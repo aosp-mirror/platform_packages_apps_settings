@@ -26,12 +26,7 @@
     <string name="off" msgid="2898123876644709799">"Выключана"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Невядома"</string>
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"Націсніце для паказу інфармацыі"</string>
-    <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
-      <item quantity="one">Зараз вы ў <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> кроку ад таго, каб стаць распрацоўшчыкам.</item>
-      <item quantity="few">Зараз вы ў <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> кроках ад таго, каб стаць распрацоўшчыкам.</item>
-      <item quantity="many">Зараз вы ў <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> кроках ад таго, каб стаць распрацоўшчыкам.</item>
-      <item quantity="other">Зараз вы ў <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> кроку ад таго, каб стаць распрацоўшчыкам.</item>
-    </plurals>
+    <string name="show_dev_countdown" msgid="2936506773086395069">"{count,plural, =1{Каб стаць распрацоўшчыкам, вам засталося выканаць # крок.}one{Каб стаць распрацоўшчыкам, вам засталося выканаць # крок.}few{Каб стаць распрацоўшчыкам, вам засталося выканаць # крокі.}many{Каб стаць распрацоўшчыкам, вам засталося выканаць # крокаў.}other{Каб стаць распрацоўшчыкам, вам засталося выканаць # кроку.}}"</string>
     <string name="show_dev_on" msgid="2840850085134853754">"Цяпер вы - распрацоўшчык!"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"Не трэба, вы ўжо з\'яўляецеся распрацоўшчыкам."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"Спачатку ўключыце параметры распрацоўшчыка."</string>
@@ -124,7 +119,7 @@
     <string name="stylus_default_notes_app" msgid="3111290761558445874">"Сістэмная праграма для стварэння нататак"</string>
     <string name="stylus_textfield_handwriting" msgid="6962904622425646128">"Выкарыстоўваць стылус для ўводу тэксту ў тэкставых палях"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Ігнараваць націсканні кнопак стілусам"</string>
-    <string name="stylus_usi_header_title" msgid="1949011797718972583">"Стылус USI"</string>
+    <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Стылус"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Дата і час"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Проксі-сервер"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Ачысціць"</string>
@@ -162,12 +157,23 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Выбар мовы для гэтай праграмы недаступны ў Наладах."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Мова можа адрознівацца ад моў, даступных у праграме. Некаторыя праграмы могуць не падтрымліваць гэту наладу."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Тут паказаны толькі праграмы, якія падтрымліваюць выбар мовы."</string>
-    <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
-      <item quantity="one">Выдаліць выбраныя мовы?</item>
-      <item quantity="few">Выдаліць выбраныя мовы?</item>
-      <item quantity="many">Выдаліць выбраныя мовы?</item>
-      <item quantity="other">Выдаліць выбраныя мовы?</item>
-    </plurals>
+    <!-- no translation found for regional_preferences_title (4304567374498629528) -->
+    <skip />
+    <!-- no translation found for regional_preferences_summary (1189876997389469650) -->
+    <skip />
+    <!-- no translation found for regional_preferences_main_page_sub_title (4666033861956272891) -->
+    <skip />
+    <!-- no translation found for temperature_preferences_title (5009881556503629058) -->
+    <skip />
+    <!-- no translation found for calendar_preferences_title (8312485828206542600) -->
+    <skip />
+    <!-- no translation found for first_day_of_week_preferences_title (1971850087589599553) -->
+    <skip />
+    <!-- no translation found for numbers_preferences_title (6094837605398562369) -->
+    <skip />
+    <!-- no translation found for default_string_of_regional_preference (1595774718180886349) -->
+    <skip />
+    <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Выдаліць выбраную мову?}one{Выдаліць выбраныя мовы?}few{Выдаліць выбраныя мовы?}many{Выдаліць выбраныя мовы?}other{Выдаліць выбраныя мовы?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Тэкст будзе адлюстроўвацца на іншай мове."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Не атрымалася выдаліць усе мовы"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Пакіньце па меншай меры адну прыярытэтную мову"</string>
@@ -186,6 +192,7 @@
     <string name="apply" msgid="7834684883190163536">"Прымяніць"</string>
     <string name="share" msgid="8502235338607613795">"Абагуліць"</string>
     <string name="add" msgid="8335206931421683426">"Дадаць"</string>
+    <string name="remove" msgid="1028414219245072102">"Выдаліць"</string>
     <string name="settings_label" msgid="943294133671632976">"Налады"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Налады"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Ярлык налад"</string>
@@ -197,6 +204,7 @@
     <string name="roaming_warning" msgid="7703647889040229013">"Можа спаганяцца плата за роўмінг."</string>
     <string name="date_time_auto" msgid="4239202185055225869">"Задаваць час аўтаматычна"</string>
     <string name="zone_auto_title" msgid="5141692422373097957">"Вызначаць аўтаматычна"</string>
+    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"Калі гэта налада ўключана, часавы пояс вызначаецца з выкарыстаннем месцазнаходжання"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Выкарыстоўваць стандартныя рэгіянальныя налады"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Выкарыстоўваць 24-гадзінны фармат"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Час"</string>
@@ -225,12 +233,8 @@
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"Напрыклад, Android Лявона"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Месцазнаходжанне"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Выкарыстоўваць геалакацыю"</string>
-    <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="one">Укл. – <xliff:g id="COUNT_1">%1$d</xliff:g> праграма мае доступ да даных месцазнаходжання</item>
-      <item quantity="few">Укл. – <xliff:g id="COUNT_1">%1$d</xliff:g> праграмы маюць доступ да даных месцазнаходжання</item>
-      <item quantity="many">Укл. – <xliff:g id="COUNT_1">%1$d</xliff:g> праграм маюць доступ да даных месцазнаходжання</item>
-      <item quantity="other">Укл. – <xliff:g id="COUNT_1">%1$d</xliff:g> праграмы маюць доступ да даных месцазнаходжання</item>
-    </plurals>
+    <!-- no translation found for location_settings_summary_location_on (7029728269719893381) -->
+    <skip />
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Ідзе загрузка…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Праграмы з дазволам на доступ да прылад паблізу могуць вызначаць прыблізнае месцазнаходжанне падключаных прылад."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Для праграм і сэрвісаў доступ да геаданых выключаны. Інфармацыя пра месцазнаходжанне вашай прылады можа адпраўляцца экстранным службам, калі вы робіце выклік на іх нумар ці адпраўляеце ім SMS."</string>
@@ -310,12 +314,8 @@
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Пры выкарыстанні разблакіроўкі адбіткам пальца"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Адбітак пальца (праца)"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Дадаць адбітак пальца"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
-      <item quantity="one">Дададзены <xliff:g id="COUNT">%1$d</xliff:g> адбітак пальцаў</item>
-      <item quantity="few">Дададзена <xliff:g id="COUNT">%1$d</xliff:g> адбіткі пальцаў</item>
-      <item quantity="many">Дададзена <xliff:g id="COUNT">%1$d</xliff:g> адбіткаў пальцаў</item>
-      <item quantity="other">Дададзена <xliff:g id="COUNT">%1$d</xliff:g> адбітка пальцаў</item>
-    </plurals>
+    <!-- no translation found for security_settings_fingerprint_preference_summary (8486134175759676037) -->
+    <skip />
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Наладзьце адбітак пальца"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Дазволіць разблакіраванне адбіткам"</string>
@@ -538,75 +538,20 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Калі вы яшчэ раз уведзяце няправільны ўзор разблакіроўкі, ваш працоўны профіль і звязаныя з ім даныя будуць выдалены"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Калі вы яшчэ раз уведзяце няправільны PIN-код, ваш працоўны профіль і звязаныя з ім даныя будуць выдалены"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Калі вы яшчэ раз уведзяце няправільны пароль, ваш працоўны профіль і звязаныя з ім даныя будуць выдалены"</string>
-    <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
-      <item quantity="one">Пароль павінен змяшчаць не менш за <xliff:g id="COUNT_1">%d</xliff:g> сімвал</item>
-      <item quantity="few">Пароль павінен змяшчаць не менш за <xliff:g id="COUNT_1">%d</xliff:g> сімвалы</item>
-      <item quantity="many">Пароль павінен змяшчаць не менш за <xliff:g id="COUNT_1">%d</xliff:g> сімвалаў</item>
-      <item quantity="other">Пароль павінен змяшчаць не менш за <xliff:g id="COUNT_1">%d</xliff:g> сімвала</item>
-    </plurals>
+    <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{Пароль павінен змяшчаць як мінімум # сімвал}one{Пароль павінен змяшчаць як мінімум # сімвал}few{Пароль павінен змяшчаць як мінімум # сімвалы}many{Пароль павінен змяшчаць як мінімум # сімвалаў}other{Пароль павінен змяшчаць як мінімум # сімвала}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Калі выкарыстоўваюцца толькі лічбы, павінна быць як мінімум 1 лічба}one{Калі выкарыстоўваюцца толькі лічбы, павінна быць як мінімум # лічба}few{Калі выкарыстоўваюцца толькі лічбы, павінна быць як мінімум # лічбы}many{Калі выкарыстоўваюцца толькі лічбы, павінна быць як мінімум # лічбаў}other{Калі выкарыстоўваюцца толькі лічбы, павінна быць як мінімум # лічбы}}"</string>
-    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
-      <item quantity="one">PIN-код павінен утрымліваць не менш як <xliff:g id="COUNT_1">%d</xliff:g> лічбу</item>
-      <item quantity="few">PIN-код павінен утрымліваць не менш як <xliff:g id="COUNT_1">%d</xliff:g> лічбы</item>
-      <item quantity="many">PIN-код павінен утрымліваць не менш як <xliff:g id="COUNT_1">%d</xliff:g> лічбаў</item>
-      <item quantity="other">PIN-код павінен утрымліваць не менш як <xliff:g id="COUNT_1">%d</xliff:g> лічбы</item>
-    </plurals>
-    <plurals name="lockpassword_password_too_long" formatted="false" msgid="8118091957172967677">
-      <item quantity="one">Пароль павінен змяшчаць менш за <xliff:g id="NUMBER_1">%d</xliff:g> сімвал</item>
-      <item quantity="few">Пароль павінен змяшчаць менш за <xliff:g id="NUMBER_1">%d</xliff:g> сімвалы</item>
-      <item quantity="many">Пароль павінен змяшчаць менш за <xliff:g id="NUMBER_1">%d</xliff:g> сімвалаў</item>
-      <item quantity="other">Пароль павінен змяшчаць менш за <xliff:g id="NUMBER_1">%d</xliff:g> сімвала</item>
-    </plurals>
-    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="8706992338720310765">
-      <item quantity="one">PIN-код павінен змяшчаць менш за <xliff:g id="NUMBER_1">%d</xliff:g> лічбу</item>
-      <item quantity="few">PIN-код павінен змяшчаць менш за <xliff:g id="NUMBER_1">%d</xliff:g> лічбы</item>
-      <item quantity="many">PIN-код павінен змяшчаць менш за <xliff:g id="NUMBER_1">%d</xliff:g> лічбаў</item>
-      <item quantity="other">PIN-код павінен змяшчаць менш за <xliff:g id="NUMBER_1">%d</xliff:g> лічбы</item>
-    </plurals>
+    <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{PIN-код павінен змяшчаць не менш як # лічбу}one{PIN-код павінен змяшчаць не менш як # лічбу}few{PIN-код павінен змяшчаць не менш як # лічбы}many{PIN-код павінен змяшчаць не менш як # лічбаў}other{PIN-код павінен змяшчаць не менш як # лічбы}}"</string>
+    <string name="lockpassword_password_too_long" msgid="1940345313260498308">"{count,plural, =1{Пароль павінен змяшчаць менш чым # сімвал}one{Пароль павінен змяшчаць менш чым # сімвал}few{Пароль павінен змяшчаць менш чым # сімвалы}many{Пароль павінен змяшчаць менш чым # сімвалаў}other{Пароль павінен змяшчаць менш чым # сімвала}}"</string>
+    <string name="lockpassword_pin_too_long" msgid="1678212054564388576">"{count,plural, =1{PIN-код павінен змяшчаць менш чым # лічбу}one{PIN-код павінен змяшчаць менш чым # лічбу}few{PIN-код павінен змяшчаць менш чым # лічбы}many{PIN-код павінен змяшчаць менш чым # лічбаў}other{PIN-код павінен змяшчаць менш чым # лічбы}}"</string>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"Адміністратар прылады не дазваляе выкарыстоўваць апошні PIN-код"</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"Не можа змяшчаць недапушчальны сімвал"</string>
-    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="2385916409676839024">
-      <item quantity="one">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> літару</item>
-      <item quantity="few">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> літары</item>
-      <item quantity="many">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> літар</item>
-      <item quantity="other">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> літары</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="2057467885488612701">
-      <item quantity="one">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> малую літару</item>
-      <item quantity="few">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> малыя літары</item>
-      <item quantity="many">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> малых літар</item>
-      <item quantity="other">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> малой літары</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="4541266279643052025">
-      <item quantity="one">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> вялікую літару</item>
-      <item quantity="few">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> вялікія літары</item>
-      <item quantity="many">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> вялікіх літар</item>
-      <item quantity="other">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> вялікай літары</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="70617964591376248">
-      <item quantity="one">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> лічбу</item>
-      <item quantity="few">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> лічбы</item>
-      <item quantity="many">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> лічбаў</item>
-      <item quantity="other">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> лічбы</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="7981236881269921943">
-      <item quantity="one">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> спецыяльны сімвал</item>
-      <item quantity="few">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> спецыяльныя сімвалы</item>
-      <item quantity="many">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> спецыяльных сімвалаў</item>
-      <item quantity="other">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> спецыяльнага сімвала</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="1567877061888948467">
-      <item quantity="one">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> сімвал, які не з\'яўляецца літарай</item>
-      <item quantity="few">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> сімвалы, якія не з\'яўляюцца літарамі</item>
-      <item quantity="many">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> сімвалаў, якія не з\'яўляюцца літарамі</item>
-      <item quantity="other">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> сімвала, якія не з\'яўляюцца літарамі</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonnumerical" formatted="false" msgid="5056743974888384475">
-      <item quantity="one">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> сімвал, які не з\'яўляецца лічбай</item>
-      <item quantity="few">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> сімвалы, якія не з\'яўляюцца лічбамі</item>
-      <item quantity="many">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> сімвалаў, якія не з\'яўляюцца лічбамі</item>
-      <item quantity="other">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> сімвала, якія не з\'яўляюцца лічбамі</item>
-    </plurals>
+    <string name="lockpassword_password_requires_letters" msgid="7058340182953750553">"{count,plural, =1{Пароль павінен змяшчаць як мінімум 1 літару}one{Пароль павінен змяшчаць як мінімум # літару}few{Пароль павінен змяшчаць як мінімум # літары}many{Пароль павінен змяшчаць як мінімум # літар}other{Пароль павінен змяшчаць як мінімум # літары}}"</string>
+    <string name="lockpassword_password_requires_lowercase" msgid="3286121470522077547">"{count,plural, =1{Пароль павінен змяшчаць як мінімум 1 малую літару}one{Пароль павінен змяшчаць як мінімум # малую літару}few{Пароль павінен змяшчаць як мінімум # малыя літары}many{Пароль павінен змяшчаць як мінімум # малых літар}other{Пароль павінен змяшчаць як мінімум # малой літары}}"</string>
+    <string name="lockpassword_password_requires_uppercase" msgid="720312543910397772">"{count,plural, =1{Пароль павінен змяшчаць як мінімум 1 вялікую літару}one{Пароль павінен змяшчаць як мінімум # вялікую літару}few{Пароль павінен змяшчаць як мінімум # вялікія літары}many{Пароль павінен змяшчаць як мінімум # вялікіх літар}other{Пароль павінен змяшчаць як мінімум # вялікай літары}}"</string>
+    <string name="lockpassword_password_requires_numeric" msgid="3886918493600507548">"{count,plural, =1{Пароль павінен змяшчаць як мінімум 1 лічбу}one{Пароль павінен змяшчаць як мінімум # лічбу}few{Пароль павінен змяшчаць як мінімум # лічбы}many{Пароль павінен змяшчаць як мінімум # лічбаў}other{Пароль павінен змяшчаць як мінімум # лічбы}}"</string>
+    <string name="lockpassword_password_requires_symbols" msgid="2904870551002210131">"{count,plural, =1{Пароль павінен змяшчаць як мінімум 1 спецыяльны сімвал}one{Пароль павінен змяшчаць як мінімум # спецыяльны сімвал}few{Пароль павінен змяшчаць як мінімум # спецыяльныя сімвалы}many{Пароль павінен змяшчаць як мінімум # спецыяльных сімвалаў}other{Пароль павінен змяшчаць як мінімум # спецыяльнага сімвала}}"</string>
+    <string name="lockpassword_password_requires_nonletter" msgid="1185342065898300006">"{count,plural, =1{Пароль павінен змяшчаць як мінімум 1 сімвал, які не з\'яўляецца літарай}one{Пароль павінен змяшчаць як мінімум # сімвал, які не з\'яўляецца літарай}few{Пароль павінен змяшчаць як мінімум # сімвалы, якія не з\'яўляюцца літарамі}many{Пароль павінен змяшчаць як мінімум # сімвалаў, якія не з\'яўляюцца літарамі}other{Пароль павінен змяшчаць як мінімум # сімвала, якія не з\'яўляюцца літарамі}}"</string>
+    <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{Пароль павінен змяшчаць як мінімум 1 сімвал, які не з\'яўляецца лічбай}one{Пароль павінен змяшчаць як мінімум # сімвал, які не з\'яўляецца лічбай}few{Пароль павінен змяшчаць як мінімум # сімвалы, якія не з\'яўляюцца лічбамі}many{Пароль павінен змяшчаць як мінімум # сімвалаў, якія не з\'яўляюцца лічбамі}other{Пароль павінен змяшчаць як мінімум # сімвала, якія не з\'яўляюцца лічбамі}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Адміністратар прылады не дазваляе выкарыстоўваць апошні пароль"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"Забаронена ўводзіць узрастаючую, убываючую або паўторную паслядоўнасць лічбаў"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Пацвердзіць"</string>
@@ -616,21 +561,11 @@
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"Наступны"</string>
     <string name="manage_device_admin" msgid="1044620606203916275">"Праграмы адміністратара прылады"</string>
     <string name="number_of_device_admins_none" msgid="152926922020437312">"Няма актыўных праграм"</string>
-    <plurals name="number_of_device_admins" formatted="false" msgid="2528735319390151989">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> актыўная праграма</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> актыўныя праграмы</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> актыўных праграм</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> актыўнай праграмы</item>
-    </plurals>
+    <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{# актыўная праграма}one{# актыўная праграма}few{# актыўныя праграмы}many{# актыўных праграм}other{# актыўнай праграмы}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"Даверчыя агенты"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"Перад выкарыстаннем задайце блакіроўку экрана"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"Няма"</string>
-    <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> актыўны даверчы агент</item>
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> актыўныя даверчыя агенты</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> актыўных даверчых агентаў</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> актыўнага даверчага агента</item>
-    </plurals>
+    <string name="manage_trust_agents_summary_on" msgid="3302574418419446146">"{count,plural, =1{1 актыўны даверчы агент}one{# актыўны даверчы агент}few{# актыўныя даверчыя агенты}many{# актыўных даверчых агентаў}other{# актыўнага даверчага агента}}"</string>
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Спалучыцца з <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
@@ -846,24 +781,9 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Не атрымалася захаваць сетку"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Скасаваць"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Выдаліць сетку?"</string>
-    <plurals name="wifi_saved_access_points_summary" formatted="false" msgid="2802436466732147888">
-      <item quantity="one">%d сетка</item>
-      <item quantity="few">%d сеткі</item>
-      <item quantity="many">%d сетак</item>
-      <item quantity="other">%d сеткі</item>
-    </plurals>
-    <plurals name="wifi_saved_passpoint_access_points_summary" formatted="false" msgid="5802057518058840450">
-      <item quantity="one">%d падпіска</item>
-      <item quantity="few">%d падпіскі</item>
-      <item quantity="many">%d падпісак</item>
-      <item quantity="other">%d падпіскі</item>
-    </plurals>
-    <plurals name="wifi_saved_all_access_points_summary" formatted="false" msgid="5125849180309374451">
-      <item quantity="one">%d сетка і падпіска</item>
-      <item quantity="few">%d сеткі і падпіскі</item>
-      <item quantity="many">%d сетак і падпісак</item>
-      <item quantity="other">%d сеткі і падпіскі</item>
-    </plurals>
+    <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 сетка}one{# сетка}few{# сеткі}many{# сетак}other{# сеткі}}"</string>
+    <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 падпіска}one{# падпіска}few{# падпіскі}many{# падпіскак}other{# падпіскі}}"</string>
+    <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 сетка і падпіска}one{# сетка і падпіска}few{# сеткі і падпіскі}many{# сетак і падпісак}other{# сеткі і падпіскі}}"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"MAC-адрас прылады"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"Выпадковы MAC-адрас"</string>
@@ -1095,12 +1015,7 @@
     <string name="sim_preferred_title" msgid="8850185380445309835">"Змяніць прыярытэтную SIM?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> з\'яўляецца адзінай SIM-картай на вашай прыладзе. Вы хочаце выкарыстоўваць гэту SIM-карту для мабільнай перадачы даных, выклікаў і SMS-паведамленняў?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Няправільны PIN-код SIM-карты, цяпер вы павінны звязацца з аператарам для разблакіроўкі прылады."</string>
-    <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
-      <item quantity="one">Няправільны PIN-код SIM-карты, у вас засталася <xliff:g id="NUMBER_1">%d</xliff:g> спроба.</item>
-      <item quantity="few">Няправільны PIN-код SIM-карты, у вас засталося <xliff:g id="NUMBER_1">%d</xliff:g> спробы.</item>
-      <item quantity="many">Няправільны PIN-код SIM-карты, у вас засталося <xliff:g id="NUMBER_1">%d</xliff:g> спроб.</item>
-      <item quantity="other">Няправільны PIN-код SIM-карты, у вас засталося <xliff:g id="NUMBER_1">%d</xliff:g> спробы.</item>
-    </plurals>
+    <string name="wrong_pin_code" msgid="8124222991071607958">"{count,plural, =1{Няправільны PIN-код SIM-карты. Засталася # спроба. Калі вы зноў уведзяце няправільны PIN-код, ваша прылада будзе заблакіравана і вам прыйдзецца звязацца з аператарам.}one{Няправільны PIN-код SIM-карты. Засталася # спроба.}few{Няправільны PIN-код SIM-карты. Засталося # спробы.}many{Няправільны PIN-код SIM-карты. Засталося # спроб.}other{Няправільны PIN-код SIM-карты. Засталося # спробы.}}"</string>
     <string name="wrong_pin_code_one" msgid="6924852214263071441">"Няправільны PIN-код SIM-карты. У вас засталася 1 спроба, інакш вам прыйдзецца звязацца з аператарам для разблакіроўкі прылады."</string>
     <string name="pin_failed" msgid="3726505565797352255">"Разблакір. SIM PIN-кодам не атрымалася!"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"Абнаўленні сiстэмы"</string>
@@ -1118,6 +1033,8 @@
     <string name="storage_settings" msgid="7472188817781592677">"Сховішча"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Сховішча і кэш"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Налады сховішча"</string>
+    <string name="status_eid" msgid="7532406028683438634">"EID"</string>
+    <string name="eid_multi_sim" msgid="4581966600904959452">"EID (слот SIM-карты %1$d)"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI (слот для SIM-карты %1$d)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Для прагляду выберыце захаваную сетку"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
@@ -1204,6 +1121,8 @@
     <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Цяпер вы можаце выкарыстоўваць носьбіт \"<xliff:g id="NAME">^1</xliff:g>\""</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Стан батарэі"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Узровень батарэі"</string>
+    <string name="communal_settings_title" msgid="2845678473945902115">"Супольныя"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"Супольныя налады"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Змяніць пункт доступу"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Не зададзена"</string>
@@ -1335,12 +1254,7 @@
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Месца для рабочага профілю"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Дазволы на доступ да геаданых"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Вызначэнне месцазнаходжання адключана"</string>
-    <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
-      <item quantity="one"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> праграма з <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> мае доступ да даных месцазнаходжання</item>
-      <item quantity="few"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> праграмы з <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> маюць доступ да даных месцазнаходжання</item>
-      <item quantity="many"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> праграм з <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> маюць доступ да даных месцазнаходжання</item>
-      <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> праграмы з <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> маюць доступ да даных месцазнаходжання</item>
-    </plurals>
+    <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{З {total} праграм # мае доступ да даных месцазнаходжання}one{З {total} праграм # мае доступ да даных месцазнаходжання}few{З {total} праграм # маюць доступ да даных месцазнаходжання}many{З {total} праграм # маюць доступ да даных месцазнаходжання}other{З {total} праграм # маюць доступ да даных месцазнаходжання}}"</string>
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"Апошні доступ да даных геалакацыі"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"Паказаць усе"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Паказаць падрабязныя звесткі"</string>
@@ -1355,9 +1269,15 @@
     <string name="location_services_preference_title" msgid="604317859531782159">"Службы геалакацыі"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Службы геалакацыі"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"Выкарыстоўваць геалакацыю"</string>
+    <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"Не ўдалося задаць часавы пояс аўтаматычна"</string>
+    <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"Вызначэнне месцазнаходжання або службы геалакацыі выключаны"</string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_environment" msgid="2279833212923765802"></string>
+    <string name="location_time_zone_detection_status_summary_temporarily_unavailable" msgid="6586801403644278967"></string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Патрабуюцца даныя пра месцазнаходжанне прылады"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_message" msgid="5846316326139169523">"Каб задаць часавы пояс на падставе даных пра месцазнаходжанне, уключыце геалакацыю, а потым абнавіце налады часавага пояса"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Налады месцазнаходжання"</string>
+    <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"Выправіць"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"Скасаваць"</string>
     <string name="location_time_zone_detection_auto_is_off" msgid="6264253990141650280">"Аўтаматычнае вызначэнне часавага пояса выключана"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Вызначэнне часавага пояса месцазнаходжання выключана"</string>
@@ -1481,12 +1401,7 @@
     <string name="install_applications" msgid="3921609656584369901">"Невядомыя крыніцы"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Дазволіць усе крыніцы дадаткаў"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Нядаўна адкрытыя праграмы"</string>
-    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
-      <item quantity="one">Паказаць усю %1$d праграму</item>
-      <item quantity="few">Паказаць усе %1$d праграмы</item>
-      <item quantity="many">Паказаць усе %1$d праграм</item>
-      <item quantity="other">Паказаць усе %1$d праграмы</item>
-    </plurals>
+    <string name="see_all_apps_title" msgid="1650653853942381797">"{count,plural, =1{Паказаць усе праграмы}one{Паказаць # праграму}few{Паказаць усе # праграмы}many{Паказаць усе # праграм}other{Паказаць усе # праграмы}}"</string>
     <string name="forgot_password_title" msgid="3967873480875239885">"Звярніцеся да ІТ-адміністратара"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"ІТ-адміністратары могуць дапамагчы вам скінуць PIN-код, узор разблакіроўкі ці пароль"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Пашыраныя налады"</string>
@@ -1500,12 +1415,7 @@
     <string name="cache_header_label" msgid="2441967971921741047">"Кэш"</string>
     <string name="clear_cache_btn_text" msgid="8597272828928143723">"Ачысціць кэш"</string>
     <string name="cache_size_label" msgid="313456088966822757">"Кэш"</string>
-    <plurals name="uri_permissions_text" formatted="false" msgid="8212425823423508096">
-      <item quantity="one">%d элемент</item>
-      <item quantity="few">%d элементы</item>
-      <item quantity="many">%d элементаў</item>
-      <item quantity="other">%d элемента</item>
-    </plurals>
+    <string name="uri_permissions_text" msgid="8406345863117405105">"{count,plural, =1{1 элемент}one{# элемент}few{# элементы}many{# элементаў}other{# элемента}}"</string>
     <string name="clear_uri_btn_text" msgid="4828117421162495134">"Выдалiць даныя доступу"</string>
     <string name="controls_label" msgid="8671492254263626383">"Сродкі кіравання"</string>
     <string name="force_stop" msgid="2681771622136916280">"Прымусовае спыненне"</string>
@@ -1654,50 +1564,38 @@
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Паказаць спіс спалучэнняў клавіш"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Клавіятуры і інструменты працоўнага профілю"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Экранная клавіятура для працы"</string>
-    <!-- no translation found for trackpad_settings (2071131324087677005) -->
-    <skip />
-    <!-- no translation found for trackpad_mouse_settings (136226693583218429) -->
-    <skip />
-    <!-- no translation found for trackpad_settings_summary (3369855644136760402) -->
-    <skip />
-    <!-- no translation found for trackpad_tap_to_click (1938230946542070746) -->
-    <skip />
-    <!-- no translation found for trackpad_touchpad_gesture_title (7568052847609914436) -->
-    <skip />
-    <!-- no translation found for trackpad_touchpad_gesture_summary (6256074591395359124) -->
-    <skip />
-    <!-- no translation found for trackpad_reverse_scrolling_title (422877284529360866) -->
-    <skip />
-    <!-- no translation found for trackpad_reverse_scrolling_summary (6048648562887499036) -->
-    <skip />
-    <!-- no translation found for trackpad_bottom_right_tap_title (6275428879042702880) -->
-    <skip />
-    <!-- no translation found for trackpad_bottom_right_tap_summary (8734094086900680674) -->
-    <skip />
-    <!-- no translation found for trackpad_pointer_speed (7786579408631352625) -->
-    <skip />
-    <!-- no translation found for trackpad_touch_gesture (8641725062131922497) -->
-    <skip />
-    <!-- no translation found for trackpad_go_back_title (5312164160947491440) -->
-    <skip />
-    <!-- no translation found for trackpad_go_back_summary (4201901101085902768) -->
-    <skip />
-    <!-- no translation found for trackpad_go_home_title (2146525662148291552) -->
-    <skip />
-    <!-- no translation found for trackpad_go_home_summary (2222744701528360887) -->
-    <skip />
-    <!-- no translation found for trackpad_recent_apps_title (8195970908411585445) -->
-    <skip />
-    <!-- no translation found for trackpad_recent_apps_summary (2685092851677573794) -->
-    <skip />
-    <!-- no translation found for trackpad_notifications_title (3521663305043747880) -->
-    <skip />
-    <!-- no translation found for trackpad_notifications_summary (7663647367648690040) -->
-    <skip />
-    <!-- no translation found for trackpad_switch_apps_title (7342032935377284039) -->
-    <skip />
-    <!-- no translation found for trackpad_switch_apps_summary (9193942041912927440) -->
-    <skip />
+    <string name="trackpad_settings" msgid="2071131324087677005">"Сэнсарная панэль"</string>
+    <string name="trackpad_mouse_settings" msgid="136226693583218429">"Сэнсарная панэль і мыш"</string>
+    <string name="trackpad_settings_summary" msgid="3369855644136760402">"Хуткасць указальніка, жэсты"</string>
+    <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Націсканне дотыкам"</string>
+    <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Жэсты для сэнсарнай панэлі"</string>
+    <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Наладзце ўласныя жэсты навігацыі для сэнсарнай панэлі"</string>
+    <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Прагортванне ў адваротны бок"</string>
+    <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Пры гартанні ўніз змесціва рухаецца ўверх"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Дотык унізе справа"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Націсніце правы ніжні вугал сэнсарнай панэлі, каб убачыць больш параметраў"</string>
+    <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Хуткасць указальніка"</string>
+    <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Даведацца пра жэсты сэнсарнай панэлі"</string>
+    <string name="trackpad_go_back_title" msgid="5312164160947491440">"Назад"</string>
+    <string name="trackpad_go_back_summary" msgid="4201901101085902768">"Правядзіце ўлева ці ўправа трыма пальцамі"</string>
+    <string name="trackpad_go_home_title" msgid="2146525662148291552">"На галоўную старонку"</string>
+    <string name="trackpad_go_home_summary" msgid="2222744701528360887">"Правядзіце ўверх трыма пальцамі"</string>
+    <string name="trackpad_recent_apps_title" msgid="8195970908411585445">"Нядаўнія праграмы"</string>
+    <string name="trackpad_recent_apps_summary" msgid="2685092851677573794">"Правядзіце ўверх трыма пальцамі і ўтрымлівайце"</string>
+    <string name="trackpad_notifications_title" msgid="3521663305043747880">"Апавяшчэнні"</string>
+    <string name="trackpad_notifications_summary" msgid="7663647367648690040">"Правядзіце ўніз трыма пальцамі"</string>
+    <string name="trackpad_switch_apps_title" msgid="7342032935377284039">"Пераключэнне праграм"</string>
+    <string name="trackpad_switch_apps_summary" msgid="9193942041912927440">"Правядзіце ўлева ці ўправа чатырма пальцамі"</string>
+    <string name="modifier_keys_settings" msgid="2537108435032034683">"Клавішы-мадыфікатары"</string>
+    <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Змяніць уласцівасці ключоў?"</string>
+    <string name="modifier_keys_reset_title" msgid="948294258402761066">"Скінуць усе"</string>
+    <string name="modifier_keys_default_summary" msgid="8701640508670973258">"Стандартны"</string>
+    <string name="modifier_keys_reset_message" msgid="5236994817619936058">"Сапраўды скінуць усе клавішы-мадыфікатары да стандартных значэнняў?"</string>
+    <string name="modifier_keys_done" msgid="8196199314913909700">"Гатова"</string>
+    <string name="modifier_keys_cancel" msgid="7136520252570826772">"Скасаваць"</string>
+    <string name="modifier_keys_restore" msgid="7627661630556839268">"Аднавіць"</string>
+    <string name="modifier_keys_picker_title" msgid="244545904150587851">"Выберыце клавішу-мадыфікатар"</string>
+    <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Выберыце новы ключ для \"<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>\":"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Стандартная"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Маўленне"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Хуткасць указальніка"</string>
@@ -2014,30 +1912,14 @@
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Цямней"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Ярчэй"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Працягнуць пасля перазапуску прылады"</string>
-    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
-      <item quantity="one">Кароткі (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунда)</item>
-      <item quantity="few">Кароткі (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунды)</item>
-      <item quantity="many">Кароткі (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунд)</item>
-      <item quantity="other">Кароткі (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунд)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
-      <item quantity="one">Сярэдняя (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунда)</item>
-      <item quantity="few">Сярэдняя (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунды)</item>
-      <item quantity="many">Сярэдняя (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунд)</item>
-      <item quantity="other">Сярэдняя (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунд)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
-      <item quantity="one">Доўгая (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунда)</item>
-      <item quantity="few">Доўгая (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунды)</item>
-      <item quantity="many">Доўгая (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунд)</item>
-      <item quantity="other">Доўгая (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунд)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="4537791441118261556">
-      <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> секунда</item>
-      <item quantity="few"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунды</item>
-      <item quantity="many"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> секунд</item>
-      <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> секунды</item>
-    </plurals>
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (2981206111858937724) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (6867395206533459204) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (4079139970819335593) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_delay_unit_second (5979297390686370567) -->
+    <skip />
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Налады"</string>
     <string name="captioning_preview_title" msgid="2888561631323180535">"Перадпрагляд"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Стандартныя опцыі"</string>
@@ -2112,18 +1994,10 @@
     <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Шукаць прылады паблізу"</string>
     <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Захаваныя прылады"</string>
     <string name="print_settings" msgid="8519810615863882491">"Друк"</string>
-    <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
-      <item quantity="one">Уключаны <xliff:g id="COUNT">%1$d</xliff:g> сэрвіс друку</item>
-      <item quantity="few">Уключаны <xliff:g id="COUNT">%1$d</xliff:g> сэрвісы друку</item>
-      <item quantity="many">Уключаны <xliff:g id="COUNT">%1$d</xliff:g> сэрвісаў друку</item>
-      <item quantity="other">Уключаны <xliff:g id="COUNT">%1$d</xliff:g> сэрвісу друку</item>
-    </plurals>
-    <plurals name="print_jobs_summary" formatted="false" msgid="3933688846338306536">
-      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> заданне друку</item>
-      <item quantity="few"><xliff:g id="COUNT">%1$d</xliff:g> заданні друку</item>
-      <item quantity="many"><xliff:g id="COUNT">%1$d</xliff:g> заданняў друку</item>
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> задання друку</item>
-    </plurals>
+    <!-- no translation found for print_settings_summary (1458773840720811915) -->
+    <skip />
+    <!-- no translation found for print_jobs_summary (7040836482336577323) -->
+    <skip />
     <string name="print_settings_title" msgid="7680498284751129935">"Сэрвісы друку"</string>
     <string name="print_no_services_installed" msgid="7554057966540602692">"Няма ўсталяваных службаў"</string>
     <string name="print_no_printers_found" msgid="4833082484646109486">"Прынтараў не знойдзена"</string>
@@ -2201,36 +2075,16 @@
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Даведацца больш наконт прыпынення зарадкі"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Узнавіць зарадку"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Утрымлівае энергазатратныя дзеянні ў фонавым рэжыме"</string>
-    <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
-      <item quantity="one">Абмежаваць працу %1$d праграмы</item>
-      <item quantity="few">Абмежаваць працу %1$d праграм</item>
-      <item quantity="many">Абмежаваць працу %1$d праграм</item>
-      <item quantity="other">Абмежаваць працу %1$d праграмы</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_handled_title" formatted="false" msgid="5862649927574803958">
-      <item quantity="one">Нядаўна вы абмежавалі працу %2$d праграмы</item>
-      <item quantity="few">Нядаўна вы абмежавалі працу %2$d праграм</item>
-      <item quantity="many">Нядаўна вы абмежавалі працу %2$d праграм</item>
-      <item quantity="other">Нядаўна вы абмежавалі працу %2$d праграмы</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
-      <item quantity="one">%2$d праграма надта хутка разраджае акумулятар</item>
-      <item quantity="few">%2$d праграмы надта хутка разраджаюць акумулятар</item>
-      <item quantity="many">%2$d праграм надта хутка разраджаюць акумулятар</item>
-      <item quantity="other">%2$d праграмы надта хутка разраджаюць акумулятар</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
-      <item quantity="one">Гэтыя праграмы не могуць працаваць у фонавым рэжыме</item>
-      <item quantity="few">Гэтыя праграмы не могуць працаваць у фонавым рэжыме</item>
-      <item quantity="many">Гэтыя праграмы не могуць працаваць у фонавым рэжыме</item>
-      <item quantity="other">Гэтыя праграмы не могуць працаваць у фонавым рэжыме</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_app_dialog_title" formatted="false" msgid="7897944678619251740">
-      <item quantity="one">Абмежаваць працу %1$d праграмы?</item>
-      <item quantity="few">Абмежаваць працу %1$d праграм?</item>
-      <item quantity="many">Абмежаваць працу %1$d праграм?</item>
-      <item quantity="other">Абмежаваць працу %1$d праграмы?</item>
-    </plurals>
+    <!-- no translation found for battery_tip_restrict_title (4537101947310626753) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_handled_title (7142074986508706853) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_summary (7539469590829235277) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_handled_summary (3535697154547199190) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_app_dialog_title (1649476357343160240) -->
+    <skip />
     <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"Для эканоміі зараду акумулятара спыніце работу праграмы \"<xliff:g id="APP">%1$s</xliff:g>\" у фонавым рэжыме. Работа гэтай праграмы можа быць неналежнай, і апавяшчэнні могуць прыходзіць з затрымкай."</string>
     <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"Для эканоміі зараду акумулятара спыніце работу праграм у фонавым рэжыме. Работа праграм з абмежаваннямі можа быць неналежнай, і апавяшчэнні могуць прыходзіць з затрымкай.\n\nПраграмы:"</string>
     <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"Для эканоміі зараду акумулятара спыніце работу праграм у фонавым рэжыме. Работа праграм з абмежаваннямі можа быць неналежнай, і апавяшчэнні могуць прыходзіць з затрымкай.\n\nПраграмы:\n<xliff:g id="APP_LIST">%1$s</xliff:g>."</string>
@@ -2244,24 +2098,16 @@
     <string name="smart_battery_title" msgid="9095903608520254254">"Аўтаматычнае кіраванне праграмамі"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"Калі менеджар акумулятара выяўляе выкарыстанне зараду праграмамі, ёсць магчымасць абмежаваць іх работу. Работа праграм з абмежаваннямі можа быць неналежнай, і апавяшчэнні могуць прыходзіць з затрымкай."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Праграмы, якія не працуюць у фонавым рэжыме"</string>
-    <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
-      <item quantity="one">Абмежаванае выкарыстанне зараду для %1$d праграмы</item>
-      <item quantity="few">Абмежаванае выкарыстанне зараду для %1$d праграм</item>
-      <item quantity="many">Абмежаванае выкарыстанне зараду для %1$d праграм</item>
-      <item quantity="other">Абмежаванае выкарыстанне зараду для %1$d праграмы</item>
-    </plurals>
+    <!-- no translation found for restricted_app_summary (1022307922754893997) -->
+    <skip />
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"Абмежавана <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="restricted_app_detail_footer" msgid="3495725286882138803">"Гэтыя праграмы не могуць выкарыстоўваць зарад акумулятара ў фонавым рэжыме. Магчыма, яны будуць працаваць неналежным чынам, а апавяшчэнні будуць прыходзіць з затрымкай."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Уключыць менеджар акумулятара"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Выяўляць праграмы, якія разраджаюць акумулятар"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"Выяўленне праграм, якія разраджаюць акумулятар"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"Выяўленне праграм, якія разраджаюць акумулятар"</string>
-    <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
-      <item quantity="one">Абмежаваных праграм: %1$d</item>
-      <item quantity="few">Абмежаваных праграм: %1$d</item>
-      <item quantity="many">Абмежаваных праграм: %1$d</item>
-      <item quantity="other">Абмежаваных праграм: %1$d</item>
-    </plurals>
+    <!-- no translation found for battery_manager_app_restricted (2583902700677009173) -->
+    <skip />
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small></string>
     <string name="battery_missing_message" msgid="400958471814422770">"Не ўдаецца атрымаць даныя пра зарад акумулятара."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
@@ -2451,12 +2297,8 @@
     <string name="remove_credential_management_app" msgid="6089291496976812786">"Выдаліць праграму"</string>
     <string name="remove_credential_management_app_dialog_title" msgid="5713525435104706772">"Выдаліць гэту праграму?"</string>
     <string name="remove_credential_management_app_dialog_message" msgid="7739474298063646935">"Гэта праграма не будзе кіраваць сертыфікатамі, аднак яна застанецца на вашай прыладзе. Усе ўсталяваныя праграмай сертыфікаты будуць выдалены."</string>
-    <plurals name="number_of_urls" formatted="false" msgid="403979258551655023">
-      <item quantity="one"><xliff:g id="NUMBER_1">%d</xliff:g> URL-адрас</item>
-      <item quantity="few"><xliff:g id="NUMBER_1">%d</xliff:g> URL-адрасы</item>
-      <item quantity="many"><xliff:g id="NUMBER_1">%d</xliff:g> URL-адрасоў</item>
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> URL-адраса</item>
-    </plurals>
+    <!-- no translation found for number_of_urls (1128699121050872188) -->
+    <skip />
     <string name="emergency_tone_title" msgid="6673118505206685168">"Сігнал набору нумару ў аварыйнай сітуацыі"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Задаць паводзіны на выпадак экстранага выкліку"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Рэзервовае капіраванне"</string>
@@ -2499,12 +2341,8 @@
     <string name="notification_history_today" msgid="5828496957208237230">"За апошнія 24 гадзіны"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"Адкладзена"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"Нядаўна адхілена"</string>
-    <plurals name="notification_history_count" formatted="false" msgid="1859304685071321991">
-      <item quantity="one"><xliff:g id="NUMBER_1">%d</xliff:g> апавяшчэнне</item>
-      <item quantity="few"><xliff:g id="NUMBER_1">%d</xliff:g> апавяшчэнні</item>
-      <item quantity="many"><xliff:g id="NUMBER_1">%d</xliff:g> апавяшчэнняў</item>
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> апавяшчэння</item>
-    </plurals>
+    <!-- no translation found for notification_history_count (885305572972482838) -->
+    <skip />
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"Мелодыя выкліка і вібрацыя"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"Інфармацыя аб сетцы"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"Сінхранізацыя ўкл."</string>
@@ -2695,21 +2533,13 @@
     <string name="additional_system_update_settings_list_item_title" msgid="7230385345152138051">"Дадатк. абнаўл. сістэмы"</string>
     <string name="ssl_ca_cert_warning" msgid="3898387588657346106">"За сеткай можа назіраць"</string>
     <string name="done_button" msgid="6269449526248267">"Гатова"</string>
-    <plurals name="ssl_ca_cert_dialog_title" formatted="false" msgid="5491460811755938449">
-      <item quantity="one">Давяраць сертыфікатам або выдаліць іх</item>
-      <item quantity="few">Давяраць сертыфікатам або выдаліць іх</item>
-      <item quantity="many">Давяраць сертыфікатам або выдаліць іх</item>
-      <item quantity="other">Давяраць сертыфікатам або выдаліць іх</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_dialog_title (1032088078702042090) -->
+    <skip />
     <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{Адміністратар дамена \"{orgName}\" усталяваў на вашай прыладзе сертыфікат ЦС, які дазваляе яму кантраляваць вашы дзеянні ў працоўнай сетцы, у тым ліку выкарыстанне электроннай пошты і праграм, а таксама наведванне бяспечных вэб-сайтаў.\n\nПа дадатковую інфармацыю пра гэты сертыфікат звяртайцеся да адміністратара.}one{Адміністратар дамена \"{orgName}\" усталяваў на вашай прыладзе сертыфікаты ЦС, якія дазваляюць яму кантраляваць вашы дзеянні ў працоўнай сетцы, у тым ліку выкарыстанне электроннай пошты і праграм, а таксама наведванне бяспечных вэб-сайтаў.\n\nПа дадатковую інфармацыю пра гэтыя сертыфікаты звяртайцеся да адміністратара.}few{Адміністратар дамена \"{orgName}\" усталяваў на вашай прыладзе сертыфікаты ЦС, якія дазваляюць яму кантраляваць вашы дзеянні ў працоўнай сетцы, у тым ліку выкарыстанне электроннай пошты і праграм, а таксама наведванне бяспечных вэб-сайтаў.\n\nПа дадатковую інфармацыю пра гэтыя сертыфікаты звяртайцеся да адміністратара.}many{Адміністратар дамена \"{orgName}\" усталяваў на вашай прыладзе сертыфікаты ЦС, якія дазваляюць яму кантраляваць вашы дзеянні ў працоўнай сетцы, у тым ліку выкарыстанне электроннай пошты і праграм, а таксама наведванне бяспечных вэб-сайтаў.\n\nПа дадатковую інфармацыю пра гэтыя сертыфікаты звяртайцеся да адміністратара.}other{Адміністратар дамена \"{orgName}\" усталяваў на вашай прыладзе сертыфікаты ЦС, якія дазваляюць яму кантраляваць вашы дзеянні ў працоўнай сетцы, у тым ліку выкарыстанне электроннай пошты і праграм, а таксама наведванне бяспечных вэб-сайтаў.\n\nПа дадатковую інфармацыю пра гэтыя сертыфікаты звяртайцеся да адміністратара.}}"</string>
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{Адміністратар дамена \"{orgName}\" усталяваў для вашага працоўнага профілю сертыфікат ЦС, які дазваляе яму кантраляваць вашы дзеянні ў працоўнай сетцы, у тым ліку выкарыстанне электроннай пошты і праграм, а таксама наведванне бяспечных вэб-сайтаў.\n\nПа дадатковую інфармацыю пра гэты сертыфікат звяртайцеся да адміністратара.}one{Адміністратар дамена \"{orgName}\" усталяваў для вашага працоўнага профілю сертыфікаты ЦС, якія дазваляюць яму кантраляваць вашы дзеянні ў працоўнай сетцы, у тым ліку выкарыстанне электроннай пошты і праграм, а таксама наведванне бяспечных вэб-сайтаў.\n\nПа дадатковую інфармацыю пра гэтыя сертыфікаты звяртайцеся да адміністратара.}few{Адміністратар дамена \"{orgName}\" усталяваў для вашага працоўнага профілю сертыфікаты ЦС, якія дазваляюць яму кантраляваць вашы дзеянні ў працоўнай сетцы, у тым ліку выкарыстанне электроннай пошты і праграм, а таксама наведванне бяспечных вэб-сайтаў.\n\nПа дадатковую інфармацыю пра гэтыя сертыфікаты звяртайцеся да адміністратара.}many{Адміністратар дамена \"{orgName}\" усталяваў для вашага працоўнага профілю сертыфікаты ЦС, якія дазваляюць яму кантраляваць вашы дзеянні ў працоўнай сетцы, у тым ліку выкарыстанне электроннай пошты і праграм, а таксама наведванне бяспечных вэб-сайтаў.\n\nПа дадатковую інфармацыю пра гэтыя сертыфікаты звяртайцеся да адміністратара.}other{Адміністратар дамена \"{orgName}\" усталяваў для вашага працоўнага профілю сертыфікаты ЦС, якія дазваляюць яму кантраляваць вашы дзеянні ў працоўнай сетцы, у тым ліку выкарыстанне электроннай пошты і праграм, а таксама наведванне бяспечных вэб-сайтаў.\n\nПа дадатковую інфармацыю пра гэтыя сертыфікаты звяртайцеся да адміністратара.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Трэцяя асоба мае магчымасць маніторынгу вашай сеткавай актыўнасці, у тым ліку электроннай пошты, дадаткаў і абароненых вэб-сайтаў.\n\nГэта магчыма з-за даверанага сертыфіката, усталяванага на вашай прыладзе."</string>
-    <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
-      <item quantity="one">Праверыць сертыфікаты</item>
-      <item quantity="few">Праверыць сертыфікаты</item>
-      <item quantity="many">Праверыць сертыфікаты</item>
-      <item quantity="other">Праверыць сертыфікаты</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_settings_button (2044927302268394991) -->
+    <skip />
     <string name="user_settings_title" msgid="6550866465409807877">"Некалькі карыстальнікаў"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Карыстальнікi і профілi"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Дадаць карыстальніка або профіль"</string>
@@ -2748,9 +2578,12 @@
     <string name="enable_guest_calling" msgid="8300355036005240911">"Дазволіць гасцям карыстацца тэлефонам"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"Госць атрымае доступ да гісторыі выклікаў."</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Уключыць тэлефонныя выклікі і SMS"</string>
+    <string name="user_grant_admin" msgid="6511342422361803820">"Даць гэтаму карыстальніку правы адміністратара"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Выдаліць карыстальніка"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Уключыць тэлефонныя выклікі і SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Гэты карыстальнік атрымае доступ да гісторыі выклікаў і SMS."</string>
+    <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Выдаліць правы адміністратара?"</string>
+    <string name="user_revoke_admin_confirm_message" msgid="2719667217562982318">"Сапраўды выдаліць правы адміністратара для гэтага карыстальніка?"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Даныя для экстранных сітуацый"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Інфармацыя і кантакты карыстальніка <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Адкрыць праграму \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
@@ -2896,10 +2729,12 @@
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Кланіраваныя праграмы"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Стварыце яшчэ адзін экзэмпляр праграмы, каб можна было выкарыстоўваць два ўліковыя запісы адначасова."</string>
     <string name="cloned_apps_summary" msgid="8805362440770795709">"Створаны копіі: <xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g>, даступна для стварэння копій: <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g>"</string>
-    <!-- no translation found for cloned_app_creation_summary (4642627294993918502) -->
+    <!-- no translation found for delete_all_app_clones (3489053361980624999) -->
     <skip />
-    <!-- no translation found for cloned_app_created_summary (7277912971544890710) -->
+    <!-- no translation found for delete_all_app_clones_failure (6821033414547132335) -->
     <skip />
+    <string name="cloned_app_creation_summary" msgid="4642627294993918502">"Ідзе стварэнне…"</string>
+    <string name="cloned_app_created_summary" msgid="7277912971544890710">"Копія створана"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Мовы, жэсты, час, рэзервовае капіраванне"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"Мовы сістэмы, мовы праграмы"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, злучэнне, інтэрнэт, бесправадны, даныя, wi fi"</string>
@@ -3233,12 +3068,8 @@
     <string name="promote_conversation_title" msgid="4731148769888238722">"Гэта размова"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Дадаць у раздзел размоў"</string>
     <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Няма прыярытэтных размоў"</string>
-    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> прыярытэтная размова</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> прыярытэтныя размовы</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> прыярытэтных размоў</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> прыярытэтнай размовы</item>
-    </plurals>
+    <!-- no translation found for priority_conversation_count (7291234530844412077) -->
+    <skip />
     <string name="important_conversations" msgid="1233893707189659401">"Прыярытэтныя размомы"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Паказваць уверсе раздзела размоў у выглядзе рухомых усплывальных апавяшчэнняў"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Паказваць уверсе раздзела размоў"</string>
@@ -3267,18 +3098,10 @@
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Калі прылада разблакіравана, паказваць апавяшчэнні ў выглядзе банера ўверсе экрана"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Усе апавяшчэнні праграмы \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Усе апавяшчэнні праграмы \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
-    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
-      <item quantity="one">Прыблізна <xliff:g id="NUMBER_1">%,d</xliff:g> апавяшчэнне ў дзень</item>
-      <item quantity="few">Прыблізна <xliff:g id="NUMBER_1">%,d</xliff:g> апавяшчэнні ў дзень</item>
-      <item quantity="many">Прыблізна <xliff:g id="NUMBER_1">%,d</xliff:g> апавяшчэнняў у дзень</item>
-      <item quantity="other">Прыблізна <xliff:g id="NUMBER_1">%,d</xliff:g> апавяшчэння ў дзень</item>
-    </plurals>
-    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
-      <item quantity="one">Прыблізна <xliff:g id="NUMBER_1">%,d</xliff:g> апавяшчэнне ў тыдзень</item>
-      <item quantity="few">Прыблізна <xliff:g id="NUMBER_1">%,d</xliff:g> апавяшчэнні ў тыдзень</item>
-      <item quantity="many">Прыблізна <xliff:g id="NUMBER_1">%,d</xliff:g> апавяшчэнняў у тыдзень</item>
-      <item quantity="other">Прыблізна <xliff:g id="NUMBER_1">%,d</xliff:g> апавяшчэння ў тыдзень</item>
-    </plurals>
+    <!-- no translation found for notifications_sent_daily (10274479224185437) -->
+    <skip />
+    <!-- no translation found for notifications_sent_weekly (7895656213187555346) -->
+    <skip />
     <string name="notifications_sent_never" msgid="9081278709126812062">"Ніколі"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Апавяшчэнні прылад і праграм"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Вызначыце праграмы і прылады, якія змогуць мець доступ да апавяшчэнняў"</string>
@@ -3347,12 +3170,8 @@
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Дазволы"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"Гэта праграма можа выкарыстоўваць дазволы вашай асабістай праграмы \"<xliff:g id="NAME">%1$s</xliff:g>\", напрыклад доступ да даных пра месцазнаходжанне, сховішча і кантакты."</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"Няма падключаных праграм"</string>
-    <plurals name="interact_across_profiles_number_of_connected_apps" formatted="false" msgid="6991750455661974772">
-      <item quantity="one">Падключана <xliff:g id="COUNT_1">%d</xliff:g> праграма</item>
-      <item quantity="few">Падключана <xliff:g id="COUNT_1">%d</xliff:g> праграмы</item>
-      <item quantity="many">Падключана <xliff:g id="COUNT_1">%d</xliff:g> праграм</item>
-      <item quantity="other">Падключана <xliff:g id="COUNT_1">%d</xliff:g> праграмы</item>
-    </plurals>
+    <!-- no translation found for interact_across_profiles_number_of_connected_apps (4000424798291479207) -->
+    <skip />
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Каб падключыць гэтыя праграмы, усталюйце ў працоўным профілі праграму \"<xliff:g id="NAME">%1$s</xliff:g>\""</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Каб падключыць гэтыя праграмы, усталюйце ў асабістым профілі праграму \"<xliff:g id="NAME">%1$s</xliff:g>\""</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Націсніце, каб загрузіць праграму"</string>
@@ -3367,12 +3186,8 @@
     <string name="notification_channels_other" msgid="18159805343647908">"Іншае"</string>
     <string name="no_channels" msgid="4716199078612071915">"Гэта праграма не размяшчала ніякіх апавяшчэнняў"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Дадатковыя налады ў праграме"</string>
-    <plurals name="deleted_channels" formatted="false" msgid="5963473421547029532">
-      <item quantity="one">Выдалена <xliff:g id="COUNT_1">%d</xliff:g> катэгорыя</item>
-      <item quantity="few">Выдалены <xliff:g id="COUNT_1">%d</xliff:g> катэгорыі</item>
-      <item quantity="many">Выдалены <xliff:g id="COUNT_1">%d</xliff:g> катэгорый</item>
-      <item quantity="other">Выдалены <xliff:g id="COUNT_1">%d</xliff:g> катэгорыі</item>
-    </plurals>
+    <!-- no translation found for deleted_channels (8489800381509312964) -->
+    <skip />
     <string name="app_notification_block_title" msgid="3880322745749900296">"Блакіраваць усё"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Ніколі не паказваць гэтыя апавяшчэнні"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Уключыць апавяшчэнні"</string>
@@ -3522,7 +3337,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Запытваць пароль перад адмацаваннем"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Заблакіраваць прыладу падчас адмацавання"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Пацвярджаць выдаленне даных SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Перш чым сціраць eSIM-карту, пацвердзіце, што гэта вы"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Перш чым сціраць eSIM-карту, пацвердзіце, што гэта вы"</string>
     <string name="memtag_title" msgid="5096176296797727201">"Пашыраная абарона памяці (бэта)"</string>
     <string name="memtag_toggle" msgid="8695028758462939212">"Пашыраная абарона памяці"</string>
     <string name="memtag_intro" msgid="579408691329568953">"Гэта функцыя (пакуль у бэта-версіі) дапамагае абараніць прыладу ад памылак, якія могуць паставіць вашу бяспеку пад пагрозу."</string>
@@ -4023,22 +3838,12 @@
     <string name="enterprise_privacy_none" msgid="6026527690979756431">"Няма"</string>
     <string name="enterprise_privacy_enterprise_installed_packages" msgid="9114143640515900082">"Усталяваныя праграмы"</string>
     <string name="enterprise_privacy_apps_count_estimation_info" msgid="7959907857710107792">"Колькасць праграм – прыблізная. Сюды могуць не ўваходзіць праграмы, усталяваныя не з Крамы Play."</string>
-    <plurals name="enterprise_privacy_number_packages_lower_bound" formatted="false" msgid="5403847001419529018">
-      <item quantity="one">Мінімум <xliff:g id="COUNT_1">%d</xliff:g> праграма</item>
-      <item quantity="few">Мінімум <xliff:g id="COUNT_1">%d</xliff:g> праграмы</item>
-      <item quantity="many">Мінімум <xliff:g id="COUNT_1">%d</xliff:g> праграм</item>
-      <item quantity="other">Мінімум <xliff:g id="COUNT_1">%d</xliff:g> праграмы</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages_lower_bound" msgid="5317634640873658149">"{count,plural, =1{Мінімум # праграма}one{Мінімум # праграма}few{Мінімум # праграмы}many{Мінімум # праграм}other{Мінімум # праграмы}}"</string>
     <string name="enterprise_privacy_location_access" msgid="8023838718108456971">"Доступ да геаданых"</string>
     <string name="enterprise_privacy_microphone_access" msgid="7242958026470143653">"Дазволы мікрафона"</string>
     <string name="enterprise_privacy_camera_access" msgid="7685460535880069016">"Дазволы камеры"</string>
     <string name="enterprise_privacy_enterprise_set_default_apps" msgid="7498546659083996300">"Стандартныя праграмы"</string>
-    <plurals name="enterprise_privacy_number_packages" formatted="false" msgid="8568544906431825430">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> праграма</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> праграмы</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> праграм</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> праграмы</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages" msgid="5294444005035188274">"{count,plural, =1{# праграма}one{# праграма}few{# праграмы}many{# праграм}other{# праграмы}}"</string>
     <string name="enterprise_privacy_input_method" msgid="3278314982700662246">"Стандартная клавіятура"</string>
     <string name="enterprise_privacy_input_method_name" msgid="2974859490559054584">"Усталявана на <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
     <string name="enterprise_privacy_always_on_vpn_device" msgid="1735829327405126695">"Заўсёды ўключаны VPN уключаны"</string>
@@ -4048,22 +3853,12 @@
     <string name="enterprise_privacy_ca_certs_device" msgid="1816495877258727663">"Давераныя ўліковыя даныя"</string>
     <string name="enterprise_privacy_ca_certs_personal" msgid="1516422660828485795">"Давераныя ўліковыя даныя ў вашым асабістым профілі"</string>
     <string name="enterprise_privacy_ca_certs_work" msgid="4318941788592655561">"Давераныя ўліковыя даныя ў вашым працоўным профілі"</string>
-    <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="6459725295322004179">
-      <item quantity="one">Мінімум <xliff:g id="COUNT_1">%d</xliff:g> сертыфікат ЦС</item>
-      <item quantity="few">Мінімум <xliff:g id="COUNT_1">%d</xliff:g> сертыфікаты ЦС</item>
-      <item quantity="many">Мінімум <xliff:g id="COUNT_1">%d</xliff:g> сертыфікатаў ЦС</item>
-      <item quantity="other">Мінімум <xliff:g id="COUNT_1">%d</xliff:g> сертыфіката ЦС</item>
-    </plurals>
+    <string name="enterprise_privacy_number_ca_certs" msgid="4540897122831942658">"{count,plural, =1{Мінімум # сертыфікат ЦС}one{Мінімум # сертыфікат ЦС}few{Мінімум # сертыфікаты ЦС}many{Мінімум # сертыфікатаў ЦС}other{Мінімум # сертыфіката ЦС}}"</string>
     <string name="enterprise_privacy_lock_device" msgid="464054894363899866">"Адміністратар можа блакіраваць прыладу і скідваць пароль"</string>
     <string name="enterprise_privacy_wipe_device" msgid="869589182352244591">"Адміністратар можа выдаляць усе даныя прылады"</string>
     <string name="enterprise_privacy_failed_password_wipe_device" msgid="7045164901334821226">"Няўдалыя спробы ўводу пароля перад выдаленнем усіх даных прылады"</string>
     <string name="enterprise_privacy_failed_password_wipe_work" msgid="2537582942554484170">"Няўдалыя спробы ўводу пароля перад выдаленнем даных працоўнага профілю"</string>
-    <plurals name="enterprise_privacy_number_failed_password_wipe" formatted="false" msgid="8811973918944217791">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> спроба</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> спробы</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> спроб</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> спробы</item>
-    </plurals>
+    <string name="enterprise_privacy_number_failed_password_wipe" msgid="2695842143305867642">"{count,plural, =1{# спроба}one{# спроба}few{# спробы}many{# спроб}other{# спробы}}"</string>
     <string name="do_disclosure_generic" msgid="3067459392402324538">"Гэта прылада знаходзіцца пад кіраваннем вашай арганізацыі."</string>
     <string name="do_disclosure_with_name" msgid="867544298924410766">"Гэта прылада знаходзіцца пад кіраваннем <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
@@ -4091,27 +3886,12 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Калі вы аплаціце поўны кошт:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Усе абмежаванні на выкарыстанне прылады зняты"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Вы не можаце выдаліць праграму крэдытора"</string>
-    <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
-      <item quantity="one">Праграмы \"Камера\"</item>
-      <item quantity="few">Праграмы \"Камера\"</item>
-      <item quantity="many">Праграмы \"Камера\"</item>
-      <item quantity="other">Праграмы \"Камера\"</item>
-    </plurals>
+    <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{Праграма \"Камера\"}one{Праграмы \"Камера\"}few{Праграмы \"Камера\"}many{Праграмы \"Камера\"}other{Праграмы \"Камера\"}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"Праграма \"Каляндар\""</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"Праграма \"Кантакты\""</string>
-    <plurals name="default_email_app_title" formatted="false" msgid="8338194872609410234">
-      <item quantity="one">Паштовыя кліенты</item>
-      <item quantity="few">Паштовыя кліенты</item>
-      <item quantity="many">Паштовыя кліенты</item>
-      <item quantity="other">Паштовыя кліенты</item>
-    </plurals>
+    <string name="default_email_app_title" msgid="5411280873093244250">"{count,plural, =1{Праграма \"Паштовы кліент\"}one{Праграмы \"Паштовы кліент\"}few{Праграмы \"Паштовы кліент\"}many{Праграмы \"Паштовы кліент\"}other{Праграмы \"Паштовы кліент\"}}"</string>
     <string name="default_map_app_title" msgid="7569231732944853320">"Праграма \"Карта\""</string>
-    <plurals name="default_phone_app_title" formatted="false" msgid="4222188821845826493">
-      <item quantity="one">Праграмы \"Тэлефон\"</item>
-      <item quantity="few">Праграмы \"Тэлефон\"</item>
-      <item quantity="many">Праграмы \"Тэлефон\"</item>
-      <item quantity="other">Праграмы \"Тэлефон\"</item>
-    </plurals>
+    <string name="default_phone_app_title" msgid="795025972645464135">"{count,plural, =1{Праграма \"Тэлефон\"}one{Праграмы \"Тэлефон\"}few{Праграмы \"Тэлефон\"}many{Праграмы \"Тэлефон\"}other{Праграмы \"Тэлефон\"}}"</string>
     <string name="app_names_concatenation_template_2" msgid="8320181646458855457">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>"</string>
     <string name="app_names_concatenation_template_3" msgid="7019703249717854148">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>, <xliff:g id="THIRD_APP_NAME">%3$s</xliff:g>"</string>
     <string name="storage_default_internal_storage" msgid="4055660218818688131">"Гэта прылада"</string>
@@ -4138,15 +3918,18 @@
     <string name="webview_uninstalled_for_user" msgid="627352948986275488">"(выдалена для карыстальніка <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="webview_disabled_for_user" msgid="5809886172032644498">"(адключана для карыстальніка <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="autofill_app" msgid="7595308061826307921">"Служба аўтазапаўнення"</string>
+    <string name="default_autofill_app" msgid="372234803718251606">"Стандартная служба аўтазапаўнення"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Паролі"</string>
-    <plurals name="autofill_passwords_count" formatted="false" msgid="7715009165029452622">
-      <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> пароль</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%1$d</xliff:g> паролі</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%1$d</xliff:g> пароляў</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> пароля</item>
-    </plurals>
+    <string name="credman_credentials" msgid="5937331545565783811">"Менеджары пароляў і службы ідэнтыфікацыі"</string>
+    <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# пароль}one{# пароль}few{# паролі}many{# пароляў}other{# пароля}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"аўта, запаўненне, аўтазапаўненне, пароль"</string>
+    <string name="credman_keywords" msgid="7236954350284379264">"уліковыя даныя, ключ доступу, пароль"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Упэўніцеся, што давяраеце гэтай праграме&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Аўтазапаўненне Google&gt;%1$s&lt;/xliff:g&gt; выкарыстоўвае тое, што знаходзіцца на вашым экране, каб вызначыць, што можна запоўніць аўтаматычна."</string>
+    <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Выключыць %1$s?"</string>
+    <string name="credman_confirmation_message" msgid="1485617504425237430">"Захаваныя даныя, напрыклад адрасы ці спосабы аплаты, не будуць уводзіцца пры ўваходзе ў сістэму. Каб захаваныя даныя ўводзіліся, наладзьце стандартную службу аўтазапаўнення."</string>
+    <string name="credman_error_message_title" msgid="5108868200002966901">"Дасягнуты ліміт на колькасць менеджараў пароляў і службаў ідэнтыфікацыі"</string>
+    <string name="credman_error_message" msgid="4058425433345908579">"Адначасова могуць працаваць не больш як 5 менеджараў пароляў і службаў аўтазапаўнення. Каб дадаць новую службу, выключыце існуючую."</string>
+    <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Выключыць"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Аўтазапаўненне"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Узровень запісаў"</string>
     <string name="autofill_max_partitions" msgid="7342195529574406366">"Максімальная колькасць запытаў за сеанс"</string>
@@ -4329,8 +4112,7 @@
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"Выкарыстанне трафіка"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Несапраўдны рэжым сеткі <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ігнараваць."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Назвы пунктаў доступу"</string>
-    <!-- no translation found for keywords_access_point_names (8174967126858505945) -->
-    <skip />
+    <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Недаступна праз аператара \"<xliff:g id="CARRIER">%1$s</xliff:g>\""</string>
     <string name="see_more" msgid="7499355691042812723">"Яшчэ"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Уключыць аператара \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\"?"</string>
@@ -4420,12 +4202,7 @@
     <string name="copyable_slice_toast" msgid="1008251852798990606">"Скапіравана ў буфер абмену: <xliff:g id="COPY_CONTENT">%1$s</xliff:g>."</string>
     <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"Выкарыстанне спецыяльных магчымасцей"</string>
-    <plurals name="accessibility_usage_summary" formatted="false" msgid="6910643986958263005">
-      <item quantity="one"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> праграма мае поўны доступ да даных вашай прылады</item>
-      <item quantity="few"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> праграмы маюць поўны доступ да даных вашай прылады</item>
-      <item quantity="many"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> праграм маюць поўны доступ да даных вашай прылады</item>
-      <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> праграмы маюць поўны доступ да даных вашай прылады</item>
-    </plurals>
+    <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{1 праграма мае поўны доступ да даных вашай прылады}one{# праграма мае поўны доступ да даных вашай прылады}few{# праграмы маюць поўны доступ да даных вашай прылады}many{# праграм маюць поўны доступ да даных вашай прылады}other{# праграмы маюць поўны доступ да даных вашай прылады}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Важная інфармацыя"</string>
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"ПРАЦЯГНУЦЬ"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"НЕ, ДЗЯКУЙ"</string>
@@ -4720,18 +4497,11 @@
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR-код мае несапраўдны фармат"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"Пераўтварыць у eSIM-карту"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"Перанесці eSIM-карту на іншую прыладу"</string>
-    <!-- no translation found for background_install_preference_summary (3065219346519340364) -->
-    <skip />
-    <!-- no translation found for background_install_title (607913515188276168) -->
-    <skip />
-    <!-- no translation found for background_install_summary (3890296129543309666) -->
-    <skip />
-    <!-- no translation found for background_install_feature_list_no_entry (2071343281272266154) -->
-    <skip />
-    <!-- no translation found for background_install_uninstall_button_description (1189649052911501249) -->
-    <skip />
-    <!-- no translation found for background_install_before (8608614957688912715) -->
-    <skip />
-    <!-- no translation found for background_install_after (7983488897570908149) -->
-    <skip />
+    <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# праграма}one{# праграма}few{# праграмы}many{# праграм}other{# праграмы}}"</string>
+    <string name="background_install_title" msgid="607913515188276168">"Праграмы, усталяваныя ў фонавым рэжыме"</string>
+    <string name="background_install_summary" msgid="3890296129543309666">"Вытворца вашай прылады можа ўсталёўваць на яе праграмы ў фонавым рэжыме або дазволіць гэта рабіць вашаму аператару сувязі і іншым партнёрам.\n\nПраграмы, пералічаныя тут, не з\'яўляюцца неабходнымі для нармальнай працы вашай прылады. Непатрэбныя вам праграмы можна выдаліць."</string>
+    <string name="background_install_feature_list_no_entry" msgid="2071343281272266154">"Няма праграм, усталяваных у фонавым рэжыме"</string>
+    <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Выдаліць праграму"</string>
+    <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Праграмы, усталяваныя за апошні # месяц}one{Праграмы, усталяваныя за апошні # месяц}few{Праграмы, усталяваныя за апошнія # месяцы}many{Праграмы, усталяваныя за апошнія # месяцаў}other{Праграмы, усталяваныя за апошнія # месяца}}"</string>
+    <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Праграмы, усталяваныя больш як # месяц назад}one{Праграмы, усталяваныя больш як # месяц назад}few{Праграмы, усталяваныя больш як # месяцы назад}many{Праграмы, усталяваныя больш як # месяцаў назад}other{Праграмы, усталяваныя больш як # месяца назад}}"</string>
 </resources>
