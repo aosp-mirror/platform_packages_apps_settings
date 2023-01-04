@@ -36,6 +36,8 @@ import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.MediaManagementAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
+import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
+import com.android.settings.wifi.ChangeWifiStateDetails
 
 object SettingsActivityUtil {
     private val FRAGMENT_TO_SPA_DESTINATION_MAP = mapOf(
@@ -58,6 +60,8 @@ object SettingsActivityUtil {
             AllFilesAccessAppListProvider.getAppInfoRoutePrefix(),
         MediaManagementAppsDetails::class.qualifiedName to
             MediaManagementAppsAppListProvider.getAppInfoRoutePrefix(),
+        ChangeWifiStateDetails::class.qualifiedName to
+            WifiControlAppListProvider.getAppInfoRoutePrefix(),
     )
 
     @JvmStatic
