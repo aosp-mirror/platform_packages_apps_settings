@@ -19,6 +19,11 @@
     android:key="accessibility_hearing_devices_screen"
     android:title="@string/accessibility_hearingaid_title">
 
+    <PreferenceCategory
+        android:key="available_hearing_devices"
+        android:title="@string/accessibility_hearing_device_connected_title"
+        settings:controller="com.android.settings.accessibility.AvailableHearingDevicePreferenceController"/>
+
     <com.android.settingslib.RestrictedPreference
         android:key="add_bt_devices"
         android:title="@string/bluetooth_pairing_pref_title"

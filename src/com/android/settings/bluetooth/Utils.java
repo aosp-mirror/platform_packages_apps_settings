@@ -46,6 +46,9 @@ import com.android.settingslib.bluetooth.BluetoothUtils.ErrorListener;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager.BluetoothManagerCallback;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
+
 /**
  * Utils is a helper class that contains constants for various
  * Android resource IDs, debug logging flags, and static methods
@@ -134,6 +137,24 @@ public final class Utils {
 
     public static LocalBluetoothManager getLocalBtManager(Context context) {
         return LocalBluetoothManager.getInstance(context, mOnInitCallback);
+    }
+
+    /**
+     * Obtains a {@link LocalBluetoothManager}.
+     *
+     * To avoid StrictMode ThreadPolicy violation, will get it in another thread.
+     */
+    public static LocalBluetoothManager getLocalBluetoothManager(Context context) {
+        final FutureTask<LocalBluetoothManager> localBtManagerFutureTask = new FutureTask<>(
+                // Avoid StrictMode ThreadPolicy violation
+                () -> getLocalBtManager(context));
+        try {
+            localBtManagerFutureTask.run();
+            return localBtManagerFutureTask.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.w(TAG, "Error getting LocalBluetoothManager.", e);
+            return null;
+        }
     }
 
     public static String createRemoteName(Context context, BluetoothDevice device) {
