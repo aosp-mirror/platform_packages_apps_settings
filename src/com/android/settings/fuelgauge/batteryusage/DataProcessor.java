@@ -1448,6 +1448,9 @@ public final class DataProcessor {
 
         // Calculates all packages diff usage data in a specific time slot.
         for (String key : allBatteryHistEntryKeys) {
+            if (key == null) {
+                continue;
+            }
             final BatteryHistEntry currentEntry =
                     currentBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
             final BatteryHistEntry nextEntry =
