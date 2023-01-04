@@ -1632,7 +1632,11 @@
     <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
     <string name="fingerprint_unlock_skip_fingerprint">Continue without fingerprint</string>
     <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
-    <string name="fingerprint_unlock_title">You can unlock your phone using your fingerprint. For security, this option requires a backup screen lock.</string>
+    <string name="fingerprint_unlock_title" product="default">You can unlock your phone using your fingerprint. For security, this option requires a backup screen lock.</string>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title" product="tablet">You can unlock your tablet using your fingerprint. For security, this option requires a backup screen lock.</string>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title" product="device">You can unlock your device using your fingerprint. For security, this option requires a backup screen lock.</string>
 
     <!-- Title for preference that guides the user through creating a backup unlock pattern for Face Unlock [CHAR LIMIT=45]-->
     <string name="face_unlock_set_unlock_pattern">Face Unlock + Pattern</string>
@@ -1643,7 +1647,11 @@
     <!-- Title for preference that guides the user to skip Face Unlock setup [CHAR LIMIT=60]-->
     <string name="face_unlock_skip_face">Continue without Face Unlock</string>
     <!-- Message shown in screen lock picker while setting up the new screen lock with face unlock option. [CHAR LIMIT=NONE] -->
-    <string name="face_unlock_title">You can unlock your phone using your face. For security, this option requires a backup screen lock.</string>
+    <string name="face_unlock_title" product="default">You can unlock your phone using your face. For security, this option requires a backup screen lock.</string>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with face unlock option. [CHAR LIMIT=NONE] -->
+    <string name="face_unlock_title" product="tablet">You can unlock your tablet using your face. For security, this option requires a backup screen lock.</string>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with face unlock option. [CHAR LIMIT=NONE] -->
+    <string name="face_unlock_title" product="device">You can unlock your device using your face. For security, this option requires a backup screen lock.</string>
 
     <!-- Title for preference that guides the user through creating a backup unlock pattern for biometrics unlock [CHAR LIMIT=45]-->
     <string name="biometrics_unlock_set_unlock_pattern">Pattern \u2022 Face \u2022 Fingerprint</string>
@@ -1654,7 +1662,11 @@
     <!-- Title for preference that guides the user to skip face unlock setup [CHAR LIMIT=60]-->
     <string name="biometrics_unlock_skip_biometrics">Continue without face or fingerprint</string>
     <!-- Message shown in screen lock picker while setting up the new screen lock with biometrics option. [CHAR LIMIT=NONE] -->
-    <string name="biometrics_unlock_title">You can unlock your phone using your face or fingerprint. For security, this option requires a backup screen lock.</string>
+    <string name="biometrics_unlock_title" product="default">You can unlock your phone using your face or fingerprint. For security, this option requires a backup screen lock.</string>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with biometrics option. [CHAR LIMIT=NONE] -->
+    <string name="biometrics_unlock_title" product="tablet">You can unlock your tablet using your face or fingerprint. For security, this option requires a backup screen lock.</string>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with biometrics option. [CHAR LIMIT=NONE] -->
+    <string name="biometrics_unlock_title" product="device">You can unlock your device using your face or fingerprint. For security, this option requires a backup screen lock.</string>
 
     <!-- Summary for preference that has been disabled by because of the DevicePolicyAdmin, or because device encryption is enabled, or because there are credentials in the credential storage [CHAR LIMIT=50] -->
     <string name="unlock_set_unlock_disabled_summary">Disabled by admin, encryption policy, or
