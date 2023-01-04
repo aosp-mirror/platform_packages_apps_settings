@@ -24,12 +24,13 @@ import android.os.Looper;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -55,7 +56,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     private static final String TAG = "BatteryUsageBreakdownController";
     private static final String ROOT_PREFERENCE_KEY = "battery_usage_breakdown";
     private static final String FOOTER_PREFERENCE_KEY = "battery_usage_footer";
-    private static final String TAB_PREFERENCE_KEY = "battery_usage_tab";
+    private static final String SPINNER_PREFERENCE_KEY = "battery_usage_spinner";
     private static final String APP_LIST_PREFERENCE_KEY = "app_list";
     private static final String PACKAGE_NAME_NONE = "none";
     private static final int ENABLED_ICON_ALPHA = 255;
@@ -69,7 +70,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     @VisibleForTesting
     final Map<String, Preference> mPreferenceCache = new HashMap<>();
 
-    private int mTabPosition;
+    private int mSpinnerPosition;
     private String mSlotTimestamp;
 
     @VisibleForTesting
@@ -77,7 +78,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     @VisibleForTesting
     PreferenceCategory mRootPreference;
     @VisibleForTesting
-    TabPreference mTabPreference;
+    SpinnerPreference mSpinnerPreference;
     @VisibleForTesting
     PreferenceGroup mAppListPreferenceGroup;
     @VisibleForTesting
@@ -145,26 +146,33 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
         super.displayPreference(screen);
         mPrefContext = screen.getContext();
         mRootPreference = screen.findPreference(ROOT_PREFERENCE_KEY);
-        mTabPreference = screen.findPreference(TAB_PREFERENCE_KEY);
+        mSpinnerPreference = screen.findPreference(SPINNER_PREFERENCE_KEY);
         mAppListPreferenceGroup = screen.findPreference(APP_LIST_PREFERENCE_KEY);
         mFooterPreference = screen.findPreference(FOOTER_PREFERENCE_KEY);
 
         mAppListPreferenceGroup.setOrderingAsAdded(false);
-        mTabPreference.initializeTabs(mFragment, new String[]{
-                mPrefContext.getString(R.string.battery_usage_app_tab),
-                mPrefContext.getString(R.string.battery_usage_system_tab)
-        });
-        mTabPreference.setOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                mTabPosition = position;
-                mHandler.post(() -> {
-                    removeAndCacheAllPreferences();
-                    addAllPreferences();
+        mSpinnerPreference.initializeSpinner(
+                new String[]{
+                        mPrefContext.getString(R.string.battery_usage_spinner_breakdown_by_apps),
+                        mPrefContext.getString(R.string.battery_usage_spinner_breakdown_by_system)
+                },
+                new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(
+                            AdapterView<?> parent, View view, int position, long id) {
+                        if (mSpinnerPosition != position) {
+                            mSpinnerPosition = position;
+                            mHandler.post(() -> {
+                                removeAndCacheAllPreferences();
+                                addAllPreferences();
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                    }
                 });
-            }
-        });
     }
 
     /**
@@ -182,7 +190,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
         mSlotTimestamp = slotTimestamp;
 
         showCategoryTitle(slotTimestamp);
-        showTabAndAppList();
+        showSpinnerAndAppList();
         showFooterPreference(isAllUsageDataEmpty);
     }
 
@@ -204,12 +212,12 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
         mFooterPreference.setVisible(true);
     }
 
-    private void showTabAndAppList() {
+    private void showSpinnerAndAppList() {
         removeAndCacheAllPreferences();
         if (mBatteryDiffData == null) {
             return;
         }
-        mTabPreference.setVisible(true);
+        mSpinnerPreference.setVisible(true);
         mAppListPreferenceGroup.setVisible(true);
         mHandler.post(() -> {
             addAllPreferences();
@@ -222,7 +230,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
             return;
         }
         final long start = System.currentTimeMillis();
-        final List<BatteryDiffEntry> entries = mTabPosition == 0
+        final List<BatteryDiffEntry> entries = mSpinnerPosition == 0
                 ? mBatteryDiffData.getAppDiffEntryList()
                 : mBatteryDiffData.getSystemDiffEntryList();
         int prefIndex = mAppListPreferenceGroup.getPreferenceCount();
