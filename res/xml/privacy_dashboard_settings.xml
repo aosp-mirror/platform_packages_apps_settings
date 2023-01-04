@@ -61,6 +61,16 @@
         <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
     </Preference>
 
+    <!-- App Data Sharing Update -->
+    <Preference
+        android:key="privacy_app_data_sharing_updates"
+        android:title="@string/app_data_sharing_updates_title"
+        android:summary="@string/app_data_sharing_updates_summary"
+        settings:controller="com.android.settings.privacy.AppDataSharingUpdatesPreferenceController">
+        <intent android:action="android.intent.action.REVIEW_APP_DATA_SHARING_UPDATES"/>
+    </Preference>
+
+
     <!-- Camera toggle -->
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="privacy_camera_toggle"
