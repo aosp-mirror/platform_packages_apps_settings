@@ -19,6 +19,7 @@ package com.android.settings.biometrics2.ui.model;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_CHALLENGE;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_SENSOR_ID;
 import static com.android.settings.biometrics2.ui.model.CredentialModel.INVALID_CHALLENGE;
+import static com.android.settings.biometrics2.ui.model.CredentialModel.INVALID_GK_PW_HANDLE;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -58,11 +59,13 @@ public class CredentialModelTest {
     }
 
     public static Bundle newValidTokenCredentialIntentExtras(int userId) {
-        return newCredentialModelIntentExtras(userId, 1L, 1, new byte[] { 0 }, 0L);
+        return newCredentialModelIntentExtras(userId, 1L, 1, new byte[] { 0, 1, 2 },
+                INVALID_GK_PW_HANDLE);
     }
 
-    public static Bundle newInvalidChallengeCredentialIntentExtras(int userId) {
-        return newCredentialModelIntentExtras(userId, INVALID_CHALLENGE, 1, null, 0L);
+    public static Bundle newOnlySensorValidCredentialIntentExtras(int userId) {
+        return newCredentialModelIntentExtras(userId, INVALID_CHALLENGE, 1, null,
+                INVALID_GK_PW_HANDLE);
     }
 
     public static Bundle newGkPwHandleCredentialIntentExtras(int userId, long gkPwHandle) {
