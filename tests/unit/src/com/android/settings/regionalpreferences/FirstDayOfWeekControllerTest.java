@@ -48,47 +48,50 @@ public class FirstDayOfWeekControllerTest {
 
     @After
     public void tearDown() throws Exception {
-        RegionalPreferenceUtils.setSettingsProviderContent(
+        RegionalPreferenceTestUtils.setSettingsProviderContent(
                 mApplicationContext, mCacheProviderContent);
         Locale.setDefault(mCacheLocale);
     }
 
     @Test
     public void getSummary_hasProviderValue_resultIsWed() {
-        RegionalPreferenceUtils.setSettingsProviderContent(mApplicationContext, "und-u-fw-wed");
+        RegionalPreferenceTestUtils.setSettingsProviderContent(mApplicationContext, "und-u-fw-wed");
 
-        CharSequence day = mController.getSummary();
+        String summary = mController.getSummary().toString();
 
-        assertEquals(LocalePreferences.FirstDayOfWeek.WEDNESDAY, day.toString());
+        assertEquals(ResourcesUtils.getResourcesString(
+                mApplicationContext, "wednesday_first_day_of_week"), summary);
     }
 
     @Test
     public void getSummary_hasProviderValue_resultIsSat() {
-        RegionalPreferenceUtils.setSettingsProviderContent(mApplicationContext, "und-u-fw-sat");
+        RegionalPreferenceTestUtils.setSettingsProviderContent(mApplicationContext, "und-u-fw-sat");
 
-        CharSequence day = mController.getSummary();
+        String summary = mController.getSummary().toString();
 
-        assertEquals(LocalePreferences.FirstDayOfWeek.SATURDAY, day.toString());
+        assertEquals(ResourcesUtils.getResourcesString(
+                mApplicationContext, "saturday_first_day_of_week"), summary);
     }
 
     @Test
     public void getSummary_noProviderValueButHasDefaultLocaleWithSubtag_resultIsSat() {
-        RegionalPreferenceUtils.setSettingsProviderContent(mApplicationContext, "");
+        RegionalPreferenceTestUtils.setSettingsProviderContent(mApplicationContext, "");
         Locale.setDefault(Locale.forLanguageTag("en-US-u-fw-sat"));
 
-        CharSequence day = mController.getSummary();
+        String summary = mController.getSummary().toString();
 
-        assertEquals(LocalePreferences.FirstDayOfWeek.SATURDAY, day.toString());
+        assertEquals(ResourcesUtils.getResourcesString(
+                mApplicationContext, "saturday_first_day_of_week"), summary);
     }
 
     @Test
-    public void getSummary_noProviderValueAndDefaultLocaleWithoutSubtag_resultIsEmpty() {
-        RegionalPreferenceUtils.setSettingsProviderContent(mApplicationContext, "");
+    public void getSummary_noProviderValueAndDefaultLocaleWithoutSubtag_resultIsdefault() {
+        RegionalPreferenceTestUtils.setSettingsProviderContent(mApplicationContext, "");
         Locale.setDefault(Locale.forLanguageTag("en-US"));
 
-        CharSequence day = mController.getSummary();
+        String summary = mController.getSummary().toString();
 
         assertEquals(ResourcesUtils.getResourcesString(
-                mApplicationContext, "default_string_of_regional_preference"), day.toString());
+                mApplicationContext, "default_string_of_regional_preference"), summary);
     }
 }

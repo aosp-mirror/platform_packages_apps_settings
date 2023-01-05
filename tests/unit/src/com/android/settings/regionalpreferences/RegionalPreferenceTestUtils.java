@@ -20,7 +20,7 @@ import android.content.Context;
 import android.provider.Settings;
 
 /** Utils for each regional preference unit test. */
-public final class RegionalPreferenceUtils {
+public final class RegionalPreferenceTestUtils {
     /** Set language tag to Settings Provider */
     public static void setSettingsProviderContent(Context context, String languageTag) {
         Settings.System.putString(context.getContentResolver(),
