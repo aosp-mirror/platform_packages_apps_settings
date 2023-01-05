@@ -20,11 +20,12 @@ import android.app.settings.SettingsEnums
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.android.settings.R
@@ -34,6 +35,7 @@ import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
+import com.android.settingslib.spa.framework.compose.LifecycleEffect
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
 import com.android.settingslib.spa.widget.ui.Category
@@ -77,9 +79,11 @@ object AppInfoSettingsProvider : SettingsPageProvider {
     fun getRoute(packageName: String, userId: Int): String = "$name/$packageName/$userId"
 }
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
-    val packageInfo = packageInfoPresenter.flow.collectAsState().value ?: return
+    LifecycleEffect(onStart = { packageInfoPresenter.reloadPackageInfo() })
+    val packageInfo = packageInfoPresenter.flow.collectAsStateWithLifecycle().value ?: return
     val app = packageInfo.applicationInfo
     RegularScaffold(
         title = stringResource(R.string.application_info_label),
