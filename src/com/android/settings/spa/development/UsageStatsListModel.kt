@@ -26,6 +26,7 @@ import androidx.compose.runtime.State
 import com.android.settings.R
 import com.android.settings.spa.development.UsageStatsListModel.SpinnerItem.Companion.toSpinnerItem
 import com.android.settingslib.spa.framework.compose.stateOf
+import com.android.settingslib.spa.widget.ui.SpinnerOption
 import com.android.settingslib.spaprivileged.model.app.AppEntry
 import com.android.settingslib.spaprivileged.model.app.AppListModel
 import com.android.settingslib.spaprivileged.model.app.AppRecord
@@ -53,9 +54,13 @@ class UsageStatsListModel(private val context: Context) : AppListModel<UsageStat
             appList.map { app -> UsageStatsAppRecord(app, usageStatsMap[app.packageName]) }
         }
 
-    override fun getSpinnerOptions() = SpinnerItem.values().map {
-        context.getString(it.stringResId)
-    }
+    override fun getSpinnerOptions(recordList: List<UsageStatsAppRecord>): List<SpinnerOption> =
+        SpinnerItem.values().map {
+            SpinnerOption(
+                id = it.ordinal,
+                text = context.getString(it.stringResId),
+            )
+        }
 
     override fun filter(
         userIdFlow: Flow<Int>,
@@ -75,7 +80,8 @@ class UsageStatsListModel(private val context: Context) : AppListModel<UsageStat
     override fun getSummary(option: Int, record: UsageStatsAppRecord): State<String>? {
         val usageStats = record.usageStats ?: return null
         val lastTimeUsed = DateUtils.formatSameDayTime(
-            usageStats.lastTimeUsed, now, DateFormat.MEDIUM, DateFormat.MEDIUM)
+            usageStats.lastTimeUsed, now, DateFormat.MEDIUM, DateFormat.MEDIUM
+        )
         val lastTimeUsedLine = "${context.getString(R.string.last_time_used_label)}: $lastTimeUsed"
         val usageTime = DateUtils.formatElapsedTime(usageStats.totalTimeInForeground / 1000)
         val usageTimeLine = "${context.getString(R.string.usage_time_label)}: $usageTime"
