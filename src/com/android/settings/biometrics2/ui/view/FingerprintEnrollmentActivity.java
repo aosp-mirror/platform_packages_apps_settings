@@ -98,7 +98,6 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
 
         mAutoCredentialViewModel = viewModelProvider.get(AutoCredentialViewModel.class);
         mAutoCredentialViewModel.setCredentialModel(savedInstanceState, getIntent());
-        checkCredential();
 
         // Theme
         setTheme(mViewModel.getRequest().getTheme());
@@ -107,12 +106,14 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
 
         // fragment
         setContentView(R.layout.biometric_enrollment_container);
-
         final FingerprintEnrollIntroViewModel introViewModel =
                 viewModelProvider.get(FingerprintEnrollIntroViewModel.class);
         introViewModel.setEnrollmentRequest(mViewModel.getRequest());
         introViewModel.setUserId(mAutoCredentialViewModel.getUserId());
+
         if (savedInstanceState == null) {
+            checkCredential();
+
             final String tag = "FingerprintEnrollIntroFragment";
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
@@ -138,11 +139,34 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
         onSetActivityResult(new ActivityResult(RESULT_CANCELED, null));
     }
 
+    /**
+     * Get intent which passing back to FingerprintSettings for late generateChallenge()
+     */
+    @Nullable
+    private Intent createSetResultIntentWithGeneratingChallengeExtra(
+            @Nullable Intent activityResultIntent) {
+        if (!mViewModel.getRequest().isFromSettingsSummery()) {
+            return activityResultIntent;
+        }
+
+        final Bundle extra = mAutoCredentialViewModel.createGeneratingChallengeExtras();
+        if (extra != null) {
+            if (activityResultIntent == null) {
+                activityResultIntent = new Intent();
+            }
+            activityResultIntent.putExtras(extra);
+        }
+        return activityResultIntent;
+    }
+
     private void onSetActivityResult(@NonNull ActivityResult result) {
-        setResult(mViewModel.getRequest().isAfterSuwOrSuwSuggestedAction()
-                        ? RESULT_CANCELED
-                        : result.getResultCode(),
-                result.getData());
+        final int resultCode = mViewModel.getRequest().isAfterSuwOrSuwSuggestedAction()
+                ? RESULT_CANCELED
+                : result.getResultCode();
+        final Intent intent = resultCode == BiometricEnrollBase.RESULT_FINISHED
+                ? createSetResultIntentWithGeneratingChallengeExtra(result.getData())
+                : result.getData();
+        setResult(resultCode, intent);
         finish();
     }
 

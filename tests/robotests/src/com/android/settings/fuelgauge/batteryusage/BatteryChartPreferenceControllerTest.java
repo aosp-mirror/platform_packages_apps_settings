@@ -95,6 +95,7 @@ public final class BatteryChartPreferenceControllerTest {
                 .when(mContext)
                 .getSystemService(UserManager.class);
         doReturn(true).when(mUserManager).isUserUnlocked(anyInt());
+        doReturn(new int[]{0}).when(mUserManager).getProfileIdsWithDisabled(anyInt());
         final Resources resources = spy(mContext.getResources());
         resources.getConfiguration().setLocales(new LocaleList(new Locale("en_US")));
         doReturn(resources).when(mContext).getResources();

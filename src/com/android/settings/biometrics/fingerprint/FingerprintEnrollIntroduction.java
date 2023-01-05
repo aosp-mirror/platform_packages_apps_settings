@@ -43,6 +43,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.biometrics.GatekeeperPasswordProvider;
 import com.android.settings.biometrics.MultiBiometricEnrollHelper;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.HelpUtils;
@@ -68,7 +69,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mFingerprintManager = Utils.getFingerprintManagerOrNull(this);
+        mFingerprintManager = getFingerprintManager();
         if (mFingerprintManager == null) {
             Log.e(TAG, "Null FingerprintManager");
             finish();
@@ -127,11 +128,50 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
         final ScrollView scrollView = findViewById(R.id.sud_scroll_view);
         scrollView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
+
+        final Intent intent = getIntent();
+        if (mFromSettingsSummary
+                && GatekeeperPasswordProvider.containsGatekeeperPasswordHandle(intent)) {
+            overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
+            getNextButton().setEnabled(false);
+            getChallenge(((sensorId, userId, challenge) -> {
+                if (isFinishing()) {
+                    // Do nothing if activity is finishing
+                    Log.w(TAG, "activity finished before challenge callback launched.");
+                    return;
+                }
+
+                mSensorId = sensorId;
+                mChallenge = challenge;
+                final GatekeeperPasswordProvider provider = getGatekeeperPasswordProvider();
+                mToken = provider.requestGatekeeperHat(intent, challenge, mUserId);
+                provider.removeGatekeeperPasswordHandle(intent, true);
+                getNextButton().setEnabled(true);
+            }));
+        }
     }
 
+    @VisibleForTesting
+    @Nullable
+    protected FingerprintManager getFingerprintManager() {
+        return Utils.getFingerprintManagerOrNull(this);
+    }
+
+    /**
+     * Returns the intent extra data for setResult(), null means nothing need to been sent back
+     */
+    @Nullable
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    protected Intent getSetResultIntentExtra(@Nullable Intent activityResultIntent) {
+        Intent intent = super.getSetResultIntentExtra(activityResultIntent);
+        if (mFromSettingsSummary && mToken != null && mChallenge != -1L) {
+            if (intent == null) {
+                intent = new Intent();
+            }
+            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
+            intent.putExtra(EXTRA_KEY_CHALLENGE, mChallenge);
+        }
+        return intent;
     }
 
     @Override
@@ -295,11 +335,6 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected void getChallenge(GenerateChallengeCallback callback) {
-        mFingerprintManager = Utils.getFingerprintManagerOrNull(this);
-        if (mFingerprintManager == null) {
-            callback.onChallengeGenerated(0, 0, 0L);
-            return;
-        }
         mFingerprintManager.generateChallenge(mUserId, callback::onChallengeGenerated);
     }
 
