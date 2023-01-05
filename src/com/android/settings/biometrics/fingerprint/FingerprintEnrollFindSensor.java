@@ -73,6 +73,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     private int mPreviousRotation = 0;
     private ScreenSizeFoldProvider mScreenSizeFoldProvider;
     private boolean mIsFolded;
+    private boolean mIsReverseDefaultRotation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +121,8 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         } else if (mCanAssumeSfps) {
             setHeaderText(R.string.security_settings_sfps_enroll_find_sensor_title);
             setDescriptionText(R.string.security_settings_sfps_enroll_find_sensor_message);
+            mIsReverseDefaultRotation = getApplicationContext().getResources().getBoolean(
+                    com.android.internal.R.bool.config_reverseDefaultRotation);
         } else {
             setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
             setDescriptionText(R.string.security_settings_fingerprint_enroll_find_sensor_message);
@@ -175,11 +178,20 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         }
     }
 
+    private int getRotationFromDefault(int rotation) {
+        if (mIsReverseDefaultRotation) {
+            return (rotation + 1) % 4;
+        } else {
+            return rotation;
+        }
+    }
+
     private void updateSfpsFindSensorAnimationAsset() {
         mScreenSizeFoldProvider
                 .onConfigurationChange(getApplicationContext().getResources().getConfiguration());
         mIllustrationLottie = findViewById(R.id.illustration_lottie);
-        final int rotation = getApplicationContext().getDisplay().getRotation();
+        final int rotation = getRotationFromDefault(
+                getApplicationContext().getDisplay().getRotation());
 
         switch (rotation) {
             case Surface.ROTATION_90:
@@ -441,7 +453,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         mOrientationEventListener = new OrientationEventListener(this) {
             @Override
             public void onOrientationChanged(int orientation) {
-                final int currentRotation = getDisplay().getRotation();
+                final int currentRotation = getRotationFromDefault(getDisplay().getRotation());
                 if ((currentRotation + 2) % 4 == mPreviousRotation) {
                     mPreviousRotation = currentRotation;
                     recreate();
@@ -449,7 +461,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
             }
         };
         mOrientationEventListener.enable();
-        mPreviousRotation = getDisplay().getRotation();
+        mPreviousRotation = getRotationFromDefault(getDisplay().getRotation());
     }
 
     private void stopListenOrientationEvent() {
