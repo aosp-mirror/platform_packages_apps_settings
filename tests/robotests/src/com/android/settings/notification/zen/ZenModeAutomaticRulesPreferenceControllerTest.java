@@ -18,6 +18,7 @@ package com.android.settings.notification.zen;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
@@ -42,10 +43,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.internal.util.reflection.FieldSetter;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -192,11 +193,21 @@ public class ZenModeAutomaticRulesPreferenceControllerTest {
         rule.setEnabled(false);
         rMap.put(testId, rule);
         mockGetAutomaticZenRules(NUM_RULES, rMap);
-        FieldSetter.setField(mZenRulePreference, ZenRulePreference.class.getDeclaredField("mId"), testId);
+        setZenRulePreferenceField("mId", testId);
         mController.updateState(mockPref);
         verify(mZenRulePreference, times(1)).updatePreference(any());
         verify(mockPref, never()).removeAll();
         assertEquals(NUM_RULES, mController.mZenRulePreferences.size());
+    }
+
+    private void setZenRulePreferenceField(String name, Object value) {
+        try {
+            Field field = ZenRulePreference.class.getDeclaredField("mId");
+            field.setAccessible(true);
+            field.set(mZenRulePreference, value);
+        } catch (ReflectiveOperationException e) {
+            fail("Unable to set mZenRulePreference field: " + name);
+        }
     }
 
     private void mockGetAutomaticZenRules(int numRules, Map<String, AutomaticZenRule> rules) {
