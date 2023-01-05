@@ -19,6 +19,7 @@ package com.android.settings.spa.app.specialaccess
 import android.Manifest
 import android.app.AppGlobals
 import android.app.AppOpsManager.MODE_DEFAULT
+import android.app.AppOpsManager.MODE_ERRORED
 import android.app.AppOpsManager.OP_REQUEST_INSTALL_PACKAGES
 import android.content.Context
 import android.content.pm.ApplicationInfo
@@ -50,27 +51,32 @@ class InstallUnknownAppsListModel(private val context: Context) :
     override val pageTitleResId = R.string.install_other_apps
     override val switchTitleResId = R.string.external_source_switch_title
     override val footerResId = R.string.install_all_warning
-    override val switchRestrictionKeys = listOf(
-        UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES,
-        UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY,
-    )
+    override val switchRestrictionKeys =
+        listOf(
+            UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES,
+            UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY,
+        )
 
-    override fun transformItem(app: ApplicationInfo) = InstallUnknownAppsRecord(
-        app = app,
-        appOpsController = AppOpsController(
-            context = context,
+    override fun transformItem(app: ApplicationInfo) =
+        InstallUnknownAppsRecord(
             app = app,
-            op = OP_REQUEST_INSTALL_PACKAGES,
-        ),
-    )
+            appOpsController =
+                AppOpsController(
+                    context = context,
+                    app = app,
+                    op = OP_REQUEST_INSTALL_PACKAGES,
+                    modeForNotAllowed = MODE_ERRORED
+                ),
+        )
 
     override fun filter(
-        userIdFlow: Flow<Int>, recordListFlow: Flow<List<InstallUnknownAppsRecord>>,
-    ) = userIdFlow.map(::getPotentialPackageNames)
-        .combine(recordListFlow) { potentialPackageNames, recordList ->
-            recordList.filter { record ->
-                isChangeable(record, potentialPackageNames)
-            }
+        userIdFlow: Flow<Int>,
+        recordListFlow: Flow<List<InstallUnknownAppsRecord>>,
+    ) =
+        userIdFlow.map(::getPotentialPackageNames).combine(recordListFlow) {
+            potentialPackageNames,
+            recordList ->
+            recordList.filter { record -> isChangeable(record, potentialPackageNames) }
         }
 
     @Composable
@@ -88,12 +94,13 @@ class InstallUnknownAppsListModel(private val context: Context) :
         private fun isChangeable(
             record: InstallUnknownAppsRecord,
             potentialPackageNames: Set<String>,
-        ) = record.appOpsController.getMode() != MODE_DEFAULT ||
+        ) =
+            record.appOpsController.getMode() != MODE_DEFAULT ||
                 record.app.packageName in potentialPackageNames
 
         private fun getPotentialPackageNames(userId: Int): Set<String> =
-            AppGlobals.getPackageManager().getAppOpPermissionPackages(
-                Manifest.permission.REQUEST_INSTALL_PACKAGES, userId
-            ).toSet()
+            AppGlobals.getPackageManager()
+                .getAppOpPermissionPackages(Manifest.permission.REQUEST_INSTALL_PACKAGES, userId)
+                .toSet()
     }
 }

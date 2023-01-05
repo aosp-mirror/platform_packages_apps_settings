@@ -29,6 +29,7 @@ import com.android.settings.spa.app.specialaccess.MediaManagementAppsAppListProv
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
 import com.android.settings.spa.app.specialaccess.SpecialAppAccessPageProvider
+import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
 import com.android.settings.spa.development.UsageStatsPageProvider
 import com.android.settings.spa.home.HomePageProvider
 import com.android.settings.spa.notification.AppListNotificationsPageProvider
@@ -43,17 +44,20 @@ import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppLis
 
 open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
     override val pageProviderRepository = lazy {
-        val togglePermissionAppListTemplate = TogglePermissionAppListTemplate(
-            allProviders = listOf(
-                AllFilesAccessAppListProvider,
-                DisplayOverOtherAppsAppListProvider,
-                MediaManagementAppsAppListProvider,
-                ModifySystemSettingsAppListProvider,
-                PictureInPictureListProvider,
-                InstallUnknownAppsListProvider,
-                AlarmsAndRemindersAppListProvider,
-            ),
-        )
+        val togglePermissionAppListTemplate =
+            TogglePermissionAppListTemplate(
+                allProviders =
+                    listOf(
+                        AllFilesAccessAppListProvider,
+                        DisplayOverOtherAppsAppListProvider,
+                        MediaManagementAppsAppListProvider,
+                        ModifySystemSettingsAppListProvider,
+                        PictureInPictureListProvider,
+                        InstallUnknownAppsListProvider,
+                        AlarmsAndRemindersAppListProvider,
+                        WifiControlAppListProvider,
+                    ),
+            )
         SettingsPageProviderRepository(
             allPageProviders = listOf(
                 HomePageProvider,

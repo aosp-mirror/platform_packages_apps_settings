@@ -72,6 +72,8 @@ public class BiometricUtils {
     };
 
     /**
+     * @deprecated Use {@link com.android.settings.biometrics.GatekeeperPasswordProvider} instead.
+     *
      * Given the result from confirming or choosing a credential, request Gatekeeper to generate
      * a HardwareAuthToken with the Gatekeeper Password together with a biometric challenge.
      *
@@ -83,6 +85,7 @@ public class BiometricUtils {
      * @throws GatekeeperCredentialNotMatchException if Gatekeeper response is not match
      * @throws IllegalStateException if Gatekeeper Password is missing
      */
+    @Deprecated
     public static byte[] requestGatekeeperHat(@NonNull Context context, @NonNull Intent result,
             int userId, long challenge) {
         if (!containsGatekeeperPasswordHandle(result)) {
@@ -93,6 +96,10 @@ public class BiometricUtils {
         return requestGatekeeperHat(context, gatekeeperPasswordHandle, userId, challenge);
     }
 
+    /**
+     * @deprecated Use {@link com.android.settings.biometrics.GatekeeperPasswordProvider} instead.
+     */
+    @Deprecated
     public static byte[] requestGatekeeperHat(@NonNull Context context, long gkPwHandle, int userId,
             long challenge) {
         final LockPatternUtils utils = new LockPatternUtils(context);
@@ -104,15 +111,25 @@ public class BiometricUtils {
         return response.getGatekeeperHAT();
     }
 
+    /**
+     * @deprecated Use {@link com.android.settings.biometrics.GatekeeperPasswordProvider} instead.
+     */
+    @Deprecated
     public static boolean containsGatekeeperPasswordHandle(@Nullable Intent data) {
         return data != null && data.hasExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE);
     }
 
+    /**
+     * @deprecated Use {@link com.android.settings.biometrics.GatekeeperPasswordProvider} instead.
+     */
+    @Deprecated
     public static long getGatekeeperPasswordHandle(@NonNull Intent data) {
         return data.getLongExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 0L);
     }
 
     /**
+     * @deprecated Use {@link com.android.settings.biometrics.GatekeeperPasswordProvider} instead.
+     *
      * Requests {@link com.android.server.locksettings.LockSettingsService} to remove the
      * gatekeeper password associated with a previous
      * {@link ChooseLockSettingsHelper.Builder#setRequestGatekeeperPasswordHandle(boolean)}
@@ -120,6 +137,7 @@ public class BiometricUtils {
      * @param context Caller's context
      * @param data The onActivityResult intent from ChooseLock* or ConfirmLock*
      */
+    @Deprecated
     public static void removeGatekeeperPasswordHandle(@NonNull Context context,
             @Nullable Intent data) {
         if (data == null) {
@@ -131,6 +149,10 @@ public class BiometricUtils {
         removeGatekeeperPasswordHandle(context, getGatekeeperPasswordHandle(data));
     }
 
+    /**
+     * @deprecated Use {@link com.android.settings.biometrics.GatekeeperPasswordProvider} instead.
+     */
+    @Deprecated
     public static void removeGatekeeperPasswordHandle(@NonNull Context context, long handle) {
         final LockPatternUtils utils = new LockPatternUtils(context);
         utils.removeGatekeeperPasswordHandle(handle);

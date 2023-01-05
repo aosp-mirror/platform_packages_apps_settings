@@ -104,7 +104,7 @@ public class FingerprintEnrollmentViewModel extends AndroidViewModel implements
      * Handle activity result from FingerprintFindSensor
      */
     public void onContinueEnrollActivityResult(@NonNull ActivityResult result, int userId) {
-        if (mIsWaitingActivityResult.compareAndSet(true, false)) {
+        if (!mIsWaitingActivityResult.compareAndSet(true, false)) {
             Log.w(TAG, "fail to reset isWaiting flag for enrollment");
         }
         if (result.getResultCode() == RESULT_FINISHED

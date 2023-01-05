@@ -415,7 +415,13 @@ public class AppInfoDashboardFragment extends DashboardFragment
             return;
         }
         super.onPrepareOptionsMenu(menu);
-        menu.findItem(UNINSTALL_ALL_USERS_MENU).setVisible(shouldShowUninstallForAll(mAppEntry));
+        final MenuItem uninstallAllUsersItem = menu.findItem(UNINSTALL_ALL_USERS_MENU);
+        uninstallAllUsersItem.setVisible(
+                shouldShowUninstallForAll(mAppEntry) && !mAppsControlDisallowedBySystem);
+        if (uninstallAllUsersItem.isVisible()) {
+            RestrictedLockUtilsInternal.setMenuItemAsDisabledByAdmin(getActivity(),
+                    uninstallAllUsersItem, mAppsControlDisallowedAdmin);
+        }
         menu.findItem(ACCESS_RESTRICTED_SETTINGS).setVisible(shouldShowAccessRestrictedSettings());
         mUpdatedSysApp = (mAppEntry.info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0;
         final MenuItem uninstallUpdatesItem = menu.findItem(UNINSTALL_UPDATES);

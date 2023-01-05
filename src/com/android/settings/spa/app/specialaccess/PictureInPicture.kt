@@ -16,6 +16,7 @@
 
 package com.android.settings.spa.app.specialaccess
 
+import android.app.AppOpsManager.MODE_ERRORED
 import android.app.AppOpsManager.OP_PICTURE_IN_PICTURE
 import android.content.Context
 import android.content.pm.ActivityInfo
@@ -46,8 +47,8 @@ data class PictureInPictureRecord(
     val appOpsController: AppOpsController,
 ) : AppRecord
 
-class PictureInPictureListModel(private val context: Context)
-    : TogglePermissionAppListModel<PictureInPictureRecord> {
+class PictureInPictureListModel(private val context: Context) :
+    TogglePermissionAppListModel<PictureInPictureRecord> {
     override val pageTitleResId = R.string.picture_in_picture_title
     override val switchTitleResId = R.string.picture_in_picture_app_detail_switch
     override val footerResId = R.string.picture_in_picture_app_detail_summary
@@ -55,15 +56,16 @@ class PictureInPictureListModel(private val context: Context)
     private val packageManager = context.packageManager
 
     override fun transform(userIdFlow: Flow<Int>, appListFlow: Flow<List<ApplicationInfo>>) =
-        userIdFlow.map(::getPictureInPicturePackages)
-            .combine(appListFlow) { pictureInPicturePackages, appList ->
-                appList.map { app ->
-                    createPictureInPictureRecord(
-                        app = app,
-                        isSupport = app.packageName in pictureInPicturePackages,
-                    )
-                }
+        userIdFlow.map(::getPictureInPicturePackages).combine(appListFlow) {
+            pictureInPicturePackages,
+            appList ->
+            appList.map { app ->
+                createPictureInPictureRecord(
+                    app = app,
+                    isSupport = app.packageName in pictureInPicturePackages,
+                )
             }
+        }
 
     override fun transformItem(app: ApplicationInfo): PictureInPictureRecord {
         val packageInfo =
@@ -78,17 +80,17 @@ class PictureInPictureListModel(private val context: Context)
         PictureInPictureRecord(
             app = app,
             isSupport = isSupport,
-            appOpsController = AppOpsController(
-                context = context,
-                app = app,
-                op = OP_PICTURE_IN_PICTURE,
-            ),
+            appOpsController =
+                AppOpsController(
+                    context = context,
+                    app = app,
+                    op = OP_PICTURE_IN_PICTURE,
+                    modeForNotAllowed = MODE_ERRORED,
+                ),
         )
 
     override fun filter(userIdFlow: Flow<Int>, recordListFlow: Flow<List<PictureInPictureRecord>>) =
-        recordListFlow.map { recordList ->
-            recordList.filter { it.isSupport }
-        }
+        recordListFlow.map { recordList -> recordList.filter { it.isSupport } }
 
     @Composable
     override fun isAllowed(record: PictureInPictureRecord) =
@@ -101,7 +103,8 @@ class PictureInPictureListModel(private val context: Context)
     }
 
     private fun getPictureInPicturePackages(userId: Int): Set<String> =
-        packageManager.getInstalledPackagesAsUser(GET_ACTIVITIES_FLAGS, userId)
+        packageManager
+            .getInstalledPackagesAsUser(GET_ACTIVITIES_FLAGS, userId)
             .filter { it.supportsPictureInPicture() }
             .map { it.packageName }
             .toSet()

@@ -200,11 +200,11 @@ public class BatteryEntry {
 
     /** Battery entry for a power component of AggregateBatteryConsumer */
     public BatteryEntry(Context context, int powerComponentId, double devicePowerMah,
-            long usageDurationMs) {
+            long usageDurationMs, boolean isHidden) {
         mContext = context;
         mBatteryConsumer = null;
         mUid = Process.INVALID_UID;
-        mIsHidden = false;
+        mIsHidden = isHidden;
         mPowerComponentId = powerComponentId;
         mConsumedPower = devicePowerMah;
         mUsageDurationMs = usageDurationMs;

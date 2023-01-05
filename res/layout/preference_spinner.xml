@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2022 The Android Open Source Project
+  ~ Copyright (C) 2023 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,23 +14,11 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout
+<Spinner
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:theme="@style/Theme.TabTheme"
-    android:id="@+id/tab_container"
-    android:clipToPadding="true"
-    android:clipChildren="true"
-    android:layout_width="match_parent"
+    android:id="@+id/spinner"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs"
-        style="@style/SettingsLibTabsStyle" />
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-</LinearLayout>
+    android:layout_marginStart="24dp"
+    android:layout_marginTop="8dp"
+    android:theme="@style/Widget.PopupWindow.Settings" />

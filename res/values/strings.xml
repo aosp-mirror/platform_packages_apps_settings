@@ -2436,7 +2436,7 @@
     <!-- About phone, title of EID -->
     <string name="status_eid">EID</string>
     <!-- About phone, title of EID for multi-sim devices -->
-    <string name="eid_multi_sim">EID (sim slot %1$d)</string>
+    <string name="eid_multi_sim">EID (sim slot <xliff:g id="eid_slot_id">%1$d</xliff:g>)</string>
     <!-- About phone screen, title for IMEI for multi-sim devices -->
     <string name="imei_multi_sim">IMEI (sim slot %1$d)</string>
     <!-- About phone screen, summary of the MAC address [CHAR LIMIT=80] -->
@@ -5065,6 +5065,8 @@
     <string name="battery_not_usage_24hr">No usage for past 24 hr</string>
     <!-- Description for no usage time but have battery usage [CHAR LIMIT=120] -->
     <string name="battery_usage_without_time"></string>
+   <!-- Description for system apps aggregated battery usage data [CHAR LIMIT=120] -->
+    <string name="battery_usage_system_apps">System apps</string>
 
     <!-- Description for battery time left, i.e. 50min Estimated time left. [CHAR LIMIT=80]-->
     <string name="estimated_time_left">Estimated time left</string>
@@ -5175,13 +5177,13 @@
     <!-- [CHAR_LIMIT=NONE] Accessibility content description for hourly battery chart view. -->
     <string name="hourly_battery_usage_chart">Hourly battery usage chart</string>
     <!-- [CHAR_LIMIT=NONE] Battery usage breakdown title since last full charge -->
-    <string name="battery_usage_breakdown_title_since_last_full_charge">Usage proportional breakdown since last full charge</string>
+    <string name="battery_usage_breakdown_title_since_last_full_charge">Battery usage since last full charge</string>
     <!-- [CHAR_LIMIT=NONE] Battery usage breakdown title for a selected slot -->
-    <string name="battery_usage_breakdown_title_for_slot">Usage proportional breakdown for <xliff:g id="slot">%s</xliff:g></string>
-    <!-- [CHAR_LIMIT=NONE] The tab title in the battery usage breakdown. -->
-    <string name="battery_usage_app_tab">App</string>
-    <!-- [CHAR_LIMIT=NONE] The tab title in the battery usage breakdown. -->
-    <string name="battery_usage_system_tab">System</string>
+    <string name="battery_usage_breakdown_title_for_slot">Battery usage for <xliff:g id="slot">%s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] The spinner item text in the battery usage breakdown. -->
+    <string name="battery_usage_spinner_breakdown_by_apps">Breakdown by apps</string>
+    <!-- [CHAR_LIMIT=NONE] The spinner item text in the battery usage breakdown. -->
+    <string name="battery_usage_spinner_breakdown_by_system">Breakdown by system</string>
     <!-- Process Stats strings -->
     <skip />
 

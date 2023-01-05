@@ -23,6 +23,7 @@ import static android.app.admin.DevicePolicyResources.UNDEFINED;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY;
+import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_CHALLENGE;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -60,11 +61,13 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreference;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.biometrics.GatekeeperPasswordProvider;
 import com.android.settings.biometrics2.ui.view.FingerprintEnrollmentActivity;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -410,7 +413,7 @@ public class FingerprintSettings extends SubSettings {
                     launchChooseOrConfirmLock();
                 } else if (!mHasFirstEnrolled) {
                     mIsEnrolling = true;
-                    addFirstFingerprint();
+                    addFirstFingerprint(null);
                 }
             }
             updateFooterColumns(activity);
@@ -776,7 +779,7 @@ public class FingerprintSettings extends SubSettings {
             if (requestCode == CONFIRM_REQUEST || requestCode == CHOOSE_LOCK_GENERIC_REQUEST) {
                 mLaunchedConfirm = false;
                 if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
-                    if (data != null && BiometricUtils.containsGatekeeperPasswordHandle(data)) {
+                    if (BiometricUtils.containsGatekeeperPasswordHandle(data)) {
                         if (!mHasFirstEnrolled && !mIsEnrolling) {
                             final Activity activity = getActivity();
                             if (activity != null) {
@@ -784,21 +787,34 @@ public class FingerprintSettings extends SubSettings {
                                 activity.overridePendingTransition(R.anim.sud_slide_next_in,
                                         R.anim.sud_slide_next_out);
                             }
+
+                            // To have smoother animation, change flow to let next visible activity
+                            // to generateChallenge, then pass it back through activity result.
+                            // Token and challenge will be updated later through the activity result
+                            // of AUTO_ADD_FIRST_FINGERPRINT_REQUEST.
+                            mIsEnrolling = true;
+                            addFirstFingerprint(
+                                    BiometricUtils.getGatekeeperPasswordHandle(data));
+                        } else {
+                            mFingerprintManager.generateChallenge(mUserId,
+                                    (sensorId, userId, challenge) -> {
+                                        final Activity activity = getActivity();
+                                        if (activity == null || activity.isFinishing()) {
+                                            // Stop everything
+                                            Log.w(TAG, "activity detach or finishing");
+                                            return;
+                                        }
+
+                                        final GatekeeperPasswordProvider provider =
+                                                new GatekeeperPasswordProvider(
+                                                        new LockPatternUtils(activity));
+                                        mToken = provider.requestGatekeeperHat(data, challenge,
+                                                mUserId);
+                                        mChallenge = challenge;
+                                        provider.removeGatekeeperPasswordHandle(data, false);
+                                        updateAddPreference();
+                                    });
                         }
-                        mFingerprintManager.generateChallenge(mUserId,
-                                (sensorId, userId, challenge) -> {
-                                    mToken = BiometricUtils.requestGatekeeperHat(getActivity(),
-                                            data,
-                                            mUserId, challenge);
-                                    mChallenge = challenge;
-                                    BiometricUtils.removeGatekeeperPasswordHandle(getActivity(),
-                                            data);
-                                    updateAddPreference();
-                                    if (!mHasFirstEnrolled && !mIsEnrolling) {
-                                        mIsEnrolling = true;
-                                        addFirstFingerprint();
-                                    }
-                        });
                     } else {
                         Log.d(TAG, "Data null or GK PW missing");
                         finish();
@@ -815,12 +831,29 @@ public class FingerprintSettings extends SubSettings {
                     activity.finish();
                 }
             } else if (requestCode == AUTO_ADD_FIRST_FINGERPRINT_REQUEST) {
+                if (resultCode != RESULT_FINISHED || data == null) {
+                    Log.d(TAG, "Add first fingerprint, fail or null data, result:" + resultCode);
+                    finish();
+                    return;
+                }
+
+                mToken = data.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+                if (mToken == null) {
+                    Log.w(TAG, "Add first fingerprint, null token");
+                    finish();
+                    return;
+                }
+
+                mChallenge = data.getLongExtra(EXTRA_KEY_CHALLENGE, -1L);
+                if (mChallenge == -1L) {
+                    Log.w(TAG, "Add first fingerprint, invalid challenge");
+                    finish();
+                    return;
+                }
+
                 mIsEnrolling = false;
                 mHasFirstEnrolled = true;
-                if (resultCode != RESULT_FINISHED) {
-                    Log.d(TAG, "Add first fingerprint fail, result:" + resultCode);
-                    finish();
-                }
+                updateAddPreference();
             }
         }
 
@@ -892,7 +925,7 @@ public class FingerprintSettings extends SubSettings {
             }
         }
 
-        private void addFirstFingerprint() {
+        private void addFirstFingerprint(@Nullable Long gkPwHandle) {
             Intent intent = new Intent();
             intent.setClassName(SETTINGS_PACKAGE_NAME,
                     FeatureFlagUtils.isEnabled(getActivity(),
@@ -906,7 +939,13 @@ public class FingerprintSettings extends SubSettings {
                     SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE);
 
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
-            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
+            if (gkPwHandle != null) {
+                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
+                        gkPwHandle.longValue());
+            } else {
+                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
+                intent.putExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, mChallenge);
+            }
             startActivityForResult(intent, AUTO_ADD_FIRST_FINGERPRINT_REQUEST);
         }
 

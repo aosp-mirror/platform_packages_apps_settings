@@ -16,9 +16,20 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
+import static android.content.Intent.EXTRA_USER_ID;
+
+import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY;
+import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_CHALLENGE;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE;
+
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -32,8 +43,15 @@ import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorProperties;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
+import android.os.UserManager;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.widget.VerifyCredentialResponse;
 import com.android.settings.R;
+import com.android.settings.biometrics.GatekeeperPasswordProvider;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -42,11 +60,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.stubbing.Answer;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
-import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,17 +72,25 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 public class FingerprintEnrollIntroductionTest {
 
+    @Mock private LockPatternUtils mLockPatternUtils;
     @Mock private FingerprintManager mFingerprintManager;
+    @Mock private UserManager mUserManager;
+
+    private GatekeeperPasswordProvider mGatekeeperPasswordProvider;
 
     private Context mContext;
 
-    private FingerprintEnrollIntroduction mFingerprintEnrollIntroduction;
+    private TestFingerprintEnrollIntroduction mFingerprintEnrollIntroduction;
 
     private static final int MAX_ENROLLMENTS = 5;
+    private static final byte[] EXPECTED_TOKEN = new byte[] { 10, 20, 30, 40 };
+    private static final long EXPECTED_CHALLENGE = 9876L;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mGatekeeperPasswordProvider = new GatekeeperPasswordProvider(mLockPatternUtils);
+
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
 
         final List<ComponentInfoInternal> componentInfo = new ArrayList<>();
@@ -79,14 +105,34 @@ public class FingerprintEnrollIntroductionTest {
         final ArrayList<FingerprintSensorPropertiesInternal> props = new ArrayList<>();
         props.add(prop);
         when(mFingerprintManager.getSensorPropertiesInternal()).thenReturn(props);
+
+        when(mUserManager.getCredentialOwnerProfile(anyInt())).thenAnswer(
+                (Answer<Integer>) invocation -> (int) invocation.getArgument(0));
+
+        when(mLockPatternUtils.verifyGatekeeperPasswordHandle(anyLong(), anyLong(), anyInt()))
+                .thenAnswer((Answer<VerifyCredentialResponse>) invocation ->
+                        newGoodCredential(invocation.getArgument(0), EXPECTED_TOKEN));
+        doNothing().when(mLockPatternUtils).removeGatekeeperPasswordHandle(anyLong());
     }
 
-    void setupFingerprintEnrollIntroWith(Intent intent) {
-        ActivityController<FingerprintEnrollIntroduction> controller =
-                Robolectric.buildActivity(FingerprintEnrollIntroduction.class, intent);
-        mFingerprintEnrollIntroduction = spy(controller.get());
-        ReflectionHelpers.setField(
-                mFingerprintEnrollIntroduction, "mFingerprintManager", mFingerprintManager);
+    void setupFingerprintEnrollIntroWith(@NonNull Intent intent) {
+
+        final ActivityController<TestFingerprintEnrollIntroduction> controller =
+                Robolectric.buildActivity(TestFingerprintEnrollIntroduction.class, intent);
+        mFingerprintEnrollIntroduction = controller.get();
+        mFingerprintEnrollIntroduction.mMockedFingerprintManager = mFingerprintManager;
+        mFingerprintEnrollIntroduction.mMockedGatekeeperPasswordProvider =
+                mGatekeeperPasswordProvider;
+        mFingerprintEnrollIntroduction.mMockedLockPatternUtils = mLockPatternUtils;
+        mFingerprintEnrollIntroduction.mMockedUserManager = mUserManager;
+
+        mFingerprintEnrollIntroduction.mNewSensorId = 1;
+        mFingerprintEnrollIntroduction.mNewChallenge = EXPECTED_CHALLENGE;
+
+        final int userId = intent.getIntExtra(EXTRA_USER_ID, 0);
+        when(mLockPatternUtils.getActivePasswordQuality(userId))
+                .thenReturn(PASSWORD_QUALITY_SOMETHING);
+
         controller.create();
     }
 
@@ -102,7 +148,7 @@ public class FingerprintEnrollIntroductionTest {
 
     @Test
     public void intro_CheckCanEnrollNormal() {
-        setupFingerprintEnrollIntroWith(new Intent());
+        setupFingerprintEnrollIntroWith(newTokenOnlyIntent());
         setFingerprintManagerToHave(3 /* numEnrollments */);
         int result = mFingerprintEnrollIntroduction.checkMaxEnrolled();
 
@@ -111,7 +157,7 @@ public class FingerprintEnrollIntroductionTest {
 
     @Test
     public void intro_CheckMaxEnrolledNormal() {
-        setupFingerprintEnrollIntroWith(new Intent());
+        setupFingerprintEnrollIntroWith(newTokenOnlyIntent());
         setFingerprintManagerToHave(7 /* numEnrollments */);
         int result = mFingerprintEnrollIntroduction.checkMaxEnrolled();
 
@@ -126,10 +172,7 @@ public class FingerprintEnrollIntroductionTest {
         when(resources.getInteger(anyInt())).thenReturn(5);
         when(mContext.getResources()).thenReturn(resources);
 
-        setupFingerprintEnrollIntroWith(
-                new Intent()
-                        .putExtra(WizardManagerHelper.EXTRA_IS_FIRST_RUN, true)
-                        .putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true));
+        setupFingerprintEnrollIntroWith(newFirstSuwIntent());
         setFingerprintManagerToHave(0 /* numEnrollments */);
         int result = mFingerprintEnrollIntroduction.checkMaxEnrolled();
 
@@ -144,10 +187,7 @@ public class FingerprintEnrollIntroductionTest {
         when(mContext.getResources()).thenReturn(resources);
         when(resources.getInteger(anyInt())).thenReturn(1);
 
-        setupFingerprintEnrollIntroWith(
-                new Intent()
-                        .putExtra(WizardManagerHelper.EXTRA_IS_FIRST_RUN, true)
-                        .putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true));
+        setupFingerprintEnrollIntroWith(newFirstSuwIntent());
         setFingerprintManagerToHave(1 /* numEnrollments */);
         int result = mFingerprintEnrollIntroduction.checkMaxEnrolled();
 
@@ -156,8 +196,7 @@ public class FingerprintEnrollIntroductionTest {
 
     @Test
     public void intro_CheckCanEnrollDuringDeferred() {
-        setupFingerprintEnrollIntroWith(
-                new Intent().putExtra(WizardManagerHelper.EXTRA_IS_DEFERRED_SETUP, true));
+        setupFingerprintEnrollIntroWith(newDeferredSuwIntent());
         setFingerprintManagerToHave(2 /* numEnrollments */);
         int result = mFingerprintEnrollIntroduction.checkMaxEnrolled();
 
@@ -166,8 +205,7 @@ public class FingerprintEnrollIntroductionTest {
 
     @Test
     public void intro_CheckMaxEnrolledDuringDeferred() {
-        setupFingerprintEnrollIntroWith(
-                new Intent().putExtra(WizardManagerHelper.EXTRA_IS_DEFERRED_SETUP, true));
+        setupFingerprintEnrollIntroWith(newDeferredSuwIntent());
         setFingerprintManagerToHave(6 /* numEnrollments */);
         int result = mFingerprintEnrollIntroduction.checkMaxEnrolled();
 
@@ -176,8 +214,7 @@ public class FingerprintEnrollIntroductionTest {
 
     @Test
     public void intro_CheckCanEnrollDuringPortal() {
-        setupFingerprintEnrollIntroWith(
-                new Intent().putExtra(WizardManagerHelper.EXTRA_IS_PORTAL_SETUP, true));
+        setupFingerprintEnrollIntroWith(newPortalSuwIntent());
         setFingerprintManagerToHave(2 /* numEnrollments */);
         int result = mFingerprintEnrollIntroduction.checkMaxEnrolled();
 
@@ -186,11 +223,124 @@ public class FingerprintEnrollIntroductionTest {
 
     @Test
     public void intro_CheckMaxEnrolledDuringPortal() {
-        setupFingerprintEnrollIntroWith(
-                new Intent().putExtra(WizardManagerHelper.EXTRA_IS_PORTAL_SETUP, true));
+        setupFingerprintEnrollIntroWith(newPortalSuwIntent());
         setFingerprintManagerToHave(6 /* numEnrollments */);
         int result = mFingerprintEnrollIntroduction.checkMaxEnrolled();
 
         assertThat(result).isEqualTo(R.string.fingerprint_intro_error_max);
+    }
+
+    @Test
+    public void intro_CheckGenerateChallenge() {
+        setupFingerprintEnrollIntroWith(newGkPwHandleAndFromSettingsIntent());
+
+        final long challengeField = mFingerprintEnrollIntroduction.getChallengeField();
+        assertThat(challengeField).isEqualTo(EXPECTED_CHALLENGE);
+
+        final byte[] token = mFingerprintEnrollIntroduction.getTokenField();
+        assertThat(token).isNotNull();
+        assertThat(token.length).isEqualTo(EXPECTED_TOKEN.length);
+        for (int i = 0; i < token.length; ++i) {
+            assertWithMessage("token[" + i + "] is " + token[i] + " not " + EXPECTED_TOKEN[i])
+                    .that(token[i]).isEqualTo(EXPECTED_TOKEN[i]);
+        }
+
+        final Intent resultIntent = mFingerprintEnrollIntroduction.getSetResultIntentExtra(null);
+        assertThat(resultIntent).isNotNull();
+        assertThat(resultIntent.getLongExtra(EXTRA_KEY_CHALLENGE, -1L)).isEqualTo(challengeField);
+        final byte[] token2 = resultIntent.getByteArrayExtra(EXTRA_KEY_CHALLENGE_TOKEN);
+        assertThat(token2).isNotNull();
+        assertThat(token2.length).isEqualTo(EXPECTED_TOKEN.length);
+        for (int i = 0; i < token2.length; ++i) {
+            assertWithMessage("token2[" + i + "] is " + token2[i] + " not " + EXPECTED_TOKEN[i])
+                    .that(token2[i]).isEqualTo(EXPECTED_TOKEN[i]);
+        }
+    }
+
+    private Intent newTokenOnlyIntent() {
+        return new Intent()
+                .putExtra(EXTRA_KEY_CHALLENGE_TOKEN, new byte[] { 1 });
+    }
+
+    private Intent newFirstSuwIntent() {
+        return newTokenOnlyIntent()
+                .putExtra(WizardManagerHelper.EXTRA_IS_FIRST_RUN, true)
+                .putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true);
+    }
+
+    private Intent newDeferredSuwIntent() {
+        return newTokenOnlyIntent()
+                .putExtra(WizardManagerHelper.EXTRA_IS_DEFERRED_SETUP, true);
+    }
+
+    private Intent newPortalSuwIntent() {
+        return newTokenOnlyIntent()
+                .putExtra(WizardManagerHelper.EXTRA_IS_PORTAL_SETUP, true);
+    }
+
+    private Intent newGkPwHandleAndFromSettingsIntent() {
+        return new Intent()
+                .putExtra(EXTRA_FROM_SETTINGS_SUMMARY, true)
+                .putExtra(EXTRA_KEY_GK_PW_HANDLE, 1L);
+    }
+
+    private VerifyCredentialResponse newGoodCredential(long gkPwHandle, @NonNull byte[] hat) {
+        return new VerifyCredentialResponse.Builder()
+                .setGatekeeperPasswordHandle(gkPwHandle)
+                .setGatekeeperHAT(hat)
+                .build();
+    }
+
+    public static class TestFingerprintEnrollIntroduction
+            extends FingerprintEnrollIntroduction {
+
+        public FingerprintManager mMockedFingerprintManager;
+        public GatekeeperPasswordProvider mMockedGatekeeperPasswordProvider;
+        public LockPatternUtils mMockedLockPatternUtils;
+        public UserManager mMockedUserManager;
+        public int mNewSensorId;
+        public long mNewChallenge;
+
+        @Nullable
+        public byte[] getTokenField() {
+            return mToken;
+        }
+
+        public long getChallengeField() {
+            return mChallenge;
+        }
+
+        @Override
+        protected boolean isDisabledByAdmin() {
+            return false;
+        }
+
+        @Nullable
+        @Override
+        protected FingerprintManager getFingerprintManager() {
+            return mMockedFingerprintManager;
+        }
+
+        @Override
+        protected UserManager getUserManager() {
+            return mMockedUserManager;
+        }
+
+        @NonNull
+        @Override
+        protected GatekeeperPasswordProvider getGatekeeperPasswordProvider() {
+            return mMockedGatekeeperPasswordProvider;
+        }
+
+        @NonNull
+        @Override
+        protected LockPatternUtils getLockPatternUtils() {
+            return mMockedLockPatternUtils;
+        }
+
+        @Override
+        protected void getChallenge(GenerateChallengeCallback callback) {
+            callback.onChallengeGenerated(mNewSensorId, mUserId, mNewChallenge);
+        }
     }
 }
