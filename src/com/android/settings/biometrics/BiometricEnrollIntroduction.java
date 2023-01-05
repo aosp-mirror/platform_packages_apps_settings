@@ -35,6 +35,7 @@ import androidx.annotation.StringRes;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupSkipDialog;
@@ -59,6 +60,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     private static final String KEY_SCROLLED_TO_BOTTOM = "scrolled";
 
     private UserManager mUserManager;
+    private LockPatternUtils mLockPatternUtils;
     private boolean mHasPassword;
     private boolean mBiometricUnlockDisabledByAdmin;
     private TextView mErrorText;
@@ -155,6 +157,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         if (savedInstanceState != null) {
             mConfirmingCredentials = savedInstanceState.getBoolean(KEY_CONFIRMING_CREDENTIALS);
             mHasScrolledToBottom = savedInstanceState.getBoolean(KEY_SCROLLED_TO_BOTTOM);
+            mLaunchedPostureGuidance = savedInstanceState.getBoolean(
+                    EXTRA_LAUNCHED_POSTURE_GUIDANCE);
         }
 
         Intent intent = getIntent();
@@ -166,6 +170,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         }
 
         mBiometricUnlockDisabledByAdmin = isDisabledByAdmin();
+        mLockPatternUtils = FeatureFactory.getFactory(this)
+                .getSecurityFeatureProvider()
+                .getLockPatternUtils(this);
 
         setContentView(getLayoutResource());
         mParentalConsentRequired = ParentalControlsUtils.parentConsentRequired(this, getModality())
@@ -254,8 +261,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     }
 
     private void updatePasswordQuality() {
-        final int passwordQuality = new LockPatternUtils(this)
-                .getActivePasswordQuality(mUserManager.getCredentialOwnerProfile(mUserId));
+        final int passwordQuality = mLockPatternUtils.getActivePasswordQuality(
+                mUserManager.getCredentialOwnerProfile(mUserId));
         mHasPassword = passwordQuality != DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
     }
 
@@ -273,6 +280,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 finish();
             }
         }
+        mNextLaunched = true;
     }
 
     private void launchChooseLock() {
