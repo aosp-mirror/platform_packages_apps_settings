@@ -26,10 +26,7 @@
     <string name="off" msgid="2898123876644709799">"已关闭"</string>
     <string name="device_info_default" msgid="1406619232867343310">"未知"</string>
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"点按即可显示信息"</string>
-    <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
-      <item quantity="other">现在只需再执行 <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> 步操作即可进入开发者模式。</item>
-      <item quantity="one">现在只需再执行 <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> 步操作即可进入开发者模式。</item>
-    </plurals>
+    <string name="show_dev_countdown" msgid="2936506773086395069">"{count,plural, =1{现在只需再执行 # 步操作，即可进入开发者模式。}other{现在只需再执行 # 步操作，即可进入开发者模式。}}"</string>
     <string name="show_dev_on" msgid="2840850085134853754">"您现在处于开发者模式！"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"您已处于开发者模式，无需进行此操作。"</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"请先启用开发者选项。"</string>
@@ -122,7 +119,7 @@
     <string name="stylus_default_notes_app" msgid="3111290761558445874">"系统记事应用"</string>
     <string name="stylus_textfield_handwriting" msgid="6962904622425646128">"在文本字段中通过触控笔书写"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"忽略所有通过触控笔按下按钮的动作"</string>
-    <string name="stylus_usi_header_title" msgid="1949011797718972583">"USI 触控笔"</string>
+    <string name="stylus_connected_devices_title" msgid="2823967577941359812">"触控笔"</string>
     <string name="date_and_time" msgid="1788358029823431692">"日期和时间"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"代理"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"清除"</string>
@@ -160,10 +157,23 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"您无法从“设置”中选择此应用的语言。"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"语言可能与应用中可用的语言不同。部分应用可能不支持此设置。"</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"此处只显示了支持用户选择语言的应用。"</string>
-    <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
-      <item quantity="other">要移除所选语言吗？</item>
-      <item quantity="one">要移除所选语言吗？</item>
-    </plurals>
+    <!-- no translation found for regional_preferences_title (4304567374498629528) -->
+    <skip />
+    <!-- no translation found for regional_preferences_summary (1189876997389469650) -->
+    <skip />
+    <!-- no translation found for regional_preferences_main_page_sub_title (4666033861956272891) -->
+    <skip />
+    <!-- no translation found for temperature_preferences_title (5009881556503629058) -->
+    <skip />
+    <!-- no translation found for calendar_preferences_title (8312485828206542600) -->
+    <skip />
+    <!-- no translation found for first_day_of_week_preferences_title (1971850087589599553) -->
+    <skip />
+    <!-- no translation found for numbers_preferences_title (6094837605398562369) -->
+    <skip />
+    <!-- no translation found for default_string_of_regional_preference (1595774718180886349) -->
+    <skip />
+    <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{要移除所选语言吗？}other{要移除所选语言吗？}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"系统将以其他语言显示文字。"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"无法移除所有语言"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"请保留至少一种首选语言"</string>
@@ -182,6 +192,7 @@
     <string name="apply" msgid="7834684883190163536">"应用"</string>
     <string name="share" msgid="8502235338607613795">"分享"</string>
     <string name="add" msgid="8335206931421683426">"添加"</string>
+    <string name="remove" msgid="1028414219245072102">"移除"</string>
     <string name="settings_label" msgid="943294133671632976">"设置"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"设置"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"设置快捷方式"</string>
@@ -193,6 +204,7 @@
     <string name="roaming_warning" msgid="7703647889040229013">"可能需要支付漫游费用。"</string>
     <string name="date_time_auto" msgid="4239202185055225869">"自动设置时间"</string>
     <string name="zone_auto_title" msgid="5141692422373097957">"自动设置"</string>
+    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"这个切换开关开启时，系统会根据位置信息设置时区"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"使用默认语言区域"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"使用 24 小时制"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"时间"</string>
@@ -221,10 +233,8 @@
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"例如，小明的 Android 设备。"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"位置信息"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"使用位置信息"</string>
-    <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="other">已开启 - <xliff:g id="COUNT_1">%1$d</xliff:g> 个应用有权使用位置信息</item>
-      <item quantity="one">已开启 - <xliff:g id="COUNT_0">%1$d</xliff:g> 个应用有权使用位置信息</item>
-    </plurals>
+    <!-- no translation found for location_settings_summary_location_on (7029728269719893381) -->
+    <skip />
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"正在加载…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"具有附近设备权限的应用可以确定已连接的设备的相对位置。"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"应用和服务的位置信息使用权处于关闭状态。在您拨打紧急电话号码或向该号码发送短信时，系统可能仍会将您的设备位置信息发送给急救人员。"</string>
@@ -304,10 +314,8 @@
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"使用指纹解锁功能时"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"工作资料指纹"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"添加指纹"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
-      <item quantity="other">已添加 <xliff:g id="COUNT">%1$d</xliff:g> 个指纹</item>
-      <item quantity="one">已添加 1 个指纹</item>
-    </plurals>
+    <!-- no translation found for security_settings_fingerprint_preference_summary (8486134175759676037) -->
+    <skip />
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"设置指纹"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"允许使用指纹解锁功能"</string>
@@ -530,53 +538,20 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"如果您下次绘制的解锁图案仍然有误，系统将删除您的工作资料和相关数据"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"如果您下次输入的 PIN 码仍然有误，系统将删除您的工作资料和相关数据"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"如果您下次输入的密码仍然有误，系统将删除您的工作资料和相关数据"</string>
-    <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
-      <item quantity="other">必须包含至少 <xliff:g id="COUNT_1">%d</xliff:g> 个字符</item>
-      <item quantity="one">必须包含至少 <xliff:g id="COUNT_0">%d</xliff:g> 个字符</item>
-    </plurals>
+    <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{必须包含至少 # 个字符}other{必须至少为 # 个字符}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{如果仅使用数字，则必须至少包含 1 个数字}other{如果仅使用数字，则必须至少包含 # 个数字}}"</string>
-    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
-      <item quantity="other">PIN 码必须包含至少 <xliff:g id="COUNT_1">%d</xliff:g> 位数</item>
-      <item quantity="one">PIN 码必须包含至少 <xliff:g id="COUNT_0">%d</xliff:g> 位数</item>
-    </plurals>
-    <plurals name="lockpassword_password_too_long" formatted="false" msgid="8118091957172967677">
-      <item quantity="other">必须少于 <xliff:g id="NUMBER_1">%d</xliff:g> 个字符</item>
-      <item quantity="one">必须少于 <xliff:g id="NUMBER_0">%d</xliff:g> 个字符</item>
-    </plurals>
-    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="8706992338720310765">
-      <item quantity="other">必须少于 <xliff:g id="NUMBER_1">%d</xliff:g> 位数</item>
-      <item quantity="one">必须少于 <xliff:g id="NUMBER_0">%d</xliff:g> 位数</item>
-    </plurals>
+    <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{PIN 码必须包含至少 # 位数}other{PIN 码必须至少为 # 位数}}"</string>
+    <string name="lockpassword_password_too_long" msgid="1940345313260498308">"{count,plural, =1{必须少于 # 个字符}other{必须少于 # 个字符}}"</string>
+    <string name="lockpassword_pin_too_long" msgid="1678212054564388576">"{count,plural, =1{必须少于 # 位数}other{必须少于 # 位数}}"</string>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"设备管理员不允许使用最近用过的 PIN 码"</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"密码不得包含无效字符"</string>
-    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="2385916409676839024">
-      <item quantity="other">必须包含至少 <xliff:g id="COUNT">%d</xliff:g> 个字母</item>
-      <item quantity="one">必须包含至少 1 个字母</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="2057467885488612701">
-      <item quantity="other">必须包含至少 <xliff:g id="COUNT">%d</xliff:g> 个小写字母</item>
-      <item quantity="one">必须包含至少 1 个小写字母</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="4541266279643052025">
-      <item quantity="other">必须包含至少 <xliff:g id="COUNT">%d</xliff:g> 个大写字母</item>
-      <item quantity="one">必须包含至少 1 个大写字母</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="70617964591376248">
-      <item quantity="other">必须包含至少 <xliff:g id="COUNT">%d</xliff:g> 个数字</item>
-      <item quantity="one">必须包含至少 1 个数字</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="7981236881269921943">
-      <item quantity="other">必须包含至少 <xliff:g id="COUNT">%d</xliff:g> 个特殊符号</item>
-      <item quantity="one">必须包含至少 1 个特殊符号</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="1567877061888948467">
-      <item quantity="other">必须包含至少 <xliff:g id="COUNT">%d</xliff:g> 个非字母字符</item>
-      <item quantity="one">必须包含至少 1 个非字母字符</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonnumerical" formatted="false" msgid="5056743974888384475">
-      <item quantity="other">必须包含至少 <xliff:g id="COUNT">%d</xliff:g> 个非数字字符</item>
-      <item quantity="one">必须包含至少 1 个非数字字符</item>
-    </plurals>
+    <string name="lockpassword_password_requires_letters" msgid="7058340182953750553">"{count,plural, =1{必须包含至少 1 个字母}other{必须包含至少 # 个字母}}"</string>
+    <string name="lockpassword_password_requires_lowercase" msgid="3286121470522077547">"{count,plural, =1{必须包含至少 1 个小写字母}other{必须包含至少 # 个小写字母}}"</string>
+    <string name="lockpassword_password_requires_uppercase" msgid="720312543910397772">"{count,plural, =1{必须包含至少 1 个大写字母}other{必须包含至少 # 个大写字母}}"</string>
+    <string name="lockpassword_password_requires_numeric" msgid="3886918493600507548">"{count,plural, =1{必须包含至少 1 个数字}other{必须包含至少 # 个数字}}"</string>
+    <string name="lockpassword_password_requires_symbols" msgid="2904870551002210131">"{count,plural, =1{必须包含至少 1 个特殊符号}other{必须包含至少 # 个特殊符号}}"</string>
+    <string name="lockpassword_password_requires_nonletter" msgid="1185342065898300006">"{count,plural, =1{必须包含至少 1 个非字母字符}other{必须包含至少 # 个非字母字符}}"</string>
+    <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{必须包含至少 1 个非数字字符}other{必须包含至少 # 个非数字字符}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"设备管理员不允许使用最近用过的密码"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"不允许使用以升序、降序或重复序列进行排列的一串数字"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"确认"</string>
@@ -586,17 +561,11 @@
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"下一步"</string>
     <string name="manage_device_admin" msgid="1044620606203916275">"设备管理应用"</string>
     <string name="number_of_device_admins_none" msgid="152926922020437312">"没有相关应用在运行"</string>
-    <plurals name="number_of_device_admins" formatted="false" msgid="2528735319390151989">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 个应用正在运行</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 个应用正在运行</item>
-    </plurals>
+    <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{# 个使用中的应用}other{# 个使用中的应用}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"可信代理"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"需先设置屏幕锁定方式才能使用"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"无"</string>
-    <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> 个可信代理正在运行</item>
-      <item quantity="one">1 个可信代理正在运行</item>
-    </plurals>
+    <string name="manage_trust_agents_summary_on" msgid="3302574418419446146">"{count,plural, =1{1 个活跃的可信代理}other{# 个活跃的可信代理}}"</string>
     <string name="bluetooth_settings" msgid="2967239493428695171">"蓝牙"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"蓝牙"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"要与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>配对吗？"</string>
@@ -812,18 +781,9 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"无法保存网络"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"取消"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"要取消保存网络吗？"</string>
-    <plurals name="wifi_saved_access_points_summary" formatted="false" msgid="2802436466732147888">
-      <item quantity="other">%d 个网络</item>
-      <item quantity="one">1 个网络</item>
-    </plurals>
-    <plurals name="wifi_saved_passpoint_access_points_summary" formatted="false" msgid="5802057518058840450">
-      <item quantity="other">%d 项订阅内容</item>
-      <item quantity="one">1 项订阅内容</item>
-    </plurals>
-    <plurals name="wifi_saved_all_access_points_summary" formatted="false" msgid="5125849180309374451">
-      <item quantity="other">%d 个网络和订阅</item>
-      <item quantity="one">1 个网络和订阅</item>
-    </plurals>
+    <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 个网络}other{# 个网络}}"</string>
+    <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 项订阅}other{# 项订阅}}"</string>
+    <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 个网络和订阅}other{# 个网络和订阅}}"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"设备 MAC 地址"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"随机生成的 MAC 地址"</string>
@@ -1055,10 +1015,7 @@
     <string name="sim_preferred_title" msgid="8850185380445309835">"要更新首选 SIM 卡吗？"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"“<xliff:g id="NEW_SIM">%1$s</xliff:g>”是此设备上唯一的 SIM 卡。您要将此 SIM 卡用于移动数据网络、通话和收发短信吗？"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"SIM 卡 PIN 码不正确，您现在必须联系运营商为您解锁设备。"</string>
-    <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
-      <item quantity="other">SIM 卡 PIN 码不正确，您还可尝试 <xliff:g id="NUMBER_1">%d</xliff:g> 次。</item>
-      <item quantity="one">SIM 卡 PIN 码不正确，您还可尝试 <xliff:g id="NUMBER_0">%d</xliff:g> 次。如果仍不正确，则需要联系运营商帮您解锁设备。</item>
-    </plurals>
+    <string name="wrong_pin_code" msgid="8124222991071607958">"{count,plural, =1{SIM 卡 PIN 码不正确，您还可以尝试 # 次，如果仍不正确，则必须联系运营商帮您解锁设备。}other{SIM 卡 PIN 码不正确，您还可以尝试 # 次。}}"</string>
     <string name="wrong_pin_code_one" msgid="6924852214263071441">"SIM 卡 PIN 码不正确，您还有 1 次尝试机会。如果仍不正确，则必须联系运营商帮您解锁设备。"</string>
     <string name="pin_failed" msgid="3726505565797352255">"SIM 卡 PIN 码操作失败！"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"系统更新"</string>
@@ -1076,6 +1033,8 @@
     <string name="storage_settings" msgid="7472188817781592677">"存储"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"存储和缓存"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"存储设置"</string>
+    <string name="status_eid" msgid="7532406028683438634">"EID"</string>
+    <string name="eid_multi_sim" msgid="4581966600904959452">"EID（SIM 卡插槽 %1$d）"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI（SIM 卡插槽 %1$d）"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"如需查看，请选择已保存的网络"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
@@ -1162,6 +1121,8 @@
     <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"您可以开始使用<xliff:g id="NAME">^1</xliff:g>了"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"电池状态"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"电池电量"</string>
+    <string name="communal_settings_title" msgid="2845678473945902115">"共用"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"共用设置"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"修改接入点"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"未设置"</string>
@@ -1202,12 +1163,9 @@
     <string name="menu_restore" msgid="4310539620115151551">"重置为默认设置"</string>
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"已重置默认APN设置。"</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"重置选项"</string>
-    <!-- no translation found for reset_mobile_network_settings_title (5616713931258506842) -->
-    <skip />
-    <!-- no translation found for reset_mobile_network_settings_desc (7292636387692165727) -->
-    <skip />
-    <!-- no translation found for reset_mobile_network_settings_confirm_title (7510965634669511241) -->
-    <skip />
+    <string name="reset_mobile_network_settings_title" msgid="5616713931258506842">"重置移动网络设置"</string>
+    <string name="reset_mobile_network_settings_desc" msgid="7292636387692165727">"这将重置所有移动网络设置"</string>
+    <string name="reset_mobile_network_settings_confirm_title" msgid="7510965634669511241">"重置移动网络设置？"</string>
     <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"重置蓝牙和 WLAN"</string>
     <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"这将重置所有 WLAN 和蓝牙设置。此操作无法撤消。"</string>
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"重置"</string>
@@ -1296,10 +1254,7 @@
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"工作资料位置信息"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"应用位置信息权限"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"位置信息服务已关闭"</string>
-    <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
-      <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> 个应用（共 <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> 个应用）有权使用位置信息</item>
-      <item quantity="one"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_0">%1$d</xliff:g> 个应用（共 <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> 个应用）有权使用位置信息</item>
-    </plurals>
+    <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{# 个应用（共 {total} 个应用）有权获取位置信息}other{# 个应用（共 {total} 个应用）有权获取位置信息}}"</string>
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"近期位置信息访问"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"查看全部"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"查看详情"</string>
@@ -1314,9 +1269,15 @@
     <string name="location_services_preference_title" msgid="604317859531782159">"位置信息服务"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"位置信息服务"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"使用位置信息"</string>
+    <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"无法自动设置时区"</string>
+    <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"位置信息或位置信息服务已关闭"</string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_environment" msgid="2279833212923765802"></string>
+    <string name="location_time_zone_detection_status_summary_temporarily_unavailable" msgid="6586801403644278967"></string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"需要设备位置信息"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_message" msgid="5846316326139169523">"如需根据您的位置信息设置时区，请开启位置信息功能，然后更新时区设置"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"位置信息设置"</string>
+    <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"修复此程序"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"取消"</string>
     <string name="location_time_zone_detection_auto_is_off" msgid="6264253990141650280">"自动检测时区功能已关闭"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"位置信息时区检测已停用"</string>
@@ -1440,10 +1401,7 @@
     <string name="install_applications" msgid="3921609656584369901">"未知来源"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"允许所有应用来源"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"最近打开的应用"</string>
-    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
-      <item quantity="other">查看全部 %1$d 个应用</item>
-      <item quantity="one">查看所有应用</item>
-    </plurals>
+    <string name="see_all_apps_title" msgid="1650653853942381797">"{count,plural, =1{查看所有应用}other{查看所有 # 个应用}}"</string>
     <string name="forgot_password_title" msgid="3967873480875239885">"请联系您的 IT 管理员"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"他们可以帮助您重置 PIN 码、解锁图案或密码"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"高级设置"</string>
@@ -1457,10 +1415,7 @@
     <string name="cache_header_label" msgid="2441967971921741047">"缓存"</string>
     <string name="clear_cache_btn_text" msgid="8597272828928143723">"清除缓存"</string>
     <string name="cache_size_label" msgid="313456088966822757">"缓存"</string>
-    <plurals name="uri_permissions_text" formatted="false" msgid="8212425823423508096">
-      <item quantity="other">%d 项</item>
-      <item quantity="one">1 项</item>
-    </plurals>
+    <string name="uri_permissions_text" msgid="8406345863117405105">"{count,plural, =1{1 项}other{# 项}}"</string>
     <string name="clear_uri_btn_text" msgid="4828117421162495134">"取消访问权限"</string>
     <string name="controls_label" msgid="8671492254263626383">"控制"</string>
     <string name="force_stop" msgid="2681771622136916280">"强行停止"</string>
@@ -1609,50 +1564,38 @@
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"显示快捷键列表"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"工作资料键盘和工具"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"工作用的屏幕键盘"</string>
-    <!-- no translation found for trackpad_settings (2071131324087677005) -->
-    <skip />
-    <!-- no translation found for trackpad_mouse_settings (136226693583218429) -->
-    <skip />
-    <!-- no translation found for trackpad_settings_summary (3369855644136760402) -->
-    <skip />
-    <!-- no translation found for trackpad_tap_to_click (1938230946542070746) -->
-    <skip />
-    <!-- no translation found for trackpad_touchpad_gesture_title (7568052847609914436) -->
-    <skip />
-    <!-- no translation found for trackpad_touchpad_gesture_summary (6256074591395359124) -->
-    <skip />
-    <!-- no translation found for trackpad_reverse_scrolling_title (422877284529360866) -->
-    <skip />
-    <!-- no translation found for trackpad_reverse_scrolling_summary (6048648562887499036) -->
-    <skip />
-    <!-- no translation found for trackpad_bottom_right_tap_title (6275428879042702880) -->
-    <skip />
-    <!-- no translation found for trackpad_bottom_right_tap_summary (8734094086900680674) -->
-    <skip />
-    <!-- no translation found for trackpad_pointer_speed (7786579408631352625) -->
-    <skip />
-    <!-- no translation found for trackpad_touch_gesture (8641725062131922497) -->
-    <skip />
-    <!-- no translation found for trackpad_go_back_title (5312164160947491440) -->
-    <skip />
-    <!-- no translation found for trackpad_go_back_summary (4201901101085902768) -->
-    <skip />
-    <!-- no translation found for trackpad_go_home_title (2146525662148291552) -->
-    <skip />
-    <!-- no translation found for trackpad_go_home_summary (2222744701528360887) -->
-    <skip />
-    <!-- no translation found for trackpad_recent_apps_title (8195970908411585445) -->
-    <skip />
-    <!-- no translation found for trackpad_recent_apps_summary (2685092851677573794) -->
-    <skip />
-    <!-- no translation found for trackpad_notifications_title (3521663305043747880) -->
-    <skip />
-    <!-- no translation found for trackpad_notifications_summary (7663647367648690040) -->
-    <skip />
-    <!-- no translation found for trackpad_switch_apps_title (7342032935377284039) -->
-    <skip />
-    <!-- no translation found for trackpad_switch_apps_summary (9193942041912927440) -->
-    <skip />
+    <string name="trackpad_settings" msgid="2071131324087677005">"触控板"</string>
+    <string name="trackpad_mouse_settings" msgid="136226693583218429">"触控板和鼠标"</string>
+    <string name="trackpad_settings_summary" msgid="3369855644136760402">"指针速度，手势"</string>
+    <string name="trackpad_tap_to_click" msgid="1938230946542070746">"点按即点击"</string>
+    <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"触控板手势"</string>
+    <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"自定义个别的触控板导航手势"</string>
+    <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"反向滚动"</string>
+    <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"当您向下滚动时内容向上移动"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"点按右下角"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"点按触控板的右下角即可查看更多选项"</string>
+    <string name="trackpad_pointer_speed" msgid="7786579408631352625">"指针速度"</string>
+    <string name="trackpad_touch_gesture" msgid="8641725062131922497">"了解触控板手势"</string>
+    <string name="trackpad_go_back_title" msgid="5312164160947491440">"返回"</string>
+    <string name="trackpad_go_back_summary" msgid="4201901101085902768">"用三根手指向左或向右滑动"</string>
+    <string name="trackpad_go_home_title" msgid="2146525662148291552">"前往主屏幕"</string>
+    <string name="trackpad_go_home_summary" msgid="2222744701528360887">"用三根手指向上滑动"</string>
+    <string name="trackpad_recent_apps_title" msgid="8195970908411585445">"最近用过的应用"</string>
+    <string name="trackpad_recent_apps_summary" msgid="2685092851677573794">"用三根手指向上滑动，然后按住"</string>
+    <string name="trackpad_notifications_title" msgid="3521663305043747880">"通知"</string>
+    <string name="trackpad_notifications_summary" msgid="7663647367648690040">"用三根手指向下滑动"</string>
+    <string name="trackpad_switch_apps_title" msgid="7342032935377284039">"切换应用"</string>
+    <string name="trackpad_switch_apps_summary" msgid="9193942041912927440">"用四根手指向左或向右滑动"</string>
+    <string name="modifier_keys_settings" msgid="2537108435032034683">"辅助键"</string>
+    <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"更改辅助键的行为"</string>
+    <string name="modifier_keys_reset_title" msgid="948294258402761066">"全部重置"</string>
+    <string name="modifier_keys_default_summary" msgid="8701640508670973258">"默认"</string>
+    <string name="modifier_keys_reset_message" msgid="5236994817619936058">"确定要将所有辅助键重置为默认设置吗？"</string>
+    <string name="modifier_keys_done" msgid="8196199314913909700">"完成"</string>
+    <string name="modifier_keys_cancel" msgid="7136520252570826772">"取消"</string>
+    <string name="modifier_keys_restore" msgid="7627661630556839268">"恢复"</string>
+    <string name="modifier_keys_picker_title" msgid="244545904150587851">"选择辅助键"</string>
+    <string name="modifier_keys_picker_summary" msgid="739397232249560785">"为<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>选择新的辅助键："</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"默认"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"语音"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"指针速度"</string>
@@ -1969,22 +1912,14 @@
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"更暗"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"更亮"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"设备重启后保持开启状态"</string>
-    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
-      <item quantity="other">短（<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> 秒）</item>
-      <item quantity="one">短（<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒）</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
-      <item quantity="other">中（<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> 秒）</item>
-      <item quantity="one">中（<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒）</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
-      <item quantity="other">长（<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> 秒）</item>
-      <item quantity="one">长（<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒）</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="4537791441118261556">
-      <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> 秒</item>
-      <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒</item>
-    </plurals>
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (2981206111858937724) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (6867395206533459204) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (4079139970819335593) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_delay_unit_second (5979297390686370567) -->
+    <skip />
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"设置"</string>
     <string name="captioning_preview_title" msgid="2888561631323180535">"预览"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"标准选项"</string>
@@ -2059,14 +1994,10 @@
     <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"扫描附近的设备"</string>
     <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"保存的设备"</string>
     <string name="print_settings" msgid="8519810615863882491">"打印"</string>
-    <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
-      <item quantity="other">已开启 <xliff:g id="COUNT">%1$d</xliff:g> 项打印服务</item>
-      <item quantity="one">已开启 1 项打印服务</item>
-    </plurals>
-    <plurals name="print_jobs_summary" formatted="false" msgid="3933688846338306536">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> 项打印任务</item>
-      <item quantity="one">1 项打印任务</item>
-    </plurals>
+    <!-- no translation found for print_settings_summary (1458773840720811915) -->
+    <skip />
+    <!-- no translation found for print_jobs_summary (7040836482336577323) -->
+    <skip />
     <string name="print_settings_title" msgid="7680498284751129935">"打印服务"</string>
     <string name="print_no_services_installed" msgid="7554057966540602692">"未安装任何服务"</string>
     <string name="print_no_printers_found" msgid="4833082484646109486">"找不到打印机"</string>
@@ -2133,44 +2064,27 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"部分功能可能会受到限制"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"耗电量较高"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"查看耗电量较高的应用"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (6258554134146272311) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (6836981984725209843) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_title (4332616280495788195) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_summary (7870758621381307597) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_title (1414785238383255699) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_summary (3512082623718801459) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"为保护电池，充电方式已优化"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"为延长电池寿命，充电方式已优化"</string>
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"为保护电池，充电方式已优化"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"为延长电池寿命，在插入基座时充电方式已优化"</string>
+    <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"为保护电池，充电方式已优化"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"为延长电池寿命，在插入基座时充电方式已优化"</string>
     <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"充满电"</string>
-    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_summary (1099500476761333281) -->
-    <skip />
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"为保护电池，下次平板电脑插入基座时，充电方式将优化"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"详细了解充电暂停的原因"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"继续充电"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"包括高耗电后台活动"</string>
-    <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
-      <item quantity="other">限制 %1$d 个应用</item>
-      <item quantity="one">限制 %1$d 个应用</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_handled_title" formatted="false" msgid="5862649927574803958">
-      <item quantity="other">%2$d 个应用最近受到限制</item>
-      <item quantity="one">%1$s 个应用最近受到限制</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
-      <item quantity="other">%2$d 个应用的后台耗电量很高</item>
-      <item quantity="one">“%1$s”的后台耗电量很高</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
-      <item quantity="other">这些应用无法在后台运行</item>
-      <item quantity="one">此应用无法在后台运行</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_app_dialog_title" formatted="false" msgid="7897944678619251740">
-      <item quantity="other">要限制 %1$d 个应用吗？</item>
-      <item quantity="one">要限制应用吗？</item>
-    </plurals>
+    <!-- no translation found for battery_tip_restrict_title (4537101947310626753) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_handled_title (7142074986508706853) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_summary (7539469590829235277) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_handled_summary (3535697154547199190) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_app_dialog_title (1649476357343160240) -->
+    <skip />
     <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"为了节省电量，请将<xliff:g id="APP">%1$s</xliff:g>设置为停止在后台使用电量。该应用可能无法正常运行，相应通知也可能会有所延迟。"</string>
     <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"为了节省电量，请将这些应用设置为停止在后台使用电量。受限应用可能无法正常运行，相应通知也可能会有所延迟。\n\n应用："</string>
     <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"为了节省电量，请将这些应用设置为停止在后台使用电量。受限应用可能无法正常运行，相应通知也可能会有所延迟。\n\n应用：\n<xliff:g id="APP_LIST">%1$s</xliff:g>。"</string>
@@ -2184,20 +2098,16 @@
     <string name="smart_battery_title" msgid="9095903608520254254">"自动管理应用"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"当电池管理器检测到应用正在严重耗电时，您可以选择限制这些应用。受限应用可能无法正常运行，相应通知也可能会有所延迟。"</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"受限应用"</string>
-    <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
-      <item quantity="other">正在限制 %1$d 个应用的电池用量</item>
-      <item quantity="one">正在限制 %1$d 个应用的电池用量</item>
-    </plurals>
+    <!-- no translation found for restricted_app_summary (1022307922754893997) -->
+    <skip />
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"限制时间：<xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="restricted_app_detail_footer" msgid="3495725286882138803">"这些应用被限制在后台使用电池电量。它们可能无法正常运行，通知也可能会出现延迟。"</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"使用电池管理器"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"检测应用何时使用电量"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"检测应用大量消耗电池电量的情况"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"检测应用大量消耗电池电量的情况"</string>
-    <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
-      <item quantity="other">%1$d 个应用受到限制</item>
-      <item quantity="one">%1$d 个应用受到限制</item>
-    </plurals>
+    <!-- no translation found for battery_manager_app_restricted (2583902700677009173) -->
+    <skip />
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
     <string name="battery_missing_message" msgid="400958471814422770">"读取电池计量器时出现问题。"</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
@@ -2353,7 +2263,7 @@
     <string name="credentials_title" msgid="7535942196886123656">"凭据存储"</string>
     <string name="credentials_install" msgid="3933218407598415827">"安装证书"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"清除凭据"</string>
-    <string name="credentials_reset_summary" msgid="5400585520572874255">"删除所有证书"</string>
+    <string name="credentials_reset_summary" msgid="5400585520572874255">"移除所有证书"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"信任的凭据"</string>
     <string name="trusted_credentials_summary" msgid="345822338358409468">"显示信任的 CA 证书"</string>
     <string name="user_credentials" msgid="4044405430790970775">"用户凭据"</string>
@@ -2361,10 +2271,8 @@
     <string name="advanced_security_title" msgid="7117581975877192652">"高级"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"此用户无法查看或修改凭据"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"已安装（用于 VPN 和应用）"</string>
-    <!-- no translation found for credential_for_wifi (2286560570630763556) -->
-    <skip />
-    <!-- no translation found for credential_for_wifi_in_use (7276290656840986618) -->
-    <skip />
+    <string name="credential_for_wifi" msgid="2286560570630763556">"已为 WLAN 安装"</string>
+    <string name="credential_for_wifi_in_use" msgid="7276290656840986618">"已为 WLAN 安装（正在使用）"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"要移除所有内容吗？"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"凭据存储空间已清空。"</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"系统无法清除凭据存储。"</string>
@@ -2389,10 +2297,8 @@
     <string name="remove_credential_management_app" msgid="6089291496976812786">"移除应用"</string>
     <string name="remove_credential_management_app_dialog_title" msgid="5713525435104706772">"要移除此应用吗？"</string>
     <string name="remove_credential_management_app_dialog_message" msgid="7739474298063646935">"此应用将不再管理证书，但会保留在您的设备上。此应用安装的所有证书都将被卸载。"</string>
-    <plurals name="number_of_urls" formatted="false" msgid="403979258551655023">
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> 个网址</item>
-      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> 个网址</item>
-    </plurals>
+    <!-- no translation found for number_of_urls (1128699121050872188) -->
+    <skip />
     <string name="emergency_tone_title" msgid="6673118505206685168">"紧急拨号信号"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"设置进行紧急呼救时的行为"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"备份"</string>
@@ -2435,10 +2341,8 @@
     <string name="notification_history_today" msgid="5828496957208237230">"过去 24 小时的通知"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"延后的通知"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"最近关闭的通知"</string>
-    <plurals name="notification_history_count" formatted="false" msgid="1859304685071321991">
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> 条通知</item>
-      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> 条通知</item>
-    </plurals>
+    <!-- no translation found for notification_history_count (885305572972482838) -->
+    <skip />
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"来电铃声和振动"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"网络详情"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"同步功能已启用"</string>
@@ -2610,16 +2514,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"要启用该系统 CA 证书吗？"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"要停用该系统CA证书吗？"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"要永久移除该用户 CA 证书吗？"</string>
-    <!-- no translation found for credential_being_used_by (3682869943025283499) -->
-    <skip />
-    <!-- no translation found for credential_contains (3146519680449595771) -->
-    <skip />
-    <!-- no translation found for one_userkey (6363426728683951234) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2097644070227688983) -->
-    <skip />
-    <!-- no translation found for one_cacrt (982242103604501559) -->
-    <skip />
+    <string name="credential_being_used_by" msgid="3682869943025283499">"目前使用方："</string>
+    <string name="credential_contains" msgid="3146519680449595771">"此条目包含："</string>
+    <string name="one_userkey" msgid="6363426728683951234">"1 个用户密钥"</string>
+    <string name="one_usercrt" msgid="2097644070227688983">"1 个用户证书"</string>
+    <string name="one_cacrt" msgid="982242103604501559">"1 个 CA 证书"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"%d 个 CA 证书"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"凭据详情"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"已移除以下凭据：<xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
@@ -2634,17 +2533,13 @@
     <string name="additional_system_update_settings_list_item_title" msgid="7230385345152138051">"其他系统更新"</string>
     <string name="ssl_ca_cert_warning" msgid="3898387588657346106">"网络可能会受到监控"</string>
     <string name="done_button" msgid="6269449526248267">"完成"</string>
-    <plurals name="ssl_ca_cert_dialog_title" formatted="false" msgid="5491460811755938449">
-      <item quantity="other">信任或移除证书</item>
-      <item quantity="one">信任或移除证书</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_dialog_title (1032088078702042090) -->
+    <skip />
     <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{{orgName}已在您的设备上安装证书授权机构颁发的证书，借此监控设备网络活动，包括电子邮件、应用和安全网站。\n\n如需详细了解此证书，请与您的管理员联系。}other{{orgName}已在您的设备上安装证书授权机构颁发的证书，借此监控设备网络活动，包括电子邮件、应用和安全网站。\n\n如需详细了解这些证书，请与您的管理员联系。}}"</string>
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName}已为您的工作资料安装证书授权机构颁发的证书，借此监控工作网络活动，包括电子邮件、应用和安全网站。\n\n如需详细了解此证书，请与您的管理员联系。}other{{orgName}已为您的工作资料安装证书授权机构颁发的证书，借此监控工作网络活动，包括电子邮件、应用和安全网站。\n\n如需详细了解这些证书，请与您的管理员联系。}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"第三方可以监控您的网络活动，包括收发电子邮件、使用应用和浏览安全网站。\n\n出现这种情况的原因是您在设备上安装了信任的凭据。"</string>
-    <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
-      <item quantity="other">检查证书</item>
-      <item quantity="one">检查证书</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_settings_button (2044927302268394991) -->
+    <skip />
     <string name="user_settings_title" msgid="6550866465409807877">"多用户"</string>
     <string name="user_list_title" msgid="1387379079186123404">"用户和个人资料"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"添加用户或个人资料"</string>
@@ -2683,9 +2578,12 @@
     <string name="enable_guest_calling" msgid="8300355036005240911">"允许访客使用电话"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"将与访客用户共享通话记录"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"开启通话和短信功能"</string>
+    <string name="user_grant_admin" msgid="6511342422361803820">"向此用户授予管理员权限"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"删除用户"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"要开启通话和短信功能吗？"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"将与此用户共享通话记录和短信记录。"</string>
+    <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"要撤消管理员权限吗？"</string>
+    <string name="user_revoke_admin_confirm_message" msgid="2719667217562982318">"确定要撤消此用户的管理员权限吗？"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"急救信息"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>的相关信息和联系人信息"</string>
     <string name="open_app_button" msgid="5025229765547191710">"打开“<xliff:g id="APP_NAME">%1$s</xliff:g>”"</string>
@@ -2822,7 +2720,7 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"蓝牙、Android Auto、NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"蓝牙、Android Auto"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"无法使用，因为 NFC 已关闭"</string>
-    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"先安装付款应用，然后才能使用触碰付款功能"</string>
+    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"先安装付款应用，然后才能使用感应式付款功能"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"最近使用的应用、默认应用"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"工作资料中的应用无法访问通知。"</string>
     <string name="account_dashboard_title" msgid="8228773251948253914">"密码和帐号"</string>
@@ -2831,10 +2729,10 @@
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"克隆的应用"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"创建应用的第二个实例，这样您就可以同时使用两个帐号。"</string>
     <string name="cloned_apps_summary" msgid="8805362440770795709">"<xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g> 个已克隆，<xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g> 个可以克隆"</string>
-    <!-- no translation found for cloned_app_creation_summary (4642627294993918502) -->
-    <skip />
-    <!-- no translation found for cloned_app_created_summary (7277912971544890710) -->
-    <skip />
+    <string name="delete_all_app_clones" msgid="3489053361980624999">"删除所有应用副本"</string>
+    <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"无法删除所有应用副本"</string>
+    <string name="cloned_app_creation_summary" msgid="4642627294993918502">"正在创建…"</string>
+    <string name="cloned_app_created_summary" msgid="7277912971544890710">"已克隆"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"语言、手势、时间、备份"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"系统语言、应用语言"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, WLAN, 网络连接, 互联网, 无线, 数据, WLAN 网络"</string>
@@ -2938,7 +2836,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, 高级通话, 5g 通话, advanced calling, 5g calling"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"添加语言, 添加一种语言"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"文字大小, 大字版, 大字体, 大文字, 弱视, 放大文字, 字体放大工具, 字体放大, text size, large print, large font, large text, low vision, make text bigger, font enlarger, font enlargement"</string>
-    <string name="keywords_always_show_time_info" msgid="645658129239452778">"显示屏始终保持开启状态, always on display, AOD"</string>
+    <string name="keywords_always_show_time_info" msgid="645658129239452778">"屏幕常亮, always on display, AOD"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"音量、振动、勿扰"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"媒体音量"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"投放音量"</string>
@@ -3168,10 +3066,8 @@
     <string name="promote_conversation_title" msgid="4731148769888238722">"这是对话"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"添加到对话部分"</string>
     <string name="priority_conversation_count_zero" msgid="3862289535537564713">"没有优先对话"</string>
-    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 个优先对话</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 个优先对话</item>
-    </plurals>
+    <!-- no translation found for priority_conversation_count (7291234530844412077) -->
+    <skip />
     <string name="important_conversations" msgid="1233893707189659401">"优先对话"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"以悬浮对话泡形式显示在对话部分顶部"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"显示在对话部分顶部"</string>
@@ -3200,14 +3096,10 @@
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"当设备处于解锁状态时，在屏幕顶端以横幅形式显示通知"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"所有“<xliff:g id="APP_NAME">%1$s</xliff:g>”通知"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"所有<xliff:g id="APP_NAME">%1$s</xliff:g>通知"</string>
-    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
-      <item quantity="other">每天大约 <xliff:g id="NUMBER_1">%,d</xliff:g> 条通知</item>
-      <item quantity="one">每天大约 <xliff:g id="NUMBER_0">%d</xliff:g> 条通知</item>
-    </plurals>
-    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
-      <item quantity="other">每周大约 <xliff:g id="NUMBER_1">%,d</xliff:g> 条通知</item>
-      <item quantity="one">每周大约 <xliff:g id="NUMBER_0">%d</xliff:g> 条通知</item>
-    </plurals>
+    <!-- no translation found for notifications_sent_daily (10274479224185437) -->
+    <skip />
+    <!-- no translation found for notifications_sent_weekly (7895656213187555346) -->
+    <skip />
     <string name="notifications_sent_never" msgid="9081278709126812062">"永不"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"设备和应用通知"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"控制哪些应用和设备能够读取通知"</string>
@@ -3276,10 +3168,8 @@
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"权限"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"此应用可使用您的个人“<xliff:g id="NAME">%1$s</xliff:g>”应用的权限，例如对位置信息、存储空间或通讯录的访问权限。"</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"未关联任何应用"</string>
-    <plurals name="interact_across_profiles_number_of_connected_apps" formatted="false" msgid="6991750455661974772">
-      <item quantity="other">已关联 <xliff:g id="COUNT_1">%d</xliff:g> 个应用</item>
-      <item quantity="one">已关联 <xliff:g id="COUNT_0">%d</xliff:g> 个应用</item>
-    </plurals>
+    <!-- no translation found for interact_across_profiles_number_of_connected_apps (4000424798291479207) -->
+    <skip />
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"如需关联这些应用，请在工作资料中安装<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"如需关联这些应用，请在个人资料中安装<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"点按即可获取应用"</string>
@@ -3294,10 +3184,8 @@
     <string name="notification_channels_other" msgid="18159805343647908">"其他"</string>
     <string name="no_channels" msgid="4716199078612071915">"此应用未发布任何通知"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"应用中的其他设置"</string>
-    <plurals name="deleted_channels" formatted="false" msgid="5963473421547029532">
-      <item quantity="other">已删除 <xliff:g id="COUNT_1">%d</xliff:g> 个类别</item>
-      <item quantity="one">已删除 <xliff:g id="COUNT_0">%d</xliff:g> 个类别</item>
-    </plurals>
+    <!-- no translation found for deleted_channels (8489800381509312964) -->
+    <skip />
     <string name="app_notification_block_title" msgid="3880322745749900296">"全部屏蔽"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"一律不显示这类通知"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"显示通知"</string>
@@ -3447,7 +3335,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"取消固定屏幕前要求输入密码"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"取消固定屏幕时锁定设备"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"删除 SIM 卡前需确认"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"先验证是您本人在操作，然后才能清空 eSIM 卡"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"先验证是您本人在操作，然后才能清空 eSIM 卡"</string>
     <string name="memtag_title" msgid="5096176296797727201">"高级内存保护 Beta 版"</string>
     <string name="memtag_toggle" msgid="8695028758462939212">"高级内存保护"</string>
     <string name="memtag_intro" msgid="579408691329568953">"此 Beta 版功能有助于防止您的设备遇到可能会使您面临安全风险的问题。"</string>
@@ -3946,18 +3834,12 @@
     <string name="enterprise_privacy_none" msgid="6026527690979756431">"无"</string>
     <string name="enterprise_privacy_enterprise_installed_packages" msgid="9114143640515900082">"已安装的应用"</string>
     <string name="enterprise_privacy_apps_count_estimation_info" msgid="7959907857710107792">"应用数量是估算值，其中可能不包括从 Play 商店以外的来源安装的应用。"</string>
-    <plurals name="enterprise_privacy_number_packages_lower_bound" formatted="false" msgid="5403847001419529018">
-      <item quantity="other">至少 <xliff:g id="COUNT_1">%d</xliff:g> 个应用</item>
-      <item quantity="one">至少 <xliff:g id="COUNT_0">%d</xliff:g> 个应用</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages_lower_bound" msgid="5317634640873658149">"{count,plural, =1{至少 # 个应用}other{至少 # 个应用}}"</string>
     <string name="enterprise_privacy_location_access" msgid="8023838718108456971">"位置权限"</string>
     <string name="enterprise_privacy_microphone_access" msgid="7242958026470143653">"麦克风使用权限"</string>
     <string name="enterprise_privacy_camera_access" msgid="7685460535880069016">"相机使用权"</string>
     <string name="enterprise_privacy_enterprise_set_default_apps" msgid="7498546659083996300">"默认应用"</string>
-    <plurals name="enterprise_privacy_number_packages" formatted="false" msgid="8568544906431825430">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 个应用</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 个应用</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages" msgid="5294444005035188274">"{count,plural, =1{# 个应用}other{# 个应用}}"</string>
     <string name="enterprise_privacy_input_method" msgid="3278314982700662246">"默认键盘"</string>
     <string name="enterprise_privacy_input_method_name" msgid="2974859490559054584">"已设为<xliff:g id="APP_LABEL">%s</xliff:g>"</string>
     <string name="enterprise_privacy_always_on_vpn_device" msgid="1735829327405126695">"已开启“始终开启的 VPN”"</string>
@@ -3967,18 +3849,12 @@
     <string name="enterprise_privacy_ca_certs_device" msgid="1816495877258727663">"可信凭据"</string>
     <string name="enterprise_privacy_ca_certs_personal" msgid="1516422660828485795">"您个人资料中的可信凭据"</string>
     <string name="enterprise_privacy_ca_certs_work" msgid="4318941788592655561">"您工作资料中的可信凭据"</string>
-    <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="6459725295322004179">
-      <item quantity="other">至少 <xliff:g id="COUNT_1">%d</xliff:g> 个 CA 证书</item>
-      <item quantity="one">至少 <xliff:g id="COUNT_0">%d</xliff:g> 个 CA 证书</item>
-    </plurals>
+    <string name="enterprise_privacy_number_ca_certs" msgid="4540897122831942658">"{count,plural, =1{至少 # 个 CA 证书}other{至少 # 个 CA 证书}}"</string>
     <string name="enterprise_privacy_lock_device" msgid="464054894363899866">"管理员可以锁定设备及重置密码"</string>
     <string name="enterprise_privacy_wipe_device" msgid="869589182352244591">"管理员可以删除所有设备数据"</string>
     <string name="enterprise_privacy_failed_password_wipe_device" msgid="7045164901334821226">"输入错误密码的尝试次数上限（超过此上限将删除所有设备数据）"</string>
     <string name="enterprise_privacy_failed_password_wipe_work" msgid="2537582942554484170">"输入错误密码的尝试次数上限（超过此上限将删除工作资料数据）"</string>
-    <plurals name="enterprise_privacy_number_failed_password_wipe" formatted="false" msgid="8811973918944217791">
-      <item quantity="other">已尝试 <xliff:g id="COUNT_1">%d</xliff:g> 次</item>
-      <item quantity="one">已尝试 <xliff:g id="COUNT_0">%d</xliff:g> 次</item>
-    </plurals>
+    <string name="enterprise_privacy_number_failed_password_wipe" msgid="2695842143305867642">"{count,plural, =1{可尝试 # 次}other{可尝试 # 次}}"</string>
     <string name="do_disclosure_generic" msgid="3067459392402324538">"此设备由贵单位管理。"</string>
     <string name="do_disclosure_with_name" msgid="867544298924410766">"此设备由“<xliff:g id="ORGANIZATION_NAME">%s</xliff:g>”管理。"</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
@@ -4006,21 +3882,12 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"一旦您付清款项："</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"此设备上的所有限制都会被解除"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"您可以卸载分期付款提供商应用"</string>
-    <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
-      <item quantity="other">相机应用</item>
-      <item quantity="one">相机应用</item>
-    </plurals>
+    <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{相机应用}other{相机应用}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"日历应用"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"通讯录应用"</string>
-    <plurals name="default_email_app_title" formatted="false" msgid="8338194872609410234">
-      <item quantity="other">电子邮件客户端应用</item>
-      <item quantity="one">电子邮件客户端应用</item>
-    </plurals>
+    <string name="default_email_app_title" msgid="5411280873093244250">"{count,plural, =1{电子邮件客户端应用}other{电子邮件客户端应用}}"</string>
     <string name="default_map_app_title" msgid="7569231732944853320">"地图应用"</string>
-    <plurals name="default_phone_app_title" formatted="false" msgid="4222188821845826493">
-      <item quantity="other">电话应用</item>
-      <item quantity="one">电话应用</item>
-    </plurals>
+    <string name="default_phone_app_title" msgid="795025972645464135">"{count,plural, =1{电话应用}other{电话应用}}"</string>
     <string name="app_names_concatenation_template_2" msgid="8320181646458855457">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>、<xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>"</string>
     <string name="app_names_concatenation_template_3" msgid="7019703249717854148">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>、<xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>、<xliff:g id="THIRD_APP_NAME">%3$s</xliff:g>"</string>
     <string name="storage_default_internal_storage" msgid="4055660218818688131">"此设备"</string>
@@ -4047,13 +3914,18 @@
     <string name="webview_uninstalled_for_user" msgid="627352948986275488">"（已为用户<xliff:g id="USER">%s</xliff:g>卸载）"</string>
     <string name="webview_disabled_for_user" msgid="5809886172032644498">"（已为用户<xliff:g id="USER">%s</xliff:g>停用）"</string>
     <string name="autofill_app" msgid="7595308061826307921">"自动填充服务"</string>
+    <string name="default_autofill_app" msgid="372234803718251606">"默认自动填充服务"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"密码"</string>
-    <plurals name="autofill_passwords_count" formatted="false" msgid="7715009165029452622">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> 个密码</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> 个密码</item>
-    </plurals>
+    <string name="credman_credentials" msgid="5937331545565783811">"密码及身份管理服务"</string>
+    <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# 个密码}other{# 个密码}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"自动, 填充, 自动填充, 密码, auto, fill, autofill, password"</string>
+    <string name="credman_keywords" msgid="7236954350284379264">"凭据, 通行密钥, 密码, credentials, passkey, password"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;请确认这是您信任的应用&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt;会根据您的屏幕内容判断可自动填充哪些内容。"</string>
+    <string name="credman_confirmation_message_title" msgid="8847900085593880729">"要关闭%1$s吗？"</string>
+    <string name="credman_confirmation_message" msgid="1485617504425237430">"当您登录时，系统不会填充地址或付款方式等已存信息。若要让系统始终为您填充已存信息，请设置默认的自动填充服务。"</string>
+    <string name="credman_error_message_title" msgid="5108868200002966901">"密码及身份识别管理限制"</string>
+    <string name="credman_error_message" msgid="4058425433345908579">"您最多可以同时启用 5 项自动填充服务和密码服务。若要添加其他服务，请先关闭其中一项服务。"</string>
+    <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"关闭"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"自动填充"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"日志记录级别"</string>
     <string name="autofill_max_partitions" msgid="7342195529574406366">"每次会话的请求数上限"</string>
@@ -4236,8 +4108,7 @@
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"应用的流量使用情况"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"无效的网络模式<xliff:g id="NETWORKMODEID">%1$d</xliff:g>。忽略。"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"接入点名称"</string>
-    <!-- no translation found for keywords_access_point_names (8174967126858505945) -->
-    <skip />
+    <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"连接到<xliff:g id="CARRIER">%1$s</xliff:g>时无法使用"</string>
     <string name="see_more" msgid="7499355691042812723">"查看更多"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"要启用<xliff:g id="CARRIER_NAME">%1$s</xliff:g>吗？"</string>
@@ -4327,10 +4198,7 @@
     <string name="copyable_slice_toast" msgid="1008251852798990606">"<xliff:g id="COPY_CONTENT">%1$s</xliff:g>已复制到剪贴板。"</string>
     <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"使用无障碍功能"</string>
-    <plurals name="accessibility_usage_summary" formatted="false" msgid="6910643986958263005">
-      <item quantity="other">有 <xliff:g id="SERVICE_COUNT">%1$d</xliff:g> 个应用拥有对您设备的完整访问权限</item>
-      <item quantity="one">有 1 个应用拥有对您设备的完整访问权限</item>
-    </plurals>
+    <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{1 个应用拥有对您设备的完整访问权限}other{# 个应用拥有对您设备的完整访问权限}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"重要信息"</string>
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"继续"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"不用了"</string>
@@ -4514,10 +4382,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"允许启用 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G 网络的安全性较低，但在某些地方可能会改善您的连接质量。您始终都能通过 2G 网络拨打紧急电话。"</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"必须启用 2G 网络才能使用<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>的服务"</string>
-    <!-- no translation found for allow_null_algorithms_title (9143076634352979096) -->
-    <skip />
-    <!-- no translation found for allow_null_algorithms_summary (5874570357011783211) -->
-    <skip />
+    <string name="allow_null_algorithms_title" msgid="9143076634352979096">"允许安全性较低的连接"</string>
+    <string name="allow_null_algorithms_summary" msgid="5874570357011783211">"这或许可以改善某些地点的信号强度。系统始终允许通过安全性较低的连接提供紧急呼叫服务。"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"所有服务"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"显示剪贴板访问通知"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"系统会在应用访问您复制的文字、图片或其他内容时显示一条消息"</string>
@@ -4625,18 +4491,11 @@
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"二维码的格式无效"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"转换为 eSIM 卡"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"将 eSIM 卡转移到其他设备上"</string>
-    <!-- no translation found for background_install_preference_summary (3065219346519340364) -->
-    <skip />
-    <!-- no translation found for background_install_title (607913515188276168) -->
-    <skip />
-    <!-- no translation found for background_install_summary (3890296129543309666) -->
-    <skip />
-    <!-- no translation found for background_install_feature_list_no_entry (2071343281272266154) -->
-    <skip />
-    <!-- no translation found for background_install_uninstall_button_description (1189649052911501249) -->
-    <skip />
-    <!-- no translation found for background_install_before (8608614957688912715) -->
-    <skip />
-    <!-- no translation found for background_install_after (7983488897570908149) -->
-    <skip />
+    <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# 个应用}other{# 个应用}}"</string>
+    <string name="background_install_title" msgid="607913515188276168">"已在后台安装的应用"</string>
+    <string name="background_install_summary" msgid="3890296129543309666">"您设备的制造商可能会通过后台在设备上安装应用，或允许您的运营商及其他合作伙伴这么做。\n\n设备不必安装此处所列的任何应用也能正常运作。您可以卸载不需要的应用。"</string>
+    <string name="background_install_feature_list_no_entry" msgid="2071343281272266154">"没有在后台安装的应用"</string>
+    <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"卸载应用"</string>
+    <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{过去 # 个月内安装的应用}other{过去 # 个月内安装的应用}}"</string>
+    <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{# 个多月前安装的应用}other{# 个多月前安装的应用}}"</string>
 </resources>

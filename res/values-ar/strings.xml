@@ -26,14 +26,7 @@
     <string name="off" msgid="2898123876644709799">"غير مفعّلة"</string>
     <string name="device_info_default" msgid="1406619232867343310">"غير معروف"</string>
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"انقر لإظهار المعلومات."</string>
-    <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
-      <item quantity="zero">لا يفصلك الآن عن الوصول إلى مرحلة مطوري البرامج سوى <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> خطوة.</item>
-      <item quantity="two">لا يفصلك الآن عن الوصول إلى مرحلة مطوري البرامج سوى خطوتين (<xliff:g id="STEP_COUNT_1">%1$d</xliff:g>).</item>
-      <item quantity="few">لا يفصلك الآن عن الوصول إلى مرحلة مطوري البرامج سوى <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> خطوات.</item>
-      <item quantity="many">لا يفصلك الآن عن الوصول إلى مرحلة مطوري البرامج سوى <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> خطوة.</item>
-      <item quantity="other">لا يفصلك الآن عن الوصول إلى مرحلة مطوري البرامج سوى <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> خطوة.</item>
-      <item quantity="one">لا يفصلك الآن عن الوصول إلى مرحلة مطوري البرامج سوى خطوة واحدة (<xliff:g id="STEP_COUNT_0">%1$d</xliff:g>).</item>
-    </plurals>
+    <string name="show_dev_countdown" msgid="2936506773086395069">"{count,plural, =1{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا خطوة واحدة.}zero{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا # خطوة.}two{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا خطوتَين.}few{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا # خطوات.}many{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا # خطوة.}other{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا # خطوة.}}"</string>
     <string name="show_dev_on" msgid="2840850085134853754">"لقد أصبحت الآن مطور برامج!"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"لا حاجة لذلك، فأنت مطور برامج فعلاً."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"يُرجى تفعيل خيارات المطوري أولاً."</string>
@@ -126,7 +119,7 @@
     <string name="stylus_default_notes_app" msgid="3111290761558445874">"تطبيق تدوين الملاحظات الخاص بالنظام"</string>
     <string name="stylus_textfield_handwriting" msgid="6962904622425646128">"الكتابة بقلم الشاشة في الحقول النصية"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"تجاهل كل الأزرار التي تم الضغط عليها باستخدام قلم الشاشة"</string>
-    <string name="stylus_usi_header_title" msgid="1949011797718972583">"‏أقلام الشاشة المتوافقة مع معايير USI"</string>
+    <string name="stylus_connected_devices_title" msgid="2823967577941359812">"قلم الشاشة"</string>
     <string name="date_and_time" msgid="1788358029823431692">"التاريخ والوقت"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"الخادم الوكيل"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"محو"</string>
@@ -164,14 +157,23 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"لا تتوفَّر إمكانية اختيار لغة لهذا التطبيق من الإعدادات."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"قد تختلف اللغة عن اللغات المتوفّرة في التطبيق. قد لا تدعم بعض التطبيقات هذا الإعداد."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"تظهر هنا فقط التطبيقات التي تتيح اختيار اللغة."</string>
-    <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
-      <item quantity="zero">هل تريد إزالة اللغة المحددة؟</item>
-      <item quantity="two">هل تريد إزالة اللغتين المحددتين؟</item>
-      <item quantity="few">هل تريد إزالة اللغات المحددة؟</item>
-      <item quantity="many">هل تريد إزالة اللغات المحددة؟</item>
-      <item quantity="other">هل تريد إزالة اللغات المحددة؟</item>
-      <item quantity="one">هل تريد إزالة اللغة المحددة؟</item>
-    </plurals>
+    <!-- no translation found for regional_preferences_title (4304567374498629528) -->
+    <skip />
+    <!-- no translation found for regional_preferences_summary (1189876997389469650) -->
+    <skip />
+    <!-- no translation found for regional_preferences_main_page_sub_title (4666033861956272891) -->
+    <skip />
+    <!-- no translation found for temperature_preferences_title (5009881556503629058) -->
+    <skip />
+    <!-- no translation found for calendar_preferences_title (8312485828206542600) -->
+    <skip />
+    <!-- no translation found for first_day_of_week_preferences_title (1971850087589599553) -->
+    <skip />
+    <!-- no translation found for numbers_preferences_title (6094837605398562369) -->
+    <skip />
+    <!-- no translation found for default_string_of_regional_preference (1595774718180886349) -->
+    <skip />
+    <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{هل تريد إزالة اللغة المحددة؟}zero{هل تريد إزالة اللغات المحددة؟}two{هل تريد إزالة اللغتَين المحددتَين؟}few{هل تريد إزالة اللغات المحددة؟}many{هل تريد إزالة اللغات المحددة؟}other{هل تريد إزالة اللغات المحددة؟}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"سيتم عرض النص بلغة أخرى."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"تتعذر إزالة كل اللغات"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"يجب الاحتفاظ بلغة واحدة مفضَّلة على الأقل."</string>
@@ -190,6 +192,7 @@
     <string name="apply" msgid="7834684883190163536">"تطبيق"</string>
     <string name="share" msgid="8502235338607613795">"مشاركة"</string>
     <string name="add" msgid="8335206931421683426">"إضافة"</string>
+    <string name="remove" msgid="1028414219245072102">"إزالة"</string>
     <string name="settings_label" msgid="943294133671632976">"الإعدادات"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"الإعدادات"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"اختصار الإعدادات"</string>
@@ -201,6 +204,7 @@
     <string name="roaming_warning" msgid="7703647889040229013">"قد يتم فرض رسوم تجوال."</string>
     <string name="date_time_auto" msgid="4239202185055225869">"ضبط الوقت تلقائيًا"</string>
     <string name="zone_auto_title" msgid="5141692422373097957">"ضبط إعدادات التاريخ والوقت تلقائيًا"</string>
+    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"سيتم استخدام الموقع الجغرافي لضبط المنطقة الزمنية عندما يكون مفتاح التبديل هذا مفعَّلاً."</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"استخدام التنسيق التلقائي المحلي"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"استخدام تنسيق ٢٤ ساعة"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"الوقت"</string>
@@ -229,14 +233,8 @@
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"‏جهاز Android الخاص بهاني مثلاً"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"الموقع الجغرافي"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"استخدام الموقع الجغرافي"</string>
-    <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="zero">خدمة \"الموقع الجغرافي\" مفعَّلة - يمتلك <xliff:g id="COUNT_1">%1$d</xliff:g> تطبيق الإذن بالوصول إلى بيانات الموقع الجغرافي.</item>
-      <item quantity="two">خدمة \"الموقع الجغرافي\" مفعَّلة - يمتلك تطبيقان (<xliff:g id="COUNT_1">%1$d</xliff:g>) الإذن بالوصول إلى بيانات الموقع الجغرافي.</item>
-      <item quantity="few">خدمة \"الموقع الجغرافي\" مفعَّلة - تمتلك <xliff:g id="COUNT_1">%1$d</xliff:g> تطبيقات الإذن بالوصول إلى بيانات الموقع الجغرافي.</item>
-      <item quantity="many">خدمة \"الموقع الجغرافي\" مفعَّلة - يمتلك <xliff:g id="COUNT_1">%1$d</xliff:g> تطبيقًا الإذن بالوصول إلى بيانات الموقع الجغرافي.</item>
-      <item quantity="other">خدمة \"الموقع الجغرافي\" مفعَّلة - يمتلك <xliff:g id="COUNT_1">%1$d</xliff:g> تطبيق الإذن بالوصول إلى بيانات الموقع الجغرافي.</item>
-      <item quantity="one">خدمة \"الموقع الجغرافي\" مفعَّلة - يمتلك تطبيق واحد (<xliff:g id="COUNT_0">%1$d</xliff:g>) الإذن بالوصول إلى بيانات الموقع الجغرافي.</item>
-    </plurals>
+    <!-- no translation found for location_settings_summary_location_on (7029728269719893381) -->
+    <skip />
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"جارٍ التحميل..."</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"يمكن للتطبيقات التي لديها إذن بالوصول إلى الأجهزة المجاورة تحديد الموضع النسبي للأجهزة المتصلة بجهازك."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"ميزة وصول التطبيقات والخدمات إلى الموقع الجغرافي غير مفّعلة. قد يستمر إرسال الموقع الجغرافي لجهازك إلى مسؤولي الاستجابة لحالات الطوارئ عند الاتصال برقم طوارئ أو مراسلته نصيًا."</string>
@@ -316,14 +314,8 @@
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"عند استخدام ميزة \"فتح الجهاز ببصمة الإصبع\""</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"بصمة الإصبع للملف الشخصي للعمل"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"إضافة بصمة إصبع"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
-      <item quantity="zero">تمت إضافة <xliff:g id="COUNT">%1$d</xliff:g> بصمة إصبع.</item>
-      <item quantity="two">تمت إضافة بصمتَي إصبع (<xliff:g id="COUNT">%1$d</xliff:g>).</item>
-      <item quantity="few">تمت إضافة <xliff:g id="COUNT">%1$d</xliff:g> بصمات أصابع.</item>
-      <item quantity="many">تمت إضافة <xliff:g id="COUNT">%1$d</xliff:g> بصمة إصبع.</item>
-      <item quantity="other">تمت إضافة <xliff:g id="COUNT">%1$d</xliff:g> بصمة إصبع.</item>
-      <item quantity="one">تمت إضافة بصمة الإصبع.</item>
-    </plurals>
+    <!-- no translation found for security_settings_fingerprint_preference_summary (8486134175759676037) -->
+    <skip />
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"إعداد بصمة الإصبع"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"سماح بفتح الجهاز ببصمة الإصبع"</string>
@@ -546,97 +538,20 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"عند إدخال نقش غير صحيح في المحاولة التالية، سيتم حذف ملفك الشخصي للعمل وبياناته"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"عند إدخال رقم تعريف شخصي غير صحيح في المحاولة التالية، سيتم حذف ملفك الشخصي للعمل وبياناته"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"عند إدخال كلمة مرور غير صحيحة في المحاولة التالية، سيتم حذف ملفك الشخصي للعمل وبياناته"</string>
-    <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
-      <item quantity="zero">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT_1">%d</xliff:g> حرف على الأقل.</item>
-      <item quantity="two">يجب أن تحتوي كلمة المرور على حرفين (<xliff:g id="COUNT_1">%d</xliff:g>) على الأقل.</item>
-      <item quantity="few">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT_1">%d</xliff:g> أحرف على الأقل.</item>
-      <item quantity="many">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT_1">%d</xliff:g> حرفًا على الأقل.</item>
-      <item quantity="other">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT_1">%d</xliff:g> حرف على الأقل.</item>
-      <item quantity="one">يجب أن تحتوي كلمة المرور على حرف واحد (<xliff:g id="COUNT_0">%d</xliff:g>) على الأقل.</item>
-    </plurals>
+    <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{يجب أن تحتوي كلمة المرور على حرف واحد على الأقل.}zero{يجب ألّا يقل عدد الأحرف عن # حرف.}two{يجب ألّا يقل عدد الأحرف عن حرفَين.}few{يجب ألّا يقل عدد الأحرف عن # حروف.}many{يجب ألّا يقل عدد الأحرف عن # حرفًا.}other{يجب ألّا يقل عدد الأحرف عن # حرف.}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{في حال استخدام الأرقام فقط، يجب أن تحتوي كلمة المرور على رقم واحد على الأقل.}zero{في حال استخدام الأرقام فقط، يجب أن تحتوي كلمة المرور على # رقم على الأقل.}two{في حال استخدام الأرقام فقط، يجب أن تحتوي كلمة المرور على رقمَين على الأقل.}few{في حال استخدام الأرقام فقط، يجب أن تحتوي كلمة المرور على # أرقام على الأقل.}many{في حال استخدام الأرقام فقط، يجب أن تحتوي كلمة المرور على # رقمًا على الأقل.}other{في حال استخدام الأرقام فقط، يجب أن تحتوي كلمة المرور على # رقم على الأقل.}}"</string>
-    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
-      <item quantity="zero">يجب أن يحتوي رقم التعريف الشخصي على <xliff:g id="COUNT_1">%d</xliff:g> رقم على الأقل.</item>
-      <item quantity="two">يجب أن يحتوي رقم التعريف الشخصي على رقمين (<xliff:g id="COUNT_1">%d</xliff:g>) على الأقل.</item>
-      <item quantity="few">يجب أن يحتوي رقم التعريف الشخصي على <xliff:g id="COUNT_1">%d</xliff:g> أرقام على الأقل.</item>
-      <item quantity="many">يجب أن يحتوي رقم التعريف الشخصي على <xliff:g id="COUNT_1">%d</xliff:g> رقمًا على الأقل.</item>
-      <item quantity="other">يجب أن يحتوي رقم التعريف الشخصي على <xliff:g id="COUNT_1">%d</xliff:g> رقم على الأقل.</item>
-      <item quantity="one">يجب أن يحتوي رقم التعريف الشخصي على رقم واحد (<xliff:g id="COUNT_0">%d</xliff:g>) على الأقل.</item>
-    </plurals>
-    <plurals name="lockpassword_password_too_long" formatted="false" msgid="8118091957172967677">
-      <item quantity="zero">يجب ألا تزيد كلمة المرور عن <xliff:g id="NUMBER_1">%d</xliff:g> حرف.</item>
-      <item quantity="two">يجب ألا تزيد كلمة المرور عن حرفين (<xliff:g id="NUMBER_1">%d</xliff:g>).</item>
-      <item quantity="few">يجب ألا تزيد كلمة المرور عن <xliff:g id="NUMBER_1">%d</xliff:g> أحرف.</item>
-      <item quantity="many">يجب ألا تزيد كلمة المرور عن <xliff:g id="NUMBER_1">%d</xliff:g> حرفًا.</item>
-      <item quantity="other">يجب ألا تزيد كلمة المرور عن <xliff:g id="NUMBER_1">%d</xliff:g> حرف.</item>
-      <item quantity="one">يجب ألا تزيد كلمة المرور عن حرف واحد (<xliff:g id="NUMBER_0">%d</xliff:g>).</item>
-    </plurals>
-    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="8706992338720310765">
-      <item quantity="zero">يجب ألا يزيد رقم التعريف الشخصي عن <xliff:g id="NUMBER_1">%d</xliff:g> رقم.</item>
-      <item quantity="two">يجب ألا يزيد رقم التعريف الشخصي عن رقمين (<xliff:g id="NUMBER_1">%d</xliff:g>).</item>
-      <item quantity="few">يجب ألا يزيد رقم التعريف الشخصي عن <xliff:g id="NUMBER_1">%d</xliff:g> أرقام.</item>
-      <item quantity="many">يجب ألا يزيد رقم التعريف الشخصي عن <xliff:g id="NUMBER_1">%d</xliff:g> رقمًا.</item>
-      <item quantity="other">يجب ألا يزيد رقم التعريف الشخصي عن <xliff:g id="NUMBER_1">%d</xliff:g> رقم.</item>
-      <item quantity="one">يجب ألا يزيد رقم التعريف الشخصي عن رقم واحد (<xliff:g id="NUMBER_0">%d</xliff:g>).</item>
-    </plurals>
+    <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{يجب أن يحتوي رقم التعريف الشخصي على رقم واحد على الأقل.}zero{يجب أن يحتوي رقم التعريف الشخصي على # رقم على الأقل.}two{يجب أن يحتوي رقم التعريف الشخصي على رقمَين على الأقل.}few{يجب أن يحتوي رقم التعريف الشخصي على # أرقام على الأقل.}many{يجب أن يحتوي رقم التعريف الشخصي على # رقمًا على الأقل.}other{يجب أن يحتوي رقم التعريف الشخصي على # رقم على الأقل.}}"</string>
+    <string name="lockpassword_password_too_long" msgid="1940345313260498308">"{count,plural, =1{يجب أن تحتوي كلمة المرور على أقل من حرف واحد.}zero{يجب أن تحتوي كلمة المرور على أقل من # حرف.}two{يجب أن تحتوي كلمة المرور على أقل من حرفَين.}few{يجب أن تحتوي كلمة المرور على أقل من # أحرف.}many{يجب أن تحتوي كلمة المرور على أقل من # حرفًا.}other{يجب أن تحتوي كلمة المرور على أقل من # حرف.}}"</string>
+    <string name="lockpassword_pin_too_long" msgid="1678212054564388576">"{count,plural, =1{يجب أن يحتوي رقم التعريف الشخصي على أقل من رقم واحد.}zero{يجب أن يحتوي رقم التعريف الشخصي على أقل من # رقم.}two{يجب أن يحتوي رقم التعريف الشخصي على أقل من رقمَين.}few{يجب أن يحتوي رقم التعريف الشخصي على أقل من # أرقام.}many{يجب أن يحتوي رقم التعريف الشخصي على أقل من # رقمًا.}other{يجب أن يحتوي رقم التعريف الشخصي على أقل من # رقم.}}"</string>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"لا يسمح مشرف الجهاز باستخدام رقم تعريف شخصي تم استخدامه مؤخرًا"</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"لا يجب أن تتضمن كلمة المرور حرفًا غير صالح."</string>
-    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="2385916409676839024">
-      <item quantity="zero">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> حرف على الأقل</item>
-      <item quantity="two">يجب أن تحتوي كلمة المرور على حرفين (<xliff:g id="COUNT">%d</xliff:g>) على الأقل</item>
-      <item quantity="few">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> أحرف على الأقل</item>
-      <item quantity="many">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> حرفًا على الأقل</item>
-      <item quantity="other">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> حرف على الأقل</item>
-      <item quantity="one">يجب أن تحتوي كلمة المرور على حرف واحد على الأقل</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="2057467885488612701">
-      <item quantity="zero">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> حرف صغير على الأقل</item>
-      <item quantity="two">يجب أن تحتوي كلمة المرور على حرفين صغيرين (<xliff:g id="COUNT">%d</xliff:g>) على الأقل</item>
-      <item quantity="few">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> أحرف صغيرة على الأقل</item>
-      <item quantity="many">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> حرفًا صغيرًا على الأقل</item>
-      <item quantity="other">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> حرف صغير على الأقل</item>
-      <item quantity="one">يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="4541266279643052025">
-      <item quantity="zero">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> حرف كبير على الأقل</item>
-      <item quantity="two">يجب أن تحتوي كلمة المرور على حرفين كبيرين (<xliff:g id="COUNT">%d</xliff:g>) على الأقل</item>
-      <item quantity="few">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> أحرف كبيرة على الأقل</item>
-      <item quantity="many">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> حرفًا كبيرًا على الأقل</item>
-      <item quantity="other">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> حرف كبير على الأقل</item>
-      <item quantity="one">يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="70617964591376248">
-      <item quantity="zero">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> رقم عددي على الأقل</item>
-      <item quantity="two">يجب أن تحتوي كلمة المرور على رقمين عدديين (<xliff:g id="COUNT">%d</xliff:g>) على الأقل</item>
-      <item quantity="few">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> أرقام عددية على الأقل</item>
-      <item quantity="many">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> رقمًا عدديًا على الأقل</item>
-      <item quantity="other">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> رقم عددي على الأقل</item>
-      <item quantity="one">يجب أن تحتوي كلمة المرور على رقم عددي واحد على الأقل</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="7981236881269921943">
-      <item quantity="zero">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> رمز خاص على الأقل</item>
-      <item quantity="two">يجب أن تحتوي كلمة المرور على رمزين خاصين (<xliff:g id="COUNT">%d</xliff:g>) على الأقل</item>
-      <item quantity="few">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> رموز خاصة على الأقل</item>
-      <item quantity="many">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> رمزًا خاصًا على الأقل</item>
-      <item quantity="other">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> رمز خاص على الأقل</item>
-      <item quantity="one">يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="1567877061888948467">
-      <item quantity="zero">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> حرف ليس من الأحرف الأبجدية على الأقل</item>
-      <item quantity="two">يجب أن تحتوي كلمة المرور على حرفين (<xliff:g id="COUNT">%d</xliff:g>) ليسا من الأحرف الأبجدية على الأقل</item>
-      <item quantity="few">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> أحرف ليست من الأحرف الأبجدية على الأقل</item>
-      <item quantity="many">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> حرفًا ليس من الأحرف الأبجدية على الأقل</item>
-      <item quantity="other">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> حرف ليس من الأحرف الأبجدية على الأقل</item>
-      <item quantity="one">يجب أن تحتوي كلمة المرور على حرف واحد ليس من الأحرف الأبجدية على الأقل</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonnumerical" formatted="false" msgid="5056743974888384475">
-      <item quantity="zero">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> حرف أبجدي على الأقل.</item>
-      <item quantity="two">يجب أن تحتوي كلمة المرور على حرفين (<xliff:g id="COUNT">%d</xliff:g>) أبجديين على الأقل.</item>
-      <item quantity="few">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> أحرف أبجدية على الأقل.</item>
-      <item quantity="many">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> حرفًا أبجديًا على الأقل.</item>
-      <item quantity="other">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> حرف أبجدي على الأقل.</item>
-      <item quantity="one">يجب أن تحتوي كلمة المرور على حرف أبجدي واحد على الأقل.</item>
-    </plurals>
+    <string name="lockpassword_password_requires_letters" msgid="7058340182953750553">"{count,plural, =1{يجب أن تحتوي كلمة المرور على حرف واحد على الأقل.}zero{يجب أن تحتوي كلمة المرور على # حرف على الأقل.}two{يجب أن تحتوي كلمة المرور على حرفَين على الأقل.}few{يجب أن تحتوي كلمة المرور على # أحرف على الأقل.}many{يجب أن تحتوي كلمة المرور على # حرفًا على الأقل.}other{يجب أن تحتوي كلمة المرور على # حرف على الأقل.}}"</string>
+    <string name="lockpassword_password_requires_lowercase" msgid="3286121470522077547">"{count,plural, =1{يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل.}zero{يجب أن تحتوي كلمة المرور على # حرف صغير على الأقل.}two{يجب أن تحتوي كلمة المرور على حرفَين صغيرين على الأقل.}few{يجب أن تحتوي كلمة المرور على # أحرف صغيرة على الأقل.}many{يجب أن تحتوي كلمة المرور على # حرفًا صغيرًا على الأقل.}other{يجب أن تحتوي كلمة المرور على # حرف صغير على الأقل.}}"</string>
+    <string name="lockpassword_password_requires_uppercase" msgid="720312543910397772">"{count,plural, =1{يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل.}zero{يجب أن تحتوي كلمة المرور على # حرف كبير على الأقل.}two{يجب أن تحتوي كلمة المرور على حرفَين كبيرين على الأقل.}few{يجب أن تحتوي كلمة المرور على # أحرف كبيرة على الأقل.}many{يجب أن تحتوي كلمة المرور على # حرفًا كبيرًا على الأقل.}other{يجب أن تحتوي كلمة المرور على # حرف كبير على الأقل.}}"</string>
+    <string name="lockpassword_password_requires_numeric" msgid="3886918493600507548">"{count,plural, =1{يجب أن تحتوي كلمة المرور على رقم عددي واحد على الأقل.}zero{يجب أن تحتوي كلمة المرور على # رقم عددي على الأقل.}two{يجب أن تحتوي كلمة المرور على رقمَين عددين على الأقل.}few{يجب أن تحتوي كلمة المرور على # أرقام عددية على الأقل.}many{يجب أن تحتوي كلمة المرور على # رقمًا عدديًا على الأقل.}other{يجب أن تحتوي كلمة المرور على # رقم عددي على الأقل.}}"</string>
+    <string name="lockpassword_password_requires_symbols" msgid="2904870551002210131">"{count,plural, =1{يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل.}zero{يجب أن تحتوي كلمة المرور على # رمز خاص على الأقل.}two{يجب أن تحتوي كلمة المرور على رمزَين خاصين على الأقل.}few{يجب أن تحتوي كلمة المرور على # رموز خاصة على الأقل.}many{يجب أن تحتوي كلمة المرور على # رمزًا خاصًا على الأقل.}other{يجب أن تحتوي كلمة المرور على # رمز خاص على الأقل.}}"</string>
+    <string name="lockpassword_password_requires_nonletter" msgid="1185342065898300006">"{count,plural, =1{يجب أن تحتوي كلمة المرور على حرف واحد ليس من الأحرف الأبجدية على الأقل.}zero{يجب أن تحتوي كلمة المرور على # حرف ليس من الأحرف الأبجدية على الأقل.}two{يجب أن تحتوي كلمة المرور على حرفَين ليسا من الأحرف الأبجدية على الأقل.}few{يجب أن تحتوي كلمة المرور على # أحرف ليست من الأحرف الأبجدية على الأقل.}many{يجب أن تحتوي كلمة المرور على # حرفًا ليس من الأحرف الأبجدية على الأقل.}other{يجب أن تحتوي كلمة المرور على # حرف ليس من الأحرف الأبجدية على الأقل.}}"</string>
+    <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{يجب أن تحتوي كلمة المرور على حرف واحد غير رقمي على الأقل.}zero{يجب أن تحتوي كلمة المرور على # حرف غير رقمي على الأقل.}two{يجب أن تحتوي كلمة المرور على حرفَين غير رقميين على الأقل.}few{يجب أن تحتوي كلمة المرور على # أحرف غير رقمية على الأقل.}many{يجب أن تحتوي كلمة المرور على # حرفًا غير رقمي على الأقل.}other{يجب أن تحتوي كلمة المرور على # حرف غير رقمي على الأقل.}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"لا يسمح مشرف الجهاز باستخدام كلمة مرور تم استخدامها مؤخرًا"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"غير مسموح باستخدام الترتيب التصاعدي أو التنازلي أو المكرر للأرقام"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"تأكيد"</string>
@@ -646,25 +561,11 @@
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"التالي"</string>
     <string name="manage_device_admin" msgid="1044620606203916275">"تطبيقات مشرف الجهاز"</string>
     <string name="number_of_device_admins_none" msgid="152926922020437312">"ما مِن تطبيقات نشطة."</string>
-    <plurals name="number_of_device_admins" formatted="false" msgid="2528735319390151989">
-      <item quantity="zero"><xliff:g id="COUNT_1">%d</xliff:g> تطبيق نشط</item>
-      <item quantity="two">تطبيقان نشطان (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> تطبيقات نشطة</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> تطبيقًا نشطًا</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> تطبيق نشط</item>
-      <item quantity="one">تطبيق نشط واحد (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
-    </plurals>
+    <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{تطبيق واحد نشط}zero{# تطبيق نشط}two{تطبيقان نشطان}few{# تطبيقات نشطة}many{# تطبيقًا نشطًا}other{# تطبيق نشط}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"الوكلاء المعتمدون"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"لاستخدام هذه الميزة، عليك إعداد قفل الشاشة أولاً."</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"ليس هناك أي وكلاء معتمدين"</string>
-    <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
-      <item quantity="zero"><xliff:g id="COUNT">%d</xliff:g> وكيل معتمد نشط</item>
-      <item quantity="two">وكيلان (<xliff:g id="COUNT">%d</xliff:g>) معتمدان نشطان</item>
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> وكلاء معتمدين نشطين</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> وكيلاً معتمدًا نشطًا</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> وكيل معتمد نشط</item>
-      <item quantity="one">وكيل واحد معتمد نشط</item>
-    </plurals>
+    <string name="manage_trust_agents_summary_on" msgid="3302574418419446146">"{count,plural, =1{وكيل واحد معتمد نشط}zero{# وكيل معتمد نشط}two{وكيلان معتمدان نشطان}few{# وكلاء معتمدين نشطين}many{# وكيلاً معتمدًا نشطًا}other{# وكيل معتمد نشط}}"</string>
     <string name="bluetooth_settings" msgid="2967239493428695171">"بلوتوث"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"بلوتوث"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"هل تريد الإقران مع <xliff:g id="DEVICE_NAME">%1$s</xliff:g>؟"</string>
@@ -880,30 +781,9 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"تعذّر حفظ الشبكة"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"إلغاء"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"هل تريد حذف الشبكة؟"</string>
-    <plurals name="wifi_saved_access_points_summary" formatted="false" msgid="2802436466732147888">
-      <item quantity="zero">‏%d شبكة</item>
-      <item quantity="two">‏شبكتان (%d)</item>
-      <item quantity="few">‏%d شبكات</item>
-      <item quantity="many">‏%d شبكة</item>
-      <item quantity="other">‏%d شبكة</item>
-      <item quantity="one">شبكة واحدة</item>
-    </plurals>
-    <plurals name="wifi_saved_passpoint_access_points_summary" formatted="false" msgid="5802057518058840450">
-      <item quantity="zero">‏%d اشتراك</item>
-      <item quantity="two">‏اشتراكان (%d)</item>
-      <item quantity="few">‏%d اشتراكات</item>
-      <item quantity="many">‏%d اشتراكًا</item>
-      <item quantity="other">‏%d اشتراك</item>
-      <item quantity="one">اشتراك واحد</item>
-    </plurals>
-    <plurals name="wifi_saved_all_access_points_summary" formatted="false" msgid="5125849180309374451">
-      <item quantity="zero">‏%d شبكة واشتراك</item>
-      <item quantity="two">‏شبكتان واشتراكان (%d)</item>
-      <item quantity="few">‏%d شبكات واشتراكات</item>
-      <item quantity="many">‏%d شبكةً واشتراكًا</item>
-      <item quantity="other">‏%d شبكة واشتراك</item>
-      <item quantity="one">شبكة واحدة واشتراك واحد</item>
-    </plurals>
+    <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{شبكة واحدة}zero{# شبكة}two{شبكتان}few{# شبكات}many{# شبكة}other{# شبكة}}"</string>
+    <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{اشتراك واحد}zero{# اشتراك}two{اشتراكان}few{# اشتراكات}many{# اشتراكًا}other{# اشتراك}}"</string>
+    <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{شبكة واحدة واشتراك واحد}zero{# شبكة واشتراك}two{شبكتان واشتراكان}few{# شبكات واشتراكات}many{# شبكة واشتراكًا}other{# شبكة واشتراك}}"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"‏عنوان MAC للجهاز"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"‏عنوان MAC العشوائي"</string>
@@ -1135,14 +1015,7 @@
     <string name="sim_preferred_title" msgid="8850185380445309835">"‏أتريد تعديل شريحة SIM المفضلة؟"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"‏<xliff:g id="NEW_SIM">%1$s</xliff:g> هي شريحة SIM الوحيدة في جهازك، فهل تريد استخدام هذه الشريحة لبيانات الجوال والمكالمات والرسائل القصيرة SMS؟"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"‏رمز \"رقم التعريف الشخصي\" لبطاقة SIM غير صحيح، ويلزمك الاتصال الآن بمشغّل شبكة الجوّال لإلغاء قفل الجهاز."</string>
-    <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
-      <item quantity="zero">‏رمز رقم التعريف الشخصي لبطاقة SIM غير صحيح، ولم يتبق لديك أي محاولات (<xliff:g id="NUMBER_1">%d</xliff:g>).</item>
-      <item quantity="two">‏رمز رقم التعريف الشخصي لبطاقة SIM غير صحيح، ويتبقى لديك محاولتان (<xliff:g id="NUMBER_1">%d</xliff:g>).</item>
-      <item quantity="few">‏رمز رقم التعريف الشخصي لبطاقة SIM غير صحيح، ويتبقى لديك <xliff:g id="NUMBER_1">%d</xliff:g> محاولات.</item>
-      <item quantity="many">‏رمز رقم التعريف الشخصي لبطاقة SIM غير صحيح، ويتبقى لديك <xliff:g id="NUMBER_1">%d</xliff:g> محاولة.</item>
-      <item quantity="other">‏رمز رقم التعريف الشخصي لبطاقة SIM غير صحيح، ويتبقى لديك <xliff:g id="NUMBER_1">%d</xliff:g> من المحاولات.</item>
-      <item quantity="one">‏رمزPIN لبطاقة SIM غير صحيح، ولديك محاولة واحدة (<xliff:g id="NUMBER_0">%d</xliff:g>) يجب أن تتصل بعدها بمشغّل شبكة الجوّال لإلغاء قفل الجهاز.</item>
-    </plurals>
+    <string name="wrong_pin_code" msgid="8124222991071607958">"{count,plural, =1{‏رقم التعريف الشخصي لشريحة SIM غير صحيح. تتبقّى لديك محاولة واحدة يجب بعدها الاتصال بمشغّل شبكة الجوّال لفتح قفل الجهاز.}zero{‏رمز رقم التعريف الشخصي لشريحة SIM غير صحيح. تتبقّى لديك # محاولة.}two{‏رمز رقم التعريف الشخصي لشريحة SIM غير صحيح. تتبقّى لديك محاولتان.}few{‏رمز رقم التعريف الشخصي لشريحة SIM غير صحيح. تتبقّى لديك # محاولات.}many{‏رمز رقم التعريف الشخصي لشريحة SIM غير صحيح. تتبقّى لديك # محاولة.}other{‏رمز رقم التعريف الشخصي لشريحة SIM غير صحيح. تتبقّى لديك # محاولة.}}"</string>
     <string name="wrong_pin_code_one" msgid="6924852214263071441">"‏رمز \"رقم التعريف الشخصي\" لبطاقة SIM غير صحيح، ويتبقى لديك محاولة واحدة يجب بعدها الاتصال بمشغّل شبكة الجوّال لإلغاء قفل الجهاز."</string>
     <string name="pin_failed" msgid="3726505565797352255">"‏تعذّر إتمام عملية \"رقم التعريف الشخصي\" لبطاقة SIM!"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"تحديثات النظام"</string>
@@ -1160,6 +1033,8 @@
     <string name="storage_settings" msgid="7472188817781592677">"التخزين"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"مساحة التخزين وذاكرة التخزين المؤقت"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"إعدادات وحدة التخزين"</string>
+    <string name="status_eid" msgid="7532406028683438634">"‏معرّف بطاقة SIM المضمنة (EID)"</string>
+    <string name="eid_multi_sim" msgid="4581966600904959452">"‏معرّف بطاقة SIM المضمنة (مَنفذ شريحة SIM ‏%1$d)"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"‏IMEI (المنفذ %1$d لشريحة SIM)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"‏لعرض عنوان MAC، اختَر شبكة محفوظة."</string>
     <string name="status_min_number" msgid="4492899165438225714">"دقيقة"</string>
@@ -1246,6 +1121,8 @@
     <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"بإمكانك بدء استخدام \"<xliff:g id="NAME">^1</xliff:g>\""</string>
     <string name="battery_status_title" msgid="4661768220545945771">"حالة البطارية"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"مستوى البطارية"</string>
+    <string name="communal_settings_title" msgid="2845678473945902115">"الإعدادات المشتركة"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"الإعدادات المشتركة"</string>
     <string name="apn_settings" msgid="4295467389400441299">"أسماء نقاط الوصول"</string>
     <string name="apn_edit" msgid="2003683641840248741">"تعديل نقطة الوصول"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"لم يتم الضبط."</string>
@@ -1286,12 +1163,9 @@
     <string name="menu_restore" msgid="4310539620115151551">"إعادة الضبط على الإعداد التلقائي"</string>
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"‏اكتملت إعادة ضبط إعدادات APN التلقائية."</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"خيارات إعادة الضبط"</string>
-    <!-- no translation found for reset_mobile_network_settings_title (5616713931258506842) -->
-    <skip />
-    <!-- no translation found for reset_mobile_network_settings_desc (7292636387692165727) -->
-    <skip />
-    <!-- no translation found for reset_mobile_network_settings_confirm_title (7510965634669511241) -->
-    <skip />
+    <string name="reset_mobile_network_settings_title" msgid="5616713931258506842">"إعادة ضبط إعدادات شبكة الجوال"</string>
+    <string name="reset_mobile_network_settings_desc" msgid="7292636387692165727">"سيؤدي هذا الإجراء إلى إعادة ضبط كل إعدادات شبكة الجوال."</string>
+    <string name="reset_mobile_network_settings_confirm_title" msgid="7510965634669511241">"أتريد إعادة ضبط إعدادات شبكة الجوال؟"</string>
     <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"‏إعادة ضبط البلوتوث وWi‑Fi"</string>
     <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"‏سيؤدي هذا الإجراء إلى إعادة ضبط كل إعدادات Wi‑Fi والبلوتوث. لا يمكنك التراجع عن هذا الإجراء."</string>
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"إعادة الضبط"</string>
@@ -1380,14 +1254,7 @@
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"الموقع الجغرافي للملف الشخصي للعمل"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"أذونات التطبيقات لتحديد الموقع الجغرافي"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"خدمة الموقع الجغرافي غير مفعّلة"</string>
-    <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
-      <item quantity="zero"> يملك <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> تطبيق من إجمالي <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> تطبيق الإذن بالوصول إلى بيانات الموقع الجغرافي.</item>
-      <item quantity="two"> يملك تطبيقان (<xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g>) من إجمالي <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> تطبيق الإذن بالوصول إلى بيانات الموقع الجغرافي.</item>
-      <item quantity="few"> تملك <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> تطبيقات من إجمالي <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> تطبيق الإذن بالوصول إلى بيانات الموقع الجغرافي.</item>
-      <item quantity="many"> يملك <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> تطبيقًا من إجمالي <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> تطبيق الإذن بالوصول إلى بيانات الموقع الجغرافي.</item>
-      <item quantity="other"> يملك <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> تطبيق من إجمالي <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> تطبيق الإذن بالوصول إلى بيانات الموقع الجغرافي.</item>
-      <item quantity="one"> يملك تطبيق واحد (<xliff:g id="PERMITTED_LOCATION_APP_COUNT_0">%1$d</xliff:g>) من إجمالي <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> تطبيق الإذن بالوصول إلى بيانات الموقع الجغرافي.</item>
-    </plurals>
+    <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{يملك تطبيق واحد من إجمالي {total} تطبيق حق الوصول إلى بيانات الموقع الجغرافي.}zero{يملك # تطبيق من إجمالي {total} تطبيق حق الوصول إلى بيانات الموقع الجغرافي.}two{يملك تطبيقان من إجمالي {total} تطبيق حق الوصول إلى بيانات الموقع الجغرافي.}few{يملك # تطبيقات من إجمالي {total} تطبيق حق الوصول إلى بيانات الموقع الجغرافي.}many{يملك # تطبيقًا من إجمالي {total} تطبيق حق الوصول إلى بيانات الموقع الجغرافي.}other{يملك # تطبيق من إجمالي {total} تطبيق حق الوصول إلى بيانات الموقع الجغرافي.}}"</string>
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"التطبيقات التي وصلت مؤخرًا إلى الموقع الجغرافي"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"عرض الكل"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"عرض التفاصيل"</string>
@@ -1402,9 +1269,15 @@
     <string name="location_services_preference_title" msgid="604317859531782159">"خدمات الموقع الجغرافي"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"خدمات الموقع الجغرافي"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"استخدام الموقع الجغرافي"</string>
+    <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"يتعذّر ضبط المنطقة الزمنية تلقائيًا"</string>
+    <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"ميزة \"الموقع الجغرافي\" وخدمات الموقع الجغرافي غير مفعَّلة."</string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_environment" msgid="2279833212923765802"></string>
+    <string name="location_time_zone_detection_status_summary_temporarily_unavailable" msgid="6586801403644278967"></string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"الموقع الجغرافي للجهاز مطلوب"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_message" msgid="5846316326139169523">"لضبط المنطقة الزمنية باستخدام موقعك الجغرافي، فعِّل ميزة \"الموقع الجغرافي\" ثم عدِّل إعدادات المنطقة الزمنية."</string>
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"إعدادات الموقع الجغرافي"</string>
+    <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"إصلاح ذلك"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"إلغاء"</string>
     <string name="location_time_zone_detection_auto_is_off" msgid="6264253990141650280">"ميزة التعرّف التلقائي على المنطقة الزمنية غير مفعّلة."</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"تم إيقاف ميزة رصد المنطقة الزمنية للموقع الجغرافي"</string>
@@ -1528,14 +1401,7 @@
     <string name="install_applications" msgid="3921609656584369901">"مصادر غير معروفة"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"السماح بكل مصادر التطبيقات"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"التطبيقات التي تم فتحها مؤخرًا"</string>
-    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
-      <item quantity="zero">‏عرض كل التطبيقات البالغ عددها %1$d </item>
-      <item quantity="two">‏عرض كلا التطبيقين (%1$d)</item>
-      <item quantity="few">‏عرض كل التطبيقات البالغ عددها %1$d</item>
-      <item quantity="many">‏عرض كل التطبيقات البالغ عددها %1$d</item>
-      <item quantity="other">‏عرض كل التطبيقات البالغ عددها %1$d</item>
-      <item quantity="one">عرض كل التطبيقات</item>
-    </plurals>
+    <string name="see_all_apps_title" msgid="1650653853942381797">"{count,plural, =1{عرض كل التطبيقات}zero{الاطّلاع على كل الـ # تطبيق}two{الاطّلاع على كلا التطبيقَين}few{الاطّلاع على كل الـ # تطبيقات}many{الاطّلاع على كل الـ # تطبيقًا}other{الاطّلاع على كل الـ # تطبيق}}"</string>
     <string name="forgot_password_title" msgid="3967873480875239885">"تواصَل مع مشرف تكنولوجيا معلومات."</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"يمكن أن يساعدك مشرف تكنولوجيا المعلومات في إعادة ضبط رقم التعريف الشخصي أو النقش أو كلمة المرور."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"الإعدادات المتقدمة"</string>
@@ -1549,14 +1415,7 @@
     <string name="cache_header_label" msgid="2441967971921741047">"ذاكرة التخزين المؤقت"</string>
     <string name="clear_cache_btn_text" msgid="8597272828928143723">"محو ذاكرة التخزين المؤقت"</string>
     <string name="cache_size_label" msgid="313456088966822757">"ذاكرة التخزين المؤقت"</string>
-    <plurals name="uri_permissions_text" formatted="false" msgid="8212425823423508096">
-      <item quantity="zero">‏%d عنصر</item>
-      <item quantity="two">‏عنصران (%d)</item>
-      <item quantity="few">‏%d عناصر</item>
-      <item quantity="many">‏%d عنصرًا</item>
-      <item quantity="other">‏%d عنصر</item>
-      <item quantity="one">عنصر واحد</item>
-    </plurals>
+    <string name="uri_permissions_text" msgid="8406345863117405105">"{count,plural, =1{عنصر واحد}zero{# عنصر}two{عنصران}few{# عناصر}many{# عنصرًا}other{# عنصر}}"</string>
     <string name="clear_uri_btn_text" msgid="4828117421162495134">"محو إمكانية الدخول"</string>
     <string name="controls_label" msgid="8671492254263626383">"عناصر التحكم"</string>
     <string name="force_stop" msgid="2681771622136916280">"فرض الإيقاف"</string>
@@ -1705,50 +1564,38 @@
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"إظهار قائمة الاختصارات"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"لوحات مفاتيح وأدوات الملف الشخصي للعمل"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"لوحة المفاتيح على الشاشة للعمل"</string>
-    <!-- no translation found for trackpad_settings (2071131324087677005) -->
-    <skip />
-    <!-- no translation found for trackpad_mouse_settings (136226693583218429) -->
-    <skip />
-    <!-- no translation found for trackpad_settings_summary (3369855644136760402) -->
-    <skip />
-    <!-- no translation found for trackpad_tap_to_click (1938230946542070746) -->
-    <skip />
-    <!-- no translation found for trackpad_touchpad_gesture_title (7568052847609914436) -->
-    <skip />
-    <!-- no translation found for trackpad_touchpad_gesture_summary (6256074591395359124) -->
-    <skip />
-    <!-- no translation found for trackpad_reverse_scrolling_title (422877284529360866) -->
-    <skip />
-    <!-- no translation found for trackpad_reverse_scrolling_summary (6048648562887499036) -->
-    <skip />
-    <!-- no translation found for trackpad_bottom_right_tap_title (6275428879042702880) -->
-    <skip />
-    <!-- no translation found for trackpad_bottom_right_tap_summary (8734094086900680674) -->
-    <skip />
-    <!-- no translation found for trackpad_pointer_speed (7786579408631352625) -->
-    <skip />
-    <!-- no translation found for trackpad_touch_gesture (8641725062131922497) -->
-    <skip />
-    <!-- no translation found for trackpad_go_back_title (5312164160947491440) -->
-    <skip />
-    <!-- no translation found for trackpad_go_back_summary (4201901101085902768) -->
-    <skip />
-    <!-- no translation found for trackpad_go_home_title (2146525662148291552) -->
-    <skip />
-    <!-- no translation found for trackpad_go_home_summary (2222744701528360887) -->
-    <skip />
-    <!-- no translation found for trackpad_recent_apps_title (8195970908411585445) -->
-    <skip />
-    <!-- no translation found for trackpad_recent_apps_summary (2685092851677573794) -->
-    <skip />
-    <!-- no translation found for trackpad_notifications_title (3521663305043747880) -->
-    <skip />
-    <!-- no translation found for trackpad_notifications_summary (7663647367648690040) -->
-    <skip />
-    <!-- no translation found for trackpad_switch_apps_title (7342032935377284039) -->
-    <skip />
-    <!-- no translation found for trackpad_switch_apps_summary (9193942041912927440) -->
-    <skip />
+    <string name="trackpad_settings" msgid="2071131324087677005">"لوحة اللمس"</string>
+    <string name="trackpad_mouse_settings" msgid="136226693583218429">"لوحة اللمس والماوس"</string>
+    <string name="trackpad_settings_summary" msgid="3369855644136760402">"سرعة المؤشر، والإيماءات"</string>
+    <string name="trackpad_tap_to_click" msgid="1938230946542070746">"الضغط للنقر"</string>
+    <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"إيماءات لوحة اللمس"</string>
+    <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"تخصيص إيماءات التنقّل الفردية في لوحة اللمس"</string>
+    <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"عكس اتجاه التنقّل"</string>
+    <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"يتحرّك المحتوى للأعلى عندما تمرِّر سريعًا للأسفل."</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"النقر في أسفل يسار لوحة اللمس"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"انقر أسفل يسار لوحة اللمس للحصول على مزيد من الخيارات."</string>
+    <string name="trackpad_pointer_speed" msgid="7786579408631352625">"سرعة المؤشر"</string>
+    <string name="trackpad_touch_gesture" msgid="8641725062131922497">"التعرّف على إيماءات لوحة اللمس"</string>
+    <string name="trackpad_go_back_title" msgid="5312164160947491440">"الرجوع"</string>
+    <string name="trackpad_go_back_summary" msgid="4201901101085902768">"مرِّر سريعًا لليمين أو لليسار باستخدام 3 أصابع."</string>
+    <string name="trackpad_go_home_title" msgid="2146525662148291552">"الانتقال إلى الشاشة الرئيسية"</string>
+    <string name="trackpad_go_home_summary" msgid="2222744701528360887">"مرِّر سريعًا للأعلى باستخدام 3 أصابع."</string>
+    <string name="trackpad_recent_apps_title" msgid="8195970908411585445">"التطبيقات المستخدمة مؤخرًا"</string>
+    <string name="trackpad_recent_apps_summary" msgid="2685092851677573794">"مرِّر سريعًا للأعلى باستخدام 3 أصابع ثم ثبِّتها."</string>
+    <string name="trackpad_notifications_title" msgid="3521663305043747880">"الإشعارات"</string>
+    <string name="trackpad_notifications_summary" msgid="7663647367648690040">"مرِّر سريعًا للأسفل باستخدام 3 أصابع."</string>
+    <string name="trackpad_switch_apps_title" msgid="7342032935377284039">"تبديل التطبيقات"</string>
+    <string name="trackpad_switch_apps_summary" msgid="9193942041912927440">"مرِّر سريعًا لليمين أو لليسار باستخدام 4 أصابع."</string>
+    <string name="modifier_keys_settings" msgid="2537108435032034683">"مفاتيح التعديل"</string>
+    <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"تغيير سلوك المفاتيح"</string>
+    <string name="modifier_keys_reset_title" msgid="948294258402761066">"إعادة ضبط الكل"</string>
+    <string name="modifier_keys_default_summary" msgid="8701640508670973258">"الخيار التلقائي"</string>
+    <string name="modifier_keys_reset_message" msgid="5236994817619936058">"هل تريد فعلاً إعادة ضبط كل مفاتيح التعديل على الإعدادات التلقائية؟"</string>
+    <string name="modifier_keys_done" msgid="8196199314913909700">"تم"</string>
+    <string name="modifier_keys_cancel" msgid="7136520252570826772">"إلغاء"</string>
+    <string name="modifier_keys_restore" msgid="7627661630556839268">"استعادة"</string>
+    <string name="modifier_keys_picker_title" msgid="244545904150587851">"اختيار مفتاح التعديل"</string>
+    <string name="modifier_keys_picker_summary" msgid="739397232249560785">"اختيار مفتاح جديد لـ \"<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>\":"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"تلقائي"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"الكلام"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"سرعة المؤشر"</string>
@@ -1818,7 +1665,7 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"عناصر التحكّم في الميزات"</string>
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"هو قارئ شاشة مُصمَّم في الأساس للأشخاص الذين يعانون فقدان البصر أو ضعفه."</string>
-    <string name="select_to_speak_summary" msgid="1995285446766920925">"يمكنك النقر على بيانات على شاشتك لتتم قراءتها بصوت عالٍ"</string>
+    <string name="select_to_speak_summary" msgid="1995285446766920925">"يمكنك النقر على عناصر على شاشتك لتتم قراءتها بصوت عالٍ"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"الإعدادات المفضّلة للشرح"</string>
     <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"لمحة عن الإعدادات المفضّلة للشرح"</string>
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"تعرّف على مزيد من المعلومات حول الإعدادات المفضّلة للشرح"</string>
@@ -2065,38 +1912,14 @@
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"أقل سطوعًا"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"أكثر سطوعًا"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"إبقاء الميزة مفعّلة حتى بعد إعادة تشغيل الجهاز"</string>
-    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
-      <item quantity="zero">قصير (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ثانية)</item>
-      <item quantity="two">قصير (ثانيتان (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g>))</item>
-      <item quantity="few">قصير (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ثوانٍ)</item>
-      <item quantity="many">قصير (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ثانية)</item>
-      <item quantity="other">قصير (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ثانية)</item>
-      <item quantity="one">قصير (ثانية واحدة (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g>))</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
-      <item quantity="zero">متوسطة (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ثانية)</item>
-      <item quantity="two">متوسطة (ثانيتان (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g>))</item>
-      <item quantity="few">متوسطة (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ثونٍ)</item>
-      <item quantity="many">متوسطة (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ثانية)</item>
-      <item quantity="other">متوسطة (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ثانية)</item>
-      <item quantity="one">متوسطة (ثانية واحدة (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g>))</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
-      <item quantity="zero">طويلة (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ثانية)</item>
-      <item quantity="two">طويلة (ثانيتان (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g>))</item>
-      <item quantity="few">طويلة (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ثوانٍ)</item>
-      <item quantity="many">طويلة (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ثانية)</item>
-      <item quantity="other">طويلة (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ثانية)</item>
-      <item quantity="one">طويلة (ثانية واحدة (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g>))</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="4537791441118261556">
-      <item quantity="zero"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> ثانية</item>
-      <item quantity="two">ثانيتان (<xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g>)</item>
-      <item quantity="few"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ثوانٍ</item>
-      <item quantity="many"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> ثانية</item>
-      <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> ثانية</item>
-      <item quantity="one">ثانية واحدة (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g>)</item>
-    </plurals>
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (2981206111858937724) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (6867395206533459204) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (4079139970819335593) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_delay_unit_second (5979297390686370567) -->
+    <skip />
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"الإعدادات"</string>
     <string name="captioning_preview_title" msgid="2888561631323180535">"معاينة"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"خيارات عادية"</string>
@@ -2171,22 +1994,10 @@
     <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"البحث عن الأجهزة المجاورة"</string>
     <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"الأجهزة المحفوظة"</string>
     <string name="print_settings" msgid="8519810615863882491">"الطباعة"</string>
-    <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
-      <item quantity="zero">تم تفعيل <xliff:g id="COUNT">%1$d</xliff:g> خدمة طباعة.</item>
-      <item quantity="two">تم تفعيل خدمتي طباعة (<xliff:g id="COUNT">%1$d</xliff:g>).</item>
-      <item quantity="few">تم تفعيل <xliff:g id="COUNT">%1$d</xliff:g> خدمات طباعة.</item>
-      <item quantity="many">تم تفعيل <xliff:g id="COUNT">%1$d</xliff:g> خدمة طباعة.</item>
-      <item quantity="other">تم تفعيل <xliff:g id="COUNT">%1$d</xliff:g> خدمة طباعة.</item>
-      <item quantity="one">تم تفعيل خدمة طباعة واحدة.</item>
-    </plurals>
-    <plurals name="print_jobs_summary" formatted="false" msgid="3933688846338306536">
-      <item quantity="zero"><xliff:g id="COUNT">%1$d</xliff:g> مهمة طباعة</item>
-      <item quantity="two">مهمتان (<xliff:g id="COUNT">%1$d</xliff:g>) للطباعة</item>
-      <item quantity="few"><xliff:g id="COUNT">%1$d</xliff:g> مهمات طباعة</item>
-      <item quantity="many"><xliff:g id="COUNT">%1$d</xliff:g> مهمة طباعة</item>
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> مهمة طباعة</item>
-      <item quantity="one">مهمة طباعة واحدة</item>
-    </plurals>
+    <!-- no translation found for print_settings_summary (1458773840720811915) -->
+    <skip />
+    <!-- no translation found for print_jobs_summary (7040836482336577323) -->
+    <skip />
     <string name="print_settings_title" msgid="7680498284751129935">"خدمات الطباعة"</string>
     <string name="print_no_services_installed" msgid="7554057966540602692">"لم يتم تثبيت أي خدمات"</string>
     <string name="print_no_printers_found" msgid="4833082484646109486">"لم يتم العثور على طابعات"</string>
@@ -2253,64 +2064,27 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"قد تكون بعض الميزات محظورة."</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"استخدام أعلى للبطارية"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"عرض التطبيقات ذات أعلى معدّل استخدام للبطارية"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (6258554134146272311) -->
-    <skip />
-    <!-- no translation found for battery_tip_limited_temporarily_summary (6836981984725209843) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_title (4332616280495788195) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_future_bypass_summary (7870758621381307597) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_title (1414785238383255699) -->
-    <skip />
-    <!-- no translation found for battery_tip_dock_defender_active_summary (3512082623718801459) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"تم تحسين الشحن لحماية البطارية"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"للمساعدة في إطالة عمر البطارية، يتم تحسين الشحن."</string>
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"تم تحسين الشحن لحماية البطارية"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"للمساعدة في إطالة عمر البطارية، يتم تحسين الشحن في وضع الإرساء."</string>
+    <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"تم تحسين الشحن لحماية البطارية"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"للمساعدة في إطالة عمر البطارية، يتم تحسين الشحن في وضع الإرساء."</string>
     <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"الشحن بالكامل"</string>
-    <!-- no translation found for battery_tip_dock_defender_temporarily_bypassed_summary (1099500476761333281) -->
-    <skip />
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"لحماية البطارية، سيتم تحسين الشحن في المرة التالية التي يكون فيها الجهاز اللوحي في وضع الإرساء."</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"مزيد من المعلومات عن إيقاف الشحن مؤقتًا"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"استئناف الشحن"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"يشمل النشاط الكثيف لطاقة البطارية في الخلفية"</string>
-    <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
-      <item quantity="zero">‏حظر %1$d تطبيق</item>
-      <item quantity="two">‏حظر تطبيقين (%1$d)</item>
-      <item quantity="few">‏حظر %1$d تطبيقات</item>
-      <item quantity="many">‏حظر %1$d تطبيقًا</item>
-      <item quantity="other">‏حظر %1$d تطبيق</item>
-      <item quantity="one">‏حظر تطبيق واحد (%1$d)</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_handled_title" formatted="false" msgid="5862649927574803958">
-      <item quantity="zero">‏تم تقييد %2$d تطبيق مؤخرًا.</item>
-      <item quantity="two">‏تم تقييد تطبيقين (%2$d) مؤخرًا.</item>
-      <item quantity="few">‏تم تقييد %2$d تطبيقات مؤخرًا.</item>
-      <item quantity="many">‏تم تقييد %2$d تطبيقًا مؤخرًا.</item>
-      <item quantity="other">‏تم تقييد %2$d تطبيق مؤخرًا.</item>
-      <item quantity="one">‏تم تقييد %1$s مؤخرًا.</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
-      <item quantity="zero">‏هناك %2$d تطبيق يستخدم البطارية في الخلفية بدرجة عالية</item>
-      <item quantity="two">‏هناك تطبيقان (%2$d) يستخدمان البطارية في الخلفية بدرجة عالية</item>
-      <item quantity="few">‏هناك %2$d تطبيقات تستخدم البطارية في الخلفية بدرجة عالية</item>
-      <item quantity="many">‏هناك %2$d تطبيقًا يستخدم البطارية في الخلفية بدرجة عالية</item>
-      <item quantity="other">‏هناك %2$d تطبيق يستخدم البطارية في الخلفية بدرجة عالية</item>
-      <item quantity="one">‏يستخدم تطبيق \"%1$s\" البطارية في الخلفية بدرجة عالية</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
-      <item quantity="zero">يتعذّر تشغيل هذه التطبيقات في الخلفية.</item>
-      <item quantity="two">يتعذّر تشغيل هذين التطبيقين في الخلفية.</item>
-      <item quantity="few">يتعذّر تشغيل هذه التطبيقات في الخلفية.</item>
-      <item quantity="many">يتعذّر تشغيل هذه التطبيقات في الخلفية.</item>
-      <item quantity="other">يتعذّر تشغيل هذه التطبيقات في الخلفية.</item>
-      <item quantity="one">يتعذّر تشغيل هذا التطبيق في الخلفية.</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_app_dialog_title" formatted="false" msgid="7897944678619251740">
-      <item quantity="zero">‏هل تريد تقييد %1$d تطبيق؟</item>
-      <item quantity="two">هل تريد تقييد تطبيقين؟</item>
-      <item quantity="few">‏هل تريد تقييد %1$d تطبيقات؟</item>
-      <item quantity="many">‏هل تريد تقييد %1$d تطبيقًا؟</item>
-      <item quantity="other">‏هل تريد تقييد %1$d تطبيق؟</item>
-      <item quantity="one">هل تريد تقييد التطبيق؟</item>
-    </plurals>
+    <!-- no translation found for battery_tip_restrict_title (4537101947310626753) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_handled_title (7142074986508706853) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_summary (7539469590829235277) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_handled_summary (3535697154547199190) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_app_dialog_title (1649476357343160240) -->
+    <skip />
     <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"لتوفير شحن البطارية، أوقف <xliff:g id="APP">%1$s</xliff:g> عن استخدام البطارية في الخلفية علمًا بأن هذا التطبيق قد لا يعمل على نحو صحيح وقد تتأخر الإشعارات."</string>
     <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"لتوفير شحن البطارية، أوقف هذه التطبيقات عن استخدام البطارية في الخلفية علمًا بأن التطبيقات المقيدة قد لا تعمل على نحو صحيح وقد تتأخر الإشعارات.\n\nالتطبيقات:"</string>
     <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"لتوفير شحن البطارية، أوقف هذه التطبيقات عن استخدام البطارية في الخلفية علمًا بأن التطبيقات المقيدة قد لا تعمل على نحو صحيح وقد تتأخر الإشعارات.\n\nالتطبيقات:\n<xliff:g id="APP_LIST">%1$s</xliff:g>."</string>
@@ -2324,28 +2098,16 @@
     <string name="smart_battery_title" msgid="9095903608520254254">"إدارة التطبيقات تلقائيًا"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"عندما يرصد \"مدير البطارية\" تطبيقات تستنزف شحن البطارية، سيتوفر لديك خيار بتقييد هذه التطبيقات، علمًا بأن التطبيقات المقيدة قد لا تعمل على نحو صحيح وقد تتأخر الإشعارات."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"التطبيقات المقيّدة"</string>
-    <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
-      <item quantity="zero">‏تحديد مدى استخدام البطارية لـ %1$d تطبيق</item>
-      <item quantity="two">تحديد مدى استخدام البطارية لتطبيقين</item>
-      <item quantity="few">‏تحديد مدى استخدام البطارية لـ %1$d تطبيقات</item>
-      <item quantity="many">‏تحديد مدى استخدام البطارية لـ %1$d تطبيقًا</item>
-      <item quantity="other">‏تحديد مدى استخدام البطارية لـ %1$d تطبيق</item>
-      <item quantity="one">تحديد مدى استخدام البطارية لتطبيق واحد</item>
-    </plurals>
+    <!-- no translation found for restricted_app_summary (1022307922754893997) -->
+    <skip />
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"مُقيَّد <xliff:g id="TIME">%1$s</xliff:g>."</string>
     <string name="restricted_app_detail_footer" msgid="3495725286882138803">"تم حظر استخدام هذه التطبيقات للبطارية في الخلفية، وبالتالي قد لا تعمل كما هو متوقّع وقد يتأخر ظهور الإشعارات الخاصة بها."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"استخدام مدير البطارية"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"الرصد عندما تستنزف تطبيقات شحن البطارية."</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"رصد التطبيقات التي تستنزف البطارية"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"رصد التطبيقات التي تستنزف البطارية"</string>
-    <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
-      <item quantity="zero">‏تم تقييد %1$d تطبيق.</item>
-      <item quantity="two">‏تم تقييد تطبيقين (%1$d).</item>
-      <item quantity="few">‏تم تقييد %1$d تطبيقات.</item>
-      <item quantity="many">‏تم تقييد %1$d تطبيقًا.</item>
-      <item quantity="other">‏تم تقييد %1$d تطبيق.</item>
-      <item quantity="one">‏تم تقييد تطبيق واحد (%1$d).</item>
-    </plurals>
+    <!-- no translation found for battery_manager_app_restricted (2583902700677009173) -->
+    <skip />
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
     <string name="battery_missing_message" msgid="400958471814422770">"حدثت مشكلة أثناء قراءة مقياس مستوى شحن البطارية."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
@@ -2509,10 +2271,8 @@
     <string name="advanced_security_title" msgid="7117581975877192652">"إعدادات متقدمة"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"لا تتوفر بيانات الاعتماد لهذا المستخدم"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"‏تم التثبيت للاستخدام بواسطة الشبكة الافتراضية الخاصة (VPN) والتطبيقات."</string>
-    <!-- no translation found for credential_for_wifi (2286560570630763556) -->
-    <skip />
-    <!-- no translation found for credential_for_wifi_in_use (7276290656840986618) -->
-    <skip />
+    <string name="credential_for_wifi" msgid="2286560570630763556">"‏تم التثبيت للاستخدام بواسطة Wi-Fi"</string>
+    <string name="credential_for_wifi_in_use" msgid="7276290656840986618">"‏تم التثبيت للاستخدام بواسطة Wi-Fi (قيد الاستخدام)"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"هل تريد إزالة جميع المحتوى؟"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"تم مسح تخزين بيانات الاعتماد."</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"تعذر محو وحدة تخزين بيانات الاعتماد."</string>
@@ -2537,14 +2297,8 @@
     <string name="remove_credential_management_app" msgid="6089291496976812786">"إزالة التطبيق"</string>
     <string name="remove_credential_management_app_dialog_title" msgid="5713525435104706772">"هل تريد إزالة هذا التطبيق؟"</string>
     <string name="remove_credential_management_app_dialog_message" msgid="7739474298063646935">"لن يدير هذا التطبيق الشهادات، ولكنه سيظل على جهازك. سيتم إلغاء تثبيت أي شهادات ثبّتها التطبيق."</string>
-    <plurals name="number_of_urls" formatted="false" msgid="403979258551655023">
-      <item quantity="zero">‏<xliff:g id="NUMBER_1">%d</xliff:g> عنوان URL</item>
-      <item quantity="two">‏عنوانا URL (<xliff:g id="NUMBER_1">%d</xliff:g>)</item>
-      <item quantity="few">‏<xliff:g id="NUMBER_1">%d</xliff:g> عناوين URL</item>
-      <item quantity="many">‏<xliff:g id="NUMBER_1">%d</xliff:g> عنوان URL</item>
-      <item quantity="other">‏<xliff:g id="NUMBER_1">%d</xliff:g> عنوان URL</item>
-      <item quantity="one">‏عنوان URL واحد (<xliff:g id="NUMBER_0">%d</xliff:g>)</item>
-    </plurals>
+    <!-- no translation found for number_of_urls (1128699121050872188) -->
+    <skip />
     <string name="emergency_tone_title" msgid="6673118505206685168">"إشارة اتصال الطوارئ"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"تعيين السلوك عند إجراء اتصال بالطوارئ"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"الاحتفاظ بنسخة احتياطية"</string>
@@ -2587,14 +2341,8 @@
     <string name="notification_history_today" msgid="5828496957208237230">"آخر 24 ساعة"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"المؤجلة"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"الإشعارات التي تم تجاهلها مؤخرًا"</string>
-    <plurals name="notification_history_count" formatted="false" msgid="1859304685071321991">
-      <item quantity="zero"><xliff:g id="NUMBER_1">%d</xliff:g> إشعار</item>
-      <item quantity="two">إشعاران (<xliff:g id="NUMBER_1">%d</xliff:g>)</item>
-      <item quantity="few"><xliff:g id="NUMBER_1">%d</xliff:g> إشعارات</item>
-      <item quantity="many"><xliff:g id="NUMBER_1">%d</xliff:g> إشعارًا</item>
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> إشعار</item>
-      <item quantity="one">إشعار واحد (<xliff:g id="NUMBER_0">%d</xliff:g>)</item>
-    </plurals>
+    <!-- no translation found for notification_history_count (885305572972482838) -->
+    <skip />
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"نغمة الرنين والاهتزاز عند الاتصال"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"تفاصيل الشبكة"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"تم تفعيل المزامنة"</string>
@@ -2766,16 +2514,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"‏هل تريد تفعيل شهادة CA للنظام؟"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"‏هل تريد إيقاف شهادة CA للنظام؟"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"‏هل تريد إزالة شهادة CA للمستخدم بشكل دائم؟"</string>
-    <!-- no translation found for credential_being_used_by (3682869943025283499) -->
-    <skip />
-    <!-- no translation found for credential_contains (3146519680449595771) -->
-    <skip />
-    <!-- no translation found for one_userkey (6363426728683951234) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2097644070227688983) -->
-    <skip />
-    <!-- no translation found for one_cacrt (982242103604501559) -->
-    <skip />
+    <string name="credential_being_used_by" msgid="3682869943025283499">"يتم الاستخدام من قِبل"</string>
+    <string name="credential_contains" msgid="3146519680449595771">"يحتوي هذا الإدخال على"</string>
+    <string name="one_userkey" msgid="6363426728683951234">"مفتاح مستخدم واحد"</string>
+    <string name="one_usercrt" msgid="2097644070227688983">"شهادة مستخدم واحدة"</string>
+    <string name="one_cacrt" msgid="982242103604501559">"‏شهادة CA واحدة"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"‏%d شهادات CA"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"تفاصيل بيانات الاعتماد"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"تمت إزالة بيانات الاعتماد: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
@@ -2790,25 +2533,13 @@
     <string name="additional_system_update_settings_list_item_title" msgid="7230385345152138051">"تحديثات إضافية للنظام"</string>
     <string name="ssl_ca_cert_warning" msgid="3898387588657346106">"قد تكون الشبكة خاضعة للمراقبة"</string>
     <string name="done_button" msgid="6269449526248267">"تم"</string>
-    <plurals name="ssl_ca_cert_dialog_title" formatted="false" msgid="5491460811755938449">
-      <item quantity="zero">الثقة أو إزالة الشهادة</item>
-      <item quantity="two">الثقة أو إزالة الشهادتين</item>
-      <item quantity="few">الثقة أو إزالة الشهادات</item>
-      <item quantity="many">الثقة أو إزالة الشهادات</item>
-      <item quantity="other">الثقة أو إزالة الشهادات</item>
-      <item quantity="one">الثقة أو إزالة الشهادة</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_dialog_title (1032088078702042090) -->
+    <skip />
     <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{يتم تثبيت مرجع تصديق واحد من قِبل \"{orgName}\" على جهازك، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة الجهاز، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادة، يُرجى التواصُل مع المشرف.}zero{يتم تثبيت مرجع تصديق من قِبل \"{orgName}\" على جهازك، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة الجهاز، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يُرجى التواصُل مع المشرف.}two{يتم تثبيت مرجعَي تصديق من قِبل \"{orgName}\" على جهازك، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة الجهاز، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يُرجى التواصُل مع المشرف.}few{يتم تثبيت مراجع تصديق من قِبل \"{orgName}\" على جهازك، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة الجهاز، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يُرجى التواصُل مع المشرف.}many{يتم تثبيت مرجع تصديق من قِبل \"{orgName}\" على جهازك، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة الجهاز، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يُرجى التواصُل مع المشرف.}other{يتم تثبيت مرجع تصديق من قِبل \"{orgName}\" على جهازك، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة الجهاز، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يُرجى التواصُل مع المشرف.}}"</string>
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{يتم تثبيت مرجع تصديق واحد من قِبل \"{orgName}\" لملفك الشخصي للعمل، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادة، يُرجى التواصُل مع المشرف.}zero{يتم تثبيت مرجع تصديق من قِبل \"{orgName}\" لملفك الشخصي للعمل، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يُرجى التواصُل مع المشرف.}two{يتم تثبيت مرجعَي تصديق من قِبل \"{orgName}\" لملفك الشخصي للعمل، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يُرجى التواصُل مع المشرف.}few{يتم تثبيت مراجع تصديق من قِبل \"{orgName}\" لملفك الشخصي للعمل، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يُرجى التواصُل مع المشرف.}many{يتم تثبيت مرجع تصديق من قِبل \"{orgName}\" لملفك الشخصي للعمل، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يُرجى التواصُل مع المشرف.}other{يتم تثبيت مرجع تصديق من قِبل \"{orgName}\" لملفك الشخصي للعمل، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يُرجى التواصُل مع المشرف.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"يُمكن لأي جهة خارجية مراقبة نشاط الشبكة، بما في ذلك الرسائل الإلكترونية والتطبيقات ومواقع الويب الآمنة.\n\nويُمكن لبيانات اعتماد موثوقة ومثبتة على جهاز الكمبيوتر إتاحة إجراء ذلك."</string>
-    <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
-      <item quantity="zero">الاطّلاع على الشهادات</item>
-      <item quantity="two">الاطّلاع على الشهادتين</item>
-      <item quantity="few">الاطّلاع على الشهادات</item>
-      <item quantity="many">الاطّلاع على الشهادات</item>
-      <item quantity="other">الاطّلاع على الشهادات</item>
-      <item quantity="one">الاطّلاع على الشهادة</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_settings_button (2044927302268394991) -->
+    <skip />
     <string name="user_settings_title" msgid="6550866465409807877">"مستخدمون متعدِّدون"</string>
     <string name="user_list_title" msgid="1387379079186123404">"المستخدمون والملفات الشخصية"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"إضافة مستخدم أو ملف شخصي"</string>
@@ -2847,9 +2578,12 @@
     <string name="enable_guest_calling" msgid="8300355036005240911">"السماح للمستخدِم الضيف باستخدام الهاتف"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"ستتم مشاركة سجلّ المكالمات مع المستخدِم الضيف."</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"تفعيل المكالمات الهاتفية والرسائل القصيرة"</string>
+    <string name="user_grant_admin" msgid="6511342422361803820">"منح هذا المستخدم امتيازات المشرف"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"حذف حساب المستخدم"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"تفعيل المكالمات الهاتفية والرسائل القصيرة"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"‏ستتم مشاركة سجل المكالمات والرسائل القصيرة SMS مع هذا المستخدم."</string>
+    <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"هل تريد إزالة امتيازات المشرف؟"</string>
+    <string name="user_revoke_admin_confirm_message" msgid="2719667217562982318">"هل تريد فعلاً إزالة امتيازات المشرف الخاصة بهذا المستخدم؟"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"معلومات الطوارئ"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"المعلومات وجهات الاتصال للمستخدم <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"فتح <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -2995,10 +2729,12 @@
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"التطبيقات المنسوخة"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"يمكنك إنشاء نسخة ثانية من أحد التطبيقات لتتمكن من استخدام الحسابَين في الوقت نفسه."</string>
     <string name="cloned_apps_summary" msgid="8805362440770795709">"تم نسخ <xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g>، ويمكن أيضًا نسخ <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g>."</string>
-    <!-- no translation found for cloned_app_creation_summary (4642627294993918502) -->
+    <!-- no translation found for delete_all_app_clones (3489053361980624999) -->
     <skip />
-    <!-- no translation found for cloned_app_created_summary (7277912971544890710) -->
+    <!-- no translation found for delete_all_app_clones_failure (6821033414547132335) -->
     <skip />
+    <string name="cloned_app_creation_summary" msgid="4642627294993918502">"جارٍ إنشاء نسخة من التطبيق…"</string>
+    <string name="cloned_app_created_summary" msgid="7277912971544890710">"تم نسخ التطبيق."</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"اللغات والإيماءات والوقت والنسخ الاحتياطي"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"لغات النظام، لغات التطبيقات"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"‏لاسلكي، wi-fi، اتصال شبكة، إنترنت، لاسلكي، بيانات، واي فاي"</string>
@@ -3332,14 +3068,8 @@
     <string name="promote_conversation_title" msgid="4731148769888238722">"هذه محادثة."</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"إضافة إلى قسم المحادثات"</string>
     <string name="priority_conversation_count_zero" msgid="3862289535537564713">"ما مِن محادثات ذات أولوية."</string>
-    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
-      <item quantity="zero"><xliff:g id="COUNT_1">%d</xliff:g> محادثة ذات أولوية</item>
-      <item quantity="two">محادثتان (<xliff:g id="COUNT_1">%d</xliff:g>) ذواتا أولوية</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> محادثات ذات أولوية</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> محادثة ذات أولوية</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> محادثة ذات أولوية</item>
-      <item quantity="one">محادثة واحدة (<xliff:g id="COUNT_0">%d</xliff:g>) ذات أولوية</item>
-    </plurals>
+    <!-- no translation found for priority_conversation_count (7291234530844412077) -->
+    <skip />
     <string name="important_conversations" msgid="1233893707189659401">"المحادثات ذات الأولوية"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"تظهر في أعلى قسم المحادثات في شكل فقاعات عائمة."</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"تظهر في أعلى قسم المحادثات."</string>
@@ -3368,22 +3098,10 @@
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"عند فتح قفل الجهاز، تظهر الإشعارات في صورة بانر أعلى الشاشة."</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"جميع إشعارات \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"جميع إشعارات \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
-    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
-      <item quantity="zero">حوالي <xliff:g id="NUMBER_1">%,d</xliff:g> إشعار في اليوم</item>
-      <item quantity="two">حوالي إشعارين في يوم (<xliff:g id="NUMBER_1">%,d</xliff:g>)</item>
-      <item quantity="few">حوالي <xliff:g id="NUMBER_1">%,d</xliff:g> إشعارات في اليوم</item>
-      <item quantity="many">حوالي <xliff:g id="NUMBER_1">%,d</xliff:g> إشعارًا في اليوم</item>
-      <item quantity="other">حوالي <xliff:g id="NUMBER_1">%,d</xliff:g> إشعار في اليوم</item>
-      <item quantity="one">حوالي إشعار واحد في اليوم (<xliff:g id="NUMBER_0">%d</xliff:g>)</item>
-    </plurals>
-    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
-      <item quantity="zero">حوالي <xliff:g id="NUMBER_1">%,d</xliff:g> إشعار في الأسبوع</item>
-      <item quantity="two">حوالي إشعارين في الأسبوع (<xliff:g id="NUMBER_1">%,d</xliff:g>)</item>
-      <item quantity="few">حوالي <xliff:g id="NUMBER_1">%,d</xliff:g> إشعارات في الأسبوع</item>
-      <item quantity="many">حوالي <xliff:g id="NUMBER_1">%,d</xliff:g> إشعارًا في الأسبوع</item>
-      <item quantity="other">حوالي <xliff:g id="NUMBER_1">%,d</xliff:g> إشعار في الأسبوع</item>
-      <item quantity="one">حوالي إشعار واحد في الأسبوع (<xliff:g id="NUMBER_0">%d</xliff:g>)</item>
-    </plurals>
+    <!-- no translation found for notifications_sent_daily (10274479224185437) -->
+    <skip />
+    <!-- no translation found for notifications_sent_weekly (7895656213187555346) -->
+    <skip />
     <string name="notifications_sent_never" msgid="9081278709126812062">"أبدًا"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"إشعارات التطبيقات والأجهزة"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"تحديد التطبيقات والأجهزة التي يمكنها قراءة الإشعارات"</string>
@@ -3452,14 +3170,8 @@
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"الأذونات"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"يمكن لهذا التطبيق استخدام أذونات تطبيقك الشخصي <xliff:g id="NAME">%1$s</xliff:g>، مثلاً الوصول إلى الموقع الجغرافي أو مساحة التخزين أو جهات الاتصال."</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"ما مِن تطبيقات مرتبطة."</string>
-    <plurals name="interact_across_profiles_number_of_connected_apps" formatted="false" msgid="6991750455661974772">
-      <item quantity="zero">تم ربط <xliff:g id="COUNT_1">%d</xliff:g> تطبيق.</item>
-      <item quantity="two">تم ربط تطبيقين (<xliff:g id="COUNT_1">%d</xliff:g>).</item>
-      <item quantity="few">تم ربط <xliff:g id="COUNT_1">%d</xliff:g> تطبيقات.</item>
-      <item quantity="many">تم ربط <xliff:g id="COUNT_1">%d</xliff:g> تطبيقًا.</item>
-      <item quantity="other">تم ربط <xliff:g id="COUNT_1">%d</xliff:g> تطبيق.</item>
-      <item quantity="one">تم ربط تطبيق واحد (<xliff:g id="COUNT_0">%d</xliff:g>).</item>
-    </plurals>
+    <!-- no translation found for interact_across_profiles_number_of_connected_apps (4000424798291479207) -->
+    <skip />
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"لربط هذه التطبيقات، عليك تثبيت تطبيق <xliff:g id="NAME">%1$s</xliff:g> في ملفك الشخصي للعمل."</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"لربط هذه التطبيقات، عليك تثبيت تطبيق <xliff:g id="NAME">%1$s</xliff:g> في ملفك الشخصي."</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"انقر لتنزيل التطبيق."</string>
@@ -3474,14 +3186,8 @@
     <string name="notification_channels_other" msgid="18159805343647908">"غير ذلك"</string>
     <string name="no_channels" msgid="4716199078612071915">"لم ينشر هذا التطبيق أي إشعارات."</string>
     <string name="app_settings_link" msgid="6725453466705333311">"الإعدادات الإضافية في التطبيق"</string>
-    <plurals name="deleted_channels" formatted="false" msgid="5963473421547029532">
-      <item quantity="zero">تم حذف <xliff:g id="COUNT_1">%d</xliff:g> فئة</item>
-      <item quantity="two">تم حذف فئتين (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
-      <item quantity="few">تم حذف <xliff:g id="COUNT_1">%d</xliff:g> فئات</item>
-      <item quantity="many">تم حذف <xliff:g id="COUNT_1">%d</xliff:g> فئة</item>
-      <item quantity="other">تم حذف <xliff:g id="COUNT_1">%d</xliff:g> فئة</item>
-      <item quantity="one">تم حذف فئة واحدة (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
-    </plurals>
+    <!-- no translation found for deleted_channels (8489800381509312964) -->
+    <skip />
     <string name="app_notification_block_title" msgid="3880322745749900296">"حظر الكل"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"عدم عرض هذه الإشعارات"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"عرض الإشعارات"</string>
@@ -3631,7 +3337,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"طلب إدخال كلمة المرور قبل إزالة التثبيت"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"إقفال الجهاز عند إزالة التثبيت"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"‏تأكيد حذف بيانات شريحة SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"‏يجب إثبات هويتك قبل محو بيانات شريحة eSIM."</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"‏يجب إثبات هويتك قبل محو بيانات شريحة eSIM."</string>
     <string name="memtag_title" msgid="5096176296797727201">"الحماية المتقدمة للذاكرة (تجريبية)"</string>
     <string name="memtag_toggle" msgid="8695028758462939212">"الحماية المتقدمة للذاكرة"</string>
     <string name="memtag_intro" msgid="579408691329568953">"تساعدك هذه الميزة التجريبية على حماية جهازك من الأخطاء التي قد تُعرّض أمانك للخطر."</string>
@@ -4134,26 +3840,12 @@
     <string name="enterprise_privacy_none" msgid="6026527690979756431">"بدون"</string>
     <string name="enterprise_privacy_enterprise_installed_packages" msgid="9114143640515900082">"التطبيقات المثبّتة"</string>
     <string name="enterprise_privacy_apps_count_estimation_info" msgid="7959907857710107792">"‏عدد التطبيقات تقديري. وقد لا يشمل التطبيقات المثبتة خارج متجر Play."</string>
-    <plurals name="enterprise_privacy_number_packages_lower_bound" formatted="false" msgid="5403847001419529018">
-      <item quantity="zero"><xliff:g id="COUNT_1">%d</xliff:g> تطبيق كحد أدنى</item>
-      <item quantity="two">تطبيقان (<xliff:g id="COUNT_1">%d</xliff:g>) كحد أدنى</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> تطبيقات كحد أدنى</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> تطبيقًا كحد أدنى</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> تطبيق كحد أدنى</item>
-      <item quantity="one">تطبيق واحد (<xliff:g id="COUNT_0">%d</xliff:g>) كحد أدنى</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages_lower_bound" msgid="5317634640873658149">"{count,plural, =1{تطبيق واحد كحد أدنى}zero{# تطبيق كحد أدنى}two{تطبيقان كحد أدنى}few{# تطبيقات كحد أدنى}many{# تطبيقًا كحد أدنى}other{# تطبيق كحد أدنى}}"</string>
     <string name="enterprise_privacy_location_access" msgid="8023838718108456971">"أذونات تحديد الموقع"</string>
     <string name="enterprise_privacy_microphone_access" msgid="7242958026470143653">"أذونات الميكروفون"</string>
     <string name="enterprise_privacy_camera_access" msgid="7685460535880069016">"أذونات الكاميرا"</string>
     <string name="enterprise_privacy_enterprise_set_default_apps" msgid="7498546659083996300">"التطبيقات التلقائية"</string>
-    <plurals name="enterprise_privacy_number_packages" formatted="false" msgid="8568544906431825430">
-      <item quantity="zero"><xliff:g id="COUNT_1">%d</xliff:g> تطبيق</item>
-      <item quantity="two">تطبيقان (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> تطبيقات</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> تطبيقًا</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> تطبيق</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> تطبيق</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages" msgid="5294444005035188274">"{count,plural, =1{تطبيق واحد}zero{# تطبيق}two{تطبيقان}few{# تطبيقات}many{# تطبيقًا}other{# تطبيق}}"</string>
     <string name="enterprise_privacy_input_method" msgid="3278314982700662246">"لوحة المفاتيح التلقائية"</string>
     <string name="enterprise_privacy_input_method_name" msgid="2974859490559054584">"ضبط على <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
     <string name="enterprise_privacy_always_on_vpn_device" msgid="1735829327405126695">"‏تم تفعيل إعداد \"شبكة افتراضية خاصة (VPN) دائمة التفعيل\""</string>
@@ -4163,26 +3855,12 @@
     <string name="enterprise_privacy_ca_certs_device" msgid="1816495877258727663">"بيانات الاعتماد الموثوقة"</string>
     <string name="enterprise_privacy_ca_certs_personal" msgid="1516422660828485795">"بيانات اعتماد موثوقة في ملفك الشخصي"</string>
     <string name="enterprise_privacy_ca_certs_work" msgid="4318941788592655561">"بيانات اعتماد موثوقة في ملفك الشخصي للعمل"</string>
-    <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="6459725295322004179">
-      <item quantity="zero">‏<xliff:g id="COUNT_1">%d</xliff:g> شهادة CA كحد أدنى</item>
-      <item quantity="two">‏شهادتا CA (<xliff:g id="COUNT_1">%d</xliff:g>) كحد أدنى</item>
-      <item quantity="few">‏<xliff:g id="COUNT_1">%d</xliff:g> شهادات CA كحد أدنى</item>
-      <item quantity="many">‏<xliff:g id="COUNT_1">%d</xliff:g> شهادة CA كحد أدنى</item>
-      <item quantity="other">‏<xliff:g id="COUNT_1">%d</xliff:g> شهادة CA كحد أدنى</item>
-      <item quantity="one">‏شهادة CA واحدة (<xliff:g id="COUNT_0">%d</xliff:g>) كحد أدنى</item>
-    </plurals>
+    <string name="enterprise_privacy_number_ca_certs" msgid="4540897122831942658">"{count,plural, =1{‏شهادة CA واحدة كحد أدنى}zero{‏# شهادة CA كحد أدنى}two{‏شهادتا CA كحد أدنى}few{‏# شهادات CA كحد أدنى}many{‏# شهادة CA كحد أدنى}other{‏# شهادة CA كحد أدنى}}"</string>
     <string name="enterprise_privacy_lock_device" msgid="464054894363899866">"يمكن للمشرف قفل الجهاز وإعادة ضبط كلمة المرور"</string>
     <string name="enterprise_privacy_wipe_device" msgid="869589182352244591">"يمكن للمشرف حذف جميع بيانات الجهاز"</string>
     <string name="enterprise_privacy_failed_password_wipe_device" msgid="7045164901334821226">"محاولات كلمة المرور الخاطئة قبل حذف جميع بيانات الجهاز"</string>
     <string name="enterprise_privacy_failed_password_wipe_work" msgid="2537582942554484170">"محاولات كلمة المرور الخاطئة قبل حذف بيانات الملف الشخصي للعمل"</string>
-    <plurals name="enterprise_privacy_number_failed_password_wipe" formatted="false" msgid="8811973918944217791">
-      <item quantity="zero"><xliff:g id="COUNT_1">%d</xliff:g> محاولة</item>
-      <item quantity="two">محاولتان (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> محاولات</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> محاولة</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> محاولة</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> محاولة</item>
-    </plurals>
+    <string name="enterprise_privacy_number_failed_password_wipe" msgid="2695842143305867642">"{count,plural, =1{محاولة واحدة}zero{# محاولة}two{محاولتان}few{# محاولات}many{# محاولة}other{# محاولة}}"</string>
     <string name="do_disclosure_generic" msgid="3067459392402324538">"تتولى مؤسستك إدارة هذا الجهاز."</string>
     <string name="do_disclosure_with_name" msgid="867544298924410766">"تتم إدارة هذا الجهاز بواسطة <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
@@ -4210,33 +3888,12 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"بعد دفع ثمن الجهاز بالكامل:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"تتم إزالة كل القيود من الجهاز."</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"يمكنك إلغاء تثبيت تطبيق شركة بيع الأجهزة بالائتمان."</string>
-    <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
-      <item quantity="zero">تطبيقات للكاميرا</item>
-      <item quantity="two">تطبيقان للكاميرا</item>
-      <item quantity="few">تطبيقات للكاميرا</item>
-      <item quantity="many">تطبيقات للكاميرا</item>
-      <item quantity="other">تطبيقات للكاميرا</item>
-      <item quantity="one">تطبيق واحد للكاميرا</item>
-    </plurals>
+    <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{تطبيق الكاميرا}zero{تطبيقات الكاميرا}two{تطبيقا الكاميرا}few{تطبيقات الكاميرا}many{تطبيقات الكاميرا}other{تطبيقات الكاميرا}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"تطبيق التقويم"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"تطبيق جهات الاتصال"</string>
-    <plurals name="default_email_app_title" formatted="false" msgid="8338194872609410234">
-      <item quantity="zero">تطبيقات برنامج بريد إلكتروني</item>
-      <item quantity="two">تطبيقان لبرنامج بريد إلكتروني</item>
-      <item quantity="few">تطبيقات برنامج بريد إلكتروني</item>
-      <item quantity="many">تطبيقات برنامج بريد إلكتروني</item>
-      <item quantity="other">تطبيقات برنامج بريد إلكتروني</item>
-      <item quantity="one">تطبيق برنامج بريد إلكتروني</item>
-    </plurals>
+    <string name="default_email_app_title" msgid="5411280873093244250">"{count,plural, =1{تطبيق البريد الإلكتروني}zero{تطبيقات البريد الإلكتروني}two{تطبيقا البريد الإلكتروني}few{تطبيقات البريد الإلكتروني}many{تطبيقات البريد الإلكتروني}other{تطبيقات البريد الإلكتروني}}"</string>
     <string name="default_map_app_title" msgid="7569231732944853320">"تطبيق الخريطة"</string>
-    <plurals name="default_phone_app_title" formatted="false" msgid="4222188821845826493">
-      <item quantity="zero">تطبيقات الهاتف</item>
-      <item quantity="two">تطبيقان للهاتف</item>
-      <item quantity="few">تطبيقات الهاتف</item>
-      <item quantity="many">تطبيقات الهاتف</item>
-      <item quantity="other">تطبيقات الهاتف</item>
-      <item quantity="one">تطبيق الهاتف</item>
-    </plurals>
+    <string name="default_phone_app_title" msgid="795025972645464135">"{count,plural, =1{تطبيق الهاتف}zero{تطبيقات الهاتف}two{تطبيقا الهاتف}few{تطبيقات الهاتف}many{تطبيقات الهاتف}other{تطبيقات الهاتف}}"</string>
     <string name="app_names_concatenation_template_2" msgid="8320181646458855457">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>، <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>"</string>
     <string name="app_names_concatenation_template_3" msgid="7019703249717854148">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>، <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>، <xliff:g id="THIRD_APP_NAME">%3$s</xliff:g>"</string>
     <string name="storage_default_internal_storage" msgid="4055660218818688131">"هذا الجهاز"</string>
@@ -4263,17 +3920,18 @@
     <string name="webview_uninstalled_for_user" msgid="627352948986275488">"(تم إلغاء التثبيت للمستخدم <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="webview_disabled_for_user" msgid="5809886172032644498">"(غير مغعّلة للمستخدم <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="autofill_app" msgid="7595308061826307921">"خدمة الملء التلقائي"</string>
+    <string name="default_autofill_app" msgid="372234803718251606">"الخدمة التلقائية للملء التلقائي"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"كلمات المرور"</string>
-    <plurals name="autofill_passwords_count" formatted="false" msgid="7715009165029452622">
-      <item quantity="zero"><xliff:g id="COUNT_1">%1$d</xliff:g> كلمة مرور</item>
-      <item quantity="two">كلمتا مرور (<xliff:g id="COUNT_1">%1$d</xliff:g>)</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%1$d</xliff:g> كلمات مرور</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%1$d</xliff:g> كلمة مرور</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> كلمة مرور</item>
-      <item quantity="one">كلمة مرور واحدة (<xliff:g id="COUNT_0">%1$d</xliff:g>)</item>
-    </plurals>
+    <string name="credman_credentials" msgid="5937331545565783811">"خدمات كلمات المرور وخدمات التحقّق من الهوية"</string>
+    <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{كلمة مرور واحدة}zero{# كلمة مرور}two{كلمتا مرور}few{# كلمات مرور}many{# كلمة مرور}other{# كلمة مرور}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"تلقائي، ملء، ملء تلقائي، كلمة مرور"</string>
+    <string name="credman_keywords" msgid="7236954350284379264">"بيانات الاعتماد، مفتاح مرور، كلمة مرور"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"‏&lt;b&gt;تأكّد من أنك تثق بهذا التطبيق&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; تستخدم البيانات المعروضة على الشاشة لتحديد ما يمكن ملؤه تلقائيًا."</string>
+    <string name="credman_confirmation_message_title" msgid="8847900085593880729">"‏هل تريد إيقاف %1$s؟"</string>
+    <string name="credman_confirmation_message" msgid="1485617504425237430">"عندما تسجِّل الدخول لن يتم ملء المعلومات المحفوظة، مثلاً العناوين أو طرق الدفع. لمواصلة ملء معلوماتك المحفوظة، عليك تحديد خدمة تلقائية للملء التلقائي."</string>
+    <string name="credman_error_message_title" msgid="5108868200002966901">"الحد الأقصى المسموح به لخدمات كلمات المرور وخدمات التحقّق من الهوية"</string>
+    <string name="credman_error_message" msgid="4058425433345908579">"يمكن أن يكون لديك ما يصل إلى 5 خدمات للملء التلقائي وخدمات لإدارة كلمات المرور مفعَّلة في الوقت نفسه. عليك إيقاف خدمة لإضافة المزيد."</string>
+    <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"إيقاف"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"الملء التلقائي"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"مستوى التسجيل"</string>
     <string name="autofill_max_partitions" msgid="7342195529574406366">"الحد الأقصى للطلبات في كل جلسة"</string>
@@ -4456,8 +4114,7 @@
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"استخدام التطبيقات للبيانات"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"وضع الشبكة <xliff:g id="NETWORKMODEID">%1$d</xliff:g> غير صالح، وعليك تجاهله."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"أسماء نقاط الوصول"</string>
-    <!-- no translation found for keywords_access_point_names (8174967126858505945) -->
-    <skip />
+    <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"عدم التوفُّر عند الربط بمشغّل شبكة الجوّال <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"عرض المزيد"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"هل تريد تفعيل <xliff:g id="CARRIER_NAME">%1$s</xliff:g>؟"</string>
@@ -4547,14 +4204,7 @@
     <string name="copyable_slice_toast" msgid="1008251852798990606">"تمّ نسخ <xliff:g id="COPY_CONTENT">%1$s</xliff:g> إلى الحافظة."</string>
     <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"استخدام \"سهولة الاستخدام\""</string>
-    <plurals name="accessibility_usage_summary" formatted="false" msgid="6910643986958263005">
-      <item quantity="zero">يحظى <xliff:g id="SERVICE_COUNT">%1$d</xliff:g> تطبيق بوصول كامل إلى جهازك.</item>
-      <item quantity="two">يحظى تطبيقان (<xliff:g id="SERVICE_COUNT">%1$d</xliff:g>) بوصول كامل إلى جهازك.</item>
-      <item quantity="few">يحظى <xliff:g id="SERVICE_COUNT">%1$d</xliff:g> تطبيقات بوصول كامل إلى جهازك.</item>
-      <item quantity="many">يحظى <xliff:g id="SERVICE_COUNT">%1$d</xliff:g> تطبيقًا بوصول كامل إلى جهازك.</item>
-      <item quantity="other">يحظى <xliff:g id="SERVICE_COUNT">%1$d</xliff:g> تطبيق بوصول كامل إلى جهازك.</item>
-      <item quantity="one">يحظى تطبيق واحد بوصول كامل إلى جهازك.</item>
-    </plurals>
+    <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{يملك تطبيق واحد حق وصول كامل إلى جهازك.}zero{يملك # تطبيق حق وصول كامل إلى جهازك.}two{يملك تطبيقان حق وصول كامل إلى جهازك.}few{يملك # تطبيقات حق وصول كامل إلى جهازك.}many{يملك # تطبيقًا حق وصول كامل إلى جهازك.}other{يملك # تطبيق حق وصول كامل إلى جهازك.}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"معلومات مهمة"</string>
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"متابعة"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"لا، شكرًا"</string>
@@ -4742,10 +4392,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"السماح بشبكة الجيل الثاني"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"شبكة الجيل الثاني أقل أمانًا، ولكن قد تحسِّن الاتصال بالإنترنت في بعض المواقع الجغرافية. يُسمح باستخدام شبكة الجيل الثاني دائمًا لمكالمات الطوارئ."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"يطلب مشغّل شبكة الجوال <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> توفّر شبكة الجيل الثاني"</string>
-    <!-- no translation found for allow_null_algorithms_title (9143076634352979096) -->
-    <skip />
-    <!-- no translation found for allow_null_algorithms_summary (5874570357011783211) -->
-    <skip />
+    <string name="allow_null_algorithms_title" msgid="9143076634352979096">"السماح بالاتصال الأقل أمانًا"</string>
+    <string name="allow_null_algorithms_summary" msgid="5874570357011783211">"قد تحسِّن الإشارة في بعض المواقع الجغرافية. يتم دائمًا السماح بالاتصالات الأقل أمانًا في مكالمات الطوارئ."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"جميع الخدمات"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"إظهار الوصول إلى الحافظة"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"إظهار رسالة عندما يصل التطبيق إلى نص أو صور أو محتوى آخر تم نسخه."</string>
@@ -4853,18 +4501,11 @@
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"تنسيق رمز الاستجابة السريعة غير صالح."</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"‏التحويل إلى شريحة eSIM"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"‏نقل بيانات شريحة eSIM إلى جهاز آخر"</string>
-    <!-- no translation found for background_install_preference_summary (3065219346519340364) -->
-    <skip />
-    <!-- no translation found for background_install_title (607913515188276168) -->
-    <skip />
-    <!-- no translation found for background_install_summary (3890296129543309666) -->
-    <skip />
-    <!-- no translation found for background_install_feature_list_no_entry (2071343281272266154) -->
-    <skip />
-    <!-- no translation found for background_install_uninstall_button_description (1189649052911501249) -->
-    <skip />
-    <!-- no translation found for background_install_before (8608614957688912715) -->
-    <skip />
-    <!-- no translation found for background_install_after (7983488897570908149) -->
-    <skip />
+    <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{تطبيق واحد}zero{# تطبيق}two{تطبيقان}few{# تطبيقات}many{# تطبيقًا}other{# تطبيق}}"</string>
+    <string name="background_install_title" msgid="607913515188276168">"التطبيقات التي تم تثبيتها في الخلفية"</string>
+    <string name="background_install_summary" msgid="3890296129543309666">"يمكن للشركة المصنّعة لجهازك تثبيت التطبيقات عليه في الخلفية أو السماح لمشغّل شبكة الجوّال والشركاء الآخرين بتنفيذ ذلك.\n\nأي تطبيقات مدرجة هنا ليست مطلوبة كي يعمل جهازك بشكل طبيعي. يمكنك إلغاء تثبيت التطبيقات التي تريدها."</string>
+    <string name="background_install_feature_list_no_entry" msgid="2071343281272266154">"لم يتم تثبيت أي تطبيقات في الخلفية."</string>
+    <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"إلغاء تثبيت التطبيق"</string>
+    <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{التطبيقات التي تم تثبيتها خلال آخر شهر}zero{التطبيقات التي تم تثبيتها خلال آخر # شهر}two{التطبيقات التي تم تثبيتها خلال آخر شهرَين}few{التطبيقات التي تم تثبيتها خلال آخر # شهور}many{التطبيقات التي تم تثبيتها خلال آخر # شهرًا}other{التطبيقات التي تم تثبيتها خلال آخر # شهر}}"</string>
+    <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{التطبيقات التي تم تثبيتها قبل أكثر من شهر واحد}zero{التطبيقات التي تم تثبيتها قبل أكثر من # شهر}two{التطبيقات التي تم تثبيتها قبل أكثر من شهرَين}few{التطبيقات التي تم تثبيتها قبل أكثر من # شهور}many{التطبيقات التي تم تثبيتها قبل أكثر من # شهرًا}other{التطبيقات التي تم تثبيتها قبل أكثر من # شهر}}"</string>
 </resources>

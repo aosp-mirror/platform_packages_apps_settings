@@ -26,10 +26,7 @@
     <string name="off" msgid="2898123876644709799">"অফ আছে"</string>
     <string name="device_info_default" msgid="1406619232867343310">"অজ্ঞাত"</string>
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"তথ্য দেখুৱাবলৈ টিপক"</string>
-    <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
-      <item quantity="one">আপুনি এতিয়া বিকাশকৰ্তা হোৱাৰ পৰা<xliff:g id="STEP_COUNT_1">%1$d</xliff:g> পদক্ষেপ দূৰত।</item>
-      <item quantity="other">আপুনি এতিয়া বিকাশকৰ্তা হোৱাৰ পৰা<xliff:g id="STEP_COUNT_1">%1$d</xliff:g> পদক্ষেপ দূৰত।</item>
-    </plurals>
+    <string name="show_dev_countdown" msgid="2936506773086395069">"{count,plural, =1{আপুনি এতিয়া এগৰাকী বিকাশকৰ্তা হোৱাৰ পৰা # টা পদক্ষেপ দূৰত আছে।}one{আপুনি এতিয়া এগৰাকী বিকাশকৰ্তা হোৱাৰ পৰা # টা পদক্ষেপ দূৰত আছে।}other{আপুনি এতিয়া এগৰাকী বিকাশকৰ্তা হোৱাৰ পৰা # টা পদক্ষেপ দূৰত আছে।}}"</string>
     <string name="show_dev_on" msgid="2840850085134853754">"এতিয়া আপুনি এজন বিকাশকৰ্তা!"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"কোনো প্ৰয়োজন নাই, আপুনি ইতিমধ্যে এজন ডেভেলপাৰ।"</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"অনুগ্ৰহ কৰি প্ৰথমে বিকাশকৰ্তাৰ বিকল্পসমূহ সক্ষম কৰক।"</string>
@@ -122,7 +119,7 @@
     <string name="stylus_default_notes_app" msgid="3111290761558445874">"ছিষ্টেমৰ টোকা গ্ৰহণ কৰা এপ্‌"</string>
     <string name="stylus_textfield_handwriting" msgid="6962904622425646128">"পাঠৰ ক্ষেত্ৰত ষ্টাইলাছ লিখন"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"ষ্টাইলাছ বুটামত দিয়া আটাইবোৰ টিপা উপেক্ষা কৰক"</string>
-    <string name="stylus_usi_header_title" msgid="1949011797718972583">"USI ষ্টাইলাছ"</string>
+    <string name="stylus_connected_devices_title" msgid="2823967577941359812">"ষ্টাইলাছ"</string>
     <string name="date_and_time" msgid="1788358029823431692">"তাৰিখ আৰু সময়"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"প্ৰক্সি"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"মচক"</string>
@@ -160,10 +157,23 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"এই এপ্‌টোৰ বাবে ছেটিঙৰ পৰা ভাষা বাছনি কৰাৰ সুবিধা উপলব্ধ নহয়।"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"ভাষাটো এপ্‌টোত উপলব্ধ ভাষাসমূহতকৈ পৃথক হ’ব পাৰে। কিছুমান এপে এই ছেটিংটো সমৰ্থন নকৰিব পাৰে।"</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"কেৱল ভাষা বাছনি কৰাৰ সুবিধা থকা এপ্‌সমূহ ইয়াত দেখুওৱা হৈছে।"</string>
-    <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
-      <item quantity="one">বাছনি কৰা ভাষাসমূহ আঁতৰাবনে?</item>
-      <item quantity="other">বাছনি কৰা ভাষাসমূহ আঁতৰাবনে?</item>
-    </plurals>
+    <!-- no translation found for regional_preferences_title (4304567374498629528) -->
+    <skip />
+    <!-- no translation found for regional_preferences_summary (1189876997389469650) -->
+    <skip />
+    <!-- no translation found for regional_preferences_main_page_sub_title (4666033861956272891) -->
+    <skip />
+    <!-- no translation found for temperature_preferences_title (5009881556503629058) -->
+    <skip />
+    <!-- no translation found for calendar_preferences_title (8312485828206542600) -->
+    <skip />
+    <!-- no translation found for first_day_of_week_preferences_title (1971850087589599553) -->
+    <skip />
+    <!-- no translation found for numbers_preferences_title (6094837605398562369) -->
+    <skip />
+    <!-- no translation found for default_string_of_regional_preference (1595774718180886349) -->
+    <skip />
+    <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{বাছনি কৰা ভাষাটো আঁতৰাবনে?}one{বাছনি কৰা ভাষাসমূহ আঁতৰাবনে?}other{বাছনি কৰা ভাষাসমূহ আঁতৰাবনে?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"পাঠ অইন এটা ভাষাত দেখুওৱা হ\'ব।"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"আটাইবোৰ ভাষা আঁতৰাব নোৱাৰি"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"কমেও এটা পচন্দৰ ভাষা ৰাখক"</string>
@@ -182,6 +192,7 @@
     <string name="apply" msgid="7834684883190163536">"প্ৰয়োগ কৰক"</string>
     <string name="share" msgid="8502235338607613795">"শ্বেয়াৰ কৰক"</string>
     <string name="add" msgid="8335206931421683426">"যোগ কৰক"</string>
+    <string name="remove" msgid="1028414219245072102">"আঁতৰাওক"</string>
     <string name="settings_label" msgid="943294133671632976">"ছেটিং"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"ছেটিং"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"ছেটিঙৰ শ্বৰ্টকাট"</string>
@@ -193,6 +204,7 @@
     <string name="roaming_warning" msgid="7703647889040229013">"ৰ’মিঙৰ মাচুল প্ৰযোজ্য হ’ব পাৰে।"</string>
     <string name="date_time_auto" msgid="4239202185055225869">"স্বয়ংক্ৰিয়ভাৱে সময় ছেট কৰক"</string>
     <string name="zone_auto_title" msgid="5141692422373097957">"স্বয়ংক্ৰিয়ভাৱে ছেট কৰক"</string>
+    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"এই ট’গলটো অন হৈ থাকিলে সময় মণ্ডল ছেট কৰিবলৈ অৱস্থান ব্যৱহাৰ কৰা হ’ব"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"স্থানীয় ডিফ’ল্ট ব্যৱহাৰ কৰক"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"২৪ ঘণ্টীয়া সজ্জা ব্যৱহাৰ কৰক"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"সময়"</string>
@@ -221,10 +233,8 @@
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"যেনে, জয়েজৰ Android।"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"অৱস্থান"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"অৱস্থান ব্যৱহাৰ কৰক"</string>
-    <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="one">অন আছে - <xliff:g id="COUNT_1">%1$d</xliff:g>টা এপে অৱস্থান এক্সেছ কৰিব পাৰে</item>
-      <item quantity="other">অন আছে - <xliff:g id="COUNT_1">%1$d</xliff:g>টা এপে অৱস্থান এক্সেছ কৰিব পাৰে</item>
-    </plurals>
+    <!-- no translation found for location_settings_summary_location_on (7029728269719893381) -->
+    <skip />
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"ল’ড হৈ আছে…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"নিকটৱৰ্তী ডিভাইচৰ সৈতে যোগাযোগ কৰিব পৰাৰ অনুমতি থকা এপ্‌সমূহে সংযুক্ত হৈ থকা ডিভাইচৰ আপেক্ষিক স্থান নিৰ্ধাৰণ কৰিব পাৰে।"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"এপ্‌ আৰু সেৱাৰ বাবে অৱস্থানৰ এক্সেছ অফ কৰা আছে। আপুনি কোনো জৰুৰীকালীন নম্বৰলৈ কল কৰিলে অথবা বাৰ্তা পঠিয়ালে আপোনাৰ ডিভাইচৰ অৱস্থান তথাপি জৰুৰীকালীন পৰিস্থিতিত সঁহাৰি দিয়া লোকলৈ পঠিওৱা হ’ব পাৰে।"</string>
@@ -304,10 +314,8 @@
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"ফিংগাৰপ্ৰিন্ট আনলক ব্যৱহাৰ কৰাৰ সময়ত"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"কৰ্মস্থানৰ ফিংগাৰপ্ৰিণ্ট"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"ফিংগাৰপ্ৰিণ্ট যোগ কৰক"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
-      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> টা ফিংগাৰপ্ৰিণ্ট যোগ দিয়া হৈছে</item>
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> টা ফিংগাৰপ্ৰিণ্ট যোগ দিয়া হৈছে</item>
-    </plurals>
+    <!-- no translation found for security_settings_fingerprint_preference_summary (8486134175759676037) -->
+    <skip />
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"নিজৰ ফিংগাৰপ্ৰিণ্ট ছেট আপ কৰক"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"ফিংগাৰপ্ৰিন্ট আনলকৰ অনুমতি দিয়ক"</string>
@@ -530,53 +538,20 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"আপুনি পৰৱৰ্তী চেষ্টাত ভুল আৰ্হি আঁকিলে আপোনাৰ কৰ্মস্থানৰ প্ৰ’ফাইল আৰু ইয়াৰ ডেটা মচা হ’ব"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"আপুনি পৰৱৰ্তী চেষ্টাত ভুল পিন দিলে আপোনাৰ কৰ্মস্থানৰ প্ৰ’ফাইল আৰু ইয়াৰ ডেটা মচা হ’ব"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"আপুনি পৰৱৰ্তী প্ৰয়াসত ভুল পাছৱৰ্ড দিলে, আপোনাৰ কৰ্মস্থানৰ প্ৰ\'ফাইলটো আৰু তাৰ লগত জড়িত ডেটা মচা হ\'ব"</string>
-    <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
-      <item quantity="one">অতি কমেও <xliff:g id="COUNT_1">%d</xliff:g> টা বর্ণ থাকিবই লাগিব</item>
-      <item quantity="other">অতি কমেও <xliff:g id="COUNT_1">%d</xliff:g> টা বর্ণ থাকিবই লাগিব</item>
-    </plurals>
+    <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{অতি কমেও # টা বৰ্ণ থাকিবই লাগিব}one{অতি কমেও # টা বৰ্ণ থাকিবই লাগিব}other{অতি কমেও # টা বৰ্ণ থাকিবই লাগিব}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{যদি কেৱল সংখ্যা ব্যৱহাৰ কৰিছে, অতি কমেও ১ টা অংকৰ হ’বই লাগিব}one{যদি কেৱল সংখ্যা ব্যৱহাৰ কৰিছে, অতি কমেও # টা অংকৰ হ’বই লাগিব}other{যদি কেৱল সংখ্যা ব্যৱহাৰ কৰিছে, অতি কমেও # টা অংকৰ হ’বই লাগিব}}"</string>
-    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
-      <item quantity="one">পিনত কমেও <xliff:g id="COUNT_1">%d</xliff:g>টা সংখ্যা থাকিবই লাগিব</item>
-      <item quantity="other">পিনত কমেও <xliff:g id="COUNT_1">%d</xliff:g>টা সংখ্যা থাকিবই লাগিব</item>
-    </plurals>
-    <plurals name="lockpassword_password_too_long" formatted="false" msgid="8118091957172967677">
-      <item quantity="one"><xliff:g id="NUMBER_1">%d</xliff:g>টা বর্ণতকৈ কম হ\'বই লাগিব</item>
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g>টা বর্ণতকৈ কম হ\'বই লাগিব</item>
-    </plurals>
-    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="8706992338720310765">
-      <item quantity="one"><xliff:g id="NUMBER_1">%d</xliff:g>টা সংখ্যাতকৈ কম হ\'বই লাগিব</item>
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g>টা সংখ্যাতকৈ কম হ\'বই লাগিব</item>
-    </plurals>
+    <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{পিনটোত অতি কমেও # টা সংখ্যা থাকিবই লাগিব}one{পিনটোত অতি কমেও # টা সংখ্যা থাকিবই লাগিব}other{পিনটোত অতি কমেও # টা সংখ্যা থাকিবই লাগিব}}"</string>
+    <string name="lockpassword_password_too_long" msgid="1940345313260498308">"{count,plural, =1{# টা বৰ্ণতকৈ কম হ’বই লাগিব}one{# টা বৰ্ণতকৈ কম হ’বই লাগিব}other{# টা বৰ্ণতকৈ কম হ’বই লাগিব}}"</string>
+    <string name="lockpassword_pin_too_long" msgid="1678212054564388576">"{count,plural, =1{# টা সংখ্যাতকৈ কম হ’বই লাগিব}one{# টা সংখ্যাতকৈ কম হ’বই লাগিব}other{# টা সংখ্যাতকৈ কম হ’বই লাগিব}}"</string>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"ডিভাইচ এডমিনে আপুনি ব্যৱহাৰ কৰা অন্তিমটো পিন আকৌ ব্যৱহাৰ কৰিবলৈ অনুমতি দিয়া নাই"</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"কেৱল বৈধ বৰ্ণহে দিয়ক"</string>
-    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="2385916409676839024">
-      <item quantity="one">অতি কমেও <xliff:g id="COUNT">%d</xliff:g> টা বৰ্ণ থাকিব লাগিব</item>
-      <item quantity="other">অতি কমেও <xliff:g id="COUNT">%d</xliff:g> বৰ্ণ থাকিব লাগিব</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="2057467885488612701">
-      <item quantity="one">অতি কমেও <xliff:g id="COUNT">%d</xliff:g>টা সৰুফলাৰ বৰ্ণ থাকিব লাগিব</item>
-      <item quantity="other">অতি কমেও <xliff:g id="COUNT">%d</xliff:g>টা সৰুফলাৰ বৰ্ণ থাকিব লাগিব</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="4541266279643052025">
-      <item quantity="one">অতি কমেও <xliff:g id="COUNT">%d</xliff:g>টা বৰফলাৰ বৰ্ণ থাকিব লাগিব</item>
-      <item quantity="other">অতি কমেও <xliff:g id="COUNT">%d</xliff:g>টা বৰফলাৰ বৰ্ণ থাকিব লাগিব</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="70617964591376248">
-      <item quantity="one">কমেও <xliff:g id="COUNT">%d</xliff:g>টা অংক থাকিব লাগিব</item>
-      <item quantity="other">কমেও <xliff:g id="COUNT">%d</xliff:g>টা অংক থাকিব লাগিব</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="7981236881269921943">
-      <item quantity="one">অতি কমেও <xliff:g id="COUNT">%d</xliff:g>টা বিশেষ চিহ্ন থাকিব লাগিব</item>
-      <item quantity="other">অতি কমেও <xliff:g id="COUNT">%d</xliff:g>টা বিশেষ চিহ্ন থাকিব লাগিব</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="1567877061888948467">
-      <item quantity="one">অতি কমেও <xliff:g id="COUNT">%d</xliff:g>টা সংখ্যা বা প্ৰতীক থাকিব লাগিব</item>
-      <item quantity="other">অতি কমেও <xliff:g id="COUNT">%d</xliff:g>টা সংখ্যা বা প্ৰতীক থাকিব লাগিব</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonnumerical" formatted="false" msgid="5056743974888384475">
-      <item quantity="one">অতি কমেও <xliff:g id="COUNT">%d</xliff:g>টা এনেকুৱা বৰ্ণ থাকিবই লাগিব যিটো সংখ্যা নহয়</item>
-      <item quantity="other">অতি কমেও <xliff:g id="COUNT">%d</xliff:g>টা এনেকুৱা বৰ্ণ থাকিবই লাগিব যিটো সংখ্যা নহয়</item>
-    </plurals>
+    <string name="lockpassword_password_requires_letters" msgid="7058340182953750553">"{count,plural, =1{অতি কমেও ১ টা বৰ্ণ থাকিবই লাগিব}one{অতি কমেও # টা বৰ্ণ থাকিবই লাগিব}other{অতি কমেও # টা বৰ্ণ থাকিবই লাগিব}}"</string>
+    <string name="lockpassword_password_requires_lowercase" msgid="3286121470522077547">"{count,plural, =1{অতি কমেও ১ টা সৰুফলা বৰ্ণ থাকিবই লাগিব}one{অতি কমেও # টা সৰুফলা বৰ্ণ থাকিবই লাগিব}other{অতি কমেও # টা সৰুফলা বৰ্ণ থাকিবই লাগিব}}"</string>
+    <string name="lockpassword_password_requires_uppercase" msgid="720312543910397772">"{count,plural, =1{অতি কমেও ১ টা বৰফলা বৰ্ণ থাকিবই লাগিব}one{অতি কমেও # টা বৰফলা বৰ্ণ থাকিবই লাগিব}other{অতি কমেও # টা বৰফলা বৰ্ণ থাকিবই লাগিব}}"</string>
+    <string name="lockpassword_password_requires_numeric" msgid="3886918493600507548">"{count,plural, =1{অতি কমেও ১ টা সংখ্যা থাকিবই লাগিব}one{অতি কমেও # টা সংখ্যা থাকিবই লাগিব}other{অতি কমেও # টা সংখ্যা থাকিবই লাগিব}}"</string>
+    <string name="lockpassword_password_requires_symbols" msgid="2904870551002210131">"{count,plural, =1{অতি কমেও ১ টা বিশেষ প্ৰতীক থাকিবই লাগিব}one{অতি কমেও # টা বিশেষ প্ৰতীক থাকিবই লাগিব}other{অতি কমেও # টা বিশেষ প্ৰতীক থাকিবই লাগিব}}"</string>
+    <string name="lockpassword_password_requires_nonletter" msgid="1185342065898300006">"{count,plural, =1{অতি কমেও ১ টা সংখ্যা অথবা প্ৰতীক থাকিবই লাগিব}one{অতি কমেও # টা সংখ্যা অথবা প্ৰতীক থাকিবই লাগিব}other{অতি কমেও # টা সংখ্যা অথবা প্ৰতীক থাকিবই লাগিব}}"</string>
+    <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{অতি কমেও ১ টা এনেকুৱা বৰ্ণ থাকিবই লাগিব যিটো সংখ্যা নহয়}one{অতি কমেও # টা এনেকুৱা বৰ্ণ থাকিবই লাগিব যিকেইটা সংখ্যা নহয়}other{অতি কমেও # টা এনেকুৱা বৰ্ণ থাকিবই লাগিব যিকেইটা সংখ্যা নহয়}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"ডিভাইচৰ প্ৰশাসকে শেহতীয়া পাছৱৰ্ড ব্যৱহাৰ কৰিব নিদিয়ে"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"সংখ্যাবোৰৰ ঊৰ্দ্ধগামী, অধোগামী বা পুনৰাবৃত্তি ক্ৰম অনুমোদিত নহয়"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"নিশ্চিত কৰক"</string>
@@ -586,17 +561,11 @@
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"পৰৱৰ্তী"</string>
     <string name="manage_device_admin" msgid="1044620606203916275">"ডিভাইচৰ প্ৰশাসকৰ এপসমূহ"</string>
     <string name="number_of_device_admins_none" msgid="152926922020437312">"কোনো সক্ৰিয় এপ্ নাই"</string>
-    <plurals name="number_of_device_admins" formatted="false" msgid="2528735319390151989">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>টা সক্ৰিয় এপ্</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>টা সক্ৰিয় এপ্</item>
-    </plurals>
+    <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{# টা সক্ৰিয় এপ্‌}one{# টা সক্ৰিয় এপ্‌}other{# টা সক্ৰিয় এপ্‌}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"বিশ্বাসী এজেণ্টসমূহ"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"ব্যৱহাৰ কৰিবলৈ প্ৰথমে এটা স্ক্ৰীন লক ছেট কৰিব লাগিব"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"নাই"</string>
-    <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g>টা সক্ৰিয় বিশ্বাসী এজেণ্ট</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g>টা সক্ৰিয় বিশ্বাসী এজেণ্ট</item>
-    </plurals>
+    <string name="manage_trust_agents_summary_on" msgid="3302574418419446146">"{count,plural, =1{১ টা সক্ৰিয় বিশ্বাসী এজেণ্ট}one{# টা সক্ৰিয় বিশ্বাসী এজেণ্ট}other{# টা সক্ৰিয় বিশ্বাসী এজেণ্ট}}"</string>
     <string name="bluetooth_settings" msgid="2967239493428695171">"ব্লুটুথ"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"ব্লুটুথ"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>ৰ সৈতে পেয়াৰ কৰিবনে?"</string>
@@ -812,18 +781,9 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"নেটৱৰ্ক ছেভ কৰাত ব্যৰ্থ হ’ল"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"বাতিল কৰক"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"নেটৱৰ্কটো পাহৰেনে?"</string>
-    <plurals name="wifi_saved_access_points_summary" formatted="false" msgid="2802436466732147888">
-      <item quantity="one">%d টা নেটৱৰ্ক</item>
-      <item quantity="other">%d টা নেটৱৰ্ক</item>
-    </plurals>
-    <plurals name="wifi_saved_passpoint_access_points_summary" formatted="false" msgid="5802057518058840450">
-      <item quantity="one">%d গ্ৰাহকভুক্তি</item>
-      <item quantity="other">%d গ্ৰাহকভুক্তি</item>
-    </plurals>
-    <plurals name="wifi_saved_all_access_points_summary" formatted="false" msgid="5125849180309374451">
-      <item quantity="one">%dটা নেটৱৰ্ক আৰু গ্ৰাহকভুক্তি</item>
-      <item quantity="other">%dটা নেটৱৰ্ক আৰু গ্ৰাহকভুক্তি</item>
-    </plurals>
+    <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{১ টা নেটৱৰ্ক}one{# টা নেটৱৰ্ক}other{# টা নেটৱৰ্ক}}"</string>
+    <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{১ টা ছাবস্ক্ৰিপশ্বন}one{# টা ছাবস্ক্ৰিপশ্বন}other{# টা ছাবস্ক্ৰিপশ্বন}}"</string>
+    <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{১ টা নেটৱৰ্ক আৰু ছাবস্ক্ৰিপশ্বন}one{# টা নেটৱৰ্ক আৰু ছাবস্ক্ৰিপশ্বন}other{# টা নেটৱৰ্ক আৰু ছাবস্ক্ৰিপশ্বন}}"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"ডিভাইচৰ MAC ঠিকনা"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"যাদৃচ্ছিক MAC ঠিকনা"</string>
@@ -1055,10 +1015,7 @@
     <string name="sim_preferred_title" msgid="8850185380445309835">"অগ্ৰাধিকাৰ দিয়া ছিমখন আপডে’ট কৰিবনে?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> আপোনাৰ ডিভাইচটোৰ একমাত্ৰ ছিম। আপুনি এই ছিমটো ম’বাইল ডেটা, কল আৰু এছএমএছ বাৰ্তাৰ বাবে ব্যৱহাৰ কৰিব খুজেনে?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"ভুল ছিম পিন ক\'ড, আপোনাৰ ডিভাইচটো আনলক কৰিবলৈ আপুনি এতিয়া আপোনাৰ বাহকৰ সৈতে যোগাযোগ কৰিবই লাগিব।"</string>
-    <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
-      <item quantity="one">ভুল ছিম পিন ক’ড, আপোনাৰ <xliff:g id="NUMBER_1">%d</xliff:g> টা প্ৰচেষ্টা বাকী আছে৷</item>
-      <item quantity="other">ভুল ছিম পিন ক’ড, আপোনাৰ <xliff:g id="NUMBER_1">%d</xliff:g> টা প্ৰচেষ্টা বাকী আছে৷</item>
-    </plurals>
+    <string name="wrong_pin_code" msgid="8124222991071607958">"{count,plural, =1{ছিমৰ পিন ক’ড ভুল হৈছে, আপোনাৰ ডিভাইচটো আনলক কৰিবলৈ আপোনাৰ বাহকৰ লগত যোগাযোগ কৰিবই লগা হোৱাৰ পূৰ্বে আপোনাৰ ওচৰত # টা প্ৰয়াস বাকী আছে।}one{ছিমৰ পিন ক’ড ভুল হৈছে, আপোনাৰ ওচৰত # টা প্ৰয়াস বাকী আছে।}other{ছিমৰ পিন ক’ড ভুল হৈছে, আপোনাৰ ওচৰত # টা প্ৰয়াস বাকী আছে।}}"</string>
     <string name="wrong_pin_code_one" msgid="6924852214263071441">"ভুল ছিম পিন ক’ড, আপোনাৰ ডিভাইচৰ লক খুলিবলৈ বাহকৰ লগত যোগাযোগ কৰিবই লগা হোৱাৰ পূৰ্বে আপোনাৰ ১ টা প্ৰয়াস বাকী আছে।"</string>
     <string name="pin_failed" msgid="3726505565797352255">"ছিম পিন অপাৰেশ্বন সফল নহ\'ল!"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"ছিষ্টেম আপডেইট"</string>
@@ -1076,6 +1033,8 @@
     <string name="storage_settings" msgid="7472188817781592677">"ষ্ট’ৰেজ"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"ষ্ট’ৰেজ আৰু কেশ্ব"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"ষ্ট\'ৰেজৰ ছেটিং"</string>
+    <string name="status_eid" msgid="7532406028683438634">"EID"</string>
+    <string name="eid_multi_sim" msgid="4581966600904959452">"EID (ছিমৰ শ্লট %1$d)"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI (ছিম শ্ল\'ট %1$d)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"চাবলৈ ছেভ কৰি থোৱা নেটৱর্ক বাছনি কৰক"</string>
     <string name="status_min_number" msgid="4492899165438225714">"নিম্নতম"</string>
@@ -1162,6 +1121,8 @@
     <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"আপুনি আপোনাৰ <xliff:g id="NAME">^1</xliff:g> ব্যৱহাৰ কৰা আৰম্ভ কৰিব পাৰে"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"বেটাৰীৰ স্থিতি"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"বেটাৰীৰ পৰিমাণ"</string>
+    <string name="communal_settings_title" msgid="2845678473945902115">"সম্প্ৰদায়ৰ সৈতে জড়িত"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"সম্প্ৰদায়ৰ সৈতে জড়িত ছেটিং"</string>
     <string name="apn_settings" msgid="4295467389400441299">"এপিএনসমূহ"</string>
     <string name="apn_edit" msgid="2003683641840248741">"এক্সেছ পইণ্ট সম্পাদনা কৰক"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"ছেট কৰা হোৱা নাই"</string>
@@ -1202,12 +1163,9 @@
     <string name="menu_restore" msgid="4310539620115151551">"ডিফ\'ল্টলৈ ৰিছেট কৰক"</string>
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"ডিফ’ল্ট এপিএন ছেটিং ৰিছেট কৰা সম্পূৰ্ণ হৈছে৷"</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"বিকল্পসমূহ ৰিছেট কৰক"</string>
-    <!-- no translation found for reset_mobile_network_settings_title (5616713931258506842) -->
-    <skip />
-    <!-- no translation found for reset_mobile_network_settings_desc (7292636387692165727) -->
-    <skip />
-    <!-- no translation found for reset_mobile_network_settings_confirm_title (7510965634669511241) -->
-    <skip />
+    <string name="reset_mobile_network_settings_title" msgid="5616713931258506842">"ম’বাইল নেটৱৰ্কৰ ছেটিং ৰিছেট কৰক"</string>
+    <string name="reset_mobile_network_settings_desc" msgid="7292636387692165727">"এইটোৱে ম’বাইল নেটৱৰ্কৰ আটাইবোৰ ছেটিং ৰিছেট কৰিব"</string>
+    <string name="reset_mobile_network_settings_confirm_title" msgid="7510965634669511241">"ম’বাইল নেটৱৰ্কৰ ছেটিং ৰিছেট কৰিবনে?"</string>
     <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"ব্লুটুথ আৰু ৱাই-ফাই ৰিছেট কৰক"</string>
     <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"এইটোৱে ব্লুটুথ আৰু ৱাই-ফাইৰ আটাইবোৰ ছেটিং ৰিছেট কৰিব। আপুনি এই কাৰ্য আনডু কৰিব নোৱাৰে।"</string>
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"ৰিছেট কৰক"</string>
@@ -1296,10 +1254,7 @@
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"কৰ্মস্থানৰ প্ৰ’ফাইলৰ বাবে অৱস্থান"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"এপৰ অৱস্থানৰ অনুমতি"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"অৱস্থান সুবিধা অফ আছে"</string>
-    <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
-      <item quantity="one"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g>টাৰ ভিতৰত <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g>টা এপে অৱস্থান এক্সেছ কৰিব পাৰে</item>
-      <item quantity="other"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g>টাৰ ভিতৰত <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g>টা এপে অৱস্থান এক্সেছ কৰিব পাৰে</item>
-    </plurals>
+    <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{{total} টাৰ ভিতৰত # টা এপে অৱস্থান এক্সেছ কৰিব পাৰে}one{{total} টাৰ ভিতৰত # টা এপে অৱস্থান এক্সেছ কৰিব পাৰে}other{{total} টাৰ ভিতৰত # টা এপে অৱস্থান এক্সেছ কৰিব পাৰে}}"</string>
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"শেহতীয়া এক্সেছ"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"আটাইবোৰ চাওক"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"সবিশেষ চাওক"</string>
@@ -1314,9 +1269,15 @@
     <string name="location_services_preference_title" msgid="604317859531782159">"অৱস্থান সেৱা"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"অৱস্থান সেৱা"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"অৱস্থান ব্যৱহাৰ কৰক"</string>
+    <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"স্বয়ংক্ৰিয়ভাৱে সময় মণ্ডল ছেট কৰিব নোৱাৰি"</string>
+    <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"অৱস্থান অথবা অৱস্থান সেৱাসমূহ অফ কৰা আছে"</string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_environment" msgid="2279833212923765802"></string>
+    <string name="location_time_zone_detection_status_summary_temporarily_unavailable" msgid="6586801403644278967"></string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"ডিভাইচৰ অৱস্থানৰ প্ৰয়োজন"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_message" msgid="5846316326139169523">"আপোনাৰ অৱস্থান ব্যৱহাৰ কৰি সময় মণ্ডল ছেট কৰিবলৈ প্ৰথমে অৱস্থান অন কৰক আৰু তাৰ পাছত সময় মণ্ডলৰ ছেটিং আপডে’ট কৰক"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"অৱস্থানৰ ছেটিং"</string>
+    <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"এইটো সমাধান কৰক"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"বাতিল কৰক"</string>
     <string name="location_time_zone_detection_auto_is_off" msgid="6264253990141650280">"স্বয়ংক্ৰিয় সময় মণ্ডল অফ হৈ আছে"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"অৱস্থানৰ সময় মণ্ডল চিনাক্তকৰণৰ সুবিধাটো অক্ষম কৰা হৈছে"</string>
@@ -1440,10 +1401,7 @@
     <string name="install_applications" msgid="3921609656584369901">"অজ্ঞাত উৎসবোৰ"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"আটাইবোৰ এপৰ উৎসক অনুমতি দিয়ক"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"অলপতে খোলা এপসমূহ"</string>
-    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
-      <item quantity="one">সম্পূৰ্ণ %1$dটা এপ্‌ চাওক</item>
-      <item quantity="other">সম্পূৰ্ণ %1$dটা এপ্‌ চাওক</item>
-    </plurals>
+    <string name="see_all_apps_title" msgid="1650653853942381797">"{count,plural, =1{আটাইবোৰ এপ্‌ চাওক}one{সম্পূৰ্ণ # টা এপ্‌ চাওক}other{সম্পূৰ্ণ # টা এপ্‌ চাওক}}"</string>
     <string name="forgot_password_title" msgid="3967873480875239885">"আপোনাৰ আইটি প্ৰশাসকৰ সৈতে যোগাযোগ কৰক"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"তেওঁলোকে আপোনাক অপোনাৰ পিন, আৰ্হি অথবা পাছৱৰ্ড ৰিছেট কৰাত সহায় কৰিব পাৰে"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"উচ্চখাপৰ ছেটিং"</string>
@@ -1457,10 +1415,7 @@
     <string name="cache_header_label" msgid="2441967971921741047">"কেশ্ব"</string>
     <string name="clear_cache_btn_text" msgid="8597272828928143723">"কেশ্ব মচক"</string>
     <string name="cache_size_label" msgid="313456088966822757">"কেশ্ব"</string>
-    <plurals name="uri_permissions_text" formatted="false" msgid="8212425823423508096">
-      <item quantity="one">%d টা বস্তু</item>
-      <item quantity="other">%d টা বস্তু</item>
-    </plurals>
+    <string name="uri_permissions_text" msgid="8406345863117405105">"{count,plural, =1{১ টা বস্তু}one{# টা বস্তু}other{# টা বস্তু}}"</string>
     <string name="clear_uri_btn_text" msgid="4828117421162495134">"এক্সেছ আঁতৰাওক"</string>
     <string name="controls_label" msgid="8671492254263626383">"নিয়ন্ত্ৰণ"</string>
     <string name="force_stop" msgid="2681771622136916280">"বলেৰে ৰখাওক"</string>
@@ -1609,50 +1564,38 @@
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"শ্বৰ্টকাটৰ সূচী দেখুৱাওক"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"কৰ্মস্থানৰ প্ৰ’ফাইল আৰু সঁজুলি"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"কৰ্মস্থানৰ বাবে অন-স্ক্ৰীন কীব’ৰ্ড"</string>
-    <!-- no translation found for trackpad_settings (2071131324087677005) -->
-    <skip />
-    <!-- no translation found for trackpad_mouse_settings (136226693583218429) -->
-    <skip />
-    <!-- no translation found for trackpad_settings_summary (3369855644136760402) -->
-    <skip />
-    <!-- no translation found for trackpad_tap_to_click (1938230946542070746) -->
-    <skip />
-    <!-- no translation found for trackpad_touchpad_gesture_title (7568052847609914436) -->
-    <skip />
-    <!-- no translation found for trackpad_touchpad_gesture_summary (6256074591395359124) -->
-    <skip />
-    <!-- no translation found for trackpad_reverse_scrolling_title (422877284529360866) -->
-    <skip />
-    <!-- no translation found for trackpad_reverse_scrolling_summary (6048648562887499036) -->
-    <skip />
-    <!-- no translation found for trackpad_bottom_right_tap_title (6275428879042702880) -->
-    <skip />
-    <!-- no translation found for trackpad_bottom_right_tap_summary (8734094086900680674) -->
-    <skip />
-    <!-- no translation found for trackpad_pointer_speed (7786579408631352625) -->
-    <skip />
-    <!-- no translation found for trackpad_touch_gesture (8641725062131922497) -->
-    <skip />
-    <!-- no translation found for trackpad_go_back_title (5312164160947491440) -->
-    <skip />
-    <!-- no translation found for trackpad_go_back_summary (4201901101085902768) -->
-    <skip />
-    <!-- no translation found for trackpad_go_home_title (2146525662148291552) -->
-    <skip />
-    <!-- no translation found for trackpad_go_home_summary (2222744701528360887) -->
-    <skip />
-    <!-- no translation found for trackpad_recent_apps_title (8195970908411585445) -->
-    <skip />
-    <!-- no translation found for trackpad_recent_apps_summary (2685092851677573794) -->
-    <skip />
-    <!-- no translation found for trackpad_notifications_title (3521663305043747880) -->
-    <skip />
-    <!-- no translation found for trackpad_notifications_summary (7663647367648690040) -->
-    <skip />
-    <!-- no translation found for trackpad_switch_apps_title (7342032935377284039) -->
-    <skip />
-    <!-- no translation found for trackpad_switch_apps_summary (9193942041912927440) -->
-    <skip />
+    <string name="trackpad_settings" msgid="2071131324087677005">"টাচ্চপেড"</string>
+    <string name="trackpad_mouse_settings" msgid="136226693583218429">"টাচ্চপেড আৰু মাউছ"</string>
+    <string name="trackpad_settings_summary" msgid="3369855644136760402">"পইণ্টাৰৰ গতিবেগ, নিৰ্দেশ"</string>
+    <string name="trackpad_tap_to_click" msgid="1938230946542070746">"ক্লিক কৰিবলৈ টিপাৰ সুবিধা"</string>
+    <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"টাচ্চপেডৰ নিৰ্দেশ"</string>
+    <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"গাইগুটীয়া টাচ্চপেড নেভিগেশ্বনৰ নিৰ্দেশ কাষ্টমাইজ কৰক"</string>
+    <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"বিপৰীত দিশলৈ স্ক্ৰ’ল কৰাৰ সুবিধা"</string>
+    <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"আপুনি তললৈ স্ক্ৰ’ল কৰিলে সমল ওপৰলৈ যায়"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"একেবাৰে তলৰ সোঁফালৰ টিপা"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"অধিক বিকল্প পাবলৈ টাচ্চপেডৰ একেবাৰে তলৰ সোঁফালৰ কোণটোত টিপক"</string>
+    <string name="trackpad_pointer_speed" msgid="7786579408631352625">"পইণ্টাৰৰ গতিবেগ"</string>
+    <string name="trackpad_touch_gesture" msgid="8641725062131922497">"টাচ্চপেডৰ নিৰ্দেশসমূহ শিকক"</string>
+    <string name="trackpad_go_back_title" msgid="5312164160947491440">"উভতি যাওক"</string>
+    <string name="trackpad_go_back_summary" msgid="4201901101085902768">"তিনিটা আঙুলিৰে বাওঁফাললৈ অথবা সোঁফাললৈ ছোৱাইপ কৰক"</string>
+    <string name="trackpad_go_home_title" msgid="2146525662148291552">"গৃহ পৃষ্ঠালৈ যাওক"</string>
+    <string name="trackpad_go_home_summary" msgid="2222744701528360887">"তিনিটা আঙুলিৰে ওপৰলৈ ছোৱাইপ কৰক"</string>
+    <string name="trackpad_recent_apps_title" msgid="8195970908411585445">"শেহতীয়া এপ্‌সমূহ"</string>
+    <string name="trackpad_recent_apps_summary" msgid="2685092851677573794">"তিনিটা আঙুলিৰে ওপৰলৈ ছোৱাইপ কৰি ধৰি ৰাখক"</string>
+    <string name="trackpad_notifications_title" msgid="3521663305043747880">"জাননী"</string>
+    <string name="trackpad_notifications_summary" msgid="7663647367648690040">"তিনিটা আঙুলিৰে তললৈ ছোৱাইপ কৰক"</string>
+    <string name="trackpad_switch_apps_title" msgid="7342032935377284039">"এপ্‌ সলনি কৰক"</string>
+    <string name="trackpad_switch_apps_summary" msgid="9193942041912927440">"চাৰিটা আঙুলিৰে বাওঁফাললৈ অথবা সোঁফাললৈ ছোৱাইপ কৰক"</string>
+    <string name="modifier_keys_settings" msgid="2537108435032034683">"সংশোধক চাবি"</string>
+    <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"চাবিসমূহৰ আচৰণ সলনি কৰক"</string>
+    <string name="modifier_keys_reset_title" msgid="948294258402761066">"আটাইবোৰ ৰিছেট কৰক"</string>
+    <string name="modifier_keys_default_summary" msgid="8701640508670973258">"ডিফ’ল্ট"</string>
+    <string name="modifier_keys_reset_message" msgid="5236994817619936058">"আপুনি আটাইবোৰ সংশোধক চাবি সেইসমূহৰ ডিফ’ল্টলৈ ৰিছেট কৰিবলৈ বিচাৰে বুলি নিশ্চিতনে?"</string>
+    <string name="modifier_keys_done" msgid="8196199314913909700">"কৰা হ’ল"</string>
+    <string name="modifier_keys_cancel" msgid="7136520252570826772">"বাতিল কৰক"</string>
+    <string name="modifier_keys_restore" msgid="7627661630556839268">"পুনঃস্থাপন কৰক"</string>
+    <string name="modifier_keys_picker_title" msgid="244545904150587851">"সংশোধক চাবি বাছনি কৰক"</string>
+    <string name="modifier_keys_picker_summary" msgid="739397232249560785">"<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>ৰ বাবে এটা নতুন চাবি বাছনি কৰক:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"ডিফ\'ল্ট"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"কথন"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"পইণ্টাৰৰ বেগ"</string>
@@ -1969,22 +1912,14 @@
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"অনুজ্জ্বল"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"অধিক উজ্জ্বল"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"ডিভাইচ ৰিষ্টাৰ্ট হোৱাৰ পাছতো অন কৰি ৰাখক"</string>
-    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
-      <item quantity="one">চুটি (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ছেকেণ্ড)</item>
-      <item quantity="other">চুটি (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ছেকেণ্ড)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
-      <item quantity="one">মধ্যমীয়া (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ছেকেণ্ড)</item>
-      <item quantity="other">মধ্যমীয়া (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ছেকেণ্ড)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
-      <item quantity="one">দীঘলীয়া (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ছেকেণ্ড)</item>
-      <item quantity="other">দীঘলীয়া (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ছেকেণ্ড)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="4537791441118261556">
-      <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> ছেকেণ্ড</item>
-      <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> ছেকেণ্ড</item>
-    </plurals>
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (2981206111858937724) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (6867395206533459204) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (4079139970819335593) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_delay_unit_second (5979297390686370567) -->
+    <skip />
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"ছেটিং"</string>
     <string name="captioning_preview_title" msgid="2888561631323180535">"পূৰ্বদৰ্শন"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"মান্য বিকল্পসমূহ"</string>
@@ -2059,14 +1994,10 @@
     <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"নিকটৱৰ্তী ডিভাইচৰ বাবে স্কেন কৰক"</string>
     <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"ছেভ কৰা ডিভাইচ"</string>
     <string name="print_settings" msgid="8519810615863882491">"প্ৰিণ্ট কৰি থকা হৈছে"</string>
-    <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
-      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g>টা প্ৰিণ্ট সেৱা চলি আছে</item>
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g>টা প্ৰিণ্ট সেৱা চলি আছে</item>
-    </plurals>
-    <plurals name="print_jobs_summary" formatted="false" msgid="3933688846338306536">
-      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g>টা প্ৰিণ্টিঙৰ কাম</item>
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g>টা প্ৰিণ্টিঙৰ কাম</item>
-    </plurals>
+    <!-- no translation found for print_settings_summary (1458773840720811915) -->
+    <skip />
+    <!-- no translation found for print_jobs_summary (7040836482336577323) -->
+    <skip />
     <string name="print_settings_title" msgid="7680498284751129935">"প্ৰিণ্ট সেৱাসমূহ"</string>
     <string name="print_no_services_installed" msgid="7554057966540602692">"কোনো সেৱা ইনষ্টল হোৱা নাই"</string>
     <string name="print_no_printers_found" msgid="4833082484646109486">"প্ৰিণ্টাৰ পোৱা নগ\'ল"</string>
@@ -2144,26 +2075,16 @@
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"চাৰ্জিঙৰ বিষয়ে অধিক জানক সুবিধাটো পজ কৰা হৈছে"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"চাৰ্জ কৰা পুনৰ আৰম্ভ কৰক"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"বেছি বেটাৰি ব্যয় হোৱা নেপথ্যৰ কাৰ্যকলাপ অন্তৰ্ভুক্ত হয়"</string>
-    <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
-      <item quantity="one">%1$dটা এপক সীমাবদ্ধ কৰক</item>
-      <item quantity="other">%1$dটা এপক সীমাবদ্ধ কৰক</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_handled_title" formatted="false" msgid="5862649927574803958">
-      <item quantity="one">%2$dটা এপক শেহতীয়াকৈ প্ৰতিবন্ধ কৰা হ’ল</item>
-      <item quantity="other">%2$dটা এপক শেহতীয়াকৈ প্ৰতিবন্ধ কৰা হ’ল</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
-      <item quantity="one">%2$dটা এপে নেপথ্য়ত অত্য়াধিক বেটাৰী ব্যৱহাৰ কৰে</item>
-      <item quantity="other">%2$dটা এপে নেপথ্য়ত অত্য়াধিক বেটাৰী ব্যৱহাৰ কৰে</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
-      <item quantity="one">এই এপবোৰ নেপথ্য়ত চলিব নোৱাৰে</item>
-      <item quantity="other">এই এপবোৰ নেপথ্য়ত চলিব নোৱাৰে</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_app_dialog_title" formatted="false" msgid="7897944678619251740">
-      <item quantity="one">%1$dটা এপক সীমাবদ্ধ কৰিবনে?</item>
-      <item quantity="other">%1$dটা এপক সীমাবদ্ধ কৰিবনে?</item>
-    </plurals>
+    <!-- no translation found for battery_tip_restrict_title (4537101947310626753) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_handled_title (7142074986508706853) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_summary (7539469590829235277) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_handled_summary (3535697154547199190) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_app_dialog_title (1649476357343160240) -->
+    <skip />
     <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"বেটাৰীৰ চাৰ্জ বচাবলৈ <xliff:g id="APP">%1$s</xliff:g>ক নেপথ্য়ত বেটাৰী ব্যৱহাৰ কৰাৰ পৰা বিৰত ৰাখক। ইয়াৰ ফলত এই এপে ভালকৈ কাম নকৰিব পাৰে আৰু জাননীসমূহ পলমকৈ আহিব পাৰে।"</string>
     <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"বেটাৰীৰ চাৰ্জ বচাবলৈ এই এপ্‌সমূহক নেপথ্য়ত বেটাৰী ব্যৱহাৰ কৰাৰ পৰা বিৰত ৰাখক। সীমিত কৰা এপ্‌সমূহে ভালকৈ কাম নকৰিব পাৰে আৰু জাননীসমূহ পলমকৈ আহিব পাৰে।\n\nএপ্‌সমূহ:"</string>
     <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"বেটাৰীৰ চাৰ্জ বচাবলৈ এই এপ্‌সমূহক নেপথ্য়ত বেটাৰী ব্যৱহাৰ কৰাৰ পৰা বিৰত ৰাখক। সীমিত কৰা এপ্‌সমূহে ভালকৈ কাম নকৰিব পাৰে আৰু জাননীসমূহ পলমকৈ আহিব পাৰে।\n\nএপসমূহ:\n<xliff:g id="APP_LIST">%1$s</xliff:g>।"</string>
@@ -2177,20 +2098,16 @@
     <string name="smart_battery_title" msgid="9095903608520254254">"এপসমূহক স্বয়ংক্ৰিয়ভাৱে পৰিচালনা কৰক"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"বেটাৰী মেনেজাৰে যেতিয়া এপ্‌সমূহে বেছিকৈ বেটাৰীৰ চাৰ্জ হ্ৰাস কৰাটো চিনাক্ত কৰে, তেতিয়া আপোনাৰ লগত এই এপ্‌সমূহক সীমিত কৰাৰ সুবিধা থাকিব। সীমিত কৰা এপ্‌সমূহে ভালকৈ কাম নকৰিব পাৰে আৰু জাননীসমূহ পলমকৈ আহিব পাৰে।"</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"সীমাবদ্ধ কৰা এপ্‌সমূহ"</string>
-    <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
-      <item quantity="one">%1$dটা এপৰ বেটাৰী ব্যৱহাৰ সীমিতকৰণ</item>
-      <item quantity="other">%1$dটা এপৰ বেটাৰী ব্যৱহাৰ সীমিতকৰণ</item>
-    </plurals>
+    <!-- no translation found for restricted_app_summary (1022307922754893997) -->
+    <skip />
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"নিষিদ্ধ কৰা হ’ল <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="restricted_app_detail_footer" msgid="3495725286882138803">"এই এপ্‌সমূহক নেপথ্যত বেটাৰী ব্যৱহাৰ কৰাৰ পৰা প্ৰতিবন্ধিত কৰা হয়। এই এপ্‌সমূহে আশা কৰা ধৰণে কাম নকৰিব পাৰে আৰু জাননীসমূহ পলমকৈ আহিব পাৰে।"</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"বেটাৰী মেনেজাৰ ব্যৱহাৰ কৰক"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"এপসমূহে বেটাৰিৰ চ্চাৰ্জ বেছিকৈ হ্ৰাস কৰাটো চিনাক্ত কৰক"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"এপে বেটাৰীৰ চাৰ্জ সোনকালে শেষ কৰিলে চিনাক্ত কৰে"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"এপে বেটাৰীৰ চাৰ্জ সোনকালে শেষ কৰিলে চিনাক্ত কৰি থকা হৈছে"</string>
-    <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
-      <item quantity="one">%1$d এপক নিষিদ্ধ কৰা হ’ল</item>
-      <item quantity="other">%1$d এপক নিষিদ্ধ কৰা হ’ল</item>
-    </plurals>
+    <!-- no translation found for battery_manager_app_restricted (2583902700677009173) -->
+    <skip />
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
     <string name="battery_missing_message" msgid="400958471814422770">"বেটাৰী মিটাৰটোত দেখুওৱা তথ্য পঢ়োঁতে সমস্যা হৈছে।"</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
@@ -2354,10 +2271,8 @@
     <string name="advanced_security_title" msgid="7117581975877192652">"উচ্চখাপৰ ছেটিংসমূহ"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"এই ব্যৱহাৰকাৰীৰ বাবে ক্ৰেডেনশ্বিয়েলসমূহ উপলব্ধ নহয়"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"ভিপিএন আৰু এপ্‌সমূহৰ বাবে ইনষ্টল কৰা হৈছে"</string>
-    <!-- no translation found for credential_for_wifi (2286560570630763556) -->
-    <skip />
-    <!-- no translation found for credential_for_wifi_in_use (7276290656840986618) -->
-    <skip />
+    <string name="credential_for_wifi" msgid="2286560570630763556">"ৱাই-ফাইৰ বাবে ইনষ্টল কৰা হৈছে"</string>
+    <string name="credential_for_wifi_in_use" msgid="7276290656840986618">"ৱাই-ফাইৰ বাবে ইনষ্টল কৰা (ব্যৱহাৰ হৈ আছে)"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"আটাইবোৰ সমল আঁতৰাবনে?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"ক্ৰেডেনশ্বিয়েল ষ্ট’ৰেজ মচা হ’ল।"</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"ক্ৰেডেনশ্বিয়েল ষ্ট’ৰেজ মচিব নোৱাৰি।"</string>
@@ -2382,10 +2297,8 @@
     <string name="remove_credential_management_app" msgid="6089291496976812786">"এপ্‌টো আঁতৰাওক"</string>
     <string name="remove_credential_management_app_dialog_title" msgid="5713525435104706772">"এই এপ্‌টো আঁতৰাবনে?"</string>
     <string name="remove_credential_management_app_dialog_message" msgid="7739474298063646935">"এই এপ্‌টোৱে প্ৰমাণপত্ৰ পৰিচালনা নকৰে, কিন্তু এইটো আপোনাৰ ডিভাইচটোত থাকিব। এপ্‌টোৱে ইনষ্টল কৰা প্ৰমাণপত্ৰ আনইনষ্টল কৰা হ’ব।"</string>
-    <plurals name="number_of_urls" formatted="false" msgid="403979258551655023">
-      <item quantity="one"><xliff:g id="NUMBER_1">%d</xliff:g> টা URL</item>
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> টা URL</item>
-    </plurals>
+    <!-- no translation found for number_of_urls (1128699121050872188) -->
+    <skip />
     <string name="emergency_tone_title" msgid="6673118505206685168">"জৰুৰীকালীন অৱস্থাত ডায়েল কৰা ছিগনেল"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"জৰুৰীকালীন কল কৰোতে কৰিবলগীয়া আচৰণ ছেট কৰক"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"বেকআপ"</string>
@@ -2428,10 +2341,8 @@
     <string name="notification_history_today" msgid="5828496957208237230">"যোৱা ২৪ ঘণ্টাৰ"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"স্নুজ কৰা হ’ল"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"শেহতীয়াকৈ অগ্ৰাহ্য কৰা হ\'ল"</string>
-    <plurals name="notification_history_count" formatted="false" msgid="1859304685071321991">
-      <item quantity="one"><xliff:g id="NUMBER_1">%d</xliff:g> খন জাননী</item>
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> খন জাননী</item>
-    </plurals>
+    <!-- no translation found for notification_history_count (885305572972482838) -->
+    <skip />
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"কলৰ ৰিংট’ন আৰু কম্পন"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"নেটৱৰ্কৰ সবিশেষ"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"ছিংক সক্ষম কৰা হৈছে"</string>
@@ -2603,16 +2514,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"ছিষ্টেমৰ চিএ প্ৰমাণপত্ৰখন সক্ষম কৰিবনে?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"ছিষ্টেমৰ চিএ প্ৰমাণপত্ৰক অক্ষম কৰিবনে?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"ব্যৱহাৰকাৰীৰ চিএ প্ৰমাণপত্ৰ স্থায়ীভাৱে আঁতৰাবনে?"</string>
-    <!-- no translation found for credential_being_used_by (3682869943025283499) -->
-    <skip />
-    <!-- no translation found for credential_contains (3146519680449595771) -->
-    <skip />
-    <!-- no translation found for one_userkey (6363426728683951234) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2097644070227688983) -->
-    <skip />
-    <!-- no translation found for one_cacrt (982242103604501559) -->
-    <skip />
+    <string name="credential_being_used_by" msgid="3682869943025283499">"এইবোৰে ব্যৱহাৰ কৰি আছে"</string>
+    <string name="credential_contains" msgid="3146519680449595771">"এই এণ্ট্ৰিত আছে"</string>
+    <string name="one_userkey" msgid="6363426728683951234">"১ টা ব্যৱহাৰকাৰী চাবি"</string>
+    <string name="one_usercrt" msgid="2097644070227688983">"১ খন ব্যৱহাৰকাৰীৰ প্ৰমাণপত্ৰ"</string>
+    <string name="one_cacrt" msgid="982242103604501559">"১ খন CA প্ৰমাণপত্ৰ"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"%d চিএ প্ৰমাণপত্ৰ"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"ক্ৰেডেনশ্বিয়েলৰ সবিশেষ"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"ক্ৰেডেনশ্বিয়েল আঁতৰোৱা হ’ল: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
@@ -2627,17 +2533,13 @@
     <string name="additional_system_update_settings_list_item_title" msgid="7230385345152138051">"অতিৰিক্ত ছিষ্টেম আপডেইটসমূহ"</string>
     <string name="ssl_ca_cert_warning" msgid="3898387588657346106">"নেটৱৰ্ক নিৰীক্ষণ কৰা হ\'ব পাৰে"</string>
     <string name="done_button" msgid="6269449526248267">"হ’ল"</string>
-    <plurals name="ssl_ca_cert_dialog_title" formatted="false" msgid="5491460811755938449">
-      <item quantity="one">প্ৰমাণপত্ৰক বিশ্বাসী বুলি চিহ্নিত কৰক বা আঁতৰাওক</item>
-      <item quantity="other">প্ৰমাণপত্ৰক বিশ্বাসী বুলি চিহ্নিত কৰক বা আঁতৰাওক</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_dialog_title (1032088078702042090) -->
+    <skip />
     <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{{orgName}এ আপোনাৰ ডিভাইচত কোনো প্ৰমাণপত্ৰ প্ৰদানকাৰী কৰ্তৃপক্ষ ইনষ্টল কৰিছে, যিয়ে ইমেইল, এপ্‌ আৰু সুৰক্ষিত ৱেবছাইটকে ধৰি আপোনাৰ ডিভাইচৰ নেটৱৰ্কৰ কাৰ্যকলাপ নিৰীক্ষণ কৰিবলৈ তেওঁলোকক হয়তো অনুমতি দিব পাৰে।\n\nএই প্ৰমাণপত্ৰৰ বিষয়ে অধিক তথ্যৰ বাবে, আপোনাৰ প্ৰশাসকৰ সৈতে যোগাযোগ কৰক।}one{{orgName}এ আপোনাৰ ডিভাইচত প্ৰমাণপত্ৰ প্ৰদানকাৰী কৰ্তৃপক্ষসমূহ ইনষ্টল কৰিছে, যিয়ে ইমেইল, এপ্‌ আৰু সুৰক্ষিত ৱেবছাইটকে ধৰি আপোনাৰ কৰ্মস্থানৰ নেটৱৰ্কৰ কাৰ্যকলাপ নিৰীক্ষণ কৰিবলৈ তেওঁলোকক হয়তো অনুমতি দিব পাৰে।\n\nএই প্ৰমাণপত্ৰসমূহৰ বিষয়ে অধিক তথ্যৰ বাবে, আপোনাৰ প্ৰশাসকৰ সৈতে যোগাযোগ কৰক।}other{{orgName}এ আপোনাৰ ডিভাইচত প্ৰমাণপত্ৰ প্ৰদানকাৰী কৰ্তৃপক্ষসমূহ ইনষ্টল কৰিছে, যিয়ে ইমেইল, এপ্‌ আৰু সুৰক্ষিত ৱেবছাইটকে ধৰি আপোনাৰ কৰ্মস্থানৰ নেটৱৰ্কৰ কাৰ্যকলাপ নিৰীক্ষণ কৰিবলৈ তেওঁলোকক হয়তো অনুমতি দিব পাৰে।\n\nএই প্ৰমাণপত্ৰসমূহৰ বিষয়ে অধিক তথ্যৰ বাবে, আপোনাৰ প্ৰশাসকৰ সৈতে যোগাযোগ কৰক।}}"</string>
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName}এ আপোনাৰ কৰ্মস্থানৰ প্ৰ’ফাইলৰ বাবে কোনো প্ৰমাণপত্ৰ প্ৰদানকাৰী কৰ্তৃপক্ষ ইনষ্টল কৰিছে, যিয়ে ইমেইল, এপ্‌ আৰু সুৰক্ষিত ৱেবছাইটকে ধৰি আপোনাৰ কৰ্মস্থানৰ নেটৱৰ্কৰ কাৰ্যকলাপ নিৰীক্ষণ কৰিবলৈ তেওঁলোকক হয়তো অনুমতি দিব পাৰে।\n\nএই প্ৰমাণপত্ৰৰ বিষয়ে অধিক তথ্যৰ বাবে, আপোনাৰ প্ৰশাসকৰ সৈতে যোগাযোগ কৰক।}one{{orgName}এ আপোনাৰ কৰ্মস্থানৰ প্ৰ’ফাইলৰ বাবে প্ৰমাণপত্ৰ প্ৰদানকাৰী কৰ্তৃপক্ষসমূহ ইনষ্টল কৰিছে, যিয়ে ইমেইল, এপ্‌ আৰু সুৰক্ষিত ৱেবছাইটকে ধৰি আপোনাৰ কৰ্মস্থানৰ নেটৱৰ্কৰ কাৰ্যকলাপ নিৰীক্ষণ কৰিবলৈ তেওঁলোকক হয়তো অনুমতি দিব পাৰে।\n\nএই প্ৰমাণপত্ৰসমূহৰ বিষয়ে অধিক তথ্যৰ বাবে, আপোনাৰ প্ৰশাসকৰ সৈতে যোগাযোগ কৰক।}other{{orgName}এ আপোনাৰ কৰ্মস্থানৰ প্ৰ’ফাইলৰ বাবে প্ৰমাণপত্ৰ প্ৰদানকাৰী কৰ্তৃপক্ষসমূহ ইনষ্টল কৰিছে, যিয়ে ইমেইল, এপ্‌ আৰু সুৰক্ষিত ৱেবছাইটকে ধৰি আপোনাৰ কৰ্মস্থানৰ নেটৱৰ্কৰ কাৰ্যকলাপ নিৰীক্ষণ কৰিবলৈ তেওঁলোকক হয়তো অনুমতি দিব পাৰে।\n\nএই প্ৰমাণপত্ৰসমূহৰ বিষয়ে অধিক তথ্যৰ বাবে, আপোনাৰ প্ৰশাসকৰ সৈতে যোগাযোগ কৰক।}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"তৃতীয় পক্ষই ইমেইল, এপ্‌সমূহ আৰু সুৰক্ষিত ৱেবছাইটসমূহক সামৰি আপোনাৰ নেটৱৰ্কৰ কাৰ্যকলাপ নিৰীক্ষণ কৰিব পাৰে৷\n\nআপোনাৰ ডিভাইচত ইনষ্টল কৰি থোৱা এটা বিশ্বাসী ক্ৰেডেনশ্বিয়েল এইটো সম্ভৱ কৰি তুলিছে।"</string>
-    <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
-      <item quantity="one">প্ৰমাণপত্ৰ পৰীক্ষা কৰক</item>
-      <item quantity="other">প্ৰমাণপত্ৰ পৰীক্ষা কৰক</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_settings_button (2044927302268394991) -->
+    <skip />
     <string name="user_settings_title" msgid="6550866465409807877">"একাধিক ব্যৱহাৰকাৰী"</string>
     <string name="user_list_title" msgid="1387379079186123404">"ব্যৱহাৰকাৰী আৰু প্ৰ\'ফাইলসমূহ"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"ব্যৱহাৰকাৰী বা প্ৰ\'ফাইল যোগ কৰক"</string>
@@ -2676,9 +2578,12 @@
     <string name="enable_guest_calling" msgid="8300355036005240911">"অতিথিক ফ’ন ব্যৱহাৰ কৰিবলৈ দিয়ক"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"এইগৰাকী অতিথি ব্যৱহাৰকাৰীৰ সৈতে কলৰ ইতিহাস শ্বেয়াৰ কৰা হ’ব"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"ফ\'ন কল আৰু এছএমএছ অন কৰক"</string>
+    <string name="user_grant_admin" msgid="6511342422361803820">"ব্যৱহাৰকাৰীগৰাকীক প্ৰশাসকৰ বিশেষাধিকাৰ দিয়ক"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"ব্যৱহাৰকাৰীজন মচক"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"ফ\'ন কল আৰু এছএমএছ অন কৰেনে?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"এইজন ব্যৱহাৰকাৰীৰ সৈতে কল আৰু এছএমএছৰ ইতিহাস শ্ৱেয়াৰ কৰা হ\'ব।"</string>
+    <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"প্ৰশাসকৰ বিশেষাধিকাৰ আঁতৰাবনে?"</string>
+    <string name="user_revoke_admin_confirm_message" msgid="2719667217562982318">"আপুনি এইগৰাকী ব্যৱহাৰকাৰীৰ প্ৰশাসকৰ বিশেষাধিকাৰ আঁতৰাবলৈ বিচৰাটো নিশ্চিতনে?"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"জৰুৰীকালীন তথ্য"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>ৰ তথ্য আৰু সম্পৰ্ক"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g> খোলক"</string>
@@ -2824,10 +2729,10 @@
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"ক্ল’ন কৰা এপ্‌"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"এটা এপৰ দ্বিতীয় আৰ্হি এটা সৃষ্টি কৰক যাতে আপুনি একে সময়তে দুটা একাউণ্ট ব্যৱহাৰ কৰিব পাৰে।"</string>
     <string name="cloned_apps_summary" msgid="8805362440770795709">"<xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g> টা ক্ল’ন কৰা হ’ল, <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g> টা ক্ল’ন কৰিবলৈ উপলব্ধ"</string>
-    <!-- no translation found for cloned_app_creation_summary (4642627294993918502) -->
-    <skip />
-    <!-- no translation found for cloned_app_created_summary (7277912971544890710) -->
-    <skip />
+    <string name="delete_all_app_clones" msgid="3489053361980624999">"আটাইবোৰ এপ্‌ ক্ল’ন মচক"</string>
+    <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"আটাইবোৰ এপ্‌ ক্ল’ন মচা কাৰ্যটো বিফল হ’ল"</string>
+    <string name="cloned_app_creation_summary" msgid="4642627294993918502">"সৃষ্টি কৰি থকা হৈছে…"</string>
+    <string name="cloned_app_created_summary" msgid="7277912971544890710">"ক্ল’ন কৰা"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"ভাষা, আঙুলিৰ স্পৰ্শৰে নিৰ্দেশ, সময়, বেক আপ, আপডে’ট"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"ছিষ্টেমৰ ভাষা, এপৰ ভাষা"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"ৱাইফাই, ৱাই-ফাই, নেটৱৰ্ক সংযোগ, ইণ্টাৰনেট, বেঁতাৰ, ডেটা, ৱাই ফাই"</string>
@@ -3161,10 +3066,8 @@
     <string name="promote_conversation_title" msgid="4731148769888238722">"এইটো এটা বাৰ্তালাপ"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"বাৰ্তালাপ শাখাটোত যোগ কৰক"</string>
     <string name="priority_conversation_count_zero" msgid="3862289535537564713">"কোনো অগ্ৰাধিকাৰপ্ৰাপ্ত বার্তালাপ নাই"</string>
-    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> টা অগ্ৰাধিকাৰপ্ৰাপ্ত বার্তালাপ</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> টা অগ্ৰাধিকাৰপ্ৰাপ্ত বার্তালাপ</item>
-    </plurals>
+    <!-- no translation found for priority_conversation_count (7291234530844412077) -->
+    <skip />
     <string name="important_conversations" msgid="1233893707189659401">"অগ্ৰাধিকাৰপ্ৰাপ্ত বার্তালাপসমূহ"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"বাৰ্তালাপ শাখাটোৰ একেবাৰে ওপৰত দেখুৱাওক আৰু ওপঙা বাবল হিচাপে প্ৰদর্শন কৰক"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"বাৰ্তালাপ শাখাটোৰ একেবাৰে ওপৰত দেখুৱাওক"</string>
@@ -3193,14 +3096,10 @@
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"ডিভাইচটো আনলক কৰি ৰাখিলে, স্ক্ৰীনৰ একেবাৰে ওপৰৰ অংশত বেনাৰ হিচাপে জাননীসমূহ দেখুৱাওক"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"\"<xliff:g id="APP_NAME">%1$s</xliff:g>\"ৰ আটাইবোৰ জাননী"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g>ৰ আটাইবোৰ জাননী"</string>
-    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
-      <item quantity="one">প্ৰতি দিনে প্ৰায় <xliff:g id="NUMBER_1">%,d</xliff:g> টা জাননী</item>
-      <item quantity="other">প্ৰতি দিনে প্ৰায় <xliff:g id="NUMBER_1">%,d</xliff:g> টা জাননী</item>
-    </plurals>
-    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
-      <item quantity="one">প্ৰতি সপ্তাহে প্ৰায় <xliff:g id="NUMBER_1">%,d</xliff:g> টা জাননী</item>
-      <item quantity="other">প্ৰতি সপ্তাহে প্ৰায় <xliff:g id="NUMBER_1">%,d</xliff:g> টা জাননী</item>
-    </plurals>
+    <!-- no translation found for notifications_sent_daily (10274479224185437) -->
+    <skip />
+    <!-- no translation found for notifications_sent_weekly (7895656213187555346) -->
+    <skip />
     <string name="notifications_sent_never" msgid="9081278709126812062">"কেতিয়াও পঠোৱা নহয়"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"ডিভাইচ আৰু এপৰ জাননী"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"কোনসমূহ এপ আৰু ডিভাইচে জাননী পঢ়িব পাৰে সেইয়া নিয়ন্ত্ৰণ কৰক"</string>
@@ -3269,10 +3168,8 @@
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"অনুমতিসমূহ"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"এই এপ্‌টোৱে আপোনাৰ ব্যক্তিগত <xliff:g id="NAME">%1$s</xliff:g> এপৰ অনুমতিসমূহ ব্যৱহাৰ কৰিব পাৰে, যেনে অৱস্থান, ষ্ট\'ৰেজ অথবা সম্পর্কসমূহলৈ এক্সেছ কৰা।"</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"কোনো এপ্ সংযোগ কৰা হোৱা নাই"</string>
-    <plurals name="interact_across_profiles_number_of_connected_apps" formatted="false" msgid="6991750455661974772">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> টা এপ্ সংযোগ কৰা হ\'ল</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> টা এপ্ সংযোগ কৰা হ\'ল</item>
-    </plurals>
+    <!-- no translation found for interact_across_profiles_number_of_connected_apps (4000424798291479207) -->
+    <skip />
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"এই এপ্‌সমূহ সংযোগ কৰিবলৈ আপোনাৰ কৰ্মস্থানৰ প্ৰ’ফাইলত <xliff:g id="NAME">%1$s</xliff:g> ইনষ্টল কৰক"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"এই এপ্‌সমূহ সংযোগ কৰিবলৈ আপোনাৰ ব্যক্তিগত প্ৰ’ফাইলত <xliff:g id="NAME">%1$s</xliff:g> ইনষ্টল কৰক"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"এপ্‌টো পাবলৈ টিপক"</string>
@@ -3287,10 +3184,8 @@
     <string name="notification_channels_other" msgid="18159805343647908">"অন্যান্য"</string>
     <string name="no_channels" msgid="4716199078612071915">"এই এপটোৱে এটাও জাননী দিয়া নাই"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"এপত থকা অতিৰিক্ত ছেটিং"</string>
-    <plurals name="deleted_channels" formatted="false" msgid="5963473421547029532">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>টা বৰ্গ মচা হৈছে</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>টা বৰ্গ মচা হৈছে</item>
-    </plurals>
+    <!-- no translation found for deleted_channels (8489800381509312964) -->
+    <skip />
     <string name="app_notification_block_title" msgid="3880322745749900296">"আটাইবোৰ অৱৰোধ কৰক"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"এই জাননীবিলাক কেতিয়াও নেদেখুৱাব"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"জাননীসমূহ দেখুৱাওক"</string>
@@ -3440,7 +3335,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"আনপিন কৰোতে পাছৱৰ্ড বিচাৰক"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"আনপিন কৰোঁতে ডিভাইচ লক কৰক"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"ছিম মচাটো নিশ্চিত কৰক"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"এখন ই-ছিম মচাৰ পূৰ্বে এইজন আপুনিয়েই বুলি সত্যাপন কৰক"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"কোনো ই-ছিম মচাৰ পূৰ্বে এইগৰাকী আপুনিয়েই বুলি সত্যাপন কৰক"</string>
     <string name="memtag_title" msgid="5096176296797727201">"উন্নত মেম’ৰী সুৰক্ষাৰ বিটা"</string>
     <string name="memtag_toggle" msgid="8695028758462939212">"উন্নত মেম’ৰী সুৰক্ষা"</string>
     <string name="memtag_intro" msgid="579408691329568953">"এই বিটা সুবিধাটোৱে আপোনাক আপোনাৰ সুৰক্ষা বিপদাপন্ন কৰিব পৰা বাগসমূহৰ পৰা আপোনাৰ ডিভাইচটো সুৰক্ষিত কৰাত সহায় কৰে।"</string>
@@ -3939,18 +3834,12 @@
     <string name="enterprise_privacy_none" msgid="6026527690979756431">"নাই"</string>
     <string name="enterprise_privacy_enterprise_installed_packages" msgid="9114143640515900082">"এপ্ ইনষ্টল কৰা হৈছে"</string>
     <string name="enterprise_privacy_apps_count_estimation_info" msgid="7959907857710107792">"মুঠ এপৰ সংখ্যাটো আনুমানিকহে। Play Storeৰ বাহিৰৰ পৰা ইনষ্টল কৰা এপ্ ইয়াত অন্তৰ্ভুক্ত নহ\'বও পাৰে।"</string>
-    <plurals name="enterprise_privacy_number_packages_lower_bound" formatted="false" msgid="5403847001419529018">
-      <item quantity="one">ন্যূনতম <xliff:g id="COUNT_1">%d</xliff:g> এপ্</item>
-      <item quantity="other">ন্যূনতম <xliff:g id="COUNT_1">%d</xliff:g> এপ্</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages_lower_bound" msgid="5317634640873658149">"{count,plural, =1{ন্যূনতম # টা এপ্‌}one{ন্যূনতম # টা এপ্‌}other{ন্যূনতম # টা এপ্‌}}"</string>
     <string name="enterprise_privacy_location_access" msgid="8023838718108456971">"অৱস্থানৰ অনুমতিসমূহ"</string>
     <string name="enterprise_privacy_microphone_access" msgid="7242958026470143653">"মাইক্ৰ\'ফোনত অনুমতি"</string>
     <string name="enterprise_privacy_camera_access" msgid="7685460535880069016">"কেমেৰাৰ অনুমতিসমূহ"</string>
     <string name="enterprise_privacy_enterprise_set_default_apps" msgid="7498546659083996300">"ডিফ\'ল্ট এপসমূহ"</string>
-    <plurals name="enterprise_privacy_number_packages" formatted="false" msgid="8568544906431825430">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>টা এপ্</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>টা এপ্</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages" msgid="5294444005035188274">"{count,plural, =1{# টা এপ্‌}one{# টা এপ্‌}other{# টা এপ্‌}}"</string>
     <string name="enterprise_privacy_input_method" msgid="3278314982700662246">"ডিফ\'ল্ট কীব\'ৰ্ড"</string>
     <string name="enterprise_privacy_input_method_name" msgid="2974859490559054584">"<xliff:g id="APP_LABEL">%s</xliff:g>লৈ ছেট কৰা হৈছে"</string>
     <string name="enterprise_privacy_always_on_vpn_device" msgid="1735829327405126695">"সদা-সক্ৰিয় ভিপিএন অনহৈ আছে"</string>
@@ -3960,18 +3849,12 @@
     <string name="enterprise_privacy_ca_certs_device" msgid="1816495877258727663">"বিশ্বাসী ক্ৰেডেনশ্বিয়েলসমূহ"</string>
     <string name="enterprise_privacy_ca_certs_personal" msgid="1516422660828485795">"আপোনাৰ ব্যক্তিগত প্ৰ’ফাইলত থকা বিশ্বাসী ক্ৰেডেনশ্বিয়েলবোৰ"</string>
     <string name="enterprise_privacy_ca_certs_work" msgid="4318941788592655561">"আপোনাৰ কৰ্মস্থানৰ প্ৰ’ফাইলত থকা বিশ্বাসী ক্ৰেডেনশ্বিয়েলবোৰ"</string>
-    <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="6459725295322004179">
-      <item quantity="one">ন্যূনতম <xliff:g id="COUNT_1">%d</xliff:g> খন চিএ প্ৰমাণপত্ৰ</item>
-      <item quantity="other">ন্যূনতম <xliff:g id="COUNT_1">%d</xliff:g> খন চিএ প্ৰমাণপত্ৰ</item>
-    </plurals>
+    <string name="enterprise_privacy_number_ca_certs" msgid="4540897122831942658">"{count,plural, =1{ন্যূনতম # খন CA প্ৰমাণপত্ৰ}one{ন্যূনতম # খন CA প্ৰমাণপত্ৰ}other{ন্যূনতম # খন CA প্ৰমাণপত্ৰ}}"</string>
     <string name="enterprise_privacy_lock_device" msgid="464054894363899866">"প্ৰশাসকে ডিভাইচটো লক কৰিব আৰু পাছৱৰ্ড ৰিছেট কৰিব পাৰে"</string>
     <string name="enterprise_privacy_wipe_device" msgid="869589182352244591">"প্ৰশাসকে ডিভাইচৰ আটাইবোৰ ডেটা মচিব পাৰে"</string>
     <string name="enterprise_privacy_failed_password_wipe_device" msgid="7045164901334821226">"ডিভাইচৰ আটাইবোৰ ডেটা মচাৰ পূৰ্বে সঠিক পাছৱৰ্ড দিয়াৰ প্ৰচেষ্টা ব্যৰ্থ হ’ল"</string>
     <string name="enterprise_privacy_failed_password_wipe_work" msgid="2537582942554484170">"কৰ্মস্থানৰ ডেটা মচাৰ আগতে কেইবাবাৰো ভূল পাছৱৰ্ড টাইপ কৰা হ’ল"</string>
-    <plurals name="enterprise_privacy_number_failed_password_wipe" formatted="false" msgid="8811973918944217791">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> প্ৰয়াস</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> প্ৰয়াস</item>
-    </plurals>
+    <string name="enterprise_privacy_number_failed_password_wipe" msgid="2695842143305867642">"{count,plural, =1{# টা প্ৰয়াস}one{# টা প্ৰয়াস}other{# টা প্ৰয়াস}}"</string>
     <string name="do_disclosure_generic" msgid="3067459392402324538">"এই ডিভাইচটো আপোনাৰ প্ৰতিষ্ঠানৰ দ্বাৰা পৰিচালিত৷"</string>
     <string name="do_disclosure_with_name" msgid="867544298924410766">"এই ডিভাইচটো <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>ৰ দ্বাৰা পৰিচালিত।"</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
@@ -3999,21 +3882,12 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"আপুনি এবাৰ সম্পূৰ্ণ পৰিমাণ পৰিশোধ কৰাৰ পাছত:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"ডিভাইচটোৰ পৰা আটাইবোৰ প্ৰতিবন্ধকতা আঁতৰোৱা হ\'ব"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"আপোনাৰ ক্ৰেডিটৰ এপ্‌টো আপুনি আনইনষ্টল কৰিব পাৰে"</string>
-    <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
-      <item quantity="one">টা কেমেৰা এপ্‌</item>
-      <item quantity="other">টা কেমেৰা এপ্‌</item>
-    </plurals>
+    <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{কেমেৰা এপ্‌}one{কেমেৰা এপ্‌সমূহ}other{কেমেৰা এপ্‌সমূহ}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"Calendar এপ্"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"সম্পৰ্কসূচীৰ এপ্"</string>
-    <plurals name="default_email_app_title" formatted="false" msgid="8338194872609410234">
-      <item quantity="one">ইমেইল ক্লাইণ্ট এপসমূহ</item>
-      <item quantity="other">ইমেইল ক্লাইণ্ট এপসমূহ</item>
-    </plurals>
+    <string name="default_email_app_title" msgid="5411280873093244250">"{count,plural, =1{ইমেইল ক্লায়েণ্ট এপ্‌}one{ইমেইল ক্লায়েণ্ট এপ্‌সমূহ}other{ইমেইল ক্লায়েণ্ট এপ্‌সমূহ}}"</string>
     <string name="default_map_app_title" msgid="7569231732944853320">"মেপ এপ্"</string>
-    <plurals name="default_phone_app_title" formatted="false" msgid="4222188821845826493">
-      <item quantity="one">টা ফ\'ন এপ্</item>
-      <item quantity="other">টা ফ\'ন এপ্</item>
-    </plurals>
+    <string name="default_phone_app_title" msgid="795025972645464135">"{count,plural, =1{ফ’ন এপ্‌}one{ফ’ন এপ্‌সমূহ}other{ফ’ন এপ্‌সমূহ}}"</string>
     <string name="app_names_concatenation_template_2" msgid="8320181646458855457">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>"</string>
     <string name="app_names_concatenation_template_3" msgid="7019703249717854148">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>, <xliff:g id="THIRD_APP_NAME">%3$s</xliff:g>"</string>
     <string name="storage_default_internal_storage" msgid="4055660218818688131">"এই ডিভাইচটো"</string>
@@ -4040,13 +3914,18 @@
     <string name="webview_uninstalled_for_user" msgid="627352948986275488">"(ব্যৱহাৰকাৰী <xliff:g id="USER">%s</xliff:g>ৰ বাবে আনইনষ্টল কৰা হৈছে)"</string>
     <string name="webview_disabled_for_user" msgid="5809886172032644498">"(<xliff:g id="USER">%s</xliff:g>ৰ বাবে অক্ষম কৰা হৈছে)"</string>
     <string name="autofill_app" msgid="7595308061826307921">"স্বয়ংপূৰ্তি সেৱা"</string>
+    <string name="default_autofill_app" msgid="372234803718251606">"ডিফ’ল্ট স্বয়ংক্ৰিয়ভাৱে পূৰ হোৱাৰ সেৱা"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"পাছৱৰ্ড"</string>
-    <plurals name="autofill_passwords_count" formatted="false" msgid="7715009165029452622">
-      <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> টা পাছৱৰ্ড</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> টা পাছৱৰ্ড</item>
-    </plurals>
+    <string name="credman_credentials" msgid="5937331545565783811">"পাছৱৰ্ড আৰু পৰিচয় সম্পৰ্কীয় সেৱা"</string>
+    <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# টা পাছৱৰ্ড}one{# টা পাছৱৰ্ড}other{# টা পাছৱৰ্ড}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"স্বয়ংক্ৰিয়, পূৰ, স্বয়ংক্রিয়ভাৱে পূৰ হোৱা, পাছৱৰ্ড"</string>
+    <string name="credman_keywords" msgid="7236954350284379264">"ক্ৰিডেনশ্বিয়েল, পাছকী, পাছৱৰ্ড"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;আপুনি এই এপ্‌টোক বিশ্বাস কৰাটো নিশ্চিত কৰক&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; এ স্বয়ংপূৰ্তিৰ বাবে নিৰ্ধাৰণ কৰিবলৈ আপোনাৰ স্ক্ৰীনত দেখা দিয়া বস্তুবোৰ ব্যৱহাৰ কৰে।"</string>
+    <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s অফ কৰিবনে?"</string>
+    <string name="credman_confirmation_message" msgid="1485617504425237430">"আপুনি ছাইন ইন কৰাৰ সময়ত ঠিকনা অথবা পৰিশোধৰ পদ্ধতিৰ দৰে ছেভ কৰি থোৱা তথ্য পূৰ কৰা নহ’ব। আপোনাৰ ছেভ কৰি থোৱা তথ্য পূৰ কৰি ৰাখিবলৈ এটা ডিফ’ল্ট স্বয়ংক্ৰিয়ভাৱে পূৰ হোৱাৰ সেৱা ছেট কৰক।"</string>
+    <string name="credman_error_message_title" msgid="5108868200002966901">"পাছৱৰ্ড আৰু পৰিচয় সম্পৰ্কীয় সেৱাৰ সীমা"</string>
+    <string name="credman_error_message" msgid="4058425433345908579">"একে সময়তে আপোনাৰ ৫ টা পৰ্যন্ত স্বয়ংক্ৰিয়ভাৱে পূৰ হোৱা আৰু পাছৱৰ্ড সম্পৰ্কীয় সেৱা সক্ৰিয় হৈ থাকিব পাৰে। অধিক যোগ দিবলৈ এটা সেৱা অফ কৰক।"</string>
+    <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"অফ কৰক"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"স্বয়ংপূৰ্তি"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"লগিঙৰ স্তৰ"</string>
     <string name="autofill_max_partitions" msgid="7342195529574406366">"প্ৰতি ছেশ্বনত কৰিব পৰা অধিকতম অনুৰোধ"</string>
@@ -4229,8 +4108,7 @@
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"এপৰ ডেটা ব্যৱহাৰ"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"অমান্য নেটৱৰ্কৰ ম’ড <xliff:g id="NETWORKMODEID">%1$d</xliff:g>। উপেক্ষা কৰক।"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"এক্সেছ পইণ্টৰ নাম"</string>
-    <!-- no translation found for keywords_access_point_names (8174967126858505945) -->
-    <skip />
+    <string name="keywords_access_point_names" msgid="8174967126858505945">"এপিএন"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g>ৰ সৈতে সংযোগ কৰিলে উপলব্ধ নহয়"</string>
     <string name="see_more" msgid="7499355691042812723">"অধিক চাওক"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> অন কৰিবনে?"</string>
@@ -4320,10 +4198,7 @@
     <string name="copyable_slice_toast" msgid="1008251852798990606">"<xliff:g id="COPY_CONTENT">%1$s</xliff:g> ক্লিপব’ৰ্ডত প্ৰতিলিপি কৰা হ’ল"</string>
     <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"সাধ্য সুবিধাৰ ব্যৱহাৰ"</string>
-    <plurals name="accessibility_usage_summary" formatted="false" msgid="6910643986958263005">
-      <item quantity="one"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g>টা এপে আপোনাৰ ডিভাইচটো সম্পূৰ্ণভাৱে এক্সেছ কৰিব পাৰে</item>
-      <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g>টা এপে আপোনাৰ ডিভাইচটো সম্পূৰ্ণভাৱে এক্সেছ কৰিব পাৰে</item>
-    </plurals>
+    <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{১ টা এপে আপোনাৰ ডিভাইচটো সম্পূৰ্ণৰূপে এক্সেছ কৰিব পাৰে}one{# টা এপে আপোনাৰ ডিভাইচটো সম্পূৰ্ণৰূপে এক্সেছ কৰিব পাৰে}other{# টা এপে আপোনাৰ ডিভাইচটো সম্পূৰ্ণৰূপে এক্সেছ কৰিব পাৰে}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"জৰুৰী তথ্য"</string>
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"অব্যাহত ৰাখক"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"নালাগে, ধন্যবাদ"</string>
@@ -4507,10 +4382,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"2Gৰ অনুমতি দিয়ক"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G কম সুৰক্ষিত, কিন্তু কিছুমান অৱস্থানত আপোনাৰ সংযোগ উন্নত কৰিব পাৰে। জৰুৰীকালীন কলৰ বাবে 2Gৰ সদায় অনুমতি আছে।"</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>ৰ বাবে 2G উপলব্ধ হোৱাটো আৱশ্যক"</string>
-    <!-- no translation found for allow_null_algorithms_title (9143076634352979096) -->
-    <skip />
-    <!-- no translation found for allow_null_algorithms_summary (5874570357011783211) -->
-    <skip />
+    <string name="allow_null_algorithms_title" msgid="9143076634352979096">"কম সুৰক্ষিত সংযোগক অনুমতি দিয়ক"</string>
+    <string name="allow_null_algorithms_summary" msgid="5874570357011783211">"কিছুমান অৱস্থানত আপোনাৰ ছিগনেল উন্নত কৰিব পাৰে। জৰুৰীকালীন কলৰ বাবে, কম সুৰক্ষিত সংযোগসমূহক সদায় অনুমতি দিয়া হয়।"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"আটাইবোৰ সেৱা"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"ক্লিপব’ৰ্ডৰ এক্সেছ দেখুৱাওক"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"এপে আপুনি প্ৰতিলিপি কৰা পাঠ, প্ৰতিচ্ছবি অথবা অন্য সমল এক্সেছ কৰিলে এটা বাৰ্তা দেখুৱাওক"</string>
@@ -4618,18 +4491,11 @@
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"কিউআৰ ক’ডটো মান্য ফৰ্মেটৰ নহয়"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"ই-ছিমলৈ সলনি কৰক"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"ই-ছিম অন্য এটা ডিভাইচলৈ স্থানান্তৰ কৰক"</string>
-    <!-- no translation found for background_install_preference_summary (3065219346519340364) -->
-    <skip />
-    <!-- no translation found for background_install_title (607913515188276168) -->
-    <skip />
-    <!-- no translation found for background_install_summary (3890296129543309666) -->
-    <skip />
-    <!-- no translation found for background_install_feature_list_no_entry (2071343281272266154) -->
-    <skip />
-    <!-- no translation found for background_install_uninstall_button_description (1189649052911501249) -->
-    <skip />
-    <!-- no translation found for background_install_before (8608614957688912715) -->
-    <skip />
-    <!-- no translation found for background_install_after (7983488897570908149) -->
-    <skip />
+    <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# টা এপ্‌}one{# টা এপ্‌}other{# টা এপ্‌}}"</string>
+    <string name="background_install_title" msgid="607913515188276168">"নেপথ্যত ইনষ্টল হোৱা এপ্‌"</string>
+    <string name="background_install_summary" msgid="3890296129543309666">"আপোনাৰ ডিভাইচ নিৰ্মাতাই নেপথ্যত আপোনাৰ ডিভাইচত এপ্‌ ইনষ্টল কৰিব পাৰে অথবা আপোনাৰ বাহক আৰু অন্য অংশীদাৰক তেনে কৰিবলৈ অনুমতি দিব পাৰে।\n\nআপোনাৰ ডিভাইচটোৱে স্বাভাৱিকভাৱে কাম কৰিবলৈ ইয়াত তালিকাভুক্ত কৰা কোনো এপৰ আৱশ্যক নহয়। আপুনি নিবিচৰা এপ্‌সমূহ আনইনষ্টল কৰিব পাৰে।"</string>
+    <string name="background_install_feature_list_no_entry" msgid="2071343281272266154">"নেপথ্যত কোনো এপ্‌ ইনষ্টল হোৱা নাই"</string>
+    <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"এপ্‌ আনইনষ্টল কৰক"</string>
+    <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{যোৱা # মাহত ইনষ্টল কৰা এপ্‌}one{যোৱা # মাহত ইনষ্টল কৰা এপ্‌}other{যোৱা # মাহত ইনষ্টল কৰা এপ্‌}}"</string>
+    <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{# মাহতকৈ আগত ইনষ্টল কৰা এপ্‌}one{# মাহতকৈ আগত ইনষ্টল কৰা এপ্‌}other{# মাহতকৈ আগত ইনষ্টল কৰা এপ্‌}}"</string>
 </resources>

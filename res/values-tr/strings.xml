@@ -26,10 +26,7 @@
     <string name="off" msgid="2898123876644709799">"Kapalı"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Bilinmiyor"</string>
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"Bilgileri göstermek için dokunun"</string>
-    <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
-      <item quantity="other">Geliştirici olmanıza <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> adım kaldı.</item>
-      <item quantity="one">Geliştirici olmanıza <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> adım kaldı.</item>
-    </plurals>
+    <string name="show_dev_countdown" msgid="2936506773086395069">"{count,plural, =1{Geliştirici olmanıza # adım kaldı.}other{Geliştirici olmanıza # adım kaldı.}}"</string>
     <string name="show_dev_on" msgid="2840850085134853754">"Artık bir geliştiricisiniz"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"Gerekli değil, siz zaten bir geliştiricisiniz."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"Lütfen önce geliştirici seçeneklerini etkinleştirin."</string>
@@ -122,7 +119,7 @@
     <string name="stylus_default_notes_app" msgid="3111290761558445874">"Sistem not alma uygulaması"</string>
     <string name="stylus_textfield_handwriting" msgid="6962904622425646128">"Metin alanlarına ekran kalemiyle yazma"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Ekran kalemiyle basılan düğmeleri yoksay"</string>
-    <string name="stylus_usi_header_title" msgid="1949011797718972583">"USI ekran kalemi"</string>
+    <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Ekran kalemi"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Tarih ve saat"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Temizle"</string>
@@ -160,10 +157,23 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Ayarlar\'da bu uygulama için dil seçimi mevcut değil."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Dil, uygulamada bulunan dillerden farklı olabilir. Bazı uygulamalar bu ayarı desteklemeyebilir."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Yalnızca dil seçimini destekleyen uygulamalar burada görünür."</string>
-    <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
-      <item quantity="other">Seçilen diller kaldırılsın mı?</item>
-      <item quantity="one">Seçilen dil kaldırılsın mı?</item>
-    </plurals>
+    <!-- no translation found for regional_preferences_title (4304567374498629528) -->
+    <skip />
+    <!-- no translation found for regional_preferences_summary (1189876997389469650) -->
+    <skip />
+    <!-- no translation found for regional_preferences_main_page_sub_title (4666033861956272891) -->
+    <skip />
+    <!-- no translation found for temperature_preferences_title (5009881556503629058) -->
+    <skip />
+    <!-- no translation found for calendar_preferences_title (8312485828206542600) -->
+    <skip />
+    <!-- no translation found for first_day_of_week_preferences_title (1971850087589599553) -->
+    <skip />
+    <!-- no translation found for numbers_preferences_title (6094837605398562369) -->
+    <skip />
+    <!-- no translation found for default_string_of_regional_preference (1595774718180886349) -->
+    <skip />
+    <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Seçilen dil kaldırılsın mı?}other{Seçilen diller kaldırılsın mı?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Metin başka bir dilde görüntülenecek."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Tüm diller kaldırılamaz"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Tercih edilen en az dil bırakın"</string>
@@ -182,6 +192,7 @@
     <string name="apply" msgid="7834684883190163536">"Uygula"</string>
     <string name="share" msgid="8502235338607613795">"Paylaş"</string>
     <string name="add" msgid="8335206931421683426">"Ekle"</string>
+    <string name="remove" msgid="1028414219245072102">"Kaldır"</string>
     <string name="settings_label" msgid="943294133671632976">"Ayarlar"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Ayarlar"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Ayarlar kısayolu"</string>
@@ -193,6 +204,7 @@
     <string name="roaming_warning" msgid="7703647889040229013">"Dolaşım ücretleri alınabilir."</string>
     <string name="date_time_auto" msgid="4239202185055225869">"Saati otomatik olarak ayarla"</string>
     <string name="zone_auto_title" msgid="5141692422373097957">"Otomatik olarak ayarla"</string>
+    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"Bu anahtar açık konuma getirildiğinde saat dilimini ayarlamak için konum kullanılır"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Yerel ayar varsayılan değerini kullan"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24 saat biçimini kullan"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Saat"</string>
@@ -221,10 +233,8 @@
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"Ör. Can\'ın Android\'i."</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Konum"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Konumu kullan"</string>
-    <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="other">Açık - <xliff:g id="COUNT_1">%1$d</xliff:g> uygulamanın konuma erişimi var</item>
-      <item quantity="one">Açık - <xliff:g id="COUNT_0">%1$d</xliff:g> uygulamanın konuma erişimi var</item>
-    </plurals>
+    <!-- no translation found for location_settings_summary_location_on (7029728269719893381) -->
+    <skip />
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Yükleniyor…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Yakındaki cihazlarla bağlanma izni olan uygulamalar, bağlı cihazların göreli konumunu belirleyebilir."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Uygulamaların ve hizmetlerin konum erişimi kapalı. Yine de arayarak veya mesaj göndererek bir acil durum numarasına ulaştığınızda cihazınızın konumu acil durum müdahale ekiplerine gönderilebilir."</string>
@@ -304,10 +314,8 @@
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Parmak İzi Kilidi kullanırken"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"İş için parmak izi"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Parmak izi ekle"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> parmak izi eklendi</item>
-      <item quantity="one">Parmak izi eklendi</item>
-    </plurals>
+    <!-- no translation found for security_settings_fingerprint_preference_summary (8486134175759676037) -->
+    <skip />
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Parmak izinizi kurun"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Parmak izi kilidine izin verin"</string>
@@ -530,53 +538,20 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Bir sonraki denemenizde yanlış desen girerseniz iş profiliniz ve verileri silinecek"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Bir sonraki denemenizde yanlış PIN girerseniz iş profiliniz ve verileri silinecek"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Bir sonraki denemenizde yanlış şifre girerseniz iş profiliniz ve verileri silinecek"</string>
-    <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
-      <item quantity="other">En az <xliff:g id="COUNT_1">%d</xliff:g> karakter olmalıdır</item>
-      <item quantity="one">En az <xliff:g id="COUNT_0">%d</xliff:g> karakter içermelidir</item>
-    </plurals>
+    <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{En az # karakter içermelidir}other{En az # karakter olmalıdır.}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Yalnızca rakam kullanıyorsanız şifre en az 1 basamaklı olmalıdır}other{Yalnızca rakam kullanıyorsanız şifre en az # basamaklı olmalıdır}}"</string>
-    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
-      <item quantity="other">PIN en az <xliff:g id="COUNT_1">%d</xliff:g> basamaklı olmalıdır</item>
-      <item quantity="one">PIN en az <xliff:g id="COUNT_0">%d</xliff:g> basamaklı olmalıdır</item>
-    </plurals>
-    <plurals name="lockpassword_password_too_long" formatted="false" msgid="8118091957172967677">
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> karakterden az olmalıdır</item>
-      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> karakterden az olmalıdır</item>
-    </plurals>
-    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="8706992338720310765">
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> basamaktan az olmalıdır</item>
-      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> basamaktan az olmalıdır</item>
-    </plurals>
+    <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{PIN en az # basamak içermelidir}other{PIN en az # basamaklı olmalıdır}}"</string>
+    <string name="lockpassword_password_too_long" msgid="1940345313260498308">"{count,plural, =1{# karakterden az olmalıdır}other{# karakterden az olmalıdır}}"</string>
+    <string name="lockpassword_pin_too_long" msgid="1678212054564388576">"{count,plural, =1{En çok # haneli olmalıdır}other{En çok # haneli olmalıdır}}"</string>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"Cihaz yöneticisi yakın zamanda kullanılan bir PIN\'e izin vermiyor"</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"Burada geçersiz bir karakter kullanılamaz"</string>
-    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="2385916409676839024">
-      <item quantity="other">En az <xliff:g id="COUNT">%d</xliff:g> harf içermelidir</item>
-      <item quantity="one">En az 1 harf içermelidir</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="2057467885488612701">
-      <item quantity="other">En az <xliff:g id="COUNT">%d</xliff:g> küçük harf içermelidir</item>
-      <item quantity="one">En az 1 küçük harf içermelidir</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="4541266279643052025">
-      <item quantity="other">En az <xliff:g id="COUNT">%d</xliff:g> büyük harf içermelidir</item>
-      <item quantity="one">En az 1 büyük harf içermelidir</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="70617964591376248">
-      <item quantity="other">En az <xliff:g id="COUNT">%d</xliff:g> rakam içermelidir</item>
-      <item quantity="one">En az 1 rakam içermelidir</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="7981236881269921943">
-      <item quantity="other">En az <xliff:g id="COUNT">%d</xliff:g> özel sembol içermelidir</item>
-      <item quantity="one">En az 1 özel sembol içermelidir</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="1567877061888948467">
-      <item quantity="other">Harf olmayan en az <xliff:g id="COUNT">%d</xliff:g> karakter içermelidir</item>
-      <item quantity="one">Harf olmayan en az 1 karakter içermelidir</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonnumerical" formatted="false" msgid="5056743974888384475">
-      <item quantity="other">En az <xliff:g id="COUNT">%d</xliff:g> rakam olmayan karakter içermelidir</item>
-      <item quantity="one">En az 1 rakam olmayan karakter içermelidir</item>
-    </plurals>
+    <string name="lockpassword_password_requires_letters" msgid="7058340182953750553">"{count,plural, =1{En az 1 harf içermelidir}other{En az # harf içermelidir}}"</string>
+    <string name="lockpassword_password_requires_lowercase" msgid="3286121470522077547">"{count,plural, =1{En az 1 küçük harf içermelidir}other{En az # küçük harf içermelidir}}"</string>
+    <string name="lockpassword_password_requires_uppercase" msgid="720312543910397772">"{count,plural, =1{En az 1 büyük harf içermelidir}other{En az # büyük harf içermelidir}}"</string>
+    <string name="lockpassword_password_requires_numeric" msgid="3886918493600507548">"{count,plural, =1{En az 1 rakam içermelidir}other{En az # rakam içermelidir}}"</string>
+    <string name="lockpassword_password_requires_symbols" msgid="2904870551002210131">"{count,plural, =1{En az 1 özel simge içermelidir}other{En az # özel simge içermelidir}}"</string>
+    <string name="lockpassword_password_requires_nonletter" msgid="1185342065898300006">"{count,plural, =1{Harf olmayan en az 1 karakter içermelidir}other{Harf olmayan en az # karakter içermelidir}}"</string>
+    <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{En az 1 rakam olmayan karakter içermelidir}other{En az # rakam olmayan karakter içermelidir}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Cihaz yöneticisi yakın zamanda kullanılan bir şifreye izin vermiyor"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"Artan, azalan veya tekrar eden rakam dizisine izin verilmiyor"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Onayla"</string>
@@ -586,17 +561,11 @@
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"İleri"</string>
     <string name="manage_device_admin" msgid="1044620606203916275">"Cihaz yönetimi uygulamaları"</string>
     <string name="number_of_device_admins_none" msgid="152926922020437312">"Etkin uygulama yok"</string>
-    <plurals name="number_of_device_admins" formatted="false" msgid="2528735319390151989">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> etkin uygulama</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> etkin uygulama</item>
-    </plurals>
+    <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{# etkin uygulama}other{# etkin uygulama}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"Güven aracıları"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"Kullanmak için önce bir ekran kilidi ayarlayın"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"Yok"</string>
-    <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> etkin güven aracısı</item>
-      <item quantity="one">1 etkin güven aracısı</item>
-    </plurals>
+    <string name="manage_trust_agents_summary_on" msgid="3302574418419446146">"{count,plural, =1{1 etkin güven aracısı}other{# etkin güven aracısı}}"</string>
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ile eşlensin mi?"</string>
@@ -686,7 +655,7 @@
     <string name="wifi_wakeup" msgid="3834327315861781611">"Kablosuz ağı otomatik olarak aç"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Ev ağınız gibi yüksek kaliteli kayıtlı ağların yakınında olduğunuzda kablosuz özelliği tekrar açılır"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Konum kapalı olduğundan kullanılamıyor. "<annotation id="link">"Konum"</annotation>"\'u açın."</string>
-    <string name="wifi_install_credentials" msgid="5192903644606839972">"Sertifika yükle"</string>
+    <string name="wifi_install_credentials" msgid="5192903644606839972">"Sertifika yükleme"</string>
     <string name="wifi_scan_notify_text" msgid="7163137260385995873">"Uygulamalar ve hizmetler, konum doğruluğunu iyileştirmek için kablosuz ağları kablosuz özelliği kapalıyken bile her zaman tarayabilir. Bu özellik örneğin konuma dayalı özellikleri ve hizmetleri iyileştirmek için kullanılabilir. Bunu <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>Kablosuz ağ taraması ayarlarından<xliff:g id="LINK_END_1">LINK_END</xliff:g> değiştirebilirsiniz."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="7439201783168213149">"Konum doğruluğunu iyileştirmek için <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>kablosuz ağ taraması ayarlarında<xliff:g id="LINK_END_1">LINK_END</xliff:g> kablosuz ağ taramasını açın."</string>
     <string name="wifi_cellular_data_fallback_title" msgid="2844653839490977040">"Mobil veriye otomatik olarak geç"</string>
@@ -812,18 +781,9 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Ağ kaydedilemedi"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"İptal"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Ağ unutulsun mu?"</string>
-    <plurals name="wifi_saved_access_points_summary" formatted="false" msgid="2802436466732147888">
-      <item quantity="other">%d ağ</item>
-      <item quantity="one">1 ağ</item>
-    </plurals>
-    <plurals name="wifi_saved_passpoint_access_points_summary" formatted="false" msgid="5802057518058840450">
-      <item quantity="other">%d abonelik</item>
-      <item quantity="one">1 abonelik</item>
-    </plurals>
-    <plurals name="wifi_saved_all_access_points_summary" formatted="false" msgid="5125849180309374451">
-      <item quantity="other">%d ağ ve abonelik</item>
-      <item quantity="one">1 ağ ve abonelik</item>
-    </plurals>
+    <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 ağ}other{# ağ}}"</string>
+    <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 abonelik}other{# abonelik}}"</string>
+    <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 ağ ve abonelik}other{# ağ ve abonelik}}"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"Cihaz MAC adresi"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"Rastgele MAC adresi"</string>
@@ -1055,10 +1015,7 @@
     <string name="sim_preferred_title" msgid="8850185380445309835">"Tercih edilen SIM güncellensin mi?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g>, cihazınızdaki tek SIM kart. Bu SIM kartı mobil veri, çağrı ve SMS mesajları için kullanmak istiyor musunuz?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Yanlış SIM PIN kodu. Cihazınızın kilidini açmak için artık operatörünüzle bağlantı kurmanız gerekiyor."</string>
-    <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
-      <item quantity="other">Yanlış SIM PIN kodu, <xliff:g id="NUMBER_1">%d</xliff:g> deneme hakkınız kaldı.</item>
-      <item quantity="one">Yanlış SIM PIN kodu. Cihazınızın kilidini açmak için operatörünüzle bağlantı kurmak zorunda kalmadan önce <xliff:g id="NUMBER_0">%d</xliff:g> deneme hakkınız kaldı.</item>
-    </plurals>
+    <string name="wrong_pin_code" msgid="8124222991071607958">"{count,plural, =1{Yanlış SIM PIN kodu. Cihazınızın kilidini açması için operatörünüzle bağlantı kurmak zorunda kalmadan önce # deneme hakkınız kaldı.}other{Yanlış SIM PIN kodu. # deneme hakkınız kaldı.}}"</string>
     <string name="wrong_pin_code_one" msgid="6924852214263071441">"Yanlış SIM PIN kodu. Cihazınızın kilidini açması için operatörünüzle bağlantı kurmak zorunda kalmadan önce 1 deneme hakkınız kaldı."</string>
     <string name="pin_failed" msgid="3726505565797352255">"SIM PIN işlemi başarısız oldu!"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"Sistem güncellemeleri"</string>
@@ -1076,6 +1033,8 @@
     <string name="storage_settings" msgid="7472188817781592677">"Depolama"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Depolama alanı ve önbellek"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Depolama ayarları"</string>
+    <string name="status_eid" msgid="7532406028683438634">"SIM kimliği"</string>
+    <string name="eid_multi_sim" msgid="4581966600904959452">"SIM kimliği (SIM yuvası %1$d)"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI (SIM yuvası %1$d)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Görüntülemek için kaydedilmiş ağı seçin"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
@@ -1162,6 +1121,8 @@
     <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"<xliff:g id="NAME">^1</xliff:g> biriminizi kullanmaya başlayabilirsiniz"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Pil durumu"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Pil düzeyi"</string>
+    <string name="communal_settings_title" msgid="2845678473945902115">"Ortak"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"Ortak ayarlar"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN\'ler"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Erişim noktasını düzenle"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Ayarlanmadı"</string>
@@ -1202,12 +1163,9 @@
     <string name="menu_restore" msgid="4310539620115151551">"Varsayılana sıfırla"</string>
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"Varsayılan APN ayarlarına sıfırlama tamamlandı."</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"Sıfırlama seçenekleri"</string>
-    <!-- no translation found for reset_mobile_network_settings_title (5616713931258506842) -->
-    <skip />
-    <!-- no translation found for reset_mobile_network_settings_desc (7292636387692165727) -->
-    <skip />
-    <!-- no translation found for reset_mobile_network_settings_confirm_title (7510965634669511241) -->
-    <skip />
+    <string name="reset_mobile_network_settings_title" msgid="5616713931258506842">"Mobil Ağ Ayarlarını Sıfırla"</string>
+    <string name="reset_mobile_network_settings_desc" msgid="7292636387692165727">"Bu işlem tüm mobil ağ ayarlarını sıfırlar"</string>
+    <string name="reset_mobile_network_settings_confirm_title" msgid="7510965634669511241">"Mobil Ağ Ayarları Sıfırlansın mı?"</string>
     <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"Bluetooth ve kablosuzu sıfırlayın"</string>
     <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"Bu işlem tüm kablosuz ve Bluetooth ayarlarını sıfırlar. Bu işlem geri alınamaz."</string>
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Sıfırla"</string>
@@ -1296,10 +1254,7 @@
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"İş profili konumu"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Uygulama konum izinleri"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Konum özelliği kapalı"</string>
-    <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
-      <item quantity="other"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> uygulamadan <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> tanesinin konuma erişimi var</item>
-      <item quantity="one"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> uygulamadan <xliff:g id="PERMITTED_LOCATION_APP_COUNT_0">%1$d</xliff:g> tanesinin konuma erişimi var</item>
-    </plurals>
+    <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{#/{total} uygulamanın konuma erişimi var}other{#/{total} uygulamanın konuma erişimi var}}"</string>
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"En son erişim"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"Tümünü göster"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Ayrıntıları göster"</string>
@@ -1314,9 +1269,15 @@
     <string name="location_services_preference_title" msgid="604317859531782159">"Konum hizmetleri"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Konum hizmetleri"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"Konumu kullan"</string>
+    <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"Saat dilimi otomatik olarak ayarlanamıyor"</string>
+    <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"Konum veya Konum Hizmetleri kapalı"</string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_environment" msgid="2279833212923765802"></string>
+    <string name="location_time_zone_detection_status_summary_temporarily_unavailable" msgid="6586801403644278967"></string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Cihaz konumu gerekiyor"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_message" msgid="5846316326139169523">"Konumunuzu kullanarak saat dilimini ayarlamak için konumu açın, ardından saat dilimi ayarlarını güncelleyin"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Konum ayarları"</string>
+    <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"Bunu düzelt"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"İptal"</string>
     <string name="location_time_zone_detection_auto_is_off" msgid="6264253990141650280">"Otomatik saat dilimi algılama kapalı"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Konum saat dilimini algılama devre dışı bırakıldı"</string>
@@ -1440,10 +1401,7 @@
     <string name="install_applications" msgid="3921609656584369901">"Bilinmeyen kaynaklar"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Tüm uyg. kaynaklarına izin ver"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Son açılan uygulamalar"</string>
-    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
-      <item quantity="other">%1$d uygulamanın tamamını göster</item>
-      <item quantity="one">Tüm uygulamaları göster</item>
-    </plurals>
+    <string name="see_all_apps_title" msgid="1650653853942381797">"{count,plural, =1{Tüm uygulamaları göster}other{# uygulamanın tümünü göster}}"</string>
     <string name="forgot_password_title" msgid="3967873480875239885">"BT yöneticinizle iletişim kurun"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Kendisi PIN, desen veya şifrenizi sıfırlamanıza yardımcı olabilir."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Gelişmiş ayarlar"</string>
@@ -1457,10 +1415,7 @@
     <string name="cache_header_label" msgid="2441967971921741047">"Önbellek"</string>
     <string name="clear_cache_btn_text" msgid="8597272828928143723">"Önbelleği temizle"</string>
     <string name="cache_size_label" msgid="313456088966822757">"Önbellek"</string>
-    <plurals name="uri_permissions_text" formatted="false" msgid="8212425823423508096">
-      <item quantity="other">%d öğe</item>
-      <item quantity="one">1 öğe</item>
-    </plurals>
+    <string name="uri_permissions_text" msgid="8406345863117405105">"{count,plural, =1{1 öğe}other{# öğe}}"</string>
     <string name="clear_uri_btn_text" msgid="4828117421162495134">"Erişimi temizle"</string>
     <string name="controls_label" msgid="8671492254263626383">"Denetimler"</string>
     <string name="force_stop" msgid="2681771622136916280">"Durmaya zorla"</string>
@@ -1609,50 +1564,38 @@
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Kısayol listesini göster"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"İş profili klavyeleri ve araçları"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"İş için dokunmatik klavye"</string>
-    <!-- no translation found for trackpad_settings (2071131324087677005) -->
-    <skip />
-    <!-- no translation found for trackpad_mouse_settings (136226693583218429) -->
-    <skip />
-    <!-- no translation found for trackpad_settings_summary (3369855644136760402) -->
-    <skip />
-    <!-- no translation found for trackpad_tap_to_click (1938230946542070746) -->
-    <skip />
-    <!-- no translation found for trackpad_touchpad_gesture_title (7568052847609914436) -->
-    <skip />
-    <!-- no translation found for trackpad_touchpad_gesture_summary (6256074591395359124) -->
-    <skip />
-    <!-- no translation found for trackpad_reverse_scrolling_title (422877284529360866) -->
-    <skip />
-    <!-- no translation found for trackpad_reverse_scrolling_summary (6048648562887499036) -->
-    <skip />
-    <!-- no translation found for trackpad_bottom_right_tap_title (6275428879042702880) -->
-    <skip />
-    <!-- no translation found for trackpad_bottom_right_tap_summary (8734094086900680674) -->
-    <skip />
-    <!-- no translation found for trackpad_pointer_speed (7786579408631352625) -->
-    <skip />
-    <!-- no translation found for trackpad_touch_gesture (8641725062131922497) -->
-    <skip />
-    <!-- no translation found for trackpad_go_back_title (5312164160947491440) -->
-    <skip />
-    <!-- no translation found for trackpad_go_back_summary (4201901101085902768) -->
-    <skip />
-    <!-- no translation found for trackpad_go_home_title (2146525662148291552) -->
-    <skip />
-    <!-- no translation found for trackpad_go_home_summary (2222744701528360887) -->
-    <skip />
-    <!-- no translation found for trackpad_recent_apps_title (8195970908411585445) -->
-    <skip />
-    <!-- no translation found for trackpad_recent_apps_summary (2685092851677573794) -->
-    <skip />
-    <!-- no translation found for trackpad_notifications_title (3521663305043747880) -->
-    <skip />
-    <!-- no translation found for trackpad_notifications_summary (7663647367648690040) -->
-    <skip />
-    <!-- no translation found for trackpad_switch_apps_title (7342032935377284039) -->
-    <skip />
-    <!-- no translation found for trackpad_switch_apps_summary (9193942041912927440) -->
-    <skip />
+    <string name="trackpad_settings" msgid="2071131324087677005">"Dokunmatik alan"</string>
+    <string name="trackpad_mouse_settings" msgid="136226693583218429">"Dokunmatik alan ve fare"</string>
+    <string name="trackpad_settings_summary" msgid="3369855644136760402">"İşaretçi hızı, hareketler"</string>
+    <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Tıklamak için dokunun"</string>
+    <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Dokunmatik alan hareketleri"</string>
+    <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Dokunmatik alan gezinme hareketlerini ayrı ayrı özelleştirin"</string>
+    <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Ters kaydırma"</string>
+    <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Aşağı kaydırdığınızda içerikler yukarı çıkar"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Sağ alt tarafa dokunma"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Daha fazlası için dokunmatik alanın sağ alt köşesine dokunun"</string>
+    <string name="trackpad_pointer_speed" msgid="7786579408631352625">"İşaretçi hızı"</string>
+    <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Dokunmatik alan hareketlerini öğren"</string>
+    <string name="trackpad_go_back_title" msgid="5312164160947491440">"Geri dön"</string>
+    <string name="trackpad_go_back_summary" msgid="4201901101085902768">"Üç parmağınızla sola veya sağa kaydırın"</string>
+    <string name="trackpad_go_home_title" msgid="2146525662148291552">"Ana sayfaya gidin"</string>
+    <string name="trackpad_go_home_summary" msgid="2222744701528360887">"Üç parmağınızla yukarı kaydırın"</string>
+    <string name="trackpad_recent_apps_title" msgid="8195970908411585445">"Son uygulamalar"</string>
+    <string name="trackpad_recent_apps_summary" msgid="2685092851677573794">"Üç parmağınızla yukarı kaydırıp basılı tutun"</string>
+    <string name="trackpad_notifications_title" msgid="3521663305043747880">"Bildirimler"</string>
+    <string name="trackpad_notifications_summary" msgid="7663647367648690040">"Üç parmağınızla aşağı kaydırın"</string>
+    <string name="trackpad_switch_apps_title" msgid="7342032935377284039">"Uygulamalar arasında geçiş yapma"</string>
+    <string name="trackpad_switch_apps_summary" msgid="9193942041912927440">"Dört parmağınızla sola veya sağa kaydırın"</string>
+    <string name="modifier_keys_settings" msgid="2537108435032034683">"Değiştirici tuşlar"</string>
+    <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Tuşların davranışını değiştirin"</string>
+    <string name="modifier_keys_reset_title" msgid="948294258402761066">"Tümünü sıfırla"</string>
+    <string name="modifier_keys_default_summary" msgid="8701640508670973258">"Varsayılan"</string>
+    <string name="modifier_keys_reset_message" msgid="5236994817619936058">"Değiştirici tuşların tümünü varsayılan değerlerine sıfırlamak istediğinizden emin misiniz?"</string>
+    <string name="modifier_keys_done" msgid="8196199314913909700">"Bitti"</string>
+    <string name="modifier_keys_cancel" msgid="7136520252570826772">"İptal"</string>
+    <string name="modifier_keys_restore" msgid="7627661630556839268">"Geri yükle"</string>
+    <string name="modifier_keys_picker_title" msgid="244545904150587851">"Değiştirici tuşu seçin"</string>
+    <string name="modifier_keys_picker_summary" msgid="739397232249560785">"<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> için yeni bir tuş seçin:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Varsayılan"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Konuşma"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"İşaretçi hızı"</string>
@@ -1969,22 +1912,14 @@
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Daha loş"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Daha parlak"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Cihaz yeniden başladığında devam et"</string>
-    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
-      <item quantity="other">Kısa (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> saniye)</item>
-      <item quantity="one">Kısa (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> saniye)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
-      <item quantity="other">Orta (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> saniye)</item>
-      <item quantity="one">Orta (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> saniye)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
-      <item quantity="other">Uzun (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> saniye)</item>
-      <item quantity="one">Uzun (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> saniye)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="4537791441118261556">
-      <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> saniye</item>
-      <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> saniye</item>
-    </plurals>
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (2981206111858937724) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (6867395206533459204) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (4079139970819335593) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_delay_unit_second (5979297390686370567) -->
+    <skip />
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Ayarlar"</string>
     <string name="captioning_preview_title" msgid="2888561631323180535">"Önizle"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Standart seçenekler"</string>
@@ -2059,14 +1994,10 @@
     <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Etrafımdaki cihazları tara"</string>
     <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Kayıtlı cihazlar"</string>
     <string name="print_settings" msgid="8519810615863882491">"Yazdırma"</string>
-    <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> yazdırma hizmeti açık</item>
-      <item quantity="one">1 yazdırma hizmeti açık</item>
-    </plurals>
-    <plurals name="print_jobs_summary" formatted="false" msgid="3933688846338306536">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> yazdırma işi</item>
-      <item quantity="one">1 yazdırma işi</item>
-    </plurals>
+    <!-- no translation found for print_settings_summary (1458773840720811915) -->
+    <skip />
+    <!-- no translation found for print_jobs_summary (7040836482336577323) -->
+    <skip />
     <string name="print_settings_title" msgid="7680498284751129935">"Yazdırma hizmetleri"</string>
     <string name="print_no_services_installed" msgid="7554057966540602692">"Hiçbir hizmet yüklenmedi"</string>
     <string name="print_no_printers_found" msgid="4833082484646109486">"Yazıcı bulunamadı"</string>
@@ -2134,36 +2065,26 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Yüksek pil kullanımı"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"En fazla pil kullanan uygulamaları göster"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Pilinizi korumak için şarj işlemi optimize edildi"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"Pilinizin kullanım ömrünü uzatmaya yardımcı olmak için şarj işlemi optimize edildi."</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"Pilinizin kullanım ömrünü uzatmaya yardımcı olmak için şarj işlemi optimize edildi"</string>
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Pilinizi korumak için şarj işlemi optimize edildi"</string>
-    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Cihazınız yuvadayken pilinizin kullanım ömrünü uzatmaya yardımcı olmak için şarj işlemi optimize edildi."</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Cihazınız yuvadayken pilinizin kullanım ömrünü uzatmaya yardımcı olmak için şarj işlemi optimize edildi"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Pilinizi korumak için şarj işlemi optimize edildi"</string>
-    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Cihazınız yuvadayken pilinizin kullanım ömrünü uzatmaya yardımcı olmak için şarj işlemi optimize edildi."</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Cihazınız yuvadayken pilinizin kullanım ömrünü uzatmaya yardımcı olmak için şarj işlemi optimize edildi"</string>
     <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Tamamen dolana kadar şarj ediliyor"</string>
-    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"Pilinizi korumak amacıyla, tabletiniz daha sonra yuvaya yerleştirildiğinde şarj işlemi optimize edilecek."</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"Tabletiniz daha sonra yuvadayken şarj işlemi, pilinizi korumak için optimize edilecek"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Şarj işlemi duraklatıldı hakkında daha fazla bilgi"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Şarja devam et"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Yüksek güç tüketen arka plan etkinliğini içerir"</string>
-    <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
-      <item quantity="other">%1$d uygulamayı kısıtla</item>
-      <item quantity="one">%1$d uygulamayı kısıtla</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_handled_title" formatted="false" msgid="5862649927574803958">
-      <item quantity="other">%2$d uygulama yakın zamanda kısıtlandı</item>
-      <item quantity="one">%1$s yakın zamanda kısıtlandı</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
-      <item quantity="other">%2$d uygulama arka planda yüksek düzeyde pil kullanıyor</item>
-      <item quantity="one">%1$s arka planda yüksek düzeyde pil kullanıyor</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
-      <item quantity="other">Bu uygulamalar arka planda çalışamaz</item>
-      <item quantity="one">Bu uygulama arka planda çalışamaz</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_app_dialog_title" formatted="false" msgid="7897944678619251740">
-      <item quantity="other">%1$d uygulama kısıtlansın mı?</item>
-      <item quantity="one">Uygulama kısıtlansın mı?</item>
-    </plurals>
+    <!-- no translation found for battery_tip_restrict_title (4537101947310626753) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_handled_title (7142074986508706853) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_summary (7539469590829235277) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_handled_summary (3535697154547199190) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_app_dialog_title (1649476357343160240) -->
+    <skip />
     <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"Pilden tasarruf etmek için <xliff:g id="APP">%1$s</xliff:g> uygulamasının arka planda pil kullanmasını durdurun. Bu uygulama düzgün çalışmayabilir ve bildirimlerinde gecikme olabilir."</string>
     <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"Pilden tasarruf etmek için bu uygulamaların arka planda pil kullanmasını durdurun. Kısıtlanmış uygulamalar düzgün çalışmayabilir ve bildirimlerinde gecikme olabilir.\n\nUygulamalar:"</string>
     <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"Pilden tasarruf etmek için bu uygulamaların arka planda pil kullanmasını durdurun. Kısıtlanmış uygulamalar düzgün çalışmayabilir ve bildirimlerinde gecikme olabilir.\n\nUygulamalar:\n<xliff:g id="APP_LIST">%1$s</xliff:g>"</string>
@@ -2177,20 +2098,16 @@
     <string name="smart_battery_title" msgid="9095903608520254254">"Uygulamaları otomatik olarak yönet"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"Pil Yöneticisi uygulamaların pili çok harcadığını algıladığında, bu uygulamaları kısıtlama seçeneğiniz olacaktır. Kısıtlanmış uygulamalar düzgün bir şekilde çalışmayabilir ve bildirimlerinde gecikme olabilir."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Kısıtlanmış uygulamalar"</string>
-    <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
-      <item quantity="other">%1$d uygulama için pil kullanımı sınırlanıyor</item>
-      <item quantity="one">%1$d uygulama için pil kullanımı sınırlanıyor</item>
-    </plurals>
+    <!-- no translation found for restricted_app_summary (1022307922754893997) -->
+    <skip />
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"<xliff:g id="TIME">%1$s</xliff:g> kısıtlandı"</string>
     <string name="restricted_app_detail_footer" msgid="3495725286882138803">"Bu uygulamaların arka planda pil kullanımı kısıtlanmıştır. Bu uygulamalar beklendiği gibi çalışmayabilir ve bildirimlerinde gecikme olabilir."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Pil Yöneticisi\'ni kullan"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Uygulamalar pili çok harcadığında algıla"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"Uygulamalar pili çok harcadığında algılama"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"Uygulamalar pili çok harcadığında algılama"</string>
-    <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
-      <item quantity="other">%1$d uygulama kısıtlandı</item>
-      <item quantity="one">%1$d uygulama kısıtlandı</item>
-    </plurals>
+    <!-- no translation found for battery_manager_app_restricted (2583902700677009173) -->
+    <skip />
     <string name="battery_header_title_alternate" msgid="8371821625994616659"><small><font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>"<xliff:g id="NUMBER">^1</xliff:g>"</string>
     <string name="battery_missing_message" msgid="400958471814422770">"Pil ölçer okunurken sorun oluştu."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
@@ -2344,9 +2261,9 @@
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Ağ bağlantılarınızı otomatik olarak yöneterek pil ömrünü uzatır ve cihaz performansını iyileştirir"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Uyarlanabilir Bağlantı\'yı kullanın"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Kimlik bilgileri deposu"</string>
-    <string name="credentials_install" msgid="3933218407598415827">"Sertifika yükle"</string>
-    <string name="credentials_reset" msgid="4246628389366452655">"Kimlik bilgilerini temizle"</string>
-    <string name="credentials_reset_summary" msgid="5400585520572874255">"Tüm sertifikaları kaldır"</string>
+    <string name="credentials_install" msgid="3933218407598415827">"Sertifika yükleme"</string>
+    <string name="credentials_reset" msgid="4246628389366452655">"Kimlik bilgilerini temizleme"</string>
+    <string name="credentials_reset_summary" msgid="5400585520572874255">"Tüm sertifikaları kaldırın"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"Güvenilen kimlik bilgileri"</string>
     <string name="trusted_credentials_summary" msgid="345822338358409468">"Güvenilen CA sertifikalarını görüntüleyin"</string>
     <string name="user_credentials" msgid="4044405430790970775">"Kullanıcı kimlik bilgileri"</string>
@@ -2354,10 +2271,8 @@
     <string name="advanced_security_title" msgid="7117581975877192652">"Gelişmiş"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"Bu kullanıcı için kimlik bilgileri kullanılamıyor"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"VPN ve uygulamalar için yüklendi"</string>
-    <!-- no translation found for credential_for_wifi (2286560570630763556) -->
-    <skip />
-    <!-- no translation found for credential_for_wifi_in_use (7276290656840986618) -->
-    <skip />
+    <string name="credential_for_wifi" msgid="2286560570630763556">"Kablosuz bağlantı için yüklendi"</string>
+    <string name="credential_for_wifi_in_use" msgid="7276290656840986618">"Kablosuz bağlantı için yüklendi (kullanılıyor)"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"Tüm içerik kaldırılsın mı?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"Kimlik bilgileri deposu silindi."</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"Kimlik bilgileri deposu silinemedi."</string>
@@ -2382,10 +2297,8 @@
     <string name="remove_credential_management_app" msgid="6089291496976812786">"Uygulamayı kaldır"</string>
     <string name="remove_credential_management_app_dialog_title" msgid="5713525435104706772">"Bu uygulama kaldırılsın mı?"</string>
     <string name="remove_credential_management_app_dialog_message" msgid="7739474298063646935">"Bu uygulama, sertifikaları yönetmez ancak cihazınızda kalmaya devam eder. Uygulama tarafından yüklenen sertifikalar kaldırılır."</string>
-    <plurals name="number_of_urls" formatted="false" msgid="403979258551655023">
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> URL</item>
-      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> URL</item>
-    </plurals>
+    <!-- no translation found for number_of_urls (1128699121050872188) -->
+    <skip />
     <string name="emergency_tone_title" msgid="6673118505206685168">"Acil durum arama sinyali"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Acil çağrı yapıldığında nasıl işlev göreceğini ayarlayın"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Yedekleme"</string>
@@ -2428,10 +2341,8 @@
     <string name="notification_history_today" msgid="5828496957208237230">"Son 24 saat"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"Ertelendi"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"Yakın zamanda kapatıldı"</string>
-    <plurals name="notification_history_count" formatted="false" msgid="1859304685071321991">
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> bildirim</item>
-      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> bildirim</item>
-    </plurals>
+    <!-- no translation found for notification_history_count (885305572972482838) -->
+    <skip />
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"Çağrı zil sesi ve titreşim"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"Ağ ayrıntıları"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"Senkronizasyon etkinleştirildi"</string>
@@ -2603,16 +2514,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Sistem CA sertifikası etkinleştirilsin mi?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Sistem CA sertifikası devre dışı bırakılsın mı?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Kullanıcı CA sertifikası kalıcı olarak kaldırılsın mı?"</string>
-    <!-- no translation found for credential_being_used_by (3682869943025283499) -->
-    <skip />
-    <!-- no translation found for credential_contains (3146519680449595771) -->
-    <skip />
-    <!-- no translation found for one_userkey (6363426728683951234) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2097644070227688983) -->
-    <skip />
-    <!-- no translation found for one_cacrt (982242103604501559) -->
-    <skip />
+    <string name="credential_being_used_by" msgid="3682869943025283499">"Aşağıdakiler tarafından kullanılıyor:"</string>
+    <string name="credential_contains" msgid="3146519680449595771">"Bu giriş şunları içeriyor:"</string>
+    <string name="one_userkey" msgid="6363426728683951234">"1 kullanıcı anahtarı"</string>
+    <string name="one_usercrt" msgid="2097644070227688983">"1 kullanıcı sertifikası"</string>
+    <string name="one_cacrt" msgid="982242103604501559">"1 CA sertifikası"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"%d CA sertifikası"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"Kimlik bilgileri ayrıntıları"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"Kimlik bilgileri kaldırıldı: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
@@ -2627,17 +2533,13 @@
     <string name="additional_system_update_settings_list_item_title" msgid="7230385345152138051">"Ek sistem güncellemeleri"</string>
     <string name="ssl_ca_cert_warning" msgid="3898387588657346106">"Ağ etkinliği izlenebilir"</string>
     <string name="done_button" msgid="6269449526248267">"Tamam"</string>
-    <plurals name="ssl_ca_cert_dialog_title" formatted="false" msgid="5491460811755938449">
-      <item quantity="other">Sertifikalara güvenin veya sertifikaları kaldırın</item>
-      <item quantity="one">Sertifikaya güvenin veya sertifikayı kaldırın</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_dialog_title (1032088078702042090) -->
+    <skip />
     <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{{orgName}, cihazınıza sertifika yetkilisi yükledi. Yönetici, bu sertifikayla e-postalar, uygulamalar ve güvenli web siteleri de dahil olmak üzere cihazınızın ağ etkinliğini izleyebilir.\n\nBu sertifika hakkında daha fazla bilgi edinmek için yöneticinizle iletişime geçin.}other{{orgName}, cihazınıza sertifika yetkilileri yükledi. Yönetici, bu sertifikayla e-postalar, uygulamalar ve güvenli web siteleri de dahil olmak üzere cihazınızın ağ etkinliğini izleyebilir.\n\nBu sertifikalar hakkında daha fazla bilgi edinmek için yöneticinizle iletişime geçin.}}"</string>
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName}, iş profilinize sertifika yetkilisi yükledi. Yönetici, bu sertifikayla e-postalar, uygulamalar ve güvenli web siteleri de dahil olmak üzere iş ağı etkinliğini izleyebilir.\n\nBu sertifika hakkında daha fazla bilgi edinmek için yöneticinizle iletişime geçin.}other{{orgName}, iş profilinize sertifika yetkilileri yükledi. Yönetici, bu sertifikalarla e-postalar, uygulamalar ve güvenli web siteleri de dahil olmak üzere iş ağı etkinliğini izleyebilir.\n\nBu sertifikalar hakkında daha fazla bilgi edinmek için yöneticinizle iletişime geçin.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"E-postalarınız, uygulamalarınız ve güvenli web siteleriniz dahil olmak üzere ağ etkinliğiniz üçüncü bir tarafça izlenebilir.\n\nCihazınızda yüklü durumdaki güvenilen bir kimlik bilgisi bunu mümkün kılmaktadır."</string>
-    <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
-      <item quantity="other">Sertifikaları kontrol et</item>
-      <item quantity="one">Sertifikayı kontrol et</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_settings_button (2044927302268394991) -->
+    <skip />
     <string name="user_settings_title" msgid="6550866465409807877">"Birden çok kullanıcı"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Kullanıcılar ve Profiller"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Kullanıcı veya profil ekle"</string>
@@ -2676,9 +2578,12 @@
     <string name="enable_guest_calling" msgid="8300355036005240911">"Misafirin, telefonu kullanmasına izin verin"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"Çağrı geçmişi bu kullanıcıyla paylaşılacak"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Telefon aramalarını ve mesajları aç"</string>
+    <string name="user_grant_admin" msgid="6511342422361803820">"Bu kullanıcıya yönetici ayrıcalıkları verin"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Kullanıcıyı sil"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Telefon aramaları ve mesajlar açılsın mı?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Çağrı ve SMS geçmişi bu kullanıcıyla paylaşılacak."</string>
+    <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Yönetici ayrıcalıkları kaldırılsın mı?"</string>
+    <string name="user_revoke_admin_confirm_message" msgid="2719667217562982318">"Bu kullanıcının yönetici ayrıcalıklarını kaldırmak istediğinizden emin misiniz?"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Acil durum bilgileri"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g> için bilgi ve kişiler"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g> uygulamasını aç"</string>
@@ -2824,10 +2729,10 @@
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Klonlanan Uygulamalar"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Aynı anda iki hesap kullanabilmek için ikinci bir uygulama örneği oluşturun."</string>
     <string name="cloned_apps_summary" msgid="8805362440770795709">"<xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g> klonlandı, <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g> klonlanmaya hazır"</string>
-    <!-- no translation found for cloned_app_creation_summary (4642627294993918502) -->
-    <skip />
-    <!-- no translation found for cloned_app_created_summary (7277912971544890710) -->
-    <skip />
+    <string name="delete_all_app_clones" msgid="3489053361980624999">"Tüm uygulama klonlarını silin"</string>
+    <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"Tüm uygulama klonları silinemedi"</string>
+    <string name="cloned_app_creation_summary" msgid="4642627294993918502">"Oluşturuluyor…"</string>
+    <string name="cloned_app_created_summary" msgid="7277912971544890710">"Klonlandı"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Diller, hareketler, saat, yedekleme"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"Sistem dilleri, uygulama dilleri"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"kablosuz, ağ bağlantısı, internet, kablosuz bağlantı, veri"</string>
@@ -3161,10 +3066,8 @@
     <string name="promote_conversation_title" msgid="4731148769888238722">"Bu bir görüşme"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Görüşme bölümüne ekleyin"</string>
     <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Öncelikli görüşme yok"</string>
-    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> öncelikli görüşme</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> öncelikli görüşme</item>
-    </plurals>
+    <!-- no translation found for priority_conversation_count (7291234530844412077) -->
+    <skip />
     <string name="important_conversations" msgid="1233893707189659401">"Öncelikli görüşmeler"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Görüşme bölümünün üstünde gösterilir ve kayan baloncuklar olarak görünür"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Görüşme bölümünün üstünde gösterilir"</string>
@@ -3193,14 +3096,10 @@
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Cihaz kilitli değilken, bildirimleri ekranın üst kısmında banner olarak göster"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Tüm \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" bildirimleri"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Tüm <xliff:g id="APP_NAME">%1$s</xliff:g> bildirimleri"</string>
-    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
-      <item quantity="other">Günde yaklaşık <xliff:g id="NUMBER_1">%,d</xliff:g> bildirim</item>
-      <item quantity="one">Günde yaklaşık <xliff:g id="NUMBER_0">%d</xliff:g> bildirim</item>
-    </plurals>
-    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
-      <item quantity="other">Haftada yaklaşık <xliff:g id="NUMBER_1">%,d</xliff:g> bildirim</item>
-      <item quantity="one">Haftada yaklaşık <xliff:g id="NUMBER_0">%d</xliff:g> bildirim</item>
-    </plurals>
+    <!-- no translation found for notifications_sent_daily (10274479224185437) -->
+    <skip />
+    <!-- no translation found for notifications_sent_weekly (7895656213187555346) -->
+    <skip />
     <string name="notifications_sent_never" msgid="9081278709126812062">"Hiçbir zaman"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Cihaz ve uygulama bildirimleri"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Bildirimlerin hangi uygulama ve cihazlar tarafından okunabileceğini kontrol edin"</string>
@@ -3269,10 +3168,8 @@
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"İzinler"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"Bu uygulama, <xliff:g id="NAME">%1$s</xliff:g> adlı kişisel uygulamanızın konum, depolama alanı veya kişilere erişim gibi izinlerini kullanabilir."</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"Bağlı uygulama yok"</string>
-    <plurals name="interact_across_profiles_number_of_connected_apps" formatted="false" msgid="6991750455661974772">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> uygulama bağlı</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> uygulama bağlı</item>
-    </plurals>
+    <!-- no translation found for interact_across_profiles_number_of_connected_apps (4000424798291479207) -->
+    <skip />
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Bu uygulamaları bağlamak için <xliff:g id="NAME">%1$s</xliff:g> adlı uygulamayı iş profilinize yükleyin"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Bu uygulamaları bağlamak için <xliff:g id="NAME">%1$s</xliff:g> adlı uygulamayı kişisel profilinize yükleyin"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Uygulamayı yüklemek için dokunun"</string>
@@ -3287,10 +3184,8 @@
     <string name="notification_channels_other" msgid="18159805343647908">"Diğer"</string>
     <string name="no_channels" msgid="4716199078612071915">"Bu uygulama herhangi bir bildirim yayınlamadı"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Uygulamadaki ek ayarlar"</string>
-    <plurals name="deleted_channels" formatted="false" msgid="5963473421547029532">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> kategori silindi</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> kategori silindi</item>
-    </plurals>
+    <!-- no translation found for deleted_channels (8489800381509312964) -->
+    <skip />
     <string name="app_notification_block_title" msgid="3880322745749900296">"Tümünü engelle"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Bu bildirimleri hiçbir zaman gösterme"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Bildirim göster"</string>
@@ -3440,7 +3335,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Sabitlemeyi kaldırmadan önce şifre sor"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Sabitlemeyi kaldırırken cihazı kilitle"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"SIM\'in silinmesini onayla"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"eSIM\'i silmeden önce siz olduğunuzu doğrulayın"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"eSIM\'i silmeden önce siz olduğunuzu doğrulayın"</string>
     <string name="memtag_title" msgid="5096176296797727201">"Gelişmiş bellek koruması beta"</string>
     <string name="memtag_toggle" msgid="8695028758462939212">"Gelişmiş bellek koruması"</string>
     <string name="memtag_intro" msgid="579408691329568953">"Bu beta özellik, güvenliğiniz açısından risk oluşturabilecek hatalar karşısında cihazınızı korumanıza yardımcı olur."</string>
@@ -3939,18 +3834,12 @@
     <string name="enterprise_privacy_none" msgid="6026527690979756431">"Yok"</string>
     <string name="enterprise_privacy_enterprise_installed_packages" msgid="9114143640515900082">"Yüklü uygulamalar"</string>
     <string name="enterprise_privacy_apps_count_estimation_info" msgid="7959907857710107792">"Uygulama sayısı tahminidir. Play Store dışından yüklenen uygulamaları içermeyebilir."</string>
-    <plurals name="enterprise_privacy_number_packages_lower_bound" formatted="false" msgid="5403847001419529018">
-      <item quantity="other">Minimum <xliff:g id="COUNT_1">%d</xliff:g> uygulama</item>
-      <item quantity="one">Minimum <xliff:g id="COUNT_0">%d</xliff:g> uygulama</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages_lower_bound" msgid="5317634640873658149">"{count,plural, =1{Minimum # uygulama}other{Minimum # uygulama}}"</string>
     <string name="enterprise_privacy_location_access" msgid="8023838718108456971">"Konum izinleri"</string>
     <string name="enterprise_privacy_microphone_access" msgid="7242958026470143653">"Mikrofon izinleri"</string>
     <string name="enterprise_privacy_camera_access" msgid="7685460535880069016">"Kamera izinleri"</string>
     <string name="enterprise_privacy_enterprise_set_default_apps" msgid="7498546659083996300">"Varsayılan uygulamalar"</string>
-    <plurals name="enterprise_privacy_number_packages" formatted="false" msgid="8568544906431825430">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> uygulama</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> uygulama</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages" msgid="5294444005035188274">"{count,plural, =1{# uygulama}other{# uygulama}}"</string>
     <string name="enterprise_privacy_input_method" msgid="3278314982700662246">"Varsayılan klavye"</string>
     <string name="enterprise_privacy_input_method_name" msgid="2974859490559054584">"<xliff:g id="APP_LABEL">%s</xliff:g> olarak ayarlandı"</string>
     <string name="enterprise_privacy_always_on_vpn_device" msgid="1735829327405126695">"Her zaman açık VPN açılmış"</string>
@@ -3960,18 +3849,12 @@
     <string name="enterprise_privacy_ca_certs_device" msgid="1816495877258727663">"Güvenilir kimlik bilgileri"</string>
     <string name="enterprise_privacy_ca_certs_personal" msgid="1516422660828485795">"Kişisel profilinizde güvenilir kimlik bilgileri"</string>
     <string name="enterprise_privacy_ca_certs_work" msgid="4318941788592655561">"İş profilinizde güvenilir kimlik bilgileri"</string>
-    <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="6459725295322004179">
-      <item quantity="other">Minimum <xliff:g id="COUNT_1">%d</xliff:g> CA sertifikası</item>
-      <item quantity="one">Minimum <xliff:g id="COUNT_0">%d</xliff:g> CA sertifikası</item>
-    </plurals>
+    <string name="enterprise_privacy_number_ca_certs" msgid="4540897122831942658">"{count,plural, =1{Minimum # CA sertifikası}other{Minimum # CA sertifikası}}"</string>
     <string name="enterprise_privacy_lock_device" msgid="464054894363899866">"Yönetici cihazı kilitleyebilir ve şifreyi sıfırlayabilir"</string>
     <string name="enterprise_privacy_wipe_device" msgid="869589182352244591">"Yönetici tüm cihaz verilerini silebilir"</string>
     <string name="enterprise_privacy_failed_password_wipe_device" msgid="7045164901334821226">"Tüm cihaz verileri silinmeden önceki başarısız şifre girişi deneme sayısı"</string>
     <string name="enterprise_privacy_failed_password_wipe_work" msgid="2537582942554484170">"İş profili verileri silinmeden önceki başarısız şifre girişi deneme sayısı"</string>
-    <plurals name="enterprise_privacy_number_failed_password_wipe" formatted="false" msgid="8811973918944217791">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> deneme</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> deneme</item>
-    </plurals>
+    <string name="enterprise_privacy_number_failed_password_wipe" msgid="2695842143305867642">"{count,plural, =1{# deneme}other{# deneme}}"</string>
     <string name="do_disclosure_generic" msgid="3067459392402324538">"Bu cihaz kuruluşunuz tarafından yönetiliyor."</string>
     <string name="do_disclosure_with_name" msgid="867544298924410766">"Bu cihaz <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> tarafından yönetiliyor."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
@@ -3999,21 +3882,12 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Tam tutarı ödediğinizde:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Cihazdan tüm kısıtlamalar kaldırılır"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Sözleşmeli cihaz sağlayıcının uygulamasını kaldırabilirsiniz"</string>
-    <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
-      <item quantity="other">Kamera uygulamaları</item>
-      <item quantity="one">Kamera uygulaması</item>
-    </plurals>
+    <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{Kamera uygulaması}other{Kamera uygulaması}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"Takvim uygulaması"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"Kişiler uygulaması"</string>
-    <plurals name="default_email_app_title" formatted="false" msgid="8338194872609410234">
-      <item quantity="other">E-posta istemci uygulamaları</item>
-      <item quantity="one">E-posta istemci uygulaması</item>
-    </plurals>
+    <string name="default_email_app_title" msgid="5411280873093244250">"{count,plural, =1{E-posta istemci uygulaması}other{E-posta istemci uygulaması}}"</string>
     <string name="default_map_app_title" msgid="7569231732944853320">"Harita uygulaması"</string>
-    <plurals name="default_phone_app_title" formatted="false" msgid="4222188821845826493">
-      <item quantity="other">Telefon uygulamaları</item>
-      <item quantity="one">Telefon uygulaması</item>
-    </plurals>
+    <string name="default_phone_app_title" msgid="795025972645464135">"{count,plural, =1{Telefon uygulaması}other{Telefon uygulaması}}"</string>
     <string name="app_names_concatenation_template_2" msgid="8320181646458855457">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>"</string>
     <string name="app_names_concatenation_template_3" msgid="7019703249717854148">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>, <xliff:g id="THIRD_APP_NAME">%3$s</xliff:g>"</string>
     <string name="storage_default_internal_storage" msgid="4055660218818688131">"Bu cihaz"</string>
@@ -4040,13 +3914,18 @@
     <string name="webview_uninstalled_for_user" msgid="627352948986275488">"(<xliff:g id="USER">%s</xliff:g> için yükleme kaldırıldı)"</string>
     <string name="webview_disabled_for_user" msgid="5809886172032644498">"(<xliff:g id="USER">%s</xliff:g> için devre dışı bırakıldı)"</string>
     <string name="autofill_app" msgid="7595308061826307921">"Otomatik doldurma hizmeti"</string>
+    <string name="default_autofill_app" msgid="372234803718251606">"Varsayılan otomatik doldurma hizmeti"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Şifreler"</string>
-    <plurals name="autofill_passwords_count" formatted="false" msgid="7715009165029452622">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> şifre</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> şifre</item>
-    </plurals>
+    <string name="credman_credentials" msgid="5937331545565783811">"Şifre ve kimlik hizmetleri"</string>
+    <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# şifre}other{# şifre}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"otomatik, doldurma, otomatik doldurma, şifre"</string>
+    <string name="credman_keywords" msgid="7236954350284379264">"kimlik bilgisi, şifre anahtarı, şifre"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Bu uygulamaya güvendiğinizden emin olun&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Otomatik Doldurma&gt;%1$s&lt;/xliff:g&gt; otomatik doldurulabilecek öğeleri belirlemek için ekranınızdaki bilgileri kullanır."</string>
+    <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s kapatılsın mı?"</string>
+    <string name="credman_confirmation_message" msgid="1485617504425237430">"Adres veya ödeme yöntemi gibi kayıtlı bilgiler oturum açtığınızda doldurulmaz. Kayıtlı bilgilerinizin doldurulmaya devam etmesi için varsayılan bir otomatik doldurma hizmeti belirleyin."</string>
+    <string name="credman_error_message_title" msgid="5108868200002966901">"Şifre ve kimlik hizmetleri sınırı"</string>
+    <string name="credman_error_message" msgid="4058425433345908579">"Aynı anda en fazla 5 tane otomatik doldurma ve şifre hizmetini etkinleştirebilirsiniz. Başka hizmet eklemek için bir hizmeti devre dışı bırakın."</string>
+    <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Kapat"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Otomatik doldur"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Günlük kaydı düzeyi"</string>
     <string name="autofill_max_partitions" msgid="7342195529574406366">"Oturum başına maksimum istek"</string>
@@ -4229,8 +4108,7 @@
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"Uygulama veri kullanımı"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"<xliff:g id="NETWORKMODEID">%1$d</xliff:g> Geçersiz Ağ Modu. Yoksayın."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Erişim Noktası Adları"</string>
-    <!-- no translation found for keywords_access_point_names (8174967126858505945) -->
-    <skip />
+    <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> operatörüne bağlıyken kullanılamaz"</string>
     <string name="see_more" msgid="7499355691042812723">"Daha fazla"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> etkinleştirilsin mi?"</string>
@@ -4320,10 +4198,7 @@
     <string name="copyable_slice_toast" msgid="1008251852798990606">"<xliff:g id="COPY_CONTENT">%1$s</xliff:g> panoya kopyalandı."</string>
     <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"Erişilebilirlik kullanımı"</string>
-    <plurals name="accessibility_usage_summary" formatted="false" msgid="6910643986958263005">
-      <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> hizmetin, cihazınıza tam erişimi var</item>
-      <item quantity="one">1 hizmetin, cihazınıza tam erişimi var</item>
-    </plurals>
+    <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{1 uygulamanın cihazınıza tam erişimi var}other{# uygulamanın cihazınıza tam erişimi var}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Önemli bilgiler"</string>
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"DEVAM"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"HAYIR TEŞEKKÜRLER"</string>
@@ -4507,10 +4382,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"2G\'ye izin ver"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G daha az güvenli olsa da bazı konumlarda bağlantınızı iyileştirebilir. Acil durum aramaları için 2G\'ye her zaman izin verilir."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> için 2G\'nin kullanılabilir olması gerekir"</string>
-    <!-- no translation found for allow_null_algorithms_title (9143076634352979096) -->
-    <skip />
-    <!-- no translation found for allow_null_algorithms_summary (5874570357011783211) -->
-    <skip />
+    <string name="allow_null_algorithms_title" msgid="9143076634352979096">"Daha az güvenli bağlantıya izin ver"</string>
+    <string name="allow_null_algorithms_summary" msgid="5874570357011783211">"Bazı konumlarda sinyalinizi iyileştirebilir. Acil durum aramalarında daha az güvenli bağlantılara her zaman izin verilir."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Tüm hizmetler"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Panoya erişimi göster"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Uygulamalar kopyaladığınız metne, resimlere veya diğer içeriklere eriştiğinde mesaj gösterilsin"</string>
@@ -4618,18 +4491,11 @@
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR kodu geçerli bir biçim değil"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"eSIM\'e dönüştürün"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"eSIM\'i başka bir cihaza aktarın"</string>
-    <!-- no translation found for background_install_preference_summary (3065219346519340364) -->
-    <skip />
-    <!-- no translation found for background_install_title (607913515188276168) -->
-    <skip />
-    <!-- no translation found for background_install_summary (3890296129543309666) -->
-    <skip />
-    <!-- no translation found for background_install_feature_list_no_entry (2071343281272266154) -->
-    <skip />
-    <!-- no translation found for background_install_uninstall_button_description (1189649052911501249) -->
-    <skip />
-    <!-- no translation found for background_install_before (8608614957688912715) -->
-    <skip />
-    <!-- no translation found for background_install_after (7983488897570908149) -->
-    <skip />
+    <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# uygulama}other{# uygulama}}"</string>
+    <string name="background_install_title" msgid="607913515188276168">"Arka planda yüklenen uygulamalar"</string>
+    <string name="background_install_summary" msgid="3890296129543309666">"Cihaz üreticiniz, cihazınıza arka planda uygulama yükleyebilir ya da operatörünüzün ve diğer iş ortaklarının yüklemesine izin verebilir.\n\nBurada listelenen uygulamalar, cihazınızın normal şekilde çalışması için gerekli değildir. İstemediğiniz uygulamaları kaldırabilirsiniz."</string>
+    <string name="background_install_feature_list_no_entry" msgid="2071343281272266154">"Arka planda yüklenen uygulama yok"</string>
+    <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Uygulamanın yüklemesini kaldır"</string>
+    <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Son # ay içinde yüklenen uygulamalar}other{Son # ay içinde yüklenen uygulamalar}}"</string>
+    <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{# aydan daha uzun süre önce yüklenen uygulamalar}other{# aydan daha uzun süre önce yüklenen uygulamalar}}"</string>
 </resources>

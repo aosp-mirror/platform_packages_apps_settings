@@ -26,11 +26,7 @@
     <string name="off" msgid="2898123876644709799">"Isključeno"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Nepoznato"</string>
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"Dodirnite da se prikažu informacije"</string>
-    <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
-      <item quantity="one">Još <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> korak vas dijeli od toga da postanete programer.</item>
-      <item quantity="few">Još <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> koraka vas dijele od toga da postanete programer.</item>
-      <item quantity="other">Još <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> koraka vas dijeli od toga da postanete programer.</item>
-    </plurals>
+    <string name="show_dev_countdown" msgid="2936506773086395069">"{count,plural, =1{Još # korak vas dijeli od toga da postanete programer.}one{Još # korak vas dijeli od toga da postanete programer.}few{Još # koraka vas dijele od toga da postanete programer.}other{Još # koraka vas dijeli od toga da postanete programer.}}"</string>
     <string name="show_dev_on" msgid="2840850085134853754">"Postali ste programer!"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"Nema potrebe, već ste programer."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"Prvo omogućite opcije za programere."</string>
@@ -60,7 +56,7 @@
     <string name="bluetooth_rename_device" msgid="4219655243836021443">"Promijenite naziv uređaja"</string>
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"Promijeni naziv"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"Želite li prekinuti vezu s uređajem?"</string>
-    <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Uparivanje novog uređaja"</string>
+    <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Uparite novi uređaj"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Upari desno uho"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Upari lijevo uho"</string>
@@ -101,7 +97,7 @@
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Uređaj je vidljiv drugim uređajima kao \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\""</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Uključite Bluetooth za povezivanje s drugim uređajima."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Vaši uređaji"</string>
-    <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Uparivanje novog uređaja"</string>
+    <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Uparite novi uređaj"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Onemogući rasterećenje Bluetootha A2DP"</string>
     <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Onemogući rasterećenje Bluetootha LE audio"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Ponovo pokrenuti?"</string>
@@ -123,7 +119,7 @@
     <string name="stylus_default_notes_app" msgid="3111290761558445874">"Sistemska aplikacija za bilježenje"</string>
     <string name="stylus_textfield_handwriting" msgid="6962904622425646128">"Pisanje pisaljkom u poljima za tekst"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignoriranje svih pritisaka dugmeta za pisaljku"</string>
-    <string name="stylus_usi_header_title" msgid="1949011797718972583">"USI pisaljka"</string>
+    <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Pisaljka"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Datum i vrijeme"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proksi server"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Obriši"</string>
@@ -161,11 +157,23 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Odabir jezika za ovu aplikaciju nije dostupan u Postavkama."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Jezik se može razlikovati od jezika dostupnih u aplikaciji. Neke aplikacije možda neće podržavati ovu postavku."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Ovdje su prikazane samo aplikacije koje podržavaju odabir jezika."</string>
-    <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
-      <item quantity="one">Ukloniti odabrane jezike?</item>
-      <item quantity="few">Ukloniti odabrane jezike?</item>
-      <item quantity="other">Ukloniti odabrane jezike?</item>
-    </plurals>
+    <!-- no translation found for regional_preferences_title (4304567374498629528) -->
+    <skip />
+    <!-- no translation found for regional_preferences_summary (1189876997389469650) -->
+    <skip />
+    <!-- no translation found for regional_preferences_main_page_sub_title (4666033861956272891) -->
+    <skip />
+    <!-- no translation found for temperature_preferences_title (5009881556503629058) -->
+    <skip />
+    <!-- no translation found for calendar_preferences_title (8312485828206542600) -->
+    <skip />
+    <!-- no translation found for first_day_of_week_preferences_title (1971850087589599553) -->
+    <skip />
+    <!-- no translation found for numbers_preferences_title (6094837605398562369) -->
+    <skip />
+    <!-- no translation found for default_string_of_regional_preference (1595774718180886349) -->
+    <skip />
+    <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Ukloniti odabrani jezik?}one{Ukloniti odabrane jezike?}few{Ukloniti odabrane jezike?}other{Ukloniti odabrane jezike?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Tekst će biti prikazan na drugom jeziku"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Ne mogu se ukloniti svi jezici"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Zadržite najmanje jedan preferirani jezik"</string>
@@ -184,6 +192,7 @@
     <string name="apply" msgid="7834684883190163536">"Primijeni"</string>
     <string name="share" msgid="8502235338607613795">"Dijeli"</string>
     <string name="add" msgid="8335206931421683426">"Dodaj"</string>
+    <string name="remove" msgid="1028414219245072102">"Ukloni"</string>
     <string name="settings_label" msgid="943294133671632976">"Postavke"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Postavke"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Prečica za postavke"</string>
@@ -195,6 +204,7 @@
     <string name="roaming_warning" msgid="7703647889040229013">"Mogu nastati troškovi rominga."</string>
     <string name="date_time_auto" msgid="4239202185055225869">"Automatski postavi vrijeme"</string>
     <string name="zone_auto_title" msgid="5141692422373097957">"Postavi automatski"</string>
+    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"Lokacije će se koristiti za postavljanje vremenske zone kada je ovaj prekidač uključen"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Koristi zadani format jezika/zemlje"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Koristi 24-satni format"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Vrijeme"</string>
@@ -223,11 +233,8 @@
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"Npr. Edinov Android."</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Lokacija"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Koristi lokaciju"</string>
-    <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="one">Uključeno – <xliff:g id="COUNT_1">%1$d</xliff:g> aplikacija ima pristup lokaciji</item>
-      <item quantity="few">Uključeno – <xliff:g id="COUNT_1">%1$d</xliff:g> aplikacije imaju pristup lokaciji</item>
-      <item quantity="other">Uključeno – <xliff:g id="COUNT_1">%1$d</xliff:g> aplikacija ima pristup lokaciji</item>
-    </plurals>
+    <!-- no translation found for location_settings_summary_location_on (7029728269719893381) -->
+    <skip />
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Učitavanje…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikacije s odobrenjem Uređaja u blizini mogu otkriti relativan položaj povezanih uređaja."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Pristup lokaciji je isključen za aplikacije i usluge. Lokacija uređaja se i dalje može slati hitnim službama kada pozovete broj za hitne slučajeve ili pošaljete SMS na njega."</string>
@@ -307,11 +314,8 @@
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Kada koristite otključavanje otiskom prsta"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Otisak prsta za posao"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Dodajte otisak prsta"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
-      <item quantity="one">Dodan je <xliff:g id="COUNT">%1$d</xliff:g> otisak prsta</item>
-      <item quantity="few">Dodana su <xliff:g id="COUNT">%1$d</xliff:g> otiska prsta</item>
-      <item quantity="other">Dodano je <xliff:g id="COUNT">%1$d</xliff:g> otisaka prsta</item>
-    </plurals>
+    <!-- no translation found for security_settings_fingerprint_preference_summary (8486134175759676037) -->
+    <skip />
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Postavite otisak prsta"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Dozvolite otklj. otiskom prsta"</string>
@@ -534,64 +538,20 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Ako u sljedećem pokušaju unesete neispravan uzorak, vaš radni profil i njegovi podaci će se izbrisati"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Ako u sljedećem pokušaju unesete neispravan PIN, vaš radni profil i njegovi podaci će se izbrisati"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Ako u sljedećem pokušaju unesete neispravnu lozinku, vaš radni profil i njegovi podaci će se izbrisati"</string>
-    <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
-      <item quantity="one">Mora sadržavati najmanje <xliff:g id="COUNT_1">%d</xliff:g> znak</item>
-      <item quantity="few">Mora sadržavati najmanje <xliff:g id="COUNT_1">%d</xliff:g> znaka</item>
-      <item quantity="other">Mora sadržavati najmanje <xliff:g id="COUNT_1">%d</xliff:g> znakova</item>
-    </plurals>
+    <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{Mora sadržavati najmanje # znak}one{Mora sadržavati najmanje # znak}few{Mora sadržavati najmanje # znaka}other{Mora sadržavati najmanje # znakova}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Ako koristite samo brojeve, mora imati najmanje 1 cifru}one{Ako koristite samo brojeve, mora imati najmanje # cifru}few{Ako koristite samo brojeve, mora imati najmanje # cifre}other{Ako koristite samo brojeve, mora imati najmanje # cifara}}"</string>
-    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
-      <item quantity="one">PIN mora sadržavati najmanje <xliff:g id="COUNT_1">%d</xliff:g> cifru</item>
-      <item quantity="few">PIN mora sadržavati najmanje <xliff:g id="COUNT_1">%d</xliff:g> cifre</item>
-      <item quantity="other">PIN mora sadržavati najmanje <xliff:g id="COUNT_1">%d</xliff:g> cifara</item>
-    </plurals>
-    <plurals name="lockpassword_password_too_long" formatted="false" msgid="8118091957172967677">
-      <item quantity="one">Ukupan broj znakova mora biti manji od <xliff:g id="NUMBER_1">%d</xliff:g></item>
-      <item quantity="few">Ukupan broj znakova mora biti manji od <xliff:g id="NUMBER_1">%d</xliff:g></item>
-      <item quantity="other">Ukupan broj znakova mora biti manji od <xliff:g id="NUMBER_1">%d</xliff:g></item>
-    </plurals>
-    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="8706992338720310765">
-      <item quantity="one">Ukupan broj cifara mora biti manji od <xliff:g id="NUMBER_1">%d</xliff:g></item>
-      <item quantity="few">Ukupan broj cifara mora biti manji od <xliff:g id="NUMBER_1">%d</xliff:g></item>
-      <item quantity="other">Ukupan broj cifara mora biti manji od <xliff:g id="NUMBER_1">%d</xliff:g></item>
-    </plurals>
+    <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{PIN mora sadržavati najmanje # cifru}one{PIN mora sadržavati najmanje # cifru}few{PIN mora sadržavati najmanje # cifre}other{PIN mora sadržavati najmanje # cifara}}"</string>
+    <string name="lockpassword_password_too_long" msgid="1940345313260498308">"{count,plural, =1{Ukupan broj znakova mora biti manji od #}one{Ukupan broj znakova mora biti manji od #}few{Ukupan broj znakova mora biti manji od #}other{Ukupan broj znakova mora biti manji od #}}"</string>
+    <string name="lockpassword_pin_too_long" msgid="1678212054564388576">"{count,plural, =1{Ukupan broj cifara mora biti manji od #}one{Ukupan broj cifara mora biti manji od #}few{Ukupan broj cifara mora biti manji od #}other{Ukupan broj cifara mora biti manji od #}}"</string>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"Administrator uređaja ne dozvoljava korištenje nedavnog PIN-a"</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"Ne može sadržavati nevažeći znak"</string>
-    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="2385916409676839024">
-      <item quantity="one">Mora sadržavati najmanje <xliff:g id="COUNT">%d</xliff:g> slovo</item>
-      <item quantity="few">Mora sadržavati najmanje <xliff:g id="COUNT">%d</xliff:g> slova</item>
-      <item quantity="other">Mora sadržavati najmanje <xliff:g id="COUNT">%d</xliff:g> slova</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="2057467885488612701">
-      <item quantity="one">Mora sadržavati najmanje <xliff:g id="COUNT">%d</xliff:g> malo slovo</item>
-      <item quantity="few">Mora sadržavati najmanje <xliff:g id="COUNT">%d</xliff:g> mala slova</item>
-      <item quantity="other">Mora sadržavati najmanje <xliff:g id="COUNT">%d</xliff:g> malih slova</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="4541266279643052025">
-      <item quantity="one">Mora sadržavati najmanje <xliff:g id="COUNT">%d</xliff:g> veliko slovo</item>
-      <item quantity="few">Mora sadržavati najmanje <xliff:g id="COUNT">%d</xliff:g> velika slova</item>
-      <item quantity="other">Mora sadržavati najmanje <xliff:g id="COUNT">%d</xliff:g> velikih slova</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="70617964591376248">
-      <item quantity="one">Mora sadržavati najmanje <xliff:g id="COUNT">%d</xliff:g> cifru</item>
-      <item quantity="few">Mora sadržavati najmanje <xliff:g id="COUNT">%d</xliff:g> cifre</item>
-      <item quantity="other">Mora sadržavati najmanje <xliff:g id="COUNT">%d</xliff:g> cifara</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="7981236881269921943">
-      <item quantity="one">Mora sadržavati najmanje <xliff:g id="COUNT">%d</xliff:g> posebni znak</item>
-      <item quantity="few">Mora sadržavati najmanje <xliff:g id="COUNT">%d</xliff:g> posebna znaka</item>
-      <item quantity="other">Mora sadržavati najmanje <xliff:g id="COUNT">%d</xliff:g> posebnih znakova</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="1567877061888948467">
-      <item quantity="one">Mora sadržavati najmanje <xliff:g id="COUNT">%d</xliff:g> znak koji nije slovo</item>
-      <item quantity="few">Mora sadržavati najmanje <xliff:g id="COUNT">%d</xliff:g> znaka koja nisu slova</item>
-      <item quantity="other">Mora sadržavati najmanje <xliff:g id="COUNT">%d</xliff:g> znakova koji nisu slova</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonnumerical" formatted="false" msgid="5056743974888384475">
-      <item quantity="one">Mora sadržavati najmanje <xliff:g id="COUNT">%d</xliff:g> znak koji nije broj</item>
-      <item quantity="few">Mora sadržavati najmanje <xliff:g id="COUNT">%d</xliff:g> znaka koji nisu brojevi</item>
-      <item quantity="other">Mora sadržavati najmanje <xliff:g id="COUNT">%d</xliff:g> znakova koji nisu brojevi</item>
-    </plurals>
+    <string name="lockpassword_password_requires_letters" msgid="7058340182953750553">"{count,plural, =1{Mora sadržavati najmanje 1 slovo}one{Mora sadržavati najmanje # slovo}few{Mora sadržavati najmanje # slova}other{Mora sadržavati najmanje # slova}}"</string>
+    <string name="lockpassword_password_requires_lowercase" msgid="3286121470522077547">"{count,plural, =1{Mora sadržavati najmanje 1 malo slovo}one{Mora sadržavati najmanje # malo slovo}few{Mora sadržavati najmanje # mala slova}other{Mora sadržavati najmanje # malih slova}}"</string>
+    <string name="lockpassword_password_requires_uppercase" msgid="720312543910397772">"{count,plural, =1{Mora sadržavati najmanje 1 veliko slovo}one{Mora sadržavati najmanje # veliko slovo}few{Mora sadržavati najmanje # velika slova}other{Mora sadržavati najmanje # velikih slova}}"</string>
+    <string name="lockpassword_password_requires_numeric" msgid="3886918493600507548">"{count,plural, =1{Mora sadržavati najmanje 1 cifru}one{Mora sadržavati najmanje # cifru}few{Mora sadržavati najmanje # cifre}other{Mora sadržavati najmanje # cifara}}"</string>
+    <string name="lockpassword_password_requires_symbols" msgid="2904870551002210131">"{count,plural, =1{Mora sadržavati najmanje 1 posebni simbol}one{Mora sadržavati najmanje # posebni simbol}few{Mora sadržavati najmanje # posebna simbola}other{Mora sadržavati najmanje # posebnih simbola}}"</string>
+    <string name="lockpassword_password_requires_nonletter" msgid="1185342065898300006">"{count,plural, =1{Mora sadržavati najmanje 1 znak koji nije slovo}one{Mora sadržavati najmanje # znak koji nije slovo}few{Mora sadržavati najmanje # znaka koja nisu slova}other{Mora sadržavati najmanje # znakova koji nisu slova}}"</string>
+    <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{Mora sadržavati najmanje 1 znak koji nije broj}one{Mora sadržavati najmanje # znak koji nije broj}few{Mora sadržavati najmanje # znaka koja nisu brojevi}other{Mora sadržavati najmanje # znakova koji nisu brojevi}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Administrator uređaja ne dozvoljava korištenje nedavne lozinke"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"Nije dozvoljen rastući, opadajući ili ponavljajući niz cifara"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Potvrdi"</string>
@@ -601,19 +561,11 @@
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"Naprijed"</string>
     <string name="manage_device_admin" msgid="1044620606203916275">"Aplikacije administratora uređaja"</string>
     <string name="number_of_device_admins_none" msgid="152926922020437312">"Nema aktivnih aplikacija"</string>
-    <plurals name="number_of_device_admins" formatted="false" msgid="2528735319390151989">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> aktivna aplikacija</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> aktivne aplikacije</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aktivnih aplikacija</item>
-    </plurals>
+    <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{# aktivna aplikacija}one{# aktivna aplikacija}few{# aktivne aplikacije}other{# aktivnih aplikacija}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"Pouzdani agenti"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"Da biste ovo koristili, prvo postavite zaključavanje ekrana"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"Nema"</string>
-    <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> aktivni pouzdani agent</item>
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aktivna pouzdana agenta</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aktivnih pouzdanih agenata</item>
-    </plurals>
+    <string name="manage_trust_agents_summary_on" msgid="3302574418419446146">"{count,plural, =1{1 aktivni pouzdani agent}one{# aktivni pouzdani agent}few{# aktivna pouzdana agenta}other{# aktivnih pouzdanih agenata}}"</string>
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Upariti s uređajem <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
@@ -829,21 +781,9 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Čuvanje mreže nije uspjelo"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Otkaži"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Zaboraviti mrežu?"</string>
-    <plurals name="wifi_saved_access_points_summary" formatted="false" msgid="2802436466732147888">
-      <item quantity="one">%d mreža</item>
-      <item quantity="few">%d mreže</item>
-      <item quantity="other">%d mreža</item>
-    </plurals>
-    <plurals name="wifi_saved_passpoint_access_points_summary" formatted="false" msgid="5802057518058840450">
-      <item quantity="one">%d pretplata</item>
-      <item quantity="few">%d pretplate</item>
-      <item quantity="other">%d pretplata</item>
-    </plurals>
-    <plurals name="wifi_saved_all_access_points_summary" formatted="false" msgid="5125849180309374451">
-      <item quantity="one">%d mreža i pretplata</item>
-      <item quantity="few">%d mreže i pretplate</item>
-      <item quantity="other">%d mreža i pretplata</item>
-    </plurals>
+    <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 mreža}one{# mreža}few{# mreže}other{# mreža}}"</string>
+    <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 pretplata}one{# pretplata}few{# pretplate}other{# pretplata}}"</string>
+    <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 mreža i pretplata}one{# mreža i pretplata}few{# mreže i pretplate}other{# mreža i pretplata}}"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"MAC adresa uređaja"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"Nasumično odabrana MAC adresa"</string>
@@ -1075,11 +1015,7 @@
     <string name="sim_preferred_title" msgid="8850185380445309835">"Ažurirati preferirani SIM?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"SIM kartica <xliff:g id="NEW_SIM">%1$s</xliff:g> jedina je SIM kartica u vašem uređaju. Želite li tu SIM karticu koristiti za prijenos podataka na mobilnoj mreži, pozive i SMS poruke?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"PIN za SIM je netačan. Za otključavanje uređaja sada morate kontaktirati svog operatera."</string>
-    <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
-      <item quantity="one">PIN za SIM je netačan. Preostao vam je još <xliff:g id="NUMBER_1">%d</xliff:g> pokušaj.</item>
-      <item quantity="few">PIN za SIM je netačan. Preostala su vam još <xliff:g id="NUMBER_1">%d</xliff:g> pokušaja.</item>
-      <item quantity="other">PIN za SIM je netačan. Preostalo vam je još <xliff:g id="NUMBER_1">%d</xliff:g> pokušaja.</item>
-    </plurals>
+    <string name="wrong_pin_code" msgid="8124222991071607958">"{count,plural, =1{PIN kôd za SIM je netačan. Imate još # pokušaj prije nego što budete morali kontaktirati mobilnog operatera da vam otključa uređaj.}one{PIN kôd za SIM je netačan. Imate još # pokušaj.}few{PIN kôd za SIM je netačan. Imate još # pokušaja.}other{PIN kôd za SIM je netačan. Imate još # pokušaja.}}"</string>
     <string name="wrong_pin_code_one" msgid="6924852214263071441">"PIN kôd za SIM je netačan. Imate još 1 pokušaj prije nego što budete morali kontaktirati operatera da bi otključao uređaj."</string>
     <string name="pin_failed" msgid="3726505565797352255">"Operacija PIN-a za SIM nije uspjela!"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"Ažuriranja sistema"</string>
@@ -1097,6 +1033,8 @@
     <string name="storage_settings" msgid="7472188817781592677">"Pohrana"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Pohrana i keš memorija"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Postavke za pohranu"</string>
+    <string name="status_eid" msgid="7532406028683438634">"EID"</string>
+    <string name="eid_multi_sim" msgid="4581966600904959452">"EID (utor za sim %1$d)"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI (utor za sim %1$d)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Za prikaz odaberite sačuvanu mrežu"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
@@ -1183,6 +1121,8 @@
     <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Možete početi koristiti medij <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Status baterije"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Nivo napunjenosti baterije"</string>
+    <string name="communal_settings_title" msgid="2845678473945902115">"Opće"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"Opće postavke"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN-ovi"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Uredi pristupnu tačku"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Nije postavljeno"</string>
@@ -1314,11 +1254,7 @@
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Lokacija za radni profil"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Odobrenja lokacije za aplikacije"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Lokacija je isključena"</string>
-    <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
-      <item quantity="one"> Pristup lokaciji ima sljedeći broj aplikacija: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> od <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
-      <item quantity="few"> Pristup lokaciji ima sljedeći broj aplikacija: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> od <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
-      <item quantity="other"> Pristup lokaciji ima sljedeći broj aplikacija: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> od <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
-    </plurals>
+    <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{Pristup lokaciji ima sljedeći broj aplikacija: # od {total}}one{Pristup lokaciji ima sljedeći broj aplikacija: # od {total}}few{Pristup lokaciji ima sljedeći broj aplikacija: # od {total}}other{Pristup lokaciji ima sljedeći broj aplikacija: # od {total}}}"</string>
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"Nedavni pristup"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"Prikaži sve"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Prikaži detalje"</string>
@@ -1333,9 +1269,15 @@
     <string name="location_services_preference_title" msgid="604317859531782159">"Usluge lokacije"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Usluge lokacije"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"Koristi lokaciju"</string>
+    <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"Nije moguće automatski postaviti vremensku zonu"</string>
+    <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"Lokacija ili usluge lokacije su isključene"</string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_environment" msgid="2279833212923765802"></string>
+    <string name="location_time_zone_detection_status_summary_temporarily_unavailable" msgid="6586801403644278967"></string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Potrebna je lokacija uređaja"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_message" msgid="5846316326139169523">"Da postavite vremensku zonu pomoću lokacije, uključite lokaciju, a zatim ažurirajte postavke vremenske zone"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Postavke lokacije"</string>
+    <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"Popravi ovo"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"Otkaži"</string>
     <string name="location_time_zone_detection_auto_is_off" msgid="6264253990141650280">"Automatska vremenska zona je isključena"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Otkrivanje vremenske zone pomoću lokacije je onemogućeno"</string>
@@ -1459,11 +1401,7 @@
     <string name="install_applications" msgid="3921609656584369901">"Nepoznati izvori"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Dopusti sve izvore aplikacija"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Nedavno otvarane aplikacije"</string>
-    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
-      <item quantity="one">Prikaz svih aplikacija (njih %1$d)</item>
-      <item quantity="few">Prikaz svih aplikacija (njih %1$d)</item>
-      <item quantity="other">Prikaz svih aplikacija (njih %1$d)</item>
-    </plurals>
+    <string name="see_all_apps_title" msgid="1650653853942381797">"{count,plural, =1{Pogledajte sve aplikacije}one{Pogledajte sve aplikacije (njih #)}few{Pogledajte sve aplikacije (njih #)}other{Pogledajte sve aplikacije (njih #)}}"</string>
     <string name="forgot_password_title" msgid="3967873480875239885">"Kontaktirajte IT administratora"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Može vam pomoći s poništavanjem PIN-a, uzorka ili lozinke"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Napredne postavke"</string>
@@ -1477,11 +1415,7 @@
     <string name="cache_header_label" msgid="2441967971921741047">"Keš memorija"</string>
     <string name="clear_cache_btn_text" msgid="8597272828928143723">"Obriši keš memoriju"</string>
     <string name="cache_size_label" msgid="313456088966822757">"Keš memorija"</string>
-    <plurals name="uri_permissions_text" formatted="false" msgid="8212425823423508096">
-      <item quantity="one">%d stavka</item>
-      <item quantity="few">%d stavke</item>
-      <item quantity="other">%d stavki</item>
-    </plurals>
+    <string name="uri_permissions_text" msgid="8406345863117405105">"{count,plural, =1{1 stavka}one{# stavka}few{# stavke}other{# stavki}}"</string>
     <string name="clear_uri_btn_text" msgid="4828117421162495134">"Pristup je slobodan"</string>
     <string name="controls_label" msgid="8671492254263626383">"Kontrole"</string>
     <string name="force_stop" msgid="2681771622136916280">"Prisilno zaustavi"</string>
@@ -1630,50 +1564,38 @@
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Prikažite listu prečica"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastatura i alati radnog profila"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Tastatura na ekranu za posao"</string>
-    <!-- no translation found for trackpad_settings (2071131324087677005) -->
-    <skip />
-    <!-- no translation found for trackpad_mouse_settings (136226693583218429) -->
-    <skip />
-    <!-- no translation found for trackpad_settings_summary (3369855644136760402) -->
-    <skip />
-    <!-- no translation found for trackpad_tap_to_click (1938230946542070746) -->
-    <skip />
-    <!-- no translation found for trackpad_touchpad_gesture_title (7568052847609914436) -->
-    <skip />
-    <!-- no translation found for trackpad_touchpad_gesture_summary (6256074591395359124) -->
-    <skip />
-    <!-- no translation found for trackpad_reverse_scrolling_title (422877284529360866) -->
-    <skip />
-    <!-- no translation found for trackpad_reverse_scrolling_summary (6048648562887499036) -->
-    <skip />
-    <!-- no translation found for trackpad_bottom_right_tap_title (6275428879042702880) -->
-    <skip />
-    <!-- no translation found for trackpad_bottom_right_tap_summary (8734094086900680674) -->
-    <skip />
-    <!-- no translation found for trackpad_pointer_speed (7786579408631352625) -->
-    <skip />
-    <!-- no translation found for trackpad_touch_gesture (8641725062131922497) -->
-    <skip />
-    <!-- no translation found for trackpad_go_back_title (5312164160947491440) -->
-    <skip />
-    <!-- no translation found for trackpad_go_back_summary (4201901101085902768) -->
-    <skip />
-    <!-- no translation found for trackpad_go_home_title (2146525662148291552) -->
-    <skip />
-    <!-- no translation found for trackpad_go_home_summary (2222744701528360887) -->
-    <skip />
-    <!-- no translation found for trackpad_recent_apps_title (8195970908411585445) -->
-    <skip />
-    <!-- no translation found for trackpad_recent_apps_summary (2685092851677573794) -->
-    <skip />
-    <!-- no translation found for trackpad_notifications_title (3521663305043747880) -->
-    <skip />
-    <!-- no translation found for trackpad_notifications_summary (7663647367648690040) -->
-    <skip />
-    <!-- no translation found for trackpad_switch_apps_title (7342032935377284039) -->
-    <skip />
-    <!-- no translation found for trackpad_switch_apps_summary (9193942041912927440) -->
-    <skip />
+    <string name="trackpad_settings" msgid="2071131324087677005">"Dodirna površina"</string>
+    <string name="trackpad_mouse_settings" msgid="136226693583218429">"Dodirna podloga i miš"</string>
+    <string name="trackpad_settings_summary" msgid="3369855644136760402">"Brzina pokazivača, pokreti"</string>
+    <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Dodirni za klik"</string>
+    <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Pokreti na dodirnoj podlozi"</string>
+    <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Prilagodite pojedinačne pokrete navigacije na dodirnoj podlozi"</string>
+    <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Klizanje unazad"</string>
+    <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Sadržaj se pomjera nagore kada kližete nadolje"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Dodir dolje desno"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Dodirnite donji desni ugao dodirne podloge za više opcija"</string>
+    <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Brzina pokazivača"</string>
+    <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Naučite pokrete dodirne podloge"</string>
+    <string name="trackpad_go_back_title" msgid="5312164160947491440">"Nazad"</string>
+    <string name="trackpad_go_back_summary" msgid="4201901101085902768">"Prevucite ulijevo ili udesno s tri prsta"</string>
+    <string name="trackpad_go_home_title" msgid="2146525662148291552">"Odlazak na početni ekran"</string>
+    <string name="trackpad_go_home_summary" msgid="2222744701528360887">"Prevucite nagore s tri prsta"</string>
+    <string name="trackpad_recent_apps_title" msgid="8195970908411585445">"Nedavne aplikacije"</string>
+    <string name="trackpad_recent_apps_summary" msgid="2685092851677573794">"Prevucite nagore s tri prsta, a zatim zadržite"</string>
+    <string name="trackpad_notifications_title" msgid="3521663305043747880">"Obavještenja"</string>
+    <string name="trackpad_notifications_summary" msgid="7663647367648690040">"Prevucite nadolje s tri prsta"</string>
+    <string name="trackpad_switch_apps_title" msgid="7342032935377284039">"Prebacujte se između aplikacija"</string>
+    <string name="trackpad_switch_apps_summary" msgid="9193942041912927440">"Prevucite ulijevo ili udesno s četiri prsta"</string>
+    <string name="modifier_keys_settings" msgid="2537108435032034683">"Modifikacijske tipke"</string>
+    <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Promijenite ponašanje tipki"</string>
+    <string name="modifier_keys_reset_title" msgid="948294258402761066">"Vrati sve na zadano"</string>
+    <string name="modifier_keys_default_summary" msgid="8701640508670973258">"Zadano"</string>
+    <string name="modifier_keys_reset_message" msgid="5236994817619936058">"Jeste li sigurni da želite vratiti sve modifikacijske tipke na zadano?"</string>
+    <string name="modifier_keys_done" msgid="8196199314913909700">"Gotovo"</string>
+    <string name="modifier_keys_cancel" msgid="7136520252570826772">"Otkaži"</string>
+    <string name="modifier_keys_restore" msgid="7627661630556839268">"Vrati"</string>
+    <string name="modifier_keys_picker_title" msgid="244545904150587851">"Odaberite modifikacijsku tipku"</string>
+    <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Odaberite novu tipku za <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Zadano"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Govor"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Brzina pokazivača"</string>
@@ -1990,26 +1912,14 @@
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Tamnije"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Svjetlije"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Ostavi uključeno nakon ponovnog pokretanja uređaja"</string>
-    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
-      <item quantity="one">Kratko (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunda)</item>
-      <item quantity="few">Kratko (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunde)</item>
-      <item quantity="other">Kratko (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundi)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
-      <item quantity="one">Srednje (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunda)</item>
-      <item quantity="few">Srednje (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunde)</item>
-      <item quantity="other">Srednje (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundi)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
-      <item quantity="one">Dugo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunda)</item>
-      <item quantity="few">Dugo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunde)</item>
-      <item quantity="other">Dugo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundi)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="4537791441118261556">
-      <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> sekunda</item>
-      <item quantity="few"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunde</item>
-      <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> sekundi</item>
-    </plurals>
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (2981206111858937724) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (6867395206533459204) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (4079139970819335593) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_delay_unit_second (5979297390686370567) -->
+    <skip />
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Postavke"</string>
     <string name="captioning_preview_title" msgid="2888561631323180535">"Pregled"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Standardne opcije"</string>
@@ -2084,16 +1994,10 @@
     <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Skeniraj uređaje u blizini"</string>
     <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Sačuvani uređaji"</string>
     <string name="print_settings" msgid="8519810615863882491">"Štampanje"</string>
-    <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
-      <item quantity="one">Uključena je <xliff:g id="COUNT">%1$d</xliff:g> usluga štampanja</item>
-      <item quantity="few">Uključene su <xliff:g id="COUNT">%1$d</xliff:g> usluge štampanja</item>
-      <item quantity="other">Uključeno je <xliff:g id="COUNT">%1$d</xliff:g> usluga štampanja</item>
-    </plurals>
-    <plurals name="print_jobs_summary" formatted="false" msgid="3933688846338306536">
-      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> zadatak za štampanje</item>
-      <item quantity="few"><xliff:g id="COUNT">%1$d</xliff:g>zadatka za štampanje</item>
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g>zadataka za štampanje</item>
-    </plurals>
+    <!-- no translation found for print_settings_summary (1458773840720811915) -->
+    <skip />
+    <!-- no translation found for print_jobs_summary (7040836482336577323) -->
+    <skip />
     <string name="print_settings_title" msgid="7680498284751129935">"Usluge štampanja"</string>
     <string name="print_no_services_installed" msgid="7554057966540602692">"Nema instaliranih usluga"</string>
     <string name="print_no_printers_found" msgid="4833082484646109486">"Nije pronađen nijedan štampač"</string>
@@ -2171,31 +2075,16 @@
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Saznajte više o pauziranju punjenja"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Nastavi punjenje"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Uključuje aktivnost u pozadini s velikom potrošnjom baterije"</string>
-    <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
-      <item quantity="one">Ograničite %1$d aplikaciju</item>
-      <item quantity="few">Ograničite %1$d aplikacije</item>
-      <item quantity="other">Ograničite %1$d aplikacija</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_handled_title" formatted="false" msgid="5862649927574803958">
-      <item quantity="one">%2$d aplikacija je nedavno ograničena</item>
-      <item quantity="few">%2$d aplikacije su nedavno ograničene</item>
-      <item quantity="other">%2$d aplikacija je nedavno ograničeno</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
-      <item quantity="one">%2$d aplikacija ima visoku potrošnju baterije u pozadini</item>
-      <item quantity="few">%2$d aplikacije imaju visoku potrošnju baterije u pozadini</item>
-      <item quantity="other">%2$d aplikacija ima visoku potrošnju baterije u pozadini</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
-      <item quantity="one">Ove aplikacije ne mogu raditi u pozadini</item>
-      <item quantity="few">Ove aplikacije ne mogu raditi u pozadini</item>
-      <item quantity="other">Ove aplikacije ne mogu raditi u pozadini</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_app_dialog_title" formatted="false" msgid="7897944678619251740">
-      <item quantity="one">Ograničiti %1$d aplikaciju?</item>
-      <item quantity="few">Ograničiti %1$d aplikacije?</item>
-      <item quantity="other">Ograničiti %1$d aplikacija?</item>
-    </plurals>
+    <!-- no translation found for battery_tip_restrict_title (4537101947310626753) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_handled_title (7142074986508706853) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_summary (7539469590829235277) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_handled_summary (3535697154547199190) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_app_dialog_title (1649476357343160240) -->
+    <skip />
     <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"Da uštedite bateriju, spriječite aplikaciju <xliff:g id="APP">%1$s</xliff:g> da koristi bateriju u pozadini. Moguće je da ta aplikacija neće raditi pravilno i da će obavještenja kasniti."</string>
     <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"Da uštedite bateriju, spriječite ove aplikacije da koriste bateriju u pozadini. Moguće je da aplikacije s ograničenjem neće raditi pravilno i da će obavještenja kasniti.\n\nAplikacije:"</string>
     <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"Da uštedite bateriju, spriječite ove aplikacije da koriste bateriju u pozadini. Moguće je da aplikacije s ograničenjem neće raditi pravilno i da će obavještenja kasniti.\n\nAplikacije:\n<xliff:g id="APP_LIST">%1$s</xliff:g>."</string>
@@ -2209,22 +2098,16 @@
     <string name="smart_battery_title" msgid="9095903608520254254">"Automatsko upravljanje aplikacijama"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"Kada Upravitelj baterije otkrije da aplikacije troše bateriju, imat ćete opciju da na te aplikacije postavite ograničenje. Moguće je da aplikacije s ograničenjem neće raditi pravilno i da će obavještenja kasniti."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Ograničene aplikacije"</string>
-    <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
-      <item quantity="one">Ograničavanje potrošnje baterije za %1$d aplikaciju</item>
-      <item quantity="few">Ograničavanje potrošnje baterije za %1$d aplikacije</item>
-      <item quantity="other">Ograničavanje potrošnje baterije za %1$d aplikacija</item>
-    </plurals>
+    <!-- no translation found for restricted_app_summary (1022307922754893997) -->
+    <skip />
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"Ograničeno <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="restricted_app_detail_footer" msgid="3495725286882138803">"Ovim aplikacijama je ograničena potrošnja baterije u pozadini. Moguće je da neće raditi kao što je očekivano i da će obavještenja kasniti."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Upotreba Upravitelja baterije"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Otkrij kada aplikacije troše bateriju"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"Otkrivanje kada aplikacije brzo troše bateriju"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"Otkrivanje kada aplikacije brzo troše bateriju"</string>
-    <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
-      <item quantity="one">Ograničena je %1$d aplikacija</item>
-      <item quantity="few">Ograničene su %1$d aplikacije</item>
-      <item quantity="other">Ograničeno je %1$d aplikacija</item>
-    </plurals>
+    <!-- no translation found for battery_manager_app_restricted (2583902700677009173) -->
+    <skip />
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
     <string name="battery_missing_message" msgid="400958471814422770">"Došlo je do problema prilikom očitavanja mjerača stanja baterije."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
@@ -2414,11 +2297,8 @@
     <string name="remove_credential_management_app" msgid="6089291496976812786">"Ukloni aplikaciju"</string>
     <string name="remove_credential_management_app_dialog_title" msgid="5713525435104706772">"Ukloniti ovu aplikaciju?"</string>
     <string name="remove_credential_management_app_dialog_message" msgid="7739474298063646935">"Ova aplikacija neće upravljati certifikatima, ali će ostati na vašem uređaju. Svi certifikati koje je aplikacija instalirala će se deinstalirati."</string>
-    <plurals name="number_of_urls" formatted="false" msgid="403979258551655023">
-      <item quantity="one"><xliff:g id="NUMBER_1">%d</xliff:g> URL</item>
-      <item quantity="few"><xliff:g id="NUMBER_1">%d</xliff:g> URL-a</item>
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> URL-ova</item>
-    </plurals>
+    <!-- no translation found for number_of_urls (1128699121050872188) -->
+    <skip />
     <string name="emergency_tone_title" msgid="6673118505206685168">"Signal za hitne pozive"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Postavi ponašanje prilikom upućivanja poziva za hitne situacije"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Izrada sigurnosne kopije"</string>
@@ -2461,11 +2341,8 @@
     <string name="notification_history_today" msgid="5828496957208237230">"Posljednja 24 sata"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"Odgođeno"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"Nedavno odbačeno"</string>
-    <plurals name="notification_history_count" formatted="false" msgid="1859304685071321991">
-      <item quantity="one"><xliff:g id="NUMBER_1">%d</xliff:g> obavještenje</item>
-      <item quantity="few"><xliff:g id="NUMBER_1">%d</xliff:g> obavještenja</item>
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> obavještenja</item>
-    </plurals>
+    <!-- no translation found for notification_history_count (885305572972482838) -->
+    <skip />
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"Melodija zvona telefona i vibracija"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"Detalji o mreži"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"Sinhronizacija omogućena"</string>
@@ -2656,19 +2533,13 @@
     <string name="additional_system_update_settings_list_item_title" msgid="7230385345152138051">"Dodatna ažuriranja sistema"</string>
     <string name="ssl_ca_cert_warning" msgid="3898387588657346106">"Mreža može biti nadzirana"</string>
     <string name="done_button" msgid="6269449526248267">"Gotovo"</string>
-    <plurals name="ssl_ca_cert_dialog_title" formatted="false" msgid="5491460811755938449">
-      <item quantity="one"> Vjerujte certifikatu ili ga uklonite</item>
-      <item quantity="few"> Vjerujte certifikatima ili ih uklonite</item>
-      <item quantity="other"> Vjerujte certifikatima ili ih uklonite</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_dialog_title (1032088078702042090) -->
+    <skip />
     <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{Domena {orgName} je instalirala CA certifikat na vaš uređaj, koji joj može omogućiti da prati aktivnosti na mreži uređaja, uključujući e-poštu, aplikacije i sigurne web lokacije.\n\nViše informacija o ovom certifikatu potražite od administratora.}one{Domena {orgName} je instalirala CA certifikate na vaš uređaj, koji joj mogu omogućiti da prati aktivnosti na mreži uređaja, uključujući e-poštu, aplikacije i sigurne web lokacije.\n\nViše informacija o ovim certifikatima potražite od administratora.}few{Domena {orgName} je instalirala CA certifikate na vaš uređaj, koji joj mogu omogućiti da prati aktivnosti na mreži uređaja, uključujući e-poštu, aplikacije i sigurne web lokacije.\n\nViše informacija o ovim certifikatima potražite od administratora.}other{Domena {orgName} je instalirala CA certifikate na vaš uređaj, koji joj mogu omogućiti da prati aktivnosti na mreži uređaja, uključujući e-poštu, aplikacije i sigurne web lokacije.\n\nViše informacija o ovim certifikatima potražite od administratora.}}"</string>
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{Domena {orgName} je instalirala CA certifikat za vaš radni profil, koji joj može omogućiti da prati aktivnosti na poslovnoj mreži, uključujući e-poštu, aplikacije i sigurne web lokacije.\n\nViše informacija o ovom certifikatu potražite od administratora.}one{Domena {orgName} je instalirala CA certifikate za vaš radni profil, koji joj mogu omogućiti da prati aktivnosti na poslovnoj mreži, uključujući e-poštu, aplikacije i sigurne web lokacije.\n\nViše informacija o ovim certifikatima potražite od administratora.}few{Domena {orgName} je instalirala CA certifikate za vaš radni profil, koji joj mogu omogućiti da prati aktivnosti na poslovnoj mreži, uključujući e-poštu, aplikacije i sigurne web lokacije.\n\nViše informacija o ovim certifikatima potražite od administratora.}other{Domena {orgName} je instalirala CA certifikate za vaš radni profil, koji joj mogu omogućiti da prati aktivnosti na poslovnoj mreži, uključujući e-poštu, aplikacije i sigurne web lokacije.\n\nViše informacija o ovim certifikatima potražite od administratora.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Treća strana je u stanju da prati vaše mrežne aktivnosti, uključujući e-poruke, aplikacije i sigurne web lokacije. \n\nPouzdani akreditiv instaliran na vašem uređaju to omogućava."</string>
-    <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
-      <item quantity="one">Provjerite certifikate</item>
-      <item quantity="few">Provjerite certifikate</item>
-      <item quantity="other">Provjerite certifikate</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_settings_button (2044927302268394991) -->
+    <skip />
     <string name="user_settings_title" msgid="6550866465409807877">"Više korisnika"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Korisnici i profili"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Dodaj korisnika ili profil"</string>
@@ -2707,9 +2578,12 @@
     <string name="enable_guest_calling" msgid="8300355036005240911">"Dozvolite gostu da koristi telefon"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"Historija poziva će se dijeliti s gostom korisnikom"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Uključi telefonske pozive i SMS-ove"</string>
+    <string name="user_grant_admin" msgid="6511342422361803820">"Dajte korisniku privilegije administratora"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Izbriši korisnika"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Uključiti telefonske pozive i SMS-ove?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Historija poziva i SMS-ova će se dijeliti s ovim korisnikom."</string>
+    <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Ukloniti privilegije administratora?"</string>
+    <string name="user_revoke_admin_confirm_message" msgid="2719667217562982318">"Jeste li sigurni da želite ukloniti privilegije administratora ovog korisnika?"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Informacije za hitne slučajeve"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Informacije i kontakti za korisnika <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Otvorit aplikaciju <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -2855,10 +2729,10 @@
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Klonirane aplikacije"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Kreirajte drugu instancu aplikacije tako da možete istovremeno koristiti dva računa."</string>
     <string name="cloned_apps_summary" msgid="8805362440770795709">"Klonirano: <xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g>. Dostupno za kloniranje: <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g>"</string>
-    <!-- no translation found for cloned_app_creation_summary (4642627294993918502) -->
-    <skip />
-    <!-- no translation found for cloned_app_created_summary (7277912971544890710) -->
-    <skip />
+    <string name="delete_all_app_clones" msgid="3489053361980624999">"Brisanje svih klonova aplikacije"</string>
+    <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"Brisanje klonova aplikacije nije uspjelo"</string>
+    <string name="cloned_app_creation_summary" msgid="4642627294993918502">"Kreiranje…"</string>
+    <string name="cloned_app_created_summary" msgid="7277912971544890710">"Klonirano"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Jezici, pokreti, vrijeme, sigurnosna kopija"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"Jezici sistema, jezici aplikacije"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, veza s mrežom, internet, bežično, podaci, wi fi"</string>
@@ -3192,11 +3066,8 @@
     <string name="promote_conversation_title" msgid="4731148769888238722">"Ovo je razgovor"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Dodavanje u odjeljak razgovora"</string>
     <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Nema prioritetnih razgovora"</string>
-    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> prioritetan razgovor</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> prioritetna razgovora</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> prioritetnih razgovora</item>
-    </plurals>
+    <!-- no translation found for priority_conversation_count (7291234530844412077) -->
+    <skip />
     <string name="important_conversations" msgid="1233893707189659401">"Prioritetni razgovori"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Prikazuju se na vrhu odjeljka razgovora u vidu plutajućih oblačića"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Prikazuju se na vrhu odjeljka razgovora"</string>
@@ -3225,16 +3096,10 @@
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Kada je uređaj otključan, vidite obavještenja u vidu banera na vrhu ekrana"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Sva obavještenja aplikacije \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Sva obavještenja aplikacije <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
-      <item quantity="one">O <xliff:g id="NUMBER_1">%,d</xliff:g> obavještenju na dan</item>
-      <item quantity="few">O <xliff:g id="NUMBER_1">%,d</xliff:g> obavještenja na dan</item>
-      <item quantity="other">O <xliff:g id="NUMBER_1">%,d</xliff:g> obavještenja na dan</item>
-    </plurals>
-    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
-      <item quantity="one">Oko <xliff:g id="NUMBER_1">%,d</xliff:g> obavještenje sedmično</item>
-      <item quantity="few">Oko <xliff:g id="NUMBER_1">%,d</xliff:g> obavještenja sedmično</item>
-      <item quantity="other">Oko <xliff:g id="NUMBER_1">%,d</xliff:g> obavještenja sedmično</item>
-    </plurals>
+    <!-- no translation found for notifications_sent_daily (10274479224185437) -->
+    <skip />
+    <!-- no translation found for notifications_sent_weekly (7895656213187555346) -->
+    <skip />
     <string name="notifications_sent_never" msgid="9081278709126812062">"Nikada"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Obavještenja uređaja i aplikacija"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Kontrolirajte koje aplikacije i uređaji mogu čitati obavještenja"</string>
@@ -3303,11 +3168,8 @@
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Odobrenja"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"Ova aplikacija može koristiti odobrenja vaše lične aplikacije <xliff:g id="NAME">%1$s</xliff:g>, kao što su pristup lokaciji, pohrani ili kontaktima."</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"Nema povezanih aplikacija"</string>
-    <plurals name="interact_across_profiles_number_of_connected_apps" formatted="false" msgid="6991750455661974772">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> aplikacija je povezana</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> aplikacije su povezane</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aplikacija je povezano</item>
-    </plurals>
+    <!-- no translation found for interact_across_profiles_number_of_connected_apps (4000424798291479207) -->
+    <skip />
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Da povežete ove aplikacije, instalirajte aplikaciju <xliff:g id="NAME">%1$s</xliff:g> na radnom profilu"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Da povežete ove aplikacije, instalirajte aplikaciju <xliff:g id="NAME">%1$s</xliff:g> na ličnom profilu"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Dodirnite da preuzmete aplikaciju"</string>
@@ -3322,11 +3184,8 @@
     <string name="notification_channels_other" msgid="18159805343647908">"Ostalo"</string>
     <string name="no_channels" msgid="4716199078612071915">"Ova aplikacija nije objavila nikakva obavještenja"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Dodatne postavke u aplikaciji"</string>
-    <plurals name="deleted_channels" formatted="false" msgid="5963473421547029532">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> kategorija je izbrisana</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> kategorije su izbrisane</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> kategorija je izbrisano</item>
-    </plurals>
+    <!-- no translation found for deleted_channels (8489800381509312964) -->
+    <skip />
     <string name="app_notification_block_title" msgid="3880322745749900296">"Blokiraj sve"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Nikada ne prikazuj ova obavještenja"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Prikaži obavještenja"</string>
@@ -3476,7 +3335,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Traži lozinku prije poništavanja kačenja"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Zaključaj uređaj kada se ekran otkači"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Potvrda brisanja SIM-a"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Potvrdite identitet prije potpunog brisanja eSIM-a"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Potvrdite identitet prije potpunog brisanja eSIM-a"</string>
     <string name="memtag_title" msgid="5096176296797727201">"Beta v. Napredne zaštite memorije"</string>
     <string name="memtag_toggle" msgid="8695028758462939212">"Napredna zaštita memorije"</string>
     <string name="memtag_intro" msgid="579408691329568953">"Ova beta verzija funkcije vam pomaže da zaštitite uređaj od grešaka koje mogu ugroziti vašu sigurnost."</string>
@@ -3976,20 +3835,12 @@
     <string name="enterprise_privacy_none" msgid="6026527690979756431">"Ništa"</string>
     <string name="enterprise_privacy_enterprise_installed_packages" msgid="9114143640515900082">"Aplikacije su instalirane"</string>
     <string name="enterprise_privacy_apps_count_estimation_info" msgid="7959907857710107792">"Broj aplikacija je samo procjena. Možda nisu obuhvaćene aplikacije koje su instalirane izvan Play trgovine."</string>
-    <plurals name="enterprise_privacy_number_packages_lower_bound" formatted="false" msgid="5403847001419529018">
-      <item quantity="one">Najmanje <xliff:g id="COUNT_1">%d</xliff:g> aplikacija</item>
-      <item quantity="few">Najmanje <xliff:g id="COUNT_1">%d</xliff:g> aplikacije</item>
-      <item quantity="other">Najmanje <xliff:g id="COUNT_1">%d</xliff:g> aplikacija</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages_lower_bound" msgid="5317634640873658149">"{count,plural, =1{Najmanje # aplikacija}one{Najmanje # aplikacija}few{Najmanje # aplikacije}other{Najmanje # aplikacija}}"</string>
     <string name="enterprise_privacy_location_access" msgid="8023838718108456971">"Odobrenja za lokacije"</string>
     <string name="enterprise_privacy_microphone_access" msgid="7242958026470143653">"Odobrenja za mikrofon"</string>
     <string name="enterprise_privacy_camera_access" msgid="7685460535880069016">"Odobrenja za kameru"</string>
     <string name="enterprise_privacy_enterprise_set_default_apps" msgid="7498546659083996300">"Zadane aplikacije"</string>
-    <plurals name="enterprise_privacy_number_packages" formatted="false" msgid="8568544906431825430">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> aplikacija</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> aplikacije</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aplikacija</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages" msgid="5294444005035188274">"{count,plural, =1{# aplikacija}one{# aplikacija}few{# aplikacije}other{# aplikacija}}"</string>
     <string name="enterprise_privacy_input_method" msgid="3278314982700662246">"Zadana tastatura"</string>
     <string name="enterprise_privacy_input_method_name" msgid="2974859490559054584">"Postavljeno kao <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
     <string name="enterprise_privacy_always_on_vpn_device" msgid="1735829327405126695">"Uključen je uvijek aktivni VPN"</string>
@@ -3999,20 +3850,12 @@
     <string name="enterprise_privacy_ca_certs_device" msgid="1816495877258727663">"Pouzdani akreditivi"</string>
     <string name="enterprise_privacy_ca_certs_personal" msgid="1516422660828485795">"Pouzdani akreditivi na vašem ličnom profilu"</string>
     <string name="enterprise_privacy_ca_certs_work" msgid="4318941788592655561">"Pouzdani akreditivi na vašem radnom profilu"</string>
-    <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="6459725295322004179">
-      <item quantity="one">Najmanje <xliff:g id="COUNT_1">%d</xliff:g> CA certifikat</item>
-      <item quantity="few">Najmanje <xliff:g id="COUNT_1">%d</xliff:g> CA certifikata</item>
-      <item quantity="other">Najmanje <xliff:g id="COUNT_1">%d</xliff:g> CA certifikata</item>
-    </plurals>
+    <string name="enterprise_privacy_number_ca_certs" msgid="4540897122831942658">"{count,plural, =1{Najmanje # CA certifikat}one{Najmanje # CA certifikat}few{Najmanje # CA certifikata}other{Najmanje # CA certifikata}}"</string>
     <string name="enterprise_privacy_lock_device" msgid="464054894363899866">"Administrator može zaključati uređaj i postaviti novu lozinku"</string>
     <string name="enterprise_privacy_wipe_device" msgid="869589182352244591">"Administrator može izbrisati sve podatke iz uređaja"</string>
     <string name="enterprise_privacy_failed_password_wipe_device" msgid="7045164901334821226">"Neuspjeli pokušaji upisivanja lozinke prije brisanja svih podataka na uređaju"</string>
     <string name="enterprise_privacy_failed_password_wipe_work" msgid="2537582942554484170">"Neuspjeli pokušaji upisivanja lozinke prije brisanja svih podataka radnog profila"</string>
-    <plurals name="enterprise_privacy_number_failed_password_wipe" formatted="false" msgid="8811973918944217791">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> pokušaj</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> pokušaja</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> pokušaja</item>
-    </plurals>
+    <string name="enterprise_privacy_number_failed_password_wipe" msgid="2695842143305867642">"{count,plural, =1{# pokušaj}one{# pokušaj}few{# pokušaja}other{# pokušaja}}"</string>
     <string name="do_disclosure_generic" msgid="3067459392402324538">"Ovim uređajem upravlja vaša organizacija."</string>
     <string name="do_disclosure_with_name" msgid="867544298924410766">"Ovim uređajem upravlja <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
@@ -4040,24 +3883,12 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Kada platite cjelokupni iznos:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"sva ograničenja se uklanjaju s uređaja"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"možete deinstalirati aplikaciju povjerioca"</string>
-    <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
-      <item quantity="one">Aplikacija za kameru</item>
-      <item quantity="few">Aplikacije za kameru</item>
-      <item quantity="other">Aplikacija za kameru</item>
-    </plurals>
+    <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{Aplikacija za kameru}one{Aplikacije za kameru}few{Aplikacije za kameru}other{Aplikacije za kameru}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"Aplikacija za kalendar"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"Aplikacija za kontakte"</string>
-    <plurals name="default_email_app_title" formatted="false" msgid="8338194872609410234">
-      <item quantity="one">Aplikacija klijenta za e-poštu</item>
-      <item quantity="few">Aplikacije klijenta za e-poštu</item>
-      <item quantity="other">Aplikacija klijenta za e-poštu</item>
-    </plurals>
+    <string name="default_email_app_title" msgid="5411280873093244250">"{count,plural, =1{Aplikacija klijenta za e-poštu}one{Aplikacije klijenta za e-poštu}few{Aplikacije klijenta za e-poštu}other{Aplikacije klijenta za e-poštu}}"</string>
     <string name="default_map_app_title" msgid="7569231732944853320">"Aplikacija za mape"</string>
-    <plurals name="default_phone_app_title" formatted="false" msgid="4222188821845826493">
-      <item quantity="one">Aplikacija za telefon</item>
-      <item quantity="few">Aplikacije za telefon</item>
-      <item quantity="other">Aplikacija za telefon</item>
-    </plurals>
+    <string name="default_phone_app_title" msgid="795025972645464135">"{count,plural, =1{Aplikacija za telefon}one{Aplikacije za telefon}few{Aplikacije za telefon}other{Aplikacije za telefon}}"</string>
     <string name="app_names_concatenation_template_2" msgid="8320181646458855457">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>"</string>
     <string name="app_names_concatenation_template_3" msgid="7019703249717854148">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>, <xliff:g id="THIRD_APP_NAME">%3$s</xliff:g>"</string>
     <string name="storage_default_internal_storage" msgid="4055660218818688131">"Ovaj uređaj"</string>
@@ -4084,14 +3915,18 @@
     <string name="webview_uninstalled_for_user" msgid="627352948986275488">"(deinstalirano za korisnika <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="webview_disabled_for_user" msgid="5809886172032644498">"(onemogućeno za korisnika <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="autofill_app" msgid="7595308061826307921">"Usluga automatskog popunjavanja"</string>
+    <string name="default_autofill_app" msgid="372234803718251606">"Zadana usluga automatskog popunjavanja"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Lozinke"</string>
-    <plurals name="autofill_passwords_count" formatted="false" msgid="7715009165029452622">
-      <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> lozinka</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%1$d</xliff:g> lozinke</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> lozinki</item>
-    </plurals>
+    <string name="credman_credentials" msgid="5937331545565783811">"Usluge lozinke i identiteta"</string>
+    <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# lozinka}one{# lozinka}few{# lozinke}other{# lozinki}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"automatski, popunjavanje, automatsko popunjavanje, lozinka"</string>
+    <string name="credman_keywords" msgid="7236954350284379264">"akreditivi, pristupni ključ, lozinka"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Provjerite je li ova aplikacija pouzdana&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Automatsko popunjavanje&gt;%1$s&lt;/xliff:g&gt; koristi sadržaj na vašem ekranu da odredi šta se može automatski popuniti."</string>
+    <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Isključiti %1$s?"</string>
+    <string name="credman_confirmation_message" msgid="1485617504425237430">"Sačuvane informacije kao što su adrese ili načini plaćanja se neće popunjavati kada se prijavite. Da sačuvane informacije ostanu popunjene, postavite zadanu uslugu automatskog popunjavanja."</string>
+    <string name="credman_error_message_title" msgid="5108868200002966901">"Ograničenje usluga lozinke i identiteta"</string>
+    <string name="credman_error_message" msgid="4058425433345908579">"Istovremeno možete imati najviše 5 aktivnih usluga automatskog popunjavanja i lozinki. Isključite uslugu da dodate više."</string>
+    <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Isključi"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Automatsko popunjavanje"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Nivo zapisivanja"</string>
     <string name="autofill_max_partitions" msgid="7342195529574406366">"Maksimalan broj zahtjeva po sesiji"</string>
@@ -4274,8 +4109,7 @@
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"Prijenos podataka u aplikaciji"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Mrežni način <xliff:g id="NETWORKMODEID">%1$d</xliff:g> nije važeći. Zanemarite."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nazivi pristupne tačke"</string>
-    <!-- no translation found for keywords_access_point_names (8174967126858505945) -->
-    <skip />
+    <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Nedostupno kada ste povezani s operaterom <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Prikaži više"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Uključiti mobilnog operatera <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
@@ -4365,11 +4199,7 @@
     <string name="copyable_slice_toast" msgid="1008251852798990606">"Sljedeći sadržaj je kopiran u međumemoriju: <xliff:g id="COPY_CONTENT">%1$s</xliff:g>"</string>
     <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"Korištenje pristupačnosti"</string>
-    <plurals name="accessibility_usage_summary" formatted="false" msgid="6910643986958263005">
-      <item quantity="one"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> aplikacija ima potpuni pristup vašem uređaju</item>
-      <item quantity="few"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> aplikacije imaju potpuni pristup vašem uređaju</item>
-      <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> aplikacija ima potpuni pristup vašem uređaju</item>
-    </plurals>
+    <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{1 aplikacija ima potpuni pristup vašem uređaju}one{# aplikacija ima potpuni pristup vašem uređaju}few{# aplikacije imaju potpuni pristup vašem uređaju}other{# aplikacija ima potpuni pristup vašem uređaju}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Važne informacije"</string>
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"NASTAVI"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"NE, HVALA"</string>
@@ -4663,18 +4493,11 @@
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"Format QR koda nije važeći"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"Pretvori u eSIM"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"Prenesite eSIM na drugi uređaj"</string>
-    <!-- no translation found for background_install_preference_summary (3065219346519340364) -->
-    <skip />
-    <!-- no translation found for background_install_title (607913515188276168) -->
-    <skip />
-    <!-- no translation found for background_install_summary (3890296129543309666) -->
-    <skip />
-    <!-- no translation found for background_install_feature_list_no_entry (2071343281272266154) -->
-    <skip />
-    <!-- no translation found for background_install_uninstall_button_description (1189649052911501249) -->
-    <skip />
-    <!-- no translation found for background_install_before (8608614957688912715) -->
-    <skip />
-    <!-- no translation found for background_install_after (7983488897570908149) -->
-    <skip />
+    <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# aplikacija}one{# aplikacija}few{# aplikacije}other{# aplikacija}}"</string>
+    <string name="background_install_title" msgid="607913515188276168">"Aplikacije instalirane u pozadini"</string>
+    <string name="background_install_summary" msgid="3890296129543309666">"Proizvođač uređaja može u pozadini instalirati aplikacije na vaš uređaj ili dozvoliti operateru i drugim partnerima da to rade.\n\nNijedna aplikacija navedena ovdje nije obavezna za normalno funkcioniranje uređaja. Možete deinstalirati aplikacije koje ne želite."</string>
+    <string name="background_install_feature_list_no_entry" msgid="2071343281272266154">"Nijedna aplikacija nije instalirana u pozadini"</string>
+    <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Deinstaliraj aplikaciju"</string>
+    <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Aplikacije instalirane u proteklom mjesecu}one{Aplikacije instalirane u proteklom # mjesecu}few{Aplikacije instalirane u protekla # mjeseca}other{Aplikacije instalirane u proteklih # mjeseci}}"</string>
+    <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Aplikacije instalirane prije # mjesec}one{Aplikacije instalirane prije # mjesec}few{Aplikacije instalirane prije # mjeseca}other{Aplikacije instalirane prije # mjeseci}}"</string>
 </resources>

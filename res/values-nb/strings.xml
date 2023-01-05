@@ -26,10 +26,7 @@
     <string name="off" msgid="2898123876644709799">"Av"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Ukjent"</string>
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"Trykk for å vise informasjon"</string>
-    <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
-      <item quantity="other">Nå er du <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> steg fra å bli utvikler.</item>
-      <item quantity="one">Nå er du <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> steg fra å bli utvikler.</item>
-    </plurals>
+    <string name="show_dev_countdown" msgid="2936506773086395069">"{count,plural, =1{Du er nå # trinn fra å bli en utvikler.}other{Du er nå # trinn fra å bli en utvikler.}}"</string>
     <string name="show_dev_on" msgid="2840850085134853754">"Du er nå utvikler!"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"Det trengs ikke, du er allerede utvikler."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"Slå på utvikleralternativer først."</string>
@@ -122,7 +119,7 @@
     <string name="stylus_default_notes_app" msgid="3111290761558445874">"Standardapp for notatskriving"</string>
     <string name="stylus_textfield_handwriting" msgid="6962904622425646128">"Pekepennskriving i tekstfelt"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignorer alle knappetrykk med pekepenn"</string>
-    <string name="stylus_usi_header_title" msgid="1949011797718972583">"USI-pekepenn"</string>
+    <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Pekepenn"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Dato og klokkeslett"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy-tjener"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Tøm"</string>
@@ -160,10 +157,23 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Språkvalg for denne appen er ikke tilgjengelig fra innstillingene."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Språket kan være forskjellig fra språkene som er tilgjengelige i appen. Noen apper støtter muligens ikke denne innstillingen."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Bare apper som støtter språkvalg, vises her."</string>
-    <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
-      <item quantity="other">Vil du fjerne de valgte språkene?</item>
-      <item quantity="one">Vil du fjerne det valgte språket?</item>
-    </plurals>
+    <!-- no translation found for regional_preferences_title (4304567374498629528) -->
+    <skip />
+    <!-- no translation found for regional_preferences_summary (1189876997389469650) -->
+    <skip />
+    <!-- no translation found for regional_preferences_main_page_sub_title (4666033861956272891) -->
+    <skip />
+    <!-- no translation found for temperature_preferences_title (5009881556503629058) -->
+    <skip />
+    <!-- no translation found for calendar_preferences_title (8312485828206542600) -->
+    <skip />
+    <!-- no translation found for first_day_of_week_preferences_title (1971850087589599553) -->
+    <skip />
+    <!-- no translation found for numbers_preferences_title (6094837605398562369) -->
+    <skip />
+    <!-- no translation found for default_string_of_regional_preference (1595774718180886349) -->
+    <skip />
+    <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Vil du fjerne det valgte språket?}other{Vil du fjerne de valgte språkene?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Da vises tekst på et annet språk."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Du kan ikke fjerne alle språkene"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Behold minst ett av de foretrukne språkene"</string>
@@ -182,6 +192,7 @@
     <string name="apply" msgid="7834684883190163536">"Bruk"</string>
     <string name="share" msgid="8502235338607613795">"Del"</string>
     <string name="add" msgid="8335206931421683426">"Legg til"</string>
+    <string name="remove" msgid="1028414219245072102">"Fjern"</string>
     <string name="settings_label" msgid="943294133671632976">"Innstillinger"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Innstillinger"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Snarvei for Innstillinger"</string>
@@ -193,6 +204,7 @@
     <string name="roaming_warning" msgid="7703647889040229013">"Roamingavgifter kan påløpe."</string>
     <string name="date_time_auto" msgid="4239202185055225869">"Angi klokkeslettet automatisk"</string>
     <string name="zone_auto_title" msgid="5141692422373097957">"Angi automatisk"</string>
+    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"Posisjon blir brukt til å angi tidssonen når denne av/på-knappen er på"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Bruk lokal standard"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Bruk 24-timers format"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Tid"</string>
@@ -221,10 +233,8 @@
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"F.eks. Petters Android."</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Posisjon"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Bruk posisjon"</string>
-    <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="other">På – <xliff:g id="COUNT_1">%1$d</xliff:g> apper har tilgang til posisjon</item>
-      <item quantity="one">På – <xliff:g id="COUNT_0">%1$d</xliff:g> app har tilgang til posisjon</item>
-    </plurals>
+    <!-- no translation found for location_settings_summary_location_on (7029728269719893381) -->
+    <skip />
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Laster inn …"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Apper med tillatelsen for enheter i nærheten kan fastslå den relative posisjonen til tilkoblede enheter."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Posisjonstilgang er av for apper og tjenester. Enhetsposisjonen kan fremdeles sendes til utrykningspersonell når du ringer eller sender tekstmelding til et nødnummer."</string>
@@ -304,10 +314,8 @@
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Ved bruk av opplåsing med fingeravtrykk"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingeravtrykk for jobb"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Legg til fingeravtrykk"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> fingeravtrykk er lagt til</item>
-      <item quantity="one">Fingeravtrykk er lagt til</item>
-    </plurals>
+    <!-- no translation found for security_settings_fingerprint_preference_summary (8486134175759676037) -->
+    <skip />
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Konfigurer fingeravtrykket"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Tillat bruk av fingeravtrykk"</string>
@@ -530,53 +538,20 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Hvis du oppgir feil mønster på neste forsøk, slettes jobbprofilen din og tilknyttede data"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Hvis du skriver inn feil PIN-kode på neste forsøk, slettes jobbprofilen din og tilknyttede data"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Hvis du skriver inn feil passord på neste forsøk, slettes jobbprofilen din og tilknyttede data"</string>
-    <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
-      <item quantity="other">Må inneholde minst <xliff:g id="COUNT_1">%d</xliff:g> tegn</item>
-      <item quantity="one">Må inneholde minst <xliff:g id="COUNT_0">%d</xliff:g> tegn</item>
-    </plurals>
+    <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{Må inneholde minst # tegn}other{Må inneholde minst # tegn}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Hvis du bare bruker tall, må passordet være minst 1 siffer}other{Hvis du bare bruker tall, må passordet være minst # sifre}}"</string>
-    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
-      <item quantity="other">PIN-koden må inneholde minst <xliff:g id="COUNT_1">%d</xliff:g> sifre</item>
-      <item quantity="one">PIN-koden må inneholde minst <xliff:g id="COUNT_0">%d</xliff:g> siffer</item>
-    </plurals>
-    <plurals name="lockpassword_password_too_long" formatted="false" msgid="8118091957172967677">
-      <item quantity="other">Må inneholde færre enn <xliff:g id="NUMBER_1">%d</xliff:g> tegn</item>
-      <item quantity="one">Må inneholde færre enn <xliff:g id="NUMBER_0">%d</xliff:g> tegn</item>
-    </plurals>
-    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="8706992338720310765">
-      <item quantity="other">Må inneholde færre enn <xliff:g id="NUMBER_1">%d</xliff:g> sifre</item>
-      <item quantity="one">Må inneholde færre enn <xliff:g id="NUMBER_0">%d</xliff:g> siffer</item>
-    </plurals>
+    <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{PIN-koden må inneholde minst # siffer}other{PIN-koden må inneholde på minst # sifre}}"</string>
+    <string name="lockpassword_password_too_long" msgid="1940345313260498308">"{count,plural, =1{Må inneholde færre enn # tegn}other{Må inneholde færre enn # tegn}}"</string>
+    <string name="lockpassword_pin_too_long" msgid="1678212054564388576">"{count,plural, =1{Må inneholde færre enn # siffer}other{Må inneholde færre enn # sifre}}"</string>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"Enhetsadministratoren forbyr nylig brukt PIN-kode"</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"Dette kan ikke inkludere et ugyldig tegn"</string>
-    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="2385916409676839024">
-      <item quantity="other">Må inneholde minst <xliff:g id="COUNT">%d</xliff:g> bokstaver</item>
-      <item quantity="one">Må inneholde minst én bokstav</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="2057467885488612701">
-      <item quantity="other">Må inneholde minst <xliff:g id="COUNT">%d</xliff:g> små bokstaver</item>
-      <item quantity="one">Må inneholde minst én liten bokstav</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="4541266279643052025">
-      <item quantity="other">Må inneholde minst <xliff:g id="COUNT">%d</xliff:g> store bokstaver</item>
-      <item quantity="one">Må inneholde minst én stor bokstav</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="70617964591376248">
-      <item quantity="other">Må inneholde minst <xliff:g id="COUNT">%d</xliff:g> sifre</item>
-      <item quantity="one">Må inneholde minst ett siffer</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="7981236881269921943">
-      <item quantity="other">Må inneholde minst <xliff:g id="COUNT">%d</xliff:g> spesialtegn</item>
-      <item quantity="one">Må inneholde minst ett spesialtegn</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="1567877061888948467">
-      <item quantity="other">Må inneholde minst <xliff:g id="COUNT">%d</xliff:g> andre tegn enn bokstaver</item>
-      <item quantity="one">Må inneholde minst ett annet tegn enn bokstaver</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonnumerical" formatted="false" msgid="5056743974888384475">
-      <item quantity="other">Må inneholde minst <xliff:g id="COUNT">%d</xliff:g> tegn som ikke er tall</item>
-      <item quantity="one">Må inneholde minst 1 tegn som ikke er et tall</item>
-    </plurals>
+    <string name="lockpassword_password_requires_letters" msgid="7058340182953750553">"{count,plural, =1{Må inneholde minst 1 bokstav}other{Må inneholde minst # bokstaver}}"</string>
+    <string name="lockpassword_password_requires_lowercase" msgid="3286121470522077547">"{count,plural, =1{Må inneholde minst 1 liten bokstav}other{Må inneholde minst # små bokstaver}}"</string>
+    <string name="lockpassword_password_requires_uppercase" msgid="720312543910397772">"{count,plural, =1{Må inneholde minst 1 stor bokstav}other{Må inneholde minst # store bokstaver}}"</string>
+    <string name="lockpassword_password_requires_numeric" msgid="3886918493600507548">"{count,plural, =1{Må inneholde minst 1 siffer}other{Må inneholde minst # sifre}}"</string>
+    <string name="lockpassword_password_requires_symbols" msgid="2904870551002210131">"{count,plural, =1{Må inneholde minst 1 spesialtegn}other{Må inneholde minst # spesialtegn}}"</string>
+    <string name="lockpassword_password_requires_nonletter" msgid="1185342065898300006">"{count,plural, =1{Må inneholde minst 1 annet tegn enn bokstaver}other{Må inneholde minst # andre tegn enn bokstaver}}"</string>
+    <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{Må inneholde minst 1 tegn som ikke er et tall}other{Må inneholde minst # tegn som ikke er et tall}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Enhetsadministratoren forbyr nylig brukte passord"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"En sekvens av stigende, synkende eller like sifre er ikke tillatt"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Bekreft"</string>
@@ -586,17 +561,11 @@
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"Neste"</string>
     <string name="manage_device_admin" msgid="1044620606203916275">"Apper for enhetsadministrator"</string>
     <string name="number_of_device_admins_none" msgid="152926922020437312">"Ingen aktive apper"</string>
-    <plurals name="number_of_device_admins" formatted="false" msgid="2528735319390151989">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aktive apper</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> aktiv app</item>
-    </plurals>
+    <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{# aktiv app}other{# aktive apper}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"Pålitelige agenter"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"Du må angi en skjermlås for å bruke denne funksjonen"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"Ingen"</string>
-    <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aktive pålitelige agenter</item>
-      <item quantity="one">1 aktiv pålitelig agent</item>
-    </plurals>
+    <string name="manage_trust_agents_summary_on" msgid="3302574418419446146">"{count,plural, =1{1 aktiv pålitelig agent}other{# aktive pålitelige agenter}}"</string>
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Vil du koble til <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
@@ -812,18 +781,9 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Kunne ikke lagre nettverket"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Avbryt"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Vil du glemme nettverket?"</string>
-    <plurals name="wifi_saved_access_points_summary" formatted="false" msgid="2802436466732147888">
-      <item quantity="other">%d nettverk</item>
-      <item quantity="one">1 nettverk</item>
-    </plurals>
-    <plurals name="wifi_saved_passpoint_access_points_summary" formatted="false" msgid="5802057518058840450">
-      <item quantity="other">%d abonnementer</item>
-      <item quantity="one">1 abonnement</item>
-    </plurals>
-    <plurals name="wifi_saved_all_access_points_summary" formatted="false" msgid="5125849180309374451">
-      <item quantity="other">%d nettverk og abonnementer</item>
-      <item quantity="one">1 nettverk og abonnement</item>
-    </plurals>
+    <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 nettverk}other{# nettverk}}"</string>
+    <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 abonnement}other{# abonnementer}}"</string>
+    <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 nettverk og abonnement}other{# nettverk og abonnementer}}"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"Enhetens MAC-adresse"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"Tilfeldig valgt MAC-adresse"</string>
@@ -1055,10 +1015,7 @@
     <string name="sim_preferred_title" msgid="8850185380445309835">"Oppdater foretrukket SIM-kort?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> er det eneste SIM-kortet i enheten din. Vil du bruke dette SIM-kortet for mobildata, anrop og SMS-meldinger?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Feil PIN-kode for SIM-kortet. Du må nå kontakte operatøren din for å låse opp enheten."</string>
-    <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
-      <item quantity="other">Feil PIN-kode for SIM-kortet. Du har <xliff:g id="NUMBER_1">%d</xliff:g> forsøk igjen.</item>
-      <item quantity="one">Feil PIN-kode for SIM-kortet. Du har <xliff:g id="NUMBER_0">%d</xliff:g> forsøk igjen før du må kontakte operatøren din for å låse opp enheten.</item>
-    </plurals>
+    <string name="wrong_pin_code" msgid="8124222991071607958">"{count,plural, =1{Feil PIN-kode for SIM-kortet. Du har # forsøk igjen før du må kontakte operatøren din for å låse opp enheten.}other{Feil PIN-kode for SIM-kortet. Du har # forsøk igjen.}}"</string>
     <string name="wrong_pin_code_one" msgid="6924852214263071441">"Feil PIN-kode for SIM-kortet. Du har ett forsøk igjen før du må kontakte operatøren din for å låse opp enheten."</string>
     <string name="pin_failed" msgid="3726505565797352255">"PIN-koden for SIM-kortet ble avvist."</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"Systemoppdateringer"</string>
@@ -1076,6 +1033,8 @@
     <string name="storage_settings" msgid="7472188817781592677">"Lagring"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Lagring og buffer"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Innstillinger for lagring"</string>
+    <string name="status_eid" msgid="7532406028683438634">"EID"</string>
+    <string name="eid_multi_sim" msgid="4581966600904959452">"EID (SIM-kortspor %1$d)"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI (SIM-kortspor %1$d)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"For å se, velg lagret nettverk"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
@@ -1162,6 +1121,8 @@
     <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Du kan begynne å bruke <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Batteristatus"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Batterinivå"</string>
+    <string name="communal_settings_title" msgid="2845678473945902115">"Felles"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"Fellesinnstillinger"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Rediger tilgangspunkt"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Ikke angitt"</string>
@@ -1202,12 +1163,9 @@
     <string name="menu_restore" msgid="4310539620115151551">"Tilbakestill til standardvalg"</string>
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"Tilbakestilling av standard APN-innstillinger er fullført."</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"Alternativer for tilbakestilling"</string>
-    <!-- no translation found for reset_mobile_network_settings_title (5616713931258506842) -->
-    <skip />
-    <!-- no translation found for reset_mobile_network_settings_desc (7292636387692165727) -->
-    <skip />
-    <!-- no translation found for reset_mobile_network_settings_confirm_title (7510965634669511241) -->
-    <skip />
+    <string name="reset_mobile_network_settings_title" msgid="5616713931258506842">"Tilbakestill innstillingene for mobilnettverk"</string>
+    <string name="reset_mobile_network_settings_desc" msgid="7292636387692165727">"Dette tilbakestiller alle innstillinger for mobilnettverk"</string>
+    <string name="reset_mobile_network_settings_confirm_title" msgid="7510965634669511241">"Vil du tilbakestille innstillingene for mobilnettverk?"</string>
     <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"Tilbakestill Bluetooth og wifi"</string>
     <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"Dette tilbakestiller alle wifi- og Bluetooth-innstillinger. Denne handlingen kan ikke angres."</string>
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Tilbakestill"</string>
@@ -1296,10 +1254,7 @@
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Sted for jobbprofil"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Appenes posisjonstillatelser"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Posisjon er slått av"</string>
-    <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
-      <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> av <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> apper har tilgang til posisjon</item>
-      <item quantity="one"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_0">%1$d</xliff:g> av <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> apper har tilgang til posisjon</item>
-    </plurals>
+    <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{# av {total} apper har tilgang til posisjon}other{# av {total} apper har tilgang til posisjon}}"</string>
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"Nylig tilgang"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"Se alle"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Se detaljer"</string>
@@ -1314,9 +1269,15 @@
     <string name="location_services_preference_title" msgid="604317859531782159">"Posisjonstjenester"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Posisjonstjenester"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"Bruk posisjon"</string>
+    <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"Kan ikke angi tidssonen automatisk"</string>
+    <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"Posisjon eller posisjonstjenester er av"</string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_environment" msgid="2279833212923765802"></string>
+    <string name="location_time_zone_detection_status_summary_temporarily_unavailable" msgid="6586801403644278967"></string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Enhetsposisjonen er nødvendig"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_message" msgid="5846316326139169523">"For å angi tidssonen med posisjonen din, slå på posisjon og oppdater innstillingene for tidssone"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Posisjonsinnstillinger"</string>
+    <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"Løs dette"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"Avbryt"</string>
     <string name="location_time_zone_detection_auto_is_off" msgid="6264253990141650280">"Automatisk tidssone er av"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Gjenkjenning av tidssone basert på posisjon er slått av"</string>
@@ -1440,10 +1401,7 @@
     <string name="install_applications" msgid="3921609656584369901">"Ukjente kilder"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Tillat alle appkilder"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Nylig åpnede apper"</string>
-    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
-      <item quantity="other">Se alle de %1$d appene</item>
-      <item quantity="one">Se alle appene</item>
-    </plurals>
+    <string name="see_all_apps_title" msgid="1650653853942381797">"{count,plural, =1{Se alle appene}other{Se alle de # appene}}"</string>
     <string name="forgot_password_title" msgid="3967873480875239885">"Kontakt IT-administratoren din"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"De kan hjelpe deg med å tilbakestille PIN-koden, mønsteret eller passordet"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Avanserte innstillinger"</string>
@@ -1457,10 +1415,7 @@
     <string name="cache_header_label" msgid="2441967971921741047">"Buffer"</string>
     <string name="clear_cache_btn_text" msgid="8597272828928143723">"Tøm bufferen"</string>
     <string name="cache_size_label" msgid="313456088966822757">"Buffer"</string>
-    <plurals name="uri_permissions_text" formatted="false" msgid="8212425823423508096">
-      <item quantity="other">%d elementer</item>
-      <item quantity="one">1 element</item>
-    </plurals>
+    <string name="uri_permissions_text" msgid="8406345863117405105">"{count,plural, =1{1 element}other{# elementer}}"</string>
     <string name="clear_uri_btn_text" msgid="4828117421162495134">"Fjern tilgang"</string>
     <string name="controls_label" msgid="8671492254263626383">"Kontroller"</string>
     <string name="force_stop" msgid="2681771622136916280">"Tving avslutning"</string>
@@ -1609,50 +1564,38 @@
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Vis listen over hurtigtaster"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastatur og verktøy i jobbprofilen"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Skjermtastatur for jobb"</string>
-    <!-- no translation found for trackpad_settings (2071131324087677005) -->
-    <skip />
-    <!-- no translation found for trackpad_mouse_settings (136226693583218429) -->
-    <skip />
-    <!-- no translation found for trackpad_settings_summary (3369855644136760402) -->
-    <skip />
-    <!-- no translation found for trackpad_tap_to_click (1938230946542070746) -->
-    <skip />
-    <!-- no translation found for trackpad_touchpad_gesture_title (7568052847609914436) -->
-    <skip />
-    <!-- no translation found for trackpad_touchpad_gesture_summary (6256074591395359124) -->
-    <skip />
-    <!-- no translation found for trackpad_reverse_scrolling_title (422877284529360866) -->
-    <skip />
-    <!-- no translation found for trackpad_reverse_scrolling_summary (6048648562887499036) -->
-    <skip />
-    <!-- no translation found for trackpad_bottom_right_tap_title (6275428879042702880) -->
-    <skip />
-    <!-- no translation found for trackpad_bottom_right_tap_summary (8734094086900680674) -->
-    <skip />
-    <!-- no translation found for trackpad_pointer_speed (7786579408631352625) -->
-    <skip />
-    <!-- no translation found for trackpad_touch_gesture (8641725062131922497) -->
-    <skip />
-    <!-- no translation found for trackpad_go_back_title (5312164160947491440) -->
-    <skip />
-    <!-- no translation found for trackpad_go_back_summary (4201901101085902768) -->
-    <skip />
-    <!-- no translation found for trackpad_go_home_title (2146525662148291552) -->
-    <skip />
-    <!-- no translation found for trackpad_go_home_summary (2222744701528360887) -->
-    <skip />
-    <!-- no translation found for trackpad_recent_apps_title (8195970908411585445) -->
-    <skip />
-    <!-- no translation found for trackpad_recent_apps_summary (2685092851677573794) -->
-    <skip />
-    <!-- no translation found for trackpad_notifications_title (3521663305043747880) -->
-    <skip />
-    <!-- no translation found for trackpad_notifications_summary (7663647367648690040) -->
-    <skip />
-    <!-- no translation found for trackpad_switch_apps_title (7342032935377284039) -->
-    <skip />
-    <!-- no translation found for trackpad_switch_apps_summary (9193942041912927440) -->
-    <skip />
+    <string name="trackpad_settings" msgid="2071131324087677005">"Styreflate"</string>
+    <string name="trackpad_mouse_settings" msgid="136226693583218429">"Styreflate og mus"</string>
+    <string name="trackpad_settings_summary" msgid="3369855644136760402">"Pekerhastighet, bevegelser"</string>
+    <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Trykk for å klikke"</string>
+    <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Styreflatebevegelser"</string>
+    <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Tilpass enkeltbevegelser for styreflatenavigasjon"</string>
+    <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Omvendt rulling"</string>
+    <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Innholdet flyttes opp når du ruller ned"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Trykk nederst til høyre"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Trykk nederst til høyre på styreflaten for alternativer"</string>
+    <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Pekerhastighet"</string>
+    <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Lær styreflatebevegelser"</string>
+    <string name="trackpad_go_back_title" msgid="5312164160947491440">"Gå tilbake"</string>
+    <string name="trackpad_go_back_summary" msgid="4201901101085902768">"Sveip til venstre eller høyre med tre fingre"</string>
+    <string name="trackpad_go_home_title" msgid="2146525662148291552">"Gå til startsiden"</string>
+    <string name="trackpad_go_home_summary" msgid="2222744701528360887">"Sveip opp med tre fingre"</string>
+    <string name="trackpad_recent_apps_title" msgid="8195970908411585445">"Nylige apper"</string>
+    <string name="trackpad_recent_apps_summary" msgid="2685092851677573794">"Sveip opp med tre fingre og hold"</string>
+    <string name="trackpad_notifications_title" msgid="3521663305043747880">"Varsler"</string>
+    <string name="trackpad_notifications_summary" msgid="7663647367648690040">"Sveip ned med tre fingre"</string>
+    <string name="trackpad_switch_apps_title" msgid="7342032935377284039">"Bytt app"</string>
+    <string name="trackpad_switch_apps_summary" msgid="9193942041912927440">"Sveip til venstre eller høyre med fire fingre"</string>
+    <string name="modifier_keys_settings" msgid="2537108435032034683">"Modifikatortaster"</string>
+    <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Endre atferden til nøkler"</string>
+    <string name="modifier_keys_reset_title" msgid="948294258402761066">"Tilbakestill alle"</string>
+    <string name="modifier_keys_default_summary" msgid="8701640508670973258">"Standard"</string>
+    <string name="modifier_keys_reset_message" msgid="5236994817619936058">"Er du sikker på at du vil tilbakestille alle modifikatortastene til standard?"</string>
+    <string name="modifier_keys_done" msgid="8196199314913909700">"Ferdig"</string>
+    <string name="modifier_keys_cancel" msgid="7136520252570826772">"Avbryt"</string>
+    <string name="modifier_keys_restore" msgid="7627661630556839268">"Gjenopprett"</string>
+    <string name="modifier_keys_picker_title" msgid="244545904150587851">"Velg modifikatortast"</string>
+    <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Velg en ny nøkkel for <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Standard"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Tale"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Pekerhastighet"</string>
@@ -1727,7 +1670,7 @@
     <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"Om innstillinger for teksting"</string>
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Finn ut mer om innstillinger for teksting"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Forstørring"</string>
-    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Forstørringssnarvei"</string>
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Forstørring-snarvei"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Forstørr skriving"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Forstørrelsesglasset følger teksten når du skriver"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Om forstørring"</string>
@@ -1969,22 +1912,14 @@
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Mørkere"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Lysere"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Hold på etter at enheten starter på nytt"</string>
-    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
-      <item quantity="other">Kort (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunder)</item>
-      <item quantity="one">Kort (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekund)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
-      <item quantity="other">Middels (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunder)</item>
-      <item quantity="one">Middels (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekund)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
-      <item quantity="other">Lang (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunder)</item>
-      <item quantity="one">Lang (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekund)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="4537791441118261556">
-      <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> sekunder</item>
-      <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekund</item>
-    </plurals>
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (2981206111858937724) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (6867395206533459204) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (4079139970819335593) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_delay_unit_second (5979297390686370567) -->
+    <skip />
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Innstillinger"</string>
     <string name="captioning_preview_title" msgid="2888561631323180535">"Forhåndsvisning"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Standardvalg"</string>
@@ -2059,14 +1994,10 @@
     <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Skann etter enheter i nærheten"</string>
     <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Lagrede enheter"</string>
     <string name="print_settings" msgid="8519810615863882491">"Utskrift"</string>
-    <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> utskriftstjenester er på</item>
-      <item quantity="one">1 utskriftstjeneste er på</item>
-    </plurals>
-    <plurals name="print_jobs_summary" formatted="false" msgid="3933688846338306536">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> utskriftsjobber</item>
-      <item quantity="one">1 utskriftsjobb</item>
-    </plurals>
+    <!-- no translation found for print_settings_summary (1458773840720811915) -->
+    <skip />
+    <!-- no translation found for print_jobs_summary (7040836482336577323) -->
+    <skip />
     <string name="print_settings_title" msgid="7680498284751129935">"Utskriftstjenester"</string>
     <string name="print_no_services_installed" msgid="7554057966540602692">"Ingen tjenester er installert"</string>
     <string name="print_no_printers_found" msgid="4833082484646109486">"Fant ingen skrivere"</string>
@@ -2144,26 +2075,16 @@
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Finn ut mer om lading satt på pause"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Gjenoppta ladingen"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Inkluderer bakgrunnsaktivitet med høyt strømforbruk"</string>
-    <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
-      <item quantity="other">Begrens %1$d apper</item>
-      <item quantity="one">Begrens %1$d app</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_handled_title" formatted="false" msgid="5862649927574803958">
-      <item quantity="other">%2$d apper ble nylig begrenset</item>
-      <item quantity="one">%1$s ble nylig begrenset</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
-      <item quantity="other">%2$d apper har høy batteribruk i bakgrunnen</item>
-      <item quantity="one">%1$s har høy batteribruk i bakgrunnen</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
-      <item quantity="other">Disse appene kan ikke kjøre i bakgrunnen</item>
-      <item quantity="one">Denne appen kan ikke kjøre i bakgrunnen</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_app_dialog_title" formatted="false" msgid="7897944678619251740">
-      <item quantity="other">Vil du begrense %1$d apper?</item>
-      <item quantity="one">Vil du begrense appen?</item>
-    </plurals>
+    <!-- no translation found for battery_tip_restrict_title (4537101947310626753) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_handled_title (7142074986508706853) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_summary (7539469590829235277) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_handled_summary (3535697154547199190) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_app_dialog_title (1649476357343160240) -->
+    <skip />
     <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"For å spare batteri kan du hindre <xliff:g id="APP">%1$s</xliff:g> i å bruke batteri i bakgrunnen. Appen fungerer muligens ikke som den skal, og varsler kan bli forsinket."</string>
     <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"For å spare batteri kan du hindre disse appene i å bruke batteri i bakgrunnen. Begrensede apper fungerer muligens ikke som de skal, og varsler kan bli forsinket.\n\nApper:"</string>
     <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"For å spare batteri kan hindre disse appene i å bruke batteri i bakgrunnen. Begrensede apper fungerer muligens ikke som de skal, og varsler kan bli forsinket.\n\nApper:\n<xliff:g id="APP_LIST">%1$s</xliff:g>."</string>
@@ -2177,20 +2098,16 @@
     <string name="smart_battery_title" msgid="9095903608520254254">"Administrer apper automatisk"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"Når batteristyring oppdager at apper bruker for mye batteri, får du muligheten til å begrense disse appene. Begrensede apper fungerer muligens ikke som de skal, og varsler kan bli forsinket."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Begrensede apper"</string>
-    <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
-      <item quantity="other">Begrenser batteribruken for %1$d apper</item>
-      <item quantity="one">Begrenser batteribruken for %1$d app</item>
-    </plurals>
+    <!-- no translation found for restricted_app_summary (1022307922754893997) -->
+    <skip />
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"Begrenset <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="restricted_app_detail_footer" msgid="3495725286882138803">"Disse appene er begrenset fra batteribruk i bakgrunnen. De fungerer muligens ikke som de skal, og varsler kan bli forsinket."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Bruk batteristyring"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Oppdag når apper har for høyt batteriforbruk"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"Registrerer når apper har for høyt batteriforbruk"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"Registrerer når apper har for høyt batteriforbruk"</string>
-    <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
-      <item quantity="other">%1$d apper er begrenset</item>
-      <item quantity="one">%1$d app er begrenset</item>
-    </plurals>
+    <!-- no translation found for battery_manager_app_restricted (2583902700677009173) -->
+    <skip />
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
     <string name="battery_missing_message" msgid="400958471814422770">"Kunne ikke lese batterimåleren."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
@@ -2354,10 +2271,8 @@
     <string name="advanced_security_title" msgid="7117581975877192652">"Avansert"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"Legitimasjon er ikke tilgjengelig for denne brukeren"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"Installert for VPN og apper"</string>
-    <!-- no translation found for credential_for_wifi (2286560570630763556) -->
-    <skip />
-    <!-- no translation found for credential_for_wifi_in_use (7276290656840986618) -->
-    <skip />
+    <string name="credential_for_wifi" msgid="2286560570630763556">"Installert for wifi"</string>
+    <string name="credential_for_wifi_in_use" msgid="7276290656840986618">"Installert for wifi (i bruk)"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"Vil du fjerne alt innholdet?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"Legitimasjonslageret ble tømt."</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"Leg.lageret kan ikke slettes."</string>
@@ -2382,10 +2297,8 @@
     <string name="remove_credential_management_app" msgid="6089291496976812786">"Fjern appen"</string>
     <string name="remove_credential_management_app_dialog_title" msgid="5713525435104706772">"Vil du fjerne denne appen?"</string>
     <string name="remove_credential_management_app_dialog_message" msgid="7739474298063646935">"Denne appen kommer ikke til å administrere sertifikater, men den blir værende på enheten. Alle sertifikater som er installert av appen, blir avinstallert."</string>
-    <plurals name="number_of_urls" formatted="false" msgid="403979258551655023">
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> nettadresser</item>
-      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> nettadresse</item>
-    </plurals>
+    <!-- no translation found for number_of_urls (1128699121050872188) -->
+    <skip />
     <string name="emergency_tone_title" msgid="6673118505206685168">"Ringesignal for nødssituasjoner"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Velg oppførsel når en nødsamtale opprettes"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Sikkerhetskopiering"</string>
@@ -2428,10 +2341,8 @@
     <string name="notification_history_today" msgid="5828496957208237230">"De siste 24 timene"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"Slumret"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"Nylig avvist"</string>
-    <plurals name="notification_history_count" formatted="false" msgid="1859304685071321991">
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> varsler</item>
-      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> varsel</item>
-    </plurals>
+    <!-- no translation found for notification_history_count (885305572972482838) -->
+    <skip />
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"Anropsringetone og vibrering"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"Nettverksdetaljer"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"Synkronisering aktivert"</string>
@@ -2603,16 +2514,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Vil du slå på systemets CA-sertifikat?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Vil du slå av systemets CA-sertifikat?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Vil du fjerne brukerens CA-sertifikat permanent?"</string>
-    <!-- no translation found for credential_being_used_by (3682869943025283499) -->
-    <skip />
-    <!-- no translation found for credential_contains (3146519680449595771) -->
-    <skip />
-    <!-- no translation found for one_userkey (6363426728683951234) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2097644070227688983) -->
-    <skip />
-    <!-- no translation found for one_cacrt (982242103604501559) -->
-    <skip />
+    <string name="credential_being_used_by" msgid="3682869943025283499">"Brukes av"</string>
+    <string name="credential_contains" msgid="3146519680449595771">"Denne oppføringen inneholder"</string>
+    <string name="one_userkey" msgid="6363426728683951234">"1 brukernøkkel"</string>
+    <string name="one_usercrt" msgid="2097644070227688983">"1 brukersertifikat"</string>
+    <string name="one_cacrt" msgid="982242103604501559">"1 CA-sertifikat"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"%d CA-sertifikater"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"Legitimasjonsdetaljer"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"Fjernet legitimasjon: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
@@ -2627,17 +2533,13 @@
     <string name="additional_system_update_settings_list_item_title" msgid="7230385345152138051">"Ytterligere systemoppdateringer"</string>
     <string name="ssl_ca_cert_warning" msgid="3898387588657346106">"Nettverket blir muligens overvåket"</string>
     <string name="done_button" msgid="6269449526248267">"Ferdig"</string>
-    <plurals name="ssl_ca_cert_dialog_title" formatted="false" msgid="5491460811755938449">
-      <item quantity="other">Stol på eller fjern sertifikatene</item>
-      <item quantity="one">Stol på eller fjern sertifikatet</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_dialog_title (1032088078702042090) -->
+    <skip />
     <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{{orgName} har installert en sertifiseringsinstans på enheten din. Dette kan gi dem tillatelse til å overvåke nettverksaktiviteten på enheten, inkludert e-poster, apper og sikre nettsteder.\n\nKontakt administratoren din for å få mer informasjon om dette sertifikatet.}other{{orgName} har installert sertifiseringsinstanser på enheten din. Dette kan gi dem tillatelse til å overvåke nettverksaktiviteten på enheten, inkludert e-poster, apper og sikre nettsteder.\n\nKontakt administratoren din for å få mer informasjon om disse sertifikatene.}}"</string>
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} har installert en sertifiseringsinstans for jobbprofilen din. Dette kan gi dem tillatelse til å overvåke nettverksaktiviteten på jobben, inkludert e-poster, apper og sikre nettsteder.\n\nKontakt administratoren din for å få mer informasjon om dette sertifikatet.}other{{orgName} har installert sertifiseringsinstanser for jobbprofilen din. Dette kan gi dem tillatelse til å overvåke nettverksaktiviteten på jobben, inkludert e-poster, apper og sikre nettsteder.\n\nKontakt administratoren din for å få mer informasjon om disse sertifikatene.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"En utenforstående kan overvåke nettverksaktiviteten din, inkludert e-poster, apper og sikre nettsteder.\n\nPålitelig legitimasjon, som er installert på enheten din, gjør dette mulig."</string>
-    <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
-      <item quantity="other">Sjekk sertifikatene</item>
-      <item quantity="one">Sjekk sertifikatet</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_settings_button (2044927302268394991) -->
+    <skip />
     <string name="user_settings_title" msgid="6550866465409807877">"Flere brukere"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Brukere og profiler"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Legg til en bruker eller profil"</string>
@@ -2676,9 +2578,12 @@
     <string name="enable_guest_calling" msgid="8300355036005240911">"La gjester bruke telefonen"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"Anropsloggen deles med gjestebrukeren"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Slå på telefonsamtaler og SMS"</string>
+    <string name="user_grant_admin" msgid="6511342422361803820">"Gi denne brukeren administratorrettigheter"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Slett brukeren"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Vil du slå på telefonsamtaler og SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Anrops- og tekstmeldingsloggen deles med denne brukeren."</string>
+    <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Vil du fjerne administratorrettigheter?"</string>
+    <string name="user_revoke_admin_confirm_message" msgid="2719667217562982318">"Er du sikker på at du vil fjerne administratorrettighetene til denne brukeren?"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Nødinformasjon"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Informasjon og kontakter for <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Åpne <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -2824,10 +2729,10 @@
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Klonede apper"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Opprett en ny forekomst av en app, slik at du kan bruke to kontoer samtidig."</string>
     <string name="cloned_apps_summary" msgid="8805362440770795709">"<xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g> er klonet, og <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g> kan klones"</string>
-    <!-- no translation found for cloned_app_creation_summary (4642627294993918502) -->
-    <skip />
-    <!-- no translation found for cloned_app_created_summary (7277912971544890710) -->
-    <skip />
+    <string name="delete_all_app_clones" msgid="3489053361980624999">"Slett alle appkloner"</string>
+    <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"Kunne ikke slette alle appkloner"</string>
+    <string name="cloned_app_creation_summary" msgid="4642627294993918502">"Oppretter …"</string>
+    <string name="cloned_app_created_summary" msgid="7277912971544890710">"Klonet"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Språk, bevegelser, klokkeslett, sikkerhetskopi"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"Systemspråk, appspråk"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, Wifi, nettverkstilkobling, Internett, trådløs, data, Wi Fi"</string>
@@ -3161,10 +3066,8 @@
     <string name="promote_conversation_title" msgid="4731148769888238722">"Dette er en samtale"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Legg til i samtaledelen"</string>
     <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Ingen prioriterte samtaler"</string>
-    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> prioriterte samtaler</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> prioritert samtale</item>
-    </plurals>
+    <!-- no translation found for priority_conversation_count (7291234530844412077) -->
+    <skip />
     <string name="important_conversations" msgid="1233893707189659401">"Prioriterte samtaler"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Vis øverst i samtaledelen som flytende bobler"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"De vises øverst i samtaledelen."</string>
@@ -3193,14 +3096,10 @@
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Når enheten låses opp, vises varsler som et banner øverst på skjermen"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"«<xliff:g id="APP_NAME">%1$s</xliff:g>»: alle varsler"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g>: alle varsler"</string>
-    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
-      <item quantity="other">Omtrent <xliff:g id="NUMBER_1">%,d</xliff:g> varsler per dag</item>
-      <item quantity="one">Omtrent <xliff:g id="NUMBER_0">%d</xliff:g> varsel per dag</item>
-    </plurals>
-    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
-      <item quantity="other">Omtrent <xliff:g id="NUMBER_1">%,d</xliff:g> varsler per uke</item>
-      <item quantity="one">Omtrent <xliff:g id="NUMBER_0">%d</xliff:g> varsel per uke</item>
-    </plurals>
+    <!-- no translation found for notifications_sent_daily (10274479224185437) -->
+    <skip />
+    <!-- no translation found for notifications_sent_weekly (7895656213187555346) -->
+    <skip />
     <string name="notifications_sent_never" msgid="9081278709126812062">"Aldri"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Enhets- og appvarsler"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Kontroller hvilke apper og enheter som kan lese varsler"</string>
@@ -3269,10 +3168,8 @@
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Tillatelser"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"Denne appen kan bruke tillatelsene til den personlige <xliff:g id="NAME">%1$s</xliff:g>-appen din, for eksempel tilgang til posisjon, lagring eller kontakter."</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"Ingen apper er tilknyttet"</string>
-    <plurals name="interact_across_profiles_number_of_connected_apps" formatted="false" msgid="6991750455661974772">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> apper er tilknyttet</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> app er tilknyttet</item>
-    </plurals>
+    <!-- no translation found for interact_across_profiles_number_of_connected_apps (4000424798291479207) -->
+    <skip />
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"For å tilknytte disse appene, installer <xliff:g id="NAME">%1$s</xliff:g> i jobbprofilen din"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"For å tilknytte disse appene, installer <xliff:g id="NAME">%1$s</xliff:g> i den personlige profilen din"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Trykk for å installere appen"</string>
@@ -3287,10 +3184,8 @@
     <string name="notification_channels_other" msgid="18159805343647908">"Annet"</string>
     <string name="no_channels" msgid="4716199078612071915">"Denne appen har ikke publisert noen varsler"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Flere innstillinger i appen"</string>
-    <plurals name="deleted_channels" formatted="false" msgid="5963473421547029532">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> kategorier er slettet</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> kategori er slettet</item>
-    </plurals>
+    <!-- no translation found for deleted_channels (8489800381509312964) -->
+    <skip />
     <string name="app_notification_block_title" msgid="3880322745749900296">"Blokkér alle"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Vis aldri disse varslene"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Vis varsler"</string>
@@ -3440,7 +3335,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Krev passord for å løsne apper"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Lås enheten når apper løsnes"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Bekreft sletting av SIM-kort"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Bekreft at det er deg, før du sletter et e-SIM-kort."</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Bekreft at det er deg, før du sletter et e-SIM-kort"</string>
     <string name="memtag_title" msgid="5096176296797727201">"Beta, avansert minnebeskyttelse"</string>
     <string name="memtag_toggle" msgid="8695028758462939212">"Avansert minnebeskyttelse"</string>
     <string name="memtag_intro" msgid="579408691329568953">"Denne betafunksjonen bidrar til å beskytte enheten mot feil som kan utgjøre en sikkerhetsrisiko."</string>
@@ -3939,18 +3834,12 @@
     <string name="enterprise_privacy_none" msgid="6026527690979756431">"Ingen"</string>
     <string name="enterprise_privacy_enterprise_installed_packages" msgid="9114143640515900082">"Installerte apper"</string>
     <string name="enterprise_privacy_apps_count_estimation_info" msgid="7959907857710107792">"Antall apper er estimert. Det inkluderer muligens ikke apper som er installert utenfor Play-butikken."</string>
-    <plurals name="enterprise_privacy_number_packages_lower_bound" formatted="false" msgid="5403847001419529018">
-      <item quantity="other">Minimum <xliff:g id="COUNT_1">%d</xliff:g> apper</item>
-      <item quantity="one">Minimum <xliff:g id="COUNT_0">%d</xliff:g> app</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages_lower_bound" msgid="5317634640873658149">"{count,plural, =1{Minimum # app}other{Minimum # apper}}"</string>
     <string name="enterprise_privacy_location_access" msgid="8023838718108456971">"Posisjonstillatelser"</string>
     <string name="enterprise_privacy_microphone_access" msgid="7242958026470143653">"Mikrofontillatelser"</string>
     <string name="enterprise_privacy_camera_access" msgid="7685460535880069016">"Kameratillatelser"</string>
     <string name="enterprise_privacy_enterprise_set_default_apps" msgid="7498546659083996300">"Standardapper"</string>
-    <plurals name="enterprise_privacy_number_packages" formatted="false" msgid="8568544906431825430">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> apper</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> app</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages" msgid="5294444005035188274">"{count,plural, =1{# app}other{# apper}}"</string>
     <string name="enterprise_privacy_input_method" msgid="3278314982700662246">"Standardtastatur"</string>
     <string name="enterprise_privacy_input_method_name" msgid="2974859490559054584">"Satt til <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
     <string name="enterprise_privacy_always_on_vpn_device" msgid="1735829327405126695">"Alltid-på VPN-er slått på"</string>
@@ -3960,18 +3849,12 @@
     <string name="enterprise_privacy_ca_certs_device" msgid="1816495877258727663">"Pålitelig legitimasjon"</string>
     <string name="enterprise_privacy_ca_certs_personal" msgid="1516422660828485795">"Pålitelig legitimasjon i den personlige profilen din"</string>
     <string name="enterprise_privacy_ca_certs_work" msgid="4318941788592655561">"Pålitelig legitimasjon i jobbprofilen din"</string>
-    <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="6459725295322004179">
-      <item quantity="other">Minimum <xliff:g id="COUNT_1">%d</xliff:g> CA-sertifikater</item>
-      <item quantity="one">Minimum <xliff:g id="COUNT_0">%d</xliff:g> CA-sertifikat</item>
-    </plurals>
+    <string name="enterprise_privacy_number_ca_certs" msgid="4540897122831942658">"{count,plural, =1{Minimum # CA-sertifikat}other{Minimum # CA-sertifikater}}"</string>
     <string name="enterprise_privacy_lock_device" msgid="464054894363899866">"Administratoren kan låse enheten og tilbakestille passordet"</string>
     <string name="enterprise_privacy_wipe_device" msgid="869589182352244591">"Administratoren kan slette alle enhetsdata"</string>
     <string name="enterprise_privacy_failed_password_wipe_device" msgid="7045164901334821226">"Antall mislykkede forsøk på å oppgi passordet før alle enhetsdataene slettes"</string>
     <string name="enterprise_privacy_failed_password_wipe_work" msgid="2537582942554484170">"Antall mislykkede forsøk på å oppgi passordet før jobbprofildataene slettes"</string>
-    <plurals name="enterprise_privacy_number_failed_password_wipe" formatted="false" msgid="8811973918944217791">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> forsøk</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> forsøk</item>
-    </plurals>
+    <string name="enterprise_privacy_number_failed_password_wipe" msgid="2695842143305867642">"{count,plural, =1{# forsøk}other{# forsøk}}"</string>
     <string name="do_disclosure_generic" msgid="3067459392402324538">"Denne enheten administreres av organisasjonen din."</string>
     <string name="do_disclosure_with_name" msgid="867544298924410766">"Denne enheten administreres av <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
@@ -3999,21 +3882,12 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Når du har betalt hele beløpet:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"alle begrensninger fjernes fra enheten"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"du kan ikke avinstallere kreditorappen"</string>
-    <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
-      <item quantity="other">Kamera-apper</item>
-      <item quantity="one">Kamera-app</item>
-    </plurals>
+    <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{Kameraapp}other{Kameraapper}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"Kalender-app"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"Kontakter-app"</string>
-    <plurals name="default_email_app_title" formatted="false" msgid="8338194872609410234">
-      <item quantity="other">E-postapper</item>
-      <item quantity="one">E-postapp</item>
-    </plurals>
+    <string name="default_email_app_title" msgid="5411280873093244250">"{count,plural, =1{E-postapp}other{E-postapper}}"</string>
     <string name="default_map_app_title" msgid="7569231732944853320">"Kart-app"</string>
-    <plurals name="default_phone_app_title" formatted="false" msgid="4222188821845826493">
-      <item quantity="other">Telefon-apper</item>
-      <item quantity="one">Telefon-app</item>
-    </plurals>
+    <string name="default_phone_app_title" msgid="795025972645464135">"{count,plural, =1{Telefonapp}other{Telefonapper}}"</string>
     <string name="app_names_concatenation_template_2" msgid="8320181646458855457">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>"</string>
     <string name="app_names_concatenation_template_3" msgid="7019703249717854148">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>, <xliff:g id="THIRD_APP_NAME">%3$s</xliff:g>"</string>
     <string name="storage_default_internal_storage" msgid="4055660218818688131">"Denne enheten"</string>
@@ -4040,13 +3914,18 @@
     <string name="webview_uninstalled_for_user" msgid="627352948986275488">"(avinstallert for brukeren <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="webview_disabled_for_user" msgid="5809886172032644498">"(slått av for brukeren <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="autofill_app" msgid="7595308061826307921">"Autofylltjeneste"</string>
+    <string name="default_autofill_app" msgid="372234803718251606">"Standard autofylltjeneste"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Passord"</string>
-    <plurals name="autofill_passwords_count" formatted="false" msgid="7715009165029452622">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> passord</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> passord</item>
-    </plurals>
+    <string name="credman_credentials" msgid="5937331545565783811">"Passord- og identitetstjenester"</string>
+    <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# passord}other{# passord}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"auto, fyll, autofyll, passord"</string>
+    <string name="credman_keywords" msgid="7236954350284379264">"legitimasjon, tilgangsnøkkel, passord"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Stoler du på denne appen?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google autofyll&gt;%1$s&lt;/xliff:g&gt; bruker det som er på skjermen, til å fastslå hva som kan fylles ut automatisk."</string>
+    <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Vil du slå av %1$s?"</string>
+    <string name="credman_confirmation_message" msgid="1485617504425237430">"Lagret informasjon, for eksempel adresser eller betalingsmåter, blir ikke fylt ut når du logger på. For å få lagret informasjon fylt ut, angi en standard autofylltjeneste."</string>
+    <string name="credman_error_message_title" msgid="5108868200002966901">"Grense for passord- og identitetstjenester"</string>
+    <string name="credman_error_message" msgid="4058425433345908579">"Du kan ha opptil 5 autofyll- og passordtjenester aktive samtidig. Slå av en tjeneste for å legge til flere."</string>
+    <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Slå av"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Autofyll"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Loggføringsnivå"</string>
     <string name="autofill_max_partitions" msgid="7342195529574406366">"Maksimalt antall forespørsler per økt"</string>
@@ -4229,8 +4108,7 @@
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"Databruk av apper"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Ugyldig nettverksmodus (<xliff:g id="NETWORKMODEID">%1$d</xliff:g>). Ignorer."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Navn på tilgangspunkt"</string>
-    <!-- no translation found for keywords_access_point_names (8174967126858505945) -->
-    <skip />
+    <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Utilgjengelig når du er koblet til <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Se flere"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Vil du slå på <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
@@ -4320,10 +4198,7 @@
     <string name="copyable_slice_toast" msgid="1008251852798990606">"<xliff:g id="COPY_CONTENT">%1$s</xliff:g> er kopiert til utklippstavlen."</string>
     <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"Bruk av Tilgjengelighet"</string>
-    <plurals name="accessibility_usage_summary" formatted="false" msgid="6910643986958263005">
-      <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> apper har full tilgang til enheten din</item>
-      <item quantity="one">1 app har full tilgang til enheten din</item>
-    </plurals>
+    <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{1 app har full tilgang til enheten}other{# apper har full tilgang til enheten}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Viktig informasjon"</string>
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"FORTSETT"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"NEI TAKK"</string>
@@ -4507,10 +4382,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Tillat 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G er mindre sikkert, men kan gi deg bedre tilkobling noen steder. 2G tillates alltid for nødanrop."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> krever at 2G er tilgjengelig"</string>
-    <!-- no translation found for allow_null_algorithms_title (9143076634352979096) -->
-    <skip />
-    <!-- no translation found for allow_null_algorithms_summary (5874570357011783211) -->
-    <skip />
+    <string name="allow_null_algorithms_title" msgid="9143076634352979096">"Tillat mindre sikre tilkoblinger"</string>
+    <string name="allow_null_algorithms_summary" msgid="5874570357011783211">"Dette kan forbedre signalet noen steder. Mindre sikre tilkoblinger tillates alltid for nødanrop."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Alle tjenester"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Vis tilgang til utklippstavlen"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Vis en melding når apper bruker tekst, bilder eller annet innhold du har kopiert"</string>
@@ -4618,18 +4491,11 @@
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR-koden er ikke i et gyldig format"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"Konverter til e-SIM-kort"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"Overfør e-SIM-kortet til en annen enhet"</string>
-    <!-- no translation found for background_install_preference_summary (3065219346519340364) -->
-    <skip />
-    <!-- no translation found for background_install_title (607913515188276168) -->
-    <skip />
-    <!-- no translation found for background_install_summary (3890296129543309666) -->
-    <skip />
-    <!-- no translation found for background_install_feature_list_no_entry (2071343281272266154) -->
-    <skip />
-    <!-- no translation found for background_install_uninstall_button_description (1189649052911501249) -->
-    <skip />
-    <!-- no translation found for background_install_before (8608614957688912715) -->
-    <skip />
-    <!-- no translation found for background_install_after (7983488897570908149) -->
-    <skip />
+    <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# app}other{# apper}}"</string>
+    <string name="background_install_title" msgid="607913515188276168">"Apper installert i bakgrunnen"</string>
+    <string name="background_install_summary" msgid="3890296129543309666">"Enhetsprodusenten kan installere apper på enheten i bakgrunnen eller gi operatøren din og andre partnere tillatelse til å gjøre det.\n\nApper som er oppført her, kreves ikke for at enheten skal fungere som normalt. Du kan avinstallere apper du ikke vil ha."</string>
+    <string name="background_install_feature_list_no_entry" msgid="2071343281272266154">"Ingen apper er installert i bakgrunnen"</string>
+    <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Avinstaller app"</string>
+    <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Apper installert i løpet av siste # måned}other{Apper installert i løpet av de siste # månedene}}"</string>
+    <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Apper installert for mer enn # måned siden}other{Apper installert for mer enn # måneder siden}}"</string>
 </resources>
