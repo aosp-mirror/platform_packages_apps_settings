@@ -129,14 +129,18 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         mBatteryChartPreferenceController =
                 new BatteryChartPreferenceController(
                         context, getSettingsLifecycle(), (SettingsActivity) getActivity());
+        ScreenOnTimeController screenOnTimeController = new ScreenOnTimeController(context);
         BatteryUsageBreakdownController batteryUsageBreakdownController =
                 new BatteryUsageBreakdownController(
                         context, getSettingsLifecycle(), (SettingsActivity) getActivity(), this);
 
+        mBatteryChartPreferenceController.setOnScreenOnTimeUpdatedListener(
+                screenOnTimeController::handleSceenOnTimeUpdated);
         mBatteryChartPreferenceController.setOnBatteryUsageUpdatedListener(
                 batteryUsageBreakdownController::handleBatteryUsageUpdated);
 
         controllers.add(mBatteryChartPreferenceController);
+        controllers.add(screenOnTimeController);
         controllers.add(batteryUsageBreakdownController);
         setBatteryChartPreferenceController();
         return controllers;
@@ -192,6 +196,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                     final List<AbstractPreferenceController> controllers = new ArrayList<>();
                     controllers.add(new BatteryChartPreferenceController(
                             context, null /* lifecycle */, null /* activity */));
+                    controllers.add((new ScreenOnTimeController(context)));
                     controllers.add(new BatteryUsageBreakdownController(
                             context, null /* lifecycle */, null /* activity */,
                             null /* fragment */));
