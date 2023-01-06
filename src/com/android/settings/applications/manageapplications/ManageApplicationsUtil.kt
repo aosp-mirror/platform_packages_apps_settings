@@ -59,6 +59,7 @@ import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListPro
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.MediaManagementAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
+import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
 import com.android.settings.spa.notification.AppListNotificationsPageProvider
 import com.android.settings.spa.system.AppLanguagesPageProvider
 
@@ -101,6 +102,7 @@ object ManageApplicationsUtil {
             LIST_MANAGE_EXTERNAL_STORAGE -> AllFilesAccessAppListProvider.getAppListRoute()
             LIST_TYPE_MEDIA_MANAGEMENT_APPS -> MediaManagementAppsAppListProvider.getAppListRoute()
             LIST_TYPE_ALARMS_AND_REMINDERS -> AlarmsAndRemindersAppListProvider.getAppListRoute()
+            LIST_TYPE_WIFI_ACCESS -> WifiControlAppListProvider.getAppListRoute()
             LIST_TYPE_NOTIFICATION -> AppListNotificationsPageProvider.name
             LIST_TYPE_APPS_LOCALE -> AppLanguagesPageProvider.name
             LIST_TYPE_MAIN -> AllAppListPageProvider.name

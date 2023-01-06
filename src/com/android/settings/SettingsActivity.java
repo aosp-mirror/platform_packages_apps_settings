@@ -572,6 +572,11 @@ public class SettingsActivity extends SettingsBaseActivity
     @VisibleForTesting
     void launchSettingFragment(String initialFragmentName, Intent intent) {
         if (initialFragmentName != null) {
+            if (SettingsActivityUtil.launchSpaActivity(this, initialFragmentName, intent)) {
+                finish();
+                return;
+            }
+
             setTitleFromIntent(intent);
 
             Bundle initialArguments = intent.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);

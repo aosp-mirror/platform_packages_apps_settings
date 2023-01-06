@@ -415,7 +415,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     }
 
     /** Dialog showing error when too many providers are selected. */
-    private static class ErrorDialogFragment extends CredentialManagerDialogFragment {
+    public static class ErrorDialogFragment extends CredentialManagerDialogFragment {
 
         ErrorDialogFragment(DialogHost dialogHost) {
             super(dialogHost);
@@ -438,7 +438,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
      * Confirmation dialog fragment shows a dialog to the user to confirm that they are disabling a
      * provider.
      */
-    private static class ConfirmationDialogFragment extends CredentialManagerDialogFragment {
+    public static class ConfirmationDialogFragment extends CredentialManagerDialogFragment {
 
         ConfirmationDialogFragment(
                 DialogHost dialogHost, @NonNull String packageName, @NonNull CharSequence appName) {

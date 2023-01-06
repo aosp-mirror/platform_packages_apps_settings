@@ -28,7 +28,6 @@ import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.util.FeatureFlagUtils;
 import android.util.IconDrawableFactory;
 import android.util.Pair;
 import android.view.View;
@@ -41,8 +40,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.spa.SpaActivity;
-import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider;
 import com.android.settings.widget.EmptyTextSettings;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.AppPreference;
@@ -127,16 +124,6 @@ public class PictureInPictureSettings extends EmptyTextSettings {
     public PictureInPictureSettings(PackageManager pm, UserManager um) {
         mPackageManager = pm;
         mUserManager = um;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_ENABLE_SPA)) {
-            SpaActivity.startSpaActivity(
-                    context, PictureInPictureListProvider.INSTANCE.getAppListRoute());
-            finish();
-        }
     }
 
     @Override

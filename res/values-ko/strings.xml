@@ -26,10 +26,7 @@
     <string name="off" msgid="2898123876644709799">"사용 안함"</string>
     <string name="device_info_default" msgid="1406619232867343310">"알 수 없음"</string>
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"탭하여 정보 표시"</string>
-    <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
-      <item quantity="other"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g>단계만 더 완료하면 개발자가 될 수 있습니다.</item>
-      <item quantity="one"><xliff:g id="STEP_COUNT_0">%1$d</xliff:g>단계만 더 완료하면 개발자가 될 수 있습니다.</item>
-    </plurals>
+    <string name="show_dev_countdown" msgid="2936506773086395069">"{count,plural, =1{개발자가 되려면 #단계가 남았습니다.}other{개발자가 되려면 #단계가 남았습니다.}}"</string>
     <string name="show_dev_on" msgid="2840850085134853754">"개발자가 되셨습니다."</string>
     <string name="show_dev_already" msgid="7041756429707644630">"이미 개발자입니다."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"먼저 개발자 옵션을 사용 설정하세요."</string>
@@ -122,7 +119,7 @@
     <string name="stylus_default_notes_app" msgid="3111290761558445874">"시스템 메모 앱"</string>
     <string name="stylus_textfield_handwriting" msgid="6962904622425646128">"텍스트 입력란에 스타일러스 쓰기"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"스타일러스 버튼 누름 모두 무시"</string>
-    <string name="stylus_usi_header_title" msgid="1949011797718972583">"USI 스타일러스"</string>
+    <string name="stylus_connected_devices_title" msgid="2823967577941359812">"스타일러스"</string>
     <string name="date_and_time" msgid="1788358029823431692">"날짜 및 시간"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"프록시"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"지우기"</string>
@@ -160,10 +157,23 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"설정에서 이 앱의 언어를 선택할 수 없습니다."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"언어가 앱에서 사용 가능한 언어와 다를 수 있습니다. 일부 앱에서는 이 설정을 지원하지 않을 수도 있습니다."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"언어 선택을 지원하는 앱만 여기에 표시됩니다."</string>
-    <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
-      <item quantity="other">선택한 언어를 삭제하시겠습니까?</item>
-      <item quantity="one">선택한 언어를 삭제하시겠습니까?</item>
-    </plurals>
+    <!-- no translation found for regional_preferences_title (4304567374498629528) -->
+    <skip />
+    <!-- no translation found for regional_preferences_summary (1189876997389469650) -->
+    <skip />
+    <!-- no translation found for regional_preferences_main_page_sub_title (4666033861956272891) -->
+    <skip />
+    <!-- no translation found for temperature_preferences_title (5009881556503629058) -->
+    <skip />
+    <!-- no translation found for calendar_preferences_title (8312485828206542600) -->
+    <skip />
+    <!-- no translation found for first_day_of_week_preferences_title (1971850087589599553) -->
+    <skip />
+    <!-- no translation found for numbers_preferences_title (6094837605398562369) -->
+    <skip />
+    <!-- no translation found for default_string_of_regional_preference (1595774718180886349) -->
+    <skip />
+    <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{선택한 언어를 삭제하시겠습니까?}other{선택한 언어를 삭제하시겠습니까?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"텍스트가 다른 언어로 표시됩니다."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"모든 언어를 삭제할 수는 없습니다."</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"기본 언어를 하나 이상 유지해야 합니다."</string>
@@ -182,6 +192,7 @@
     <string name="apply" msgid="7834684883190163536">"적용"</string>
     <string name="share" msgid="8502235338607613795">"공유"</string>
     <string name="add" msgid="8335206931421683426">"추가"</string>
+    <string name="remove" msgid="1028414219245072102">"삭제"</string>
     <string name="settings_label" msgid="943294133671632976">"설정"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"설정"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"설정 바로가기"</string>
@@ -193,6 +204,7 @@
     <string name="roaming_warning" msgid="7703647889040229013">"로밍 요금이 부과될 수 있습니다."</string>
     <string name="date_time_auto" msgid="4239202185055225869">"자동으로 시간 설정"</string>
     <string name="zone_auto_title" msgid="5141692422373097957">"자동 설정"</string>
+    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"위치는 이 전환 스위치가 켜져 있을 때 시간대를 설정하는 데 사용됩니다."</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"언어 기본값 사용"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24시간 형식 사용"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"시간"</string>
@@ -221,10 +233,8 @@
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"예: Joe의 Android"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"위치"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"위치 사용"</string>
-    <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="other">사용 - <xliff:g id="COUNT_1">%1$d</xliff:g>개의 앱이 위치에 액세스할 수 있음</item>
-      <item quantity="one">사용 - <xliff:g id="COUNT_0">%1$d</xliff:g>개의 앱이 위치에 액세스할 수 있음</item>
-    </plurals>
+    <!-- no translation found for location_settings_summary_location_on (7029728269719893381) -->
+    <skip />
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"로드 중…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"근처 기기 액세스 권한이 있는 앱은 연결된 기기 간의 상대적인 위치를 파악할 수 있습니다."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"앱 및 서비스에 대한 위치 정보 액세스가 사용 중지되어 있습니다. 그래도 긴급 전화번호로 전화를 걸거나 문자 메시지를 보내면 기기의 위치 정보가 긴급 구조원에게 전달될 수 있습니다."</string>
@@ -304,10 +314,8 @@
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"지문 잠금 해제 사용 시"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"업무 시 사용할 지문"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"지문 추가"</string>
-    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
-      <item quantity="other">지문 <xliff:g id="COUNT">%1$d</xliff:g>개 추가됨</item>
-      <item quantity="one">지문 추가됨</item>
-    </plurals>
+    <!-- no translation found for security_settings_fingerprint_preference_summary (8486134175759676037) -->
+    <skip />
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"지문 설정"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"지문 잠금 해제 허용"</string>
@@ -530,53 +538,20 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"다음번 시도에서 잘못된 패턴을 입력하면 직장 프로필 및 관련 데이터가 삭제됩니다."</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"다음번 시도에서 잘못된 PIN을 입력하면 직장 프로필 및 관련 데이터가 삭제됩니다."</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"다음번 시도에서 잘못된 비밀번호를 입력하면 직장 프로필 및 관련 데이터가 삭제됩니다."</string>
-    <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>자 이상이어야 합니다.</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g>자 이상이어야 합니다.</item>
-    </plurals>
+    <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{#자 이상이어야 합니다.}other{#자 이상이어야 합니다.}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{숫자만 사용하는 경우 1자리 이상이어야 합니다.}other{숫자만 사용하는 경우 #자리 이상이어야 합니다.}}"</string>
-    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
-      <item quantity="other">PIN은 <xliff:g id="COUNT_1">%d</xliff:g>자리 이상이어야 합니다.</item>
-      <item quantity="one">PIN은 <xliff:g id="COUNT_0">%d</xliff:g>자리 이상이어야 합니다.</item>
-    </plurals>
-    <plurals name="lockpassword_password_too_long" formatted="false" msgid="8118091957172967677">
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g>자 미만이어야 합니다.</item>
-      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g>자 미만이어야 합니다.</item>
-    </plurals>
-    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="8706992338720310765">
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g>자리 미만이어야 합니다.</item>
-      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g>자리 미만이어야 합니다.</item>
-    </plurals>
+    <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{PIN은 #자리 이상이어야 합니다.}other{PIN은 #자리 이상이어야 합니다.}}"</string>
+    <string name="lockpassword_password_too_long" msgid="1940345313260498308">"{count,plural, =1{#자 미만이어야 합니다.}other{#자 미만이어야 합니다.}}"</string>
+    <string name="lockpassword_pin_too_long" msgid="1678212054564388576">"{count,plural, =1{#자리 미만이어야 합니다.}other{#자리 미만이어야 합니다.}}"</string>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"기기 관리자가 최근 PIN 사용을 허용하지 않습니다."</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"잘못된 문자를 포함할 수 없습니다."</string>
-    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="2385916409676839024">
-      <item quantity="other">문자를 <xliff:g id="COUNT">%d</xliff:g>개 이상 포함해야 합니다.</item>
-      <item quantity="one">문자를 1개 이상 포함해야 합니다.</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="2057467885488612701">
-      <item quantity="other">소문자를 <xliff:g id="COUNT">%d</xliff:g>개 이상 포함해야 합니다.</item>
-      <item quantity="one">소문자를 1개 이상 포함해야 합니다.</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="4541266279643052025">
-      <item quantity="other">대문자를 <xliff:g id="COUNT">%d</xliff:g>개 이상 포함해야 합니다.</item>
-      <item quantity="one">대문자를 1개 이상 포함해야 합니다.</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="70617964591376248">
-      <item quantity="other">숫자를 <xliff:g id="COUNT">%d</xliff:g>개 이상 포함해야 합니다.</item>
-      <item quantity="one">숫자를 1개 이상 포함해야 합니다.</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="7981236881269921943">
-      <item quantity="other">특수 기호를 <xliff:g id="COUNT">%d</xliff:g>개 이상 포함해야 합니다.</item>
-      <item quantity="one">특수 기호를 1개 이상 포함해야 합니다.</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="1567877061888948467">
-      <item quantity="other">글자가 아닌 문자를 <xliff:g id="COUNT">%d</xliff:g>개 이상 포함해야 합니다.</item>
-      <item quantity="one">글자가 아닌 문자를 1개 이상 포함해야 합니다.</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonnumerical" formatted="false" msgid="5056743974888384475">
-      <item quantity="other">숫자가 아닌 문자를 <xliff:g id="COUNT">%d</xliff:g>개 이상 포함해야 합니다.</item>
-      <item quantity="one">숫자가 아닌 문자를 1개 이상 포함해야 합니다.</item>
-    </plurals>
+    <string name="lockpassword_password_requires_letters" msgid="7058340182953750553">"{count,plural, =1{문자를 1개 이상 포함해야 합니다.}other{문자를 #개 이상 포함해야 합니다.}}"</string>
+    <string name="lockpassword_password_requires_lowercase" msgid="3286121470522077547">"{count,plural, =1{소문자를 1개 이상 포함해야 합니다.}other{소문자를 #개 이상 포함해야 합니다.}}"</string>
+    <string name="lockpassword_password_requires_uppercase" msgid="720312543910397772">"{count,plural, =1{대문자를 1개 이상 포함해야 합니다.}other{대문자를 #개 이상 포함해야 합니다.}}"</string>
+    <string name="lockpassword_password_requires_numeric" msgid="3886918493600507548">"{count,plural, =1{숫자를 1개 이상 포함해야 합니다.}other{숫자를 #개 이상 포함해야 합니다.}}"</string>
+    <string name="lockpassword_password_requires_symbols" msgid="2904870551002210131">"{count,plural, =1{특수 기호를 1개 이상 포함해야 합니다.}other{특수 기호를 #개 이상 포함해야 합니다.}}"</string>
+    <string name="lockpassword_password_requires_nonletter" msgid="1185342065898300006">"{count,plural, =1{글자가 아닌 문자를 1개 이상 포함해야 합니다.}other{글자가 아닌 문자를 #개 이상 포함해야 합니다.}}"</string>
+    <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{숫자가 아닌 문자를 1개 이상 포함해야 합니다.}other{숫자가 아닌 문자를 #개 이상 포함해야 합니다.}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"기기 관리자가 최근 비밀번호 사용을 허용하지 않습니다."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"연속으로 올라가거나 내려가는 숫자 또는 반복되는 숫자의 배열은 허용되지 않습니다."</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"확인"</string>
@@ -586,17 +561,11 @@
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"다음"</string>
     <string name="manage_device_admin" msgid="1044620606203916275">"기기 관리자 앱"</string>
     <string name="number_of_device_admins_none" msgid="152926922020437312">"활성 앱 없음"</string>
-    <plurals name="number_of_device_admins" formatted="false" msgid="2528735319390151989">
-      <item quantity="other">활성 상태의 앱 <xliff:g id="COUNT_1">%d</xliff:g>개</item>
-      <item quantity="one">활성 상태의 앱 <xliff:g id="COUNT_0">%d</xliff:g>개</item>
-    </plurals>
+    <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{활성 앱 #개}other{활성 앱 #개}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"Trust Agent"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"이 기능을 사용하려면 먼저 화면 잠금을 설정하세요."</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"없음"</string>
-    <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
-      <item quantity="other">활성 Trust Agent <xliff:g id="COUNT">%d</xliff:g>개</item>
-      <item quantity="one">활성 Trust Agent 1개</item>
-    </plurals>
+    <string name="manage_trust_agents_summary_on" msgid="3302574418419446146">"{count,plural, =1{활성 Trust Agent 1개}other{활성 Trust Agent #개}}"</string>
     <string name="bluetooth_settings" msgid="2967239493428695171">"블루투스"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"블루투스"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>과(와) 페어링하시겠습니까?"</string>
@@ -812,18 +781,9 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"네트워크 저장 실패"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"취소"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"네트워크를 삭제하시겠습니까?"</string>
-    <plurals name="wifi_saved_access_points_summary" formatted="false" msgid="2802436466732147888">
-      <item quantity="other">네트워크 %d개</item>
-      <item quantity="one">네트워크 1개</item>
-    </plurals>
-    <plurals name="wifi_saved_passpoint_access_points_summary" formatted="false" msgid="5802057518058840450">
-      <item quantity="other">구독 %d개</item>
-      <item quantity="one">구독 1개</item>
-    </plurals>
-    <plurals name="wifi_saved_all_access_points_summary" formatted="false" msgid="5125849180309374451">
-      <item quantity="other">네트워크 및 구독 %d개</item>
-      <item quantity="one">네트워크 및 구독 1개</item>
-    </plurals>
+    <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{네트워크 1개}other{네트워크 #개}}"</string>
+    <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{구독 1개}other{구독 #개}}"</string>
+    <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{네트워크 및 구독 1개}other{네트워크 및 구독 #개}}"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"기기 MAC 주소"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"무작위 MAC 주소"</string>
@@ -1055,10 +1015,7 @@
     <string name="sim_preferred_title" msgid="8850185380445309835">"기본 SIM을 업데이트하시겠습니까?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g>이(가) 기기에 있는 유일한 SIM입니다. 모바일 데이터, 전화 및 SMS 메시지에 이 SIM을 사용하시겠습니까?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"SIM PIN 코드가 잘못되었습니다. 이동통신사에 문의하여 기기를 잠금 해제해야 합니다."</string>
-    <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
-      <item quantity="other">SIM PIN 코드가 잘못되었습니다. <xliff:g id="NUMBER_1">%d</xliff:g>번 더 시도할 수 있습니다.</item>
-      <item quantity="one">SIM PIN 코드가 잘못되었습니다. <xliff:g id="NUMBER_0">%d</xliff:g>번 더 실패하면 이동통신사에 문의하여 기기를 잠금 해제해야 합니다.</item>
-    </plurals>
+    <string name="wrong_pin_code" msgid="8124222991071607958">"{count,plural, =1{SIM의 PIN 코드가 잘못되었습니다. 남은 시도 횟수는 #회이며 실패할 경우 이동통신사에 문의하여 기기를 잠금 해제해야 합니다.}other{SIM의 PIN 코드가 잘못되었습니다. 남은 시도 횟수는 #회입니다.}}"</string>
     <string name="wrong_pin_code_one" msgid="6924852214263071441">"SIM의 PIN 코드가 잘못되었습니다. 한 번 더 실패할 경우 이동통신사에 문의하여 기기를 잠금 해제해야 합니다."</string>
     <string name="pin_failed" msgid="3726505565797352255">"SIM PIN 작업이 실패했습니다."</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"시스템 업데이트"</string>
@@ -1076,6 +1033,8 @@
     <string name="storage_settings" msgid="7472188817781592677">"저장용량"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"저장용량 및 캐시"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"저장소 설정"</string>
+    <string name="status_eid" msgid="7532406028683438634">"EID"</string>
+    <string name="eid_multi_sim" msgid="4581966600904959452">"EID(SIM 슬롯 %1$d)"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI(SIM 슬롯 %1$d)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"확인하려면 저장된 네트워크를 선택하세요."</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
@@ -1162,6 +1121,8 @@
     <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"이제 <xliff:g id="NAME">^1</xliff:g>을(를) 사용할 수 있습니다"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"배터리 상태"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"배터리 수준"</string>
+    <string name="communal_settings_title" msgid="2845678473945902115">"커뮤니티"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"커뮤니티 설정"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"액세스 포인트 수정"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"설정되지 않음"</string>
@@ -1202,12 +1163,9 @@
     <string name="menu_restore" msgid="4310539620115151551">"초기화"</string>
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"기본 APN 설정을 초기화했습니다."</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"옵션 초기화"</string>
-    <!-- no translation found for reset_mobile_network_settings_title (5616713931258506842) -->
-    <skip />
-    <!-- no translation found for reset_mobile_network_settings_desc (7292636387692165727) -->
-    <skip />
-    <!-- no translation found for reset_mobile_network_settings_confirm_title (7510965634669511241) -->
-    <skip />
+    <string name="reset_mobile_network_settings_title" msgid="5616713931258506842">"모바일 네트워크 설정 초기화"</string>
+    <string name="reset_mobile_network_settings_desc" msgid="7292636387692165727">"모든 모바일 네트워크 설정이 초기화됩니다."</string>
+    <string name="reset_mobile_network_settings_confirm_title" msgid="7510965634669511241">"모바일 네트워크 설정을 초기화할까요?"</string>
     <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"블루투스 및 Wi-Fi 초기화"</string>
     <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"Wi-Fi 및 블루투스 설정이 초기화됩니다. 이 작업은 실행취소할 수 없습니다."</string>
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"초기화"</string>
@@ -1296,10 +1254,7 @@
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"직장 프로필 위치"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"앱 위치 정보 액세스 권한"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"위치 서비스 사용 안함"</string>
-    <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
-      <item quantity="other"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g>개 중 <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g>개의 앱이 위치 정보에 액세스할 수 있음</item>
-      <item quantity="one"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g>개 중 <xliff:g id="PERMITTED_LOCATION_APP_COUNT_0">%1$d</xliff:g>개의 앱이 위치 정보에 액세스할 수 있음</item>
-    </plurals>
+    <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{{total}개 중 #개의 앱이 위치에 액세스할 수 있음}other{{total}개 중 #개의 앱이 위치에 액세스할 수 있음}}"</string>
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"최근에 위치 정보에 액세스한 앱"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"모두 보기"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"세부정보 보기"</string>
@@ -1314,9 +1269,15 @@
     <string name="location_services_preference_title" msgid="604317859531782159">"위치 서비스"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"위치 서비스"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"위치 사용"</string>
+    <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"시간대를 자동으로 설정할 수 없음"</string>
+    <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"위치 또는 위치 서비스가 꺼져 있음"</string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_environment" msgid="2279833212923765802"></string>
+    <string name="location_time_zone_detection_status_summary_temporarily_unavailable" msgid="6586801403644278967"></string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"기기 위치가 필요함"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_message" msgid="5846316326139169523">"위치를 사용하여 시간대를 설정하려면 위치를 사용 설정한 후 시간대 설정을 업데이트하세요."</string>
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"위치 설정"</string>
+    <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"문제 해결"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"취소"</string>
     <string name="location_time_zone_detection_auto_is_off" msgid="6264253990141650280">"자동 시간대가 사용 안함"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"위치 시간대 감지가 사용 중지됩니다."</string>
@@ -1440,10 +1401,7 @@
     <string name="install_applications" msgid="3921609656584369901">"알 수 없는 소스"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"모든 앱 소스 허용"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"최근 실행한 앱"</string>
-    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
-      <item quantity="other">앱 %1$d개 모두 보기</item>
-      <item quantity="one">앱 모두 보기</item>
-    </plurals>
+    <string name="see_all_apps_title" msgid="1650653853942381797">"{count,plural, =1{앱 모두 보기}other{앱 #개 모두 보기}}"</string>
     <string name="forgot_password_title" msgid="3967873480875239885">"IT 관리자에게 문의하세요"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"PIN, 패턴 또는 비밀번호 재설정에 도움을 받을 수 있습니다."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"고급 설정"</string>
@@ -1457,10 +1415,7 @@
     <string name="cache_header_label" msgid="2441967971921741047">"캐시"</string>
     <string name="clear_cache_btn_text" msgid="8597272828928143723">"캐시 지우기"</string>
     <string name="cache_size_label" msgid="313456088966822757">"캐시"</string>
-    <plurals name="uri_permissions_text" formatted="false" msgid="8212425823423508096">
-      <item quantity="other">%d개 항목</item>
-      <item quantity="one">1개 항목</item>
-    </plurals>
+    <string name="uri_permissions_text" msgid="8406345863117405105">"{count,plural, =1{항목 1개}other{항목 #개}}"</string>
     <string name="clear_uri_btn_text" msgid="4828117421162495134">"액세스 삭제"</string>
     <string name="controls_label" msgid="8671492254263626383">"제어"</string>
     <string name="force_stop" msgid="2681771622136916280">"강제 종료"</string>
@@ -1609,50 +1564,38 @@
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"단축키 목록을 표시합니다."</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"직장 프로필 키보드 및 도구"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"업무용 터치 키보드"</string>
-    <!-- no translation found for trackpad_settings (2071131324087677005) -->
-    <skip />
-    <!-- no translation found for trackpad_mouse_settings (136226693583218429) -->
-    <skip />
-    <!-- no translation found for trackpad_settings_summary (3369855644136760402) -->
-    <skip />
-    <!-- no translation found for trackpad_tap_to_click (1938230946542070746) -->
-    <skip />
-    <!-- no translation found for trackpad_touchpad_gesture_title (7568052847609914436) -->
-    <skip />
-    <!-- no translation found for trackpad_touchpad_gesture_summary (6256074591395359124) -->
-    <skip />
-    <!-- no translation found for trackpad_reverse_scrolling_title (422877284529360866) -->
-    <skip />
-    <!-- no translation found for trackpad_reverse_scrolling_summary (6048648562887499036) -->
-    <skip />
-    <!-- no translation found for trackpad_bottom_right_tap_title (6275428879042702880) -->
-    <skip />
-    <!-- no translation found for trackpad_bottom_right_tap_summary (8734094086900680674) -->
-    <skip />
-    <!-- no translation found for trackpad_pointer_speed (7786579408631352625) -->
-    <skip />
-    <!-- no translation found for trackpad_touch_gesture (8641725062131922497) -->
-    <skip />
-    <!-- no translation found for trackpad_go_back_title (5312164160947491440) -->
-    <skip />
-    <!-- no translation found for trackpad_go_back_summary (4201901101085902768) -->
-    <skip />
-    <!-- no translation found for trackpad_go_home_title (2146525662148291552) -->
-    <skip />
-    <!-- no translation found for trackpad_go_home_summary (2222744701528360887) -->
-    <skip />
-    <!-- no translation found for trackpad_recent_apps_title (8195970908411585445) -->
-    <skip />
-    <!-- no translation found for trackpad_recent_apps_summary (2685092851677573794) -->
-    <skip />
-    <!-- no translation found for trackpad_notifications_title (3521663305043747880) -->
-    <skip />
-    <!-- no translation found for trackpad_notifications_summary (7663647367648690040) -->
-    <skip />
-    <!-- no translation found for trackpad_switch_apps_title (7342032935377284039) -->
-    <skip />
-    <!-- no translation found for trackpad_switch_apps_summary (9193942041912927440) -->
-    <skip />
+    <string name="trackpad_settings" msgid="2071131324087677005">"터치패드"</string>
+    <string name="trackpad_mouse_settings" msgid="136226693583218429">"터치패드 및 마우스"</string>
+    <string name="trackpad_settings_summary" msgid="3369855644136760402">"포인터 속도, 동작"</string>
+    <string name="trackpad_tap_to_click" msgid="1938230946542070746">"탭하여 클릭"</string>
+    <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"터치패드 동작"</string>
+    <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"개별 터치패드 탐색 동작 맞춤설정"</string>
+    <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"역방향 스크롤"</string>
+    <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"아래로 스크롤하면 콘텐츠가 위로 이동합니다."</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"오른쪽 하단 탭하기"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"더 많은 옵션을 확인하려면 터치패드 오른쪽 하단을 탭합니다"</string>
+    <string name="trackpad_pointer_speed" msgid="7786579408631352625">"포인터 속도"</string>
+    <string name="trackpad_touch_gesture" msgid="8641725062131922497">"터치패드 동작 알아보기"</string>
+    <string name="trackpad_go_back_title" msgid="5312164160947491440">"뒤로"</string>
+    <string name="trackpad_go_back_summary" msgid="4201901101085902768">"세 손가락을 사용해 왼쪽 또는 오른쪽으로 스와이프하세요."</string>
+    <string name="trackpad_go_home_title" msgid="2146525662148291552">"홈으로 이동"</string>
+    <string name="trackpad_go_home_summary" msgid="2222744701528360887">"세 손가락을 사용해 위로 스와이프하세요."</string>
+    <string name="trackpad_recent_apps_title" msgid="8195970908411585445">"최근 앱"</string>
+    <string name="trackpad_recent_apps_summary" msgid="2685092851677573794">"세 손가락을 사용해 위로 스와이프한 다음 잠시 기다립니다."</string>
+    <string name="trackpad_notifications_title" msgid="3521663305043747880">"알림"</string>
+    <string name="trackpad_notifications_summary" msgid="7663647367648690040">"세 손가락을 사용해 아래로 스와이프하세요."</string>
+    <string name="trackpad_switch_apps_title" msgid="7342032935377284039">"앱 전환"</string>
+    <string name="trackpad_switch_apps_summary" msgid="9193942041912927440">"네 손가락을 사용해 왼쪽 또는 오른쪽으로 스와이프하세요."</string>
+    <string name="modifier_keys_settings" msgid="2537108435032034683">"특수키"</string>
+    <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"키 동작 변경"</string>
+    <string name="modifier_keys_reset_title" msgid="948294258402761066">"모두 재설정"</string>
+    <string name="modifier_keys_default_summary" msgid="8701640508670973258">"기본"</string>
+    <string name="modifier_keys_reset_message" msgid="5236994817619936058">"모든 특수키를 기본값으로 재설정하시겠습니까?"</string>
+    <string name="modifier_keys_done" msgid="8196199314913909700">"완료"</string>
+    <string name="modifier_keys_cancel" msgid="7136520252570826772">"취소"</string>
+    <string name="modifier_keys_restore" msgid="7627661630556839268">"복원"</string>
+    <string name="modifier_keys_picker_title" msgid="244545904150587851">"특수키 선택"</string>
+    <string name="modifier_keys_picker_summary" msgid="739397232249560785">"<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>의 새 키 선택:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"기본"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"음성"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"포인터 속도"</string>
@@ -1969,22 +1912,14 @@
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"어둡게"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"밝게"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"기기 재시작 후 유지"</string>
-    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
-      <item quantity="other">짧은 지연(<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g>초)</item>
-      <item quantity="one">짧은 지연(<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g>초)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
-      <item quantity="other">중간 지연(<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g>초)</item>
-      <item quantity="one">중간 지연(<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g>초)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
-      <item quantity="other">긴 지연(<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g>초)</item>
-      <item quantity="one">긴 지연(<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g>초)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="4537791441118261556">
-      <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g>초</item>
-      <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g>초</item>
-    </plurals>
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (2981206111858937724) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (6867395206533459204) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (4079139970819335593) -->
+    <skip />
+    <!-- no translation found for accessibilty_autoclick_delay_unit_second (5979297390686370567) -->
+    <skip />
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"설정"</string>
     <string name="captioning_preview_title" msgid="2888561631323180535">"미리보기"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"표준 옵션"</string>
@@ -2059,14 +1994,10 @@
     <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"근처 기기 검색"</string>
     <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"저장된 기기"</string>
     <string name="print_settings" msgid="8519810615863882491">"인쇄"</string>
-    <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
-      <item quantity="other">인쇄 서비스 <xliff:g id="COUNT">%1$d</xliff:g>개 사용</item>
-      <item quantity="one">인쇄 서비스 1개 사용</item>
-    </plurals>
-    <plurals name="print_jobs_summary" formatted="false" msgid="3933688846338306536">
-      <item quantity="other">인쇄 작업 <xliff:g id="COUNT">%1$d</xliff:g>개</item>
-      <item quantity="one">인쇄 작업 1개</item>
-    </plurals>
+    <!-- no translation found for print_settings_summary (1458773840720811915) -->
+    <skip />
+    <!-- no translation found for print_jobs_summary (7040836482336577323) -->
+    <skip />
     <string name="print_settings_title" msgid="7680498284751129935">"인쇄 서비스"</string>
     <string name="print_no_services_installed" msgid="7554057966540602692">"설치된 서비스 없음"</string>
     <string name="print_no_printers_found" msgid="4833082484646109486">"프린터 없음"</string>
@@ -2144,26 +2075,16 @@
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"충전 일시중지에 관해 자세히 알아보세요."</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"충전 재개"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"고전력 백그라운드 활동 포함"</string>
-    <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
-      <item quantity="other">%1$d개 앱 제한</item>
-      <item quantity="one">%1$d개 앱 제한</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_handled_title" formatted="false" msgid="5862649927574803958">
-      <item quantity="other">앱 %2$d개가 최근에 제한됨</item>
-      <item quantity="one">%1$s이(가) 최근에 제한됨</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
-      <item quantity="other">앱 %2$d개가 백그라운드에서 배터리를 많이 사용합니다.</item>
-      <item quantity="one">%1$s이(가) 백그라운드에서 배터리를 많이 사용합니다.</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
-      <item quantity="other">백그라운드에서 실행할 수 없는 앱입니다.</item>
-      <item quantity="one">백그라운드에서 실행할 수 없는 앱입니다.</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_app_dialog_title" formatted="false" msgid="7897944678619251740">
-      <item quantity="other">%1$d개 앱을 제한하시겠습니까?</item>
-      <item quantity="one">앱을 제한하시겠습니까?</item>
-    </plurals>
+    <!-- no translation found for battery_tip_restrict_title (4537101947310626753) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_handled_title (7142074986508706853) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_summary (7539469590829235277) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_handled_summary (3535697154547199190) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_app_dialog_title (1649476357343160240) -->
+    <skip />
     <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"배터리를 절약하려면 <xliff:g id="APP">%1$s</xliff:g>이(가) 백그라운드에서 배터리를 사용하지 못하도록 설정하세요. 앱이 제대로 작동하지 않을 수 있으며 알림이 지연될 수 있습니다."</string>
     <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"배터리를 절약하려면 다음 앱이 백그라운드에서 배터리를 사용하지 못하도록 설정하세요. 제한된 앱이 제대로 작동하지 않을 수 있으며 알림이 지연될 수 있습니다.\n\n앱:"</string>
     <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"배터리를 절약하려면 다음 앱이 백그라운드에서 배터리를 사용하지 못하도록 설정하세요. 제한된 앱이 제대로 작동하지 않을 수 있으며 알림이 지연될 수 있습니다.\n\n앱:\n<xliff:g id="APP_LIST">%1$s</xliff:g>"</string>
@@ -2177,20 +2098,16 @@
     <string name="smart_battery_title" msgid="9095903608520254254">"자동으로 앱 관리"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"배터리 관리에서 배터리를 많이 소모하는 앱을 감지하면 이 앱을 제한할 수 있습니다. 제한된 앱이 제대로 작동하지 않을 수 있으며 알림이 지연될 수 있습니다."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"제한된 앱"</string>
-    <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
-      <item quantity="other">%1$d개 앱의 배터리 사용량 제한</item>
-      <item quantity="one">%1$d개 앱의 배터리 사용량 제한</item>
-    </plurals>
+    <!-- no translation found for restricted_app_summary (1022307922754893997) -->
+    <skip />
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"<xliff:g id="TIME">%1$s</xliff:g>에 제한됨"</string>
     <string name="restricted_app_detail_footer" msgid="3495725286882138803">"이러한 앱은 백그라운드에서 배터리를 사용할 수 없도록 제한되어 있습니다. 앱이 제대로 작동하지 않을 수 있으며 알림이 지연될 수 있습니다."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"배터리 관리 사용"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"앱에서 배터리를 많이 소모하면 감지"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"앱의 배터리 사용량이 많은 경우 감지"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"앱의 배터리 사용량이 많은 경우 감지"</string>
-    <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
-      <item quantity="other">앱 %1$d개가 제한됨</item>
-      <item quantity="one">앱 %1$d개가 제한됨</item>
-    </plurals>
+    <!-- no translation found for battery_manager_app_restricted (2583902700677009173) -->
+    <skip />
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
     <string name="battery_missing_message" msgid="400958471814422770">"배터리 수준을 읽는 중에 문제가 발생했습니다."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
@@ -2354,10 +2271,8 @@
     <string name="advanced_security_title" msgid="7117581975877192652">"고급"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"이 사용자는 자격증명을 확인하거나 수정할 수 없습니다."</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"VPN 및 앱에 사용하도록 설치됨"</string>
-    <!-- no translation found for credential_for_wifi (2286560570630763556) -->
-    <skip />
-    <!-- no translation found for credential_for_wifi_in_use (7276290656840986618) -->
-    <skip />
+    <string name="credential_for_wifi" msgid="2286560570630763556">"Wi-Fi에 사용하도록 설치됨"</string>
+    <string name="credential_for_wifi_in_use" msgid="7276290656840986618">"Wi-Fi에 사용하도록 설치됨(사용 중)"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"콘텐츠를 모두 삭제하시겠습니까?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"사용자 인증 정보 저장소가 삭제되었습니다."</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"사용자 인증 정보 저장소를 삭제하지 못했습니다."</string>
@@ -2382,10 +2297,8 @@
     <string name="remove_credential_management_app" msgid="6089291496976812786">"앱 삭제"</string>
     <string name="remove_credential_management_app_dialog_title" msgid="5713525435104706772">"이 앱을 삭제하시겠습니까?"</string>
     <string name="remove_credential_management_app_dialog_message" msgid="7739474298063646935">"이 앱에서 인증서를 관리하지 않지만 기기에서 계속 사용할 수 있습니다. 앱에서 설치한 모든 인증서가 제거됩니다."</string>
-    <plurals name="number_of_urls" formatted="false" msgid="403979258551655023">
-      <item quantity="other">URL <xliff:g id="NUMBER_1">%d</xliff:g>개</item>
-      <item quantity="one">URL <xliff:g id="NUMBER_0">%d</xliff:g>개</item>
-    </plurals>
+    <!-- no translation found for number_of_urls (1128699121050872188) -->
+    <skip />
     <string name="emergency_tone_title" msgid="6673118505206685168">"응급 상황 다이얼링 신호"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"긴급 통화 중 동작 설정"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"백업"</string>
@@ -2428,10 +2341,8 @@
     <string name="notification_history_today" msgid="5828496957208237230">"지난 24시간"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"일시 중지된 알림"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"최근 닫은 알림"</string>
-    <plurals name="notification_history_count" formatted="false" msgid="1859304685071321991">
-      <item quantity="other">알림 <xliff:g id="NUMBER_1">%d</xliff:g>개</item>
-      <item quantity="one">알림 <xliff:g id="NUMBER_0">%d</xliff:g>개</item>
-    </plurals>
+    <!-- no translation found for notification_history_count (885305572972482838) -->
+    <skip />
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"전화 벨소리 및 진동"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"네트워크 세부정보"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"동기화 사용"</string>
@@ -2603,16 +2514,11 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"시스템 CA 인증서를 사용하시겠습니까?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"시스템 CA 인증서를 사용 중지하시겠습니까?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"사용자 CA 인증서를 영구 삭제하시겠습니까?"</string>
-    <!-- no translation found for credential_being_used_by (3682869943025283499) -->
-    <skip />
-    <!-- no translation found for credential_contains (3146519680449595771) -->
-    <skip />
-    <!-- no translation found for one_userkey (6363426728683951234) -->
-    <skip />
-    <!-- no translation found for one_usercrt (2097644070227688983) -->
-    <skip />
-    <!-- no translation found for one_cacrt (982242103604501559) -->
-    <skip />
+    <string name="credential_being_used_by" msgid="3682869943025283499">"사용처"</string>
+    <string name="credential_contains" msgid="3146519680449595771">"이 항목 포함사항"</string>
+    <string name="one_userkey" msgid="6363426728683951234">"사용자 키 1개"</string>
+    <string name="one_usercrt" msgid="2097644070227688983">"사용자 인증서 1개"</string>
+    <string name="one_cacrt" msgid="982242103604501559">"CA 인증서 1개"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"CA 인증서 %d개"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"사용자 인증 정보 세부정보"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"삭제된 사용자 인증 정보: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
@@ -2627,17 +2533,13 @@
     <string name="additional_system_update_settings_list_item_title" msgid="7230385345152138051">"추가 시스템 업데이트"</string>
     <string name="ssl_ca_cert_warning" msgid="3898387588657346106">"네트워크가 모니터링될 수 있음"</string>
     <string name="done_button" msgid="6269449526248267">"완료"</string>
-    <plurals name="ssl_ca_cert_dialog_title" formatted="false" msgid="5491460811755938449">
-      <item quantity="other">인증서 신뢰 또는 삭제</item>
-      <item quantity="one">인증서 신뢰 또는 삭제</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_dialog_title (1032088078702042090) -->
+    <skip />
     <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{{orgName}에서 내 기기에 인증 기관의 인증서를 설치했으며, 인증서를 통해 관리자가 이메일, 앱, 보안 웹사이트를 포함한 내 기기의 네트워크 활동을 모니터링할 수 있습니다.\n\n이 인증서에 관해 자세히 알아보려면 관리자에게 문의하세요.}other{{orgName}에서 내 기기에 인증 기관의 인증서를 설치했으며, 인증서를 통해 관리자가 이메일, 앱, 보안 웹사이트를 포함한 내 기기의 네트워크 활동을 모니터링할 수 있습니다.\n\n이 인증서에 관해 자세히 알아보려면 관리자에게 문의하세요.}}"</string>
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName}에서 내 직장 프로필에 인증 기관의 인증서를 설치했으며, 인증서를 통해 관리자가 이메일, 앱, 보안 웹사이트를 포함한 내 직장 프로필의 네트워크 활동을 모니터링할 수 있습니다.\n\n이 인증서에 관해 자세히 알아보려면 관리자에게 문의하세요.}other{{orgName}에서 내 직장 프로필에 인증 기관의 인증서를 설치했으며, 인증서를 통해 관리자가 이메일, 앱, 보안 웹사이트를 포함한 내 직장 프로필의 네트워크 활동을 모니터링할 수 있습니다.\n\n이 인증서에 관해 자세히 알아보려면 관리자에게 문의하세요.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"기기에 신뢰할 수 있는 자격증명이 설치되어 있기 때문에\n제3자가 이메일, 앱, 보안 웹사이트를 포함한 네트워크 활동을 모니터링 할 수 있습니다.\n"</string>
-    <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
-      <item quantity="other">인증서 확인</item>
-      <item quantity="one">인증서 확인</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_settings_button (2044927302268394991) -->
+    <skip />
     <string name="user_settings_title" msgid="6550866465409807877">"여러 사용자"</string>
     <string name="user_list_title" msgid="1387379079186123404">"사용자 및 프로필"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"사용자 또는 프로필 추가"</string>
@@ -2676,9 +2578,12 @@
     <string name="enable_guest_calling" msgid="8300355036005240911">"게스트가 전화를 사용하도록 허용"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"통화 기록이 이 게스트 사용자와 공유됩니다."</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"통화 및 SMS 기능 사용"</string>
+    <string name="user_grant_admin" msgid="6511342422361803820">"이 사용자에게 관리자 권한 부여"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"사용자 삭제"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"통화 및 SMS 기능을 사용하시겠습니까?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"통화 및 SMS 기록이 이 사용자와 공유됩니다."</string>
+    <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"관리자 권한을 삭제하시겠습니까?"</string>
+    <string name="user_revoke_admin_confirm_message" msgid="2719667217562982318">"이 사용자의 관리자 권한을 삭제하시겠습니까?"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"긴급 상황 정보"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>님의 정보 및 연락처"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g> 열기"</string>
@@ -2824,10 +2729,10 @@
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"클론된 앱"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"두 계정을 동시에 사용할 수 있도록 앱의 추가 인스턴스를 만드세요."</string>
     <string name="cloned_apps_summary" msgid="8805362440770795709">"<xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g>개 복제됨, <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g>개 복제 가능"</string>
-    <!-- no translation found for cloned_app_creation_summary (4642627294993918502) -->
-    <skip />
-    <!-- no translation found for cloned_app_created_summary (7277912971544890710) -->
-    <skip />
+    <string name="delete_all_app_clones" msgid="3489053361980624999">"모든 앱 사본을 삭제합니다."</string>
+    <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"일부 앱 사본을 삭제할 수 없습니다."</string>
+    <string name="cloned_app_creation_summary" msgid="4642627294993918502">"생성 중…"</string>
+    <string name="cloned_app_created_summary" msgid="7277912971544890710">"클론됨"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"언어, 동작, 시간, 백업"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"시스템 언어, 앱 언어"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, Wi-Fi, 네트워크 연결, 인터넷, 무선, 데이터, WiFi"</string>
@@ -3161,10 +3066,8 @@
     <string name="promote_conversation_title" msgid="4731148769888238722">"대화입니다."</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"대화 섹션에 추가"</string>
     <string name="priority_conversation_count_zero" msgid="3862289535537564713">"우선순위 대화 없음"</string>
-    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
-      <item quantity="other">우선순위 대화 <xliff:g id="COUNT_1">%d</xliff:g>개</item>
-      <item quantity="one">우선순위 대화 <xliff:g id="COUNT_0">%d</xliff:g>개</item>
-    </plurals>
+    <!-- no translation found for priority_conversation_count (7291234530844412077) -->
+    <skip />
     <string name="important_conversations" msgid="1233893707189659401">"우선순위 대화"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"대화 섹션 상단에 플로팅 대화창으로 표시"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"대화 섹션의 상단에 표시"</string>
@@ -3193,14 +3096,10 @@
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"기기가 잠금 해제되어 있을 때 화면 상단에 알림 배너 표시"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"모든 ‘<xliff:g id="APP_NAME">%1$s</xliff:g>’ 알림"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"모든 <xliff:g id="APP_NAME">%1$s</xliff:g> 알림"</string>
-    <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
-      <item quantity="other">알림 약 <xliff:g id="NUMBER_1">%,d</xliff:g>개/일</item>
-      <item quantity="one">알림 약 <xliff:g id="NUMBER_0">%d</xliff:g>개/일</item>
-    </plurals>
-    <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
-      <item quantity="other">알림 약 <xliff:g id="NUMBER_1">%,d</xliff:g>개/주</item>
-      <item quantity="one">알림 약 <xliff:g id="NUMBER_0">%d</xliff:g>개/주</item>
-    </plurals>
+    <!-- no translation found for notifications_sent_daily (10274479224185437) -->
+    <skip />
+    <!-- no translation found for notifications_sent_weekly (7895656213187555346) -->
+    <skip />
     <string name="notifications_sent_never" msgid="9081278709126812062">"전송하지 않음"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"기기 및 앱 알림"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"알림을 읽을 수 있는 앱과 기기 제어"</string>
@@ -3269,10 +3168,8 @@
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"권한"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"이 앱은 위치, 저장소, 연락처 액세스와 같은 개인용 <xliff:g id="NAME">%1$s</xliff:g>의 권한을 사용할 수 있습니다."</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"연결된 앱 없음"</string>
-    <plurals name="interact_across_profiles_number_of_connected_apps" formatted="false" msgid="6991750455661974772">
-      <item quantity="other">앱 <xliff:g id="COUNT_1">%d</xliff:g>개 연결됨</item>
-      <item quantity="one">앱 <xliff:g id="COUNT_0">%d</xliff:g>개 연결됨</item>
-    </plurals>
+    <!-- no translation found for interact_across_profiles_number_of_connected_apps (4000424798291479207) -->
+    <skip />
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"이 앱을 연결하려면 직장 프로필에 <xliff:g id="NAME">%1$s</xliff:g>을 설치하세요"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"이 앱을 연결하려면 개인 프로필에 <xliff:g id="NAME">%1$s</xliff:g>을 설치하세요"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"탭하여 앱을 다운로드하세요."</string>
@@ -3287,10 +3184,8 @@
     <string name="notification_channels_other" msgid="18159805343647908">"기타"</string>
     <string name="no_channels" msgid="4716199078612071915">"이 앱에서 게시한 알림이 없음"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"앱 내 추가 설정"</string>
-    <plurals name="deleted_channels" formatted="false" msgid="5963473421547029532">
-      <item quantity="other">카테고리 <xliff:g id="COUNT_1">%d</xliff:g>개 삭제됨</item>
-      <item quantity="one">카테고리 <xliff:g id="COUNT_0">%d</xliff:g>개 삭제됨</item>
-    </plurals>
+    <!-- no translation found for deleted_channels (8489800381509312964) -->
+    <skip />
     <string name="app_notification_block_title" msgid="3880322745749900296">"모두 차단"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"이러한 알림을 다시 표시하지 않음"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"알림 표시"</string>
@@ -3440,7 +3335,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"고정 해제 이전에 비밀번호 요청"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"화면 고정 해제 시 기기 잠금"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"SIM 삭제 확인"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"eSIM을 삭제하기 전에 본인 확인을 진행하세요."</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"eSIM을 삭제하기 전에 본인 확인을 진행하세요"</string>
     <string name="memtag_title" msgid="5096176296797727201">"고급 메모리 보호 베타"</string>
     <string name="memtag_toggle" msgid="8695028758462939212">"고급 메모리 보호"</string>
     <string name="memtag_intro" msgid="579408691329568953">"보안 위험에 노출될 수 있는 버그로부터 기기를 보호하는 베타 기능입니다."</string>
@@ -3939,18 +3834,12 @@
     <string name="enterprise_privacy_none" msgid="6026527690979756431">"없음"</string>
     <string name="enterprise_privacy_enterprise_installed_packages" msgid="9114143640515900082">"설치된 앱"</string>
     <string name="enterprise_privacy_apps_count_estimation_info" msgid="7959907857710107792">"앱의 수는 추정치입니다. Play 스토어 이외의 출처에서 설치된 앱은 포함되지 않을 수도 있습니다."</string>
-    <plurals name="enterprise_privacy_number_packages_lower_bound" formatted="false" msgid="5403847001419529018">
-      <item quantity="other">최소 <xliff:g id="COUNT_1">%d</xliff:g>개 앱</item>
-      <item quantity="one">최소 <xliff:g id="COUNT_0">%d</xliff:g>개 앱</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages_lower_bound" msgid="5317634640873658149">"{count,plural, =1{앱 최소 #개}other{앱 최소 #개}}"</string>
     <string name="enterprise_privacy_location_access" msgid="8023838718108456971">"위치 정보 액세스 권한"</string>
     <string name="enterprise_privacy_microphone_access" msgid="7242958026470143653">"마이크 사용 권한"</string>
     <string name="enterprise_privacy_camera_access" msgid="7685460535880069016">"카메라 사용 권한"</string>
     <string name="enterprise_privacy_enterprise_set_default_apps" msgid="7498546659083996300">"기본 앱"</string>
-    <plurals name="enterprise_privacy_number_packages" formatted="false" msgid="8568544906431825430">
-      <item quantity="other">앱 <xliff:g id="COUNT_1">%d</xliff:g>개</item>
-      <item quantity="one">앱 <xliff:g id="COUNT_0">%d</xliff:g>개</item>
-    </plurals>
+    <string name="enterprise_privacy_number_packages" msgid="5294444005035188274">"{count,plural, =1{앱 #개}other{앱 #개}}"</string>
     <string name="enterprise_privacy_input_method" msgid="3278314982700662246">"기본 키보드"</string>
     <string name="enterprise_privacy_input_method_name" msgid="2974859490559054584">"<xliff:g id="APP_LABEL">%s</xliff:g>(으)로 설정"</string>
     <string name="enterprise_privacy_always_on_vpn_device" msgid="1735829327405126695">"연결 유지 VPN 사용 설정됨"</string>
@@ -3960,18 +3849,12 @@
     <string name="enterprise_privacy_ca_certs_device" msgid="1816495877258727663">"신뢰할 수 있는 사용자 인증 정보"</string>
     <string name="enterprise_privacy_ca_certs_personal" msgid="1516422660828485795">"개인 프로필에서 신뢰할 수 있는 사용자 인증 정보"</string>
     <string name="enterprise_privacy_ca_certs_work" msgid="4318941788592655561">"직장 프로필에서 신뢰할 수 있는 사용자 인증 정보"</string>
-    <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="6459725295322004179">
-      <item quantity="other">CA 인증서 최소 <xliff:g id="COUNT_1">%d</xliff:g>개</item>
-      <item quantity="one">CA 인증서 최소 <xliff:g id="COUNT_0">%d</xliff:g>개</item>
-    </plurals>
+    <string name="enterprise_privacy_number_ca_certs" msgid="4540897122831942658">"{count,plural, =1{CA 인증서 최소 #개}other{CA 인증서 최소 #개}}"</string>
     <string name="enterprise_privacy_lock_device" msgid="464054894363899866">"관리자는 기기를 잠그고 비밀번호를 재설정할 수 있음"</string>
     <string name="enterprise_privacy_wipe_device" msgid="869589182352244591">"관리자는 모든 기기 데이터를 삭제할 수 있습니다."</string>
     <string name="enterprise_privacy_failed_password_wipe_device" msgid="7045164901334821226">"기기의 데이터가 모두 삭제되는 비밀번호 입력 시도 실패 횟수"</string>
     <string name="enterprise_privacy_failed_password_wipe_work" msgid="2537582942554484170">"직장 프로필 데이터가 삭제되는 비밀번호 입력 시도 실패 횟수"</string>
-    <plurals name="enterprise_privacy_number_failed_password_wipe" formatted="false" msgid="8811973918944217791">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>회 시도</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g>회 시도</item>
-    </plurals>
+    <string name="enterprise_privacy_number_failed_password_wipe" msgid="2695842143305867642">"{count,plural, =1{#회 시도}other{#회 시도}}"</string>
     <string name="do_disclosure_generic" msgid="3067459392402324538">"조직에서 관리하는 기기입니다."</string>
     <string name="do_disclosure_with_name" msgid="867544298924410766">"<xliff:g id="ORGANIZATION_NAME">%s</xliff:g>에서 관리하는 기기입니다."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
@@ -3999,21 +3882,12 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"전액을 납부하고 나면 다음과 같이 됩니다"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"기기에서 모든 제한 사항 해제"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"신용 상품 제공업체 앱 제거 가능"</string>
-    <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
-      <item quantity="other">카메라 앱</item>
-      <item quantity="one">카메라 앱</item>
-    </plurals>
+    <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{카메라 앱}other{카메라 앱}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"캘린더 앱"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"연락처 앱"</string>
-    <plurals name="default_email_app_title" formatted="false" msgid="8338194872609410234">
-      <item quantity="other">이메일 클라이언트 앱</item>
-      <item quantity="one">이메일 클라이언트 앱</item>
-    </plurals>
+    <string name="default_email_app_title" msgid="5411280873093244250">"{count,plural, =1{이메일 클라이언트 앱}other{이메일 클라이언트 앱}}"</string>
     <string name="default_map_app_title" msgid="7569231732944853320">"지도 앱"</string>
-    <plurals name="default_phone_app_title" formatted="false" msgid="4222188821845826493">
-      <item quantity="other">전화 앱</item>
-      <item quantity="one">전화 앱</item>
-    </plurals>
+    <string name="default_phone_app_title" msgid="795025972645464135">"{count,plural, =1{전화 앱}other{전화 앱}}"</string>
     <string name="app_names_concatenation_template_2" msgid="8320181646458855457">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>"</string>
     <string name="app_names_concatenation_template_3" msgid="7019703249717854148">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>, <xliff:g id="THIRD_APP_NAME">%3$s</xliff:g>"</string>
     <string name="storage_default_internal_storage" msgid="4055660218818688131">"이 기기"</string>
@@ -4040,13 +3914,18 @@
     <string name="webview_uninstalled_for_user" msgid="627352948986275488">"(<xliff:g id="USER">%s</xliff:g>님의 경우 제거됨)"</string>
     <string name="webview_disabled_for_user" msgid="5809886172032644498">"(<xliff:g id="USER">%s</xliff:g>님의 경우 사용 안함)"</string>
     <string name="autofill_app" msgid="7595308061826307921">"자동완성 서비스"</string>
+    <string name="default_autofill_app" msgid="372234803718251606">"기본 자동 완성 서비스"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"비밀번호"</string>
-    <plurals name="autofill_passwords_count" formatted="false" msgid="7715009165029452622">
-      <item quantity="other">비밀번호 <xliff:g id="COUNT_1">%1$d</xliff:g>개</item>
-      <item quantity="one">비밀번호 <xliff:g id="COUNT_0">%1$d</xliff:g>개</item>
-    </plurals>
+    <string name="credman_credentials" msgid="5937331545565783811">"비밀번호 및 ID 서비스"</string>
+    <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{비밀번호 #개}other{비밀번호 #개}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"자동, 채우기, 자동 완성, 비밀번호"</string>
+    <string name="credman_keywords" msgid="7236954350284379264">"사용자 인증 정보, 패스키, 비밀번호"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;신뢰할 수 있는 앱인지 확인하세요&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt;에서는 자동 완성할 수 있는 항목을 결정하기 위해 화면의 내용을 사용합니다."</string>
+    <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s을(를) 사용 중지하시겠습니까?"</string>
+    <string name="credman_confirmation_message" msgid="1485617504425237430">"로그인 시 주소나 결제 수단 같이 저장된 정보가 입력되지 않습니다. 저장된 정보를 계속 입력하려면 기본 자동 완성 서비스를 설정하세요."</string>
+    <string name="credman_error_message_title" msgid="5108868200002966901">"비밀번호 및 ID 서비스 한도"</string>
+    <string name="credman_error_message" msgid="4058425433345908579">"자동 완성 및 비밀번호 서비스를 동시에 최대 5개까지 활성화할 수 있습니다. 추가하려면 서비스를 사용 중지하세요."</string>
+    <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"사용 중지"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"자동 완성"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"로깅 수준"</string>
     <string name="autofill_max_partitions" msgid="7342195529574406366">"세션당 최대 요청 수"</string>
@@ -4229,8 +4108,7 @@
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"앱 데이터 사용량"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"잘못된 네트워크 모드(<xliff:g id="NETWORKMODEID">%1$d</xliff:g>)입니다. 무시하세요."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"액세스 포인트 이름(APN)"</string>
-    <!-- no translation found for keywords_access_point_names (8174967126858505945) -->
-    <skip />
+    <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g>에 연결된 경우 사용할 수 없음"</string>
     <string name="see_more" msgid="7499355691042812723">"더보기"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> 서비스를 사용하시겠습니까?"</string>
@@ -4320,10 +4198,7 @@
     <string name="copyable_slice_toast" msgid="1008251852798990606">"<xliff:g id="COPY_CONTENT">%1$s</xliff:g>이(가) 클립보드에 복사되었습니다."</string>
     <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"접근성 사용"</string>
-    <plurals name="accessibility_usage_summary" formatted="false" msgid="6910643986958263005">
-      <item quantity="other">앱 <xliff:g id="SERVICE_COUNT">%1$d</xliff:g>개가 기기에 대한 전체 액세스 권한을 가지고 있습니다.</item>
-      <item quantity="one">앱 1개가 기기에 대한 전체 액세스 권한을 가지고 있습니다.</item>
-    </plurals>
+    <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{앱 1개에 기기 전체에 대한 액세스 권한을 가지고 있습니다}other{앱 #개에 기기 전체에 대한 액세스 권한을 가지고 있습니다}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"중요한 정보"</string>
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"계속"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"거부"</string>
@@ -4507,10 +4382,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"2G 허용"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G는 보안이 약한 대신 일부 위치에서 연결 품질을 개선할 수 있습니다. 긴급 전화의 경우 2G는 항상 지원됩니다."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> 이동통신사 사용 시 2G 필요"</string>
-    <!-- no translation found for allow_null_algorithms_title (9143076634352979096) -->
-    <skip />
-    <!-- no translation found for allow_null_algorithms_summary (5874570357011783211) -->
-    <skip />
+    <string name="allow_null_algorithms_title" msgid="9143076634352979096">"보안 수준이 낮은 연결 허용"</string>
+    <string name="allow_null_algorithms_summary" msgid="5874570357011783211">"일부 위치에서 신호가 개선될 수 있습니다. 긴급 전화의 경우 보안 수준이 낮은 연결도 항상 허용됩니다."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"모든 서비스"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"클립보드 액세스 표시"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"앱이 복사된 텍스트, 이미지 또는 기타 콘텐츠에 액세스할 때 메시지 표시"</string>
@@ -4618,18 +4491,11 @@
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR 코드가 유효한 형식이 아닙니다."</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"eSIM으로 전환"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"eSIM을 다른 기기로 전송"</string>
-    <!-- no translation found for background_install_preference_summary (3065219346519340364) -->
-    <skip />
-    <!-- no translation found for background_install_title (607913515188276168) -->
-    <skip />
-    <!-- no translation found for background_install_summary (3890296129543309666) -->
-    <skip />
-    <!-- no translation found for background_install_feature_list_no_entry (2071343281272266154) -->
-    <skip />
-    <!-- no translation found for background_install_uninstall_button_description (1189649052911501249) -->
-    <skip />
-    <!-- no translation found for background_install_before (8608614957688912715) -->
-    <skip />
-    <!-- no translation found for background_install_after (7983488897570908149) -->
-    <skip />
+    <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{앱 #개}other{앱 #개}}"</string>
+    <string name="background_install_title" msgid="607913515188276168">"백그라운드에서 설치된 앱"</string>
+    <string name="background_install_summary" msgid="3890296129543309666">"기기 제조업체가 백그라운드에서 기기에 앱을 설치하거나 이동통신사 및 기타 파트너의 앱 설치를 허용할 수 있습니다.\n\n기기가 정상적으로 작동하기 위해 여기에 명시된 앱이 꼭 필요하지는 않습니다. 원하지 않는 앱은 제거해도 됩니다."</string>
+    <string name="background_install_feature_list_no_entry" msgid="2071343281272266154">"백그라운드에서 설치된 앱 없음"</string>
+    <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"앱 제거"</string>
+    <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{앱이 지난 #개월 내에 설치됨}other{앱이 지난 #개월 내에 설치됨}}"</string>
+    <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{앱이 설치된 지 #개월 이상 지남}other{앱이 설치된 지 #개월 이상 지남}}"</string>
 </resources>

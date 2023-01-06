@@ -19,6 +19,7 @@ package com.android.settings.regionalpreferences;
 import static org.junit.Assert.assertEquals;
 
 import android.content.Context;
+import android.icu.util.ULocale;
 import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -48,49 +49,57 @@ public class CalendarTypeControllerTest {
 
     @After
     public void tearDown() throws Exception {
-        RegionalPreferenceUtils.setSettingsProviderContent(
+        RegionalPreferenceTestUtils.setSettingsProviderContent(
                 mApplicationContext, mCacheProviderContent);
         Locale.setDefault(mCacheLocale);
     }
 
     @Test
-    public void getSummary_hasProviderValue_resultIsChinese() {
-        RegionalPreferenceUtils.setSettingsProviderContent(
+    public void getSummary_hasProviderValue_resultIsChineseCalendar() {
+        RegionalPreferenceTestUtils.setSettingsProviderContent(
                 mApplicationContext, "und-u-ca-chinese");
 
-        CharSequence type = mController.getSummary();
+        String summary = mController.getSummary().toString();
 
-        assertEquals(LocalePreferences.CalendarType.CHINESE, type.toString());
+        assertEquals(getDisplayKeywordValue(LocalePreferences.CalendarType.CHINESE), summary);
     }
 
     @Test
-    public void getSummary_hasProviderValue_resultIsDangi() {
-        RegionalPreferenceUtils.setSettingsProviderContent(
+    public void getSummary_hasProviderValue_resultIsDangiCalendar() {
+        RegionalPreferenceTestUtils.setSettingsProviderContent(
                 mApplicationContext, "und-u-ca-dangi");
 
-        CharSequence type = mController.getSummary();
+        String summary = mController.getSummary().toString();
 
-        assertEquals(LocalePreferences.CalendarType.DANGI, type.toString());
+        assertEquals(getDisplayKeywordValue(LocalePreferences.CalendarType.DANGI), summary);
     }
 
     @Test
-    public void getSummary_noProviderValueButHasDefaultLocaleWithSubtag_resultIsSat() {
-        RegionalPreferenceUtils.setSettingsProviderContent(mApplicationContext, "");
+    public void getSummary_noProviderValueButHasDefaultLocaleWithSubtag_resultIsChineseCalendar() {
+        RegionalPreferenceTestUtils.setSettingsProviderContent(mApplicationContext, "");
         Locale.setDefault(Locale.forLanguageTag("en-US-u-ca-chinese"));
 
-        CharSequence type = mController.getSummary();
+        String summary = mController.getSummary().toString();
 
-        assertEquals(LocalePreferences.CalendarType.CHINESE, type.toString());
+        assertEquals(getDisplayKeywordValue(LocalePreferences.CalendarType.CHINESE), summary);
     }
 
     @Test
     public void getSummary_noProviderValueAndDefaultLocaleWithoutSubtag_resultIsEmpty() {
-        RegionalPreferenceUtils.setSettingsProviderContent(mApplicationContext, "");
+        RegionalPreferenceTestUtils.setSettingsProviderContent(mApplicationContext, "");
         Locale.setDefault(Locale.forLanguageTag("en-US"));
 
-        CharSequence type = mController.getSummary();
+        String summary = mController.getSummary().toString();
 
         assertEquals(ResourcesUtils.getResourcesString(
-                mApplicationContext, "default_string_of_regional_preference"), type.toString());
+                mApplicationContext, "default_string_of_regional_preference"), summary);
+    }
+
+    private static String getDisplayKeywordValue(String value) {
+        String languageTag = new Locale.Builder()
+                .setUnicodeLocaleKeyword(
+                        RegionalPreferencesFragment.TYPE_CALENDAR, value).build().toLanguageTag();
+        return ULocale.getDisplayKeywordValue(languageTag, "calendar",
+                ULocale.forLocale(Locale.getDefault(Locale.Category.FORMAT)));
     }
 }

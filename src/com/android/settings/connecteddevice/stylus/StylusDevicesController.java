@@ -91,8 +91,7 @@ public class StylusDevicesController extends AbstractPreferenceController implem
             return null;
         }
 
-        // TODO(b/254834764): replace with notes role once merged
-        List<String> roleHolders = rm.getRoleHoldersAsUser(RoleManager.ROLE_ASSISTANT,
+        List<String> roleHolders = rm.getRoleHoldersAsUser(RoleManager.ROLE_NOTES,
                 mContext.getUser());
         if (roleHolders.isEmpty()) {
             return null;
@@ -113,6 +112,7 @@ public class StylusDevicesController extends AbstractPreferenceController implem
         pref.setKey(KEY_DEFAULT_NOTES);
         pref.setTitle(mContext.getString(R.string.stylus_default_notes_app));
         pref.setIcon(R.drawable.ic_article);
+        pref.setOnPreferenceClickListener(this);
         pref.setEnabled(true);
         pref.setSummary(appName);
         return pref;
@@ -148,9 +148,8 @@ public class StylusDevicesController extends AbstractPreferenceController implem
             case KEY_DEFAULT_NOTES:
                 PackageManager pm = mContext.getPackageManager();
                 String packageName = pm.getPermissionControllerPackageName();
-                // TODO(b/254834764): replace with notes role once merged
                 Intent intent = new Intent(Intent.ACTION_MANAGE_DEFAULT_APP).setPackage(
-                        packageName).putExtra(Intent.EXTRA_ROLE_NAME, RoleManager.ROLE_ASSISTANT);
+                        packageName).putExtra(Intent.EXTRA_ROLE_NAME, RoleManager.ROLE_NOTES);
                 mContext.startActivity(intent);
                 break;
             case KEY_HANDWRITING:

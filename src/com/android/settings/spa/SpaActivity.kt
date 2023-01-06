@@ -34,10 +34,7 @@ class SpaActivity : BrowseActivity() {
         @JvmStatic
         fun Context.startSpaActivityForApp(destinationPrefix: String, intent: Intent): Boolean {
             val packageName = intent.data?.schemeSpecificPart ?: return false
-            val userId = intent.getParcelableExtra(Intent.EXTRA_USER_HANDLE, UserHandle::class.java)
-                ?.identifier
-                ?: UserHandle.myUserId()
-            startSpaActivity("$destinationPrefix/$packageName/$userId")
+            startSpaActivity("$destinationPrefix/$packageName/${UserHandle.myUserId()}")
             return true
         }
     }
