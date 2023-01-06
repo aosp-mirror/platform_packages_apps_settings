@@ -16,35 +16,24 @@
 
 package com.android.settings.biometrics.face;
 
-import static com.android.settings.biometrics.BiometricUtils.DEVICE_POSTURE_UNKNOWN;
-import static com.android.settings.biometrics.BiometricUtils.isPostureAllowEnrollment;
-import static com.android.settings.biometrics.BiometricUtils.isPostureGuidanceShowing;
-
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.hardware.face.FaceManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 
-import androidx.annotation.NonNull;
-
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupSkipDialog;
-import com.android.systemui.unfold.compat.ScreenSizeFoldProvider;
-import com.android.systemui.unfold.updates.FoldProvider;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -52,26 +41,19 @@ import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.view.IllustrationVideoView;
 
-/**
- * Provides animated education for users to know how to enroll a face with appropriate posture.
- */
 public class FaceEnrollEducation extends BiometricEnrollBase {
     private static final String TAG = "FaceEducation";
 
     private FaceManager mFaceManager;
     private FaceEnrollAccessibilityToggle mSwitchDiversity;
+
     private boolean mIsUsingLottie;
     private IllustrationVideoView mIllustrationDefault;
     private LottieAnimationView mIllustrationLottie;
     private View mIllustrationAccessibility;
     private Intent mResultIntent;
+    private boolean mNextClicked;
     private boolean mAccessibilityEnabled;
-
-    @VisibleForTesting
-    @BiometricUtils.DevicePostureInt
-    protected int mDevicePostureState = DEVICE_POSTURE_UNKNOWN;
-    @VisibleForTesting
-    protected FoldProvider.FoldCallback mFoldCallback = null;
 
     private final CompoundButton.OnCheckedChangeListener mSwitchDiversityListener =
             new CompoundButton.OnCheckedChangeListener() {
@@ -173,40 +155,6 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     }
 
     @Override
-    protected boolean launchPostureGuidance() {
-        // Visible for testing
-        return super.launchPostureGuidance();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (mPostureGuidanceIntent == null) {
-            Log.d(TAG, "Device do not support posture guidance");
-            return;
-        }
-
-        BiometricUtils.setDevicePosturesAllowEnroll(
-                getResources().getInteger(R.integer.config_face_enroll_supported_posture));
-
-        if (mFoldCallback == null) {
-            mFoldCallback = isFolded -> {
-                mDevicePostureState = isFolded ? BiometricUtils.DEVICE_POSTURE_CLOSED
-                        : BiometricUtils.DEVICE_POSTURE_OPENED;
-                if (BiometricUtils.shouldShowPostureGuidance(mDevicePostureState,
-                        mLaunchedPostureGuidance) && !mNextLaunched) {
-                    launchPostureGuidance();
-                }
-            };
-        }
-
-        if (mScreenSizeFoldProvider == null) {
-            mScreenSizeFoldProvider = new ScreenSizeFoldProvider(getApplicationContext());
-            mScreenSizeFoldProvider.registerCallback(mFoldCallback, getMainExecutor());
-        }
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         mSwitchDiversityListener.onCheckedChanged(mSwitchDiversity.getSwitch(),
@@ -224,8 +172,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
 
     @Override
     protected boolean shouldFinishWhenBackgrounded() {
-        return super.shouldFinishWhenBackgrounded() && !mNextLaunched
-                && !isPostureGuidanceShowing(mDevicePostureState, mLaunchedPostureGuidance);
+        return super.shouldFinishWhenBackgrounded() && !mNextClicked;
     }
 
     @Override
@@ -259,14 +206,13 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
             FaceEnrollAccessibilityDialog dialog = FaceEnrollAccessibilityDialog.newInstance();
             dialog.setPositiveButtonListener((dialog1, which) -> {
                 startActivityForResult(intent, BIOMETRIC_FIND_SENSOR_REQUEST);
-                mNextLaunched = true;
+                mNextClicked = true;
             });
             dialog.show(getSupportFragmentManager(), FaceEnrollAccessibilityDialog.class.getName());
         } else {
             startActivityForResult(intent, BIOMETRIC_FIND_SENSOR_REQUEST);
-            mNextLaunched = true;
+            mNextClicked = true;
         }
-
     }
 
     protected void onSkipButtonClick(View view) {
@@ -278,28 +224,14 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     }
 
     @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        if (mScreenSizeFoldProvider != null && mFoldCallback != null) {
-            mScreenSizeFoldProvider.onConfigurationChange(newConfig);
-        }
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_POSTURE_GUIDANCE) {
-            mLaunchedPostureGuidance = false;
-            if (resultCode == RESULT_CANCELED || resultCode == RESULT_SKIP) {
-                onSkipButtonClick(getCurrentFocus());
-            }
-            return;
-        }
+        super.onActivityResult(requestCode, resultCode, data);
         mResultIntent = data;
         boolean hasEnrolledFace = false;
         if (data != null) {
             hasEnrolledFace = data.getBooleanExtra(EXTRA_FINISHED_ENROLL_FACE, false);
         }
-        if (resultCode == RESULT_TIMEOUT || !isPostureAllowEnrollment(mDevicePostureState)) {
+        if (resultCode == RESULT_TIMEOUT) {
             setResult(resultCode, data);
             finish();
         } else if (requestCode == BIOMETRIC_FIND_SENSOR_REQUEST
@@ -311,8 +243,6 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
                 finish();
             }
         }
-        mNextLaunched = false;
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -332,10 +262,8 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
 
     private void showDefaultIllustration() {
         if (mIsUsingLottie) {
-            mIllustrationLottie.setAnimation(R.raw.face_education_lottie);
             mIllustrationLottie.setVisibility(View.VISIBLE);
             mIllustrationLottie.playAnimation();
-            mIllustrationLottie.setProgress(0f);
         } else {
             mIllustrationDefault.setVisibility(View.VISIBLE);
             mIllustrationDefault.start();

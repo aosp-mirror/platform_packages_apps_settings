@@ -48,7 +48,6 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.core.InstrumentedActivity;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockPattern;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -216,16 +215,11 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 mIsFaceEnrollable =
                         faceManager.getEnrolledFaces(mUserId).size() < maxEnrolls;
 
-                final boolean parentalConsent = isSetupWizard || (mParentalOptionsRequired
+                // exclude face enrollment from setup wizard if configured as a convenience
+                // isSetupWizard is always false for unicorn enrollment, so if consent is
+                // required check if setup has completed instead.
+                final boolean isSettingUp = isSetupWizard || (mParentalOptionsRequired
                         && !WizardManagerHelper.isUserSetupComplete(this));
-                if (parentalConsent && isMultiSensor && mIsFaceEnrollable) {
-                    // Exclude face enrollment from setup wizard if feature config not supported
-                    // in setup wizard flow, we still allow user enroll faces through settings.
-                    mIsFaceEnrollable = FeatureFactory.getFactory(getApplicationContext())
-                            .getFaceFeatureProvider()
-                            .isSetupWizardSupported(getApplicationContext());
-                    Log.d(TAG, "config_suw_support_face_enroll: " + mIsFaceEnrollable);
-                }
             }
         }
         if (mHasFeatureFingerprint) {
