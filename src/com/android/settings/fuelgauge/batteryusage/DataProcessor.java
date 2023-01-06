@@ -1719,6 +1719,7 @@ public final class DataProcessor {
                 batteryDiffData.setTotalConsumePower();
                 batteryDiffData.sortEntries();
                 combineIntoSystemApps(context, batteryDiffData);
+                combineSystemItemsIntoOthers(context, batteryDiffData);
             });
         });
     }
@@ -1741,6 +1742,33 @@ public final class DataProcessor {
             if (hideBackgroundUsageTimeSet.contains(packageName)) {
                 entry.mBackgroundUsageTimeInMs = 0;
             }
+        }
+    }
+
+    private static void combineSystemItemsIntoOthers(
+            final Context context, final BatteryDiffData batteryDiffData) {
+        final Set<Integer> othersSystemComponentSet =
+                FeatureFactory.getFactory(context)
+                        .getPowerUsageFeatureProvider(context)
+                        .getOthersSystemComponentSet(context);
+
+        BatteryDiffEntry.OthersBatteryDiffEntry othersDiffEntry = null;
+        final Iterator<BatteryDiffEntry> systemListIterator =
+                batteryDiffData.getSystemDiffEntryList().iterator();
+        while (systemListIterator.hasNext()) {
+            final BatteryDiffEntry batteryDiffEntry = systemListIterator.next();
+            if (othersSystemComponentSet.contains(batteryDiffEntry.mBatteryHistEntry.mDrainType)) {
+                if (othersDiffEntry == null) {
+                    othersDiffEntry = new BatteryDiffEntry.OthersBatteryDiffEntry(context);
+                }
+                othersDiffEntry.mConsumePower += batteryDiffEntry.mConsumePower;
+                othersDiffEntry.setTotalConsumePower(
+                        batteryDiffEntry.getTotalConsumePower());
+                systemListIterator.remove();
+            }
+        }
+        if (othersDiffEntry != null) {
+            batteryDiffData.getSystemDiffEntryList().add(othersDiffEntry);
         }
     }
 

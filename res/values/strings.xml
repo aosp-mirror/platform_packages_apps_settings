@@ -371,6 +371,26 @@
     <string name="numbers_preferences_title">Numbers</string>
     <!-- The summary of default string for each regional preference. [CHAR LIMIT=50] -->
     <string name="default_string_of_regional_preference">[No preference]</string>
+    <!-- The title of Celsius for preference of temperature unit. [CHAR LIMIT=50] -->
+    <string name="celsius_temperature_unit">Celsius</string>
+    <!-- The title of Fahrenheit for preference of temperature unit. [CHAR LIMIT=50] -->
+    <string name="fahrenheit_temperature_unit">Fahrenheit</string>
+    <!-- The title of Kevin for preference of temperature unit. [CHAR LIMIT=50] -->
+    <string name="kevin_temperature_unit">Kevin</string>
+    <!-- The title of sunday for preference of first day of week. [CHAR LIMIT=50] -->
+    <string name="sunday_first_day_of_week">Sunday</string>
+    <!-- The title of monday for preference of first day of week. [CHAR LIMIT=50] -->
+    <string name="monday_first_day_of_week">Monday</string>
+    <!-- The title of tuesday for preference of first day of week. [CHAR LIMIT=50] -->
+    <string name="tuesday_first_day_of_week">Tuesday</string>
+    <!-- The title of wednesday for preference of first day of week. [CHAR LIMIT=50] -->
+    <string name="wednesday_first_day_of_week">Wednesday</string>
+    <!-- The title of thursday for preference of first day of week. [CHAR LIMIT=50] -->
+    <string name="thursday_first_day_of_week">Thursday</string>
+    <!-- The title of friday for preference of first day of week. [CHAR LIMIT=50] -->
+    <string name="friday_first_day_of_week">Friday</string>
+    <!-- The title of saturday for preference of first day of week. [CHAR LIMIT=50] -->
+    <string name="saturday_first_day_of_week">Saturday</string>
 
     <!-- The title of the confirmation dialog shown when the user selects one / several languages and tries to remove them [CHAR LIMIT=60] -->
     <string name="dlg_remove_locales_title">{count, plural,
@@ -1034,8 +1054,6 @@
     <string name="fingerprint_unlock_set_unlock_password">Fingerprint + Password</string>
     <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
     <string name="fingerprint_unlock_skip_fingerprint">Continue without fingerprint</string>
-    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
-    <string name="fingerprint_unlock_title">You can unlock your phone using your fingerprint. For security, this option requires a backup screen lock.</string>
 
     <!-- Title for preference that guides the user through creating a backup unlock pattern for Face Unlock [CHAR LIMIT=45]-->
     <string name="face_unlock_set_unlock_pattern">Face Unlock + Pattern</string>
@@ -1045,8 +1063,6 @@
     <string name="face_unlock_set_unlock_password">Face Unlock + Password</string>
     <!-- Title for preference that guides the user to skip Face Unlock setup [CHAR LIMIT=60]-->
     <string name="face_unlock_skip_face">Continue without Face Unlock</string>
-    <!-- Message shown in screen lock picker while setting up the new screen lock with face unlock option. [CHAR LIMIT=NONE] -->
-    <string name="face_unlock_title">You can unlock your phone using your face. For security, this option requires a backup screen lock.</string>
 
     <!-- Title for preference that guides the user through creating a backup unlock pattern for biometrics unlock [CHAR LIMIT=45]-->
     <string name="biometrics_unlock_set_unlock_pattern">Pattern \u2022 Face \u2022 Fingerprint</string>
@@ -1056,8 +1072,6 @@
     <string name="biometrics_unlock_set_unlock_password">Password \u2022 Face \u2022 Fingerprint</string>
     <!-- Title for preference that guides the user to skip face unlock setup [CHAR LIMIT=60]-->
     <string name="biometrics_unlock_skip_biometrics">Continue without face or fingerprint</string>
-    <!-- Message shown in screen lock picker while setting up the new screen lock with biometrics option. [CHAR LIMIT=NONE] -->
-    <string name="biometrics_unlock_title">You can unlock your phone using your face or fingerprint. For security, this option requires a backup screen lock.</string>
 
     <!-- Summary for "Configure lockscreen" when lock screen is off [CHAR LIMIT=45] -->
     <string name="unlock_set_unlock_mode_off">None</string>
@@ -5067,6 +5081,8 @@
     <string name="battery_usage_without_time"></string>
    <!-- Description for system apps aggregated battery usage data [CHAR LIMIT=120] -->
     <string name="battery_usage_system_apps">System apps</string>
+    <!-- Description for others battery usage data [CHAR LIMIT=120] -->
+    <string name="battery_usage_others">Others</string>
 
     <!-- Description for battery time left, i.e. 50min Estimated time left. [CHAR LIMIT=80]-->
     <string name="estimated_time_left">Estimated time left</string>

@@ -17,14 +17,11 @@
 package com.android.settings.spa.app.backgroundinstall
 
 import android.content.Context
-import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.IBackgroundInstallControlService
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.ParceledListSlice
-import android.net.Uri
-import android.os.UserHandle
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
@@ -73,9 +70,6 @@ class BackgroundInstalledAppsPageProviderTest {
 
     private var packageInfoFlagsCaptor =
         ArgumentCaptor.forClass(PackageManager.PackageInfoFlags::class.java)
-
-    private var intentCaptor =
-        ArgumentCaptor.forClass(Intent::class.java)
 
     private val fakeNavControllerWrapper = FakeNavControllerWrapper()
 
@@ -175,26 +169,6 @@ class BackgroundInstalledAppsPageProviderTest {
 
         Truth.assertThat(fakeNavControllerWrapper.navigateCalledWith)
             .isEqualTo("AppInfoSettings/package.name/0")
-    }
-
-    @Suppress
-    @OptIn(ExperimentalCoroutinesApi::class)
-    @Test
-    fun startUninstallActivity_success() = runTest {
-        val expectedPackageUri = Uri.parse("package:package.name")
-        val mockUserHandle = UserHandle(0)
-        Mockito.`when`(mockContext.user).thenReturn(mockUserHandle)
-        Mockito.`when`(mockContext.startActivityAsUser(
-            intentCaptor.capture(),
-            eq(mockUserHandle)
-        )).then {  }
-
-        startUninstallActivity(mockContext, TEST_PACKAGE_NAME)
-
-        Truth.assertThat(intentCaptor.value.action).isEqualTo(Intent.ACTION_UNINSTALL_PACKAGE)
-        Truth.assertThat(intentCaptor.value.data).isEqualTo(expectedPackageUri)
-        Truth.assertThat(intentCaptor.value.extras?.getBoolean(Intent.EXTRA_UNINSTALL_ALL_USERS))
-            .isEqualTo(false)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)

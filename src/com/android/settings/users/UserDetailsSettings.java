@@ -308,8 +308,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             mSwitchUserPref.setOnPreferenceClickListener(this);
         }
         //TODO(b/261700461): remove preference for supervised user
-        //TODO(b/262371063): check whether multiple admins allowed, not for HSUM
-        if (mUserInfo.isMain() || mUserInfo.isGuest() || !UserManager.isHeadlessSystemUserMode()) {
+        if (mUserInfo.isMain() || mUserInfo.isGuest() || !UserManager.isMultipleAdminEnabled()) {
             removePreference(KEY_GRANT_ADMIN);
         }
         if (!mUserManager.isAdminUser()) { // non admin users can't remove users and allow calls

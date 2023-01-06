@@ -22,11 +22,11 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.UserHandle
 import android.util.Log
 import androidx.compose.runtime.Composable
 import com.android.settings.overlay.FeatureFactory
+import com.android.settings.spa.app.startUninstallActivity
 import com.android.settingslib.spa.framework.compose.LocalNavController
 import com.android.settingslib.spaprivileged.framework.common.activityManager
 import com.android.settingslib.spaprivileged.framework.common.asUser
@@ -116,11 +116,7 @@ class PackageInfoPresenter(
     /** Starts the uninstallation activity. */
     fun startUninstallActivity(forAllUsers: Boolean = false) {
         logAction(SettingsEnums.ACTION_SETTINGS_UNINSTALL_APP)
-        val packageUri = Uri.parse("package:${packageName}")
-        val intent = Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri).apply {
-            putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, forAllUsers)
-        }
-        context.startActivityAsUser(intent, userHandle)
+        context.startUninstallActivity(packageName, userHandle, forAllUsers)
     }
 
     /** Clears this instant app. */

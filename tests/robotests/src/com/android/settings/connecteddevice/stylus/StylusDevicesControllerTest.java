@@ -99,8 +99,7 @@ public class StylusDevicesControllerTest {
         when(mContext.getSystemService(RoleManager.class)).thenReturn(mRm);
         doNothing().when(mContext).startActivity(any());
 
-        // TODO(b/254834764): notes role placeholder
-        when(mRm.getRoleHoldersAsUser(eq(RoleManager.ROLE_ASSISTANT), any(UserHandle.class)))
+        when(mRm.getRoleHoldersAsUser(eq(RoleManager.ROLE_NOTES), any(UserHandle.class)))
                 .thenReturn(Collections.singletonList(NOTES_PACKAGE_NAME));
         when(mContext.getPackageManager()).thenReturn(mPm);
         when(mPm.getApplicationInfo(eq(NOTES_PACKAGE_NAME),
@@ -237,8 +236,7 @@ public class StylusDevicesControllerTest {
 
     @Test
     public void defaultNotesPreference_noRoleHolder_hidesNotesRoleApp() {
-        // TODO(b/254834764): replace with notes role once merged
-        when(mRm.getRoleHoldersAsUser(eq(RoleManager.ROLE_ASSISTANT), any(UserHandle.class)))
+        when(mRm.getRoleHoldersAsUser(eq(RoleManager.ROLE_NOTES), any(UserHandle.class)))
                 .thenReturn(Collections.emptyList());
         showScreen(mController);
 
@@ -258,14 +256,13 @@ public class StylusDevicesControllerTest {
         showScreen(mController);
         Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
         mController.onPreferenceClick(defaultNotesPref);
-        verify(mContext).startActivity(captor.capture());
 
+        verify(mContext).startActivity(captor.capture());
         Intent intent = captor.getValue();
         assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MANAGE_DEFAULT_APP);
         assertThat(intent.getPackage()).isEqualTo(permissionPackageName);
-        // TODO(b/254834764): when notes role is merged
         assertThat(intent.getStringExtra(Intent.EXTRA_ROLE_NAME)).isEqualTo(
-                RoleManager.ROLE_ASSISTANT);
+                RoleManager.ROLE_NOTES);
     }
 
     @Test

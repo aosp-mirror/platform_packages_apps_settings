@@ -684,11 +684,11 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    public void initialize_userSelected_shouldShowGrantAdminPref_HSUM() {
+    public void initialize_userSelected_shouldShowGrantAdminPref_MultipleAdminEnabled() {
         setupSelectedUser();
-        ShadowUserManager.setIsHeadlessSystemUserMode(true);
+        ShadowUserManager.setIsMultipleAdminEnabled(true);
         mFragment.initialize(mActivity, mArguments);
-        assertTrue(UserManager.isHeadlessSystemUserMode());
+        assertTrue(UserManager.isMultipleAdminEnabled());
         verify(mFragment, never()).removePreference(KEY_GRANT_ADMIN);
     }
 
@@ -700,17 +700,17 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    public void initialize_mainUserSelected_shouldShowGrantAdminPref_HSUM() {
+    public void initialize_mainUserSelected_shouldShowGrantAdminPref_MultipleAdminEnabled() {
         setupSelectedMainUser();
-        ShadowUserManager.setIsHeadlessSystemUserMode(true);
+        ShadowUserManager.setIsMultipleAdminEnabled(true);
         mFragment.initialize(mActivity, mArguments);
         verify(mFragment).removePreference(KEY_GRANT_ADMIN);
     }
 
     @Test
-    public void initialize_guestSelected_shouldNotShowGrantAdminPref_HSUM() {
+    public void initialize_guestSelected_shouldNotShowGrantAdminPref_MultipleAdminEnabled() {
         setupSelectedGuest();
-        ShadowUserManager.setIsHeadlessSystemUserMode(true);
+        ShadowUserManager.setIsMultipleAdminEnabled(true);
         mFragment.initialize(mActivity, mArguments);
         verify(mFragment).removePreference(KEY_GRANT_ADMIN);
     }

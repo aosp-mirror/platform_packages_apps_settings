@@ -153,6 +153,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public Set<Integer> getOthersSystemComponentSet(Context context) {
+        return new ArraySet<>();
+    }
+
+    @Override
     public Set<Integer> getHideSystemComponentSet(Context context) {
         return new ArraySet<>();
     }

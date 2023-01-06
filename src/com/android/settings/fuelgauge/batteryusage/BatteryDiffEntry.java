@@ -435,4 +435,45 @@ public class BatteryDiffEntry {
             return false;
         }
     }
+
+    /** Specific battery diff entry for others. */
+    static class OthersBatteryDiffEntry extends BatteryDiffEntry {
+        OthersBatteryDiffEntry(Context context) {
+            super(context,
+                    /*foregroundUsageTimeInMs=*/ 0,
+                    /*backgroundUsageTimeInMs=*/ 0,
+                    /*screenOnTimeInMs=*/ 0,
+                    /*consumePower=*/ 0,
+                    /*foregroundUsageConsumePower=*/ 0,
+                    /*foregroundServiceUsageConsumePower=*/ 0,
+                    /*backgroundUsageConsumePower=*/ 0,
+                    /*cachedUsageConsumePower=*/ 0,
+                    new BatteryHistEntry(new ContentValues()));
+        }
+
+        @Override
+        public String getKey() {
+            return "S|Others";
+        }
+
+        @Override
+        public String getAppLabel() {
+            return mContext.getString(R.string.battery_usage_others);
+        }
+
+        @Override
+        public Drawable getAppIcon() {
+            return mContext.getDrawable(R.drawable.ic_settings_ethernet);
+        }
+
+        @Override
+        public boolean validForRestriction() {
+            return false;
+        }
+
+        @Override
+        public boolean isSystemEntry() {
+            return true;
+        }
+    }
 }

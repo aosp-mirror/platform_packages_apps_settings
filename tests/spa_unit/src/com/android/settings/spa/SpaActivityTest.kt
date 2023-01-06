@@ -57,7 +57,6 @@ class SpaActivityTest {
     fun startSpaActivityForApp() {
         val intent = Intent().apply {
             data = Uri.parse("package:$PACKAGE_NAME")
-            putExtra(Intent.EXTRA_USER_HANDLE, UserHandle.of(USER_ID))
         }
 
         context.startSpaActivityForApp(DESTINATION, intent)
@@ -67,12 +66,11 @@ class SpaActivityTest {
         val capturedIntent = intentCaptor.value
         assertThat(capturedIntent.component?.className).isEqualTo(SpaActivity::class.qualifiedName)
         assertThat(capturedIntent.getStringExtra(KEY_DESTINATION))
-            .isEqualTo("Destination/package.name/1")
+            .isEqualTo("Destination/package.name/${UserHandle.myUserId()}")
     }
 
     private companion object {
         const val DESTINATION = "Destination"
         const val PACKAGE_NAME = "package.name"
-        const val USER_ID = 1
     }
 }
