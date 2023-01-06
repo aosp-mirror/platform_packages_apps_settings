@@ -119,6 +119,7 @@
             android:fragment="com.android.settings.notification.zen.ZenModeSettings"
             settings:controller="com.android.settings.notification.zen.ZenModePreferenceController"
         />
+
         <SwitchPreference
             android:key="lock_screen_show_only_unseen_notifs"
             android:order="18"
@@ -126,6 +127,15 @@
             android:summary="@string/unseen_notifs_lock_screen_summary"
             settings:controller="com.android.settings.notification.ShowOnlyUnseenNotificationsOnLockscreenPreferenceController"
         />
+
+        <Preference
+            android:fragment="com.android.settings.accessibility.FlashNotificationsPreferenceFragment"
+            android:key="flash_notifications_preference"
+            android:order="18"
+            android:persistent="false"
+            android:title="@string/flash_notifications_title"
+            settings:controller="com.android.settings.accessibility.FlashNotificationsPreferenceController" />
+
         <com.android.settingslib.RestrictedPreference
             android:key="app_and_notif_cell_broadcast_settings"
             android:order="19"
