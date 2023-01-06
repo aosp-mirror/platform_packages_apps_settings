@@ -853,7 +853,7 @@
             android:exported="true"
             android:label="@string/long_background_tasks_label">
             <intent-filter android:priority="1">
-                <action android:name="android.settings.MANAGE_APP_LONG_JOBS" />
+                <action android:name="android.settings.MANAGE_APP_LONG_RUNNING_JOBS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -869,7 +869,7 @@
             android:exported="true"
             android:label="@string/long_background_tasks_label">
             <intent-filter android:priority="1">
-                <action android:name="android.settings.MANAGE_APP_LONG_JOBS" />
+                <action android:name="android.settings.MANAGE_APP_LONG_RUNNING_JOBS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
             </intent-filter>

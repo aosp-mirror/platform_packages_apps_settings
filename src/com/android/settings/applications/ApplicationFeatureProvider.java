@@ -93,6 +93,12 @@ public interface ApplicationFeatureProvider {
     }
 
     /**
+     * @return {@code true} if the device supports the toggling of the long background task
+     * permission.
+     */
+    boolean isLongBackgroundTaskPermissionToggleSupported();
+
+    /**
      * Callback that receives the number of packages installed on the device.
      */
     interface NumberOfAppsCallback {
