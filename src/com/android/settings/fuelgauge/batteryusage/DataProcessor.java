@@ -1792,6 +1792,8 @@ public final class DataProcessor {
                     systemAppsDiffEntry = new BatteryDiffEntry.SystemAppsBatteryDiffEntry(context);
                 }
                 systemAppsDiffEntry.mConsumePower += batteryDiffEntry.mConsumePower;
+                systemAppsDiffEntry.mForegroundUsageTimeInMs +=
+                        batteryDiffEntry.mForegroundUsageTimeInMs;
                 systemAppsDiffEntry.setTotalConsumePower(
                         batteryDiffEntry.getTotalConsumePower());
                 appListIterator.remove();
