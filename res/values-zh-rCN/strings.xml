@@ -828,8 +828,8 @@
     <string name="bluetooth_pin_values_hint" msgid="2753202519050044670">"通常为 0000 或 1234"</string>
     <string name="bluetooth_pin_values_hint_16_digits" msgid="5603928271430883558">"必须为 16 位数字"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"您可能还需要在另一设备上输入此PIN码。"</string>
-    <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"您可能还需要在另一台设备上输入此密钥。"</string>
-    <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"要与以下设备配对：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;请确保其显示的配对密钥为：&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"您可能还需要在另一台设备上输入此通行密钥。"</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"要与以下设备配对：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;请确保其显示的通行密钥为：&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"确认与协调组配对"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"来自：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;要与此设备配对吗？"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"要与 <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> 设备配对，请在该设备上键入：<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>，然后按回车键。"</string>
@@ -3038,7 +3038,7 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"从存储设备安装证书"</string>
     <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"从SD卡安装证书"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"清除凭据"</string>
-    <string name="credentials_reset_summary" msgid="5400585520572874255">"删除所有证书"</string>
+    <string name="credentials_reset_summary" msgid="5400585520572874255">"移除所有证书"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"信任的凭据"</string>
     <string name="trusted_credentials_summary" msgid="345822338358409468">"显示信任的 CA 证书"</string>
     <string name="user_credentials" msgid="4044405430790970775">"用户凭据"</string>
@@ -3579,7 +3579,7 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"蓝牙、Android Auto、NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"蓝牙、Android Auto"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"无法使用，因为 NFC 已关闭"</string>
-    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"先安装付款应用，然后才能使用触碰付款功能"</string>
+    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"先安装付款应用，然后才能使用感应式付款功能"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"应用和通知"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"最近使用的应用、默认应用"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"工作资料中的应用无法访问通知。"</string>
@@ -3685,7 +3685,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, 高级通话, 5g 通话, advanced calling, 5g calling"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"添加语言, 添加一种语言"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"文字大小, 大字版, 大字体, 大文字, 弱视, 放大文字, 字体放大工具, 字体放大, text size, large print, large font, large text, low vision, make text bigger, font enlarger, font enlargement"</string>
-    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"显示屏始终保持开启状态"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"屏幕常亮"</string>
     <string name="default_sound" msgid="6604374495015245195">"默认铃声"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"铃声和通知音量为 <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"音量、振动、勿扰"</string>
@@ -4051,7 +4051,7 @@
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 助手服务"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"没有任何已安装的应用请求以 VR 助手服务的形式运行。"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"允许<xliff:g id="SERVICE">%1$s</xliff:g>访问 VR 服务吗？"</string>
-    <string name="vr_listener_security_warning_summary" msgid="1888843557687017791">"只有当您在虚拟实境模式下使用应用时，才能运行<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g>。"</string>
+    <string name="vr_listener_security_warning_summary" msgid="1888843557687017791">"只有当您在虚拟现实模式下使用应用时，才能运行<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g>。"</string>
     <string name="display_vr_pref_title" msgid="4850474436291113569">"当设备处于 VR 模式时"</string>
     <string name="display_vr_pref_low_persistence" msgid="7039841277157739871">"减少模糊（建议）"</string>
     <string name="display_vr_pref_off" msgid="4008841566387432721">"减少闪烁"</string>
@@ -4607,7 +4607,7 @@
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"允许应用管理媒体"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"如果允许，此应用可以直接修改或删除通过其他应用创建的媒体文件，无需事先征得您的同意。应用必须有访问文件和媒体的权限。"</string>
     <string name="keywords_media_management_apps" msgid="7499959607583088690">"媒体, 文件, 管理, 管理器, 编辑, 编辑器, 应用, 程序, Media, File, Management, Manager, Manage, Edit, Editor, App, Application, Program"</string>
-    <string name="keywords_vr_listener" msgid="902737490270081131">"vr 虚拟实境 监听器 立体 助手服务"</string>
+    <string name="keywords_vr_listener" msgid="902737490270081131">"vr 虚拟现实 监听器 立体 助手服务"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"显示在其他应用的上层"</string>
     <string name="system_alert_window_summary" msgid="1435856750594492891">"<xliff:g id="COUNT_0">%1$d</xliff:g> 个（共 <xliff:g id="COUNT_1">%2$d</xliff:g> 个）应用可以显示在其他应用的上层"</string>
     <string name="filter_overlay_apps" msgid="2483998217116789206">"具有该权限的应用"</string>
@@ -5160,7 +5160,7 @@
     <string name="input_method_category" msgid="2252659253631639005">"输入法"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"触控笔手写功能"</string>
     <string name="stylus_handwriting_summary" msgid="6333425895172696950">"启用后，如果焦点位于编辑器，当前输入法将接收触控笔的 MotionEvent 对象。"</string>
-    <string name="device_theme" msgid="5027604586494772471">"设备主题背景"</string>
+    <string name="device_theme" msgid="5027604586494772471">"设备主题"</string>
     <string name="default_theme" msgid="4815428567082263639">"默认"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"网络名称"</string>
     <string name="show_operator_name_summary" msgid="5352696579216501773">"在状态栏中显示网络名称"</string>

@@ -482,7 +482,7 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Usando seu rosto"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Usando sua impressão digital"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Usando seu rosto ou sua impressão digital"</string>
-    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Entregue o smartphone ao seu pai/mãe"</string>
+    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Entregue o smartphone ao seu familiar responsável"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Pular bloqueio de tela?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Os recursos de proteção do dispositivo não serão ativados. Você não poderá impedir que outras pessoas usem este tablet se ele for perdido, roubado ou redefinido."</string>
@@ -519,9 +519,7 @@
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Coloque a lateral direita do dedo"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Coloque a lateral da sua impressão digital no sensor e mantenha o dedo parado por alguns instantes. Depois, mude para o outro lado"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Isso ajuda na captura da sua impressão digital"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
-    <skip />
+    <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Cadastro de impressão digital em <xliff:g id="PERCENTAGE">%d</xliff:g>%%"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Impressão digital adicionada"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"O Desbloqueio por impressão digital melhora sempre que é usado para desbloquear o tablet ou confirmar sua identidade em apps"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"O Desbloqueio por impressão digital melhora sempre que é usado para desbloquear o dispositivo ou confirmar sua identidade em apps"</string>
@@ -4680,7 +4678,7 @@
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"Não é possível abrir este app"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Configuração bloqueada pelo provedor de crédito"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Consentimento necessário"</string>
-    <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Para iniciar a configuração, entregue o smartphone ao seu pai/mãe"</string>
+    <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Para iniciar a configuração, entregue o smartphone ao seu familiar responsável"</string>
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Se você tiver perguntas, entre em contato com o administrador de TI"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Mais detalhes"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Seu administrador pode monitorar e gerenciar apps e dados associados ao seu perfil de trabalho, incluindo configurações, permissões, acesso corporativo, atividade de rede e informações de local do dispositivo."</string>
@@ -5000,7 +4998,7 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="8045017109714463041">"Conecte-se à Internet primeiro"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="7425519481227423860">"Conecte-se à Internet ou entre em contato com sua operadora"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="168124660162907358">"Indisponível em dispositivos bloqueados pela operadora"</string>
-    <string name="oem_lock_info_message" msgid="8843145669619429197">"Reinicie o dispositivo para ativar o recurso de proteção para dispositivo."</string>
+    <string name="oem_lock_info_message" msgid="8843145669619429197">"Reinicie o aparelho para ativar o recurso de proteção do dispositivo."</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="706230592123831676">"Total de <xliff:g id="SIZE">%1$s</xliff:g> disponibilizado\n\nÚltima execução em <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="web_action_enable_title" msgid="6654581786741216382">"Apps instantâneos"</string>
     <string name="web_action_enable_summary" msgid="2658930257777545990">"Abrir links em apps, mesmo que eles não estejam instalados"</string>
@@ -5532,8 +5530,8 @@
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Padrão do sistema"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Essa opção não é mais válida. Tente novamente."</string>
     <string name="quick_controls_lower" msgid="6675573610027367819">"controles do dispositivo"</string>
-    <string name="cards_passes_sentence" msgid="1866311782387946944">"Cartões e passes"</string>
-    <string name="cards_passes_lower" msgid="2429722007109957877">"cartões e passes"</string>
+    <string name="cards_passes_sentence" msgid="1866311782387946944">"Cartões de pagamento e de transporte"</string>
+    <string name="cards_passes_lower" msgid="2429722007109957877">"cartões e tickets"</string>
     <string name="power_menu_setting_name" msgid="7291642927216934159">"Aperte e mantenha pressionado o botão liga/desliga"</string>
     <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Aperte o botão e o mantenha pressionado para abrir o Google Assistente"</string>
     <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Aperte o botão e o mantenha pressionado para abrir o menu liga/desliga"</string>
@@ -5762,7 +5760,7 @@
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Mostrar outras informações"</string>
     <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"Mostrar horário, data, clima, qualidade do ar e detalhes do Cast no protetor de tela"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Mais configurações"</string>
-    <string name="dream_setup_title" msgid="2458303874255396142">"Escolher o protetor de tela"</string>
+    <string name="dream_setup_title" msgid="2458303874255396142">"Escolha o protetor de tela"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Escolha o que ver na tela quando o tablet estiver na base. O dispositivo pode consumir mais energia quando o protetor de tela é usado."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Personalizar"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"É necessário reiniciar o dispositivo para ativar o suporte ao formato livre."</string>
