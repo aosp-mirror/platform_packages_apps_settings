@@ -31,6 +31,7 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.view.accessibility.AccessibilityManager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -110,6 +111,11 @@ public class AccessibilitySettings extends DashboardFragment {
     private final PackageMonitor mSettingsPackageMonitor = new PackageMonitor() {
         @Override
         public void onPackageAdded(String packageName, int uid) {
+            sendUpdate();
+        }
+
+        @Override
+        public void onPackageModified(@NonNull String packageName) {
             sendUpdate();
         }
 
