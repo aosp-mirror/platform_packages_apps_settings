@@ -4405,6 +4405,22 @@
                 android:value="true" />
         </activity>
 
+        <activity
+            android:name="Settings$StylusUsiDetailsActivity"
+            android:label="@string/stylus_device_details_title"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.STYLUS_USI_DETAILS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.connecteddevice.stylus.StylusUsiDetailsFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_connected_devices"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
         <activity android:name=".panel.SettingsPanelActivity"
             android:label="@string/settings_panel_title"
             android:theme="@style/Theme.Panel"

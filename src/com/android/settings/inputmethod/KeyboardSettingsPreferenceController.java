@@ -50,6 +50,10 @@ public class KeyboardSettingsPreferenceController extends BasePreferenceControll
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
+        if (!getPreferenceKey().equals(preference.getKey())) {
+            return false;
+        }
+
         final Intent intent = new Intent(Settings.ACTION_HARD_KEYBOARD_SETTINGS);
         intent.setClass(mContext, PhysicalKeyboardActivity.class);
         intent.putExtra(PhysicalKeyboardFragment.EXTRA_BT_ADDRESS, mCachedDevice.getAddress());
