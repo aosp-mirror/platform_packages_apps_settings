@@ -1826,8 +1826,7 @@ public final class DataProcessor {
         if (appEntry == null || appEntry.info == null) {
             return false;
         }
-        return !ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER_AND_INSTANT.filterApp(
-                appEntry);
+        return ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER_AND_INSTANT.filterApp(appEntry);
     }
 
     private static boolean shouldShowBatteryAttributionList(final Context context) {
