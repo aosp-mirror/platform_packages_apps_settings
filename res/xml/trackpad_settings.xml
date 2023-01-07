@@ -32,6 +32,7 @@
         android:key="trackpad_tap_to_click"
         android:title="@string/trackpad_tap_to_click"
         android:icon="@drawable/ic_trackpad_tap_to_click"
+        settings:controller="com.android.settings.inputmethod.TrackpadTapToClickPreferenceController"
         android:order="10"/>
 
     <SwitchPreference
@@ -39,6 +40,7 @@
         android:title="@string/trackpad_reverse_scrolling_title"
         android:summary="@string/trackpad_reverse_scrolling_summary"
         android:icon="@drawable/ic_trackpad_reverse_scrolling"
+        settings:controller="com.android.settings.inputmethod.TrackpadReverseScrollingPreferenceController"
         android:order="20"/>
 
     <SwitchPreference
@@ -46,6 +48,7 @@
         android:title="@string/trackpad_bottom_right_tap_title"
         android:summary="@string/trackpad_bottom_right_tap_summary"
         android:icon="@drawable/ic_trackpad_reverse_scrolling"
+        settings:controller="com.android.settings.inputmethod.TrackpadBottomPreferenceController"
         android:order="30"/>
 
     <com.android.settings.widget.SeekBarPreference
@@ -54,9 +57,7 @@
         android:icon="@drawable/ic_trackpad_pointer_speed"
         android:order="40"
         android:selectable="false"
-        android:max="100"
-        android:min="0"
-        android:defaultValue="50"/>
+        settings:controller="com.android.settings.inputmethod.TrackpadPointerSpeedPreferenceController"/>
 
     <com.android.settingslib.widget.ButtonPreference
         android:key="trackpad_touch_gesture"
