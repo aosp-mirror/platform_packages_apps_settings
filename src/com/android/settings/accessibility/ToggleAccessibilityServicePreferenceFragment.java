@@ -32,7 +32,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
-import android.content.pm.ServiceInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -283,22 +282,10 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         mPackageRemovedReceiver = null;
     }
 
-    private boolean isServiceSupportAccessibilityButton() {
-        final AccessibilityManager ams = getPrefContext().getSystemService(
-                AccessibilityManager.class);
-        final List<AccessibilityServiceInfo> services = ams.getInstalledAccessibilityServiceList();
-
-        for (AccessibilityServiceInfo info : services) {
-            if ((info.flags & AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON) != 0) {
-                ServiceInfo serviceInfo = info.getResolveInfo().serviceInfo;
-                if (serviceInfo != null && TextUtils.equals(serviceInfo.name,
-                        getAccessibilityServiceInfo().getResolveInfo().serviceInfo.name)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
+    boolean serviceSupportsAccessibilityButton() {
+        final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+        return info != null
+                && (info.flags & AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON) != 0;
     }
 
     private void handleConfirmServiceEnabled(boolean confirmed) {
@@ -449,7 +436,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     private void onAllowButtonFromEnableToggleClicked() {
         handleConfirmServiceEnabled(/* confirmed= */ true);
-        if (isServiceSupportAccessibilityButton()) {
+        if (serviceSupportsAccessibilityButton()) {
             mIsDialogShown.set(false);
             showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
         }
@@ -524,7 +511,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 showPopupDialog(DialogEnums.ENABLE_WARNING_FROM_TOGGLE);
             } else {
                 handleConfirmServiceEnabled(/* confirmed= */ true);
-                if (isServiceSupportAccessibilityButton()) {
+                if (serviceSupportsAccessibilityButton()) {
                     showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
                 }
             }
