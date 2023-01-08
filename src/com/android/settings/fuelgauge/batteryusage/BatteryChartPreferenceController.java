@@ -88,6 +88,19 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 BatteryDiffData slotUsageData, String slotTimestamp, boolean isAllUsageDataEmpty);
     }
 
+    /**
+     * A callback listener for the device screen on time is updated.
+     * This happens when screen on time data is ready or the selected index is changed.
+     */
+    public interface OnScreenOnTimeUpdatedListener {
+        /**
+         * The callback function for the device screen on time is updated.
+         * @param screenOnTime The selected slot device screen on time.
+         * @param slotTimestamp The selected slot timestamp information.
+         */
+        void onScreenOnTimeUpdated(Long screenOnTime, String slotTimestamp);
+    }
+
     @VisibleForTesting
     Context mPrefContext;
     @VisibleForTesting
@@ -100,6 +113,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     int mHourlyChartIndex = BatteryChartViewModel.SELECTED_INDEX_ALL;
     @VisibleForTesting
     Map<Integer, Map<Integer, BatteryDiffData>> mBatteryUsageMap;
+    @VisibleForTesting
+    Map<Integer, Map<Integer, Long>> mScreenOnTimeMap;
 
     private boolean mIs24HourFormat;
     private boolean mHourlyChartVisible = true;
@@ -108,6 +123,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private BatteryChartViewModel mDailyViewModel;
     private List<BatteryChartViewModel> mHourlyViewModels;
     private OnBatteryUsageUpdatedListener mOnBatteryUsageUpdatedListener;
+    private OnScreenOnTimeUpdatedListener mOnScreenOnTimeUpdatedListener;
 
     private final SettingsActivity mActivity;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -202,6 +218,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         mOnBatteryUsageUpdatedListener = listener;
     }
 
+    void setOnScreenOnTimeUpdatedListener(OnScreenOnTimeUpdatedListener listener) {
+        mOnScreenOnTimeUpdatedListener = listener;
+    }
+
     void setBatteryHistoryMap(
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
         Log.d(TAG, "setBatteryHistoryMap() " + (batteryHistoryMap == null ? "null"
@@ -212,6 +232,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 DataProcessManager.getBatteryLevelData(mContext, mHandler, batteryHistoryMap,
                         batteryCallbackData -> {
                             mBatteryUsageMap = batteryCallbackData.getBatteryUsageMap();
+                            mScreenOnTimeMap = batteryCallbackData.getDeviceScreenOnTime();
                             refreshUi();
                         });
         Log.d(TAG, "getBatteryLevelData: " + batteryLevelData);
@@ -318,7 +339,12 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             return false;
         }
 
-
+        if (mOnScreenOnTimeUpdatedListener != null && mScreenOnTimeMap != null
+                && mScreenOnTimeMap.get(mDailyChartIndex) != null) {
+            mOnScreenOnTimeUpdatedListener.onScreenOnTimeUpdated(
+                    mScreenOnTimeMap.get(mDailyChartIndex).get(mHourlyChartIndex),
+                    getSlotInformation());
+        }
         if (mOnBatteryUsageUpdatedListener != null && mBatteryUsageMap != null
                 && mBatteryUsageMap.get(mDailyChartIndex) != null) {
             final BatteryDiffData slotUsageData =

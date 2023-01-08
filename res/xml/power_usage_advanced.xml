@@ -27,6 +27,18 @@
             "com.android.settings.fuelgauge.batteryusage.BatteryChartPreferenceController" />
 
     <PreferenceCategory
+        android:key="screen_on_time_category"
+        settings:controller=
+            "com.android.settings.fuelgauge.batteryusage.ScreenOnTimeController"
+        settings:isPreferenceVisible="false">
+
+        <com.android.settings.fuelgauge.batteryusage.TextViewPreference
+            android:key="screen_on_time_text"
+            settings:isPreferenceVisible="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="battery_usage_breakdown"
         settings:controller=
             "com.android.settings.fuelgauge.batteryusage.BatteryUsageBreakdownController"
