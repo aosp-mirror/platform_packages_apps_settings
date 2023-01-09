@@ -16,10 +16,20 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
+import android.app.Application;
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
+import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.applications.ApplicationsState;
+
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /** Wraps the battery usage diff data for each entry used for battery usage app list. */
 public class BatteryDiffData {
@@ -28,10 +38,22 @@ public class BatteryDiffData {
 
     /** Constructor for the diff entries. */
     public BatteryDiffData(
-            @NonNull List<BatteryDiffEntry> appDiffEntries,
-            @NonNull List<BatteryDiffEntry> systemDiffEntries) {
+            final Context context,
+            final @NonNull List<BatteryDiffEntry> appDiffEntries,
+            final @NonNull List<BatteryDiffEntry> systemDiffEntries,
+            final boolean isAccumulated) {
         mAppEntries = appDiffEntries;
         mSystemEntries = systemDiffEntries;
+
+        if (!isAccumulated) {
+            final PowerUsageFeatureProvider featureProvider =
+                    FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context);
+            purgeFakeAndHiddenPackages(featureProvider);
+            combineBatteryDiffEntry(context, featureProvider);
+        }
+
+        setTotalConsumePower();
+        sortEntries();
     }
 
     public List<BatteryDiffEntry> getAppDiffEntryList() {
@@ -42,20 +64,111 @@ public class BatteryDiffData {
         return mSystemEntries;
     }
 
-    // Sorts entries based on consumed percentage.
-    void sortEntries() {
-        Collections.sort(mAppEntries, BatteryDiffEntry.COMPARATOR);
-        Collections.sort(mSystemEntries, BatteryDiffEntry.COMPARATOR);
+    /** Removes fake usage data and hidden packages. */
+    private void purgeFakeAndHiddenPackages(final PowerUsageFeatureProvider featureProvider) {
+        purgeFakeAndHiddenPackages(featureProvider, mAppEntries);
+        purgeFakeAndHiddenPackages(featureProvider, mSystemEntries);
     }
 
-    // Sets total consume power for app and system entries separately.
-    void setTotalConsumePower() {
+    /** Combines into SystemAppsBatteryDiffEntry and OthersBatteryDiffEntry. */
+    private void combineBatteryDiffEntry(
+            final Context context, final PowerUsageFeatureProvider featureProvider) {
+        combineIntoSystemApps(context, featureProvider, mAppEntries);
+        combineSystemItemsIntoOthers(context, featureProvider, mSystemEntries);
+    }
+
+    /** Sets total consume power for app and system entries separately. */
+    private void setTotalConsumePower() {
         setTotalConsumePowerForAllEntries(mAppEntries);
         setTotalConsumePowerForAllEntries(mSystemEntries);
     }
 
+    /** Sorts entries based on consumed percentage. */
+    private void sortEntries() {
+        Collections.sort(mAppEntries, BatteryDiffEntry.COMPARATOR);
+        Collections.sort(mSystemEntries, BatteryDiffEntry.COMPARATOR);
+    }
+
+    private static void purgeFakeAndHiddenPackages(
+            final PowerUsageFeatureProvider featureProvider,
+            final List<BatteryDiffEntry> entries) {
+        final Set<Integer> hideSystemComponentSet = featureProvider.getHideSystemComponentSet();
+        final Set<String> hideBackgroundUsageTimeSet =
+                featureProvider.getHideBackgroundUsageTimeSet();
+        final Set<String> hideApplicationSet = featureProvider.getHideApplicationSet();
+        final Iterator<BatteryDiffEntry> iterator = entries.iterator();
+        while (iterator.hasNext()) {
+            final BatteryDiffEntry entry = iterator.next();
+            final String packageName = entry.getPackageName();
+            final Integer componentId = entry.mBatteryHistEntry.mDrainType;
+            if (ConvertUtils.FAKE_PACKAGE_NAME.equals(packageName)
+                    || hideSystemComponentSet.contains(componentId)
+                    || (packageName != null && hideApplicationSet.contains(packageName))) {
+                iterator.remove();
+            }
+            if (packageName != null && hideBackgroundUsageTimeSet.contains(packageName)) {
+                entry.mBackgroundUsageTimeInMs = 0;
+            }
+        }
+    }
+
+    private static void combineIntoSystemApps(
+            final Context context,
+            final PowerUsageFeatureProvider featureProvider,
+            final List<BatteryDiffEntry> appEntries) {
+        final List<String> systemAppsAllowlist = featureProvider.getSystemAppsAllowlist();
+        final Application application = (Application) context.getApplicationContext();
+        final ApplicationsState applicationsState =
+                application == null ? null : ApplicationsState.getInstance(application);
+
+        BatteryDiffEntry.SystemAppsBatteryDiffEntry systemAppsDiffEntry = null;
+        final Iterator<BatteryDiffEntry> appListIterator = appEntries.iterator();
+        while (appListIterator.hasNext()) {
+            final BatteryDiffEntry batteryDiffEntry = appListIterator.next();
+            if (needsCombineInSystemApp(batteryDiffEntry, systemAppsAllowlist, applicationsState)) {
+                if (systemAppsDiffEntry == null) {
+                    systemAppsDiffEntry = new BatteryDiffEntry.SystemAppsBatteryDiffEntry(context);
+                }
+                systemAppsDiffEntry.mConsumePower += batteryDiffEntry.mConsumePower;
+                systemAppsDiffEntry.mForegroundUsageTimeInMs +=
+                        batteryDiffEntry.mForegroundUsageTimeInMs;
+                systemAppsDiffEntry.setTotalConsumePower(
+                        batteryDiffEntry.getTotalConsumePower());
+                appListIterator.remove();
+            }
+        }
+        if (systemAppsDiffEntry != null) {
+            appEntries.add(systemAppsDiffEntry);
+        }
+    }
+
+    private static void combineSystemItemsIntoOthers(
+            final Context context,
+            final PowerUsageFeatureProvider featureProvider,
+            final List<BatteryDiffEntry> systemEntries) {
+        final Set<Integer> othersSystemComponentSet = featureProvider.getOthersSystemComponentSet();
+        BatteryDiffEntry.OthersBatteryDiffEntry othersDiffEntry = null;
+        final Iterator<BatteryDiffEntry> systemListIterator = systemEntries.iterator();
+        while (systemListIterator.hasNext()) {
+            final BatteryDiffEntry batteryDiffEntry = systemListIterator.next();
+            if (othersSystemComponentSet.contains(batteryDiffEntry.mBatteryHistEntry.mDrainType)) {
+                if (othersDiffEntry == null) {
+                    othersDiffEntry = new BatteryDiffEntry.OthersBatteryDiffEntry(context);
+                }
+                othersDiffEntry.mConsumePower += batteryDiffEntry.mConsumePower;
+                othersDiffEntry.setTotalConsumePower(
+                        batteryDiffEntry.getTotalConsumePower());
+                systemListIterator.remove();
+            }
+        }
+        if (othersDiffEntry != null) {
+            systemEntries.add(othersDiffEntry);
+        }
+    }
+
     // Sets total consume power for each entry.
-    private void setTotalConsumePowerForAllEntries(List<BatteryDiffEntry> batteryDiffEntries) {
+    private static void setTotalConsumePowerForAllEntries(
+            final List<BatteryDiffEntry> batteryDiffEntries) {
         double totalConsumePower = 0.0;
         for (BatteryDiffEntry batteryDiffEntry : batteryDiffEntries) {
             totalConsumePower += batteryDiffEntry.mConsumePower;
@@ -63,5 +176,33 @@ public class BatteryDiffData {
         for (BatteryDiffEntry batteryDiffEntry : batteryDiffEntries) {
             batteryDiffEntry.setTotalConsumePower(totalConsumePower);
         }
+    }
+
+    @VisibleForTesting
+    static boolean needsCombineInSystemApp(final BatteryDiffEntry batteryDiffEntry,
+            final List<String> systemAppsAllowlist, final ApplicationsState applicationsState) {
+        if (batteryDiffEntry.mBatteryHistEntry.mIsHidden) {
+            return true;
+        }
+
+        final String packageName = batteryDiffEntry.getPackageName();
+        if (packageName == null || packageName.isEmpty()) {
+            return false;
+        }
+
+        if (systemAppsAllowlist != null && systemAppsAllowlist.contains(packageName)) {
+            return true;
+        }
+
+        if (applicationsState == null) {
+            return false;
+        }
+        final ApplicationsState.AppEntry appEntry =
+                applicationsState.getEntry(packageName, /* userId= */ 0);
+        if (appEntry == null || appEntry.info == null) {
+            return false;
+        }
+        return !ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER_AND_INSTANT.filterApp(
+                appEntry);
     }
 }
