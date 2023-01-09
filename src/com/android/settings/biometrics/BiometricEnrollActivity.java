@@ -23,6 +23,7 @@ import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_CONSENT
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_CONSENT_GRANTED;
 
 import android.annotation.NonNull;
+import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
@@ -73,7 +74,8 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     private static final int REQUEST_CHOOSE_OPTIONS = 3;
     // prompt hand phone back to parent after enrollment
     private static final int REQUEST_HANDOFF_PARENT = 4;
-    private static final int REQUEST_SINGLE_ENROLL = 5;
+    private static final int REQUEST_SINGLE_ENROLL_FINGERPRINT = 5;
+    private static final int REQUEST_SINGLE_ENROLL_FACE = 6;
 
     public static final int RESULT_SKIP = BiometricEnrollBase.RESULT_SKIP;
 
@@ -118,7 +120,6 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     private Bundle mParentalOptions;
     @Nullable private Long mGkPwHandle;
     @Nullable private ParentalConsentHelper mParentalConsentHelper;
-    @Nullable private MultiBiometricEnrollHelper mMultiBiometricEnrollHelper;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -314,8 +315,6 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         } else if (canUseFace || canUseFingerprint) {
             if (mGkPwHandle == null) {
                 setOrConfirmCredentialsNow();
-            } else if (canUseFace && canUseFingerprint) {
-                launchFaceAndFingerprintEnroll();
             } else if (canUseFingerprint) {
                 launchFingerprintOnlyEnroll();
             } else {
@@ -444,47 +443,61 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     // handles responses while multi biometric enrollment is pending
     private void handleOnActivityResultWhileEnrolling(
             int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_HANDOFF_PARENT) {
-            Log.d(TAG, "Enrollment complete, requesting handoff, result: " + resultCode);
-            setResult(RESULT_OK, newResultIntent());
-            finish();
-        } else if (mMultiBiometricEnrollHelper == null) {
-            overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
 
-            switch (requestCode) {
-                case REQUEST_CHOOSE_LOCK:
-                case REQUEST_CONFIRM_LOCK:
-                    mConfirmingCredentials = false;
-                    final boolean isOk =
-                            isSuccessfulConfirmOrChooseCredential(requestCode, resultCode);
-                    if (isOk && (mHasFeatureFace || mHasFeatureFingerprint)) {
-                        updateGatekeeperPasswordHandle(data);
-                        if (mHasFeatureFace && mHasFeatureFingerprint) {
-                            launchFaceAndFingerprintEnroll();
-                        } else if (mHasFeatureFingerprint) {
-                            launchFingerprintOnlyEnroll();
-                        } else {
-                            launchFaceOnlyEnroll();
-                        }
+        Log.d(TAG, "handleOnActivityResultWhileEnrolling, request = " + requestCode + ""
+                + ", resultCode = " + resultCode);
+        switch (requestCode) {
+            case REQUEST_HANDOFF_PARENT:
+                setResult(RESULT_OK, newResultIntent());
+                finish();
+                break;
+            case REQUEST_CHOOSE_LOCK:
+            case REQUEST_CONFIRM_LOCK:
+                mConfirmingCredentials = false;
+                final boolean isOk =
+                        isSuccessfulConfirmOrChooseCredential(requestCode, resultCode);
+                if (isOk && (mHasFeatureFace || mHasFeatureFingerprint)) {
+                    updateGatekeeperPasswordHandle(data);
+                    if (mHasFeatureFingerprint) {
+                        launchFingerprintOnlyEnroll();
                     } else {
-                        Log.d(TAG, "Unknown result for set/choose lock: " + resultCode);
-                        setResult(resultCode, newResultIntent());
-                        finish();
+                        launchFaceOnlyEnroll();
                     }
-                    break;
-                case REQUEST_SINGLE_ENROLL:
-                    mIsSingleEnrolling = false;
-                    finishOrLaunchHandToParent(resultCode);
-                    break;
-                default:
-                    Log.w(TAG, "Unknown enrolling requestCode: " + requestCode + ", finishing");
+                } else {
+                    Log.d(TAG, "Unknown result for set/choose lock: " + resultCode);
+                    setResult(resultCode, newResultIntent());
                     finish();
-            }
-        } else {
-            Log.d(TAG, "RequestCode: " + requestCode + " resultCode: " + resultCode);
-            BiometricUtils.removeGatekeeperPasswordHandle(this, mGkPwHandle);
-            finishOrLaunchHandToParent(resultCode);
+                }
+                break;
+            case REQUEST_SINGLE_ENROLL_FINGERPRINT:
+                mIsSingleEnrolling = false;
+                if ((resultCode == BiometricEnrollBase.RESULT_SKIP
+                        || resultCode == BiometricEnrollBase.RESULT_FINISHED) && mHasFeatureFace) {
+                    launchFaceOnlyEnroll();
+                } else {
+                    finishOrLaunchHandToParent(resultCode);
+                }
+                break;
+            case REQUEST_SINGLE_ENROLL_FACE:
+                mIsSingleEnrolling = false;
+                if (resultCode == Activity.RESULT_CANCELED && mHasFeatureFingerprint) {
+                    launchFingerprintOnlyEnroll();
+                } else {
+                    finishOrLaunchHandToParent(resultCode);
+                }
+                break;
+            default:
+                Log.w(TAG, "Unknown enrolling requestCode: " + requestCode + ", finishing");
+                finish();
         }
+    }
+
+    @Override
+    public void finish() {
+        if (mGkPwHandle != null) {
+            BiometricUtils.removeGatekeeperPasswordHandle(this, mGkPwHandle);
+        }
+        super.finish();
     }
 
     private void finishOrLaunchHandToParent(int resultCode) {
@@ -630,7 +643,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
             } else {
                 intent = BiometricUtils.getFingerprintIntroIntent(this, getIntent());
             }
-            launchSingleSensorEnrollActivity(intent, REQUEST_SINGLE_ENROLL);
+            launchSingleSensorEnrollActivity(intent, REQUEST_SINGLE_ENROLL_FINGERPRINT);
         }
     }
 
@@ -638,14 +651,8 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         if (!mIsSingleEnrolling) {
             mIsSingleEnrolling = true;
             final Intent intent = BiometricUtils.getFaceIntroIntent(this, getIntent());
-            launchSingleSensorEnrollActivity(intent, REQUEST_SINGLE_ENROLL);
+            launchSingleSensorEnrollActivity(intent, REQUEST_SINGLE_ENROLL_FACE);
         }
-    }
-
-    private void launchFaceAndFingerprintEnroll() {
-        mMultiBiometricEnrollHelper = new MultiBiometricEnrollHelper(this, mUserId,
-                mIsFaceEnrollable, mIsFingerprintEnrollable, mGkPwHandle);
-        mMultiBiometricEnrollHelper.startNextStep();
     }
 
     private void launchHandoffToParent() {
