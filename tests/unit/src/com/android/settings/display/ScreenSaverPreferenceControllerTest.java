@@ -58,57 +58,57 @@ public class ScreenSaverPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_dreamsEnabledForAllUsers_shouldBeTrueForSystemUser() {
+    public void isAvailable_dreamsEnabledForAllUsers_shouldBeTrueForMainUser() {
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_dreamsSupported)).thenReturn(true);
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_dreamsOnlyEnabledForDockUser))
                 .thenReturn(false);
-        when(mUserManager.isSystemUser()).thenReturn(true);
+        when(mUserManager.isMainUser()).thenReturn(true);
         assertTrue(mController.isAvailable());
     }
 
     @Test
-    public void isAvailable_dreamsEnabledForAllUsers_shouldBeTrueForNonSystemUser() {
+    public void isAvailable_dreamsEnabledForAllUsers_shouldBeTrueForNonMainUser() {
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_dreamsSupported)).thenReturn(true);
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_dreamsOnlyEnabledForDockUser))
                 .thenReturn(false);
-        when(mUserManager.isSystemUser()).thenReturn(false);
+        when(mUserManager.isMainUser()).thenReturn(false);
         assertTrue(mController.isAvailable());
     }
 
     @Test
-    public void isAvailable_dreamsDisabled_shouldBeFalseForSystemUser() {
+    public void isAvailable_dreamsDisabled_shouldBeFalseForMainUser() {
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_dreamsSupported)).thenReturn(false);
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_dreamsOnlyEnabledForDockUser))
                 .thenReturn(false);
-        when(mUserManager.isSystemUser()).thenReturn(true);
+        when(mUserManager.isMainUser()).thenReturn(true);
         assertFalse(mController.isAvailable());
     }
 
     @Test
-    public void isAvailable_dreamsOnlyEnabledForSystemUser_shouldBeTrueForSystemUser() {
+    public void isAvailable_dreamsOnlyEnabledForDockUser_shouldBeTrueForMainUser() {
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_dreamsSupported)).thenReturn(true);
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_dreamsOnlyEnabledForDockUser))
                 .thenReturn(true);
-        when(mUserManager.isSystemUser()).thenReturn(true);
+        when(mUserManager.isMainUser()).thenReturn(true);
         assertTrue(mController.isAvailable());
     }
 
     @Test
-    public void isAvailable_dreamsOnlyEnabledForSystemUser_shouldBeFalseForNonSystemUser() {
+    public void isAvailable_dreamsOnlyEnabledForDockUser_shouldBeFalseForNonMainUser() {
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_dreamsSupported)).thenReturn(true);
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_dreamsOnlyEnabledForDockUser))
                 .thenReturn(true);
-        when(mUserManager.isSystemUser()).thenReturn(false);
+        when(mUserManager.isMainUser()).thenReturn(false);
         assertFalse(mController.isAvailable());
     }
 }
