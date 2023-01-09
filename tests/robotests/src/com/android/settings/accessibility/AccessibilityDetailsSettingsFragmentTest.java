@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import static com.android.internal.accessibility.AccessibilityShortcutController.ACCESSIBILITY_BUTTON_COMPONENT_NAME;
+import static com.android.internal.accessibility.AccessibilityShortcutController.ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME;
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -36,6 +37,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
+import android.util.FeatureFlagUtils;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.fragment.app.FragmentActivity;
@@ -169,6 +171,21 @@ public class AccessibilityDetailsSettingsFragmentTest {
 
         assertStartActivityWithExpectedFragment(mActivity,
                 AccessibilityButtonFragment.class.getName());
+    }
+
+    @Test
+    public void onCreate_hearingAidsComponentName_launchAccessibilityHearingAidsFragment() {
+        FeatureFlagUtils.setEnabled(mContext,
+                FeatureFlagUtils.SETTINGS_ACCESSIBILITY_HEARING_AID_PAGE, true);
+        final Intent intent = new Intent();
+        intent.putExtra(Intent.EXTRA_COMPONENT_NAME,
+                ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME.flattenToString());
+        doReturn(intent).when(mActivity).getIntent();
+
+        mFragment.onCreate(Bundle.EMPTY);
+
+        assertStartActivityWithExpectedFragment(mActivity,
+                AccessibilityHearingAidsFragment.class.getName());
     }
 
     @Test

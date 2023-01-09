@@ -148,11 +148,14 @@ public class AccessibilitySettings extends DashboardFragment {
 
     public AccessibilitySettings() {
         // Observe changes to anything that the shortcut can toggle, so we can reflect updates
-        final Collection<AccessibilityShortcutController.ToggleableFrameworkFeatureInfo> features =
+        final Collection<AccessibilityShortcutController.FrameworkFeatureInfo> features =
                 AccessibilityShortcutController.getFrameworkShortcutFeaturesMap().values();
         final List<String> shortcutFeatureKeys = new ArrayList<>(features.size());
-        for (AccessibilityShortcutController.ToggleableFrameworkFeatureInfo feature : features) {
-            shortcutFeatureKeys.add(feature.getSettingKey());
+        for (AccessibilityShortcutController.FrameworkFeatureInfo feature : features) {
+            final String key = feature.getSettingKey();
+            if (key != null) {
+                shortcutFeatureKeys.add(key);
+            }
         }
 
         // Observe changes from accessibility selection menu
