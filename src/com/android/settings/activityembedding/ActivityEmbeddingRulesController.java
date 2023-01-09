@@ -46,6 +46,7 @@ import com.android.settings.homepage.DeepLinkHomepageActivity;
 import com.android.settings.homepage.DeepLinkHomepageActivityInternal;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.password.ChooseLockPattern;
 import com.android.settingslib.users.AvatarPickerActivity;
 
 import java.util.HashSet;
@@ -234,6 +235,7 @@ public class ActivityEmbeddingRulesController {
         addActivityFilter(activityFilters, FaceEnrollIntroductionInternal.class);
         addActivityFilter(activityFilters, Settings.FaceSettingsInternalActivity.class);
         addActivityFilter(activityFilters, AvatarPickerActivity.class);
+        addActivityFilter(activityFilters, ChooseLockPattern.class);
         mSplitController.registerRule(new ActivityRule(activityFilters, true /* alwaysExpand */));
     }
 
