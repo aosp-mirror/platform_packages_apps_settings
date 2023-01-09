@@ -2925,7 +2925,7 @@
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Erabilerarik ez azken 24 orduetan"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Gailuaren erabileran oinarritzen da gelditzen den bateriaren estimazioa"</string>
-    <string name="estimated_time_left" msgid="948717045180211777">"Geratzen den denbora, gutxi gorabehera"</string>
+    <string name="estimated_time_left" msgid="948717045180211777">"Geratzen den denbora estimatua"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"guztiz kargatu arte"</string>
     <string name="estimated_time_description" msgid="211058785418596009">"Estimazioak gorabeherak izan ditzake erabileraren arabera"</string>
     <string name="menu_stats_unplugged" msgid="7125297366200634285">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> entxufea atera zenetik"</string>
@@ -3011,7 +3011,7 @@
     <string name="voice_input_settings_title" msgid="3708147270767296322">"Ahozko idazketa"</string>
     <string name="voice_service_preference_section_title" msgid="4807795449147187497">"Ahozko idazketa-zerbitzuak"</string>
     <string name="voice_interactor_preference_summary" msgid="3942881638813452880">"Ahozko gako-hitzak eta erabateko interakzioa"</string>
-    <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"Ahoz idazteko eginbide arrunta"</string>
+    <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"Ahotsa testu bihurtzeko eginbide sinplea"</string>
     <string name="voice_interaction_security_warning" msgid="7962884055885987671">"Aginduak ahoz emateko zerbitzu honek une oro kontrolatuko du ahotsa eta ahozko gaitasuna duten aplikazioak ere kontrolatu ahal izango ditu. <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> aplikazioarena da. Zerbitzu hau erabiltzeko aukera gaitu nahi duzu?"</string>
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"Motor hobetsia"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"Motorraren ezarpenak"</string>
@@ -3040,7 +3040,7 @@
     <string name="credentials_reset" msgid="4246628389366452655">"Garbitu kredentzialak"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"Kendu ziurtagiri guztiak"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"Kredentzial fidagarriak"</string>
-    <string name="trusted_credentials_summary" msgid="345822338358409468">"Bistaratu CA fidagarrien ziurtagiriak"</string>
+    <string name="trusted_credentials_summary" msgid="345822338358409468">"Bistaratu autoritate ziurtagiri-emaile fidagarri batek jaulkitako ziurtagiriak"</string>
     <string name="user_credentials" msgid="4044405430790970775">"Erabiltzaile-kredentzialak"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"Ikusi eta aldatu gordetako kredentzialak"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"Aurreratuak"</string>
@@ -3192,8 +3192,8 @@
     <string name="data_usage_menu_split_4g" msgid="3391899816926640583">"4G erabilera bereizia"</string>
     <string name="data_usage_menu_show_wifi" msgid="6380926350184939975">"Erakutsi Wi‑Fi sareen erabilera"</string>
     <string name="data_usage_menu_hide_wifi" msgid="4694889089278302691">"Ezkutatu Wi‑Fi erabilera"</string>
-    <string name="data_usage_menu_show_ethernet" msgid="4401026240876938859">"Erakuts Ethernet erabilera"</string>
-    <string name="data_usage_menu_hide_ethernet" msgid="7792365022467586772">"Ezkutatu Ethernet erabilera"</string>
+    <string name="data_usage_menu_show_ethernet" msgid="4401026240876938859">"Erakutsi Ethernet-erabilera"</string>
+    <string name="data_usage_menu_hide_ethernet" msgid="7792365022467586772">"Ezkutatu Ethernet-erabilera"</string>
     <string name="data_usage_menu_metered" msgid="4279260736172851951">"Sarearen murriztapenak"</string>
     <string name="data_usage_menu_auto_sync" msgid="2632694000068175025">"Sinkronizatu datuak automatikoki"</string>
     <string name="data_usage_menu_sim_cards" msgid="8966135605336735887">"SIM txartelak"</string>
@@ -4739,7 +4739,7 @@
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"Aplikazioak erabilitako datuak"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Wifi-sareko datu-erabilera"</string>
     <string name="non_carrier_data_usage" msgid="6494603202578414755">"Operadorearenak ez diren datuen erabilera"</string>
-    <string name="ethernet_data_usage" msgid="4552227880905679761">"Ethernet datu-erabilera"</string>
+    <string name="ethernet_data_usage" msgid="4552227880905679761">"Ethernet-datuen erabilera"</string>
     <string name="wifi" msgid="2932584495223243842">"Wifia"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
     <string name="cell_data_template" msgid="6077963976103260821">"Datu-konexioaren <xliff:g id="AMOUNT">^1</xliff:g>"</string>
@@ -5031,7 +5031,7 @@
     <string name="enterprise_privacy_security_logs" msgid="8494681624247959075">"Azken segurtasun-erregistroa"</string>
     <string name="enterprise_privacy_none" msgid="6026527690979756431">"Bat ere ez"</string>
     <string name="enterprise_privacy_enterprise_installed_packages" msgid="9114143640515900082">"Instalatutako aplikazioak"</string>
-    <string name="enterprise_privacy_apps_count_estimation_info" msgid="7959907857710107792">"Gutxi gorabeherakoa da aplikazio kopurua. Baliteke Play Store-tik instalatu ez diren aplikazioak kontuan ez izatea."</string>
+    <string name="enterprise_privacy_apps_count_estimation_info" msgid="7959907857710107792">"Aplikazio kopurua estimazio bat da. Baliteke Play Store-tik instalatu ez diren aplikazioak kontuan ez izatea."</string>
     <plurals name="enterprise_privacy_number_packages_lower_bound" formatted="false" msgid="5403847001419529018">
       <item quantity="other">Gutxienez <xliff:g id="COUNT_1">%d</xliff:g> aplikazio</item>
       <item quantity="one">Gutxienez <xliff:g id="COUNT_0">%d</xliff:g> aplikazio</item>
