@@ -109,6 +109,11 @@ public class FingerprintEnrollSidecar extends BiometricEnrollSidecar {
         }
 
         @Override
+        public void onAcquired(boolean isAcquiredGood) {
+            FingerprintEnrollSidecar.super.onAcquired(isAcquiredGood);
+        }
+
+        @Override
         public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
             FingerprintEnrollSidecar.super.onEnrollmentHelp(helpMsgId, helpString);
         }
