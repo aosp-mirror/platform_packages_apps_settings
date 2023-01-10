@@ -146,6 +146,10 @@
 
         <uses-library android:name="org.apache.http.legacy" />
 
+        <property
+            android:name="android.window.PROPERTY_ACTIVITY_EMBEDDING_SPLITS_ENABLED"
+            android:value="true" />
+
         <!-- Settings -->
         <activity android:name=".homepage.SettingsHomepageActivity"
                   android:label="@string/settings_label_launcher"

@@ -62,7 +62,7 @@ public class RegionalPreferencesDataUtilsTest {
                 mApplicationContext, "und-u-mu-celsius");
 
         String unit = RegionalPreferencesDataUtils.getDefaultUnicodeExtensionData(
-                mApplicationContext, RegionalPreferencesFragment.TYPE_TEMPERATURE);
+                mApplicationContext, ExtensionTypes.TEMPERATURE_UNIT);
 
         assertEquals(LocalePreferences.TemperatureUnit.CELSIUS, unit);
     }
@@ -74,7 +74,7 @@ public class RegionalPreferencesDataUtilsTest {
         Locale.setDefault(Locale.forLanguageTag("en-US-u-mu-celsius"));
 
         String unit = RegionalPreferencesDataUtils.getDefaultUnicodeExtensionData(
-                mApplicationContext, RegionalPreferencesFragment.TYPE_TEMPERATURE);
+                mApplicationContext, ExtensionTypes.TEMPERATURE_UNIT);
 
         assertEquals(LocalePreferences.TemperatureUnit.CELSIUS, unit);
     }
@@ -86,16 +86,16 @@ public class RegionalPreferencesDataUtilsTest {
         Locale.setDefault(Locale.forLanguageTag("en-US"));
 
         String unit = RegionalPreferencesDataUtils.getDefaultUnicodeExtensionData(
-                mApplicationContext, RegionalPreferencesFragment.TYPE_TEMPERATURE);
+                mApplicationContext, ExtensionTypes.TEMPERATURE_UNIT);
 
-        assertEquals(RegionalPreferencesFragment.TYPE_DEFAULT, unit);
+        assertEquals(RegionalPreferencesDataUtils.DEFAULT_VALUE, unit);
     }
 
     @Test
     public void savePreference_saveCalendarIsDangi_success() {
         RegionalPreferencesDataUtils.savePreference(
                 mApplicationContext,
-                RegionalPreferencesFragment.TYPE_CALENDAR,
+                ExtensionTypes.CALENDAR,
                 LocalePreferences.CalendarType.DANGI
         );
         String providerContent = Settings.System.getString(
@@ -103,12 +103,12 @@ public class RegionalPreferencesDataUtilsTest {
         Locale locale = Locale.forLanguageTag(providerContent);
 
 
-        String result1 = locale.getUnicodeLocaleType(RegionalPreferencesFragment.TYPE_CALENDAR);
+        String result1 = locale.getUnicodeLocaleType(ExtensionTypes.CALENDAR);
 
         assertEquals(LocalePreferences.CalendarType.DANGI, result1);
 
         String result2 = Locale.getDefault(Locale.Category.FORMAT)
-                .getUnicodeLocaleType(RegionalPreferencesFragment.TYPE_CALENDAR);
+                .getUnicodeLocaleType(ExtensionTypes.CALENDAR);
 
         assertEquals(LocalePreferences.CalendarType.DANGI, result2);
 
@@ -126,7 +126,7 @@ public class RegionalPreferencesDataUtilsTest {
     @Test
     public void temperatureUnitsConverter_inputDefault_resultIsDefaultString() {
         String result = RegionalPreferencesDataUtils.temperatureUnitsConverter(mApplicationContext,
-                RegionalPreferencesFragment.TYPE_DEFAULT);
+                RegionalPreferencesDataUtils.DEFAULT_VALUE);
 
         assertEquals(ResourcesUtils.getResourcesString(
                 mApplicationContext, "default_string_of_regional_preference"), result);
@@ -144,7 +144,7 @@ public class RegionalPreferencesDataUtilsTest {
     @Test
     public void dayConverter_inputDefault_resultIsDefaultString() {
         String result = RegionalPreferencesDataUtils.dayConverter(mApplicationContext,
-                RegionalPreferencesFragment.TYPE_DEFAULT);
+                RegionalPreferencesDataUtils.DEFAULT_VALUE);
 
         assertEquals(ResourcesUtils.getResourcesString(
                 mApplicationContext, "default_string_of_regional_preference"), result);
@@ -153,7 +153,7 @@ public class RegionalPreferencesDataUtilsTest {
     @Test
     public void calendarConverter_inputDefault_resultIsDefaultString() {
         String result = RegionalPreferencesDataUtils.dayConverter(mApplicationContext,
-                RegionalPreferencesFragment.TYPE_DEFAULT);
+                RegionalPreferencesDataUtils.DEFAULT_VALUE);
 
         assertEquals(ResourcesUtils.getResourcesString(
                 mApplicationContext, "default_string_of_regional_preference"), result);

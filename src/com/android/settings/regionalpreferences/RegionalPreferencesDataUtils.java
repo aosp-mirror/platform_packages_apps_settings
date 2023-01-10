@@ -29,10 +29,8 @@ import java.util.Locale;
 
 /** Provides utils for regional preferences. */
 public class RegionalPreferencesDataUtils {
-    private static final String TAG = RegionalPreferencesDataUtils.class.getSimpleName();
-
-    private static final String U_EXTENSION_FAHRENHEIT = "fahrenhe";
-    private static final String KEYWORD_OF_CALENDAR = "calendar";
+    static final String DISPLAY_KEYWORD_OF_CALENDAR = "calendar";
+    static final String DEFAULT_VALUE = "default";
 
     static String getDefaultUnicodeExtensionData(Context contxt, String type) {
         // 1. Check cache data in Settings provider.
@@ -47,27 +45,11 @@ public class RegionalPreferencesDataUtils {
         if (TextUtils.isEmpty(result)) {
             result = Locale.getDefault(Locale.Category.FORMAT).getUnicodeLocaleType(type);
         }
-        if (result == null) {
-            return RegionalPreferencesFragment.TYPE_DEFAULT;
-        }
 
-        // In BCP47 expression, the tag of fahrenheit is "fahrenhe" i.e. und-u-mu-fahrenhe,
-        // so if it may need to convert from the langngiage tag, "fahrenhe", to "fahrenheit".
-        if (result.equals(U_EXTENSION_FAHRENHEIT)) {
-            return LocalePreferences.TemperatureUnit.FAHRENHEIT;
-        }
-
-        return result;
+        return result == null ? DEFAULT_VALUE : result;
     }
 
     static void savePreference(Context context, String type, String value) {
-        if (type.equals(RegionalPreferencesFragment.TYPE_TEMPERATURE)
-                && value != null && value.equals(LocalePreferences.TemperatureUnit.FAHRENHEIT)) {
-            // In BCP47 expression, the temperature unit is expressed to "fahrenhe"
-            // i.e. zh-TW-u-mu-fahrenhe. Hence, if we want to save fahrenheit unit to u extension,
-            // It need to change from "fahrenheit" to "fahrenhe".
-            value = U_EXTENSION_FAHRENHEIT;
-        }
         saveToSettingsProvider(context, type, value);
         saveToSystem(type, value);
     }
@@ -105,14 +87,14 @@ public class RegionalPreferencesDataUtils {
     }
 
     static String calendarConverter(Context context, String calendarType) {
-        if (calendarType.equals(RegionalPreferencesFragment.TYPE_DEFAULT)) {
+        if (calendarType.equals(DEFAULT_VALUE)) {
             return context.getString(R.string.default_string_of_regional_preference);
         }
 
         Locale locale = new Locale.Builder()
-                .setUnicodeLocaleKeyword(RegionalPreferencesFragment.TYPE_CALENDAR, calendarType)
+                .setUnicodeLocaleKeyword(ExtensionTypes.CALENDAR, calendarType)
                 .build();
-        return ULocale.getDisplayKeywordValue(locale.toLanguageTag(), KEYWORD_OF_CALENDAR,
+        return ULocale.getDisplayKeywordValue(locale.toLanguageTag(), DISPLAY_KEYWORD_OF_CALENDAR,
                 ULocale.forLocale(Locale.getDefault(Locale.Category.FORMAT)));
     }
 
@@ -122,8 +104,6 @@ public class RegionalPreferencesDataUtils {
                 return context.getString(R.string.celsius_temperature_unit);
             case LocalePreferences.TemperatureUnit.FAHRENHEIT:
                 return context.getString(R.string.fahrenheit_temperature_unit);
-            case LocalePreferences.TemperatureUnit.KELVIN:
-                return context.getString(R.string.kevin_temperature_unit);
             default:
                 return context.getString(R.string.default_string_of_regional_preference);
         }

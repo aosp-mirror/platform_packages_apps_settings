@@ -58,8 +58,10 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
@@ -76,6 +78,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private final @Nullable CredentialManager mCredentialManager;
     private final CancellationSignal mCancellationSignal = new CancellationSignal();
     private final Executor mExecutor;
+    private final Map<String, SwitchPreference> mPrefs = new HashMap<>(); // key is package name
 
     private @Nullable DashboardFragment mParentFragment = null;
 
@@ -125,6 +128,13 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             return;
         }
 
+        List<ServiceInfo> services = new ArrayList<>();
+        for (CredentialProviderInfo cpi :
+                CredentialProviderInfo.getAvailableServices(mContext, getUser())) {
+            services.add(cpi.getServiceInfo());
+        }
+        init(lifecycleOwner, services);
+
         mCredentialManager.listEnabledProviders(
                 mCancellationSignal,
                 mExecutor,
@@ -140,13 +150,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                             }
                         }
 
-                        List<ServiceInfo> services = new ArrayList<>();
-                        for (CredentialProviderInfo cpi :
-                                CredentialProviderInfo.getAvailableServices(mContext, getUser())) {
-                            services.add(cpi.getServiceInfo());
-                        }
-
-                        init(lifecycleOwner, services, enabledPackages);
+                        setEnabledPackageNames(enabledPackages);
                     }
 
                     @Override
@@ -157,15 +161,19 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     }
 
     @VisibleForTesting
-    void init(
-            LifecycleOwner lifecycleOwner,
-            List<ServiceInfo> availableServices,
-            Set<String> enabledPackages) {
+    void init(LifecycleOwner lifecycleOwner, List<ServiceInfo> availableServices) {
         mServices.clear();
         mServices.addAll(availableServices);
+    }
 
+    @VisibleForTesting
+    void setEnabledPackageNames(Set<String> enabledPackages) {
         mEnabledPackageNames.clear();
         mEnabledPackageNames.addAll(enabledPackages);
+
+        for (String packageName : mPrefs.keySet()) {
+            mPrefs.get(packageName).setChecked(mEnabledPackageNames.contains(packageName));
+        }
     }
 
     @Override
@@ -176,6 +184,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+
+        // Since the UI is being cleared, clear any refs.
+        mPrefs.clear();
 
         PreferenceGroup group = screen.findPreference(getPreferenceKey());
         Context context = screen.getContext();
@@ -254,6 +265,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         final SwitchPreference pref = new SwitchPreference(prefContext);
         pref.setTitle(title);
         pref.setChecked(mEnabledPackageNames.contains(packageName));
+        mPrefs.put(packageName, pref);
 
         if (icon != null) {
             pref.setIcon(Utils.getSafeIcon(icon));

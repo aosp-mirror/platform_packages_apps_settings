@@ -98,8 +98,10 @@ public class CalendarTypeControllerTest {
     private static String getDisplayKeywordValue(String value) {
         String languageTag = new Locale.Builder()
                 .setUnicodeLocaleKeyword(
-                        RegionalPreferencesFragment.TYPE_CALENDAR, value).build().toLanguageTag();
-        return ULocale.getDisplayKeywordValue(languageTag, "calendar",
+                        ExtensionTypes.CALENDAR, value).build().toLanguageTag();
+        return ULocale.getDisplayKeywordValue(
+                languageTag,
+                RegionalPreferencesDataUtils.DISPLAY_KEYWORD_OF_CALENDAR,
                 ULocale.forLocale(Locale.getDefault(Locale.Category.FORMAT)));
     }
 }

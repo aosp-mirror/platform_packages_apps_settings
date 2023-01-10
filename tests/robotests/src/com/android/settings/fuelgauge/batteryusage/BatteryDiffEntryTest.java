@@ -168,8 +168,8 @@ public final class BatteryDiffEntryTest {
         assertThat(nameAndIcon.mName).isEqualTo(expectedName);
         assertThat(nameAndIcon.mIconId).isEqualTo(R.drawable.ic_settings_aod);
         // Verifies the restrictable flag in the cache.
-        assertThat(entry.mValidForRestriction).isTrue();
-        assertThat(BatteryDiffEntry.sValidForRestriction.get(entry.getKey())).isTrue();
+        assertThat(entry.mValidForRestriction).isFalse();
+        assertThat(BatteryDiffEntry.sValidForRestriction.get(entry.getKey())).isFalse();
     }
 
     @Test
@@ -194,8 +194,8 @@ public final class BatteryDiffEntryTest {
         assertThat(nameAndIcon.mName).isEqualTo(expectedName);
         assertThat(nameAndIcon.mIconId).isEqualTo(0);
         // Verifies the restrictable flag in the cache.
-        assertThat(entry.mValidForRestriction).isTrue();
-        assertThat(BatteryDiffEntry.sValidForRestriction.get(entry.getKey())).isTrue();
+        assertThat(entry.mValidForRestriction).isFalse();
+        assertThat(BatteryDiffEntry.sValidForRestriction.get(entry.getKey())).isFalse();
     }
 
     @Test

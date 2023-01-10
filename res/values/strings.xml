@@ -360,9 +360,11 @@
     <!-- The summary of the  menu entry of regional preferences. [CHAR LIMIT=NONE] -->
     <string name="regional_preferences_summary">Set units and number preferences</string>
     <!-- The subtitle of main page of regional preferences. [CHAR LIMIT=NONE] -->
-    <string name="regional_preferences_main_page_sub_title">Apps can use your regional preferences to personalize your experience</string>
+    <string name="regional_preferences_main_page_sub_title">Let apps know your regional preferences so they can personalize your experience.</string>
+    <!-- The subtitle of option's page of regional preferences for Temperature units, Calendar and First day of week. [CHAR LIMIT=NONE] -->
+    <string name="regional_preferences_option_page_sub_title">Apps will use your regional preferences where possible.</string>
     <!-- The title of menu entry of Temperature unit preference. [CHAR LIMIT=50] -->
-    <string name="temperature_preferences_title">Temperature</string>
+    <string name="temperature_preferences_title">Temperature units</string>
     <!-- The title of the  menu entry of Calendar type preference. [CHAR LIMIT=50]  -->
     <string name="calendar_preferences_title">Calendar</string>
     <!-- The title of the  menu entry of First day of week preference. [CHAR LIMIT=50]  -->
@@ -370,13 +372,11 @@
     <!-- The title of the menu entry of Numbers system preference. [CHAR LIMIT=50]  -->
     <string name="numbers_preferences_title">Numbers</string>
     <!-- The summary of default string for each regional preference. [CHAR LIMIT=50] -->
-    <string name="default_string_of_regional_preference">[No preference]</string>
+    <string name="default_string_of_regional_preference">Use app default</string>
     <!-- The title of Celsius for preference of temperature unit. [CHAR LIMIT=50] -->
-    <string name="celsius_temperature_unit">Celsius</string>
+    <string name="celsius_temperature_unit">Celsius(\u00B0C)</string>
     <!-- The title of Fahrenheit for preference of temperature unit. [CHAR LIMIT=50] -->
-    <string name="fahrenheit_temperature_unit">Fahrenheit</string>
-    <!-- The title of Kevin for preference of temperature unit. [CHAR LIMIT=50] -->
-    <string name="kevin_temperature_unit">Kevin</string>
+    <string name="fahrenheit_temperature_unit">Fahrenheit(\u00B0F)</string>
     <!-- The title of sunday for preference of first day of week. [CHAR LIMIT=50] -->
     <string name="sunday_first_day_of_week">Sunday</string>
     <!-- The title of monday for preference of first day of week. [CHAR LIMIT=50] -->
@@ -5178,10 +5178,14 @@
     <string name="battery_usage_total_less_than_one_minute">Total: less than a min</string>
     <!-- [CHAR_LIMIT=NONE] Battery usage item for total background time less than a minute -->
     <string name="battery_usage_background_less_than_one_minute">Background: less than a min</string>
+    <!-- [CHAR_LIMIT=NONE] Device screen on time less than a minute -->
+    <string name="battery_usage_screen_time_less_than_one_minute">Screen time: less than a min</string>
     <!-- [CHAR_LIMIT=NONE] Battery usage item for total usage time -->
     <string name="battery_usage_for_total_time">Total: <xliff:g id="time">%s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Battery usage item for background usage time -->
     <string name="battery_usage_for_background_time">Background: <xliff:g id="time">%s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] Device screen on time -->
+    <string name="battery_usage_screen_time">Screen time: <xliff:g id="time">%s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Battery usage main screen footer for empty content -->
     <string name="battery_usage_screen_footer_empty">Battery usage data will be available in a few hours once fully charged</string>
     <!-- [CHAR_LIMIT=NONE] Battery chart label for the current time. -->
