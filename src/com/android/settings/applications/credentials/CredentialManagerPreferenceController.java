@@ -21,7 +21,6 @@ import static androidx.lifecycle.Lifecycle.Event.ON_CREATE;
 import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.app.Dialog;
-import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -43,6 +42,7 @@ import android.util.Log;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
@@ -54,7 +54,6 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFragment;
 
 import java.util.ArrayList;
@@ -80,7 +79,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private final Executor mExecutor;
     private final Map<String, SwitchPreference> mPrefs = new HashMap<>(); // key is package name
 
-    private @Nullable DashboardFragment mParentFragment = null;
+    private @Nullable FragmentManager mFragmentManager = null;
 
     public CredentialManagerPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -113,13 +112,15 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     }
 
     /**
-     * Sets the parent fragment and attaches this controller to the settings lifecycle.
+     * Initializes the controller with the parent fragment and adds the controller to observe its
+     * lifecycle. Also stores the fragment manager which is used to open dialogs.
      *
      * @param fragment the fragment to use as the parent
+     * @param fragmentManager the fragment manager to use
      */
-    public void setParentFragment(DashboardFragment fragment) {
-        mParentFragment = fragment;
+    public void init(DashboardFragment fragment, FragmentManager fragmentManager) {
         fragment.getSettingsLifecycle().addObserver(this);
+        mFragmentManager = fragmentManager;
     }
 
     @OnLifecycleEvent(ON_CREATE)
@@ -133,7 +134,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 CredentialProviderInfo.getAvailableServices(mContext, getUser())) {
             services.add(cpi.getServiceInfo());
         }
-        init(lifecycleOwner, services);
+        setAvailableServices(lifecycleOwner, services);
 
         mCredentialManager.listEnabledProviders(
                 mCancellationSignal,
@@ -161,7 +162,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     }
 
     @VisibleForTesting
-    void init(LifecycleOwner lifecycleOwner, List<ServiceInfo> availableServices) {
+    void setAvailableServices(LifecycleOwner lifecycleOwner, List<ServiceInfo> availableServices) {
         mServices.clear();
         mServices.addAll(availableServices);
     }
@@ -280,13 +281,11 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                         if (!togglePackageNameEnabled(packageName)) {
                             final DialogFragment fragment = newErrorDialogFragment();
 
-                            if (fragment == null || mParentFragment == null) {
+                            if (fragment == null || mFragmentManager == null) {
                                 return true;
                             }
 
-                            fragment.show(
-                                    mParentFragment.getActivity().getSupportFragmentManager(),
-                                    ErrorDialogFragment.TAG);
+                            fragment.show(mFragmentManager, ErrorDialogFragment.TAG);
 
                             // The user set the check to true so we need to set it back.
                             pref.setChecked(false);
@@ -298,13 +297,11 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                         final DialogFragment fragment =
                                 newConfirmationDialogFragment(packageName, title, pref);
 
-                        if (fragment == null || mParentFragment == null) {
+                        if (fragment == null || mFragmentManager == null) {
                             return true;
                         }
 
-                        fragment.show(
-                                mParentFragment.getActivity().getSupportFragmentManager(),
-                                ConfirmationDialogFragment.TAG);
+                        fragment.show(mFragmentManager, ConfirmationDialogFragment.TAG);
                     }
 
                     return true;
@@ -344,11 +341,6 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         DialogHost host =
                 new DialogHost() {
                     @Override
-                    public DashboardFragment getParentFragment() {
-                        return mParentFragment;
-                    }
-
-                    @Override
                     public void onDialogClick(int whichButton) {
                         if (whichButton == DialogInterface.BUTTON_POSITIVE) {
                             // Since the package is now enabled then we
@@ -362,10 +354,6 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                     }
                 };
 
-        if (host.getParentFragment() == null) {
-            return null;
-        }
-
         return new ConfirmationDialogFragment(host, packageName, appName);
     }
 
@@ -373,17 +361,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         DialogHost host =
                 new DialogHost() {
                     @Override
-                    public DashboardFragment getParentFragment() {
-                        return mParentFragment;
-                    }
-
-                    @Override
                     public void onDialogClick(int whichButton) {}
                 };
-
-        if (host.getParentFragment() == null) {
-            return null;
-        }
 
         return new ErrorDialogFragment(host);
     }
@@ -396,12 +375,10 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     /** Called when the dialog button is clicked. */
     private interface DialogHost {
         void onDialogClick(int whichButton);
-
-        DashboardFragment getParentFragment();
     }
 
     /** Dialog fragment parent class. */
-    private abstract static class CredentialManagerDialogFragment extends InstrumentedDialogFragment
+    private abstract static class CredentialManagerDialogFragment extends DialogFragment
             implements DialogInterface.OnClickListener {
 
         public static final String TAG = "CredentialManagerDialogFragment";
@@ -412,17 +389,11 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         CredentialManagerDialogFragment(DialogHost dialogHost) {
             super();
-            setTargetFragment(dialogHost.getParentFragment(), 0);
             mDialogHost = dialogHost;
         }
 
         public DialogHost getDialogHost() {
             return mDialogHost;
-        }
-
-        @Override
-        public int getMetricsCategory() {
-            return SettingsEnums.ACCOUNT;
         }
     }
 
