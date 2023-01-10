@@ -39,8 +39,9 @@ public class ScreenSaverPreferenceController extends BasePreferenceController im
                 com.android.internal.R.bool.config_dreamsSupported);
         final boolean dreamsOnlyEnabledForDockUser = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_dreamsOnlyEnabledForDockUser);
+        final UserManager userManager = mContext.getSystemService(UserManager.class);
         // TODO(b/257333623): Allow the Dock User to be non-SystemUser user in HSUM.
-        return (dreamsSupported && (!dreamsOnlyEnabledForDockUser || isSystemUser()))
+        return (dreamsSupported && (!dreamsOnlyEnabledForDockUser || userManager.isMainUser()))
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
@@ -52,10 +53,5 @@ public class ScreenSaverPreferenceController extends BasePreferenceController im
         } else {
             return DreamSettings.getSummaryTextWithDreamName(mContext);
         }
-    }
-
-    private boolean isSystemUser() {
-        final UserManager userManager = mContext.getSystemService(UserManager.class);
-        return userManager.isSystemUser();
     }
 }

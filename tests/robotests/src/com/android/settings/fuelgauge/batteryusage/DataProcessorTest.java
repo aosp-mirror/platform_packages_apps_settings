@@ -1660,8 +1660,7 @@ public final class DataProcessorTest {
                 batteryHistEntry);
         doReturn(mAppEntry).when(mApplicationsState).getEntry(anyString(), anyInt());
         mAppEntry.info = mApplicationInfo;
-        mApplicationInfo.flags =
-                ApplicationInfo.FLAG_SYSTEM | ApplicationInfo.FLAG_UPDATED_SYSTEM_APP;
+        mApplicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
 
         boolean needsCombineInSystemApp = DataProcessor.needsCombineInSystemApp(
                 batteryDiffEntry, List.of(), mApplicationsState);
@@ -1691,7 +1690,7 @@ public final class DataProcessorTest {
                 batteryHistEntry);
         doReturn(mAppEntry).when(mApplicationsState).getEntry(anyString(), anyInt());
         mAppEntry.info = mApplicationInfo;
-        mApplicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
+        mApplicationInfo.flags = 0;
 
         boolean needsCombineInSystemApp = DataProcessor.needsCombineInSystemApp(
                 batteryDiffEntry, List.of(), mApplicationsState);

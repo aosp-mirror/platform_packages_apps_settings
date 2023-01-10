@@ -15,4 +15,8 @@
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="key_option_page_sub_title"
+        android:title="@string/regional_preferences_option_page_sub_title"
+        android:persistent="false" />
 </PreferenceScreen>

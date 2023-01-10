@@ -44,7 +44,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
-import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.utils.LocaleUtils;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -56,7 +56,7 @@ import java.util.Locale;
 /**
  * Base class for accessibility fragments shortcut functions and dialog management.
  */
-public abstract class AccessibilityShortcutPreferenceFragment extends DashboardFragment
+public abstract class AccessibilityShortcutPreferenceFragment extends RestrictedDashboardFragment
         implements ShortcutPreference.OnClickCallback {
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     protected static final String KEY_SAVED_USER_SHORTCUT_TYPE = "shortcut_type";
@@ -74,6 +74,10 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
     private AccessibilityQuickSettingsTooltipWindow mTooltipWindow;
     private boolean mNeedsQSTooltipReshow = false;
     private int mNeedsQSTooltipType = QuickSettingsTooltipType.GUIDE_TO_EDIT;
+
+    public AccessibilityShortcutPreferenceFragment(String restrictionKey) {
+        super(restrictionKey);
+    }
 
     /** Returns the accessibility component name. */
     protected abstract ComponentName getComponentName();

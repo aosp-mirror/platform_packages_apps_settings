@@ -36,16 +36,13 @@
         android:paddingLeft="0dp"
         android:paddingRight="0dp">
 
-        <TextView
-            android:id="@+id/headerText"
-            style="@style/SudDescription.Glif"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/screen_lock_options"
+            style="@style/LockPatternButtonStyle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minLines="2"
-            android:gravity="center"
-            android:paddingStart="?attr/sudMarginStart"
-            android:paddingEnd="?attr/sudMarginEnd"
-            android:fontFamily="@*android:string/config_headlineFontFamily" />
+            android:text="@string/setup_lock_settings_options_button_label"
+            android:visibility="gone"/>
 
         <com.google.android.setupdesign.view.FillContentLayout
             style="@style/LockPatternContainerStyle"
@@ -69,13 +66,6 @@
                   android:textSize="14sp"
                   android:visibility="gone"/>
 
-        <Button
-            android:id="@+id/screen_lock_options"
-            style="@style/SudGlifButton.Tertiary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/setup_lock_settings_options_button_label"
-            android:visibility="gone"/>
     </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
 
 </com.google.android.setupdesign.GlifLayout>

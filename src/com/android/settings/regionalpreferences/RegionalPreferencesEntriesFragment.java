@@ -28,6 +28,8 @@ import com.android.settingslib.search.SearchIndexable;
 public class RegionalPreferencesEntriesFragment extends DashboardFragment {
     private static final String TAG = RegionalPreferencesEntriesFragment.class.getSimpleName();
 
+    static final String ARG_KEY_REGIONAL_PREFERENCE = "arg_key_regional_preference";
+
     @Override
     public void onStart() {
         super.onStart();

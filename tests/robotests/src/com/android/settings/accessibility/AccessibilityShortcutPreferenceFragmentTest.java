@@ -93,7 +93,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
     public void setUpTestFragment() {
         MockitoAnnotations.initMocks(this);
 
-        mFragment = spy(new TestAccessibilityShortcutPreferenceFragment());
+        mFragment = spy(new TestAccessibilityShortcutPreferenceFragment(null));
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
         when(mFragment.getContext()).thenReturn(mContext);
@@ -255,6 +255,10 @@ public class AccessibilityShortcutPreferenceFragmentTest {
 
     public static class TestAccessibilityShortcutPreferenceFragment
             extends AccessibilityShortcutPreferenceFragment {
+
+        public TestAccessibilityShortcutPreferenceFragment(String restrictionKey) {
+            super(restrictionKey);
+        }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,

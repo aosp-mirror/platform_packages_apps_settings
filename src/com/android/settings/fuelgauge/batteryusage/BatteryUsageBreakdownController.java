@@ -291,44 +291,43 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     @VisibleForTesting
     void setPreferenceSummary(
             PowerGaugePreference preference, BatteryDiffEntry entry) {
+        final long screenOnTimeInMs = entry.mScreenOnTimeInMs;
         final long foregroundUsageTimeInMs = entry.mForegroundUsageTimeInMs;
         final long backgroundUsageTimeInMs = entry.mBackgroundUsageTimeInMs;
         final long totalUsageTimeInMs = foregroundUsageTimeInMs + backgroundUsageTimeInMs;
-        String usageTimeSummary = null;
-        // Not shows summary for some system components without usage time.
-        if (totalUsageTimeInMs == 0) {
-            preference.setSummary(null);
-            // Shows background summary only if we don't have foreground usage time.
-        } else if (foregroundUsageTimeInMs == 0 && backgroundUsageTimeInMs != 0) {
-            usageTimeSummary = buildUsageTimeInfo(backgroundUsageTimeInMs, true);
-            // Shows total usage summary only if total usage time is small.
-        } else if (totalUsageTimeInMs < DateUtils.MINUTE_IN_MILLIS) {
-            usageTimeSummary = buildUsageTimeInfo(totalUsageTimeInMs, false);
+
+        StringBuilder usageTimeSummary = new StringBuilder();
+        if (entry.isSystemEntry()) {
+            if (totalUsageTimeInMs != 0) {
+                usageTimeSummary.append(buildUsageTimeInfo(totalUsageTimeInMs,
+                        R.string.battery_usage_total_less_than_one_minute,
+                        R.string.battery_usage_for_total_time));
+            }
         } else {
-            usageTimeSummary = buildUsageTimeInfo(totalUsageTimeInMs, false);
-            // Shows background usage time if it is larger than a minute.
-            if (backgroundUsageTimeInMs > 0) {
-                usageTimeSummary +=
-                        "\n" + buildUsageTimeInfo(backgroundUsageTimeInMs, true);
+            if (screenOnTimeInMs != 0) {
+                usageTimeSummary.append(buildUsageTimeInfo(screenOnTimeInMs,
+                        R.string.battery_usage_screen_time_less_than_one_minute,
+                        R.string.battery_usage_screen_time));
+            }
+            if (screenOnTimeInMs != 0 && backgroundUsageTimeInMs != 0) {
+                usageTimeSummary.append('\n');
+            }
+            if (backgroundUsageTimeInMs != 0) {
+                usageTimeSummary.append(buildUsageTimeInfo(backgroundUsageTimeInMs,
+                        R.string.battery_usage_background_less_than_one_minute,
+                        R.string.battery_usage_for_background_time));
             }
         }
         preference.setSummary(usageTimeSummary);
     }
 
-    private String buildUsageTimeInfo(long usageTimeInMs, boolean isBackground) {
-        if (usageTimeInMs < DateUtils.MINUTE_IN_MILLIS) {
-            return mPrefContext.getString(
-                    isBackground
-                            ? R.string.battery_usage_background_less_than_one_minute
-                            : R.string.battery_usage_total_less_than_one_minute);
+    private String buildUsageTimeInfo(long timeInMs, int lessThanOneMinuteResId, int normalResId) {
+        if (timeInMs < DateUtils.MINUTE_IN_MILLIS) {
+            return mPrefContext.getString(lessThanOneMinuteResId);
         }
         final CharSequence timeSequence =
-                StringUtil.formatElapsedTime(mPrefContext, (double) usageTimeInMs,
+                StringUtil.formatElapsedTime(mPrefContext, (double) timeInMs,
                         /*withSeconds=*/ false, /*collapseTimeUnit=*/ false);
-        final int resourceId =
-                isBackground
-                        ? R.string.battery_usage_for_background_time
-                        : R.string.battery_usage_for_total_time;
-        return mPrefContext.getString(resourceId, timeSequence);
+        return mPrefContext.getString(normalResId, timeSequence);
     }
 }

@@ -272,8 +272,8 @@ public class BatteryDiffEntry {
 
     @VisibleForTesting
     void updateRestrictionFlagState() {
-        mValidForRestriction = true;
         if (!mBatteryHistEntry.isAppEntry()) {
+            mValidForRestriction = false;
             return;
         }
         final boolean isValidPackage =

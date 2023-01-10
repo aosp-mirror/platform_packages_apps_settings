@@ -43,7 +43,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -183,7 +182,7 @@ public class CredentialManagerPreferenceControllerTest {
         CredentialManagerPreferenceController controller =
                 new CredentialManagerPreferenceController(
                         mContext, mCredentialsPreferenceCategory.getKey());
-        controller.init(() -> mock(Lifecycle.class), availableServices, new HashSet<>());
+        controller.init(() -> mock(Lifecycle.class), availableServices);
         return controller;
     }
 
