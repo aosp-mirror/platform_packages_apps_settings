@@ -32,8 +32,8 @@ object WifiControlAppListProvider : TogglePermissionAppListProvider {
 }
 
 class WifiControlAppListModel(
-    private val context: Context,
-    private val packageManagers: IPackageManagers = PackageManagers
+    context: Context,
+    packageManagers: IPackageManagers = PackageManagers
 ) : AppOpPermissionListModel(context, packageManagers) {
     override val pageTitleResId = R.string.change_wifi_state_title
     override val switchTitleResId = R.string.change_wifi_state_app_detail_switch
@@ -44,6 +44,6 @@ class WifiControlAppListModel(
 
     /** NETWORK_SETTINGS permission trumps CHANGE_WIFI_CONFIG. */
     override val broaderPermission = Manifest.permission.NETWORK_SETTINGS
-    override val permissionHasAppopFlag = false
+    override val permissionHasAppOpFlag = false
     override val modeForNotAllowed = MODE_IGNORED
 }

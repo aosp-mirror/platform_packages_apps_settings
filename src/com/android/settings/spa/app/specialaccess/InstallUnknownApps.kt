@@ -19,7 +19,6 @@ package com.android.settings.spa.app.specialaccess
 import android.Manifest
 import android.app.AppGlobals
 import android.app.AppOpsManager.MODE_DEFAULT
-import android.app.AppOpsManager.MODE_ERRORED
 import android.app.AppOpsManager.OP_REQUEST_INSTALL_PACKAGES
 import android.content.Context
 import android.content.pm.ApplicationInfo
@@ -65,7 +64,6 @@ class InstallUnknownAppsListModel(private val context: Context) :
                     context = context,
                     app = app,
                     op = OP_REQUEST_INSTALL_PACKAGES,
-                    modeForNotAllowed = MODE_ERRORED
                 ),
         )
 
