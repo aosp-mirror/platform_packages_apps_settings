@@ -19,6 +19,7 @@ package com.android.settings.inputmethod;
 import android.content.Context;
 import android.util.FeatureFlagUtils;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
@@ -29,9 +30,16 @@ public class TouchGesturesButtonPreferenceController extends BasePreferenceContr
     private static final int ORDER_TOP = 0;
     private static final int ORDER_BOTTOM = 100;
     private static final String PREFERENCE_KEY = "trackpad_touch_gesture";
+    private static final String GESTURE_DIALOG_TAG = "GESTURE_DIALOG_TAG";
+
+    private Fragment mParent;
 
     public TouchGesturesButtonPreferenceController(Context context, String key) {
         super(context, key);
+    }
+
+    public void setFragment(Fragment parent) {
+        mParent = parent;
     }
 
     @Override
@@ -59,12 +67,8 @@ public class TouchGesturesButtonPreferenceController extends BasePreferenceContr
     }
 
     private void showTouchpadGestureEducation() {
-        // TODO: Waiting for the education UX design.
-        /* For example:
-        FragmentManager fragmentManager = mParent.getActivity().getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
         TrackpadGestureDialogFragment fragment = new TrackpadGestureDialogFragment();
-        fragment.show(transaction, GESTURE_DIALOG_TAG);
-        */
+        fragment.setTargetFragment(mParent, 0);
+        fragment.show(mParent.getActivity().getSupportFragmentManager(), GESTURE_DIALOG_TAG);
     }
 }
