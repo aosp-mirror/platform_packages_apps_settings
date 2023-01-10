@@ -24,7 +24,6 @@ import android.annotation.IntDef;
 import android.app.Application;
 import android.os.UserHandle;
 import android.util.Log;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -189,7 +188,7 @@ public class FingerprintEnrollIntroViewModel extends AndroidViewModel
     /**
      * User clicks next button
      */
-    public void onNextButtonClick(View ignoredView) {
+    public void onNextButtonClick() {
         final Integer status = mEnrollableStatusLiveData.getValue();
         switch (status != null ? status : ENROLLABLE_STATUS_DEFAULT) {
             case FINGERPRINT_ENROLLABLE_ERROR_REACH_MAX:
@@ -206,7 +205,7 @@ public class FingerprintEnrollIntroViewModel extends AndroidViewModel
     /**
      * User clicks skip/cancel button
      */
-    public void onSkipOrCancelButtonClick(View ignoredView) {
+    public void onSkipOrCancelButtonClick() {
         mActionLiveData.postValue(FINGERPRINT_ENROLL_INTRO_ACTION_SKIP_OR_CANCEL);
     }
 

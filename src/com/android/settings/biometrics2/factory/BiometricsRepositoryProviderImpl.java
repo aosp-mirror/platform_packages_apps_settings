@@ -30,6 +30,8 @@ import com.android.settings.biometrics2.data.repository.FingerprintRepository;
  */
 public class BiometricsRepositoryProviderImpl implements BiometricsRepositoryProvider {
 
+    private static volatile FingerprintRepository sFingerprintRepository;
+
     /**
      * Get FingerprintRepository
      */
@@ -41,6 +43,13 @@ public class BiometricsRepositoryProviderImpl implements BiometricsRepositoryPro
         if (fingerprintManager == null) {
             return null;
         }
-        return new FingerprintRepository(fingerprintManager);
+        if (sFingerprintRepository == null) {
+            synchronized (FingerprintRepository.class) {
+                if (sFingerprintRepository == null) {
+                    sFingerprintRepository = new FingerprintRepository(fingerprintManager);
+                }
+            }
+        }
+        return sFingerprintRepository;
     }
 }

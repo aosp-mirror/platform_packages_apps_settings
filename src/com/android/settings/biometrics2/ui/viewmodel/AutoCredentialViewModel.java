@@ -253,7 +253,11 @@ public class AutoCredentialViewModel extends AndroidViewModel {
         if (isUnspecifiedPassword()) {
             return CREDENTIAL_FAIL_NEED_TO_CHOOSE_LOCK;
         } else if (mCredentialModel.isValidGkPwHandle()) {
-            generateChallenge(mCredentialModel.getGkPwHandle());
+            final long gkPwHandle = mCredentialModel.getGkPwHandle();
+            mCredentialModel.clearGkPwHandle();
+            // GkPwHandle is got through caller activity, we shall not revoke it after
+            // generateChallenge(). Let caller activity to make decision.
+            generateChallenge(gkPwHandle, false /* revokeGkPwHandle */);
             mIsGeneratingChallengeDuringCheckingCredential = true;
             return CREDENTIAL_IS_GENERATING_CHALLENGE;
         } else {
@@ -261,7 +265,7 @@ public class AutoCredentialViewModel extends AndroidViewModel {
         }
     }
 
-    private void generateChallenge(long gkPwHandle) {
+    private void generateChallenge(long gkPwHandle, boolean revokeGkPwHandle) {
         mChallengeGenerator.setCallback((sensorId, userId, challenge) -> {
             try {
                 final byte[] newToken = requestGatekeeperHat(gkPwHandle, challenge, userId);
@@ -274,11 +278,13 @@ public class AutoCredentialViewModel extends AndroidViewModel {
                 return;
             }
 
-            mLockPatternUtils.removeGatekeeperPasswordHandle(gkPwHandle);
-            mCredentialModel.clearGkPwHandle();
+            if (revokeGkPwHandle) {
+                mLockPatternUtils.removeGatekeeperPasswordHandle(gkPwHandle);
+            }
 
             if (DEBUG) {
-                Log.d(TAG, "generateChallenge " + mCredentialModel);
+                Log.d(TAG, "generateChallenge(), model:" + mCredentialModel
+                        + ", revokeGkPwHandle:" + revokeGkPwHandle);
             }
 
             // Check credential again
@@ -314,7 +320,9 @@ public class AutoCredentialViewModel extends AndroidViewModel {
             if (data != null) {
                 final long gkPwHandle = result.getData().getLongExtra(
                         EXTRA_KEY_GK_PW_HANDLE, INVALID_GK_PW_HANDLE);
-                generateChallenge(gkPwHandle);
+                // Revoke self requested GkPwHandle because it shall only used once inside this
+                // activity lifecycle.
+                generateChallenge(gkPwHandle, true /* revokeGkPwHandle */);
                 return true;
             }
         }
@@ -326,6 +334,14 @@ public class AutoCredentialViewModel extends AndroidViewModel {
      */
     public int getUserId() {
         return mCredentialModel.getUserId();
+    }
+
+    /**
+     * Get userId for this credential
+     */
+    @Nullable
+    public byte[] getToken() {
+        return mCredentialModel.getToken();
     }
 
     @Nullable
