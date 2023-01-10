@@ -24,6 +24,8 @@ import android.content.res.Resources;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
+import android.hardware.fingerprint.IFingerprintAuthenticatorsRegisteredCallback;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,10 +41,21 @@ import java.util.List;
  */
 public class FingerprintRepository {
 
+    private static final String TAG = "FingerprintRepository";
     @NonNull private final FingerprintManager mFingerprintManager;
+
+    private List<FingerprintSensorPropertiesInternal> mSensorPropertiesCache;
 
     public FingerprintRepository(@NonNull FingerprintManager fingerprintManager) {
         mFingerprintManager = fingerprintManager;
+        mFingerprintManager.addAuthenticatorsRegisteredCallback(
+                new IFingerprintAuthenticatorsRegisteredCallback.Stub() {
+                    @Override
+                    public void onAllAuthenticatorsRegistered(
+                            List<FingerprintSensorPropertiesInternal> sensors) {
+                        mSensorPropertiesCache = sensors;
+                    }
+                });
     }
 
     /**
@@ -86,9 +99,12 @@ public class FingerprintRepository {
 
     @Nullable
     private FingerprintSensorPropertiesInternal getFirstFingerprintSensorPropertiesInternal() {
-        // TODO(b/264827022) use API addAuthenticatorsRegisteredCallback
-        final List<FingerprintSensorPropertiesInternal> props =
-                mFingerprintManager.getSensorPropertiesInternal();
+        final List<FingerprintSensorPropertiesInternal> props = mSensorPropertiesCache;
+        if (props == null) {
+            // Handle this case if it really happens
+            Log.e(TAG, "Sensor properties cache is null");
+            return null;
+        }
         return props.size() > 0 ? props.get(0) : null;
     }
 
