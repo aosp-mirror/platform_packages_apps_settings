@@ -67,12 +67,12 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public boolean isBatteryUsageEnabled(Context context) {
+    public boolean isBatteryUsageEnabled() {
         return true;
     }
 
     @Override
-    public List<String> getSystemAppsAllowlist(Context context) {
+    public List<String> getSystemAppsAllowlist() {
         return null;
     }
 
@@ -153,27 +153,27 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public Set<Integer> getOthersSystemComponentSet(Context context) {
+    public Set<Integer> getOthersSystemComponentSet() {
         return new ArraySet<>();
     }
 
     @Override
-    public Set<Integer> getHideSystemComponentSet(Context context) {
+    public Set<Integer> getHideSystemComponentSet() {
         return new ArraySet<>();
     }
 
     @Override
-    public Set<CharSequence> getHideApplicationSet(Context context) {
+    public Set<String> getHideApplicationSet() {
         return new ArraySet<>();
     }
 
     @Override
-    public Set<CharSequence> getHideBackgroundUsageTimeSet(Context context) {
+    public Set<String> getHideBackgroundUsageTimeSet() {
         return new ArraySet<>();
     }
 
     @Override
-    public Set<CharSequence> getIgnoreScreenOnTimeTaskRootSet(Context context) {
+    public Set<String> getIgnoreScreenOnTimeTaskRootSet() {
         return new ArraySet<>();
     }
 }

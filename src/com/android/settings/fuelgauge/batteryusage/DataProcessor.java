@@ -323,10 +323,10 @@ public final class DataProcessor {
         final List<AppUsageEvent> appUsageEventList = new ArrayList<>();
         long numEventsFetched = 0;
         long numAllEventsFetched = 0;
-        final Set<CharSequence> ignoreScreenOnTimeTaskRootSet =
+        final Set<String> ignoreScreenOnTimeTaskRootSet =
                 FeatureFactory.getFactory(context)
                         .getPowerUsageFeatureProvider(context)
-                        .getIgnoreScreenOnTimeTaskRootSet(context);
+                        .getIgnoreScreenOnTimeTaskRootSet();
         for (final long userId : usageEventsMap.keySet()) {
             final UsageEvents usageEvents = usageEventsMap.get(userId);
             while (usageEvents.hasNextEvent()) {
@@ -1691,15 +1691,15 @@ public final class DataProcessor {
         final Set<Integer> hideSystemComponentSet =
                 FeatureFactory.getFactory(context)
                         .getPowerUsageFeatureProvider(context)
-                        .getHideSystemComponentSet(context);
-        final Set<CharSequence> hideBackgroundUsageTimeSet =
+                        .getHideSystemComponentSet();
+        final Set<String> hideBackgroundUsageTimeSet =
                 FeatureFactory.getFactory(context)
                         .getPowerUsageFeatureProvider(context)
-                        .getHideBackgroundUsageTimeSet(context);
-        final Set<CharSequence> hideApplicationSet =
+                        .getHideBackgroundUsageTimeSet();
+        final Set<String> hideApplicationSet =
                 FeatureFactory.getFactory(context)
                         .getPowerUsageFeatureProvider(context)
-                        .getHideApplicationSet(context);
+                        .getHideApplicationSet();
         resultMap.keySet().forEach(dailyKey -> {
             final Map<Integer, BatteryDiffData> dailyUsageMap = resultMap.get(dailyKey);
             dailyUsageMap.values().forEach(batteryDiffData -> {
@@ -1727,8 +1727,8 @@ public final class DataProcessor {
     private static void purgeFakeAndHiddenPackages(
             final List<BatteryDiffEntry> entries,
             final Set<Integer> hideSystemComponentSet,
-            final Set<CharSequence> hideApplicationSet,
-            final Set<CharSequence> hideBackgroundUsageTimeSet) {
+            final Set<String> hideApplicationSet,
+            final Set<String> hideBackgroundUsageTimeSet) {
         final Iterator<BatteryDiffEntry> iterator = entries.iterator();
         while (iterator.hasNext()) {
             final BatteryDiffEntry entry = iterator.next();
@@ -1750,7 +1750,7 @@ public final class DataProcessor {
         final Set<Integer> othersSystemComponentSet =
                 FeatureFactory.getFactory(context)
                         .getPowerUsageFeatureProvider(context)
-                        .getOthersSystemComponentSet(context);
+                        .getOthersSystemComponentSet();
 
         BatteryDiffEntry.OthersBatteryDiffEntry othersDiffEntry = null;
         final Iterator<BatteryDiffEntry> systemListIterator =
@@ -1777,7 +1777,7 @@ public final class DataProcessor {
         final List<String> systemAppsAllowlist =
                 FeatureFactory.getFactory(context)
                         .getPowerUsageFeatureProvider(context)
-                        .getSystemAppsAllowlist(context);
+                        .getSystemAppsAllowlist();
         final Application application = (Application) context.getApplicationContext();
         final ApplicationsState applicationsState =
                 application == null ? null : ApplicationsState.getInstance(application);

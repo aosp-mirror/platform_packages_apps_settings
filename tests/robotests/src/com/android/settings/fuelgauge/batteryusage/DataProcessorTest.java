@@ -1237,7 +1237,7 @@ public final class DataProcessorTest {
         final List<Integer> levels = List.of(100, 100);
         hourlyBatteryLevelsPerDay.add(
                 new BatteryLevelData.PeriodBatteryLevelData(timestamps, levels));
-        when(mPowerUsageFeatureProvider.getHideApplicationSet(mContext))
+        when(mPowerUsageFeatureProvider.getHideApplicationSet())
                 .thenReturn(Set.of("package1"));
 
         final Map<Integer, Map<Integer, BatteryDiffData>> resultMap =
@@ -1330,7 +1330,7 @@ public final class DataProcessorTest {
         final List<Integer> levels = List.of(100, 100);
         hourlyBatteryLevelsPerDay.add(
                 new BatteryLevelData.PeriodBatteryLevelData(timestamps, levels));
-        when(mPowerUsageFeatureProvider.getHideBackgroundUsageTimeSet(mContext))
+        when(mPowerUsageFeatureProvider.getHideBackgroundUsageTimeSet())
                 .thenReturn(new HashSet(Arrays.asList((CharSequence) "package2")));
 
         final Map<Integer, Map<Integer, BatteryDiffData>> resultMap =

@@ -90,7 +90,7 @@ public final class BatteryUsageBreakdownControllerTest {
         doReturn(resources).when(mContext).getResources();
         doReturn(Set.of("com.android.gms.persistent"))
                 .when(mFeatureFactory.powerUsageFeatureProvider)
-                .getHideApplicationSet(mContext);
+                .getHideApplicationSet();
         mBatteryUsageBreakdownController = createController();
         mBatteryUsageBreakdownController.mAppListPreferenceGroup = mAppListPreferenceGroup;
         mBatteryDiffEntry = new BatteryDiffEntry(
