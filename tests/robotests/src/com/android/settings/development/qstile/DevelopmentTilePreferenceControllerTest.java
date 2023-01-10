@@ -19,7 +19,9 @@ package com.android.settings.development.qstile;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -30,6 +32,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
+import android.os.Bundle;
 import android.os.RemoteException;
 import android.service.quicksettings.TileService;
 
@@ -50,6 +53,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowPackageManager;
+import org.robolectric.shadows.ShadowSystemProperties;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Arrays;
@@ -88,16 +92,42 @@ public class DevelopmentTilePreferenceControllerTest {
     public void display_hasTileService_shouldDisplay() {
         final Intent tileProbe = new Intent(TileService.ACTION_QS_TILE)
                 .setPackage(mContext.getPackageName());
-        final ResolveInfo info = new ResolveInfo();
-        info.serviceInfo = new FakeServiceInfo();
-        info.serviceInfo.name = "abc";
-        info.serviceInfo.icon = R.drawable.ic_settings_24dp;
-        info.serviceInfo.packageName = mContext.getPackageName();
+        final ResolveInfo info = createFakeInfo("abc");
         mShadowPackageManager.setResolveInfosForIntent(tileProbe, Arrays.asList(info));
 
         mController.displayPreference(mScreen);
 
         verify(mScreen, atLeastOnce()).addPreference(any(Preference.class));
+    }
+
+    @Test
+    public void display_flagDefinedAndOn_shouldDisplay() {
+        ShadowSystemProperties.override("tile_flag", "1");
+
+        final Intent tileProbe = new Intent(TileService.ACTION_QS_TILE)
+                .setPackage(mContext.getPackageName());
+        final ResolveInfo info = createFakeInfo("abc");
+        info.serviceInfo.metaData = createFlagMetadata("tile_flag");
+        mShadowPackageManager.setResolveInfosForIntent(tileProbe, Arrays.asList(info));
+
+        mController.displayPreference(mScreen);
+
+        verify(mScreen, atLeastOnce()).addPreference(argThat(pref -> pref.getKey().equals("abc")));
+    }
+
+    @Test
+    public void display_flagDefinedAndOff_shouldHide() {
+        ShadowSystemProperties.override("tile_flag" , "0");
+
+        final Intent tileProbe = new Intent(TileService.ACTION_QS_TILE)
+                .setPackage(mContext.getPackageName());
+        final ResolveInfo info = createFakeInfo("abc");
+        info.serviceInfo.metaData = createFlagMetadata("tile_flag");
+        mShadowPackageManager.setResolveInfosForIntent(tileProbe, Arrays.asList(info));
+
+        mController.displayPreference(mScreen);
+
+        verify(mScreen, never()).addPreference(argThat(pref -> pref.getKey().equals("abc")));
     }
 
     @Test
@@ -130,6 +160,21 @@ public class DevelopmentTilePreferenceControllerTest {
         preference.setChecked(defaultCheckedState);
         preference.setOnPreferenceChangeListener(mOnChangeHandler);
         return preference;
+    }
+
+    private ResolveInfo createFakeInfo(String name) {
+        final ResolveInfo info = new ResolveInfo();
+        info.serviceInfo = new FakeServiceInfo();
+        info.serviceInfo.name = name;
+        info.serviceInfo.icon = R.drawable.ic_settings_24dp;
+        info.serviceInfo.packageName = mContext.getPackageName();
+        return info;
+    }
+
+    private Bundle createFlagMetadata(String flag) {
+        Bundle metaData = new Bundle();
+        metaData.putString(DevelopmentTiles.META_DATA_REQUIRES_SYSTEM_PROPERTY, flag);
+        return metaData;
     }
 
     private static class FakeServiceInfo extends ServiceInfo {

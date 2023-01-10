@@ -77,6 +77,18 @@
     </Preference>
 
     <Preference
+        android:key="app_battery_usage"
+        android:order="17"
+        android:title="@string/app_battery_usage_title"
+        android:summary="@string/app_battery_usage_summary"
+        settings:controller="com.android.settings.applications.AppBatteryUsagePreferenceController"
+        android:fragment="com.android.settings.applications.manageapplications.ManageApplications">
+        <extra
+            android:name="classname"
+            android:value="com.android.settings.Settings$AppBatteryUsageActivity"/>
+    </Preference>
+
+    <Preference
         android:key="special_access"
         android:fragment="com.android.settings.applications.specialaccess.SpecialAccessSettings"
         android:title="@string/special_access"

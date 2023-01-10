@@ -58,6 +58,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.provider.Settings;
+import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -108,6 +109,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 // TODO(b/143326832): Should add test cases for connect button.
@@ -1790,5 +1792,75 @@ public class WifiDetailPreferenceController2Test {
         when(pref.setButton4OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
 
         return pref;
+    }
+
+    @Test
+    public void fineSubscriptionInfo_noMatchedCarrierId_returnNull() {
+        setUpSpyController();
+        SubscriptionInfo sub1 = mockSubscriptionInfo(1, "sim1", 1111);
+        SubscriptionInfo sub2 = mockSubscriptionInfo(2, "sim2", 2222);
+        List<SubscriptionInfo> activeSubInfos = Arrays.asList(sub1, sub2);
+
+        SubscriptionInfo info = mController.fineSubscriptionInfo(3333, activeSubInfos, 1);
+
+        assertThat(info).isNull();
+
+        info = mController.fineSubscriptionInfo(3333, activeSubInfos, 2);
+
+        assertThat(info).isNull();
+    }
+
+    @Test
+    public void fineSubscriptionInfo_diffCarrierId_returnMatchedOne() {
+        setUpSpyController();
+        SubscriptionInfo sub1 = mockSubscriptionInfo(1, "sim1", 1111);
+        SubscriptionInfo sub2 = mockSubscriptionInfo(2, "sim2", 2222);
+        List<SubscriptionInfo> activeSubInfos = Arrays.asList(sub1, sub2);
+
+        SubscriptionInfo info = mController.fineSubscriptionInfo(1111, activeSubInfos, 1);
+
+        assertThat(info).isNotNull();
+        assertThat(info.getDisplayName().toString()).isEqualTo("sim1");
+
+        info = mController.fineSubscriptionInfo(1111, activeSubInfos, 2);
+
+        assertThat(info).isNotNull();
+        assertThat(info.getDisplayName().toString()).isEqualTo("sim1");
+
+        info = mController.fineSubscriptionInfo(2222, activeSubInfos, 1);
+
+        assertThat(info).isNotNull();
+        assertThat(info.getDisplayName().toString()).isEqualTo("sim2");
+
+        info = mController.fineSubscriptionInfo(2222, activeSubInfos, 2);
+
+        assertThat(info).isNotNull();
+        assertThat(info.getDisplayName().toString()).isEqualTo("sim2");
+    }
+
+    @Test
+    public void fineSubscriptionInfo_sameCarrierId_returnDefaultDataOne() {
+        setUpSpyController();
+        SubscriptionInfo sub1 = mockSubscriptionInfo(1, "sim1", 1111);
+        SubscriptionInfo sub2 = mockSubscriptionInfo(2, "sim2", 1111);
+        List<SubscriptionInfo> activeSubInfos = Arrays.asList(sub1, sub2);
+
+        SubscriptionInfo info = mController.fineSubscriptionInfo(1111, activeSubInfos, 1);
+
+        assertThat(info).isNotNull();
+        assertThat(info.getDisplayName().toString()).isEqualTo("sim1");
+
+        info = mController.fineSubscriptionInfo(1111, activeSubInfos, 2);
+
+        assertThat(info).isNotNull();
+        assertThat(info.getDisplayName().toString()).isEqualTo("sim2");
+    }
+
+    private SubscriptionInfo mockSubscriptionInfo(int subId, String displayName, int carrierId) {
+        SubscriptionInfo info = mock(SubscriptionInfo.class);
+        when(info.getSubscriptionId()).thenReturn(subId);
+        when(info.getDisplayName()).thenReturn(displayName);
+        when(info.getCarrierId()).thenReturn(carrierId);
+        return info;
     }
 }

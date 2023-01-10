@@ -114,6 +114,7 @@ public class WifiSliceTest {
         mSIPackageName = mContext.getString(R.string.config_settingsintelligence_package_name);
         ShadowBinder.setCallingUid(USER_ID);
         when(mPackageManager.getPackagesForUid(USER_ID)).thenReturn(new String[]{mSIPackageName});
+        when(mPackageManager.getNameForUid(USER_ID)).thenReturn(mSIPackageName);
         ShadowWifiSlice.setWifiPermissible(true);
         mWifiSlice = new WifiSlice(mContext, mWifiRestriction);
     }
@@ -148,6 +149,7 @@ public class WifiSliceTest {
     @Test
     public void getWifiSlice_fromSIPackage_shouldHaveTitleAndToggle() {
         when(mPackageManager.getPackagesForUid(USER_ID)).thenReturn(new String[]{mSIPackageName});
+        when(mPackageManager.getNameForUid(USER_ID)).thenReturn(mSIPackageName);
         ShadowWifiSlice.setWifiPermissible(false);
 
         final Slice wifiSlice = mWifiSlice.getSlice();
@@ -163,6 +165,7 @@ public class WifiSliceTest {
     @Test
     public void getWifiSlice_notFromSIPackageAndWithWifiPermission_shouldHaveTitleAndToggle() {
         when(mPackageManager.getPackagesForUid(USER_ID)).thenReturn(new String[]{"com.test"});
+        when(mPackageManager.getNameForUid(USER_ID)).thenReturn("com.test");
         ShadowWifiSlice.setWifiPermissible(true);
 
         final Slice wifiSlice = mWifiSlice.getSlice();
@@ -177,6 +180,7 @@ public class WifiSliceTest {
     @Test
     public void getWifiSlice_notFromSIPackageAndWithoutWifiPermission_shouldReturnNoToggle() {
         when(mPackageManager.getPackagesForUid(USER_ID)).thenReturn(new String[]{"com.test"});
+        when(mPackageManager.getNameForUid(USER_ID)).thenReturn("com.test");
         ShadowWifiSlice.setWifiPermissible(false);
 
         final Slice wifiSlice = mWifiSlice.getSlice();

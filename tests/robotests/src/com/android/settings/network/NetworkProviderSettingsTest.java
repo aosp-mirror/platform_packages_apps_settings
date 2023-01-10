@@ -17,9 +17,11 @@ package com.android.settings.network;
 
 import static com.android.settings.network.NetworkProviderSettings.MENU_ID_DISCONNECT;
 import static com.android.settings.network.NetworkProviderSettings.MENU_ID_FORGET;
+import static com.android.settings.network.NetworkProviderSettings.MENU_ID_MODIFY;
 import static com.android.settings.network.NetworkProviderSettings.MENU_ID_SHARE;
 import static com.android.settings.wifi.WifiConfigUiBase2.MODE_CONNECT;
 import static com.android.settings.wifi.WifiConfigUiBase2.MODE_MODIFY;
+import static com.android.wifitrackerlib.WifiEntry.CONNECTED_STATE_DISCONNECTED;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -145,7 +147,10 @@ public class NetworkProviderSettingsTest {
 
     @Before
     public void setUp() {
-        mNetworkProviderSettings = spy(new NetworkProviderSettings());
+        mNetworkProviderSettings = spy(new NetworkProviderSettings() {
+            @Override
+            boolean showAnySubscriptionInfo(Context context) { return true; }
+        });
         doReturn(mContext).when(mNetworkProviderSettings).getContext();
         doReturn(mPreferenceManager).when(mNetworkProviderSettings).getPreferenceManager();
         doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
@@ -730,6 +735,28 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
+    public void addModifyMenuIfSuitable_isAdmin_addMenu() {
+        mNetworkProviderSettings.mIsAdmin = true;
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        when(mWifiEntry.getConnectedState()).thenReturn(CONNECTED_STATE_DISCONNECTED);
+
+        mNetworkProviderSettings.addModifyMenuIfSuitable(mContextMenu, mWifiEntry);
+
+        verify(mContextMenu).add(anyInt(), eq(MENU_ID_MODIFY), anyInt(), anyInt());
+    }
+
+    @Test
+    public void addModifyMenuIfSuitable_isNotAdmin_notAddMenu() {
+        mNetworkProviderSettings.mIsAdmin = false;
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        when(mWifiEntry.getConnectedState()).thenReturn(CONNECTED_STATE_DISCONNECTED);
+
+        mNetworkProviderSettings.addModifyMenuIfSuitable(mContextMenu, mWifiEntry);
+
+        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_MODIFY), anyInt(), anyInt());
+    }
+
+    @Test
     public void getNonIndexableKeys_allowedChangeWifiState_keyNotReturned() {
         when(mWifiRestriction.isChangeWifiStateAllowed(mContext)).thenReturn(true);
         NetworkProviderSettings.SearchIndexProvider searchIndexProvider =
@@ -749,6 +776,15 @@ public class NetworkProviderSettingsTest {
         final List<String> keys = searchIndexProvider.getNonIndexableKeys(mContext);
 
         assertThat(keys).contains(NetworkProviderSettings.PREF_KEY_WIFI_TOGGLE);
+    }
+
+    @Test
+    public void launchConfigNewNetworkFragment_fragmentIsRestricted_ignoreWifiEntry() {
+        mNetworkProviderSettings.mIsRestricted = true;
+
+        mNetworkProviderSettings.launchConfigNewNetworkFragment(mWifiEntry);
+
+        verify(mWifiEntry, never()).getKey();
     }
 
     @Implements(PreferenceFragmentCompat.class)

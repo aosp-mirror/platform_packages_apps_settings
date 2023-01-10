@@ -233,11 +233,7 @@ public class NotificationAccessDetails extends DashboardFragment {
         apc.updateState(screen.findPreference(apc.getPreferenceKey()));
         getPreferenceControllers().forEach(controllers -> {
             controllers.forEach(controller -> {
-                if (controller instanceof TypeFilterPreferenceController) {
-                    TypeFilterPreferenceController tfpc =
-                            (TypeFilterPreferenceController) controller;
-                    tfpc.updateState(screen.findPreference(tfpc.getPreferenceKey()));
-                }
+                controller.updateState(screen.findPreference(controller.getPreferenceKey()));
             });
         });
     }
@@ -249,11 +245,7 @@ public class NotificationAccessDetails extends DashboardFragment {
         apc.updateState(screen.findPreference(apc.getPreferenceKey()));
         getPreferenceControllers().forEach(controllers -> {
             controllers.forEach(controller -> {
-                if (controller instanceof TypeFilterPreferenceController) {
-                    TypeFilterPreferenceController tfpc =
-                            (TypeFilterPreferenceController) controller;
-                    tfpc.updateState(screen.findPreference(tfpc.getPreferenceKey()));
-                }
+                controller.updateState(screen.findPreference(controller.getPreferenceKey()));
             });
         });
     }

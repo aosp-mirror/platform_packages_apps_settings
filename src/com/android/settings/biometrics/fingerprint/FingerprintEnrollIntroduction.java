@@ -26,9 +26,12 @@ import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -104,6 +107,11 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         footerMessage5.setText(getFooterMessage5());
         footerMessage6.setText(getFooterMessage6());
 
+        final TextView footerLink = findViewById(R.id.footer_learn_more);
+        footerLink.setMovementMethod(LinkMovementMethod.getInstance());
+        footerLink.setText(Html.fromHtml(getString(getFooterLearnMore()),
+                Html.FROM_HTML_MODE_LEGACY));
+
         if (mCanAssumeUdfps) {
             footerMessage6.setVisibility(View.VISIBLE);
             iconShield.setVisibility(View.VISIBLE);
@@ -116,6 +124,9 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         final TextView footerTitle2 = findViewById(R.id.footer_title_2);
         footerTitle1.setText(getFooterTitle1());
         footerTitle2.setText(getFooterTitle2());
+
+        final ScrollView scrollView = findViewById(R.id.sud_scroll_view);
+        scrollView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
     }
 
     @Override
@@ -187,6 +198,11 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         return R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_6;
     }
 
+    @StringRes
+    protected int getFooterLearnMore() {
+        return R.string.security_settings_fingerprint_v2_enroll_introduction_message_learn_more;
+    }
+
     @Override
     protected boolean isDisabledByAdmin() {
         return RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
@@ -236,6 +252,11 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         return findViewById(R.id.error_text);
     }
 
+    private boolean isFromSetupWizardSuggestAction(@Nullable Intent intent) {
+        return intent != null && intent.getBooleanExtra(
+                WizardManagerHelper.EXTRA_IS_SUW_SUGGESTED_ACTION_FLOW, false);
+    }
+
     @Override
     protected int checkMaxEnrolled() {
         final boolean isSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
@@ -243,6 +264,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
                 WizardManagerHelper.isDeferredSetupWizard(getIntent());
         final boolean isPortalSetupWizard =
                 WizardManagerHelper.isPortalSetupWizard(getIntent());
+        final boolean isFromSetupWizardSuggestAction = isFromSetupWizardSuggestAction(getIntent());
         if (mFingerprintManager != null) {
             final List<FingerprintSensorPropertiesInternal> props =
                     mFingerprintManager.getSensorPropertiesInternal();
@@ -254,7 +276,8 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
                     getApplicationContext()
                             .getResources()
                             .getInteger(R.integer.suw_max_fingerprints_enrollable);
-            if (isSetupWizard && !isDeferredSetupWizard && !isPortalSetupWizard) {
+            if (isSetupWizard && !isDeferredSetupWizard && !isPortalSetupWizard
+                    && !isFromSetupWizardSuggestAction) {
                 if (numEnrolledFingerprints >= maxFingerprintsEnrollableIfSUW) {
                     return R.string.fingerprint_intro_error_max;
                 } else {
@@ -308,7 +331,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     public void onClick(LinkSpan span) {
-        if ("url".equals(span.getId())) {
+        if ("url".equals(span.getLink())) {
             String url = getString(R.string.help_url_fingerprint);
             Intent intent = HelpUtils.getHelpIntent(this, url, getClass().getName());
             if (intent == null) {

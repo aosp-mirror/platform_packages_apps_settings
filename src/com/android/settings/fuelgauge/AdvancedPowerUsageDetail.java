@@ -44,15 +44,16 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry;
 import com.android.settings.fuelgauge.batteryusage.BatteryEntry;
 import com.android.settings.fuelgauge.batteryusage.BatteryHistEntry;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
@@ -222,8 +223,12 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         return UserHandle.getUserId(batteryEntry.getUid());
     }
 
-    public static void startBatteryDetailPage(Activity caller,
-            InstrumentedPreferenceFragment fragment, String packageName) {
+    /**
+     * Start packageName's battery detail page.
+     */
+    public static void startBatteryDetailPage(
+            Activity caller, Instrumentable instrumentable, String packageName,
+            UserHandle userHandle) {
         final Bundle args = new Bundle(3);
         final PackageManager packageManager = caller.getPackageManager();
         args.putString(EXTRA_PACKAGE_NAME, packageName);
@@ -238,7 +243,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                 .setDestination(AdvancedPowerUsageDetail.class.getName())
                 .setTitleRes(R.string.battery_details_title)
                 .setArguments(args)
-                .setSourceMetricsCategory(fragment.getMetricsCategory())
+                .setSourceMetricsCategory(instrumentable.getMetricsCategory())
+                .setUserHandle(userHandle)
                 .launch();
     }
 
@@ -295,7 +301,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
             notifyBackupManager();
             logMetricCategory(selectedPreference);
-            mBatteryOptimizeUtils.setAppUsageState(selectedPreference);
             Log.d(TAG, "Leave with mode: " + selectedPreference);
         }
     }
@@ -462,6 +467,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         updatePreferenceState(mUnrestrictedPreference, selectedKey);
         updatePreferenceState(mOptimizePreference, selectedKey);
         updatePreferenceState(mRestrictedPreference, selectedKey);
+	mBatteryOptimizeUtils.setAppUsageState(getSelectedPreference());
     }
 
     private void updatePreferenceState(SelectorWithWidgetPreference preference,
@@ -527,7 +533,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     private CharSequence getAppActiveTime(Bundle bundle) {
         final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
         final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
-        final int consumedPower = bundle.getInt(EXTRA_POWER_USAGE_AMOUNT);
         final int uid = bundle.getInt(EXTRA_UID, 0);
         final String slotTime = bundle.getString(EXTRA_SLOT_TIME, null);
         final long totalTimeMs = foregroundTimeMs + backgroundTimeMs;
@@ -539,16 +544,11 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             return null;
         }
         if (totalTimeMs == 0) {
-            final int batteryWithoutUsageTime = consumedPower > 0
-                    ? R.string.battery_usage_without_time : R.string.battery_not_usage_24hr;
-            usageTimeSummary = getText(isChartGraphEnabled
-                    ? batteryWithoutUsageTime : R.string.battery_not_usage);
+            usageTimeSummary = getText(R.string.battery_usage_without_time);
         } else if (slotTime == null) {
-            // Shows summary text with past 24 hr or full charge if slot time is null.
-            usageTimeSummary = isChartGraphEnabled
-                    ? getAppPast24HrActiveSummary(foregroundTimeMs, backgroundTimeMs, totalTimeMs)
-                    : getAppFullChargeActiveSummary(
-                            foregroundTimeMs, backgroundTimeMs, totalTimeMs);
+            // Shows summary text with last full charge if slot time is null.
+            usageTimeSummary = getAppFullChargeActiveSummary(
+                    foregroundTimeMs, backgroundTimeMs, totalTimeMs);
         } else {
             // Shows summary text with slot time.
             usageTimeSummary = getAppActiveSummaryWithSlotTime(

@@ -18,6 +18,7 @@ package com.android.settings.applications.manageapplications;
 
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_ALARMS_AND_REMINDERS;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_ALL;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_BATTERY_OPTIMIZED;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_INSTALL_SOURCES;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_MEDIA_MANAGEMENT;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_POWER_ALLOWLIST;
@@ -26,6 +27,7 @@ import static com.android.settings.applications.manageapplications.AppFilterRegi
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_WITH_OVERLAY;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_WRITE_SETTINGS;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_ALARMS_AND_REMINDERS;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_BATTERY_OPTIMIZATION;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_GAMES;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_HIGH_POWER;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MAIN;
@@ -66,6 +68,8 @@ public class AppFilterRegistryTest {
 
         assertThat(registry.getDefaultFilterType(LIST_TYPE_MEDIA_MANAGEMENT_APPS))
                 .isEqualTo(FILTER_APPS_MEDIA_MANAGEMENT);
+        assertThat(registry.getDefaultFilterType(LIST_TYPE_BATTERY_OPTIMIZATION))
+                .isEqualTo(FILTER_APPS_BATTERY_OPTIMIZED);
 
         assertThat(registry.getDefaultFilterType(LIST_TYPE_MAIN)).isEqualTo(FILTER_APPS_ALL);
         assertThat(registry.getDefaultFilterType(LIST_TYPE_NOTIFICATION))

@@ -19,6 +19,7 @@ package com.android.settings.deviceinfo;
 import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -57,15 +58,34 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
 
     private String mVolumeId;
     private VolumeInfo mVolume;
+    private final View.OnClickListener mUnmountListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            new UnmountTask(getActivity(), mVolume).execute();
+        }
+    };
     private DiskInfo mDisk;
-
     private UsageProgressBarPreference mSummary;
-
     private Preference mMount;
     private Preference mFormatPublic;
-    private Preference mFormatPrivate;
     private Button mUnmount;
+    private final StorageEventListener mStorageListener = new StorageEventListener() {
+        @Override
+        public void onVolumeStateChanged(VolumeInfo vol, int oldState, int newState) {
+            if (Objects.equals(mVolume.getId(), vol.getId())) {
+                mVolume = vol;
+                update();
+            }
+        }
 
+        @Override
+        public void onVolumeRecordChanged(VolumeRecord rec) {
+            if (Objects.equals(mVolume.getFsUuid(), rec.getFsUuid())) {
+                mVolume = mStorageManager.findVolumeById(mVolumeId);
+                update();
+            }
+        }
+    };
     private boolean mIsPermittedToAdopt;
 
     private boolean isVolumeValid() {
@@ -120,10 +140,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         mUnmount = new Button(getActivity());
         mUnmount.setText(R.string.storage_menu_unmount);
         mUnmount.setOnClickListener(mUnmountListener);
-        mFormatPublic = buildAction(R.string.storage_menu_format);
-        if (mIsPermittedToAdopt) {
-            mFormatPrivate = buildAction(R.string.storage_menu_format_private);
-        }
+        mFormatPublic = buildAction(R.string.storage_menu_format_option);
     }
 
     @Override
@@ -176,9 +193,6 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
             mUnmount.setVisibility(View.GONE);
         }
         addPreference(mFormatPublic);
-        if (mDisk.isAdoptable() && mIsPermittedToAdopt) {
-            addPreference(mFormatPrivate);
-        }
     }
 
     private void addPreference(Preference pref) {
@@ -215,39 +229,14 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
 
     @Override
     public boolean onPreferenceTreeClick(Preference pref) {
+        final Intent intent = new Intent(getActivity(), StorageWizardInit.class);
+        intent.putExtra(VolumeInfo.EXTRA_VOLUME_ID, mVolume.getId());
         if (pref == mMount) {
             new MountTask(getActivity(), mVolume).execute();
         } else if (pref == mFormatPublic) {
-            StorageWizardFormatConfirm.showPublic(getActivity(), mDisk.getId());
-        } else if (pref == mFormatPrivate) {
-            StorageWizardFormatConfirm.showPrivate(getActivity(), mDisk.getId());
+            startActivity(intent);
         }
 
         return super.onPreferenceTreeClick(pref);
     }
-
-    private final View.OnClickListener mUnmountListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            new UnmountTask(getActivity(), mVolume).execute();
-        }
-    };
-
-    private final StorageEventListener mStorageListener = new StorageEventListener() {
-        @Override
-        public void onVolumeStateChanged(VolumeInfo vol, int oldState, int newState) {
-            if (Objects.equals(mVolume.getId(), vol.getId())) {
-                mVolume = vol;
-                update();
-            }
-        }
-
-        @Override
-        public void onVolumeRecordChanged(VolumeRecord rec) {
-            if (Objects.equals(mVolume.getFsUuid(), rec.getFsUuid())) {
-                mVolume = mStorageManager.findVolumeById(mVolumeId);
-                update();
-            }
-        }
-    };
 }

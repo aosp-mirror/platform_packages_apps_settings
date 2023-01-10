@@ -24,7 +24,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
@@ -87,9 +86,7 @@ public class RemoveGuestOnExitPreferenceController extends BasePreferenceControl
                 || !UserManager.isGuestUserAllowEphemeralStateChange()
                 || !mUserCaps.isAdmin()
                 || mUserCaps.disallowAddUser()
-                || mUserCaps.disallowAddUserSetByAdmin()
-                || !FeatureFlagUtils.isEnabled(mContext,
-                        FeatureFlagUtils.SETTINGS_GUEST_MODE_UX_CHANGES)) {
+                || mUserCaps.disallowAddUserSetByAdmin()) {
             return DISABLED_FOR_USER;
         } else {
             return mUserCaps.mUserSwitcherEnabled ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;

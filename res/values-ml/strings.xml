@@ -53,7 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"ചെറുതാക്കുക"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"വലുതാക്കുക"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"സ്വയമേവ തിരിയുക ക്രമീകരണം ഉപയോഗിക്കുക"</string>
-    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"സ്വയമേ തിരിയുക ക്രമീകരണത്തിന്റെ കൃത്യത മെച്ചപ്പെടുത്താൻ, \'മുഖം തിരിച്ചറിയൽ\' മുൻ ക്യാമറ ഉപയോഗിക്കുന്നു. ചിത്രങ്ങൾ ഒരിക്കലും സംഭരിക്കുകയോ Google-ലേക്ക് അയയ്ക്കുകയോ ചെയ്യില്ല."</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"\'സ്വയമേവ തിരിയുക\' ക്രമീകരണത്തിന്റെ കൃത്യത മെച്ചപ്പെടുത്താൻ, \'മുഖം തിരിച്ചറിയൽ\' മുൻ ക്യാമറ ഉപയോഗിക്കുന്നു. ചിത്രങ്ങൾ ഒരിക്കലും സംഭരിക്കുകയോ Google-ലേക്ക് അയയ്ക്കുകയോ ചെയ്യില്ല."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"സാമ്പിൾ ടെക്‌സ്റ്റ്"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"ഓസ് നഗരത്തിലെ അതിശയിപ്പിക്കുന്ന മന്ത്രവാദി"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"അധ്യായം 11: ഓസ് എന്ന അത്ഭുതകരമായ മരതകനഗരം"</string>
@@ -85,6 +85,8 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"ബ്ലൂടൂത്ത് ക്രമീകരണങ്ങൾ മാറ്റാൻ നിങ്ങൾക്ക് അനുമതിയില്ല."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"പുതിയ ഉപകരണം ജോടിയാക്കുക"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"വലതു ചെവി ജോടിയാക്കൂ"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"ഇടത് ചെവി ജോടിയാക്കൂ"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"അടുത്ത ചെവി ജോടിയാക്കുക"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"നിങ്ങളുടെ ഇടത് ശ്രവണ സഹായി കണക്റ്റ് ചെയ്തു.\n\nവലതു വശത്തേത് ജോടിയാക്കാൻ, അത് ഓണാക്കിയിട്ടുണ്ടെന്നും ജോടിയാക്കാൻ തയ്യാറാണെന്നും ഉറപ്പാക്കുക."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"നിങ്ങളുടെ വലത് ശ്രവണ സഹായി കണക്റ്റ് ചെയ്തു.\n\nഇടതു വശത്തേത് ജോടിയാക്കാൻ, അത് ഓണാക്കിയിട്ടുണ്ടെന്നും ജോടിയാക്കാൻ തയ്യാറാണെന്നും ഉറപ്പാക്കുക."</string>
@@ -351,13 +353,17 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"ഫെയ്‌സ് അൺലോക്ക് സജ്ജീകരിക്കുക"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"പരിശോധിച്ചുറപ്പിക്കാൻ നിങ്ങളുടെ മുഖം ഉപയോഗിക്കൂ"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"ആരംഭിക്കുക"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"ഫെയ്‌സ് അൺലോക്ക് ഉപയോഗസഹായി ഓഫാക്കുകയാണെങ്കിൽ, ചില സജ്ജീകരണ ഘട്ടങ്ങൾ TalkBack-നൊപ്പം ശരിയായി പ്രവർത്തിച്ചേക്കില്ല."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"മടങ്ങുക"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"സജ്ജമാക്കൽ തുടരുക"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"ഉപയോഗസഹായി സജ്ജീകരണം ഉപയോഗിക്കുക"</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"റദ്ദാക്കുക"</string>
@@ -367,7 +373,9 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"നിങ്ങളുടെ മുഖം ഉപയോഗിച്ച് അൺലോക്ക് ചെയ്യൂ"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"ഫെയ്‌സ് അൺലോക്ക് അനുവദിക്കുക"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"പരിശോധിച്ചുറപ്പിക്കലിനായി നിങ്ങളുടെ മുഖം ഉപയോഗിക്കുക"</string>
-    <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"ഫോൺ അൺലോക്ക് ചെയ്യാനോ വാങ്ങലുകൾ അംഗീകരിക്കാനോ ആപ്പുകളിലേക്ക് സൈൻ ഇൻ ചെയ്യാനോ നിങ്ങളുടെ മുഖം ഉപയോഗിക്കുക."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"ഫോൺ അൺലോക്ക് ചെയ്യാനോ വാങ്ങലുകൾ അംഗീകരിക്കാനോ ആപ്പുകളിലേക്ക് സൈൻ ഇൻ ചെയ്യാനോ നിങ്ങളുടെ മുഖം ഉപയോഗിക്കുക."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="6144528803097608850">"നിങ്ങളുടെ ടാബ്‌ലെറ്റ് അൺലോക്ക് ചെയ്യാനോ വാങ്ങലുകൾ അംഗീകരിക്കാനോ ആപ്പുകളിലേക്ക് സൈൻ ഇൻ ചെയ്യാനോ നിങ്ങളുടെ മുഖം ഉപയോഗിക്കുക."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="device" msgid="8600301257170347509">"നിങ്ങളുടെ ഉപകരണം അൺലോക്ക് ചെയ്യാനോ വാങ്ങലുകൾ അംഗീകരിക്കാനോ ആപ്പുകളിലേക്ക് സൈൻ ഇൻ ചെയ്യാനോ നിങ്ങളുടെ മുഖം ഉപയോഗിക്കുക."</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"സ്വന്തം മുഖം ഉപയോഗിച്ച് ഫോൺ അൺലോക്ക് ചെയ്യാൻ നിങ്ങളുടെ കുട്ടിയെ അനുവദിക്കുക"</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"സ്വന്തം മുഖം ഉപയോഗിച്ച് ടാബ്‌ലെറ്റ് അൺലോക്ക് ചെയ്യാൻ നിങ്ങളുടെ കുട്ടിയെ അനുവദിക്കുക"</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"സ്വന്തം മുഖം ഉപയോഗിച്ച് ഉപകരണം അൺലോക്ക് ചെയ്യാൻ നിങ്ങളുടെ കുട്ടിയെ അനുവദിക്കുക"</string>
@@ -379,19 +387,39 @@
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"നിങ്ങളുടെ ഫെയ്‌സ് വൃത്തത്തിനുള്ളിൽ കേന്ദ്രീകരിക്കുക"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"ഒഴിവാക്കുക"</string>
     <string name="face_add_max" msgid="4578405795494514876">"നിങ്ങൾക്ക് <xliff:g id="COUNT">%d</xliff:g> വരെ ഫെയ്‌സുകൾ ചേർക്കാനാവും"</string>
@@ -425,6 +453,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"നിങ്ങളുടെ മുഖ മോഡൽ ശാശ്വതമായും സുരക്ഷിതമായും ഇല്ലാതാക്കും.\n\n ഇല്ലാതാക്കിയാൽ, ഫോൺ അൺലോക്ക് ചെയ്യാൻ പിൻ, പാറ്റേൺ അല്ലെങ്കിൽ പാസ്‍വേഡ് വേണ്ടി വരും."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"നിങ്ങളുടെ ഫോൺ അൺലോക്ക് ചെയ്യാൻ ഫെയ്‌സ് അൺലോക്ക് ഉപയോഗിക്കുക"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"ഫിംഗർപ്രിന്റ്"</string>
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"ഫിംഗർപ്രിന്റ് അൺലോക്ക് ഉപയോഗിക്കുമ്പോൾ"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"ഔദ്യോഗിക ഫിംഗർപ്രിന്റ്"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"വിരലടയാളങ്ങൾ നിയന്ത്രിക്കുക"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"ഇതിനായി ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കുക"</string>
@@ -441,7 +470,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"നിങ്ങളുടെ ടാബ്‌ലെറ്റ് അൺലോക്ക് ചെയ്യാനോ ആപ്പുകളിലേക്ക് സൈൻ ഇൻ ചെയ്യുകയോ വാങ്ങൽ അംഗീകരിക്കുകയോ ചെയ്യുന്നത് പോലുള്ള സാഹചര്യങ്ങളിൽ ഇത് നിങ്ങൾ തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കാനോ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കുക."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"ആപ്പുകളിലേക്ക് സൈൻ ഇൻ ചെയ്യുകയോ വാങ്ങൽ അംഗീകരിക്കുകയോ പോലുള്ള സന്ദർഭങ്ങളിൽ ഉപകരണം അൺലോക്ക് ചെയ്യാനോ ഇത് നിങ്ങൾ തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കാനോ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കുക."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"ആപ്പുകളിലേക്ക് സൈൻ ഇൻ ചെയ്യുക, വാങ്ങൽ അംഗീകരിക്കുക പോലുള്ള സന്ദർഭങ്ങളിൽ ഫോൺ അൺലോക്ക് ചെയ്യാനോ ഇത് നിങ്ങൾ തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കാനോ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കുക."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"നിങ്ങളുടെ കുട്ടിയുടെ ഫോൺ അൺലോക്ക് ചെയ്യാനോ ഇത് അവർ തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കാനോ അവരുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കാൻ കുട്ടിയെ അനുവദിക്കുക. ആപ്പുകളിലേക്ക് സൈൻ ഇൻ ചെയ്യുക, വാങ്ങലുകൾ അംഗീകരിക്കുക എന്നിവയും മറ്റും ചെയ്യുമ്പോഴാണ് ഇത് സംഭവിക്കുന്നത്."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"നിങ്ങളുടെ കുട്ടിയുടെ ഫോൺ അൺലോക്ക് ചെയ്യാനോ ഇത് അവർ തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കാനോ അവരുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കാൻ കുട്ടിയെ അനുവദിക്കുക. ആപ്പുകളിലേക്ക് സൈൻ ഇൻ ചെയ്യുക, വാങ്ങലുകൾ അംഗീകരിക്കുക എന്നിവയും മറ്റും ചെയ്യുമ്പോഴാണ് ഇത് സംഭവിക്കുന്നത്."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="9019236661560266282">"നിങ്ങളുടെ കുട്ടിയുടെ ടാബ്‌ലെറ്റ് അൺലോക്ക് ചെയ്യാനോ ഇത് അവർ തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കാനോ അവരുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കാൻ അനുവദിക്കുക. ആപ്പുകളിലേക്ക് സൈൻ ഇൻ ചെയ്യുമ്പോഴും വാങ്ങലുകൾ അംഗീകരിക്കുമ്പോഴും മറ്റുമാണ് ഇത് സംഭവിക്കുന്നത്."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"നിങ്ങളുടെ കുട്ടിയുടെ ഉപകരണം അൺലോക്ക് ചെയ്യാനോ ഇത് അവർ തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കാനോ അവരുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കാൻ അനുവദിക്കുക. ആപ്പുകളിലേക്ക് സൈൻ ഇൻ ചെയ്യുമ്പോഴും വാങ്ങലുകൾ അംഗീകരിക്കുമ്പോഴും മറ്റുമാണ് ഇത് സംഭവിക്കുന്നത്."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"നിയന്ത്രണം നിങ്ങൾക്കാണ്"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"നിങ്ങൾക്കും നിങ്ങളുടെ കുട്ടിക്കും നിയന്ത്രിക്കാനാകും"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"ശ്രദ്ധിക്കുക"</string>
@@ -456,18 +487,30 @@
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"ഫിംഗർപ്രിന്‍റ് സജ്ജമാക്കാൻ ഒന്നോ രണ്ടോ മിനിറ്റോ മാത്രമേ എടുക്കൂ. ഈ ഘട്ടം ഒഴിവാക്കുകയാണെങ്കിൽ, പിന്നീട് ക്രമീകരണത്തിൽ നിങ്ങൾക്ക് ഫിംഗർപ്രിന്‍റ് ചേർക്കാവുന്നതാണ്."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"ഈ ഐക്കൺ കാണുമ്പോൾ, ആപ്പിൽ സൈൻ ഇൻ ചെയ്യുന്നതോ വാങ്ങൽ അംഗീകരിക്കുന്നതോ പോലുള്ള പരിശോധിച്ചുറപ്പിക്കലിന് ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കൂ"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"ഓർമ്മിക്കുക"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"നിങ്ങളുടെ ഫോൺ അൺലോക്ക് ചെയ്യാൻ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കുന്നത്, ശക്തമായ പാറ്റേണിറ്റെയോ പിൻ നമ്പറിന്റെയോ അത്ര സുരക്ഷിതമായിരിക്കണമെന്നില്ല"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"നിങ്ങളുടെ ഫോൺ അൺലോക്ക് ചെയ്യാൻ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കുന്നത്, ശക്തമായ പാറ്റേണിറ്റെയോ പിൻ നമ്പറിന്റെയോ അത്ര സുരക്ഷിതമായിരിക്കണമെന്നില്ല"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"നിങ്ങളുടെ ടാബ്‌ലെറ്റ് അൺലോക്ക് ചെയ്യാൻ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കുന്നതിന്, ശക്തമായ പാറ്റേണോ പിൻ നമ്പറോ ഉപയോഗിക്കുന്നത്ര സുരക്ഷയുണ്ടായിരിക്കില്ല"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"നിങ്ങളുടെ ഉപകരണം അൺലോക്ക് ചെയ്യാൻ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കുന്നതിന്, ശക്തമായ പാറ്റേണോ പിൻ നമ്പറോ ഉപയോഗിക്കുന്നത്ര സുരക്ഷയുണ്ടായിരിക്കില്ല"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"ഇത് എങ്ങനെ പ്രവർത്തിക്കുന്നു"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"ഇത് നിങ്ങൾ തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കുന്നതിന് ഫിംഗർപ്രിന്റ് അൺലോക്ക് നിങ്ങളുടെ ഫിംഗർപ്രിന്റിന്റെ ഒരു തനത് മോഡൽ സൃഷ്ടിക്കുന്നു. ഈ ഫിംഗർപ്രിന്റ് മോഡൽ സൃഷ്ടിക്കാൻ, സജ്ജീകരണ സമയത്ത് നിങ്ങളുടെ ഫിംഗർപ്രിന്റിന്റെ വ്യത്യസ്‌ത വശങ്ങളിൽ നിന്നുള്ള ചിത്രങ്ങളെടുക്കണം."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"ഇത് നിങ്ങളുടെ കുട്ടി തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കുന്നതിന് ഫിംഗർപ്രിന്റ് അൺലോക്ക് കുട്ടിയുടെ ഫിംഗർപ്രിന്റിന്റെ ഒരു തനത് മോഡൽ സൃഷ്ടിക്കുന്നു. ഈ ഫിംഗർപ്രിന്റ് മോഡൽ സൃഷ്ടിക്കാൻ, സജ്ജീകരണ സമയത്ത് അവരുടെ ഫിംഗർപ്രിന്റിന്റെ വ്യത്യസ്‌ത വശങ്ങളിൽ നിന്നുള്ള ചിത്രങ്ങളെടുക്കണം."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="4729142136478078228">"നിങ്ങൾ Pixel Imprint ഉപയോഗിക്കുമ്പോൾ, നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് മോഡൽ അപ്ഡേറ്റ് ചെയ്യാൻ ചിത്രങ്ങൾ ഉപയോഗിക്കുന്നു. നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് മോഡൽ സൃഷ്ടിക്കാൻ ഉപയോഗിക്കുന്ന ചിത്രങ്ങൾ സംഭരിക്കില്ലെങ്കിലും ഫിംഗർപ്രിന്റ് മോഡൽ സുരക്ഷിതമായി നിങ്ങളുടെ ഫോണിൽ സംഭരിക്കുന്നു, അത് ഒരിക്കലും ഫോണിൽ നിന്ന് പുറത്ത് പോകില്ല. എല്ലാ പ്രോസസിംഗും നിങ്ങളുടെ ഫോണിൽ സുരക്ഷിതമായി നടക്കുന്നു."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"അവർ Pixel Imprint ഉപയോഗിക്കുമ്പോൾ, അവരുടെ ഫിംഗർപ്രിന്റ് മോഡൽ അപ്ഡേറ്റ് ചെയ്യാൻ ചിത്രങ്ങൾ ഉപയോഗിക്കുന്നു. ഫിംഗർപ്രിന്റ് മോഡൽ സൃഷ്‌ടിക്കാൻ ഉപയോഗിക്കുന്ന ചിത്രങ്ങൾ സംഭരിക്കില്ലെങ്കിലും ഫിംഗർപ്രിന്റ് മോഡൽ സുരക്ഷിതമായി ഫോണിൽ സംഭരിക്കുന്നു, അത് ഒരിക്കലും ഫോണിൽ നിന്ന് പുറത്ത് പോകില്ല. എല്ലാ പ്രോസസിംഗും ഫോണിൽ സുരക്ഷിതമായി നടക്കുന്നു."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"നിങ്ങൾക്ക് ക്രമീകരണത്തിൽ ഏതുസമയത്തും ഫിംഗർപ്രിന്റ് ചിത്രങ്ങളും മോഡലും ഇല്ലാതാക്കാനോ ഫിംഗർപ്രിന്റ് അൺലോക്ക് ഓഫാക്കാനോ കഴിയും. നിങ്ങൾ ഇല്ലാതാക്കുന്നത് വരെ ഫിംഗർപ്രിന്റ് ചിത്രങ്ങളും മോഡലുകളും ഫോണിൽ സംഭരിക്കുന്നു."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"നിങ്ങൾക്കും കുട്ടിക്കും ക്രമീകരണത്തിൽ ഏതുസമയത്തും ഫിംഗർപ്രിന്റ് ചിത്രങ്ങളും മോഡലും ഇല്ലാതാക്കാനോ ഫിംഗർപ്രിന്റ് അൺലോക്ക് ഓഫാക്കാനോ കഴിയും. ഫിംഗർപ്രിന്റ് ചിത്രങ്ങളും മോഡലുകളും ഇല്ലാതാക്കുന്നത് വരെ അവ ഫോണിൽ സംഭരിക്കുന്നു."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"നിങ്ങൾ Pixel Imprint ഉപയോഗിക്കുമ്പോൾ, നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് മോഡൽ അപ്ഡേറ്റ് ചെയ്യാൻ ചിത്രങ്ങൾ ഉപയോഗിക്കുന്നു. നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് മോഡൽ സൃഷ്ടിക്കാൻ ഉപയോഗിക്കുന്ന ചിത്രങ്ങൾ സംഭരിക്കില്ലെങ്കിലും ഫിംഗർപ്രിന്റ് മോഡൽ സുരക്ഷിതമായി നിങ്ങളുടെ ഫോണിൽ സംഭരിക്കുന്നു, അത് ഒരിക്കലും ഫോണിൽ നിന്ന് പുറത്ത് പോകില്ല. എല്ലാ പ്രോസസിംഗും നിങ്ങളുടെ ഫോണിൽ സുരക്ഷിതമായി നടക്കുന്നു."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"Pixel Imprint ഉപയോഗിക്കുമ്പോൾ, നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് മോഡൽ അപ്ഡേറ്റ് ചെയ്യാൻ ചിത്രങ്ങൾ ഉപയോഗിക്കുന്നു. നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് മോഡൽ സൃഷ്ടിക്കാൻ ഉപയോഗിക്കുന്ന ചിത്രങ്ങൾ സംഭരിക്കില്ലെങ്കിലും ഫിംഗർപ്രിന്റ് മോഡൽ സുരക്ഷിതമായി നിങ്ങളുടെ ടാബ്‌ലെറ്റിൽ സംഭരിക്കുന്നു, അത് ഒരിക്കലും ടാബ്‌ലെറ്റിൽ നിന്ന് പുറത്ത് പോകുകയുമില്ല. എല്ലാ പ്രോസസിംഗും നിങ്ങളുടെ ടാബ്‌ലെറ്റിൽ സുരക്ഷിതമായി നടക്കുന്നു."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device" msgid="1392098506793837697">"Pixel Imprint ഉപയോഗിക്കുമ്പോൾ, നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് മോഡൽ അപ്ഡേറ്റ് ചെയ്യാൻ ചിത്രങ്ങൾ ഉപയോഗിക്കുന്നു. നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് മോഡൽ സൃഷ്ടിക്കാൻ ഉപയോഗിക്കുന്ന ചിത്രങ്ങൾ സംഭരിക്കില്ലെങ്കിലും ഫിംഗർപ്രിന്റ് മോഡൽ സുരക്ഷിതമായി നിങ്ങളുടെ ഉപകരണത്തിൽ സംഭരിക്കുന്നു, അത് ഒരിക്കലും ഉപകരണത്തിൽ നിന്ന് പുറത്ത് പോകുകയുമില്ല. എല്ലാ പ്രോസസിംഗും നിങ്ങളുടെ ഉപകരണത്തിൽ സുരക്ഷിതമായി നടക്കുന്നു."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"അവർ Pixel Imprint ഉപയോഗിക്കുമ്പോൾ, അവരുടെ ഫിംഗർപ്രിന്റ് മോഡൽ അപ്ഡേറ്റ് ചെയ്യാൻ ചിത്രങ്ങൾ ഉപയോഗിക്കുന്നു. ഫിംഗർപ്രിന്റ് മോഡൽ സൃഷ്‌ടിക്കാൻ ഉപയോഗിക്കുന്ന ചിത്രങ്ങൾ സംഭരിക്കില്ലെങ്കിലും ഫിംഗർപ്രിന്റ് മോഡൽ സുരക്ഷിതമായി ഫോണിൽ സംഭരിക്കുന്നു, അത് ഒരിക്കലും ഫോണിൽ നിന്ന് പുറത്ത് പോകില്ല. എല്ലാ പ്രോസസിംഗും ഫോണിൽ സുരക്ഷിതമായി നടക്കുന്നു."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="530891604602839577">"അവർ Pixel Imprint ഉപയോഗിക്കുമ്പോൾ, അവരുടെ ഫിംഗർപ്രിന്റ് മോഡൽ അപ്ഡേറ്റ് ചെയ്യാൻ ചിത്രങ്ങൾ ഉപയോഗിക്കുന്നു. ഫിംഗർപ്രിന്റ് മോഡൽ സൃഷ്‌ടിക്കാൻ ഉപയോഗിക്കുന്ന ചിത്രങ്ങൾ സംഭരിക്കില്ലെങ്കിലും ഫിംഗർപ്രിന്റ് മോഡൽ സുരക്ഷിതമായി ടാബ്‌ലെറ്റിൽ സംഭരിക്കുന്നു, അത് ഒരിക്കലും ടാബ്‌ലെറ്റിൽ നിന്ന് പുറത്ത് പോകുകയുമില്ല. എല്ലാ പ്രോസസിംഗും ടാബ്‌ലെറ്റിൽ സുരക്ഷിതമായി നടക്കുന്നു."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="1735767057693277593">"അവർ Pixel Imprint ഉപയോഗിക്കുമ്പോൾ, അവരുടെ ഫിംഗർപ്രിന്റ് മോഡൽ അപ്ഡേറ്റ് ചെയ്യാൻ ചിത്രങ്ങൾ ഉപയോഗിക്കുന്നു. ഫിംഗർപ്രിന്റ് മോഡൽ സൃഷ്‌ടിക്കാൻ ഉപയോഗിക്കുന്ന ചിത്രങ്ങൾ സംഭരിക്കില്ലെങ്കിലും ഫിംഗർപ്രിന്റ് മോഡൽ സുരക്ഷിതമായി ഉപകരണത്തിൽ സംഭരിക്കുന്നു, അത് ഒരിക്കലും ഉപകരണത്തിൽ നിന്ന് പുറത്ത് പോകുകയുമില്ല. എല്ലാ പ്രോസസിംഗും നിങ്ങളുടെ ഉപകരണത്തിൽ സുരക്ഷിതമായി നടക്കുന്നു."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"നിങ്ങൾക്ക് ക്രമീകരണത്തിൽ ഏതുസമയത്തും ഫിംഗർപ്രിന്റ് ചിത്രങ്ങളും മോഡലും ഇല്ലാതാക്കാനോ ഫിംഗർപ്രിന്റ് അൺലോക്ക് ഓഫാക്കാനോ കഴിയും. നിങ്ങൾ ഇല്ലാതാക്കുന്നത് വരെ ഫിംഗർപ്രിന്റ് ചിത്രങ്ങളും മോഡലുകളും ഫോണിൽ സംഭരിക്കുന്നു."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="1577753788807120092">"നിങ്ങൾക്ക് ക്രമീകരണത്തിൽ ഏതുസമയത്തും ഫിംഗർപ്രിന്റ് ചിത്രങ്ങളും മോഡലും ഇല്ലാതാക്കാനോ ഫിംഗർപ്രിന്റ് അൺലോക്ക് ഓഫാക്കാനോ കഴിയും. നിങ്ങൾ ഇല്ലാതാക്കുന്നത് വരെ ഫിംഗർപ്രിന്റ് ചിത്രങ്ങളും മോഡലുകളും ടാബ്‌ലെറ്റിൽ സംഭരിക്കുന്നു."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="5092396314447369758">"നിങ്ങൾക്ക് ക്രമീകരണത്തിൽ ഏതുസമയത്തും ഫിംഗർപ്രിന്റ് ചിത്രങ്ങളും മോഡലും ഇല്ലാതാക്കാനോ ഫിംഗർപ്രിന്റ് അൺലോക്ക് ഓഫാക്കാനോ കഴിയും. നിങ്ങൾ ഇല്ലാതാക്കുന്നത് വരെ ഫിംഗർപ്രിന്റ് ചിത്രങ്ങളും മോഡലുകളും ഉപകരണത്തിൽ സംഭരിക്കുന്നു."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"നിങ്ങൾക്കും കുട്ടിക്കും ക്രമീകരണത്തിൽ ഏതുസമയത്തും ഫിംഗർപ്രിന്റ് ചിത്രങ്ങളും മോഡലും ഇല്ലാതാക്കാനോ ഫിംഗർപ്രിന്റ് അൺലോക്ക് ഓഫാക്കാനോ കഴിയും. ഫിംഗർപ്രിന്റ് ചിത്രങ്ങളും മോഡലുകളും ഇല്ലാതാക്കുന്നത് വരെ അവ ഫോണിൽ സംഭരിക്കുന്നു."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"നിങ്ങൾക്കും കുട്ടിക്കും ക്രമീകരണത്തിൽ ഏതുസമയത്തും ഫിംഗർപ്രിന്റ് ചിത്രങ്ങളും മോഡലും ഇല്ലാതാക്കാനോ ഫിംഗർപ്രിന്റ് അൺലോക്ക് ഓഫാക്കാനോ കഴിയും. ഫിംഗർപ്രിന്റ് ചിത്രങ്ങളും മോഡലുകളും ഇല്ലാതാക്കുന്നത് വരെ അവ ടാബ്‌ലെറ്റിൽ സംഭരിക്കുന്നു."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"നിങ്ങൾക്കും കുട്ടിക്കും ക്രമീകരണത്തിൽ ഏതുസമയത്തും ഫിംഗർപ്രിന്റ് ചിത്രങ്ങളും മോഡലും ഇല്ലാതാക്കാനോ ഫിംഗർപ്രിന്റ് അൺലോക്ക് ഓഫാക്കാനോ കഴിയും. ഫിംഗർപ്രിന്റ് ചിത്രങ്ങളും മോഡലുകളും ഇല്ലാതാക്കുന്നത് വരെ അവ ഉപകരണത്തിൽ സംഭരിക്കുന്നു."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"ആരെങ്കിലും ഫോൺ നിങ്ങളുടെ വിരലിൽ തട്ടിക്കുന്നത് പോലെ, നിങ്ങൾ ഉദ്ദേശിക്കാത്ത സന്ദർഭങ്ങളിലും ഫോൺ അൺലോക്ക് ചെയ്യാനാകും."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"ആരെങ്കിലും ടാബ്‌ലെറ്റ് നിങ്ങളുടെ വിരലിൽ തട്ടിക്കുന്നത് പോലെ, നിങ്ങൾ ഉദ്ദേശിക്കാത്ത സന്ദർഭങ്ങളിലും ടാബ്‌ലെറ്റ് അൺലോക്ക് ചെയ്യാനാകും."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"ആരെങ്കിലും ഉപകരണം നിങ്ങളുടെ വിരലിൽ തട്ടിക്കുന്നത് പോലെ, നിങ്ങൾ ഉദ്ദേശിക്കാത്ത സന്ദർഭങ്ങളിലും ഉപകരണം അൺലോക്ക് ചെയ്യാനാകും."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"ആരെങ്കിലും ഫോൺ നിങ്ങളുടെ കുട്ടിയുടെ വിരലിന് നേരെ പിടിച്ചാൽ, അവർ ഉദ്ദേശിക്കാത്ത സന്ദർഭങ്ങളിലും ഫോൺ അൺലോക്ക് ചെയ്യാനാകും."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"ആരെങ്കിലും ഫോൺ നിങ്ങളുടെ കുട്ടിയുടെ വിരലിന് നേരെ പിടിച്ചാൽ, അവർ ഉദ്ദേശിക്കാത്ത സന്ദർഭങ്ങളിലും ഫോൺ അൺലോക്ക് ചെയ്യാനാകും."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="6956407873271178462">"ആരെങ്കിലും നിങ്ങളുടെ കുട്ടിയുടെ വിരൽ ടാബ്‌ലെറ്റിൽ വയ്ക്കുന്നത് പോലെ, അവർ ഉദ്ദേശിക്കാത്ത സാഹചര്യങ്ങളിൽ പോലും ടാബ്‌ലെറ്റ് അൺലോക്ക് ചെയ്യാനാകും."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="885555477843366483">"ആരെങ്കിലും നിങ്ങളുടെ കുട്ടിയുടെ വിരൽ ഉപകരണത്തിൽ വയ്ക്കുന്നത് പോലെ, അവർ ഉദ്ദേശിക്കാത്ത സാഹചര്യങ്ങളിൽ പോലും ഉപകരണം അൺലോക്ക് ചെയ്യാനാകും."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"മികച്ച ഫലങ്ങൾക്കായി, Google-നായി നിർമ്മിച്ചതെന്ന് സാക്ഷ്യപ്പെടുത്തിയ സ്‌ക്രീൻ പ്രൊട്ടക്‌ടർ ഉപയോഗിക്കുക. മറ്റ് സ്‌ക്രീൻ പ്രൊട്ടക്‌ടറുകളിൽ നിങ്ങളുടെ വിരലടയാളം പ്രവർത്തിക്കണമെന്നില്ല."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"മികച്ച ഫലങ്ങൾക്കായി, Google-നായി നിർമ്മിച്ചതെന്ന് സാക്ഷ്യപ്പെടുത്തിയ സ്‌ക്രീൻ പ്രൊട്ടക്‌ടർ ഉപയോഗിക്കുക. മറ്റ് സ്‌ക്രീൻ പ്രൊട്ടക്‌ടറുകളിൽ നിങ്ങളുടെ കുട്ടിയുടെ വിരലടയാളം പ്രവർത്തിക്കണമെന്നില്ല."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
@@ -478,9 +521,6 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"വൈബ്രേഷൻ അനുഭവപ്പെട്ട ശേഷം വിരലെടുക്കുക"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"നേരിയ വെളിച്ചമുള്ള മറ്റൊരിടത്തേക്ക് മാറി വീണ്ടും ശ്രമിക്കുക"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"നിങ്ങൾ പരമാവധി ശ്രമങ്ങളുടെ പരിധിയെത്തി"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"ടാബ്‌ലെറ്റ് അൺലോക്ക് ചെയ്യാനോ ആപ്പുകളിലേക്ക് സൈൻ ഇൻ ചെയ്യുമ്പോൾ ഇത് നിങ്ങൾ തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കാനോ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കുക"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"ഉപകരണം അൺലോക്ക് ചെയ്യാനോ ആപ്പുകളിലേക്ക് സൈൻ ഇൻ ചെയ്യുമ്പോൾ ഇത് നിങ്ങൾ തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കാനോ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കുക"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"ഫോൺ അൺലോക്ക് ചെയ്യാനോ ആപ്പുകളിലേക്ക് സൈൻ ഇൻ ചെയ്യുമ്പോൾ ഇത് നിങ്ങൾ തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കാനോ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കുക"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"ഫെയ്‌സും ഫിംഗർപ്രിന്റും ഉപയോഗിച്ചുള്ള അൺലോക്ക് ചെയ്യൽ"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"സജ്ജീകരിക്കാൻ ടാപ്പ് ചെയ്യുക"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"മുഖവും ഫിംഗർപ്രിന്റുകളും ചേർത്തു"</string>
@@ -508,8 +548,12 @@
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"ഒഴിവാക്കൂ"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"റദ്ദാക്കൂ"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"സെൻസർ സ്പർശിക്കുക"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"പവർ ബട്ടൺ അമർത്താതെ തന്നെ സ്പർശിക്കുക"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് എങ്ങനെ സജ്ജീകരിക്കാം"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"ഫോണിന്റെ പിൻവശത്താണ് അതുള്ളത്. ചൂണ്ടുവിരൽ ഉപയോഗിക്കുക."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"പവർ ബട്ടണിലാണ് ഫിംഗർപ്രിന്റ് സെൻസർ ഉള്ളത്. ടാബ്‌ലെറ്റിന്റെ അരികിൽ ഉയർന്ന് നിൽക്കുന്ന ശബ്ദ ബട്ടണിന്റെ അടുത്തുള്ള പരന്ന ബട്ടൺ ആണ് ഇത്.\n\nപവർ ബട്ടൺ അമർത്തുമ്പോൾ സ്ക്രീൻ ഓഫാകും."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"പവർ ബട്ടണിലാണ് ഫിംഗർപ്രിന്റ് സെൻസർ ഉള്ളത്. ഉപകരണത്തിന്റെ അരികിൽ ഉയർന്ന് നിൽക്കുന്ന ശബ്ദ ബട്ടണിന്റെ അടുത്തുള്ള പരന്ന ബട്ടൺ ആണ് ഇത്.\n\nപവർ ബട്ടൺ അമർത്തുമ്പോൾ സ്ക്രീൻ ഓഫാകും."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"പവർ ബട്ടണിലാണ് ഫിംഗർപ്രിന്റ് സെൻസർ ഉള്ളത്. ഫോണിന്റെ അരികിൽ ഉയർന്ന് നിൽക്കുന്ന ശബ്ദ ബട്ടണിന്റെ അടുത്തുള്ള പരന്ന ബട്ടൺ ആണ് ഇത്.\n\nപവർ ബട്ടൺ അമർത്തുമ്പോൾ സ്ക്രീൻ ഓഫാകും."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"ഫിംഗർപ്രിന്റ് സെൻസർ നിങ്ങളുടെ സ്ക്രീനിലാണ്. അടുത്ത സ്ക്രീനിൽ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ക്യാപ്‌ചർ ചെയ്യും."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"ആരംഭിക്കുക"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"സെൻസർ കണ്ടെത്താൻ സ്ക്രീനിലുടനീളം നിങ്ങളുടെ വിരൽ നീക്കുക. വിരലടയാള സെൻസറിൽ സ്‌പർശിച്ചുപിടിക്കുക."</string>
@@ -521,6 +565,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"സെൻസർ സ്പർശിക്കുക"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"സെൻസറിൽ വിരൽ വച്ച് വൈബ്രേഷൻ അനുഭവപ്പെട്ട ശേഷം വിരൽ മാറ്റുക."</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"വൈബ്രേഷൻ അനുഭവപ്പെടുന്നത് വരെ സെൻസറിൽ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ചേർത്തുപിടിക്കുക"</string>
+    <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"ബട്ടൺ അമർത്താതെ, ഒരു വൈബ്രേഷൻ അനുഭവപ്പെടുന്നത് വരെ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് സെൻസറിൽ വയ്ക്കുക.\n\nഓരോ തവണയും വിരൽ പതുക്കെ നീക്കുക. ഇത് നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് കൂടുതൽ സമഗ്രമായി ക്യാപ്‌ചർ ചെയ്യാൻ സഹായിക്കും."</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"ഫിംഗർപ്രിന്റ് സെൻസറിൽ സ്‌പർശിച്ചുപിടിക്കുക"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"വിരലെടുക്കുക, വീണ്ടും സ്പർശിക്കുക"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"ഒരിക്കൽ കൂടി"</string>
@@ -530,13 +575,22 @@
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"നിങ്ങളുടെ വിരലിന്റെ അഗ്രം സെൻസറിൽ വയ്ക്കുക"</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"നിങ്ങളുടെ വിരലിന്റെ ഇടത്തേയറ്റം വയ്‌ക്കുക"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"നിങ്ങളുടെ വിരലിന്റെ വലത്തേയറ്റം വയ്‌ക്കുക"</string>
+    <string name="security_settings_sfps_enroll_finger_center_title" msgid="1320688855767675739">"നിങ്ങളുടെ വിരലിന്റെ മധ്യഭാഗം സെൻസറിന്റെ മുകളിൽ വയ്ക്കുക"</string>
+    <string name="security_settings_sfps_enroll_fingertip_title" msgid="2737520837684516446">"നിങ്ങളുടെ വിരലിന്റെ അഗ്രം സെൻസറിൽ വയ്ക്കുക"</string>
+    <string name="security_settings_sfps_enroll_left_edge_title" msgid="9022963735924413343">"നിങ്ങളുടെ വിരലിന്റെ ഇടത്തേ അരിക് സെൻസറിൽ വയ്ക്കുക"</string>
+    <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"അവസാനമായി, നിങ്ങളുടെ വിരലിന്റെ വലത്തേ അരിക് സെൻസറിൽ വയ്ക്കുക"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"നിങ്ങളുടെ ഫിംഗർപ്രിന്റിന്റെ വശം സെൻസറിൽ വച്ച് അമർത്തിപ്പിടിക്കുക, തുടർന്ന് മറ്റേ വശം നൽകുക"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"ഇത് നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് കൂടുതൽ സമഗ്രമായി ക്യാപ്‌ചർ ചെയ്യാൻ സഹായിക്കും"</string>
+    <string name="security_settings_sfps_enroll_progress_a11y_message" msgid="6450772721691523736">"ഫിംഗർപ്രിന്റ് എൻറോൾ ചെയ്യൽ <xliff:g id="PERCENTAGE">%d</xliff:g> ശതമാനം ആയി"</string>
+    <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"<xliff:g id="PERCENTAGE">%d</xliff:g> ശതമാനം എൻറോൾ ചെയ്തു"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"ഫിംഗർപ്രിന്റ് എൻറോൾ ചെയ്യൽ <xliff:g id="PERCENTAGE">%d</xliff:g> ശതമാനം ആയി"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"ഫിംഗർപ്രിന്റ് ചേർത്തു"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"നിങ്ങളുടെ ടാബ്‌ലെറ്റ് അൺലോക്ക് ചെയ്യുന്നതിനായോ ആപ്പുകളിൽ ഇത് നിങ്ങൾ തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കുന്നതിനായോ കൂടുതൽ ഉപയോഗിക്കുമ്പോൾ ഫിംഗർപ്രിന്റ് അൺലോക്ക് മെച്ചപ്പെടും"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"നിങ്ങളുടെ ഉപകരണം അൺലോക്ക് ചെയ്യാൻ ഫിംഗർപ്രിന്റ് അൺലോക്ക് കൂടുതൽ തവണ ഉപയോഗിക്കുകയോ ഇത് നിങ്ങൾ തന്നെയാണെന്ന് ആപ്പുകളിൽ പരിശോധിച്ചുറപ്പിക്കുകയോ ചെയ്യുമ്പോൾ ഫിംഗർപ്രിന്റ് അൺലോക്ക് മെച്ചപ്പെടും"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"നിങ്ങളുടെ ഫോൺ അൺലോക്ക് ചെയ്യുന്നതിനായി കൂടുതൽ ഉപയോഗിക്കുകയോ ഇത് നിങ്ങൾ തന്നെയാണെന്ന് ആപ്പുകളിൽ പരിശോധിച്ചുറപ്പിക്കുകയോ ചെയ്യുമ്പോൾ ഫിംഗർപ്രിന്റ് അൺലോക്ക് മെച്ചപ്പെടും"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"ടാബ്‌ലെറ്റ് അൺലോക്ക് ചെയ്യാനോ ആപ്പുകളിലേക്ക് സൈൻ ഇൻ ചെയ്യുന്നത് പോലുള്ള സന്ദർഭങ്ങളിൽ ഇത് നിങ്ങൾ തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കാനോ ഇപ്പോൾ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കാനാകും"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"ഉപകരണം അൺലോക്ക് ചെയ്യാനോ ആപ്പുകളിലേക്ക് സൈൻ ഇൻ ചെയ്യുന്നത് പോലുള്ള സന്ദർഭങ്ങളിൽ ഇത് നിങ്ങൾ തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കാനോ ഇപ്പോൾ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കാനാകും"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"ഫോൺ അൺലോക്ക് ചെയ്യാനോ ആപ്പുകളിലേക്ക് സൈൻ ഇൻ ചെയ്യുന്നത് പോലുള്ള സന്ദർഭങ്ങളിൽ ഇത് നിങ്ങൾ തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കാനോ ഇപ്പോൾ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കാനാകും"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"സ്ക്രീൻ ഓണായിരിക്കുമ്പോൾ മാത്രം അൺലോക്ക് ചെയ്യുക"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിച്ച് അൺലോക്ക് ചെയ്യുന്നതിന് മുമ്പ് സ്ക്രീൻ ഓണായിരിക്കണം. ഇത്, അവിചാരിതമായി അൺലോക്ക് ചെയ്യുന്നതിനുള്ള സാധ്യത കുറയ്ക്കുന്നു."</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"സ്ക്രീൻ അൺലോക്ക്"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"ഇത് പിന്നീട് ചെയ്യുക"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"വിരലെടുക്കുക, വീണ്ടും സ്‌പർശിക്കുക"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"നിങ്ങളുടെ ഫിംഗർപ്രിന്റിന്റെ വശം സെൻസറിൽ വച്ച് അമർത്തിപ്പിടിക്കുക, തുടർന്ന് മറ്റേ വശം നൽകുക"</string>
@@ -614,10 +668,14 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"നിങ്ങൾ പരമാവധി എണ്ണം ഫിംഗർപ്രിന്റുകൾ ചേർത്തിട്ടുണ്ട്"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"കൂടുതൽ ഫിംഗർപ്രിന്റുകൾ ചേർക്കാൻ കഴിയില്ല"</string>
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"എല്ലാ ഫിംഗർപ്രിന്റുകളും നീക്കംചെയ്യണോ?"</string>
-    <string name="fingerprint_delete_title" msgid="1469865327307917858">"\'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' ‌നീക്കംചെയ്യുക"</string>
+    <string name="fingerprint_delete_title" msgid="5412123164503407098">"\'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' ഇല്ലാതാക്കുക"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"ഈ ‌ഫിംഗർപ്രിന്റ് ഇല്ലാതാക്കണോ?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"\'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' എന്നതുമായി ബന്ധപ്പെട്ട് നിങ്ങളുടെ ഉപകരണത്തിൽ സംഭരിച്ചിരിക്കുന്ന ഫിംഗർപ്രിന്റ് ചിത്രങ്ങളും മോഡലും ഇത് ഇല്ലാതാക്കുന്നു"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"ഫോൺ അൺലോക്ക് ചെയ്യാനോ ആപ്പുകളിൽ ഇത് നിങ്ങൾ തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കാനോ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കാനാകില്ല."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"\'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' എന്നതുമായി ബന്ധപ്പെട്ട് നിങ്ങളുടെ ഫോണിൽ സംഭരിച്ചിരിക്കുന്ന ഫിംഗർപ്രിന്റ് ചിത്രങ്ങളും മോഡലും ഇത് ഇല്ലാതാക്കുന്നു"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"\'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' എന്നതുമായി ബന്ധപ്പെട്ട് നിങ്ങളുടെ ടാബ്‌ലെറ്റിൽ സംഭരിച്ചിരിക്കുന്ന ഫിംഗർപ്രിന്റ് ചിത്രങ്ങളും മോഡലും ഇത് ഇല്ലാതാക്കുന്നു"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"\'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' എന്നതുമായി ബന്ധപ്പെട്ട് നിങ്ങളുടെ ഉപകരണത്തിൽ സംഭരിച്ചിരിക്കുന്ന ഫിംഗർപ്രിന്റ് ചിത്രങ്ങളും മോഡലും ഇത് ഇല്ലാതാക്കുന്നു"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"ഫോൺ അൺലോക്ക് ചെയ്യാനോ ആപ്പുകളിൽ ഇത് നിങ്ങൾ തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കാനോ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കാനാകില്ല."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"ടാബ്‌ലെറ്റ് അൺലോക്ക് ചെയ്യാനോ ആപ്പുകളിൽ ഇത് നിങ്ങൾ തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കാനോ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കാനാകില്ല."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"ഉപകരണം അൺലോക്ക് ചെയ്യാനോ ആപ്പുകളിൽ ഇത് നിങ്ങൾ തന്നെയാണെന്ന് പരിശോധിച്ചുറപ്പിക്കാനോ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കാനാകില്ല."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"നിങ്ങളുടെ ഔദ്യോഗിക പ്രൊഫൈൽ അൺലോക്ക് ചെയ്യാനോ വാങ്ങലുകൾ അംഗീകരിക്കാനോ ഔദ്യോഗിക ആപ്പുകളിലേക്ക് സൈൻ ഇൻ ചെയ്യാനോ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കാനാകില്ല."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"അതെ, നീക്കംചെയ്യുക"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"എൻ‌ക്രിപ്ഷൻ"</string>
@@ -676,17 +734,29 @@
     <string name="fingerprint_unlock_set_unlock_pin" msgid="4724451168139460493">"ഫിംഗർപ്രിന്റ് + പിൻ"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"ഫിംഗർപ്രിന്റ് + പാസ്‌വേഡ്"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"ഫിംഗർപ്രിന്റ് ഇല്ലാതെ തുടരുക"</string>
-    <string name="fingerprint_unlock_title" msgid="4978686534505944042">"നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിച്ച് ഫോൺ അൺലോക്ക് ചെയ്യാവുന്നതാണ്. സുരക്ഷയ്ക്കായി, ഈ ഓപ്‌ഷനൊരു ബാക്കപ്പ് സ്ക്രീൻ ലോക്ക് ആവശ്യമാണ്."</string>
+    <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിച്ച് ഫോൺ അൺലോക്ക് ചെയ്യാവുന്നതാണ്. സുരക്ഷയ്ക്കായി, ഈ ഓപ്‌ഷനൊരു ബാക്കപ്പ് സ്ക്രീൻ ലോക്ക് ആവശ്യമാണ്."</string>
+    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
+    <skip />
+    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
+    <skip />
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"ഫെയ്‌സ് അൺലോക്ക് + പാറ്റേൺ"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"ഫെയ്‌സ് അൺലോക്ക് + പിൻ"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"ഫെയ്‌സ് അൺലോക്ക് + പാസ്‌വേഡ്"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"ഫെയ്‌സ് അൺലോക്ക് ഇല്ലാതെ തുടരുക"</string>
-    <string name="face_unlock_title" msgid="7344830351598247267">"നിങ്ങളുടെ മുഖം ഉപയോഗിച്ച് ഫോൺ അൺലോക്ക് ചെയ്യാനാവും. സുരക്ഷയ്ക്കായി, ഈ ഓപ്‌ഷന് ഒരു ബാക്കപ്പ് സ്‌ക്രീൻ ലോക്ക് ആവശ്യമാണ്."</string>
+    <string name="face_unlock_title" product="default" msgid="7344830351598247267">"നിങ്ങളുടെ മുഖം ഉപയോഗിച്ച് ഫോൺ അൺലോക്ക് ചെയ്യാനാവും. സുരക്ഷയ്ക്കായി, ഈ ഓപ്‌ഷന് ഒരു ബാക്കപ്പ് സ്‌ക്രീൻ ലോക്ക് ആവശ്യമാണ്."</string>
+    <!-- no translation found for face_unlock_title (5695698036499155727) -->
+    <skip />
+    <!-- no translation found for face_unlock_title (6768108756755361161) -->
+    <skip />
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"പാറ്റേൺ • മുഖം • ഫിംഗർപ്രിന്റ്"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"പിൻ • മുഖം • ഫിംഗർപ്രിന്റ്"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"പാസ്‍വേഡ് • മുഖം • ഫിംഗർപ്രിന്റ്"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"മുഖമോ ഫിംഗർപ്രിന്റോ ഇല്ലാതെ തുടരുക"</string>
-    <string name="biometrics_unlock_title" msgid="616524056055233041">"നിങ്ങളുടെ മുഖമോ ഫിംഗർപ്രിന്റോ ഉപയോഗിച്ച് ഫോൺ അൺലോക്ക് ചെയ്യാനാകും. സുരക്ഷയ്ക്കായി, ഈ ഓപ്‌ഷന് ഒരു ബാക്കപ്പ് സ്ക്രീൻ ലോക്ക് ആവശ്യമാണ്."</string>
+    <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"നിങ്ങളുടെ മുഖമോ ഫിംഗർപ്രിന്റോ ഉപയോഗിച്ച് ഫോൺ അൺലോക്ക് ചെയ്യാനാകും. സുരക്ഷയ്ക്കായി, ഈ ഓപ്‌ഷന് ഒരു ബാക്കപ്പ് സ്ക്രീൻ ലോക്ക് ആവശ്യമാണ്."</string>
+    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
+    <skip />
+    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
+    <skip />
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"അഡ്‌മിനോ എൻക്രിപ്‌ഷൻ നയമോ ക്രെഡൻഷ്യൽ സ്റ്റോറേജോ പ്രവർത്തനരഹിതമാക്കി"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"ഒന്നുമില്ല"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"സ്വൈപ്പ് ചെയ്യുക"</string>
@@ -1324,7 +1394,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"ഓണാണ്"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"ഓണാണ് - ഫേസ് ബേസ്‌ഡ്"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"മുഖം തിരിച്ചറിയൽ"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"നിങ്ങൾ പോർട്രെയ്റ്റിലും ലാൻഡ്‌സ്കേപ്പിലും ഫോൺ തിരിക്കുമ്പോൾ സ്ക്രീൻ ഓറിയന്റേഷൻ സ്വയമേവ ക്രമീകരിക്കുക"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"നിങ്ങൾ പോർട്രെയ്റ്റിലും ലാൻഡ്‌സ്കേപ്പിലും ഫോൺ തിരിക്കുമ്പോൾ സ്ക്രീൻ ഓറിയന്റേഷൻ സ്വയമേവ ക്രമീകരിക്കുക"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"നിങ്ങൾ പോർട്രെയ്റ്റിലും ലാൻഡ്‌സ്കേപ്പിലും ടാബ്‌ലെറ്റ് തിരിക്കുമ്പോൾ സ്ക്രീൻ ഓറിയന്റേഷൻ സ്വയമേവ ക്രമീകരിക്കുക"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"സ്വയമേവ തിരിയുക ക്രമീകരണത്തെ കുറിച്ച് കൂടുതലറിയുക"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"പോർട്രെയ്‌റ്റിനും ലാൻഡ്സ്കേപ്പിനും ഇടയിൽ ഫോൺ തിരിക്കുമ്പോൾ"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"സ്ക്രീൻ റെസല്യൂഷൻ"</string>
@@ -1333,6 +1404,7 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"പൂർണ്ണ റെസല്യൂഷൻ കൂടുതൽ ബാറ്ററി ചാർജ് ഉപയോഗിക്കുന്നു. നിങ്ങളുടെ റെസല്യൂഷൻ മാറ്റുന്നത് ചില ആപ്പുകൾ റീസ്റ്റാർട്ട് ചെയ്യാൻ കാരണമായേക്കാം."</string>
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"തിരഞ്ഞെടുത്തു"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"നിറങ്ങൾ"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"സ്വാഭാവികം"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"ബൂസ്‌റ്റ് ചെയ്‌‌തത്"</string>
@@ -1452,11 +1524,14 @@
     <string name="style_suggestion_summary" msgid="4271131877800968159">"വ്യത്യസ്‌ത സ്റ്റൈലുകളും വാൾപേപ്പറുകളും മറ്റും പരീക്ഷിക്കൂ"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"സ്ക്രീൻ സേവർ"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"സ്‌ക്രീൻ സേവർ"</string>
+    <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"ഉറക്ക സമയ മോഡ് ഓണായതിനാൽ ലഭ്യമല്ല"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"സ്ക്രീൻ സേവർ ഉപയോഗിക്കുക"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"ചാർജ്/ഡോക്ക് ചെയ്യുമ്പോൾ"</string>
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"ഡോക്ക് ചെയ്ത് ചാർജ് ചെയ്യുമ്പോൾ"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"ചാർജ് ചെയ്യുമ്പോൾ"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"ഡോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"ഒരിക്കലും വേണ്ട"</string>
+    <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"ഓണാണ് / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"ഓഫ്"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"എപ്പോൾ തുടങ്ങണം"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"നിലവിലെ സ്‌ക്രീൻ സേവർ"</string>
@@ -1612,13 +1687,14 @@
     <string name="sd_ejecting_summary" msgid="861928572729341132">"അൺമൗണ്ടുചെയ്യൽ പുരോഗതിയിലാണ്"</string>
     <string name="storage_low_title" msgid="8002650511493419567">"സംഭരണയിടം കഴിഞ്ഞു"</string>
     <string name="storage_low_summary" msgid="7341022293583384506">"സമന്വയിപ്പിക്കൽ പോലുള്ള ചില സിസ്റ്റം പ്രവർത്തനങ്ങൾ ശരിയായി പ്രവർത്തിക്കണമെന്നില്ല. അപ്ലിക്കേഷനുകളോ മീഡിയ ഉള്ളടക്കമോ പോലുള്ള ഇനങ്ങൾ ഇല്ലാതാക്കുന്നതിലൂടെയോ അൺപിൻ ചെയ്യുന്നതിലൂടെയോ ഇടം ശൂന്യമാക്കുന്നത് പരീക്ഷിക്കുക."</string>
-    <string name="storage_menu_rename" msgid="8549835371429159336">"പേരുമാറ്റുക"</string>
+    <string name="storage_menu_rename" msgid="8549835371429159336">"പേര് മാറ്റുക"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"മൗണ്ടുചെയ്യുക"</string>
-    <string name="storage_menu_unmount" msgid="8171552487742912282">"നിരസിക്കുക"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"ഫോർമാറ്റുചെയ്യുക"</string>
+    <string name="storage_menu_unmount" msgid="8171552487742912282">"ഒഴിവാക്കുക"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"പോർട്ടബിൾ സ്റ്റോറേജിനായി SD കാർഡ് ഫോർമാറ്റ് ചെയ്യൂ"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"കാർഡ് ഫോർമാറ്റ് ചെയ്യുക"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"പോർട്ടബിളായി ഫോർമാറ്റുചെയ്യുക"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"ആന്തരികമായി ഫോർമാറ്റുചെയ്യുക"</string>
-    <string name="storage_menu_migrate" msgid="2196088149560070193">"ഡാറ്റ മൈഗ്രേറ്റുചെയ്യുക"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"ഫോർമാറ്റ് ചെയ്യുക"</string>
+    <string name="storage_menu_migrate" msgid="2196088149560070193">"ഡാറ്റ മൈഗ്രേറ്റ് ചെയ്യുക"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"മറക്കുക"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"സജ്ജമാക്കുക"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"ഇടം സൃഷ്ടിക്കുക"</string>
@@ -1647,17 +1723,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"സംഭരണത്തിന്റെ പേരുമാറ്റുക"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"ഈ <xliff:g id="NAME_0">^1</xliff:g> സുരക്ഷിതമായി ഇജക്റ്റുചെയ്തിരിക്കുന്നു. \n\nഈ <xliff:g id="NAME_1">^1</xliff:g> ഉപയോഗിക്കുന്നതിന്, ആദ്യം നിങ്ങളിത് മൗണ്ടുചെയ്യേണ്ടതുണ്ട്."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"<xliff:g id="NAME_0">^1</xliff:g> കേടായിരിക്കുന്നു. \n\nഈ <xliff:g id="NAME_1">^1</xliff:g> ഉപയോഗിക്കുന്നതിന്, ആദ്യം നിങ്ങളിത് മൗണ്ടുചെയ്യേണ്ടതുണ്ട്."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"ഫോർമാറ്റുചെയ്‌തശേഷം, നിങ്ങൾക്ക് ഈ <xliff:g id="NAME_0">^1</xliff:g> മറ്റ് ഉപകരണങ്ങളിൽ ഉപയോഗിക്കാനാകും. \n\nഈ <xliff:g id="NAME_1">^1</xliff:g> എന്നതിലെ എല്ലാ വിവരവും മായ്‌ക്കും. ആദ്യം ബാക്കപ്പുചെയ്യുന്നത് പരിഗണിക്കുക. \n\n"<b>"ഫോട്ടോകളും മറ്റ് മീഡിയയും ബാക്കപ്പുചെയ്യുക"</b>" \nനിങ്ങളുടെ മീഡിയ ഫയലുകളെ ഈ ഉപകരണത്തിലെ ഇതര സംഭരണയിടത്തിലേക്ക് നീക്കുകയോ USB കേബിൾ ഉപയോഗിച്ച് അവയെ ഒരു കമ്പ്യൂട്ടറിലേക്ക് മാറ്റുകയോ ചെയ്യുക. \n\n"<b>"അപ്ലിക്കേഷനുകൾ ബാക്കപ്പുചെയ്യുക"</b>" \nഈ <xliff:g id="NAME_6">^1</xliff:g> എന്നതിൽ സംഭരിച്ചിരിക്കുന്ന എല്ലാ അപ്ലിക്കേഷനുകളും അൺഇൻസ്റ്റാൾ ചെയ്യുകയും അവയുടെ വിവരം മായ്‌ക്കുകയും ചെയ്യും. ഈ അപ്ലിക്കേഷനുകൾ സൂക്ഷിക്കാൻ, അവയെ ഈ ഉപകരണത്തിലെ ഇതര സംഭരണയിടത്തിലേക്ക് നീക്കുക."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"ഫോട്ടോകളും വീഡിയോകളും സംഗീതവും മറ്റും സംഭരിക്കാനും മറ്റുപകരണങ്ങളിൽ അവ ആക്സസ് ചെയ്യാനും നിങ്ങൾക്ക് ഈ SD കാർഡ് ഫോർമാറ്റ് ചെയ്യാം. \n\n"<b>"ഈ SD കാർഡിലുള്ള എല്ലാ ഡാറ്റയും മായ്ക്കും."</b>" \n\n"<b>"ഫോർമാറ്റ് ചെയ്യുന്നതിന് മുമ്പ്"</b>" \n\n"<b>"ഫോട്ടോകളുടെയും മറ്റു മീഡിയയുടെയും ബാക്കപ്പെടുക്കുക"</b>" \nനിങ്ങളുടെ മീഡിയാ ഫയലുകൾ ഈ ഉപകരണത്തിലെ മറ്റൊരു സ്റ്റോറേജിലേക്ക് മാറ്റുക അല്ലെങ്കിൽ USB കേബിൾ ഉപയോഗിച്ച് അവ ഒരു കമ്പ്യൂട്ടറിലേക്ക് കൈമാറുക. \n\n"<b>"ആപ്പുകളുടെ ബാക്കപ്പെടുക്കുക"</b>" \nഈ <xliff:g id="NAME">^1</xliff:g> ഉപകരണത്തിൽ സംഭരിച്ചിട്ടുള്ള എല്ലാ ആപ്പുകളും അണ്‍ഇൻസ്റ്റാള്‍ ചെയ്യുകയും അവയുടെ ഡാറ്റ മായ്ക്കുകയും ചെയ്യും. ഈ ആപ്പുകൾ സൂക്ഷിക്കാൻ, അവ ഈ ഉപകരണത്തിലെ മറ്റൊരു സ്റ്റോറേജിലേക്ക് മാറ്റുക."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"നിങ്ങൾ ഈ <xliff:g id="NAME_0">^1</xliff:g> ഒഴിവാക്കുമ്പോൾ, അതിൽ സംഭരിച്ചിരിക്കുന്ന അപ്ലിക്കേഷനുകളുടെ പ്രവർത്തനം നിലയ്‌ക്കുകയും അതിൽ സംഭരിച്ചിരിക്കുന്ന മീഡിയ ഫയലുകൾ അത് തിരികെ ചേർക്കുന്നതുവരെ ലഭ്യമാകുകയുമില്ല ."</b>" \n\nഈ <xliff:g id="NAME_1">^1</xliff:g> എന്നത് ഈ ഉപകരണത്തിൽ മാത്രം പ്രവർത്തിക്കാനാണ് ഫോർമാറ്റുചെയ്‌തിരിക്കുന്നത്. ഇത് മറ്റുള്ളവയിലൊന്നും പ്രവർത്തിക്കില്ല."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"ഈ <xliff:g id="NAME">^1</xliff:g> അടങ്ങിയിരിക്കുന്ന ആപ്പുകൾ, ഫോട്ടോകൾ അല്ലെങ്കിൽ വിവരം ഉപയോഗിക്കാൻ, അത് വീണ്ടും ചേർക്കുക. \n\nപകരം, ഉപകരണം ലഭ്യമല്ലെങ്കിൽ, നിങ്ങൾക്ക് ഈ ഉപകരണം മറക്കാൻ തിരഞ്ഞെടുക്കാനാകും. \n\nനിങ്ങൾ മറക്കാൻ തിരഞ്ഞെടുക്കുകയാണെങ്കിൽ, ഉപകരണത്തിൽ അടങ്ങിയിരിക്കുന്ന എല്ലാ വിവരവും ശാശ്വതമായി നഷ്‌ടമാകും. \n\nനിങ്ങൾക്ക് ഈ ആപ്പുകൾ പിന്നീട് വീണ്ടും ഇൻസ്റ്റാൾ ചെയ്യാനാകും, എന്നാൽ ഈ ഉപകരണത്തിൽ സംഭരിച്ചിരിക്കുന്ന അവയുടെ വിവരം നഷ്‌ടമാകും."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g> മറക്കണോ?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"<xliff:g id="NAME">^1</xliff:g> എന്നതിൽ സംഭരിച്ചിരിക്കുന്ന എല്ലാ ആപ്സും ഫോട്ടോകളും ഡാറ്റയും ശാശ്വതമായി നഷ്ടപ്പെടും."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"സിസ്‌റ്റത്തിൽ Android <xliff:g id="VERSION">%s</xliff:g> പതിപ്പ് റൺ ചെയ്യാൻ ഉപയോഗിച്ച ഫയലുകളും ഉൾപ്പെടുന്നു"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"അതിഥി മോഡ് യൂസർക്ക് SD കാർഡ് ഫോർമാറ്റ് ചെയ്യാനാകില്ല"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"നിങ്ങളുടെ <xliff:g id="NAME">^1</xliff:g> സജ്ജമാക്കുക"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"പോർട്ടബിൾ സംഭരണമായി ഉപയോഗിക്കുക"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"ഉപകരണങ്ങൾ തമ്മിൽ ഫോട്ടോകളും മറ്റ് മീഡിയയും നീക്കുന്നതിനായി."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"ആന്തരിക സംഭരണമായി ഉപയോഗിക്കുക"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"അപ്ലിക്കേഷനുകളും ഫോട്ടോകളും ഉൾപ്പെടെ ഈ ഉപകരണത്തിൽ മാത്രമായി എന്തും സംഭരിക്കാനായി. ഇത് മറ്റ് ഉപകരണങ്ങളിൽ പ്രവർത്തിക്കുന്നതിനെ തടയാൻ ഫോർമാറ്റുചെയ്യേണ്ടതുണ്ട്."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"പോർട്ടബിൾ സ്റ്റോറേജിനായി SD കാർഡ് ഫോർമാറ്റ് ചെയ്യൂ"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"ഫോട്ടോകളും വീഡിയോകളും സംഗീതവും മറ്റും സംരക്ഷിച്ച് അവ മറ്റുപകരണങ്ങളിൽ നിന്ന് ആക്സസ് ചെയ്യുക"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"ഉള്ളിലെ മെമ്മറിക്കായി SD കാർഡ് ഫോർമാറ്റ് ചെയ്യുക"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"ഈ ഫോണിൽ മാത്രം ഉപയോഗിക്കുന്നതിനായി ആപ്പുകളും മീഡിയയും സംരക്ഷിക്കുക"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"ആന്തരിക സംഭരണമായി ഫോർമാറ്റുചെയ്യൂ"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"ഇത് സുരക്ഷിതമാക്കാൻ <xliff:g id="NAME_0">^1</xliff:g> എന്നത് ഇതിന് ഫോർമാറ്റുചെയ്യേണ്ടതുണ്ട്. \n\nഫോർമാറ്റുചെയ്‌തതിനുശേഷം, ഈ <xliff:g id="NAME_1">^1</xliff:g> ഈ ഉപകരണത്തിൽ മാത്രമേ പ്രവർത്തിക്കൂ. \n\n"<b>"ഫോർമാറ്റുചെയ്യുന്നത്, <xliff:g id="NAME_2">^1</xliff:g> എന്നതിൽ നിലവിൽ സംഭരിച്ചിരിക്കുന്ന എല്ലാ വിവരവും മായ്ക്കാനിടയാക്കും."</b>" വിവരം നഷ്‌ടപ്പെടുന്നത് ഒഴിവാക്കാൻ, അത് ബാക്കപ്പുചെയ്യുന്നത് പരിഗണിക്കുക."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"പോർട്ടബിളായി ഫോർമാറ്റുചെയ്യൂ"</string>
@@ -1674,9 +1751,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"നീക്കുക"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"വിവരം നീക്കുന്നു ..."</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"നീക്കുന്ന സമയത്ത്: \n• <xliff:g id="NAME">^1</xliff:g> നീക്കംചെയ്യരുത്. \n• ചില അപ്ലിക്കേഷനുകൾ ശരിയായി പ്രവർത്തിക്കില്ല. \n• ഉപകരണം ചാർജ്ജുചെയ്‌തുതന്നെ സൂക്ഷിക്കുക."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"നിങ്ങളുടെ <xliff:g id="NAME">^1</xliff:g> ഉപയോഗത്തിന് തയ്യാറാണ്"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"ഫോട്ടോകൾക്കും മറ്റ് മീഡിയയ്‌ക്കുമൊപ്പം ഉപയോഗിക്കാൻ നിങ്ങളുടെ <xliff:g id="NAME">^1</xliff:g> തയ്യാറായിരിക്കുന്നു."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"നിങ്ങളുടെ പുതിയ <xliff:g id="NAME">^1</xliff:g> പ്രവർത്തിക്കുന്നു. \n\nഫോട്ടോകൾ, ഫയലുകൾ അപ്ലിക്കേഷൻ വിവരം എന്നിവ ഈ ഉപകരണത്തിലേക്ക് നീക്കാൻ, ക്രമീകരണം &gt; സ്റ്റോറേജ്  എന്നതിലേക്ക് പോകുക."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> ഫോർമാറ്റ് ചെയ്തു"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"നിങ്ങൾക്ക് <xliff:g id="NAME">^1</xliff:g> ഉപയോഗിക്കാൻ ആരംഭിക്കാം"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"നിങ്ങൾക്ക് <xliff:g id="NAME">^1</xliff:g> ഉപയോഗിക്കാൻ ആരംഭിക്കാം"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"<xliff:g id="APP">^1</xliff:g> നീക്കുക"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"<xliff:g id="NAME_0">^2</xliff:g> എന്നതിലേക്ക് <xliff:g id="APP">^1</xliff:g> എന്നതും അതിന്റെ വിവരവും നീക്കുന്നതിന് കുറച്ച് നിമിഷങ്ങൾ മാത്രമേയെടുക്കൂ. നീക്കുന്ന പ്രവർത്തനം പൂർത്തിയാകുന്നതുവരെ നിങ്ങൾക്ക് അപ്ലിക്കേഷൻ ഉപയോഗിക്കാനാവില്ല. \n\nനീക്കുന്നതിനിടെ <xliff:g id="NAME_1">^2</xliff:g> നീക്കംചെയ്യരുത്."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"ഡാറ്റ നീക്കാൻ <xliff:g id="APP">^1</xliff:g> ഉപയോക്താവിനെ അൺലോക്ക് ചെയ്യേണ്ടതുണ്ട്."</string>
@@ -1685,19 +1762,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"നീക്കുന്നത് റദ്ദാക്കുക"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"ഈ <xliff:g id="NAME_0">^1</xliff:g> എന്നതിന് വേഗത കുറവാണെന്ന് തോന്നുന്നു. \n\nനിങ്ങൾക്ക് തുടരാനാകുമെങ്കിലും, ഈ ലൊക്കേഷനിലേക്ക് നീക്കിയ ആപ്പ്‌സിൽ തടസ്സമുണ്ടാകുകയും വിവരം കൈമാറാൻ കൂടുതൽ സമയമെടുക്കുകയും ചെയ്യാം. \n\nമികച്ച പ്രകടനത്തിന് വേഗതയേറിയ <xliff:g id="NAME_1">^1</xliff:g> ഉപയോഗിക്കുന്നതിനെക്കുറിച്ച് ആലോചിക്കൂ."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"നിങ്ങൾ ഈ <xliff:g id="NAME">^1</xliff:g> എങ്ങനെ ഉപയോഗിക്കും?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"അധിക ടാബ്‌ലെറ്റ് സ്റ്റോറേജിനായി ഉപയോഗിക്കുക"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"ഈ ടാബ്‌ലെറ്റിലെ മാത്രം ആപ്പുകൾ, ഫയലുകൾ, മീഡിയ എന്നിവയ്ക്ക്"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"ടാബ്‌ലെറ്റ് സ്റ്റോറേജ്"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"അധിക ഫോൺ സ്റ്റോറേജിനായി ഉപയോഗിക്കുക"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"ഈ ഫോണിലെ മാത്രം ആപ്പുകൾ, ഫയലുകൾ, മീഡിയ എന്നിവയ്ക്ക്"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"ഫോൺ സ്‌റ്റോറേജ്"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"ഉള്ളിലെ മെമ്മറിക്കായി SD കാർഡ് ഫോർമാറ്റ് ചെയ്യുക"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"ഈ ടാബ്‌ലെറ്റിൽ മാത്രം ഉപയോഗിക്കുന്നതിനായി ആപ്പുകളും മീഡിയയും സംഭരിക്കുക. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD കാർഡ് സജ്ജീകരിക്കുന്നതിനെ കുറിച്ച് കൂടുതലറിയുക&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"ഫോർമാറ്റ് ചെയ്യുക"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"ഉള്ളിലെ മെമ്മറിക്കായി SD കാർഡ് ഫോർമാറ്റ് ചെയ്യുക"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"ഈ ഫോണിൽ മാത്രം ഉപയോഗിക്കുന്നതിനായി ആപ്പുകളും മീഡിയയും സംഭരിക്കുക. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD കാർഡ് സജ്ജീകരിക്കുന്നതിനെ കുറിച്ച് കൂടുതലറിയുക&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"ഫോർമാറ്റ് ചെയ്യുക"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"അല്ലെങ്കില്‍"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"പോർട്ടബിൾ‌ സ്‌റ്റോറേജിന് ഉപയോഗിക്കുക"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"ഉപകരണങ്ങൾ തമ്മിൽ ഫയലുകളും മീഡിയയും കൈമാറുന്നതിന്"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"പോർട്ടബിൾ സ്റ്റോറേജ്"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"പോർട്ടബിൾ സ്റ്റോറേജിന് SD കാർഡ് ഫോർമാറ്റ് ചെയ്യുക"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"ഫോട്ടോകളും വീഡിയോകളും സംഗീതവും മറ്റും സംഭരിക്കുക, മറ്റുപകരണങ്ങളിൽ നിന്ന് അവ ആക്സസ് ചെയ്യുക. &lt;a href=https://support.google.com/android/answer/12153449&gt;SD കാർഡ് സജ്ജീകരിക്കുന്നതിനെ കുറിച്ച് കൂടുതലറിയുക&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"ഫോർമാറ്റ് ചെയ്യുക"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"പിന്നീട് സജ്ജീകരിക്കുക"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"ഈ <xliff:g id="NAME">^1</xliff:g> ഫോർമാറ്റ് ചെയ്യണോ?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"ആപ്പുകൾ, ഫയലുകൾ, മീഡിയ എന്നിവ സംഭരിക്കാൻ ഈ <xliff:g id="NAME_0">^1</xliff:g> ഫോർമാറ്റ് ചെയ്യേണ്ടതുണ്ട്.\n\nഫോർമാറ്റ് ചെയ്‌താൽ <xliff:g id="NAME_1">^2</xliff:g>-ലെ നിലവിലെ ഉള്ളടക്കം മായ്ക്കപ്പെടും. ഉള്ളടക്കം നഷ്‌ടമാകുന്നത് ഒഴിവാക്കാൻ അത് മറ്റൊരു <xliff:g id="NAME_2">^3</xliff:g> അല്ലെങ്കിൽ ഉപകരണത്തിലേക്ക് ബാക്കപ്പ് ചെയ്യുക."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"ഫോട്ടോകളും വീഡിയോകളും സംഗീതവും മറ്റും സംഭരിക്കുന്നതിന് ഈ <xliff:g id="NAME_0">^1</xliff:g> ഫോർമാറ്റ് ചെയ്യേണ്ടതുണ്ട്. \n\nഫോർമാറ്റ് ചെയ്യുന്നത് <xliff:g id="NAME_1">^2</xliff:g>-ൽ നിലവിലുള്ള ഉള്ളടക്കം മായ്ക്കും. ഉള്ളടക്കം നഷ്ടപ്പെടുന്നത് ഒഴിവാക്കാൻ മറ്റൊരു <xliff:g id="NAME_2">^3</xliff:g>-ലോ ഉപകരണത്തിലോ അതിന്റെ ബാക്കപ്പെടുക്കുക."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"<xliff:g id="NAME">^1</xliff:g> ഫോർമാറ്റ് ചെയ്യൂ"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"ഉള്ളടക്കം <xliff:g id="NAME">^1</xliff:g>-ലേക്ക് നീക്കണോ?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"നിങ്ങൾക്ക് ഫയലുകൾ, മീഡിയ, ചില ആപ്പുകൾ എന്നിവ ഈ <xliff:g id="NAME">^1</xliff:g>-ലേക്ക് നീക്കാം. \n\n ഇങ്ങനെ നീക്കുന്നതിലൂടെ നിങ്ങളുടെ ടാബ്‌ലെറ്റ് സ്റ്റോറേജിൽ <xliff:g id="SIZE">^2</xliff:g> ഇടം സൃഷ്‌ടിക്കാനാകും, ഇതിന് ഏകദേശം <xliff:g id="DURATION">^3</xliff:g> എടുക്കും."</string>
@@ -1714,11 +1792,13 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"നിങ്ങൾക്ക് ഇനിയും ഈ <xliff:g id="NAME_0">^1</xliff:g> ഉപയോഗിക്കാം, പക്ഷേ ഇതിന് വേഗത കുറവായിരിക്കും. \n\nഈ <xliff:g id="NAME_1">^2</xliff:g>-ൽ സംഭരിച്ചിരിക്കുന്ന ആപ്പുകൾ ശരിയായി പ്രവർത്തിക്കണമെന്നില്ല, മാത്രമല്ല ഉള്ളടക്ക കൈമാറ്റത്തിന് അധിക സമയം വേണ്ടിവന്നേക്കാം. \n\n ഒന്നുകിൽ വേഗതയുള്ള ഒരു <xliff:g id="NAME_2">^3</xliff:g> ഉപയോഗിക്കാൻ ശ്രമിക്കുക, അല്ലെങ്കിൽ ഈ <xliff:g id="NAME_3">^4</xliff:g> പോർട്ടബിൾ സ്‌റ്റോറേജിന് വേണ്ടി ഉപയോഗിക്കുക."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"പുനരാംരംഭിക്കുക"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"തുടരുക"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"നിങ്ങൾക്ക് ഉള്ളടക്കം <xliff:g id="NAME">^1</xliff:g>-ലേക്ക് നീക്കാനാവും"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"<xliff:g id="NAME">^1</xliff:g>-ലേക്ക് ഉള്ളടക്കം നീക്കുന്നതിന്, "<b>"ക്രമീകരണ &gt; സ്റ്റോറേജിലേക്ക്"</b>" പോവുക"</string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"നിങ്ങളുടെ ഉള്ളടക്കം <xliff:g id="NAME_0">^1</xliff:g>-ലേക്ക് നീക്കി. \n\nഈ <xliff:g id="NAME_1">^2</xliff:g> മാനേജ് ചെയ്യാൻ, "<b>"ക്രമീകരണം &gt; സ്‌റ്റോറേജ്"</b>" എന്നതിലേക്ക് പോവുക."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"നിങ്ങൾക്ക് <xliff:g id="NAME">^1</xliff:g> ഉപയോഗിക്കാൻ ആരംഭിക്കാം"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"നിങ്ങൾക്ക് <xliff:g id="NAME">^1</xliff:g> ഉപയോഗിക്കാൻ ആരംഭിക്കാം"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"നിങ്ങൾക്ക് <xliff:g id="NAME">^1</xliff:g> ഉപയോഗിക്കാൻ ആരംഭിക്കാം"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"ബാറ്ററി നില"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"ബാറ്ററി നില"</string>
+    <string name="communal_settings_title" msgid="2845678473945902115">"കമ്മ്യൂണൽ"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"കമ്മ്യൂണൽ ക്രമീകരണങ്ങൾ"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN-കൾ"</string>
     <string name="apn_edit" msgid="2003683641840248741">"ആക്‌സസ് പോയിന്റ് എഡിറ്റ് ചെയ്യുക"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"സജ്ജീകരിച്ചിട്ടില്ല"</string>
@@ -1850,6 +1930,7 @@
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ടെതർ ചെയ്‌തത് മാറ്റും."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"ഇതർനെറ്റ് ടെതറിംഗ്"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"ഇതർനെറ്റ് വഴി ഫോണിന്റെ ഇന്റർനെറ്റ് കണക്ഷൻ പങ്കിടുക"</string>
+    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"ഇതർനെറ്റ് വഴി ടാബ്‌ലെറ്റിന്റെ ഇന്റർനെറ്റ് കണക്ഷൻ പങ്കിടുക"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"നിങ്ങളുടെ മൊബൈൽ ഡാറ്റാ കണക്ഷനിലൂടെ മറ്റ് ഉപകരണങ്ങളിലേക്ക് ഇന്‍റർനെറ്റ് നൽകാൻ ഹോട്ട്‌സ്പോട്ടും ‌ടെതറിംഗും ഉപയോഗിക്കുക. ചുറ്റുവട്ടത്തുള്ള ഉപകരണങ്ങളുമായി ഉള്ളടക്കം പങ്കിടാൻ ആപ്പുകൾക്കും ഹോട്ട്‌സ്പോട്ട് സൃഷ്ടിക്കാൻ കഴിയും."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"നിങ്ങളുടെ വൈഫൈ വഴിയോ മൊബൈൽ ഡാറ്റാ കണക്ഷൻ വഴിയോ മറ്റ് ഉപകരണങ്ങളിലേക്ക് ഇന്റർനെറ്റ് നൽകാൻ ഹോട്ട്‌സ്പോട്ടും ടെതറിംഗും ഉപയോഗിക്കുക. സമീപമുള്ള ഉപകരണങ്ങളുമായി ഉള്ളടക്കം പങ്കിടാൻ ആപ്പുകൾക്ക് ഹോട്ട്‌സ്പോട്ട് സൃഷ്‌ടിക്കാനുമാവും."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"സഹായം"</string>
@@ -2301,7 +2382,7 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"ആവശ്യങ്ങൾക്ക് അനുസരിച്ച് നിങ്ങൾക്ക് ഈ ഉപകരണം ഇഷ്ടാനുസൃതമാക്കാം. ഈ ഉപയോഗസഹായി ഫീച്ചറുകൾ പിന്നീട് ക്രമീകരണത്തിൽ മാറ്റാവുന്നതാണ്."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"ഫോണ്ട് വലുപ്പം മാറ്റുക"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"സ്‌ക്രീൻ റീഡർ"</string>
-    <string name="captions_category_title" msgid="574490148949400274">"അടിക്കുറിപ്പുകൾ"</string>
+    <string name="captions_category_title" msgid="574490148949400274">"സബ്ടൈറ്റിലുകൾ"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"ഓഡിയോ"</string>
     <string name="general_category_title" msgid="6298579528716834157">"പൊതുവായവ"</string>
     <string name="display_category_title" msgid="6638191682294461408">"ഡി‌സ്‌പ്ലേ"</string>
@@ -2460,7 +2541,7 @@
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;ശ്രദ്ധിക്കുക&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; മീഡിയയിലും ചിത്രങ്ങളിലും നിറങ്ങൾ മാറും&lt;/li&gt; &lt;li&gt; നിറം വിപരീതമാക്കൽ എല്ലാ ആപ്പുകളിലും പ്രവർത്തിക്കുന്നു&lt;/li&gt; &lt;li&gt; ഇരുണ്ട പശ്ചാത്തലം പ്രദർശിപ്പിക്കാൻ പകരം ഡാർക്ക് തീം ഉപയോഗിക്കാം&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"ഓട്ടോക്ലിക്ക് (കഴ്സർ വെച്ച് ചെലവഴിച്ച സമയം)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"ഓട്ടോക്ലിക്കിനെ കുറിച്ച് (ഡ്വെൽ സമയം)"</string>
-    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"ഓട്ടോക്ലിക്കിനെ കുറിച്ച് കൂടുതലറിയുക (കഴ്സർ വച്ച് ചെലവഴിച്ച സമയം)"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"ഓട്ടോക്ലിക്കിനെ (കഴ്സർ വച്ച് ചെലവഴിച്ച സമയത്തെ) കുറിച്ച് കൂടുതലറിയുക"</string>
     <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"കഴ്‌സർ ചലിക്കുന്നത് ഒരു നിശ്ചിത സമയത്തേക്ക് നിലയ്ക്കുമ്പോൾ, സ്വയമേവ ക്ലിക്ക് ചെയ്യാൻ കണക്റ്റ് ചെയ്ത ഒരു മൗസ് നിങ്ങൾക്ക് സജ്ജീകരിക്കാവുന്നതാണ്."</string>
     <string name="accessibility_autoclick_description" msgid="6695732131412361101">"മൗസിൽ ക്ലിക്ക് ചെയ്യുന്നത് ബുദ്ധിമുട്ട് ആണെങ്കിൽ ഓട്ടോക്ലിക്ക് സഹായകരമാകും"</string>
     <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"ഓട്ടോക്ലിക്ക് ഓഫാണ്"</string>
@@ -2482,7 +2563,7 @@
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"കോളുകൾ"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"അറിയിപ്പുകളും അലാറങ്ങളും"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"ഇന്ററാക്റ്റീവ് ഹാപ്റ്റിക്"</string>
-    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"വെെബ്രേഷനും സ്‌പർശനങ്ങളും ഉപയോഗിക്കുക"</string>
+    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"വെെബ്രേഷനും ഹാപ്റ്റിക്സും ഉപയോഗിക്കുക"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"അലാറം വെെബ്രേഷൻ"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"മീഡിയ വൈബ്രേഷൻ"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"റിംഗ് വൈബ്രേഷൻ"</string>
@@ -2707,7 +2788,7 @@
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"ഒപ്റ്റിമൈസ് ചെയ്തത്"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"നിയന്ത്രിതം"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"നിയന്ത്രണങ്ങളൊന്നുമില്ലാതെ പശ്ചാത്തലത്തിൽ ബാറ്ററി ഉപയോഗം അനുവദിക്കുക. കൂടുതൽ ബാറ്ററി ഉപയോഗിച്ചേക്കാം."</string>
-    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"നിങ്ങളുടെ ഉപയോഗം അടിസ്ഥാനമാക്കി ഓപ്‌റ്റിമൈസ് ചെയ്യുക. മിക്ക ആപ്പുകൾക്കും ശുപാർശ ചെയ്തത്."</string>
+    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"നിങ്ങളുടെ ഉപയോഗം അടിസ്ഥാനമാക്കി ഒപ്‌റ്റിമൈസ് ചെയ്യുക. മിക്ക ആപ്പുകൾക്കും ശുപാർശ ചെയ്തത്."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"പശ്ചാത്തലത്തിൽ പ്രവർത്തിക്കുമ്പോൾ ബാറ്ററി ഉപയോഗം നിയന്ത്രിക്കുക. ആപ്പ് പ്രതീക്ഷിച്ച രീതിയിൽ പ്രവർത്തിച്ചേക്കില്ല. അറിയിപ്പുകൾ വൈകിയേക്കാം."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"ആപ്പ് നിങ്ങളുടെ ബാറ്ററി ഉപയോഗിക്കുന്ന രീതി മാറ്റുന്നത് ബാറ്ററിയുടെ പ്രകടനത്തെ ബാധിക്കും."</string>
     <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"ഈ ആപ്പിന് <xliff:g id="STATE">%1$s</xliff:g> എന്ന നിലയിലുള്ള ബാറ്ററി ഉപയോഗം ആവശ്യമാണ്."</string>
@@ -2739,8 +2820,8 @@
     <string name="history_details_title" msgid="8628584613889559355">"ചരിത്ര വിശദാംശം"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"ബാറ്ററി ഉപയോഗം"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"കഴിഞ്ഞ 24 മണിക്കൂറിലെ ഉപയോഗം കാണുക"</string>
-    <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"അവസാനം ചാർജ് ചെയ്ത ശേഷമുള്ള ഉപയോഗം കാണുക"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"ബാറ്ററി ഉപയോഗം"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"അവസാനം ചാർജ് ചെയ്ത ശേഷമുള്ള ഉപയോഗം കാണുക"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"ആപ്പിന്റെ ബാറ്ററി ഉപയോഗം"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"വിശദാംശം ഉപയോഗിക്കൂ"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"പവർ ഉപയോഗം ക്രമീകരിക്കുക"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"ഉൾപ്പെടുത്തിയ പാക്കേജുകൾ"</string>
@@ -2759,8 +2840,15 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"ചില ഫീച്ചറുകൾ പരിമിതപ്പെടാം"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"ഉയർന്ന ബാറ്ററി ഉപയോഗം"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"ഉയർന്ന ഉപയോഗമുള്ള ആപ്പുകൾ കാണുക"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"ചാർജിംഗ് താൽക്കാലികമായി പരിമിതപ്പെടുത്തിയിരിക്കുന്നു"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"നിങ്ങളുടെ ബാറ്ററി ചാർജ് നിലനിർത്താൻ. കൂടുതലറിയുക."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"നിങ്ങളുടെ ബാറ്ററി പരിരക്ഷിക്കാൻ ചാർജിംഗ് ഒപ്റ്റിമൈസ് ചെയ്തു"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"നിങ്ങളുടെ ബാറ്ററിയുടെ ആയുസ്സ് വർദ്ധിപ്പിക്കാൻ സഹായിക്കുന്നതിന്, ചാർജിംഗ് ഒപ്റ്റിമൈസ് ചെയ്യുന്നു"</string>
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"നിങ്ങളുടെ ബാറ്ററി പരിരക്ഷിക്കാൻ ചാർജിംഗ് ഒപ്റ്റിമൈസ് ചെയ്തു"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"നിങ്ങളുടെ ബാറ്ററിയുടെ ആയുസ്സ് വർദ്ധിപ്പിക്കാൻ സഹായിക്കുന്നതിന്, ഡോക്ക് ചെയ്യുമ്പോൾ ചാർജിംഗ് ഒപ്റ്റിമൈസ് ചെയ്യുന്നു"</string>
+    <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"നിങ്ങളുടെ ബാറ്ററി പരിരക്ഷിക്കാൻ ചാർജിംഗ് ഒപ്റ്റിമൈസ് ചെയ്തു"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"നിങ്ങളുടെ ബാറ്ററിയുടെ ആയുസ്സ് വർദ്ധിപ്പിക്കാൻ സഹായിക്കുന്നതിന്, ഡോക്ക് ചെയ്യുമ്പോൾ ചാർജിംഗ് ഒപ്റ്റിമൈസ് ചെയ്യുന്നു"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"പൂർണ്ണമായും ചാർജ് ചെയ്യുന്നു"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"നിങ്ങളുടെ ബാറ്ററി പരിരക്ഷിക്കാൻ, അടുത്ത തവണ ടാബ്‌ലെറ്റ് ഡോക്ക് ചെയ്യുമ്പോൾ ചാർജിംഗ് ഒപ്റ്റിമൈസ് ചെയ്യും"</string>
+    <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"ചാർജിംഗ് താൽക്കാലികമായി നിർത്തിയതിനെ കുറിച്ച് കൂടുതലറിയുക"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"ചാർജിംഗ് പുനനരാരംഭിക്കുക"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"ഉയർന്ന താപനിലയും ദൈർഘ്യമേറിയ ചാർജിംഗ് കാലയളവും പോലുള്ള ഏതാനും സാഹചര്യങ്ങളിൽ ബാറ്ററിയുടെ ആരോഗ്യം സംരക്ഷിക്കാൻ ചാർജിംഗ് <xliff:g id="PERCENT">%1$s</xliff:g>-ലേക്ക് പരിമിതപ്പെടുത്തിയിരിക്കുന്നു.\n\nആ സാഹചര്യങ്ങൾ അവസാനിക്കുമ്പോൾ, നിങ്ങളുടെ ഫോൺ സാധാരണ ഗതിയിൽ സ്വയമേവ ചാർജ് ചെയ്യും."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"ഉയർന്ന താപനിലയും ദൈർഘ്യമേറിയ ചാർജിംഗ് കാലയളവും പോലുള്ള ഏതാനും സാഹചര്യങ്ങളിൽ ബാറ്ററിയുടെ ആരോഗ്യം സംരക്ഷിക്കാൻ ചാർജിംഗ് <xliff:g id="PERCENT">%1$s</xliff:g>-ലേക്ക് പരിമിതപ്പെടുത്തിയിരിക്കുന്നു.\n\nആ സാഹചര്യങ്ങൾ അവസാനിക്കുമ്പോൾ, നിങ്ങളുടെ ടാബ്‌ലെറ്റ് സാധാരണ ഗതിയിൽ സ്വയമേവ ചാർജ് ചെയ്യും."</string>
@@ -2796,6 +2884,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"ഈ ആപ്പിന് പശ്ചാത്തലത്തിൽ ബാറ്ററി ഉപയോഗിക്കാനാവും. പ്രതീക്ഷിച്ചതിനെക്കാൾ വേഗത്തിൽ ബാറ്ററി ചാർജ് തീർന്നേക്കാം."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"നീക്കം ചെയ്യുക"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"റദ്ദാക്കുക"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"പൂർണ്ണമായി ചാർജ് ചെയ്യുക"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"നിങ്ങളുടെ ആപ്പുകൾ, ബാറ്ററി സാധാരണ അളവിലാണ് ഉപയോഗിക്കുന്നത്. ആപ്പുകൾ വളരെ കൂടുതൽ ബാറ്ററി ഉപയോഗിക്കുന്നെങ്കിൽ, നിങ്ങൾക്ക് സ്വീകരിക്കാവുന്ന നടപടികൾ ഫോൺ നിർദ്ദേശിക്കും.\n\nനിങ്ങളുടെ ഉപകരണം കുറഞ്ഞ ബാറ്ററി ചാർജിലാണ് പ്രവർത്തിക്കുന്നതെങ്കിൽ, നിങ്ങൾക്ക് എപ്പോഴും ബാറ്ററി ലാഭിക്കൽ ഓണാക്കാനാവും."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"നിങ്ങളുടെ ആപ്പുകൾ, ബാറ്ററി സാധാരണ അളവിലാണ് ഉപയോഗിക്കുന്നത്. ആപ്പുകൾ വളരെ കൂടുതൽ ബാറ്ററി ഉപയോഗിക്കുന്നെങ്കിൽ, നിങ്ങൾക്ക് സ്വീകരിക്കാവുന്ന നടപടികൾ ടാബ്‌ലെറ്റ് നിർദ്ദേശിക്കും.\n\nനിങ്ങളുടെ ഉപകരണം കുറഞ്ഞ ബാറ്ററി ചാർജിലാണ് പ്രവർത്തിക്കുന്നതെങ്കിൽ, നിങ്ങൾക്ക് എപ്പോഴും ബാറ്ററി ലാഭിക്കൽ ഓണാക്കാനാവും."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"നിങ്ങളുടെ ആപ്പുകൾ, ബാറ്ററി സാധാരണ അളവിലാണ് ഉപയോഗിക്കുന്നത്. ആപ്പുകൾ വളരെ കൂടുതൽ ബാറ്ററി ഉപയോഗിക്കുന്നെങ്കിൽ, നിങ്ങൾക്ക് സ്വീകരിക്കാവുന്ന നടപടികൾ ഉപകരണം നിർദ്ദേശിക്കും.\n\nനിങ്ങളുടെ ഉപകരണം കുറഞ്ഞ ബാറ്ററി ചാർജിലാണ് പ്രവർത്തിക്കുന്നതെങ്കിൽ, നിങ്ങൾക്ക് എപ്പോഴും ബാറ്ററി ലാഭിക്കൽ ഓണാക്കാനാവും."</string>
@@ -2916,25 +3005,25 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"ബാറ്ററി ഉപയോഗം"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"പൂർണ്ണമായി ചാർജ് ചെയ്‌തത് മുതൽ"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"ബാറ്ററി ഉപയോഗം മാനേജ് ചെയ്യുക"</string>
-    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"ആകെ ഉപയോഗം <xliff:g id="TIME_0">^1</xliff:g> • അവസാനം പൂർണ്ണമായി ചാർജ് ആയതിന് ശേഷം\nപശ്ചാത്തല ഉപയോഗം <xliff:g id="TIME_1">^2</xliff:g>"</string>
+    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"ആകെ <xliff:g id="TIME_0">^1</xliff:g> • അവസാനം പൂർണ്ണമായി ചാർജ് ചെയ്‌ത ശേഷം \n<xliff:g id="TIME_1">^2</xliff:g> പശ്ചാത്തലത്തിൽ ഉപയോഗിച്ചു"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"ആകെ ഉപയോഗം <xliff:g id="TIME_0">^1</xliff:g> • കഴിഞ്ഞ 24 മണിക്കൂറിനിടെയുള്ള\nപശ്ചാത്തല ഉപയോഗം <xliff:g id="TIME_1">^2</xliff:g>"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"ആകെ <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_PERIOD">^3</xliff:g> വരെയുള്ള\nപശ്ചാത്തല ഉപയോഗം <xliff:g id="TIME_1">^2</xliff:g>"</string>
-    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"അവസാനം പൂർണ്ണമായി ചാർജ് ആയതിന് ശേഷം ആകെ ഉപയോഗം ഒരു മിനിറ്റിൽ താഴെ"</string>
+    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"അവസാനം പൂർണ്ണമായി ചാർജ് ചെയ്‌ത ശേഷം ഒരു മിനിറ്റിൽ താഴെ"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"കഴിഞ്ഞ 24 മണിക്കൂറിനിടെ ആകെ ഒരു മിനിറ്റിൽ താഴെ"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"<xliff:g id="TIME_PERIOD">^1</xliff:g> എന്നതിന് ഇടയിൽ ആകെ ഒരു മിനിറ്റിൽ താഴെ"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"അവസാനം പൂർണ്ണമായി ചാർജ് ആയതിന് ശേഷം പശ്ചാത്തല ഉപയോഗം ഒരു മിനിറ്റിൽ താഴെ"</string>
+    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"അവസാനം പൂർണ്ണമായി ചാർജ് ചെയ്‌ത ശേഷം ഒരു മിനിറ്റിൽ താഴെ പശ്ചാത്തലത്തിൽ ഉപയോഗിച്ചു"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"കഴിഞ്ഞ 24 മണിക്കൂറിനിടെയുള്ള പശ്ചാത്തല ഉപയോഗം ഒരു മിനിറ്റിൽ താഴെ"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"<xliff:g id="TIME_PERIOD">^1</xliff:g> എന്നതിന് ഇടയിൽ പശ്ചാത്തല ഉപയോഗം ഒരു മിനിറ്റിൽ താഴെ"</string>
-    <string name="battery_total_usage" msgid="4685408616230899847">"അവസാനം പൂർണ്ണമായി ചാർജ് ആയതിന് ശേഷം ആകെ ഉപയോഗം <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_total_usage" msgid="4811532932663354619">"അവസാനം പൂർണ്ണമായി ചാർജ് ചെയ്‌ത ശേഷം ആകെ <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"കഴിഞ്ഞ 24 മണിക്കൂറിനിടെയുള്ള ആകെ ഉപയോഗം <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_PERIOD">^2</xliff:g> എന്നതിന് ഇടയിൽ ആകെ <xliff:g id="TIME_0">^1</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="548670902301883980">"അവസാനം പൂർണ്ണമായി ചാർജ് ആയതിന് ശേഷം പശ്ചാത്തല ഉപയോഗം <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_bg_usage" msgid="8262917746299259350">"അവസാനം പൂർണ്ണമായി ചാർജ് ചെയ്‌ത ശേഷം <xliff:g id="TIME">^1</xliff:g> പശ്ചാത്തലത്തിൽ ഉപയോഗിച്ചു"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"കഴിഞ്ഞ 24 മണിക്കൂറിനിടെയുള്ള പശ്ചാത്തല ഉപയോഗം <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_PERIOD">^2</xliff:g> എന്നതിന് ഇടയിൽ പശ്ചാത്തല ഉപയോഗം <xliff:g id="TIME_0">^1</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"ആകെ ഉപയോഗം <xliff:g id="TIME">^1</xliff:g> • അവസാനം പൂർണ്ണമായി ചാർജ് ആയതിന് ശേഷം\nപശ്ചാത്തല ഉപയോഗം ഒരു മിനിറ്റിൽ താഴെ"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"ആകെ <xliff:g id="TIME">^1</xliff:g> • അവസാനം പൂർണ്ണമായി ചാർജ് ചെയ്‌ത ശേഷം\nഒരു മിനിറ്റിൽ താഴെ പശ്ചാത്തലത്തിൽ ഉപയോഗിച്ചു"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"ആകെ ഉപയോഗം <xliff:g id="TIME">^1</xliff:g> • കഴിഞ്ഞ 24 മണിക്കൂറിനിടെയുള്ള\nപശ്ചാത്തല ഉപയോഗം ഒരു മിനിറ്റിൽ താഴെ"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"ആകെ <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_PERIOD">^2</xliff:g> വരെയുള്ള\nപശ്ചാത്തല ഉപയോഗം ഒരു മിനിറ്റിൽ താഴെയാണ്"</string>
-    <string name="battery_not_usage" msgid="1472275761547230196">"അവസാനം പൂർണ്ണമായി ചാർജ് ആയതിന് ശേഷം ഉപയോഗിച്ചിട്ടില്ല"</string>
+    <string name="battery_not_usage" msgid="3851536644733662392">"അവസാനം പൂർണ്ണമായി ചാർജ് ചെയ്‌ത ശേഷം ഉപയോഗിച്ചിട്ടില്ല"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"കഴിഞ്ഞ 24 മണിക്കൂറിനിടെ ഉപയോഗിച്ചിട്ടില്ല"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"മറ്റ് ഉപയോക്താക്കൾ"</string>
@@ -2973,8 +3062,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"<xliff:g id="PERCENT">%1$s</xliff:g> ബാറ്ററിയിൽ"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"ബാറ്ററി ശതമാനം"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"സ്‌റ്റാറ്റസ് ബാറിൽ ബാറ്ററി ശതമാനം കാണിക്കുക"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"അവസാനം പൂർണ്ണമായി ചാർജ് ചെയ്തതിന് ശേഷമുള്ള ബാറ്ററി നില"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"കഴിഞ്ഞ 24 മണിക്കൂറിലെ ബാറ്ററി ലെവൽ"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"അവസാനം പൂർണ്ണമായി ചാർജ് ചെയ്തതിന് ശേഷമുള്ള ആപ്പ് ഉപയോഗം"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"കഴിഞ്ഞ 24 മണിക്കൂറിലെ ആപ്പ് ഉപയോഗം"</string>
+    <string name="battery_system_usage" msgid="1395943945140097585">"അവസാനം പൂർണ്ണമായി ചാർജ് ചെയ്തതിന് ശേഷമുള്ള സിസ്‌റ്റം ഉപയോഗം"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"കഴിഞ്ഞ 24 മണിക്കൂറിലെ സിസ്‌റ്റം ഉപയോഗം"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"<xliff:g id="SLOT">%s</xliff:g> എന്നതിനുള്ള സിസ്‌റ്റം ഉപയോഗം"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"<xliff:g id="SLOT">%s</xliff:g> എന്നതിനുള്ള ആപ്പ് ഉപയോഗം"</string>
@@ -2982,9 +3074,13 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"പശ്ചാത്തലം: ഒരു മിനിറ്റിൽ താഴെ"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"ആകെ: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"പശ്ചാത്തലം: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"ബാറ്ററി ഉപയോഗ ഡാറ്റ ഏകദേശ കണക്കാണ്, ഫോൺ ചാർജ് ചെയ്യുമ്പോൾ ഉപയോഗം അളക്കില്ല"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"ഏതാനും മണിക്കൂറുകൾ ഫോൺ ഉപയോഗിച്ച ശേഷം ബാറ്ററി ഉപയോഗ ഡാറ്റ ലഭ്യമാകും"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"ബാറ്ററി ഉപയോഗ ഡാറ്റ ഏകദേശ കണക്കാണ്, ഫോൺ ചാർജ് ചെയ്യുമ്പോൾ ഉപയോഗം അളക്കില്ല"</string>
+    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"ബാറ്ററി ഉപയോഗ ഡാറ്റ ഏകദേശ കണക്കാണ്, ടാബ്‌ലെറ്റ് ചാർജ് ചെയ്യുമ്പോൾ ഉപയോഗം അളക്കില്ല"</string>
+    <string name="battery_usage_screen_footer" product="device" msgid="6610974734578869768">"ബാറ്ററി ഉപയോഗ ഡാറ്റ ഏകദേശ കണക്കാണ്, ഉപകരണം ചാർജ് ചെയ്യുമ്പോൾ ഉപയോഗം അളക്കില്ല"</string>
+    <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"പൂർണ്ണമായി ചാർജ് ചെയ്താൽ, ഏതാനും മണിക്കൂറുകൾക്കുള്ളിൽ ബാറ്ററി ഉപയോഗ ഡാറ്റ ലഭ്യമാകും ബാറ്ററി പൂർണ്ണമായി ചാർജ് ചെയ്തതിന് ശേഷം കുറച്ച് മണിക്കൂറുകൾക്ക് ശേഷം ബാറ്ററി ഉപയോഗ ഡാറ്റ ലഭ്യമാകും"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"ബാറ്ററി ഉപയോഗത്തിന്റെ ചാർട്ട്"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"ബാറ്ററിയുടെ ദിവസേനയുള്ള ഉപയോഗത്തിന്റെ ചാർട്ട്"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"ബാറ്ററിയുടെ ഓരോ മണിക്കൂറിലുമുള്ള ഉപയോഗത്തിന്റെ ചാർട്ട്"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"പ്രോസസ്സ് സ്ഥിതിവിവരക്കണക്കുകൾ"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"പ്രവർത്തന പ്രോസസ്സുകളെക്കുറിച്ചുള്ള Geeky സ്ഥിതിവിവരക്കണക്കുകൾ"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"മെമ്മറി ഉപയോഗം"</string>
@@ -3407,7 +3503,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"ഫോണിൽ നിന്നും <xliff:g id="USER_NAME">%1$s</xliff:g>-നെ മായ്ക്കൂ"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"ലോക്ക് സ്ക്രീൻ ക്രമീകരണം"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"ലോക്ക് സ്ക്രീനിൽ നിന്ന് ഉപയോക്താക്കളെ ചേർക്കുക"</string>
-    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"ഡോക്ക് ചെയ്യുമ്പോൾ അഡ്‌മിൻ ഉപയോക്താവിലേക്ക് മാറുക"</string>
+    <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"ഡോക്ക് ചെയ്യുമ്പോൾ അഡ്‌മിൻ ഉപയോക്താവിലേക്ക് മാറുക"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"നിങ്ങളെ സ്വയം ഇല്ലാതാക്കണോ?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"ഈ ഉപയോക്താവിനെ ഇല്ലാതാക്കണോ?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"ഈ പ്രൊഫൈൽ നീക്കംചെയ്യണോ?"</string>
@@ -3540,6 +3636,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"നിങ്ങളുടെ ലൊക്കേഷൻ വിവരം ഉപയോഗിക്കാൻ അപ്ലിക്കേഷനുകളെ അനുവദിക്കുക"</string>
     <string name="wizard_back" msgid="8257697435061870191">"മടങ്ങുക"</string>
     <string name="wizard_next" msgid="3884832431439072471">"അടുത്തത്"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"പോർട്ടബിൾ ആക്കി മാറ്റുക"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"വേറെ രീതിയിൽ ഫോർമാറ്റ് ചെയ്യൂ"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"പൂര്‍ത്തിയാക്കുക"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"സിം കാർഡുകൾ"</string>
@@ -3721,6 +3819,7 @@
     <string name="call_volume_option_title" msgid="1461105986437268924">"കോൾ വോളിയം"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"അലാറം വോളിയം"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"റിംഗ്, അറിയിപ്പ് വോളിയം"</string>
+    <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"റിംഗ് വോളിയം"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"അറിയിപ്പ് വോളിയം"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"ഫോൺ റിംഗ്ടോൺ"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"ഡിഫോൾട്ട് അറിയിപ്പ് ശബ്‌ദം"</string>
@@ -4117,6 +4216,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"നിങ്ങളുടെ അഭ്യർത്ഥനപ്രകാരം, ഈ ഉപകരണത്തിൽ ഈ ആപ്പിന്‍റെ അറിയിപ്പുകൾ ദൃശ്യമാകുന്നത് Android ബ്ലോക്ക് ചെയ്യുന്നു"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"നിങ്ങളുടെ അഭ്യർത്ഥനപ്രകാരം, ഈ ഉപകരണത്തിൽ ഈ വിഭാഗത്തിൽപ്പെട്ട അറിയിപ്പുകൾ ദൃശ്യമാകുന്നത് Android ബ്ലോക്ക് ചെയ്യുന്നു"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"നിങ്ങളുടെ അഭ്യർത്ഥനപ്രകാരം, ഈ ഗ്രൂപ്പിൽപ്പെട്ട അറിയിപ്പുകൾ ഈ ഉപകരണത്തിൽ ദൃശ്യമാകുന്നത് Android ബ്ലോക്ക് ചെയ്യുന്നു"</string>
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"ഈ ആപ്പ് അറിയിപ്പുകൾ അയയ്ക്കുന്നില്ല"</string>
     <string name="notification_channels" msgid="1502969522886493799">"വിഭാഗങ്ങള്‍"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"മറ്റുള്ളവ"</string>
     <plurals name="notification_group_summary" formatted="false" msgid="483490958130993160">
@@ -4214,7 +4314,7 @@
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"കോളുകൾ"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"തടസ്സപ്പെടുത്താൻ കഴിയുന്ന കോളുകൾ"</string>
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"അനുവദനീയമായ കോളുകൾക്ക് ശബ്‌ദം വരുന്നുണ്ടെന്ന് ഉറപ്പാക്കാൻ, റിംഗ് ചെയ്യുക എന്നതിലേക്ക് ഉപകരണം സജ്ജീകരിച്ചിട്ടുണ്ടോയെന്ന് പരിശോധിക്കുക"</string>
-    <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ എന്നതിന് ഇന്‍‌കമിംഗ് കോളുകള്‍ ബ്ലോക്ക് ചെയ്‌തിരിക്കുന്നു. സുഹൃത്തുക്കളേയും കുടുംബാംഗങ്ങളേയും മറ്റ് കോണ്‍‌ടാക്‌റ്റുകളേയും നിങ്ങളിലേക്ക് എത്തിച്ചേരാന്‍ അനുവദിക്കുന്നതിന്‌ ക്രമീകരണങ്ങളിൽ മാറ്റം വരുത്താം."</string>
+    <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ എന്നതിന് ഇന്‍‌കമിംഗ് കോളുകള്‍ ബ്ലോക്ക് ചെയ്‌തിരിക്കുന്നു. സുഹൃത്തുക്കളേയും കുടുംബാംഗങ്ങളേയും മറ്റ് കോണ്‍‌ടാക്‌റ്റുകളേയും നിങ്ങളെ വിളിക്കാൻ അനുവദിക്കുന്നതിന്‌ ക്രമീകരണങ്ങളിൽ മാറ്റം വരുത്താം."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"നക്ഷത്രചിഹ്നമിട്ടവ"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{ഒന്നുമില്ല}=1{{contact_1}}=2{{contact_1}, {contact_2} എന്നിവർ}=3{{contact_1}, {contact_2}, {contact_3} എന്നിവർ}other{{contact_1}, {contact_2} എന്നിവരും മറ്റ് # പേരും}}"</string>
     <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(പേരില്ല)"</string>
@@ -4486,7 +4586,7 @@
     <string name="choose_voice_input_title" msgid="4855506199101586943">"വോയ്‌സ് ഇൻപുട്ട് ഉപയോഗിക്കുക"</string>
     <string name="default_browser_title" msgid="8342074390782390458">"ബ്രൗസർ ആപ്പ്"</string>
     <string name="default_browser_title_none" msgid="4691907418284764833">"സ്ഥിര ബ്രൗസറൊന്നുമില്ല"</string>
-    <string name="default_phone_title" msgid="7616730756650803827">"ഫോൺ ആപ്പ്"</string>
+    <string name="default_phone_title" msgid="7616730756650803827">"Phone ആപ്പ്"</string>
     <string name="default_app" msgid="445053777504688596">"(സ്ഥിരമായത്)"</string>
     <string name="system_app" msgid="1863291702508355041">"(സിസ്‌റ്റം)"</string>
     <string name="system_default_app" msgid="2647834628622214931">"(സിസ്റ്റം ഡിഫോൾട്ട്)"</string>
@@ -4837,6 +4937,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"ഇപ്പോൾ ഓണാക്കുക"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"ഇപ്പോൾ ഓഫാക്കുക"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"ബാറ്ററി ഒപ്റ്റിമൈസേഷൻ ഉപയോഗിക്കുന്നില്ല"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"ആപ്പിന്റെ ബാറ്ററി ഉപയോഗം"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"ആപ്പുകൾക്ക് ബാറ്ററി ഉപയോഗം സജ്ജീകരിക്കുക"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"നിയന്ത്രിച്ചിട്ടില്ല"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"ഒപ്റ്റിമൈസ് ചെയ്‌തിരിക്കുന്നു"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"നിയന്ത്രിച്ചിരിക്കുന്നു"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"ഉപകരണം ലോക്കുചെയ്തിരിക്കുകയാണെങ്കിൽ അറിയിപ്പുകൾക്ക് മറുപടികളോ മറ്റ് ടെക്സ്റ്റുകളോ ടൈപ്പുചെയ്യുന്നത് തടയുക"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"ഡിഫോൾട്ട് സ്പെൽ ചെക്കർ"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"സ്പെൽ ചെക്കർ തിരഞ്ഞെടുക്കുക"</string>
@@ -5400,6 +5505,7 @@
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"ആപ്പിന്‍റെ ഡാറ്റാ ഉപയോഗം"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"നെറ്റ്‍വര്‍ക്ക് മോഡ് <xliff:g id="NETWORKMODEID">%1$d</xliff:g> അസാധുവാണ്. അവഗണിക്കുക."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ആക്‌സസ് പോയിന്റ് പേരുകൾ"</string>
+    <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> എന്നതിലേക്ക് കണക്‌റ്റ് ചെയ്‌തിരിക്കുമ്പോൾ ലഭ്യമല്ല"</string>
     <string name="see_more" msgid="7499355691042812723">"കൂടുതൽ കാണുക"</string>
     <string name="see_less" msgid="2642392725363552793">"കുറച്ച് കാണുക"</string>
@@ -5565,7 +5671,7 @@
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"ഉപയോഗിക്കാൻ, ആദ്യം സ്ക്രീൻ ലോക്ക് സജ്ജീകരിക്കുക"</string>
     <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"പവർ മെനു:\nപവർ ബട്ടണും ശബ്‌ദം കൂട്ടുന്ന ബട്ടണും ഒരുമിച്ച് അമർത്തുക"</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"റിംഗ് ചെയ്യുന്നത് തടയുക:\nകുറുക്കുവഴിക്കായി ഒരു വോളിയം ബട്ടൺ അമർത്തുക"</string>
-    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"സമയ ദൈർഘ്യം അമർത്തിപ്പിടിക്കുക"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"അമർത്തിപ്പിടിക്കൽ സമയം"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"പവർ ബട്ടൺ എത്ര സമയം അമർത്തിപ്പിടിക്കണമെന്ന് തിരഞ്ഞെടുത്ത് സെൻസിറ്റിവിറ്റി ക്രമീകരിക്കുക"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"ദൈർഘ്യം കുറഞ്ഞത്"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"ദൈർഘ്യമേറിയത്"</string>
@@ -5580,6 +5686,11 @@
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"ഉപയോഗിക്കാൻ, ആദ്യം \"ഉപകരണ നിയന്ത്രണങ്ങൾ കാണിക്കുക\" ഓണാക്കുക"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"ലഭ്യമാകുമ്പോൾ ഡബിൾലൈൻ ക്ലോക്ക് കാണിക്കുക"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"ഡബിൾലൈൻ ക്ലോക്ക്"</string>
+    <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"കുറുക്കുവഴികൾ"</string>
+    <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
+      <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
+      <item quantity="one"><xliff:g id="FIRST_0">%1$s</xliff:g></item>
+    </plurals>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
@@ -5600,6 +5711,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"മീഡിയ"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"മീഡിയ പ്ലേയർ പിൻ ചെയ്യുക"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"പ്ലേബാക്ക് വേഗത്തിൽ പുനരാരംഭിക്കാൻ, ദ്രുത ക്രമീകരണത്തിൽ മീഡിയ പ്ലേയർ തുറന്ന നിലയിൽ തുടരും"</string>
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"ലോക്ക് സ്ക്രീനിൽ മീഡിയ കാണിക്കുക"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"പ്ലേബാക്ക് വേഗത്തിൽ പുനരാരംഭിക്കാൻ ലോക്ക് സ്ക്രീനിൽ മീഡിയാ പ്ലേയർ തുറന്ന നിലയിൽ തുടരും"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"മീഡിയ നിർദ്ദേശങ്ങൾ കാണിക്കുക"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"നിങ്ങളുടെ ആക്റ്റിവിറ്റി അടിസ്ഥാനമാക്കിയുള്ളവ"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"പ്ലേയർ മറയ്‌ക്കുക"</string>
@@ -5782,7 +5895,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"പ്രിവ്യൂ ചെയ്യുക"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"ഒരു സ്ക്രീൻ സേവർ തിരഞ്ഞെടുക്കുക"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"അധിക വിവരങ്ങൾ കാണിക്കുക"</string>
-    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"സമയം, തീയതി, കാലാവസ്ഥ, വായുവിന്റെ ഗുണമേന്മ, കാസ്റ്റ് ചെയ്യൽ വിശദാംശങ്ങൾ എന്നിവ സ്ക്രീൻ സേവറിൽ പ്രദർശിപ്പിക്കുക"</string>
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"സമയം, കാലാവസ്ഥ അല്ലെങ്കിൽ മറ്റ് വിവരങ്ങൾ എന്നിവ പോലുള്ള കാര്യങ്ങൾ സ്‌ക്രീൻ സേവറിൽ പ്രദർശിപ്പിക്കുക"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"കൂടുതൽ ക്രമീകരണം"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"സ്ക്രീൻ സേവർ തിരഞ്ഞെടുക്കുക"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"നിങ്ങളുടെ ടാബ്‌ലെറ്റ് ഡോക്ക് ചെയ്തിരിക്കുമ്പോൾ സ്ക്രീനിൽ എന്ത് കാണണമെന്ന് തിരഞ്ഞെടുക്കുക. സ്ക്രീൻ സേവർ ഉപയോഗിക്കുമ്പോൾ ഉപകരണം കൂടുതൽ ഊർജ്ജം ഉപയോഗിച്ചേക്കാം."</string>

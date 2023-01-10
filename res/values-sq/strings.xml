@@ -85,6 +85,8 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Nuk ke leje për të ndryshuar cilësimet e \"Bluetooth-it\"."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Çifto pajisjen e re"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Çifto anën e djathtë"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Çifto anën e majtë"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Çifto anën tjetër"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Aparati i dëgjimit në anën e majtë është lidhur.\n\nPër të çiftuar atë në anën e djathtë, sigurohu që ai të jetë i ndezur dhe gati për t\'u çiftuar."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Aparati i dëgjimit në anën e djathtë është lidhur.\n\nPër të çiftuar atë në anën e majtë, sigurohu që ai të jetë i ndezur dhe gati për t\'u çiftuar."</string>
@@ -351,13 +353,17 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Konfiguro \"Shkyçjen me fytyrë\""</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Përdor fytyrën për të vërtetuar"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Nis"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"Nëse \"Shkyçja me fytyrë\" për qasshmëri është e çaktivizuar, disa hapa konfigurimi mund të mos funksionojnë mirë me TalkBack."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Kthehu pas"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Vazhdo konfigurimin"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Përdor konfigurimin e qasshmërisë"</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Anulo"</string>
@@ -367,7 +373,9 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Shkyç me fytyrë"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Lejo shkyçjen me fytyrë"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Përdor fytyrën për të vërtetuar"</string>
-    <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Përdor fytyrën për të shkyçur telefonin, për të autorizuar blerjet ose për t\'u identifikuar në aplikacione"</string>
+    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"Përdor fytyrën për të shkyçur telefonin, për të autorizuar blerjet ose për t\'u identifikuar në aplikacione"</string>
+    <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="6144528803097608850">"Përdor fytyrën për të shkyçur tabletin, për të autorizuar blerjet ose për t\'u identifikuar në aplikacione."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="device" msgid="8600301257170347509">"Përdor fytyrën për të shkyçur pajisjen, për të autorizuar blerjet ose për t\'u identifikuar në aplikacione."</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Lejo fëmijën të përdorë fytyrën për të shkyçur telefonin e tij"</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Lejo fëmijën të përdorë fytyrën për të shkyçur tabletin e tij"</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Lejo fëmijën të përdorë fytyrën për të shkyçur pajisjen e tij"</string>
@@ -379,19 +387,39 @@
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"Mbaje fytyrën në mes të rrethit"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Kapërce"</string>
     <string name="face_add_max" msgid="4578405795494514876">"Mund të shtosh deri në <xliff:g id="COUNT">%d</xliff:g> fytyra"</string>
@@ -425,6 +453,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Modeli yt i fytyrës do të fshihet përgjithmonë dhe në mënyrë të sigurt.\n\nPas fshirjes, do të të duhet kodi yt PIN, motivi ose fjalëkalimi për të shkyçur telefonin."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Përdor \"Shkyçjen me fytyrë\" për të shkyçur telefonin tënd"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Gjurma e gishtit"</string>
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Kur përdoret \"Shkyçja me gjurmën e gishtit\""</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Gjurmë gishti për punë"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Menaxho gjurm. gishtit"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Përdor gjurmën për"</string>
@@ -441,7 +470,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Përdor gjurmën e gishtit për të shkyçur tabletin tënd ose për të verifikuar që je ti, si p.sh. kur identifikohesh në aplikacione ose kur miraton një blerje."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Përdor gjurmën e gishtit për të shkyçur pajisjen ose për të verifikuar që je ti, si p.sh. kur identifikohesh në aplikacione ose kur miraton një blerje."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Përdor gjurmën e gishtit për të shkyçur telefonin tënd ose për të verifikuar që je ti, si p.sh. kur identifikohesh në aplikacione ose kur miraton një blerje."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Lejoje fëmijën tënd të përdorë gjurmën e gishtit për të shkyçur telefonin ose për t\'u verifikuar si vetvetja. Kjo ndodh kur identifikohet në aplikacione, miraton një blerje etj."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"Lejoje fëmijën tënd të përdorë gjurmën e gishtit për të shkyçur telefonin ose për t\'u verifikuar si vetvetja. Kjo ndodh kur identifikohet në aplikacione, miraton një blerje etj."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="9019236661560266282">"Lejoje fëmijën tënd të përdorë gjurmën e gishtit për të shkyçur tabletin ose për të verifikuar që është ai. Kjo ndodh kur identifikohet në aplikacione, miraton një blerje etj."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"Lejoje fëmijën tënd të përdorë gjurmën e gishtit për të shkyçur pajisjen ose për të verifikuar që është ai. Kjo ndodh kur identifikohet në aplikacione, miraton një blerje etj."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Kontrolli është në duart e tua"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Kontrollin e ke ti dhe fëmija yt"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Ki parasysh"</string>
@@ -456,18 +487,30 @@
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Konfigurimi i gjurmës së gishtit zgjat vetëm një ose dy minuta. Nëse e kapërcen këtë, mund ta shtosh gjurmën tënde të gishtit më vonë te cilësimet."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Kur të shikosh këtë ikonë, përdor gjurmën tënde të gishtit për vërtetim, p.sh. kur të identifikohesh në aplikacione ose për të miratuar një blerje"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Ki parasysh"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Përdorimi i gjurmës sate të gishtit për të shkyçur telefonin mund të jetë më pak i sigurt se një motiv apo PIN i fortë."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"Përdorimi i gjurmës sate të gishtit për të shkyçur telefonin mund të jetë më pak i sigurt se një motiv apo PIN i fortë."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"Përdorimi i gjurmës sate të gishtit për të shkyçur tabletin mund të jetë më pak i sigurt se një kod PIN ose motiv i fortë"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"Përdorimi i gjurmës sate të gishtit për të shkyçur pajisjen mund të jetë më pak i sigurt se një kod PIN ose motiv i fortë"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Si funksionon"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"\"Shkyçja me gjurmën e gishtit\" krijon një model unik të gjurmës sate të gishtit për të verifikuar që je ti. Për ta krijuar këtë model të gjurmës së gishtit gjatë konfigurimit, duhet t\'i regjistrosh nga pozicione të ndryshme imazhet e gjurmës sate të gishtit."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"\"Shkyçja me gjurmën e gishtit\" krijon një model unik të gjurmës së gishtit të fëmijës tënd për të verifikuar që është ai. Për ta krijuar këtë model të gjurmës së gishtit gjatë konfigurimit, ajo duhet t\'i regjistrojë nga pozicione të ndryshme imazhet e gjurmës sate të gishtit."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="4729142136478078228">"Kur të përdorësh Pixel Imprint, imazhet përdoren për të përditësuar modelin tënd të gjurmës së gishtit. Imazhet e përdorura për të krijuar modelin e gjurmës sate të gishtit nuk ruhen asnjëherë, por modeli i gjurmës sate të gishtit ruhet në mënyrë të sigurt në telefonin tënd dhe nuk largohet kurrë nga telefoni. I gjithë përpunimi ndodh në mënyrë të sigurt në telefonin tënd."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Kur të përdorë Pixel Imprint, imazhet përdoren për të përditësuar modelin e tij të gjurmës së gishtit. Imazhet e përdorura për të krijuar modelin e gjurmës së gishtit të fëmijës tënd nuk ruhen asnjëherë, por modeli i gjurmës së gishtit ruhet në mënyrë të sigurt në telefon dhe nuk largohet kurrë nga telefoni. I gjithë përpunimi ndodh në mënyrë të sigurt në telefon."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Mund t\'i fshish imazhet dhe modelin e gjurmës sate të gishtit ose çaktivizoje \"Shkyçjen me gjurmën e gishtit\" në çdo kohë te \"Cilësimet\". Imazhet dhe modelet e gjurmës së gishtit ruhen në telefon deri kur t\'i fshish."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Ti dhe fëmija yt mund t\'i fshini imazhet dhe modelin e gjurmës së tij të gishtit ose ta çaktivizoni \"Shkyçjen me gjurmën e gishtit\" në çfarëdo kohe te \"Cilësimet\". Imazhet dhe modelet e gjurmës së gishtit ruhen në telefon derisa të fshihen."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"Kur të përdorësh Pixel Imprint, imazhet përdoren për të përditësuar modelin tënd të gjurmës së gishtit. Imazhet e përdorura për të krijuar modelin e gjurmës sate të gishtit nuk ruhen asnjëherë, por modeli i gjurmës sate të gishtit ruhet në mënyrë të sigurt në telefonin tënd dhe nuk largohet kurrë nga telefoni. I gjithë përpunimi ndodh në mënyrë të sigurt në telefonin tënd."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"Kur të përdorësh Pixel Imprint, imazhet përdoren për të përditësuar modelin tënd të gjurmës së gishtit. Imazhet e përdorura për të krijuar modelin e gjurmës sate të gishtit nuk ruhen asnjëherë, por modeli i gjurmës sate të gishtit ruhet në mënyrë të sigurt në tabletin tënd dhe nuk largohet kurrë nga tableti. I gjithë përpunimi ndodh në mënyrë të sigurt në tabletin tënd."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device" msgid="1392098506793837697">"Kur të përdorësh Pixel Imprint, imazhet përdoren për të përditësuar modelin tënd të gjurmës së gishtit. Imazhet e përdorura për të krijuar modelin e gjurmës sate të gishtit nuk ruhen asnjëherë, por modeli i gjurmës sate të gishtit ruhet në mënyrë të sigurt në pajisjen tënde dhe nuk largohet kurrë nga pajisja. I gjithë përpunimi ndodh në mënyrë të sigurt në pajisjen tënde."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"Kur të përdorë Pixel Imprint, imazhet përdoren për të përditësuar modelin e tij të gjurmës së gishtit. Imazhet e përdorura për të krijuar modelin e gjurmës së gishtit të fëmijës tënd nuk ruhen asnjëherë, por modeli i gjurmës së gishtit ruhet në mënyrë të sigurt në telefon dhe nuk largohet kurrë nga telefoni. I gjithë përpunimi ndodh në mënyrë të sigurt në telefon."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="530891604602839577">"Kur të përdorë Pixel Imprint, imazhet përdoren për të përditësuar modelin e tij të gjurmës së gishtit. Imazhet e përdorura për të krijuar modelin e gjurmës së gishtit të fëmijës tënd nuk ruhen asnjëherë, por modeli i gjurmës së gishtit ruhet në mënyrë të sigurt në tablet dhe nuk largohet kurrë nga tableti. I gjithë përpunimi ndodh në mënyrë të sigurt në tablet."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="1735767057693277593">"Kur të përdorë Pixel Imprint, imazhet përdoren për të përditësuar modelin e tij të gjurmës së gishtit. Imazhet e përdorura për të krijuar modelin e gjurmës së gishtit të fëmijës tënd nuk ruhen asnjëherë, por modeli i gjurmës së gishtit ruhet në mënyrë të sigurt në pajisje dhe nuk largohet kurrë nga pajisja. I gjithë përpunimi ndodh në mënyrë të sigurt në pajisje."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"Mund t\'i fshish imazhet dhe modelin e gjurmës sate të gishtit ose çaktivizoje \"Shkyçjen me gjurmën e gishtit\" në çdo kohë te \"Cilësimet\". Imazhet dhe modelet e gjurmës së gishtit ruhen në telefon deri kur t\'i fshish."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="1577753788807120092">"Mund t\'i fshish imazhet dhe modelin e gjurmës sate të gishtit ose ta çaktivizosh \"Shkyçjen me gjurmë gishti\" në çdo kohë te \"Cilësimet\". Imazhet dhe modelet e gjurmës së gishtit ruhen në tablet derisa t\'i fshish."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="5092396314447369758">"Mund t\'i fshish imazhet dhe modelin e gjurmës sate të gishtit ose ta çaktivizosh \"Shkyçjen me gjurmë gishti\" në çdo kohë te \"Cilësimet\". Imazhet dhe modelet e gjurmës së gishtit ruhen në pajisje derisa t\'i fshish."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"Ti dhe fëmija yt mund t\'i fshini imazhet dhe modelin e gjurmës së tij të gishtit ose ta çaktivizoni \"Shkyçjen me gjurmën e gishtit\" në çfarëdo kohe te \"Cilësimet\". Imazhet dhe modelet e gjurmës së gishtit ruhen në telefon derisa të fshihen."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"Ti dhe fëmija yt mund t\'i fshini imazhet dhe modelin e gjurmës së tij të gishtit ose ta çaktivizoni \"Shkyçjen me gjurmë gishti\" në çfarëdo kohe te \"Cilësimet\". Imazhet dhe modelet e gjurmës së gishtit ruhen në tablet derisa të fshihen."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"Ti dhe fëmija yt mund t\'i fshini imazhet dhe modelin e gjurmës së tij të gishtit ose ta çaktivizoni \"Shkyçjen me gjurmë gishti\" në çfarëdo kohe te \"Cilësimet\". Imazhet dhe modelet e gjurmës së gishtit ruhen në pajisje derisa të fshihen."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Telefoni yt mund të shkyçet edhe nëse nuk ke për qëllim një gjë të tillë, p.sh. nëse dikush ta mban te gishti."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"Tableti yt mund të shkyçet edhe nëse nuk ke për qëllim një gjë të tillë, p.sh. nëse dikush ta mban te gishti."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"Pajisja jote mund të shkyçet edhe nëse nuk ke për qëllim një gjë të tillë, p.sh. nëse dikush ta mban te gishti."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Telefoni i fëmijës tënd mund të shkyçet pa dashje, si p.sh. nëse dikush ia mban te gishti."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"Telefoni i fëmijës tënd mund të shkyçet pa dashje, si p.sh. nëse dikush ia mban te gishti."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="6956407873271178462">"Tableti i fëmijës tënd mund të shkyçet pa dashje, si p.sh. nëse dikush ia mban te gishti."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="885555477843366483">"Pajisja e fëmijës tënd mund të shkyçet pa dashje, si p.sh. nëse dikush ia mban te gishti."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Për rezultate më të mira, përdor një mbrojtës ekrani që është i certifikuar nga \"Prodhuar për Google\". Me mbrojtës të tjerë ekrani, gjurma jote e gishtit mund të mos funksionojë."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Për rezultate më të mira, përdor një mbrojtës ekrani që është i certifikuar nga \"Prodhuar për Google\". Me mbrojtës të tjerë ekrani, gjurma e gishtit e fëmijës tënd mund të mos funksionojë."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
@@ -478,9 +521,6 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Ngri gishtin pasi të ndjesh një dridhje"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Lëviz diku me ndriçim më të butë dhe provo përsëri"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Ke arritur numrin maksimal të përpjekjeve"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Përdor gjurmën e gishtit për të shkyçur tabletin ose për të verifikuar që je ti, si p.sh. kur identifikohesh në aplikacione"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Përdor gjurmën e gishtit për të shkyçur pajisjen ose për të verifikuar që je ti, si p.sh. kur identifikohesh në aplikacione"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Përdor gjurmën e gishtit për të shkyçur telefonin ose për të verifikuar që je ti, si p.sh. kur identifikohesh në aplikacione"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Shkyçja me fytyrë dhe me gjurmën e gishtit"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Trokit për të konfiguruar"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Fytyra dhe gjurmët e gishtave u shtuan"</string>
@@ -508,8 +548,12 @@
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"Kapërce"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"Anulo"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Prek sensorin"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Prek butonin e energjisë pa e shtypur atë"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Si të konfigurosh gjurmën e gishtit"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Ndodhet në pjesën e pasme të telefonit. Përdor gishtin tregues."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"Sensori i gjurmës së gishtit është në butonin e energjisë. Ai është butoni i rrafshët pranë butonit të ngritur të volumit në anë të tabletit.\n\nShtypja e butonit të energjisë e fik ekranin."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"Sensori i gjurmës së gishtit është në butonin e energjisë. Ai është butoni i rrafshët pranë butonit të ngritur të volumit në anë të pajisjes.\n\nShtypja e butonit të energjisë e fik ekranin."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"Sensori i gjurmës së gishtit është në butonin e energjisë. Ai është butoni i rrafshët pranë butonit të ngritur të volumit në anë të telefonit.\n\nShtypja e butonit të energjisë e fik ekranin."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Sensori i gjurmës së gishtit është në ekranin tënd. Do ta regjistrosh gjurmën e gishtit në ekranin tjetër."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Nis"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Lëvize gishtin nëpër ekran për të gjetur sensorin. Prek dhe mbaj të shtypur sensorin e gjurmës së gishtit"</string>
@@ -521,6 +565,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Prek sensorin"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Vendose gishtin mbi sensor dhe ngrije pasi të ndjesh një dridhje"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Mbaje gjurmën e gishtit mbi sensor derisa të ndjesh një dridhje"</string>
+    <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"Pa e shtypur butonin, mbaje gjurmën e gishtit mbi sensor derisa të ndjesh një dridhje.\n\nLëvize gishtin nga pak çdo herë. Kjo ndihmon për të regjistruar një pjesë më të madhe të gjurmës së gishtit tënd."</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Prek dhe mbaj të shtypur sensorin e gjurmës së gishtit"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Ngrije dhe më pas prek përsëri"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Edhe një herë"</string>
@@ -530,13 +575,22 @@
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Vendos majën e gishtit në sensor"</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Vendos skajin e majtë të gishtit"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Vendos skajin e djathtë të gishtit"</string>
+    <string name="security_settings_sfps_enroll_finger_center_title" msgid="1320688855767675739">"Vendos pjesën qendrore të gishtit tënd mbi sensor"</string>
+    <string name="security_settings_sfps_enroll_fingertip_title" msgid="2737520837684516446">"Vendos majën e gishtit mbi sensor"</string>
+    <string name="security_settings_sfps_enroll_left_edge_title" msgid="9022963735924413343">"Vendos skajin e majtë të gishtit mbi sensor"</string>
+    <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"Në përfundim, vendos anën e djathtë të gishtit mbi sensor"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Vendos anën e gjurmës së gishtit në sensor dhe mbaje, më pas kalo në anën tjetër"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Kjo ndihmon për të regjistruar një pjesë më të madhe të gjurmës së gishtit tënd"</string>
+    <string name="security_settings_sfps_enroll_progress_a11y_message" msgid="6450772721691523736">"Regjistrimi i gjurmës së gishtit: <xliff:g id="PERCENTAGE">%d</xliff:g> për qind"</string>
+    <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Regjistruar <xliff:g id="PERCENTAGE">%d</xliff:g> për qind"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Regjistrimi i gjurmës së gishtit: <xliff:g id="PERCENTAGE">%d</xliff:g> për qind"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Gjurma e gishtit u shtua"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"\"Shkyçja me gjurmën e gishtit\" përmirësohet sa më shumë që e përdor atë për të shkyçur tabletin tënd ose për të verifikuar që je ti në aplikacione"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"\"Shkyçja me gjurmën e gishtit\" përmirësohet sa më shumë që e përdor atë për të shkyçur pajisjen tënde ose për të verifikuar që je ti në aplikacione"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"\"Shkyçja me gjurmën e gishtit\" përmirësohet sa më shumë që e përdorur atë për të shkyçur telefonin tënd ose për të verifikuar që je ti në aplikacione"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Tani mund të përdorësh gjurmën tënde të gishtit për të shkyçur tabletin tënd ose për të verifikuar që je ti, si për shembull kur identifikohesh në aplikacione ose kur miraton një blerje"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Tani mund të përdorësh gjurmën tënde të gishtit për të shkyçur pajisjen tënde ose për të verifikuar që je ti, si për shembull kur identifikohesh në aplikacione ose kur miraton një blerje"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Tani mund të përdorësh gjurmën tënde të gishtit për të shkyçur telefonin tënd ose për të verifikuar që je ti, si për shembull kur identifikohesh në aplikacione ose kur miraton një blerje"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Shkyç vetëm kur ekrani është i ndezur"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Ekrani duhet të jetë i ndezur para se të mund ta shkyçësh me gjurmën tënde të gishtit. Kjo bën që shkyçja aksidentale të ketë më pak gjasë të ndodhë."</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Ekrani; Shkyçja"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Bëje më vonë"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Ngrije dhe më pas prek përsëri"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Vendos anën e gjurmës së gishtit në sensor dhe mbaje, më pas kalo në anën tjetër"</string>
@@ -614,10 +668,14 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Ke shtuar numrin maksimal të gjurmëve të gishtave"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Nuk mund të shtohen gjurmë të tjera të gishtave"</string>
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Të hiqen të gjitha gjurmët e gishtave?"</string>
-    <string name="fingerprint_delete_title" msgid="1469865327307917858">"Hiq \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
+    <string name="fingerprint_delete_title" msgid="5412123164503407098">"Fshi \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Dëshiron ta fshish këtë gjurmë gishti?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Kjo fshin imazhet e gjurmës së gishtit dhe modelin e lidhur me \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" që ruhen në pajisjen tënde"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Nuk do të jesh në gjendje të përdorësh gjurmën e gishtit për të shkyçur telefonin tënd ose për të verifikuar që je ti në aplikacione."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Kjo fshin imazhet e gjurmës së gishtit dhe modelin e lidhur me \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" që ruhen në telefonin tënd"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Kjo fshin imazhet e gjurmës së gishtit dhe modelin e lidhur me \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" që ruhen në tabletin tënd"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Kjo fshin imazhet e gjurmës së gishtit dhe modelin e lidhur me \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" që ruhen në pajisjen tënde"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Nuk do të jesh në gjendje të përdorësh gjurmën e gishtit për të shkyçur telefonin tënd ose për të verifikuar që je ti në aplikacione."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Nuk do të jesh në gjendje të përdorësh gjurmën e gishtit për të shkyçur tabletin tënd ose për të verifikuar që je ti në aplikacione."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Nuk do të jesh në gjendje të përdorësh gjurmën e gishtit për të shkyçur pajisjen tënde ose për të verifikuar që je ti në aplikacione."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Nuk do të jesh në gjendje të përdorësh gjurmën e gishtit për të shkyçur profilin tënd të punës, për të autorizuar blerje ose për t\'u identifikuar në aplikacionet e punës."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Po, hiqi"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Enkriptimi"</string>
@@ -676,17 +734,29 @@
     <string name="fingerprint_unlock_set_unlock_pin" msgid="4724451168139460493">"Gjurma e gishtit + Kodi PIN"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"Gjurma e gishtit + Fjalëkalimi"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Vazhdo pa gjurmën e gishtit"</string>
-    <string name="fingerprint_unlock_title" msgid="4978686534505944042">"Mund ta shkyçësh telefonin duke përdorur gjurmën e gishtit. Për siguri, ky opsion kërkon një kyçje rezervë të ekranit."</string>
+    <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"Mund ta shkyçësh telefonin duke përdorur gjurmën e gishtit. Për siguri, ky opsion kërkon një kyçje rezervë të ekranit."</string>
+    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
+    <skip />
+    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
+    <skip />
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"Shkyçja me fytyrë + Motivi"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Shkyçja me fytyrë + Kodi PIN"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Shkyçja me fytyrë + Fjalëkalimi"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Vazhdo pa \"Shkyçjen me fytyrë\""</string>
-    <string name="face_unlock_title" msgid="7344830351598247267">"Mund ta shkyçësh telefonin duke përdorur fytyrën. Për siguri, ky opsion kërkon një kyçje rezervë të ekranit."</string>
+    <string name="face_unlock_title" product="default" msgid="7344830351598247267">"Mund ta shkyçësh telefonin duke përdorur fytyrën. Për siguri, ky opsion kërkon një kyçje rezervë të ekranit."</string>
+    <!-- no translation found for face_unlock_title (5695698036499155727) -->
+    <skip />
+    <!-- no translation found for face_unlock_title (6768108756755361161) -->
+    <skip />
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Motivi • Fytyra • Gjurma e gishtit"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • Fytyra • Gjurma e gishtit"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Fjalëkalimet • Fytyra • Gjurma e gishtit"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Vazhdo pa fytyrë apo gjurmë gishti"</string>
-    <string name="biometrics_unlock_title" msgid="616524056055233041">"Mund ta shkyçësh telefonin duke përdorur fytyrën ose gjurmën e gishtit. Për siguri, ky opsion kërkon një kyçje rezervë të ekranit."</string>
+    <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"Mund ta shkyçësh telefonin duke përdorur fytyrën ose gjurmën e gishtit. Për siguri, ky opsion kërkon një kyçje rezervë të ekranit."</string>
+    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
+    <skip />
+    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
+    <skip />
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"Çaktivizuar nga administratori, politika e enkriptimit ose hapësira ruajtëse e kredencialeve"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Asnjë"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Me rrëshqitje"</string>
@@ -1324,7 +1394,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Aktiv"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Aktiv - Në bazë të fytyrave"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Zbulimi i fytyrës"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Rregullo automatikisht orientimin e ekranit kur lëviz telefonin mes modalitetit të portretit dhe atij horizontal"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Rregullo automatikisht orientimin e ekranit kur lëviz telefonin mes modalitetit të portretit dhe atij horizontal"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Rregullo automatikisht orientimin e ekranit kur lëviz tabletin mes modalitetit të portretit dhe atij horizontal"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Mëso më shumë për rrotullimin automatik"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Kur lëviz telefonin mes modalitetit \"portret\" e \"horizontal\""</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Rezolucioni i ekranit"</string>
@@ -1333,6 +1404,7 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"Rezolucioni i plotë përdor më shumë bateri. Ndryshimi i rezolucionit mund të shkaktojë rinisjen e disa aplikacioneve."</string>
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Zgjedhur"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Ngjyrat"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Natyrale"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Të theksuara"</string>
@@ -1452,11 +1524,14 @@
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Provo stile, imazhe sfondi të ndryshme etj."</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Mbrojtësi i ekranit"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"mbrojtësi i ekranit"</string>
+    <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Nuk ofrohet sepse modaliteti i orarit të gjumit është aktiv"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Përdor mbrojtësin e ekranit"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Gjatë karikimit ose lidhjes me stacionin"</string>
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Teksa është në stacion e në karikim"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Gjatë karikimit"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Kur vendoset në stacion"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Asnjëherë"</string>
+    <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Aktiv / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Çaktivizuar"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Kur të fillojë"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Mbrojtësi aktual i ekranit"</string>
@@ -1615,9 +1690,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Riemërto"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Monto"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Nxirr"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"Formato"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"Formato kartën SD si hapësirë ruajtëse të lëvizshme"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Formato kartën"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formato si të lëvizshme"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"Formato si të brendshme"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Formato"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Migro të dhënat"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Harroje"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Konfiguro"</string>
@@ -1647,17 +1723,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Riemërto hapësirën ruajtëse"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Kjo <xliff:g id="NAME_0">^1</xliff:g> është nxjerrë në mënyrë të sigurt, por është akoma e disponueshme. \n\nPër të përdorur këtë <xliff:g id="NAME_1">^1</xliff:g>, duhet ta montosh në fillim."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Kjo <xliff:g id="NAME_0">^1</xliff:g> është e dëmtuar. \n\nPër të përdorur këtë <xliff:g id="NAME_1">^1</xliff:g>, duhet ta konfigurosh në fillim."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"Pas formatimit, kartën <xliff:g id="NAME_0">^1</xliff:g> mund ta përdorësh në pajisje të tjera. \n\nTë gjitha të dhënat në <xliff:g id="NAME_1">^1</xliff:g> do të fshihen. Rekomandohet që të kryesh rezervimin në fillim. \n\n"<b>"Rezervo fotografitë dhe artikujt e tjerë \"media\""</b>" \nZhvendosi skedarët \"media\" në hapësira alternative ruajtjeje në këtë pajisje ose transferoji ato në një kompjuter duke përdorur një kabllo USB-je. \n\n"<b>"Rezervo aplikacionet"</b>" \nTë gjitha aplikacionet e ruajtura në <xliff:g id="NAME_6">^1</xliff:g> do të çinstalohen dhe të dhënat e tyre do të fshihen. Për t\'i ruajtur këto aplikacione, zhvendosi në hapësira alternative ruajtjeje në këtë pajisje."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Mund ta formatosh këtë kartë SD për të ruajtur fotografitë, videot, muzikën etj. dhe për të pasur qasje në to në pajisje të tjera. \n\n"<b>"Të gjitha të dhënat në këtë kartë SD do të spastrohen."</b>" \n\n"<b>"Para formatimit"</b>" \n\n"<b>"Rezervo fotografitë dhe mediat e tjera"</b>" \nZhvendosi skedarët e tu të medias në një hapësirë ruajtëse alternative në këtë pajisje ose transferoji te një kompjuter duke përdorur një kabllo USB. \n\n"<b>"Rezervo aplikacionet"</b>" \nTë gjitha aplikacionet e ruajtura te <xliff:g id="NAME">^1</xliff:g> do të çinstalohen dhe të dhënat e tyre do të spastrohen. Për t\'i mbajtur këto aplikacione, zhvendosi ato te një hapësirë ruajtëse alternative në këtë pajisje."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Kur ta nxjerrësh këtë <xliff:g id="NAME_0">^1</xliff:g>, aplikacionet e ruajtura në të do të ndalojnë së funksionuari ndërsa skedarët \"media\" nuk do të jenë të përdorshëm derisa ta fusësh atë sërish."</b>" \n\n<xliff:g id="NAME_1">^1</xliff:g> është formatuar për të funksionuar vetëm me këtë pajisje dhe nuk do të funksionojë me pajisje të tjera."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Për të përdorur aplikacionet, fotografitë ose të dhënat që përmban <xliff:g id="NAME">^1</xliff:g>, rifute atë. \n\nSi alternativë, mund të zgjedhësh ta harrosh këtë magazinë nëse pajisja nuk mund të përdoret. \n\nNëse zgjedh që ta harrosh, të gjitha të dhënat që përmban pajisja do të humbasin përgjithmonë. \n\nAplikacionet mund t\'i instalosh sërish më vonë, por të dhënat e ruajtura në këtë pajisje do të humbasin."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Harroje <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Të gjitha aplikacionet, fotografitë dhe të dhënat e ruajtura në këtë <xliff:g id="NAME">^1</xliff:g> do të humbasin përgjithmonë."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Sistemi përfshin skedarët që përdoren për ekzekutimin e versionit <xliff:g id="VERSION">%s</xliff:g> të Android"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Përdoruesit në modalitetin \"vizitor\" nuk mund t\'i formatojnë kartat SD"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Konfiguro <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Përdore si hapësirë portative ruajtjeje"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Për të zhvendosur fotografi dhe artikuj të tjerë \"media\" mes pajisjeve."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Përdore si hapësirë të brendshme ruajtjeje"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"Për të ruajtur diçka vetëm në këtë pajisje, duke përfshirë aplikacionet dhe fotografitë. Kërkon formatim që e parandalon atë të funksionojë me pajisje të tjera."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Formato kartën SD si hapësirë ruajtëse të lëvizshme"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Ruaj fotografitë, videot, muzikën etj. dhe qasu tek ato nga pajisjet e tjera"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Formato kartën SD si hapësirë ruajtëse të brendshme"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Ruaj aplikacionet dhe mediat për t\'i përdorur vetëm në këtë telefon"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Formato si hapësirë të brendshme ruajtjeje"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"Kjo kërkon që <xliff:g id="NAME_0">^1</xliff:g> të formatohet për ta bërë të sigurt atë. \n\nPas formatimit, <xliff:g id="NAME_1">^1</xliff:g> do të funksionojë vetëm në këtë pajisje. \n\n"<b>"Formatimi fshin të gjitha të dhënat që ruhen aktualisht në <xliff:g id="NAME_2">^1</xliff:g>."</b>" Për të shmangur humbjen e të dhënave, rekomandohet rezervimi i tyre."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Formatoje si hapësirë ruajtëse të lëvizshme"</string>
@@ -1674,9 +1751,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Zhvendos"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Po zhvendos të dhënat..."</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Gjatë zhvendosjes: \n• <xliff:g id="NAME">^1</xliff:g> nuk duhet të hiqet. \n• Disa apl. nuk do të funksionojnë si duhet. \n• Mbaje pajisjen të karikuar."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"<xliff:g id="NAME">^1</xliff:g> është gati për përdorim"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"<xliff:g id="NAME">^1</xliff:g> është gati për t\'u përdorur me fotografitë dhe skedarët e tjerë."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"<xliff:g id="NAME">^1</xliff:g> po funksionon. \n\nPër të zhvendosur fotografitë, skedarët dhe të dhënat e aplikacioneve te kjo pajisje, shko te Cilësimet &gt; Hapësira ruajtëse."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> u formatua"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Mund të fillosh të përdorësh <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Mund të fillosh të përdorësh <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Zhvendos <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Zhvendosja e aplikacionit <xliff:g id="APP">^1</xliff:g> dhe të dhënave të tij te <xliff:g id="NAME_0">^2</xliff:g> do të zgjasë vetëm pak çaste. Nuk do të jesh në gjendje ta përdorësh aplikacionin derisa zhvendosja të përfundojë. \n\n<xliff:g id="NAME_1">^2</xliff:g> nuk duhet të hiqet gjatë zhvendosjes."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Për të hequr të dhënat të nevojitet të shkyçësh përdoruesin <xliff:g id="APP">^1</xliff:g>."</string>
@@ -1685,19 +1762,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Anulo zhvendosjen"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"Kjo <xliff:g id="NAME_0">^1</xliff:g> duket se është e ngadaltë. \n\nMund të vazhdosh, por aplikacionet e zhvendosura në këtë vend mund të pengohen dhe transferimi i të dhënave mund të kërkojë shumë kohë. \n\nKi parasysh të përdorësh një <xliff:g id="NAME_1">^1</xliff:g> më të shpejtë për një cilësi më të mirë të funksionimit."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Si do ta përdorësh këtë <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"Përdore si hapësirë ruajtëse shtesë të tabletit"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"Për aplikacionet, skedarët dhe median vetëm në këtë tablet"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"Hapësira ruajtëse e tabletit"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"Përdore si hapësirë ruajtëse shtesë të telefonit"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"Për aplikacionet, skedarët dhe median vetëm në këtë telefon"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Hapësira ruajtëse e telefonit"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Formato kartën SD si hapësirë ruajtëse të brendshme"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Ruaj aplikacionet dhe mediat për t\'i përdorur vetëm në këtë tablet. &lt;a href=https://support.google.com/android/answer/12153449&gt;Mëso më shumë për konfigurimin e një karte SD&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Formato"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Formato kartën SD si hapësirë ruajtëse të brendshme"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Ruaj aplikacionet dhe mediat për t\'i përdorur vetëm në këtë telefon. &lt;a href=https://support.google.com/android/answer/12153449&gt;Mëso më shumë për konfigurimin e një karte SD&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Formato"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Ose"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Përdore si hapësirë të lëvizshme"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"Për transferimin e skedarëve dhe medias mes pajisjeve"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Hapësira ruajtëse e lëvizshme"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Formato kartën SD si hapësirë ruajtëse të lëvizshme"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Ruaj fotografitë, videot, muzikën etj. dhe qasu tek ato nga pajisje të tjera. &lt;a href=https://support.google.com/android/answer/12153449&gt;Mëso më shumë për konfigurimin e një karte SD&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Formato"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Konfiguro më vonë"</string>
-    <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Të formatohet kjo <xliff:g id="NAME">^1</xliff:g>?"</string>
+    <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Të formatohet <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Kjo <xliff:g id="NAME_0">^1</xliff:g> duhet të formatohet për të ruajtur aplikacione, skedarë dhe media. \n\nFormatimi do të spastrojë përmbajtjen ekzistuese në <xliff:g id="NAME_1">^2</xliff:g>. Për të shmangur humbjen e përmbajtjes, krijo një kopje rezervë në një <xliff:g id="NAME_2">^3</xliff:g> ose në një pajisje tjetër."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"<xliff:g id="NAME_0">^1</xliff:g> duhet të formatohet për të ruajtur fotografitë, videot, muzikën etj. \n\nFormatimi do të spastrojë përmbajtjet ekzistuese te <xliff:g id="NAME_1">^2</xliff:g>. Për të shmangur humbjen e përmbajtjeve, rezervoje në një tjetër <xliff:g id="NAME_2">^3</xliff:g> ose një pajisje tjetër."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Formato <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Të zhvendoset përmbajtja te <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Mund të zhvendosësh skedarët, median dhe aplikacione të caktuara në këtë <xliff:g id="NAME">^1</xliff:g>. \n\nKjo zhvendosje do të lirojë deri në <xliff:g id="SIZE">^2</xliff:g> nga hapësira ruajtëse e tabletit dhe duhet të zgjasë rreth <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1714,11 +1792,13 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Mund ta përdorësh përsëri këtë <xliff:g id="NAME_0">^1</xliff:g>, por mund të jetë e ngadaltë. \n\nAplikacionet e ruajtura në këtë <xliff:g id="NAME_1">^2</xliff:g> mund të mos funksionojnë si duhet dhe transferimet e përmbajtjeve mund të kërkojnë shumë kohë. \n\nProvo të përdorësh një <xliff:g id="NAME_2">^3</xliff:g> më të shpejtë ose përdor më mirë këtë <xliff:g id="NAME_3">^4</xliff:g> për hapësirë ruajtëse të lëvizshme."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Fillo nga e para"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Vazhdo"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Mund ta zhvendosësh përmbajtjen te <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"Për të zhvendosur përmbajtjen te <xliff:g id="NAME">^1</xliff:g>, shko te "<b>"Cilësimet &gt; Hapësira ruajtëse"</b></string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Përmbajtja jote u zhvendos te <xliff:g id="NAME_0">^1</xliff:g>. \n\nPër të menaxhuar këtë <xliff:g id="NAME_1">^2</xliff:g>, shko te "<b>"Cilësimet &gt; Hapësira ruajtëse"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Mund të fillosh të përdorësh <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Mund të fillosh të përdorësh <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Mund të fillosh të përdorësh <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Statusi i baterisë"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Niveli i baterisë"</string>
+    <string name="communal_settings_title" msgid="2845678473945902115">"Të përbashkëta"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"Cilësimet e përbashkëta"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN-të"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Redakto pikën e qasjes"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Nuk është caktuar"</string>
@@ -1850,6 +1930,7 @@
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Ndarja e internetit do të çaktivizohet për <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ndarja e Ethernet-it"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Ndaj lidhjen e internetit të telefonit përmes Ethernet"</string>
+    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"Ndaj lidhjen e internetit të tabletit përmes Ethernet-it"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Përdor zonën e qasjes dhe ndarjen e internetit për t\'u ofruar internet pajisjeve të tjera nëpërmjet lidhjes tënde të të dhënave celulare. Aplikacionet mund të krijojnë po ashtu një zonë qasjeje të internetit për të ndarë përmbajtje me pajisjet në afërsi."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Përdor zonën e qasjes dhe ndarjen e internetit për t\'u ofruar internet pajisjeve të tjera nëpërmjet lidhjes tënde Wi-Fi ose të të dhënave celulare. Aplikacionet mund të krijojnë po ashtu një zonë qasjeje të internetit për të ndarë përmbajtje me pajisjet në afërsi."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Ndihma"</string>
@@ -2739,8 +2820,8 @@
     <string name="history_details_title" msgid="8628584613889559355">"Detajet e historikut"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Përdorimi i baterisë"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Shiko përdorimin për 24 orët e fundit"</string>
-    <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Shiko përdorimin nga karikimi i fundit i plotë"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Përdorimi i baterisë"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Shiko përdorimin që nga karikimi i fundit i plotë"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Përdorimi i baterisë për aplikacionet"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Përdor detajet"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Rregullo përdorimin e energjisë"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Paketat e përfshira"</string>
@@ -2759,8 +2840,15 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Disa veçori mund të jenë të kufizuara"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Përdorim më i lartë i baterisë"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Shiko aplikacionet me përdorimin më të lartë"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Karikimi përkohësisht i kufizuar"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Për të kursyer baterinë. Mëso më shumë."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Karikimi u optimizua për të mbrojtur baterinë tënde"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"Për të ndihmuar në zgjatjen e jetëgjatësisë së baterisë sate, karikimi është optimizuar"</string>
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Karikimi u optimizua për të mbrojtur baterinë tënde"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Për të ndihmuar në zgjatjen e jetëgjatësisë së baterisë sate, karikimi është i optimizuar gjatë lidhjes me stacionin"</string>
+    <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Karikimi u optimizua për të mbrojtur baterinë tënde"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Për të ndihmuar në zgjatjen e jetëgjatësisë së baterisë sate, karikimi është i optimizuar gjatë lidhjes me stacionin"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Po karikohet plotësisht"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"Për të mbrojtur baterinë tënde, karikimi do të optimizohet herën tjetër kur tableti yt të jetë i lidhur me stacionin"</string>
+    <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Mëso më shumë rreth vendosjes së karikimit në pauzë"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Vazhdo karikimin"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Karikimi mund të kufizohet në <xliff:g id="PERCENT">%1$s</xliff:g> për të ndihmuar në ruajtjen e gjendjes së baterisë në kushte të caktuara, si p.sh. në temperatura të larta dhe periudha të gjata karikimi.\n\nKur këto kushte përfundojnë, telefoni yt do të karikohet automatikisht si zakonisht."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Karikimi mund të kufizohet në <xliff:g id="PERCENT">%1$s</xliff:g> për të ndihmuar në ruajtjen e gjendjes së baterisë në kushte të caktuara, si p.sh. në temperatura të larta dhe periudha të gjata karikimi.\n\nKur këto kushte përfundojnë, tableta jote do të karikohet automatikisht si zakonisht."</string>
@@ -2796,6 +2884,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Ky aplikacion do të mund ta përdorë baterinë në sfond. Bateria mund të mbarojë më shpejt nga sa pritet."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Hiq"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Anulo"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Karikoje plotësisht"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Aplikacionet e tua po përdorin një sasi normale të baterisë. Nëse aplikacionet përdorin një sasi të madhe të baterisë, telefoni yt do të japë sugjerime për veprimet që mund të kryesh.\n\nMund të aktivizosh gjithmonë \"Kursyesin e baterisë\" nëse bateria është në nivel të ulët."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Aplikacionet e tua po përdorin një sasi normale të baterisë. Nëse aplikacionet përdorin një sasi të madhe të baterisë, tableti yt do të japë sugjerime për veprimet që mund të kryesh.\n\nMund të aktivizosh gjithmonë \"Kursyesin e baterisë\" nëse bateria është në nivel të ulët."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Aplikacionet e tua po përdorin një sasi normale të baterisë. Nëse aplikacionet përdorin një sasi të madhe të baterisë, pajisja jote do të japë sugjerime për veprimet që mund të kryesh.\n\nMund të aktivizosh gjithmonë \"Kursyesin e baterisë\" nëse bateria është në nivel të ulët."</string>
@@ -2916,25 +3005,25 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Përdorimi i baterisë"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Që nga karikimi i plotë"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Menaxho përdorimin e baterisë"</string>
-    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> në total • <xliff:g id="TIME_1">^2</xliff:g> në sfond\nnga karikimi i fundit i plotë"</string>
+    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"<xliff:g id="TIME_0">^1</xliff:g> në total • <xliff:g id="TIME_1">^2</xliff:g> në sfond\nqë nga karikimi i fundit i plotë"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> në total • <xliff:g id="TIME_1">^2</xliff:g> në sfond\npër 24 orët e fundit"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"<xliff:g id="TIME_0">^1</xliff:g> në total • <xliff:g id="TIME_1">^2</xliff:g> në sfond\npër <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
-    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"Në total më pak se një minutë nga karikimi i fundit i plotë"</string>
+    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"Në total më pak se një minutë që nga karikimi i fundit i plotë"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"Përdorimi në total: më pak se një minutë për 24 orët e fundit"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Përdorimi në total: më pak se një minutë për periudhën <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"Në sfond më pak se një minutë nga karikimi i fundit i plotë"</string>
+    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"Në sfond më pak se një minutë që nga karikimi i fundit i plotë"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"Në sfond për më pak se një minutë për 24 orët e fundit"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Në sfond për më pak se një minutë për periudhën <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_total_usage" msgid="4685408616230899847">"<xliff:g id="TIME">^1</xliff:g> në total nga karikimi i fundit i plotë"</string>
+    <string name="battery_total_usage" msgid="4811532932663354619">"<xliff:g id="TIME">^1</xliff:g> në total që nga karikimi i fundit i plotë"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"<xliff:g id="TIME">^1</xliff:g> në total për 24 orët e fundit"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_0">^1</xliff:g> në total për periudhën <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="548670902301883980">"<xliff:g id="TIME">^1</xliff:g> në sfond nga karikimi i fundit i plotë"</string>
+    <string name="battery_bg_usage" msgid="8262917746299259350">"<xliff:g id="TIME">^1</xliff:g> në sfond që nga karikimi i fundit i plotë"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"<xliff:g id="TIME">^1</xliff:g> në sfond për 24 orët e fundit"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> në sfond për periudhën <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"<xliff:g id="TIME">^1</xliff:g> në total • në sfond më pak se një minutë\nnga karikimi i fundit i plotë"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"<xliff:g id="TIME">^1</xliff:g> në total • në sfond më pak se një minutë\nqë nga karikimi i fundit i plotë"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"<xliff:g id="TIME">^1</xliff:g> në total • në sfond më pak se një minutë\npër 24 orët e fundit"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"<xliff:g id="TIME_0">^1</xliff:g> në total • në sfond për më pak se një minutë\npër <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_not_usage" msgid="1472275761547230196">"Pa përdorim nga karikimi i fundit i plotë"</string>
+    <string name="battery_not_usage" msgid="3851536644733662392">"Pa përdorim që nga karikimi i fundit i plotë"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Nuk është përdorur për 24 orët e fundit"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"Përdorues të tjerë"</string>
@@ -2973,8 +3062,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"me <xliff:g id="PERCENT">%1$s</xliff:g> bateri"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Përqindja e baterisë"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Shfaq përqindjen e baterisë në shiritin e statusit"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Niveli i baterisë që nga karikimi i fundit i plotë"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Niveli i baterisë për 24 orët e fundit"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"Përdorimi i aplikacioneve që nga karikimi i fundit i plotë"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Përdorimi i aplikacionit për 24 orët e fundit"</string>
+    <string name="battery_system_usage" msgid="1395943945140097585">"Përdorimi i sistemit që nga karikimi i fundit i plotë"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Përdorimi i sistemit për 24 orët e fundit"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Përdorimi i sistemit për: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Përdorimi i aplikacionit për: <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -2982,9 +3074,13 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Në sfond: më pak se një minutë"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Në total: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Në sfond: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Të dhënat e përdorimit të baterisë janë të përafërta dhe nuk masin përdorimin gjatë karikimit të telefonit"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Të dhënat e përdorimit të baterisë do të ofrohen pasi të përdorësh telefonin për disa orë"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Të dhënat e përdorimit të baterisë janë të përafërta dhe nuk masin përdorimin gjatë karikimit të telefonit"</string>
+    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"Të dhënat e përdorimit të baterisë janë të përafërta dhe nuk matin përdorimin gjatë karikimit të tabletit"</string>
+    <string name="battery_usage_screen_footer" product="device" msgid="6610974734578869768">"Të dhënat e përdorimit të baterisë janë të përafërta dhe nuk matin përdorimin gjatë karikimit të pajisjes"</string>
+    <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Të dhënat e përdorimit të baterisë do të ofrohen pas disa orësh pasi të karikohet plotësisht"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Grafiku i përdorimit të baterisë"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Grafiku i përdorimit të baterisë për çdo ditë"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Grafiku i përdorimit të baterisë për çdo orë"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistikat e procesit"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistikat teknike për proceset në ekzekutim"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Përdorimi i memories"</string>
@@ -3025,7 +3121,7 @@
     <string name="voice_input_settings_title" msgid="3708147270767296322">"Hyrja zanore"</string>
     <string name="voice_service_preference_section_title" msgid="4807795449147187497">"Shërbime të hyrjes zanore"</string>
     <string name="voice_interactor_preference_summary" msgid="3942881638813452880">"Ndërveprimi dhe fjalëkyçi i aktivizimit (hotword), i plotë"</string>
-    <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"Shërbim i thjeshtë \"ligjërim-në-tekst\""</string>
+    <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"Shërbim i thjeshtë \"Ligjërim në tekst\""</string>
     <string name="voice_interaction_security_warning" msgid="7962884055885987671">"Ky shërbim i hyrjes së zërit do të kryejë gjithmonë monitorim të zërit si dhe do të kontrollojë në emrin tënd, të gjitha aplikacionet që mundësohen me zë. Ai ofrohet nga aplikacioni <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Të aktivizohet përdorimi e këtij shërbimi?"</string>
     <string name="on_device_recognition_settings" msgid="6503160369314598069">"Cilësimet e njohjes në pajisje"</string>
     <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"Njohja në pajisje"</string>
@@ -3407,7 +3503,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Fshije <xliff:g id="USER_NAME">%1$s</xliff:g> nga pajisja"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Cilësimet e ekranit të kyçjes"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Shto përdoruesit nga ekrani i kyçjes"</string>
-    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"Kalo te përdoruesi administrator kur stacionohet"</string>
+    <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Kalo te përdoruesi administrator kur stacionohet"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Do e fshish veten?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Të fshihet ky përdorues?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Të hiqet ky profil?"</string>
@@ -3447,7 +3543,7 @@
     <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"Instalo aplikacionet e disponueshme"</string>
     <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Pagesat pa kontakt"</string>
     <string name="nfc_default_payment_settings_title" msgid="2150504446774382261">"Aplikacioni i parazgjedhur për pagesa"</string>
-    <string name="nfc_default_payment_footer" msgid="978535088340021360">"Për të paguar me aplikacionin për pagesa, mbaje pjesën e pasme të pajisjes te një pikë pagese"</string>
+    <string name="nfc_default_payment_footer" msgid="978535088340021360">"Për të paguar me një aplikacion për pagesa, mbaje pjesën e pasme të pajisjes te një terminal pagese"</string>
     <string name="nfc_more_details" msgid="1700713533074275233">"Mëso më shumë"</string>
     <string name="nfc_default_payment_workapp_confirmation_title" msgid="746921251872504687">"Të parazgjidhet apl. i punës për pagesat?"</string>
     <string name="nfc_default_payment_workapp_confirmation_message_title" msgid="1533022606333010329">"Për të paguar me aplikacionin e punës:"</string>
@@ -3540,6 +3636,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Lejo aplikacionet të përdorin informacionin e vendndodhjes tënde"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Prapa"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Para"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Kalo te hapësira ruajtëse e lëvizshme"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Formatoje në një mënyrë tjetër"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Përfundo"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"Kartat SIM"</string>
@@ -3721,6 +3819,7 @@
     <string name="call_volume_option_title" msgid="1461105986437268924">"Volumi i telefonatës"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"Volumi i alarmit"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Volumi i ziles dhe njoftimeve"</string>
+    <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Volumi i ziles"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Volumi i njoftimit"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Zilja e telefonit"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Tingulli i parazgjedhur i njoftimit"</string>
@@ -4117,6 +4216,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"Me kërkesën tënde, Android po bllokon shfaqjen e njoftimeve të këtij aplikacioni në këtë pajisje"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Me kërkesën tënde, Android po bllokon shfaqjen e kësaj kategorie njoftimesh në këtë pajisje"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Me kërkesën tënde, Android po bllokon shfaqjen e këtij grupi njoftimesh në këtë pajisje"</string>
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Ky aplikacion nuk dërgon njoftime"</string>
     <string name="notification_channels" msgid="1502969522886493799">"Kategoritë"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Të tjera"</string>
     <plurals name="notification_group_summary" formatted="false" msgid="483490958130993160">
@@ -4837,6 +4937,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Aktivizo tani"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Çaktivizo tani"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Nuk po përdoret optimizimi i baterisë"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Përdorimi i baterisë për aplikacionet"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Cakto përdorimin e baterisë për aplikacionet"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"E pakufizuar"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"E optimizuar"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"E kufizuar"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Nëse pajisja është e kyçur, parandalo shkrimin e përgjigjeve ose teksteve të tjera te njoftimet"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Kontrolluesi drejtshkrimor i parazgjedhur"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Zgjidh kontrolluesin drejtshkrimor"</string>
@@ -5400,6 +5505,7 @@
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"Përdorimi i të dhënave të aplikacionit"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Regjim i pavlefshëm i rrjetit <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Shpërfille."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Emrat e pikës së qasjes"</string>
+    <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Nuk ofrohet kur është e lidhur me <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Shiko më shumë"</string>
     <string name="see_less" msgid="2642392725363552793">"Shiko më pak"</string>
@@ -5580,6 +5686,11 @@
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Për ta përdorur, fillimisht aktivizo \"Shfaq kontrollet e pajisjes\""</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Shfaq orën analoge kur ofrohet"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Orë analoge"</string>
+    <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"Shkurtoret"</string>
+    <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
+      <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
+      <item quantity="one"><xliff:g id="FIRST_0">%1$s</xliff:g></item>
+    </plurals>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
@@ -5600,6 +5711,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Gozhdo luajtësin e medias"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Për të rifilluar shpejt luajtjen, luajtësi i medias qëndron i hapur te \"Cilësimet e shpejta\""</string>
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Shfaq media në ekranin e kyçjes"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"Për të rifilluar shpejt luajtjen, luajtësi i medias qëndron i hapur në ekranin e kyçjes"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Shfaq rekomandimet për mediat"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Bazuar në aktivitetin tënd"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Fshih luajtësin"</string>
@@ -5782,7 +5895,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Pamja paraprake"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Zgjidh një mbrojtës ekrani"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Shfaq informacione shtesë"</string>
-    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"Ora në ekran, data, moti, cilësia e ajrit dhe detajet e Google Cast në mbrojtësin e ekranit"</string>
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Shfaq gjëra të tilla si ora, moti ose informacione të tjera në mbrojtësin e ekranit"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Cilësime të tjera"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Zgjidh mbrojtësin e ekranit"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Zgjidh se çfarë do të shohësh në ekranin tënd kur tableti të jetë lidhur me stacionin. Pajisja jote mund të përdorë më shumë energji kur përdoret një mbrojtës ekrani."</string>

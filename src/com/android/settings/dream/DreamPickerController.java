@@ -132,7 +132,7 @@ public class DreamPickerController extends BasePreferenceController {
             mActiveDream = mDreamInfo;
             mBackend.setActiveDream(mDreamInfo.componentName);
             mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
-                    SettingsEnums.ACTION_DREAM_SELECT_TYPE, SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_DREAM_SELECT_TYPE, SettingsEnums.DREAM,
                     mDreamInfo.componentName.flattenToString(), 1);
         }
 

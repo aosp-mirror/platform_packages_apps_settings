@@ -49,7 +49,8 @@ public class BatteryHistoryPreference extends Preference {
 
     private TextView mSummaryView;
     private CharSequence mSummaryContent;
-    private BatteryChartView mBatteryChartView;
+    private BatteryChartView mDailyChartView;
+    private BatteryChartView mHourlyChartView;
     private BatteryChartPreferenceController mChartPreferenceController;
 
     public BatteryHistoryPreference(Context context, AttributeSet attrs) {
@@ -92,8 +93,8 @@ public class BatteryHistoryPreference extends Preference {
 
     void setChartPreferenceController(BatteryChartPreferenceController controller) {
         mChartPreferenceController = controller;
-        if (mBatteryChartView != null) {
-            mChartPreferenceController.setBatteryChartView(mBatteryChartView);
+        if (mDailyChartView != null && mHourlyChartView != null) {
+            mChartPreferenceController.setBatteryChartView(mDailyChartView, mHourlyChartView);
         }
     }
 
@@ -105,11 +106,13 @@ public class BatteryHistoryPreference extends Preference {
             return;
         }
         if (mIsChartGraphEnabled) {
-            mBatteryChartView = (BatteryChartView) view.findViewById(R.id.battery_chart);
-            mBatteryChartView.setCompanionTextView(
-                    (TextView) view.findViewById(R.id.companion_text));
+            final TextView companionTextView = (TextView) view.findViewById(R.id.companion_text);
+            mDailyChartView = (BatteryChartView) view.findViewById(R.id.daily_battery_chart);
+            mDailyChartView.setCompanionTextView(companionTextView);
+            mHourlyChartView = (BatteryChartView) view.findViewById(R.id.hourly_battery_chart);
+            mHourlyChartView.setCompanionTextView(companionTextView);
             if (mChartPreferenceController != null) {
-                mChartPreferenceController.setBatteryChartView(mBatteryChartView);
+                mChartPreferenceController.setBatteryChartView(mDailyChartView, mHourlyChartView);
             }
         } else {
             final TextView chargeView = (TextView) view.findViewById(R.id.charge);

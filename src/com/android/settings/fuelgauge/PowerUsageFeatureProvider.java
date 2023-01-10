@@ -140,9 +140,14 @@ public interface PowerUsageFeatureProvider {
     boolean isAdaptiveChargingSupported();
 
     /**
+     * Returns {@code true} if current defender mode is extra defend
+     */
+    boolean isExtraDefend();
+
+    /**
      * Gets a intent for one time bypass charge limited to resume charging.
      */
-    Intent getResumeChargeIntent();
+    Intent getResumeChargeIntent(boolean isDockDefender);
 
     /**
      * Returns battery history data with corresponding timestamp key.

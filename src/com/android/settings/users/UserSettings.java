@@ -49,7 +49,6 @@ import android.os.UserManager;
 import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Gravity;
@@ -126,7 +125,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_ADD_SUPERVISED_USER = "supervised_user_add";
     private static final String KEY_ADD_USER_WHEN_LOCKED = "user_settings_add_users_when_locked";
     private static final String KEY_MULTIUSER_TOP_INTRO = "multiuser_top_intro";
-    private static final String KEY_TIMEOUT_TO_USER_ZERO = "timeout_to_user_zero_preference";
+    private static final String KEY_TIMEOUT_TO_DOCK_USER = "timeout_to_dock_user_preference";
     private static final String KEY_GUEST_CATEGORY = "guest_category";
     private static final String KEY_GUEST_RESET = "guest_reset";
     private static final String KEY_GUEST_EXIT = "guest_exit";
@@ -214,7 +213,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private AddUserWhenLockedPreferenceController mAddUserWhenLockedPreferenceController;
     private RemoveGuestOnExitPreferenceController mRemoveGuestOnExitPreferenceController;
     private MultiUserTopIntroPreferenceController mMultiUserTopIntroPreferenceController;
-    private TimeoutToUserZeroPreferenceController mTimeoutToUserZeroPreferenceController;
+    private TimeoutToDockUserPreferenceController mTimeoutToDockUserPreferenceController;
     private UserCreatingDialog mUserCreatingDialog;
     private final AtomicBoolean mGuestCreationScheduled = new AtomicBoolean();
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
@@ -307,14 +306,14 @@ public class UserSettings extends SettingsPreferenceFragment
         mMultiUserTopIntroPreferenceController = new MultiUserTopIntroPreferenceController(activity,
                 KEY_MULTIUSER_TOP_INTRO);
 
-        mTimeoutToUserZeroPreferenceController = new TimeoutToUserZeroPreferenceController(activity,
-                KEY_TIMEOUT_TO_USER_ZERO);
+        mTimeoutToDockUserPreferenceController = new TimeoutToDockUserPreferenceController(
+                activity, KEY_TIMEOUT_TO_DOCK_USER);
 
         final PreferenceScreen screen = getPreferenceScreen();
         mAddUserWhenLockedPreferenceController.displayPreference(screen);
         mRemoveGuestOnExitPreferenceController.displayPreference(screen);
         mMultiUserTopIntroPreferenceController.displayPreference(screen);
-        mTimeoutToUserZeroPreferenceController.displayPreference(screen);
+        mTimeoutToDockUserPreferenceController.displayPreference(screen);
 
         screen.findPreference(mAddUserWhenLockedPreferenceController.getPreferenceKey())
                 .setOnPreferenceChangeListener(mAddUserWhenLockedPreferenceController);
@@ -388,8 +387,8 @@ public class UserSettings extends SettingsPreferenceFragment
 
         mAddUserWhenLockedPreferenceController.updateState(screen.findPreference(
                 mAddUserWhenLockedPreferenceController.getPreferenceKey()));
-        mTimeoutToUserZeroPreferenceController.updateState(screen.findPreference(
-                mTimeoutToUserZeroPreferenceController.getPreferenceKey()));
+        mTimeoutToDockUserPreferenceController.updateState(screen.findPreference(
+                mTimeoutToDockUserPreferenceController.getPreferenceKey()));
         mRemoveGuestOnExitPreferenceController.updateState(screen.findPreference(
                 mRemoveGuestOnExitPreferenceController.getPreferenceKey()));
         if (mShouldUpdateUserList) {
@@ -468,11 +467,6 @@ public class UserSettings extends SettingsPreferenceFragment
         mUserCaps.updateAddUserCapabilities(getActivity());
         loadProfile();
         updateUserList();
-    }
-
-    private boolean isEnableGuestModeUxChanges() {
-        return FeatureFlagUtils.isEnabled(getContext(),
-                FeatureFlagUtils.SETTINGS_GUEST_MODE_UX_CHANGES);
     }
 
     /**
@@ -574,13 +568,6 @@ public class UserSettings extends SettingsPreferenceFragment
                 .setAction(UserManager.ACTION_CREATE_SUPERVISED_USER)
                 .setPackage(mConfigSupervisedUserCreationPackage)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        // TODO(b/209659998): [to-be-removed] fallback activity for supervised user creation.
-        if (getActivity().getPackageManager().resolveActivity(intent, 0) == null) {
-            intent
-                .setClass(getContext(), AddSupervisedUserActivity.class)
-                .setPackage(null);
-        }
 
         startActivity(intent);
     }
@@ -1345,33 +1332,25 @@ public class UserSettings extends SettingsPreferenceFragment
         }
         mGuestCategory.setVisible(true);
         mGuestExitPreference.setVisible(true);
-        if (isEnableGuestModeUxChanges()) {
-            mGuestResetPreference.setVisible(true);
+        mGuestResetPreference.setVisible(true);
 
-            boolean isGuestFirstLogin = Settings.Secure.getIntForUser(
-                                            getContext().getContentResolver(),
-                                            SETTING_GUEST_HAS_LOGGED_IN,
-                                            0,
-                                            UserHandle.myUserId()) <= 1;
-            String guestExitSummary;
-            if (mUserCaps.mIsEphemeral) {
-                guestExitSummary = getContext().getString(
-                                    R.string.guest_notification_ephemeral);
-            } else if (isGuestFirstLogin) {
-                guestExitSummary = getContext().getString(
-                                    R.string.guest_notification_non_ephemeral);
-            } else {
-                guestExitSummary = getContext().getString(
-                                    R.string.guest_notification_non_ephemeral_non_first_login);
-            }
-            mGuestExitPreference.setSummary(guestExitSummary);
+        boolean isGuestFirstLogin = Settings.Secure.getIntForUser(
+                                        getContext().getContentResolver(),
+                                        SETTING_GUEST_HAS_LOGGED_IN,
+                                        0,
+                                        UserHandle.myUserId()) <= 1;
+        String guestExitSummary;
+        if (mUserCaps.mIsEphemeral) {
+            guestExitSummary = getContext().getString(
+                                R.string.guest_notification_ephemeral);
+        } else if (isGuestFirstLogin) {
+            guestExitSummary = getContext().getString(
+                                R.string.guest_notification_non_ephemeral);
         } else {
-            mGuestExitPreference.setIcon(getEncircledDefaultIcon());
-            mGuestExitPreference.setTitle(
-                                    mGuestUserAutoCreated
-                                        ? com.android.settingslib.R.string.guest_reset_guest
-                                        : com.android.settingslib.R.string.guest_exit_guest);
+            guestExitSummary = getContext().getString(
+                                R.string.guest_notification_non_ephemeral_non_first_login);
         }
+        mGuestExitPreference.setSummary(guestExitSummary);
     }
 
     private void updateGuestCategory(Context context, List<UserInfo> users) {
@@ -1400,16 +1379,12 @@ public class UserSettings extends SettingsPreferenceFragment
             pref.setOnPreferenceClickListener(this);
             pref.setEnabled(canOpenUserDetails);
             pref.setSelectable(true);
-            if (isEnableGuestModeUxChanges()) {
-                Drawable icon = getContext().getDrawable(R.drawable.ic_account_circle_outline);
-                icon.setTint(
-                        getColorAttrDefaultColor(getContext(), android.R.attr.colorControlNormal));
-                pref.setIcon(encircleUserIcon(
-                        UserIcons.convertToBitmapAtUserIconSize(
-                                getContext().getResources(), icon)));
-            } else {
-                pref.setIcon(getEncircledDefaultIcon());
-            }
+            Drawable icon = getContext().getDrawable(R.drawable.ic_account_circle_outline);
+            icon.setTint(
+                    getColorAttrDefaultColor(getContext(), android.R.attr.colorControlNormal));
+            pref.setIcon(encircleUserIcon(
+                    UserIcons.convertToBitmapAtUserIconSize(
+                            getContext().getResources(), icon)));
             pref.setKey(KEY_USER_GUEST);
             pref.setOrder(Preference.DEFAULT_ORDER);
             if (mUserCaps.mDisallowSwitchUser) {
@@ -1449,15 +1424,10 @@ public class UserSettings extends SettingsPreferenceFragment
                 && mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_GUEST)
                 && WizardManagerHelper.isDeviceProvisioned(context)
                 && mUserCaps.mUserSwitcherEnabled) {
+            Drawable icon = context.getDrawable(R.drawable.ic_account_circle);
+            mAddGuest.setIcon(centerAndTint(icon));
             isVisible = true;
             mAddGuest.setVisible(true);
-            // when isEnableGuestModeUxChanges() is true, the icon is set via the layout xml
-            // In com.android.settings.users.UserSettingsTest
-            // we disable the check for setIcon being called
-            if (!isEnableGuestModeUxChanges()) {
-                Drawable icon = context.getDrawable(R.drawable.ic_account_circle);
-                mAddGuest.setIcon(centerAndTint(icon));
-            }
             mAddGuest.setSelectable(true);
             if (mGuestUserAutoCreated && mGuestCreationScheduled.get()) {
                 mAddGuest.setTitle(com.android.internal.R.string.guest_name);
@@ -1475,21 +1445,15 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void updateAddUser(Context context) {
         updateAddUserCommon(context, mAddUser, mUserCaps.mCanAddRestrictedProfile);
-        // when isEnableGuestModeUxChanges() is true, the icon is set via the layout xml
-        if (!isEnableGuestModeUxChanges()) {
-            Drawable icon = context.getDrawable(R.drawable.ic_account_circle_filled);
-            mAddUser.setIcon(centerAndTint(icon));
-        }
+        Drawable icon = context.getDrawable(R.drawable.ic_account_circle_filled);
+        mAddUser.setIcon(centerAndTint(icon));
     }
 
     private void updateAddSupervisedUser(Context context) {
         if (!TextUtils.isEmpty(mConfigSupervisedUserCreationPackage)) {
             updateAddUserCommon(context, mAddSupervisedUser, false);
-            // when isEnableGuestModeUxChanges() is true, the icon is set via the layout xml
-            if (!isEnableGuestModeUxChanges()) {
-                Drawable icon = context.getDrawable(R.drawable.ic_add_supervised_user);
-                mAddSupervisedUser.setIcon(centerAndTint(icon));
-            }
+            Drawable icon = context.getDrawable(R.drawable.ic_add_supervised_user);
+            mAddSupervisedUser.setIcon(centerAndTint(icon));
         } else {
             mAddSupervisedUser.setVisible(false);
         }
@@ -1530,7 +1494,10 @@ public class UserSettings extends SettingsPreferenceFragment
         LayerDrawable ld = new LayerDrawable(new Drawable[] {bg, icon});
         int size = getContext().getResources().getDimensionPixelSize(
                 R.dimen.multiple_users_avatar_size);
+        int bgSize = getContext().getResources().getDimensionPixelSize(
+                R.dimen.multiple_users_user_icon_size);
         ld.setLayerSize(1, size, size);
+        ld.setLayerSize(0, bgSize, bgSize);
         ld.setLayerGravity(1, Gravity.CENTER);
 
         return ld;
@@ -1586,28 +1553,17 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public boolean onPreferenceClick(Preference pref) {
         if (isCurrentUserGuest()) {
-            if (isEnableGuestModeUxChanges()) {
-                if (mGuestResetPreference != null && pref == mGuestResetPreference) {
-                    showDialog(DIALOG_CONFIRM_RESET_AND_RESTART_GUEST);
-                    return true;
+            if (mGuestResetPreference != null && pref == mGuestResetPreference) {
+                showDialog(DIALOG_CONFIRM_RESET_AND_RESTART_GUEST);
+                return true;
+            }
+            if (mGuestExitPreference != null && pref == mGuestExitPreference) {
+                if (mUserCaps.mIsEphemeral) {
+                    showDialog(DIALOG_CONFIRM_EXIT_GUEST_EPHEMERAL);
+                } else {
+                    showDialog(DIALOG_CONFIRM_EXIT_GUEST_NON_EPHEMERAL);
                 }
-                if (mGuestExitPreference != null && pref == mGuestExitPreference) {
-                    if (mUserCaps.mIsEphemeral) {
-                        showDialog(DIALOG_CONFIRM_EXIT_GUEST_EPHEMERAL);
-                    } else {
-                        showDialog(DIALOG_CONFIRM_EXIT_GUEST_NON_EPHEMERAL);
-                    }
-                    return true;
-                }
-            } else {
-                if (mGuestExitPreference != null && pref == mGuestExitPreference) {
-                    if (mGuestUserAutoCreated) {
-                        showDialog(DIALOG_CONFIRM_REMOVE_GUEST_WITH_AUTO_CREATE);
-                    } else {
-                        showDialog(DIALOG_CONFIRM_REMOVE_GUEST);
-                    }
-                    return true;
-                }
+                return true;
             }
         }
         if (pref == mMePreference) {
@@ -1718,7 +1674,10 @@ public class UserSettings extends SettingsPreferenceFragment
         }
 
         UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        Bitmap icon = BitmapFactory.decodeStream(avatarDataStream);
+        Bitmap decodedIcon = BitmapFactory.decodeStream(avatarDataStream);
+        CircleFramedDrawable drawable = CircleFramedDrawable.getInstance(context, decodedIcon);
+        Bitmap icon = UserIcons.convertToBitmapAtUserIconSize(context.getResources(), drawable);
+
         um.setUserIcon(userId, icon);
         try {
             avatarDataStream.close();

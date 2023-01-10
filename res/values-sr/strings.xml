@@ -86,6 +86,8 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Немате дозволу за промену подешавања Bluetooth-а."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Упари нови уређај"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
+    <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Упари десно уво"</string>
+    <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Упари лево уво"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Упарите друго уво"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Леви слушни апарат је повезан.\n\nДа бисте упарили десни, уверите се да је укључен и спреман за упаривање."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Десни слушни апарат је повезан.\n\nДа бисте упарили леви, уверите се да је укључен и спреман за упаривање."</string>
@@ -354,13 +356,17 @@
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Подесите откључавање лицем"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Потврдите идентитет лицем"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
-    <string name="security_settings_face_enroll_education_message_accessibility" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="1986648712195281391"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Започните"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"Ако је откључавање лицем са функцијом приступачности искључено, неки кораци за подешавање можда неће исправно радити са TalkBack-ом."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Назад"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Наставите подешавање"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Користите подеш. за приступачн."</string>
-    <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="6763509014732769185"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Откажи"</string>
@@ -370,7 +376,9 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Откључајте помоћу лица"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Дозволите откључавање лицем"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Потврдите идентитет лицем"</string>
-    <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Откључавајте телефон, одобравајте куповине или се пријављујте у апликације помоћу лица."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="3015751486939484934">"Откључавајте телефон, одобравајте куповине или се пријављујте у апликације помоћу лица."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="6144528803097608850">"Откључавајте таблет, одобравајте куповине или се пријављујте у апликације помоћу лица."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="device" msgid="8600301257170347509">"Откључавајте уређај, одобравајте куповине или се пријављујте у апликације помоћу лица."</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Дозволите детету да користи откључавање телефона лицем"</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Дозволите детету да користи откључавање таблета лицем"</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Дозволите детету да користи откључавање уређаја лицем"</string>
@@ -382,19 +390,39 @@
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
-    <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
-    <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
-    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
-    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6502109133251718131"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="1803349736039164986"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="6496505354480525745"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="6301647369911879888"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
-    <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
-    <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="4192656589626667797"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="9028182363896853946"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="9028182363896853946"></string>
     <string name="security_settings_face_enroll_introduction_control_title" msgid="4536951089583821051"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_title" msgid="5892729331412694759"></string>
-    <string name="security_settings_face_enroll_introduction_control_message" msgid="4818463420573540379"></string>
-    <string name="security_settings_face_enroll_introduction_control_consent_message" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="4818463420573540379"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="4658082872829249850"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"Поставите лице у центар круга"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Прескочи"</string>
     <string name="face_add_max" msgid="4578405795494514876">"Максималан број лица који можете да додате је <xliff:g id="COUNT">%d</xliff:g>"</string>
@@ -428,6 +456,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Модел лица ће бити трајно и безбедно избрисан.\n\nПосле брисања вам треба PIN, шаблон или лозинка да бисте откључали телефон."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Откључајте телефон лицем"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Отисак прста"</string>
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Када се користи откључавање отиском прста"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Отисак прста за посао"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Управљај отис. прстију"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Користи отис. прста за"</string>
@@ -445,7 +474,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Користите отисак прста да бисте откључавали таблет или потврђивали идентитет, на пример, када се пријављујете у апликације или одобравате куповину."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Користите отисак прста да бисте откључавали уређај или потврђивали идентитет, на пример, када се пријављујете у апликације или одобравате куповину."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Користите отисак прста да бисте откључавали телефон или потврђивали идентитет, на пример, када се пријављујете у апликације или одобравате куповину."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Дозволите детету да користи откључавање отиском прста на телефону ради верификовања идентитета. Ово се дешава када се пријављује у апликације, одобрава куповину и у другим ситуацијама."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"Дозволите детету да користи откључавање отиском прста на телефону ради верификовања идентитета. Ово се дешава када се пријављује у апликације, одобрава куповину и у другим ситуацијама."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="9019236661560266282">"Дозволите детету да користи откључавање отиском прста на таблету ради верификовања идентитета. Ово се дешава када се пријављује у апликације, одобрава куповину и у другим ситуацијама."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"Дозволите детету да користи откључавање отиском прста на уређају ради верификовања идентитета. Ово се дешава када се пријављује у апликације, одобрава куповину и у другим ситуацијама."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Ви имате контролу"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Ви и дете имате контролу"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Имајте на уму"</string>
@@ -460,18 +491,30 @@
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Подешавање отисака прстију траје свега минут-два. Ако прескочите ово, можете да додате отисак прста касније у подешавањима."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Када видите ову икону, потврдите идентитет помоћу отиска прста као када се пријављујете у апликације или одобравате куповину"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Имајте на уму"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Коришћење отиска прста за откључавање телефона може да буде мање безбедно него јак шаблон или PIN."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="5824014348182478279">"Коришћење отиска прста за откључавање телефона може да буде мање безбедно него јак шаблон или PIN."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"Коришћење отиска прста за откључавање таблета може да буде мање безбедно него јак шаблон или PIN."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"Коришћење отиска прста за откључавање уређаја може да буде мање безбедно него јак шаблон или PIN."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Принцип рада"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Откључавање отиском прста прави јединствени модел отиска прста ради верификовања идентитета. Да бисте направили тај модел отиска прста током подешавања, морате да сликате отисак прста из различитих положаја."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Откључавање отиском прста прави јединствени модел дететовог отиска прста ради верификовања идентитета. Да би направило тај модел отиска прста током подешавања, дете треба да слика отисак прста из различитих положаја."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="4729142136478078228">"Када користите Pixel Imprint, слике се користе за ажурирање модела отиска прста. Слике које се користе за прављење модела отиска прста никада се не чувају, али се модел отиска прста безбедно чува на телефону и остаје само на њему. Цео процес обраде се безбедно одвија на телефону."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Када користи Pixel Imprint, слике се користе за ажурирање модела отиска прста. Слике које се користе за прављење дететовог модела отиска прста никада се не чувају, али се модел отиска прста безбедно чува на телефону и остаје само на њему. Цео процес обраде се безбедно одвија на телефону."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Можете да избришете слике и модел отиска прста или да искључите Откључавање отискoм прста у било ком тренутку у Подешавањима. Слике и модели отисака прстију се чувају на телефону док их не избришете."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Ви и дете можете да избришете слике и модел отиска прста или да искључите откључавање отискoм прста у било ком тренутку у подешавањима. Слике и модели отисака прстију се чувају на телефону док их не избришете."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"Када користите Pixel Imprint, слике се користе за ажурирање модела отиска прста. Слике које се користе за прављење модела отиска прста никада се не чувају, али се модел отиска прста безбедно чува на телефону и остаје само на њему. Цео процес обраде се безбедно одвија на телефону."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"Када користите Pixel Imprint, слике се користе за ажурирање модела отиска прста. Слике које се користе за прављење модела отиска прста никада се не чувају, али се модел отиска прста безбедно чува на таблету и увек остаје на њему. Цео процес обраде се безбедно одвија на таблету."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device" msgid="1392098506793837697">"Када користите Pixel Imprint, слике се користе за ажурирање модела отиска прста. Слике које се користе за прављење модела отиска прста никада се не чувају, али се модел отиска прста безбедно чува на уређају и увек остаје на њему. Цео процес обраде се безбедно одвија на уређају."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"Када користи Pixel Imprint, слике се користе за ажурирање модела отиска прста. Слике које се користе за прављење дететовог модела отиска прста никада се не чувају, али се модел отиска прста безбедно чува на телефону и остаје само на њему. Цео процес обраде се безбедно одвија на телефону."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="530891604602839577">"Када дете користи Pixel Imprint, слике се користе за ажурирање модела отиска прста. Слике које се користе за прављење дететовог модела отиска прста никада се не чувају, али се модел отиска прста безбедно чува на таблету и увек остаје на њему. Цео процес обраде се безбедно одвија на таблету."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="1735767057693277593">"Када дете користи Pixel Imprint, слике се користе за ажурирање модела отиска прста. Слике које се користе за прављење дететовог модела отиска прста никада се не чувају, али се модел отиска прста безбедно чува на уређају и увек остаје на њему. Цео процес обраде се безбедно одвија на уређају."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"Можете да избришете слике и модел отиска прста или да искључите Откључавање отискoм прста у било ком тренутку у Подешавањима. Слике и модели отисака прстију се чувају на телефону док их не избришете."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="1577753788807120092">"У сваком тренутку можете да избришете слике и модел отиска прста или да искључите откључавање отиском прста у Подешавањима. Слике и модели отисака прстију се чувају на таблету док их не избришете."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="5092396314447369758">"У сваком тренутку можете да избришете слике и модел отиска прста или да искључите откључавање отиском прста у Подешавањима. Слике и модели отисака прстију се чувају на уређају док их не избришете."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"Ви и дете можете да избришете слике и модел отиска прста или да искључите откључавање отискoм прста у било ком тренутку у подешавањима. Слике и модели отисака прстију се чувају на телефону док их не избришете."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"Ви и дете можете да избришете слике и модел отиска прста или да искључите откључавање отискoм прста у било ком тренутку у подешавањима. Слике и модели отисака прстију се чувају на таблету док их не избришете."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"Ви и дете можете да избришете слике и модел отиска прста или да искључите откључавање отискoм прста у било ком тренутку у подешавањима. Слике и модели отисака прстију се чувају на уређају док их не избришете."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Телефон може да се откључа када то не намеравате. На пример, ако га неко приближи вашем прсту."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"Таблет може да се откључа када то не намеравате. На пример, ако га неко приближи вашем прсту."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"Уређај може да се откључа када то не намеравате. На пример, ако га неко приближи вашем прсту."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Телефон детета може да се откључа када дете то не намерава. На пример, ако неко приближи телефон дететовом прсту."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"Телефон детета може да се откључа када дете то не намерава. На пример, ако неко приближи телефон дететовом прсту."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="6956407873271178462">"Дететов таблет може да се откључа када дете то не намерава. На пример, ако неко приближи таблет дететовом прсту."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="885555477843366483">"Дететов уређај може да се откључа када дете то не намерава. На пример, ако неко приближи уређај дететовом прсту."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Да бисте имали најбоље резултате, користите заштиту за екран са сертификатом Направљено за Google. Отисак прста можда неће радити са другим заштитама за екран."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Да бисте имали најбоље резултате, користите заштиту за екран са сертификатом Направљено за Google. Отисак прста детета можда неће радити са другим заштитама за екран."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
@@ -482,9 +525,6 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Подигните прст када осетите вибрирање"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Померите се негде са блажим осветљењем и пробајте поново"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Достигли сте максималан број покушаја"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Користите отисак прста да бисте откључавали таблет или верификовали идентитет, на пример, када се пријављујете у апликације"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Користите отисак прста да бисте откључавали уређај или верификовали идентитет, на пример, када се пријављујете у апликације"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Користите отисак прста да бисте откључавали телефон или верификовали идентитет, на пример, када се пријављујете у апликације"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Откључавање лицем и отиском прста"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Додирните да бисте подесили"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Лице и отисци прста су додати"</string>
@@ -512,8 +552,12 @@
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"Прескочи"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"Откажи"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Додирните сензор"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Додирните дугме за укључивање без притискања"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Како да подесите отисак прста"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Налази се на полеђини телефона. Користите кажипрст."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"Сензор за отисак прста се налази на дугмету за укључивање. То је равно дугме поред издигнутог дугмета за јачину звука на ивици таблета.\n\nПритиском на дугме за укључивање искључује се екран."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"Сензор за отисак прста се налази на дугмету за укључивање. То је равно дугме поред издигнутог дугмета за јачину звука на ивици уређаја.\n\nПритиском на дугме за укључивање искључује се екран."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"Сензор за отисак прста се налази на дугмету за укључивање. То је равно дугме поред издигнутог дугмета за јачину звука на ивици телефона.\n\nПритиском на дугме за укључивање искључује се екран."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Сензор за отисак прста је на екрану. Снимићете отисак прста на следећем екрану."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Покрени"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Превуците прстом преко екрана да бисте пронашли сензор. Додирните и задржите сензор за отисак прста."</string>
@@ -525,6 +569,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Додирните сензор"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Ставите прст на сензор и подигните га када осетите вибрацију"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Држите прст равно на сензору док не осетите вибрацију"</string>
+    <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"Без притискања дугмета задржите прст на сензору док не осетите вибрацију.\n\nСваки пут када је осетите, помало померите прст. Тако ћете снимити већи део отиска прста."</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Додирните и задржите сензор за отисак прста"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Подигните, па опет додирните"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Још једном"</string>
@@ -534,13 +579,22 @@
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Ставите врх прста на сензор"</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Ставите леву ивицу прста"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Ставите десну ивицу прста"</string>
+    <string name="security_settings_sfps_enroll_finger_center_title" msgid="1320688855767675739">"Ставите средишњи део прста на сензор"</string>
+    <string name="security_settings_sfps_enroll_fingertip_title" msgid="2737520837684516446">"Ставите врх прста на сензор"</string>
+    <string name="security_settings_sfps_enroll_left_edge_title" msgid="9022963735924413343">"Ставите леву ивицу прста на сензор"</string>
+    <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"На крају, ставите десну ивицу прста на сензор"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Ставите једну страну прста на сензор и задржите, па ставите другу страну"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Тако ћете снимити већи део отиска прста"</string>
+    <string name="security_settings_sfps_enroll_progress_a11y_message" msgid="6450772721691523736">"Регистровање отиска прста је на <xliff:g id="PERCENTAGE">%d</xliff:g> посто"</string>
+    <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Регистровано је <xliff:g id="PERCENTAGE">%d</xliff:g> посто"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Регистровање отиска прста је на <xliff:g id="PERCENTAGE">%d</xliff:g> посто"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Отисак прста је додат"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Откључавање отиском прста побољшава се што га више користите за откључавање таблета или потврду идентитета у апликацијама"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Откључавање отиском прста побољшава се што га више користите за откључавање уређаја или потврду идентитета у апликацијама"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Откључавање отиском прста побољшава се што га више користите за откључавање телефона или потврду идентитета у апликацијама"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Сада можете да користите отисак прста за откључавање таблета или потврду идентитета, на пример, кад се пријављујете у апликације или одобравате куповину"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Сада можете да користите отисак прста за откључавање уређаја или потврду идентитета, на пример, кад се пријављујете у апликације или одобравате куповину"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Сада можете да користите отисак прста за откључавање телефона или потврду идентитета, на пример, кад се пријављујете у апликације или одобравате куповину"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Откључавање само када је екран укључен"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Екран мора да буде укључен да бисте могли да откључате отиском прста. То смањује вероватноћу за случајно откључавање."</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Екран, откључавање"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Урадићу то касније"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Подигните, па опет додирните"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Ставите једну страну прста на сензор и задржите, па ставите другу страну"</string>
@@ -618,15 +672,19 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Додали сте максималан број отисака прстију"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Не можете да додате још отисака прстију"</string>
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Уклањате све отиске прстију?"</string>
-    <string name="fingerprint_delete_title" msgid="1469865327307917858">"Уклоните „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“"</string>
+    <string name="fingerprint_delete_title" msgid="5412123164503407098">"Избришите <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Желите ли да избришете овај отисак прста?"</string>
-    <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Овим се бришу слике и модел отиска прста у вези са отиском <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> који су сачувани на уређају"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Нећете моћи да користите отисак прста да бисте откључавали телефон или верификовали идентитет у апликацијама."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Овим се бришу слике и модел отиска прста у вези са отиском <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> који су сачувани на телефону"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Овим се бришу слике и модел отиска прста у вези са отиском <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> који су сачувани на таблету"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Овим се бришу слике и модел отиска прста у вези са отиском <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> који су сачувани на уређају"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"Нећете моћи да користите отисак прста да бисте откључавали телефон ни верификовали идентитет у апликацијама."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"Нећете моћи да користите отисак прста да бисте откључавали таблет или верификовали идентитет у апликацијама."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"Нећете моћи да користите отисак прста да бисте откључавали уређај или верификовали идентитет у апликацијама."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Нећете моћи да користите отисак прста за откључавање пословног профила, овлашћивање куповина или пријављивање у пословне апликације."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Да, уклони"</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Шифровање"</string>
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Шифруј таблет"</string>
-    <string name="encrypt_title" product="default" msgid="7337365190988321100">"Шифруј телефон"</string>
+    <string name="encrypt_title" product="default" msgid="7337365190988321100">"Шифровање телефона"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Шифровано"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Подесите закључавање екрана"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Да бисте побољшали безбедност, подесите PIN, шаблон или лозинку за овај уређај"</string>
@@ -680,17 +738,29 @@
     <string name="fingerprint_unlock_set_unlock_pin" msgid="4724451168139460493">"отисак прста + PIN"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"отисак прста + лозинка"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Наставите без отиска прста"</string>
-    <string name="fingerprint_unlock_title" msgid="4978686534505944042">"Можете да откључате телефон помоћу отиска прста. Ова опција захтева резервни начин за откључавање екрана из безбедносних разлога."</string>
+    <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"Можете да откључате телефон помоћу отиска прста. Ова опција захтева резервни начин за откључавање екрана из безбедносних разлога."</string>
+    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
+    <skip />
+    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
+    <skip />
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"Откључавање лицем и шаблон"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Откључавање лицем и PIN"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Откључавање лицем и лозинка"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Наставите без откључавања лицем"</string>
-    <string name="face_unlock_title" msgid="7344830351598247267">"Можете да откључате телефон помоћу лица. Ова опција захтева резервни начин за откључавање екрана из безбедносних разлога."</string>
+    <string name="face_unlock_title" product="default" msgid="7344830351598247267">"Можете да откључате телефон помоћу лица. Ова опција захтева резервни начин за откључавање екрана из безбедносних разлога."</string>
+    <!-- no translation found for face_unlock_title (5695698036499155727) -->
+    <skip />
+    <!-- no translation found for face_unlock_title (6768108756755361161) -->
+    <skip />
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Шаблон • Лице • Отисак прста"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • Лице • Отисак прста"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Лозинка • Лице • Отисак прста"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Наставите без лица или отиска прста"</string>
-    <string name="biometrics_unlock_title" msgid="616524056055233041">"Можете да откључате телефон помоћу лица или отиска прста. Ова опција захтева резервни начин за откључавање екрана из безбедносних разлога."</string>
+    <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"Можете да откључате телефон помоћу лица или отиска прста. Ова опција захтева резервни начин за откључавање екрана из безбедносних разлога."</string>
+    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
+    <skip />
+    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
+    <skip />
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"Онемогућио администратор, смернице за шифровање или складиште акредитива"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Ништа"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Превуците"</string>
@@ -1344,7 +1414,8 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Укључено"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Укључено – на основу лица"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Препознавање лица"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Аутоматски прилагодите положај екрана када пребацујете телефон између усправног и водоравног режима"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="4547268203621754096">"Аутоматски прилагодите положај екрана када пребацујете телефон између усправног и водоравног режима"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="2148040599220623607">"Аутоматски прилагодите положај екрана када пребацујете таблет између усправног и водоравног режима"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Сазнајте више о аутоматском ротирању"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Када окрећете телефон у усправни или водоравни режим"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Резолуција екрана"</string>
@@ -1353,6 +1424,7 @@
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080 пиксела FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440 пиксела QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"Пуна резолуција користи више батерије. Ако пређете на ову резолуцију, неке апликације ће се можда рестартовати."</string>
+    <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Изабрано је"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Боје"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Природне"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Појачане"</string>
@@ -1441,7 +1513,7 @@
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"Распоред"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Ништа"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Укључује се од сумрака до свитања"</string>
-    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Укључује се у жељено време"</string>
+    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Укључује се у прилагођено време"</string>
     <string name="dark_ui_auto_mode_custom_bedtime" msgid="8465023741946439266">"Укључује се када је време за спавање"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"Статус"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Никада се не укључује аутоматски"</string>
@@ -1472,11 +1544,14 @@
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Пробајте другачије стилове, позадине и још тога"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Чувар екрана"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"чувар екрана"</string>
+    <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Недоступно је јер је ноћни режим укључен"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Користи чувар екрана"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Током пуњења или на базној станици"</string>
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Док је на базној станици и пуни се"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Током пуњења"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Док је на базној станици"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Никада"</string>
+    <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Укључено/<xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Искључено"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Када да почне"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Тренутни чувар екрана"</string>
@@ -1636,9 +1711,10 @@
     <string name="storage_menu_rename" msgid="8549835371429159336">"Преименуј"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Прикључи"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Избаци"</string>
-    <string name="storage_menu_format" msgid="5454870642788909443">"Форматирај"</string>
+    <string name="storage_menu_format" msgid="8903698999905354146">"Форматирајте SD картицу за преносиву меморију"</string>
+    <string name="storage_menu_format_button" msgid="7623565190643699626">"Форматирај картицу"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Форматирај као преносну"</string>
-    <string name="storage_menu_format_private" msgid="3208326980027382079">"Форматирај као интерну"</string>
+    <string name="storage_menu_format_option" msgid="4886059624052908432">"Форматирај"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Пренеси податке"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Заборави"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Подеси"</string>
@@ -1668,17 +1744,18 @@
     <string name="storage_rename_title" msgid="5911285992205282312">"Преименујте меморију"</string>
     <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Уређај <xliff:g id="NAME_0">^1</xliff:g> је безбедно избачен, али је још увек доступан. \n\nДа бисте користили уређај <xliff:g id="NAME_1">^1</xliff:g>, прво треба да га прикључите."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Уређај <xliff:g id="NAME_0">^1</xliff:g> је оштећен. \n\nДа бисте користили уређај <xliff:g id="NAME_1">^1</xliff:g>, прво треба да га подесите."</string>
-    <string name="storage_internal_format_details" msgid="8922023528848861812">"После форматирања уређај <xliff:g id="NAME_0">^1</xliff:g> можете да користите са другим уређајима. \n\nСви подаци на овом уређају <xliff:g id="NAME_1">^1</xliff:g> биће обрисани. Размислите о томе да прво направите резервну копију података. \n\n"<b>"Направите резервну копију слика и других медија"</b>" \nПреместите медијске датотеке у алтернативну меморију на овом уређају или их пренесите на рачунар помоћу USB кабла. \n\n"<b>"Направите резервну копију апликација"</b>" \nСве апликације сачуване на овом уређају <xliff:g id="NAME_6">^1</xliff:g> биће деинсталиране и њихови подаци биће избрисани. Да бисте задржали ове апликације, преместите их у алтернативну меморију на овом уређају."</string>
+    <string name="storage_internal_format_details" msgid="2399034372813686846">"Ову SD картицу можете да форматирате за чување слика, видео снимака, музике и другог садржаја и да му приступате на другим уређајима. \n\n"<b>"Сви подаци на овој SD картици биће обрисани."</b>" \n\n"<b>"Пре форматирања"</b>" \n\n"<b>"Направите резервне копије слика и других медија"</b>" \nПреместите фајлове медија у алтернативни меморијски простор на овом уређају или их пребаците на рачунар помоћу USB кабла. \n\n"<b>"Направите резервне копије апликација"</b>" \nСве апликације које се чувају на уређају <xliff:g id="NAME">^1</xliff:g> биће деинсталиране, а њихови подаци обрисани. Да бисте задржали те апликације, преместите их у алтернативни меморијски простор на овом уређају."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Када избаците овај уређај <xliff:g id="NAME_0">^1</xliff:g>, апликације које су на њему сачуване ће престати да функционишу и медијске датотеке које су на њему сачуване неће бити доступне док га поново не уметнете."</b>" \n\nУређај <xliff:g id="NAME_1">^1</xliff:g> се форматира да би функционисао само на овом уређају. Неће функционисати на другим уређајима."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Да бисте користили апликације, слике или податке на овом уређају (<xliff:g id="NAME">^1</xliff:g>), уметните га поново. \n\nДруга могућност је да изаберете да заборавите тај меморијски уређај ако није доступан. \n\nАко одлучите да заборавите, сви подаци на том уређају биће заувек изгубљени. \n\nАпликације можете да касније поново инсталирате, али ће подаци ускладиштени на уређају бити изгубљени."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Желите да заборавите уређај <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Све апликације, слике и подаци сачувани на уређају <xliff:g id="NAME">^1</xliff:g> биће заувек избрисани."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Систем обухвата датотеке које се користе за покретање верзије Android <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_wizard_guest" msgid="5813419895687733649">"Корисници у режиму госта не могу да форматирају SD"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Подесите уређај <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Користи као преносиву меморију"</string>
-    <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"За пренос слика и других медија са једног уређаја на други."</string>
-    <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Користи као интерну меморију"</string>
-    <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"За чување података само на овом уређају, укључујући апликације и слике. Потребно је форматирање које спречава да меморијски уређај функционише са другим уређајима."</string>
+    <string name="storage_wizard_init_external_title" msgid="5304499882951772292">"Форматирајте SD картицу за преносиву меморију"</string>
+    <string name="storage_wizard_init_external_summary" msgid="5842588772292324473">"Чувајте слике, видео, музику и друго и приступајте им са других уређаја"</string>
+    <string name="storage_wizard_init_internal_title" msgid="8799676990387869411">"Форматирајте SD картицу за интерну меморију"</string>
+    <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Сачувајте апликације и медије за коришћење само на овом телефону"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Форматир. као интерну меморију"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"За ово је потребно да се уређај <xliff:g id="NAME_0">^1</xliff:g> форматира да би био безбедан. \n\nПосле форматирања <xliff:g id="NAME_1">^1</xliff:g> ће функционисати само на овом уређају. \n\n"<b>"Форматирањем се бришу сви подаци који су тренутно сачувани на уређају <xliff:g id="NAME_2">^1</xliff:g>."</b>" Да не бисте изгубили податке, размислите о томе да направите резервну копију података."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Форматирање преносне меморије"</string>
@@ -1695,9 +1772,9 @@
     <string name="storage_wizard_migrate_confirm_next" msgid="217478540562501692">"Пренеси"</string>
     <string name="storage_wizard_migrate_progress_title" msgid="462238335086734131">"Подаци се преносе…"</string>
     <string name="storage_wizard_migrate_details" msgid="7474061662976940407">"Током преноса: \n• Не уклањајте уређај <xliff:g id="NAME">^1</xliff:g>. \n• Неке апликације неће правилно функционисати. \n• Уређај треба да буде напуњен."</string>
-    <string name="storage_wizard_ready_title" msgid="3093468548660255543">"<xliff:g id="NAME">^1</xliff:g> је спреман/на за употребу"</string>
-    <string name="storage_wizard_ready_external_body" msgid="45040717412844114">"Уређај <xliff:g id="NAME">^1</xliff:g> је спреман да се користи за слике и друге медије."</string>
-    <string name="storage_wizard_ready_internal_body" msgid="7734817996475607447">"Нови уређај <xliff:g id="NAME">^1</xliff:g> функционише. \n\nДа бисте пренели слике, датотеке и податке апликација на овај уређај, идите у Подешавања &gt; Меморија."</string>
+    <string name="storage_wizard_ready_title" msgid="3631022511474086605">"<xliff:g id="NAME">^1</xliff:g> је форматирана"</string>
+    <string name="storage_wizard_ready_external_body" msgid="4264787122605706421">"Можете да почнете да користите <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_internal_body" msgid="2416472979690681273">"Можете да почнете да користите <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_title" msgid="6812469630804101590">"Пренесите апликацију <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"Пренос апликације <xliff:g id="APP">^1</xliff:g> и њених података на уређај <xliff:g id="NAME_0">^2</xliff:g> трајаће неколико тренутака. Апликацију нећете моћи да користите док се пренос не заврши \n\nНе уклањајте меморијски уређај <xliff:g id="NAME_1">^2</xliff:g> током преноса."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"Да бисте преместили податке, треба да откључате корисника <xliff:g id="APP">^1</xliff:g>."</string>
@@ -1706,19 +1783,20 @@
     <string name="storage_wizard_move_progress_cancel" msgid="3494022998599718937">"Откажи пренос"</string>
     <string name="storage_wizard_slow_body" msgid="8293565076885232029">"Изгледа да <xliff:g id="NAME_0">^1</xliff:g> споро функционише. \n\nМожете да наставите, али апликације које преместите на ту локацију ће се можда прекидати и трансфери података могу дуго да трају. \n\nРазмислите о коришћењу бржег уређаја <xliff:g id="NAME_1">^1</xliff:g> за бољи учинак."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"Како ћете користити уређај <xliff:g id="NAME">^1</xliff:g>?"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="1884468440013151482">"Користите као додатну меморију"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="2907833056467441047">"За апликације, датотеке и медије само на овом таблету"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="3278694259614995649">"Меморијски простор таблета"</string>
-    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5941952998075252284">"Користите као додатну меморију"</string>
-    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"За апликације, датотеке и медије само на овом телефону"</string>
-    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Меморијски простор телефона"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="5201609602833104654">"Форматирајте SD картицу за интерну меморију"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6050264373968853062">"Сачувајте апликације и медије за коришћење само на овом таблету. &lt;a href=https://support.google.com/android/answer/12153449&gt;Сазнајте више о подешавању SD картице&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="274533758831212652">"Форматирај"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="5201609602833104654">"Форматирајте SD картицу за интерну меморију"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4315288081962526508">"Сачувајте апликације и медије за коришћење само на овом телефону. &lt;a href=https://support.google.com/android/answer/12153449&gt;Сазнајте више о подешавању SD картице&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="274533758831212652">"Форматирај"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Или"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Користите као преносиву меморију"</string>
-    <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"За пренос датотека и медија са једног уређаја на други"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Преносива меморија"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"Форматирајте SD картицу за преносиву меморију"</string>
+    <string name="storage_wizard_init_v2_external_summary" msgid="2002761631147966185">"Чувајте слике, видео, музику и друго и приступајте им са других уређаја. &lt;a href=https://support.google.com/android/answer/12153449&gt;Сазнајте више о подешавању SD картице&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="6140058734875839081">"Форматирај"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Подесићу касније"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Желите да форматирате уређај <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"<xliff:g id="NAME_0">^1</xliff:g> захтева форматирање да бисте могли да чувате апликације, датотеке и медије. \n\nФорматирање брише податке које <xliff:g id="NAME_1">^2</xliff:g> садржи. Да не бисте изгубили садржај, направите његову резервну копију помоћу уређаја <xliff:g id="NAME_2">^3</xliff:g> или неког другог."</string>
+    <string name="storage_wizard_format_confirm_v2_body_external" msgid="5810296966099830035">"Треба да форматирате <xliff:g id="NAME_0">^1</xliff:g> да бисте ту могли да чувате слике, видео снимке, музику и друго. \n\nФорматирањем ћете обрисати постојећи садржај на: <xliff:g id="NAME_1">^2</xliff:g>. Да не бисте изгубили садржај, направите резервну копију помоћу уређаја <xliff:g id="NAME_2">^3</xliff:g> или неког другог."</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="5718254101386377126">"Форматирај: <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="3471564531564756698">"Желите да померите садржај на: <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4541523202790415721">"Можете да преместите датотеке, медије и неке апликације на уређај <xliff:g id="NAME">^1</xliff:g>. \n\nОво премештање ће ослободити <xliff:g id="SIZE">^2</xliff:g> меморијског простора таблета и требало би да траје око <xliff:g id="DURATION">^3</xliff:g>."</string>
@@ -1735,11 +1813,13 @@
     <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"И даље можете да користите уређај <xliff:g id="NAME_0">^1</xliff:g>, али ће можда споро радити. \n\nАпликације које се налазе на уређају <xliff:g id="NAME_1">^2</xliff:g> можда неће исправно радити, а преноси садржаја ће можда дуго трајати. \n\nПробајте да користите бржи уређај <xliff:g id="NAME_2">^3</xliff:g> или користите уређај <xliff:g id="NAME_3">^4</xliff:g> као преносиви меморијски простор."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Почни поново"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Настави"</string>
-    <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Можете да преместите садржај на <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"Да бисте преместили садржај на <xliff:g id="NAME">^1</xliff:g>, изаберите "<b>"Подешавања &gt; Меморијски простор"</b></string>
-    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Садржај је премештен на <xliff:g id="NAME_0">^1</xliff:g>. \n\nДа бисте управљали уређајем <xliff:g id="NAME_1">^2</xliff:g>, изаберите "<b>"Подешавања &gt; Меморијски простор"</b>"."</string>
+    <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Можете да почнете да користите: <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_body" msgid="3520269956641115883">"Можете да почнете да користите: <xliff:g id="NAME">^1</xliff:g>"</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"Можете да почнете да користите: <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Статус батерије"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Ниво батерије"</string>
+    <string name="communal_settings_title" msgid="2845678473945902115">"Заједничко"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"Заједничка подешавања"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Називи приступних тачака"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Измена приступне тачке"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Није подешено"</string>
@@ -1871,6 +1951,7 @@
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Интернет веза са уређајем <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ће бити прекинута."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Привезивање етернета"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Дељење интернет везе телефона преко етернета"</string>
+    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"Делите интернет везу таблета преко етернета"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Користите хотспот и привезивање да бисте обезбедили интернет другим уређајима помоћу везе за мобилне податке. Апликације могу да праве хотспотове и за дељење садржаја са уређајима у близини."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Користите хотспот и привезивање да бисте омогућили интернет на другим уређајима помоћу WiFi везе или везе за пренос података преко мобилног оператера. Апликације могу и да праве хотспотове за дељење садржаја са уређајима у близини."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Помоћ"</string>
@@ -2505,8 +2586,8 @@
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Подешавање је онемогућено зато што је звук уређаја искључен"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Позиви"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Обавештења и аларми"</string>
-    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Интерактивне вибрације"</string>
-    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Користите вибрирање и тактилне одзиве"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Интерактивна тактилна технологија"</string>
+    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Користите вибрирање и тактилну технологију"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Вибрирање аларма"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Вибрирање медија"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Вибрирање звона"</string>
@@ -2770,8 +2851,8 @@
     <string name="history_details_title" msgid="8628584613889559355">"Детаљи историје"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Потрошња батерије"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Погледајте коришћења у последња 24 сата"</string>
-    <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Коришћење од последњег потпуног пуњења"</string>
-    <string name="battery_details_title" msgid="4531369291819754178">"Потрошња батерије"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Прегледајте употребу од последњег пуњења"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Потрошња батерије за апликације"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Коришћење детаља"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Прилагођавање коришћења напајања"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Садржани пакети"</string>
@@ -2790,8 +2871,15 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Неке функције могу да буду ограничене"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Највећа потрошња батерије"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Погледајте апликације са највећом потрошњом батерије"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Пуњење је привремено ограничено"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Да би се сачувала батерија. Сазнајте више."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Пуњење је оптимизовано да би се заштитила батерија"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"Пуњење је оптимизовано да би се продужио век трајања батерије"</string>
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Пуњење је оптимизовано да би се заштитила батерија"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Да би се продужио век трајања батерије, пуњење се оптимизује док је уређај на базној станици"</string>
+    <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Пуњење је оптимизовано да би се заштитила батерија"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Да би се продужио век трајања батерије, пуњење се оптимизује док је уређај на базној станици"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Потпуно пуњење"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"Да би се заштитила батерија, пуњење ће се оптимизовати следећи пут када таблет буде на базној станици"</string>
+    <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Сазнајте више о томе зашто је пуњење паузирано"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Настави са пуњењем"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"У одређеним условима, на пример, високе температуре и дуги периоди пуњења, пуњење може да буде ограничено на <xliff:g id="PERCENT">%1$s</xliff:g> ради бољег стања батерије.\n\nКада ти услови престану, телефон ће аутоматски почети нормално да се пуни."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"У одређеним условима, на пример, високе температуре и дуги периоди пуњења, пуњење може да буде ограничено на <xliff:g id="PERCENT">%1$s</xliff:g> ради бољег стања батерије.\n\nКада ти услови престану, таблет ће аутоматски почети нормално да се пуни."</string>
@@ -2832,6 +2920,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Ова апликација ће моћи да користи батерију у позадини. Батерија може да се испразни раније него што је очекивано."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Уклони"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Откажи"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Пуни до краја"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Апликације користе уобичајену количину батерије. Ако апликације користе превише батерије, телефон ће вам предложити радње које можете да предузмете.\n\nУвек можете да укључите Уштеду батерије ако вам је батерија при крају."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Апликације користе уобичајену количину батерије. Ако апликације користе превише батерије, таблет ће вам предложити радње које можете да предузмете.\n\nУвек можете да укључите Уштеду батерије ако вам је батерија при крају."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Апликације користе уобичајену количину батерије. Ако апликације користе превише батерије, уређај ће вам предложити радње које можете да предузмете.\n\nУвек можете да укључите Уштеду батерије ако вам је батерија при крају."</string>
@@ -2954,25 +3043,25 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Потрошња батерије"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Од потпуног пуњења"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Управљање потрошњом батерије"</string>
-    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Укупно <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> коришћења у позадини\nод последњег потпуног пуњења"</string>
+    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"Укупно <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> коришћења у позадини\nод последњег потпуног пуњења"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Укупно <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> коришћења у позадини\nу последња 24 сата"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Укупно <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> коришћења у позадини\nу периоду <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
-    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"Укупно мање од минута од последњег потпуног пуњења"</string>
+    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"Укупно мање од минута од последњег потпуног пуњења"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"Укупно мање од минута у последња 24 сата"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Укупно мање од минута у периоду <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"Мање од минута коришћења у позадини од последњег потпуног пуњења"</string>
+    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"Мање од минута коришћења у позадини од последњег потпуног пуњења"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"Мање од минута коришћења у позадини у последња 24 сата"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Мање од минута коришћења у позадини у периоду: <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_total_usage" msgid="4685408616230899847">"Укупно <xliff:g id="TIME">^1</xliff:g> од последњег потпуног пуњења"</string>
+    <string name="battery_total_usage" msgid="4811532932663354619">"Укупно <xliff:g id="TIME">^1</xliff:g> од последњег потпуног пуњења"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"Укупно <xliff:g id="TIME">^1</xliff:g> у последња 24 сата"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"Укупно <xliff:g id="TIME_0">^1</xliff:g> у периоду <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="548670902301883980">"<xliff:g id="TIME">^1</xliff:g> коришћења у позадини од последњег потпуног пуњења"</string>
+    <string name="battery_bg_usage" msgid="8262917746299259350">"<xliff:g id="TIME">^1</xliff:g> коришћења у позадини од последњег потпуног пуњења"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"<xliff:g id="TIME">^1</xliff:g> коришћења у позадини у последња 24 сата"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> коришћења у позадини у периоду: <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"Укупно <xliff:g id="TIME">^1</xliff:g> • Мање од минута коришћења у позадини\nод последњег потпуног пуњења"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"Укупно <xliff:g id="TIME">^1</xliff:g> • мање од минута коришћења у позадини\nод последњег потпуног пуњења"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"Укупно <xliff:g id="TIME">^1</xliff:g> • Мање од минута коришћења у позадини\nу последња 24 сата"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"Укупно <xliff:g id="TIME_0">^1</xliff:g> • Мање од минута коришћења у позадини\nу периоду <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_not_usage" msgid="1472275761547230196">"Нема коришћења од последњег потпуног пуњења"</string>
+    <string name="battery_not_usage" msgid="3851536644733662392">"Није било коришћења од последњег потпуног пуњења"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Нема коришћења у последња 24 сата"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"Остали корисници"</string>
@@ -3011,8 +3100,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"на <xliff:g id="PERCENT">%1$s</xliff:g> батерије"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Проценат напуњености батерије"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Приказује проценат напуњености батерије на статусној траци"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Ниво напуњености батерије од последњег потпуног пуњења"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Ниво напуњености батерије у последња 24 сата"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"Коришћење апликација од последњег потпуног пуњења"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Потрошња од стране апликација у последња 24 сата"</string>
+    <string name="battery_system_usage" msgid="1395943945140097585">"Коришћење система од последњег потпуног пуњења"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Потрошња од стране система у последња 24 сата"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Потрошња од стране система за: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Потрошња од стране апликација за: <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -3020,9 +3112,13 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Позадина: мање од минут"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Укупно: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Позадина: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Подаци о потрошњи батерије су приближни и не мере потрошњу када се телефон пуни"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Подаци о потрошњи батерије ће бити доступни пошто будете користили телефон неколико сати"</string>
+    <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Подаци о потрошњи батерије су приближни и не мере потрошњу када се телефон пуни"</string>
+    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"Подаци о потрошњи батерије су приближни и не мере потрошњу када се таблет пуни"</string>
+    <string name="battery_usage_screen_footer" product="device" msgid="6610974734578869768">"Подаци о потрошњи батерије су приближни и не мере потрошњу када се уређај пуни"</string>
+    <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Подаци о потрошњи батерије ће бити доступни за неколико сати пошто се батерија напуни до краја"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Графикон потрошње батерије"</string>
+    <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Графикон дневне потрошње батерије"</string>
+    <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Графикон потрошње батерије по сатима"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Статистика процеса"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Штреберска статистика о активним процесима"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Искоришћеност меморије"</string>
@@ -3449,7 +3545,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Избриши <xliff:g id="USER_NAME">%1$s</xliff:g> са уређаја"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Подешавања закључаног екрана"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Додај кориснике са закључаног екрана"</string>
-    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"Пређи на администратора на базној станици"</string>
+    <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Пређи на администратора на базној станици"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Желите ли да избришете себе?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Бришете овог корисника?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Уклањате овај профил?"</string>
@@ -3582,6 +3678,8 @@
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Дозволите да апликације користе информације о локацији"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Назад"</string>
     <string name="wizard_next" msgid="3884832431439072471">"Даље"</string>
+    <string name="wizard_back_portable" msgid="5315939180781404882">"Пређи на преносив уређај"</string>
+    <string name="wizard_back_adoptable" msgid="1447814356855134183">"Форматирај на други начин"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"Заврши"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM картице"</string>
@@ -3764,6 +3862,7 @@
     <string name="call_volume_option_title" msgid="1461105986437268924">"Јачина звука позива"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"Јачина звука аларма"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Јачина звука за звоно и обавештења"</string>
+    <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Јачина звука звона"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Јачина звука за обавештења"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Звук звона телефона"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Подразумевани звук обавештења"</string>
@@ -4066,14 +4165,14 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Сва обавештења апликације <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Прилагодљива обавештења"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1319135950258375284">
-      <item quantity="one">Отприлике <xliff:g id="NUMBER_1">%,d</xliff:g> обавештење дневно</item>
-      <item quantity="few">Отприлике <xliff:g id="NUMBER_1">%,d</xliff:g> обавештења дневно</item>
-      <item quantity="other">Отприлике <xliff:g id="NUMBER_1">%,d</xliff:g> обавештења дневно</item>
+      <item quantity="one">Око <xliff:g id="NUMBER_1">%,d</xliff:g> обавештење дневно</item>
+      <item quantity="few">Око <xliff:g id="NUMBER_1">%,d</xliff:g> обавештења дневно</item>
+      <item quantity="other">Око <xliff:g id="NUMBER_1">%,d</xliff:g> обавештења дневно</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="7604454969366376305">
-      <item quantity="one">Отприлике <xliff:g id="NUMBER_1">%,d</xliff:g> обавештење недељно</item>
-      <item quantity="few">Отприлике <xliff:g id="NUMBER_1">%,d</xliff:g> обавештења недељно</item>
-      <item quantity="other">Отприлике <xliff:g id="NUMBER_1">%,d</xliff:g> обавештења недељно</item>
+      <item quantity="one">Око <xliff:g id="NUMBER_1">%,d</xliff:g> обавештење недељно</item>
+      <item quantity="few">Око <xliff:g id="NUMBER_1">%,d</xliff:g> обавештења недељно</item>
+      <item quantity="other">Око <xliff:g id="NUMBER_1">%,d</xliff:g> обавештења недељно</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Никад"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Обавештења на уређајима и у апликацијама"</string>
@@ -4165,6 +4264,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"На ваш захтев, Android блокира приказивање обавештења ове апликације на овом уређају"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"На ваш захтев, Android блокира приказивање ове категорије обавештења на овом уређају"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"На ваш захтев, Android блокира приказивање ове групе обавештења на овом уређају"</string>
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Ова апликација не шаље обавештења"</string>
     <string name="notification_channels" msgid="1502969522886493799">"Категорије"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Другo"</string>
     <plurals name="notification_group_summary" formatted="false" msgid="483490958130993160">
@@ -4909,6 +5009,11 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Укључи"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Искључи"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Не користи оптимизацију батерије"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Потрошња батерије за апликације"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Подесите потрошњу батерије за апликације"</string>
+    <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Неограничено"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Оптимизовано"</string>
+    <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Забрањено"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Ако је уређај закључан, спречи унос одговора или другог текста у обавештења"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Подразумевана провера правописа"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Изаберите проверу правописа"</string>
@@ -5485,6 +5590,7 @@
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"Потрошња података апликације"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Неважећи режим мреже <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Игноришите."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Називи приступних тачака"</string>
+    <string name="keywords_access_point_names" msgid="8174967126858505945">"Назив приступне тачке"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Недоступно када је успостављена веза са оператером <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Прикажи још"</string>
     <string name="see_less" msgid="2642392725363552793">"Прикажи мање"</string>
@@ -5667,6 +5773,12 @@
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Да бисте користили, прво укључите Прикажи контроле уређаја"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Приказује дволинијски сат када је доступан"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Дволинијски сат"</string>
+    <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"Пречице"</string>
+    <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
+      <item quantity="one"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
+      <item quantity="few"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
+      <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
+    </plurals>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
@@ -5687,6 +5799,8 @@
     <string name="media_controls_title" msgid="403271085636252597">"Медији"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Закачи медија плејер"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Да бисте брзо наставили репродукцију, медија плејер остаје отворен у Брзим подешавањима"</string>
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Приказуј медијски садржај на закључаном екрану"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"Да бисте брзо наставили репродукцију, медија плејер остаје отворен на закључаном екрану"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Приказуј препоруке за медије"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"На основу активности"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Сакриј плејер"</string>
@@ -5869,7 +5983,7 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Прикажи"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Одаберите чувар екрана"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Приказуј додатне информације"</string>
-    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"Прикажите време, датум, временске услове, квалитет ваздуха и Cast детаље на чувару екрана"</string>
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Омогућите да се на чувару екрана приказују ставке попут времена, временске прогнозе или других информација"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Још подешавања"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Изаберите чувар екрана"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Изаберите шта ћете видети на екрану када је таблет на базној станици. Уређај може да троши више енергије када се користи чувар екрана."</string>

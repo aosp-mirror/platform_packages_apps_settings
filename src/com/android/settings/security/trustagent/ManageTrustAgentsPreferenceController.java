@@ -32,12 +32,14 @@ public class ManageTrustAgentsPreferenceController extends BasePreferenceControl
     private static final int MY_USER_ID = UserHandle.myUserId();
 
     private final LockPatternUtils mLockPatternUtils;
+    private TrustAgentManager mTrustAgentManager;
 
     public ManageTrustAgentsPreferenceController(Context context, String key) {
         super(context, key);
         final SecurityFeatureProvider securityFeatureProvider = FeatureFactory.getFactory(context)
                 .getSecurityFeatureProvider();
         mLockPatternUtils = securityFeatureProvider.getLockPatternUtils(context);
+        mTrustAgentManager = securityFeatureProvider.getTrustAgentManager();
     }
 
     @Override
@@ -64,6 +66,6 @@ public class ManageTrustAgentsPreferenceController extends BasePreferenceControl
     }
 
     private int getTrustAgentCount() {
-        return mLockPatternUtils.getEnabledTrustAgents(MY_USER_ID).size();
+        return mTrustAgentManager.getActiveTrustAgents(mContext, mLockPatternUtils, false).size();
     }
 }

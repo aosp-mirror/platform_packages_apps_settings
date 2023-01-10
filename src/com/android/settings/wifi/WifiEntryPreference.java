@@ -201,7 +201,8 @@ public class WifiEntryPreference extends Preference implements WifiEntry.WifiEnt
         return accent ? android.R.attr.colorAccent : android.R.attr.colorControlNormal;
     }
 
-    private void updateIcon(boolean showX, int level) {
+    @VisibleForTesting
+    void updateIcon(boolean showX, int level) {
         if (level == -1) {
             setIcon(null);
             return;
@@ -209,7 +210,9 @@ public class WifiEntryPreference extends Preference implements WifiEntry.WifiEnt
 
         final Drawable drawable = mIconInjector.getIcon(showX, level);
         if (drawable != null) {
-            drawable.setTint(Utils.getColorAttrDefaultColor(getContext(), getIconColorAttr()));
+            // Must use Drawable#setTintList() instead of Drawable#setTint() to show the grey
+            // icon when the preference is disabled.
+            drawable.setTintList(Utils.getColorAttr(getContext(), getIconColorAttr()));
             setIcon(drawable);
         } else {
             setIcon(null);

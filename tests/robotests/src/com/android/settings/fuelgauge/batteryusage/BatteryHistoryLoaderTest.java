@@ -53,7 +53,7 @@ public final class BatteryHistoryLoaderTest {
     public void testLoadIBackground_returnsMapFromPowerFeatureProvider() {
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
         doReturn(batteryHistoryMap).when(mFeatureFactory.powerUsageFeatureProvider)
-                .getBatteryHistory(mContext);
+                .getBatteryHistorySinceLastFullCharge(mContext);
 
         assertThat(mBatteryHistoryLoader.loadInBackground())
                 .isSameInstanceAs(batteryHistoryMap);

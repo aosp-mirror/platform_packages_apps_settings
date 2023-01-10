@@ -42,6 +42,7 @@ import android.text.InputType;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -1495,13 +1496,20 @@ public class WifiConfigController2 implements TextWatcher,
         }
 
         // Shows display name of each active subscription.
-        final ArrayList<CharSequence> displayNames = new ArrayList<>();
+        ArrayMap<Integer, CharSequence> displayNames = new ArrayMap<>();
+        int defaultDataSubscriptionId = SubscriptionManager.getDefaultDataSubscriptionId();
         for (SubscriptionInfo activeSubInfo : mActiveSubscriptionInfos) {
-            displayNames.add(
+            // If multiple SIMs have the same carrier id, only the first or default data SIM is
+            // displayed.
+            if (displayNames.containsKey(activeSubInfo.getCarrierId())
+                    && defaultDataSubscriptionId != activeSubInfo.getSubscriptionId()) {
+                continue;
+            }
+            displayNames.put(activeSubInfo.getCarrierId(),
                     SubscriptionUtil.getUniqueSubscriptionDisplayName(activeSubInfo, mContext));
         }
         mEapSimSpinner.setAdapter(
-                getSpinnerAdapter(displayNames.toArray(new String[displayNames.size()])));
+                getSpinnerAdapter(displayNames.values().toArray(new String[displayNames.size()])));
         mEapSimSpinner.setSelection(0 /* position */);
         if (displayNames.size() == 1) {
             mEapSimSpinner.setEnabled(false);
