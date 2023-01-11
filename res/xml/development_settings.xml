@@ -619,11 +619,9 @@
             android:title="@string/show_notification_channel_warnings"
             android:summary="@string/show_notification_channel_warnings_summary" />
 
-        <com.android.settingslib.widget.LayoutPreference
+        <Preference
             android:key="asst_importance_reset"
             android:title="@string/asst_importance_reset_title"
-            android:selectable="false"
-            android:layout="@layout/reset_importance_button"
             settings:controller="com.android.settings.notification.ImportanceResetPreferenceController" />
 
         <Preference
