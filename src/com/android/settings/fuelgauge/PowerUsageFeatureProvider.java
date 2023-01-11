@@ -33,12 +33,12 @@ public interface PowerUsageFeatureProvider {
     /**
      * Check whether the battery usage button is enabled in the battery page
      */
-    boolean isBatteryUsageEnabled(Context context);
+    boolean isBatteryUsageEnabled();
 
     /**
      * Returns an allowlist of app names combined into the system-apps item
      */
-    List<String> getSystemAppsAllowlist(Context context);
+    List<String> getSystemAppsAllowlist();
 
     /**
      * Check whether location setting is enabled
@@ -135,25 +135,25 @@ public interface PowerUsageFeatureProvider {
     /**
      * Returns {@link Set} for the system component ids which are combined into others.
      */
-    Set<Integer> getOthersSystemComponentSet(Context context);
+    Set<Integer> getOthersSystemComponentSet();
 
     /**
      * Returns {@link Set} for hiding system component ids in the usage screen.
      */
-    Set<Integer> getHideSystemComponentSet(Context context);
+    Set<Integer> getHideSystemComponentSet();
 
     /**
      * Returns {@link Set} for hiding application package names in the usage screen.
      */
-    Set<CharSequence> getHideApplicationSet(Context context);
+    Set<String> getHideApplicationSet();
 
     /**
      * Returns {@link Set} for hiding applications background usage time.
      */
-    Set<CharSequence> getHideBackgroundUsageTimeSet(Context context);
+    Set<String> getHideBackgroundUsageTimeSet();
 
     /**
      * Returns {@link Set} for ignoring task root class names for screen on time.
      */
-    Set<CharSequence> getIgnoreScreenOnTimeTaskRootSet(Context context);
+    Set<String> getIgnoreScreenOnTimeTaskRootSet();
 }

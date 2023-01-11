@@ -19,7 +19,6 @@ package com.android.settings.fuelgauge.batteryusage;
 import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.getEffectivePackageName;
 import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.utcToLocalTime;
 
-import android.app.Application;
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
 import android.app.usage.UsageEvents.Event;
@@ -53,7 +52,6 @@ import com.android.internal.os.PowerProfile;
 import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.fuelgauge.BatteryStatus;
 
 import java.time.Duration;
@@ -63,7 +61,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -323,10 +320,10 @@ public final class DataProcessor {
         final List<AppUsageEvent> appUsageEventList = new ArrayList<>();
         long numEventsFetched = 0;
         long numAllEventsFetched = 0;
-        final Set<CharSequence> ignoreScreenOnTimeTaskRootSet =
+        final Set<String> ignoreScreenOnTimeTaskRootSet =
                 FeatureFactory.getFactory(context)
                         .getPowerUsageFeatureProvider(context)
-                        .getIgnoreScreenOnTimeTaskRootSet(context);
+                        .getIgnoreScreenOnTimeTaskRootSet();
         for (final long userId : usageEventsMap.keySet()) {
             final UsageEvents usageEvents = usageEventsMap.get(userId);
             while (usageEvents.hasNextEvent()) {
@@ -645,10 +642,9 @@ public final class DataProcessor {
                 context, hourlyBatteryLevelsPerDay, batteryHistoryMap, appUsagePeriodMap,
                 resultMap);
         // Insert diff data from [0][SELECTED_INDEX_ALL] to [maxDailyIndex][SELECTED_INDEX_ALL].
-        insertDailyUsageDiffData(hourlyBatteryLevelsPerDay, resultMap);
+        insertDailyUsageDiffData(context, hourlyBatteryLevelsPerDay, resultMap);
         // Insert diff data [SELECTED_INDEX_ALL][SELECTED_INDEX_ALL].
-        insertAllUsageDiffData(resultMap);
-        processBatteryDiffData(context, resultMap);
+        insertAllUsageDiffData(context, resultMap);
         if (!isUsageMapValid(resultMap, hourlyBatteryLevelsPerDay)) {
             return null;
         }
@@ -703,7 +699,7 @@ public final class DataProcessor {
             return null;
         }
 
-        return new BatteryDiffData(appEntries, systemEntries);
+        return new BatteryDiffData(context, appEntries, systemEntries, /* isAccumulated= */ false);
     }
 
     /**
@@ -866,7 +862,6 @@ public final class DataProcessor {
         allUsageMap.put(SELECTED_INDEX_ALL,
                 generateBatteryDiffData(context, getBatteryHistListFromFromStatsService(context)));
         resultMap.put(SELECTED_INDEX_ALL, allUsageMap);
-        processBatteryDiffData(context, resultMap);
         return resultMap;
     }
 
@@ -1389,6 +1384,7 @@ public final class DataProcessor {
     }
 
     private static void insertDailyUsageDiffData(
+            final Context context,
             final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay,
             final Map<Integer, Map<Integer, BatteryDiffData>> resultMap) {
         for (int index = 0; index < hourlyBatteryLevelsPerDay.size(); index++) {
@@ -1399,23 +1395,24 @@ public final class DataProcessor {
             }
             dailyUsageMap.put(
                     SELECTED_INDEX_ALL,
-                    getAccumulatedUsageDiffData(dailyUsageMap.values()));
+                    getAccumulatedUsageDiffData(context, dailyUsageMap.values()));
         }
     }
 
     private static void insertAllUsageDiffData(
+            final Context context,
             final Map<Integer, Map<Integer, BatteryDiffData>> resultMap) {
         final List<BatteryDiffData> diffDataList = new ArrayList<>();
         resultMap.keySet().forEach(
                 key -> diffDataList.add(resultMap.get(key).get(SELECTED_INDEX_ALL)));
         final Map<Integer, BatteryDiffData> allUsageMap = new HashMap<>();
-        allUsageMap.put(SELECTED_INDEX_ALL, getAccumulatedUsageDiffData(diffDataList));
+        allUsageMap.put(SELECTED_INDEX_ALL, getAccumulatedUsageDiffData(context, diffDataList));
         resultMap.put(SELECTED_INDEX_ALL, allUsageMap);
     }
 
     @Nullable
     private static BatteryDiffData insertHourlyUsageDiffDataPerSlot(
-            Context context,
+            final Context context,
             final int currentUserId,
             final int workProfileUserId,
             final int currentIndex,
@@ -1573,7 +1570,7 @@ public final class DataProcessor {
             return null;
         }
 
-        return new BatteryDiffData(appEntries, systemEntries);
+        return new BatteryDiffData(context, appEntries, systemEntries, /* isAccumulated= */ false);
     }
 
     private static long getScreenOnTime(@Nullable final List<AppUsagePeriod> appUsagePeriodList) {
@@ -1630,7 +1627,7 @@ public final class DataProcessor {
 
     @Nullable
     private static BatteryDiffData getAccumulatedUsageDiffData(
-            final Collection<BatteryDiffData> diffEntryListData) {
+            final Context context, final Collection<BatteryDiffData> diffEntryListData) {
         final Map<String, BatteryDiffEntry> diffEntryMap = new HashMap<>();
         final List<BatteryDiffEntry> appEntries = new ArrayList<>();
         final List<BatteryDiffEntry> systemEntries = new ArrayList<>();
@@ -1656,13 +1653,14 @@ public final class DataProcessor {
             }
         }
 
-        return diffEntryList.isEmpty() ? null : new BatteryDiffData(appEntries, systemEntries);
+        return diffEntryList.isEmpty() ? null : new BatteryDiffData(
+                context, appEntries, systemEntries, /* isAccumulated= */ true);
     }
 
     private static void computeUsageDiffDataPerEntry(
             final BatteryDiffEntry entry,
             final Map<String, BatteryDiffEntry> diffEntryMap) {
-        final String key = entry.mBatteryHistEntry.getKey();
+        final String key = entry.getKey();
         final BatteryDiffEntry oldBatteryDiffEntry = diffEntryMap.get(key);
         // Creates new BatteryDiffEntry if we don't have it.
         if (oldBatteryDiffEntry == null) {
@@ -1682,157 +1680,6 @@ public final class DataProcessor {
             oldBatteryDiffEntry.mBackgroundUsageConsumePower += entry.mBackgroundUsageConsumePower;
             oldBatteryDiffEntry.mCachedUsageConsumePower += entry.mCachedUsageConsumePower;
         }
-    }
-
-    // Process every battery diff data in the battery usage result map.
-    // (1) Removes low percentage data and fake usage data, which will be zero value.
-    // (2) Sets total consume power, so the usage percentage is updated.
-    // (3) Sorts the result.
-    private static void processBatteryDiffData(
-            final Context context,
-            final Map<Integer, Map<Integer, BatteryDiffData>> resultMap) {
-        final Set<Integer> hideSystemComponentSet =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
-                        .getHideSystemComponentSet(context);
-        final Set<CharSequence> hideBackgroundUsageTimeSet =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
-                        .getHideBackgroundUsageTimeSet(context);
-        final Set<CharSequence> hideApplicationSet =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
-                        .getHideApplicationSet(context);
-        resultMap.keySet().forEach(dailyKey -> {
-            final Map<Integer, BatteryDiffData> dailyUsageMap = resultMap.get(dailyKey);
-            dailyUsageMap.values().forEach(batteryDiffData -> {
-                if (batteryDiffData == null) {
-                    return;
-                }
-                purgeFakeAndHiddenPackages(
-                        batteryDiffData.getAppDiffEntryList(),
-                        hideSystemComponentSet,
-                        hideApplicationSet,
-                        hideBackgroundUsageTimeSet);
-                purgeFakeAndHiddenPackages(
-                        batteryDiffData.getSystemDiffEntryList(),
-                        hideSystemComponentSet,
-                        hideApplicationSet,
-                        hideBackgroundUsageTimeSet);
-                batteryDiffData.setTotalConsumePower();
-                batteryDiffData.sortEntries();
-                combineIntoSystemApps(context, batteryDiffData);
-                combineSystemItemsIntoOthers(context, batteryDiffData);
-            });
-        });
-    }
-
-    private static void purgeFakeAndHiddenPackages(
-            final List<BatteryDiffEntry> entries,
-            final Set<Integer> hideSystemComponentSet,
-            final Set<CharSequence> hideApplicationSet,
-            final Set<CharSequence> hideBackgroundUsageTimeSet) {
-        final Iterator<BatteryDiffEntry> iterator = entries.iterator();
-        while (iterator.hasNext()) {
-            final BatteryDiffEntry entry = iterator.next();
-            final String packageName = entry.getPackageName();
-            final Integer componentId = entry.mBatteryHistEntry.mDrainType;
-            if (ConvertUtils.FAKE_PACKAGE_NAME.equals(packageName)
-                    || hideSystemComponentSet.contains(componentId)
-                    || hideApplicationSet.contains(packageName)) {
-                iterator.remove();
-            }
-            if (hideBackgroundUsageTimeSet.contains(packageName)) {
-                entry.mBackgroundUsageTimeInMs = 0;
-            }
-        }
-    }
-
-    private static void combineSystemItemsIntoOthers(
-            final Context context, final BatteryDiffData batteryDiffData) {
-        final Set<Integer> othersSystemComponentSet =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
-                        .getOthersSystemComponentSet(context);
-
-        BatteryDiffEntry.OthersBatteryDiffEntry othersDiffEntry = null;
-        final Iterator<BatteryDiffEntry> systemListIterator =
-                batteryDiffData.getSystemDiffEntryList().iterator();
-        while (systemListIterator.hasNext()) {
-            final BatteryDiffEntry batteryDiffEntry = systemListIterator.next();
-            if (othersSystemComponentSet.contains(batteryDiffEntry.mBatteryHistEntry.mDrainType)) {
-                if (othersDiffEntry == null) {
-                    othersDiffEntry = new BatteryDiffEntry.OthersBatteryDiffEntry(context);
-                }
-                othersDiffEntry.mConsumePower += batteryDiffEntry.mConsumePower;
-                othersDiffEntry.setTotalConsumePower(
-                        batteryDiffEntry.getTotalConsumePower());
-                systemListIterator.remove();
-            }
-        }
-        if (othersDiffEntry != null) {
-            batteryDiffData.getSystemDiffEntryList().add(othersDiffEntry);
-        }
-    }
-
-    private static void combineIntoSystemApps(
-            final Context context, final BatteryDiffData batteryDiffData) {
-        final List<String> systemAppsAllowlist =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
-                        .getSystemAppsAllowlist(context);
-        final Application application = (Application) context.getApplicationContext();
-        final ApplicationsState applicationsState =
-                application == null ? null : ApplicationsState.getInstance(application);
-
-        BatteryDiffEntry.SystemAppsBatteryDiffEntry systemAppsDiffEntry = null;
-        final Iterator<BatteryDiffEntry> appListIterator =
-                batteryDiffData.getAppDiffEntryList().iterator();
-        while (appListIterator.hasNext()) {
-            final BatteryDiffEntry batteryDiffEntry = appListIterator.next();
-            if (needsCombineInSystemApp(batteryDiffEntry, systemAppsAllowlist, applicationsState)) {
-                if (systemAppsDiffEntry == null) {
-                    systemAppsDiffEntry = new BatteryDiffEntry.SystemAppsBatteryDiffEntry(context);
-                }
-                systemAppsDiffEntry.mConsumePower += batteryDiffEntry.mConsumePower;
-                systemAppsDiffEntry.mForegroundUsageTimeInMs +=
-                        batteryDiffEntry.mForegroundUsageTimeInMs;
-                systemAppsDiffEntry.setTotalConsumePower(
-                        batteryDiffEntry.getTotalConsumePower());
-                appListIterator.remove();
-            }
-        }
-        if (systemAppsDiffEntry != null) {
-            batteryDiffData.getAppDiffEntryList().add(systemAppsDiffEntry);
-        }
-    }
-
-    @VisibleForTesting
-    static boolean needsCombineInSystemApp(final BatteryDiffEntry batteryDiffEntry,
-            final List<String> systemAppsAllowlist, final ApplicationsState applicationsState) {
-        if (batteryDiffEntry.mBatteryHistEntry.mIsHidden) {
-            return true;
-        }
-
-        final String packageName = batteryDiffEntry.getPackageName();
-        if (packageName == null || packageName.isEmpty()) {
-            return false;
-        }
-
-        if (systemAppsAllowlist != null && systemAppsAllowlist.contains(packageName)) {
-            return true;
-        }
-
-        if (applicationsState == null) {
-            return false;
-        }
-        final ApplicationsState.AppEntry appEntry =
-                applicationsState.getEntry(packageName, /* userId= */ 0);
-        if (appEntry == null || appEntry.info == null) {
-            return false;
-        }
-        return !ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER_AND_INSTANT.filterApp(
-                appEntry);
     }
 
     private static boolean shouldShowBatteryAttributionList(final Context context) {
