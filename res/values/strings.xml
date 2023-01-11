@@ -2116,14 +2116,10 @@
 
     <!-- Display settings screen, screen resolution settings title [CHAR LIMIT=30] -->
     <string name="screen_resolution_title">Screen resolution</string>
-    <!-- Display settings screen, screen resolution option for "FHD+" [CHAR LIMIT=45] -->
+    <!-- Display settings screen, screen resolution option for high resolution [CHAR LIMIT=45] -->
     <string name="screen_resolution_option_high">High resolution</string>
-    <!-- Display settings screen, screen resolution option for "QHD+" [CHAR LIMIT=45] -->
-    <string name="screen_resolution_option_highest">Full resolution</string>
-    <!-- Display settings screen, "FHD+" screen resolution summary [CHAR LIMIT=NONE] -->
-    <string name="screen_resolution_summary_high">1080p FHD+</string>
-    <!-- Display settings screen, "QHD+" screen resolution summary [CHAR LIMIT=NONE] -->
-    <string name="screen_resolution_summary_highest">1440p QHD+</string>
+    <!-- Display settings screen, screen resolution option for full resolution [CHAR LIMIT=45] -->
+    <string name="screen_resolution_option_full">Full resolution</string>
     <!-- The footer message for switch screen resolution [CHAR LIMIT=NONE] -->
     <string name="screen_resolution_footer">Full resolution uses more of your battery. Switching your resolution may cause some apps to restart.</string>
     <!-- Message announced to a11y users when they selected one resolution [CHAR LIMIT=NONE] -->
@@ -2452,7 +2448,9 @@
     <!-- About phone, title of EID for multi-sim devices -->
     <string name="eid_multi_sim">EID (sim slot <xliff:g id="eid_slot_id">%1$d</xliff:g>)</string>
     <!-- About phone screen, title for IMEI for multi-sim devices -->
-    <string name="imei_multi_sim">IMEI (sim slot %1$d)</string>
+    <string name="imei_multi_sim">IMEI (sim slot <xliff:g id="imei_slot_id">%1$d</xliff:g>)</string>
+    <!-- About phone screen, title for primary IMEI for multi-sim devices -->
+    <string name="imei_multi_sim_primary">IMEI (sim slot <xliff:g id="imei_slot_id_primary">%1$d</xliff:g>) (primary)</string>
     <!-- About phone screen, summary of the MAC address [CHAR LIMIT=80] -->
     <string name="view_saved_network">To view, choose saved network</string>
     <!-- Do not translate. About phone, status item title -->
@@ -2468,7 +2466,9 @@
     <!-- About phone, status item title.  The phone PRL Version of the current device.-->
     <string name="status_prl_version">PRL version</string>
     <!-- About phone screen, title for MEID for multi-sim devices -->
-    <string name="meid_multi_sim">MEID (sim slot %1$d)</string>
+    <string name="meid_multi_sim">MEID (sim slot <xliff:g id="meid_slot_id">%1$d</xliff:g>)</string>
+    <!-- About phone screen, title for primary MEID for multi-sim devices -->
+    <string name="meid_multi_sim_primary">MEID (sim slot <xliff:g id="meid_slot_id_primary">%1$d</xliff:g>) (primary)</string>
     <!-- About phone, status item title.  The phone MEID number of the current LTE/CDMA device. [CHAR LIMIT=30] -->
     <string name="status_meid_number">MEID</string>
     <!-- About phone, status item title.  The ICCID of the current LTE device. [CHAR LIMIT=30] -->
@@ -10786,6 +10786,9 @@
     <!-- Subtext of system default app for current setting [CHAR LIMIT=NONE] -->
     <string name="system_default_app_subtext">System default</string>
 
+    <!-- Summary of a default app when there is no app set [CHAR LIMIT=60] -->
+    <string name="default_app_none">None</string>
+
     <!-- Developer settings: text for the bug report handler selection toast shown if an invalid bug report handler was chosen. [CHAR LIMIT=NONE] -->
     <string name="select_invalid_bug_report_handler_toast_text">This choice is no longer valid. Try again.</string>
 
@@ -11564,4 +11567,7 @@
     =1    {Apps installed more than # month ago}
     other {Apps installed more than # months ago}
     }</string>
+
+    <!-- Accessibility label for fingerprint sensor [CHAR LIMIT=NONE] -->
+    <string name="accessibility_fingerprint_label">Fingerprint sensor</string>
 </resources>

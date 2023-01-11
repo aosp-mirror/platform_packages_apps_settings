@@ -20,6 +20,8 @@ import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_REAR
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_OPTICAL;
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_ULTRASONIC;
 
+import static com.android.settings.biometrics2.data.repository.FingerprintRepositoryTest.setupFingerprintEnrolledFingerprints;
+import static com.android.settings.biometrics2.data.repository.FingerprintRepositoryTest.setupFingerprintFirstSensor;
 import static com.android.settings.biometrics2.data.repository.FingerprintRepositoryTest.setupSuwMaxFingerprintsEnrollable;
 import static com.android.settings.biometrics2.ui.model.FingerprintEnrollIntroStatus.FINGERPRINT_ENROLLABLE_ERROR_REACH_MAX;
 import static com.android.settings.biometrics2.ui.model.FingerprintEnrollIntroStatus.FINGERPRINT_ENROLLABLE_OK;
@@ -32,8 +34,6 @@ import static com.android.settings.biometrics2.util.EnrollmentRequestUtil.newIsS
 import static com.android.settings.biometrics2.util.EnrollmentRequestUtil.newIsSuwPortalRequest;
 import static com.android.settings.biometrics2.util.EnrollmentRequestUtil.newIsSuwRequest;
 import static com.android.settings.biometrics2.util.EnrollmentRequestUtil.newIsSuwSuggestedActionFlowRequest;
-import static com.android.settings.biometrics2.util.FingerprintManagerUtil.setupFingerprintEnrolledFingerprints;
-import static com.android.settings.biometrics2.util.FingerprintManagerUtil.setupFingerprintFirstSensor;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -134,26 +134,47 @@ public class FingerprintEnrollIntroViewModelTest {
     }
 
     @Test
-    public void testOnStartToUpdateEnrollableStatus_isNotSuw() {
-        testOnStartToUpdateEnrollableStatus(newAllFalseRequest(mApplication));
+    public void testOnStartToUpdateEnrollableStatusOk_isNotSuw() {
+        testOnStartToUpdateEnrollableStatusOk(newAllFalseRequest(mApplication));
     }
 
     @Test
-    public void testOnStartToUpdateEnrollableStatus_isSuwDeferred() {
-        testOnStartToUpdateEnrollableStatus(newIsSuwDeferredRequest(mApplication));
+    public void testOnStartToUpdateEnrollableStatusReachMax_isNotSuw() {
+        testOnStartToUpdateEnrollableStatusReachMax(newAllFalseRequest(mApplication));
     }
 
     @Test
-    public void testOnStartToUpdateEnrollableStatus_isSuwPortal() {
-        testOnStartToUpdateEnrollableStatus(newIsSuwPortalRequest(mApplication));
+    public void testOnStartToUpdateEnrollableStatusOk_isSuwDeferred() {
+        testOnStartToUpdateEnrollableStatusOk(newIsSuwDeferredRequest(mApplication));
     }
 
     @Test
-    public void testOnStartToUpdateEnrollableStatus_isSuwSuggestedActionFlow() {
-        testOnStartToUpdateEnrollableStatus(newIsSuwSuggestedActionFlowRequest(mApplication));
+    public void testOnStartToUpdateEnrollableStatusReachMax_isSuwDeferred() {
+        testOnStartToUpdateEnrollableStatusReachMax(newIsSuwDeferredRequest(mApplication));
     }
 
-    private void testOnStartToUpdateEnrollableStatus(@NonNull EnrollmentRequest request) {
+    @Test
+    public void testOnStartToUpdateEnrollableStatusOk_isSuwPortal() {
+        testOnStartToUpdateEnrollableStatusOk(newIsSuwPortalRequest(mApplication));
+    }
+
+    @Test
+    public void testOnStartToUpdateEnrollableStatusReachMax_isSuwPortal() {
+        testOnStartToUpdateEnrollableStatusReachMax(newIsSuwPortalRequest(mApplication));
+    }
+
+    @Test
+    public void testOnStartToUpdateEnrollableStatusOk_isSuwSuggestedActionFlow() {
+        testOnStartToUpdateEnrollableStatusOk(newIsSuwSuggestedActionFlowRequest(mApplication));
+    }
+
+    @Test
+    public void testOnStartToUpdateEnrollableStatusReachMax_isSuwSuggestedActionFlow() {
+        testOnStartToUpdateEnrollableStatusReachMax(
+                newIsSuwSuggestedActionFlowRequest(mApplication));
+    }
+
+    private void testOnStartToUpdateEnrollableStatusOk(@NonNull EnrollmentRequest request) {
         final int userId = 45;
         mViewModel.setUserId(userId);
         mViewModel.setEnrollmentRequest(request);
@@ -163,19 +184,28 @@ public class FingerprintEnrollIntroViewModelTest {
         mViewModel.onStart(mLifecycleOwner);
         FingerprintEnrollIntroStatus status = mViewModel.getPageStatusLiveData().getValue();
         assertThat(status.getEnrollableStatus()).isEqualTo(FINGERPRINT_ENROLLABLE_OK);
+    }
+
+    private void testOnStartToUpdateEnrollableStatusReachMax(@NonNull EnrollmentRequest request) {
+        final int userId = 45;
+        mViewModel.setUserId(userId);
+        mViewModel.setEnrollmentRequest(request);
 
         setupFingerprintEnrolledFingerprints(mFingerprintManager, userId, 5);
         setupFingerprintFirstSensor(mFingerprintManager, TYPE_UDFPS_OPTICAL, 5);
         mViewModel.onStart(mLifecycleOwner);
-        status = mViewModel.getPageStatusLiveData().getValue();
+        FingerprintEnrollIntroStatus status = mViewModel.getPageStatusLiveData().getValue();
         assertThat(status.getEnrollableStatus()).isEqualTo(FINGERPRINT_ENROLLABLE_ERROR_REACH_MAX);
     }
 
     @Test
-    public void textCanAssumeUdfps() {
+    public void textCanAssumeUdfps_forUdfpsUltrasonicSensor() {
         setupFingerprintFirstSensor(mFingerprintManager, TYPE_UDFPS_ULTRASONIC, 1);
         assertThat(mViewModel.canAssumeUdfps()).isEqualTo(true);
+    }
 
+    @Test
+    public void textCanAssumeUdfps_forRearSensor() {
         setupFingerprintFirstSensor(mFingerprintManager, TYPE_REAR, 1);
         assertThat(mViewModel.canAssumeUdfps()).isEqualTo(false);
     }
@@ -238,7 +268,7 @@ public class FingerprintEnrollIntroViewModelTest {
         assertThat(status.getEnrollableStatus()).isEqualTo(FINGERPRINT_ENROLLABLE_OK);
 
         // Perform click on `next`
-        mViewModel.onNextButtonClick(null);
+        mViewModel.onNextButtonClick();
 
         assertThat(mViewModel.getActionLiveData().getValue())
                 .isEqualTo(FINGERPRINT_ENROLL_INTRO_ACTION_CONTINUE_ENROLL);
@@ -258,7 +288,7 @@ public class FingerprintEnrollIntroViewModelTest {
         assertThat(status.getEnrollableStatus()).isEqualTo(FINGERPRINT_ENROLLABLE_ERROR_REACH_MAX);
 
         // Perform click on `next`
-        mViewModel.onNextButtonClick(null);
+        mViewModel.onNextButtonClick();
 
         assertThat(mViewModel.getActionLiveData().getValue())
                 .isEqualTo(FINGERPRINT_ENROLL_INTRO_ACTION_DONE_AND_FINISH);
@@ -266,7 +296,7 @@ public class FingerprintEnrollIntroViewModelTest {
 
     @Test
     public void testOnSkipOrCancelButtonClick() {
-        mViewModel.onSkipOrCancelButtonClick(null);
+        mViewModel.onSkipOrCancelButtonClick();
 
         assertThat(mViewModel.getActionLiveData().getValue())
                 .isEqualTo(FINGERPRINT_ENROLL_INTRO_ACTION_SKIP_OR_CANCEL);

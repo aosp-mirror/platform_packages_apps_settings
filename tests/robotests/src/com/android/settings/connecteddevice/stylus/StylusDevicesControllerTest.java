@@ -101,6 +101,7 @@ public class StylusDevicesControllerTest {
 
         when(mRm.getRoleHoldersAsUser(eq(RoleManager.ROLE_NOTES), any(UserHandle.class)))
                 .thenReturn(Collections.singletonList(NOTES_PACKAGE_NAME));
+        when(mRm.isRoleAvailable(RoleManager.ROLE_NOTES)).thenReturn(true);
         when(mContext.getPackageManager()).thenReturn(mPm);
         when(mPm.getApplicationInfo(eq(NOTES_PACKAGE_NAME),
                 any(PackageManager.ApplicationInfoFlags.class))).thenReturn(new ApplicationInfo());
@@ -235,16 +236,26 @@ public class StylusDevicesControllerTest {
     }
 
     @Test
-    public void defaultNotesPreference_noRoleHolder_hidesNotesRoleApp() {
+    public void defaultNotesPreference_roleHolderChanges_updatesPreference() {
+        showScreen(mController);
+        Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
         when(mRm.getRoleHoldersAsUser(eq(RoleManager.ROLE_NOTES), any(UserHandle.class)))
                 .thenReturn(Collections.emptyList());
         showScreen(mController);
 
-        for (int i = 0; i < mPreferenceContainer.getPreferenceCount(); i++) {
-            Preference pref = mPreferenceContainer.getPreference(i);
-            assertThat(pref.getTitle().toString()).isNotEqualTo(
-                    mContext.getString(R.string.stylus_default_notes_app));
-        }
+        assertThat(defaultNotesPref.getSummary().toString()).isEqualTo(
+                mContext.getString(R.string.default_app_none));
+    }
+
+    @Test
+    public void defaultNotesPreference_noRoleHolder_showNoneInSummary() {
+        when(mRm.getRoleHoldersAsUser(eq(RoleManager.ROLE_NOTES), any(UserHandle.class)))
+                .thenReturn(Collections.emptyList());
+        showScreen(mController);
+
+        Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
+        assertThat(defaultNotesPref.getSummary().toString()).isEqualTo(
+                mContext.getString(R.string.default_app_none));
     }
 
     @Test

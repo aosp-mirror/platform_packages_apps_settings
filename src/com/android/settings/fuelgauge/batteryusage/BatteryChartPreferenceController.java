@@ -233,6 +233,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                         batteryCallbackData -> {
                             mBatteryUsageMap = batteryCallbackData.getBatteryUsageMap();
                             mScreenOnTimeMap = batteryCallbackData.getDeviceScreenOnTime();
+                            logScreenUsageTime();
                             refreshUi();
                         });
         Log.d(TAG, "getBatteryLevelData: " + batteryLevelData);
@@ -493,6 +494,42 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 }
             }
         };
+    }
+
+    private void logScreenUsageTime() {
+        if (mBatteryUsageMap == null || mScreenOnTimeMap == null) {
+            return;
+        }
+        final long totalScreenOnTime =
+                mScreenOnTimeMap
+                        .get(BatteryChartViewModel.SELECTED_INDEX_ALL)
+                        .get(BatteryChartViewModel.SELECTED_INDEX_ALL);
+        mMetricsFeatureProvider.action(
+                mPrefContext,
+                SettingsEnums.ACTION_BATTERY_USAGE_SCREEN_ON_TIME,
+                (int) totalScreenOnTime);
+        mMetricsFeatureProvider.action(
+                mPrefContext,
+                SettingsEnums.ACTION_BATTERY_USAGE_FOREGROUND_USAGE_TIME,
+                (int) getTotalForegroundUsageTime());
+    }
+
+    private long getTotalForegroundUsageTime() {
+        if (mBatteryUsageMap == null) {
+            return 0;
+        }
+        final BatteryDiffData totalBatteryUsageDiffData =
+                mBatteryUsageMap
+                        .get(BatteryChartViewModel.SELECTED_INDEX_ALL)
+                        .get(BatteryChartViewModel.SELECTED_INDEX_ALL);
+        if (totalBatteryUsageDiffData == null) {
+            return 0;
+        }
+        long totalValue = 0;
+        for (final BatteryDiffEntry entry : totalBatteryUsageDiffData.getAppDiffEntryList()) {
+            totalValue += entry.mForegroundUsageTimeInMs;
+        }
+        return totalValue;
     }
 
     private boolean isBatteryLevelDataInOneDay() {

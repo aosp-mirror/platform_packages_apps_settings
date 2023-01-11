@@ -16,7 +16,6 @@
 
 package com.android.settings.spa.app.specialaccess
 
-import android.app.AppOpsManager.MODE_ERRORED
 import android.app.AppOpsManager.OP_PICTURE_IN_PICTURE
 import android.content.Context
 import android.content.pm.ActivityInfo
@@ -85,7 +84,6 @@ class PictureInPictureListModel(private val context: Context) :
                     context = context,
                     app = app,
                     op = OP_PICTURE_IN_PICTURE,
-                    modeForNotAllowed = MODE_ERRORED,
                 ),
         )
 

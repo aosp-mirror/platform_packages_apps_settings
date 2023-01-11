@@ -54,6 +54,14 @@ public class FingerprintRepository {
     }
 
     /**
+     * The first sensor type is Side fps sensor or not
+     */
+    public boolean canAssumeSfps() {
+        FingerprintSensorPropertiesInternal prop = getFirstFingerprintSensorPropertiesInternal();
+        return prop != null && prop.isAnySidefpsType();
+    }
+
+    /**
      * Get max possible number of fingerprints for a user
      */
     public int getMaxFingerprints() {
@@ -78,6 +86,7 @@ public class FingerprintRepository {
 
     @Nullable
     private FingerprintSensorPropertiesInternal getFirstFingerprintSensorPropertiesInternal() {
+        // TODO(b/264827022) use API addAuthenticatorsRegisteredCallback
         final List<FingerprintSensorPropertiesInternal> props =
                 mFingerprintManager.getSensorPropertiesInternal();
         return props.size() > 0 ? props.get(0) : null;

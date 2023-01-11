@@ -124,8 +124,6 @@ public class FingerprintEnrollmentViewModel extends AndroidViewModel implements
         }
     }
 
-
-
     private boolean isKeyguardSecure() {
         return mKeyguardManager != null && mKeyguardManager.isKeyguardSecure();
     }
@@ -181,5 +179,19 @@ public class FingerprintEnrollmentViewModel extends AndroidViewModel implements
      */
     public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putBoolean(SAVED_STATE_IS_WAITING_ACTIVITY_RESULT, mIsWaitingActivityResult.get());
+    }
+
+    /**
+     * The first sensor type is UDFPS sensor or not
+     */
+    public boolean canAssumeUdfps() {
+        return mFingerprintRepository.canAssumeUdfps();
+    }
+
+    /**
+     * The first sensor type is side fps sensor or not
+     */
+    public boolean canAssumeSfps() {
+        return mFingerprintRepository.canAssumeSfps();
     }
 }
