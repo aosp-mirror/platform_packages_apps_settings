@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,34 +39,34 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import java.util.Set;
 
 /**
- * This slider represents both ring and notification
+ * This slider is used to represent ring volume when ring is separated from notification
  */
-public class RingVolumePreferenceController extends
+public class SeparateRingVolumePreferenceController extends
         RingerModeAffectedVolumePreferenceController {
 
-    private static final String KEY_RING_VOLUME = "ring_volume";
-    private static final String TAG = "RingVolumePreferenceController";
+    private static final String KEY_SEPARATE_RING_VOLUME = "separate_ring_volume";
+    private static final String TAG = "SeparateRingVolumePreferenceController";
 
     private final RingReceiver mReceiver = new RingReceiver();
     private final H mHandler = new H();
 
-    public RingVolumePreferenceController(Context context) {
-        this(context, KEY_RING_VOLUME);
+    public SeparateRingVolumePreferenceController(Context context) {
+        this(context, KEY_SEPARATE_RING_VOLUME);
     }
 
-    public RingVolumePreferenceController(Context context, String key) {
+    public SeparateRingVolumePreferenceController(Context context, String key) {
         super(context, key, TAG);
 
-        mNormalIconId = R.drawable.ic_notifications;
+        mNormalIconId = R.drawable.ic_ring_volume;
         mVibrateIconId = R.drawable.ic_volume_ringer_vibrate;
-        mSilentIconId = R.drawable.ic_notifications_off_24dp;
+        mSilentIconId = R.drawable.ic_ring_volume_off;
 
         mSeparateNotification = isSeparateNotificationConfigEnabled();
         updateRingerMode();
     }
 
     /**
-     * As the responsibility of this slider changes, so should its title & icon
+     * Show/hide settings
      */
     private void onDeviceConfigChange(DeviceConfig.Properties properties) {
         Set<String> changeSet = properties.getKeyset();
@@ -105,14 +105,14 @@ public class RingVolumePreferenceController extends
 
     @Override
     public String getPreferenceKey() {
-        return KEY_RING_VOLUME;
+        return KEY_SEPARATE_RING_VOLUME;
     }
 
     @Override
     public int getAvailabilityStatus() {
         boolean separateNotification = isSeparateNotificationConfigEnabled();
 
-        return !separateNotification && Utils.isVoiceCapable(mContext) && !mHelper.isSingleVolume()
+        return  separateNotification && Utils.isVoiceCapable(mContext) && !mHelper.isSingleVolume()
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
@@ -123,13 +123,10 @@ public class RingVolumePreferenceController extends
 
     @Override
     protected boolean hintsMatch(int hints) {
-        boolean notificationSeparated = isSeparateNotificationConfigEnabled();
-
         return (hints & NotificationListenerService.HINT_HOST_DISABLE_CALL_EFFECTS) != 0
-                || (hints & NotificationListenerService.HINT_HOST_DISABLE_EFFECTS) != 0
-                || ((hints & NotificationListenerService.HINT_HOST_DISABLE_NOTIFICATION_EFFECTS)
-                != 0 && !notificationSeparated);
+                || (hints & NotificationListenerService.HINT_HOST_DISABLE_EFFECTS) != 0;
     }
+
 
 
     private final class H extends Handler {
