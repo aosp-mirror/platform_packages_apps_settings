@@ -89,7 +89,6 @@ public class AdvancedPowerUsageDetailTest {
     private static final String SLOT_TIME = "12 am-2 am";
     private static final int ICON_ID = 123;
     private static final int UID = 1;
-    private static final int POWER_MAH = 150;
     private static final long BACKGROUND_TIME_MS = 100;
     private static final long FOREGROUND_ACTIVITY_TIME_MS = 123;
     private static final long FOREGROUND_SERVICE_TIME_MS = 444;
@@ -270,10 +269,11 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void initHeader_noUsageTime_hasCorrectSummary() {
-        Bundle bundle = new Bundle(2);
+    public void initHeader_noAnyTimeNoConsumedPower_hasEmptySummary() {
+        Bundle bundle = new Bundle();
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, /* value */ 0);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, /* value */ 0);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME, /* value */ 0);
         when(mFragment.getArguments()).thenReturn(bundle);
 
         mFragment.initHeader();
@@ -284,10 +284,11 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void initHeader_noUsageTimeButConsumedPower_hasEmptySummary() {
-        Bundle bundle = new Bundle(3);
+    public void initHeader_noAnyTimeButConsumedPower_hasEmptySummary() {
+        Bundle bundle = new Bundle();
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, /* value */ 0);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, /* value */ 0);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME, /* value */ 0);
         bundle.putInt(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_AMOUNT, /* value */ 10);
         when(mFragment.getArguments()).thenReturn(bundle);
 
@@ -299,12 +300,14 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void initHeader_backgroundTwoMinForegroundZero_hasCorrectSummary() {
+    public void initHeader_ScreenTimeZerobackgroundTwoMin_hasCorrectSummary() {
         final long backgroundTimeTwoMinutes = 120000;
         final long foregroundTimeZero = 0;
-        Bundle bundle = new Bundle(2);
+        final long screenOnTimeZero = 0;
+        Bundle bundle = new Bundle();
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeTwoMinutes);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeZero);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME, screenOnTimeZero);
         when(mFragment.getArguments()).thenReturn(bundle);
 
         mFragment.initHeader();
@@ -312,17 +315,19 @@ public class AdvancedPowerUsageDetailTest {
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mEntityHeaderController).setSummary(captor.capture());
         assertThat(captor.getValue().toString())
-                .isEqualTo("2 min background since last full charge");
+                .isEqualTo("Background: 2 min\n(since last full charge)");
     }
 
     @Test
-    public void initHeader_backgroundLessThanAMinForegroundZero_hasCorrectSummary() {
+    public void initHeader_ScreenTimeZerobackgroundLessThanAMin_hasCorrectSummary() {
         final long backgroundTimeLessThanAMinute = 59999;
         final long foregroundTimeZero = 0;
-        Bundle bundle = new Bundle(2);
+        final long screenOnTimeZero = 0;
+        Bundle bundle = new Bundle();
         bundle.putLong(
                 AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeLessThanAMinute);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeZero);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME, screenOnTimeZero);
         when(mFragment.getArguments()).thenReturn(bundle);
 
         mFragment.initHeader();
@@ -330,35 +335,18 @@ public class AdvancedPowerUsageDetailTest {
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mEntityHeaderController).setSummary(captor.capture());
         assertThat(captor.getValue().toString())
-                .isEqualTo("Background less than a minute since last full charge");
+                .isEqualTo("Background: less than a min\n(since last full charge)");
     }
 
     @Test
-    public void initHeader_totalUsageLessThanAMin_hasCorrectSummary() {
-        final long backgroundTimeLessThanHalfMinute = 20000;
-        final long foregroundTimeLessThanHalfMinute = 20000;
-        Bundle bundle = new Bundle(2);
-        bundle.putLong(
-                AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeLessThanHalfMinute);
-        bundle.putLong(
-                AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeLessThanHalfMinute);
-        when(mFragment.getArguments()).thenReturn(bundle);
-
-        mFragment.initHeader();
-
-        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
-        verify(mEntityHeaderController).setSummary(captor.capture());
-        assertThat(captor.getValue().toString())
-                .isEqualTo("Total less than a minute since last full charge");
-    }
-
-    @Test
-    public void initHeader_TotalAMinutesBackgroundLessThanAMin_hasCorrectSummary() {
-        final long backgroundTimeZero = 59999;
-        final long foregroundTimeTwoMinutes = 1;
-        Bundle bundle = new Bundle(2);
-        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeZero);
+    public void initHeader_ScreenTimeAMinuteBackgroundTwoMin_hasCorrectSummary() {
+        final long backgroundTimeTwoMinutes = 120000;
+        final long foregroundTimeTwoMinutes = 120000;
+        final long screenOnTimeAMinute = 60000;
+        Bundle bundle = new Bundle();
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeTwoMinutes);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME, screenOnTimeAMinute);
         when(mFragment.getArguments()).thenReturn(bundle);
 
         mFragment.initHeader();
@@ -366,106 +354,149 @@ public class AdvancedPowerUsageDetailTest {
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mEntityHeaderController).setSummary(captor.capture());
         assertThat(captor.getValue().toString()).isEqualTo(
-                "1 min total • background less than a minute\nsince last full charge");
+                "Screen time: 1 min\nBackground: 2 min\n(since last full charge)");
     }
 
     @Test
-    public void initHeader_TotalAMinBackgroundZero_hasCorrectSummary() {
-        final long backgroundTimeZero = 0;
-        final long foregroundTimeAMinutes = 60000;
-        Bundle bundle = new Bundle(2);
-        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeZero);
-        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeAMinutes);
-        when(mFragment.getArguments()).thenReturn(bundle);
-
-        mFragment.initHeader();
-
-        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
-        verify(mEntityHeaderController).setSummary(captor.capture());
-        assertThat(captor.getValue().toString())
-                .isEqualTo("1 min total since last full charge");
-    }
-
-    @Test
-    public void initHeader_foregroundTwoMinBackgroundFourMin_hasCorrectSummary() {
-        final long backgroundTimeFourMinute = 240000;
+    public void initHeader_ScreenTimeAMinuteBackgroundLessThanAMin_hasCorrectSummary() {
+        final long backgroundTimeLessThanAMinute = 59999;
         final long foregroundTimeTwoMinutes = 120000;
-        Bundle bundle = new Bundle(2);
-        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeFourMinute);
-        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
-        when(mFragment.getArguments()).thenReturn(bundle);
-
-        mFragment.initHeader();
-
-        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
-        verify(mEntityHeaderController).setSummary(captor.capture());
-        assertThat(captor.getValue().toString())
-                .isEqualTo("6 min total • 4 min background\nsince last full charge");
-    }
-
-    @Test
-    public void initHeader_totalUsageLessThanAMinWithSlotTime_hasCorrectSummary() {
-        final long backgroundTimeLessThanHalfMinute = 20000;
-        final long foregroundTimeLessThanHalfMinute = 20000;
-        Bundle bundle = new Bundle(3);
+        final long screenOnTimeAMinute = 60000;
+        Bundle bundle = new Bundle();
         bundle.putLong(
-                AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeLessThanHalfMinute);
-        bundle.putLong(
-                AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeLessThanHalfMinute);
-        bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
-        when(mFragment.getArguments()).thenReturn(bundle);
-
-        mFragment.initHeader();
-
-        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
-        verify(mEntityHeaderController).setSummary(captor.capture());
-        assertThat(captor.getValue().toString())
-                .isEqualTo("Total less than a minute for 12 am-2 am");
-    }
-
-    @Test
-    public void initHeader_TotalAMinBackgroundLessThanAMinWithSlotTime_hasCorrectSummary() {
-        final long backgroundTimeZero = 59999;
-        final long foregroundTimeTwoMinutes = 1;
-        Bundle bundle = new Bundle(3);
-        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeZero);
+                AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeLessThanAMinute);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
-        bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME, screenOnTimeAMinute);
         when(mFragment.getArguments()).thenReturn(bundle);
 
         mFragment.initHeader();
 
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mEntityHeaderController).setSummary(captor.capture());
-        assertThat(captor.getValue().toString())
-                .isEqualTo("1 min total • background less than a minute\nfor 12 am-2 am");
+        assertThat(captor.getValue().toString()).isEqualTo(
+                "Screen time: 1 min\nBackground: less than a min\n(since last full charge)");
     }
 
     @Test
-    public void initHeader_TotalAMinBackgroundZeroWithSlotTime_hasCorrectSummary() {
-        final long backgroundTimeZero = 0;
-        final long foregroundTimeAMinutes = 60000;
-        Bundle bundle = new Bundle(3);
-        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeZero);
-        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeAMinutes);
-        bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
-        when(mFragment.getArguments()).thenReturn(bundle);
-
-        mFragment.initHeader();
-
-        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
-        verify(mEntityHeaderController).setSummary(captor.capture());
-        assertThat(captor.getValue().toString())
-                .isEqualTo("1 min total for 12 am-2 am");
-    }
-
-    @Test
-    public void initHeader_foregroundTwoMinBackgroundFourMinWithSlotTime_hasCorrectSummary() {
-        final long backgroundTimeFourMinute = 240000;
+    public void initHeader_ScreenTimeAMinuteBackgroundZero_hasCorrectSummary() {
+        final long backgroundTimezero = 0;
         final long foregroundTimeTwoMinutes = 120000;
-        Bundle bundle = new Bundle(3);
-        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeFourMinute);
+        final long screenOnTimeAMinute = 60000;
+        Bundle bundle = new Bundle();
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimezero);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME, screenOnTimeAMinute);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString()).isEqualTo(
+                "Screen time: 1 min\n(since last full charge)");
+    }
+
+    @Test
+    public void initHeader_ScreenTimeLessThanAMinBackgroundTwoMin_hasCorrectSummary() {
+        final long backgroundTimeTwoMinutes = 120000;
+        final long foregroundTimeTwoMinutes = 120000;
+        final long screenOnTimeLessThanAMinute = 59999;
+        Bundle bundle = new Bundle();
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeTwoMinutes);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME, screenOnTimeLessThanAMinute);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString()).isEqualTo(
+                "Screen time: less than a min\nBackground: 2 min\n(since last full charge)");
+    }
+
+    @Test
+    public void initHeader_ScreenTimeLessThanAMinBackgroundLessThanAMin_hasCorrectSummary() {
+        final long backgroundTimeLessThanAMinute = 59999;
+        final long foregroundTimeTwoMinutes = 120000;
+        final long screenOnTimeLessThanAMinute = 59999;
+        Bundle bundle = new Bundle();
+        bundle.putLong(
+                AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeLessThanAMinute);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME, screenOnTimeLessThanAMinute);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString()).isEqualTo(
+                "Screen time: less than a min\nBackground: less than a min\n(since last full "
+                        + "charge)");
+    }
+
+    @Test
+    public void initHeader_ScreenTimeLessThanAMinBackgroundZero_hasCorrectSummary() {
+        final long backgroundTimezero = 0;
+        final long foregroundTimeTwoMinutes = 120000;
+        final long screenOnTimeLessThanAMinute = 59999;
+        Bundle bundle = new Bundle();
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimezero);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME, screenOnTimeLessThanAMinute);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString()).isEqualTo(
+                "Screen time: less than a min\n(since last full charge)");
+    }
+
+    @Test
+    public void initHeader_noAnyTimeNoConsumedPowerWithSlotTime_hasEmptySummary() {
+        Bundle bundle = new Bundle();
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, /* value */ 0);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, /* value */ 0);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME, /* value */ 0);
+        bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString()).isEmpty();
+    }
+
+    @Test
+    public void initHeader_noAnyTimeButConsumedPowerWithSlotTime_hasEmptySummary() {
+        Bundle bundle = new Bundle();
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, /* value */ 0);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, /* value */ 0);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME, /* value */ 0);
+        bundle.putInt(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_AMOUNT, /* value */ 10);
+        bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString()).isEmpty();
+    }
+
+    @Test
+    public void initHeader_ScreenTimeZerobackgroundTwoMinWithSlotTime_hasCorrectSummary() {
+        final long backgroundTimeTwoMinutes = 120000;
+        final long foregroundTimeZero = 0;
+        final long screenOnTimeZero = 0;
+        Bundle bundle = new Bundle();
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeTwoMinutes);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeZero);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME, screenOnTimeZero);
         bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
         when(mFragment.getArguments()).thenReturn(bundle);
 
@@ -474,14 +505,158 @@ public class AdvancedPowerUsageDetailTest {
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mEntityHeaderController).setSummary(captor.capture());
         assertThat(captor.getValue().toString())
-                .isEqualTo("6 min total • 4 min background\nfor 12 am-2 am");
+                .isEqualTo("Background: 2 min\n(12 am-2 am)");
+    }
+
+    @Test
+    public void initHeader_ScreenTimeZerobackgroundLessThanAMinWithSlotTime_hasCorrectSummary() {
+        final long backgroundTimeLessThanAMinute = 59999;
+        final long foregroundTimeZero = 0;
+        final long screenOnTimeZero = 0;
+        Bundle bundle = new Bundle();
+        bundle.putLong(
+                AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeLessThanAMinute);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeZero);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME, screenOnTimeZero);
+        bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("Background: less than a min\n(12 am-2 am)");
+    }
+
+    @Test
+    public void initHeader_ScreenTimeAMinuteBackgroundTwoMinWithSlotTime_hasCorrectSummary() {
+        final long backgroundTimeTwoMinutes = 120000;
+        final long foregroundTimeTwoMinutes = 120000;
+        final long screenOnTimeAMinute = 60000;
+        Bundle bundle = new Bundle();
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeTwoMinutes);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME, screenOnTimeAMinute);
+        bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString()).isEqualTo(
+                "Screen time: 1 min\nBackground: 2 min\n(12 am-2 am)");
+    }
+
+    @Test
+    public void initHeader_ScreenTimeAMinuteBackgroundLessThanAMinWithSlotTime_hasCorrectSummary() {
+        final long backgroundTimeLessThanAMinute = 59999;
+        final long foregroundTimeTwoMinutes = 120000;
+        final long screenOnTimeAMinute = 60000;
+        Bundle bundle = new Bundle();
+        bundle.putLong(
+                AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeLessThanAMinute);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME, screenOnTimeAMinute);
+        bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString()).isEqualTo(
+                "Screen time: 1 min\nBackground: less than a min\n(12 am-2 am)");
+    }
+
+    @Test
+    public void initHeader_ScreenTimeAMinuteBackgroundZeroWithSlotTime_hasCorrectSummary() {
+        final long backgroundTimezero = 0;
+        final long foregroundTimeTwoMinutes = 120000;
+        final long screenOnTimeAMinute = 60000;
+        Bundle bundle = new Bundle();
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimezero);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME, screenOnTimeAMinute);
+        bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString()).isEqualTo(
+                "Screen time: 1 min\n(12 am-2 am)");
+    }
+
+    @Test
+    public void initHeader_ScreenTimeLessThanAMinBackgroundTwoMinWithSlotTime_hasCorrectSummary() {
+        final long backgroundTimeTwoMinutes = 120000;
+        final long foregroundTimeTwoMinutes = 120000;
+        final long screenOnTimeLessThanAMinute = 59999;
+        Bundle bundle = new Bundle();
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeTwoMinutes);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME, screenOnTimeLessThanAMinute);
+        bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString()).isEqualTo(
+                "Screen time: less than a min\nBackground: 2 min\n(12 am-2 am)");
+    }
+
+    @Test
+    public void initHeader_ScreenTimeLessAMinBackgroundLessAMinWithSlotTime_hasCorrectSummary() {
+        final long backgroundTimeLessThanAMinute = 59999;
+        final long foregroundTimeTwoMinutes = 120000;
+        final long screenOnTimeLessThanAMinute = 59999;
+        Bundle bundle = new Bundle();
+        bundle.putLong(
+                AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeLessThanAMinute);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME, screenOnTimeLessThanAMinute);
+        bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString()).isEqualTo(
+                "Screen time: less than a min\nBackground: less than a min\n(12 am-2 am)");
+    }
+
+    @Test
+    public void initHeader_ScreenTimeLessThanAMinBackgroundZeroWithSlotTime_hasCorrectSummary() {
+        final long backgroundTimezero = 0;
+        final long foregroundTimeTwoMinutes = 120000;
+        final long screenOnTimeLessThanAMinute = 59999;
+        Bundle bundle = new Bundle();
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimezero);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME, screenOnTimeLessThanAMinute);
+        bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString()).isEqualTo(
+                "Screen time: less than a min\n(12 am-2 am)");
     }
 
     @Test
     public void initHeader_systemUidWithChartIsEnabled_notNullSummary() {
-        Bundle bundle = new Bundle(3);
+        Bundle bundle = new Bundle();
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, 240000);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, 120000);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME, 120000);
         bundle.putInt(AdvancedPowerUsageDetail.EXTRA_UID, Process.SYSTEM_UID);
         when(mFragment.getArguments()).thenReturn(bundle);
 
@@ -501,6 +676,8 @@ public class AdvancedPowerUsageDetailTest {
         assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME))
                 .isEqualTo(0);
         assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME))
+                .isEqualTo(0);
+        assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME))
                 .isEqualTo(0);
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT))
                 .isEqualTo(USAGE_PERCENT);

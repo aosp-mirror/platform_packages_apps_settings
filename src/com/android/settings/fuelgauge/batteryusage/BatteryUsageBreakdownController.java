@@ -22,7 +22,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -38,12 +37,12 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
-import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.HashMap;
@@ -296,43 +295,9 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     @VisibleForTesting
     void setPreferenceSummary(
             PowerGaugePreference preference, BatteryDiffEntry entry) {
-        final long screenOnTimeInMs = entry.mScreenOnTimeInMs;
-        final long foregroundUsageTimeInMs = entry.mForegroundUsageTimeInMs;
-        final long backgroundUsageTimeInMs = entry.mBackgroundUsageTimeInMs;
-        final long totalUsageTimeInMs = foregroundUsageTimeInMs + backgroundUsageTimeInMs;
-
-        StringBuilder usageTimeSummary = new StringBuilder();
-        if (entry.isSystemEntry()) {
-            if (totalUsageTimeInMs != 0) {
-                usageTimeSummary.append(buildUsageTimeInfo(totalUsageTimeInMs,
-                        R.string.battery_usage_total_less_than_one_minute,
-                        R.string.battery_usage_for_total_time));
-            }
-        } else {
-            if (screenOnTimeInMs != 0) {
-                usageTimeSummary.append(buildUsageTimeInfo(screenOnTimeInMs,
-                        R.string.battery_usage_screen_time_less_than_one_minute,
-                        R.string.battery_usage_screen_time));
-            }
-            if (screenOnTimeInMs != 0 && backgroundUsageTimeInMs != 0) {
-                usageTimeSummary.append('\n');
-            }
-            if (backgroundUsageTimeInMs != 0) {
-                usageTimeSummary.append(buildUsageTimeInfo(backgroundUsageTimeInMs,
-                        R.string.battery_usage_background_less_than_one_minute,
-                        R.string.battery_usage_for_background_time));
-            }
-        }
-        preference.setSummary(usageTimeSummary);
-    }
-
-    private String buildUsageTimeInfo(long timeInMs, int lessThanOneMinuteResId, int normalResId) {
-        if (timeInMs < DateUtils.MINUTE_IN_MILLIS) {
-            return mPrefContext.getString(lessThanOneMinuteResId);
-        }
-        final CharSequence timeSequence =
-                StringUtil.formatElapsedTime(mPrefContext, (double) timeInMs,
-                        /*withSeconds=*/ false, /*collapseTimeUnit=*/ false);
-        return mPrefContext.getString(normalResId, timeSequence);
+        preference.setSummary(
+                BatteryUtils.buildBatteryUsageTimeSummary(mPrefContext, entry.isSystemEntry(),
+                        entry.mForegroundUsageTimeInMs, entry.mBackgroundUsageTimeInMs,
+                        entry.mScreenOnTimeInMs));
     }
 }

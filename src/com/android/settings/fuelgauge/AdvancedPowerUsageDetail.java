@@ -26,7 +26,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -51,7 +50,6 @@ import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.Instrumentable;
-import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
@@ -74,6 +72,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     public static final String EXTRA_PACKAGE_NAME = "extra_package_name";
     public static final String EXTRA_FOREGROUND_TIME = "extra_foreground_time";
     public static final String EXTRA_BACKGROUND_TIME = "extra_background_time";
+    public static final String EXTRA_SCREEN_ON_TIME = "extra_screen_on_time";
     public static final String EXTRA_SLOT_TIME = "extra_slot_time";
     public static final String EXTRA_LABEL = "extra_label";
     public static final String EXTRA_ICON_ID = "extra_icon_id";
@@ -86,6 +85,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     private static final String KEY_PREF_RESTRICTED = "restricted_pref";
     private static final String KEY_FOOTER_PREFERENCE = "app_usage_footer_preference";
     private static final String PACKAGE_NAME_NONE = "none";
+
+    private static final String HEADER_SUMMARY_FORMAT = "%s\n(%s)";
 
     private static final int REQUEST_UNINSTALL = 0;
     private static final int REQUEST_REMOVE_DEVICE_ADMIN = 1;
@@ -129,6 +130,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         private int mConsumedPower;
         private long mForegroundTimeMs;
         private long mBackgroundTimeMs;
+        private long mScreenOnTimeMs;
         private boolean mIsUserEntry;
     }
 
@@ -156,6 +158,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         launchArgs.mConsumedPower = (int) diffEntry.mConsumePower;
         launchArgs.mForegroundTimeMs = diffEntry.mForegroundUsageTimeInMs;
         launchArgs.mBackgroundTimeMs = diffEntry.mBackgroundUsageTimeInMs;
+        launchArgs.mScreenOnTimeMs = diffEntry.mScreenOnTimeInMs;
         launchArgs.mIsUserEntry = histEntry.isUserEntry();
         startBatteryDetailPage(context, sourceMetricsCategory, launchArgs);
     }
@@ -191,6 +194,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         args.putInt(EXTRA_UID, launchArgs.mUid);
         args.putLong(EXTRA_BACKGROUND_TIME, launchArgs.mBackgroundTimeMs);
         args.putLong(EXTRA_FOREGROUND_TIME, launchArgs.mForegroundTimeMs);
+        args.putLong(EXTRA_SCREEN_ON_TIME, launchArgs.mScreenOnTimeMs);
         args.putString(EXTRA_SLOT_TIME, launchArgs.mSlotInformation);
         args.putString(EXTRA_POWER_USAGE_PERCENT, launchArgs.mUsagePercent);
         args.putInt(EXTRA_POWER_USAGE_AMOUNT, launchArgs.mConsumedPower);
@@ -323,7 +327,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             controller.setIsInstantApp(AppUtils.isInstant(mAppEntry.info));
         }
 
-        controller.setSummary(getAppActiveTime(bundle));
+        controller.setSummary(getHeaderSummary(bundle));
         controller.done(context, true /* rebindActions */);
     }
 
@@ -474,113 +478,20 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         }
     }
 
-    private CharSequence getAppActiveTime(Bundle bundle) {
+    private CharSequence getHeaderSummary(Bundle bundle) {
         final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
         final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
+        final long screenOnTimeInMs = bundle.getLong(EXTRA_SCREEN_ON_TIME);
         final String slotTime = bundle.getString(EXTRA_SLOT_TIME, null);
-        final long totalTimeMs = foregroundTimeMs + backgroundTimeMs;
-        final CharSequence usageTimeSummary;
+        final String usageSummary = BatteryUtils.buildBatteryUsageTimeSummary(getContext(),
+                /* isSystem= */ false, foregroundTimeMs, backgroundTimeMs, screenOnTimeInMs);
 
-        if (totalTimeMs == 0) {
-            usageTimeSummary = getText(R.string.battery_usage_without_time);
-        } else if (slotTime == null) {
-            // Shows summary text with last full charge if slot time is null.
-            usageTimeSummary = getAppFullChargeActiveSummary(
-                    foregroundTimeMs, backgroundTimeMs, totalTimeMs);
+        if (usageSummary.isEmpty()) {
+            return getText(R.string.battery_usage_without_time);
         } else {
-            // Shows summary text with slot time.
-            usageTimeSummary = getAppActiveSummaryWithSlotTime(
-                    foregroundTimeMs, backgroundTimeMs, totalTimeMs, slotTime);
-        }
-        return usageTimeSummary;
-    }
-
-    private CharSequence getAppFullChargeActiveSummary(
-            long foregroundTimeMs, long backgroundTimeMs, long totalTimeMs) {
-        // Shows background summary only if we don't have foreground usage time.
-        if (foregroundTimeMs == 0 && backgroundTimeMs != 0) {
-            return backgroundTimeMs < DateUtils.MINUTE_IN_MILLIS ?
-                    getText(R.string.battery_bg_usage_less_minute) :
-                    TextUtils.expandTemplate(getText(R.string.battery_bg_usage),
-                            StringUtil.formatElapsedTime(
-                                    getContext(),
-                                    backgroundTimeMs,
-                                    /* withSeconds */ false,
-                                    /* collapseTimeUnit */ false));
-        // Shows total usage summary only if total usage time is small.
-        } else if (totalTimeMs < DateUtils.MINUTE_IN_MILLIS) {
-            return getText(R.string.battery_total_usage_less_minute);
-        // Shows different total usage summary when background usage time is small.
-        } else if (backgroundTimeMs < DateUtils.MINUTE_IN_MILLIS) {
-            return TextUtils.expandTemplate(
-                    getText(backgroundTimeMs == 0 ?
-                            R.string.battery_total_usage :
-                            R.string.battery_total_usage_and_bg_less_minute_usage),
-                    StringUtil.formatElapsedTime(
-                            getContext(),
-                            totalTimeMs,
-                            /* withSeconds */ false,
-                            /* collapseTimeUnit */ false));
-        // Shows default summary.
-        } else {
-            return TextUtils.expandTemplate(
-                    getText(R.string.battery_total_and_bg_usage),
-                    StringUtil.formatElapsedTime(
-                            getContext(),
-                            totalTimeMs,
-                            /* withSeconds */ false,
-                            /* collapseTimeUnit */ false),
-                    StringUtil.formatElapsedTime(
-                            getContext(),
-                            backgroundTimeMs,
-                            /* withSeconds */ false,
-                            /* collapseTimeUnit */ false));
-        }
-    }
-
-    private CharSequence getAppActiveSummaryWithSlotTime(
-            long foregroundTimeMs, long backgroundTimeMs, long totalTimeMs, String slotTime) {
-        // Shows background summary only if we don't have foreground usage time.
-        if (foregroundTimeMs == 0 && backgroundTimeMs != 0) {
-            return backgroundTimeMs < DateUtils.MINUTE_IN_MILLIS ?
-                    TextUtils.expandTemplate(
-                            getText(R.string.battery_bg_usage_less_minute_with_period),
-                            slotTime) :
-                    TextUtils.expandTemplate(getText(R.string.battery_bg_usage_with_period),
-                            StringUtil.formatElapsedTime(
-                                    getContext(),
-                                    backgroundTimeMs,
-                                    /* withSeconds */ false,
-                                    /* collapseTimeUnit */ false), slotTime);
-        // Shows total usage summary only if total usage time is small.
-        } else if (totalTimeMs < DateUtils.MINUTE_IN_MILLIS) {
-            return TextUtils.expandTemplate(
-                    getText(R.string.battery_total_usage_less_minute_with_period), slotTime);
-        // Shows different total usage summary when background usage time is small.
-        } else if (backgroundTimeMs < DateUtils.MINUTE_IN_MILLIS) {
-            return TextUtils.expandTemplate(
-                    getText(backgroundTimeMs == 0 ?
-                            R.string.battery_total_usage_with_period :
-                            R.string.battery_total_usage_and_bg_less_minute_usage_with_period),
-                    StringUtil.formatElapsedTime(
-                            getContext(),
-                            totalTimeMs,
-                            /* withSeconds */ false,
-                            /* collapseTimeUnit */ false), slotTime);
-        // Shows default summary.
-        } else {
-            return TextUtils.expandTemplate(
-                    getText(R.string.battery_total_and_bg_usage_with_period),
-                    StringUtil.formatElapsedTime(
-                            getContext(),
-                            totalTimeMs,
-                            /* withSeconds */ false,
-                            /* collapseTimeUnit */ false),
-                    StringUtil.formatElapsedTime(
-                            getContext(),
-                            backgroundTimeMs,
-                            /* withSeconds */ false,
-                            /* collapseTimeUnit */ false), slotTime);
+            CharSequence slotSummary = slotTime == null
+                    ? getText(R.string.battery_usage_since_last_full_charge) : slotTime;
+            return String.format("%s\n(%s)", usageSummary, slotSummary);
         }
     }
 }
