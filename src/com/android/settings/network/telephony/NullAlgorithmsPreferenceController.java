@@ -21,9 +21,9 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 /**
- * Preference controller for "Allow Null Algorithms"
+ * Preference controller for "Require Encryption"
  *
- * <p>This preference controller is toggling null algorithms is not a per-sim operation.
+ * <p>This preference controller is toggling null algorithms. This applies to all active SIMs.
  */
 public class NullAlgorithmsPreferenceController extends TelephonyTogglePreferenceController {
 
@@ -33,7 +33,7 @@ public class NullAlgorithmsPreferenceController extends TelephonyTogglePreferenc
     private TelephonyManager mTelephonyManager;
 
     /**
-     * Class constructor of "Allow Null Algorithms" toggle.
+     * Class constructor of "Require Encryption" toggle.
      *
      * @param context of settings
      * @param key     assigned within UI entry of XML file
@@ -81,7 +81,7 @@ public class NullAlgorithmsPreferenceController extends TelephonyTogglePreferenc
     }
 
     /**
-     * Return {@code true} if null algorithms are currently allowed.
+     * Return {@code true} if encryption is required (null algorithms not allowed)
      *
      * <p><b>NOTE:</b> This method returns the active state of the preference controller and is not
      * the parameter passed into {@link #setChecked(boolean)}, which is instead the requested future
@@ -90,7 +90,7 @@ public class NullAlgorithmsPreferenceController extends TelephonyTogglePreferenc
     @Override
     public boolean isChecked() {
         try {
-            return mTelephonyManager.isNullCipherAndIntegrityPreferenceEnabled();
+            return !mTelephonyManager.isNullCipherAndIntegrityPreferenceEnabled();
         } catch (Exception e) {
             Log.e(LOG_TAG,
                     "Failed isNullCipherAndIntegrityEnabled. Defaulting toggle to "
@@ -109,24 +109,22 @@ public class NullAlgorithmsPreferenceController extends TelephonyTogglePreferenc
      * details.
      *
      * @param isChecked The toggle value that we're being requested to enforce. A value of {@code
-     *                  false} denotes that null ciphers will be disabled by the modem after this
-     *                  function
-     *                  completes, if it is not already.
+     *                  true} denotes that null ciphers will be disabled by the modem after this
+     *                  function completes, if it is not already.
      */
     @Override
     public boolean setChecked(boolean isChecked) {
         if (isChecked) {
-            Log.i(LOG_TAG, "Enabling null algorithms");
+            Log.i(LOG_TAG, "Encryption required. Disabling null algorithms.");
         } else {
-            Log.i(LOG_TAG, "Disabling null algorithms");
+            Log.i(LOG_TAG, "Encryption not required. Enabling null algorithms.");
         }
         try {
-            mTelephonyManager.setNullCipherAndIntegrityEnabled(isChecked);
+            mTelephonyManager.setNullCipherAndIntegrityEnabled(!isChecked);
         } catch (Exception e) {
             Log.e(LOG_TAG,
                     "Failed setNullCipherAndIntegrityEnabled. Setting not updated. Exception: "
                             + e.getMessage());
-            // The underlying setting was not updated
             return false;
         }
         return true;
