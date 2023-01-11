@@ -1149,7 +1149,7 @@ public final class DataProcessorTest {
         assertThat(resultEntry.mForegroundUsageTimeInMs)
                 .isEqualTo(Math.round(entry.mForegroundUsageTimeInMs * ratio));
         assertThat(resultEntry.mBackgroundUsageTimeInMs)
-                .isEqualTo(Math.round(entry.mBackgroundUsageTimeInMs * ratio));
+                .isEqualTo(0);
         assertThat(resultEntry.mConsumePower)
                 .isEqualTo(entry.mConsumePower * ratio);
         assertThat(resultEntry.mForegroundUsageConsumePower)

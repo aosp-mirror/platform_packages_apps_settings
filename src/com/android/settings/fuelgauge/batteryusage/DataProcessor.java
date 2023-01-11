@@ -1547,6 +1547,9 @@ public final class DataProcessor {
                             appUsageMap,
                             selectedBatteryEntry.mUserId,
                             selectedBatteryEntry.mPackageName));
+            // Make sure the background + screen-on time will not exceed the threshold.
+            backgroundUsageTimeInMs = Math.min(
+                    backgroundUsageTimeInMs, (long) TOTAL_HOURLY_TIME_THRESHOLD - screenOnTime);
             final BatteryDiffEntry currentBatteryDiffEntry = new BatteryDiffEntry(
                     context,
                     foregroundUsageTimeInMs,
