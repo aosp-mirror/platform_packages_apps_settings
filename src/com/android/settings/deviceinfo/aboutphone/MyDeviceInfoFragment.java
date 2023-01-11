@@ -55,6 +55,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Consumer;
 
 @SearchIndexable
 public class MyDeviceInfoFragment extends DashboardFragment
@@ -79,7 +80,6 @@ public class MyDeviceInfoFragment extends DashboardFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        use(ImeiInfoPreferenceController.class).setHost(this /* parent */);
         use(DeviceNamePreferenceController.class).setHost(this /* parent */);
         mBuildNumberPreferenceController = use(BuildNumberPreferenceController.class);
         mBuildNumberPreferenceController.setHost(this /* parent */);
@@ -126,12 +126,27 @@ public class MyDeviceInfoFragment extends DashboardFragment
         controllers.add(new FccEquipmentIdPreferenceController(context));
         controllers.add(new UptimePreferenceController(context, lifecycle));
 
+        Consumer<String> imeiInfoList = imeiKey -> {
+            ImeiInfoPreferenceController imeiRecord =
+                    new ImeiInfoPreferenceController(context, imeiKey);
+            imeiRecord.init(fragment, slotSimStatus);
+            controllers.add(imeiRecord);
+        };
+
+        if (fragment != null) {
+            imeiInfoList.accept(ImeiInfoPreferenceController.DEFAULT_KEY);
+        }
+
         for (int slotIndex = 0; slotIndex < slotSimStatus.size(); slotIndex ++) {
             SimStatusPreferenceController slotRecord =
                     new SimStatusPreferenceController(context,
                     slotSimStatus.getPreferenceKey(slotIndex));
             slotRecord.init(fragment, slotSimStatus);
             controllers.add(slotRecord);
+
+            if (fragment != null) {
+                imeiInfoList.accept(ImeiInfoPreferenceController.DEFAULT_KEY + (1 + slotIndex));
+            }
         }
 
         EidStatus eidStatus = new EidStatus(slotSimStatus, context, executor);

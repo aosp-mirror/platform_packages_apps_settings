@@ -85,16 +85,24 @@ public class StylusDevicesController extends AbstractPreferenceController implem
     }
 
     @Nullable
-    private Preference createDefaultNotesPreference() {
+    private Preference createOrUpdateDefaultNotesPreference(@Nullable Preference preference) {
         RoleManager rm = mContext.getSystemService(RoleManager.class);
-        if (rm == null) {
+        if (rm == null || !rm.isRoleAvailable(RoleManager.ROLE_NOTES)) {
             return null;
         }
+
+        Preference pref = preference == null ? new Preference(mContext) : preference;
+        pref.setKey(KEY_DEFAULT_NOTES);
+        pref.setTitle(mContext.getString(R.string.stylus_default_notes_app));
+        pref.setIcon(R.drawable.ic_article);
+        pref.setOnPreferenceClickListener(this);
+        pref.setEnabled(true);
 
         List<String> roleHolders = rm.getRoleHoldersAsUser(RoleManager.ROLE_NOTES,
                 mContext.getUser());
         if (roleHolders.isEmpty()) {
-            return null;
+            pref.setSummary(R.string.default_app_none);
+            return pref;
         }
 
         String packageName = roleHolders.get(0);
@@ -107,13 +115,6 @@ public class StylusDevicesController extends AbstractPreferenceController implem
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(TAG, "Notes role package not found.");
         }
-
-        Preference pref = new Preference(mContext);
-        pref.setKey(KEY_DEFAULT_NOTES);
-        pref.setTitle(mContext.getString(R.string.stylus_default_notes_app));
-        pref.setIcon(R.drawable.ic_article);
-        pref.setOnPreferenceClickListener(this);
-        pref.setEnabled(true);
         pref.setSummary(appName);
         return pref;
     }
@@ -187,12 +188,10 @@ public class StylusDevicesController extends AbstractPreferenceController implem
     private void refresh() {
         if (!isAvailable()) return;
 
-        Preference notesPref = mPreferencesContainer.findPreference(KEY_DEFAULT_NOTES);
-        if (notesPref == null) {
-            notesPref = createDefaultNotesPreference();
-            if (notesPref != null) {
-                mPreferencesContainer.addPreference(notesPref);
-            }
+        Preference currNotesPref = mPreferencesContainer.findPreference(KEY_DEFAULT_NOTES);
+        Preference notesPref = createOrUpdateDefaultNotesPreference(currNotesPref);
+        if (currNotesPref == null && notesPref != null) {
+            mPreferencesContainer.addPreference(notesPref);
         }
 
         Preference handwritingPref = mPreferencesContainer.findPreference(KEY_HANDWRITING);

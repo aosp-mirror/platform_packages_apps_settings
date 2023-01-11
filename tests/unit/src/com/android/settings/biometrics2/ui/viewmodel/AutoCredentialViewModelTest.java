@@ -45,6 +45,7 @@ import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_G
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
 import android.annotation.NonNull;
@@ -70,6 +71,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @RunWith(AndroidJUnit4.class)
 public class AutoCredentialViewModelTest {
@@ -299,13 +302,18 @@ public class AutoCredentialViewModelTest {
         when(mLockPatternUtils.verifyGatekeeperPasswordHandle(gkPwHandle, newChallenge, userId))
                 .thenReturn(newGoodCredential(gkPwHandle, new byte[] { 1 }));
 
+        final AtomicBoolean hasCalledRemoveGkPwHandle = new AtomicBoolean();
+        doAnswer(invocation -> {
+            hasCalledRemoveGkPwHandle.set(true);
+            return null;
+        }).when(mLockPatternUtils).removeGatekeeperPasswordHandle(gkPwHandle);
+
         // Run credential check
         @CredentialAction final int action = mViewModel.checkCredential();
 
         // Check viewModel behavior
         assertThat(action).isEqualTo(CREDENTIAL_IS_GENERATING_CHALLENGE);
         assertThat(mViewModel.getGenerateChallengeFailedLiveData().getValue()).isNull();
-        assertThat(mChallengeGenerator.mCallbackRunCount).isEqualTo(1);
 
         // Check data inside CredentialModel
         final Bundle extras = mViewModel.createCredentialIntentExtra();
@@ -314,6 +322,8 @@ public class AutoCredentialViewModelTest {
         assertThat(extras.getByteArray(EXTRA_KEY_CHALLENGE_TOKEN)).isNotNull();
         assertThat(extras.getLong(EXTRA_KEY_GK_PW_HANDLE)).isEqualTo(INVALID_GK_PW_HANDLE);
         assertThat(extras.getLong(EXTRA_KEY_CHALLENGE)).isNotEqualTo(INVALID_CHALLENGE);
+        assertThat(mChallengeGenerator.mCallbackRunCount).isEqualTo(1);
+        assertThat(hasCalledRemoveGkPwHandle.get()).isFalse();
 
         // Check createGeneratingChallengeExtras()
         final Bundle generatingChallengeExtras = mViewModel.createGeneratingChallengeExtras();
@@ -511,6 +521,12 @@ public class AutoCredentialViewModelTest {
         when(mLockPatternUtils.verifyGatekeeperPasswordHandle(gkPwHandle, newChallenge, userId))
                 .thenReturn(newGoodCredential(gkPwHandle, new byte[] { 1 }));
 
+        final AtomicBoolean hasCalledRemoveGkPwHandle = new AtomicBoolean();
+        doAnswer(invocation -> {
+            hasCalledRemoveGkPwHandle.set(true);
+            return null;
+        }).when(mLockPatternUtils).removeGatekeeperPasswordHandle(gkPwHandle);
+
         // Run checkNewCredentialFromActivityResult()
         final Intent intent = new Intent().putExtra(EXTRA_KEY_GK_PW_HANDLE, gkPwHandle);
         final boolean ret = mViewModel.checkNewCredentialFromActivityResult(true,
@@ -524,6 +540,7 @@ public class AutoCredentialViewModelTest {
         assertThat(extras.getByteArray(EXTRA_KEY_CHALLENGE_TOKEN)).isNotNull();
         assertThat(extras.getLong(EXTRA_KEY_GK_PW_HANDLE)).isEqualTo(INVALID_GK_PW_HANDLE);
         assertThat(mChallengeGenerator.mCallbackRunCount).isEqualTo(1);
+        assertThat(hasCalledRemoveGkPwHandle.get()).isTrue();
     }
 
     @Test
@@ -541,6 +558,12 @@ public class AutoCredentialViewModelTest {
         when(mLockPatternUtils.verifyGatekeeperPasswordHandle(gkPwHandle, newChallenge, userId))
                 .thenReturn(newGoodCredential(gkPwHandle, new byte[] { 1 }));
 
+        final AtomicBoolean hasCalledRemoveGkPwHandle = new AtomicBoolean();
+        doAnswer(invocation -> {
+            hasCalledRemoveGkPwHandle.set(true);
+            return null;
+        }).when(mLockPatternUtils).removeGatekeeperPasswordHandle(gkPwHandle);
+
         // Run checkNewCredentialFromActivityResult()
         final Intent intent = new Intent().putExtra(EXTRA_KEY_GK_PW_HANDLE, gkPwHandle);
         final boolean ret = mViewModel.checkNewCredentialFromActivityResult(false,
@@ -554,6 +577,7 @@ public class AutoCredentialViewModelTest {
         assertThat(extras.getByteArray(EXTRA_KEY_CHALLENGE_TOKEN)).isNotNull();
         assertThat(extras.getLong(EXTRA_KEY_GK_PW_HANDLE)).isEqualTo(INVALID_GK_PW_HANDLE);
         assertThat(mChallengeGenerator.mCallbackRunCount).isEqualTo(1);
+        assertThat(hasCalledRemoveGkPwHandle.get()).isTrue();
     }
 
     public static class TestChallengeGenerator implements ChallengeGenerator {

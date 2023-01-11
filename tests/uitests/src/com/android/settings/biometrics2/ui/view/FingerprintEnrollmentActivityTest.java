@@ -58,26 +58,30 @@ public class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    public void lunchWithoutCredential() {
+    public void launchWithoutCredential() {
         launchFingerprintEnrollActivity(true);
         Assert.assertNotNull(mDevice.wait(Until.hasObject(
                 By.text("Choose your backup screen lock method")), IDLE_TIMEOUT));
     }
 
     @Test
-    public void lunchWithCredential() {
+    public void launchWithCredential() {
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, "1234", true);
         launchFingerprintEnrollActivity(true);
-        Assert.assertNotNull(mDevice.wait(Until.hasObject(
-                By.text("More")), IDLE_TIMEOUT));
+        for (long i = 0; i < IDLE_TIMEOUT; i += 100L) {
+            if (mDevice.wait(Until.hasObject(By.text("More")), 50L) != null) {
+                break;
+            } else if (mDevice.wait(Until.hasObject(By.text("I agree")), 50L) != null) {
+                break;
+            }
+        }
 
-        //click more btn twice and the introduction should stay in the last page
-        UiObject2 moreBtn = mDevice.findObject(By.text("More"));
-        moreBtn.click();
-        Assert.assertNotNull(mDevice.wait(Until.hasObject(
-                By.text("More")), IDLE_TIMEOUT));
-        moreBtn = mDevice.findObject(By.text("More"));
-        moreBtn.click();
+        //click more btn at most twice and the introduction should stay in the last page
+        UiObject2 moreBtn;
+        for (int i = 0; i < 2 && (moreBtn = mDevice.findObject(By.text("More"))) != null; ++i) {
+            moreBtn.click();
+            mDevice.wait(Until.hasObject(By.text("More")), IDLE_TIMEOUT);
+        }
 
         Assert.assertNotNull(mDevice.wait(Until.hasObject(
                 By.text("I agree")), IDLE_TIMEOUT));
@@ -114,5 +118,4 @@ public class FingerprintEnrollmentActivityTest {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(intent);
     }
-
 }

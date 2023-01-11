@@ -40,6 +40,11 @@ public abstract class BiometricEnrollSidecar extends InstrumentedFragment {
         void onEnrollmentHelp(int helpMsgId, CharSequence helpString);
         void onEnrollmentError(int errMsgId, CharSequence errString);
         void onEnrollmentProgressChange(int steps, int remaining);
+        /**
+         * Called when a fingerprint image has been acquired.
+         * @param isAcquiredGood whether the fingerprint image was good.
+         */
+        default void onAcquired(boolean isAcquiredGood) { }
     }
 
     private int mEnrollmentSteps = -1;
@@ -97,6 +102,19 @@ public abstract class BiometricEnrollSidecar extends InstrumentedFragment {
         @Override
         public void send(Listener listener) {
             listener.onEnrollmentError(errMsgId, errString);
+        }
+    }
+
+    private class QueuedAcquired extends QueuedEvent {
+        private final boolean isAcquiredGood;
+
+        public QueuedAcquired(boolean isAcquiredGood) {
+            this.isAcquiredGood = isAcquiredGood;
+        }
+
+        @Override
+        public void send(Listener listener) {
+            listener.onAcquired(isAcquiredGood);
         }
     }
 
@@ -187,6 +205,14 @@ public abstract class BiometricEnrollSidecar extends InstrumentedFragment {
             mQueuedEvents.add(new QueuedEnrollmentError(errMsgId, errString));
         }
         mEnrolling = false;
+    }
+
+    protected void onAcquired(boolean isAcquiredGood) {
+        if (mListener != null) {
+            mListener.onAcquired(isAcquiredGood);
+        } else {
+            mQueuedEvents.add(new QueuedAcquired(isAcquiredGood));
+        }
     }
 
     public void setListener(Listener listener) {
