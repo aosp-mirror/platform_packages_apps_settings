@@ -125,7 +125,9 @@ public final class DatabaseUtils {
         Log.d(TAG, String.format(
                 "getAppUsageStartTimestampOfUser() userId=%d latestTimestamp=%d in %d/ms",
                 userId, latestTimestamp, (System.currentTimeMillis() - startTime)));
-        return Math.max(latestTimestamp, earliestTimestamp);
+        // Use (latestTimestamp + 1) here to avoid loading the events of the latestTimestamp
+        // repeatedly.
+        return Math.max(latestTimestamp + 1, earliestTimestamp);
     }
 
     /** Returns the current user data in app usage event table. */
