@@ -23,7 +23,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
@@ -494,23 +493,9 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void startBatteryDetailPage_hasBasicData() {
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
-                mBatteryEntry, USAGE_PERCENT, /*isValidToShowSummary=*/ true);
-
-        assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
-        assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME))
-                .isEqualTo(BACKGROUND_TIME_MS);
-        assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME))
-                .isEqualTo(FOREGROUND_TIME_MS);
-        assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT))
-                .isEqualTo(USAGE_PERCENT);
-    }
-
-    @Test
     public void startBatteryDetailPage_invalidToShowSummary_noFGBDData() {
         AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
-                mBatteryEntry, USAGE_PERCENT, /*isValidToShowSummary=*/ false);
+                mBatteryEntry, USAGE_PERCENT);
 
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
         assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME))
@@ -519,52 +504,6 @@ public class AdvancedPowerUsageDetailTest {
                 .isEqualTo(0);
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT))
                 .isEqualTo(USAGE_PERCENT);
-    }
-
-    @Test
-    public void startBatteryDetailPage_NormalApp() {
-        when(mBatteryEntry.getDefaultPackageName()).thenReturn(PACKAGE_NAME[0]);
-
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
-                mBatteryEntry, USAGE_PERCENT, /*isValidToShowSummary=*/ true);
-
-        assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_PACKAGE_NAME)).isEqualTo(
-                PACKAGE_NAME[0]);
-    }
-
-    @Test
-    public void startBatteryDetailPage_SystemApp() {
-        when(mBatteryEntry.getDefaultPackageName()).thenReturn(null);
-
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
-                mBatteryEntry, USAGE_PERCENT, /*isValidToShowSummary=*/ true);
-
-        assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_LABEL)).isEqualTo(APP_LABEL);
-        assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_ICON_ID)).isEqualTo(ICON_ID);
-        assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_PACKAGE_NAME)).isNull();
-    }
-
-    @Test
-    public void startBatteryDetailPage_WorkApp() {
-        final int appUid = 1010019;
-        doReturn(appUid).when(mBatteryEntry).getUid();
-
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
-                mBatteryEntry, USAGE_PERCENT, /*isValidToShowSummary=*/ true);
-
-        verify(mActivity).startActivityAsUser(any(Intent.class), eq(new UserHandle(10)));
-    }
-
-    @Test
-    public void startBatteryDetailPage_typeUser_startByCurrentUser() {
-        when(mBatteryEntry.isUserEntry()).thenReturn(true);
-
-        final int currentUser = 20;
-        ShadowActivityManager.setCurrentUser(currentUser);
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
-                mBatteryEntry, USAGE_PERCENT, /*isValidToShowSummary=*/ true);
-
-        verify(mActivity).startActivityAsUser(any(Intent.class), eq(new UserHandle(currentUser)));
     }
 
     @Test
