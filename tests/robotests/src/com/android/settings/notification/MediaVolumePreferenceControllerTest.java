@@ -216,12 +216,12 @@ public class MediaVolumePreferenceControllerTest {
         final Intent intent = new Intent(action);
         intent.setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME);
         return PendingIntent.getBroadcast(mContext, 0 /* requestCode */, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 
     private PendingIntent getActivityIntent(String action) {
         final Intent intent = new Intent(action);
         return PendingIntent.getActivity(mContext, 0 /* requestCode */, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 }
