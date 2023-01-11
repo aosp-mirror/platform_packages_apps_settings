@@ -191,7 +191,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
 
         showCategoryTitle(slotTimestamp);
         showSpinnerAndAppList();
-        showFooterPreference(isAllUsageDataEmpty);
+        showFooterPreference(isAllUsageDataEmpty, slotTimestamp);
     }
 
     // TODO: request accessibility focus on category title when slot selection updated.
@@ -204,11 +204,16 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
         mRootPreference.setVisible(true);
     }
 
-    private void showFooterPreference(boolean isAllBatteryUsageEmpty) {
-        mFooterPreference.setTitle(mPrefContext.getString(
+    private void showFooterPreference(boolean isAllBatteryUsageEmpty, String slotTimestamp) {
+        mFooterPreference.setTitle(
                 isAllBatteryUsageEmpty
-                        ? R.string.battery_usage_screen_footer_empty
-                        : R.string.battery_usage_screen_footer));
+                        ? mPrefContext.getString(R.string.battery_usage_screen_footer_empty)
+                        : (slotTimestamp == null
+                                ? mPrefContext.getString(
+                                        R.string.battery_usage_screen_footer_since_last_full_charge)
+                                : mPrefContext.getString(
+                                        R.string.battery_usage_screen_footer_of_timestamp,
+                                        slotTimestamp)));
         mFooterPreference.setVisible(true);
     }
 
