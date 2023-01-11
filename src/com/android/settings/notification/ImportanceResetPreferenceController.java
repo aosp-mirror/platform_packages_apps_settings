@@ -17,24 +17,20 @@
 package com.android.settings.notification;
 
 import android.content.Context;
-import android.view.View;
-import android.widget.Button;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.widget.LayoutPreference;
 
-public class ImportanceResetPreferenceController extends BasePreferenceController implements
-        View.OnClickListener {
+public class ImportanceResetPreferenceController extends BasePreferenceController {
 
     public static final String KEY = "asst_importance_reset";
     private static final String TAG = "ResetImportanceButton";
 
     private NotificationBackend mBackend;
-    private Button mButton;
 
     public ImportanceResetPreferenceController(Context context, String key) {
         super(context, key);
@@ -47,19 +43,14 @@ public class ImportanceResetPreferenceController extends BasePreferenceControlle
     }
 
     @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-
-        mButton = ((LayoutPreference) preference)
-                .findViewById(R.id.reset_importance_button);
-        mButton.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+            return false;
+        }
         mBackend.resetNotificationImportance();
         Toast.makeText(mContext, R.string.reset_importance_completed, Toast.LENGTH_SHORT)
-                            .show();
+                .show();
+        return true;
     }
 
     @Override
