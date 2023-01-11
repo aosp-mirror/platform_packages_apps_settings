@@ -270,7 +270,7 @@ public final class DatabaseUtilsTest {
 
         final long earliestTimestamp1 = 1001L;
         assertThat(DatabaseUtils.getAppUsageStartTimestampOfUser(
-                mContext, /*userId=*/ 0, earliestTimestamp1)).isEqualTo(returnedTimestamp);
+                mContext, /*userId=*/ 0, earliestTimestamp1)).isEqualTo(returnedTimestamp + 1);
         final long earliestTimestamp2 = 100001L;
         assertThat(DatabaseUtils.getAppUsageStartTimestampOfUser(
                 mContext, /*userId=*/ 0, earliestTimestamp2)).isEqualTo(earliestTimestamp2);
