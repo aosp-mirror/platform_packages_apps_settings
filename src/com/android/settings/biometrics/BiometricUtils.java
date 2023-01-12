@@ -39,6 +39,7 @@ import com.android.settings.SetupWizardUtils;
 import com.android.settings.biometrics.face.FaceEnrollIntroduction;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollFindSensor;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction;
+import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollFindSensor;
 import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollIntroduction;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -152,9 +153,13 @@ public class BiometricUtils {
      */
     public static Intent getFingerprintFindSensorIntent(@NonNull Context context,
             @NonNull Intent activityIntent) {
-        Intent intent = new Intent(context, FingerprintEnrollFindSensor.class);
-        SetupWizardUtils.copySetupExtras(activityIntent, intent);
-        return intent;
+        if (WizardManagerHelper.isAnySetupWizard(activityIntent)) {
+            Intent intent = new Intent(context, SetupFingerprintEnrollFindSensor.class);
+            SetupWizardUtils.copySetupExtras(activityIntent, intent);
+            return intent;
+        } else {
+            return new Intent(context, FingerprintEnrollFindSensor.class);
+        }
     }
 
     /**
