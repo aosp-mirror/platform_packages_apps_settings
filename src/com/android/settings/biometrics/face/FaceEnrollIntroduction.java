@@ -18,6 +18,8 @@ package com.android.settings.biometrics.face;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.FACE_UNLOCK_DISABLED;
 
+import static com.android.settings.biometrics.BiometricUtils.GatekeeperCredentialNotMatchException;
+
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
@@ -36,6 +38,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -43,7 +46,6 @@ import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.MultiBiometricEnrollHelper;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupSkipDialog;
 import com.android.settings.utils.SensorPrivacyManagerHelper;
@@ -61,7 +63,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     private static final String TAG = "FaceEnrollIntroduction";
 
     private FaceManager mFaceManager;
-    private FaceFeatureProvider mFaceFeatureProvider;
     @Nullable private FooterButton mPrimaryFooterButton;
     @Nullable private FooterButton mSecondaryFooterButton;
     @Nullable private SensorPrivacyManager mSensorPrivacyManager;
@@ -142,9 +143,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             infoMessageRequireEyes.setText(getInfoMessageRequireEyes());
         }
 
-        mFaceManager = Utils.getFaceManagerOrNull(this);
-        mFaceFeatureProvider = FeatureFactory.getFactory(getApplicationContext())
-                .getFaceFeatureProvider();
+        mFaceManager = getFaceManager();
 
         // This path is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
@@ -154,11 +153,22 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                 // We either block on generateChallenge, or need to gray out the "next" button until
                 // the challenge is ready. Let's just do this for now.
                 mFaceManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
-                    mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId,
-                            challenge);
-                    mSensorId = sensorId;
-                    mChallenge = challenge;
-                    mFooterBarMixin.getPrimaryButton().setEnabled(true);
+                    if (isFinishing()) {
+                        // Do nothing if activity is finishing
+                        Log.w(TAG, "activity finished before challenge callback launched.");
+                        return;
+                    }
+
+                    try {
+                        mToken = requestGatekeeperHat(challenge);
+                        mSensorId = sensorId;
+                        mChallenge = challenge;
+                        mFooterBarMixin.getPrimaryButton().setEnabled(true);
+                    } catch (GatekeeperCredentialNotMatchException e) {
+                        // Let BiometricEnrollBase#onCreate() to trigger confirmLock()
+                        getIntent().removeExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE);
+                        recreate();
+                    }
                 });
             }
         }
@@ -170,6 +180,18 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         final boolean cameraPrivacyEnabled = helper
                 .isSensorBlocked(SensorPrivacyManager.Sensors.CAMERA, mUserId);
         Log.v(TAG, "cameraPrivacyEnabled : " + cameraPrivacyEnabled);
+    }
+
+    @VisibleForTesting
+    @Nullable
+    protected FaceManager getFaceManager() {
+        return Utils.getFaceManagerOrNull(this);
+    }
+
+    @VisibleForTesting
+    @Nullable
+    protected byte[] requestGatekeeperHat(long challenge) {
+        return BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
     }
 
     @Override
