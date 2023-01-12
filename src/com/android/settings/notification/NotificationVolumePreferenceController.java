@@ -35,7 +35,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.Set;
@@ -129,8 +128,7 @@ public class NotificationVolumePreferenceController extends
         boolean separateNotification = isSeparateNotificationConfigEnabled();
 
         return mContext.getResources().getBoolean(R.bool.config_show_notification_volume)
-                && !mHelper.isSingleVolume()
-                && (separateNotification || !Utils.isVoiceCapable(mContext))
+                && !mHelper.isSingleVolume() && separateNotification
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
