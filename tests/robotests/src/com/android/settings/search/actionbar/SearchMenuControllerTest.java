@@ -21,7 +21,7 @@ import static com.android.settings.search.actionbar.SearchMenuController.MENU_SE
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.settings.SettingsEnums;
@@ -91,7 +91,7 @@ public class SearchMenuControllerTest {
 
         SearchMenuController.init(mHost);
         mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
-        verifyZeroInteractions(mMenu);
+        verifyNoInteractions(mMenu);
     }
 
     @Test
@@ -100,7 +100,7 @@ public class SearchMenuControllerTest {
         SearchMenuController.init(mHost);
         mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
 
-        verifyZeroInteractions(mMenu);
+        verifyNoInteractions(mMenu);
     }
 
     @Test
@@ -112,6 +112,6 @@ public class SearchMenuControllerTest {
 
         mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
 
-        verifyZeroInteractions(mMenu);
+        verifyNoInteractions(mMenu);
     }
 }
