@@ -23,10 +23,10 @@
         android:key="tether_prefs_top_intro"
         settings:searchable="false"/>
 
-    <com.android.settings.widget.FixedLineSummaryPreference
+    <com.android.settingslib.PrimarySwitchPreference
         android:key="wifi_tether"
         android:title="@string/wifi_hotspot_checkbox_text"
-        android:summary="@string/summary_placeholder"
+        android:summary="@string/wifi_hotspot_off_subtext"
         android:fragment="com.android.settings.wifi.tether.WifiTetherSettings"
         settings:allowDividerAbove="true"
         settings:maxLines="2"/>

@@ -16,6 +16,8 @@
 
 package com.android.settings.network.tether;
 
+import static android.net.TetheringManager.TETHERING_WIFI;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -91,5 +93,19 @@ public class TetheringManagerModelTest {
         mModel.mEventCallback.onTetheredInterfacesChanged(mInterfaces);
 
         assertThat(mModel.mTetheredInterfaces.getValue()).isEqualTo(mInterfaces);
+    }
+
+    @Test
+    public void startTethering_startTetheringToTetheringManager() {
+        mModel.startTethering(TETHERING_WIFI);
+
+        verify(mTetheringManager).startTethering(eq(TETHERING_WIFI), any(), any());
+    }
+
+    @Test
+    public void stopTethering_stopTetheringToTetheringManager() {
+        mModel.stopTethering(TETHERING_WIFI);
+
+        verify(mTetheringManager).stopTethering(eq(TETHERING_WIFI));
     }
 }
