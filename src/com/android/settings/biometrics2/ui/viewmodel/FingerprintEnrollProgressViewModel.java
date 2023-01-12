@@ -38,6 +38,7 @@ import com.android.settings.R;
 import com.android.settings.biometrics.fingerprint.FingerprintUpdater;
 import com.android.settings.biometrics.fingerprint.MessageDisplayController;
 import com.android.settings.biometrics2.ui.model.EnrollmentProgress;
+import com.android.settings.biometrics2.ui.model.EnrollmentStatusMessage;
 
 /**
  * Progress ViewModel handles the state around biometric enrollment. It manages the state of
@@ -51,6 +52,10 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
 
     private final MutableLiveData<EnrollmentProgress> mProgressLiveData = new MutableLiveData<>(
             new EnrollmentProgress(INITIAL_STEPS, INITIAL_REMAINING));
+    private final MutableLiveData<EnrollmentStatusMessage> mHelpMessageLiveData =
+            new MutableLiveData<>();
+    private final MutableLiveData<EnrollmentStatusMessage> mErrorMessageLiveData =
+            new MutableLiveData<>();
 
     private byte[] mToken = null;
     private int mUserId = UserHandle.myUserId();
@@ -75,12 +80,12 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
 
         @Override
         public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
-            // TODO add LiveData for help message during implementing b/260957933
+            mHelpMessageLiveData.postValue(new EnrollmentStatusMessage(helpMsgId, helpString));
         }
 
         @Override
         public void onEnrollmentError(int errMsgId, CharSequence errString) {
-            // TODO add LiveData for error message during implementing b/260957933
+            mErrorMessageLiveData.postValue(new EnrollmentStatusMessage(errMsgId, errString));
         }
     };
 
@@ -91,15 +96,16 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
         final Resources res = application.getResources();
         mMessageDisplayController =
                 res.getBoolean(R.bool.enrollment_message_display_controller_flag)
-                ? new MessageDisplayController(
-                        application.getMainThreadHandler(),
-                        mEnrollmentCallback,
-                        SystemClock.elapsedRealtimeClock(),
-                        res.getInteger(R.integer.enrollment_help_minimum_time_display),
-                        res.getInteger(R.integer.enrollment_progress_minimum_time_display),
-                        res.getBoolean(R.bool.enrollment_progress_priority_over_help),
-                        res.getBoolean(R.bool.enrollment_prioritize_acquire_messages),
-                        res.getInteger(R.integer.enrollment_collect_time)) : null;
+                        ? new MessageDisplayController(
+                                application.getMainThreadHandler(),
+                                mEnrollmentCallback,
+                                SystemClock.elapsedRealtimeClock(),
+                                res.getInteger(R.integer.enrollment_help_minimum_time_display),
+                                res.getInteger(R.integer.enrollment_progress_minimum_time_display),
+                                res.getBoolean(R.bool.enrollment_progress_priority_over_help),
+                                res.getBoolean(R.bool.enrollment_prioritize_acquire_messages),
+                                res.getInteger(R.integer.enrollment_collect_time))
+                        : null;
     }
 
     public void setToken(byte[] token) {
@@ -119,6 +125,14 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
 
     public LiveData<EnrollmentProgress> getProgressLiveData() {
         return mProgressLiveData;
+    }
+
+    public LiveData<EnrollmentStatusMessage> getHelpMessageLiveData() {
+        return mHelpMessageLiveData;
+    }
+
+    public LiveData<EnrollmentStatusMessage> getErrorMessageLiveData() {
+        return mErrorMessageLiveData;
     }
 
     /**
