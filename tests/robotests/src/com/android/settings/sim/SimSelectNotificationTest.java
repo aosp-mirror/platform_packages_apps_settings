@@ -143,6 +143,7 @@ public class SimSelectNotificationTest {
         when(mSubInfo.getDisplayName()).thenReturn(mFakeDisplayName);
         when(mContext.getResources()).thenReturn(mResources);
 
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
         when(mResources.getText(R.string.enable_sending_mms_notification_title))
                 .thenReturn(mFakeNotificationTitle);
         when(mResources.getText(R.string.enable_mms_notification_channel_title))

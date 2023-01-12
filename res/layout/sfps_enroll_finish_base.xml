@@ -30,20 +30,13 @@
         android:clipToPadding="false"
         android:clipChildren="false">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
             <com.google.android.setupdesign.view.FillContentLayout
                 android:layout_width="@dimen/sfps_enrollment_finished_icon_max_size"
                 android:layout_height="@dimen/sfps_enrollment_finished_icon_max_size"
                 android:layout_marginTop="24dp"
                 android:paddingTop="0dp"
                 android:paddingBottom="0dp"
-                android:gravity="center">
+                android:layout_gravity="center">
 
                 <ImageView
                     android:id="@+id/fingerprint_in_app_indicator"
@@ -54,17 +47,6 @@
                     android:importantForAccessibility="no"
                     android:src="@drawable/sfps_enroll_finish" />
             </com.google.android.setupdesign.view.FillContentLayout>
-
-            <!-- Added to align elements with fingerprint_enroll_enrolling_base -->
-            <TextView
-                style="@style/TextAppearance.ErrorText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
-                android:visibility="invisible" />
-
-        </LinearLayout>
-
     </LinearLayout>
 
 </com.google.android.setupdesign.GlifLayout>

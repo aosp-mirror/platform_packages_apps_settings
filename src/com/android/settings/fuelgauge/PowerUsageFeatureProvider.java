@@ -147,7 +147,7 @@ public interface PowerUsageFeatureProvider {
     /**
      * Gets a intent for one time bypass charge limited to resume charging.
      */
-    Intent getResumeChargeIntent();
+    Intent getResumeChargeIntent(boolean isDockDefender);
 
     /**
      * Returns battery history data with corresponding timestamp key.

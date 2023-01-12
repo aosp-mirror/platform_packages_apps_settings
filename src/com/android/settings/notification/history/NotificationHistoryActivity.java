@@ -73,6 +73,10 @@ import java.util.concurrent.TimeUnit;
 public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
 
     private static String TAG = "NotifHistory";
+    // MAX_RECENT_DISMISS_ITEM_COUNT needs to be less or equals than
+    // R.integer.config_notificationServiceArchiveSize, which is the Number of notifications kept
+    // in the notification service historical archive
+    private static final int MAX_RECENT_DISMISS_ITEM_COUNT = 50;
 
     private ViewGroup mHistoryOn;
     private ViewGroup mHistoryOff;
@@ -388,7 +392,8 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
                 snoozed = getSnoozedNotifications();
                 dismissed = mNm.getHistoricalNotificationsWithAttribution(
                         NotificationHistoryActivity.this.getPackageName(),
-                        NotificationHistoryActivity.this.getAttributionTag(), 6, false);
+                        NotificationHistoryActivity.this.getAttributionTag(),
+                        MAX_RECENT_DISMISS_ITEM_COUNT, false);
             } catch (SecurityException | RemoteException e) {
                 Log.d(TAG, "OnPaused called while trying to retrieve notifications");
             }

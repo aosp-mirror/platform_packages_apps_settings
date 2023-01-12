@@ -87,6 +87,10 @@ public class QRCodeScannerPreferenceController extends TogglePreferenceControlle
 
     @Override
     public int getAvailabilityStatus() {
+        if (CustomizableLockScreenUtils.isFeatureEnabled(mContext)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+
         return isScannerActivityAvailable() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
