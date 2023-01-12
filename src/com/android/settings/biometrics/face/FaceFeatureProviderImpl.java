@@ -17,12 +17,18 @@
 package com.android.settings.biometrics.face;
 
 import android.content.Context;
-import android.provider.Settings;
+
+import androidx.annotation.NonNull;
 
 public class FaceFeatureProviderImpl implements FaceFeatureProvider {
 
     @Override
     public boolean isAttentionSupported(Context context) {
+        return true;
+    }
+
+    @Override
+    public boolean isSetupWizardSupported(@NonNull Context context) {
         return true;
     }
 }
