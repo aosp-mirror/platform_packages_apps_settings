@@ -68,6 +68,11 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
+    public void testGetBatteryUsageListConsumePowerThreshold_return0() {
+        assertThat(mPowerFeatureProvider.getBatteryUsageListConsumePowerThreshold()).isEqualTo(0.0);
+    }
+
+    @Test
     public void testIsTypeSystem_uidRoot_returnTrue() {
         assertThat(mPowerFeatureProvider.isTypeSystem(Process.ROOT_UID, null)).isTrue();
     }
