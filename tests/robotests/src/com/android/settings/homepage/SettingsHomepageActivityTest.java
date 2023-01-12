@@ -20,6 +20,8 @@ import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTE
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -37,9 +39,11 @@ import androidx.fragment.app.Fragment;
 import com.android.settings.R;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
 import com.android.settings.homepage.contextualcards.slices.BatteryFixSliceTest;
+import com.android.settings.testutils.shadow.ShadowPasswordUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -64,6 +68,11 @@ public class SettingsHomepageActivityTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowPasswordUtils.reset();
     }
 
     @Test
@@ -193,6 +202,32 @@ public class SettingsHomepageActivityTest {
         verify(window).setAttributes(paramCaptor.capture());
         assertThat(paramCaptor.getValue().privateFlags
                 & SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS).isEqualTo(0);
+    }
+
+    @Test
+    @Config(shadows = {ShadowPasswordUtils.class})
+    public void isCallingAppPermitted_emptyPermission_returnTrue() {
+        SettingsHomepageActivity homepageActivity = spy(new SettingsHomepageActivity());
+
+        assertTrue(homepageActivity.isCallingAppPermitted(""));
+    }
+
+    @Test
+    @Config(shadows = {ShadowPasswordUtils.class})
+    public void isCallingAppPermitted_noGrantedPermission_returnFalse() {
+        SettingsHomepageActivity homepageActivity = spy(new SettingsHomepageActivity());
+
+        assertFalse(homepageActivity.isCallingAppPermitted("android.permission.TEST"));
+    }
+
+    @Test
+    @Config(shadows = {ShadowPasswordUtils.class})
+    public void isCallingAppPermitted_grantedPermission_returnTrue() {
+        SettingsHomepageActivity homepageActivity = spy(new SettingsHomepageActivity());
+        String permission = "android.permission.TEST";
+        ShadowPasswordUtils.addGrantedPermission(permission);
+
+        assertTrue(homepageActivity.isCallingAppPermitted(permission));
     }
 
     @Implements(SuggestionFeatureProviderImpl.class)
