@@ -36,6 +36,7 @@ import com.android.settings.Utils;
  */
 public class UsbDetailsPowerRoleController extends UsbDetailsController
         implements OnPreferenceClickListener {
+    private static final String KEY_USB_USE_POWER_ONLY = "usb_use_power_only";
 
     private PreferenceCategory mPreferenceCategory;
     private SwitchPreference mSwitchPreference;
@@ -61,6 +62,7 @@ public class UsbDetailsPowerRoleController extends UsbDetailsController
         mPreferenceCategory = screen.findPreference(getPreferenceKey());
         mSwitchPreference = new SwitchPreference(mPreferenceCategory.getContext());
         mSwitchPreference.setTitle(R.string.usb_use_power_only);
+        mSwitchPreference.setKey(KEY_USB_USE_POWER_ONLY);
         mSwitchPreference.setOnPreferenceClickListener(this);
         mPreferenceCategory.addPreference(mSwitchPreference);
     }

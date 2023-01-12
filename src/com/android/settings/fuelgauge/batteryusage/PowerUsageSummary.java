@@ -256,7 +256,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
         mBatteryUsagePreference = findPreference(KEY_BATTERY_USAGE);
         mBatteryUsagePreference.setSummary(getString(R.string.advanced_battery_preference_summary));
         mBatteryUsagePreference.setVisible(
-                mPowerFeatureProvider.isBatteryUsageEnabled(getContext()));
+                mPowerFeatureProvider.isBatteryUsageEnabled());
 
         mHelpPreference = findPreference(KEY_BATTERY_ERROR);
         mHelpPreference.setVisible(false);

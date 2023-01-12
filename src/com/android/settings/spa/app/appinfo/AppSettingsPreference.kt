@@ -49,7 +49,7 @@ import kotlinx.coroutines.plus
 fun AppSettingsPreference(app: ApplicationInfo) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
-    val presenter = remember { AppSettingsPresenter(context, app, coroutineScope) }
+    val presenter = remember(app) { AppSettingsPresenter(context, app, coroutineScope) }
     if (!presenter.isAvailableFlow.collectAsStateWithLifecycle(initialValue = false).value) return
 
     Preference(object : PreferenceModel {

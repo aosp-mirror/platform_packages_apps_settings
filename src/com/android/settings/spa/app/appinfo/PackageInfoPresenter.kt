@@ -59,11 +59,7 @@ class PackageInfoPresenter(
 
     val flow: StateFlow<PackageInfo?> = _flow
 
-    init {
-        notifyChange()
-    }
-
-    private fun notifyChange() {
+    fun reloadPackageInfo() {
         coroutineScope.launch(Dispatchers.IO) {
             _flow.value = getPackageInfo()
         }
@@ -83,7 +79,7 @@ class PackageInfoPresenter(
                 val packageInfo = flow.value
                 if (packageInfo != null && packageInfo.applicationInfo.isSystemApp) {
                     // System app still exists after uninstalling the updates, refresh the page.
-                    notifyChange()
+                    reloadPackageInfo()
                 } else {
                     navController.navigateBack()
                 }
@@ -98,7 +94,7 @@ class PackageInfoPresenter(
             userPackageManager.setApplicationEnabledSetting(
                 packageName, PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0
             )
-            notifyChange()
+            reloadPackageInfo()
         }
     }
 
@@ -109,7 +105,7 @@ class PackageInfoPresenter(
             userPackageManager.setApplicationEnabledSetting(
                 packageName, PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER, 0
             )
-            notifyChange()
+            reloadPackageInfo()
         }
     }
 
@@ -124,7 +120,7 @@ class PackageInfoPresenter(
         logAction(SettingsEnums.ACTION_SETTINGS_CLEAR_INSTANT_APP)
         coroutineScope.launch(Dispatchers.IO) {
             userPackageManager.deletePackageAsUser(packageName, null, 0, userId)
-            notifyChange()
+            reloadPackageInfo()
         }
     }
 
@@ -134,7 +130,7 @@ class PackageInfoPresenter(
         coroutineScope.launch(Dispatchers.Default) {
             Log.d(TAG, "Stopping package $packageName")
             context.activityManager.forceStopPackageAsUser(packageName, userId)
-            notifyChange()
+            reloadPackageInfo()
         }
     }
 

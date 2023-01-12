@@ -16,7 +16,6 @@
 
 package com.android.settings.fuelgauge;
 
-import android.annotation.UserIdInt;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.backup.BackupManager;
@@ -208,14 +207,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                 .setSourceMetricsCategory(sourceMetricsCategory)
                 .setUserHandle(new UserHandle(userId))
                 .launch();
-    }
-
-    private static @UserIdInt int getUserIdToLaunchAdvancePowerUsageDetail(
-            BatteryEntry batteryEntry) {
-        if (batteryEntry.isUserEntry()) {
-            return ActivityManager.getCurrentUser();
-        }
-        return UserHandle.getUserId(batteryEntry.getUid());
     }
 
     /**
@@ -537,49 +528,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         } else {
             return TextUtils.expandTemplate(
                     getText(R.string.battery_total_and_bg_usage),
-                    StringUtil.formatElapsedTime(
-                            getContext(),
-                            totalTimeMs,
-                            /* withSeconds */ false,
-                            /* collapseTimeUnit */ false),
-                    StringUtil.formatElapsedTime(
-                            getContext(),
-                            backgroundTimeMs,
-                            /* withSeconds */ false,
-                            /* collapseTimeUnit */ false));
-        }
-    }
-
-    private CharSequence getAppPast24HrActiveSummary(
-            long foregroundTimeMs, long backgroundTimeMs, long totalTimeMs) {
-        // Shows background summary only if we don't have foreground usage time.
-        if (foregroundTimeMs == 0 && backgroundTimeMs != 0) {
-            return backgroundTimeMs < DateUtils.MINUTE_IN_MILLIS
-                    ? getText(R.string.battery_bg_usage_less_minute_24hr)
-                    : TextUtils.expandTemplate(getText(R.string.battery_bg_usage_24hr),
-                            StringUtil.formatElapsedTime(
-                                    getContext(),
-                                    backgroundTimeMs,
-                                    /* withSeconds */ false,
-                                    /* collapseTimeUnit */ false));
-        // Shows total usage summary only if total usage time is small.
-        } else if (totalTimeMs < DateUtils.MINUTE_IN_MILLIS) {
-            return getText(R.string.battery_total_usage_less_minute_24hr);
-        // Shows different total usage summary when background usage time is small.
-        } else if (backgroundTimeMs < DateUtils.MINUTE_IN_MILLIS) {
-            return TextUtils.expandTemplate(
-                    getText(backgroundTimeMs == 0
-                            ? R.string.battery_total_usage_24hr
-                            : R.string.battery_total_usage_and_bg_less_minute_usage_24hr),
-                    StringUtil.formatElapsedTime(
-                            getContext(),
-                            totalTimeMs,
-                            /* withSeconds */ false,
-                            /* collapseTimeUnit */ false));
-        // Shows default summary.
-        } else {
-            return TextUtils.expandTemplate(
-                    getText(R.string.battery_total_and_bg_usage_24hr),
                     StringUtil.formatElapsedTime(
                             getContext(),
                             totalTimeMs,

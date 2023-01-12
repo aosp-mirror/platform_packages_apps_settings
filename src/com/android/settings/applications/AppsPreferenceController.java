@@ -16,6 +16,8 @@
 
 package com.android.settings.applications;
 
+import static com.android.settings.spa.app.appinfo.AppInfoSettingsProvider.startAppInfoSettings;
+
 import android.app.Application;
 import android.app.usage.UsageStats;
 import android.content.Context;
@@ -33,7 +35,6 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.Utils;
 import com.android.settingslib.applications.ApplicationsState;
@@ -208,9 +209,7 @@ public class AppsPreferenceController extends BasePreferenceController implement
                         RelativeDateTimeFormatter.Style.SHORT));
                 pref.setOrder(showAppsCount++);
                 pref.setOnPreferenceClickListener(preference -> {
-                    AppInfoBase.startAppInfoFragment(AppInfoDashboardFragment.class,
-                            mContext.getString(R.string.application_info_label),
-                            pkgName, appEntry.info.uid,
+                    startAppInfoSettings(pkgName, appEntry.info.uid,
                             mHost, 1001 /*RequestCode*/, getMetricsCategory());
                     return true;
                 });
