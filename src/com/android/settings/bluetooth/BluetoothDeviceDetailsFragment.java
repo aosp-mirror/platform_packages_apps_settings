@@ -65,8 +65,6 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
 
     static final int FEATURE_HEARING_DEVICE_CONTROLS_ORDER = 1;
     static final int FEATURE_AUDIO_ROUTING_ORDER = 2;
-    static final int FEATURE_SPATIAL_AUDIO_ORDER = 3;
-    static final int FEATURE_HEAD_TRACKING_ORDER = 4;
 
     @VisibleForTesting
     static int EDIT_DEVICE_NAME_ITEM_ID = Menu.FIRST;

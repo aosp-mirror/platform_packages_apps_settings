@@ -251,9 +251,9 @@
     <!-- Title for stylus device details page [CHAR LIMIT=50] -->
     <string name="stylus_device_details_title">Stylus</string>
     <!-- Preference title for setting the default note taking app [CHAR LIMIT=none] -->
-    <string name="stylus_default_notes_app">System note taking app</string>
+    <string name="stylus_default_notes_app">Default notes app</string>
     <!-- Preference title for toggling whether handwriting in textfields is enabled [CHAR LIMIT=none] -->
-    <string name="stylus_textfield_handwriting">Stylus writing in textfields</string>
+    <string name="stylus_textfield_handwriting">Write in text fields</string>
     <!-- Preference title for toggling whether stylus button presses are ignored [CHAR LIMIT=none] -->
     <string name="stylus_ignore_button">Ignore all stylus button presses</string>
     <!-- Name shown in the title of individual stylus preference in the connected devices page [CHAR LIMIT=60] -->
@@ -871,9 +871,9 @@
     <!-- Title shown in fingerprint enrollment dialog once enrollment is completed [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_finish_title">Fingerprint added</string>
     <!-- Title for require screen on to auth toggle shown in fingerprint enrollment dialog once enrollment is completed. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_require_screen_on_to_auth_title">Unlock only when screen is on</string>
+    <string name="security_settings_require_screen_on_to_auth_title">Touch to unlock anytime</string>
     <!-- Description for require screen on to auth toggle shown in fingerprint enrollment dialog once enrollment is completed. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_require_screen_on_to_auth_description">The screen must be on before you can unlock with your fingerprint. This makes accidental unlocking less likely.</string>
+    <string name="security_settings_require_screen_on_to_auth_description">Touch the sensor to unlock, even when the screen is off. This makes accidental unlocking more likely.</string>
     <!-- Description for require screen on to auth toggle shown in fingerprint enrollment dialog once enrollment is completed. [CHAR LIMIT=NONE] -->
     <string name="security_settings_require_screen_on_to_auth_keywords">Screen, Unlock</string>
     <!-- Button text to skip enrollment of fingerprint [CHAR LIMIT=40] -->
@@ -5033,43 +5033,31 @@
 
     <!-- Description for battery total and background usage time for an app, i.e. 1 hr 15 min total • 39 min background since last full charge. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_total_and_bg_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background\nsince last full charge</string>
-    <!-- Description for battery total and background usage time for an app, i.e. 1 hr 15 min total • 39 min background for past 24 hr. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_and_bg_usage_24hr"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background\nfor past 24 hr</string>
     <!-- Description for battery total and background usage time in a time period for an app, i.e. 1 hr 15 min total • 39 min background for 12 am-2 am. Note: ^1, ^2 and ^3 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_total_and_bg_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background\nfor <xliff:g id="time_period" example="12 am-2 am">^3</xliff:g></string>
 
     <!-- Description for battery total usage time is less than a minute for an app since last full charge [CHAR LIMIT=120] -->
     <string name="battery_total_usage_less_minute">Total less than a minute since last full charge</string>
-    <!-- Description for battery total usage time is less than a minute for an app for past 24 hr [CHAR LIMIT=120] -->
-    <string name="battery_total_usage_less_minute_24hr">Total less than a minute for past 24 hr</string>
     <!-- Description for battery total usage time is less than a minute in a time period for an app, i.e. Total less than a minute for 12 am-2 am. Note: ^1 should be used in all translations[CHAR LIMIT=120] -->
     <string name="battery_total_usage_less_minute_with_period">Total less than a minute for <xliff:g id="time_period" example="12 am-2 am">^1</xliff:g></string>
 
     <!-- Description for battery background usage time is less than a minute for an app since last full charge [CHAR LIMIT=120] -->
     <string name="battery_bg_usage_less_minute">Background less than a minute since last full charge</string>
-    <!-- Description for battery background usage time is less than a minute for an app for past 24 hr [CHAR LIMIT=120] -->
-    <string name="battery_bg_usage_less_minute_24hr">Background less than a minute for past 24 hr</string>
     <!-- Description for battery background usage time is less than a minute in a time period for an app, i.e. Background less than a minute for 12 am-2 am. Note: ^1 should be used in all translations[CHAR LIMIT=120] -->
     <string name="battery_bg_usage_less_minute_with_period">Background less than a minute for <xliff:g id="time_period" example="12 am-2 am">^1</xliff:g></string>
 
     <!-- Description for battery total usage time for an app, i.e. 1 hr 15 min total since last full charge. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_total_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total since last full charge</string>
-    <!-- Description for battery total usage time for an app, i.e. 1 hr 15 min total for past 24 hr. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_usage_24hr"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total for past 24 hr</string>
     <!-- Description for battery total usage time in a time period for an app, i.e. 1 hr 15 min total for 12 am-2 am. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_total_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total for <xliff:g id="time_period" example="12 am-2 am">^2</xliff:g></string>
 
     <!-- Description for battery background usage time for an app, i.e. 1 hr 15 min background since last full charge. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_bg_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> background since last full charge</string>
-    <!-- Description for battery background usage time for an app, i.e. 1 hr 15 min background for past 24 hr. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_bg_usage_24hr"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> background for past 24 hr</string>
     <!-- Description for battery background usage time in a time period for an app, i.e. 1 hr 15 min background for 12 am-2 am. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_bg_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> background for <xliff:g id="time_period" example="12 am-2 am">^2</xliff:g></string>
 
     <!-- Description for battery total usage with background usage time less than a minute for an app, i.e. 1 hr 15 min total • background less than a minute since last full charge. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_total_usage_and_bg_less_minute_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute\nsince last full charge</string>
-    <!-- Description for battery total usage with background usage time less than a minute for an app, i.e. 1 hr 15 min total • background less than a minute for past 24 hr. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_usage_and_bg_less_minute_usage_24hr"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute\nfor past 24 hr</string>
     <!-- Description for battery total usage with background usage time less than a minute in a time period for an app, i.e. 1 hr 15 min total • background less than a minute for 12 am-2 am. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute\nfor <xliff:g id="time_period" example="12 am-2 am">^2</xliff:g></string>
 
@@ -7807,7 +7795,7 @@
     <string name="zen_access_empty_text">No installed apps have requested Do Not Disturb access</string>
 
     <!-- [CHAR LIMIT=NONE] Text appearing when app notifications are off -->
-    <string name="app_notifications_off_desc">At your request, Android is blocking this app\'s notifications from appearing on this device</string>
+    <string name="app_notifications_off_desc">You haven\'t allowed notifications from this app</string>
 
     <!-- [CHAR LIMIT=NONE] Text appearing when channel notifications are off -->
     <string name="channel_notifications_off_desc">At your request, Android is blocking this category of notifications from appearing on this device</string>
@@ -8442,6 +8430,12 @@
 
     <!-- Label for list that shows all permissions -->
     <string name="app_permissions">Permission manager</string>
+
+    <!-- Label for the list that shows all data sharing updates. TODO b/261914980 finalize string [CHAR LIMIT=30]-->
+    <string name="app_data_sharing_updates_title">Data sharing updates</string>
+
+    <!-- Label for the list that shows all data sharing updates TODO b/261914980 finalize string [CHAR LIMIT=NONE]-->
+    <string name="app_data_sharing_updates_summary">Show which apps recently updated data sharing policy</string>
 
     <!-- Label for tap to wake setting [CHAR LIMIT=30] -->
     <string name="tap_to_wake">Tap to wake</string>

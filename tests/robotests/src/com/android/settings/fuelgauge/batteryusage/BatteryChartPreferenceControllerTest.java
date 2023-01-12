@@ -101,7 +101,7 @@ public final class BatteryChartPreferenceControllerTest {
         doReturn(resources).when(mContext).getResources();
         doReturn(Set.of("com.android.gms.persistent"))
                 .when(mFeatureFactory.powerUsageFeatureProvider)
-                .getHideApplicationSet(mContext);
+                .getHideApplicationSet();
         doReturn(mLayoutParams).when(mDailyChartView).getLayoutParams();
         doReturn(mIntent).when(mContext).registerReceiver(any(), any());
         doReturn(100).when(mIntent).getIntExtra(eq(BatteryManager.EXTRA_SCALE), anyInt());

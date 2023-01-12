@@ -54,7 +54,7 @@ public class PanelSlicesAdapter
      * Maximum number of slices allowed on the panel view.
      */
     @VisibleForTesting
-    static final int MAX_NUM_OF_SLICES = 7;
+    static final int MAX_NUM_OF_SLICES = 9;
 
     private final List<LiveData<Slice>> mSliceLiveData;
     private final int mMetricsCategory;
