@@ -21,6 +21,7 @@ import static android.view.WindowManager.LayoutParams.TYPE_SYSTEM_DIALOG;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -44,6 +45,7 @@ public class ModifierKeysResetDialogFragment extends DialogFragment {
     private static final String MODIFIER_KEYS_ALT = "modifier_keys_alt";
 
     private PreferenceScreen mScreen;
+    private InputManager mIm;
     private String[] mKeys = {
             MODIFIER_KEYS_CAPS_LOCK,
             MODIFIER_KEYS_CTRL,
@@ -53,8 +55,9 @@ public class ModifierKeysResetDialogFragment extends DialogFragment {
     public ModifierKeysResetDialogFragment() {
     }
 
-    public ModifierKeysResetDialogFragment(PreferenceScreen screen) {
+    public ModifierKeysResetDialogFragment(PreferenceScreen screen, InputManager inputManager) {
         mScreen = screen;
+        mIm = inputManager;
     }
 
     @Override
@@ -95,7 +98,10 @@ public class ModifierKeysResetDialogFragment extends DialogFragment {
                     0, title.length(), 0);
             preference.setSummary(title);
         }
-        // TODO(b/252812993): clearAllModifierKeyRemappings()
+
+        if (mIm != null) {
+            mIm.clearAllModifierKeyRemappings();
+        }
     }
 
     private int getColorOfTextColorSecondary() {
