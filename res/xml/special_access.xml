@@ -111,7 +111,8 @@
         android:key="long_background_tasks"
         android:title="@string/long_background_tasks_title"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-        settings:keywords="@string/keywords_long_background_tasks">
+        settings:keywords="@string/keywords_long_background_tasks"
+        settings:controller="com.android.settings.applications.specialaccess.applications.LongBackgroundTaskController">
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$LongBackgroundTasksActivity" />

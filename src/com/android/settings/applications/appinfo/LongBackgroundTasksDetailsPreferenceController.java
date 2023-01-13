@@ -24,6 +24,8 @@ import androidx.preference.Preference;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppStateLongBackgroundTasksBridge;
+import com.android.settings.applications.ApplicationFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * Preference controller for
@@ -32,14 +34,28 @@ import com.android.settings.applications.AppStateLongBackgroundTasksBridge;
 public class LongBackgroundTasksDetailsPreferenceController extends
         AppInfoPreferenceControllerBase {
 
+    private final ApplicationFeatureProvider mAppFeatureProvider;
+
     private String mPackageName;
 
     public LongBackgroundTasksDetailsPreferenceController(Context context, String key) {
         super(context, key);
+        mAppFeatureProvider = FeatureFactory.getFactory(context)
+                .getApplicationFeatureProvider(context);
+    }
+
+    @VisibleForTesting
+    LongBackgroundTasksDetailsPreferenceController(Context context, String key,
+            ApplicationFeatureProvider appFeatureProvider) {
+        super(context, key);
+        mAppFeatureProvider = appFeatureProvider;
     }
 
     @Override
     public int getAvailabilityStatus() {
+        if (!mAppFeatureProvider.isLongBackgroundTaskPermissionToggleSupported()) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
         return isCandidate() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
