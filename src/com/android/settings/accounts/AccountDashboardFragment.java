@@ -75,7 +75,7 @@ public class AccountDashboardFragment extends DashboardFragment {
         if (CredentialManager.isServiceEnabled(context)) {
             CredentialManagerPreferenceController cmpp =
                     use(CredentialManagerPreferenceController.class);
-            cmpp.setParentFragment(this);
+            cmpp.init(this, getFragmentManager());
         }
 
         getSettingsLifecycle().addObserver(use(PasswordsPreferenceController.class));
@@ -127,8 +127,8 @@ public class AccountDashboardFragment extends DashboardFragment {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = getPreferenceLayoutResId(context);
                     return List.of(sir);
