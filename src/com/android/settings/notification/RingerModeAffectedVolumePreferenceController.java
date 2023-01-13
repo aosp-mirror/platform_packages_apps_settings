@@ -21,6 +21,7 @@ import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.media.AudioManager;
+import android.os.Binder;
 import android.os.ServiceManager;
 import android.os.Vibrator;
 import android.provider.DeviceConfig;
@@ -118,9 +119,10 @@ public abstract class RingerModeAffectedVolumePreferenceController extends
     }
 
     protected boolean isSeparateNotificationConfigEnabled() {
-        return DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SYSTEMUI,
+        return Binder.withCleanCallingIdentity(()
+                -> DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SYSTEMUI,
                 SystemUiDeviceConfigFlags.VOLUME_SEPARATE_NOTIFICATION,
-                CONFIG_SEPARATE_NOTIFICATION_DEFAULT_VAL);
+                CONFIG_SEPARATE_NOTIFICATION_DEFAULT_VAL));
     }
 
     /**

@@ -215,6 +215,7 @@ public class ChooseLockPattern extends SettingsActivity {
         private FooterButton mNextButton;
         @VisibleForTesting protected LockscreenCredential mChosenPattern;
         private ColorStateList mDefaultHeaderColorList;
+        private View mSudContent;
 
         /**
          * The patten used during the help screen to show how to draw a pattern.
@@ -537,6 +538,10 @@ public class ChooseLockPattern extends SettingsActivity {
             );
             mSkipOrClearButton = mixin.getSecondaryButton();
             mNextButton = mixin.getPrimaryButton();
+            // TODO(b/243008023) Workaround for Glif layout on 2 panel choose lock settings.
+            mSudContent = layout.findViewById(R.id.sud_layout_content);
+            mSudContent.setPadding(mSudContent.getPaddingLeft(), 0, mSudContent.getPaddingRight(),
+                    0);
 
             return layout;
         }
