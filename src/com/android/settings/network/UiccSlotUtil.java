@@ -141,8 +141,7 @@ public class UiccSlotUtil {
                         inactiveRemovableSlot,
                         /*removable sim's port Id*/ TelephonyManager.DEFAULT_PORT_INDEX,
                         excludedLogicalSlotIndex),
-                context,
-                /*isWaitingForValidSubId=*/ true);
+                context);
     }
 
     /**
@@ -180,8 +179,7 @@ public class UiccSlotUtil {
         performSwitchToSlot(telMgr,
                 prepareUiccSlotMappings(uiccSlotMappings, /*slot is not psim*/ false,
                         physicalSlotId, port, excludedLogicalSlotIndex),
-                context,
-                /*isWaitingForValidSubId=*/ false);
+                context);
     }
 
     /**
@@ -233,8 +231,7 @@ public class UiccSlotUtil {
     }
 
     private static void performSwitchToSlot(TelephonyManager telMgr,
-            Collection<UiccSlotMapping> uiccSlotMappings, Context context,
-            boolean isWaitingForValidSubId)
+            Collection<UiccSlotMapping> uiccSlotMappings, Context context)
             throws UiccSlotsException {
         CarrierConfigChangedReceiver receiver = null;
         long waitingTimeMillis =
@@ -244,7 +241,7 @@ public class UiccSlotUtil {
                         DEFAULT_WAIT_AFTER_SWITCH_TIMEOUT_MILLIS);
         try {
             CountDownLatch latch = new CountDownLatch(1);
-            receiver = new CarrierConfigChangedReceiver(latch, isWaitingForValidSubId);
+            receiver = new CarrierConfigChangedReceiver(latch);
             receiver.registerOn(context);
             telMgr.setSimSlotMapping(uiccSlotMappings);
             latch.await(waitingTimeMillis, TimeUnit.MILLISECONDS);
