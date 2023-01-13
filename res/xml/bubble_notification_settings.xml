@@ -26,7 +26,8 @@
         <com.android.settingslib.widget.IllustrationPreference
             android:key="bubbles_illustration"
             settings:searchable="false"
-            app:lottie_rawRes="@raw/lottie_bubbles"/>
+            app:lottie_rawRes="@raw/lottie_bubbles"
+            settings:controller="com.android.settings.notification.BubbleNotificationIllustrationPreferenceController"/>
 
         <com.android.settingslib.widget.MainSwitchPreference
             android:key="global_notification_bubbles"
