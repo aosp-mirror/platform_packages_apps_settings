@@ -2510,6 +2510,8 @@
             <meta-data android:name="com.android.settings.icon_tintable" android:value="true" />
         </activity-alias>
 
+        <activity android:name=".biometrics.activeunlock.ActiveUnlockRequireBiometricSetup" android:exported="false"/>
+
         <!-- Note this must not be exported since it returns the password in the intent -->
         <activity android:name=".password.ConfirmLockPattern$InternalActivity"
             android:exported="false"
