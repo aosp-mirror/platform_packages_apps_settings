@@ -118,7 +118,7 @@ public class BatteryOptimizeUtils {
 
     /** Sets the {@link OptimizationMode} for associated app. */
     public void setAppUsageState(@OptimizationMode int mode, Action action) {
-        if (getAppOptimizationMode(mMode, mAllowListed) == mode) {
+        if (getAppOptimizationMode() == mode) {
             Log.w(TAG, "set the same optimization mode for: " + mPackageName);
             return;
         }

@@ -499,8 +499,10 @@ public class FingerprintSettings extends SubSettings {
             if (root != null) {
                 root.removeAll();
             }
-            root = getPreferenceScreen();
-            addFingerprintItemPreferences(root);
+            final String fpPrefKey = addFingerprintItemPreferences(root);
+            if (isSfps()) {
+                scrollToPreference(fpPrefKey);
+            }
             addPreferencesFromResource(getPreferenceScreenResId());
             mRequireScreenOnToAuthPreference = findPreference(KEY_REQUIRE_SCREEN_ON_TO_AUTH);
             mFingerprintUnlockCategory = findPreference(KEY_FINGERPRINT_UNLOCK_CATEGORY);
@@ -534,15 +536,20 @@ public class FingerprintSettings extends SubSettings {
             }
         }
 
-        private void addFingerprintItemPreferences(PreferenceGroup root) {
+        private String addFingerprintItemPreferences(PreferenceGroup root) {
             root.removeAll();
+            String keyToReturn = KEY_FINGERPRINT_ADD;
             final List<Fingerprint> items = mFingerprintManager.getEnrolledFingerprints(mUserId);
             final int fingerprintCount = items.size();
             for (int i = 0; i < fingerprintCount; i++) {
                 final Fingerprint item = items.get(i);
                 FingerprintPreference pref = new FingerprintPreference(root.getContext(),
                         this /* onDeleteClickListener */);
-                pref.setKey(genKey(item.getBiometricId()));
+                String key = genKey(item.getBiometricId());
+                if (i == 0) {
+                    keyToReturn = key;
+                }
+                pref.setKey(key);
                 pref.setTitle(item.getName());
                 pref.setFingerprint(item);
                 pref.setPersistent(false);
@@ -565,6 +572,8 @@ public class FingerprintSettings extends SubSettings {
             addPreference.setOnPreferenceChangeListener(this);
             updateAddPreference();
             createFooterPreference(root);
+
+            return keyToReturn;
         }
 
         private void updateAddPreference() {

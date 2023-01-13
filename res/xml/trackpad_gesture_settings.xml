@@ -24,39 +24,45 @@
         android:title="@string/trackpad_go_back_title"
         android:summary="@string/trackpad_go_back_summary"
         android:icon="@drawable/ic_trackpad_gesture_back"
-        android:order="10"/>
+        android:order="10"
+        settings:controller="com.android.settings.inputmethod.TrackpadGoBackPreferenceController"/>
 
     <SwitchPreference
         android:key="gesture_go_home"
         android:title="@string/trackpad_go_home_title"
         android:summary="@string/trackpad_go_home_summary"
         android:icon="@drawable/ic_trackpad_gesture_home"
-        android:order="20"/>
+        android:order="20"
+        settings:controller="com.android.settings.inputmethod.TrackpadGoHomePreferenceController"/>
 
     <SwitchPreference
         android:key="gesture_recent_apps"
         android:title="@string/trackpad_recent_apps_title"
         android:summary="@string/trackpad_recent_apps_summary"
         android:icon="@drawable/ic_trackpad_gesture_recent_apps"
-        android:order="30"/>
+        android:order="30"
+        settings:controller="com.android.settings.inputmethod.TrackpadRecentAppsPreferenceController"/>
 
     <SwitchPreference
         android:key="gesture_notifications"
         android:title="@string/trackpad_notifications_title"
         android:summary="@string/trackpad_notifications_summary"
         android:icon="@drawable/ic_trackpad_gesture_notifications"
-        android:order="40"/>
+        android:order="40"
+        settings:controller="com.android.settings.inputmethod.TrackpadNotificationsPreferenceController"/>
 
     <SwitchPreference
         android:key="gesture_switch_apps"
         android:title="@string/trackpad_switch_apps_title"
         android:summary="@string/trackpad_switch_apps_summary"
         android:icon="@drawable/ic_trackpad_gesture_switch_apps"
-        android:order="50"/>
+        android:order="50"
+        settings:controller="com.android.settings.inputmethod.TrackpadSwitchAppsPreferenceController"/>
 
     <com.android.settingslib.widget.ButtonPreference
         android:key="trackpad_touch_gesture_developer_mode"
         android:title="@string/trackpad_touch_gesture"
         android:icon="@drawable/ic_trackpad_touch_gestures_inverse"
+        android:order="100"
         settings:controller="com.android.settings.inputmethod.TouchGesturesButtonPreferenceController"/>
 </PreferenceScreen>
