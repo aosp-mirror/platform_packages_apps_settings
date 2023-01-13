@@ -72,7 +72,6 @@ import java.util.stream.Stream;
  * usage UI.
  */
 public final class DataProcessor {
-    private static final boolean DEBUG = false;
     private static final String TAG = "DataProcessor";
     private static final int POWER_COMPONENT_SYSTEM_SERVICES = 7;
     private static final int POWER_COMPONENT_WAKELOCK = 12;
@@ -97,6 +96,9 @@ public final class DataProcessor {
 
     @VisibleForTesting
     static long sFakeCurrentTimeMillis = 0;
+
+    @VisibleForTesting
+    static boolean sDebug = false;
 
     @VisibleForTesting
     static IUsageStatsManager sUsageStatsManager =
@@ -250,8 +252,7 @@ public final class DataProcessor {
     public static Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>>
             generateAppUsagePeriodMap(
             final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay,
-            final List<AppUsageEvent> appUsageEventList,
-            final long startTimestampOfLevelData) {
+            final List<AppUsageEvent> appUsageEventList) {
         if (appUsageEventList.isEmpty()) {
             Log.w(TAG, "appUsageEventList is empty");
             return null;
@@ -261,12 +262,8 @@ public final class DataProcessor {
         Collections.sort(appUsageEventList, TIMESTAMP_COMPARATOR);
         final Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>> resultMap =
                 new HashMap<>();
-        // Starts from the first index within expected time range. The events before the time range
-        // will be bypassed directly.
-        int currentAppUsageEventIndex =
-                getFirstUsageEventIndex(appUsageEventList, startTimestampOfLevelData);
-        final int appUsageEventSize = appUsageEventList.size();
 
+        final long dailySize = hourlyBatteryLevelsPerDay.size();
         for (int dailyIndex = 0; dailyIndex < hourlyBatteryLevelsPerDay.size(); dailyIndex++) {
             final Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>> dailyMap =
                     new HashMap<>();
@@ -275,32 +272,21 @@ public final class DataProcessor {
                 continue;
             }
             final List<Long> timestamps = hourlyBatteryLevelsPerDay.get(dailyIndex).getTimestamps();
+            final long hourlySize = timestamps.size() - 1;
             for (int hourlyIndex = 0; hourlyIndex < timestamps.size() - 1; hourlyIndex++) {
                 // The start and end timestamps of this slot should be the adjacent timestamps.
                 final long startTimestamp = timestamps.get(hourlyIndex);
-                final long endTimestamp = timestamps.get(hourlyIndex + 1);
+                // The final slot is to show the data from last even hour until now but the
+                // timestamp in hourlyBatteryLevelsPerDay is not the real value. So use current
+                // timestamp instead of reading the timestamp from hourlyBatteryLevelsPerDay here.
+                final long endTimestamp =
+                        dailyIndex == dailySize - 1 && hourlyIndex == hourlySize - 1 && !sDebug
+                                ? System.currentTimeMillis() : timestamps.get(hourlyIndex + 1);
 
                 // Gets the app usage event list for this hourly slot first.
-                final List<AppUsageEvent> hourlyAppUsageEventList = new ArrayList<>();
-                while (currentAppUsageEventIndex < appUsageEventSize) {
-                    // If current event is null, go for next directly.
-                    if (appUsageEventList.get(currentAppUsageEventIndex) == null) {
-                        currentAppUsageEventIndex++;
-                        continue;
-                    }
-                    final long timestamp =
-                            appUsageEventList.get(currentAppUsageEventIndex).getTimestamp();
-                    // If the timestamp is already later than the end time, stop the loop.
-                    if (timestamp >= endTimestamp) {
-                        break;
-                    }
-                    // If timestamp is within the time range, add it into the list.
-                    if (timestamp >= startTimestamp) {
-                        hourlyAppUsageEventList.add(
-                                appUsageEventList.get(currentAppUsageEventIndex));
-                    }
-                    currentAppUsageEventIndex++;
-                }
+                final List<AppUsageEvent> hourlyAppUsageEventList =
+                        getAppUsageEventListWithinTimeRangeWithBuffer(
+                                appUsageEventList, startTimestamp, endTimestamp);
 
                 // The value could be null when there is no data in the hourly slot.
                 dailyMap.put(
@@ -785,13 +771,11 @@ public final class DataProcessor {
             final List<AppUsageEvent> usageEvents, final long startTime, final long endTime) {
         final List<AppUsagePeriod> usagePeriodList = new ArrayList<>();
         AppUsagePeriod.Builder pendingUsagePeriod = AppUsagePeriod.newBuilder();
-        boolean hasMetStartEvent = false;
 
         for (final AppUsageEvent event : usageEvents) {
             final long eventTime = event.getTimestamp();
 
             if (event.getType() == AppUsageEventType.ACTIVITY_RESUMED) {
-                hasMetStartEvent = true;
                 // If there is an existing start time, simply ignore this start event.
                 // If there was no start time, then start a new period.
                 if (!pendingUsagePeriod.hasStartTime()) {
@@ -800,37 +784,31 @@ public final class DataProcessor {
             } else if (event.getType() == AppUsageEventType.ACTIVITY_STOPPED) {
                 pendingUsagePeriod.setEndTime(eventTime);
                 if (!pendingUsagePeriod.hasStartTime()) {
-                    // If we haven't met start event in this list, the start event might happen
-                    // in the previous time slot. use the startTime for this period.
-                    // Otherwise, add one for the default duration.
-                    if (!hasMetStartEvent) {
-                        hasMetStartEvent = true;
-                        pendingUsagePeriod.setStartTime(startTime);
-                    } else {
-                        pendingUsagePeriod.setStartTime(
-                                getStartTimeForIncompleteUsagePeriod(pendingUsagePeriod));
-                    }
+                    pendingUsagePeriod.setStartTime(
+                            getStartTimeForIncompleteUsagePeriod(pendingUsagePeriod));
                 }
                 // If we already have start time, add it directly.
-                addToPeriodList(usagePeriodList, pendingUsagePeriod.build());
+                validateAndAddToPeriodList(
+                        usagePeriodList, pendingUsagePeriod.build(), startTime, endTime);
                 pendingUsagePeriod.clear();
             } else if (event.getType() == AppUsageEventType.DEVICE_SHUTDOWN) {
-                hasMetStartEvent = true;
                 // The end event might be lost when device is shutdown. Use the estimated end
                 // time for the period.
                 if (pendingUsagePeriod.hasStartTime()) {
                     pendingUsagePeriod.setEndTime(
                             getEndTimeForIncompleteUsagePeriod(pendingUsagePeriod, eventTime));
-                    addToPeriodList(usagePeriodList, pendingUsagePeriod.build());
+                    validateAndAddToPeriodList(
+                            usagePeriodList, pendingUsagePeriod.build(), startTime, endTime);
                     pendingUsagePeriod.clear();
                 }
             }
         }
         // If there exists unclosed period, the stop event might happen in the next time
         // slot. Use the endTime for the period.
-        if (pendingUsagePeriod.hasStartTime()) {
+        if (pendingUsagePeriod.hasStartTime() && pendingUsagePeriod.getStartTime() < endTime) {
             pendingUsagePeriod.setEndTime(endTime);
-            addToPeriodList(usagePeriodList, pendingUsagePeriod.build());
+            validateAndAddToPeriodList(
+                    usagePeriodList, pendingUsagePeriod.build(), startTime, endTime);
             pendingUsagePeriod.clear();
         }
         return usagePeriodList;
@@ -881,12 +859,56 @@ public final class DataProcessor {
         }
     }
 
-    private static void addToPeriodList(
-            final List<AppUsagePeriod> appUsagePeriodList, final AppUsagePeriod appUsagePeriod) {
-        // Only when the period is valid, add it into the list.
-        if (appUsagePeriod.getStartTime() < appUsagePeriod.getEndTime()) {
-            appUsagePeriodList.add(appUsagePeriod);
+    /**
+     * Generates the list of {@link AppUsageEvent} within the specific time range.
+     * The buffer is added to make sure the app usage calculation near the boundaries is correct.
+     *
+     * Note: The appUsageEventList should have been sorted when calling this function.
+     */
+    private static List<AppUsageEvent> getAppUsageEventListWithinTimeRangeWithBuffer(
+            final List<AppUsageEvent> appUsageEventList, final long startTime, final long endTime) {
+        final long start = startTime - DatabaseUtils.USAGE_QUERY_BUFFER_HOURS;
+        final long end = endTime + DatabaseUtils.USAGE_QUERY_BUFFER_HOURS;
+        final List<AppUsageEvent> resultList = new ArrayList<>();
+        for (final AppUsageEvent event : appUsageEventList) {
+            final long eventTime = event.getTimestamp();
+            // Because the appUsageEventList has been sorted, if any event is already after the end
+            // time, all the following events should be able to drop directly.
+            if (eventTime > end) {
+                break;
+            }
+            // If the event timestamp is in [start, end], add it into the result list.
+            if (eventTime >= start) {
+                resultList.add(event);
+            }
         }
+        return resultList;
+    }
+
+    private static void validateAndAddToPeriodList(
+            final List<AppUsagePeriod> appUsagePeriodList,
+            final AppUsagePeriod appUsagePeriod,
+            final long startTime,
+            final long endTime) {
+        final long periodStartTime =
+                trimPeriodTime(appUsagePeriod.getStartTime(), startTime, endTime);
+        final long periodEndTime = trimPeriodTime(appUsagePeriod.getEndTime(), startTime, endTime);
+        // Only when the period is valid, add it into the list.
+        if (periodStartTime < periodEndTime) {
+            final AppUsagePeriod period =
+                    AppUsagePeriod.newBuilder()
+                            .setStartTime(periodStartTime)
+                            .setEndTime(periodEndTime)
+                            .build();
+            appUsagePeriodList.add(period);
+        }
+    }
+
+    private static long trimPeriodTime(
+            final long originalTime, final long startTime, final long endTime) {
+        long finalTime = Math.max(originalTime, startTime);
+        finalTime = Math.min(finalTime, endTime);
+        return finalTime;
     }
 
     private static void addToUsagePeriodMap(
@@ -916,19 +938,6 @@ public final class DataProcessor {
         return Math.min(
                 usagePeriod.getStartTime() + DEFAULT_USAGE_DURATION_FOR_INCOMPLETE_INTERVAL,
                 eventTime);
-    }
-
-    private static int getFirstUsageEventIndex(
-            final List<AppUsageEvent> appUsageEventList,
-            final long startTimestampOfLevelData) {
-        int currentIndex = 0;
-        while (currentIndex < appUsageEventList.size()
-                && (appUsageEventList.get(currentIndex) == null
-                || appUsageEventList.get(currentIndex).getTimestamp()
-                < startTimestampOfLevelData)) {
-            currentIndex++;
-        }
-        return currentIndex;
     }
 
     private static void insertHourlyDeviceScreenOnTime(
@@ -1520,7 +1529,7 @@ public final class DataProcessor {
                     foregroundUsageTimeInMs + backgroundUsageTimeInMs;
             if (totalUsageTimeInMs > TOTAL_HOURLY_TIME_THRESHOLD) {
                 final float ratio = TOTAL_HOURLY_TIME_THRESHOLD / totalUsageTimeInMs;
-                if (DEBUG) {
+                if (sDebug) {
                     Log.w(TAG, String.format("abnormal usage time %d|%d for:\n%s",
                             Duration.ofMillis(foregroundUsageTimeInMs).getSeconds(),
                             Duration.ofMillis(backgroundUsageTimeInMs).getSeconds(),
@@ -1876,7 +1885,7 @@ public final class DataProcessor {
 
     private static void log(Context context, final String content, final long timestamp,
             final BatteryHistEntry entry) {
-        if (DEBUG) {
+        if (sDebug) {
             Log.d(TAG, String.format(entry != null ? "%s %s:\n%s" : "%s %s:%s",
                     utcToLocalTime(context, timestamp), content, entry));
         }

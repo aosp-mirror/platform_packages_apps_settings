@@ -178,22 +178,22 @@ public final class DataProcessorTest {
 
     @Test
     public void generateAppUsagePeriodMap_returnExpectedResult() {
+        DataProcessor.sDebug = true;
         final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
                 new ArrayList<>();
         final String packageName = "com.android.settings";
         // Adds the day 1 data.
-        final List<Long> timestamps1 = List.of(10000L, 20000L, 30000L);
+        final List<Long> timestamps1 = List.of(14400000L, 18000000L, 21600000L);
         final List<Integer> levels1 = List.of(100, 100, 100);
         hourlyBatteryLevelsPerDay.add(
                 new BatteryLevelData.PeriodBatteryLevelData(timestamps1, levels1));
         // Adds the day 2 data.
         hourlyBatteryLevelsPerDay.add(null);
         // Adds the day 3 data.
-        final List<Long> timestamps2 = List.of(40000L, 50000L);
+        final List<Long> timestamps2 = List.of(45200000L, 48800000L);
         final List<Integer> levels2 = List.of(100, 100);
         hourlyBatteryLevelsPerDay.add(
                 new BatteryLevelData.PeriodBatteryLevelData(timestamps2, levels2));
-        final long startTimestampOfLevelData = 10000L;
         final List<AppUsageEvent> appUsageEventList = new ArrayList<>();
         // Adds some events before the start timestamp.
         appUsageEventList.add(buildAppUsageEvent(
@@ -204,39 +204,48 @@ public final class DataProcessorTest {
                 /*instanceId=*/ 2, packageName));
         // Adds the valid app usage events.
         appUsageEventList.add(buildAppUsageEvent(
-                AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 10000L, /*userId=*/ 1,
+                AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 4200000L, /*userId=*/ 1,
                 /*instanceId=*/ 2, packageName));
         appUsageEventList.add(buildAppUsageEvent(
-                AppUsageEventType.ACTIVITY_STOPPED, /*timestamp=*/ 15000L, /*userId=*/ 1,
+                AppUsageEventType.ACTIVITY_STOPPED, /*timestamp=*/ 4500000L, /*userId=*/ 1,
                 /*instanceId=*/ 2, packageName));
         appUsageEventList.add(buildAppUsageEvent(
-                AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 12000L, /*userId=*/ 2,
+                AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 12600000L, /*userId=*/ 2,
                 /*instanceId=*/ 3, packageName));
         appUsageEventList.add(buildAppUsageEvent(
-                AppUsageEventType.ACTIVITY_STOPPED, /*timestamp=*/ 18000L, /*userId=*/ 2,
+                AppUsageEventType.ACTIVITY_STOPPED, /*timestamp=*/ 15600000L, /*userId=*/ 2,
                 /*instanceId=*/ 3, packageName));
         appUsageEventList.add(buildAppUsageEvent(
-                AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 35000L, /*userId=*/ 1,
+                AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 16200000L, /*userId=*/ 2,
+                /*instanceId=*/ 3, packageName));
+        appUsageEventList.add(buildAppUsageEvent(
+                AppUsageEventType.ACTIVITY_STOPPED, /*timestamp=*/ 18000000L, /*userId=*/ 2,
+                /*instanceId=*/ 3, packageName));
+        appUsageEventList.add(buildAppUsageEvent(
+                AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 17200000L, /*userId=*/ 1,
                 /*instanceId=*/ 2, packageName));
         appUsageEventList.add(buildAppUsageEvent(
-                AppUsageEventType.ACTIVITY_STOPPED, /*timestamp=*/ 45000L, /*userId=*/ 1,
+                AppUsageEventType.ACTIVITY_STOPPED, /*timestamp=*/ 17800000L, /*userId=*/ 1,
                 /*instanceId=*/ 2, packageName));
         appUsageEventList.add(buildAppUsageEvent(
-                AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 42000L, /*userId=*/ 1,
+                AppUsageEventType.ACTIVITY_STOPPED, /*timestamp=*/ 46000000L, /*userId=*/ 1,
+                /*instanceId=*/ 2, packageName));
+        appUsageEventList.add(buildAppUsageEvent(
+                AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 47800000L, /*userId=*/ 1,
+                /*instanceId=*/ 2, packageName));
+        appUsageEventList.add(buildAppUsageEvent(
+                AppUsageEventType.ACTIVITY_STOPPED, /*timestamp=*/ 49000000L, /*userId=*/ 1,
+                /*instanceId=*/ 2, packageName));
+        appUsageEventList.add(buildAppUsageEvent(
+                AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 59600000L, /*userId=*/ 1,
                 /*instanceId=*/ 4, packageName));
         appUsageEventList.add(buildAppUsageEvent(
-                AppUsageEventType.ACTIVITY_STOPPED, /*timestamp=*/ 52000L, /*userId=*/ 1,
-                /*instanceId=*/ 4, packageName));
-        appUsageEventList.add(buildAppUsageEvent(
-                AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 55000L, /*userId=*/ 1,
-                /*instanceId=*/ 4, packageName));
-        appUsageEventList.add(buildAppUsageEvent(
-                AppUsageEventType.ACTIVITY_STOPPED, /*timestamp=*/ 58000L, /*userId=*/ 1,
+                AppUsageEventType.ACTIVITY_STOPPED, /*timestamp=*/ 61200000L, /*userId=*/ 1,
                 /*instanceId=*/ 4, packageName));
 
         final Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>> periodMap =
                 DataProcessor.generateAppUsagePeriodMap(
-                        hourlyBatteryLevelsPerDay, appUsageEventList, startTimestampOfLevelData);
+                        hourlyBatteryLevelsPerDay, appUsageEventList);
 
         assertThat(periodMap.size()).isEqualTo(3);
         // Day 1
@@ -246,11 +255,12 @@ public final class DataProcessorTest {
         Map<String, List<AppUsagePeriod>> userMap = hourlyMap.get(1L);
         assertThat(userMap.size()).isEqualTo(1);
         assertThat(userMap.get(packageName).size()).isEqualTo(1);
-        assertAppUsagePeriod(userMap.get(packageName).get(0), 10000, 15000);
+        assertAppUsagePeriod(userMap.get(packageName).get(0), 17200000L, 17800000L);
         userMap = hourlyMap.get(2L);
         assertThat(userMap.size()).isEqualTo(1);
-        assertThat(userMap.get(packageName).size()).isEqualTo(1);
-        assertAppUsagePeriod(userMap.get(packageName).get(0), 12000, 18000);
+        assertThat(userMap.get(packageName).size()).isEqualTo(2);
+        assertAppUsagePeriod(userMap.get(packageName).get(0), 14400000L, 15600000L);
+        assertAppUsagePeriod(userMap.get(packageName).get(1), 16200000L, 18000000L);
         hourlyMap = periodMap.get(0).get(1);
         assertThat(hourlyMap).isNull();
         // Day 2
@@ -262,8 +272,8 @@ public final class DataProcessorTest {
         userMap = hourlyMap.get(1L);
         assertThat(userMap.size()).isEqualTo(1);
         assertThat(userMap.get(packageName).size()).isEqualTo(2);
-        assertAppUsagePeriod(userMap.get(packageName).get(0), 40000, 45000);
-        assertAppUsagePeriod(userMap.get(packageName).get(1), 42000, 50000);
+        assertAppUsagePeriod(userMap.get(packageName).get(0), 45970000L, 46000000L);
+        assertAppUsagePeriod(userMap.get(packageName).get(1), 47800000L, 48800000L);
     }
 
     @Test
@@ -273,7 +283,7 @@ public final class DataProcessorTest {
         hourlyBatteryLevelsPerDay.add(
                 new BatteryLevelData.PeriodBatteryLevelData(new ArrayList<>(), new ArrayList<>()));
         assertThat(DataProcessor.generateAppUsagePeriodMap(
-                hourlyBatteryLevelsPerDay, new ArrayList<>(), 0)).isNull();
+                hourlyBatteryLevelsPerDay, new ArrayList<>())).isNull();
     }
 
     @Test
@@ -1508,9 +1518,19 @@ public final class DataProcessorTest {
     @Test
     public void buildAppUsagePeriodListPerInstance_returnExpectedResult() {
         final List<AppUsageEvent> appUsageEvents = new ArrayList<>();
+        // Fake data earlier than time range.
+        appUsageEvents.add(buildAppUsageEvent(
+                AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 1));
+        appUsageEvents.add(buildAppUsageEvent(
+                AppUsageEventType.ACTIVITY_STOPPED, /*timestamp=*/ 2));
+        // Fake resume event earlier than time range.
+        appUsageEvents.add(buildAppUsageEvent(
+                AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 3));
+        appUsageEvents.add(buildAppUsageEvent(
+                AppUsageEventType.ACTIVITY_STOPPED, /*timestamp=*/ 120000));
         // Fake normal data.
         appUsageEvents.add(buildAppUsageEvent(
-                AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 100000));
+                AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 150000));
         appUsageEvents.add(buildAppUsageEvent(
                 AppUsageEventType.ACTIVITY_STOPPED, /*timestamp=*/ 200000));
         // Fake two adjacent resume events.
@@ -1540,29 +1560,16 @@ public final class DataProcessorTest {
                 AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 1000000));
 
         final List<AppUsagePeriod> appUsagePeriodList =
-                DataProcessor.buildAppUsagePeriodListPerInstance(appUsageEvents, 0, 1100000);
+                DataProcessor.buildAppUsagePeriodListPerInstance(appUsageEvents, 100000, 1100000);
 
-        assertThat(appUsagePeriodList.size()).isEqualTo(6);
-        assertAppUsagePeriod(appUsagePeriodList.get(0), 100000, 200000);
-        assertAppUsagePeriod(appUsagePeriodList.get(1), 300000, 500000);
-        assertAppUsagePeriod(appUsagePeriodList.get(2), 570000, 600000);
-        assertAppUsagePeriod(appUsagePeriodList.get(3), 700000, 730000);
-        assertAppUsagePeriod(appUsagePeriodList.get(4), 900000, 910000);
-        assertAppUsagePeriod(appUsagePeriodList.get(5), 1000000, 1100000);
-    }
-
-    @Test
-    public void buildAppUsagePeriodListPerInstance_notMetStart_returnExpectedResult() {
-        final List<AppUsageEvent> appUsageEvents = new ArrayList<>();
-        // Start with stop event.
-        appUsageEvents.add(buildAppUsageEvent(
-                AppUsageEventType.ACTIVITY_STOPPED, /*timestamp=*/ 100000));
-
-        final List<AppUsagePeriod> appUsagePeriodList =
-                DataProcessor.buildAppUsagePeriodListPerInstance(appUsageEvents, 0, 200000);
-
-        assertThat(appUsageEvents.size()).isEqualTo(1);
-        assertAppUsagePeriod(appUsagePeriodList.get(0), 0, 100000);
+        assertThat(appUsagePeriodList.size()).isEqualTo(7);
+        assertAppUsagePeriod(appUsagePeriodList.get(0), 100000, 120000);
+        assertAppUsagePeriod(appUsagePeriodList.get(1), 150000, 200000);
+        assertAppUsagePeriod(appUsagePeriodList.get(2), 300000, 500000);
+        assertAppUsagePeriod(appUsagePeriodList.get(3), 570000, 600000);
+        assertAppUsagePeriod(appUsagePeriodList.get(4), 700000, 730000);
+        assertAppUsagePeriod(appUsagePeriodList.get(5), 900000, 910000);
+        assertAppUsagePeriod(appUsagePeriodList.get(6), 1000000, 1100000);
     }
 
     @Test
