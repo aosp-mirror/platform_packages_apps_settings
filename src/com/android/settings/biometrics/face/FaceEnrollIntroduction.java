@@ -18,9 +18,12 @@ package com.android.settings.biometrics.face;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.FACE_UNLOCK_DISABLED;
 
+import static com.android.settings.biometrics.BiometricUtils.GatekeeperCredentialNotMatchException;
+
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.hardware.SensorPrivacyManager;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.FaceManager;
@@ -36,6 +39,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -43,11 +47,12 @@ import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.MultiBiometricEnrollHelper;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupSkipDialog;
 import com.android.settings.utils.SensorPrivacyManagerHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.systemui.unfold.compat.ScreenSizeFoldProvider;
+import com.android.systemui.unfold.updates.FoldProvider;
 
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -61,7 +66,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     private static final String TAG = "FaceEnrollIntroduction";
 
     private FaceManager mFaceManager;
-    private FaceFeatureProvider mFaceFeatureProvider;
     @Nullable private FooterButton mPrimaryFooterButton;
     @Nullable private FooterButton mSecondaryFooterButton;
     @Nullable private SensorPrivacyManager mSensorPrivacyManager;
@@ -96,6 +100,12 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                 "finished")) {
             super.onFinishedEnrolling(data);
         }
+    }
+
+    @Override
+    protected boolean shouldFinishWhenBackgrounded() {
+        return super.shouldFinishWhenBackgrounded() && !BiometricUtils.isPostureGuidanceShowing(
+                mDevicePostureState, mLaunchedPostureGuidance);
     }
 
     @Override
@@ -142,9 +152,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             infoMessageRequireEyes.setText(getInfoMessageRequireEyes());
         }
 
-        mFaceManager = Utils.getFaceManagerOrNull(this);
-        mFaceFeatureProvider = FeatureFactory.getFactory(getApplicationContext())
-                .getFaceFeatureProvider();
+        mFaceManager = getFaceManager();
 
         // This path is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
@@ -154,11 +162,22 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                 // We either block on generateChallenge, or need to gray out the "next" button until
                 // the challenge is ready. Let's just do this for now.
                 mFaceManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
-                    mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId,
-                            challenge);
-                    mSensorId = sensorId;
-                    mChallenge = challenge;
-                    mFooterBarMixin.getPrimaryButton().setEnabled(true);
+                    if (isFinishing()) {
+                        // Do nothing if activity is finishing
+                        Log.w(TAG, "activity finished before challenge callback launched.");
+                        return;
+                    }
+
+                    try {
+                        mToken = requestGatekeeperHat(challenge);
+                        mSensorId = sensorId;
+                        mChallenge = challenge;
+                        mFooterBarMixin.getPrimaryButton().setEnabled(true);
+                    } catch (GatekeeperCredentialNotMatchException e) {
+                        // Let BiometricEnrollBase#onCreate() to trigger confirmLock()
+                        getIntent().removeExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE);
+                        recreate();
+                    }
                 });
             }
         }
@@ -172,8 +191,82 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         Log.v(TAG, "cameraPrivacyEnabled : " + cameraPrivacyEnabled);
     }
 
+    @VisibleForTesting
+    @Nullable
+    protected FaceManager getFaceManager() {
+        return Utils.getFaceManagerOrNull(this);
+    }
+
+    @VisibleForTesting
+    @Nullable
+    protected Intent getPostureGuidanceIntent() {
+        return mPostureGuidanceIntent;
+    }
+
+    @VisibleForTesting
+    @Nullable
+    protected FoldProvider.FoldCallback getPostureCallback() {
+        return mFoldCallback;
+    }
+
+    @VisibleForTesting
+    @BiometricUtils.DevicePostureInt
+    protected int getDevicePostureState() {
+        return mDevicePostureState;
+    }
+
+    @VisibleForTesting
+    @Nullable
+    protected byte[] requestGatekeeperHat(long challenge) {
+        return BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (mScreenSizeFoldProvider != null && getPostureCallback() != null) {
+            mScreenSizeFoldProvider.onConfigurationChange(newConfig);
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (getPostureGuidanceIntent() == null) {
+            Log.d(TAG, "Device do not support posture guidance");
+            return;
+        }
+
+        BiometricUtils.setDevicePosturesAllowEnroll(
+                getResources().getInteger(R.integer.config_face_enroll_supported_posture));
+
+        if (getPostureCallback() == null) {
+            mFoldCallback = isFolded -> {
+                mDevicePostureState = isFolded ? BiometricUtils.DEVICE_POSTURE_CLOSED
+                        : BiometricUtils.DEVICE_POSTURE_OPENED;
+                if (BiometricUtils.shouldShowPostureGuidance(mDevicePostureState,
+                        mLaunchedPostureGuidance) && !mNextLaunched) {
+                    launchPostureGuidance();
+                }
+            };
+        }
+
+        if (mScreenSizeFoldProvider == null) {
+            mScreenSizeFoldProvider = new ScreenSizeFoldProvider(getApplicationContext());
+            mScreenSizeFoldProvider.registerCallback(mFoldCallback, getMainExecutor());
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_POSTURE_GUIDANCE) {
+            mLaunchedPostureGuidance = false;
+            if (resultCode == RESULT_CANCELED || resultCode == RESULT_SKIP) {
+                onSkipButtonClick(getCurrentFocus());
+            }
+            return;
+        }
+
         // If user has skipped or finished enrolling, don't restart enrollment.
         final boolean isEnrollRequest = requestCode == BIOMETRIC_FIND_SENSOR_REQUEST
                 || requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST;
@@ -184,10 +277,12 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             hasEnrolledFace = data.getBooleanExtra(EXTRA_FINISHED_ENROLL_FACE, false);
         }
 
-        if (resultCode == RESULT_CANCELED && hasEnrolledFace) {
-            setResult(resultCode, data);
-            finish();
-            return;
+        if (resultCode == RESULT_CANCELED) {
+            if (hasEnrolledFace || !BiometricUtils.isPostureAllowEnrollment(mDevicePostureState)) {
+                setResult(resultCode, data);
+                finish();
+                return;
+            }
         }
 
         if (isEnrollRequest && isResultSkipOrFinished || hasEnrolledFace) {

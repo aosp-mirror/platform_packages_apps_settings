@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
+import android.os.Binder;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -33,7 +34,6 @@ import androidx.lifecycle.OnLifecycleEvent;
 
 import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.Set;
@@ -85,8 +85,9 @@ public class RingVolumePreferenceController extends
         super.onResume();
         mReceiver.register(true);
         readSeparateNotificationVolumeConfig();
-        DeviceConfig.addOnPropertiesChangedListener(DeviceConfig.NAMESPACE_SYSTEMUI,
-                ActivityThread.currentApplication().getMainExecutor(), this::onDeviceConfigChange);
+        Binder.withCleanCallingIdentity(()
+                -> DeviceConfig.addOnPropertiesChangedListener(DeviceConfig.NAMESPACE_SYSTEMUI,
+                ActivityThread.currentApplication().getMainExecutor(), this::onDeviceConfigChange));
         updateEffectsSuppressor();
         selectPreferenceIconState();
 
@@ -100,7 +101,8 @@ public class RingVolumePreferenceController extends
     public void onPause() {
         super.onPause();
         mReceiver.register(false);
-        DeviceConfig.removeOnPropertiesChangedListener(this::onDeviceConfigChange);
+        Binder.withCleanCallingIdentity(() ->
+                DeviceConfig.removeOnPropertiesChangedListener(this::onDeviceConfigChange));
     }
 
     @Override
@@ -111,8 +113,7 @@ public class RingVolumePreferenceController extends
     @Override
     public int getAvailabilityStatus() {
         boolean separateNotification = isSeparateNotificationConfigEnabled();
-
-        return !separateNotification && Utils.isVoiceCapable(mContext) && !mHelper.isSingleVolume()
+        return !separateNotification && !mHelper.isSingleVolume()
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
@@ -124,7 +125,6 @@ public class RingVolumePreferenceController extends
     @Override
     protected boolean hintsMatch(int hints) {
         boolean notificationSeparated = isSeparateNotificationConfigEnabled();
-
         return (hints & NotificationListenerService.HINT_HOST_DISABLE_CALL_EFFECTS) != 0
                 || (hints & NotificationListenerService.HINT_HOST_DISABLE_EFFECTS) != 0
                 || ((hints & NotificationListenerService.HINT_HOST_DISABLE_NOTIFICATION_EFFECTS)

@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
+import android.os.Binder;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -34,7 +35,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.Set;
@@ -109,9 +109,9 @@ public class NotificationVolumePreferenceController extends
     public void onResume() {
         super.onResume();
         mReceiver.register(true);
-        DeviceConfig.addOnPropertiesChangedListener(DeviceConfig.NAMESPACE_SYSTEMUI,
-                ActivityThread.currentApplication().getMainExecutor(),
-                this::onDeviceConfigChange);
+        Binder.withCleanCallingIdentity(()
+                -> DeviceConfig.addOnPropertiesChangedListener(DeviceConfig.NAMESPACE_SYSTEMUI,
+                ActivityThread.currentApplication().getMainExecutor(), this::onDeviceConfigChange));
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
@@ -119,7 +119,8 @@ public class NotificationVolumePreferenceController extends
     public void onPause() {
         super.onPause();
         mReceiver.register(false);
-        DeviceConfig.removeOnPropertiesChangedListener(this::onDeviceConfigChange);
+        Binder.withCleanCallingIdentity(() ->
+                DeviceConfig.removeOnPropertiesChangedListener(this::onDeviceConfigChange));
     }
 
     @Override
@@ -127,8 +128,7 @@ public class NotificationVolumePreferenceController extends
         boolean separateNotification = isSeparateNotificationConfigEnabled();
 
         return mContext.getResources().getBoolean(R.bool.config_show_notification_volume)
-                && !mHelper.isSingleVolume()
-                && (separateNotification || !Utils.isVoiceCapable(mContext))
+                && !mHelper.isSingleVolume() && separateNotification
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
