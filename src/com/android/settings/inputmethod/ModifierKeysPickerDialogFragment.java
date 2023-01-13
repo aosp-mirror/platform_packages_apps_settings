@@ -21,10 +21,12 @@ import static android.view.WindowManager.LayoutParams.TYPE_SYSTEM_DIALOG;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,31 +45,48 @@ import com.android.settings.R;
 import com.android.settingslib.Utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ModifierKeysPickerDialogFragment extends DialogFragment {
 
     private Preference mPreference;
     private String mKeyDefaultName;
     private Context mContext;
+    private InputManager mIm;
+
+    private List<int[]> mRemappableKeyList =
+            new ArrayList<>(Arrays.asList(
+                    new int[]{KeyEvent.KEYCODE_CAPS_LOCK},
+                    new int[]{KeyEvent.KEYCODE_CTRL_LEFT, KeyEvent.KEYCODE_CTRL_RIGHT},
+                    new int[]{KeyEvent.KEYCODE_META_LEFT, KeyEvent.KEYCODE_META_RIGHT},
+                    new int[]{KeyEvent.KEYCODE_ALT_LEFT, KeyEvent.KEYCODE_ALT_RIGHT}));
+
+    private Map<String, int[]> mRemappableKeyMap = new HashMap<>();
 
     public ModifierKeysPickerDialogFragment() {
     }
 
-    public ModifierKeysPickerDialogFragment(Preference preference) {
+    public ModifierKeysPickerDialogFragment(Preference preference, InputManager inputManager) {
         mPreference = preference;
         mKeyDefaultName = preference.getTitle().toString();
+        mIm = inputManager;
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
         mContext = getActivity();
-        String[] modifierKeys = new String[] {
+        List<String> modifierKeys = new ArrayList<String>(Arrays.asList(
                 mContext.getString(R.string.modifier_keys_caps_lock),
                 mContext.getString(R.string.modifier_keys_ctrl),
                 mContext.getString(R.string.modifier_keys_meta),
-                mContext.getString(R.string.modifier_keys_alt)};
+                mContext.getString(R.string.modifier_keys_alt)));
+        for (int i = 0; i < modifierKeys.size(); i++) {
+            mRemappableKeyMap.put(modifierKeys.get(i), mRemappableKeyList.get(i));
+        }
 
         View dialoglayout  =
                 LayoutInflater.from(mContext).inflate(R.layout.modifier_key_picker_dialog, null);
@@ -79,11 +98,7 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
                 R.string.modifier_keys_picker_summary, mKeyDefaultName);
         summary.setText(summaryText);
 
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < modifierKeys.length; i++) {
-            list.add(modifierKeys[i]);
-        }
-        ModifierKeyAdapter adapter = new ModifierKeyAdapter(list);
+        ModifierKeyAdapter adapter = new ModifierKeyAdapter(modifierKeys);
         ListView listView = dialoglayout.findViewById(R.id.modifier_key_picker);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -98,7 +113,7 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
         AlertDialog modifierKeyDialog = dialogBuilder.create();
         Button doneButton = dialoglayout.findViewById(R.id.modifier_key_done_button);
         doneButton.setOnClickListener(v -> {
-            String selectedItem = list.get(adapter.getCurrentItem());
+            String selectedItem = modifierKeys.get(adapter.getCurrentItem());
             Spannable itemSummary;
             if (selectedItem.equals(mKeyDefaultName)) {
                 itemSummary = new SpannableString(
@@ -106,12 +121,34 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
                 itemSummary.setSpan(
                         new ForegroundColorSpan(getColorOfTextColorSecondary()),
                         0, itemSummary.length(), 0);
-                // TODO(b/252812993): remapModifierKey
+                // Set keys to default.
+                int[] keys = mRemappableKeyMap.get(mKeyDefaultName);
+                for (int i = 0; i < keys.length; i++) {
+                    mIm.remapModifierKey(keys[i], keys[i]);
+                }
             } else {
                 itemSummary = new SpannableString(selectedItem);
                 itemSummary.setSpan(
                         new ForegroundColorSpan(getColorOfColorAccentPrimaryVariant()),
                         0, itemSummary.length(), 0);
+                int[] fromKeys = mRemappableKeyMap.get(mKeyDefaultName);
+                int[] toKeys = mRemappableKeyMap.get(selectedItem);
+                // CAPS_LOCK only one key, so always choose the left key for remapping.
+                if (isKeyCapsLock(mContext, mKeyDefaultName)) {
+                    mIm.remapModifierKey(fromKeys[0], toKeys[0]);
+                }
+                // Remap KEY_LEFT and KEY_RIGHT to CAPS_LOCK.
+                if (!isKeyCapsLock(mContext, mKeyDefaultName)
+                        && isKeyCapsLock(mContext, selectedItem)) {
+                    mIm.remapModifierKey(fromKeys[0], toKeys[0]);
+                    mIm.remapModifierKey(fromKeys[1], toKeys[0]);
+                }
+                // Auto handle left and right keys remapping.
+                if (!isKeyCapsLock(mContext, mKeyDefaultName)
+                        && !isKeyCapsLock(mContext, selectedItem)) {
+                    mIm.remapModifierKey(fromKeys[0], toKeys[0]);
+                    mIm.remapModifierKey(fromKeys[1], toKeys[1]);
+                }
             }
             mPreference.setSummary(itemSummary);
             modifierKeyDialog.dismiss();
@@ -126,6 +163,10 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
         window.setType(TYPE_SYSTEM_DIALOG);
 
         return modifierKeyDialog;
+    }
+
+    private static boolean isKeyCapsLock(Context context, String key) {
+        return key.equals(context.getString(R.string.modifier_keys_caps_lock));
     }
 
     class ModifierKeyAdapter extends BaseAdapter {

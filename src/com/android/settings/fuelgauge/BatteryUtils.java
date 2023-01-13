@@ -34,6 +34,7 @@ import android.os.SystemClock;
 import android.os.UidBatteryConsumer;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.text.format.DateUtils;
 import android.util.Base64;
 import android.util.Log;
 
@@ -43,6 +44,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
 
 import com.android.internal.util.ArrayUtils;
+import com.android.settings.R;
 import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AnomalyInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
@@ -53,6 +55,7 @@ import com.android.settingslib.fuelgauge.Estimate;
 import com.android.settingslib.fuelgauge.EstimateKt;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 import com.android.settingslib.utils.PowerUtil;
+import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.protobuf.InvalidProtocolBufferException;
@@ -615,5 +618,46 @@ public class BatteryUtils {
             }
         }
         return DockDefenderMode.DISABLED;
+    }
+
+    /** Builds the battery usage time summary. */
+    public static String buildBatteryUsageTimeSummary(final Context context, final boolean isSystem,
+            final long foregroundUsageTimeInMs, final long backgroundUsageTimeInMs,
+            final long screenOnTimeInMs) {
+        StringBuilder summary = new StringBuilder();
+        if (isSystem) {
+            final long totalUsageTimeInMs = foregroundUsageTimeInMs + backgroundUsageTimeInMs;
+            if (totalUsageTimeInMs != 0) {
+                summary.append(buildBatteryUsageTimeInfo(context, totalUsageTimeInMs,
+                        R.string.battery_usage_total_less_than_one_minute,
+                        R.string.battery_usage_for_total_time));
+            }
+        } else {
+            if (screenOnTimeInMs != 0) {
+                summary.append(buildBatteryUsageTimeInfo(context, screenOnTimeInMs,
+                        R.string.battery_usage_screen_time_less_than_one_minute,
+                        R.string.battery_usage_screen_time));
+            }
+            if (screenOnTimeInMs != 0 && backgroundUsageTimeInMs != 0) {
+                summary.append('\n');
+            }
+            if (backgroundUsageTimeInMs != 0) {
+                summary.append(buildBatteryUsageTimeInfo(context, backgroundUsageTimeInMs,
+                        R.string.battery_usage_background_less_than_one_minute,
+                        R.string.battery_usage_for_background_time));
+            }
+        }
+        return summary.toString();
+    }
+
+    /** Builds the battery usage time information for one timestamp. */
+    private static String buildBatteryUsageTimeInfo(final Context context, long timeInMs,
+            final int lessThanOneMinuteResId, final int normalResId) {
+        if (timeInMs < DateUtils.MINUTE_IN_MILLIS) {
+            return context.getString(lessThanOneMinuteResId);
+        }
+        final CharSequence timeSequence = StringUtil.formatElapsedTime(
+                context, (double) timeInMs, /*withSeconds=*/ false, /*collapseTimeUnit=*/ false);
+        return context.getString(normalResId, timeSequence);
     }
 }

@@ -66,6 +66,9 @@ public class SpinnerPreference extends Preference {
 
     @Override
     protected Parcelable onSaveInstanceState() {
+        if (mSpinner == null) {
+            return super.onSaveInstanceState();
+        }
         Log.d(TAG, "onSaveInstanceState() spinnerPosition=" + mSpinner.getSelectedItemPosition());
         return new SavedState(super.onSaveInstanceState(), mSpinner.getSelectedItemPosition());
     }

@@ -20,10 +20,10 @@ import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHE
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_SKIP;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_TIMEOUT;
 import static com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollIntroduction.EXTRA_FINGERPRINT_ENROLLED_COUNT;
-import static com.android.settings.biometrics2.data.repository.FingerprintRepositoryTest.setupFingerprintEnrolledFingerprints;
 import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollmentViewModel.SAVED_STATE_IS_WAITING_ACTIVITY_RESULT;
-import static com.android.settings.biometrics2.util.EnrollmentRequestUtil.newAllFalseRequest;
-import static com.android.settings.biometrics2.util.EnrollmentRequestUtil.newIsSuwRequest;
+import static com.android.settings.biometrics2.utils.EnrollmentRequestUtils.newAllFalseRequest;
+import static com.android.settings.biometrics2.utils.EnrollmentRequestUtils.newIsSuwRequest;
+import static com.android.settings.biometrics2.utils.FingerprintRepositoryUtils.setupFingerprintEnrolledFingerprints;
 
 import static com.google.common.truth.Truth.assertThat;
 

@@ -140,8 +140,8 @@ public class AppBatteryPreferenceController extends BasePreferenceController
                     + " | uid : "
                     + entry.getUid()
                     + " with BatteryEntry data");
-            AdvancedPowerUsageDetail.startBatteryDetailPage(mParent.getActivity(), mParent, entry,
-                    Utils.formatPercentage(0), /*isValidToShowSummary=*/ false);
+            AdvancedPowerUsageDetail.startBatteryDetailPage(
+                    mParent.getActivity(), mParent, entry, Utils.formatPercentage(0));
         } else {
             Log.i(TAG, "Launch : " + mPackageName + " with package name");
             AdvancedPowerUsageDetail.startBatteryDetailPage(mParent.getActivity(), mParent,

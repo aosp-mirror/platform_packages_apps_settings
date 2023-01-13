@@ -72,6 +72,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public double getBatteryUsageListConsumePowerThreshold() {
+        return 0.0;
+    }
+
+    @Override
     public List<String> getSystemAppsAllowlist() {
         return null;
     }

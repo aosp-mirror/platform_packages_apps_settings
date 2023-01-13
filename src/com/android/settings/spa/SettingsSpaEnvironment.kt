@@ -20,6 +20,7 @@ import android.content.Context
 import com.android.settings.spa.app.AllAppListPageProvider
 import com.android.settings.spa.app.AppsMainPageProvider
 import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
+import com.android.settings.spa.app.appinfo.CloneAppInfoSettingsProvider
 import com.android.settings.spa.app.backgroundinstall.BackgroundInstalledAppsPageProvider
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
 import com.android.settings.spa.app.specialaccess.AllFilesAccessAppListProvider
@@ -72,6 +73,7 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
                 AppLanguagesPageProvider,
                 UsageStatsPageProvider,
                 BackgroundInstalledAppsPageProvider,
+                CloneAppInfoSettingsProvider,
             ) + togglePermissionAppListTemplate.createPageProviders(),
             rootPages = listOf(
                 SettingsPage.create(HomePageProvider.name),

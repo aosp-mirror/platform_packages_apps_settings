@@ -48,7 +48,7 @@ public class BatteryDiffData {
         if (!isAccumulated) {
             final PowerUsageFeatureProvider featureProvider =
                     FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context);
-            purgeFakeAndHiddenPackages(featureProvider);
+            purgeBatteryDiffData(featureProvider);
             combineBatteryDiffEntry(context, featureProvider);
         }
 
@@ -65,9 +65,9 @@ public class BatteryDiffData {
     }
 
     /** Removes fake usage data and hidden packages. */
-    private void purgeFakeAndHiddenPackages(final PowerUsageFeatureProvider featureProvider) {
-        purgeFakeAndHiddenPackages(featureProvider, mAppEntries);
-        purgeFakeAndHiddenPackages(featureProvider, mSystemEntries);
+    private void purgeBatteryDiffData(final PowerUsageFeatureProvider featureProvider) {
+        purgeBatteryDiffData(featureProvider, mAppEntries);
+        purgeBatteryDiffData(featureProvider, mSystemEntries);
     }
 
     /** Combines into SystemAppsBatteryDiffEntry and OthersBatteryDiffEntry. */
@@ -89,9 +89,11 @@ public class BatteryDiffData {
         Collections.sort(mSystemEntries, BatteryDiffEntry.COMPARATOR);
     }
 
-    private static void purgeFakeAndHiddenPackages(
+    private static void purgeBatteryDiffData(
             final PowerUsageFeatureProvider featureProvider,
             final List<BatteryDiffEntry> entries) {
+        final double consumePowerThreshold =
+                featureProvider.getBatteryUsageListConsumePowerThreshold();
         final Set<Integer> hideSystemComponentSet = featureProvider.getHideSystemComponentSet();
         final Set<String> hideBackgroundUsageTimeSet =
                 featureProvider.getHideBackgroundUsageTimeSet();
@@ -99,9 +101,11 @@ public class BatteryDiffData {
         final Iterator<BatteryDiffEntry> iterator = entries.iterator();
         while (iterator.hasNext()) {
             final BatteryDiffEntry entry = iterator.next();
+            final double comsumePower = entry.mConsumePower;
             final String packageName = entry.getPackageName();
             final Integer componentId = entry.mBatteryHistEntry.mDrainType;
-            if (ConvertUtils.FAKE_PACKAGE_NAME.equals(packageName)
+            if (comsumePower < consumePowerThreshold
+                    || ConvertUtils.FAKE_PACKAGE_NAME.equals(packageName)
                     || hideSystemComponentSet.contains(componentId)
                     || (packageName != null && hideApplicationSet.contains(packageName))) {
                 iterator.remove();

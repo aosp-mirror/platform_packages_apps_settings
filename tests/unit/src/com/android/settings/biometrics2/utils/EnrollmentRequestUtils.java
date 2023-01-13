@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics2.util;
+package com.android.settings.biometrics2.utils;
 
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY;
 
@@ -33,7 +33,7 @@ import androidx.annotation.NonNull;
 
 import com.android.settings.biometrics2.ui.model.EnrollmentRequest;
 
-public class EnrollmentRequestUtil {
+public class EnrollmentRequestUtils {
 
     @NonNull
     public static EnrollmentRequest newAllFalseRequest(@NonNull Context context) {

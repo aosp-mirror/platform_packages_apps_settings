@@ -90,7 +90,7 @@ public class CloneBackend {
      * @param packageName
      * @return error/success code
      */
-    int installCloneApp(String packageName) {
+    public int installCloneApp(String packageName) {
         String userName = "cloneUser";
         UserHandle cloneUserHandle = null;
         boolean newlyCreated = false;
@@ -159,5 +159,9 @@ public class CloneBackend {
             Log.i(TAG, "Package " + packageName + " cloned successfully.");
         }
         return SUCCESS;
+    }
+
+    public int getCloneUserId() {
+        return mCloneUserId;
     }
 }
