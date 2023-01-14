@@ -19,16 +19,15 @@ import static android.net.NetworkPolicy.CYCLE_NONE;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyObject;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.nullable;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -133,9 +132,9 @@ public class BillingCycleSettingsTest {
                 mDataLimit, mDataWarning, mEnableDataLimit, mEnableDataWarning);
 
         doReturn("some-string").when(billingCycleSettings).getString(anyInt(), anyInt());
-        when(mNetworkPolicyEditor.getPolicyCycleDay(anyObject())).thenReturn(CYCLE_NONE + 1);
-        when(mNetworkPolicyEditor.getPolicyLimitBytes(anyObject())).thenReturn(2000L);
-        when(mNetworkPolicyEditor.getPolicyWarningBytes(anyObject())).thenReturn(1000L);
+        when(mNetworkPolicyEditor.getPolicyCycleDay(any())).thenReturn(CYCLE_NONE + 1);
+        when(mNetworkPolicyEditor.getPolicyLimitBytes(any())).thenReturn(2000L);
+        when(mNetworkPolicyEditor.getPolicyWarningBytes(any())).thenReturn(1000L);
 
         billingCycleSettings.updatePrefs();
 
