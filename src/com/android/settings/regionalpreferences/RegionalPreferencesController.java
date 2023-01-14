@@ -42,7 +42,7 @@ public class RegionalPreferencesController  extends BasePreferenceController {
      */
     @Override
     public int getAvailabilityStatus() {
-        return SystemProperties.getBoolean(FEATURE_PROPERTY, false)
+        return SystemProperties.getBoolean(FEATURE_PROPERTY, true)
                 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 }

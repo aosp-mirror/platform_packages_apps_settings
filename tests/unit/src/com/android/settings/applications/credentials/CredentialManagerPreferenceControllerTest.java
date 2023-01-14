@@ -182,7 +182,7 @@ public class CredentialManagerPreferenceControllerTest {
         CredentialManagerPreferenceController controller =
                 new CredentialManagerPreferenceController(
                         mContext, mCredentialsPreferenceCategory.getKey());
-        controller.init(() -> mock(Lifecycle.class), availableServices);
+        controller.setAvailableServices(() -> mock(Lifecycle.class), availableServices);
         return controller;
     }
 
