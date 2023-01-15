@@ -23,7 +23,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
@@ -267,7 +267,7 @@ public class BatteryHeaderPreferenceControllerTest {
 
         mController.updateHeaderByBatteryTips(null, mBatteryInfo);
 
-        verifyZeroInteractions(mBatteryUsageProgressBarPref);
+        verifyNoInteractions(mBatteryUsageProgressBarPref);
     }
 
     @Test
@@ -277,7 +277,7 @@ public class BatteryHeaderPreferenceControllerTest {
 
         mController.updateHeaderByBatteryTips(lowBatteryTip, null);
 
-        verifyZeroInteractions(mBatteryUsageProgressBarPref);
+        verifyNoInteractions(mBatteryUsageProgressBarPref);
     }
 
     @Test
