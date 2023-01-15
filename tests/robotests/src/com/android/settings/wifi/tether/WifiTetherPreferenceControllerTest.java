@@ -16,11 +16,15 @@
 
 package com.android.settings.wifi.tether;
 
+import static android.net.TetheringManager.TETHERING_WIFI;
+import static android.net.wifi.WifiManager.WIFI_AP_STATE_ENABLED;
+
 import static com.android.settings.wifi.WifiUtils.setCanShowWifiHotspotCached;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -30,7 +34,9 @@ import android.net.wifi.WifiManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.network.tether.TetheringManagerModel;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -66,6 +72,10 @@ public class WifiTetherPreferenceControllerTest {
     private WifiManager mWifiManager;
     @Mock
     private PreferenceScreen mScreen;
+    @Mock
+    TetheringManagerModel mTetheringManagerModel;
+    @Mock
+    private SwitchWidgetController mSwitch;
     private SoftApConfiguration mSoftApConfiguration;
 
     private WifiTetherPreferenceController mController;
@@ -80,10 +90,13 @@ public class WifiTetherPreferenceControllerTest {
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
         mSoftApConfiguration = new SoftApConfiguration.Builder().setSsid(SSID).build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(mSoftApConfiguration);
+        when(mWifiManager.getWifiApState()).thenReturn(WIFI_AP_STATE_ENABLED);
 
         mController = new WifiTetherPreferenceController(mContext, mLifecycle, mWifiManager,
-                false /* initSoftApManager */, true /* isWifiTetheringAllow */);
+                false /* initSoftApManager */, true /* isWifiTetheringAllow */,
+                mTetheringManagerModel);
         mController.displayPreference(mScreen);
+        mController.mSwitch = mSwitch;
     }
 
     @Test
@@ -103,7 +116,8 @@ public class WifiTetherPreferenceControllerTest {
     @Test
     public void displayPreference_wifiTetheringNotAllowed_shouldDisable() {
         mController = new WifiTetherPreferenceController(mContext, mLifecycle, mWifiManager,
-                false /* initSoftApManager */, false /* isWifiTetheringAllow */);
+                false /* initSoftApManager */, false /* isWifiTetheringAllow */,
+                mTetheringManagerModel);
 
         mController.displayPreference(mScreen);
 
@@ -114,7 +128,8 @@ public class WifiTetherPreferenceControllerTest {
     @Test
     public void displayPreference_wifiTetheringAllowed_shouldEnable() {
         mController = new WifiTetherPreferenceController(mContext, mLifecycle, mWifiManager,
-                false /* initSoftApManager */, true /* isWifiTetheringAllow */);
+                false /* initSoftApManager */, true /* isWifiTetheringAllow */,
+                mTetheringManagerModel);
 
         mController.displayPreference(mScreen);
 
@@ -130,7 +145,7 @@ public class WifiTetherPreferenceControllerTest {
 
     @Test
     public void testHandleWifiApStateChanged_stateEnabled_showEnabledSummary() {
-        mController.handleWifiApStateChanged(WifiManager.WIFI_AP_STATE_ENABLED, 0 /* reason */);
+        mController.handleWifiApStateChanged(WIFI_AP_STATE_ENABLED, 0 /* reason */);
 
         assertThat(mPreference.getSummary()).isEqualTo("Pixel is active");
     }
@@ -149,6 +164,53 @@ public class WifiTetherPreferenceControllerTest {
         assertThat(mPreference.getSummary()).isEqualTo(
                 "Not sharing internet or content with other devices");
     }
+
+    @Test
+    public void handleWifiApStateChanged_stateDisabled_setSwitchUnchecked() {
+        mController.handleWifiApStateChanged(WifiManager.WIFI_AP_STATE_DISABLED, 0 /* reason */);
+
+        verify(mSwitch).setChecked(false);
+    }
+
+    @Test
+    public void handleWifiApStateChanged_stateEnabled_setSwitchChecked() {
+        mController.handleWifiApStateChanged(WIFI_AP_STATE_ENABLED, 0 /* reason */);
+
+        verify(mSwitch).setChecked(true);
+    }
+
+    @Test
+    public void setDataSaverEnabled_setEnabled_setPrefDisabled() {
+        mController.setDataSaverEnabled(true);
+
+        assertThat(mPreference.isEnabled()).isFalse();
+        verify(mSwitch).setEnabled(false);
+    }
+
+    @Test
+    public void setDataSaverEnabled_setDisabled_setPrefEnabled() {
+        mController.setDataSaverEnabled(false);
+
+        assertThat(mPreference.isEnabled()).isTrue();
+        verify(mSwitch).setEnabled(true);
+    }
+
+    @Test
+    public void onSwitchToggled_isChecked_startTethering() {
+        boolean ret = mController.onSwitchToggled(true);
+
+        verify(mTetheringManagerModel).startTethering(TETHERING_WIFI);
+        assertThat(ret).isTrue();
+    }
+
+    @Test
+    public void onSwitchToggled_isUnchecked_stopTethering() {
+        boolean ret = mController.onSwitchToggled(false);
+
+        verify(mTetheringManagerModel).stopTethering(TETHERING_WIFI);
+        assertThat(ret).isTrue();
+    }
+
 
     @Implements(WifiTetherSettings.class)
     public static final class ShadowWifiTetherSettings {

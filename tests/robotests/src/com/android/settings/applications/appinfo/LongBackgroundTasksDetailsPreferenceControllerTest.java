@@ -27,6 +27,7 @@ import android.content.Context;
 
 import androidx.preference.Preference;
 
+import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
@@ -44,6 +45,8 @@ public class LongBackgroundTasksDetailsPreferenceControllerTest {
     private AppInfoDashboardFragment mFragment;
     @Mock
     private Preference mPreference;
+    @Mock
+    private ApplicationFeatureProvider mAppFeatureProvider;
 
     private Context mContext;
     private LongBackgroundTasksDetailsPreferenceController mController;
@@ -52,11 +55,13 @@ public class LongBackgroundTasksDetailsPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mController = spy(new LongBackgroundTasksDetailsPreferenceController(mContext, "test_key"));
+        mController = spy(new LongBackgroundTasksDetailsPreferenceController(mContext, "test_key",
+                mAppFeatureProvider));
         mController.setPackageName("Package1");
         mController.setParentFragment(mFragment);
         final String key = mController.getPreferenceKey();
         when(mPreference.getKey()).thenReturn(key);
+        when(mAppFeatureProvider.isLongBackgroundTaskPermissionToggleSupported()).thenReturn(true);
     }
 
     @Test

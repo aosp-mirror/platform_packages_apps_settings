@@ -34,6 +34,7 @@ public class TetheringManagerModel extends AndroidViewModel {
     protected TetheringManager mTetheringManager;
     protected EventCallback mEventCallback = new EventCallback();
     protected MutableLiveData<List<String>> mTetheredInterfaces = new MutableLiveData<>();
+    protected StartTetheringCallback mStartTetheringCallback = new StartTetheringCallback();
 
     public TetheringManagerModel(@NonNull Application application) {
         super(application);
@@ -63,6 +64,27 @@ public class TetheringManagerModel extends AndroidViewModel {
     }
 
     /**
+     * Starts tethering and runs tether provisioning for the given type if needed. If provisioning
+     * fails, stopTethering will be called automatically.
+     *
+     * @param type The tethering type, on of the {@code TetheringManager#TETHERING_*} constants.
+     */
+    public void startTethering(int type) {
+        mTetheringManager.startTethering(type, getApplication().getMainExecutor(),
+                mStartTetheringCallback);
+    }
+
+    /**
+     * Stops tethering for the given type. Also cancels any provisioning rechecks for that type if
+     * applicable.
+     *
+     * @param type The tethering type, on of the {@code TetheringManager#TETHERING_*} constants.
+     */
+    public void stopTethering(int type) {
+        mTetheringManager.stopTethering(type);
+    }
+
+    /**
      * Callback for use with {@link TetheringManager#registerTetheringEventCallback} to find out
      * tethering upstream status.
      */
@@ -70,6 +92,18 @@ public class TetheringManagerModel extends AndroidViewModel {
         @Override
         public void onTetheredInterfacesChanged(List<String> interfaces) {
             mTetheredInterfaces.setValue(interfaces);
+        }
+    }
+
+    private class StartTetheringCallback implements TetheringManager.StartTetheringCallback {
+        @Override
+        public void onTetheringStarted() {
+            // Do nothing
+        }
+
+        @Override
+        public void onTetheringFailed(int error) {
+            // Do nothing
         }
     }
 }

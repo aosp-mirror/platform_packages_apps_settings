@@ -96,11 +96,12 @@ public class TetherSettings extends RestrictedSettingsFragment
     private static final String TAG = "TetheringSettings";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
-    private RestrictedSwitchPreference mUsbTether;
-
-    private SwitchPreference mBluetoothTether;
-
-    private SwitchPreference mEthernetTether;
+    @VisibleForTesting
+    RestrictedSwitchPreference mUsbTether;
+    @VisibleForTesting
+    SwitchPreference mBluetoothTether;
+    @VisibleForTesting
+    SwitchPreference mEthernetTether;
 
     private BroadcastReceiver mTetherChangeReceiver;
     private BroadcastReceiver mBluetoothStateReceiver;
@@ -115,7 +116,8 @@ public class TetherSettings extends RestrictedSettingsFragment
     private EthernetListener mEthernetListener;
     private final HashSet<String> mAvailableInterfaces = new HashSet<>();
 
-    private WifiTetherPreferenceController mWifiTetherPreferenceController;
+    @VisibleForTesting
+    WifiTetherPreferenceController mWifiTetherPreferenceController;
 
     private boolean mUsbConnected;
     private boolean mMassStorageActive;
@@ -125,7 +127,8 @@ public class TetherSettings extends RestrictedSettingsFragment
 
     private DataSaverBackend mDataSaverBackend;
     private boolean mDataSaverEnabled;
-    private Preference mDataSaverFooter;
+    @VisibleForTesting
+    Preference mDataSaverFooter;
 
     @VisibleForTesting
     String[] mUsbRegexs;
@@ -146,10 +149,10 @@ public class TetherSettings extends RestrictedSettingsFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mWifiTetherPreferenceController =
-                new WifiTetherPreferenceController(context, getSettingsLifecycle());
         TetheringManagerModel model = new ViewModelProvider(this).get(TetheringManagerModel.class);
-        mTm = model.mTetheringManager;
+        mWifiTetherPreferenceController =
+                new WifiTetherPreferenceController(context, getSettingsLifecycle(), model);
+        mTm = model.getTetheringManager();
         model.getTetheredInterfaces().observe(this, this::onTetheredInterfacesChanged);
     }
 
@@ -248,6 +251,7 @@ public class TetherSettings extends RestrictedSettingsFragment
     @Override
     public void onDataSaverChanged(boolean isDataSaving) {
         mDataSaverEnabled = isDataSaving;
+        mWifiTetherPreferenceController.setDataSaverEnabled(mDataSaverEnabled);
         mUsbTether.setEnabled(!mDataSaverEnabled);
         mBluetoothTether.setEnabled(!mDataSaverEnabled);
         mEthernetTether.setEnabled(!mDataSaverEnabled);

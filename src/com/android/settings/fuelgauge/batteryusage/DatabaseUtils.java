@@ -74,6 +74,11 @@ public final class DatabaseUtils {
     public static final String QUERY_KEY_USERID = "userid";
 
     public static final long INVALID_USER_ID = Integer.MIN_VALUE;
+    /**
+     * The buffer hours to query app usage events that may have begun or ended out of the final
+     * desired time frame.
+     */
+    public static final long USAGE_QUERY_BUFFER_HOURS = Duration.ofHours(3).toMillis();
 
     /** A content URI to access battery usage states data. */
     public static final Uri BATTERY_CONTENT_URI =
@@ -138,7 +143,10 @@ public final class DatabaseUtils {
             final long startTimestampOfLevelData) {
         final long startTime = System.currentTimeMillis();
         final long sixDaysAgoTimestamp = getTimestampSixDaysAgo(calendar);
-        final long queryTimestamp = Math.max(startTimestampOfLevelData, sixDaysAgoTimestamp);
+        // Query a longer time period and then trim to the original time period in order to make
+        // sure the app usage calculation near the boundaries is correct.
+        final long queryTimestamp =
+                Math.max(startTimestampOfLevelData, sixDaysAgoTimestamp) - USAGE_QUERY_BUFFER_HOURS;
         Log.d(TAG, "sixDayAgoTimestamp: " + sixDaysAgoTimestamp);
         final String queryUserIdString = userIds.stream()
                 .map(userId -> String.valueOf(userId))
