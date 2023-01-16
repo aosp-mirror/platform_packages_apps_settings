@@ -137,6 +137,16 @@ public final class DataProcessor {
         // Wrap and processed history map into easy-to-use format for UI rendering.
         final BatteryLevelData batteryLevelData =
                 getLevelDataThroughProcessedHistoryMap(context, processedBatteryHistoryMap);
+        // Loads the current battery usage data from the battery stats service.
+        final Map<String, BatteryHistEntry> currentBatteryHistoryMap =
+                getCurrentBatteryHistoryMapFromStatsService(context);
+        // Replaces the placeholder in processedBatteryHistoryMap.
+        for (Map.Entry<Long, Map<String, BatteryHistEntry>> mapEntry
+                : processedBatteryHistoryMap.entrySet()) {
+            if (mapEntry.getValue().containsKey(CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER)) {
+                mapEntry.setValue(currentBatteryHistoryMap);
+            }
+        }
         return batteryLevelData == null
                 ? null
                 : getBatteryUsageMap(
