@@ -53,6 +53,8 @@ import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.fuelgauge.BatteryStatus;
+import com.android.settingslib.spaprivileged.model.app.AppListConfig;
+import com.android.settingslib.spaprivileged.model.app.AppListRepositoryUtil;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -95,10 +97,13 @@ public final class DataProcessor {
     static final int SELECTED_INDEX_ALL = BatteryChartViewModel.SELECTED_INDEX_ALL;
 
     @VisibleForTesting
+    static boolean sDebug = false;
+
+    @VisibleForTesting
     static long sFakeCurrentTimeMillis = 0;
 
     @VisibleForTesting
-    static boolean sDebug = false;
+    static Set<String> sFakeSystemAppsSet;
 
     @VisibleForTesting
     static IUsageStatsManager sUsageStatsManager =
@@ -633,10 +638,10 @@ public final class DataProcessor {
             return null;
         }
         final Map<Integer, Map<Integer, BatteryDiffData>> resultMap = new HashMap<>();
+        final Set<String> systemAppsSet = getSystemAppsSet(context);
         // Insert diff data from [0][0] to [maxDailyIndex][maxHourlyIndex].
-        insertHourlyUsageDiffData(
-                context, hourlyBatteryLevelsPerDay, batteryHistoryMap, appUsagePeriodMap,
-                resultMap);
+        insertHourlyUsageDiffData(context, systemAppsSet, hourlyBatteryLevelsPerDay,
+                batteryHistoryMap, appUsagePeriodMap, resultMap);
         // Insert diff data from [0][SELECTED_INDEX_ALL] to [maxDailyIndex][SELECTED_INDEX_ALL].
         insertDailyUsageDiffData(context, hourlyBatteryLevelsPerDay, resultMap);
         // Insert diff data [SELECTED_INDEX_ALL][SELECTED_INDEX_ALL].
@@ -695,7 +700,9 @@ public final class DataProcessor {
             return null;
         }
 
-        return new BatteryDiffData(context, appEntries, systemEntries, /* isAccumulated= */ false);
+        final Set<String> systemAppsSet = getSystemAppsSet(context);
+        return new BatteryDiffData(
+                context, appEntries, systemEntries, systemAppsSet, /* isAccumulated= */ false);
     }
 
     /**
@@ -1363,6 +1370,7 @@ public final class DataProcessor {
 
     private static void insertHourlyUsageDiffData(
             Context context,
+            final Set<String> systemAppsSet,
             final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay,
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap,
             final Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>>
@@ -1392,6 +1400,7 @@ public final class DataProcessor {
                                 workProfileUserId,
                                 hourlyIndex,
                                 timestamps,
+                                systemAppsSet,
                                 appUsagePeriodMap == null
                                         || appUsagePeriodMap.get(dailyIndex) == null
                                         ? null
@@ -1436,6 +1445,7 @@ public final class DataProcessor {
             final int workProfileUserId,
             final int currentIndex,
             final List<Long> timestamps,
+            final Set<String> systemAppsSet,
             final Map<Long, Map<String, List<AppUsagePeriod>>> appUsageMap,
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
         final List<BatteryDiffEntry> appEntries = new ArrayList<>();
@@ -1589,7 +1599,8 @@ public final class DataProcessor {
             return null;
         }
 
-        return new BatteryDiffData(context, appEntries, systemEntries, /* isAccumulated= */ false);
+        return new BatteryDiffData(
+                context, appEntries, systemEntries, systemAppsSet, /* isAccumulated= */ false);
     }
 
     private static long getScreenOnTime(@Nullable final List<AppUsagePeriod> appUsagePeriodList) {
@@ -1672,8 +1683,8 @@ public final class DataProcessor {
             }
         }
 
-        return diffEntryList.isEmpty() ? null : new BatteryDiffData(
-                context, appEntries, systemEntries, /* isAccumulated= */ true);
+        return diffEntryList.isEmpty() ? null : new BatteryDiffData(context, appEntries,
+                systemEntries, /* systemAppsSet= */ null, /* isAccumulated= */ true);
     }
 
     private static void computeUsageDiffDataPerEntry(
@@ -1887,6 +1898,12 @@ public final class DataProcessor {
             }
         }
         return null;
+    }
+
+    private static Set<String> getSystemAppsSet(Context context) {
+        return sFakeSystemAppsSet != null ? sFakeSystemAppsSet
+                : AppListRepositoryUtil.getSystemPackageNames(context,
+                        new AppListConfig(context.getUserId(), false));
     }
 
     private static long getCurrentTimeMillis() {
