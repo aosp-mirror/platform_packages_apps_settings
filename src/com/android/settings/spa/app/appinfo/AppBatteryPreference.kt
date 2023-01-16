@@ -126,6 +126,7 @@ private class AppBatteryPresenter(private val context: Context, private val app:
             this,
             Utils.formatPercentage(percentOfTotal, true),
             null,
+            false,
         )
     }
 
