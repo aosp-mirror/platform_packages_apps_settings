@@ -46,6 +46,9 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.widget.LottieColorUtils;
+
+import com.airbnb.lottie.LottieAnimationView;
 
 
 public class ApplicationViewHolder extends RecyclerView.ViewHolder {
@@ -110,6 +113,24 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
                 .inflate(R.layout.preference_app_header, parent, false);
         TextView textView = view.findViewById(R.id.apps_top_intro_text);
         textView.setText(resText);
+        return view;
+    }
+
+    static View newHeaderWithAnimation(Context context, ViewGroup parent, int resIntroText,
+            int resAnimation, int resAppListText) {
+        ViewGroup view = (ViewGroup) LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.preference_app_header_animation, parent, false);
+        TextView introText = view.findViewById(R.id.apps_top_intro_text);
+        introText.setText(resIntroText);
+
+        LottieAnimationView illustrationLottie = view.findViewById(R.id.illustration_lottie);
+        illustrationLottie.setAnimation(resAnimation);
+        illustrationLottie.setVisibility(View.VISIBLE);
+        LottieColorUtils.applyDynamicColors(context, illustrationLottie);
+
+        TextView appListText = view.findViewById(R.id.app_list_text);
+        appListText.setText(resAppListText);
+
         return view;
     }
 
