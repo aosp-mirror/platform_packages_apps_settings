@@ -25,6 +25,7 @@ import android.annotation.Nullable;
 import android.app.Dialog;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.ManagedSubscriptionsPolicy;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -34,6 +35,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -139,6 +141,31 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
             getActivity().finish();
         });
         setupForgotButtonIfManagedProfile(view);
+        setupEmergencyCallButtonIfManagedSubscription(view);
+    }
+
+    private void setupEmergencyCallButtonIfManagedSubscription(View view) {
+        int policyType = getContext().getSystemService(
+                DevicePolicyManager.class).getManagedSubscriptionsPolicy().getPolicyType();
+
+        if (policyType == ManagedSubscriptionsPolicy.TYPE_ALL_MANAGED_SUBSCRIPTIONS) {
+            Button emergencyCallButton = view.findViewById(R.id.emergencyCallButton);
+            if (emergencyCallButton == null) {
+                Log.wtf(TAG,
+                        "Emergency call button not found in managed profile credential dialog");
+                return;
+            }
+            emergencyCallButton.setVisibility(View.VISIBLE);
+            emergencyCallButton.setOnClickListener(v -> {
+                final Intent intent = getActivity()
+                        .getSystemService(TelecomManager.class)
+                        .createLaunchEmergencyDialerIntent(null)
+                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                getActivity().startActivity(intent);
+                getActivity().finish();
+            });
+        }
     }
 
     private void setupForgotButtonIfManagedProfile(View view) {
