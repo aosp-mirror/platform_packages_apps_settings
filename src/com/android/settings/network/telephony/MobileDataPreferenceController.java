@@ -40,7 +40,6 @@ import com.android.settings.network.MobileDataContentObserver;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.mobile.dataservice.DataServiceUtils;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
@@ -243,21 +242,18 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
 
     @Override
     public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-        if (DataServiceUtils.shouldUpdateEntityList(mSubscriptionInfoEntityList,
-                subInfoEntityList)) {
-            mSubscriptionInfoEntityList = subInfoEntityList;
-            mSubscriptionInfoEntityList.forEach(entity -> {
-                if (Integer.parseInt(entity.subId) == mSubId) {
-                    mSubscriptionInfoEntity = entity;
-                }
-            });
-            if (mSubscriptionInfoEntity != null
-                    && mSubscriptionInfoEntity.isDefaultDataSubscription) {
-                mDefaultSubId = Integer.parseInt(mSubscriptionInfoEntity.subId);
+        mSubscriptionInfoEntityList = subInfoEntityList;
+        mSubscriptionInfoEntityList.forEach(entity -> {
+            if (Integer.parseInt(entity.subId) == mSubId) {
+                mSubscriptionInfoEntity = entity;
             }
-            update();
-            refreshSummary(mPreference);
+        });
+        if (mSubscriptionInfoEntity != null
+                && mSubscriptionInfoEntity.isDefaultDataSubscription) {
+            mDefaultSubId = Integer.parseInt(mSubscriptionInfoEntity.subId);
         }
+        update();
+        refreshSummary(mPreference);
     }
 
     @Override
@@ -267,17 +263,14 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     @Override
     public void onAllMobileNetworkInfoChanged(
             List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
-        if (DataServiceUtils.shouldUpdateEntityList(mMobileNetworkInfoEntityList,
-                mobileNetworkInfoEntityList)) {
-            mMobileNetworkInfoEntityList = mobileNetworkInfoEntityList;
-            mMobileNetworkInfoEntityList.forEach(entity -> {
-                if (Integer.parseInt(entity.subId) == mSubId) {
-                    mMobileNetworkInfoEntity = entity;
-                    update();
-                    refreshSummary(mPreference);
-                    return;
-                }
-            });
-        }
+        mMobileNetworkInfoEntityList = mobileNetworkInfoEntityList;
+        mMobileNetworkInfoEntityList.forEach(entity -> {
+            if (Integer.parseInt(entity.subId) == mSubId) {
+                mMobileNetworkInfoEntity = entity;
+                update();
+                refreshSummary(mPreference);
+                return;
+            }
+        });
     }
 }

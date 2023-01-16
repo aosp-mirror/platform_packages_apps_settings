@@ -42,7 +42,6 @@ import android.util.Log;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.mobile.dataservice.DataServiceUtils;
 import com.android.settingslib.mobile.dataservice.MobileNetworkDatabase;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoDao;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
@@ -53,7 +52,6 @@ import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -71,7 +69,12 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private static final String TAG = "MobileNetworkRepository";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
-    private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
+    private static ExecutorService sExecutor = Executors.newSingleThreadExecutor();
+    private static Map<String, SubscriptionInfoEntity> sCacheSubscriptionInfoEntityMap =
+            new ArrayMap<>();
+    private static Map<String, MobileNetworkInfoEntity> sCacheMobileNetworkInfoEntityMap =
+            new ArrayMap<>();
+    private static Map<String, UiccInfoEntity> sCacheUiccInfoEntityMap = new ArrayMap<>();
 
     private SubscriptionManager mSubscriptionManager;
     private TelephonyManager mTelephonyManager;
@@ -130,8 +133,8 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         mDataContentObserver = new MobileDataContentObserver(
                 new Handler(Looper.getMainLooper()));
         mDataContentObserver.setOnMobileDataChangedListener(() -> {
-            mExecutor.execute(() -> {
-                insertMobileNetworkInfo(context);
+            sExecutor.execute(() -> {
+                insertMobileNetworkInfo(context, String.valueOf(mSubId));
             });
         });
         mFilter.addAction(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED);
@@ -192,19 +195,25 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     }
 
     private void observeAllSubInfo(LifecycleOwner lifecycleOwner) {
-        Log.d(TAG, "Observe subInfo.");
+        if (DEBUG) {
+            Log.d(TAG, "Observe subInfo.");
+        }
         mMobileNetworkDatabase.queryAvailableSubInfos().observe(
                 lifecycleOwner, this::onAvailableSubInfoChanged);
     }
 
     private void observeAllUiccInfo(LifecycleOwner lifecycleOwner) {
-        Log.d(TAG, "Observe UICC info.");
+        if (DEBUG) {
+            Log.d(TAG, "Observe UICC info.");
+        }
         mMobileNetworkDatabase.queryAllUiccInfo().observe(
                 lifecycleOwner, this::onAllUiccInfoChanged);
     }
 
     private void observeAllMobileNetworkInfo(LifecycleOwner lifecycleOwner) {
-        Log.d(TAG, "Observe mobile network info.");
+        if (DEBUG) {
+            Log.d(TAG, "Observe mobile network info.");
+        }
         mMobileNetworkDatabase.queryAllMobileNetworkInfo().observe(
                 lifecycleOwner, this::onAllMobileNetworkInfoChanged);
     }
@@ -321,35 +330,44 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     }
 
     public void insertSubInfo(Context context, SubscriptionInfo info) {
-        mExecutor.execute(() -> {
-            SubscriptionInfoEntity subInfoEntity =
-                    convertToSubscriptionInfoEntity(context, info);
-            if (subInfoEntity != null) {
-                int subId = info.getSubscriptionId();
-                mSubscriptionInfoMap.put(subId, info);
+        SubscriptionInfoEntity subInfoEntity =
+                convertToSubscriptionInfoEntity(context, info);
+        String subId = String.valueOf(mSubId);
+        if (subInfoEntity != null) {
+            if (!sCacheSubscriptionInfoEntityMap.containsKey(subId)
+                    || (sCacheSubscriptionInfoEntityMap.get(subId) != null
+                    && !sCacheSubscriptionInfoEntityMap.get(subId).equals(subInfoEntity))) {
+                sCacheSubscriptionInfoEntityMap.put(subId, subInfoEntity);
                 if (DEBUG) {
                     Log.d(TAG, "convert subId " + subId + "to SubscriptionInfoEntity: "
                             + subInfoEntity);
                 }
                 mMobileNetworkDatabase.insertSubsInfo(subInfoEntity);
+                insertUiccInfo(subId);
+                insertMobileNetworkInfo(context, subId);
                 mMetricsFeatureProvider.action(mContext,
                         SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_SUB_INFO);
             } else if (DEBUG) {
                 Log.d(TAG, "Can not insert subInfo, the entity is null");
             }
-        });
+        }
     }
 
     public void deleteAllInfoBySubId(String subId) {
-        mExecutor.execute(() -> {
-            mMobileNetworkDatabase.deleteSubInfoBySubId(subId);
-            mMobileNetworkDatabase.deleteUiccInfoBySubId(subId);
-            mMobileNetworkDatabase.deleteMobileNetworkInfoBySubId(subId);
-        });
+        if (DEBUG) {
+            Log.d(TAG, "deleteAllInfoBySubId, subId = " + subId);
+        }
+        mMobileNetworkDatabase.deleteSubInfoBySubId(subId);
+        mMobileNetworkDatabase.deleteUiccInfoBySubId(subId);
+        mMobileNetworkDatabase.deleteMobileNetworkInfoBySubId(subId);
         mAvailableSubInfoEntityList.removeIf(info -> info.subId.equals(subId));
         mActiveSubInfoEntityList.removeIf(info -> info.subId.equals(subId));
         mUiccInfoEntityList.removeIf(info -> info.subId.equals(subId));
         mMobileNetworkInfoEntityList.removeIf(info -> info.subId.equals(subId));
+        mSubscriptionInfoMap.remove(Integer.parseInt(subId));
+        sCacheSubscriptionInfoEntityMap.remove(subId);
+        sCacheUiccInfoEntityMap.remove(subId);
+        sCacheMobileNetworkInfoEntityMap.remove(subId);
         mMetricsFeatureProvider.action(mContext,
                 SettingsEnums.ACTION_MOBILE_NETWORK_DB_DELETE_DATA);
     }
@@ -368,8 +386,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             return null;
         } else {
             getUiccInfoBySubscriptionInfo(uiccSlotInfos, subInfo);
-            insertUiccInfo();
-            insertMobileNetworkInfo(context);
             SubscriptionInfo firstRemovableSubInfo = SubscriptionUtil.getFirstRemovableSubscription(
                     context);
             SubscriptionInfo subscriptionOrDefault = SubscriptionUtil.getSubscriptionOrDefault(
@@ -406,24 +422,32 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
     }
 
-    public void insertUiccInfo() {
+    public void insertUiccInfo(String subId) {
         UiccInfoEntity uiccInfoEntity = convertToUiccInfoEntity();
         if (DEBUG) {
             Log.d(TAG, "uiccInfoEntity = " + uiccInfoEntity);
         }
-        mMobileNetworkDatabase.insertUiccInfo(uiccInfoEntity);
-        mMetricsFeatureProvider.action(mContext,
-                SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_UICC_INFO);
+        if (!sCacheUiccInfoEntityMap.containsKey(subId)
+                || !sCacheUiccInfoEntityMap.get(subId).equals(uiccInfoEntity)) {
+            sCacheUiccInfoEntityMap.put(subId, uiccInfoEntity);
+            mMobileNetworkDatabase.insertUiccInfo(uiccInfoEntity);
+            mMetricsFeatureProvider.action(mContext,
+                    SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_UICC_INFO);
+        }
     }
 
-    public void insertMobileNetworkInfo(Context context) {
+    public void insertMobileNetworkInfo(Context context, String subId) {
         MobileNetworkInfoEntity mobileNetworkInfoEntity = convertToMobileNetworkInfoEntity(context);
         if (DEBUG) {
             Log.d(TAG, "mobileNetworkInfoEntity = " + mobileNetworkInfoEntity);
         }
-        mMobileNetworkDatabase.insertMobileNetworkInfo(mobileNetworkInfoEntity);
-        mMetricsFeatureProvider.action(mContext,
-                SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_MOBILE_NETWORK_INFO);
+        if (!sCacheMobileNetworkInfoEntityMap.containsKey(subId)
+                || !sCacheMobileNetworkInfoEntityMap.get(subId).equals(mobileNetworkInfoEntity)) {
+            sCacheMobileNetworkInfoEntityMap.put(subId, mobileNetworkInfoEntity);
+            mMobileNetworkDatabase.insertMobileNetworkInfo(mobileNetworkInfoEntity);
+            mMetricsFeatureProvider.action(mContext,
+                    SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_MOBILE_NETWORK_INFO);
+        }
     }
 
     public MobileNetworkInfoEntity convertToMobileNetworkInfoEntity(Context context) {
@@ -468,42 +492,56 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     }
 
     private void insertAvailableSubInfoToEntity(List<SubscriptionInfo> availableInfoList) {
-        if ((availableInfoList == null || availableInfoList.size() == 0)
-                && mAvailableSubInfoEntityList.size() != 0) {
-            if (DEBUG) {
-                Log.d(TAG, "availableSudInfoList from framework is empty, remove all subs");
-            }
-
+        sExecutor.execute(() -> {
             SubscriptionInfoEntity[] availableInfoArray = mAvailableSubInfoEntityList.toArray(
                     new SubscriptionInfoEntity[0]);
-            for (SubscriptionInfoEntity info : availableInfoArray) {
-                deleteAllInfoBySubId(info.subId);
-            }
-
-        } else if (availableInfoList != null) {
-            SubscriptionInfo[] infoArray = availableInfoList.toArray(new SubscriptionInfo[0]);
-            for (SubscriptionInfo subInfo : infoArray) {
-                mSubscriptionInfoMap.remove(subInfo.getSubscriptionId());
+            if ((availableInfoList == null || availableInfoList.size() == 0)
+                    && mAvailableSubInfoEntityList.size() != 0) {
                 if (DEBUG) {
-                    Log.d(TAG, "insert subInfo to subInfoEntity, subInfo = " + subInfo);
+                    Log.d(TAG, "availableSudInfoList from framework is empty, remove all subs");
                 }
-                if (subInfo.isEmbedded()
-                        && subInfo.getProfileClass() == PROFILE_CLASS_PROVISIONING) {
-                    if (DEBUG) {
-                        Log.d(TAG, "Do not insert the provision eSIM");
-                    }
-                    continue;
-                }
-                insertSubInfo(mContext, subInfo);
-            }
 
-            if (!mSubscriptionInfoMap.isEmpty()) {
-                Iterator<Integer> iterator = mSubscriptionInfoMap.keySet().iterator();
-                while (iterator.hasNext()) {
-                    deleteAllInfoBySubId(String.valueOf(iterator.next()));
+                for (SubscriptionInfoEntity info : availableInfoArray) {
+                    deleteAllInfoBySubId(info.subId);
+                }
+
+            } else if (availableInfoList != null) {
+                SubscriptionInfo[] infoArray = availableInfoList.toArray(new SubscriptionInfo[0]);
+                // Remove the redundant subInfo
+                if (availableInfoList.size() <= mAvailableSubInfoEntityList.size()) {
+                    for (SubscriptionInfo subInfo : infoArray) {
+                        int subId = subInfo.getSubscriptionId();
+                        if (mSubscriptionInfoMap.containsKey(subId)) {
+                            mSubscriptionInfoMap.remove(subId);
+                        }
+                    }
+
+                    if (!mSubscriptionInfoMap.isEmpty()) {
+                        for (Integer key : mSubscriptionInfoMap.keySet()) {
+                            if (key != null) {
+                                deleteAllInfoBySubId(String.valueOf(key));
+                            }
+                        }
+                    }
+                }
+
+                // Insert all new available subInfo to database.
+                for (SubscriptionInfo subInfo : infoArray) {
+                    if (DEBUG) {
+                        Log.d(TAG, "insert subInfo to subInfoEntity, subInfo = " + subInfo);
+                    }
+                    if (subInfo.isEmbedded()
+                            && subInfo.getProfileClass() == PROFILE_CLASS_PROVISIONING) {
+                        if (DEBUG) {
+                            Log.d(TAG, "Do not insert the provision eSIM");
+                        }
+                        continue;
+                    }
+                    mSubscriptionInfoMap.put(mSubId, subInfo);
+                    insertSubInfo(mContext, subInfo);
                 }
             }
-        }
+        });
     }
 
     public boolean isAirplaneModeOn() {
