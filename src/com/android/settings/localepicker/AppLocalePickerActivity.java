@@ -78,6 +78,7 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
                 mContextAsUser,
                 this,
                 false /* translate only */,
+                null,
                 mPackageName,
                 this);
         mAppLocaleDetails = AppLocaleDetails.newInstance(mPackageName, mContextAsUser.getUserId());

@@ -307,6 +307,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment {
 
                 final Intent intent = new Intent(getActivity(),
                         LocalePickerWithRegionActivity.class);
+                intent.putExtras(getActivity().getIntent().getExtras());
                 startActivityForResult(intent, REQUEST_LOCALE_PICKER);
             }
         });
