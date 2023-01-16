@@ -26,6 +26,7 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.fuelgauge.BatteryStatus;
 
 import java.time.Duration;
@@ -36,6 +37,9 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
     /** An intent action to request Settings to clear cache data. */
     public static final String ACTION_CLEAR_BATTERY_CACHE_DATA =
             "com.android.settings.battery.action.CLEAR_BATTERY_CACHE_DATA";
+    /** An intent action to request Settings to clear cache data. */
+    public static final String ACTION_BATTERY_UNPLUGGING =
+            "com.android.settings.battery.action.ACTION_BATTERY_UNPLUGGING";
 
     @VisibleForTesting
     static long sBroadcastDelayFromBoot = Duration.ofMinutes(40).toMillis();
@@ -51,9 +55,27 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
             return;
         }
         Log.d(TAG, "onReceive:" + intent.getAction());
+        final String fullChargeIntentAction = FeatureFactory.getFactory(context)
+                .getPowerUsageFeatureProvider(context)
+                .getFullChargeIntentAction();
         switch (intent.getAction()) {
             case Intent.ACTION_BATTERY_LEVEL_CHANGED:
-                tryToFetchUsageData(context);
+                // Only when fullChargeIntentAction is ACTION_BATTERY_LEVEL_CHANGED,
+                // ACTION_BATTERY_LEVEL_CHANGED will be considered as the full charge event and then
+                // start usage events fetching.
+                if (Intent.ACTION_BATTERY_LEVEL_CHANGED.equals(fullChargeIntentAction)) {
+                    Log.d(TAG, "fetch data because of event: ACTION_BATTERY_LEVEL_CHANGED");
+                    tryToFetchUsageData(context);
+                }
+                break;
+            case ACTION_BATTERY_UNPLUGGING:
+                // Only when fullChargeIntentAction is ACTION_POWER_DISCONNECTED,
+                // ACTION_BATTERY_UNPLUGGING will be considered as the full charge event and then
+                // start usage events fetching.
+                if (Intent.ACTION_POWER_DISCONNECTED.equals(fullChargeIntentAction)) {
+                    Log.d(TAG, "fetch data because of event: ACTION_POWER_DISCONNECTED");
+                    tryToFetchUsageData(context);
+                }
                 break;
             case ACTION_CLEAR_BATTERY_CACHE_DATA:
                 if (sIsDebugMode) {
@@ -74,7 +96,7 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
         final long broadcastDelay = sBroadcastDelayFromBoot - SystemClock.elapsedRealtime();
         // If current boot time is smaller than expected delay, cancel sending the broadcast.
         if (broadcastDelay > 0) {
-            Log.d(TAG, "cancel sendBroadcastToFetchUsageData when broadcastDelay is"
+            Log.d(TAG, "cancel sendBroadcastToFetchUsageData when broadcastDelay is "
                     + broadcastDelay + "ms.");
             return;
         }
