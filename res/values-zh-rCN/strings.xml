@@ -116,8 +116,10 @@
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"已开启蓝牙"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"查看全部"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"触控笔"</string>
-    <string name="stylus_default_notes_app" msgid="3111290761558445874">"系统记事应用"</string>
-    <string name="stylus_textfield_handwriting" msgid="6962904622425646128">"在文本字段中通过触控笔书写"</string>
+    <!-- no translation found for stylus_default_notes_app (3896158797687806941) -->
+    <skip />
+    <!-- no translation found for stylus_textfield_handwriting (2363579035338976327) -->
+    <skip />
     <string name="stylus_ignore_button" msgid="7734540973145241391">"忽略所有通过触控笔按下按钮的动作"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"触控笔"</string>
     <string name="date_and_time" msgid="1788358029823431692">"日期和时间"</string>
@@ -157,22 +159,24 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"您无法从“设置”中选择此应用的语言。"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"语言可能与应用中可用的语言不同。部分应用可能不支持此设置。"</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"此处只显示了支持用户选择语言的应用。"</string>
-    <!-- no translation found for regional_preferences_title (4304567374498629528) -->
-    <skip />
-    <!-- no translation found for regional_preferences_summary (1189876997389469650) -->
-    <skip />
-    <!-- no translation found for regional_preferences_main_page_sub_title (4666033861956272891) -->
-    <skip />
-    <!-- no translation found for temperature_preferences_title (5009881556503629058) -->
-    <skip />
-    <!-- no translation found for calendar_preferences_title (8312485828206542600) -->
-    <skip />
-    <!-- no translation found for first_day_of_week_preferences_title (1971850087589599553) -->
-    <skip />
-    <!-- no translation found for numbers_preferences_title (6094837605398562369) -->
-    <skip />
-    <!-- no translation found for default_string_of_regional_preference (1595774718180886349) -->
-    <skip />
+    <string name="regional_preferences_title" msgid="4304567374498629528">"区域偏好设置"</string>
+    <string name="regional_preferences_summary" msgid="1189876997389469650">"设置单位和数字偏好设置"</string>
+    <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"将您的区域偏好设置告知应用，使应用能够为您提供个性化体验。"</string>
+    <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"应用将尽可能使用您的区域偏好设置。"</string>
+    <string name="temperature_preferences_title" msgid="9067783912861473593">"温度单位"</string>
+    <string name="calendar_preferences_title" msgid="8312485828206542600">"日历"</string>
+    <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"一周的第一天"</string>
+    <string name="numbers_preferences_title" msgid="6094837605398562369">"数字"</string>
+    <string name="default_string_of_regional_preference" msgid="7662581547334113719">"使用应用默认设置"</string>
+    <string name="celsius_temperature_unit" msgid="6118523647432383132">"摄氏度 (°C)"</string>
+    <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"华氏度 (°F)"</string>
+    <string name="sunday_first_day_of_week" msgid="7644548348295686051">"星期日"</string>
+    <string name="monday_first_day_of_week" msgid="7244698610476506771">"星期一"</string>
+    <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"星期二"</string>
+    <string name="wednesday_first_day_of_week" msgid="6544537589727042869">"星期三"</string>
+    <string name="thursday_first_day_of_week" msgid="3035885630945594833">"星期四"</string>
+    <string name="friday_first_day_of_week" msgid="7074795061812083541">"星期五"</string>
+    <string name="saturday_first_day_of_week" msgid="3702282590450322727">"星期六"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{要移除所选语言吗？}other{要移除所选语言吗？}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"系统将以其他语言显示文字。"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"无法移除所有语言"</string>
@@ -233,8 +237,7 @@
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"例如，小明的 Android 设备。"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"位置信息"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"使用位置信息"</string>
-    <!-- no translation found for location_settings_summary_location_on (7029728269719893381) -->
-    <skip />
+    <string name="location_settings_summary_location_on" msgid="7029728269719893381">"{count,plural, =1{已开启 - # 个应用有权访问位置信息}other{已开启 - # 个应用有权访问位置信息}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"正在加载…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"具有附近设备权限的应用可以确定已连接的设备的相对位置。"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"应用和服务的位置信息使用权处于关闭状态。在您拨打紧急电话号码或向该号码发送短信时，系统可能仍会将您的设备位置信息发送给急救人员。"</string>
@@ -314,8 +317,7 @@
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"使用指纹解锁功能时"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"工作资料指纹"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"添加指纹"</string>
-    <!-- no translation found for security_settings_fingerprint_preference_summary (8486134175759676037) -->
-    <skip />
+    <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{已添加指纹}other{已添加 # 个指纹}}"</string>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"设置指纹"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"允许使用指纹解锁功能"</string>
@@ -389,8 +391,8 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"当前注册进度为百分之 <xliff:g id="PERCENTAGE">%d</xliff:g>"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"指纹注册进度为百分之 <xliff:g id="PERCENTAGE">%d</xliff:g>"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"指纹已添加"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"仅在屏幕开启时解锁"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"屏幕必须开启，然后您才能使用指纹解锁。这样可以降低意外解锁的可能性。"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"无论何时，轻触即可解锁"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"轻触传感器即可解锁，即使屏幕关闭也可以。这样会提高意外解锁的概率。"</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"屏幕, 解锁, Screen, Unlock"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"以后再说"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"移开手指，然后再次触摸传感器"</string>
@@ -413,6 +415,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"完成"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"糟糕，这不是传感器"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"请用您的食指触摸位于手机背面的传感器。"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"指纹设置已超时"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"您可以立即重试，或之后在“设置”部分进行指纹设置"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"无法注册指纹。请重试或使用其他手指。"</string>
@@ -464,17 +468,14 @@
     <string name="fingerprint_unlock_set_unlock_pin" msgid="4724451168139460493">"指纹 + PIN 码"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"指纹 + 密码"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"不设置指纹并继续"</string>
-    <string name="fingerprint_unlock_title" msgid="4978686534505944042">"您可以使用自己的指纹将手机解锁。为了安全起见，要使用此选项，您必须设置备用屏幕锁定方式。"</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"人脸解锁 + 解锁图案"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"人脸解锁 + PIN 码"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"人脸解锁 + 密码"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"不设置人脸解锁并继续"</string>
-    <string name="face_unlock_title" msgid="7344830351598247267">"您可以使用自己的面孔将手机解锁。为了安全起见，要使用此选项，您必须设置备用屏幕锁定方式。"</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"图案 • 人脸 • 指纹"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN 码 • 人脸 • 指纹"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"密码 • 人脸 • 指纹"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"继续，不设置人脸解锁或指纹解锁"</string>
-    <string name="biometrics_unlock_title" msgid="616524056055233041">"您可以通过人脸或指纹解锁手机。为安全起见，您必须设置备用屏幕锁定方式，才能使用该选项。"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"无"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"滑动"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"图案"</string>
@@ -607,7 +608,7 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"要重启设备吗？"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"详细 NFC 日志记录仅用于开发目的。错误报告中包含其他 NFC 数据，其中可能包含私密信息。如需更改此设置，请重启设备。"</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"重启"</string>
-    <string name="wifi_display_settings_title" msgid="6451625615274960175">"投放"</string>
+    <string name="wifi_display_settings_title" msgid="6451625615274960175">"投屏"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"镜像"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"开启无线显示"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"未在附近找到设备。"</string>
@@ -886,9 +887,8 @@
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"当您在纵向与横向之间变换手机持握方向时"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"屏幕分辨率"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"高分辨率"</string>
-    <string name="screen_resolution_option_highest" msgid="9134161136319625840">"完整分辨率"</string>
-    <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
-    <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
+    <!-- no translation found for screen_resolution_option_full (2694003735219114186) -->
+    <skip />
     <string name="screen_resolution_footer" msgid="6772341522952795647">"完整分辨率会增加耗电量。切换分辨率可能会导致一些应用重启。"</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"已选择"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"颜色"</string>
@@ -1034,13 +1034,19 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"存储和缓存"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"存储设置"</string>
     <string name="status_eid" msgid="7532406028683438634">"EID"</string>
-    <string name="eid_multi_sim" msgid="4581966600904959452">"EID（SIM 卡插槽 %1$d）"</string>
-    <string name="imei_multi_sim" msgid="71477088017585479">"IMEI（SIM 卡插槽 %1$d）"</string>
+    <string name="eid_multi_sim" msgid="9087924808336397804">"EID（SIM 卡插槽 <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>）"</string>
+    <!-- no translation found for imei_multi_sim (9001570420423929507) -->
+    <skip />
+    <!-- no translation found for imei_multi_sim_primary (7914653040843734282) -->
+    <skip />
     <string name="view_saved_network" msgid="1232387673095080910">"如需查看，请选择已保存的网络"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL 版本"</string>
-    <string name="meid_multi_sim" msgid="7645394486193991388">"MEID（SIM 卡插槽 %1$d）"</string>
+    <!-- no translation found for meid_multi_sim (1460689549266621286) -->
+    <skip />
+    <!-- no translation found for meid_multi_sim_primary (8921262417580407201) -->
+    <skip />
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"移动数据网络类型"</string>
@@ -1122,7 +1128,7 @@
     <string name="battery_status_title" msgid="4661768220545945771">"电池状态"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"电池电量"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"共用"</string>
-    <string name="communal_settings_summary" msgid="4923914136953940317">"共用设置"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"通用设置"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"修改接入点"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"未设置"</string>
@@ -1912,14 +1918,10 @@
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"更暗"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"更亮"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"设备重启后保持开启状态"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (2981206111858937724) -->
-    <skip />
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (6867395206533459204) -->
-    <skip />
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (4079139970819335593) -->
-    <skip />
-    <!-- no translation found for accessibilty_autoclick_delay_unit_second (5979297390686370567) -->
-    <skip />
+    <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{短（{time} 秒）}other{短（{time} 秒）}}"</string>
+    <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{中（{time} 秒）}other{中（{time} 秒）}}"</string>
+    <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{长（{time} 秒）}other{长（{time} 秒）}}"</string>
+    <string name="accessibilty_autoclick_delay_unit_second" msgid="5979297390686370567">"{count,plural, =1{{time} 秒}other{{time} 秒}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"设置"</string>
     <string name="captioning_preview_title" msgid="2888561631323180535">"预览"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"标准选项"</string>
@@ -1994,10 +1996,8 @@
     <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"扫描附近的设备"</string>
     <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"保存的设备"</string>
     <string name="print_settings" msgid="8519810615863882491">"打印"</string>
-    <!-- no translation found for print_settings_summary (1458773840720811915) -->
-    <skip />
-    <!-- no translation found for print_jobs_summary (7040836482336577323) -->
-    <skip />
+    <string name="print_settings_summary" msgid="1458773840720811915">"{count,plural, =1{1 个打印服务已开启}other{# 个打印服务已开启}}"</string>
+    <string name="print_jobs_summary" msgid="7040836482336577323">"{count,plural, =1{1 个打印作业}other{# 个打印作业}}"</string>
     <string name="print_settings_title" msgid="7680498284751129935">"打印服务"</string>
     <string name="print_no_services_installed" msgid="7554057966540602692">"未安装任何服务"</string>
     <string name="print_no_printers_found" msgid="4833082484646109486">"找不到打印机"</string>
@@ -2075,16 +2075,11 @@
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"详细了解充电暂停的原因"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"继续充电"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"包括高耗电后台活动"</string>
-    <!-- no translation found for battery_tip_restrict_title (4537101947310626753) -->
-    <skip />
-    <!-- no translation found for battery_tip_restrict_handled_title (7142074986508706853) -->
-    <skip />
-    <!-- no translation found for battery_tip_restrict_summary (7539469590829235277) -->
-    <skip />
-    <!-- no translation found for battery_tip_restrict_handled_summary (3535697154547199190) -->
-    <skip />
-    <!-- no translation found for battery_tip_restrict_app_dialog_title (1649476357343160240) -->
-    <skip />
+    <string name="battery_tip_restrict_title" msgid="4537101947310626753">"{count,plural, =1{限制 # 个应用}other{限制 # 个应用}}"</string>
+    <string name="battery_tip_restrict_handled_title" msgid="7142074986508706853">"{count,plural, =1{{label}最近受到限制}other{# 个应用最近受到限制}}"</string>
+    <string name="battery_tip_restrict_summary" msgid="7539469590829235277">"{count,plural, =1{{label}在后台消耗的电量很高}other{# 个应用在后台消耗的电量很高}}"</string>
+    <string name="battery_tip_restrict_handled_summary" msgid="3535697154547199190">"{count,plural, =1{此应用无法在后台运行}other{这些应用无法在后台运行}}"</string>
+    <string name="battery_tip_restrict_app_dialog_title" msgid="1649476357343160240">"{count,plural, =1{限制应用？}other{限制 # 个应用？}}"</string>
     <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"为了节省电量，请将<xliff:g id="APP">%1$s</xliff:g>设置为停止在后台使用电量。该应用可能无法正常运行，相应通知也可能会有所延迟。"</string>
     <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"为了节省电量，请将这些应用设置为停止在后台使用电量。受限应用可能无法正常运行，相应通知也可能会有所延迟。\n\n应用："</string>
     <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"为了节省电量，请将这些应用设置为停止在后台使用电量。受限应用可能无法正常运行，相应通知也可能会有所延迟。\n\n应用：\n<xliff:g id="APP_LIST">%1$s</xliff:g>。"</string>
@@ -2098,16 +2093,14 @@
     <string name="smart_battery_title" msgid="9095903608520254254">"自动管理应用"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"当电池管理器检测到应用正在严重耗电时，您可以选择限制这些应用。受限应用可能无法正常运行，相应通知也可能会有所延迟。"</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"受限应用"</string>
-    <!-- no translation found for restricted_app_summary (1022307922754893997) -->
-    <skip />
+    <string name="restricted_app_summary" msgid="1022307922754893997">"{count,plural, =1{限制 # 个应用的电池用量}other{限制 # 个应用的电池用量}}"</string>
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"限制时间：<xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="restricted_app_detail_footer" msgid="3495725286882138803">"这些应用被限制在后台使用电池电量。它们可能无法正常运行，通知也可能会出现延迟。"</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"使用电池管理器"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"检测应用何时使用电量"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"检测应用大量消耗电池电量的情况"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"检测应用大量消耗电池电量的情况"</string>
-    <!-- no translation found for battery_manager_app_restricted (2583902700677009173) -->
-    <skip />
+    <string name="battery_manager_app_restricted" msgid="2583902700677009173">"{count,plural, =1{# 个应用受到限制}other{# 个应用受到限制}}"</string>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
     <string name="battery_missing_message" msgid="400958471814422770">"读取电池计量器时出现问题。"</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
@@ -2127,27 +2120,13 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"电池充满电后的大致使用时长"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"电池用量数据为大致值，可能会因使用情形而变化。"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"电池用量"</string>
-    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"共使用了 <xliff:g id="TIME_0">^1</xliff:g> • 自上次充满电后，\n在后台使用了 <xliff:g id="TIME_1">^2</xliff:g>"</string>
-    <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"共 <xliff:g id="TIME_0">^1</xliff:g> • 过去 24 小时内在后台使用了 <xliff:g id="TIME_1">^2</xliff:g>\n"</string>
-    <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"共 <xliff:g id="TIME_0">^1</xliff:g> • 后台使用了 <xliff:g id="TIME_1">^2</xliff:g>\n（<xliff:g id="TIME_PERIOD">^3</xliff:g>）"</string>
-    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"自上次充满电后，共使用了不到 1 分钟"</string>
-    <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"过去 24 小时内共使用了不到 1 分钟"</string>
-    <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"<xliff:g id="TIME_PERIOD">^1</xliff:g>之间共使用了不到 1 分钟"</string>
-    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"自电池上次充满电后，在后台使用了不到 1 分钟"</string>
-    <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"过去 24 小时内在后台使用了不到 1 分钟"</string>
-    <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"<xliff:g id="TIME_PERIOD">^1</xliff:g>之间在后台使用了不到 1 分钟"</string>
-    <string name="battery_total_usage" msgid="4811532932663354619">"自上次充满电后，共使用了 <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="battery_total_usage_24hr" msgid="3907495067623665787">"过去 24 小时内共使用了 <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_PERIOD">^2</xliff:g>之间共使用了 <xliff:g id="TIME_0">^1</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="8262917746299259350">"自上次充满电后，在后台使用了 <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"过去 24 小时内在后台使用了 <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_PERIOD">^2</xliff:g>之间在后台使用了 <xliff:g id="TIME_0">^1</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"共使用了 <xliff:g id="TIME">^1</xliff:g> • 自上次充满电后，\n在后台使用了不到 1 分钟"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"共 <xliff:g id="TIME">^1</xliff:g> • 过去 24 小时内在后台使用了不到 1 分钟\n"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"共 <xliff:g id="TIME_0">^1</xliff:g> • 后台使用了不到 1 分钟\n（<xliff:g id="TIME_PERIOD">^2</xliff:g>）"</string>
     <string name="battery_not_usage" msgid="3851536644733662392">"自上次充满电后，未曾使用"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"过去 24 小时内未使用过"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
+    <!-- no translation found for battery_usage_since_last_full_charge (3488425008925924769) -->
+    <skip />
+    <string name="battery_usage_system_apps" msgid="8659537819731575299">"系统应用"</string>
+    <string name="battery_usage_others" msgid="311793281613609986">"其他"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"预计剩余时间"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"剩余充电时间"</string>
     <string name="estimated_time_description" msgid="211058785418596009">"估算时间可能会因使用情形而有所改变"</string>
@@ -2185,17 +2164,21 @@
     <string name="battery_app_usage_for" msgid="7309909074935858949">"<xliff:g id="SLOT">%s</xliff:g>的应用耗电量"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"总计：不到 1 分钟"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"后台：不到 1 分钟"</string>
+    <string name="battery_usage_screen_time_less_than_one_minute" msgid="2911989465891679033">"设备使用时间：不到一分钟"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"总计：<xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"后台：<xliff:g id="TIME">%s</xliff:g>"</string>
+    <string name="battery_usage_screen_time" msgid="3973865893520804115">"设备使用时间：<xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"充满电几小时后，设备才会显示电池用量数据"</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"现在"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"电池用量图表"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"每日电池用量图表"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"每小时电池用量图表"</string>
-    <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="8219417894003454299">"自上次充满电后的按比例详细用量信息"</string>
-    <string name="battery_usage_breakdown_title_for_slot" msgid="5897712719834293709">"<xliff:g id="SLOT">%s</xliff:g>的按比例详细用量信息"</string>
-    <string name="battery_usage_app_tab" msgid="47007533921631047">"应用"</string>
-    <string name="battery_usage_system_tab" msgid="2723499428460455537">"系统"</string>
+    <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"自上次充满电后的电池用量"</string>
+    <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"<xliff:g id="SLOT">%s</xliff:g>的电池用量"</string>
+    <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"自上次充满电以来的设备使用时间"</string>
+    <string name="screen_time_category_for_slot" msgid="8287722270554654959">"<xliff:g id="SLOT">%s</xliff:g>的设备使用时间"</string>
+    <string name="battery_usage_spinner_breakdown_by_apps" msgid="7746337368402445072">"按应用细分"</string>
+    <string name="battery_usage_spinner_breakdown_by_system" msgid="4646952798665973464">"按系统细分"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"进程统计信息"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"运行中进程的相关技术统计信息"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"内存用量"</string>
@@ -2297,8 +2280,7 @@
     <string name="remove_credential_management_app" msgid="6089291496976812786">"移除应用"</string>
     <string name="remove_credential_management_app_dialog_title" msgid="5713525435104706772">"要移除此应用吗？"</string>
     <string name="remove_credential_management_app_dialog_message" msgid="7739474298063646935">"此应用将不再管理证书，但会保留在您的设备上。此应用安装的所有证书都将被卸载。"</string>
-    <!-- no translation found for number_of_urls (1128699121050872188) -->
-    <skip />
+    <string name="number_of_urls" msgid="1128699121050872188">"{count,plural, =1{# 个网址}other{# 个网址}}"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"紧急拨号信号"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"设置进行紧急呼救时的行为"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"备份"</string>
@@ -2341,8 +2323,7 @@
     <string name="notification_history_today" msgid="5828496957208237230">"过去 24 小时的通知"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"延后的通知"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"最近关闭的通知"</string>
-    <!-- no translation found for notification_history_count (885305572972482838) -->
-    <skip />
+    <string name="notification_history_count" msgid="885305572972482838">"{count,plural, =1{# 条通知}other{# 条通知}}"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"来电铃声和振动"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"网络详情"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"同步功能已启用"</string>
@@ -2533,13 +2514,11 @@
     <string name="additional_system_update_settings_list_item_title" msgid="7230385345152138051">"其他系统更新"</string>
     <string name="ssl_ca_cert_warning" msgid="3898387588657346106">"网络可能会受到监控"</string>
     <string name="done_button" msgid="6269449526248267">"完成"</string>
-    <!-- no translation found for ssl_ca_cert_dialog_title (1032088078702042090) -->
-    <skip />
+    <string name="ssl_ca_cert_dialog_title" msgid="1032088078702042090">"{count,plural, =1{信任或移除证书}other{信任或移除证书}}"</string>
     <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{{orgName}已在您的设备上安装证书授权机构颁发的证书，借此监控设备网络活动，包括电子邮件、应用和安全网站。\n\n如需详细了解此证书，请与您的管理员联系。}other{{orgName}已在您的设备上安装证书授权机构颁发的证书，借此监控设备网络活动，包括电子邮件、应用和安全网站。\n\n如需详细了解这些证书，请与您的管理员联系。}}"</string>
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName}已为您的工作资料安装证书授权机构颁发的证书，借此监控工作网络活动，包括电子邮件、应用和安全网站。\n\n如需详细了解此证书，请与您的管理员联系。}other{{orgName}已为您的工作资料安装证书授权机构颁发的证书，借此监控工作网络活动，包括电子邮件、应用和安全网站。\n\n如需详细了解这些证书，请与您的管理员联系。}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"第三方可以监控您的网络活动，包括收发电子邮件、使用应用和浏览安全网站。\n\n出现这种情况的原因是您在设备上安装了信任的凭据。"</string>
-    <!-- no translation found for ssl_ca_cert_settings_button (2044927302268394991) -->
-    <skip />
+    <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{检查证书}other{检查证书}}"</string>
     <string name="user_settings_title" msgid="6550866465409807877">"多用户"</string>
     <string name="user_list_title" msgid="1387379079186123404">"用户和个人资料"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"添加用户或个人资料"</string>
@@ -3066,8 +3045,7 @@
     <string name="promote_conversation_title" msgid="4731148769888238722">"这是对话"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"添加到对话部分"</string>
     <string name="priority_conversation_count_zero" msgid="3862289535537564713">"没有优先对话"</string>
-    <!-- no translation found for priority_conversation_count (7291234530844412077) -->
-    <skip />
+    <string name="priority_conversation_count" msgid="7291234530844412077">"{count,plural, =1{# 个优先对话}other{# 个优先对话}}"</string>
     <string name="important_conversations" msgid="1233893707189659401">"优先对话"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"以悬浮对话泡形式显示在对话部分顶部"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"显示在对话部分顶部"</string>
@@ -3096,10 +3074,8 @@
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"当设备处于解锁状态时，在屏幕顶端以横幅形式显示通知"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"所有“<xliff:g id="APP_NAME">%1$s</xliff:g>”通知"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"所有<xliff:g id="APP_NAME">%1$s</xliff:g>通知"</string>
-    <!-- no translation found for notifications_sent_daily (10274479224185437) -->
-    <skip />
-    <!-- no translation found for notifications_sent_weekly (7895656213187555346) -->
-    <skip />
+    <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{每天大约 # 条通知}other{每天大约 # 条通知}}"</string>
+    <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{每周大约 # 条通知}other{每周大约 # 条通知}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"永不"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"设备和应用通知"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"控制哪些应用和设备能够读取通知"</string>
@@ -3168,15 +3144,15 @@
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"权限"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"此应用可使用您的个人“<xliff:g id="NAME">%1$s</xliff:g>”应用的权限，例如对位置信息、存储空间或通讯录的访问权限。"</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"未关联任何应用"</string>
-    <!-- no translation found for interact_across_profiles_number_of_connected_apps (4000424798291479207) -->
-    <skip />
+    <string name="interact_across_profiles_number_of_connected_apps" msgid="4000424798291479207">"{count,plural, =1{已关联 # 个应用}other{已关联 # 个应用}}"</string>
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"如需关联这些应用，请在工作资料中安装<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"如需关联这些应用，请在个人资料中安装<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"点按即可获取应用"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"“勿扰”权限"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"允许勿扰模式"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"没有任何已安装应用申请“勿扰”权限"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"根据您的要求，Android 会阻止此应用的通知显示在此设备上"</string>
+    <!-- no translation found for app_notifications_off_desc (2484843759466874201) -->
+    <skip />
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"根据您的要求，Android 会阻止这类通知显示在此设备上"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"根据您的要求，Android 会阻止这组通知显示在此设备上"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"此应用不会发送通知"</string>
@@ -3184,8 +3160,7 @@
     <string name="notification_channels_other" msgid="18159805343647908">"其他"</string>
     <string name="no_channels" msgid="4716199078612071915">"此应用未发布任何通知"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"应用中的其他设置"</string>
-    <!-- no translation found for deleted_channels (8489800381509312964) -->
-    <skip />
+    <string name="deleted_channels" msgid="8489800381509312964">"{count,plural, =1{# 个类别已删除}other{# 个类别已删除}}"</string>
     <string name="app_notification_block_title" msgid="3880322745749900296">"全部屏蔽"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"一律不显示这类通知"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"显示通知"</string>
@@ -3398,6 +3373,10 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"已关闭"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"高级"</string>
     <string name="app_permissions" msgid="8666537659217653626">"权限管理器"</string>
+    <!-- no translation found for app_data_sharing_updates_title (921888411974134089) -->
+    <skip />
+    <!-- no translation found for app_data_sharing_updates_summary (1500580254161164185) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"点按唤醒"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"在屏幕上的任意位置点按两次即可唤醒设备"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"打开链接"</string>
@@ -4238,6 +4217,8 @@
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"个人"</string>
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"工作"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"系统默认"</string>
+    <!-- no translation found for default_app_none (5420632042222036264) -->
+    <skip />
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"这项选择已失效，请重试。"</string>
     <string name="power_menu_setting_name" msgid="2394440932633137229">"按住电源按钮"</string>
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"按住电源按钮即可访问"</string>
@@ -4498,4 +4479,6 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"卸载应用"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{过去 # 个月内安装的应用}other{过去 # 个月内安装的应用}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{# 个多月前安装的应用}other{# 个多月前安装的应用}}"</string>
+    <!-- no translation found for accessibility_fingerprint_label (5017431423168191733) -->
+    <skip />
 </resources>
