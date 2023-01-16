@@ -588,8 +588,8 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Artık tabletinizin kilidini açarken veya uygulamalarda oturum açmak ya da satın alma işlemlerini onaylamak gibi işlemler için kimliğinizi doğrularken parmak izinizi kullanabilirsiniz"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Artık cihazınızın kilidini açarken veya uygulamalarda oturum açmak ya da satın alma işlemlerini onaylamak gibi işlemler için kimliğinizi doğrularken parmak izinizi kullanabilirsiniz"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Artık telefonunuzun kilidini açarken veya uygulamalarda oturum açmak ya da satın alma işlemlerini onaylamak gibi işlemler için kimliğinizi doğrularken parmak izinizi kullanabilirsiniz"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Yalnızca ekran açıkken kilidi aç"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Parmak izinizi kullanarak kilidi açabilmeniz için önce ekranı açmanız gerekir. Bu şekilde, yanlışlıkla kilit açma ihtimali azalır."</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"İstediğiniz zaman kilidi açmak için dokunun"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Ekran kapalıyken bile kilidi açmak için sensöre dokunun. Bu durumda, yanlışlıkla kilit açma ihtimali artar."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Ekran kilidini açma"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Daha sonra yap"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Kaldırın, tekrar dokunun"</string>
@@ -648,6 +648,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Bitti"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Yanlış oldu, bu sensör değil"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"İşaret parmağınızla telefonunun arkasındaki sensöre dokunun."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Parmak izi kurulumu zaman aşımına uğradı"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Şimdi tekrar deneyin veya parmak izini daha sonra Ayarlar\'da kurun"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Parmak izi kaydı çalışmadı. Tekrar deneyin veya farklı bir parmak kullanın."</string>
@@ -735,28 +737,22 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"Parmak İzi + Şifre"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Parmak izi olmadan devam et"</string>
     <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"Telefonunuzun kilidini parmak izinizle açabilirsiniz. Güvenlik amacıyla, bu seçenek için yedek bir ekran kilidi gerekir."</string>
-    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
-    <skip />
+    <string name="fingerprint_unlock_title" product="tablet" msgid="8674718459462612186">"Tabletinizin kilidini, parmak izinizi kullanarak açabilirsiniz. Güvenlik amacıyla, bu seçenek için yedek bir ekran kilidi gerekir."</string>
+    <string name="fingerprint_unlock_title" product="device" msgid="3224468142599659740">"Cihazınızın kilidini parmak izinizle açabilirsiniz. Güvenlik amacıyla, bu seçenek için yedek bir ekran kilidi gerekir."</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"Yüz Tanıma Kilidi + Desen"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Yüz Tanıma Kilidi + PIN"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Yüz Tanıma Kilidi + Şifre"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Yüz Tanıma Kilidi olmadan devam et"</string>
     <string name="face_unlock_title" product="default" msgid="7344830351598247267">"Telefonunuzun kilidini yüzünüzü kullanarak açabilirsiniz. Güvenlik amacıyla, bu seçenek için yedek bir ekran kilidi gerekir."</string>
-    <!-- no translation found for face_unlock_title (5695698036499155727) -->
-    <skip />
-    <!-- no translation found for face_unlock_title (6768108756755361161) -->
-    <skip />
+    <string name="face_unlock_title" product="tablet" msgid="5695698036499155727">"Tabletinizin kilidini yüzünüzü kullanarak açabilirsiniz. Güvenlik amacıyla, bu seçenek için yedek bir ekran kilidi gerekir."</string>
+    <string name="face_unlock_title" product="device" msgid="6768108756755361161">"Cihazınızın kilidini yüzünüzü kullanarak açabilirsiniz. Güvenlik amacıyla, bu seçenek için yedek bir ekran kilidi gerekir."</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Desen • Yüz • Parmak İzi"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • Yüz • Parmak İzi"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Şifre • Yüz • Parmak İzi"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Yüz tanıma veya parmak izi kilidi kurmadan devam et"</string>
     <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"Telefonunuzun kilidini, yüzünüzü veya parmak izinizi kullanarak açabilirsiniz. Güvenlik amacıyla, bu seçenek için yedek bir ekran kilidi gerekir."</string>
-    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
-    <skip />
-    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
-    <skip />
+    <string name="biometrics_unlock_title" product="tablet" msgid="5808626401936488028">"Tabletinizin kilidini, yüzünüzü veya parmak izinizi kullanarak açabilirsiniz. Güvenlik amacıyla, bu seçenek için yedek bir ekran kilidi gerekir."</string>
+    <string name="biometrics_unlock_title" product="device" msgid="4912499343509046929">"Cihazınızın kilidini, yüzünüzü veya parmak izinizi kullanarak açabilirsiniz. Güvenlik amacıyla, bu seçenek için yedek bir ekran kilidi gerekir."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"Yönetici, şifreleme politikası veya kimlik bilgileri deposu tarafından devre dışı bırakıldı"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Yok"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Hızlıca kaydırma"</string>
@@ -4213,7 +4209,8 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Rahatsız Etmeyin\'e izin ver"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Yüklü hiçbir uygulama Rahatsız Etmeyin erişimi isteğinde bulunmadı"</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"Uygulamalar yükleniyor…"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"İsteğiniz üzerine Android, bu uygulamanın bildirimlerinin bu cihazda görünmesini engelliyor"</string>
+    <!-- no translation found for app_notifications_off_desc (2484843759466874201) -->
+    <skip />
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"İsteğiniz üzerine Android, bu kategorideki bildirimlerin bu cihazda görünmesini engelliyor"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"İsteğiniz üzerine Android, bu bildirim grubunun bu cihazda görünmesini engelliyor"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Bu uygulama bildirim göndermiyor."</string>

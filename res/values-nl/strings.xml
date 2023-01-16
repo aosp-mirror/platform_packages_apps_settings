@@ -588,8 +588,10 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Je kunt nu je vingerafdruk gebruiken om je tablet te ontgrendelen of om te bevestigen dat jij het bent, bijvoorbeeld als je inlogt bij apps of een aankoop goedkeurt"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Je kunt nu je vingerafdruk gebruiken om je apparaat te ontgrendelen of om te bevestigen dat jij het bent, bijvoorbeeld als je inlogt bij apps of een aankoop goedkeurt"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Je kunt nu je vingerafdruk gebruiken om je telefoon te ontgrendelen of om te bevestigen dat jij het bent, bijvoorbeeld als je inlogt bij apps of een aankoop goedkeurt"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Alleen ontgrendelen als het scherm aanstaat"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Het scherm moet aanstaan voordat je kunt ontgrendelen met je vingerafdruk. Zo wordt de kans op per ongeluk ontgrendelen kleiner."</string>
+    <!-- no translation found for security_settings_require_screen_on_to_auth_title (1641621458536715518) -->
+    <skip />
+    <!-- no translation found for security_settings_require_screen_on_to_auth_description (4158414711168345398) -->
+    <skip />
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Scherm, Ontgrendelen"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Later doen"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Raak de sensor opnieuw aan"</string>
@@ -648,6 +650,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Klaar"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Dat is niet de sensor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Raak de sensor achter op je telefoon aan. Gebruik je wijsvinger."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Time-out bij instellen van vingerafdruk"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Probeer het nu opnieuw of stel je vingerafdruk later in via Instellingen"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Vingerafdrukregistratie is mislukt. Probeer het opnieuw of gebruik een andere vinger."</string>
@@ -735,28 +739,22 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"Vingerafdruk + wachtwoord"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Doorgaan zonder vingerafdruk"</string>
     <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"Je kunt je telefoon ontgrendelen met je vingerafdruk. Uit beveiligingsoverwegingen is voor deze optie een extra schermvergrendeling vereist."</string>
-    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
-    <skip />
+    <string name="fingerprint_unlock_title" product="tablet" msgid="8674718459462612186">"Je kunt je tablet ontgrendelen met je vingerafdruk. Uit beveiligingsoverwegingen is voor deze optie een extra schermvergrendeling vereist."</string>
+    <string name="fingerprint_unlock_title" product="device" msgid="3224468142599659740">"Je kunt je apparaat ontgrendelen met je vingerafdruk. Uit beveiligingsoverwegingen is voor deze optie een extra schermvergrendeling vereist."</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"Ontgrendelen via gezichtsherkenning + patroon"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Ontgrendelen via gezichtsherkenning + pincode"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Ontgrendelen via gezicht + wachtwoord"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Doorgaan zonder Ontgrendelen via gezichtsherkenning"</string>
     <string name="face_unlock_title" product="default" msgid="7344830351598247267">"Je kunt je telefoon ontgrendelen met je gezicht. Uit beveiligingsoverwegingen is voor deze optie een extra schermvergrendeling vereist."</string>
-    <!-- no translation found for face_unlock_title (5695698036499155727) -->
-    <skip />
-    <!-- no translation found for face_unlock_title (6768108756755361161) -->
-    <skip />
+    <string name="face_unlock_title" product="tablet" msgid="5695698036499155727">"Je kunt je tablet ontgrendelen met je gezicht. Uit beveiligingsoverwegingen is voor deze optie een extra schermvergrendeling vereist."</string>
+    <string name="face_unlock_title" product="device" msgid="6768108756755361161">"Je kunt je apparaat ontgrendelen met je gezicht. Uit beveiligingsoverwegingen is voor deze optie een extra schermvergrendeling vereist."</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Patroon • Gezicht • Vingerafdruk"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"Pincode • Gezicht • Vingerafdruk"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Wachtwoord • Gezicht • Vingerafdruk"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Doorgaan zonder gezicht of vingerafdruk"</string>
     <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"Je kunt je telefoon ontgrendelen met je gezicht of vingerafdruk. Uit beveiligingsoverwegingen is voor deze optie een extra schermvergrendeling vereist."</string>
-    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
-    <skip />
-    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
-    <skip />
+    <string name="biometrics_unlock_title" product="tablet" msgid="5808626401936488028">"Je kunt je tablet ontgrendelen met je gezicht of vingerafdruk. Uit beveiligingsoverwegingen is voor deze optie een extra schermvergrendeling vereist."</string>
+    <string name="biometrics_unlock_title" product="device" msgid="4912499343509046929">"Je kunt je apparaat ontgrendelen met je gezicht of vingerafdruk. Uit beveiligingsoverwegingen is voor deze optie een extra schermvergrendeling vereist."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"Uitgezet door beheerder, versleutelingsbeleid of opslag certificaatgegevens"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Geen"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Swipen"</string>
@@ -4213,7 +4211,8 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Niet storen toestaan"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Er zijn geen geïnstalleerde apps die toegang tot \'Niet storen\' hebben aangevraagd"</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"Apps laden…"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"Op jouw verzoek toont Android geen meldingen van deze app op dit apparaat"</string>
+    <!-- no translation found for app_notifications_off_desc (2484843759466874201) -->
+    <skip />
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Op jouw verzoek toont Android geen meldingen van deze categorie op dit apparaat"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Op jouw verzoek toont Android deze groep meldingen niet op dit apparaat"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Deze app stuurt geen meldingen"</string>
@@ -5675,7 +5674,7 @@
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Pas de gevoeligheid aan door te kiezen hoelang je de aan/uit-knop ingedrukt moet houden"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Kort"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Lang"</string>
-    <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Portemonnee tonen"</string>
+    <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Wallet tonen"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"Sta toegang tot Wallet toe vanaf vergrendelscherm"</string>
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"QR-scanner tonen"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Toegang tot QR-scanner toestaan vanaf vergrendelscherm"</string>

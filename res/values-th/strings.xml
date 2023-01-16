@@ -588,8 +588,8 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"ตอนนี้คุณสามารถใช้ลายนิ้วมือเพื่อปลดล็อกแท็บเล็ตหรือยืนยันว่าเป็นคุณ เช่น เมื่อลงชื่อเข้าใช้แอปหรืออนุมัติการซื้อ"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"ตอนนี้คุณสามารถใช้ลายนิ้วมือเพื่อปลดล็อกอุปกรณ์หรือยืนยันว่าเป็นคุณ เช่น เมื่อลงชื่อเข้าใช้แอปหรืออนุมัติการซื้อ"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"ตอนนี้คุณสามารถใช้ลายนิ้วมือเพื่อปลดล็อกโทรศัพท์หรือยืนยันว่าเป็นคุณ เช่น เมื่อลงชื่อเข้าใช้แอปหรืออนุมัติการซื้อ"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"ปลดล็อกเฉพาะเวลาที่หน้าจอเปิดอยู่เท่านั้น"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"หน้าจอต้องเปิดอยู่จึงจะปลดล็อกด้วยลายนิ้วมือได้ ซึ่งจะช่วยลดการปลดล็อกโดยไม่ได้ตั้งใจ"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"แตะเพื่อปลดล็อกได้ทุกเมื่อ"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"แตะเซ็นเซอร์เพื่อปลดล็อกแม้หน้าจอจะปิดอยู่ ซึ่งมีโอกาสสูงที่จะปลดล็อกโดยไม่ได้ตั้งใจ"</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"ปลดล็อกหน้าจอ"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"ข้ามไปก่อน"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"ยกนิ้วขึ้นแล้วแตะอีกครั้ง"</string>
@@ -648,6 +648,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"เสร็จสิ้น"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"อ๊ะ นั่นไม่ใช่เซ็นเซอร์"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"แตะเซ็นเซอร์ที่ด้านหลังโทรศัพท์โดยใช้นิ้วชี้"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"การตั้งค่าลายนิ้วมือหมดเวลา"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"ลองอีกครั้งตอนนี้หรือตั้งค่าลายนิ้วมือภายหลังในการตั้งค่า"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"การลงทะเบียนลายนิ้วมือไม่ทำงาน โปรดลองอีกครั้งหรือใช้นิ้วอื่น"</string>
@@ -735,28 +737,22 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"ลายนิ้วมือ + รหัสผ่าน"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"ดำเนินการต่อโดยไม่ใช้ลายนิ้วมือ"</string>
     <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"คุณสามารถปลดล็อกโทรศัพท์โดยใช้ลายนิ้วมือ ตัวเลือกนี้ต้องใช้การล็อกหน้าจอสำรองเพื่อความปลอดภัย"</string>
-    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
-    <skip />
+    <string name="fingerprint_unlock_title" product="tablet" msgid="8674718459462612186">"คุณปลดล็อกแท็บเล็ตโดยใช้ลายนิ้วมือได้ ตัวเลือกนี้ต้องใช้การล็อกหน้าจอสำรองเพื่อความปลอดภัย"</string>
+    <string name="fingerprint_unlock_title" product="device" msgid="3224468142599659740">"คุณปลดล็อกอุปกรณ์โดยใช้ลายนิ้วมือได้ ตัวเลือกนี้ต้องใช้การล็อกหน้าจอสำรองเพื่อความปลอดภัย"</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"การปลดล็อกด้วยใบหน้าและรูปแบบ"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"การปลดล็อกด้วยใบหน้าและ PIN"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"การปลดล็อกด้วยใบหน้าและรหัสผ่าน"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"ดำเนินการต่อโดยไม่ใช้การปลดล็อกด้วยใบหน้า"</string>
     <string name="face_unlock_title" product="default" msgid="7344830351598247267">"คุณปลดล็อกโทรศัพท์โดยใช้ใบหน้าได้ ตัวเลือกนี้ต้องใช้การล็อกหน้าจอสำรองเพื่อความปลอดภัย"</string>
-    <!-- no translation found for face_unlock_title (5695698036499155727) -->
-    <skip />
-    <!-- no translation found for face_unlock_title (6768108756755361161) -->
-    <skip />
+    <string name="face_unlock_title" product="tablet" msgid="5695698036499155727">"คุณปลดล็อกแท็บเล็ตโดยใช้ใบหน้าได้ ตัวเลือกนี้ต้องใช้การล็อกหน้าจอสำรองเพื่อความปลอดภัย"</string>
+    <string name="face_unlock_title" product="device" msgid="6768108756755361161">"คุณปลดล็อกอุปกรณ์โดยใช้ใบหน้าได้ ตัวเลือกนี้ต้องใช้การล็อกหน้าจอสำรองเพื่อความปลอดภัย"</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"รูปแบบ • ใบหน้า • ลายนิ้วมือ"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • ใบหน้า • ลายนิ้วมือ"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"รหัสผ่าน • ใบหน้า • ลายนิ้วมือ"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"ดำเนินการต่อโดยไม่ตั้งค่าการปลดล็อกด้วยใบหน้าหรือลายนิ้วมือ"</string>
     <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"คุณปลดล็อกโทรศัพท์โดยใช้ใบหน้าหรือลายนิ้วมือได้ ตัวเลือกนี้ต้องใช้การล็อกหน้าจอสำรองเพื่อความปลอดภัย"</string>
-    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
-    <skip />
-    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
-    <skip />
+    <string name="biometrics_unlock_title" product="tablet" msgid="5808626401936488028">"คุณปลดล็อกแท็บเล็ตโดยใช้ใบหน้าหรือลายนิ้วมือได้ ตัวเลือกนี้ต้องใช้การล็อกหน้าจอสำรองเพื่อความปลอดภัย"</string>
+    <string name="biometrics_unlock_title" product="device" msgid="4912499343509046929">"คุณปลดล็อกอุปกรณ์โดยใช้ใบหน้าหรือลายนิ้วมือได้ ตัวเลือกนี้ต้องใช้การล็อกหน้าจอสำรองเพื่อความปลอดภัย"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"ปิดใช้โดยผู้ดูแลระบบ นโยบายการเข้ารหัสลับ หรือที่เก็บข้อมูลเข้าสู่ระบบ"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"ไม่มี"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"ปัด"</string>
@@ -4213,7 +4209,7 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"อนุญาตโหมดห้ามรบกวน"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"ไม่มีแอปที่ติดตั้งใดๆ ส่งคำขอสิทธิ์เข้าถึง \"ห้ามรบกวน\""</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"กำลังโหลดแอป…"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"Android กำลังบล็อกไม่ให้การแจ้งเตือนของแอปนี้ปรากฏในอุปกรณ์นี้ตามที่คุณขอ"</string>
+    <string name="app_notifications_off_desc" msgid="2484843759466874201">"คุณไม่อนุญาตการแจ้งเตือนจากแอปนี้"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Android กำลังบล็อกไม่ให้การแจ้งเตือนหมวดหมู่นี้ปรากฏในอุปกรณ์นี้ตามที่คุณขอ"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Android กำลังบล็อกไม่ให้การแจ้งเตือนกลุ่มนี้ปรากฏในอุปกรณ์นี้ตามที่คุณขอ"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"แอปนี้ไม่ได้ส่งการแจ้งเตือน"</string>
