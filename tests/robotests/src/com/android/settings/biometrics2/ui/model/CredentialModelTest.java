@@ -31,18 +31,18 @@ import android.os.Bundle;
 import android.os.SystemClock;
 
 import androidx.annotation.Nullable;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.password.ChooseLockSettingsHelper;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.time.Clock;
 import java.util.Arrays;
 import java.util.Set;
 
-@RunWith(AndroidJUnit4.class)
+@RunWith(RobolectricTestRunner.class)
 public class CredentialModelTest {
 
     private final Clock mClock = SystemClock.elapsedRealtimeClock();
