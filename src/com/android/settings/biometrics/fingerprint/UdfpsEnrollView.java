@@ -25,7 +25,6 @@ import android.util.AttributeSet;
 import android.util.RotationUtils;
 import android.view.Gravity;
 import android.view.Surface;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -34,11 +33,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
+import com.android.settingslib.udfps.UdfpsOverlayParams;
 
 /**
  * View corresponding with udfps_enroll_view.xml
  */
 public class UdfpsEnrollView extends FrameLayout implements UdfpsEnrollHelper.Listener {
+    private static final String TAG = "UdfpsEnrollView";
     @NonNull
     private final UdfpsEnrollDrawable mFingerprintDrawable;
     @NonNull
@@ -98,10 +99,13 @@ public class UdfpsEnrollView extends FrameLayout implements UdfpsEnrollHelper.Li
         onFingerDown();
     }
 
-
     @Override
     public void onPointerUp(int sensorId) {
         onFingerUp();
+    }
+
+    public UdfpsOverlayParams getOverlayParams() {
+        return mOverlayParams;
     }
 
     void setOverlayParams(UdfpsOverlayParams params) {
@@ -124,7 +128,6 @@ public class UdfpsEnrollView extends FrameLayout implements UdfpsEnrollHelper.Li
 
     private void onSensorRectUpdated() {
         updateDimensions();
-        updateAccessibilityViewLocation();
 
         // Updates sensor rect in relation to the overlay view
         mSensorRect.set(getPaddingX(), getPaddingY(),
@@ -135,7 +138,7 @@ public class UdfpsEnrollView extends FrameLayout implements UdfpsEnrollHelper.Li
 
     private void updateDimensions() {
         // Original sensorBounds assume portrait mode.
-        final Rect rotatedBounds = mOverlayParams.getSensorBounds();
+        final Rect rotatedBounds = new Rect(mOverlayParams.getSensorBounds());
         int rotation = mOverlayParams.getRotation();
         if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
             RotationUtils.rotateBounds(
@@ -192,27 +195,14 @@ public class UdfpsEnrollView extends FrameLayout implements UdfpsEnrollHelper.Li
         setLayoutParams(params);
     }
 
-    private void updateAccessibilityViewLocation() {
-        View fingerprintAccessibilityView = findViewById(R.id.udfps_enroll_accessibility_view);
-        ViewGroup.LayoutParams params = fingerprintAccessibilityView.getLayoutParams();
-        params.width = mOverlayParams.getSensorBounds().width();
-        params.height = mOverlayParams.getSensorBounds().height();
-        fingerprintAccessibilityView.setLayoutParams(params);
-        fingerprintAccessibilityView.requestLayout();
-    }
-
     private void onFingerDown() {
-        if (mOverlayParams.isOptical()) {
-            mFingerprintDrawable.setShouldSkipDraw(true);
-            mFingerprintDrawable.invalidateSelf();
-        }
+        mFingerprintDrawable.setShouldSkipDraw(true);
+        mFingerprintDrawable.invalidateSelf();
     }
 
     private void onFingerUp() {
-        if (mOverlayParams.isOptical()) {
-            mFingerprintDrawable.setShouldSkipDraw(false);
-            mFingerprintDrawable.invalidateSelf();
-        }
+        mFingerprintDrawable.setShouldSkipDraw(false);
+        mFingerprintDrawable.invalidateSelf();
     }
 
     private int getPaddingX() {
