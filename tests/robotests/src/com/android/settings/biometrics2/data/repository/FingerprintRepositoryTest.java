@@ -34,7 +34,6 @@ import android.content.res.Resources;
 import android.hardware.fingerprint.FingerprintManager;
 
 import androidx.test.core.app.ApplicationProvider;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -43,8 +42,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(AndroidJUnit4.class)
+@RunWith(RobolectricTestRunner.class)
 public class FingerprintRepositoryTest {
 
     @Rule public final MockitoRule mockito = MockitoJUnit.rule();
