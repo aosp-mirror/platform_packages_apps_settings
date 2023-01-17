@@ -40,7 +40,6 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.biometrics2.data.repository.FingerprintRepository;
-import com.android.settings.biometrics2.ui.model.EnrollmentRequest;
 import com.android.settings.password.SetupSkipDialog;
 import com.android.settings.testutils.InstantTaskExecutorRule;
 
@@ -70,28 +69,21 @@ public class FingerprintEnrollmentViewModelTest {
         mApplication = ApplicationProvider.getApplicationContext();
         mFingerprintRepository = new FingerprintRepository(mFingerprintManager);
         mViewModel = new FingerprintEnrollmentViewModel(mApplication, mFingerprintRepository,
-                mKeyguardManager);
+                mKeyguardManager, newAllFalseRequest(mApplication));
     }
 
     @Test
     public void testGetRequest() {
-        when(mKeyguardManager.isKeyguardSecure()).thenReturn(true);
-        assertThat(mViewModel.getRequest()).isNull();
-
-        final EnrollmentRequest request = newAllFalseRequest(mApplication);
-        mViewModel.setRequest(request);
-        assertThat(mViewModel.getRequest()).isEqualTo(request);
+        assertThat(mViewModel.getRequest()).isNotNull();
     }
 
     @Test
     public void testGetNextActivityBaseIntentExtras() {
-        mViewModel.setRequest(newAllFalseRequest(mApplication));
         assertThat(mViewModel.getNextActivityBaseIntentExtras()).isNotNull();
     }
 
     @Test
     public void testOnContinueEnrollActivityResult_shouldRelaySkip1Result() {
-        mViewModel.setRequest(newAllFalseRequest(mApplication));
         final ActivityResult result = new ActivityResult(RESULT_SKIP, null);
 
         // Run onContinueEnrollActivityResult
@@ -102,7 +94,6 @@ public class FingerprintEnrollmentViewModelTest {
 
     @Test
     public void testOnContinueEnrollActivityResult_shouldRelaySkip2Result() {
-        mViewModel.setRequest(newAllFalseRequest(mApplication));
         final ActivityResult result = new ActivityResult(SetupSkipDialog.RESULT_SKIP, null);
 
         // Run onContinueEnrollActivityResult
@@ -113,7 +104,6 @@ public class FingerprintEnrollmentViewModelTest {
 
     @Test
     public void testOnContinueEnrollActivityResult_shouldRelayNullDataTimeoutResult() {
-        mViewModel.setRequest(newAllFalseRequest(mApplication));
         final ActivityResult result = new ActivityResult(RESULT_TIMEOUT, null);
 
         // Run onContinueEnrollActivityResult
@@ -127,7 +117,6 @@ public class FingerprintEnrollmentViewModelTest {
 
     @Test
     public void testOnContinueEnrollActivityResult_shouldRelayWithDataTimeoutResult() {
-        mViewModel.setRequest(newAllFalseRequest(mApplication));
         final Intent intent = new Intent("testAction");
         intent.putExtra("testKey", "testValue");
         final ActivityResult result = new ActivityResult(RESULT_TIMEOUT, intent);
@@ -143,7 +132,6 @@ public class FingerprintEnrollmentViewModelTest {
 
     @Test
     public void testOnContinueEnrollActivityResult_shouldRelayNullDataFinishResult() {
-        mViewModel.setRequest(newAllFalseRequest(mApplication));
         final ActivityResult result = new ActivityResult(RESULT_FINISHED, null);
 
         // Run onContinueEnrollActivityResult
@@ -157,7 +145,6 @@ public class FingerprintEnrollmentViewModelTest {
 
     @Test
     public void testOnContinueEnrollActivityResult_shouldRelayWithDataFinishResult() {
-        mViewModel.setRequest(newAllFalseRequest(mApplication));
         final Intent intent = new Intent("testAction");
         intent.putExtra("testKey", "testValue");
         final ActivityResult result = new ActivityResult(RESULT_FINISHED, intent);
@@ -173,11 +160,12 @@ public class FingerprintEnrollmentViewModelTest {
 
     @Test
     public void testOnContinueEnrollActivityResult_shouldRelayNullDataFinishResultAsNewData() {
+        mViewModel = new FingerprintEnrollmentViewModel(mApplication, mFingerprintRepository,
+                mKeyguardManager, newIsSuwRequest(mApplication));
         when(mKeyguardManager.isKeyguardSecure()).thenReturn(true);
         final int userId = 111;
         final int numOfFp = 4;
         setupFingerprintEnrolledFingerprints(mFingerprintManager, userId, numOfFp);
-        mViewModel.setRequest(newIsSuwRequest(mApplication));
         final ActivityResult result = new ActivityResult(RESULT_FINISHED, null);
 
         // Run onContinueEnrollActivityResult
@@ -194,11 +182,12 @@ public class FingerprintEnrollmentViewModelTest {
 
     @Test
     public void testOnContinueEnrollActivityResult_shouldRelayWithDataFinishResultAsNewData() {
+        mViewModel = new FingerprintEnrollmentViewModel(mApplication, mFingerprintRepository,
+                mKeyguardManager, newIsSuwRequest(mApplication));
         when(mKeyguardManager.isKeyguardSecure()).thenReturn(true);
         final int userId = 20;
         final int numOfFp = 9;
         setupFingerprintEnrolledFingerprints(mFingerprintManager, userId, numOfFp);
-        mViewModel.setRequest(newIsSuwRequest(mApplication));
         final String action = "testAction";
         final String key = "testKey";
         final String value = "testValue";

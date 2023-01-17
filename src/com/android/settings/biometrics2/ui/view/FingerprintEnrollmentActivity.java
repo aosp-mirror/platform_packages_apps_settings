@@ -19,7 +19,9 @@ package com.android.settings.biometrics2.ui.view;
 import static androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult;
 import static androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY;
 
-import static com.android.settings.biometrics2.factory.BiometricsViewModelFactory.CHALLENGE_GENERATOR;
+import static com.android.settings.biometrics2.factory.BiometricsViewModelFactory.CHALLENGE_GENERATOR_KEY;
+import static com.android.settings.biometrics2.factory.BiometricsViewModelFactory.ENROLLMENT_REQUEST_KEY;
+import static com.android.settings.biometrics2.factory.BiometricsViewModelFactory.USER_ID_KEY;
 import static com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.CREDENTIAL_FAIL_NEED_TO_CHOOSE_LOCK;
 import static com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.CREDENTIAL_FAIL_NEED_TO_CONFIRM_LOCK;
 import static com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.CREDENTIAL_IS_GENERATING_CHALLENGE;
@@ -37,9 +39,11 @@ import android.annotation.StyleRes;
 import android.app.Application;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 
 import androidx.activity.result.ActivityResult;
@@ -63,9 +67,11 @@ import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling;
 import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollEnrolling;
 import com.android.settings.biometrics2.data.repository.FingerprintRepository;
 import com.android.settings.biometrics2.factory.BiometricsViewModelFactory;
+import com.android.settings.biometrics2.ui.model.CredentialModel;
 import com.android.settings.biometrics2.ui.model.EnrollmentRequest;
 import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.FingerprintChallengeGenerator;
+import com.android.settings.biometrics2.ui.viewmodel.DeviceFoldedViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFindSensorViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollIntroViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollProgressViewModel;
@@ -126,7 +132,6 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
         mViewModelProvider = new ViewModelProvider(this);
 
         mViewModel = mViewModelProvider.get(FingerprintEnrollmentViewModel.class);
-        mViewModel.setRequest(new EnrollmentRequest(getIntent(), getApplicationContext()));
         mViewModel.setSavedInstanceState(savedInstanceState);
 
         mAutoCredentialViewModel = mViewModelProvider.get(AutoCredentialViewModel.class);
@@ -173,7 +178,6 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
         }
 
         // observe LiveData
-        getLifecycle().addObserver(mViewModel);
         mViewModel.getSetResultLiveData().observe(this, this::onSetActivityResult);
 
         mAutoCredentialViewModel.getGenerateChallengeFailedLiveData().observe(this,
@@ -192,9 +196,6 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
     private void attachIntroViewModel() {
         final FingerprintEnrollIntroViewModel introViewModel =
                 mViewModelProvider.get(FingerprintEnrollIntroViewModel.class);
-
-        introViewModel.setEnrollmentRequest(mViewModel.getRequest());
-        introViewModel.setUserId(mAutoCredentialViewModel.getUserId());
 
         // Clear ActionLiveData in FragmentViewModel to prevent getting previous action during
         // recreate, like press 'Agree' then press 'back' in FingerprintEnrollFindSensor activity.
@@ -224,12 +225,10 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
         if (initProgressViewModel) {
             final FingerprintEnrollProgressViewModel progressViewModel =
                     mViewModelProvider.get(FingerprintEnrollProgressViewModel.class);
-            progressViewModel.setUserId(mAutoCredentialViewModel.getUserId());
             progressViewModel.setToken(mAutoCredentialViewModel.getToken());
         }
         final FingerprintEnrollFindSensorViewModel findSensorViewModel =
                 mViewModelProvider.get(FingerprintEnrollFindSensorViewModel.class);
-        findSensorViewModel.setIsSuw(mViewModel.getRequest().isSuw());
         getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
                 .setCustomAnimations(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out,
@@ -408,9 +407,19 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
                 super.getDefaultViewModelCreationExtras().get(APPLICATION_KEY);
         final MutableCreationExtras ret = new MutableCreationExtras();
         ret.set(APPLICATION_KEY, application);
+
         final FingerprintRepository repository = FeatureFactory.getFactory(application)
                 .getBiometricsRepositoryProvider().getFingerprintRepository(application);
-        ret.set(CHALLENGE_GENERATOR, new FingerprintChallengeGenerator(repository));
+        ret.set(CHALLENGE_GENERATOR_KEY, new FingerprintChallengeGenerator(repository));
+
+        ret.set(ENROLLMENT_REQUEST_KEY, new EnrollmentRequest(getIntent(),
+                getApplicationContext()));
+
+        Bundle extras = getIntent().getExtras();
+        final CredentialModel credentialModel = new CredentialModel(extras,
+                SystemClock.elapsedRealtimeClock());
+        ret.set(USER_ID_KEY, credentialModel.getUserId());
+
         return ret;
     }
 
@@ -433,9 +442,9 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        getLifecycle().removeObserver(mViewModel);
-        super.onDestroy();
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        mViewModelProvider.get(DeviceFoldedViewModel.class).onConfigurationChanged(newConfig);
+        super.onConfigurationChanged(newConfig);
     }
 
     @Override
