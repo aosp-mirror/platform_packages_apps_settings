@@ -1376,8 +1376,9 @@ public class ManageApplications extends InstrumentedFragment
                         LIST_TYPE_NOTIFICATION);
             } else if (mManageApplications.mListType == LIST_TYPE_CLONED_APPS
                     && viewType == VIEW_TYPE_APP_HEADER) {
-                view = ApplicationViewHolder.newHeader(parent,
-                        R.string.desc_cloned_apps_intro_text);
+                view = ApplicationViewHolder.newHeaderWithAnimation(mContext, parent,
+                        R.string.desc_cloned_apps_intro_text, R.raw.app_cloning,
+                        R.string.desc_cloneable_app_list_text);
             } else if (mManageApplications.mListType == LIST_TYPE_CLONED_APPS
                     && viewType == VIEW_TYPE_TWO_TARGET) {
                 view = ApplicationViewHolder.newView(

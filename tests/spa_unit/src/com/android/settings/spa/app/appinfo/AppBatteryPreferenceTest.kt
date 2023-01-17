@@ -162,6 +162,7 @@ class AppBatteryPreferenceTest {
                 batteryDiffEntry,
                 "10%",
                 null,
+                false,
             )
         }
     }

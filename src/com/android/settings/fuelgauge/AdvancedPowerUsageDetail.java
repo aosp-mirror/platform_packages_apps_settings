@@ -139,13 +139,15 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             Activity caller, InstrumentedPreferenceFragment fragment,
             BatteryDiffEntry diffEntry, String usagePercent, String slotInformation) {
         startBatteryDetailPage(
-                caller, fragment.getMetricsCategory(), diffEntry, usagePercent, slotInformation);
+                caller, fragment.getMetricsCategory(), diffEntry, usagePercent, slotInformation,
+                /*showTimeInformation=*/ true);
     }
 
     /** Launches battery details page for an individual battery consumer fragment. */
     public static void startBatteryDetailPage(
             Context context, int sourceMetricsCategory,
-            BatteryDiffEntry diffEntry, String usagePercent, String slotInformation) {
+            BatteryDiffEntry diffEntry, String usagePercent, String slotInformation,
+            boolean showTimeInformation) {
         final BatteryHistEntry histEntry = diffEntry.mBatteryHistEntry;
         final LaunchBatteryDetailPageArgs launchArgs = new LaunchBatteryDetailPageArgs();
         // configure the launch argument.
@@ -156,9 +158,11 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         launchArgs.mUid = (int) histEntry.mUid;
         launchArgs.mIconId = diffEntry.getAppIconId();
         launchArgs.mConsumedPower = (int) diffEntry.mConsumePower;
-        launchArgs.mForegroundTimeMs = diffEntry.mForegroundUsageTimeInMs;
-        launchArgs.mBackgroundTimeMs = diffEntry.mBackgroundUsageTimeInMs;
-        launchArgs.mScreenOnTimeMs = diffEntry.mScreenOnTimeInMs;
+        if (showTimeInformation) {
+            launchArgs.mForegroundTimeMs = diffEntry.mForegroundUsageTimeInMs;
+            launchArgs.mBackgroundTimeMs = diffEntry.mBackgroundUsageTimeInMs;
+            launchArgs.mScreenOnTimeMs = diffEntry.mScreenOnTimeInMs;
+        }
         launchArgs.mIsUserEntry = histEntry.isUserEntry();
         startBatteryDetailPage(context, sourceMetricsCategory, launchArgs);
     }
