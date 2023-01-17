@@ -116,8 +116,10 @@
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth увімкнено"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Показати всі"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"Стилус"</string>
-    <string name="stylus_default_notes_app" msgid="3111290761558445874">"Системний додаток для нотаток"</string>
-    <string name="stylus_textfield_handwriting" msgid="6962904622425646128">"Писання стилусом у текстових полях"</string>
+    <!-- no translation found for stylus_default_notes_app (3896158797687806941) -->
+    <skip />
+    <!-- no translation found for stylus_textfield_handwriting (2363579035338976327) -->
+    <skip />
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Ігнорувати всі натискання кнопок стилусом"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Стилус"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Дата й час"</string>
@@ -157,22 +159,24 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Вибір мови для цього додатка в налаштуваннях неможливий"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Мова може відрізнятися від мов, доступних у додатку. Деякі додатки можуть не підтримувати це налаштування."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Тут відображаються лише додатки, які підтримують вибір мови."</string>
-    <!-- no translation found for regional_preferences_title (4304567374498629528) -->
-    <skip />
-    <!-- no translation found for regional_preferences_summary (1189876997389469650) -->
-    <skip />
-    <!-- no translation found for regional_preferences_main_page_sub_title (4666033861956272891) -->
-    <skip />
-    <!-- no translation found for temperature_preferences_title (5009881556503629058) -->
-    <skip />
-    <!-- no translation found for calendar_preferences_title (8312485828206542600) -->
-    <skip />
-    <!-- no translation found for first_day_of_week_preferences_title (1971850087589599553) -->
-    <skip />
-    <!-- no translation found for numbers_preferences_title (6094837605398562369) -->
-    <skip />
-    <!-- no translation found for default_string_of_regional_preference (1595774718180886349) -->
-    <skip />
+    <string name="regional_preferences_title" msgid="4304567374498629528">"Регіональні параметри"</string>
+    <string name="regional_preferences_summary" msgid="1189876997389469650">"Установіть параметри одиниць і чисел"</string>
+    <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Укажіть регіональні параметри, щоб додатки могли персоналізувати для вас свій інтерфейс."</string>
+    <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"За можливості додатки використовуватимуть ваші регіональні параметри."</string>
+    <string name="temperature_preferences_title" msgid="9067783912861473593">"Одиниці температури"</string>
+    <string name="calendar_preferences_title" msgid="8312485828206542600">"Календар"</string>
+    <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Перший день тижня"</string>
+    <string name="numbers_preferences_title" msgid="6094837605398562369">"Числа"</string>
+    <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Використовувати значення за умовчанням"</string>
+    <string name="celsius_temperature_unit" msgid="6118523647432383132">"Градуси Цельсія (°С)"</string>
+    <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Градуси Фаренгейта (°F)"</string>
+    <string name="sunday_first_day_of_week" msgid="7644548348295686051">"Неділя"</string>
+    <string name="monday_first_day_of_week" msgid="7244698610476506771">"Понеділок"</string>
+    <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"Вівторок"</string>
+    <string name="wednesday_first_day_of_week" msgid="6544537589727042869">"Середа"</string>
+    <string name="thursday_first_day_of_week" msgid="3035885630945594833">"Четвер"</string>
+    <string name="friday_first_day_of_week" msgid="7074795061812083541">"П’ятниця"</string>
+    <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Субота"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Вилучити вибрану мову?}one{Вилучити вибрані мови?}few{Вилучити вибрані мови?}many{Вилучити вибрані мови?}other{Вилучити вибрані мови?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Текст відображатиметься іншою мовою"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Не можна видалити всі мови"</string>
@@ -233,8 +237,7 @@
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"Наприклад, \"Android Олега\"."</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Місцезнаходження"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Використовувати геодані"</string>
-    <!-- no translation found for location_settings_summary_location_on (7029728269719893381) -->
-    <skip />
+    <string name="location_settings_summary_location_on" msgid="7029728269719893381">"{count,plural, =1{Увімкнено: # додаток має доступ до геоданих}one{Увімкнено: # додаток має доступ до геоданих}few{Увімкнено: # додатки мають доступ до геоданих}many{Увімкнено: # додатків мають доступ до геоданих}other{Увімкнено: # додатка мають доступ до геоданих}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Завантаження…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Додатки з дозволами на доступ до пристроїв поблизу можуть визначати відносне розташування підключених пристроїв."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Доступ до геоданих вимкнено для додатків і сервісів. Однак дані про місцезнаходження вашого пристрою можуть надсилатися в екстрених випадках, якщо ви зателефонуєте або надішлете SMS на екстрений номер."</string>
@@ -314,8 +317,7 @@
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Коли ввімкнено розблокування відбитком пальця"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Відбиток пальця (роб.)"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Додати відбиток пальця"</string>
-    <!-- no translation found for security_settings_fingerprint_preference_summary (8486134175759676037) -->
-    <skip />
+    <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Додано відбиток пальця}one{Додано # відбиток пальця}few{Додано # відбитки пальців}many{Додано # відбитків пальців}other{Додано # відбитка пальців}}"</string>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Налаштуйте \"Відбиток пальця\""</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Розблокування відбитком"</string>
@@ -389,8 +391,8 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Реєстрацію завершено на <xliff:g id="PERCENTAGE">%d</xliff:g>%%"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Реєстрацію відбитка пальця завершено на стільки відсотків: <xliff:g id="PERCENTAGE">%d</xliff:g>"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Відбиток додано"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Розблоковувати, лише коли екран увімкнено"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Перш ніж розблоковувати пристрій відбитком пальця, потрібно ввімкнути екран. Це зменшить імовірність випадкового розблокування."</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Торкнутися, щоб розблокувати будь-коли"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Розблоковуйте пристрій, навіть якщо його екран вимкнено, торкаючись датчика. Це збільшить імовірність випадкового розблокування."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Екран, розблокування"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Виконати цю процедуру пізніше"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Підніміть і знову прикладіть палець"</string>
@@ -413,6 +415,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Готово"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Це не датчик"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Торкніться сканера на задній панелі телефона. Прикладіть вказівний палець."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Час очікування для відбитка пальця минув"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Повторіть спробу зараз або налаштуйте відбиток пальця пізніше в налаштуваннях"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Відбиток не зареєстровано. Повторіть спробу або прикладіть інший палець."</string>
@@ -464,17 +468,14 @@
     <string name="fingerprint_unlock_set_unlock_pin" msgid="4724451168139460493">"Відбиток пальця + PIN-код"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"Відбиток пальця + пароль"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Продовжити без відбитка пальця"</string>
-    <string name="fingerprint_unlock_title" msgid="4978686534505944042">"Ви можете розблоковувати свій телефон відбитком пальця. З міркувань безпеки для цього методу потрібно налаштувати резервний спосіб блокування екрана."</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"Фейсконтроль + ключ"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Фейсконтроль + PIN-код"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Фейсконтроль + пароль"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Продовжити без фейсконтролю"</string>
-    <string name="face_unlock_title" msgid="7344830351598247267">"Ви можете розблоковувати свій телефон за допомогою розпізнавання облич. З міркувань безпеки для цього методу потрібно налаштувати резервний спосіб блокування екрана."</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Ключ • Фейсконтроль • Відбиток пальця"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN-код • Фейсконтроль • Відбиток пальця"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Пароль • Фейсконтроль • Відбиток пальця"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Продовжити без фейсконтролю чи відбитка пальця"</string>
-    <string name="biometrics_unlock_title" msgid="616524056055233041">"Телефон можна розблокувати за допомогою фейсконтролю чи відбитка пальця. З міркувань безпеки для цих функцій потрібно налаштувати резервний спосіб розблокування."</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Немає"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Провести по екрану"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Ключ"</string>
@@ -886,9 +887,8 @@
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Змінення орієнтації з портретної на альбомну та навпаки"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Роздільна здатність екрана"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Висока роздільна здатність"</string>
-    <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Максимальна роздільна здатність"</string>
-    <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
-    <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
+    <!-- no translation found for screen_resolution_option_full (2694003735219114186) -->
+    <skip />
     <string name="screen_resolution_footer" msgid="6772341522952795647">"Коли екран працює з максимальною роздільною здатністю, акумулятор розряджається швидше. Якщо змінити роздільну здатність, деякі додатки можуть перезапуститися."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Вибрано"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Кольори"</string>
@@ -1034,13 +1034,19 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Пам’ять і кеш"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Налаштування пам’яті"</string>
     <string name="status_eid" msgid="7532406028683438634">"EID"</string>
-    <string name="eid_multi_sim" msgid="4581966600904959452">"EID (гніздо SIM-карти %1$d)"</string>
-    <string name="imei_multi_sim" msgid="71477088017585479">"IMEI (гніздо %1$d для SIM-карти)"</string>
+    <string name="eid_multi_sim" msgid="9087924808336397804">"EID (гніздо SIM-карти <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
+    <!-- no translation found for imei_multi_sim (9001570420423929507) -->
+    <skip />
+    <!-- no translation found for imei_multi_sim_primary (7914653040843734282) -->
+    <skip />
     <string name="view_saved_network" msgid="1232387673095080910">"Щоб переглянути, виберіть збережену мережу"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"Версія PRL"</string>
-    <string name="meid_multi_sim" msgid="7645394486193991388">"MEID (гніздо %1$d для SIM-карти)"</string>
+    <!-- no translation found for meid_multi_sim (1460689549266621286) -->
+    <skip />
+    <!-- no translation found for meid_multi_sim_primary (8921262417580407201) -->
+    <skip />
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"Тип мережі для мобільного передавання даних"</string>
@@ -1912,14 +1918,10 @@
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Темніше"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Світліше"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Не вимикати після перезапуску"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (2981206111858937724) -->
-    <skip />
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (6867395206533459204) -->
-    <skip />
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (4079139970819335593) -->
-    <skip />
-    <!-- no translation found for accessibilty_autoclick_delay_unit_second (5979297390686370567) -->
-    <skip />
+    <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Коротка ({time} секунда)}one{Коротка ({time} секунда)}few{Коротка ({time} секунди)}many{Коротка ({time} секунд)}other{Коротка ({time} секунди)}}"</string>
+    <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Середня ({time} секунда)}one{Середня ({time} секунда)}few{Середня ({time} секунди)}many{Середня ({time} секунд)}other{Середня ({time} секунди)}}"</string>
+    <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{Довга ({time} секунда)}one{Довга ({time} секунда)}few{Довга ({time} секунди)}many{Довга ({time} секунд)}other{Довга ({time} секунди)}}"</string>
+    <string name="accessibilty_autoclick_delay_unit_second" msgid="5979297390686370567">"{count,plural, =1{{time} секунда}one{{time} секунда}few{{time} секунди}many{{time} секунд}other{{time} секунди}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Налаштування"</string>
     <string name="captioning_preview_title" msgid="2888561631323180535">"Переглянути"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Стандартні параметри"</string>
@@ -1994,10 +1996,8 @@
     <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Шукати пристрої поблизу"</string>
     <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Збережені пристрої"</string>
     <string name="print_settings" msgid="8519810615863882491">"Друк"</string>
-    <!-- no translation found for print_settings_summary (1458773840720811915) -->
-    <skip />
-    <!-- no translation found for print_jobs_summary (7040836482336577323) -->
-    <skip />
+    <string name="print_settings_summary" msgid="1458773840720811915">"{count,plural, =1{Увімкнено 1 сервіс друку}one{Увімкнено # сервіс друку}few{Увімкнено # сервіси друку}many{Увімкнено # сервісів друку}other{Увімкнено # сервісу друку}}"</string>
+    <string name="print_jobs_summary" msgid="7040836482336577323">"{count,plural, =1{1 завдання друку}one{# завдання друку}few{# завдання друку}many{# завдань друку}other{# завдання друку}}"</string>
     <string name="print_settings_title" msgid="7680498284751129935">"Налаштування друку"</string>
     <string name="print_no_services_installed" msgid="7554057966540602692">"Не встановлено жодну службу"</string>
     <string name="print_no_printers_found" msgid="4833082484646109486">"Принтери не знайдено"</string>
@@ -2075,16 +2075,11 @@
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Докладніше про призупинення заряджання"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Відновити заряджання"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Виявлено енергозатратну активність у фоновому режимі"</string>
-    <!-- no translation found for battery_tip_restrict_title (4537101947310626753) -->
-    <skip />
-    <!-- no translation found for battery_tip_restrict_handled_title (7142074986508706853) -->
-    <skip />
-    <!-- no translation found for battery_tip_restrict_summary (7539469590829235277) -->
-    <skip />
-    <!-- no translation found for battery_tip_restrict_handled_summary (3535697154547199190) -->
-    <skip />
-    <!-- no translation found for battery_tip_restrict_app_dialog_title (1649476357343160240) -->
-    <skip />
+    <string name="battery_tip_restrict_title" msgid="4537101947310626753">"{count,plural, =1{Обмежити # додаток}one{Обмежити # додаток}few{Обмежити # додатки}many{Обмежити # додатків}other{Обмежити # додатка}}"</string>
+    <string name="battery_tip_restrict_handled_title" msgid="7142074986508706853">"{count,plural, =1{Нещодавно обмежено додаток {label}}one{Нещодавно обмежено # додаток}few{Нещодавно обмежено # додатки}many{Нещодавно обмежено # додатків}other{Нещодавно обмежено # додатка}}"</string>
+    <string name="battery_tip_restrict_summary" msgid="7539469590829235277">"{count,plural, =1{Додаток {label} інтенсивно використовує заряд акумулятора у фоновому режимі}one{# додаток інтенсивно використовує заряд акумулятора у фоновому режимі}few{# додатки інтенсивно використовують заряд акумулятора у фоновому режимі}many{# додатків інтенсивно використовують заряд акумулятора у фоновому режимі}other{# додатка інтенсивно використовують заряд акумулятора у фоновому режимі}}"</string>
+    <string name="battery_tip_restrict_handled_summary" msgid="3535697154547199190">"{count,plural, =1{Цей додаток не може працювати у фоновому режимі}one{Ці додатки не можуть працювати у фоновому режимі}few{Ці додатки не можуть працювати у фоновому режимі}many{Ці додатки не можуть працювати у фоновому режимі}other{Ці додатки не можуть працювати у фоновому режимі}}"</string>
+    <string name="battery_tip_restrict_app_dialog_title" msgid="1649476357343160240">"{count,plural, =1{Обмежити додаток?}one{Обмежити # додаток?}few{Обмежити # додатки?}many{Обмежити # додатків?}other{Обмежити # додатка?}}"</string>
     <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"Щоб пристрій працював довше, забороніть додатку <xliff:g id="APP">%1$s</xliff:g> споживати заряд акумулятора у фоновому режимі. Можливо, цей додаток працюватиме неналежним чином, а сповіщення надходитимуть із затримкою."</string>
     <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"Щоб пристрій працював довше, забороніть цим додаткам споживати заряд акумулятора у фоновому режимі. Можливо, вони працюватимуть неналежним чином, а сповіщення надходитимуть із затримкою.\n\nДодатки:"</string>
     <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"Щоб пристрій працював довше, забороніть цим додаткам споживати заряд акумулятора у фоновому режимі. Можливо, вони працюватимуть неналежним чином, а сповіщення надходитимуть із затримкою.\n\nДодатки:\n<xliff:g id="APP_LIST">%1$s</xliff:g>."</string>
@@ -2098,16 +2093,14 @@
     <string name="smart_battery_title" msgid="9095903608520254254">"Керувати додатками автоматично"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"Коли диспетчер заряду виявляє додатки, які швидко розряджають акумулятор, ви можете обмежити їх. Можливо, додатки працюватимуть неналежним чином, а сповіщення надходитимуть із затримкою."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Обмежені додатки"</string>
-    <!-- no translation found for restricted_app_summary (1022307922754893997) -->
-    <skip />
+    <string name="restricted_app_summary" msgid="1022307922754893997">"{count,plural, =1{Обмежено використання заряду акумулятора для # додатка}one{Обмежено використання заряду акумулятора для # додатка}few{Обмежено використання заряду акумулятора для # додатків}many{Обмежено використання заряду акумулятора для # додатків}other{Обмежено використання заряду акумулятора для # додатка}}"</string>
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"Максимальний час: <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="restricted_app_detail_footer" msgid="3495725286882138803">"Цим додаткам не дозволено споживати заряд акумулятора у фоновому режимі. Вони можуть не працювати як слід, і сповіщення можуть відображатися із затримками."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Використовувати диспетчер заряду акумулятора"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Виявляти, коли додатки швидко розряджають акумулятор"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"Виявлення додатків, які розряджають акумулятор"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"Виявлення додатків, які розряджають акумулятор"</string>
-    <!-- no translation found for battery_manager_app_restricted (2583902700677009173) -->
-    <skip />
+    <string name="battery_manager_app_restricted" msgid="2583902700677009173">"{count,plural, =1{Обмежено # додаток}one{Обмежено # додаток}few{Обмежено # додатки}many{Обмежено # додатків}other{Обмежено # додатка}}"</string>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
     <string name="battery_missing_message" msgid="400958471814422770">"Не вдалось отримати дані про рівень заряду акумулятора."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
@@ -2127,27 +2120,13 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Повністю зарядженого акумулятора вистачає на"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Дані про використання заряду акумулятора приблизні та можуть змінюватися залежно від конкретних умов."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Використання заряду"</string>
-    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"Використання після останнього повного заряджання:\nусього <xliff:g id="TIME_0">^1</xliff:g> • у фоновому режимі <xliff:g id="TIME_1">^2</xliff:g>"</string>
-    <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> усього • <xliff:g id="TIME_1">^2</xliff:g> споживання у фоновому режимі\nза останні 24 год"</string>
-    <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Усього <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> споживання у фоновому режимі\nза період <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
-    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"Використання після останнього повного заряджання: усього менше хвилини"</string>
-    <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"Усього менше ніж хвилина за останні 24 год"</string>
-    <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Усього менше ніж хвилина за період <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"Використання у фоновому режимі після останнього повного заряджання: менше хвилини"</string>
-    <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"Менше ніж хвилина споживання у фоновому режимі за останні 24 год"</string>
-    <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Менше ніж хвилина споживання у фоновому режимі за період <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_total_usage" msgid="4811532932663354619">"Використання після останнього повного заряджання: усього <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="battery_total_usage_24hr" msgid="3907495067623665787">"<xliff:g id="TIME">^1</xliff:g> усього за останні 24 год"</string>
-    <string name="battery_total_usage_with_period" msgid="2849061229625950626">"Усього <xliff:g id="TIME_0">^1</xliff:g> за період <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="8262917746299259350">"Використання у фоновому режимі після останнього повного заряджання: <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"<xliff:g id="TIME">^1</xliff:g> споживання у фоновому режимі за останні 24 год"</string>
-    <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> споживання у фоновому режимі за період <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"Використання після останнього повного заряджання:\nусього <xliff:g id="TIME">^1</xliff:g> • у фоновому режимі – менше хвилини"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"<xliff:g id="TIME">^1</xliff:g> усього • менше ніж хвилина споживання у фоновому режимі\nза останні 24 год"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"Усього <xliff:g id="TIME_0">^1</xliff:g> • менше ніж хвилина споживання у фоновому режимі\nза період <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="3851536644733662392">"Заряд акумулятора не використовувався у фоновому режимі після останнього повного заряджання"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Відсутнє споживання за останні 24 години"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
+    <!-- no translation found for battery_usage_since_last_full_charge (3488425008925924769) -->
+    <skip />
+    <string name="battery_usage_system_apps" msgid="8659537819731575299">"Системні додатки"</string>
+    <string name="battery_usage_others" msgid="311793281613609986">"Інше"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Залишилося приблизно"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"До повного заряду"</string>
     <string name="estimated_time_description" msgid="211058785418596009">"Час може змінитися залежно від використання"</string>
@@ -2185,17 +2164,21 @@
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Споживання на роботу додатків (<xliff:g id="SLOT">%s</xliff:g>)"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Усього: менше ніж хвилина"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"У фоновому режимі: менше ніж хвилина"</string>
+    <string name="battery_usage_screen_time_less_than_one_minute" msgid="2911989465891679033">"Час використання пристрою: менше ніж хвилина"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Усього: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"У фоновому режимі: <xliff:g id="TIME">%s</xliff:g>"</string>
+    <string name="battery_usage_screen_time" msgid="3973865893520804115">"Час використання пристрою: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Дані про використання заряду будуть доступні через кілька годин після того, як акумулятор повністю зарядиться"</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"зараз"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Діаграма використання заряду"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Діаграма використання заряду акумулятора за день"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Діаграма використання заряду акумулятора за годину"</string>
-    <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="8219417894003454299">"Пропорційна статистика використання після останнього повного заряджання"</string>
-    <string name="battery_usage_breakdown_title_for_slot" msgid="5897712719834293709">"Пропорційна статистика використання для <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <string name="battery_usage_app_tab" msgid="47007533921631047">"Додаток"</string>
-    <string name="battery_usage_system_tab" msgid="2723499428460455537">"Система"</string>
+    <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Використання заряду акумулятора після останнього повного заряджання"</string>
+    <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Використання заряду акумулятора (<xliff:g id="SLOT">%s</xliff:g>)"</string>
+    <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Час використання пристрою після останнього повного заряджання"</string>
+    <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Час використання пристрою (<xliff:g id="SLOT">%s</xliff:g>)"</string>
+    <string name="battery_usage_spinner_breakdown_by_apps" msgid="7746337368402445072">"Розподіл за додатками"</string>
+    <string name="battery_usage_spinner_breakdown_by_system" msgid="4646952798665973464">"Розподіл за системами"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Статистика про процеси"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Статистика про запущені процеси"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Використання пам’яті"</string>
@@ -2297,8 +2280,7 @@
     <string name="remove_credential_management_app" msgid="6089291496976812786">"Вилучити додаток"</string>
     <string name="remove_credential_management_app_dialog_title" msgid="5713525435104706772">"Вилучити цей додаток?"</string>
     <string name="remove_credential_management_app_dialog_message" msgid="7739474298063646935">"Цей додаток не керуватиме сертифікатами, але залишиться на пристрої. Усі сертифікати, які він установив, буде видалено."</string>
-    <!-- no translation found for number_of_urls (1128699121050872188) -->
-    <skip />
+    <string name="number_of_urls" msgid="1128699121050872188">"{count,plural, =1{# URL-адреса}one{# URL-адреса}few{# URL-адреси}many{# URL-адрес}other{# URL-адреси}}"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Сигнал екстреного виклику"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Устан. поведінку при розміщ. аварійного виклику"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Резервне копіювання"</string>
@@ -2341,8 +2323,7 @@
     <string name="notification_history_today" msgid="5828496957208237230">"Останні 24 години"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"Відкладено"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"Нещодавно відхилено"</string>
-    <!-- no translation found for notification_history_count (885305572972482838) -->
-    <skip />
+    <string name="notification_history_count" msgid="885305572972482838">"{count,plural, =1{# сповіщення}one{# сповіщення}few{# сповіщення}many{# сповіщень}other{# сповіщення}}"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"Сигнал і вібрація під час виклику"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"Деталі мережі"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"Синхронізацію ввімкнено"</string>
@@ -2533,13 +2514,11 @@
     <string name="additional_system_update_settings_list_item_title" msgid="7230385345152138051">"Додаткові оновлення системи"</string>
     <string name="ssl_ca_cert_warning" msgid="3898387588657346106">"Мережа може відстежуватися"</string>
     <string name="done_button" msgid="6269449526248267">"Готово"</string>
-    <!-- no translation found for ssl_ca_cert_dialog_title (1032088078702042090) -->
-    <skip />
+    <string name="ssl_ca_cert_dialog_title" msgid="1032088078702042090">"{count,plural, =1{Додати або вилучити сертифікат}one{Додати або вилучити сертифікати}few{Додати або вилучити сертифікати}many{Додати або вилучити сертифікати}other{Додати або вилучити сертифікати}}"</string>
     <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{Адміністратор організації {orgName} установив на вашому пристрої центр сертифікації, за допомогою якого зможе відстежувати ваші дії в мережі на пристрої, зокрема в електронній пошті, додатках і на безпечних веб-сайтах.\n\nЩоб дізнатися більше про цей сертифікат, зверніться до адміністратора.}one{Адміністратор організації {orgName} установив на вашому пристрої центри сертифікації, за допомогою яких зможе відстежувати ваші дії в мережі на пристрої, зокрема в електронній пошті, додатках і на безпечних веб-сайтах.\n\nЩоб дізнатися більше про ці сертифікати, зверніться до адміністратора.}few{Адміністратор організації {orgName} установив на вашому пристрої центри сертифікації, за допомогою яких зможе відстежувати ваші дії в мережі на пристрої, зокрема в електронній пошті, додатках і на безпечних веб-сайтах.\n\nЩоб дізнатися більше про ці сертифікати, зверніться до адміністратора.}many{Адміністратор організації {orgName} установив на вашому пристрої центри сертифікації, за допомогою яких зможе відстежувати ваші дії в мережі на пристрої, зокрема в електронній пошті, додатках і на безпечних веб-сайтах.\n\nЩоб дізнатися більше про ці сертифікати, зверніться до адміністратора.}other{Адміністратор організації {orgName} установив на вашому пристрої центри сертифікації, за допомогою яких зможе відстежувати ваші дії в мережі на пристрої, зокрема в електронній пошті, додатках і на безпечних веб-сайтах.\n\nЩоб дізнатися більше про ці сертифікати, зверніться до адміністратора.}}"</string>
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{Адміністратор організації {orgName} установив для вашого робочого профілю центр сертифікації, за допомогою якого зможе відстежувати ваші дії в корпоративній мережі, зокрема в електронній пошті, додатках і на безпечних веб-сайтах.\n\nЩоб дізнатися більше про цей сертифікат, зверніться до адміністратора.}one{Адміністратор організації {orgName} установив для вашого робочого профілю центри сертифікації, за допомогою яких зможе відстежувати ваші дії в корпоративній мережі, зокрема в електронній пошті, додатках і на безпечних веб-сайтах.\n\nЩоб дізнатися більше про ці сертифікати, зверніться до адміністратора.}few{Адміністратор організації {orgName} установив для вашого робочого профілю центри сертифікації, за допомогою яких зможе відстежувати ваші дії в корпоративній мережі, зокрема в електронній пошті, додатках і на безпечних веб-сайтах.\n\nЩоб дізнатися більше про ці сертифікати, зверніться до адміністратора.}many{Адміністратор організації {orgName} установив для вашого робочого профілю центри сертифікації, за допомогою яких зможе відстежувати ваші дії в корпоративній мережі, зокрема в електронній пошті, додатках і на безпечних веб-сайтах.\n\nЩоб дізнатися більше про ці сертифікати, зверніться до адміністратора.}other{Адміністратор організації {orgName} установив для вашого робочого профілю центри сертифікації, за допомогою яких зможе відстежувати ваші дії в корпоративній мережі, зокрема в електронній пошті, додатках і на безпечних веб-сайтах.\n\nЩоб дізнатися більше про ці сертифікати, зверніться до адміністратора.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Третя сторона може відстежувати ваші дії в мережі, зокрема електронне листування, роботу в програмах і на захищених веб-сайтах.\n\nЦе робиться за допомогою довірених облікових даних, установлених на вашому пристрої."</string>
-    <!-- no translation found for ssl_ca_cert_settings_button (2044927302268394991) -->
-    <skip />
+    <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Перевірити сертифікат}one{Перевірити сертифікати}few{Перевірити сертифікати}many{Перевірити сертифікати}other{Перевірити сертифікати}}"</string>
     <string name="user_settings_title" msgid="6550866465409807877">"Кілька користувачів"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Користувачі та профілі"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Додати користувача чи профіль"</string>
@@ -3066,8 +3045,7 @@
     <string name="promote_conversation_title" msgid="4731148769888238722">"Це чат"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Додати в список розмов"</string>
     <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Немає важливих розмов"</string>
-    <!-- no translation found for priority_conversation_count (7291234530844412077) -->
-    <skip />
+    <string name="priority_conversation_count" msgid="7291234530844412077">"{count,plural, =1{# важлива розмова}one{# важлива розмова}few{# важливі розмови}many{# важливих розмов}other{# важливої розмови}}"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Важливі розмови"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Показувати вгорі розділу розмов і в спливаючих чатах"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Показувати вгорі розділу розмов"</string>
@@ -3096,10 +3074,8 @@
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Коли пристрій розблоковано, показувати сповіщення як банер угорі екрана"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"<xliff:g id="APP_NAME">%1$s</xliff:g>: усі сповіщення"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Усі сповіщення з додатка <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for notifications_sent_daily (10274479224185437) -->
-    <skip />
-    <!-- no translation found for notifications_sent_weekly (7895656213187555346) -->
-    <skip />
+    <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Близько # сповіщення на день}one{Близько # сповіщення на день}few{Близько # сповіщень на день}many{Близько # сповіщень на день}other{Близько # сповіщення на день}}"</string>
+    <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Близько # сповіщення на тиждень}one{Близько # сповіщення на тиждень}few{Близько # сповіщень на тиждень}many{Близько # сповіщень на тиждень}other{Близько # сповіщення на тиждень}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Ніколи"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Сповіщення додатків і пристроїв"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Укажіть, які додатки та пристрої можуть переглядати сповіщення"</string>
@@ -3168,15 +3144,15 @@
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Дозволи"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"Цей додаток може використовувати дозволи особистого додатка <xliff:g id="NAME">%1$s</xliff:g>, як-от доступ до геоданих, пам\'яті або контактів."</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"Немає підключених додатків"</string>
-    <!-- no translation found for interact_across_profiles_number_of_connected_apps (4000424798291479207) -->
-    <skip />
+    <string name="interact_across_profiles_number_of_connected_apps" msgid="4000424798291479207">"{count,plural, =1{Підключено # додаток}one{Підключено # додаток}few{Підключено # додатки}many{Підключено # додатків}other{Підключено # додатка}}"</string>
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Щоб підключити ці додатки, установіть додаток <xliff:g id="NAME">%1$s</xliff:g> у своєму робочому профілі"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Щоб підключити ці додатки, установіть додаток <xliff:g id="NAME">%1$s</xliff:g> у своєму особистому профілі"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Натисніть, щоб отримати додаток"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Доступ у режимі \"Не турбувати\""</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Дозволити доступ у режимі \"Не турбувати\""</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Установлені додатки не запитували доступу до функції \"Не турбувати\""</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"За вашим запитом Android блокує на цьому пристрої сповіщення з цього додатка"</string>
+    <!-- no translation found for app_notifications_off_desc (2484843759466874201) -->
+    <skip />
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"На ваш запит Android блокує цю категорію сповіщень на пристрої"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"На ваш запит Android блокує цю групу сповіщень на пристрої"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Цей додаток не надсилає сповіщення"</string>
@@ -3184,8 +3160,7 @@
     <string name="notification_channels_other" msgid="18159805343647908">"Інше"</string>
     <string name="no_channels" msgid="4716199078612071915">"Цей додаток не надсилав сповіщень"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Розширені налаштування в додатку"</string>
-    <!-- no translation found for deleted_channels (8489800381509312964) -->
-    <skip />
+    <string name="deleted_channels" msgid="8489800381509312964">"{count,plural, =1{Видалено # категорію}one{Видалено # категорію}few{Видалено # категорії}many{Видалено # категорій}other{Видалено # категорії}}"</string>
     <string name="app_notification_block_title" msgid="3880322745749900296">"Блокувати всі"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Ніколи не показувати ці сповіщення"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Показувати сповіщення"</string>
@@ -3398,6 +3373,10 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Вимкнені"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Розширені налаштування"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Диспетчер дозволів"</string>
+    <!-- no translation found for app_data_sharing_updates_title (921888411974134089) -->
+    <skip />
+    <!-- no translation found for app_data_sharing_updates_summary (1500580254161164185) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"Торкніться, щоб активувати"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Двічі торкніться екрана, щоб активувати пристрій"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Відкривання посилань"</string>
@@ -4240,6 +4219,8 @@
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Особисті додатки"</string>
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Робота"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"За умовчанням"</string>
+    <!-- no translation found for default_app_none (5420632042222036264) -->
+    <skip />
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Ця опція вже не дійсна. Повторіть спробу."</string>
     <string name="power_menu_setting_name" msgid="2394440932633137229">"Утримування кнопки живлення"</string>
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Утримувати кнопку живлення, щоб відкрити"</string>
@@ -4502,4 +4483,6 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Видалити додаток"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Додатки, установлені протягом останнього # місяця}one{Додатки, установлені протягом останнього # місяця}few{Додатки, установлені протягом останніх # місяців}many{Додатки, установлені протягом останніх # місяців}other{Додатки, установлені протягом останнього # місяця}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Додатки, установлені понад # місяць тому}one{Додатки, установлені понад # місяць тому}few{Додатки, установлені понад # місяці тому}many{Додатки, установлені понад # місяців тому}other{Додатки, установлені понад # місяця тому}}"</string>
+    <!-- no translation found for accessibility_fingerprint_label (5017431423168191733) -->
+    <skip />
 </resources>
