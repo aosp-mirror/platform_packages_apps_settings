@@ -38,6 +38,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
+import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
 public class BatteryDiffDataTest {
@@ -77,7 +78,7 @@ public class BatteryDiffDataTest {
                 hiddenHistEntry);
 
         boolean needsCombineInSystemApp = BatteryDiffData.needsCombineInSystemApp(
-                hiddenDiffEntry, List.of(), mApplicationsState);
+                hiddenDiffEntry, List.of(), Set.of());
 
         assertThat(needsCombineInSystemApp).isTrue();
     }
@@ -107,7 +108,7 @@ public class BatteryDiffDataTest {
         mApplicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
 
         boolean needsCombineInSystemApp = BatteryDiffData.needsCombineInSystemApp(
-                batteryDiffEntry, List.of(), mApplicationsState);
+                batteryDiffEntry, List.of(), Set.of(ConvertUtils.FAKE_PACKAGE_NAME));
 
         assertThat(needsCombineInSystemApp).isTrue();
     }
@@ -137,7 +138,7 @@ public class BatteryDiffDataTest {
         mApplicationInfo.flags = 0;
 
         boolean needsCombineInSystemApp = BatteryDiffData.needsCombineInSystemApp(
-                batteryDiffEntry, List.of(), mApplicationsState);
+                batteryDiffEntry, List.of(), Set.of());
 
         assertThat(needsCombineInSystemApp).isFalse();
     }
