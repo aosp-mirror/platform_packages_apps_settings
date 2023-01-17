@@ -199,7 +199,9 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
                 : mPrefContext.getString(
                         R.string.battery_usage_breakdown_title_for_slot, slotTimestamp));
         mRootPreference.setVisible(true);
-        mRootPreference.requestAccessibilityFocus();
+        mHandler.post(() -> {
+            mRootPreference.requestAccessibilityFocus();
+        });
     }
 
     private void showFooterPreference(boolean isAllBatteryUsageEmpty, String slotTimestamp) {
