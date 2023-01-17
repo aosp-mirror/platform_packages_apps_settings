@@ -224,8 +224,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     public void onResume() {
         super.onResume();
         updatePreferenceStates();
-        writeElapsedTimeMetric(SettingsEnums.ACTION_DASHBOARD_VISIBLE_TIME,
-                "isParalleledControllers:false");
     }
 
     @Override
