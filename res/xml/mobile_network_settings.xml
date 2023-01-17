@@ -251,9 +251,9 @@
             settings:userRestriction="no_cellular_2g"/>
 
         <SwitchPreference
-            android:key="allow_null_algorithms"
-            android:title="@string/allow_null_algorithms_title"
-            android:summary="@string/allow_null_algorithms_summary"
+            android:key="require_cellular_encryption"
+            android:title="@string/require_cellular_encryption_title"
+            android:summary="@string/require_cellular_encryption_summary"
             settings:controller=
                 "com.android.settings.network.telephony.NullAlgorithmsPreferenceController" />
 
