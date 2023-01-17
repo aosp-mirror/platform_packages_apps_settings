@@ -112,7 +112,8 @@ public class BluetoothDetailsCompanionAppsControllerTest extends
                 /* notifyOnDeviceNearby */ true,
                 /* revoked */ false,
                 /* timeApprovedMs */ System.currentTimeMillis(),
-                /* lastTimeConnected */ Long.MAX_VALUE);
+                /* lastTimeConnected */ Long.MAX_VALUE,
+                /* systemDataSyncFlags */ -1);
 
         mAssociations.add(association);
         showScreen(mController);
