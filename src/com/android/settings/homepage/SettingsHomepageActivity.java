@@ -241,6 +241,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
         updateHomepagePaddings();
         updateSplitLayout();
+
+        enableTaskLocaleOverride();
     }
 
     @VisibleForTesting
