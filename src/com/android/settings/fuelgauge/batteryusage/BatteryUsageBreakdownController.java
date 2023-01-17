@@ -27,7 +27,6 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
@@ -75,7 +74,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     @VisibleForTesting
     Context mPrefContext;
     @VisibleForTesting
-    PreferenceCategory mRootPreference;
+    AccessibilityFocusablePreferenceCategory mRootPreference;
     @VisibleForTesting
     SpinnerPreference mSpinnerPreference;
     @VisibleForTesting
@@ -193,7 +192,6 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
         showFooterPreference(isAllUsageDataEmpty, slotTimestamp);
     }
 
-    // TODO: request accessibility focus on category title when slot selection updated.
     private void showCategoryTitle(String slotTimestamp) {
         mRootPreference.setTitle(slotTimestamp == null
                 ? mPrefContext.getString(
@@ -201,6 +199,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
                 : mPrefContext.getString(
                         R.string.battery_usage_breakdown_title_for_slot, slotTimestamp));
         mRootPreference.setVisible(true);
+        mRootPreference.requestAccessibilityFocus();
     }
 
     private void showFooterPreference(boolean isAllBatteryUsageEmpty, String slotTimestamp) {
