@@ -16,8 +16,10 @@
 
 package com.android.settings.accounts;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.ACCESSIBILITY_CATEGORY_CLONE;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.ACCESSIBILITY_CATEGORY_PERSONAL;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.ACCESSIBILITY_CATEGORY_WORK;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.CLONE_CATEGORY_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.MANAGED_BY;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.MANAGED_PROFILE_SETTINGS_TITLE;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.PERSONAL_CATEGORY_HEADER;
@@ -349,28 +351,34 @@ public class AccountPreferenceController extends AbstractPreferenceController
             preferenceGroup.setContentDescription(title);
         } else if (userInfo.isManagedProfile()) {
             if (mType == ProfileSelectFragment.ProfileType.ALL) {
-                preferenceGroup.setTitle(
-                        mDpm.getResources().getString(WORK_CATEGORY_HEADER,
-                                () -> mContext.getString(R.string.category_work)));
+                setCategoryTitleFromDevicePolicyResource(preferenceGroup, WORK_CATEGORY_HEADER,
+                        R.string.category_work);
                 final String workGroupSummary = getWorkGroupSummary(context, userInfo);
                 preferenceGroup.setSummary(workGroupSummary);
-                preferenceGroup.setContentDescription(
-                        mDpm.getResources().getString(ACCESSIBILITY_CATEGORY_WORK, () ->
-                        mContext.getString(
-                                R.string.accessibility_category_work, workGroupSummary)));
+                setContentDescriptionFromDevicePolicyResource(preferenceGroup,
+                        ACCESSIBILITY_CATEGORY_WORK, R.string.accessibility_category_work,
+                        workGroupSummary);
             }
             profileData.removeWorkProfilePreference = newRemoveWorkProfilePreference();
             mHelper.enforceRestrictionOnPreference(profileData.removeWorkProfilePreference,
                     DISALLOW_REMOVE_MANAGED_PROFILE, UserHandle.myUserId());
             profileData.managedProfilePreference = newManagedProfileSettings();
-        } else {
+        } else if (userInfo.isCloneProfile()) {
             if (mType == ProfileSelectFragment.ProfileType.ALL) {
-                preferenceGroup.setTitle(
-                        mDpm.getResources().getString(PERSONAL_CATEGORY_HEADER,
-                                () -> mContext.getString(R.string.category_personal)));
-                preferenceGroup.setContentDescription(
-                        mDpm.getResources().getString(ACCESSIBILITY_CATEGORY_PERSONAL, () ->
-                        mContext.getString(R.string.accessibility_category_personal)));
+                setCategoryTitleFromDevicePolicyResource(preferenceGroup, CLONE_CATEGORY_HEADER,
+                        R.string.category_clone);
+                setContentDescriptionFromDevicePolicyResource(preferenceGroup,
+                        ACCESSIBILITY_CATEGORY_CLONE, R.string.accessibility_category_clone,
+                        null);
+            }
+        } else {
+            // Primary Profile
+            if (mType == ProfileSelectFragment.ProfileType.ALL) {
+                setCategoryTitleFromDevicePolicyResource(preferenceGroup, PERSONAL_CATEGORY_HEADER,
+                        R.string.category_personal);
+                setContentDescriptionFromDevicePolicyResource(preferenceGroup,
+                        ACCESSIBILITY_CATEGORY_PERSONAL, R.string.accessibility_category_personal,
+                        null);
             }
         }
         final PreferenceScreen screen = mFragment.getPreferenceScreen();
@@ -381,11 +389,31 @@ public class AccountPreferenceController extends AbstractPreferenceController
         if (userInfo.isEnabled()) {
             profileData.authenticatorHelper = new AuthenticatorHelper(context,
                     userInfo.getUserHandle(), this);
-            profileData.addAccountPreference = newAddAccountPreference();
-            mHelper.enforceRestrictionOnPreference(profileData.addAccountPreference,
-                    DISALLOW_MODIFY_ACCOUNTS, userInfo.id);
+            if (!userInfo.isCloneProfile()) {
+                profileData.addAccountPreference = newAddAccountPreference();
+                mHelper.enforceRestrictionOnPreference(profileData.addAccountPreference,
+                        DISALLOW_MODIFY_ACCOUNTS, userInfo.id);
+            }
         }
         mProfiles.put(userInfo.id, profileData);
+    }
+
+    private void setCategoryTitleFromDevicePolicyResource(
+            AccessiblePreferenceCategory preferenceGroup, String stringId, int resourceIdentifier) {
+        preferenceGroup.setTitle(
+                mDpm.getResources().getString(stringId,
+                        () -> mContext.getString(resourceIdentifier)));
+    }
+
+    private void setContentDescriptionFromDevicePolicyResource(
+            AccessiblePreferenceCategory preferenceGroup, String stringId, int resourceIdentifier,
+            String formatArgs) {
+        preferenceGroup.setContentDescription(mDpm.getResources().getString(stringId, () -> {
+            if (formatArgs != null) {
+                return mContext.getString(resourceIdentifier, formatArgs);
+            }
+            return mContext.getString(resourceIdentifier);
+        }));
     }
 
     private RestrictedPreference newAddAccountPreference() {
