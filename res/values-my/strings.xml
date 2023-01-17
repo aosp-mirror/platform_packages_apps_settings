@@ -588,8 +588,8 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"အက်ပ်များသို့ လက်မှတ်ထိုးဝင်သောအခါ (သို့) ပစ္စည်းဝယ်ယူသောအခါကဲ့သို့တွင် သင်ဖြစ်ကြောင်းအတည်ပြုရန် (သို့) တက်ဘလက်ဖွင့်ရန်အတွက် သင့်လက်ဗွေကို ယခုသုံးနိုင်ပါပြီ"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"အက်ပ်များသို့ လက်မှတ်ထိုးဝင်သောအခါ (သို့) ပစ္စည်းဝယ်ယူသောအခါကဲ့သို့တွင် သင်ဖြစ်ကြောင်းအတည်ပြုရန် (သို့) စက်ဖွင့်ရန်အတွက် သင့်လက်ဗွေကို ယခုသုံးနိုင်ပါပြီ"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"အက်ပ်များသို့ လက်မှတ်ထိုးဝင်သောအခါ (သို့) ပစ္စည်းဝယ်ယူသောအခါကဲ့သို့တွင် သင်ဖြစ်ကြောင်းအတည်ပြုရန် (သို့) ဖုန်းဖွင့်ရန်အတွက် သင့်လက်ဗွေကို ယခုသုံးနိုင်ပါပြီ"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"ဖန်သားပြင်ဖွင့်ထားမှသာ လော့ခ်ဖွင့်ရန်"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"သင့်လက်ဗွေဖြင့် လော့ခ်မဖွင့်မီ ဖန်သားပြင်ကို ဖွင့်ထားရမည်။ ၎င်းက မတော်တဆ လော့ခ်ပွင့်ခြင်းကို လျော့နည်းစေမည်။"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"အချိန်မရွေးဖွင့်ရန် ထိပါ"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"စခရင်ပိတ်ထားလျှင်ပင် ဖွင့်ရန် အာရုံခံကိရိယာကို ထိပါ။ ၎င်းက မတော်တဆဖွင့်မိခြင်းမျိုး ပိုဖြစ်နိုင်ခြေများသည်။"</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"ဖန်သားပြင်၊ လော့ခ်ဖွင့်ရန်"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"နောက်မှလုပ်ရန်"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"ဖယ်ပြီး ပြန်ထိပါ"</string>
@@ -648,6 +648,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"ပြီးပါပြီ"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"အိုး။ ဒါ အာရုံခံကိရိယာမဟုတ်ဘူး"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"သင့်ဖုန်း ကျောဘက်ရှိ အာရုံခံကိရိယာကို ထိပါ။ လက်ညှိုးကို အသုံးပြုပါ။"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"လက်ဗွေစနစ်ထည့်သွင်းချိန် ကုန်သွားပါပြီ"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"ယခုထပ်စမ်းကြည့်ပါ (သို့) ‘ဆက်တင်များ’ တွင် လက်ဗွေကို နောက်မှ စနစ်ထည့်သွင်းပါ"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"လက်ဗွေထည့်သွင်းမှု အဆင်မပြေပါ။ အခြားလက်ချောင်းကို သုံးပါ သို့မဟုတ် ထပ်စမ်းကြည့်ပါ။"</string>
@@ -735,28 +737,22 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"လက်ဗွေ + စကားဝှက်"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"လက်ဗွေမပါဘဲ ဆက်လုပ်ရန်"</string>
     <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"သင်၏ လက်ဗွေကို အသုံးပြုပြီး သင့်ဖုန်းကို လော့ခ်ဖွင့်နိုင်ပါသည်။ လုံခြုံရေးအရ ဤနည်းလမ်းက မျက်နှာပြင်လော့ခ်ချသည့် မိတ္တူတစ်ခု လိုအပ်ပါသည်။"</string>
-    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
-    <skip />
+    <string name="fingerprint_unlock_title" product="tablet" msgid="8674718459462612186">"သင့်လက်ဗွေသုံး၍ တက်ဘလက်ကို ဖွင့်နိုင်သည်။ လုံခြုံရေးအရ ဤနည်းလမ်းအတွက် အရန်ဖန်သားပြင်လော့ခ် လိုအပ်သည်။"</string>
+    <string name="fingerprint_unlock_title" product="device" msgid="3224468142599659740">"သင့်လက်ဗွေသုံး၍ စက်ပစ္စည်းကို ဖွင့်နိုင်သည်။ လုံခြုံရေးအရ ဤနည်းလမ်းအတွက် အရန်ဖန်သားပြင်လော့ခ် လိုအပ်သည်။"</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း + ပုံစံ"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း + ပင်နံပါတ်"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း + စကားဝှက်"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း မသုံးဘဲ ရှေ့ဆက်ခြင်း"</string>
     <string name="face_unlock_title" product="default" msgid="7344830351598247267">"သင့်မျက်နှာကို အသုံးပြုပြီး သင့်ဖုန်းကို လော့ခ်ဖွင့်နိုင်ပါသည်။ လုံခြုံရေးအရ ဤနည်းလမ်းက အရန်မျက်နှာပြင်လော့ခ်တစ်ခု လိုအပ်ပါသည်။"</string>
-    <!-- no translation found for face_unlock_title (5695698036499155727) -->
-    <skip />
-    <!-- no translation found for face_unlock_title (6768108756755361161) -->
-    <skip />
+    <string name="face_unlock_title" product="tablet" msgid="5695698036499155727">"သင့်မျက်နှာသုံး၍ တက်ဘလက်ကို ဖွင့်နိုင်သည်။ လုံခြုံရေးအရ ဤနည်းလမ်းအတွက် အရန်ဖန်သားပြင်လော့ခ် လိုအပ်သည်။"</string>
+    <string name="face_unlock_title" product="device" msgid="6768108756755361161">"သင့်မျက်နှာသုံး၍ စက်ပစ္စည်းကို ဖွင့်နိုင်သည်။ လုံခြုံရေးအရ ဤနည်းလမ်းအတွက် အရန်ဖန်သားပြင်လော့ခ် လိုအပ်သည်။"</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"ပုံစံ • မျက်နှာ • လက်ဗွေ"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"ပင်နံပါတ် • မျက်နှာ • လက်ဗွေ"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"စကားဝှက် • မျက်နှာ • လက်ဗွေ"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"မျက်နှာ (သို့) လက်ဗွေ မသုံးဘဲ ရှေ့ဆက်ခြင်း"</string>
     <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"သင့်မျက်နှာ (သို့) လက်ဗွေကို သုံး၍ သင့်ဖုန်းကို လော့ခ်ဖွင့်နိုင်သည်။ လုံခြုံရေးအရ ဤနည်းလမ်းအတွက် အရန်ဖုန်းဖန်သားပြင်လော့ခ်စနစ်တစ်ခု လိုအပ်သည်။"</string>
-    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
-    <skip />
-    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
-    <skip />
+    <string name="biometrics_unlock_title" product="tablet" msgid="5808626401936488028">"သင်၏ မျက်နှာ (သို့) လက်ဗွေသုံး၍ တက်ဘလက်ကို ဖွင့်နိုင်သည်။ လုံခြုံရေးအရ ဤနည်းလမ်းအတွက် အရန်ဖန်သားပြင်လော့ခ် လိုအပ်သည်။"</string>
+    <string name="biometrics_unlock_title" product="device" msgid="4912499343509046929">"သင်၏ မျက်နှာ (သို့) လက်ဗွေသုံး၍ စက်ပစ္စည်းကို ဖွင့်နိုင်သည်။ လုံခြုံရေးအရ ဤနည်းလမ်းအတွက် အရန်ဖန်သားပြင်လော့ခ် လိုအပ်သည်။"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"စီမံခန့်ခွဲသူ၊ အသွင်ဝှက်ခြင်း မူဝါဒ သို့မဟုတ် အထောက်အထား သိုလှောင်ခန်းက ပိတ်ထားပါသည်"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"မရှိ"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"ပွတ်ဆွဲရန်"</string>
@@ -4213,7 +4209,8 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"\'မနှောင့်ယှက်ရ\' ကိုခွင့်ပြုရန်"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"ထည့်သွင်းထားသည့် အက်ပ်များသည် \'မနှောက်ယှက်ရ\' သုံးခွင့် တောင်းဆိုမထားပါ"</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"အက်ပ်များကို ဖွင့်နေသည်…"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"သင့်တောင်းဆိုချက်အရ Android သည် ဤအက်ပ်၏ အကြောင်းကြားချက်များကို ဤစက်ပစ္စည်းပေါ်တွင် ပိတ်ထားပါသည်"</string>
+    <!-- no translation found for app_notifications_off_desc (2484843759466874201) -->
+    <skip />
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"သင့်တောင်းဆိုချက်အရ Android သည် ဤအကြောင်းကြားချက်အမျိုးအစားများ ဤစက်ပစ္စည်းပေါ်တွင် ပေါ်မလာအောင် ပိတ်ထားပါသည်"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"သင့်တောင်းဆိုချက်အရ Android သည် ဤအကြောင်းကြားချက်အုပ်စုများ ဤစက်ပစ္စည်းပေါ်တွင် ပေါ်မလာအောင် ပိတ်ထားပါသည်"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"ဤအက်ပ်က အကြောင်းကြားချက် မပို့ပါ"</string>

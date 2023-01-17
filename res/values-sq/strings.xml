@@ -588,8 +588,8 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Tani mund të përdorësh gjurmën tënde të gishtit për të shkyçur tabletin tënd ose për të verifikuar që je ti, si për shembull kur identifikohesh në aplikacione ose kur miraton një blerje"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Tani mund të përdorësh gjurmën tënde të gishtit për të shkyçur pajisjen tënde ose për të verifikuar që je ti, si për shembull kur identifikohesh në aplikacione ose kur miraton një blerje"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Tani mund të përdorësh gjurmën tënde të gishtit për të shkyçur telefonin tënd ose për të verifikuar që je ti, si për shembull kur identifikohesh në aplikacione ose kur miraton një blerje"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Shkyç vetëm kur ekrani është i ndezur"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Ekrani duhet të jetë i ndezur para se të mund ta shkyçësh me gjurmën tënde të gishtit. Kjo bën që shkyçja aksidentale të ketë më pak gjasë të ndodhë."</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Prek për ta shkyçur në çdo kohë"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Prek sensorin për ta shkyçur, edhe kur ekrani është i fikur. Kjo bën që shkyçja aksidentale të ketë më shumë gjasa të ndodhë."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Ekrani; Shkyçja"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Bëje më vonë"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Ngrije dhe më pas prek përsëri"</string>
@@ -648,6 +648,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"U krye"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Jo, sensori nuk është ai"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Prek sensorin në pjesën e pasme të telefonit. Përdor gishtin tregues."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Konfigurimi i gjurmës së gishtit skadoi"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Provo sërish tani ose konfiguro gjurmën e gishtit më vonë te \"Cilësimet\""</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Regjistrimi i gjurmës së gishtit nuk funksionoi. Provo përsëri ose përdor një gisht tjetër."</string>
@@ -735,28 +737,22 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"Gjurma e gishtit + Fjalëkalimi"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Vazhdo pa gjurmën e gishtit"</string>
     <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"Mund ta shkyçësh telefonin duke përdorur gjurmën e gishtit. Për siguri, ky opsion kërkon një kyçje rezervë të ekranit."</string>
-    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
-    <skip />
+    <string name="fingerprint_unlock_title" product="tablet" msgid="8674718459462612186">"Mund ta shkyçësh tabletin tënd duke përdorur gjurmën e gishtit. Për siguri, ky opsion kërkon një kyçje rezervë të ekranit."</string>
+    <string name="fingerprint_unlock_title" product="device" msgid="3224468142599659740">"Mund ta shkyçësh pajisjen duke përdorur gjurmën e gishtit. Për siguri, ky opsion kërkon një kyçje rezervë të ekranit."</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"Shkyçja me fytyrë + Motivi"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Shkyçja me fytyrë + Kodi PIN"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Shkyçja me fytyrë + Fjalëkalimi"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Vazhdo pa \"Shkyçjen me fytyrë\""</string>
     <string name="face_unlock_title" product="default" msgid="7344830351598247267">"Mund ta shkyçësh telefonin duke përdorur fytyrën. Për siguri, ky opsion kërkon një kyçje rezervë të ekranit."</string>
-    <!-- no translation found for face_unlock_title (5695698036499155727) -->
-    <skip />
-    <!-- no translation found for face_unlock_title (6768108756755361161) -->
-    <skip />
+    <string name="face_unlock_title" product="tablet" msgid="5695698036499155727">"Mund ta shkyçësh tabletin tënd duke përdorur fytyrën. Për siguri, ky opsion kërkon një kyçje rezervë të ekranit."</string>
+    <string name="face_unlock_title" product="device" msgid="6768108756755361161">"Mund ta shkyçësh pajisjen tënde duke përdorur fytyrën. Për siguri, ky opsion kërkon një kyçje rezervë të ekranit."</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Motivi • Fytyra • Gjurma e gishtit"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • Fytyra • Gjurma e gishtit"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Fjalëkalimet • Fytyra • Gjurma e gishtit"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Vazhdo pa fytyrë apo gjurmë gishti"</string>
     <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"Mund ta shkyçësh telefonin duke përdorur fytyrën ose gjurmën e gishtit. Për siguri, ky opsion kërkon një kyçje rezervë të ekranit."</string>
-    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
-    <skip />
-    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
-    <skip />
+    <string name="biometrics_unlock_title" product="tablet" msgid="5808626401936488028">"Mund ta shkyçësh tabletin tënd duke përdorur fytyrën ose gjurmën e gishtit. Për siguri, ky opsion kërkon një kyçje rezervë të ekranit."</string>
+    <string name="biometrics_unlock_title" product="device" msgid="4912499343509046929">"Mund ta shkyçësh pajisjen tënde duke përdorur fytyrën ose gjurmën e gishtit. Për siguri, ky opsion kërkon një kyçje rezervë të ekranit."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"Çaktivizuar nga administratori, politika e enkriptimit ose hapësira ruajtëse e kredencialeve"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Asnjë"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Me rrëshqitje"</string>
@@ -4213,7 +4209,8 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Lejo modalitetin \"Mos shqetëso\""</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Asnjë aplikacion i instaluar nuk ka kërkuar qasje te \"Mos shqetëso\""</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"Po ngarkon aplikacionet…"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"Me kërkesën tënde, Android po bllokon shfaqjen e njoftimeve të këtij aplikacioni në këtë pajisje"</string>
+    <!-- no translation found for app_notifications_off_desc (2484843759466874201) -->
+    <skip />
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Me kërkesën tënde, Android po bllokon shfaqjen e kësaj kategorie njoftimesh në këtë pajisje"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Me kërkesën tënde, Android po bllokon shfaqjen e këtij grupi njoftimesh në këtë pajisje"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Ky aplikacion nuk dërgon njoftime"</string>

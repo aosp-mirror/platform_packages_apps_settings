@@ -588,8 +588,8 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"이제 지문을 사용하여 태블릿을 잠금 해제하거나 앱 로그인, 구매 승인 등을 위해 본인 인증을 진행할 수 있습니다."</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"이제 지문을 사용하여 기기를 잠금 해제하거나 앱 로그인, 구매 승인 등을 위해 본인 인증을 진행할 수 있습니다."</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"이제 지문을 사용하여 휴대전화를 잠금 해제하거나 앱 로그인, 구매 승인 등을 위해 본인 인증을 진행할 수 있습니다."</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"화면이 켜져 있을 때만 잠금 해제"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"지문으로 잠금 해제하려면 먼저 화면이 켜져 있어야 합니다. 이를 설정하면 실수로 잠금 해제될 가능성이 작아집니다."</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"언제든지 터치하여 잠금 해제하기"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"화면이 꺼져 있을 때도 센서를 터치하면 잠금 해제할 수 있습니다. 이렇게 설정하면 실수로 인해 잠금 해제될 가능성이 커집니다."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"화면 잠금 해제"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"나중에"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"손가락을 뗀 후 다시 터치하세요"</string>
@@ -648,6 +648,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"완료"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"죄송합니다. 센서가 아닙니다."</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"휴대전화 뒷면에 있는 센서를 터치하세요. 검지를 사용하세요."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"지문 설정 시간 초과됨"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"지금 다시 시도하거나 나중에 설정에서 지문을 등록하세요."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"지문 등록이 되지 않았습니다. 다시 시도하거나 다른 손가락을 사용하세요."</string>
@@ -735,28 +737,22 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"지문 + 비밀번호"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"지문 없이 계속하기"</string>
     <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"지문을 사용하여 휴대전화를 잠금 해제할 수 있습니다. 이 옵션을 사용하려면 보안을 위해 백업 화면 잠금이 필요합니다."</string>
-    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
-    <skip />
+    <string name="fingerprint_unlock_title" product="tablet" msgid="8674718459462612186">"지문을 사용하여 태블릿을 잠금 해제할 수 있습니다. 이 옵션을 사용하려면 보안을 위해 백업 화면 잠금이 필요합니다."</string>
+    <string name="fingerprint_unlock_title" product="device" msgid="3224468142599659740">"지문을 사용하여 기기를 잠금 해제할 수 있습니다. 이 옵션을 사용하려면 보안을 위해 백업 화면 잠금이 필요합니다."</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"얼굴 인식 잠금 해제 + 패턴"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"얼굴 인식 잠금 해제 + PIN"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"얼굴 인식 잠금 해제 + 비밀번호"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"얼굴 인식 잠금 해제 없이 계속하기"</string>
     <string name="face_unlock_title" product="default" msgid="7344830351598247267">"얼굴을 사용하여 휴대전화를 잠금 해제할 수 있습니다. 이 옵션을 사용하려면 보안을 위해 백업 화면 잠금이 필요합니다."</string>
-    <!-- no translation found for face_unlock_title (5695698036499155727) -->
-    <skip />
-    <!-- no translation found for face_unlock_title (6768108756755361161) -->
-    <skip />
+    <string name="face_unlock_title" product="tablet" msgid="5695698036499155727">"얼굴 인식을 사용하여 태블릿 잠금 해제할 수 있습니다. 이 옵션을 사용하려면 보안을 위해 백업 화면 잠금이 필요합니다."</string>
+    <string name="face_unlock_title" product="device" msgid="6768108756755361161">"얼굴 인식을 사용하여 기기를 잠금 해제할 수 있습니다. 이 옵션을 사용하려면 보안을 위해 백업 화면 잠금이 필요합니다."</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"패턴 • 얼굴 인식 • 지문"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • 얼굴 인식 • 지문"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"비밀번호 • 얼굴 인식 • 지문"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"얼굴 인식 또는 지문 없이 계속"</string>
     <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"얼굴 인식 또는 지문을 사용하여 휴대전화를 잠금 해제할 수 있습니다. 이 옵션을 사용하려면 보안을 위해 백업 화면 잠금이 필요합니다."</string>
-    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
-    <skip />
-    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
-    <skip />
+    <string name="biometrics_unlock_title" product="tablet" msgid="5808626401936488028">"얼굴 인식 또는 지문을 사용하여 태블릿을 잠금 해제할 수 있습니다. 이 옵션을 사용하려면 보안을 위해 백업 화면 잠금이 필요합니다."</string>
+    <string name="biometrics_unlock_title" product="device" msgid="4912499343509046929">"얼굴 인식 또는 지문을 사용하여 기기를 잠금 해제할 수 있습니다. 이 옵션을 사용하려면 보안을 위해 백업 화면 잠금이 필요합니다."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"관리자, 암호화 정책 또는 사용자 인증 정보 저장소에 의해 사용 중지됨"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"없음"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"스와이프"</string>
@@ -4213,7 +4209,8 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"방해 금지 모드 허용"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"설치된 앱 중에서 방해 금지 모드 액세스를 요청한 앱이 없습니다."</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"앱 로드 중…"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"사용자의 요청에 따라 Android에서 기기에 이 앱의 알림이 표시되지 않도록 차단하고 있습니다"</string>
+    <!-- no translation found for app_notifications_off_desc (2484843759466874201) -->
+    <skip />
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"사용자의 요청에 따라 Android에서 기기에 이 카테고리의 알림이 표시되지 않도록 차단하고 있습니다"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"사용자의 요청에 따라 Android에서 기기에 이 그룹의 알림이 표시되지 않도록 차단하고 있습니다"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"이 앱은 알림을 전송하지 않습니다."</string>
