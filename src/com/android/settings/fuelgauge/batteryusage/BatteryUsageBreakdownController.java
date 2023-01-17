@@ -217,13 +217,16 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     }
 
     private void showSpinnerAndAppList() {
-        removeAndCacheAllPreferences();
         if (mBatteryDiffData == null) {
+            mHandler.post(() -> {
+                removeAndCacheAllPreferences();
+            });
             return;
         }
         mSpinnerPreference.setVisible(true);
         mAppListPreferenceGroup.setVisible(true);
         mHandler.post(() -> {
+            removeAndCacheAllPreferences();
             addAllPreferences();
         });
     }

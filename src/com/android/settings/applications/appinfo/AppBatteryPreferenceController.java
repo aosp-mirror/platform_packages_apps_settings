@@ -121,11 +121,11 @@ public class AppBatteryPreferenceController extends BasePreferenceController
             Log.i(TAG, "handlePreferenceTreeClick():\n" + mBatteryDiffEntry);
             AdvancedPowerUsageDetail.startBatteryDetailPage(
                     mParent.getActivity(),
-                    mParent,
+                    mParent.getMetricsCategory(),
                     mBatteryDiffEntry,
                     Utils.formatPercentage(
                             mBatteryDiffEntry.getPercentOfTotal(), /* round */ true),
-                    /*slotInformation=*/ null);
+                    /*slotInformation=*/ null, /*showTimeInformation=*/ false);
             return true;
         }
 
