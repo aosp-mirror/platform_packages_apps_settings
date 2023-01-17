@@ -22,6 +22,7 @@
     <Preference
         android:key="manage_external_storage"
         android:title="@string/manage_external_storage_title"
+        android:order="100"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications">
         <extra
             android:name="classname"
@@ -31,6 +32,7 @@
     <Preference
         android:key="interact_across_profiles"
         android:title="@string/interact_across_profiles_title"
+        android:order="200"
         android:fragment="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings"
         settings:keywords="@string/interact_across_profiles_keywords"
         settings:controller="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesController" />
@@ -38,6 +40,7 @@
     <Preference
         android:key="device_administrators"
         android:title="@string/manage_device_admin"
+        android:order="300"
         android:fragment="com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings"
         android:summary="@string/summary_placeholder"
         settings:searchable="false"
@@ -46,6 +49,7 @@
     <Preference
         android:key="system_alert_window_app_list"
         android:title="@string/system_alert_window_settings"
+        android:order="400"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
         settings:keywords="@string/keywords_draw_overlay"
         settings:controller="com.android.settings.applications.specialaccess.SystemAlertWindowPreferenceController">
@@ -57,12 +61,14 @@
     <Preference
         android:key="zen_access"
         android:title="@string/manage_zen_access_title"
+        android:order="500"
         android:fragment="com.android.settings.notification.zen.ZenAccessSettings"
         settings:controller="com.android.settings.applications.specialaccess.zenaccess.ZenAccessController" />
 
     <Preference
         android:key="media_management_apps"
         android:title="@string/media_management_apps_title"
+        android:order="600"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
         settings:keywords="@string/keywords_media_management_apps">
         <extra
@@ -73,6 +79,7 @@
     <Preference
         android:key="write_settings_apps"
         android:title="@string/write_settings"
+        android:order="700"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
         settings:keywords="@string/keywords_write_settings">
         <extra
@@ -83,12 +90,14 @@
     <Preference
         android:key="notification_access"
         android:title="@string/manage_notification_access_title"
+        android:order="800"
         android:fragment="com.android.settings.notification.NotificationAccessSettings"
         settings:controller="com.android.settings.applications.specialaccess.notificationaccess.NotificationAccessController" />
 
     <Preference
         android:key="picture_in_picture"
         android:title="@string/picture_in_picture_title"
+        android:order="900"
         android:fragment="com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureSettings"
         settings:keywords="@string/picture_in_picture_keywords"
         settings:controller="com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureController" />
@@ -96,6 +105,7 @@
     <Preference
         android:key="premium_sms"
         android:title="@string/premium_sms_access"
+        android:order="1000"
         android:fragment="com.android.settings.applications.specialaccess.premiumsms.PremiumSmsAccess"
         settings:isPreferenceVisible="@bool/config_show_premium_sms"
         settings:controller="com.android.settings.applications.specialaccess.premiumsms.PremiumSmsController" />
@@ -103,6 +113,7 @@
     <Preference
         android:key="data_saver"
         android:title="@string/unrestricted_data_saver"
+        android:order="1100"
         android:fragment="com.android.settings.datausage.UnrestrictedDataAccess"
         settings:isPreferenceVisible="@bool/config_show_data_saver"
         settings:controller="com.android.settings.applications.specialaccess.DataSaverController" />
@@ -110,6 +121,7 @@
     <Preference
         android:key="long_background_tasks"
         android:title="@string/long_background_tasks_title"
+        android:order="1200"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
         settings:keywords="@string/keywords_long_background_tasks">
         <extra
@@ -120,6 +132,7 @@
     <Preference
         android:key="manage_external_sources"
         android:title="@string/install_other_apps"
+        android:order="1300"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
         settings:keywords="@string/keywords_install_other_apps">
         <extra
@@ -130,6 +143,7 @@
     <Preference
         android:key="alarms_and_reminders"
         android:title="@string/alarms_and_reminders_title"
+        android:order="1400"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
         settings:keywords="@string/keywords_alarms_and_reminders">
         <extra
@@ -140,6 +154,7 @@
     <Preference
         android:key="special_app_usage_access"
         android:title="@string/usage_access"
+        android:order="1500"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
         settings:keywords="@string/keywords_write_settings">
         <extra
@@ -150,6 +165,7 @@
     <Preference
         android:key="enabled_vr_listeners"
         android:title="@string/vr_listeners_title"
+        android:order="1600"
         android:fragment="com.android.settings.applications.specialaccess.vrlistener.VrListenerSettings"
         settings:keywords="@string/keywords_vr_listener"
         settings:controller="com.android.settings.applications.specialaccess.vrlistener.EnabledVrListenersController">
@@ -161,6 +177,7 @@
     <Preference
         android:key="change_wifi_state"
         android:title="@string/change_wifi_state_title"
+        android:order="1700"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
         settings:keywords="@string/keywords_change_wifi_state">
         <extra
@@ -171,10 +188,12 @@
     <Preference
         android:key="turn_screen_on"
         android:title="@string/turn_screen_on_title"
+        android:order="1800"
         android:fragment="com.android.settings.applications.specialaccess.turnscreenon.TurnScreenOnSettings" />
 
     <Preference
         android:key="special_access_more"
         android:title="@string/special_access_more"
+        android:order="1900"
         settings:controller="com.android.settings.applications.specialaccess.MoreSpecialAccessPreferenceController" />
 </PreferenceScreen>
