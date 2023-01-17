@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.accounts.AccountDashboardFragment;
+import com.android.settings.applications.specialaccess.SpecialAccessSettings;
 import com.android.settingslib.drawer.CategoryKey;
 
 import org.junit.Test;
@@ -40,5 +41,14 @@ public class DashboardFragmentRegistryTest {
                 CategoryKey.CATEGORY_ACCOUNT_DETAIL);
 
         assertThat(fragment).isEqualTo(AccountDashboardFragment.class.getName());
+    }
+
+    @Test
+    public void specialAppAccessCategoryShouldRedirectToSpecialAppAccessPage() {
+        final String fragment =
+                DashboardFragmentRegistry.CATEGORY_KEY_TO_PARENT_MAP.get(
+                        CategoryKey.CATEGORY_SPECIAL_APP_ACCESS);
+
+        assertThat(fragment).isEqualTo(SpecialAccessSettings.class.getName());
     }
 }
