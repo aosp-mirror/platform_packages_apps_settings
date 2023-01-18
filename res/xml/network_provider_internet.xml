@@ -52,7 +52,8 @@
         settings:userRestriction="no_config_mobile_networks"
         settings:isPreferenceVisible="@bool/config_show_sim_info"
         settings:allowDividerAbove="true"
-        settings:useAdminDisabledSummary="true" />
+        settings:useAdminDisabledSummary="true"
+        settings:searchable="@bool/config_show_sim_info"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="airplane_mode"
