@@ -99,7 +99,7 @@ public class BugReportInPowerPreferenceControllerTest {
 
         mController.onPreferenceChange(mPreference, false /* new value */);
         int mode = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Global.BUGREPORT_IN_POWER_MENU, -1 /* default */);
+                Settings.Secure.BUGREPORT_IN_POWER_MENU, -1 /* default */);
 
         assertThat(mode).isEqualTo(SETTING_VALUE_OFF);
     }
@@ -111,7 +111,7 @@ public class BugReportInPowerPreferenceControllerTest {
 
         mController.onPreferenceChange(mPreference, true /* new value */);
         int mode = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Global.BUGREPORT_IN_POWER_MENU, -1 /* default */);
+                Settings.Secure.BUGREPORT_IN_POWER_MENU, -1 /* default */);
 
         assertThat(mode).isEqualTo(SETTING_VALUE_ON);
     }
@@ -121,7 +121,7 @@ public class BugReportInPowerPreferenceControllerTest {
     public void updateState_settingsOn_preferenceShouldBeChecked() {
         when(mUserManager.hasUserRestriction(anyString())).thenReturn(false);
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Global.BUGREPORT_IN_POWER_MENU, SETTING_VALUE_ON);
+                Settings.Secure.BUGREPORT_IN_POWER_MENU, SETTING_VALUE_ON);
         mController.displayPreference(mScreen);
 
         mController.updateState(mPreference);
@@ -133,7 +133,7 @@ public class BugReportInPowerPreferenceControllerTest {
     public void updateState_settingsOff_preferenceShouldNotBeChecked() {
         when(mUserManager.hasUserRestriction(anyString())).thenReturn(false);
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Global.BUGREPORT_IN_POWER_MENU, SETTING_VALUE_OFF);
+                Settings.Secure.BUGREPORT_IN_POWER_MENU, SETTING_VALUE_OFF);
         mController.displayPreference(mScreen);
 
         mController.updateState(mPreference);
@@ -148,7 +148,7 @@ public class BugReportInPowerPreferenceControllerTest {
 
         mController.onDeveloperOptionsSwitchDisabled();
         int mode = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Global.BUGREPORT_IN_POWER_MENU, -1 /* default */);
+                Settings.Secure.BUGREPORT_IN_POWER_MENU, -1 /* default */);
 
         assertThat(mode).isEqualTo(SETTING_VALUE_OFF);
         verify(mPreference).setChecked(false);
