@@ -17,10 +17,13 @@ import static android.provider.Settings.Secure.MANAGED_PROFILE_CONTACT_REMOTE_SE
 
 import android.content.Context;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.slices.SliceData;
 import com.android.settingslib.RestrictedLockUtils;
@@ -34,9 +37,14 @@ public class ContactSearchPreferenceController extends BasePreferenceController 
 
     public ContactSearchPreferenceController(Context context, String key) {
         super(context, key);
+        // Set default managed profile for the current user, otherwise isAvailable will be false and
+        // the setting won't be searchable.
+        UserManager userManager = context.getSystemService(UserManager.class);
+        mManagedUser = Utils.getManagedProfile(userManager);
     }
 
-    public void setManagedUser(UserHandle managedUser) {
+    @VisibleForTesting
+    void setManagedUser(UserHandle managedUser) {
         mManagedUser = managedUser;
     }
 

@@ -31,6 +31,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.slices.SliceData;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -56,9 +57,13 @@ public class WorkModePreferenceController extends BasePreferenceController imple
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(Intent.ACTION_MANAGED_PROFILE_AVAILABLE);
         mIntentFilter.addAction(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE);
+        // Set default managed profile for the current user, otherwise isAvailable will be false and
+        // the setting won't be searchable.
+        mManagedUser = Utils.getManagedProfile(mUserManager);
     }
 
-    public void setManagedUser(UserHandle managedUser) {
+    @VisibleForTesting
+    void setManagedUser(UserHandle managedUser) {
         mManagedUser = managedUser;
     }
 
