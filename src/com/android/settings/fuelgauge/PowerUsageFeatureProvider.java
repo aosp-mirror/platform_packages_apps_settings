@@ -133,9 +133,14 @@ public interface PowerUsageFeatureProvider {
     boolean delayHourlyJobWhenBooting();
 
     /**
-     * Gets a intent for one time bypass charge limited to resume charging.
+     * Gets an intent for one time bypass charge limited to resume charging.
      */
     Intent getResumeChargeIntent(boolean isDockDefender);
+
+    /**
+     * Returns the intent action used to mark as the full charge start event.
+     */
+    String getFullChargeIntentAction();
 
     /**
      * Returns {@link Set} for the system component ids which are combined into others

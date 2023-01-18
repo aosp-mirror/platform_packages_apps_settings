@@ -148,6 +148,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public String getFullChargeIntentAction() {
+        return Intent.ACTION_BATTERY_LEVEL_CHANGED;
+    }
+
+    @Override
     public boolean isExtraDefend() {
         return false;
     }
