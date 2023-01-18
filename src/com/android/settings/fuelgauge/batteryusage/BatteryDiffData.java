@@ -16,7 +16,6 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
-import android.app.Application;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -24,7 +23,6 @@ import androidx.annotation.NonNull;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.applications.ApplicationsState;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -41,6 +39,7 @@ public class BatteryDiffData {
             final Context context,
             final @NonNull List<BatteryDiffEntry> appDiffEntries,
             final @NonNull List<BatteryDiffEntry> systemDiffEntries,
+            final Set<String> systemAppsSet,
             final boolean isAccumulated) {
         mAppEntries = appDiffEntries;
         mSystemEntries = systemDiffEntries;
@@ -49,7 +48,7 @@ public class BatteryDiffData {
             final PowerUsageFeatureProvider featureProvider =
                     FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context);
             purgeBatteryDiffData(featureProvider);
-            combineBatteryDiffEntry(context, featureProvider);
+            combineBatteryDiffEntry(context, featureProvider, systemAppsSet);
         }
 
         setTotalConsumePower();
@@ -71,9 +70,9 @@ public class BatteryDiffData {
     }
 
     /** Combines into SystemAppsBatteryDiffEntry and OthersBatteryDiffEntry. */
-    private void combineBatteryDiffEntry(
-            final Context context, final PowerUsageFeatureProvider featureProvider) {
-        combineIntoSystemApps(context, featureProvider, mAppEntries);
+    private void combineBatteryDiffEntry(final Context context,
+            final PowerUsageFeatureProvider featureProvider, final Set<String> systemAppsSet) {
+        combineIntoSystemApps(context, featureProvider, systemAppsSet, mAppEntries);
         combineSystemItemsIntoOthers(context, featureProvider, mSystemEntries);
     }
 
@@ -119,17 +118,14 @@ public class BatteryDiffData {
     private static void combineIntoSystemApps(
             final Context context,
             final PowerUsageFeatureProvider featureProvider,
+            final Set<String> systemAppsSet,
             final List<BatteryDiffEntry> appEntries) {
         final List<String> systemAppsAllowlist = featureProvider.getSystemAppsAllowlist();
-        final Application application = (Application) context.getApplicationContext();
-        final ApplicationsState applicationsState =
-                application == null ? null : ApplicationsState.getInstance(application);
-
         BatteryDiffEntry.SystemAppsBatteryDiffEntry systemAppsDiffEntry = null;
         final Iterator<BatteryDiffEntry> appListIterator = appEntries.iterator();
         while (appListIterator.hasNext()) {
             final BatteryDiffEntry batteryDiffEntry = appListIterator.next();
-            if (needsCombineInSystemApp(batteryDiffEntry, systemAppsAllowlist, applicationsState)) {
+            if (needsCombineInSystemApp(batteryDiffEntry, systemAppsAllowlist, systemAppsSet)) {
                 if (systemAppsDiffEntry == null) {
                     systemAppsDiffEntry = new BatteryDiffEntry.SystemAppsBatteryDiffEntry(context);
                 }
@@ -184,7 +180,7 @@ public class BatteryDiffData {
 
     @VisibleForTesting
     static boolean needsCombineInSystemApp(final BatteryDiffEntry batteryDiffEntry,
-            final List<String> systemAppsAllowlist, final ApplicationsState applicationsState) {
+            final List<String> systemAppsAllowlist, final Set<String> systemAppsSet) {
         if (batteryDiffEntry.mBatteryHistEntry.mIsHidden) {
             return true;
         }
@@ -198,15 +194,6 @@ public class BatteryDiffData {
             return true;
         }
 
-        if (applicationsState == null) {
-            return false;
-        }
-        final ApplicationsState.AppEntry appEntry =
-                applicationsState.getEntry(packageName, /* userId= */ 0);
-        if (appEntry == null || appEntry.info == null) {
-            return false;
-        }
-        return !ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER_AND_INSTANT.filterApp(
-                appEntry);
+        return systemAppsSet != null && systemAppsSet.contains(packageName);
     }
 }

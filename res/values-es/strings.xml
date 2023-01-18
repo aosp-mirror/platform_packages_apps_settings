@@ -116,8 +116,10 @@
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth activado"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Ver todo"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"Lápiz óptico"</string>
-    <string name="stylus_default_notes_app" msgid="3111290761558445874">"Aplicación para tomar notas del sistema"</string>
-    <string name="stylus_textfield_handwriting" msgid="6962904622425646128">"Escritura con lápiz óptico en campos de texto"</string>
+    <!-- no translation found for stylus_default_notes_app (3896158797687806941) -->
+    <skip />
+    <!-- no translation found for stylus_textfield_handwriting (2363579035338976327) -->
+    <skip />
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignorar todas las pulsaciones del botón del lápiz óptico"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Lápiz óptico"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Fecha y hora"</string>
@@ -157,22 +159,24 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La selección de idioma para esta aplicación no está disponible en Ajustes."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Puede que el idioma no coincida con los que hay disponibles en la aplicación. Algunas aplicaciones no son compatibles con este ajuste."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Aquí solo se muestran las aplicaciones que admiten la selección de idioma."</string>
-    <!-- no translation found for regional_preferences_title (4304567374498629528) -->
-    <skip />
-    <!-- no translation found for regional_preferences_summary (1189876997389469650) -->
-    <skip />
-    <!-- no translation found for regional_preferences_main_page_sub_title (4666033861956272891) -->
-    <skip />
-    <!-- no translation found for temperature_preferences_title (5009881556503629058) -->
-    <skip />
-    <!-- no translation found for calendar_preferences_title (8312485828206542600) -->
-    <skip />
-    <!-- no translation found for first_day_of_week_preferences_title (1971850087589599553) -->
-    <skip />
-    <!-- no translation found for numbers_preferences_title (6094837605398562369) -->
-    <skip />
-    <!-- no translation found for default_string_of_regional_preference (1595774718180886349) -->
-    <skip />
+    <string name="regional_preferences_title" msgid="4304567374498629528">"Preferencias locales"</string>
+    <string name="regional_preferences_summary" msgid="1189876997389469650">"Definir preferencias de unidades y números"</string>
+    <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Permite que las aplicaciones sepan tus preferencias regionales para que puedan personalizar tu experiencia."</string>
+    <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Las aplicaciones usarán tus preferencias regionales siempre que sea posible."</string>
+    <string name="temperature_preferences_title" msgid="9067783912861473593">"Unidades de temperatura"</string>
+    <string name="calendar_preferences_title" msgid="8312485828206542600">"Calendario"</string>
+    <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Primer día de la semana"</string>
+    <string name="numbers_preferences_title" msgid="6094837605398562369">"Números"</string>
+    <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Usar la configuración predeterminada de la app"</string>
+    <string name="celsius_temperature_unit" msgid="6118523647432383132">"Celsius (°C)"</string>
+    <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Fahrenheit (°F)"</string>
+    <string name="sunday_first_day_of_week" msgid="7644548348295686051">"Domingo"</string>
+    <string name="monday_first_day_of_week" msgid="7244698610476506771">"Lunes"</string>
+    <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"Martes"</string>
+    <string name="wednesday_first_day_of_week" msgid="6544537589727042869">"Miércoles"</string>
+    <string name="thursday_first_day_of_week" msgid="3035885630945594833">"Jueves"</string>
+    <string name="friday_first_day_of_week" msgid="7074795061812083541">"Viernes"</string>
+    <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Sábado"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{¿Eliminar idioma seleccionado?}other{¿Eliminar idiomas seleccionados?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"El texto se mostrará en otro idioma."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"No puedes quitar todos los idiomas"</string>
@@ -233,8 +237,7 @@
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"p. ej., Android de Juan"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Ubicación"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Usar ubicación"</string>
-    <!-- no translation found for location_settings_summary_location_on (7029728269719893381) -->
-    <skip />
+    <string name="location_settings_summary_location_on" msgid="7029728269719893381">"{count,plural, =1{Activada: # aplicación tiene acceso a la ubicación}other{Activada: # aplicaciones tienen acceso a la ubicación}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Cargando…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Las aplicaciones que tengan permiso para detectar dispositivos cercanos pueden determinar la posición relativa de los dispositivos conectados."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Las aplicaciones y los servicios no pueden acceder a la ubicación. Aun así, quizá se envíe la ubicación del dispositivo a los servicios de emergencia cuando llames o envíes mensajes a números de emergencia."</string>
@@ -314,8 +317,7 @@
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Al usar Desbloqueo con huella digital"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Huella del trabajo"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Añadir huella digital"</string>
-    <!-- no translation found for security_settings_fingerprint_preference_summary (8486134175759676037) -->
-    <skip />
+    <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Huella digital añadida}other{# huellas digitales añadidas}}"</string>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Configura tu huella digital"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Permitir desbloqueo con huella digital"</string>
@@ -389,8 +391,10 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Registro al <xliff:g id="PERCENTAGE">%d</xliff:g> por ciento"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registro de la huella digital al <xliff:g id="PERCENTAGE">%d</xliff:g> por ciento"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Huella digital añadida"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Desbloquear solo si la pantalla está encendida"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"La pantalla debe estar encendida para desbloquearla con tu huella digital. Esto evita desbloqueos accidentales."</string>
+    <!-- no translation found for security_settings_require_screen_on_to_auth_title (1641621458536715518) -->
+    <skip />
+    <!-- no translation found for security_settings_require_screen_on_to_auth_description (4158414711168345398) -->
+    <skip />
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Pantalla, desbloqueo"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Más tarde"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Levanta el dedo y toca de nuevo"</string>
@@ -413,6 +417,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Hecho"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"¡Vaya! Ese no es el sensor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Toca el sensor situado detrás del teléfono con el dedo índice."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Tiempo agotado para configurar la huella digital"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Inténtalo otra vez ahora o configura la huella digital en otro momento desde Ajustes"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"El registro de la huella digital no se ha realizado correctamente. Vuelve a intentarlo o utiliza otro dedo."</string>
@@ -464,17 +470,14 @@
     <string name="fingerprint_unlock_set_unlock_pin" msgid="4724451168139460493">"Huella digital + PIN"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"Huella digital + contraseña"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Continuar sin huella digital"</string>
-    <string name="fingerprint_unlock_title" msgid="4978686534505944042">"Puedes desbloquear el teléfono con tu huella digital. Por motivos de seguridad, para utilizar esta opción necesitas un método de bloqueo de pantalla alternativo."</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"Desbloqueo facial + patrón"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Desbloqueo facial + PIN"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Desbloqueo facial + contraseña"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Continuar sin Desbloqueo facial"</string>
-    <string name="face_unlock_title" msgid="7344830351598247267">"Puedes desbloquear el teléfono con tu cara. Por motivos de seguridad, para utilizar esta opción necesitas un método de bloqueo de pantalla alternativo."</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Patrón • Cara • Huella digital"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • Cara • Huella digital"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Contraseña • Cara • Huella digital"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Continuar sin cara ni huella digital"</string>
-    <string name="biometrics_unlock_title" msgid="616524056055233041">"Puedes desbloquear el teléfono con la cara o con una huella digital. Por motivos de seguridad, necesitas un método de bloqueo de pantalla alternativo para utilizar esta opción."</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Ninguno"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Deslizar"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Patrón"</string>
@@ -886,9 +889,8 @@
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Cuando cambias el teléfono entre vertical y horizontal"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Resolución de pantalla"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Alta resolución"</string>
-    <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Resolución completa"</string>
-    <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
-    <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
+    <!-- no translation found for screen_resolution_option_full (2694003735219114186) -->
+    <skip />
     <string name="screen_resolution_footer" msgid="6772341522952795647">"La resolución completa consume más batería. Cambiar la resolución puede provocar que algunas aplicaciones se reinicien."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Seleccionado"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Colores"</string>
@@ -1034,13 +1036,19 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Almacenamiento y caché"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Ajustes de almacenamiento"</string>
     <string name="status_eid" msgid="7532406028683438634">"EID"</string>
-    <string name="eid_multi_sim" msgid="4581966600904959452">"EID (ranura de SIM %1$d)"</string>
-    <string name="imei_multi_sim" msgid="71477088017585479">"IMEI (ranura SIM %1$d)"</string>
+    <string name="eid_multi_sim" msgid="9087924808336397804">"EID (ranura de SIM <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
+    <!-- no translation found for imei_multi_sim (9001570420423929507) -->
+    <skip />
+    <!-- no translation found for imei_multi_sim_primary (7914653040843734282) -->
+    <skip />
     <string name="view_saved_network" msgid="1232387673095080910">"Para verla, selecciona una red guardada"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"Versión de PRL"</string>
-    <string name="meid_multi_sim" msgid="7645394486193991388">"MEID (ranura SIM %1$d)"</string>
+    <!-- no translation found for meid_multi_sim (1460689549266621286) -->
+    <skip />
+    <!-- no translation found for meid_multi_sim_primary (8921262417580407201) -->
+    <skip />
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"Tipo de red de datos móviles"</string>
@@ -1912,14 +1920,10 @@
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Más tenue"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Más brillante"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Mantener después de reiniciar el dispositivo"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (2981206111858937724) -->
-    <skip />
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (6867395206533459204) -->
-    <skip />
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (4079139970819335593) -->
-    <skip />
-    <!-- no translation found for accessibilty_autoclick_delay_unit_second (5979297390686370567) -->
-    <skip />
+    <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Breve ({time} segundo)}other{Breve ({time} segundos)}}"</string>
+    <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Medio ({time} segundo)}other{Medio ({time} segundos)}}"</string>
+    <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{Largo ({time} segundo)}other{Largo ({time} segundos)}}"</string>
+    <string name="accessibilty_autoclick_delay_unit_second" msgid="5979297390686370567">"{count,plural, =1{{time} segundo}other{{time} segundos}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Ajustes"</string>
     <string name="captioning_preview_title" msgid="2888561631323180535">"Vista previa"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Opciones estándar"</string>
@@ -1994,10 +1998,8 @@
     <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Buscar dispositivos cercanos"</string>
     <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Dispositivos guardados"</string>
     <string name="print_settings" msgid="8519810615863882491">"Impresión"</string>
-    <!-- no translation found for print_settings_summary (1458773840720811915) -->
-    <skip />
-    <!-- no translation found for print_jobs_summary (7040836482336577323) -->
-    <skip />
+    <string name="print_settings_summary" msgid="1458773840720811915">"{count,plural, =1{1 servicio de impresión activo}other{# servicios de impresión activos}}"</string>
+    <string name="print_jobs_summary" msgid="7040836482336577323">"{count,plural, =1{1 trabajo de impresión}other{# trabajos de impresión}}"</string>
     <string name="print_settings_title" msgid="7680498284751129935">"Servicios de impresión"</string>
     <string name="print_no_services_installed" msgid="7554057966540602692">"No se ha instalado ningún servicio."</string>
     <string name="print_no_printers_found" msgid="4833082484646109486">"No se encontraron impresoras"</string>
@@ -2075,16 +2077,11 @@
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Más información sobre la carga en pausa"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Seguir cargando"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Se incluye la actividad en segundo plano que consume mucha batería"</string>
-    <!-- no translation found for battery_tip_restrict_title (4537101947310626753) -->
-    <skip />
-    <!-- no translation found for battery_tip_restrict_handled_title (7142074986508706853) -->
-    <skip />
-    <!-- no translation found for battery_tip_restrict_summary (7539469590829235277) -->
-    <skip />
-    <!-- no translation found for battery_tip_restrict_handled_summary (3535697154547199190) -->
-    <skip />
-    <!-- no translation found for battery_tip_restrict_app_dialog_title (1649476357343160240) -->
-    <skip />
+    <string name="battery_tip_restrict_title" msgid="4537101947310626753">"{count,plural, =1{Restringir # aplicación}other{Restringir # aplicaciones}}"</string>
+    <string name="battery_tip_restrict_handled_title" msgid="7142074986508706853">"{count,plural, =1{{label} restringida recientemente}other{# aplicaciones restringidas recientemente}}"</string>
+    <string name="battery_tip_restrict_summary" msgid="7539469590829235277">"{count,plural, =1{{label} tiene un uso de batería en segundo plano elevado}other{# aplicaciones tienen un uso de batería en segundo plano elevado}}"</string>
+    <string name="battery_tip_restrict_handled_summary" msgid="3535697154547199190">"{count,plural, =1{Esta aplicación no se puede ejecutar en segundo plano}other{Estas aplicaciones no se pueden ejecutar en segundo plano}}"</string>
+    <string name="battery_tip_restrict_app_dialog_title" msgid="1649476357343160240">"{count,plural, =1{¿Restringir aplicación?}other{¿Restringir # aplicaciones?}}"</string>
     <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"Si quieres ahorrar batería, evita que <xliff:g id="APP">%1$s</xliff:g> consuma batería en segundo plano. Es posible que la aplicación no funcione correctamente y las notificaciones se retrasen."</string>
     <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"Si quieres ahorrar batería, evita que estas aplicaciones consuman batería en segundo plano. Es posible que las aplicaciones restringidas no funcionen correctamente y las notificaciones se retrasen.\n\nAplicaciones:"</string>
     <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"Si quieres ahorrar batería, evita que estas aplicaciones consuman batería en segundo plano. Es posible que las aplicaciones restringidas no funcionen correctamente y las notificaciones se retrasen.\n\nAplicaciones:\n<xliff:g id="APP_LIST">%1$s</xliff:g>."</string>
@@ -2098,16 +2095,14 @@
     <string name="smart_battery_title" msgid="9095903608520254254">"Gestionar aplicaciones automáticamente"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"Cuando el gestor de batería detecte que las aplicaciones consumen batería, podrás restringirlas, aunque es posible que no funcionen correctamente y las notificaciones se retrasen."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Aplicaciones restringidas"</string>
-    <!-- no translation found for restricted_app_summary (1022307922754893997) -->
-    <skip />
+    <string name="restricted_app_summary" msgid="1022307922754893997">"{count,plural, =1{Limitando el uso de batería de # aplicación}other{Limitando el uso de batería de # aplicaciones}}"</string>
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"Restringida <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="restricted_app_detail_footer" msgid="3495725286882138803">"Estas aplicaciones tienen restringido el uso de batería en segundo plano. Es posible que no funcionen correctamente y que las notificaciones se retrasen."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Utilizar el gestor de batería"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Detectar el consumo de batería de las aplicaciones"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"Detectando cuándo consumen batería las aplicaciones"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"Detectando cuándo agotan batería las aplicaciones"</string>
-    <!-- no translation found for battery_manager_app_restricted (2583902700677009173) -->
-    <skip />
+    <string name="battery_manager_app_restricted" msgid="2583902700677009173">"{count,plural, =1{# aplicación restringida}other{# aplicaciones restringidas}}"</string>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small><font size="20">" <xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
     <string name="battery_missing_message" msgid="400958471814422770">"Se ha producido un problema al leer el indicador de batería."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
@@ -2127,27 +2122,13 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"Duración aproximada de una carga completa"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Los datos de uso de la batería son aproximados y pueden variar en función del uso."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Uso de batería"</string>
-    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"<xliff:g id="TIME_0">^1</xliff:g> en total • <xliff:g id="TIME_1">^2</xliff:g> en segundo plano\ndesde la última carga completa"</string>
-    <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> en total • <xliff:g id="TIME_1">^2</xliff:g> en segundo plano\ndurante las últimas 24 horas"</string>
-    <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"<xliff:g id="TIME_0">^1</xliff:g> en total • <xliff:g id="TIME_1">^2</xliff:g> en segundo plano\ndurante <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
-    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"Menos de 1 minuto en total desde la última carga completa"</string>
-    <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"Menos de 1 minuto en total durante las últimas 24 horas"</string>
-    <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Menos de un minuto en total entre <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"Menos de 1 minuto en segundo plano desde la última carga completa"</string>
-    <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"Menos de 1 minuto en segundo plano durante las últimas 24 horas"</string>
-    <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Menos de 1 minuto en segundo plano entre <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_total_usage" msgid="4811532932663354619">"<xliff:g id="TIME">^1</xliff:g> en total desde la última carga completa"</string>
-    <string name="battery_total_usage_24hr" msgid="3907495067623665787">"<xliff:g id="TIME">^1</xliff:g> en total durante las últimas 24 horas"</string>
-    <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_0">^1</xliff:g> en total entre <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="8262917746299259350">"<xliff:g id="TIME">^1</xliff:g> en segundo plano desde la última carga completa"</string>
-    <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"<xliff:g id="TIME">^1</xliff:g> en segundo plano durante las últimas 24 horas"</string>
-    <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> en segundo plano entre <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"<xliff:g id="TIME">^1</xliff:g> en total • menos de 1 minuto en segundo plano\ndesde la última carga completa"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"<xliff:g id="TIME">^1</xliff:g> en total • menos de 1 minuto en segundo plano\ndurante las últimas 24 horas"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"<xliff:g id="TIME_0">^1</xliff:g> en total • menos de 1 minuto en segundo plano\ndurante <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="3851536644733662392">"Ningún uso desde la última carga completa"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Sin uso durante las últimas 24 horas"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
+    <!-- no translation found for battery_usage_since_last_full_charge (3488425008925924769) -->
+    <skip />
+    <string name="battery_usage_system_apps" msgid="8659537819731575299">"Aplicaciones del sistema"</string>
+    <string name="battery_usage_others" msgid="311793281613609986">"Otros"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Tiempo restante estimado"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Hasta completar la carga"</string>
     <string name="estimated_time_description" msgid="211058785418596009">"La estimación puede variar en función del uso"</string>
@@ -2185,17 +2166,21 @@
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Uso de aplicaciones de <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Total: menos de 1 minuto"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"En segundo plano: menos de 1 minuto"</string>
+    <string name="battery_usage_screen_time_less_than_one_minute" msgid="2911989465891679033">"Tiempo de pantalla: menos de un minuto"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Total: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"En segundo plano: <xliff:g id="TIME">%s</xliff:g>"</string>
+    <string name="battery_usage_screen_time" msgid="3973865893520804115">"Tiempo de pantalla: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Los datos de uso de la batería estarán disponibles en unas horas cuando se haya cargado completamente"</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"ahora"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Gráfico del uso de batería"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Gráfico de uso de batería diario"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Gráfico de uso de batería por horas"</string>
-    <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="8219417894003454299">"Desglose proporcional de uso desde la última carga completa"</string>
-    <string name="battery_usage_breakdown_title_for_slot" msgid="5897712719834293709">"Desglose proporcional de uso de <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <string name="battery_usage_app_tab" msgid="47007533921631047">"Aplicación"</string>
-    <string name="battery_usage_system_tab" msgid="2723499428460455537">"Sistema"</string>
+    <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Uso de batería desde la última carga completa"</string>
+    <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Uso de batería de <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Tiempo de pantalla desde la última carga completa"</string>
+    <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Tiempo de pantalla (<xliff:g id="SLOT">%s</xliff:g>)"</string>
+    <string name="battery_usage_spinner_breakdown_by_apps" msgid="7746337368402445072">"Desglose por aplicaciones"</string>
+    <string name="battery_usage_spinner_breakdown_by_system" msgid="4646952798665973464">"Desglose por sistema"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Estadísticas de procesos"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Estadísticas técnicas sobre procesos en ejecución"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Uso de memoria"</string>
@@ -2297,8 +2282,7 @@
     <string name="remove_credential_management_app" msgid="6089291496976812786">"Quitar aplicación"</string>
     <string name="remove_credential_management_app_dialog_title" msgid="5713525435104706772">"¿Quitar esta aplicación?"</string>
     <string name="remove_credential_management_app_dialog_message" msgid="7739474298063646935">"Esta aplicación no gestionará certificados, pero permanecerá en tu dispositivo. Se desinstalarán todos los certificados que haya instalado."</string>
-    <!-- no translation found for number_of_urls (1128699121050872188) -->
-    <skip />
+    <string name="number_of_urls" msgid="1128699121050872188">"{count,plural, =1{# URL}other{# URLs}}"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Señal de llamada de emergencia"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Establecer comportamiento al realizar una llamada de emergencia"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Copia de seguridad"</string>
@@ -2341,8 +2325,7 @@
     <string name="notification_history_today" msgid="5828496957208237230">"Últimas 24 horas"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"Pospuestas"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"Descartadas recientemente"</string>
-    <!-- no translation found for notification_history_count (885305572972482838) -->
-    <skip />
+    <string name="notification_history_count" msgid="885305572972482838">"{count,plural, =1{# notificación}other{# notificaciones}}"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"Tono de llamada y vibración"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"Información de la red"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"Sincronización habilitada"</string>
@@ -2533,13 +2516,11 @@
     <string name="additional_system_update_settings_list_item_title" msgid="7230385345152138051">"Otras actualizaciones del sistema"</string>
     <string name="ssl_ca_cert_warning" msgid="3898387588657346106">"Puede que la red esté supervisada"</string>
     <string name="done_button" msgid="6269449526248267">"Hecho"</string>
-    <!-- no translation found for ssl_ca_cert_dialog_title (1032088078702042090) -->
-    <skip />
+    <string name="ssl_ca_cert_dialog_title" msgid="1032088078702042090">"{count,plural, =1{Confiar en el certificado o eliminarlo}other{Confiar en los certificados o eliminarlos}}"</string>
     <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{{orgName} ha instalado una autoridad de certificación en tu dispositivo. Con ella, quizá pueda monitorizar la actividad de red de tu dispositivo, incluidos correos, aplicaciones y sitios web seguros.\n\nPara obtener más información sobre este certificado, contacta con tu administrador.}other{{orgName} ha instalado autoridades de certificación en tu dispositivo. Con ellas, quizá pueda monitorizar la actividad de red de tu dispositivo, incluidos correos, aplicaciones y sitios web seguros.\n\nPara obtener más información sobre estos certificados, contacta con tu administrador.}}"</string>
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} ha instalado una autoridad de certificación en tu perfil de trabajo. Con ella, quizá pueda monitorizar la actividad de red de trabajo, incluidos correos, aplicaciones y sitios web seguros.\n\nPara obtener más información sobre este certificado, contacta con tu administrador.}other{{orgName} ha instalado autoridades de certificación en tu perfil de trabajo. Con ellas, quizá pueda monitorizar la actividad de red de trabajo, incluidos correos, aplicaciones y sitios web seguros.\n\nPara obtener más información sobre estos certificados, contacta con tu administrador.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Un tercero puede supervisar tu actividad de la red, incluidos los correos electrónicos, las aplicaciones y los sitios web seguros.\n\nEsto es posible por una credencial de confianza instalada en tu dispositivo."</string>
-    <!-- no translation found for ssl_ca_cert_settings_button (2044927302268394991) -->
-    <skip />
+    <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Comprobar certificado}other{Comprobar certificados}}"</string>
     <string name="user_settings_title" msgid="6550866465409807877">"Varios usuarios"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Usuarios y perfiles"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Añadir usuario o perfil"</string>
@@ -3066,8 +3047,7 @@
     <string name="promote_conversation_title" msgid="4731148769888238722">"Es una conversación"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Añadir a la sección de conversaciones"</string>
     <string name="priority_conversation_count_zero" msgid="3862289535537564713">"No hay conversaciones prioritarias"</string>
-    <!-- no translation found for priority_conversation_count (7291234530844412077) -->
-    <skip />
+    <string name="priority_conversation_count" msgid="7291234530844412077">"{count,plural, =1{# conversación prioritaria}other{# conversaciones prioritarias}}"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Prioritarias"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Se muestran en la parte superior de la sección de conversaciones y como burbuja"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Se muestran en la parte superior de la sección de conversaciones"</string>
@@ -3096,10 +3076,8 @@
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Cuando el dispositivo esté desbloqueado, muestra las notificaciones como un banner en la parte superior de la pantalla"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Todas las notificaciones de \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Todas las notificaciones de <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for notifications_sent_daily (10274479224185437) -->
-    <skip />
-    <!-- no translation found for notifications_sent_weekly (7895656213187555346) -->
-    <skip />
+    <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Alrededor de # notificación al día}other{Alrededor de # notificaciones al día}}"</string>
+    <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Alrededor de # notificación a la semana}other{Alrededor de # notificaciones a la semana}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Nunca"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Notificaciones del dispositivo y de aplicaciones"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Controla qué aplicaciones y dispositivos pueden leer notificaciones"</string>
@@ -3168,15 +3146,15 @@
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Permisos"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"Esta aplicación puede utilizar los permisos de tu aplicación personal <xliff:g id="NAME">%1$s</xliff:g>, como el acceso a la ubicación, el almacenamiento o los contactos."</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"No hay aplicaciones conectadas"</string>
-    <!-- no translation found for interact_across_profiles_number_of_connected_apps (4000424798291479207) -->
-    <skip />
+    <string name="interact_across_profiles_number_of_connected_apps" msgid="4000424798291479207">"{count,plural, =1{# aplicación conectada}other{# aplicaciones conectadas}}"</string>
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Para conectar estas aplicaciones, instala <xliff:g id="NAME">%1$s</xliff:g> en tu perfil de trabajo"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Para conectar estas aplicaciones, instala <xliff:g id="NAME">%1$s</xliff:g> en tu perfil personal"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Toca para descargar la aplicación"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Acceso a No molestar"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permitir No molestar"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Ninguna aplicación instalada ha solicitado acceso a No molestar"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"Por petición tuya, Android está bloqueando las notificaciones de esta aplicación para que no se muestren en el dispositivo"</string>
+    <!-- no translation found for app_notifications_off_desc (2484843759466874201) -->
+    <skip />
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Por petición tuya, Android está bloqueando esta categoría de notificaciones para que no se muestren en el dispositivo"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Por petición tuya, Android está bloqueando este grupo de notificaciones para que no se muestren en el dispositivo"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Esta aplicación no envía notificaciones"</string>
@@ -3184,8 +3162,7 @@
     <string name="notification_channels_other" msgid="18159805343647908">"Otros"</string>
     <string name="no_channels" msgid="4716199078612071915">"Esta aplicación no ha publicado ninguna notificación"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Ajustes adicionales de la aplicación"</string>
-    <!-- no translation found for deleted_channels (8489800381509312964) -->
-    <skip />
+    <string name="deleted_channels" msgid="8489800381509312964">"{count,plural, =1{# categoría eliminada}other{# categorías eliminadas}}"</string>
     <string name="app_notification_block_title" msgid="3880322745749900296">"Bloquear todo"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"No mostrar nunca estas notificaciones"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Mostrar notificaciones"</string>
@@ -3398,6 +3375,10 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Desactivadas"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Ajustes avanzados"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Gestor de permisos"</string>
+    <!-- no translation found for app_data_sharing_updates_title (921888411974134089) -->
+    <skip />
+    <!-- no translation found for app_data_sharing_updates_summary (1500580254161164185) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"Tocar para activar"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Toca dos veces cualquier punto de la pantalla para activar el dispositivo"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Abrir enlaces"</string>
@@ -4238,6 +4219,8 @@
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personal"</string>
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Trabajo"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Predeterminado del sistema"</string>
+    <!-- no translation found for default_app_none (5420632042222036264) -->
+    <skip />
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Esta opción ya no es válida. Vuelve a intentarlo."</string>
     <string name="power_menu_setting_name" msgid="2394440932633137229">"Mantener pulsado el botón de encendido"</string>
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Mantener pulsado el botón de encendido para tener acceso a"</string>
@@ -4498,4 +4481,6 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Desinstalar aplicación"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Aplicaciones instaladas desde hace # mes}other{Aplicaciones instaladas desde hace # meses}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Aplicaciones instaladas hace más de # mes}other{Aplicaciones instaladas hace más de # meses}}"</string>
+    <!-- no translation found for accessibility_fingerprint_label (5017431423168191733) -->
+    <skip />
 </resources>

@@ -38,7 +38,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
+    <com.android.settings.fuelgauge.batteryusage.AccessibilityFocusablePreferenceCategory
         android:key="battery_usage_breakdown"
         settings:controller=
             "com.android.settings.fuelgauge.batteryusage.BatteryUsageBreakdownController"
@@ -58,5 +58,5 @@
             settings:isPreferenceVisible="false"
             settings:searchable="false" />
 
-    </PreferenceCategory>
+    </com.android.settings.fuelgauge.batteryusage.AccessibilityFocusablePreferenceCategory>
 </PreferenceScreen>

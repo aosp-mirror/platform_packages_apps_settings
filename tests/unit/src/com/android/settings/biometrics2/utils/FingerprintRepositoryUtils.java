@@ -32,7 +32,6 @@ import android.hardware.fingerprint.IFingerprintAuthenticatorsRegisteredCallback
 import androidx.annotation.NonNull;
 
 import com.android.settings.biometrics2.data.repository.FingerprintRepository;
-import com.android.settings.testutils.ResourcesUtils;
 
 import java.util.ArrayList;
 
@@ -42,8 +41,8 @@ public class FingerprintRepositoryUtils {
             @NonNull Context context,
             @NonNull Resources mockedResources,
             int numOfFp) {
-        final int resId = ResourcesUtils.getResourcesId(context, "integer",
-                "suw_max_fingerprints_enrollable");
+        final int resId = context.getResources().getIdentifier("suw_max_fingerprints_enrollable",
+                "integer", context.getPackageName());
         when(mockedResources.getInteger(resId)).thenReturn(numOfFp);
     }
 
