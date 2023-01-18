@@ -56,6 +56,10 @@ public class SpinnerPreference extends Preference {
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
+        if (mSpinner != null) {
+            return;
+        }
+
         mSpinner = (Spinner) view.findViewById(R.id.spinner);
         mSpinner.setAdapter(new SpinnerAdapter(getContext(), mItems));
         mSpinner.setSelection(mSavedSpinnerPosition);
