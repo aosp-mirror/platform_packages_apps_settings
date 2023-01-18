@@ -588,8 +588,8 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Anda kini dapat menggunakan sidik jari untuk membuka kunci tablet atau memverifikasi diri Anda, seperti saat login ke aplikasi atau menyetujui pembelian"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Anda kini dapat menggunakan sidik jari untuk membuka kunci perangkat atau memverifikasi diri Anda, seperti saat login ke aplikasi atau menyetujui pembelian"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Anda kini dapat menggunakan sidik jari untuk membuka kunci ponsel atau memverifikasi diri Anda, seperti saat login ke aplikasi atau menyetujui pembelian"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Buka kunci hanya saat layar aktif"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Layar harus aktif sebelum Anda dapat membuka kunci dengan sidik jari. Hal ini mengurangi peristiwa kunci tidak sengaja terbuka."</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Sentuh untuk membuka kunci kapan saja"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Sentuh sensor untuk membuka kunci, bahkan saat layar nonaktif. Hal ini cenderung membuat kunci tidak sengaja terbuka."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Layar, Buka kunci"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Lakukan nanti"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Angkat jari, lalu sentuh lagi"</string>
@@ -648,6 +648,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Selesai"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ups, bukan itu sensornya"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Sentuh sensor di bagian belakang ponsel. Gunakan jari telunjuk Anda."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Waktu penyiapan sidik jari habis"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Coba lagi sekarang atau siapkan sidik jari nanti di Setelan"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Pendaftaran sidik jari tidak berhasil. Coba lagi atau gunakan jari lain."</string>
@@ -735,28 +737,22 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"Sidik Jari + Sandi"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Lanjutkan tanpa sidik jari"</string>
     <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"Anda dapat membuka kunci ponsel menggunakan sidik jari. Demi keamanan, opsi ini memerlukan kunci layar cadangan."</string>
-    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
-    <skip />
+    <string name="fingerprint_unlock_title" product="tablet" msgid="8674718459462612186">"Anda dapat membuka kunci tablet menggunakan sidik jari. Demi keamanan, opsi ini memerlukan kunci layar cadangan."</string>
+    <string name="fingerprint_unlock_title" product="device" msgid="3224468142599659740">"Anda dapat membuka kunci perangkat menggunakan sidik jari. Demi keamanan, opsi ini memerlukan kunci layar cadangan."</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"Buka dengan Wajah + Pola"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Buka dengan Wajah + PIN"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Buka dengan Wajah + Sandi"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Lanjutkan tanpa Buka dengan Wajah"</string>
     <string name="face_unlock_title" product="default" msgid="7344830351598247267">"Anda dapat membuka kunci ponsel menggunakan wajah. Demi keamanan, opsi ini memerlukan kunci layar cadangan."</string>
-    <!-- no translation found for face_unlock_title (5695698036499155727) -->
-    <skip />
-    <!-- no translation found for face_unlock_title (6768108756755361161) -->
-    <skip />
+    <string name="face_unlock_title" product="tablet" msgid="5695698036499155727">"Anda dapat membuka kunci tablet menggunakan wajah. Demi keamanan, opsi ini memerlukan kunci layar cadangan."</string>
+    <string name="face_unlock_title" product="device" msgid="6768108756755361161">"Anda dapat membuka kunci perangkat menggunakan wajah. Demi keamanan, opsi ini memerlukan kunci layar cadangan."</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Pola • Wajah • Sidik jari"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • Wajah • Sidik jari"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Sandi • Wajah • Sidik jari"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Lanjutkan tanpa face unlock atau sidik jari"</string>
     <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"Anda dapat membuka kunci ponsel menggunakan wajah atau sidik jari. Demi keamanan, opsi ini memerlukan kunci layar cadangan."</string>
-    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
-    <skip />
-    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
-    <skip />
+    <string name="biometrics_unlock_title" product="tablet" msgid="5808626401936488028">"Anda dapat membuka kunci tablet menggunakan wajah atau sidik jari. Demi keamanan, opsi ini memerlukan kunci layar cadangan."</string>
+    <string name="biometrics_unlock_title" product="device" msgid="4912499343509046929">"Anda dapat membuka kunci perangkat menggunakan wajah atau sidik jari. Demi keamanan, opsi ini memerlukan kunci layar cadangan."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"Dinonaktifkan oleh admin, kebijakan enkripsi, atau penyimpanan kredensial"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Tidak ada"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Geser"</string>
@@ -4213,7 +4209,8 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Izinkan Mode Jangan Ganggu"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Tidak ada aplikasi terpasang yang meminta akses Jangan Ganggu"</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"Memuat aplikasi …"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"Sesuai permintaan, Android memblokir notifikasi aplikasi ini agar tidak muncul di perangkat ini"</string>
+    <!-- no translation found for app_notifications_off_desc (2484843759466874201) -->
+    <skip />
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Sesuai permintaan, Android memblokir kategori notifikasi ini agar tidak muncul di perangkat ini"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Sesuai permintaan, Android memblokir grup notifikasi ini agar tidak muncul di perangkat ini"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Aplikasi ini tidak mengirim notifikasi"</string>

@@ -588,8 +588,8 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"现在您可以使用指纹解锁平板电脑或在需要时验证自己的身份，例如在登录应用或批准购买时"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"现在您可以使用指纹解锁设备或在需要时验证自己的身份，例如在登录应用或批准购买时"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"现在您可以使用指纹解锁手机或在需要时验证自己的身份，例如在登录应用或批准购买时"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"仅在屏幕开启时解锁"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"屏幕必须开启，然后您才能使用指纹解锁。这样可以降低意外解锁的可能性。"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"无论何时，轻触即可解锁"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"轻触传感器即可解锁，即使屏幕关闭也可以。这样会提高意外解锁的概率。"</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"屏幕, 解锁, Screen, Unlock"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"以后再说"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"移开手指，然后再次触摸传感器"</string>
@@ -648,6 +648,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"完成"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"糟糕，这不是传感器"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"请用您的食指触摸位于手机背面的传感器。"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"指纹设置已超时"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"您可以立即重试，或之后在“设置”部分进行指纹设置"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"无法注册指纹。请重试或使用其他手指。"</string>
@@ -735,28 +737,22 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"指纹 + 密码"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"不设置指纹并继续"</string>
     <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"您可以使用自己的指纹将手机解锁。为了安全起见，要使用此选项，您必须设置备用屏幕锁定方式。"</string>
-    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
-    <skip />
+    <string name="fingerprint_unlock_title" product="tablet" msgid="8674718459462612186">"您可以通过指纹解锁平板电脑。为安全起见，您必须设置备用屏幕锁定方式，才能使用该选项。"</string>
+    <string name="fingerprint_unlock_title" product="device" msgid="3224468142599659740">"您可以通过指纹解锁设备。为安全起见，您必须设置备用屏幕锁定方式，才能使用该选项。"</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"人脸解锁 + 解锁图案"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"人脸解锁 + PIN 码"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"人脸解锁 + 密码"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"不设置人脸解锁并继续"</string>
     <string name="face_unlock_title" product="default" msgid="7344830351598247267">"您可以使用自己的面孔将手机解锁。为了安全起见，要使用此选项，您必须设置备用屏幕锁定方式。"</string>
-    <!-- no translation found for face_unlock_title (5695698036499155727) -->
-    <skip />
-    <!-- no translation found for face_unlock_title (6768108756755361161) -->
-    <skip />
+    <string name="face_unlock_title" product="tablet" msgid="5695698036499155727">"您可以通过人脸解锁平板电脑。为安全起见，您必须设置备用屏幕锁定方式，才能使用该选项。"</string>
+    <string name="face_unlock_title" product="device" msgid="6768108756755361161">"您可以通过人脸解锁设备。为安全起见，您必须设置备用屏幕锁定方式，才能使用该选项。"</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"图案 • 人脸 • 指纹"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN 码 • 人脸 • 指纹"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"密码 • 人脸 • 指纹"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"继续，不设置人脸解锁或指纹解锁"</string>
     <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"您可以通过人脸或指纹解锁手机。为安全起见，您必须设置备用屏幕锁定方式，才能使用该选项。"</string>
-    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
-    <skip />
-    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
-    <skip />
+    <string name="biometrics_unlock_title" product="tablet" msgid="5808626401936488028">"您可以通过人脸或指纹解锁平板电脑。为安全起见，您必须设置备用屏幕锁定方式，才能使用该选项。"</string>
+    <string name="biometrics_unlock_title" product="device" msgid="4912499343509046929">"您可以通过人脸或指纹解锁设备。为安全起见，您必须设置备用屏幕锁定方式，才能使用该选项。"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"由于管理员、加密策略或凭据存储的要求，您无法使用此选项"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"无"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"滑动"</string>
@@ -981,7 +977,7 @@
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"选择已连接蓝牙音频设备的数量上限"</string>
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"NFC 堆栈调试日志"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"提高 NFC 堆栈记录等级"</string>
-    <string name="wifi_display_settings_title" msgid="6451625615274960175">"投放"</string>
+    <string name="wifi_display_settings_title" msgid="6451625615274960175">"投屏"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"镜像"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"开启无线显示"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"未在附近找到设备。"</string>
@@ -1798,7 +1794,7 @@
     <string name="battery_status_title" msgid="4661768220545945771">"电池状态"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"电池电量"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"共用"</string>
-    <string name="communal_settings_summary" msgid="4923914136953940317">"共用设置"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"通用设置"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"修改接入点"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"未设置"</string>
@@ -4213,7 +4209,8 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"允许勿扰模式"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"没有任何已安装应用申请“勿扰”权限"</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"正在加载应用…"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"根据您的要求，Android 会阻止此应用的通知显示在此设备上"</string>
+    <!-- no translation found for app_notifications_off_desc (2484843759466874201) -->
+    <skip />
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"根据您的要求，Android 会阻止这类通知显示在此设备上"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"根据您的要求，Android 会阻止这组通知显示在此设备上"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"此应用不会发送通知"</string>
