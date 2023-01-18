@@ -63,13 +63,14 @@ public class AccessibilitySettings extends DashboardFragment {
     private static final String CATEGORY_SCREEN_READER = "screen_reader_category";
     private static final String CATEGORY_CAPTIONS = "captions_category";
     private static final String CATEGORY_AUDIO = "audio_category";
+    private static final String CATEGORY_SPEECH = "speech_category";
     private static final String CATEGORY_DISPLAY = "display_category";
     private static final String CATEGORY_INTERACTION_CONTROL = "interaction_control_category";
     private static final String CATEGORY_DOWNLOADED_SERVICES = "user_installed_services_category";
 
     private static final String[] CATEGORIES = new String[]{
             CATEGORY_SCREEN_READER, CATEGORY_CAPTIONS, CATEGORY_AUDIO, CATEGORY_DISPLAY,
-            CATEGORY_INTERACTION_CONTROL, CATEGORY_DOWNLOADED_SERVICES
+            CATEGORY_SPEECH, CATEGORY_INTERACTION_CONTROL, CATEGORY_DOWNLOADED_SERVICES
     };
 
     // Extras passed to sub-fragments.
@@ -349,6 +350,8 @@ public class AccessibilitySettings extends DashboardFragment {
                 R.array.config_preinstalled_audio_services);
         initializePreBundledServicesMapFromArray(CATEGORY_DISPLAY,
                 R.array.config_preinstalled_display_services);
+        initializePreBundledServicesMapFromArray(CATEGORY_SPEECH,
+                R.array.config_preinstalled_speech_services);
         initializePreBundledServicesMapFromArray(CATEGORY_INTERACTION_CONTROL,
                 R.array.config_preinstalled_interaction_control_services);
 
@@ -382,6 +385,8 @@ public class AccessibilitySettings extends DashboardFragment {
                 R.array.config_order_interaction_control_services);
         updateCategoryOrderFromArray(CATEGORY_DISPLAY,
                 R.array.config_order_display_services);
+        updateCategoryOrderFromArray(CATEGORY_SPEECH,
+                R.array.config_order_speech_services);
 
         // Need to check each time when updateServicePreferences() called.
         if (downloadedServicesCategory.getPreferenceCount() == 0) {
@@ -390,8 +395,9 @@ public class AccessibilitySettings extends DashboardFragment {
             getPreferenceScreen().addPreference(downloadedServicesCategory);
         }
 
-        // Hide screen reader category if it is empty.
+        // Hide category if it is empty.
         updatePreferenceCategoryVisibility(CATEGORY_SCREEN_READER);
+        updatePreferenceCategoryVisibility(CATEGORY_SPEECH);
     }
 
     private List<RestrictedPreference> getInstalledAccessibilityList(Context context) {
