@@ -588,8 +588,8 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"অ্যাপে সাইন-ইন করা বা কেনাকাটায় অনুমতি দেওয়ার মতোই এখন ফিঙ্গারপ্রিন্ট ব্যবহার করে ট্যাবলেট আনলক বা আপনার পরিচয় যাচাই করতে পারবেন"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"অ্যাপে সাইন-ইন করা বা কেনাকাটায় অনুমতি দেওয়ার মতোই এখন ফিঙ্গারপ্রিন্ট ব্যবহার করে ডিভাইস আনলক বা আপনার পরিচয় যাচাই করতে পারবেন"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"অ্যাপে সাইন-ইন করা বা কেনাকাটায় অনুমতি দেওয়ার মতোই এখন ফিঙ্গারপ্রিন্ট ব্যবহার করে ফোন আনলক বা আপনার পরিচয় যাচাই করতে পারবেন"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"শুধুমাত্র স্ক্রিন চালু থাকা অবস্থাতে আনলক করা"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"আপনি নিজের ফিঙ্গারপ্রিন্টের মাধ্যমে আনলক করতে পারার আগে স্ক্রিন অবশ্যই চালু থাকতে হবে। এর ফলে ভুলবশত আনলক হওয়ার ঘটনা কম ঘটে।"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"যেকোনও সময়ে আনলক করতে টাচ করুন"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"স্ক্রিন বন্ধ থাকলেও আনলক করতে সেন্সর টাচ করুন। এটির জন্য ভুলবশত আনলক হওয়ার সম্ভাবনা আরও বেড়ে যায়।"</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"স্ক্রিন, আনলক করুন"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"এটি পরে করুন"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"আঙ্গুল তুলুন, তারপর আবার স্পর্শ করুন"</string>
@@ -648,6 +648,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"সম্পন্ন"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"ওহো, সেটি সেন্সর ছিল না"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"আপনার ফোন এর পিছনে থাকা সেন্সর স্পর্শ করুন। আপনার তর্জনী ব্যবহার করুন।"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"ফিঙ্গারপ্রিন্ট সেট-আপ টাইম-আউট হয়ে গেছে"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"এখন চেষ্টা করুন অথবা পরে সেটিংস থেকে আপনার ফিঙ্গারপ্রিন্ট সেট-আপ করুন"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"আঙ্গুলের ছাপ তালিকাভুক্তিকরণ কাজ করেনি৷ আবার চেষ্টা করুন অথবা আলাদা কোনো আঙুল ব্যবহার করুন৷"</string>
@@ -735,28 +737,22 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"আঙ্গুলের ছাপ + পাসওয়ার্ড"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"আঙ্গুলের ছাপ ছাড়াই চালিয়ে যান"</string>
     <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"আপনি আপনার আঙ্গুলের ছাপ ব্যবহার করে নিজের ফোন আনলক করতে পারেন। এক্ষেত্রে নিরাপত্তার জন্য, ব্যাক-আপ হিসেবে একটি স্ক্রিন লকের প্রয়োজন।"</string>
-    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
-    <skip />
+    <string name="fingerprint_unlock_title" product="tablet" msgid="8674718459462612186">"আপনার ফিঙ্গারপ্রিন্ট মডেল ব্যবহার করে ট্যাবলেট আনলক করতে পারবেন। নিরাপত্তার কারণে, এই বিকল্পটির জন্য একটি ব্যাক-আপ \'স্ক্রিন লক\' প্রয়োজন।"</string>
+    <string name="fingerprint_unlock_title" product="device" msgid="3224468142599659740">"আপনার ফিঙ্গারপ্রিন্ট মডেল ব্যবহার করে ডিভাইস আনলক করতে পারবেন। নিরাপত্তার কারণে, এই বিকল্পটির জন্য একটি ব্যাক-আপ \'স্ক্রিন লক\' প্রয়োজন।"</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"ফেস আনলক + প্যাটার্ন"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"ফেস আনলক + পিন"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"ফেস আনলক + পাসওয়ার্ড"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"\'ফেস আনলক\' ছাড়াই চালিয়ে যান"</string>
     <string name="face_unlock_title" product="default" msgid="7344830351598247267">"আপনার ফেস ব্যবহার করে আপনি ফোন আনলক করতে পারবেন। নিরাপত্তার খাতিরে, এই বিকল্পটির জন্য একটি ব্যাক-আপ স্ক্রিন লকের প্রয়োজন।"</string>
-    <!-- no translation found for face_unlock_title (5695698036499155727) -->
-    <skip />
-    <!-- no translation found for face_unlock_title (6768108756755361161) -->
-    <skip />
+    <string name="face_unlock_title" product="tablet" msgid="5695698036499155727">"আপনার ফেস মডেল ব্যবহার করে ট্যাবলেট আনলক করতে পারবেন। নিরাপত্তার কারণে, এই বিকল্পটির জন্য একটি ব্যাক-আপ \'স্ক্রিন লক\' প্রয়োজন।"</string>
+    <string name="face_unlock_title" product="device" msgid="6768108756755361161">"আপনার ফেস মডেল ব্যবহার করে ডিভাইস আনলক করতে পারবেন। নিরাপত্তার কারণে, এই বিকল্পটির জন্য একটি ব্যাক-আপ \'স্ক্রিন লক\' প্রয়োজন।"</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"প্যাটার্ন • মুখ • আঙ্গুলের ছাপ"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"পিন • মুখ • আঙ্গুলের ছাপ"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"পাসওয়ার্ড • মুখ • আঙ্গুলের ছাপ"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"মুখ এবং আঙুলের ছাপ ছাড়া চালিয়ে যান"</string>
     <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"আপনার মুখ বা আঙুলের ছাপ ব্যবহার করে ফোন আনলক করতে পারবেন। নিরাপত্তার খাতিরে, এই বিকল্পটির জন্য একটি ব্যাক-আপ স্ক্রিন লকের প্রয়োজন।"</string>
-    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
-    <skip />
-    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
-    <skip />
+    <string name="biometrics_unlock_title" product="tablet" msgid="5808626401936488028">"আপনার ফেস বা ফিঙ্গারপ্রিন্ট মডেল ব্যবহার করে ট্যাবলেট আনলক করতে পারবেন। নিরাপত্তার কারণে, এই বিকল্পটির জন্য একটি ব্যাক-আপ \'স্ক্রিন লক\' প্রয়োজন।"</string>
+    <string name="biometrics_unlock_title" product="device" msgid="4912499343509046929">"আপনার ফেস বা ফিঙ্গারপ্রিন্ট মডেল ব্যবহার করে ডিভাইস আনলক করতে পারবেন। নিরাপত্তার কারণে, এই বিকল্পটির জন্য একটি ব্যাক-আপ \'স্ক্রিন লক\' প্রয়োজন।"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"প্রশাসক, এনক্রিপশন নীতি বা ক্রেডেনশিয়াল স্টোরেজ দ্বারা অক্ষম"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"কোনও কিছুই নয়"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"সোয়াইপ করুন"</string>
@@ -3460,7 +3456,7 @@
     <string name="one_usercrt" msgid="1865069301105101370">"একটি ব্যবহারকারী সার্টিফিকেট"</string>
     <string name="one_cacrt" msgid="7467796501404158399">"একটি CA সার্টিফিকেট"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"%dটি CA সার্টিফিকেট"</string>
-    <string name="user_credential_title" msgid="4686178602575567298">"শংসাপত্রের বিশদ বিবরণ"</string>
+    <string name="user_credential_title" msgid="4686178602575567298">"ক্রেডেনশিয়ালের বিবরণ"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"সরানো সার্টিফিকেট: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
     <string name="user_credential_none_installed" msgid="918620912366836994">"কোনও ব্যবহারকারীর সার্টিফিকেট ইনস্টল করা নেই"</string>
     <string name="spellcheckers_settings_title" msgid="2799021700580591443">"বানান পরিক্ষক"</string>
@@ -4213,7 +4209,7 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"\'বিরক্ত করবে না\' মোডের জন্য অনুমতি দিন"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"ইনস্টল করা নেই এমন অ্যাপগুলি বিরক্ত করবে না অ্যাক্সেস করুন এর অনুরোধ জানিয়েছে"</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"অ্যাপ লোড হচ্ছে…"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"আপনার অনুরোধ অনুযায়ী Android এই অ্যাপের বিজ্ঞপ্তি এই ডিভাইসে দেখাচ্ছে না"</string>
+    <string name="app_notifications_off_desc" msgid="2484843759466874201">"এই অ্যাপ থেকে বিজ্ঞপ্তি পাওয়ার অনুমতি দেননি"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"আপনার অনুরোধ অনুযায়ী Android এই বিভাগের বিজ্ঞপ্তিগুলি এই ডিভাইসে দেখাচ্ছে না"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"আপনার অনুরোধ অনুযায়ী Android এই ধরনের বিজ্ঞপ্তিগুলি এই ডিভাইসে দেখাচ্ছে না"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"এই অ্যাপ কোনও বিজ্ঞপ্তি পাঠায় না"</string>
