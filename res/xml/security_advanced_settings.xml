@@ -107,15 +107,6 @@
         settings:isPreferenceVisible="@bool/config_show_sim_info"
         settings:controller="com.android.settings.security.ConfirmSimDeletionPreferenceController" />
 
-  <com.android.settingslib.RestrictedPreference
-        android:order="100"
-        android:id="@+id/memtag_page"
-        android:key="memtag_page"
-        android:title="@string/memtag_title"
-        settings:keywords="@string/keywords_memtag"
-        android:fragment="com.android.settings.security.MemtagPage"
-        settings:controller="com.android.settings.security.MemtagPagePreferenceController" />
-
     <!-- work profile security section -->
     <PreferenceCategory
         android:order="110"
