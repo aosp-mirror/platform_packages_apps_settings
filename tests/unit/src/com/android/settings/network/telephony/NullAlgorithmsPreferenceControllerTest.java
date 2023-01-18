@@ -142,22 +142,22 @@ public final class NullAlgorithmsPreferenceControllerTest {
     }
 
     @Test
-    public void setChecked_true() {
+    public void setChecked_true_nullCiphersDisabled() {
         mController.setChecked(true);
-        verify(mTelephonyManager, times(1)).setNullCipherAndIntegrityEnabled(true);
+        verify(mTelephonyManager, times(1)).setNullCipherAndIntegrityEnabled(false);
     }
 
     @Test
-    public void setChecked_false() {
+    public void setChecked_false_nullCiphersEnabled() {
         mController.setChecked(false);
-        verify(mTelephonyManager, times(1)).setNullCipherAndIntegrityEnabled(false);
+        verify(mTelephonyManager, times(1)).setNullCipherAndIntegrityEnabled(true);
     }
 
     @Test
     public void setChecked_exceptionThrown() {
         doThrow(IllegalStateException.class).when(
                 mTelephonyManager).setNullCipherAndIntegrityEnabled(true);
-        assertFalse(mController.setChecked(true));
+        assertFalse(mController.setChecked(false));
         verify(mTelephonyManager, times(1)).setNullCipherAndIntegrityEnabled(true);
     }
 }

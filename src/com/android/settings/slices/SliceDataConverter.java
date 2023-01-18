@@ -52,6 +52,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.notification.RingerModeAffectedVolumePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.search.Indexable.SearchIndexProvider;
@@ -202,7 +203,10 @@ class SliceDataConverter {
                 final BasePreferenceController controller = SliceBuilderUtils
                         .getPreferenceController(mContext, controllerClassName, key);
                 // Only add pre-approved Slices available on the device.
-                if (!controller.isSliceable() || !controller.isAvailable()) {
+                // Always index RingerModeAffected slices so they are available for panel
+                if (!controller.isSliceable()
+                        || !(controller.isAvailable()
+                        || controller instanceof RingerModeAffectedVolumePreferenceController)) {
                     continue;
                 }
                 final String title = bundle.getString(METADATA_TITLE);

@@ -38,6 +38,8 @@ import android.app.Application;
 import android.content.res.Resources;
 import android.os.CancellationSignal;
 
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
 import com.android.settings.R;
 import com.android.settings.biometrics.fingerprint.FingerprintUpdater;
 import com.android.settings.biometrics2.ui.model.EnrollmentProgress;
@@ -50,9 +52,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
-import org.robolectric.RobolectricTestRunner;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class FingerprintEnrollProgressViewModelTest {
 
     @Rule public final MockitoRule mockito = MockitoJUnit.rule();

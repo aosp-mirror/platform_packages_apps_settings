@@ -26,8 +26,7 @@
     <string name="off" msgid="2898123876644709799">"OFF"</string>
     <string name="device_info_default" msgid="1406619232867343310">"不明"</string>
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"情報を表示するにはタップ"</string>
-    <!-- no translation found for show_dev_countdown (2936506773086395069) -->
-    <skip />
+    <string name="show_dev_countdown" msgid="2936506773086395069">"{count,plural, =1{あと # ステップでデベロッパー設定が有効になります。}other{あと # ステップでデベロッパー設定が有効になります。}}"</string>
     <string name="show_dev_on" msgid="2840850085134853754">"開発者向けオプションが有効になりました"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"開発者向けオプションはすでに有効です"</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"まず開発者向けオプションを有効にしてください。"</string>
@@ -112,16 +111,17 @@
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"その他のデバイス"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"保存済みのデバイス"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"ペア設定できるよう Bluetooth が ON になります"</string>
-    <string name="connected_device_connections_title" msgid="4164120115341579170">"接続の設定"</string>
+    <string name="connected_device_connections_title" msgid="4164120115341579170">"接続の詳細設定"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"ペア設定済み"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth を ON にしました"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"すべて表示"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"タッチペン"</string>
-    <string name="stylus_default_notes_app" msgid="3111290761558445874">"システムメモ作成アプリ"</string>
-    <string name="stylus_textfield_handwriting" msgid="6962904622425646128">"テキスト フィールドでのタッチペン入力"</string>
-    <string name="stylus_ignore_button" msgid="7734540973145241391">"タッチペンのボタン押下をすべて無視する"</string>
-    <!-- no translation found for stylus_connected_devices_title (2823967577941359812) -->
+    <!-- no translation found for stylus_default_notes_app (3896158797687806941) -->
     <skip />
+    <!-- no translation found for stylus_textfield_handwriting (2363579035338976327) -->
+    <skip />
+    <string name="stylus_ignore_button" msgid="7734540973145241391">"タッチペンのボタン押下をすべて無視する"</string>
+    <string name="stylus_connected_devices_title" msgid="2823967577941359812">"タッチペン"</string>
     <string name="date_and_time" msgid="1788358029823431692">"日付と時刻"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"プロキシ"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"消去"</string>
@@ -159,24 +159,25 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"このアプリの言語は [設定] から選択できません。"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"アプリで利用できない言語の可能性があります。一部のアプリはこの設定に対応していない可能性があります。"</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"言語の選択に対応しているアプリのみが表示されます。"</string>
-    <!-- no translation found for regional_preferences_title (4304567374498629528) -->
-    <skip />
-    <!-- no translation found for regional_preferences_summary (1189876997389469650) -->
-    <skip />
-    <!-- no translation found for regional_preferences_main_page_sub_title (4666033861956272891) -->
-    <skip />
-    <!-- no translation found for temperature_preferences_title (5009881556503629058) -->
-    <skip />
-    <!-- no translation found for calendar_preferences_title (8312485828206542600) -->
-    <skip />
-    <!-- no translation found for first_day_of_week_preferences_title (1971850087589599553) -->
-    <skip />
-    <!-- no translation found for numbers_preferences_title (6094837605398562369) -->
-    <skip />
-    <!-- no translation found for default_string_of_regional_preference (1595774718180886349) -->
-    <skip />
-    <!-- no translation found for dlg_remove_locales_title (3170501604483612114) -->
-    <skip />
+    <string name="regional_preferences_title" msgid="4304567374498629528">"地域の設定"</string>
+    <string name="regional_preferences_summary" msgid="1189876997389469650">"単位と数字の設定を指定する"</string>
+    <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"アプリが地域の設定を使用して、アプリの機能をカスタマイズできるようにします。"</string>
+    <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"必要に応じてアプリが地域の設定を使用します。"</string>
+    <string name="temperature_preferences_title" msgid="9067783912861473593">"温度単位"</string>
+    <string name="calendar_preferences_title" msgid="8312485828206542600">"カレンダー"</string>
+    <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"週最初の曜日"</string>
+    <string name="numbers_preferences_title" msgid="6094837605398562369">"数字"</string>
+    <string name="default_string_of_regional_preference" msgid="7662581547334113719">"アプリのデフォルトを使用する"</string>
+    <string name="celsius_temperature_unit" msgid="6118523647432383132">"摂氏（°C）"</string>
+    <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"華氏（°F）"</string>
+    <string name="sunday_first_day_of_week" msgid="7644548348295686051">"日曜日"</string>
+    <string name="monday_first_day_of_week" msgid="7244698610476506771">"月曜日"</string>
+    <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"火曜日"</string>
+    <string name="wednesday_first_day_of_week" msgid="6544537589727042869">"水曜日"</string>
+    <string name="thursday_first_day_of_week" msgid="3035885630945594833">"木曜日"</string>
+    <string name="friday_first_day_of_week" msgid="7074795061812083541">"金曜日"</string>
+    <string name="saturday_first_day_of_week" msgid="3702282590450322727">"土曜日"</string>
+    <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{選択した言語を削除しますか？}other{選択した言語を削除しますか？}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"テキストは別の言語で表示されるようになります。"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"すべての言語を削除することはできません"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"優先する言語を設定しておく必要があります"</string>
@@ -195,8 +196,7 @@
     <string name="apply" msgid="7834684883190163536">"適用"</string>
     <string name="share" msgid="8502235338607613795">"共有"</string>
     <string name="add" msgid="8335206931421683426">"追加"</string>
-    <!-- no translation found for remove (1028414219245072102) -->
-    <skip />
+    <string name="remove" msgid="1028414219245072102">"削除"</string>
     <string name="settings_label" msgid="943294133671632976">"設定"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"設定"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"設定のショートカット"</string>
@@ -208,8 +208,7 @@
     <string name="roaming_warning" msgid="7703647889040229013">"ローミング料金が発生する場合があります。"</string>
     <string name="date_time_auto" msgid="4239202185055225869">"日時を自動的に設定"</string>
     <string name="zone_auto_title" msgid="5141692422373097957">"自動設定"</string>
-    <!-- no translation found for auto_zone_requires_location_summary (4831038184260596735) -->
-    <skip />
+    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"この切り替えが ON の場合、タイムゾーンの設定に位置情報が使用されます"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"言語 / 地域で一般的な形式を使用する"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24時間表示"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"時刻"</string>
@@ -238,8 +237,7 @@
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"例: 佐藤のAndroid"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"位置情報"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"位置情報を使用"</string>
-    <!-- no translation found for location_settings_summary_location_on (7029728269719893381) -->
-    <skip />
+    <string name="location_settings_summary_location_on" msgid="7029728269719893381">"{count,plural, =1{ON - # 件のアプリに位置情報へのアクセスを許可}other{ON - # 件のアプリに位置情報へのアクセスを許可}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"読み込んでいます…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"付近のデバイスへのアクセス許可を持つアプリは、接続されたデバイスの相対位置を確認できます。"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"アプリとサービスの位置情報へのアクセスは OFF になっています。緊急通報番号に電話をかけたりテキスト メッセージを送信したりした場合は、デバイスの位置情報が緊急サービスに送信されることがあります。"</string>
@@ -319,8 +317,7 @@
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"指紋認証の使用時"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"仕事用の指紋"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"指紋を追加"</string>
-    <!-- no translation found for security_settings_fingerprint_preference_summary (8486134175759676037) -->
-    <skip />
+    <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{指紋を登録しました}other{# 件の指紋を登録しました}}"</string>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"指紋の設定"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"指紋認証によるロック解除の許可"</string>
@@ -394,8 +391,10 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"登録済み: <xliff:g id="PERCENTAGE">%d</xliff:g> パーセント"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"指紋の登録中: <xliff:g id="PERCENTAGE">%d</xliff:g> パーセント"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"指紋の登録完了"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"画面が ON のときのみロック解除"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"指紋認証を使用するには画面が ON になっている必要があります。これにより、意図しないロック解除が起こりにくくなります。"</string>
+    <!-- no translation found for security_settings_require_screen_on_to_auth_title (1641621458536715518) -->
+    <skip />
+    <!-- no translation found for security_settings_require_screen_on_to_auth_description (4158414711168345398) -->
+    <skip />
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"画面、ロック解除"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"後で行う"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"指を離して、もう一度タッチ"</string>
@@ -418,6 +417,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"完了"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"これはセンサーではありません"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"スマートフォンの背面にある指紋センサーを人差し指でタッチしてください。"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"指紋の設定がタイムアウトしました"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"今すぐもう一度指紋を設定してみるか、後から [設定] で設定してください"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"指紋を登録できませんでした。もう一度試すか、別の指を使用してください。"</string>
@@ -469,17 +470,14 @@
     <string name="fingerprint_unlock_set_unlock_pin" msgid="4724451168139460493">"指紋 + PIN"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"指紋 + パスワード"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"指紋を設定せずに続行"</string>
-    <string name="fingerprint_unlock_title" msgid="4978686534505944042">"指紋を使ってスマートフォンのロックを解除できます。セキュリティ上の理由により、この方法を使用する際は予備の画面ロックを選択する必要があります。"</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"顔認証 + パターン"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"顔認証 + PIN"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"顔認証 + パスワード"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"顔認証を設定せずに続行"</string>
-    <string name="face_unlock_title" msgid="7344830351598247267">"顔認証を使用してスマートフォンのロックを解除できます。セキュリティ上の理由により、この方法を使用する際は予備の画面ロックを選択する必要があります。"</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"パターン • 顔 • 指紋"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • 顔 • 指紋"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"パスワード • 顔 • 指紋"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"顔認証や指紋認証を設定せずに続行"</string>
-    <string name="biometrics_unlock_title" msgid="616524056055233041">"顔認証や指紋認証でスマートフォンのロックを解除できます。セキュリティ上の理由により、この機能を使用する際は予備の画面ロックを選択する必要があります。"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"なし"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"スワイプ"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"パターン"</string>
@@ -543,31 +541,20 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"パターンをあと 1 回間違えると、仕事用プロファイルと関連データが削除されます"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"PIN をあと 1 回間違えると、仕事用プロファイルと関連データが削除されます"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"パスワードをあと 1 回間違えると、仕事用プロファイルと関連データが削除されます"</string>
-    <!-- no translation found for lockpassword_password_too_short (1938086368137797700) -->
-    <skip />
+    <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{# 文字以上にしてください}other{# 文字以上にしてください}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{数字のみ使用する場合は、1 桁以上にしてください}other{数字のみ使用する場合は、# 桁以上にしてください}}"</string>
-    <!-- no translation found for lockpassword_pin_too_short (8910105226463085689) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_too_long (1940345313260498308) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_too_long (1678212054564388576) -->
-    <skip />
+    <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{PIN は # 桁以上必要です}other{PIN は # 桁以上必要です}}"</string>
+    <string name="lockpassword_password_too_long" msgid="1940345313260498308">"{count,plural, =1{# 文字未満にしてください}other{# 文字未満にしてください}}"</string>
+    <string name="lockpassword_pin_too_long" msgid="1678212054564388576">"{count,plural, =1{# 桁未満にしてください}other{# 桁未満にしてください}}"</string>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"デバイス管理により、最近使用した PIN は使用できません"</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"無効な文字があります"</string>
-    <!-- no translation found for lockpassword_password_requires_letters (7058340182953750553) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_lowercase (3286121470522077547) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_uppercase (720312543910397772) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_numeric (3886918493600507548) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_symbols (2904870551002210131) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_nonletter (1185342065898300006) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_nonnumerical (389687423482993365) -->
-    <skip />
+    <string name="lockpassword_password_requires_letters" msgid="7058340182953750553">"{count,plural, =1{英字が 1 文字以上必要です}other{英字が # 文字以上必要です}}"</string>
+    <string name="lockpassword_password_requires_lowercase" msgid="3286121470522077547">"{count,plural, =1{小文字の英字が 1 文字以上必要です}other{小文字の英字が # 文字以上必要です}}"</string>
+    <string name="lockpassword_password_requires_uppercase" msgid="720312543910397772">"{count,plural, =1{大文字の英字が 1 文字以上必要です}other{大文字の英字が # 文字以上必要です}}"</string>
+    <string name="lockpassword_password_requires_numeric" msgid="3886918493600507548">"{count,plural, =1{数字が 1 個以上必要です}other{数字が # 個以上必要です}}"</string>
+    <string name="lockpassword_password_requires_symbols" msgid="2904870551002210131">"{count,plural, =1{記号が 1 個以上必要です}other{記号が # 個以上必要です}}"</string>
+    <string name="lockpassword_password_requires_nonletter" msgid="1185342065898300006">"{count,plural, =1{記号または数字が 1 個以上必要です}other{記号または数字が # 個以上必要です}}"</string>
+    <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{数字以外の文字が 1 個以上必要です}other{数字以外の文字が # 個以上必要です}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"デバイス管理により、最近使用したパスワードは使用できません"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"一連の数字を昇順や降順にしたり、繰り返したりすることはできません"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"確認"</string>
@@ -577,13 +564,11 @@
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"次へ"</string>
     <string name="manage_device_admin" msgid="1044620606203916275">"デバイス管理アプリ"</string>
     <string name="number_of_device_admins_none" msgid="152926922020437312">"実行中のアプリはありません"</string>
-    <!-- no translation found for number_of_device_admins (3402909995362162876) -->
-    <skip />
+    <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{# 個の実行中のアプリ}other{# 個の実行中のアプリ}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"信頼エージェント"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"使用するには、まず画面ロックを設定してください"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"なし"</string>
-    <!-- no translation found for manage_trust_agents_summary_on (3302574418419446146) -->
-    <skip />
+    <string name="manage_trust_agents_summary_on" msgid="3302574418419446146">"{count,plural, =1{有効な信頼エージェント: 1 件}other{有効な信頼エージェント: # 件}}"</string>
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>をペアに設定しますか？"</string>
@@ -799,12 +784,9 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"ネットワークを保存できませんでした"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"キャンセル"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"ネットワークを削除"</string>
-    <!-- no translation found for wifi_saved_access_points_summary (6637163320524940353) -->
-    <skip />
-    <!-- no translation found for wifi_saved_passpoint_access_points_summary (8939933724918673785) -->
-    <skip />
-    <!-- no translation found for wifi_saved_all_access_points_summary (2335870101156113858) -->
-    <skip />
+    <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 件のネットワーク}other{# 件のネットワーク}}"</string>
+    <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 件の登録}other{# 件の登録}}"</string>
+    <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 件のネットワークと登録}other{# 件のネットワークと登録}}"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"デバイスの MAC アドレス"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"ランダム MAC アドレス"</string>
@@ -907,9 +889,8 @@
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"スマートフォンを動かして縦向きと横向きを切り替えたとき"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"画面の解像度"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"高解像度"</string>
-    <string name="screen_resolution_option_highest" msgid="9134161136319625840">"最大解像度"</string>
-    <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
-    <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
+    <!-- no translation found for screen_resolution_option_full (2694003735219114186) -->
+    <skip />
     <string name="screen_resolution_footer" msgid="6772341522952795647">"最大解像度ではバッテリー消費量が多くなります。解像度を切り替えると、一部のアプリが再起動することがあります。"</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"選択中"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"カラー"</string>
@@ -1036,8 +1017,7 @@
     <string name="sim_preferred_title" msgid="8850185380445309835">"優先 SIM を変更しますか？"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"デバイス内の SIM は <xliff:g id="NEW_SIM">%1$s</xliff:g> のみです。この SIM をモバイルデータ、通話、SMS メッセージ用に使用しますか？"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"SIM PINコードが無効です。お使いのデバイスをロック解除するには携帯通信会社にお問い合わせいただく必要があります。"</string>
-    <!-- no translation found for wrong_pin_code (8124222991071607958) -->
-    <skip />
+    <string name="wrong_pin_code" msgid="8124222991071607958">"{count,plural, =1{SIM PIN コードが無効です。入力できるのはあと # 回です。この回数を超えると、お使いのデバイスをロック解除するのに携帯通信会社にお問い合わせいただく必要があります。}other{SIM PIN コードが無効です。入力できるのはあと # 回です。}}"</string>
     <string name="wrong_pin_code_one" msgid="6924852214263071441">"SIM PIN コードが無効です。入力できるのはあと 1 回です。この回数を超えると、お使いのデバイスをロック解除するのに携帯通信会社にお問い合わせいただく必要があります。"</string>
     <string name="pin_failed" msgid="3726505565797352255">"SIM PIN操作に失敗しました。"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"システムアップデート"</string>
@@ -1055,16 +1035,20 @@
     <string name="storage_settings" msgid="7472188817781592677">"ストレージ"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"ストレージとキャッシュ"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"ストレージの設定"</string>
-    <!-- no translation found for status_eid (7532406028683438634) -->
+    <string name="status_eid" msgid="7532406028683438634">"EID"</string>
+    <string name="eid_multi_sim" msgid="9087924808336397804">"EID（SIM スロット <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>）"</string>
+    <!-- no translation found for imei_multi_sim (9001570420423929507) -->
     <skip />
-    <!-- no translation found for eid_multi_sim (4581966600904959452) -->
+    <!-- no translation found for imei_multi_sim_primary (7914653040843734282) -->
     <skip />
-    <string name="imei_multi_sim" msgid="71477088017585479">"IMEI（SIM スロット %1$d）"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"表示するには、保存済みネットワークを選択してください"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRLバージョン:"</string>
-    <string name="meid_multi_sim" msgid="7645394486193991388">"MEID（SIM スロット %1$d）"</string>
+    <!-- no translation found for meid_multi_sim (1460689549266621286) -->
+    <skip />
+    <!-- no translation found for meid_multi_sim_primary (8921262417580407201) -->
+    <skip />
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"モバイルデータ ネットワークの種類"</string>
@@ -1145,10 +1129,8 @@
     <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"<xliff:g id="NAME">^1</xliff:g>を使えるようになりました"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"電池の状態:"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"バッテリー残量"</string>
-    <!-- no translation found for communal_settings_title (2845678473945902115) -->
-    <skip />
-    <!-- no translation found for communal_settings_summary (4923914136953940317) -->
-    <skip />
+    <string name="communal_settings_title" msgid="2845678473945902115">"共用"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"共用の設定"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"アクセスポイントの編集"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"未設定"</string>
@@ -1280,8 +1262,7 @@
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"仕事用プロファイルで位置情報を使用"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"アプリへの位置情報の利用許可"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"位置情報は OFF です"</string>
-    <!-- no translation found for location_app_permission_summary_location_on (7552095451731948984) -->
-    <skip />
+    <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{{total} 個中 # 個のアプリに位置情報へのアクセスを許可しています}other{{total} 個中 # 個のアプリに位置情報へのアクセスを許可しています}}"</string>
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"最近のアクセス"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"すべて表示"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"詳細を表示"</string>
@@ -1296,18 +1277,15 @@
     <string name="location_services_preference_title" msgid="604317859531782159">"位置情報サービス"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"位置情報サービス"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"位置情報の使用"</string>
-    <!-- no translation found for location_time_zone_detection_status_title (8903495354385600423) -->
-    <skip />
+    <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"タイムゾーンを自動的に設定できません"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
-    <!-- no translation found for location_time_zone_detection_status_summary_blocked_by_settings (5276280770344278768) -->
-    <skip />
+    <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"位置情報または位置情報サービスが OFF です"</string>
     <string name="location_time_zone_detection_status_summary_blocked_by_environment" msgid="2279833212923765802"></string>
     <string name="location_time_zone_detection_status_summary_temporarily_unavailable" msgid="6586801403644278967"></string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"デバイスの位置情報が必要"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_message" msgid="5846316326139169523">"位置情報を使用してタイムゾーンを設定するには、位置情報を ON にしてから、タイムゾーンの設定を更新してください"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"位置情報の設定"</string>
-    <!-- no translation found for location_time_zone_provider_fix_dialog_ok_button (9026666001835079126) -->
-    <skip />
+    <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"これを修正"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"キャンセル"</string>
     <string name="location_time_zone_detection_auto_is_off" msgid="6264253990141650280">"タイムゾーンの自動設定は OFF です"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"位置情報によるタイムゾーン検出は無効です"</string>
@@ -1431,8 +1409,7 @@
     <string name="install_applications" msgid="3921609656584369901">"提供元不明のアプリ"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"アプリの提供元をすべて許可する"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"最近開いたアプリ"</string>
-    <!-- no translation found for see_all_apps_title (1650653853942381797) -->
-    <skip />
+    <string name="see_all_apps_title" msgid="1650653853942381797">"{count,plural, =1{アプリをすべて表示}other{# 個のアプリをすべて表示}}"</string>
     <string name="forgot_password_title" msgid="3967873480875239885">"IT 管理者にお問い合わせください"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"PIN、パターン、またはパスワードのリセットを依頼できます"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"詳細設定"</string>
@@ -1446,8 +1423,7 @@
     <string name="cache_header_label" msgid="2441967971921741047">"キャッシュ"</string>
     <string name="clear_cache_btn_text" msgid="8597272828928143723">"キャッシュを削除"</string>
     <string name="cache_size_label" msgid="313456088966822757">"キャッシュ"</string>
-    <!-- no translation found for uri_permissions_text (8406345863117405105) -->
-    <skip />
+    <string name="uri_permissions_text" msgid="8406345863117405105">"{count,plural, =1{1 件のアイテム}other{# 件のアイテム}}"</string>
     <string name="clear_uri_btn_text" msgid="4828117421162495134">"アクセスをクリア"</string>
     <string name="controls_label" msgid="8671492254263626383">"コントロール"</string>
     <string name="force_stop" msgid="2681771622136916280">"強制停止"</string>
@@ -1596,70 +1572,38 @@
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"ショートカットのリストを表示"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"仕事用プロファイルのキーボードとツール"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"仕事用の画面キーボード"</string>
-    <!-- no translation found for trackpad_settings (2071131324087677005) -->
-    <skip />
-    <!-- no translation found for trackpad_mouse_settings (136226693583218429) -->
-    <skip />
-    <!-- no translation found for trackpad_settings_summary (3369855644136760402) -->
-    <skip />
-    <!-- no translation found for trackpad_tap_to_click (1938230946542070746) -->
-    <skip />
-    <!-- no translation found for trackpad_touchpad_gesture_title (7568052847609914436) -->
-    <skip />
-    <!-- no translation found for trackpad_touchpad_gesture_summary (6256074591395359124) -->
-    <skip />
-    <!-- no translation found for trackpad_reverse_scrolling_title (422877284529360866) -->
-    <skip />
-    <!-- no translation found for trackpad_reverse_scrolling_summary (6048648562887499036) -->
-    <skip />
-    <!-- no translation found for trackpad_bottom_right_tap_title (6275428879042702880) -->
-    <skip />
-    <!-- no translation found for trackpad_bottom_right_tap_summary (8734094086900680674) -->
-    <skip />
-    <!-- no translation found for trackpad_pointer_speed (7786579408631352625) -->
-    <skip />
-    <!-- no translation found for trackpad_touch_gesture (8641725062131922497) -->
-    <skip />
-    <!-- no translation found for trackpad_go_back_title (5312164160947491440) -->
-    <skip />
-    <!-- no translation found for trackpad_go_back_summary (4201901101085902768) -->
-    <skip />
-    <!-- no translation found for trackpad_go_home_title (2146525662148291552) -->
-    <skip />
-    <!-- no translation found for trackpad_go_home_summary (2222744701528360887) -->
-    <skip />
-    <!-- no translation found for trackpad_recent_apps_title (8195970908411585445) -->
-    <skip />
-    <!-- no translation found for trackpad_recent_apps_summary (2685092851677573794) -->
-    <skip />
-    <!-- no translation found for trackpad_notifications_title (3521663305043747880) -->
-    <skip />
-    <!-- no translation found for trackpad_notifications_summary (7663647367648690040) -->
-    <skip />
-    <!-- no translation found for trackpad_switch_apps_title (7342032935377284039) -->
-    <skip />
-    <!-- no translation found for trackpad_switch_apps_summary (9193942041912927440) -->
-    <skip />
-    <!-- no translation found for modifier_keys_settings (2537108435032034683) -->
-    <skip />
-    <!-- no translation found for modifier_keys_settings_summary (6933143361657444436) -->
-    <skip />
-    <!-- no translation found for modifier_keys_reset_title (948294258402761066) -->
-    <skip />
-    <!-- no translation found for modifier_keys_default_summary (8701640508670973258) -->
-    <skip />
-    <!-- no translation found for modifier_keys_reset_message (5236994817619936058) -->
-    <skip />
-    <!-- no translation found for modifier_keys_done (8196199314913909700) -->
-    <skip />
-    <!-- no translation found for modifier_keys_cancel (7136520252570826772) -->
-    <skip />
-    <!-- no translation found for modifier_keys_restore (7627661630556839268) -->
-    <skip />
-    <!-- no translation found for modifier_keys_picker_title (244545904150587851) -->
-    <skip />
-    <!-- no translation found for modifier_keys_picker_summary (739397232249560785) -->
-    <skip />
+    <string name="trackpad_settings" msgid="2071131324087677005">"タッチパッド"</string>
+    <string name="trackpad_mouse_settings" msgid="136226693583218429">"タッチパッドとマウス"</string>
+    <string name="trackpad_settings_summary" msgid="3369855644136760402">"ポインタの速度、操作"</string>
+    <string name="trackpad_tap_to_click" msgid="1938230946542070746">"タップによるクリック"</string>
+    <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"タッチパッド操作"</string>
+    <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"個々のタッチパッド移動操作をカスタマイズします"</string>
+    <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"逆スクロール"</string>
+    <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"下にスクロールするとコンテンツが上に移動します"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"右下をタップ"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"タッチパッドの右下をタップすると他のオプションが表示されます"</string>
+    <string name="trackpad_pointer_speed" msgid="7786579408631352625">"ポインタの速度"</string>
+    <string name="trackpad_touch_gesture" msgid="8641725062131922497">"タッチパッド操作を見る"</string>
+    <string name="trackpad_go_back_title" msgid="5312164160947491440">"戻る"</string>
+    <string name="trackpad_go_back_summary" msgid="4201901101085902768">"3 本の指で左または右にスワイプします"</string>
+    <string name="trackpad_go_home_title" msgid="2146525662148291552">"ホームに移動"</string>
+    <string name="trackpad_go_home_summary" msgid="2222744701528360887">"3 本の指で上にスワイプします"</string>
+    <string name="trackpad_recent_apps_title" msgid="8195970908411585445">"最近使ったアプリ"</string>
+    <string name="trackpad_recent_apps_summary" msgid="2685092851677573794">"3 本の指で上にスワイプしたまま長押しします"</string>
+    <string name="trackpad_notifications_title" msgid="3521663305043747880">"通知"</string>
+    <string name="trackpad_notifications_summary" msgid="7663647367648690040">"3 本の指で下にスワイプします"</string>
+    <string name="trackpad_switch_apps_title" msgid="7342032935377284039">"アプリの切り替え"</string>
+    <string name="trackpad_switch_apps_summary" msgid="9193942041912927440">"4 本の指で左または右にスワイプします"</string>
+    <string name="modifier_keys_settings" msgid="2537108435032034683">"修飾キー"</string>
+    <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"キーの動作を変更します"</string>
+    <string name="modifier_keys_reset_title" msgid="948294258402761066">"すべてリセット"</string>
+    <string name="modifier_keys_default_summary" msgid="8701640508670973258">"デフォルト"</string>
+    <string name="modifier_keys_reset_message" msgid="5236994817619936058">"修飾キーをすべてデフォルトにリセットしてもよろしいですか？"</string>
+    <string name="modifier_keys_done" msgid="8196199314913909700">"完了"</string>
+    <string name="modifier_keys_cancel" msgid="7136520252570826772">"キャンセル"</string>
+    <string name="modifier_keys_restore" msgid="7627661630556839268">"復元"</string>
+    <string name="modifier_keys_picker_title" msgid="244545904150587851">"修飾キーを選択"</string>
+    <string name="modifier_keys_picker_summary" msgid="739397232249560785">"<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> の新しい鍵を選択します:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"デフォルト"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"読み上げ"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"ポインタの速度"</string>
@@ -1976,14 +1920,10 @@
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"暗い"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"明るい"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"デバイスの再起動後も維持する"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (2981206111858937724) -->
-    <skip />
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (6867395206533459204) -->
-    <skip />
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (4079139970819335593) -->
-    <skip />
-    <!-- no translation found for accessibilty_autoclick_delay_unit_second (5979297390686370567) -->
-    <skip />
+    <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{短め（{time} 秒）}other{短め（{time} 秒）}}"</string>
+    <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{普通（{time} 秒）}other{普通（{time} 秒）}}"</string>
+    <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{長め（{time} 秒）}other{長め（{time} 秒）}}"</string>
+    <string name="accessibilty_autoclick_delay_unit_second" msgid="5979297390686370567">"{count,plural, =1{{time} 秒}other{{time} 秒}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"設定"</string>
     <string name="captioning_preview_title" msgid="2888561631323180535">"プレビュー"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"標準オプション"</string>
@@ -2058,10 +1998,8 @@
     <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"周辺のデバイスのスキャン"</string>
     <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"保存済みのデバイス"</string>
     <string name="print_settings" msgid="8519810615863882491">"印刷"</string>
-    <!-- no translation found for print_settings_summary (1458773840720811915) -->
-    <skip />
-    <!-- no translation found for print_jobs_summary (7040836482336577323) -->
-    <skip />
+    <string name="print_settings_summary" msgid="1458773840720811915">"{count,plural, =1{1 件の印刷サービス ON}other{# 件の印刷サービス ON}}"</string>
+    <string name="print_jobs_summary" msgid="7040836482336577323">"{count,plural, =1{1 件の印刷ジョブ}other{# 件の印刷ジョブ}}"</string>
     <string name="print_settings_title" msgid="7680498284751129935">"印刷サービス"</string>
     <string name="print_no_services_installed" msgid="7554057966540602692">"インストールされているサービスはありません"</string>
     <string name="print_no_printers_found" msgid="4833082484646109486">"プリンタが見つかりません"</string>
@@ -2139,16 +2077,11 @@
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"充電一時停止の詳細"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"充電を再開"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"電力消費量の多いバックグラウンド アクティビティを含める"</string>
-    <!-- no translation found for battery_tip_restrict_title (4537101947310626753) -->
-    <skip />
-    <!-- no translation found for battery_tip_restrict_handled_title (7142074986508706853) -->
-    <skip />
-    <!-- no translation found for battery_tip_restrict_summary (7539469590829235277) -->
-    <skip />
-    <!-- no translation found for battery_tip_restrict_handled_summary (3535697154547199190) -->
-    <skip />
-    <!-- no translation found for battery_tip_restrict_app_dialog_title (1649476357343160240) -->
-    <skip />
+    <string name="battery_tip_restrict_title" msgid="4537101947310626753">"{count,plural, =1{# 件のアプリを制限}other{# 件のアプリを制限}}"</string>
+    <string name="battery_tip_restrict_handled_title" msgid="7142074986508706853">"{count,plural, =1{{label}を最近制限}other{# 件のアプリを最近制限}}"</string>
+    <string name="battery_tip_restrict_summary" msgid="7539469590829235277">"{count,plural, =1{{label}でバックグラウンドのバッテリー使用量が多くなっています}other{# 件のアプリでバックグラウンドのバッテリー使用量が多くなっています}}"</string>
+    <string name="battery_tip_restrict_handled_summary" msgid="3535697154547199190">"{count,plural, =1{このアプリはバックグラウンドで実行できません}other{これらのアプリはバックグラウンドで実行できません}}"</string>
+    <string name="battery_tip_restrict_app_dialog_title" msgid="1649476357343160240">"{count,plural, =1{アプリを制限しますか？}other{# 件のアプリを制限しますか？}}"</string>
     <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"「<xliff:g id="APP">%1$s</xliff:g>」によるバックグラウンドでの電池使用を停止すると、電池が長持ちします。制限したアプリは正常に動作しないことがあります。また、通知が遅れる可能性もあります。"</string>
     <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"このアプリによるバックグラウンドでの電池使用を停止すると、電池が長持ちします。制限したアプリは正常に動作しないことがあります。また、通知が遅れる可能性もあります。\n\nアプリ:"</string>
     <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"このアプリによるバックグラウンドでの電池使用を停止すると、電池が長持ちします。制限したアプリは正常に動作しないことがあります。また、通知が遅れる可能性もあります。\n\nアプリ:\n<xliff:g id="APP_LIST">%1$s</xliff:g>."</string>
@@ -2162,16 +2095,14 @@
     <string name="smart_battery_title" msgid="9095903608520254254">"アプリを自動的に管理"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"バッテリー使用量が多いと判断されたアプリは、バッテリー マネージャによって制限されます。制限されたアプリは正常に動作しない場合や、通知が遅れる可能性があります。"</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"アプリの利用制限"</string>
-    <!-- no translation found for restricted_app_summary (1022307922754893997) -->
-    <skip />
+    <string name="restricted_app_summary" msgid="1022307922754893997">"{count,plural, =1{# 件のアプリのバッテリー使用量を制限しています}other{# 件のアプリのバッテリー使用量を制限しています}}"</string>
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"制限ありに指定: <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="restricted_app_detail_footer" msgid="3495725286882138803">"これらのアプリは、バックグラウンドでのバッテリーの使用が制限されます。そのため、正常に動作しないことがあります。また、通知が遅れる可能性もあります。"</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"バッテリー マネージャの使用"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"アプリのバッテリー使用量が多いかどうかを検出します"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"アプリのバッテリー使用量が多いかどうかを検出しています"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"アプリのバッテリー使用量が多いときを検出します"</string>
-    <!-- no translation found for battery_manager_app_restricted (2583902700677009173) -->
-    <skip />
+    <string name="battery_manager_app_restricted" msgid="2583902700677009173">"{count,plural, =1{# 件のアプリが制限されています}other{# 件のアプリが制限されています}}"</string>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small></string>
     <string name="battery_missing_message" msgid="400958471814422770">"バッテリー残量の読み取り中に問題が発生しました。"</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
@@ -2191,27 +2122,13 @@
     <string name="battery_full_charge_last" msgid="465146408601016923">"フル充電での推定待ち受け可能時間"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"バッテリー使用量データは概算値であり、使用状況によって変化する可能性があります。"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"バッテリー使用量"</string>
-    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"合計: <xliff:g id="TIME_0">^1</xliff:g> • バックグラウンドでの使用: <xliff:g id="TIME_1">^2</xliff:g>\n（前回のフル充電以降）"</string>
-    <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"合計: <xliff:g id="TIME_0">^1</xliff:g> • バックグラウンドでの使用: <xliff:g id="TIME_1">^2</xliff:g>\n（過去 24 時間）"</string>
-    <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"合計: <xliff:g id="TIME_0">^1</xliff:g> • バックグラウンド: <xliff:g id="TIME_1">^2</xliff:g>\n（<xliff:g id="TIME_PERIOD">^3</xliff:g>）"</string>
-    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"合計: 1 分未満（前回のフル充電以降）"</string>
-    <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"合計: 1 分未満（過去 24 時間）"</string>
-    <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"<xliff:g id="TIME_PERIOD">^1</xliff:g> の合計: 1 分未満"</string>
-    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"バックグラウンドでの使用: 1 分未満（前回のフル充電以降）"</string>
-    <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"バックグラウンドでの使用: 1 分未満（過去 24 時間）"</string>
-    <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"<xliff:g id="TIME_PERIOD">^1</xliff:g> のバックグラウンドでの使用: 1 分未満"</string>
-    <string name="battery_total_usage" msgid="4811532932663354619">"合計: <xliff:g id="TIME">^1</xliff:g>（前回のフル充電以降）"</string>
-    <string name="battery_total_usage_24hr" msgid="3907495067623665787">"合計: <xliff:g id="TIME">^1</xliff:g>（過去 24 時間）"</string>
-    <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_PERIOD">^2</xliff:g> の合計: <xliff:g id="TIME_0">^1</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="8262917746299259350">"バックグラウンドでの使用: <xliff:g id="TIME">^1</xliff:g>（前回のフル充電以降）"</string>
-    <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"バックグラウンドでの使用: <xliff:g id="TIME">^1</xliff:g>（過去 24 時間）"</string>
-    <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_PERIOD">^2</xliff:g> のバックグラウンドでの使用: <xliff:g id="TIME_0">^1</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"合計: <xliff:g id="TIME">^1</xliff:g> • バックグラウンドでの使用: 1 分未満\n（前回のフル充電以降）"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"合計: <xliff:g id="TIME">^1</xliff:g> • バックグラウンドでの使用: 1 分未満\n（過去 24 時間）"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"合計: <xliff:g id="TIME_0">^1</xliff:g> • バックグラウンド: 1 分未満\n（<xliff:g id="TIME_PERIOD">^2</xliff:g>）"</string>
     <string name="battery_not_usage" msgid="3851536644733662392">"使用なし（前回のフル充電以降）"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"使用: なし（過去 24 時間）"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
+    <!-- no translation found for battery_usage_since_last_full_charge (3488425008925924769) -->
+    <skip />
+    <string name="battery_usage_system_apps" msgid="8659537819731575299">"システムアプリ"</string>
+    <string name="battery_usage_others" msgid="311793281613609986">"その他"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"予測される残り時間"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"フル充電まで"</string>
     <string name="estimated_time_description" msgid="211058785418596009">"推定値は使用状況によって変わる可能性があります"</string>
@@ -2249,19 +2166,21 @@
     <string name="battery_app_usage_for" msgid="7309909074935858949">"<xliff:g id="SLOT">%s</xliff:g>のアプリのバッテリー使用量"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"合計: 1 分未満"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"バックグラウンド: 1 分未満"</string>
+    <string name="battery_usage_screen_time_less_than_one_minute" msgid="2911989465891679033">"利用時間: 1 分未満"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"合計: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"バックグラウンド: <xliff:g id="TIME">%s</xliff:g>"</string>
+    <string name="battery_usage_screen_time" msgid="3973865893520804115">"利用時間: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"バッテリー使用量のデータは、充電が完了してから数時間使用すると表示されます"</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"今"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"バッテリー使用量グラフ"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"バッテリー使用量グラフ（日）"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"バッテリー使用量グラフ（時間）"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for battery_usage_breakdown_title_since_last_full_charge (8219417894003454299) -->
-    <skip />
-    <string name="battery_usage_breakdown_title_for_slot" msgid="5897712719834293709">"<xliff:g id="SLOT">%s</xliff:g> の使用状況の内訳"</string>
-    <string name="battery_usage_app_tab" msgid="47007533921631047">"アプリ"</string>
-    <string name="battery_usage_system_tab" msgid="2723499428460455537">"システム"</string>
+    <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"最後にフル充電されてからのバッテリー使用量"</string>
+    <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"<xliff:g id="SLOT">%s</xliff:g> のバッテリー使用量"</string>
+    <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"最後にフル充電されてからの利用時間"</string>
+    <string name="screen_time_category_for_slot" msgid="8287722270554654959">"<xliff:g id="SLOT">%s</xliff:g> の利用時間"</string>
+    <string name="battery_usage_spinner_breakdown_by_apps" msgid="7746337368402445072">"アプリごとの内訳"</string>
+    <string name="battery_usage_spinner_breakdown_by_system" msgid="4646952798665973464">"システムごとの内訳"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"プロセスの統計情報"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"プロセスの実行に関する独自の統計情報"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"メモリ使用"</string>
@@ -2363,8 +2282,7 @@
     <string name="remove_credential_management_app" msgid="6089291496976812786">"アプリを削除"</string>
     <string name="remove_credential_management_app_dialog_title" msgid="5713525435104706772">"このアプリを削除しますか？"</string>
     <string name="remove_credential_management_app_dialog_message" msgid="7739474298063646935">"このアプリは、証明書の管理に使用できなくなりますが、デバイスからは削除されません。このアプリでインストールされた証明書はすべてアンインストールされます。"</string>
-    <!-- no translation found for number_of_urls (1128699121050872188) -->
-    <skip />
+    <string name="number_of_urls" msgid="1128699121050872188">"{count,plural, =1{# 件の URL}other{# 件の URL}}"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"緊急通報信号"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"緊急通報時の動作を設定します"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"バックアップ"</string>
@@ -2407,8 +2325,7 @@
     <string name="notification_history_today" msgid="5828496957208237230">"過去 24 時間"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"スヌーズ"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"最近非表示にした通知"</string>
-    <!-- no translation found for notification_history_count (885305572972482838) -->
-    <skip />
+    <string name="notification_history_count" msgid="885305572972482838">"{count,plural, =1{# 件の通知}other{# 件の通知}}"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"通話着信音とバイブレーション"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"ネットワークの詳細"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"同期が有効です"</string>
@@ -2599,13 +2516,11 @@
     <string name="additional_system_update_settings_list_item_title" msgid="7230385345152138051">"その他のシステムアップデート"</string>
     <string name="ssl_ca_cert_warning" msgid="3898387588657346106">"ネットワークが監視されている可能性があります"</string>
     <string name="done_button" msgid="6269449526248267">"完了"</string>
-    <!-- no translation found for ssl_ca_cert_dialog_title (1032088078702042090) -->
-    <skip />
+    <string name="ssl_ca_cert_dialog_title" msgid="1032088078702042090">"{count,plural, =1{証明書の信頼または削除}other{証明書の信頼または削除}}"</string>
     <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{{orgName} が、あなたのデバイスに認証局をインストールしました。これにより、デバイスのネットワーク アクティビティ（メール、アプリ、保護されたウェブサイトなど）が管理される可能性があります。\n\nこの証明書について詳しくは、管理者にお問い合わせください。}other{{orgName} が、あなたのデバイスに認証局をインストールしました。これにより、デバイスのネットワーク アクティビティ（メール、アプリ、保護されたウェブサイトなど）が管理される可能性があります。\n\nこれらの証明書について詳しくは、管理者にお問い合わせください。}}"</string>
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} が、あなたの仕事用プロファイルに認証局をインストールしました。これにより、仕事のネットワーク アクティビティ（メール、アプリ、保護されたウェブサイトなど）が管理される可能性があります。\n\nこの証明書について詳しくは、管理者にお問い合わせください。}other{{orgName} が、あなたの仕事用プロファイルの認証局をインストールしました。これにより、仕事のネットワーク アクティビティ（メール、アプリ、保護されたウェブサイトなど）が管理される可能性があります。\n\nこれらの証明書について詳しくは、管理者にお問い合わせください。}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"第三者があなたのネットワークアクティビティ（メール、アプリ、保護されたウェブサイトなど）を監視できます。\n\nこれは、信頼できる認証情報がデバイスにインストールされているためです。"</string>
-    <!-- no translation found for ssl_ca_cert_settings_button (2044927302268394991) -->
-    <skip />
+    <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{証明書を確認}other{証明書を確認}}"</string>
     <string name="user_settings_title" msgid="6550866465409807877">"複数ユーザー"</string>
     <string name="user_list_title" msgid="1387379079186123404">"ユーザーとプロファイル"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"ユーザーまたはプロファイルを追加"</string>
@@ -2644,15 +2559,12 @@
     <string name="enable_guest_calling" msgid="8300355036005240911">"スマートフォンの利用をゲストに許可する"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"発信履歴がゲストユーザーと共有されます。"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"通話とSMSをON"</string>
-    <!-- no translation found for user_grant_admin (6511342422361803820) -->
-    <skip />
+    <string name="user_grant_admin" msgid="6511342422361803820">"このユーザーに管理者権限を付与"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"ユーザーの削除"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"通話とSMSをONにしますか？"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"通話とSMSの履歴がこのユーザーと共有されます。"</string>
-    <!-- no translation found for user_revoke_admin_confirm_title (3057842401861731863) -->
-    <skip />
-    <!-- no translation found for user_revoke_admin_confirm_message (2719667217562982318) -->
-    <skip />
+    <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"管理者権限を削除しますか？"</string>
+    <string name="user_revoke_admin_confirm_message" msgid="2719667217562982318">"このユーザーの管理者権限を削除してもよろしいですか？"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"緊急時情報"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>の情報と連絡先"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g>を開く"</string>
@@ -3135,8 +3047,7 @@
     <string name="promote_conversation_title" msgid="4731148769888238722">"会話として表示させる"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"会話セクションに追加します"</string>
     <string name="priority_conversation_count_zero" msgid="3862289535537564713">"優先度の高い会話: なし"</string>
-    <!-- no translation found for priority_conversation_count (7291234530844412077) -->
-    <skip />
+    <string name="priority_conversation_count" msgid="7291234530844412077">"{count,plural, =1{優先度の高い会話: # 件}other{優先度の高い会話: # 件}}"</string>
     <string name="important_conversations" msgid="1233893707189659401">"優先度の高い会話"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"会話セクションの一番上にバブルとして表示されます"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"会話セクションの一番上に表示"</string>
@@ -3165,10 +3076,8 @@
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"デバイスのロックが解除されているとき、画面上部にバナーとして通知を表示します"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」のすべての通知"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g> のすべての通知"</string>
-    <!-- no translation found for notifications_sent_daily (10274479224185437) -->
-    <skip />
-    <!-- no translation found for notifications_sent_weekly (7895656213187555346) -->
-    <skip />
+    <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{1 日あたりの通知の数: 約 # 件}other{1 日あたりの通知の数: 約 # 件}}"</string>
+    <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{1 週間あたりの通知の数: 約 # 件}other{1 週間あたりの通知の数: 約 # 件}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"なし"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"デバイスとアプリの通知"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"通知を読み取れるアプリとデバイスの管理"</string>
@@ -3237,15 +3146,15 @@
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"権限"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"このアプリは、位置情報、ストレージ、連絡先へのアクセスなどに個人用の<xliff:g id="NAME">%1$s</xliff:g>の権限を使用できます。"</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"アクセス可能なアプリはありません"</string>
-    <!-- no translation found for interact_across_profiles_number_of_connected_apps (4000424798291479207) -->
-    <skip />
+    <string name="interact_across_profiles_number_of_connected_apps" msgid="4000424798291479207">"{count,plural, =1{# 件のアプリが接続されています}other{# 件のアプリが接続されています}}"</string>
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"これらのアプリを接続するには、仕事用プロファイルに<xliff:g id="NAME">%1$s</xliff:g>をインストールしてください"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"これらのアプリを接続するには、個人用プロファイルに<xliff:g id="NAME">%1$s</xliff:g>をインストールしてください"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"タップしてアプリを入手"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"サイレント モードの利用"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"サイレント モードの利用を許可"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"サイレント モードの利用をリクエストしたインストール済みアプリはありません"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"選択された設定に基づき、このアプリの通知はこのデバイスに表示されません"</string>
+    <!-- no translation found for app_notifications_off_desc (2484843759466874201) -->
+    <skip />
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"選択された設定に基づき、このカテゴリの通知はこのデバイスには表示されません"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"リクエストに従い、このグループの通知はこのデバイスには表示されません"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"このアプリは通知を送信しません"</string>
@@ -3253,8 +3162,7 @@
     <string name="notification_channels_other" msgid="18159805343647908">"その他"</string>
     <string name="no_channels" msgid="4716199078612071915">"このアプリの通知はありません"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"アプリ内のその他の設定"</string>
-    <!-- no translation found for deleted_channels (8489800381509312964) -->
-    <skip />
+    <string name="deleted_channels" msgid="8489800381509312964">"{count,plural, =1{# 件のカテゴリを削除しました}other{# 件のカテゴリを削除しました}}"</string>
     <string name="app_notification_block_title" msgid="3880322745749900296">"すべてブロック"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"今後はこの通知を表示しない"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"通知の表示"</string>
@@ -3404,8 +3312,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"画面固定の解除前にパスワードを要求"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"アプリ固定の解除時にデバイスをロック"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"SIM の削除の確認"</string>
-    <!-- no translation found for confirm_sim_deletion_description (4439657901673639063) -->
-    <skip />
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"eSIM を消去する前に本人確認を行います"</string>
     <string name="memtag_title" msgid="5096176296797727201">"高度なメモリ保護（ベータ版）"</string>
     <string name="memtag_toggle" msgid="8695028758462939212">"高度なメモリ保護"</string>
     <string name="memtag_intro" msgid="579408691329568953">"このベータ版機能を使用すると、セキュリティ上のリスクがあるバグからデバイスを保護できます。"</string>
@@ -3468,6 +3375,10 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"通知 OFF"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"詳細設定"</string>
     <string name="app_permissions" msgid="8666537659217653626">"権限マネージャー"</string>
+    <!-- no translation found for app_data_sharing_updates_title (921888411974134089) -->
+    <skip />
+    <!-- no translation found for app_data_sharing_updates_summary (1500580254161164185) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"タップして復帰"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"画面をダブルタップするとデバイスが復帰します"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"リンクを開く"</string>
@@ -3904,14 +3815,12 @@
     <string name="enterprise_privacy_none" msgid="6026527690979756431">"なし"</string>
     <string name="enterprise_privacy_enterprise_installed_packages" msgid="9114143640515900082">"アプリがインストールされています"</string>
     <string name="enterprise_privacy_apps_count_estimation_info" msgid="7959907857710107792">"アプリの数は推定値です。Play ストア以外からインストールしたアプリが含まれていないことがあります。"</string>
-    <!-- no translation found for enterprise_privacy_number_packages_lower_bound (5317634640873658149) -->
-    <skip />
+    <string name="enterprise_privacy_number_packages_lower_bound" msgid="5317634640873658149">"{count,plural, =1{# 個以上のアプリ}other{# 個以上のアプリ}}"</string>
     <string name="enterprise_privacy_location_access" msgid="8023838718108456971">"位置情報の権限"</string>
     <string name="enterprise_privacy_microphone_access" msgid="7242958026470143653">"マイクの権限"</string>
     <string name="enterprise_privacy_camera_access" msgid="7685460535880069016">"カメラの権限"</string>
     <string name="enterprise_privacy_enterprise_set_default_apps" msgid="7498546659083996300">"デフォルト アプリ"</string>
-    <!-- no translation found for enterprise_privacy_number_packages (5294444005035188274) -->
-    <skip />
+    <string name="enterprise_privacy_number_packages" msgid="5294444005035188274">"{count,plural, =1{# 個のアプリ}other{# 個のアプリ}}"</string>
     <string name="enterprise_privacy_input_method" msgid="3278314982700662246">"デフォルト キーボード"</string>
     <string name="enterprise_privacy_input_method_name" msgid="2974859490559054584">"<xliff:g id="APP_LABEL">%s</xliff:g> に設定済み"</string>
     <string name="enterprise_privacy_always_on_vpn_device" msgid="1735829327405126695">"常時接続 VPN は ON です"</string>
@@ -3921,14 +3830,12 @@
     <string name="enterprise_privacy_ca_certs_device" msgid="1816495877258727663">"信頼できる認証情報"</string>
     <string name="enterprise_privacy_ca_certs_personal" msgid="1516422660828485795">"個人用プロファイル内の信頼できる認証情報"</string>
     <string name="enterprise_privacy_ca_certs_work" msgid="4318941788592655561">"仕事用プロファイル内の信頼できる認証情報"</string>
-    <!-- no translation found for enterprise_privacy_number_ca_certs (4540897122831942658) -->
-    <skip />
+    <string name="enterprise_privacy_number_ca_certs" msgid="4540897122831942658">"{count,plural, =1{# 件以上の CA 証明書}other{# 件以上の CA 証明書}}"</string>
     <string name="enterprise_privacy_lock_device" msgid="464054894363899866">"管理者はデバイスをロックしてパスワードを再設定できます"</string>
     <string name="enterprise_privacy_wipe_device" msgid="869589182352244591">"管理者はデバイスのすべてのデータを削除できます"</string>
     <string name="enterprise_privacy_failed_password_wipe_device" msgid="7045164901334821226">"すべてのデバイスデータが削除されるまでのパスワード入力回数"</string>
     <string name="enterprise_privacy_failed_password_wipe_work" msgid="2537582942554484170">"仕事用プロファイルのデータが削除されるまでのパスワード入力回数"</string>
-    <!-- no translation found for enterprise_privacy_number_failed_password_wipe (2695842143305867642) -->
-    <skip />
+    <string name="enterprise_privacy_number_failed_password_wipe" msgid="2695842143305867642">"{count,plural, =1{入力回数 # 回}other{入力回数 # 回}}"</string>
     <string name="do_disclosure_generic" msgid="3067459392402324538">"このデバイスは組織によって管理されています。"</string>
     <string name="do_disclosure_with_name" msgid="867544298924410766">"このデバイスは <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> により管理されています。"</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
@@ -3956,15 +3863,12 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"全額支払い済みの場合:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"デバイスからすべての制限が削除される"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"クレジット プロバイダのアプリをアンインストールできる"</string>
-    <!-- no translation found for default_camera_app_title (6546248868519965998) -->
-    <skip />
+    <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{カメラアプリ}other{カメラアプリ}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"カレンダー アプリ"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"連絡帳アプリ"</string>
-    <!-- no translation found for default_email_app_title (5411280873093244250) -->
-    <skip />
+    <string name="default_email_app_title" msgid="5411280873093244250">"{count,plural, =1{メール クライアント アプリ}other{メール クライアント アプリ}}"</string>
     <string name="default_map_app_title" msgid="7569231732944853320">"地図アプリ"</string>
-    <!-- no translation found for default_phone_app_title (795025972645464135) -->
-    <skip />
+    <string name="default_phone_app_title" msgid="795025972645464135">"{count,plural, =1{電話アプリ}other{電話アプリ}}"</string>
     <string name="app_names_concatenation_template_2" msgid="8320181646458855457">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>、<xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>"</string>
     <string name="app_names_concatenation_template_3" msgid="7019703249717854148">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>、<xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>、<xliff:g id="THIRD_APP_NAME">%3$s</xliff:g>"</string>
     <string name="storage_default_internal_storage" msgid="4055660218818688131">"このデバイス"</string>
@@ -3991,27 +3895,18 @@
     <string name="webview_uninstalled_for_user" msgid="627352948986275488">"（<xliff:g id="USER">%s</xliff:g> からアンインストール）"</string>
     <string name="webview_disabled_for_user" msgid="5809886172032644498">"（<xliff:g id="USER">%s</xliff:g> では無効）"</string>
     <string name="autofill_app" msgid="7595308061826307921">"自動入力サービス"</string>
-    <!-- no translation found for default_autofill_app (372234803718251606) -->
-    <skip />
+    <string name="default_autofill_app" msgid="372234803718251606">"デフォルトの自動入力サービス"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"パスワード"</string>
-    <!-- no translation found for credman_credentials (5937331545565783811) -->
-    <skip />
-    <!-- no translation found for autofill_passwords_count (6359289285822955973) -->
-    <skip />
+    <string name="credman_credentials" msgid="5937331545565783811">"パスワードと ID の管理サービス"</string>
+    <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# 件のパスワード}other{# 件のパスワード}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"自動, 入力, 自動入力, パスワード"</string>
-    <!-- no translation found for credman_keywords (7236954350284379264) -->
-    <skip />
+    <string name="credman_keywords" msgid="7236954350284379264">"認証情報、パスキー、パスワード"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;このアプリが信頼できることを確認してください&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; は画面上の内容に基づいて、自動入力可能な情報を判別します。"</string>
-    <!-- no translation found for credman_confirmation_message_title (8847900085593880729) -->
-    <skip />
-    <!-- no translation found for credman_confirmation_message (1485617504425237430) -->
-    <skip />
-    <!-- no translation found for credman_error_message_title (5108868200002966901) -->
-    <skip />
-    <!-- no translation found for credman_error_message (4058425433345908579) -->
-    <skip />
-    <!-- no translation found for credman_confirmation_message_positive_button (2812613187691345361) -->
-    <skip />
+    <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s を OFF にしますか？"</string>
+    <string name="credman_confirmation_message" msgid="1485617504425237430">"住所やお支払い方法などの保存された情報はログイン時に入力されません。入力されるようにするには、デフォルトの自動入力サービスを設定してください。"</string>
+    <string name="credman_error_message_title" msgid="5108868200002966901">"パスワードと ID の管理サービスの上限"</string>
+    <string name="credman_error_message" msgid="4058425433345908579">"同時に有効にできる自動入力サービスとパスワード サービスは最大 5 件です。追加するには、いずれかのサービスを OFF にしてください。"</string>
+    <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"OFF にする"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"自動入力"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"ロギングレベル"</string>
     <string name="autofill_max_partitions" msgid="7342195529574406366">"セッションごとの最大リクエスト数"</string>
@@ -4284,8 +4179,7 @@
     <string name="copyable_slice_toast" msgid="1008251852798990606">"クリップボードにコピーしました（<xliff:g id="COPY_CONTENT">%1$s</xliff:g>）"</string>
     <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"ユーザー補助の使用"</string>
-    <!-- no translation found for accessibility_usage_summary (4348285359995227813) -->
-    <skip />
+    <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{1 個のアプリにデバイスへのフルアクセスを許可しています}other{# 個のアプリにデバイスへのフルアクセスを許可しています}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"重要な情報"</string>
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"続行"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"同意しない"</string>
@@ -4325,6 +4219,8 @@
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"個人用"</string>
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"仕事用"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"システムのデフォルト"</string>
+    <!-- no translation found for default_app_none (5420632042222036264) -->
+    <skip />
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"この選択は無効になりました。もう一度お試しください。"</string>
     <string name="power_menu_setting_name" msgid="2394440932633137229">"電源ボタンを長押し"</string>
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"電源ボタンを長押ししてアクセスする"</string>
@@ -4578,18 +4474,13 @@
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR コードの形式が無効です"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"eSIM への変換"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"別のデバイスへの eSIM の移行"</string>
-    <!-- no translation found for background_install_preference_summary (3065219346519340364) -->
-    <skip />
-    <!-- no translation found for background_install_title (607913515188276168) -->
-    <skip />
-    <!-- no translation found for background_install_summary (3890296129543309666) -->
-    <skip />
-    <!-- no translation found for background_install_feature_list_no_entry (2071343281272266154) -->
-    <skip />
-    <!-- no translation found for background_install_uninstall_button_description (1189649052911501249) -->
-    <skip />
-    <!-- no translation found for background_install_before (8608614957688912715) -->
-    <skip />
-    <!-- no translation found for background_install_after (7983488897570908149) -->
+    <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# 個のアプリ}other{# 個のアプリ}}"</string>
+    <string name="background_install_title" msgid="607913515188276168">"バックグラウンドでインストールされたアプリ"</string>
+    <string name="background_install_summary" msgid="3890296129543309666">"デバイスのメーカーがデバイスにバックグラウンドでアプリをインストールしたり、携帯通信会社などのパートナーにその操作を許可したりすることがあります。\n\nここに表示されるアプリはいずれも、デバイスの正常な動作には必要ありません。不要なアプリはアンインストールできます。"</string>
+    <string name="background_install_feature_list_no_entry" msgid="2071343281272266154">"バックグラウンドでインストールされたアプリはありません"</string>
+    <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"アプリをアンインストール"</string>
+    <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{過去 # か月間にインストールされたアプリ}other{過去 # か月間にインストールされたアプリ}}"</string>
+    <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{# か月以上前にインストールされたアプリ}other{# か月以上前にインストールされたアプリ}}"</string>
+    <!-- no translation found for accessibility_fingerprint_label (5017431423168191733) -->
     <skip />
 </resources>

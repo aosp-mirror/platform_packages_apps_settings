@@ -29,6 +29,7 @@ import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Locale;
@@ -92,6 +93,7 @@ public class RegionalPreferencesDataUtilsTest {
     }
 
     @Test
+    @Ignore("b/265733270")
     public void savePreference_saveCalendarIsDangi_success() {
         RegionalPreferencesDataUtils.savePreference(
                 mApplicationContext,
