@@ -588,8 +588,8 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"İndi tətbiqlərə daxil olmaq və ya alışı təsdiqləmək kimi hallarda planşeti kiliddən çıxarmaq və ya kimlik doğrulaması üçün barmaq izinizdən istifadə edə bilərsiniz"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"İndi tətbiqlərə daxil olmaq və ya alışı təsdiqləmək kimi hallarda cihazı kiliddən çıxarmaq və ya kimlik doğrulaması üçün barmaq izinizdən istifadə edə bilərsiniz"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"İndi tətbiqlərə daxil olmaq və ya alışı təsdiqləmək kimi hallarda telefonu kiliddən çıxarmaq və ya kimlik doğrulaması üçün barmaq izinizdən istifadə edə bilərsiniz"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Yalnız ekran aktiv olduqda kiliddən çıxarın"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Barmaq izinizlə kiliddən çıxarmadan əvvəl ekran aktiv olmalıdır. Bu, təsadüfən kiliddən çıxarılma ehtimalını azaldır."</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Kilidi açmaq üçün toxunun"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Ekran deaktiv olsa da kilidi açmaq üçün sensora toxunun. Təsadüfən kilidin açılması ehtimalını artırır."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Ekranı kiliddən çıxarma"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Sonraya saxlayın"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Qaldırın və təkrar toxunun"</string>
@@ -648,6 +648,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Hazırdır"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ups, bu sensor deyil"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Telefonun arxasındakı sensora toxunun."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Barmaq izi ayarlama vaxtı bitdi"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"İndi yenidən cəhd edin, yaxud daha sonra Ayarlarda barmaq izinizi ayarlayın"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Barmaq izi qeydiyyatı işləmədi. Yenidən cəhd edin və ya başqa barmaq istifadə edin."</string>
@@ -735,28 +737,22 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"Barmaq izi + Parol"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Barmaq izi olmadan davam edin"</string>
     <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"Barmaq izinizi istifadə edərək telefonun kilidini aça bilərsiniz. Təhlükəsizlik üçün, bu seçim yedək ekran kilidi tələb edir."</string>
-    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
-    <skip />
+    <string name="fingerprint_unlock_title" product="tablet" msgid="8674718459462612186">"Barmaq izinizdən istifadə etməklə planşetinizi kiliddən çıxara bilərsiniz. Təhlükəsizlik üçün bu seçim yedək ekran kilidi tələb edir."</string>
+    <string name="fingerprint_unlock_title" product="device" msgid="3224468142599659740">"Barmaq izinizdən istifadə etməklə cihazınızı kiliddən çıxara bilərsiniz. Təhlükəsizlik üçün bu seçim yedək ekran kilidi tələb edir."</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"Üz ilə kiliddən çıxarma + Model"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Üz ilə kiliddən çıxarma + PIN"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Üz ilə kiliddən çıxarma + Parol"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Üz ilə kiliddən çıxarma olmadan davam edin"</string>
     <string name="face_unlock_title" product="default" msgid="7344830351598247267">"Barmaq izinizi istifadə edərək telefonun kilidini aça bilərsiniz. Təhlükəsizlik üçün bu seçim yedək ekran kilidi tələb edir."</string>
-    <!-- no translation found for face_unlock_title (5695698036499155727) -->
-    <skip />
-    <!-- no translation found for face_unlock_title (6768108756755361161) -->
-    <skip />
+    <string name="face_unlock_title" product="tablet" msgid="5695698036499155727">"Üzünüzdən istifadə etməklə planşetinizi kiliddən çıxara bilərsiniz. Təhlükəsizlik üçün bu seçim yedək ekran kilidi tələb edir."</string>
+    <string name="face_unlock_title" product="device" msgid="6768108756755361161">"Üzünüzdən istifadə etməklə cihazınızı kiliddən çıxara bilərsiniz. Təhlükəsizlik üçün bu seçim yedək ekran kilidi tələb edir."</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Model • Üz • Barmaq izi"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • Üz • Barmaq izi"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Parol • Üz • Barmaq izi"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Üz və ya barmaq izi olmadan davam edin"</string>
     <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"Üzünüzdən və ya barmaq izinizdən istifadə etməklə telefonunuzu kiliddən çıxara bilərsiniz. Təhlükəsizlik üçün bu seçim yedək ekran kilidi tələb edir."</string>
-    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
-    <skip />
-    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
-    <skip />
+    <string name="biometrics_unlock_title" product="tablet" msgid="5808626401936488028">"Üzünüzdən və ya barmaq izinizdən istifadə etməklə planşetinizi kiliddən çıxara bilərsiniz. Təhlükəsizlik üçün bu seçim yedək ekran kilidi tələb edir."</string>
+    <string name="biometrics_unlock_title" product="device" msgid="4912499343509046929">"Üzünüzdən və ya barmaq izinizdən istifadə etməklə cihazınızı kiliddən çıxara bilərsiniz. Təhlükəsizlik üçün bu seçim yedək ekran kilidi tələb edir."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"Admin, siyasət və ya yaddaş deaktiv etdi"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Heç biri"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Sürüşdürmə"</string>
@@ -4213,7 +4209,8 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"\"Narahat etməyin\" rejiminə icazə verin"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Heç bir tətbiq \"Narahat etməyin\" girişi sorğusu göndərməyib"</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"Tətbiqlər yüklənir…"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"Bu kateqoriya bildirişləri deaktivdir."</string>
+    <!-- no translation found for app_notifications_off_desc (2484843759466874201) -->
+    <skip />
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Bu kateqoriya bildirişləri deaktivdir."</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Bu kateqoriya bildirişləri deaktivdir."</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Bu tətbiq bildiriş göndərmir"</string>

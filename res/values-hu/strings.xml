@@ -588,8 +588,8 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Mostantól használhatja ujjlenyomatát táblagépe zárolásának feloldásához vagy személyazonossága igazolásához (például amikor alkalmazásokba jelentkezik be, vagy vásárlást hagy jóvá)."</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Mostantól használhatja ujjlenyomatát eszköze zárolásának feloldásához vagy személyazonossága igazolásához (például amikor alkalmazásokba jelentkezik be, vagy vásárlást hagy jóvá)."</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Mostantól használhatja ujjlenyomatát telefonja zárolásának feloldásához vagy személyazonossága igazolásához (például amikor alkalmazásokba jelentkezik be, vagy vásárlást hagy jóvá)."</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Csak akkor oldja fel a képernyőt, ha be van kapcsolva a képernyő"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"A képernyőnek bekapcsolva kell lennie, hogy feloldhassa az ujjlenyomatával. Így kisebb az esélye a véletlen feloldásoknak."</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Feloldás érintéssel bármikor"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"A feloldáshoz érintse meg az érzékelőt, akár kikapcsolt képernyő esetén is. Így nagyobb az esély a véletlen feloldásra."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Képernyő, feloldás"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Később"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Emelje fel, majd érintse meg újra"</string>
@@ -648,6 +648,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Kész"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Hoppá! Az nem az érzékelő"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Érintse meg a hátsó érzékelőt mutatóujjával."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Lejárt az ujjlenyomat-beállítás időkorlátja."</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Próbálja meg újra beállítani az ujjlenyomatát most, illetve később a Beállítások menüben"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Az ujjlenyomat regisztrációja nem sikerült. Próbálja újra, vagy próbálkozzon egy másik ujjával."</string>
@@ -735,28 +737,22 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"Ujjlenyomat + jelszó"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Folytatás ujjlenyomat nélkül"</string>
     <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"Telefonját feloldhatja az ujjlenyomata segítségével. Biztonsági okokból ezen beállítás esetében szükség van másodlagos képernyőzárra is."</string>
-    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
-    <skip />
+    <string name="fingerprint_unlock_title" product="tablet" msgid="8674718459462612186">"Ujjlenyomata segítségével feloldhatja táblagépe zárolását. Biztonsági okokból ennek a beállításnak az esetében szükség van másodlagos képernyőzárra is"</string>
+    <string name="fingerprint_unlock_title" product="device" msgid="3224468142599659740">"Eszközét feloldhatja az ujjlenyomata segítségével. Biztonsági okokból ennek a beállításnak az esetében szükség van másodlagos képernyőzárra is."</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"Arcalapú feloldás + minta"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Arcalapú feloldás + PIN-kód"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Arcalapú feloldás + jelszó"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Folytatás Arcalapú feloldás nélkül"</string>
     <string name="face_unlock_title" product="default" msgid="7344830351598247267">"Feloldhatja telefonját arca segítségével. Biztonsági okokból ezen beállítás esetében szükség van másodlagos képernyőzárra is."</string>
-    <!-- no translation found for face_unlock_title (5695698036499155727) -->
-    <skip />
-    <!-- no translation found for face_unlock_title (6768108756755361161) -->
-    <skip />
+    <string name="face_unlock_title" product="tablet" msgid="5695698036499155727">"Feloldhatja táblagépét arca segítségével. Biztonsági okokból ezen beállítás esetében szükség van másodlagos képernyőzárra is."</string>
+    <string name="face_unlock_title" product="device" msgid="6768108756755361161">"Feloldhatja eszközét arca segítségével. Biztonsági okokból ezen beállítás esetében szükség van másodlagos képernyőzárra is."</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Minta • Arc • Ujjlenyomat"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN-kód • Arc • Ujjlenyomat"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Jelszó • Arc • Ujjlenyomat"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Folytatás arc- vagy ujjlenyomat-alapú feloldás nélkül"</string>
     <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"Feloldhatja telefonja zárolását az arca vagy az ujjlenyomata használatával. Biztonsági okokból ennek a beállításnak az esetében szükség van másodlagos képernyőzárra is"</string>
-    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
-    <skip />
-    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
-    <skip />
+    <string name="biometrics_unlock_title" product="tablet" msgid="5808626401936488028">"Feloldhatja táblagépe zárolását az arca vagy az ujjlenyomata használatával. Biztonsági okokból ennek a beállításnak az esetében szükség van másodlagos képernyőzárra is"</string>
+    <string name="biometrics_unlock_title" product="device" msgid="4912499343509046929">"Feloldhatja eszköze zárolását az arca vagy az ujjlenyomata használatával. Biztonsági okokból ennek a beállításnak az esetében szükség van másodlagos képernyőzárra is"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"Rendszergazda, szabályzat vagy adattár letiltotta"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Nincs"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Csúsztatás"</string>
@@ -4213,7 +4209,8 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"A Ne zavarjanak mód engedélyezése"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Egy telepített alkalmazás sem kért „Ne zavarjanak” elérést"</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"Alkalmazások betöltése…"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"Kérésére az Android letiltotta a jelen alkalmazás értesítéseinek megjelenését ezen az eszközön"</string>
+    <!-- no translation found for app_notifications_off_desc (2484843759466874201) -->
+    <skip />
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Kérésére az Android letiltotta a jelen értesítési kategória megjelenését ezen az eszközön"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Kérésére az Android letiltotta az értesítések jelen csoportjának megjelenését ezen az eszközön"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Ez az alkalmazás nem küld értesítéseket"</string>

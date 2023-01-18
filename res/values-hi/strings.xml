@@ -588,8 +588,8 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"अब अपने फ़िंगरप्रिंट की मदद से, टैबलेट को अनलॉक किया जा सकता है. इसके अलावा, किसी ऐप्लिकेशन में साइन इन करने, किसी खरीदारी की मंज़ूरी देने या ऐसे और काम करने के दौरान, अपनी पहचान की पुष्टि करने के लिए भी फ़िंगरप्रिंट का इस्तेमाल किया जा सकता है"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"अब अपने फ़िंगरप्रिंट की मदद से, डिवाइस को अनलॉक किया जा सकता है. इसके अलावा, किसी ऐप्लिकेशन में साइन इन करने, किसी खरीदारी की मंज़ूरी देने या ऐसे और काम करने के दौरान, अपनी पहचान की पुष्टि करने के लिए भी फ़िंगरप्रिंट का इस्तेमाल किया जा सकता है"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"अब अपने फ़िंगरप्रिंट की मदद से, फ़ोन को अनलॉक किया जा सकता है. इसके अलावा, किसी ऐप्लिकेशन में साइन इन करने, किसी खरीदारी की मंज़ूरी देने या ऐसे और काम करने के दौरान, अपनी पहचान की पुष्टि करने के लिए भी फ़िंगरप्रिंट का इस्तेमाल किया जा सकता है"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"स्क्रीन चालू होने पर ही अनलॉक होगा"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"फ़िंगरप्रिंट अनलॉक की सुविधा का इस्तेमाल करने से पहले, आपके डिवाइस की स्क्रीन चालू होनी चाहिए. इससे गलती से डिवाइस अनलॉक होने की संभावना कम होती है."</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"किसी भी समय अनलॉक करने के लिए छुएं"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"स्क्रीन बंद होने पर भी उसे अनलॉक करने के लिए, सेंसर को छुएं. इससे स्क्रीन के अनजाने में खुलने की संभावना ज़्यादा बढ़ जाती है."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"स्क्रीन, अनलॉक करें"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"इसे बाद में करें"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"हटाएं, फिर दोबारा छुएं"</string>
@@ -648,6 +648,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"हो गया"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"ओह हो, वह सेंसर नहीं है"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"अपने फ़ोन के पीछे लगे सेंसर को छुएं. अपनी तर्जनी (अंगूठे के बगल वाली) उंगली का इस्तेमाल करें."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"फ़िंगरप्रिंट सेट अप करने का समय खत्म हो गया"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"अभी दोबारा कोशिश करें या कुछ समय बाद सेटिंग में जाकर, फ़िंगरप्रिंट सेट अप करें"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"फ़िंगरप्रिंट नामांकन ने काम नहीं किया. फिर से प्रयास करें या किसी दूसरी उंगली का उपयोग करें."</string>
@@ -735,28 +737,22 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"फ़िंगरप्रिंट + पासवर्ड"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"फ़िंगरप्रिंट के बिना जारी रखें"</string>
     <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"आप अपने फ़िंगरप्रिंट का उपयोग करके अपना फ़ोन अनलॉक कर सकते हैं. सुरक्षा के लिए, इस विकल्प के लिए बैकअप स्क्रीन लॉक आवश्यक है."</string>
-    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
-    <skip />
+    <string name="fingerprint_unlock_title" product="tablet" msgid="8674718459462612186">"फ़िंगरप्रिंट का इस्तेमाल करके, टैबलेट को अनलॉक किया जा सकता है. सुरक्षा की वजह से, इस सुविधा को इस्तेमाल करने के लिए एक बैकअप स्क्रीन लॉक ज़रूरी है."</string>
+    <string name="fingerprint_unlock_title" product="device" msgid="3224468142599659740">"फ़िंगरप्रिंट का इस्तेमाल करके, डिवाइस को अनलॉक किया जा सकता है. सुरक्षा की वजह से, इस सुविधा को इस्तेमाल करने के लिए एक बैकअप स्क्रीन लॉक ज़रूरी है."</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"फ़ेस अनलॉक + पैटर्न"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"फ़ेस अनलॉक + पिन"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"फ़ेस अनलॉक + पासवर्ड"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"फ़ेस अनलॉक की सुविधा सेट अप किए बिना जारी रखें"</string>
     <string name="face_unlock_title" product="default" msgid="7344830351598247267">"आप अपने चेहरे के ज़रिए फ़ोन अनलॉक कर सकते हैं. डिवाइस को सुरक्षित रखने के लिए, यह ज़रूरी है कि चेहरे के अलावा अनलॉक करने का दूसरा विकल्प भी सेट किया जाए."</string>
-    <!-- no translation found for face_unlock_title (5695698036499155727) -->
-    <skip />
-    <!-- no translation found for face_unlock_title (6768108756755361161) -->
-    <skip />
+    <string name="face_unlock_title" product="tablet" msgid="5695698036499155727">"चेहरे का इस्तेमाल करके, टैबलेट को अनलॉक किया जा सकता है. सुरक्षा की वजह से, इस सुविधा को इस्तेमाल करने के लिए एक बैकअप स्क्रीन लॉक ज़रूरी है."</string>
+    <string name="face_unlock_title" product="device" msgid="6768108756755361161">"चेहरे का इस्तेमाल करके, डिवाइस को अनलॉक किया जा सकता है. सुरक्षा की वजह से, इस सुविधा को इस्तेमाल करने के लिए एक बैकअप स्क्रीन लॉक ज़रूरी है."</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"पैटर्न • फ़ेस अनलॉक • फ़िंगरप्रिंट"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"पिन • फ़ेस अनलॉक • फ़िंगरप्रिंट"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"पासवर्ड • फ़ेस अनलॉक • फ़िंगरप्रिंट"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"फ़िंगरप्रिंट या फ़ेस अनलॉक सेट अप किए बिना आगे बढ़ें"</string>
     <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"आप अपने चेहरे या फ़िंगरप्रिंट का इस्तेमाल करके, अपने फ़ोन को अनलॉक कर सकते हैं. डिवाइस को सुरक्षित रखने के लिए यह ज़रूरी है कि बायोमेट्रिक्स के अलावा, अनलॉक करने का दूसरा विकल्प भी सेट किया जाए."</string>
-    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
-    <skip />
-    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
-    <skip />
+    <string name="biometrics_unlock_title" product="tablet" msgid="5808626401936488028">"चेहरे या फ़िंगरप्रिंट का इस्तेमाल करके, टैबलेट को अनलॉक किया जा सकता है. सुरक्षा की वजह से, इस सुविधा को इस्तेमाल करने के लिए एक बैकअप स्क्रीन लॉक ज़रूरी है."</string>
+    <string name="biometrics_unlock_title" product="device" msgid="4912499343509046929">"चेहरे या फ़िंगरप्रिंट का इस्तेमाल करके, डिवाइस को अनलॉक किया जा सकता है. सुरक्षा की वजह से, इस सुविधा को इस्तेमाल करने के लिए एक बैकअप स्क्रीन लॉक ज़रूरी है."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"एडमिन, सुरक्षित करने की नीति या क्रेडेंशियल स्टोरेज ने बंद किया है"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"कोई नहीं"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"स्वाइप करें"</string>
@@ -4213,7 +4209,8 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"\'परेशान न करें\' सुविधा की अनुमति दें"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"इंस्टॉल किए गए किसी भी ऐप्लिकेशन ने, परेशान ना करें सुविधा के इस्तेमाल का अनुरोध नहीं किया है"</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"ऐप्लिकेशन लोड हो रहे हैं…"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"आपके अनुरोध पर, Android इस ऐप्लिकेशन की सूचनाओं को इस डिवाइस पर आने से रोक रहा है"</string>
+    <!-- no translation found for app_notifications_off_desc (2484843759466874201) -->
+    <skip />
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"आपके अनुरोध पर, Android इस श्रेणी की सूचनाओं को इस डिवाइस पर आने से रोक रहा है"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"आपके अनुरोध पर, Android इस तरह की सूचनाओं को इस डिवाइस पर आने से रोक रहा है"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"यह ऐप्लिकेशन सूचनाएं नहीं भेजता"</string>

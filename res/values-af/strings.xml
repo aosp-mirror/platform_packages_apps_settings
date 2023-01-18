@@ -588,8 +588,10 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Jy kan nou jou vingerafdruk gebruik om jou tablet te ontsluit of te verifieer dat dit jy is, soos wanneer jy by apps aanmeld of ’n aankoop goedkeur"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Jy kan nou jou vingerafdruk gebruik om jou toestel te ontsluit of te verifieer dat dit jy is, soos wanneer jy by apps aanmeld of ’n aankoop goedkeur"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Jy kan nou jou vingerafdruk gebruik om jou foon te ontsluit of te verifieer dat dit jy is, soos wanneer jy by apps aanmeld of ’n aankoop goedkeur"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Ontsluit slegs wanneer skerm aan is"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Die skerm moet aan wees voordat jy met jou vingerafdruk kan ontsluit. Dit maak onbeplande ontsluiting minder waarskynlik."</string>
+    <!-- no translation found for security_settings_require_screen_on_to_auth_title (1641621458536715518) -->
+    <skip />
+    <!-- no translation found for security_settings_require_screen_on_to_auth_description (4158414711168345398) -->
+    <skip />
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Skerm, ontsluit"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Doen dit later"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Lig en raak dan weer"</string>
@@ -648,6 +650,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Klaar"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Oeps, dis nie die sensor nie"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Raak sensor op die agterkant van jou foon. Gebruik jou wysvinger."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Vingerafdrukopstelling het uitgetel"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Probeer nou weer of stel jou vingerafdruk later in Instellings op"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Vingerafdrukregistrasie het nie gewerk nie. Probeer weer of gebruik \'n ander vinger."</string>
@@ -735,28 +739,22 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"Vingerafdruk + Wagwoord"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Gaan voort sonder vingerafdruk"</string>
     <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"Jy kan jou foon met jou vingerafdruk ontsluit. Vir sekuriteit vereis hierdie opsie \'n rugsteunskermslot."</string>
-    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
-    <skip />
+    <string name="fingerprint_unlock_title" product="tablet" msgid="8674718459462612186">"Jy kan jou tablet met jou vingerafdruk ontsluit. Om veiligheidsredes vereis hierdie opsie ’n rugsteunskermslot."</string>
+    <string name="fingerprint_unlock_title" product="device" msgid="3224468142599659740">"Jy kan jou toestel met jou vingerafdruk ontsluit. Om veiligheidsredes vereis hierdie opsie ’n rugsteunskermslot."</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"Gesigslot + patroon"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Gesigslot + PIN"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Gesigslot + wagwoord"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Gaan voort sonder Gesigslot"</string>
     <string name="face_unlock_title" product="default" msgid="7344830351598247267">"Jy kan jou foon met jou gesig ontsluit. Vir sekuriteit vereis hierdie opsie \'n rugsteunskermslot."</string>
-    <!-- no translation found for face_unlock_title (5695698036499155727) -->
-    <skip />
-    <!-- no translation found for face_unlock_title (6768108756755361161) -->
-    <skip />
+    <string name="face_unlock_title" product="tablet" msgid="5695698036499155727">"Jy kan jou tablet met jou gesig ontsluit. Om veiligheidsredes vereis hierdie opsie ’n rugsteunskermslot."</string>
+    <string name="face_unlock_title" product="device" msgid="6768108756755361161">"Jy kan jou toestel met jou gesig ontsluit. Om veiligheidsredes vereis hierdie opsie ’n rugsteunskermslot."</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Patroon • Gesig • Vingerafdruk"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • Gesig • Vingerafdruk"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Wagwoord • Gesig • Vingerafdruk"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Gaan voort sonder Gesigslot of Vingerafdruk"</string>
     <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"Jy kan jou foon met jou gesig of vingerafdruk ontsluit. Om veiligheidsredes vereis hierdie opsie \'n rugsteunskermslot."</string>
-    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
-    <skip />
-    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
-    <skip />
+    <string name="biometrics_unlock_title" product="tablet" msgid="5808626401936488028">"Jy kan jou tablet met jou gesig of vingerafdruk ontsluit. Om veiligheidsredes vereis hierdie opsie ’n rugsteunskermslot."</string>
+    <string name="biometrics_unlock_title" product="device" msgid="4912499343509046929">"Jy kan jou toestel met jou gesig of vingerafdruk ontsluit. Om veiligheidsredes vereis hierdie opsie ’n rugsteunskermslot."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"Gedeaktiveer deur administrateur, enkripsiebeleid of eiebewysberging"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Geen"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Swiep"</string>
@@ -4213,7 +4211,7 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Laat Moenie Steur Nie toe"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Geen geïnstalleerde programme het toegang tot Moenie Steur Nie versoek nie"</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"Laai tans programme …"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"Android keer tans op jou versoek dat hierdie program se kennisgewings op hierdie toestel verskyn"</string>
+    <string name="app_notifications_off_desc" msgid="2484843759466874201">"Jy het nie kennisgewings van hierdie app af toegelaat nie"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Android keer tans op jou versoek dat hierdie kategorie kennisgewings op hierdie toestel verskyn"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Android keer tans op jou versoek dat hierdie groep kennisgewings op hierdie toestel verskyn"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Hierdie app stuur nie kennisgewings nie"</string>
