@@ -3051,11 +3051,12 @@
             android:exported="false"
             android:authorities="${applicationId}.battery.usage.bugreport"/>
 
-        <receiver android:name=".fuelgauge.batteryusage.BatteryUsageBroadcastReceiver"
+        <receiver android:name="com.android.settings.fuelgauge.batteryusage.BatteryUsageBroadcastReceiver"
                   android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BATTERY_LEVEL_CHANGED"/>
                 <action android:name="com.android.settings.battery.action.CLEAR_BATTERY_CACHE_DATA"/>
+                <action android:name="com.android.settings.battery.action.ACTION_BATTERY_UNPLUGGING"/>
             </intent-filter>
         </receiver>
 

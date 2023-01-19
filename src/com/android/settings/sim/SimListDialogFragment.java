@@ -109,16 +109,18 @@ public class SimListDialogFragment extends SimDialogFragment {
      * @param selectionIndex the index of item in the list.
      */
     public void onClick(int selectionIndex) {
+        final SimDialogActivity activity = (SimDialogActivity) getActivity();
         if (selectionIndex >= 0 && selectionIndex < mSubscriptions.size()) {
             int subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
             final SubscriptionInfo subscription = mSubscriptions.get(selectionIndex);
             if (subscription != null) {
                 subId = subscription.getSubscriptionId();
             }
-            final SimDialogActivity activity = (SimDialogActivity) getActivity();
             activity.onSubscriptionSelected(getDialogType(), subId);
         }
-        dismiss();
+        Log.d(TAG, "Start showing auto data switch dialog");
+        activity.showEnableAutoDataSwitchDialog();
+        if (getDialog() != null) getDialog().dismiss();
     }
 
     protected List<SubscriptionInfo> getCurrentSubscriptions() {

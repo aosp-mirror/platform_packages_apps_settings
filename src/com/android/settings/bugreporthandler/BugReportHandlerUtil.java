@@ -78,7 +78,7 @@ public class BugReportHandlerUtil {
         boolean needToResetOutdatedSettings = false;
         if (!isBugreportAllowlistedApp(handlerApp)) {
             handlerApp = getDefaultBugReportHandlerApp(context);
-            handlerUser = UserHandle.USER_SYSTEM;
+            handlerUser = context.getUserId();
         } else if (getBugReportHandlerAppReceivers(context, handlerApp, handlerUser).isEmpty()) {
             // It looks like the settings are outdated, need to reset outdated settings.
             //
@@ -89,7 +89,7 @@ public class BugReportHandlerUtil {
             // The chosen bugreport handler app is outdated because the profile is removed,
             // so need to reset outdated settings
             handlerApp = getDefaultBugReportHandlerApp(context);
-            handlerUser = UserHandle.USER_SYSTEM;
+            handlerUser = context.getUserId();
             needToResetOutdatedSettings = true;
         }
 
@@ -99,7 +99,7 @@ public class BugReportHandlerUtil {
             // bugreport, so change to let shell to handle a bugreport and need to reset
             // settings.
             handlerApp = SHELL_APP_PACKAGE;
-            handlerUser = UserHandle.USER_SYSTEM;
+            handlerUser = context.getUserId();
             needToResetOutdatedSettings = true;
         }
 
@@ -112,13 +112,13 @@ public class BugReportHandlerUtil {
 
     private String getCustomBugReportHandlerApp(Context context) {
         // Get the package of custom bugreport handler app
-        return Settings.Global.getString(context.getContentResolver(),
-                Settings.Global.CUSTOM_BUGREPORT_HANDLER_APP);
+        return Settings.Secure.getString(context.getContentResolver(),
+                Settings.Secure.CUSTOM_BUGREPORT_HANDLER_APP);
     }
 
     private int getCustomBugReportHandlerUser(Context context) {
-        return Settings.Global.getInt(context.getContentResolver(),
-                Settings.Global.CUSTOM_BUGREPORT_HANDLER_USER, UserHandle.USER_NULL);
+        return Settings.Secure.getInt(context.getContentResolver(),
+                Settings.Secure.CUSTOM_BUGREPORT_HANDLER_USER, UserHandle.USER_NULL);
     }
 
     private String getDefaultBugReportHandlerApp(Context context) {
@@ -164,22 +164,24 @@ public class BugReportHandlerUtil {
             return validBugReportHandlerApplicationInfos;
         }
 
-        // Add "Shell with system user" as System default preference on top of screen
+        int currentUser = UserHandle.getCallingUserId();
+
+        // Add "Shell" as user's default preference on top of screen
         if (bugreportAllowlistedPackages.contains(SHELL_APP_PACKAGE)
                 && !getBugReportHandlerAppReceivers(context, SHELL_APP_PACKAGE,
-                UserHandle.USER_SYSTEM).isEmpty()) {
+                currentUser).isEmpty()) {
             try {
                 validBugReportHandlerApplicationInfos.add(
                         Pair.create(
                                 context.getPackageManager().getApplicationInfo(SHELL_APP_PACKAGE,
-                                        PackageManager.MATCH_ANY_USER), UserHandle.USER_SYSTEM)
+                                     PackageManager.MATCH_ANY_USER), currentUser)
                 );
             } catch (PackageManager.NameNotFoundException e) {
             }
         }
 
         final UserManager userManager = context.getSystemService(UserManager.class);
-        final List<UserInfo> profileList = userManager.getProfiles(UserHandle.getCallingUserId());
+        final List<UserInfo> profileList = userManager.getProfiles(currentUser);
         // Only add non-Shell app as normal preference
         final List<String> nonShellPackageList = bugreportAllowlistedPackages.stream()
                 .filter(pkg -> !SHELL_APP_PACKAGE.equals(pkg)).collect(Collectors.toList());
@@ -228,11 +230,11 @@ public class BugReportHandlerUtil {
 
     private void setBugreportHandlerAppAndUser(Context context, String handlerApp,
             int handlerUser) {
-        Settings.Global.putString(context.getContentResolver(),
-                Settings.Global.CUSTOM_BUGREPORT_HANDLER_APP,
+        Settings.Secure.putString(context.getContentResolver(),
+                Settings.Secure.CUSTOM_BUGREPORT_HANDLER_APP,
                 handlerApp);
-        Settings.Global.putInt(context.getContentResolver(),
-                Settings.Global.CUSTOM_BUGREPORT_HANDLER_USER, handlerUser);
+        Settings.Secure.putInt(context.getContentResolver(),
+                Settings.Secure.CUSTOM_BUGREPORT_HANDLER_USER, handlerUser);
     }
 
     /**

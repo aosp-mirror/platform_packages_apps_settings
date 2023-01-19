@@ -312,6 +312,12 @@
     <!-- Title for the locale picker activity. [CHAR LIMIT=30]-->
     <string name="language_picker_title">Languages</string>
 
+    <!-- Title for category of the locale picker . [CHAR LIMIT=50]-->
+    <string name="language_picker_category_title">Preferred language order</string>
+
+    <!-- Description for indication of current system default language. [CHAR LIMIT=50]-->
+    <string name="desc_current_default_language">System language</string>
+
     <!-- Menu item in the locale menu. Will remove the selected locales. [CHAR LIMIT=30] -->
     <string name="locale_remove_menu">Remove</string>
 
@@ -325,13 +331,13 @@
     <string name="locale_picker_category_title">Preferred Language</string>
 
     <!-- Title for the Apps' locale menu entry [CHAR LIMIT=50]-->
-    <string name="app_locales_picker_menu_title">App Languages</string>
+    <string name="app_locales_picker_menu_title">App languages</string>
 
     <!-- Summary for the app's locale picker activity. [CHAR LIMIT=50]-->
     <string name="app_locale_picker_summary">Set the language for each app</string>
 
     <!-- Title for the App's locale picker activity. [CHAR LIMIT=50]-->
-    <string name="app_locale_picker_title">App Language</string>
+    <string name="app_locale_picker_title">App language</string>
 
     <!-- Category for the suggested app's locales. [CHAR LIMIT=50]-->
     <string name="suggested_app_locales_title">Suggested languages</string>
@@ -353,6 +359,18 @@
 
     <!-- Description for introduction of the locale selection supported of app list [CHAR LIMIT=NONE]-->
     <string name="desc_app_locale_selection_supported">Only apps that support language selection are shown here.</string>
+
+    <!-- Description for the introduction to language picker activity. [CHAR LIMIT=NONE]-->
+    <string name="desc_introduction_of_language_picker">Your system, apps, and websites use the first supported language from your preferred languages.</string>
+
+    <!-- Description for the notice of language picker. [CHAR LIMIT=NONE]-->
+    <string name="desc_notice_of_language_picker">To select a language for each app, go to app language settings.</string>
+
+    <!-- Title for locale helper page [CHAR LIMIT=NONE] -->
+    <string name="desc_locale_helper_footer_general">Learn more about languages</string>
+
+    <!-- Link for Locale helper page. [CHAR LIMIT=NONE]-->
+    <string name="link_locale_picker_footer_learn_more" translatable="false">https://support.google.com/android?p=per_language_app_settings</string>
 
     <!-- Regional Preferences begin -->
     <!-- The title of the menu entry of regional preferences. [CHAR LIMIT=50] -->
@@ -407,7 +425,7 @@
     <string name="dlg_remove_locales_error_message">Keep at least one preferred language</string>
 
     <!-- This text shows in the language picker when the system is not translated into that languages [CHAR LIMIT=80] -->
-    <string name="locale_not_translated">May not be available in some apps</string>
+    <string name="locale_not_translated">Not available as system language</string>
 
     <!-- Label for an accessibility action that moves a language up in the ordered language list [CHAR LIMIT=20] -->
     <string name="action_drag_label_move_up">Move up</string>
@@ -808,6 +826,12 @@
     <string name="security_settings_udfps_enroll_find_sensor_title">How to set up your fingerprint</string>
     <!-- Message shown in fingerprint enrollment dialog to locate the sensor -->
     <string name="security_settings_fingerprint_enroll_find_sensor_message">It\u2019s on the back of your phone. Use your index finger.</string>
+    <!-- Message shown in SFPS enrollment dialog to locate the sensor (tablet) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet">The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the tablet.</string>
+    <!-- Message shown in SFPS enrollment dialog to locate the sensor (device) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device">The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the device.</string>
+    <!-- Message shown in SFPS enrollment dialog to locate the sensor (default) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default">The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the phone.</string>
     <!-- Message shown in UDFPS enrollment dialog to locate the sensor [CHAR LIMIT=NONE]-->
     <string name="security_settings_udfps_enroll_find_sensor_message">The fingerprint sensor is on your screen. You\u2019ll capture your fingerprint on the next screen.</string>
     <!-- Button for starting fingerprint enrollment. [CHAR LIMIT=10]-->
@@ -2397,6 +2421,13 @@
     <string name="sim_preferred_title">Update preferred SIM?</string>
     <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
     <string name="sim_preferred_message"><xliff:g id="new_sim">%1$s</xliff:g> is the only SIM in your device. Do you want to use this SIM for mobile data, calls, and SMS messages?</string>
+
+    <!-- Title for the dialog asking to user to enable auto data switch upon enabling multi-SIM  [CHAR LIMIT=30] -->
+    <string name="enable_auto_data_switch_dialog_title">Switch SIMs automatically?</string>
+    <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
+    <string name="enable_auto_data_switch_dialog_message">Allow your phone to automatically switch to <xliff:g id="backup_carrier" example="T-mobile">%1$s</xliff:g> for mobile data when it has better availability.</string>
+    <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
+    <string name="auto_data_switch_dialog_managed_profile_warning">\n\nCalls, messages, and network traffic may be visible to your organization.</string>
 
     <!-- Instructions telling the user that they entered the wrong SIM PIN for the last time.
          Displayed in a dialog box.  [CHAR LIMIT=100] -->

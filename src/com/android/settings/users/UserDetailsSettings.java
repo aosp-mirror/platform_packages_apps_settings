@@ -307,8 +307,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             mSwitchUserPref.setSelectable(true);
             mSwitchUserPref.setOnPreferenceClickListener(this);
         }
-        //TODO(b/261700461): remove preference for supervised user
-        if (mUserInfo.isMain() || mUserInfo.isGuest() || !UserManager.isMultipleAdminEnabled()) {
+        if (mUserInfo.isMain() || mUserInfo.isGuest() || !UserManager.isMultipleAdminEnabled()
+                || mUserManager.hasUserRestrictionForUser(UserManager.DISALLOW_GRANT_ADMIN,
+                mUserInfo.getUserHandle())) {
             removePreference(KEY_GRANT_ADMIN);
         }
         if (!mUserManager.isAdminUser()) { // non admin users can't remove users and allow calls
