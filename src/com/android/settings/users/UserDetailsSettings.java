@@ -185,9 +185,13 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             enableCallsAndSms(false);
         } else if (preference == mGrantAdminPref) {
             if (Boolean.FALSE.equals(newValue)) {
+                mMetricsFeatureProvider.action(getActivity(),
+                        SettingsEnums.ACTION_REVOKE_ADMIN_FROM_SETTINGS);
                 showDialog(DIALOG_CONFIRM_REVOKE_ADMIN);
                 return false;
             }
+            mMetricsFeatureProvider.action(getActivity(),
+                    SettingsEnums.ACTION_GRANT_ADMIN_FROM_SETTINGS);
             updateUserAdminStatus(true);
         }
         return true;
