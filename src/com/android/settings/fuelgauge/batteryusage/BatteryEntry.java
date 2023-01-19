@@ -558,37 +558,46 @@ public class BatteryEntry {
         String name;
         int iconId;
         switch (powerComponentId) {
-            case BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY:
-                name = context.getResources().getString(R.string.ambient_display_screen_title);
-                iconId = R.drawable.ic_settings_aod;
-                break;
-            case BatteryConsumer.POWER_COMPONENT_BLUETOOTH:
-                name = context.getResources().getString(R.string.power_bluetooth);
-                iconId = R.drawable.ic_settings_bluetooth;
-                break;
-            case BatteryConsumer.POWER_COMPONENT_CAMERA:
-                name = context.getResources().getString(R.string.power_camera);
-                iconId = R.drawable.ic_settings_camera;
-                break;
-            case BatteryConsumer.POWER_COMPONENT_MOBILE_RADIO:
-                name = context.getResources().getString(R.string.power_cell);
-                iconId = R.drawable.ic_cellular_1_bar;
-                break;
-            case BatteryConsumer.POWER_COMPONENT_FLASHLIGHT:
-                name = context.getResources().getString(R.string.power_flashlight);
-                iconId = R.drawable.ic_settings_display;
-                break;
-            case BatteryConsumer.POWER_COMPONENT_PHONE:
-                name = context.getResources().getString(R.string.power_phone);
-                iconId = R.drawable.ic_settings_voice_calls;
-                break;
-            case BatteryConsumer.POWER_COMPONENT_SCREEN:
+            // Please see go/battery-usage-system-component-map
+            case BatteryConsumer.POWER_COMPONENT_SCREEN:  // id: 0
                 name = context.getResources().getString(R.string.power_screen);
                 iconId = R.drawable.ic_settings_display;
                 break;
-            case BatteryConsumer.POWER_COMPONENT_WIFI:
+            case BatteryConsumer.POWER_COMPONENT_CPU:  // id: 1
+                name = context.getResources().getString(R.string.power_cpu);
+                iconId = R.drawable.ic_power_system;
+                break;
+            case BatteryConsumer.POWER_COMPONENT_BLUETOOTH: // id: 2
+                name = context.getResources().getString(R.string.power_bluetooth);
+                iconId = R.drawable.ic_settings_bluetooth;
+                break;
+            case BatteryConsumer.POWER_COMPONENT_CAMERA:  // id: 3
+                name = context.getResources().getString(R.string.power_camera);
+                iconId = R.drawable.ic_settings_camera;
+                break;
+            case BatteryConsumer.POWER_COMPONENT_FLASHLIGHT:  // id: 6
+                name = context.getResources().getString(R.string.power_flashlight);
+                iconId = R.drawable.ic_settings_display;
+                break;
+            case BatteryConsumer.POWER_COMPONENT_MOBILE_RADIO: // id: 8
+                name = context.getResources().getString(R.string.power_cell);
+                iconId = R.drawable.ic_cellular_1_bar;
+                break;
+            case BatteryConsumer.POWER_COMPONENT_GNSS:  // id: 10
+                name = context.getResources().getString(R.string.power_gps);
+                iconId = R.drawable.ic_power_system;
+                break;
+            case BatteryConsumer.POWER_COMPONENT_WIFI:  // id: 11
                 name = context.getResources().getString(R.string.power_wifi);
                 iconId = R.drawable.ic_settings_wireless_no_theme;
+                break;
+            case BatteryConsumer.POWER_COMPONENT_PHONE:  // id: 14
+                name = context.getResources().getString(R.string.power_phone);
+                iconId = R.drawable.ic_settings_voice_calls;
+                break;
+            case BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY:  // id :15
+                name = context.getResources().getString(R.string.ambient_display_screen_title);
+                iconId = R.drawable.ic_settings_aod;
                 break;
             default:
                 Log.w(TAG, "unknown attribute:" + DebugUtils.constantToString(
