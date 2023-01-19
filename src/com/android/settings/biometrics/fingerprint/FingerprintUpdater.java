@@ -96,6 +96,16 @@ public class FingerprintUpdater {
         public void onAcquired(boolean isAcquiredGood) {
             mCallback.onAcquired(isAcquiredGood);
         }
+
+        @Override
+        public void onPointerDown(int sensorId) {
+            mCallback.onPointerDown(sensorId);
+        }
+
+        @Override
+        public void onPointerUp(int sensorId) {
+            mCallback.onPointerUp(sensorId);
+        }
     }
 
     /**
