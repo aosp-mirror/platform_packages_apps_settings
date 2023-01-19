@@ -8712,6 +8712,10 @@
     <string name="usb_use_photo_transfers">PTP</string>
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
+         is for using the device as a Webcam. -->
+    <string name="usb_use_uvc_webcam">Webcam</string>
+    <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
+         select what the USB connection for this device should be used for. This choice
          is for transcoding the files that are transferred via MTP. -->
     <string name="usb_transcode_files">Convert videos to AVC</string>
     <!-- The summary text that appears when the user enables the 'Convert videos to AVC' option for
@@ -8775,6 +8779,8 @@
     <string name="usb_summary_photo_transfers">PTP</string>
     <!-- Settings item summary for USB preference when set to entering MIDI mode [CHAR LIMIT=NONE] -->
     <string name="usb_summary_MIDI">MIDI</string>
+    <!-- Settings item summary for USB preference when set to entering UVC mode [CHAR LIMIT=NONE] -->
+    <string name="usb_summary_UVC">Webcam</string>
     <!-- Settings item summary for USB preference when set to transferring files via MTP
           and powering other device [CHAR LIMIT=NONE] -->
     <string name="usb_summary_file_transfers_power">File transfer and supplying power</string>
@@ -8787,6 +8793,9 @@
     <!-- Settings item summary for USB preference when set to entering MIDI mode
          and powering other device [CHAR LIMIT=NONE] -->
     <string name="usb_summary_MIDI_power">MIDI and supplying power</string>
+    <!-- Settings item summary for USB preference when set to entering UVC mode
+         and powering other device [CHAR LIMIT=NONE] -->
+    <string name="usb_summary_UVC_power">Webcam and supplying power</string>
 
     <!-- Settings item title for background check prefs [CHAR LIMIT=35] -->
     <string name="background_check_pref">Background check</string>

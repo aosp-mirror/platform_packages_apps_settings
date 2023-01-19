@@ -52,6 +52,7 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
         FUNCTIONS_MAP.put(UsbManager.FUNCTION_RNDIS, R.string.usb_use_tethering);
         FUNCTIONS_MAP.put(UsbManager.FUNCTION_MIDI, R.string.usb_use_MIDI);
         FUNCTIONS_MAP.put(UsbManager.FUNCTION_PTP, R.string.usb_use_photo_transfers);
+        FUNCTIONS_MAP.put(UsbManager.FUNCTION_UVC, R.string.usb_use_uvc_webcam);
         FUNCTIONS_MAP.put(UsbManager.FUNCTION_NONE, R.string.usb_use_charging_only);
     }
 
