@@ -71,6 +71,7 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.display.DisplayDensityUtils;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieCompositionFactory;
 import com.airbnb.lottie.LottieProperty;
 import com.airbnb.lottie.model.KeyPath;
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -668,9 +669,12 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     private void configureEnrollmentStage(CharSequence description, @RawRes int lottie) {
         setDescriptionText(description);
-        mIllustrationLottie.setAnimation(lottie);
-        mIllustrationLottie.setVisibility(View.VISIBLE);
-        mIllustrationLottie.playAnimation();
+        LottieCompositionFactory.fromRawRes(this, lottie)
+                .addListener((c) -> {
+                    mIllustrationLottie.setComposition(c);
+                    mIllustrationLottie.setVisibility(View.VISIBLE);
+                    mIllustrationLottie.playAnimation();
+                });
     }
 
     @EnrollStage
