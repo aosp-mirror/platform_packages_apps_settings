@@ -487,7 +487,7 @@ public class BatteryDiffEntry {
 
         @Override
         public Drawable getAppIcon() {
-            return mContext.getDrawable(R.drawable.ic_settings_ethernet);
+            return mContext.getDrawable(R.drawable.ic_settings_battery_usage_others);
         }
 
         @Override
