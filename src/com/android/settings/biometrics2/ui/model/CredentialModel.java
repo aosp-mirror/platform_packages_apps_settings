@@ -82,7 +82,10 @@ public final class CredentialModel {
     @Nullable
     private Long mClearGkPwHandleMillis = null;
 
-    public CredentialModel(@NonNull Bundle bundle, @NonNull Clock clock) {
+    public CredentialModel(@Nullable Bundle bundle, @NonNull Clock clock) {
+        if (bundle == null) {
+            bundle = new Bundle();
+        }
         mUserId = bundle.getInt(Intent.EXTRA_USER_ID, UserHandle.myUserId());
         mSensorId = bundle.getInt(EXTRA_KEY_SENSOR_ID, INVALID_SENSOR_ID);
         mChallenge = bundle.getLong(EXTRA_KEY_CHALLENGE, INVALID_CHALLENGE);

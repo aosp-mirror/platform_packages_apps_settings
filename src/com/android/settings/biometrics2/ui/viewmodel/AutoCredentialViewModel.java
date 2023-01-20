@@ -201,8 +201,7 @@ public class AutoCredentialViewModel extends AndroidViewModel {
         } else {
             bundle = intent.getExtras();
         }
-        mCredentialModel = new CredentialModel(bundle != null ? bundle : new Bundle(),
-                SystemClock.elapsedRealtimeClock());
+        mCredentialModel = new CredentialModel(bundle, SystemClock.elapsedRealtimeClock());
 
         if (DEBUG) {
             Log.d(TAG, "setCredentialModel " + mCredentialModel + ", savedInstanceState exist:"

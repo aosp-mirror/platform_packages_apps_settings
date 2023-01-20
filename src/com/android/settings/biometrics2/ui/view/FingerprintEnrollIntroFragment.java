@@ -163,7 +163,7 @@ public class FingerprintEnrollIntroFragment extends Fragment {
             mIconShield.setVisibility(View.GONE);
         }
         mSecondaryFooterButton.setText(context,
-                mViewModel.getEnrollmentRequest().isAfterSuwOrSuwSuggestedAction()
+                mViewModel.getRequest().isAfterSuwOrSuwSuggestedAction()
                 ? R.string.security_settings_fingerprint_enroll_introduction_cancel
                 : R.string.security_settings_fingerprint_enroll_introduction_no_thanks);
 
@@ -209,14 +209,7 @@ public class FingerprintEnrollIntroFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         mViewModel = new ViewModelProvider(getActivity())
                 .get(FingerprintEnrollIntroViewModel.class);
-        getLifecycle().addObserver(mViewModel);
         super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        getLifecycle().removeObserver(mViewModel);
-        super.onDetach();
     }
 
     @NonNull
