@@ -641,6 +641,7 @@ public class FingerprintSettings extends SubSettings {
             if (mAuthenticateSidecar != null) {
                 mAuthenticateSidecar.setListener(null);
                 mAuthenticateSidecar.stopAuthentication();
+                mHandler.removeCallbacks(mFingerprintLockoutReset);
             }
         }
 
