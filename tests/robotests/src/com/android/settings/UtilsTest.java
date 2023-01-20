@@ -46,6 +46,7 @@ import android.net.LinkProperties;
 import android.net.Network;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
@@ -298,5 +299,44 @@ public class UtilsTest {
         when(mPackageManager.getPackagesForUid(USER_ID)).thenReturn(new String[]{PACKAGE_NAME});
 
         assertThat(Utils.isSettingsIntelligence(mContext)).isFalse();
+    }
+
+    @Test
+    public void canCurrentUserDream_isMainUser_returnTrue() {
+        Context mockContext = mock(Context.class);
+        UserManager mockUserManager = mock(UserManager.class);
+
+        when(mockContext.getSystemService(UserManager.class)).thenReturn(mockUserManager);
+
+        // mock MainUser
+        UserHandle mainUser = new UserHandle(10);
+        when(mockUserManager.getMainUser()).thenReturn(mainUser);
+        when(mockUserManager.isUserForeground()).thenReturn(true);
+
+        when(mockContext.createContextAsUser(mainUser, 0)).thenReturn(mockContext);
+
+        assertThat(Utils.canCurrentUserDream(mockContext)).isTrue();
+    }
+
+    @Test
+    public void canCurrentUserDream_nullMainUser_returnFalse() {
+        Context mockContext = mock(Context.class);
+        UserManager mockUserManager = mock(UserManager.class);
+
+        when(mockContext.getSystemService(UserManager.class)).thenReturn(mockUserManager);
+        when(mockUserManager.getMainUser()).thenReturn(null);
+
+        assertThat(Utils.canCurrentUserDream(mockContext)).isFalse();
+    }
+
+    @Test
+    public void canCurrentUserDream_notMainUser_returnFalse() {
+        Context mockContext = mock(Context.class);
+        UserManager mockUserManager = mock(UserManager.class);
+
+        when(mockContext.getSystemService(UserManager.class)).thenReturn(mockUserManager);
+        when(mockUserManager.isUserForeground()).thenReturn(false);
+
+        assertThat(Utils.canCurrentUserDream(mockContext)).isFalse();
     }
 }

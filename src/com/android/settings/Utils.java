@@ -1277,4 +1277,16 @@ public final class Utils extends com.android.settingslib.Utils {
         }
         return -1;
     }
+
+    /**
+     * Returns if the current user is able to use Dreams.
+     */
+    public static boolean canCurrentUserDream(Context context) {
+        final UserHandle mainUser = context.getSystemService(UserManager.class).getMainUser();
+        if (mainUser == null) {
+            return false;
+        }
+        return context.createContextAsUser(mainUser, 0).getSystemService(UserManager.class)
+               .isUserForeground();
+    }
 }
