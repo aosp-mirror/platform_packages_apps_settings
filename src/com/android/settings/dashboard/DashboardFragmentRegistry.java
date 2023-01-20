@@ -23,6 +23,7 @@ import com.android.settings.LegalSettings;
 import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.accounts.AccountDetailDashboardFragment;
 import com.android.settings.applications.AppDashboardFragment;
+import com.android.settings.applications.specialaccess.SpecialAccessSettings;
 import com.android.settings.communal.CommunalDashboardFragment;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
@@ -129,6 +130,8 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_SMART_BATTERY_SETTINGS);
         PARENT_TO_CATEGORY_KEY_MAP.put(CommunalDashboardFragment.class.getName(),
                 CategoryKey.CATEGORY_COMMUNAL_SETTINGS);
+        PARENT_TO_CATEGORY_KEY_MAP.put(SpecialAccessSettings.class.getName(),
+                CategoryKey.CATEGORY_SPECIAL_APP_ACCESS);
 
         CATEGORY_KEY_TO_PARENT_MAP = new ArrayMap<>(PARENT_TO_CATEGORY_KEY_MAP.size());
 
