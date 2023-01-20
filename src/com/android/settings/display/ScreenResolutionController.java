@@ -17,9 +17,7 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.graphics.Point;
 import android.hardware.display.DisplayManager;
-import android.util.Log;
 import android.view.Display;
 
 import androidx.annotation.VisibleForTesting;
@@ -27,63 +25,32 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 /** Controller that switch the screen resolution. */
 public class ScreenResolutionController extends BasePreferenceController {
-    private static final String TAG = "ScreenResolutionController";
-    static final int HIGHRESOLUTION_IDX = 0;
-    static final int FULLRESOLUTION_IDX = 1;
+
+    static final int FHD_WIDTH = 1080;
+    static final int QHD_WIDTH = 1440;
 
     private Display mDisplay;
-    private Set<Point> mSupportedResolutions = null;
-    private int mHighWidth = 0;
-    private int mFullWidth = 0;
-    private int mHighHeight = 0;
-    private int mFullHeight = 0;
 
     public ScreenResolutionController(Context context, String key) {
         super(context, key);
 
         mDisplay =
                 mContext.getSystemService(DisplayManager.class).getDisplay(Display.DEFAULT_DISPLAY);
-
-        initSupportedResolutionData();
     }
 
-    /**
-     * Initialize the resolution data. So far, we support two resolution switching. Save the width
-     * and the height for high resolution and full resolution.
-     */
-    private void initSupportedResolutionData() {
-        // Collect and filter the resolutions
-        Set<Point> resolutions = new HashSet<>();
+    /** Check if the width is supported by the display. */
+    private boolean isSupportedMode(int width) {
         for (Display.Mode mode : getSupportedModes()) {
-            resolutions.add(new Point(mode.getPhysicalWidth(), mode.getPhysicalHeight()));
+            if (mode.getPhysicalWidth() == width) return true;
         }
-        mSupportedResolutions = resolutions;
-
-        // Get the width and height for high resolution and full resolution
-        List<Point> resolutionList = new ArrayList<>(resolutions);
-        if (resolutionList == null || resolutionList.size() != 2) {
-            Log.e(TAG, "No support");
-            return;
-        }
-
-        Collections.sort(resolutionList, (p1, p2) -> p1.x * p1.y - p2.x * p2.y);
-        mHighWidth = resolutionList.get(HIGHRESOLUTION_IDX).x;
-        mHighHeight = resolutionList.get(HIGHRESOLUTION_IDX).y;
-        mFullWidth = resolutionList.get(FULLRESOLUTION_IDX).x;
-        mFullHeight = resolutionList.get(FULLRESOLUTION_IDX).y;
+        return false;
     }
 
     /** Return true if the device contains two (or more) resolutions. */
     protected boolean checkSupportedResolutions() {
-        return getHighWidth() != 0 && getFullWidth() != 0;
+        return isSupportedMode(FHD_WIDTH) && isSupportedMode(QHD_WIDTH);
     }
 
     @Override
@@ -94,41 +61,18 @@ public class ScreenResolutionController extends BasePreferenceController {
     @Override
     public CharSequence getSummary() {
         String summary = null;
-        int width = getDisplayWidth();
-        if (width == mHighWidth) {
-            summary = mContext.getString(R.string.screen_resolution_option_high);
-        } else if (width == mFullWidth) {
-            summary = mContext.getString(R.string.screen_resolution_option_full);
-        } else {
-            summary = mContext.getString(R.string.screen_resolution_title);
+        switch (getDisplayWidth()) {
+            case FHD_WIDTH:
+                summary = mContext.getString(R.string.screen_resolution_summary_high);
+                break;
+            case QHD_WIDTH:
+                summary = mContext.getString(R.string.screen_resolution_summary_highest);
+                break;
+            default:
+                summary = mContext.getString(R.string.screen_resolution_title);
         }
 
         return summary;
-    }
-
-    /** Return all supported resolutions of the device. */
-    public Set<Point> getAllSupportedResolutions() {
-        return this.mSupportedResolutions;
-    }
-
-    /** Return the high resolution width of the device. */
-    public int getHighWidth() {
-        return this.mHighWidth;
-    }
-
-    /** Return the full resolution width of the device. */
-    public int getFullWidth() {
-        return this.mFullWidth;
-    }
-
-    /** Return the high resolution height of the device. */
-    public int getHighHeight() {
-        return this.mHighHeight;
-    }
-
-    /** Return the full resolution height of the device. */
-    public int getFullHeight() {
-        return this.mFullHeight;
     }
 
     @VisibleForTesting

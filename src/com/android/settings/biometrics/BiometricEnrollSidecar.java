@@ -45,6 +45,14 @@ public abstract class BiometricEnrollSidecar extends InstrumentedFragment {
          * @param isAcquiredGood whether the fingerprint image was good.
          */
         default void onAcquired(boolean isAcquiredGood) { }
+        /**
+         * Called when a pointer down event has occurred.
+         */
+        default void onPointerDown(int sensorId) { }
+        /**
+         * Called when a pointer up event has occurred.
+         */
+        default void onPointerUp(int sensorId) { }
     }
 
     private int mEnrollmentSteps = -1;
@@ -115,6 +123,32 @@ public abstract class BiometricEnrollSidecar extends InstrumentedFragment {
         @Override
         public void send(Listener listener) {
             listener.onAcquired(isAcquiredGood);
+        }
+    }
+
+    private class QueuedPointerDown extends QueuedEvent {
+        private final int sensorId;
+
+        public QueuedPointerDown(int sensorId) {
+            this.sensorId = sensorId;
+        }
+
+        @Override
+        public void send(Listener listener) {
+            listener.onPointerDown(sensorId);
+        }
+    }
+
+    private class QueuedPointerUp extends QueuedEvent {
+        private final int sensorId;
+
+        public QueuedPointerUp(int sensorId) {
+            this.sensorId = sensorId;
+        }
+
+        @Override
+        public void send(Listener listener) {
+            listener.onPointerUp(sensorId);
         }
     }
 
@@ -212,6 +246,22 @@ public abstract class BiometricEnrollSidecar extends InstrumentedFragment {
             mListener.onAcquired(isAcquiredGood);
         } else {
             mQueuedEvents.add(new QueuedAcquired(isAcquiredGood));
+        }
+    }
+
+    protected void onPointerDown(int sensorId) {
+        if (mListener != null) {
+            mListener.onPointerDown(sensorId);
+        } else {
+            mQueuedEvents.add(new QueuedPointerDown(sensorId));
+        }
+    }
+
+    protected void onPointerUp(int sensorId) {
+        if (mListener != null) {
+            mListener.onPointerUp(sensorId);
+        } else {
+            mQueuedEvents.add(new QueuedPointerUp(sensorId));
         }
     }
 
