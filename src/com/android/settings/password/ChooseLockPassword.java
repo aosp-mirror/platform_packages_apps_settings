@@ -71,6 +71,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.CheckBox;
 import android.widget.ImeAwareEditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
@@ -101,7 +102,9 @@ import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ChooseLockPassword extends SettingsActivity {
     private static final String TAG = "ChooseLockPassword";
@@ -223,6 +226,8 @@ public class ChooseLockPassword extends SettingsActivity {
         private static final String KEY_CURRENT_CREDENTIAL = "current_credential";
         private static final String FRAGMENT_TAG_SAVE_AND_FINISH = "save_and_finish_worker";
 
+        private static final int MIN_AUTO_PIN_REQUIREMENT_LENGTH = 6;
+
         private LockscreenCredential mCurrentCredential;
         private LockscreenCredential mChosenPassword;
         private boolean mRequestGatekeeperPassword;
@@ -255,6 +260,9 @@ public class ChooseLockPassword extends SettingsActivity {
         protected FooterButton mSkipOrClearButton;
         private FooterButton mNextButton;
         private TextView mMessage;
+        protected CheckBox mAutoPinConfirmOption;
+        protected TextView mAutoConfirmSecurityMessage;
+        protected boolean mIsAutoPinConfirmOptionSetManually;
 
         private TextChangedHandler mTextChangedHandler;
 
@@ -514,6 +522,16 @@ public class ChooseLockPassword extends SettingsActivity {
             mPasswordEntry.addTextChangedListener(this);
             mPasswordEntry.requestFocus();
             mPasswordEntryInputDisabler = new TextViewInputDisabler(mPasswordEntry);
+
+            // Fetch the AutoPinConfirmOption
+            mAutoPinConfirmOption = view.findViewById(R.id.auto_pin_confirm_enabler);
+            mAutoConfirmSecurityMessage = view.findViewById(R.id.auto_pin_confirm_security_message);
+            mIsAutoPinConfirmOptionSetManually = false;
+            setOnAutoConfirmOptionClickListener();
+            if (mAutoPinConfirmOption != null) {
+                mAutoPinConfirmOption.setVisibility(View.GONE);
+                mAutoPinConfirmOption.setChecked(false);
+            }
 
             final Activity activity = getActivity();
 
@@ -808,10 +826,22 @@ public class ChooseLockPassword extends SettingsActivity {
                                 R.string.lockpassword_password_requires_nonnumerical));
                         break;
                     case TOO_SHORT:
-                        messages.add(StringUtil.getIcuPluralsString(getContext(), error.requirement,
+                        String message = StringUtil.getIcuPluralsString(getContext(),
+                                error.requirement,
                                 mIsAlphaMode
                                         ? R.string.lockpassword_password_too_short
-                                        : R.string.lockpassword_pin_too_short));
+                                        : R.string.lockpassword_pin_too_short);
+                        if (mLockPatternUtils.isAutoPinConfirmFeatureAvailable()
+                                && !mIsAlphaMode
+                                && error.requirement < MIN_AUTO_PIN_REQUIREMENT_LENGTH) {
+                            Map<String, Object> arguments = new HashMap<>();
+                            arguments.put("count", error.requirement);
+                            arguments.put("minAutoConfirmLen", MIN_AUTO_PIN_REQUIREMENT_LENGTH);
+                            message = StringUtil.getIcuPluralsString(getContext(),
+                                    arguments,
+                                    R.string.lockpassword_pin_too_short_autoConfirm_extra_message);
+                        }
+                        messages.add(message);
                         break;
                     case TOO_SHORT_WHEN_ALL_NUMERIC:
                         messages.add(
@@ -864,6 +894,8 @@ public class ChooseLockPassword extends SettingsActivity {
                 String[] messages = convertErrorCodeToMessages();
                 // Update the fulfillment of requirements.
                 mPasswordRequirementAdapter.setRequirements(messages);
+                // set the visibility of pin_auto_confirm option accordingly
+                setAutoPinConfirmOption(passwordCompliant, length);
                 // Enable/Disable the next button accordingly.
                 setNextEnabled(passwordCompliant);
             } else {
@@ -894,6 +926,36 @@ public class ChooseLockPassword extends SettingsActivity {
 
         protected int toVisibility(boolean visibleOrGone) {
             return visibleOrGone ? View.VISIBLE : View.GONE;
+        }
+
+        private void setAutoPinConfirmOption(boolean enabled, int length) {
+            if (!mLockPatternUtils.isAutoPinConfirmFeatureAvailable()
+                    || mAutoPinConfirmOption == null) {
+                return;
+            }
+            if (enabled && !mIsAlphaMode && isAutoPinConfirmPossible(length)) {
+                mAutoPinConfirmOption.setVisibility(View.VISIBLE);
+                mAutoConfirmSecurityMessage.setVisibility(View.VISIBLE);
+                if (!mIsAutoPinConfirmOptionSetManually) {
+                    mAutoPinConfirmOption.setChecked(length == MIN_AUTO_PIN_REQUIREMENT_LENGTH);
+                }
+            } else {
+                mAutoPinConfirmOption.setVisibility(View.GONE);
+                mAutoConfirmSecurityMessage.setVisibility(View.GONE);
+                mAutoPinConfirmOption.setChecked(false);
+            }
+        }
+
+        private boolean isAutoPinConfirmPossible(int currentPinLength) {
+            return currentPinLength >= MIN_AUTO_PIN_REQUIREMENT_LENGTH;
+        }
+
+        private void setOnAutoConfirmOptionClickListener() {
+            if (mAutoPinConfirmOption != null) {
+                mAutoPinConfirmOption.setOnClickListener((v) -> {
+                    mIsAutoPinConfirmOptionSetManually = true;
+                });
+            }
         }
 
         private void setHeaderText(String text) {
@@ -951,6 +1013,10 @@ public class ChooseLockPassword extends SettingsActivity {
             }
             mSaveAndFinishWorker.start(mLockPatternUtils, mRequestGatekeeperPassword,
                     mChosenPassword, mCurrentCredential, mUserId);
+            // update the pin_auto_confirm setting accordingly.
+            mLockPatternUtils.setAutoPinConfirm(
+                    (mAutoPinConfirmOption != null && mAutoPinConfirmOption.isChecked()),
+                    mUserId);
         }
 
         @Override
