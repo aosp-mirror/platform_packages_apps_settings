@@ -16,7 +16,6 @@
 
 package com.android.settings.spa.app.appinfo
 
-import android.app.Activity
 import android.app.settings.SettingsEnums
 import android.content.pm.ApplicationInfo
 import androidx.compose.material.icons.Icons
@@ -60,7 +59,8 @@ class AppCreateButton(packageInfoPresenter: PackageInfoPresenter) {
                 enabledState.value = false
                 val result = installCloneApp(app, cloneBackend)
                 if (result == CloneBackend.SUCCESS) {
-                    navController.navigate(getRoute(app.packageName, cloneBackend.cloneUserId))
+                    navController.navigate(getRoute(app.packageName, cloneBackend.cloneUserId),
+                            /* popUpCurrent*/ true)
                 } else {
                     enabledState.value = true
                 }
