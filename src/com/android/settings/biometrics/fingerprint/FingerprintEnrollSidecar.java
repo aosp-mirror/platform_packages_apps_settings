@@ -122,6 +122,16 @@ public class FingerprintEnrollSidecar extends BiometricEnrollSidecar {
         public void onEnrollmentError(int errMsgId, CharSequence errString) {
             FingerprintEnrollSidecar.super.onEnrollmentError(errMsgId, errString);
         }
+
+        @Override
+        public void onPointerDown(int sensorId) {
+            FingerprintEnrollSidecar.super.onPointerDown(sensorId);
+        }
+
+        @Override
+        public void onPointerUp(int sensorId) {
+            FingerprintEnrollSidecar.super.onPointerUp(sensorId);
+        }
     };
 
     @Override

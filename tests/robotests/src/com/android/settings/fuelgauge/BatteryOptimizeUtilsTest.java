@@ -31,6 +31,7 @@ import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
@@ -150,8 +151,9 @@ public class BatteryOptimizeUtilsTest {
     @Test
     public void testSetAppUsageState_Restricted_verifyAction() throws Exception {
         // Sets the current mode as MODE_UNRESTRICTED.
-        mBatteryOptimizeUtils.mAllowListed = false;
-        mBatteryOptimizeUtils.mMode = AppOpsManager.MODE_ALLOWED;
+        when(mMockBackend.isAllowlisted(anyString())).thenReturn(true);
+        when(mMockAppOpsManager.checkOpNoThrow(anyInt(), anyInt(), anyString()))
+                .thenReturn(AppOpsManager.MODE_ALLOWED);
 
         mBatteryOptimizeUtils.setAppUsageState(MODE_RESTRICTED, Action.UNKNOWN);
         TimeUnit.SECONDS.sleep(1);
@@ -161,6 +163,12 @@ public class BatteryOptimizeUtilsTest {
 
     @Test
     public void testSetAppUsageState_Unrestricted_verifyAction() throws Exception {
+        // Sets the current mode as MODE_RESTRICTED.
+        when(mMockBackend.isAllowlisted(anyString())).thenReturn(false);
+        when(mMockAppOpsManager.checkOpNoThrow(anyInt(), anyInt(), anyString()))
+                .thenReturn(AppOpsManager.MODE_IGNORED);
+
+
         mBatteryOptimizeUtils.setAppUsageState(MODE_UNRESTRICTED, Action.UNKNOWN);
         TimeUnit.SECONDS.sleep(1);
 
@@ -169,6 +177,11 @@ public class BatteryOptimizeUtilsTest {
 
     @Test
     public void testSetAppUsageState_Optimized_verifyAction() throws Exception {
+        // Sets the current mode as MODE_UNRESTRICTED.
+        when(mMockBackend.isAllowlisted(anyString())).thenReturn(true);
+        when(mMockAppOpsManager.checkOpNoThrow(anyInt(), anyInt(), anyString()))
+                .thenReturn(AppOpsManager.MODE_ALLOWED);
+
         mBatteryOptimizeUtils.setAppUsageState(MODE_OPTIMIZED, Action.UNKNOWN);
         TimeUnit.SECONDS.sleep(1);
 
@@ -178,14 +191,16 @@ public class BatteryOptimizeUtilsTest {
     @Test
     public void testSetAppUsageState_sameUnrestrictedMode_verifyNoAction() throws Exception {
         // Sets the current mode as MODE_UNRESTRICTED.
-        mBatteryOptimizeUtils.mAllowListed = true;
-        mBatteryOptimizeUtils.mMode = AppOpsManager.MODE_ALLOWED;
+        when(mMockBackend.isAllowlisted(anyString())).thenReturn(true);
+        when(mMockAppOpsManager.checkOpNoThrow(anyInt(), anyInt(), anyString()))
+                .thenReturn(AppOpsManager.MODE_ALLOWED);
 
         mBatteryOptimizeUtils.setAppUsageState(MODE_UNRESTRICTED, Action.UNKNOWN);
         TimeUnit.SECONDS.sleep(1);
 
-        verifyNoInteractions(mMockBackend);
-        verifyNoInteractions(mMockBatteryUtils);
+        verify(mMockBatteryUtils, never()).setForceAppStandby(anyInt(), anyString(), anyInt());
+        verify(mMockBackend, never()).addApp(anyString());
+        verify(mMockBackend, never()).removeApp(anyString());
     }
 
     @Test

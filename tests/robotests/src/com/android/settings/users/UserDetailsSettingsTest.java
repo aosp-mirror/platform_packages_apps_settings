@@ -700,6 +700,16 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
+    public void initialize_restrictUserSelected_shouldNotShowGrantAdminPref_MultipleAdminEnabled() {
+        setupSelectedUser();
+        ShadowUserManager.setIsMultipleAdminEnabled(true);
+        mUserManager.setUserRestriction(mUserInfo.getUserHandle(),
+                UserManager.DISALLOW_GRANT_ADMIN, true);
+        mFragment.initialize(mActivity, mArguments);
+        verify(mFragment).removePreference(KEY_GRANT_ADMIN);
+    }
+
+    @Test
     public void initialize_mainUserSelected_shouldShowGrantAdminPref_MultipleAdminEnabled() {
         setupSelectedMainUser();
         ShadowUserManager.setIsMultipleAdminEnabled(true);

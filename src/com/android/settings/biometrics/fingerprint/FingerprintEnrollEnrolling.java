@@ -82,6 +82,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieCompositionFactory;
 import com.airbnb.lottie.LottieProperty;
 import com.airbnb.lottie.model.KeyPath;
+import com.google.android.setupcompat.template.FooterActionButton;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -101,6 +102,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     private static final String TAG = "FingerprintEnrollEnrolling";
     static final String TAG_SIDECAR = "sidecar";
+    static final String TAG_UDFPS_HELPER = "udfps_helper";
     static final String KEY_STATE_CANCELED = "is_canceled";
     static final String KEY_STATE_PREVIOUS_ROTATION = "previous_rotation";
 
@@ -352,6 +354,24 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                         .setTheme(R.style.SudGlifButton_Secondary)
                         .build()
         );
+
+        if (FeatureFlagUtils.isEnabled(getApplicationContext(),
+                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS)) {
+            // Remove the space view and make the width of footer button container WRAP_CONTENT
+            // to avoid hiding the udfps view progress bar bottom.
+            final LinearLayout buttonContainer = mFooterBarMixin.getButtonContainer();
+            View spaceView = null;
+            for (int i = 0; i < buttonContainer.getChildCount(); i++) {
+                if (!(buttonContainer.getChildAt(i) instanceof FooterActionButton)) {
+                    spaceView = buttonContainer.getChildAt(i);
+                    break;
+                }
+            }
+            if (spaceView != null) {
+                spaceView.setVisibility(View.GONE);
+                buttonContainer.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
+            }
+        }
 
         final LayerDrawable fingerprintDrawable = mProgressBar != null
                 ? (LayerDrawable) mProgressBar.getBackground() : null;
@@ -867,6 +887,20 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         }
     }
 
+    @Override
+    public void onPointerDown(int sensorId) {
+        if (mUdfpsEnrollHelper != null) {
+            mUdfpsEnrollHelper.onPointerDown(sensorId);
+        }
+    }
+
+    @Override
+    public void onPointerUp(int sensorId) {
+        if (mUdfpsEnrollHelper != null) {
+            mUdfpsEnrollHelper.onPointerUp(sensorId);
+        }
+    }
+
     private void updateProgress(boolean animate) {
         if (mSidecar == null || !mSidecar.isEnrolling()) {
             Log.d(TAG, "Enrollment not started yet");
@@ -1195,7 +1229,16 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                 udfpsProps.sensorType == FingerprintSensorProperties.TYPE_UDFPS_OPTICAL);
 
         udfpsEnrollView.setOverlayParams(params);
-        mUdfpsEnrollHelper = new UdfpsEnrollHelper(getApplicationContext(), mFingerprintManager);
+
+        mUdfpsEnrollHelper = (UdfpsEnrollHelper) getSupportFragmentManager().findFragmentByTag(
+                FingerprintEnrollEnrolling.TAG_UDFPS_HELPER);
+        if (mUdfpsEnrollHelper == null) {
+            mUdfpsEnrollHelper = new UdfpsEnrollHelper(getApplicationContext(),
+                    mFingerprintManager);
+            getSupportFragmentManager().beginTransaction()
+                    .add(mUdfpsEnrollHelper, FingerprintEnrollEnrolling.TAG_UDFPS_HELPER)
+                    .commitAllowingStateLoss();
+        }
         udfpsEnrollView.setEnrollHelper(mUdfpsEnrollHelper);
 
         return udfpsEnrollView;
