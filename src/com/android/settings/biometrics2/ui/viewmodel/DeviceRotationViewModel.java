@@ -29,17 +29,25 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.android.internal.annotations.VisibleForTesting;
+
 /**
  * ViewModel explaining the fingerprint sensor location for fingerprint enrollment.
  */
 public class DeviceRotationViewModel extends AndroidViewModel {
 
     private static final boolean DEBUG = false;
-    private static final String TAG = "RotationViewModel";
+    private static final String TAG = "DeviceRotationViewModel";
 
     private final DisplayManager mDisplayManager;
+    private final boolean mIsReverseDefaultRotation;
     @NonNull private final DisplayInfo mDisplayInfo = new DisplayInfo();
-    private final DisplayListener mDisplayListener = new DisplayListener() {
+
+    /** {@link android.hardware.display.DisplayManager} is a final class, set this member visibility
+     * to 'protected' for testing
+     */
+    @VisibleForTesting
+    protected final DisplayListener mDisplayListener = new DisplayListener() {
         @Override
         public void onDisplayAdded(int displayId) {
         }
@@ -58,29 +66,43 @@ public class DeviceRotationViewModel extends AndroidViewModel {
         }
     };
 
-    @NonNull private final MutableLiveData<Integer> mLiveData =
-            new MutableLiveData<>(getRotation());
+    @NonNull private final MutableLiveData<Integer> mLiveData = new MutableLiveData<>();
 
     public DeviceRotationViewModel(@NonNull Application application) {
         super(application);
         mDisplayManager = application.getSystemService(DisplayManager.class);
         mDisplayManager.registerDisplayListener(mDisplayListener,
                 application.getMainThreadHandler());
+        mIsReverseDefaultRotation = application.getResources().getBoolean(
+                com.android.internal.R.bool.config_reverseDefaultRotation);
     }
 
     /**
-     * Returns current rotation
+     * Returns current rotation.
+     *
+     * {@link android.view.Display} is a final class, set this method visibility to "protected" for
+     * inheriting it in test
      */
+    @VisibleForTesting
     @Surface.Rotation
-    private int getRotation() {
+    protected int getRotation() {
         getApplication().getDisplay().getDisplayInfo(mDisplayInfo);
-        return mDisplayInfo.rotation;
+        if (mIsReverseDefaultRotation) {
+            return (mDisplayInfo.rotation + 1) % 4;
+        } else {
+            return mDisplayInfo.rotation;
+        }
     }
 
     /**
      * Returns RotationLiveData
      */
     public LiveData<Integer> getLiveData() {
+        if (mLiveData.getValue() == null) {
+            // Init data here because if we set it through getDisplay().getRotation() or through
+            // getDisplay().getDisplayInfo() in constructor(), we always get incorrect value.
+            mLiveData.setValue(getRotation());
+        }
         return mLiveData;
     }
 

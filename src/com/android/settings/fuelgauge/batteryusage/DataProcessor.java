@@ -53,7 +53,6 @@ import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.fuelgauge.BatteryStatus;
-import com.android.settingslib.spaprivileged.model.app.AppListConfig;
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryUtil;
 
 import java.time.Duration;
@@ -1902,8 +1901,7 @@ public final class DataProcessor {
 
     private static Set<String> getSystemAppsSet(Context context) {
         return sFakeSystemAppsSet != null ? sFakeSystemAppsSet
-                : AppListRepositoryUtil.getSystemPackageNames(context,
-                        new AppListConfig(context.getUserId(), false));
+                : AppListRepositoryUtil.getSystemPackageNames(context, context.getUserId(), false);
     }
 
     private static long getCurrentTimeMillis() {

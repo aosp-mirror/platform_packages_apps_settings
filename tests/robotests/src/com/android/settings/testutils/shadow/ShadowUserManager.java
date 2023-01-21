@@ -263,4 +263,11 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
         }
         return isSuccess;
     }
+
+    @Implementation
+    protected void setUserAdmin(@UserIdInt int userId) {
+        for (int i = 0; i < mUserProfileInfos.size(); i++) {
+            mUserProfileInfos.get(i).flags |= UserInfo.FLAG_ADMIN;
+        }
+    }
 }

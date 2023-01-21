@@ -25,7 +25,6 @@ import android.hardware.fingerprint.FingerprintManager.EnrollReason;
 import android.hardware.fingerprint.FingerprintManager.EnrollmentCallback;
 import android.os.CancellationSignal;
 import android.os.SystemClock;
-import android.os.UserHandle;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -58,7 +57,7 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
             new MutableLiveData<>();
 
     private byte[] mToken = null;
-    private int mUserId = UserHandle.myUserId();
+    private final int mUserId;
 
     private final FingerprintUpdater mFingerprintUpdater;
     private final MessageDisplayController mMessageDisplayController;
@@ -90,9 +89,11 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
     };
 
     public FingerprintEnrollProgressViewModel(@NonNull Application application,
-            @NonNull FingerprintUpdater fingerprintUpdater) {
+            @NonNull FingerprintUpdater fingerprintUpdater, int userId) {
         super(application);
         mFingerprintUpdater = fingerprintUpdater;
+        mUserId = userId;
+
         final Resources res = application.getResources();
         mMessageDisplayController =
                 res.getBoolean(R.bool.enrollment_message_display_controller_flag)
@@ -110,10 +111,6 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
 
     public void setToken(byte[] token) {
         mToken = token;
-    }
-
-    public void setUserId(int userId) {
-        mUserId = userId;
     }
 
     /**

@@ -62,18 +62,12 @@ public class FingerprintEnrollFindSensorViewModel extends AndroidViewModel {
 
     private final AccessibilityManager mAccessibilityManager;
 
-    private boolean mIsSuw = false;
+    private final boolean mIsSuw;
     @NonNull private final MutableLiveData<Integer> mActionLiveData = new MutableLiveData<>();
 
-    public FingerprintEnrollFindSensorViewModel(@NonNull Application application) {
+    public FingerprintEnrollFindSensorViewModel(@NonNull Application application, boolean isSuw) {
         super(application);
         mAccessibilityManager = application.getSystemService(AccessibilityManager.class);
-    }
-
-    /**
-     * Sets isSetupWizard or not
-     */
-    public void setIsSuw(boolean isSuw) {
         mIsSuw = isSuw;
     }
 
