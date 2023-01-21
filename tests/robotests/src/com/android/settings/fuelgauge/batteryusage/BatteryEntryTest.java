@@ -317,30 +317,36 @@ public class BatteryEntryTest {
 
     @Test
     public void getNameAndIconFromPowerComponent_rerturnExpectedNameAndIcon() {
-        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY,
-                R.string.ambient_display_screen_title,
-                R.drawable.ic_settings_aod);
+        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_SCREEN,
+                R.string.power_screen,
+                R.drawable.ic_settings_display);
+        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_CPU,
+                R.string.power_cpu,
+                R.drawable.ic_power_system);
         assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_BLUETOOTH,
                 R.string.power_bluetooth,
                 R.drawable.ic_settings_bluetooth);
         assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_CAMERA,
                 R.string.power_camera,
                 R.drawable.ic_settings_camera);
-        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_MOBILE_RADIO,
-                R.string.power_cell,
-                R.drawable.ic_cellular_1_bar);
         assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_FLASHLIGHT,
                 R.string.power_flashlight,
                 R.drawable.ic_settings_display);
-        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_PHONE,
-                R.string.power_phone,
-                R.drawable.ic_settings_voice_calls);
-        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_SCREEN,
-                R.string.power_screen,
-                R.drawable.ic_settings_display);
+        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_MOBILE_RADIO,
+                R.string.power_cell,
+                R.drawable.ic_cellular_1_bar);
+        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_GNSS,
+                R.string.power_gps,
+                R.drawable.ic_power_system);
         assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_WIFI,
                 R.string.power_wifi,
                 R.drawable.ic_settings_wireless_no_theme);
+        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_PHONE,
+                R.string.power_phone,
+                R.drawable.ic_settings_voice_calls);
+        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY,
+                R.string.ambient_display_screen_title,
+                R.drawable.ic_settings_aod);
     }
 
     private void assertNameAndIcon(String name, int stringId) {

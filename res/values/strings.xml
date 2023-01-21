@@ -4242,6 +4242,12 @@
     <string name="accessibility_disable_animations">Remove animations</string>
     <!-- Summary for the accessibility preference for disabling animations. [CHAR LIMIT=60] -->
     <string name="accessibility_disable_animations_summary">Reduce movement on the screen</string>
+    <!-- Title for the accessibility preference for the contrast level slider. [CHAR LIMIT=35] -->
+    <string name="accessibility_contrast_level_title">Contrast Level</string>
+    <!-- 'Low' text at the left of the contrast level slider. [CHAR LIMIT=20] -->
+    <string name="accessibility_contrast_level_left_label">Standard</string>
+    <!-- 'High' text at the right of the contrast level slider. [CHAR LIMIT=20] -->
+    <string name="accessibility_contrast_level_right_label">High</string>
     <!-- Title for the accessibility preference for primary mono. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_primary_mono_title">Mono audio</string>
     <!-- Summary for the accessibility preference for primary mono. [CHAR LIMIT=60] -->
@@ -5032,10 +5038,14 @@
 
     <!-- Label for power consumed by the screen -->
     <string name="power_screen">Screen</string>
+    <!-- Label for power consumed by the CPU -->
+    <string name="power_cpu">CPU</string>
     <!-- Label for power consumed by the flashlight -->
     <string name="power_flashlight">Flashlight</string>
     <!-- Label for power consumed by the camera -->
     <string name="power_camera">Camera</string>
+    <!-- Label for power consumed by the GPS -->
+    <string name="power_gps">GPS</string>
     <!-- Label for power consumed by Wi-Fi -->
     <string name="power_wifi">Wi\u2011Fi</string>
     <!-- Label for power consumed by Bluetooth -->
@@ -7365,6 +7375,12 @@
     <!-- Configure Notifications: Title for the option controlling notifications for work profile. [CHAR LIMIT=30] -->
     <string name="locked_work_profile_notification_title">When work profile is locked</string>
 
+    <!-- Configure notifications: Title for the option controlling whether only new notifications are displayed to the user
+    on the lock screen [CHAR LIMIT=60] -->
+    <string name="unseen_notifs_lock_screen">Show only new notifications on lock screen</string>
+
+    <!-- Configure notifications: Summary for option of showing only new notifications on the lock screen. [CHAR LIMIT=100] -->
+    <string name="unseen_notifs_lock_screen_summary">After each unlock, remove existing notifications from the lock screen</string>
 
     <!-- Configure notifications: Title for determining which notifications appear on the lock screen [CHAR LIMIT=60] -->
     <string name="lock_screen_notifs_title">Notifications on lock screen</string>

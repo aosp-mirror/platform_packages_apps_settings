@@ -33,7 +33,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -47,8 +46,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * Fingerprint enrollment view model implementation
  */
-public class FingerprintEnrollmentViewModel extends AndroidViewModel implements
-        DefaultLifecycleObserver {
+public class FingerprintEnrollmentViewModel extends AndroidViewModel {
 
     private static final String TAG = "FingerprintEnrollmentViewModel";
 
@@ -60,32 +58,23 @@ public class FingerprintEnrollmentViewModel extends AndroidViewModel implements
 
     private final AtomicBoolean mIsWaitingActivityResult = new AtomicBoolean(false);
     private final MutableLiveData<ActivityResult> mSetResultLiveData = new MutableLiveData<>();
-
-    /**
-     * Even this variable may be nullable, but activity will call setIntent() immediately during
-     * its onCreate(), we do not assign @Nullable for this variable here.
-     */
-    private EnrollmentRequest mRequest = null;
+    @NonNull private final EnrollmentRequest mRequest;
 
     public FingerprintEnrollmentViewModel(
             @NonNull Application application,
             @NonNull FingerprintRepository fingerprintRepository,
-            @Nullable KeyguardManager keyguardManager) {
+            @Nullable KeyguardManager keyguardManager,
+            @NonNull EnrollmentRequest request) {
         super(application);
         mFingerprintRepository = fingerprintRepository;
         mKeyguardManager = keyguardManager;
-    }
-
-    /**
-     * Set EnrollmentRequest
-     */
-    public void setRequest(@NonNull EnrollmentRequest request) {
         mRequest = request;
     }
 
     /**
      * Get EnrollmentRequest
      */
+    @NonNull
     public EnrollmentRequest getRequest() {
         return mRequest;
     }

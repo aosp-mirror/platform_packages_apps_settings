@@ -725,6 +725,32 @@ public class UserDetailsSettingsTest {
         verify(mFragment).removePreference(KEY_GRANT_ADMIN);
     }
 
+    @Test
+    public void onPreferenceChange_grantAdminClicked_isNotAdmin_shouldLogGrantAdmin() {
+        setupSelectedUser();
+        mFragment.mUserInfo = mUserInfo;
+        mFragment.mGrantAdminPref = mGrantAdminPref;
+        doNothing().when(mFragment).showDialog(anyInt());
+
+        mFragment.onPreferenceChange(mGrantAdminPref, true);
+
+        verify(mMetricsFeatureProvider).action(any(),
+                eq(SettingsEnums.ACTION_GRANT_ADMIN_FROM_SETTINGS));
+    }
+
+    @Test
+    public void onPreferenceChange_grantAdminClicked_isAdmin_shouldLogRevokeAdmin() {
+        setupSelectedAdminUser();
+        mFragment.mUserInfo = mUserInfo;
+        mFragment.mGrantAdminPref = mGrantAdminPref;
+        doNothing().when(mFragment).showDialog(anyInt());
+
+        mFragment.onPreferenceChange(mGrantAdminPref, false);
+
+        verify(mMetricsFeatureProvider).action(any(),
+                eq(SettingsEnums.ACTION_REVOKE_ADMIN_FROM_SETTINGS));
+    }
+
     private void setupSelectedUser() {
         mArguments.putInt("user_id", 1);
         mUserInfo = new UserInfo(1, "Tom", null,
@@ -738,6 +764,15 @@ public class UserDetailsSettingsTest {
         mArguments.putInt("user_id", 11);
         mUserInfo = new UserInfo(11, "Jerry", null,
                 UserInfo.FLAG_FULL | UserInfo.FLAG_INITIALIZED | UserInfo.FLAG_MAIN,
+                UserManager.USER_TYPE_FULL_SECONDARY);
+
+        mUserManager.addProfile(mUserInfo);
+    }
+
+    private void setupSelectedAdminUser() {
+        mArguments.putInt("user_id", 12);
+        mUserInfo = new UserInfo(12, "Andy", null,
+                UserInfo.FLAG_FULL | UserInfo.FLAG_INITIALIZED | UserInfo.FLAG_ADMIN,
                 UserManager.USER_TYPE_FULL_SECONDARY);
 
         mUserManager.addProfile(mUserInfo);

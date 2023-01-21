@@ -75,12 +75,13 @@ public class CloneBackend {
      * dialog to the user and handles actual uninstall.
      */
     void uninstallClonedApp(String packageName, boolean allUsers, FragmentActivity activity) {
-        // Create new intent to launch Uninstaller activity
+        // Create new intent to launch Uninstaller activity.
         Uri packageUri = Uri.parse("package:" + packageName);
         Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri);
         uninstallIntent.putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, allUsers);
         uninstallIntent.putExtra(Intent.EXTRA_USER, UserHandle.of(mCloneUserId));
-        activity.startActivityForResult(uninstallIntent, 0);
+        // Trigger uninstall as clone user.
+        activity.startActivityAsUser(uninstallIntent, UserHandle.of(mCloneUserId));
     }
 
     /**
