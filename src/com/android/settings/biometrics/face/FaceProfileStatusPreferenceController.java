@@ -84,4 +84,9 @@ public class FaceProfileStatusPreferenceController extends FaceStatusPreferenceC
                 mContext.getResources().getString(
                 R.string.security_settings_face_profile_preference_title)));
     }
+
+    @Override
+    protected boolean isWorkProfileController() {
+        return true;
+    }
 }
