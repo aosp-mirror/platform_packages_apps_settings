@@ -21,7 +21,9 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -35,6 +37,7 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
 import android.view.InputDevice;
+import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
 import androidx.preference.Preference;
@@ -49,7 +52,6 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -72,6 +74,8 @@ public class StylusDevicesControllerTest {
 
     @Mock
     private InputMethodManager mImm;
+    @Mock
+    private InputMethodInfo mInputMethodInfo;
     @Mock
     private PackageManager mPm;
     @Mock
@@ -98,6 +102,11 @@ public class StylusDevicesControllerTest {
         when(mContext.getSystemService(InputMethodManager.class)).thenReturn(mImm);
         when(mContext.getSystemService(RoleManager.class)).thenReturn(mRm);
         doNothing().when(mContext).startActivity(any());
+
+        when(mImm.getCurrentInputMethodInfo()).thenReturn(mInputMethodInfo);
+        when(mInputMethodInfo.createStylusHandwritingSettingsActivityIntent())
+                .thenReturn(mock(Intent.class));
+        when(mInputMethodInfo.supportsStylusHandwriting()).thenReturn(true);
 
         when(mRm.getRoleHoldersAsUser(eq(RoleManager.ROLE_NOTES), any(UserHandle.class)))
                 .thenReturn(Collections.singletonList(NOTES_PACKAGE_NAME));
@@ -205,24 +214,23 @@ public class StylusDevicesControllerTest {
         assertThat(mPreferenceContainer.getPreferenceCount()).isEqualTo(3);
         assertThat(defaultNotesPref.getTitle().toString()).isEqualTo(
                 mContext.getString(R.string.stylus_default_notes_app));
+        assertThat(defaultNotesPref.isVisible()).isTrue();
         assertThat(handwritingPref.getTitle().toString()).isEqualTo(
                 mContext.getString(R.string.stylus_textfield_handwriting));
+        assertThat(handwritingPref.isVisible()).isTrue();
         assertThat(buttonPref.getTitle().toString()).isEqualTo(
                 mContext.getString(R.string.stylus_ignore_button));
+        assertThat(buttonPref.isVisible()).isTrue();
     }
 
     @Test
-    @Ignore // TODO(b/255732419): unignore when InputMethodInfo available
-    public void btStylusInputDevice_noHandwritingIme_showsSomePreferences() {
-        showScreen(mController);
-        Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
-        Preference buttonPref = mPreferenceContainer.getPreference(1);
+    public void btStylusInputDevice_noHandwritingIme_handwritingPrefNotVisible() {
+        when(mInputMethodInfo.supportsStylusHandwriting()).thenReturn(false);
 
-        assertThat(mPreferenceContainer.getPreferenceCount()).isEqualTo(2);
-        assertThat(defaultNotesPref.getTitle().toString()).isEqualTo(
-                mContext.getString(R.string.stylus_default_notes_app));
-        assertThat(buttonPref.getTitle().toString()).isEqualTo(
-                mContext.getString(R.string.stylus_ignore_button));
+        showScreen(mController);
+        Preference handwritingPref = mPreferenceContainer.getPreference(1);
+
+        assertThat(handwritingPref.isVisible()).isFalse();
     }
 
     @Test
@@ -310,6 +318,47 @@ public class StylusDevicesControllerTest {
         assertThat(handwritingPref.isChecked()).isEqualTo(true);
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.STYLUS_HANDWRITING_ENABLED, -1)).isEqualTo(1);
+    }
+
+    @Test
+    public void handwritingPreference_startsHandwritingSettingsOnClickIfChecked() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.STYLUS_HANDWRITING_ENABLED, 0);
+        showScreen(mController);
+        SwitchPreference handwritingPref = (SwitchPreference) mPreferenceContainer.getPreference(1);
+
+        handwritingPref.performClick();
+
+        verify(mInputMethodInfo).createStylusHandwritingSettingsActivityIntent();
+        verify(mContext).startActivity(any());
+    }
+
+    @Test
+    public void handwritingPreference_doesNotStartHandwritingSettingsOnClickIfNotChecked() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.STYLUS_HANDWRITING_ENABLED, 1);
+        showScreen(mController);
+        SwitchPreference handwritingPref = (SwitchPreference) mPreferenceContainer.getPreference(1);
+
+        handwritingPref.performClick();
+
+        verify(mInputMethodInfo, times(0)).createStylusHandwritingSettingsActivityIntent();
+        verify(mContext, times(0)).startActivity(any());
+    }
+
+    @Test
+    public void handwritingPreference_doesNotStartHandwritingSettingsIfNoIntent() {
+        when(mInputMethodInfo.createStylusHandwritingSettingsActivityIntent())
+                .thenReturn(null);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.STYLUS_HANDWRITING_ENABLED, 1);
+        showScreen(mController);
+        SwitchPreference handwritingPref = (SwitchPreference) mPreferenceContainer.getPreference(1);
+
+        handwritingPref.performClick();
+
+        verify(mInputMethodInfo, times(0)).createStylusHandwritingSettingsActivityIntent();
+        verify(mContext, times(0)).startActivity(any());
     }
 
     @Test
