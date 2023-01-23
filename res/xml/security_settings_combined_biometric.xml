@@ -40,6 +40,12 @@
             settings:keywords="@string/keywords_fingerprint_settings"
             settings:controller="com.android.settings.biometrics.combination.BiometricFingerprintStatusPreferenceController" />
 
+        <com.android.settingslib.RestrictedPreference
+            android:key="biometric_active_unlock_settings"
+            android:title="@string/security_settings_activeunlock_preference_title"
+            android:summary="@string/summary_placeholder"
+            settings:keywords="@string/keywords_active_unlock_settings"
+            settings:controller="com.android.settings.biometrics.activeunlock.ActiveUnlockStatusPreferenceController" />
     </PreferenceCategory>
 
     <PreferenceCategory
