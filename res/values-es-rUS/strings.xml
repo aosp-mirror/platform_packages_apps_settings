@@ -116,10 +116,8 @@
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Se activó el Bluetooth"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Ver todos"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"Pluma stylus"</string>
-    <!-- no translation found for stylus_default_notes_app (3896158797687806941) -->
-    <skip />
-    <!-- no translation found for stylus_textfield_handwriting (2363579035338976327) -->
-    <skip />
+    <string name="stylus_default_notes_app" msgid="3896158797687806941">"App de notas predeterminada"</string>
+    <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Escribir en campos de texto"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignorar todas las pulsaciones del botón de la pluma stylus"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Pluma stylus"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Fecha y hora"</string>
@@ -145,13 +143,15 @@
     <string name="skip_label" msgid="6380034601349015895">"Omitir"</string>
     <string name="next_label" msgid="1248293387735652187">"Siguiente"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Idiomas"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"Orden de idiomas preferidos"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"Idioma del sistema"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Quitar"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Agregar un idioma"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Idioma"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Idioma preferido"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Idiomas de las apps"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Idiomas de la app"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Configura el idioma para cada app"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"Idioma de la app"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"Idioma de la app"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Idiomas sugeridos"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Todos los idiomas"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Idioma del sistema"</string>
@@ -159,6 +159,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La selección de idioma para esta app no está disponible en Configuración."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Puede que el idioma difiera de los idiomas disponibles en la app. Algunas apps no son compatibles con este parámetro de configuración."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Aquí se muestran solo las apps que admiten la selección de idioma."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"El sistema, las apps y los sitios web usan el primer idioma compatible de entre los preferidos."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Para seleccionar un idioma para cada app, ve a la configuración del idioma de la app."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Más información sobre idiomas"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Preferencias regionales"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Establece tus preferencias de unidades y números"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Permite que las apps sepan tus preferencias regionales para que puedan personalizar la experiencia."</string>
@@ -181,7 +184,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Se mostrará el texto en otro idioma."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"No se pueden quitar todos los idiomas"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Debes tener al menos un idioma preferido"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"Es posible que no esté disponible en algunas apps"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"No está disponible como idioma del sistema"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Mover hacia arriba"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Mover hacia abajo"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Mover al principio"</string>
@@ -391,10 +394,8 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Se inscribió el <xliff:g id="PERCENTAGE">%d</xliff:g> por ciento"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Inscribiendo huella dactilar: <xliff:g id="PERCENTAGE">%d</xliff:g>%%"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Se agregó la huella dactilar"</string>
-    <!-- no translation found for security_settings_require_screen_on_to_auth_title (1641621458536715518) -->
-    <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_description (4158414711168345398) -->
-    <skip />
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Toca para desbloquear en cualquier momento"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Toca el sensor para desbloquear, incluso si la pantalla está apagada. Esta opción puede generar más desbloqueos accidentales."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Pantalla, desbloqueo"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Más tarde"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Levanta el dedo y vuelve a tocar"</string>
@@ -417,8 +418,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Listo"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ese no es el sensor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Toca el sensor en la parte posterior del teléfono con el dedo índice."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"No se completó la inscripción"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Tiempo para conf. huella dactilar agotado"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Vuelve a intentarlo o hazlo más tarde en Configuración"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"El registro de huellas dactilares no funcionó. Vuelve a intentarlo o usa otro dedo."</string>
@@ -889,8 +889,9 @@
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Cuando muevas el tel. entre el modo vertical y el horizontal"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Resolución de pantalla"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Alta resolución"</string>
-    <!-- no translation found for screen_resolution_option_full (2694003735219114186) -->
-    <skip />
+    <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Máxima resolución"</string>
+    <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
+    <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"La máxima resolución consume más batería. Es posible que, si cambias la resolución, algunas apps se reinicien."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Seleccionada"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Colores"</string>
@@ -1016,6 +1017,12 @@
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Usar <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="sim_preferred_title" msgid="8850185380445309835">"¿Quieres actualizar la SIM preferida?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> es la única SIM en tu dispositivo. ¿Deseas usar esta tarjeta para datos móviles, llamadas y mensajes SMS?"</string>
+    <!-- no translation found for enable_auto_data_switch_dialog_title (2220065802765581029) -->
+    <skip />
+    <!-- no translation found for enable_auto_data_switch_dialog_message (8113487212923434425) -->
+    <skip />
+    <!-- no translation found for auto_data_switch_dialog_managed_profile_warning (6839438290079866605) -->
+    <skip />
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"El código PIN de la tarjeta SIM es incorrecto. Debes comunicarte con el proveedor para desbloquear el dispositivo."</string>
     <string name="wrong_pin_code" msgid="8124222991071607958">"{count,plural, =1{El código PIN de la tarjeta SIM es incorrecto. Te queda # intento antes de que debas comunicarte con tu operador para desbloquear el dispositivo.}other{El código PIN de la tarjeta SIM es incorrecto. Te quedan # intentos.}}"</string>
     <string name="wrong_pin_code_one" msgid="6924852214263071441">"El código PIN de la tarjeta SIM es incorrecto. Te queda 1 intento antes de que debas comunicarte con tu proveedor para desbloquear el dispositivo."</string>
@@ -1037,18 +1044,14 @@
     <string name="storage_settings_title" msgid="486118156723194815">"Configuración de almacenamiento"</string>
     <string name="status_eid" msgid="7532406028683438634">"EID"</string>
     <string name="eid_multi_sim" msgid="9087924808336397804">"EID (ranura SIM <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <!-- no translation found for imei_multi_sim (9001570420423929507) -->
-    <skip />
-    <!-- no translation found for imei_multi_sim_primary (7914653040843734282) -->
-    <skip />
+    <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (ranura de SIM <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
+    <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (ranura de SIM <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (principal)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Elige una red guardada para verla"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"Versión de PRL"</string>
-    <!-- no translation found for meid_multi_sim (1460689549266621286) -->
-    <skip />
-    <!-- no translation found for meid_multi_sim_primary (8921262417580407201) -->
-    <skip />
+    <string name="meid_multi_sim" msgid="1460689549266621286">"MEID (ranura de SIM <xliff:g id="MEID_SLOT_ID">%1$d</xliff:g>)"</string>
+    <string name="meid_multi_sim_primary" msgid="8921262417580407201">"MEID (ranura de SIM <xliff:g id="MEID_SLOT_ID_PRIMARY">%1$d</xliff:g>) (principal)"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"Tipo de red de datos móviles"</string>
@@ -1792,6 +1795,12 @@
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Destaca más el puntero del mouse"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Quitar animaciones"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Reduce el movimiento de la pantalla"</string>
+    <!-- no translation found for accessibility_contrast_level_title (8044307040061738158) -->
+    <skip />
+    <!-- no translation found for accessibility_contrast_level_left_label (732834661342809574) -->
+    <skip />
+    <!-- no translation found for accessibility_contrast_level_right_label (5381154127087484725) -->
+    <skip />
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Audio mono"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Combinar canales cuando se reproduce audio"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Balance de audio"</string>
@@ -2108,8 +2117,12 @@
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Presiona para obtener más información sobre este error"</string>
     <string name="power_screen" msgid="4596900105850963806">"Pantalla"</string>
+    <!-- no translation found for power_cpu (1820472721627148746) -->
+    <skip />
     <string name="power_flashlight" msgid="8993388636332573202">"Linterna"</string>
     <string name="power_camera" msgid="4778315081581293923">"Cámara"</string>
+    <!-- no translation found for power_gps (6352380895542498164) -->
+    <skip />
     <string name="power_wifi" msgid="4614007837288250325">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
     <string name="power_cell" msgid="7793805106954398186">"Red móvil"</string>
@@ -2125,8 +2138,7 @@
     <string name="battery_not_usage" msgid="3851536644733662392">"Sin uso desde la última carga completa"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Sin uso durante las últimas 24 h"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
-    <!-- no translation found for battery_usage_since_last_full_charge (3488425008925924769) -->
-    <skip />
+    <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"desde la última carga completa"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Apps del sistema"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Otros"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Tiempo restante estimado"</string>
@@ -2709,6 +2721,7 @@
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Apps predeterminadas"</string>
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Apps clonadas"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Crea una segunda instancia de una app para usar dos cuentas al mismo tiempo."</string>
+    <string name="desc_cloneable_app_list_text" msgid="3354586725814708688">"Apps que pueden clonarse."</string>
     <string name="cloned_apps_summary" msgid="8805362440770795709">"<xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g> clonadas, <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g> disponibles para clonar"</string>
     <string name="delete_all_app_clones" msgid="3489053361980624999">"Borra todas las apps clonadas"</string>
     <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"Borra todas las apps clonadas"</string>
@@ -2883,7 +2896,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"El teléfono no sonará ni vibrará cuando recibas notificaciones."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Notificaciones sin sonido ni elementos visuales"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"No verás ni oirás notificaciones"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Tu teléfono no mostrará notificaciones nuevas o existentes, ni tampoco vibrará ni sonará por ellas. Ten en cuenta que se seguirán mostrando las notificaciones importantes sobre la actividad y el estado del teléfono.\n\nCuando desactives No interrumpir, desliza el dedo hacia abajo desde la parte superior de la pantalla para ver las notificaciones que te perdiste."</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"Tu teléfono no vibrará ni sonará por notificaciones nuevas ni existentes, ni las mostrará. Ten en cuenta que se seguirán mostrando las notificaciones importantes sobre la actividad y el estado del dispositivo.\n\nCuando desactives No interrumpir, desliza el dedo hacia abajo desde la parte superior de la pantalla para encontrar las notificaciones que te perdiste."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Personalizada"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Habilitar configuración personalizada"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Quitar configuración personalizada"</string>
@@ -2907,7 +2920,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"Sonido y vibración"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"Sonido, vibración y algunos signos visuales de notificaciones"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"Sonido, vibración y signos visuales de notificaciones"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="1115914818435434668">"Nunca se ocultarán las notificaciones necesarias sobre el estado y las actividades básicas del teléfono."</string>
+    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"Nunca se ocultarán las notificaciones necesarias sobre el estado y las actividades básicas del dispositivo."</string>
     <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"Nada"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"otras opciones"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"Agregar"</string>
@@ -3017,6 +3030,10 @@
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Después del desbloqueo, ir a la última pantalla usada"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Pantalla bloqueada, bloqueo de pantalla, omitir, omisión"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Con el perfil de trabajo bloqueado"</string>
+    <!-- no translation found for unseen_notifs_lock_screen (6910701117021324612) -->
+    <skip />
+    <!-- no translation found for unseen_notifs_lock_screen_summary (8824730389406143614) -->
+    <skip />
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificaciones en pantalla de bloqueo"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Mostrar conversaciones predeterminadas y silenciosas"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostrar conversaciones predeterminadas y silenciosas"</string>
@@ -3153,8 +3170,7 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Acceso en No interrumpir"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permitir opción No interrumpir"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Ninguna aplicación instalada solicitó acceso en No interrumpir."</string>
-    <!-- no translation found for app_notifications_off_desc (2484843759466874201) -->
-    <skip />
+    <string name="app_notifications_off_desc" msgid="2484843759466874201">"No permitiste las notificaciones de esta app"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Como lo solicitaste, Android bloquea esta categoría de notificaciones para que no se muestren en el dispositivo"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Como lo solicitaste, Android bloquea este grupo de notificaciones para que no se muestren en el dispositivo"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Esta app no envía notificaciones"</string>
@@ -3375,10 +3391,8 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Desactivadas"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Avanzado"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Administrador de permisos"</string>
-    <!-- no translation found for app_data_sharing_updates_title (921888411974134089) -->
-    <skip />
-    <!-- no translation found for app_data_sharing_updates_summary (1500580254161164185) -->
-    <skip />
+    <string name="app_data_sharing_updates_title" msgid="921888411974134089">"Actualizaciones del uso compartido de datos"</string>
+    <string name="app_data_sharing_updates_summary" msgid="1500580254161164185">"Muestra qué apps actualizaron recientemente la política de uso compartido de datos"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Presionar para activar"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Presiona dos veces en cualquier lugar de la pantalla para activar el dispositivo."</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Abrir vínculos"</string>
@@ -4219,8 +4233,7 @@
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personal"</string>
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Trabajo"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Predeterminada del sistema"</string>
-    <!-- no translation found for default_app_none (5420632042222036264) -->
-    <skip />
+    <string name="default_app_none" msgid="5420632042222036264">"Ninguna"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Esta opción ya no es válida. Vuelve a intentarlo."</string>
     <string name="power_menu_setting_name" msgid="2394440932633137229">"Mantener presionado el botón de encendido"</string>
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Mantener presionado el botón de encendido para acceder al:"</string>
@@ -4365,8 +4378,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Permitir 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G es menos seguro, pero podría mejorar tu conexión en algunas ubicaciones. Para llamadas de emergencia, siempre se permite 2G."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> requiere 2G para brindar servicio"</string>
-    <string name="allow_null_algorithms_title" msgid="9143076634352979096">"Permitir una conexión menos segura"</string>
-    <string name="allow_null_algorithms_summary" msgid="5874570357011783211">"Puede mejorar la señal en algunas ubicaciones. Para realizar llamadas de emergencia, las conexiones menos seguras están siempre permitidas."</string>
+    <string name="require_cellular_encryption_title" msgid="7516008146269371585">"Solicitar encriptación"</string>
+    <string name="require_cellular_encryption_summary" msgid="4813823321032908641">"La encriptación es más segura, pero es posible que no puedas establecer conexión en algunas ubicaciones. No es necesaria la encriptación para realizar llamadas de emergencia."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Todos los servicios"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Mostrar acceso a portapapeles"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Mostrar un mensaje cuando las apps accedan a textos, imágenes y otro contenido que hayas copiado"</string>
@@ -4481,6 +4494,5 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Desinstalar app"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Apps instaladas en el último # mes}other{Apps instaladas en los últimos # meses}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Apps instaladas hace más de # mes}other{Apps instaladas hace más de # meses}}"</string>
-    <!-- no translation found for accessibility_fingerprint_label (5017431423168191733) -->
-    <skip />
+    <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensor de huellas dactilares"</string>
 </resources>
