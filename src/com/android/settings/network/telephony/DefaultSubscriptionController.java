@@ -38,7 +38,6 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.mobile.dataservice.DataServiceUtils;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
@@ -308,11 +307,9 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
     @Override
     public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-        if (DataServiceUtils.shouldUpdateEntityList(mSubInfoEntityList, subInfoEntityList)) {
-            mSubInfoEntityList = subInfoEntityList;
-            updateEntries();
-            refreshSummary(mPreference);
-        }
+        mSubInfoEntityList = subInfoEntityList;
+        updateEntries();
+        refreshSummary(mPreference);
     }
 
     @Override

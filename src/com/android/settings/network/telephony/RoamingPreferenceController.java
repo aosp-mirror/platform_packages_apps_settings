@@ -40,7 +40,6 @@ import com.android.settings.network.GlobalSettingsChangeListener;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.mobile.dataservice.DataServiceUtils;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
@@ -257,17 +256,14 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
     @Override
     public void onAllMobileNetworkInfoChanged(
             List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
-        if (DataServiceUtils.shouldUpdateEntityList(mMobileNetworkInfoEntityList,
-                mobileNetworkInfoEntityList)) {
-            mMobileNetworkInfoEntityList = mobileNetworkInfoEntityList;
-            mMobileNetworkInfoEntityList.forEach(entity -> {
-                if (Integer.parseInt(entity.subId) == mSubId) {
-                    mMobileNetworkInfoEntity = entity;
-                    update();
-                    refreshSummary(mSwitchPreference);
-                    return;
-                }
-            });
-        }
+        mMobileNetworkInfoEntityList = mobileNetworkInfoEntityList;
+        mMobileNetworkInfoEntityList.forEach(entity -> {
+            if (Integer.parseInt(entity.subId) == mSubId) {
+                mMobileNetworkInfoEntity = entity;
+                update();
+                refreshSummary(mSwitchPreference);
+                return;
+            }
+        });
     }
 }
