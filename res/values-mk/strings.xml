@@ -116,10 +116,8 @@
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth е вклучен"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Прикажи ги сите"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"Пенкало"</string>
-    <!-- no translation found for stylus_default_notes_app (3896158797687806941) -->
-    <skip />
-    <!-- no translation found for stylus_textfield_handwriting (2363579035338976327) -->
-    <skip />
+    <string name="stylus_default_notes_app" msgid="3896158797687806941">"Стандардна апликација за белешки"</string>
+    <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Пишувајте во текстуалните полиња"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Игнорирајте ги сите притискања на копчето на пенкалото"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Пенкало"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Датум и време"</string>
@@ -145,13 +143,15 @@
     <string name="skip_label" msgid="6380034601349015895">"Прескокни"</string>
     <string name="next_label" msgid="1248293387735652187">"Следно"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Јазици"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"Редослед на претпочитани јазици"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"Системски јазик"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Отстрани"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Додајте јазик"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Јазик"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Претпочитан јазик"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Јазици за апликации"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Јазици на апликациите"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Поставете го јазикот за секоја апликација"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"Јазик на апликациjата"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"Јазик на апликациjата"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Предложени јазици"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Сите јазици"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Системски јазик"</string>
@@ -159,6 +159,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Не може да се бира јазик за апликацијава од „Поставките“."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Јазикот може да се разликува од јазиците достапни во апликацијата. Некои апликации може да не ја поддржуваат оваа поставка."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Само апликациите што поддржуваат бирање јазик се прикажани овде."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Системот, апликациите и веб-сајтовите го користат првиот поддржан јазик од вашите претпочитани јазици."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"За да изберете јазик за секоја апликација, одете во поставките за јазик на апликацијата."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Дознајте повеќе за јазиците"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Регионални поставки"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Поставете поставки за единици и бројки"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Овозможи им на апликациите да ги дознаат твоите регионални поставки за да може да го персонализираат твоето доживување."</string>
@@ -181,7 +184,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Текстот ќе се прикажува на друг јазик."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Не може да се отстранат сите јазици"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Задржете барем еден претпочитан јазик"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"Може да не е достапно во некои апликации"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"Не е достапен за системски јазик"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Премести нагоре"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Премести надолу"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Премести најгоре"</string>
@@ -415,8 +418,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Готово"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Упс, тоа не е сензорот"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Допрете го сензорот одзади со показалецот."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Регистрацијата не беше завршена"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Времето за поставување отпечаток истече"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Обидете се повторно сега или поставете отпечаток подоцна во „Поставки“"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Внесувањето отпечаток не успеа. Обидете се повторно или користете друг прст."</string>
@@ -887,7 +889,9 @@
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Менувајте помеѓу портрет и пејзаж кога го движите телефонот"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Резолуција на екран"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Висока резолуција"</string>
-    <string name="screen_resolution_option_full" msgid="2694003735219114186">"Полна резолуција"</string>
+    <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Полна резолуција"</string>
+    <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
+    <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"Полната резолуција повеќе ја троши батеријата. Префрлањето на резолуцијата може да предизвика рестартирање кај некои апликации."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Избрано"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Бои"</string>
@@ -1013,6 +1017,9 @@
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Користи <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="sim_preferred_title" msgid="8850185380445309835">"Да се ажурира стандардна SIM?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> е единственaта SIM-картичка во вашиот уред. Дали сакате да ја користите за мобилен интернет, повици и SMS-пораки?"</string>
+    <string name="enable_auto_data_switch_dialog_title" msgid="2220065802765581029">"Автоматски префрлај меѓу SIM?"</string>
+    <string name="enable_auto_data_switch_dialog_message" msgid="8113487212923434425">"Дозволете телефонот автоматски да се префрли на <xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> за мобилен интернет кога има подобра достапност."</string>
+    <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"Повиците, пораките и мрежниот сообраќај може да се видливи за вашата организација."</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"PIN кодот за SIM картичката е неточен. Контактирате со вашиот оператор да го отклучи уредот."</string>
     <string name="wrong_pin_code" msgid="8124222991071607958">"{count,plural, =1{Погрешен PIN за SIM. Уште # обид пред да мора да контактирате со операторот за да го отклучи уредот.}one{Погрешен PIN-код за SIM, ви преостанува уште # обид.}other{Погрешен PIN-код за SIM, ви преостануваат уште # обиди.}}"</string>
     <string name="wrong_pin_code_one" msgid="6924852214263071441">"Погрешен PIN-код за SIM-картичката. Ви преостанува уште 1 обид пред да мора да контактирате со вашиот оператор за да го отклучи уредот."</string>
@@ -1123,7 +1130,7 @@
     <string name="battery_status_title" msgid="4661768220545945771">"Статус на батеријата"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Ниво на батерија"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"Заедница"</string>
-    <string name="communal_settings_summary" msgid="4923914136953940317">"Поставки за заедница"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"Заеднички поставки"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Поставки за APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Изменете ја пристапната точка"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Не е поставено"</string>
@@ -1785,6 +1792,12 @@
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Истакни го покажувачот на глувчето"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Отстрани анимации"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Намали го движењето на екранот"</string>
+    <!-- no translation found for accessibility_contrast_level_title (8044307040061738158) -->
+    <skip />
+    <!-- no translation found for accessibility_contrast_level_left_label (732834661342809574) -->
+    <skip />
+    <!-- no translation found for accessibility_contrast_level_right_label (5381154127087484725) -->
+    <skip />
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Моно аудио"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Комбинирај канали кога се пушта аудио"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Баланс на аудио"</string>
@@ -2101,8 +2114,12 @@
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Допрете за да дознаете повеќе за оваа грешка"</string>
     <string name="power_screen" msgid="4596900105850963806">"Екран"</string>
+    <!-- no translation found for power_cpu (1820472721627148746) -->
+    <skip />
     <string name="power_flashlight" msgid="8993388636332573202">"Светилка"</string>
     <string name="power_camera" msgid="4778315081581293923">"Камера"</string>
+    <!-- no translation found for power_gps (6352380895542498164) -->
+    <skip />
     <string name="power_wifi" msgid="4614007837288250325">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
     <string name="power_cell" msgid="7793805106954398186">"Мобилна мрежа"</string>
@@ -2118,8 +2135,7 @@
     <string name="battery_not_usage" msgid="3851536644733662392">"Нема користење од последното целосно полнење"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Не е користена во минатите 24 часа"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
-    <!-- no translation found for battery_usage_since_last_full_charge (3488425008925924769) -->
-    <skip />
+    <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"од последното целосно полнење"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Системски апликации"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Други"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Проценето преостанато време"</string>
@@ -2702,6 +2718,7 @@
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Стандардни апликации"</string>
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Клонирани апликации"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Создадете втор примерок на апликација за да може да користите две сметки истовремено."</string>
+    <string name="desc_cloneable_app_list_text" msgid="3354586725814708688">"Апликации што може да се клонираат."</string>
     <string name="cloned_apps_summary" msgid="8805362440770795709">"<xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g> се клонирани, <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g> се достапни за клонирање"</string>
     <string name="delete_all_app_clones" msgid="3489053361980624999">"Избришете ги сите клонирани апликации"</string>
     <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"Не успеа бришењето на сите клонирани апликации"</string>
@@ -2876,7 +2893,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Кога пристигнуваат известувања, телефонот нема да испушта звук или да вибрира."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Без визуелни вознемирувања или звук од известувањата"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Нема да гледате ниту да слушате известувања"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Телефонот нема да ги прикажува, ниту да вибрира или да пушта звук за новите и постојните известувања. Имајте предвид дека важните известувања за активноста и статусот на телефонот и понатаму ќе се појавуваат.\n\nКога ќе го исклучите „Не вознемирувај“, пропуштените известувања може да ги најдете со повлекување надолу од врвот на екранот."</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"Телефонот нема да ги прикажува, ниту да вибрира или да пушта звук за новите и постојните известувања. Имајте предвид дека важните известувања за активноста и статусот на уредот и понатаму ќе се појавуваат.\n\nКога ќе ја исклучите „Не вознемирувај“, пропуштените известувања може да ги најдете со повлекување надолу од врвот на екранот."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Приспособени"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Овозможи ја приспособената поставка"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Отстрани ја приспособената поставка"</string>
@@ -2900,7 +2917,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"Звук и вибрации"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"Звук, вибрации и некои визуелни знаци од известувањата"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"Звук, вибрации и визуелни знаци од известувањата"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="1115914818435434668">"Неопходните известувања за основната активност и статусот на телефонот никогаш нема да се кријат."</string>
+    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"Неопходните известувања за основната активност и статусот на уредот никогаш нема да се кријат."</string>
     <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"Нема"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"други опции"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"Додај"</string>
@@ -3010,6 +3027,10 @@
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"По отклучувањето, оди директно на последниот користен екран"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Заклучен екран, прескокни, заобиколи"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"При заклучен работен профил"</string>
+    <!-- no translation found for unseen_notifs_lock_screen (6910701117021324612) -->
+    <skip />
+    <!-- no translation found for unseen_notifs_lock_screen_summary (8824730389406143614) -->
+    <skip />
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Известувања на заклучен екран"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Прикажувај разговори, стандардни и безгласни"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Прикажувај разговори, стандардни и безгласни"</string>
@@ -3367,10 +3388,8 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Исклучени"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Напредни"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Управувач со дозволи"</string>
-    <!-- no translation found for app_data_sharing_updates_title (921888411974134089) -->
-    <skip />
-    <!-- no translation found for app_data_sharing_updates_summary (1500580254161164185) -->
-    <skip />
+    <string name="app_data_sharing_updates_title" msgid="921888411974134089">"Новости за споделувањето податоци"</string>
+    <string name="app_data_sharing_updates_summary" msgid="1500580254161164185">"Прикажи кои апликации неодамна го ажурирале правилото за споделување податоци"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Допрете за будење"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Допрете двапати каде било на екранот за да го разбудите уредот"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"За отворање линкови"</string>
@@ -4356,8 +4375,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Дозволете 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G е помалку безбедна, но може да ја подобри врската на некои локации. За итни повици, 2G е секогаш дозволена."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> има потреба од 2G за да биде достапен"</string>
-    <string name="allow_null_algorithms_title" msgid="9143076634352979096">"Дозволи помалку безбедни врски"</string>
-    <string name="allow_null_algorithms_summary" msgid="5874570357011783211">"Може да го подобри вашиот сигнал на некои локации. За итни повици, помалку безбедните врски се секогаш дозволени."</string>
+    <string name="require_cellular_encryption_title" msgid="7516008146269371585">"Потребно е шифрирање"</string>
+    <string name="require_cellular_encryption_summary" msgid="4813823321032908641">"Шифрирањето е побезбедно, но можеби нема да можете да се поврзете на некои локации. За итни повици никогаш не е потребно шифрирање"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Сите услуги"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Известувај за пристап до привремената меморија"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Нека се прикажува известување кога апликациите пристапуваат до текст, слики или други содржини што сте ги копирале"</string>

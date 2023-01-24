@@ -116,10 +116,8 @@
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"S\'ha activat el Bluetooth"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Mostra-ho tot"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"Llapis òptic"</string>
-    <!-- no translation found for stylus_default_notes_app (3896158797687806941) -->
-    <skip />
-    <!-- no translation found for stylus_textfield_handwriting (2363579035338976327) -->
-    <skip />
+    <string name="stylus_default_notes_app" msgid="3896158797687806941">"Aplicació de notes predeterminada"</string>
+    <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Escriu als camps de text"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Omet la premuda repetida del botó de llapis òptic"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Llapis òptic"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Data i hora"</string>
@@ -145,13 +143,15 @@
     <string name="skip_label" msgid="6380034601349015895">"Omet"</string>
     <string name="next_label" msgid="1248293387735652187">"Següent"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Idiomes"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"Ordre d\'idiomes preferits"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"Idioma del sistema"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Suprimeix"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Afegeix un idioma"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Idioma"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Idioma preferit"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Idiomes de les aplicacions"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Idiomes de les aplicacions"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Configura l\'idioma per a cada aplicació"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"Idioma de l\'aplicació"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"Idioma de l\'aplicació"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Idiomes suggerits"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Tots els idiomes"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Idioma del sistema"</string>
@@ -159,6 +159,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La selecció d\'idioma per a aquesta aplicació no està disponible des de Configuració."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"És possible que l\'idioma no coincideixi amb els que hi ha disponibles a l\'aplicació. Algunes aplicacions no admeten aquesta opció de configuració."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Aquí només es mostren les aplicacions que admeten la selecció d\'idioma."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"El sistema, les aplicacions i els llocs web utilitzen el primer idioma admès dels teus idiomes preferits."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Per seleccionar un idioma en cada aplicació, ves a la configuració d\'idioma de l\'aplicació."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Més informació sobre els idiomes"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Preferències regionals"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Estableix preferències d\'unitats i de números"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Permet a les aplicacions conèixer les preferències regionals perquè puguin personalitzar la teva experiència."</string>
@@ -181,7 +184,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"El text es mostrarà en un altre idioma."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"No es poden suprimir tots els idiomes"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Conserva almenys un idioma preferit"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"És possible que no estigui disponible en algunes aplicacions"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"No disponible com a idioma del sistema"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Mou amunt"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Mou avall"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Mou a la part superior"</string>
@@ -391,10 +394,8 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"S\'ha inscrit un <xliff:g id="PERCENTAGE">%d</xliff:g> per cent"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registre de l\'empremta digital <xliff:g id="PERCENTAGE">%d</xliff:g> per cent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"S\'ha afegit l\'empremta digital"</string>
-    <!-- no translation found for security_settings_require_screen_on_to_auth_title (1641621458536715518) -->
-    <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_description (4158414711168345398) -->
-    <skip />
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Toca per desbloquejar en qualsevol moment"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Toca el sensor per desbloquejar el dispositiu, encara que la pantalla estigui desactivada. Això farà que sigui més probable que es desbloquegi accidentalment."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Pantalla, desbloqueig"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Fes-ho més tard"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Aixeca el dit i toca de nou"</string>
@@ -417,8 +418,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Fet"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Això no és el sensor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Toca el sensor situat a la part posterior amb el dit índex."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"No s\'ha completat el registre"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Temps esgotat per configurar l\'empremta digital"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Torna-ho a provar ara o configura l\'empremta digital més tard a Configuració"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"El registre de l\'empremta digital no ha funcionat. Torna-ho a provar o fes servir un altre dit."</string>
@@ -889,8 +889,9 @@
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Quan canvies entre el mode vertical i horitzontal al telèfon"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Resolució de pantalla"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Alta resolució"</string>
-    <!-- no translation found for screen_resolution_option_full (2694003735219114186) -->
-    <skip />
+    <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Resolució completa"</string>
+    <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
+    <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"La resolució completa consumeix més bateria. Si canvies la resolució, és possible que algunes aplicacions es reiniciïn."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Seleccionada"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Colors"</string>
@@ -1016,6 +1017,12 @@
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Utilitza <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="sim_preferred_title" msgid="8850185380445309835">"Vols actual. la SIM preferida?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> és l\'única SIM del dispositiu. Vols fer-la servir per a les dades mòbils, les trucades i els missatges SMS?"</string>
+    <!-- no translation found for enable_auto_data_switch_dialog_title (2220065802765581029) -->
+    <skip />
+    <!-- no translation found for enable_auto_data_switch_dialog_message (8113487212923434425) -->
+    <skip />
+    <!-- no translation found for auto_data_switch_dialog_managed_profile_warning (6839438290079866605) -->
+    <skip />
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"El codi PIN de la SIM no és correcte. Has de contactar amb l\'operador de telefonia mòbil per desbloquejar el dispositiu."</string>
     <string name="wrong_pin_code" msgid="8124222991071607958">"{count,plural, =1{El codi PIN de la SIM no és correcte. Et queda # intent; si no l\'encertes, contacta amb l\'operador per desbloquejar el dispositiu.}other{El codi PIN de la SIM no és correcte. Et queden # intents.}}"</string>
     <string name="wrong_pin_code_one" msgid="6924852214263071441">"El codi PIN de la SIM no és correcte. Et queda 1 intent; si no l\'encertes, contacta amb l\'operador per desbloquejar el dispositiu."</string>
@@ -1037,18 +1044,14 @@
     <string name="storage_settings_title" msgid="486118156723194815">"Configuració d\'emmagatzematge"</string>
     <string name="status_eid" msgid="7532406028683438634">"EID"</string>
     <string name="eid_multi_sim" msgid="9087924808336397804">"EID (ranura SIM <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <!-- no translation found for imei_multi_sim (9001570420423929507) -->
-    <skip />
-    <!-- no translation found for imei_multi_sim_primary (7914653040843734282) -->
-    <skip />
+    <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (ranura de la SIM <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
+    <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (ranura de la SIM <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (principal)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Selecciona una xarxa desada per veure-la"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"Versió de PRL"</string>
-    <!-- no translation found for meid_multi_sim (1460689549266621286) -->
-    <skip />
-    <!-- no translation found for meid_multi_sim_primary (8921262417580407201) -->
-    <skip />
+    <string name="meid_multi_sim" msgid="1460689549266621286">"MEID (ranura de la SIM <xliff:g id="MEID_SLOT_ID">%1$d</xliff:g>)"</string>
+    <string name="meid_multi_sim_primary" msgid="8921262417580407201">"MEID (ranura de la SIM <xliff:g id="MEID_SLOT_ID_PRIMARY">%1$d</xliff:g>) (principal)"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"Tipus de xarxa de dades mòbils"</string>
@@ -1194,7 +1197,7 @@
     <string name="main_clear_short_title" msgid="4752094765533020696">"Esborra totes les dades (restabliment dades fàbrica)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"La música"</li>\n<li>"Les fotos"</li>\n<li>"Altres dades de l\'usuari"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM"</li></string>
-    <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"No es cancel·larà el teu pla de servei mòbil."</string>
+    <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"No es cancel·larà el teu pla de serveis mòbils."</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"Se suprimiran tota la teva informació personal i les aplicacions baixades. Aquesta acció no es pot desfer."</string>
     <string name="main_clear_final_desc_esim" msgid="440406836793824969">"Se suprimirà tota la teva informació personal, incloses les targetes SIM i les aplicacions que hagis baixat. Aquesta acció no es pot desfer."</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"Vols esborrar totes les dades?"</string>
@@ -1792,6 +1795,12 @@
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Fes que el punter del ratolí sigui més visible"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Suprimeix les animacions"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Redueix el moviment a la pantalla"</string>
+    <!-- no translation found for accessibility_contrast_level_title (8044307040061738158) -->
+    <skip />
+    <!-- no translation found for accessibility_contrast_level_left_label (732834661342809574) -->
+    <skip />
+    <!-- no translation found for accessibility_contrast_level_right_label (5381154127087484725) -->
+    <skip />
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Àudio mono"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Combina els canals en reproduir àudio"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Balanç d\'àudio"</string>
@@ -2108,8 +2117,12 @@
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Toca per obtenir més informació sobre aquest error"</string>
     <string name="power_screen" msgid="4596900105850963806">"Pantalla"</string>
+    <!-- no translation found for power_cpu (1820472721627148746) -->
+    <skip />
     <string name="power_flashlight" msgid="8993388636332573202">"Llanterna"</string>
     <string name="power_camera" msgid="4778315081581293923">"Càmera"</string>
+    <!-- no translation found for power_gps (6352380895542498164) -->
+    <skip />
     <string name="power_wifi" msgid="4614007837288250325">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
     <string name="power_cell" msgid="7793805106954398186">"Xarxa mòbil"</string>
@@ -2125,8 +2138,7 @@
     <string name="battery_not_usage" msgid="3851536644733662392">"Sense ús des de la darrera càrrega completa"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Sense ús durant les 24 darreres hores"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
-    <!-- no translation found for battery_usage_since_last_full_charge (3488425008925924769) -->
-    <skip />
+    <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"des de l\'última càrrega completa"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Aplicacions del sistema"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Altres"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Temps estimat restant"</string>
@@ -2231,7 +2243,7 @@
     <string name="tts_sliders_title" msgid="6901146958648426181">"Velocitat i to de veu"</string>
     <string name="tts_engine_section_title" msgid="5115035218089228451">"Motor"</string>
     <string name="tts_install_voice_title" msgid="5133545696447933812">"Veus"</string>
-    <string name="tts_spoken_language" msgid="4652894245474520872">"Idioma de la veu"</string>
+    <string name="tts_spoken_language" msgid="4652894245474520872">"Idioma parlat"</string>
     <string name="tts_install_voices_title" msgid="6505257816336165782">"Instal·la veus"</string>
     <string name="tts_install_voices_text" msgid="902408506519246362">"Continua a l\'aplicació <xliff:g id="TTS_APP_NAME">%s</xliff:g> per instal·lar veus"</string>
     <string name="tts_install_voices_open" msgid="919034855418197668">"Obre una aplicació"</string>
@@ -2709,6 +2721,7 @@
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Aplicacions predeterminades"</string>
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Aplicacions clonades"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Crea una segona instància d\'una aplicació per poder utilitzar dos comptes alhora."</string>
+    <string name="desc_cloneable_app_list_text" msgid="3354586725814708688">"Aplicacions que es poden clonar."</string>
     <string name="cloned_apps_summary" msgid="8805362440770795709">"Aplicacions clonades: <xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g>; aplicacions disponibles per clonar: <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g>"</string>
     <string name="delete_all_app_clones" msgid="3489053361980624999">"Suprimeix totes les aplicacions clonades"</string>
     <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"Error en suprimir les apps clonades"</string>
@@ -2883,7 +2896,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Quan arribin notificacions, el telèfon no emetrà cap so ni vibrarà."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Notificacions sense so ni elements visuals"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"No veuràs ni sentiràs notificacions"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Les notificacions noves i existents no es mostraran ni faran que el telèfon soni ni vibri. Tingues en compte que les notificacions importants de l\'estat i l\'activitat del telèfon continuaran mostrant-se.\n\nQuan desactivis el mode No molestis, podràs veure les notificacions que t\'has perdut lliscant cap avall des de la part superior de la pantalla."</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"El telèfon no mostrarà cap notificació, ni sonarà ni vibrarà per a les notificacions noves o existents. Tingues en compte que les notificacions importants de l\'estat i l\'activitat del dispositiu continuaran mostrant-se.\n\nQuan desactivis el mode No molestis, podràs veure les notificacions que t\'has perdut lliscant cap avall des de la part superior de la pantalla."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Personalitzat"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Activa la configuració personalitzada"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Suprimeix la configuració personalitzada"</string>
@@ -2907,7 +2920,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"So i vibració"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"So, vibració i alguns senyals visuals de les notificacions"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"So, vibració i senyals visuals de les notificacions"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="1115914818435434668">"Les notificacions necessàries per a l\'estat i les activitats bàsiques del telèfon no s\'amagaran mai."</string>
+    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"Les notificacions necessàries per a l\'estat i les activitats bàsiques del dispositiu no s\'amagaran mai."</string>
     <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"Cap"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"Altres opcions"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"Afegeix"</string>
@@ -3017,6 +3030,10 @@
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Després de desbloquejar, ves directament a la darrera pantalla utilitzada"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"pantalla de bloqueig, bloqueig, ometre, saltar"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Amb el perfil de treball bloquejat"</string>
+    <!-- no translation found for unseen_notifs_lock_screen (6910701117021324612) -->
+    <skip />
+    <!-- no translation found for unseen_notifs_lock_screen_summary (8824730389406143614) -->
+    <skip />
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificacions a la pantalla de bloqueig"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Mostra les converses, predeterminades i silencioses"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostra les converses, predeterminades i silencioses"</string>
@@ -3153,8 +3170,7 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Accés a No molestis"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permet l\'accés al mode No molestis"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Cap aplicació instal·lada no ha sol·licitat accés a No molestis."</string>
-    <!-- no translation found for app_notifications_off_desc (2484843759466874201) -->
-    <skip />
+    <string name="app_notifications_off_desc" msgid="2484843759466874201">"No has permès les notificacions d\'aquesta aplicació"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Tal com has sol·licitat, Android està bloquejant aquesta categoria de notificacions perquè no apareguin al dispositiu"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Tal com has sol·licitat, Android està bloquejant aquest grup de notificacions perquè no apareguin al dispositiu"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Aquesta aplicació no envia notificacions"</string>
@@ -3375,10 +3391,8 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Desactivades"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Configuració avançada"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Gestor de permisos"</string>
-    <!-- no translation found for app_data_sharing_updates_title (921888411974134089) -->
-    <skip />
-    <!-- no translation found for app_data_sharing_updates_summary (1500580254161164185) -->
-    <skip />
+    <string name="app_data_sharing_updates_title" msgid="921888411974134089">"Actual. de compartició de dades"</string>
+    <string name="app_data_sharing_updates_summary" msgid="1500580254161164185">"Mostra quines aplicacions han actualitzat recentment la política de compartició de dades"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Toca per activar"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Toca dos cops un punt de la pantalla per activar el dispositiu"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Obertura d\'enllaços"</string>
@@ -4219,8 +4233,7 @@
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personal"</string>
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Treball"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Opció predeterminada del sistema"</string>
-    <!-- no translation found for default_app_none (5420632042222036264) -->
-    <skip />
+    <string name="default_app_none" msgid="5420632042222036264">"Cap"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Aquesta opció ja no és vàlida. Torna-ho a provar."</string>
     <string name="power_menu_setting_name" msgid="2394440932633137229">"Mantén premut el botó d\'engegada"</string>
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Mantén premut el botó d\'engegada per accedir a:"</string>
@@ -4365,8 +4378,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Permet 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"El 2G és menys segur, però pot millorar la teva connexió en algunes ubicacions. Per a les trucades d\'emergència, el 2G sempre es permet."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> necessita una connexió 2G disponible"</string>
-    <string name="allow_null_algorithms_title" msgid="9143076634352979096">"Permet una connexió menys segura"</string>
-    <string name="allow_null_algorithms_summary" msgid="5874570357011783211">"Pot ser que millori el senyal en algunes ubicacions. Per a les trucades d\'emergència, sempre es permeten connexions menys segures."</string>
+    <string name="require_cellular_encryption_title" msgid="7516008146269371585">"Sol·licita l\'encriptació"</string>
+    <string name="require_cellular_encryption_summary" msgid="4813823321032908641">"L\'encriptació és més segura, però és possible que no puguis connectar-te en algunes ubicacions. Per a les trucades d\'emergència, l\'encriptació no es requereix mai."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Tots els serveis"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Mostra l\'accés al porta-retalls"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Mostra un missatge quan les aplicacions accedeixen al text, a les imatges o a qualsevol altre contingut que hagis copiat"</string>
@@ -4481,6 +4494,5 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Desinstal·la l\'aplicació"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Aplicacions instal·lades en el # darrer mes}other{Aplicacions instal·lades en els # darrers mesos}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Aplicacions instal·lades fa més d’# mes}other{Aplicacions instal·lades fa més de # mesos}}"</string>
-    <!-- no translation found for accessibility_fingerprint_label (5017431423168191733) -->
-    <skip />
+    <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensor d\'empremtes digitals"</string>
 </resources>
