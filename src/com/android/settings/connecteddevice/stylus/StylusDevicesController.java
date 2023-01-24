@@ -27,6 +27,8 @@ import android.provider.Settings.Secure;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.InputDevice;
+import android.view.inputmethod.InputMethodInfo;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
@@ -119,14 +121,15 @@ public class StylusDevicesController extends AbstractPreferenceController implem
         return pref;
     }
 
-    private SwitchPreference createHandwritingPreference() {
-        SwitchPreference pref = new SwitchPreference(mContext);
+    private SwitchPreference createOrUpdateHandwritingPreference(SwitchPreference preference) {
+        SwitchPreference pref = preference == null ? new SwitchPreference(mContext) : preference;
         pref.setKey(KEY_HANDWRITING);
         pref.setTitle(mContext.getString(R.string.stylus_textfield_handwriting));
         pref.setIcon(R.drawable.ic_text_fields_alt);
         pref.setOnPreferenceClickListener(this);
         pref.setChecked(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.STYLUS_HANDWRITING_ENABLED, 0) == 1);
+        pref.setVisible(currentInputMethodSupportsHandwriting());
         return pref;
     }
 
@@ -157,6 +160,18 @@ public class StylusDevicesController extends AbstractPreferenceController implem
                 Settings.Global.putInt(mContext.getContentResolver(),
                         Settings.Global.STYLUS_HANDWRITING_ENABLED,
                         ((SwitchPreference) preference).isChecked() ? 1 : 0);
+
+                if (((SwitchPreference) preference).isChecked()) {
+                    InputMethodManager imm = mContext.getSystemService(InputMethodManager.class);
+                    InputMethodInfo inputMethod = imm.getCurrentInputMethodInfo();
+                    if (inputMethod == null) break;
+
+                    Intent handwritingIntent =
+                            inputMethod.createStylusHandwritingSettingsActivityIntent();
+                    if (handwritingIntent != null) {
+                        mContext.startActivity(handwritingIntent);
+                    }
+                }
                 break;
             case KEY_IGNORE_BUTTON:
                 Settings.Secure.putInt(mContext.getContentResolver(),
@@ -194,17 +209,23 @@ public class StylusDevicesController extends AbstractPreferenceController implem
             mPreferencesContainer.addPreference(notesPref);
         }
 
-        Preference handwritingPref = mPreferencesContainer.findPreference(KEY_HANDWRITING);
-        // TODO(b/255732419): add proper InputMethodInfo conditional to show or hide
-        // InputMethodManager imm = mContext.getSystemService(InputMethodManager.class);
-        if (handwritingPref == null) {
-            mPreferencesContainer.addPreference(createHandwritingPreference());
+        SwitchPreference currHandwritingPref = mPreferencesContainer.findPreference(
+                KEY_HANDWRITING);
+        Preference handwritingPref = createOrUpdateHandwritingPreference(currHandwritingPref);
+        if (currHandwritingPref == null) {
+            mPreferencesContainer.addPreference(handwritingPref);
         }
 
         Preference buttonPref = mPreferencesContainer.findPreference(KEY_IGNORE_BUTTON);
         if (buttonPref == null) {
             mPreferencesContainer.addPreference(createButtonPressPreference());
         }
+    }
+
+    private boolean currentInputMethodSupportsHandwriting() {
+        InputMethodManager imm = mContext.getSystemService(InputMethodManager.class);
+        InputMethodInfo inputMethod = imm.getCurrentInputMethodInfo();
+        return inputMethod != null && inputMethod.supportsStylusHandwriting();
     }
 
     /**
