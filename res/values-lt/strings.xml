@@ -143,13 +143,15 @@
     <string name="skip_label" msgid="6380034601349015895">"Praleisti"</string>
     <string name="next_label" msgid="1248293387735652187">"Kitas"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Kalbos"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"Pageidaujamų kalbų eiliškumas"</string>
+    <string name="desc_current_default_language" msgid="1901157141663662859">"Sistemos kalba"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Pašalinti"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Pridėti kalbą"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Kalba"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Pageidaujama kalba"</string>
-    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Programų kalbos"</string>
+    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Programų kalbos"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Nustatykite kiekvienos programos kalbą"</string>
-    <string name="app_locale_picker_title" msgid="8423365003726200684">"Programos kalba"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"Programos kalba"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Siūlomos kalbos"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Visos kalbos"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Sistemos kalba"</string>
@@ -157,6 +159,9 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Šios programos kalbos pasirinkimas nepasiekiamas iš skilties „Nustatymai“."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Kalba gali skirtis nuo programoje pasiekiamų kalbų. Kai kuriose programose šis nustatymas gali būti nepalaikomas."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Čia rodomos tik kalbos pasirinkimą palaikančios programos."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Jūsų sistema, programos ir svetainės naudoja pirmąją palaikomą kalbą iš pageidaujamų sąrašo."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Norėdami pasirinkti kalbą kiekvienai programai, eikite į programų kalbų nustatymus."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Sužinokite daugiau apie kalbas"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regiono nuostatos"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Nustatyti vienetus ir numerių nuostatas"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Leiskite programoms žinoti jūsų regiono nuostatas, kad galėtų suasmeninti funkcijas."</string>
@@ -179,7 +184,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Tekstas bus rodomas kita kalba."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Negalima pašalinti visų kalbų"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Palikite bent vieną pageidaujamą kalbą"</string>
-    <string name="locale_not_translated" msgid="5079729745235316146">"Gali būti nepasiekiama kai kuriose programose"</string>
+    <string name="locale_not_translated" msgid="3071618135527110152">"Nepasiekiama kaip sistemos kalba"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Perkelti aukštyn"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Perkelti žemyn"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Perkelti į viršų"</string>
@@ -413,8 +418,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Atlikta"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Oi, tai ne jutiklis"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Smiliumi palieskite jutiklį tel. užp. dalyje."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Registracija neužbaigta"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Baigėsi kontrolinio kodo sąrankos skirtasis laikas"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Dabar bandykite dar kartą arba vėliau nustatykite kontrolinį kodą skiltyje „Nustatymai“"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Nepavyko užregistruoti piršto antspaudo. Bandykite dar kartą arba atlikite tai kitu pirštu."</string>
@@ -885,8 +889,9 @@
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Kai pasukate telefoną stačiai ar gulsčiai"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Ekrano skyra"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Didelė skyra"</string>
-    <!-- no translation found for screen_resolution_option_full (2694003735219114186) -->
-    <skip />
+    <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Visa skyra"</string>
+    <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
+    <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"Esant visai skyrai eikvojama daugiau akumuliatoriaus energijos. Perjungus skyrą, kai kurios programos gali būti paleistos iš naujo."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Pasirinkta"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Spalvos"</string>
@@ -1012,6 +1017,9 @@
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Naudoti „<xliff:g id="CARRIER">%1$s</xliff:g>“"</string>
     <string name="sim_preferred_title" msgid="8850185380445309835">"Atnaujinti pageid. SIM kort.?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"„<xliff:g id="NEW_SIM">%1$s</xliff:g>“ yra vienintelė SIM kortelė įrenginyje. Ar norite naudoti šią SIM kortelę mobiliojo ryšio duomenims, skambučiams ir SMS pranešimams?"</string>
+    <string name="enable_auto_data_switch_dialog_title" msgid="2220065802765581029">"Automatiškai perjungti SIM?"</string>
+    <string name="enable_auto_data_switch_dialog_message" msgid="8113487212923434425">"Leiskite telefone automatiškai perjungti į „<xliff:g id="BACKUP_CARRIER">%1$s</xliff:g>“ mobiliojo ryšio duomenis, kai jų pasiekiamumas geresnis."</string>
+    <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"Skambučiai, pranešimai ir tinklo srautas gali būti rodomi jūsų organizacijai."</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Netinkamas SIM kortelės PIN kodas. Reikės susisiekti su operatoriumi, kad atrakintų įrenginį."</string>
     <string name="wrong_pin_code" msgid="8124222991071607958">"{count,plural, =1{Netinkamas SIM kortelės PIN kodas. Jums liko # bandymas. Paskui reikės susisiekti su operatoriumi, kad atrakintumėte įrenginį.}one{Netinkamas SIM kortelės PIN kodas. Jums liko # bandymas.}few{Netinkamas SIM kortelės PIN kodas. Jums liko # bandymai.}many{Netinkamas SIM kortelės PIN kodas. Jums liko # bandymo.}other{Netinkamas SIM kortelės PIN kodas. Jums liko # bandymų.}}"</string>
     <string name="wrong_pin_code_one" msgid="6924852214263071441">"Netinkamas SIM kortelės PIN kodas. Jums liko vienas bandymas, paskui reikės susisiekti su operatoriumi, kad atrakintų įrenginį."</string>
@@ -1033,18 +1041,14 @@
     <string name="storage_settings_title" msgid="486118156723194815">"Atmintinės nustatymai"</string>
     <string name="status_eid" msgid="7532406028683438634">"EID"</string>
     <string name="eid_multi_sim" msgid="9087924808336397804">"EID (SIM kortelės anga <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <!-- no translation found for imei_multi_sim (9001570420423929507) -->
-    <skip />
-    <!-- no translation found for imei_multi_sim_primary (7914653040843734282) -->
-    <skip />
+    <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (<xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g> SIM lizdas)"</string>
+    <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (<xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g> SIM lizdas) (pagrindinis)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Norėdami peržiūrėti pasirinkite išsaugotą tinklą"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN."</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL versija"</string>
-    <!-- no translation found for meid_multi_sim (1460689549266621286) -->
-    <skip />
-    <!-- no translation found for meid_multi_sim_primary (8921262417580407201) -->
-    <skip />
+    <string name="meid_multi_sim" msgid="1460689549266621286">"MEID (<xliff:g id="MEID_SLOT_ID">%1$d</xliff:g> SIM lizdas)"</string>
+    <string name="meid_multi_sim_primary" msgid="8921262417580407201">"MEID (<xliff:g id="MEID_SLOT_ID_PRIMARY">%1$d</xliff:g> SIM lizdas) (pagrindinis)"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"Mobiliojo ryšio duomenų tinklo tipas"</string>
@@ -1788,6 +1792,12 @@
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Padarykite pelės žymeklį geriau matomą"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Pašalinti animacijas"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Sumažinkite judėjimą ekrane"</string>
+    <!-- no translation found for accessibility_contrast_level_title (8044307040061738158) -->
+    <skip />
+    <!-- no translation found for accessibility_contrast_level_left_label (732834661342809574) -->
+    <skip />
+    <!-- no translation found for accessibility_contrast_level_right_label (5381154127087484725) -->
+    <skip />
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Monofoninis garsas"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Sujungti kanalus leidžiant garsą"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Garso balansas"</string>
@@ -2104,8 +2114,12 @@
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Palieskite, jei norite sužinoti daugiau apie šią klaidą"</string>
     <string name="power_screen" msgid="4596900105850963806">"Ekranas"</string>
+    <!-- no translation found for power_cpu (1820472721627148746) -->
+    <skip />
     <string name="power_flashlight" msgid="8993388636332573202">"Žibintuvėlis"</string>
     <string name="power_camera" msgid="4778315081581293923">"Fotoaparatas"</string>
+    <!-- no translation found for power_gps (6352380895542498164) -->
+    <skip />
     <string name="power_wifi" msgid="4614007837288250325">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
     <string name="power_cell" msgid="7793805106954398186">"Mobiliojo ryšio tinklas"</string>
@@ -2121,8 +2135,7 @@
     <string name="battery_not_usage" msgid="3851536644733662392">"Nenaudota nuo paskutinio visiško įkrovimo"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Nenaudota per pastarąsias 24 val."</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
-    <!-- no translation found for battery_usage_since_last_full_charge (3488425008925924769) -->
-    <skip />
+    <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"nuo paskutinio visiško įkrovimo"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Sistemos programos"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Kita"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Liko laiko (numatyta)"</string>
@@ -2705,6 +2718,7 @@
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Numatytosios programos"</string>
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Nukopijuotos programos"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Sukurkite antrą programos atvejį, kad galėtumėte naudoti dvi paskyras vienu metu."</string>
+    <string name="desc_cloneable_app_list_text" msgid="3354586725814708688">"Programos, kurias galima kopijuoti."</string>
     <string name="cloned_apps_summary" msgid="8805362440770795709">"Nukopijuota: <xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g>; galima kopijuoti: <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g>"</string>
     <string name="delete_all_app_clones" msgid="3489053361980624999">"Visų programų kopijų ištrynimas"</string>
     <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"Nepavyko ištrinti visų programų kopijų"</string>
@@ -2879,7 +2893,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Gavus pranešimą telefonas neskleis garso ir nevibruos."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Nieko nerodyti arba neskambėti gavus pranešimų"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Nematysite arba negirdėsite pranešimų"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Jūsų telefonas nerodys naujų ar esamų pranešimų, nevibruos ir neskambės. Atminkite, kad svarbūs pranešimai apie telefono veiklą ir būseną vis tiek bus rodomi.\n\nIšjungę „Netrukdymo“ režimą praleistus pranešimus rasite perbraukę žemyn iš ekrano viršaus."</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"Jūsų telefonas nerodys naujų ar esamų pranešimų, nevibruos ir neskambės. Atminkite, kad svarbūs pranešimai apie įrenginio veiklą ir būseną vis tiek bus rodomi.\n\nIšjungę netrukdymo režimą praleistus pranešimus rasite perbraukę žemyn iš ekrano viršaus."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Tinkinti"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Įgalinti tinkintą nustatymą"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Pašalinti tinkintą nustatymą"</string>
@@ -2903,7 +2917,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"Garsas ir vibravimas"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"Pranešimų garsas, vibravimas ir kai kurie vaizdiniai ženklai"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"Pranešimų garsas, vibravimas ir vaizdiniai ženklai"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="1115914818435434668">"Būtini pagrindinės telefono veiklos ir būsenos pranešimai niekada nebus slepiami."</string>
+    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"Būtini pagrindinės įrenginio veiklos ir būsenos pranešimai niekada nebus slepiami."</string>
     <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"Nėra"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"kitos parinktys"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"Pridėti"</string>
@@ -3013,6 +3027,10 @@
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Atrakinę tiesiogiai eikite į paskutinį naudotą ekraną"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"užrakinimo ekranas, praleisti, apeiti"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Kai darbo profilis užrakintas"</string>
+    <!-- no translation found for unseen_notifs_lock_screen (6910701117021324612) -->
+    <skip />
+    <!-- no translation found for unseen_notifs_lock_screen_summary (8824730389406143614) -->
+    <skip />
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Pranešimai užrakinimo ekrane"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Rodyti pokalbius, numatytuosius ir tylius"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Rodyti pokalbius, numatytuosius ir tylius"</string>
@@ -3149,8 +3167,7 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Prieiga „Netrukdyti“"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Leisti netrukdymo režimą"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Jokios įdiegtos programos nepateikė prieigos „Netrukdyti“ užklausos"</string>
-    <!-- no translation found for app_notifications_off_desc (2484843759466874201) -->
-    <skip />
+    <string name="app_notifications_off_desc" msgid="2484843759466874201">"Neleidote šios programos pranešimų"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"„Android“ jūsų prašymu blokuoja šios kategorijos pranešimus, kad jie nebūtų rodomi šiame įrenginyje"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"„Android“ jūsų prašymu blokuoja šios grupės pranešimus, kad jie nebūtų rodomi šiame įrenginyje"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Ši programa nesiunčia pranešimų"</string>
@@ -4215,8 +4232,7 @@
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Asmeninė"</string>
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Darbo"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Numatytasis sistemos nustatymas"</string>
-    <!-- no translation found for default_app_none (5420632042222036264) -->
-    <skip />
+    <string name="default_app_none" msgid="5420632042222036264">"Nėra"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Šios parinkties nebegalima pasirinkti. Bandykite dar kartą."</string>
     <string name="power_menu_setting_name" msgid="2394440932633137229">"Paspauskite ir palaikykite maitinimo mygtuką"</string>
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Paspauskite ir palaikykite maitinimo mygtuką prieigai"</string>
@@ -4363,8 +4379,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Leisti 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G ne toks saugus, bet kai kur ryšys gali būti geresnis. 2G visada leidžiama naudoti skambučiams pagalbos numeriu."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"„<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>“ būtinas 2G"</string>
-    <string name="allow_null_algorithms_title" msgid="9143076634352979096">"Leisti ne tokį saugų ryšį"</string>
-    <string name="allow_null_algorithms_summary" msgid="5874570357011783211">"Kai kuriose vietovėse signalas gali būti geresnis. Skambučiams pagalbos numeriu visada leidžiamas ir ne toks saugus ryšys."</string>
+    <string name="require_cellular_encryption_title" msgid="7516008146269371585">"Reikalauti šifruotės"</string>
+    <string name="require_cellular_encryption_summary" msgid="4813823321032908641">"Šifruotės metodas saugesnis, bet gali nepavykti prisijungti kai kuriose vietovėse. Skambučiams pagalbos numeriu šifruotė niekada nereikalinga"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Visos paslaugos"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Rodyti iškarpinės prieigą"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Rodyti pranešimą, kai programos pasiekia nukopijuotą tekstą, vaizdus ar kitą turinį"</string>
@@ -4479,6 +4495,5 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Pašalinti programą"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Programos įdiegtos per pastarąjį # mėnesį}one{Programos įdiegtos per pastaruosius # mėnesį}few{Programos įdiegtos per pastaruosius # mėnesius}many{Programos įdiegtos per pastaruosius # mėnesio}other{Programos įdiegtos per pastaruosius # mėnesių}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Programos įdiegtos daugiau nei prieš # mėnesį}one{Programos įdiegtos daugiau nei prieš # mėnesį}few{Programos įdiegtos daugiau nei prieš # mėnesius}many{Programos įdiegtos daugiau nei prieš # mėnesio}other{Programos įdiegtos daugiau nei prieš # mėnesių}}"</string>
-    <!-- no translation found for accessibility_fingerprint_label (5017431423168191733) -->
-    <skip />
+    <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Piršto atspaudo jutiklis"</string>
 </resources>

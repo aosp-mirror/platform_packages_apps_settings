@@ -45,7 +45,6 @@ import com.android.settings.widget.SummaryUpdater;
 import com.android.settings.wifi.WifiSummaryUpdater;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.mobile.dataservice.DataServiceUtils;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
@@ -238,10 +237,8 @@ public class InternetPreferenceController extends AbstractPreferenceController i
 
     @Override
     public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-        if (DataServiceUtils.shouldUpdateEntityList(mSubInfoEntityList, subInfoEntityList)) {
-            mSubInfoEntityList = subInfoEntityList;
-            updateState(mPreference);
-        }
+        mSubInfoEntityList = subInfoEntityList;
+        updateState(mPreference);
     }
 
     @Override
