@@ -89,7 +89,7 @@ public class ScreenOnTimeController extends BasePreferenceController {
         final CharSequence timeSequence =
                 StringUtil.formatElapsedTime(mPrefContext, (double) screenOnTime,
                         /*withSeconds=*/ false, /*collapseTimeUnit=*/ false);
-        mScreenOnTimeTextPreference.setText(enlargeFontOfNumber(timeSequence));
+        mScreenOnTimeTextPreference.setText(enlargeFontOfNumber(removeCommas(timeSequence)));
         mScreenOnTimeTextPreference.setVisible(true);
     }
 
@@ -106,5 +106,9 @@ public class ScreenOnTimeController extends BasePreferenceController {
                     matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         return spannableText;
+    }
+
+    private static CharSequence removeCommas(CharSequence text) {
+        return text.toString().replaceAll(",", "");
     }
 }
