@@ -57,6 +57,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.android.settings.R;
+import com.android.settingslib.widget.LottieColorUtils;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieDrawable;
@@ -300,6 +301,7 @@ public final class AccessibilityGestureNavigationTutorial {
                         result));
         lottieView.setAnimation(imageRawRes);
         lottieView.setRepeatCount(LottieDrawable.INFINITE);
+        LottieColorUtils.applyDynamicColors(context, lottieView);
         lottieView.playAnimation();
 
         return illustrationFrame;
