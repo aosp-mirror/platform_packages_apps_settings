@@ -37,7 +37,6 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.mobile.dataservice.DataServiceUtils;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
@@ -224,10 +223,8 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
 
     @Override
     public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> activeSubInfoList) {
-        if (DataServiceUtils.shouldUpdateEntityList(mSubInfoEntityList, activeSubInfoList)) {
-            mSubInfoEntityList = activeSubInfoList;
-            update();
-        }
+        mSubInfoEntityList = activeSubInfoList;
+        update();
     }
 
     @Override

@@ -41,7 +41,6 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.mobile.dataservice.DataServiceUtils;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
@@ -203,10 +202,8 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     @Override
     public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-        if (DataServiceUtils.shouldUpdateEntityList(mSubInfoEntityList, subInfoEntityList)) {
-            mSubInfoEntityList = subInfoEntityList;
-            update();
-        }
+        mSubInfoEntityList = subInfoEntityList;
+        update();
     }
 
     @Override
@@ -215,19 +212,14 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     @Override
     public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
-        if (DataServiceUtils.shouldUpdateEntityList(mUiccInfoEntityList, uiccInfoEntityList)) {
-            mUiccInfoEntityList = uiccInfoEntityList;
-            update();
-        }
+        mUiccInfoEntityList = uiccInfoEntityList;
+        update();
     }
 
     @Override
     public void onAllMobileNetworkInfoChanged(
             List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
-        if (DataServiceUtils.shouldUpdateEntityList(mMobileNetworkInfoEntityList,
-                mobileNetworkInfoEntityList)) {
-            mMobileNetworkInfoEntityList = mobileNetworkInfoEntityList;
-            update();
-        }
+        mMobileNetworkInfoEntityList = mobileNetworkInfoEntityList;
+        update();
     }
 }
