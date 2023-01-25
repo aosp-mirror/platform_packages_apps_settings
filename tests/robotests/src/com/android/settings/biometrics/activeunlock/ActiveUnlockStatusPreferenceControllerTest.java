@@ -22,6 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
+import static org.robolectric.shadows.ShadowLooper.idleMainLooper;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -43,6 +44,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -66,6 +68,7 @@ public class ActiveUnlockStatusPreferenceControllerTest {
 
     @Before
     public void setUp() {
+        Robolectric.setupContentProvider(FakeContentProvider.class, FakeContentProvider.AUTHORITY);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)).thenReturn(true);
@@ -80,6 +83,7 @@ public class ActiveUnlockStatusPreferenceControllerTest {
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
         ActiveUnlockTestUtils.enable(mContext);
+        FakeContentProvider.init(mContext);
         mController = new ActiveUnlockStatusPreferenceController(mContext);
     }
 
@@ -135,5 +139,32 @@ public class ActiveUnlockStatusPreferenceControllerTest {
         mController.displayPreference(mPreferenceScreen);
 
         assertThat(mPreference.isVisible()).isTrue();
+    }
+
+    @Test
+    public void defaultState_summaryIsEmpty() {
+        mController.displayPreference(mPreferenceScreen);
+
+        idleMainLooper();
+
+        assertThat(mPreference.getSummary().toString()).isEqualTo(" ");
+    }
+
+    @Test
+    public void onStart_summaryIsUpdated() {
+        String summary = "newSummary";
+        updateSummary(summary);
+        mController.displayPreference(mPreferenceScreen);
+
+        mController.onStart();
+        idleMainLooper();
+
+        assertThat(mPreference.getSummary().toString()).isEqualTo(summary);
+    }
+
+    private void updateSummary(String summary) {
+        FakeContentProvider.setTileSummary(summary);
+        mContext.getContentResolver().notifyChange(FakeContentProvider.URI, null /* observer */);
+        idleMainLooper();
     }
 }

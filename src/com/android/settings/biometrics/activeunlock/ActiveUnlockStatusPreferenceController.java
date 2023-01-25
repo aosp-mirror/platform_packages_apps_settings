@@ -27,6 +27,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricStatusPreferenceController;
+import com.android.settings.biometrics.activeunlock.ActiveUnlockContentListener.OnContentChangedListener;
 import com.android.settingslib.RestrictedPreference;
 
 /**
@@ -34,7 +35,8 @@ import com.android.settingslib.RestrictedPreference;
  * controls the ability to unlock the phone with watch authentication.
  */
 public class ActiveUnlockStatusPreferenceController
-        extends BiometricStatusPreferenceController implements LifecycleObserver {
+        extends BiometricStatusPreferenceController
+        implements LifecycleObserver, OnContentChangedListener {
     /**
      * Preference key.
      *
@@ -43,7 +45,9 @@ public class ActiveUnlockStatusPreferenceController
     public static final String KEY_ACTIVE_UNLOCK_SETTINGS = "biometric_active_unlock_settings";
     @Nullable private RestrictedPreference mPreference;
     @Nullable private PreferenceScreen mPreferenceScreen;
+    @Nullable private String mSummary;
     private final ActiveUnlockStatusUtils mActiveUnlockStatusUtils;
+    private final ActiveUnlockSummaryListener mActiveUnlockSummaryListener;
 
     public ActiveUnlockStatusPreferenceController(@NonNull Context context) {
         this(context, KEY_ACTIVE_UNLOCK_SETTINGS);
@@ -53,6 +57,14 @@ public class ActiveUnlockStatusPreferenceController
             @NonNull Context context, @NonNull String key) {
         super(context, key);
         mActiveUnlockStatusUtils = new ActiveUnlockStatusUtils(context);
+        mActiveUnlockSummaryListener = new ActiveUnlockSummaryListener(context, this);
+    }
+
+
+    /** Subscribes to update preference summary dynamically. */
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    public void onStart() {
+        mActiveUnlockSummaryListener.subscribe();
     }
 
     /** Resets the preference reference on resume. */
@@ -60,6 +72,20 @@ public class ActiveUnlockStatusPreferenceController
     public void onResume() {
         if (mPreferenceScreen != null) {
             displayPreference(mPreferenceScreen);
+        }
+    }
+
+    /** Unsubscribes to prevent leaked listener. */
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    public void onStop() {
+        mActiveUnlockSummaryListener.unsubscribe();
+    }
+
+    @Override
+    public void onContentChanged(String newContent) {
+        mSummary = newContent;
+        if (mPreference != null) {
+            mPreference.setSummary(getSummaryText());
         }
     }
 
@@ -94,8 +120,11 @@ public class ActiveUnlockStatusPreferenceController
 
     @Override
     protected String getSummaryText() {
-        // TODO(b/264812018): set the summary from the ContentProvider
-        return "";
+        if (mSummary == null) {
+            // return non-empty string to prevent re-sizing of the tile
+            return " ";
+        }
+        return mSummary;
     }
 
     @Override
