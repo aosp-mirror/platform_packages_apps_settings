@@ -551,9 +551,9 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Touch the power button without pressing it"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"How to set up your fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"It\'s on the back of your phone. Use your index finger."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the tablet.\n\nPressing the power button turns off the screen."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the device.\n\nPressing the power button turns off the screen."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the phone.\n\nPressing the power button turns off the screen."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="6345521315059783195">"The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the tablet."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="5548015866784733975">"The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the device."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="1977903336177861081">"The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the phone."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"The fingerprint sensor is on your screen. You’ll capture your fingerprint on the next screen."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Start"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Move your finger across the screen to find the sensor. Touch &amp; hold the fingerprint sensor."</string>
@@ -588,10 +588,8 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Now you can use your fingerprint to unlock your tablet or verify that it’s you, like when you sign in to apps or approve a purchase"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Now you can use your fingerprint to unlock your device or verify that it’s you, like when you sign in to apps or approve a purchase"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Now you can use your fingerprint to unlock your phone or verify that it’s you, like when you sign in to apps or approve a purchase"</string>
-    <!-- no translation found for security_settings_require_screen_on_to_auth_title (1641621458536715518) -->
-    <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_description (4158414711168345398) -->
-    <skip />
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Touch to unlock at any time"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Touch the sensor to unlock, even when the screen is off. This makes accidental unlocking more likely."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Screen, unlock"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Do it later"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Lift, then touch again"</string>
@@ -650,8 +648,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Done"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Whoops, that\'s not the sensor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Touch the sensor on the back of your phone. Use your index finger."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Enrolment was not completed"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Fingerprint setup timed out"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Try again now or set up your fingerprint later in Settings"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Fingerprint enrolment didn\'t work. Try again or use a different finger."</string>
@@ -3882,7 +3879,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"When notifications arrive, your phone won’t make a sound or vibrate."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"No visuals or sound from notifications"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"You won’t see or hear notifications"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Your phone won’t show, vibrate or make sound for new or existing notifications. Bear in mind: critical notifications for phone activity and status will still appear.\n\nWhen you turn off Do Not Disturb, find missed notifications by swiping down from the top of your screen."</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"Your phone won’t show, vibrate or make sound for new or existing notifications. Bear in mind that critical notifications for device activity and status will still appear.\n\nWhen you turn off Do Not Disturb, find missed notifications by swiping down from the top of your screen."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Custom"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Enable custom setting"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Remove custom setting"</string>
@@ -3906,7 +3903,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"Sound and vibration"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"Sound, vibration and some visual signs of notifications"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"Sound, vibration and visual signs of notifications"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="1115914818435434668">"Notifications needed for basic phone activity and status will never be hidden."</string>
+    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"Notifications needed for basic device activity and status will never be hidden."</string>
     <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"None"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"other options"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"Add"</string>
@@ -4040,6 +4037,10 @@
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"After unlocking, go directly to last used screen"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Lock screen, Lockscreen, Skip, Bypass"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"When work profile is locked"</string>
+    <!-- no translation found for unseen_notifs_lock_screen (6910701117021324612) -->
+    <skip />
+    <!-- no translation found for unseen_notifs_lock_screen_summary (8824730389406143614) -->
+    <skip />
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notifications on lock screen"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Show conversations, default and silent"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Show conversations, default and silent"</string>
