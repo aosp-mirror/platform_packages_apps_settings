@@ -64,8 +64,9 @@ public class AccessibilitySettings extends DashboardFragment {
     private static final String CATEGORY_CAPTIONS = "captions_category";
     private static final String CATEGORY_AUDIO = "audio_category";
     private static final String CATEGORY_DISPLAY = "display_category";
-    private static final String CATEGORY_INTERACTION_CONTROL = "interaction_control_category";
     private static final String CATEGORY_DOWNLOADED_SERVICES = "user_installed_services_category";
+    @VisibleForTesting
+    static final String CATEGORY_INTERACTION_CONTROL = "interaction_control_category";
 
     private static final String[] CATEGORIES = new String[]{
             CATEGORY_SCREEN_READER, CATEGORY_CAPTIONS, CATEGORY_AUDIO, CATEGORY_DISPLAY,
@@ -144,7 +145,8 @@ public class AccessibilitySettings extends DashboardFragment {
 
     private final Map<String, PreferenceCategory> mCategoryToPrefCategoryMap =
             new ArrayMap<>();
-    private final Map<Preference, PreferenceCategory> mServicePreferenceToPreferenceCategoryMap =
+    @VisibleForTesting
+    final Map<Preference, PreferenceCategory> mServicePreferenceToPreferenceCategoryMap =
             new ArrayMap<>();
     private final Map<ComponentName, PreferenceCategory> mPreBundledServiceComponentToCategoryMap =
             new ArrayMap<>();
@@ -351,6 +353,12 @@ public class AccessibilitySettings extends DashboardFragment {
                 R.array.config_preinstalled_display_services);
         initializePreBundledServicesMapFromArray(CATEGORY_INTERACTION_CONTROL,
                 R.array.config_preinstalled_interaction_control_services);
+
+        // ACCESSIBILITY_MENU_IN_SYSTEM is a default pre-bundled interaction control service.
+        // If the device opts out of including this service then this is a no-op.
+        mPreBundledServiceComponentToCategoryMap.put(
+                AccessibilityManager.ACCESSIBILITY_MENU_IN_SYSTEM,
+                mCategoryToPrefCategoryMap.get(CATEGORY_INTERACTION_CONTROL));
 
         final List<RestrictedPreference> preferenceList = getInstalledAccessibilityList(
                 getPrefContext());
