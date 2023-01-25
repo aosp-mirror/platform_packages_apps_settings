@@ -215,6 +215,11 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         }
     }
 
+    @Override
+    protected boolean shouldSkipForInitialSUW() {
+        return true;
+    }
+
     /**
      * Long-pressing a developer options quick settings tile will by default (see
      * QS_TILE_PREFERENCES in the manifest) take you to the developer options page.
