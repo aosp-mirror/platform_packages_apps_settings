@@ -551,9 +551,12 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Toca el botó d\'engegada sense prémer-lo"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Com pots configurar l\'empremta digital"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"És a la part posterior del telèfon. Utilitza el dit índex."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"El sensor d\'empremtes digitals es troba al botó d\'engegada. És el botó pla situat al costat del botó de volum elevat a l\'extrem de la tauleta.\n\nEn prémer el botó d\'engegada, la pantalla es desactiva."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"El sensor d\'empremtes digitals es troba al botó d\'engegada. És el botó pla situat al costat del botó de volum elevat a l\'extrem del dispositiu.\n\nEn prémer el botó d\'engegada, la pantalla es desactiva."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"El sensor d\'empremtes digitals es troba al botó d\'engegada. És el botó pla situat al costat del botó de volum elevat a l\'extrem del telèfon.\n\nEn prémer el botó d\'engegada, la pantalla es desactiva."</string>
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (6345521315059783195) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (5548015866784733975) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (1977903336177861081) -->
+    <skip />
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"El sensor d\'empremtes digitals es troba a la pantalla. Capturaràs l\'empremta digital a la pantalla següent."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Comença"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Mou el dit per la pantalla per trobar el sensor d\'empremtes digitals. Mantén-lo premut."</string>
@@ -588,10 +591,8 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Ara pots utilitzar l\'empremta digital per desbloquejar la tauleta o verificar que ets tu, com ara quan inicies la sessió en aplicacions o aproves una compra"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Ara pots utilitzar l\'empremta digital per desbloquejar el dispositiu o verificar que ets tu, com ara quan inicies la sessió en aplicacions o aproves una compra"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Ara pots utilitzar l\'empremta digital per desbloquejar el telèfon o verificar que ets tu, com ara quan inicies la sessió en aplicacions o aproves una compra"</string>
-    <!-- no translation found for security_settings_require_screen_on_to_auth_title (1641621458536715518) -->
-    <skip />
-    <!-- no translation found for security_settings_require_screen_on_to_auth_description (4158414711168345398) -->
-    <skip />
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Toca per desbloquejar en qualsevol moment"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Toca el sensor per desbloquejar el dispositiu, encara que la pantalla estigui desactivada. Això farà que sigui més probable que es desbloquegi accidentalment."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Pantalla, desbloqueig"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Fes-ho més tard"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Aixeca el dit i toca de nou"</string>
@@ -650,8 +651,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Fet"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Això no és el sensor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Toca el sensor situat a la part posterior amb el dit índex."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (5796228438604723279) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"No s\'ha completat el registre"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Temps esgotat per configurar l\'empremta digital"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Torna-ho a provar ara o configura l\'empremta digital més tard a Configuració"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"El registre de l\'empremta digital no ha funcionat. Torna-ho a provar o fes servir un altre dit."</string>
@@ -1865,7 +1865,7 @@
     <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"En aquest dispositiu hi ha altres usuaris.\n"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"La música"</li>\n<li>"Les fotos"</li>\n<li>"Altres dades de l\'usuari"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM"</li></string>
-    <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"No es cancel·larà el teu pla de servei mòbil."</string>
+    <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"No es cancel·larà el teu pla de serveis mòbils."</string>
     <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"Si vols suprimir música, imatges i altres dades de l\'usuari, cal que esborris l\'"<b>"emmagatzematge USB"</b>"."</string>
     <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"Si vols suprimir música, imatges i altres dades de l\'usuari, cal que esborris la "<b>"targeta SD"</b>"."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"Esborra l\'emmagatzematge USB"</string>
@@ -3129,7 +3129,7 @@
     <string name="tts_sliders_title" msgid="6901146958648426181">"Velocitat i to de veu"</string>
     <string name="tts_engine_section_title" msgid="5115035218089228451">"Motor"</string>
     <string name="tts_install_voice_title" msgid="5133545696447933812">"Veus"</string>
-    <string name="tts_spoken_language" msgid="4652894245474520872">"Idioma de la veu"</string>
+    <string name="tts_spoken_language" msgid="4652894245474520872">"Idioma parlat"</string>
     <string name="tts_install_voices_title" msgid="6505257816336165782">"Instal·la veus"</string>
     <string name="tts_install_voices_text" msgid="902408506519246362">"Continua a l\'aplicació <xliff:g id="TTS_APP_NAME">%s</xliff:g> per instal·lar veus"</string>
     <string name="tts_install_voices_open" msgid="919034855418197668">"Obre una aplicació"</string>
@@ -3882,7 +3882,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Quan arribin notificacions, el telèfon no emetrà cap so ni vibrarà."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Notificacions sense so ni elements visuals"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"No veuràs ni sentiràs notificacions"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Les notificacions noves i existents no es mostraran ni faran que el telèfon soni ni vibri. Tingues en compte que les notificacions importants de l\'estat i l\'activitat del telèfon continuaran mostrant-se.\n\nQuan desactivis el mode No molestis, podràs veure les notificacions que t\'has perdut lliscant cap avall des de la part superior de la pantalla."</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"El telèfon no mostrarà cap notificació, ni sonarà ni vibrarà per a les notificacions noves o existents. Tingues en compte que les notificacions importants de l\'estat i l\'activitat del dispositiu continuaran mostrant-se.\n\nQuan desactivis el mode No molestis, podràs veure les notificacions que t\'has perdut lliscant cap avall des de la part superior de la pantalla."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Personalitzat"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Activa la configuració personalitzada"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Suprimeix la configuració personalitzada"</string>
@@ -3906,7 +3906,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"So i vibració"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"So, vibració i alguns senyals visuals de les notificacions"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"So, vibració i senyals visuals de les notificacions"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="1115914818435434668">"Les notificacions necessàries per a l\'estat i les activitats bàsiques del telèfon no s\'amagaran mai."</string>
+    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"Les notificacions necessàries per a l\'estat i les activitats bàsiques del dispositiu no s\'amagaran mai."</string>
     <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"Cap"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"Altres opcions"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"Afegeix"</string>
@@ -4040,6 +4040,10 @@
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Després de desbloquejar, ves directament a la darrera pantalla utilitzada"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"pantalla de bloqueig, bloqueig, ometre, saltar"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Amb el perfil de treball bloquejat"</string>
+    <!-- no translation found for unseen_notifs_lock_screen (6910701117021324612) -->
+    <skip />
+    <!-- no translation found for unseen_notifs_lock_screen_summary (8824730389406143614) -->
+    <skip />
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificacions a la pantalla de bloqueig"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Mostra les converses, predeterminades i silencioses"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostra les converses, predeterminades i silencioses"</string>
@@ -4211,8 +4215,7 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permet l\'accés al mode No molestis"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Cap aplicació instal·lada no ha sol·licitat accés a No molestis."</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"S\'estan carregant les aplicacions…"</string>
-    <!-- no translation found for app_notifications_off_desc (2484843759466874201) -->
-    <skip />
+    <string name="app_notifications_off_desc" msgid="2484843759466874201">"No has permès les notificacions d\'aquesta aplicació"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Tal com has sol·licitat, Android està bloquejant aquesta categoria de notificacions perquè no apareguin al dispositiu"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Tal com has sol·licitat, Android està bloquejant aquest grup de notificacions perquè no apareguin al dispositiu"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Aquesta aplicació no envia notificacions"</string>
