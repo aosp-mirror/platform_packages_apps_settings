@@ -39,6 +39,8 @@ public final class FakeContentProvider extends ContentProvider {
             .build();
     public static final String METHOD_SUMMARY = "getSummary";
     public static final String KEY_SUMMARY = "com.android.settings.summary";
+    private static final String METHOD_DEVICE_NAME = "getDeviceName";
+    private static final String KEY_DEVICE_NAME = "com.android.settings.active_unlock.device_name";
     @Nullable private static String sTileSummary;
     @Nullable private static String sDeviceName;
 
@@ -50,10 +52,15 @@ public final class FakeContentProvider extends ContentProvider {
         sTileSummary = summary;
     }
 
+    public static void setDeviceName(String deviceName) {
+        sDeviceName = deviceName;
+    }
+
     public static void init(Context context) {
         Settings.Secure.putString(
                 context.getContentResolver(), ActiveUnlockTestUtils.PROVIDER_SETTING, AUTHORITY);
         sTileSummary = null;
+        sDeviceName = null;
     }
 
     @Override
@@ -61,6 +68,8 @@ public final class FakeContentProvider extends ContentProvider {
         Bundle bundle = new Bundle();
         if (METHOD_SUMMARY.equals(method)) {
             bundle.putCharSequence(KEY_SUMMARY, sTileSummary);
+        } else if (METHOD_DEVICE_NAME.equals(method)) {
+            bundle.putCharSequence(KEY_DEVICE_NAME, sDeviceName);
         }
         return bundle;
     }

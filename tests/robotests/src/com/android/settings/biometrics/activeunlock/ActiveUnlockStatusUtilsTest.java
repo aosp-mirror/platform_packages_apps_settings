@@ -32,6 +32,7 @@ import android.hardware.fingerprint.FingerprintManager;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.R;
 import com.android.settings.testutils.ActiveUnlockTestUtils;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 
@@ -134,5 +135,91 @@ public class ActiveUnlockStatusUtilsTest {
 
         assertThat(mActiveUnlockStatusUtils.useUnlockIntentLayout()).isFalse();
         assertThat(mActiveUnlockStatusUtils.useBiometricFailureLayout()).isTrue();
+    }
+
+    @Test
+    public void getTitle_faceEnabled_returnsFacePreferenceTitle() {
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+
+        assertThat(mActiveUnlockStatusUtils.getTitleForActiveUnlock())
+                .isEqualTo(mApplicationContext.getString(
+                        R.string.security_settings_face_preference_title));
+    }
+
+    @Test
+    public void getTitle_fingerprintEnabled_returnsFingerprintPreferenceTitle() {
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(false);
+
+        assertThat(mActiveUnlockStatusUtils.getTitleForActiveUnlock())
+                .isEqualTo(mApplicationContext.getString(
+                        R.string.security_settings_fingerprint_preference_title));
+    }
+
+    @Test
+    public void getIntro_faceEnabled_returnsIntroWithFace() {
+        ActiveUnlockTestUtils.enable(
+                mApplicationContext, ActiveUnlockStatusUtils.BIOMETRIC_FAILURE_LAYOUT);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+
+        assertThat(mActiveUnlockStatusUtils.getIntroForActiveUnlock())
+                .isEqualTo(mApplicationContext.getString(
+                        R.string.biometric_settings_intro_with_face));
+    }
+
+    @Test
+    public void getIntro_fingerprintEnabled_returnsIntroWithFingerprint() {
+        ActiveUnlockTestUtils.enable(
+                mApplicationContext, ActiveUnlockStatusUtils.BIOMETRIC_FAILURE_LAYOUT);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(false);
+
+        assertThat(mActiveUnlockStatusUtils.getIntroForActiveUnlock())
+                .isEqualTo(mApplicationContext.getString(
+                        R.string.biometric_settings_intro_with_fingerprint));
+    }
+
+    @Test
+    public void getIntro_unlockOnIntentAndFaceEnabled_returnsEmpty() {
+        ActiveUnlockTestUtils.enable(
+                mApplicationContext, ActiveUnlockStatusUtils.UNLOCK_INTENT_LAYOUT);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(false);
+
+        assertThat(mActiveUnlockStatusUtils.getIntroForActiveUnlock()).isEqualTo("");
+    }
+
+    @Test
+    public void getIntro_unlockOnIntentAndFaceAndFingerprintEnabled_returnsDefault() {
+        ActiveUnlockTestUtils.enable(
+                mApplicationContext, ActiveUnlockStatusUtils.UNLOCK_INTENT_LAYOUT);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+
+        assertThat(mActiveUnlockStatusUtils.getIntroForActiveUnlock())
+                .isEqualTo(mApplicationContext.getString(
+                        R.string.biometric_settings_intro));
+    }
+
+    @Test
+    public void getUnlockDeviceSummary_fingerprintEnabled_returnsFingerprintOrWatch() {
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(false);
+
+        assertThat(mActiveUnlockStatusUtils.getUnlockDeviceSummaryForActiveUnlock())
+                .isEqualTo(mApplicationContext.getString(
+                        R.string.biometric_settings_use_fingerprint_or_watch_preference_summary));
+    }
+
+    @Test
+    public void getUnlockDeviceSummary_faceEnabled_returnsFaceOrWatch() {
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+
+        assertThat(mActiveUnlockStatusUtils.getUnlockDeviceSummaryForActiveUnlock())
+                .isEqualTo(mApplicationContext.getString(
+                        R.string.biometric_settings_use_face_or_watch_preference_summary));
     }
 }

@@ -31,7 +31,9 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
+import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.BasePreferenceController.AvailabilityStatus;
@@ -162,6 +164,82 @@ public class ActiveUnlockStatusUtils {
             return BasePreferenceController.AVAILABLE;
         }
         return BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+    }
+
+    /**
+     * Returns the title of the combined biometric settings entity when active unlock is enabled.
+     */
+    public String getTitleForActiveUnlock() {
+        final boolean faceAllowed = Utils.hasFaceHardware(mContext);
+        final boolean fingerprintAllowed = Utils.hasFingerprintHardware(mContext);
+        return mContext.getString(getTitleRes(faceAllowed, fingerprintAllowed));
+    }
+
+    @StringRes
+    private static int getTitleRes(boolean isFaceAllowed, boolean isFingerprintAllowed) {
+        if (isFaceAllowed && isFingerprintAllowed) {
+            return R.string.security_settings_biometric_preference_title;
+        } else if (isFaceAllowed) {
+            return R.string.security_settings_face_preference_title;
+        } else if (isFingerprintAllowed) {
+            return R.string.security_settings_fingerprint_preference_title;
+        } else {
+            // Default to original summary, but this case should never happen.
+            return R.string.security_settings_biometric_preference_title;
+        }
+    }
+
+    /**
+     * Returns the intro of the combined biometric settings entity when active unlock is enabled.
+     */
+    public String getIntroForActiveUnlock() {
+        final boolean faceAllowed = Utils.hasFaceHardware(mContext);
+        final boolean fingerprintAllowed = Utils.hasFingerprintHardware(mContext);
+        if (useBiometricFailureLayout()) {
+            int introRes = getIntroRes(faceAllowed, fingerprintAllowed);
+            return introRes == 0 ? "" : mContext.getString(introRes);
+        }
+        if (useUnlockIntentLayout() && (!faceAllowed || !fingerprintAllowed)) {
+            return "";
+        }
+        return mContext.getString(R.string.biometric_settings_intro);
+    }
+
+    @StringRes
+    private static int getIntroRes(boolean isFaceAllowed, boolean isFingerprintAllowed) {
+        if (isFaceAllowed && isFingerprintAllowed) {
+            return R.string.biometric_settings_intro_with_activeunlock;
+        } else if (isFaceAllowed) {
+            return R.string.biometric_settings_intro_with_face;
+        } else if (isFingerprintAllowed) {
+            return R.string.biometric_settings_intro_with_fingerprint;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Returns the summary of the unlock device entity when active unlock is enabled.
+     */
+    public String getUnlockDeviceSummaryForActiveUnlock() {
+        final boolean faceAllowed = Utils.hasFaceHardware(mContext);
+        final boolean fingerprintAllowed = Utils.hasFingerprintHardware(mContext);
+
+        return mContext.getString(getUnlockDeviceSummaryRes(faceAllowed, fingerprintAllowed));
+    }
+
+    @StringRes
+    private static int getUnlockDeviceSummaryRes(
+            boolean isFaceAllowed, boolean isFingerprintAllowed) {
+        if (isFaceAllowed && isFingerprintAllowed) {
+            return R.string.biometric_settings_use_face_fingerprint_or_watch_preference_summary;
+        } else if (isFaceAllowed) {
+            return R.string.biometric_settings_use_face_or_watch_preference_summary;
+        } else if (isFingerprintAllowed) {
+            return R.string.biometric_settings_use_fingerprint_or_watch_preference_summary;
+        } else {
+            return R.string.biometric_settings_use_watch_preference_summary;
+        }
     }
 
     private static String getFlagState() {

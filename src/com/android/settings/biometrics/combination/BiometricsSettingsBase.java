@@ -107,10 +107,7 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
             launchChooseOrConfirmLock();
         }
 
-        final Preference unlockPhonePreference = findPreference(getUnlockPhonePreferenceKey());
-        if (unlockPhonePreference != null) {
-            unlockPhonePreference.setSummary(getUseAnyBiometricSummary());
-        }
+        updateUnlockPhonePreferenceSummary();
 
         final Preference useInAppsPreference = findPreference(getUseInAppsPreferenceKey());
         if (useInAppsPreference != null) {
@@ -309,8 +306,15 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
         }
     }
 
+    protected void updateUnlockPhonePreferenceSummary() {
+        final Preference unlockPhonePreference = findPreference(getUnlockPhonePreferenceKey());
+        if (unlockPhonePreference != null) {
+            unlockPhonePreference.setSummary(getUseAnyBiometricSummary());
+        }
+    }
+
     @NonNull
-    private String getUseAnyBiometricSummary() {
+    protected String getUseAnyBiometricSummary() {
         boolean isFaceAllowed = mFaceManager != null && mFaceManager.isHardwareDetected();
         boolean isFingerprintAllowed =
                 mFingerprintManager != null && mFingerprintManager.isHardwareDetected();
