@@ -1030,7 +1030,9 @@ public class FingerprintSettings extends SubSettings {
             @Override
             public void onCancel(DialogInterface dialog) {
                 super.onCancel(dialog);
-                mDismissListener.onDismiss(dialog);
+                if (mDismissListener != null) {
+                    mDismissListener.onDismiss(dialog);
+                }
             }
 
             @Override
@@ -1068,7 +1070,9 @@ public class FingerprintSettings extends SubSettings {
                                             parent.renameFingerPrint(mFp.getBiometricId(),
                                                     newName);
                                         }
-                                        mDismissListener.onDismiss(dialog);
+                                        if (mDismissListener != null) {
+                                            mDismissListener.onDismiss(dialog);
+                                        }
                                         dialog.dismiss();
                                     }
                                 })
