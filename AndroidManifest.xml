@@ -1875,6 +1875,20 @@
                        android:value="@string/menu_key_security"/>
         </activity>
 
+        <activity
+            android:name="Settings$MoreSecurityPrivacySettingsActivity"
+            android:label="@string/more_security_privacy_settings"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.MORE_SECURITY_PRIVACY_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.safetycenter.MoreSecurityPrivacyFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_safety_center"/>
+        </activity>
+
         <activity android:name="MonitoringCertInfoActivity"
                 android:label=""
                 android:theme="@style/Transparent"
