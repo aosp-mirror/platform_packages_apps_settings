@@ -15,6 +15,8 @@
  */
 package com.android.settings.datetime;
 
+import static android.service.timezone.TimeZoneProviderStatus.DEPENDENCY_STATUS_OK;
+
 import android.app.time.DetectorStatusTypes;
 import android.app.time.LocationTimeZoneAlgorithmStatus;
 import android.app.time.TelephonyTimeZoneAlgorithmStatus;
@@ -95,22 +97,16 @@ public class LocationProviderStatusPreferenceController
                         .getLocationTimeZoneAlgorithmStatus();
         TimeZoneProviderStatus primary = status.getPrimaryProviderReportedStatus();
         TimeZoneProviderStatus secondary = status.getSecondaryProviderReportedStatus();
-        if (primary == null && secondary == null) {
-            return null;
-        }
-
-        if (primary == null) {
-            return secondary;
-        } else if (secondary == null) {
+        if (primary != null && secondary != null) {
+            if (primary.getLocationDetectionDependencyStatus() == DEPENDENCY_STATUS_OK) {
+                return secondary;
+            }
             return primary;
-        }
-
-        if (status.getPrimaryProviderStatus()
-                != LocationTimeZoneAlgorithmStatus.PROVIDER_STATUS_IS_CERTAIN) {
+        } else if (primary != null) {
+            return primary;
+        } else {
             return secondary;
         }
-
-        return primary;
     }
 
     @Override
