@@ -32,6 +32,7 @@ import android.os.UserManager;
 
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.testutils.ActiveUnlockTestUtils;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settingslib.RestrictedPreference;
@@ -162,9 +163,57 @@ public class ActiveUnlockStatusPreferenceControllerTest {
         assertThat(mPreference.getSummary().toString()).isEqualTo(summary);
     }
 
+    @Test
+    public void biometricsNotSetUp_deviceNameIsNotSet_setupBiometricStringShown() {
+        ActiveUnlockTestUtils.enable(mContext, ActiveUnlockStatusUtils.BIOMETRIC_FAILURE_LAYOUT);
+        updateSummary("newSummary");
+        mController.displayPreference(mPreferenceScreen);
+
+        mController.onStart();
+        idleMainLooper();
+
+        assertThat(mPreference.getSummary()).isEqualTo(mContext.getString(
+                R.string.security_settings_activeunlock_require_face_fingerprint_setup_title));
+    }
+
+    @Test
+    public void biometricNotSetUp_deviceNameIsSet_summaryShown() {
+        ActiveUnlockTestUtils.enable(mContext, ActiveUnlockStatusUtils.BIOMETRIC_FAILURE_LAYOUT);
+        String summary = "newSummary";
+        updateSummary(summary);
+        updateDeviceName("deviceName");
+        mController.displayPreference(mPreferenceScreen);
+
+        mController.onStart();
+        idleMainLooper();
+
+        assertThat(mPreference.getSummary()).isEqualTo(summary);
+    }
+
+    @Test
+    public void biometricSetUp_summaryShown() {
+        when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(true);
+        ActiveUnlockTestUtils.enable(mContext, ActiveUnlockStatusUtils.BIOMETRIC_FAILURE_LAYOUT);
+        String summary = "newSummary";
+        updateSummary(summary);
+        mController.displayPreference(mPreferenceScreen);
+
+        mController.onStart();
+        idleMainLooper();
+
+        assertThat(mPreference.getSummary()).isEqualTo(summary);
+    }
+
     private void updateSummary(String summary) {
         FakeContentProvider.setTileSummary(summary);
         mContext.getContentResolver().notifyChange(FakeContentProvider.URI, null /* observer */);
         idleMainLooper();
     }
+
+    private void updateDeviceName(String deviceName) {
+        FakeContentProvider.setDeviceName(deviceName);
+        mContext.getContentResolver().notifyChange(FakeContentProvider.URI, null /* observer */);
+        idleMainLooper();
+    }
+
 }

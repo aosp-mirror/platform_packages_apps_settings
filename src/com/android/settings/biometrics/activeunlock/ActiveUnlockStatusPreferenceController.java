@@ -28,6 +28,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricStatusPreferenceController;
 import com.android.settings.biometrics.activeunlock.ActiveUnlockContentListener.OnContentChangedListener;
+import com.android.settings.biometrics.combination.CombinedBiometricStatusUtils;
 import com.android.settingslib.RestrictedPreference;
 
 /**
@@ -35,8 +36,7 @@ import com.android.settingslib.RestrictedPreference;
  * controls the ability to unlock the phone with watch authentication.
  */
 public class ActiveUnlockStatusPreferenceController
-        extends BiometricStatusPreferenceController
-        implements LifecycleObserver, OnContentChangedListener {
+        extends BiometricStatusPreferenceController implements LifecycleObserver {
     /**
      * Preference key.
      *
@@ -47,7 +47,9 @@ public class ActiveUnlockStatusPreferenceController
     @Nullable private PreferenceScreen mPreferenceScreen;
     @Nullable private String mSummary;
     private final ActiveUnlockStatusUtils mActiveUnlockStatusUtils;
+    private final CombinedBiometricStatusUtils mCombinedBiometricStatusUtils;
     private final ActiveUnlockSummaryListener mActiveUnlockSummaryListener;
+    private final ActiveUnlockDeviceNameListener mActiveUnlockDeviceNameListener;
 
     public ActiveUnlockStatusPreferenceController(@NonNull Context context) {
         this(context, KEY_ACTIVE_UNLOCK_SETTINGS);
@@ -57,7 +59,31 @@ public class ActiveUnlockStatusPreferenceController
             @NonNull Context context, @NonNull String key) {
         super(context, key);
         mActiveUnlockStatusUtils = new ActiveUnlockStatusUtils(context);
-        mActiveUnlockSummaryListener = new ActiveUnlockSummaryListener(context, this);
+        mCombinedBiometricStatusUtils = new CombinedBiometricStatusUtils(context, getUserId());
+        OnContentChangedListener onSummaryChangedListener = new OnContentChangedListener() {
+            @Override
+            public void onContentChanged(String newContent) {
+                mSummary = newContent;
+                if (mPreference != null) {
+                    mPreference.setSummary(getSummaryText());
+                }
+            }
+        };
+        OnContentChangedListener onDeviceNameChangedListener =
+                new OnContentChangedListener() {
+
+            @Override
+            public void onContentChanged(String newContent) {
+                if (mPreference != null) {
+                    mPreference.setSummary(getSummaryText());
+                }
+            }
+
+        };
+        mActiveUnlockSummaryListener =
+                new ActiveUnlockSummaryListener(context, onSummaryChangedListener);
+        mActiveUnlockDeviceNameListener =
+                new ActiveUnlockDeviceNameListener(context, onDeviceNameChangedListener);
     }
 
 
@@ -65,6 +91,7 @@ public class ActiveUnlockStatusPreferenceController
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStart() {
         mActiveUnlockSummaryListener.subscribe();
+        mActiveUnlockDeviceNameListener.subscribe();
     }
 
     /** Resets the preference reference on resume. */
@@ -79,14 +106,7 @@ public class ActiveUnlockStatusPreferenceController
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     public void onStop() {
         mActiveUnlockSummaryListener.unsubscribe();
-    }
-
-    @Override
-    public void onContentChanged(String newContent) {
-        mSummary = newContent;
-        if (mPreference != null) {
-            mPreference.setSummary(getSummaryText());
-        }
+        mActiveUnlockDeviceNameListener.unsubscribe();
     }
 
     @Override
@@ -120,6 +140,15 @@ public class ActiveUnlockStatusPreferenceController
 
     @Override
     protected String getSummaryText() {
+        if (mActiveUnlockStatusUtils.useBiometricFailureLayout()
+                && !mActiveUnlockDeviceNameListener.hasEnrolled()
+                && !mCombinedBiometricStatusUtils.hasEnrolled()) {
+            @Nullable final String setupString =
+                    mActiveUnlockStatusUtils.getSummaryWhenBiometricSetupRequired();
+            if (setupString != null) {
+                return setupString;
+            }
+        }
         if (mSummary == null) {
             // return non-empty string to prevent re-sizing of the tile
             return " ";
@@ -129,7 +158,6 @@ public class ActiveUnlockStatusPreferenceController
 
     @Override
     protected String getSettingsClassName() {
-        // TODO(b/264813445): direct user to face & fingerprint setup
-        return null;
+        return ActiveUnlockRequireBiometricSetup.class.getName();
     }
 }
