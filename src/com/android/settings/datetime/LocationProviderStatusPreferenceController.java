@@ -91,22 +91,36 @@ public class LocationProviderStatusPreferenceController
     // only one LTZP on a device, the primary. The UI here only reports status for one
     // LTZP. This UI logic prioritizes the primary if there is a "bad" status for both.
     @Nullable
-    private TimeZoneProviderStatus getLtzpStatus() {
+    private TimeZoneProviderStatus getLtzpStatusToReport() {
         LocationTimeZoneAlgorithmStatus status =
                 mTimeManager.getTimeZoneCapabilitiesAndConfig().getDetectorStatus()
                         .getLocationTimeZoneAlgorithmStatus();
-        TimeZoneProviderStatus primary = status.getPrimaryProviderReportedStatus();
-        TimeZoneProviderStatus secondary = status.getSecondaryProviderReportedStatus();
+        @Nullable TimeZoneProviderStatus primary = status.getPrimaryProviderReportedStatus();
+        @Nullable TimeZoneProviderStatus secondary = status.getSecondaryProviderReportedStatus();
         if (primary != null && secondary != null) {
-            if (primary.getLocationDetectionDependencyStatus() == DEPENDENCY_STATUS_OK) {
-                return secondary;
-            }
-            return primary;
+            return pickWorstLtzpStatus(primary, secondary);
         } else if (primary != null) {
             return primary;
         } else {
             return secondary;
         }
+    }
+
+    private static TimeZoneProviderStatus pickWorstLtzpStatus(
+            TimeZoneProviderStatus primary, TimeZoneProviderStatus secondary) {
+        int primaryScore = scoreLtzpStatus(primary);
+        int secondaryScore = scoreLtzpStatus(secondary);
+        return primaryScore >= secondaryScore ? primary : secondary;
+    }
+
+    private static int scoreLtzpStatus(TimeZoneProviderStatus providerStatus) {
+        @DependencyStatus int locationStatus =
+                providerStatus.getLocationDetectionDependencyStatus();
+        if (locationStatus <= DEPENDENCY_STATUS_OK) {
+            return 0;
+        }
+        // The enum values currently correspond well to severity.
+        return providerStatus.getLocationDetectionDependencyStatus();
     }
 
     @Override
@@ -128,33 +142,36 @@ public class LocationProviderStatusPreferenceController
 
         if (!timeZoneCapabilities.isUseLocationEnabled()
                 && hasLocationTimeZoneNoTelephonyFallback(detectorStatus)) {
-            return mContext.getResources().getString(
+            return mContext.getString(
                     R.string.location_time_zone_detection_status_summary_blocked_by_settings);
         }
 
-        TimeZoneProviderStatus ltzpStatus = getLtzpStatus();
+        TimeZoneProviderStatus ltzpStatus = getLtzpStatusToReport();
         if (ltzpStatus == null) {
             return "";
         }
 
-        @DependencyStatus int status = ltzpStatus.getLocationDetectionDependencyStatus();
+        @DependencyStatus int locationStatus = ltzpStatus.getLocationDetectionDependencyStatus();
 
-        if (status == TimeZoneProviderStatus.DEPENDENCY_STATUS_BLOCKED_BY_ENVIRONMENT) {
-            return mContext.getResources().getString(
-                    R.string.location_time_zone_detection_status_summary_blocked_by_environment);
-        }
-        if (status == TimeZoneProviderStatus.DEPENDENCY_STATUS_DEGRADED_BY_SETTINGS) {
-            return mContext.getResources().getString(
-                    R.string.location_time_zone_detection_status_summary_degraded_by_settings);
-        }
-        if (status == TimeZoneProviderStatus.DEPENDENCY_STATUS_TEMPORARILY_UNAVAILABLE) {
-            return mContext.getResources().getString(
-                    R.string.location_time_zone_detection_status_summary_temporarily_unavailable);
-        }
-        if (status == TimeZoneProviderStatus.DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS) {
-            return mContext.getResources().getString(
+        if (locationStatus == TimeZoneProviderStatus.DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS) {
+            return mContext.getString(
                     R.string.location_time_zone_detection_status_summary_blocked_by_settings);
         }
+        if (locationStatus == TimeZoneProviderStatus.DEPENDENCY_STATUS_DEGRADED_BY_SETTINGS) {
+            return mContext.getString(
+                    R.string.location_time_zone_detection_status_summary_degraded_by_settings);
+        }
+        if (locationStatus == TimeZoneProviderStatus.DEPENDENCY_STATUS_BLOCKED_BY_ENVIRONMENT) {
+            return mContext.getString(
+                    R.string.location_time_zone_detection_status_summary_blocked_by_environment);
+        }
+        if (locationStatus == TimeZoneProviderStatus.DEPENDENCY_STATUS_TEMPORARILY_UNAVAILABLE) {
+            return mContext.getString(
+                    R.string.location_time_zone_detection_status_summary_temporarily_unavailable);
+        }
+
+        // LTZP-reported network connectivity and time zone resolution statuses are currently
+        // ignored. Partners can tweak this logic if they also want to report these to users.
 
         return "";
     }
