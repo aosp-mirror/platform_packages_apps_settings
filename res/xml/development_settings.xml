@@ -48,14 +48,6 @@
             android:key="reboot_with_mte"
             android:title="@string/reboot_with_mte_title" />
 
-        <com.android.settingslib.RestrictedPreference
-                android:id="@+id/memtag_page"
-                android:key="memtag_page"
-                android:title="@string/memtag_title"
-                settings:keywords="@string/keywords_memtag"
-                android:fragment="com.android.settings.security.MemtagPage"
-                settings:controller="com.android.settings.security.MemtagPagePreferenceController" />
-
         <Preference
             android:key="local_backup_password"
             android:title="@string/local_backup_password_title"
