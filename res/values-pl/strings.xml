@@ -559,12 +559,9 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Dotknij przycisku zasilania, nie naciskając go"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Jak skonfigurować odcisk palca"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Znajduje się z tyłu telefonu. Użyj palca wskazującego."</string>
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (6345521315059783195) -->
-    <skip />
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (5548015866784733975) -->
-    <skip />
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (1977903336177861081) -->
-    <skip />
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="6345521315059783195">"Czytnik linii papilarnych znajduje się na przycisku zasilania. To płaski przycisk przy uniesionym przycisku głośności na krawędzi tabletu."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="5548015866784733975">"Czytnik linii papilarnych znajduje się na przycisku zasilania. To płaski przycisk przy uniesionym przycisku głośności na krawędzi urządzenia."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="1977903336177861081">"Czytnik linii papilarnych znajduje się na przycisku zasilania. To płaski przycisk przy uniesionym przycisku głośności na krawędzi telefonu."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Czytnik linii papilarnych znajduje się na ekranie. Na następnym ekranie zarejestrujesz odcisk palca."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Rozpocznij"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Przesuwaj palcem po ekranie, by znaleźć czytnik. Połóż palec na czytniku linii papilarnych i przytrzymaj."</string>
@@ -599,6 +596,12 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Możesz teraz używać odcisku palca do odblokowywania tabletu oraz potwierdzania tożsamości, na przykład podczas logowania się w aplikacjach i zatwierdzania zakupów"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Możesz teraz używać odcisku palca do odblokowywania urządzenia oraz weryfikacji tożsamości, na przykład podczas logowania się w aplikacjach i zatwierdzania zakupów"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Możesz teraz używać odcisku palca do odblokowywania telefonu oraz weryfikacji tożsamości, na przykład podczas logowania się w aplikacjach i zatwierdzania zakupów"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
+    <skip />
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Dotknij, aby odblokować w dowolnym momencie"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Dotknięcie czujnika powoduje odblokowanie urządzenia nawet przy wyłączonym ekranie. W ten sposób łatwo przypadkowo odblokować urządzenie."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Ekran, odblokowywanie"</string>
@@ -3968,8 +3971,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Telefon nie będzie sygnalizował powiadomień dźwiękiem ani wibracjami."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Brak wizualnego i dźwiękowego sygnalizowania powiadomień"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Powiadomienia nie będą wyświetlane ani sygnalizowane dźwiękiem"</string>
-    <!-- no translation found for zen_mode_restrict_notifications_hide_footer (3761837271201073330) -->
-    <skip />
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"Telefon nie będzie sygnalizował nowych i obecnych powiadomień przez wyświetlanie informacji, wibracje ani dzwonek. Pamiętaj, że krytyczne powiadomienia dotyczące aktywności i stanu urządzenia nadal będą się pojawiać.\n\nPo wyłączeniu trybu Nie przeszkadzać możesz zobaczyć wszystkie powiadomienia, przesuwając palcem z góry ekranu w dół."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Niestandardowe"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Włącz ustawienia niestandardowe"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Usuń ustawienia niestandardowe"</string>
@@ -3993,8 +3995,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"Dźwięk i wibracje"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"Dźwięk, wibracje i niektóre rodzaje wizualnej sygnalizacji powiadomień"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"Dźwięk, wibracje i wizualna sygnalizacja powiadomień"</string>
-    <!-- no translation found for zen_mode_blocked_effects_footer (6403365663466620328) -->
-    <skip />
+    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"Powiadomienia dotyczące podstawowych funkcji i stanu urządzenia nigdy nie będą ukryte."</string>
     <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"Brak"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"inne opcje"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"Dodaj"</string>
