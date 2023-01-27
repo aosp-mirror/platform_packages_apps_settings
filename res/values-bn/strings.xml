@@ -551,12 +551,9 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"পাওয়ার বোতাম প্রেস না করেই এটি টাচ করুন"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"আপনার আঙ্গুলের ছাপ কীভাবে সেট আপ করবেন"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"এটি আপনার ফোনের পিছনে আছে। আপনার তর্জনী ব্যবহার করুন।"</string>
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (6345521315059783195) -->
-    <skip />
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (5548015866784733975) -->
-    <skip />
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (1977903336177861081) -->
-    <skip />
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="6345521315059783195">"\'পাওয়ার\' বোতামের উপরে ফিঙ্গারপ্রিন্ট সেন্সর আছে। এটি হল ট্যাবলেটের প্রান্তে থাকা ভলিউম বাড়ানোর বোতামের পাশের ফ্ল্যাট বোতাম।"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="5548015866784733975">"\'পাওয়ার\' বোতামের উপরে ফিঙ্গারপ্রিন্ট সেন্সর আছে। এটি হল ডিভাইসের প্রান্তে থাকা ভলিউম বাড়ানোর বোতামের পাশের ফ্ল্যাট বোতাম।"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="1977903336177861081">"\'পাওয়ার\' বোতামের উপরে ফিঙ্গারপ্রিন্ট সেন্সর আছে। এটি হল ফোনের প্রান্তে থাকা ভলিউম বাড়ানোর বোতামের পাশের ফ্ল্যাট বোতাম।"</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"আপনার স্ক্রিনে \'আঙ্গুলের ছাপের সেন্সর\' আছে। আপনি পরবর্তী স্ক্রিনে আপনার আঙ্গুলের ছাপ ক্যাপচার করতে পারবেন।"</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"শুরু করুন"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"সম্পূর্ণ স্ক্রিন জুড়ে আঙুল সরিয়ে সেন্সর খুঁজুন। \'আঙ্গুলের ছাপের সেন্সর\' টাচ করে ধরে থাকুন।"</string>
@@ -591,6 +588,12 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"অ্যাপে সাইন-ইন করা বা কেনাকাটায় অনুমতি দেওয়ার মতোই এখন ফিঙ্গারপ্রিন্ট ব্যবহার করে ট্যাবলেট আনলক বা আপনার পরিচয় যাচাই করতে পারবেন"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"অ্যাপে সাইন-ইন করা বা কেনাকাটায় অনুমতি দেওয়ার মতোই এখন ফিঙ্গারপ্রিন্ট ব্যবহার করে ডিভাইস আনলক বা আপনার পরিচয় যাচাই করতে পারবেন"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"অ্যাপে সাইন-ইন করা বা কেনাকাটায় অনুমতি দেওয়ার মতোই এখন ফিঙ্গারপ্রিন্ট ব্যবহার করে ফোন আনলক বা আপনার পরিচয় যাচাই করতে পারবেন"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
+    <skip />
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"যেকোনও সময়ে আনলক করতে টাচ করুন"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"স্ক্রিন বন্ধ থাকলেও আনলক করতে সেন্সর টাচ করুন। এটির জন্য ভুলবশত আনলক হওয়ার সম্ভাবনা আরও বেড়ে যায়।"</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"স্ক্রিন, আনলক করুন"</string>
@@ -3882,8 +3885,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"বিজ্ঞপ্তি দেখানো হলে ফোনে সাউন্ড বা ভাইব্রেশন হবে না।"</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"বিজ্ঞপ্তি থেকে কোনও কিছু দেখা বা শোনা যাবে না"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"আপনি কোনও বিজ্ঞপ্তি দেখতে বা শুনতে পাবেন না"</string>
-    <!-- no translation found for zen_mode_restrict_notifications_hide_footer (3761837271201073330) -->
-    <skip />
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"নতুন বা আগে থাকা কোনও বিজ্ঞপ্তি আপনার ফোন দেখাবে না বা এর জন্য ভাইব্রেট করবে না অথবা রিং হবে না। মনে রাখবেন, ডিভাইসের অ্যাক্টিভিটি এবং স্ট্যাটাস সংক্রান্ত জরুরি বিজ্ঞপ্তি এখনও দেখানো হবে।\n\nআপনি \"বিরক্ত করবেন না মোড\" বন্ধ করলে, স্ক্রিনের উপর থেকে নিচের দিকে সোয়াইপ করে মিস হওয়া বিজ্ঞপ্তিগুলি দেখা যাবে।"</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"কাস্টম"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"কাস্টম সেটিং চালু করুন"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"কাস্টম সেটিং সরান"</string>
@@ -3907,8 +3909,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"সাউন্ড এবং ভাইব্রেশন"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"সাউন্ড, ভাইব্রেশন এবং বিজ্ঞপ্তির যে চিহ্নগুলি দেখা যায় তার মধ্যে কয়েকটি"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"সাউন্ড, ভাইব্রেশন এবং বিজ্ঞপ্তির যে চিহ্নগুলি দেখা যায়"</string>
-    <!-- no translation found for zen_mode_blocked_effects_footer (6403365663466620328) -->
-    <skip />
+    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"ডিভাইসের সাধারণ অ্যাক্টিভিটি এবং স্ট্যাটাসের ব্যাপারে দেওয়া প্রয়োজনীয় বিজ্ঞপ্তিগুলি কখনও আড়াল করা হবে না।"</string>
     <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"কোনওটিই নয়"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"অন্যান্য বিকল্প"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"যোগ করুন"</string>
@@ -4042,10 +4043,8 @@
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"আনলক করার পর, ব্যবহার করা শেষ স্ক্রিনে সরাসরি যান"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"লক স্ক্রিন, লকস্ক্রিন, স্কিপ, বাইপাস"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"অফিস প্রোফাইল লক করা থাকলে"</string>
-    <!-- no translation found for unseen_notifs_lock_screen (6910701117021324612) -->
-    <skip />
-    <!-- no translation found for unseen_notifs_lock_screen_summary (8824730389406143614) -->
-    <skip />
+    <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"লক স্ক্রিনে শুধু নতুন বিজ্ঞপ্তি দেখানো"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"প্রতিবার আনলক করার পরে, লক স্ক্রিন থেকে পুরনো বিজ্ঞপ্তি সরিয়ে দিন"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"লক স্ক্রিনে বিজ্ঞপ্তি"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"কথোপকথন দেখুন, ডিফল্ট ও আওয়াজ করবে না"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"ডিফল্ট ও আওয়াজ করবে না এমন সব কথোপকথন দেখুন"</string>
