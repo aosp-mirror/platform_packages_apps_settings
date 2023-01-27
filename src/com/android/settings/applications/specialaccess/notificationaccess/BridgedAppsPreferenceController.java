@@ -25,6 +25,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.applications.AppStateBaseBridge;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settings.widget.AppCheckBoxPreference;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -126,9 +127,9 @@ public class BridgedAppsPreferenceController extends BasePreferenceController im
             final AppEntry entry = apps.get(i);
             final String prefKey = entry.info.packageName + "|" + entry.info.uid;
             appsKeySet.add(prefKey);
-            CheckBoxPreference preference = mScreen.findPreference(prefKey);
+            AppCheckBoxPreference preference = mScreen.findPreference(prefKey);
             if (preference == null) {
-                preference = new CheckBoxPreference(mScreen.getContext());
+                preference = new AppCheckBoxPreference(mScreen.getContext());
                 preference.setIcon(AppUtils.getIcon(mContext, entry));
                 preference.setTitle(entry.label);
                 preference.setKey(prefKey);
