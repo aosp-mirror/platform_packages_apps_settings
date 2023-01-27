@@ -27,7 +27,6 @@ import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
 import android.safetycenter.SafetySourceStatus;
 
-import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricNavigationUtils;
 import com.android.settings.biometrics.combination.CombinedBiometricStatusUtils;
@@ -63,7 +62,7 @@ public final class BiometricsSafetySource {
             final RestrictedLockUtils.EnforcedAdmin disablingAdmin =
                     combinedBiometricStatusUtils.getDisablingAdmin();
             setBiometricSafetySourceData(context,
-                    context.getString(R.string.security_settings_biometric_preference_title),
+                    combinedBiometricStatusUtils.getTitle(),
                     combinedBiometricStatusUtils.getSummary(),
                     createPendingIntent(context,
                             biometricNavigationUtils.getBiometricSettingsIntent(context,
@@ -83,7 +82,7 @@ public final class BiometricsSafetySource {
             final RestrictedLockUtils.EnforcedAdmin disablingAdmin =
                     faceStatusUtils.getDisablingAdmin();
             setBiometricSafetySourceData(context,
-                    context.getString(R.string.security_settings_face_preference_title),
+                    faceStatusUtils.getTitle(),
                     faceStatusUtils.getSummary(),
                     createPendingIntent(context,
                             biometricNavigationUtils.getBiometricSettingsIntent(context,
@@ -105,7 +104,7 @@ public final class BiometricsSafetySource {
             final RestrictedLockUtils.EnforcedAdmin disablingAdmin =
                     fingerprintStatusUtils.getDisablingAdmin();
             setBiometricSafetySourceData(context,
-                    context.getString(R.string.security_settings_fingerprint_preference_title),
+                    fingerprintStatusUtils.getTitle(),
                     fingerprintStatusUtils.getSummary(),
                     createPendingIntent(context,
                             biometricNavigationUtils.getBiometricSettingsIntent(context,
