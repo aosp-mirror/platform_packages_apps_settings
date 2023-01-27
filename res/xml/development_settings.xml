@@ -45,8 +45,9 @@
             android:title="@string/capture_system_heap_dump_title" />
 
         <Preference
-            android:key="reboot_with_mte"
-            android:title="@string/reboot_with_mte_title" />
+            android:key="development_memtag_page"
+            android:title="@string/development_memtag_page_title"
+            android:fragment="com.android.settings.development.DevelopmentMemtagPage" />
 
         <Preference
             android:key="local_backup_password"

@@ -25,7 +25,7 @@ import org.robolectric.annotation.Implements;
 public class ZygoteShadow {
     private static boolean sSupportsMemoryTagging;
 
-    static void setSupportsMemoryTagging(boolean value) {
+    public static void setSupportsMemoryTagging(boolean value) {
         sSupportsMemoryTagging = value;
     }
 
