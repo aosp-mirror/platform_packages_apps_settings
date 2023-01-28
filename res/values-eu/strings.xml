@@ -551,12 +551,9 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Ukitu etengailua, sakatu gabe"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Hatz-marka konfiguratzeko argibideak"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Telefonoaren atzealdean dago. Erabili hatz erakuslea."</string>
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (6345521315059783195) -->
-    <skip />
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (5548015866784733975) -->
-    <skip />
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (1977903336177861081) -->
-    <skip />
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="6345521315059783195">"Etengailuan dago hatz-marken sentsorea. Tabletaren ertzeko bolumen-botoi goratuaren ondoan dagoen botoi laua da."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="5548015866784733975">"Etengailuan dago hatz-marken sentsorea. Gailuaren ertzeko bolumen-botoi goratuaren ondoan dagoen botoi laua da."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="1977903336177861081">"Etengailuan dago hatz-marken sentsorea. Telefonoaren ertzeko bolumen-botoi goratuaren ondoan dagoen botoi laua da."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Hatz-marken sentsorea pantailan dago. Hurrengo pantailan detektatuko da hatz-marka."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Hasi"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Sentsorea bilatzeko, mugitu hatza pantailan. Eduki ukituta hatz-marken sentsorea."</string>
@@ -591,6 +588,12 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Orain, tableta desblokeatzeko edo zeu zarela egiaztatzeko erabil dezakezu hatz-marka, hala nola aplikazioetan saioa hastean edo erosketak onartzean"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Orain, gailua desblokeatzeko edo zeu zarela egiaztatzeko erabil dezakezu hatz-marka, hala nola aplikazioetan saioa hastean edo erosketak onartzean"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Orain, telefonoa desblokeatzeko edo zeu zarela egiaztatzeko erabil dezakezu hatz-marka, hala nola aplikazioetan saioa hastean edo erosketak onartzean"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
+    <skip />
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Gailua edonoiz desblokeatzeko, sakatu sentsorea"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Sakatu sentsorea gailua desblokeatzeko, pantaila itzalita badago ere. Ustekabeko desblokeoak gertatzeko probabilitatea handiagoa izango da."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"pantaila, desblokeatu"</string>
@@ -3882,8 +3885,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Jakinarazpenak iristen direnean, telefonoak ez du egingo soinurik edo dardararik."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Ez egin soinurik eta ez erakutsi ezer jakinarazpenak jasotzean"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Ez duzu ikusi edo entzungo jakinarazpenik"</string>
-    <!-- no translation found for zen_mode_restrict_notifications_hide_footer (3761837271201073330) -->
-    <skip />
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"Jakinarazpen berriei eta lehendik daudenei dagokienez, telefonoak ez ditu erakutsiko, eta ez du dar-dar edo soinurik egingo haiek jasotzean. Kontuan izan, ordea, gailuaren egoeraren eta jardueren berri ematen duten ezinbesteko jakinarazpenek agertzen jarraituko dutela.\n\nEz molestatzeko modua desaktibatu ostean, hatza pantailaren goialdetik behera pasatuta aurkituko dituzu galdutako jakinarazpenak."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Pertsonalizatua"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Gaitu ezarpen pertsonalizatua"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Kendu ezarpen pertsonalizatua"</string>
@@ -3907,8 +3909,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"Audioa eta dardara"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"Audioa, dardara eta jakinarazpenen ikusizko adierazpen batzuk"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"Audioa, dardara eta jakinarazpenen ikusizko adierazpenak"</string>
-    <!-- no translation found for zen_mode_blocked_effects_footer (6403365663466620328) -->
-    <skip />
+    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"Gailuaren egoeraren eta oinarrizko jardueren berri ematen duten jakinarazpenak ez dira inoiz ezkutatuko."</string>
     <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"Bat ere ez"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"aukera gehiago"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"Gehitu"</string>
