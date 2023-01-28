@@ -650,6 +650,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         new SubSettingLauncher(context)
                 .setDestination(destination.getName())
                 .setArguments(args)
+                .setUserHandle(UserHandle.getUserHandleForUid(app.uid))
                 .setSourceMetricsCategory(sourceMetricsCategory)
                 .launch();
     }
