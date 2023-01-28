@@ -551,12 +551,9 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Touchez l\'interrupteur sans l\'enfoncer"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Voici comment configurer votre empreinte digitale"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Il se trouve à l\'arrière de votre téléphone. Utilisez votre index."</string>
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (6345521315059783195) -->
-    <skip />
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (5548015866784733975) -->
-    <skip />
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (1977903336177861081) -->
-    <skip />
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="6345521315059783195">"Le capteur d\'empreintes digitales est situé sur l\'interrupteur. Il s\'agit du bouton plat situé à côté du bouton de volume surélevé, sur le bord de la tablette."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="5548015866784733975">"Le capteur d\'empreintes digitales est situé sur l\'interrupteur. Il s\'agit du bouton plat situé à côté du bouton de volume surélevé, sur le bord de l\'appareil."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="1977903336177861081">"Le capteur d\'empreintes digitales est situé sur l\'interrupteur. Il s\'agit du bouton plat situé à côté du bouton de volume surélevé, sur le bord du téléphone."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Le capteur d\'empreintes digitales se trouve sur votre écran. Vous capturerez votre empreinte digitale au prochain écran."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Démarrer"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Déplacez votre doigt sur l\'écran pour trouver le capteur. Maintenez le doigt sur le capteur d\'empreintes digitales."</string>
@@ -591,6 +588,12 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Vous pouvez maintenant utiliser votre empreinte digitale pour déverrouiller votre tablette ou vérifier qu\'il s\'agit bien de vous, par exemple pour vous connecter à des applications ou approuver un achat"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Vous pouvez maintenant utiliser votre empreinte digitale pour déverrouiller votre appareil ou vérifier qu\'il s\'agit bien de vous, par exemple pour vous connecter à des applications ou approuver un achat"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Vous pouvez maintenant utiliser votre empreinte digitale pour déverrouiller votre téléphone ou vérifier qu\'il s\'agit bien de vous, par exemple pour vous connecter à des applications ou approuver un achat"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
+    <skip />
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Toucher pour déverrouiller à tout moment"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Touchez le capteur pour déverrouiller, même lorsque l\'écran est éteint. Cela rend le déverrouillage accidentel plus probable."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Écran, déverrouiller"</string>
@@ -3882,8 +3885,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Lorsque de nouvelles notifications arrivent, votre téléphone n\'émettra aucun son et ne vibrera pas."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Aucun élément visuel ni son provenant des notifications"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Vous ne verrez et n\'entendrez pas de notifications"</string>
-    <!-- no translation found for zen_mode_restrict_notifications_hide_footer (3761837271201073330) -->
-    <skip />
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"Votre téléphone n\'affichera pas les notifications nouvelles ou existantes, ne vibrera pas et n\'émettra aucun son pour les signaler. Gardez à l\'esprit que les notifications importantes pour l\'activité et l\'état de l\'appareil continueront de s\'afficher.\n\nLorsque vous désactivez le mode Ne pas déranger, vous trouverez les notifications manquées en balayant l\'écran du haut vers le bas."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Personnalisées"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Activer les paramètres personnalisés"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Supprimer les paramètres personnalisés"</string>
@@ -3907,8 +3909,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"Sons et vibrations"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"Sons, vibrations et certains signes visuels des notifications"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"Sons, vibrations et signes visuels des notifications"</string>
-    <!-- no translation found for zen_mode_blocked_effects_footer (6403365663466620328) -->
-    <skip />
+    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"Les notifications nécessaires à l\'activité et à l\'état de base de l\'appareil ne seront jamais masquées."</string>
     <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"Aucun"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"autres options"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"Ajouter"</string>
@@ -4259,7 +4260,7 @@
     <string name="notification_vibrate_title" msgid="1422330728336623351">"Vibration"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"Son"</string>
     <string name="notification_conversation_important" msgid="4365437037763608045">"Priorité"</string>
-    <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"Ajouter au domicile"</string>
+    <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"Ajouter à l\'écran d\'accueil"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"Supprimer"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"Renommer"</string>
     <string name="zen_mode_rule_name" msgid="7303080427006917702">"Nom de l\'horaire"</string>

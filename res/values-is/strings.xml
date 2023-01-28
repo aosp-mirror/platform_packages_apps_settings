@@ -551,12 +551,9 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Snertu aflrofann án þess að ýta honum niður"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Svona skráirðu fingrafar"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Hann er aftan á símanum. Notaðu vísifingurinn."</string>
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (6345521315059783195) -->
-    <skip />
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (5548015866784733975) -->
-    <skip />
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (1977903336177861081) -->
-    <skip />
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="6345521315059783195">"Fingrafaralesarinn er á aflrofanum. Það er flati hnappurinn við hliðina á upphleypta hljóðstyrkshnappnum á hlið spjaldtölvunnar."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="5548015866784733975">"Fingrafaralesarinn er á aflrofanum. Það er flati hnappurinn við hliðina á upphleypta hljóðstyrkshnappnum á hlið tækisins."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="1977903336177861081">"Fingrafaralesarinn er á aflrofanum. Það er flati hnappurinn við hliðina á upphleypta hljóðstyrkshnappnum á hlið símans."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Fingrafaralesarinn er á skjánum. Þú myndar fingrafarið á næsta skjá."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Byrja"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Renndu fingrinum yfir skjáinn til að finna lesarann. Haltu fingri á fingrafaralesaranum."</string>
@@ -591,6 +588,12 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Nú geturðu notað fingrafarið til að taka spjaldtölvuna úr lás eða til að staðfesta hver þú ert, t.d. þegar þú skráir þig inn í forrit eða samþykkir kaup"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Nú geturðu notað fingrafarið til að taka tækið úr lás eða til að staðfesta hver þú ert, t.d. þegar þú skráir þig inn í forrit eða samþykkir kaup"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Nú geturðu notað fingrafarið til að taka símann úr lás eða til að staðfesta hver þú ert, t.d. þegar þú skráir þig inn í forrit eða samþykkir kaup"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
+    <skip />
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Snertu til að taka úr lás hvenær sem er"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Snertu skynjarann til að taka úr lás, jafnvel þótt slökkt sé á skjánum. Þetta eykur líkurnar á því að tækið sé óvart tekið úr lás."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Skjár, taka úr lás"</string>
@@ -3882,8 +3885,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Þegar tilkynningar berast mun síminn hvorki gefa frá sér hljóð né titra."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Engin skilaboð á skjá eða hljóð frá tilkynningum"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Þú munt hvorki sjá né heyra tilkynningar"</string>
-    <!-- no translation found for zen_mode_restrict_notifications_hide_footer (3761837271201073330) -->
-    <skip />
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"Síminn hvorki sýnir, titrar eða gefur frá sér hljóð fyrir nýjar eða fyrirliggjandi tilkynningar. Hafðu í huga að áríðandi tilkynningar um aðgerðir og stöðu tækisins birtast áfram.\n\nÞegar slökkt er á „Ónáðið ekki“ má sjá tilkynningar sem misst var af með því að strjúka niður frá efsta hluta skjásins."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Sérsniðið"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Kveikja á sérstillingu"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Fjarlægja sérstillingu"</string>
@@ -3907,8 +3909,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"Hljóð og titringur"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"Hljóð, titringur og sum sjónræn merki tilkynninga"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"Hljóð, titringur og sjónræn merki tilkynninga"</string>
-    <!-- no translation found for zen_mode_blocked_effects_footer (6403365663466620328) -->
-    <skip />
+    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"Nauðsynlegar tilkynningar um grunnvirkni og stöðu tækisins verða aldrei faldar."</string>
     <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"Engin"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"aðrir valkostir"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"Bæta við"</string>
@@ -4042,10 +4043,8 @@
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Við opnun ferðu á skjáinn sem var virkur síðast"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Læsa skjá, lásskjár, sleppa, sneiða hjá"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Þegar vinnusnið er læst"</string>
-    <!-- no translation found for unseen_notifs_lock_screen (6910701117021324612) -->
-    <skip />
-    <!-- no translation found for unseen_notifs_lock_screen_summary (8824730389406143614) -->
-    <skip />
+    <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Sýna aðeins nýjar tilkynningar á lásskjánum"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"Fjarlægja fyrirliggjandi tilkynningar af lásskjánum eftir hvert skipti sem tekið er úr lás"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Tilkynningar á lásskjá"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Birta sjálfgefin og þögul samtöl"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Birta sjálfgefin og þögul samtöl"</string>
