@@ -27,13 +27,10 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.media.AudioManager;
 import android.os.Vibrator;
-import android.provider.DeviceConfig;
 import android.service.notification.NotificationListenerService;
 import android.telephony.TelephonyManager;
 
-import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
 import com.android.settings.R;
-import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,11 +39,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowDeviceConfig.class})
 public class RingVolumePreferenceControllerTest {
 
     @Mock
@@ -129,10 +124,9 @@ public class RingVolumePreferenceControllerTest {
     // todo: verify that the title change is displayed, by examining the underlying preference
     @Test
     public void ringNotificationStreamsNotAliased_sliderTitleSetToRingOnly() {
-
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SYSTEMUI,
-                SystemUiDeviceConfigFlags.VOLUME_SEPARATE_NOTIFICATION, "true", false);
-
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_alias_ring_notif_stream_types))
+                .thenReturn(false);
         final RingVolumePreferenceController controller =
                 new RingVolumePreferenceController(mContext);
 
@@ -144,9 +138,8 @@ public class RingVolumePreferenceControllerTest {
     @Test
     public void ringNotificationStreamsAliased_sliderTitleIncludesBothRingNotification() {
 
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SYSTEMUI,
-                SystemUiDeviceConfigFlags.VOLUME_SEPARATE_NOTIFICATION, "false", false);
-
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_alias_ring_notif_stream_types)).thenReturn(true);
         final RingVolumePreferenceController control = new RingVolumePreferenceController(mContext);
 
         int expectedTitleId = R.string.ring_volume_option_title;
@@ -157,39 +150,39 @@ public class RingVolumePreferenceControllerTest {
     @Test
     public void setHintsRing_aliased_Matches() {
         assertThat(mController.hintsMatch(
-                NotificationListenerService.HINT_HOST_DISABLE_CALL_EFFECTS, false)).isTrue();
+                NotificationListenerService.HINT_HOST_DISABLE_CALL_EFFECTS, true)).isTrue();
     }
 
     @Test
     public void setHintsRingNotification_aliased_Matches() {
         assertThat(mController.hintsMatch(NotificationListenerService.HINT_HOST_DISABLE_EFFECTS,
-                false)).isTrue();
+                true)).isTrue();
     }
 
     @Test
     public void setHintNotification_aliased_Matches() {
         assertThat(mController
                 .hintsMatch(NotificationListenerService.HINT_HOST_DISABLE_NOTIFICATION_EFFECTS,
-                false)).isTrue();
+                true)).isTrue();
     }
 
     @Test
     public void setHintsRing_unaliased_Matches() {
         assertThat(mController.hintsMatch(
-                NotificationListenerService.HINT_HOST_DISABLE_CALL_EFFECTS, true)).isTrue();
+                NotificationListenerService.HINT_HOST_DISABLE_CALL_EFFECTS, false)).isTrue();
     }
 
     @Test
     public void setHintsRingNotification_unaliased_Matches() {
         assertThat(mController.hintsMatch(NotificationListenerService.HINT_HOST_DISABLE_EFFECTS,
-                true)).isTrue();
+                false)).isTrue();
     }
 
     @Test
     public void setHintNotification_unaliased_doesNotMatch() {
         assertThat(mController
                 .hintsMatch(NotificationListenerService.HINT_HOST_DISABLE_NOTIFICATION_EFFECTS,
-                        true)).isFalse();
+                        false)).isFalse();
     }
 
     @Test
