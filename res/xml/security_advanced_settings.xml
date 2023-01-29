@@ -107,6 +107,15 @@
         settings:isPreferenceVisible="@bool/config_show_sim_info"
         settings:controller="com.android.settings.security.ConfirmSimDeletionPreferenceController" />
 
+  <com.android.settingslib.RestrictedPreference
+        android:order="100"
+        android:id="@+id/memtag_page"
+        android:key="memtag_page"
+        android:title="@string/memtag_title"
+        settings:keywords="@string/keywords_memtag"
+        android:fragment="com.android.settings.security.MemtagPage"
+        settings:controller="com.android.settings.security.MemtagPagePreferenceController" />
+
     <!-- work profile security section -->
     <PreferenceCategory
         android:order="110"
@@ -137,12 +146,12 @@
 
         <com.android.settingslib.RestrictedPreference
             android:key="face_settings_profile"
-            android:title="@string/security_settings_face_preference_title"
+            android:title="@string/security_settings_face_profile_preference_title"
             android:summary="@string/summary_placeholder" />
 
         <com.android.settingslib.RestrictedPreference
             android:key="biometric_settings_profile"
-            android:title="@string/security_settings_biometric_preference_title"
+            android:title="@string/security_settings_work_biometric_preference_title"
             android:summary="@string/summary_placeholder" />
 
     </PreferenceCategory>
