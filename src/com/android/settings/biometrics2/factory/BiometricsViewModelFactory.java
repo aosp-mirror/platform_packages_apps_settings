@@ -49,10 +49,11 @@ public class BiometricsViewModelFactory implements ViewModelProvider.Factory {
     private static final String TAG = "BiometricsViewModelFact";
 
     public static final CreationExtras.Key<ChallengeGenerator> CHALLENGE_GENERATOR_KEY =
-            new CreationExtras.Key<>() {};
+            new CreationExtras.Key<ChallengeGenerator>() {};
     public static final CreationExtras.Key<EnrollmentRequest> ENROLLMENT_REQUEST_KEY =
-            new CreationExtras.Key<>() {};
-    public static final CreationExtras.Key<Integer> USER_ID_KEY = new CreationExtras.Key<>() {};
+            new CreationExtras.Key<EnrollmentRequest>() {};
+    public static final CreationExtras.Key<Integer> USER_ID_KEY =
+            new CreationExtras.Key<Integer>() {};
 
     @NonNull
     @Override
