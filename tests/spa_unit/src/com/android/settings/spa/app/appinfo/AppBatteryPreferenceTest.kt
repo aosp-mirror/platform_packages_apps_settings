@@ -36,6 +36,9 @@ import com.android.settings.R
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail
 import com.android.settings.fuelgauge.batteryusage.BatteryChartPreferenceController
 import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry
+import com.android.settings.testutils.mockAsUser
+import com.android.settingslib.spaprivileged.framework.common.asUser
+import com.android.settingslib.spaprivileged.model.app.userHandle
 import com.android.settingslib.spaprivileged.model.app.userId
 import org.junit.After
 import org.junit.Before
@@ -69,6 +72,7 @@ class AppBatteryPreferenceTest {
             .mockStatic(AdvancedPowerUsageDetail::class.java)
             .strictness(Strictness.LENIENT)
             .startMocking()
+        context.mockAsUser()
         whenever(context.resources).thenReturn(resources)
         whenever(resources.getBoolean(R.bool.config_show_app_info_settings_battery))
             .thenReturn(true)
