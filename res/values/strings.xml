@@ -1150,6 +1150,50 @@
     <!-- Acquire message received during fingerprint enrollment to inform the user they've reached the maximum number of enrollments. [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts">You\u2019ve reached the maximum number of attempts</string>
 
+    <!-- Watch unlock enrollment and settings --><skip />
+    <!-- Title shown for menu item that launches watch unlock settings. [CHAR LIMIT=40] -->
+    <string name ="security_settings_activeunlock_preference_title">Watch Unlock</string>
+    <!-- Introduction shown in face and fingerprint page to introduce the biometric feature. [CHAR LIMIT=NONE]-->
+    <string name="biometric_settings_intro_with_activeunlock" product="default">When you set up Face Unlock and Fingerprint Unlock, your phone will ask for your fingerprint when you wear a mask or are in a dark area.\n\nYou can unlock with your watch when your face or fingerprint isn\u2019t recognized.</string>
+    <!-- Introduction shown in face and fingerprint page to introduce the biometric feature. [CHAR LIMIT=NONE]-->
+    <string name="biometric_settings_intro_with_activeunlock" product="tablet">When you set up Face Unlock and Fingerprint Unlock, your tablet will ask for your fingerprint when you wear a mask or are in a dark area.\n\nYou can unlock with your watch when your face or fingerprint isn\u2019t recognized.</string>
+    <!-- Introduction shown in fingerprint page to explain that watch unlock can be used if fingerprint isn't recognized. [CHAR LIMIT=NONE]-->
+    <string name="biometric_settings_intro_with_fingerprint">You can unlock with your watch when your fingerprint isn\u2019t recognized.</string>
+     <!-- Introduction shown in face page to explain that watch unlock can be used if face isn't recognized. [CHAR LIMIT=NONE]-->
+    <string name="biometric_settings_intro_with_face">You can unlock with your watch when your face isn\u2019t recognized.</string>
+    <!-- Message for a biometric preference toggle, indicating that an action can only be performed by using Face Unlock or Watch Unlock. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_use_face_or_watch_preference_summary">Using face or watch</string>
+    <!-- Message for a biometric preference toggle, indicating that an action can only be performed by using Fingerprint Unlock or Watch Unlock. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary">Using fingerprint or watch</string>
+    <!-- Message for a biometric preference toggle, indicating that an action can be performed by using either Face Unlock, Fingerprint Unlock, or Watch Unlock. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary">Using face, fingerprint, or watch</string>
+    <!-- Message for a biometric preference toggle, indicating that an action can be performed by using Watch Unlock. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_use_watch_preference_summary">Using watch</string>
+    <!-- Title shown in watch unlock require face or fingerprint setup page [CHAR LIMIT=60] -->
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title">Set up Face or Fingerprint Unlock first</string>
+    <!-- Message shown in watch unlock require face or fingerprint setup page [CHAR LIMIT=NONE] -->
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message">You can unlock with your watch when your face or fingerprint isn\u2019t recognized</string>
+    <!-- Title shown in watch unlock require fingerprint setup page [CHAR LIMIT=60] -->
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title">Set up Fingerprint Unlock first</string>
+    <!-- Message shown in watch unlock require fingerprint setup page [CHAR LIMIT=NONE] -->
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message">You can unlock with your watch when your fingerprint isn\u2019t recognized</string>
+    <!-- Title shown in watch unlock require face setup page [CHAR LIMIT=60] -->
+    <string name="security_settings_activeunlock_require_face_setup_title">Set up Face Unlock first</string>
+    <!-- Message shown in watch unlock require face setup page [CHAR LIMIT=NONE] -->
+    <string name="security_settings_activeunlock_require_face_setup_message">You can unlock with your watch when your face isn\u2019t recognized</string>
+    <!-- Button text to launch biometric setup [CHAR LIMIT=30] -->
+    <string name="security_settings_activeunlock_biometric_setup">Set up</string>
+    <!-- Message showing that fingerprint and watch is set up. Shown for a menu item that launches fingerprint and watch unlock settings or enrollment. [CHAR LIMIT=80]-->
+    <string name="security_settings_fingerprint_single_watch_preference_summary">Fingerprint and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
+    <!-- Message showing that multiple fingerprints and watch is set up. Shown for a menu item that launches fingerprint and watch unlock settings or enrollment. [CHAR LIMIT=80]-->
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary">Fingerprints and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
+    <!-- Message showing that face and watch is set up. Shown for a menu item that launches face and watch unlock settings or enrollment. [CHAR LIMIT=80]-->
+    <string name="security_settings_face_watch_preference_summary">Face and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
+    <!-- Message showing that fingerprint, face, and the current watch is set up. Shown for a menu item that launches fingerprint, face,  and active unlock settings or enrollment. [CHAR LIMIT=80] -->
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary">Face, fingerprint, and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
+    <!-- Message showing that multiple fingerprints, face, and the current watch is set up. Shown for a menu item that launches fingerprint, face,  and active unlock settings or enrollment. [CHAR LIMIT=80]-->
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary">Face, fingerprints, and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
+
     <!-- Biometric settings --><skip />
     <!-- Title shown for menu item that launches biometric settings. [CHAR LIMIT=66] -->
     <string name="security_settings_biometric_preference_title">Face &amp; Fingerprint Unlock</string>
