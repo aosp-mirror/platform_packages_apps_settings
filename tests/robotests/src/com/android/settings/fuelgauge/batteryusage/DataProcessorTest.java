@@ -18,20 +18,23 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.isA;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
 import android.app.usage.UsageEvents.Event;
+import android.content.BroadcastReceiver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.UserInfo;
 import android.os.BatteryConsumer;
 import android.os.BatteryManager;
@@ -90,9 +93,10 @@ public final class DataProcessorTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mPowerUsageFeatureProvider = mFeatureFactory.powerUsageFeatureProvider;
 
-        DataProcessor.sFakeSystemAppsSet = Set.of();
+        DataProcessor.sTestSystemAppsSet = Set.of();
         DataProcessor.sUsageStatsManager = mUsageStatsManager;
-        doReturn(mIntent).when(mContext).registerReceiver(any(), any());
+        doReturn(mIntent).when(mContext).registerReceiver(
+                isA(BroadcastReceiver.class), isA(IntentFilter.class));
         doReturn(100).when(mIntent).getIntExtra(eq(BatteryManager.EXTRA_SCALE), anyInt());
         doReturn(66).when(mIntent).getIntExtra(eq(BatteryManager.EXTRA_LEVEL), anyInt());
         doReturn(mContext).when(mContext).getApplicationContext();
@@ -109,11 +113,11 @@ public final class DataProcessorTest {
         doReturn(true).when(mUserManager).isUserUnlocked(userInfo.id);
         doReturn(mUsageEvents1)
                 .when(mUsageStatsManager)
-                .queryEventsForUser(anyLong(), anyLong(), anyInt(), any());
+                .queryEventsForUser(anyLong(), anyLong(), anyInt(), anyString());
 
         final Map<Long, UsageEvents> resultMap = DataProcessor.getAppUsageEvents(mContext);
 
-        assertThat(resultMap.size()).isEqualTo(1);
+        assertThat(resultMap).hasSize(1);
         assertThat(resultMap.get(Long.valueOf(userInfo.id))).isEqualTo(mUsageEvents1);
     }
 
@@ -138,8 +142,8 @@ public final class DataProcessorTest {
         userInfoList.add(userInfo);
         doReturn(userInfoList).when(mUserManager).getAliveUsers();
         doReturn(true).when(mUserManager).isUserUnlocked(userInfo.id);
-        doReturn(null)
-                .when(mUsageStatsManager).queryEventsForUser(anyLong(), anyLong(), anyInt(), any());
+        doReturn(null).when(mUsageStatsManager)
+                .queryEventsForUser(anyLong(), anyLong(), anyInt(), anyString());
 
         final Map<Long, UsageEvents> resultMap = DataProcessor.getAppUsageEvents(mContext);
 
@@ -152,7 +156,7 @@ public final class DataProcessorTest {
         doReturn(true).when(mUserManager).isUserUnlocked(userId);
         doReturn(mUsageEvents1)
                 .when(mUsageStatsManager)
-                .queryEventsForUser(anyLong(), anyLong(), anyInt(), any());
+                .queryEventsForUser(anyLong(), anyLong(), anyInt(), anyString());
 
         assertThat(DataProcessor.getAppUsageEventsForUser(mContext, userId, 0))
                 .isEqualTo(mUsageEvents1);
@@ -171,8 +175,8 @@ public final class DataProcessorTest {
     public void getAppUsageEventsForUser_nullUsageEvents_returnNull() throws RemoteException {
         final int userId = 1;
         doReturn(true).when(mUserManager).isUserUnlocked(userId);
-        doReturn(null)
-                .when(mUsageStatsManager).queryEventsForUser(anyLong(), anyLong(), anyInt(), any());
+        doReturn(null).when(mUsageStatsManager)
+                .queryEventsForUser(anyLong(), anyLong(), anyInt(), anyString());
 
         assertThat(DataProcessor.getAppUsageEventsForUser(mContext, userId, 0)).isNull();
     }
@@ -248,31 +252,31 @@ public final class DataProcessorTest {
                 DataProcessor.generateAppUsagePeriodMap(
                         hourlyBatteryLevelsPerDay, appUsageEventList);
 
-        assertThat(periodMap.size()).isEqualTo(3);
+        assertThat(periodMap).hasSize(3);
         // Day 1
-        assertThat(periodMap.get(0).size()).isEqualTo(2);
+        assertThat(periodMap.get(0)).hasSize(2);
         Map<Long, Map<String, List<AppUsagePeriod>>> hourlyMap = periodMap.get(0).get(0);
-        assertThat(hourlyMap.size()).isEqualTo(2);
+        assertThat(hourlyMap).hasSize(2);
         Map<String, List<AppUsagePeriod>> userMap = hourlyMap.get(1L);
-        assertThat(userMap.size()).isEqualTo(1);
-        assertThat(userMap.get(packageName).size()).isEqualTo(1);
+        assertThat(userMap).hasSize(1);
+        assertThat(userMap.get(packageName)).hasSize(1);
         assertAppUsagePeriod(userMap.get(packageName).get(0), 17200000L, 17800000L);
         userMap = hourlyMap.get(2L);
-        assertThat(userMap.size()).isEqualTo(1);
-        assertThat(userMap.get(packageName).size()).isEqualTo(2);
+        assertThat(userMap).hasSize(1);
+        assertThat(userMap.get(packageName)).hasSize(2);
         assertAppUsagePeriod(userMap.get(packageName).get(0), 14400000L, 15600000L);
         assertAppUsagePeriod(userMap.get(packageName).get(1), 16200000L, 18000000L);
         hourlyMap = periodMap.get(0).get(1);
         assertThat(hourlyMap).isNull();
         // Day 2
-        assertThat(periodMap.get(1).size()).isEqualTo(0);
+        assertThat(periodMap.get(1)).hasSize(0);
         // Day 3
-        assertThat(periodMap.get(2).size()).isEqualTo(1);
+        assertThat(periodMap.get(2)).hasSize(1);
         hourlyMap = periodMap.get(2).get(0);
-        assertThat(hourlyMap.size()).isEqualTo(1);
+        assertThat(hourlyMap).hasSize(1);
         userMap = hourlyMap.get(1L);
-        assertThat(userMap.size()).isEqualTo(1);
-        assertThat(userMap.get(packageName).size()).isEqualTo(2);
+        assertThat(userMap).hasSize(1);
+        assertThat(userMap.get(packageName)).hasSize(2);
         assertAppUsagePeriod(userMap.get(packageName).get(0), 45970000L, 46000000L);
         assertAppUsagePeriod(userMap.get(packageName).get(1), 47800000L, 48800000L);
     }
@@ -313,7 +317,7 @@ public final class DataProcessorTest {
         final List<AppUsageEvent> appUsageEventList =
                 DataProcessor.generateAppUsageEventListFromUsageEvents(mContext, appUsageEvents);
 
-        assertThat(appUsageEventList.size()).isEqualTo(3);
+        assertThat(appUsageEventList).hasSize(3);
         assertAppUsageEvent(
                 appUsageEventList.get(0), AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 2);
         assertAppUsageEvent(
@@ -398,7 +402,7 @@ public final class DataProcessorTest {
         final int[] levels = {100, 94, 90, 82, 50};
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
                 createHistoryMap(timestamps, levels);
-        DataProcessor.sFakeCurrentTimeMillis = timestamps[timestamps.length - 1];
+        DataProcessor.sTestCurrentTimeMillis = timestamps[timestamps.length - 1];
 
         final Map<Long, Map<String, BatteryHistEntry>> resultMap =
                 DataProcessor.getHistoryMapWithExpectedTimestamps(mContext, batteryHistoryMap);
@@ -431,7 +435,7 @@ public final class DataProcessorTest {
         final int[] levels = {100};
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
                 createHistoryMap(timestamps, levels);
-        DataProcessor.sFakeCurrentTimeMillis = timestamps[timestamps.length - 1];
+        DataProcessor.sTestCurrentTimeMillis = timestamps[timestamps.length - 1];
 
         assertThat(
                 DataProcessor.getLevelDataThroughProcessedHistoryMap(mContext, batteryHistoryMap))
@@ -451,7 +455,7 @@ public final class DataProcessorTest {
         final int[] levels = {100, 94, 90, 82, 50};
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
                 createHistoryMap(timestamps, levels);
-        DataProcessor.sFakeCurrentTimeMillis = timestamps[timestamps.length - 1];
+        DataProcessor.sTestCurrentTimeMillis = timestamps[timestamps.length - 1];
 
         final BatteryLevelData resultData =
                 DataProcessor.getLevelDataThroughProcessedHistoryMap(mContext, batteryHistoryMap);
@@ -484,7 +488,7 @@ public final class DataProcessorTest {
         final int[] levels = {100, 94, 90, 82};
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
                 createHistoryMap(timestamps, levels);
-        DataProcessor.sFakeCurrentTimeMillis = timestamps[timestamps.length - 1];
+        DataProcessor.sTestCurrentTimeMillis = timestamps[timestamps.length - 1];
 
         final BatteryLevelData resultData =
                 DataProcessor.getLevelDataThroughProcessedHistoryMap(mContext, batteryHistoryMap);
@@ -525,6 +529,194 @@ public final class DataProcessorTest {
         final List<List<Integer>> expectedHourlyLevels = List.of(
                 expectedHourlyLevels1,
                 expectedHourlyLevels2
+        );
+        verifyExpectedBatteryLevelData(
+                resultData,
+                expectedDailyTimestamps,
+                expectedDailyLevels,
+                expectedHourlyTimestamps,
+                expectedHourlyLevels);
+    }
+
+    @Test
+    public void getLevelDataThroughProcessedHistoryMap_daylightSaving25Hour_returnExpectedResult() {
+        // Timezone PST 2022-11-06 has an extra 01:00:00 - 01:59:59 for daylight saving.
+        TimeZone.setDefault(TimeZone.getTimeZone("America/Los_Angeles"));
+        final long[] timestamps = {
+                1667667600000L, // 2022-11-05 10:00:00
+                1667829600000L  // 2022-11-07 06:00:00
+        };
+        final int[] levels = {100, 88};
+        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
+                createHistoryMap(timestamps, levels);
+        DataProcessor.sTestCurrentTimeMillis = timestamps[timestamps.length - 1];
+
+        final BatteryLevelData resultData =
+                DataProcessor.getLevelDataThroughProcessedHistoryMap(mContext, batteryHistoryMap);
+
+        final List<Long> expectedDailyTimestamps = List.of(
+                1667667600000L, // 2022-11-05 10:00:00
+                1667718000000L, // 2022-11-06 00:00:00
+                1667808000000L, // 2022-11-07 00:00:00
+                1667829600000L  // 2022-11-07 06:00:00
+        );
+        final List<Integer> expectedDailyLevels = new ArrayList<>();
+        expectedDailyLevels.add(100);
+        expectedDailyLevels.add(null);
+        expectedDailyLevels.add(null);
+        expectedDailyLevels.add(88);
+        final List<List<Long>> expectedHourlyTimestamps = List.of(
+                List.of(
+                        1667667600000L, // 2022-11-05 10:00:00
+                        1667674800000L, // 2022-11-05 12:00:00
+                        1667682000000L, // 2022-11-05 14:00:00
+                        1667689200000L, // 2022-11-05 16:00:00
+                        1667696400000L, // 2022-11-05 18:00:00
+                        1667703600000L, // 2022-11-05 20:00:00
+                        1667710800000L, // 2022-11-05 22:00:00
+                        1667718000000L  // 2022-11-06 00:00:00
+                ),
+                List.of(
+                        1667718000000L, // 2022-11-06 00:00:00
+                        1667725200000L, // 2022-11-06 01:00:00  after daylight saving change
+                        1667732400000L, // 2022-11-06 03:00:00
+                        1667739600000L, // 2022-11-06 05:00:00
+                        1667746800000L, // 2022-11-06 07:00:00
+                        1667754000000L, // 2022-11-06 09:00:00
+                        1667761200000L, // 2022-11-06 11:00:00
+                        1667768400000L, // 2022-11-06 13:00:00
+                        1667775600000L, // 2022-11-06 15:00:00
+                        1667782800000L, // 2022-11-06 17:00:00
+                        1667790000000L, // 2022-11-06 19:00:00
+                        1667797200000L, // 2022-11-06 21:00:00
+                        1667804400000L  // 2022-11-06 23:00:00
+                ),
+                List.of(
+                        1667808000000L, // 2022-11-07 00:00:00
+                        1667815200000L, // 2022-11-07 02:00:00
+                        1667822400000L, // 2022-11-07 04:00:00
+                        1667829600000L  // 2022-11-07 06:00:00
+                )
+        );
+        final List<Integer> expectedHourlyLevels1 = new ArrayList<>();
+        expectedHourlyLevels1.add(100);
+        expectedHourlyLevels1.add(null);
+        expectedHourlyLevels1.add(null);
+        expectedHourlyLevels1.add(null);
+        expectedHourlyLevels1.add(null);
+        expectedHourlyLevels1.add(null);
+        expectedHourlyLevels1.add(null);
+        expectedHourlyLevels1.add(null);
+        final List<Integer> expectedHourlyLevels2 = new ArrayList<>();
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        final List<Integer> expectedHourlyLevels3 = new ArrayList<>();
+        expectedHourlyLevels3.add(null);
+        expectedHourlyLevels3.add(null);
+        expectedHourlyLevels3.add(null);
+        expectedHourlyLevels3.add(88);
+        final List<List<Integer>> expectedHourlyLevels = List.of(
+                expectedHourlyLevels1,
+                expectedHourlyLevels2,
+                expectedHourlyLevels3
+        );
+        verifyExpectedBatteryLevelData(
+                resultData,
+                expectedDailyTimestamps,
+                expectedDailyLevels,
+                expectedHourlyTimestamps,
+                expectedHourlyLevels);
+    }
+
+    @Test
+    public void getLevelDataThroughProcessedHistoryMap_daylightSaving23Hour_returnExpectedResult() {
+        // Timezone PST 2022-03-13 has no 02:00:00 - 02:59:59 for daylight saving.
+        TimeZone.setDefault(TimeZone.getTimeZone("America/Los_Angeles"));
+        final long[] timestamps = {
+                1647151200000L, // 2022-03-12 22:00:00
+                1647262800000L  // 2022-03-14 06:00:00
+        };
+        final int[] levels = {100, 88};
+        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
+                createHistoryMap(timestamps, levels);
+        DataProcessor.sTestCurrentTimeMillis = timestamps[timestamps.length - 1];
+
+        final BatteryLevelData resultData =
+                DataProcessor.getLevelDataThroughProcessedHistoryMap(mContext, batteryHistoryMap);
+
+        final List<Long> expectedDailyTimestamps = List.of(
+                1647151200000L, // 2022-03-12 22:00:00
+                1647158400000L, // 2022-03-13 00:00:00
+                1647241200000L, // 2022-03-14 00:00:00
+                1647262800000L  // 2022-03-14 06:00:00
+        );
+        final List<Integer> expectedDailyLevels = new ArrayList<>();
+        expectedDailyLevels.add(100);
+        expectedDailyLevels.add(null);
+        expectedDailyLevels.add(null);
+        expectedDailyLevels.add(88);
+        final List<List<Long>> expectedHourlyTimestamps = List.of(
+                List.of(
+                        1647151200000L, // 2022-03-12 22:00:00
+                        1647158400000L  // 2022-03-13 00:00:00
+                ),
+                List.of(
+                        1647158400000L, // 2022-03-13 00:00:00
+                        1647165600000L, // 2022-03-13 03:00:00  after daylight saving change
+                        1647172800000L, // 2022-03-13 05:00:00
+                        1647180000000L, // 2022-03-13 07:00:00
+                        1647187200000L, // 2022-03-13 09:00:00
+                        1647194400000L, // 2022-03-13 11:00:00
+                        1647201600000L, // 2022-03-13 13:00:00
+                        1647208800000L, // 2022-03-13 15:00:00
+                        1647216000000L, // 2022-03-13 17:00:00
+                        1647223200000L, // 2022-03-13 19:00:00
+                        1647230400000L, // 2022-03-13 21:00:00
+                        1647237600000L  // 2022-03-13 23:00:00
+                ),
+                List.of(
+                        1647241200000L, // 2022-03-14 00:00:00
+                        1647248400000L, // 2022-03-14 02:00:00
+                        1647255600000L, // 2022-03-14 04:00:00
+                        1647262800000L  // 2022-03-14 06:00:00
+                )
+        );
+        final List<Integer> expectedHourlyLevels1 = new ArrayList<>();
+        expectedHourlyLevels1.add(100);
+        expectedHourlyLevels1.add(null);
+        final List<Integer> expectedHourlyLevels2 = new ArrayList<>();
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(null);
+        final List<Integer> expectedHourlyLevels3 = new ArrayList<>();
+        expectedHourlyLevels3.add(null);
+        expectedHourlyLevels3.add(null);
+        expectedHourlyLevels3.add(null);
+        expectedHourlyLevels3.add(88);
+        final List<List<Integer>> expectedHourlyLevels = List.of(
+                expectedHourlyLevels1,
+                expectedHourlyLevels2,
+                expectedHourlyLevels3
         );
         verifyExpectedBatteryLevelData(
                 resultData,
@@ -1479,21 +1671,21 @@ public final class DataProcessorTest {
         final Map<Long, Map<String, List<AppUsagePeriod>>> appUsagePeriodMap =
                 DataProcessor.buildAppUsagePeriodList(appUsageEvents, 0, 5);
 
-        assertThat(appUsagePeriodMap.size()).isEqualTo(2);
+        assertThat(appUsagePeriodMap).hasSize(2);
         final Map<String, List<AppUsagePeriod>> userMap1 = appUsagePeriodMap.get(1L);
-        assertThat(userMap1.size()).isEqualTo(2);
+        assertThat(userMap1).hasSize(2);
         List<AppUsagePeriod> appUsagePeriodList = userMap1.get(packageName1);
-        assertThat(appUsagePeriodList.size()).isEqualTo(3);
+        assertThat(appUsagePeriodList).hasSize(3);
         assertAppUsagePeriod(appUsagePeriodList.get(0), 1, 2);
         assertAppUsagePeriod(appUsagePeriodList.get(1), 2, 4);
         assertAppUsagePeriod(appUsagePeriodList.get(2), 3, 4);
         appUsagePeriodList = userMap1.get(packageName2);
-        assertThat(appUsagePeriodList.size()).isEqualTo(1);
+        assertThat(appUsagePeriodList).hasSize(1);
         assertAppUsagePeriod(appUsagePeriodList.get(0), 2, 4);
         final Map<String, List<AppUsagePeriod>> userMap2 = appUsagePeriodMap.get(2L);
-        assertThat(userMap2.size()).isEqualTo(1);
+        assertThat(userMap2).hasSize(1);
         appUsagePeriodList = userMap2.get(packageName2);
-        assertThat(appUsagePeriodList.size()).isEqualTo(2);
+        assertThat(appUsagePeriodList).hasSize(2);
         assertAppUsagePeriod(appUsagePeriodList.get(0), 1, 2);
         assertAppUsagePeriod(appUsagePeriodList.get(1), 3, 4);
     }
@@ -1563,7 +1755,7 @@ public final class DataProcessorTest {
         final List<AppUsagePeriod> appUsagePeriodList =
                 DataProcessor.buildAppUsagePeriodListPerInstance(appUsageEvents, 100000, 1100000);
 
-        assertThat(appUsagePeriodList.size()).isEqualTo(7);
+        assertThat(appUsagePeriodList).hasSize(7);
         assertAppUsagePeriod(appUsagePeriodList.get(0), 100000, 120000);
         assertAppUsagePeriod(appUsagePeriodList.get(1), 150000, 200000);
         assertAppUsagePeriod(appUsagePeriodList.get(2), 300000, 500000);
