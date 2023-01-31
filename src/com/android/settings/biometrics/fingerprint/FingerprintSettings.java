@@ -84,6 +84,8 @@ import com.android.settingslib.transition.SettingsTransitionHelper;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.TwoTargetPreference;
 
+import com.google.android.setupdesign.util.DeviceHelper;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -451,8 +453,9 @@ public class FingerprintSettings extends SubSettings {
                 mFooterColumns.add(column2);
             } else {
                 final FooterColumn column = new FooterColumn();
-                column.mTitle = getText(
-                        R.string.security_settings_fingerprint_enroll_introduction_v2_message);
+                column.mTitle = getString(
+                        R.string.security_settings_fingerprint_enroll_introduction_v3_message,
+                        DeviceHelper.getDeviceName(getActivity()));
                 column.mLearnMoreClickListener = learnMoreClickListener;
                 mFooterColumns.add(column);
             }
