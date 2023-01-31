@@ -19,10 +19,12 @@ import android.app.time.DetectorStatusTypes;
 import android.app.time.LocationTimeZoneAlgorithmStatus;
 import android.app.time.TelephonyTimeZoneAlgorithmStatus;
 import android.app.time.TimeManager;
+import android.app.time.TimeZoneCapabilities;
+import android.app.time.TimeZoneCapabilitiesAndConfig;
 import android.app.time.TimeZoneDetectorStatus;
 import android.content.Context;
-import android.location.LocationManager;
 import android.service.timezone.TimeZoneProviderStatus;
+import android.service.timezone.TimeZoneProviderStatus.DependencyStatus;
 import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
@@ -43,14 +45,12 @@ import java.util.concurrent.Executor;
 public class LocationProviderStatusPreferenceController
         extends BasePreferenceController implements TimeManager.TimeZoneDetectorListener {
     private final TimeManager mTimeManager;
-    private final LocationManager mLocationManager;
 
     private BannerMessagePreference mPreference = null;
 
     public LocationProviderStatusPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mTimeManager = context.getSystemService(TimeManager.class);
-        mLocationManager = context.getSystemService(LocationManager.class);
 
         Executor mainExecutor = context.getMainExecutor();
         mTimeManager.addTimeZoneDetectorListener(mainExecutor, this);
@@ -123,11 +123,15 @@ public class LocationProviderStatusPreferenceController
 
     @Override
     public CharSequence getSummary() {
-        boolean locationEnabled = mLocationManager.isLocationEnabled();
+        final TimeZoneCapabilitiesAndConfig timeZoneCapabilitiesAndConfig =
+                mTimeManager.getTimeZoneCapabilitiesAndConfig();
         final TimeZoneDetectorStatus detectorStatus =
-                mTimeManager.getTimeZoneCapabilitiesAndConfig().getDetectorStatus();
+                timeZoneCapabilitiesAndConfig.getDetectorStatus();
+        final TimeZoneCapabilities timeZoneCapabilities =
+                timeZoneCapabilitiesAndConfig.getCapabilities();
 
-        if (!locationEnabled && hasLocationTimeZoneNoTelephonyFallback(detectorStatus)) {
+        if (!timeZoneCapabilities.isUseLocationEnabled()
+                && hasLocationTimeZoneNoTelephonyFallback(detectorStatus)) {
             return mContext.getResources().getString(
                     R.string.location_time_zone_detection_status_summary_blocked_by_settings);
         }
@@ -137,7 +141,7 @@ public class LocationProviderStatusPreferenceController
             return "";
         }
 
-        int status = ltzpStatus.getLocationDetectionDependencyStatus();
+        @DependencyStatus int status = ltzpStatus.getLocationDetectionDependencyStatus();
 
         if (status == TimeZoneProviderStatus.DEPENDENCY_STATUS_BLOCKED_BY_ENVIRONMENT) {
             return mContext.getResources().getString(
