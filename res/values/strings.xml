@@ -2488,11 +2488,11 @@
     <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
     <string name="sim_preferred_message"><xliff:g id="new_sim">%1$s</xliff:g> is the only SIM in your device. Do you want to use this SIM for mobile data, calls, and SMS messages?</string>
 
-    <!-- Title for the dialog asking to user to enable auto data switch upon enabling multi-SIM  [CHAR LIMIT=30] -->
-    <string name="enable_auto_data_switch_dialog_title">Switch SIMs automatically?</string>
-    <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
-    <string name="enable_auto_data_switch_dialog_message">Allow your phone to automatically switch to <xliff:g id="backup_carrier" example="T-mobile">%1$s</xliff:g> for mobile data when it has better availability.</string>
-    <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
+    <!-- Title for the dialog asking user to enable auto data switch upon enabling multi-SIM  [CHAR LIMIT=30] -->
+    <string name="enable_auto_data_switch_dialog_title">Improve mobile data coverage?</string>
+    <!-- Message for the dialog asking user to enable auto data switch upon enabling multi-SIM  [CHAR LIMIT=NONE] -->
+    <string name="enable_auto_data_switch_dialog_message">Allow your device to automatically switch to <xliff:g id="backup_carrier" example="T-mobile">%1$s</xliff:g> for mobile data when it has better availability.</string>
+    <!-- Warning for the dialog asking user to enable auto data switch for switching data between work and personal profile  [CHAR LIMIT=NONE] -->
     <string name="auto_data_switch_dialog_managed_profile_warning">\n\nCalls, messages, and network traffic may be visible to your organization.</string>
 
     <!-- Instructions telling the user that they entered the wrong SIM PIN for the last time.
@@ -6536,15 +6536,15 @@
     <!-- Summary of multimedia messaging service settings.  [CHAR LIMIT=100] -->
     <string name="mms_message_summary">Send &amp; receive when mobile data is off</string>
 
-    <!-- Title of a preference for whether to allow data during calls that is shown when mobile
-         data is turned off. This is needed for some multi-SIM scenarios, because the SIM that is
-         default for data might not be available during a phone call. [CHAR LIMIT=60] -->
+    <!-- Title of a preference for whether to allow auto data switch that is shown for backup
+         data SIM. This is needed for some multi-SIM scenarios, because the SIM that is
+         default for data might be unavailable while the backup is in coverage. [CHAR LIMIT=60] -->
     <string name="auto_data_switch_title">Switch mobile data automatically</string>
-    <!-- Title of a preference for whether to allow data during calls that is shown when mobile
-         data is turned off. This is needed for some multi-SIM scenarios, because the SIM that is
-         default for data might not be available during a phone call. [CHAR LIMIT=NONE] -->
+    <!-- Summary of a preference for whether to allow auto data switch that is shown for backup
+         data SIM. This is needed for some multi-SIM scenarios, because the SIM that is
+         default for data might be unavailable while the backup is in coverage. [CHAR LIMIT=NONE]-->
     <string name="auto_data_switch_summary">
-        Temporarily use this network when it has better availability for calls and internet
+        Use this network when it has better availability
     </string>
 
     <!-- Work SIM title.  [CHAR LIMIT=50] -->
