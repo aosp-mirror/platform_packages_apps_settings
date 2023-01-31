@@ -242,6 +242,32 @@ public class ActiveUnlockStatusUtils {
         }
     }
 
+    /**
+     * Returns the summary of the active unlock preference when biometrics are needed to set up the
+     * feature.
+     */
+    @Nullable
+    public String getSummaryWhenBiometricSetupRequired() {
+        final boolean faceAllowed = Utils.hasFaceHardware(mContext);
+        final boolean fingerprintAllowed = Utils.hasFingerprintHardware(mContext);
+
+        int summaryRes = getSetupBiometricRes(faceAllowed, fingerprintAllowed);
+        return summaryRes == 0 ? null : mContext.getString(summaryRes);
+    }
+
+    @StringRes
+    private static int getSetupBiometricRes(boolean faceAllowed, boolean fingerprintAllowed) {
+        if (faceAllowed && fingerprintAllowed) {
+            return R.string.security_settings_activeunlock_require_face_fingerprint_setup_title;
+        } else if (faceAllowed) {
+            return R.string.security_settings_activeunlock_require_face_setup_title;
+        } else if (fingerprintAllowed) {
+            return R.string.security_settings_activeunlock_require_fingerprint_setup_title;
+        } else {
+            return 0;
+        }
+    }
+
     private static String getFlagState() {
         return DeviceConfig.getProperty(DeviceConfig.NAMESPACE_REMOTE_AUTH, CONFIG_FLAG_NAME);
     }

@@ -49,14 +49,17 @@ public class ActiveUnlockRequireBiometricSetup extends BiometricEnrollBase {
 
     @VisibleForTesting
     static final int BIOMETRIC_ENROLL_REQUEST = 1001;
+    private static final int ACTIVE_UNLOCK_REQUEST = 1002;
     private long mGkPwHandle;
     private boolean mNextClicked;
+    private ActiveUnlockStatusUtils mActiveUnlockStatusUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activeunlock_require_biometric_setup);
 
+        mActiveUnlockStatusUtils = new ActiveUnlockStatusUtils(this);
         mUserId = getIntent().getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
         Log.i(TAG, "mUserId = " + mUserId);
         mGkPwHandle = getIntent().getLongExtra(EXTRA_KEY_GK_PW_HANDLE, 0L);
@@ -132,8 +135,10 @@ public class ActiveUnlockRequireBiometricSetup extends BiometricEnrollBase {
             CombinedBiometricStatusUtils combinedBiometricStatusUtils =
                     new CombinedBiometricStatusUtils(this, mUserId);
             if (combinedBiometricStatusUtils.hasEnrolled()) {
-                // TODO(b/264813444): launch active unlock setting page in GmsCore without double
-                //  authentication.
+                Intent activeUnlockIntent = mActiveUnlockStatusUtils.getIntent();
+                if (activeUnlockIntent != null) {
+                    startActivityForResult(activeUnlockIntent, ACTIVE_UNLOCK_REQUEST);
+                }
             }
         }
         mNextClicked = false;
