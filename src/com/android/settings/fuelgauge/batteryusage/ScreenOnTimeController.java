@@ -30,6 +30,7 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.utils.StringUtil;
 
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,6 +40,7 @@ public class ScreenOnTimeController extends BasePreferenceController {
     private static final String ROOT_PREFERENCE_KEY = "screen_on_time_category";
     private static final String SCREEN_ON_TIME_TEXT_PREFERENCE_KEY = "screen_on_time_text";
     private static final Pattern NUMBER_PATTERN = Pattern.compile("[\\d]*[\\.,]?[\\d]+");
+    private static final Locale IW_LOCALE = new Locale("iw");
 
     @VisibleForTesting
     Context mPrefContext;
@@ -89,14 +91,20 @@ public class ScreenOnTimeController extends BasePreferenceController {
         final CharSequence timeSequence =
                 StringUtil.formatElapsedTime(mPrefContext, (double) screenOnTime,
                         /*withSeconds=*/ false, /*collapseTimeUnit=*/ false);
-        mScreenOnTimeTextPreference.setText(enlargeFontOfNumber(removeCommas(timeSequence)));
+        mScreenOnTimeTextPreference.setText(
+                enlargeFontOfNumberIfNeeded(mPrefContext, removeCommas(timeSequence)));
         mScreenOnTimeTextPreference.setVisible(true);
     }
 
     @VisibleForTesting
-    static CharSequence enlargeFontOfNumber(CharSequence text) {
+    static CharSequence enlargeFontOfNumberIfNeeded(Context context, CharSequence text) {
         if (TextUtils.isEmpty(text)) {
             return "";
+        }
+
+        final Locale locale = context.getResources().getConfiguration().getLocales().get(0);
+        if (locale != null && IW_LOCALE.getLanguage().equals(locale.getLanguage())) {
+            return text;
         }
 
         final SpannableString spannableText =  new SpannableString(text);
