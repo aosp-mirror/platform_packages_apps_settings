@@ -18,6 +18,7 @@ package com.android.settings.biometrics.activeunlock;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 import static org.robolectric.shadows.ShadowLooper.idleMainLooper;
@@ -42,6 +43,8 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowDeviceConfig.class})
@@ -134,6 +137,26 @@ public class ActiveUnlockContentListenerTest {
         updateContent("newContent");
 
         assertThat(mUpdateCount).isEqualTo(1);
+    }
+
+    @Test
+    public void noProvider_subscribeDoesntRegisterObserver() {
+        when(mPackageManager.getInstalledPackages(any()))
+                .thenReturn(new ArrayList<>());
+        OnContentChangedListener listener = new OnContentChangedListener() {
+            @Override
+            public void onContentChanged(String newValue) {}
+        };
+
+        ActiveUnlockContentListener contentListener =
+                new ActiveUnlockContentListener(
+                        mContext,
+                        listener,
+                        "logTag",
+                        FakeContentProvider.METHOD_SUMMARY,
+                        FakeContentProvider.KEY_SUMMARY);
+
+        assertThat(contentListener.subscribe()).isFalse();
     }
 
     private void updateContent(String content) {
