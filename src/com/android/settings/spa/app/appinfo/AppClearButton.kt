@@ -19,61 +19,44 @@ package com.android.settings.spa.app.appinfo
 import android.content.pm.ApplicationInfo
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settingslib.spa.widget.button.ActionButton
+import com.android.settingslib.spa.widget.dialog.AlertDialogButton
+import com.android.settingslib.spa.widget.dialog.rememberAlertDialogPresenter
 
 class AppClearButton(
     private val packageInfoPresenter: PackageInfoPresenter,
 ) {
     private val context = packageInfoPresenter.context
 
-    private var openConfirmDialog by mutableStateOf(false)
-
+    @Composable
     fun getActionButton(app: ApplicationInfo): ActionButton? {
         if (!app.isInstantApp) return null
 
         return clearButton()
     }
 
-    private fun clearButton() = ActionButton(
-        text = context.getString(R.string.clear_instant_app_data),
-        imageVector = Icons.Outlined.Delete,
-    ) { openConfirmDialog = true }
-
     @Composable
-    fun ClearConfirmDialog() {
-        if (!openConfirmDialog) return
-        AlertDialog(
-            onDismissRequest = { openConfirmDialog = false },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        openConfirmDialog = false
-                        packageInfoPresenter.clearInstantApp()
-                    },
-                ) {
-                    Text(stringResource(R.string.clear_instant_app_data))
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = { openConfirmDialog = false }) {
-                    Text(stringResource(R.string.cancel))
-                }
-            },
-            title = {
-                Text(stringResource(R.string.clear_instant_app_data))
-            },
-            text = {
-                Text(stringResource(R.string.clear_instant_app_confirmation))
-            },
+    private fun clearButton(): ActionButton {
+        val dialogPresenter = confirmDialogPresenter()
+        return ActionButton(
+            text = context.getString(R.string.clear_instant_app_data),
+            imageVector = Icons.Outlined.Delete,
+            onClick = dialogPresenter::open,
         )
     }
+
+    @Composable
+    private fun confirmDialogPresenter() = rememberAlertDialogPresenter(
+        confirmButton = AlertDialogButton(
+            text = stringResource(R.string.clear_instant_app_data),
+            onClick = packageInfoPresenter::clearInstantApp,
+        ),
+        dismissButton = AlertDialogButton(stringResource(R.string.cancel)),
+        title = stringResource(R.string.clear_instant_app_data),
+        text = { Text(stringResource(R.string.clear_instant_app_confirmation)) },
+    )
 }

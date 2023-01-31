@@ -21,16 +21,19 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.UserManager
+import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito
 import com.android.settings.Utils
 import com.android.settings.testutils.FakeFeatureFactory
+import com.android.settingslib.spa.widget.button.ActionButton
 import com.android.settingslib.spaprivileged.framework.common.devicePolicyManager
 import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
@@ -42,6 +45,8 @@ import org.mockito.Mockito.`when` as whenever
 
 @RunWith(AndroidJUnit4::class)
 class AppDisableButtonTest {
+    @get:Rule
+    val composeTestRule = createComposeRule()
 
     private lateinit var mockSession: MockitoSession
 
@@ -97,7 +102,7 @@ class AppDisableButtonTest {
             privateFlags = privateFlags or ApplicationInfo.PRIVATE_FLAG_SIGNED_WITH_PLATFORM_KEY
         }
 
-        val actionButton = appDisableButton.getActionButton(app)!!
+        val actionButton = setDisableButton(app)
 
         assertThat(actionButton.enabled).isFalse()
     }
@@ -108,7 +113,7 @@ class AppDisableButtonTest {
             privateFlags = privateFlags or ApplicationInfo.PRIVATE_FLAG_IS_RESOURCE_OVERLAY
         }
 
-        val actionButton = appDisableButton.getActionButton(app)!!
+        val actionButton = setDisableButton(app)
 
         assertThat(actionButton.enabled).isFalse()
     }
@@ -118,7 +123,7 @@ class AppDisableButtonTest {
         whenever(appFeatureProvider.keepEnabledPackages).thenReturn(setOf(PACKAGE_NAME))
         val app = enabledSystemApp()
 
-        val actionButton = appDisableButton.getActionButton(app)!!
+        val actionButton = setDisableButton(app)
 
         assertThat(actionButton.enabled).isFalse()
     }
@@ -130,7 +135,7 @@ class AppDisableButtonTest {
         ).thenReturn(true)
         val app = enabledSystemApp()
 
-        val actionButton = appDisableButton.getActionButton(app)!!
+        val actionButton = setDisableButton(app)
 
         assertThat(actionButton.enabled).isFalse()
     }
@@ -141,7 +146,7 @@ class AppDisableButtonTest {
             .thenReturn(true)
         val app = enabledSystemApp()
 
-        val actionButton = appDisableButton.getActionButton(app)!!
+        val actionButton = setDisableButton(app)
 
         assertThat(actionButton.enabled).isFalse()
     }
@@ -150,9 +155,17 @@ class AppDisableButtonTest {
     fun getActionButton_regularEnabledSystemApp_canDisable() {
         val app = enabledSystemApp()
 
-        val actionButton = appDisableButton.getActionButton(app)!!
+        val actionButton = setDisableButton(app)
 
         assertThat(actionButton.enabled).isTrue()
+    }
+
+    private fun setDisableButton(app: ApplicationInfo): ActionButton {
+        lateinit var actionButton: ActionButton
+        composeTestRule.setContent {
+            actionButton = appDisableButton.getActionButton(app)!!
+        }
+        return actionButton
     }
 
     private fun enabledSystemApp(builder: ApplicationInfo.() -> Unit = {}) =
