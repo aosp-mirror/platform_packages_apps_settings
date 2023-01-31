@@ -44,6 +44,7 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorProperties;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.UserManager;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -54,7 +55,10 @@ import com.android.settings.R;
 import com.android.settings.biometrics.GatekeeperPasswordProvider;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.GlifLayout;
+import com.google.android.setupdesign.template.RequireScrollMixin;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -177,6 +181,14 @@ public class FingerprintEnrollIntroductionTest {
         int result = mFingerprintEnrollIntroduction.checkMaxEnrolled();
 
         assertThat(result).isEqualTo(0);
+
+        final RequireScrollMixin requireScrollMixin =
+                ((GlifLayout) mFingerprintEnrollIntroduction.findViewById(
+                        R.id.setup_wizard_layout)).getMixin(RequireScrollMixin.class);
+        requireScrollMixin.getOnRequireScrollStateChangedListener().onRequireScrollStateChanged(
+                false);
+        Assert.assertEquals(View.VISIBLE,
+                mFingerprintEnrollIntroduction.getSecondaryFooterButton().getVisibility());
     }
 
     @Test
@@ -192,6 +204,14 @@ public class FingerprintEnrollIntroductionTest {
         int result = mFingerprintEnrollIntroduction.checkMaxEnrolled();
 
         assertThat(result).isEqualTo(R.string.fingerprint_intro_error_max);
+
+        final RequireScrollMixin requireScrollMixin =
+                ((GlifLayout) mFingerprintEnrollIntroduction.findViewById(
+                        R.id.setup_wizard_layout)).getMixin(RequireScrollMixin.class);
+        requireScrollMixin.getOnRequireScrollStateChangedListener().onRequireScrollStateChanged(
+                false);
+        Assert.assertEquals(View.INVISIBLE,
+                mFingerprintEnrollIntroduction.getSecondaryFooterButton().getVisibility());
     }
 
     @Test
