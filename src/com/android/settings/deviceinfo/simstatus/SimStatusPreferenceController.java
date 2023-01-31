@@ -109,12 +109,18 @@ public class SimStatusPreferenceController extends BasePreferenceController {
 
     @Override
     public void updateState(Preference preference) {
+        if (mFragment == null) {
+            return;
+        }
         final int simSlot = getSimSlotIndex();
         if (mSimChangeObserver == null) {
             mSimChangeObserver = x -> updateStateBySlot(preference, simSlot);
-            mSlotSimStatus.observe(mFragment.getViewLifecycleOwner(), mSimChangeObserver);
+            mFragment.getViewLifecycleOwnerLiveData().observeForever(lifecycleOwner -> {
+                mSlotSimStatus.observe(lifecycleOwner, mSimChangeObserver);
+            });
+        } else {
+            updateStateBySlot(preference, simSlot);
         }
-        updateStateBySlot(preference, simSlot);
     }
 
     protected void updateStateBySlot(Preference preference, int simSlot) {
