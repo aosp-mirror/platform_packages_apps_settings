@@ -495,7 +495,13 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     @Override
     public void finish() {
         if (mGkPwHandle != null) {
-            BiometricUtils.removeGatekeeperPasswordHandle(this, mGkPwHandle);
+            // When launched as InternalActivity, the mGkPwHandle was gotten from intent extra
+            // instead of requesting from the user. Do not remove the mGkPwHandle in service side
+            // for this case because the caller activity may still need it and will be responsible
+            // for removing it.
+            if (!(this instanceof InternalActivity)) {
+                BiometricUtils.removeGatekeeperPasswordHandle(this, mGkPwHandle);
+            }
         }
         super.finish();
     }
