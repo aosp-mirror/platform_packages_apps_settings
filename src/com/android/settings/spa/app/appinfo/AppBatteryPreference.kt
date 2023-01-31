@@ -40,7 +40,9 @@ import com.android.settings.fuelgauge.batteryusage.BatteryChartPreferenceControl
 import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
+import com.android.settingslib.spaprivileged.framework.common.asUser
 import com.android.settingslib.spaprivileged.model.app.installed
+import com.android.settingslib.spaprivileged.model.app.userHandle
 import com.android.settingslib.spaprivileged.model.app.userId
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -63,6 +65,7 @@ fun AppBatteryPreference(app: ApplicationInfo) {
 }
 
 private class AppBatteryPresenter(private val context: Context, private val app: ApplicationInfo) {
+    private val userContext = context.asUser(app.userHandle)
     private var batteryDiffEntryState: LoadingState<BatteryDiffEntry?>
         by mutableStateOf(LoadingState.Loading)
 
@@ -84,7 +87,7 @@ private class AppBatteryPresenter(private val context: Context, private val app:
 
     private suspend fun getBatteryDiffEntry(): BatteryDiffEntry? = withContext(Dispatchers.IO) {
         BatteryChartPreferenceController.getAppBatteryUsageData(
-            context, app.packageName, app.userId
+            userContext, app.packageName, app.userId
         ).also {
             Log.d(TAG, "loadBatteryDiffEntries():\n$it")
         }
@@ -141,6 +144,7 @@ private class AppBatteryPresenter(private val context: Context, private val app:
             .setDestination(AdvancedPowerUsageDetail::class.java.name)
             .setTitleRes(R.string.battery_details_title)
             .setArguments(args)
+            .setUserHandle(app.userHandle)
             .setSourceMetricsCategory(AppInfoSettingsProvider.METRICS_CATEGORY)
             .launch()
     }

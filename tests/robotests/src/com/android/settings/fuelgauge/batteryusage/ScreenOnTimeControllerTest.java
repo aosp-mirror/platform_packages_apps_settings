@@ -98,7 +98,7 @@ public final class ScreenOnTimeControllerTest {
 
         ArgumentCaptor<CharSequence> argumentCaptor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mScreenOnTimeTextPreference).setText(argumentCaptor.capture());
-        assertThat(argumentCaptor.getValue().toString()).isEqualTo("18 days, 12 hr, 27 min");
+        assertThat(argumentCaptor.getValue().toString()).isEqualTo("18 days 12 hr 27 min");
         verify(mScreenOnTimeTextPreference).setVisible(true);
     }
 }
