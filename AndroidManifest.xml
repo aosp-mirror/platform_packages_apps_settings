@@ -3636,7 +3636,7 @@
                   android:label="@string/notification_channel_title"
                   android:theme="@style/Theme.Panel"
                   android:excludeFromRecents="true"
-                  android:configChanges="orientation|keyboardHidden|screenSize"
+                  android:configChanges="keyboardHidden|screenSize"
                   android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.CHANNEL_NOTIFICATION_SETTINGS" />

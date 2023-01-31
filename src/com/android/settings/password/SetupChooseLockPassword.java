@@ -170,6 +170,12 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
                 mOptionsButton.setVisibility(
                         mUiStage == Stage.Introduction ? View.VISIBLE : View.GONE);
             }
+
+            // Visibility of auto pin confirm opt-in/out option should always be invisible.
+            if (mAutoPinConfirmOption != null) {
+                mAutoPinConfirmOption.setVisibility(View.GONE);
+                mAutoConfirmSecurityMessage.setVisibility(View.GONE);
+            }
         }
     }
 }

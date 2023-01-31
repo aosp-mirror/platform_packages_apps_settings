@@ -932,18 +932,6 @@
     <string name="security_settings_udfps_enroll_progress_a11y_message">Enrolling fingerprint <xliff:g id="percentage" example="10">%d</xliff:g> percent</string>
     <!-- Title shown in fingerprint enrollment dialog once enrollment is completed [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_finish_title">Fingerprint added</string>
-    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (tablet) [CHAR LIMIT=NONE] -->
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet">Now you can use your fingerprint to unlock your tablet or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
-    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (device) [CHAR LIMIT=NONE] -->
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device">Now you can use your fingerprint to unlock your device or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
-    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (default) [CHAR LIMIT=NONE] -->
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default">Now you can use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
-    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (tablet) [CHAR LIMIT=NONE] -->
-    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet">Now you can use your fingerprint to unlock your tablet or verify it\u2019s you, like when you sign in to apps or approve a purchase. \n\nAdd another fingerprint so it\u2019s easier to unlock when you hold your tablet in different ways.</string>
-    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (device) [CHAR LIMIT=NONE] -->
-    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device">Now you can use your fingerprint to unlock your device or verify it\u2019s you, like when you sign in to apps or approve a purchase.\n\nAdd another fingerprint so it\u2019s easier to unlock when you hold your device in different ways.</string>
-    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (default) [CHAR LIMIT=NONE] -->
-    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default">Now you can use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps or approve a purchase.\n\nAdd another fingerprint so it\u2019s easier to unlock when you hold your phone in different ways.</string>
     <!-- Title for require screen on to auth toggle shown in fingerprint enrollment dialog once enrollment is completed. [CHAR LIMIT=NONE] -->
     <string name="security_settings_require_screen_on_to_auth_title">Touch to unlock anytime</string>
     <!-- Description for require screen on to auth toggle shown in fingerprint enrollment dialog once enrollment is completed. [CHAR LIMIT=NONE] -->
@@ -1101,6 +1089,15 @@
 
     <!-- Title for dialog in screen lock settings, allowing users to choose other types of screen locks. [CHAR LIMIT=40] -->
     <string name="setup_lock_settings_options_dialog_title">Screen lock options</string>
+
+    <!-- Title of the lock screen auto pin confirm setting. [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_auto_pin_confirm_title">Auto-confirm unlock</string>
+    <!-- Summary of the lock screen auto pin confirm setting. [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_auto_pin_confirm_summary">Unlock automatically if you input a correct PIN of 6 digits or more. This is slightly less secure than tapping Enter to confirm.</string>
+    <!-- Message shown to check auto pin confirmation feature when the user is updating the PIN. [CHAR LIMIT=NONE] -->
+    <string name="auto_pin_confirm_user_message">Auto-confirm correct PIN</string>
+    <!-- Message shown to explain the security concern if a user opts-in to the auto-pin feature. [CHAR LIMIT=NONE] -->
+    <string name="auto_pin_confirm_opt_in_security_message">Confirming your PIN by tapping Enter is more secure than using auto-confirm</string>
 
     <!--  Main Security lock settings --><skip />
     <!--  Title for PreferenceScreen to launch picker for security method when there is none [CHAR LIMIT=22] -->
@@ -1261,6 +1258,12 @@
       =1      {PIN must contain at least # digit}
       other   {PIN must be at least # digits}
     }</string>
+
+    <!-- Hint shown in dialog screen when PIN is too short with Additional text indicating minAutoConfirmLen(eg: 6) digits PIN offer additional security -->
+    <string name="lockpassword_pin_too_short_autoConfirm_extra_message">{count, plural,
+        =1      {PIN must contain at least # digit, but a {minAutoConfirmLen}-digit PIN is recommended for added security}
+        other   {PIN must be at least # digits, but a {minAutoConfirmLen}-digit PIN is recommended for added security}
+        }</string>
 
     <!-- Error shown in popup when password is too long -->
     <string name="lockpassword_password_too_long">{count, plural,
