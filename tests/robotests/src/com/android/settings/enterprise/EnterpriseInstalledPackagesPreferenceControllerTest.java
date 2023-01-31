@@ -18,7 +18,7 @@ package com.android.settings.enterprise;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.anyObject;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.eq;
@@ -74,7 +74,7 @@ public class EnterpriseInstalledPackagesPreferenceControllerTest {
                 return null;
             }
         }).when(mFeatureFactory.applicationFeatureProvider)
-                .calculateNumberOfPolicyInstalledApps(eq(async), anyObject());
+                .calculateNumberOfPolicyInstalledApps(eq(async), any());
     }
 
     @Test
