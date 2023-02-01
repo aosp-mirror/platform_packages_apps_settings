@@ -519,9 +519,7 @@
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Coloca el borde derecho de tu dedo"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Apoya un lado de tu huella dactilar en el sensor y mantén presionado. Luego, cambia de lado."</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Esto permite capturar más superficie de tu huella dactilar"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
-    <skip />
+    <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Inscribiendo huella dactilar: <xliff:g id="PERCENTAGE">%d</xliff:g>%%"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Se agregó la huella dactilar"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"El Desbloqueo con huellas dactilares mejora a medida que lo usas para desbloquear la tablet o verificar tu identidad en apps"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"El Desbloqueo con huellas dactilares mejora a medida que lo usas para desbloquear el dispositivo o verificar tu identidad en apps"</string>
@@ -613,9 +611,9 @@
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Encriptar tablet"</string>
     <string name="encrypt_title" product="default" msgid="7337365190988321100">"Encriptar teléfono"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Con encriptación"</string>
-    <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Establece un bloqueo de pantalla"</string>
+    <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Establecer un bloqueo de pantalla"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Para mayor seguridad, establece un PIN, un patrón o una contraseña para este dispositivo."</string>
-    <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Establece un bloqueo de pantalla"</string>
+    <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Establecer un bloqueo de pantalla"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Protege tu teléfono"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Agrega un bloqueo de pantalla para proteger la tablet"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Agrega bloqueo de pantalla para proteger el dispositivo"</string>
@@ -891,7 +889,7 @@
     <string name="bluetooth_device_advanced_enable_opp_title" msgid="7604726126703453984">"Permitir transferencias de archivos entrantes"</string>
     <string name="bluetooth_pan_user_profile_summary_connected" msgid="7851033200857999275">"Conectado para Internet"</string>
     <string name="bluetooth_pan_nap_profile_summary_connected" msgid="5563892893331988809">"Compartiendo conexión"</string>
-    <string name="bluetooth_dock_settings" msgid="1709536202189755022">"Configuración de la base"</string>
+    <string name="bluetooth_dock_settings" msgid="1709536202189755022">"Configuración del conector"</string>
     <string name="bluetooth_dock_settings_title" msgid="4872789068019972847">"Utilizar la base para el audio"</string>
     <string name="bluetooth_dock_settings_headset" msgid="5756482379574272554">"Como altavoz"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="434520221656010141">"Para música y medios"</string>
@@ -1027,7 +1025,7 @@
     <string name="passpoint_content" msgid="5219226173518418335">"Credenciales de <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="wifi_eap_method" msgid="3776009521349381742">"Método EAP"</string>
     <string name="please_select_phase2" msgid="577633852089847142">"Autenticación de fase 2"</string>
-    <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"Certificado de CA"</string>
+    <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"Certificado de la AC"</string>
     <string name="wifi_eap_ocsp" msgid="8713933962516871238">"Estado de certificado en línea"</string>
     <string name="wifi_eap_domain" msgid="8304301470752333203">"Dominio"</string>
     <string name="wifi_eap_user_cert" msgid="3569182430929173220">"Certificado del usuario"</string>
@@ -1286,7 +1284,7 @@
     <string name="volume_notification_mute" msgid="2612197659377126312">"Silenciar notificaciones"</string>
     <string name="volume_alarm_mute" msgid="3730895630530980760">"Silenciar alarmas"</string>
     <string name="dock_settings" msgid="4654404127402812514">"Base"</string>
-    <string name="dock_settings_title" msgid="1276956575555480214">"Configuración de la base"</string>
+    <string name="dock_settings_title" msgid="1276956575555480214">"Configuración del conector"</string>
     <string name="dock_audio_settings_title" msgid="8294821925086965934">"Audio"</string>
     <string name="dock_audio_summary_desk" msgid="4158593887711452737">"Configuración para la base adjunta del escritorio"</string>
     <string name="dock_audio_summary_car" msgid="292911654994476080">"Configuración para la base adjunta del automóvil"</string>
@@ -2471,7 +2469,7 @@
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Llamadas"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Notificaciones y alarmas"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Respuesta táctil interactiva"</string>
-    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Usa vibración y tecnología táctil"</string>
+    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Usar vibración y tecnología táctil"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibración de alarmas"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibración de contenido multimedia"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibración del tono"</string>
@@ -3042,7 +3040,7 @@
     <string name="credentials_reset" msgid="4246628389366452655">"Borrar credenciales"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"Quitar todos los certificados"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"Credenciales de confianza"</string>
-    <string name="trusted_credentials_summary" msgid="345822338358409468">"Mostrar certificados de CA de confianza"</string>
+    <string name="trusted_credentials_summary" msgid="345822338358409468">"Mostrar certificados de la AC de confianza"</string>
     <string name="user_credentials" msgid="4044405430790970775">"Credenciales de usuario"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"Ver y modificar las credenciales guardadas"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"Configuración avanzada"</string>
@@ -3053,7 +3051,7 @@
     <string name="credentials_erased" msgid="9121052044566053345">"Credenciales borradas"</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"Imposible borrar almac credenc"</string>
     <string name="usage_access_title" msgid="1580006124578134850">"Acceso a datos de uso"</string>
-    <string name="ca_certificate" msgid="3076484307693855611">"Certificado de CA"</string>
+    <string name="ca_certificate" msgid="3076484307693855611">"Certificado de la AC"</string>
     <string name="user_certificate" msgid="6897024598058566466">"Cert. de usuario de app y VPN"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Certificado de Wi‑Fi"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Tus datos no serán privados"</string>
@@ -4041,7 +4039,7 @@
     <string name="notif_type_conversation" msgid="4383931408641374979">"Conversaciones"</string>
     <string name="notif_type_conversation_summary" msgid="179142405410217101">"SMS, mensajes de texto y otras comunicaciones"</string>
     <string name="notif_type_alerting" msgid="4713073696855718576">"Notificaciones"</string>
-    <string name="notif_type_alerting_summary" msgid="4681068287836313604">"Puede sonar o vibrar en función de la configuración"</string>
+    <string name="notif_type_alerting_summary" msgid="4681068287836313604">"Pueden sonar o vibrar en función de la configuración"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"Silencio"</string>
     <string name="notif_type_silent_summary" msgid="7820923063105060844">"Notificaciones que nunca suenan ni vibran"</string>
     <string name="notification_listener_allowed" msgid="5536962633536318551">"Con permiso"</string>
