@@ -183,7 +183,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                         .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
                         .putExtra(EXTRA_USER_HANDLE, getUser());
                 intent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivityAsUser(intent, um.getPrimaryUser().getUserHandle());
+                startActivityAsUser(intent, um.getProfileParent(userInfo.id).getUserHandle());
                 finish();
                 return;
             }
