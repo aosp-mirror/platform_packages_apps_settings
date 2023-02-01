@@ -18,10 +18,12 @@ package com.android.settings.applications.defaultapps;
 
 import static com.android.settingslib.widget.TwoTargetPreference.ICON_SIZE_MEDIUM;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.os.UserManager;
 
@@ -57,6 +59,8 @@ public class DefaultAppPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        doReturn(mock(DevicePolicyManager.class)).when(mContext)
+                .getSystemService(Context.DEVICE_POLICY_SERVICE);
     }
 
     @Test

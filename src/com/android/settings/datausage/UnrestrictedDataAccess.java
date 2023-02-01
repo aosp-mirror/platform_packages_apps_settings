@@ -25,8 +25,8 @@ import android.view.View;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.applications.AppIconCacheManager;
 import com.android.settingslib.applications.ApplicationsState;
-import com.android.settingslib.applications.ApplicationsState.AppFilter;
 import com.android.settingslib.search.SearchIndexable;
 
 @SearchIndexable
@@ -38,14 +38,15 @@ public class UnrestrictedDataAccess extends DashboardFragment {
     private static final String EXTRA_SHOW_SYSTEM = "show_system";
 
     private boolean mShowSystem;
-    private AppFilter mFilter;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         mShowSystem = icicle != null && icicle.getBoolean(EXTRA_SHOW_SYSTEM);
-
-        use(UnrestrictedDataAccessPreferenceController.class).setParentFragment(this);
+        use(UnrestrictedDataAccessPreferenceController.class).setFilter(
+                mShowSystem ? ApplicationsState.FILTER_ALL_ENABLED
+                        : ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER);
+        use(UnrestrictedDataAccessPreferenceController.class).setSession(getSettingsLifecycle());
     }
 
     @Override
@@ -57,17 +58,14 @@ public class UnrestrictedDataAccess extends DashboardFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case MENU_SHOW_SYSTEM:
-                mShowSystem = !mShowSystem;
-                item.setTitle(mShowSystem ? R.string.menu_hide_system : R.string.menu_show_system);
-                mFilter = mShowSystem ? ApplicationsState.FILTER_ALL_ENABLED
-                        : ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER;
-
-                use(UnrestrictedDataAccessPreferenceController.class).setFilter(mFilter);
-                use(UnrestrictedDataAccessPreferenceController.class).rebuild();
-
-                break;
+        if (item.getItemId() == MENU_SHOW_SYSTEM) {
+            mShowSystem = !mShowSystem;
+            item.setTitle(mShowSystem ? R.string.menu_hide_system : R.string.menu_show_system);
+            use(UnrestrictedDataAccessPreferenceController.class).setFilter(
+                    mShowSystem ? ApplicationsState.FILTER_ALL_ENABLED
+                            : ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER);
+            use(UnrestrictedDataAccessPreferenceController.class).rebuild();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -79,17 +77,9 @@ public class UnrestrictedDataAccess extends DashboardFragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mFilter = mShowSystem ? ApplicationsState.FILTER_ALL_ENABLED
-                : ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER;
-        use(UnrestrictedDataAccessPreferenceController.class).setSession(getSettingsLifecycle());
-        use(UnrestrictedDataAccessPreferenceController.class).setFilter(mFilter);
+        use(UnrestrictedDataAccessPreferenceController.class).setParentFragment(this);
     }
 
     @Override
@@ -110,6 +100,12 @@ public class UnrestrictedDataAccess extends DashboardFragment {
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.unrestricted_data_access_settings;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        AppIconCacheManager.getInstance().release();
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

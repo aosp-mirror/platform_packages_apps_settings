@@ -18,7 +18,6 @@ package com.android.settings.accessibility;
 
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -30,24 +29,17 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 public class HearingAidDialogFragment extends InstrumentedDialogFragment {
     public static HearingAidDialogFragment newInstance() {
-        HearingAidDialogFragment frag = new HearingAidDialogFragment();
-        return frag;
+        return new HearingAidDialogFragment();
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.accessibility_hearingaid_pair_instructions_title)
                 .setMessage(R.string.accessibility_hearingaid_pair_instructions_message)
                 .setPositiveButton(R.string.accessibility_hearingaid_instruction_continue_button,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                launchBluetoothAddDeviceSetting();
-                            }
-                        })
-                .setNegativeButton(android.R.string.cancel,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) { }
-                        })
+                        (dialog, which) -> launchBluetoothAddDeviceSetting())
+                .setNegativeButton(android.R.string.cancel, /* listener= */ null)
                 .create();
     }
 
@@ -59,7 +51,7 @@ public class HearingAidDialogFragment extends InstrumentedDialogFragment {
     private void launchBluetoothAddDeviceSetting() {
         new SubSettingLauncher(getActivity())
                 .setDestination(BluetoothPairingDetail.class.getName())
-                .setSourceMetricsCategory(SettingsEnums.ACCESSIBILITY)
+                .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
     }
 }

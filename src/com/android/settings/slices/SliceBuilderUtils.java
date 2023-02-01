@@ -94,10 +94,6 @@ public class SliceBuilderUtils {
             return buildUnavailableSlice(context, sliceData);
         }
 
-        if (controller.isCopyableSlice()) {
-            return buildCopyableSlice(context, sliceData, controller);
-        }
-
         switch (sliceData.getSliceType()) {
             case SliceData.SliceType.INTENT:
                 return buildIntentSlice(context, sliceData, controller);
@@ -343,35 +339,14 @@ public class SliceBuilderUtils {
             inputRangeBuilder.setSubtitle(subtitleText);
         }
 
-        return new ListBuilder(context, sliceData.getUri(), ListBuilder.INFINITY)
-                .setAccentColor(color)
-                .addInputRange(inputRangeBuilder)
-                .setKeywords(keywords)
-                .build();
-    }
-
-    private static Slice buildCopyableSlice(Context context, SliceData sliceData,
-            BasePreferenceController controller) {
-        final SliceAction copyableAction = getCopyableAction(context, sliceData);
-        final PendingIntent contentIntent = getContentPendingIntent(context, sliceData);
-        final IconCompat icon = getSafeIcon(context, sliceData);
-        final SliceAction primaryAction = SliceAction.createDeeplink(contentIntent, icon,
-                ListBuilder.ICON_IMAGE,
-                sliceData.getTitle());
-        final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
-        @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
-        final Set<String> keywords = buildSliceKeywords(sliceData);
-        final RowBuilder rowBuilder = new RowBuilder()
-                .setTitle(sliceData.getTitle())
-                .setPrimaryAction(primaryAction)
-                .addEndItem(copyableAction);
-        if (!Utils.isSettingsIntelligence(context)) {
-            rowBuilder.setSubtitle(subtitleText);
+        SliceAction endItemAction = sliderController.getSliceEndItem(context);
+        if (endItemAction != null) {
+            inputRangeBuilder.addEndItem(endItemAction);
         }
 
         return new ListBuilder(context, sliceData.getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addRow(rowBuilder)
+                .addInputRange(inputRangeBuilder)
                 .setKeywords(keywords)
                 .build();
     }
@@ -396,14 +371,6 @@ public class SliceBuilderUtils {
 
     private static PendingIntent getSliderAction(Context context, SliceData sliceData) {
         return getActionIntent(context, SettingsSliceProvider.ACTION_SLIDER_CHANGED, sliceData);
-    }
-
-    private static SliceAction getCopyableAction(Context context, SliceData sliceData) {
-        final PendingIntent intent = getActionIntent(context,
-                SettingsSliceProvider.ACTION_COPY, sliceData);
-        final IconCompat icon = IconCompat.createWithResource(context,
-                R.drawable.ic_content_copy_grey600_24dp);
-        return SliceAction.create(intent, icon, ListBuilder.ICON_IMAGE, sliceData.getTitle());
     }
 
     private static boolean isValidSummary(Context context, CharSequence summary) {

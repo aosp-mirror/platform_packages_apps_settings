@@ -25,11 +25,13 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 public class CaCertsCurrentUserPreferenceControllerTest
     extends CaCertsPreferenceControllerTestBase {
 

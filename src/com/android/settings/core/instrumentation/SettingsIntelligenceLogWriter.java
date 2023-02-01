@@ -48,6 +48,8 @@ public class SettingsIntelligenceLogWriter implements LogWriter {
 
     private static final String LOG = "logs";
     private static final long MESSAGE_DELAY = DateUtils.MINUTE_IN_MILLIS; // 1 minute
+    // Based on the exp, 99.5% users collect less than 150 data in 1 minute.
+    private static final int CACHE_LOG_THRESHOLD = 150;
 
     private List<SettingsLog> mSettingsLogList;
     private SendLogHandler mLogHandler;
@@ -128,7 +130,8 @@ public class SettingsIntelligenceLogWriter implements LogWriter {
         mLogHandler.post(() -> {
             mSettingsLogList.add(settingsLog);
         });
-        if (action == SettingsEnums.ACTION_CONTEXTUAL_CARD_DISMISS) {
+        if (action == SettingsEnums.ACTION_CONTEXTUAL_CARD_DISMISS
+                || mSettingsLogList.size() >= CACHE_LOG_THRESHOLD) {
             // Directly send this event to notify SI instantly that the card is dismissed
             mLogHandler.sendLog();
         } else {

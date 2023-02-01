@@ -16,29 +16,71 @@
 
 package com.android.settings.notification;
 
+import static com.android.settings.slices.CustomSliceRegistry.VOLUME_MEDIA_URI;
+
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
+import android.media.session.MediaController;
+import android.net.Uri;
+
+import androidx.slice.builders.SliceAction;
+
+import com.android.settings.media.MediaOutputIndicatorWorker;
+import com.android.settings.slices.SliceBackgroundWorker;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.media.BluetoothMediaDevice;
+import com.android.settingslib.media.MediaDevice;
+import com.android.settingslib.media.MediaOutputConstants;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = MediaVolumePreferenceControllerTest.ShadowSliceBackgroundWorker.class)
 public class MediaVolumePreferenceControllerTest {
+
+    private static final String ACTION_LAUNCH_BROADCAST_DIALOG =
+            "android.settings.MEDIA_BROADCAST_DIALOG";
+    private static MediaOutputIndicatorWorker sMediaOutputIndicatorWorker;
 
     private MediaVolumePreferenceController mController;
 
     private Context mContext;
 
+    @Mock
+    private MediaController mMediaController;
+    @Mock
+    private MediaDevice mDevice1;
+    @Mock
+    private MediaDevice mDevice2;
+
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
+
         mContext = RuntimeEnvironment.application;
         mController = new MediaVolumePreferenceController(mContext);
+        sMediaOutputIndicatorWorker = spy(
+                new MediaOutputIndicatorWorker(mContext, VOLUME_MEDIA_URI));
+        when(mDevice1.isBLEDevice()).thenReturn(true);
+        when(mDevice2.isBLEDevice()).thenReturn(false);
     }
 
     @Test
@@ -67,5 +109,84 @@ public class MediaVolumePreferenceControllerTest {
     @Test
     public void isPublicSlice_returnTrue() {
         assertThat(mController.isPublicSlice()).isTrue();
+    }
+
+    @Test
+    public void isSupportEndItem_withBleDevice_returnsTrue() {
+        doReturn(mDevice1).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
+
+        assertThat(mController.isSupportEndItem()).isTrue();
+    }
+
+    @Test
+    public void isSupportEndItem_withNonBleDevice_returnsFalse() {
+        doReturn(mDevice2).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
+
+        assertThat(mController.isSupportEndItem()).isFalse();
+    }
+
+    @Test
+    public void getSliceEndItem_NotSupportEndItem_getsNullSliceAction() {
+        doReturn(mDevice2).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
+
+        final SliceAction sliceAction = mController.getSliceEndItem(mContext);
+
+        assertThat(sliceAction).isNull();
+    }
+
+    @Test
+    public void getSliceEndItem_deviceIsBroadcasting_getsBroadcastIntent() {
+        doReturn(mDevice1).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
+        doReturn(true).when(sMediaOutputIndicatorWorker).isDeviceBroadcasting();
+        doReturn(mMediaController).when(sMediaOutputIndicatorWorker)
+                .getActiveLocalMediaController();
+
+        final SliceAction sliceAction = mController.getSliceEndItem(mContext);
+
+        final PendingIntent endItemPendingIntent = sliceAction.getAction();
+        final PendingIntent expectedToggleIntent = getBroadcastIntent(
+                MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_BROADCAST_DIALOG);
+        assertThat(endItemPendingIntent).isEqualTo(expectedToggleIntent);
+    }
+
+    @Test
+    public void getSliceEndItem_deviceIsNotBroadcasting_getsActivityIntent() {
+        final MediaDevice device = mock(BluetoothMediaDevice.class);
+        final CachedBluetoothDevice cachedDevice = mock(CachedBluetoothDevice.class);
+        when(((BluetoothMediaDevice) device).getCachedDevice()).thenReturn(cachedDevice);
+        when(device.isBLEDevice()).thenReturn(true);
+        doReturn(device).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
+        doReturn(false).when(sMediaOutputIndicatorWorker).isDeviceBroadcasting();
+        doReturn(mMediaController).when(sMediaOutputIndicatorWorker)
+                .getActiveLocalMediaController();
+
+        final SliceAction sliceAction = mController.getSliceEndItem(mContext);
+
+        final PendingIntent endItemPendingIntent = sliceAction.getAction();
+        final PendingIntent expectedPendingIntent =
+                getActivityIntent(ACTION_LAUNCH_BROADCAST_DIALOG);
+        assertThat(endItemPendingIntent).isEqualTo(expectedPendingIntent);
+    }
+
+    @Implements(SliceBackgroundWorker.class)
+    public static class ShadowSliceBackgroundWorker {
+
+        @Implementation
+        public static SliceBackgroundWorker getInstance(Uri uri) {
+            return sMediaOutputIndicatorWorker;
+        }
+    }
+
+    private PendingIntent getBroadcastIntent(String action) {
+        final Intent intent = new Intent(action);
+        intent.setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME);
+        return PendingIntent.getBroadcast(mContext, 0 /* requestCode */, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+    }
+
+    private PendingIntent getActivityIntent(String action) {
+        final Intent intent = new Intent(action);
+        return PendingIntent.getActivity(mContext, 0 /* requestCode */, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
     }
 }

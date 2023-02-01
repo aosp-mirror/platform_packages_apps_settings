@@ -19,7 +19,6 @@ package com.android.settings.security.trustagent;
 import android.content.Context;
 import android.os.UserHandle;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -30,16 +29,10 @@ import com.android.settings.security.SecurityFeatureProvider;
 
 public class ManageTrustAgentsPreferenceController extends BasePreferenceController {
 
-    @VisibleForTesting
-    static final String KEY_MANAGE_TRUST_AGENTS = "manage_trust_agents";
     private static final int MY_USER_ID = UserHandle.myUserId();
 
     private final LockPatternUtils mLockPatternUtils;
     private TrustAgentManager mTrustAgentManager;
-
-    public ManageTrustAgentsPreferenceController(Context context) {
-        this(context, KEY_MANAGE_TRUST_AGENTS);
-    }
 
     public ManageTrustAgentsPreferenceController(Context context, String key) {
         super(context, key);
@@ -73,6 +66,6 @@ public class ManageTrustAgentsPreferenceController extends BasePreferenceControl
     }
 
     private int getTrustAgentCount() {
-        return mTrustAgentManager.getActiveTrustAgents(mContext, mLockPatternUtils).size();
+        return mTrustAgentManager.getActiveTrustAgents(mContext, mLockPatternUtils, false).size();
     }
 }

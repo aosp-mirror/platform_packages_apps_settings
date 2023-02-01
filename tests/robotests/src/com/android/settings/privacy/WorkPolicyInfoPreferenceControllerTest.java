@@ -16,11 +16,12 @@
 
 package com.android.settings.privacy;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -30,11 +31,12 @@ import android.content.Context;
 import androidx.preference.Preference;
 
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
+import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
-import org.junit.runner.RunWith;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -52,6 +54,7 @@ public class WorkPolicyInfoPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mEnterpriseProvider = mFakeFeatureFactory.getEnterprisePrivacyFeatureProvider(mContext);
+        SafetyCenterManagerWrapper.sInstance = mock(SafetyCenterManagerWrapper.class);
     }
 
     @Test
@@ -64,12 +67,21 @@ public class WorkPolicyInfoPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_haveWorkPolicyInfo_shouldReturnAvailableUnsearchable() {
+    public void getAvailabilityStatus_haveWorkPolicyInfo_shouldReturnAvailable() {
         when(mEnterpriseProvider.hasWorkPolicyInfo()).thenReturn(true);
         WorkPolicyInfoPreferenceController controller =
                 new WorkPolicyInfoPreferenceController(mContext, "test_key");
 
-        assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_safetyCenterEnabled_shouldReturnUnsupported() {
+        when(SafetyCenterManagerWrapper.get().isEnabled(mContext)).thenReturn(true);
+        WorkPolicyInfoPreferenceController controller =
+                new WorkPolicyInfoPreferenceController(mContext, "test_key");
+
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test

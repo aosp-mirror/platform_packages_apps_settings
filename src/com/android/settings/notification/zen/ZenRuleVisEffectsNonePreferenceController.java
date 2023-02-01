@@ -27,12 +27,12 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 public class ZenRuleVisEffectsNonePreferenceController extends
         AbstractZenCustomRulePreferenceController implements PreferenceControllerMixin {
 
-    private RadioButtonPreference mPreference;
+    private SelectorWithWidgetPreference mPreference;
 
     public ZenRuleVisEffectsNonePreferenceController(Context context, Lifecycle lifecycle,
             String key) {

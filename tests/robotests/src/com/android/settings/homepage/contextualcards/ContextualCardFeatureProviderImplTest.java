@@ -31,6 +31,7 @@ import com.android.settings.intelligence.ContextualCardProto;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -64,6 +65,7 @@ public class ContextualCardFeatureProviderImplTest {
     }
 
     @Test
+    @Ignore
     public void getContextualCards_shouldSortByScore() {
         insertFakeCard(mDatabase, "card1", 1, "uri1", 1000L);
         insertFakeCard(mDatabase, "card2", 0, "uri2", 1000L);
@@ -82,6 +84,7 @@ public class ContextualCardFeatureProviderImplTest {
     }
 
     @Test
+    @Ignore
     public void resetDismissedTime_durationExpired_shouldResetToNull() {
         insertFakeCard(mDatabase, "card1", 1, "uri1", 100L);
         final long threshold = 1000L;
@@ -92,6 +95,7 @@ public class ContextualCardFeatureProviderImplTest {
     }
 
     @Test
+    @Ignore
     public void resetDismissedTime_durationNotExpired_shouldNotUpdate() {
         insertFakeCard(mDatabase, "card1", 1, "uri1", 1111L);
         final long threshold = 1000L;

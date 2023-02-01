@@ -156,10 +156,16 @@ public class BlobInfoListView extends ListActivity {
             final BlobInfo blob = getItem(position);
             holder.blobLabel.setText(blob.getLabel());
             holder.blobId.setText(getString(R.string.blob_id_text, blob.getId()));
-            holder.blobExpiry.setText(getString(R.string.blob_expires_text,
-                    SharedDataUtils.formatTime(blob.getExpiryTimeMs())));
+            holder.blobExpiry.setText(formatExpiryTime(blob.getExpiryTimeMs()));
             holder.blobSize.setText(SharedDataUtils.formatSize(blob.getSizeBytes()));
             return convertView;
+        }
+
+        private String formatExpiryTime(long expiryTimeMs) {
+            if (expiryTimeMs == 0) {
+                return getString(R.string.blob_never_expires_text);
+            }
+            return getString(R.string.blob_expires_text, SharedDataUtils.formatTime(expiryTimeMs));
         }
     }
 }

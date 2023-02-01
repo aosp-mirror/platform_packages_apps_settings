@@ -27,6 +27,7 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
+import static android.view.WindowManager.LayoutParams.FLAG_SECURE;
 
 import static com.android.internal.widget.LockPatternUtils.PASSWORD_TYPE_KEY;
 import static com.android.settings.password.ChooseLockGeneric.CONFIRM_CREDENTIALS;
@@ -56,7 +57,6 @@ import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -74,13 +74,10 @@ import org.robolectric.shadows.ShadowDrawable;
 })
 public class ChooseLockPasswordTest {
 
-    private ShadowDevicePolicyManager mShadowDpm;
-
     @Before
     public void setUp() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.string.config_headlineFontFamily, "");
-        mShadowDpm = ShadowDevicePolicyManager.getShadow();
     }
 
     @After
@@ -163,6 +160,21 @@ public class ChooseLockPasswordTest {
     }
 
     @Test
+    public void activity_shouldHaveSecureFlag() {
+        PasswordPolicy policy = new PasswordPolicy();
+        policy.quality = PASSWORD_QUALITY_ALPHABETIC;
+        policy.length = 10;
+
+        Intent intent = createIntentForPasswordValidation(
+                /* minMetrics */ policy.getMinMetrics(),
+                /* minComplexity= */ PASSWORD_COMPLEXITY_NONE,
+                /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC);
+        ChooseLockPassword activity = buildChooseLockPasswordActivity(intent);
+        final int flags = activity.getWindow().getAttributes().flags;
+        assertThat(flags & FLAG_SECURE).isEqualTo(FLAG_SECURE);
+    }
+
+    @Test
     public void processAndValidatePasswordRequirements_noMinPasswordComplexity() {
         PasswordPolicy policy = new PasswordPolicy();
         policy.quality = PASSWORD_QUALITY_ALPHABETIC;
@@ -191,7 +203,6 @@ public class ChooseLockPasswordTest {
     }
 
     @Test
-    @Ignore
     public void processAndValidatePasswordRequirements_minPasswordComplexityStricter_password() {
         PasswordPolicy policy = new PasswordPolicy();
         policy.quality = PASSWORD_QUALITY_SOMETHING;
@@ -201,7 +212,6 @@ public class ChooseLockPasswordTest {
                 /* minComplexity= */ PASSWORD_COMPLEXITY_MEDIUM,
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
                 /* userEnteredPassword= */ LockscreenCredential.createNone(),
-                "Must contain at least 1 non-numerical character",
                 "Must be at least 4 characters");
     }
 
@@ -323,7 +333,6 @@ public class ChooseLockPasswordTest {
     }
 
     @Test
-    @Ignore
     public void processAndValidatePasswordRequirements_requirementsUpdateAccordingToMinComplexityAndUserInput_empty() {
         PasswordPolicy policy = new PasswordPolicy();
         policy.quality = PASSWORD_QUALITY_UNSPECIFIED;
@@ -334,11 +343,10 @@ public class ChooseLockPasswordTest {
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
                 /* userEnteredPassword= */ LockscreenCredential.createNone(),
                 "Must be at least 6 characters",
-                "Must contain at least 1 non-numerical character");
+                "If using only numbers, must be at least 8 digits");
     }
 
     @Test
-    @Ignore
     public void processAndValidatePasswordRequirements_requirementsUpdateAccordingToMinComplexityAndUserInput_numeric() {
         PasswordPolicy policy = new PasswordPolicy();
         policy.quality = PASSWORD_QUALITY_UNSPECIFIED;
@@ -349,7 +357,7 @@ public class ChooseLockPasswordTest {
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
                 /* userEnteredPassword= */ LockscreenCredential.createPassword("1"),
                 "Must be at least 6 characters",
-                "Must contain at least 1 non-numerical character");
+                "If using only numbers, must be at least 8 digits");
     }
 
     @Test

@@ -52,19 +52,15 @@
             android:fragment="com.android.settings.notification.zen.ZenModeSoundVibrationSettings" />
     </PreferenceCategory>
 
-    <!-- Automatic rules -->
     <PreferenceCategory
-        android:key="zen_mode_settings_schedule"
-        android:title="@string/zen_category_schedule">
+        android:title="@string/zen_settings_general"
+        android:key="zen_mode_settings_advanced">
+
+        <!-- Automatic rules -->
         <Preference
             android:key="zen_mode_automation_settings"
             android:title="@string/zen_category_schedule"
             android:fragment="com.android.settings.notification.zen.ZenModeAutomationSettings"/>
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="@string/zen_settings_general"
-        android:key="zen_mode_settings_advanced">
 
         <!-- DND duration settings -->
         <com.android.settings.notification.zen.ZenDurationDialogPreference

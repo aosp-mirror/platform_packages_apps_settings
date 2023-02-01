@@ -99,7 +99,7 @@ public class AppStateNotificationBridgeTest {
         when(mState.newSession(any())).thenReturn(mSession);
         when(mState.getBackgroundLooper()).thenReturn(mock(Looper.class));
         when(mBackend.getNotificationsBanned(anyString(), anyInt())).thenReturn(true);
-        when(mBackend.isSystemApp(any(), any())).thenReturn(true);
+        when(mBackend.enableSwitch(any(), any())).thenReturn(true);
         // most tests assume no work profile
         when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{});
         mContext = RuntimeEnvironment.application.getApplicationContext();
@@ -245,7 +245,6 @@ public class AppStateNotificationBridgeTest {
         assertThat(((NotificationsSentState) apps.get(0).extraInfo).avgSentDaily).isEqualTo(1);
         assertThat(((NotificationsSentState) apps.get(0).extraInfo).avgSentWeekly).isEqualTo(0);
         assertThat(((NotificationsSentState) apps.get(0).extraInfo).blocked).isTrue();
-        assertThat(((NotificationsSentState) apps.get(0).extraInfo).systemApp).isTrue();
         assertThat(((NotificationsSentState) apps.get(0).extraInfo).blockable).isTrue();
     }
 
@@ -376,7 +375,6 @@ public class AppStateNotificationBridgeTest {
         assertThat(((NotificationsSentState) entry.extraInfo).avgSentDaily).isEqualTo(2);
         assertThat(((NotificationsSentState) entry.extraInfo).avgSentWeekly).isEqualTo(0);
         assertThat(((NotificationsSentState) entry.extraInfo).blocked).isTrue();
-        assertThat(((NotificationsSentState) entry.extraInfo).systemApp).isTrue();
         assertThat(((NotificationsSentState) entry.extraInfo).blockable).isTrue();
     }
 
@@ -563,11 +561,11 @@ public class AppStateNotificationBridgeTest {
         entry.extraInfo = new NotificationsSentState();
 
         CompoundButton.OnCheckedChangeListener listener = mBridge.getSwitchOnCheckedListener(entry);
-        listener.onCheckedChanged(toggle, true);
+        listener.onCheckedChanged(toggle, false);
 
         verify(mBackend).setNotificationsEnabledForPackage(
-                entry.info.packageName, entry.info.uid, true);
-        assertThat(((NotificationsSentState) entry.extraInfo).blocked).isFalse();
+                entry.info.packageName, entry.info.uid, false);
+        assertThat(((NotificationsSentState) entry.extraInfo).blocked).isTrue();
     }
 
     @Test

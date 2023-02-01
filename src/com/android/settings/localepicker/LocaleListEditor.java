@@ -202,7 +202,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment {
             new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.dlg_remove_locales_error_title)
                     .setMessage(R.string.dlg_remove_locales_error_message)
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                         }
@@ -228,7 +228,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment {
         }
 
         builder.setTitle(title)
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         setRemoveMode(false);

@@ -22,6 +22,7 @@ import static com.android.settings.development.FreeformWindowsPreferenceControll
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -30,6 +31,9 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
@@ -51,6 +55,14 @@ public class FreeformWindowsPreferenceControllerTest {
     private SwitchPreference mPreference;
     @Mock
     private PreferenceScreen mScreen;
+    @Mock
+    private DevelopmentSettingsDashboardFragment mFragment;
+    @Mock
+    private FragmentActivity mActivity;
+    @Mock
+    private FragmentManager mFragmentManager;
+    @Mock
+    private FragmentTransaction mTransaction;
 
     private Context mContext;
     private FreeformWindowsPreferenceController mController;
@@ -59,7 +71,10 @@ public class FreeformWindowsPreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new FreeformWindowsPreferenceController(mContext);
+        doReturn(mTransaction).when(mFragmentManager).beginTransaction();
+        doReturn(mFragmentManager).when(mActivity).getSupportFragmentManager();
+        doReturn(mActivity).when(mFragment).getActivity();
+        mController = new FreeformWindowsPreferenceController(mContext, mFragment);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
     }
@@ -87,6 +102,8 @@ public class FreeformWindowsPreferenceControllerTest {
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT, -1 /* default */);
         assertThat(mode).isEqualTo(SETTING_VALUE_ON);
+
+        verify(mTransaction).add(any(RebootConfirmationDialogFragment.class), any());
     }
 
     @Test

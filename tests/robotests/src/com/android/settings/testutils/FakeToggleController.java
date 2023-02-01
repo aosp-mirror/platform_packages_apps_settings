@@ -21,13 +21,14 @@ import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.slices.SliceBackgroundWorker;
 
 public class FakeToggleController extends TogglePreferenceController {
 
     public static final String AVAILABILITY_KEY = "fake_toggle_availability_key";
-    public static final int HIGHLIGHT_MENU_RES = 5678;
+    public static final int HIGHLIGHT_MENU_RES = R.string.menu_key_about_device;
 
     public static final IntentFilter INTENT_FILTER = new IntentFilter(
             WifiManager.WIFI_AP_STATE_CHANGED_ACTION);

@@ -16,7 +16,11 @@
 
 package com.android.settings.applications.specialaccess.deviceadmin;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.MANAGE_DEVICE_ADMIN_APPS;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.NO_DEVICE_ADMINS;
+
 import android.app.settings.SettingsEnums;
+import android.os.Bundle;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -29,6 +33,15 @@ public class DeviceAdminSettings extends DashboardFragment {
 
     public int getMetricsCategory() {
         return SettingsEnums.DEVICE_ADMIN_SETTINGS;
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        replaceEnterprisePreferenceScreenTitle(
+                MANAGE_DEVICE_ADMIN_APPS, R.string.manage_device_admin);
+        replaceEnterpriseStringTitle("device_admin_footer",
+                NO_DEVICE_ADMINS, R.string.no_device_admins);
     }
 
     @Override

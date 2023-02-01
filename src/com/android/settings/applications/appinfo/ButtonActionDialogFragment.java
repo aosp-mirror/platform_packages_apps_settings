@@ -90,6 +90,12 @@ public class ButtonActionDialogFragment extends InstrumentedDialogFragment imple
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
+        // When it's in a multi-window mode, force stopping an app will lead to an activity
+        // recreate, and the dialog fragment will also be recreated. So dismiss the dialog before
+        // stopping the app.
+        if (mId == ButtonActionDialogFragment.DialogType.FORCE_STOP) {
+            dialog.dismiss();
+        }
         final AppButtonsDialogListener lsn =
                 (AppButtonsDialogListener) getTargetFragment();
         lsn.handleDialogClick(mId);

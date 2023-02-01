@@ -27,13 +27,19 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.Looper;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.android.settings.network.CarrierConfigCache;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,37 +50,48 @@ import org.mockito.MockitoAnnotations;
 @RunWith(AndroidJUnit4.class)
 public final class Enable2gPreferenceControllerTest {
     private static final int SUB_ID = 2;
+    private static final String PREFERENCE_KEY = "TEST_2G_PREFERENCE";
 
+    @Mock
+    private CarrierConfigCache mCarrierConfigCache;
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
     private TelephonyManager mInvalidTelephonyManager;
-    @Mock
-    private CarrierConfigManager mCarrierConfigManager;
 
+    private RestrictedSwitchPreference mPreference;
+    private PreferenceScreen mPreferenceScreen;
     private PersistableBundle mPersistableBundle;
     private Enable2gPreferenceController mController;
     private Context mContext;
 
     @Before
     public void setUp() {
+        if (Looper.myLooper() == null) {
+            Looper.prepare();
+        }
+
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
-        when(mContext.getSystemService(CarrierConfigManager.class))
-              .thenReturn(mCarrierConfigManager);
+        CarrierConfigCache.setTestInstance(mContext, mCarrierConfigCache);
 
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mInvalidTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
         mPersistableBundle = new PersistableBundle();
-        doReturn(mPersistableBundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
-        doReturn(mPersistableBundle).when(mCarrierConfigManager).getConfigForSubId(
+        doReturn(mPersistableBundle).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
+        doReturn(mPersistableBundle).when(mCarrierConfigCache).getConfigForSubId(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-        mController = new Enable2gPreferenceController(mContext, "mobile_data");
+        mController = new Enable2gPreferenceController(mContext, PREFERENCE_KEY);
+
+        mPreference = spy(new RestrictedSwitchPreference(mContext));
+        mPreference.setKey(PREFERENCE_KEY);
+        mPreferenceScreen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
+        mPreferenceScreen.addPreference(mPreference);
         mController.init(SUB_ID);
     }
 
@@ -99,7 +116,7 @@ public final class Enable2gPreferenceControllerTest {
                 mTelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
         mPersistableBundle.putBoolean(CarrierConfigManager.KEY_HIDE_ENABLE_2G,
                 false);
-        doReturn(null).when(mCarrierConfigManager);
+        doReturn(null).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
@@ -137,12 +154,14 @@ public final class Enable2gPreferenceControllerTest {
     }
 
     @Test
+    public void setChecked_disabledByAdmin_returnFalse() {
+        when2gIsDisabledByAdmin(true);
+        assertThat(mController.setChecked(false)).isFalse();
+    }
+
+    @Test
     public void onPreferenceChange_update() {
-        // Set "Enable 2G" flag to "on"
-        when(mTelephonyManager.getAllowedNetworkTypesForReason(
-                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G)).thenReturn(
-                (long) (TelephonyManager.NETWORK_TYPE_BITMASK_GSM
-                        | TelephonyManager.NETWORK_TYPE_BITMASK_LTE));
+        when2gIsEnabledForReasonEnable2g();
 
         // Setup state to allow disabling
         doReturn(true).when(mTelephonyManager).isRadioInterfaceCapabilitySupported(
@@ -157,5 +176,43 @@ public final class Enable2gPreferenceControllerTest {
         verify(mTelephonyManager, times(1)).setAllowedNetworkTypesForReason(
                 TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G,
                 TelephonyManager.NETWORK_TYPE_BITMASK_LTE);
+    }
+
+    @Test
+    public void disabledByAdmin_toggleUnchecked() {
+        when2gIsEnabledForReasonEnable2g();
+        when2gIsDisabledByAdmin(true);
+        assertThat(mController.isChecked()).isFalse();
+    }
+
+    @Test
+    public void userRestrictionInactivated_userToggleMaintainsState() {
+        // Initially, 2g is enabled
+        when2gIsEnabledForReasonEnable2g();
+        when2gIsDisabledByAdmin(false);
+        assertThat(mController.isChecked()).isTrue();
+
+        // When we disable the preference by an admin, the preference should be unchecked
+        when2gIsDisabledByAdmin(true);
+        assertThat(mController.isChecked()).isFalse();
+
+        // If the preference is re-enabled by an admin, former state should hold
+        when2gIsDisabledByAdmin(false);
+        assertThat(mController.isChecked()).isTrue();
+    }
+
+    private void when2gIsEnabledForReasonEnable2g() {
+        when(mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G)).thenReturn(
+                (long) (TelephonyManager.NETWORK_TYPE_BITMASK_GSM
+                        | TelephonyManager.NETWORK_TYPE_BITMASK_LTE));
+    }
+
+    private void when2gIsDisabledByAdmin(boolean is2gDisabledByAdmin) {
+        // Our controller depends on state being initialized when the associated preference is
+        // displayed because the admin disablement functionality flows from the association of a
+        // Preference with the PreferenceScreen
+        when(mPreference.isDisabledByAdmin()).thenReturn(is2gDisabledByAdmin);
+        mController.displayPreference(mPreferenceScreen);
     }
 }

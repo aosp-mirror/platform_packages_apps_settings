@@ -19,6 +19,7 @@ import static com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MAX;
 import static com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MIN;
 import static com.android.settingslib.display.BrightnessUtils.convertLinearToGammaFloat;
 
+import android.app.ActivityOptions;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -140,6 +141,7 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
         mContentResolver.registerContentObserver(BRIGHTNESS_ADJ_URI, false, mBrightnessObserver);
         mDisplayManager.registerDisplayListener(mDisplayListener, mHandler,
                 DisplayManager.EVENT_FLAG_DISPLAY_BRIGHTNESS);
+        updatedSummary(mPreference);
     }
 
     @Override
@@ -156,7 +158,11 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
         final Intent intent = new Intent(ACTION_SHOW_BRIGHTNESS_DIALOG);
         intent.putExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
                 SettingsTransitionHelper.TransitionType.TRANSITION_NONE);
-        mContext.startActivity(intent);
+
+        // Start activity in the same task and pass fade animations
+        final ActivityOptions options = ActivityOptions.makeCustomAnimation(mContext,
+                android.R.anim.fade_in, android.R.anim.fade_out);
+        mContext.startActivityForResult(preference.getKey(), intent, 0, options.toBundle());
         return true;
     }
 

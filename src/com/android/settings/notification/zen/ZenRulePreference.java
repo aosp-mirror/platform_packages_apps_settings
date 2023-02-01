@@ -23,22 +23,20 @@ import android.content.Intent;
 import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
 import android.service.notification.ZenModeConfig;
-import android.view.View;
-import android.widget.CheckBox;
+import android.service.notification.ZenModeConfig.ScheduleInfo;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.utils.ManagedServiceSettings;
 import com.android.settings.utils.ZenServiceListing;
+import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.widget.TwoTargetPreference;
 
 import java.util.Map;
 
-public class ZenRulePreference extends TwoTargetPreference {
+public class ZenRulePreference extends PrimarySwitchPreference {
     private static final ManagedServiceSettings.Config CONFIG =
             ZenModeAutomationSettings.getConditionProviderConfig();
     final String mId;
@@ -53,14 +51,13 @@ public class ZenRulePreference extends TwoTargetPreference {
     CharSequence mName;
 
     private Intent mIntent;
-    private boolean mChecked;
-    private CheckBox mCheckBox;
+
+    private final ZenRuleScheduleHelper mScheduleHelper = new ZenRuleScheduleHelper();
 
     public ZenRulePreference(Context context,
             final Map.Entry<String, AutomaticZenRule> ruleEntry,
             Fragment parent, MetricsFeatureProvider metricsProvider) {
         super(context);
-        setLayoutResource(R.layout.preference_checkable_two_target);
         mBackend = ZenModeBackend.getInstance(context);
         mContext = context;
         mRule = ruleEntry.getValue();
@@ -72,50 +69,11 @@ public class ZenRulePreference extends TwoTargetPreference {
         mServiceListing.reloadApprovedServices();
         mPref = this;
         mMetricsFeatureProvider = metricsProvider;
-        mChecked = mRule.isEnabled();
         setAttributes(mRule);
         setWidgetLayoutResource(getSecondTargetResId());
-    }
 
-    protected int getSecondTargetResId() {
-        if (mIntent != null) {
-            return R.layout.zen_rule_widget;
-        }
-        return 0;
-    }
-
-    @Override
-    public void onBindViewHolder(PreferenceViewHolder view) {
-        super.onBindViewHolder(view);
-        View settingsWidget = view.findViewById(android.R.id.widget_frame);
-        View divider = view.findViewById(R.id.two_target_divider);
-        if (mIntent != null) {
-            divider.setVisibility(View.VISIBLE);
-            settingsWidget.setVisibility(View.VISIBLE);
-            settingsWidget.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mContext.startActivity(mIntent);
-                }
-            });
-        } else {
-            divider.setVisibility(View.GONE);
-            settingsWidget.setVisibility(View.GONE);
-            settingsWidget.setOnClickListener(null);
-        }
-
-        View checkboxContainer = view.findViewById(R.id.checkbox_container);
-        if (checkboxContainer != null) {
-            checkboxContainer.setOnClickListener(mOnCheckBoxClickListener);
-        }
-        mCheckBox = (CheckBox) view.findViewById(com.android.internal.R.id.checkbox);
-        if (mCheckBox != null) {
-            mCheckBox.setChecked(mChecked);
-        }
-    }
-
-    public boolean isChecked() {
-        return mChecked;
+        // initialize the checked state of the preference
+        super.setChecked(mRule.isEnabled());
     }
 
     public void updatePreference(AutomaticZenRule rule) {
@@ -126,33 +84,25 @@ public class ZenRulePreference extends TwoTargetPreference {
 
         if (mRule.isEnabled() != rule.isEnabled()) {
             setChecked(rule.isEnabled());
-            setSummary(computeRuleSummary(rule));
         }
-
+        setSummary(computeRuleSummary(rule));
         mRule = rule;
     }
 
     @Override
     public void onClick() {
-        mOnCheckBoxClickListener.onClick(null);
-    }
-
-    private void setChecked(boolean checked) {
-        mChecked = checked;
-        if (mCheckBox != null) {
-            mCheckBox.setChecked(checked);
+        if (mIntent != null) {
+            mContext.startActivity(mIntent);
         }
     }
 
-    private View.OnClickListener mOnCheckBoxClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            mRule.setEnabled(!mChecked);
-            mBackend.updateZenRule(mId, mRule);
-            setChecked(mRule.isEnabled());
-            setAttributes(mRule);
-        }
-    };
+    @Override
+    public void setChecked(boolean checked) {
+        mRule.setEnabled(checked);
+        mBackend.updateZenRule(mId, mRule);
+        setAttributes(mRule);
+        super.setChecked(checked);
+    }
 
     protected void setAttributes(AutomaticZenRule rule) {
         final boolean isSchedule = ZenModeConfig.isValidScheduleConditionId(
@@ -178,6 +128,30 @@ public class ZenRulePreference extends TwoTargetPreference {
     }
 
     private String computeRuleSummary(AutomaticZenRule rule) {
+        if (rule != null) {
+            // handle schedule-based rules
+            ScheduleInfo schedule =
+                    ZenModeConfig.tryParseScheduleConditionId(rule.getConditionId());
+            if (schedule != null) {
+                String desc = mScheduleHelper.getDaysAndTimeSummary(mContext, schedule);
+                return (desc != null) ? desc :
+                        mContext.getResources().getString(
+                                R.string.zen_mode_schedule_rule_days_none);
+            }
+
+            // handle event-based rules
+            ZenModeConfig.EventInfo event =
+                    ZenModeConfig.tryParseEventConditionId(rule.getConditionId());
+            if (event != null) {
+                if (event.calName != null) {
+                    return event.calName;
+                } else {
+                    return mContext.getResources().getString(
+                            R.string.zen_mode_event_rule_calendar_any);
+                }
+            }
+        }
+
         return (rule == null || !rule.isEnabled())
                 ? mContext.getResources().getString(R.string.switch_off_text)
                 : mContext.getResources().getString(R.string.switch_on_text);

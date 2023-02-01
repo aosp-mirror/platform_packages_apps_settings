@@ -17,6 +17,7 @@ package com.android.settings.applications;
 
 import static android.app.AppOpsManager.OP_GET_USAGE_STATS;
 import static android.app.AppOpsManager.OP_LOADER_USAGE_STATS;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_DISABLE_USAGE_ACCESS_WARNING;
 
 import android.Manifest;
 import android.app.AppOpsManager;
@@ -96,7 +97,9 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
                     new AlertDialog.Builder(getContext())
                             .setIcon(com.android.internal.R.drawable.ic_dialog_alert_material)
                             .setTitle(android.R.string.dialog_alert_title)
-                            .setMessage(R.string.work_profile_usage_access_warning)
+                            .setMessage(mDpm.getResources().getString(
+                                    WORK_PROFILE_DISABLE_USAGE_ACCESS_WARNING,
+                                    () -> getString(R.string.work_profile_usage_access_warning)))
                             .setPositiveButton(R.string.okay, null)
                             .show();
                 }

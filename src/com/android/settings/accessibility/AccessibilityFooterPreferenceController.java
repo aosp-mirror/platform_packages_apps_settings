@@ -31,7 +31,7 @@ import com.android.settingslib.HelpUtils;
 public class AccessibilityFooterPreferenceController extends BasePreferenceController {
 
     private int mHelpResource;
-    private String mLearnMoreContentDescription;
+    private String mLearnMoreText;
     private String mIntroductionTitle;
 
     public AccessibilityFooterPreferenceController(Context context, String key) {
@@ -56,9 +56,9 @@ public class AccessibilityFooterPreferenceController extends BasePreferenceContr
      * Setups a help item in the {@link AccessibilityFooterPreference} with specific content
      * description.
      */
-    public void setupHelpLink(int helpResource, String learnMoreContentDescription) {
+    public void setupHelpLink(int helpResource, String learnMoreText) {
         mHelpResource = helpResource;
-        mLearnMoreContentDescription = learnMoreContentDescription;
+        mLearnMoreText = learnMoreText;
     }
 
     /**
@@ -73,12 +73,12 @@ public class AccessibilityFooterPreferenceController extends BasePreferenceContr
 
     /**
      * Overrides this if showing a help item in the {@link AccessibilityFooterPreference} with
-     * specific content description.
+     * specific learn more title.
      *
-     * @return the content description for the help url
+     * @return learn more title for the help url
      */
-    protected String getLearnMoreContentDescription() {
-        return mLearnMoreContentDescription;
+    protected String getLearnMoreText() {
+        return mLearnMoreText;
     }
 
     /**
@@ -117,10 +117,13 @@ public class AccessibilityFooterPreferenceController extends BasePreferenceContr
             footerPreference.setLearnMoreAction(view -> {
                 view.startActivityForResult(helpIntent, 0);
             });
-            footerPreference.setLearnMoreContentDescription(getLearnMoreContentDescription());
+            footerPreference.setLearnMoreText(getLearnMoreText());
             footerPreference.setLinkEnabled(true);
         } else {
             footerPreference.setLinkEnabled(false);
         }
+
+        // Grouping subcomponents to make more accessible.
+        footerPreference.setSelectable(false);
     }
 }

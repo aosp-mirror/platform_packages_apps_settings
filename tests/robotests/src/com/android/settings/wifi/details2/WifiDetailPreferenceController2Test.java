@@ -53,13 +53,13 @@ import android.net.NetworkInfo;
 import android.net.NetworkRequest;
 import android.net.RouteInfo;
 import android.net.Uri;
-import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.provider.Settings;
+import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -86,7 +86,6 @@ import com.android.settingslib.widget.LayoutPreference;
 import com.android.wifitrackerlib.NetworkDetailsTracker;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
-import com.android.wifitrackerlib.WifiEntry.ConnectedInfo;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -110,6 +109,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 // TODO(b/143326832): Should add test cases for connect button.
@@ -943,22 +943,22 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    public void onConnectedNetwork_getKnownNetworkType_visibleWifiTypePref() {
+    public void onConnectedNetwork_getStandardString_visibleWifiTypePref() {
         setUpForConnectedNetwork();
         setUpSpyController();
-        setWifiType(ScanResult.WIFI_STANDARD_11AX);
+        when(mMockWifiEntry.getStandardString()).thenReturn("Standard");
 
         displayAndResume();
 
-        verify(mMockTypePref).setSummary(R.string.wifi_type_11AX);
+        verify(mMockTypePref).setSummary("Standard");
         verify(mMockTypePref).setVisible(true);
     }
 
     @Test
-    public void onConnectedNetwork_getUnKnownNetworkType_invisibleWifiTypePref() {
+    public void onConnectedNetwork_getEmptyStandardString_invisibleWifiTypePref() {
         setUpForConnectedNetwork();
         setUpSpyController();
-        setWifiType(ScanResult.WIFI_STANDARD_UNKNOWN);
+        when(mMockWifiEntry.getStandardString()).thenReturn("");
 
         displayAndResume();
 
@@ -972,12 +972,6 @@ public class WifiDetailPreferenceController2Test {
         displayAndResume();
 
         verify(mMockTypePref).setVisible(false);
-    }
-
-    private void setWifiType(int type) {
-        ConnectedInfo connectedInfo = new ConnectedInfo();
-        connectedInfo.wifiStandard = type;
-        when(mMockWifiEntry.getConnectedInfo()).thenReturn(connectedInfo);
     }
 
     @Test
@@ -1798,5 +1792,75 @@ public class WifiDetailPreferenceController2Test {
         when(pref.setButton4OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
 
         return pref;
+    }
+
+    @Test
+    public void fineSubscriptionInfo_noMatchedCarrierId_returnNull() {
+        setUpSpyController();
+        SubscriptionInfo sub1 = mockSubscriptionInfo(1, "sim1", 1111);
+        SubscriptionInfo sub2 = mockSubscriptionInfo(2, "sim2", 2222);
+        List<SubscriptionInfo> activeSubInfos = Arrays.asList(sub1, sub2);
+
+        SubscriptionInfo info = mController.fineSubscriptionInfo(3333, activeSubInfos, 1);
+
+        assertThat(info).isNull();
+
+        info = mController.fineSubscriptionInfo(3333, activeSubInfos, 2);
+
+        assertThat(info).isNull();
+    }
+
+    @Test
+    public void fineSubscriptionInfo_diffCarrierId_returnMatchedOne() {
+        setUpSpyController();
+        SubscriptionInfo sub1 = mockSubscriptionInfo(1, "sim1", 1111);
+        SubscriptionInfo sub2 = mockSubscriptionInfo(2, "sim2", 2222);
+        List<SubscriptionInfo> activeSubInfos = Arrays.asList(sub1, sub2);
+
+        SubscriptionInfo info = mController.fineSubscriptionInfo(1111, activeSubInfos, 1);
+
+        assertThat(info).isNotNull();
+        assertThat(info.getDisplayName().toString()).isEqualTo("sim1");
+
+        info = mController.fineSubscriptionInfo(1111, activeSubInfos, 2);
+
+        assertThat(info).isNotNull();
+        assertThat(info.getDisplayName().toString()).isEqualTo("sim1");
+
+        info = mController.fineSubscriptionInfo(2222, activeSubInfos, 1);
+
+        assertThat(info).isNotNull();
+        assertThat(info.getDisplayName().toString()).isEqualTo("sim2");
+
+        info = mController.fineSubscriptionInfo(2222, activeSubInfos, 2);
+
+        assertThat(info).isNotNull();
+        assertThat(info.getDisplayName().toString()).isEqualTo("sim2");
+    }
+
+    @Test
+    public void fineSubscriptionInfo_sameCarrierId_returnDefaultDataOne() {
+        setUpSpyController();
+        SubscriptionInfo sub1 = mockSubscriptionInfo(1, "sim1", 1111);
+        SubscriptionInfo sub2 = mockSubscriptionInfo(2, "sim2", 1111);
+        List<SubscriptionInfo> activeSubInfos = Arrays.asList(sub1, sub2);
+
+        SubscriptionInfo info = mController.fineSubscriptionInfo(1111, activeSubInfos, 1);
+
+        assertThat(info).isNotNull();
+        assertThat(info.getDisplayName().toString()).isEqualTo("sim1");
+
+        info = mController.fineSubscriptionInfo(1111, activeSubInfos, 2);
+
+        assertThat(info).isNotNull();
+        assertThat(info.getDisplayName().toString()).isEqualTo("sim2");
+    }
+
+    private SubscriptionInfo mockSubscriptionInfo(int subId, String displayName, int carrierId) {
+        SubscriptionInfo info = mock(SubscriptionInfo.class);
+        when(info.getSubscriptionId()).thenReturn(subId);
+        when(info.getDisplayName()).thenReturn(displayName);
+        when(info.getCarrierId()).thenReturn(carrierId);
+        return info;
     }
 }

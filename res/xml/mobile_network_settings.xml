@@ -20,6 +20,7 @@
 
     <com.android.settings.widget.SettingsMainSwitchPreference
         android:key="use_sim_switch"
+        android:title="@string/mobile_network_use_sim_on"
         settings:controller="com.android.settings.network.telephony.MobileNetworkSwitchController"/>
 
     <PreferenceCategory
@@ -240,11 +241,13 @@
             settings:controller="com.android.settings.network.telephony.CarrierPreferenceController">
         </Preference>
 
-        <SwitchPreference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:key="enable_2g"
             android:title="@string/enable_2g_title"
             android:summary="@string/enable_2g_summary"
-            settings:controller="com.android.settings.network.telephony.Enable2gPreferenceController" />
+            settings:controller="com.android.settings.network.telephony.Enable2gPreferenceController"
+            settings:useAdminDisabledSummary="true"
+            settings:userRestriction="no_cellular_2g"/>
 
         <SwitchPreference
             android:key="nr_advanced_calling"

@@ -36,7 +36,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.network.telephony.MobileNetworkActivity;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -126,12 +126,7 @@ public class NetworkProviderSimListController extends AbstractPreferenceControll
                     SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, subId,
                             true);
                 } else {
-                    final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
-                    intent.putExtra(Settings.EXTRA_SUB_ID, info.getSubscriptionId());
-                    // MobileNetworkActivity is singleTask, set SplitPairRule to show in 2-pane.
-                    MobileNetworkTwoPaneUtils.registerTwoPaneForMobileNetwork(mContext, intent,
-                            null);
-                    mContext.startActivity(intent);
+                    MobileNetworkUtils.launchMobileNetworkSettings(mContext, info);
                 }
                 return true;
             });

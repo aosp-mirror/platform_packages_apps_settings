@@ -62,14 +62,6 @@
         <intent android:action="android.settings.MANAGE_DEFAULT_APPS_SETTINGS"/>
     </Preference>
 
-    <Preference
-        android:key="game_settings"
-        android:title="@string/game_settings_title"
-        android:summary="@string/game_settings_summary"
-        android:order="-995"
-        settings:controller="com.android.settings.applications.GameSettingsPreferenceController">
-    </Preference>
-
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"
         android:order="10"/>
@@ -82,6 +74,18 @@
         settings:keywords="app_hibernation_key"
         settings:controller="com.android.settings.applications.HibernatedAppsPreferenceController">
         <intent android:action="android.intent.action.MANAGE_UNUSED_APPS"/>
+    </Preference>
+
+    <Preference
+        android:key="app_battery_usage"
+        android:order="17"
+        android:title="@string/app_battery_usage_title"
+        android:summary="@string/app_battery_usage_summary"
+        settings:controller="com.android.settings.applications.AppBatteryUsagePreferenceController"
+        android:fragment="com.android.settings.applications.manageapplications.ManageApplications">
+        <extra
+            android:name="classname"
+            android:value="com.android.settings.Settings$AppBatteryUsageActivity"/>
     </Preference>
 
     <Preference

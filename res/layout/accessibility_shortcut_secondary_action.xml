@@ -21,17 +21,15 @@
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeightSmall"
     android:gravity="center_vertical"
-    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:clipToPadding="false">
 
     <LinearLayout
         android:id="@+id/main_frame"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
         android:layout_weight="1"
-        android:gravity="start|center_vertical"
-        >
+        android:gravity="start|center_vertical">
 
         <FrameLayout
             android:id="@+id/icon_frame"
@@ -61,6 +59,8 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:textAppearance="?android:attr/textAppearanceListItem"
+                android:hyphenationFrequency="normalFast"
+                android:lineBreakWordStyle="phrase"
                 android:ellipsize="marquee" />
 
             <TextView
@@ -71,6 +71,8 @@
                 android:layout_alignStart="@android:id/title"
                 android:textAppearance="?android:attr/textAppearanceListItemSecondary"
                 android:textColor="?android:attr/textColorSecondary"
+                android:hyphenationFrequency="normalFast"
+                android:lineBreakWordStyle="phrase"
                 android:maxLines="10" />
 
         </RelativeLayout>
@@ -91,6 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="end|center_vertical"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
         android:minWidth="58dp"
         android:orientation="vertical" />
 

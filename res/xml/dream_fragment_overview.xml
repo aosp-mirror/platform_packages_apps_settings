@@ -17,25 +17,37 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/screensaver_settings_title">
+    android:key="screensaver_settings_screen"
+    android:title="@string/screensaver_settings_title"
+    settings:keywords="@string/keywords_screensaver">
 
-    <com.android.settings.widget.GearPreference
-        android:key="current_screensaver"
-        android:title="@string/screensaver_settings_current"
-        android:fragment="com.android.settings.dream.CurrentDreamPicker"
-        settings:controller="com.android.settings.dream.CurrentDreamPreferenceController" />
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="dream_main_settings_switch"
+        android:title="@string/screensaver_settings_toggle_title"
+        settings:controller="com.android.settings.dream.DreamMainSwitchPreferenceController"
+        settings:searchable="false"/>
 
     <Preference
         android:key="when_to_start"
         android:title="@string/screensaver_settings_when_to_dream"
-        android:fragment="com.android.settings.dream.WhenToDreamPicker" />
+        android:fragment="com.android.settings.dream.WhenToDreamPicker"/>
 
-    <PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/dream_picker_category">
         <com.android.settingslib.widget.LayoutPreference
-            android:key="dream_start_now_button_container"
-            android:layout="@layout/dream_start_button"
+            android:key="dream_picker"
             android:selectable="false"
-            settings:controller="com.android.settings.dream.StartNowPreferenceController" />
+            android:layout="@layout/dream_picker_layout"
+            settings:controller="com.android.settings.dream.DreamPickerController"/>
     </PreferenceCategory>
+
+    <SwitchPreference
+        android:key="dream_complications_toggle"
+        android:title="@string/dream_complications_toggle_title"
+        android:summary="@string/dream_complications_toggle_summary"
+        settings:controller="com.android.settings.dream.DreamComplicationPreferenceController"/>
+
+    <com.android.settings.applications.SpacePreference
+        android:layout_height="16dp" />
 
 </PreferenceScreen>

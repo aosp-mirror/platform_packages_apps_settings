@@ -59,7 +59,7 @@
         settings:highlightableMenuKey="@string/menu_key_notifications"/>
 
     <com.android.settings.widget.HomepagePreference
-        android:fragment="com.android.settings.fuelgauge.PowerUsageSummary"
+        android:fragment="com.android.settings.fuelgauge.batteryusage.PowerUsageSummary"
         android:icon="@drawable/ic_settings_battery_white"
         android:key="top_level_battery"
         android:order="-110"
@@ -117,6 +117,15 @@
         settings:controller="com.android.settings.accessibility.TopLevelAccessibilityPreferenceController"/>
 
     <com.android.settings.widget.HomepagePreference
+        android:icon="@drawable/ic_settings_safety_center"
+        android:key="top_level_safety_center"
+        android:order="-55"
+        android:title="@string/safety_center_title"
+        android:summary="@string/safety_center_summary"
+        settings:highlightableMenuKey="@string/menu_key_safety_center"
+        settings:controller="com.android.settings.safetycenter.TopLevelSafetyCenterEntryPreferenceController"/>
+
+    <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.security.SecuritySettings"
         android:icon="@drawable/ic_settings_security_white"
         android:key="top_level_security"
@@ -133,7 +142,8 @@
         android:order="-40"
         android:title="@string/privacy_dashboard_title"
         android:summary="@string/privacy_dashboard_summary"
-        settings:highlightableMenuKey="@string/menu_key_privacy"/>
+        settings:highlightableMenuKey="@string/menu_key_privacy"
+        settings:controller="com.android.settings.privacy.TopLevelPrivacyEntryPreferenceController"/>
 
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.location.LocationSettings"
@@ -152,6 +162,7 @@
         android:icon="@drawable/ic_settings_emergency"
         android:order="-20"
         android:fragment="com.android.settings.emergency.EmergencyDashboardFragment"
+        settings:isPreferenceVisible="@bool/config_show_emergency_settings"
         settings:highlightableMenuKey="@string/menu_key_emergency"/>
 
     <com.android.settings.widget.HomepagePreference

@@ -100,6 +100,11 @@ public class SelectSpecificDataSimDialogFragment extends SimDialogFragment imple
             return;
         }
 
+        if (dialog == null) {
+            Log.d(TAG, "Dialog is null.");
+            dismiss();
+        }
+
         SubscriptionInfo currentDataSubInfo = getDefaultDataSubInfo();
         SubscriptionInfo newSubInfo = getNonDefaultDataSubscriptionInfo(currentDataSubInfo);
 

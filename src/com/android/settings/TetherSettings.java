@@ -43,6 +43,7 @@ import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
+import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 
@@ -97,6 +98,7 @@ public class TetherSettings extends RestrictedSettingsFragment
     private SwitchPreference mEthernetTether;
 
     private BroadcastReceiver mTetherChangeReceiver;
+    private BroadcastReceiver mBluetoothStateReceiver;
 
     private String[] mBluetoothRegexs;
     private AtomicReference<BluetoothPan> mBluetoothPan = new AtomicReference<>();
@@ -167,6 +169,12 @@ public class TetherSettings extends RestrictedSettingsFragment
             adapter.getProfileProxy(activity.getApplicationContext(), mProfileServiceListener,
                     BluetoothProfile.PAN);
         }
+        if (mBluetoothStateReceiver == null) {
+            mBluetoothStateReceiver = new BluetoothStateReceiver();
+            mContext.registerReceiver(
+                    mBluetoothStateReceiver,
+                    new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
+        }
 
         setupTetherPreference();
         setTopIntroPreferenceTitle();
@@ -216,6 +224,10 @@ public class TetherSettings extends RestrictedSettingsFragment
         if (profile != null && adapter != null) {
             adapter.closeProfileProxy(BluetoothProfile.PAN, profile);
         }
+        if (mBluetoothStateReceiver != null) {
+            mContext.unregisterReceiver(mBluetoothStateReceiver);
+            mBluetoothStateReceiver = null;
+        }
 
         super.onDestroy();
     }
@@ -252,6 +264,30 @@ public class TetherSettings extends RestrictedSettingsFragment
             topIntroPreference.setTitle(R.string.tethering_footer_info_sta_ap_concurrency);
         } else {
             topIntroPreference.setTitle(R.string.tethering_footer_info);
+        }
+    }
+
+    private class BluetoothStateReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            Log.i(TAG, "onReceive: action: " + action);
+
+            if (TextUtils.equals(action, BluetoothAdapter.ACTION_STATE_CHANGED)) {
+                final int state =
+                        intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+                Log.i(TAG, "onReceive: state: " + BluetoothAdapter.nameForState(state));
+                final BluetoothProfile profile = mBluetoothPan.get();
+                switch(state) {
+                    case BluetoothAdapter.STATE_ON:
+                        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+                        if (profile == null && adapter != null) {
+                            adapter.getProfileProxy(mContext, mProfileServiceListener,
+                                    BluetoothProfile.PAN);
+                        }
+                        break;
+                }
+            }
         }
     }
 
@@ -416,8 +452,11 @@ public class TetherSettings extends RestrictedSettingsFragment
         if (usbTethered) {
             mUsbTether.setEnabled(!mDataSaverEnabled);
             mUsbTether.setChecked(true);
-            mUsbTether.setDisabledByAdmin(
-                    checkIfUsbDataSignalingIsDisabled(mContext, UserHandle.myUserId()));
+            final RestrictedLockUtils.EnforcedAdmin enforcedAdmin =
+                    checkIfUsbDataSignalingIsDisabled(mContext, UserHandle.myUserId());
+            if (enforcedAdmin != null) {
+                mUsbTether.setDisabledByAdmin(enforcedAdmin);
+            }
         } else {
             mUsbTether.setChecked(false);
             updateUsbPreference();
@@ -555,13 +594,16 @@ public class TetherSettings extends RestrictedSettingsFragment
 
     private BluetoothProfile.ServiceListener mProfileServiceListener =
             new BluetoothProfile.ServiceListener() {
-        public void onServiceConnected(int profile, BluetoothProfile proxy) {
-            mBluetoothPan.set((BluetoothPan) proxy);
-        }
-        public void onServiceDisconnected(int profile) {
-            mBluetoothPan.set(null);
-        }
-    };
+                @Override
+                public void onServiceConnected(int profile, BluetoothProfile proxy) {
+                    if (mBluetoothPan.get() == null) {
+                        mBluetoothPan.set((BluetoothPan) proxy);
+                    }
+                }
+
+                @Override
+                public void onServiceDisconnected(int profile) { /* Do nothing */ }
+            };
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {

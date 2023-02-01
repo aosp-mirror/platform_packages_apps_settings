@@ -17,7 +17,6 @@
 package com.android.settings.biometrics.face;
 
 import android.content.Context;
-import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.FaceManager;
 
 import androidx.annotation.Nullable;
@@ -28,11 +27,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.settings.R;
-import com.android.settings.Settings;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricStatusPreferenceController;
-import com.android.settings.biometrics.ParentalControlsUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 
@@ -42,8 +38,11 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
     public static final String KEY_FACE_SETTINGS = "face_settings";
 
     protected final FaceManager mFaceManager;
+
     @VisibleForTesting
     RestrictedPreference mPreference;
+    private PreferenceScreen mPreferenceScreen;
+    private final FaceStatusUtils mFaceStatusUtils;
 
     public FaceStatusPreferenceController(Context context) {
         this(context, KEY_FACE_SETTINGS, null /* lifecycle */);
@@ -60,6 +59,7 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
     public FaceStatusPreferenceController(Context context, String key, Lifecycle lifecycle) {
         super(context, key);
         mFaceManager = Utils.getFaceManagerOrNull(context);
+        mFaceStatusUtils = new FaceStatusUtils(context, mFaceManager, getUserId());
 
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -69,22 +69,21 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void onResume() {
         updateStateInternal();
+        if (mPreferenceScreen != null) {
+            displayPreference(mPreferenceScreen);
+        }
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        mPreferenceScreen = screen;
         mPreference = screen.findPreference(mPreferenceKey);
     }
 
     @Override
     protected boolean isDeviceSupported() {
-        return !Utils.isMultipleBiometricsSupported(mContext) && Utils.hasFaceHardware(mContext);
-    }
-
-    @Override
-    protected boolean hasEnrolledBiometrics() {
-        return mFaceManager.hasEnrolledTemplates(getUserId());
+        return mFaceStatusUtils.isAvailable();
     }
 
     @Override
@@ -94,8 +93,7 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
     }
 
     private void updateStateInternal() {
-        updateStateInternal(ParentalControlsUtils.parentConsentRequired(
-                mContext, BiometricAuthenticator.TYPE_FACE));
+        updateStateInternal(mFaceStatusUtils.getDisablingAdmin());
     }
 
     @VisibleForTesting
@@ -106,25 +104,16 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
     }
 
     @Override
-    protected String getSummaryTextEnrolled() {
-        return mContext.getResources()
-                .getString(R.string.security_settings_face_preference_summary);
-    }
-
-    @Override
-    protected String getSummaryTextNoneEnrolled() {
-        return mContext.getResources()
-                .getString(R.string.security_settings_face_preference_summary_none);
+    protected String getSummaryText() {
+        return mFaceStatusUtils.getSummary();
     }
 
     @Override
     protected String getSettingsClassName() {
-        return Settings.FaceSettingsActivity.class.getName();
+        return mFaceStatusUtils.getSettingsClassName();
     }
 
-    @Override
-    protected String getEnrollClassName() {
-        return FaceEnrollIntroduction.class.getName();
+    public void setPreferenceScreen(PreferenceScreen preferenceScreen) {
+        mPreferenceScreen = preferenceScreen;
     }
-
 }

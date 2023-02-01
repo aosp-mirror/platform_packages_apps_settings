@@ -22,6 +22,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
+import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
 import android.widget.Switch;
 
@@ -95,13 +96,17 @@ public class BatterySaverButtonPreferenceController extends
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-        mPreference.setTitle(mContext.getString(R.string.battery_saver_master_switch_title));
         mPreference.addOnSwitchChangeListener(this);
         mPreference.updateStatus(isChecked());
     }
 
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        // Cancel preference's check state once it's first time launch
+        if (isChecked && (Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.LOW_POWER_WARNING_ACKNOWLEDGED, 0) == 0)) {
+            mPreference.setChecked(false);
+        }
         setChecked(isChecked);
     }
 
@@ -112,10 +117,8 @@ public class BatterySaverButtonPreferenceController extends
 
     @Override
     public boolean setChecked(boolean stateOn) {
-        // This screen already shows a warning, so we don't need another warning.
-        mPreference.updateStatus(isChecked());
         return BatterySaverUtils.setPowerSaveMode(mContext, stateOn,
-                false /* needFirstTimeWarning */);
+                true /* needFirstTimeWarning */);
     }
 
     @Override

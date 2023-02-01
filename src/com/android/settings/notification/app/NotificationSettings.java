@@ -25,7 +25,6 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
-import android.app.role.RoleManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -69,7 +68,6 @@ abstract public class NotificationSettings extends DashboardFragment {
     protected PackageManager mPm;
     protected NotificationBackend mBackend = new NotificationBackend();
     protected NotificationManager mNm;
-    protected RoleManager mRm;
     protected Context mContext;
 
     protected int mUid;
@@ -116,7 +114,6 @@ abstract public class NotificationSettings extends DashboardFragment {
 
         mPm = getPackageManager();
         mNm = NotificationManager.from(mContext);
-        mRm = mContext.getSystemService(RoleManager.class);
 
         mPkg = mArgs != null && mArgs.containsKey(AppInfoBase.ARG_PACKAGE_NAME)
                 ? mArgs.getString(AppInfoBase.ARG_PACKAGE_NAME)
@@ -270,6 +267,9 @@ abstract public class NotificationSettings extends DashboardFragment {
         String conversationId = intent != null
                 ? intent.getStringExtra(Settings.EXTRA_CONVERSATION_ID) : null;
         mChannel = mBackend.getChannel(mPkg, mUid, channelId, conversationId);
+        if (mChannel == null) {
+            mBackend.getChannel(mPkg, mUid, channelId, null);
+        }
     }
 
     private void loadConversation() {
@@ -287,7 +287,7 @@ abstract public class NotificationSettings extends DashboardFragment {
     }
 
     private void loadAppRow() {
-        mAppRow = mBackend.loadAppRow(mContext, mPm, mRm, mPkgInfo);
+        mAppRow = mBackend.loadAppRow(mContext, mPm, mPkgInfo);
     }
 
     private void loadChannelGroup() {
@@ -359,7 +359,8 @@ abstract public class NotificationSettings extends DashboardFragment {
                 final String p = packages[i];
                 if (pkg.equals(p)) {
                     try {
-                        return mPm.getPackageInfo(pkg, PackageManager.GET_SIGNATURES);
+                        return mPm.getPackageInfo(pkg, PackageManager.GET_SIGNATURES
+                                | PackageManager.GET_PERMISSIONS);
                     } catch (NameNotFoundException e) {
                         Log.w(TAG, "Failed to load package " + pkg, e);
                     }

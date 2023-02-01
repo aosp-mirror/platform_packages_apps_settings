@@ -16,35 +16,33 @@
 
 package com.android.settings.display;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+
 import android.content.Context;
-import androidx.fragment.app.Fragment;
+
 import com.android.settings.display.darkmode.DarkModePreference;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
 
 @RunWith(RobolectricTestRunner.class)
 public class DarkUIPreferenceControllerTest {
 
     private DarkUIPreferenceController mController;
     private Context mContext;
-    @Mock
-    private Fragment mFragment;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         mController = spy(new DarkUIPreferenceController(mContext, "dark_ui_mode"));
-        mController.setParentFragment(mFragment);
         mController.mPreference = new DarkModePreference(mContext, null /* AttributeSet attrs */);
         mController.onStart();
     }

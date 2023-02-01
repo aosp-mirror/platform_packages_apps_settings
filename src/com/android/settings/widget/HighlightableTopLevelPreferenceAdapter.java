@@ -21,7 +21,6 @@ import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,10 +30,10 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceGroupAdapter;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.window.embedding.SplitController;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.homepage.SettingsHomepageActivity;
 
 /**
@@ -46,6 +45,10 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
     private static final String TAG = "HighlightableTopLevelAdapter";
 
     static final long DELAY_HIGHLIGHT_DURATION_MILLIS = 100L;
+    private static final int RES_NORMAL_BACKGROUND =
+            R.drawable.homepage_selectable_item_background;
+    private static final int RES_HIGHLIGHTED_BACKGROUND =
+            R.drawable.homepage_highlighted_item_background;
 
     private final int mTitleColorNormal;
     private final int mTitleColorHighlight;
@@ -54,11 +57,8 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
     private final int mIconColorNormal;
     private final int mIconColorHighlight;
 
-    private final Context mContext;
     private final SettingsHomepageActivity mHomepageActivity;
     private final RecyclerView mRecyclerView;
-    private final int mNormalBackgroundRes;
-    private final int mHighlightBackgroundRes;
     private String mHighlightKey;
     private int mHighlightPosition = RecyclerView.NO_POSITION;
     private int mScrollPosition = RecyclerView.NO_POSITION;
@@ -67,28 +67,23 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
     private SparseArray<PreferenceViewHolder> mViewHolders;
 
     public HighlightableTopLevelPreferenceAdapter(SettingsHomepageActivity homepageActivity,
-            PreferenceGroup preferenceGroup, RecyclerView recyclerView, String key) {
+            PreferenceGroup preferenceGroup, RecyclerView recyclerView, String key,
+            boolean scrollNeeded) {
         super(preferenceGroup);
         mRecyclerView = recyclerView;
         mHighlightKey = key;
+        mScrolled = !scrollNeeded;
         mViewHolders = new SparseArray<>();
-        mContext = preferenceGroup.getContext();
         mHomepageActivity = homepageActivity;
-        final TypedValue outValue = new TypedValue();
-        mContext.getTheme().resolveAttribute(android.R.attr.selectableItemBackground,
-                outValue, true /* resolveRefs */);
-        mNormalBackgroundRes = outValue.resourceId;
-        mHighlightBackgroundRes = R.drawable.homepage_highlighted_item_background;
-        mTitleColorNormal = Utils.getColorAttrDefaultColor(mContext,
+        Context context = preferenceGroup.getContext();
+        mTitleColorNormal = Utils.getColorAttrDefaultColor(context,
                 android.R.attr.textColorPrimary);
-        mTitleColorHighlight = Utils.getColorAttrDefaultColor(mContext,
-                android.R.attr.textColorPrimaryInverse);
-        mSummaryColorNormal = Utils.getColorAttrDefaultColor(mContext,
+        mTitleColorHighlight = context.getColor(R.color.accent_select_primary_text);
+        mSummaryColorNormal = Utils.getColorAttrDefaultColor(context,
                 android.R.attr.textColorSecondary);
-        mSummaryColorHighlight = Utils.getColorAttrDefaultColor(mContext,
-                android.R.attr.textColorSecondaryInverse);
-        mIconColorNormal = Utils.getHomepageIconColor(mContext);
-        mIconColorHighlight = Utils.getHomepageIconColorHighlight(mContext);
+        mSummaryColorHighlight = context.getColor(R.color.accent_select_secondary_text);
+        mIconColorNormal = Utils.getHomepageIconColor(context);
+        mIconColorHighlight = Utils.getHomepageIconColorHighlight(context);
     }
 
     @Override
@@ -234,7 +229,7 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
 
     private void addHighlightBackground(PreferenceViewHolder holder) {
         final View v = holder.itemView;
-        v.setBackgroundResource(mHighlightBackgroundRes);
+        v.setBackgroundResource(RES_HIGHLIGHTED_BACKGROUND);
         ((TextView) v.findViewById(android.R.id.title)).setTextColor(mTitleColorHighlight);
         ((TextView) v.findViewById(android.R.id.summary)).setTextColor(mSummaryColorHighlight);
         final Drawable drawable = ((ImageView) v.findViewById(android.R.id.icon)).getDrawable();
@@ -245,7 +240,7 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
 
     private void removeHighlightBackground(PreferenceViewHolder holder) {
         final View v = holder.itemView;
-        v.setBackgroundResource(mNormalBackgroundRes);
+        v.setBackgroundResource(RES_NORMAL_BACKGROUND);
         ((TextView) v.findViewById(android.R.id.title)).setTextColor(mTitleColorNormal);
         ((TextView) v.findViewById(android.R.id.summary)).setTextColor(mSummaryColorNormal);
         final Drawable drawable = ((ImageView) v.findViewById(android.R.id.icon)).getDrawable();
@@ -255,6 +250,6 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
     }
 
     private boolean isHighlightNeeded() {
-        return ActivityEmbeddingUtils.isTwoPaneResolution(mHomepageActivity);
+        return SplitController.getInstance().isActivityEmbedded(mHomepageActivity);
     }
 }

@@ -24,6 +24,7 @@ import static com.android.internal.util.CollectionUtils.emptyIfNull;
 import android.annotation.Nullable;
 import android.content.Context;
 import android.os.ParcelUuid;
+import android.provider.Settings;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -37,6 +38,8 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.telephony.MccTable;
 import com.android.settings.R;
+import com.android.settings.network.helper.SelectableSubscriptions;
+import com.android.settings.network.helper.SubscriptionAnnotation;
 import com.android.settings.network.telephony.DeleteEuiccSubscriptionDialogActivity;
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity;
 import com.android.settingslib.DeviceInfoUtils;
@@ -48,6 +51,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -540,13 +544,14 @@ public class SubscriptionUtil {
             return null;
         }
 
-        TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
-        String rawPhoneNumber =
-                telephonyManager.getLine1Number(subscriptionInfo.getSubscriptionId());
-        String countryIso = MccTable.countryCodeForMcc(subscriptionInfo.getMccString());
+        final SubscriptionManager subscriptionManager = context.getSystemService(
+                SubscriptionManager.class);
+        String rawPhoneNumber = subscriptionManager.getPhoneNumber(
+                subscriptionInfo.getSubscriptionId());
         if (TextUtils.isEmpty(rawPhoneNumber)) {
             return null;
         }
+        String countryIso = MccTable.countryCodeForMcc(subscriptionInfo.getMccString());
         return PhoneNumberUtils.formatNumber(rawPhoneNumber, countryIso);
     }
 
@@ -641,5 +646,50 @@ public class SubscriptionUtil {
 
     private static int getDefaultDataSubscriptionId() {
         return SubscriptionManager.getDefaultDataSubscriptionId();
+    }
+
+
+    /**
+     * Select one of the subscription as the default subscription.
+     * @param subAnnoList a list of {@link SubscriptionAnnotation}
+     * @return ideally the {@link SubscriptionAnnotation} as expected
+     */
+    private static SubscriptionAnnotation getDefaultSubscriptionSelection(
+            List<SubscriptionAnnotation> subAnnoList) {
+        return (subAnnoList == null) ? null :
+                subAnnoList.stream()
+                        .filter(SubscriptionAnnotation::isDisplayAllowed)
+                        .filter(SubscriptionAnnotation::isActive)
+                        .findFirst().orElse(null);
+    }
+
+    public static SubscriptionInfo getSubscriptionOrDefault(Context context, int subscriptionId) {
+        return getSubscription(context, subscriptionId,
+                (subscriptionId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) ? null : (
+                        subAnnoList -> getDefaultSubscriptionSelection(subAnnoList)
+                ));
+    }
+
+    /**
+     * Get the current subscription to display. First check whether intent has {@link
+     * Settings#EXTRA_SUB_ID} and if so find the subscription with that id.
+     * If not, select default one based on {@link Function} provided.
+     *
+     * @param preferredSubscriptionId preferred subscription id
+     * @param selectionOfDefault when true current subscription is absent
+     */
+    private static SubscriptionInfo getSubscription(Context context, int preferredSubscriptionId,
+            Function<List<SubscriptionAnnotation>, SubscriptionAnnotation> selectionOfDefault) {
+        List<SubscriptionAnnotation> subList =
+                (new SelectableSubscriptions(context, true)).call();
+        Log.d(TAG, "get subId=" + preferredSubscriptionId + " from " + subList);
+        SubscriptionAnnotation currentSubInfo = subList.stream()
+                .filter(SubscriptionAnnotation::isDisplayAllowed)
+                .filter(subAnno -> (subAnno.getSubscriptionId() == preferredSubscriptionId))
+                .findFirst().orElse(null);
+        if ((currentSubInfo == null) && (selectionOfDefault != null)) {
+            currentSubInfo = selectionOfDefault.apply(subList);
+        }
+        return (currentSubInfo == null) ? null : currentSubInfo.getSubInfo();
     }
 }

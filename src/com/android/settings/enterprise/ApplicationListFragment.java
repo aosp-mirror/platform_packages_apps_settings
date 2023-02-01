@@ -16,9 +16,12 @@
 
 package com.android.settings.enterprise;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.ADMIN_ACTION_APPS_COUNT_ESTIMATED;
+
 import android.Manifest;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.Bundle;
 
 import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
@@ -41,6 +44,15 @@ public abstract class ApplicationListFragment extends DashboardFragment
     @Override
     protected String getLogTag() {
         return TAG;
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+
+        replaceEnterpriseStringTitle("enterprise_privacy_apps_footer",
+                ADMIN_ACTION_APPS_COUNT_ESTIMATED,
+                R.string.enterprise_privacy_apps_count_estimation_info);
     }
 
     @Override

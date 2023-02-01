@@ -20,12 +20,15 @@ import android.content.Intent;
 import android.icu.text.RelativeDateTimeFormatter;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.DeviceConfig;
+import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
@@ -45,6 +48,8 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
     RecentAppOpsAccess mRecentLocationApps;
     private PreferenceCategory mCategoryRecentLocationRequests;
     private int mType = ProfileSelectFragment.ProfileType.ALL;
+    private boolean mShowSystem = false;
+    private boolean mSystemSettingChanged = false;
 
     private static class PackageEntryClickedListener implements
             Preference.OnPreferenceClickListener {
@@ -79,17 +84,36 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
             RecentAppOpsAccess recentLocationApps) {
         super(context, key);
         mRecentLocationApps = recentLocationApps;
+        mShowSystem = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY,
+                SystemUiDeviceConfigFlags.PROPERTY_LOCATION_INDICATORS_SMALL_ENABLED, false)
+                ? Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 0) == 1
+                : false;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mCategoryRecentLocationRequests = screen.findPreference(getPreferenceKey());
+        mLocationEnabler.refreshLocationMode();
+        loadRecentAccesses();
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        // Only reload the recent accesses in updateState if the system setting has changed.
+        if (mSystemSettingChanged) {
+            loadRecentAccesses();
+            mSystemSettingChanged = false;
+        }
+    }
+
+    private void loadRecentAccesses() {
+        mCategoryRecentLocationRequests.removeAll();
         final Context prefContext = mCategoryRecentLocationRequests.getContext();
         final List<RecentAppOpsAccess.Access> recentLocationAccesses = new ArrayList<>();
         final UserManager userManager = UserManager.get(mContext);
-        for (RecentAppOpsAccess.Access access : mRecentLocationApps.getAppListSorted(
-                /* showSystemApps= */ false)) {
+        for (RecentAppOpsAccess.Access access : mRecentLocationApps.getAppListSorted(mShowSystem)) {
             if (isRequestMatchesProfileType(userManager, access, mType)) {
                 recentLocationAccesses.add(access);
                 if (recentLocationAccesses.size() == MAX_APPS) {
@@ -117,6 +141,15 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
     public void onLocationModeChanged(int mode, boolean restricted) {
         boolean enabled = mLocationEnabler.isEnabled(mode);
         mCategoryRecentLocationRequests.setVisible(enabled);
+    }
+
+    /**
+     * Clears the list of apps which recently accessed location from the screen.
+     */
+    public void clearPreferenceList() {
+        if (mCategoryRecentLocationRequests != null) {
+            mCategoryRecentLocationRequests.removeAll();
+        }
     }
 
     /**
@@ -160,5 +193,15 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
             return true;
         }
         return false;
+    }
+
+    /**
+     * Update the state of the showSystem setting flag and load the new results.
+     */
+    void updateShowSystem() {
+        mSystemSettingChanged = true;
+        mShowSystem = !mShowSystem;
+        clearPreferenceList();
+        loadRecentAccesses();
     }
 }

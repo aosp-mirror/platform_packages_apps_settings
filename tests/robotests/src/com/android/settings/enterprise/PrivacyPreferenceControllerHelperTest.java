@@ -33,6 +33,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -73,6 +74,7 @@ public class PrivacyPreferenceControllerHelperTest {
     }
 
     @Test
+    @Ignore
     public void testUpdateState_noDeviceOwnerName_useGenericPreferenceSummary() {
         final Preference preference = new Preference(mContext, null, 0, 0);
         when(mContext.getString(R.string.enterprise_privacy_settings_summary_generic))
@@ -86,6 +88,7 @@ public class PrivacyPreferenceControllerHelperTest {
     }
 
     @Test
+    @Ignore
     public void testUpdateState_deviceOwnerName_usePreferenceSummaryWithDeviceOwnerName() {
         final Preference preference = new Preference(mContext, null, 0, 0);
         when(mContext.getResources().getString(

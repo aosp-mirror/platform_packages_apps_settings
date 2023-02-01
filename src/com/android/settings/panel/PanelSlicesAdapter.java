@@ -143,6 +143,9 @@ public class PanelSlicesAdapter
                 sliceView.setVisibility(View.GONE);
             }
 
+            // Add divider for the end icon
+            sliceView.setShowActionDividers(true);
+
             // Log Panel interaction
             sliceView.setOnSliceActionListener(
                     ((eventInfo, sliceItem) -> {

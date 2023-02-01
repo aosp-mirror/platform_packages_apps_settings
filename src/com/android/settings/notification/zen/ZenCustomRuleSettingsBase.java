@@ -37,10 +37,11 @@ abstract class ZenCustomRuleSettingsBase extends ZenModeSettingsBase {
     String mId;
     AutomaticZenRule mRule;
     List<AbstractPreferenceController> mControllers = new ArrayList<>();
+    private boolean mIsFirstLaunch = true;
 
     /**
      * @return null if no preference category exists
-      */
+     */
     abstract String getPreferenceCategoryKey();
 
     @Override
@@ -49,7 +50,7 @@ abstract class ZenCustomRuleSettingsBase extends ZenModeSettingsBase {
         Bundle bundle = getArguments();
         if (bundle != null && bundle.containsKey(RULE_ID)) {
             mId = bundle.getString(RULE_ID);
-            mRule = mBackend.getAutomaticZenRule(mId);
+            updateRule();
         } else {
             Log.d(TAG, "Rule id required to set custom dnd rule config settings");
             this.finish();
@@ -57,13 +58,33 @@ abstract class ZenCustomRuleSettingsBase extends ZenModeSettingsBase {
     }
 
     @Override
-    public void onZenModeConfigChanged() {
-        super.onZenModeConfigChanged();
+    public void onResume() {
+        if (!mIsFirstLaunch) {
+            // Rule will be used in updatePreferenceStates() in super.onResume().
+            updateRule();
+        }
+        super.onResume();
         updatePreferences();
     }
 
-    public void updatePreferences() {
+    @Override
+    public void onZenModeConfigChanged() {
+        super.onZenModeConfigChanged();
+        updateRule();
+        updatePreferences();
+        updatePreferenceStates();
+    }
+
+    private void updateRule() {
         mRule = mBackend.getAutomaticZenRule(mId);
+        for (AbstractPreferenceController controller : mControllers) {
+            AbstractZenCustomRulePreferenceController zenRuleController =
+                    (AbstractZenCustomRulePreferenceController) controller;
+            zenRuleController.setIdAndRule(mId, mRule);
+        }
+    }
+
+    public void updatePreferences() {
         final PreferenceScreen screen = getPreferenceScreen();
         String categoryKey = getPreferenceCategoryKey();
         if (categoryKey != null) {
@@ -78,21 +99,20 @@ abstract class ZenCustomRuleSettingsBase extends ZenModeSettingsBase {
         for (AbstractPreferenceController controller : mControllers) {
             AbstractZenCustomRulePreferenceController zenRuleController =
                     (AbstractZenCustomRulePreferenceController) controller;
-            zenRuleController.onResume(mRule, mId);
-            zenRuleController.displayPreference(screen);
-            updatePreference(zenRuleController);
+            zenRuleController.onResume();
+            if (!mIsFirstLaunch) {
+                // In first launch, displayPreference() is already called in DashboardFragment's
+                // onCreate().
+                zenRuleController.displayPreference(screen);
+            }
         }
+
+        mIsFirstLaunch = false;
     }
 
     @Override
     public int getHelpResource() {
         return R.string.help_uri_interruptions;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        updatePreferences();
     }
 
     Bundle createZenRuleBundle() {

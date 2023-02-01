@@ -37,42 +37,16 @@
             <com.android.settings.display.ConversationMessageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:incoming="false"
-                app:messageText="@string/screen_zoom_conversation_message_1"
-                app:timestampText="@string/screen_zoom_conversation_timestamp_1"
-                app:iconText="@string/screen_zoom_conversation_icon_alex"
-                app:iconTextColor="@color/message_icon_text_outgoing"
-                app:iconBackgroundColor="@color/message_icon_background_outgoing" />
-
-            <com.android.settings.display.ConversationMessageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 app:incoming="true"
-                app:messageText="@string/screen_zoom_conversation_message_2"
-                app:timestampText="@string/screen_zoom_conversation_timestamp_2"
-                app:iconText="@string/screen_zoom_conversation_icon_pete"
-                app:iconTextColor="@color/message_icon_text_incoming"
+                app:messageText="@string/accessibility_text_reading_conversation_message_1"
                 app:iconBackgroundColor="@color/message_icon_background_incoming" />
 
             <com.android.settings.display.ConversationMessageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:incoming="false"
-                app:messageText="@string/screen_zoom_conversation_message_3"
-                app:timestampText="@string/screen_zoom_conversation_timestamp_3"
-                app:iconText="@string/screen_zoom_conversation_icon_alex"
-                app:iconTextColor="@color/message_icon_text_outgoing"
+                app:messageText="@string/accessibility_text_reading_conversation_message_2"
                 app:iconBackgroundColor="@color/message_icon_background_outgoing" />
-
-            <com.android.settings.display.ConversationMessageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:incoming="true"
-                app:messageText="@string/screen_zoom_conversation_message_4"
-                app:timestampText="@string/screen_zoom_conversation_timestamp_4"
-                app:iconText="@string/screen_zoom_conversation_icon_pete"
-                app:iconTextColor="@color/message_icon_text_incoming"
-                app:iconBackgroundColor="@color/message_icon_background_incoming" />
         </LinearLayout>
     </view>
 </androidx.core.widget.NestedScrollView>

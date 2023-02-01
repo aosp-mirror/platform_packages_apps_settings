@@ -25,8 +25,8 @@ import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
 
-import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import org.junit.Before;
@@ -49,7 +49,7 @@ public class AutoSyncPersonalDataPreferenceControllerTest {
     @Mock(answer = RETURNS_DEEP_STUBS)
     private UserManager mUserManager;
     @Mock(answer = RETURNS_DEEP_STUBS)
-    private Fragment mFragment;
+    private PreferenceFragmentCompat mFragment;
 
     private Context mContext;
     private Preference mPreference;

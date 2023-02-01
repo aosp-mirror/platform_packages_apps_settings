@@ -17,9 +17,11 @@
 package com.android.settings.activityembedding;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.util.FeatureFlagUtils;
 import android.util.LayoutDirection;
 import android.util.Log;
 
@@ -32,12 +34,17 @@ import androidx.window.embedding.SplitPlaceholderRule;
 import androidx.window.embedding.SplitRule;
 
 import com.android.settings.Settings;
+import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction;
+import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroductionInternal;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.homepage.DeepLinkHomepageActivity;
+import com.android.settings.homepage.DeepLinkHomepageActivityInternal;
 import com.android.settings.homepage.SettingsHomepageActivity;
-import com.android.settings.homepage.SliceDeepLinkHomepageActivity;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.users.AvatarPickerActivity;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -46,6 +53,8 @@ import java.util.Set;
 public class ActivityEmbeddingRulesController {
 
     private static final String TAG = "ActivityEmbeddingCtrl";
+    private static final ComponentName COMPONENT_NAME_WILDCARD = new ComponentName(
+            "*" /* pkg */, "*" /* cls */);
     private final Context mContext;
     private final SplitController mSplitController;
 
@@ -92,14 +101,12 @@ public class ActivityEmbeddingRulesController {
                 clearTop,
                 ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthPx(context),
                 ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthPx(context),
-                ActivityEmbeddingUtils.SPLIT_RATIO,
+                ActivityEmbeddingUtils.getSplitRatio(context),
                 LayoutDirection.LOCALE));
     }
 
     /**
-     * Register a new SplitPairRule for Settings home. Because homepage is able to be opened by
-     * {@link Settings} or {@link SettingsHomepageActivity} or
-     * {@link SliceDeepLinkHomepageActivity}, we register split rule for above cases.
+     * Registers a {@link SplitPairRule} for all classes that Settings homepage can be invoked from.
      */
     public static void registerTwoPanePairRuleForSettingsHome(Context context,
             ComponentName secondaryComponent,
@@ -142,7 +149,7 @@ public class ActivityEmbeddingRulesController {
 
         registerTwoPanePairRule(
                 context,
-                new ComponentName(context, SliceDeepLinkHomepageActivity.class),
+                new ComponentName(context, DeepLinkHomepageActivityInternal.class),
                 secondaryComponent,
                 secondaryIntentAction,
                 finishPrimaryWithSecondary ? SplitRule.FINISH_ALWAYS : SplitRule.FINISH_NEVER,
@@ -181,16 +188,22 @@ public class ActivityEmbeddingRulesController {
                 new ComponentName(context, SubSettings.class),
                 null /* secondaryIntentAction */,
                 clearTop);
+
+        registerTwoPanePairRuleForSettingsHome(
+                context,
+                COMPONENT_NAME_WILDCARD,
+                Intent.ACTION_SAFETY_CENTER,
+                clearTop
+        );
     }
 
     private void registerHomepagePlaceholderRule() {
         final Set<ActivityFilter> activityFilters = new HashSet<>();
         addActivityFilter(activityFilters, SettingsHomepageActivity.class);
-        addActivityFilter(activityFilters, DeepLinkHomepageActivity.class);
-        addActivityFilter(activityFilters, SliceDeepLinkHomepageActivity.class);
         addActivityFilter(activityFilters, Settings.class);
 
         final Intent intent = new Intent(mContext, Settings.NetworkDashboardActivity.class);
+        intent.putExtra(SettingsActivity.EXTRA_IS_SECOND_LAYER_PAGE, true);
         final SplitPlaceholderRule placeholderRule = new SplitPlaceholderRule(
                 activityFilters,
                 intent,
@@ -198,7 +211,7 @@ public class ActivityEmbeddingRulesController {
                 SplitRule.FINISH_ADJACENT,
                 ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthPx(mContext),
                 ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthPx(mContext),
-                ActivityEmbeddingUtils.SPLIT_RATIO,
+                ActivityEmbeddingUtils.getSplitRatio(mContext),
                 LayoutDirection.LOCALE);
 
         mSplitController.registerRule(placeholderRule);
@@ -206,9 +219,21 @@ public class ActivityEmbeddingRulesController {
 
     private void registerAlwaysExpandRule() {
         final Set<ActivityFilter> activityFilters = new HashSet<>();
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SETTINGS_SEARCH_ALWAYS_EXPAND)) {
+            final Intent searchIntent = FeatureFactory.getFactory(mContext)
+                    .getSearchFeatureProvider()
+                    .buildSearchIntent(mContext, SettingsEnums.SETTINGS_HOMEPAGE);
+            addActivityFilter(activityFilters, searchIntent);
+        }
         addActivityFilter(activityFilters, FingerprintEnrollIntroduction.class);
+        addActivityFilter(activityFilters, FingerprintEnrollIntroductionInternal.class);
         addActivityFilter(activityFilters, FingerprintEnrollEnrolling.class);
+        addActivityFilter(activityFilters, AvatarPickerActivity.class);
         mSplitController.registerRule(new ActivityRule(activityFilters, true /* alwaysExpand */));
+    }
+
+    private static void addActivityFilter(Set<ActivityFilter> activityFilters, Intent intent) {
+        activityFilters.add(new ActivityFilter(COMPONENT_NAME_WILDCARD, intent.getAction()));
     }
 
     private void addActivityFilter(Set<ActivityFilter> activityFilters,

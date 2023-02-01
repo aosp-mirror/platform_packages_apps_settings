@@ -35,6 +35,15 @@ java_library {
     ],
 }
 
+java_library {
+    name: "Settings-change-ids",
+    srcs: ["src/com/android/settings/ChangeIds.java"],
+    libs: [
+        "app-compat-annotations",
+    ],
+}
+
+
 // Build the Settings APK
 android_library {
     name: "Settings-core",
@@ -44,7 +53,7 @@ android_library {
         "SettingsLib-search-defaults",
     ],
 
-    srcs: ["src/**/*.java"],
+    srcs: ["src/**/*.java", "src/**/*.kt"],
 
     static_libs: [
         "androidx-constraintlayout_constraintlayout",
@@ -56,10 +65,10 @@ android_library {
         "androidx.cardview_cardview",
         "androidx.preference_preference",
         "androidx.recyclerview_recyclerview",
+        "androidx.window_window",
         "com.google.android.material_material",
         "setupcompat",
         "setupdesign",
-        "androidx-constraintlayout_constraintlayout-solver",
         "androidx.lifecycle_lifecycle-runtime",
         "androidx.lifecycle_lifecycle-extensions",
         "guava",
@@ -67,26 +76,29 @@ android_library {
         "net-utils-framework-common",
         "settings-contextual-card-protos-lite",
         "settings-log-bridge-protos-lite",
+        "settings-telephony-protos-lite",
         "contextualcards",
         "settings-logtags",
         "statslog-settings",
         "zxing-core-1.7",
         "android.hardware.dumpstate-V1.0-java",
         "android.hardware.dumpstate-V1.1-java",
+        "android.hardware.dumpstate-V1-java",
         "lottie",
-        "windowExtLib",
+        "WifiTrackerLib",
+        "SettingsLibActivityEmbedding",
+        "Settings-change-ids",
     ],
 
     libs: [
         "telephony-common",
         "ims-common",
-        "app-compat-annotations",
     ],
 }
 
 platform_compat_config {
     name: "settings-platform-compat-config",
-    src: ":Settings-core",
+    src: ":Settings-change-ids",
     system_ext_specific: true,
 }
 
@@ -103,10 +115,6 @@ android_app {
     ],
     static_libs: ["Settings-core"],
     uses_libs: ["org.apache.http.legacy"],
-    optional_uses_libs: [
-        "androidx.window.extensions",
-        "androidx.window.sidecar",
-    ],
     resource_dirs: [],
     optimize: {
         proguard_flags_files: ["proguard.flags"],
@@ -116,11 +124,6 @@ android_app {
 android_library_import {
     name: "contextualcards",
     aars: ["libs/contextualcards.aar"],
-}
-
-android_library_import {
-    name: "windowExtLib",
-    aars: ["libs/window_ext_lib.aar"],
 }
 
 filegroup {
@@ -133,7 +136,7 @@ filegroup {
 // over all the sources together.
 filegroup {
     name: "Settings_srcs",
-    srcs: ["src/**/*.java"],
+    srcs: ["src/**/*.java", "src/**/*.kt"],
 }
 
 filegroup {

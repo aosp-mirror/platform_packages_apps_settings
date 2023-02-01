@@ -56,6 +56,8 @@
             android:paddingEnd="7dip"
             android:ellipsize="marquee"
             android:duplicateParentState="true"
+            android:hyphenationFrequency="normalFast"
+            android:lineBreakWordStyle="phrase"
             />
         <TextView
             android:id="@android:id/summary"
@@ -67,6 +69,8 @@
             android:ellipsize="marquee"
             android:visibility="gone"
             android:duplicateParentState="true"
+            android:hyphenationFrequency="normalFast"
+            android:lineBreakWordStyle="phrase"
             />
     </LinearLayout>
     <TextView

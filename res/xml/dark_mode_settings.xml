@@ -55,4 +55,11 @@
         android:title="@string/night_display_end_time_title"
         settings:searchable="false"/>
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="dark_theme_custom_bedtime_footer"
+        android:title="@string/dark_ui_bedtime_footer_summary"
+        android:selectable="false"
+        settings:searchable="false"
+        settings:controller="com.android.settings.display.darkmode.DarkModeCustomBedtimePreferenceController" />
+
 </PreferenceScreen>

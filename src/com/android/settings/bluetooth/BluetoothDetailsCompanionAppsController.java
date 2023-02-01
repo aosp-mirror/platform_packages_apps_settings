@@ -18,7 +18,7 @@ package com.android.settings.bluetooth;
 
 import static com.android.internal.util.CollectionUtils.filter;
 
-import android.companion.Association;
+import android.companion.AssociationInfo;
 import android.companion.CompanionDeviceManager;
 import android.companion.ICompanionDeviceManager;
 import android.content.Context;
@@ -29,6 +29,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.UserHandle;
 import android.provider.DeviceConfig;
 import android.text.TextUtils;
 import android.util.Log;
@@ -88,7 +89,7 @@ public class BluetoothDetailsCompanionAppsController extends BluetoothDetailsCon
         mProfilesContainer.setLayoutResource(R.layout.preference_companion_app);
     }
 
-    private List<Association> getAssociations(String address) {
+    private List<AssociationInfo> getAssociations(String address) {
         return filter(
                 mCompanionDeviceManager.getAllAssociations(),
                 a -> Objects.equal(address, a.getDeviceMacAddress()));
@@ -126,8 +127,8 @@ public class BluetoothDetailsCompanionAppsController extends BluetoothDetailsCon
         try {
             java.util.Objects.requireNonNull(ICompanionDeviceManager.Stub.asInterface(
                     ServiceManager.getService(
-                            Context.COMPANION_DEVICE_SERVICE))).disassociate(
-                                    address, packageName);
+                            Context.COMPANION_DEVICE_SERVICE))).legacyDisassociate(
+                                    address, packageName, UserHandle.myUserId());
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
@@ -150,7 +151,7 @@ public class BluetoothDetailsCompanionAppsController extends BluetoothDetailsCon
     private List<String> getPreferencesNeedToShow(String address, PreferenceCategory container) {
         List<String> preferencesToRemove = new ArrayList<>();
         Set<String> packages = getAssociations(address)
-                .stream().map(Association::getPackageName)
+                .stream().map(AssociationInfo::getPackageName)
                 .collect(Collectors.toSet());
 
         for (int i = 0; i < container.getPreferenceCount(); i++) {
@@ -185,7 +186,7 @@ public class BluetoothDetailsCompanionAppsController extends BluetoothDetailsCon
             String address, PreferenceCategory container) {
         // If the device is FastPair, remove CDM companion apps.
         final BluetoothFeatureProvider bluetoothFeatureProvider = FeatureFactory.getFactory(context)
-                .getBluetoothFeatureProvider(context);
+                .getBluetoothFeatureProvider();
         final boolean sliceEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
                 SettingsUIDeviceConfig.BT_SLICE_SETTINGS_ENABLED, true);
         final Uri settingsUri = bluetoothFeatureProvider.getBluetoothDeviceSettingsUri(

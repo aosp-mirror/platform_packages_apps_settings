@@ -117,7 +117,15 @@ public class PreviewPagerAdapter extends PagerAdapter {
         mAnimationEndAction = action;
     }
 
-    void setPreviewLayer(int newLayerIndex, int currentLayerIndex, int currentFrameIndex,
+    /**
+     * Switches the sample layouts for the preview pager.
+     *
+     * @param newLayerIndex the new layer index
+     * @param currentLayerIndex the current layer index
+     * @param currentFrameIndex the current frame index
+     * @param animate whether to enable the animation
+     */
+    public void setPreviewLayer(int newLayerIndex, int currentLayerIndex, int currentFrameIndex,
             final boolean animate) {
         for (FrameLayout previewFrame : mPreviewFrames) {
             if (currentLayerIndex >= 0) {

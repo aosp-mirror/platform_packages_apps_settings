@@ -16,9 +16,14 @@
 
 package com.android.settings.language;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.PERSONAL_DICTIONARY_FOR_WORK;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.SPELL_CHECKER_FOR_WORK;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_KEYBOARDS_AND_TOOLS;
+
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,8 +49,10 @@ public class LanguageAndInputSettings extends DashboardFragment {
     private static final String TAG = "LangAndInputSettings";
 
     private static final String KEY_KEYBOARDS_CATEGORY = "keyboards_category";
+    private static final String KEY_SPEECH_CATEGORY = "speech_category";
+    private static final String KEY_ON_DEVICE_RECOGNITION = "odsr_settings";
     private static final String KEY_TEXT_TO_SPEECH = "tts_settings_summary";
-    private static final String KEY_POINTER_AND_TTS_CATEGORY = "pointer_and_tts_category";
+    private static final String KEY_POINTER_CATEGORY = "pointer_category";
 
     @Override
     public int getMetricsCategory() {
@@ -68,6 +75,20 @@ public class LanguageAndInputSettings extends DashboardFragment {
             return;
         }
         activity.setTitle(R.string.language_settings);
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        replaceEnterpriseStringTitle("language_and_input_for_work_category",
+                WORK_PROFILE_KEYBOARDS_AND_TOOLS,
+                R.string.language_and_input_for_work_category_title);
+        replaceEnterpriseStringTitle("spellcheckers_settings_for_work_pref",
+                SPELL_CHECKER_FOR_WORK,
+                R.string.spellcheckers_settings_for_work_title);
+        replaceEnterpriseStringTitle("user_dictionary_settings_for_work_pref",
+                PERSONAL_DICTIONARY_FOR_WORK,
+                R.string.user_dict_settings_for_work_title);
     }
 
     @Override
@@ -98,15 +119,32 @@ public class LanguageAndInputSettings extends DashboardFragment {
                 Arrays.asList(virtualKeyboardPreferenceController,
                         physicalKeyboardPreferenceController)));
 
-        // Pointer and Tts
+        // Speech
+        final DefaultVoiceInputPreferenceController defaultVoiceInputPreferenceController =
+                new DefaultVoiceInputPreferenceController(context, lifecycle);
         final TtsPreferenceController ttsPreferenceController =
                 new TtsPreferenceController(context, KEY_TEXT_TO_SPEECH);
+        final OnDeviceRecognitionPreferenceController onDeviceRecognitionPreferenceController =
+                new OnDeviceRecognitionPreferenceController(context, KEY_ON_DEVICE_RECOGNITION);
+
+        controllers.add(defaultVoiceInputPreferenceController);
         controllers.add(ttsPreferenceController);
+        List<AbstractPreferenceController> speechCategoryChildren = new ArrayList<>(
+                List.of(defaultVoiceInputPreferenceController, ttsPreferenceController));
+
+        if (onDeviceRecognitionPreferenceController.isAvailable()) {
+            controllers.add(onDeviceRecognitionPreferenceController);
+            speechCategoryChildren.add(onDeviceRecognitionPreferenceController);
+        }
+
+        controllers.add(new PreferenceCategoryController(context, KEY_SPEECH_CATEGORY)
+                .setChildren(speechCategoryChildren));
+
+        // Pointer
         final PointerSpeedController pointerController = new PointerSpeedController(context);
         controllers.add(pointerController);
         controllers.add(new PreferenceCategoryController(context,
-                KEY_POINTER_AND_TTS_CATEGORY).setChildren(
-                Arrays.asList(pointerController, ttsPreferenceController)));
+                KEY_POINTER_CATEGORY).setChildren(Arrays.asList(pointerController)));
 
         // Input Assistance
         controllers.add(new SpellCheckerPreferenceController(context));

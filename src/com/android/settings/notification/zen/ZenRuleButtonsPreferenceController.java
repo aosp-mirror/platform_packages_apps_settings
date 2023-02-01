@@ -39,11 +39,9 @@ public class ZenRuleButtonsPreferenceController extends AbstractZenModePreferenc
     implements PreferenceControllerMixin {
     public static final String KEY = "zen_action_buttons";
 
-    private AutomaticZenRule mRule;
+    private final PreferenceFragmentCompat mFragment;
     private String mId;
-    private PreferenceFragmentCompat mFragment;
-    private ActionButtonsPreference mButtonsPref;
-
+    private AutomaticZenRule mRule;
 
     public ZenRuleButtonsPreferenceController(Context context, PreferenceFragmentCompat fragment,
             Lifecycle lc) {
@@ -51,6 +49,10 @@ public class ZenRuleButtonsPreferenceController extends AbstractZenModePreferenc
         mFragment = fragment;
     }
 
+    void setIdAndRule(String id, AutomaticZenRule rule) {
+        mId = id;
+        mRule = rule;
+    }
 
     @Override
     public boolean isAvailable() {
@@ -60,7 +62,7 @@ public class ZenRuleButtonsPreferenceController extends AbstractZenModePreferenc
     @Override
     public void displayPreference(PreferenceScreen screen) {
         if (isAvailable()) {
-            mButtonsPref = ((ActionButtonsPreference) screen.findPreference(KEY))
+            ((ActionButtonsPreference) screen.findPreference(KEY))
                     .setButton1Text(R.string.zen_mode_rule_name_edit)
                     .setButton1Icon(com.android.internal.R.drawable.ic_mode_edit)
                     .setButton1OnClickListener(new EditRuleNameClickListener())
@@ -101,8 +103,7 @@ public class ZenRuleButtonsPreferenceController extends AbstractZenModePreferenc
                     new ZenDeleteRuleDialog.PositiveClickListener() {
                         @Override
                         public void onOk(String id) {
-                            Bundle bundle = new Bundle();
-                            bundle.putString(ZenModeAutomationSettings.DELETE, id);
+                            mBackend.removeZenRule(id);
                             mMetricsFeatureProvider.action(mContext,
                                     SettingsEnums.ACTION_ZEN_DELETE_RULE_OK);
                             new SubSettingLauncher(mContext)
@@ -110,15 +111,9 @@ public class ZenRuleButtonsPreferenceController extends AbstractZenModePreferenc
                                     .setDestination(ZenModeAutomationSettings.class.getName())
                                     .setSourceMetricsCategory(MetricsProto.MetricsEvent
                                             .NOTIFICATION_ZEN_MODE_AUTOMATION)
-                                    .setArguments(bundle)
                                     .launch();
                         }
             });
         }
-    }
-
-    protected void onResume(AutomaticZenRule rule, String id) {
-        mRule = rule;
-        mId = id;
     }
 }

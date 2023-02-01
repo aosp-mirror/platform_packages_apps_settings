@@ -26,6 +26,7 @@ import android.util.Log;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
@@ -39,24 +40,24 @@ import com.android.settings.core.CategoryMixin.CategoryHandler;
 import com.android.settings.core.CategoryMixin.CategoryListener;
 import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.PrimarySwitchPreference;
+import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.ProviderTile;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.search.Indexable;
-import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Base fragment for dashboard style UI containing a list of static and dynamic setting items.
@@ -66,6 +67,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         BasePreferenceController.UiBlockListener {
     public static final String CATEGORY = "category";
     private static final String TAG = "DashboardFragment";
+    private static final long TIMEOUT_MILLIS = 50L;
 
     @VisibleForTesting
     final ArrayMap<String, List<DynamicDataObserver>> mDashboardTilePrefKeys = new ArrayMap<>();
@@ -131,17 +133,22 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @VisibleForTesting
     void checkUiBlocker(List<AbstractPreferenceController> controllers) {
         final List<String> keys = new ArrayList<>();
+        final List<BasePreferenceController> baseControllers = new ArrayList<>();
         controllers.forEach(controller -> {
             if (controller instanceof BasePreferenceController.UiBlocker
                     && controller.isAvailable()) {
                 ((BasePreferenceController) controller).setUiBlockListener(this);
                 keys.add(controller.getPreferenceKey());
+                baseControllers.add((BasePreferenceController) controller);
             }
         });
 
         if (!keys.isEmpty()) {
             mBlockerController = new UiBlockerController(keys);
-            mBlockerController.start(() -> updatePreferenceVisibility(mPreferenceControllers));
+            mBlockerController.start(() -> {
+                updatePreferenceVisibility(mPreferenceControllers);
+                baseControllers.forEach(controller -> controller.setUiBlockerFinished(true));
+            });
         }
     }
 
@@ -218,7 +225,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         super.onResume();
         updatePreferenceStates();
         writeElapsedTimeMetric(SettingsEnums.ACTION_DASHBOARD_VISIBLE_TIME,
-                "isParalleledControllers:" + isParalleledControllers());
+                "isParalleledControllers:false");
     }
 
     @Override
@@ -275,6 +282,11 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
 
         return null;
+    }
+
+    /** Returns all controllers of type T. */
+    protected <T extends AbstractPreferenceController> List<T> useAll(Class<T> clazz) {
+        return (List<T>) mPreferenceControllers.getOrDefault(clazz, Collections.emptyList());
     }
 
     protected void addPreferenceController(AbstractPreferenceController controller) {
@@ -340,14 +352,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     }
 
     /**
-     * @return {@code true} if the underlying controllers should be executed in parallel.
-     * Override this function to enable/disable the behavior.
-     */
-    protected boolean isParalleledControllers() {
-        return false;
-    }
-
-    /**
      * Get current PreferenceController(s)
      */
     protected Collection<List<AbstractPreferenceController>> getPreferenceControllers() {
@@ -386,36 +390,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     }
 
     /**
-     * Use parallel method to update state of each preference managed by PreferenceController.
-     */
-    @VisibleForTesting
-    // To use this parallel approach will cause the side effect of the UI flicker. Such as
-    // the thumb sliding of the toggle button.
-    void updatePreferenceStatesInParallel() {
-        final PreferenceScreen screen = getPreferenceScreen();
-        final Collection<List<AbstractPreferenceController>> controllerLists =
-                mPreferenceControllers.values();
-        final List<ControllerFutureTask> taskList = new ArrayList<>();
-        for (List<AbstractPreferenceController> controllerList : controllerLists) {
-            for (AbstractPreferenceController controller : controllerList) {
-                final ControllerFutureTask task = new ControllerFutureTask(
-                        new ControllerTask(controller, screen, mMetricsFeatureProvider,
-                                getMetricsCategory()), null /* result */);
-                taskList.add(task);
-                ThreadUtils.postOnBackgroundThread(task);
-            }
-        }
-
-        for (ControllerFutureTask task : taskList) {
-            try {
-                task.get();
-            } catch (InterruptedException | ExecutionException e) {
-                Log.w(TAG, task.getController().getPreferenceKey() + " " + e.getMessage());
-            }
-        }
-    }
-
-    /**
      * Refresh all preference items, including both static prefs from xml, and dynamic items from
      * DashboardCategory.
      */
@@ -441,6 +415,30 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         updatePreferenceVisibility(mPreferenceControllers);
     }
 
+    /**
+     * Force update all the preferences in this fragment.
+     */
+    public void forceUpdatePreferences() {
+        final PreferenceScreen screen = getPreferenceScreen();
+        if (screen == null || mPreferenceControllers == null) {
+            return;
+        }
+        for (List<AbstractPreferenceController> controllerList : mPreferenceControllers.values()) {
+            for (AbstractPreferenceController controller : controllerList) {
+                final String key = controller.getPreferenceKey();
+                final Preference preference = findPreference(key);
+                if (preference == null) {
+                    continue;
+                }
+                final boolean available = controller.isAvailable();
+                if (available) {
+                    controller.updateState(preference);
+                }
+                preference.setVisible(available);
+            }
+        }
+    }
+
     @VisibleForTesting
     void updatePreferenceVisibility(
             Map<Class, List<AbstractPreferenceController>> preferenceControllers) {
@@ -455,7 +453,14 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             for (AbstractPreferenceController controller : controllerList) {
                 final String key = controller.getPreferenceKey();
                 final Preference preference = findPreference(key);
-                if (preference != null) {
+                if (preference == null) {
+                    continue;
+                }
+                if (controller instanceof BasePreferenceController.UiBlocker) {
+                    final boolean prefVisible =
+                            ((BasePreferenceController) controller).getSavedPrefVisibility();
+                    preference.setVisible(visible && controller.isAvailable() && prefVisible);
+                } else {
                     preference.setVisible(visible && controller.isAvailable());
                 }
             }
@@ -482,8 +487,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         // Create a list to track which tiles are to be removed.
         final Map<String, List<DynamicDataObserver>> remove = new ArrayMap(mDashboardTilePrefKeys);
 
-        // Install dashboard tiles.
+        // Install dashboard tiles and collect pending observers.
         final boolean forceRoundedIcons = shouldForceRoundedIcon();
+        final List<DynamicDataObserver> pendingObservers = new ArrayList<>();
         for (Tile tile : tiles) {
             final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
             if (TextUtils.isEmpty(key)) {
@@ -493,26 +499,30 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             if (!displayTile(tile)) {
                 continue;
             }
+            final List<DynamicDataObserver> observers;
             if (mDashboardTilePrefKeys.containsKey(key)) {
                 // Have the key already, will rebind.
                 final Preference preference = screen.findPreference(key);
-                mDashboardFeatureProvider.bindPreferenceToTileAndGetObservers(getActivity(), this,
-                        forceRoundedIcons, preference, tile, key,
+                observers = mDashboardFeatureProvider.bindPreferenceToTileAndGetObservers(
+                        getActivity(), this, forceRoundedIcons, preference, tile, key,
                         mPlaceholderPreferenceController.getOrder());
             } else {
                 // Don't have this key, add it.
                 final Preference pref = createPreference(tile);
-                final List<DynamicDataObserver> observers =
-                        mDashboardFeatureProvider.bindPreferenceToTileAndGetObservers(getActivity(),
-                                this, forceRoundedIcons, pref, tile, key,
-                                mPlaceholderPreferenceController.getOrder());
+                observers = mDashboardFeatureProvider.bindPreferenceToTileAndGetObservers(
+                        getActivity(), this, forceRoundedIcons, pref, tile, key,
+                        mPlaceholderPreferenceController.getOrder());
                 screen.addPreference(pref);
                 registerDynamicDataObservers(observers);
                 mDashboardTilePrefKeys.put(key, observers);
             }
+            if (observers != null) {
+                pendingObservers.addAll(observers);
+            }
             remove.remove(key);
         }
-        // Finally remove tiles that are gone.
+
+        // Remove tiles that are gone.
         for (Map.Entry<String, List<DynamicDataObserver>> entry : remove.entrySet()) {
             final String key = entry.getKey();
             mDashboardTilePrefKeys.remove(key);
@@ -522,11 +532,26 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             }
             unregisterDynamicDataObservers(entry.getValue());
         }
+
+        // Wait for pending observers to update UI.
+        if (!pendingObservers.isEmpty()) {
+            final CountDownLatch mainLatch = new CountDownLatch(1);
+            new Thread(() -> {
+                pendingObservers.forEach(observer ->
+                        awaitObserverLatch(observer.getCountDownLatch()));
+                mainLatch.countDown();
+            }).start();
+            Log.d(tag, "Start waiting observers");
+            awaitObserverLatch(mainLatch);
+            Log.d(tag, "Stop waiting observers");
+            pendingObservers.forEach(DynamicDataObserver::updateUi);
+        }
     }
 
     @Override
     public void onBlockerWorkFinished(BasePreferenceController controller) {
         mBlockerController.countDown(controller.getPreferenceKey());
+        controller.setUiBlockerFinished(mBlockerController.isBlockerFinished());
     }
 
     protected Preference createPreference(Tile tile) {
@@ -565,5 +590,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             mRegisteredObservers.remove(observer);
             resolver.unregisterContentObserver(observer);
         });
+    }
+
+    private void awaitObserverLatch(CountDownLatch latch) {
+        try {
+            latch.await(TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            // Do nothing
+        }
     }
 }

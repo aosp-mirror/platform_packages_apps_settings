@@ -20,7 +20,12 @@ import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+
 import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
+import android.content.Context;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -49,6 +54,8 @@ public class GesturesSettingsPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        doReturn(mock(DevicePolicyManager.class)).when(mActivity)
+                .getSystemService(Context.DEVICE_POLICY_SERVICE);
         FakeFeatureFactory.setupForTest();
         mController = new GesturesSettingPreferenceController(mActivity);
     }

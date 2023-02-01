@@ -16,6 +16,8 @@
 
 package com.android.settings.enterprise;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.DISABLED_BY_IT_ADMIN_TITLE;
+
 import android.annotation.NonNull;
 import android.annotation.UserIdInt;
 import android.app.Activity;
@@ -62,11 +64,18 @@ public final class ActionDisabledByAdminDialogHelper {
     public ActionDisabledByAdminDialogHelper(Activity activity, String restriction) {
         mActivity = activity;
         mDialogView = (ViewGroup) LayoutInflater.from(mActivity).inflate(
-                R.layout.admin_support_details_dialog, null);
+                R.layout.support_details_dialog, null);
         mActionDisabledByAdminController = ActionDisabledByAdminControllerFactory
                 .createInstance(mActivity, restriction,
                         new DeviceAdminStringProviderImpl(mActivity),
                         UserHandle.SYSTEM);
+        DevicePolicyManager devicePolicyManager =
+                mActivity.getSystemService(DevicePolicyManager.class);
+
+        TextView title = mDialogView.findViewById(R.id.admin_support_dialog_title);
+        title.setText(devicePolicyManager.getResources().getString(DISABLED_BY_IT_ADMIN_TITLE,
+                () -> mActivity.getString(R.string.disabled_by_policy_title)));
+
     }
 
     private @UserIdInt int getEnforcementAdminUserId(@NonNull EnforcedAdmin admin) {

@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -81,6 +82,10 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
         mCancelBtn.setOnClickListener(this);
         ssidScannerButton.setOnClickListener(this);
         mUIController = new WifiConfigController2(this, rootView, null, getMode());
+
+        // Resize the layout when keyboard opens.
+        getActivity().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         return rootView;
     }

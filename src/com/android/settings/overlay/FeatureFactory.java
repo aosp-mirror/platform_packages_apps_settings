@@ -27,8 +27,6 @@ import com.android.settings.accessibility.AccessibilityMetricsFeatureProvider;
 import com.android.settings.accessibility.AccessibilitySearchFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
-import com.android.settings.applications.GameSettingsFeatureProvider;
-import com.android.settings.applications.appinfo.ExtraAppInfoFeatureProvider;
 import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
@@ -47,6 +45,7 @@ import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.security.SecuritySettingsFeatureProvider;
 import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.users.UserFeatureProvider;
+import com.android.settings.vpn2.AdvancedVpnFeatureProvider;
 import com.android.settings.wifi.WifiTrackerLibProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -150,7 +149,10 @@ public abstract class FeatureFactory {
 
     public abstract ContextualCardFeatureProvider getContextualCardFeatureProvider(Context context);
 
-    public abstract BluetoothFeatureProvider getBluetoothFeatureProvider(Context context);
+    /**
+     * Retrieves implementation for Bluetooth feature.
+     */
+    public abstract BluetoothFeatureProvider getBluetoothFeatureProvider();
 
     public abstract AwareFeatureProvider getAwareFeatureProvider();
 
@@ -162,19 +164,9 @@ public abstract class FeatureFactory {
     public abstract WifiTrackerLibProvider getWifiTrackerLibProvider();
 
     /**
-     * Retrieves implementation for Extra App Info feature.
-     */
-    public abstract ExtraAppInfoFeatureProvider getExtraAppInfoFeatureProvider();
-
-    /**
      * Retrieves implementation for SecuritySettings feature.
      */
     public abstract SecuritySettingsFeatureProvider getSecuritySettingsFeatureProvider();
-
-    /**
-     * Retrieves implementation for Game Settings feature.
-     */
-    public abstract GameSettingsFeatureProvider getGameSettingsFeatureProvider();
 
     /**
      * Retrieves implementation for Accessibility search index feature.
@@ -185,6 +177,11 @@ public abstract class FeatureFactory {
      * Retrieves implementation for Accessibility metrics category feature.
      */
     public abstract AccessibilityMetricsFeatureProvider getAccessibilityMetricsFeatureProvider();
+
+    /**
+     * Retrieves implementation for advanced vpn feature.
+     */
+    public abstract AdvancedVpnFeatureProvider getAdvancedVpnFeatureProvider();
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {

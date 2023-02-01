@@ -25,8 +25,10 @@ import android.provider.Settings;
 import android.service.notification.ConversationChannelWrapper;
 import android.text.TextUtils;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
@@ -38,22 +40,17 @@ import com.android.settingslib.widget.AppPreference;
 import java.text.Collator;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class ConversationListPreferenceController extends AbstractPreferenceController {
 
-    private static final String KEY = "all_conversations";
-
+    private static final String SUMMARY_KEY_SUFFIX = "_summary";
     protected final NotificationBackend mBackend;
+    private PreferenceGroup mPreferenceGroup;
 
-    public ConversationListPreferenceController(Context context,
-            NotificationBackend backend) {
+    public ConversationListPreferenceController(Context context, NotificationBackend backend) {
         super(context);
         mBackend = backend;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY;
     }
 
     @Override
@@ -61,43 +58,55 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
         return true;
     }
 
-    protected void populateList(List<ConversationChannelWrapper> conversations,
-            PreferenceGroup containerGroup) {
-        containerGroup.setVisible(false);
-        containerGroup.removeAll();
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreferenceGroup = screen.findPreference(getPreferenceKey());
+    }
+
+    /**
+     * Updates the conversation list.
+     * @return true if this controller has content to display.
+     */
+    boolean updateList(List<ConversationChannelWrapper> conversations) {
+        mPreferenceGroup.setVisible(false);
+        mPreferenceGroup.removeAll();
         if (conversations != null) {
-            populateConversations(conversations, containerGroup);
+            populateConversations(conversations);
         }
 
-        if (containerGroup.getPreferenceCount() != 0) {
+        boolean hasContent = mPreferenceGroup.getPreferenceCount() != 0;
+        if (hasContent) {
             Preference summaryPref = getSummaryPreference();
             if (summaryPref != null) {
-                containerGroup.addPreference(summaryPref);
+                summaryPref.setKey(getPreferenceKey() + SUMMARY_KEY_SUFFIX);
+                mPreferenceGroup.addPreference(summaryPref);
             }
-            containerGroup.setVisible(true);
+            mPreferenceGroup.setVisible(true);
         }
+        return hasContent;
     }
 
     abstract Preference getSummaryPreference();
 
     abstract boolean matchesFilter(ConversationChannelWrapper conversation);
 
-    protected void populateConversations(List<ConversationChannelWrapper> conversations,
-            PreferenceGroup containerGroup) {
-        int order = 100;
-        for (ConversationChannelWrapper conversation : conversations) {
-            if (conversation.getNotificationChannel().isDemoted()
-                    || !matchesFilter(conversation)) {
-                continue;
-            }
-            containerGroup.addPreference(createConversationPref(conversation, order++));
-        }
+    @VisibleForTesting
+    void populateConversations(List<ConversationChannelWrapper> conversations) {
+        AtomicInteger order = new AtomicInteger(100);
+        conversations.stream()
+                .filter(conversation -> !conversation.getNotificationChannel().isDemoted()
+                        && matchesFilter(conversation))
+                .sorted(mConversationComparator)
+                .map(this::createConversationPref)
+                .forEachOrdered(preference -> {
+                    preference.setOrder(order.getAndIncrement());
+                    mPreferenceGroup.addPreference(preference);
+                });
     }
 
-    protected Preference createConversationPref(final ConversationChannelWrapper conversation,
-            int order) {
+    private Preference createConversationPref(final ConversationChannelWrapper conversation) {
         AppPreference pref = new AppPreference(mContext);
-        pref.setOrder(order);
 
         pref.setTitle(getTitle(conversation));
         pref.setSummary(getSummary(conversation));
@@ -146,7 +155,8 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
                 .setSourceMetricsCategory(SettingsEnums.NOTIFICATION_CONVERSATION_LIST_SETTINGS);
     }
 
-    protected Comparator<ConversationChannelWrapper> mConversationComparator =
+    @VisibleForTesting
+    Comparator<ConversationChannelWrapper> mConversationComparator =
             new Comparator<ConversationChannelWrapper>() {
                 private final Collator sCollator = Collator.getInstance();
                 @Override

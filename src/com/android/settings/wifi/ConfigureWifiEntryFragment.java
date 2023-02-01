@@ -31,6 +31,7 @@ import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import androidx.annotation.VisibleForTesting;
@@ -123,6 +124,10 @@ public class ConfigureWifiEntryFragment extends InstrumentedFragment implements 
             actionBar.setHomeButtonEnabled(false);
             actionBar.setDisplayShowHomeEnabled(false);
         }
+
+        // Resize the layout when keyboard opens.
+        getActivity().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         return rootView;
     }

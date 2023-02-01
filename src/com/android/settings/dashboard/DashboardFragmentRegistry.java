@@ -31,9 +31,9 @@ import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.display.NightDisplaySettings;
 import com.android.settings.emergency.EmergencyDashboardFragment;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
-import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.fuelgauge.SmartBatterySettings;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
+import com.android.settings.fuelgauge.batteryusage.PowerUsageSummary;
 import com.android.settings.gestures.GestureSettings;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.language.LanguageAndInputSettings;
@@ -43,6 +43,7 @@ import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.zen.ZenModeSettings;
 import com.android.settings.privacy.PrivacyDashboardFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
+import com.android.settings.security.SecurityAdvancedSettings;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.system.SystemDashboardFragment;
 import com.android.settingslib.drawer.CategoryKey;
@@ -90,6 +91,8 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_STORAGE);
         PARENT_TO_CATEGORY_KEY_MAP.put(SecuritySettings.class.getName(),
                 CategoryKey.CATEGORY_SECURITY);
+        PARENT_TO_CATEGORY_KEY_MAP.put(SecurityAdvancedSettings.class.getName(),
+                CategoryKey.CATEGORY_SECURITY_ADVANCED_SETTINGS);
         PARENT_TO_CATEGORY_KEY_MAP.put(AccountDetailDashboardFragment.class.getName(),
                 CategoryKey.CATEGORY_ACCOUNT_DETAIL);
         PARENT_TO_CATEGORY_KEY_MAP.put(AccountDashboardFragment.class.getName(),

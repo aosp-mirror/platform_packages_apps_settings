@@ -16,8 +16,13 @@
 
 package com.android.settings.enterprise;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.CONTACT_YOUR_IT_ADMIN;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.DISABLED_BY_IT_ADMIN_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.IT_ADMIN_POLICY_DISABLING_INFO_URL;
+
 import static java.util.Objects.requireNonNull;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 
 import com.android.settings.R;
@@ -25,14 +30,17 @@ import com.android.settingslib.enterprise.DeviceAdminStringProvider;
 
 class DeviceAdminStringProviderImpl implements DeviceAdminStringProvider {
     private final Context mContext;
+    private final DevicePolicyManager mDevicePolicyManager;
 
     DeviceAdminStringProviderImpl(Context context) {
         mContext = requireNonNull(context);
+        mDevicePolicyManager = mContext.getSystemService(DevicePolicyManager.class);
     }
 
     @Override
     public String getDefaultDisabledByPolicyTitle() {
-        return mContext.getString(R.string.disabled_by_policy_title);
+        return mDevicePolicyManager.getResources().getString(DISABLED_BY_IT_ADMIN_TITLE,
+                () -> mContext.getString(R.string.disabled_by_policy_title));
     }
 
     @Override
@@ -67,12 +75,14 @@ class DeviceAdminStringProviderImpl implements DeviceAdminStringProvider {
 
     @Override
     public String getDefaultDisabledByPolicyContent() {
-        return mContext.getString(R.string.default_admin_support_msg);
+        return mDevicePolicyManager.getResources().getString(CONTACT_YOUR_IT_ADMIN,
+                () -> mContext.getString(R.string.default_admin_support_msg));
     }
 
     @Override
     public String getLearnMoreHelpPageUrl() {
-        return mContext.getString(R.string.help_url_action_disabled_by_it_admin);
+        return mDevicePolicyManager.getResources().getString(IT_ADMIN_POLICY_DISABLING_INFO_URL,
+                () -> mContext.getString(R.string.help_url_action_disabled_by_it_admin));
     }
 
     @Override

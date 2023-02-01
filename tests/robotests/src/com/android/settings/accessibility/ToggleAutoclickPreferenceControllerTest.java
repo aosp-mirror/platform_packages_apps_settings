@@ -42,8 +42,8 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.settings.accessibility.ToggleAutoclickPreferenceController.OnChangeListener;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.LayoutPreference;
-import com.android.settingslib.widget.RadioButtonPreference;
-import com.android.settingslib.widget.RadioButtonPreference.OnClickListener;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference.OnClickListener;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -62,7 +62,7 @@ public class ToggleAutoclickPreferenceControllerTest {
     private PreferenceScreen mScreen;
 
     @Mock
-    private RadioButtonPreference mDelayModePref;
+    private SelectorWithWidgetPreference mDelayModePref;
 
     @Mock
     private OnChangeListener mOnChangeListener;
@@ -118,7 +118,7 @@ public class ToggleAutoclickPreferenceControllerTest {
         when(mAccessibilityAutoclickKeyToValueMap.get(mPrefKey)).thenReturn(AUTOCLICK_OFF_MODE);
 
         mController.displayPreference(mScreen);
-        mController.onRadioButtonClicked(any(RadioButtonPreference.class));
+        mController.onRadioButtonClicked(any(SelectorWithWidgetPreference.class));
         final boolean isEnabled = Secure.getInt(mContext.getContentResolver(),
                 Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, /* def= */ 0) == 1;
         final int delayMs = Secure.getInt(mContext.getContentResolver(),
@@ -137,7 +137,7 @@ public class ToggleAutoclickPreferenceControllerTest {
         when(mAccessibilityAutoclickKeyToValueMap.get(mPrefKey)).thenReturn(AUTOCLICK_CUSTOM_MODE);
 
         mController.displayPreference(mScreen);
-        mController.onRadioButtonClicked(any(RadioButtonPreference.class));
+        mController.onRadioButtonClicked(any(SelectorWithWidgetPreference.class));
         final boolean isEnabled = Secure.getInt(mContext.getContentResolver(),
                 Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, /* def= */ 0) == 1;
         final int keyDelayMode = mSharedPreferences.getInt(KEY_DELAY_MODE, AUTOCLICK_CUSTOM_MODE);
@@ -154,7 +154,7 @@ public class ToggleAutoclickPreferenceControllerTest {
 
         mController.setOnChangeListener(mOnChangeListener);
         mController.displayPreference(mScreen);
-        mController.onRadioButtonClicked(any(RadioButtonPreference.class));
+        mController.onRadioButtonClicked(any(SelectorWithWidgetPreference.class));
 
         verify(mOnChangeListener).onCheckedChanged(mDelayModePref);
     }

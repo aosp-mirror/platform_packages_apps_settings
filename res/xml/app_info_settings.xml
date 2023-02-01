@@ -42,6 +42,12 @@
         settings:controller="com.android.settings.applications.appinfo.AppSettingPreferenceController" />
 
     <Preference
+        android:key="all_services_settings"
+        android:title="@string/app_info_all_services_label"
+        android:summary="@string/summary_placeholder"
+        settings:controller="com.android.settings.applications.appinfo.AppAllServicesPreferenceController" />
+
+    <Preference
         android:key="notification_settings"
         android:title="@string/notifications_label"
         settings:controller="com.android.settings.applications.appinfo.AppNotificationPreferenceController" />
@@ -72,12 +78,6 @@
         settings:controller="com.android.settings.applications.appinfo.AppDataUsagePreferenceController" />
 
     <Preference
-        android:key="extra_app_info_settings"
-        android:title="@string/extra_app_info_label"
-        android:summary="@string/extra_app_info_summary"
-        settings:controller="com.android.settings.applications.appinfo.ExtraAppInfoPreferenceController" />
-
-    <Preference
         android:key="time_spent_in_app"
         android:title="@string/time_spent_in_app_pref_title"
         android:summary="@string/summary_placeholder"
@@ -85,8 +85,14 @@
 
     <Preference
         android:key="battery"
-        android:title="@string/power_usage_summary_title"
+        android:title="@string/app_battery_usage_title"
         android:summary="@string/summary_placeholder" />
+
+    <Preference
+        android:key="app_language_setting"
+        android:title="@string/app_locale_preference_title"
+        android:summary="@string/summary_placeholder"
+        settings:controller="com.android.settings.applications.appinfo.AppLocalePreferenceController" />
 
     <Preference
         android:key="preferred_settings"
@@ -129,13 +135,14 @@
 
     <PreferenceCategory
         android:key="app_hibernation_info"
-        android:title="@string/unused_apps"
+        android:title="@string/unused_apps_category"
         settings:controller=
             "com.android.settings.applications.appinfo.AppHibernationPreferenceCategoryController">
 
         <SwitchPreference
             android:key="hibernation_switch"
             android:title="@string/unused_apps_switch"
+            android:summary="@string/unused_apps_switch_summary"
             settings:controller=
                 "com.android.settings.applications.appinfo.HibernationSwitchPreferenceController" />
     </PreferenceCategory>

@@ -27,12 +27,14 @@ import android.net.wifi.WifiManager.NetworkRequestUserSelectionCallback;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerExecutor;
+import android.os.Looper;
 import android.os.Message;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
 import com.android.settings.wifi.NetworkRequestErrorDialogFragment.ERROR_DIALOG_TYPE;
@@ -58,12 +60,17 @@ public class NetworkRequestDialogActivity extends FragmentActivity implements
     final static String EXTRA_IS_SPECIFIED_SSID =
         "com.android.settings.wifi.extra.REQUEST_IS_FOR_SINGLE_NETWORK";
 
-    @VisibleForTesting NetworkRequestDialogBaseFragment mDialogFragment;
+    @VisibleForTesting
+    NetworkRequestDialogBaseFragment mDialogFragment;
+    @VisibleForTesting
+    boolean mIsSpecifiedSsid;
+    @VisibleForTesting
+    boolean mShowingErrorDialog;
+    @VisibleForTesting
+    ProgressDialog mProgressDialog;
+
     private NetworkRequestUserSelectionCallback mUserSelectionCallback;
-    private boolean mIsSpecifiedSsid;
-    private boolean mShowingErrorDialog;
     private WifiConfiguration mMatchedConfig;
-    @VisibleForTesting ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -103,7 +110,8 @@ public class NetworkRequestDialogActivity extends FragmentActivity implements
         mDialogFragment.show(getSupportFragmentManager(), TAG);
     }
 
-    private void dismissDialogs() {
+    @VisibleForTesting
+    void dismissDialogs() {
         if (mDialogFragment != null) {
             mDialogFragment.dismiss();
             mDialogFragment = null;
@@ -137,7 +145,7 @@ public class NetworkRequestDialogActivity extends FragmentActivity implements
         super.onPause();
     }
 
-    private final Handler mHandler = new Handler() {
+    private final Handler mHandler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -156,13 +164,17 @@ public class NetworkRequestDialogActivity extends FragmentActivity implements
         dismissDialogs();
 
         // Throws error dialog.
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+        if (fragmentManager.isDestroyed() || fragmentManager.isStateSaved()) {
+            return;
+        }
         final NetworkRequestErrorDialogFragment dialogFragment =
                 NetworkRequestErrorDialogFragment.newInstance();
         dialogFragment.setRejectCallback(mUserSelectionCallback);
         final Bundle bundle = new Bundle();
         bundle.putSerializable(NetworkRequestErrorDialogFragment.DIALOG_TYPE, type);
         dialogFragment.setArguments(bundle);
-        dialogFragment.show(getSupportFragmentManager(), TAG);
+        dialogFragment.show(fragmentManager, TAG);
         mShowingErrorDialog = true;
     }
 
@@ -174,7 +186,9 @@ public class NetworkRequestDialogActivity extends FragmentActivity implements
             return;
         }
 
-        mDialogFragment.onUserSelectionCallbackRegistration(userSelectionCallback);
+        if (mDialogFragment != null) {
+            mDialogFragment.onUserSelectionCallbackRegistration(userSelectionCallback);
+        }
     }
 
     @Override
@@ -201,7 +215,9 @@ public class NetworkRequestDialogActivity extends FragmentActivity implements
             return;
         }
 
-        mDialogFragment.onMatch(scanResults);
+        if (mDialogFragment != null) {
+            mDialogFragment.onMatch(scanResults);
+        }
     }
 
     @Override

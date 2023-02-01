@@ -40,13 +40,29 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
         final String title = getContext().getString(
                 R.string.accessibility_screen_magnification_title);
         final String description = getContext().getString(
-                R.string.accessibility_preference_magnification_summary);
+                R.string.accessibility_screen_magnification_intro_text);
         final Drawable icon = getContext().getDrawable(R.drawable.ic_accessibility_visibility);
         AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
                 description, icon);
+        hidePreferenceSettingComponents();
+    }
 
-        // Hide the setting from the vision settings.
-        mSettingsPreference.setVisible(false);
+    /**
+     * Hide the magnification preference settings in the SuW's vision settings.
+     */
+    private void hidePreferenceSettingComponents() {
+        // Intro
+        if (mTopIntroPreference != null) {
+            mTopIntroPreference.setVisible(false);
+        }
+        // Setting of magnification type
+        if (mSettingsPreference != null) {
+            mSettingsPreference.setVisible(false);
+        }
+        // Setting of following typing
+        if (mFollowingTypingSwitchPreference != null) {
+            mFollowingTypingSwitchPreference.setVisible(false);
+        }
     }
 
     @Override

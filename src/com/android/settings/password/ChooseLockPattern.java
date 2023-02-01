@@ -16,6 +16,7 @@
 
 package com.android.settings.password;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.SET_WORK_PROFILE_PATTERN_HEADER;
 import static android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE;
 
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL;
@@ -23,6 +24,7 @@ import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_U
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -39,6 +41,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -173,6 +176,7 @@ public class ChooseLockPattern extends SettingsActivity {
         ThemeHelper.trySetDynamicColor(this);
         super.onCreate(savedInstanceState);
         findViewById(R.id.content_parent).setFitsSystemWindows(false);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
     }
 
     @Override
@@ -363,54 +367,49 @@ public class ChooseLockPattern extends SettingsActivity {
 
             Introduction(
                     R.string.lock_settings_picker_biometrics_added_security_message,
-                    R.string.lockpattern_choose_pattern_description,
                     R.string.lockpattern_recording_intro_header,
                     LeftButtonMode.Gone, RightButtonMode.ContinueDisabled,
                     ID_EMPTY_MESSAGE, true),
             HelpScreen(
-                    ID_EMPTY_MESSAGE, ID_EMPTY_MESSAGE, R.string.lockpattern_settings_help_how_to_record,
+                    ID_EMPTY_MESSAGE, R.string.lockpattern_settings_help_how_to_record,
                     LeftButtonMode.Gone, RightButtonMode.Ok, ID_EMPTY_MESSAGE, false),
             ChoiceTooShort(
                     R.string.lock_settings_picker_biometrics_added_security_message,
-                    R.string.lockpattern_choose_pattern_description,
                     R.string.lockpattern_recording_incorrect_too_short,
                     LeftButtonMode.Retry, RightButtonMode.ContinueDisabled,
                     ID_EMPTY_MESSAGE, true),
             FirstChoiceValid(
                     R.string.lock_settings_picker_biometrics_added_security_message,
-                    R.string.lockpattern_choose_pattern_description,
                     R.string.lockpattern_pattern_entered_header,
                     LeftButtonMode.Retry, RightButtonMode.Continue, ID_EMPTY_MESSAGE, false),
             NeedToConfirm(
-                    ID_EMPTY_MESSAGE, ID_EMPTY_MESSAGE, R.string.lockpattern_need_to_confirm,
+                    ID_EMPTY_MESSAGE, R.string.lockpattern_need_to_confirm,
                     LeftButtonMode.Gone, RightButtonMode.ConfirmDisabled,
                     ID_EMPTY_MESSAGE, true),
             ConfirmWrong(
-                    ID_EMPTY_MESSAGE, ID_EMPTY_MESSAGE, R.string.lockpattern_need_to_unlock_wrong,
+                    ID_EMPTY_MESSAGE, R.string.lockpattern_need_to_unlock_wrong,
                     LeftButtonMode.Gone, RightButtonMode.ConfirmDisabled,
                     ID_EMPTY_MESSAGE, true),
             ChoiceConfirmed(
-                    ID_EMPTY_MESSAGE, ID_EMPTY_MESSAGE, R.string.lockpattern_pattern_confirmed_header,
+                    ID_EMPTY_MESSAGE, R.string.lockpattern_pattern_confirmed_header,
                     LeftButtonMode.Gone, RightButtonMode.Confirm, ID_EMPTY_MESSAGE, false);
 
 
             /**
              * @param messageForBiometrics The message displayed at the top, above header for
              *                              fingerprint flow.
-             * @param message The message displayed at the top.
              * @param headerMessage The message displayed at the top.
              * @param leftMode The mode of the left button.
              * @param rightMode The mode of the right button.
              * @param footerMessage The footer message.
              * @param patternEnabled Whether the pattern widget is enabled.
              */
-            Stage(int messageForBiometrics, int message, int headerMessage,
+            Stage(int messageForBiometrics, int headerMessage,
                     LeftButtonMode leftMode,
                     RightButtonMode rightMode,
                     int footerMessage, boolean patternEnabled) {
                 this.headerMessage = headerMessage;
                 this.messageForBiometrics = messageForBiometrics;
-                this.message = message;
                 this.leftMode = leftMode;
                 this.rightMode = rightMode;
                 this.footerMessage = footerMessage;
@@ -419,7 +418,6 @@ public class ChooseLockPattern extends SettingsActivity {
 
             final int headerMessage;
             final int messageForBiometrics;
-            final int message;
             final LeftButtonMode leftMode;
             final RightButtonMode rightMode;
             final int footerMessage;
@@ -480,15 +478,18 @@ public class ChooseLockPattern extends SettingsActivity {
         }
 
         private void updateActivityTitle() {
-            final int msg;
+            final String msg;
             if (mForFingerprint) {
-                msg = R.string.lockpassword_choose_your_pattern_header_for_fingerprint;
+                msg = getString(R.string.lockpassword_choose_your_pattern_header_for_fingerprint);
             } else if (mForFace) {
-                msg = R.string.lockpassword_choose_your_pattern_header_for_face;
+                msg = getString(R.string.lockpassword_choose_your_pattern_header_for_face);
+            } else if (mIsManagedProfile) {
+                msg = getContext().getSystemService(DevicePolicyManager.class).getResources()
+                        .getString(SET_WORK_PROFILE_PATTERN_HEADER,
+                                () -> getString(
+                                        R.string.lockpassword_choose_your_profile_pattern_header));
             } else {
-                msg = mIsManagedProfile
-                        ? R.string.lockpassword_choose_your_profile_pattern_header
-                        : R.string.lockpassword_choose_your_pattern_header;
+                msg = getString(R.string.lockpassword_choose_your_pattern_header);
             }
             getActivity().setTitle(msg);
         }
@@ -547,8 +548,6 @@ public class ChooseLockPattern extends SettingsActivity {
             mDefaultHeaderColorList = mHeaderText.getTextColors();
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
             mLockPatternView.setOnPatternListener(mChooseNewLockPatternListener);
-            mLockPatternView.setTactileFeedbackEnabled(
-                    mLockPatternUtils.isTactileFeedbackEnabled());
             mLockPatternView.setFadePattern(false);
 
             mFooterText = (TextView) view.findViewById(R.id.footerText);
@@ -735,11 +734,14 @@ public class ChooseLockPattern extends SettingsActivity {
             }
             final GlifLayout layout = getActivity().findViewById(R.id.setup_wizard_layout);
             final boolean forAnyBiometric = mForFingerprint || mForFace || mForBiometrics;
-            int message = forAnyBiometric ? stage.messageForBiometrics : stage.message;
-            if (message == ID_EMPTY_MESSAGE) {
-                layout.setDescriptionText("");
+            if (forAnyBiometric) {
+                if (stage.messageForBiometrics == ID_EMPTY_MESSAGE) {
+                    layout.setDescriptionText("");
+                } else {
+                    layout.setDescriptionText(stage.messageForBiometrics);
+                }
             } else {
-                layout.setDescriptionText(message);
+                layout.getDescriptionTextView().setVisibility(View.GONE);
             }
             if (stage.footerMessage == ID_EMPTY_MESSAGE) {
                 mFooterText.setText("");

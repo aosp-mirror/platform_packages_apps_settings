@@ -21,7 +21,7 @@ import android.os.PowerManager;
 import android.util.AttributeSet;
 
 import com.android.settings.R;
-import com.android.settings.widget.PrimarySwitchPreference;
+import com.android.settingslib.PrimarySwitchPreference;
 
 import java.time.LocalTime;
 
@@ -81,13 +81,20 @@ public class DarkModePreference extends PrimarySwitchPreference {
                     ? R.string.dark_ui_summary_on_auto_mode_auto
                     : R.string.dark_ui_summary_off_auto_mode_auto);
         } else if (mode == UiModeManager.MODE_NIGHT_CUSTOM) {
-            final LocalTime time = active
-                    ? mUiModeManager.getCustomNightModeEnd()
-                    : mUiModeManager.getCustomNightModeStart();
-            final String timeStr = mFormat.of(time);
-            summary = getContext().getString(active
-                    ? R.string.dark_ui_summary_on_auto_mode_custom
-                    : R.string.dark_ui_summary_off_auto_mode_custom, timeStr);
+            if (mUiModeManager.getNightModeCustomType()
+                    == UiModeManager.MODE_NIGHT_CUSTOM_TYPE_BEDTIME) {
+                summary = getContext().getString(active
+                        ? R.string.dark_ui_summary_on_auto_mode_custom_bedtime
+                        : R.string.dark_ui_summary_off_auto_mode_custom_bedtime);
+            } else {
+                final LocalTime time = active
+                        ? mUiModeManager.getCustomNightModeEnd()
+                        : mUiModeManager.getCustomNightModeStart();
+                final String timeStr = mFormat.of(time);
+                summary = getContext().getString(active
+                        ? R.string.dark_ui_summary_on_auto_mode_custom
+                        : R.string.dark_ui_summary_off_auto_mode_custom, timeStr);
+            }
         } else {
             summary = getContext().getString(active
                     ? R.string.dark_ui_summary_on_auto_mode_never

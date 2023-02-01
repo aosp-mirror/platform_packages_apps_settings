@@ -21,8 +21,7 @@
     android:title="@string/data_usage_app_summary_title">
 
     <com.android.settings.datausage.SpinnerPreference
-        android:key="cycle"
-        settings:isPreferenceVisible="false" />
+        android:key="cycle" />
 
     <PreferenceCategory
         android:key="app_data_usage_summary_category">
@@ -31,19 +30,22 @@
             android:key="total_usage"
             android:title="@string/total_size_label"
             android:selectable="false"
-            android:layout="@layout/horizontal_preference" />
+            android:layout="@layout/horizontal_preference"
+            android:summary="@string/summary_placeholder" />
 
         <Preference
             android:key="foreground_usage"
             android:title="@string/data_usage_label_foreground"
             android:selectable="false"
-            android:layout="@layout/horizontal_preference" />
+            android:layout="@layout/horizontal_preference"
+            android:summary="@string/summary_placeholder" />
 
         <Preference
             android:key="background_usage"
             android:title="@string/data_usage_label_background"
             android:selectable="false"
-            android:layout="@layout/horizontal_preference" />
+            android:layout="@layout/horizontal_preference"
+            android:summary="@string/summary_placeholder" />
 
     </PreferenceCategory>
 

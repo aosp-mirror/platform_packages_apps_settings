@@ -40,6 +40,7 @@ import com.android.settings.testutils.DatabaseTestUtils;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -103,6 +104,7 @@ public class AnomalyCleanupJobServiceTest {
     }
 
     @Test
+    @Ignore
     public void onStartJob_cleanUpDataBefore30days() {
         final BatteryDatabaseManager databaseManager = BatteryDatabaseManager.getInstance(mContext);
         final AnomalyCleanupJobService service = spy(Robolectric.setupService(

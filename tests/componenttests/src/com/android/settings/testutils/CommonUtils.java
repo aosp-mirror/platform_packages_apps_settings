@@ -17,8 +17,14 @@
 package com.android.settings.testutils;
 
 import android.app.Activity;
+import android.app.Instrumentation;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.wifi.WifiManager;
 import android.os.Environment;
+import android.os.PowerManager;
+import android.os.StrictMode;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 
@@ -36,6 +42,14 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class CommonUtils {
     private static final String TAG = CommonUtils.class.getSimpleName();
+    private static final Instrumentation sInstrumentation =
+            InstrumentationRegistry.getInstrumentation();
+    private static final WifiManager sWifiManager =
+            (WifiManager) sInstrumentation.getTargetContext().getSystemService(
+                    Context.WIFI_SERVICE);
+    private static final PowerManager sPowerManager =
+            (PowerManager) sInstrumentation.getTargetContext().getSystemService(
+                    Context.POWER_SERVICE);
 
     public static void takeScreenshot(Activity activity) {
         long now = System.currentTimeMillis();
@@ -66,6 +80,8 @@ public class CommonUtils {
     }
 
     public static boolean connectToURL(URL url) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         HttpURLConnection connection = null;
         try {
             connection = (HttpsURLConnection) url.openConnection();
@@ -81,17 +97,19 @@ public class CommonUtils {
                 while (null != (line = reader.readLine())) {
                     response.append(line);
                 }
+                Log.d(TAG, "Connection success! " + response.toString());
                 return true;
             }
         } catch (Exception e) {
-            Log.d(TAG, e.getMessage());
+            Log.e(TAG, e.toString());
+            e.printStackTrace();
             return false;
         } finally {
             if (null != connection) {
                 connection.disconnect();
             }
         }
-
+        Log.d(TAG, "End, return false.");
         return false;
     }
 
@@ -105,5 +123,43 @@ public class CommonUtils {
     public static int getResId(String name) {
         return InstrumentationRegistry.getInstrumentation().getTargetContext().getResources()
                 .getIdentifier(name, "id", Constants.SETTINGS_PACKAGE_NAME);
+    }
+
+    public static void reopenScreen() {
+        sPowerManager.goToSleep(SystemClock.uptimeMillis());
+        // According to local test, we need to sleep to wait it fully processed.
+        // 1000 ms is a good value to sleep, otherwise it might cause keyDispatchingTimedOut.
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        UiUtils.waitUntilCondition(1000, () -> !sPowerManager.isInteractive());
+        sPowerManager.wakeUp(SystemClock.uptimeMillis());
+        UiUtils.waitUntilCondition(1000, () -> sPowerManager.isInteractive());
+
+        // After power on screen, need to unlock and goto home page.
+        sPowerManager.wakeUp(1000,  PowerManager.WAKE_REASON_POWER_BUTTON, "Wakeup");
+    }
+
+    /**
+     * Sets wifi status to given enable / disable via ADB command.
+     */
+    public static void set_wifi_enabled(boolean enable) {
+        final int timeoutMsec = 10000;
+        Log.d(TAG, "Set wifi status to " + enable);
+        if (sWifiManager.isWifiEnabled() != enable) {
+            AdbUtils.shell("svc wifi " + (enable ? "enable" : "disable"));
+            if (!UiUtils.waitUntilCondition(timeoutMsec,
+                    () -> sWifiManager.isWifiEnabled() == enable)) {
+                Log.e(TAG, "Cannot set wifi to " + (enable ? "enabl" : "disable") + ", timeout "
+                        + timeoutMsec + " (ms).");
+                Log.e(TAG, "See logcat for more information.");
+            }
+            Log.d(TAG, "After configuration wifi status = " + sWifiManager.isWifiEnabled());
+        } else {
+            Log.d(TAG, "Wifi is enable is already " + enable + ", no need to change.");
+        }
+
     }
 }

@@ -34,7 +34,7 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.TrustedCredentialsSettings.CertHolder;
+import com.android.settings.TrustedCredentialsFragment.CertHolder;
 import com.android.settingslib.RestrictedLockUtils;
 
 import java.security.cert.X509Certificate;
@@ -171,8 +171,8 @@ class TrustedCredentialsDialogBuilder extends AlertDialog.Builder {
             } else {
                 new AlertDialog.Builder(mActivity)
                         .setMessage(R.string.trusted_credentials_remove_confirmation)
-                        .setPositiveButton(android.R.string.yes, onConfirm)
-                        .setNegativeButton(android.R.string.no, null)
+                        .setPositiveButton(android.R.string.ok, onConfirm)
+                        .setNegativeButton(android.R.string.cancel, null)
                         .show();
 
             }

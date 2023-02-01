@@ -19,6 +19,7 @@ import static android.net.NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL;
 import static android.net.NetworkCapabilities.NET_CAPABILITY_PARTIAL_CONNECTIVITY;
 import static android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED;
 import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
+import static android.telephony.TelephonyManager.UNKNOWN_CARRIER_ID;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -42,7 +43,6 @@ import android.net.NetworkInfo;
 import android.net.NetworkRequest;
 import android.net.RouteInfo;
 import android.net.Uri;
-import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -50,7 +50,6 @@ import android.os.Handler;
 import android.provider.Telephony.CarrierId;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
@@ -435,9 +434,9 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             mDataUsageSummaryPref = screen.findPreference(KEY_DATA_USAGE_HEADER);
             mDataUsageSummaryPref.setVisible(true);
             mSummaryHeaderController =
-                new WifiDataUsageSummaryPreferenceController(mFragment.getActivity(),
-                        mLifecycle, (PreferenceFragmentCompat) mFragment,
-                        mWifiEntry.getTitle());
+                    new WifiDataUsageSummaryPreferenceController(mFragment.getActivity(),
+                            mLifecycle, (PreferenceFragmentCompat) mFragment,
+                            mWifiEntry.getWifiConfiguration().getAllNetworkKeys());
             return;
         }
 
@@ -712,34 +711,17 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         // Checks if the SIM subscription is active.
         final List<SubscriptionInfo> activeSubscriptionInfos = mContext
                 .getSystemService(SubscriptionManager.class).getActiveSubscriptionInfoList();
-        final int defaultDataSubscriptionId = SubscriptionManager.getDefaultDataSubscriptionId();
         if (activeSubscriptionInfos != null) {
-            CharSequence firstCarrierIdMatchedDisplayName = null;
-            for (SubscriptionInfo subscriptionInfo : activeSubscriptionInfos) {
-                final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
-                        subscriptionInfo, mContext);
-                if (firstCarrierIdMatchedDisplayName == null
-                        && config.carrierId == subscriptionInfo.getCarrierId()) {
-                    firstCarrierIdMatchedDisplayName = displayName;
-                }
-
-                // When it's UNKNOWN_CARRIER_ID or matched with configured CarrierId,
-                // devices connects it with the SIM subscription of defaultDataSubscriptionId.
-                if (defaultDataSubscriptionId == subscriptionInfo.getSubscriptionId()
-                        && (config.carrierId == subscriptionInfo.getCarrierId()
-                                || config.carrierId == TelephonyManager.UNKNOWN_CARRIER_ID)) {
-                    mEapSimSubscriptionPref.setSummary(displayName);
-                    return;
-                }
-            }
-
-            if (firstCarrierIdMatchedDisplayName != null) {
-                mEapSimSubscriptionPref.setSummary(firstCarrierIdMatchedDisplayName);
+            SubscriptionInfo info = fineSubscriptionInfo(config.carrierId, activeSubscriptionInfos,
+                    SubscriptionManager.getDefaultDataSubscriptionId());
+            if (info != null) {
+                mEapSimSubscriptionPref.setSummary(
+                        SubscriptionUtil.getUniqueSubscriptionDisplayName(info, mContext));
                 return;
             }
         }
 
-        if (config.carrierId == TelephonyManager.UNKNOWN_CARRIER_ID) {
+        if (config.carrierId == UNKNOWN_CARRIER_ID) {
             mEapSimSubscriptionPref.setSummary(R.string.wifi_no_related_sim_card);
             return;
         }
@@ -756,6 +738,25 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
                 CarrierId.CARRIER_ID + "=?",
                 new String[] {Integer.toString(config.carrierId)},
                 null /* orderBy */);
+    }
+
+    @VisibleForTesting
+    SubscriptionInfo fineSubscriptionInfo(int carrierId,
+            List<SubscriptionInfo> activeSubscriptionInfos, int defaultDataSubscriptionId) {
+        SubscriptionInfo firstMatchedInfo = null;
+        for (SubscriptionInfo info : activeSubscriptionInfos) {
+            // When it's UNKNOWN_CARRIER_ID or matched with configured CarrierId,
+            // devices connects it with the SIM subscription of defaultDataSubscriptionId.
+            if (defaultDataSubscriptionId == info.getSubscriptionId()
+                    && (carrierId == info.getCarrierId() || carrierId == UNKNOWN_CARRIER_ID)) {
+                return info;
+            }
+
+            if (firstMatchedInfo == null && carrierId == info.getCarrierId()) {
+                firstMatchedInfo = info;
+            }
+        }
+        return firstMatchedInfo;
     }
 
     private void refreshMacAddress() {
@@ -776,32 +777,12 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     }
 
     private void refreshWifiType() {
-        final ConnectedInfo connectedInfo = mWifiEntry.getConnectedInfo();
-        if (connectedInfo == null) {
-            mTypePref.setVisible(false);
-            return;
-        }
-
-        final int typeString = getWifiStandardTypeString(connectedInfo.wifiStandard);
-        if (typeString != -1) {
+        final String typeString = mWifiEntry.getStandardString();
+        if (!TextUtils.isEmpty(typeString)) {
             mTypePref.setSummary(typeString);
             mTypePref.setVisible(true);
         } else {
             mTypePref.setVisible(false);
-        }
-    }
-
-    private int getWifiStandardTypeString(int wifiStandardType) {
-        Log.d(TAG, "Wifi Type " + wifiStandardType);
-        switch (wifiStandardType) {
-            case ScanResult.WIFI_STANDARD_11AX:
-                return R.string.wifi_type_11AX;
-            case ScanResult.WIFI_STANDARD_11AC:
-                return R.string.wifi_type_11AC;
-            case ScanResult.WIFI_STANDARD_11N:
-                return R.string.wifi_type_11N;
-            default:
-                return -1;
         }
     }
 

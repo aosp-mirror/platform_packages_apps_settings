@@ -17,16 +17,16 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/notification_importance_title">
 
-        <com.android.settingslib.widget.RadioButtonPreference
+        <com.android.settingslib.widget.SelectorWithWidgetPreference
             android:key="importance_high"
             android:title="@string/notification_importance_high" />
-        <com.android.settingslib.widget.RadioButtonPreference
+        <com.android.settingslib.widget.SelectorWithWidgetPreference
             android:key="importance_default"
             android:title="@string/notification_importance_default" />
-        <com.android.settingslib.widget.RadioButtonPreference
+        <com.android.settingslib.widget.SelectorWithWidgetPreference
             android:key="importance_low"
             android:title="@string/notification_importance_low" />
-        <com.android.settingslib.widget.RadioButtonPreference
+        <com.android.settingslib.widget.SelectorWithWidgetPreference
             android:key="importance_min"
             android:title="@string/notification_importance_min" />
 

@@ -15,6 +15,8 @@
  */
 package com.android.settings.connecteddevice;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.Uri;
@@ -25,9 +27,9 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.password.PasswordUtils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.slices.SlicePreferenceController;
 import com.android.settingslib.search.SearchIndexable;
@@ -36,9 +38,9 @@ import com.android.settingslib.search.SearchIndexable;
 public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "ConnectedDeviceFrag";
-    private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
     private static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+    private static final String SLICE_ACTION = "com.android.settings.SEARCH_RESULT_TRAMPOLINE";
 
     @VisibleForTesting
     static final String KEY_CONNECTED_DEVICES = "connected_device_list";
@@ -70,10 +72,12 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
         super.onAttach(context);
         final boolean nearbyEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
                 SettingsUIDeviceConfig.BT_NEAR_BY_SUGGESTION_ENABLED, true);
-        String callingAppPackageName = PasswordUtils.getCallingAppPackageName(
-                getActivity().getActivityToken());
+        String callingAppPackageName = ((SettingsActivity) getActivity())
+                .getInitialCallingPackage();
+        String action = getIntent() != null ? getIntent().getAction() : "";
         if (DEBUG) {
-            Log.d(TAG, "onAttach() calling package name is : " + callingAppPackageName);
+            Log.d(TAG, "onAttach() calling package name is : " + callingAppPackageName
+                    + ", action : " + action);
         }
         use(AvailableMediaDeviceGroupController.class).init(this);
         use(ConnectedDeviceGroupController.class).init(this);
@@ -81,9 +85,15 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
         use(SlicePreferenceController.class).setSliceUri(nearbyEnabled
                 ? Uri.parse(getString(R.string.config_nearby_devices_slice_uri))
                 : null);
-        use(DiscoverableFooterPreferenceController.class).setAlwaysDiscoverable(
-                TextUtils.equals(SETTINGS_PACKAGE_NAME, callingAppPackageName)
-                        || TextUtils.equals(SYSTEMUI_PACKAGE_NAME, callingAppPackageName));
+        use(DiscoverableFooterPreferenceController.class)
+                .setAlwaysDiscoverable(isAlwaysDiscoverable(callingAppPackageName, action));
+    }
+
+    @VisibleForTesting
+    boolean isAlwaysDiscoverable(String callingAppPackageName, String action) {
+        return TextUtils.equals(SLICE_ACTION, action) ? false
+                : TextUtils.equals(SETTINGS_PACKAGE_NAME, callingAppPackageName)
+                || TextUtils.equals(SYSTEMUI_PACKAGE_NAME, callingAppPackageName);
     }
 
     /**

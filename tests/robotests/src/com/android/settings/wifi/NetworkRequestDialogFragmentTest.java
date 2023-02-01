@@ -18,6 +18,8 @@ package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -38,6 +40,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
@@ -46,6 +49,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InOrder;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -67,6 +71,12 @@ public class NetworkRequestDialogFragmentTest {
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory fakeFeatureFactory = FakeFeatureFactory.setupForTest();
+        when(fakeFeatureFactory.wifiTrackerLibProvider.createWifiPickerTracker(
+                any(), any(), any(), any(), any(), anyLong(), anyLong(), any()))
+                .thenReturn(mock(WifiPickerTracker.class));
+
         mActivity = Robolectric.buildActivity(FragmentActivity.class,
                 new Intent().putExtra(NetworkRequestDialogFragment.EXTRA_APP_NAME,
                         TEST_APP_NAME)).setup().get();

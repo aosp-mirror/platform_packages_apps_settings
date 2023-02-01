@@ -44,16 +44,20 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
+import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry;
+import com.android.settings.fuelgauge.batteryusage.BatteryEntry;
+import com.android.settings.fuelgauge.batteryusage.BatteryHistEntry;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +70,8 @@ import java.util.List;
  */
 public class AdvancedPowerUsageDetail extends DashboardFragment implements
         ButtonActionDialogFragment.AppButtonsDialogListener,
-        BatteryTipPreferenceController.BatteryTipListener, RadioButtonPreference.OnClickListener {
+        BatteryTipPreferenceController.BatteryTipListener,
+        SelectorWithWidgetPreference.OnClickListener {
 
     public static final String TAG = "AdvancedPowerDetail";
     public static final String EXTRA_UID = "extra_uid";
@@ -108,11 +113,11 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     @VisibleForTesting
     FooterPreference mFooterPreference;
     @VisibleForTesting
-    RadioButtonPreference mRestrictedPreference;
+    SelectorWithWidgetPreference mRestrictedPreference;
     @VisibleForTesting
-    RadioButtonPreference mOptimizePreference;
+    SelectorWithWidgetPreference mOptimizePreference;
     @VisibleForTesting
-    RadioButtonPreference mUnrestrictedPreference;
+    SelectorWithWidgetPreference mUnrestrictedPreference;
     @VisibleForTesting
     boolean mEnableTriState = true;
     @VisibleForTesting
@@ -171,7 +176,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         launchArgs.mPackageName = entry.getDefaultPackageName();
         launchArgs.mAppLabel = entry.getLabel();
         launchArgs.mUid = entry.getUid();
-        launchArgs.mIconId = entry.iconId;
+        launchArgs.mIconId = entry.mIconId;
         launchArgs.mConsumedPower = (int) entry.getConsumedPower();
         launchArgs.mForegroundTimeMs = isValidToShowSummary ? entry.getTimeInForegroundMs() : 0;
         launchArgs.mBackgroundTimeMs = isValidToShowSummary ? entry.getTimeInBackgroundMs() : 0;
@@ -218,8 +223,11 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         return UserHandle.getUserId(batteryEntry.getUid());
     }
 
-    public static void startBatteryDetailPage(Activity caller,
-            InstrumentedPreferenceFragment fragment, String packageName) {
+    /**
+     * Start packageName's battery detail page.
+     */
+    public static void startBatteryDetailPage(
+            Activity caller, Instrumentable instrumentable, String packageName) {
         final Bundle args = new Bundle(3);
         final PackageManager packageManager = caller.getPackageManager();
         args.putString(EXTRA_PACKAGE_NAME, packageName);
@@ -234,7 +242,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                 .setDestination(AdvancedPowerUsageDetail.class.getName())
                 .setTitleRes(R.string.battery_details_title)
                 .setArguments(args)
-                .setSourceMetricsCategory(fragment.getMetricsCategory())
+                .setSourceMetricsCategory(instrumentable.getMetricsCategory())
                 .launch();
     }
 
@@ -366,8 +374,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final String footerString;
 
         if (!mBatteryOptimizeUtils.isValidPackageName()) {
-            // Present optimized only string when the package name is invalid or
-            // it's in allow list not idle app.
+            // Present optimized only string when the package name is invalid.
             stateString = context.getString(R.string.manager_battery_usage_optimized_only);
             footerString = context.getString(
                     R.string.manager_battery_usage_footer_limited, stateString);
@@ -386,7 +393,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         if (helpIntent != null) {
             mFooterPreference.setLearnMoreAction(v ->
                     startActivityForResult(helpIntent, /*requestCode=*/ 0));
-            mFooterPreference.setLearnMoreContentDescription(
+            mFooterPreference.setLearnMoreText(
                     context.getString(R.string.manager_battery_usage_link_a11y));
         }
     }
@@ -414,8 +421,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final String packageName = bundle.getString(EXTRA_PACKAGE_NAME);
 
         mAppButtonsPreferenceController = new AppButtonsPreferenceController(
-                (SettingsActivity) getActivity(), this, getSettingsLifecycle(), packageName,
-                mState, REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
+                (SettingsActivity) getActivity(), this, getSettingsLifecycle(),
+                packageName, mState, REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
         controllers.add(mAppButtonsPreferenceController);
         if (mEnableTriState) {
             controllers.add(new UnrestrictedPreferenceController(context, uid, packageName));
@@ -454,14 +461,15 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     }
 
     @Override
-    public void onRadioButtonClicked(RadioButtonPreference selected) {
+    public void onRadioButtonClicked(SelectorWithWidgetPreference selected) {
         final String selectedKey = selected.getKey();
         updatePreferenceState(mUnrestrictedPreference, selectedKey);
         updatePreferenceState(mOptimizePreference, selectedKey);
         updatePreferenceState(mRestrictedPreference, selectedKey);
     }
 
-    private void updatePreferenceState(RadioButtonPreference preference, String selectedKey) {
+    private void updatePreferenceState(SelectorWithWidgetPreference preference,
+            String selectedKey) {
         preference.setChecked(selectedKey.equals(preference.getKey()));
     }
 
@@ -524,23 +532,24 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
         final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
         final int consumedPower = bundle.getInt(EXTRA_POWER_USAGE_AMOUNT);
+        final int uid = bundle.getInt(EXTRA_UID, 0);
         final String slotTime = bundle.getString(EXTRA_SLOT_TIME, null);
         final long totalTimeMs = foregroundTimeMs + backgroundTimeMs;
         final CharSequence usageTimeSummary;
-        final PowerUsageFeatureProvider powerFeatureProvider =
-                FeatureFactory.getFactory(getContext()).getPowerUsageFeatureProvider(getContext());
+        final boolean isChartGraphEnabled = FeatureFactory.getFactory(getContext())
+                .getPowerUsageFeatureProvider(getContext()).isChartGraphEnabled(getContext());
 
+        if (!isChartGraphEnabled && BatteryEntry.isSystemUid(uid)) {
+            return null;
+        }
         if (totalTimeMs == 0) {
-            final int batteryWithoutUsageTime = consumedPower > 0
-                    ? R.string.battery_usage_without_time : R.string.battery_not_usage_24hr;
-            usageTimeSummary = getText(powerFeatureProvider.isChartGraphEnabled(getContext())
-                    ? batteryWithoutUsageTime : R.string.battery_not_usage);
+            usageTimeSummary = getText(
+                    isChartGraphEnabled && consumedPower > 0 ? R.string.battery_usage_without_time
+                            : R.string.battery_not_usage);
         } else if (slotTime == null) {
-            // Shows summary text with past 24 hr or full charge if slot time is null.
-            usageTimeSummary = powerFeatureProvider.isChartGraphEnabled(getContext())
-                    ? getAppPast24HrActiveSummary(foregroundTimeMs, backgroundTimeMs, totalTimeMs)
-                    : getAppFullChargeActiveSummary(
-                            foregroundTimeMs, backgroundTimeMs, totalTimeMs);
+            // Shows summary text with last full charge if slot time is null.
+            usageTimeSummary = getAppFullChargeActiveSummary(
+                    foregroundTimeMs, backgroundTimeMs, totalTimeMs);
         } else {
             // Shows summary text with slot time.
             usageTimeSummary = getAppActiveSummaryWithSlotTime(

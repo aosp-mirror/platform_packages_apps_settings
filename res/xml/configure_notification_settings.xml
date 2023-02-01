@@ -156,7 +156,7 @@
             android:title="@string/notification_pulse_title"
             settings:controller="com.android.settings.notification.PulseNotificationPreferenceController"/>
 
-        <SwitchPreference
+        <com.android.settingslib.PrimarySwitchPreference
             android:key="notification_assistant"
             android:order="23"
             android:title="@string/notification_assistant_title"

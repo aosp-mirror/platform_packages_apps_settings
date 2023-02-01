@@ -26,6 +26,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 
+import com.android.settings.R;
+
 /** Fragment to show a progress dialog. */
 public class ProgressDialogFragment extends DialogFragment {
     private static final String ARG_TITLE = "title";
@@ -83,6 +85,7 @@ public class ProgressDialogFragment extends DialogFragment {
     @SuppressWarnings("deprecation") // ProgressDialog is deprecated but is intended UX for now
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         ProgressDialog dialog = new ProgressDialog(getActivity());
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.sim_progress_dialog_rounded_bg);
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
         dialog.setMessage(getArguments().getString(ARG_TITLE));

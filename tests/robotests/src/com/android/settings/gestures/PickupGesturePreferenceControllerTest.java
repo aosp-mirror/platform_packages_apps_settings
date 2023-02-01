@@ -22,8 +22,11 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.hardware.display.AmbientDisplayConfiguration;
@@ -54,6 +57,8 @@ public class PickupGesturePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        doReturn(mock(DevicePolicyManager.class)).when(mContext)
+                .getSystemService(Context.DEVICE_POLICY_SERVICE);
         mController = new PickupGesturePreferenceController(mContext, KEY_PICK_UP);
         mController.setConfig(mAmbientDisplayConfiguration);
     }

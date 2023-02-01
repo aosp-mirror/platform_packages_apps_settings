@@ -16,6 +16,9 @@
 
 package com.android.settings.biometrics.face;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.FACE_SETTINGS_FOR_WORK_TITLE;
+
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.os.UserHandle;
 
@@ -27,21 +30,26 @@ import com.android.settings.R;
 public class FaceProfileStatusPreferenceController extends FaceStatusPreferenceController {
 
     private static final String KEY_FACE_SETTINGS = "face_settings_profile";
+    private final DevicePolicyManager mDevicePolicyManager;
 
     public FaceProfileStatusPreferenceController(Context context) {
         super(context, KEY_FACE_SETTINGS);
+        mDevicePolicyManager = context.getSystemService(DevicePolicyManager.class);
     }
 
     public FaceProfileStatusPreferenceController(Context context, String key) {
         super(context, key);
+        mDevicePolicyManager = context.getSystemService(DevicePolicyManager.class);
     }
 
     public FaceProfileStatusPreferenceController(Context context, Lifecycle lifecycle) {
         super(context, KEY_FACE_SETTINGS, lifecycle);
+        mDevicePolicyManager = context.getSystemService(DevicePolicyManager.class);
     }
 
     public FaceProfileStatusPreferenceController(Context context, String key, Lifecycle lifecycle) {
         super(context, key, lifecycle);
+        mDevicePolicyManager = context.getSystemService(DevicePolicyManager.class);
     }
 
     @Override
@@ -59,7 +67,7 @@ public class FaceProfileStatusPreferenceController extends FaceStatusPreferenceC
     @Override
     protected boolean isUserSupported() {
         return mProfileChallengeUserId != UserHandle.USER_NULL
-                && mLockPatternUtils.isSeparateProfileChallengeAllowed(mProfileChallengeUserId);
+                && mUm.isManagedProfile(mProfileChallengeUserId);
     }
 
     @Override
@@ -70,7 +78,10 @@ public class FaceProfileStatusPreferenceController extends FaceStatusPreferenceC
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        preference.setTitle(mContext.getResources().getString(
-                R.string.security_settings_face_profile_preference_title));
+
+        preference.setTitle(
+                mDevicePolicyManager.getResources().getString(FACE_SETTINGS_FOR_WORK_TITLE, () ->
+                mContext.getResources().getString(
+                R.string.security_settings_face_profile_preference_title)));
     }
 }

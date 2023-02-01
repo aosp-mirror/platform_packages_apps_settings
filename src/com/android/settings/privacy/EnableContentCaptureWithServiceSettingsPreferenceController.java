@@ -19,19 +19,18 @@ package com.android.settings.privacy;
 import android.annotation.NonNull;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.text.TextUtils;
 import android.util.Log;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
-import com.android.settings.dashboard.profileselector.UserAdapter;
+import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
 import com.android.settings.utils.ContentCaptureUtils;
 
 import java.util.ArrayList;
@@ -42,13 +41,9 @@ public final class EnableContentCaptureWithServiceSettingsPreferenceController
 
     private static final String TAG = "ContentCaptureController";
 
-    private final UserManager mUserManager;
-
     public EnableContentCaptureWithServiceSettingsPreferenceController(@NonNull Context context,
             @NonNull String key) {
         super(context, key);
-
-        mUserManager = UserManager.get(context);
     }
 
     @Override
@@ -74,11 +69,6 @@ public final class EnableContentCaptureWithServiceSettingsPreferenceController
             Log.w(TAG, "No component name for custom service settings");
             preference.setSelectable(false);
         }
-
-        preference.setOnPreferenceClickListener((pref) -> {
-            ProfileSelectDialog.show(mContext, pref);
-            return true;
-        });
     }
 
     @Override
@@ -93,32 +83,30 @@ public final class EnableContentCaptureWithServiceSettingsPreferenceController
         return R.string.menu_key_privacy;
     }
 
-    private static final class ProfileSelectDialog {
-        public static void show(Context context, Preference pref) {
-            final UserManager userManager = UserManager.get(context);
-            final List<UserInfo> userInfos = userManager.getUsers();
-            final ArrayList<UserHandle> userHandles = new ArrayList<>(userInfos.size());
-            for (UserInfo info: userInfos) {
-                userHandles.add(info.getUserHandle());
-            }
-            if (userHandles.size() == 1) {
-                final Intent intent = pref.getIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                context.startActivityAsUser(intent, userHandles.get(0));
-            } else {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                UserAdapter adapter = UserAdapter.createUserAdapter(userManager, context,
-                        userHandles);
-                builder.setTitle(com.android.settingslib.R.string.choose_profile)
-                        .setAdapter(adapter, (DialogInterface dialog, int which) -> {
-                            final UserHandle user = userHandles.get(which);
-                            // Show menu on top level items.
-                            final Intent intent = pref.getIntent()
-                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            context.startActivityAsUser(intent, user);
-                        })
-                        .show();
-            }
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+            return false;
         }
+        show(preference);
+        return true;
     }
 
+    private void show(Preference preference) {
+        final UserManager userManager = UserManager.get(mContext);
+        final List<UserInfo> userInfos = userManager.getUsers();
+        final ArrayList<UserHandle> userHandles = new ArrayList<>(userInfos.size());
+        for (UserInfo info : userInfos) {
+            userHandles.add(info.getUserHandle());
+        }
+        final Intent intent = preference.getIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        if (userHandles.size() == 1) {
+            mContext.startActivityAsUser(intent, userHandles.get(0));
+            return;
+        }
+        ProfileSelectDialog.createDialog(mContext, userHandles, (int position) -> {
+            // Show menu on top level items.
+            mContext.startActivityAsUser(intent, userHandles.get(position));
+        }).show();
+    }
 }

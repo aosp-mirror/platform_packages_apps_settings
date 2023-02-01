@@ -16,7 +16,12 @@
 
 package com.android.settings.users;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_REMOVE_MESSAGE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_REMOVE_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_MANAGED_BY;
+
 import android.app.Dialog;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
@@ -52,17 +57,20 @@ public final class UserDialogs {
     public static Dialog createRemoveDialog(Context context, int removingUserId,
             DialogInterface.OnClickListener onConfirmListener) {
         UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
         UserInfo userInfo = um.getUserInfo(removingUserId);
         AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setPositiveButton(R.string.user_delete_button, onConfirmListener)
                 .setNegativeButton(android.R.string.cancel, null);
         if (userInfo.isManagedProfile()) {
-            builder.setTitle(R.string.work_profile_confirm_remove_title);
+            builder.setTitle(dpm.getResources().getString(WORK_PROFILE_CONFIRM_REMOVE_TITLE,
+                    () -> context.getString(R.string.work_profile_confirm_remove_title)));
             View view = createRemoveManagedUserDialogView(context, removingUserId);
             if (view != null) {
                 builder.setView(view);
             } else {
-                builder.setMessage(R.string.work_profile_confirm_remove_message);
+                builder.setMessage(dpm.getResources().getString(WORK_PROFILE_CONFIRM_REMOVE_MESSAGE,
+                        () -> context.getString(R.string.work_profile_confirm_remove_message)));
             }
         } else if (UserHandle.myUserId() == removingUserId) {
             builder.setTitle(R.string.user_confirm_remove_self_title);
@@ -82,6 +90,8 @@ public final class UserDialogs {
      */
     private static View createRemoveManagedUserDialogView(Context context, int userId) {
         PackageManager packageManager = context.getPackageManager();
+        DevicePolicyManager devicePolicyManager =
+                context.getSystemService(DevicePolicyManager.class);
         ApplicationInfo mdmApplicationInfo = Utils.getAdminApplicationInfo(context, userId);
         if (mdmApplicationInfo == null) {
             return null;
@@ -94,6 +104,18 @@ public final class UserDialogs {
                 (ImageView) view.findViewById(R.id.delete_managed_profile_mdm_icon_view);
         Drawable badgedApplicationIcon = packageManager.getApplicationIcon(mdmApplicationInfo);
         imageView.setImageDrawable(badgedApplicationIcon);
+
+        TextView openingParagraph = (TextView)
+                view.findViewById(R.id.delete_managed_profile_opening_paragraph);
+        openingParagraph.setText(devicePolicyManager.getResources().getString(
+                WORK_PROFILE_MANAGED_BY,
+                () -> context.getString(
+                        R.string.opening_paragraph_delete_profile_unknown_company)));
+        TextView closingParagraph = (TextView)
+                view.findViewById(R.id.delete_managed_profile_closing_paragraph);
+        closingParagraph.setText(devicePolicyManager.getResources().getString(
+                WORK_PROFILE_CONFIRM_REMOVE_MESSAGE,
+                () -> context.getString(R.string.work_profile_confirm_remove_message)));
 
         CharSequence appLabel = packageManager.getApplicationLabel(mdmApplicationInfo);
         CharSequence badgedAppLabel = packageManager.getUserBadgedLabel(appLabel,
@@ -167,9 +189,30 @@ public final class UserDialogs {
             DialogInterface.OnClickListener onConfirmListener) {
         return new AlertDialog.Builder(context)
                 .setTitle(com.android.settingslib.R.string.guest_reset_guest_dialog_title)
-                .setMessage(R.string.user_exit_guest_confirm_message)
+                .setMessage(com.android.settingslib.R.string.guest_exit_dialog_message)
                 .setPositiveButton(
                         com.android.settingslib.R.string.guest_reset_guest_confirm_button,
+                        onConfirmListener)
+                .setNegativeButton(android.R.string.cancel, null)
+                .create();
+    }
+
+
+    /**
+     * Creates a dialog to confirm with the user if it's ok to remove the guest user, which will
+     * delete all the guest user's data.
+     *
+     * @param context a Context object
+     * @param onConfirmListener Callback object for positive action
+     * @return the created Dialog
+     */
+    public static Dialog createRemoveGuestDialog(Context context,
+            DialogInterface.OnClickListener onConfirmListener) {
+        return new AlertDialog.Builder(context)
+                .setTitle(com.android.settingslib.R.string.guest_remove_guest_dialog_title)
+                .setMessage(R.string.user_exit_guest_confirm_message)
+                .setPositiveButton(
+                        com.android.settingslib.R.string.guest_remove_guest_confirm_button,
                         onConfirmListener)
                 .setNegativeButton(android.R.string.cancel, null)
                 .create();

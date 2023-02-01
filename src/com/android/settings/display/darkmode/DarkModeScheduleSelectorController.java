@@ -34,10 +34,13 @@ import com.android.settings.display.TwilightLocationDialog;
 public class DarkModeScheduleSelectorController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {
     private static final String TAG = DarkModeScheduleSelectorController.class.getSimpleName();
+
     private final UiModeManager mUiModeManager;
-    private PowerManager mPowerManager;
+    private final PowerManager mPowerManager;
+    private final LocationManager mLocationManager;
+    private final BedtimeSettings mBedtimeSettings;
+
     private DropDownPreference mPreference;
-    private LocationManager mLocationManager;
     private int mCurrentMode;
 
     public DarkModeScheduleSelectorController(Context context, String key) {
@@ -45,12 +48,19 @@ public class DarkModeScheduleSelectorController extends BasePreferenceController
         mUiModeManager = context.getSystemService(UiModeManager.class);
         mPowerManager = context.getSystemService(PowerManager.class);
         mLocationManager = context.getSystemService(LocationManager.class);
+        mBedtimeSettings = new BedtimeSettings(context);
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
+        if (mBedtimeSettings.getBedtimeSettingsIntent() != null) {
+            String[] entries = mContext.getResources().getStringArray(
+                    R.array.dark_ui_scheduler_with_bedtime_preference_titles);
+            mPreference.setEntries(entries);
+            mPreference.setEntryValues(entries);
+        }
     }
 
     @Override
@@ -73,7 +83,12 @@ public class DarkModeScheduleSelectorController extends BasePreferenceController
                 resId = R.string.dark_ui_auto_mode_auto;
                 break;
             case UiModeManager.MODE_NIGHT_CUSTOM:
-                resId = R.string.dark_ui_auto_mode_custom;
+                boolean isCustomBedtime = mBedtimeSettings.getBedtimeSettingsIntent() != null
+                        && mUiModeManager.getNightModeCustomType()
+                                == UiModeManager.MODE_NIGHT_CUSTOM_TYPE_BEDTIME;
+                resId = isCustomBedtime
+                        ? R.string.dark_ui_auto_mode_custom_bedtime
+                        : R.string.dark_ui_auto_mode_custom;
                 break;
             default:
                 resId = R.string.dark_ui_auto_mode_never;
@@ -104,6 +119,9 @@ public class DarkModeScheduleSelectorController extends BasePreferenceController
         } else if (newMode == mPreference.findIndexOfValue(
                 mContext.getString(R.string.dark_ui_auto_mode_custom))) {
             mUiModeManager.setNightMode(UiModeManager.MODE_NIGHT_CUSTOM);
+        } else if (newMode == mPreference.findIndexOfValue(
+                mContext.getString(R.string.dark_ui_auto_mode_custom_bedtime))) {
+            mUiModeManager.setNightModeCustomType(UiModeManager.MODE_NIGHT_CUSTOM_TYPE_BEDTIME);
         }
         mCurrentMode = newMode;
         return true;

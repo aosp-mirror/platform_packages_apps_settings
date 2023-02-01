@@ -18,35 +18,52 @@ package com.android.settings.wifi.addappnetworks;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.annotation.Nullable;
-import android.app.IActivityManager;
-import android.os.RemoteException;
-
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.annotation.Nullable;
+import android.app.IActivityManager;
+import android.content.Context;
+import android.os.RemoteException;
+import android.os.UserManager;
+
+import androidx.test.core.app.ApplicationProvider;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class AddAppNetworksActivityTest {
 
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Spy
+    Context mContext = ApplicationProvider.getApplicationContext();
+    @Mock
+    UserManager mUserManager;
     @Mock
     private IActivityManager mIActivityManager;
 
-    private AddAppNetworksActivity mActivity;
+    private FakeAddAppNetworksActivity mActivity;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(mUserManager.isGuestUser()).thenReturn(false);
 
-        mActivity = Robolectric.buildActivity(AddAppNetworksActivity.class).create().get();
+        mActivity = spy(Robolectric.buildActivity(FakeAddAppNetworksActivity.class).create().get());
+        when(mActivity.getApplicationContext()).thenReturn(mContext);
         mActivity.mActivityManager = mIActivityManager;
+        fakeCallingPackage("com.android.settings");
     }
 
     @Test
@@ -77,11 +94,41 @@ public class AddAppNetworksActivityTest {
         assertThat(mActivity.showAddNetworksFragment()).isTrue();
     }
 
+    @Test
+    public void showAddNetworksFragment_isAddWifiConfigNotAllow_returnFalse() {
+        mActivity.mIsAddWifiConfigAllow = false;
+
+        assertThat(mActivity.showAddNetworksFragment()).isFalse();
+    }
+
+    @Test
+    public void showAddNetworksFragment_isGuestUser_returnFalse() {
+        when(mUserManager.isGuestUser()).thenReturn(true);
+
+        assertThat(mActivity.showAddNetworksFragment()).isFalse();
+    }
+
+    @Test
+    public void showAddNetworksFragment_notGuestUser_returnTrue() {
+        when(mUserManager.isGuestUser()).thenReturn(false);
+
+        assertThat(mActivity.showAddNetworksFragment()).isTrue();
+    }
+
     private void fakeCallingPackage(@Nullable String packageName) {
         try {
             when(mIActivityManager.getLaunchedFromPackage(any())).thenReturn(packageName);
         } catch (RemoteException e) {
             // Do nothing.
+        }
+    }
+
+    private static class FakeAddAppNetworksActivity extends AddAppNetworksActivity {
+        boolean mIsAddWifiConfigAllow = true;
+
+        @Override
+        boolean isAddWifiConfigAllow() {
+            return mIsAddWifiConfigAllow;
         }
     }
 }

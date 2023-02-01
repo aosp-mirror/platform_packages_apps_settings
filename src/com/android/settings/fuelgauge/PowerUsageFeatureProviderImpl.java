@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,16 +21,18 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Process;
+import android.util.ArraySet;
 import android.util.SparseIntArray;
 
-import com.android.internal.os.BatterySipper;
 import com.android.internal.util.ArrayUtils;
+import com.android.settings.R;
+import com.android.settings.fuelgauge.batteryusage.BatteryHistEntry;
 import com.android.settingslib.fuelgauge.Estimate;
 
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/** Implementation of {@code PowerUsageFeatureProvider} */
 public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider {
 
     private static final String PACKAGE_CALENDAR_PROVIDER = "com.android.providers.calendar";
@@ -48,25 +50,7 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public boolean isTypeService(BatterySipper sipper) {
-        return false;
-    }
-
-    @Override
-    public boolean isTypeSystem(BatterySipper sipper) {
-        final int uid = sipper.uidObj == null ? -1 : sipper.getUid();
-        sipper.mPackages = mPackageManager.getPackagesForUid(uid);
-        // Classify all the sippers to type system if the range of uid is 0...FIRST_APPLICATION_UID
-        if (uid >= Process.ROOT_UID && uid < Process.FIRST_APPLICATION_UID) {
-            return true;
-        } else if (sipper.mPackages != null) {
-            for (final String packageName : sipper.mPackages) {
-                if (ArrayUtils.contains(PACKAGES_SYSTEM, packageName)) {
-                    return true;
-                }
-            }
-        }
-
+    public boolean isTypeService(int uid) {
         return false;
     }
 
@@ -177,7 +161,18 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public boolean isExtraDefend() {
+        return false;
+    }
+
+    @Override
     public Map<Long, Map<String, BatteryHistEntry>> getBatteryHistory(Context context) {
+        return null;
+    }
+
+    @Override
+    public Map<Long, Map<String, BatteryHistEntry>> getBatteryHistorySinceLastFullCharge(
+            Context context) {
         return null;
     }
 
@@ -188,7 +183,7 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
 
     @Override
     public Set<CharSequence> getHideBackgroundUsageTimeSet(Context context) {
-        return new HashSet<>();
+        return new ArraySet<>();
     }
 
     @Override
@@ -198,6 +193,7 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
 
     @Override
     public CharSequence[] getHideApplicationSummary(Context context) {
-        return new CharSequence[0];
+        return context.getResources().getTextArray(
+                R.array.allowlist_hide_summary_in_battery_usage);
     }
 }

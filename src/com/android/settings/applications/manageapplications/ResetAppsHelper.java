@@ -32,10 +32,13 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.os.UserManager;
+import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
+import com.android.settings.fuelgauge.BatteryOptimizeUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -44,6 +47,7 @@ public class ResetAppsHelper implements DialogInterface.OnClickListener,
         DialogInterface.OnDismissListener {
 
     private static final String EXTRA_RESET_DIALOG = "resetDialog";
+    private static final String TAG = "ResetAppsHelper";
 
     private final PackageManager mPm;
     private final IPackageManager mIPm;
@@ -51,6 +55,7 @@ public class ResetAppsHelper implements DialogInterface.OnClickListener,
     private final NetworkPolicyManager mNpm;
     private final AppOpsManager mAom;
     private final Context mContext;
+    private final UserManager mUm;
 
     private AlertDialog mResetDialog;
 
@@ -62,6 +67,7 @@ public class ResetAppsHelper implements DialogInterface.OnClickListener,
                 ServiceManager.getService(Context.NOTIFICATION_SERVICE));
         mNpm = NetworkPolicyManager.from(context);
         mAom = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+        mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
     }
 
     public void onRestoreInstanceState(Bundle savedInstanceState) {
@@ -110,27 +116,35 @@ public class ResetAppsHelper implements DialogInterface.OnClickListener,
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                final List<ApplicationInfo> apps = mPm.getInstalledApplications(
-                        PackageManager.GET_DISABLED_COMPONENTS);
                 final List<String> allowList = Arrays.asList(
                         mContext.getResources().getStringArray(
                                 R.array.config_skip_reset_apps_package_name));
-
-                for (int i = 0; i < apps.size(); i++) {
-                    ApplicationInfo app = apps.get(i);
-                    if (allowList.contains(app.packageName)) {
-                        continue;
-                    }
-                    try {
-                        mNm.clearData(app.packageName, app.uid, false);
-                    } catch (android.os.RemoteException ex) {
-                    }
-                    if (!app.enabled) {
-                        if (mPm.getApplicationEnabledSetting(app.packageName)
-                                == PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER) {
-                            mPm.setApplicationEnabledSetting(app.packageName,
-                                    PackageManager.COMPONENT_ENABLED_STATE_DEFAULT,
-                                    PackageManager.DONT_KILL_APP);
+                for (UserHandle userHandle : mUm.getEnabledProfiles()) {
+                    final int userId = userHandle.getIdentifier();
+                    final List<ApplicationInfo> apps = mPm.getInstalledApplicationsAsUser(
+                            PackageManager.GET_DISABLED_COMPONENTS, userId);
+                    for (int i = 0; i < apps.size(); i++) {
+                        ApplicationInfo app = apps.get(i);
+                        if (allowList.contains(app.packageName)) {
+                            continue;
+                        }
+                        try {
+                            mNm.clearData(app.packageName, app.uid, false);
+                        } catch (android.os.RemoteException ex) {
+                        }
+                        if (!app.enabled) {
+                            try {
+                                if (mIPm.getApplicationEnabledSetting(app.packageName, userId)
+                                        == PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER) {
+                                    mIPm.setApplicationEnabledSetting(app.packageName,
+                                            PackageManager.COMPONENT_ENABLED_STATE_DEFAULT,
+                                            PackageManager.DONT_KILL_APP,
+                                            userId,
+                                            mContext.getPackageName());
+                                }
+                            } catch (RemoteException e) {
+                                Log.e(TAG, "Error during reset disabled apps.", e);
+                            }
                         }
                     }
                 }
@@ -139,6 +153,7 @@ public class ResetAppsHelper implements DialogInterface.OnClickListener,
                 } catch (RemoteException e) {
                 }
                 mAom.resetAllModes();
+                BatteryOptimizeUtils.resetAppOptimizationMode(mContext, mIPm, mAom);
                 final int[] restrictedUids = mNpm.getUidsWithPolicy(
                         POLICY_REJECT_METERED_BACKGROUND);
                 final int currentUserId = ActivityManager.getCurrentUser();

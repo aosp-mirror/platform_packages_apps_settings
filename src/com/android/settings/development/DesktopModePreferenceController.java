@@ -19,6 +19,7 @@ package com.android.settings.development;
 import static android.provider.Settings.Global.DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.provider.Settings;
 
@@ -26,11 +27,13 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 public class DesktopModePreferenceController extends DeveloperOptionsPreferenceController
-        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
+        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin,
+        RebootConfirmationDialogHost {
 
     private static final String FORCE_DESKTOP_MODE_KEY = "force_desktop_mode_on_external_displays";
 
@@ -39,8 +42,12 @@ public class DesktopModePreferenceController extends DeveloperOptionsPreferenceC
     @VisibleForTesting
     static final int SETTING_VALUE_ON = 1;
 
-    public DesktopModePreferenceController(Context context) {
+    private final DevelopmentSettingsDashboardFragment mFragment;
+
+    public DesktopModePreferenceController(
+            Context context, DevelopmentSettingsDashboardFragment fragment) {
         super(context);
+        mFragment = fragment;
     }
 
     @Override
@@ -54,6 +61,10 @@ public class DesktopModePreferenceController extends DeveloperOptionsPreferenceC
         Settings.Global.putInt(mContext.getContentResolver(),
                 DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS,
                 isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
+        if (isEnabled) {
+            RebootConfirmationDialogFragment.show(
+                    mFragment, R.string.reboot_dialog_force_desktop_mode, this);
+        }
         return true;
     }
 
@@ -70,6 +81,12 @@ public class DesktopModePreferenceController extends DeveloperOptionsPreferenceC
         Settings.Global.putInt(mContext.getContentResolver(),
                 DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS, SETTING_VALUE_OFF);
         ((SwitchPreference) mPreference).setChecked(false);
+    }
+
+    @Override
+    public void onRebootConfirmed() {
+        final Intent intent = new Intent(Intent.ACTION_REBOOT);
+        mContext.startActivity(intent);
     }
 
     @VisibleForTesting

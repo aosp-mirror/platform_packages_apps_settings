@@ -18,28 +18,37 @@ package com.android.settings.wifi;
 
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.text.TextUtils;
+import android.util.EventLog;
+import android.util.Log;
 import android.view.WindowManager;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.wifi.WifiPermissionChecker;
 
 /**
  * This activity requests users permission to allow scanning even when Wi-Fi is turned off
  */
 public class WifiScanModeActivity extends FragmentActivity {
+    private static final String TAG = "WifiScanModeActivity";
     private DialogFragment mDialog;
-    private String mApp;
+    @VisibleForTesting
+    String mApp;
+    @VisibleForTesting
+    WifiPermissionChecker mWifiPermissionChecker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +59,7 @@ public class WifiScanModeActivity extends FragmentActivity {
         if (savedInstanceState == null) {
             if (intent != null && WifiManager.ACTION_REQUEST_SCAN_ALWAYS_AVAILABLE
                     .equals(intent.getAction())) {
-                ApplicationInfo ai;
-                mApp = getCallingPackage();
-                try {
-                    PackageManager pm = getPackageManager();
-                    ai = pm.getApplicationInfo(mApp, 0);
-                    mApp = (String)pm.getApplicationLabel(ai);
-                } catch (PackageManager.NameNotFoundException e) { }
+                refreshAppLabel();
             } else {
                 finish();
                 return;
@@ -67,7 +70,28 @@ public class WifiScanModeActivity extends FragmentActivity {
         createDialog();
     }
 
-    private void createDialog() {
+    @VisibleForTesting
+    void refreshAppLabel() {
+        if (mWifiPermissionChecker == null) {
+            mWifiPermissionChecker = new WifiPermissionChecker(this);
+        }
+        String packageName = mWifiPermissionChecker.getLaunchedPackage();
+        if (TextUtils.isEmpty(packageName)) {
+            mApp = null;
+            return;
+        }
+        mApp = Utils.getApplicationLabel(getApplicationContext(), packageName).toString();
+    }
+
+    @VisibleForTesting
+    void createDialog() {
+        if (isGuestUser(getApplicationContext())) {
+            Log.e(TAG, "Guest user is not allowed to configure Wi-Fi Scan Mode!");
+            EventLog.writeEvent(0x534e4554, "235601169", -1 /* UID */, "User is a guest");
+            finish();
+            return;
+        }
+
         if (mDialog == null) {
             mDialog = AlertDialogFragment.newInstance(mApp);
             mDialog.show(getSupportFragmentManager(), "dialog");
@@ -157,5 +181,12 @@ public class WifiScanModeActivity extends FragmentActivity {
         public void onCancel(DialogInterface dialog) {
             ((WifiScanModeActivity) getActivity()).doNegativeClick();
         }
+    }
+
+    private static boolean isGuestUser(Context context) {
+        if (context == null) return false;
+        final UserManager userManager = context.getSystemService(UserManager.class);
+        if (userManager == null) return false;
+        return userManager.isGuestUser();
     }
 }

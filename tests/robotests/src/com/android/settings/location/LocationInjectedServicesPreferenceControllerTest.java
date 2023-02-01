@@ -101,7 +101,8 @@ public class LocationInjectedServicesPreferenceControllerTest {
         mController.onResume();
 
         verify(mContext).registerReceiver(eq(mController.mInjectedSettingsReceiver),
-                eq(mController.INTENT_FILTER_INJECTED_SETTING_CHANGED));
+                eq(mController.INTENT_FILTER_INJECTED_SETTING_CHANGED),
+                anyInt());
     }
 
     @Test

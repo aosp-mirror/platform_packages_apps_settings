@@ -44,7 +44,8 @@ public class FingerprintEnrollParentalConsent extends FingerprintEnrollIntroduct
             R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2,
             R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3,
             R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4,
-            R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5
+            R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5,
+            R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6
     };
 
     @Override
@@ -114,6 +115,11 @@ public class FingerprintEnrollParentalConsent extends FingerprintEnrollIntroduct
     @StringRes
     protected int getFooterMessage5() {
         return R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5;
+    }
+
+    @StringRes
+    protected int getFooterMessage6() {
+        return R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6;
     }
 
     @Override

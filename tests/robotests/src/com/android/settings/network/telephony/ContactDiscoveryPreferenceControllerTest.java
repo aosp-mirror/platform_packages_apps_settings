@@ -48,6 +48,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -72,7 +73,7 @@ public class ContactDiscoveryPreferenceControllerTest {
     @Mock private ImsManager mImsManager;
     @Mock private ImsRcsManager mImsRcsManager;
     @Mock private RcsUceAdapter mRcsUceAdapter;
-    @Mock private CarrierConfigManager mCarrierConfigManager;
+    @Mock private CarrierConfigCache mCarrierConfigCache;
     @Mock private ContentResolver mContentResolver;
     @Mock private FragmentManager mFragmentManager;
     @Mock private FragmentTransaction mFragmentTransaction;
@@ -93,8 +94,8 @@ public class ContactDiscoveryPreferenceControllerTest {
         doReturn(mImsManager).when(mContext).getSystemService(ImsManager.class);
         doReturn(mImsRcsManager).when(mImsManager).getImsRcsManager(anyInt());
         doReturn(mRcsUceAdapter).when(mImsRcsManager).getUceAdapter();
-        doReturn(mCarrierConfigManager).when(mContext).getSystemService(CarrierConfigManager.class);
-        doReturn(mCarrierConfig).when(mCarrierConfigManager).getConfigForSubId(eq(TEST_SUB_ID));
+        CarrierConfigCache.setTestInstance(mContext, mCarrierConfigCache);
+        doReturn(mCarrierConfig).when(mCarrierConfigCache).getConfigForSubId(eq(TEST_SUB_ID));
         // Start all tests with presence being disabled.
         setRcsPresenceConfig(false);
         doReturn(mContentResolver).when(mContext).getContentResolver();
@@ -104,7 +105,8 @@ public class ContactDiscoveryPreferenceControllerTest {
                 "ContactDiscovery");
         // Ensure subscriptionInfo check doesn't fail.
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Collections.emptyList());
-        mPreferenceControllerUT.init(mFragmentManager, TEST_SUB_ID, mLifecycle);
+        mPreferenceControllerUT.init(mFragmentManager, TEST_SUB_ID);
+        mLifecycle.addObserver(mPreferenceControllerUT);
         mSwitchPreferenceUT = spy(new SwitchPreference(mContext));
         mSwitchPreferenceUT.setKey(mPreferenceControllerUT.getPreferenceKey());
         mPreferenceControllerUT.preference = mSwitchPreferenceUT;

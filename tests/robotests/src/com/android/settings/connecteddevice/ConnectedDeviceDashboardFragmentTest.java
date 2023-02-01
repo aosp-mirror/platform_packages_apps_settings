@@ -54,16 +54,24 @@ public class ConnectedDeviceDashboardFragmentTest {
     private static final String KEY_DISCOVERABLE_FOOTER = "discoverable_footer";
     private static final String KEY_SEE_ALL = "previously_connected_devices_see_all";
     private static final String KEY_ADD_BT_DEVICES = "add_bt_devices";
+    private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
+    private static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
+    private static final String SLICE_ACTION = "com.android.settings.SEARCH_RESULT_TRAMPOLINE";
+    private static final String TEST_APP_NAME = "com.testapp.settings";
+    private static final String TEST_ACTION = "com.testapp.settings.ACTION_START";
+
 
     @Mock
     private PackageManager mPackageManager;
     private Context mContext;
+    private ConnectedDeviceDashboardFragment mFragment;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
+        mFragment = new ConnectedDeviceDashboardFragment();
         doReturn(mPackageManager).when(mContext).getPackageManager();
         doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
     }
@@ -85,6 +93,26 @@ public class ConnectedDeviceDashboardFragmentTest {
 
         assertThat(niks).containsExactly(KEY_CONNECTED_DEVICES, KEY_AVAILABLE_DEVICES,
                 KEY_NEARBY_DEVICES, KEY_DISCOVERABLE_FOOTER, KEY_SEE_ALL);
+    }
+
+    @Test
+    public void isAlwaysDiscoverable_callingAppIsNotFromSystemApp_returnsFalse() {
+        assertThat(mFragment.isAlwaysDiscoverable(TEST_APP_NAME, TEST_ACTION)).isFalse();
+    }
+
+    @Test
+    public void isAlwaysDiscoverable_callingAppIsFromSettings_returnsTrue() {
+        assertThat(mFragment.isAlwaysDiscoverable(SETTINGS_PACKAGE_NAME, TEST_ACTION)).isTrue();
+    }
+
+    @Test
+    public void isAlwaysDiscoverable_callingAppIsFromSystemUI_returnsTrue() {
+        assertThat(mFragment.isAlwaysDiscoverable(SYSTEMUI_PACKAGE_NAME, TEST_ACTION)).isTrue();
+    }
+
+    @Test
+    public void isAlwaysDiscoverable_actionIsFromSlice_returnsFalse() {
+        assertThat(mFragment.isAlwaysDiscoverable(SYSTEMUI_PACKAGE_NAME, SLICE_ACTION)).isFalse();
     }
 
     @Test

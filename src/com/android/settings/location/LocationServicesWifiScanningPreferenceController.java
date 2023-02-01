@@ -17,9 +17,13 @@ package com.android.settings.location;
 
 import android.content.Context;
 import android.net.wifi.WifiManager;
+import android.os.UserManager;
+
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.RestrictedPreference;
 
 /**
  * Preference controller for Wi-Fi scanning in Location Services.
@@ -31,6 +35,13 @@ public class LocationServicesWifiScanningPreferenceController extends BasePrefer
     public LocationServicesWifiScanningPreferenceController(Context context, String key) {
         super(context, key);
         mWifiManager = context.getSystemService(WifiManager.class);
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        ((RestrictedPreference) preference).checkRestrictionAndSetDisabled(
+                UserManager.DISALLOW_CONFIG_LOCATION);
+        refreshSummary(preference);
     }
 
     @Override
