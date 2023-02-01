@@ -25,7 +25,34 @@
         android:title="@string/language_settings"
         android:icon="@drawable/ic_settings_language"
         android:order="-260"
-        android:fragment="com.android.settings.language.LanguageAndInputSettings"/>
+        android:fragment="com.android.settings.language.LanguageAndInputSettings"
+        settings:controller="com.android.settings.language.LanguageAndInputPreferenceController"/>
+
+    <Preference
+        android:key="language_settings"
+        android:title="@string/languages_settings"
+        android:summary="@string/languages_setting_summary"
+        android:icon="@drawable/ic_settings_languages"
+        android:order="-260"
+        android:fragment="com.android.settings.language.LanguageSettings"
+        settings:controller="com.android.settings.language.LanguagePreferenceController"/>
+
+    <Preference
+        android:key="Keyboard_settings"
+        android:title="@string/keyboard_settings"
+        android:icon="@drawable/ic_settings_keyboards"
+        android:order="-255"
+        android:fragment="com.android.settings.inputmethod.KeyboardSettings"
+        settings:controller="com.android.settings.inputmethod.KeyboardPreferenceController"/>
+
+    <Preference
+        android:key="trackpad_settings"
+        android:title="@string/trackpad_settings"
+        android:summary="@string/trackpad_settings_summary"
+        android:icon="@drawable/ic_settings_trackpad"
+        android:order="-254"
+        android:fragment="com.android.settings.inputmethod.TrackpadSettings"
+        settings:controller="com.android.settings.inputmethod.TrackpadSettingsController"/>
 
     <Preference
         android:key="gesture_settings"

@@ -82,10 +82,13 @@ import com.android.settings.network.telephony.TelephonyConstants.TelephonyManage
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.graph.SignalDrawable;
+import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -211,7 +214,7 @@ public class MobileNetworkUtils {
             return false;
         }
         PersistableBundle bundle = carrierConfigCache.getConfigForSubId(subId);
-        return bundle.getBoolean(
+        return bundle == null ? false : bundle.getBoolean(
                 CarrierConfigManager.KEY_USE_RCS_PRESENCE_BOOL, false /*default*/)
                 || bundle.getBoolean(CarrierConfigManager.Ims.KEY_RCS_BULK_CAPABILITY_EXCHANGE_BOOL,
                 false /*default*/);
@@ -261,6 +264,9 @@ public class MobileNetworkUtils {
      * the user has enabled development mode.
      */
     public static boolean showEuiccSettings(Context context) {
+        if (!SubscriptionUtil.isSimHardwareVisible(context)) {
+            return false;
+        }
         long timeForAccess = SystemClock.elapsedRealtime();
         try {
             Boolean isShow = ((Future<Boolean>) ThreadUtils.postOnBackgroundThread(() -> {
@@ -711,15 +717,17 @@ public class MobileNetworkUtils {
         final TelephonyManager tm =
                 (TelephonyManager) context.getSystemService(TelephonyManager.class);
 
+        Set<String> countrySet = new HashSet<>();
         for (int i = 0; i < tm.getPhoneCount(); i++) {
             String countryCode = tm.getNetworkCountryIso(i);
-            if (em.isSupportedCountry(countryCode)) {
-                Log.i(TAG, "isCurrentCountrySupported: eSIM is supported in " + countryCode);
-                return true;
+            if (!TextUtils.isEmpty(countryCode)) {
+                countrySet.add(countryCode);
             }
         }
-        Log.i(TAG, "isCurrentCountrySupported: eSIM is not supported in the current country.");
-        return false;
+        boolean isSupported = countrySet.stream().anyMatch(em::isSupportedCountry);
+        Log.i(TAG, "isCurrentCountrySupported countryCodes: " + countrySet
+                + " eSIMSupported: " + isSupported);
+        return isSupported;
     }
 
     /**
@@ -937,19 +945,15 @@ public class MobileNetworkUtils {
      * Returns preferred status of Calls & SMS separately when Provider Model is enabled.
      */
     public static CharSequence getPreferredStatus(boolean isRtlMode, Context context,
-            SubscriptionManager subscriptionManager, boolean isPreferredCallStatus) {
-        final List<SubscriptionInfo> subs = SubscriptionUtil.getActiveSubscriptions(
-                subscriptionManager);
-        if (!subs.isEmpty()) {
+            boolean isPreferredCallStatus, List<SubscriptionInfoEntity> entityList) {
+        if (entityList != null || !entityList.isEmpty()) {
             final StringBuilder summary = new StringBuilder();
-            for (SubscriptionInfo subInfo : subs) {
-                int subsSize = subs.size();
-                final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
-                        subInfo, context);
+            for (SubscriptionInfoEntity subInfo : entityList) {
+                int subsSize = entityList.size();
+                final CharSequence displayName = subInfo.uniqueName;
 
                 // Set displayName as summary if there is only one valid SIM.
-                if (subsSize == 1
-                        && SubscriptionManager.isValidSubscriptionId(subInfo.getSubscriptionId())) {
+                if (subsSize == 1 && subInfo.isValidSubscription) {
                     return displayName;
                 }
 
@@ -967,7 +971,7 @@ public class MobileNetworkUtils {
                             .append(")");
                 }
                 // Do not add ", " for the last subscription.
-                if (subInfo != subs.get(subs.size() - 1)) {
+                if (subInfo != entityList.get(entityList.size() - 1)) {
                     summary.append(", ");
                 }
 
@@ -981,24 +985,20 @@ public class MobileNetworkUtils {
         }
     }
 
-    private static CharSequence getPreferredCallStatus(Context context, SubscriptionInfo subInfo) {
-        final int subId = subInfo.getSubscriptionId();
+    private static CharSequence getPreferredCallStatus(Context context,
+            SubscriptionInfoEntity subInfo) {
         String status = "";
-        boolean isDataPreferred = subId == SubscriptionManager.getDefaultVoiceSubscriptionId();
-
-        if (isDataPreferred) {
+        if (subInfo.isDefaultVoiceSubscription) {
             status = setSummaryResId(context, R.string.calls_sms_preferred);
         }
 
         return status;
     }
 
-    private static CharSequence getPreferredSmsStatus(Context context, SubscriptionInfo subInfo) {
-        final int subId = subInfo.getSubscriptionId();
+    private static CharSequence getPreferredSmsStatus(Context context,
+            SubscriptionInfoEntity subInfo) {
         String status = "";
-        boolean isSmsPreferred = subId == SubscriptionManager.getDefaultSmsSubscriptionId();
-
-        if (isSmsPreferred) {
+        if (subInfo.isDefaultSmsSubscription) {
             status = setSummaryResId(context, R.string.calls_sms_preferred);
         }
 
@@ -1010,6 +1010,10 @@ public class MobileNetworkUtils {
     }
 
     public static void launchMobileNetworkSettings(Context context, SubscriptionInfo info) {
+        if (!SubscriptionUtil.isSimHardwareVisible(context)) {
+            Log.e(TAG, "launchMobileNetworkSettings fail, device without such UI.");
+            return;
+        }
         final int subId = info.getSubscriptionId();
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             Log.d(TAG, "launchMobileNetworkSettings fail, subId is invalid.");
@@ -1021,6 +1025,24 @@ public class MobileNetworkUtils {
         extra.putInt(Settings.EXTRA_SUB_ID, subId);
         new SubSettingLauncher(context)
                 .setTitleText(SubscriptionUtil.getUniqueSubscriptionDisplayName(info, context))
+                .setDestination(MobileNetworkSettings.class.getCanonicalName())
+                .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
+                .setArguments(extra)
+                .launch();
+    }
+
+    public static void launchMobileNetworkSettings(Context context, SubscriptionInfoEntity info) {
+        final int subId = Integer.valueOf(info.subId);
+        if (!info.isValidSubscription) {
+            Log.d(TAG, "launchMobileNetworkSettings fail, subId is invalid.");
+            return;
+        }
+
+        Log.d(TAG, "launchMobileNetworkSettings for SubscriptionInfoEntity subId: " + subId);
+        final Bundle extra = new Bundle();
+        extra.putInt(Settings.EXTRA_SUB_ID, subId);
+        new SubSettingLauncher(context)
+                .setTitleText(info.uniqueName)
                 .setDestination(MobileNetworkSettings.class.getCanonicalName())
                 .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
                 .setArguments(extra)

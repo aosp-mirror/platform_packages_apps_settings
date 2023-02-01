@@ -28,18 +28,24 @@ import static org.mockito.Mockito.when;
 
 import android.app.Instrumentation;
 import android.content.Context;
+import android.os.Looper;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleRegistry;
 import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.android.settings.testutils.ResourcesUtils;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
+import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,6 +55,10 @@ import org.mockito.MockitoAnnotations;
 
 @RunWith(AndroidJUnit4.class)
 public class MobileDataPreferenceControllerTest {
+    private static final String SUB_ID_1 = "1";
+    private static final String SUB_ID_2 = "2";
+    private static final String DISPLAY_NAME_1 = "Sub 1";
+    private static final String DISPLAY_NAME_2 = "Sub 2";
     private static final int SUB_ID = 2;
     private static final int SUB_ID_OTHER = 3;
 
@@ -64,7 +74,15 @@ public class MobileDataPreferenceControllerTest {
     private SubscriptionInfo mSubscriptionInfo;
     @Mock
     private FragmentTransaction mFragmentTransaction;
-
+    @Mock
+    private Lifecycle mLifecycle;
+    @Mock
+    private LifecycleOwner mLifecycleOwner;
+    private SubscriptionInfoEntity mSubInfo1;
+    private SubscriptionInfoEntity mSubInfo2;
+    private MobileNetworkInfoEntity mNetworkInfo1;
+    private MobileNetworkInfoEntity mNetworkInfo2;
+    private LifecycleRegistry mLifecycleRegistry;
     private MobileDataPreferenceController mController;
     private SwitchPreference mPreference;
     private Context mContext;
@@ -72,6 +90,10 @@ public class MobileDataPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+
+        if (Looper.myLooper() == null) {
+            Looper.prepare();
+        }
 
         mContext = spy(ApplicationProvider.getApplicationContext());
         doReturn(mTelephonyManager).when(mContext).getSystemService(Context.TELEPHONY_SERVICE);
@@ -83,22 +105,45 @@ public class MobileDataPreferenceControllerTest {
         doReturn(mFragmentTransaction).when(mFragmentManager).beginTransaction();
 
         mPreference = new SwitchPreference(mContext);
-        mController = new MobileDataPreferenceController(mContext, "mobile_data");
-        mController.init(mFragmentManager, SUB_ID);
+        mController = new MobileDataPreferenceController(mContext, "mobile_data", mLifecycle,
+                mLifecycleOwner, SUB_ID);
+        mController.init(mFragmentManager, SUB_ID, mSubInfo1, mNetworkInfo1);
         mPreference.setKey(mController.getPreferenceKey());
+        mLifecycleRegistry = new LifecycleRegistry(mLifecycleOwner);
+        when(mLifecycleOwner.getLifecycle()).thenReturn(mLifecycleRegistry);
+    }
+
+    private SubscriptionInfoEntity setupSubscriptionInfoEntity(String subId, String displayName,
+            boolean isOpportunistic, boolean isValid, boolean isActive, boolean isAvailable,
+            boolean isDefaultData) {
+        int id = Integer.parseInt(subId);
+        return new SubscriptionInfoEntity(subId, id, id,
+                displayName, displayName, 0, "mcc", "mnc", "countryIso", false, id,
+                TelephonyManager.DEFAULT_PORT_INDEX, isOpportunistic, null,
+                SubscriptionManager.SUBSCRIPTION_TYPE_LOCAL_SIM, displayName, false,
+                "1234567890", true, "default", false, isValid, true, isActive, isAvailable, false,
+                false, isDefaultData, false, false);
+    }
+
+    private MobileNetworkInfoEntity setupMobileNetworkInfoEntity(String subId,
+            boolean isDatEnabled) {
+        return new MobileNetworkInfoEntity(subId, false, false, isDatEnabled, false, false, false,
+                false, false, false, false, false);
     }
 
     @Test
     public void getAvailabilityStatus_invalidSubscription_returnAvailableUnsearchable() {
-        mController.init(mFragmentManager, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        mController.init(mFragmentManager, SubscriptionManager.INVALID_SUBSCRIPTION_ID, mSubInfo1,
+                mNetworkInfo1);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
     public void isDialogNeeded_disableSingleSim_returnFalse() {
-        doReturn(true).when(mTelephonyManager).isDataEnabled();
-        doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
+        mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, DISPLAY_NAME_1, false, true, true, true,
+                true);
+        mNetworkInfo1 = setupMobileNetworkInfoEntity(String.valueOf(SUB_ID), true);
         doReturn(1).when(mTelephonyManager).getActiveModemCount();
 
         assertThat(mController.isDialogNeeded()).isFalse();
@@ -106,12 +151,15 @@ public class MobileDataPreferenceControllerTest {
 
     @Test
     public void isDialogNeeded_enableNonDefaultSimInMultiSimMode_returnTrue() {
-        doReturn(false).when(mTelephonyManager).isDataEnabled();
-        doReturn(mSubscriptionInfo).when(mSubscriptionManager)
-                .getActiveSubscriptionInfo(SUB_ID);
+        mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, DISPLAY_NAME_1, false, true, true, true,
+                false);
+        mNetworkInfo1 = setupMobileNetworkInfoEntity(String.valueOf(SUB_ID), false);
+        doReturn(1).when(mTelephonyManager).getActiveModemCount();
         // Ideally, it would be better if we could set the default data subscription to
         // SUB_ID_OTHER, and set that as an active subscription id.
-        when(mSubscriptionManager.isActiveSubscriptionId(anyInt())).thenReturn(true);
+        mSubInfo2 = setupSubscriptionInfoEntity(SUB_ID_2, DISPLAY_NAME_2, false, true, true, true,
+                true);
+        mNetworkInfo1 = setupMobileNetworkInfoEntity(String.valueOf(SUB_ID), true);
         doReturn(2).when(mTelephonyManager).getActiveModemCount();
 
         assertThat(mController.isDialogNeeded()).isTrue();
@@ -132,8 +180,11 @@ public class MobileDataPreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_singleSim_On_shouldEnableData() {
-        doReturn(true).when(mTelephonyManager).isDataEnabled();
-        doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
+        mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, DISPLAY_NAME_1, true, true, true, true,
+                true);
+        mNetworkInfo1 = setupMobileNetworkInfoEntity(String.valueOf(SUB_ID), true);
+        mController.setSubscriptionInfoEntity(mSubInfo1);
+        mController.setMobileNetworkInfoEntity(mNetworkInfo1);
         doReturn(1).when(mTelephonyManager).getActiveModemCount();
 
         mController.onPreferenceChange(mPreference, true);
@@ -143,8 +194,11 @@ public class MobileDataPreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_multiSim_On_shouldEnableData() {
-        doReturn(true).when(mTelephonyManager).isDataEnabled();
-        doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
+        mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, DISPLAY_NAME_1, true, true, true, true,
+                true);
+        mNetworkInfo1 = setupMobileNetworkInfoEntity(String.valueOf(SUB_ID), true);
+        mController.setSubscriptionInfoEntity(mSubInfo1);
+        mController.setMobileNetworkInfoEntity(mNetworkInfo1);
         doReturn(2).when(mTelephonyManager).getActiveModemCount();
 
         mController.onPreferenceChange(mPreference, true);
@@ -154,18 +208,20 @@ public class MobileDataPreferenceControllerTest {
 
     @Test
     public void isChecked_returnUserDataEnabled() {
-        mController.init(mFragmentManager, SUB_ID);
+        mNetworkInfo1 = setupMobileNetworkInfoEntity(String.valueOf(SUB_ID), false);
+        mController.init(mFragmentManager, SUB_ID, mSubInfo1, mNetworkInfo1);
         assertThat(mController.isChecked()).isFalse();
 
-        doReturn(true).when(mTelephonyManager).isDataEnabled();
+        mNetworkInfo1 = setupMobileNetworkInfoEntity(String.valueOf(SUB_ID), true);
+        mController.setMobileNetworkInfoEntity(mNetworkInfo1);
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
     public void updateState_opportunistic_disabled() {
-        doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
-        mController.init(mFragmentManager, SUB_ID);
-        doReturn(true).when(mSubscriptionInfo).isOpportunistic();
+        mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, DISPLAY_NAME_1, true, true, true, true,
+                true);
+        mController.init(mFragmentManager, SUB_ID, mSubInfo1, mNetworkInfo1);
         mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isFalse();
@@ -176,9 +232,9 @@ public class MobileDataPreferenceControllerTest {
 
     @Test
     public void updateState_notOpportunistic_enabled() {
-        doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
-        mController.init(mFragmentManager, SUB_ID);
-        doReturn(false).when(mSubscriptionInfo).isOpportunistic();
+        mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, DISPLAY_NAME_1, false, true, true, true,
+                true);
+        mController.init(mFragmentManager, SUB_ID, mSubInfo1, mNetworkInfo1);
         mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isTrue();

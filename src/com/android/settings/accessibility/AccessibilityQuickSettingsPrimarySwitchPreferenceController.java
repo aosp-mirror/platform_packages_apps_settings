@@ -28,12 +28,13 @@ import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
+import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
 /** PrimarySwitchPreferenceController that shows quick settings tooltip on first use. */
 public abstract class AccessibilityQuickSettingsPrimarySwitchPreferenceController
         extends TogglePreferenceController
-        implements LifecycleObserver, OnCreate, OnSaveInstanceState {
+        implements LifecycleObserver, OnCreate, OnDestroy, OnSaveInstanceState {
     private static final String KEY_SAVED_QS_TOOLTIP_RESHOW = "qs_tooltip_reshow";
     private final Handler mHandler;
     private PrimarySwitchPreference mPreference;
@@ -63,9 +64,15 @@ public abstract class AccessibilityQuickSettingsPrimarySwitchPreferenceControlle
     }
 
     @Override
+    public void onDestroy() {
+        mHandler.removeCallbacksAndMessages(null);
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
-        if (mTooltipWindow != null) {
-            outState.putBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW, mTooltipWindow.isShowing());
+        final boolean isTooltipWindowShowing = mTooltipWindow != null && mTooltipWindow.isShowing();
+        if (mNeedsQSTooltipReshow || isTooltipWindowShowing) {
+            outState.putBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW, /* value= */ true);
         }
     }
 
@@ -102,6 +109,11 @@ public abstract class AccessibilityQuickSettingsPrimarySwitchPreferenceControlle
     }
 
     private void showQuickSettingsTooltipIfNeeded() {
+        if (mPreference == null) {
+            // Returns if no preference found by slice highlight menu.
+            return;
+        }
+
         final ComponentName tileComponentName = getTileComponentName();
         if (tileComponentName == null) {
             // Returns if no tile service assigned.

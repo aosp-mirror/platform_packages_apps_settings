@@ -91,6 +91,21 @@ public class FingerprintUpdater {
                 BiometricsSafetySource.onBiometricsChanged(mContext); // biometrics data changed
             }
         }
+
+        @Override
+        public void onAcquired(boolean isAcquiredGood) {
+            mCallback.onAcquired(isAcquiredGood);
+        }
+
+        @Override
+        public void onPointerDown(int sensorId) {
+            mCallback.onPointerDown(sensorId);
+        }
+
+        @Override
+        public void onPointerUp(int sensorId) {
+            mCallback.onPointerUp(sensorId);
+        }
     }
 
     /**

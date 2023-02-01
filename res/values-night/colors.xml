@@ -20,13 +20,9 @@
     <color name="switchbar_switch_thumb_tint">@android:color/black</color>
     <color name="homepage_accessibility_background">#783BE5</color>
     <color name="homepage_support_background">#3F5FBD</color>
-    <color name="homepage_card_dismissal_background">@*android:color/material_grey_900</color>
     <color name="contextual_card_background">@*android:color/material_grey_900</color>
     <color name="search_bar_background">?androidprv:attr/colorSurfaceVariant</color>
-    <color name="notification_importance_selection_bg">@*android:color/material_grey_800</color>
-    <color name="notification_importance_button_selected">#AECBFA</color> <!-- material blue 200 -->
     <color name="notification_importance_button_unselected">#5F6368</color>
-    <color name="notification_history_background">#202124</color>
 
     <!-- Palette list preference colors. -->
     <color name="palette_list_gradient_background">@android:color/black</color>
@@ -40,7 +36,6 @@
     <color name="palette_list_color_gray">@color/palette_list_dark_mode_color_gray</color>
     <color name="gestures_setting_background_color">@android:color/black</color>
 
-    <color name="color_surface_header">@*android:color/surface_header_dark</color>
     <!-- Dialog error color. -->
     <color name="settings_dialog_colorError">#f28b82</color> <!-- Red 300 -->
 
@@ -50,7 +45,27 @@
     <color name="biometric_enroll_intro_color_outline">#5e5e5e</color>
     <color name="fingerprint_enrollment_finish_color_outline">#669df6</color>
 
+    <!-- Side fingerprint sensor enrollment animation colors -->
+    <color name="sfps_enrollment_fp_captured_color">#d2e3fc</color> <!-- Blue 100 -->
+    <color name="sfps_enrollment_fp_error_color">#fad2cf</color> <!-- Red 100 -->
+    <color name="sfps_enrollment_progress_bar_bg_color">#3C4043</color> <!-- Gray 800 -->
+    <color name="sfps_enrollment_progress_bar_fill_color">#669df6</color> <!-- Blue 400 -->
+    <color name="sfps_enrollment_progress_bar_error_color">#ee675c</color> <!-- Red 400 -->
+
     <!-- Material inverse ripple color, useful for inverted backgrounds. -->
     <color name="ripple_material_inverse">@*android:color/ripple_material_light</color>
+
+    <!-- Icon tint color for battery usage system icon -->
+    <color name="battery_usage_system_icon_color">@android:color/white</color>
+
+
+    <!-- UDFPS colors -->
+    <color name="udfps_enroll_icon">#7DA7F1</color>
+    <color name="udfps_moving_target_fill">#475670</color>
+    <!-- 50% of udfps_moving_target_fill-->
+    <color name="udfps_moving_target_fill_error">#80475670</color>
+    <color name="udfps_enroll_progress">#7DA7F1</color>
+    <color name="udfps_enroll_progress_help">#607DA7F1</color>
+    <color name="udfps_enroll_progress_help_with_talkback">#FFEE675C</color>
 </resources>
 

@@ -34,15 +34,56 @@ import android.view.ViewGroup;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SettingsMainSwitchPreference;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /** Settings page for color inversion. */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePreferenceFragment {
 
+    private static final String TAG = "ToggleColorInversionPreferenceFragment";
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
+
+    @Override
+    protected void registerKeysToObserverCallback(
+            AccessibilitySettingsContentObserver contentObserver) {
+        super.registerKeysToObserverCallback(contentObserver);
+
+        final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
+        enableServiceFeatureKeys.add(ENABLED);
+        contentObserver.registerKeysToObserverCallback(enableServiceFeatureKeys,
+                key -> updateSwitchBarToggleSwitch());
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        mComponentName = COLOR_INVERSION_COMPONENT_NAME;
+        mPackageName = getText(R.string.accessibility_display_inversion_preference_title);
+        mHtmlDescription = getText(R.string.accessibility_display_inversion_preference_subtitle);
+        mTopIntroTitle = getText(R.string.accessibility_display_inversion_preference_intro_text);
+        mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(getPrefContext().getPackageName())
+                .appendPath(String.valueOf(R.raw.accessibility_color_inversion_banner))
+                .build();
+        final View view = super.onCreateView(inflater, container, savedInstanceState);
+        updateFooterPreference();
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        final View rootView = getActivity().getWindow().peekDecorView();
+        if (rootView != null) {
+            rootView.setAccessibilityPaneTitle(getString(
+                    R.string.accessibility_display_inversion_preference_title));
+        }
+    }
 
     @Override
     public int getMetricsCategory() {
@@ -69,6 +110,11 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     }
 
     @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
     protected void onRemoveSwitchPreferenceToggleSwitch() {
         super.onRemoveSwitchPreferenceToggleSwitch();
         mToggleServiceSwitchPreference.setOnPreferenceClickListener(null);
@@ -82,33 +128,6 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     @Override
     protected CharSequence getShortcutTitle() {
         return getText(R.string.accessibility_display_inversion_shortcut_title);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        mComponentName = COLOR_INVERSION_COMPONENT_NAME;
-        mPackageName = getText(R.string.accessibility_display_inversion_preference_title);
-        mHtmlDescription = getText(R.string.accessibility_display_inversion_preference_subtitle);
-        mTopIntroTitle = getText(R.string.accessibility_display_inversion_preference_intro_text);
-        mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
-                .authority(getPrefContext().getPackageName())
-                .appendPath(String.valueOf(R.raw.accessibility_color_inversion_banner))
-                .build();
-        final View view = super.onCreateView(inflater, container, savedInstanceState);
-        updateFooterPreference();
-        return view;
-    }
-
-    @Override
-    protected void registerKeysToObserverCallback(
-            AccessibilitySettingsContentObserver contentObserver) {
-        super.registerKeysToObserverCallback(contentObserver);
-
-        final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
-        enableServiceFeatureKeys.add(ENABLED);
-        contentObserver.registerKeysToObserverCallback(enableServiceFeatureKeys,
-                key -> updateSwitchBarToggleSwitch());
     }
 
     private void updateFooterPreference() {
@@ -163,4 +182,7 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
         }
         mToggleServiceSwitchPreference.setChecked(checked);
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.accessibility_color_inversion_settings);
 }

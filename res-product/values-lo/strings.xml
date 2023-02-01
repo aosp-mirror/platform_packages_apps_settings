@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="bluetooth_disconnect_all_profiles" product="default" msgid="5845431621920557637">"ໂທລະສັບຂອງທ່ານຈະຕັດການເຊື່ອມຕໍ່ຈາກ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_disconnect_all_profiles" product="tablet" msgid="4247757468465328774">"ແທັບເລັດຂອງທ່ານຈະຕັດການເຊື່ອມຕໍ່ຈາກ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_disconnect_all_profiles" product="device" msgid="1632553419566947403">"ອຸປະກອນຂອງທ່ານຈະຕັດການເຊື່ອມຕໍ່ຈາກ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_footer_mac_message" product="default" msgid="1640339352473051542">"ທີ່ຢູ່ Bluetooth ຂອງໂທລະສັບ: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_footer_mac_message" product="tablet" msgid="7338607486971997745">"ທີ່ຢູ່ Bluetooth ຂອງແທັບເລັດ: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_footer_mac_message" product="device" msgid="8944917742814573320">"ທີ່ຢູ່ Bluetooth ຂອງອຸປະກອນ: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="7430581669309228387">"<xliff:g id="APP_NAME">%1$s</xliff:g> ຕ້ອງການເຮັດໃຫ້ແທັບເລັດຂອງທ່ານເປີດໃຫ້ອຸປະກອນ Bluetooth ອື່ນເຫັນໄດ້ເປັນເວລາ <xliff:g id="TIMEOUT">%2$d</xliff:g> ວິນາທີ."</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="3947027393224406367">"<xliff:g id="APP_NAME">%1$s</xliff:g> ຕ້ອງການເຮັດໃຫ້ໂທລະສັບຂອງທ່ານເປີດໃຫ້ອຸປະກອນ Bluetooth ອື່ນເຫັນໄດ້ເປັນເວລາ <xliff:g id="TIMEOUT">%2$d</xliff:g> ວິນາທີ."</string>
+    <string name="bluetooth_ask_discovery_no_name" product="tablet" msgid="440976482246291783">"ມີແອັບຕ້ອງການເຮັດໃຫ້ແທັບເລັດຂອງທ່ານເປີດໃຫ້ອຸປະກອນ Bluetooth ອື່ນເຫັນໄດ້ເປັນເວລາ <xliff:g id="TIMEOUT">%1$d</xliff:g> ວິນາທີ."</string>
+    <string name="bluetooth_ask_discovery_no_name" product="default" msgid="5164413774312648842">"ມີແອັບຕ້ອງການເຮັດໃຫ້ໂທລະສັບຂອງທ່ານເປີດໃຫ້ອຸປະກອນ Bluetooth ອື່ນເຫັນໄດ້ເປັນເວລາ <xliff:g id="TIMEOUT">%1$d</xliff:g> ວິນາທີ."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="750347558570909906">"<xliff:g id="APP_NAME">%1$s</xliff:g> ຕ້ອງການເຮັດໃຫ້ແທັບເລັດຂອງທ່ານເບິ່ງເຫັນໄດ້ໂດຍອຸປະກອນ Bluetooth ອື່ນ. ທ່ານສາມາດປ່ຽນໄດ້ໃນພາຍຫຼັງໃນການຕັ້ງຄ່າ Bluetooth."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="5844129004156080891">"<xliff:g id="APP_NAME">%1$s</xliff:g> ຕ້ອງການເຮັດໃຫ້ໂທລະສັບຂອງທ່ານເບິ່ງເຫັນໄດ້ໂດຍອຸປະກອນ Bluetooth ອື່ນ. ທ່ານສາມາດປ່ຽນໄດ້ໃນພາຍຫຼັງໃນການຕັ້ງຄ່າ Bluetooth."</string>
+    <string name="bluetooth_ask_lasting_discovery_no_name" product="tablet" msgid="1062185767225450964">"ມີແອັບຕ້ອງການເຮັດໃຫ້ແທັບເລັດຂອງທ່ານສາມາດເບິ່ງເຫັນໄດ້ໂດຍອຸປະກອນ Bluetooth ອື່ນ. ທ່ານສາມາດປ່ຽນແປງໄດ້ພາຍຫຼັງໃນການຕັ້ງຄ່າ Bluetooth."</string>
+    <string name="bluetooth_ask_lasting_discovery_no_name" product="default" msgid="7909547303183236140">"ມີແອັບຕ້ອງການເຮັດໃຫ້ໂທລະສັບຂອງທ່ານສາມາດເບິ່ງເຫັນໄດ້ໂດຍອຸປະກອນ Bluetooth ອື່ນ. ທ່ານສາມາດປ່ຽນແປງໄດ້ພາຍຫຼັງໃນການຕັ້ງຄ່າ Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="6187874232925632790">"<xliff:g id="APP_NAME">%1$s</xliff:g> ຕ້ອງການເປີດໃຊ້ ແລະ ເຮັດໃຫ້ແທັບເລັດຂອງທ່ານເປີດໃຫ້ອຸປະກອນ Bluetooth ອື່ນເຫັນໄດ້ເປັນເວລາ <xliff:g id="TIMEOUT">%2$d</xliff:g> ວິນາທີ."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="1018495685727482700">"<xliff:g id="APP_NAME">%1$s</xliff:g> ຕ້ອງການເປີດໃຊ້ ແລະ ເຮັດໃຫ້ໂທລະສັບຂອງທ່ານເປີດໃຫ້ອຸປະກອນ Bluetooth ອື່ນເຫັນໄດ້ເປັນເວລາ <xliff:g id="TIMEOUT">%2$d</xliff:g> ວິນາທີ."</string>
+    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="tablet" msgid="3469927640700478737">"ມີແອັບຕ້ອງການເປີດໃຊ້ Bluetooth ແລະ ເຮັດໃຫ້ແທັບເລັດຂອງທ່ານສາມາດຊອກເຫັນໄດ້ໂດຍອຸປະກອນອື່ນເປັນເວລາ <xliff:g id="TIMEOUT">%1$d</xliff:g> ວິນາທີ."</string>
+    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="default" msgid="4847493437698663706">"ມີແອັບຕ້ອງການເປີດໃຊ້ Bluetooth ແລະເຮັດໃຫ້ໂທລະສັບຂອງທ່ານ ສາມາດຊອກເຫັນໄດ້ຈາກອຸປະກອນອື່ນເປັນເວລາ <xliff:g id="TIMEOUT">%1$d</xliff:g> ວິນາທີ."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="487436507630570730">"<xliff:g id="APP_NAME">%1$s</xliff:g> ຕ້ອງການເປີດໃຊ້ Bluetooth ແລະ ເຮັດໃຫ້ແທັບເລັດຂອງທ່ານສາມາດຊອກເຫັນໄດ້ຈາກອຸປະກອນອື່ນ. ທ່ານສາມາດປ່ຽນໄດ້ໃນພາຍຫຼັງໃນການຕັ້ງຄ່າ Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="5169934906530139494">"<xliff:g id="APP_NAME">%1$s</xliff:g> ຕ້ອງການເປີດໃຊ້ Bluetooth ແລະ ເຮັດໃຫ້ໂທລະສັບຂອງທ່ານສາມາດຊອກເຫັນໄດ້ຈາກອຸປະກອນອື່ນ. ທ່ານສາມາດປ່ຽນໄດ້ໃນພາຍຫຼັງໃນການຕັ້ງຄ່າ Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="tablet" msgid="505214056751470551">"ແອັບຕ້ອງການເປີດໃຊ້ Bluetooth ແລະ ເຮັດໃຫ້ແທັບເລັດຂອງທ່ານສາມາດຊອກເຫັນໄດ້ຈາກອຸປະກອນອື່ນ. ທ່ານສາມາດປ່ຽນໄດ້ໃນພາຍຫຼັງໃນການຕັ້ງຄ່າ Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="default" msgid="6187216564831513193">"ແອັບຕ້ອງການເປີດໃຊ້ Bluetooth ແລະ ເຮັດໃຫ້ໂທລະສັບຂອງທ່ານສາມາດຊອກເຫັນໄດ້ຈາກອຸປະກອນອື່ນ. ທ່ານສາມາດປ່ຽນໄດ້ໃນພາຍຫຼັງໃນການຕັ້ງຄ່າ Bluetooth."</string>
+    <string name="encryption_and_credential_settings_summary" product="default" msgid="3741475436042800617">"ເຂົ້າລະຫັດໂທລະສັບແລ້ວ"</string>
+    <string name="not_encrypted_summary" product="default" msgid="330652312169527734">"ບໍ່ໄດ້ເຂົ້າລະຫັດໂທລະສັບ"</string>
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="2220021007677215054">"ເຂົ້າລະຫັດອຸປະກອນແລ້ວ"</string>
+    <string name="not_encrypted_summary" product="tablet" msgid="452970124282458862">"ບໍ່ໄດ້ເຂົ້າລະຫັດອຸປະກອນ"</string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="default" msgid="5795890116575517967"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet" msgid="5795890116575517967"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" product="device" msgid="5795890116575517967"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default" msgid="2221590003018953090"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet" msgid="2221590003018953090"></string>
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device" msgid="2221590003018953090"></string>
+    <string name="security_settings_face_enroll_introduction_message" product="default" msgid="847716059867943459">"ໃຊ້ໃບໜ້າຂອງທ່ານເພື່ອປົດລັອກໂທລະສັບ, ອະນຸມັດການສັ່ງຊື້ ຫຼື ເຂົ້າສູ່ລະບົບຫາແອັບຕ່າງໆ."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="3976493376026067375">"ໃຊ້ໃບໜ້າຂອງທ່ານເພື່ອປົດລັອກແທັບເລັດ, ອະນຸຍາດການສັ່ງຊື້ ຫຼື ເຂົ້າສູ່ລະບົບຫາແອັບຕ່າງໆ."</string>
+    <string name="security_settings_face_enroll_introduction_message" product="device" msgid="6432265830098806034">"ໃຊ້ໃບໜ້າຂອງທ່ານເພື່ອປົດລັອກອຸປະກອນ, ອະນຸຍາດການສັ່ງຊື້ ຫຼື ເຂົ້າສູ່ລະບົບຫາແອັບຕ່າງໆ."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="9086377203303858619">"ອະນຸຍາດໃຫ້ເດັກນ້ອຍຂອງທ່ານໃຊ້ໜ້າຂອງເຂົາເຈົ້າເພື່ອປົດລັອກໂທລະສັບເຂົາເຈົ້າໄດ້"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="4560949471246282574">"ອະນຸຍາດໃຫ້ເດັກນ້ອຍຂອງທ່ານໃຊ້ໜ້າຂອງເຂົາເຈົ້າເພື່ອປົດລັອກແທັບເລັດເຂົາເຈົ້າໄດ້"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="1156063265854416046">"ອະນຸຍາດໃຫ້ເດັກນ້ອຍຂອງທ່ານໃຊ້ໜ້າຂອງເຂົາເຈົ້າເພື່ອປົດລັອກອຸປະກອນເຂົາເຈົ້າໄດ້"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="3698558920963989416">"ການໃຊ້ໜ້າຂອງລູກທ່ານເພື່ອປົດລັອກໂທລະສັບຂອງເຂົາເຈົ້າອາດປອດໄພໜ້ອຍກວ່າຮູບແບບ ຫຼື PIN ທີ່ຍາກ."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="2689983368730833505">"ການໃຊ້ໜ້າຂອງລູກທ່ານເພື່ອປົດລັອກແທັບເລັດຂອງເຂົາເຈົ້າອາດປອດໄພໜ້ອຍກວ່າຮູບແບບ ຫຼື PIN ທີ່ຍາກ."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="5768077532130409820">"ການໃຊ້ໜ້າຂອງລູກທ່ານເພື່ອປົດລັອກອຸປະກອນຂອງເຂົາເຈົ້າອາດປອດໄພໜ້ອຍກວ່າຮູບແບບ ຫຼື PIN ທີ່ຍາກ."</string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="default" msgid="6532489273492650716"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet" msgid="6532489273492650716"></string>
+    <string name="security_settings_face_enroll_introduction_info_looking" product="device" msgid="6532489273492650716"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default" msgid="5741230674977518758"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet" msgid="5741230674977518758"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device" msgid="5741230674977518758"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default" msgid="9108545933856688526"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet" msgid="9108545933856688526"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device" msgid="9108545933856688526"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default" msgid="8122442762352835480"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet" msgid="8122442762352835480"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device" msgid="8122442762352835480"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="default" msgid="762967108645858948"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet" msgid="762967108645858948"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="device" msgid="762967108645858948"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default" msgid="4344820870381904205"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet" msgid="4344820870381904205"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device" msgid="4344820870381904205"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="default" msgid="8933211744361765188"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="tablet" msgid="8933211744361765188"></string>
+    <string name="security_settings_face_enroll_introduction_how_message" product="device" msgid="8933211744361765188"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default" msgid="5091057232082857733"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet" msgid="5091057232082857733"></string>
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device" msgid="5091057232082857733"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="default" msgid="5648868145191337026"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="tablet" msgid="5648868145191337026"></string>
+    <string name="security_settings_face_enroll_introduction_control_message" product="device" msgid="5648868145191337026"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="6983939010814873996"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="6983939010814873996"></string>
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="6983939010814873996"></string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="576075217523281005">"ໃຊ້ລາຍນິ້ວມືຂອງທ່ານເພື່ອປົດລັອກແທັບເລັດທ່ານ ຫຼື ຢັ້ງຢືນວ່າແມ່ນທ່ານແທ້, ເຊັ່ນ: ໃນເວລາທີ່ທ່ານເຂົ້າສູ່ລະບົບຫາແອັບ ຫຼື ອະນຸມັດການສັ່ງຊື້ໃດໜຶ່ງ."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="2613589252279036009">"ໃຊ້ລາຍນິ້ວມືຂອງທ່ານເພື່ອປົດລັອກອຸປະກອນທ່ານ ຫຼື ຢັ້ງຢືນວ່າແມ່ນທ່ານ, ເຊັ່ນ: ໃນເວລາທີ່ທ່ານເຂົ້າສູ່ລະບົບຫາແອັບ ຫຼື ອະນຸມັດການສັ່ງຊື້ໃດໜຶ່ງ."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="7582164897191194462">"ໃຊ້ລາຍນິ້ວມືຂອງທ່ານເພື່ອປົດລັອກໂທລະສັບທ່ານ ຫຼື ຢັ້ງຢືນວ່າແມ່ນທ່ານແທ້, ເຊັ່ນ: ໃນເວລາທີ່ທ່ານເຂົ້າສູ່ລະບົບຫາແອັບ ຫຼື ອະນຸມັດການສັ່ງຊື້ໃດໜຶ່ງ."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="5101253231118659496">"ອະນຸຍາດໃຫ້ລູກຂອງທ່ານໃຊ້ລາຍນິ້ວມືຂອງເຂົາເຈົ້າປົດລັອກໂທລະສັບ ຫຼື ຢັ້ງຢືນວ່າແມ່ນເຂົາເຈົ້າໄດ້. ນີ້ຈະເກີດຂຶ້ນເມື່ອເຂົາເຈົ້າເຂົ້າສູ່ລະບົບຫາແອັບ, ອະນຸມັດການສັ່ງຊື້ ແລະ ອື່ນໆ."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="3063978167545799342">"ອະນຸຍາດໃຫ້ລູກຂອງທ່ານໃຊ້ລາຍນິ້ວມືຂອງເຂົາເຈົ້າປົດລັອກແທັບເລັດ ຫຼື ຢັ້ງຢືນວ່າແມ່ນເຂົາເຈົ້າໄດ້. ສິ່ງນີ້ຈະເກີດຂຶ້ນເມື່ອເຂົາເຈົ້າເຂົ້າສູ່ລະບົບຫາແອັບ, ອະນຸມັດການສັ່ງຊື້ ແລະ ອື່ນໆ."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="4399560001732497632">"ອະນຸຍາດໃຫ້ລູກຂອງທ່ານໃຊ້ລາຍນິ້ວມືຂອງເຂົາເຈົ້າປົດລັອກອຸປະກອນ ຫຼື ຢັ້ງຢືນວ່າແມ່ນເຂົາເຈົ້າໄດ້. ສິ່ງນີ້ຈະເກີດຂຶ້ນເມື່ອເຂົາເຈົ້າເຂົ້າສູ່ລະບົບຫາແອັບ, ອະນຸມັດການສັ່ງຊື້ ແລະ ອື່ນໆ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default" msgid="8488497844109768268">"ການໃຊ້ລາຍນິ້ວມືຂອງທ່ານເພື່ອປົດລັອກໂທລະສັບທ່ານອາດມີຄວາມປອດໄພໜ້ອຍກວ່າຮູບແບບ ຫຼື PIN ທີ່ຍາກ"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="5688664190282817312">"ການໃຊ້ລາຍນິ້ວມືຂອງທ່ານເພື່ອປົດລັອກແທັບເລັດອາດມີຄວາມປອດໄພໜ້ອຍກວ່າຮູບແບບ ຫຼື PIN ທີ່ເດົາຍາກ"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="2814616139536479018">"ການໃຊ້ລາຍນິ້ວມືຂອງທ່ານເພື່ອປົດລັອກອຸປະກອນອາດມີຄວາມປອດໄພໜ້ອຍກວ່າຮູບແບບ ຫຼື PIN ທີ່ເດົາຍາກ"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="3334689370761542152">"ເມື່ອທ່ານໃຊ້ Pixel Imprint, ຮູບຈະຖືກໃຊ້ເພື່ອອັບເດດຮູບແບບລາຍນິ້ວມືຂອງທ່ານ. ຮູບທີ່ຖືກໃຊ້ເພື່ອສ້າງຮູບແບບໃບໜ້າຈະບໍ່ຖືກຈັດເກັບໄວ້, ແຕ່ຮູບແບບລາຍນິ້ວມືແມ່ນຖືກຈັດເກັບໄວ້ຢ່າງປອດໄພຢູ່ໂທລະສັບຂອງທ່ານ ແລະ ຈະບໍ່ຖືກສົ່ງອອກຈາກໂທລະສັບເດັດຂາດ. ການປະມວນຜົນທັງໝົດຈະເກີດຂຶ້ນຢ່າງປອດໄພຢູ່ໂທລະສັບຂອງທ່ານ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="6142978289780449828">"ເມື່ອທ່ານໃຊ້ Pixel Imprint, ຮູບຈະຖືກໃຊ້ເພື່ອອັບເດດຮູບແບບລາຍນິ້ວມືຂອງທ່ານ. ລະບົບຈະບໍ່ຈັດເກັບຮູບທີ່ໃຊ້ສ້າງຮູບແບບລາຍນິ້ວມືຂອງທ່ານ, ແຕ່ຮູບແບບລາຍນິ້ວມືຈະຖືກຈັດເກັບໄວ້ຢ່າງປອດໄພຢູ່ແທັບເລັດຂອງທ່ານ ແລະ ຈະບໍ່ຖືກສົ່ງອອກຈາກແທັບເລັດເດັດຂາດ. ການປະມວນຜົນທັງໝົດຈະເກີດຂຶ້ນຢ່າງປອດໄພຢູ່ແທັບເລັດຂອງທ່ານ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device" msgid="9221017777932077429">"ເມື່ອທ່ານໃຊ້ Pixel Imprint, ຮູບຈະຖືກໃຊ້ເພື່ອອັບເດດຮູບແບບລາຍນິ້ວມືຂອງທ່ານ. ລະບົບຈະບໍ່ຈັດເກັບຮູບທີ່ໃຊ້ສ້າງຮູບແບບລາຍນິ້ວມືຂອງທ່ານ, ແຕ່ຮູບແບບລາຍນິ້ວມືຈະຖືກຈັດເກັບໄວ້ຢ່າງປອດໄພຢູ່ອຸປະກອນຂອງທ່ານ ແລະ ຈະບໍ່ຖືກສົ່ງອອກຈາກອຸປະກອນເດັດຂາດ. ການປະມວນຜົນທັງໝົດຈະເກີດຂຶ້ນຢ່າງປອດໄພຢູ່ອຸປະກອນຂອງທ່ານ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="6804981319922169283">"ເມື່ອເຂົາເຈົ້າໃຊ້ Pixel Imprint, ຮູບຈະຖືກໃຊ້ເພື່ອອັບເດດຮູບແບບລາຍນິ້ວມືຂອງເຂົາເຈົ້າ. ຮູບທີ່ຖືກໃຊ້ເພື່ອສ້າງຮູບແບບລາຍນິ້ວມືຂອງລູກທ່ານຈະບໍ່ຖືກຈັດເກັບໄວ້, ແຕ່ຮູບແບບລາຍນິ້ວມືແມ່ນຖືກຈັດເກັບໄວ້ຢ່າງປອດໄພຢູ່ໂທລະສັບ ແລະ ຈະບໍ່ຖືກສົ່ງອອກຈາກໂທລະສັບເດັດຂາດ. ການປະມວນຜົນທັງໝົດຈະເກີດຂຶ້ນຢ່າງປອດໄພຢູ່ໂທລະສັບ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="1426913673720862863">"ເມື່ອເຂົາເຈົ້າໃຊ້ Pixel Imprint, ຮູບຈະຖືກໃຊ້ເພື່ອອັບເດດຮູບແບບລາຍນິ້ວມືຂອງເຂົາເຈົ້າ. ລະບົບຈະບໍ່ຈັດເກັບຮູບທີ່ໃຊ້ສ້າງຮູບແບບລາຍນິ້ວມືຂອງລູກທ່ານ, ແຕ່ຮູບແບບລາຍນິ້ວມືຈະຖືກຈັດເກັບໄວ້ຢ່າງປອດໄພຢູ່ແທັບເລັດ ແລະ ຈະບໍ່ຖືກສົ່ງອອກຈາກແທັບເລັດເດັດຂາດ. ການປະມວນຜົນທັງໝົດຈະເກີດຂຶ້ນຢ່າງປອດໄພຢູ່ແທັບເລັດ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="2631789126811300879">"ເມື່ອເຂົາເຈົ້າໃຊ້ Pixel Imprint, ຮູບຈະຖືກໃຊ້ເພື່ອອັບເດດຮູບແບບລາຍນິ້ວມືຂອງເຂົາເຈົ້າ. ລະບົບຈະບໍ່ຈັດເກັບຮູບທີ່ໃຊ້ສ້າງຮູບແບບລາຍນິ້ວມືຂອງລູກທ່ານ, ແຕ່ຮູບແບບລາຍນິ້ວມືຈະຖືກຈັດເກັບໄວ້ຢ່າງປອດໄພຢູ່ອຸປະກອນ ແລະ ຈະບໍ່ຖືກສົ່ງອອກຈາກອຸປະກອນເດັດຂາດ. ການປະມວນຜົນທັງໝົດຈະເກີດຂຶ້ນຢ່າງປອດໄພຢູ່ອຸປະກອນ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="1354488801088258040">"ທ່ານສາມາດລຶບຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືຂອງທ່ານ ຫຼື ປິດການປົດລັອກດ້ວຍລາຍນິ້ວມືຕອນໃດກໍໄດ້ໃນການຕັ້ງຄ່າ. ຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືແມ່ນຖືກຈັດເກັບໄວ້ຢູ່ໂທລະສັບຈົນກວ່າທ່ານຈະລຶບພວກມັນອອກ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="8207309581266022275">"ທ່ານສາມາດລຶບຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືຂອງທ່ານ ຫຼື ປິດການປົດລັອກດ້ວຍລາຍນິ້ວມືຕອນໃດກໍໄດ້ໃນການຕັ້ງຄ່າ. ຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືແມ່ນຖືກຈັດເກັບໄວ້ຢູ່ແທັບເລັດຈົນກວ່າທ່ານຈະລຶບພວກມັນອອກ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="2498580070051496133">"ທ່ານສາມາດລຶບຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືຂອງທ່ານ ຫຼື ປິດການປົດລັອກດ້ວຍລາຍນິ້ວມືຕອນໃດກໍໄດ້ໃນການຕັ້ງຄ່າ. ຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືແມ່ນຖືກຈັດເກັບໄວ້ຢູ່ອຸປະກອນຈົນກວ່າທ່ານຈະລຶບພວກມັນອອກ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="5003753461032107715">"ທ່ານ ແລະ ລູກຂອງທ່ານສາມາດລຶບຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືຂອງເຂົາເຈົ້າອອກ ຫຼື ປິດການໃຊ້ການປົດລັອກດ້ວຍລາຍນິ້ວມືຕອນໃດກໍໄດ້ໃນການຕັ້ງຄ່າ. ຮູບລາຍນິ້ວມື ແລະ ຮູບແບບແມ່ນຖືກຈັດເກັບໄວ້ຢູ່ໂທລະສັບຈົນກວ່າພວກມັນຈະຖືກລຶບອອກ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8772005555323461143">"ທ່ານ ແລະ ລູກຂອງທ່ານສາມາດລຶບຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືຂອງເຂົາເຈົ້າອອກ ຫຼື ປິດການໃຊ້ການປົດລັອກດ້ວຍລາຍນິ້ວມືຕອນໃດກໍໄດ້ໃນການຕັ້ງຄ່າ. ຮູບລາຍນິ້ວມື ແລະ ຮູບແບບແມ່ນຖືກຈັດເກັບໄວ້ຢູ່ແທັບເລັດຈົນກວ່າພວກມັນຈະຖືກລຶບອອກ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7254955922685507093">"ທ່ານ ແລະ ລູກຂອງທ່ານສາມາດລຶບຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືຂອງເຂົາເຈົ້າອອກ ຫຼື ປິດການໃຊ້ການປົດລັອກດ້ວຍລາຍນິ້ວມືຕອນໃດກໍໄດ້ໃນການຕັ້ງຄ່າ. ຮູບລາຍນິ້ວມື ແລະ ຮູບແບບແມ່ນຖືກຈັດເກັບໄວ້ຢູ່ອຸປະກອນຈົນກວ່າພວກມັນຈະຖືກລຶບອອກ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="6272159089589340181">"ໂທລະສັບຂອງທ່ານສາມາດຖືກປົດລັອກໄດ້ເມື່ອທ່ານບໍ່ໄດ້ຕັ້ງໃຈ ເຊັ່ນ: ຫາກມີຄົນຖືມັນໄປໃສ່ນິ້ວມືຂອງທ່ານ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="2420109998272019149">"ແທັບເລັດຂອງທ່ານສາມາດຖືກປົດລັອກໄດ້ເມື່ອທ່ານບໍ່ໄດ້ຕັ້ງໃຈ, ເຊັ່ນ: ຫາກມີຄົນຖືມັນໄປໃສ່ນິ້ວມືຂອງທ່ານ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="5915844445830045866">"ອຸປະກອນຂອງທ່ານສາມາດຖືກປົດລັອກໄດ້ເມື່ອທ່ານບໍ່ໄດ້ຕັ້ງໃຈ, ເຊັ່ນ: ຫາກມີຄົນຖືມັນໄປໃສ່ນິ້ວມືຂອງທ່ານ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="6556725426776167791">"ໂທລະສັບຂອງລູກທ່ານສາມາດຖືກປົດລັອກໄດ້ໃນເວລາທີ່ເຂົາເຈົ້າບໍ່ໄດ້ຕັ້ງໃຈ ເຊັ່ນ: ຫາກມີຄົນຖືໂທລະສັບໄປໃສ່ນິ້ວມືຂອງເຂົາເຈົ້າ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="5156581794964551571">"ແທັບເລັດຂອງລູກທ່ານສາມາດຖືກປົດລັອກໄດ້ໃນເວລາທີ່ເຂົາເຈົ້າບໍ່ໄດ້ຕັ້ງໃຈ ເຊັ່ນ: ຫາກມີຄົນຖືແທັບເລັດໄປໃສ່ນິ້ວມືຂອງເຂົາເຈົ້າ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="8309101436391515400">"ອຸປະກອນຂອງລູກທ່ານສາມາດຖືກປົດລັອກໄດ້ໃນເວລາທີ່ເຂົາເຈົ້າບໍ່ໄດ້ຕັ້ງໃຈ ເຊັ່ນ: ຫາກມີຄົນຖືອຸປະກອນໄປໃສ່ນິ້ວມືຂອງເຂົາເຈົ້າ."</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="5074447304036758639">"ໃຊ້ລາຍນິ້ວມືຂອງທ່ານເພື່ອປົດລັອກແທັບເລັດຂອງທ່ານ ຫຼື ຢັ້ງຢືນວ່າແມ່ນທ່ານແທ້, ເຊັ່ນ: ເມື່ອທ່ານເຂົ້າສູ່ລະບົບຫາແອັບຕ່າງໆ"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="7398339851724524558">"ໃຊ້ລາຍນິ້ວມືຂອງທ່ານເພື່ອປົດລັອກອຸປະກອນຂອງທ່ານ ຫຼື ຢັ້ງຢືນວ່າແມ່ນທ່ານແທ້, ເຊັ່ນ: ເມື່ອທ່ານເຂົ້າສູ່ລະບົບຫາແອັບຕ່າງໆ"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="5376408603508393038">"ໃຊ້ລາຍນິ້ວມືຂອງທ່ານເພື່ອປົດລັອກໂທລະສັບຂອງທ່ານ ຫຼື ຢັ້ງຢືນວ່າແມ່ນທ່ານແທ້, ເຊັ່ນ: ເມື່ອທ່ານເຂົ້າສູ່ລະບົບຫາແອັບຕ່າງໆ"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="9034560319613439593">"ນຳແທັບເລັດກັບໄປໃຫ້ພໍ່ແມ່ຂອງທ່ານ"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="2149647165743006307">"ນຳອຸປະກອນກັບໄປໃຫ້ພໍ່ແມ່ຂອງທ່ານ"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="2060265104488529949">"ເອົາໂທລະສັບກັບໄປໃຫ້ພໍ່ແມ່ຂອງທ່ານ"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7526137517192538870">"ບໍ່ສາມາດເປີດຄຸນສົມບັດການປ້ອງກັນອຸປະກອນໄດ້. ທ່ານຈະບໍ່ສາມາດປ້ອງກັນບໍ່ໃຫ້ຄົນອື່ນໃຊ້ແທັບເລັດນີ້ໄດ້ຫາກມັນເສຍ, ຖືກລັກ ຫຼື ຖືກຣີເຊັດ."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="1350434793163709209">"ບໍ່ສາມາດເປີດຄຸນສົມບັດການປ້ອງກັນອຸປະກອນໄດ້. ທ່ານຈະບໍ່ສາມາດປ້ອງກັນບໍ່ໃຫ້ຄົນອື່ນໃຊ້ອຸປະກອນນີ້ໄດ້ຫາກມັນເສຍ, ຖືກລັກ ຫຼື ຖືກຣີເຊັດ."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="8367731653387033354">"ບໍ່ສາມາດເປີດຄຸນສົມບັດການປ້ອງກັນອຸປະກອນໄດ້. ທ່ານຈະບໍ່ສາມາດປ້ອງກັນບໍ່ໃຫ້ຄົນອື່ນໃຊ້ໂທລະສັບນີ້ໄດ້ຫາກມັນເສຍ, ຖືກລັກ ຫຼື ຖືກຣີເຊັດ."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="1957425614489669582">"ບໍ່ສາມາດເປີດຄຸນສົມບັດການປ້ອງກັນອຸປະກອນໄດ້. ທ່ານຈະບໍ່ສາມາດປ້ອງກັນບໍ່ໃຫ້ຄົນອື່ນໃຊ້ແທັບເລັດນີ້ໄດ້ຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="7427748422888413977">"ບໍ່ສາມາດເປີດຄຸນສົມບັດການປ້ອງກັນອຸປະກອນໄດ້. ທ່ານຈະບໍ່ສາມາດປ້ອງກັນບໍ່ໃຫ້ຄົນອື່ນໃຊ້ອຸປະກອນນີ້ໄດ້ຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="8970036878014302990">"ບໍ່ສາມາດເປີດຄຸນສົມບັດການປ້ອງກັນອຸປະກອນໄດ້. ທ່ານຈະບໍ່ສາມາດປ້ອງກັນບໍ່ໃຫ້ຄົນອື່ນໃຊ້ໂທລະສັບນີ້ໄດ້ຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (2006739081527422127) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (1209233633252372907) -->
+    <skip />
+    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (6862493139500275821) -->
+    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="2012126789397819713">"ຕອນນີ້ທ່ານສາມາດໃຊ້ລາຍນິ້ວມືຂອງທ່ານເພື່ອປົດລັອກແທັບເລັດຂອງທ່ານ ຫຼື ຢັ້ງຢືນວ່າແມ່ນທ່ານໄດ້ແລ້ວ, ເຊັ່ນ: ໃນເວລາທີ່ທ່ານເຂົ້າສູ່ລະບົບຫາແອັບ ຫຼື ອະນຸມັດການຊື້"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="7119860465479161782">"ຕອນນີ້ທ່ານສາມາດໃຊ້ລາຍນິ້ວມືຂອງທ່ານເພື່ອປົດລັອກອຸປະກອນຂອງທ່ານ ຫຼື ຢັ້ງຢືນວ່າແມ່ນທ່ານໄດ້ແລ້ວ, ເຊັ່ນ: ໃນເວລາທີ່ທ່ານເຂົ້າສູ່ລະບົບຫາແອັບ ຫຼື ອະນຸມັດການຊື້"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="8255422287180693200">"ຕອນນີ້ທ່ານສາມາດໃຊ້ລາຍນິ້ວມືຂອງທ່ານເພື່ອປົດລັອກໂທລະສັບຂອງທ່ານ ຫຼື ຢັ້ງຢືນວ່າແມ່ນທ່ານໄດ້ແລ້ວ, ເຊັ່ນ: ໃນເວລາທີ່ທ່ານເຂົ້າສູ່ລະບົບຫາແອັບ ຫຼື ອະນຸມັດການຊື້"</string>
+    <string name="lock_screen_pin_skip_message" product="tablet" msgid="2125894016330764666">"PIN ຈະປົກປ້ອງແທັບເລັດຫາກມັນເສຍ ຫຼື ຖືກລັກ"</string>
+    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="7022124791463099454">"ຮູບແບບຈະປົກປ້ອງແທັບເລັດຫາກມັນເສຍ ຫຼື ຖືກລັກ"</string>
+    <string name="lock_screen_password_skip_message" product="tablet" msgid="7117050321575989041">"ລະຫັດຜ່ານຈະປົກປ້ອງແທັບເລັດຫາກມັນເສຍ ຫຼື ຖືກລັກ"</string>
+    <string name="lock_screen_pin_skip_message" product="device" msgid="6028521833666812314">"PIN ຈະປົກປ້ອງອຸປະກອນຫາກມັນເສຍ ຫຼື ຖືກລັກ"</string>
+    <string name="lock_screen_pattern_skip_message" product="device" msgid="8959252397804630340">"ຮູບແບບຈະປົກປ້ອງອຸປະກອນຫາກມັນເສຍ ຫຼື ຖືກລັກ"</string>
+    <string name="lock_screen_password_skip_message" product="device" msgid="1659302203398339496">"ລະຫັດຜ່ານຈະປົກປ້ອງອຸປະກອນຫາກມັນເສຍ ຫຼື ຖືກລັກ"</string>
+    <string name="lock_screen_pin_skip_message" product="default" msgid="1488786078805713892">"PIN ຈະປົກປ້ອງໂທລະສັບຫາກມັນເສຍ ຫຼື ຖືກລັກ"</string>
+    <string name="lock_screen_pattern_skip_message" product="default" msgid="827145253475892869">"ຮູບແບບຈະປົກປ້ອງໂທລະສັບຫາກມັນເສຍ ຫຼື ຖືກລັກ"</string>
+    <string name="lock_screen_password_skip_message" product="default" msgid="8112387870039469467">"ລະຫັດຜ່ານຈະປົກປ້ອງໂທລະສັບຫາກມັນເຮັດເສຍ ຫຼື ຖືກລັກ"</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="2645508906847445498">"ຕ້ອງໃຊ້ PIN ເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍລາຍນິ້ວມື.\n\nPIN ຈະປົກປ້ອງແທັບເລັດຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="2792582623472935881">"ຕ້ອງໃຊ້ຮູບແບບເພື່ອຕັ້ງຄ່າປົດລັອກດ້ວຍລາຍນິ້ວມື.\n\nຮູບແບບຈະປົກປ້ອງແທັບເລັດຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="1541137095940752409">"ຕ້ອງໃຊ້ລະຫັດຜ່ານເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍລາຍນິ້ວມື.\n\nລະຫັດຜ່ານຈະປົກປ້ອງແທັບເລັດຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="7716542198483220546">"ຕ້ອງໃຊ້ PIN ເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍລາຍນິ້ວມື.\n\nPIN ຈະປົກປ້ອງອຸປະກອນຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="9028476635257602198">"ຕ້ອງໃຊ້ຮູບແບບເພື່ອຕັ້ງຄ່າປົດລັອກດ້ວຍລາຍນິ້ວມື.\n\nຮູບແບບຈະປົກປ້ອງອຸປະກອນຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4616434834130322527">"ຕ້ອງໃຊ້ລະຫັດຜ່ານເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍລາຍນິ້ວມື.\n\nລະຫັດຜ່ານຈະປົກປ້ອງອຸປະກອນຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3396830571282413409">"ຕ້ອງໃຊ້ PIN ເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍລາຍນິ້ວມື.\n\nPIN ຈະປົກປ້ອງໂທລະສັບຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="2952431330433118050">"ຕ້ອງໃຊ້ຮູບແບບເພື່ອຕັ້ງຄ່າປົດລັອກດ້ວຍລາຍນິ້ວມື.\n\nຮູບແບບຈະປົກປ້ອງໂທລະສັບຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="8499384469890032816">"ຕ້ອງໃຊ້ລະຫັດຜ່ານເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍລາຍນິ້ວມື.\n\nລະຫັດຜ່ານຈະປົກປ້ອງໂທລະສັບຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="657464034320090412">"ຕ້ອງໃຊ້ PIN ເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າ.\n\nPIN ຈະປົກປ້ອງແທັບເລັດຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1057921621902514520">"ຕ້ອງໃຊ້ຮູບແບບເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າ.\n\nຮູບແບບຈະປົກປ້ອງແທັບເລັດຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7178731554533608255">"ຕ້ອງໃຊ້ລະຫັດຜ່ານເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າ.\n\nລະຫັດຜ່ານຈະປົກປ້ອງແທັບເລັດຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_pin_skip_face_message" product="device" msgid="1932467886606343431">"ຕ້ອງໃຊ້ PIN ເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າ.\n\nPIN ຈະປົກປ້ອງອຸປະກອນຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="3670112640345602511">"ຕ້ອງໃຊ້ຮູບແບບເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າ.\n\nຮູບແບບຈະປົກປ້ອງອຸປະກອນຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_password_skip_face_message" product="device" msgid="256847653854178247">"ຕ້ອງໃຊ້ລະຫັດຜ່ານເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າ.\n\nລະຫັດຜ່ານຈະປົກປ້ອງອຸປະກອນຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_pin_skip_face_message" product="default" msgid="358903382559327157">"ຕ້ອງໃຊ້ PIN ເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າ.\n\nPIN ຈະປົກປ້ອງໂທລະສັບຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="6400426500859622964">"ຕ້ອງໃຊ້ຮູບແບບເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າ.\n\nຮູບແບບຈະປົກປ້ອງໂທລະສັບຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_password_skip_face_message" product="default" msgid="1555954661782997039">"ຕ້ອງໃຊ້ລະຫັດຜ່ານເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າ.\n\nລະຫັດຜ່ານຈະປົກປ້ອງໂທລະສັບຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3792419626110520922">"ຕ້ອງໃຊ້ PIN ເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າ ແລະ ການປົດລັອກດ້ວຍລາຍນິ້ວມື.\n\nPIN ຈະປົກປ້ອງແທັບເລັດຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="2937217199563914791">"ຕ້ອງໃຊ້ຮູບແບບເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າ ແລະ ການປົດລັອກດ້ວຍລາຍນິ້ວມື.\n\nຮູບແບບຈະປົກປ້ອງແທັບເລັດຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="1988360407507443804">"ຕ້ອງໃຊ້ລະຫັດຜ່ານເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າ ແລະ ການປົດລັອກດ້ວຍລາຍນິ້ວມື.\n\nລະຫັດຜ່ານຈະປົກປ້ອງແທັບເລັດຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="4423227124669516582">"ຕ້ອງໃຊ້ PIN ເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າ ແລະ ການປົດລັອກດ້ວຍລາຍນິ້ວມື.\n\nPIN ຈະປົກປ້ອງອຸປະກອນຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="6409777941433213751">"ຕ້ອງໃຊ້ຮູບແບບເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າ ແລະ ການປົດລັອກດ້ວຍລາຍນິ້ວມື.\n\nຮູບແບບຈະປົກປ້ອງອຸປະກອນຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="7939217127900065677">"ຕ້ອງໃຊ້ລະຫັດຜ່ານເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າ ແລະ ການປົດລັອກດ້ວຍລາຍນິ້ວມື.\n\nລະຫັດຜ່ານຈະປົກປ້ອງອຸປະກອນຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="2717938545326672010">"ຕ້ອງໃຊ້ PIN ເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າ ແລະ ການປົດລັອກດ້ວຍລາຍນິ້ວມື.\n\nPIN ຈະປົກປ້ອງໂທລະສັບຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="6067309080610183546">"ຕ້ອງໃຊ້ຮູບແບບເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າ ແລະ ການປົດລັອກດ້ວຍລາຍນິ້ວມື.\n\nຮູບແບບຈະປົກປ້ອງໂທລະສັບຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="4739690336878613804">"ຕ້ອງໃຊ້ລະຫັດຜ່ານເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າ ແລະ ການປົດລັອກດ້ວຍລາຍນິ້ວມື.\n\nລະຫັດຜ່ານຈະປົກປ້ອງໂທລະສັບຫາກມັນເສຍ ຫຼື ຖືກລັກ."</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8723083814238510088">"ນີ້ຈະລຶບຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືທີ່ເຊື່ອມໂຍງກັບ \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' ທີ່ຈັດເກັບໄວ້ຢູ່ໂທລະສັບຂອງທ່ານອອກ"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="527375244730792698">"ນີ້ຈະລຶບຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືທີ່ເຊື່ອມໂຍງກັບ \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' ທີ່ຈັດເກັບໄວ້ຢູ່ແທັບເລັດຂອງທ່ານອອກ"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4549780655045100171">"ນີ້ຈະລຶບຮູບ ແລະ ຮູບແບບລາຍນິ້ວມືທີ່ເຊື່ອມໂຍງກັບ \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' ທີ່ຈັດເກັບໄວ້ຢູ່ອຸປະກອນຂອງທ່ານອອກ"</string>
+    <string name="fingerprint_last_delete_message" product="default" msgid="3187410175262625294">"ທ່ານຈະບໍ່ສາມາດໃຊ້ລາຍນິ້ວມືຂອງທ່ານເພື່ອປົດລັອກໂທລະສັບຂອງທ່ານ ຫຼື ຢັ້ງຢືນວ່າແມ່ນທ່ານໃນແອັບໄດ້."</string>
+    <string name="fingerprint_last_delete_message" product="tablet" msgid="8618307419148004587">"ທ່ານຈະບໍ່ສາມາດໃຊ້ລາຍນິ້ວມືຂອງທ່ານເພື່ອປົດລັອກແທັບເລັດຂອງທ່ານ ຫຼື ຢັ້ງຢືນວ່າແມ່ນທ່ານໃນແອັບໄດ້."</string>
+    <string name="fingerprint_last_delete_message" product="device" msgid="3910012280858587242">"ທ່ານຈະບໍ່ສາມາດໃຊ້ລາຍນິ້ວມືຂອງທ່ານເພື່ອປົດລັອກອຸປະກອນຂອງທ່ານ ຫຼື ຢັ້ງຢືນວ່າແມ່ນທ່ານໃນແອັບໄດ້."</string>
+    <string name="fingerprint_unlock_title" product="default" msgid="3224008661274975980">"ທ່ານສາມາດປົດລັອກໂທລະສັບຂອງທ່ານໂດຍໃຊ້ລາຍນິ້ວມືຂອງທ່ານໄດ້. ເພື່ອຄວາມປອດໄພ, ຕົວເລືອກນີ້ຕ້ອງໃຊ້ການລັອກໜ້າຈໍສຳຮອງ."</string>
+    <string name="fingerprint_unlock_title" product="tablet" msgid="6920040586231644124">"ທ່ານສາມາດປົດລັອກແທັບເລັດຂອງທ່ານໂດຍໃຊ້ລາຍນິ້ວມືຂອງທ່ານໄດ້. ເພື່ອຄວາມປອດໄພ, ຕົວເລືອກນີ້ຕ້ອງໃຊ້ການລັອກໜ້າຈໍສຳຮອງ."</string>
+    <string name="fingerprint_unlock_title" product="device" msgid="1469790269368691678">"ທ່ານສາມາດປົດລັອກອຸປະກອນຂອງທ່ານໂດຍໃຊ້ລາຍນິ້ວມືຂອງທ່ານໄດ້. ເພື່ອຄວາມປອດໄພ, ຕົວເລືອກນີ້ຕ້ອງໃຊ້ການລັອກໜ້າຈໍສຳຮອງ."</string>
+    <string name="face_unlock_title" product="default" msgid="6204354389041615791">"ທ່ານສາມາດປົດລັອກໂທລະສັບຂອງທ່ານໂດຍໃຊ້ໃບໜ້າຂອງທ່ານໄດ້. ເພື່ອຄວາມປອດໄພ, ຕົວເລືອກນີ້ຕ້ອງໃຊ້ການລັອກໜ້າຈໍສຳຮອງ."</string>
+    <string name="face_unlock_title" product="tablet" msgid="4555222073942524251">"ທ່ານສາມາດປົດລັອກແທັບເລັດຂອງທ່ານໂດຍໃຊ້ໃບໜ້າຂອງທ່ານໄດ້. ເພື່ອຄວາມປອດໄພ, ຕົວເລືອກນີ້ຕ້ອງໃຊ້ການລັອກໜ້າຈໍສຳຮອງ."</string>
+    <string name="face_unlock_title" product="device" msgid="5627632794198729685">"ທ່ານສາມາດປົດລັອກອຸປະກອນຂອງທ່ານໂດຍໃຊ້ໃບໜ້າຂອງທ່ານໄດ້. ເພື່ອຄວາມປອດໄພ, ຕົວເລືອກນີ້ຕ້ອງໃຊ້ການລັອກໜ້າຈໍສຳຮອງ."</string>
+    <string name="biometrics_unlock_title" product="default" msgid="8270390834627826090">"ທ່ານສາມາດປົດລັອກໂທລະສັບຂອງທ່ານໂດຍໃຊ້ໃບໜ້າ ຫຼື ລາຍນິ້ວມືຂອງທ່ານໄດ້. ເພື່ອຄວາມປອດໄພ, ຕົວເລືອກນີ້ຕ້ອງໃຊ້ການລັອກໜ້າຈໍສຳຮອງ."</string>
+    <string name="biometrics_unlock_title" product="tablet" msgid="4239121143654305269">"ທ່ານສາມາດປົດລັອກແທັບເລັດຂອງທ່ານໂດຍໃຊ້ໃບໜ້າ ຫຼື ລາຍນິ້ວມືຂອງທ່ານໄດ້. ເພື່ອຄວາມປອດໄພ, ຕົວເລືອກນີ້ຕ້ອງໃຊ້ການລັອກໜ້າຈໍສຳຮອງ."</string>
+    <string name="biometrics_unlock_title" product="device" msgid="3342994085226864170">"ທ່ານສາມາດປົດລັອກອຸປະກອນຂອງທ່ານໂດຍໃຊ້ໃບໜ້າ ຫຼື ລາຍນິ້ວມືຂອງທ່ານໄດ້. ເພື່ອຄວາມປອດໄພ, ຕົວເລືອກນີ້ຕ້ອງໃຊ້ການລັອກໜ້າຈໍສຳຮອງ."</string>
+    <string name="encrypt_title" product="tablet" msgid="8915795247786124547">"ເຂົ້າລະຫັດແທັບເລັດ"</string>
+    <string name="encrypt_title" product="default" msgid="511146128799853404">"ເຂົ້າລະຫັດໂທລະສັບ"</string>
+    <string name="suggested_lock_settings_summary" product="tablet" msgid="8821254377043173267">"ຕັ້ງໜ້າຈໍລັອກເພື່ອປົກປ້ອງແທັບເລັດຂອງທ່ານ"</string>
+    <string name="suggested_lock_settings_summary" product="device" msgid="4863929838844014122">"ຕັ້ງໜ້າຈໍລັອກເພື່ອປົກປ້ອງອຸປະກອນຂອງທ່ານ"</string>
+    <string name="suggested_lock_settings_summary" product="default" msgid="8050809409337082738">"ຕັ້ງໜ້າຈໍລັອກເພື່ອປົກປ້ອງໂທລະສັບຂອງທ່ານ"</string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="8565330205932332157"></string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="8565330205932332157"></string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="8565330205932332157"></string>
+    <string name="setup_lock_settings_picker_title" product="tablet" msgid="7615280976565002421">"ປົກ​ປ້ອງ​ແທັບ​ເລັດ​ຂອງ​ທ່ານ"</string>
+    <string name="setup_lock_settings_picker_title" product="device" msgid="701531571481098327">"ປົກປ້ອງອຸປະກອນຂອງທ່ານ"</string>
+    <string name="setup_lock_settings_picker_title" product="default" msgid="9097195832806088530">"ປົກ​ປ້ອງ​ໂທ​ລະ​ສັບ​ຂອງ​ທ່ານ"</string>
+    <string name="setup_lock_settings_picker_message" product="tablet" msgid="5570255431873198678">"ປ້ອງກັນບໍ່ໃຫ້ຄົນອື່ນໃຊ້ແທັບເລັດນີ້ໂດຍບໍ່ໄດ້ຮັບອະນຸຍາດຈາກທ່ານ ໂດຍການເປີດນຳໃຊ້ຄຸນສົມບັດການປົກປ້ອງອຸປະກອນ. ເລືອກການລັອກໜ້າຈໍທີ່ທ່ານຕ້ອງການໃຊ້."</string>
+    <string name="setup_lock_settings_picker_message" product="device" msgid="437860817089616245">"ປ້ອງກັນບໍ່ໃຫ້ຄົນອື່ນໃຊ້ອຸປະກອນນີ້ໂດຍບໍ່ໄດ້ຮັບອະນຸຍາດຈາກທ່ານ ໂດຍການເປີດນຳໃຊ້ຄຸນສົມບັດການປົກປ້ອງອຸປະກອນ. ເລືອກການລັອກໜ້າຈໍທີ່ທ່ານຕ້ອງການໃຊ້."</string>
+    <string name="setup_lock_settings_picker_message" product="default" msgid="343440740226992914">"ປ້ອງກັນບໍ່ໃຫ້ຄົນອື່ນໃຊ້ໂທລະສັບນີ້ໂດຍບໍ່ໄດ້ຮັບອະນຸຍາດຈາກທ່ານ ໂດຍການເປີດນຳໃຊ້ຄຸນສົມບັດການປົກປ້ອງອຸປະກອນ. ເລືອກການລັອກໜ້າຈໍທີ່ທ່ານຕ້ອງການໃຊ້."</string>
+    <string name="bluetooth_unpair_dialog_body" product="default" msgid="176620413491664050">"ໂທລະສັບຂອງທ່ານບໍ່ໄດ້ຈັບຄູ່ກັບ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ອີກຕໍ່ໄປແລ້ວ"</string>
+    <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="8098078685596880647">"ແທັບເລັດຂອງທ່ານບໍ່ໄດ້ຈັບຄູ່ກັບ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ອີກຕໍ່ໄປແລ້ວ"</string>
+    <string name="bluetooth_unpair_dialog_body" product="device" msgid="563640675231461703">"ອຸປະກອນຂອງທ່ານບໍ່ໄດ້ຈັບຄູ່ກັບ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ອີກຕໍ່ໄປແລ້ວ"</string>
+    <string name="nfc_secure_toggle_summary" product="default" msgid="3515508978581011683">"ອະນຸຍາດໃຫ້ໃຊ້ NFC ສະເພາະຕອນປົດລັອກໜ້າຈໍເທົ່ານັ້ນ"</string>
+    <string name="wifi_add_app_single_network_summary" product="default" msgid="7742934005022827107">"<xliff:g id="APPNAME">%1$s</xliff:g> ຕ້ອງການບັນທຶກເຄືອຂ່າຍໄປໃສ່ໂທລະສັບຂອງທ່ານ"</string>
+    <string name="wifi_add_app_single_network_summary" product="tablet" msgid="93466057231937113">"<xliff:g id="APPNAME">%1$s</xliff:g> ຕ້ອງການບັນທຶກເຄືອຂ່າຍໄປໃສ່ແທັບເລັດຂອງທ່ານ"</string>
+    <string name="wifi_add_app_networks_summary" product="default" msgid="7014504084783236696">"<xliff:g id="APPNAME">%1$s</xliff:g> ຕ້ອງການບັນທຶກການເຄືອຂ່າຍເຫຼົ່ານີ້ໄປໃສ່ໂທລະສັບຂອງທ່ານ"</string>
+    <string name="wifi_add_app_networks_summary" product="tablet" msgid="6433255556506891439">"<xliff:g id="APPNAME">%1$s</xliff:g> ຕ້ອງການບັນທຶກການເຄືອຂ່າຍເຫຼົ່ານີ້ໄປໃສ່ແທັບເລັດຂອງທ່ານ"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="5562937346878935483">"ປັບແກ້ທິດທາງໜ້າຈໍໂດຍອັດຕະໂນມັດໃນເວລາທ່ານຍ້າຍໂທລະສັບຂອງທ່ານລະຫວ່າງແບບລວງຕັ້ງ ແລະ ລວງນອນ"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="3163709742477804994">"ປັບແກ້ທິດທາງໜ້າຈໍໂດຍອັດຕະໂນມັດໃນເວລາທ່ານຍ້າຍແທັບເລັດຂອງທ່ານລະຫວ່າງແບບລວງຕັ້ງ ແລະ ລວງນອນ"</string>
+    <string name="sim_lock_on" product="tablet" msgid="227481196121403470">"ຕ້ອງມີລະຫັດ PIN ຈຶ່ງຈະໃຊ້ແທັບເລັດໄດ້"</string>
+    <string name="sim_lock_on" product="default" msgid="6896034657274595838">"ຕ້ອງມີລະຫັດ PIN ເພື່ອໃຊ້ໂທລະສັບ"</string>
+    <string name="sim_lock_off" product="tablet" msgid="4619320846576958981">"ຕ້ອງມີລະຫັດ PIN ເພື່ອໃຊ້ແທັບເລັດ"</string>
+    <string name="sim_lock_off" product="default" msgid="2064502270875375541">"ຕ້ອງມີລະຫັດ PIN ຈຶ່ງຈະໃຊ້ໂທລະສັບໄດ້"</string>
+    <string name="status_number" product="tablet" msgid="6746773328312218158">"MDN"</string>
+    <string name="status_number" product="default" msgid="2333455505912871374">"ເບີໂທລະສັບ"</string>
+    <string name="status_number_sim_slot" product="tablet" msgid="2190552731606069787">"MDN (ຊິມຊ່ອງ %1$d)"</string>
+    <string name="status_number_sim_slot" product="default" msgid="1333171940376236656">"ເບີໂທລະສັບ (ຊິມຊ່ອງ %1$d)"</string>
+    <string name="status_number_sim_status" product="tablet" msgid="9003886361856568694">"MDN ຢູ່ SIM"</string>
+    <string name="status_number_sim_status" product="default" msgid="7536755538266735352">"ເບີໂທຢູ່ SIM"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="2049551739429034707">"ຟໍແມັດ SD card ເພື່ອເປັນບ່ອນຈັດເກັບຂໍ້ມູນພາຍໃນ"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet" msgid="6130017080675241337">"ຈັດເກັບແອັບ ແລະ ມີເດຍທີ່ຈະໃຊ້ຢູ່ແທັບເລັດນີ້ເທົ່ານັ້ນ. &lt;a href=https://support.google.com/android/answer/12153449&gt;ສຶກສາເພີ່ມເຕີມກ່ຽວກັບການຕັ້ງຄ່າ SD card&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet" msgid="560506072518373839">"ຟໍແມັດ"</string>
+    <string name="storage_wizard_init_v2_internal_title" product="default" msgid="2049551739429034707">"ຟໍແມັດ SD card ເພື່ອເປັນບ່ອນຈັດເກັບຂໍ້ມູນພາຍໃນ"</string>
+    <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="4395040788668914783">"ຈັດເກັບແອັບ ແລະ ມີເດຍທີ່ຈະໃຊ້ຢູ່ໂທລະສັບນີ້ເທົ່ານັ້ນ. &lt;a href=https://support.google.com/android/answer/12153449&gt;ສຶກສາເພີ່ມເຕີມກ່ຽວກັບການຕັ້ງຄ່າ SD card&lt;/a&gt;."</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default" msgid="560506072518373839">"ຟໍແມັດ"</string>
+    <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="7539293889421540797">"ທ່ານສາມາດຍ້າຍໄຟລ໌, ມີເດຍ ແລະ ແອັບບາງຢ່າງໄປໃສ່ <xliff:g id="NAME">^1</xliff:g> ນີ້ໄດ້. \n\nການຍ້າຍນີ້ຈະເປັນການເພີ່ມບ່ອນຫວ່າງ <xliff:g id="SIZE">^2</xliff:g> ໃຫ້ແທັບເລັດທ່ານ ແລະ ຈະໃຊ້ເວລາປະມານ <xliff:g id="DURATION">^3</xliff:g>."</string>
+    <string name="storage_wizard_migrate_v2_body" product="default" msgid="3807501187945770401">"ທ່ານສາມາດຍ້າຍໄຟລ໌, ມີເດຍ ແລະ ແອັບບາງຢ່າງໄປໃສ່ <xliff:g id="NAME">^1</xliff:g> ນີ້ໄດ້. \n\nການຍ້າຍນີ້ຈະເປັນການເພີ່ມບ່ອນຫວ່າງ <xliff:g id="SIZE">^2</xliff:g> ໃຫ້ໂທລະສັບທ່ານ ແລະ ຈະໃຊ້ເວລາປະມານ <xliff:g id="DURATION">^3</xliff:g>."</string>
+    <string name="storage_wizard_migrate_v2_checklist_battery" product="tablet" msgid="5326017162943304749">"ສາກແທັບເລັດນີ້ໄວ້"</string>
+    <string name="storage_wizard_migrate_v2_checklist_battery" product="default" msgid="8041162611685970218">"ສາກໂທລະສັບນີ້ໄວ້"</string>
+    <string name="main_clear_desc" product="tablet" msgid="5778614597513856716">"ນີ້ຈະເປັນການລຶບຂໍ້ມູນທັງໝົດຈາກ "<b>"ພື້ນທີ່ຈັດເກັບພາຍໃນ"</b>" ຂອງແທັບເລັດຂອງທ່ານ, ຮວມທັງ:\n\n"<li>"ບັນຊີ Google ຂອງທ່ານ"</li>\n<li>"ຂໍ້ມູນ ແລະ ການຕັ້ງຄ່າຂອງລະບົບ ແລະ ແອັບພລິເຄຊັນ"</li>\n<li>"ແອັບທີ່ດາວໂຫຼດມາ"</li></string>
+    <string name="main_clear_desc" product="default" msgid="1888412491866186706">"ນີ້ຈະເປັນການລຶບຂໍ້ມູນທັງໝົດໃນ "<b>"ພື້ນທີ່ຈັດເກັບພາຍໃນ"</b>" ຂອງໂທລະສັບທ່ານ, ຮວມທັງ:\n\n"<li>"ບັນຊີ Google ຂອງທ່ານ"</li>\n<li>"ຂໍ້ມູນ ແລະ ການຕັ້ງຄ່າຂອງລະບົບ ແລະ ແອັບພລິເຄຊັນ"</li>\n<li>"ແອັບພລິເຄຊັນທີ່ດາວໂຫຼດມາ"</li></string>
+    <string name="main_clear_accounts" product="default" msgid="3604029744509330786">\n\n"ຕອນນີ້ທ່ານກຳລັງເຂົ້າສູ່ລະບົບບັນຊີຕໍ່ໄປນີ້:\n"</string>
+    <string name="main_clear_other_users_present" product="default" msgid="7750368595882863399">\n\n"ມີ​ຜູ້​ໃຊ້​ອື່ນ​ຢູ່​ເທິງ​ອຸ​ປະ​ກອນ​ນີ້.\n"</string>
+    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="5834269984459195918">\n\n"ເພື່ອລຶບເພງ, ຮູບພາບ ແລະຂໍ້ມູນຜູ້ໃຊ້ອື່ນໆ, ຈະຕ້ອງລຶບ "<b>"ບ່ອນຈັດເກັບຂໍ້ມູນ USB"</b>" ອອກນຳ."</string>
+    <string name="main_clear_desc_erase_external_storage" product="default" msgid="2891180770413959600">\n\n"ເພື່ອລຶບເພງ, ຮູບພາບ ແລະຂໍ້ມູນຜູ້ໃຊ້ອື່ນໆ, ຈະຕ້ອງລຶບ "<b>"SD card"</b>" ອອກນຳ."</string>
+    <string name="erase_external_storage" product="nosdcard" msgid="217149161941522642">"ລຶບພື້ນທີ່ຈັດເກັບຂໍ້ມູນ USB"</string>
+    <string name="erase_external_storage" product="default" msgid="645024170825543458">"ລຶບຂໍ້ມູນ SD card"</string>
+    <string name="erase_external_storage_description" product="nosdcard" msgid="6285187323873212966">"ລຶບຂໍ້ມູນທຸກຢ່າງທີ່ຢູ່ໃນພື້ນທີ່ຈັດເກັບຂໍ້ມູນ USB ພາຍໃນ ເຊັ່ນເພງ ຫຼືຮູບພາບ"</string>
+    <string name="erase_external_storage_description" product="default" msgid="3294267929524578503">"ລຶບຂໍ້ມູນທັງໝົດໃນ SD card ເຊັ່ນ: ເພງ ແລະຮູບພາບ"</string>
+    <string name="main_clear_button_text" product="tablet" msgid="3763748694468489783">"ລຶບຂໍ້ມູນທັງໝົດ"</string>
+    <string name="main_clear_button_text" product="default" msgid="3763748694468489783">"ລຶບຂໍ້ມູນທັງໝົດ"</string>
+    <string name="usb_tethering_subtext" product="default" msgid="5969806206311342779">"ແບ່ງປັນອິນເຕີເນັດຂອງໂທລະສັບຜ່ານທາງ USB"</string>
+    <string name="usb_tethering_subtext" product="tablet" msgid="4550828946207155142">"ແບ່ງປັນອິນເຕີເນັດຂອງແທັບເລັດຜ່ານທາງ USB"</string>
+    <string name="bluetooth_tethering_subtext" product="tablet" msgid="1339730853653511849">"ແບ່ງປັນການເຊື່ອມຕໍ່ອິນເຕີເນັດຂອງແທັບເລັດຜ່ານທາງ Bluetooth"</string>
+    <string name="bluetooth_tethering_subtext" product="default" msgid="3638886236597805392">"ແບ່ງປັນການເຊື່ອມຕໍ່ອິນເຕີເນັດຂອງໂທລະສັບຜ່ານທາງ Bluetooth"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="8652438909365718644">"ແບ່ງປັນອິນເຕີເນັດຂອງໂທລະສັບຜ່ານທາງ Ethernet"</string>
+    <string name="ethernet_tethering_subtext" product="tablet" msgid="2227710549796706455">"ແບ່ງປັນການເຊື່ອມຕໍ່ອິນເຕີເນັດຂອງແທັບເລັດຜ່ານທາງອີເທີເນັດ"</string>
+    <string name="about_settings" product="tablet" msgid="1471390492111370330">"ກ່ຽວກັບແທັບເລັດ"</string>
+    <string name="about_settings" product="default" msgid="2621311564780208250">"ກ່ຽວກັບໂທລະສັບ"</string>
+    <string name="about_settings" product="device" msgid="7595574154492383452">"ກ່ຽວກັບອຸປະກອນ"</string>
+    <string name="about_settings" product="emulator" msgid="1099246296173401003">"ກ່ຽວກັບອຸປະກອນຮຽນແບບ"</string>
+    <string name="install_all_warning" product="tablet" msgid="1732116924846572063">"ແທັບເລັດ ແລະ ຂໍ້ມູນສ່ວນຕົວຂອງທ່ານຈະສາມາດຖືກແອັບທີ່ບໍ່ຮູ້ຈັກໂຈມຕີໄດ້ງ່າຍຂຶ້ນ. ໂດຍການຕິດຕັ້ງແອັບຕ່າງໆຈາກແຫລ່ງຂໍ້ມູນເຫຼົ່ານີ້, ແມ່ນທ່ານຍອມຮັບວ່າຈະຮັບຜິດຊອບຕໍ່ຄວາມເສຍຫາຍທີ່ເກີດຂຶ້ນກັບໂທລະສັບຂອງທ່ານ ຫຼື ການສູນເສຍຂໍ້ມູນທີ່ອາດເກີດຂຶ້ນຈາກການນຳໃຊ້ແອັບເຫຼົ່ານັ້ນ."</string>
+    <string name="install_all_warning" product="default" msgid="4597256179485325694">"ໂທລະສັບ ແລະ ຂໍ້ມູນສ່ວນຕົວຂອງທ່ານຈະສາມາດຖືກແອັບທີ່ບໍ່ຮູ້ຈັກໂຈມຕີໄດ້ງ່າຍຂຶ້ນ. ໂດຍການຕິດຕັ້ງແອັບຕ່າງໆຈາກແຫລ່ງຂໍ້ມູນເຫຼົ່ານີ້, ແມ່ນທ່ານຍອມຮັບວ່າຈະຮັບຜິດຊອບຕໍ່ຄວາມເສຍຫາຍທີ່ເກີດຂຶ້ນກັບໂທລະສັບຂອງທ່ານ ຫຼື ການສູນເສຍຂໍ້ມູນທີ່ອາດເກີດຂຶ້ນຈາກການນຳໃຊ້ແອັບເຫຼົ່ານັ້ນ."</string>
+    <string name="install_all_warning" product="device" msgid="6293002353591632851">"ອຸປະກອນ ແລະ ຂໍ້ມູນສ່ວນຕົວຂອງທ່ານຈະສາມາດຖືກແອັບທີ່ບໍ່ຮູ້ຈັກໂຈມຕີໄດ້ງ່າຍຂຶ້ນ. ໂດຍການຕິດຕັ້ງແອັບຕ່າງໆຈາກແຫລ່ງທີ່ມາເຫຼົ່ານີ້, ແມ່ນທ່ານຍອມຮັບວ່າຈະຮັບຜິດຊອບຕໍ່ຄວາມເສຍຫາຍທີ່ເກີດຂຶ້ນກັບອຸປະກອນຂອງທ່ານ ຫຼື ການສູນເສຍຂໍ້ມູນທີ່ອາດເກີດຂຶ້ນຈາກການນຳໃຊ້ແອັບເຫຼົ່ານັ້ນ."</string>
+    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="6321057186549848774">"ຫາກທ່ານປິດບໍລິການນີ້ ບາງຄຸນສົມບັດຂອງແທັບເລັດຂອງທ່ານອາດເຮັດວຽກບໍ່ຖືກຕ້ອງໄດ້ ຈົນກວ່າທ່ານຈະປິດແລ້ວເປີດໃໝ່ໃໝ່ອີກຄັ້ງ."</string>
+    <string name="runningservicedetails_stop_dlg_text" product="default" msgid="6869998550403667737">"ຫາກທ່ານຢຸດບໍລິການນີ້ ບາງຄຸນສົມບັດຂອງໂທລະສັບທ່ານອາດເຮັດວຽກໄດ້ບໍ່ຖືກຕ້ອງ ຈົນກວ່າທ່ານຈະປິດແລ້ວເປີດໃໝ່ໃໝ່ອີກຄັ້ງ."</string>
+    <string name="testing_phone_info" product="tablet" msgid="8267746802132630741">"ຂໍ້ມູນແທັບເລັດ"</string>
+    <string name="testing_phone_info" product="default" msgid="7507506297352160191">"ຂໍ້​ມູນ​ໂທລະ​ສັບ"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="1773409172676594981">"ຂະໜາດການສະແດງຜົນ ແລະ ການຕັ້ງຄ່າຂໍ້ຄວາມຂອງທ່ານຈະຖືກຣີເຊັດເປັນການຕັ້ງຄ່າຕົ້ນສະບັບຂອງໂທລະສັບ"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="2547948891207211388">"ຂະໜາດການສະແດງຜົນ ແລະ ການຕັ້ງຄ່າຂໍ້ຄວາມຂອງທ່ານຈະຖືກຣີເຊັດເປັນການຕັ້ງຄ່າຕົ້ນສະບັບຂອງແທັບເລັດ"</string>
+    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="5234458848997942613">"ປັບແກ້ວິທີສະແດງສີຢູ່ໂທລະສັບຂອງທ່ານ"</string>
+    <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="5300401841391736534">"ປັບແກ້ວິທີສະແດງສີຢູ່ແທັບເລັດຂອງທ່ານ"</string>
+    <string name="reduce_bright_colors_preference_summary" product="default" msgid="2025941326724094318">"ຫຼຸດແສງໜ້າຈໍໃຫ້ຕ່ຳກວ່າຄວາມສະຫວ່າງຂັ້ນຕ່ຳຂອງໂທລະສັບທ່ານ"</string>
+    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="3106979202311807559">"ຫຼຸດແສງໜ້າຈໍໃຫ້ຕ່ຳກວ່າຄວາມສະຫວ່າງຂັ້ນຕ່ຳຂອງແທັບເລັດທ່ານ"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="9162440023310121356">"ການຫຼຸດແສງເປັນພິເສດອາດມີປະໂຫຍດໃນເວລາ: &lt;ol&gt; &lt;li&gt; ຄວາມສະຫວ່າງຂັ້ນຕ່ຳເລີ່ມຕົ້ນຂອງໂທລະສັບທ່ານຍັງຄົງແຈ້ງເກີນໄປ&lt;/li&gt; &lt;li&gt; ທ່ານກຳລັງໃຊ້ໂທລະສັບໃນສະຖານະການທີ່ມືດ, ເຊັ່ນ: ໃນເວລາກາງຄືນ ຫຼື ໃນຫ້ອງມືດກ່ອນນອນ&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5747242697890472822">"ການຫຼຸດແສງເປັນພິເສດອາດມີປະໂຫຍດໃນເວລາ: &lt;ol&gt; &lt;li&gt; ຄວາມສະຫວ່າງຂັ້ນຕ່ຳເລີ່ມຕົ້ນຂອງແທັບເລັດທ່ານຍັງຄົງແຈ້ງເກີນໄປ&lt;/li&gt; &lt;li&gt; ທ່ານກຳລັງໃຊ້ແທັບເລັດໃນສະຖານະການທີ່ມືດ, ເຊັ່ນ: ໃນເວລາກາງຄືນ ຫຼື ໃນຫ້ອງມືດກ່ອນນອນ&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="battery_tip_summary_summary" product="default" msgid="1880496476760792933">"ໂທລະສັບມີການໃຊ້ແບັດເຕີຣີໃນພື້ນຫຼັງໃນລະດັບປົກກະຕິ"</string>
+    <string name="battery_tip_summary_summary" product="tablet" msgid="865695079664997057">"ແທັບເລັດມີການໃຊ້ແບັດເຕີຣີໃນພື້ນຫຼັງໃນລະດັບປົກກະຕິ"</string>
+    <string name="battery_tip_summary_summary" product="device" msgid="45436555475195632">"ອຸປະກອນມີການໃຊ້ແບັດເຕີຣີໃນພື້ນຫຼັງໃນລະດັບປົກກະຕິ"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="4134817691837413711">"ໃນບາງສະພາບເງື່ອນໄຂ ເຊັ່ນ: ອຸນຫະພູມສູງ ແລະ ໄລຍະເວລາການສາກໄຟດົນ, ການສາກໄຟອາດຖືກຈຳກັດເປັນ <xliff:g id="PERCENT">%1$s</xliff:g> ເພື່ອຊ່ວຍຖະໜອມອາຍຸແບັດເຕີຣີ.\n\nເມື່ອສະພາບເງື່ອນໄຂເຫຼົ່ານັ້ນສິ້ນສຸດລົງ, ໂທລະສັບຂອງທ່ານຈະສາກໄຟປົກກະຕິໂດຍອັດຕະໂນມັດ."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="9123428127699951337">"ໃນບາງສະພາບເງື່ອນໄຂ ເຊັ່ນ: ອຸນຫະພູມສູງ ແລະ ໄລຍະເວລາການສາກໄຟດົນ, ການສາກໄຟອາດຖືກຈຳກັດເປັນ <xliff:g id="PERCENT">%1$s</xliff:g> ເພື່ອຊ່ວຍຖະໜອມອາຍຸແບັດເຕີຣີ.\n\nເມື່ອສະພາບເງື່ອນໄຂເຫຼົ່ານັ້ນສິ້ນສຸດລົງ, ແທັບເລັດຂອງທ່ານຈະສາກໄຟປົກກະຕິໂດຍອັດຕະໂນມັດ."</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="7183790460600610222">"ເນື່ອງຈາກທ່ານໃຊ້ໂທລະສັບຂອງທ່ານຫຼາຍກວ່າປົກກະຕິ, ແບັດເຕີຣີຂອງທ່ານອາດໝົດໄວກວ່າທີ່ປົກກະຕິມັນຈະໝົດ.\n\nແອັບທີ່ກຳລັງໃຊ້ແບັດເຕີຣີຫຼາຍທີ່ສຸດ:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="2702706858728966181">"ເນື່ອງຈາກທ່ານໃຊ້ແທັບເລັດຂອງທ່ານຫຼາຍກວ່າປົກກະຕິ, ແບັດເຕີຣີຂອງທ່ານອາດໝົດໄວກວ່າທີ່ປົກກະຕິມັນຈະໝົດ.\n\nແອັບທີ່ກຳລັງໃຊ້ແບັດເຕີຣີຫຼາຍທີ່ສຸດ:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="6488208467377974021">"ເນື່ອງຈາກທ່ານໃຊ້ອຸປະກອນຂອງທ່ານຫຼາຍກວ່າປົກກະຕິ, ແບັດເຕີຣີຂອງທ່ານອາດໝົດໄວກວ່າທີ່ປົກກະຕິມັນຈະໝົດ.\n\nແອັບທີ່ກຳລັງໃຊ້ແບັດເຕີຣີຫຼາຍທີ່ສຸດ:"</string>
+    <string name="battery_tip_dialog_summary_message" product="default" msgid="5760208650901831793">"ແອັບຂອງທ່ານກຳລັງໃຊ້ແບັດເຕີຣີໃນປະລິມານປົກກະຕິ. ຫາກແອັບຕ່າງໆໃຊ້ແບັດເຕີຣີຫຼາຍເກີນໄປ, ໂທລະສັບຂອງທ່ານຈະແນະນຳຄຳສັ່ງທີ່ທ່ານສາມາດໃຊ້ໄດ້.\n\nທ່ານສາມາດເປີດໃຊ້ຕົວປະຢັດແບັດເຕີຣີໄດ້ຕະຫຼອດເວລາຫາກແບັດເຕີຣີຂອງທ່ານເຫຼືອໜ້ອຍ."</string>
+    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="236339248261391160">"ແອັບຂອງທ່ານກຳລັງໃຊ້ແບັດເຕີຣີໃນປະລິມານປົກກະຕິ. ຫາກແອັບຕ່າງໆໃຊ້ແບັດເຕີຣີຫຼາຍເກີນໄປ, ແທັບເລັດຂອງທ່ານຈະແນະນຳຄຳສັ່ງທີ່ທ່ານສາມາດໃຊ້ໄດ້.\n\nທ່ານສາມາດເປີດໃຊ້ຕົວປະຢັດແບັດເຕີຣີໄດ້ຕະຫຼອດເວລາຫາກແບັດເຕີຣີຂອງທ່ານເຫຼືອໜ້ອຍ."</string>
+    <string name="battery_tip_dialog_summary_message" product="device" msgid="7885502661524685786">"ແອັບຂອງທ່ານກຳລັງໃຊ້ແບັດເຕີຣີໃນປະລິມານປົກກະຕິ. ຫາກແອັບຕ່າງໆໃຊ້ແບັດເຕີຣີຫຼາຍເກີນໄປ, ອຸປະກອນຂອງທ່ານຈະແນະນຳຄຳສັ່ງທີ່ທ່ານສາມາດໃຊ້ໄດ້.\n\nທ່ານສາມາດເປີດໃຊ້ຕົວປະຢັດແບັດເຕີຣີໄດ້ຕະຫຼອດເວລາຫາກແບັດເຕີຣີຂອງທ່ານເຫຼືອໜ້ອຍ."</string>
+    <string name="smart_battery_summary" product="default" msgid="1210637215867635435">"ຈຳກັດແບັດເຕີຣີສຳລັບແອັບທີ່ທ່ານບໍ່ໄດ້ໃຊ້ເລື້ອຍໆ"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="5575448894010064508">"ຕົວປະຢັດແບັດເຕີຣີຈະປິດເມື່ອໂທລະສັບຂອງທ່ານມີແບັດເຕີຣີເກີນ <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="3691094425050449325">"ຕົວປະຢັດແບັດເຕີຣີຈະປິດເມື່ອແທັບເລັດຂອງທ່ານມີແບັດເຕີຣີເກີນ <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="183319530239501162">"ຕົວປະຢັດແບັດເຕີຣີຈະປິດເມື່ອອຸປະກອນຂອງທ່ານມີແບັດເຕີຣີເກີນ <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_usage_screen_footer_since_last_full_charge" product="default" msgid="6975198602070957876">"ຕົວເລກການນຳໃຊ້ຈະປັບຕາມການໃຊ້ແບັດເຕີຣີຕັ້ງແຕ່ສາກເຕັມເທື່ອຫຼ້າສຸດ ແລະ ລະບົບຈະບໍ່ວັດແທກຂໍ້ມູນການນຳໃຊ້ເມື່ອກຳລັງສາກໂທລະສັບ"</string>
+    <string name="battery_usage_screen_footer_since_last_full_charge" product="tablet" msgid="6849106636898562108">"ຕົວເລກການນຳໃຊ້ຈະປັບຕາມການໃຊ້ແບັດເຕີຣີຕັ້ງແຕ່ສາກເຕັມເທື່ອຫຼ້າສຸດ ແລະ ລະບົບຈະບໍ່ວັດແທກຂໍ້ມູນການນຳໃຊ້ເມື່ອກຳລັງສາກແທັບເລັດ"</string>
+    <string name="battery_usage_screen_footer_since_last_full_charge" product="device" msgid="2576593281687022333">"ຕົວເລກການນຳໃຊ້ຈະປັບຕາມການໃຊ້ແບັດເຕີຣີຕັ້ງແຕ່ສາກເຕັມເທື່ອຫຼ້າສຸດ ແລະ ລະບົບຈະບໍ່ວັດແທກຂໍ້ມູນການນຳໃຊ້ເມື່ອກຳລັງສາກອຸປະກອນ"</string>
+    <string name="battery_usage_screen_footer_of_timestamp" product="default" msgid="3287065663811653290">"ຕົວເລກການນຳໃຊ້ຈະປັບຕາມການໃຊ້ແບັດເຕີຣີຂອງ <xliff:g id="SLOT">%s</xliff:g> ແລະ ລະບົບຈະບໍ່ວັດແທກຂໍ້ມູນການນຳໃຊ້ເມື່ອກຳລັງສາກໂທລະສັບ"</string>
+    <string name="battery_usage_screen_footer_of_timestamp" product="tablet" msgid="6499510727118584001">"ຕົວເລກການນຳໃຊ້ຈະປັບຕາມການໃຊ້ແບັດເຕີຣີຂອງ <xliff:g id="SLOT">%s</xliff:g> ແລະ ລະບົບຈະບໍ່ວັດແທກຂໍ້ມູນການນຳໃຊ້ເມື່ອກຳລັງສາກແທັບເລັດ"</string>
+    <string name="battery_usage_screen_footer_of_timestamp" product="device" msgid="762230435986762026">"ຕົວເລກການນຳໃຊ້ຈະປັບຕາມການໃຊ້ແບັດເຕີຣີຂອງ <xliff:g id="SLOT">%s</xliff:g> ແລະ ລະບົບຈະບໍ່ວັດແທກຂໍ້ມູນການນຳໃຊ້ເມື່ອກຳລັງສາກອຸປະກອນ"</string>
+    <string name="credentials_install_summary" product="nosdcard" msgid="8585932964626513863">"ຕິດຕັ້ງໃບຮັບຮອງຈາກບ່ອນຈັດເກັບຂໍ້ມູນ"</string>
+    <string name="credentials_install_summary" product="default" msgid="879796378361350092">"ຕິດຕັ້ງໃບຮັບຮອງຈາກ SD card"</string>
+    <string name="really_remove_account_message" product="tablet" msgid="5134483498496943623">"ການລຶບບັນຊີນີ້ຈະເປັນການລຶບຂໍ້ຄວາມ, ລາຍຊື່ຜູ້ຕິດຕໍ່ ແລະ ຂໍ້ມູນແທັບເລັດອື່ນໆທັງໝົດອອກ!"</string>
+    <string name="really_remove_account_message" product="default" msgid="6681864753604250818">"ການລຶບບັນຊີນີ້ຈະເປັນການລຶບຂໍ້ຄວາມ, ລາຍຊື່ຜູ້ຕິດຕໍ່ ແລະ ຂໍ້ມູນໂທລະສັບອື່ນໆທັງໝົດອອກ!"</string>
+    <string name="really_remove_account_message" product="device" msgid="1482438683708606820">"ການລຶບບັນຊີນີ້ຈະເປັນການລຶບຂໍ້ຄວາມ, ລາຍຊື່ຜູ້ຕິດຕໍ່ ແລະ ຂໍ້ມູນອື່ນໆທັງໝົດຂອງມັນອອກຈາກອຸປະກອນ!"</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7137933271689383781">"ການ​ປ່ຽນ​ແປງ​ໃດໆ​ທີ່​ທ່ານ​ສ້າງ​ໃຫ້​ກັບ​ບັນ​ຊີ​ຂອງ​ທ່ານ​ໃນ​ເວັບ​ໄຊ​ຈະ​ຖືກ​ສຳ​ເນົາ​ໄປ​ທີ່​ແທັບ​ເລັດ​ຂອງ​ທ່ານ​ໂດຍ​ອັດ​ຕະ​ໂນ​ມັດ.\n\nບາງ​ບັນ​ຊີ​ອາດ​ສຳ​ເນົາ​ການ​ປ່ຽນ​ແປງ​ທີ່​ທ່ານ​ສ້າງ​ໃນ​ແທັບ​ເລັດ​ໄປ​ໃສ່​ໃນ​ເວັບ​ໄຊ​ໃຫ້​ໂດຍ​ອັດ​ຕະ​ໂນ​ມັດ. ນີ້​ເປັນ​ວິ​ທີ​ທີ່​ບັນ​ຊີ Google ເຮັດ​ວຽກ."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="7207326473052484970">"ການ​ປ່ຽນ​ແປງ​ໃດໆ​ທີ່​ທ່ານ​ສ້າງ​ໃຫ້​ກັບ​ບັນ​ຊີ​ຂອງ​ທ່ານ​ໃນ​ເວັບ​ໄຊ​ຈະ​ຖືກ​ສຳ​ເນົາ​ໄປ​ທີ່​ໂທ​ລະ​ສັບ​ຂອງ​ທ່ານ​ໂດຍ​ອັດ​ຕະ​ໂນ​ມັດ.\n\nບາງ​ບັນ​ຊີ​ອາດ​ສຳ​ເນົາ​ການ​ປ່ຽນ​ແປງ​ທີ່​ທ່ານ​ສ້າງ​ໃນ​ໂທ​ລະ​ສັບ​ໄປ​ໃສ່​ໃນ​ເວັບ​ໄຊ​ໃຫ້​ໂດຍ​ອັດ​ຕະ​ໂນ​ມັດ. ນີ້​ເປັນ​ວິ​ທີ​ທີ່​ບັນ​ຊີ Google ເຮັດ​ວຽກ."</string>
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="5609616352941038118">"ແທັບເລັດຂອງທ່ານຈະປິດການນຳໃຊ້ອິນເຕີເນັດມືຖືເມື່ອໃຊ້ຮອດປະລິມານທີ່ກຳນົດໄວ້.\n\nເນື່ອງຈາກການນຳໃຊ້ຂໍ້ມູນແມ່ນວັດແທກໂດຍແທັບເລັດຂອງທ່ານ ເຊິ່ງຜູ້ໃຫ້ບໍລິການຂອງທ່ານອາດນັບປະລິມານແຕກຕ່າງກັນ. ໃຫ້ທ່ານຈຳກັດປະລິມານໂດຍເຜື່ອຈຳນວນໄວ້ນຳ."</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4552449053646826676">"ໂທລະສັບຂອງທ່ານຈະປິດການນຳໃຊ້ອິນເຕີເນັດມືຖືເມື່ອໃຊ້ຮອດປະລິມານທີ່ກຳນົດໄວ້.\n\nເນື່ອງຈາກການນຳໃຊ້ຂໍ້ມູນແມ່ນວັດແທກໂດຍໂທລະສັບຂອງທ່ານ ເຊິ່ງຜູ້ໃຫ້ບໍລິການຂອງທ່ານອາດນັບປະລິມານແຕກຕ່າງກັນ. ໃຫ້ທ່ານຈຳກັດປະລິມານໂດຍເຜື່ອຈຳນວນໄວ້ນຳ."</string>
+    <string name="user_settings_footer_text" product="device" msgid="8543171604218174424">"ແບ່ງປັນອຸປະກອນຂອງທ່ານໂດຍການເພີ່ມຜູ້ໃຊ້ໃໝ່. ຜູ້ໃຊ້ແຕ່ລະຄົນມີພື້ນທີ່ສ່ວນຕົວໃນອຸປະກອນຂອງທ່ານສຳລັບໜ້າຈໍຫຼັກ, ບັນຊີ, ແອັບ, ການຕັ້ງຄ່າແບບກຳນົດເອງ ແລະ ອື່ນໆອີກ."</string>
+    <string name="user_settings_footer_text" product="tablet" msgid="4749331578207116797">"ແບ່ງປັນແທັບເລັດຂອງທ່ານໂດຍການເພີ່ມຜູ້ໃຊ້ໃໝ່. ຜູ້ໃຊ້ແຕ່ລະຄົນມີພື້ນທີ່ສ່ວນຕົວໃນອຸປະກອນຂອງທ່ານສຳລັບໜ້າຈໍຫຼັກ, ບັນຊີ, ແອັບ, ການຕັ້ງຄ່າແບບກຳນົດເອງ ແລະ ອື່ນໆອີກ."</string>
+    <string name="user_settings_footer_text" product="default" msgid="5440172971747221370">"ແບ່ງປັນໂທລະສັບຂອງທ່ານໂດຍການເພີ່ມຜູ້ໃຊ້ໃໝ່. ຜູ້ໃຊ້ແຕ່ລະຄົນມີພື້ນທີ່ສ່ວນຕົວໃນໂທລະສັບຂອງທ່ານສຳລັບໜ້າຈໍຫຼັກ, ບັນຊີ, ແອັບ, ການຕັ້ງຄ່າແບບກຳນົດເອງ ແລະ ອື່ນໆອີກ."</string>
+    <string name="user_cannot_manage_message" product="tablet" msgid="5566619500245432179">"ສະເພາະເຈົ້າຂອງແທັບເລັດທີ່ສາມາດຈັດການຜູ່ໃຊ້ໄດ້."</string>
+    <string name="user_cannot_manage_message" product="default" msgid="8596259161937605316">"ສະເພາະເຈົ້າຂອງໂທລະສັບທີ່ສາມາດຈັດການຜູ່ໃຊ້ໄດ້."</string>
+    <string name="user_confirm_remove_self_message" product="tablet" msgid="6880861846664267876">"ທ່ານຈະເສຍພື້ນທີ່ຈັດເກັບຂໍ້ມູນ ແລະຂໍ້ມູນທີ່ມີຢູ່ໃນແທັບເລັດນີ້. ການກະທຳນີ້ຈະບໍ່ສາມາດຍົກເລີກໄດ້."</string>
+    <string name="user_confirm_remove_self_message" product="default" msgid="3209762447055039706">"ທ່ານຈະເສຍພື້ນທີ່ຈັດເກັບຂໍ້ມູນ ແລະຂໍ້ມູນທີ່ມີຢູ່ໃນໂທລະສັບນີ້. ການກະທຳນີ້ຈະບໍ່ສາມາດຍົກເລີກໄດ້."</string>
+    <string name="support_summary" product="default" msgid="2044721479256103419">"ບົດຄວາມຊ່ວຍເຫຼືອ, ໂທລະສັບ ແລະ ສົນທະນາ"</string>
+    <string name="support_summary" product="tablet" msgid="2588832599234347108">"ບົດຄວາມຊ່ວຍເຫຼືອ, ແທັບເລັດ ແລະ ການສົນທະນາ"</string>
+    <string name="support_summary" product="device" msgid="6821511162132497205">"ບົດຄວາມຊ່ວຍເຫຼືອ, ອຸ​ປະ​ກອນ ແລະ ການສົນທະນາ"</string>
+    <string name="ambient_display_title" product="default" msgid="8027137727044125809">"ແຕະສອງເທື່ອເພື່ອກວດສອບໂທລະສັບ"</string>
+    <string name="ambient_display_title" product="tablet" msgid="2347746118188465334">"ແຕະສອງເທືື່ອເພື່ອກວດສອບແທັບເລັດ"</string>
+    <string name="ambient_display_title" product="device" msgid="6306105102175823199">"ແຕະສອງເທືື່ອເພື່ອກວດສອບອຸປະກອນ"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="6753194901596847876">"ຍົກຂຶ້ນເພື່ອກວດສອບໂທລະສັບ"</string>
+    <string name="ambient_display_pickup_title" product="tablet" msgid="1166999144900082897">"ຍົກຂຶ້ນເພື່ອກວດສອບແທັບເລັດ"</string>
+    <string name="ambient_display_pickup_title" product="device" msgid="2091669267677915975">"ຍົກຂຶ້ນເພື່ອກວດສອບອຸປະກອນ"</string>
+    <string name="ambient_display_pickup_summary" product="default" msgid="135853288202686097">"ເພື່ອກວດສອບເວລາ, ການແຈ້ງເຕືອນ ແລະ ຂໍ້ມູນອື່ນໆ, ໃຫ້ຍົກໂທລະສັບຂອງທ່ານຂຶ້ນ."</string>
+    <string name="ambient_display_pickup_summary" product="tablet" msgid="1638055271563107384">"ເພື່ອກວດສອບເວລາ, ການແຈ້ງເຕືອນ ແລະ ຂໍ້ມູນອື່ນໆ, ໃຫ້ຍົກແທັບເລັດຂອງທ່ານຂຶ້ນ."</string>
+    <string name="ambient_display_pickup_summary" product="device" msgid="964509644539692482">"ເພື່ອກວດສອບເວລາ, ການແຈ້ງເຕືອນ ແລະ ຂໍ້ມູນອື່ນໆ, ໃຫ້ຍົກອຸປະກອນຂອງທ່ານຂຶ້ນ."</string>
+    <string name="ambient_display_tap_screen_title" product="default" msgid="4098147293617084955">"ແຕະເພື່ອກວດສອບໂທລະສັບ"</string>
+    <string name="ambient_display_tap_screen_title" product="tablet" msgid="7748346447393988408">"ແຕະເພື່ອກວດສອບແທັບເລັດ"</string>
+    <string name="ambient_display_tap_screen_title" product="device" msgid="5710618387229771616">"ແຕະເພື່ອກວດສອບອຸປະກອນ"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="9220919404923939167">"ເພື່ອກວດເບິ່ງການແຈ້ງເຕືອນຂອງທ່ານ, ໃຫ້ເລື່ອນລົງໃສ່ເຊັນເຊີນລາຍນິ້ວມືທີ່ຢູ່ຫຼັງໂທລະສັບຂອງທ່ານ."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="8352977484297938140">"ເພື່ອກວດເບິ່ງການແຈ້ງເຕືອນຂອງທ່ານ, ໃຫ້ເລື່ອນລົງໃສ່ເຊັນເຊີນລາຍນິ້ວມືທີ່ຢູ່ຫຼັງແທັບເລັດຂອງທ່ານ."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="3599811593791756084">"ເພື່ອກວດເບິ່ງການແຈ້ງເຕືອນຂອງທ່ານ, ໃຫ້ເລື່ອນລົງໃສ່ເຊັນເຊີນລາຍນິ້ວມືທີ່ຢູ່ຫຼັງອຸປະກອນຂອງທ່ານ."</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="5094072105248383976">"ເມື່ອໃຊ້ 2 ຊິມແລ້ວ, ໂທລະສັບນີ້ຈະຖືກຈຳກັດໃຫ້ໃຊ້ໄດ້ສະເພາະ 4G. "<annotation id="url">"ສຶກສາເພີ່ມເຕີມ"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="9078652902370178468">"ເມື່ອໃຊ້ 2 ຊິມແລ້ວ, ແທັບເລັດນີ້ຈະຖືກຈຳກັດໃຫ້ໃຊ້ໄດ້ສະເພາະ 4G. "<annotation id="url">"ສຶກສາເພີ່ມເຕີມ"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="2081735896122371350">"ເມື່ອໃຊ້ 2 ຊິມແລ້ວ, ອຸປະກອນນີ້ຈະຖືກຈຳກັດໃຫ້ໃຊ້ໄດ້ສະເພາະ 4G. "<annotation id="url">"ສຶກສາເພີ່ມເຕີມ"</annotation></string>
+    <string name="reset_internet_text" product="default" msgid="8672305377652449075">"ນີ້ຈະເປັນການສິ້ນສຸດການໂທຂອງທ່ານ"</string>
+    <string name="reset_internet_text" product="tablet" msgid="8672305377652449075">"ນີ້ຈະເປັນການສິ້ນສຸດການໂທຂອງທ່ານ"</string>
+</resources>

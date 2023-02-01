@@ -117,9 +117,13 @@ public class TareFactorController {
                 new TareFactorData(mResources.getString(R.string.tare_initial_consumption_limit),
                         EconomyManager.DEFAULT_AM_INITIAL_CONSUMPTION_LIMIT_CAKES,
                         POLICY_ALARM_MANAGER));
-        mAlarmManagerMap.put(EconomyManager.KEY_AM_HARD_CONSUMPTION_LIMIT,
-                new TareFactorData(mResources.getString(R.string.tare_hard_consumption_limit),
-                        EconomyManager.DEFAULT_AM_HARD_CONSUMPTION_LIMIT_CAKES,
+        mAlarmManagerMap.put(EconomyManager.KEY_AM_MIN_CONSUMPTION_LIMIT,
+                new TareFactorData(mResources.getString(R.string.tare_min_consumption_limit),
+                        EconomyManager.DEFAULT_AM_MIN_CONSUMPTION_LIMIT_CAKES,
+                        POLICY_ALARM_MANAGER));
+        mAlarmManagerMap.put(EconomyManager.KEY_AM_MAX_CONSUMPTION_LIMIT,
+                new TareFactorData(mResources.getString(R.string.tare_max_consumption_limit),
+                        EconomyManager.DEFAULT_AM_MAX_CONSUMPTION_LIMIT_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_TOP_ACTIVITY_INSTANT,
                 new TareFactorData(mResources.getString(R.string.tare_top_activity),
@@ -293,6 +297,11 @@ public class TareFactorController {
                 new TareFactorData(mResources.getString(R.string.tare_min_balance_other_app),
                         EconomyManager.DEFAULT_JS_MIN_SATIATED_BALANCE_OTHER_APP_CAKES,
                         POLICY_JOB_SCHEDULER));
+        mJobSchedulerMap.put(EconomyManager.KEY_JS_MIN_SATIATED_BALANCE_INCREMENT_APP_UPDATER,
+                new TareFactorData(
+                        mResources.getString(R.string.tare_min_balance_addition_app_updater),
+                        EconomyManager.DEFAULT_JS_MIN_SATIATED_BALANCE_INCREMENT_APP_UPDATER_CAKES,
+                        POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_MAX_SATIATED_BALANCE,
                 new TareFactorData(mResources.getString(R.string.tare_max_satiated_balance),
                         EconomyManager.DEFAULT_JS_MAX_SATIATED_BALANCE_CAKES,
@@ -301,9 +310,25 @@ public class TareFactorController {
                 new TareFactorData(mResources.getString(R.string.tare_initial_consumption_limit),
                         EconomyManager.DEFAULT_JS_INITIAL_CONSUMPTION_LIMIT_CAKES,
                         POLICY_JOB_SCHEDULER));
-        mJobSchedulerMap.put(EconomyManager.KEY_JS_HARD_CONSUMPTION_LIMIT,
-                new TareFactorData(mResources.getString(R.string.tare_hard_consumption_limit),
-                        EconomyManager.DEFAULT_JS_HARD_CONSUMPTION_LIMIT_CAKES,
+        mJobSchedulerMap.put(EconomyManager.KEY_JS_MIN_CONSUMPTION_LIMIT,
+                new TareFactorData(mResources.getString(R.string.tare_min_consumption_limit),
+                        EconomyManager.DEFAULT_JS_MIN_CONSUMPTION_LIMIT_CAKES,
+                        POLICY_JOB_SCHEDULER));
+        mJobSchedulerMap.put(EconomyManager.KEY_JS_MAX_CONSUMPTION_LIMIT,
+                new TareFactorData(mResources.getString(R.string.tare_max_consumption_limit),
+                        EconomyManager.DEFAULT_JS_MAX_CONSUMPTION_LIMIT_CAKES,
+                        POLICY_JOB_SCHEDULER));
+        mJobSchedulerMap.put(EconomyManager.KEY_JS_REWARD_APP_INSTALL_INSTANT,
+                new TareFactorData(mResources.getString(R.string.tare_app_install),
+                        EconomyManager.DEFAULT_JS_REWARD_APP_INSTALL_INSTANT_CAKES,
+                        POLICY_JOB_SCHEDULER));
+        mJobSchedulerMap.put(EconomyManager.KEY_JS_REWARD_APP_INSTALL_ONGOING,
+                new TareFactorData(mResources.getString(R.string.tare_app_install),
+                        EconomyManager.DEFAULT_JS_REWARD_APP_INSTALL_ONGOING_CAKES,
+                        POLICY_JOB_SCHEDULER));
+        mJobSchedulerMap.put(EconomyManager.KEY_JS_REWARD_APP_INSTALL_MAX,
+                new TareFactorData(mResources.getString(R.string.tare_app_install),
+                        EconomyManager.DEFAULT_JS_REWARD_APP_INSTALL_MAX_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_REWARD_TOP_ACTIVITY_INSTANT,
                 new TareFactorData(mResources.getString(R.string.tare_top_activity),

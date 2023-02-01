@@ -27,6 +27,7 @@ import android.content.res.AssetManager;
 
 import androidx.preference.Preference;
 
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -59,7 +60,7 @@ public class PhoneLanguagePreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getAssets()).thenReturn(mAssets);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mController = new PhoneLanguagePreferenceController(mContext);
+        mController = new PhoneLanguagePreferenceController(mContext, "key");
     }
 
     @Test
@@ -74,6 +75,22 @@ public class PhoneLanguagePreferenceControllerTest {
         when(mAssets.getLocales()).thenReturn(new String[] {"en"});
 
         assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void testGetAvailabilityStatus_hasMultipleLocales_returnAvailable() {
+        when(mAssets.getLocales()).thenReturn(new String[] {"en", "de"});
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+        public void testGetAvailabilityStatus_hasSingleLocales_returnConditionallyUnavailable() {
+        when(mAssets.getLocales()).thenReturn(new String[] {"en"});
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test

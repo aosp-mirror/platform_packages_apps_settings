@@ -59,6 +59,12 @@
             settings:controller="com.android.settings.network.telephony.MobileDataPreferenceController"
             settings:allowDividerAbove="true"/>
 
+        <SwitchPreference
+            android:key="auto_data_switch"
+            android:title="@string/auto_data_switch_title"
+            android:summary="@string/auto_data_switch_summary"
+            settings:controller="com.android.settings.network.telephony.AutoDataSwitchPreferenceController"/>
+
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="button_roaming_key"
             android:title="@string/roaming"
@@ -95,12 +101,6 @@
             android:title="@string/mms_message_title"
             android:summary="@string/mms_message_summary"
             settings:controller="com.android.settings.network.telephony.MmsMessagePreferenceController"/>
-
-        <SwitchPreference
-            android:key="data_during_calls"
-            android:title="@string/data_during_calls_title"
-            android:summary="@string/data_during_calls_summary"
-            settings:controller="com.android.settings.network.telephony.DataDuringCallsPreferenceController"/>
 
         <SwitchPreference
             android:key="enhanced_4g_lte"
@@ -233,6 +233,7 @@
             android:persistent="false"
             android:title="@string/mobile_network_apn_title"
             settings:allowDividerAbove="true"
+            settings:keywords="@string/keywords_access_point_names"
             settings:controller="com.android.settings.network.telephony.ApnPreferenceController"/>
 
         <Preference
@@ -241,11 +242,20 @@
             settings:controller="com.android.settings.network.telephony.CarrierPreferenceController">
         </Preference>
 
-        <SwitchPreference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:key="enable_2g"
             android:title="@string/enable_2g_title"
             android:summary="@string/enable_2g_summary"
-            settings:controller="com.android.settings.network.telephony.Enable2gPreferenceController" />
+            settings:controller="com.android.settings.network.telephony.Enable2gPreferenceController"
+            settings:useAdminDisabledSummary="true"
+            settings:userRestriction="no_cellular_2g"/>
+
+        <SwitchPreference
+            android:key="require_cellular_encryption"
+            android:title="@string/require_cellular_encryption_title"
+            android:summary="@string/require_cellular_encryption_summary"
+            settings:controller=
+                "com.android.settings.network.telephony.NullAlgorithmsPreferenceController" />
 
         <SwitchPreference
             android:key="nr_advanced_calling"
@@ -255,6 +265,18 @@
             settings:keywords="@string/keywords_nr_advanced_calling"
             settings:controller="com.android.settings.network.telephony.NrAdvancedCallingPreferenceController"/>
     </PreferenceCategory>
+
+    <Preference
+        android:key="convert_to_esim"
+        android:persistent="false"
+        android:title="@string/convert_to_esim_title"
+        settings:controller="com.android.settings.network.telephony.ConvertToEsimPreferenceController"/>
+
+    <Preference
+        android:key="transfer_esim"
+        android:persistent="false"
+        android:title="@string/transfer_esim_to_another_device_title"
+        settings:controller="com.android.settings.network.telephony.TransferEsimPreferenceController"/>
 
     <Preference
         android:key="erase_sim"

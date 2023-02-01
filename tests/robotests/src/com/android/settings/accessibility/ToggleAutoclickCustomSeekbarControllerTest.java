@@ -18,13 +18,14 @@ package com.android.settings.accessibility;
 
 import static android.content.Context.MODE_PRIVATE;
 
-import static com.android.settings.accessibility.ToggleAutoclickCustomSeekbarController.KEY_CUSTOM_DELAY_VALUE;
-import static com.android.settings.accessibility.ToggleAutoclickPreferenceController.KEY_DELAY_MODE;
+import static com.android.settings.accessibility.AutoclickUtils.KEY_CUSTOM_DELAY_VALUE;
+import static com.android.settings.accessibility.AutoclickUtils.KEY_DELAY_MODE;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -37,57 +38,52 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import androidx.lifecycle.LifecycleObserver;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 
 /** Tests for {@link ToggleAutoclickCustomSeekbarController}. */
 @RunWith(RobolectricTestRunner.class)
 public class ToggleAutoclickCustomSeekbarControllerTest {
 
+    private static final String KEY_CUSTOM_SEEKBAR = "autoclick_custom_seekbar";
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
     @Mock
     private PreferenceScreen mScreen;
-
     @Mock
     private LayoutPreference mLayoutPreference;
-
-    @Mock
-    private Lifecycle mLifecycle;
-
+    @Spy
+    private Context mContext = ApplicationProvider.getApplicationContext();
     private SharedPreferences mSharedPreferences;
     private TextView mDelayLabel;
     private ImageView mShorter;
     private ImageView mLonger;
     private SeekBar mSeekBar;
     private ToggleAutoclickCustomSeekbarController mController;
-    private Context mContext;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
-        final String mPrefKey = "prefKey";
-        mContext = ApplicationProvider.getApplicationContext();
         mSharedPreferences = mContext.getSharedPreferences(mContext.getPackageName(), MODE_PRIVATE);
         mDelayLabel = new TextView(mContext);
         mShorter = new ImageView(mContext);
         mLonger = new ImageView(mContext);
         mSeekBar = new SeekBar(mContext);
-        mController =
-                new ToggleAutoclickCustomSeekbarController(mContext, mLifecycle, mPrefKey);
-
-        doReturn(mLayoutPreference).when(mScreen).findPreference(mPrefKey);
+        mController = new ToggleAutoclickCustomSeekbarController(mContext, KEY_CUSTOM_SEEKBAR);
+        doReturn(mLayoutPreference).when(mScreen).findPreference(KEY_CUSTOM_SEEKBAR);
         doReturn(mSeekBar).when(mLayoutPreference).findViewById(R.id.autoclick_delay);
         doReturn(mDelayLabel).when(mLayoutPreference).findViewById(R.id.current_label);
         doReturn(mShorter).when(mLayoutPreference).findViewById(R.id.shorter);
@@ -100,17 +96,12 @@ public class ToggleAutoclickCustomSeekbarControllerTest {
     }
 
     @Test
-    public void constructor_hasLifecycle_addObserver() {
-        verify(mLifecycle).addObserver(any(LifecycleObserver.class));
-    }
-
-    @Test
     public void displayPreference_initSeekBar() {
         mSharedPreferences.edit().putInt(KEY_CUSTOM_DELAY_VALUE, 700).apply();
 
-        mController.onResume();
+        mController.onStart();
         mController.displayPreference(mScreen);
-        mController.onPause();
+        mController.onStop();
         final SeekBar.OnSeekBarChangeListener mListener =
                 shadowOf(mSeekBar).getOnSeekBarChangeListener();
 
@@ -123,9 +114,9 @@ public class ToggleAutoclickCustomSeekbarControllerTest {
     public void displayPreference_initDelayLabel() {
         mSharedPreferences.edit().putInt(KEY_CUSTOM_DELAY_VALUE, 700).apply();
 
-        mController.onResume();
+        mController.onStart();
         mController.displayPreference(mScreen);
-        mController.onPause();
+        mController.onStop();
 
         assertThat(mDelayLabel.getText()).isEqualTo("0.7 seconds");
     }
@@ -202,5 +193,29 @@ public class ToggleAutoclickCustomSeekbarControllerTest {
         assertThat(mDelayLabel.getText()).isEqualTo("0.8 seconds");
         assertThat(actualDelayValue).isEqualTo(800);
         assertThat(actualCustomDelayValue).isEqualTo(800);
+    }
+
+    @Test
+    public void onStart_registerOnSharedPreferenceChangeListener() {
+        final SharedPreferences prefs = mock(SharedPreferences.class);
+        doReturn(prefs).when(mContext).getSharedPreferences(anyString(), anyInt());
+        final ToggleAutoclickCustomSeekbarController controller =
+                new ToggleAutoclickCustomSeekbarController(mContext, KEY_CUSTOM_SEEKBAR);
+
+        controller.onStart();
+
+        verify(prefs).registerOnSharedPreferenceChangeListener(controller);
+    }
+
+    @Test
+    public void onStop_unregisterOnSharedPreferenceChangeListener() {
+        final SharedPreferences prefs = mock(SharedPreferences.class);
+        doReturn(prefs).when(mContext).getSharedPreferences(anyString(), anyInt());
+        final ToggleAutoclickCustomSeekbarController controller =
+                new ToggleAutoclickCustomSeekbarController(mContext, KEY_CUSTOM_SEEKBAR);
+
+        controller.onStop();
+
+        verify(prefs).unregisterOnSharedPreferenceChangeListener(controller);
     }
 }

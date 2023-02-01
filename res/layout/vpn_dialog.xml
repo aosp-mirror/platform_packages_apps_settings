@@ -69,7 +69,6 @@
                 <CheckBox style="@style/vpn_value"
                         android:id="@+id/mppe"
                         android:text="@string/vpn_mppe"
-                        android:singleLine="false"
                         android:visibility="gone"/>
 
                 <LinearLayout android:id="@+id/l2tp"
@@ -147,7 +146,6 @@
 
                 <CheckBox style="@style/vpn_value"
                         android:id="@+id/show_options"
-                        android:singleLine="false"
                         android:text="@string/vpn_show_options"/>
             </LinearLayout>
 
@@ -243,7 +241,6 @@
 
                 <CheckBox style="@style/vpn_value"
                         android:id="@+id/save_login"
-                        android:singleLine="false"
                         android:text="@string/vpn_save_login"/>
             </LinearLayout>
 
@@ -254,11 +251,9 @@
                     android:animateLayoutChanges="true">
                 <CheckBox style="@style/vpn_value"
                         android:id="@+id/always_on_vpn"
-                        android:singleLine="false"
                         android:text="@string/vpn_menu_lockdown"/>
                 <TextView style="@style/vpn_warning"
                         android:id="@+id/always_on_invalid_reason"
-                        android:singleLine="false"
                         android:visibility="gone"/>
             </LinearLayout>
         </LinearLayout>

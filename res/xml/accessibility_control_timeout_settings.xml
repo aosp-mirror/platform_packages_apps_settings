@@ -18,13 +18,11 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/accessibility_control_timeout_preference_title"
-    android:persistent="false" >
+    android:title="@string/accessibility_control_timeout_preference_title">
 
     <com.android.settingslib.widget.TopIntroPreference
         android:key="accessibility_control_timeout_intro"
-        android:persistent="false"
-        android:title="@string/accessibility_control_timeout_preference_intro_text" />
+        android:title="@string/accessibility_control_timeout_preference_intro_text"/>
 
     <com.android.settingslib.widget.IllustrationPreference
         android:key="accessibility_control_timeout_banner"
@@ -33,32 +31,31 @@
     <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="accessibility_control_timeout_default"
         android:title="@string/accessibility_timeout_default"
-        android:persistent="false" />
+        settings:controller="com.android.settings.accessibility.AccessibilityTimeoutController"/>
 
     <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="accessibility_control_timeout_10secs"
         android:title="@string/accessibility_timeout_10secs"
-        android:persistent="false" />
+        settings:controller="com.android.settings.accessibility.AccessibilityTimeoutController"/>
 
     <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="accessibility_control_timeout_30secs"
         android:title="@string/accessibility_timeout_30secs"
-        android:persistent="false" />
+        settings:controller="com.android.settings.accessibility.AccessibilityTimeoutController"/>
 
     <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="accessibility_control_timeout_1min"
         android:title="@string/accessibility_timeout_1min"
-        android:persistent="false" />
+        settings:controller="com.android.settings.accessibility.AccessibilityTimeoutController"/>
 
     <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="accessibility_control_timeout_2mins"
         android:title="@string/accessibility_timeout_2mins"
-        android:persistent="false" />
+        settings:controller="com.android.settings.accessibility.AccessibilityTimeoutController"/>
 
     <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="accessibility_control_timeout_footer"
         android:title="@string/accessibility_control_timeout_preference_summary"
-        android:persistent="false"
         android:selectable="false"
         settings:searchable="false"
         settings:controller="com.android.settings.accessibility.AccessibilityControlTimeoutFooterPreferenceController"/>

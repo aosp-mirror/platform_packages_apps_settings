@@ -27,6 +27,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -67,7 +68,6 @@ public class MagnificationSettingsFragmentTest {
         doReturn(mScreen).when(mFragment).getPreferenceScreen();
         doReturn(mock(FragmentManager.class, Answers.RETURNS_DEEP_STUBS)).when(
                 mFragment).getChildFragmentManager();
-
     }
 
     @Test
@@ -89,6 +89,23 @@ public class MagnificationSettingsFragmentTest {
 
         verify(dialogDelegate).onCreateDialog(1);
         verify(dialogDelegate).getDialogMetricsCategory(1);
+    }
+
+    @Test
+    public void getMetricsCategory_returnsCorrectCategory() {
+        assertThat(mFragment.getMetricsCategory()).isEqualTo(
+                SettingsEnums.ACCESSIBILITY_MAGNIFICATION_SETTINGS);
+    }
+
+    @Test
+    public void getPreferenceScreenResId_returnsCorrectXml() {
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(
+                R.xml.accessibility_magnification_service_settings);
+    }
+
+    @Test
+    public void getLogTag_returnsCorrectTag() {
+        assertThat(mFragment.getLogTag()).isEqualTo("MagnificationSettingsFragment");
     }
 
     @Test

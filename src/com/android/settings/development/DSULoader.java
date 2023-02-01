@@ -26,6 +26,7 @@ import android.text.TextUtils;
 import android.util.Slog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -117,6 +118,20 @@ public class DSULoader extends ListActivity {
             }
         }
     }
+
+    private void resizeListView() {
+        ListView view = getListView();
+        View item_view = mAdapter.getView(0, null, view);
+        item_view.measure(
+                MeasureSpec.makeMeasureSpec(view.getWidth(), MeasureSpec.EXACTLY),
+                MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+        ViewGroup.LayoutParams params = view.getLayoutParams();
+        params.height = item_view.getMeasuredHeight() * (mAdapter.getCount() + 1);
+        Slog.e(TAG, "resizeListView height=" + params.height);
+        view.setLayoutParams(params);
+        view.requestLayout();
+    }
+
     // Fetcher fetches mDSUList in backgroud
     private class Fetcher implements Runnable {
         private URL mDsuList;
@@ -172,6 +187,9 @@ public class DSULoader extends ListActivity {
         public void run() {
             try {
                 fetch(mDsuList);
+                if (mDSUList.size() == 0) {
+                    mDSUList.add(0, "No DSU available for this device");
+                }
             } catch (IOException e) {
                 Slog.e(TAG, e.toString());
                 mDSUList.add(0, "Network Error");
@@ -179,14 +197,12 @@ public class DSULoader extends ListActivity {
                 Slog.e(TAG, e.toString());
                 mDSUList.add(0, "Metadata Error");
             }
-            if (mDSUList.size() == 0) {
-                mDSUList.add(0, "No DSU available for this device");
-            }
             runOnUiThread(
                     new Runnable() {
                         public void run() {
                             mAdapter.clear();
                             mAdapter.addAll(mDSUList);
+                            resizeListView();
                         }
                     });
         }

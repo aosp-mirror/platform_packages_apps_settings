@@ -15,6 +15,8 @@
  */
 package com.android.settings.datetime.timezone;
 
+import static com.android.settingslib.datetime.ZoneGetter.capitalizeForStandaloneDisplay;
+
 import android.icu.text.TimeZoneFormat;
 import android.icu.text.TimeZoneNames;
 import android.icu.util.TimeZone;
@@ -152,18 +154,28 @@ public class TimeZoneInfo {
             String canonicalZoneId = getCanonicalZoneId(timeZone);
             final TimeZoneNames timeZoneNames = mTimeZoneFormat.getTimeZoneNames();
             final java.util.TimeZone javaTimeZone = toJavaTimeZone(canonicalZoneId);
-            final CharSequence gmtOffset = ZoneGetter.getGmtOffsetText(mTimeZoneFormat, mLocale,
-                javaTimeZone, mNow);
+            final CharSequence gmtOffset =
+                    ZoneGetter.getGmtOffsetText(mTimeZoneFormat, mLocale, javaTimeZone, mNow);
             return new TimeZoneInfo.Builder(timeZone)
-                    .setGenericName(timeZoneNames.getDisplayName(canonicalZoneId,
-                            TimeZoneNames.NameType.LONG_GENERIC, mNow.getTime()))
-                    .setStandardName(timeZoneNames.getDisplayName(canonicalZoneId,
-                            TimeZoneNames.NameType.LONG_STANDARD, mNow.getTime()))
-                    .setDaylightName(timeZoneNames.getDisplayName(canonicalZoneId,
-                            TimeZoneNames.NameType.LONG_DAYLIGHT, mNow.getTime()))
-                    .setExemplarLocation(timeZoneNames.getExemplarLocationName(canonicalZoneId))
+                    .setGenericName(getTzNameForListDisplay(mLocale, timeZoneNames,
+                            canonicalZoneId, mNow, TimeZoneNames.NameType.LONG_GENERIC))
+                    .setStandardName(getTzNameForListDisplay(mLocale, timeZoneNames,
+                            canonicalZoneId, mNow, TimeZoneNames.NameType.LONG_STANDARD))
+                    .setDaylightName(getTzNameForListDisplay(mLocale, timeZoneNames,
+                            canonicalZoneId, mNow, TimeZoneNames.NameType.LONG_DAYLIGHT))
+                    .setExemplarLocation(capitalizeForStandaloneDisplay(mLocale,
+                            timeZoneNames.getExemplarLocationName(canonicalZoneId)))
                     .setGmtOffset(gmtOffset)
                     .build();
+        }
+
+        private static String getTzNameForListDisplay(
+                Locale locale, TimeZoneNames timeZoneNames, String canonicalZoneId, Date now,
+                TimeZoneNames.NameType nameType) {
+            long nowEpochMillis = now.getTime();
+            String displayName = timeZoneNames.getDisplayName(
+                    canonicalZoneId, nameType, nowEpochMillis);
+            return capitalizeForStandaloneDisplay(locale, displayName);
         }
     }
 

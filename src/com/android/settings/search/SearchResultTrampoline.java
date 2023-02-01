@@ -22,6 +22,7 @@ import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -86,8 +87,12 @@ public class SearchResultTrampoline extends Activity {
                 return;
             }
 
+            final Uri data = intent.getParcelableExtra(
+                    SettingsHomepageActivity.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_DATA,
+                    Uri.class);
             try {
                 intent = Intent.parseUri(intentUriString, Intent.URI_INTENT_SCHEME);
+                intent.setData(data);
             } catch (URISyntaxException e) {
                 Log.e(TAG, "Failed to parse deep link intent: " + e);
                 finish();

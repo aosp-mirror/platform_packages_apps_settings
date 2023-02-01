@@ -27,8 +27,8 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothHapClient;
 import android.bluetooth.BluetoothHearingAid;
-import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
@@ -45,6 +45,8 @@ import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.HapClientProfile;
+import com.android.settingslib.bluetooth.HearingAidInfo;
 import com.android.settingslib.bluetooth.HearingAidProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
@@ -62,19 +64,21 @@ import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /** Tests for {@link AccessibilityHearingAidPreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowBluetoothAdapter.class, ShadowBluetoothUtils.class})
 public class AccessibilityHearingAidPreferenceControllerTest {
     private static final String TEST_DEVICE_ADDRESS = "00:A1:A1:A1:A1:A1";
+    private static final String TEST_DEVICE_ADDRESS_2 = "00:A2:A2:A2:A2:A2";
     private static final String TEST_DEVICE_NAME = "TEST_HEARING_AID_BT_DEVICE_NAME";
     private static final String HEARING_AID_PREFERENCE = "hearing_aid_preference";
 
     private BluetoothAdapter mBluetoothAdapter;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
-    private BluetoothManager mBluetoothManager;
     private BluetoothDevice mBluetoothDevice;
     private Activity mContext;
     private Preference mHearingAidPreference;
@@ -95,14 +99,16 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     private LocalBluetoothProfileManager mLocalBluetoothProfileManager;
     @Mock
     private HearingAidProfile mHearingAidProfile;
+    @Mock
+    private HapClientProfile mHapClientProfile;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mShadowApplication = ShadowApplication.getInstance();
         mContext = spy(Robolectric.setupActivity(Activity.class));
-        setupBluetoothEnvironment();
-        setupHearingAidEnvironment();
+        setupEnvironment();
+
         mHearingAidPreference = new Preference(mContext);
         mHearingAidPreference.setKey(HEARING_AID_PREFERENCE);
         mPreferenceController = new AccessibilityHearingAidPreferenceController(mContext,
@@ -117,10 +123,11 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     }
 
     @Test
-    public void getSummary_connectedHearingAidRightSide_connectedRightSideSummary() {
+    public void getSummary_connectedAshaHearingAidRightSide_connectedRightSideSummary() {
         when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
-                HearingAidProfile.DeviceSide.SIDE_RIGHT);
+                HearingAidInfo.DeviceSide.SIDE_RIGHT);
         when(mHearingAidProfile.getConnectedDevices()).thenReturn(generateHearingAidDeviceList());
+
         mPreferenceController.onStart();
         Intent intent = new Intent(BluetoothHearingAid.ACTION_CONNECTION_STATE_CHANGED);
         intent.putExtra(BluetoothHearingAid.EXTRA_STATE, BluetoothHearingAid.STATE_CONNECTED);
@@ -131,12 +138,13 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     }
 
     @Test
-    public void getSummary_connectedHearingAidBothSide_connectedBothSideSummary() {
+    public void getSummary_connectedAshaHearingAidBothSide_connectedBothSideSummary() {
         when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
-                HearingAidProfile.DeviceSide.SIDE_LEFT);
+                HearingAidInfo.DeviceSide.SIDE_LEFT);
         when(mCachedSubBluetoothDevice.isConnected()).thenReturn(true);
         when(mCachedBluetoothDevice.getSubDevice()).thenReturn(mCachedSubBluetoothDevice);
         when(mHearingAidProfile.getConnectedDevices()).thenReturn(generateHearingAidDeviceList());
+
         mPreferenceController.onStart();
         Intent intent = new Intent(BluetoothHearingAid.ACTION_CONNECTION_STATE_CHANGED);
         intent.putExtra(BluetoothHearingAid.EXTRA_STATE, BluetoothHearingAid.STATE_CONNECTED);
@@ -147,13 +155,75 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     }
 
     @Test
-    public void getSummary_connectedMultipleHearingAids_connectedBothSideSummary() {
+    public void getSummary_connectedLeAudioHearingAidLeftSide_connectedLeftSideSummary() {
         when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
-                HearingAidProfile.DeviceSide.SIDE_LEFT);
+                HearingAidInfo.DeviceSide.SIDE_LEFT);
+        when(mCachedBluetoothDevice.getMemberDevice()).thenReturn(new HashSet<>());
+        when(mHapClientProfile.getConnectedDevices()).thenReturn(generateHearingAidDeviceList());
+
+        mPreferenceController.onStart();
+        Intent intent = new Intent(BluetoothHapClient.ACTION_HAP_CONNECTION_STATE_CHANGED);
+        intent.putExtra(BluetoothHearingAid.EXTRA_STATE, BluetoothHapClient.STATE_CONNECTED);
+        sendIntent(intent);
+
+        assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
+                "TEST_HEARING_AID_BT_DEVICE_NAME, left only")).isTrue();
+    }
+
+    @Test
+    public void getSummary_connectedLeAudioHearingAidRightSide_connectedRightSideSummary() {
+        when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
+                HearingAidInfo.DeviceSide.SIDE_RIGHT);
+        when(mCachedBluetoothDevice.getMemberDevice()).thenReturn(new HashSet<>());
+        when(mHapClientProfile.getConnectedDevices()).thenReturn(generateHearingAidDeviceList());
+
+        mPreferenceController.onStart();
+        Intent intent = new Intent(BluetoothHapClient.ACTION_HAP_CONNECTION_STATE_CHANGED);
+        intent.putExtra(BluetoothHearingAid.EXTRA_STATE, BluetoothHapClient.STATE_CONNECTED);
+        sendIntent(intent);
+
+        assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
+                "TEST_HEARING_AID_BT_DEVICE_NAME, right only")).isTrue();
+    }
+
+    @Test
+    public void getSummary_connectedLeAudioHearingAidLeftAndRightSide_connectedSummary() {
+        when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
+                HearingAidInfo.DeviceSide.SIDE_LEFT_AND_RIGHT);
+        when(mCachedBluetoothDevice.getMemberDevice()).thenReturn(new HashSet<>());
+        when(mHapClientProfile.getConnectedDevices()).thenReturn(generateHearingAidDeviceList());
+
+        mPreferenceController.onStart();
+        Intent intent = new Intent(BluetoothHapClient.ACTION_HAP_CONNECTION_STATE_CHANGED);
+        intent.putExtra(BluetoothHearingAid.EXTRA_STATE, BluetoothHapClient.STATE_CONNECTED);
+        sendIntent(intent);
+
+        assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
+                "TEST_HEARING_AID_BT_DEVICE_NAME, left and right")).isTrue();
+    }
+
+    @Test
+    public void getSummary_connectedLeAudioHearingAidBothSide_connectedBothSideSummary() {
+        when(mCachedBluetoothDevice.getMemberDevice()).thenReturn(generateMemberDevices());
         when(mCachedSubBluetoothDevice.isConnected()).thenReturn(true);
-        when(mCachedBluetoothDevice.getSubDevice()).thenReturn(mCachedSubBluetoothDevice);
+        when(mHapClientProfile.getConnectedDevices()).thenReturn(generateHearingAidDeviceList());
+
+        mPreferenceController.onStart();
+        Intent intent = new Intent(BluetoothHapClient.ACTION_HAP_CONNECTION_STATE_CHANGED);
+        intent.putExtra(BluetoothHearingAid.EXTRA_STATE, BluetoothHapClient.STATE_CONNECTED);
+        sendIntent(intent);
+
+        assertThat(mHearingAidPreference.getSummary().toString()).isEqualTo(
+                "TEST_HEARING_AID_BT_DEVICE_NAME, left and right");
+    }
+
+    @Test
+    public void getSummary_connectedMultipleHearingAids_connectedMultipleDevicesSummary() {
+        when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
+                HearingAidInfo.DeviceSide.SIDE_LEFT);
         when(mHearingAidProfile.getConnectedDevices()).thenReturn(
                 generateMultipleHearingAidDeviceList());
+
         mPreferenceController.onStart();
         Intent intent = new Intent(BluetoothHearingAid.ACTION_CONNECTION_STATE_CHANGED);
         intent.putExtra(BluetoothHearingAid.EXTRA_STATE, BluetoothHearingAid.STATE_CONNECTED);
@@ -161,17 +231,6 @@ public class AccessibilityHearingAidPreferenceControllerTest {
 
         assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
                 "TEST_HEARING_AID_BT_DEVICE_NAME +1 more")).isTrue();
-    }
-
-    @Test
-    public void getSummary_disconnectedHearingAid_disconnectedSummary() {
-        mPreferenceController.onStart();
-        Intent intent = new Intent(BluetoothHearingAid.ACTION_CONNECTION_STATE_CHANGED);
-        intent.putExtra(BluetoothHearingAid.EXTRA_STATE, BluetoothHearingAid.STATE_DISCONNECTED);
-        sendIntent(intent);
-
-        assertThat(mHearingAidPreference.getSummary()).isEqualTo(
-                mContext.getText(R.string.accessibility_hearingaid_not_connected_summary));
     }
 
     @Test
@@ -210,8 +269,29 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     }
 
     @Test
-    public void onNotSupportHearingAidProfile_isNotAvailable() {
-        //clear bluetooth supported profile
+    public void onSupportHearingAidProfile_isAvailable() {
+        mShadowBluetoothAdapter.clearSupportedProfiles();
+        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
+        mPreferenceController = new AccessibilityHearingAidPreferenceController(mContext,
+                HEARING_AID_PREFERENCE);
+        mPreferenceController.setPreference(mHearingAidPreference);
+
+        assertThat(mPreferenceController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void onSupportHapClientProfile_isAvailable() {
+        mShadowBluetoothAdapter.clearSupportedProfiles();
+        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HAP_CLIENT);
+        mPreferenceController = new AccessibilityHearingAidPreferenceController(mContext,
+                HEARING_AID_PREFERENCE);
+        mPreferenceController.setPreference(mHearingAidPreference);
+
+        assertThat(mPreferenceController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void onNotSupportAnyHearingAidRelatedProfile_isNotAvailable() {
         mShadowBluetoothAdapter.clearSupportedProfiles();
         mPreferenceController = new AccessibilityHearingAidPreferenceController(mContext,
                 HEARING_AID_PREFERENCE);
@@ -233,11 +313,11 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     @Config(shadows = ShadowAlertDialogCompat.class)
     public void onActiveDeviceChanged_hearingAidProfile_launchHearingAidPairingDialog() {
         final FragmentActivity mActivity = Robolectric.setupActivity(FragmentActivity.class);
-        when(mCachedBluetoothDevice.isConnectedHearingAidDevice()).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
         when(mCachedBluetoothDevice.getDeviceMode()).thenReturn(
-                HearingAidProfile.DeviceMode.MODE_BINAURAL);
+                HearingAidInfo.DeviceMode.MODE_BINAURAL);
         when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
-                HearingAidProfile.DeviceSide.SIDE_LEFT);
+                HearingAidInfo.DeviceSide.SIDE_LEFT);
         mPreferenceController.setFragmentManager(mActivity.getSupportFragmentManager());
 
         mPreferenceController.onActiveDeviceChanged(mCachedBluetoothDevice,
@@ -247,24 +327,51 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         assertThat(dialog.isShowing()).isTrue();
     }
 
-    private void setupBluetoothEnvironment() {
+    @Test
+    public void onServiceConnected_onHearingAidProfileConnected_updateSummary() {
+        when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
+                HearingAidInfo.DeviceSide.SIDE_LEFT);
+        when(mHearingAidProfile.getConnectedDevices()).thenReturn(generateHearingAidDeviceList());
+
+        mPreferenceController.onStart();
+        mPreferenceController.onServiceConnected();
+
+        assertThat(mHearingAidPreference.getSummary().toString()).isEqualTo(
+                "TEST_HEARING_AID_BT_DEVICE_NAME, left only");
+    }
+
+    @Test
+    public void onServiceConnected_onHapClientProfileConnected_updateSummary() {
+        when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
+                HearingAidInfo.DeviceSide.SIDE_RIGHT);
+        when(mHapClientProfile.getConnectedDevices()).thenReturn(generateHearingAidDeviceList());
+
+        mPreferenceController.onStart();
+        mPreferenceController.onServiceConnected();
+
+        assertThat(mHearingAidPreference.getSummary().toString()).isEqualTo(
+                "TEST_HEARING_AID_BT_DEVICE_NAME, right only");
+    }
+
+    private void setupEnvironment() {
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
         mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
-        mBluetoothManager = mContext.getSystemService(BluetoothManager.class);
-        mBluetoothAdapter = mBluetoothManager.getAdapter();
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mShadowBluetoothAdapter = Shadow.extract(mBluetoothAdapter);
+        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
+        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HAP_CLIENT);
+        mBluetoothDevice = mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS);
+        mBluetoothAdapter.enable();
+
+        doReturn(mEventManager).when(mLocalBluetoothManager).getEventManager();
         when(mLocalBluetoothManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
         when(mLocalBluetoothManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
         when(mLocalBluetoothProfileManager.getHearingAidProfile()).thenReturn(mHearingAidProfile);
-        doReturn(mEventManager).when(mLocalBluetoothManager).getEventManager();
-    }
-
-    private void setupHearingAidEnvironment() {
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        mShadowBluetoothAdapter = Shadow.extract(mBluetoothAdapter);
-        mBluetoothDevice = mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS);
-        mBluetoothAdapter.enable();
-        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
+        when(mLocalBluetoothProfileManager.getHapClientProfile()).thenReturn(mHapClientProfile);
+        when(mHearingAidProfile.isProfileReady()).thenReturn(true);
+        when(mHapClientProfile.isProfileReady()).thenReturn(true);
         when(mCachedDeviceManager.findDevice(mBluetoothDevice)).thenReturn(mCachedBluetoothDevice);
+        when(mCachedBluetoothDevice.getAddress()).thenReturn(TEST_DEVICE_ADDRESS);
         when(mCachedBluetoothDevice.getName()).thenReturn(TEST_DEVICE_NAME);
     }
 
@@ -281,9 +388,16 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     }
 
     private List<BluetoothDevice> generateMultipleHearingAidDeviceList() {
+        // Generates different Bluetooth devices for testing multiple devices
         final List<BluetoothDevice> deviceList = new ArrayList<>(2);
         deviceList.add(mBluetoothDevice);
-        deviceList.add(mBluetoothDevice);
+        deviceList.add(mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_2));
         return deviceList;
+    }
+
+    private Set<CachedBluetoothDevice> generateMemberDevices() {
+        final Set<CachedBluetoothDevice> memberDevices = new HashSet<>();
+        memberDevices.add(mCachedSubBluetoothDevice);
+        return memberDevices;
     }
 }

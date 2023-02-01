@@ -19,6 +19,7 @@ import static android.net.NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL;
 import static android.net.NetworkCapabilities.NET_CAPABILITY_PARTIAL_CONNECTIVITY;
 import static android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED;
 import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
+import static android.telephony.TelephonyManager.UNKNOWN_CARRIER_ID;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -49,7 +50,6 @@ import android.os.Handler;
 import android.provider.Telephony.CarrierId;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
@@ -88,7 +88,6 @@ import com.android.settingslib.widget.ActionButtonsPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
-import com.android.wifitrackerlib.WifiEntry.ConnectedInfo;
 import com.android.wifitrackerlib.WifiEntry.DisconnectCallback;
 import com.android.wifitrackerlib.WifiEntry.ForgetCallback;
 import com.android.wifitrackerlib.WifiEntry.SignInCallback;
@@ -624,32 +623,12 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     }
 
     private void refreshFrequency() {
-        final ConnectedInfo connectedInfo = mWifiEntry.getConnectedInfo();
-        if (connectedInfo == null) {
+        final String bandString = mWifiEntry.getBandString();
+        if (TextUtils.isEmpty(bandString)) {
             mFrequencyPref.setVisible(false);
             return;
         }
-
-        // TODO(b/190390803): We should get the band string directly from WifiEntry.ConnectedInfo
-        //                    instead of doing the frequency -> band conversion here.
-        final int frequency = connectedInfo.frequencyMhz;
-        String band = null;
-        if (frequency >= WifiEntry.MIN_FREQ_24GHZ && frequency < WifiEntry.MAX_FREQ_24GHZ) {
-            band = mContext.getResources().getString(R.string.wifi_band_24ghz);
-        } else if (frequency >= WifiEntry.MIN_FREQ_5GHZ && frequency < WifiEntry.MAX_FREQ_5GHZ) {
-            band = mContext.getResources().getString(R.string.wifi_band_5ghz);
-        } else if (frequency >= WifiEntry.MIN_FREQ_6GHZ && frequency < WifiEntry.MAX_FREQ_6GHZ) {
-            band = mContext.getResources().getString(R.string.wifi_band_6ghz);
-        } else {
-            // Connecting state is unstable, make it disappeared if unexpected
-            if (mWifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTING) {
-                mFrequencyPref.setVisible(false);
-            } else {
-                Log.e(TAG, "Unexpected frequency " + frequency);
-            }
-            return;
-        }
-        mFrequencyPref.setSummary(band);
+        mFrequencyPref.setSummary(bandString);
         mFrequencyPref.setVisible(true);
     }
 
@@ -711,27 +690,17 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         // Checks if the SIM subscription is active.
         final List<SubscriptionInfo> activeSubscriptionInfos = mContext
                 .getSystemService(SubscriptionManager.class).getActiveSubscriptionInfoList();
-        final int defaultDataSubscriptionId = SubscriptionManager.getDefaultDataSubscriptionId();
         if (activeSubscriptionInfos != null) {
-            for (SubscriptionInfo subscriptionInfo : activeSubscriptionInfos) {
-                final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
-                        subscriptionInfo, mContext);
-                if (config.carrierId == subscriptionInfo.getCarrierId()) {
-                    mEapSimSubscriptionPref.setSummary(displayName);
-                    return;
-                }
-
-                // When it's UNKNOWN_CARRIER_ID, devices connects it with the SIM subscription of
-                // defaultDataSubscriptionId.
-                if (config.carrierId == TelephonyManager.UNKNOWN_CARRIER_ID
-                        && defaultDataSubscriptionId == subscriptionInfo.getSubscriptionId()) {
-                    mEapSimSubscriptionPref.setSummary(displayName);
-                    return;
-                }
+            SubscriptionInfo info = fineSubscriptionInfo(config.carrierId, activeSubscriptionInfos,
+                    SubscriptionManager.getDefaultDataSubscriptionId());
+            if (info != null) {
+                mEapSimSubscriptionPref.setSummary(
+                        SubscriptionUtil.getUniqueSubscriptionDisplayName(info, mContext));
+                return;
             }
         }
 
-        if (config.carrierId == TelephonyManager.UNKNOWN_CARRIER_ID) {
+        if (config.carrierId == UNKNOWN_CARRIER_ID) {
             mEapSimSubscriptionPref.setSummary(R.string.wifi_no_related_sim_card);
             return;
         }
@@ -748,6 +717,25 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
                 CarrierId.CARRIER_ID + "=?",
                 new String[] {Integer.toString(config.carrierId)},
                 null /* orderBy */);
+    }
+
+    @VisibleForTesting
+    SubscriptionInfo fineSubscriptionInfo(int carrierId,
+            List<SubscriptionInfo> activeSubscriptionInfos, int defaultDataSubscriptionId) {
+        SubscriptionInfo firstMatchedInfo = null;
+        for (SubscriptionInfo info : activeSubscriptionInfos) {
+            // When it's UNKNOWN_CARRIER_ID or matched with configured CarrierId,
+            // devices connects it with the SIM subscription of defaultDataSubscriptionId.
+            if (defaultDataSubscriptionId == info.getSubscriptionId()
+                    && (carrierId == info.getCarrierId() || carrierId == UNKNOWN_CARRIER_ID)) {
+                return info;
+            }
+
+            if (firstMatchedInfo == null && carrierId == info.getCarrierId()) {
+                firstMatchedInfo = info;
+            }
+        }
+        return firstMatchedInfo;
     }
 
     private void refreshMacAddress() {

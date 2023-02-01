@@ -102,7 +102,10 @@ public class MainClearTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mMainClear = spy(new MainClear());
+        mMainClear = spy(new MainClear() {
+            @Override
+            boolean showAnySubscriptionInfo(Context context) { return true; }
+        });
         mActivity = Robolectric.setupActivity(FragmentActivity.class);
         mShadowActivity = Shadows.shadowOf(mActivity);
         UserManager userManager = mActivity.getSystemService(UserManager.class);

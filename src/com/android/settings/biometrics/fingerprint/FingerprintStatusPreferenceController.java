@@ -35,12 +35,13 @@ import com.android.settingslib.RestrictedPreference;
 public class FingerprintStatusPreferenceController extends BiometricStatusPreferenceController
         implements LifecycleObserver {
 
-    private static final String KEY_FINGERPRINT_SETTINGS = "fingerprint_settings";
+    public static final String KEY_FINGERPRINT_SETTINGS = "fingerprint_settings";
 
     protected final FingerprintManager mFingerprintManager;
     @VisibleForTesting
     RestrictedPreference mPreference;
     private final FingerprintStatusUtils mFingerprintStatusUtils;
+    private PreferenceScreen mPreferenceScreen;
 
     public FingerprintStatusPreferenceController(Context context) {
         this(context, KEY_FINGERPRINT_SETTINGS);
@@ -68,17 +69,26 @@ public class FingerprintStatusPreferenceController extends BiometricStatusPrefer
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void onResume() {
         updateStateInternal();
+        if (mPreferenceScreen != null) {
+            displayPreference(mPreferenceScreen);
+        }
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        mPreferenceScreen = screen;
         mPreference = screen.findPreference(mPreferenceKey);
     }
 
     @Override
     protected boolean isDeviceSupported() {
         return mFingerprintStatusUtils.isAvailable();
+    }
+
+    @Override
+    protected boolean isHardwareSupported() {
+        return Utils.hasFingerprintHardware(mContext);
     }
 
     @Override
@@ -106,5 +116,9 @@ public class FingerprintStatusPreferenceController extends BiometricStatusPrefer
         if (mPreference != null) {
             mPreference.setDisabledByAdmin(enforcedAdmin);
         }
+    }
+
+    public void setPreferenceScreen(PreferenceScreen preferenceScreen) {
+        mPreferenceScreen = preferenceScreen;
     }
 }

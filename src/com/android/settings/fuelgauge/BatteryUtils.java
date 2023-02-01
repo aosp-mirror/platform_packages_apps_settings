@@ -23,7 +23,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.os.BatteryConsumer;
+import android.os.BatteryManager;
 import android.os.BatteryStats;
 import android.os.BatteryStatsManager;
 import android.os.BatteryUsageStats;
@@ -33,6 +33,9 @@ import android.os.Process;
 import android.os.SystemClock;
 import android.os.UidBatteryConsumer;
 import android.os.UserHandle;
+import android.provider.Settings;
+import android.text.format.DateUtils;
+import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.IntDef;
@@ -41,6 +44,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
 
 import com.android.internal.util.ArrayUtils;
+import com.android.settings.R;
 import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AnomalyInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
@@ -51,7 +55,11 @@ import com.android.settingslib.fuelgauge.Estimate;
 import com.android.settingslib.fuelgauge.EstimateKt;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 import com.android.settingslib.utils.PowerUtil;
+import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.utils.ThreadUtils;
+
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.MessageLite;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -70,6 +78,11 @@ public class BatteryUtils {
     /** Special UID value for data usage by tethering. */
     public static final int UID_TETHERING = -5;
 
+    /** Flag to check if the dock defender mode has been temporarily bypassed */
+    public static final String SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS = "dock_defender_bypass";
+
+    public static final String BYPASS_DOCK_DEFENDER_ACTION = "battery.dock.defender.bypass";
+
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({StatusType.SCREEN_USAGE,
             StatusType.FOREGROUND,
@@ -81,6 +94,18 @@ public class BatteryUtils {
         int FOREGROUND = 1;
         int BACKGROUND = 2;
         int ALL = 3;
+    }
+
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({DockDefenderMode.FUTURE_BYPASS,
+            DockDefenderMode.ACTIVE,
+            DockDefenderMode.TEMPORARILY_BYPASSED,
+            DockDefenderMode.DISABLED})
+    public @interface DockDefenderMode {
+        int FUTURE_BYPASS = 0;
+        int ACTIVE = 1;
+        int TEMPORARILY_BYPASSED = 2;
+        int DISABLED = 3;
     }
 
     private static final String TAG = "BatteryUtils";
@@ -190,30 +215,12 @@ public class BatteryUtils {
      * Returns true if the specified battery consumer should be excluded from
      * battery consumption lists, either short or full.
      */
-    boolean shouldHideUidBatteryConsumerUnconditionally(UidBatteryConsumer consumer,
+    public boolean shouldHideUidBatteryConsumerUnconditionally(UidBatteryConsumer consumer,
             String[] packages) {
         final int uid = consumer.getUid();
         return uid == UID_TETHERING
                 ? false
                 : uid < 0 || isHiddenSystemModule(packages);
-    }
-
-    /**
-     * Returns true if the specified device power component should be excluded from the summary
-     * battery consumption list.
-     */
-    public boolean shouldHideDevicePowerComponent(BatteryConsumer consumer,
-            @BatteryConsumer.PowerComponent int powerComponentId) {
-        switch (powerComponentId) {
-            case BatteryConsumer.POWER_COMPONENT_IDLE:
-            case BatteryConsumer.POWER_COMPONENT_MOBILE_RADIO:
-            case BatteryConsumer.POWER_COMPONENT_SCREEN:
-            case BatteryConsumer.POWER_COMPONENT_BLUETOOTH:
-            case BatteryConsumer.POWER_COMPONENT_WIFI:
-                return true;
-            default:
-                return false;
-        }
     }
 
     /**
@@ -333,6 +340,28 @@ public class BatteryUtils {
         }
     }
 
+    /**
+     * Parses proto object from string.
+     *
+     * @param serializedProto the serialized proto string
+     * @param protoClass class of the proto
+     * @return instance of the proto class parsed from the string
+     */
+    @SuppressWarnings("unchecked")
+    public static <T extends MessageLite> T parseProtoFromString(
+            String serializedProto, T protoClass) {
+        if (serializedProto.isEmpty()) {
+            return (T) protoClass.getDefaultInstanceForType();
+        }
+        try {
+            return (T) protoClass.getParserForType()
+                    .parseFrom(Base64.decode(serializedProto, Base64.DEFAULT));
+        } catch (InvalidProtocolBufferException e) {
+            Log.e(TAG, "Failed to deserialize proto class", e);
+            return (T) protoClass.getDefaultInstanceForType();
+        }
+    }
+
     public void setForceAppStandby(int uid, String packageName,
             int mode) {
         final boolean isPreOApp = isPreOApp(packageName);
@@ -388,8 +417,7 @@ public class BatteryUtils {
         final long startTime = System.currentTimeMillis();
 
         // Stuff we always need to get BatteryInfo
-        final Intent batteryBroadcast = mContext.registerReceiver(null,
-                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        final Intent batteryBroadcast = getBatteryIntent(mContext);
 
         final long elapsedRealtimeUs = PowerUtil.convertMsToUs(
                 SystemClock.elapsedRealtime());
@@ -567,5 +595,69 @@ public class BatteryUtils {
         }
 
         return -1L;
+    }
+
+    /** Gets the latest sticky battery intent from the Android system. */
+    public static Intent getBatteryIntent(Context context) {
+        return context.registerReceiver(
+                /*receiver=*/ null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+    }
+
+    /** Gets the current dock defender mode */
+    public static int getCurrentDockDefenderMode(Context context, BatteryInfo batteryInfo) {
+        if (batteryInfo.pluggedStatus == BatteryManager.BATTERY_PLUGGED_DOCK) {
+            if (Settings.Global.getInt(context.getContentResolver(),
+                    SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS, 0) == 1) {
+                return DockDefenderMode.TEMPORARILY_BYPASSED;
+            } else if (batteryInfo.isOverheated && FeatureFactory.getFactory(context)
+                    .getPowerUsageFeatureProvider(context)
+                    .isExtraDefend()) {
+                return DockDefenderMode.ACTIVE;
+            } else if (!batteryInfo.isOverheated) {
+                return DockDefenderMode.FUTURE_BYPASS;
+            }
+        }
+        return DockDefenderMode.DISABLED;
+    }
+
+    /** Builds the battery usage time summary. */
+    public static String buildBatteryUsageTimeSummary(final Context context, final boolean isSystem,
+            final long foregroundUsageTimeInMs, final long backgroundUsageTimeInMs,
+            final long screenOnTimeInMs) {
+        StringBuilder summary = new StringBuilder();
+        if (isSystem) {
+            final long totalUsageTimeInMs = foregroundUsageTimeInMs + backgroundUsageTimeInMs;
+            if (totalUsageTimeInMs != 0) {
+                summary.append(buildBatteryUsageTimeInfo(context, totalUsageTimeInMs,
+                        R.string.battery_usage_total_less_than_one_minute,
+                        R.string.battery_usage_for_total_time));
+            }
+        } else {
+            if (screenOnTimeInMs != 0) {
+                summary.append(buildBatteryUsageTimeInfo(context, screenOnTimeInMs,
+                        R.string.battery_usage_screen_time_less_than_one_minute,
+                        R.string.battery_usage_screen_time));
+            }
+            if (screenOnTimeInMs != 0 && backgroundUsageTimeInMs != 0) {
+                summary.append('\n');
+            }
+            if (backgroundUsageTimeInMs != 0) {
+                summary.append(buildBatteryUsageTimeInfo(context, backgroundUsageTimeInMs,
+                        R.string.battery_usage_background_less_than_one_minute,
+                        R.string.battery_usage_for_background_time));
+            }
+        }
+        return summary.toString();
+    }
+
+    /** Builds the battery usage time information for one timestamp. */
+    private static String buildBatteryUsageTimeInfo(final Context context, long timeInMs,
+            final int lessThanOneMinuteResId, final int normalResId) {
+        if (timeInMs < DateUtils.MINUTE_IN_MILLIS) {
+            return context.getString(lessThanOneMinuteResId);
+        }
+        final CharSequence timeSequence = StringUtil.formatElapsedTime(
+                context, (double) timeInMs, /*withSeconds=*/ false, /*collapseTimeUnit=*/ false);
+        return context.getString(normalResId, timeSequence);
     }
 }

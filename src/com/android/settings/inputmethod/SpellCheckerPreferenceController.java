@@ -66,7 +66,7 @@ public class SpellCheckerPreferenceController extends AbstractPreferenceControll
             return;
         }
         if (!mTextServicesManager.isSpellCheckerEnabled()) {
-            preference.setSummary(R.string.switch_off_text);
+            preference.setSummary(R.string.off);
         } else {
             final SpellCheckerInfo sci = mTextServicesManager.getCurrentSpellChecker();
             if (sci != null) {

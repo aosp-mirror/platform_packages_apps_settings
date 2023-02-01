@@ -46,8 +46,10 @@ import androidx.slice.core.SliceQuery;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
+import com.android.settings.bluetooth.Utils;
 import com.android.settings.testutils.SliceTester;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
+import com.android.settings.testutils.shadow.ShadowCachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 import org.junit.After;
@@ -67,7 +69,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowBluetoothAdapter.class)
+@Config(shadows = {ShadowBluetoothAdapter.class, ShadowCachedBluetoothDeviceManager.class})
 public class BluetoothDevicesSliceTest {
 
     private static final String BLUETOOTH_MOCK_ADDRESS = "00:11:00:11:00:11";
@@ -111,6 +113,9 @@ public class BluetoothDevicesSliceTest {
             mShadowBluetoothAdapter.setEnabled(true);
             mShadowBluetoothAdapter.setState(BluetoothAdapter.STATE_ON);
         }
+        final ShadowCachedBluetoothDeviceManager shadowCachedBluetoothDeviceManager =
+                Shadow.extract(Utils.getLocalBtManager(mContext).getCachedDeviceManager());
+        shadowCachedBluetoothDeviceManager.setCachedDevicesCopy(mBluetoothDeviceList);
     }
 
     @After
@@ -186,7 +191,7 @@ public class BluetoothDevicesSliceTest {
     public void getSlice_hasAvailableMediaDevice_shouldBuildPrimaryBluetoothAction() {
         mockBluetoothDeviceList(1);
         when(mBluetoothDeviceList.get(0).getDevice().isConnected()).thenReturn(true);
-        doReturn(true).when(mBluetoothDeviceList.get(0)).isConnectedHearingAidDevice();
+        doReturn(true).when(mBluetoothDeviceList.get(0)).isConnectedAshaHearingAidDevice();
         doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getPairedBluetoothDevices();
 
         mBluetoothDevicesSlice.getSlice();

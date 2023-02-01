@@ -18,6 +18,10 @@ package com.android.settings.accessibility;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+import static com.android.settings.accessibility.AutoclickUtils.KEY_DELAY_MODE;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -25,49 +29,28 @@ import android.content.res.Resources;
 import android.provider.Settings;
 import android.util.ArrayMap;
 
-import androidx.annotation.VisibleForTesting;
-import androidx.lifecycle.LifecycleObserver;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.Map;
 
-/**
- * Controller class that controls accessibility autoclick settings.
- */
+/** Controller class that controls accessibility autoclick settings. */
 public class ToggleAutoclickPreferenceController extends BasePreferenceController implements
-        LifecycleObserver, SelectorWithWidgetPreference.OnClickListener, PreferenceControllerMixin {
+        LifecycleObserver, OnStart, OnStop, SelectorWithWidgetPreference.OnClickListener,
+        SharedPreferences.OnSharedPreferenceChangeListener {
 
-    @VisibleForTesting
-    static final String CONTROL_AUTOCLICK_DELAY_SECURE =
-            Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY;
-
-    @VisibleForTesting
-    static final String KEY_AUTOCLICK_CUSTOM_SEEKBAR = "autoclick_custom_seekbar";
-    static final String KEY_DELAY_MODE = "delay_mode";
-
-    @VisibleForTesting
-    static final int AUTOCLICK_OFF_MODE = 0;
-
-    @VisibleForTesting
-    static final int AUTOCLICK_CUSTOM_MODE = 2000;
-
-    // Pair the preference key and autoclick mode value.
-    @VisibleForTesting
-    Map<String, Integer> mAccessibilityAutoclickKeyToValueMap = new ArrayMap<>();
-
-    private SharedPreferences mSharedPreferences;
-    private final ContentResolver mContentResolver;
-    private final Resources mResources;
-    private OnChangeListener mOnChangeListener;
-    private SelectorWithWidgetPreference mDelayModePref;
+    private static final String KEY_AUTOCLICK_CUSTOM_SEEKBAR = "autoclick_custom_seekbar";
+    private static final int AUTOCLICK_OFF_MODE = 0;
+    private static final int AUTOCLICK_CUSTOM_MODE = 2000;
 
     /**
      * Seek bar preference for autoclick delay value. The seek bar has values between 0 and
@@ -75,29 +58,33 @@ public class ToggleAutoclickPreferenceController extends BasePreferenceControlle
      * delay values before saving them in settings.
      */
     private LayoutPreference mSeekBerPreference;
-    private int mCurrentUiAutoClickMode;
+    private SelectorWithWidgetPreference mDelayModePref;
+    private Map<String, Integer> mAccessibilityAutoclickKeyToValueMap = new ArrayMap<>();
+    private final SharedPreferences mSharedPreferences;
+    private final ContentResolver mContentResolver;
+    private final Resources mResources;
 
     public ToggleAutoclickPreferenceController(Context context, String preferenceKey) {
-        this(context, /* lifecycle= */ null, preferenceKey);
-    }
-
-    public ToggleAutoclickPreferenceController(Context context, Lifecycle lifecycle,
-            String preferenceKey) {
         super(context, preferenceKey);
-
         mSharedPreferences = context.getSharedPreferences(context.getPackageName(), MODE_PRIVATE);
         mContentResolver = context.getContentResolver();
         mResources = context.getResources();
-
-        setAutoclickModeToKeyMap();
-
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
     }
 
-    public void setOnChangeListener(OnChangeListener listener) {
-        mOnChangeListener = listener;
+    @Override
+    public void onStart() {
+        mSharedPreferences.registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onStop() {
+        mSharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
+            @Nullable String key) {
+        updateState(mDelayModePref);
     }
 
     @Override
@@ -109,86 +96,51 @@ public class ToggleAutoclickPreferenceController extends BasePreferenceControlle
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        mDelayModePref = (SelectorWithWidgetPreference)
-                screen.findPreference(getPreferenceKey());
+        mDelayModePref = screen.findPreference(getPreferenceKey());
         mDelayModePref.setOnClickListener(this);
-        mSeekBerPreference = (LayoutPreference) screen.findPreference(KEY_AUTOCLICK_CUSTOM_SEEKBAR);
-        updateState((Preference) mDelayModePref);
+        mSeekBerPreference = screen.findPreference(KEY_AUTOCLICK_CUSTOM_SEEKBAR);
+        updateState(mDelayModePref);
     }
 
     @Override
     public void onRadioButtonClicked(SelectorWithWidgetPreference preference) {
-        final int value = mAccessibilityAutoclickKeyToValueMap.get(mPreferenceKey);
-        handleRadioButtonPreferenceChange(value);
-        if (mOnChangeListener != null) {
-            mOnChangeListener.onCheckedChanged(mDelayModePref);
+        final int mode = getAutoclickModeToKeyMap().get(mPreferenceKey);
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED,
+                (mode != AUTOCLICK_OFF_MODE) ? ON : OFF);
+        mSharedPreferences.edit().putInt(KEY_DELAY_MODE, mode).apply();
+        if (mode != AUTOCLICK_CUSTOM_MODE) {
+            Settings.Secure.putInt(mContentResolver, Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
+                    mode);
         }
-    }
-
-    private void updatePreferenceCheckedState(int mode) {
-        if (mCurrentUiAutoClickMode == mode) {
-            mDelayModePref.setChecked(true);
-        }
-    }
-
-    private void updatePreferenceVisibleState(int mode) {
-        mSeekBerPreference.setVisible(mCurrentUiAutoClickMode == mode);
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-
         final boolean enabled = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, 0) == 1;
-
-        mCurrentUiAutoClickMode =
-                enabled ? getSharedPreferenceForAutoClickMode() : AUTOCLICK_OFF_MODE;
-
-        // Reset RadioButton.
-        mDelayModePref.setChecked(false);
-        final int mode = mAccessibilityAutoclickKeyToValueMap.get(mDelayModePref.getKey());
-        updatePreferenceCheckedState(mode);
-        updatePreferenceVisibleState(mode);
-    }
-
-    /** Listener interface handles checked event. */
-    public interface OnChangeListener {
-        /**
-         * A hook that is called when preference checked.
-         */
-        void onCheckedChanged(Preference preference);
-    }
-
-    private void setAutoclickModeToKeyMap() {
-        final String[] autoclickKeys = mResources.getStringArray(
-                R.array.accessibility_autoclick_control_selector_keys);
-
-        final int[] autoclickValues = mResources.getIntArray(
-                R.array.accessibility_autoclick_selector_values);
-
-        final int autoclickValueCount = autoclickValues.length;
-        for (int i = 0; i < autoclickValueCount; i++) {
-            mAccessibilityAutoclickKeyToValueMap.put(autoclickKeys[i], autoclickValues[i]);
+                Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, OFF) == ON;
+        final int currentUiAutoClickMode = enabled
+                ? mSharedPreferences.getInt(KEY_DELAY_MODE, AUTOCLICK_CUSTOM_MODE)
+                : AUTOCLICK_OFF_MODE;
+        final int mode = getAutoclickModeToKeyMap().get(mDelayModePref.getKey());
+        mDelayModePref.setChecked(currentUiAutoClickMode == mode);
+        if (mode == AUTOCLICK_CUSTOM_MODE) {
+            mSeekBerPreference.setVisible(mDelayModePref.isChecked());
         }
     }
 
-    private void handleRadioButtonPreferenceChange(int preference) {
-        putSecureInt(Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED,
-                (preference != AUTOCLICK_OFF_MODE) ? /* enabled */ 1 : /* disabled */ 0);
-
-        mSharedPreferences.edit().putInt(KEY_DELAY_MODE, preference).apply();
-
-        if (preference != AUTOCLICK_CUSTOM_MODE) {
-            putSecureInt(CONTROL_AUTOCLICK_DELAY_SECURE, preference);
+    /** Returns the paring preference key and autoclick mode value listing. */
+    private Map<String, Integer> getAutoclickModeToKeyMap() {
+        if (mAccessibilityAutoclickKeyToValueMap.size() == 0) {
+            final String[] autoclickKeys = mResources.getStringArray(
+                    R.array.accessibility_autoclick_control_selector_keys);
+            final int[] autoclickValues = mResources.getIntArray(
+                    R.array.accessibility_autoclick_selector_values);
+            final int autoclickValueCount = autoclickValues.length;
+            for (int i = 0; i < autoclickValueCount; i++) {
+                mAccessibilityAutoclickKeyToValueMap.put(autoclickKeys[i], autoclickValues[i]);
+            }
         }
-    }
-
-    private void putSecureInt(String name, int value) {
-        Settings.Secure.putInt(mContentResolver, name, value);
-    }
-
-    private int getSharedPreferenceForAutoClickMode() {
-        return mSharedPreferences.getInt(KEY_DELAY_MODE, AUTOCLICK_CUSTOM_MODE);
+        return mAccessibilityAutoclickKeyToValueMap;
     }
 }

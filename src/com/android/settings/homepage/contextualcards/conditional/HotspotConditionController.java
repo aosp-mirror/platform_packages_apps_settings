@@ -28,9 +28,9 @@ import android.os.UserHandle;
 import android.os.UserManager;
 
 import com.android.settings.R;
-import com.android.settings.TetherSettings;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.homepage.contextualcards.ContextualCard;
+import com.android.settings.network.tether.TetherSettings;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
@@ -106,6 +106,9 @@ public class HotspotConditionController implements ConditionalCardController {
     @Override
     public void startMonitoringStateChange() {
         mAppContext.registerReceiver(mReceiver, WIFI_AP_STATE_FILTER);
+        // The intent WIFI_AP_STATE_CHANGED_ACTION is not sticky intent anymore after SC-V2
+        // Handle the initial state after register the receiver.
+        mConditionManager.onConditionChanged();
     }
 
     @Override

@@ -21,7 +21,6 @@ import static android.content.Intent.EXTRA_USER_ID;
 import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
 import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 
-import android.annotation.Nullable;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -42,6 +41,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.content.pm.UserProperties;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -96,6 +96,7 @@ import android.widget.TabWidget;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
@@ -117,6 +118,7 @@ import com.android.settingslib.widget.AdaptiveIcon;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 public final class Utils extends com.android.settingslib.Utils {
 
@@ -161,6 +163,18 @@ public final class Utils extends com.android.settingslib.Utils {
     /** Whether or not app hibernation targets apps that target a pre-S SDK **/
     public static final String PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS =
             "app_hibernation_targets_pre_s_apps";
+
+    /**
+     * Whether or not Cloned Apps menu is available in Apps page. Default is false.
+     */
+    public static final String PROPERTY_CLONED_APPS_ENABLED = "cloned_apps_enabled";
+
+    /**
+     * Whether or not Delete All App Clones sub-menu is available in the Cloned Apps page.
+     * Default is false.
+     */
+    public static final String PROPERTY_DELETE_ALL_APP_CLONES_ENABLED =
+            "delete_all_app_clones_enabled";
 
     /**
      * Finds a matching activity for a preference's intent. If a matching
@@ -434,18 +448,20 @@ public final class Utils extends com.android.settingslib.Utils {
      * {@link #getManagedProfile} this method returns enabled and disabled managed profiles.
      */
     public static UserHandle getManagedProfileWithDisabled(UserManager userManager) {
-        // TODO: Call getManagedProfileId from here once Robolectric supports
-        // API level 24 and UserManager.getProfileIdsWithDisabled can be Mocked (to avoid having
-        // yet another implementation that loops over user profiles in this method). In the meantime
-        // we need to use UserManager.getProfiles that is available on API 23 (the one currently
-        // used for Settings Robolectric tests).
-        final int myUserId = UserHandle.myUserId();
-        final List<UserInfo> profiles = userManager.getProfiles(myUserId);
+        return getManagedProfileWithDisabled(userManager, UserHandle.myUserId());
+    }
+
+    /**
+     * Returns the managed profile of the given user or {@code null} if none is found. Unlike
+     * {@link #getManagedProfile} this method returns enabled and disabled managed profiles.
+     */
+    private static UserHandle getManagedProfileWithDisabled(UserManager um, int parentUserId) {
+        final List<UserInfo> profiles = um.getProfiles(parentUserId);
         final int count = profiles.size();
         for (int i = 0; i < count; i++) {
             final UserInfo profile = profiles.get(i);
             if (profile.isManagedProfile()
-                    && profile.getUserHandle().getIdentifier() != myUserId) {
+                    && profile.getUserHandle().getIdentifier() != parentUserId) {
                 return profile.getUserHandle();
             }
         }
@@ -454,15 +470,14 @@ public final class Utils extends com.android.settingslib.Utils {
 
     /**
      * Retrieves the id for the given user's managed profile.
+     * Unlike {@link #getManagedProfile} this method returns enabled and disabled managed profiles.
      *
      * @return the managed profile id or UserHandle.USER_NULL if there is none.
      */
     public static int getManagedProfileId(UserManager um, int parentUserId) {
-        final int[] profileIds = um.getProfileIdsWithDisabled(parentUserId);
-        for (int profileId : profileIds) {
-            if (profileId != parentUserId) {
-                return profileId;
-            }
+        final UserHandle profile = getManagedProfileWithDisabled(um, parentUserId);
+        if (profile != null) {
+            return profile.getIdentifier();
         }
         return UserHandle.USER_NULL;
     }
@@ -588,7 +603,9 @@ public final class Utils extends com.android.settingslib.Utils {
         return inflater.inflate(resId, parent, false);
     }
 
-    public static ArraySet<String> getHandledDomains(PackageManager pm, String packageName) {
+    /** Gets all the domains that the given package could handled. */
+    @NonNull
+    public static Set<String> getHandledDomains(PackageManager pm, String packageName) {
         final List<IntentFilterVerificationInfo> iviList =
                 pm.getIntentFilterVerifications(packageName);
         final List<IntentFilter> filters = pm.getAllIntentFilters(packageName);
@@ -596,9 +613,7 @@ public final class Utils extends com.android.settingslib.Utils {
         final ArraySet<String> result = new ArraySet<>();
         if (iviList != null && iviList.size() > 0) {
             for (IntentFilterVerificationInfo ivi : iviList) {
-                for (String host : ivi.getDomains()) {
-                    result.add(host);
-                }
+                result.addAll(ivi.getDomains());
             }
         }
         if (filters != null && filters.size() > 0) {
@@ -798,7 +813,9 @@ public final class Utils extends com.android.settingslib.Utils {
         }
     }
 
-    public static CharSequence getApplicationLabel(Context context, String packageName) {
+    /** Gets the application label of the given package name. */
+    @Nullable
+    public static CharSequence getApplicationLabel(Context context, @NonNull String packageName) {
         try {
             final ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(
                     packageName,
@@ -1159,7 +1176,7 @@ public final class Utils extends com.android.settingslib.Utils {
         final boolean isWork = args != null ? args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
                 == ProfileSelectFragment.ProfileType.WORK : false;
         try {
-            if (activity.getSystemService(UserManager.class).getUserProfiles().size() > 1
+            if (isNewTabNeeded(activity)
                     && ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName) != null
                     && !isWork && !isPersonal) {
                 f = Fragment.instantiate(activity,
@@ -1171,6 +1188,24 @@ public final class Utils extends com.android.settingslib.Utils {
             Log.e(TAG, "Unable to get target fragment", e);
         }
         return f;
+    }
+
+    /**
+     * Checks if a new tab is needed or not for any user profile associated with the context user.
+     *
+     * <p> Checks if any user has the property {@link UserProperties#SHOW_IN_SETTINGS_SEPARATE} set.
+     */
+    public static boolean isNewTabNeeded(Activity activity) {
+        UserManager userManager = activity.getSystemService(UserManager.class);
+        List<UserHandle> profiles = userManager.getUserProfiles();
+        for (UserHandle userHandle : profiles) {
+            UserProperties userProperties = userManager.getUserProperties(userHandle);
+            if (userProperties.getShowInSettings()
+                    == UserProperties.SHOW_IN_SETTINGS_SEPARATE) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -1228,5 +1263,18 @@ public final class Utils extends com.android.settingslib.Utils {
     @ColorInt
     public static int getHomepageIconColorHighlight(Context context) {
         return context.getColor(R.color.accent_select_primary_text);
+    }
+
+    /**
+     * Returns user id of clone profile if present, else returns -1.
+     */
+    public static int getCloneUserId(Context context) {
+        UserManager userManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        for (UserHandle userHandle : userManager.getUserProfiles()) {
+            if (userManager.getUserInfo(userHandle.getIdentifier()).isCloneProfile()) {
+                return userHandle.getIdentifier();
+            }
+        }
+        return -1;
     }
 }

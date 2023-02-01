@@ -39,7 +39,6 @@ android_app {
         "setupcompat",
         "setupdesign",
         "androidx.lifecycle_lifecycle-runtime",
-        "androidx.lifecycle_lifecycle-extensions",
         "androidx.test.core",
         "androidx.test.runner",
         "androidx.test.ext.junit",
@@ -73,12 +72,14 @@ android_robolectric_test {
     name: "SettingsRoboTests",
     srcs: [
         "src/**/*.java",
+        "src/**/*.kt",
     ],
 
     static_libs: [
         "SettingsLib-robo-testutils",
         "android-support-annotations",
         "androidx.test.core",
+        "androidx.test.rules",
         "androidx.test.runner",
         "androidx.test.ext.junit",
         "androidx.test.espresso.core",

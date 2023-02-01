@@ -34,7 +34,6 @@ import android.os.Looper;
 import android.service.notification.NotificationListenerFilter;
 import android.util.ArraySet;
 
-import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -42,6 +41,7 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.notification.NotificationBackend;
+import com.android.settings.widget.AppCheckBoxPreference;
 import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
@@ -120,7 +120,7 @@ public class BridgedAppsPreferenceControllerTest {
         when(mNm.isNotificationListenerAccessGranted(mCn)).thenReturn(true);
         when(mNm.getListenerFilter(mCn, 0)).thenReturn(new NotificationListenerFilter());
 
-        CheckBoxPreference p = mock(CheckBoxPreference.class);
+        AppCheckBoxPreference p = mock(AppCheckBoxPreference.class);
         when(p.getKey()).thenReturn("pkg|12300");
         mScreen.addPreference(p);
 
@@ -161,7 +161,7 @@ public class BridgedAppsPreferenceControllerTest {
 
         mController.onRebuildComplete(entries);
 
-        CheckBoxPreference actual = mScreen.findPreference("pkg|12300");
+        AppCheckBoxPreference actual = mScreen.findPreference("pkg|12300");
 
         assertThat(actual.isChecked()).isTrue();
         assertThat(actual.getTitle()).isEqualTo("hi");
@@ -178,7 +178,7 @@ public class BridgedAppsPreferenceControllerTest {
         when(mNm.isNotificationListenerAccessGranted(mCn)).thenReturn(true);
         when(mNm.getListenerFilter(mCn, 0)).thenReturn(nlf);
 
-        CheckBoxPreference pref = new CheckBoxPreference(mContext);
+        AppCheckBoxPreference pref = new AppCheckBoxPreference(mContext);
         pref.setKey("pkg|567");
 
         mController.onPreferenceChange(pref, false);
@@ -204,7 +204,7 @@ public class BridgedAppsPreferenceControllerTest {
         when(mNm.isNotificationListenerAccessGranted(mCn)).thenReturn(true);
         when(mNm.getListenerFilter(mCn, 0)).thenReturn(nlf);
 
-        CheckBoxPreference pref = new CheckBoxPreference(mContext);
+        AppCheckBoxPreference pref = new AppCheckBoxPreference(mContext);
         pref.setKey("pkg|567");
 
         mController.onPreferenceChange(pref, true);

@@ -16,6 +16,10 @@
 
 package com.android.settings.applications;
 
+import static android.Manifest.permission.RUN_LONG_JOBS;
+import static android.app.AppOpsManager.OP_RUN_LONG_JOBS;
+import static android.app.AppOpsManager.opToPermission;
+
 import android.Manifest;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -337,5 +341,10 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
             return resolveInfo.providerInfo;
         }
         throw new IllegalStateException("Missing ComponentInfo!");
+    }
+
+    @Override
+    public boolean isLongBackgroundTaskPermissionToggleSupported() {
+        return TextUtils.equals(RUN_LONG_JOBS, opToPermission(OP_RUN_LONG_JOBS));
     }
 }

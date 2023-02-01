@@ -16,6 +16,9 @@
 
 package com.android.settings.fuelgauge.batterysaver;
 
+import static com.android.settingslib.fuelgauge.BatterySaverUtils.KEY_NO_SCHEDULE;
+import static com.android.settingslib.fuelgauge.BatterySaverUtils.KEY_PERCENTAGE;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -27,7 +30,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -95,7 +97,7 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
                 Settings.Secure.getUriFor(Settings.Secure.LOW_POWER_WARNING_ACKNOWLEDGED),
                 false,
                 mSettingsObserver);
-        mSaverScheduleKey = mRadioButtonController.getDefaultKey();
+        mSaverScheduleKey = BatterySaverUtils.getBatterySaverScheduleKey(mContext);
         mSaverPercentage = getSaverPercentage();
     }
 
@@ -122,28 +124,16 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
     protected List<? extends CandidateInfo> getCandidates() {
         Context context = getContext();
         List<CandidateInfo> candidates = Lists.newArrayList();
-        String routineProviderApp = getContext().getResources()
-                .getString(com.android.internal.R.string.config_batterySaverScheduleProvider);
         candidates.add(new BatterySaverScheduleCandidateInfo(
                 context.getText(R.string.battery_saver_auto_no_schedule),
                 /* summary */ null,
-                BatterySaverScheduleRadioButtonsController.KEY_NO_SCHEDULE,
+                KEY_NO_SCHEDULE,
                 /* enabled */ true));
-        // only add routine option if an app has been specified
-        if (!TextUtils.isEmpty(routineProviderApp)) {
-            candidates.add(new BatterySaverScheduleCandidateInfo(
-                    context.getText(R.string.battery_saver_auto_routine),
-                    context.getText(R.string.battery_saver_auto_routine_summary),
-                    BatterySaverScheduleRadioButtonsController.KEY_ROUTINE,
-                    /* enabled */ true));
-        } else {
-            // Make sure routine is not selected if no provider app is configured
-            BatterySaverUtils.revertScheduleToNoneIfNeeded(context);
-        }
+        BatterySaverUtils.revertScheduleToNoneIfNeeded(context);
         candidates.add(new BatterySaverScheduleCandidateInfo(
                 context.getText(R.string.battery_saver_auto_percentage),
                 /* summary */ null,
-                BatterySaverScheduleRadioButtonsController.KEY_PERCENTAGE,
+                KEY_PERCENTAGE,
                 /* enabled */ true));
 
         return candidates;
@@ -169,7 +159,7 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
 
     @Override
     protected String getDefaultKey() {
-        return mRadioButtonController.getDefaultKey();
+        return BatterySaverUtils.getBatterySaverScheduleKey(mContext);
     }
 
     @Override
@@ -179,12 +169,13 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
 
     @Override
     public int getMetricsCategory() {
-        return 0;
+        return SettingsEnums.FUELGAUGE_BATTERY_SAVER_SCHEDULE;
     }
 
     private void logPowerSaver() {
         final int currentSaverPercentage = getSaverPercentage();
-        final String currentSaverScheduleKey = mRadioButtonController.getDefaultKey();
+        final String currentSaverScheduleKey = BatterySaverUtils.getBatterySaverScheduleKey(
+                mContext);
         if (mSaverScheduleKey.equals(currentSaverScheduleKey)
                 && mSaverPercentage == currentSaverPercentage) {
             return;

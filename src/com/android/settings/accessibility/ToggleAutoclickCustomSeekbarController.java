@@ -18,8 +18,11 @@ package com.android.settings.accessibility;
 
 import static android.content.Context.MODE_PRIVATE;
 
-import static com.android.settings.accessibility.ToggleAutoclickPreferenceController.KEY_DELAY_MODE;
-import static com.android.settings.accessibility.ToggleAutoclickPreferenceFragment.Quantity;
+import static com.android.settings.accessibility.AutoclickUtils.AUTOCLICK_DELAY_STEP;
+import static com.android.settings.accessibility.AutoclickUtils.KEY_CUSTOM_DELAY_VALUE;
+import static com.android.settings.accessibility.AutoclickUtils.KEY_DELAY_MODE;
+import static com.android.settings.accessibility.AutoclickUtils.MAX_AUTOCLICK_DELAY_MS;
+import static com.android.settings.accessibility.AutoclickUtils.MIN_AUTOCLICK_DELAY_MS;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -35,35 +38,15 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
-import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.widget.LayoutPreference;
 
-/**
- * Controller class that controls accessibility autoclick seekbar settings.
- */
+/** Controller class that controls accessibility autoclick seekbar settings. */
 public class ToggleAutoclickCustomSeekbarController extends BasePreferenceController
-        implements LifecycleObserver, OnResume, OnPause,
+        implements LifecycleObserver, OnStart, OnStop,
         SharedPreferences.OnSharedPreferenceChangeListener {
-
-    private static final String CONTROL_AUTOCLICK_DELAY_SECURE =
-            Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY;
-
-    @VisibleForTesting
-    static final String KEY_CUSTOM_DELAY_VALUE = "custom_delay_value";
-
-    // Min allowed autoclick delay value.
-    static final int MIN_AUTOCLICK_DELAY_MS = 200;
-
-    // Max allowed autoclick delay value.
-    static final int MAX_AUTOCLICK_DELAY_MS = 1000;
-
-    // Allowed autoclick delay values are discrete.
-    // This is the difference between two allowed values.
-    @VisibleForTesting
-    static final int AUTOCLICK_DELAY_STEP = 100;
 
     private final SharedPreferences mSharedPreferences;
     private final ContentResolver mContentResolver;
@@ -98,29 +81,20 @@ public class ToggleAutoclickCustomSeekbarController extends BasePreferenceContro
         mContentResolver = context.getContentResolver();
     }
 
-    public ToggleAutoclickCustomSeekbarController(Context context, Lifecycle lifecycle,
-            String preferenceKey) {
-        this(context, preferenceKey);
-
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
-    }
-
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
     }
 
     @Override
-    public void onResume() {
+    public void onStart() {
         if (mSharedPreferences != null) {
             mSharedPreferences.registerOnSharedPreferenceChangeListener(this);
         }
     }
 
     @Override
-    public void onPause() {
+    public void onStop() {
         if (mSharedPreferences != null) {
             mSharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
         }
@@ -132,7 +106,7 @@ public class ToggleAutoclickCustomSeekbarController extends BasePreferenceContro
         final LayoutPreference preference = screen.findPreference(getPreferenceKey());
 
         if (isAvailable()) {
-            int delayMillis = getSharedPreferenceForDelayValue();
+            final int delayMillis = getSharedPreferenceForDelayValue();
             // Initialize seek bar preference. Sets seek bar size to the number of possible delay
             // values.
             mSeekBar = preference.findViewById(R.id.autoclick_delay);
@@ -144,14 +118,10 @@ public class ToggleAutoclickCustomSeekbarController extends BasePreferenceContro
             mDelayLabel.setText(delayTimeToString(delayMillis));
 
             mShorter = preference.findViewById(R.id.shorter);
-            mShorter.setOnClickListener(v -> {
-                minusDelayByImageView();
-            });
+            mShorter.setOnClickListener(v -> minusDelayByImageView());
 
             mLonger = preference.findViewById(R.id.longer);
-            mLonger.setOnClickListener(v -> {
-                plusDelayByImageView();
-            });
+            mLonger.setOnClickListener(v -> plusDelayByImageView());
         }
     }
 
@@ -184,12 +154,9 @@ public class ToggleAutoclickCustomSeekbarController extends BasePreferenceContro
         return mSharedPreferences.getInt(KEY_CUSTOM_DELAY_VALUE, delayMillis);
     }
 
-    private void putSecureInt(String name, int value) {
-        Settings.Secure.putInt(mContentResolver, name, value);
-    }
-
     private void updateCustomDelayValue(int delayMillis) {
-        putSecureInt(CONTROL_AUTOCLICK_DELAY_SECURE, delayMillis);
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
+                delayMillis);
         mSharedPreferences.edit().putInt(KEY_CUSTOM_DELAY_VALUE, delayMillis).apply();
         mSeekBar.setProgress(delayToSeekBarProgress(delayMillis));
         mDelayLabel.setText(delayTimeToString(delayMillis));
@@ -208,15 +175,8 @@ public class ToggleAutoclickCustomSeekbarController extends BasePreferenceContro
             updateCustomDelayValue(delayMillis + AUTOCLICK_DELAY_STEP);
         }
     }
-
     private CharSequence delayTimeToString(int delayMillis) {
-        final int quantity = (delayMillis == 1000) ? Quantity.ONE : Quantity.FEW;
-        final float delaySecond = (float) delayMillis / 1000;
-        // Only show integer when delay time is 1.
-        final String decimalFormat = (delaySecond == 1) ? "%.0f" : "%.1f";
-
-        return mContext.getResources().getQuantityString(
-                R.plurals.accessibilty_autoclick_delay_unit_second,
-                quantity, String.format(decimalFormat, delaySecond));
+        return AutoclickUtils.getAutoclickDelaySummary(mContext,
+                R.string.accessibilty_autoclick_delay_unit_second, delayMillis);
     }
 }

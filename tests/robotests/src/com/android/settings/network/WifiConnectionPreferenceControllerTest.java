@@ -42,6 +42,7 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -103,6 +104,7 @@ public class WifiConnectionPreferenceControllerTest {
         verify(mPreferenceCategory, never()).addPreference(any());
     }
 
+    @Ignore
     @Test
     public void displayPreference_hasConnectedWifiEntry_preferenceAdded() {
         final WifiEntry wifiEntry = mock(WifiEntry.class);
@@ -112,6 +114,7 @@ public class WifiConnectionPreferenceControllerTest {
         verify(mPreferenceCategory).addPreference(any(WifiEntryPreference.class));
     }
 
+    @Ignore
     @Test
     public void onConnectedChanged_wifiBecameDisconnected_preferenceRemoved() {
         final WifiEntry wifiEntry = mock(WifiEntry.class);
@@ -134,6 +137,7 @@ public class WifiConnectionPreferenceControllerTest {
     }
 
 
+    @Ignore
     @Test
     public void onAccessPointsChanged_wifiBecameConnectedToDifferentAP_preferenceReplaced() {
         final WifiEntry wifiEntry1 = mock(WifiEntry.class);

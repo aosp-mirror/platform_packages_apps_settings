@@ -22,12 +22,12 @@ import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserManager;
-import android.provider.Settings;
-import android.telephony.SubscriptionManager;
 import android.telephony.euicc.EuiccManager;
+import android.util.Log;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -35,32 +35,36 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.network.helper.SubscriptionAnnotation;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.AddPreference;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
+import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
+import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class MobileNetworkSummaryController extends AbstractPreferenceController implements
-        SubscriptionsChangeListener.SubscriptionsChangeListenerClient, LifecycleObserver,
-        PreferenceControllerMixin {
+        LifecycleObserver, PreferenceControllerMixin,
+        MobileNetworkRepository.MobileNetworkCallback {
     private static final String TAG = "MobileNetSummaryCtlr";
 
     private static final String KEY = "mobile_network_list";
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
-
-    private SubscriptionManager mSubscriptionManager;
     private UserManager mUserManager;
-    private SubscriptionsChangeListener mChangeListener;
-    private AddPreference mPreference;
+    private RestrictedPreference mPreference;
 
-    private MobileNetworkSummaryStatus mStatusCache = new MobileNetworkSummaryStatus();
+    private MobileNetworkRepository mMobileNetworkRepository;
+    private List<SubscriptionInfoEntity> mSubInfoEntityList;
+    private List<UiccInfoEntity> mUiccInfoEntityList;
+    private List<MobileNetworkInfoEntity> mMobileNetworkInfoEntityList;
+    private boolean mIsAirplaneModeOn;
+    private LifecycleOwner mLifecycleOwner;
 
     /**
      * This controls the summary text and click behavior of the "Mobile network" item on the
@@ -77,26 +81,28 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
      * and the summary text gives the count of SIMs</li>
      * </ul>
      */
-    public MobileNetworkSummaryController(Context context, Lifecycle lifecycle) {
+    public MobileNetworkSummaryController(Context context, Lifecycle lifecycle,
+            LifecycleOwner lifecycleOwner) {
         super(context);
         mMetricsFeatureProvider = FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
-        mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mUserManager = context.getSystemService(UserManager.class);
+        mLifecycleOwner = lifecycleOwner;
+        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
+        mIsAirplaneModeOn = mMobileNetworkRepository.isAirplaneModeOn();
         if (lifecycle != null) {
-            mChangeListener = new SubscriptionsChangeListener(context, this);
             lifecycle.addObserver(this);
         }
     }
 
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
-        mChangeListener.start();
+        mMobileNetworkRepository.addRegister(mLifecycleOwner);
         update();
     }
 
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
-        mChangeListener.stop();
+        mMobileNetworkRepository.removeRegister();
     }
 
     @Override
@@ -107,28 +113,27 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     @Override
     public CharSequence getSummary() {
-        mStatusCache.update(mContext, null);
-        List<SubscriptionAnnotation> subs = mStatusCache.getSubscriptionList();
 
-        if (subs.isEmpty()) {
-            if (mStatusCache.isEuiccConfigSupport()) {
+        if ((mSubInfoEntityList == null || mSubInfoEntityList.isEmpty()) || (
+                mUiccInfoEntityList == null || mUiccInfoEntityList.isEmpty()) || (
+                mMobileNetworkInfoEntityList == null || mMobileNetworkInfoEntityList.isEmpty())) {
+            if (MobileNetworkUtils.showEuiccSettingsDetecting(mContext)) {
                 return mContext.getResources().getString(
                         R.string.mobile_network_summary_add_a_network);
             }
             // set empty string to override previous text for carrier when SIM available
             return "";
-        } else if (subs.size() == 1) {
-            SubscriptionAnnotation info = subs.get(0);
-            CharSequence displayName = mStatusCache.getDisplayName(info.getSubscriptionId());
-            if (info.getSubInfo().isEmbedded() || info.isActive()
-                    || mStatusCache.isPhysicalSimDisableSupport()) {
+        } else if (mSubInfoEntityList.size() == 1) {
+            SubscriptionInfoEntity info = mSubInfoEntityList.get(0);
+            CharSequence displayName = info.uniqueName;
+            if (info.isEmbedded || mUiccInfoEntityList.get(0).isActive
+                    || mMobileNetworkInfoEntityList.get(0).showToggleForPhysicalSim) {
                 return displayName;
             }
             return mContext.getString(R.string.mobile_network_tap_to_activate, displayName);
         } else {
-            return subs.stream()
-                    .mapToInt(SubscriptionAnnotation::getSubscriptionId)
-                    .mapToObj(subId -> mStatusCache.getDisplayName(subId))
+            return mSubInfoEntityList.stream()
+                    .map(SubscriptionInfoEntity::getUniqueDisplayName)
                     .collect(Collectors.joining(", "));
         }
     }
@@ -147,9 +152,8 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
     private void initPreference() {
         refreshSummary(mPreference);
         mPreference.setOnPreferenceClickListener(null);
-        mPreference.setOnAddClickListener(null);
         mPreference.setFragment(null);
-        mPreference.setEnabled(!mChangeListener.isAirplaneModeOn());
+        mPreference.setEnabled(!mIsAirplaneModeOn);
     }
 
     private void update() {
@@ -157,11 +161,12 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
             return;
         }
 
-        mStatusCache.update(mContext, statusCache -> initPreference());
-
-        List<SubscriptionAnnotation> subs = mStatusCache.getSubscriptionList();
-        if (subs.isEmpty()) {
-            if (mStatusCache.isEuiccConfigSupport()) {
+        initPreference();
+        if (((mSubInfoEntityList == null || mSubInfoEntityList.isEmpty())
+                || (mUiccInfoEntityList == null || mUiccInfoEntityList.isEmpty())
+                || (mMobileNetworkInfoEntityList == null
+                || mMobileNetworkInfoEntityList.isEmpty()))) {
+            if (MobileNetworkUtils.showEuiccSettingsDetecting(mContext)) {
                 mPreference.setOnPreferenceClickListener((Preference pref) -> {
                     logPreferenceClick(pref);
                     startAddSimFlow();
@@ -173,40 +178,13 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
             return;
         }
 
-        // We have one or more existing subscriptions, so we want the plus button if eSIM is
-        // supported.
-        if (mStatusCache.isEuiccConfigSupport()) {
-            mPreference.setAddWidgetEnabled(!mChangeListener.isAirplaneModeOn());
-            mPreference.setOnAddClickListener(p -> {
-                logPreferenceClick(p);
-                startAddSimFlow();
-            });
-        }
-
-        if (subs.size() == 1) {
-            mPreference.setOnPreferenceClickListener((Preference pref) -> {
-                logPreferenceClick(pref);
-
-                SubscriptionAnnotation info = subs.get(0);
-                if (info.getSubInfo().isEmbedded() || info.isActive()
-                        || mStatusCache.isPhysicalSimDisableSupport()) {
-                    MobileNetworkUtils.launchMobileNetworkSettings(mContext,
-                            info.getSubInfo());
-                    return true;
-                }
-
-                SubscriptionUtil.startToggleSubscriptionDialogActivity(
-                        mContext, info.getSubscriptionId(), true);
-                return true;
-            });
-        } else {
-            mPreference.setFragment(MobileNetworkListFragment.class.getCanonicalName());
-        }
+        mPreference.setFragment(MobileNetworkListFragment.class.getCanonicalName());
     }
 
     @Override
     public boolean isAvailable() {
-        return !Utils.isWifiOnly(mContext) && mUserManager.isAdminUser();
+        return SubscriptionUtil.isSimHardwareVisible(mContext) &&
+                !Utils.isWifiOnly(mContext) && mUserManager.isAdminUser();
     }
 
     @Override
@@ -216,14 +194,32 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     @Override
     public void onAirplaneModeChanged(boolean airplaneModeEnabled) {
-        mStatusCache.update(mContext, statusCache -> update());
+        if (mIsAirplaneModeOn != airplaneModeEnabled) {
+            mIsAirplaneModeOn = airplaneModeEnabled;
+            update();
+        }
     }
 
     @Override
-    public void onSubscriptionsChanged() {
-        mStatusCache.update(mContext, statusCache -> {
-            refreshSummary(mPreference);
-            update();
-        });
+    public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
+        mSubInfoEntityList = subInfoEntityList;
+        update();
+    }
+
+    @Override
+    public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> activeSubInfoList) {
+    }
+
+    @Override
+    public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
+        mUiccInfoEntityList = uiccInfoEntityList;
+        update();
+    }
+
+    @Override
+    public void onAllMobileNetworkInfoChanged(
+            List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
+        mMobileNetworkInfoEntityList = mobileNetworkInfoEntityList;
+        update();
     }
 }

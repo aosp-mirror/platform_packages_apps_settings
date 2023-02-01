@@ -24,6 +24,7 @@ import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.FeatureFlagUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,6 +51,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
     private static final String KEY_KEYBOARDS_CATEGORY = "keyboards_category";
     private static final String KEY_SPEECH_CATEGORY = "speech_category";
+    private static final String KEY_ON_DEVICE_RECOGNITION = "odsr_settings";
     private static final String KEY_TEXT_TO_SPEECH = "tts_settings_summary";
     private static final String KEY_POINTER_CATEGORY = "pointer_category";
 
@@ -103,8 +105,6 @@ public class LanguageAndInputSettings extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             @NonNull Context context, @Nullable Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        // Language
-        controllers.add(new PhoneLanguagePreferenceController(context));
 
         // Input
         final VirtualKeyboardPreferenceController virtualKeyboardPreferenceController =
@@ -123,11 +123,21 @@ public class LanguageAndInputSettings extends DashboardFragment {
                 new DefaultVoiceInputPreferenceController(context, lifecycle);
         final TtsPreferenceController ttsPreferenceController =
                 new TtsPreferenceController(context, KEY_TEXT_TO_SPEECH);
+        final OnDeviceRecognitionPreferenceController onDeviceRecognitionPreferenceController =
+                new OnDeviceRecognitionPreferenceController(context, KEY_ON_DEVICE_RECOGNITION);
+
         controllers.add(defaultVoiceInputPreferenceController);
         controllers.add(ttsPreferenceController);
-        controllers.add(new PreferenceCategoryController(context,
-                KEY_SPEECH_CATEGORY).setChildren(
-                Arrays.asList(defaultVoiceInputPreferenceController, ttsPreferenceController)));
+        List<AbstractPreferenceController> speechCategoryChildren = new ArrayList<>(
+                List.of(defaultVoiceInputPreferenceController, ttsPreferenceController));
+
+        if (onDeviceRecognitionPreferenceController.isAvailable()) {
+            controllers.add(onDeviceRecognitionPreferenceController);
+            speechCategoryChildren.add(onDeviceRecognitionPreferenceController);
+        }
+
+        controllers.add(new PreferenceCategoryController(context, KEY_SPEECH_CATEGORY)
+                .setChildren(speechCategoryChildren));
 
         // Pointer
         final PointerSpeedController pointerController = new PointerSpeedController(context);
@@ -143,11 +153,16 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.language_and_input) {
-
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context, null);
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return !FeatureFlagUtils
+                            .isEnabled(context, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_UI);
                 }
             };
 }

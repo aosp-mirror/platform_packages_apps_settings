@@ -35,6 +35,7 @@ import android.widget.TextView;
 
 import androidx.preference.Preference;
 
+import com.android.internal.app.LocaleHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -42,7 +43,6 @@ import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.AppLocaleUtil;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
-import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.Locale;
@@ -206,14 +206,14 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
      * TODO (b209962418) Do a performance test to low end device.
      * @return Return the summary to show the current app's language.
      */
-    public static CharSequence getSummary(Context context, AppEntry entry) {
-        final UserHandle userHandle = UserHandle.getUserHandleForUid(entry.info.uid);
+    public static CharSequence getSummary(Context context, ApplicationInfo app) {
+        final UserHandle userHandle = UserHandle.getUserHandleForUid(app.uid);
         final Context contextAsUser = context.createContextAsUser(userHandle, 0);
-        Locale appLocale = getAppDefaultLocale(contextAsUser, entry.info.packageName);
+        Locale appLocale = getAppDefaultLocale(contextAsUser, app.packageName);
         if (appLocale == null) {
             return context.getString(R.string.preference_of_system_locale_summary);
         } else {
-            return appLocale.getDisplayName(appLocale);
+            return LocaleHelper.getDisplayName(appLocale, appLocale, true);
         }
     }
 }

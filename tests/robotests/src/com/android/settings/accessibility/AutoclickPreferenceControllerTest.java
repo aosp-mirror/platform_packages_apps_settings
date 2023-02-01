@@ -16,11 +16,17 @@
 
 package com.android.settings.accessibility;
 
+import static android.view.accessibility.AccessibilityManager.AUTOCLICK_DELAY_DEFAULT;
+
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.provider.Settings;
-import android.view.accessibility.AccessibilityManager;
+
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -29,17 +35,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
+/** Tests for {@link AutoclickPreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
 public class AutoclickPreferenceControllerTest {
 
-    private Context mContext;
+    private final Context mContext = ApplicationProvider.getApplicationContext();
     private AutoclickPreferenceController mController;
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
         mController = new AutoclickPreferenceController(mContext, "auto_click");
     }
 
@@ -52,22 +57,23 @@ public class AutoclickPreferenceControllerTest {
     @Test
     public void getSummary_disabledAutoclick_shouldReturnOffSummary() {
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, 0);
+                Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, OFF);
 
         assertThat(mController.getSummary())
-                .isEqualTo(mContext.getText(R.string.accessibility_feature_state_off));
+                .isEqualTo(mContext.getText(R.string.off));
     }
 
     @Test
     public void getSummary_enabledAutoclick_shouldReturnOnSummary() {
-        final int autoclickDelayDefault = AccessibilityManager.AUTOCLICK_DELAY_DEFAULT;
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, 1);
+                Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, ON);
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY, autoclickDelayDefault);
+                Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY, AUTOCLICK_DELAY_DEFAULT);
 
-        assertThat(mController.getSummary())
-                .isEqualTo(ToggleAutoclickPreferenceFragment.getAutoclickPreferenceSummary(
-                        mContext.getResources(), autoclickDelayDefault));
+        assertThat(mController.getSummary().toString())
+                .isEqualTo(AutoclickUtils.getAutoclickDelaySummary(
+                        mContext,
+                        R.string.accessibilty_autoclick_preference_subtitle_medium_delay,
+                        AUTOCLICK_DELAY_DEFAULT).toString());
     }
 }

@@ -16,6 +16,8 @@
 
 package com.android.settings.applications.manageapplications;
 
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_NONE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.mock;
@@ -117,7 +119,8 @@ public class ApplicationViewHolderTest {
 
     @Test
     public void twoTouchTarget() {
-        mView = ApplicationViewHolder.newView(new FrameLayout(mContext), true);
+        mView = ApplicationViewHolder.newView(new FrameLayout(mContext), true,
+                LIST_TYPE_NONE);
         mHolder = new ApplicationViewHolder(mView);
         assertThat(mHolder.mSwitch).isNotNull();
         assertThat(mHolder.mWidgetContainer.getChildCount()).isEqualTo(1);
@@ -126,7 +129,8 @@ public class ApplicationViewHolderTest {
     @Test
     public void updateSwitch() {
         final CountDownLatch latch = new CountDownLatch(1);
-        mView = ApplicationViewHolder.newView(new FrameLayout(mContext), true);
+        mView = ApplicationViewHolder.newView(new FrameLayout(mContext), true,
+                LIST_TYPE_NONE);
         mHolder = new ApplicationViewHolder(mView);
         mHolder.updateSwitch((buttonView, isChecked) -> latch.countDown(), true, true);
 

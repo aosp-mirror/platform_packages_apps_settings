@@ -38,7 +38,7 @@ import android.util.Log;
 import android.util.Pair;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
@@ -208,7 +208,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         }
 
         final TextToSpeechViewModel ttsViewModel =
-                ViewModelProviders.of(this).get(TextToSpeechViewModel.class);
+                new ViewModelProvider(this).get(TextToSpeechViewModel.class);
         Pair<TextToSpeech, Boolean> ttsAndNew = ttsViewModel.getTtsAndWhetherNew(mInitListener);
         mTts = ttsAndNew.first;
         // If the TTS object is not newly created, we need to run the setup on the settings side to
@@ -228,14 +228,16 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         // them to resize, which results in the recyclerview smoothly animating them at inopportune
         // times. Disable the animation so widgets snap to their positions rather than sliding
         // around while the user is interacting with it.
-        getListView().getItemAnimator().setMoveDuration(0);
+        if (getListView().getItemAnimator() != null) {
+            getListView().getItemAnimator().setMoveDuration(0);
+        }
 
         if (mTts == null || mCurrentDefaultLocale == null) {
             return;
         }
         if (!mTts.getDefaultEngine().equals(mTts.getCurrentEngine())) {
             final TextToSpeechViewModel ttsViewModel =
-                    ViewModelProviders.of(this).get(TextToSpeechViewModel.class);
+                    new ViewModelProvider(this).get(TextToSpeechViewModel.class);
             try {
                 // If the current engine isn't the default engine shut down the current engine in
                 // preparation for creating the new engine.

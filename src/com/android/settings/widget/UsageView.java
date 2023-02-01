@@ -28,7 +28,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.settingslib.R;
+import com.android.settings.R;
 
 import java.util.Locale;
 

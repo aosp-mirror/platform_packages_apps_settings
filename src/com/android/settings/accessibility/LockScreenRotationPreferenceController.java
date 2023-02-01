@@ -54,7 +54,7 @@ public class LockScreenRotationPreferenceController extends TogglePreferenceCont
      */
     @Override
     public boolean setChecked(boolean isChecked) {
-        RotationPolicy.setRotationLockForAccessibility(mContext, !isChecked);
+        RotationPolicy.setRotationLock(mContext, !isChecked);
         return true;
     }
 

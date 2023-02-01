@@ -18,23 +18,20 @@ package com.android.settings.emergency;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.emergencynumber.EmergencyNumberUtils;
 
 /**
  * Preference controller for emergency gesture setting's entyrpoint preference
  */
 public class EmergencyGestureEntrypointPreferenceController extends BasePreferenceController {
-    private static final String TAG = "EmergencyGestureEntry";
 
     @VisibleForTesting
     static final String ACTION_EMERGENCY_GESTURE_SETTINGS =
@@ -42,10 +39,12 @@ public class EmergencyGestureEntrypointPreferenceController extends BasePreferen
     @VisibleForTesting
     Intent mIntent;
 
+    private final EmergencyNumberUtils mEmergencyNumberUtils;
     private boolean mUseCustomIntent;
 
     public EmergencyGestureEntrypointPreferenceController(Context context, String key) {
         super(context, key);
+        mEmergencyNumberUtils = new EmergencyNumberUtils(context);
         final String emergencyGestureSettingsPackageName = context.getResources().getString(
                 R.string.emergency_gesture_settings_package);
         if (!TextUtils.isEmpty(emergencyGestureSettingsPackageName)) {
@@ -94,23 +93,9 @@ public class EmergencyGestureEntrypointPreferenceController extends BasePreferen
 
     @Override
     public CharSequence getSummary() {
-        if (mUseCustomIntent) {
-            final String packageName = mContext.getResources().getString(
-                    R.string.emergency_gesture_settings_package);
-            try {
-                final PackageManager pm = mContext.getPackageManager();
-                final ApplicationInfo appInfo = pm.getApplicationInfo(
-                        packageName, PackageManager.MATCH_DISABLED_COMPONENTS
-                                | PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS);
-                return mContext.getString(R.string.emergency_gesture_entrypoint_summary,
-                        appInfo.loadLabel(pm));
-            } catch (Exception e) {
-                Log.d(TAG, "Failed to get custom summary, falling back.");
-                return super.getSummary();
-            }
-        }
-
-        return super.getSummary();
+        return mContext.getText(
+                mEmergencyNumberUtils.getEmergencyGestureEnabled()
+                        ? R.string.on : R.string.off);
     }
 
     /**

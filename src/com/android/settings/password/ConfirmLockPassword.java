@@ -493,6 +493,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         }
 
         private void startDisappearAnimation(final Intent intent) {
+            ConfirmDeviceCredentialUtils.hideImeImmediately(
+                    getActivity().getWindow().getDecorView());
+
             if (mDisappearing) {
                 return;
             }

@@ -21,6 +21,7 @@ import com.android.settingslib.net.NetworkCycleData;
 import com.android.settingslib.widget.SettingsSpinnerAdapter;
 
 import java.util.List;
+import java.util.Objects;
 
 public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem> {
 
@@ -66,7 +67,7 @@ public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem>
      * Rebuild list based on network data. Always selects the newest item,
      * updating the inspection range on chartData.
      */
-    public void updateCycleList(List<? extends NetworkCycleData> cycleData) {
+    public boolean updateCycleList(List<? extends NetworkCycleData> cycleData) {
         mSpinner.setOnItemSelectedListener(mListener);
         // stash away currently selected cycle to try restoring below
         final CycleAdapter.CycleItem previousItem = (CycleAdapter.CycleItem)
@@ -82,7 +83,16 @@ public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem>
         if (getCount() > 0) {
             final int position = findNearestPosition(previousItem);
             mSpinner.setSelection(position);
+
+            // only force-update cycle when changed; skipping preserves any
+            // user-defined inspection region.
+            final CycleAdapter.CycleItem selectedItem = getItem(position);
+            if (!Objects.equals(selectedItem, previousItem)) {
+                mListener.onItemSelected(null, null, position, 0);
+                return false;
+            }
         }
+        return true;
     }
 
     /**

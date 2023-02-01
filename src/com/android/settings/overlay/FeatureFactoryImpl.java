@@ -37,6 +37,8 @@ import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.aware.AwareFeatureProviderImpl;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProviderImpl;
+import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider;
+import com.android.settings.biometrics2.factory.BiometricsRepositoryProviderImpl;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProviderImpl;
 import com.android.settings.connecteddevice.dock.DockUpdaterFeatureProviderImpl;
@@ -71,6 +73,8 @@ import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.slices.SlicesFeatureProviderImpl;
 import com.android.settings.users.UserFeatureProvider;
 import com.android.settings.users.UserFeatureProviderImpl;
+import com.android.settings.vpn2.AdvancedVpnFeatureProvider;
+import com.android.settings.vpn2.AdvancedVpnFeatureProviderImpl;
 import com.android.settings.wifi.WifiTrackerLibProvider;
 import com.android.settings.wifi.WifiTrackerLibProviderImpl;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -102,10 +106,12 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private BluetoothFeatureProvider mBluetoothFeatureProvider;
     private AwareFeatureProvider mAwareFeatureProvider;
     private FaceFeatureProvider mFaceFeatureProvider;
+    private BiometricsRepositoryProvider mBiometricsRepositoryProvider;
     private WifiTrackerLibProvider mWifiTrackerLibProvider;
     private SecuritySettingsFeatureProvider mSecuritySettingsFeatureProvider;
     private AccessibilitySearchFeatureProvider mAccessibilitySearchFeatureProvider;
     private AccessibilityMetricsFeatureProvider mAccessibilityMetricsFeatureProvider;
+    private AdvancedVpnFeatureProvider mAdvancedVpnFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -222,10 +228,9 @@ public class FeatureFactoryImpl extends FeatureFactory {
     }
 
     @Override
-    public SuggestionFeatureProvider getSuggestionFeatureProvider(Context context) {
+    public SuggestionFeatureProvider getSuggestionFeatureProvider() {
         if (mSuggestionFeatureProvider == null) {
-            mSuggestionFeatureProvider = new SuggestionFeatureProviderImpl(
-                    context.getApplicationContext());
+            mSuggestionFeatureProvider = new SuggestionFeatureProviderImpl();
         }
         return mSuggestionFeatureProvider;
     }
@@ -304,6 +309,14 @@ public class FeatureFactoryImpl extends FeatureFactory {
     }
 
     @Override
+    public BiometricsRepositoryProvider getBiometricsRepositoryProvider() {
+        if (mBiometricsRepositoryProvider == null) {
+            mBiometricsRepositoryProvider = new BiometricsRepositoryProviderImpl();
+        }
+        return mBiometricsRepositoryProvider;
+    }
+
+    @Override
     public WifiTrackerLibProvider getWifiTrackerLibProvider() {
         if (mWifiTrackerLibProvider == null) {
             mWifiTrackerLibProvider = new WifiTrackerLibProviderImpl();
@@ -333,5 +346,13 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mAccessibilityMetricsFeatureProvider = new AccessibilityMetricsFeatureProviderImpl();
         }
         return mAccessibilityMetricsFeatureProvider;
+    }
+
+    @Override
+    public AdvancedVpnFeatureProvider getAdvancedVpnFeatureProvider() {
+        if (mAdvancedVpnFeatureProvider == null) {
+            mAdvancedVpnFeatureProvider = new AdvancedVpnFeatureProviderImpl();
+        }
+        return mAdvancedVpnFeatureProvider;
     }
 }

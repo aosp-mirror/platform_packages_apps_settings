@@ -85,7 +85,7 @@ public class PickupGesturePreferenceControllerTest {
         when(mContext.getResources().getString(anyInt())).thenReturn("foo");
         final Context context = RuntimeEnvironment.application;
         final SharedPreferences prefs =
-                new SuggestionFeatureProviderImpl(context).getSharedPrefs(context);
+                new SuggestionFeatureProviderImpl().getSharedPrefs(context);
         prefs.edit().putBoolean(PickupGestureSettings.PREF_KEY_SUGGESTION_COMPLETE, true).commit();
 
         assertThat(PickupGesturePreferenceController.isSuggestionComplete(mContext, prefs))

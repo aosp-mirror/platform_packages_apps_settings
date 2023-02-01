@@ -19,6 +19,7 @@ package com.android.settings.accessibility;
 import android.app.settings.SettingsEnums;
 import android.hardware.display.ColorDisplayManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
@@ -28,7 +29,11 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** Accessibility settings for color and motion. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
@@ -46,18 +51,48 @@ public class ColorAndMotionFragment extends DashboardFragment {
     private Preference mDisplayDaltonizerPreferenceScreen;
     private SwitchPreference mToggleDisableAnimationsPreference;
     private SwitchPreference mToggleLargePointerIconPreference;
+    private AccessibilitySettingsContentObserver mSettingsContentObserver;
+
+    private final List<String> mShortcutFeatureKeys = new ArrayList<>();
 
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.ACCESSIBILITY_COLOR_AND_MOTION;
     }
 
-
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         initializeAllPreferences();
         updateSystemPreferences();
+
+        mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED);
+        mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED);
+
+        mSettingsContentObserver = new AccessibilitySettingsContentObserver(new Handler());
+        mSettingsContentObserver.registerKeysToObserverCallback(mShortcutFeatureKeys,
+                key -> updatePreferencesState());
+    }
+
+    private void updatePreferencesState() {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        getPreferenceControllers().forEach(controllers::addAll);
+        controllers.forEach(controller -> controller.updateState(
+                findPreference(controller.getPreferenceKey())));
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        mSettingsContentObserver.register(getContentResolver());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        mSettingsContentObserver.unregister(getContentResolver());
     }
 
     @Override

@@ -224,8 +224,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     public void onResume() {
         super.onResume();
         updatePreferenceStates();
-        writeElapsedTimeMetric(SettingsEnums.ACTION_DASHBOARD_VISIBLE_TIME,
-                "isParalleledControllers:false");
     }
 
     @Override
@@ -413,6 +411,30 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
 
         updatePreferenceVisibility(mPreferenceControllers);
+    }
+
+    /**
+     * Force update all the preferences in this fragment.
+     */
+    public void forceUpdatePreferences() {
+        final PreferenceScreen screen = getPreferenceScreen();
+        if (screen == null || mPreferenceControllers == null) {
+            return;
+        }
+        for (List<AbstractPreferenceController> controllerList : mPreferenceControllers.values()) {
+            for (AbstractPreferenceController controller : controllerList) {
+                final String key = controller.getPreferenceKey();
+                final Preference preference = findPreference(key);
+                if (preference == null) {
+                    continue;
+                }
+                final boolean available = controller.isAvailable();
+                if (available) {
+                    controller.updateState(preference);
+                }
+                preference.setVisible(available);
+            }
+        }
     }
 
     @VisibleForTesting

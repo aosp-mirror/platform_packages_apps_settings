@@ -17,18 +17,21 @@
 package com.android.settings.enterprise;
 
 import static android.app.admin.DevicePolicyManager.DEVICE_OWNER_TYPE_DEFAULT;
+import static android.app.admin.DevicePolicyManager.DEVICE_OWNER_TYPE_FINANCED;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+import android.widget.FrameLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -42,9 +45,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.android.controller.ActivityController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
@@ -54,33 +58,33 @@ public class EnterprisePrivacySettingsTest extends AbsBasePrivacySettingsPrefere
 
     @Mock
     private DevicePolicyManager mDevicePolicyManager;
-    @Mock
-    private PrivacySettingsPreference mPrivacySettingsPreference;
     private FakeFeatureFactory mFeatureFactory;
     private EnterprisePrivacySettings mSettings;
     private Context mContext;
+    private TestActivity mActivity;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(ApplicationProvider.getApplicationContext());
+        mContext = ApplicationProvider.getApplicationContext();
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mSettings = new EnterprisePrivacySettings();
-        mSettings.mPrivacySettingsPreference = mPrivacySettingsPreference;
+        mSettings.mPrivacySettingsPreference = new PrivacySettingsEnterprisePreference(mContext);
 
-        when(mContext.getSystemService(DevicePolicyManager.class)).thenReturn(mDevicePolicyManager);
-        when(mDevicePolicyManager.isDeviceManaged()).thenReturn(true);
-        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser())
-                .thenReturn(DEVICE_OWNER_COMPONENT);
-        when(mDevicePolicyManager.getDeviceOwnerType(DEVICE_OWNER_COMPONENT))
-                .thenReturn(DEVICE_OWNER_TYPE_DEFAULT);
+        ActivityController<TestActivity> controller = Robolectric.buildActivity(
+                TestActivity.class).create();
+        mActivity = controller.get();
+
+        mActivity
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .add(TestActivity.CONTAINER_VIEW_ID, mSettings)
+                .commit();
+        controller.start();
     }
 
     @Test
     public void verifyConstants() {
-        when(mPrivacySettingsPreference.getPreferenceScreenResId())
-                .thenReturn(R.xml.enterprise_privacy_settings);
-
         assertThat(mSettings.getMetricsCategory())
                 .isEqualTo(MetricsEvent.ENTERPRISE_PRIVACY_SETTINGS);
         assertThat(mSettings.getLogTag()).isEqualTo("EnterprisePrivacySettings");
@@ -90,7 +94,7 @@ public class EnterprisePrivacySettingsTest extends AbsBasePrivacySettingsPrefere
     }
 
     @Test
-    public void isPageEnabled_hasDeviceOwner_shouldReturnTrue() {
+    public void isPageEnabled_hasDeviceOwner_returnsTrue() {
         when(mFeatureFactory.enterprisePrivacyFeatureProvider.hasDeviceOwner())
                 .thenReturn(true);
 
@@ -99,7 +103,7 @@ public class EnterprisePrivacySettingsTest extends AbsBasePrivacySettingsPrefere
     }
 
     @Test
-    public void isPageEnabled_noDeviceOwner_shouldReturnFalse() {
+    public void isPageEnabled_noDeviceOwner_returnsFalse() {
         when(mDevicePolicyManager.isDeviceManaged()).thenReturn(false);
         when(mFeatureFactory.enterprisePrivacyFeatureProvider.hasDeviceOwner())
                 .thenReturn(false);
@@ -109,36 +113,105 @@ public class EnterprisePrivacySettingsTest extends AbsBasePrivacySettingsPrefere
     }
 
     @Test
-    public void getPreferenceControllers() {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new NetworkLogsPreferenceController(mContext));
-        when(mPrivacySettingsPreference.createPreferenceControllers(anyBoolean()))
-                .thenReturn(controllers);
-
+    public void getPreferenceControllers_returnsEnterprisePreferenceControllers() {
         final List<AbstractPreferenceController> privacyControllers =
                 mSettings.createPreferenceControllers(mContext);
 
-        assertThat(privacyControllers).isNotNull();
-        assertThat(privacyControllers.size()).isEqualTo(1);
-        assertThat(controllers.get(0)).isInstanceOf(NetworkLogsPreferenceController.class);
+        verifyEnterprisePreferenceControllers(privacyControllers);
     }
 
     @Test
     public void
             getSearchIndexProviderPreferenceControllers_returnsEnterpriseSearchIndexPreferenceControllers() {
+        Context context = spy(ApplicationProvider.getApplicationContext());
+        setupPrivacyPreference(context, DEVICE_OWNER_TYPE_DEFAULT);
+
         final List<AbstractPreferenceController> controllers =
             EnterprisePrivacySettings.SEARCH_INDEX_DATA_PROVIDER
-                .getPreferenceControllers(mContext);
+                .getPreferenceControllers(context);
 
         verifyEnterprisePreferenceControllers(controllers);
     }
 
     @Test
+    public void
+            getSearchIndexProviderPreferenceControllers_returnsFinancedSearchIndexPreferenceControllers() {
+        Context context = spy(ApplicationProvider.getApplicationContext());
+        setupPrivacyPreference(context, DEVICE_OWNER_TYPE_FINANCED);
+
+        final List<AbstractPreferenceController> controllers =
+                EnterprisePrivacySettings.SEARCH_INDEX_DATA_PROVIDER
+                        .getPreferenceControllers(context);
+
+        verifyFinancedPreferenceControllers(controllers);
+    }
+
+    @Test
     public void getXmlResourcesToIndex_returnsEnterpriseXmlResources() {
+        Context context = spy(ApplicationProvider.getApplicationContext());
+        setupPrivacyPreference(context, DEVICE_OWNER_TYPE_DEFAULT);
+
         final List<SearchIndexableResource> searchIndexableResources =
                 EnterprisePrivacySettings.SEARCH_INDEX_DATA_PROVIDER
-                        .getXmlResourcesToIndex(mContext, true);
+                        .getXmlResourcesToIndex(context, true);
 
         verifyEnterpriseSearchIndexableResources(searchIndexableResources);
+    }
+
+    @Test
+    public void getXmlResourcesToIndex_returnsFinancedXmlResources() {
+        Context context = spy(ApplicationProvider.getApplicationContext());
+        setupPrivacyPreference(context, DEVICE_OWNER_TYPE_FINANCED);
+
+        final List<SearchIndexableResource> searchIndexableResources =
+                EnterprisePrivacySettings.SEARCH_INDEX_DATA_PROVIDER
+                        .getXmlResourcesToIndex(context, true);
+
+        verifyFinancedSearchIndexableResources(searchIndexableResources);
+    }
+
+    @Test
+    public void onCreate_enterprisePrivacyPreference_updatesTitle() {
+        mSettings.onCreate(new Bundle());
+
+        assertThat(mActivity.getTitle())
+                .isEqualTo(mContext.getText(R.string.enterprise_privacy_settings));
+    }
+
+    @Test
+    public void onCreate_financedPrivacyPreference_doesNotUpdateTitle() {
+        mSettings.mPrivacySettingsPreference = new PrivacySettingsFinancedPreference(mContext);
+
+        mSettings.onCreate(new Bundle());
+
+        assertThat(mActivity.getTitle())
+                .isEqualTo(mContext.getText(R.string.financed_privacy_settings));
+    }
+
+    private void setupPrivacyPreference(Context context, int deviceOwnerType) {
+        when(context.getSystemService(DevicePolicyManager.class)).thenReturn(mDevicePolicyManager);
+        when(mDevicePolicyManager.isDeviceManaged()).thenReturn(true);
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser())
+                .thenReturn(DEVICE_OWNER_COMPONENT);
+        when(mDevicePolicyManager.getDeviceOwnerType(DEVICE_OWNER_COMPONENT))
+                .thenReturn(deviceOwnerType);
+    }
+
+    private static final class TestActivity extends AppCompatActivity {
+
+        private static final int CONTAINER_VIEW_ID = 1234;
+
+        @Override
+        protected void onCreate(Bundle bundle) {
+            super.onCreate(bundle);
+
+            FrameLayout frameLayout = new FrameLayout(this);
+            frameLayout.setId(CONTAINER_VIEW_ID);
+
+            // Need to set the Theme.AppCompat theme (or descendant) with this activity, otherwise
+            // a {@link IllegalStateException} is thrown when setting the content view.
+            setTheme(R.style.Theme_AppCompat_Light);
+            setContentView(frameLayout);
+        }
     }
 }

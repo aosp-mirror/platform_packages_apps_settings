@@ -62,13 +62,20 @@ public class WalletPrivacyPreferenceController extends TogglePreferenceControlle
 
     @Override
     public int getAvailabilityStatus() {
-        return isEnabled() && isSecure() ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
+        if (CustomizableLockScreenUtils.isFeatureEnabled(mContext)) {
+            return UNSUPPORTED_ON_DEVICE;
+        } else  if (!isEnabled()) {
+            return UNSUPPORTED_ON_DEVICE;
+        } else if (!isSecure()) {
+            return DISABLED_DEPENDENT_SETTING;
+        }
+        return AVAILABLE;
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        preference.setEnabled(getAvailabilityStatus() != DISABLED_DEPENDENT_SETTING);
+        preference.setEnabled(getAvailabilityStatus() == AVAILABLE);
         refreshSummary(preference);
     }
 

@@ -18,12 +18,13 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.TextReadingResetController.ResetStateListener;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.IntDef;
@@ -36,13 +37,13 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 
+import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -53,8 +54,7 @@ import java.util.stream.Collectors;
 public class TextReadingPreferenceFragment extends DashboardFragment {
     public static final String EXTRA_LAUNCHED_FROM = "launched_from";
     private static final String TAG = "TextReadingPreferenceFragment";
-    private static final String CATEGORY_FOR_ANYTHING_ELSE =
-            "com.android.settings.suggested.category.DISPLAY_SETTINGS";
+    private static final String SETUP_WIZARD_PACKAGE = "setupwizard";
     static final String FONT_SIZE_KEY = "font_size";
     static final String DISPLAY_SIZE_KEY = "display_size";
     static final String BOLD_TEXT_KEY = "toggle_force_bold_text";
@@ -62,7 +62,11 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
     static final String RESET_KEY = "reset";
     private static final String PREVIEW_KEY = "preview";
     private static final String NEED_RESET_SETTINGS = "need_reset_settings";
+    private static final String LAST_PREVIEW_INDEX = "last_preview_index";
+    private static final int UNKNOWN_INDEX = -1;
+
     private FontWeightAdjustmentPreferenceController mFontWeightAdjustmentController;
+    private TextReadingPreviewController mPreviewController;
     private int mEntryPoint = EntryPoint.UNKNOWN_ENTRY;
 
     /**
@@ -93,14 +97,33 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
     boolean mNeedResetSettings;
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         mNeedResetSettings = false;
         mResetStateListeners = getResetStateListeners();
 
-        if (icicle != null && icicle.getBoolean(NEED_RESET_SETTINGS)) {
-            mResetStateListeners.forEach(ResetStateListener::resetState);
+        if (savedInstanceState != null) {
+            if (savedInstanceState.getBoolean(NEED_RESET_SETTINGS)) {
+                mResetStateListeners.forEach(ResetStateListener::resetState);
+            }
+
+            if (savedInstanceState.containsKey(LAST_PREVIEW_INDEX)) {
+                final int lastPreviewIndex = savedInstanceState.getInt(LAST_PREVIEW_INDEX);
+                if (lastPreviewIndex != UNKNOWN_INDEX) {
+                    mPreviewController.setCurrentItem(lastPreviewIndex);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        final View rootView = getActivity().getWindow().peekDecorView();
+        if (rootView != null) {
+            rootView.setAccessibilityPaneTitle(getString(
+                    R.string.accessibility_text_reading_options_title));
         }
     }
 
@@ -127,19 +150,19 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
         final FontSizeData fontSizeData = new FontSizeData(context);
         final DisplaySizeData displaySizeData = createDisplaySizeData(context);
 
-        final TextReadingPreviewController previewController = new TextReadingPreviewController(
-                context, PREVIEW_KEY, fontSizeData, displaySizeData);
-        previewController.setEntryPoint(mEntryPoint);
-        controllers.add(previewController);
+        mPreviewController = new TextReadingPreviewController(context, PREVIEW_KEY, fontSizeData,
+                displaySizeData);
+        mPreviewController.setEntryPoint(mEntryPoint);
+        controllers.add(mPreviewController);
 
         final PreviewSizeSeekBarController fontSizeController = new PreviewSizeSeekBarController(
                 context, FONT_SIZE_KEY, fontSizeData);
-        fontSizeController.setInteractionListener(previewController);
+        fontSizeController.setInteractionListener(mPreviewController);
         controllers.add(fontSizeController);
 
         final PreviewSizeSeekBarController displaySizeController = new PreviewSizeSeekBarController(
                 context, DISPLAY_SIZE_KEY, displaySizeData);
-        displaySizeController.setInteractionListener(previewController);
+        displaySizeController.setInteractionListener(mPreviewController);
         controllers.add(displaySizeController);
 
         mFontWeightAdjustmentController =
@@ -156,6 +179,7 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
                 new TextReadingResetController(context, RESET_KEY,
                         v -> showDialog(DialogEnums.DIALOG_RESET_SETTINGS));
         resetController.setEntryPoint(mEntryPoint);
+        resetController.setVisible(!WizardManagerHelper.isAnySetupWizard(getIntent()));
         controllers.add(resetController);
 
         return controllers;
@@ -188,9 +212,25 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
         if (mNeedResetSettings) {
             outState.putBoolean(NEED_RESET_SETTINGS, true);
         }
+
+        outState.putInt(LAST_PREVIEW_INDEX, mPreviewController.getCurrentItem());
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    protected boolean isCallingFromAnythingElseEntryPoint() {
+        final Activity activity = getActivity();
+        final String callingPackage = activity != null ? activity.getCallingPackage() : null;
+
+        return callingPackage != null && callingPackage.contains(SETUP_WIZARD_PACKAGE);
     }
 
     @VisibleForTesting
@@ -205,14 +245,7 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
             return;
         }
 
-        final Intent intent = getIntent();
-        if (intent == null) {
-            mEntryPoint = EntryPoint.UNKNOWN_ENTRY;
-            return;
-        }
-
-        final Set<String> categories = intent.getCategories();
-        mEntryPoint = categories != null && categories.contains(CATEGORY_FOR_ANYTHING_ELSE)
+        mEntryPoint = isCallingFromAnythingElseEntryPoint()
                 ? EntryPoint.SUW_ANYTHING_ELSE : EntryPoint.UNKNOWN_ENTRY;
     }
 

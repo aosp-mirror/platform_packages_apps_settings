@@ -85,13 +85,15 @@ public class StorageAsyncLoader
 
         for (UserInfo info : infos) {
             final StorageResult result = getAppsAndGamesSize(info.id);
-
+            final Bundle media = new Bundle();
+            media.putString(ContentResolver.QUERY_ARG_SQL_SELECTION, MediaColumns.VOLUME_NAME
+                    + "= '" + MediaStore.VOLUME_EXTERNAL_PRIMARY + "'");
             result.imagesSize = getFilesSize(info.id, MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                    null /* queryArgs */);
+                    media /* queryArgs */);
             result.videosSize = getFilesSize(info.id, MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
-                    null /* queryArgs */);
+                    media /* queryArgs */);
             result.audioSize = getFilesSize(info.id, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                    null /* queryArgs */);
+                    media /* queryArgs */);
 
             final Bundle documentsAndOtherQueryArgs = new Bundle();
             documentsAndOtherQueryArgs.putString(ContentResolver.QUERY_ARG_SQL_SELECTION,
@@ -100,13 +102,14 @@ public class StorageAsyncLoader
                     + " AND " + FileColumns.MEDIA_TYPE + "!=" + FileColumns.MEDIA_TYPE_AUDIO
                     + " AND " + FileColumns.MIME_TYPE + " IS NOT NULL");
             result.documentsAndOtherSize = getFilesSize(info.id,
-                    MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL),
+                    MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY),
                     documentsAndOtherQueryArgs);
 
             final Bundle trashQueryArgs = new Bundle();
             trashQueryArgs.putInt(MediaStore.QUERY_ARG_MATCH_TRASHED, MediaStore.MATCH_ONLY);
             result.trashSize = getFilesSize(info.id,
-                    MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL), trashQueryArgs);
+                    MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY),
+                    trashQueryArgs);
 
             results.put(info.id, result);
         }

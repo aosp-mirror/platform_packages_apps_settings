@@ -21,15 +21,42 @@
     android:title="@string/advanced_battery_title"
     settings:keywords="@string/keywords_battery_usage">
 
-    <com.android.settings.fuelgauge.BatteryHistoryPreference
-        android:key="battery_graph"/>
+    <com.android.settings.fuelgauge.batteryusage.BatteryHistoryPreference
+        android:key="battery_chart"
+        settings:controller=
+            "com.android.settings.fuelgauge.batteryusage.BatteryChartPreferenceController" />
 
     <PreferenceCategory
-        android:key="app_list"/>
+        android:key="screen_on_time_category"
+        settings:controller=
+            "com.android.settings.fuelgauge.batteryusage.ScreenOnTimeController"
+        settings:isPreferenceVisible="false">
 
-    <com.android.settingslib.widget.FooterPreference
-        android:key="battery_graph_footer"
-        android:title="@string/battery_usage_screen_footer"
-        android:selectable="false"
-        settings:searchable="false"/>
+        <com.android.settings.fuelgauge.batteryusage.TextViewPreference
+            android:key="screen_on_time_text"
+            settings:isPreferenceVisible="false" />
+
+    </PreferenceCategory>
+
+    <com.android.settings.fuelgauge.batteryusage.AccessibilityFocusablePreferenceCategory
+        android:key="battery_usage_breakdown"
+        settings:controller=
+            "com.android.settings.fuelgauge.batteryusage.BatteryUsageBreakdownController"
+        settings:isPreferenceVisible="false">
+
+        <com.android.settings.fuelgauge.batteryusage.SpinnerPreference
+            android:key="battery_usage_spinner"
+            settings:isPreferenceVisible="false" />
+
+        <PreferenceCategory
+            android:key="app_list"
+            settings:isPreferenceVisible="false" />
+
+        <com.android.settingslib.widget.FooterPreference
+            android:key="battery_usage_footer"
+            android:selectable="false"
+            settings:isPreferenceVisible="false"
+            settings:searchable="false" />
+
+    </com.android.settings.fuelgauge.batteryusage.AccessibilityFocusablePreferenceCategory>
 </PreferenceScreen>

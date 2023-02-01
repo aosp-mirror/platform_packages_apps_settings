@@ -18,7 +18,6 @@ package com.android.settings.applications.appinfo;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.BatteryUsageStats;
 import android.os.Bundle;
@@ -38,13 +37,11 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
-import com.android.settings.fuelgauge.BatteryChartPreferenceController;
-import com.android.settings.fuelgauge.BatteryDiffEntry;
-import com.android.settings.fuelgauge.BatteryEntry;
-import com.android.settings.fuelgauge.BatteryUsageStatsLoader;
 import com.android.settings.fuelgauge.BatteryUtils;
-import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
-import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.fuelgauge.batteryusage.BatteryChartPreferenceController;
+import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry;
+import com.android.settings.fuelgauge.batteryusage.BatteryEntry;
+import com.android.settings.fuelgauge.batteryusage.BatteryUsageStatsLoader;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -71,8 +68,6 @@ public class AppBatteryPreferenceController extends BasePreferenceController
     @VisibleForTesting
     BatteryDiffEntry mBatteryDiffEntry;
     @VisibleForTesting
-    boolean mIsChartGraphEnabled;
-    @VisibleForTesting
     final AppInfoDashboardFragment mParent;
 
     private Preference mPreference;
@@ -91,7 +86,6 @@ public class AppBatteryPreferenceController extends BasePreferenceController
         mPackageName = packageName;
         mUid = uid;
         mUserId = mContext.getUserId();
-        refreshFeatureFlag(mContext);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -127,19 +121,18 @@ public class AppBatteryPreferenceController extends BasePreferenceController
             Log.i(TAG, "handlePreferenceTreeClick():\n" + mBatteryDiffEntry);
             AdvancedPowerUsageDetail.startBatteryDetailPage(
                     mParent.getActivity(),
-                    mParent,
+                    mParent.getMetricsCategory(),
                     mBatteryDiffEntry,
                     Utils.formatPercentage(
                             mBatteryDiffEntry.getPercentOfTotal(), /* round */ true),
-                    /*isValidToShowSummary=*/ true,
-                    /*slotInformation=*/ null);
+                    /*slotInformation=*/ null, /*showTimeInformation=*/ false);
             return true;
         }
 
         if (isBatteryStatsAvailable()) {
             final UserManager userManager =
                     (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-            final BatteryEntry entry = new BatteryEntry(mContext, /* handler */null, userManager,
+            final BatteryEntry entry = new BatteryEntry(mContext, userManager,
                     mUidBatteryConsumer, /* isHidden */ false,
                     mUidBatteryConsumer.getUid(), /* packages */ null, mPackageName);
             Log.i(TAG, "Battery consumer available, launch : "
@@ -147,13 +140,12 @@ public class AppBatteryPreferenceController extends BasePreferenceController
                     + " | uid : "
                     + entry.getUid()
                     + " with BatteryEntry data");
-            AdvancedPowerUsageDetail.startBatteryDetailPage(mParent.getActivity(), mParent, entry,
-                    mIsChartGraphEnabled ? Utils.formatPercentage(0) : mBatteryPercent,
-                    !mIsChartGraphEnabled);
+            AdvancedPowerUsageDetail.startBatteryDetailPage(
+                    mParent.getActivity(), mParent, entry, Utils.formatPercentage(0));
         } else {
             Log.i(TAG, "Launch : " + mPackageName + " with package name");
             AdvancedPowerUsageDetail.startBatteryDetailPage(mParent.getActivity(), mParent,
-                    mPackageName);
+                    mPackageName, UserHandle.CURRENT);
         }
         return true;
     }
@@ -169,6 +161,7 @@ public class AppBatteryPreferenceController extends BasePreferenceController
     public void onPause() {
         mParent.getLoaderManager().destroyLoader(
                 AppInfoDashboardFragment.LOADER_BATTERY_USAGE_STATS);
+        closeBatteryUsageStats();
     }
 
     private void loadBatteryDiffEntries() {
@@ -179,7 +172,7 @@ public class AppBatteryPreferenceController extends BasePreferenceController
                     return null;
                 }
                 final BatteryDiffEntry entry =
-                        BatteryChartPreferenceController.getBatteryLast24HrUsageData(
+                        BatteryChartPreferenceController.getAppBatteryUsageData(
                                 mContext, mPackageName, mUserId);
                 Log.d(TAG, "loadBatteryDiffEntries():\n" + entry);
                 return entry;
@@ -195,16 +188,14 @@ public class AppBatteryPreferenceController extends BasePreferenceController
 
     @VisibleForTesting
     void updateBatteryWithDiffEntry() {
-        if (mIsChartGraphEnabled) {
-            if (mBatteryDiffEntry != null && mBatteryDiffEntry.mConsumePower > 0) {
-                mBatteryPercent = Utils.formatPercentage(
-                        mBatteryDiffEntry.getPercentOfTotal(), /* round */ true);
-                mPreference.setSummary(mContext.getString(
-                        R.string.battery_summary_24hr, mBatteryPercent));
-            } else {
-                mPreference.setSummary(
-                        mContext.getString(R.string.no_battery_summary_24hr));
-            }
+        if (mBatteryDiffEntry != null && mBatteryDiffEntry.mConsumePower > 0) {
+            mBatteryPercent = Utils.formatPercentage(
+                    mBatteryDiffEntry.getPercentOfTotal(), /* round */ true);
+            mPreference.setSummary(mContext.getString(
+                    R.string.battery_summary, mBatteryPercent));
+        } else {
+            mPreference.setSummary(
+                    mContext.getString(R.string.no_battery_summary));
         }
 
         mBatteryDiffEntriesLoaded = true;
@@ -226,42 +217,9 @@ public class AppBatteryPreferenceController extends BasePreferenceController
         }
     }
 
-    private void refreshFeatureFlag(Context context) {
-        if (isWorkProfile(context)) {
-            try {
-                context = context.createPackageContextAsUser(
-                        context.getPackageName(), 0, UserHandle.OWNER);
-            } catch (PackageManager.NameNotFoundException e) {
-                Log.e(TAG, "context.createPackageContextAsUser() fail: " + e);
-            }
-        }
-
-        final PowerUsageFeatureProvider powerUsageFeatureProvider =
-                FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context);
-        mIsChartGraphEnabled = powerUsageFeatureProvider.isChartGraphEnabled(context);
-    }
-
-    private boolean isWorkProfile(Context context) {
-        final UserManager userManager = context.getSystemService(UserManager.class);
-        return userManager.isManagedProfile() && !userManager.isSystemUser();
-    }
-
-    @VisibleForTesting
-    void updateBattery() {
+    private void updateBattery() {
         mBatteryUsageStatsLoaded = true;
         mPreference.setEnabled(mBatteryDiffEntriesLoaded);
-        if (mIsChartGraphEnabled) {
-            return;
-        }
-        if (isBatteryStatsAvailable()) {
-            final int percentOfMax = (int) mBatteryUtils.calculateBatteryPercent(
-                    mUidBatteryConsumer.getConsumedPower(), mBatteryUsageStats.getConsumedPower(),
-                    mBatteryUsageStats.getDischargePercentage());
-            mBatteryPercent = Utils.formatPercentage(percentOfMax);
-            mPreference.setSummary(mContext.getString(R.string.battery_summary, mBatteryPercent));
-        } else {
-            mPreference.setSummary(mContext.getString(R.string.no_battery_summary));
-        }
     }
 
     @VisibleForTesting
@@ -292,12 +250,25 @@ public class AppBatteryPreferenceController extends BasePreferenceController
         @Override
         public void onLoadFinished(Loader<BatteryUsageStats> loader,
                 BatteryUsageStats batteryUsageStats) {
+            closeBatteryUsageStats();
             mBatteryUsageStats = batteryUsageStats;
             AppBatteryPreferenceController.this.onLoadFinished();
         }
 
         @Override
         public void onLoaderReset(Loader<BatteryUsageStats> loader) {
+        }
+    }
+
+    private void closeBatteryUsageStats() {
+        if (mBatteryUsageStats != null) {
+            try {
+                mBatteryUsageStats.close();
+            } catch (Exception e) {
+                Log.e(TAG, "BatteryUsageStats.close() failed", e);
+            } finally {
+                mBatteryUsageStats = null;
+            }
         }
     }
 }

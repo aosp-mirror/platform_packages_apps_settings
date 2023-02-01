@@ -31,7 +31,8 @@ public class StatsLogWriter implements LogWriter {
                 SettingsEnums.PAGE_VISIBLE /* action */,
                 pageId, /* target pageId */
                 "" /* changedPreferenceKey */,
-                latency /* changedPreferenceIntValue */);
+                latency /* changedPreferenceIntValue */,
+                ElapsedTimeUtils.getElapsedTime(System.currentTimeMillis()));
     }
 
     @Override
@@ -41,7 +42,30 @@ public class StatsLogWriter implements LogWriter {
                 SettingsEnums.PAGE_HIDE /* action */,
                 pageId,
                 "" /* changedPreferenceKey */,
-                visibleTime /* changedPreferenceIntValue */);
+                visibleTime /* changedPreferenceIntValue */,
+                ElapsedTimeUtils.getElapsedTime(System.currentTimeMillis()));
+    }
+
+    @Override
+    public void clicked(int sourceCategory, String key) {
+        SettingsStatsLog.write(SettingsStatsLog.SETTINGS_UI_CHANGED /* Atom name */,
+                sourceCategory /* attribution */,
+                SettingsEnums.ACTION_SETTINGS_TILE_CLICK /* action */,
+                SettingsEnums.PAGE_UNKNOWN /* pageId */,
+                key /* changedPreferenceKey */,
+                0 /* changedPreferenceIntValue */,
+                ElapsedTimeUtils.getElapsedTime(System.currentTimeMillis()));
+    }
+
+    @Override
+    public void changed(int sourceCategory, String key, int value) {
+        SettingsStatsLog.write(SettingsStatsLog.SETTINGS_UI_CHANGED /* Atom name */,
+                sourceCategory /* attribution */,
+                SettingsEnums.ACTION_SETTINGS_PREFERENCE_CHANGE /* action */,
+                SettingsEnums.PAGE_UNKNOWN /* pageId */,
+                key /* changedPreferenceKey */,
+                value /* changedPreferenceIntValue */,
+                ElapsedTimeUtils.getElapsedTime(System.currentTimeMillis()));
     }
 
     @Override
@@ -87,6 +111,7 @@ public class StatsLogWriter implements LogWriter {
                 action,
                 pageId,
                 key,
-                value);
+                value,
+                ElapsedTimeUtils.getElapsedTime(System.currentTimeMillis()));
     }
 }

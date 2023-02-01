@@ -57,8 +57,10 @@ public class NetworkProviderCallsSmsFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new CallsDefaultSubscriptionController(context, KEY_PREFERENCE_CALLS));
-        controllers.add(new SmsDefaultSubscriptionController(context, KEY_PREFERENCE_SMS));
+        controllers.add(new CallsDefaultSubscriptionController(context, KEY_PREFERENCE_CALLS,
+                getSettingsLifecycle(), this));
+        controllers.add(new SmsDefaultSubscriptionController(context, KEY_PREFERENCE_SMS,
+                getSettingsLifecycle(), this));
         mNetworkProviderWifiCallingPreferenceController =
                 new NetworkProviderWifiCallingPreferenceController(context,
                         KEY_PREFERENCE_CATEGORY_CALLING);
@@ -92,7 +94,7 @@ public class NetworkProviderCallsSmsFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.ACTION_UNKNOWN;
+        return SettingsEnums.NETWORK_PROVIDER_CALLS_SMS;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -100,7 +102,8 @@ public class NetworkProviderCallsSmsFragment extends DashboardFragment {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return context.getSystemService(UserManager.class).isAdminUser();
+                    return SubscriptionUtil.isSimHardwareVisible(context) &&
+                            context.getSystemService(UserManager.class).isAdminUser();
                 }
             };
 }

@@ -65,6 +65,15 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
             updateState(mPreference);
         }
     };
+
+    private final SensorPrivacyManager.OnSensorPrivacyChangedListener mPrivacyChangedListener =
+            new SensorPrivacyManager.OnSensorPrivacyChangedListener() {
+                @Override
+                public void onSensorPrivacyChanged(int sensor, boolean enabled) {
+                    updateState(mPreference);
+                }
+            };
+
     private final DeviceStateRotationLockSettingsManager mDeviceStateAutoRotateSettingsManager;
     private final DeviceStateRotationLockSettingsManager.DeviceStateRotationLockSettingsListener
             mDeviceStateRotationLockSettingsListener = () -> updateState(mPreference);
@@ -74,8 +83,6 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
         super(context, preferenceKey);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
-        mPrivacyManager
-                .addSensorPrivacyListener(CAMERA, (sensor, enabled) -> updateState(mPreference));
         mPowerManager = context.getSystemService(PowerManager.class);
         mDeviceStateAutoRotateSettingsManager = DeviceStateRotationLockSettingsManager.getInstance(
                 context);
@@ -134,6 +141,7 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
         RotationPolicy.registerRotationPolicyListener(mContext, mRotationPolicyListener);
         mDeviceStateAutoRotateSettingsManager.registerListener(
                 mDeviceStateRotationLockSettingsListener);
+        mPrivacyManager.addSensorPrivacyListener(CAMERA, mPrivacyChangedListener);
     }
 
     @OnLifecycleEvent(ON_STOP)
@@ -145,6 +153,7 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
         }
         mDeviceStateAutoRotateSettingsManager.unregisterListener(
                 mDeviceStateRotationLockSettingsListener);
+        mPrivacyManager.removeSensorPrivacyListener(CAMERA, mPrivacyChangedListener);
     }
 
     @Override
@@ -180,6 +189,10 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
      * Returns true if there is a {@link RotationResolverService} available
      */
     public static boolean isRotationResolverServiceAvailable(Context context) {
+        if (!context.getResources().getBoolean(
+                R.bool.config_auto_rotate_face_detection_available)) {
+            return false;
+        }
         final PackageManager packageManager = context.getPackageManager();
         final String resolvePackage = packageManager.getRotationResolverPackageName();
         if (TextUtils.isEmpty(resolvePackage)) {

@@ -25,6 +25,8 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.widget.LabeledSeekBarPreference;
 
+import java.util.Optional;
+
 /**
  * The controller of {@link LabeledSeekBarPreference} that listens to display size and font size
  * settings changes and updates preview size threshold smoothly.
@@ -33,19 +35,26 @@ class PreviewSizeSeekBarController extends BasePreferenceController implements
         TextReadingResetController.ResetStateListener {
     private final PreviewSizeData<? extends Number> mSizeData;
     private boolean mSeekByTouch;
-    private ProgressInteractionListener mInteractionListener;
+    private Optional<ProgressInteractionListener> mInteractionListener = Optional.empty();
     private LabeledSeekBarPreference mSeekBarPreference;
 
     private final SeekBar.OnSeekBarChangeListener mSeekBarChangeListener =
             new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    mInteractionListener.notifyPreferenceChanged();
-
-                    if (!mSeekByTouch && mInteractionListener != null) {
-                        mInteractionListener.onProgressChanged();
+                    if (mInteractionListener.isEmpty()) {
+                        return;
                     }
 
+                    final ProgressInteractionListener interactionListener =
+                            mInteractionListener.get();
+                    // Avoid timing issues to update the corresponding preview fail when clicking
+                    // the increase/decrease button.
+                    seekBar.post(interactionListener::notifyPreferenceChanged);
+
+                    if (!mSeekByTouch) {
+                        interactionListener.onProgressChanged();
+                    }
                 }
 
                 @Override
@@ -57,9 +66,7 @@ class PreviewSizeSeekBarController extends BasePreferenceController implements
                 public void onStopTrackingTouch(SeekBar seekBar) {
                     mSeekByTouch = false;
 
-                    if (mInteractionListener != null) {
-                        mInteractionListener.onEndTrackingTouch();
-                    }
+                    mInteractionListener.ifPresent(ProgressInteractionListener::onEndTrackingTouch);
                 }
             };
 
@@ -70,7 +77,7 @@ class PreviewSizeSeekBarController extends BasePreferenceController implements
     }
 
     void setInteractionListener(ProgressInteractionListener interactionListener) {
-        mInteractionListener = interactionListener;
+        mInteractionListener = Optional.ofNullable(interactionListener);
     }
 
     @Override
@@ -95,6 +102,10 @@ class PreviewSizeSeekBarController extends BasePreferenceController implements
     public void resetState() {
         final int defaultProgress = mSizeData.getValues().indexOf(mSizeData.getDefaultValue());
         mSeekBarPreference.setProgress(defaultProgress);
+
+        // Immediately take the effect of updating the progress to avoid waiting for receiving
+        // the event to delay update.
+        mInteractionListener.ifPresent(ProgressInteractionListener::onProgressChanged);
     }
 
 

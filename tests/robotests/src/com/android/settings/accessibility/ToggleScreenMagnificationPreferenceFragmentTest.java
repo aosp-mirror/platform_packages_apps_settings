@@ -70,6 +70,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
+/** Tests for {@link ToggleScreenMagnificationPreferenceFragment}. */
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowSettingsPreferenceFragment.class})
 public class ToggleScreenMagnificationPreferenceFragmentTest {
@@ -389,6 +390,16 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         verify(dialogDelegate).getDialogMetricsCategory(1);
     }
 
+    @Test
+    public void getMetricsCategory_shouldNotHaveMetricsCategory() {
+        assertThat(mFragment.getMetricsCategory()).isEqualTo(0);
+    }
+
+    @Test
+    public void getHelpResource_returnsCorrectHelpResource() {
+        assertThat(mFragment.getHelpResource()).isEqualTo(R.string.help_url_magnification);
+    }
+
     private void putStringIntoSettings(String key, String componentName) {
         Settings.Secure.putString(mContext.getContentResolver(), key, componentName);
     }
@@ -469,10 +480,16 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         }
 
         @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            // do nothing
+        }
+
+        @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             // do nothing
         }
 
+        @SuppressWarnings("MissingSuperCall")
         @Override
         public void onDestroyView() {
             // do nothing

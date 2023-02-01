@@ -34,13 +34,11 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.internal.net.VpnConfig;
 import com.android.internal.util.ArrayUtils;
@@ -48,6 +46,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreference;
@@ -71,6 +70,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
     private PackageManager mPackageManager;
     private DevicePolicyManager mDevicePolicyManager;
     private VpnManager mVpnManager;
+    private AdvancedVpnFeatureProvider mFeatureProvider;
 
     // VPN app info
     private final int mUserId = UserHandle.myUserId();
@@ -79,6 +79,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
     private String mVpnLabel;
 
     // UI preference
+    private Preference mPreferenceVersion;
     private RestrictedSwitchPreference mPreferenceAlwaysOn;
     private RestrictedSwitchPreference mPreferenceLockdown;
     private RestrictedPreference mPreferenceForget;
@@ -122,7 +123,9 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         mPackageManager = getContext().getPackageManager();
         mDevicePolicyManager = getContext().getSystemService(DevicePolicyManager.class);
         mVpnManager = getContext().getSystemService(VpnManager.class);
+        mFeatureProvider = FeatureFactory.getFactory(getContext()).getAdvancedVpnFeatureProvider();
 
+        mPreferenceVersion = findPreference(KEY_VERSION);
         mPreferenceAlwaysOn = (RestrictedSwitchPreference) findPreference(KEY_ALWAYS_ON_VPN);
         mPreferenceLockdown = (RestrictedSwitchPreference) findPreference(KEY_LOCKDOWN_VPN);
         mPreferenceForget = (RestrictedPreference) findPreference(KEY_FORGET_VPN);
@@ -138,52 +141,8 @@ public class AppManagementFragment extends SettingsPreferenceFragment
 
         boolean isInfoLoaded = loadInfo();
         if (isInfoLoaded) {
+            mPreferenceVersion.setSummary(mPackageInfo.versionName);
             updateUI();
-
-            Preference version = getPreferenceScreen().findPreference(KEY_VERSION);
-            if (version != null) {
-                // Version field has been added.
-                return;
-            }
-
-            /**
-             * Create version field at runtime, and set max height on the display area.
-             *
-             * When long length of text given within version field, a large text area
-             * might be created and inconvenient to the user (User need to scroll
-             * for a long time in order to get to the Preferences after this field.)
-             */
-            version = new Preference(getPrefContext()) {
-                @Override
-                public void onBindViewHolder(PreferenceViewHolder holder) {
-                    super.onBindViewHolder(holder);
-
-                    TextView titleView =
-                            (TextView) holder.findViewById(android.R.id.title);
-                    if (titleView != null) {
-                        titleView.setTextAppearance(R.style.vpn_app_management_version_title);
-                    }
-
-                    TextView summaryView =
-                            (TextView) holder.findViewById(android.R.id.summary);
-                    if (summaryView != null) {
-                        summaryView.setTextAppearance(R.style.vpn_app_management_version_summary);
-
-                        // Set max height in summary area.
-                        int versionMaxHeight = getListView().getHeight();
-                        summaryView.setMaxHeight(versionMaxHeight);
-                        summaryView.setVerticalScrollBarEnabled(false);
-                        summaryView.setHorizontallyScrolling(false);
-                    }
-                }
-            };
-            version.setOrder(0);            // Set order to 0 in order to be placed
-                                            // in front of other Preference(s).
-            version.setKey(KEY_VERSION);    // Set key to avoid from creating multi instance.
-            version.setTitle(R.string.vpn_version);
-            version.setSummary(mPackageInfo.versionName);
-            version.setSelectable(false);
-            getPreferenceScreen().addPreference(version);
         } else {
             finish();
         }
@@ -283,7 +242,16 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         }
     }
 
-    private void updateRestrictedViews() {
+    @VisibleForTesting
+    void updateRestrictedViews() {
+        if (mFeatureProvider.isAdvancedVpnSupported(getContext())
+                && !mFeatureProvider.isAdvancedVpnRemovable()
+                && TextUtils.equals(mPackageName, mFeatureProvider.getAdvancedVpnPackageName())) {
+            mPreferenceForget.setVisible(false);
+        } else {
+            mPreferenceForget.setVisible(true);
+        }
+
         if (isAdded()) {
             mPreferenceAlwaysOn.checkRestrictionAndSetDisabled(UserManager.DISALLOW_CONFIG_VPN,
                     mUserId);
@@ -312,6 +280,14 @@ public class AppManagementFragment extends SettingsPreferenceFragment
                 mPreferenceAlwaysOn.setSummary(R.string.vpn_always_on_summary_not_supported);
             }
         }
+    }
+
+    @VisibleForTesting
+    void init(String packageName, AdvancedVpnFeatureProvider featureProvider,
+            RestrictedPreference preference) {
+        mPackageName = packageName;
+        mFeatureProvider = featureProvider;
+        mPreferenceForget = preference;
     }
 
     private String getAlwaysOnVpnPackage() {

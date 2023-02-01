@@ -17,6 +17,7 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
+import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.text.format.Formatter;
 
@@ -24,7 +25,9 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.deviceinfo.storage.StorageCacheHelper;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 import com.android.settingslib.utils.ThreadUtils;
@@ -59,23 +62,36 @@ public class TopLevelStoragePreferenceController extends BasePreferenceControlle
 
     @VisibleForTesting
     protected Future refreshSummaryThread(Preference preference) {
+        int userId = Utils.getCurrentUserId(mContext.getSystemService(UserManager.class),
+                /* isWorkProfile */ false);
+        final StorageCacheHelper storageCacheHelper = new StorageCacheHelper(mContext, userId);
+        long cachedUsedSize = storageCacheHelper.retrieveUsedSize();
+        long cachedTotalSize = storageCacheHelper.retrieveCachedSize().totalSize;
+        if (cachedUsedSize != 0 && cachedTotalSize != 0) {
+            preference.setSummary(getSummary(cachedUsedSize, cachedTotalSize));
+        }
+
         return ThreadUtils.postOnBackgroundThread(() -> {
-            final NumberFormat percentageFormat = NumberFormat.getPercentInstance();
             final PrivateStorageInfo info = PrivateStorageInfo.getPrivateStorageInfo(
                     getStorageManagerVolumeProvider());
-            final double privateUsedBytes = info.totalBytes - info.freeBytes;
-
+            storageCacheHelper.cacheUsedSize(info.totalBytes - info.freeBytes);
             ThreadUtils.postOnMainThread(() -> {
-                preference.setSummary(mContext.getString(R.string.storage_summary,
-                        percentageFormat.format(privateUsedBytes / info.totalBytes),
-                        Formatter.formatFileSize(mContext, info.freeBytes)));
+                preference.setSummary(
+                        getSummary(info.totalBytes - info.freeBytes, info.totalBytes));
             });
         });
     }
 
-
     @VisibleForTesting
     protected StorageManagerVolumeProvider getStorageManagerVolumeProvider() {
         return mStorageManagerVolumeProvider;
+    }
+
+    private String getSummary(long usedBytes, long totalBytes) {
+        NumberFormat percentageFormat = NumberFormat.getPercentInstance();
+
+        return mContext.getString(R.string.storage_summary,
+                totalBytes == 0L ? "0" : percentageFormat.format(((double) usedBytes) / totalBytes),
+                Formatter.formatFileSize(mContext, totalBytes - usedBytes));
     }
 }

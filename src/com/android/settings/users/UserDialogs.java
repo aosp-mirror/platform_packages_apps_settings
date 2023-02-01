@@ -146,21 +146,6 @@ public final class UserDialogs {
     }
 
     /**
-     * Creates a dialog to confirm that the user is ok to enable phone calls (no SMS).
-     *
-     * @param onConfirmListener Callback object for positive action
-     */
-    public static Dialog createEnablePhoneCallsDialog(Context context,
-            DialogInterface.OnClickListener onConfirmListener) {
-        return new AlertDialog.Builder(context)
-                .setTitle(R.string.user_enable_calling_confirm_title)
-                .setMessage(R.string.user_enable_calling_confirm_message)
-                .setPositiveButton(R.string.okay, onConfirmListener)
-                .setNegativeButton(android.R.string.cancel, null)
-                .create();
-    }
-
-    /**
      * Creates a dialog to confirm that the user is ok to start setting up a new user.
      *
      * @param onConfirmListener Callback object for positive action
@@ -189,7 +174,7 @@ public final class UserDialogs {
             DialogInterface.OnClickListener onConfirmListener) {
         return new AlertDialog.Builder(context)
                 .setTitle(com.android.settingslib.R.string.guest_reset_guest_dialog_title)
-                .setMessage(R.string.user_exit_guest_confirm_message)
+                .setMessage(com.android.settingslib.R.string.guest_exit_dialog_message)
                 .setPositiveButton(
                         com.android.settingslib.R.string.guest_reset_guest_confirm_button,
                         onConfirmListener)
@@ -214,6 +199,21 @@ public final class UserDialogs {
                 .setPositiveButton(
                         com.android.settingslib.R.string.guest_remove_guest_confirm_button,
                         onConfirmListener)
+                .setNegativeButton(android.R.string.cancel, null)
+                .create();
+    }
+
+    /**
+     * Creates a dialog to confirm that the admin privileges of the user should be revoked.
+     *
+     * @param onConfirmListener Callback object for positive action
+     */
+    public static Dialog createConfirmRevokeAdmin(Context context,
+            DialogInterface.OnClickListener onConfirmListener) {
+        return new AlertDialog.Builder(context)
+                .setTitle(R.string.user_revoke_admin_confirm_title)
+                .setMessage(R.string.user_revoke_admin_confirm_message)
+                .setPositiveButton(R.string.remove, onConfirmListener)
                 .setNegativeButton(android.R.string.cancel, null)
                 .create();
     }

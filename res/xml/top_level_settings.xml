@@ -31,6 +31,16 @@
         settings:controller="com.android.settings.network.TopLevelNetworkEntryPreferenceController"/>
 
     <com.android.settings.widget.HomepagePreference
+        android:fragment="com.android.settings.communal.CommunalDashboardFragment"
+        android:icon="@drawable/ia_settings_communal"
+        android:key="top_level_communal"
+        android:order="-145"
+        android:title="@string/communal_settings_title"
+        android:summary="@string/communal_settings_summary"
+        settings:highlightableMenuKey="@string/menu_key_communal"
+        settings:controller="com.android.settings.communal.CommunalPreferenceController"/>
+
+    <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"
         android:icon="@drawable/ic_devices_other"
         android:key="top_level_connected_devices"
@@ -59,7 +69,7 @@
         settings:highlightableMenuKey="@string/menu_key_notifications"/>
 
     <com.android.settings.widget.HomepagePreference
-        android:fragment="com.android.settings.fuelgauge.PowerUsageSummary"
+        android:fragment="com.android.settings.fuelgauge.batteryusage.PowerUsageSummary"
         android:icon="@drawable/ic_settings_battery_white"
         android:key="top_level_battery"
         android:order="-110"
@@ -186,7 +196,7 @@
 
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment"
-        android:icon="@drawable/ic_phone_info"
+        android:icon="@drawable/ic_settings_about_device"
         android:key="top_level_about_device"
         android:order="20"
         android:title="@string/about_settings"

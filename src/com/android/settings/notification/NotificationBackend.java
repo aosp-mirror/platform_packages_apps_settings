@@ -20,22 +20,15 @@ import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_CACHED;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_DYNAMIC;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED_BY_ANY_LAUNCHER;
-import static android.os.UserHandle.USER_SYSTEM;
 
-import android.Manifest;
 import android.app.INotificationManager;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationHistory;
 import android.app.NotificationManager;
-import android.app.compat.CompatChanges;
-import android.app.role.RoleManager;
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
 import android.companion.ICompanionDeviceManager;
-import android.compat.annotation.ChangeId;
-import android.compat.annotation.EnabledAfter;
-import android.compat.annotation.EnabledSince;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -51,7 +44,6 @@ import android.os.Build;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
-import android.provider.Settings;
 import android.service.notification.ConversationChannelWrapper;
 import android.service.notification.NotificationListenerFilter;
 import android.text.format.DateUtils;
@@ -61,8 +53,7 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.util.CollectionUtils;
-import com.android.settingslib.R;
-import com.android.settingslib.Utils;
+import com.android.settings.R;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.notification.ConversationIconFactory;
@@ -126,6 +117,7 @@ public class NotificationBackend {
             if (app.requestedPermissions == null || Arrays.stream(app.requestedPermissions)
                     .noneMatch(p -> p.equals(android.Manifest.permission.POST_NOTIFICATIONS))) {
                 row.lockedImportance = true;
+                row.permissionStateLocked = true;
             }
         }
     }
@@ -517,11 +509,11 @@ public class NotificationBackend {
                     context, System.currentTimeMillis() - state.lastSent, true);
         } else {
             if (state.avgSentDaily > 0) {
-                return context.getResources().getQuantityString(R.plurals.notifications_sent_daily,
-                        state.avgSentDaily, state.avgSentDaily);
+                return StringUtil.getIcuPluralsString(context, state.avgSentDaily,
+                        R.string.notifications_sent_daily);
             }
-            return context.getResources().getQuantityString(R.plurals.notifications_sent_weekly,
-                    state.avgSentWeekly, state.avgSentWeekly);
+            return StringUtil.getIcuPluralsString(context, state.avgSentWeekly,
+                    R.string.notifications_sent_weekly);
         }
     }
 
@@ -684,6 +676,9 @@ public class NotificationBackend {
         public boolean systemApp;
         public boolean lockedImportance;
         public boolean showBadge;
+        // For apps target T but have not but has not requested the permission
+        // we cannot change the permission state
+        public boolean permissionStateLocked;
         public int bubblePreference = NotificationManager.BUBBLE_PREFERENCE_NONE;
         public int userId;
         public int blockedChannelCount;

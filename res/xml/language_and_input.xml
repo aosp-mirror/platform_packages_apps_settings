@@ -25,7 +25,8 @@
         <Preference
             android:key="phone_language"
             android:title="@string/phone_language"
-            android:fragment="com.android.settings.localepicker.LocaleListEditor" />
+            android:fragment="com.android.settings.localepicker.LocaleListEditor"
+            settings:controller="com.android.settings.language.PhoneLanguagePreferenceController" />
 
         <Preference
             android:key="apps_language"
@@ -37,6 +38,15 @@
                 android:name="classname"
                 android:value="com.android.settings.applications.appinfo.AppLocaleDetails" />
         </Preference>
+
+        <Preference
+            android:key="regional_preferences"
+            android:title="@string/regional_preferences_title"
+            android:summary="@string/regional_preferences_summary"
+            android:fragment="com.android.settings.regionalpreferences.RegionalPreferencesEntriesFragment"
+            settings:controller="com.android.settings.regionalpreferences.RegionalPreferencesController">
+        </Preference>
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -62,6 +72,13 @@
             android:key="voice_input_settings"
             android:title="@string/voice_input_settings_title"
             android:fragment="com.android.settings.language.DefaultVoiceInputPicker" />
+
+        <Preference
+            android:key="on_device_recognition_settings"
+            android:title="@string/on_device_recognition_settings_title"
+            android:summary="@string/on_device_recognition_settings_summary"
+            settings:controller=
+                "com.android.settings.language.OnDeviceRecognitionPreferenceController" />
 
         <Preference
             android:key="tts_settings_summary"

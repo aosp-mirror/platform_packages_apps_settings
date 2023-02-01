@@ -18,11 +18,31 @@ package com.android.settings.applications.appinfo;
 
 import android.content.Context;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.widget.PreferenceCategoryController;
+import com.android.settingslib.applications.AppUtils;
+import com.android.settingslib.applications.ApplicationsState;
 
 public class AdvancedAppInfoPreferenceCategoryController extends PreferenceCategoryController {
 
+    private ApplicationsState.AppEntry mAppEntry;
+
     public AdvancedAppInfoPreferenceCategoryController(Context context, String key) {
         super(context, key);
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        Preference preference = screen.findPreference(getPreferenceKey());
+        if (preference != null && !AppUtils.isAppInstalled(mAppEntry)) {
+            preference.setEnabled(false);
+        }
+        super.displayPreference(screen);
+    }
+
+    public void setAppEntry(ApplicationsState.AppEntry appEntry) {
+        mAppEntry = appEntry;
     }
 }

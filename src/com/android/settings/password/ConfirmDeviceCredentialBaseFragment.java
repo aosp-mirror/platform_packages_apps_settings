@@ -283,8 +283,8 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
             case USER_TYPE_MANAGED_PROFILE:
                 return mDevicePolicyManager.getResources().getString(
                         WORK_PROFILE_LOCK_ATTEMPTS_FAILED,
-                        () -> getString(com.android.settingslib
-                                .R.string.failed_attempts_now_wiping_profile));
+                        () -> getString(
+                          com.android.settingslib.R.string.failed_attempts_now_wiping_profile));
             case USER_TYPE_SECONDARY:
                 return getString(com.android.settingslib.R.string.failed_attempts_now_wiping_user);
             default:

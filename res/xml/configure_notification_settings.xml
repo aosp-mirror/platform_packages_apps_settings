@@ -119,9 +119,16 @@
             android:fragment="com.android.settings.notification.zen.ZenModeSettings"
             settings:controller="com.android.settings.notification.zen.ZenModePreferenceController"
         />
+        <SwitchPreference
+            android:key="lock_screen_show_only_unseen_notifs"
+            android:order="18"
+            android:title="@string/unseen_notifs_lock_screen"
+            android:summary="@string/unseen_notifs_lock_screen_summary"
+            settings:controller="com.android.settings.notification.ShowOnlyUnseenNotificationsOnLockscreenPreferenceController"
+        />
         <com.android.settingslib.RestrictedPreference
             android:key="app_and_notif_cell_broadcast_settings"
-            android:order="18"
+            android:order="19"
             android:title="@string/cell_broadcast_settings"
             settings:useAdminDisabledSummary="true">
             <intent
@@ -132,33 +139,33 @@
 
         <SwitchPreference
              android:key="silent_icons"
-             android:order="19"
+             android:order="20"
              android:title="@string/silent_notifications_status_bar"
              settings:controller="com.android.settings.notification.SilentStatusBarPreferenceController"/>
 
         <SwitchPreference
             android:key="show_snooze_options"
-            android:order="20"
+            android:order="21"
             android:title="@string/snooze_options_title"
             settings:controller="com.android.settings.notification.SnoozeNotificationPreferenceController" />
 
         <!-- Notification badging -->
         <SwitchPreference
             android:key="notification_badging"
-            android:order="21"
+            android:order="22"
             android:title="@string/notification_badging_title"
             settings:controller="com.android.settings.notification.BadgingNotificationPreferenceController"/>
 
         <!-- Pulse notification light, on devices that support it -->
         <SwitchPreference
             android:key="notification_pulse"
-            android:order="22"
+            android:order="23"
             android:title="@string/notification_pulse_title"
             settings:controller="com.android.settings.notification.PulseNotificationPreferenceController"/>
 
-        <SwitchPreference
+        <com.android.settingslib.PrimarySwitchPreference
             android:key="notification_assistant"
-            android:order="23"
+            android:order="24"
             android:title="@string/notification_assistant_title"
             android:summary="@string/notification_assistant_summary"
             settings:controller="com.android.settings.notification.NotificationAssistantPreferenceController"/>

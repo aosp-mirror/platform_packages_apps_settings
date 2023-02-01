@@ -326,4 +326,8 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
             ((BluetoothDevicePreference) preference).onPreferenceAttributesChanged();
         }
     }
+
+    protected boolean isDeviceInCachedDevicesList(CachedBluetoothDevice cachedDevice){
+        return mLocalManager.getCachedDeviceManager().getCachedDevicesCopy().contains(cachedDevice);
+    }
 }

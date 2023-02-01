@@ -16,6 +16,9 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+
 import android.content.Context;
 import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
@@ -23,7 +26,18 @@ import android.view.accessibility.AccessibilityManager;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
+/** Preference controller for autoclick (dwell timing). */
 public class AutoclickPreferenceController extends BasePreferenceController {
+
+    /**
+     * Resource ids from which autoclick preference summaries should be derived. The strings have
+     * placeholder for integer delay value.
+     */
+    private static final int[] AUTOCLICK_PREFERENCE_SUMMARIES = {
+            R.string.accessibilty_autoclick_preference_subtitle_short_delay,
+            R.string.accessibilty_autoclick_preference_subtitle_medium_delay,
+            R.string.accessibilty_autoclick_preference_subtitle_long_delay
+    };
 
     public AutoclickPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -37,14 +51,29 @@ public class AutoclickPreferenceController extends BasePreferenceController {
     @Override
     public CharSequence getSummary() {
         final boolean enabled = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, 0) == 1;
+                Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, OFF) == ON;
         if (!enabled) {
-            return mContext.getResources().getText(R.string.accessibility_feature_state_off);
+            return mContext.getResources().getText(R.string.off);
         }
-        final int delay = Settings.Secure.getInt(mContext.getContentResolver(),
+        final int delayMillis = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
                 AccessibilityManager.AUTOCLICK_DELAY_DEFAULT);
-        return ToggleAutoclickPreferenceFragment.getAutoclickPreferenceSummary(
-                mContext.getResources(), delay);
+        final int summaryIndex = getAutoclickPreferenceSummaryIndex(delayMillis);
+        return AutoclickUtils.getAutoclickDelaySummary(mContext,
+                AUTOCLICK_PREFERENCE_SUMMARIES[summaryIndex], delayMillis);
+    }
+
+    /** Finds index of the summary that should be used for the provided autoclick delay. */
+    private int getAutoclickPreferenceSummaryIndex(int delay) {
+        if (delay <= AutoclickUtils.MIN_AUTOCLICK_DELAY_MS) {
+            return 0;
+        }
+        if (delay >= AutoclickUtils.MAX_AUTOCLICK_DELAY_MS) {
+            return AUTOCLICK_PREFERENCE_SUMMARIES.length - 1;
+        }
+        int delayRange =
+                AutoclickUtils.MAX_AUTOCLICK_DELAY_MS - AutoclickUtils.MIN_AUTOCLICK_DELAY_MS;
+        int rangeSize = (delayRange) / (AUTOCLICK_PREFERENCE_SUMMARIES.length - 1);
+        return (delay - AutoclickUtils.MIN_AUTOCLICK_DELAY_MS) / rangeSize;
     }
 }

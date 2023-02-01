@@ -92,7 +92,8 @@ public class SettingsLicenseActivityTest {
                 "text/html");
         intent.putExtra(Intent.EXTRA_TITLE, mActivity.getString(
                 R.string.settings_license_activity_title));
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.addFlags(
+                Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_PREFIX_URI_PERMISSION);
         intent.addCategory(Intent.CATEGORY_DEFAULT);
         intent.setPackage("com.android.htmlviewer");
 

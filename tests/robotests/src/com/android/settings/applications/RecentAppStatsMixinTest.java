@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -52,13 +53,20 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class RecentAppStatsMixinTest {
 
+    private static final UserHandle NORMAL_USER = UserHandle.SYSTEM;
+    private static final UserHandle CLONE_USER = new UserHandle(2222);
+    private static final UserHandle WORK_USER = new UserHandle(3333);
+
     @Mock
     private UsageStatsManager mUsageStatsManager;
+    @Mock
+    private UsageStatsManager mWorkUsageStatsManager;
     @Mock
     private UserManager mUserManager;
     @Mock
@@ -71,22 +79,33 @@ public class RecentAppStatsMixinTest {
     private ApplicationInfo mApplicationInfo;
     @Mock
     private PowerManager mPowerManager;
+    @Mock
+    private UsageStatsManager mCloneUsageStatsManager;
+    @Mock
+    Context mMockContext;
+
+    private Context mContext;
 
     private RecentAppStatsMixin mRecentAppStatsMixin;
 
     @Before
-    public void setUp() {
+    public void setUp() throws PackageManager.NameNotFoundException {
         MockitoAnnotations.initMocks(this);
-        final Context context = spy(RuntimeEnvironment.application);
-        when(context.getApplicationContext()).thenReturn(context);
+        mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getApplicationContext()).thenReturn(mContext);
         ReflectionHelpers.setStaticField(ApplicationsState.class, "sInstance", mAppState);
-        doReturn(mUsageStatsManager).when(context).getSystemService(Context.USAGE_STATS_SERVICE);
-        doReturn(mUserManager).when(context).getSystemService(Context.USER_SERVICE);
-        doReturn(mPackageManager).when(context).getPackageManager();
-        doReturn(mPowerManager).when(context).getSystemService(PowerManager.class);
+        doReturn(mUsageStatsManager).when(mContext).getSystemService(UsageStatsManager.class);
+        doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
+        doReturn(mPackageManager).when(mContext).getPackageManager();
+        doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
         when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{});
 
-        mRecentAppStatsMixin = new RecentAppStatsMixin(context, 3 /* maximumApps */);
+        doReturn(mMockContext).when(mContext).createContextAsUser(any(), anyInt());
+        doReturn(mMockContext).when(mContext).createPackageContextAsUser(any(), anyInt(), any());
+        when(mUserManager.getUserProfiles())
+                .thenReturn(new ArrayList<>(Arrays.asList(NORMAL_USER)));
+
+        mRecentAppStatsMixin = new RecentAppStatsMixin(mContext, 3 /* maximumApps */);
     }
 
     @Test
@@ -99,7 +118,7 @@ public class RecentAppStatsMixinTest {
         // stat1 is valid app.
         when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId()))
                 .thenReturn(mAppEntry);
-        when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
+        when(mPackageManager.resolveActivityAsUser(any(Intent.class), anyInt(), anyInt()))
                 .thenReturn(new ResolveInfo());
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
                 .thenReturn(stats);
@@ -134,7 +153,7 @@ public class RecentAppStatsMixinTest {
                 .thenReturn(mAppEntry);
         when(mAppState.getEntry(stat3.mPackageName, UserHandle.myUserId()))
                 .thenReturn(mAppEntry);
-        when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
+        when(mPackageManager.resolveActivityAsUser(any(Intent.class), anyInt(), anyInt()))
                 .thenReturn(new ResolveInfo());
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
                 .thenReturn(stats);
@@ -170,7 +189,7 @@ public class RecentAppStatsMixinTest {
                 .thenReturn(mAppEntry);
         when(mAppState.getEntry(stat3.mPackageName, UserHandle.myUserId()))
                 .thenReturn(null);
-        when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
+        when(mPackageManager.resolveActivityAsUser(any(Intent.class), anyInt(), anyInt()))
                 .thenReturn(new ResolveInfo());
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
                 .thenReturn(stats);
@@ -272,7 +291,7 @@ public class RecentAppStatsMixinTest {
         when(mPackageManager.getInstalledModules(anyInt() /* flags */))
                 .thenReturn(modules);
 
-        when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
+        when(mPackageManager.resolveActivityAsUser(any(Intent.class), anyInt(), anyInt()))
                 .thenReturn(new ResolveInfo());
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
                 .thenReturn(stats);
@@ -296,7 +315,7 @@ public class RecentAppStatsMixinTest {
         // stat1, stat2 are valid apps. stat3 is invalid.
         when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId()))
                 .thenReturn(mAppEntry);
-        when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
+        when(mPackageManager.resolveActivityAsUser(any(Intent.class), anyInt(), anyInt()))
                 .thenReturn(new ResolveInfo());
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
                 .thenReturn(stats);
@@ -305,5 +324,166 @@ public class RecentAppStatsMixinTest {
         mRecentAppStatsMixin.loadDisplayableRecentApps(3);
 
         assertThat(mRecentAppStatsMixin.mRecentApps).isEmpty();
+    }
+
+    @Test
+    public void loadDisplayableRecentApps_usePersonalAndWorkApps_shouldBeSortedByLastTimeUse() {
+        final List<UsageStats> personalStats = new ArrayList<>();
+        final UsageStats stats1 = new UsageStats();
+        final UsageStats stats2 = new UsageStats();
+        stats1.mLastTimeUsed = System.currentTimeMillis();
+        stats1.mPackageName = "personal.pkg.class";
+        personalStats.add(stats1);
+
+        stats2.mLastTimeUsed = System.currentTimeMillis() - 5000;
+        stats2.mPackageName = "personal.pkg.class2";
+        personalStats.add(stats2);
+
+        final List<UsageStats> workStats = new ArrayList<>();
+        final UsageStats stat3 = new UsageStats();
+        stat3.mLastTimeUsed = System.currentTimeMillis() - 2000;
+        stat3.mPackageName = "work.pkg.class3";
+        workStats.add(stat3);
+
+        when(mAppState.getEntry(anyString(), anyInt()))
+                .thenReturn(mAppEntry);
+        when(mPackageManager.resolveActivityAsUser(any(Intent.class), anyInt(), anyInt()))
+                .thenReturn(new ResolveInfo());
+        when(mUserManager.getUserProfiles())
+                .thenReturn(new ArrayList<>(Arrays.asList(NORMAL_USER, WORK_USER)));
+        when(mMockContext.getSystemService(UsageStatsManager.class))
+                .thenReturn(mWorkUsageStatsManager);
+        // personal app stats
+        when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
+                .thenReturn(personalStats);
+        // work app stats
+        when(mWorkUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
+                .thenReturn(workStats);
+        mAppEntry.info = mApplicationInfo;
+
+        mRecentAppStatsMixin.loadDisplayableRecentApps(3);
+
+        assertThat(mRecentAppStatsMixin.mRecentApps.size()).isEqualTo(3);
+        assertThat(mRecentAppStatsMixin.mRecentApps.get(0).mUsageStats.mPackageName).isEqualTo(
+                "personal.pkg.class");
+        assertThat(mRecentAppStatsMixin.mRecentApps.get(1).mUsageStats.mPackageName).isEqualTo(
+                "work.pkg.class3");
+        assertThat(mRecentAppStatsMixin.mRecentApps.get(2).mUsageStats.mPackageName).isEqualTo(
+                "personal.pkg.class2");
+    }
+
+    @Test
+    public void loadDisplayableRecentApps_usePersonalAndWorkApps_shouldBeUniquePerProfile()
+            throws PackageManager.NameNotFoundException {
+        final String firstAppPackageName = "app1.pkg.class";
+        final String secondAppPackageName = "app2.pkg.class";
+        final List<UsageStats> personalStats = new ArrayList<>();
+        final UsageStats personalStatsFirstApp = new UsageStats();
+        final UsageStats personalStatsFirstAppOlderUse = new UsageStats();
+        final UsageStats personalStatsSecondApp = new UsageStats();
+        personalStatsFirstApp.mLastTimeUsed = System.currentTimeMillis();
+        personalStatsFirstApp.mPackageName = firstAppPackageName;
+        personalStats.add(personalStatsFirstApp);
+
+        personalStatsFirstAppOlderUse.mLastTimeUsed = System.currentTimeMillis() - 5000;
+        personalStatsFirstAppOlderUse.mPackageName = firstAppPackageName;
+        personalStats.add(personalStatsFirstAppOlderUse);
+
+        personalStatsSecondApp.mLastTimeUsed = System.currentTimeMillis() - 2000;
+        personalStatsSecondApp.mPackageName = secondAppPackageName;
+        personalStats.add(personalStatsSecondApp);
+
+        final List<UsageStats> workStats = new ArrayList<>();
+        final UsageStats workStatsSecondApp = new UsageStats();
+        workStatsSecondApp.mLastTimeUsed = System.currentTimeMillis() - 1000;
+        workStatsSecondApp.mPackageName = secondAppPackageName;
+        workStats.add(workStatsSecondApp);
+
+        when(mAppState.getEntry(anyString(), anyInt()))
+                .thenReturn(mAppEntry);
+        when(mUserManager.getUserProfiles())
+                .thenReturn(new ArrayList<>(Arrays.asList(NORMAL_USER, WORK_USER)));
+        when(mMockContext.getSystemService(UsageStatsManager.class))
+                .thenReturn(mWorkUsageStatsManager);
+        when(mPackageManager.resolveActivityAsUser(any(Intent.class), anyInt(), anyInt()))
+                .thenReturn(new ResolveInfo());
+        // personal app stats
+        when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
+                .thenReturn(personalStats);
+        // work app stats
+        when(mWorkUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
+                .thenReturn(workStats);
+        mAppEntry.info = mApplicationInfo;
+
+        mRecentAppStatsMixin.loadDisplayableRecentApps(3);
+
+        // The output should have the first app once since the duplicate use in the personal profile
+        // is filtered out, and the second app twice - once for each profile.
+        assertThat(mRecentAppStatsMixin.mRecentApps.size()).isEqualTo(3);
+        assertThat(mRecentAppStatsMixin.mRecentApps.get(0).mUsageStats.mPackageName).isEqualTo(
+                firstAppPackageName);
+        assertThat(mRecentAppStatsMixin.mRecentApps.get(1).mUsageStats.mPackageName).isEqualTo(
+                secondAppPackageName);
+        assertThat(mRecentAppStatsMixin.mRecentApps.get(2).mUsageStats.mPackageName).isEqualTo(
+                secondAppPackageName);
+    }
+
+    @Test
+    public void loadDisplayableRecentApps_multipleProfileApps_shouldBeSortedByLastTimeUse()
+            throws PackageManager.NameNotFoundException {
+        final List<UsageStats> personalStats = new ArrayList<>();
+        final UsageStats stats1 = new UsageStats();
+        final UsageStats stats2 = new UsageStats();
+        stats1.mLastTimeUsed = System.currentTimeMillis();
+        stats1.mPackageName = "personal.pkg.class";
+        personalStats.add(stats1);
+
+        stats2.mLastTimeUsed = System.currentTimeMillis() - 5000;
+        stats2.mPackageName = "personal.pkg.class2";
+        personalStats.add(stats2);
+
+        final List<UsageStats> workStats = new ArrayList<>();
+        final UsageStats stat3 = new UsageStats();
+        stat3.mLastTimeUsed = System.currentTimeMillis() - 2000;
+        stat3.mPackageName = "work.pkg.class3";
+        workStats.add(stat3);
+
+        final List<UsageStats> cloneStats = new ArrayList<>();
+        final UsageStats stat4 = new UsageStats();
+        stat4.mLastTimeUsed = System.currentTimeMillis() - 1000;
+        stat4.mPackageName = "clone.pkg.class4";
+        cloneStats.add(stat4);
+
+        when(mAppState.getEntry(anyString(), anyInt()))
+                .thenReturn(mAppEntry);
+        when(mUserManager.getUserProfiles())
+                .thenReturn(new ArrayList<>(Arrays.asList(NORMAL_USER, CLONE_USER, WORK_USER)));
+        when(mMockContext.getSystemService(UsageStatsManager.class))
+                .thenReturn(mCloneUsageStatsManager, mWorkUsageStatsManager);
+        when(mPackageManager.resolveActivityAsUser(any(Intent.class), anyInt(), anyInt()))
+                .thenReturn(new ResolveInfo());
+        // personal app stats
+        when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
+                .thenReturn(personalStats);
+        // work app stats
+        when(mWorkUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
+                .thenReturn(workStats);
+        // clone app stats
+        when(mCloneUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
+                .thenReturn(cloneStats);
+
+        mAppEntry.info = mApplicationInfo;
+
+        mRecentAppStatsMixin.loadDisplayableRecentApps(4);
+
+        assertThat(mRecentAppStatsMixin.mRecentApps.size()).isEqualTo(4);
+        assertThat(mRecentAppStatsMixin.mRecentApps.get(0).mUsageStats.mPackageName).isEqualTo(
+                "personal.pkg.class");
+        assertThat(mRecentAppStatsMixin.mRecentApps.get(1).mUsageStats.mPackageName).isEqualTo(
+                "clone.pkg.class4");
+        assertThat(mRecentAppStatsMixin.mRecentApps.get(2).mUsageStats.mPackageName).isEqualTo(
+                "work.pkg.class3");
+        assertThat(mRecentAppStatsMixin.mRecentApps.get(3).mUsageStats.mPackageName).isEqualTo(
+                "personal.pkg.class2");
     }
 }

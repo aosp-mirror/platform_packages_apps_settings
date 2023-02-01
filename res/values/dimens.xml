@@ -17,15 +17,9 @@
 <resources>
     <dimen name="match_parent">-1px</dimen>
 
-    <dimen name="device_memory_usage_button_width">16dip</dimen>
-    <dimen name="device_memory_usage_button_height">32dip</dimen>
-    <dimen name="action_bar_switch_padding">16dip</dimen>
-
     <dimen name="app_icon_size">40dip</dimen>
     <dimen name="min_tap_target_size">48dp</dimen>
     <dimen name="screen_margin_sides">64dip</dimen>
-    <dimen name="screen_margin_top">72dip</dimen>
-    <dimen name="screen_margin_bottom">48dip</dimen>
     <dimen name="content_margin_left">16dip</dimen>
     <dimen name="description_margin_top">26dip</dimen>
     <dimen name="description_margin_sides">40dip</dimen>
@@ -33,62 +27,30 @@
     <dimen name="installed_app_details_bullet_offset">8dip</dimen>
 
     <dimen name="data_usage_chart_height">228dip</dimen>
-    <dimen name="data_usage_chart_optimalWidth">440dip</dimen>
     <dimen name="usage_number_text_size">36sp</dimen>
-
-    <dimen name="volume_seekbar_side_margin">8dip</dimen>
 
     <dimen name="balance_seekbar_center_marker_height">14dp</dimen>
     <dimen name="balance_seekbar_center_marker_width">1dp</dimen>
 
-    <dimen name="divider_height">3dip</dimen>
-    <dimen name="divider_margin_top">6dip</dimen>
-    <dimen name="divider_margin_bottom">7dip</dimen>
-
-    <dimen name="pager_tabs_padding">0dp</dimen>
     <dimen name="pager_tabs_title_padding">16dp</dimen>
     <dimen name="pager_tabs_selected_indicator_height">3dp</dimen>
 
     <dimen name="captioning_preview_height">300dp</dimen>
 
-    <dimen name="autoclick_preview_height">200dp</dimen>
-
     <dimen name="color_mode_preview_height">320dp</dimen>
-
-    <dimen name="accessibility_button_preview_height">200dp</dimen>
 
     <dimen name="ring_progress_bar_thickness">4dp</dimen>
 
-    <!-- Weight of the left pane in a multi-pane preference layout. -->
-    <integer name="preferences_left_pane_weight">4</integer>
-    <!-- Weight of the right pane in a multi-pane preference layout. So the split is 40:60 -->
-    <integer name="preferences_right_pane_weight">6</integer>
-
-    <dimen name="nfc_detection_point_height">300dp</dimen>
-
-    <dimen name="notification_app_icon_size">64dp</dimen>
-    <dimen name="notification_app_icon_badge_size">20dp</dimen>
-    <dimen name="notification_app_icon_badge_margin">4dp</dimen>
-    <dimen name="notification_importance_toggle_size">48dp</dimen>
     <dimen name="notification_importance_toggle_marginTop">28dp</dimen>
-    <dimen name="notification_importance_toggle_marginBottom">28dp</dimen>
-    <dimen name="notification_importance_text_marginTop">20dp</dimen>
     <dimen name="notification_importance_button_separation">16dp</dimen>
-    <dimen name="notification_importance_button_width">178dp</dimen>
-    <dimen name="notification_importance_button_horiz_padding">36dp</dimen>
     <dimen name="notification_importance_drawable_padding">8dp</dimen>
-    <dimen name="notification_importance_description_padding">20dp</dimen>
     <dimen name="notification_importance_description_text">14sp</dimen>
     <dimen name="notification_importance_button_text">16sp</dimen>
     <dimen name="notification_importance_button_padding">14dp</dimen>
 
-    <dimen name="notification_history_header_drawable_start">26dp</dimen>
     <dimen name="conversation_icon_size">32dp</dimen>
 
-    <dimen name="zen_mode_icon_size">36dp</dimen>
-    <dimen name="zen_mode_icon_margin">16dp</dimen>
     <dimen name="zen_mode_settings_button_margin_vertical">24dp</dimen>
-    <dimen name="zen_senders_image_margin_vertical">16dp</dimen>
     <dimen name="zen_conversations_image_margin_vertical">24dp</dimen>
     <dimen name="zen_conversations_icon_offset">32dp</dimen>
     <dimen name="zen_conversations_icon_size">50dp</dimen>
@@ -97,11 +59,8 @@
 
     <dimen name="rect_button_radius">8dp</dimen>
 
-    <!-- Default text size for caption preview samples. Uses dp rather than sp because captions are not scaled. -->
-    <dimen name="caption_preview_text_size">48dp</dimen>
-
-    <!-- ActionBar height -->
-    <dimen name="actionbar_size">56dip</dimen>
+    <!-- Default text size for captioning preview samples. Uses dp rather than sp because captions are not scaled. -->
+    <dimen name="captioning_preview_text_size">48dp</dimen>
 
     <!-- ActionBar contentInsetStart -->
     <dimen name="actionbar_contentInsetStart">16dp</dimen>
@@ -141,6 +100,7 @@
     <dimen name="avatar_margin_top">56dp</dimen>
     <dimen name="avatar_margin_end">24dp</dimen>
     <dimen name="multiple_users_avatar_size">20dp</dimen>
+    <dimen name="multiple_users_user_icon_size">40dp</dimen>
 
     <!-- Homepage -->
     <dimen name="homepage_title_margin_bottom">8dp</dimen>
@@ -159,30 +119,10 @@
     <!-- horizontal: homepage_padding_horizontal_two_pane - homepage_app_bar_padding_two_pane -->
     <dimen name="homepage_app_bar_margin_horizontal_two_pane">18dp</dimen>
 
-    <!-- Dimensions for Wifi Assistant Card -->
-    <dimen name="wifi_assistant_padding_top_bottom">16dp</dimen>
-    <dimen name="wifi_assistant_padding_start_end">16dp</dimen>
-    <dimen name="wifi_assistant_padding">25dp</dimen>
-    <dimen name="wifi_assistant_text_padding">16dp</dimen>
-    <dimen name="wifi_assistant_height">182dp</dimen>
-    <dimen name="wifi_assistant_image_top">32dp</dimen>
-    <dimen name="wifi_assistant_image_start">24dp</dimen>
-
-    <!-- SIM Dialog Margin top -->
-    <dimen name="sim_dialog_margin_top">8dip</dimen>
-    <!-- SIM Dialog Margin bottom -->
-    <dimen name="sim_dialog_margin_bottom">16dip</dimen>
     <!-- SIM Dialog padding -->
-    <dimen name="sim_dialog_padding">8dip</dimen>
     <dimen name="sim_color_spinner_padding">12dip</dimen>
     <dimen name="sim_label_padding">16dip</dimen>
     <dimen name="sim_content_padding">24dip</dimen>
-    <!-- Sim Card Name length -->
-    <integer name="sim_name_length">32</integer>
-
-    <!-- CheckBoxPreference -->
-    <dimen name="checkbox_widget_min_width">58dip</dimen>
-    <dimen name="checkbox_layout_padding">16dip</dimen>
 
     <!-- Bluetooth Preferences -->
     <dimen name="bluetooth_dialog_padding">8dip</dimen>
@@ -195,8 +135,6 @@
     <dimen name="bluetooth_companion_app_widget">20dp</dimen>
 
     <!-- WiFi Preferences -->
-    <dimen name="wifi_divider_height">1px</dimen>
-    <dimen name="wifi_ap_band_checkbox_padding">16dp</dimen>
     <dimen name="wifi_detail_page_header_image_size">32dp</dimen>
 
     <!-- Internet Preferences -->
@@ -216,31 +154,26 @@
     <item name="fingerprint_sensor_location_fraction_x" type="fraction">50%</item>
     <item name="fingerprint_sensor_location_fraction_y" type="fraction">30%</item>
     <dimen name="fingerprint_find_sensor_graphic_size">190dp</dimen>
-    <item name="fingerprint_illustration_aspect_ratio" format="float" type="dimen">2.6</item>
-    <dimen name="fingerprint_decor_padding_top">0dp</dimen>
     <dimen name="fingerprint_error_text_appear_distance">16dp</dimen>
     <dimen name="fingerprint_error_text_disappear_distance">-8dp</dimen>
-    <dimen name="fingerprint_animation_size">88dp</dimen>
+    <dimen name="sfps_enrollment_finished_icon_max_size">295dp</dimen>
     <dimen name="fingerprint_progress_bar_max_size">240dp</dimen>
     <dimen name="fingerprint_progress_bar_min_size">120dp</dimen>
-    <dimen name="fingerprint_enrolling_content_margin_vertical">24dp</dimen>
-    <!-- To be the same size as fingerprint progress bar:
-         fingerprint_finish_max_size = fingerprint_progress_bar_max_size
-                  + (fingerprint_enrolling_content_margin_vertical x 2) -->
-    <dimen name="fingerprint_finish_max_size">288dp</dimen>
+    <dimen name="sfps_progress_bar_translate_x">2dp</dimen>
+    <dimen name="sfps_progress_bar_translate_y">2dp</dimen>
+    <dimen name="sfps_lottie_translate_x">12dp</dimen>
+    <dimen name="sfps_lottie_translate_y">12dp</dimen>
     <dimen name="udfps_lottie_translate_y">0dp</dimen>
 
     <!-- Face -->
     <item name="face_preview_translate_y" format="float" type="dimen">0</item>
     <item name="face_preview_translate_x" format="float" type="dimen">0</item>
     <item name="face_preview_scale" format="float" type="dimen">1.0</item>
+    <dimen name="face_enroll_intro_illustration_margin_bottom">0dp</dimen>
 
-    <!-- Confirm device credentials -->
-    <dimen name="confirm_credentials_security_method_margin">48dp</dimen>
-    <dimen name="confirm_credentials_layout_width">@dimen/match_parent</dimen>
-    <dimen name="confirm_credentials_top_padding">0dp</dimen>
-    <dimen name="confirm_credentials_side_margin">16dp</dimen>
-    <dimen name="confirm_credentials_top_margin">16dp</dimen>
+    <!-- Lock pattern view size, align sysui biometric_auth_pattern_view_size -->
+    <dimen name="biometric_auth_pattern_view_size">348dp</dimen>
+    <dimen name="biometric_auth_pattern_view_max_size">@dimen/biometric_auth_pattern_view_size</dimen>
 
     <!-- Delete managed profile dialog -->
     <dimen name="delete_profile_dialog_padding_top">16dp</dimen>
@@ -253,18 +186,12 @@
     <!-- Launcher Icons -->
     <dimen name="shortcut_size_maskable">120dp</dimen>
     <dimen name="shortcut_size">40dp</dimen>
-    <dimen name="shortcut_icon_size">16dp</dimen>
-    <dimen name="badge_size">10dp</dimen>
 
     <!-- Admin support contact details dialog. -->
     <dimen name="admin_details_dialog_padding">24dp</dimen>
     <dimen name="admin_details_dialog_padding_bottom">32dp</dimen>
     <dimen name="admin_details_dialog_title_bottom_padding">16dp</dimen>
     <dimen name="admin_details_dialog_icon_size">32dp</dimen>
-    <dimen name="admin_details_dialog_link_padding_top">36dp</dimen>
-    <dimen name="admin_details_dialog_learn_more_button_top_margin">24dp</dimen>
-    <dimen name="admin_details_dialog_learn_more_button_padding">8dp</dimen>
-    <dimen name="admin_details_dialog_learn_more_button_minWidth">88dp</dimen>
 
     <!-- Display, Screen zoom -->
     <dimen name="conversation_message_list_padding">10dp</dimen>
@@ -282,11 +209,8 @@
 
     <!-- Accessibility Settings -->
     <dimen name="accessibility_layout_margin_start_end">16dp</dimen>
-    <dimen name="accessibility_button_preference_padding_top_bottom">18dp</dimen>
     <dimen name="accessibility_imageview_size">176dp</dimen>
     <dimen name="accessibility_illustration_view_radius">28dp</dimen>
-    <!-- The margin between two Textviews-->
-    <dimen name="accessibility_textview_layout_margin_bottom">24dp</dimen>
 
     <!-- Accessibility icon -->
     <dimen name="accessibility_icon_size">32dp</dimen>
@@ -296,26 +220,17 @@
     <dimen name="accessibility_qs_tooltip_margin">20dp</dimen>
     <dimen name="accessibility_qs_tooltip_margin_top">27dp</dimen>
 
+    <!-- Contrast level slider -->
+    <dimen name="contrast_level_seekbar_center_marker_height">14dp</dimen>
+    <dimen name="contrast_level_seekbar_center_marker_width">1dp</dimen>
+
     <!-- Restricted icon in switch bar -->
     <dimen name="restricted_icon_margin_end">16dp</dimen>
     <!-- Restricted icon size in switch bar -->
     <dimen name="restricted_icon_size">@*android:dimen/config_restrictedIconSize</dimen>
 
-    <!-- Display Size and Font Size preview screen -->
-    <dimen name="preview_pager_padding">8dp</dimen>
-
-    <!-- Padding between the radio buttons/checkbox and text on the redaction interstitial -->
-    <dimen name="redaction_padding_start">16dp</dimen>
-
     <!-- Padding for Gestures settings screen -->
-    <dimen name="gestures_settings_padding_top_bottom">20dp</dimen>
     <dimen name="gestures_play_button_size">36dp</dimen>
-
-    <dimen name="password_requirement_textsize">14sp</dimen>
-
-    <!-- Visible vertical space we want to show below password edittext field when ime is shown.
-         The unit is sp as it is related to the text size of password requirement item. -->
-    <dimen name="visible_vertical_space_below_password">20sp</dimen>
 
     <!-- Minimum height for setting a lock pattern -->
     <dimen name="choose_lockscreen_min_height">200dp</dimen>
@@ -330,16 +245,7 @@
     <dimen name="battery_meter_height">100dp</dimen>
 
     <!-- Margin for the reset screens -->
-    <dimen name="reset_network_margin_start">72dp</dimen>
-    <dimen name="reset_network_margin_end">12dp</dimen>
     <dimen name="reset_button_margin_end">20dp</dimen>
-
-    <!-- Padding for the reset screens -->
-    <dimen name="reset_checkbox_padding_end">8dp</dimen>
-    <dimen name="reset_checkbox_title_padding_top">12dp</dimen>
-    <dimen name="reset_checkbox_summary_padding_top">4dp</dimen>
-    <dimen name="reset_checkbox_title_text_size">18sp</dimen>
-    <dimen name="reset_checkbox_summary_text_size">14sp</dimen>
 
     <!-- Homepage cards size and padding -->
     <dimen name="contextual_card_icon_size">24dp</dimen>
@@ -362,9 +268,6 @@
 
     <!-- Horizontal divider size and margin -->
     <dimen name="horizontal_divider_height">.75dp</dimen>
-
-    <!-- Vertical divider size -->
-    <dimen name="vertical_divider_width">.75dp</dimen>
 
     <!-- Signal icon in NetworkSelectSetting -->
     <dimen name="signal_strength_icon_size">24dp</dimen>
@@ -399,9 +302,6 @@
 
     <!-- Maximum height for SliceView, override on slices/view/src/main/res/values/dimens.xml -->
     <dimen name="abc_slice_large_height">1800dp</dimen>
-
-    <!-- System navigation settings illustration height -->
-    <dimen name="system_navigation_illustration_height">320dp</dimen>
 
     <dimen name="back_gesture_indicator_width">60dp</dimen>
 
@@ -442,10 +342,8 @@
     <dimen name="list_preferred_item_padding">16dp</dimen>
 
     <!-- Output switcher panel related dimensions -->
-    <dimen name="output_switcher_slice_padding_top">11dp</dimen>
     <dimen name="output_switcher_slice_max_height">600dp</dimen>
     <dimen name="output_switcher_panel_icon_size">52dp</dimen>
-    <dimen name="output_switcher_panel_icon_corner_radius">16dp</dimen>
 
     <!-- Settings panel related dimensions -->
     <dimen name="settings_panel_corner_radius">28dp</dimen>
@@ -460,9 +358,6 @@
     <!-- Text padding for EmptyTextSettings -->
     <dimen name="empty_text_padding">24dp</dimen>
     <dimen name="empty_text_layout_height">450dp</dimen>
-
-    <!--  Choose SIM Activity dimens  -->
-    <dimen name="subtitle_bottom_padding">24dp</dimen>
 
     <!-- Battery usage chart view component -->
     <dimen name="chartview_text_padding">6dp</dimen>
@@ -484,16 +379,39 @@
     <dimen name="dream_item_icon_padding">18dp</dimen>
     <dimen name="dream_item_title_margin_horizontal">8dp</dimen>
     <dimen name="dream_preference_card_padding">16dp</dimen>
-    <dimen name="dream_preference_margin_bottom">20dp</dimen>
-    <dimen name="dream_picker_margin_horizontal">48dp</dimen>
     <dimen name="dream_preview_placeholder_width">52dp</dimen>
 
     <!-- Sims/Data mobile/Calls/SMS select dialog-->
     <dimen name="sims_select_margin_bottom">24dp</dimen>
     <dimen name="sims_select_margin_top">8dp</dimen>
 
+    <!-- Biometrics UDFPS enroll default dimensions-->
+    <dimen name="enroll_padding_start">0dp</dimen>
+    <dimen name="enroll_padding_end">0dp</dimen>
+    <dimen name="enroll_margin_end">0dp</dimen>
+    <dimen name="rotation_90_enroll_padding_start">0dp</dimen>
+    <dimen name="rotation_90_enroll_padding_end">0dp</dimen>
+    <dimen name="rotation_90_enroll_margin_end">0dp</dimen>
+
     <!-- QR code picture size -->
     <dimen name="qrcode_preview_margin">40dp</dimen>
     <dimen name="qrcode_preview_radius">30dp</dimen>
     <dimen name="qrcode_icon_size">27dp</dimen>
+    <!-- Margin for SD card setup completion Image -->
+    <dimen name="setup_completion_margin_top">88dp</dimen>
+
+    <!-- Biometrics Face enroll education dimensions-->
+    <dimen name="face_enroll_icon_large_width">300dp</dimen>
+    <dimen name="face_enroll_icon_large_height">300dp</dimen>
+    <dimen name="illustration_lottie_height">440dp</dimen>
+    <dimen name="illustration_accessibility_margin_top">0dp</dimen>
+    <dimen name="face_enroll_education_lottie_frame_margin_top">-24dp</dimen>
+    <dimen name="lottie_animation_view_margin_top">-52dp</dimen>
+    <dimen name="limited_vision_button_frame_margin_top">-24dp</dimen>
+    <dimen name="limited_vision_button_margin_top">0dp</dimen>
+    <dimen name="limited_vision_button_margin_bottom">0dp</dimen>
+    <dimen name="limited_vision_button_toggle_margin_top">0dp</dimen>
+
+    <!-- Default margin for side fps enroll find sensor lottie -->
+    <dimen name="sfps_enroll_find_sensor_lottie_margin">0dp</dimen>
 </resources>

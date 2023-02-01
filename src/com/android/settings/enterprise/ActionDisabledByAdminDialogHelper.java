@@ -89,7 +89,7 @@ public final class ActionDisabledByAdminDialogHelper {
     public AlertDialog.Builder prepareDialogBuilder(String restriction,
             EnforcedAdmin enforcedAdmin) {
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity)
-                .setPositiveButton(R.string.okay,
+                .setPositiveButton(R.string.suggestion_button_close,
                         mActionDisabledByAdminController
                                 .getPositiveButtonListener(mActivity, enforcedAdmin))
                 .setView(mDialogView);

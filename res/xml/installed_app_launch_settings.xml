@@ -31,7 +31,7 @@
         <PreferenceCategory
             android:title="@string/app_launch_links_category">
 
-            <com.android.settings.applications.intentpicker.VerifiedLinksPreference
+            <Preference
                 android:key="open_by_default_verified_links"
                 android:title="@string/summary_placeholder"
                 android:order="-100"
@@ -40,8 +40,7 @@
             <PreferenceCategory
                 android:layout="@layout/preference_category_no_label"
                 android:key="open_by_default_selected_links_category"
-                android:order="100"
-                settings:searchable="false"/>
+                android:order="100"/>
 
             <Preference
                 android:key="open_by_default_add_link"

@@ -21,7 +21,6 @@ import static android.content.Context.POWER_SERVICE;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -82,27 +81,16 @@ public class BrightnessLevelPreferenceControllerTest {
                 PowerManager.BRIGHTNESS_CONSTRAINT_TYPE_MINIMUM)).thenReturn(0.0f);
         when(mPowerManager.getBrightnessConstraint(
                 PowerManager.BRIGHTNESS_CONSTRAINT_TYPE_MAXIMUM)).thenReturn(1.0f);
-        when(mPowerManager.getBrightnessConstraint(
-                PowerManager.BRIGHTNESS_CONSTRAINT_TYPE_MINIMUM_VR)).thenReturn(0.0f);
-        when(mPowerManager.getBrightnessConstraint(
-                PowerManager.BRIGHTNESS_CONSTRAINT_TYPE_MAXIMUM_VR)).thenReturn(1.0f);
         ShadowApplication.getInstance().setSystemService(POWER_SERVICE,
                 mPowerManager);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
         when(mContext.getDisplay()).thenReturn(mDisplay);
         mController = spy(new BrightnessLevelPreferenceController(mContext, null));
-        doReturn(false).when(mController).isInVrMode();
     }
 
     @Test
     public void isAvailable_shouldAlwaysReturnTrue() {
         assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    public void isInVrMode_noVrManager_shouldAlwaysReturnFalse() {
-        doReturn(null).when(mController).safeGetVrManager();
-        assertThat(mController.isInVrMode()).isFalse();
     }
 
     @Test
@@ -113,8 +101,6 @@ public class BrightnessLevelPreferenceControllerTest {
 
         controller.onStart();
 
-        assertThat(shadowContentResolver.getContentObservers(
-                System.getUriFor(System.SCREEN_BRIGHTNESS_FOR_VR))).isNotEmpty();
         assertThat(shadowContentResolver.getContentObservers(
                 System.getUriFor(System.SCREEN_AUTO_BRIGHTNESS_ADJ))).isNotEmpty();
     }
@@ -129,8 +115,6 @@ public class BrightnessLevelPreferenceControllerTest {
         controller.onStart();
         controller.onStop();
 
-        assertThat(shadowContentResolver.getContentObservers(
-                System.getUriFor(System.SCREEN_BRIGHTNESS_FOR_VR_FLOAT))).isEmpty();
         assertThat(shadowContentResolver.getContentObservers(
                 System.getUriFor(System.SCREEN_AUTO_BRIGHTNESS_ADJ))).isEmpty();
     }
@@ -151,18 +135,7 @@ public class BrightnessLevelPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_inVrMode_shouldSetSummaryToVrBrightness() {
-        doReturn(true).when(mController).isInVrMode();
-        System.putFloat(mContentResolver, System.SCREEN_BRIGHTNESS_FOR_VR_FLOAT, 0.6f);
-
-        mController.updateState(mPreference);
-
-        verify(mPreference).setSummary("91%");
-    }
-
-    @Test
     public void updateState_autoBrightness_shouldSetSummaryToAutoBrightness() {
-        doReturn(false).when(mController).isInVrMode();
         System.putInt(mContentResolver, System.SCREEN_BRIGHTNESS_MODE,
                 System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
 
@@ -177,7 +150,6 @@ public class BrightnessLevelPreferenceControllerTest {
 
     @Test
     public void updateState_manualBrightness_shouldSetSummaryToScreenBrightness() {
-        doReturn(false).when(mController).isInVrMode();
         System.putInt(mContentResolver, System.SCREEN_BRIGHTNESS_MODE,
                 System.SCREEN_BRIGHTNESS_MODE_MANUAL);
 
@@ -188,20 +160,6 @@ public class BrightnessLevelPreferenceControllerTest {
         mController.updateState(mPreference);
 
         verify(mPreference).setSummary("87%");
-    }
-
-    @Test
-    public void updateState_brightnessOutOfRange_shouldSetSummaryInRange() {
-        // VR mode
-        doReturn(true).when(mController).isInVrMode();
-
-        System.putFloat(mContentResolver, System.SCREEN_BRIGHTNESS_FOR_VR_FLOAT, 1.05f);
-        mController.updateState(mPreference);
-        verify(mPreference).setSummary("100%");
-
-        System.putFloat(mContentResolver, System.SCREEN_BRIGHTNESS_FOR_VR_FLOAT, -20f);
-        mController.updateState(mPreference);
-        verify(mPreference).setSummary("0%");
     }
 
     @Test

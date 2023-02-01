@@ -93,10 +93,14 @@
         <attr name="currentPageIndicatorColor" format="color" />
     </declare-styleable>
 
-    <!-- For ConversationMessageView -->
-    <declare-styleable name="ConversationMessageView">
-        <attr name="incoming" format="boolean" />
+    <declare-styleable name="MessageView">
         <attr name="messageText" format="reference" />
+    </declare-styleable>
+
+    <!-- For ConversationMessageView -->
+    <declare-styleable name="ConversationMessageView" parent="MessageView">
+        <attr name="incoming" format="boolean" />
+        <attr name="messageText" />
         <attr name="timestampText" format="reference" />
         <attr name="iconText" format="reference" />
         <attr name="iconTextColor" format="reference|color" />
@@ -146,16 +150,9 @@
         <attr name="android:gravity" />
     </declare-styleable>
 
-    <!-- For biometric enroll checkboxes -->
-    <declare-styleable name="BiometricEnrollCheckbox">
-        <attr name="icon" format="reference" />
-        <attr name="title" format="reference" />
-        <attr name="description" format="reference" />
-    </declare-styleable>
-
     <!-- For Face enroll accessibility toggle -->
-    <declare-styleable name="FaceEnrollAccessibilityToggle">
-        <attr name="messageText" format="reference" />
+    <declare-styleable name="FaceEnrollAccessibilityToggle" parent="MessageView">
+        <attr name="messageText" />
     </declare-styleable>
 
     <!-- For TwoStatesButtonPreference -->
@@ -187,4 +184,14 @@
     <attr name="ic_menu_moreoverflow" format="reference" />
     <attr name="side_margin" format="reference|dimension" />
     <attr name="wifi_signal_color" format="reference" />
+
+    <declare-styleable name="BiometricsEnrollView">
+        <attr name="biometricsEnrollStyle" format="reference" />
+        <attr name="biometricsEnrollIcon" format="reference|color" />
+        <attr name="biometricsMovingTargetFill" format="reference|color" />
+        <attr name="biometricsMovingTargetFillError" format="reference|color" />
+        <attr name="biometricsEnrollProgress" format="reference|color" />
+        <attr name="biometricsEnrollProgressHelp" format="reference|color" />
+        <attr name="biometricsEnrollProgressHelpWithTalkback" format="reference|color" />
+    </declare-styleable>
 </resources>

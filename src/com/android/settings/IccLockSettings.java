@@ -57,6 +57,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -174,8 +175,9 @@ public class IccLockSettings extends SettingsPreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (Utils.isMonkeyRunning()) {
-            finish();
+        if (Utils.isMonkeyRunning() ||
+                !SubscriptionUtil.isSimHardwareVisible(getContext())) {
+            finishFragment();
             return;
         }
 
@@ -476,7 +478,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
         mPin = preference.getText();
         if (!reasonablePin(mPin)) {
             // inject error message and display dialog again
-            mError = mRes.getString(R.string.sim_bad_pin);
+            mError = mRes.getString(R.string.sim_invalid_pin_hint);
             showPinDialog();
             return;
         }
@@ -673,9 +675,8 @@ public class IccLockSettings extends SettingsPreferenceFragment
         } else if (attemptsRemaining == 1) {
             displayMessage = mRes.getString(R.string.wrong_pin_code_one, attemptsRemaining);
         } else if (attemptsRemaining > 1) {
-            displayMessage = mRes
-                    .getQuantityString(R.plurals.wrong_pin_code, attemptsRemaining,
-                            attemptsRemaining);
+            displayMessage = StringUtil.getIcuPluralsString(getPrefContext(), attemptsRemaining,
+                    R.string.wrong_pin_code);
         } else {
             displayMessage = mRes.getString(R.string.pin_failed);
         }

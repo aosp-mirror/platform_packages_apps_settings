@@ -250,12 +250,11 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
         CheckBox alphanumericPin = (CheckBox) view.findViewById(R.id.alphanumeric_pin);
         CheckBox contactSharing = (CheckBox) view.findViewById(
                 R.id.phonebook_sharing_message_entry_pin);
-        contactSharing.setText(getString(R.string.bluetooth_pairing_shares_phonebook,
-                mPairingController.getDeviceName()));
+        contactSharing.setText(getString(R.string.bluetooth_pairing_shares_phonebook));
         EditText pairingView = (EditText) view.findViewById(R.id.text);
 
-        contactSharing.setVisibility(mPairingController.isProfileReady()
-                ? View.GONE : View.VISIBLE);
+        contactSharing.setVisibility(
+                mPairingController.isContactSharingVisible() ? View.VISIBLE : View.GONE);
         mPairingController.setContactSharingState();
         contactSharing.setOnCheckedChangeListener(mPairingController);
         contactSharing.setChecked(mPairingController.getContactSharingState());
@@ -342,11 +341,10 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
         TextView messagePairing = (TextView) view.findViewById(R.id.pairing_code_message);
         CheckBox contactSharing = (CheckBox) view.findViewById(
                 R.id.phonebook_sharing_message_confirm_pin);
-        contactSharing.setText(getString(R.string.bluetooth_pairing_shares_phonebook,
-                mPairingController.getDeviceName()));
+        contactSharing.setText(getString(R.string.bluetooth_pairing_shares_phonebook));
 
         contactSharing.setVisibility(
-                mPairingController.isProfileReady() ? View.GONE : View.VISIBLE);
+                mPairingController.isContactSharingVisible() ? View.VISIBLE : View.GONE);
         mPairingController.setContactSharingState();
         contactSharing.setChecked(mPairingController.getContactSharingState());
         contactSharing.setOnCheckedChangeListener(mPairingController);
@@ -363,5 +361,4 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
                 ? View.VISIBLE : View.GONE);
         return view;
     }
-
 }

@@ -39,6 +39,7 @@ import android.os.SimpleClock;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.EventLog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +60,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.wifi.WifiUtils;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
@@ -418,8 +420,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
             return;
         }
         // TODO: Check level of the network to show signal icon.
-        final Drawable wifiIcon = mActivity.getDrawable(
-                Utils.getWifiIconResource(level)).mutate();
+        final Drawable wifiIcon = mActivity.getDrawable(getWifiIconResource(level)).mutate();
         final Drawable wifiIconDark = wifiIcon.getConstantState().newDrawable().mutate();
         wifiIconDark.setTintList(
                 Utils.getColorAttr(mActivity, android.R.attr.colorControlNormal));
@@ -518,7 +519,13 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
 
         UiConfigurationItem(String displayedSsid, WifiNetworkSuggestion wifiNetworkSuggestion,
                 int index, int level) {
-            mDisplayedSsid = displayedSsid;
+            if (displayedSsid.contains("\n") || displayedSsid.contains("\r")) {
+                mDisplayedSsid = displayedSsid.replaceAll("\\r|\\n", "");
+                Log.e(TAG, "Ignore CRLF strings in display SSIDs to avoid display errors!");
+                EventLog.writeEvent(0x534e4554, "224545390", -1 /* UID */, "CRLF injection");
+            } else {
+                mDisplayedSsid = displayedSsid;
+            }
             mWifiNetworkSuggestion = wifiNetworkSuggestion;
             mIndex = index;
             mLevel = level;
@@ -559,8 +566,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
             final PreferenceImageView imageView = view.findViewById(android.R.id.icon);
             if (imageView != null) {
                 final Drawable drawable = getContext().getDrawable(
-                        com.android.settingslib.Utils.getWifiIconResource(
-                                uiConfigurationItem.mLevel));
+                        getWifiIconResource(uiConfigurationItem.mLevel));
                 drawable.setTintList(
                         com.android.settingslib.Utils.getColorAttr(getContext(),
                                 android.R.attr.colorControlNormal));
@@ -748,8 +754,6 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
         }
     }
 
-
-
     @VisibleForTesting
     void updateScanResultsToUi() {
         if (mUiToRequestedList == null) {
@@ -817,5 +821,10 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
     @Override
     public void onNumSavedNetworksChanged() {
         // Do nothing.
+    }
+
+    @VisibleForTesting
+    static int getWifiIconResource(int level) {
+        return WifiUtils.getInternetIconResource(level, false /* noInternet */);
     }
 }

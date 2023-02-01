@@ -66,21 +66,21 @@ import java.util.StringJoiner;
 public class ToggleScreenMagnificationPreferenceFragment extends
         ToggleFeaturePreferenceFragment implements
         MagnificationModePreferenceController.DialogHelper {
-    // TODO(b/147021230): Move duplicated functions with android/internal/accessibility into util.
-    private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
 
-    private CheckBox mSoftwareTypeCheckBox;
-    private CheckBox mHardwareTypeCheckBox;
-    private CheckBox mTripleTapTypeCheckBox;
-
+    private static final String TAG = "ToggleScreenMagnificationPreferenceFragment";
     private static final char COMPONENT_NAME_SEPARATOR = ':';
     private static final TextUtils.SimpleStringSplitter sStringColonSplitter =
             new TextUtils.SimpleStringSplitter(COMPONENT_NAME_SEPARATOR);
 
+    protected SwitchPreference mFollowingTypingSwitchPreference;
+
+    // TODO(b/147021230): Move duplicated functions with android/internal/accessibility into util.
+    private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
+    private CheckBox mSoftwareTypeCheckBox;
+    private CheckBox mHardwareTypeCheckBox;
+    private CheckBox mTripleTapTypeCheckBox;
     private DialogCreatable mDialogDelegate;
     private MagnificationFollowTypingPreferenceController mFollowTypingPreferenceController;
-
-    protected SwitchPreference mFollowingTypingSwitchPreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -123,6 +123,17 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final AccessibilityManager am = getPrefContext().getSystemService(
                 AccessibilityManager.class);
         am.addTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        // TODO(b/171272809): Add back when controllers move to static type
+        return 0;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
     @Override
@@ -326,7 +337,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     @Override
     protected CharSequence getShortcutTypeSummary(Context context) {
         if (!mShortcutPreference.isChecked()) {
-            return context.getText(R.string.switch_off_text);
+            return context.getText(R.string.off);
         }
 
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(context,
@@ -623,15 +634,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         return false;
     }
 
-    private boolean isWindowMagnification(Context context) {
-        final int mode = Settings.Secure.getIntForUser(
-                context.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE,
-                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_FULLSCREEN,
-                context.getContentResolver().getUserId());
-        return mode == Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_WINDOW;
-    }
-
     private static int getUserShortcutTypeFromSettings(Context context) {
         int shortcutTypes = UserShortcutType.EMPTY;
         if (hasMagnificationValuesInSettings(context, UserShortcutType.SOFTWARE)) {
@@ -656,6 +658,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final int uerShortcutType = getUserShortcutTypeFromSettings(context);
         return (uerShortcutType != AccessibilityUtil.UserShortcutType.EMPTY)
                 ? context.getText(R.string.accessibility_summary_shortcut_enabled)
-                : context.getText(R.string.accessibility_summary_shortcut_disabled);
+                : context.getText(R.string.off);
     }
 }

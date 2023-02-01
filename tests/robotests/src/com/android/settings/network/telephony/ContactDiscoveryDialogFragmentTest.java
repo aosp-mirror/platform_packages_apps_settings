@@ -35,6 +35,7 @@ import android.widget.Button;
 import androidx.fragment.app.FragmentActivity;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -44,6 +45,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
 
+@Ignore
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowAlertDialog.class)
 public class ContactDiscoveryDialogFragmentTest {

@@ -57,7 +57,7 @@
             android:order="3"
             android:title="@string/status_number"
             android:summary="@string/summary_placeholder"
-            android:selectable="false"
+            settings:isPreferenceVisible="@bool/config_show_sim_info"
             settings:controller="com.android.settings.deviceinfo.PhoneNumberPreferenceController"
             settings:enableCopying="true"/>
     </PreferenceCategory>
@@ -99,18 +99,31 @@
             android:title="@string/sim_status_title"
             settings:keywords="@string/keywords_sim_status"
             android:summary="@string/summary_placeholder"
-            settings:enableCopying="true"/>
+            settings:isPreferenceVisible="@bool/config_show_sim_info"
+            settings:controller="com.android.settings.deviceinfo.simstatus.SimStatusPreferenceController"/>
 
         <!-- Model & hardware -->
         <Preference
             android:key="device_model"
-            android:order="31"
+            android:order="30"
             android:title="@string/model_info"
             android:summary="@string/summary_placeholder"
             android:fragment="com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFragment"
             settings:enableCopying="true"
             settings:keywords="@string/keywords_model_and_hardware"
             settings:controller="com.android.settings.deviceinfo.HardwareInfoPreferenceController"/>
+
+        <!-- EID -->
+        <com.android.settings.network.telephony.TelephonyPreferenceDialog
+            android:key="eid_info"
+            android:order="31"
+            android:title="@string/status_eid"
+            android:summary="@string/device_info_protected_single_press"
+            android:positiveButtonText="@string/dlg_ok"
+            android:dialogLayout="@layout/dialog_eid_status"
+            settings:isPreferenceVisible="@bool/config_show_sim_info"
+            settings:enableCopying="true"
+            settings:controller="com.android.settings.deviceinfo.simstatus.SimEidPreferenceController"/>
 
         <!-- IMEI -->
         <com.android.settings.deviceinfo.PhoneNumberSummaryPreference
@@ -120,6 +133,7 @@
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_imei_info"
             settings:enableCopying="true"
+            settings:isPreferenceVisible="@bool/config_show_sim_info"
             settings:controller="com.android.settings.deviceinfo.imei.ImeiInfoPreferenceController"/>
 
         <!-- Android version -->

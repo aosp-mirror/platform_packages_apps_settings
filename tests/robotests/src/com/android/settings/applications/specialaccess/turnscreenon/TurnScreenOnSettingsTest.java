@@ -176,7 +176,7 @@ public class TurnScreenOnSettingsTest {
 
     private PackageInfo createPackage(String packageName, boolean hasTurnScreenOnPermission) {
         PackageInfo pi = new PackageInfo();
-        when(mPackageManager.checkPermission(Manifest.permission.WAKE_LOCK,
+        when(mPackageManager.checkPermission(Manifest.permission.TURN_SCREEN_ON,
                 packageName)).thenReturn(
                 hasTurnScreenOnPermission ? PackageManager.PERMISSION_GRANTED
                         : PackageManager.PERMISSION_DENIED);

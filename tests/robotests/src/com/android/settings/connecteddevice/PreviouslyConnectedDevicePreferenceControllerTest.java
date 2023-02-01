@@ -168,7 +168,8 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     @Test
     public void onStop_unregisterCallback() {
         // register it first
-        mContext.registerReceiver(mPreConnectedDeviceController.mReceiver, null);
+        mContext.registerReceiver(mPreConnectedDeviceController.mReceiver, null,
+                Context.RECEIVER_EXPORTED/*UNAUDITED*/);
 
         // unregister the callback in onStop()
         mPreConnectedDeviceController.onStop();

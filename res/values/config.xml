@@ -29,9 +29,6 @@
          very long strings too. -->
     <integer name="maximum_user_dictionary_word_length" translatable="false">48</integer>
 
-    <!-- Dashboard number of columns -->
-    <integer name="dashboard_num_columns">1</integer>
-
     <!-- Carrier_enabled editable -->
     <bool name="config_allow_edit_carrier_enabled" translatable="false">false</bool>
 
@@ -49,6 +46,10 @@
     <string name="config_wallpaper_picker_class" translatable="false">com.android.settings.Settings$WallpaperSettingsActivity</string>
     <!-- Fully-qualified class name for the styles & wallpaper picker activity. -->
     <string name="config_styles_and_wallpaper_picker_class" translatable="false"></string>
+    <!-- Action name for the wallpaper picker activity. -->
+    <string name="config_wallpaper_picker_action" translatable="false"></string>
+    <!-- Action name for the styles & wallpaper picker activity. -->
+    <string name="config_styles_and_wallpaper_picker_action" translatable="false"></string>
     <!-- Intent extra for wallpaper picker activity. -->
     <string name="config_wallpaper_picker_launch_extra" translatable="false">com.android.wallpaper.LAUNCH_SOURCE</string>
 
@@ -61,9 +62,6 @@
     <!-- Double twist sensor type and vendor used by gesture setting -->
     <string name="gesture_double_twist_sensor_type" translatable="false"></string>
     <string name="gesture_double_twist_sensor_vendor" translatable="false"></string>
-
-    <!-- When true enable gesture setting. -->
-    <bool name="config_gesture_settings_enabled">false</bool>
 
     <!-- If the Storage Manager settings are enabled. -->
     <bool name="config_storage_manager_settings_enabled">false</bool>
@@ -103,6 +101,14 @@
         -->
     </string-array>
 
+    <!-- List containing the component names of pre-installed speech services. -->
+    <string-array name="config_preinstalled_speech_services" translatable="false">
+        <!--
+        <item>com.example.package.first/com.example.class.FirstService</item>
+        <item>com.example.package.second/com.example.class.SecondService</item>
+        -->
+    </string-array>
+
     <!-- List containing the component names of pre-installed interaction control services. -->
     <string-array name="config_preinstalled_interaction_control_services" translatable="false">
         <!--
@@ -111,8 +117,9 @@
         -->
     </string-array>
 
-    <!-- List containing the order of services in screen reader category by componentname.
-         All componentnames in a category need to be specified to guarantee correct behavior.-->
+    <!-- List containing the order of services in screen reader category by {@link ComponentName}.
+         All {@link ComponentName} in a category need to be specified to guarantee correct
+         behavior.-->
     <string-array name="config_order_screen_reader_services" translatable="false">
         <!--
         <item>com.example.package.first/com.example.class.FirstService</item>
@@ -121,8 +128,8 @@
     </string-array>
 
     <!-- List containing the order of services in captions category by preference key or
-         componentname. All preference keys in a category need to be specified to guarantee correct
-         behavior.-->
+         {@link ComponentName}. All preference keys in a category need to be specified to guarantee
+         correct behavior.-->
     <string-array name="config_order_captions_services" translatable="false">
         <!--
         <item>com.example.package.first/com.example.class.FirstService</item>
@@ -133,8 +140,8 @@
         -->
     </string-array>
 
-    <!-- List containing the order of services in audio and caption category by preference key
-         or componentname. All preference keys in a category need to be specified to guarantee
+    <!-- List containing the order of services in audio and caption category by preference key or
+         {@link ComponentName}. All preference keys in a category need to be specified to guarantee
          correct behavior.-->
     <string-array name="config_order_audio_services" translatable="false">
         <!--
@@ -146,8 +153,8 @@
         -->
     </string-array>
 
-    <!-- List containing the order of services in display category by preference key
-         or componentname. All preference keys in a category need to be specified to guarantee
+    <!-- List containing the order of services in display category by preference key or
+         {@link ComponentName}. All preference keys in a category need to be specified to guarantee
          correct behavior.-->
     <string-array name="config_order_display_services" translatable="false">
         <!--
@@ -159,8 +166,21 @@
         -->
     </string-array>
 
-    <!-- List containing the order of services in interaction control category by preference key
-         or componentname. All preference keys in a category need to be specified to guarantee
+    <!-- List containing the order of services in speech category by preference key or
+         {@link ComponentName}. All preference keys in a category need to be specified to guarantee
+         correct behavior.-->
+    <string-array name="config_order_speech_services" translatable="false">
+        <!--
+        <item>com.example.package.first/com.example.class.FirstService</item>
+        <item>com.example.package.second/com.example.class.SecondService</item>
+        <item>font_size_preference_screen</item>
+        <item>dark_ui_mode_accessibility</item>
+        <item>...</item>
+        -->
+    </string-array>
+
+    <!-- List containing the order of services in interaction control category by preference key or
+         {@link ComponentName}. All preference keys in a category need to be specified to guarantee
          correct behavior.-->
     <string-array name="config_order_interaction_control_services" translatable="false">
         <!--
@@ -174,14 +194,6 @@
 
     <!-- List of packages that should be allowlisted for slice uri access. Do not translate -->
     <string-array name="slice_allowlist_package_names" translatable="false"/>
-
-    <!-- Whether or not App & Notification screen should display recently used apps -->
-    <bool name="config_display_recent_apps">true</bool>
-
-    <!-- Package name for the storage manager to use from Settings search. -->
-    <string name="config_deletion_helper_package" translatable="false">com.android.storagemanager</string>
-    <!-- Class name for the storage manager's deletion helper class. -->
-    <string name="config_deletion_helper_class" translatable="false">com.android.storagemanager.deletionhelper.DeletionHelperActivity</string>
 
     <!-- Whether to use a UI variant that minimizes the number of UI elements on screen. This is
          typically used when there is not enough space to display everything, because pattern view
@@ -253,6 +265,9 @@
     <!-- Settings intelligence interaction log intent action -->
     <string name="config_settingsintelligence_log_action" translatable="false"></string>
 
+    <!-- Whether Settings intelligence supports presenting Slices. -->
+    <bool name="config_settingsintelligence_slice_supported">false</bool>
+
     <!-- AOSP Emergency app package name -->
     <string name="config_aosp_emergency_package_name" translatable="false">
         com.android.emergency
@@ -279,6 +294,19 @@
     <!-- ComponentName to launch a vendor-specific enrollment activity if available -->
     <string name="config_face_enroll" translatable="false"></string>
 
+    <!-- ComponentName to launch a vendor-specific posture guidance activity if available -->
+    <string name="config_face_enroll_guidance_page" translatable="false"></string>
+
+    <!-- Whether to support posture listening for face auth, default is 0(DEVICE_POSTURE_UNKNOWN)
+     means setting will try listening on device posture changes.
+     0 : DEVICE_POSTURE_UNKNOWN
+     1 : DEVICE_POSTURE_CLOSED
+     2 : DEVICE_POSTURE_HALF_OPENED
+     3 : DEVICE_POSTURE_OPENED
+     4 : DEVICE_POSTURE_FLIPPED
+     -->
+    <integer name="config_face_enroll_supported_posture">0</integer>
+
     <!-- Whether to show the "less secure" info section on the face enroll intro screen -->
     <bool name="config_face_intro_show_less_secure">false</bool>
 
@@ -288,6 +316,9 @@
     <!-- Whether to use the Lottie animation for the face education enrollment screen -->
     <bool name="config_face_education_use_lottie">false</bool>
 
+    <!-- Whether to support enrollment during setup wizard flow -->
+    <bool name="config_suw_support_face_enroll">true</bool>
+
     <!-- App intent -->
     <string name="config_account_intent_uri" translatable="false"></string>
 
@@ -295,8 +326,6 @@
     <bool name="has_dock_settings">false</bool>
     <!-- Whether there is a boot sounds checkbox -->
     <bool name="has_boot_sounds">false</bool>
-    <!-- Whether there is a silent mode checkbox  -->
-    <bool name="has_silent_mode">true</bool>
 
     <!-- Display additional System Update menu if true -->
     <bool name="config_additional_system_update_setting_enable">false</bool>
@@ -327,6 +356,9 @@
     surface in search results or not.-->
     <bool name="config_show_wifi_settings">true</bool>
 
+    <!-- Whether Wi-Fi hotspot settings should be shown or not. -->
+    <bool name="config_show_wifi_hotspot_settings">true</bool>
+
     <!-- Whether toggle_airplane is available or not. -->
     <bool name="config_show_toggle_airplane">true</bool>
 
@@ -339,14 +371,8 @@
     <!-- Whether battery from app_info_settings is available or not. -->
     <bool name="config_show_app_info_settings_battery">true</bool>
 
-    <!-- Whether location mode is available or not. -->
-    <bool name="config_location_mode_available">true</bool>
-
     <!-- Whether location scanning is available or not. -->
     <bool name="config_show_location_scanning">true</bool>
-
-    <!-- Whether high_power_apps should be shown or not. -->
-    <bool name="config_show_high_power_apps">true</bool>
 
     <!-- Whether media_volume should be shown or not. -->
     <bool name="config_show_media_volume">true</bool>
@@ -462,9 +488,6 @@
     <!-- Whether to disable "Uninstall Updates" menu item for System apps or not. -->
     <bool name="config_disable_uninstall_update">false</bool>
 
-    <!-- Whether or not extra preview panels should be used for screen zoom setting. -->
-    <bool name="config_enable_extra_screen_zoom_preview">true</bool>
-
     <!-- Slice Uri to query nearby devices. -->
     <string name="config_nearby_devices_slice_uri" translatable="false">content://com.google.android.gms.nearby.fastpair/device_status_list_item</string>
 
@@ -542,9 +565,6 @@
     <!-- Whether to show Smart Storage toggle -->
     <bool name="config_show_smart_storage_toggle">true</bool>
 
-    <!-- Whether to support large screen -->
-    <bool name="config_supported_large_screen">false</bool>
-
     <!-- Display settings screen, Color mode options. Must be the same length and order as
          config_color_mode_options_values below. Only the values that also appear in
          frameworks/base/core/res/res/values/config.xml's config_availableColorModes are shown. -->
@@ -592,6 +612,9 @@
     <!-- Whether to aggregate for network selection list-->
     <bool name="config_network_selection_list_aggregation_enabled">false</bool>
 
+    <!-- Max network scan search time in seconds -->
+    <integer name="config_network_scan_helper_max_search_time_sec">300</integer>
+
     <!-- Whether to give option to add restricted profiles -->
     <bool name="config_offer_restricted_profiles">false</bool>
 
@@ -615,12 +638,58 @@
     <!-- Whether the dream setup activity should be enabled as part of setupwizard -->
     <bool name="dream_setup_supported">false</bool>
 
-    <!-- Whether to put the apps with system UID into system component bucket or not -->
-    <bool name="config_battery_combine_system_components">false</bool>
+    <!-- Whether to show communal settings at the top level. -->
+    <bool name="config_show_communal_settings">false</bool>
+
+    <!-- The extra value for battery tip -->
+    <integer name="config_battery_extra_tip_value">12</integer>
+
+    <!-- Whether to enable the advanced vpn feature. The default is not to. -->
+    <bool name="config_advanced_vpn_enabled">false</bool>
 
     <!-- An array of uid name for which packages exempt from Wi-Fi permission check. -->
     <string-array name="config_exempt_wifi_permission_uid_name" translatable="false">
         <item>@string/config_settingsintelligence_package_name</item>
         <item>android.uid.system:1000</item>
     </string-array>
+
+    <!-- The default value for RedactionInterstitial in SUW -->
+    <bool name="default_allow_sensitive_lockscreen_content">true</bool>
+
+    <!-- Whether to enable the app battery usage list page feature. -->
+    <bool name="config_app_battery_usage_list_enabled">false</bool>
+
+    <!-- Whether sim related information is visible to the end user. -->
+    <bool name="config_show_sim_info">true</bool>
+
+    <!-- In the case of receiving both help and progress message, display progress message. -->
+    <bool name="enrollment_progress_priority_over_help">false</bool>
+    <!-- Prioritize help message by their occurrence -->
+    <bool name="enrollment_prioritize_acquire_messages">false</bool>
+    <!-- Control messages displayed during enrollment -->
+    <bool name="enrollment_message_display_controller_flag">false</bool>
+
+    <!-- Whether the toggle for Auto-rotate with Face Detection should be shown. -->
+    <bool name="config_auto_rotate_face_detection_available">true</bool>
+
+    <!-- The radius of the enrollment progress bar, in dp -->
+    <integer name="config_udfpsEnrollProgressBar" translatable="false">
+        280
+    </integer>
+
+    <!-- Default udfps icon. Same path as ic_fingerprint.xml -->
+    <string name="config_udfpsIcon" translatable="false">
+        M25.5,16.3283C28.47,14.8433 31.9167,14 35.5834,14C39.2501,14 42.6968,14.8433 45.6668,16.3283
+        M20,28.6669C22.7683,24.3402 28.7084,21.3335 35.5834,21.3335C42.4585,21.3335 48.3985,
+        24.3402 51.1669,28.6669
+        M22.8607,47.0002C21.834,44.3235 21.834,41.5002 21.834,41.5002C21.834,
+        34.4051 27.7374,28.6667 35.5841,28.6667C43.4308,28.6667 49.3341,34.4051 49.3341,41.5002
+        M49.3344,41.5003V42.0319C49.3344,44.7636 47.1161,47.0003 44.3661,47.0003C41.9461,
+        47.0003 39.8744,45.2403 39.471,42.857L38.9577,
+        39.7769C38.591,37.5953 36.7027,36.0002 34.5027,
+        36.0002C26.5826,36.0002 29.846,49.1087 35.291,50.6487
+        M44.9713,54.6267C42.5513,56.7167 39.2879,58.0001 35.5846,58.0001C32.2296,
+        58.0001 29.2229,56.9551 26.8945,55.195
+    </string>
+
 </resources>

@@ -29,6 +29,7 @@ import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
+import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
@@ -45,6 +46,7 @@ import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.security.SecuritySettingsFeatureProvider;
 import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.users.UserFeatureProvider;
+import com.android.settings.vpn2.AdvancedVpnFeatureProvider;
 import com.android.settings.wifi.WifiTrackerLibProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -101,7 +103,10 @@ public abstract class FeatureFactory {
 
     public abstract AssistGestureFeatureProvider getAssistGestureFeatureProvider();
 
-    public abstract SuggestionFeatureProvider getSuggestionFeatureProvider(Context context);
+    /**
+     * Gets implementation for the Suggestion Feature provider.
+     */
+    public abstract SuggestionFeatureProvider getSuggestionFeatureProvider();
 
     public abstract SupportFeatureProvider getSupportFeatureProvider(Context context);
 
@@ -158,6 +163,11 @@ public abstract class FeatureFactory {
     public abstract FaceFeatureProvider getFaceFeatureProvider();
 
     /**
+     * Gets implementation for Biometrics repository provider.
+     */
+    public abstract BiometricsRepositoryProvider getBiometricsRepositoryProvider();
+
+    /**
      * Gets implementation for the WifiTrackerLib.
      */
     public abstract WifiTrackerLibProvider getWifiTrackerLibProvider();
@@ -176,6 +186,11 @@ public abstract class FeatureFactory {
      * Retrieves implementation for Accessibility metrics category feature.
      */
     public abstract AccessibilityMetricsFeatureProvider getAccessibilityMetricsFeatureProvider();
+
+    /**
+     * Retrieves implementation for advanced vpn feature.
+     */
+    public abstract AdvancedVpnFeatureProvider getAdvancedVpnFeatureProvider();
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {

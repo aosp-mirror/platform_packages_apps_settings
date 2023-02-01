@@ -16,6 +16,9 @@
 
 package com.android.settings.display;
 
+import static androidx.lifecycle.Lifecycle.Event.ON_START;
+import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
+
 import static com.android.settings.display.SmartAutoRotateController.isRotationResolverServiceAvailable;
 
 import android.content.BroadcastReceiver;
@@ -25,14 +28,13 @@ import android.content.IntentFilter;
 import android.os.PowerManager;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnStart;
-import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.widget.BannerMessagePreference;
 
 /**
@@ -40,7 +42,7 @@ import com.android.settingslib.widget.BannerMessagePreference;
  * when battery saver mode is enabled.
  */
 public class SmartAutoRotateBatterySaverController extends BasePreferenceController implements
-        LifecycleObserver, OnStart, OnStop {
+        LifecycleObserver {
 
     private Preference mPreference;
     private final PowerManager mPowerManager;
@@ -76,13 +78,13 @@ public class SmartAutoRotateBatterySaverController extends BasePreferenceControl
                 });
     }
 
-    @Override
+    @OnLifecycleEvent(ON_START)
     public void onStart() {
         mContext.registerReceiver(mReceiver,
                 new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
     }
 
-    @Override
+    @OnLifecycleEvent(ON_STOP)
     public void onStop() {
         mContext.unregisterReceiver(mReceiver);
     }

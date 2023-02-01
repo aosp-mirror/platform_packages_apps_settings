@@ -53,16 +53,16 @@ public class OptimizedPreferenceController extends AbstractPreferenceController
             return;
         }
 
-        if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
-            Log.d(TAG, "is system or default app, disable pref");
-            ((SelectorWithWidgetPreference) preference).setChecked(false);
-            preference.setEnabled(false);
-        } else if (mBatteryOptimizeUtils.getAppOptimizationMode()
+        if (mBatteryOptimizeUtils.getAppOptimizationMode()
                 == BatteryOptimizeUtils.MODE_OPTIMIZED) {
             Log.d(TAG, "is optimized states");
             ((SelectorWithWidgetPreference) preference).setChecked(true);
         } else {
             ((SelectorWithWidgetPreference) preference).setChecked(false);
+            if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
+                Log.d(TAG, "is system or default app, disable pref");
+                preference.setEnabled(false);
+            }
         }
     }
 

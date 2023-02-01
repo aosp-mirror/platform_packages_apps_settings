@@ -25,7 +25,6 @@ import android.annotation.UiThread;
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
-import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -68,7 +67,7 @@ import com.android.internal.annotations.GuardedBy;
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.TrustedCredentialsSettings.Tab;
-import com.android.settings.core.InstrumentedFragment;
+import com.android.settingslib.core.lifecycle.ObservableFragment;
 
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
@@ -81,7 +80,7 @@ import java.util.function.IntConsumer;
 /**
  * Fragment to display trusted credentials settings for one tab.
  */
-public class TrustedCredentialsFragment extends InstrumentedFragment
+public class TrustedCredentialsFragment extends ObservableFragment
         implements TrustedCredentialsDialogBuilder.DelegateInterface {
 
     public static final String ARG_POSITION = "tab";
@@ -174,11 +173,6 @@ public class TrustedCredentialsFragment extends InstrumentedFragment
             createChildView(inflater, contentView, childState, i);
         }
         return mFragmentView;
-    }
-
-    @Override
-    public int getMetricsCategory() {
-        return SettingsEnums.TRUSTED_CREDENTIALS;
     }
 
     private void createChildView(

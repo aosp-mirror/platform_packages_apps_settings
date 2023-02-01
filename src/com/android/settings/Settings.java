@@ -46,6 +46,8 @@ public class Settings extends SettingsActivity {
     /*
     * Settings subclasses for launching independently.
     */
+
+    public static class MemtagPageActivity extends SettingsActivity { /* empty */}
     public static class AssistGestureSettingsActivity extends SettingsActivity { /* empty */}
     public static class BluetoothSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CreateShortcutActivity extends SettingsActivity { /* empty */ }
@@ -111,6 +113,10 @@ public class Settings extends SettingsActivity {
     public static class SpellCheckersSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocalePickerActivity extends SettingsActivity { /* empty */ }
     public static class LanguageAndInputSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class LanguageSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity for the regional preferences settings. */
+    public static class RegionalPreferencesActivity extends SettingsActivity { /* empty */ }
+    public static class KeyboardSettingsActivity extends SettingsActivity { /* empty */ }
     public static class UserDictionarySettingsActivity extends SettingsActivity { /* empty */ }
     public static class DarkThemeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DisplaySettingsActivity extends SettingsActivity { /* empty */ }
@@ -138,6 +144,10 @@ public class Settings extends SettingsActivity {
     public static class BlueToothPairingActivity extends SettingsActivity { /* empty */ }
     /** Activity for Reduce Bright Colors. */
     public static class ReduceBrightColorsSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity for text reading settings. */
+    public static class TextReadingSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity for text color and motion settings. */
+    public static class ColorAndMotionActivity extends SettingsActivity { /* empty */ }
     /** Activity for the security dashboard. */
     public static class SecurityDashboardActivity extends SettingsActivity {
 
@@ -152,6 +162,11 @@ public class Settings extends SettingsActivity {
         /** Redirects to SafetyCenter if enabled. */
         @VisibleForTesting
         public void handleSafetyCenterRedirection() {
+            if (isFinishing()) {
+                // Don't trampoline if already exiting this activity.
+                return;
+            }
+
             if (SafetyCenterManagerWrapper.get().isEnabled(this)) {
                 try {
                     startActivity(new Intent(Intent.ACTION_SAFETY_CENTER));
@@ -194,6 +209,8 @@ public class Settings extends SettingsActivity {
     }
     /** Activity for the Advanced security settings. */
     public static class SecurityAdvancedSettings extends SettingsActivity { /* empty */ }
+    /** Activity for the More settings page. */
+    public static class MoreSecurityPrivacySettingsActivity extends SettingsActivity { /* empty */ }
     public static class UsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppUsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocationSettingsActivity extends SettingsActivity { /* empty */ }
@@ -213,6 +230,11 @@ public class Settings extends SettingsActivity {
         /** Redirects to SafetyCenter if enabled. */
         @VisibleForTesting
         public void handleSafetyCenterRedirection() {
+            if (isFinishing()) {
+                // Don't trampoline if already exiting this activity.
+                return;
+            }
+
             if (ACTION_PRIVACY_SETTINGS.equals(getIntent().getAction())
                     && SafetyCenterManagerWrapper.get().isEnabled(this)) {
                 try {
@@ -296,6 +318,8 @@ public class Settings extends SettingsActivity {
     public static class AppBubbleNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationAssistantSettingsActivity extends SettingsActivity{ /* empty */ }
     public static class NotificationAppListActivity extends SettingsActivity { /* empty */ }
+    /** Activity to manage Cloned Apps page */
+    public static class ClonedAppsListActivity extends SettingsActivity { /* empty */ }
     public static class NotificationReviewPermissionsActivity extends SettingsActivity { /* empty */ }
     public static class AppNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChannelNotificationSettingsActivity extends SettingsActivity { /* empty */ }
@@ -324,8 +348,12 @@ public class Settings extends SettingsActivity {
     public static class AppMediaManagementAppsActivity extends SettingsActivity { /* empty */ }
     public static class WriteSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChangeWifiStateActivity extends SettingsActivity { /* empty */ }
+    /** Activity to manage NFC Tag applications. */
+    public static class ChangeNfcTagAppsActivity extends SettingsActivity { /* empty */ }
     public static class AppDrawOverlaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppWriteSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity to manage app battery usage details. */
+    public static class AppBatteryUsageActivity extends SettingsActivity { /* empty */ }
 
     public static class ManageExternalSourcesActivity extends SettingsActivity {/* empty */ }
     public static class ManageAppExternalSourcesActivity extends SettingsActivity { /* empty */ }
@@ -359,7 +387,9 @@ public class Settings extends SettingsActivity {
     }
     public static class WebViewAppPickerActivity extends SettingsActivity { /* empty */ }
     public static class AdvancedConnectedDeviceActivity extends SettingsActivity { /* empty */ }
+    public static class NfcSettingsActivity extends SettingsActivity { /* empty */ }
     public static class BluetoothDeviceDetailActivity extends SettingsActivity { /* empty */ }
+    public static class StylusUsiDetailsActivity extends SettingsActivity { /* empty */ }
     public static class BluetoothBroadcastActivity extends SettingsActivity { /* empty */ }
     public static class BluetoothFindBroadcastsActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingDisclaimerActivity extends SettingsActivity { /* empty */ }
@@ -406,6 +436,11 @@ public class Settings extends SettingsActivity {
                     ImsRcsManager.ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN);
         }
     }
+
+    /** Actviity to manage apps with {@link android.Manifest.permission#RUN_LONG_JOBS} */
+    public static class LongBackgroundTasksActivity extends SettingsActivity { /* empty */ }
+    /** App specific version of {@link LongBackgroundTasksActivity} */
+    public static class LongBackgroundTasksAppActivity extends SettingsActivity { /* empty */ }
 
     /**
      * Activity for BugReportHandlerPicker.

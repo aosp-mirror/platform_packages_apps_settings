@@ -29,8 +29,6 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.display.AlwaysOnDisplaySlice;
 import com.android.settings.display.ScreenTimeoutPreferenceController;
 import com.android.settings.flashlight.FlashlightSlice;
-import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
-import com.android.settings.homepage.contextualcards.slices.BatteryFixSlice;
 import com.android.settings.homepage.contextualcards.slices.BluetoothDevicesSlice;
 import com.android.settings.homepage.contextualcards.slices.ContextualAdaptiveSleepSlice;
 import com.android.settings.homepage.contextualcards.slices.DarkThemeSlice;
@@ -62,16 +60,6 @@ public class CustomSliceRegistry {
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
             .appendPath(ScreenTimeoutPreferenceController.PREF_NAME)
-            .build();
-
-    /**
-     * Uri for Battery Fix Slice.
-     */
-    public static final Uri BATTERY_FIX_SLICE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendEncodedPath(SettingsSlicesContract.PATH_SETTING_INTENT)
-            .appendPath(BatteryTipPreferenceController.PREF_NAME)
             .build();
 
     /**
@@ -208,13 +196,33 @@ public class CustomSliceRegistry {
             .build();
 
     /**
-     * Full {@link Uri} for the Ringer volume Slice.
+     * Full {@link Uri} for the Ringer volume Slice. (Ring & notification combined)
      */
     public static final Uri VOLUME_RINGER_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("ring_volume")
+            .build();
+
+    /**
+     * Full {@link Uri} for the Separate Ring volume Slice.
+     */
+    public static final Uri VOLUME_SEPARATE_RING_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("separate_ring_volume")
+            .build();
+
+    /**
+     * Full {@link Uri} for the Notification volume Slice.
+     */
+    public static final Uri VOLUME_NOTIFICATION_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("notification_volume")
             .build();
 
     /**
@@ -305,37 +313,27 @@ public class CustomSliceRegistry {
             .appendPath("always_on_display")
             .build();
 
-    /**
-     * Backing Uri for the Turn on Wi-Fi Slice.
-     */
-    public static final Uri TURN_ON_WIFI_SLICE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath("turn_on_wifi")
-            .build();
-
     @VisibleForTesting
     static final Map<Uri, Class<? extends CustomSliceable>> sUriToSlice;
 
     static {
         sUriToSlice = new ArrayMap<>();
-
-        sUriToSlice.put(BATTERY_FIX_SLICE_URI, BatteryFixSlice.class);
-        sUriToSlice.put(BLUETOOTH_DEVICES_SLICE_URI, BluetoothDevicesSlice.class);
-        sUriToSlice.put(CONTEXTUAL_ADAPTIVE_SLEEP_URI, ContextualAdaptiveSleepSlice.class);
-        sUriToSlice.put(CONTEXTUAL_WIFI_SLICE_URI, ContextualWifiSlice.class);
-        sUriToSlice.put(FACE_ENROLL_SLICE_URI, FaceSetupSlice.class);
         sUriToSlice.put(FLASHLIGHT_SLICE_URI, FlashlightSlice.class);
         sUriToSlice.put(LOCATION_SLICE_URI, LocationSlice.class);
-        sUriToSlice.put(LOW_STORAGE_SLICE_URI, LowStorageSlice.class);
-        sUriToSlice.put(MEDIA_OUTPUT_INDICATOR_SLICE_URI, MediaOutputIndicatorSlice.class);
         sUriToSlice.put(MOBILE_DATA_SLICE_URI, MobileDataSlice.class);
         sUriToSlice.put(PROVIDER_MODEL_SLICE_URI, ProviderModelSlice.class);
         sUriToSlice.put(WIFI_SLICE_URI, WifiSlice.class);
         sUriToSlice.put(DARK_THEME_SLICE_URI, DarkThemeSlice.class);
-        sUriToSlice.put(REMOTE_MEDIA_SLICE_URI, RemoteMediaSlice.class);
         sUriToSlice.put(ALWAYS_ON_SLICE_URI, AlwaysOnDisplaySlice.class);
+        sUriToSlice.put(MEDIA_OUTPUT_INDICATOR_SLICE_URI, MediaOutputIndicatorSlice.class);
+        sUriToSlice.put(REMOTE_MEDIA_SLICE_URI, RemoteMediaSlice.class);
+
+        // Slices for contextual card.
+        sUriToSlice.put(FACE_ENROLL_SLICE_URI, FaceSetupSlice.class);
+        sUriToSlice.put(CONTEXTUAL_ADAPTIVE_SLEEP_URI, ContextualAdaptiveSleepSlice.class);
+        sUriToSlice.put(CONTEXTUAL_WIFI_SLICE_URI, ContextualWifiSlice.class);
+        sUriToSlice.put(LOW_STORAGE_SLICE_URI, LowStorageSlice.class);
+        sUriToSlice.put(BLUETOOTH_DEVICES_SLICE_URI, BluetoothDevicesSlice.class);
     }
 
     public static Class<? extends CustomSliceable> getSliceClassByUri(Uri uri) {

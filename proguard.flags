@@ -6,7 +6,7 @@
 -keepattributes Exceptions
 
 # Keep all Fragments in this package, which are used by reflection.
--keep public class com.android.settings.** extends androidx.fragment.app.Fragment
+-keep public class com.android.settings*.** extends androidx.fragment.app.Fragment
 
 # Keep all preference controllers needed by slice and DashboardFragment.
 -keep class * extends com.android.settings.core.BasePreferenceController {
@@ -18,13 +18,13 @@
 }
 
 # We want to keep methods in Activity that could be used in the XML attribute onClick.
--keepclassmembers class * extends android.app.Activity {
+-keepclassmembers class com.android.settings*.** extends android.app.Activity {
     public void *(android.view.View);
     public void *(android.view.MenuItem);
 }
 
 # Keep setters in Views so that animations can still work.
--keep public class * extends android.view.View {
+-keep public class com.android.settings*.** extends android.view.View {
     public <init>(android.content.Context);
     public <init>(android.content.Context, android.util.AttributeSet);
     public <init>(android.content.Context, android.util.AttributeSet, int);
@@ -34,20 +34,14 @@
 }
 
 # Keep classes that may be inflated from XML.
--keepclasseswithmembers class * {
+-keepclasseswithmembers class com.android.settings*.** {
     public <init>(android.content.Context, android.util.AttributeSet);
 }
--keepclasseswithmembers class * {
+-keepclasseswithmembers class com.android.settings*.** {
     public <init>(android.content.Context, android.util.AttributeSet, int);
 }
--keepclasseswithmembers class * {
+-keepclasseswithmembers class com.android.settings*.** {
     public <init>(android.content.Context, android.util.AttributeSet, int, int);
-}
-
-# Keep annotated classes or class members.
--keep @androidx.annotation.Keep class *
--keepclassmembers class * {
-    @androidx.annotation.Keep *;
 }
 
 # Keep specific fields used via reflection.

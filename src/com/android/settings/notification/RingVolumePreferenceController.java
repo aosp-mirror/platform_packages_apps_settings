@@ -16,51 +16,67 @@
 
 package com.android.settings.notification;
 
+import android.app.ActivityThread;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
+import android.os.Binder;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.os.Vibrator;
-import android.text.TextUtils;
+import android.provider.DeviceConfig;
+import android.service.notification.NotificationListenerService;
 
 import androidx.lifecycle.OnLifecycleEvent;
 
+import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-import java.util.Objects;
+import java.util.Set;
 
-public class RingVolumePreferenceController extends VolumeSeekBarPreferenceController {
+/**
+ * This slider represents both ring and notification
+ */
+public class RingVolumePreferenceController extends
+        RingerModeAffectedVolumePreferenceController {
 
-    private static final String TAG = "RingVolumeController";
     private static final String KEY_RING_VOLUME = "ring_volume";
+    private static final String TAG = "RingVolumePreferenceController";
 
-    private Vibrator mVibrator;
-    private int mRingerMode = -1;
-    private ComponentName mSuppressor;
     private final RingReceiver mReceiver = new RingReceiver();
     private final H mHandler = new H();
-
-    private int mMuteIcon;
 
     public RingVolumePreferenceController(Context context) {
         this(context, KEY_RING_VOLUME);
     }
 
     public RingVolumePreferenceController(Context context, String key) {
-        super(context, key);
-        mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
-        if (mVibrator != null && !mVibrator.hasVibrator()) {
-            mVibrator = null;
-        }
+        super(context, key, TAG);
+
+        mNormalIconId = R.drawable.ic_notifications;
+        mVibrateIconId = R.drawable.ic_volume_ringer_vibrate;
+        mSilentIconId = R.drawable.ic_notifications_off_24dp;
+
+        mSeparateNotification = isSeparateNotificationConfigEnabled();
         updateRingerMode();
+    }
+
+    /**
+     * As the responsibility of this slider changes, so should its title & icon
+     */
+    private void onDeviceConfigChange(DeviceConfig.Properties properties) {
+        Set<String> changeSet = properties.getKeyset();
+        if (changeSet.contains(SystemUiDeviceConfigFlags.VOLUME_SEPARATE_NOTIFICATION)) {
+            boolean valueUpdated = readSeparateNotificationVolumeConfig();
+            if (valueUpdated) {
+                updateEffectsSuppressor();
+                selectPreferenceIconState();
+            }
+        }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
@@ -68,8 +84,16 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
     public void onResume() {
         super.onResume();
         mReceiver.register(true);
+        readSeparateNotificationVolumeConfig();
+        Binder.withCleanCallingIdentity(()
+                -> DeviceConfig.addOnPropertiesChangedListener(DeviceConfig.NAMESPACE_SYSTEMUI,
+                ActivityThread.currentApplication().getMainExecutor(), this::onDeviceConfigChange));
         updateEffectsSuppressor();
-        updatePreferenceIcon();
+        selectPreferenceIconState();
+
+        if (mPreference != null) {
+            mPreference.setVisible(getAvailabilityStatus() == AVAILABLE);
+        }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
@@ -77,6 +101,8 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
     public void onPause() {
         super.onPause();
         mReceiver.register(false);
+        Binder.withCleanCallingIdentity(() ->
+                DeviceConfig.removeOnPropertiesChangedListener(this::onDeviceConfigChange));
     }
 
     @Override
@@ -86,23 +112,9 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
 
     @Override
     public int getAvailabilityStatus() {
-        return Utils.isVoiceCapable(mContext) && !mHelper.isSingleVolume()
+        boolean separateNotification = isSeparateNotificationConfigEnabled();
+        return !separateNotification && !mHelper.isSingleVolume()
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
-    }
-
-    @Override
-    public boolean isSliceable() {
-        return TextUtils.equals(getPreferenceKey(), KEY_RING_VOLUME);
-    }
-
-    @Override
-    public boolean isPublicSlice() {
-        return true;
-    }
-
-    @Override
-    public boolean useDynamicSliceSummary() {
-        return true;
     }
 
     @Override
@@ -111,41 +123,14 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
     }
 
     @Override
-    public int getMuteIcon() {
-        return mMuteIcon;
+    protected boolean hintsMatch(int hints) {
+        boolean notificationSeparated = isSeparateNotificationConfigEnabled();
+        return (hints & NotificationListenerService.HINT_HOST_DISABLE_CALL_EFFECTS) != 0
+                || (hints & NotificationListenerService.HINT_HOST_DISABLE_EFFECTS) != 0
+                || ((hints & NotificationListenerService.HINT_HOST_DISABLE_NOTIFICATION_EFFECTS)
+                != 0 && !notificationSeparated);
     }
 
-    private void updateRingerMode() {
-        final int ringerMode = mHelper.getRingerModeInternal();
-        if (mRingerMode == ringerMode) return;
-        mRingerMode = ringerMode;
-        updatePreferenceIcon();
-    }
-
-    private void updateEffectsSuppressor() {
-        final ComponentName suppressor = NotificationManager.from(mContext).getEffectsSuppressor();
-        if (Objects.equals(suppressor, mSuppressor)) return;
-        mSuppressor = suppressor;
-        if (mPreference != null) {
-            final String text = SuppressorHelper.getSuppressionText(mContext, suppressor);
-            mPreference.setSuppressionText(text);
-        }
-        updatePreferenceIcon();
-    }
-
-    private void updatePreferenceIcon() {
-        if (mPreference != null) {
-            if (mRingerMode == AudioManager.RINGER_MODE_VIBRATE) {
-                mMuteIcon = R.drawable.ic_volume_ringer_vibrate;
-                mPreference.showIcon(R.drawable.ic_volume_ringer_vibrate);
-            } else if (mRingerMode == AudioManager.RINGER_MODE_SILENT) {
-                mMuteIcon = R.drawable.ic_notifications_off_24dp;
-                mPreference.showIcon(R.drawable.ic_notifications_off_24dp);
-            } else {
-                mPreference.showIcon(R.drawable.ic_notifications);
-            }
-        }
-    }
 
     private final class H extends Handler {
         private static final int UPDATE_EFFECTS_SUPPRESSOR = 1;

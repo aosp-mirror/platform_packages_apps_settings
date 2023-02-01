@@ -69,7 +69,6 @@ import com.android.settingslib.net.UidDetailProvider;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Panel showing data usage history across various networks, including options
@@ -112,11 +111,7 @@ public class DataUsageList extends DataUsageBaseFragment
 
     private ChartDataUsagePreference mChart;
     private List<NetworkCycleChartData> mCycleData;
-    // Caches the cycles for startAppDataUsage usage, which need be cleared when resumed.
     private ArrayList<Long> mCycles;
-    // Spinner will keep the selected cycle even after paused, this only keeps the displayed cycle,
-    // which need be cleared when resumed.
-    private CycleAdapter.CycleItem mLastDisplayedCycle;
     private UidDetailProvider mUidDetailProvider;
     private CycleAdapter mCycleAdapter;
     private Preference mUsageAmount;
@@ -157,7 +152,20 @@ public class DataUsageList extends DataUsageBaseFragment
     public void onViewCreated(View v, Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
 
+        // Show loading
+        mLoadingViewController = new LoadingViewController(
+                v.findViewById(R.id.loading_container), getListView());
+        mLoadingViewController.showLoadingViewDelayed();
+    }
+
+    private void onEndOfLoading() {
+        if (mHeader != null) {
+            return;
+        }
         mHeader = setPinnedHeaderView(R.layout.apps_filter_spinner);
+
+        mCycleSpinner = mHeader.findViewById(R.id.filter_spinner);
+
         mHeader.findViewById(R.id.filter_settings).setOnClickListener(btn -> {
             final Bundle args = new Bundle();
             args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, mTemplate);
@@ -168,8 +176,6 @@ public class DataUsageList extends DataUsageBaseFragment
                     .setArguments(args)
                     .launch();
         });
-        mCycleSpinner = mHeader.findViewById(R.id.filter_spinner);
-        mCycleSpinner.setVisibility(View.GONE);
         mCycleAdapter = new CycleAdapter(mCycleSpinner.getContext(), new SpinnerInterface() {
             @Override
             public void setAdapter(CycleAdapter cycleAdapter) {
@@ -201,18 +207,16 @@ public class DataUsageList extends DataUsageBaseFragment
                 super.sendAccessibilityEvent(host, eventType);
             }
         });
-
-        mLoadingViewController = new LoadingViewController(
-                getView().findViewById(R.id.loading_container), getListView());
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mLoadingViewController.showLoadingViewDelayed();
         mDataStateListener.start(mSubId);
-        mCycles = null;
-        mLastDisplayedCycle = null;
+
+        if (mChart != null) {
+            mChart.onPreparingChartData();
+        }
 
         // kick off loader for network history
         // TODO: consider chaining two loaders together instead of reloading
@@ -312,6 +316,9 @@ public class DataUsageList extends DataUsageBaseFragment
      */
     @VisibleForTesting
     void updatePolicy() {
+        if (mHeader == null) {
+            return;
+        }
         final NetworkPolicy policy = services.mPolicyEditor.getPolicy(mTemplate);
         final View configureButton = mHeader.findViewById(R.id.filter_settings);
         //SUB SELECT
@@ -326,46 +333,9 @@ public class DataUsageList extends DataUsageBaseFragment
         }
 
         // generate cycle list based on policy and available history
-        mCycleAdapter.updateCycleList(mCycleData);
-        updateSelectedCycle();
-    }
-
-    /**
-     * Updates the chart and detail data when initial loaded or selected cycle changed.
-     */
-    private void updateSelectedCycle() {
-        // Avoid from updating UI after #onStop.
-        if (!getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
-            return;
+        if (mCycleAdapter.updateCycleList(mCycleData)) {
+            updateDetailData();
         }
-
-        // Avoid from updating UI when async query still on-going.
-        // This could happen when a request from #onMobileDataEnabledChange.
-        if (mCycleData == null) {
-            return;
-        }
-
-        final int position = mCycleSpinner.getSelectedItemPosition();
-        if (mCycleAdapter.getCount() == 0 || position < 0) {
-            return;
-        }
-        final CycleAdapter.CycleItem cycle = mCycleAdapter.getItem(position);
-        if (Objects.equals(cycle, mLastDisplayedCycle)) {
-            // Avoid duplicate update to avoid page flash.
-            return;
-        }
-        mLastDisplayedCycle = cycle;
-
-        if (LOGD) {
-            Log.d(TAG, "showing cycle " + cycle + ", [start=" + cycle.start + ", end="
-                    + cycle.end + "]");
-        }
-
-        // update chart to show selected cycle, and update detail data
-        // to match updated sweep bounds.
-        mChart.setNetworkCycleData(mCycleData.get(position));
-
-        updateDetailData();
     }
 
     /**
@@ -539,10 +509,33 @@ public class DataUsageList extends DataUsageBaseFragment
         return Math.max(largest, item.total);
     }
 
-    private final OnItemSelectedListener mCycleListener = new OnItemSelectedListener() {
+    private OnItemSelectedListener mCycleListener = new OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            updateSelectedCycle();
+            final CycleAdapter.CycleItem cycle = (CycleAdapter.CycleItem)
+                    mCycleSpinner.getSelectedItem();
+
+            if (LOGD) {
+                Log.d(TAG, "showing cycle " + cycle + ", start=" + cycle.start + ", end="
+                        + cycle.end + "]");
+            }
+
+            // Avoid from updating UI after #onStop.
+            if (!getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
+                return;
+            }
+
+            // Avoid from updating UI when async query still on-going.
+            // This could happen when a request from #onMobileDataEnabledChange.
+            if (mCycleData == null) {
+                return;
+            }
+
+            // update chart to show selected cycle, and update detail data
+            // to match updated sweep bounds.
+            mChart.setNetworkCycleData(mCycleData.get(position));
+
+            updateDetailData();
         }
 
         @Override
@@ -564,11 +557,13 @@ public class DataUsageList extends DataUsageBaseFragment
         @Override
         public void onLoadFinished(Loader<List<NetworkCycleChartData>> loader,
                 List<NetworkCycleChartData> data) {
-            mLoadingViewController.showContent(false /* animate */);
+            onEndOfLoading();
+            if (mLoadingViewController != null) {
+                mLoadingViewController.showContent(false /* animate */);
+            }
             mCycleData = data;
             // calculate policy cycles based on available data
             updatePolicy();
-            mCycleSpinner.setVisibility(View.VISIBLE);
         }
 
         @Override

@@ -27,6 +27,8 @@ import androidx.window.embedding.SplitController;
 
 import com.android.settings.R;
 
+import com.google.android.setupcompat.util.WizardManagerHelper;
+
 /** An util class collecting all common methods for the embedding activity features. */
 public class ActivityEmbeddingUtils {
     // The smallest value of current width of the window when the split should be used.
@@ -65,14 +67,16 @@ public class ActivityEmbeddingUtils {
 
     /** Whether to support embedding activity feature. */
     public static boolean isEmbeddingActivityEnabled(Context context) {
-        final boolean isFlagEnabled = FeatureFlagUtils.isEnabled(context,
+        boolean isFlagEnabled = FeatureFlagUtils.isEnabled(context,
                 FeatureFlagUtils.SETTINGS_SUPPORT_LARGE_SCREEN);
-        final boolean isSplitSupported = SplitController.getInstance().isSplitSupported();
+        boolean isSplitSupported = SplitController.getInstance().isSplitSupported();
+        boolean isUserSetupComplete = WizardManagerHelper.isUserSetupComplete(context);
 
         Log.d(TAG, "isFlagEnabled = " + isFlagEnabled);
         Log.d(TAG, "isSplitSupported = " + isSplitSupported);
+        Log.d(TAG, "isUserSetupComplete = " + isUserSetupComplete);
 
-        return isFlagEnabled && isSplitSupported;
+        return isFlagEnabled && isSplitSupported && isUserSetupComplete;
     }
 
     /** Whether to show the regular or simplified homepage layout. */

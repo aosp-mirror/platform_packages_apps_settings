@@ -35,7 +35,6 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -172,25 +171,25 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
      */
     private SparseArray<ArrayMap<String, PermissionState>> getEntries() {
         try {
-            Set<String> packagesSet = new HashSet<>();
-            for (String permission : mPermissions) {
-                String[] pkgs = mIPackageManager.getAppOpPermissionPackages(permission);
-                if (pkgs != null) {
-                    packagesSet.addAll(Arrays.asList(pkgs));
-                }
-            }
-
-            if (packagesSet.isEmpty()) {
-                // No packages are requesting permission as specified by mPermissions.
-                return null;
-            }
-
             // Create a sparse array that maps profileIds to an ArrayMap that maps package names to
             // an associated PermissionState object
             SparseArray<ArrayMap<String, PermissionState>> entries = new SparseArray<>();
             for (final UserHandle profile : mProfiles) {
-                final ArrayMap<String, PermissionState> entriesForProfile = new ArrayMap<>();
                 final int profileId = profile.getIdentifier();
+                final Set<String> packagesSet = new HashSet<>();
+                for (String permission : mPermissions) {
+                    final String[] pkgs = mIPackageManager.getAppOpPermissionPackages(
+                            permission, profileId);
+                    if (pkgs != null) {
+                        packagesSet.addAll(Arrays.asList(pkgs));
+                    }
+                }
+                if (packagesSet.isEmpty()) {
+                    // No packages are requesting permission as specified by mPermissions.
+                    continue;
+                }
+
+                final ArrayMap<String, PermissionState> entriesForProfile = new ArrayMap<>();
                 entries.put(profileId, entriesForProfile);
                 for (final String packageName : packagesSet) {
                     final boolean isAvailable = mIPackageManager.isPackageAvailable(packageName,
@@ -200,6 +199,9 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
                         entriesForProfile.put(packageName, newEntry);
                     }
                 }
+            }
+            if (entries.size() == 0) {
+                return null;
             }
 
             return entries;
@@ -243,8 +245,7 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
             }
         } catch (RemoteException e) {
             Log.w(TAG, "PackageManager is dead. Can't get list of packages granted "
-                    + mPermissions, e);
-            return;
+                    + Arrays.toString(mPermissions), e);
         }
     }
 
@@ -294,41 +295,6 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
      */
     private boolean shouldIgnorePackage(String packageName) {
         return packageName.equals("android") || packageName.equals(mContext.getPackageName());
-    }
-
-    public int getNumPackagesDeclaredPermission() {
-        SparseArray<ArrayMap<String, PermissionState>> entries = getEntries();
-        if (entries == null) {
-            return 0;
-        }
-        final ArrayMap<String, PermissionState> entriesForProfile =
-                entries.get(mUserManager.getProcessUserId());
-        if (entriesForProfile == null) {
-            return 0;
-        }
-        return entriesForProfile.size();
-    }
-
-    public int getNumPackagesAllowedByAppOps() {
-        SparseArray<ArrayMap<String, PermissionState>> entries = getEntries();
-        if (entries == null) {
-            return 0;
-        }
-        loadPermissionsStates(entries);
-        loadAppOpsStates(entries);
-        final ArrayMap<String, PermissionState> entriesForProfile =
-                entries.get(mUserManager.getProcessUserId());
-        if (entriesForProfile == null) {
-            return 0;
-        }
-        Collection<PermissionState> permStates = entriesForProfile.values();
-        int result = 0;
-        for (PermissionState permState : permStates) {
-            if (permState.isPermissible()) {
-                result++;
-            }
-        }
-        return result;
     }
 
     public static class PermissionState {

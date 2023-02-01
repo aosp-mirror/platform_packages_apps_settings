@@ -37,11 +37,12 @@
         android:icon="@drawable/ic_calls_sms"
         android:order="-20"
         android:summary="@string/summary_placeholder"
+        settings:isPreferenceVisible="@bool/config_show_sim_info"
         settings:allowDividerBelow="true"
         settings:keywords="@string/calls_and_sms"
         settings:useAdminDisabledSummary="true" />
 
-    <com.android.settings.widget.AddPreference
+    <com.android.settingslib.RestrictedPreference
         android:key="mobile_network_list"
         android:title="@string/provider_network_settings_title"
         android:summary="@string/summary_placeholder"
@@ -49,8 +50,10 @@
         android:order="-15"
         settings:keywords="@string/keywords_more_mobile_networks"
         settings:userRestriction="no_config_mobile_networks"
+        settings:isPreferenceVisible="@bool/config_show_sim_info"
         settings:allowDividerAbove="true"
-        settings:useAdminDisabledSummary="true" />
+        settings:useAdminDisabledSummary="true"
+        settings:searchable="@bool/config_show_sim_info"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="airplane_mode"
@@ -66,10 +69,11 @@
         android:persistent="false"
         android:order="19"
         settings:userRestriction="no_config_mobile_networks"
+        settings:isPreferenceVisible="@bool/config_show_sim_info"
         settings:useAdminDisabledSummary="true" />
 
     <com.android.settingslib.RestrictedPreference
-        android:fragment="com.android.settings.TetherSettings"
+        android:fragment="com.android.settings.network.tether.TetherSettings"
         android:key="tether_settings"
         android:title="@string/tether_settings_title_all"
         android:icon="@drawable/ic_wifi_tethering"
@@ -96,6 +100,7 @@
         android:title="@string/data_saver_title"
         android:icon="@drawable/ic_settings_data_usage"
         android:order="10"
+        settings:isPreferenceVisible="@bool/config_show_data_saver"
         android:fragment="com.android.settings.datausage.DataSaverSummary"/>
 
     <com.android.settings.vpn2.VpnInfoPreference

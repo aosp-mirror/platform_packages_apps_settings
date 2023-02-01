@@ -18,46 +18,39 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:persistent="false"
     android:title="@string/accessibility_captioning_title">
 
     <com.android.settingslib.widget.TopIntroPreference
-        android:key="captions_intro"
-        android:persistent="false"
-        android:title="@string/accessibility_caption_preference_intro"/>
+        android:key="captioning_intro"
+        android:title="@string/accessibility_captioning_preference_intro"/>
 
     <com.android.settingslib.widget.IllustrationPreference
-        android:key="captions_preview"
-        android:persistent="false"
+        android:key="captioning_preview"
         android:selectable="false"
-        settings:lottie_rawRes="@drawable/accessibility_captions_banner"
+        settings:lottie_rawRes="@drawable/accessibility_captioning_banner"
         settings:searchable="false" />
 
     <com.android.settings.widget.SettingsMainSwitchPreference
         android:key="captioning_preference_switch"
-        android:persistent="false"
-        android:summary="@string/accessibility_caption_primary_switch_summary"
-        android:title="@string/accessibility_caption_primary_switch_title" />
+        android:title="@string/accessibility_captioning_primary_switch_title"
+        settings:controller="com.android.settings.accessibility.CaptioningTogglePreferenceController"/>
 
     <Preference
-        android:fragment="com.android.settings.accessibility.CaptionAppearanceFragment"
-        android:key="captioning_caption_appearance"
-        android:persistent="false"
-        android:title="@string/captioning_caption_appearance_title"
-        settings:controller="com.android.settings.accessibility.CaptionAppearancePreferenceController" />
+        android:fragment="com.android.settings.accessibility.CaptioningAppearanceFragment"
+        android:key="captioning_appearance"
+        android:title="@string/captioning_appearance_title"
+        settings:controller="com.android.settings.accessibility.CaptioningAppearancePreferenceController" />
 
     <Preference
-        android:fragment="com.android.settings.accessibility.CaptionMoreOptionsFragment"
+        android:fragment="com.android.settings.accessibility.CaptioningMoreOptionsFragment"
         android:key="captioning_more_options"
-        android:persistent="false"
         android:title="@string/captioning_more_options_title" />
 
     <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="captioning_settings_footer"
-        android:title="@string/accessibility_caption_preference_summary"
-        android:persistent="false"
+        android:title="@string/accessibility_captioning_preference_summary"
         android:selectable="false"
         settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.CaptionFooterPreferenceController"/>
+        settings:controller="com.android.settings.accessibility.CaptioningFooterPreferenceController"/>
 
 </PreferenceScreen>

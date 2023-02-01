@@ -16,6 +16,8 @@
 
 package com.android.settings.sim;
 
+import static android.telephony.SubscriptionManager.PROFILE_CLASS_PROVISIONING;
+
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
@@ -70,14 +72,31 @@ public class SelectSpecificDataSimDialogFragment extends SimDialogFragment imple
     }
 
     @Override
-    public void onClick(DialogInterface dialog, int buttonClicked) {
-        if (buttonClicked != DialogInterface.BUTTON_POSITIVE) {
-            return;
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        Log.d(TAG, "Dialog onDismiss, dismiss status: " + mWasDismissed);
+        if (!mWasDismissed) {
+            // This dialog might be called onDismiss twice due to first time called by onDismiss()
+            // as a consequence of user action. We need this fragment alive so the activity
+            // doesn't end, which allows the following dialog to attach. Upon the second dialog
+            // dismiss, this fragment is removed from SimDialogActivity.onFragmentDismissed to
+            // end the activity.
+            mWasDismissed = true;
+            final SimDialogActivity activity = (SimDialogActivity) getActivity();
+            activity.showEnableAutoDataSwitchDialog();
+            // Not using super.onDismiss because it will result in an immediate end of the activity,
+            // before the second auto data switch dialog can attach.
+            if (getDialog() != null) getDialog().dismiss();
         }
+    }
+
+    @Override
+    public void onClick(DialogInterface dialog, int buttonClicked) {
         final SimDialogActivity activity = (SimDialogActivity) getActivity();
-        final SubscriptionInfo info = getTargetSubscriptionInfo();
-        if (info != null) {
-            activity.onSubscriptionSelected(getDialogType(), info.getSubscriptionId());
+        if (buttonClicked == DialogInterface.BUTTON_POSITIVE) {
+            final SubscriptionInfo info = getTargetSubscriptionInfo();
+            if (info != null) {
+                activity.onSubscriptionSelected(getDialogType(), info.getSubscriptionId());
+            }
         }
     }
 
@@ -113,6 +132,15 @@ public class SelectSpecificDataSimDialogFragment extends SimDialogFragment imple
             dismiss();
             return;
         }
+
+        if ((newSubInfo.isEmbedded() && newSubInfo.getProfileClass() == PROFILE_CLASS_PROVISIONING)
+                || (currentDataSubInfo.isEmbedded()
+                && currentDataSubInfo.getProfileClass() == PROFILE_CLASS_PROVISIONING)) {
+            Log.d(TAG, "do not set the provision eSIM");
+            dismiss();
+            return;
+        }
+
         Log.d(TAG, "newSubId: " + newSubInfo.getSubscriptionId()
                 + "currentDataSubID: " + currentDataSubInfo.getSubscriptionId());
         setTargetSubscriptionInfo(newSubInfo);
@@ -165,6 +193,6 @@ public class SelectSpecificDataSimDialogFragment extends SimDialogFragment imple
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.DIALOG_PREFERRED_SIM_PICKER;
+        return SettingsEnums.DIALOG_SPECIFIC_DDS_SIM_PICKER;
     }
 }

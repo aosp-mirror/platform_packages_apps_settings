@@ -22,7 +22,9 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.graphics.text.LineBreakConfig;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -109,8 +111,14 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             if (mCollapsingToolbarLayout != null) {
                 mCollapsingToolbarLayout.setLineSpacingMultiplier(TOOLBAR_LINE_SPACING_MULTIPLIER);
                 mCollapsingToolbarLayout.setHyphenationFrequency(HYPHENATION_FREQUENCY_NORMAL_FAST);
+                mCollapsingToolbarLayout.setStaticLayoutBuilderConfigurer(builder ->
+                        builder.setLineBreakConfig(
+                                new LineBreakConfig.Builder()
+                                        .setLineBreakWordStyle(
+                                                LineBreakConfig.LINE_BREAK_WORD_STYLE_PHRASE)
+                                        .build()));
             }
-            disableCollapsingToolbarLayoutScrollingBehavior();
+            autoSetCollapsingToolbarLayoutScrolling();
         } else {
             super.setContentView(R.layout.settings_base_layout);
         }
@@ -245,7 +253,7 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
         return false;
     }
 
-    private void disableCollapsingToolbarLayoutScrollingBehavior() {
+    private void autoSetCollapsingToolbarLayoutScrolling() {
         if (mAppBarLayout == null) {
             return;
         }
@@ -256,7 +264,9 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
                 new AppBarLayout.Behavior.DragCallback() {
                     @Override
                     public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
-                        return false;
+                        // Header can be scrolling while device in landscape mode.
+                        return appBarLayout.getResources().getConfiguration().orientation
+                                == Configuration.ORIENTATION_LANDSCAPE;
                     }
                 });
         params.setBehavior(behavior);

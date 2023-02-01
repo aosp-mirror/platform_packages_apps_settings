@@ -24,6 +24,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.widget.SeekBar;
 
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
@@ -54,6 +55,9 @@ public class PreviewSizeSeekBarControllerTest {
     @Mock
     private PreferenceScreen mPreferenceScreen;
 
+    @Mock
+    private PreviewSizeSeekBarController.ProgressInteractionListener mInteractionListener;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -65,6 +69,8 @@ public class PreviewSizeSeekBarControllerTest {
 
         mSeekBarPreference = spy(new LabeledSeekBarPreference(mContext, /* attrs= */ null));
         when(mPreferenceScreen.findPreference(anyString())).thenReturn(mSeekBarPreference);
+
+        mSeekBarController.setInteractionListener(mInteractionListener);
     }
 
     @Test
@@ -97,5 +103,24 @@ public class PreviewSizeSeekBarControllerTest {
         mSeekBarController.resetState();
 
         assertThat(mSeekBarPreference.getProgress()).isEqualTo(defaultProgress);
+    }
+
+    @Test
+    public void resetState_verifyOnProgressChanged() {
+        mSeekBarController.displayPreference(mPreferenceScreen);
+        mSeekBarController.resetState();
+
+        verify(mInteractionListener).onProgressChanged();
+    }
+
+    @Test
+    public void onProgressChanged_verifyNotifyPreferenceChanged() {
+        mSeekBarController.displayPreference(mPreferenceScreen);
+
+        mSeekBarPreference.setProgress(mSeekBarPreference.getMax());
+        mSeekBarPreference.onProgressChanged(new SeekBar(mContext), /* progress= */
+                0, /* fromUser= */ false);
+
+        verify(mInteractionListener).notifyPreferenceChanged();
     }
 }

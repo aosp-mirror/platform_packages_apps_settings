@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2022 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/keyboard_settings">
+    <PreferenceCategory
+        android:key="keyboards_category">
+        <Preference
+            android:key="virtual_keyboard_pref"
+            android:title="@string/virtual_keyboard_category"
+            android:fragment="com.android.settings.inputmethod.AvailableVirtualKeyboardFragment"
+            settings:keywords="@string/keywords_virtual_keyboard"/>
+
+        <Preference
+            android:key="physical_keyboard_pref"
+            android:title="@string/physical_keyboard_title"
+            android:summary="@string/summary_placeholder"
+            android:fragment="com.android.settings.inputmethod.PhysicalKeyboardFragment"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="speech_category"
+        android:title="@string/speech_category_title">
+        <com.android.settings.widget.GearPreference
+            android:key="voice_input_settings"
+            android:title="@string/voice_input_settings_title"
+            android:fragment="com.android.settings.language.DefaultVoiceInputPicker" />
+
+        <Preference
+            android:key="tts_settings_summary"
+            android:title="@string/tts_settings_title"
+            android:fragment="com.android.settings.tts.TextToSpeechSettings"
+            settings:searchable="false"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="input_assistance_category"
+        android:title="@string/input_assistance">
+        <!-- Spell checker preference title, summary and fragment will be set programmatically. -->
+        <!-- Note: Mark this as persistent="false" to remove unnecessarily saved shared preference.
+             See: InputMethodAndSubtypeUtil.removeUnnecessaryNonPersistentPreference. -->
+        <Preference
+            android:key="spellcheckers_settings"
+            android:title="@string/spellcheckers_settings_title"
+            android:persistent="false"
+            android:fragment="com.android.settings.inputmethod.SpellCheckersSettings" />
+
+        <!-- User dictionary preference title and fragment will be set programmatically. -->
+        <Preference
+            android:key="key_user_dictionary_settings"
+            android:title="@string/user_dict_settings_title"
+            android:summary="@string/user_dict_settings_summary"
+            android:fragment="com.android.settings.inputmethod.UserDictionaryList"
+            settings:controller="com.android.settings.language.UserDictionaryPreferenceController" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="pointer_category"
+        android:layout="@layout/preference_category_no_label">
+        <com.android.settings.PointerSpeedPreference
+            android:key="pointer_speed"
+            android:title="@string/pointer_speed"
+            android:dialogTitle="@string/pointer_speed" />
+    </PreferenceCategory>
+
+    <SwitchPreference
+        android:key="vibrate_input_devices"
+        android:title="@string/vibrate_input_devices"
+        android:summary="@string/vibrate_input_devices_summary"
+        settings:controller="com.android.settings.inputmethod.GameControllerPreferenceController" />
+
+    <com.android.settings.widget.WorkOnlyCategory
+        android:key="language_and_input_for_work_category"
+        android:title="@string/language_and_input_for_work_category_title"
+        settings:searchable="false">
+
+        <Preference
+            android:key="spellcheckers_settings_for_work_pref"
+            android:title="@string/spellcheckers_settings_for_work_title"
+            android:fragment="com.android.settings.inputmethod.SpellCheckersSettings"
+            settings:forWork="true"
+            settings:controller="com.android.settings.core.WorkPreferenceController" />
+
+        <Preference
+            android:key="user_dictionary_settings_for_work_pref"
+            android:title="@string/user_dict_settings_for_work_title"
+            android:fragment="com.android.settings.inputmethod.UserDictionaryList"
+            settings:forWork="true"
+            settings:controller="com.android.settings.inputmethod.SpellCheckerForWorkPreferenceController" />
+    </com.android.settings.widget.WorkOnlyCategory>
+</PreferenceScreen>

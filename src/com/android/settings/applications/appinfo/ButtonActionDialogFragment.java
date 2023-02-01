@@ -48,12 +48,10 @@ public class ButtonActionDialogFragment extends InstrumentedDialogFragment imple
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({
             DialogType.DISABLE,
-            DialogType.SPECIAL_DISABLE,
             DialogType.FORCE_STOP
     })
     public @interface DialogType {
         int DISABLE = 0;
-        int SPECIAL_DISABLE = 1;
         int FORCE_STOP = 2;
     }
 
@@ -105,7 +103,6 @@ public class ButtonActionDialogFragment extends InstrumentedDialogFragment imple
         final Context context = getContext();
         switch (id) {
             case DialogType.DISABLE:
-            case DialogType.SPECIAL_DISABLE:
                 return new AlertDialog.Builder(context)
                         .setMessage(R.string.app_disable_dlg_text)
                         .setPositiveButton(R.string.app_disable_dlg_positive, this)

@@ -21,6 +21,8 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
@@ -28,17 +30,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
+/** Tests for {@link AccessibilityTimeoutPreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
 public class AccessibilityTimeoutPreferenceControllerTest {
 
-    private Context mContext;
+    private Context mContext = ApplicationProvider.getApplicationContext();
     private AccessibilityTimeoutPreferenceController mController;
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
         mController = new AccessibilityTimeoutPreferenceController(mContext, "control_timeout");
     }
 
@@ -50,31 +51,31 @@ public class AccessibilityTimeoutPreferenceControllerTest {
 
     @Test
     public void getSummary_byDefault_shouldReturnDefaultSummary() {
-        final String[] timeoutSummarys = mContext.getResources().getStringArray(
+        final String[] timeoutSummaries = mContext.getResources().getStringArray(
                 R.array.accessibility_timeout_summaries);
         Settings.Secure.putString(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS, "0");
 
-        assertThat(mController.getSummary()).isEqualTo(timeoutSummarys[0]);
+        assertThat(mController.getSummary().toString()).isEqualTo(timeoutSummaries[0]);
     }
 
     @Test
     public void getSummary_invalidTimeout_shouldReturnDefaultSummary() {
-        final String[] timeoutSummarys = mContext.getResources().getStringArray(
+        final String[] timeoutSummaries = mContext.getResources().getStringArray(
                 R.array.accessibility_timeout_summaries);
         Settings.Secure.putString(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS, "invalid_timeout");
 
-        assertThat(mController.getSummary()).isEqualTo(timeoutSummarys[0]);
+        assertThat(mController.getSummary().toString()).isEqualTo(timeoutSummaries[0]);
     }
 
     @Test
     public void getSummary_validTimeout_shouldReturnValidSummary() {
-        final String[] timeoutSummarys = mContext.getResources().getStringArray(
+        final String[] timeoutSummaries = mContext.getResources().getStringArray(
                 R.array.accessibility_timeout_summaries);
         Settings.Secure.putString(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS, "60000");
 
-        assertThat(mController.getSummary()).isEqualTo(timeoutSummarys[3]);
+        assertThat(mController.getSummary().toString()).isEqualTo(timeoutSummaries[3]);
     }
 }

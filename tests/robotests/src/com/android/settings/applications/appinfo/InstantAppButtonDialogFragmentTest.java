@@ -57,17 +57,18 @@ public class InstantAppButtonDialogFragmentTest {
     public void setUp() {
         final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
         mContext = spy(RuntimeEnvironment.application);
-        mFragment = spy(InstantAppButtonDialogFragment.newInstance(TEST_PACKAGE));
+        mFragment = InstantAppButtonDialogFragment.newInstance(TEST_PACKAGE);
         mFragment.show(activity.getSupportFragmentManager(), "InstantAppButtonDialogFragment");
-        doReturn(mContext).when(mFragment).getContext();
     }
 
     @Test
     public void onClick_shouldDeleteApp() {
+        final InstantAppButtonDialogFragment spyFragment = spy(mFragment);
+        doReturn(mContext).when(spyFragment).getContext();
         final PackageManager packageManager = mock(PackageManager.class);
         when(mContext.getPackageManager()).thenReturn(packageManager);
 
-        mFragment.onClick(null /* dialog */, 0  /* which */);
+        spyFragment.onClick(null /* dialog */, 0  /* which */);
 
         verify(packageManager)
             .deletePackageAsUser(eq(TEST_PACKAGE), any(), anyInt(), anyInt());

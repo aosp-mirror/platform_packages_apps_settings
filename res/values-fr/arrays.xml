@@ -20,15 +20,6 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string-array name="timezone_filters">
-    <item msgid="6657355508154731088">"Amérique"</item>
-    <item msgid="728005479339643412">"Europe"</item>
-    <item msgid="4086411516715683715">"Afrique"</item>
-    <item msgid="2044919239591619902">"Asie"</item>
-    <item msgid="4758559452497348479">"Australie"</item>
-    <item msgid="2254507767835075885">"Pacifique"</item>
-    <item msgid="6471579645890342891">"Tous"</item>
-  </string-array>
   <string-array name="screen_timeout_entries">
     <item msgid="8386012403457852396">"15 secondes"</item>
     <item msgid="4572123773028439079">"30 secondes"</item>
@@ -37,16 +28,6 @@
     <item msgid="2693197579676214668">"5 minutes"</item>
     <item msgid="1955784331962974678">"10 minutes"</item>
     <item msgid="5578717731965793584">"30 minutes"</item>
-  </string-array>
-  <string-array name="dream_timeout_entries">
-    <item msgid="1999412608953538363">"Jamais"</item>
-    <item msgid="5533979945668138276">"15 secondes"</item>
-    <item msgid="418444643954320796">"30 secondes"</item>
-    <item msgid="3604213008710109260">"1 minute"</item>
-    <item msgid="5684250925112815553">"2 minutes"</item>
-    <item msgid="4003134469028178277">"5 minutes"</item>
-    <item msgid="6258291104689105723">"10 minutes"</item>
-    <item msgid="6231662826434607130">"30 minutes"</item>
   </string-array>
     <!-- no translation found for dark_ui_scheduler_preference_titles:0 (7465697698048662118) -->
     <!-- no translation found for dark_ui_scheduler_preference_titles:1 (4057198235664064478) -->
@@ -66,12 +47,6 @@
     <item msgid="7289395602286160723">"10 minutes"</item>
     <item msgid="3142577549730704595">"30 minutes"</item>
   </string-array>
-  <string-array name="entries_font_size">
-    <item msgid="4649244712522775149">"Petite"</item>
-    <item msgid="4350318459725129464">"Par défaut"</item>
-    <item msgid="722959474722634030">"Grande"</item>
-    <item msgid="5468692832610514379">"Très grande"</item>
-  </string-array>
   <string-array name="wifi_status">
     <item msgid="1201478116293383426"></item>
     <item msgid="7388036070768806193">"Recherche…"</item>
@@ -86,20 +61,6 @@
     <item msgid="5473541238056528086">"Bloqué"</item>
     <item msgid="1114588261171522603">"Mauvaise connexion évitée momentanément"</item>
   </string-array>
-  <string-array name="wifi_status_with_ssid">
-    <item msgid="1528087426723432177"></item>
-    <item msgid="155483314608049961">"Recherche…"</item>
-    <item msgid="3409219643606946053">"Connexion à <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
-    <item msgid="7891463004457278422">"Authentification avec <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
-    <item msgid="3193388999810487137">"Récupération de l\'adresse IP à partir de <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
-    <item msgid="2227930004124157952">"Connecté à <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</item>
-    <item msgid="7104168043537022445">"Interrompu"</item>
-    <item msgid="2595938203187002544">"Déconnexion de <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
-    <item msgid="2435175968703898648">"Déconnecté"</item>
-    <item msgid="4804573668906374228">"Échec"</item>
-    <item msgid="4036325515437530221">"Bloqué"</item>
-    <item msgid="8883455894013518008">"Mauvaise connexion évitée momentanément"</item>
-  </string-array>
     <!-- no translation found for wifi_tether_security:0 (6312112980634811065) -->
     <!-- no translation found for wifi_tether_security:1 (1428294025896439258) -->
     <!-- no translation found for wifi_tether_security:2 (6851763638266088835) -->
@@ -109,23 +70,12 @@
     <item msgid="5703177653586269306">"Demander l\'état du certificat"</item>
     <item msgid="326388247868439528">"Exiger l\'état du certificat"</item>
   </string-array>
-  <string-array name="wifi_p2p_wps_setup">
-    <item msgid="1446717102923442720">"Appuyer sur le bouton"</item>
-    <item msgid="2630618799033509548">"Code de l\'appareil associé"</item>
-    <item msgid="6088264311596031080">"Code de l\'appareil"</item>
-  </string-array>
   <string-array name="wifi_p2p_status">
     <item msgid="8357401480964012245">"Connecté"</item>
     <item msgid="66312817817365647">"Invité"</item>
     <item msgid="4463567967438038210">"Échec."</item>
     <item msgid="6556827947082659801">"Disponible"</item>
     <item msgid="6096962300722555553">"Hors de portée"</item>
-  </string-array>
-  <string-array name="bluetooth_visibility_timeout_entries">
-    <item msgid="6697785880436838464">"Deux minutes"</item>
-    <item msgid="3886297451944778457">"Cinq minutes"</item>
-    <item msgid="5972466727114812286">"Une heure"</item>
-    <item msgid="4241913314075719627">"Aucun délai"</item>
   </string-array>
   <string-array name="bluetooth_max_connected_audio_devices">
     <item msgid="4792793579224104167">"Utiliser la valeur par défaut du système : <xliff:g id="DEFAULT_BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES">%1$d</xliff:g>"</item>
@@ -141,21 +91,6 @@
     <item msgid="8545211062334016668">"Satisfaisante"</item>
     <item msgid="7468449584777730187">"Bonne"</item>
     <item msgid="202124107702016530">"Excellente"</item>
-  </string-array>
-  <string-array name="data_usage_data_range">
-    <item msgid="3528385925116637939">"30 derniers jours"</item>
-    <item msgid="3356834403629955571">"Définir cycle conso..."</item>
-  </string-array>
-  <string-array name="usage_stats_display_order_types">
-    <item msgid="7527014644010884448">"Durée d\'utilisation"</item>
-    <item msgid="4631872897572423215">"Dernière utilisation"</item>
-    <item msgid="2647568941623179473">"Nom de l\'application"</item>
-  </string-array>
-  <string-array name="wifi_eap_entries">
-    <item msgid="6337816338410321026">"PEAP"</item>
-    <item msgid="1540215992819772636">"TLS"</item>
-    <item msgid="9105006864434061405">"TTLS"</item>
-    <item msgid="3199281439582632425">"PWD"</item>
   </string-array>
   <string-array name="wifi_peap_phase2_entries">
     <item msgid="8082624033981656770">"MSCHAPV2"</item>
@@ -218,18 +153,6 @@
     <item msgid="8568003268185342352">"SPN"</item>
     <item msgid="1804537219968457989">"IMSI"</item>
     <item msgid="3441876902463317017">"GID"</item>
-  </string-array>
-  <string-array name="app_install_location_entries">
-    <item msgid="3771157789865587832">"Mémoire interne du mobile"</item>
-    <item msgid="5501345333507193420">"Carte SD amovible"</item>
-    <item msgid="2362840341195111674">"Laisser le système décider"</item>
-  </string-array>
-  <string-array name="app_ops_categories">
-    <item msgid="528483497841471005">"Localisation"</item>
-    <item msgid="7786376598377098070">"Personnel"</item>
-    <item msgid="7707692387382449990">"SMS/MMS"</item>
-    <item msgid="2235402926760712958">"Multimédia"</item>
-    <item msgid="1822578131647724167">"Appareil"</item>
   </string-array>
   <string-array name="app_ops_summaries">
     <item msgid="8837238583601420163">"position approximative"</item>
@@ -427,17 +350,6 @@
     <item msgid="7482952318152486459">"Petite"</item>
     <item msgid="1666628329913333563">"Grande"</item>
   </string-array>
-  <string-array name="vpn_types_long">
-    <item msgid="6621806338070912611">"VPN PPTP"</item>
-    <item msgid="2552427673212085780">"VPN L2TP/IPSec avec clés pré-partagées"</item>
-    <item msgid="7378096704485168082">"VPN L2TP/IPSec avec certificats"</item>
-    <item msgid="3792393562235791509">"VPN IPSec avec clés pré-partagées et authentification Xauth"</item>
-    <item msgid="2484564813864139237">"VPN IPSec avec certificats et authentification Xauth"</item>
-    <item msgid="68918911194507915">"VPN IPSec avec certificats et authentification hybride"</item>
-    <item msgid="4631647675167100375">"VPN IKEv2/IPSec avec certificats et authentification à l\'aide d\'un nom d\'utilisateur/mot de passe"</item>
-    <item msgid="8812228622975052811">"VPN IKEv2/IPSec avec clés pré-partagées"</item>
-    <item msgid="6630554779981113046">"VPN IKEv2/IPSec avec certificats"</item>
-  </string-array>
   <string-array name="vpn_proxy_settings">
     <item msgid="7165538292837266997">"Aucun"</item>
     <item msgid="2397017538263427575">"Manuel"</item>
@@ -461,28 +373,6 @@
     <item msgid="1749887190650889318">"Faible"</item>
     <item msgid="4434319706635379779">"Critique"</item>
     <item msgid="7582717864806562725">"?"</item>
-  </string-array>
-  <string-array name="proc_stats_memory_states">
-    <item msgid="9158074556874274573">"Normale"</item>
-    <item msgid="800025072447180345">"Moyenne"</item>
-    <item msgid="6553000762562707158">"Faible"</item>
-    <item msgid="1800371389071355640">"Critique"</item>
-  </string-array>
-  <string-array name="proc_stats_process_states">
-    <item msgid="7389344075996860704">"Permanent"</item>
-    <item msgid="5777152116210127847">"Activité principale"</item>
-    <item msgid="1834030155560727324">"Important (premier plan)"</item>
-    <item msgid="8494424742994426350">"Important (arrière-plan)"</item>
-    <item msgid="5099332663422156149">"Sauvegarde"</item>
-    <item msgid="7701089238529887617">"Haute densité"</item>
-    <item msgid="3006466648960525485">"Service (en cours)"</item>
-    <item msgid="2253476667031759713">"Service (redémarrage)"</item>
-    <item msgid="5209576689975321486">"Récepteur"</item>
-    <item msgid="7243761414719310364">"Accueil"</item>
-    <item msgid="3674963093565630781">"Dernière activité"</item>
-    <item msgid="5545221272903898598">"Mise en cache (activité)"</item>
-    <item msgid="3164591924266309710">"Mise en cache (client d\'activité)"</item>
-    <item msgid="8186970968968646288">"Mise en cache (vide)"</item>
   </string-array>
   <string-array name="color_picker">
     <item msgid="7216413848731287689">"Cyan"</item>
@@ -515,10 +405,6 @@
   <string-array name="wifi_hidden_entries">
     <item msgid="342232116597649254">"Non"</item>
     <item msgid="2163015208097377388">"Oui"</item>
-  </string-array>
-  <string-array name="dark_ui_mode_entries">
-    <item msgid="6438197382930472090">"Sombre"</item>
-    <item msgid="3761390980253394079">"Clair"</item>
   </string-array>
   <string-array name="autofill_logging_level_entries">
     <item msgid="2263571982739726576">"Désactivé"</item>
@@ -572,9 +458,6 @@
     <!-- no translation found for enhanced_4g_lte_mode_title_variant:0 (1841976293698111057) -->
     <!-- no translation found for enhanced_4g_lte_mode_title_variant:1 (6822859933189908133) -->
     <!-- no translation found for enhanced_4g_lte_mode_title_variant:2 (4543171628914168621) -->
-    <!-- no translation found for enhanced_4g_lte_mode_sumary_variant:0 (6624400115590055120) -->
-    <!-- no translation found for enhanced_4g_lte_mode_sumary_variant:1 (5783108243674842461) -->
-    <!-- no translation found for enhanced_4g_lte_mode_sumary_variant:2 (2605068646093321511) -->
     <!-- no translation found for rtt_setting_mode:1 (7903019313228349427) -->
     <!-- no translation found for rtt_setting_mode:2 (8525285145696236811) -->
     <!-- no translation found for rtt_setting_mode:3 (7725394146877517088) -->
@@ -586,9 +469,9 @@
     <item msgid="2373999996715432397">"0"</item>
     <item msgid="5305176997036663262">"1"</item>
   </string-array>
-  <string-array name="switch_to_user_zero_when_docked_timeout_entries">
-    <item msgid="4844842227131211168">"Jamais"</item>
-    <item msgid="5065465585332446709">"Après 1 minute"</item>
-    <item msgid="622807566366131941">"Après 5 minutes"</item>
+  <string-array name="switch_to_dock_user_when_docked_timeout_entries">
+    <item msgid="3211660022507486536">"Jamais"</item>
+    <item msgid="7025253383416830453">"Après 1 minute"</item>
+    <item msgid="1574040255478150028">"Après 5 minutes"</item>
   </string-array>
 </resources>

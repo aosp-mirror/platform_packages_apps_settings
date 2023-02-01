@@ -71,8 +71,11 @@ import com.android.settings.core.FeatureFlags;
 import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.PasswordUtils;
+import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.net.URISyntaxException;
 import java.util.Set;
@@ -225,9 +228,26 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         }, R.id.main_content);
 
         // Launch the intent from deep link for large screen devices.
-        launchDeepLinkIntentToRight();
+        if (shouldLaunchDeepLinkIntentToRight()) {
+            launchDeepLinkIntentToRight();
+        }
+
+        // Settings app may be launched on an existing task. Reset SplitPairRule of SubSettings here
+        // to prevent SplitPairRule of an existing task applied on a new started Settings app.
+        if (ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this)
+                && (getIntent().getFlags() & Intent.FLAG_ACTIVITY_CLEAR_TOP) != 0) {
+            initSplitPairRules();
+        }
+
         updateHomepagePaddings();
         updateSplitLayout();
+
+        enableTaskLocaleOverride();
+    }
+
+    @VisibleForTesting
+    void initSplitPairRules() {
+        new ActivityEmbeddingRulesController(getApplicationContext()).initRules();
     }
 
     @Override
@@ -248,7 +268,9 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             return;
         }
         // Launch the intent from deep link for large screen devices.
-        launchDeepLinkIntentToRight();
+        if (shouldLaunchDeepLinkIntentToRight()) {
+            launchDeepLinkIntentToRight();
+        }
     }
 
     @Override
@@ -357,7 +379,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
     private void showSuggestionFragment(boolean scrollNeeded) {
         final Class<? extends Fragment> fragmentClass = FeatureFactory.getFactory(this)
-                .getSuggestionFeatureProvider(this).getContextualSuggestionFragment();
+                .getSuggestionFeatureProvider().getContextualSuggestionFragment();
         if (fragmentClass == null) {
             return;
         }
@@ -396,17 +418,18 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         return showFragment;
     }
 
+    private boolean shouldLaunchDeepLinkIntentToRight() {
+        if (!FeatureFlagUtils.isEnabled(this, FeatureFlagUtils.SETTINGS_SUPPORT_LARGE_SCREEN)
+                || !SplitController.getInstance().isSplitSupported()) {
+            return false;
+        }
+
+        Intent intent = getIntent();
+        return intent != null && TextUtils.equals(intent.getAction(),
+                ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY);
+    }
+
     private void launchDeepLinkIntentToRight() {
-        if (!mIsEmbeddingActivityEnabled) {
-            return;
-        }
-
-        final Intent intent = getIntent();
-        if (intent == null || !TextUtils.equals(intent.getAction(),
-                ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY)) {
-            return;
-        }
-
         if (!(this instanceof DeepLinkHomepageActivity
                 || this instanceof DeepLinkHomepageActivityInternal)) {
             Log.e(TAG, "Not a deep link component");
@@ -414,6 +437,13 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             return;
         }
 
+        if (!WizardManagerHelper.isUserSetupComplete(this)) {
+            Log.e(TAG, "Cancel deep link before SUW completed");
+            finish();
+            return;
+        }
+
+        final Intent intent = getIntent();
         final String intentUriString = intent.getStringExtra(
                 EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI);
         if (TextUtils.isEmpty(intentUriString)) {
@@ -431,6 +461,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             return;
         }
 
+        targetIntent.setData(intent.getParcelableExtra(
+                SettingsHomepageActivity.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_DATA));
         final ComponentName targetComponentName = targetIntent.resolveActivity(getPackageManager());
         if (targetComponentName == null) {
             Log.e(TAG, "No valid target for the deep link intent: " + targetIntent);
@@ -471,6 +503,19 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             }
         }
 
+        // Only allow FLAG_GRANT_READ/WRITE_URI_PERMISSION if calling app has the permission to
+        // access specified Uri.
+        int uriPermissionFlags = targetIntent.getFlags()
+                & (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        if (targetIntent.getData() != null
+                && uriPermissionFlags != 0
+                && checkUriPermission(targetIntent.getData(), /* pid= */ -1, callingUid,
+                        uriPermissionFlags) == PackageManager.PERMISSION_DENIED) {
+            Log.e(TAG, "Calling app must have the permission to access Uri and grant permission");
+            finish();
+            return;
+        }
+
         targetIntent.setComponent(targetComponentName);
 
         // To prevent launchDeepLinkIntentToRight again for configuration change.
@@ -484,22 +529,6 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
         targetIntent.putExtra(EXTRA_IS_FROM_SETTINGS_HOMEPAGE, true);
         targetIntent.putExtra(SettingsActivity.EXTRA_IS_FROM_SLICE, false);
-
-        targetIntent.setData(intent.getParcelableExtra(
-                SettingsHomepageActivity.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_DATA));
-
-        // Only allow FLAG_GRANT_READ/WRITE_URI_PERMISSION if calling app has the permission to
-        // access specified Uri.
-        int uriPermissionFlags = targetIntent.getFlags()
-                & (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        if (targetIntent.getData() != null
-                && uriPermissionFlags != 0
-                && checkUriPermission(targetIntent.getData(), /* pid= */ -1, callingUid,
-                        uriPermissionFlags) == PackageManager.PERMISSION_DENIED) {
-            Log.e(TAG, "Calling app must have the permission to access Uri and grant permission");
-            finish();
-            return;
-        }
 
         // Set 2-pane pair rule for the deep link page.
         ActivityEmbeddingRulesController.registerTwoPanePairRule(this,
@@ -570,10 +599,26 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             final String menuKey = intent.getStringExtra(
                     EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY);
             if (!TextUtils.isEmpty(menuKey)) {
-                return menuKey;
+                return maybeRemapMenuKey(menuKey);
             }
         }
         return getString(DEFAULT_HIGHLIGHT_MENU_KEY);
+    }
+
+    private String maybeRemapMenuKey(String menuKey) {
+        boolean isPrivacyOrSecurityMenuKey =
+                getString(R.string.menu_key_privacy).equals(menuKey)
+                        || getString(R.string.menu_key_security).equals(menuKey);
+        boolean isSafetyCenterMenuKey = getString(R.string.menu_key_safety_center).equals(menuKey);
+
+        if (isPrivacyOrSecurityMenuKey && SafetyCenterManagerWrapper.get().isEnabled(this)) {
+            return getString(R.string.menu_key_safety_center);
+        }
+        if (isSafetyCenterMenuKey && !SafetyCenterManagerWrapper.get().isEnabled(this)) {
+            // We don't know if security or privacy, default to security as it is above.
+            return getString(R.string.menu_key_security);
+        }
+        return menuKey;
     }
 
     private void reloadHighlightMenuKey() {

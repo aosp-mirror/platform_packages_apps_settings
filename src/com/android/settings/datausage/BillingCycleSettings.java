@@ -22,6 +22,8 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.icu.text.MeasureFormat;
+import android.icu.util.MeasureUnit;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
@@ -30,6 +32,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
@@ -42,6 +45,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
@@ -102,6 +106,10 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
         super.onCreate(icicle);
 
         final Context context = getContext();
+        if (!SubscriptionUtil.isSimHardwareVisible(context)) {
+            finish();
+            return;
+        }
         mDataUsageController = new DataUsageController(context);
 
         Bundle args = getArguments();
@@ -301,6 +309,17 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
                     : editor.getPolicyWarningBytes(template);
             final long limitDisabled = isLimit ? LIMIT_DISABLED : WARNING_DISABLED;
 
+            final MeasureFormat formatter = MeasureFormat.getInstance(
+                    getContext().getResources().getConfiguration().locale,
+                    MeasureFormat.FormatWidth.SHORT);
+            final String[] unitNames = new String[] {
+                formatter.getUnitDisplayName(MeasureUnit.MEGABYTE),
+                formatter.getUnitDisplayName(MeasureUnit.GIGABYTE)
+            };
+            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                    getContext(), android.R.layout.simple_spinner_item, unitNames);
+            type.setAdapter(adapter);
+
             final boolean unitInGigaBytes = (bytes > 1.5f * GIB_IN_BYTES);
             final String bytesText = formatText(bytes,
                     unitInGigaBytes ? GIB_IN_BYTES : MIB_IN_BYTES);
@@ -498,7 +517,8 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return DataUsageUtils.hasMobileData(context);
+                    return SubscriptionUtil.isSimHardwareVisible(context)
+                            && DataUsageUtils.hasMobileData(context);
                 }
             };
 

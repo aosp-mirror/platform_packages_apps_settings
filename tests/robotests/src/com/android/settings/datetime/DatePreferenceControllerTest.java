@@ -18,11 +18,21 @@ package com.android.settings.datetime;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.DatePickerDialog;
+import android.app.time.Capabilities;
+import android.app.time.TimeCapabilities;
+import android.app.time.TimeCapabilitiesAndConfig;
+import android.app.time.TimeConfiguration;
+import android.app.time.TimeManager;
 import android.app.timedetector.TimeDetector;
+import android.app.timedetector.TimeDetectorHelper;
 import android.content.Context;
+import android.os.UserHandle;
 
 import com.android.settingslib.RestrictedPreference;
 
@@ -34,17 +44,20 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 @RunWith(RobolectricTestRunner.class)
 public class DatePreferenceControllerTest {
 
     @Mock
     private Context mContext;
     @Mock
-    private TimeDetector mTimeDetector;
-    @Mock
     private DatePreferenceController.DatePreferenceHost mHost;
     @Mock
-    private AutoTimePreferenceController mAutoTimePreferenceController;
+    private TimeManager mTimeManager;
+    @Mock
+    private TimeDetector mTimeDetector;
 
     private RestrictedPreference mPreference;
     private DatePreferenceController mController;
@@ -53,8 +66,9 @@ public class DatePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(TimeDetector.class)).thenReturn(mTimeDetector);
+        when(mContext.getSystemService(TimeManager.class)).thenReturn(mTimeManager);
         mPreference = new RestrictedPreference(RuntimeEnvironment.application);
-        mController = new DatePreferenceController(mContext, mHost, mAutoTimePreferenceController);
+        mController = new DatePreferenceController(mContext, mHost);
     }
 
     @Test
@@ -73,7 +87,9 @@ public class DatePreferenceControllerTest {
         // Make sure not disabled by admin.
         mPreference.setDisabledByAdmin(null);
 
-        when(mAutoTimePreferenceController.isEnabled()).thenReturn(true);
+        TimeCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                /* suggestManualAllowed= */false);
+        when(mTimeManager.getTimeCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
         mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isFalse();
@@ -84,7 +100,9 @@ public class DatePreferenceControllerTest {
         // Make sure not disabled by admin.
         mPreference.setDisabledByAdmin(null);
 
-        when(mAutoTimePreferenceController.isEnabled()).thenReturn(false);
+        TimeCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                /* suggestManualAllowed= */true);
+        when(mTimeManager.getTimeCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
         mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isTrue();
@@ -101,5 +119,39 @@ public class DatePreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
         // Should show date picker
         verify(mHost).showDatePicker();
+    }
+
+    @Test
+    public void testBuildDatePicker() {
+        TimeDetectorHelper timeDetectorHelper = mock(TimeDetectorHelper.class);
+        when(timeDetectorHelper.getManualDateSelectionYearMin()).thenReturn(2015);
+        when(timeDetectorHelper.getManualDateSelectionYearMax()).thenReturn(2020);
+
+        Context context = RuntimeEnvironment.application;
+        DatePickerDialog dialog = mController.buildDatePicker(context, timeDetectorHelper);
+
+        GregorianCalendar calendar = new GregorianCalendar();
+
+        long minDate = dialog.getDatePicker().getMinDate();
+        calendar.setTimeInMillis(minDate);
+        assertEquals(2015, calendar.get(Calendar.YEAR));
+
+        long maxDate = dialog.getDatePicker().getMaxDate();
+        calendar.setTimeInMillis(maxDate);
+        assertEquals(2020, calendar.get(Calendar.YEAR));
+    }
+
+    private static TimeCapabilitiesAndConfig createCapabilitiesAndConfig(
+            boolean suggestManualAllowed) {
+        int suggestManualCapability = suggestManualAllowed ? Capabilities.CAPABILITY_POSSESSED
+                : Capabilities.CAPABILITY_NOT_SUPPORTED;
+        TimeCapabilities capabilities = new TimeCapabilities.Builder(UserHandle.SYSTEM)
+                .setConfigureAutoDetectionEnabledCapability(Capabilities.CAPABILITY_POSSESSED)
+                .setSetManualTimeCapability(suggestManualCapability)
+                .build();
+        TimeConfiguration config = new TimeConfiguration.Builder()
+                .setAutoDetectionEnabled(!suggestManualAllowed)
+                .build();
+        return new TimeCapabilitiesAndConfig(capabilities, config);
     }
 }

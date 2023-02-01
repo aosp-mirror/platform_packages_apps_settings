@@ -20,8 +20,11 @@ import androidx.annotation.IntDef;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppStateAlarmsAndRemindersBridge;
+import com.android.settings.applications.AppStateAppBatteryUsageBridge;
+import com.android.settings.applications.AppStateClonedAppsBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateLocaleBridge;
+import com.android.settings.applications.AppStateLongBackgroundTasksBridge;
 import com.android.settings.applications.AppStateManageExternalStorageBridge;
 import com.android.settings.applications.AppStateMediaManagementAppsBridge;
 import com.android.settings.applications.AppStateNotificationBridge;
@@ -29,6 +32,7 @@ import com.android.settings.applications.AppStateOverlayBridge;
 import com.android.settings.applications.AppStatePowerBridge;
 import com.android.settings.applications.AppStateUsageBridge;
 import com.android.settings.applications.AppStateWriteSettingsBridge;
+import com.android.settings.nfc.AppStateNfcTagAppsBridge;
 import com.android.settings.wifi.AppStateChangeWifiStateBridge;
 import com.android.settingslib.applications.ApplicationsState;
 
@@ -37,28 +41,34 @@ import com.android.settingslib.applications.ApplicationsState;
  */
 public class AppFilterRegistry {
 
-    @IntDef(value = {
-            FILTER_APPS_POWER_ALLOWLIST,
-            FILTER_APPS_POWER_ALLOWLIST_ALL,
-            FILTER_APPS_ALL,
-            FILTER_APPS_ENABLED,
-            FILTER_APPS_INSTANT,
-            FILTER_APPS_DISABLED,
-            FILTER_APPS_RECENT,
-            FILTER_APPS_FREQUENT,
-            FILTER_APPS_PERSONAL,
-            FILTER_APPS_WORK,
-            FILTER_APPS_USAGE_ACCESS,
-            FILTER_APPS_WITH_OVERLAY,
-            FILTER_APPS_WRITE_SETTINGS,
-            FILTER_APPS_INSTALL_SOURCES,
-            FILTER_APPS_BLOCKED,
-            FILTER_ALARMS_AND_REMINDERS,
-            FILTER_APPS_MEDIA_MANAGEMENT,
-            FILTER_APPS_LOCALE,
-    })
-    @interface FilterType {
-    }
+    @IntDef(
+            value = {
+                FILTER_APPS_POWER_ALLOWLIST,
+                FILTER_APPS_POWER_ALLOWLIST_ALL,
+                FILTER_APPS_ALL,
+                FILTER_APPS_ENABLED,
+                FILTER_APPS_INSTANT,
+                FILTER_APPS_DISABLED,
+                FILTER_APPS_RECENT,
+                FILTER_APPS_FREQUENT,
+                FILTER_APPS_PERSONAL,
+                FILTER_APPS_WORK,
+                FILTER_APPS_USAGE_ACCESS,
+                FILTER_APPS_WITH_OVERLAY,
+                FILTER_APPS_WRITE_SETTINGS,
+                FILTER_APPS_INSTALL_SOURCES,
+                FILTER_APPS_BLOCKED,
+                FILTER_ALARMS_AND_REMINDERS,
+                FILTER_APPS_MEDIA_MANAGEMENT,
+                FILTER_APPS_LOCALE,
+                FILTER_APPS_BATTERY_UNRESTRICTED,
+                FILTER_APPS_BATTERY_OPTIMIZED,
+                FILTER_APPS_BATTERY_RESTRICTED,
+                FILTER_LONG_BACKGROUND_TASKS,
+                FILTER_APPS_CLONE,
+                FILTER_APPS_NFC_TAG,
+            })
+    @interface FilterType {}
 
     // Filter options used for displayed list of applications
     // Filters will appear sorted based on their value defined here.
@@ -82,14 +92,21 @@ public class AppFilterRegistry {
     public static final int FILTER_ALARMS_AND_REMINDERS = 18;
     public static final int FILTER_APPS_MEDIA_MANAGEMENT = 19;
     public static final int FILTER_APPS_LOCALE = 20;
-    // Next id: 21. If you add an entry here, length of mFilters should be updated
+    public static final int FILTER_APPS_BATTERY_UNRESTRICTED = 21;
+    public static final int FILTER_APPS_BATTERY_OPTIMIZED = 22;
+    public static final int FILTER_APPS_BATTERY_RESTRICTED = 23;
+    public static final int FILTER_LONG_BACKGROUND_TASKS = 24;
+    public static final int FILTER_APPS_CLONE = 25;
+    public static final int FILTER_APPS_NFC_TAG = 26;
+    private static final int NUM_FILTER_ENTRIES = 27;
+    // Next id: 27. If you add an entry here, please change NUM_FILTER_ENTRIES.
 
     private static AppFilterRegistry sRegistry;
 
     private final AppFilterItem[] mFilters;
 
     private AppFilterRegistry() {
-        mFilters = new AppFilterItem[21];
+        mFilters = new AppFilterItem[NUM_FILTER_ENTRIES];
 
         // High power allowlist, on
         mFilters[FILTER_APPS_POWER_ALLOWLIST] = new AppFilterItem(
@@ -212,9 +229,49 @@ public class AppFilterRegistry {
                 AppStateLocaleBridge.FILTER_APPS_LOCALE,
                 FILTER_APPS_LOCALE,
                 R.string.app_locale_picker_title);
+
+        // Battery optimization app states:
+        // Unrestricted
+        mFilters[FILTER_APPS_BATTERY_UNRESTRICTED] =
+                new AppFilterItem(
+                        AppStateAppBatteryUsageBridge.FILTER_BATTERY_UNRESTRICTED_APPS,
+                        FILTER_APPS_BATTERY_UNRESTRICTED,
+                        R.string.filter_battery_unrestricted_title);
+
+        // Optimized
+        mFilters[FILTER_APPS_BATTERY_OPTIMIZED] =
+                new AppFilterItem(
+                        AppStateAppBatteryUsageBridge.FILTER_BATTERY_OPTIMIZED_APPS,
+                        FILTER_APPS_BATTERY_OPTIMIZED,
+                        R.string.filter_battery_optimized_title);
+
+        // Unrestricted
+        mFilters[FILTER_APPS_BATTERY_RESTRICTED] =
+                new AppFilterItem(
+                        AppStateAppBatteryUsageBridge.FILTER_BATTERY_RESTRICTED_APPS,
+                        FILTER_APPS_BATTERY_RESTRICTED,
+                        R.string.filter_battery_restricted_title);
+
+        // Apps that can run long background tasks
+        mFilters[FILTER_LONG_BACKGROUND_TASKS] = new AppFilterItem(
+                AppStateLongBackgroundTasksBridge.FILTER_LONG_JOBS_APPS,
+                FILTER_LONG_BACKGROUND_TASKS,
+                R.string.long_background_tasks_title);
+
+        // Apps that are cloneable or cloned.
+        mFilters[FILTER_APPS_CLONE] =
+                new AppFilterItem(
+                        AppStateClonedAppsBridge.FILTER_APPS_CLONE,
+                        FILTER_APPS_CLONE,
+                        R.string.cloned_apps_dashboard_title);
+
+        // Apps that are nfc tag allowlisted.
+        mFilters[FILTER_APPS_NFC_TAG] =
+                new AppFilterItem(
+                        AppStateNfcTagAppsBridge.FILTER_APPS_NFC_TAG,
+                        FILTER_APPS_NFC_TAG,
+                        R.string.change_nfc_tag_apps_title);
     }
-
-
 
     public static AppFilterRegistry getInstance() {
         if (sRegistry == null) {
@@ -248,6 +305,14 @@ public class AppFilterRegistry {
                 return FILTER_APPS_MEDIA_MANAGEMENT;
             case ManageApplications.LIST_TYPE_APPS_LOCALE:
                 return FILTER_APPS_LOCALE;
+            case ManageApplications.LIST_TYPE_BATTERY_OPTIMIZATION:
+                return FILTER_APPS_BATTERY_OPTIMIZED;
+            case ManageApplications.LIST_TYPE_LONG_BACKGROUND_TASKS:
+                return FILTER_LONG_BACKGROUND_TASKS;
+            case ManageApplications.LIST_TYPE_CLONED_APPS:
+                return FILTER_APPS_CLONE;
+            case ManageApplications.LIST_TYPE_NFC_TAG_APPS:
+                return FILTER_APPS_NFC_TAG;
             default:
                 return FILTER_APPS_ALL;
         }

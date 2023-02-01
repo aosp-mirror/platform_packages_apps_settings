@@ -42,9 +42,19 @@
         settings:searchable="false"
         settings:controller="com.android.settings.bluetooth.LeAudioBluetoothDetailsHeaderController"/>
 
+    <com.android.settingslib.widget.ButtonPreference
+        android:key="hearing_aid_pair_other_button"
+        android:gravity="center"/>
+    <com.android.settings.applications.SpacePreference
+        android:key="hearing_aid_space_layout"
+        android:layout_height="8dp"/>
+
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="action_buttons"
         settings:allowDividerBelow="true"/>
+
+    <PreferenceCategory
+        android:key="device_stylus"/>
 
     <com.android.settings.slices.SlicePreference
         android:key="bt_extra_control"
@@ -59,6 +69,9 @@
 
     <PreferenceCategory
         android:key="device_companion_apps"/>
+
+    <PreferenceCategory
+        android:key="feature_controls_group"/>
 
     <PreferenceCategory
         android:key="spatial_audio_group"/>
@@ -77,6 +90,12 @@
             android:title="@string/live_caption_title"
             settings:controller="com.android.settings.accessibility.LiveCaptionPreferenceController"/>
     </PreferenceCategory>
+
+    <Preference
+        android:key="keyboard_settings"
+        android:persistent="false"
+        android:title="@string/bluetooth_device_keyboard_settings_preference_title"
+        settings:controller="com.android.settings.inputmethod.KeyboardSettingsPreferenceController"/>
 
     <com.android.settingslib.widget.FooterPreference
         android:key="device_details_footer"

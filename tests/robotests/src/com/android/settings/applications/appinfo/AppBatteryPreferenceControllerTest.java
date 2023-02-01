@@ -18,8 +18,6 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyDouble;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -40,8 +38,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.SettingsActivity;
-import com.android.settings.fuelgauge.BatteryDiffEntry;
 import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry;
 import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
@@ -133,49 +131,26 @@ public class AppBatteryPreferenceControllerTest {
     }
 
     @Test
-    public void updateBattery_noBatteryStats_summaryNo() {
-        mController.displayPreference(mScreen);
-
-        mController.updateBattery();
-
-        assertThat(mBatteryPreference.getSummary())
-            .isEqualTo("No battery use since last full charge");
-    }
-
-    @Test
-    public void updateBattery_hasBatteryStats_summaryPercent() {
-        mController.mBatteryUsageStats = mBatteryUsageStats;
-        mController.mUidBatteryConsumer = mUidBatteryConsumer;
-        doReturn(BATTERY_LEVEL).when(mBatteryUtils).calculateBatteryPercent(anyDouble(),
-                anyDouble(), anyInt());
-        mController.displayPreference(mScreen);
-
-        mController.updateBattery();
-
-        assertThat(mBatteryPreference.getSummary()).isEqualTo("60% use since last full charge");
-    }
-
-    @Test
     public void updateBatteryWithDiffEntry_noConsumePower_summaryNo() {
         mController.displayPreference(mScreen);
-        mController.mIsChartGraphEnabled = true;
 
         mController.updateBatteryWithDiffEntry();
 
-        assertThat(mBatteryPreference.getSummary()).isEqualTo("No battery use for past 24 hours");
+        assertThat(mBatteryPreference.getSummary().toString()).isEqualTo(
+                "No battery use since last full charge");
     }
 
     @Test
     public void updateBatteryWithDiffEntry_withConsumePower_summaryPercent() {
         mController.displayPreference(mScreen);
-        mController.mIsChartGraphEnabled = true;
         mBatteryDiffEntry.mConsumePower = 1;
         mController.mBatteryDiffEntry = mBatteryDiffEntry;
         when(mBatteryDiffEntry.getPercentOfTotal()).thenReturn(60.0);
 
         mController.updateBatteryWithDiffEntry();
 
-        assertThat(mBatteryPreference.getSummary()).isEqualTo("60% use for past 24 hours");
+        assertThat(mBatteryPreference.getSummary().toString()).isEqualTo(
+                "60% use since last full charge");
     }
 
     @Test

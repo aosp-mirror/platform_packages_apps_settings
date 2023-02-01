@@ -27,6 +27,7 @@ import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
+import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
@@ -47,6 +48,7 @@ import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.security.SecuritySettingsFeatureProvider;
 import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.users.UserFeatureProvider;
+import com.android.settings.vpn2.AdvancedVpnFeatureProvider;
 import com.android.settings.wifi.WifiTrackerLibProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -77,6 +79,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final BluetoothFeatureProvider mBluetoothFeatureProvider;
     public final AwareFeatureProvider mAwareFeatureProvider;
     public final FaceFeatureProvider mFaceFeatureProvider;
+    public final BiometricsRepositoryProvider mBiometricsRepositoryProvider;
 
     public PanelFeatureProvider panelFeatureProvider;
     public SlicesFeatureProvider slicesFeatureProvider;
@@ -87,6 +90,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public SecuritySettingsFeatureProvider securitySettingsFeatureProvider;
     public AccessibilitySearchFeatureProvider mAccessibilitySearchFeatureProvider;
     public AccessibilityMetricsFeatureProvider mAccessibilityMetricsFeatureProvider;
+    public AdvancedVpnFeatureProvider mAdvancedVpnFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -132,14 +136,16 @@ public class FakeFeatureFactory extends FeatureFactory {
         mBluetoothFeatureProvider = mock(BluetoothFeatureProvider.class);
         mAwareFeatureProvider = mock(AwareFeatureProvider.class);
         mFaceFeatureProvider = mock(FaceFeatureProvider.class);
+        mBiometricsRepositoryProvider = mock(BiometricsRepositoryProvider.class);
         wifiTrackerLibProvider = mock(WifiTrackerLibProvider.class);
         securitySettingsFeatureProvider = mock(SecuritySettingsFeatureProvider.class);
         mAccessibilitySearchFeatureProvider = mock(AccessibilitySearchFeatureProvider.class);
         mAccessibilityMetricsFeatureProvider = mock(AccessibilityMetricsFeatureProvider.class);
+        mAdvancedVpnFeatureProvider = mock(AdvancedVpnFeatureProvider.class);
     }
 
     @Override
-    public SuggestionFeatureProvider getSuggestionFeatureProvider(Context context) {
+    public SuggestionFeatureProvider getSuggestionFeatureProvider() {
         return suggestionsFeatureProvider;
     }
 
@@ -254,6 +260,11 @@ public class FakeFeatureFactory extends FeatureFactory {
     }
 
     @Override
+    public BiometricsRepositoryProvider getBiometricsRepositoryProvider() {
+        return mBiometricsRepositoryProvider;
+    }
+
+    @Override
     public WifiTrackerLibProvider getWifiTrackerLibProvider() {
         return wifiTrackerLibProvider;
     }
@@ -271,5 +282,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public AccessibilityMetricsFeatureProvider getAccessibilityMetricsFeatureProvider() {
         return mAccessibilityMetricsFeatureProvider;
+    }
+
+    @Override
+    public AdvancedVpnFeatureProvider getAdvancedVpnFeatureProvider() {
+        return mAdvancedVpnFeatureProvider;
     }
 }

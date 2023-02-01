@@ -94,7 +94,6 @@ public class DataUsageListTest {
                 mMobileDataEnabledListener);
         ReflectionHelpers.setField(mDataUsageList, "services", mNetworkServices);
         doReturn(mLoaderManager).when(mDataUsageList).getLoaderManager();
-        mDataUsageList.mLoadingViewController = mock(LoadingViewController.class);
     }
 
     @Test
@@ -193,30 +192,23 @@ public class DataUsageListTest {
     }
 
     @Test
-    public void onViewCreated_shouldHideCycleSpinner() {
-        final View view = new View(mActivity);
-        final View header = getHeader();
-        final Spinner spinner = getSpinner(header);
-        spinner.setVisibility(View.VISIBLE);
-        doReturn(header).when(mDataUsageList).setPinnedHeaderView(anyInt());
-        doReturn(view).when(mDataUsageList).getView();
+    public void onViewCreated_shouldNotSetCycleSpinner() {
+        View view = constructRootView();
 
         mDataUsageList.onViewCreated(view, null);
 
-        assertThat(spinner.getVisibility()).isEqualTo(View.GONE);
+        assertThat(getSpinner(view)).isNull();
     }
 
     @Test
-    public void onLoadFinished_networkCycleDataCallback_shouldShowCycleSpinner() {
-        final Spinner spinner = getSpinner(getHeader());
-        spinner.setVisibility(View.INVISIBLE);
-        mDataUsageList.mCycleSpinner = spinner;
-        assertThat(spinner.getVisibility()).isEqualTo(View.INVISIBLE);
+    public void onLoadFinished_networkCycleDataCallback_shouldSetCycleSpinner() {
+        final View view = constructRootView();
         doNothing().when(mDataUsageList).updatePolicy();
+        doReturn(setupHeaderView(view)).when(mDataUsageList).setPinnedHeaderView(anyInt());
 
         mDataUsageList.mNetworkCycleDataCallbacks.onLoadFinished(null, null);
 
-        assertThat(spinner.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(getSpinner(view)).isNotNull();
     }
 
     @Test
@@ -227,18 +219,24 @@ public class DataUsageListTest {
         verify(mLoaderManager).destroyLoader(DataUsageList.LOADER_SUMMARY);
     }
 
-    private View getHeader() {
-        final View rootView = LayoutInflater.from(mActivity)
+    private View constructRootView() {
+        View rootView = LayoutInflater.from(mActivity)
                 .inflate(R.layout.preference_list_fragment, null, false);
-        final FrameLayout pinnedHeader = rootView.findViewById(R.id.pinned_header);
-        final View header = mActivity.getLayoutInflater()
-                .inflate(R.layout.apps_filter_spinner, pinnedHeader, false);
+        return rootView;
+    }
 
+    private View setupHeaderView(View rootView) {
+        final FrameLayout pinnedHeader = (FrameLayout) rootView.findViewById(R.id.pinned_header);
+        final View header = mActivity.getLayoutInflater()
+                .inflate(R.layout.apps_filter_spinner, pinnedHeader, true);
         return header;
     }
 
-    private Spinner getSpinner(View header) {
-        final Spinner spinner = header.findViewById(R.id.filter_spinner);
-        return spinner;
+    private Spinner getSpinner(View rootView) {
+        final FrameLayout pinnedHeader = (FrameLayout) rootView.findViewById(R.id.pinned_header);
+        if (pinnedHeader == null) {
+            return null;
+        }
+        return pinnedHeader.findViewById(R.id.filter_spinner);
     }
 }

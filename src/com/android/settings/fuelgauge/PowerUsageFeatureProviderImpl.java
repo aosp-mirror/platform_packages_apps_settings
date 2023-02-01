@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,18 +19,17 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Process;
 import android.util.ArraySet;
 import android.util.SparseIntArray;
 
 import com.android.internal.util.ArrayUtils;
-import com.android.settings.R;
 import com.android.settingslib.fuelgauge.Estimate;
 
-import java.util.Map;
+import java.util.List;
 import java.util.Set;
 
+/** Implementation of {@code PowerUsageFeatureProvider} */
 public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider {
 
     private static final String PACKAGE_CALENDAR_PROVIDER = "com.android.providers.calendar";
@@ -68,28 +67,28 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public boolean isLocationSettingEnabled(String[] packages) {
-        return false;
+    public boolean isBatteryUsageEnabled() {
+        return true;
     }
 
     @Override
-    public boolean isAdditionalBatteryInfoEnabled() {
+    public double getBatteryUsageListConsumePowerThreshold() {
+        return 0.0;
+    }
+
+    @Override
+    public List<String> getSystemAppsAllowlist() {
+        return null;
+    }
+
+    @Override
+    public boolean isLocationSettingEnabled(String[] packages) {
         return false;
     }
 
     @Override
     public Intent getAdditionalBatteryInfoIntent() {
         return null;
-    }
-
-    @Override
-    public boolean isAdvancedUiEnabled() {
-        return true;
-    }
-
-    @Override
-    public boolean isPowerAccountingToggleEnabled() {
-        return true;
     }
 
     @Override
@@ -123,24 +122,9 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public String getAdvancedUsageScreenInfoString() {
-        return null;
-    }
-
-    @Override
-    public boolean getEarlyWarningSignal(Context context, String id) {
-        return false;
-    }
-
-    @Override
     public boolean isSmartBatterySupported() {
         return mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_smart_battery_available);
-    }
-
-    @Override
-    public boolean isChartGraphEnabled(Context context) {
-        return false;
     }
 
     @Override
@@ -154,33 +138,52 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public Intent getResumeChargeIntent() {
+    public boolean isBatteryManagerSupported() {
+        return true;
+    }
+
+    @Override
+    public Intent getResumeChargeIntent(boolean isDockDefender) {
         return null;
     }
 
     @Override
-    public Map<Long, Map<String, BatteryHistEntry>> getBatteryHistory(Context context) {
-        return null;
+    public String getFullChargeIntentAction() {
+        return Intent.ACTION_BATTERY_LEVEL_CHANGED;
     }
 
     @Override
-    public Uri getBatteryHistoryUri() {
-        return null;
+    public boolean isExtraDefend() {
+        return false;
     }
 
     @Override
-    public Set<CharSequence> getHideBackgroundUsageTimeSet(Context context) {
+    public boolean delayHourlyJobWhenBooting() {
+        return true;
+    }
+
+    @Override
+    public Set<Integer> getOthersSystemComponentSet() {
         return new ArraySet<>();
     }
 
     @Override
-    public CharSequence[] getHideApplicationEntries(Context context) {
-        return new CharSequence[0];
+    public Set<Integer> getHideSystemComponentSet() {
+        return new ArraySet<>();
     }
 
     @Override
-    public CharSequence[] getHideApplicationSummary(Context context) {
-        return context.getResources().getTextArray(
-                R.array.allowlist_hide_summary_in_battery_usage);
+    public Set<String> getHideApplicationSet() {
+        return new ArraySet<>();
+    }
+
+    @Override
+    public Set<String> getHideBackgroundUsageTimeSet() {
+        return new ArraySet<>();
+    }
+
+    @Override
+    public Set<String> getIgnoreScreenOnTimeTaskRootSet() {
+        return new ArraySet<>();
     }
 }

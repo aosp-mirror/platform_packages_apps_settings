@@ -17,23 +17,13 @@
 <resources
     xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
 
-    <color name="divider_color">#20ffffff</color>
-    <color name="title_color">@android:color/holo_blue_light</color>
     <color name="setup_wizard_wifi_color_dark">#89ffffff</color>
     <color name="setup_wizard_wifi_color_light">#89000000</color>
-
-    <color name="lock_pattern_background">#00000000</color>
-
-    <color name="fingerprint_title_area_bg">?android:attr/colorAccent</color>
-    <color name="fingerprint_title_color">#ffffffff</color>
-    <color name="fingerprint_message_color">#de000000</color>
 
     <color name="running_processes_system_ram">#ff384248</color>
     <color name="running_processes_free_ram">#ffced7db</color>
 
     <color name="sim_noitification">@*android:color/accent_device_default_light</color>
-
-    <color name="confirm_device_credential_transparent_black">#60000000</color>
 
     <!-- Accent color that matches the settings launcher icon -->
     <color name="icon_accent">#ffabffec</color>
@@ -42,7 +32,6 @@
     <color name="material_blue_500">#4285F4</color>
     <color name="material_blue_700">#3367D6</color>
     <color name="material_grey_100">#f5f5f5</color>
-    <color name="material_grey_200">#ffffff</color>
 
     <color name="message_text_incoming">#E4E3DA</color>
     <color name="message_text_outgoing">#1B1C17</color>
@@ -51,9 +40,7 @@
     <color name="message_bubble_incoming">#52534D</color>
     <color name="message_bubble_outgoing">#C7C8B7</color>
     <color name="message_icon_background_incoming">#E6F451</color>
-    <color name="message_icon_text_incoming">#ffffffff</color>
     <color name="message_icon_background_outgoing">#FBBC04</color>
-    <color name="message_icon_text_outgoing">#ffffffff</color>
     <color name="message_icon_color">#DADADA</color>
 
     <color name="usage_graph_dots">#B0BEC5</color>
@@ -63,9 +50,6 @@
 
     <!-- Color for the background of the shortcut icons.-->
     <color name="shortcut_background">#fff5f5f5</color>
-
-    <!-- The fallback color for tinting icons. Only used when colorControlNormal is unavailable -->
-    <color name="fallback_tintColor">#89000000</color>
 
     <!-- Dashboard/homepage icon background colors -->
     <color name="homepage_network_background">#2196F3</color>
@@ -78,15 +62,11 @@
     <color name="homepage_security_background">#0F9D58</color>
     <color name="homepage_accounts_background">#F15B8D</color>
     <color name="homepage_accessibility_background">#5011C1</color>
-    <color name="homepage_emergency_background">#F28B82</color>
     <color name="homepage_system_background">#9E9E9E</color>
     <color name="homepage_support_background">#26459C</color>
     <color name="homepage_generic_icon_background">#1A73E8</color>
     <color name="homepage_location_background">#2EC7DC</color>
     <color name="homepage_about_background">#6F86DA</color>
-    <color name="homepage_privacy_background">#5E97F6</color>
-    <color name="homepage_wallpaper_background">#E51AD1</color>
-    <color name="homepage_notification_background">#DD4C9D</color>
 
     <color name="contextual_card_dismissal_background">@*android:color/material_grey_100</color>
     <color name="contextual_card_background">@*android:color/background_device_default_light</color>
@@ -97,11 +77,7 @@
     <color name="switchbar_switch_thumb_tint">@android:color/white</color>
 
     <color name="battery_good_color_light">#43a047</color> <!-- Material Green 600 -->
-    <color name="battery_maybe_color_light">#ef6c00</color> <!-- Material Orange 800 -->
     <color name="battery_bad_color_light">#f44336</color> <!-- Material Red 500 -->
-    <color name="battery_good_color_dark">#4caf50</color> <!-- Material Green 500 -->
-    <color name="battery_maybe_color_dark">#fdd835</color> <!-- Material Yellow 600 -->
-    <color name="battery_bad_color_dark">#f44336</color> <!-- Material Red 500 -->
 
     <!-- TODO: Figure out colors -->
     <color name="face_anim_particle_color_1">#ff00bcd4</color> <!-- Material Cyan 500 -->
@@ -116,22 +92,10 @@
     <color name="biometric_enroll_intro_color_outline">#e3e3e3</color>
 
     <!-- notification settings -->
-    <color name="notification_block_color">#ffff0000</color>
-    <color name="notification_silence_color">#FF32c1de</color>
-    <color name="notification_alert_color">#FFF87B2B</color>
     <color name="notification_importance_button_unselected">#DADCE0</color>
-    <color name="notification_importance_button_selected">#1967D2</color> <!-- material blue 700 -->
-    <color name="notification_importance_selection_bg">#FFFFFF</color>
-    <color name="notification_history_background">?android:attr/colorBackgroundFloating</color>
 
     <!-- launcher icon color -->
     <color name="icon_launcher_setting_color">@*android:color/accent_device_default_light</color>
-
-    <!-- QR code scanner colors -->
-    <color name="qr_corner_line_color">#ffdadce0</color>
-    <color name="qr_focused_corner_line_color">#ff1a73e8</color>
-    <color name="qr_background_color">#b3ffffff</color> <!-- 70% white transparency -->
-    <!-- End of QR code scanner colors -->
 
     <!-- Search bar background color -->
     <color name="search_bar_background">?androidprv:attr/colorSurfaceHighlight</color>
@@ -161,14 +125,6 @@
     <color name="palette_list_dark_mode_color_purple">#c58af9</color> <!-- Material Purple 300 -->
     <color name="palette_list_dark_mode_color_gray">#dadce0</color> <!-- Material Gray 300 -->
 
-    <!-- SIM colors -->
-    <color name="SIM_color_teal">#ff00796b</color> <!-- Material Teal 700 -->
-    <color name="SIM_color_blue">#ff3367d6</color> <!-- Material Blue 700 -->
-    <color name="SIM_color_indigo">#ff303f9f</color> <!-- Material Indigo 700 -->
-    <color name="SIM_color_purple">#ff7b1fa2</color> <!-- Material Purple 700 -->
-    <color name="SIM_color_pink">#ffc2185b</color> <!-- Material Pink 700 -->
-    <color name="SIM_color_red">#ffd32f2f</color> <!-- Material Red 700 -->
-
     <!-- SIM colors updated for GAR -->
     <color name="SIM_color_cyan">#ff006D74</color> <!-- Material Custom Cyan -->
     <color name="SIM_color_blue800">#ff185ABC</color> <!-- Material Blue 800 -->
@@ -185,9 +141,6 @@
     <color name="SIM_dark_mode_color_pink">#ffff8bcb</color> <!-- Material Pink 300 -->
     <color name="SIM_dark_mode_color_orange">#fffcad70</color> <!-- Material Orange 300 -->
 
-    <!-- Top app bar colors -->
-    <color name="color_surface_header">@*android:color/surface_header_light</color>
-
     <!-- Accessibility Settings icon background colors -->
     <color name="accessibility_feature_background">#5F6368</color> <!-- Google grey 700 -->
     <color name="accessibility_magnification_background">#F50D60</color>
@@ -201,6 +154,13 @@
     <!-- Fingerprint enrollment color -->
     <color name="fingerprint_enrollment_finish_color_outline">#1A73E8</color>
 
+    <!-- Side fingerprint sensor guided enrollment fill colors -->
+    <color name="sfps_enrollment_fp_captured_color">#d2e3fc</color> <!-- Blue 100 -->
+    <color name="sfps_enrollment_fp_error_color">#fad2cf</color> <!-- Red 100 -->
+    <color name="sfps_enrollment_progress_bar_bg_color">#E8EAED</color> <!-- Gray 200 -->
+    <color name="sfps_enrollment_progress_bar_fill_color">#1a73e8</color> <!-- Blue 600 -->
+    <color name="sfps_enrollment_progress_bar_error_color">#d93025</color> <!-- Red 600 -->
+
     <!-- Material inverse ripple color, useful for inverted backgrounds. -->
     <color name="ripple_material_inverse">@*android:color/ripple_material_dark</color>
 
@@ -209,4 +169,16 @@
 
     <!-- Background for multiple user settings page avatars -->
     <color name="user_avatar_color_bg">?androidprv:attr/colorSurface</color>
+
+    <!-- Icon tint color for battery usage system icon -->
+    <color name="battery_usage_system_icon_color">?android:attr/textColorPrimary</color>
+
+    <!-- UDFPS colors -->
+    <color name="udfps_enroll_icon">#699FF3</color>
+    <color name="udfps_moving_target_fill">#C2D7F7</color>
+    <!-- 50% of udfps_moving_target_fill-->
+    <color name="udfps_moving_target_fill_error">#80C2D7F7</color>
+    <color name="udfps_enroll_progress">#699FF3</color>
+    <color name="udfps_enroll_progress_help">#70699FF3</color>
+    <color name="udfps_enroll_progress_help_with_talkback">#FFEE675C</color>
 </resources>

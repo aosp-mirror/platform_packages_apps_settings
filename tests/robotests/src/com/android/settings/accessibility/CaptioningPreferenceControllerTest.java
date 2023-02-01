@@ -16,6 +16,9 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
@@ -30,10 +33,9 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+/** Tests for {@link CaptioningPreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
 public class CaptioningPreferenceControllerTest {
-    private static final int ON = 1;
-    private static final int OFF = 0;
 
     private Context mContext;
     private CaptioningPreferenceController mController;
@@ -56,7 +58,7 @@ public class CaptioningPreferenceControllerTest {
                 Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, ON);
 
         assertThat(mController.getSummary()).isEqualTo(
-                mContext.getText(R.string.accessibility_feature_state_on));
+                mContext.getText(R.string.on));
     }
 
     @Test
@@ -65,6 +67,6 @@ public class CaptioningPreferenceControllerTest {
                 Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, OFF);
 
         assertThat(mController.getSummary()).isEqualTo(
-                mContext.getText(R.string.accessibility_feature_state_off));
+                mContext.getText(R.string.off));
     }
 }

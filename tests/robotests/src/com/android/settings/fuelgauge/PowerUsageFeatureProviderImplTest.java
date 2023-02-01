@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,6 +63,16 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
+    public void testIsBatteryUsageEnabled_returnFalse() {
+        assertThat(mPowerFeatureProvider.isBatteryUsageEnabled()).isTrue();
+    }
+
+    @Test
+    public void testGetBatteryUsageListConsumePowerThreshold_return0() {
+        assertThat(mPowerFeatureProvider.getBatteryUsageListConsumePowerThreshold()).isEqualTo(0.0);
+    }
+
+    @Test
     public void testIsTypeSystem_uidRoot_returnTrue() {
         assertThat(mPowerFeatureProvider.isTypeSystem(Process.ROOT_UID, null)).isTrue();
     }
@@ -101,16 +111,6 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
-    public void testIsAdvancedUiEnabled_returnTrue() {
-        assertThat(mPowerFeatureProvider.isAdvancedUiEnabled()).isTrue();
-    }
-
-    @Test
-    public void testIsPowerAccountingToggleEnabled_returnTrue() {
-        assertThat(mPowerFeatureProvider.isPowerAccountingToggleEnabled()).isTrue();
-    }
-
-    @Test
     public void testIsSmartBatterySupported_smartBatterySupported_returnTrue() {
         when(mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_smart_battery_available)).thenReturn(true);
@@ -132,7 +132,12 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
-    public void testGetResumeChargeIntent_returnNull() {
-        assertThat(mPowerFeatureProvider.getResumeChargeIntent()).isNull();
+    public void testGetResumeChargeIntentWithoutDockDefender_returnNull() {
+        assertThat(mPowerFeatureProvider.getResumeChargeIntent(false)).isNull();
+    }
+
+    @Test
+    public void testGetResumeChargeIntentWithDockDefender_returnNull() {
+        assertThat(mPowerFeatureProvider.getResumeChargeIntent(true)).isNull();
     }
 }

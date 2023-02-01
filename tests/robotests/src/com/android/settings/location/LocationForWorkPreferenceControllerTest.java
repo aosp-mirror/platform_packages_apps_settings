@@ -97,7 +97,7 @@ public class LocationForWorkPreferenceControllerTest {
 
         verify(mUserManager)
             .setUserRestriction(UserManager.DISALLOW_SHARE_LOCATION, false, mUserHandle);
-        verify(mPreference).setSummary(R.string.switch_on_text);
+        verify(mPreference).setSummary(R.string.on);
     }
 
     @Test
@@ -109,7 +109,7 @@ public class LocationForWorkPreferenceControllerTest {
 
         verify(mUserManager)
             .setUserRestriction(UserManager.DISALLOW_SHARE_LOCATION, true, mUserHandle);
-        verify(mPreference).setSummary(R.string.switch_off_text);
+        verify(mPreference).setSummary(R.string.off);
     }
 
     @Test
@@ -147,7 +147,7 @@ public class LocationForWorkPreferenceControllerTest {
         mController.onLocationModeChanged(Settings.Secure.LOCATION_MODE_BATTERY_SAVING, false);
 
         verify(mPreference).setEnabled(true);
-        verify(mPreference).setSummary(R.string.switch_on_text);
+        verify(mPreference).setSummary(R.string.on);
     }
 
     @Test

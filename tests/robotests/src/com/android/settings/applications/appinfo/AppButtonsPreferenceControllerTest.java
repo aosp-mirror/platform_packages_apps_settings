@@ -85,10 +85,8 @@ import java.util.Set;
 public class AppButtonsPreferenceControllerTest {
 
     private static final String PACKAGE_NAME = "com.android.settings";
-    private static final String RRO_PACKAGE_NAME = "com.android.settings.overlay";
     private static final String RESOURCE_STRING = "string";
     private static final boolean ALL_USERS = false;
-    private static final boolean DISABLE_AFTER_INSTALL = true;
     private static final int REQUEST_UNINSTALL = 0;
     private static final int REQUEST_REMOVE_DEVICE_ADMIN = 1;
     private static final OverlayInfo OVERLAY_DISABLED = createFakeOverlay("overlay", false, 1);
@@ -401,14 +399,13 @@ public class AppButtonsPreferenceControllerTest {
 
     @Test
     public void uninstallPkg_intentSent() {
-        mController.uninstallPkg(PACKAGE_NAME, ALL_USERS, DISABLE_AFTER_INSTALL);
+        mController.uninstallPkg(PACKAGE_NAME, ALL_USERS);
 
         verify(mFragment).startActivityForResult(any(), eq(REQUEST_UNINSTALL));
         assertThat(
                 mUninstallIntent.getBooleanExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, true))
                 .isEqualTo(ALL_USERS);
         assertThat(mUninstallIntent.getAction()).isEqualTo(Intent.ACTION_UNINSTALL_PACKAGE);
-        assertThat(mController.mDisableAfterUninstall).isEqualTo(DISABLE_AFTER_INSTALL);
     }
 
     @Test

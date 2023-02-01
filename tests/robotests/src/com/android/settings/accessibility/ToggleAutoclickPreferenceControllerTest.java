@@ -16,18 +16,19 @@
 
 package com.android.settings.accessibility;
 
-import static android.content.Context.MODE_PRIVATE;
-
-import static com.android.settings.accessibility.ToggleAutoclickPreferenceController.AUTOCLICK_CUSTOM_MODE;
-import static com.android.settings.accessibility.ToggleAutoclickPreferenceController.AUTOCLICK_OFF_MODE;
-import static com.android.settings.accessibility.ToggleAutoclickPreferenceController.KEY_AUTOCLICK_CUSTOM_SEEKBAR;
-import static com.android.settings.accessibility.ToggleAutoclickPreferenceController.KEY_DELAY_MODE;
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+import static com.android.settings.accessibility.AutoclickUtils.KEY_DELAY_MODE;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -35,127 +36,137 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.Settings.Secure;
 
-import androidx.lifecycle.LifecycleObserver;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.accessibility.ToggleAutoclickPreferenceController.OnChangeListener;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 import com.android.settingslib.widget.SelectorWithWidgetPreference.OnClickListener;
 
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-
-import java.util.Map;
 
 /** Tests for {@link ToggleAutoclickPreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
 public class ToggleAutoclickPreferenceControllerTest {
 
+    private static final String KEY_PREF_DEFAULT = "accessibility_control_autoclick_default";
+    private static final String KEY_PREF_CUSTOM = "accessibility_control_autoclick_custom";
+    private static final String KEY_CUSTOM_SEEKBAR = "autoclick_custom_seekbar";
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
     @Mock
     private PreferenceScreen mScreen;
-
     @Mock
     private SelectorWithWidgetPreference mDelayModePref;
-
-    @Mock
-    private OnChangeListener mOnChangeListener;
-
     @Mock
     private LayoutPreference mSeekBarPref;
-
     @Mock
-    private Map<String, Integer> mAccessibilityAutoclickKeyToValueMap;
-
-    private ToggleAutoclickPreferenceController mController;
     private SharedPreferences mSharedPreferences;
-    private final String mPrefKey = "prefKey";
-    private final Context mContext = ApplicationProvider.getApplicationContext();
-
-    @Before
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
-        mController = new ToggleAutoclickPreferenceController(mContext, mPrefKey);
-        mController.mAccessibilityAutoclickKeyToValueMap = mAccessibilityAutoclickKeyToValueMap;
-        mSharedPreferences =
-                mContext.getSharedPreferences(mContext.getPackageName(), MODE_PRIVATE);
-
-        when(mScreen.findPreference(mPrefKey)).thenReturn(mDelayModePref);
-        when(mScreen.findPreference(KEY_AUTOCLICK_CUSTOM_SEEKBAR)).thenReturn(mSeekBarPref);
-        when(mAccessibilityAutoclickKeyToValueMap.get(mDelayModePref.getKey())).thenReturn(
-                AUTOCLICK_OFF_MODE);
-    }
+    @Spy
+    private Context mContext = ApplicationProvider.getApplicationContext();
+    private ToggleAutoclickPreferenceController mController;
 
     @Test
     public void getAvailabilityStatus_available() {
+        setUpController(KEY_PREF_DEFAULT);
+
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
     public void setClickListenerOnDelayModePref_whenDisplay_success() {
+        setUpController(KEY_PREF_DEFAULT);
+
         mController.displayPreference(mScreen);
 
         verify(mDelayModePref).setOnClickListener(any(OnClickListener.class));
     }
 
     @Test
-    public void constructor_hasLifecycle_addObserver() {
-        final Lifecycle lifecycle = mock(Lifecycle.class);
-        mController = new ToggleAutoclickPreferenceController(mContext, lifecycle, mPrefKey);
+    public void onStart_registerOnSharedPreferenceChangeListener() {
+        doReturn(mSharedPreferences).when(mContext).getSharedPreferences(anyString(), anyInt());
+        setUpController(KEY_PREF_DEFAULT);
 
-        verify(lifecycle).addObserver(any(LifecycleObserver.class));
+        mController.onStart();
+
+        verify(mSharedPreferences).registerOnSharedPreferenceChangeListener(mController);
+    }
+
+    @Test
+    public void onStop_unregisterOnSharedPreferenceChangeListener() {
+        doReturn(mSharedPreferences).when(mContext).getSharedPreferences(anyString(), anyInt());
+        setUpController(KEY_PREF_DEFAULT);
+
+        mController.onStop();
+
+        verify(mSharedPreferences).unregisterOnSharedPreferenceChangeListener(mController);
     }
 
     @Test
     public void onRadioButtonClicked_offMode_disableAutoClick() {
-        when(mAccessibilityAutoclickKeyToValueMap.get(mPrefKey)).thenReturn(AUTOCLICK_OFF_MODE);
-
+        setUpController(KEY_PREF_DEFAULT);
         mController.displayPreference(mScreen);
-        mController.onRadioButtonClicked(any(SelectorWithWidgetPreference.class));
-        final boolean isEnabled = Secure.getInt(mContext.getContentResolver(),
-                Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, /* def= */ 0) == 1;
-        final int delayMs = Secure.getInt(mContext.getContentResolver(),
-                Secure.ACCESSIBILITY_AUTOCLICK_DELAY, /* def= */ 0);
-        final int keyDelayMode = mSharedPreferences.getInt(KEY_DELAY_MODE, AUTOCLICK_CUSTOM_MODE);
 
-        assertThat(keyDelayMode).isEqualTo(AUTOCLICK_OFF_MODE);
-        assertThat(delayMs).isEqualTo(/* expected= */ 0);
+        mController.onRadioButtonClicked(mDelayModePref);
+
+        final boolean isEnabled = Secure.getInt(mContext.getContentResolver(),
+                Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, OFF) == ON;
+        final int delayMs = Secure.getInt(mContext.getContentResolver(),
+                Secure.ACCESSIBILITY_AUTOCLICK_DELAY, 0);
+        assertThat(delayMs).isEqualTo(0);
         assertThat(isEnabled).isFalse();
     }
 
+
     @Test
     public void onRadioButtonClicked_customMode_enableAutoClick() {
-        when(mAccessibilityAutoclickKeyToValueMap.get(mDelayModePref.getKey())).thenReturn(
-                AUTOCLICK_CUSTOM_MODE);
-        when(mAccessibilityAutoclickKeyToValueMap.get(mPrefKey)).thenReturn(AUTOCLICK_CUSTOM_MODE);
-
+        setUpController(KEY_PREF_CUSTOM);
         mController.displayPreference(mScreen);
-        mController.onRadioButtonClicked(any(SelectorWithWidgetPreference.class));
-        final boolean isEnabled = Secure.getInt(mContext.getContentResolver(),
-                Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, /* def= */ 0) == 1;
-        final int keyDelayMode = mSharedPreferences.getInt(KEY_DELAY_MODE, AUTOCLICK_CUSTOM_MODE);
 
-        assertThat(keyDelayMode).isEqualTo(AUTOCLICK_CUSTOM_MODE);
+        mController.onRadioButtonClicked(mDelayModePref);
+
+        final boolean isEnabled = Secure.getInt(mContext.getContentResolver(),
+                Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, OFF) == ON;
         assertThat(isEnabled).isTrue();
     }
 
     @Test
-    public void onRadioButtonClicked_hasListener_runOnCheckedChanged() {
-        when(mAccessibilityAutoclickKeyToValueMap.get(mDelayModePref.getKey())).thenReturn(
-                AUTOCLICK_CUSTOM_MODE);
-        when(mAccessibilityAutoclickKeyToValueMap.get(mPrefKey)).thenReturn(AUTOCLICK_CUSTOM_MODE);
-
-        mController.setOnChangeListener(mOnChangeListener);
+    public void onSharedPreferenceChanged_customMode_shouldShowCustomSeekbar() {
+        setUpController(KEY_PREF_CUSTOM);
         mController.displayPreference(mScreen);
-        mController.onRadioButtonClicked(any(SelectorWithWidgetPreference.class));
+        mController.onRadioButtonClicked(mDelayModePref);
+        when(mDelayModePref.isChecked()).thenReturn(true);
+        reset(mSeekBarPref);
 
-        verify(mOnChangeListener).onCheckedChanged(mDelayModePref);
+        mController.onSharedPreferenceChanged(mSharedPreferences, KEY_DELAY_MODE);
+
+        verify(mSeekBarPref).setVisible(true);
+    }
+
+    @Test
+    public void onSharedPreferenceChanged_offMode_shouldNotShowCustomSeekbar() {
+        setUpController(KEY_PREF_DEFAULT);
+        mController.displayPreference(mScreen);
+        mController.onRadioButtonClicked(mDelayModePref);
+        reset(mSeekBarPref);
+
+        mController.onSharedPreferenceChanged(mSharedPreferences, KEY_DELAY_MODE);
+
+        verify(mSeekBarPref, never()).setVisible(true);
+    }
+
+    private void setUpController(String preferenceKey) {
+        mController = new ToggleAutoclickPreferenceController(mContext, preferenceKey);
+        when(mScreen.findPreference(preferenceKey)).thenReturn(mDelayModePref);
+        when(mDelayModePref.getKey()).thenReturn(preferenceKey);
+        when(mScreen.findPreference(KEY_CUSTOM_SEEKBAR)).thenReturn(mSeekBarPref);
     }
 }

@@ -23,6 +23,7 @@ import android.content.Context;
 import android.os.Parcel;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
@@ -36,8 +37,6 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class LowBatteryTipTest {
 
-    private static final CharSequence SUMMARY = "Turn on Battery Saver to extend battery life";
-
     @Mock
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private Context mContext;
@@ -46,7 +45,6 @@ public class LowBatteryTipTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-
         mContext = RuntimeEnvironment.application;
         mLowBatteryTip = new LowBatteryTip(BatteryTip.StateType.NEW, false /* powerSaveModeOn */);
     }
@@ -60,21 +58,30 @@ public class LowBatteryTipTest {
         final LowBatteryTip parcelTip = new LowBatteryTip(parcel);
 
         assertThat(parcelTip.isPowerSaveModeOn()).isFalse();
-        assertThat(parcelTip.getSummary(mContext)).isEqualTo(SUMMARY);
+        assertThat(parcelTip.getSummary(mContext)).isEqualTo(
+                mContext.getString(R.string.battery_tip_low_battery_summary));
     }
 
     @Test
-    public void getSummary_tipNew_showTitle() {
+    public void updateState_stateNew_showExpectedInformation() {
         mLowBatteryTip.mState = BatteryTip.StateType.NEW;
 
-        assertThat(mLowBatteryTip.getTitle(mContext)).isEqualTo("Battery level low");
+        assertThat(mLowBatteryTip.getTitle(mContext)).isEqualTo(
+                mContext.getString(R.string.battery_tip_low_battery_title));
+        assertThat(mLowBatteryTip.getSummary(mContext)).isEqualTo(
+                mContext.getString(R.string.battery_tip_low_battery_summary));
+        assertThat(mLowBatteryTip.getIconId()).isEqualTo(R.drawable.ic_battery_status_bad_24dp);
+        assertThat(mLowBatteryTip.getIconTintColorId()).isEqualTo(R.color.battery_bad_color_light);
     }
 
     @Test
-    public void getSummary_tipNew_showSummary() {
-        mLowBatteryTip.mState = BatteryTip.StateType.NEW;
+    public void updateState_powerSaveModeOn_notShowTipItem() {
+        final LowBatteryTip tip = new LowBatteryTip(
+                BatteryTip.StateType.NEW, true /* powerSaveModeOn */);
 
-        assertThat(mLowBatteryTip.getSummary(mContext)).isEqualTo(SUMMARY);
+        tip.updateState(tip);
+
+        assertThat(tip.mState).isEqualTo(BatteryTip.StateType.INVISIBLE);
     }
 
     @Test

@@ -29,8 +29,11 @@ import android.widget.Toast;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityStatsLogUtils;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.HearingAidStatsLogUtils;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.widget.FooterPreference;
 
@@ -179,6 +182,13 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
             // If one device is connected(bonded), then close this fragment.
             finish();
             return;
+        } else if (bondState == BluetoothDevice.BOND_BONDING) {
+            // Set the bond entry where binding process starts for logging hearing aid device info
+            final int pageId = FeatureFactory.getFactory(
+                    getContext()).getMetricsFeatureProvider().getAttribution(getActivity());
+            final int bondEntry = AccessibilityStatsLogUtils.convertToHearingAidInfoBondEntry(
+                    pageId);
+            HearingAidStatsLogUtils.setBondEntryForDevice(bondEntry, cachedDevice);
         }
         if (mSelectedDevice != null && cachedDevice != null) {
             BluetoothDevice device = cachedDevice.getDevice();

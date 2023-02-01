@@ -124,7 +124,7 @@ public class PreferenceXmlParserUtilsTest {
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String entries = PreferenceXmlParserUtils.getDataEntries(mContext, attrs);
         String[] expEntries = mContext.getResources()
-                .getStringArray(R.array.app_install_location_entries);
+                .getStringArray(R.array.mvno_type_entries);
         for (String expEntry : expEntries) {
             assertThat(entries).contains(expEntry);
         }

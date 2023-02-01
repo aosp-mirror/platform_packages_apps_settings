@@ -38,6 +38,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Slog;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -678,7 +679,12 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment implem
                 if (route.isConnecting()) {
                     setSummary(R.string.wifi_display_status_connecting);
                 } else {
-                    setSummary(R.string.wifi_display_status_connected);
+                    CharSequence status = route.getStatus();
+                    if (!TextUtils.isEmpty(status)) {
+                        setSummary(status);
+                    } else {
+                        setSummary(R.string.wifi_display_status_connected);
+                    }
                 }
             } else {
                 if (isEnabled()) {

@@ -47,7 +47,6 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     private static final int PRIMARY_USER_ID = 0;
 
     private final List<String> mBaseRestrictions = new ArrayList<>();
-    private final List<String> mGuestRestrictions = new ArrayList<>();
     private final Map<String, List<EnforcingUser>> mRestrictionSources = new HashMap<>();
     private final List<UserInfo> mUserProfileInfos = new ArrayList<>();
     private final Set<Integer> mManagedProfiles = new HashSet<>();
@@ -55,6 +54,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     private boolean mIsQuietModeEnabled = false;
     private int[] profileIdsForUser = new int[0];
     private boolean mUserSwitchEnabled;
+    private Bundle mDefaultGuestUserRestriction = new Bundle();
 
     private @UserManager.UserSwitchabilityResult int mSwitchabilityStatus =
             UserManager.SWITCHABILITY_STATUS_OK;
@@ -99,14 +99,23 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
 
     @Implementation
     protected Bundle getDefaultGuestRestrictions() {
-        Bundle bundle = new Bundle();
-        mGuestRestrictions.forEach(restriction -> bundle.putBoolean(restriction, true));
-        return bundle;
+        return mDefaultGuestUserRestriction;
+    }
+
+    @Implementation
+    protected void setDefaultGuestRestrictions(Bundle restrictions) {
+        mDefaultGuestUserRestriction = restrictions;
     }
 
     public void addGuestUserRestriction(String restriction) {
-        mGuestRestrictions.add(restriction);
+        mDefaultGuestUserRestriction.putBoolean(restriction, true);
     }
+
+    public boolean hasGuestUserRestriction(String restriction, boolean expectedValue) {
+        return mDefaultGuestUserRestriction.containsKey(restriction)
+                && mDefaultGuestUserRestriction.getBoolean(restriction) == expectedValue;
+    }
+
 
     @Implementation
     protected boolean hasUserRestriction(String restrictionKey) {
@@ -225,5 +234,40 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     protected UserInfo getPrimaryUser() {
         return new UserInfo(PRIMARY_USER_ID, null, null,
                 UserInfo.FLAG_INITIALIZED | UserInfo.FLAG_ADMIN | UserInfo.FLAG_PRIMARY);
+    }
+
+    protected boolean setUserEphemeral(@UserIdInt int userId, boolean enableEphemeral) {
+        UserInfo userInfo = mUserProfileInfos.stream()
+                .filter(user -> user.id == userId)
+                .findFirst()
+                .orElse(super.getUserInfo(userId));
+
+        boolean isSuccess = false;
+        boolean isEphemeralUser =
+                        (userInfo.flags & UserInfo.FLAG_EPHEMERAL) != 0;
+        boolean isEphemeralOnCreateUser =
+                (userInfo.flags & UserInfo.FLAG_EPHEMERAL_ON_CREATE)
+                    != 0;
+        // when user is created in ephemeral mode via FLAG_EPHEMERAL
+        // its state cannot be changed.
+        // FLAG_EPHEMERAL_ON_CREATE is used to keep track of this state
+        if (!isEphemeralOnCreateUser) {
+            isSuccess = true;
+            if (isEphemeralUser != enableEphemeral) {
+                if (enableEphemeral) {
+                    userInfo.flags |= UserInfo.FLAG_EPHEMERAL;
+                } else {
+                    userInfo.flags &= ~UserInfo.FLAG_EPHEMERAL;
+                }
+            }
+        }
+        return isSuccess;
+    }
+
+    @Implementation
+    protected void setUserAdmin(@UserIdInt int userId) {
+        for (int i = 0; i < mUserProfileInfos.size(); i++) {
+            mUserProfileInfos.get(i).flags |= UserInfo.FLAG_ADMIN;
+        }
     }
 }

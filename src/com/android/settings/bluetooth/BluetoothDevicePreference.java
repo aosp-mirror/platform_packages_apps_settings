@@ -27,6 +27,7 @@ import android.graphics.drawable.Drawable;
 import android.os.UserManager;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Pair;
 import android.util.TypedValue;
 import android.view.View;
@@ -41,13 +42,13 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.GearPreference;
-import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.concurrent.RejectedExecutionException;
 
 /**
  * BluetoothDevicePreference is the preference type used to display each remote
@@ -175,6 +176,7 @@ public final class BluetoothDevicePreference extends GearPreference {
         mHideSecondTarget = hideSecondTarget;
     }
 
+    @SuppressWarnings("FutureReturnValueIgnored")
     void onPreferenceAttributesChanged() {
         Pair<Drawable, String> pair = mCachedDevice.getDrawableWithDescription();
         setIcon(pair.first);
@@ -186,9 +188,14 @@ public final class BluetoothDevicePreference extends GearPreference {
          * any preference info has changed from the previous value.
          */
         setTitle(mCachedDevice.getName());
-        // Null check is done at the framework
-        setSummary(mCachedDevice.getConnectionSummary());
-
+        try {
+            ThreadUtils.postOnBackgroundThread(() -> {
+                // Null check is done at the framework
+                ThreadUtils.postOnMainThread(() -> setSummary(getConnectionSummary()));
+            });
+        } catch (RejectedExecutionException e) {
+            Log.w(TAG, "Handler thread unavailable, skipping getConnectionSummary!");
+        }
         // Used to gray out the item
         setEnabled(!mCachedDevice.isBusy());
 
@@ -310,5 +317,13 @@ public final class BluetoothDevicePreference extends GearPreference {
             Utils.showError(getContext(), mCachedDevice.getName(),
                     R.string.bluetooth_pairing_error_message);
         }
+    }
+
+    private String getConnectionSummary() {
+        String summary = null;
+        if (mCachedDevice.getBondState() != BluetoothDevice.BOND_NONE) {
+            summary = mCachedDevice.getConnectionSummary();
+        }
+        return summary;
     }
 }

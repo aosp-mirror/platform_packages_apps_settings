@@ -18,8 +18,15 @@ package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.res.Resources;
+import android.os.Bundle;
 import android.os.Vibrator;
 import android.provider.SearchIndexableResource;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -62,6 +69,23 @@ public class VibrationSettings extends DashboardFragment {
     @Override
     protected String getLogTag() {
         return TAG;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        final View view = super.onCreateView(inflater, container, savedInstanceState);
+        final RecyclerView rv = getListView();
+        final Resources res = view.getResources();
+        final int supportedIntensities = res.getInteger(
+                R.integer.config_vibration_supported_intensity_levels);
+        if (rv != null && supportedIntensities > 1) {
+            final int bottom_padding = res.getDimensionPixelSize(
+                    R.dimen.settingslib_listPreferredItemPaddingEnd);
+            rv.setPaddingRelative(rv.getPaddingStart(), rv.getPaddingTop(), rv.getPaddingEnd(),
+                    rv.getPaddingBottom() + bottom_padding);
+        }
+        return view;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

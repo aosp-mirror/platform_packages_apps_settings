@@ -19,26 +19,24 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.accessibility.CaptioningManager;
 import android.view.accessibility.CaptioningManager.CaptionStyle;
 import android.widget.TextView;
 
 import com.android.internal.widget.SubtitleView;
 import com.android.settings.R;
 
+/** Grid preference that allows the user to pick a captioning preset type. */
 public class PresetPreference extends ListDialogPreference {
-    private static final float DEFAULT_FONT_SIZE = 32f;
 
-    private final CaptioningManager mCaptioningManager;
+    private static final float DEFAULT_FONT_SIZE = 32f;
+    private final CaptionHelper mCaptionHelper;
 
     public PresetPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mCaptionHelper = new CaptionHelper(context);
 
         setDialogLayoutResource(R.layout.grid_picker_dialog);
         setListItemLayoutResource(R.layout.preset_picker_item);
-
-        mCaptioningManager = (CaptioningManager) context.getSystemService(
-                Context.CAPTIONING_SERVICE);
     }
 
     @Override
@@ -50,17 +48,16 @@ public class PresetPreference extends ListDialogPreference {
     @Override
     protected void onBindListItem(View view, int index) {
         final View previewViewport = view.findViewById(R.id.preview_viewport);
-        final SubtitleView previewText = (SubtitleView) view.findViewById(R.id.preview);
+        final SubtitleView previewText = view.findViewById(R.id.preview);
         final int value = getValueAt(index);
-        CaptionAppearanceFragment.applyCaptionProperties(
-                mCaptioningManager, previewText, previewViewport, value);
+        mCaptionHelper.applyCaptionProperties(previewText, previewViewport, value);
 
         final float density = getContext().getResources().getDisplayMetrics().density;
         previewText.setTextSize(DEFAULT_FONT_SIZE * density);
 
         final CharSequence title = getTitleAt(index);
         if (title != null) {
-            final TextView summary = (TextView) view.findViewById(R.id.summary);
+            final TextView summary = view.findViewById(R.id.summary);
             summary.setText(title);
         }
     }

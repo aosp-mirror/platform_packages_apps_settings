@@ -83,7 +83,7 @@ public class HighlightablePreferenceGroupAdapterTest {
                 false /* highlighted*/));
         when(mAdapter.getItem(anyInt())).thenReturn(mPreference);
         mViewHolder = PreferenceViewHolder.createInstanceForTests(
-                View.inflate(mContext, R.layout.app_preference_item, null));
+                View.inflate(mContext, R.layout.preference, null));
     }
 
     @Test
@@ -129,7 +129,7 @@ public class HighlightablePreferenceGroupAdapterTest {
     }
 
     @Test
-    public void adjustInitialExpandedChildCount_hasHightlightKey_shouldExpandAllChildren() {
+    public void adjustInitialExpandedChildCount_hasHighlightKey_shouldExpandAllChildren() {
         final Bundle args = new Bundle();
         when(mFragment.getArguments()).thenReturn(args);
         args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, "testkey");
@@ -208,7 +208,7 @@ public class HighlightablePreferenceGroupAdapterTest {
     }
 
     @Test
-    public void updateBackground_reuseHightlightedRowForNormalRow_shouldResetBackgroundAndTag() {
+    public void updateBackground_reuseHighlightedRowForNormalRow_shouldResetBackgroundAndTag() {
         ReflectionHelpers.setField(mAdapter, "mHighlightPosition", 10);
         mViewHolder.itemView.setTag(R.id.preference_highlighted, true);
 

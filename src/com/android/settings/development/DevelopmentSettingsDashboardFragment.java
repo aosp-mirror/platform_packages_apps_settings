@@ -60,6 +60,7 @@ import com.android.settings.development.bluetooth.BluetoothQualityDialogPreferen
 import com.android.settings.development.bluetooth.BluetoothSampleRateDialogPreferenceController;
 import com.android.settings.development.qstile.DevelopmentTiles;
 import com.android.settings.development.storage.SharedDataPreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.widget.SettingsMainSwitchBar;
@@ -80,8 +81,9 @@ import java.util.List;
 public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFragment
         implements OnMainSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost,
         AdbClearKeysDialogHost, LogPersistDialogHost,
-        BluetoothHwOffloadRebootDialog.OnHwOffloadDialogListener,
-        AbstractBluetoothPreferenceController.Callback {
+        BluetoothRebootDialog.OnRebootDialogListener,
+        AbstractBluetoothPreferenceController.Callback,
+        NfcRebootDialog.OnNfcRebootDialogConfirmedListener {
 
     private static final String TAG = "DevSettingsDashboard";
 
@@ -299,15 +301,26 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 final BluetoothLeAudioHwOffloadPreferenceController leAudioController =
                         getDevelopmentOptionsController(
                                 BluetoothLeAudioHwOffloadPreferenceController.class);
+                final NfcSnoopLogPreferenceController nfcSnoopLogController =
+                        getDevelopmentOptionsController(
+                                NfcSnoopLogPreferenceController.class);
+                final NfcVerboseVendorLogPreferenceController nfcVerboseLogController =
+                        getDevelopmentOptionsController(
+                                NfcVerboseVendorLogPreferenceController.class);
                 // If hardware offload isn't default value, we must reboot after disable
                 // developer options. Show a dialog for the user to confirm.
                 if ((a2dpController == null || a2dpController.isDefaultValue())
-                        && (leAudioController == null || leAudioController.isDefaultValue())) {
+                        && (leAudioController == null || leAudioController.isDefaultValue())
+                        && (nfcSnoopLogController == null || nfcSnoopLogController.isDefaultValue())
+                        && (nfcVerboseLogController == null
+                        || nfcVerboseLogController.isDefaultValue())) {
                     disableDeveloperOptions();
                 } else {
                     DisableDevSettingsDialogFragment.show(this /* host */);
                 }
             }
+            FeatureFactory.getFactory(
+                    getContext()).getSearchFeatureProvider().sendPreIndexIntent(getContext());
         }
     }
 
@@ -362,27 +375,59 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     @Override
-    public void onHwOffloadDialogConfirmed() {
+    public void onRebootDialogConfirmed() {
         final BluetoothA2dpHwOffloadPreferenceController a2dpController =
                 getDevelopmentOptionsController(BluetoothA2dpHwOffloadPreferenceController.class);
-        a2dpController.onHwOffloadDialogConfirmed();
+        a2dpController.onRebootDialogConfirmed();
 
         final BluetoothLeAudioHwOffloadPreferenceController leAudioController =
                 getDevelopmentOptionsController(
-                    BluetoothLeAudioHwOffloadPreferenceController.class);
-        leAudioController.onHwOffloadDialogConfirmed();
+                        BluetoothLeAudioHwOffloadPreferenceController.class);
+        leAudioController.onRebootDialogConfirmed();
+
+        final BluetoothLeAudioPreferenceController leAudioFeatureController =
+                getDevelopmentOptionsController(
+                        BluetoothLeAudioPreferenceController.class);
+        leAudioFeatureController.onRebootDialogConfirmed();
     }
 
     @Override
-    public void onHwOffloadDialogCanceled() {
+    public void onRebootDialogCanceled() {
         final BluetoothA2dpHwOffloadPreferenceController a2dpController =
                 getDevelopmentOptionsController(BluetoothA2dpHwOffloadPreferenceController.class);
-        a2dpController.onHwOffloadDialogCanceled();
+        a2dpController.onRebootDialogCanceled();
 
         final BluetoothLeAudioHwOffloadPreferenceController leAudioController =
                 getDevelopmentOptionsController(
-                    BluetoothLeAudioHwOffloadPreferenceController.class);
-        leAudioController.onHwOffloadDialogCanceled();
+                        BluetoothLeAudioHwOffloadPreferenceController.class);
+        leAudioController.onRebootDialogCanceled();
+
+        final BluetoothLeAudioPreferenceController leAudioFeatureController =
+                getDevelopmentOptionsController(
+                        BluetoothLeAudioPreferenceController.class);
+        leAudioFeatureController.onRebootDialogCanceled();
+    }
+
+    @Override
+    public void onNfcRebootDialogConfirmed() {
+        final NfcSnoopLogPreferenceController controller =
+                getDevelopmentOptionsController(NfcSnoopLogPreferenceController.class);
+        controller.onNfcRebootDialogConfirmed();
+
+        final NfcVerboseVendorLogPreferenceController vendorLogController =
+                getDevelopmentOptionsController(NfcVerboseVendorLogPreferenceController.class);
+        vendorLogController.onNfcRebootDialogConfirmed();
+    }
+
+    @Override
+    public void onNfcRebootDialogCanceled() {
+        final NfcSnoopLogPreferenceController controller =
+                getDevelopmentOptionsController(NfcSnoopLogPreferenceController.class);
+        controller.onNfcRebootDialogCanceled();
+
+        final NfcVerboseVendorLogPreferenceController vendorLogController =
+                getDevelopmentOptionsController(NfcVerboseVendorLogPreferenceController.class);
+        vendorLogController.onNfcRebootDialogCanceled();
     }
 
     @Override
@@ -540,10 +585,13 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothAbsoluteVolumePreferenceController(context));
         controllers.add(new BluetoothAvrcpVersionPreferenceController(context));
         controllers.add(new BluetoothMapVersionPreferenceController(context));
+        controllers.add(new BluetoothLeAudioPreferenceController(context, fragment));
         controllers.add(new BluetoothA2dpHwOffloadPreferenceController(context, fragment));
         controllers.add(new BluetoothLeAudioHwOffloadPreferenceController(context, fragment));
         controllers.add(new BluetoothMaxConnectedAudioDevicesPreferenceController(context));
         controllers.add(new NfcStackDebugLogPreferenceController(context));
+        controllers.add(new NfcSnoopLogPreferenceController(context, fragment));
+        controllers.add(new NfcVerboseVendorLogPreferenceController(context, fragment));
         controllers.add(new ShowTapsPreferenceController(context));
         controllers.add(new PointerLocationPreferenceController(context));
         controllers.add(new ShowSurfaceUpdatesPreferenceController(context));
@@ -608,6 +656,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new StylusHandwritingPreferenceController(context));
         controllers.add(new IngressRateLimitPreferenceController((context)));
         controllers.add(new BackAnimationPreferenceController(context, fragment));
+        controllers.add(new PhantomProcessPreferenceController(context));
 
         return controllers;
     }

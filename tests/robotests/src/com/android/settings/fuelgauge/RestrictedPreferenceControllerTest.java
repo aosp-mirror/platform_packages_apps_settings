@@ -69,7 +69,19 @@ public class RestrictedPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_isSystemOrDefaultApp_prefChecked() {
+    public void testUpdateState_isSystemOrDefaultAppAndRestrictedStates_prefChecked() {
+        when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mockBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
+        when(mockBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
+                BatteryOptimizeUtils.MODE_RESTRICTED);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isChecked()).isTrue();
+    }
+
+    @Test
+    public void testUpdateState_isSystemOrDefaultApp_prefUnchecked() {
         when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
         when(mockBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
 

@@ -119,10 +119,9 @@
             settings:controller="com.android.settings.accessibility.LiveCaptionPreferenceController"/>
 
         <Preference
-            android:fragment="com.android.settings.accessibility.CaptionPropertiesFragment"
+            android:fragment="com.android.settings.accessibility.CaptioningPropertiesFragment"
             android:key="captioning_preference_screen"
             android:icon="@drawable/ic_captioning"
-            android:persistent="false"
             android:title="@string/accessibility_captioning_title"
             settings:controller="com.android.settings.accessibility.CaptioningPreferenceController"/>
 
@@ -169,6 +168,11 @@
             settings:searchable="true"/>
 
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="speech_category"
+        android:persistent="false"
+        android:title="@string/speech_category_title"/>
 
     <PreferenceCategory
         android:persistent="false"

@@ -16,8 +16,6 @@
 
 package com.android.settings.sim;
 
-import static android.content.Context.MODE_PRIVATE;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,6 +33,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.telephony.SubscriptionActionDialogActivity;
 
 import java.util.List;
@@ -60,10 +59,19 @@ public class SimDialogActivity extends FragmentActivity {
     public static final int SMS_PICK_FOR_MESSAGE = 4;
     // Dismiss the current dialog and finish the activity.
     public static final int PICK_DISMISS = 5;
+    // Show auto data switch dialog(when user enables multi-SIM)
+    public static final int ENABLE_AUTO_DATA_SWITCH = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!SubscriptionUtil.isSimHardwareVisible(this)) {
+            Log.d(TAG, "Not support on device without SIM.");
+            finish();
+            return;
+        }
+        SimDialogProhibitService.supportDismiss(this);
 
         getWindow().addSystemFlags(
                 WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
@@ -114,7 +122,7 @@ public class SimDialogActivity extends FragmentActivity {
     private SimDialogFragment createFragment(int dialogType) {
         switch (dialogType) {
             case DATA_PICK:
-                return getDataPickDialogFramgent();
+                return getDataPickDialogFragment();
             case CALLS_PICK:
                 return CallsSimListDialogFragment.newInstance(dialogType,
                         R.string.select_sim_for_calls,
@@ -133,12 +141,14 @@ public class SimDialogActivity extends FragmentActivity {
                 return SimListDialogFragment.newInstance(dialogType, R.string.select_sim_for_sms,
                         false /* includeAskEveryTime */,
                         false /* isCancelItemShowed */);
+            case ENABLE_AUTO_DATA_SWITCH:
+                return EnableAutoDataSwitchDialogFragment.newInstance();
             default:
                 throw new IllegalArgumentException("Invalid dialog type " + dialogType + " sent.");
         }
     }
 
-    private SimDialogFragment getDataPickDialogFramgent() {
+    private SimDialogFragment getDataPickDialogFragment() {
         if (SubscriptionManager.getDefaultDataSubscriptionId()
                 == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             return SimListDialogFragment.newInstance(DATA_PICK, R.string.select_sim_for_data,
@@ -173,15 +183,40 @@ public class SimDialogActivity extends FragmentActivity {
                 intent.putExtra(RESULT_SUB_ID, subId);
                 setResult(Activity.RESULT_OK, intent);
                 break;
+            case ENABLE_AUTO_DATA_SWITCH:
+                onEnableAutoDataSwitch(subId);
+                break;
             default:
                 throw new IllegalArgumentException(
                         "Invalid dialog type " + dialogType + " sent.");
         }
     }
 
+    /**
+     * Show dialog prompting the user to enable auto data switch
+     */
+    public void showEnableAutoDataSwitchDialog() {
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+        SimDialogFragment fragment = createFragment(ENABLE_AUTO_DATA_SWITCH);
+        fragment.show(fragmentManager, Integer.toString(ENABLE_AUTO_DATA_SWITCH));
+    }
+
+    /**
+     * @param subId The sub Id to enable auto data switch
+     */
+    public void onEnableAutoDataSwitch(int subId) {
+        Log.d(TAG, "onEnableAutoDataSwitch subId:" + subId);
+        final TelephonyManager telephonyManager = getSystemService(
+                TelephonyManager.class).createForSubscriptionId(subId);
+        telephonyManager.setMobileDataPolicyEnabled(
+                TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH, true);
+    }
+
     public void onFragmentDismissed(SimDialogFragment simDialogFragment) {
         final List<Fragment> fragments = getSupportFragmentManager().getFragments();
-        if (fragments.size() == 1 && fragments.get(0) == simDialogFragment) {
+        if (fragments.size() == 1 && fragments.get(0) == simDialogFragment
+                || simDialogFragment.getDialogType() == ENABLE_AUTO_DATA_SWITCH) {
+            Log.d(TAG, "onFragmentDismissed dialogType:" + simDialogFragment.getDialogType());
             finishAndRemoveTask();
         }
     }
@@ -192,7 +227,8 @@ public class SimDialogActivity extends FragmentActivity {
                 TelephonyManager.class).createForSubscriptionId(subId);
         subscriptionManager.setDefaultDataSubId(subId);
         if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            telephonyManager.setDataEnabled(true);
+            telephonyManager.setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER,
+                    true);
             Toast.makeText(this, R.string.data_switch_started, Toast.LENGTH_LONG).show();
         }
     }
@@ -224,5 +260,16 @@ public class SimDialogActivity extends FragmentActivity {
             }
         }
         return null;
+    }
+
+    /*
+     * Force dismiss this Activity.
+     */
+    protected void forceClose() {
+        if (isFinishing() || isDestroyed()) {
+            return;
+        }
+        Log.d(TAG, "Dismissed by Service");
+        finishAndRemoveTask();
     }
 }

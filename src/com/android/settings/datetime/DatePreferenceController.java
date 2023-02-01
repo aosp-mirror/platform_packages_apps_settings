@@ -16,13 +16,18 @@
 
 package com.android.settings.datetime;
 
-import android.app.Activity;
+import static android.app.time.Capabilities.CAPABILITY_POSSESSED;
+
 import android.app.DatePickerDialog;
+import android.app.time.TimeCapabilities;
+import android.app.time.TimeManager;
 import android.app.timedetector.ManualTimeSuggestion;
 import android.app.timedetector.TimeDetector;
+import android.app.timedetector.TimeDetectorHelper;
 import android.content.Context;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.widget.DatePicker;
 
 import androidx.annotation.VisibleForTesting;
@@ -43,16 +48,16 @@ public class DatePreferenceController extends AbstractPreferenceController
 
     public static final int DIALOG_DATEPICKER = 0;
 
+    private static final String TAG = "DatePreferenceController";
     private static final String KEY_DATE = "date";
 
     private final DatePreferenceHost mHost;
-    private final AutoTimePreferenceController mAutoTimePreferenceController;
+    private final TimeManager mTimeManager;
 
-    public DatePreferenceController(Context context, DatePreferenceHost host,
-            AutoTimePreferenceController autoTimePreferenceController) {
+    public DatePreferenceController(Context context, DatePreferenceHost host) {
         super(context);
         mHost = host;
-        mAutoTimePreferenceController = autoTimePreferenceController;
+        mTimeManager = context.getSystemService(TimeManager.class);
     }
 
     @Override
@@ -68,7 +73,8 @@ public class DatePreferenceController extends AbstractPreferenceController
         final Calendar now = Calendar.getInstance();
         preference.setSummary(DateFormat.getLongDateFormat(mContext).format(now.getTime()));
         if (!((RestrictedPreference) preference).isDisabledByAdmin()) {
-            preference.setEnabled(!mAutoTimePreferenceController.isEnabled());
+            boolean enableManualDateSelection = isEnabled();
+            preference.setEnabled(enableManualDateSelection);
         }
     }
 
@@ -92,22 +98,32 @@ public class DatePreferenceController extends AbstractPreferenceController
         mHost.updateTimeAndDateDisplay(mContext);
     }
 
-    public DatePickerDialog buildDatePicker(Activity activity) {
+    /**
+     * Builds a {@link DatePickerDialog} that can be used to request the current date from the user.
+     */
+    public DatePickerDialog buildDatePicker(
+            Context parentContext, TimeDetectorHelper timeDetectorHelper) {
         final Calendar calendar = Calendar.getInstance();
-        final DatePickerDialog d = new DatePickerDialog(
-                activity,
+        final DatePickerDialog dialog = new DatePickerDialog(
+                parentContext,
                 this,
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH));
-        // The system clock can't represent dates outside this range.
+
+        // Limit the dates the user can pick to a sensible range.
+        DatePicker datePicker = dialog.getDatePicker();
+
         calendar.clear();
-        calendar.set(2007, Calendar.JANUARY, 1);
-        d.getDatePicker().setMinDate(calendar.getTimeInMillis());
+        int minYear = timeDetectorHelper.getManualDateSelectionYearMin();
+        calendar.set(minYear, Calendar.JANUARY, 1);
+        datePicker.setMinDate(calendar.getTimeInMillis());
+
+        int maxYear = timeDetectorHelper.getManualDateSelectionYearMax();
         calendar.clear();
-        calendar.set(2037, Calendar.DECEMBER, 31);
-        d.getDatePicker().setMaxDate(calendar.getTimeInMillis());
-        return d;
+        calendar.set(maxYear, Calendar.DECEMBER, 31);
+        datePicker.setMaxDate(calendar.getTimeInMillis());
+        return dialog;
     }
 
     @VisibleForTesting
@@ -117,13 +133,28 @@ public class DatePreferenceController extends AbstractPreferenceController
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, day);
-        long when = Math.max(c.getTimeInMillis(), DatePreferenceHost.MIN_DATE);
+        long when = c.getTimeInMillis();
 
-        if (when / 1000 < Integer.MAX_VALUE) {
-            TimeDetector timeDetector = mContext.getSystemService(TimeDetector.class);
-            ManualTimeSuggestion manualTimeSuggestion =
-                    TimeDetector.createManualTimeSuggestion(when, "Settings: Set date");
-            timeDetector.suggestManualTime(manualTimeSuggestion);
+        TimeDetector timeDetector = mContext.getSystemService(TimeDetector.class);
+        ManualTimeSuggestion manualTimeSuggestion =
+                TimeDetector.createManualTimeSuggestion(when, "Settings: Set date");
+        boolean success = timeDetector.suggestManualTime(manualTimeSuggestion);
+        if (!success) {
+            // This implies the system server is applying tighter bounds than the settings app or
+            // the date/time cannot be set for other reasons, e.g. perhaps "auto time" is turned on.
+            Log.w(TAG, "Unable to set date with suggestion=" + manualTimeSuggestion);
         }
+    }
+
+    /**
+     * Returns whether selecting the preference should prompt for the user to enter the date
+     * manually. Exposed as public so that the time controller can easily share the same logic as
+     * the rules are identical for time.
+     */
+    public boolean isEnabled() {
+        TimeCapabilities timeZoneCapabilities =
+                mTimeManager.getTimeCapabilitiesAndConfig().getCapabilities();
+        int suggestManualTimeCapability = timeZoneCapabilities.getSetManualTimeCapability();
+        return suggestManualTimeCapability == CAPABILITY_POSSESSED;
     }
 }

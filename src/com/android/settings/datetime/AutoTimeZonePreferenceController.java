@@ -16,14 +16,24 @@
 
 package com.android.settings.datetime;
 
-import android.content.Context;
-import android.provider.Settings;
+import static android.app.time.Capabilities.CAPABILITY_NOT_ALLOWED;
+import static android.app.time.Capabilities.CAPABILITY_NOT_APPLICABLE;
+import static android.app.time.Capabilities.CAPABILITY_NOT_SUPPORTED;
+import static android.app.time.Capabilities.CAPABILITY_POSSESSED;
 
+import android.app.time.TimeManager;
+import android.app.time.TimeZoneCapabilities;
+import android.app.time.TimeZoneCapabilitiesAndConfig;
+import android.app.time.TimeZoneConfiguration;
+import android.content.Context;
+
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 public class AutoTimeZonePreferenceController extends AbstractPreferenceController
@@ -33,17 +43,37 @@ public class AutoTimeZonePreferenceController extends AbstractPreferenceControll
 
     private final boolean mIsFromSUW;
     private final UpdateTimeAndDateCallback mCallback;
+    private final TimeManager mTimeManager;
 
     public AutoTimeZonePreferenceController(Context context, UpdateTimeAndDateCallback callback,
             boolean isFromSUW) {
         super(context);
+        mTimeManager = context.getSystemService(TimeManager.class);
         mCallback = callback;
         mIsFromSUW = isFromSUW;
     }
 
     @Override
     public boolean isAvailable() {
-        return !(Utils.isWifiOnly(mContext) || mIsFromSUW);
+        if (mIsFromSUW) {
+            return false;
+        }
+
+        TimeZoneCapabilities timeZoneCapabilities =
+                getTimeZoneCapabilitiesAndConfig().getCapabilities();
+        int capability = timeZoneCapabilities.getConfigureAutoDetectionEnabledCapability();
+
+        // The preference only has two states: present and not present. The preference is never
+        // present but disabled.
+        if (capability == CAPABILITY_NOT_SUPPORTED
+                || capability == CAPABILITY_NOT_ALLOWED
+                || capability == CAPABILITY_NOT_APPLICABLE) {
+            return false;
+        } else if (capability == CAPABILITY_POSSESSED) {
+            return true;
+        } else {
+            throw new IllegalStateException("Unknown capability=" + capability);
+        }
     }
 
     @Override
@@ -62,14 +92,41 @@ public class AutoTimeZonePreferenceController extends AbstractPreferenceControll
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean autoZoneEnabled = (Boolean) newValue;
-        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AUTO_TIME_ZONE,
-                autoZoneEnabled ? 1 : 0);
+        TimeZoneConfiguration configuration = new TimeZoneConfiguration.Builder()
+                .setAutoDetectionEnabled(autoZoneEnabled)
+                .build();
+        boolean result = mTimeManager.updateTimeZoneConfiguration(configuration);
+
         mCallback.updateTimeAndDateDisplay(mContext);
-        return true;
+        return result;
     }
 
-    public boolean isEnabled() {
-        return isAvailable() && Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.AUTO_TIME_ZONE, 0) > 0;
+    @Override
+    public CharSequence getSummary() {
+        // If auto time zone cannot enable telephony fallback and is capable of location, then auto
+        // time zone must use location.
+        if (LocationProviderStatusPreferenceController.hasLocationTimeZoneNoTelephonyFallback(
+                mTimeManager.getTimeZoneCapabilitiesAndConfig().getDetectorStatus())) {
+            return mContext.getResources().getString(R.string.auto_zone_requires_location_summary);
+        }
+        // If the user has a dedicated toggle to control location use, the summary can
+        // be empty because the use of location is explicit.
+        return "";
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        refreshSummary(screen.findPreference(getPreferenceKey()));
+    }
+
+    @VisibleForTesting
+    boolean isEnabled() {
+        TimeZoneConfiguration config = getTimeZoneCapabilitiesAndConfig().getConfiguration();
+        return config.isAutoDetectionEnabled();
+    }
+
+    private TimeZoneCapabilitiesAndConfig getTimeZoneCapabilitiesAndConfig() {
+        return mTimeManager.getTimeZoneCapabilitiesAndConfig();
     }
 }

@@ -146,7 +146,7 @@ public class ChooseLockGenericTest {
 
     @Test
     public void updatePreferencesOrFinish_passwordTypeSetPinNotFbe_shouldNotStartChooseLock() {
-        ShadowStorageManager.setIsFileEncryptedNativeOrEmulated(false);
+        ShadowStorageManager.setIsFileEncrypted(false);
         Intent intent = new Intent().putExtra(
                 LockPatternUtils.PASSWORD_TYPE_KEY,
                 DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
@@ -159,7 +159,7 @@ public class ChooseLockGenericTest {
 
     @Test
     public void updatePreferencesOrFinish_footerPreferenceAddedHighComplexityText() {
-        ShadowStorageManager.setIsFileEncryptedNativeOrEmulated(false);
+        ShadowStorageManager.setIsFileEncrypted(false);
         Intent intent = new Intent()
                 .putExtra(EXTRA_KEY_CALLER_APP_NAME, "app name")
                 .putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_HIGH);
@@ -175,7 +175,7 @@ public class ChooseLockGenericTest {
 
     @Test
     public void updatePreferencesOrFinish_footerPreferenceAddedMediumComplexityText() {
-        ShadowStorageManager.setIsFileEncryptedNativeOrEmulated(false);
+        ShadowStorageManager.setIsFileEncrypted(false);
         Intent intent = new Intent()
                 .putExtra(EXTRA_KEY_CALLER_APP_NAME, "app name")
                 .putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_MEDIUM);
@@ -191,7 +191,7 @@ public class ChooseLockGenericTest {
 
     @Test
     public void updatePreferencesOrFinish_footerPreferenceAddedLowComplexityText() {
-        ShadowStorageManager.setIsFileEncryptedNativeOrEmulated(false);
+        ShadowStorageManager.setIsFileEncrypted(false);
         Intent intent = new Intent()
                 .putExtra(EXTRA_KEY_CALLER_APP_NAME, "app name")
                 .putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_LOW);
@@ -207,7 +207,7 @@ public class ChooseLockGenericTest {
 
     @Test
     public void updatePreferencesOrFinish_footerPreferenceAddedNoneComplexityText() {
-        ShadowStorageManager.setIsFileEncryptedNativeOrEmulated(false);
+        ShadowStorageManager.setIsFileEncrypted(false);
         Intent intent = new Intent()
                 .putExtra(EXTRA_KEY_CALLER_APP_NAME, "app name")
                 .putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_NONE);
@@ -250,17 +250,6 @@ public class ChooseLockGenericTest {
                 SearchFeatureProvider.REQUEST_CODE, Activity.RESULT_OK, null /* data */);
 
         assertThat(mActivity.isFinishing()).isFalse();
-    }
-
-    @Test
-    public void onActivityResult_requestcode101_shouldFinish() {
-        initActivity(null);
-
-        mFragment.onActivityResult(
-                ChooseLockGenericFragment.ENABLE_ENCRYPTION_REQUEST, Activity.RESULT_OK,
-                null /* data */);
-
-        assertThat(mActivity.isFinishing()).isTrue();
     }
 
     @Test
@@ -389,7 +378,7 @@ public class ChooseLockGenericTest {
 
     @Test
     public void updatePreferencesOrFinish_ComplexityIsReadFromDPM() {
-        ShadowStorageManager.setIsFileEncryptedNativeOrEmulated(false);
+        ShadowStorageManager.setIsFileEncrypted(false);
         ShadowLockPatternUtils.setRequiredPasswordComplexity(PASSWORD_COMPLEXITY_HIGH);
 
         initActivity(null);
@@ -405,7 +394,7 @@ public class ChooseLockGenericTest {
 
     @Test
     public void updatePreferencesOrFinish_ComplexityIsMergedWithDPM() {
-        ShadowStorageManager.setIsFileEncryptedNativeOrEmulated(false);
+        ShadowStorageManager.setIsFileEncrypted(false);
         ShadowLockPatternUtils.setRequiredPasswordComplexity(PASSWORD_COMPLEXITY_HIGH);
         Intent intent = new Intent()
                 .putExtra(EXTRA_KEY_CALLER_APP_NAME, "app name")
@@ -425,7 +414,7 @@ public class ChooseLockGenericTest {
 
     @Test
     public void updatePreferencesOrFinish_ComplexityIsMergedWithDPM_AppIsHigher() {
-        ShadowStorageManager.setIsFileEncryptedNativeOrEmulated(false);
+        ShadowStorageManager.setIsFileEncrypted(false);
         ShadowLockPatternUtils.setRequiredPasswordComplexity(PASSWORD_COMPLEXITY_LOW);
         Intent intent = new Intent()
                 .putExtra(EXTRA_KEY_CALLER_APP_NAME, "app name")

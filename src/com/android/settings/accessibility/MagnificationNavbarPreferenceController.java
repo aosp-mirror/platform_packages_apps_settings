@@ -94,8 +94,7 @@ public class MagnificationNavbarPreferenceController extends TogglePreferenceCon
             resId = R.string.accessibility_screen_magnification_navbar_short_summary;
         } else {
             final boolean enabled = isChecked();
-            resId = (enabled ? R.string.accessibility_feature_state_on :
-                    R.string.accessibility_feature_state_off);
+            resId = (enabled ? R.string.on : R.string.off);
         }
         return mContext.getText(resId);
     }

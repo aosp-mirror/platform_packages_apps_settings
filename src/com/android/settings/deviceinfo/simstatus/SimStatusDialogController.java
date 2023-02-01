@@ -46,7 +46,6 @@ import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyDisplayInfo;
 import android.telephony.TelephonyManager;
-import android.telephony.UiccCardInfo;
 import android.telephony.euicc.EuiccManager;
 import android.telephony.ims.ImsException;
 import android.telephony.ims.ImsMmTelManager;
@@ -63,11 +62,8 @@ import com.android.settings.R;
 import com.android.settingslib.DeviceInfoUtils;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Controller for Sim Status information within the About Phone Settings page.
@@ -102,10 +98,6 @@ public class SimStatusDialogController implements LifecycleObserver {
     final static int ICCID_INFO_LABEL_ID = R.id.icc_id_label;
     @VisibleForTesting
     final static int ICCID_INFO_VALUE_ID = R.id.icc_id_value;
-    @VisibleForTesting
-    final static int EID_INFO_LABEL_ID = R.id.esim_id_label;
-    @VisibleForTesting
-    final static int EID_INFO_VALUE_ID = R.id.esim_id_value;
     @VisibleForTesting
     final static int IMS_REGISTRATION_STATE_LABEL_ID = R.id.ims_reg_state_label;
     @VisibleForTesting
@@ -234,8 +226,6 @@ public class SimStatusDialogController implements LifecycleObserver {
     }
 
     public void initialize() {
-        requestForUpdateEid();
-
         if (mSubscriptionInfo == null) {
             return;
         }
@@ -295,7 +285,8 @@ public class SimStatusDialogController implements LifecycleObserver {
         if (mShowLatestAreaInfo) {
             updateAreaInfoText();
             mContext.registerReceiver(mAreaInfoReceiver,
-                    new IntentFilter(CellBroadcastIntents.ACTION_AREA_INFO_UPDATED));
+                    new IntentFilter(CellBroadcastIntents.ACTION_AREA_INFO_UPDATED),
+                    Context.RECEIVER_EXPORTED/*UNAUDITED*/);
         }
 
         mIsRegisteredListener = true;
@@ -611,62 +602,6 @@ public class SimStatusDialogController implements LifecycleObserver {
             mDialog.removeSettingFromScreen(ICCID_INFO_VALUE_ID);
         } else {
             mDialog.setText(ICCID_INFO_VALUE_ID, getTelephonyManager().getSimSerialNumber());
-        }
-    }
-
-    @VisibleForTesting
-    protected void requestForUpdateEid() {
-        ThreadUtils.postOnBackgroundThread(() -> {
-            final AtomicReference<String> eid = getEid(mSlotIndex);
-            ThreadUtils.postOnMainThread(() -> updateEid(eid));
-        });
-    }
-
-    @VisibleForTesting
-    public AtomicReference<String> getEid(int slotIndex) {
-        boolean shouldHaveEid = false;
-        String eid = null;
-        if (getTelephonyManager().getActiveModemCount() > MAX_PHONE_COUNT_SINGLE_SIM) {
-            // Get EID per-SIM in multi-SIM mode
-            final Map<Integer, Integer> mapping = mTelephonyManager
-                    .getLogicalToPhysicalSlotMapping();
-            final int pSlotId = mapping.getOrDefault(slotIndex,
-                    SubscriptionManager.INVALID_SIM_SLOT_INDEX);
-
-            if (pSlotId != SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
-                final List<UiccCardInfo> infos = getTelephonyManager().getUiccCardsInfo();
-
-                for (UiccCardInfo info : infos) {
-                    if (info.getPhysicalSlotIndex() == pSlotId) {
-                        if (info.isEuicc()) {
-                            shouldHaveEid = true;
-                            eid = info.getEid();
-                            if (TextUtils.isEmpty(eid)) {
-                                eid = mEuiccManager.createForCardId(info.getCardId()).getEid();
-                            }
-                        }
-                        break;
-                    }
-                }
-            }
-        } else if (mEuiccManager.isEnabled()) {
-            // Get EID of default eSIM in single-SIM mode
-            shouldHaveEid = true;
-            eid = mEuiccManager.getEid();
-        }
-        if ((!shouldHaveEid) && (eid == null)) {
-            return null;
-        }
-        return new AtomicReference<String>(eid);
-    }
-
-    @VisibleForTesting
-    protected void updateEid(AtomicReference<String> eid) {
-        if (eid == null) {
-            mDialog.removeSettingFromScreen(EID_INFO_LABEL_ID);
-            mDialog.removeSettingFromScreen(EID_INFO_VALUE_ID);
-        } else if (eid.get() != null) {
-            mDialog.setText(EID_INFO_VALUE_ID, eid.get());
         }
     }
 

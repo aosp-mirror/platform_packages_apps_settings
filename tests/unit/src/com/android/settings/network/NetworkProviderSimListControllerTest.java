@@ -28,22 +28,27 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Looper;
-import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
 import androidx.preference.PreferenceManager;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.R;
 import com.android.settings.testutils.ResourcesUtils;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -53,19 +58,30 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
 public class NetworkProviderSimListControllerTest {
 
-    private static final int SUB_ID_1 = 1;
+    private static final String SUB_ID_1 = "1";
+    private static final String SUB_ID_2 = "2";
     private static final String KEY_PREFERENCE_SIM_LIST = "provider_model_sim_list";
+    private static final String KEY_PREFERENCE_CATEGORY_SIM = "provider_model_sim_category";
     private static final String DISPLAY_NAME_1 = "Sub 1";
+    private static final String DISPLAY_NAME_2 = "Sub 2";
+    private static final String SUB_MCC_1 = "123";
+    private static final String SUB_MNC_1 = "456";
+    private static final String SUB_MCC_2 = "223";
+    private static final String SUB_MNC_2 = "456";
+    private static final String SUB_COUNTRY_ISO_1 = "Sub 1";
+    private static final String SUB_COUNTRY_ISO_2 = "Sub 2";
 
     @Mock
-    private SubscriptionManager mSubscriptionManager;
+    private SubscriptionInfoEntity mSubInfo1;
     @Mock
-    private SubscriptionInfo mSubscriptionInfo;
+    private SubscriptionInfoEntity mSubInfo2;
+    @Mock
+    private SubscriptionManager mSubscriptionManager;
     @Mock
     private Lifecycle mLifecycle;
     @Mock
@@ -74,10 +90,11 @@ public class NetworkProviderSimListControllerTest {
 
     private MockNetworkProviderSimListController mController;
     private PreferenceManager mPreferenceManager;
+    private PreferenceCategory mPreferenceCategory;
     private PreferenceScreen mPreferenceScreen;
-    private Preference mPreference;
-
+    private RestrictedPreference mPreference;
     private Context mContext;
+    private List<SubscriptionInfoEntity> mSubscriptionInfoEntityList = new ArrayList<>();
 
     /**
      * Mock the NetworkProviderSimListController that allows one to set a default voice,
@@ -86,41 +103,21 @@ public class NetworkProviderSimListControllerTest {
     @SuppressWarnings("ClassCanBeStatic")
     private class MockNetworkProviderSimListController extends
             com.android.settings.network.NetworkProviderSimListController {
-        public MockNetworkProviderSimListController(Context context, Lifecycle lifecycle) {
-            super(context, lifecycle);
+        public MockNetworkProviderSimListController(Context context, Lifecycle lifecycle,
+        LifecycleOwner lifecycleOwner) {
+            super(context, lifecycle, lifecycleOwner);
         }
 
-        private int mDefaultVoiceSubscriptionId;
-        private int mDefaultSmsSubscriptionId;
-        private int mDefaultDataSubscriptionId;
+        private List<SubscriptionInfoEntity> mSubscriptionInfoEntity;
 
         @Override
-        protected int getDefaultVoiceSubscriptionId() {
-            return mDefaultVoiceSubscriptionId;
+        protected List<SubscriptionInfoEntity> getAvailablePhysicalSubscriptions() {
+            return mSubscriptionInfoEntity;
         }
 
-        @Override
-        protected int getDefaultSmsSubscriptionId() {
-            return mDefaultSmsSubscriptionId;
+        public void setSubscriptionInfoList(List<SubscriptionInfoEntity> list) {
+            mSubscriptionInfoEntity = list;
         }
-
-        @Override
-        protected int getDefaultDataSubscriptionId() {
-            return mDefaultDataSubscriptionId;
-        }
-
-        public void setDefaultVoiceSubscriptionId(int subscriptionId) {
-            mDefaultVoiceSubscriptionId = subscriptionId;
-        }
-
-        public void setDefaultSmsSubscriptionId(int subscriptionId) {
-            mDefaultSmsSubscriptionId = subscriptionId;
-        }
-
-        public void setDefaultDataSubscriptionId(int subscriptionId) {
-            mDefaultDataSubscriptionId = subscriptionId;
-        }
-
     }
 
     @Before
@@ -135,9 +132,12 @@ public class NetworkProviderSimListControllerTest {
 
         mPreferenceManager = new PreferenceManager(mContext);
         mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
-        mPreference = new Preference(mContext);
+        mPreference = new RestrictedPreference(mContext);
         mPreference.setKey(KEY_PREFERENCE_SIM_LIST);
-        mController = new MockNetworkProviderSimListController(mContext, mLifecycle);
+        mPreferenceCategory = new PreferenceCategory(mContext);
+        mPreferenceCategory.setKey(KEY_PREFERENCE_CATEGORY_SIM);
+        mController = new MockNetworkProviderSimListController(mContext, mLifecycle,
+                mLifecycleOwner);
         mLifecycleRegistry = new LifecycleRegistry(mLifecycleOwner);
         when(mLifecycleOwner.getLifecycle()).thenReturn(mLifecycleRegistry);
     }
@@ -145,105 +145,116 @@ public class NetworkProviderSimListControllerTest {
     private void displayPreferenceWithLifecycle() {
         mLifecycleRegistry.addObserver(mController);
         mPreferenceScreen.addPreference(mPreference);
+        mPreferenceScreen.addPreference(mPreferenceCategory);
         mController.displayPreference(mPreferenceScreen);
         mLifecycleRegistry.handleLifecycleEvent(Event.ON_RESUME);
     }
 
-    private void setupSubscriptionInfoList(int subId, String displayName,
-            SubscriptionInfo subscriptionInfo) {
-        when(subscriptionInfo.getSubscriptionId()).thenReturn(subId);
-        doReturn(subscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(subId);
-        when(subscriptionInfo.getDisplayName()).thenReturn(displayName);
-        when(subscriptionInfo.isEmbedded()).thenReturn(false);
+    private SubscriptionInfoEntity setupSubscriptionInfoEntity(String subId, int slotId,
+            int carrierId, String displayName, String mcc, String mnc, String countryIso,
+            int cardId, CharSequence defaultSimConfig, boolean isValid, boolean isActive,
+            boolean isAvailable, boolean isDefaultCall, boolean isDefaultSms) {
+        return new SubscriptionInfoEntity(subId, slotId, carrierId, displayName, displayName, 0,
+                mcc, mnc, countryIso, false, cardId, TelephonyManager.DEFAULT_PORT_INDEX, false,
+                null, SubscriptionManager.SUBSCRIPTION_TYPE_LOCAL_SIM, displayName, false,
+                "1234567890", true, defaultSimConfig.toString(), false, isValid, true, isActive,
+                isAvailable, isDefaultCall, isDefaultSms, false, false, false);
     }
 
     private String setSummaryResId(String resName, String value) {
         return ResourcesUtils.getResourcesString(mContext, resName, value);
     }
 
+    private String setSummaryResId(String resName) {
+        return ResourcesUtils.getResourcesString(mContext, resName);
+    }
+
     @Test
     @UiThreadTest
     public void getSummary_tapToActivePSim() {
-        setupSubscriptionInfoList(SUB_ID_1, DISPLAY_NAME_1, mSubscriptionInfo);
-        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(new ArrayList<>());
-        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(new ArrayList<>());
-        doReturn(false).when(mSubscriptionManager).isActiveSubscriptionId(SUB_ID_1);
-
+        mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, "", true, false, true, false, false);
+        mSubscriptionInfoEntityList.add(mSubInfo1);
+        mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
         displayPreferenceWithLifecycle();
         String summary = setSummaryResId("mobile_network_tap_to_activate", DISPLAY_NAME_1);
 
-        assertTrue(TextUtils.equals(mController.getSummary(SUB_ID_1, DISPLAY_NAME_1), summary));
+        assertTrue(TextUtils.equals(mController.getSummary(mSubInfo1, DISPLAY_NAME_1), summary));
     }
 
     @Test
     @UiThreadTest
     public void getSummary_inactivePSim() {
-        setupSubscriptionInfoList(SUB_ID_1, DISPLAY_NAME_1, mSubscriptionInfo);
-        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(new ArrayList<>());
-        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(new ArrayList<>());
-        doReturn(false).when(mSubscriptionManager).isActiveSubscriptionId(SUB_ID_1);
+        mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, "", true, false, true, false, false);
         doReturn(true).when(mSubscriptionManager).canDisablePhysicalSubscription();
+        mSubscriptionInfoEntityList.add(mSubInfo1);
+        mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
 
         displayPreferenceWithLifecycle();
         String summary = setSummaryResId("sim_category_inactive_sim", null);
 
-        assertTrue(TextUtils.equals(mController.getSummary(SUB_ID_1, DISPLAY_NAME_1), summary));
+        assertTrue(TextUtils.equals(mController.getSummary(mSubInfo1, DISPLAY_NAME_1), summary));
     }
 
     @Test
     @UiThreadTest
     public void getSummary_defaultCalls() {
-        mController.setDefaultVoiceSubscriptionId(SUB_ID_1);
-        setupSubscriptionInfoList(SUB_ID_1, DISPLAY_NAME_1, mSubscriptionInfo);
-        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
-                Arrays.asList(mSubscriptionInfo));
-        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(
-                Arrays.asList(mSubscriptionInfo));
-        doReturn(true).when(mSubscriptionManager).isActiveSubscriptionId(SUB_ID_1);
+        mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1,
+                setSummaryResId("sim_category_default_active_sim",
+                        setSummaryResId("default_active_sim_calls")), true, true, true, true,
+                false);
+        mSubscriptionInfoEntityList.add(mSubInfo1);
+        mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
 
         displayPreferenceWithLifecycle();
-        CharSequence defaultCall = SubscriptionUtil.getDefaultSimConfig(mContext, SUB_ID_1);
+        CharSequence defaultCall = mSubInfo1.defaultSimConfig;
         final StringBuilder summary = new StringBuilder();
         summary.append(setSummaryResId("sim_category_active_sim", null))
                 .append(defaultCall);
 
-        assertTrue(TextUtils.equals(mController.getSummary(SUB_ID_1, DISPLAY_NAME_1), summary));
+        assertTrue(TextUtils.equals(mController.getSummary(mSubInfo1, DISPLAY_NAME_1), summary));
     }
 
     @Test
     @UiThreadTest
     public void getSummary_defaultCallsAndSms() {
-        mController.setDefaultVoiceSubscriptionId(SUB_ID_1);
-        mController.setDefaultSmsSubscriptionId(SUB_ID_1);
-        setupSubscriptionInfoList(SUB_ID_1, DISPLAY_NAME_1, mSubscriptionInfo);
-        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
-                Arrays.asList(mSubscriptionInfo));
-        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(
-                Arrays.asList(mSubscriptionInfo));
-        doReturn(true).when(mSubscriptionManager).isActiveSubscriptionId(SUB_ID_1);
+        final StringBuilder defaultConfig = new StringBuilder();
+        defaultConfig.append(setSummaryResId("default_active_sim_calls"))
+                .append(", ")
+                .append(setSummaryResId("default_active_sim_sms"));
+        mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1,
+                setSummaryResId("sim_category_default_active_sim", defaultConfig.toString()), true,
+                true, true, true, true);
+        mSubscriptionInfoEntityList.add(mSubInfo1);
+        mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
 
         displayPreferenceWithLifecycle();
-        CharSequence defaultCall = SubscriptionUtil.getDefaultSimConfig(mContext, SUB_ID_1);
+        CharSequence defaultCall = mSubInfo1.defaultSimConfig;
         final StringBuilder summary = new StringBuilder();
         summary.append(setSummaryResId("sim_category_active_sim", null))
                 .append(defaultCall);
 
-        assertTrue(TextUtils.equals(mController.getSummary(SUB_ID_1, DISPLAY_NAME_1), summary));
+        assertTrue(TextUtils.equals(mController.getSummary(mSubInfo1, DISPLAY_NAME_1), summary));
     }
 
     @Ignore
     @Test
     @UiThreadTest
     public void getAvailablePhysicalSubscription_withTwoPhysicalSims_returnTwo() {
-        final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
-        when(info1.isEmbedded()).thenReturn(false);
-        final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
-        when(info2.isEmbedded()).thenReturn(false);
-        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(
-                Arrays.asList(info1,  info2));
+        mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, "", true, true, true, true, true);
+        mSubInfo2 = setupSubscriptionInfoEntity(SUB_ID_2, 1, 1, DISPLAY_NAME_2, SUB_MCC_2,
+                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, "", true, true, true, false, false);
+        mSubscriptionInfoEntityList.add(mSubInfo1);
+        mSubscriptionInfoEntityList.add(mSubInfo2);
+        mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
+
         displayPreferenceWithLifecycle();
 
-        assertThat(mController.getAvailablePhysicalSubscription().size()).isEqualTo(2);
+        assertThat(mController.getAvailablePhysicalSubscriptions().size()).isEqualTo(2);
     }
 
 }

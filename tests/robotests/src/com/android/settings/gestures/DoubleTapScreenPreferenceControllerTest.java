@@ -83,7 +83,7 @@ public class DoubleTapScreenPreferenceControllerTest {
         // No stored value in shared preferences if not visited yet.
         final Context context = RuntimeEnvironment.application;
         final SharedPreferences prefs =
-                new SuggestionFeatureProviderImpl(context).getSharedPrefs(context);
+                new SuggestionFeatureProviderImpl().getSharedPrefs(context);
 
         assertThat(DoubleTapScreenPreferenceController
                 .isSuggestionComplete(mAmbientDisplayConfiguration, prefs)).isFalse();
@@ -94,7 +94,7 @@ public class DoubleTapScreenPreferenceControllerTest {
         when(mAmbientDisplayConfiguration.doubleTapSensorAvailable()).thenReturn(false);
         final Context context = RuntimeEnvironment.application;
         final SharedPreferences prefs =
-                new SuggestionFeatureProviderImpl(context).getSharedPrefs(context);
+                new SuggestionFeatureProviderImpl().getSharedPrefs(context);
 
         prefs.edit().putBoolean(
                 DoubleTapScreenSettings.PREF_KEY_SUGGESTION_COMPLETE, true).commit();

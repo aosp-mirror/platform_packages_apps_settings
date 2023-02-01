@@ -33,7 +33,7 @@ public class LocationServicesForWork extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.LOCATION_SERVICES;
+        return SettingsEnums.LOCATION_SERVICES_FOR_WORK;
     }
 
     @Override

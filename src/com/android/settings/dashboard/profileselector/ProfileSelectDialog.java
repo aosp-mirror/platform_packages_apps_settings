@@ -23,6 +23,7 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.DialogInterface.OnShowListener;
 import android.content.Intent;
+import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -168,7 +169,8 @@ public class ProfileSelectDialog extends DialogFragment implements UserAdapter.O
         }
         final UserManager userManager = UserManager.get(context);
         for (int i = userHandles.size() - 1; i >= 0; i--) {
-            if (userManager.getUserInfo(userHandles.get(i).getIdentifier()) == null) {
+            UserInfo userInfo = userManager.getUserInfo(userHandles.get(i).getIdentifier());
+            if (userInfo == null || userInfo.isCloneProfile()) {
                 if (DEBUG) {
                     Log.d(TAG, "Delete the user: " + userHandles.get(i).getIdentifier());
                 }

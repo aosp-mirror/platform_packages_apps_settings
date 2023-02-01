@@ -179,8 +179,8 @@ public class ZenOnboardingActivity extends Activity {
     }
 
     private static boolean withinShowTimeThreshold(Context context) {
-        final SuggestionFeatureProvider featureProvider = FeatureFactory.getFactory(context)
-                .getSuggestionFeatureProvider(context);
+        final SuggestionFeatureProvider featureProvider =
+                FeatureFactory.getFactory(context).getSuggestionFeatureProvider();
         final SharedPreferences prefs = featureProvider.getSharedPrefs(context);
         final long currentTimeMs = System.currentTimeMillis();
         final long firstDisplayTimeMs;

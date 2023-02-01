@@ -19,6 +19,7 @@ package com.android.settings.network;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -35,10 +36,11 @@ public class NetworkProviderSimsCategoryController extends PreferenceCategoryCon
     private NetworkProviderSimListController mNetworkProviderSimListController;
     private PreferenceCategory mPreferenceCategory;
 
-    public NetworkProviderSimsCategoryController(Context context, String key, Lifecycle lifecycle) {
+    public NetworkProviderSimsCategoryController(Context context, String key, Lifecycle lifecycle,
+            LifecycleOwner lifecycleOwner) {
         super(context, key);
         mNetworkProviderSimListController =
-                new NetworkProviderSimListController(mContext, lifecycle);
+                new NetworkProviderSimListController(mContext, lifecycle, lifecycleOwner);
     }
 
     @Override
@@ -61,19 +63,5 @@ public class NetworkProviderSimsCategoryController extends PreferenceCategoryCon
             return;
         }
         mPreferenceCategory.setVisible(isAvailable());
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-        if (mPreferenceCategory == null) {
-            Log.d(LOG_TAG, "updateState(), Can not find the category.");
-            return;
-        }
-        int count = mPreferenceCategory.getPreferenceCount();
-        String title = mContext.getString(count > 1
-                ? R.string.provider_network_settings_title
-                : R.string.sim_category_title);
-        mPreferenceCategory.setTitle(title);
     }
 }

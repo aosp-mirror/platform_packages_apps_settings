@@ -29,11 +29,13 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.util.Log;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -43,9 +45,14 @@ import com.android.settings.widget.SummaryUpdater;
 import com.android.settings.wifi.WifiSummaryUpdater;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
+import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
+import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
 import com.android.settingslib.utils.ThreadUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -53,7 +60,7 @@ import java.util.Map;
  */
 public class InternetPreferenceController extends AbstractPreferenceController implements
         LifecycleObserver, SummaryUpdater.OnSummaryChangeListener,
-        InternetUpdater.InternetChangeListener {
+        InternetUpdater.InternetChangeListener, MobileNetworkRepository.MobileNetworkCallback  {
 
     public static final String KEY = "internet_settings";
 
@@ -61,6 +68,9 @@ public class InternetPreferenceController extends AbstractPreferenceController i
     private final WifiSummaryUpdater mSummaryHelper;
     private InternetUpdater mInternetUpdater;
     private @InternetUpdater.InternetType int mInternetType;
+    private LifecycleOwner mLifecycleOwner;
+    private MobileNetworkRepository mMobileNetworkRepository;
+    private List<SubscriptionInfoEntity> mSubInfoEntityList = new ArrayList<>();
 
     @VisibleForTesting
     static Map<Integer, Integer> sIconMap = new HashMap<>();
@@ -81,7 +91,8 @@ public class InternetPreferenceController extends AbstractPreferenceController i
         sSummaryMap.put(INTERNET_ETHERNET, R.string.to_switch_networks_disconnect_ethernet);
     }
 
-    public InternetPreferenceController(Context context, Lifecycle lifecycle) {
+    public InternetPreferenceController(Context context, Lifecycle lifecycle,
+            LifecycleOwner lifecycleOwner) {
         super(context);
         if (lifecycle == null) {
             throw new IllegalArgumentException("Lifecycle must be set");
@@ -89,6 +100,8 @@ public class InternetPreferenceController extends AbstractPreferenceController i
         mSummaryHelper = new WifiSummaryUpdater(mContext, this);
         mInternetUpdater = new InternetUpdater(context, lifecycle, this);
         mInternetType = mInternetUpdater.getInternetType();
+        mLifecycleOwner = lifecycleOwner;
+        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
         lifecycle.addObserver(this);
     }
 
@@ -143,12 +156,14 @@ public class InternetPreferenceController extends AbstractPreferenceController i
     /** @OnLifecycleEvent(ON_RESUME) */
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
+        mMobileNetworkRepository.addRegister(mLifecycleOwner);
         mSummaryHelper.register(true);
     }
 
     /** @OnLifecycleEvent(ON_PAUSE) */
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
+        mMobileNetworkRepository.removeRegister();
         mSummaryHelper.register(false);
     }
 
@@ -187,16 +202,55 @@ public class InternetPreferenceController extends AbstractPreferenceController i
 
     @VisibleForTesting
     void updateCellularSummary() {
-        final SubscriptionManager subscriptionManager =
-                mContext.getSystemService(SubscriptionManager.class);
-        if (subscriptionManager == null) {
+        CharSequence summary = null;
+        SubscriptionInfoEntity activeSubInfo = null;
+        SubscriptionInfoEntity defaultSubInfo = null;
+
+        for (SubscriptionInfoEntity subInfo : getSubscriptionInfoList()) {
+            if (subInfo.isActiveDataSubscriptionId) {
+                activeSubInfo = subInfo;
+            }
+            if (subInfo.isDefaultDataSubscription) {
+                defaultSubInfo = subInfo;
+            }
+        }
+        if (activeSubInfo == null) {
             return;
         }
-        SubscriptionInfo subInfo = subscriptionManager.getDefaultDataSubscriptionInfo();
-        if (subInfo == null) {
-            return;
+        activeSubInfo = activeSubInfo.isSubscriptionVisible ? activeSubInfo : defaultSubInfo;
+
+        if (activeSubInfo.equals(defaultSubInfo)) {
+            // DDS is active
+            summary = activeSubInfo.uniqueName;
+        } else {
+            summary = mContext.getString(
+                    R.string.mobile_data_temp_using, activeSubInfo.uniqueName);
         }
-        mPreference.setSummary(SubscriptionUtil.getUniqueSubscriptionDisplayName(
-                subInfo, mContext));
+
+        mPreference.setSummary(summary);
+    }
+
+    @VisibleForTesting
+    protected List<SubscriptionInfoEntity> getSubscriptionInfoList() {
+        return mSubInfoEntityList;
+    }
+
+    @Override
+    public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
+        mSubInfoEntityList = subInfoEntityList;
+        updateState(mPreference);
+    }
+
+    @Override
+    public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> activeSubInfoList) {
+    }
+
+    @Override
+    public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
+    }
+
+    @Override
+    public void onAllMobileNetworkInfoChanged(
+            List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
     }
 }

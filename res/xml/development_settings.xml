@@ -320,12 +320,17 @@
             android:summary="@string/bluetooth_disable_absolute_volume_summary" />
 
         <SwitchPreference
-            android:key="bluetooth_disable_a2dp_hw_offload"
-            android:title="@string/bluetooth_disable_a2dp_hw_offload" />
+            android:key="bluetooth_enable_leaudio"
+            android:title="@string/bluetooth_enable_leaudio"
+            android:summary="@string/bluetooth_enable_leaudio_summary" />
 
         <SwitchPreference
             android:key="bluetooth_disable_le_audio_hw_offload"
             android:title="@string/bluetooth_disable_le_audio_hw_offload" />
+
+        <SwitchPreference
+            android:key="bluetooth_disable_a2dp_hw_offload"
+            android:title="@string/bluetooth_disable_a2dp_hw_offload" />
 
         <ListPreference
             android:key="bluetooth_select_avrcp_version"
@@ -396,6 +401,16 @@
             android:key="nfc_stack_debuglog_enabled"
             android:title="@string/nfc_stack_debuglog_title"
             android:summary="@string/nfc_stack_debuglog_summary" />
+
+        <SwitchPreference
+            android:key="nfc_verbose_vendor_log"
+            android:title="@string/nfc_verbose_vendor_log_title"
+            android:summary="@string/nfc_verbose_vendor_log_summary" />
+
+        <SwitchPreference
+            android:key="nfc_snoop_log"
+            android:title="@string/nfc_snoop_log_title"
+            android:summary="@string/nfc_snoop_log_summary"/>
 
     </PreferenceCategory>
 
@@ -604,11 +619,9 @@
             android:title="@string/show_notification_channel_warnings"
             android:summary="@string/show_notification_channel_warnings_summary" />
 
-        <com.android.settingslib.widget.LayoutPreference
+        <Preference
             android:key="asst_importance_reset"
             android:title="@string/asst_importance_reset_title"
-            android:selectable="false"
-            android:layout="@layout/reset_importance_button"
             settings:controller="com.android.settings.notification.ImportanceResetPreferenceController" />
 
         <Preference
@@ -657,6 +670,12 @@
         <Preference
             android:key="reset_shortcut_manager_throttling"
             android:title="@string/reset_shortcut_manager_throttling" />
+
+        <SwitchPreference
+            android:key="disable_phantom_process_monitor"
+            android:title="@string/disable_phantom_process_monitor_title"
+            android:summary="@string/disable_phantom_process_monitor_summary" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -729,6 +748,7 @@
         <SwitchPreference
             android:key="stylus_handwriting"
             android:title="@string/stylus_handwriting"
+            android:defaultValue="true"
             android:summary="@string/stylus_handwriting_summary" />
     </PreferenceCategory>
 </PreferenceScreen>

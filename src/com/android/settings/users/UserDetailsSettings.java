@@ -42,7 +42,6 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -62,6 +61,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private static final String KEY_SWITCH_USER = "switch_user";
     private static final String KEY_ENABLE_TELEPHONY = "enable_calling";
     private static final String KEY_REMOVE_USER = "remove_user";
+    private static final String KEY_GRANT_ADMIN = "user_grant_admin";
     private static final String KEY_APP_AND_CONTENT_ACCESS = "app_and_content_access";
     private static final String KEY_APP_COPYING = "app_copying";
 
@@ -69,10 +69,11 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     static final String EXTRA_USER_ID = "user_id";
 
     private static final int DIALOG_CONFIRM_REMOVE = 1;
-    private static final int DIALOG_CONFIRM_ENABLE_CALLING = 2;
-    private static final int DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS = 3;
-    private static final int DIALOG_SETUP_USER = 4;
-    private static final int DIALOG_CONFIRM_RESET_GUEST = 5;
+    private static final int DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS = 2;
+    private static final int DIALOG_SETUP_USER = 3;
+    private static final int DIALOG_CONFIRM_RESET_GUEST = 4;
+    private static final int DIALOG_CONFIRM_RESET_GUEST_AND_SWITCH_USER = 5;
+    private static final int DIALOG_CONFIRM_REVOKE_ADMIN = 6;
 
     /** Whether to enable the app_copying fragment. */
     private static final boolean SHOW_APP_COPYING_PREF = false;
@@ -92,11 +93,12 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     Preference mAppCopyingPref;
     @VisibleForTesting
     Preference mRemoveUserPref;
+    @VisibleForTesting
+    SwitchPreference mGrantAdminPref;
 
     @VisibleForTesting
     /** The user being studied (not the user doing the studying). */
     UserInfo mUserInfo;
-    private Bundle mDefaultGuestRestrictions;
 
     @Override
     public int getMetricsCategory() {
@@ -129,7 +131,12 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
+        if (preference != null && preference.getKey() != null) {
+            mMetricsFeatureProvider.logSettingsTileClick(preference.getKey(), getMetricsCategory());
+        }
         if (preference == mRemoveUserPref) {
+            mMetricsFeatureProvider.action(getActivity(),
+                    UserMetricsUtils.getRemoveUserMetricCategory(mUserInfo));
             if (canDeleteUser()) {
                 if (mUserInfo.isGuest()) {
                     showDialog(DIALOG_CONFIRM_RESET_GUEST);
@@ -139,9 +146,16 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 return true;
             }
         } else if (preference == mSwitchUserPref) {
+            mMetricsFeatureProvider.action(getActivity(),
+                    UserMetricsUtils.getSwitchUserMetricCategory(mUserInfo));
             if (canSwitchUserNow()) {
                 if (shouldShowSetupPromptDialog()) {
                     showDialog(DIALOG_SETUP_USER);
+                } else if (mUserCaps.mIsGuest && mUserCaps.mIsEphemeral) {
+                    // if we are switching away from a ephemeral guest then,
+                    // show a dialog that guest user will be reset and then switch
+                    // the user
+                    showDialog(DIALOG_CONFIRM_RESET_GUEST_AND_SWITCH_USER);
                 } else {
                     switchUser();
                 }
@@ -159,12 +173,27 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (Boolean.TRUE.equals(newValue)) {
-            showDialog(mUserInfo.isGuest() ? DIALOG_CONFIRM_ENABLE_CALLING
-                    : DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS);
-            return false;
+        if (preference == mPhonePref) {
+            if (Boolean.TRUE.equals(newValue)) {
+                mMetricsFeatureProvider.action(getActivity(),
+                        SettingsEnums.ACTION_ENABLE_USER_CALL);
+                showDialog(DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS);
+                return false;
+            }
+            mMetricsFeatureProvider.action(getActivity(),
+                    SettingsEnums.ACTION_DISABLE_USER_CALL);
+            enableCallsAndSms(false);
+        } else if (preference == mGrantAdminPref) {
+            if (Boolean.FALSE.equals(newValue)) {
+                mMetricsFeatureProvider.action(getActivity(),
+                        SettingsEnums.ACTION_REVOKE_ADMIN_FROM_SETTINGS);
+                showDialog(DIALOG_CONFIRM_REVOKE_ADMIN);
+                return false;
+            }
+            mMetricsFeatureProvider.action(getActivity(),
+                    SettingsEnums.ACTION_GRANT_ADMIN_FROM_SETTINGS);
+            updateUserAdminStatus(true);
         }
-        enableCallsAndSms(false);
         return true;
     }
 
@@ -173,11 +202,12 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         switch (dialogId) {
             case DIALOG_CONFIRM_REMOVE:
             case DIALOG_CONFIRM_RESET_GUEST:
+            case DIALOG_CONFIRM_RESET_GUEST_AND_SWITCH_USER:
                 return SettingsEnums.DIALOG_USER_REMOVE;
-            case DIALOG_CONFIRM_ENABLE_CALLING:
-                return SettingsEnums.DIALOG_USER_ENABLE_CALLING;
             case DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS:
                 return SettingsEnums.DIALOG_USER_ENABLE_CALLING_AND_SMS;
+            case DIALOG_CONFIRM_REVOKE_ADMIN:
+                return SettingsEnums.DIALOG_REVOKE_USER_ADMIN;
             case DIALOG_SETUP_USER:
                 return SettingsEnums.DIALOG_USER_SETUP;
             default:
@@ -195,9 +225,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             case DIALOG_CONFIRM_REMOVE:
                 return UserDialogs.createRemoveDialog(getActivity(), mUserInfo.id,
                         (dialog, which) -> removeUser());
-            case DIALOG_CONFIRM_ENABLE_CALLING:
-                return UserDialogs.createEnablePhoneCallsDialog(getActivity(),
-                        (dialog, which) -> enableCallsAndSms(true));
             case DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS:
                 return UserDialogs.createEnablePhoneCallsAndSmsDialog(getActivity(),
                         (dialog, which) -> enableCallsAndSms(true));
@@ -216,6 +243,17 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                     return UserDialogs.createRemoveGuestDialog(getActivity(),
                         (dialog, which) -> resetGuest());
                 }
+            case DIALOG_CONFIRM_RESET_GUEST_AND_SWITCH_USER:
+                if (mGuestUserAutoCreated) {
+                    return UserDialogs.createResetGuestDialog(getActivity(),
+                        (dialog, which) -> switchUser());
+                } else {
+                    return UserDialogs.createRemoveGuestDialog(getActivity(),
+                        (dialog, which) -> switchUser());
+                }
+            case DIALOG_CONFIRM_REVOKE_ADMIN:
+                return UserDialogs.createConfirmRevokeAdmin(getActivity(),
+                        (dialog, which) -> updateUserAdminStatus(false));
         }
         throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
     }
@@ -258,6 +296,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         mRemoveUserPref = findPreference(KEY_REMOVE_USER);
         mAppAndContentAccessPref = findPreference(KEY_APP_AND_CONTENT_ACCESS);
         mAppCopyingPref = findPreference(KEY_APP_COPYING);
+        mGrantAdminPref = findPreference(KEY_GRANT_ADMIN);
+
+        mGrantAdminPref.setChecked(mUserInfo.isAdmin());
 
         mSwitchUserPref.setTitle(
                 context.getString(com.android.settingslib.R.string.user_switch_to_user,
@@ -270,10 +311,15 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             mSwitchUserPref.setSelectable(true);
             mSwitchUserPref.setOnPreferenceClickListener(this);
         }
-
+        if (mUserInfo.isMain() || mUserInfo.isGuest() || !UserManager.isMultipleAdminEnabled()
+                || mUserManager.hasUserRestrictionForUser(UserManager.DISALLOW_GRANT_ADMIN,
+                mUserInfo.getUserHandle())) {
+            removePreference(KEY_GRANT_ADMIN);
+        }
         if (!mUserManager.isAdminUser()) { // non admin users can't remove users and allow calls
             removePreference(KEY_ENABLE_TELEPHONY);
             removePreference(KEY_REMOVE_USER);
+            removePreference(KEY_GRANT_ADMIN);
             removePreference(KEY_APP_AND_CONTENT_ACCESS);
             removePreference(KEY_APP_COPYING);
         } else {
@@ -293,13 +339,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             }
 
             if (mUserInfo.isGuest()) {
-                // These are not for an existing user, just general Guest settings.
-                // Default title is for calling and SMS. Change to calling-only here
-                // TODO(b/191483069): These settings can't be changed unless guest user exists
-                mPhonePref.setTitle(R.string.user_enable_calling);
-                mDefaultGuestRestrictions = mUserManager.getDefaultGuestRestrictions();
-                mPhonePref.setChecked(
-                        !mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_OUTGOING_CALLS));
+                removePreference(KEY_ENABLE_TELEPHONY);
                 mRemoveUserPref.setTitle(mGuestUserAutoCreated
                         ? com.android.settingslib.R.string.guest_reset_guest
                         : com.android.settingslib.R.string.guest_exit_guest);
@@ -315,13 +355,18 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 mRemoveUserPref.setTitle(R.string.user_remove_user);
                 removePreference(KEY_APP_COPYING);
             }
+
+            // Remove preference KEY_REMOVE_USER if DISALLOW_REMOVE_USER restriction is set
+            // on the current user or the user selected in user details settings is a main user.
             if (RestrictedLockUtilsInternal.hasBaseUserRestriction(context,
-                    UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId())) {
+                    UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId())
+                    || mUserInfo.isMain()) {
                 removePreference(KEY_REMOVE_USER);
             }
 
             mRemoveUserPref.setOnPreferenceClickListener(this);
             mPhonePref.setOnPreferenceChangeListener(this);
+            mGrantAdminPref.setOnPreferenceChangeListener(this);
             mAppAndContentAccessPref.setOnPreferenceClickListener(this);
             mAppCopyingPref.setOnPreferenceClickListener(this);
         }
@@ -329,7 +374,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     @VisibleForTesting
     boolean canDeleteUser() {
-        if (!mUserManager.isAdminUser()) {
+        if (!mUserManager.isAdminUser() || mUserInfo.isMain()) {
             return false;
         }
 
@@ -358,8 +403,15 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     void switchUser() {
         Trace.beginSection("UserDetailSettings.switchUser");
         try {
-            if (mUserInfo.isGuest()) {
-                mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_SWITCH_TO_GUEST);
+            if (mUserCaps.mIsGuest && mUserCaps.mIsEphemeral) {
+                int guestUserId = UserHandle.myUserId();
+                // Using markGuestForDeletion allows us to create a new guest before this one is
+                // fully removed.
+                boolean marked = mUserManager.markGuestForDeletion(guestUserId);
+                if (!marked) {
+                    Log.w(TAG, "Couldn't mark the guest for deletion for user " + guestUserId);
+                    return;
+                }
             }
             ActivityManager.getService().switchUser(mUserInfo.id);
         } catch (RemoteException re) {
@@ -372,30 +424,22 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     private void enableCallsAndSms(boolean enabled) {
         mPhonePref.setChecked(enabled);
-        if (mUserInfo.isGuest()) {
-            mDefaultGuestRestrictions.putBoolean(UserManager.DISALLOW_OUTGOING_CALLS, !enabled);
-            // SMS is always disabled for guest
-            mDefaultGuestRestrictions.putBoolean(UserManager.DISALLOW_SMS, true);
-            mUserManager.setDefaultGuestRestrictions(mDefaultGuestRestrictions);
+        UserHandle userHandle = UserHandle.of(mUserInfo.id);
+        mUserManager.setUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS, !enabled, userHandle);
+        mUserManager.setUserRestriction(UserManager.DISALLOW_SMS, !enabled, userHandle);
+    }
 
-            // Update the guest's restrictions, if there is a guest
-            // TODO: Maybe setDefaultGuestRestrictions() can internally just set the restrictions
-            // on any existing guest rather than do it here with multiple Binder calls.
-            List<UserInfo> users = mUserManager.getAliveUsers();
-            for (UserInfo user : users) {
-                if (user.isGuest()) {
-                    UserHandle userHandle = UserHandle.of(user.id);
-                    for (String key : mDefaultGuestRestrictions.keySet()) {
-                        mUserManager.setUserRestriction(
-                                key, mDefaultGuestRestrictions.getBoolean(key), userHandle);
-                    }
-                }
-            }
-        } else {
-            UserHandle userHandle = UserHandle.of(mUserInfo.id);
-            mUserManager.setUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS, !enabled,
-                    userHandle);
-            mUserManager.setUserRestriction(UserManager.DISALLOW_SMS, !enabled, userHandle);
+    /**
+     * Sets admin status of selected user. Method is called when toggle in
+     * user details settings is switched.
+     * @param isSetAdmin indicates if user admin status needs to be set to true.
+     */
+    private void updateUserAdminStatus(boolean isSetAdmin) {
+        mGrantAdminPref.setChecked(isSetAdmin);
+        if (!isSetAdmin) {
+            mUserManager.revokeUserAdmin(mUserInfo.id);
+        } else if ((mUserInfo.flags & UserInfo.FLAG_ADMIN) == 0) {
+            mUserManager.setUserAdmin(mUserInfo.id);
         }
     }
 

@@ -34,11 +34,11 @@ import static org.mockito.Mockito.when;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -56,6 +56,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import java.util.Arrays;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
@@ -95,7 +97,7 @@ public class RedactNotificationPreferenceControllerTest {
         when(mMockContext.getSystemService(UserManager.class)).thenReturn(mUm);
         when(mMockContext.getSystemService(DevicePolicyManager.class)).thenReturn(mDpm);
         when(mMockContext.getSystemService(KeyguardManager.class)).thenReturn(mKm);
-        when(mUm.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {0});
+        when(mUm.getProfiles(anyInt())).thenReturn(Arrays.asList(new UserInfo(0, "", 0)));
 
         mController = new RedactNotificationPreferenceController(
                 mMockContext, RedactNotificationPreferenceController.KEY_LOCKSCREEN_REDACT);
@@ -105,7 +107,9 @@ public class RedactNotificationPreferenceControllerTest {
                 mController.getPreferenceKey())).thenReturn(mPreference);
         assertThat(mController.mProfileUserId).isEqualTo(0);
 
-        when(mUm.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {0, 10});
+        when(mUm.getProfiles(anyInt())).thenReturn(Arrays.asList(
+                new UserInfo(5, "", 0),
+                new UserInfo(10, "", UserInfo.FLAG_MANAGED_PROFILE | UserInfo.FLAG_PROFILE)));
         mWorkController = new RedactNotificationPreferenceController(mMockContext,
                 RedactNotificationPreferenceController.KEY_LOCKSCREEN_WORK_PROFILE_REDACT);
         mWorkPreference = new RestrictedSwitchPreference(mContext);
@@ -137,7 +141,8 @@ public class RedactNotificationPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_noWorkProfile() {
         // reset controllers with no work profile
-        when(mUm.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {UserHandle.myUserId()});
+        when(mUm.getProfiles(anyInt())).thenReturn(Arrays.asList(
+                new UserInfo(UserHandle.myUserId(), "", 0)));
         mWorkController = new RedactNotificationPreferenceController(mMockContext,
                 RedactNotificationPreferenceController.KEY_LOCKSCREEN_WORK_PROFILE_REDACT);
         mController = new RedactNotificationPreferenceController(mMockContext,

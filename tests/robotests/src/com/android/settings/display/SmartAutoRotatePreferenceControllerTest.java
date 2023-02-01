@@ -80,12 +80,15 @@ public class SmartAutoRotatePreferenceControllerTest {
         when(mContext.getResources()).thenReturn(mResources);
         when(mContext.getContentResolver()).thenReturn(mContentResolver);
 
+        when(mResources.getBoolean(R.bool.config_auto_rotate_face_detection_available)).thenReturn(
+                true);
+
         doReturn(PACKAGE_NAME).when(mPackageManager).getRotationResolverPackageName();
         doReturn(PackageManager.PERMISSION_GRANTED).when(mPackageManager).checkPermission(
                 Manifest.permission.CAMERA, PACKAGE_NAME);
-        when(mContext.getString(R.string.auto_rotate_option_off))
+        when(mContext.getString(R.string.off))
                 .thenReturn("Off");
-        when(mContext.getString(R.string.auto_rotate_option_on))
+        when(mContext.getString(R.string.on))
                 .thenReturn("On");
         when(mContext.getString(R.string.auto_rotate_option_face_based))
                 .thenReturn("On - Face-based");

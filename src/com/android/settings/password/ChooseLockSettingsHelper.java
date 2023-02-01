@@ -28,6 +28,7 @@ import android.content.IntentSender;
 import android.os.UserManager;
 import android.util.Log;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 
@@ -57,7 +58,6 @@ public final class ChooseLockSettingsHelper {
     public static final String EXTRA_KEY_FOR_FACE = "for_face";
     // For the paths where multiple biometric sensors exist
     public static final String EXTRA_KEY_FOR_BIOMETRICS = "for_biometrics";
-    public static final String EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT = "for_cred_req_boot";
     public static final String EXTRA_KEY_FOREGROUND_ONLY = "foreground_only";
     public static final String EXTRA_KEY_REQUEST_GK_PW_HANDLE = "request_gk_pw_handle";
     // Gatekeeper password handle, which can subsequently be used to generate Gatekeeper
@@ -109,19 +109,23 @@ public final class ChooseLockSettingsHelper {
     @VisibleForTesting @NonNull LockPatternUtils mLockPatternUtils;
     @NonNull private final Activity mActivity;
     @Nullable private final Fragment mFragment;
+    @Nullable private final ActivityResultLauncher mActivityResultLauncher;
     @NonNull private final Builder mBuilder;
 
     private ChooseLockSettingsHelper(@NonNull Builder builder, @NonNull Activity activity,
-            @Nullable Fragment fragment) {
+            @Nullable Fragment fragment,
+            @Nullable ActivityResultLauncher activityResultLauncher) {
         mBuilder = builder;
         mActivity = activity;
         mFragment = fragment;
+        mActivityResultLauncher = activityResultLauncher;
         mLockPatternUtils = new LockPatternUtils(activity);
     }
 
     public static class Builder {
         @NonNull private final Activity mActivity;
         @Nullable private Fragment mFragment;
+        @Nullable private ActivityResultLauncher mActivityResultLauncher;
 
         private int mRequestCode;
         @Nullable private CharSequence mTitle;
@@ -265,6 +269,18 @@ public final class ChooseLockSettingsHelper {
             return this;
         }
 
+        /**
+         * Support of ActivityResultLauncher.
+         *
+         * Which allowing the launch operation be controlled externally.
+         * @param activityResultLauncher a launcher previously prepared.
+         */
+        @NonNull public Builder setActivityResultLauncher(
+                ActivityResultLauncher activityResultLauncher) {
+            mActivityResultLauncher = activityResultLauncher;
+            return this;
+        }
+
         @NonNull public ChooseLockSettingsHelper build() {
             if (!mAllowAnyUserId && mUserId != LockPatternUtils.USER_FRP) {
                 Utils.enforceSameOwner(mActivity, mUserId);
@@ -282,7 +298,8 @@ public final class ChooseLockSettingsHelper {
                         + " ReturnCredentials. Are you sure this is what you want?");
             }
 
-            return new ChooseLockSettingsHelper(this, mActivity, mFragment);
+            return new ChooseLockSettingsHelper(this, mActivity, mFragment,
+                    mActivityResultLauncher);
         }
 
         public boolean show() {
@@ -369,13 +386,17 @@ public final class ChooseLockSettingsHelper {
         if (external) {
             intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
             copyOptionalExtras(inIntent, intent);
-            if (mFragment != null) {
+            if (mActivityResultLauncher != null) {
+                mActivityResultLauncher.launch(intent);
+            } else if (mFragment != null) {
                 mFragment.startActivity(intent);
             } else {
                 mActivity.startActivity(intent);
             }
         } else {
-            if (mFragment != null) {
+            if (mActivityResultLauncher != null) {
+                mActivityResultLauncher.launch(intent);
+            } else if (mFragment != null) {
                 mFragment.startActivityForResult(intent, request);
             } else {
                 mActivity.startActivityForResult(intent, request);

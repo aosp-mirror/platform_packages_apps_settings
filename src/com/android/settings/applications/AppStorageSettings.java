@@ -58,6 +58,7 @@ import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState.Callbacks;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
+import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.ActionButtonsPreference;
 import com.android.settingslib.widget.LayoutPreference;
 
@@ -309,11 +310,7 @@ public class AppStorageSettings extends AppInfoWithHeader
                     .setButton1Enabled(false);
             mCanClearData = false;
         } else {
-            if (appHasSpaceManagementUI) {
-                mButtonsPref.setButton1Text(R.string.manage_space_text);
-            } else {
-                mButtonsPref.setButton1Text(R.string.clear_user_data_text);
-            }
+            mButtonsPref.setButton1Text(R.string.clear_user_data_text);
             mButtonsPref.setButton1Icon(R.drawable.ic_settings_delete)
                     .setButton1OnClickListener(v -> handleClearDataClick());
         }
@@ -442,9 +439,8 @@ public class AppStorageSettings extends AppInfoWithHeader
             int numberResources = entry.getValue().value;
             Preference pref = new Preference(getPrefContext());
             pref.setTitle(entry.getKey());
-            pref.setSummary(getPrefContext().getResources()
-                    .getQuantityString(R.plurals.uri_permissions_text, numberResources,
-                            numberResources));
+            pref.setSummary(StringUtil.getIcuPluralsString(mUri.getContext(), numberResources,
+                    R.string.uri_permissions_text));
             pref.setSelectable(false);
             pref.setLayoutResource(R.layout.horizontal_preference);
             pref.setOrder(order);

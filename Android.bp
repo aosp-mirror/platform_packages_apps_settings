@@ -35,6 +35,15 @@ java_library {
     ],
 }
 
+java_library {
+    name: "Settings-change-ids",
+    srcs: ["src/com/android/settings/ChangeIds.java"],
+    libs: [
+        "app-compat-annotations",
+    ],
+}
+
+
 // Build the Settings APK
 android_library {
     name: "Settings-core",
@@ -42,10 +51,15 @@ android_library {
     defaults: [
         "SettingsLibDefaults",
         "SettingsLib-search-defaults",
+        "SpaPrivilegedLib-defaults",
     ],
 
     srcs: ["src/**/*.java", "src/**/*.kt"],
-
+    resource_dirs: [
+        "res",
+        "res-export", // for external usage
+        "res-product",
+    ],
     static_libs: [
         "androidx-constraintlayout_constraintlayout",
         "androidx.slice_slice-builders",
@@ -54,6 +68,7 @@ android_library {
         "androidx.core_core",
         "androidx.appcompat_appcompat",
         "androidx.cardview_cardview",
+        "androidx.compose.runtime_runtime-livedata",
         "androidx.preference_preference",
         "androidx.recyclerview_recyclerview",
         "androidx.window_window",
@@ -61,40 +76,51 @@ android_library {
         "setupcompat",
         "setupdesign",
         "androidx.lifecycle_lifecycle-runtime",
-        "androidx.lifecycle_lifecycle-extensions",
+        "androidx.lifecycle_lifecycle-viewmodel",
         "guava",
         "jsr305",
         "net-utils-framework-common",
+        "app-usage-event-protos-lite",
         "settings-contextual-card-protos-lite",
         "settings-log-bridge-protos-lite",
         "settings-telephony-protos-lite",
+        "fuelgauge-log-protos-lite",
+        "fuelgauge-usage-state-protos-lite",
         "contextualcards",
         "settings-logtags",
         "statslog-settings",
         "zxing-core-1.7",
         "android.hardware.dumpstate-V1.0-java",
         "android.hardware.dumpstate-V1.1-java",
+        "android.hardware.dumpstate-V1-java",
         "lottie",
         "WifiTrackerLib",
         "SettingsLibActivityEmbedding",
+        "Settings-change-ids",
+        "androidx.room_room-runtime",
+        "SystemUIUnfoldLib",
     ],
+
+    plugins: ["androidx.room_room-compiler-plugin"],
 
     libs: [
         "telephony-common",
         "ims-common",
-        "app-compat-annotations",
     ],
 }
 
 platform_compat_config {
     name: "settings-platform-compat-config",
-    src: ":Settings-core",
+    src: ":Settings-change-ids",
     system_ext_specific: true,
 }
 
 android_app {
     name: "Settings",
-    defaults: ["platform_app_defaults"],
+    defaults: [
+        "platform_app_defaults",
+        "SpaPrivilegedLib-defaults",
+    ],
     platform_apis: true,
     certificate: "platform",
     system_ext_specific: true,
@@ -126,7 +152,7 @@ filegroup {
 // over all the sources together.
 filegroup {
     name: "Settings_srcs",
-    srcs: ["src/**/*.java"],
+    srcs: ["src/**/*.java", "src/**/*.kt"],
 }
 
 filegroup {

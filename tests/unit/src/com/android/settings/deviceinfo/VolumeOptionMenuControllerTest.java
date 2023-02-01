@@ -55,7 +55,6 @@ public class VolumeOptionMenuControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Menu mMenu;
     @Mock private PackageManager mPackageManager;
-    @Mock private StorageManager mStorageManager;
     @Mock private VolumeInfo mExternalVolumeInfo;
     @Mock private VolumeInfo mInternalVolumeInfo;
 
@@ -68,7 +67,6 @@ public class VolumeOptionMenuControllerTest {
 
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
-        when(mContext.getSystemService(StorageManager.class)).thenReturn(mStorageManager);
 
         when(mInternalVolumeInfo.getId()).thenReturn(INTERNAL_VOLUME_ID);
         when(mInternalVolumeInfo.getType()).thenReturn(VolumeInfo.TYPE_PRIVATE);
@@ -173,17 +171,16 @@ public class VolumeOptionMenuControllerTest {
         when(mExternalVolumeInfo.getState()).thenReturn(VolumeInfo.STATE_MOUNTED);
         when(mExternalVolumeInfo.getDiskId()).thenReturn(DISK_ID);
         final DiskInfo externalDiskInfo = mock(DiskInfo.class);
-        when(mStorageManager.findDiskById(DISK_ID)).thenReturn(externalDiskInfo);
         mController.setSelectedStorageEntry(new StorageEntry(mContext, mExternalVolumeInfo));
 
         mController.onPrepareOptionsMenu(mMenu);
 
         verify(mController.mRename, atLeastOnce()).setVisible(true);
         verify(mController.mUnmount, atLeastOnce()).setVisible(true);
-        verify(mController.mFormat, atLeastOnce()).setVisible(true);
-        verify(mController.mMount, never()).setVisible(true);
+        verify(mController.mFormatAsInternal, atLeastOnce()).setVisible(true);
         verify(mController.mFormatAsPortable, never()).setVisible(true);
-        verify(mController.mFormatAsInternal, never()).setVisible(true);
+        verify(mController.mFormat, never()).setVisible(true);
+        verify(mController.mMount, never()).setVisible(true);
         verify(mController.mFree, never()).setVisible(true);
         verify(mController.mForget, never()).setVisible(true);
     }

@@ -46,8 +46,7 @@ public class LocationServicesBluetoothScanningPreferenceController extends
     public CharSequence getSummary() {
         final boolean bleScanOn = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 0) == 1;
-        int resId =
-                bleScanOn ? R.string.scanning_status_text_on : R.string.scanning_status_text_off;
+        final int resId = bleScanOn ? R.string.on : R.string.off;
         return mContext.getString(resId);
     }
 

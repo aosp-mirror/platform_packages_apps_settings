@@ -56,6 +56,17 @@
         android:layout_toStartOf="@+id/dragHandle"
         android:layout_below="@id/label"/>
 
+    <TextView
+        android:id="@+id/default_locale"
+        style="@style/LanguageCheckboxAndLabel"
+        android:layout_marginTop="-28dp"
+        android:paddingStart="56dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:textColor="?android:textColorSecondary"
+        android:text="@string/desc_current_default_language"
+        android:layout_toStartOf="@+id/dragHandle"
+        android:layout_below="@id/label"/>
+
     <ImageView
         android:id="@+id/dragHandle"
         android:layout_width="wrap_content"

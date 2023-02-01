@@ -85,7 +85,7 @@
 
     <Preference
         android:key="battery"
-        android:title="@string/power_usage_summary_title"
+        android:title="@string/app_battery_usage_title"
         android:summary="@string/summary_placeholder" />
 
     <Preference
@@ -188,6 +188,12 @@
             android:title="@string/alarms_and_reminders_title"
             android:summary="@string/summary_placeholder"
             settings:controller="com.android.settings.applications.appinfo.AlarmsAndRemindersDetailPreferenceController" />
+
+        <Preference
+            android:key="long_background_tasks"
+            android:title="@string/long_background_tasks_title"
+            android:summary="@string/summary_placeholder"
+            settings:controller="com.android.settings.applications.appinfo.LongBackgroundTasksDetailsPreferenceController" />
 
     </PreferenceCategory>
 

@@ -626,7 +626,14 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
             String proxyPort = mProxyPort.getText().toString().trim();
             // 0 is a last resort default, but the interface validates that the proxy port is
             // present and non-zero.
-            int port = proxyPort.isEmpty() ? 0 : Integer.parseInt(proxyPort);
+            int port = 0;
+            if (!proxyPort.isEmpty()) {
+                try {
+                    port = Integer.parseInt(proxyPort);
+                } catch (NumberFormatException e) {
+                    Log.e(TAG, "Could not parse proxy port integer ", e);
+                }
+            }
             profile.proxy = ProxyInfo.buildDirectProxy(proxyHost, port);
         } else {
             profile.proxy = null;

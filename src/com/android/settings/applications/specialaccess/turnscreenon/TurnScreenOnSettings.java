@@ -205,7 +205,7 @@ public class TurnScreenOnSettings extends EmptyTextSettings {
         if (IGNORE_PACKAGE_LIST.contains(packageName)) {
             return false;
         }
-        return packageManager.checkPermission(Manifest.permission.WAKE_LOCK, packageName)
+        return packageManager.checkPermission(Manifest.permission.TURN_SCREEN_ON, packageName)
                 == PackageManager.PERMISSION_GRANTED;
     }
 

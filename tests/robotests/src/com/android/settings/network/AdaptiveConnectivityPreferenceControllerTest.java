@@ -74,7 +74,7 @@ public class AdaptiveConnectivityPreferenceControllerTest {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED, 1);
 
-        assertThat(mController.getSummary()).isEqualTo(mContext.getString(R.string.switch_on_text));
+        assertThat(mController.getSummary()).isEqualTo(mContext.getString(R.string.on));
     }
 
     @Test
@@ -83,6 +83,6 @@ public class AdaptiveConnectivityPreferenceControllerTest {
                 Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED, 0);
 
         assertThat(mController.getSummary())
-                .isEqualTo(mContext.getString(R.string.switch_off_text));
+                .isEqualTo(mContext.getString(R.string.off));
     }
 }

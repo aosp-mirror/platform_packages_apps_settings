@@ -37,6 +37,24 @@ public class TextReadingPreviewPreference extends Preference {
     private int mLastLayerIndex;
     private PreviewPagerAdapter mPreviewAdapter;
 
+    private final ViewPager.OnPageChangeListener mPageChangeListener =
+            new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int i, float v, int i1) {
+            // Do nothing
+        }
+
+        @Override
+        public void onPageSelected(int i) {
+            mCurrentItem = i;
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int i) {
+            // Do nothing
+        }
+    };
+
     TextReadingPreviewPreference(Context context) {
         super(context);
         init();
@@ -63,6 +81,7 @@ public class TextReadingPreviewPreference extends Preference {
         super.onBindViewHolder(holder);
 
         final ViewPager viewPager = (ViewPager) holder.findViewById(R.id.preview_pager);
+        viewPager.addOnPageChangeListener(mPageChangeListener);
         final DotsPageIndicator pageIndicator =
                 (DotsPageIndicator) holder.findViewById(R.id.page_indicator);
         updateAdapterIfNeeded(viewPager, pageIndicator, mPreviewAdapter);
@@ -84,6 +103,10 @@ public class TextReadingPreviewPreference extends Preference {
             mCurrentItem = currentItem;
             notifyChanged();
         }
+    }
+
+    void setLastLayerIndex(int lastLayerIndex) {
+        mLastLayerIndex = lastLayerIndex;
     }
 
     int getCurrentItem() {
