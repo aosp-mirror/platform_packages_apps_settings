@@ -50,6 +50,7 @@ public class ActiveUnlockStatusPreferenceController
     private final CombinedBiometricStatusUtils mCombinedBiometricStatusUtils;
     private final ActiveUnlockSummaryListener mActiveUnlockSummaryListener;
     private final ActiveUnlockDeviceNameListener mActiveUnlockDeviceNameListener;
+    private final boolean mIsAvailable;
 
     public ActiveUnlockStatusPreferenceController(@NonNull Context context) {
         this(context, KEY_ACTIVE_UNLOCK_SETTINGS);
@@ -59,6 +60,7 @@ public class ActiveUnlockStatusPreferenceController
             @NonNull Context context, @NonNull String key) {
         super(context, key);
         mActiveUnlockStatusUtils = new ActiveUnlockStatusUtils(context);
+        mIsAvailable = mActiveUnlockStatusUtils.isAvailable();
         mCombinedBiometricStatusUtils = new CombinedBiometricStatusUtils(context, getUserId());
         OnContentChangedListener onSummaryChangedListener = new OnContentChangedListener() {
             @Override
@@ -90,8 +92,10 @@ public class ActiveUnlockStatusPreferenceController
     /** Subscribes to update preference summary dynamically. */
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStart() {
-        mActiveUnlockSummaryListener.subscribe();
-        mActiveUnlockDeviceNameListener.subscribe();
+        if (mIsAvailable) {
+            mActiveUnlockSummaryListener.subscribe();
+            mActiveUnlockDeviceNameListener.subscribe();
+        }
     }
 
     /** Resets the preference reference on resume. */
@@ -105,8 +109,10 @@ public class ActiveUnlockStatusPreferenceController
     /** Unsubscribes to prevent leaked listener. */
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     public void onStop() {
-        mActiveUnlockSummaryListener.unsubscribe();
-        mActiveUnlockDeviceNameListener.unsubscribe();
+        if (mIsAvailable) {
+            mActiveUnlockSummaryListener.unsubscribe();
+            mActiveUnlockDeviceNameListener.unsubscribe();
+        }
     }
 
     @Override
@@ -127,7 +133,7 @@ public class ActiveUnlockStatusPreferenceController
         // This should never be called, as getAvailabilityStatus() will return the exact value.
         // However, this is an abstract method in BiometricStatusPreferenceController, and so
         // needs to be overridden.
-        return mActiveUnlockStatusUtils.isAvailable();
+        return mIsAvailable;
     }
 
     @Override

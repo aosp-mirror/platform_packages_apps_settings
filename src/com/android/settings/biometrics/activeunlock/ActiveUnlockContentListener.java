@@ -87,10 +87,10 @@ public class ActiveUnlockContentListener {
 
     }
 
-    /** Starts listening for updates from the ContentProvider, and fetches the current value. */
-    public synchronized void subscribe() {
-        if (mSubscribed && mUri != null) {
-            return;
+    /** Returns true if start listening for updates from the ContentProvider, false otherwise. */
+    public synchronized boolean subscribe() {
+        if (mSubscribed || mUri == null) {
+            return false;
         }
         mSubscribed = true;
         mContext.getContentResolver().registerContentObserver(
@@ -99,15 +99,17 @@ public class ActiveUnlockContentListener {
                 () -> {
                     getContentFromUri();
                 });
+        return true;
     }
 
-    /** Stops listening for updates from the ContentProvider. */
-    public synchronized void unsubscribe() {
-        if (!mSubscribed && mUri != null) {
-            return;
+    /** Returns true if stops listening for updates from the ContentProvider, false otherewise. */
+    public synchronized boolean unsubscribe() {
+        if (!mSubscribed || mUri == null) {
+            return false;
         }
         mSubscribed = false;
         mContext.getContentResolver().unregisterContentObserver(mContentObserver);
+        return true;
     }
 
     /** Retrieves the most recently fetched value from the ContentProvider. */
