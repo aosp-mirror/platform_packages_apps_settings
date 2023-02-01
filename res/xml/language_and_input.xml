@@ -19,12 +19,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/language_settings">
+    <PreferenceCategory
+        android:key="languages_category"
+        android:title="@string/locale_picker_category_title">
+        <Preference
+            android:key="phone_language"
+            android:title="@string/phone_language"
+            android:fragment="com.android.settings.localepicker.LocaleListEditor" />
 
-    <Preference
-        android:key="phone_language"
-        android:title="@string/phone_language"
-        android:icon="@drawable/ic_translate_24dp"
-        android:fragment="com.android.settings.localepicker.LocaleListEditor" />
+        <Preference
+            android:key="apps_language"
+            android:title="@string/app_locales_picker_menu_title"
+            android:summary="@string/app_locale_picker_summary"
+            android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+            settings:controller="com.android.settings.applications.appinfo.ManageAppLocalePreferenceController">
+            <extra
+                android:name="classname"
+                android:value="com.android.settings.applications.appinfo.AppLocaleDetails" />
+        </Preference>
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="keyboards_category"
@@ -32,13 +45,36 @@
         <Preference
             android:key="virtual_keyboard_pref"
             android:title="@string/virtual_keyboard_category"
-            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
+            android:fragment="com.android.settings.inputmethod.AvailableVirtualKeyboardFragment"
             settings:keywords="@string/keywords_virtual_keyboard"/>
+
         <Preference
             android:key="physical_keyboard_pref"
             android:title="@string/physical_keyboard_title"
             android:summary="@string/summary_placeholder"
             android:fragment="com.android.settings.inputmethod.PhysicalKeyboardFragment"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="speech_category"
+        android:title="@string/speech_category_title">
+        <com.android.settings.widget.GearPreference
+            android:key="voice_input_settings"
+            android:title="@string/voice_input_settings_title"
+            android:fragment="com.android.settings.language.DefaultVoiceInputPicker" />
+
+        <Preference
+            android:key="on_device_recognition_settings"
+            android:title="@string/on_device_recognition_settings_title"
+            android:summary="@string/on_device_recognition_settings_summary"
+            settings:controller=
+                "com.android.settings.language.OnDeviceRecognitionPreferenceController" />
+
+        <Preference
+            android:key="tts_settings_summary"
+            android:title="@string/tts_settings_title"
+            android:fragment="com.android.settings.tts.TextToSpeechSettings"
+            settings:searchable="false"/>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -63,20 +99,12 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="pointer_and_tts_category"
+        android:key="pointer_category"
         android:layout="@layout/preference_category_no_label">
-
         <com.android.settings.PointerSpeedPreference
             android:key="pointer_speed"
             android:title="@string/pointer_speed"
             android:dialogTitle="@string/pointer_speed" />
-
-        <Preference
-            android:key="tts_settings_summary"
-            android:title="@string/tts_settings_title"
-            android:fragment="com.android.settings.tts.TextToSpeechSettings"
-            settings:searchable="false"/>
-
     </PreferenceCategory>
 
     <SwitchPreference
@@ -89,13 +117,6 @@
         android:key="language_and_input_for_work_category"
         android:title="@string/language_and_input_for_work_category_title"
         settings:searchable="false">
-
-        <Preference
-            android:key="virtual_keyboards_for_work_pref"
-            android:title="@string/virtual_keyboards_for_work_title"
-            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
-            settings:forWork="true"
-            settings:controller="com.android.settings.inputmethod.VirtualKeyboardForWorkPreferenceController" />
 
         <Preference
             android:key="spellcheckers_settings_for_work_pref"

@@ -101,7 +101,7 @@ class SlicesIndexer implements Runnable {
         for (SliceData dataRow : indexData) {
             values = new ContentValues();
             values.put(IndexColumns.KEY, dataRow.getKey());
-            values.put(IndexColumns.SLICE_URI, dataRow.getUri().toSafeString());
+            values.put(IndexColumns.SLICE_URI, dataRow.getUri().toString());
             values.put(IndexColumns.TITLE, dataRow.getTitle());
             values.put(IndexColumns.SUMMARY, dataRow.getSummary());
             final CharSequence screenTitle = dataRow.getScreenTitle();

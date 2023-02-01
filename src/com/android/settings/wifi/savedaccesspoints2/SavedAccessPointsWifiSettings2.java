@@ -19,7 +19,6 @@ package com.android.settings.wifi.savedaccesspoints2;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.NetworkScoreManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -101,7 +100,6 @@ public class SavedAccessPointsWifiSettings2 extends DashboardFragment
         mSavedNetworkTracker = new SavedNetworkTracker(getSettingsLifecycle(), context,
                 context.getSystemService(WifiManager.class),
                 context.getSystemService(ConnectivityManager.class),
-                context.getSystemService(NetworkScoreManager.class),
                 new Handler(Looper.getMainLooper()),
                 mWorkerThread.getThreadHandler(),
                 elapsedRealtimeClock,

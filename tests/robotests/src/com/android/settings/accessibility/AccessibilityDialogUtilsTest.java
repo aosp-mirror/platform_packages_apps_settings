@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.app.Dialog;
 import android.content.Context;
 
 import androidx.appcompat.app.AlertDialog;
@@ -57,5 +58,15 @@ public class AccessibilityDialogUtilsTest {
 
         assertThat(AccessibilityDialogUtils.updateSoftwareShortcutInDialog(mContext,
                 dialog)).isFalse();
+    }
+
+    @Test
+    public void showDialog_createCustomDialog_isShowing() {
+        final Dialog dialog = AccessibilityDialogUtils.createCustomDialog(mContext,
+                "Title", /* customView= */ null, "positiveButton", /* positiveListener= */ null,
+                "negativeButton", /* negativeListener= */ null);
+        dialog.show();
+
+        assertThat(dialog.isShowing()).isTrue();
     }
 }

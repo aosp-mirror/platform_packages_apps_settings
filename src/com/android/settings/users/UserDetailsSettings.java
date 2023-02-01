@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.os.Trace;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
@@ -62,6 +63,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private static final String KEY_ENABLE_TELEPHONY = "enable_calling";
     private static final String KEY_REMOVE_USER = "remove_user";
     private static final String KEY_APP_AND_CONTENT_ACCESS = "app_and_content_access";
+    private static final String KEY_APP_COPYING = "app_copying";
 
     /** Integer extra containing the userId to manage */
     static final String EXTRA_USER_ID = "user_id";
@@ -71,6 +73,10 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private static final int DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS = 3;
     private static final int DIALOG_SETUP_USER = 4;
     private static final int DIALOG_CONFIRM_RESET_GUEST = 5;
+    private static final int DIALOG_CONFIRM_RESET_GUEST_AND_SWITCH_USER = 6;
+
+    /** Whether to enable the app_copying fragment. */
+    private static final boolean SHOW_APP_COPYING_PREF = false;
 
     private UserManager mUserManager;
     private UserCapabilities mUserCaps;
@@ -84,9 +90,12 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     @VisibleForTesting
     Preference mAppAndContentAccessPref;
     @VisibleForTesting
+    Preference mAppCopyingPref;
+    @VisibleForTesting
     Preference mRemoveUserPref;
 
     @VisibleForTesting
+    /** The user being studied (not the user doing the studying). */
     UserInfo mUserInfo;
     private Bundle mDefaultGuestRestrictions;
 
@@ -134,6 +143,11 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             if (canSwitchUserNow()) {
                 if (shouldShowSetupPromptDialog()) {
                     showDialog(DIALOG_SETUP_USER);
+                } else if (mUserCaps.mIsGuest && mUserCaps.mIsEphemeral) {
+                    // if we are switching away from a ephemeral guest then,
+                    // show a dialog that guest user will be reset and then switch
+                    // the user
+                    showDialog(DIALOG_CONFIRM_RESET_GUEST_AND_SWITCH_USER);
                 } else {
                     switchUser();
                 }
@@ -141,6 +155,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             }
         } else if (preference == mAppAndContentAccessPref) {
             openAppAndContentAccessScreen(false);
+            return true;
+        } else if (preference == mAppCopyingPref) {
+            openAppCopyingScreen();
             return true;
         }
         return false;
@@ -162,6 +179,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         switch (dialogId) {
             case DIALOG_CONFIRM_REMOVE:
             case DIALOG_CONFIRM_RESET_GUEST:
+            case DIALOG_CONFIRM_RESET_GUEST_AND_SWITCH_USER:
                 return SettingsEnums.DIALOG_USER_REMOVE;
             case DIALOG_CONFIRM_ENABLE_CALLING:
                 return SettingsEnums.DIALOG_USER_ENABLE_CALLING;
@@ -198,8 +216,21 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                             }
                         });
             case DIALOG_CONFIRM_RESET_GUEST:
-                return UserDialogs.createResetGuestDialog(getActivity(),
+                if (mGuestUserAutoCreated) {
+                    return UserDialogs.createResetGuestDialog(getActivity(),
                         (dialog, which) -> resetGuest());
+                } else {
+                    return UserDialogs.createRemoveGuestDialog(getActivity(),
+                        (dialog, which) -> resetGuest());
+                }
+            case DIALOG_CONFIRM_RESET_GUEST_AND_SWITCH_USER:
+                if (mGuestUserAutoCreated) {
+                    return UserDialogs.createResetGuestDialog(getActivity(),
+                        (dialog, which) -> switchUser());
+                } else {
+                    return UserDialogs.createRemoveGuestDialog(getActivity(),
+                        (dialog, which) -> switchUser());
+                }
         }
         throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
     }
@@ -241,10 +272,11 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         mPhonePref = findPreference(KEY_ENABLE_TELEPHONY);
         mRemoveUserPref = findPreference(KEY_REMOVE_USER);
         mAppAndContentAccessPref = findPreference(KEY_APP_AND_CONTENT_ACCESS);
+        mAppCopyingPref = findPreference(KEY_APP_COPYING);
 
         mSwitchUserPref.setTitle(
                 context.getString(com.android.settingslib.R.string.user_switch_to_user,
-                        UserSettings.getUserName(context, mUserInfo)));
+                        mUserInfo.name));
 
         if (mUserCaps.mDisallowSwitchUser) {
             mSwitchUserPref.setDisabledByAdmin(RestrictedLockUtilsInternal.getDeviceOwner(context));
@@ -258,6 +290,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             removePreference(KEY_ENABLE_TELEPHONY);
             removePreference(KEY_REMOVE_USER);
             removePreference(KEY_APP_AND_CONTENT_ACCESS);
+            removePreference(KEY_APP_COPYING);
         } else {
             if (!Utils.isVoiceCapable(context)) { // no telephony
                 removePreference(KEY_ENABLE_TELEPHONY);
@@ -284,14 +317,18 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                         !mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_OUTGOING_CALLS));
                 mRemoveUserPref.setTitle(mGuestUserAutoCreated
                         ? com.android.settingslib.R.string.guest_reset_guest
-                        : R.string.user_exit_guest_title);
+                        : com.android.settingslib.R.string.guest_exit_guest);
                 if (mGuestUserAutoCreated) {
                     mRemoveUserPref.setEnabled((mUserInfo.flags & UserInfo.FLAG_INITIALIZED) != 0);
+                }
+                if (!SHOW_APP_COPYING_PREF) {
+                    removePreference(KEY_APP_COPYING);
                 }
             } else {
                 mPhonePref.setChecked(!mUserManager.hasUserRestriction(
                         UserManager.DISALLOW_OUTGOING_CALLS, new UserHandle(userId)));
                 mRemoveUserPref.setTitle(R.string.user_remove_user);
+                removePreference(KEY_APP_COPYING);
             }
             if (RestrictedLockUtilsInternal.hasBaseUserRestriction(context,
                     UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId())) {
@@ -301,6 +338,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             mRemoveUserPref.setOnPreferenceClickListener(this);
             mPhonePref.setOnPreferenceChangeListener(this);
             mAppAndContentAccessPref.setOnPreferenceClickListener(this);
+            mAppCopyingPref.setOnPreferenceClickListener(this);
         }
     }
 
@@ -333,14 +371,26 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     @VisibleForTesting
     void switchUser() {
+        Trace.beginSection("UserDetailSettings.switchUser");
         try {
             if (mUserInfo.isGuest()) {
                 mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_SWITCH_TO_GUEST);
+            }
+            if (mUserCaps.mIsGuest && mUserCaps.mIsEphemeral) {
+                int guestUserId = UserHandle.myUserId();
+                // Using markGuestForDeletion allows us to create a new guest before this one is
+                // fully removed.
+                boolean marked = mUserManager.markGuestForDeletion(guestUserId);
+                if (!marked) {
+                    Log.w(TAG, "Couldn't mark the guest for deletion for user " + guestUserId);
+                    return;
+                }
             }
             ActivityManager.getService().switchUser(mUserInfo.id);
         } catch (RemoteException re) {
             Log.e(TAG, "Error while switching to other user.");
         } finally {
+            Trace.endSection();
             finishFragment();
         }
     }
@@ -391,6 +441,20 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 .setDestination(AppRestrictionsFragment.class.getName())
                 .setArguments(extras)
                 .setTitleRes(R.string.user_restrictions_title)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .launch();
+    }
+
+    private void openAppCopyingScreen() {
+        if (!SHOW_APP_COPYING_PREF) {
+            return;
+        }
+        final Bundle extras = new Bundle();
+        extras.putInt(AppRestrictionsFragment.EXTRA_USER_ID, mUserInfo.id);
+        new SubSettingLauncher(getContext())
+                .setDestination(AppCopyFragment.class.getName())
+                .setArguments(extras)
+                .setTitleRes(R.string.user_copy_apps_menu_title)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
     }

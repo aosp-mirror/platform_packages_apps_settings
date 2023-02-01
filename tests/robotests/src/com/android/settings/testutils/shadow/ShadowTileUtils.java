@@ -34,7 +34,7 @@ import java.util.Map;
 @Implements(TileUtils.class)
 public class ShadowTileUtils {
 
-    public static final String MOCK_SUMMARY = "summary";
+    public static final String MOCK_TEXT = "text";
 
     private static boolean sChecked;
     private static Bundle sResult;
@@ -42,13 +42,14 @@ public class ShadowTileUtils {
     @Implementation
     protected static String getTextFromUri(Context context, Uri uri,
             Map<String, IContentProvider> providerMap, String key) {
-        return MOCK_SUMMARY;
+        return MOCK_TEXT;
     }
 
     @Implementation
     protected static Pair<String, Integer> getIconFromUri(Context context, String packageName,
             Uri uri, Map<String, IContentProvider> providerMap) {
-        return Pair.create(RuntimeEnvironment.application.getPackageName(), R.drawable.ic_settings_accent);
+        return Pair.create(RuntimeEnvironment.application.getPackageName(),
+                R.drawable.ic_settings_accent);
     }
 
     @Implementation

@@ -18,6 +18,8 @@ package com.android.settings.notification;
 
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.LOCK_SCREEN_HIDE_WORK_NOTIFICATION_CONTENT;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.LOCK_SCREEN_SHOW_WORK_NOTIFICATION_CONTENT;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
@@ -158,8 +160,13 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
         ArrayList<CharSequence> entries = new ArrayList<>();
         ArrayList<CharSequence> values = new ArrayList<>();
 
-        String summaryShowEntry = mContext.getString(
-                R.string.lock_screen_notifications_summary_show_profile);
+        DevicePolicyManager devicePolicyManager =
+                mContext.getSystemService(DevicePolicyManager.class);
+
+        String summaryShowEntry = devicePolicyManager
+                .getResources().getString(LOCK_SCREEN_SHOW_WORK_NOTIFICATION_CONTENT,
+                        () -> mContext.getString(
+                                R.string.lock_screen_notifications_summary_show_profile));
         String summaryShowEntryValue = Integer.toString(
                 R.string.lock_screen_notifications_summary_show_profile);
         entries.add(summaryShowEntry);
@@ -168,8 +175,10 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
                 KEYGUARD_DISABLE_SECURE_NOTIFICATIONS | KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS);
 
         if (mSecureProfile) {
-            String summaryHideEntry = mContext.getString(
-                    R.string.lock_screen_notifications_summary_hide_profile);
+            String summaryHideEntry = devicePolicyManager
+                    .getResources().getString(LOCK_SCREEN_HIDE_WORK_NOTIFICATION_CONTENT,
+                            () -> mContext.getString(
+                                    R.string.lock_screen_notifications_summary_hide_profile));
             String summaryHideEntryValue = Integer.toString(
                     R.string.lock_screen_notifications_summary_hide_profile);
             entries.add(summaryHideEntry);

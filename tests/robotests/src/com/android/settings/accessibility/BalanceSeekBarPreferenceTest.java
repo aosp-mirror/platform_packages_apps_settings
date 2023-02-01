@@ -26,13 +26,17 @@ import android.widget.LinearLayout;
 
 import androidx.preference.PreferenceViewHolder;
 
+import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowInteractionJankMonitor.class})
 public class BalanceSeekBarPreferenceTest {
     private static final int BALANCE_CENTER_VALUE = 100;
     private static final int BALANCE_MAX_VALUE = 200;

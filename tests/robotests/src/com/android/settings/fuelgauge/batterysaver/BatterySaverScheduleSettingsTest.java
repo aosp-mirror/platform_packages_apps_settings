@@ -1,7 +1,5 @@
 package com.android.settings.fuelgauge.batterysaver;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -10,9 +8,9 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.PowerManager;
 import android.provider.Settings;
-import android.util.Pair;
 
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
@@ -20,8 +18,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowInteractionJankMonitor.class})
 public final class BatterySaverScheduleSettingsTest {
 
     private Context mContext;

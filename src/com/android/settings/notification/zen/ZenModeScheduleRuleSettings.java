@@ -42,7 +42,6 @@ import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -56,8 +55,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
 
     public static final String ACTION = Settings.ACTION_ZEN_MODE_SCHEDULE_RULE_SETTINGS;
 
-    // per-instance to ensure we're always using the current locale
-    private final SimpleDateFormat mDayFormat = new SimpleDateFormat("EEE");
+    private final ZenRuleScheduleHelper mScheduleHelper = new ZenRuleScheduleHelper();
 
     private Preference mDays;
     private TimePickerPreference mStart;
@@ -149,30 +147,11 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
     }
 
     private void updateDays() {
-        // Compute an ordered, delimited list of day names based on the persisted user config.
-        final int[] days = mSchedule.days;
-        if (days != null && days.length > 0) {
-            final StringBuilder sb = new StringBuilder();
-            final Calendar c = Calendar.getInstance();
-            int[] daysOfWeek = ZenModeScheduleDaysSelection.getDaysOfWeekForLocale(c);
-            for (int i = 0; i < daysOfWeek.length; i++) {
-                final int day = daysOfWeek[i];
-                for (int j = 0; j < days.length; j++) {
-                    if (day == days[j]) {
-                        c.set(Calendar.DAY_OF_WEEK, day);
-                        if (sb.length() > 0) {
-                            sb.append(mContext.getString(R.string.summary_divider_text));
-                        }
-                        sb.append(mDayFormat.format(c.getTime()));
-                        break;
-                    }
-                }
-            }
-            if (sb.length() > 0) {
-                mDays.setSummary(sb);
-                mDays.notifyDependencyChange(false);
-                return;
-            }
+        String desc = mScheduleHelper.getDaysDescription(mContext, mSchedule);
+        if (desc != null) {
+            mDays.setSummary(desc);
+            mDays.notifyDependencyChange(false);
+            return;
         }
         mDays.setSummary(R.string.zen_mode_schedule_rule_days_none);
         mDays.notifyDependencyChange(true);
@@ -231,7 +210,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
                     protected void onChanged(final int[] days) {
                         if (mDisableListeners) return;
                         if (Arrays.equals(days, mSchedule.days)) return;
-                        if (DEBUG) Log.d(TAG, "days.onChanged days=" + Arrays.asList(days));
+                        if (DEBUG) Log.d(TAG, "days.onChanged days=" + Arrays.toString(days));
                         mSchedule.days = days;
                         updateRule(ZenModeConfig.toScheduleConditionId(mSchedule));
                     }

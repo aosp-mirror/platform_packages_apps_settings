@@ -30,7 +30,6 @@ import android.provider.SettingsSlicesContract;
 import android.security.Credentials;
 import android.security.LegacyVpnProfileStore;
 import android.util.Log;
-import android.util.SparseArray;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -50,7 +49,9 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.utils.ThreadUtils;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 
 public class VpnPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
@@ -63,32 +64,32 @@ public class VpnPreferenceController extends AbstractPreferenceController
             .build();
     private static final String TAG = "VpnPreferenceController";
 
-    private final String mToggleable;
-    private final UserManager mUserManager;
-    private final ConnectivityManager mConnectivityManager;
-    private final VpnManager mVpnManager;
+    private ConnectivityManager mConnectivityManager;
     private Preference mPreference;
 
     public VpnPreferenceController(Context context) {
         super(context);
-        mToggleable = Settings.Global.getString(context.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
-        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mConnectivityManager =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        mVpnManager = context.getSystemService(VpnManager.class);
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = screen.findPreference(KEY_VPN_SETTINGS);
-        // Manually set dependencies for Wifi when not toggleable.
-        if (mToggleable == null || !mToggleable.contains(Settings.Global.RADIO_WIFI)) {
-            if (mPreference != null) {
-                mPreference.setDependency(SettingsSlicesContract.KEY_AIRPLANE_MODE);
-            }
+        mPreference = getEffectivePreference(screen);
+    }
+
+    @VisibleForTesting
+    protected Preference getEffectivePreference(PreferenceScreen screen) {
+        Preference preference = screen.findPreference(KEY_VPN_SETTINGS);
+        if (preference == null) {
+            return null;
         }
+        String toggleable = Settings.Global.getString(mContext.getContentResolver(),
+                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
+        // Manually set dependencies for Wifi when not toggleable.
+        if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_WIFI)) {
+            preference.setDependency(SettingsSlicesContract.KEY_AIRPLANE_MODE);
+        }
+        return preference;
     }
 
     @Override
@@ -104,15 +105,19 @@ public class VpnPreferenceController extends AbstractPreferenceController
 
     @Override
     public void onPause() {
-        if (isAvailable()) {
+        if (mConnectivityManager != null) {
             mConnectivityManager.unregisterNetworkCallback(mNetworkCallback);
+            mConnectivityManager = null;
         }
     }
 
     @Override
     public void onResume() {
         if (isAvailable()) {
+            mConnectivityManager = mContext.getSystemService(ConnectivityManager.class);
             mConnectivityManager.registerNetworkCallback(REQUEST, mNetworkCallback);
+        } else {
+            mConnectivityManager = null;
         }
     }
 
@@ -121,67 +126,77 @@ public class VpnPreferenceController extends AbstractPreferenceController
         if (mPreference == null) {
             return;
         }
-        // Copied from SystemUI::SecurityControllerImpl
-        SparseArray<VpnConfig> vpns = new SparseArray<>();
-        final List<UserInfo> users = mUserManager.getUsers();
-        int connectedLegacyVpnCount = 0;
-        for (UserInfo user : users) {
-            VpnConfig cfg = mVpnManager.getVpnConfig(user.id);
-            if (cfg == null) {
-                continue;
-            } else if (cfg.legacy) {
+        UserManager userManager = mContext.getSystemService(UserManager.class);
+        VpnManager vpnManager = mContext.getSystemService(VpnManager.class);
+        String summary = getInsecureVpnSummaryOverride(userManager, vpnManager);
+        if (summary == null) {
+            final UserInfo userInfo = userManager.getUserInfo(UserHandle.myUserId());
+            final int uid;
+            if (userInfo.isRestricted()) {
+                uid = userInfo.restrictedProfileParentId;
+            } else {
+                uid = userInfo.id;
+            }
+            VpnConfig vpn = vpnManager.getVpnConfig(uid);
+            if ((vpn != null) && vpn.legacy) {
+                // Copied from SystemUI::SecurityControllerImpl
                 // Legacy VPNs should do nothing if the network is disconnected. Third-party
                 // VPN warnings need to continue as traffic can still go to the app.
-                final LegacyVpnInfo legacyVpn = mVpnManager.getLegacyVpnInfo(user.id);
+                final LegacyVpnInfo legacyVpn = vpnManager.getLegacyVpnInfo(uid);
                 if (legacyVpn == null || legacyVpn.state != LegacyVpnInfo.STATE_CONNECTED) {
-                    continue;
-                } else {
-                    connectedLegacyVpnCount++;
+                    vpn = null;
                 }
             }
-            vpns.put(user.id, cfg);
+            if (vpn == null) {
+                summary = mContext.getString(R.string.vpn_disconnected_summary);
+            } else {
+                summary = getNameForVpnConfig(vpn, UserHandle.of(uid));
+            }
         }
-        final UserInfo userInfo = mUserManager.getUserInfo(UserHandle.myUserId());
-        final int uid;
-        if (userInfo.isRestricted()) {
-            uid = userInfo.restrictedProfileParentId;
-        } else {
-            uid = userInfo.id;
-        }
-        VpnConfig vpn = vpns.get(uid);
-        String summary;
-        if (vpn == null) {
-            summary = mContext.getString(R.string.vpn_disconnected_summary);
-        } else {
-            summary = getNameForVpnConfig(vpn, UserHandle.of(uid));
-        }
+        final String finalSummary = summary;
+        ThreadUtils.postOnMainThread(() -> mPreference.setSummary(finalSummary));
+    }
+
+    protected int getNumberOfNonLegacyVpn(UserManager userManager, VpnManager vpnManager) {
+        // Converted from SystemUI::SecurityControllerImpl
+        return (int) userManager.getUsers().stream()
+                .map(user -> vpnManager.getVpnConfig(user.id))
+                .filter(cfg -> (cfg != null) && (!cfg.legacy))
+                .count();
+    }
+
+    protected String getInsecureVpnSummaryOverride(UserManager userManager,
+            VpnManager vpnManager) {
         // Optionally add warning icon if an insecure VPN is present.
         if (mPreference instanceof VpnInfoPreference) {
-            final int insecureVpnCount = getInsecureVpnCount();
+            String [] legacyVpnProfileKeys = LegacyVpnProfileStore.list(Credentials.VPN);
+            final int insecureVpnCount = getInsecureVpnCount(legacyVpnProfileKeys);
             boolean isInsecureVPN = insecureVpnCount > 0;
             ((VpnInfoPreference) mPreference).setInsecureVpn(isInsecureVPN);
+
             // Set the summary based on the total number of VPNs and insecure VPNs.
             if (isInsecureVPN) {
                 // Add the users and the number of legacy vpns to determine if there is more than
                 // one vpn, since there can be more than one VPN per user.
-                final int vpnCount = vpns.size()
-                        + LegacyVpnProfileStore.list(Credentials.VPN).length
-                        - connectedLegacyVpnCount;
-                if (vpnCount == 1) {
-                    summary = mContext.getString(R.string.vpn_settings_insecure_single);
-                } else if (insecureVpnCount == 1) {
-                    summary = mContext.getString(
+                int vpnCount = legacyVpnProfileKeys.length;
+                if (vpnCount <= 1) {
+                    vpnCount += getNumberOfNonLegacyVpn(userManager, vpnManager);
+                    if (vpnCount == 1) {
+                        return mContext.getString(R.string.vpn_settings_insecure_single);
+                    }
+                }
+                if (insecureVpnCount == 1) {
+                    return mContext.getString(
                             R.string.vpn_settings_single_insecure_multiple_total,
                             insecureVpnCount);
                 } else {
-                    summary = mContext.getString(
+                    return mContext.getString(
                             R.string.vpn_settings_multiple_insecure_multiple_total,
                             insecureVpnCount);
                 }
             }
         }
-        final String finalSummary = summary;
-        ThreadUtils.postOnMainThread(() -> mPreference.setSummary(finalSummary));
+        return null;
     }
 
     @VisibleForTesting
@@ -202,18 +217,14 @@ public class VpnPreferenceController extends AbstractPreferenceController
     }
 
     @VisibleForTesting
-    protected int getInsecureVpnCount() {
-        int count = 0;
-        for (String key : LegacyVpnProfileStore.list(Credentials.VPN)) {
-            final VpnProfile profile = VpnProfile.decode(key,
-                    LegacyVpnProfileStore.get(Credentials.VPN + key));
-            // Return whether any profile is an insecure type.
-            if (VpnProfile.isLegacyType(profile.type)) {
-                count++;
-            }
-        }
-        // We did not find any insecure VPNs.
-        return count;
+    protected int getInsecureVpnCount(String [] legacyVpnProfileKeys) {
+        final Function<String, VpnProfile> keyToProfile = key ->
+                VpnProfile.decode(key, LegacyVpnProfileStore.get(Credentials.VPN + key));
+        return (int) Arrays.stream(legacyVpnProfileKeys)
+                .map(keyToProfile)
+                // Return whether any profile is an insecure type.
+                .filter(profile -> VpnProfile.isLegacyType(profile.type))
+                .count();
     }
 
     // Copied from SystemUI::SecurityControllerImpl

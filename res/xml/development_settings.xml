@@ -45,6 +45,10 @@
             android:title="@string/capture_system_heap_dump_title" />
 
         <Preference
+            android:key="reboot_with_mte"
+            android:title="@string/reboot_with_mte_title" />
+
+        <Preference
             android:key="local_backup_password"
             android:title="@string/local_backup_password_title"
             android:summary="@string/local_backup_password_summary_none"
@@ -136,7 +140,7 @@
         <Preference android:key="clear_adb_keys"
                     android:title="@string/clear_adb_keys" />
 
-        <com.android.settings.widget.PrimarySwitchPreference
+        <com.android.settingslib.PrimarySwitchPreference
             android:fragment="com.android.settings.development.WirelessDebuggingFragment"
             android:key="toggle_adb_wireless"
             android:title="@string/enable_adb_wireless"
@@ -278,9 +282,9 @@
             android:summary="@string/wifi_scan_throttling_summary" />
 
         <SwitchPreference
-            android:key="wifi_enhanced_mac_randomization"
-            android:title="@string/wifi_enhanced_mac_randomization"
-            android:summary="@string/wifi_enhanced_mac_randomization_summary" />
+            android:key="wifi_non_persistent_mac_randomization"
+            android:title="@string/wifi_non_persistent_mac_randomization"
+            android:summary="@string/wifi_non_persistent_mac_randomization_summary" />
 
         <SwitchPreference
             android:key="mobile_data_always_on"
@@ -291,6 +295,14 @@
             android:key="tethering_hardware_offload"
             android:title="@string/tethering_hardware_offload"
             android:summary="@string/tethering_hardware_offload_summary" />
+
+        <ListPreference
+            android:key="ingress_rate_limit"
+            android:title="@string/ingress_rate_limit_title"
+            android:summary="@string/ingress_rate_limit_summary"
+            android:dialogTitle="@string/ingress_rate_limit_dialog_title"
+            android:entries="@array/ingress_rate_limit_entries"
+            android:entryValues="@array/ingress_rate_limit_values" />
 
         <com.android.settingslib.RestrictedPreference
             android:key="default_usb_configuration"
@@ -597,17 +609,23 @@
             android:title="@string/show_notification_channel_warnings"
             android:summary="@string/show_notification_channel_warnings_summary" />
 
-        <com.android.settingslib.widget.LayoutPreference
+        <Preference
             android:key="asst_importance_reset"
             android:title="@string/asst_importance_reset_title"
-            android:selectable="false"
-            android:layout="@layout/reset_importance_button"
             settings:controller="com.android.settings.notification.ImportanceResetPreferenceController" />
 
         <Preference
             android:key="inactive_apps"
             android:title="@string/inactive_apps_title"
             android:fragment="com.android.settings.fuelgauge.InactiveApps" />
+
+        <Preference
+            android:key="tare"
+            android:title="@string/tare_title" >
+            <intent
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.development.tare.TareHomePage" />
+        </Preference>
 
         <SwitchPreference
             android:key="force_allow_on_external"
@@ -634,12 +652,17 @@
             android:title="@string/enable_non_resizable_multi_window"
             android:summary="@string/enable_non_resizable_multi_window_summary" />
 
+        <SwitchPreference
+            android:key="back_navigation_animation"
+            android:title="@string/back_navigation_animation"
+            android:summary="@string/back_navigation_animation_summary" />
+
         <Preference
             android:key="reset_shortcut_manager_throttling"
             android:title="@string/reset_shortcut_manager_throttling" />
     </PreferenceCategory>
 
-    <com.android.settings.development.autofill.AutofillPreferenceCategory
+    <PreferenceCategory
         android:key="debug_autofill_category"
         android:title="@string/debug_autofill_category"
         settings:searchable="false"
@@ -663,7 +686,7 @@
             android:key="autofill_reset_developer_options"
             android:title="@string/autofill_reset_developer_options" />
 
-    </com.android.settings.development.autofill.AutofillPreferenceCategory>
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="storage_category"
@@ -699,5 +722,16 @@
             android:defaultValue="true"
             android:key="location_indicator_settings"
             settings:controller="com.android.settings.location.LocationIndicatorsPreferenceController"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="input_method_category"
+        android:title="@string/input_method_category"
+        android:order="1400">
+
+        <SwitchPreference
+            android:key="stylus_handwriting"
+            android:title="@string/stylus_handwriting"
+            android:summary="@string/stylus_handwriting_summary" />
     </PreferenceCategory>
 </PreferenceScreen>

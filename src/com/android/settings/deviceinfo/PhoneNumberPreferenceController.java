@@ -16,16 +16,11 @@
 
 package com.android.settings.deviceinfo;
 
-import static android.content.Context.CLIPBOARD_SERVICE;
-
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -61,7 +56,24 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
 
     @Override
     public CharSequence getSummary() {
-        return getFirstPhoneNumber();
+        return mContext.getString(R.string.device_info_protected_single_press);
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        String prefKey = preference.getKey();
+        if (prefKey.startsWith(KEY_PHONE_NUMBER)) {
+            int simSlotNumber = 0;
+            if (!TextUtils.equals(prefKey, KEY_PHONE_NUMBER)) {
+                // Get multisim slot number from preference key.
+                // Multisim preference key is KEY_PHONE_NUMBER + simSlotNumber
+                simSlotNumber = Integer.parseInt(
+                        prefKey.replaceAll("[^0-9]", ""));
+            }
+            final Preference simStatusPreference = mPreferenceList.get(simSlotNumber);
+            simStatusPreference.setSummary(getPhoneNumber(simSlotNumber));
+        }
+        return super.handlePreferenceTreeClick(preference);
     }
 
     @Override
@@ -76,9 +88,9 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
         for (int simSlotNumber = 1; simSlotNumber < mTelephonyManager.getPhoneCount();
                 simSlotNumber++) {
             final Preference multiSimPreference = createNewPreference(screen.getContext());
+            multiSimPreference.setCopyingEnabled(true);
             multiSimPreference.setOrder(phonePreferenceOrder + simSlotNumber);
             multiSimPreference.setKey(KEY_PHONE_NUMBER + simSlotNumber);
-            multiSimPreference.setSelectable(false);
             category.addPreference(multiSimPreference);
             mPreferenceList.add(multiSimPreference);
         }
@@ -89,24 +101,13 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
         for (int simSlotNumber = 0; simSlotNumber < mPreferenceList.size(); simSlotNumber++) {
             final Preference simStatusPreference = mPreferenceList.get(simSlotNumber);
             simStatusPreference.setTitle(getPreferenceTitle(simSlotNumber));
-            simStatusPreference.setSummary(getPhoneNumber(simSlotNumber));
+            simStatusPreference.setSummary(getSummary());
         }
     }
 
     @Override
     public boolean useDynamicSliceSummary() {
         return true;
-    }
-
-    @Override
-    public void copy() {
-        final ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(
-                CLIPBOARD_SERVICE);
-        clipboard.setPrimaryClip(ClipData.newPlainText("text", getFirstPhoneNumber()));
-
-        final String toast = mContext.getString(R.string.copyable_slice_toast,
-                mContext.getText(R.string.status_number));
-        Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
     }
 
     private CharSequence getFirstPhoneNumber() {
@@ -136,7 +137,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
     }
 
     @VisibleForTesting
-    SubscriptionInfo getSubscriptionInfo(int simSlot) {
+    protected SubscriptionInfo getSubscriptionInfo(int simSlot) {
         final List<SubscriptionInfo> subscriptionInfoList =
                 mSubscriptionManager.getActiveSubscriptionInfoList();
         if (subscriptionInfoList != null) {
@@ -150,7 +151,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
     }
 
     @VisibleForTesting
-    CharSequence getFormattedPhoneNumber(SubscriptionInfo subscriptionInfo) {
+    protected CharSequence getFormattedPhoneNumber(SubscriptionInfo subscriptionInfo) {
         final String phoneNumber = DeviceInfoUtils.getBidiFormattedPhoneNumber(mContext,
                 subscriptionInfo);
         return TextUtils.isEmpty(phoneNumber) ? mContext.getString(R.string.device_info_default)

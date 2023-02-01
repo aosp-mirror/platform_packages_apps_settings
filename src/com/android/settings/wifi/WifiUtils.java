@@ -41,6 +41,8 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
     private static final int SSID_ASCII_MIN_LENGTH = 1;
     private static final int SSID_ASCII_MAX_LENGTH = 32;
 
+    private static final int PSK_PASSPHRASE_ASCII_MIN_LENGTH = 8;
+    private static final int PSK_PASSPHRASE_ASCII_MAX_LENGTH = 63;
 
     public static boolean isSSIDTooLong(String ssid) {
         if (TextUtils.isEmpty(ssid)) {
@@ -62,8 +64,15 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
     public static boolean isHotspotPasswordValid(String password, int securityType) {
         final SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
         try {
+            if (securityType == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK
+                    || securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION) {
+                if (password.length() < PSK_PASSPHRASE_ASCII_MIN_LENGTH
+                        || password.length() > PSK_PASSPHRASE_ASCII_MAX_LENGTH) {
+                    return false;
+                }
+            }
             configBuilder.setPassphrase(password, securityType);
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             return false;
         }
         return true;
@@ -77,7 +86,7 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
      * @return true if Settings cannot modify the config due to lockDown.
      */
     public static boolean isNetworkLockedDown(Context context, WifiConfiguration config) {
-        if (config == null) {
+        if (context == null || config == null) {
             return false;
         }
 

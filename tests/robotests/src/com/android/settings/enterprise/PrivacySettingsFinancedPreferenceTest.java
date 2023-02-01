@@ -18,7 +18,10 @@ package com.android.settings.enterprise;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.content.Context;
 import android.provider.SearchIndexableResource;
+
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -31,14 +34,14 @@ import org.robolectric.RobolectricTestRunner;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-public class PrivacySettingsFinancedPreferenceTest extends BasePrivacySettingsPreferenceTest {
+public class PrivacySettingsFinancedPreferenceTest extends AbsBasePrivacySettingsPreference {
 
+    private Context mContext;
     private PrivacySettingsFinancedPreference mPrivacySettingsFinancedPreference;
 
-    @Override
     @Before
     public void setUp() {
-        super.setUp();
+        mContext = ApplicationProvider.getApplicationContext();
         mPrivacySettingsFinancedPreference = new PrivacySettingsFinancedPreference(mContext);
     }
 

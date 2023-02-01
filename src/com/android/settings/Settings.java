@@ -16,16 +16,24 @@
 
 package com.android.settings;
 
+import static android.provider.Settings.ACTION_PRIVACY_SETTINGS;
+
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.ims.ImsRcsManager;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
+import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
+import com.android.settings.network.MobileNetworkIntentConverter;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settings.security.SecuritySettingsFeatureProvider;
 
 import com.google.android.setupdesign.util.ThemeHelper;
@@ -42,6 +50,8 @@ public class Settings extends SettingsActivity {
     public static class BluetoothSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CreateShortcutActivity extends SettingsActivity { /* empty */ }
     public static class FaceSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Container for {@link FaceSettings} to use with a pre-defined task affinity. */
+    public static class FaceSettingsInternalActivity extends SettingsActivity { /* empty */ }
     public static class FingerprintSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CombinedBiometricSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CombinedBiometricProfileSettingsActivity extends SettingsActivity { /* empty */ }
@@ -131,6 +141,27 @@ public class Settings extends SettingsActivity {
     /** Activity for the security dashboard. */
     public static class SecurityDashboardActivity extends SettingsActivity {
 
+        private static final String TAG = "SecurityDashboardActivity";
+
+        @Override
+        protected void onCreate(Bundle savedState) {
+            super.onCreate(savedState);
+            handleSafetyCenterRedirection();
+        }
+
+        /** Redirects to SafetyCenter if enabled. */
+        @VisibleForTesting
+        public void handleSafetyCenterRedirection() {
+            if (SafetyCenterManagerWrapper.get().isEnabled(this)) {
+                try {
+                    startActivity(new Intent(Intent.ACTION_SAFETY_CENTER));
+                    finish();
+                } catch (ActivityNotFoundException e) {
+                    Log.e(TAG, "Unable to open safety center", e);
+                }
+            }
+        }
+
         /** Whether the given fragment is allowed. */
         @VisibleForTesting
         @Override
@@ -161,12 +192,39 @@ public class Settings extends SettingsActivity {
             return alternativeFragmentClassname;
         }
     }
+    /** Activity for the Advanced security settings. */
+    public static class SecurityAdvancedSettings extends SettingsActivity { /* empty */ }
     public static class UsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppUsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ScanningSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiScanningSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class PrivacyDashboardActivity extends SettingsActivity { /* empty */ }
+    /** Activity for the privacy dashboard. */
+    public static class PrivacyDashboardActivity extends SettingsActivity {
+
+        private static final String TAG = "PrivacyDashboardActivity";
+
+        @Override
+        protected void onCreate(Bundle savedState) {
+            super.onCreate(savedState);
+            handleSafetyCenterRedirection();
+        }
+
+        /** Redirects to SafetyCenter if enabled. */
+        @VisibleForTesting
+        public void handleSafetyCenterRedirection() {
+            if (ACTION_PRIVACY_SETTINGS.equals(getIntent().getAction())
+                    && SafetyCenterManagerWrapper.get().isEnabled(this)) {
+                try {
+                    startActivity(new Intent(Intent.ACTION_SAFETY_CENTER));
+                    finish();
+                } catch (ActivityNotFoundException e) {
+                    Log.e(TAG, "Unable to open safety center", e);
+                }
+            }
+        }
+    }
+    public static class PrivacyControlsActivity extends SettingsActivity { /* empty */ }
     public static class PrivacySettingsActivity extends SettingsActivity { /* empty */ }
     public static class FactoryResetActivity extends SettingsActivity {
         @Override
@@ -215,6 +273,7 @@ public class Settings extends SettingsActivity {
     public static class VrListenersSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PremiumSmsAccessActivity extends SettingsActivity { /* empty */ }
     public static class PictureInPictureSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class TurnScreenOnSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppPictureInPictureSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenAccessDetailSettingsActivity extends SettingsActivity {}
@@ -237,6 +296,7 @@ public class Settings extends SettingsActivity {
     public static class AppBubbleNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationAssistantSettingsActivity extends SettingsActivity{ /* empty */ }
     public static class NotificationAppListActivity extends SettingsActivity { /* empty */ }
+    public static class NotificationReviewPermissionsActivity extends SettingsActivity { /* empty */ }
     public static class AppNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChannelNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChannelGroupNotificationSettingsActivity extends SettingsActivity { /* empty */ }
@@ -244,6 +304,8 @@ public class Settings extends SettingsActivity {
     public static class AutomaticStorageManagerSettingsActivity extends SettingsActivity { /* empty */ }
     public static class GamesStorageActivity extends SettingsActivity { /* empty */ }
     public static class GestureNavigationSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity to manage 2-/3-button navigation configuration. */
+    public static class ButtonNavigationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class InteractAcrossProfilesSettingsActivity extends SettingsActivity {
         /* empty */
     }
@@ -264,6 +326,8 @@ public class Settings extends SettingsActivity {
     public static class ChangeWifiStateActivity extends SettingsActivity { /* empty */ }
     public static class AppDrawOverlaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppWriteSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity to manage app battery usage details. */
+    public static class AppBatteryUsageActivity extends SettingsActivity { /* empty */ }
 
     public static class ManageExternalSourcesActivity extends SettingsActivity {/* empty */ }
     public static class ManageAppExternalSourcesActivity extends SettingsActivity { /* empty */ }
@@ -303,6 +367,48 @@ public class Settings extends SettingsActivity {
     public static class WifiCallingDisclaimerActivity extends SettingsActivity { /* empty */ }
     public static class MobileNetworkListActivity extends SettingsActivity {}
     public static class PowerMenuSettingsActivity extends SettingsActivity {}
+    public static class MobileNetworkActivity extends SettingsActivity {
+
+        public static final String TAG = "MobileNetworkActivity";
+        public static final String EXTRA_MMS_MESSAGE = "mms_message";
+        public static final String EXTRA_SHOW_CAPABILITY_DISCOVERY_OPT_IN =
+                "show_capability_discovery_opt_in";
+
+        private MobileNetworkIntentConverter mIntentConverter;
+
+        /**
+         * Override of #onNewIntent() requires Activity to have "singleTop" launch mode within
+         * AndroidManifest.xml
+         */
+        @Override
+        protected void onNewIntent(Intent intent) {
+            super.onNewIntent(intent);
+
+            Log.d(TAG, "Starting onNewIntent");
+
+            createUiFromIntent(null /* savedState */, convertIntent(intent));
+        }
+
+        @Override
+        public Intent getIntent() {
+            return convertIntent(super.getIntent());
+        }
+
+        private Intent convertIntent(Intent copyFrom) {
+            if (mIntentConverter == null) {
+                mIntentConverter = new MobileNetworkIntentConverter(this);
+            }
+            Intent intent = mIntentConverter.apply(copyFrom);
+            return (intent == null) ? copyFrom : intent;
+        }
+
+        public static boolean doesIntentContainOptInAction(Intent intent) {
+            String intentAction = (intent != null ? intent.getAction() : null);
+            return TextUtils.equals(intentAction,
+                    ImsRcsManager.ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN);
+        }
+    }
+
     /**
      * Activity for BugReportHandlerPicker.
      */
@@ -327,4 +433,9 @@ public class Settings extends SettingsActivity {
     public static class AppDashboardActivity extends SettingsActivity {}
 
     public static class AdaptiveBrightnessActivity extends SettingsActivity { /* empty */ }
+
+    /**
+     * Activity for OneHandedSettings
+     */
+    public static class OneHandedSettingsActivity extends SettingsActivity { /* empty */ }
 }

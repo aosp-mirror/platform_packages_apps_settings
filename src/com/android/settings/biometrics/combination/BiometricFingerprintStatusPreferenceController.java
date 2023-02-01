@@ -30,7 +30,7 @@ public class BiometricFingerprintStatusPreferenceController extends
         FingerprintStatusPreferenceController {
 
     public BiometricFingerprintStatusPreferenceController(Context context, String key) {
-        super(context, key);
+        super(context, key, null /* lifecycle */);
     }
 
     public BiometricFingerprintStatusPreferenceController(

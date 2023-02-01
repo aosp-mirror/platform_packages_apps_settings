@@ -16,9 +16,6 @@
 package com.android.settings.biometrics.combination;
 
 import android.content.Context;
-import android.hardware.biometrics.BiometricAuthenticator;
-import android.hardware.face.FaceManager;
-import android.hardware.fingerprint.FingerprintManager;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle;
@@ -28,11 +25,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.settings.R;
-import com.android.settings.Settings;
-import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricStatusPreferenceController;
-import com.android.settings.biometrics.ParentalControlsUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 
@@ -42,14 +35,12 @@ import com.android.settingslib.RestrictedPreference;
  */
 public class CombinedBiometricStatusPreferenceController extends
         BiometricStatusPreferenceController implements LifecycleObserver {
-    private static final String KEY_BIOMETRIC_SETTINGS = "biometric_settings";
+    public static final String KEY_BIOMETRIC_SETTINGS = "biometric_settings";
 
-    @Nullable
-    FingerprintManager mFingerprintManager;
-    @Nullable
-    FaceManager mFaceManager;
     @VisibleForTesting
     RestrictedPreference mPreference;
+    protected final CombinedBiometricStatusUtils mCombinedBiometricStatusUtils;
+    private PreferenceScreen mPreferenceScreen;
 
     public CombinedBiometricStatusPreferenceController(Context context) {
         this(context, KEY_BIOMETRIC_SETTINGS, null /* lifecycle */);
@@ -66,8 +57,7 @@ public class CombinedBiometricStatusPreferenceController extends
     public CombinedBiometricStatusPreferenceController(
             Context context, String key, Lifecycle lifecycle) {
         super(context, key);
-        mFingerprintManager = Utils.getFingerprintManagerOrNull(context);
-        mFaceManager = Utils.getFaceManagerOrNull(context);
+        mCombinedBiometricStatusUtils = new CombinedBiometricStatusUtils(context, getUserId());
 
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -77,22 +67,21 @@ public class CombinedBiometricStatusPreferenceController extends
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void onResume() {
         updateStateInternal();
+        if (mPreferenceScreen != null) {
+            displayPreference(mPreferenceScreen);
+        }
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        mPreferenceScreen = screen;
         mPreference = screen.findPreference(mPreferenceKey);
     }
 
     @Override
     protected boolean isDeviceSupported() {
-        return Utils.hasFingerprintHardware(mContext) && Utils.hasFaceHardware(mContext);
-    }
-
-    @Override
-    protected boolean hasEnrolledBiometrics() {
-        return false;
+        return mCombinedBiometricStatusUtils.isAvailable();
     }
 
     @Override
@@ -102,80 +91,39 @@ public class CombinedBiometricStatusPreferenceController extends
     }
 
     private void updateStateInternal() {
-        // This controller currently is shown if fingerprint&face exist on the device. If this
-        // changes in the future, the modalities passed into the below will need to be updated.
+        final RestrictedLockUtils.EnforcedAdmin admin =
+                mCombinedBiometricStatusUtils.getDisablingAdmin();
 
-        final RestrictedLockUtils.EnforcedAdmin faceAdmin = ParentalControlsUtils
-                .parentConsentRequired(mContext, BiometricAuthenticator.TYPE_FACE);
-        final RestrictedLockUtils.EnforcedAdmin fpAdmin = ParentalControlsUtils
-                .parentConsentRequired(mContext, BiometricAuthenticator.TYPE_FINGERPRINT);
-
-        // If the admins are non-null, they are actually always the same. Just the helper class
-        // we create above always return the admin, instead of a boolean.
-        final boolean faceConsentRequired = faceAdmin != null;
-        final boolean fpConsentRequired = fpAdmin != null;
-        final RestrictedLockUtils.EnforcedAdmin admin = faceAdmin != null ? faceAdmin : fpAdmin;
-
-        updateStateInternal(admin, faceConsentRequired, fpConsentRequired);
+        updateStateInternal(admin);
     }
 
+    /**
+     *   Disables the preference and shows the consent flow only if consent is required for all
+     *   modalities.
+     *
+     *   <p>Otherwise, users will not be able to enter and modify settings for modalities which have
+     *   already been consented. In any case, the controllers for the modalities which have not yet
+     *   been consented will be disabled in the combined page anyway - users can go through the
+     *   consent+enrollment flow from there.
+     */
     @VisibleForTesting
-    void updateStateInternal(@Nullable RestrictedLockUtils.EnforcedAdmin enforcedAdmin,
-            boolean faceConsentRequired, boolean fpConsentRequired) {
-        // Disable the preference (and show the consent flow) only if consent is required for all
-        // modalities. Otherwise, users will not be able to enter and modify settings for modalities
-        // which have already been consented. In any case, the controllers for the modalities which
-        // have not yet been consented will be disabled in the combined page anyway - users can
-        // go through the consent+enrollment flow from there.
-        final boolean disablePreference = faceConsentRequired && fpConsentRequired;
-        if (!disablePreference) {
-            enforcedAdmin = null;
-        }
-
+    void updateStateInternal(@Nullable RestrictedLockUtils.EnforcedAdmin enforcedAdmin) {
         if (mPreference != null) {
             mPreference.setDisabledByAdmin(enforcedAdmin);
         }
     }
 
     @Override
-    protected String getSummaryTextEnrolled() {
-        // Note that this is currently never called (see the super class)
-        return mContext.getString(
-                R.string.security_settings_biometric_preference_summary_none_enrolled);
-    }
-
-    @Override
-    protected String getSummaryTextNoneEnrolled() {
-        final int numFingerprintsEnrolled = mFingerprintManager != null ?
-                mFingerprintManager.getEnrolledFingerprints(getUserId()).size() : 0;
-        final boolean faceEnrolled = mFaceManager != null
-                && mFaceManager.hasEnrolledTemplates(getUserId());
-
-        if (faceEnrolled && numFingerprintsEnrolled > 1) {
-            return mContext.getString(
-                    R.string.security_settings_biometric_preference_summary_both_fp_multiple);
-        } else if (faceEnrolled && numFingerprintsEnrolled == 1) {
-            return mContext.getString(
-                    R.string.security_settings_biometric_preference_summary_both_fp_single);
-        } else if (faceEnrolled) {
-            return mContext.getString(R.string.security_settings_face_preference_summary);
-        } else if (numFingerprintsEnrolled > 0) {
-            return mContext.getResources().getQuantityString(
-                    R.plurals.security_settings_fingerprint_preference_summary,
-                    numFingerprintsEnrolled, numFingerprintsEnrolled);
-        } else {
-            return mContext.getString(
-                    R.string.security_settings_biometric_preference_summary_none_enrolled);
-        }
+    protected String getSummaryText() {
+        return mCombinedBiometricStatusUtils.getSummary();
     }
 
     @Override
     protected String getSettingsClassName() {
-        return Settings.CombinedBiometricSettingsActivity.class.getName();
+        return mCombinedBiometricStatusUtils.getSettingsClassName();
     }
 
-    @Override
-    protected String getEnrollClassName() {
-        return Settings.CombinedBiometricSettingsActivity.class.getName();
+    public void setPreferenceScreen(PreferenceScreen preferenceScreen) {
+        mPreferenceScreen = preferenceScreen;
     }
 }

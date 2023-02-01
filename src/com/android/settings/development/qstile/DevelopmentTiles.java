@@ -48,8 +48,8 @@ import android.widget.Toast;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.app.LocalePicker;
+import com.android.internal.inputmethod.ImeTracing;
 import com.android.internal.statusbar.IStatusBarService;
-import com.android.internal.view.IInputMethodManager;
 import com.android.settings.R;
 import com.android.settings.development.WirelessDebuggingPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -58,6 +58,22 @@ import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.development.SystemPropPoker;
 
 public abstract class DevelopmentTiles extends TileService {
+
+    /**
+     * Meta-data for a development tile to declare a sysprop flag that needs to be enabled for
+     * the tile to be available.
+     *
+     * To define the flag, set this meta-data on the tile's manifest declaration.
+     * <pre class="prettyprint">
+     * {@literal
+     * <meta-data android:name="com.android.settings.development.qstile.REQUIRES_SYSTEM_PROPERTY"
+     *     android:value="persist.debug.flag_name_here" />
+     * }
+     * </pre>
+     */
+    public static final String META_DATA_REQUIRES_SYSTEM_PROPERTY =
+            "com.android.settings.development.qstile.REQUIRES_SYSTEM_PROPERTY";
+
     private static final String TAG = "DevelopmentTiles";
 
     protected abstract boolean isEnabled();
@@ -198,7 +214,7 @@ public abstract class DevelopmentTiles extends TileService {
         static final int SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE = 1026;
         private IBinder mSurfaceFlinger;
         private IWindowManager mWindowManager;
-        private IInputMethodManager mInputMethodManager;
+        private ImeTracing mImeTracing;
         private Toast mToast;
 
         @Override
@@ -206,8 +222,7 @@ public abstract class DevelopmentTiles extends TileService {
             super.onCreate();
             mWindowManager = WindowManagerGlobal.getWindowManagerService();
             mSurfaceFlinger = ServiceManager.getService("SurfaceFlinger");
-            mInputMethodManager = IInputMethodManager.Stub.asInterface(
-                    ServiceManager.getService("input_method"));
+            mImeTracing = ImeTracing.getInstance();
             Context context = getApplicationContext();
             CharSequence text = "Trace files written to /data/misc/wmtrace";
             mToast = Toast.makeText(context, text, Toast.LENGTH_LONG);
@@ -261,12 +276,7 @@ public abstract class DevelopmentTiles extends TileService {
         }
 
         private boolean isImeTraceEnabled() {
-            try {
-                return mInputMethodManager.isImeTraceEnabled();
-            } catch (RemoteException e) {
-                Log.e(TAG, "Could not get ime trace status, defaulting to false.", e);
-            }
-            return false;
+            return mImeTracing.isEnabled();
         }
 
         @Override
@@ -323,14 +333,10 @@ public abstract class DevelopmentTiles extends TileService {
         }
 
         private void setImeTraceEnabled(boolean isEnabled) {
-            try {
-                if (isEnabled) {
-                    mInputMethodManager.startImeTrace();
-                } else {
-                    mInputMethodManager.stopImeTrace();
-                }
-            } catch (RemoteException e) {
-                Log.e(TAG, "Could not set ime trace status." + e.toString());
+            if (isEnabled) {
+                mImeTracing.startImeTrace();
+            } else {
+                mImeTracing.stopImeTrace();
             }
         }
 
@@ -484,6 +490,79 @@ public abstract class DevelopmentTiles extends TileService {
         protected void setIsEnabled(boolean isEnabled) {
             Settings.System.putInt(mContext.getContentResolver(),
                 Settings.System.SHOW_TOUCHES, isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
+        }
+    }
+
+    /**
+     * Tile to enable desktop mode
+     */
+    public static class DesktopMode extends DevelopmentTiles {
+
+        private static final int SETTING_VALUE_ON = 1;
+        private static final int SETTING_VALUE_OFF = 0;
+        private Context mContext;
+
+        @Override
+        public void onCreate() {
+            super.onCreate();
+            mContext = getApplicationContext();
+        }
+
+        @Override
+        protected boolean isEnabled() {
+            return Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.DESKTOP_MODE, SETTING_VALUE_OFF) == SETTING_VALUE_ON;
+        }
+
+        private boolean isDesktopModeFlagEnabled() {
+            return SystemProperties.getBoolean("persist.wm.debug.desktop_mode", false);
+        }
+
+        private boolean isFreeformFlagEnabled() {
+            return Settings.Global.getInt(mContext.getContentResolver(),
+                    Settings.Global.DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT, SETTING_VALUE_OFF)
+                    == SETTING_VALUE_ON;
+        }
+
+        private boolean isCaptionOnShellEnabled() {
+            return SystemProperties.getBoolean("persist.wm.debug.caption_on_shell", false);
+        }
+
+        @Override
+        protected void setIsEnabled(boolean isEnabled) {
+            if (isEnabled) {
+                // Check that all required features are enabled
+                if (!isDesktopModeFlagEnabled()) {
+                    closeShade();
+                    showMessage(
+                            "Enable 'Desktop Windowing Proto 1' from the Flag Flipper app");
+                    return;
+                }
+                if (!isCaptionOnShellEnabled()) {
+                    closeShade();
+                    showMessage("Enable 'Captions in Shell' from the Flag Flipper app");
+                    return;
+                }
+                if (!isFreeformFlagEnabled()) {
+                    closeShade();
+                    showMessage(
+                            "Enable freeform windows from developer settings");
+                    return;
+                }
+            }
+
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.DESKTOP_MODE,
+                    isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
+            closeShade();
+        }
+
+        private void closeShade() {
+            sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+        }
+
+        private void showMessage(String message) {
+            Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
         }
     }
 }

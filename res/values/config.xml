@@ -49,6 +49,10 @@
     <string name="config_wallpaper_picker_class" translatable="false">com.android.settings.Settings$WallpaperSettingsActivity</string>
     <!-- Fully-qualified class name for the styles & wallpaper picker activity. -->
     <string name="config_styles_and_wallpaper_picker_class" translatable="false"></string>
+    <!-- Action name for the wallpaper picker activity. -->
+    <string name="config_wallpaper_picker_action" translatable="false"></string>
+    <!-- Action name for the styles & wallpaper picker activity. -->
+    <string name="config_styles_and_wallpaper_picker_action" translatable="false"></string>
     <!-- Intent extra for wallpaper picker activity. -->
     <string name="config_wallpaper_picker_launch_extra" translatable="false">com.android.wallpaper.LAUNCH_SOURCE</string>
 
@@ -70,9 +74,6 @@
 
     <!-- If the support features are enabled. -->
     <bool name="config_support_enabled">false</bool>
-
-    <!-- Whether to enable "show operator name in the status bar" setting -->
-    <bool name="config_showOperatorNameInStatusBar">false</bool>
 
     <!-- List containing the component names of pre-installed screen reader services. -->
     <string-array name="config_preinstalled_screen_reader_services" translatable="false">
@@ -197,11 +198,24 @@
     <!-- Whether or not to show the night light suggestion. -->
     <bool name="config_night_light_suggestion_enabled">true</bool>
 
-    <!-- Whether or not the device is capable of multiple levels of vibration intensity.
-         Note that this is different from whether it can control the vibration amplitude as some
-         devices will be able to vary their amplitude but do not possess enough dynamic range to
-         have distinct intensity levels -->
-    <bool name="config_vibration_supports_multiple_intensities">false</bool>
+    <!-- The number of vibration intensity levels supported by the device.
+
+         Note that this should correspond to the ability to vary the vibration amplitude, with
+         enough dynamic range to have at least as many distinct intensity levels as defined here.
+
+         Supported values are 1, 2, 3. If '1', the settings app will use a toggle for the settings,
+         otherwise a slider. If '3', the settings app maps intensities directly to the levels
+         supported by the Vibrator HAL APIs. If '2', then the levels will be mapped to
+         VIBRATION_INTENSITY_LOW and VIBRATION_INTENSITY_HIGH, which gives the most range for
+         scaling vibrations. The medium intensity will be skipped.
+
+         The default intensity values are configured at
+         frameworks/base/core/res/res/values/config.xml's config_default[type]VibrationIntensity.
+         Make sure that each default intensity value is consistent with the supported levels set
+         here. If this settings supports only 2 levels, for example, then the default intensity
+         should be either LOW (1) or HIGH (3).
+    -->
+    <integer name="config_vibration_supported_intensity_levels">1</integer>
 
     <!--
         Whether or not the homepage should be powered by legacy suggestion (versus contextual cards)
@@ -311,9 +325,6 @@
 
     <!-- Whether swipe security option is hidden or not -->
     <bool name="config_hide_swipe_security_option">false</bool>
-
-    <!--Whether help links are defined. -->
-    <bool name="config_has_help">false</bool>
 
     <!-- Whether Wi-Fi settings should be shown or not.
     This also controls whether Wi-fi related sub-settings (e.g. Wi-Fi preferences) will
@@ -437,6 +448,9 @@
     <!-- Whether top_level_battery should be shown or not. -->
     <bool name="config_show_top_level_battery">true</bool>
 
+    <!-- Whether to use compact battery status string. -->
+    <bool name="config_use_compact_battery_status">false</bool>
+
     <!-- Whether top_level_connected_devices should be shown or not. -->
     <bool name="config_show_top_level_connected_devices">true</bool>
 
@@ -492,6 +506,9 @@
     <!-- Whether to show Smooth Display feature in Settings Options -->
     <bool name="config_show_smooth_display">false</bool>
 
+    <!-- Whether to show emergency settings in top-level Settings -->
+    <bool name="config_show_emergency_settings">true</bool>
+
     <!-- Whether to show emergency gesture in Settings -->
     <bool name="config_show_emergency_gesture_settings">true</bool>
 
@@ -529,9 +546,6 @@
     <!-- Whether to show Smart Storage toggle -->
     <bool name="config_show_smart_storage_toggle">true</bool>
 
-    <!-- Whether suw to support two panes -->
-    <bool name="config_suw_supported_two_panes">false</bool>
-
     <!-- Whether to support large screen -->
     <bool name="config_supported_large_screen">false</bool>
 
@@ -555,9 +569,78 @@
         <item>3</item>
     </integer-array>
 
+    <!-- The settings/preference description for each settable device state defined in the array
+         "config_perDeviceStateRotationLockDefaults".
+         The item in position "i" describes the auto-rotation setting for the device state also in
+         position "i" in the array "config_perDeviceStateRotationLockDefaults". -->
+    <string-array name="config_settableAutoRotationDeviceStatesDescriptions">
+        <!-- Example:
+            <item>Auto-rotate when folded</item>
+            <item>@null</item> No description for state in position 1
+            <item>Auto-rotate when unfolded</item>
+        -->
+    </string-array>
+
+    <!-- The option list for switch screen resolution -->
+    <string-array name="config_screen_resolution_options_strings" translatable="false">
+        <item>@string/screen_resolution_option_high</item>
+        <item>@string/screen_resolution_option_highest</item>
+    </string-array>
+
+    <!-- The option summary list for screen resolution -->
+    <string-array name="config_screen_resolution_summaries_strings" translatable="false">
+        <item>@string/screen_resolution_summary_high</item>
+        <item>@string/screen_resolution_summary_highest</item>
+    </string-array>
+
     <!-- Whether to aggregate for network selection list-->
     <bool name="config_network_selection_list_aggregation_enabled">false</bool>
 
     <!-- Max network scan search time in seconds -->
     <integer name="config_network_scan_helper_max_search_time_sec">300</integer>
+
+    <!-- Whether to give option to add restricted profiles -->
+    <bool name="config_offer_restricted_profiles">false</bool>
+
+    <!-- An array of packages for which Applications whose per-app locale cannot be changed. -->
+    <string-array name="config_disallowed_app_localeChange_packages" translatable="false">
+        <!--
+        <item>com.example.package.first</item>
+        <item>com.example.package.second</item>
+        <item>...</item>
+        -->
+    </string-array>
+
+    <!-- The ratio to use when using the two-pane settings layout -->
+    <item name="config_activity_embed_split_ratio" format="float" type="dimen">0.3636</item>
+
+    <!-- The number of visible app icons while entering app list related pages for preloading.
+         Take the "Unrestricted data" page as the example, the visible app icons could be 15
+         on 6.4 inches screen size whether the font size and display size are both small. -->
+    <integer name="config_num_visible_app_icons">20</integer>
+
+    <!-- Whether the dream setup activity should be enabled as part of setupwizard -->
+    <bool name="dream_setup_supported">false</bool>
+
+    <!-- Whether to put the apps with system UID into system component bucket or not -->
+    <bool name="config_battery_combine_system_components">false</bool>
+
+    <!-- The extra value for battery tip -->
+    <integer name="config_battery_extra_tip_value">12</integer>
+
+    <!-- Whether to enable the advanced vpn feature. The default is not to. -->
+    <bool name="config_advanced_vpn_enabled">false</bool>
+
+    <!-- An array of uid name for which packages exempt from Wi-Fi permission check. -->
+    <string-array name="config_exempt_wifi_permission_uid_name" translatable="false">
+        <item>@string/config_settingsintelligence_package_name</item>
+        <item>android.uid.system:1000</item>
+    </string-array>
+
+    <!-- Whether to enable the app battery usage list page feature. -->
+    <bool name="config_app_battery_usage_list_enabled">false</bool>
+
+    <!-- Whether sim related information is visible to the end user. -->
+    <bool name="config_show_sim_info">true</bool>
+
 </resources>

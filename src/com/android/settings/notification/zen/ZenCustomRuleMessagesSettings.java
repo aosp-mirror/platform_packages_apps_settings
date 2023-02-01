@@ -18,12 +18,12 @@ package com.android.settings.notification.zen;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.service.notification.ZenPolicy;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.widget.FooterPreference;
 
@@ -32,7 +32,6 @@ import java.util.List;
 
 public class ZenCustomRuleMessagesSettings extends ZenCustomRuleSettingsBase {
     private static final String MESSAGES_KEY = "zen_mode_messages";
-    private static final String STARRED_CONTACTS_KEY = "zen_mode_starred_contacts_messages";
     private static final String PREFERENCE_CATEGORY_KEY = "zen_mode_settings_category_messages";
 
     @Override
@@ -48,11 +47,9 @@ public class ZenCustomRuleMessagesSettings extends ZenCustomRuleSettingsBase {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         mControllers = new ArrayList<>();
-        mControllers.add(new ZenRuleMessagesPreferenceController(context, MESSAGES_KEY,
-                getSettingsLifecycle()));
-        mControllers.add(new ZenRuleStarredContactsPreferenceController(context,
-                getSettingsLifecycle(), ZenPolicy.PRIORITY_CATEGORY_MESSAGES,
-                STARRED_CONTACTS_KEY));
+        mControllers.add(new ZenRulePrioritySendersPreferenceController(context,
+                PREFERENCE_CATEGORY_KEY, getSettingsLifecycle(), true,
+                new NotificationBackend()));
         return mControllers;
     }
 
@@ -65,6 +62,8 @@ public class ZenCustomRuleMessagesSettings extends ZenCustomRuleSettingsBase {
     public void updatePreferences() {
         super.updatePreferences();
         PreferenceScreen screen = getPreferenceScreen();
+        // TODO(b/200600958): It seems that this string does not currently update to indicate when
+        //   messages aren't in fact blocked by the rule.
         Preference footerPreference = screen.findPreference(FooterPreference.KEY_FOOTER);
         footerPreference.setTitle(mContext.getResources().getString(
                 R.string.zen_mode_custom_messages_footer, mRule.getName()));

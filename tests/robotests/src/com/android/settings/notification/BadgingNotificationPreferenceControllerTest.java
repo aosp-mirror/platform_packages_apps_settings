@@ -23,10 +23,12 @@ import static com.android.settings.notification.BadgingNotificationPreferenceCon
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.provider.Settings;
 
@@ -59,6 +61,8 @@ public class BadgingNotificationPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        doReturn(mock(DevicePolicyManager.class)).when(mContext)
+                .getSystemService(Context.DEVICE_POLICY_SERVICE);
         mController = new BadgingNotificationPreferenceController(mContext,
                 KEY_NOTIFICATION_BADGING);
         mPreference = new Preference(RuntimeEnvironment.application);

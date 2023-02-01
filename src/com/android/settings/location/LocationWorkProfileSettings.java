@@ -16,8 +16,11 @@
 
 package com.android.settings.location;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LOCATION_SWITCH_TITLE;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.Bundle;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -38,6 +41,13 @@ public class LocationWorkProfileSettings extends DashboardFragment {
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.location_settings_workprofile;
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        replaceEnterpriseStringTitle("managed_profile_location_switch",
+                WORK_PROFILE_LOCATION_SWITCH_TITLE, R.string.managed_profile_location_switch_title);
     }
 
     @Override

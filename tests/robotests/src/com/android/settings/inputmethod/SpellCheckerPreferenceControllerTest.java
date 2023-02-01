@@ -18,9 +18,11 @@ package com.android.settings.inputmethod;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.textservice.SpellCheckerInfo;
@@ -59,6 +61,8 @@ public class SpellCheckerPreferenceControllerTest {
         mAppContext = RuntimeEnvironment.application;
         when(mContext.getSystemService(Context.TEXT_SERVICES_MANAGER_SERVICE))
                 .thenReturn(mTextServicesManager);
+        doReturn(mock(DevicePolicyManager.class)).when(mContext)
+                .getSystemService(Context.DEVICE_POLICY_SERVICE);
         when(mContext.getResources()).thenReturn(mResources);
         when(mResources.getBoolean(R.bool.config_show_spellcheckers_settings)).thenReturn(true);
         mPreference = new Preference(mAppContext);

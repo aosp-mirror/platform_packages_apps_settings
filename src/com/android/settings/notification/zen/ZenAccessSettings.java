@@ -17,7 +17,6 @@
 package com.android.settings.notification.zen;
 
 import android.annotation.Nullable;
-import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -28,8 +27,8 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.ArraySet;
-import android.view.View;
 import android.util.Log;
+import android.view.View;
 
 import androidx.preference.PreferenceScreen;
 
@@ -138,7 +137,7 @@ public class ZenAccessSettings extends EmptyTextSettings implements
             pref.setOnPreferenceClickListener(preference -> {
                 AppInfoBase.startAppInfoFragment(
                         ZenAccessDetails.class  /* fragment */,
-                        R.string.manage_zen_access_title /* titleRes */,
+                        getString(R.string.manage_zen_access_title) /* titleRes */,
                         pkg,
                         app.uid,
                         this /* source */,

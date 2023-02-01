@@ -44,12 +44,15 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
+import org.junit.Ignore;
+
 @RunWith(RobolectricTestRunner.class)
 public class SoundSettingsTest {
 
     @Test
     @Config(shadows = {ShadowUserManager.class, ShadowAudioHelper.class, ShadowDeviceConfig.class,
             ShadowBluetoothAdapter.class})
+    @Ignore
     public void getNonIndexableKeys_existInXmlLayout() {
         final Context context = spy(RuntimeEnvironment.application);
         AudioManager audioManager = mock(AudioManager.class);

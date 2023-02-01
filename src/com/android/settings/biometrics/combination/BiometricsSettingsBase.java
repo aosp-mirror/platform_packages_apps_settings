@@ -127,13 +127,14 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         final String key = preference.getKey();
+        final Context context = requireActivity().getApplicationContext();
 
         // Generate challenge (and request LSS to create a HAT) each time the preference is clicked,
         // since FingerprintSettings and FaceSettings revoke the challenge when finishing.
         if (getFacePreferenceKey().equals(key)) {
             mDoNotFinishActivity = true;
             mFaceManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
-                final byte[] token = BiometricUtils.requestGatekeeperHat(getActivity(), mGkPwHandle,
+                final byte[] token = BiometricUtils.requestGatekeeperHat(context, mGkPwHandle,
                         mUserId, challenge);
                 final Bundle extras = preference.getExtras();
                 extras.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
@@ -146,7 +147,7 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
         } else if (getFingerprintPreferenceKey().equals(key)) {
             mDoNotFinishActivity = true;
             mFingerprintManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
-                final byte[] token = BiometricUtils.requestGatekeeperHat(getActivity(), mGkPwHandle,
+                final byte[] token = BiometricUtils.requestGatekeeperHat(context, mGkPwHandle,
                         mUserId, challenge);
                 final Bundle extras = preference.getExtras();
                 extras.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);

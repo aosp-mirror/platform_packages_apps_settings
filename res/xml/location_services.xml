@@ -16,21 +16,20 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
-        android:title="@string/location_services_preference_title">
+                  android:key="location_services"
+                  android:title="@string/location_services_preference_title"
+                  settings:controller="com.android.settings.location.LocationInjectedServicesPreferenceController">
 
-        <PreferenceCategory
-            android:key="location_services"
-            android:layout="@layout/preference_category_no_label"
-            settings:controller="com.android.settings.location.LocationInjectedServicesPreferenceController"/>
-
-        <Preference
+        <com.android.settingslib.RestrictedPreference
             android:fragment="com.android.settings.location.WifiScanningFragment"
+            android:order="1000"
             android:key="location_services_wifi_scanning"
             android:title="@string/location_scanning_wifi_always_scanning_title"
             settings:controller="com.android.settings.location.LocationServicesWifiScanningPreferenceController"/>
 
-        <Preference
+        <com.android.settingslib.RestrictedPreference
             android:fragment="com.android.settings.location.BluetoothScanningFragment"
+            android:order="1001"
             android:key="location_services_bluetooth_scanning"
             android:title="@string/location_scanning_bluetooth_always_scanning_title"
             settings:controller="com.android.settings.location.LocationServicesBluetoothScanningPreferenceController"/>

@@ -55,6 +55,8 @@
             android:ellipsize="marquee"
             android:fadingEdge="horizontal"
             android:maxLines="2"
+            android:hyphenationFrequency="normalFast"
+            android:lineBreakWordStyle="phrase"
             android:textAppearance="?android:attr/textAppearanceListItem"/>
 
         <TextView
@@ -63,6 +65,8 @@
             android:layout_height="wrap_content"
             android:textDirection="locale"
             android:textAppearance="?android:attr/textAppearanceSmall"
+            android:hyphenationFrequency="normalFast"
+            android:lineBreakWordStyle="phrase"
             android:textColor="?android:attr/textColorSecondary"/>
 
     </LinearLayout>

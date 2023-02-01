@@ -16,166 +16,316 @@
 
 package com.android.settings.wifi;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
+
+import static com.android.settings.wifi.WifiDialogActivity.REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER;
+import static com.android.settings.wifi.WifiDialogActivity.RESULT_CONNECTED;
+import static com.android.settings.wifi.WifiDialogActivity.RESULT_OK;
+
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.doReturn;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import android.app.KeyguardManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
+import android.os.UserManager;
 
-import androidx.lifecycle.Lifecycle.State;
-import androidx.test.core.app.ActivityScenario;
-
-import com.android.settings.R;
-import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
-import com.android.settings.testutils.shadow.ShadowConnectivityManager;
-import com.android.settings.testutils.shadow.ShadowNetworkDetailsTracker;
-import com.android.settings.testutils.shadow.ShadowWifiManager;
+import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.wifi.AccessPoint;
+import com.android.wifitrackerlib.WifiEntry;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
-import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
-import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {
-        ShadowAlertDialogCompat.class,
-        ShadowConnectivityManager.class,
-        ShadowNetworkDetailsTracker.class,
-        ShadowWifiManager.class
-})
 public class WifiDialogActivityTest {
 
-    private static final String AP1_SSID = "\"ap1\"";
-    @Mock
-    private WifiConfigController mController;
-    @Mock
-    private WifiConfigController2 mController2;
+    static final String CALLING_PACKAGE = "calling_package";
+    static final int REQUEST_CODE = REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER;
 
-    private ActivityScenario<WifiDialogActivity> mWifiDialogActivity;
+    @Mock
+    UserManager mUserManager;
+    @Mock
+    PackageManager mPackageManager;
+    @Mock
+    WifiManager mWifiManager;
+    @Mock
+    WifiDialog mWifiDialog;
+    @Mock
+    WifiConfiguration mWifiConfiguration;
+    @Mock
+    AccessPoint mAccessPoint;
+    @Mock
+    WifiDialog2 mWifiDialog2;
+    @Mock
+    WifiConfigController2 mWifiConfiguration2;
+    @Mock
+    WifiEntry mWifiEntry;
+    @Mock
+    Intent mResultData;
+    @Mock
+    WifiConfigController mController;
+    @Mock
+    KeyguardManager mKeyguardManager;
+
+    WifiDialogActivity mActivity;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        when(mWifiDialog.getController()).thenReturn(mController);
+        when(mController.getConfig()).thenReturn(mWifiConfiguration);
+        when(mController.getAccessPoint()).thenReturn(mAccessPoint);
+        when(mWifiDialog2.getController()).thenReturn(mWifiConfiguration2);
+        when(mWifiConfiguration2.getWifiEntry()).thenReturn(mWifiEntry);
+        when(mWifiEntry.canConnect()).thenReturn(true);
+        FakeFeatureFactory.setupForTest();
 
-        WifiConfiguration wifiConfig = new WifiConfiguration();
-        wifiConfig.SSID = AP1_SSID;
-        doReturn(wifiConfig).when(mController).getConfig();
-        doReturn(wifiConfig).when(mController2).getConfig();
-    }
-
-    @After
-    public void cleanUp() {
-        if (mWifiDialogActivity != null) {
-            mWifiDialogActivity.close();
-        }
-    }
-
-    private ActivityScenario<WifiDialogActivity> createTargetActivity(Intent activityIntent) {
-        return ActivityScenario.launch(activityIntent);
+        mActivity = spy(Robolectric.setupActivity(WifiDialogActivity.class));
+        when(mActivity.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(mActivity.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
+        when(mActivity.getSystemService(KeyguardManager.class)).thenReturn(mKeyguardManager);
     }
 
     @Test
     public void onSubmit_shouldConnectToNetwork() {
-        WifiDialogActivity activity = Robolectric.setupActivity(WifiDialogActivity.class);
-        WifiDialog dialog = (WifiDialog) ShadowAlertDialogCompat.getLatestAlertDialog();
-        assertThat(dialog).isNotNull();
+        mActivity.onSubmit(mWifiDialog);
 
-        ReflectionHelpers.setField(dialog, "mController", mController);
-
-        activity.onSubmit(dialog);
-
-        assertThat(ShadowWifiManager.get().savedWifiConfig.SSID).isEqualTo(AP1_SSID);
+        verify(mWifiManager).connect(any(), any());
     }
 
     @Test
-    @Ignore
+    public void onSubmit_noPermissionForResult_setResultWithoutData() {
+        when(mActivity.hasPermissionForResult()).thenReturn(false);
+
+        mActivity.onSubmit(mWifiDialog);
+
+        verify(mActivity).setResult(RESULT_CONNECTED, null);
+    }
+
+    @Test
+    public void onSubmit_hasPermissionForResult_setResultWithData() {
+        when(mActivity.hasPermissionForResult()).thenReturn(true);
+        when(mActivity.createResultData(any(), any())).thenReturn(mResultData);
+
+        mActivity.onSubmit(mWifiDialog);
+
+        verify(mActivity).setResult(RESULT_CONNECTED, mResultData);
+    }
+
+    @Test
+    public void onSubmit2_noPermissionForResult_setResultWithoutData() {
+        when(mActivity.hasPermissionForResult()).thenReturn(false);
+
+        mActivity.onSubmit(mWifiDialog2);
+
+        verify(mActivity).setResult(RESULT_CONNECTED, null);
+    }
+
+    @Test
+    public void onSubmit2_hasPermissionForResult_setResultWithData() {
+        when(mActivity.hasPermissionForResult()).thenReturn(true);
+        when(mActivity.createResultData(any(), any())).thenReturn(mResultData);
+
+        mActivity.onSubmit(mWifiDialog2);
+
+        verify(mActivity).setResult(RESULT_CONNECTED, mResultData);
+    }
+
+    @Test
     public void onSubmit2_whenConnectForCallerIsTrue_shouldConnectToNetwork() {
         final Intent intent = new Intent("com.android.settings.WIFI_DIALOG");
         intent.putExtra(WifiDialogActivity.KEY_CHOSEN_WIFIENTRY_KEY, "FAKE_KEY");
         intent.putExtra(WifiDialogActivity.KEY_CONNECT_FOR_CALLER, true);
-        mWifiDialogActivity = createTargetActivity(intent);
+        mActivity = spy(Robolectric.buildActivity(WifiDialogActivity.class, intent).setup().get());
+        when(mActivity.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
 
-        mWifiDialogActivity.moveToState(State.CREATED);
-        mWifiDialogActivity.moveToState(State.STARTED);
+        mActivity.onSubmit(mWifiDialog2);
 
-        WifiDialog2 dialog = (WifiDialog2) ShadowAlertDialogCompat.getLatestAlertDialog();
-        assertThat(dialog).isNotNull();
-
-        ReflectionHelpers.setField(dialog, "mController", mController2);
-
-        mWifiDialogActivity.onActivity(activity -> {
-            activity.onSubmit(dialog);
-            assertThat(ShadowWifiManager.get().savedWifiConfig.SSID).isEqualTo(AP1_SSID);
-        });
+        verify(mWifiEntry).connect(any());
     }
 
     @Test
     public void onSubmit_whenConnectForCallerIsFalse_shouldNotConnectToNetwork() {
-        WifiDialogActivity activity =
-                Robolectric.buildActivity(
-                        WifiDialogActivity.class,
-                        new Intent().putExtra(WifiDialogActivity.KEY_CONNECT_FOR_CALLER, false))
-                        .setup().get();
-        WifiDialog dialog = (WifiDialog) ShadowAlertDialogCompat.getLatestAlertDialog();
+        final Intent intent = new Intent();
+        intent.putExtra(WifiDialogActivity.KEY_CONNECT_FOR_CALLER, false);
+        mActivity = spy(Robolectric.buildActivity(WifiDialogActivity.class, intent).setup().get());
+        when(mActivity.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
 
-        assertThat(dialog).isNotNull();
+        mActivity.onSubmit(mWifiDialog);
 
-        ReflectionHelpers.setField(dialog, "mController", mController);
-
-        activity.onSubmit(dialog);
-
-        assertThat(ShadowWifiManager.get().savedWifiConfig).isNull();
+        verify(mWifiManager, never()).connect(any(), any());
     }
 
     @Test
-    @Ignore
     public void onSubmit2_whenConnectForCallerIsFalse_shouldNotConnectToNetwork() {
         final Intent intent = new Intent("com.android.settings.WIFI_DIALOG");
         intent.putExtra(WifiDialogActivity.KEY_CHOSEN_WIFIENTRY_KEY, "FAKE_KEY");
         intent.putExtra(WifiDialogActivity.KEY_CONNECT_FOR_CALLER, false);
-        mWifiDialogActivity = createTargetActivity(intent);
+        mActivity = spy(Robolectric.buildActivity(WifiDialogActivity.class, intent).setup().get());
+        when(mActivity.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
 
-        mWifiDialogActivity.moveToState(State.CREATED);
-        mWifiDialogActivity.moveToState(State.STARTED);
+        mActivity.onSubmit(mWifiDialog2);
 
-        WifiDialog2 dialog = (WifiDialog2) ShadowAlertDialogCompat.getLatestAlertDialog();
-        assertThat(dialog).isNotNull();
-
-        ReflectionHelpers.setField(dialog, "mController", mController2);
-
-        mWifiDialogActivity.onActivity(activity -> {
-            activity.onSubmit(dialog);
-            assertThat(ShadowWifiManager.get().savedWifiConfig).isEqualTo(null);
-        });
+        verify(mWifiEntry, never()).connect(any());
     }
 
     @Test
-    public void onSubmit_whenLaunchInSetupFlow_shouldBeLightThemeForWifiDialog() {
-        WifiDialogActivity activity =
-                Robolectric.buildActivity(
-                        WifiDialogActivity.class,
-                        new Intent()
-                                .putExtra(WifiDialogActivity.KEY_CONNECT_FOR_CALLER, false)
-                                .putExtra(WizardManagerHelper.EXTRA_IS_FIRST_RUN, true)
-                                .putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true))
-                        .setup().get();
-        WifiDialog dialog = (WifiDialog) ShadowAlertDialogCompat.getLatestAlertDialog();
+    public void onStart_whenLaunchInSetupFlow_shouldCreateDialogWithSuwTheme() {
+        final Intent intent = new Intent();
+        intent.putExtra(WifiDialogActivity.KEY_CONNECT_FOR_CALLER, false);
+        intent.putExtra(WizardManagerHelper.EXTRA_IS_FIRST_RUN, true);
+        intent.putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true);
+        mActivity = spy(Robolectric.buildActivity(WifiDialogActivity.class, intent).setup().get());
+        when(mActivity.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
+        doNothing().when(mActivity).createDialogWithSuwTheme();
 
-        assertThat(dialog).isNotNull();
+        mActivity.onStart();
 
-        activity.onSubmit(dialog);
+        verify(mActivity).createDialogWithSuwTheme();
+    }
 
-        assertThat(dialog.getContext().getThemeResId())
-                .isEqualTo(R.style.SuwAlertDialogThemeCompat_Light);
+    @Test
+    public void onActivityResult_noPermissionForResult_setResultWithoutData() {
+        when(mActivity.hasPermissionForResult()).thenReturn(false);
+
+        mActivity.onActivityResult(REQUEST_CODE, RESULT_OK, mResultData);
+
+        verify(mActivity).setResult(RESULT_CONNECTED);
+    }
+
+    @Test
+    public void onActivityResult_hasPermissionForResult_setResultWithData() {
+        when(mActivity.hasPermissionForResult()).thenReturn(true);
+
+        mActivity.onActivityResult(REQUEST_CODE, RESULT_OK, mResultData);
+
+        verify(mActivity).setResult(RESULT_CONNECTED, mResultData);
+    }
+
+    @Test
+    public void isConfigWifiAllowed_hasNoUserRestriction_returnTrue() {
+        when(mUserManager.hasUserRestriction(DISALLOW_CONFIG_WIFI)).thenReturn(false);
+
+        assertThat(mActivity.isConfigWifiAllowed()).isTrue();
+    }
+
+    @Test
+    public void isConfigWifiAllowed_hasUserRestriction_returnFalse() {
+        when(mUserManager.hasUserRestriction(DISALLOW_CONFIG_WIFI)).thenReturn(true);
+
+        assertThat(mActivity.isConfigWifiAllowed()).isFalse();
+    }
+
+    @Test
+    public void hasPermissionForResult_noCallingPackage_returnFalse() {
+        when(mActivity.getCallingPackage()).thenReturn(null);
+
+        final boolean result = mActivity.hasPermissionForResult();
+
+        assertThat(result).isFalse();
+    }
+
+    @Test
+    public void hasPermissionForResult_noPermission_returnFalse() {
+        when(mActivity.getCallingPackage()).thenReturn(null);
+        when(mPackageManager.checkPermission(ACCESS_COARSE_LOCATION, CALLING_PACKAGE))
+                .thenReturn(PackageManager.PERMISSION_DENIED);
+        when(mPackageManager.checkPermission(ACCESS_FINE_LOCATION, CALLING_PACKAGE))
+                .thenReturn(PackageManager.PERMISSION_DENIED);
+
+        final boolean result = mActivity.hasPermissionForResult();
+
+        assertThat(result).isFalse();
+    }
+
+    @Test
+    public void hasPermissionForResult_hasCoarseLocationPermission_returnFalse() {
+        when(mActivity.getCallingPackage()).thenReturn(CALLING_PACKAGE);
+        when(mActivity.getPackageManager()).thenReturn(mPackageManager);
+        when(mPackageManager.checkPermission(ACCESS_COARSE_LOCATION, CALLING_PACKAGE))
+                .thenReturn(PackageManager.PERMISSION_GRANTED);
+        when(mPackageManager.checkPermission(ACCESS_FINE_LOCATION, CALLING_PACKAGE))
+                .thenReturn(PackageManager.PERMISSION_DENIED);
+
+        final boolean result = mActivity.hasPermissionForResult();
+
+        assertThat(result).isFalse();
+    }
+
+    @Test
+    public void hasPermissionForResult_hasFineLocationPermission_returnTrue() {
+        when(mActivity.getCallingPackage()).thenReturn(CALLING_PACKAGE);
+        when(mActivity.getPackageManager()).thenReturn(mPackageManager);
+        when(mPackageManager.checkPermission(ACCESS_COARSE_LOCATION, CALLING_PACKAGE))
+                .thenReturn(PackageManager.PERMISSION_DENIED);
+        when(mPackageManager.checkPermission(ACCESS_FINE_LOCATION, CALLING_PACKAGE))
+                .thenReturn(PackageManager.PERMISSION_GRANTED);
+
+        final boolean result = mActivity.hasPermissionForResult();
+
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    public void hasPermissionForResult_haveBothLocationPermissions_returnTrue() {
+        when(mActivity.getCallingPackage()).thenReturn(CALLING_PACKAGE);
+        when(mActivity.getPackageManager()).thenReturn(mPackageManager);
+        when(mPackageManager.checkPermission(ACCESS_COARSE_LOCATION, CALLING_PACKAGE))
+                .thenReturn(PackageManager.PERMISSION_GRANTED);
+        when(mPackageManager.checkPermission(ACCESS_FINE_LOCATION, CALLING_PACKAGE))
+                .thenReturn(PackageManager.PERMISSION_GRANTED);
+
+        final boolean result = mActivity.hasPermissionForResult();
+
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    public void dismissDialog_hasDialog_dialogDismiss() {
+        mActivity.mDialog = mWifiDialog;
+        mActivity.mDialog2 = mWifiDialog2;
+
+        mActivity.dismissDialog();
+
+        verify(mWifiDialog).dismiss();
+        verify(mWifiDialog2).dismiss();
+    }
+
+    @Test
+    public void onKeyguardLockedStateChanged_keyguardIsNotLocked_doNotDismissDialog() {
+        WifiDialogActivity.LockScreenMonitor lockScreenMonitor =
+                new WifiDialogActivity.LockScreenMonitor(mActivity);
+
+        lockScreenMonitor.onKeyguardLockedStateChanged(false /* isKeyguardLocked */);
+
+        verify(mActivity, never()).dismissDialog();
+    }
+
+    @Test
+    public void onKeyguardLockedStateChanged_keyguardIsLocked_dismissDialog() {
+        WifiDialogActivity.LockScreenMonitor lockScreenMonitor =
+                new WifiDialogActivity.LockScreenMonitor(mActivity);
+
+        lockScreenMonitor.onKeyguardLockedStateChanged(true /* isKeyguardLocked */);
+
+        verify(mActivity).dismissDialog();
     }
 }

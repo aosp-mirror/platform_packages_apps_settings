@@ -52,7 +52,7 @@ public class ChangeProfileScreenLockPreferenceController extends
 
     public boolean isAvailable() {
         if (mProfileChallengeUserId == UserHandle.USER_NULL ||
-                !mLockPatternUtils.isSeparateProfileChallengeAllowed(mProfileChallengeUserId)) {
+                !mUm.isManagedProfile(mProfileChallengeUserId)) {
             return false;
         }
         if (!mLockPatternUtils.isSecure(mProfileChallengeUserId)) {

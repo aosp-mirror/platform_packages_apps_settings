@@ -42,14 +42,21 @@
         settings:searchable="false"
         settings:controller="com.android.settings.bluetooth.LeAudioBluetoothDetailsHeaderController"/>
 
+    <com.android.settingslib.widget.ButtonPreference
+        android:key="hearing_aid_pair_other_button"
+        android:gravity="center" />
+    <com.android.settings.applications.SpacePreference
+        android:key="hearing_aid_space_layout"
+        android:layout_height="8dp" />
+
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="action_buttons"
         settings:allowDividerBelow="true"/>
 
-    <!-- Add SpacePreference to draw divider -->
-    <com.android.settings.applications.SpacePreference
-        android:layout_height="0dp"
-        settings:allowDividerAbove="true" />
+    <com.android.settings.slices.SlicePreference
+        android:key="bt_extra_control"
+        settings:controller="com.android.settings.slices.SlicePreferenceController"
+        settings:allowDividerAbove="true"/>
 
     <com.android.settings.slices.SlicePreference
         android:key="bt_device_slice"
@@ -61,7 +68,22 @@
         android:key="device_companion_apps"/>
 
     <PreferenceCategory
+        android:key="spatial_audio_group"/>
+
+    <PreferenceCategory
         android:key="bluetooth_profiles"/>
+
+    <PreferenceCategory
+        android:key="bluetooth_related_tools"
+        android:title="@string/bluetooth_screen_related">
+        <Preference
+            android:key="live_caption"
+            android:icon="@drawable/ic_live_caption"
+            android:persistent="false"
+            android:summary="@string/live_caption_summary"
+            android:title="@string/live_caption_title"
+            settings:controller="com.android.settings.accessibility.LiveCaptionPreferenceController"/>
+    </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
         android:key="device_details_footer"

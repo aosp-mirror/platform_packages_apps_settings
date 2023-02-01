@@ -28,32 +28,27 @@
         settings:allowDividerBelow="true"
         settings:searchable="false"/>
 
-    <PreferenceCategory
-        android:title="@string/daltonizer_type"
-        android:key="daltonizer_mode_category" >
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
+        android:key="daltonizer_mode_deuteranomaly"
+        android:persistent="false"
+        android:summary="@string/daltonizer_mode_deuteranomaly_summary"
+        android:title="@string/daltonizer_mode_deuteranomaly_title" />
 
-        <com.android.settingslib.widget.RadioButtonPreference
-            android:key="daltonizer_mode_deuteranomaly"
-            android:persistent="false"
-            android:summary="@string/daltonizer_mode_deuteranomaly_summary"
-            android:title="@string/daltonizer_mode_deuteranomaly_title" />
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
+        android:key="daltonizer_mode_protanomaly"
+        android:persistent="false"
+        android:summary="@string/daltonizer_mode_protanomaly_summary"
+        android:title="@string/daltonizer_mode_protanomaly_title" />
 
-        <com.android.settingslib.widget.RadioButtonPreference
-            android:key="daltonizer_mode_protanomaly"
-            android:persistent="false"
-            android:summary="@string/daltonizer_mode_protanomaly_summary"
-            android:title="@string/daltonizer_mode_protanomaly_title" />
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
+        android:key="daltonizer_mode_tritanomaly"
+        android:persistent="false"
+        android:summary="@string/daltonizer_mode_tritanomaly_summary"
+        android:title="@string/daltonizer_mode_tritanomaly_title" />
 
-        <com.android.settingslib.widget.RadioButtonPreference
-            android:key="daltonizer_mode_tritanomaly"
-            android:persistent="false"
-            android:summary="@string/daltonizer_mode_tritanomaly_summary"
-            android:title="@string/daltonizer_mode_tritanomaly_title" />
-        <com.android.settingslib.widget.RadioButtonPreference
-            android:key="daltonizer_mode_grayscale"
-            android:persistent="false"
-            android:title="@string/daltonizer_mode_grayscale_title" />
-
-    </PreferenceCategory>
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
+        android:key="daltonizer_mode_grayscale"
+        android:persistent="false"
+        android:title="@string/daltonizer_mode_grayscale_title" />
 
 </PreferenceScreen>

@@ -30,7 +30,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.ProcStatsData.MemInfo;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.core.instrumentation.Instrumentable;
-import com.android.settingslib.widget.settingsspinner.SettingsSpinnerAdapter;
+import com.android.settingslib.widget.SettingsSpinnerAdapter;
 
 public abstract class ProcessStatsBase extends SettingsPreferenceFragment
         implements OnItemSelectedListener {

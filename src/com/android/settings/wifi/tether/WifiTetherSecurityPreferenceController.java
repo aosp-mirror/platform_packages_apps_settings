@@ -82,7 +82,7 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
         if (!mIsWpa3Supported && mSecurityMap.keySet()
                 .removeIf(key -> key > SoftApConfiguration.SECURITY_TYPE_WPA2_PSK)) {
             preference.setEntries(mSecurityMap.values().stream().toArray(CharSequence[]::new));
-            preference.setEntryValues(mSecurityMap.keySet().stream().map(Integer::toBinaryString)
+            preference.setEntryValues(mSecurityMap.keySet().stream().map(i -> Integer.toString(i))
                     .toArray(CharSequence[]::new));
         }
 

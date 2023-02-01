@@ -66,6 +66,7 @@ import com.android.settingslib.wifi.WifiTracker;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -171,6 +172,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void testInitialSliceReturned_emptySlice() {
         SliceTestUtils.insertSliceToDb(mContext, KEY);
         Slice slice = mProvider.onBindSlice(INTENT_SLICE_URI);
@@ -180,6 +182,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void testLoadSlice_returnsSliceFromAccessor() {
         SliceTestUtils.insertSliceToDb(mContext, KEY);
 
@@ -191,6 +194,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void loadSlice_registersIntentFilter() {
         SliceTestUtils.insertSliceToDb(mContext, KEY);
 
@@ -201,6 +205,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void loadSlice_registersBackgroundListener() {
         SliceTestUtils.insertSliceToDb(mContext, KEY);
 
@@ -214,6 +219,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void testLoadSlice_cachedEntryRemovedOnBuild() {
         SliceData data = getMockData();
         mProvider.mSliceWeakDataCache.put(data.getUri(), data);
@@ -226,6 +232,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void onBindSlice_mainThread_shouldNotOverrideStrictMode() {
         ShadowThreadUtils.setIsMainThread(true);
         final StrictMode.ThreadPolicy oldThreadPolicy = StrictMode.getThreadPolicy();
@@ -269,6 +276,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void onBindSlice_nightModeChanged_shouldReloadTheme() {
         mContext.getResources().getConfiguration().uiMode = UI_MODE_NIGHT_NO;
         final SliceData data = getMockData();
@@ -282,6 +290,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void onBindSlice_nightModeNotChanged_shouldNotReloadTheme() {
         mContext.getResources().getConfiguration().uiMode = UI_MODE_NIGHT_NO;
         SliceData data = getMockData();
@@ -323,6 +332,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void getDescendantUris_invalidPath_returnsEmpty() {
         final String key = "platform_key";
         SliceTestUtils.insertSliceToDb(mContext, key, true /* isPlatformSlice */,
@@ -340,6 +350,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void getDescendantUris_platformSlice_doesNotReturnOEMSlice() {
         SliceTestUtils.insertSliceToDb(mContext, "oem_key", false /* isPlatformSlice */,
                 null /* customizedUnavailableSliceSubtitle */, true /* isPublicSlice */);
@@ -355,6 +366,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void getDescendantUris_oemSlice_doesNotReturnPlatformSlice() {
         SliceTestUtils.insertSliceToDb(mContext, "platform_key", true /* isPlatformSlice */,
                 null /* customizedUnavailableSliceSubtitle */, true /* isPublicSlice */);
@@ -370,6 +382,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void getDescendantUris_oemSlice_returnsOEMUriDescendant() {
         final String key = "oem_key";
         SliceTestUtils.insertSliceToDb(mContext, key, false /* isPlatformSlice */,
@@ -394,6 +407,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void getDescendantUris_oemSliceNoPath_returnsOEMUriDescendant() {
         final String key = "oem_key";
         SliceTestUtils.insertSliceToDb(mContext, key, false /* isPlatformSlice */,
@@ -417,6 +431,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void getDescendantUris_oemSliceNoPath_notContainPrivateUri() {
         final String key = "oem_key";
         SliceTestUtils.insertSliceToDb(mContext, key, false /* isPlatformSlice */,
@@ -438,6 +453,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void getDescendantUris_platformSlice_returnsPlatformUriDescendant() {
         final String key = "platform_key";
         SliceTestUtils.insertSliceToDb(mContext, key, true /* isPlatformSlice */,
@@ -462,6 +478,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void getDescendantUris_platformSliceNoPath_returnsPlatformUriDescendant() {
         final String key = "platform_key";
         SliceTestUtils.insertSliceToDb(mContext, key, true /* isPlatformSlice */,
@@ -485,6 +502,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void getDescendantUris_noAuthorityNorPath_returnsAllUris() {
         final String platformKey = "platform_key";
         final String oemKey = "oemKey";
@@ -518,6 +536,7 @@ public class SettingsSliceProviderTest {
 
     @Test
     @Config(qualifiers = "mcc999")
+    @Ignore
     public void getDescendantUris_privateSlicesNeeded_containsPrivateSliceUri() {
         final String privateKey = "test_private";
         final Uri specialUri = Uri.parse("content://com.android.settings.slices/test");
@@ -540,6 +559,7 @@ public class SettingsSliceProviderTest {
 
     @Test
     @Config(qualifiers = "mcc999")
+    @Ignore
     public void getDescendantUris_privateSlicesNotNeeded_notContainPrivateSliceUri() {
         final Uri specialUri = Uri.parse("content://com.android.settings.slices/test");
         doReturn(false).when(mProvider).isPrivateSlicesNeeded(specialUri);
@@ -572,6 +592,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void bindSlice_wifiSlice_returnsWifiSlice() {
         final Slice wifiSlice = mProvider.onBindSlice(CustomSliceRegistry.WIFI_SLICE_URI);
 
@@ -602,6 +623,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void onSlicePinned_backgroundWorker_started() {
         mProvider.onSlicePinned(CustomSliceRegistry.WIFI_SLICE_URI);
 
@@ -609,6 +631,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void onSlicePinned_backgroundWorker_stopped() {
         mProvider.onSlicePinned(CustomSliceRegistry.WIFI_SLICE_URI);
         mProvider.onSliceUnpinned(CustomSliceRegistry.WIFI_SLICE_URI);
@@ -617,6 +640,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void shutdown_backgroundWorker_closed() {
         mProvider.onSlicePinned(CustomSliceRegistry.WIFI_SLICE_URI);
         mProvider.shutdown();

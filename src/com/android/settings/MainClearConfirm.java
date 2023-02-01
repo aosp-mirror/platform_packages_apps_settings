@@ -31,6 +31,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.service.oemlock.OemLockManager;
@@ -67,6 +68,8 @@ import com.google.android.setupdesign.GlifLayout;
 public class MainClearConfirm extends InstrumentedFragment {
     private static final String TAG = "MainClearConfirm";
 
+    private static final String PERSISTENT_DATA_BLOCK_PROP = "ro.frp.pst";
+
     @VisibleForTesting View mContentView;
     private boolean mEraseSdCard;
     @VisibleForTesting boolean mEraseEsims;
@@ -80,6 +83,11 @@ public class MainClearConfirm extends InstrumentedFragment {
 
         public void onClick(View v) {
             if (Utils.isMonkeyRunning()) {
+                return;
+            }
+
+            // pre-flight check hardware support PersistentDataBlockManager
+            if (SystemProperties.get(PERSISTENT_DATA_BLOCK_PROP).equals("")) {
                 return;
             }
 

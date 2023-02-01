@@ -16,6 +16,9 @@
 
 package com.android.settings.notification.zen;
 
+import static android.app.NotificationManager.EXTRA_AUTOMATIC_RULE_ID;
+import static android.service.notification.ConditionProviderService.EXTRA_RULE_ID;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.when;
@@ -24,6 +27,7 @@ import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -165,5 +169,22 @@ public class AbstractZenModeAutomaticRulePreferenceControllerTest {
                 .getSettingsActivity(mPm, rule, ci);
 
         assertThat(actual).isEqualTo(new ComponentName(mContext.getPackageName(), "activity"));
+    }
+
+    @Test
+    public void testGetRuleIntent() throws Exception {
+        AutomaticZenRule rule = new AutomaticZenRule("name", null,
+                new ComponentName(mContext.getPackageName(), "test"),  Uri.EMPTY,
+                new ZenPolicy(), NotificationManager.INTERRUPTION_FILTER_PRIORITY, true);
+        rule.setPackageName(mContext.getPackageName());
+
+        when(mPm.getPackageUid(null, 0)).thenReturn(-1);
+        when(mPm.getPackageUid(mContext.getPackageName(), 0)).thenReturn(1);
+
+        Intent intent = AbstractZenModeAutomaticRulePreferenceController
+                .getRuleIntent(null, rule.getConfigurationActivity(), "id");
+
+        assertThat("id").isEqualTo(intent.getStringExtra(EXTRA_RULE_ID));
+        assertThat("id").isEqualTo(intent.getStringExtra(EXTRA_AUTOMATIC_RULE_ID));
     }
 }

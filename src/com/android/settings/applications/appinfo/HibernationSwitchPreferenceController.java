@@ -20,6 +20,8 @@ import static android.app.AppOpsManager.MODE_ALLOWED;
 import static android.app.AppOpsManager.MODE_DEFAULT;
 import static android.app.AppOpsManager.MODE_IGNORED;
 import static android.app.AppOpsManager.OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED;
+import static android.permission.PermissionControllerManager.HIBERNATION_ELIGIBILITY_EXEMPT_BY_SYSTEM;
+import static android.permission.PermissionControllerManager.HIBERNATION_ELIGIBILITY_UNKNOWN;
 import static android.provider.DeviceConfig.NAMESPACE_APP_HIBERNATION;
 
 import static com.android.settings.Utils.PROPERTY_APP_HIBERNATION_ENABLED;
@@ -29,14 +31,11 @@ import android.app.AppOpsManager;
 import android.apphibernation.AppHibernationManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.permission.PermissionControllerManager;
 import android.provider.DeviceConfig;
-import android.text.TextUtils;
 import android.util.Slog;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
@@ -46,12 +45,14 @@ import com.google.common.annotations.VisibleForTesting;
  * A PreferenceController handling the logic for exempting hibernation of app
  */
 public final class HibernationSwitchPreferenceController extends AppInfoPreferenceControllerBase
-        implements LifecycleObserver, AppOpsManager.OnOpChangedListener,
-        Preference.OnPreferenceChangeListener {
+        implements Preference.OnPreferenceChangeListener {
     private static final String TAG = "HibernationSwitchPrefController";
     private String mPackageName;
     private final AppOpsManager mAppOpsManager;
+    private final PermissionControllerManager mPermissionControllerManager;
     private int mPackageUid;
+    private boolean mHibernationEligibilityLoaded;
+    private int mHibernationEligibility = HIBERNATION_ELIGIBILITY_UNKNOWN;
     @VisibleForTesting
     boolean mIsPackageSet;
     private boolean mIsPackageExemptByDefault;
@@ -60,19 +61,7 @@ public final class HibernationSwitchPreferenceController extends AppInfoPreferen
             String preferenceKey) {
         super(context, preferenceKey);
         mAppOpsManager = context.getSystemService(AppOpsManager.class);
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    public void onResume() {
-        if (mIsPackageSet) {
-            mAppOpsManager.startWatchingMode(
-                    OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED, mPackageName, this);
-        }
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    public void onPause() {
-        mAppOpsManager.stopWatchingMode(this);
+        mPermissionControllerManager = context.getSystemService(PermissionControllerManager.class);
     }
 
     @Override
@@ -109,10 +98,27 @@ public final class HibernationSwitchPreferenceController extends AppInfoPreferen
         }
     }
 
+    private boolean isAppEligibleForHibernation() {
+        return mHibernationEligibilityLoaded
+                && mHibernationEligibility != HIBERNATION_ELIGIBILITY_EXEMPT_BY_SYSTEM
+                && mHibernationEligibility != HIBERNATION_ELIGIBILITY_UNKNOWN;
+    }
+
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        ((SwitchPreference) preference).setChecked(!isPackageHibernationExemptByUser());
+        ((SwitchPreference) preference).setChecked(isAppEligibleForHibernation()
+                && !isPackageHibernationExemptByUser());
+        preference.setEnabled(isAppEligibleForHibernation());
+        if (!mHibernationEligibilityLoaded) {
+            mPermissionControllerManager.getHibernationEligibility(mPackageName,
+                    mContext.getMainExecutor(),
+                    eligibility -> {
+                        mHibernationEligibility = eligibility;
+                        mHibernationEligibilityLoaded = true;
+                        updateState(preference);
+                    });
+        }
     }
 
     @VisibleForTesting
@@ -122,14 +128,6 @@ public final class HibernationSwitchPreferenceController extends AppInfoPreferen
                 OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED, mPackageUid, mPackageName);
 
         return mode == MODE_DEFAULT ? mIsPackageExemptByDefault : mode != MODE_ALLOWED;
-    }
-
-    @Override
-    public void onOpChanged(String op, String packageName) {
-        if (OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED.equals(op)
-                && TextUtils.equals(mPackageName, packageName)) {
-            updateState(mPreference);
-        }
     }
 
     @Override

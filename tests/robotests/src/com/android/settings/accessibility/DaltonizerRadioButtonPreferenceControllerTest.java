@@ -31,7 +31,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,7 +51,7 @@ public class DaltonizerRadioButtonPreferenceControllerTest implements
     private DaltonizerRadioButtonPreferenceController mController;
 
     @Mock
-    private RadioButtonPreference mMockPref;
+    private SelectorWithWidgetPreference mMockPref;
     private Context mContext;
 
     @Mock

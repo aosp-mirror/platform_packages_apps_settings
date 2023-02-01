@@ -107,14 +107,14 @@ public class CarrierWifiTogglePreferenceControllerTest {
 
     @Test
     public void isChecked_carrierNetworkEnabled_returnTrue() {
-        doReturn(true).when(mWifiPickerTrackerHelper).isCarrierNetworkEnabled(SUB_ID);
+        doReturn(true).when(mWifiPickerTrackerHelper).isCarrierNetworkEnabled();
 
         assertThat(mController.isChecked()).isEqualTo(true);
     }
 
     @Test
     public void isChecked_carrierNetworkDisabled_returnFalse() {
-        doReturn(false).when(mWifiPickerTrackerHelper).isCarrierNetworkEnabled(SUB_ID);
+        doReturn(false).when(mWifiPickerTrackerHelper).isCarrierNetworkEnabled();
 
         assertThat(mController.isChecked()).isEqualTo(false);
     }

@@ -29,7 +29,7 @@ import android.test.InstrumentationTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.Suppress;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class SoundSettingsTest extends InstrumentationTestCase {
     private static final String PAGE = Settings.ACTION_SOUND_SETTINGS;
@@ -40,60 +40,54 @@ public class SoundSettingsTest extends InstrumentationTestCase {
     private SettingsHelper mHelper;
 
 
-    private HashMap ringtoneSounds = new HashMap<String, String>() {{
-        put("angler","Dione");
-        put("bullhead","Dione");
-        put("marlin","Spaceship");
-        put("sailfish","Spaceship");
-        put("walleye","Copycat");
-        put("taimen","Copycat");
-    }};
+    private final Map<String, String> ringtoneSounds = Map.of(
+            "angler", "Dione",
+            "bullhead", "Dione",
+            "marlin", "Spaceship",
+            "sailfish", "Spaceship",
+            "walleye", "Copycat",
+            "taimen", "Copycat");
 
-    private HashMap ringtoneCodes = new HashMap<String, String>() {{
-        put("angler","38");
-        put("bullhead","38");
-        put("marlin","37");
-        put("sailfish","37");
-        put("walleye","26");
-        put("taimen","26");
-    }};
+    private final Map<String, String> ringtoneCodes = Map.of(
+            "angler", "38",
+            "bullhead", "38",
+            "marlin", "37",
+            "sailfish", "37",
+            "walleye", "26",
+            "taimen", "26");
 
-    private HashMap alarmSounds = new HashMap<String, String>() {{
-        put("angler","Awaken");
-        put("bullhead","Awaken");
-        put("marlin","Bounce");
-        put("sailfish","Bounce");
-        put("walleye","Cuckoo clock");
-        put("taimen","Cuckoo clock");
-    }};
+    private final Map<String, String> alarmSounds = Map.of(
+            "angler", "Awaken",
+            "bullhead", "Awaken",
+            "marlin", "Bounce",
+            "sailfish", "Bounce",
+            "walleye", "Cuckoo clock",
+            "taimen", "Cuckoo clock");
 
-    private HashMap alarmCodes = new HashMap<String, String>() {{
-        put("angler","6");
-        put("bullhead","6");
-        put("marlin","49");
-        put("sailfish","49");
-        put("walleye","15");
-        put("taimen","15");
-    }};
+    private final Map<String, String> alarmCodes = Map.of(
+            "angler", "6",
+            "bullhead", "6",
+            "marlin", "49",
+            "sailfish", "49",
+            "walleye", "15",
+            "taimen", "15");
 
-    private HashMap notificationSounds = new HashMap<String, String>() {{
-        put("angler","Ceres");
-        put("bullhead","Ceres");
-        put("marlin","Trill");
-        put("sailfish","Trill");
-        put("walleye","Pipes");
-        put("taimen","Pipes");
-    }};
+    private final Map<String, String> notificationSounds = Map.of(
+            "angler", "Ceres",
+            "bullhead", "Ceres",
+            "marlin", "Trill",
+            "sailfish", "Trill",
+            "walleye", "Pipes",
+            "taimen", "Pipes");
 
 
-    private HashMap notificationCodes = new HashMap<String, String>() {{
-        put("angler","26");
-        put("bullhead","26");
-        put("marlin","57");
-        put("sailfish","57");
-        put("walleye","69");
-        put("taimen","69");
-    }};
+    private final Map<String, String> notificationCodes = Map.of(
+            "angler", "26",
+            "bullhead", "26",
+            "marlin", "57",
+            "sailfish", "57",
+            "walleye", "69",
+            "taimen", "69");
 
     @Override
     public void setUp() throws Exception {
@@ -151,14 +145,6 @@ public class SoundSettingsTest extends InstrumentationTestCase {
         assertTrue("Touch sounds not toggled",
                     mHelper.verifyToggleSetting(SettingsType.SYSTEM, PAGE,
                     "Touch sounds", Settings.System.SOUND_EFFECTS_ENABLED));
-    }
-
-    @MediumTest
-    public void testOtherSoundsVibrateOnTap() throws Exception {
-        loadOtherSoundsPage();
-        assertTrue("Vibrate on tap not toggled",
-                    mHelper.verifyToggleSetting(SettingsType.SYSTEM, PAGE,
-                    "Vibrate on tap", Settings.System.HAPTIC_FEEDBACK_ENABLED));
     }
 
     private void loadOtherSoundsPage() throws Exception {

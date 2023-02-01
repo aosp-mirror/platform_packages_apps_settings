@@ -30,7 +30,7 @@ public class CaptionFooterPreferenceController extends AccessibilityFooterPrefer
     }
 
     @Override
-    protected String getLearnMoreContentDescription() {
+    protected String getLearnMoreText() {
         return mContext.getString(
             R.string.accessibility_captioning_footer_learn_more_content_description);
     }

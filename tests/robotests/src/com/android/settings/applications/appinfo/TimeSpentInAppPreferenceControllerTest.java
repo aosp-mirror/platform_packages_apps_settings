@@ -20,7 +20,9 @@ import static android.content.Intent.EXTRA_PACKAGE_NAME;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -35,6 +37,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -124,5 +127,43 @@ public class TimeSpentInAppPreferenceControllerTest {
 
         verify(mFeatureFactory.applicationFeatureProvider).getTimeSpentInApp(
                 nullable(String.class));
+    }
+
+    @Test
+    public void displayPreference_noEntry_preferenceShouldNotEnable() {
+        mController.mAppEntry = null;
+        Preference preference = new Preference(mContext);
+        when(mScreen.findPreference(any())).thenReturn(preference);
+
+        mController.displayPreference(mScreen);
+
+        assertThat(preference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void displayPreference_appIsInstalled_preferenceShouldEnable() {
+        final ApplicationsState.AppEntry appEntry = mock(ApplicationsState.AppEntry.class);
+        appEntry.info = new ApplicationInfo();
+        appEntry.info.flags = ApplicationInfo.FLAG_INSTALLED;
+        mController.mAppEntry = appEntry;
+        Preference preference = new Preference(mContext);
+        when(mScreen.findPreference(any())).thenReturn(preference);
+
+        mController.displayPreference(mScreen);
+
+        assertThat(preference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void displayPreference_appIsNotInstalled_preferenceShouldDisable() {
+        final ApplicationsState.AppEntry appEntry = mock(ApplicationsState.AppEntry.class);
+        appEntry.info = new ApplicationInfo();
+        mController.mAppEntry = appEntry;
+        Preference preference = new Preference(mContext);
+        when(mScreen.findPreference(any())).thenReturn(preference);
+
+        mController.displayPreference(mScreen);
+
+        assertThat(preference.isEnabled()).isFalse();
     }
 }

@@ -20,6 +20,11 @@ import static android.provider.Settings.ACTION_BIOMETRIC_ENROLL;
 
 import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static androidx.test.espresso.intent.matcher.IntentMatchers.hasExtra;
+
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -83,6 +88,13 @@ public class BiometricEnrollActivityTest {
         try (ActivityScenario<BiometricEnrollActivity> scenario =
                      ActivityScenario.launch(getIntent())) {
             intended(hasComponent(ChooseLockGeneric.class.getName()));
+            if (mHasFace && mHasFingerprint) {
+                intended(hasExtra(EXTRA_KEY_FOR_BIOMETRICS, true));
+            } else if (mHasFace) {
+                intended(hasExtra(EXTRA_KEY_FOR_FACE, true));
+            } else if (mHasFingerprint) {
+                intended(hasExtra(EXTRA_KEY_FOR_FINGERPRINT, true));
+            }
         }
     }
 
@@ -109,11 +121,9 @@ public class BiometricEnrollActivityTest {
                             response.getGatekeeperPasswordHandle());
                 }).get();
 
-
-
         try (ActivityScenario<BiometricEnrollActivity> scenario =
                      ActivityScenario.launch(intent)) {
-            intended(hasComponent(mHasFace
+            intended(hasComponent(mHasFace && !mHasFingerprint
                     ? FaceEnrollIntroduction.class.getName()
                     : FingerprintEnrollIntroduction.class.getName()));
         }

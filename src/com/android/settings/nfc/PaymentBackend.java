@@ -20,6 +20,7 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.nfc.NfcAdapter;
 import android.nfc.cardemulation.ApduServiceInfo;
 import android.nfc.cardemulation.CardEmulation;
@@ -50,6 +51,7 @@ public class PaymentBackend {
         public ComponentName componentName;
         public ComponentName settingsComponent;
         public UserHandle userHandle;
+        public Drawable icon;
     }
 
     /**
@@ -131,6 +133,9 @@ public class PaymentBackend {
                     appInfo.settingsComponent = null;
                 }
                 appInfo.description = service.getDescription();
+                Drawable icon = (service.loadBanner(pm) != null)
+                        ? service.loadBanner(pm) : service.loadIcon(pm);
+                appInfo.icon = pm.getUserBadgedIcon(icon, appInfo.userHandle);
 
                 appInfos.add(appInfo);
             }

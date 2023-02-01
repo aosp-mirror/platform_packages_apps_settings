@@ -34,6 +34,7 @@ import static junit.framework.Assert.assertEquals;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -41,10 +42,14 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.R;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -67,6 +72,8 @@ public class SystemNavigationGestureSettingsTest {
     @Mock
     private IOverlayManager mOverlayManager;
     @Mock
+    private PackageManager mPackageManager;
+    @Mock
     private OverlayInfo mOverlayInfoEnabled;
     @Mock
     private OverlayInfo mOverlayInfoDisabled;
@@ -75,22 +82,46 @@ public class SystemNavigationGestureSettingsTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
         mSettings = new SystemNavigationGestureSettings();
 
         when(mOverlayInfoDisabled.isEnabled()).thenReturn(false);
         when(mOverlayInfoEnabled.isEnabled()).thenReturn(true);
         when(mOverlayManager.getOverlayInfo(any(), anyInt())).thenReturn(mOverlayInfoDisabled);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
     }
 
     @Test
-    public void testSearchIndexProvider_shouldIndexResource() {
+    public void searchIndexProvider_shouldIndexResource() {
         final List<SearchIndexableResource> indexRes =
                 SystemNavigationGestureSettings.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
                         RuntimeEnvironment.application, true /* enabled */);
 
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mSettings.getPreferenceScreenResId());
+    }
+
+    @Test
+    public void searchIndexProvider_gesturePackageExist_shouldBeIndexed()
+            throws NameNotFoundException {
+        PackageInfo info = new PackageInfo();
+        when(mPackageManager.getPackageInfo(NAV_BAR_MODE_GESTURAL_OVERLAY, 0))
+                .thenReturn(info);
+
+        final List<SearchIndexableRaw> indexRaws =
+                SystemNavigationGestureSettings.SEARCH_INDEX_DATA_PROVIDER
+                        .getRawDataToIndex(mContext, true /* enabled */);
+
+        assertThat(indexRaws).isNotEmpty();
+    }
+
+    @Test
+    public void searchIndexProvider_noNavigationPackageExist_shouldReturnEmpty() {
+        final List<SearchIndexableRaw> indexRaws =
+                SystemNavigationGestureSettings.SEARCH_INDEX_DATA_PROVIDER
+                        .getRawDataToIndex(mContext, true /* enabled */);
+
+        assertThat(indexRaws).isEmpty();
     }
 
     @Test

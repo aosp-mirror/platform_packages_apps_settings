@@ -18,6 +18,8 @@ package com.android.settings.password;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.content.Context;
+
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -27,9 +29,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class ConfirmCredentialTest {
+
+    private Context mContext = RuntimeEnvironment.application;
+
     @Test
     public void testLastTryDialogShownExactlyOnce() {
         FragmentManager fm = Robolectric.buildActivity(FragmentActivity.class).
@@ -37,13 +43,16 @@ public class ConfirmCredentialTest {
 
         // Launch only one instance at a time.
         assertThat(LastTryDialog.show(
-                fm, "title", android.R.string.yes, android.R.string.ok, false)).isTrue();
+                fm, "title", mContext.getString(android.R.string.ok),
+                android.R.string.ok, false)).isTrue();
         assertThat(LastTryDialog.show(
-                fm, "title", android.R.string.yes, android.R.string.ok, false)).isFalse();
+                fm, "title", mContext.getString(android.R.string.ok),
+                android.R.string.ok, false)).isFalse();
 
         // After cancelling, the dialog should be re-shown when asked for.
         LastTryDialog.hide(fm);
         assertThat(LastTryDialog.show(
-                fm, "title", android.R.string.yes, android.R.string.ok, false)).isTrue();
+                fm, "title", mContext.getString(android.R.string.ok),
+                android.R.string.ok, false)).isTrue();
     }
 }

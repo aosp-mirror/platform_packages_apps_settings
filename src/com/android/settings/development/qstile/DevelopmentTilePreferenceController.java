@@ -24,6 +24,7 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.SystemProperties;
 import android.service.quicksettings.TileService;
 import android.util.Log;
 
@@ -61,9 +62,23 @@ public class DevelopmentTilePreferenceController extends BasePreferenceControlle
         final Intent intent = new Intent(TileService.ACTION_QS_TILE)
                 .setPackage(context.getPackageName());
         final List<ResolveInfo> resolveInfos = mPackageManager.queryIntentServices(intent,
-                PackageManager.MATCH_DISABLED_COMPONENTS);
+                PackageManager.MATCH_DISABLED_COMPONENTS | PackageManager.GET_META_DATA);
         for (ResolveInfo info : resolveInfos) {
             ServiceInfo sInfo = info.serviceInfo;
+
+            // Check if the tile requires a flag. If it does, hide tile if flag is off.
+            if (sInfo.metaData != null) {
+                String flag = sInfo.metaData.getString(
+                        DevelopmentTiles.META_DATA_REQUIRES_SYSTEM_PROPERTY);
+                if (flag != null) {
+                    boolean enabled = SystemProperties.getBoolean(flag, false);
+                    if (!enabled) {
+                        // Flagged tile, flag is not enabled
+                        continue;
+                    }
+                }
+            }
+
             final int enabledSetting = mPackageManager.getComponentEnabledSetting(
                     new ComponentName(sInfo.packageName, sInfo.name));
             boolean checked = enabledSetting == PackageManager.COMPONENT_ENABLED_STATE_ENABLED

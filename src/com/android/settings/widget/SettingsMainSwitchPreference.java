@@ -31,6 +31,7 @@ import androidx.preference.TwoStatePreference;
 import com.android.settings.R;
 import com.android.settings.widget.SettingsMainSwitchBar.OnBeforeCheckedChangeListener;
 import com.android.settingslib.RestrictedPreferenceHelper;
+import com.android.settingslib.core.instrumentation.SettingsJankMonitor;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import java.util.ArrayList;
@@ -143,6 +144,7 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
         super.setChecked(isChecked);
+        SettingsJankMonitor.detectToggleJank(getKey(), switchView);
     }
 
     /**
@@ -199,9 +201,10 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
      * Set the OnBeforeCheckedChangeListener.
      */
     public void setOnBeforeCheckedChangeListener(OnBeforeCheckedChangeListener listener) {
-        if (mMainSwitchBar == null) {
+        if (!mBeforeCheckedChangeListeners.contains(listener)) {
             mBeforeCheckedChangeListeners.add(listener);
-        } else {
+        }
+        if (mMainSwitchBar != null) {
             mMainSwitchBar.setOnBeforeCheckedChangeListener(listener);
         }
     }
@@ -210,9 +213,10 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
      * Adds a listener for switch changes
      */
     public void addOnSwitchChangeListener(OnMainSwitchChangeListener listener) {
-        if (mMainSwitchBar == null) {
+        if (!mSwitchChangeListeners.contains(listener)) {
             mSwitchChangeListeners.add(listener);
-        } else {
+        }
+        if (mMainSwitchBar != null) {
             mMainSwitchBar.addOnSwitchChangeListener(listener);
         }
     }
@@ -221,9 +225,8 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
      * Remove a listener for switch changes
      */
     public void removeOnSwitchChangeListener(OnMainSwitchChangeListener listener) {
-        if (mMainSwitchBar == null) {
-            mSwitchChangeListeners.remove(listener);
-        } else {
+        mSwitchChangeListeners.remove(listener);
+        if (mMainSwitchBar != null) {
             mMainSwitchBar.removeOnSwitchChangeListener(listener);
         }
     }
@@ -254,7 +257,5 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
         for (OnMainSwitchChangeListener listener : mSwitchChangeListeners) {
             mMainSwitchBar.addOnSwitchChangeListener(listener);
         }
-        mBeforeCheckedChangeListeners.clear();
-        mSwitchChangeListeners.clear();
     }
 }

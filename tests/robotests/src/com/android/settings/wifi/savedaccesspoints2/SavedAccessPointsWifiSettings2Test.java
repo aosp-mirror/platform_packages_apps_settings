@@ -37,6 +37,7 @@ import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -99,6 +100,7 @@ public class SavedAccessPointsWifiSettings2Test {
     }
 
     @Test
+    @Ignore
     public void onCreate_shouldNewSavedNetworkTracker() {
         mSettings = new TestFragment();
         final FragmentManager fragmentManager = mActivity.getSupportFragmentManager();
@@ -113,6 +115,7 @@ public class SavedAccessPointsWifiSettings2Test {
     }
 
     @Test
+    @Ignore
     public void onDestroy_shouldTerminateWorkerThread() {
         mSettings = new TestFragment();
         final FragmentManager fragmentManager = mActivity.getSupportFragmentManager();

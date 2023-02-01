@@ -31,7 +31,7 @@
             settings:useAdminDisabledSummary="true"
             settings:userRestriction="no_config_brightness"/>
 
-        <com.android.settings.widget.PrimarySwitchPreference
+        <com.android.settingslib.PrimarySwitchPreference
             android:key="auto_brightness_entry"
             android:title="@string/auto_brightness_title"
             android:fragment="com.android.settings.display.AutoBrightnessSettings"
@@ -69,23 +69,17 @@
             settings:keywords="@string/keywords_dark_ui_mode"/>
 
         <Preference
-            android:key="font_size"
-            android:title="@string/title_font_size"
-            android:fragment="com.android.settings.display.ToggleFontSizePreferenceFragment"
-            settings:controller="com.android.settings.display.FontSizePreferenceController"
-            settings:keywords="@string/keywords_font_size"/>
-
-        <com.android.settings.display.ScreenZoomPreference
-            android:key="display_settings_screen_zoom"
-            android:title="@string/screen_zoom_title"
-            android:fragment="com.android.settings.display.ScreenZoomSettings"
-            settings:keywords="@string/keywords_display_size"/>
+            android:fragment="com.android.settings.accessibility.TextReadingPreferenceFragment"
+            android:key="text_reading_options"
+            android:persistent="false"
+            android:title="@string/accessibility_text_reading_options_title"
+            settings:controller="com.android.settings.accessibility.TextReadingFragmentForDisplaySettingsController"/>
     </PreferenceCategory>
 
     <PreferenceCategory
         android:title="@string/category_name_color">
 
-        <com.android.settings.widget.PrimarySwitchPreference
+        <com.android.settingslib.PrimarySwitchPreference
             android:key="night_display"
             android:title="@string/night_display_title"
             android:fragment="com.android.settings.display.NightDisplaySettings"
@@ -103,11 +97,33 @@
     <PreferenceCategory
         android:title="@string/category_name_display_controls">
 
+        <!--
+            Standard auto-rotation preference that will be shown when device state based
+            auto-rotation settings are NOT available.
+          -->
         <SwitchPreference
             android:key="auto_rotate"
             android:title="@string/accelerometer_title"
             settings:keywords="@string/keywords_auto_rotate"
             settings:controller="com.android.settings.display.AutoRotatePreferenceController"/>
+
+        <!--
+            Auto-rotation preference that will be shown when device state based auto-rotation
+            settings are available.
+          -->
+        <Preference
+            android:key="device_state_auto_rotate"
+            android:title="@string/accelerometer_title"
+            android:fragment="com.android.settings.display.DeviceStateAutoRotateDetailsFragment"
+            settings:keywords="@string/keywords_auto_rotate"
+            settings:controller="com.android.settings.display.DeviceStateAutoRotateOverviewController"/>
+
+        <Preference
+            android:key="screen_resolution"
+            android:title="@string/screen_resolution_title"
+            android:fragment="com.android.settings.display.ScreenResolutionFragment"
+            settings:keywords="@string/keywords_screen_resolution"
+            settings:controller="com.android.settings.display.ScreenResolutionController"/>
 
         <SwitchPreference
             android:key="display_white_balance"
@@ -129,7 +145,8 @@
         <Preference
             android:key="screensaver"
             android:title="@string/screensaver_settings_title"
-            android:fragment="com.android.settings.dream.DreamSettings"/>
+            android:fragment="com.android.settings.dream.DreamSettings"
+            settings:keywords="@string/keywords_screensaver"/>
 
         <SwitchPreference
             android:key="camera_gesture"

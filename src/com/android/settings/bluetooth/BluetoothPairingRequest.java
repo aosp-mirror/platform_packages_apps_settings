@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.os.PowerManager;
 import android.os.UserHandle;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
@@ -34,6 +35,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
  * starts a notification in the status bar that can be clicked to bring up the same dialog.
  */
 public final class BluetoothPairingRequest extends BroadcastReceiver {
+    private static final String TAG = "BluetoothPairingRequest";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -74,6 +76,7 @@ public final class BluetoothPairingRequest extends BroadcastReceiver {
             }
         } else if (TextUtils.equals(action,
                 BluetoothCsipSetCoordinator.ACTION_CSIS_SET_MEMBER_AVAILABLE)) {
+            Log.d(TAG, "Receive ACTION_CSIS_SET_MEMBER_AVAILABLE");
             if (device == null) {
                 return;
             }

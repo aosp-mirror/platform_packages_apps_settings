@@ -31,7 +31,7 @@ public class AccessibilityControlTimeoutFooterPreferenceController extends
     }
 
     @Override
-    protected String getLearnMoreContentDescription() {
+    protected String getLearnMoreText() {
         return mContext.getString(
             R.string.accessibility_control_timeout_footer_learn_more_content_description);
     }

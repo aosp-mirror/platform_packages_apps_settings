@@ -64,7 +64,7 @@ class SliceTestUtils {
                                 : SettingsSliceProvider.SLICE_AUTHORITY)
                         .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
                         .appendPath(key)
-                        .build().toSafeString());
+                        .build().toString());
         values.put(SlicesDatabaseHelper.IndexColumns.TITLE, FAKE_TITLE);
         values.put(SlicesDatabaseHelper.IndexColumns.SUMMARY, FAKE_SUMMARY);
         values.put(SlicesDatabaseHelper.IndexColumns.SCREENTITLE, FAKE_SCREEN_TITLE);

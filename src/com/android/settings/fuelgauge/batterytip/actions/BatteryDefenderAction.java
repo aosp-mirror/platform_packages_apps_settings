@@ -20,7 +20,6 @@ import android.content.Intent;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.overlay.FeatureFactory;
-import android.os.AsyncTask;
 
 /**
  * Action to open the Support Center article
@@ -38,8 +37,7 @@ public class BatteryDefenderAction extends BatteryTipAction {
         final Intent intent = FeatureFactory.getFactory(mContext)
                 .getPowerUsageFeatureProvider(mContext).getResumeChargeIntent();
         if (intent != null) {
-            // Post intent to background thread to avoid UI flaky
-            AsyncTask.execute(() -> mContext.sendBroadcast(intent));
+            mContext.sendBroadcast(intent);
         }
     }
 }

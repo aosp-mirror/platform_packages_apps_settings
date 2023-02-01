@@ -17,28 +17,23 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
-import android.provider.Settings;
 
-import androidx.annotation.VisibleForTesting;
-
+/** Preference controller for ringtone vibration intensity */
 public class RingVibrationIntensityPreferenceController
         extends VibrationIntensityPreferenceController {
 
-    @VisibleForTesting
-    static final String PREF_KEY = "ring_vibration_preference_screen";
+    public RingVibrationIntensityPreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey, new RingVibrationPreferenceConfig(context));
+    }
 
-    public RingVibrationIntensityPreferenceController(Context context) {
-        super(context, PREF_KEY, Settings.System.RING_VIBRATION_INTENSITY,
-                Settings.System.VIBRATE_WHEN_RINGING, /* supportRampingRinger= */ true);
+    protected RingVibrationIntensityPreferenceController(Context context, String preferenceKey,
+            int supportedIntensityLevels) {
+        super(context, preferenceKey, new RingVibrationPreferenceConfig(context),
+                supportedIntensityLevels);
     }
 
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
-    }
-
-    @Override
-    protected int getDefaultIntensity() {
-        return mVibrator.getDefaultRingVibrationIntensity();
     }
 }

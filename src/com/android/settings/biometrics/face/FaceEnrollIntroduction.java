@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics.face;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.FACE_UNLOCK_DISABLED;
+
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
@@ -24,6 +26,8 @@ import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -39,8 +43,10 @@ import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.biometrics.MultiBiometricEnrollHelper;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.SetupSkipDialog;
 import com.android.settings.utils.SensorPrivacyManagerHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
@@ -111,11 +117,15 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         final TextView howMessage = findViewById(R.id.how_message);
         final TextView inControlTitle = findViewById(R.id.title_in_control);
         final TextView inControlMessage = findViewById(R.id.message_in_control);
+        final TextView lessSecure = findViewById(R.id.info_message_less_secure);
         infoMessageGlasses.setText(getInfoMessageGlasses());
         infoMessageLooking.setText(getInfoMessageLooking());
         inControlTitle.setText(getInControlTitle());
         howMessage.setText(getHowMessage());
-        inControlMessage.setText(getInControlMessage());
+        inControlMessage.setText(Html.fromHtml(getString(getInControlMessage()),
+                Html.FROM_HTML_MODE_LEGACY));
+        inControlMessage.setMovementMethod(LinkMovementMethod.getInstance());
+        lessSecure.setText(getLessSecureMessage());
 
         // Set up and show the "less secure" info section if necessary.
         if (getResources().getBoolean(R.bool.config_face_intro_show_less_secure)) {
@@ -165,6 +175,30 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         Log.v(TAG, "cameraPrivacyEnabled : " + cameraPrivacyEnabled);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // If user has skipped or finished enrolling, don't restart enrollment.
+        final boolean isEnrollRequest = requestCode == BIOMETRIC_FIND_SENSOR_REQUEST
+                || requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST;
+        final boolean isResultSkipOrFinished = resultCode == RESULT_SKIP
+                || resultCode == SetupSkipDialog.RESULT_SKIP || resultCode == RESULT_FINISHED;
+        boolean hasEnrolledFace = false;
+        if (data != null) {
+            hasEnrolledFace = data.getBooleanExtra(EXTRA_FINISHED_ENROLL_FACE, false);
+        }
+
+        if (resultCode == RESULT_CANCELED && hasEnrolledFace) {
+            setResult(resultCode, data);
+            finish();
+            return;
+        }
+
+        if (isEnrollRequest && isResultSkipOrFinished || hasEnrolledFace) {
+            data = setSkipPendingEnroll(data);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     protected boolean generateChallengeOnCreate() {
         return true;
     }
@@ -199,6 +233,11 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         return R.string.security_settings_face_enroll_introduction_control_message;
     }
 
+    @StringRes
+    protected int getLessSecureMessage() {
+        return R.string.security_settings_face_enroll_introduction_info_less_secure;
+    }
+
     @Override
     protected boolean isDisabledByAdmin() {
         return RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
@@ -221,8 +260,11 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
-    protected int getDescriptionResDisabledByAdmin() {
-        return R.string.security_settings_face_enroll_introduction_message_unlock_disabled;
+    protected String getDescriptionDisabledByAdmin() {
+        DevicePolicyManager devicePolicyManager = getSystemService(DevicePolicyManager.class);
+        return devicePolicyManager.getResources().getString(
+                FACE_UNLOCK_DISABLED,
+                () -> getString(R.string.security_settings_face_enroll_introduction_message_unlock_disabled));
     }
 
     @Override
@@ -381,5 +423,14 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     @StringRes
     protected int getMoreButtonTextRes() {
         return R.string.security_settings_face_enroll_introduction_more;
+    }
+
+    @NonNull
+    protected static Intent setSkipPendingEnroll(@Nullable Intent data) {
+        if (data == null) {
+            data = new Intent();
+        }
+        data.putExtra(MultiBiometricEnrollHelper.EXTRA_SKIP_PENDING_ENROLL, true);
+        return data;
     }
 }

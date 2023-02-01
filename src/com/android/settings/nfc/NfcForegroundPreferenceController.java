@@ -16,11 +16,9 @@ package com.android.settings.nfc;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.text.TextUtils;
 
-import androidx.preference.DropDownPreference;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -36,13 +34,18 @@ public class NfcForegroundPreferenceController extends BasePreferenceController 
         PaymentBackend.Callback, Preference.OnPreferenceChangeListener,
         LifecycleObserver, OnStart, OnStop {
 
-    private DropDownPreference mPreference;
+    private ListPreference mPreference;
     private PaymentBackend mPaymentBackend;
     private MetricsFeatureProvider mMetricsFeatureProvider;
+
+    private final String[] mListValues;
+    private final String[] mListEntries;
 
     public NfcForegroundPreferenceController(Context context, String key) {
         super(context, key);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mListValues = context.getResources().getStringArray(R.array.nfc_payment_favor_values);
+        mListEntries = context.getResources().getStringArray(R.array.nfc_payment_favor);
     }
 
     public void setPaymentBackend(PaymentBackend backend) {
@@ -79,60 +82,40 @@ public class NfcForegroundPreferenceController extends BasePreferenceController 
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mPreference = screen.findPreference(getPreferenceKey());
-        if (mPreference == null) {
-            return;
-        }
-
-        mPreference.setEntries(new CharSequence[]{
-                mContext.getText(R.string.nfc_payment_favor_open),
-                mContext.getText(R.string.nfc_payment_favor_default)
-        });
-        mPreference.setEntryValues(new CharSequence[]{"1", "0"});
-    }
-
-    @Override
     public void onPaymentAppsChanged() {
         updateState(mPreference);
     }
 
     @Override
     public void updateState(Preference preference) {
-        if (preference instanceof DropDownPreference) {
-            ((DropDownPreference) preference).setValue(
-                    mPaymentBackend.isForegroundMode() ? "1" : "0");
-        }
         super.updateState(preference);
+        if (!(preference instanceof ListPreference)) {
+            return;
+        }
+        final ListPreference listPreference = (ListPreference) preference;
+        listPreference.setIconSpaceReserved(false);
+        listPreference.setValue(mListValues[mPaymentBackend.isForegroundMode() ? 1 : 0]);
     }
 
     @Override
     public CharSequence getSummary() {
-        return mPreference.getEntry();
+        return mListEntries[mPaymentBackend.isForegroundMode() ? 1 : 0];
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (!(preference instanceof DropDownPreference)) {
+        if (!(preference instanceof ListPreference)) {
             return false;
         }
-        final DropDownPreference pref = (DropDownPreference) preference;
+
+        final ListPreference listPreference = (ListPreference) preference;
         final String newValueString = (String) newValue;
-        pref.setSummary(pref.getEntries()[pref.findIndexOfValue(newValueString)]);
+        listPreference.setSummary(mListEntries[listPreference.findIndexOfValue(newValueString)]);
         final boolean foregroundMode = Integer.parseInt(newValueString) != 0;
         mPaymentBackend.setForegroundMode(foregroundMode);
         mMetricsFeatureProvider.action(mContext,
                 foregroundMode ? SettingsEnums.ACTION_NFC_PAYMENT_FOREGROUND_SETTING
                         : SettingsEnums.ACTION_NFC_PAYMENT_ALWAYS_SETTING);
         return true;
-    }
-
-    @Override
-    public void updateNonIndexableKeys(List<String> keys) {
-        final String key = getPreferenceKey();
-        if (!TextUtils.isEmpty(key)) {
-            keys.add(key);
-        }
     }
 }

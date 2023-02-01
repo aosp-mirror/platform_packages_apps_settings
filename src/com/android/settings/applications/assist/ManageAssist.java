@@ -73,7 +73,6 @@ public class ManageAssist extends DashboardFragment {
         controllers.add(new AssistContextPreferenceController(context, lifecycle));
         controllers.add(new AssistScreenshotPreferenceController(context, lifecycle));
         controllers.add(new AssistFlashScreenPreferenceController(context, lifecycle));
-        controllers.add(new DefaultVoiceInputPreferenceController(context, lifecycle));
         return controllers;
     }
 

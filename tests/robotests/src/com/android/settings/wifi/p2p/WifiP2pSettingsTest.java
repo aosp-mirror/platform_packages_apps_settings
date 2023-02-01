@@ -67,7 +67,7 @@ public class WifiP2pSettingsTest {
 
     private Context mContext;
     private FragmentActivity mActivity;
-    private WifiP2pSettings mFragment;
+    private TestWifiP2pSettings mFragment;
 
     @Mock
     public WifiP2pManager mWifiP2pManager;
@@ -85,8 +85,10 @@ public class WifiP2pSettingsTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
+        TestWifiP2pSettings.sMockWifiP2pManager = mWifiP2pManager;
+
         mActivity = Robolectric.setupActivity(FragmentActivity.class);
-        mFragment = new WifiP2pSettings();
+        mFragment = new TestWifiP2pSettings();
         mFragment.mWifiP2pManager = mWifiP2pManager;
         doReturn(mChannel).when(mWifiP2pManager).initialize(any(), any(), any());
         FragmentManager fragmentManager = mActivity.getSupportFragmentManager();
@@ -145,7 +147,19 @@ public class WifiP2pSettingsTest {
     }
 
     @Test
-    public void beSearching_getP2pStateEnabledIntent_shouldBeFalse() {
+    public void beSearching_getP2pStateDisabledIntent_shouldBeFalse() {
+        final Bundle bundle = new Bundle();
+        final Intent intent = new Intent(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
+        bundle.putInt(WifiP2pManager.EXTRA_WIFI_STATE, WifiP2pManager.WIFI_P2P_STATE_DISABLED);
+        intent.putExtras(bundle);
+
+        mFragment.mReceiver.onReceive(mContext, intent);
+
+        assertThat(mFragment.mWifiP2pSearching).isFalse();
+    }
+
+    @Test
+    public void beSearching_getP2pStateEnabledIntent_shouldBeTrue() {
         final Bundle bundle = new Bundle();
         final Intent intent = new Intent(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
         bundle.putInt(WifiP2pManager.EXTRA_WIFI_STATE, WifiP2pManager.WIFI_P2P_STATE_ENABLED);
@@ -153,7 +167,7 @@ public class WifiP2pSettingsTest {
 
         mFragment.mReceiver.onReceive(mContext, intent);
 
-        assertThat(mFragment.mWifiP2pSearching).isFalse();
+        assertThat(mFragment.mWifiP2pSearching).isTrue();
     }
 
     @Test
@@ -319,11 +333,17 @@ public class WifiP2pSettingsTest {
     }
 
     @Test
+    public void onStop_notLastGroupFormed_shouldCloseChannel() {
+        mFragment.onStop();
+
+        assertThat(mFragment.sChannel).isNull();
+    }
+
+    @Test
     public void peerDiscovery_whenOnPause_shouldStop() {
         mFragment.onPause();
 
         verify(mWifiP2pManager, times(1)).stopPeerDiscovery(any(), any());
-        assertThat(mFragment.mChannel).isNull();
     }
 
     @Test
@@ -331,10 +351,9 @@ public class WifiP2pSettingsTest {
         mFragment.onPause();
 
         verify(mWifiP2pManager, times(1)).stopPeerDiscovery(any(), any());
-        assertThat(mFragment.mChannel).isNull();
 
         mFragment.onResume();
-        assertThat(mFragment.mChannel).isNotNull();
+        assertThat(mFragment.sChannel).isNotNull();
     }
 
     @Test
@@ -505,7 +524,7 @@ public class WifiP2pSettingsTest {
 
     @Test
     public void onCreateView_withNullP2pManager_shouldGetP2pManagerAgain() {
-        mFragment.mChannel = null; // Reset channel to re-test onCreateView flow
+        mFragment.sChannel = null; // Reset channel to re-test onCreateView flow
         mFragment.mWifiP2pManager = null;
 
         mFragment.onCreateView(LayoutInflater.from(mContext), null, new Bundle());
@@ -516,7 +535,7 @@ public class WifiP2pSettingsTest {
     @Test
     public void onCreateView_withNullChannel_shouldSetP2pManagerNull() {
         doReturn(null).when(mWifiP2pManager).initialize(any(), any(), any());
-        mFragment.mChannel = null; // Reset channel to re-test onCreateView flow
+        mFragment.sChannel = null; // Reset channel to re-test onCreateView flow
         mFragment.onCreateView(LayoutInflater.from(mContext), null, new Bundle());
 
         assertThat(mFragment.mWifiP2pManager).isNull();
@@ -540,5 +559,14 @@ public class WifiP2pSettingsTest {
         wifiP2pDevice.deviceAddress = "testAddress";
         wifiP2pDevice.deviceName = "testName";
         mWifiP2pPeer.device = wifiP2pDevice;
+    }
+
+    public static class TestWifiP2pSettings extends WifiP2pSettings {
+        static WifiP2pManager sMockWifiP2pManager;
+        @Override
+        protected Object getSystemService(final String name) {
+            if (Context.WIFI_P2P_SERVICE.equals(name)) return sMockWifiP2pManager;
+            return getActivity().getSystemService(name);
+        }
     }
 }

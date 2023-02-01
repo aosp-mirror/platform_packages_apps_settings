@@ -20,40 +20,23 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/zen_category_people" >
 
-   <!-- Conversations -->
-   <PreferenceCategory
-       android:key="zen_mode_settings_category_conversations"
-       android:title="@string/zen_mode_conversations_section_title">
-
-      <!-- Senders image -->
-      <com.android.settingslib.widget.LayoutPreference
-          android:key="zen_mode_conversations_image"
-          android:layout="@layout/zen_mode_senders_overlay_image"
-          android:selectable="false"/>
-
-      <Preference
-          android:key="zen_mode_conversations"
-          android:title="@string/zen_mode_conversations_title"
-          android:fragment="com.android.settings.notification.zen.ZenModeConversationsSettings"/>
-   </PreferenceCategory>
-
    <!-- Calls & Messages -->
    <PreferenceCategory
        android:key="zen_mode_people_calls_messages_section"
        android:title="@string/zen_mode_people_calls_messages_section_title">
 
       <Preference
+          android:key="zen_mode_people_messages"
+          android:title="@string/zen_mode_messages_title"
+          android:fragment="com.android.settings.notification.zen.ZenModeMessagesSettings"/>
+
+      <Preference
           android:key="zen_mode_people_calls"
           android:title="@string/zen_mode_calls_title"
           android:fragment="com.android.settings.notification.zen.ZenModeCallsSettings"/>
 
-      <Preference
-          android:key="zen_mode_people_messages"
-          android:title="@string/zen_mode_messages_title"
-          android:fragment="com.android.settings.notification.zen.ZenModeMessagesSettings"/>
    </PreferenceCategory>
 
-   <!-- Footer that shows if user is put into alarms only or total silence mode by an app -->
    <com.android.settingslib.widget.FooterPreference/>
 
 </PreferenceScreen>

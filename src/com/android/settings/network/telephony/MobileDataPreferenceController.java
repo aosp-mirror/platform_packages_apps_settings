@@ -122,6 +122,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
 
     @Override
     public boolean isChecked() {
+        mTelephonyManager = getTelephonyManager();
         return mTelephonyManager.isDataEnabled();
     }
 
@@ -152,8 +153,21 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     public void init(FragmentManager fragmentManager, int subId) {
         mFragmentManager = fragmentManager;
         mSubId = subId;
-        mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
-                .createForSubscriptionId(mSubId);
+        mTelephonyManager = null;
+        mTelephonyManager = getTelephonyManager();
+    }
+
+    private TelephonyManager getTelephonyManager() {
+        if (mTelephonyManager != null) {
+            return mTelephonyManager;
+        }
+        TelephonyManager telMgr =
+                mContext.getSystemService(TelephonyManager.class);
+        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            telMgr = telMgr.createForSubscriptionId(mSubId);
+        }
+        mTelephonyManager = telMgr;
+        return telMgr;
     }
 
     public void setWifiPickerTrackerHelper(WifiPickerTrackerHelper helper) {
@@ -163,6 +177,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     @VisibleForTesting
     boolean isDialogNeeded() {
         final boolean enableData = !isChecked();
+        mTelephonyManager = getTelephonyManager();
         final boolean isMultiSim = (mTelephonyManager.getActiveModemCount() > 1);
         final int defaultSubId = mSubscriptionManager.getDefaultDataSubscriptionId();
         final boolean needToDisableOthers = mSubscriptionManager

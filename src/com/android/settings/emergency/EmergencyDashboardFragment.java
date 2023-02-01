@@ -66,5 +66,10 @@ public class EmergencyDashboardFragment extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.emergency_settings);
+            new BaseSearchIndexProvider(R.xml.emergency_settings) {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return context.getResources().getBoolean(R.bool.config_show_emergency_settings);
+                }
+            };
 }

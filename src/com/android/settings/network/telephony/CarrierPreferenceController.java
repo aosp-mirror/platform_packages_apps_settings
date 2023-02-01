@@ -28,17 +28,19 @@ import android.telephony.SubscriptionManager;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
+import com.android.settings.network.CarrierConfigCache;
+
 /**
  * Preference controller for "Carrier Settings"
  */
 public class CarrierPreferenceController extends TelephonyBasePreferenceController {
 
     @VisibleForTesting
-    CarrierConfigManager mCarrierConfigManager;
+    CarrierConfigCache mCarrierConfigCache;
 
     public CarrierPreferenceController(Context context, String key) {
         super(context, key);
-        mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
+        mCarrierConfigCache = CarrierConfigCache.getInstance(context);
     }
 
     public void init(int subId) {
@@ -47,7 +49,7 @@ public class CarrierPreferenceController extends TelephonyBasePreferenceControll
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
+        final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(subId);
 
         // Return available if it is in CDMA or GSM mode, and the flag is on
         return carrierConfig != null
@@ -72,7 +74,7 @@ public class CarrierPreferenceController extends TelephonyBasePreferenceControll
     }
 
     private Intent getCarrierSettingsActivityIntent(int subId) {
-        final PersistableBundle config = mCarrierConfigManager.getConfigForSubId(subId);
+        final PersistableBundle config = mCarrierConfigCache.getConfigForSubId(subId);
         final ComponentName cn = ComponentName.unflattenFromString(
                 config == null ? "" : config.getString(
                         CarrierConfigManager.KEY_CARRIER_SETTINGS_ACTIVITY_COMPONENT_NAME_STRING,

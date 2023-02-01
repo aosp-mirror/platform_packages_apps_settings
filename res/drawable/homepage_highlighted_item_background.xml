@@ -14,13 +14,14 @@
   See the License for the specific language governing permissions and
   limitations under the License.
   -->
-<inset xmlns:android="http://schemas.android.com/apk/res/android"
-       android:insetLeft="@dimen/homepage_menu_entry_padding_horizontal"
-       android:insetRight="@dimen/homepage_menu_entry_padding_horizontal">
-    <shape android:shape="rectangle">
-        <solid
-            android:color="?android:attr/textColorPrimary" />
-        <corners
-            android:radius="@dimen/homepage_menu_entry_corner_radius" />
-    </shape>
-</inset>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+        android:color="@*android:color/ripple_material_light">
+    <item>
+        <shape android:shape="rectangle">
+            <solid
+                android:color="@color/accent_select_background" />
+            <corners
+                android:radius="@dimen/homepage_preference_corner_radius" />
+        </shape>
+    </item>
+</ripple>
