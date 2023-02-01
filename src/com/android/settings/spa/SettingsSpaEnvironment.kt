@@ -31,6 +31,7 @@ import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListPro
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
 import com.android.settings.spa.app.specialaccess.SpecialAppAccessPageProvider
 import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
+import com.android.settings.spa.app.specialaccess.UseFullScreenIntentAppListProvider
 import com.android.settings.spa.development.UsageStatsPageProvider
 import com.android.settings.spa.home.HomePageProvider
 import com.android.settings.spa.notification.AppListNotificationsPageProvider
@@ -51,6 +52,7 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
             DisplayOverOtherAppsAppListProvider,
             MediaManagementAppsAppListProvider,
             ModifySystemSettingsAppListProvider,
+            UseFullScreenIntentAppListProvider,
             PictureInPictureListProvider,
             InstallUnknownAppsListProvider,
             AlarmsAndRemindersAppListProvider,
