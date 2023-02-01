@@ -18,11 +18,7 @@ package com.android.settings.notification;
 
 import android.content.Context;
 
-import androidx.preference.PreferenceScreen;
-
 import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.widget.IllustrationPreference;
-import com.android.settingslib.widget.LottieColorUtils;
 
 /**
  * Controller for the illustration shown for the feature level settings screen for bubbles.
@@ -36,14 +32,5 @@ public class BubbleNotificationIllustrationPreferenceController extends BasePref
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        IllustrationPreference illustrationPreference = screen.findPreference(getPreferenceKey());
-        illustrationPreference.setOnBindListener(animationView -> {
-            LottieColorUtils.applyDynamicColors(mContext, animationView);
-        });
     }
 }
