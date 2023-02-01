@@ -25,7 +25,6 @@ import android.app.time.TimeZoneCapabilities;
 import android.app.time.TimeZoneCapabilitiesAndConfig;
 import android.app.time.TimeZoneConfiguration;
 import android.content.Context;
-import android.location.LocationManager;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -50,7 +49,6 @@ public class LocationTimeZoneDetectionPreferenceController
     private static final String TAG = "location_time_zone_detection";
 
     private final TimeManager mTimeManager;
-    private final LocationManager mLocationManager;
     private TimeZoneCapabilitiesAndConfig mTimeZoneCapabilitiesAndConfig;
     private InstrumentedPreferenceFragment mFragment;
     private Preference mPreference;
@@ -58,7 +56,6 @@ public class LocationTimeZoneDetectionPreferenceController
     public LocationTimeZoneDetectionPreferenceController(Context context) {
         super(context, TAG);
         mTimeManager = context.getSystemService(TimeManager.class);
-        mLocationManager = context.getSystemService(LocationManager.class);
     }
 
     void setFragment(InstrumentedPreferenceFragment fragment) {
@@ -68,14 +65,18 @@ public class LocationTimeZoneDetectionPreferenceController
     @Override
     public boolean isChecked() {
         TimeZoneCapabilitiesAndConfig capabilitiesAndConfig =
-                mTimeManager.getTimeZoneCapabilitiesAndConfig();
+                getTimeZoneCapabilitiesAndConfig(/*forceRefresh=*/false);
         TimeZoneConfiguration configuration = capabilitiesAndConfig.getConfiguration();
         return configuration.isGeoDetectionEnabled();
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        if (isChecked && !mLocationManager.isLocationEnabled()) {
+        TimeZoneCapabilitiesAndConfig timeZoneCapabilitiesAndConfig =
+                getTimeZoneCapabilitiesAndConfig(/*forceRefresh=*/false);
+        boolean isLocationEnabled =
+                timeZoneCapabilitiesAndConfig.getCapabilities().isUseLocationEnabled();
+        if (isChecked && !isLocationEnabled) {
             new LocationToggleDisabledDialogFragment(mContext)
                     .show(mFragment.getFragmentManager(), TAG);
             // Toggle status is not updated.
@@ -157,11 +158,13 @@ public class LocationTimeZoneDetectionPreferenceController
             // The preference should not be visible, but text is referenced in case this changes.
             summaryResId = R.string.location_time_zone_detection_not_allowed;
         } else if (configureGeoDetectionEnabledCapability == CAPABILITY_NOT_APPLICABLE) {
-            // The TimeZoneCapabilities deliberately doesn't provide information about why the user
-            // doesn't have the capability, but the user's "location enabled" being off and the
-            // global automatic detection setting will always be considered overriding reasons why
-            // location time zone detection cannot be used.
-            if (!mLocationManager.isLocationEnabled()) {
+            boolean isLocationEnabled =
+                    timeZoneCapabilitiesAndConfig.getCapabilities().isUseLocationEnabled();
+            // The TimeZoneCapabilities cannot provide implementation-specific information about why
+            // the user doesn't have the capability, but the user's "location enabled" being off and
+            // the global automatic detection setting will always be considered overriding reasons
+            // why location time zone detection cannot be used.
+            if (!isLocationEnabled) {
                 summaryResId = R.string.location_app_permission_summary_location_off;
             } else if (!configuration.isAutoDetectionEnabled()) {
                 summaryResId = R.string.location_time_zone_detection_auto_is_off;
@@ -184,6 +187,10 @@ public class LocationTimeZoneDetectionPreferenceController
         return mContext.getString(summaryResId);
     }
 
+    /**
+     * Implementation of {@link TimeManager.TimeZoneDetectorListener#onChange()}. Called by the
+     * system server after a change that affects {@link TimeZoneCapabilitiesAndConfig}.
+     */
     @Override
     public void onChange() {
         refreshUi();

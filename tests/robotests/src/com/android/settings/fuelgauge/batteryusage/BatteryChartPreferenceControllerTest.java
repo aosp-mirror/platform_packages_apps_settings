@@ -88,7 +88,7 @@ public final class BatteryChartPreferenceControllerTest {
         Locale.setDefault(new Locale("en_US"));
         org.robolectric.shadows.ShadowSettings.set24HourTimeFormat(false);
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-        DataProcessor.sFakeSystemAppsSet = Set.of();
+        DataProcessor.sTestSystemAppsSet = Set.of();
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mContext).when(mContext).getApplicationContext();
@@ -405,7 +405,7 @@ public final class BatteryChartPreferenceControllerTest {
             entryMap.put("fake_entry_key" + index, entry);
             batteryHistoryMap.put(generateTimestamp(index), entryMap);
         }
-        DataProcessor.sFakeCurrentTimeMillis =
+        DataProcessor.sTestCurrentTimeMillis =
                 generateTimestamp(numOfHours - 1) + DateUtils.MINUTE_IN_MILLIS;
         return batteryHistoryMap;
     }

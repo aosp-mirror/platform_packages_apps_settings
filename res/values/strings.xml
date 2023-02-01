@@ -2488,11 +2488,11 @@
     <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
     <string name="sim_preferred_message"><xliff:g id="new_sim">%1$s</xliff:g> is the only SIM in your device. Do you want to use this SIM for mobile data, calls, and SMS messages?</string>
 
-    <!-- Title for the dialog asking to user to enable auto data switch upon enabling multi-SIM  [CHAR LIMIT=30] -->
-    <string name="enable_auto_data_switch_dialog_title">Switch SIMs automatically?</string>
-    <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
-    <string name="enable_auto_data_switch_dialog_message">Allow your phone to automatically switch to <xliff:g id="backup_carrier" example="T-mobile">%1$s</xliff:g> for mobile data when it has better availability.</string>
-    <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
+    <!-- Title for the dialog asking user to enable auto data switch upon enabling multi-SIM  [CHAR LIMIT=30] -->
+    <string name="enable_auto_data_switch_dialog_title">Improve mobile data coverage?</string>
+    <!-- Message for the dialog asking user to enable auto data switch upon enabling multi-SIM  [CHAR LIMIT=NONE] -->
+    <string name="enable_auto_data_switch_dialog_message">Allow your device to automatically switch to <xliff:g id="backup_carrier" example="T-mobile">%1$s</xliff:g> for mobile data when it has better availability.</string>
+    <!-- Warning for the dialog asking user to enable auto data switch for switching data between work and personal profile  [CHAR LIMIT=NONE] -->
     <string name="auto_data_switch_dialog_managed_profile_warning">\n\nCalls, messages, and network traffic may be visible to your organization.</string>
 
     <!-- Instructions telling the user that they entered the wrong SIM PIN for the last time.
@@ -3836,6 +3836,36 @@
     <string name="trackpad_pointer_speed">Pointer speed</string>
     <!-- Title for the button to trigger the 'touch gesture' education. [CHAR LIMIT=35] -->
     <string name="trackpad_touch_gesture">Learn touchpad gestures</string>
+
+    <!-- Title text for 'Go home' gesture education [CHAR LIMIT=35] -->
+    <string name="gesture_title_go_home">Go home</string>
+    <!-- Summary text for 'Go home' gesture education [CHAR LIMIT=60] -->
+    <string name="gesture_summary_go_home">Swipe up with three fingers anywhere on your touchpad</string>
+    <!-- Title text for 'Go back' gesture education [CHAR LIMIT=35] -->
+    <string name="gesture_title_go_back">Go back</string>
+    <!-- Summary text for 'Go back' gesture education [CHAR LIMIT=60] -->
+    <string name="gesture_summary_go_back">Swipe from the left or right with three fingers</string>
+    <!-- Title text for 'View recent apps' gesture education [CHAR LIMIT=35] -->
+    <string name="gesture_title_recent_apps">View recent apps</string>
+    <!-- Summary text for 'View recent apps' gesture education [CHAR LIMIT=60] -->
+    <string name="gesture_summary_recent_apps">Swipe up with three fingers, hold, then release</string>
+    <!-- Title text for 'View notifications' gesture education [CHAR LIMIT=35] -->
+    <string name="gesture_title_notifications">View notifications &amp; Quick Settings</string>
+    <!-- Summary text for 'View notifications' gesture education [CHAR LIMIT=60] -->
+    <string name="gesture_summary_notifications">Swipe down with three fingers on your home screen</string>
+    <!-- Title text for 'Switch apps' gesture education [CHAR LIMIT=35] -->
+    <string name="gesture_title_switch_apps">Switch apps</string>
+    <!-- Summary text for 'Switch apps' gesture education [CHAR LIMIT=60] -->
+    <string name="gesture_summary_switch_apps">Swipe left or right with four fingers</string>
+
+    <!-- Text for 'Skip' button in gesture education [CHAR LIMIT=10] -->
+    <string name="gesture_button_skip">Skip</string>
+    <!-- Text for 'Next' button in gesture education [CHAR LIMIT=10] -->
+    <string name="gesture_button_next">Next</string>
+    <!-- Text for 'Restart' button in gesture education [CHAR LIMIT=10] -->
+    <string name="gesture_button_restart">Restart</string>
+    <!-- Text for 'Done' button in gesture education [CHAR LIMIT=10] -->
+    <string name="gesture_button_done">Done</string>
 
     <!-- Title text for 'Go back' [CHAR LIMIT=35] -->
     <string name="trackpad_go_back_title">Go back</string>
@@ -6536,15 +6566,15 @@
     <!-- Summary of multimedia messaging service settings.  [CHAR LIMIT=100] -->
     <string name="mms_message_summary">Send &amp; receive when mobile data is off</string>
 
-    <!-- Title of a preference for whether to allow data during calls that is shown when mobile
-         data is turned off. This is needed for some multi-SIM scenarios, because the SIM that is
-         default for data might not be available during a phone call. [CHAR LIMIT=60] -->
+    <!-- Title of a preference for whether to allow auto data switch that is shown for backup
+         data SIM. This is needed for some multi-SIM scenarios, because the SIM that is
+         default for data might be unavailable while the backup is in coverage. [CHAR LIMIT=60] -->
     <string name="auto_data_switch_title">Switch mobile data automatically</string>
-    <!-- Title of a preference for whether to allow data during calls that is shown when mobile
-         data is turned off. This is needed for some multi-SIM scenarios, because the SIM that is
-         default for data might not be available during a phone call. [CHAR LIMIT=NONE] -->
+    <!-- Summary of a preference for whether to allow auto data switch that is shown for backup
+         data SIM. This is needed for some multi-SIM scenarios, because the SIM that is
+         default for data might be unavailable while the backup is in coverage. [CHAR LIMIT=NONE]-->
     <string name="auto_data_switch_summary">
-        Temporarily use this network when it has better availability for calls and internet
+        Use this network when it has better availability
     </string>
 
     <!-- Work SIM title.  [CHAR LIMIT=50] -->
@@ -6801,6 +6831,9 @@
 
     <!-- Search keyword for biometric settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_biometric_settings">face, fingerprint, add fingerprint</string>
+
+    <!-- Search keyword for active unlock settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_active_unlock_settings">watch unlock, add watch unlock</string>
 
     <!-- Search keywords for adaptive brightness setting [CHAR LIMIT=NONE]-->
     <string name="keywords_display_auto_brightness">dim screen, touchscreen, battery, smart brightness, dynamic brightness, Auto brightness</string>

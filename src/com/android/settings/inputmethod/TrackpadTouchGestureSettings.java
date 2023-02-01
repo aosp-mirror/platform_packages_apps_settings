@@ -31,6 +31,7 @@ public class TrackpadTouchGestureSettings extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        use(TouchGesturesButtonPreferenceController.class).setFragment(this /*parent*/);
     }
 
     @Override

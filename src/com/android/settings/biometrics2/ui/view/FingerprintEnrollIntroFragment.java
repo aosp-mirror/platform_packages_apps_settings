@@ -54,6 +54,7 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 import com.google.android.setupdesign.template.RequireScrollMixin;
+import com.google.android.setupdesign.util.DeviceHelper;
 import com.google.android.setupdesign.util.DynamicColorPalette;
 
 /**
@@ -177,6 +178,9 @@ public class FingerprintEnrollIntroFragment extends Fragment {
         } else {
             glifLayoutHelper.setHeaderText(
                     R.string.security_settings_fingerprint_enroll_introduction_title);
+            glifLayoutHelper.setDescriptionText(getString(
+                    R.string.security_settings_fingerprint_enroll_introduction_v3_message,
+                    DeviceHelper.getDeviceName(context)));
         }
         observePageStatusLiveDataIfNeed();
     }

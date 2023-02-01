@@ -308,7 +308,7 @@ public final class DataProcessManagerTest {
         final int[] levels = {100, 99, 98};
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
                 createHistoryMap(timestamps, levels);
-        DataProcessor.sFakeCurrentTimeMillis = timestamps[timestamps.length - 1];
+        DataProcessor.sTestCurrentTimeMillis = timestamps[timestamps.length - 1];
 
         assertThat(DataProcessManager.getBatteryLevelData(
                 mContext, /*handler=*/ null, batteryHistoryMap, /*asyncResponseDelegate=*/ null))
@@ -322,7 +322,7 @@ public final class DataProcessManagerTest {
         final int[] levels = {100, 99};
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
                 createHistoryMap(timestamps, levels);
-        DataProcessor.sFakeCurrentTimeMillis = timestamps[timestamps.length - 1];
+        DataProcessor.sTestCurrentTimeMillis = timestamps[timestamps.length - 1];
 
         final BatteryLevelData resultData =
                 DataProcessManager.getBatteryLevelData(
