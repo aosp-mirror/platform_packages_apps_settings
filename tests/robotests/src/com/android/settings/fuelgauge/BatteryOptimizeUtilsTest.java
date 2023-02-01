@@ -22,11 +22,11 @@ import static com.android.settings.fuelgauge.BatteryOptimizeUtils.MODE_UNRESTRIC
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
@@ -169,7 +169,7 @@ public class BatteryOptimizeUtilsTest {
         mBatteryOptimizeUtils.setAppUsageState(MODE_UNRESTRICTED);
         TimeUnit.SECONDS.sleep(1);
 
-        verifyZeroInteractions(mMockBackend);
-        verifyZeroInteractions(mMockBatteryUtils);
+        verifyNoInteractions(mMockBackend);
+        verifyNoInteractions(mMockBatteryUtils);
     }
 }
