@@ -52,6 +52,7 @@ import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.utils.LocaleUtils;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -213,6 +214,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 getContext(), MagnificationFollowTypingPreferenceController.PREF_KEY);
         getSettingsLifecycle().addObserver(mFollowTypingPreferenceController);
         mFollowTypingPreferenceController.displayPreference(getPreferenceScreen());
+        addPreferenceController(mFollowTypingPreferenceController);
 
         addAlwaysOnSetting(generalCategory);
     }
@@ -239,6 +241,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 getContext(), MagnificationAlwaysOnPreferenceController.PREF_KEY);
         getSettingsLifecycle().addObserver(alwaysOnPreferenceController);
         alwaysOnPreferenceController.displayPreference(getPreferenceScreen());
+        addPreferenceController(alwaysOnPreferenceController);
     }
 
     @Override
@@ -344,14 +347,19 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             AccessibilitySettingsContentObserver contentObserver) {
         super.registerKeysToObserverCallback(contentObserver);
 
-        final List<String> followingTypingKeys = new ArrayList<>();
-        followingTypingKeys.add(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED);
-        contentObserver.registerKeysToObserverCallback(followingTypingKeys,
-                key -> updateFollowTypingState());
+        var keysToObserve = List.of(
+            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED,
+            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED
+        );
+        contentObserver.registerKeysToObserverCallback(keysToObserve,
+                key -> updatePreferencesState());
     }
 
-    private void updateFollowTypingState() {
-        mFollowTypingPreferenceController.updateState();
+    private void updatePreferencesState() {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        getPreferenceControllers().forEach(controllers::addAll);
+        controllers.forEach(controller -> controller.updateState(
+                findPreference(controller.getPreferenceKey())));
     }
 
     @Override
