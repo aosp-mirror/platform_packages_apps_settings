@@ -138,6 +138,12 @@ public final class LockScreenSafetySource {
                 SET_SCREEN_LOCK_ACTION_ID,
                 context.getString(R.string.no_screen_lock_issue_action_label),
                 pendingIntent).build();
+        // Custom notification deliberately has zero actions
+        final SafetySourceIssue.Notification customNotification =
+            new SafetySourceIssue.Notification.Builder(
+                context.getString(R.string.no_screen_lock_issue_notification_title),
+                context.getString(R.string.no_screen_lock_issue_notification_text))
+                .build();
         return new SafetySourceIssue.Builder(
                 NO_SCREEN_LOCK_ISSUE_ID,
                 context.getString(R.string.no_screen_lock_issue_title),
@@ -145,6 +151,10 @@ public final class LockScreenSafetySource {
                 SafetySourceData.SEVERITY_LEVEL_RECOMMENDATION,
                 NO_SCREEN_LOCK_ISSUE_TYPE_ID)
                 .setIssueCategory(SafetySourceIssue.ISSUE_CATEGORY_DEVICE)
-                .addAction(action).build();
+                .addAction(action)
+                .setIssueActionability(SafetySourceIssue.ISSUE_ACTIONABILITY_MANUAL)
+                .setCustomNotification(customNotification)
+                .setNotificationBehavior(SafetySourceIssue.NOTIFICATION_BEHAVIOR_DELAYED)
+                .build();
     }
 }
