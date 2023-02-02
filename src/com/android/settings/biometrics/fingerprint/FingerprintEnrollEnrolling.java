@@ -66,6 +66,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.IdRes;
 import androidx.appcompat.app.AlertDialog;
@@ -248,6 +249,14 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (isInMultiWindowMode()) {
+            final Toast splitUnsupportedToast = Toast.makeText(this,
+                    R.string.dock_multi_instances_not_supported_text, Toast.LENGTH_SHORT);
+            splitUnsupportedToast.show();
+            finish();
+            return;
+        }
 
         if (savedInstanceState != null) {
             restoreSavedState(savedInstanceState);
