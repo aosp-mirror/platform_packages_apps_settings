@@ -23,6 +23,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
 import android.safetycenter.SafetySourceIssue;
@@ -54,6 +55,11 @@ public final class LockScreenSafetySource {
             SafetyEvent safetyEvent) {
         if (!SafetyCenterManagerWrapper.get().isEnabled(context)) {
             return;
+        }
+
+        UserManager userManager = context.getSystemService(UserManager.class);
+        if (userManager != null && userManager.isProfile()) {
+            return; // LockScreen source only supports primary profile.
         }
 
         if (!screenLockPreferenceDetailsUtils.isAvailable()) {
