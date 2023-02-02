@@ -26,8 +26,8 @@ import android.util.Log;
 
 import androidx.window.embedding.ActivityFilter;
 import androidx.window.embedding.ActivityRule;
+import androidx.window.embedding.RuleController;
 import androidx.window.embedding.SplitAttributes;
-import androidx.window.embedding.SplitController;
 import androidx.window.embedding.SplitPairFilter;
 import androidx.window.embedding.SplitPairRule;
 import androidx.window.embedding.SplitPlaceholderRule;
@@ -60,11 +60,11 @@ public class ActivityEmbeddingRulesController {
     private static final ComponentName COMPONENT_NAME_WILDCARD = new ComponentName(
             "*" /* pkg */, "*" /* cls */);
     private final Context mContext;
-    private final SplitController mSplitController;
+    private final RuleController mRuleController;
 
     public ActivityEmbeddingRulesController(Context context) {
         mContext = context;
-        mSplitController = SplitController.getInstance(context);
+        mRuleController = RuleController.getInstance(context);
     }
 
     /**
@@ -76,7 +76,7 @@ public class ActivityEmbeddingRulesController {
             return;
         }
 
-        mSplitController.clearRegisteredRules();
+        mRuleController.clearRules();
 
         // Set a placeholder for home page.
         registerHomepagePlaceholderRule();
@@ -112,7 +112,7 @@ public class ActivityEmbeddingRulesController {
                 .setMinSmallestWidthDp(ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthDp())
                 .setDefaultSplitAttributes(attributes)
                 .build();
-        SplitController.getInstance(context).addRule(splitPairRule);
+        RuleController.getInstance(context).addRule(splitPairRule);
     }
 
     /**
@@ -235,7 +235,7 @@ public class ActivityEmbeddingRulesController {
                 .setDefaultSplitAttributes(attributes)
                 .build();
 
-        mSplitController.addRule(placeholderRule);
+        mRuleController.addRule(placeholderRule);
     }
 
     private void registerAlwaysExpandRule() {
@@ -255,7 +255,7 @@ public class ActivityEmbeddingRulesController {
         addActivityFilter(activityFilters, ChooseLockPattern.class);
         ActivityRule activityRule = new ActivityRule.Builder(activityFilters).setAlwaysExpand(true)
                 .build();
-        mSplitController.addRule(activityRule);
+        mRuleController.addRule(activityRule);
     }
 
     private static void addActivityFilter(Set<ActivityFilter> activityFilters, Intent intent) {
