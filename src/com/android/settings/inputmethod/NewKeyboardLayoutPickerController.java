@@ -21,6 +21,8 @@ import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
 import android.view.InputDevice;
+import android.view.inputmethod.InputMethodInfo;
+import android.view.inputmethod.InputMethodSubtype;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -31,7 +33,6 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,7 +43,11 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
 
     private Fragment mParent;
     private int mInputDeviceId;
+    private int mUserId;
     private InputDeviceIdentifier mInputDeviceIdentifier;
+    private InputMethodInfo mInputMethodInfo;
+    private InputMethodSubtype mInputMethodSubtype;
+
     private KeyboardLayout[] mKeyboardLayouts;
     private PreferenceScreen mScreen;
     private String mPreviousSelection;
@@ -55,13 +60,16 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
         mPreferenceMap = new HashMap<>();
     }
 
-    public void initialize(Fragment parent, InputDeviceIdentifier inputDeviceIdentifier,
-            String layout) {
-        mLayout = layout;
+    public void initialize(Fragment parent, int userId, InputDeviceIdentifier inputDeviceIdentifier,
+            InputMethodInfo imeInfo, InputMethodSubtype imeSubtype, String layout) {
         mParent = parent;
+        mUserId = userId;
         mInputDeviceIdentifier = inputDeviceIdentifier;
-        mKeyboardLayouts = mIm.getKeyboardLayoutsForInputDevice(mInputDeviceIdentifier);
-        Arrays.sort(mKeyboardLayouts);
+        mInputMethodInfo = imeInfo;
+        mInputMethodSubtype = imeSubtype;
+        mLayout = layout;
+        mKeyboardLayouts = mIm.getKeyboardLayoutListForInputDevice(
+                inputDeviceIdentifier, userId, imeInfo, imeSubtype);
     }
 
     @Override
@@ -102,15 +110,12 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
         }
 
         final KeyboardLayoutPreference pref = (KeyboardLayoutPreference) preference;
-        // TODO(b/259530132): Need APIs to update the available keyboards for input device.
-        // For example:
-        // inputManager.setCurrentKeyboardLayoutForInputDevice(
-        //            InputDevice..., Userid..., ImeSubType ..., String keyboardLayoutDescriptor)
+        pref.setCheckMark(true);
         if (mPreviousSelection != null && !mPreviousSelection.equals(preference.getKey())) {
             KeyboardLayoutPreference preSelectedPref = mScreen.findPreference(mPreviousSelection);
-            pref.setCheckMark(true);
             preSelectedPref.setCheckMark(false);
         }
+        setLayout(pref);
         mPreviousSelection = preference.getKey();
         return true;
     }
@@ -129,13 +134,7 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
 
     @Override
     public void onInputDeviceChanged(int deviceId) {
-        if (mInputDeviceId >= 0 && deviceId == mInputDeviceId) {
-            updateCheckedState();
-        }
-    }
-
-    private void updateCheckedState() {
-        // TODO(b/259530132): Need API to update the keyboard language layout list.
+        // Do nothing.
     }
 
     private void createPreferenceHierarchy() {
@@ -143,14 +142,22 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
             final KeyboardLayoutPreference pref;
             if (mLayout.equals(layout.getLabel())) {
                 pref = new KeyboardLayoutPreference(mScreen.getContext(), layout.getLabel(), true);
-                mPreviousSelection = layout.getLabel();
+                mPreviousSelection = layout.getDescriptor();
             } else {
                 pref = new KeyboardLayoutPreference(mScreen.getContext(), layout.getLabel(), false);
             }
-            // TODO: Waiting for new API to use a prefix with special number to setKey
-            pref.setKey(layout.getLabel());
+            pref.setKey(layout.getDescriptor());
             mScreen.addPreference(pref);
             mPreferenceMap.put(pref, layout);
         }
+    }
+
+    private void setLayout(KeyboardLayoutPreference preference) {
+        mIm.setKeyboardLayoutForInputDevice(
+                mInputDeviceIdentifier,
+                mUserId,
+                mInputMethodInfo,
+                mInputMethodSubtype,
+                mPreferenceMap.get(preference).getDescriptor());
     }
 }
