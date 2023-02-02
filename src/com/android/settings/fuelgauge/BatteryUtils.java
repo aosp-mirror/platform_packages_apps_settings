@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.InstallSourceInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -34,6 +35,7 @@ import android.os.SystemClock;
 import android.os.UidBatteryConsumer;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -82,6 +84,8 @@ public class BatteryUtils {
     public static final String SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS = "dock_defender_bypass";
 
     public static final String BYPASS_DOCK_DEFENDER_ACTION = "battery.dock.defender.bypass";
+
+    private static final String GOOGLE_PLAY_STORE_PACKAGE = "com.android.vending";
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({StatusType.SCREEN_USAGE,
@@ -595,6 +599,21 @@ public class BatteryUtils {
         }
 
         return -1L;
+    }
+
+    /** Whether the package is installed from Google Play Store or not */
+    public static boolean isAppInstalledFromGooglePlayStore(Context context, String packageName) {
+        if (TextUtils.isEmpty(packageName)) {
+            return false;
+        }
+        InstallSourceInfo installSourceInfo;
+        try {
+            installSourceInfo = context.getPackageManager().getInstallSourceInfo(packageName);
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+        return installSourceInfo != null
+                && GOOGLE_PLAY_STORE_PACKAGE.equals(installSourceInfo.getInitiatingPackageName());
     }
 
     /** Gets the latest sticky battery intent from the Android system. */
