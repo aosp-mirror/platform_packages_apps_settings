@@ -24,14 +24,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settingslib.applications.AppUtils
 import com.android.settingslib.spa.widget.button.ActionButton
 import com.android.settingslib.spa.widget.button.ActionButtons
-import kotlinx.coroutines.flow.map
 
 @Composable
 fun AppButtons(packageInfoPresenter: PackageInfoPresenter) {
     if (remember(packageInfoPresenter) { packageInfoPresenter.isMainlineModule() }) return
     val presenter = remember { AppButtonsPresenter(packageInfoPresenter) }
-    presenter.Dialogs()
-    ActionButtons(actionButtons = presenter.rememberActionsButtons().value)
+    ActionButtons(actionButtons = presenter.getActionButtons())
 }
 
 private fun PackageInfoPresenter.isMainlineModule(): Boolean =
@@ -47,12 +45,12 @@ private class AppButtonsPresenter(private val packageInfoPresenter: PackageInfoP
 
     @OptIn(ExperimentalLifecycleComposeApi::class)
     @Composable
-    fun rememberActionsButtons() = remember {
-        packageInfoPresenter.flow.map { packageInfo ->
-            if (packageInfo != null) getActionButtons(packageInfo.applicationInfo) else emptyList()
-        }
-    }.collectAsStateWithLifecycle(initialValue = emptyList())
+    fun getActionButtons() =
+        packageInfoPresenter.flow.collectAsStateWithLifecycle(initialValue = null).value?.let {
+            getActionButtons(it.applicationInfo)
+        } ?: emptyList()
 
+    @Composable
     private fun getActionButtons(app: ApplicationInfo): List<ActionButton> = listOfNotNull(
         appLaunchButton.getActionButton(app),
         appInstallButton.getActionButton(app),
@@ -61,11 +59,4 @@ private class AppButtonsPresenter(private val packageInfoPresenter: PackageInfoP
         appClearButton.getActionButton(app),
         appForceStopButton.getActionButton(app),
     )
-
-    @Composable
-    fun Dialogs() {
-        appDisableButton.DisableConfirmDialog()
-        appClearButton.ClearConfirmDialog()
-        appForceStopButton.ForceStopConfirmDialog()
-    }
 }

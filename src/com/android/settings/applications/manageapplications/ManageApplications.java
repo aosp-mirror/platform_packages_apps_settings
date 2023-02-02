@@ -99,6 +99,7 @@ import com.android.internal.jank.InteractionJankMonitor;
 import com.android.settings.R;
 import com.android.settings.Settings.AlarmsAndRemindersActivity;
 import com.android.settings.Settings.AppBatteryUsageActivity;
+import com.android.settings.Settings.ChangeNfcTagAppsActivity;
 import com.android.settings.Settings.ChangeWifiStateActivity;
 import com.android.settings.Settings.ClonedAppsListActivity;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
@@ -148,6 +149,8 @@ import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.HighPowerDetail;
 import com.android.settings.localepicker.AppLocalePickerActivity;
+import com.android.settings.nfc.AppStateNfcTagAppsBridge;
+import com.android.settings.nfc.ChangeNfcTagAppsStateDetails;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.app.AppNotificationSettings;
@@ -264,6 +267,7 @@ public class ManageApplications extends InstrumentedFragment
     public static final int LIST_TYPE_BATTERY_OPTIMIZATION = 15;
     public static final int LIST_TYPE_LONG_BACKGROUND_TASKS = 16;
     public static final int LIST_TYPE_CLONED_APPS = 17;
+    public static final int LIST_TYPE_NFC_TAG_APPS = 18;
 
     // List types that should show instant apps.
     public static final Set<Integer> LIST_TYPES_WITH_INSTANT = new ArraySet<>(Arrays.asList(
@@ -361,6 +365,9 @@ public class ManageApplications extends InstrumentedFragment
                             Settings.Global.REVIEW_PERMISSIONS_NOTIFICATION_STATE,
                             1);  // USER_INTERACTED
                 }
+                break;
+            case LIST_TYPE_NFC_TAG_APPS:
+                mShowSystem = true;
                 break;
         }
         final AppFilterRegistry appFilterRegistry = AppFilterRegistry.getInstance();
@@ -560,6 +567,8 @@ public class ManageApplications extends InstrumentedFragment
                 return SettingsEnums.LONG_BACKGROUND_TASKS;
             case LIST_TYPE_CLONED_APPS:
                 return SettingsEnums.CLONED_APPS;
+            case LIST_TYPE_NFC_TAG_APPS:
+                return SettingsEnums.CONFIG_NFC_TAG_APP_PREF;
             default:
                 return SettingsEnums.PAGE_UNKNOWN;
         }
@@ -629,10 +638,9 @@ public class ManageApplications extends InstrumentedFragment
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == INSTALLED_APP_DETAILS && mCurrentPkgName != null) {
-            if (mListType == LIST_TYPE_NOTIFICATION) {
-                mApplications.mExtraInfoBridge.forceUpdate(mCurrentPkgName, mCurrentUid);
-            } else if (mListType == LIST_TYPE_HIGH_POWER || mListType == LIST_TYPE_OVERLAY
-                    || mListType == LIST_TYPE_WRITE_SETTINGS) {
+            if (mListType == LIST_TYPE_NOTIFICATION || mListType == LIST_TYPE_HIGH_POWER
+                    || mListType == LIST_TYPE_OVERLAY || mListType == LIST_TYPE_WRITE_SETTINGS
+                    || mListType == LIST_TYPE_NFC_TAG_APPS) {
                 mApplications.mExtraInfoBridge.forceUpdate(mCurrentPkgName, mCurrentUid);
             } else {
                 mApplicationsState.requestSize(mCurrentPkgName, UserHandle.getUserId(mCurrentUid));
@@ -726,6 +734,10 @@ public class ManageApplications extends InstrumentedFragment
                     SpaActivity.startSpaActivity(getContext(), AppInfoSettingsProvider.INSTANCE
                             .getRoute(mCurrentPkgName, userId));
                 }
+                break;
+            case LIST_TYPE_NFC_TAG_APPS:
+                startAppInfoFragment(ChangeNfcTagAppsStateDetails.class,
+                        R.string.change_nfc_tag_apps_title);
                 break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed
@@ -1052,6 +1064,8 @@ public class ManageApplications extends InstrumentedFragment
             screenTitle = R.string.long_background_tasks_title;
         } else if (className.equals(ClonedAppsListActivity.class.getName())) {
             screenTitle = R.string.cloned_apps_dashboard_title;
+        } else if (className.equals(ChangeNfcTagAppsActivity.class.getName())) {
+            screenTitle = R.string.change_nfc_tag_apps_title;
         } else {
             if (screenTitle == -1) {
                 screenTitle = R.string.all_apps;
@@ -1260,6 +1274,8 @@ public class ManageApplications extends InstrumentedFragment
                 mExtraInfoBridge = new AppStateLongBackgroundTasksBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_CLONED_APPS) {
                 mExtraInfoBridge = new AppStateClonedAppsBridge(mContext, mState, this);
+            } else if (mManageApplications.mListType == LIST_TYPE_NFC_TAG_APPS) {
+                mExtraInfoBridge = new AppStateNfcTagAppsBridge(mContext, mState, this);
             } else {
                 mExtraInfoBridge = null;
             }
@@ -1809,6 +1825,10 @@ public class ManageApplications extends InstrumentedFragment
                     break;
                 case LIST_TYPE_CLONED_APPS:
                     holder.setSummary(null);
+                    break;
+                case LIST_TYPE_NFC_TAG_APPS:
+                    holder.setSummary(
+                            ChangeNfcTagAppsStateDetails.getSummary(mContext, entry));
                     break;
                 default:
                     holder.updateSizeText(entry, mManageApplications.mInvalidSizeStr, mWhichSize);
