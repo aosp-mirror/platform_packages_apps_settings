@@ -163,6 +163,10 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
                             mHandler.post(() -> {
                                 removeAndCacheAllPreferences();
                                 addAllPreferences();
+                                mMetricsFeatureProvider.action(
+                                        mPrefContext,
+                                        SettingsEnums.ACTION_BATTERY_USAGE_SPINNER,
+                                        mSpinnerPosition);
                             });
                         }
                     }

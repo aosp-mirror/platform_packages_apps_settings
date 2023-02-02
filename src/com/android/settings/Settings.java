@@ -348,6 +348,8 @@ public class Settings extends SettingsActivity {
     public static class AppMediaManagementAppsActivity extends SettingsActivity { /* empty */ }
     public static class WriteSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChangeWifiStateActivity extends SettingsActivity { /* empty */ }
+    /** Activity to manage NFC Tag applications. */
+    public static class ChangeNfcTagAppsActivity extends SettingsActivity { /* empty */ }
     public static class AppDrawOverlaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppWriteSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity to manage app battery usage details. */

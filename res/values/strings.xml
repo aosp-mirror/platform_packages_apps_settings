@@ -2488,11 +2488,11 @@
     <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
     <string name="sim_preferred_message"><xliff:g id="new_sim">%1$s</xliff:g> is the only SIM in your device. Do you want to use this SIM for mobile data, calls, and SMS messages?</string>
 
-    <!-- Title for the dialog asking to user to enable auto data switch upon enabling multi-SIM  [CHAR LIMIT=30] -->
-    <string name="enable_auto_data_switch_dialog_title">Switch SIMs automatically?</string>
-    <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
-    <string name="enable_auto_data_switch_dialog_message">Allow your phone to automatically switch to <xliff:g id="backup_carrier" example="T-mobile">%1$s</xliff:g> for mobile data when it has better availability.</string>
-    <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
+    <!-- Title for the dialog asking user to enable auto data switch upon enabling multi-SIM  [CHAR LIMIT=30] -->
+    <string name="enable_auto_data_switch_dialog_title">Improve mobile data coverage?</string>
+    <!-- Message for the dialog asking user to enable auto data switch upon enabling multi-SIM  [CHAR LIMIT=NONE] -->
+    <string name="enable_auto_data_switch_dialog_message">Allow your device to automatically switch to <xliff:g id="backup_carrier" example="T-mobile">%1$s</xliff:g> for mobile data when it has better availability.</string>
+    <!-- Warning for the dialog asking user to enable auto data switch for switching data between work and personal profile  [CHAR LIMIT=NONE] -->
     <string name="auto_data_switch_dialog_managed_profile_warning">\n\nCalls, messages, and network traffic may be visible to your organization.</string>
 
     <!-- Instructions telling the user that they entered the wrong SIM PIN for the last time.
@@ -3331,11 +3331,25 @@
     <string name="lockpassword_strong_auth_required_work_password">For added security, enter your work password</string>
 
     <!-- An explanation text that the pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
-    <string name="lockpassword_confirm_your_pattern_details_frp">Your phone was reset to factory settings. To use this phone, enter your previous pattern.</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default">Your phone was reset to factory settings. To use this phone, enter your previous pattern.</string>
+    <!-- An explanation text that the pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet">Your tablet was reset to factory settings. To use this tablet, enter your previous pattern.</string>
+    <!-- An explanation text that the pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device">Your device was reset to factory settings. To use this device, enter your previous pattern.</string>
+
     <!-- An explanation text that the pin needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
-    <string name="lockpassword_confirm_your_pin_details_frp">Your phone was reset to factory settings. To use this phone, enter your previous PIN.</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default">Your phone was reset to factory settings. To use this phone, enter your previous PIN.</string>
+    <!-- An explanation text that the pin needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet">Your tablet was reset to factory settings. To use this tablet, enter your previous PIN.</string>
+    <!-- An explanation text that the pin needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device">Your device was reset to factory settings. To use this device, enter your previous PIN.</string>
+
     <!-- An explanation text that the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
-    <string name="lockpassword_confirm_your_password_details_frp">Your phone was reset to factory settings. To use this phone, enter your previous password.</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default">Your phone was reset to factory settings. To use this phone, enter your previous password.</string>
+    <!-- An explanation text that the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet">Your tablet was reset to factory settings. To use this tablet, enter your previous password.</string>
+    <!-- An explanation text that the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_password_details_frp" product="device">Your device was reset to factory settings. To use this device, enter your previous password.</string>
 
     <!-- Header shown when pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
     <string name="lockpassword_confirm_your_pattern_header_frp">Verify pattern</string>
@@ -3836,6 +3850,36 @@
     <string name="trackpad_pointer_speed">Pointer speed</string>
     <!-- Title for the button to trigger the 'touch gesture' education. [CHAR LIMIT=35] -->
     <string name="trackpad_touch_gesture">Learn touchpad gestures</string>
+
+    <!-- Title text for 'Go home' gesture education [CHAR LIMIT=35] -->
+    <string name="gesture_title_go_home">Go home</string>
+    <!-- Summary text for 'Go home' gesture education [CHAR LIMIT=60] -->
+    <string name="gesture_summary_go_home">Swipe up with three fingers anywhere on your touchpad</string>
+    <!-- Title text for 'Go back' gesture education [CHAR LIMIT=35] -->
+    <string name="gesture_title_go_back">Go back</string>
+    <!-- Summary text for 'Go back' gesture education [CHAR LIMIT=60] -->
+    <string name="gesture_summary_go_back">Swipe from the left or right with three fingers</string>
+    <!-- Title text for 'View recent apps' gesture education [CHAR LIMIT=35] -->
+    <string name="gesture_title_recent_apps">View recent apps</string>
+    <!-- Summary text for 'View recent apps' gesture education [CHAR LIMIT=60] -->
+    <string name="gesture_summary_recent_apps">Swipe up with three fingers, hold, then release</string>
+    <!-- Title text for 'View notifications' gesture education [CHAR LIMIT=35] -->
+    <string name="gesture_title_notifications">View notifications &amp; Quick Settings</string>
+    <!-- Summary text for 'View notifications' gesture education [CHAR LIMIT=60] -->
+    <string name="gesture_summary_notifications">Swipe down with three fingers on your home screen</string>
+    <!-- Title text for 'Switch apps' gesture education [CHAR LIMIT=35] -->
+    <string name="gesture_title_switch_apps">Switch apps</string>
+    <!-- Summary text for 'Switch apps' gesture education [CHAR LIMIT=60] -->
+    <string name="gesture_summary_switch_apps">Swipe left or right with four fingers</string>
+
+    <!-- Text for 'Skip' button in gesture education [CHAR LIMIT=10] -->
+    <string name="gesture_button_skip">Skip</string>
+    <!-- Text for 'Next' button in gesture education [CHAR LIMIT=10] -->
+    <string name="gesture_button_next">Next</string>
+    <!-- Text for 'Restart' button in gesture education [CHAR LIMIT=10] -->
+    <string name="gesture_button_restart">Restart</string>
+    <!-- Text for 'Done' button in gesture education [CHAR LIMIT=10] -->
+    <string name="gesture_button_done">Done</string>
 
     <!-- Title text for 'Go back' [CHAR LIMIT=35] -->
     <string name="trackpad_go_back_title">Go back</string>
@@ -6536,15 +6580,15 @@
     <!-- Summary of multimedia messaging service settings.  [CHAR LIMIT=100] -->
     <string name="mms_message_summary">Send &amp; receive when mobile data is off</string>
 
-    <!-- Title of a preference for whether to allow data during calls that is shown when mobile
-         data is turned off. This is needed for some multi-SIM scenarios, because the SIM that is
-         default for data might not be available during a phone call. [CHAR LIMIT=60] -->
+    <!-- Title of a preference for whether to allow auto data switch that is shown for backup
+         data SIM. This is needed for some multi-SIM scenarios, because the SIM that is
+         default for data might be unavailable while the backup is in coverage. [CHAR LIMIT=60] -->
     <string name="auto_data_switch_title">Switch mobile data automatically</string>
-    <!-- Title of a preference for whether to allow data during calls that is shown when mobile
-         data is turned off. This is needed for some multi-SIM scenarios, because the SIM that is
-         default for data might not be available during a phone call. [CHAR LIMIT=NONE] -->
+    <!-- Summary of a preference for whether to allow auto data switch that is shown for backup
+         data SIM. This is needed for some multi-SIM scenarios, because the SIM that is
+         default for data might be unavailable while the backup is in coverage. [CHAR LIMIT=NONE]-->
     <string name="auto_data_switch_summary">
-        Temporarily use this network when it has better availability for calls and internet
+        Use this network when it has better availability
     </string>
 
     <!-- Work SIM title.  [CHAR LIMIT=50] -->
@@ -6802,6 +6846,9 @@
     <!-- Search keyword for biometric settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_biometric_settings">face, fingerprint, add fingerprint</string>
 
+    <!-- Search keyword for active unlock settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_active_unlock_settings">watch unlock, add watch unlock</string>
+
     <!-- Search keywords for adaptive brightness setting [CHAR LIMIT=NONE]-->
     <string name="keywords_display_auto_brightness">dim screen, touchscreen, battery, smart brightness, dynamic brightness, Auto brightness</string>
 
@@ -6882,6 +6929,9 @@
 
     <!-- List of synonyms for the always show time and info [CHAR LIMIT=NONE] -->
     <string name="keywords_always_show_time_info">always on display, AOD</string>
+
+    <!-- List of synonyms for the nfc tag apps control [CHAR LIMIT=NONE] -->
+    <string name="keywords_change_nfc_tag_apps_state">nfc, tag, reader</string>
 
     <!-- Summary for sound settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="sound_dashboard_summary">Volume, vibration, Do Not Disturb</string>
@@ -10204,6 +10254,15 @@
 
     <!-- Apps > App Details > Wifi access > Description. [CHAR LIMIT=NONE] -->
     <string name="change_wifi_state_app_detail_summary">Allow this app to turn Wi-Fi on or off, scan and connect to Wi-Fi networks, add or remove networks, or start a local-only hotspot</string>
+
+    <!-- Title for Nfc Tag apps control [CHAR LIMIT=35] -->
+    <string name="change_nfc_tag_apps_title">NFC Tag apps control</string>
+
+    <!-- Apps > App Details > Nfc Tag apps control > Switch title. [CHAR LIMIT=NONE] -->
+    <string name="change_nfc_tag_apps_detail_switch">Allow app to popup upon NFC tags detected</string>
+
+    <!-- Apps > App Details > Nfc Tag apps control > Description. [CHAR LIMIT=NONE] -->
+    <string name="change_nfc_tag_apps_detail_summary">Allow this app to launch and get tag contents when the device detests NFC tags</string>
 
     <!-- Title for media output settings -->
     <string name="media_output_title">Play media to</string>

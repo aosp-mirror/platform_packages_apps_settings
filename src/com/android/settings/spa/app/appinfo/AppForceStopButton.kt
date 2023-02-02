@@ -21,19 +21,17 @@ import android.content.pm.ApplicationInfo
 import android.os.UserManager
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.WarningAmber
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settingslib.RestrictedLockUtils
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin
 import com.android.settingslib.RestrictedLockUtilsInternal
 import com.android.settingslib.spa.widget.button.ActionButton
+import com.android.settingslib.spa.widget.dialog.AlertDialogButton
+import com.android.settingslib.spa.widget.dialog.AlertDialogPresenter
+import com.android.settingslib.spa.widget.dialog.rememberAlertDialogPresenter
 import com.android.settingslib.spaprivileged.model.app.hasFlag
 import com.android.settingslib.spaprivileged.model.app.isActiveAdmin
 import com.android.settingslib.spaprivileged.model.app.userId
@@ -45,14 +43,14 @@ class AppForceStopButton(
     private val appButtonRepository = AppButtonRepository(context)
     private val packageManager = context.packageManager
 
-    private var openConfirmDialog by mutableStateOf(false)
-
+    @Composable
     fun getActionButton(app: ApplicationInfo): ActionButton {
+        val dialogPresenter = confirmDialogPresenter()
         return ActionButton(
             text = context.getString(R.string.force_stop),
             imageVector = Icons.Outlined.WarningAmber,
             enabled = isForceStopButtonEnable(app),
-        ) { onForceStopButtonClicked(app) }
+        ) { onForceStopButtonClicked(app, dialogPresenter) }
     }
 
     /**
@@ -68,13 +66,16 @@ class AppForceStopButton(
         else -> !app.hasFlag(ApplicationInfo.FLAG_STOPPED)
     }
 
-    private fun onForceStopButtonClicked(app: ApplicationInfo) {
+    private fun onForceStopButtonClicked(
+        app: ApplicationInfo,
+        dialogPresenter: AlertDialogPresenter,
+    ) {
         packageInfoPresenter.logAction(SettingsEnums.ACTION_APP_INFO_FORCE_STOP)
         getAdminRestriction(app)?.let { admin ->
             RestrictedLockUtils.sendShowAdminSupportDetailsIntent(context, admin)
             return
         }
-        openConfirmDialog = true
+        dialogPresenter.open()
     }
 
     private fun getAdminRestriction(app: ApplicationInfo): EnforcedAdmin? = when {
@@ -88,31 +89,13 @@ class AppForceStopButton(
     }
 
     @Composable
-    fun ForceStopConfirmDialog() {
-        if (!openConfirmDialog) return
-        AlertDialog(
-            onDismissRequest = { openConfirmDialog = false },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        openConfirmDialog = false
-                        packageInfoPresenter.forceStop()
-                    },
-                ) {
-                    Text(stringResource(R.string.okay))
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = { openConfirmDialog = false }) {
-                    Text(stringResource(R.string.cancel))
-                }
-            },
-            title = {
-                Text(stringResource(R.string.force_stop_dlg_title))
-            },
-            text = {
-                Text(stringResource(R.string.force_stop_dlg_text))
-            },
-        )
-    }
+    private fun confirmDialogPresenter() = rememberAlertDialogPresenter(
+        confirmButton = AlertDialogButton(
+            text = stringResource(R.string.okay),
+            onClick = packageInfoPresenter::forceStop,
+        ),
+        dismissButton = AlertDialogButton(stringResource(R.string.cancel)),
+        title = stringResource(R.string.force_stop_dlg_title),
+        text = { Text(stringResource(R.string.force_stop_dlg_text)) },
+    )
 }

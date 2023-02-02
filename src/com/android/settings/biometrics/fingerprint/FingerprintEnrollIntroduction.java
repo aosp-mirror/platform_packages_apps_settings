@@ -52,6 +52,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.span.LinkSpan;
+import com.google.android.setupdesign.util.DeviceHelper;
 
 import java.util.List;
 
@@ -149,6 +150,15 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
                 getNextButton().setEnabled(true);
             }));
         }
+    }
+
+    @Override
+    protected void initViews() {
+        setDescriptionText(getString(
+                R.string.security_settings_fingerprint_enroll_introduction_v3_message,
+                DeviceHelper.getDeviceName(this)));
+
+        super.initViews();
     }
 
     @VisibleForTesting
