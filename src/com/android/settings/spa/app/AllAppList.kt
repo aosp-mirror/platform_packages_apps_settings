@@ -27,8 +27,8 @@ import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
 import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
-import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
+import com.android.settingslib.spa.framework.common.createSettingsPage
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.framework.compose.rememberContext
 import com.android.settingslib.spa.framework.util.filterItem
@@ -48,6 +48,7 @@ import kotlinx.coroutines.flow.Flow
 
 object AllAppListPageProvider : SettingsPageProvider {
     override val name = "AllAppList"
+    private val owner = createSettingsPage()
 
     @Composable
     override fun Page(arguments: Bundle?) {
@@ -55,7 +56,7 @@ object AllAppListPageProvider : SettingsPageProvider {
     }
 
     fun buildInjectEntry() = SettingsEntryBuilder
-        .createInject(owner = SettingsPage.create(name))
+        .createInject(owner)
         .setSearchDataFn { null }
         .setUiLayoutFn {
             Preference(object : PreferenceModel {
