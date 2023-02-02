@@ -36,6 +36,7 @@ import androidx.window.embedding.SplitRule;
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
+import com.android.settings.biometrics.face.FaceEnrollIntroduction;
 import com.android.settings.biometrics.face.FaceEnrollIntroductionInternal;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction;
@@ -231,7 +232,7 @@ public class ActivityEmbeddingRulesController {
         addActivityFilter(activityFilters, FingerprintEnrollIntroductionInternal.class);
         addActivityFilter(activityFilters, FingerprintEnrollEnrolling.class);
         addActivityFilter(activityFilters, FaceEnrollIntroductionInternal.class);
-        addActivityFilter(activityFilters, Settings.FaceSettingsInternalActivity.class);
+        addActivityFilter(activityFilters, FaceEnrollIntroduction.class);
         addActivityFilter(activityFilters, AvatarPickerActivity.class);
         addActivityFilter(activityFilters, ChooseLockPattern.class);
         mSplitController.registerRule(new ActivityRule(activityFilters, true /* alwaysExpand */));
