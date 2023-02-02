@@ -140,7 +140,7 @@ public class StylusDevicesController extends AbstractPreferenceController implem
         pref.setIcon(R.drawable.ic_block);
         pref.setOnPreferenceClickListener(this);
         pref.setChecked(Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.STYLUS_BUTTONS_DISABLED, 0) == 1);
+                Settings.Secure.STYLUS_BUTTONS_ENABLED, 1) == 0);
         return pref;
     }
 
@@ -175,8 +175,8 @@ public class StylusDevicesController extends AbstractPreferenceController implem
                 break;
             case KEY_IGNORE_BUTTON:
                 Settings.Secure.putInt(mContext.getContentResolver(),
-                        Secure.STYLUS_BUTTONS_DISABLED,
-                        ((SwitchPreference) preference).isChecked() ? 1 : 0);
+                        Secure.STYLUS_BUTTONS_ENABLED,
+                        ((SwitchPreference) preference).isChecked() ? 0 : 1);
                 break;
         }
         return true;
