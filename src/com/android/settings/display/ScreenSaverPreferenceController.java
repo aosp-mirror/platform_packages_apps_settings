@@ -14,9 +14,9 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.os.UserManager;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dream.DreamSettings;
@@ -39,9 +39,8 @@ public class ScreenSaverPreferenceController extends BasePreferenceController im
                 com.android.internal.R.bool.config_dreamsSupported);
         final boolean dreamsOnlyEnabledForDockUser = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_dreamsOnlyEnabledForDockUser);
-        final UserManager userManager = mContext.getSystemService(UserManager.class);
-        // TODO(b/257333623): Allow the Dock User to be non-SystemUser user in HSUM.
-        return (dreamsSupported && (!dreamsOnlyEnabledForDockUser || userManager.isMainUser()))
+        return (dreamsSupported && (!dreamsOnlyEnabledForDockUser
+                || Utils.canCurrentUserDream(mContext)))
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 

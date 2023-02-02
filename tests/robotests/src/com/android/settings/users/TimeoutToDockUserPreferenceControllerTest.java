@@ -32,6 +32,7 @@ import android.provider.Settings;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.fuelgauge.BatteryBackupHelperTest.ShadowUserHandle;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
@@ -106,15 +107,17 @@ public class TimeoutToDockUserPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_isCurrentlyUserZero_returnDisabledForUser() {
-        ShadowUserHandle.setUid(UserHandle.USER_SYSTEM);
+    public void getAvailabilityStatus_isCurrentlyMainUser_returnDisabledForUser() {
+        when(Utils.canCurrentUserDream(mContext)).thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.DISABLED_FOR_USER);
     }
 
     @Test
-    public void getAvailabilityStatus_featureAndMultiUserEnabledAndNonUserZero_returnAvailable() {
+    public void getAvailabilityStatus_featureAndMultiUserEnabledAndNonMainUser_returnAvailable() {
+        when(Utils.canCurrentUserDream(mContext)).thenReturn(false);
+
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.AVAILABLE);
     }
