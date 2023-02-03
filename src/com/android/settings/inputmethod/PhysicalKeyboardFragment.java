@@ -35,6 +35,7 @@ import android.provider.Settings.Secure;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.view.InputDevice;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
@@ -54,9 +55,7 @@ import com.android.settingslib.utils.ThreadUtils;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 @SearchIndexable
@@ -73,6 +72,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     private final ArrayList<HardKeyboardDeviceInfo> mLastHardKeyboards = new ArrayList<>();
 
     private InputManager mIm;
+    private InputMethodManager mImm;
     @NonNull
     private PreferenceCategory mKeyboardAssistanceCategory;
     @NonNull
@@ -90,6 +90,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         mBluetoothAddress = activity.getIntent().getStringExtra(EXTRA_BT_ADDRESS);
         addPreferencesFromResource(R.xml.physical_keyboard_settings);
         mIm = Preconditions.checkNotNull(activity.getSystemService(InputManager.class));
+        mImm = Preconditions.checkNotNull(activity.getSystemService(InputMethodManager.class));
         mKeyboardAssistanceCategory = Preconditions.checkNotNull(
                 (PreferenceCategory) findPreference(KEYBOARD_OPTIONS_CATEGORY));
         mShowVirtualKeyboardSwitch = Preconditions.checkNotNull(
@@ -194,21 +195,15 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
             final Preference pref = new Preference(getPrefContext());
             pref.setTitle(hardKeyboardDeviceInfo.mDeviceName);
             if (mIsNewKeyboardSettings) {
-                // TODO(b/252816846): Need InputMethodManager to provide the enabled locales.
-                // Hardcode Languages for demo until inputMethodManager provides the latest API.
-                // For example: InputMethodManager.getEnabledInputMethodLocales();
-                String[] keyboardLanguages =
-                        {"English (US)", "German (Germany)", "Spanish (Spain)"};
-                String[] keyboardLayouts = {"English (US)", "German", "Spanish"};
-                Map<String, String> keyboardMap = new HashMap<>();
-                for (int i = 0; i < keyboardLanguages.length; i++) {
-                    keyboardMap.put(keyboardLanguages[i], keyboardLayouts[i]);
-                }
-                if (!keyboardMap.isEmpty()) {
-                    String summary = keyboardMap.get(keyboardLanguages[0]);
+                List<String> suitableImes = new ArrayList<>();
+                suitableImes.addAll(
+                        NewKeyboardSettingsUtils.getSuitableImeLabels(
+                                getContext(), mImm, UserHandle.myUserId()));
+                if (!suitableImes.isEmpty()) {
+                    String summary = suitableImes.get(0);
                     StringBuilder result = new StringBuilder(summary);
-                    for (int i = 1; i < keyboardLanguages.length; i++) {
-                        result.append(", ").append(keyboardMap.get(keyboardLanguages[i]));
+                    for (int i = 1; i < suitableImes.size(); i++) {
+                        result.append(", ").append(suitableImes.get(i));
                     }
                     pref.setSummary(result.toString());
                 } else {
@@ -245,12 +240,10 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
 
     private void showEnabledLocalesKeyboardLayoutList(String keyboardName,
             InputDeviceIdentifier inputDeviceIdentifier) {
-        // TODO(b/252816846: Need to get enabled locales.
         Bundle arguments = new Bundle();
-        arguments.putParcelable(KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_IDENTIFIER,
+        arguments.putParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER,
                 inputDeviceIdentifier);
-        arguments.putString(NewKeyboardLayoutEnabledLocalesFragment.EXTRA_KEYBOARD_DEVICE_NAME,
-                keyboardName);
+        arguments.putString(NewKeyboardSettingsUtils.EXTRA_KEYBOARD_DEVICE_NAME, keyboardName);
         new SubSettingLauncher(getContext())
                 .setSourceMetricsCategory(getMetricsCategory())
                 .setDestination(NewKeyboardLayoutEnabledLocalesFragment.class.getName())

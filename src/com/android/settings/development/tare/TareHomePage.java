@@ -21,6 +21,7 @@ import static com.android.settings.development.tare.DropdownActivity.POLICY_ALAR
 import static com.android.settings.development.tare.DropdownActivity.POLICY_JOB_SCHEDULER;
 
 import android.app.Activity;
+import android.app.tare.EconomyManager;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.net.Uri;
@@ -29,6 +30,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -41,6 +43,8 @@ import com.android.settings.R;
 
 /** Class for creating the TARE homepage in settings */
 public class TareHomePage extends Activity {
+    private static final String TAG = "TareHomePage";
+
     private Switch mOnSwitch;
     private Button mRevButton;
     private TextView mAlarmManagerView;
@@ -131,8 +135,6 @@ public class TareHomePage extends Activity {
     }
 
     private class ConfigObserver extends ContentObserver {
-        private static final String KEY_DC_ENABLE_TARE = "enable_tare";
-
         private int mEnableTareSetting;
 
         ConfigObserver(Handler handler) {
@@ -163,7 +165,8 @@ public class TareHomePage extends Activity {
                 try {
                     mEnableTareSetting = Integer.parseInt(setting);
                 } catch (NumberFormatException e) {
-                    mEnableTareSetting = Settings.Global.DEFAULT_ENABLE_TARE;
+                    Log.e(TAG, "Invalid setting value", e);
+                    mEnableTareSetting = EconomyManager.DEFAULT_ENABLE_TARE_MODE;
                 }
             }
             final boolean enabled;
@@ -178,9 +181,10 @@ public class TareHomePage extends Activity {
         }
 
         private boolean getDefaultEnabledStatus() {
-            return DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_TARE, KEY_DC_ENABLE_TARE,
-                    Settings.Global.DEFAULT_ENABLE_TARE == SETTING_VALUE_ON);
+            // Show Shadow Mode as "off" in the UI since it won't be affecting device behavior.
+            return DeviceConfig.getInt(DeviceConfig.NAMESPACE_TARE,
+                    EconomyManager.KEY_ENABLE_TARE_MODE,
+                    EconomyManager.DEFAULT_ENABLE_TARE_MODE) == EconomyManager.ENABLED_MODE_ON;
         }
-
     }
 }
