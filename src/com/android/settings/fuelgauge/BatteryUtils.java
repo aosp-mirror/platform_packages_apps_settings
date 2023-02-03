@@ -639,6 +639,13 @@ public class BatteryUtils {
         return DockDefenderMode.DISABLED;
     }
 
+    /** Formats elapsed time without commas in between.  */
+    public static CharSequence formatElapsedTimeWithoutComma(
+            Context context, double millis, boolean withSeconds, boolean collapseTimeUnit) {
+        return StringUtil.formatElapsedTime(context, millis, withSeconds, collapseTimeUnit)
+                .toString().replaceAll(",", "");
+    }
+
     /** Builds the battery usage time summary. */
     public static String buildBatteryUsageTimeSummary(final Context context, final boolean isSystem,
             final long foregroundUsageTimeInMs, final long backgroundUsageTimeInMs,
@@ -675,7 +682,7 @@ public class BatteryUtils {
         if (timeInMs < DateUtils.MINUTE_IN_MILLIS) {
             return context.getString(lessThanOneMinuteResId);
         }
-        final CharSequence timeSequence = StringUtil.formatElapsedTime(
+        final CharSequence timeSequence = formatElapsedTimeWithoutComma(
                 context, (double) timeInMs, /*withSeconds=*/ false, /*collapseTimeUnit=*/ false);
         return context.getString(normalResId, timeSequence);
     }
