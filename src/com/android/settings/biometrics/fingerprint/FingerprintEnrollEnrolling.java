@@ -58,11 +58,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.IdRes;
@@ -201,6 +203,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private boolean mHaveShownSfpsRightEdgeLottie;
     private boolean mShouldShowLottie;
     private UdfpsUtils mUdfpsUtils;
+    private ObjectAnimator mHelpAnimation;
 
     private OrientationEventListener mOrientationEventListener;
     private int mPreviousRotation = 0;
@@ -327,6 +330,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         } else if (mCanAssumeSfps) {
             setContentView(R.layout.sfps_enroll_enrolling);
             setDescriptionText(R.string.security_settings_fingerprint_enroll_start_message);
+            setHelpAnimation();
         } else {
             setContentView(R.layout.fingerprint_enroll_enrolling);
             setDescriptionText(R.string.security_settings_fingerprint_enroll_start_message);
@@ -419,6 +423,17 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         maybeHideSfpsText(config);
     }
 
+    private void setHelpAnimation() {
+        final float translationX = 40;
+        final int duration = 550;
+        final RelativeLayout progressLottieLayout = findViewById(R.id.progress_lottie);
+        mHelpAnimation = ObjectAnimator.ofFloat(progressLottieLayout,
+                "translationX" /* propertyName */,
+                0, translationX, -1 * translationX, translationX, 0f);
+        mHelpAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
+        mHelpAnimation.setDuration(duration);
+        mHelpAnimation.setAutoCancel(false);
+    }
     @Override
     protected BiometricEnrollSidecar getSidecar() {
         final FingerprintEnrollSidecar sidecar = new FingerprintEnrollSidecar(this,
@@ -836,6 +851,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         if (!TextUtils.isEmpty(helpString)) {
             if (!(mCanAssumeUdfps || mCanAssumeSfps)) {
                 mErrorText.removeCallbacks(mTouchAgainRunnable);
+                mErrorText.removeCallbacks(mTouchAgainRunnable);
             }
             showError(helpString);
 
@@ -958,6 +974,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             // Show nothing for subtitle when getting an error message.
             setDescriptionText("");
             if (mCanAssumeSfps) {
+                if (!mHelpAnimation.isRunning()) {
+                    mHelpAnimation.start();
+                }
                 applySfpsErrorDynamicColors(getApplicationContext(), true);
             }
         } else {
