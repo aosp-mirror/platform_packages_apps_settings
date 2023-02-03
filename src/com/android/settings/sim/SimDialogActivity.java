@@ -17,24 +17,35 @@
 package com.android.settings.sim;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.telephony.ims.ImsException;
+import android.telephony.ims.ImsManager;
+import android.telephony.ims.ImsMmTelManager;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
+import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.network.telephony.SubscriptionActionDialogActivity;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.List;
 
@@ -62,6 +73,7 @@ public class SimDialogActivity extends FragmentActivity {
     // Show auto data switch dialog(when user enables multi-SIM)
     public static final int ENABLE_AUTO_DATA_SWITCH = 6;
 
+    private MetricsFeatureProvider mMetricsFeatureProvider;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +85,7 @@ public class SimDialogActivity extends FragmentActivity {
         }
         SimDialogProhibitService.supportDismiss(this);
 
+        mMetricsFeatureProvider = FeatureFactory.getFactory(this).getMetricsFeatureProvider();
         getWindow().addSystemFlags(
                 WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
         showOrUpdateDialog();
@@ -192,6 +205,61 @@ public class SimDialogActivity extends FragmentActivity {
         }
     }
 
+    private PersistableBundle getCarrierConfigForSubId(int subId) {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            return null;
+        }
+        return CarrierConfigCache.getInstance(this).getConfigForSubId(subId);
+    }
+
+    private boolean isCrossSimCallingAllowedByPlatform(int subId) {
+        if ((new WifiCallingQueryImsState(this, subId)).isWifiCallingSupported()) {
+            PersistableBundle bundle = getCarrierConfigForSubId(subId);
+            return (bundle != null) && bundle.getBoolean(
+                    CarrierConfigManager.KEY_CARRIER_CROSS_SIM_IMS_AVAILABLE_BOOL,
+                    false /*default*/);
+        }
+        return false;
+    }
+
+    private ImsMmTelManager getImsMmTelManager(int subId) {
+        ImsManager imsMgr = getSystemService(ImsManager.class);
+        return (imsMgr == null) ? null : imsMgr.getImsMmTelManager(subId);
+    }
+
+    private void trySetCrossSimCallingPerSub(int subId, boolean enabled) {
+        try {
+            getImsMmTelManager(subId).setCrossSimCallingEnabled(enabled);
+        } catch (ImsException | IllegalArgumentException | NullPointerException exception) {
+            Log.w(TAG, "failed to change cross SIM calling configuration to " + enabled
+                    + " for subID " + subId + "with exception: ", exception);
+        }
+    }
+
+    private boolean autoDataSwitchEnabledOnNonDataSub(@NonNull int[] subIds, int defaultDataSub) {
+        for (int subId : subIds) {
+            if (subId != defaultDataSub) {
+                final TelephonyManager telephonyManager = getSystemService(
+                        TelephonyManager.class).createForSubscriptionId(subId);
+                if (telephonyManager.isMobileDataPolicyEnabled(
+                        TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private void trySetCrossSimCalling(int[] subIds, boolean enabled) {
+        mMetricsFeatureProvider.action(this,
+                SettingsEnums.ACTION_UPDATE_CROSS_SIM_CALLING_ON_2ND_SIM_ENABLE, enabled);
+        for (int subId : subIds) {
+            if (isCrossSimCallingAllowedByPlatform(subId)) {
+                trySetCrossSimCallingPerSub(subId, enabled);
+            }
+        }
+    }
+
     /**
      * Show dialog prompting the user to enable auto data switch
      */
@@ -199,6 +267,26 @@ public class SimDialogActivity extends FragmentActivity {
         final FragmentManager fragmentManager = getSupportFragmentManager();
         SimDialogFragment fragment = createFragment(ENABLE_AUTO_DATA_SWITCH);
         fragment.show(fragmentManager, Integer.toString(ENABLE_AUTO_DATA_SWITCH));
+
+        if (getResources().getBoolean(
+                R.bool.config_auto_data_switch_enables_cross_sim_calling)) {
+            // If auto data switch is already enabled on the non-DDS, the dialog for enabling it
+            // is suppressed (no onEnableAutoDataSwitch()). so we ensure cross-SIM calling is
+            // enabled.
+
+            // OTOH, if auto data switch is disabled on the new non-DDS, the user may still not
+            // enable it in the dialog. So we ensure cross-SIM calling is disabled before the
+            // dialog. If the user does enable auto data switch, we will re-enable cross-SIM calling
+            // through onEnableAutoDataSwitch()- a minor redundancy to ensure correctness.
+            final SubscriptionManager subscriptionManager =
+                    getSystemService(SubscriptionManager.class);
+            int[] subIds = subscriptionManager.getActiveSubscriptionIdList();
+            int defaultDataSub = subscriptionManager.getDefaultDataSubscriptionId();
+            if (subIds.length > 1) {
+                trySetCrossSimCalling(subIds,
+                        autoDataSwitchEnabledOnNonDataSub(subIds, defaultDataSub));
+            }
+        }
     }
 
     /**
@@ -210,6 +298,14 @@ public class SimDialogActivity extends FragmentActivity {
                 TelephonyManager.class).createForSubscriptionId(subId);
         telephonyManager.setMobileDataPolicyEnabled(
                 TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH, true);
+
+        if (getResources().getBoolean(
+                R.bool.config_auto_data_switch_enables_cross_sim_calling)) {
+            final SubscriptionManager subscriptionManager =
+                    getSystemService(SubscriptionManager.class);
+            trySetCrossSimCalling(subscriptionManager.getActiveSubscriptionIdList(),
+                    true /* enabled */);
+        }
     }
 
     public void onFragmentDismissed(SimDialogFragment simDialogFragment) {
