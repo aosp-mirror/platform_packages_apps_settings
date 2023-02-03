@@ -17,9 +17,9 @@
 package com.android.settings.communal;
 
 import android.content.Context;
-import android.os.UserManager;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 
 /**
@@ -32,14 +32,8 @@ public class CommunalPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        // TODO(b/257333623): Allow the communal user to be non-SystemUser user in HSUM.
         return (mContext.getResources().getBoolean(R.bool.config_show_communal_settings)
-                && isSystemUser())
+                && Utils.canCurrentUserDream(mContext))
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
-    }
-
-    private boolean isSystemUser() {
-        final UserManager userManager = mContext.getSystemService(UserManager.class);
-        return userManager != null && userManager.isSystemUser();
     }
 }

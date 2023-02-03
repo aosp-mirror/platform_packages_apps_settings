@@ -16,7 +16,6 @@
 
 package com.android.settings.inputmethod;
 
-import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static android.view.WindowManager.LayoutParams.TYPE_SYSTEM_DIALOG;
 
 import android.app.Activity;
@@ -97,8 +96,7 @@ public class TrackpadGestureDialogFragment extends BottomSheetDialogFragment {
     @Override
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
-        mInflater = (LayoutInflater) mContext.getSystemService(
-                LAYOUT_INFLATER_SERVICE);
+        mInflater = mContext.getSystemService(LayoutInflater.class);
 
         View gestureEducationView = mInflater.inflate(R.layout.trackpad_gesture_preview, null);
         addViewPager(gestureEducationView);

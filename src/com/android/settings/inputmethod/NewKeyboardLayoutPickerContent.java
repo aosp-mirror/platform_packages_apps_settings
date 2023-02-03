@@ -20,6 +20,8 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
 import android.os.Bundle;
+import android.view.inputmethod.InputMethodInfo;
+import android.view.inputmethod.InputMethodSubtype;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -28,31 +30,28 @@ public class NewKeyboardLayoutPickerContent extends DashboardFragment {
 
     private static final String TAG = "KeyboardLayoutPicker";
 
-    static final String EXTRA_TITLE = "keyboard_layout_picker_title";
-    static final String EXTRA_KEYBOARD_LAYOUT = "keyboard_layout";
-
-    /**
-     * Intent extra: The input device descriptor of the keyboard whose keyboard
-     * layout is to be changed.
-     */
-    public static final String EXTRA_INPUT_DEVICE_IDENTIFIER = "input_device_identifier";
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
         Bundle arguments = getArguments();
-        final String title = arguments.getString(EXTRA_TITLE);
-        final String layout = arguments.getString(EXTRA_KEYBOARD_LAYOUT);
+        final String title = arguments.getString(NewKeyboardSettingsUtils.EXTRA_TITLE);
+        final String layout = arguments.getString(NewKeyboardSettingsUtils.EXTRA_KEYBOARD_LAYOUT);
+        final int userId = arguments.getInt(NewKeyboardSettingsUtils.EXTRA_USER_ID);
         final InputDeviceIdentifier inputDeviceIdentifier =
-                arguments.getParcelable(EXTRA_INPUT_DEVICE_IDENTIFIER);
+                arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER);
+        final InputMethodInfo inputMethodInfo =
+                arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_METHOD_INFO);
+        final InputMethodSubtype inputMethodSubtype =
+                arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_METHOD_SUBTYPE);
+
 
         if (inputDeviceIdentifier == null) {
             getActivity().finish();
         }
         getActivity().setTitle(title);
-        use(NewKeyboardLayoutPickerController.class).initialize(this /*parent*/,
-                inputDeviceIdentifier, layout);
+        use(NewKeyboardLayoutPickerController.class).initialize(this /*parent*/, userId,
+                inputDeviceIdentifier, inputMethodInfo, inputMethodSubtype, layout);
     }
 
     @Override

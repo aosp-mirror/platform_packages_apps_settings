@@ -24,6 +24,7 @@ import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 
 import java.util.Arrays;
@@ -67,9 +68,7 @@ public class TimeoutToDockUserPreferenceController extends BasePreferenceControl
             return CONDITIONALLY_UNAVAILABLE;
         }
 
-        // Is currently user zero. Only non user zero can have this setting.
-        // TODO(b/257333623): Allow the Dock User to be non-SystemUser user in HSUM.
-        if (UserHandle.myUserId() == UserHandle.USER_SYSTEM) {
+        if (Utils.canCurrentUserDream(mContext)) {
             return DISABLED_FOR_USER;
         }
 
