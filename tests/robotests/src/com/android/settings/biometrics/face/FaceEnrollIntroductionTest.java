@@ -51,6 +51,8 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
+import com.android.settings.Settings;
+import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -62,6 +64,7 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.GlifLayout;
 import com.google.android.setupdesign.view.BottomScrollView;
 
@@ -168,6 +171,7 @@ public class FaceEnrollIntroductionTest {
     @After
     public void tearDown() {
         ShadowUtils.reset();
+        ShadowLockPatternUtils.reset();
     }
 
     private void setupActivity() {
@@ -315,7 +319,7 @@ public class FaceEnrollIntroductionTest {
     }
 
     @Test
-    public void testFaceEnrollEducation_hasBottomScrollView() {
+    public void testFaceEnrollIntroduction_hasBottomScrollView() {
         setupActivity();
         BottomScrollView scrollView = getGlifLayout(mActivity).findViewById(R.id.sud_scroll_view);
 
@@ -387,7 +391,7 @@ public class FaceEnrollIntroductionTest {
     }
 
     @Test
-    public void testFaceEnrollEducation_onFoldedUpdated_folded() {
+    public void testFaceEnrollIntroduction_onFoldedUpdated_folded() {
         final Configuration newConfig = new Configuration();
         newConfig.smallestScreenWidthDp = DENSITY_DEFAULT;
         setupActivityForPosture();
@@ -400,4 +404,97 @@ public class FaceEnrollIntroductionTest {
 
         assertThat(mSpyActivity.getDevicePostureState()).isEqualTo(DEVICE_POSTURE_CLOSED);
     }
+
+    @Test
+    public void testFaceEnrollIntroduction_maxFacesEnrolled_launchFaceSettings() {
+        setFaceManagerToHave(1 /* numEnrollments */);
+        final Intent intent = new Intent();
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
+        mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class, intent);
+        mActivity = (TestFaceEnrollIntroduction) mController.get();
+        mActivity.mOverrideFaceManager = mFaceManager;
+
+        mController.create();
+
+        ShadowActivity shadowActivity = Shadows.shadowOf(mActivity);
+        final Intent nextStartedActivity = shadowActivity.getNextStartedActivity();
+        assertThat(nextStartedActivity).isNotNull();
+        assertThat(nextStartedActivity.getComponent().getClassName())
+                .isEqualTo(Settings.FaceSettingsInternalActivity.class.getName());
+    }
+
+    @Test
+    public void testFaceEnrollIntroduction_maxFacesEnrolled_isSuw_notLaunchFaceSettings() {
+        setFaceManagerToHave(1 /* numEnrollments */);
+        ShadowLockPatternUtils.setActivePasswordQuality(PASSWORD_QUALITY_NUMERIC);
+        final Intent intent = new Intent();
+        intent.putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
+        mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class, intent);
+        mActivity = (TestFaceEnrollIntroduction) mController.get();
+        mActivity.mOverrideFaceManager = mFaceManager;
+
+        mController.create();
+
+        ShadowActivity shadowActivity = Shadows.shadowOf(mActivity);
+        final Intent nextStartedActivity = shadowActivity.getNextStartedActivity();
+        assertThat(nextStartedActivity).isNull();
+    }
+
+    @Test
+    public void testFaceEnrollIntroduction_maxFacesEnrolled_fromSettings_notLaunchFaceSettings() {
+        setFaceManagerToHave(1 /* numEnrollments */);
+        ShadowLockPatternUtils.setActivePasswordQuality(PASSWORD_QUALITY_NUMERIC);
+        final Intent intent = new Intent();
+        intent.putExtra(BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY, true);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
+        mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class, intent);
+        mActivity = (TestFaceEnrollIntroduction) mController.get();
+        mActivity.mOverrideFaceManager = mFaceManager;
+
+        mController.create();
+
+        ShadowActivity shadowActivity = Shadows.shadowOf(mActivity);
+        final Intent nextStartedActivity = shadowActivity.getNextStartedActivity();
+        assertThat(nextStartedActivity).isNull();
+    }
+
+    @Test
+    public void testFaceEnrollIntroduction_hasPostureCallback() {
+        when(mFakeFeatureFactory.mFaceFeatureProvider.getPostureGuidanceIntent(any()))
+                .thenReturn(new Intent());
+        setFaceManagerToHave(0 /* numEnrollments */);
+        ShadowLockPatternUtils.setActivePasswordQuality(PASSWORD_QUALITY_NUMERIC);
+        final Intent intent = new Intent();
+        intent.putExtra(BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY, true);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
+        mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class, intent);
+        mActivity = (TestFaceEnrollIntroduction) mController.get();
+        mActivity.mOverrideFaceManager = mFaceManager;
+
+        mController.create();
+        mController.start();
+
+        assertThat(mActivity.getPostureCallback()).isNotNull();
+    }
+
+    @Test
+    public void testFaceEnrollIntroduction_maxFacesEnrolled_noPostureCallback() {
+        when(mFakeFeatureFactory.mFaceFeatureProvider.getPostureGuidanceIntent(any()))
+                .thenReturn(new Intent());
+        setFaceManagerToHave(1 /* numEnrollments */);
+        ShadowLockPatternUtils.setActivePasswordQuality(PASSWORD_QUALITY_NUMERIC);
+        final Intent intent = new Intent();
+        intent.putExtra(BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY, true);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
+        mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class, intent);
+        mActivity = (TestFaceEnrollIntroduction) mController.get();
+        mActivity.mOverrideFaceManager = mFaceManager;
+
+        mController.create();
+        mController.start();
+
+        assertThat(mActivity.getPostureCallback()).isNull();
+    }
+
 }
