@@ -28,7 +28,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.utils.StringUtil;
+import com.android.settings.fuelgauge.BatteryUtils;
 
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -89,10 +89,10 @@ public class ScreenOnTimeController extends BasePreferenceController {
     @VisibleForTesting
     void showScreenOnTimeText(Long screenOnTime) {
         final CharSequence timeSequence =
-                StringUtil.formatElapsedTime(mPrefContext, (double) screenOnTime,
+                BatteryUtils.formatElapsedTimeWithoutComma(mPrefContext, (double) screenOnTime,
                         /*withSeconds=*/ false, /*collapseTimeUnit=*/ false);
         mScreenOnTimeTextPreference.setText(
-                enlargeFontOfNumberIfNeeded(mPrefContext, removeCommas(timeSequence)));
+                enlargeFontOfNumberIfNeeded(mPrefContext, timeSequence));
         mScreenOnTimeTextPreference.setVisible(true);
     }
 
@@ -114,9 +114,5 @@ public class ScreenOnTimeController extends BasePreferenceController {
                     matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         return spannableText;
-    }
-
-    private static CharSequence removeCommas(CharSequence text) {
-        return text.toString().replaceAll(",", "");
     }
 }

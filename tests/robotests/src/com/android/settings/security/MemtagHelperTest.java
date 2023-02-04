@@ -34,7 +34,7 @@ public class MemtagHelperTest {
     private final String mMemtagProperty = "arm64.memtag.bootctl";
     private final String mMemtagSupportedProperty = "ro.arm64.memtag.bootctl_settings_toggle";
     private final String mDeviceConfigOverride =
-            "persist.device_config.memory_safety_native.bootloader_override";
+            "persist.device_config.memory_safety_native_boot.bootloader_override";
 
     @Test
     public void isChecked_empty_isFalse() {

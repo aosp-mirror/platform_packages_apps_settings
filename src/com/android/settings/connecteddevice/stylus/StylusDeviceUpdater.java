@@ -168,7 +168,7 @@ public class StylusDeviceUpdater implements InputManager.InputDeviceListener,
         mUsiPreference.setKey(PREF_KEY);
         mUsiPreference.setTitle(R.string.stylus_connected_devices_title);
         // TODO(b/250909304): pending actual icon visD
-        mUsiPreference.setIcon(R.drawable.circle);
+        mUsiPreference.setIcon(R.drawable.ic_edit);
         mUsiPreference.setOnPreferenceClickListener((Preference p) -> {
             mMetricsFeatureProvider.logClickedPreference(p, mFragment.getMetricsCategory());
             launchDeviceDetails();
