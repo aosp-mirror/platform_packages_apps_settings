@@ -1098,10 +1098,13 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                 .launch();
     }
 
-    /** Removes all preferences and hide the {@link #mConnectedWifiEntryPreferenceCategory}. */
+    /** Removes all preferences and hide the {@link #mConnectedWifiEntryPreferenceCategory} and
+     *  {@link #mFirstWifiEntryPreferenceCategory}. */
     private void removeConnectedWifiEntryPreference() {
         mConnectedWifiEntryPreferenceCategory.removeAll();
         mConnectedWifiEntryPreferenceCategory.setVisible(false);
+        mFirstWifiEntryPreferenceCategory.setVisible(false);
+        mFirstWifiEntryPreferenceCategory.removeAll();
     }
 
     private void removeWifiEntryPreference() {
