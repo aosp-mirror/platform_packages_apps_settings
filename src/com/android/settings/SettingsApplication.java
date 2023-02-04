@@ -53,7 +53,7 @@ public class SettingsApplication extends Application {
         setSpaEnvironment();
 
         if (FeatureFlagUtils.isEnabled(this, FeatureFlagUtils.SETTINGS_SUPPORT_LARGE_SCREEN)
-                && SplitController.getInstance().isSplitSupported()) {
+                && SplitController.getInstance(this).isSplitSupported()) {
             if (WizardManagerHelper.isUserSetupComplete(this)) {
                 new ActivityEmbeddingRulesController(this).initRules();
             } else {
