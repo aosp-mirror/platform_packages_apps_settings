@@ -19,7 +19,7 @@ package com.android.settings.inputmethod;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.hardware.input.InputManager;
+import android.hardware.input.InputSettings;
 import android.os.UserHandle;
 import android.provider.Settings;
 
@@ -50,7 +50,7 @@ public class TrackpadPointerSpeedPreferenceControllerTest {
         mDefaultSpeed = Settings.System.getIntForUser(
                 mContext.getContentResolver(),
                 SETTING_KEY,
-                InputManager.DEFAULT_POINTER_SPEED,
+                InputSettings.DEFAULT_POINTER_SPEED,
                 UserHandle.USER_CURRENT);
     }
 
@@ -62,12 +62,12 @@ public class TrackpadPointerSpeedPreferenceControllerTest {
 
     @Test
     public void getMin_expected() {
-        assertThat(mController.getMin()).isEqualTo(InputManager.MIN_POINTER_SPEED);
+        assertThat(mController.getMin()).isEqualTo(InputSettings.MIN_POINTER_SPEED);
     }
 
     @Test
     public void getMax_expected() {
-        assertThat(mController.getMax()).isEqualTo(InputManager.MAX_POINTER_SPEED);
+        assertThat(mController.getMax()).isEqualTo(InputSettings.MAX_POINTER_SPEED);
     }
 
     @Test
@@ -89,7 +89,7 @@ public class TrackpadPointerSpeedPreferenceControllerTest {
 
     @Test
     public void setSliderPosition_speedValueOverMaxValue_shouldReturnFalse() {
-        int inputSpeed = InputManager.MAX_POINTER_SPEED + 1;
+        int inputSpeed = InputSettings.MAX_POINTER_SPEED + 1;
 
         boolean result = mController.setSliderPosition(inputSpeed);
 
@@ -99,7 +99,7 @@ public class TrackpadPointerSpeedPreferenceControllerTest {
 
     @Test
     public void setSliderPosition_speedValueOverMinValue_shouldReturnFalse() {
-        int inputSpeed = InputManager.MIN_POINTER_SPEED - 1;
+        int inputSpeed = InputSettings.MIN_POINTER_SPEED - 1;
 
         boolean result = mController.setSliderPosition(inputSpeed);
 
