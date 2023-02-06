@@ -27,6 +27,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
@@ -74,7 +75,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     @VisibleForTesting
     Context mPrefContext;
     @VisibleForTesting
-    AccessibilityFocusablePreferenceCategory mRootPreference;
+    PreferenceCategory mRootPreference;
     @VisibleForTesting
     SpinnerPreference mSpinnerPreference;
     @VisibleForTesting
@@ -203,9 +204,6 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
                 : mPrefContext.getString(
                         R.string.battery_usage_breakdown_title_for_slot, slotTimestamp));
         mRootPreference.setVisible(true);
-        mHandler.post(() -> {
-            mRootPreference.requestAccessibilityFocus();
-        });
     }
 
     private void showFooterPreference(boolean isAllBatteryUsageEmpty, String slotTimestamp) {

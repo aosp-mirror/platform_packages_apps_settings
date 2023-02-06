@@ -296,6 +296,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             mDailyChartIndex = trapezoidIndex;
             mHourlyChartIndex = BatteryChartViewModel.SELECTED_INDEX_ALL;
             refreshUi();
+            mHandler.post(() -> mDailyChartView.announceForAccessibility(
+                    getAccessibilityAnnounceMessage()));
             mMetricsFeatureProvider.action(
                     mPrefContext,
                     trapezoidIndex == BatteryChartViewModel.SELECTED_INDEX_ALL
@@ -311,6 +313,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             Log.d(TAG, "onHourlyChartSelect:" + trapezoidIndex);
             mHourlyChartIndex = trapezoidIndex;
             refreshUi();
+            mHandler.post(() -> mHourlyChartView.announceForAccessibility(
+                    getAccessibilityAnnounceMessage()));
             mMetricsFeatureProvider.action(
                     mPrefContext,
                     trapezoidIndex == BatteryChartViewModel.SELECTED_INDEX_ALL
@@ -437,6 +441,15 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         }
 
         return String.format("%s %s", selectedDayText, selectedHourText);
+    }
+
+    private String getAccessibilityAnnounceMessage() {
+        final String slotInformation = getSlotInformation();
+        return slotInformation == null
+                ? mPrefContext.getString(
+                       R.string.battery_usage_breakdown_title_since_last_full_charge)
+                : mPrefContext.getString(
+                        R.string.battery_usage_breakdown_title_for_slot, slotInformation);
     }
 
     private void animateBatteryChartViewGroup() {
