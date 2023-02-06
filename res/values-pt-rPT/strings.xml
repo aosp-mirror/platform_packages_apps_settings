@@ -521,6 +521,27 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Levante o dedo após sentir uma vibração"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Mude-se para um local com uma luz mais suave e tente novamente"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Atingiu o número máximo de tentativas"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Desbloqueio com o relógio"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"Ao configurar o Desbloqueio facial e o Desbloqueio por impressão digital, o telemóvel pede a sua impressão digital quando usar uma máscara ou estiver numa área escura.\n\nPode desbloquear com o relógio quando o seu rosto ou impressão digital não forem reconhecidos."</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="tablet" msgid="8930396405433023076">"Ao configurar o Desbloqueio facial e o Desbloqueio por impressão digital, o tablet pede a sua impressão digital quando usar uma máscara ou estiver numa área escura.\n\nPode desbloquear com o relógio quando o seu rosto ou impressão digital não forem reconhecidos."</string>
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Pode desbloquear com o relógio quando a sua impressão digital não for reconhecida."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Pode desbloquear com o relógio quando o seu rosto não for reconhecido."</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Usar o rosto ou o relógio"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Usar a impressão digital ou o relógio"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Usar o rosto, a impressão digital ou o relógio"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"Usar o relógio"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Configure 1.º o Desbloqueio por impressão digital ou facial"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"Pode desbloquear com o relógio quando o seu rosto ou impressão digital não forem reconhecidos"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Configure primeiro o Desbloqueio por impressão digital"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"Pode desbloquear com o relógio quando a sua impressão digital não for reconhecida"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"Configure primeiro o Desbloqueio facial"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"Pode desbloquear com o relógio quando o seu rosto não for reconhecido"</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"Configurar"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"Impressão digital e <xliff:g id="WATCH">%s</xliff:g> adicionados"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"Impressões digitais e <xliff:g id="WATCH">%s</xliff:g> adicionados"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Rosto e <xliff:g id="WATCH">%s</xliff:g> adicionados"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Rosto, impressão digital e <xliff:g id="WATCH">%s</xliff:g> adicionados"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Rosto, impressões digitais e <xliff:g id="WATCH">%s</xliff:g> adicionados"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Desbloqueio facial e por impressão digital"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Toque para configurar"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Rosto e impressões digitais adicionados"</string>
@@ -588,12 +609,9 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Já pode usar a impressão digital para desbloquear o tablet ou validar a sua identidade, como quando inicia sessão em apps ou aprova uma compra"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Já pode usar a impressão digital para desbloquear o dispositivo ou validar a sua identidade, como quando inicia sessão em apps ou aprova uma compra"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Já pode usar a impressão digital para desbloquear o telemóvel ou validar a sua identidade, como quando inicia sessão em apps ou aprova uma compra"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"Já pode usar a impressão digital para desbloquear o tablet ou validar a sua identidade, como quando inicia sessão em apps ou aprova uma compra. \n\nAdicione outra impressão digital para facilitar o desbloqueio quando segura no tablet de formas diferentes."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"Já pode usar a impressão digital para desbloquear o dispositivo ou validar a sua identidade, como quando inicia sessão em apps ou aprova uma compra.\n\nAdicione outra impressão digital para facilitar o desbloqueio quando segura no dispositivo de formas diferentes."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"Já pode usar a impressão digital para desbloquear o telemóvel ou validar a sua identidade, como quando inicia sessão em apps ou aprova uma compra.\n\nAdicione outra impressão digital para facilitar o desbloqueio quando segura no telemóvel de formas diferentes."</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Toque para desbloquear em qualquer altura"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Toque no sensor para desbloquear, mesmo quando o ecrã está desligado. Esta opção aumenta a probabilidade de um desbloqueio acidental."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Ecrã, desbloqueio"</string>

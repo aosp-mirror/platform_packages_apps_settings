@@ -521,6 +521,27 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Подигнете го прстот кога ќе почувствувате вибрации"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Преместете се некаде каде што има понежно осветлување и обидете се повторно"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Го достигнавте максималниот број на обиди"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Отклучување со часовник"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"Кога ќе поставите „Отклучување со лик“ и „Отклучување со отпечаток на прст“, телефонот ќе го побара вашиот отпечаток кога носите маска или сте на темно место.\n\nМоже да отклучите со часовникот кога нема да се препознае вашиот лик или отпечатокот."</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="tablet" msgid="8930396405433023076">"Кога ќе поставите „Отклучување со лик“ и „Отклучување со отпечаток“, таблетот ќе го побара вашиот отпечаток кога носите маска или сте на темно место.\n\nМоже да отклучите со часовникот кога нема да се препознае вашиот лик или отпечатокот."</string>
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Може да отклучите со часовникот кога нема да се препознае вашиот отпечаток."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Може да отклучите со часовникот кога нема да се препознае вашиот лик."</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Со лик или часовник"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Со отпечаток или часовник"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Со лик, отпечаток или часовник"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"Со часовник"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Прво поставете „Отклуч. со лик“ или „Отклуч. со отпечаток“"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"Може да отклучите со часовникот кога нема да се препознае вашиот лик или отпечатокот."</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Прво поставете „Отклучување со отпечаток на прст“"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"Може да отклучите со часовникот кога нема да се препознае вашиот отпечаток"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"Прво поставете „Отклучување со лик“"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"Може да отклучите со часовникот кога нема да се препознае вашиот лик"</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"Постави"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"Додадени се отпечаток и <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"Додадени се отпечатоци и <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Додадени се лик и <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Додадени се лик, отпечаток и <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Додадени се лик, отпечатоци и <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Отклучување со лик и отпечаток на прст"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Допрете за поставување"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Ликот и отпечатоците се додадени"</string>
@@ -588,12 +609,9 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Сега може да го користите отпечатокот за да го отклучите таблетот или да потврдите дека сте вие, како кога се најавувате на апликации или одобрувате купување"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Сега може да го користите отпечатокот за да го отклучите уредот или да потврдите дека сте вие, како кога се најавувате на апликации или одобрувате купување"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Сега може да го користите отпечатокот за да го отклучите телефонот или да потврдите дека сте вие, како кога се најавувате на апликации или одобрувате купување"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"Сега може да го користите отпечатокот за да го отклучите таблетот или да потврдите дека сте вие, како кога се најавувате на апликации или одобрувате купување. \n\nДодајте уште еден отпечаток за да биде полесно да отклучувате кога го држите таблетот на различни начини."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"Сега може да го користите отпечатокот за да го отклучите уредот или да потврдите дека сте вие, како кога се најавувате на апликации или одобрувате купување.\n\nДодајте уште еден отпечаток за да биде полесно да отклучувате кога го држите уредот на различни начини."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"Сега може да го користите отпечатокот за да го отклучите телефонот или да потврдите дека сте вие, како кога се најавувате на апликации или одобрувате купување.\n\nДодајте уште еден отпечаток за да биде полесно да отклучувате кога го држите телефонот на различни начини."</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Допрете за да отклучите во секое време"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Допрете го сензорот за да отклучите дури и кога екранот е исклучен. Вака, веројатноста за ненамерно отклучување е поголема."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Екран, отклучување"</string>

@@ -321,8 +321,8 @@
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Usar ubicación"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Desactivado"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="other">Encendido: <xliff:g id="COUNT_1">%1$d</xliff:g> apps tienen acceso a la ubicación</item>
-      <item quantity="one">Encendido: <xliff:g id="COUNT_0">%1$d</xliff:g> app tiene acceso a la ubicación</item>
+      <item quantity="other">Activada: <xliff:g id="COUNT_1">%1$d</xliff:g> apps tienen acceso a la ubicación</item>
+      <item quantity="one">Activada: <xliff:g id="COUNT_0">%1$d</xliff:g> app tiene acceso a la ubicación</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Cargando…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Las apps que tienen el permiso de dispositivos cercanos pueden determinar la posición relativa de los dispositivos conectados."</string>
@@ -491,7 +491,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"El uso de la huella dactilar para desbloquear la tablet puede ser menos seguro que un patrón o PIN confiables"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"El uso de la huella dactilar para desbloquear el dispositivo puede ser menos seguro que un patrón o PIN confiables"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Cómo funciona"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"La función Desbloqueo con huellas dactilares crea un modelo único de tu huella dactilar que permite verificar tu identidad. Para crear este modelo durante la configuración, deberás tomar fotos de tu huella desde diferentes posiciones."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"La función Desbloqueo con huellas dactilares crea un modelo único de tu huella dactilar que permite verificar tu identidad. Para crear este modelo durante la configuración, es necesario tomar imágenes de tu huella desde diferentes posiciones."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"La función Desbloqueo con huellas dactilares crea un modelo único de la huella dactilar de tu hijo que permite verificar su identidad. Para crear este modelo durante la configuración, deberá tomar fotos de su huella desde diferentes posiciones."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"Cuando usas Pixel Imprint, las imágenes se utilizan para actualizar el modelo de huella dactilar. Las imágenes que se usan para crear tu modelo no se guardan, pero el modelo en sí se almacena de manera segura en tu teléfono y nunca sale de él. Todo el proceso se lleva a cabo en el teléfono de forma segura."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"Con Pixel Imprint, se usan imágenes para actualizar el modelo de huella dactilar. Las imágenes que se usan para crear tu modelo no se almacenan, a diferencia del modelo en sí, que lo hace de manera segura en la tablet y nunca sale de ella. Todo el proceso se lleva a cabo en la tablet de manera segura."</string>
@@ -505,7 +505,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"Tu hijo y tú pueden borrar el modelo y las imágenes de su huella dactilar, así como desactivar la función Desbloqueo con huellas dactilares en cualquier momento desde Configuración. Los modelos y las imágenes de la huella se almacenan en el teléfono hasta que se borran."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"Tu hijo y tú pueden borrar el modelo y las imágenes de su huella dactilar, así como desactivar el Desbloqueo con huellas dactilares en cualquier momento desde Configuración. Los modelos y las imágenes de la huella se almacenan en la tablet hasta que se borran."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"Tu hijo y tú pueden borrar el modelo y las imágenes de su huella dactilar, así como desactivar el Desbloqueo con huellas dactilares en cualquier momento desde Configuración. Los modelos y las imágenes de la huella se almacenan en el dispositivo hasta que se borran."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Tu teléfono se puede desbloquear aunque no lo desees, por ejemplo, cuando alguien lo sostiene frente a tu dedo."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Tu teléfono se puede desbloquear aunque no lo desees, por ejemplo, si alguien lo acerca a tu dedo."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"Tu tablet se puede desbloquear aunque no lo desees, por ejemplo, cuando alguien la sostiene frente a tu dedo."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"Tu dispositivo se puede desbloquear aunque no lo desees, por ejemplo, cuando alguien lo sostiene frente a tu dedo."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"El teléfono de tu hijo puede desbloquearse sin que así lo quisiera, por ejemplo, porque alguien se lo acercó al dedo."</string>
@@ -521,7 +521,29 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Levanta el dedo cuando sientas una vibración"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Ve a un lugar donde la luz sea menos brillante y vuelve a intentarlo"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Alcanzaste la cantidad máxima de intentos"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Desbloqueo facial y con huella dactilar"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Desbloqueo del reloj"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"Si configuras las funciones Desbloqueo facial y Desbloqueo con huellas dactilares, el teléfono te pedirá la huella dactilar en caso de que tengas puesta una mascarilla o estés en una zona oscura.\n\nPuedes desbloquear con el reloj cuando no se reconozcan tu rostro ni tu huella dactilar."</string>
+    <!-- no translation found for biometric_settings_intro_with_activeunlock (8930396405433023076) -->
+    <skip />
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Puedes desbloquear con el reloj cuando no se reconozca tu huella dactilar."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Puedes desbloquear con el reloj cuando no se reconozca tu rostro."</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Con rostro o reloj"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Con huella dactilar o reloj"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Con rostro, huella dactilar o reloj"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"Con reloj"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Primero configura Desbloqueo facial o con huellas dactilares"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"Puedes desbloquear con el reloj cuando no se reconozcan tu rostro ni tu huella dactilar"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Primero configura Desbloqueo con huellas dactilares"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"Puedes desbloquear con el reloj cuando no se reconozca tu huella dactilar"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"Primero configura Desbloqueo facial"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"Puedes desbloquear con el reloj cuando no se reconozca tu rostro"</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"Configurar"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"Huella dactilar y <xliff:g id="WATCH">%s</xliff:g> agregados"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"Huellas dactilares y <xliff:g id="WATCH">%s</xliff:g> agregados"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Rostro y <xliff:g id="WATCH">%s</xliff:g> agregados"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Rostro, huella dactilar y <xliff:g id="WATCH">%s</xliff:g> agregados"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Rostro, huellas dactilares y <xliff:g id="WATCH">%s</xliff:g> agregados"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Desbloqueo facial y con huellas dactilares"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Presionar para configurar"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Se agregaron huellas dactilares y el rostro"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Se agregaron el rostro y la huella dactilar"</string>
@@ -587,15 +609,12 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Se agregó la huella dactilar"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Ahora puedes usar tu huella dactilar para desbloquear la tablet o verificar tu identidad, como cuando accedes a apps o apruebas compras"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Ahora puedes usar tu huella dactilar para desbloquear el dispositivo o verificar tu identidad, como cuando accedes a apps o apruebas compras"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Ahora puedes usar tu huella dactilar para desbloquear el teléfono o verificar tu identidad, como cuando accedes a apps o apruebas compras"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
-    <skip />
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Toca para desbloquear en cualquier momento"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Toca el sensor para desbloquear, incluso si la pantalla está apagada. Esta opción puede generar más desbloqueos accidentales."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Ahora puedes usar tu huella dactilar para desbloquear el teléfono o verificar tu identidad, como cuando accedes a apps o apruebas compras."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"Ahora puedes usar tu huella dactilar para desbloquear la tablet o verificar tu identidad, como cuando accedes a apps o apruebas compras. \n\nAgrega otra huella dactilar para facilitar el desbloqueo cuando sostienes el dispositivo de distintas formas."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"Ahora puedes usar tu huella dactilar para desbloquear el dispositivo o verificar tu identidad, como cuando accedes a apps o apruebas compras.\n\nAgrega otra huella dactilar para facilitar el desbloqueo cuando sostienes el dispositivo de distintas formas."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"Ahora puedes usar tu huella dactilar para desbloquear el teléfono o verificar tu identidad, como cuando accedes a apps o apruebas compras.\n\nAgrega otra huella dactilar para facilitar el desbloqueo cuando sostienes el teléfono de distintas formas."</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Tocar para desbloquear en cualquier momento"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Toca el sensor para desbloquear, incluso si la pantalla está apagada. Con esta opción es más probable que se desbloquee el dispositivo accidentalmente."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Pantalla, desbloqueo"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Más tarde"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Levanta el dedo y vuelve a tocar"</string>
@@ -655,9 +674,9 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ese no es el sensor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Toca el sensor en la parte posterior del teléfono con el dedo índice."</string>
     <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"No se completó la inscripción"</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Tiempo para conf. huella dactilar agotado"</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Tiempo para configurar huella dactilar agotado"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Vuelve a intentarlo o hazlo más tarde en Configuración"</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"El registro de huellas dactilares no funcionó. Vuelve a intentarlo o usa otro dedo."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Se produjo un error al registrar la huella dactilar. Vuelve a intentarlo o usa otro dedo."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Agregar otra huella digital"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Siguiente"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Además de desbloquear el teléfono, también puedes utilizar tu huella dactilar para autorizar compras y el acceso a aplicaciones. "<annotation id="url">"Más información"</annotation></string>
@@ -677,9 +696,9 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"¿Quitar las huellas dactilares?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Borrar \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"¿Quieres borrar esta huella dactilar?"</string>
-    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Esta opción borra las imágenes de la huella dactilar y el modelo asociado con \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que se guardaron en el teléfono"</string>
-    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Esta opción borra las imágenes de la huella dactilar y el modelo asociado con \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que se guardaron en la tablet"</string>
-    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Esta opción borra las imágenes de la huella dactilar y el modelo asociado con \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que se guardaron en el dispositivo"</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Esta opción borra las imágenes de la huella dactilar y el modelo asociado con \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que se guardaron en el teléfono."</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Esta opción borra las imágenes de la huella dactilar y el modelo asociado con \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que se guardaron en la tablet."</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Esta opción borra las imágenes de la huella dactilar y el modelo asociado con \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que se guardaron en el dispositivo."</string>
     <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"No podrás utilizar tu huella dactilar para desbloquear el teléfono ni verificar tu identidad en apps."</string>
     <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"No podrás utilizar tu huella dactilar para desbloquear la tablet ni verificar tu identidad en apps."</string>
     <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"No podrás utilizar tu huella dactilar para desbloquear el dispositivo ni verificar tu identidad en apps."</string>

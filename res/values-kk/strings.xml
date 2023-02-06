@@ -521,6 +521,28 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Дірілден кейін саусағыңызды көтеріңіз."</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Күңгірттеу жарығы бар жерге жылжып, әрекетті қайталаңыз."</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Енгізу мүмкіндіктері аяқталды."</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Құлыпты сағат арқылы ашу"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"Бет тану және саусақ ізімен ашу функцияларын реттесеңіз, бетперде таққанда немесе қараңғы жерде болғанда, телефон саусақ ізін пайдалануды ұсынатын болады.\n\nБет тану функциясы немесе саусақ ізі арқылы аша алмасаңыз, сағатты пайдалануыңызға болады."</string>
+    <!-- no translation found for biometric_settings_intro_with_activeunlock (8930396405433023076) -->
+    <skip />
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Саусақ ізі арқылы аша алмасаңыз, сағатты пайдалануыңызға болады."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Бет тану функциясы арқылы аша алмасаңыз, сағатты пайдалануыңызға болады."</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Бет тану функциясын немесе сағатты пайдалану"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Саусақ ізін немесе сағатты пайдалану"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Бет тануды, саусақ ізін немесе сағатты пайдалану"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"Сағатты пайдалану"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Алдымен бет тануды немесе саусақ ізімен ашуды реттеңіз"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"Бет тану функциясы немесе саусақ ізі арқылы аша алмасаңыз, сағатты пайдалануыңызға болады."</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Алдымен саусақ ізімен ашу функциясын реттеңіз"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"Саусақ ізі арқылы аша алмасаңыз, сағатты пайдалануыңызға болады."</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"Алдымен бет тану функциясын реттеңіз"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"Бет тану функциясы арқылы аша алмасаңыз, сағатты пайдалануыңызға болады."</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"Реттеу"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"Саусақ ізі және <xliff:g id="WATCH">%s</xliff:g> қосылды."</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"Саусақ іздері және <xliff:g id="WATCH">%s</xliff:g> қосылды."</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Бет тану функциясы және <xliff:g id="WATCH">%s</xliff:g> қосылды."</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Бет тану функциясы, саусақ ізі және <xliff:g id="WATCH">%s</xliff:g> қосылды."</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Бет тану функциясы, саусақ іздері және <xliff:g id="WATCH">%s</xliff:g> қосылды."</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Бет және саусақ ізі арқылы құлыпты ашу"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Реттеу үшін түртіңіз."</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Бет және саусақ іздері енгізілді."</string>
@@ -588,12 +610,9 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Енді планшет құлпын ашу немесе жеке басыңызды растау үшін (мысалы, қолданбаларға кіргенде немесе бірдеңе сатып алғанда) саусақ ізін пайдалана аласыз."</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Енді құрылғы құлпын ашу немесе жеке басыңызды растау үшін (мысалы, қолданбаларға кіргенде немесе бірдеңе сатып алғанда) саусақ ізін пайдалана аласыз."</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Енді телефон құлпын ашу немесе жеке басыңызды растау үшін (мысалы, қолданбаларға кіргенде немесе бірдеңе сатып алғанда) саусақ ізін пайдалана аласыз."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"Енді планшет құлпын ашу немесе жеке басыңызды растау үшін (мысалы, қолданбаларға кіргенде немесе бірдеңе сатып алғанда) саусақ ізін пайдалана аласыз. \n\nБасқа саусақ ізін қосыңыз, сонда планшет құлпын әртүрлі қалыпта ашу оңайырақ болады."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"Енді құрылғы құлпын ашу немесе жеке басыңызды растау үшін (мысалы, қолданбаларға кіргенде немесе бірдеңе сатып алғанда) саусақ ізін пайдалана аласыз.\n\nБасқа саусақ ізін қосыңыз, сонда құрылғы құлпын әртүрлі қалыпта ашу оңайырақ болады."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"Енді телефон құлпын ашу немесе жеке басыңызды растау үшін (мысалы, қолданбаларға кіргенде немесе бірдеңе сатып алғанда) саусақ ізін пайдалана аласыз.\n\nБасқа саусақ ізін қосыңыз, сонда телефон құлпын әртүрлі қалыпта ашу оңайырақ болады."</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Кез келген уақытта құлыпты ашу үшін түртіңіз"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Экран өшіп тұрса да, датчикті түртіп, құлыпты аша аласыз. Мұндайда құлып байқаусызда жиі ашылып кетуі мүмкін."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Экран құлпын ашу"</string>

@@ -521,6 +521,28 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Altxatu hatza dardara sumatzen duzunean"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Joan argi gutxiagoko toki batera eta saiatu berriro"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Gehieneko saiakera kopurua agortu duzu"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Erlojuaren bidez telefonoa desblokeatzea"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"Aurpegi eta hatz-marka bidez desblokeatzeko eginbideak konfiguratzen badituzu, telefonoak hatz-marka eskatuko dizu inoiz maskara bat jantzita edo argi gutxirekin telefonoa aurpegiaren bidez desblokeatzen saiatuz gero.\n\nAurpegia edo hatz-marka ezagutzen ez bada, erlojuaren bidez desblokea dezakezu telefonoa."</string>
+    <!-- no translation found for biometric_settings_intro_with_activeunlock (8930396405433023076) -->
+    <skip />
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Hatz-marka ezagutzen ez bada, erlojuaren bidez desblokea dezakezu telefonoa."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Aurpegia ezagutzen ez bada, erlojuaren bidez desblokea dezakezu telefonoa."</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Aurpegia edo erlojua erabiltzea"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Hatz-marka edo erlojua erabiltzea"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Aurpegia, hatz-marka edo erlojua erabiltzea"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"Erlojua erabiltzea"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Aurrena, konfiguratu aurpegi edo hatz-marka bidez desblokeatzeko eginbidea"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"Aurpegia edo hatz-marka ezagutzen ez bada, erlojuaren bidez desblokea dezakezu telefonoa"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Aurrena, konfiguratu hatz-marka bidez desblokeatzeko eginbidea"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"Hatz-marka ezagutzen ez bada, erlojuaren bidez desblokea dezakezu telefonoa"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"Aurrena, konfiguratu aurpegi bidez desblokeatzeko eginbidea"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"Aurpegia ezagutzen ez bada, erlojuaren bidez desblokea dezakezu telefonoa"</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"Konfiguratu"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"Gehitu dira hatz-marka eta <xliff:g id="WATCH">%s</xliff:g> erlojua"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"Gehitu dira hatz-markak eta <xliff:g id="WATCH">%s</xliff:g> erlojua"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Gehitu dira aurpegia eta <xliff:g id="WATCH">%s</xliff:g> erlojua"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Gehitu dira aurpegia, hatz-marka eta <xliff:g id="WATCH">%s</xliff:g> erlojua"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Gehitu dira aurpegia, hatz-markak eta <xliff:g id="WATCH">%s</xliff:g> erlojua"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Aurpegi eta hatz-marka bidez desblokeatzea"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Sakatu konfiguratzeko"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Aurpegia eta hatz-markak gehitu dira"</string>
@@ -588,12 +610,9 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Orain, tableta desblokeatzeko edo zeu zarela egiaztatzeko erabil dezakezu hatz-marka, hala nola aplikazioetan saioa hastean edo erosketak onartzean"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Orain, gailua desblokeatzeko edo zeu zarela egiaztatzeko erabil dezakezu hatz-marka, hala nola aplikazioetan saioa hastean edo erosketak onartzean"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Orain, telefonoa desblokeatzeko edo zeu zarela egiaztatzeko erabil dezakezu hatz-marka, hala nola aplikazioetan saioa hastean edo erosketak onartzean"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"Orain, tableta desblokeatzeko edo zeu zarela egiaztatzeko erabil dezakezu hatz-marka, hala nola aplikazioetan saioa hastean edo erosketak onartzean. \n\nEdonola helduta ere tableta errazago desblokea dezazun, gehitu beste hatz-marka bat."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"Orain, gailua desblokeatzeko edo zeu zarela egiaztatzeko erabil dezakezu hatz-marka, hala nola aplikazioetan saioa hastean edo erosketak onartzean.\n\nEdonola helduta ere gailua errazago desblokea dezazun, gehitu beste hatz-marka bat."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"Orain, telefonoa desblokeatzeko edo zeu zarela egiaztatzeko erabil dezakezu hatz-marka, hala nola aplikazioetan saioa hastean edo erosketak onartzean.\n\nEdonola helduta ere telefonoa errazago desblokea dezazun, gehitu beste hatz-marka bat."</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Gailua edonoiz desblokeatzeko, sakatu sentsorea"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Sakatu sentsorea gailua desblokeatzeko, pantaila itzalita badago ere. Ustekabeko desblokeoak gertatzeko probabilitatea handiagoa izango da."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"pantaila, desblokeatu"</string>
@@ -3063,11 +3082,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"bateriaren maila <xliff:g id="PERCENT">%1$s</xliff:g> denean"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Bateriaren ehunekoa"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Erakutsi bateriaren ehunekoa egoera-barran"</string>
-    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Bateria-maila gailua guztiz kargatuz geroztik"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Bateria-maila gailua guztiz kargatu zenetik"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Bateria-maila azken 24 orduetan"</string>
-    <string name="battery_app_usage" msgid="8976453608783133770">"Aplikazioaren erabilera gailua guztiz kargatuz geroztik"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"Aplikazioaren erabilera gailua guztiz kargatu zenetik"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Aplikazioek erabilitakoa azken 24 orduetan"</string>
-    <string name="battery_system_usage" msgid="1395943945140097585">"Sistemaren erabilera gailua guztiz kargatuz geroztik"</string>
+    <string name="battery_system_usage" msgid="1395943945140097585">"Sistemaren erabilera gailua guztiz kargatu zenetik"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Sistemak erabilitakoa azken 24 orduetan"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Sistemak erabilitakoa: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Aplikazioek erabilitakoa: <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -4682,7 +4701,7 @@
     <string name="assist_access_context_title" msgid="5201495523514096201">"Erabili pantailako testua"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"Eman pantailako edukia testu gisa atzitzeko baimena laguntza-aplikazioari"</string>
     <string name="assist_access_screenshot_title" msgid="4395902231753643633">"Erabili pantaila-argazkia"</string>
-    <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"Eman pantailako irudia atzitzeko baimena laguntza-aplikazioari"</string>
+    <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"Eman pantailako irudi bat atzitzeko baimena laguntza-aplikazioari"</string>
     <string name="assist_flash_title" msgid="5449512572885550108">"Distirarazi pantaila"</string>
     <string name="assist_flash_summary" msgid="3032289860177784594">"Distirarazi pantailaren ertzak laguntza-aplikazioak pantailako edo pantaila-argazkiko testua erabiltzen duenean"</string>
     <string name="assist_footer" msgid="8248015363806299068">"Laguntza-aplikazioek ikusten ari zaren pantailako informazioaren araberako laguntza eskain diezazukete. Zenbait aplikaziok abiarazlea eta ahots bidezko zerbitzuak onartzen dituzte laguntza integratua eskaintzeko."</string>

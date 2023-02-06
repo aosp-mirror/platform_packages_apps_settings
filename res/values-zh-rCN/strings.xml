@@ -521,6 +521,28 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"请在感觉到振动后抬起手指"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"请移到光线较柔和的地方，然后重试"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"您已达到尝试次数上限"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"手表解锁"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"在设置人脸解锁和指纹解锁时，如果您戴着口罩或所在区域光线较暗，手机会要求您提供指纹。\n\n如果系统无法识别您的面孔或指纹，您可以用手表进行解锁。"</string>
+    <!-- no translation found for biometric_settings_intro_with_activeunlock (8930396405433023076) -->
+    <skip />
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"如果系统无法识别您的指纹，您可以用手表进行解锁。"</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"如果系统无法识别您的面孔，您可以用手表进行解锁。"</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"使用人脸或手表"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"使用指纹或手表"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"使用人脸、指纹或手表"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"使用手表"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"请先设置人脸解锁或指纹解锁"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"如果系统无法识别您的面孔或指纹，您可以用手表进行解锁"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"请先设置指纹解锁"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"如果系统无法识别您的指纹，您可以用手表进行解锁"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"请先设置人脸解锁"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"如果系统无法识别您的面孔，您可以用手表进行解锁"</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"设置"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"已添加指纹和“<xliff:g id="WATCH">%s</xliff:g>”"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"已添加指纹和“<xliff:g id="WATCH">%s</xliff:g>”"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"已添加面孔和“<xliff:g id="WATCH">%s</xliff:g>”"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"已添加面孔、指纹和“<xliff:g id="WATCH">%s</xliff:g>”"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"已添加面孔、指纹和“<xliff:g id="WATCH">%s</xliff:g>”"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"人脸解锁和指纹解锁"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"点按即可进行设置"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"已添加面孔和多个指纹"</string>
@@ -588,12 +610,9 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"现在您可以使用指纹解锁平板电脑或在需要时验证自己的身份，例如在登录应用或批准购买时"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"现在您可以使用指纹解锁设备或在需要时验证自己的身份，例如在登录应用或批准购买时"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"现在您可以使用指纹解锁手机或在需要时验证自己的身份，例如在登录应用或批准购买时"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"现在，您就可以用指纹来解锁平板电脑或验证自己的身份了，例如在登录应用或批准购买交易时进行验证。\n\n如果希望在采用其他方式握持平板电脑时也能更轻松地解锁，可以再添加一个指纹。"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"现在，您就可以用指纹来解锁设备或验证自己的身份了，例如在登录应用或批准购买交易时进行验证。\n\n如果希望在采用其他方式握持设备时也能更轻松地解锁，可以再添加一个指纹。"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"现在，您就可以用指纹来解锁手机或验证自己的身份了，例如在登录应用或批准购买交易时进行验证。\n\n如果希望在采用其他方式握持手机时也能更轻松地解锁，可以再添加一个指纹。"</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"无论何时，轻触即可解锁"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"轻触传感器即可解锁，即使屏幕关闭也可以。这样会提高意外解锁的概率。"</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"屏幕, 解锁, Screen, Unlock"</string>
