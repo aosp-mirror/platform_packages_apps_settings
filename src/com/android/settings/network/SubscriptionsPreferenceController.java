@@ -36,10 +36,12 @@ import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyDisplayInfo;
 import android.telephony.TelephonyManager;
 import android.text.Html;
 import android.util.ArraySet;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.collection.ArrayMap;
@@ -78,7 +80,8 @@ import java.util.Set;
 public class SubscriptionsPreferenceController extends AbstractPreferenceController implements
         LifecycleObserver, SubscriptionsChangeListener.SubscriptionsChangeListenerClient,
         MobileDataEnabledListener.Client, DataConnectivityListener.Client,
-        SignalStrengthListener.Callback, TelephonyDisplayInfoListener.Callback {
+        SignalStrengthListener.Callback, TelephonyDisplayInfoListener.Callback,
+        TelephonyCallback.CarrierNetworkListener {
     private static final String TAG = "SubscriptionsPrefCntrlr";
 
     private UpdateListener mUpdateListener;
@@ -93,6 +96,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     private TelephonyDisplayInfoListener mTelephonyDisplayInfoListener;
     private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
     private final WifiManager mWifiManager;
+    private boolean mCarrierNetworkChangeMode;
 
     @VisibleForTesting
     final BroadcastReceiver mConnectionChangeReceiver = new BroadcastReceiver() {
@@ -271,8 +275,8 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
                 ? false
                 : regInfo.isRegistered();
         final boolean isCarrierNetworkActive = isCarrierNetworkActive();
-        String result = mSubsPrefCtrlInjector.getNetworkType(
-                mContext, mConfig, mTelephonyDisplayInfo, subId, isCarrierNetworkActive);
+        String result = mSubsPrefCtrlInjector.getNetworkType(mContext, mConfig,
+                mTelephonyDisplayInfo, subId, isCarrierNetworkActive, mCarrierNetworkChangeMode);
         if (mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext) || isCarrierNetworkActive) {
             if (result.isEmpty()) {
                 result = mContext.getString(R.string.mobile_data_connection_active);
@@ -318,7 +322,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
                 : (serviceState.getState() == ServiceState.STATE_IN_SERVICE);
         if (isDataInService || isVoiceInService || isCarrierNetworkActive) {
             icon = mSubsPrefCtrlInjector.getIcon(mContext, level, numLevels,
-                    !tmForSubId.isDataEnabled());
+                    !tmForSubId.isDataEnabled(), mCarrierNetworkChangeMode);
         }
 
         final boolean isActiveCellularNetwork =
@@ -348,7 +352,8 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         }
 
         final boolean showCutOut = !isDefaultForData || !mgr.isDataEnabled();
-        pref.setIcon(mSubsPrefCtrlInjector.getIcon(mContext, level, numLevels, showCutOut));
+        pref.setIcon(mSubsPrefCtrlInjector.getIcon(mContext, level, numLevels, showCutOut,
+                    mCarrierNetworkChangeMode));
     }
 
     /**
@@ -471,6 +476,12 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         update();
     }
 
+    @Override
+    public void onCarrierNetworkChange(boolean active) {
+        mCarrierNetworkChangeMode = active;
+        update();
+    }
+
     public void setWifiPickerTrackerHelper(WifiPickerTrackerHelper helper) {
         mWifiPickerTrackerHelper = helper;
     }
@@ -548,44 +559,39 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         }
 
         /**
-         * Gets current mobile network type.
+         * Gets current network type of Carrier Wi-Fi Network or Cellular.
          */
         public String getNetworkType(Context context, Config config,
-                TelephonyDisplayInfo telephonyDisplayInfo, int subId) {
-            String iconKey = getIconKey(telephonyDisplayInfo);
-            MobileIconGroup iconGroup = mapIconSets(config).get(iconKey);
-            int resId = 0;
-            if (iconGroup != null) {
-                resId = iconGroup.dataContentDescription;
+                TelephonyDisplayInfo telephonyDisplayInfo, int subId, boolean isCarrierWifiNetwork,
+                boolean carrierNetworkChanged) {
+            MobileIconGroup iconGroup = null;
+            if (isCarrierWifiNetwork) {
+                iconGroup = TelephonyIcons.CARRIER_MERGED_WIFI;
+            } else if (carrierNetworkChanged) {
+                iconGroup = TelephonyIcons.CARRIER_NETWORK_CHANGE;
+            } else {
+                String iconKey = getIconKey(telephonyDisplayInfo);
+                iconGroup = mapIconSets(config).get(iconKey);
             }
+
+            if (iconGroup == null) {
+                Log.d(TAG, "Can not get the network's icon and description.");
+                return "";
+            }
+
+            int resId = iconGroup.dataContentDescription;
             return resId != 0
                     ? SubscriptionManager.getResourcesForSubId(context, subId).getString(resId)
                     : "";
         }
 
         /**
-         * Gets current network type of Carrier Wi-Fi Network or Cellular.
-         */
-        public String getNetworkType(Context context, Config config,
-                TelephonyDisplayInfo telephonyDisplayInfo, int subId,
-                boolean isCarrierWifiNetwork) {
-            if (isCarrierWifiNetwork) {
-                MobileIconGroup carrierMergedWifiIconGroup = TelephonyIcons.CARRIER_MERGED_WIFI;
-                int resId = carrierMergedWifiIconGroup.dataContentDescription;
-                return resId != 0
-                        ? SubscriptionManager.getResourcesForSubId(context, subId)
-                        .getString(resId) : "";
-            } else {
-                return getNetworkType(context, config, telephonyDisplayInfo, subId);
-            }
-        }
-
-        /**
          * Gets signal icon with different signal level.
          */
-        public Drawable getIcon(Context context, int level, int numLevels, boolean cutOut) {
+        public Drawable getIcon(Context context, int level, int numLevels, boolean cutOut,
+                boolean carrierNetworkChanged) {
             return MobileNetworkUtils.getSignalStrengthIcon(context, level, numLevels,
-                    NO_CELL_DATA_TYPE_ICON, cutOut);
+                    NO_CELL_DATA_TYPE_ICON, cutOut, carrierNetworkChanged);
         }
     }
 }

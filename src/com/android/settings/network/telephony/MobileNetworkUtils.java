@@ -612,10 +612,11 @@ public class MobileNetworkUtils {
     }
 
     public static Drawable getSignalStrengthIcon(Context context, int level, int numLevels,
-            int iconType, boolean cutOut) {
+            int iconType, boolean cutOut, boolean carrierNetworkChanged) {
         final SignalDrawable signalDrawable = new SignalDrawable(context);
         signalDrawable.setLevel(
-                SignalDrawable.getState(level, numLevels, cutOut));
+                carrierNetworkChanged ? SignalDrawable.getCarrierChangeState(numLevels)
+                        : SignalDrawable.getState(level, numLevels, cutOut));
 
         // Make the network type drawable
         final Drawable networkDrawable =
