@@ -1722,7 +1722,7 @@ public class ManageApplications extends InstrumentedFragment
             ApplicationsState.AppEntry entry = mEntries.get(applicationPosition);
 
             return !mBackend.isSysAllowlisted(entry.info.packageName)
-                    && !mBackend.isDefaultActiveApp(entry.info.packageName);
+                    && !mBackend.isDefaultActiveApp(entry.info.packageName, entry.info.uid);
         }
 
         @Override
