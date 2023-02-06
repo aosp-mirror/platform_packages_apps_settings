@@ -55,6 +55,7 @@ import androidx.core.content.ContextCompat;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.utils.AnnotationSpan;
+import com.android.settingslib.widget.LottieColorUtils;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieDrawable;
@@ -269,10 +270,11 @@ public class AccessibilityDialogUtils {
         setupShortcutWidgetWithImageResource(view, imageResId);
     }
 
-    private static void setupShortcutWidgetWithImageRawResource(View view, CharSequence titleText,
+    private static void setupShortcutWidgetWithImageRawResource(Context context,
+            View view, CharSequence titleText,
             CharSequence summaryText, @RawRes int imageRawResId) {
         setupShortcutWidgetWithTitleAndSummary(view, titleText, summaryText);
-        setupShortcutWidgetWithImageRawResource(view, imageRawResId);
+        setupShortcutWidgetWithImageRawResource(context, view, imageRawResId);
     }
 
     private static void setupShortcutWidgetWithTitleAndSummary(View view, CharSequence titleText,
@@ -296,7 +298,7 @@ public class AccessibilityDialogUtils {
         imageView.setImageResource(imageResId);
     }
 
-    private static void setupShortcutWidgetWithImageRawResource(View view,
+    private static void setupShortcutWidgetWithImageRawResource(Context context, View view,
             @RawRes int imageRawResId) {
         final LottieAnimationView lottieView = view.findViewById(R.id.image);
         lottieView.setFailureListener(
@@ -304,6 +306,7 @@ public class AccessibilityDialogUtils {
                         result));
         lottieView.setAnimation(imageRawResId);
         lottieView.setRepeatCount(LottieDrawable.INFINITE);
+        LottieColorUtils.applyDynamicColors(context, lottieView);
         lottieView.playAnimation();
     }
 
@@ -350,7 +353,7 @@ public class AccessibilityDialogUtils {
         final Object[] arguments = {3};
         summary = MessageFormat.format(summary, arguments);
 
-        setupShortcutWidgetWithImageRawResource(dialogView, title, summary,
+        setupShortcutWidgetWithImageRawResource(context, dialogView, title, summary,
                 R.raw.accessibility_shortcut_type_triple_tap);
     }
 
