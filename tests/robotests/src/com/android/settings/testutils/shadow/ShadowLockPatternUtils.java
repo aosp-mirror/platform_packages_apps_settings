@@ -19,6 +19,8 @@ package com.android.settings.testutils.shadow;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.PasswordMetrics;
 import android.content.ComponentName;
+import android.content.Context;
+import android.content.pm.UserInfo;
 import android.os.UserHandle;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -42,6 +44,8 @@ public class ShadowLockPatternUtils {
     private static Map<Integer, PasswordMetrics> sUserToProfileMetricsMap = new HashMap<>();
     private static Map<Integer, Boolean> sUserToIsSecureMap = new HashMap<>();
 
+    private static boolean sIsUserOwnsFrpCredential;
+
     @Resetter
     public static void reset() {
         sUserToComplexityMap.clear();
@@ -50,6 +54,7 @@ public class ShadowLockPatternUtils {
         sUserToProfileMetricsMap.clear();
         sUserToIsSecureMap.clear();
         sDeviceEncryptionEnabled = false;
+        sIsUserOwnsFrpCredential = false;
     }
 
     @Implementation
@@ -120,6 +125,15 @@ public class ShadowLockPatternUtils {
                     DevicePolicyManager.PASSWORD_COMPLEXITY_NONE));
         }
         return complexity;
+    }
+
+    @Implementation
+    public static boolean userOwnsFrpCredential(Context context, UserInfo info) {
+        return sIsUserOwnsFrpCredential;
+    }
+
+    public static void setUserOwnsFrpCredential(boolean isUserOwnsFrpCredential) {
+        sIsUserOwnsFrpCredential = isUserOwnsFrpCredential;
     }
 
     public static void setRequiredPasswordComplexity(int userHandle, int complexity) {
