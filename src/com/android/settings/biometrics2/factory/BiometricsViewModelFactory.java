@@ -28,12 +28,15 @@ import androidx.lifecycle.viewmodel.CreationExtras;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.biometrics.fingerprint.FingerprintUpdater;
+import com.android.settings.biometrics2.data.repository.AccessibilityRepository;
 import com.android.settings.biometrics2.data.repository.FingerprintRepository;
+import com.android.settings.biometrics2.data.repository.VibratorRepository;
 import com.android.settings.biometrics2.ui.model.EnrollmentRequest;
 import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.ChallengeGenerator;
 import com.android.settings.biometrics2.ui.viewmodel.DeviceFoldedViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.DeviceRotationViewModel;
+import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFindSensorViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollIntroViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollProgressViewModel;
@@ -108,6 +111,16 @@ public class BiometricsViewModelFactory implements ViewModelProvider.Factory {
             if (userId != null) {
                 return (T) new FingerprintEnrollProgressViewModel(application,
                         new FingerprintUpdater(application), userId);
+            }
+        } else if (modelClass.isAssignableFrom(FingerprintEnrollEnrollingViewModel.class)) {
+            final FingerprintRepository fingerprint = provider.getFingerprintRepository(
+                    application);
+            final AccessibilityRepository accessibility = provider.getAccessibilityRepository(
+                    application);
+            final VibratorRepository vibrator = provider.getVibratorRepository(application);
+            if (fingerprint != null && accessibility != null && vibrator != null) {
+                return (T) new FingerprintEnrollEnrollingViewModel(application, fingerprint,
+                        accessibility, vibrator);
             }
         }
         return create(modelClass);
