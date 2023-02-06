@@ -30,7 +30,6 @@ import com.android.settings.fuelgauge.batterytip.detectors.LowBatteryDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.SmartBatteryDetector;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.LowBatteryTip;
-import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
 import com.android.settingslib.fuelgauge.EstimateKt;
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
@@ -45,8 +44,6 @@ import java.util.List;
 public class BatteryTipLoader extends AsyncLoaderCompat<List<BatteryTip>> {
     private static final String TAG = "BatteryTipLoader";
 
-    private static final boolean USE_FAKE_DATA = false;
-
     private BatteryUsageStats mBatteryUsageStats;
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
@@ -59,9 +56,6 @@ public class BatteryTipLoader extends AsyncLoaderCompat<List<BatteryTip>> {
 
     @Override
     public List<BatteryTip> loadInBackground() {
-        if (USE_FAKE_DATA) {
-            return getFakeData();
-        }
         final List<BatteryTip> tips = new ArrayList<>();
         final BatteryTipPolicy policy = new BatteryTipPolicy(getContext());
         final BatteryInfo batteryInfo = mBatteryUtils.getBatteryInfo(TAG);
@@ -81,14 +75,4 @@ public class BatteryTipLoader extends AsyncLoaderCompat<List<BatteryTip>> {
     @Override
     protected void onDiscardResult(List<BatteryTip> result) {
     }
-
-    private List<BatteryTip> getFakeData() {
-        final List<BatteryTip> tips = new ArrayList<>();
-        tips.add(new SummaryTip(BatteryTip.StateType.NEW,
-                EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN));
-        tips.add(new LowBatteryTip(BatteryTip.StateType.NEW, false /* powerSaveModeOn */));
-
-        return tips;
-    }
-
 }
