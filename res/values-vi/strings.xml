@@ -521,6 +521,28 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Hãy nhấc ngón tay lên sau khi bạn cảm thấy rung"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Hãy chuyển sang vị trí có ánh sáng dịu hơn rồi thử lại"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Bạn đã đạt đến số lần thử tối đa"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Mở khoá bằng đồng hồ"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"Khi bạn thiết lập tính năng Mở khóa bằng khuôn mặt và Mở khóa bằng vân tay, điện thoại của bạn sẽ yêu cầu bạn cung cấp vân tay khi bạn đeo khẩu trang hoặc ở chỗ tối.\n\nBạn có thể mở khoá bằng đồng hồ khi điện thoại không nhận dạng được khuôn mặt hoặc vân tay của bạn."</string>
+    <!-- no translation found for biometric_settings_intro_with_activeunlock (8930396405433023076) -->
+    <skip />
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Bạn có thể mở khoá bằng đồng hồ khi điện thoại không nhận dạng được vân tay của bạn."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Bạn có thể mở khoá bằng đồng hồ khi điện thoại không nhận dạng được khuôn mặt của bạn."</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Dùng khuôn mặt hoặc đồng hồ"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Dùng vân tay hoặc đồng hồ"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Dùng khuôn mặt, vân tay hoặc đồng hồ"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"Dùng đồng hồ"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Trước hết, thiết lập chế độ Mở khóa bằng khuôn mặt/vân tay"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"Bạn có thể mở khoá bằng đồng hồ khi điện thoại không nhận dạng được khuôn mặt hoặc vân tay của bạn"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Trước hết, hãy thiết lập tính năng Mở khoá bằng vân tay"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"Bạn có thể mở khoá bằng đồng hồ khi điện thoại không nhận dạng được vân tay của bạn"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"Trước hết hãy thiết lập tính năng Mở khoá bằng khuôn mặt"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"Bạn có thể mở khoá bằng đồng hồ khi điện thoại không nhận dạng được khuôn mặt của bạn"</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"Thiết lập"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"Đã thêm vân tay và <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"Đã thêm vân tay và <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Đã thêm khuôn mặt và <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Đã thêm khuôn mặt, vân tay và <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Đã thêm khuôn mặt, vân tay và <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Mở khóa bằng khuôn mặt và vân tay"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Nhấn để thiết lập"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Đã thêm khuôn mặt và các vân tay"</string>
@@ -588,12 +610,9 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Giờ đây, bạn có thể dùng vân tay để mở khoá máy tính bảng hoặc xác minh danh tính, chẳng hạn như khi bạn đăng nhập vào ứng dụng hoặc phê duyệt giao dịch mua"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Giờ đây, bạn có thể dùng vân tay để mở khoá thiết bị hoặc xác minh danh tính, chẳng hạn như khi bạn đăng nhập vào ứng dụng hoặc phê duyệt giao dịch mua"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Giờ đây, bạn có thể dùng vân tay để mở khoá điện thoại hoặc xác minh danh tính, chẳng hạn như khi bạn đăng nhập vào ứng dụng hoặc phê duyệt giao dịch mua"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"Giờ đây, bạn có thể dùng vân tay để mở khoá máy tính bảng hoặc xác minh danh tính, chẳng hạn như khi đăng nhập vào ứng dụng hoặc phê duyệt giao dịch mua. \n\nHãy thêm một dấu vân tay khác để luôn có thể mở khoá dù bạn cầm máy tính bảng theo cách nào đi nữa."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"Giờ đây, bạn có thể dùng vân tay để mở khoá thiết bị hoặc xác minh danh tính, chẳng hạn như khi đăng nhập vào ứng dụng hoặc phê duyệt giao dịch mua.\n\nHãy thêm một dấu vân tay khác để luôn có thể mở khoá dù bạn cầm thiết bị theo cách nào đi nữa."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"Giờ đây, bạn có thể dùng vân tay để mở khoá điện thoại hoặc xác minh danh tính, chẳng hạn như khi đăng nhập vào ứng dụng hoặc phê duyệt giao dịch mua.\n\nHãy thêm một dấu vân tay khác để luôn có thể mở khoá dù bạn cầm điện thoại theo cách nào đi nữa."</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Chạm để mở khoá bất cứ lúc nào"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Chạm vào cảm biến để mở khoá, ngay cả khi đã tắt màn hình. Với chế độ cài đặt này, tình trạng mở khoá ngoài ý muốn sẽ dễ xảy ra hơn."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Màn hình, mở khoá"</string>

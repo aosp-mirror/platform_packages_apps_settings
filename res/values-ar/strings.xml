@@ -537,6 +537,28 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"ارفَع إصبعك بعد أن تشعر باهتزاز الجهاز."</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"يُرجى الانتقال إلى مكان تكون الإضاءة فيه أقل سطوعًا ثم إعادة المحاولة."</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"لقد وصلت إلى الحد الأقصى من عدد المحاولات المسموح بها."</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"فتح الهاتف من الساعة"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"في حال إعداد ميزتَي \"فتح الجهاز بالتعرف على الوجه\" و\"فتح الجهاز ببصمة الإصبع\"، سيطلب منك الهاتف إدخال بصمة إصبعك عندما ترتدي كمامة أو عندما تكون في منطقة مظلمة.\n\nيمكنك فتح الهاتف من ساعتك عندما لا يتم التعرف على وجهك أو بصمة إصبعك."</string>
+    <!-- no translation found for biometric_settings_intro_with_activeunlock (8930396405433023076) -->
+    <skip />
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"يمكنك فتح الجهاز من ساعتك عندما لا يتم التعرف على بصمة إصبعك."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"يمكنك فتح الجهاز من ساعتك عندما لا يتم التعرف على وجهك."</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"استخدام الوجه أو الساعة"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"استخدام بصمة الإصبع أو الساعة"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"استخدام الوجه أو بصمة الإصبع أو الساعة"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"استخدام الساعة"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"إعداد ميزتَي فتح الجهاز بالتعرف على الوجه أو بصمة إصبع أولاً"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"يمكنك فتح الجهاز باستخدام ساعتك عندما لا يتم التعرف على وجهك أو بصمة إصبعك."</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"يجب إعداد ميزة \"فتح الجهاز ببصمة الإصبع\" أولاً"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"يمكنك فتح الهاتف من ساعتك عندما لا يتم التعرف على بصمة الإصبع."</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"يجب إعداد ميزة \"فتح الجهاز بالتعرف على الوجه\" أولاً"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"يمكنك فتح الهاتف من ساعتك عندما لا يتم التعرف على وجهك."</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"الإعداد"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"تمت إضافة بصمة إصبع و\"<xliff:g id="WATCH">%s</xliff:g>\"."</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"تمت إضافة بصمات أصابع و\"<xliff:g id="WATCH">%s</xliff:g>\"."</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"تمت إضافة وجه و\"<xliff:g id="WATCH">%s</xliff:g>\"."</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"تمت إضافة وجه وبصمة إصبع و\"<xliff:g id="WATCH">%s</xliff:g>\"."</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"تمت إضافة وجه وبصمات أصابع و\"<xliff:g id="WATCH">%s</xliff:g>\"."</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"فتح الجهاز بالتعرف على الوجه وببصمة الإصبع"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"انقر للإعداد."</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"تمت إضافة وجه وبصمات أصابع."</string>
@@ -604,12 +626,9 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"يمكنك الآن استخدام بصمة إصبعك لفتح قفل جهازك اللوحي أو إثبات هويتك، مثلاً عند تسجيل الدخول إلى التطبيقات أو الموافقة على عملية شراء."</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"يمكنك الآن استخدام بصمة إصبعك لفتح قفل جهازك أو إثبات هويتك، مثلاً عند تسجيل الدخول إلى التطبيقات أو الموافقة على عملية شراء."</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"يمكنك الآن استخدام بصمة إصبعك لفتح قفل هاتفك أو إثبات هويتك، مثلاً عند تسجيل الدخول إلى التطبيقات أو الموافقة على عملية شراء."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"يمكنك الآن استخدام بصمة إصبعك لفتح قفل جهازك اللوحي أو إثبات هويتك، مثلاً عند تسجيل الدخول إلى التطبيقات أو الموافقة على عملية شراء. \n\nأضِف بصمة إصبع أخرى حتى يكون فتح قفل الشاشة أسهل عندما تمسك جهازك اللوحي بطرق مختلفة."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"يمكنك الآن استخدام بصمة إصبعك لفتح قفل جهازك أو إثبات هويتك، مثلاً عند تسجيل الدخول إلى التطبيقات أو الموافقة على عملية شراء.\n\nأضِف بصمة إصبع أخرى حتى يكون فتح قفل الشاشة أسهل عندما تمسك جهازك بطرق مختلفة."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"يمكنك الآن استخدام بصمة إصبعك لفتح قفل هاتفك أو إثبات هويتك، مثلاً عند تسجيل الدخول إلى التطبيقات أو الموافقة على عملية شراء.\n\nأضِف بصمة إصبع أخرى حتى يكون فتح قفل الشاشة أسهل عندما تمسك هاتفك بطرق مختلفة."</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"اللمس لفتح القفل في أي وقت"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"المس أداة الاستشعار لفتح القفل، حتى عندما تكون الشاشة مطفأة. يؤدي هذا إلى زيادة احتمال فتح القفل بدون قصد."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"فتح قفل الشاشة"</string>
