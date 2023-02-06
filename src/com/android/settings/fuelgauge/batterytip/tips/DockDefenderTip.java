@@ -151,10 +151,6 @@ public class DockDefenderTip extends BatteryTip {
 
     }
 
-    private CardPreference castToCardPreferenceSafely(Preference preference) {
-        return preference instanceof CardPreference ? (CardPreference) preference : null;
-    }
-
     private void resumeCharging(Context context) {
         final Intent intent =
                 FeatureFactory.getFactory(context)
