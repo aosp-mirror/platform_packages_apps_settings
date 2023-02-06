@@ -521,6 +521,27 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Solleva il dito quando senti una vibrazione"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Spostati in una zona con un\'illuminazione meno forte e riprova"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Hai raggiunto il numero massimo di tentativi"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Sblocco dall\'orologio"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"Se configuri lo sblocco con il volto e con l\'impronta, il telefono ti chiederà l\'impronta se indossi una mascherina o ti trovi in un luogo buio.\n\nSe il tuo volto o la tua impronta non vengono riconosciuti, puoi sbloccare con lo smartwatch."</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="tablet" msgid="8930396405433023076">"Se configuri lo sblocco con il volto e con l\'impronta, il tablet ti chiederà l\'impronta se indossi una mascherina o ti trovi in un luogo buio.\n\nSe il tuo volto o la tua impronta non vengono riconosciuti, puoi sbloccare con lo smartwatch."</string>
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Se la tua impronta non viene riconosciuta, puoi sbloccare con lo smartwatch."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Se il tuo volto non viene riconosciuto, puoi sbloccare con lo smartwatch."</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Con volto o smartwatch"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Con impronta o smartwatch"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Con volto, impronta o smartwatch"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"Con smartwatch"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Prima configura lo sblocco con il volto o con l\'impronta"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"Se il tuo volto o la tua impronta non vengono riconosciuti, puoi sbloccare con lo smartwatch"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Prima configura lo sblocco con l\'impronta"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"Se la tua impronta non viene riconosciuta, puoi sbloccare con lo smartwatch"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"Prima configura lo sblocco con il volto"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"Se il tuo volto non viene riconosciuto, puoi sbloccare con lo smartwatch"</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"Configura"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"Impronta e <xliff:g id="WATCH">%s</xliff:g> aggiunti"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"Impronte e <xliff:g id="WATCH">%s</xliff:g> aggiunti"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Volto e <xliff:g id="WATCH">%s</xliff:g> aggiunti"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Volto, impronta e <xliff:g id="WATCH">%s</xliff:g> aggiunti"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Volto, impronte e <xliff:g id="WATCH">%s</xliff:g> aggiunti"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Sblocco con il volto e con l\'impronta"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Tocca per configurare"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Impronte e volto aggiunti"</string>
@@ -588,12 +609,9 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Ora puoi usare l\'impronta per sbloccare il tablet o verificare la tua identità, ad esempio quando accedi alle app o approvi un acquisto"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Ora puoi usare l\'impronta per sbloccare il dispositivo o verificare la tua identità, ad esempio quando accedi alle app o approvi un acquisto"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Ora puoi usare l\'impronta per sbloccare il telefono o verificare la tua identità, ad esempio quando accedi alle app o approvi un acquisto"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"Ora puoi usare la tua impronta per sbloccare il tablet o verificare la tua identità, ad esempio quando vuoi accedere alle app o approvare un acquisto. \n\nAggiungi un\'altra impronta per sbloccare più facilmente il tablet quando lo tieni in modi diversi."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"Ora puoi usare la tua impronta per sbloccare il dispositivo o verificare la tua identità, ad esempio quando vuoi accedere alle app o approvare un acquisto.\n\nAggiungi un\'altra impronta per sbloccare più facilmente il dispositivo quando lo tieni in modi diversi."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"Ora puoi usare la tua impronta per sbloccare il telefono o verificare la tua identità, ad esempio quando vuoi accedere alle app o approvare un acquisto.\n\nAggiungi un\'altra impronta per sbloccare più facilmente il telefono quando lo tieni in modi diversi."</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Tocca per sbloccare in qualsiasi momento"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Tocca il sensore per sbloccare, anche quando lo schermo non è attivo. Questa opzione aumenta la probabilità di sblocchi accidentali."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Schermo, sblocco"</string>
@@ -2817,9 +2835,9 @@
     <string name="awake" msgid="5405871714019268978">"Tempo di attività dispositivo"</string>
     <string name="wifi_on_time" msgid="3880778525760926066">"Tempo accensione Wi‑Fi"</string>
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Tempo accensione Wi‑Fi"</string>
-    <string name="advanced_battery_title" msgid="3005993394776555079">"Utilizzo batteria"</string>
+    <string name="advanced_battery_title" msgid="3005993394776555079">"Utilizzo della batteria"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Dettagli cronologia"</string>
-    <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Utilizzo batteria"</string>
+    <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Utilizzo della batteria"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Visualizza utilizzo delle ultime 24 ore"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Esamina uso da ultima ricarica completa"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"Utilizzo della batteria per l\'app"</string>
@@ -3003,7 +3021,7 @@
     <string name="battery_footer_summary" msgid="8221691063048377342">"I dati sull\'utilizzo della batteria sono approssimativi e possono variare in base all\'utilizzo."</string>
     <string name="battery_detail_foreground" msgid="3312280147931093967">"Durante l\'utilizzo attivo"</string>
     <string name="battery_detail_background" msgid="3333915023706228000">"In background"</string>
-    <string name="battery_detail_power_usage" msgid="1492926471397355477">"Utilizzo batteria"</string>
+    <string name="battery_detail_power_usage" msgid="1492926471397355477">"Utilizzo della batteria"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Dalla ricarica completa"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Gestisci utilizzo batteria"</string>
     <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"Totale: <xliff:g id="TIME_0">^1</xliff:g> • In background: <xliff:g id="TIME_1">^2</xliff:g>\ndall\'ultima ricarica completa"</string>
@@ -3072,7 +3090,7 @@
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Utilizzo da parte del sistema nell\'intervallo di tempo <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Utilizzo da parte delle app nell\'intervallo di tempo <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Totale: meno di un minuto"</string>
-    <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Background: meno di un minuto"</string>
+    <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"In background: meno di un minuto"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Totale: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"In background: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"I dati sull\'utilizzo della batteria sono approssimativi e l\'utilizzo non viene misurato quando il telefono è in carica"</string>
@@ -3319,7 +3337,7 @@
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Giorno del mese in cui reimpostare ciclo di utilizzo dei dati:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Nessuna app ha utilizzato dati in questo periodo."</string>
     <string name="data_usage_label_foreground" msgid="8782117644558473624">"Primo piano"</string>
-    <string name="data_usage_label_background" msgid="8862781660427421859">"Background"</string>
+    <string name="data_usage_label_background" msgid="8862781660427421859">"In background"</string>
     <string name="data_usage_app_restricted" msgid="312065316274378518">"limitato"</string>
     <string name="data_usage_disable_mobile" msgid="6183809500102606801">"Disattivare i dati mobili?"</string>
     <string name="data_usage_disable_mobile_limit" msgid="1370147078938479538">"Imposta limite dati mobili"</string>

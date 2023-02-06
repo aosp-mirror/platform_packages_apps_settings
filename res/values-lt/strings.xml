@@ -529,6 +529,27 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Pakelkite pirštą, kai pajusite vibravimą"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Eikite, kur mažesnis apšvietimas, ir bandykite dar kartą"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Pasiekėte maksimalų bandymų skaičių"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Laikrodžio atrakinimas"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"Jei nustatote atrakinimą pagal veidą ir atrakinimą piršto atspaudu, telefone prašoma piršto atspaudo, kai dėvite kaukę arba esate tamsioje vietoje.\n\nJei nepavyksta jūsų atpažinti pagal veidą ar piršto atspaudą, galite atrakinti naudodami laikrodį."</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="tablet" msgid="8930396405433023076">"Jei nustatote atrakinimą pagal veidą ir atrakinimą piršto atspaudu, planšetiniame kompiuteryje prašoma piršto atspaudo, kai dėvite kaukę arba esate tamsioje vietoje.\n\nJei nepavyksta jūsų atpažinti pagal veidą ar piršto atspaudą, galite atrakinti naudodami laikrodį."</string>
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Jei nepavyksta jūsų atpažinti pagal piršto atspaudą, galite atrakinti naudodami laikrodį."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Jei nepavyksta jūsų atpažinti pagal veidą, galite atrakinti naudodami laikrodį."</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Pagal veidą arba laikrodžiu"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Pagal piršto atspaudą arba laikrodžiu"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Pagal veidą, piršto atspaudą arba laikrodžiu"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"Laikrodžiu"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Pirmiausia atrakinimas pagal veidą arba piršto atspaudu"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"Jei nepavyksta jūsų atpažinti pagal veidą ar piršto atspaudą, galite atrakinti naudodami laikrodį"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Pirmiausia atrakinimas piršto atspaudu"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"Jei nepavyksta jūsų atpažinti pagal piršto atspaudą, galite atrakinti naudodami laikrodį"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"Pirmiausia atrakinimas pagal veidą"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"Jei nepavyksta jūsų atpažinti pagal veidą, galite atrakinti naudodami laikrodį"</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"Nustatyti"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"Pridėti piršto atspaudo ir <xliff:g id="WATCH">%s</xliff:g> duomenys"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"Pridėti piršto atspaudų ir <xliff:g id="WATCH">%s</xliff:g> duomenys"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Pridėti veido ir <xliff:g id="WATCH">%s</xliff:g> duomenys"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Pridėti veido, piršto atspaudo ir <xliff:g id="WATCH">%s</xliff:g> duomenys"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Pridėti veido, piršto atspaudų ir <xliff:g id="WATCH">%s</xliff:g> duomenys"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Atrakinimas pagal veidą ir kontroliniu kodu"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Palieskite, kad nustatytumėte"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Pridėtas veidas ir kontroliniai kodai"</string>
@@ -596,12 +617,9 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Dabar galite naudoti piršto atspaudą, kad atrakintumėte planšetinį kompiuterį ar patvirtintumėte savo tapatybę, pvz., kai prisijungiate prie programų ar patvirtinate pirkinį"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Dabar galite naudoti piršto atspaudą, kad atrakintumėte įrenginį ar patvirtintumėte savo tapatybę, pvz., kai prisijungiate prie programų ar patvirtinate pirkinį"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Dabar galite naudoti piršto atspaudą, kad atrakintumėte telefoną ar patvirtintumėte savo tapatybę, pvz., kai prisijungiate prie programų ar patvirtinate pirkinį"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"Dabar galite naudoti piršto atspaudą, kad atrakintumėte planšetinį kompiuterį ar patvirtintumėte savo tapatybę, pvz., kai prisijungiate prie programų ar patvirtinate pirkinį. \n\nPridėkite kitą piršto atspaudą, kad lengviau atrakintumėte kitaip laikydami planšetinį kompiuterį."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"Dabar galite naudoti piršto atspaudą, kad atrakintumėte įrenginį ar patvirtintumėte savo tapatybę, pvz., kai prisijungiate prie programų ar patvirtinate pirkinį.\n\nPridėkite kitą piršto atspaudą, kad lengviau atrakintumėte kitaip laikydami įrenginį."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"Dabar galite naudoti piršto atspaudą, kad atrakintumėte telefoną ar patvirtintumėte savo tapatybę, pvz., kai prisijungiate prie programų ar patvirtinate pirkinį.\n\nPridėkite kitą piršto atspaudą, kad lengviau atrakintumėte kitaip laikydami telefoną."</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Palieskite, kad bet kada atrakintumėte"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Palieskite jutiklį, kad atrakintumėte, net kai ekranas išjungtas. Tai padidina atsitiktinio atrakinimo tikimybę."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Ekranas, atrakinti"</string>

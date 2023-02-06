@@ -521,6 +521,28 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Lyft på fingret när du känner en vibration"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Gå någonstans med lägre belysning och försök igen"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Du har gjort det högsta tillåtna antalet försök"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Upplåsning med klockan"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"När du konfigurerar ansiktslås och fingeravtryckslås frågar telefonen om fingeravtryck när du använder munskydd eller om det är mörkt.\n\nDu kan låsa upp med klockan om ansiktet eller fingeravtrycket inte känns igen."</string>
+    <!-- no translation found for biometric_settings_intro_with_activeunlock (8930396405433023076) -->
+    <skip />
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Du kan låsa upp med klockan om fingeravtrycket inte känns igen."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Du kan låsa upp med klockan om ansiktet inte känns igen."</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Med ansikte eller klocka"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Med fingeravtryck eller klocka"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Med ansikte, fingeravtryck eller klocka"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"Med klocka"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Ställ först in ansikts- eller fingeravtryckslås"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"Du kan låsa upp med klockan om ansiktet eller fingeravtrycket inte känns igen."</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Ställ först in fingeravtryckslås"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"Du kan låsa upp med klockan om fingeravtrycket inte känns igen"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"Ställ först in ansiktslås"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"Du kan låsa upp med klockan om ansiktet inte känns igen"</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"Ställ in"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"Fingeravtryck och <xliff:g id="WATCH">%s</xliff:g> har lagts till"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"Fingeravtryck och <xliff:g id="WATCH">%s</xliff:g> har lagts till"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Ansikte och <xliff:g id="WATCH">%s</xliff:g> har lagts till"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Ansikte, fingeravtryck och <xliff:g id="WATCH">%s</xliff:g> har lagts till"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Ansikte, fingeravtryck och <xliff:g id="WATCH">%s</xliff:g> har lagts till"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Ansikts- och fingeravtryckslås"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Tryck för att konfigurera"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Ansikte och fingeravtryck har lagts till"</string>
@@ -588,12 +610,9 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Nu kan du låsa upp surfplattan eller verifiera din identitet med ditt fingeravtryck, till exempel när du loggar in i appar eller godkänner ett köp"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Nu kan du låsa upp enheten eller verifiera din identitet med ditt fingeravtryck, till exempel när du loggar in i appar eller godkänner ett köp"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Nu kan du låsa upp telefonen eller verifiera din identitet med ditt fingeravtryck, till exempel när du loggar in i appar eller godkänner ett köp"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"Nu kan du låsa upp surfplattan eller verifiera din identitet med ditt fingeravtryck, till exempel när du loggar in i appar eller godkänner ett köp. \n\nLägg till ytterligare ett fingeravtryck så att det blir enklare att låsa upp surfplattan när du håller den på olika sätt."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"Nu kan du låsa upp enheten eller verifiera din identitet med ditt fingeravtryck, till exempel när du loggar in i appar eller godkänner ett köp.\n\nLägg till ytterligare ett fingeravtryck så att det blir enklare att låsa upp enheten när du håller den på olika sätt."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"Nu kan du låsa upp telefonen eller verifiera din identitet med ditt fingeravtryck, till exempel när du loggar in i appar eller godkänner ett köp.\n\nLägg till ytterligare ett fingeravtryck så att det blir enklare att låsa upp telefonen när du håller den på olika sätt."</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Tryck för att låsa upp när som helst"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Tryck på sensorn för att låsa upp, även när skärmen är av. Detta ökar risken för att du råkar låsa upp enheten oavsiktligt."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Skärm, lås upp"</string>
