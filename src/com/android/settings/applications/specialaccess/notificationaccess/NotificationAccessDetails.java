@@ -16,8 +16,11 @@
 
 package com.android.settings.applications.specialaccess.notificationaccess;
 
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+
 import static com.android.settings.applications.AppInfoBase.ARG_PACKAGE_NAME;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
@@ -39,6 +42,7 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerFilter;
 import android.service.notification.NotificationListenerService;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Slog;
 
@@ -53,6 +57,7 @@ import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settings.password.PasswordUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
@@ -208,8 +213,12 @@ public class NotificationAccessDetails extends DashboardFragment {
             }
         }
         if (intent != null && intent.hasExtra(Intent.EXTRA_USER_HANDLE)) {
-            mUserId = ((UserHandle) intent.getParcelableExtra(
-                    Intent.EXTRA_USER_HANDLE)).getIdentifier();
+            if (hasInteractAcrossUsersPermission()) {
+                mUserId = ((UserHandle) intent.getParcelableExtra(
+                        Intent.EXTRA_USER_HANDLE)).getIdentifier();
+            } else {
+                finish();
+            }
         } else {
             mUserId = UserHandle.myUserId();
         }
@@ -222,6 +231,26 @@ public class NotificationAccessDetails extends DashboardFragment {
         } catch (PackageManager.NameNotFoundException e) {
             // oh well
         }
+    }
+
+    private boolean hasInteractAcrossUsersPermission() {
+        final String callingPackageName = PasswordUtils.getCallingAppPackageName(
+                getActivity().getActivityToken());
+
+        if (TextUtils.isEmpty(callingPackageName)) {
+            Log.w(TAG, "Not able to get calling package name for permission check");
+            return false;
+        }
+
+        if (getContext().getPackageManager().checkPermission(
+                Manifest.permission.INTERACT_ACROSS_USERS_FULL, callingPackageName)
+                != PERMISSION_GRANTED) {
+            Log.w(TAG, "Package " + callingPackageName + " does not have required permission "
+                    + Manifest.permission.INTERACT_ACROSS_USERS_FULL);
+            return false;
+        }
+
+        return true;
     }
 
     // Dialogs only have access to the parent fragment, not the controller, so pass the information
