@@ -24,6 +24,8 @@ import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_R
 import android.app.RemoteServiceException.MissingRequestPasswordComplexityPermissionException;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.UserHandle;
@@ -43,6 +45,8 @@ import com.android.settings.utils.SettingsDividerItemDecoration;
 
 import com.google.android.setupdesign.GlifPreferenceLayout;
 import com.google.android.setupdesign.util.ThemeHelper;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Setup Wizard's version of ChooseLockGeneric screen. It inherits the logic and basic structure
@@ -229,6 +233,13 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
 
     public static class InternalActivity extends ChooseLockGeneric.InternalActivity {
         @Override
+        protected void onCreate(Bundle savedState) {
+            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+            ThemeHelper.trySetDynamicColor(this);
+            super.onCreate(savedState);
+        }
+
+        @Override
         protected boolean isValidFragment(String fragmentName) {
             return InternalSetupChooseLockGenericFragment.class.getName().equals(fragmentName);
         }
@@ -243,6 +254,49 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             @Override
             protected boolean canRunBeforeDeviceProvisioned() {
                 return true;
+            }
+
+            @Override
+            public void onViewCreated(@NotNull View view, Bundle savedInstanceState) {
+                super.onViewCreated(view, savedInstanceState);
+
+                GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
+                int titleResource = R.string.lock_settings_picker_new_lock_title;
+
+                layout.setHeaderText(titleResource);
+                setDivider(new ColorDrawable(Color.TRANSPARENT));
+                setDividerHeight(0);
+                getHeaderView().setVisible(false);
+            }
+
+            @Override
+            protected Intent getLockPasswordIntent(int quality) {
+                final Intent intent = SetupChooseLockPassword.modifyIntentForSetup(
+                        getContext(), super.getLockPasswordIntent(quality));
+                SetupWizardUtils.copySetupExtras(getIntent(), intent);
+                return intent;
+            }
+
+            @Override
+            protected Intent getLockPatternIntent() {
+                final Intent intent = SetupChooseLockPattern.modifyIntentForSetup(
+                        getContext(), super.getLockPatternIntent());
+                SetupWizardUtils.copySetupExtras(getIntent(), intent);
+                return intent;
+            }
+
+            @Override
+            protected Intent getBiometricEnrollIntent(Context context) {
+                final Intent intent = super.getBiometricEnrollIntent(context);
+                SetupWizardUtils.copySetupExtras(getIntent(), intent);
+                return intent;
+            }
+
+            @Override
+            public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
+                    Bundle savedInstanceState) {
+                GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
+                return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
             }
         }
     }

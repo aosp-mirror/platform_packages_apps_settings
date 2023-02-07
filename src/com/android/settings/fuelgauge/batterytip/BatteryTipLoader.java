@@ -26,6 +26,7 @@ import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.detectors.BatteryDefenderDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.DockDefenderDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.HighUsageDetector;
+import com.android.settings.fuelgauge.batterytip.detectors.IncompatibleChargerDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.LowBatteryDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.SmartBatteryDetector;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
@@ -59,15 +60,15 @@ public class BatteryTipLoader extends AsyncLoaderCompat<List<BatteryTip>> {
         final List<BatteryTip> tips = new ArrayList<>();
         final BatteryTipPolicy policy = new BatteryTipPolicy(getContext());
         final BatteryInfo batteryInfo = mBatteryUtils.getBatteryInfo(TAG);
-        final Context context = getContext();
+        final Context context = getContext().getApplicationContext();
 
         tips.add(new LowBatteryDetector(context, policy, batteryInfo).detect());
         tips.add(new HighUsageDetector(context, policy, mBatteryUsageStats, batteryInfo).detect());
         tips.add(new SmartBatteryDetector(
                 context, policy, batteryInfo, context.getContentResolver()).detect());
-        tips.add(new BatteryDefenderDetector(
-                batteryInfo, context.getApplicationContext()).detect());
-        tips.add(new DockDefenderDetector(batteryInfo, context.getApplicationContext()).detect());
+        tips.add(new BatteryDefenderDetector(batteryInfo, context).detect());
+        tips.add(new DockDefenderDetector(batteryInfo, context).detect());
+        tips.add(new IncompatibleChargerDetector(context, batteryInfo).detect());
         Collections.sort(tips);
         return tips;
     }
