@@ -521,6 +521,28 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Lig jou vinger nadat jy \'n vibrasie gevoel het"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Beweeg na waar die lig sagter is en probeer weer"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Jy het die maksimum aantal pogings bereik"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Horlosieontsluiting"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"Wanneer jy Gesigslot en Vingerafdrukslot opstel, sal jou foon vir jou vingerafdruk vra as jy ’n masker dra of in die donker is.\n\nJy kan met jou horlosie ontsluit wanneer jou gesig of vingerafdruk nie herken word nie."</string>
+    <!-- no translation found for biometric_settings_intro_with_activeunlock (8930396405433023076) -->
+    <skip />
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Jy kan met jou horlosie ontsluit wanneer jou vingerafdruk nie herken word nie."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Jy kan met jou horlosie ontsluit wanneer jou gesig nie herken word nie."</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Gebruik gesig of horlosie"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Gebruik vingerafdruk of horlosie"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Gebruik gesig, vingerafdruk of horlosie"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"Gebruik horlosie"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Stel eers Gesig- of Vingerafdrukslot op"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"Jy kan met jou horlosie ontsluit wanneer jou gesig of vingerafdruk nie herken word nie"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Stel eers Vingerafdrukslot op"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"Jy kan met jou horlosie ontsluit wanneer jou vingerafdruk nie herken word nie"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"Stel eers Gesigslot op"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"Jy kan met jou horlosie ontsluit wanneer jou gesig nie herken word nie"</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"Stel op"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"Vingerafdruk en <xliff:g id="WATCH">%s</xliff:g> is bygevoeg"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"Vingerafdrukke en <xliff:g id="WATCH">%s</xliff:g> is bygevoeg"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Gesig en <xliff:g id="WATCH">%s</xliff:g> is bygevoeg"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Gesig, vingerafdruk en <xliff:g id="WATCH">%s</xliff:g> is bygevoeg"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Gesig, vingerafdrukke en <xliff:g id="WATCH">%s</xliff:g> is bygevoeg"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Gesigslot en vingerafdrukslot"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Tik om op te stel"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Gesig en vingerafdrukke is bygevoeg"</string>
@@ -588,12 +610,9 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Jy kan nou jou vingerafdruk gebruik om jou tablet te ontsluit of te verifieer dat dit jy is, soos wanneer jy by apps aanmeld of ’n aankoop goedkeur"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Jy kan nou jou vingerafdruk gebruik om jou toestel te ontsluit of te verifieer dat dit jy is, soos wanneer jy by apps aanmeld of ’n aankoop goedkeur"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Jy kan nou jou vingerafdruk gebruik om jou foon te ontsluit of te verifieer dat dit jy is, soos wanneer jy by apps aanmeld of ’n aankoop goedkeur"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"Jy kan nou jou vingerafdruk gebruik om jou tablet te ontsluit of te verifieer dat dit jy is, soos wanneer jy by apps aanmeld of ’n aankoop goedkeur. \n\nVoeg nog ’n vingerafdruk by sodat dit makliker is om jou tablet te ontsluit wanneer jy dit op verskillende maniere vashou."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"Jy kan nou jou vingerafdruk gebruik om jou toestel te ontsluit of te verifieer dat dit jy is, soos wanneer jy by apps aanmeld of ’n aankoop goedkeur.\n\nVoeg nog ’n vingerafdruk by sodat dit makliker is om jou toestel te ontsluit wanneer jy dit op verskillende maniere vashou."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"Jy kan nou jou vingerafdruk gebruik om jou foon te ontsluit of te verifieer dat dit jy is, soos wanneer jy by apps aanmeld of ’n aankoop goedkeur.\n\nVoeg nog ’n vingerafdruk by sodat dit makliker is om jou foon te ontsluit wanneer jy dit op verskillende maniere vashou."</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Raak om enige tyd te ontsluit"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Raak die sensor om te ontsluit, selfs terwyl die skerm af is. Dit kan onbedoelde ontsluiting veroorsaak."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Skerm, ontsluit"</string>

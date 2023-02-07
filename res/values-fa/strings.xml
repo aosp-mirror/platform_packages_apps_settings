@@ -521,6 +521,28 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"زمانی‌که لرزش را احساس کردید، انگشتتان را بردارید"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"به جایی با روشنایی ملایم‌تر بروید و دوباره امتحان کنید"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"به حداکثر تعداد تلاش مجاز رسیده‌اید"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"قفل‌گشایی با ساعت"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"وقتی «قفل‌گشایی با چهره» و «قفل‌گشایی با اثر انگشت» را راه‌اندازی می‌کنید، اگر ماسک به صورت داشته باشید یا در محیط تاریکی باشید، تلفن از شما می‌خواهد از اثر انگشتتان استفاده کنید.\n\nوقتی چهره یا اثر انگشت شما شناسایی نمی‌شود، می‌توانید قفل را با ساعتتان باز کنید."</string>
+    <!-- no translation found for biometric_settings_intro_with_activeunlock (8930396405433023076) -->
+    <skip />
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"وقتی اثر انگشت شما شناسایی نمی‌شود، می‌توانید قفل را با ساعتتان باز کنید."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"وقتی چهره شما شناسایی نمی‌شود، می‌توانید قفل را با ساعتتان باز کنید."</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"استفاده از چهره یا ساعت"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"استفاده از اثر انگشت یا ساعت"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"استفاده از چهره، اثر انگشت، یا ساعت"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"استفاده از ساعت"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"ابتدا «قفل‌گشایی با اثر انگشت یا چهره» را راه‌اندازی کنید"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"وقتی چهره یا اثر انگشت شما شناسایی نمی‌شود، می‌توانید قفل را با ساعتتان باز کنید"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"ابتدا «قفل‌گشایی با اثر انگشت» را راه‌اندازی کنید"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"وقتی اثر انگشت شما شناسایی نمی‌شود، می‌توانید قفل را با ساعتتان باز کنید"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"ابتدا «قفل‌گشایی با چهره» را راه‌اندازی کنید"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"وقتی چهره شما شناسایی نمی‌شود، می‌توانید قفل را با ساعتتان باز کنید"</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"راه‌اندازی"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"اثر انگشت و <xliff:g id="WATCH">%s</xliff:g> اضافه شد"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"اثر انگشت و <xliff:g id="WATCH">%s</xliff:g> اضافه شد"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"چهره و <xliff:g id="WATCH">%s</xliff:g> اضافه شد"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"چهره، اثر انگشت، و <xliff:g id="WATCH">%s</xliff:g> اضافه شد"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"چهره، اثر انگشت، و <xliff:g id="WATCH">%s</xliff:g> اضافه شد"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"قفل‌گشایی با چهره و اثر انگشت"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"برای راه‌اندازی ضربه بزنید"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"چهره و چند اثر انگشت اضافه شده است"</string>
@@ -588,12 +610,9 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"ازاین‌پس می‌توانید از اثر انگشتتان برای باز کردن قفل رایانه لوحی یا به‌تأیید رساندن هویتتان (مثلاً هنگام ورود به سیستم برنامه‌ها یا تأیید خریدها) استفاده کنید"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"ازاین‌پس می‌توانید از اثر انگشتتان برای باز کردن قفل دستگاهتان یا به‌تأیید رساندن هویتتان (مثلاً هنگام ورود به سیستم برنامه‌ها یا تأیید خریدها) استفاده کنید"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"ازاین‌پس می‌توانید از اثر انگشتتان برای باز کردن قفل تلفنتان یا به‌تأیید رساندن هویتتان (مثلاً هنگام ورود به سیستم برنامه‌ها یا تأیید خریدها) استفاده کنید"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"ازاین‌پس می‌توانید از اثر انگشتتان برای باز کردن قفل رایانه لوحی یا به‌تأیید رساندن هویتتان (مثلاً هنگام ورود به سیستم برنامه‌ها یا تأیید خریدها) استفاده کنید. \n\nاثر انگشت دیگری اضافه کنید تا وقتی رایانه لوحی‌تان را در حالت‌های مختلف نگه می‌دارید باز کردن قفل آسان‌تر شود."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"ازاین‌پس می‌توانید از اثر انگشتتان برای باز کردن قفل دستگاه یا به‌تأیید رساندن هویتتان (مثلاً هنگام ورود به سیستم برنامه‌ها یا تأیید خریدها) استفاده کنید.\n\nاثر انگشت دیگری اضافه کنید تا وقتی دستگاهتان را در حالت‌های مختلف نگه می‌دارید باز کردن قفل آسان‌تر شود."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"ازاین‌پس می‌توانید از اثر انگشتتان برای باز کردن قفل تلفن یا به‌تأیید رساندن هویتتان (مثلاً هنگام ورود به سیستم برنامه‌ها یا تأیید خریدها) استفاده کنید.\n\nاثر انگشت دیگری اضافه کنید تا وقتی تلفنتان را در حالت‌های مختلف نگه می‌دارید باز کردن قفل آسان‌تر شود."</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"هرزمان بخواهید می‌توانید قفل را با لمس کردن باز کنید"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"حتی زمانی که صفحه‌نمایش خاموش است، قفل دستگاه با لمس کردن حسگر باز می‌شود. این تنظیم احتمال باز شدن اتفاقی قفل را بیشتر می‌کند."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"صفحه‌نمایش، باز کردن قفل"</string>
@@ -2026,7 +2045,7 @@
     <string name="settings_safetylegal_activity_loading" msgid="1757860124583063395">"در حال بارگیری…"</string>
     <string name="lockpassword_choose_your_password_header" msgid="2407205113298094824">"تنظیم گذرواژه"</string>
     <string name="lockpassword_choose_your_profile_password_header" msgid="7038997227611893312">"تنظیم گذرواژه کاری"</string>
-    <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"تنظیم پین"</string>
+    <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"پین تنظیم کنید"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"تنظیم پین کاری"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"تنظیم الگو"</string>
     <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"برای امنیت بیشتر، الگویی برای باز کردن قفل دستگاه تنظیم کنید"</string>
@@ -2077,7 +2096,7 @@
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"تأیید الگو"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"تأیید پین"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"تأیید گذرواژه"</string>
-    <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"پین اشتباه"</string>
+    <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"پین اشتباه است"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"گذرواژه اشتباه"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"الگوی اشتباه"</string>
     <string name="lock_settings_title" msgid="665707559508132349">"امنیت دستگاه"</string>
@@ -3299,7 +3318,7 @@
     <string name="data_usage_cellular_data" msgid="1917226172511825849">"داده شبکه تلفن همراه"</string>
     <string name="data_usage_data_limit" msgid="1120291692444009289">"تنظیم حدمجاز داده"</string>
     <string name="data_usage_cycle" msgid="6875568429140150029">"چرخه مصرف داده"</string>
-    <string name="data_usage_app_items_header_text" msgid="7513812163443595033">"مصرف داده این برنامه"</string>
+    <string name="data_usage_app_items_header_text" msgid="7513812163443595033">"میزان مصرف برنامه"</string>
     <string name="data_usage_menu_roaming" msgid="6864561338842056939">"فراگردی داده"</string>
     <string name="data_usage_menu_restrict_background" msgid="1414574366645086133">"محدود کردن داده‌های پس‌زمینه"</string>
     <string name="data_usage_menu_allow_background" msgid="6242931073390680432">"مصرف داده پس‌زمینه: مجاز"</string>
@@ -4040,7 +4059,7 @@
     <string name="notification_pulse_title" msgid="8013178454646671529">"نور چشمک‌زن"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"حریم خصوصی"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"رد کردن صفحه قفل"</string>
-    <string name="lockscreen_bypass_summary" msgid="464277506200346748">"پس‌از قفل‌گشایی، مستقیم به آخرین صفحه استفاده‌شده می‌روید"</string>
+    <string name="lockscreen_bypass_summary" msgid="464277506200346748">"پس‌از قفل‌گشایی، آخرین صفحه استفاده‌شده باز می‌شود."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"صفحه قفل، صفحه‌قفل، رد کردن، نادیده گرفتن"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"وقتی نمایه کاری قفل است"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"فقط نمایش اعلان‌های جدید در صفحه قفل"</string>
@@ -5768,7 +5787,7 @@
     <string name="wifi_scan_change" msgid="8438320311511852918">"تغییر"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"متصل است"</string>
-    <string name="mobile_data_no_connection" msgid="905897142426974030">"اتصال برقرار نیست"</string>
+    <string name="mobile_data_no_connection" msgid="905897142426974030">"اتصال اینترنت موجود نیست"</string>
     <string name="mobile_data_off_summary" msgid="1884248776904165539">"داده تلفن همراه به‌طور خودکار متصل نخواهد شد"</string>
     <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"شبکه دیگری وجود ندارد"</string>
     <string name="all_network_unavailable" msgid="1163897808282057496">"شبکه‌ای در دسترس نیست"</string>

@@ -521,6 +521,28 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Lyftu fingrinum þegar þú finnur titring"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Færðu þig á stað með mýkri lýsingu og reyndu aftur"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Þú hefur náð hámarksfjölda tilrauna"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Opnun með úri"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"Þegar þú setur upp andlits- og fingrafarskenni biður síminn um fingrafarið þitt þegar þú ert með grímu eða á dimmum stað.\n\nÞú getur tekið úr lás með úrinu þegar hvorki tekst að greina andlit né fingrafar."</string>
+    <!-- no translation found for biometric_settings_intro_with_activeunlock (8930396405433023076) -->
+    <skip />
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Þú getur tekið úr lás með úrinu þegar ekki tekst að greina fingrafarið."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Þú getur tekið úr lás með úrinu þegar ekki tekst að greina andlitið."</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Með andliti eða úri"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Með fingrafari eða úri"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Með andliti, fingrafari eða úri"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"Með úri"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Settu fyrst upp andlits- eða fingrafarskenni"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"Þú getur tekið úr lás með úrinu þegar hvorki tekst að greina andlit né fingrafar"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Settu fyrst upp fingrafarskenni"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"Þú getur tekið úr lás með úrinu þegar ekki tekst að greina fingrafarið"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"Settu fyrst upp andlitskenni"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"Þú getur tekið úr lás með úrinu þegar ekki tekst að greina andlitið"</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"Setja upp"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"Fingrafari og <xliff:g id="WATCH">%s</xliff:g> bætt við"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"Fingraförum og <xliff:g id="WATCH">%s</xliff:g> bætt við"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Andliti og <xliff:g id="WATCH">%s</xliff:g> bætt við"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Andliti, fingrafari og <xliff:g id="WATCH">%s</xliff:g> bætt við"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Andliti, fingraförum og <xliff:g id="WATCH">%s</xliff:g> bætt við"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Andlits- og fingrafarskenni"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Ýttu til að setja upp"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Andliti og fingraförum bætt við"</string>
@@ -588,12 +610,9 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Nú geturðu notað fingrafarið til að taka spjaldtölvuna úr lás eða til að staðfesta hver þú ert, t.d. þegar þú skráir þig inn í forrit eða samþykkir kaup"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Nú geturðu notað fingrafarið til að taka tækið úr lás eða til að staðfesta hver þú ert, t.d. þegar þú skráir þig inn í forrit eða samþykkir kaup"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Nú geturðu notað fingrafarið til að taka símann úr lás eða til að staðfesta hver þú ert, t.d. þegar þú skráir þig inn í forrit eða samþykkir kaup"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"Nú geturðu notað fingrafarið til að taka spjaldtölvuna úr lás eða til að staðfesta hver þú ert, t.d. þegar þú skráir þig inn í forrit eða samþykkir kaup. \n\nBættu við öðru fingrafari til að auðveldara sé að taka úr lás þegar þú heldur á spjaldtölvunni á mismunandi hátt."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"Nú geturðu notað fingrafarið til að taka tækið úr lás eða til að staðfesta hver þú ert, t.d. þegar þú skráir þig inn í forrit eða samþykkir kaup.\n\nBættu við öðru fingrafari til að auðveldara sé að taka úr lás þegar þú heldur á tækinu á mismunandi hátt."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"Nú geturðu notað fingrafarið til að taka símann úr lás eða til að staðfesta hver þú ert, t.d. þegar þú skráir þig inn í forrit eða samþykkir kaup.\n\nBættu við öðru fingrafari til að auðveldara sé að taka úr lás þegar þú heldur á símanum á mismunandi hátt."</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Snertu til að taka úr lás hvenær sem er"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Snertu skynjarann til að taka úr lás, jafnvel þótt slökkt sé á skjánum. Þetta eykur líkurnar á því að tækið sé óvart tekið úr lás."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Skjár, taka úr lás"</string>

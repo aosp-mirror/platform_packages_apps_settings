@@ -525,6 +525,27 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Podignite prst kada osjetite vibraciju"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Pomjerite se na mjesto s prijatnijim svjetlom i pokušajte ponovo"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Dostigli ste maksimalan broj pokušaja"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Otključavanje pomoću sata"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"Kada postavite otključavanje licem i otključavanje otiskom prsta, vaš telefon će tražiti otisak prsta ako nosite masku ili se nalazite u mračnom prostoru.\n\nKada se vaše lice ili otisak prsta ne prepozna možete otključati pomoću sata."</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="tablet" msgid="8930396405433023076">"Kada postavite otključavanje licem i otključavanje otiskom prsta, tablet će tražiti otisak prsta ako nosite masku ili se nalazite u mračnom prostoru.\n\nKada se vaše lice ili otisak prsta ne prepozna, možete otključati pomoću sata."</string>
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Kada se vaš otisak prsta ne prepozna možete otključati pomoću sata."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Kada se vaše lice ne prepozna možete otključati pomoću sata."</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Pomoću lica ili sata"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Pomoću otiska prsta ili sata"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Pomoću lica, otiska prsta ili sata"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"Pomoću sata"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Najprije postavite otključavanje licem ili otiskom prsta"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"Kada se vaše lice ili otisak prsta ne prepozna možete otključati pomoću sata"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Najprije postavite otključavanje otiskom prsta"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"Kada se vaš otisak prsta ne prepozna možete otključati pomoću sata"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"Najprije postavite otključavanje licem"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"Kada se vaše lice ne prepozna možete otključati pomoću sata"</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"Postavi"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"Dodani su otisak prsta i <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"Dodani su otisci prstiju i <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Dodani su lice i <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Dodani su lice, otisak prsta i <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Dodani su lice, otisci prstiju i <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Otključavanje licem i otiskom prsta"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Dodirnite da postavite"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Lice i otisci prstiju su dodani"</string>
@@ -592,12 +613,9 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Sada možete pomoću otiska prsta otključati tablet ili potvrditi svoj identitet, naprimjer kada se prijavljujete u aplikacije ili odobravate kupovinu"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Sada možete pomoću otiska prsta otključati uređaj ili potvrditi svoj identitet, naprimjer kada se prijavljujete u aplikacije ili odobravate kupovinu"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Sada možete pomoću otiska prsta otključati telefon ili potvrditi svoj identitet, naprimjer kada se prijavljujete u aplikacije ili odobravate kupovinu"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"Sada možete otiskom prsta otključati tablet ili potvrditi identitet, naprimjer prilikom prijave u aplikacije ili odobravanja kupovine. \n\nDodajte drugi otisak prsta da vam je lakše otključati tablet kada ga držite na drugi način."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"Sada možete otiskom prsta otključati uređaj ili potvrditi identitet, naprimjer prilikom prijave u aplikacije ili odobravanja kupovine.\n\nDodajte drugi otisak prsta da vam je lakše otključati uređaj kada ga držite na drugi način."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"Sada možete otiskom prsta otključati telefon ili potvrditi identitet, naprimjer prilikom prijave u aplikacije ili odobravanja kupovine.\n\nDodajte drugi otisak prsta da vam je lakše otključati telefon kada ga držite na drugi način."</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Dodirnite da otključate bilo kada"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Dodirnite senzor da otključate, čak i kada je ekran isključen. Ovo povećava vjerovatnost slučajnog otključavanja."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Ekran, otključavanje"</string>
@@ -3114,7 +3132,7 @@
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Ukupno: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Pozadina: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Podaci o potrošnji baterije su približni i ne mjere potrošnju kada se telefon puni"</string>
-    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"Podaci o potrošnji baterije su približni i ne mjere korištenje kada se tablet puni"</string>
+    <string name="battery_usage_screen_footer" product="tablet" msgid="3729564192877964259">"Podaci o potrošnji baterije su približni i obuhvatanju potrošnju kada se tablet puni"</string>
     <string name="battery_usage_screen_footer" product="device" msgid="6610974734578869768">"Podaci o potrošnji baterije su približni i ne mjere korištenje kada se uređaj puni"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Podaci o potrošnji baterije će biti dostupni za nekoliko sati nakon što se potpuno napuni"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Grafikon potrošnje baterije"</string>
