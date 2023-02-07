@@ -68,15 +68,13 @@ public class GlifLayoutHelper {
         }
     }
 
-    /**
-     * Sets description resId to GlifLayout
-     */
-    public void setDescriptionText(int resId) {
-        CharSequence previousDescription = mGlifLayout.getDescriptionText();
-        CharSequence description = mActivity.getString(resId);
-        // Prevent a11y for re-reading the same string
-        if (!TextUtils.equals(previousDescription, description)) {
-            mGlifLayout.setDescriptionText(resId);
-        }
+    @NonNull
+    public Activity getActivity() {
+        return mActivity;
+    }
+
+    @NonNull
+    public GlifLayout getGlifLayout() {
+        return mGlifLayout;
     }
 }
