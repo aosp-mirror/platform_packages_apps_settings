@@ -16,7 +16,10 @@
 
 package com.android.settings.bluetooth;
 
+import android.annotation.Nullable;
+import android.app.ActivityManager;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -57,8 +60,9 @@ final class LocalBluetoothPreferences {
                 KEY_DISCOVERABLE_END_TIMESTAMP, 0);
     }
 
-    static boolean shouldShowDialogInForeground(Context context,
-            String deviceAddress, String deviceName) {
+    static boolean shouldShowDialogInForeground(Context context, @Nullable BluetoothDevice device) {
+        String deviceAddress = device != null ? device.getAddress() : null;
+        String deviceName = device != null ? device.getName() : null;
         LocalBluetoothManager manager = Utils.getLocalBtManager(context);
         if (manager == null) {
             if (DEBUG) Log.v(TAG, "manager == null - do not show dialog.");
@@ -122,6 +126,20 @@ final class LocalBluetoothPreferences {
                     com.android.internal.R.string.config_packagedKeyboardName);
             if (deviceName.equals(packagedKeyboardName)) {
                 if (DEBUG) Log.v(TAG, "showing dialog for packaged keyboard");
+                return true;
+            }
+        }
+
+        if (device != null) {
+            ActivityManager activityManager = context.getSystemService(ActivityManager.class);
+            String packageName = device.getCreateBondCaller();
+
+            if (packageName != null && activityManager.getPackageImportance(packageName)
+                    == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                if (DEBUG) {
+                    Log.v(TAG, "showing dialog because the initiating application "
+                            + "is in foreground");
+                }
                 return true;
             }
         }
