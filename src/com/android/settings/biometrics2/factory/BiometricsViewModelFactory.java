@@ -113,13 +113,14 @@ public class BiometricsViewModelFactory implements ViewModelProvider.Factory {
                         new FingerprintUpdater(application), userId);
             }
         } else if (modelClass.isAssignableFrom(FingerprintEnrollEnrollingViewModel.class)) {
+            final Integer userId = extras.get(USER_ID_KEY);
             final FingerprintRepository fingerprint = provider.getFingerprintRepository(
                     application);
             final AccessibilityRepository accessibility = provider.getAccessibilityRepository(
                     application);
             final VibratorRepository vibrator = provider.getVibratorRepository(application);
             if (fingerprint != null && accessibility != null && vibrator != null) {
-                return (T) new FingerprintEnrollEnrollingViewModel(application, fingerprint,
+                return (T) new FingerprintEnrollEnrollingViewModel(application, userId, fingerprint,
                         accessibility, vibrator);
             }
         }

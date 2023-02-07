@@ -85,15 +85,15 @@ public class FingerprintEnrollFinishFragment extends Fragment {
                 (GlifLayout) mView);
 
         glifLayoutHelper.setHeaderText(R.string.security_settings_fingerprint_enroll_finish_title);
-        glifLayoutHelper.setDescriptionText(
-                R.string.security_settings_fingerprint_enroll_finish_v2_message);
+        glifLayoutHelper.setDescriptionText(getString(
+                R.string.security_settings_fingerprint_enroll_finish_v2_message));
 
         final int maxEnrollments = mFingerprintEnrollFinishViewModel.getMaxFingerprints();
         final int enrolled = mFingerprintEnrollFinishViewModel.getNumOfEnrolledFingerprintsSize();
         if (mCanAssumeSfps) {
             if (enrolled < maxEnrollments) {
-                glifLayoutHelper.setDescriptionText(R.string
-                        .security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message);
+                glifLayoutHelper.setDescriptionText(getString(R.string
+                        .security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message));
             }
         }
 

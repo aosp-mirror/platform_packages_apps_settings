@@ -123,7 +123,10 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
         dialog.show(fragmentManager, FingerprintErrorDialog.class.getName());
     }
 
-    private static int getErrorMessage(int errMsgId) {
+    /**
+     * Gets dialog message as error id inside {@link FingerprintManager}
+     */
+    public static int getErrorMessage(int errMsgId) {
         switch (errMsgId) {
             case FingerprintManager.FINGERPRINT_ERROR_TIMEOUT:
                 // This message happens when the underlying crypto layer decides to revoke
@@ -137,7 +140,10 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
         }
     }
 
-    private static int getErrorTitle(int errMsgId) {
+    /**
+     * Gets dialog title as error id inside {@link FingerprintManager}
+     */
+    public static int getErrorTitle(int errMsgId) {
         switch (errMsgId) {
             case FingerprintManager.FINGERPRINT_ERROR_UNABLE_TO_PROCESS:
                 return R.string
