@@ -8,7 +8,8 @@ option java_outer_classname = "NetworkModeChoicesProto";
 // EnabledNetworks is a list which tries to categorized the entries of popup menu
 // based on carrier network types available to the end user.
 
-// Next tag: 13
+// Next tag: 15
+// TODO(b/268145152): rename the ENABLED_NETWORKS for good readability.
 enum EnabledNetworks {
     // No EnabledNetworks specified.
     ENABLED_NETWORKS_UNSPECIFIED = 0;
@@ -17,39 +18,56 @@ enum EnabledNetworks {
     ENABLED_NETWORKS_UNKNOWN = 1;
 
     // For the case where CDMA is supported and LTE is not prioritized over
-    // CDMA.
+    // CDMA (LTE, 3G, 1x, global).
     ENABLED_NETWORKS_CDMA_CHOICES = 2;
 
     // For the case where CDMA is supported and LTE is not available.
+    // CDMA (3G, 1x)
     ENABLED_NETWORKS_CDMA_NO_LTE_CHOICES = 3;
 
     // For the case where CDMA is supported and LTE is available.
+    // CDMA (LTE, Global)
     ENABLED_NETWORKS_CDMA_ONLY_LTE_CHOICES = 4;
 
     // For the case where TDSCDMA is primary network type.
+    // TDSCDMA (LTE, 3G, 2G)
     ENABLED_NETWORKS_TDSCDMA_CHOICES = 5;
 
     // For the case where GSM and LTE options are removed from the menu.
+    // (3G)
     ENABLED_NETWORKS_EXCEPT_GSM_LTE_CHOICES = 6;
 
-    // For the case where GSM and 4G options are removed from the menu.
+    // For the case where GSM option are removed from the menu. The wording of LTE is '4G'.
+    // (4G, 3G)
     ENABLED_NETWORKS_EXCEPT_GSM_4G_CHOICES = 7;
 
-    // For the case where GSM is removed from the menu, and both 4G/LTE are not an
-    // option.
+    // For the case where GSM option are removed from the menu. The wording of LTE is 'LTE'.
+    // (LTE, 3G)
     ENABLED_NETWORKS_EXCEPT_GSM_CHOICES = 8;
 
     // For the case where LTE is disabled.
+    // (3G, 3G)
     ENABLED_NETWORKS_EXCEPT_LTE_CHOICES = 9;
 
-    // For the case where GSM related carrier with 4G/LTE supported.
+    // For the case where GSM related carrier with 4G/LTE supported. The wording of LTE is '4G'.
+    // (2G, 3G, 4G)
     ENABLED_NETWORKS_4G_CHOICES = 10;
 
-    // For the case where GSM related carrier without 4G/LTE supported.
+    // For the case where GSM related carrier with 4G/LTE supported. The wording of LTE is 'LTE'.
+    // (2G, 3G, LTE)
     ENABLED_NETWORKS_CHOICES = 11;
 
     // For the case where world mode is enabled.
+    // ("Global", "LTE / CDMA", "LTE / GSM / UMTS")
     PREFERRED_NETWORK_MODE_CHOICES_WORLD_MODE = 12;
+
+    // For the case where GSM, 3G options are removed from the menu. The wording of LTE is '4G'.
+    // (4G)
+    ENABLED_NETWORKS_4G_CHOICES_EXCEPT_GSM_3G = 13;
+
+    // For the case where GSM and 3G are removed from the menu. The wording of LTE is 'LTE'.
+    // (LTE)
+    ENABLED_NETWORKS_CHOICES_EXCEPT_GSM_3G = 14;
 }
 
 // A request for popup menu.
