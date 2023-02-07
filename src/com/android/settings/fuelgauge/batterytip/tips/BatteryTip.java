@@ -27,6 +27,7 @@ import androidx.annotation.IntDef;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
+import com.android.settings.widget.CardPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.lang.annotation.Retention;
@@ -59,7 +60,8 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
             TipType.LOW_BATTERY,
             TipType.REMOVE_APP_RESTRICTION,
             TipType.BATTERY_DEFENDER,
-            TipType.DOCK_DEFENDER})
+            TipType.DOCK_DEFENDER,
+            TipType.INCOMPATIBLE_CHARGER})
     public @interface TipType {
         int SMART_BATTERY_MANAGER = 0;
         int APP_RESTRICTION = 1;
@@ -71,6 +73,7 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         int REMOVE_APP_RESTRICTION = 7;
         int BATTERY_DEFENDER = 8;
         int DOCK_DEFENDER = 9;
+        int INCOMPATIBLE_CHARGER = 10;
     }
 
     @VisibleForTesting
@@ -81,12 +84,13 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         TIP_ORDER.append(TipType.LOW_BATTERY, 1);
         TIP_ORDER.append(TipType.BATTERY_DEFENDER, 2);
         TIP_ORDER.append(TipType.DOCK_DEFENDER, 3);
-        TIP_ORDER.append(TipType.APP_RESTRICTION, 4);
-        TIP_ORDER.append(TipType.HIGH_DEVICE_USAGE, 5);
-        TIP_ORDER.append(TipType.SUMMARY, 6);
-        TIP_ORDER.append(TipType.SMART_BATTERY_MANAGER, 7);
-        TIP_ORDER.append(TipType.REDUCED_BATTERY, 8);
-        TIP_ORDER.append(TipType.REMOVE_APP_RESTRICTION, 9);
+        TIP_ORDER.append(TipType.INCOMPATIBLE_CHARGER, 4);
+        TIP_ORDER.append(TipType.APP_RESTRICTION, 5);
+        TIP_ORDER.append(TipType.HIGH_DEVICE_USAGE, 6);
+        TIP_ORDER.append(TipType.SUMMARY, 7);
+        TIP_ORDER.append(TipType.SMART_BATTERY_MANAGER, 8);
+        TIP_ORDER.append(TipType.REDUCED_BATTERY, 9);
+        TIP_ORDER.append(TipType.REMOVE_APP_RESTRICTION, 10);
     }
 
     private static final String KEY_PREFIX = "key_battery_tip";
@@ -202,5 +206,9 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
     @Override
     public String toString() {
         return "type=" + mType + " state=" + mState;
+    }
+
+    CardPreference castToCardPreferenceSafely(Preference preference) {
+        return preference instanceof CardPreference ? (CardPreference) preference : null;
     }
 }

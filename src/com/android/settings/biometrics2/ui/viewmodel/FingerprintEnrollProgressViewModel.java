@@ -56,6 +56,10 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
     private final MutableLiveData<EnrollmentStatusMessage> mErrorMessageLiveData =
             new MutableLiveData<>();
 
+    private final MutableLiveData<Boolean> mAcquireLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Integer> mPointerDownLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Integer> mPointerUpLiveData = new MutableLiveData<>();
+
     private byte[] mToken = null;
     private final int mUserId;
 
@@ -85,6 +89,21 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
         @Override
         public void onEnrollmentError(int errMsgId, CharSequence errString) {
             mErrorMessageLiveData.postValue(new EnrollmentStatusMessage(errMsgId, errString));
+        }
+
+        @Override
+        public void onAcquired(boolean isAcquiredGood) {
+            mAcquireLiveData.postValue(isAcquiredGood);
+        }
+
+        @Override
+        public void onPointerDown(int sensorId) {
+            mPointerDownLiveData.postValue(sensorId);
+        }
+
+        @Override
+        public void onPointerUp(int sensorId) {
+            mPointerUpLiveData.postValue(sensorId);
         }
     };
 
@@ -131,6 +150,19 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
     public LiveData<EnrollmentStatusMessage> getErrorMessageLiveData() {
         return mErrorMessageLiveData;
     }
+
+    public MutableLiveData<Boolean> getAcquireLiveData() {
+        return mAcquireLiveData;
+    }
+
+    public MutableLiveData<Integer> getPointerDownLiveData() {
+        return mPointerDownLiveData;
+    }
+
+    public MutableLiveData<Integer> getPointerUpLiveData() {
+        return mPointerUpLiveData;
+    }
+
 
     /**
      * Starts enrollment and return latest isEnrolling() result

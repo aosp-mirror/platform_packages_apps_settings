@@ -20,6 +20,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.hardware.usb.UsbManager;
 import android.os.BatteryManager;
 import android.os.PowerManager;
 import android.util.Log;
@@ -99,6 +100,7 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
         intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
         intentFilter.addAction(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED);
         intentFilter.addAction(BatteryUtils.BYPASS_DOCK_DEFENDER_ACTION);
+        intentFilter.addAction(UsbManager.ACTION_USB_PORT_COMPLIANCE_CHANGED);
 
         final Intent intent = mContext.registerReceiver(this, intentFilter,
                 Context.RECEIVER_EXPORTED);
@@ -110,33 +112,36 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
     }
 
     private void updateBatteryStatus(Intent intent, boolean forceUpdate) {
-        if (intent != null && mBatteryListener != null) {
-            if (Intent.ACTION_BATTERY_CHANGED.equals(intent.getAction())) {
-                final String batteryLevel = Utils.getBatteryPercentage(intent);
-                final String batteryStatus =
-                        Utils.getBatteryStatus(mContext, intent, /* compactStatus= */ false);
-                final int batteryHealth = intent.getIntExtra(
-                        BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_UNKNOWN);
-                if (!Utils.isBatteryPresent(intent)) {
-                    Log.w(TAG, "Problem reading the battery meter.");
-                    mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_NOT_PRESENT);
-                } else if (forceUpdate) {
-                    mBatteryListener.onBatteryChanged(BatteryUpdateType.MANUAL);
-                } else if (batteryHealth != mBatteryHealth) {
-                    mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_HEALTH);
-                } else if(!batteryLevel.equals(mBatteryLevel)) {
-                    mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_LEVEL);
-                } else if (!batteryStatus.equals(mBatteryStatus)) {
-                    mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_STATUS);
-                }
-                mBatteryLevel = batteryLevel;
-                mBatteryStatus = batteryStatus;
-                mBatteryHealth = batteryHealth;
-            } else if (PowerManager.ACTION_POWER_SAVE_MODE_CHANGED.equals(intent.getAction())) {
-                mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_SAVER);
-            } else if (BatteryUtils.BYPASS_DOCK_DEFENDER_ACTION.equals(intent.getAction())) {
+        if (intent == null || mBatteryListener == null) {
+            return;
+        }
+        final String action = intent.getAction();
+        if (Intent.ACTION_BATTERY_CHANGED.equals(action)) {
+            final String batteryLevel = Utils.getBatteryPercentage(intent);
+            final String batteryStatus =
+                    Utils.getBatteryStatus(mContext, intent, /* compactStatus= */ false);
+            final int batteryHealth = intent.getIntExtra(
+                    BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_UNKNOWN);
+            if (!Utils.isBatteryPresent(intent)) {
+                Log.w(TAG, "Problem reading the battery meter.");
+                mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_NOT_PRESENT);
+            } else if (forceUpdate) {
+                mBatteryListener.onBatteryChanged(BatteryUpdateType.MANUAL);
+            } else if (batteryHealth != mBatteryHealth) {
+                mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_HEALTH);
+            } else if(!batteryLevel.equals(mBatteryLevel)) {
+                mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_LEVEL);
+            } else if (!batteryStatus.equals(mBatteryStatus)) {
                 mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_STATUS);
             }
+            mBatteryLevel = batteryLevel;
+            mBatteryStatus = batteryStatus;
+            mBatteryHealth = batteryHealth;
+        } else if (PowerManager.ACTION_POWER_SAVE_MODE_CHANGED.equals(action)) {
+            mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_SAVER);
+        } else if (BatteryUtils.BYPASS_DOCK_DEFENDER_ACTION.equals(action)
+                || UsbManager.ACTION_USB_PORT_COMPLIANCE_CHANGED.equals(action)) {
+            mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_STATUS);
         }
     }
 }

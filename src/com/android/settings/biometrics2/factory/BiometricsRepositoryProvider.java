@@ -21,7 +21,9 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.settings.biometrics2.data.repository.AccessibilityRepository;
 import com.android.settings.biometrics2.data.repository.FingerprintRepository;
+import com.android.settings.biometrics2.data.repository.VibratorRepository;
 
 /**
  * Interface for BiometricsRepositoryProvider
@@ -33,4 +35,16 @@ public interface BiometricsRepositoryProvider {
      */
     @Nullable
     FingerprintRepository getFingerprintRepository(@NonNull Application application);
+
+    /**
+     * Get VibtatorRepository
+     */
+    @Nullable
+    VibratorRepository getVibratorRepository(@NonNull Application application);
+
+    /**
+     * Get AccessibilityRepository
+     */
+    @Nullable
+    AccessibilityRepository getAccessibilityRepository(@NonNull Application application);
 }
