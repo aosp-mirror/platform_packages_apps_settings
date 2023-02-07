@@ -111,7 +111,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
                 .stream()
                 .anyMatch(profile -> profile.getProfileId() == BluetoothProfile.LE_AUDIO);
 
-        return !Utils.isAdvancedDetailsHeader(mCachedDevice.getDevice()) && hasLeAudio
+        return !BluetoothUtils.isAdvancedDetailsHeader(mCachedDevice.getDevice()) && hasLeAudio
                 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 

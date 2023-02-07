@@ -126,7 +126,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         if (mCachedDevice == null) {
             return CONDITIONALLY_UNAVAILABLE;
         }
-        return Utils.isAdvancedDetailsHeader(mCachedDevice.getDevice())
+        return BluetoothUtils.isAdvancedDetailsHeader(mCachedDevice.getDevice())
                 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
