@@ -29,8 +29,10 @@
         android:title="@string/bluetooth_pairing_pref_title"
         android:icon="@drawable/ic_add_24dp"
         android:summary="@string/connected_device_add_device_summary"
+        android:fragment="com.android.settings.accessibility.HearingDevicePairingDetail"
         settings:userRestriction="no_config_bluetooth"
-        settings:useAdminDisabledSummary="true" />
+        settings:useAdminDisabledSummary="true"
+        settings:controller="com.android.settings.connecteddevice.AddDevicePreferenceController"/>
 
     <PreferenceCategory
         android:key="previously_connected_hearing_devices"
