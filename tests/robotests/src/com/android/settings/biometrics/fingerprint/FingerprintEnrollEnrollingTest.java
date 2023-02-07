@@ -36,6 +36,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
@@ -79,6 +80,8 @@ public class FingerprintEnrollEnrollingTest {
     @Mock private Vibrator mVibrator;
 
     @Mock private LottieAnimationView mIllustrationLottie;
+
+    @Mock private ObjectAnimator mHelpAnimation;
 
     @Mock private FingerprintEnrollSidecar mSidecar;
 
@@ -210,6 +213,15 @@ public class FingerprintEnrollEnrollingTest {
         verify(mIllustrationLottie, times(5)).setAnimation(lottieAssetCaptor.capture());
         List<Integer> observedLottieAssetOrder = lottieAssetCaptor.getAllValues();
         assertThat(observedLottieAssetOrder).isEqualTo(expectedLottieAssetOrder);
+    }
+
+    @Test
+    public void fingerprintSfpsEnrollHelpAnimation() {
+        initializeActivityFor(TYPE_POWER_BUTTON);
+        ReflectionHelpers.setField(mActivity, "mHelpAnimation", mHelpAnimation);
+        mActivity.onEnrollmentHelp(0 /* helpMsgId */, "Test help message" /* helpString */);
+
+        verify(mHelpAnimation).start();
     }
 
     // SFPS_STAGE_CENTER is first stage with progress bar colors, starts at steps=25, remaining=25
