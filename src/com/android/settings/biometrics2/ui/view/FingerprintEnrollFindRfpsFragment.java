@@ -172,7 +172,7 @@ public class FingerprintEnrollFindRfpsFragment extends Fragment {
             Log.d(TAG, "onStop(), current enrolling: " + isEnrolling + ", animation exist:"
                     + (mAnimation != null));
         }
-        if (!isEnrolling) {
+        if (isEnrolling) {
             stopLookingForFingerprint(false);
         }
     }
@@ -184,12 +184,11 @@ public class FingerprintEnrollFindRfpsFragment extends Fragment {
             return;
         }
 
-        mProgressViewModel.clearProgressLiveData();
-        mProgressViewModel.getProgressLiveData().observe(this, mProgressObserver);
         final boolean startResult = mProgressViewModel.startEnrollment(ENROLL_FIND_SENSOR);
         if (!startResult) {
             Log.e(TAG, "startLookingForFingerprint(), failed to start enrollment");
         }
+        mProgressViewModel.getProgressLiveData().observe(this, mProgressObserver);
     }
 
     private void stopLookingForFingerprint(boolean waitForLastCancelErrMsg) {

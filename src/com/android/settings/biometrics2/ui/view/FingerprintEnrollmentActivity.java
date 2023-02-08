@@ -27,6 +27,14 @@ import static com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewMo
 import static com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.CREDENTIAL_IS_GENERATING_CHALLENGE;
 import static com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.CREDENTIAL_VALID;
 import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.ErrorDialogData;
+import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.FINGERPRINT_ENROLL_ENROLLING_ACTION_DISMISS_ICON_TOUCH_DIALOG;
+import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.FINGERPRINT_ENROLL_ENROLLING_ACTION_DONE;
+import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.FINGERPRINT_ENROLL_ENROLLING_ACTION_SHOW_ICON_TOUCH_DIALOG;
+import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.FINGERPRINT_ENROLL_ENROLLING_ACTION_SKIP;
+import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_FINISH;
+import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_TIMEOUT;
+import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.FingerprintEnrollEnrollingAction;
+import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.FingerprintErrorDialogAction;
 import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFindSensorViewModel.FINGERPRINT_ENROLL_FIND_SENSOR_ACTION_DIALOG;
 import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFindSensorViewModel.FINGERPRINT_ENROLL_FIND_SENSOR_ACTION_SKIP;
 import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFindSensorViewModel.FINGERPRINT_ENROLL_FIND_SENSOR_ACTION_START;
@@ -122,12 +130,12 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
             onFindSensorAction(action);
         }
     };
-    private final Observer<Boolean> mEnrollingDoneObserver = isDone -> {
+    private final Observer<Integer> mEnrollingActionObserver = action -> {
         if (DEBUG) {
-            Log.d(TAG, "mEnrollingDoneObserver(" + isDone + ")");
+            Log.d(TAG, "mEnrollingActionObserver(" + action + ")");
         }
-        if (isDone != null) {
-            onEnrollingDone(isDone);
+        if (action != null) {
+            onEnrollingAction(action);
         }
     };
     private final Observer<ErrorDialogData> mEnrollingErrorDialogObserver = data -> {
@@ -135,7 +143,16 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
             Log.d(TAG, "mEnrollingErrorDialogObserver(" + data + ")");
         }
         if (data != null) {
-            startEnrollingErrorDialog();
+            new FingerprintEnrollEnrollingErrorDialog().show(getSupportFragmentManager(),
+                    ENROLLING_ERROR_DIALOG_TAG);
+        }
+    };
+    private final Observer<Integer> mEnrollingErrorDialogActionObserver = action -> {
+        if (DEBUG) {
+            Log.d(TAG, "mEnrollingErrorDialogActionObserver(" + action + ")");
+        }
+        if (action != null) {
+            onEnrollingErrorDialogAction(action);
         }
     };
     private final ActivityResultCallback<ActivityResult> mNextActivityResultCallback =
@@ -292,6 +309,7 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
             tag = ENROLLING_RFPS_TAG;
             fragmentClass = FingerprintEnrollEnrollingRfpsFragment.class;
         }
+
         getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
                 .setCustomAnimations(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out,
@@ -304,15 +322,18 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
     private void attachEnrollingViewModel() {
         final FingerprintEnrollEnrollingViewModel enrollingViewModel =
                 mViewModelProvider.get(FingerprintEnrollEnrollingViewModel.class);
-        enrollingViewModel.clearBackPressedData();
+        enrollingViewModel.clearActionLiveData();
+        enrollingViewModel.getActionLiveData().observe(this, mEnrollingActionObserver);
         enrollingViewModel.getErrorDialogLiveData().observe(this, mEnrollingErrorDialogObserver);
-
-        final FingerprintEnrollProgressViewModel progressViewModel =
-                mViewModelProvider.get(FingerprintEnrollProgressViewModel.class);
-        progressViewModel.getDoneLiveData().observe(this, mEnrollingDoneObserver);
+        enrollingViewModel.getErrorDialogActionLiveData().observe(this,
+                mEnrollingErrorDialogActionObserver);
     }
 
     private void startFinishActivity() {
+        final FingerprintEnrollEnrollingViewModel enrollingViewModel =
+                mViewModelProvider.get(FingerprintEnrollEnrollingViewModel.class);
+        enrollingViewModel.clearActionLiveData();
+
         final boolean isSuw = mViewModel.getRequest().isSuw();
         if (!mViewModel.isWaitingActivityResult().compareAndSet(false, true)) {
             Log.w(TAG, "startNext, isSuw:" + isSuw + ", fail to set isWaiting flag");
@@ -323,16 +344,6 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
         intent.putExtras(mAutoCredentialViewModel.createCredentialIntentExtra());
         intent.putExtras(mViewModel.getNextActivityBaseIntentExtras());
         mNextActivityLauncher.launch(intent);
-    }
-
-    private void startSkipSetupFindFpsDialog() {
-        new SkipSetupFindFpsDialog().show(getSupportFragmentManager(),
-                SKIP_SETUP_FIND_FPS_DIALOG_TAG);
-    }
-
-    private void startEnrollingErrorDialog() {
-        new FingerprintEnrollEnrollingErrorDialog().show(getSupportFragmentManager(),
-                ENROLLING_ERROR_DIALOG_TAG);
     }
 
     private void onGenerateChallengeFailed(@NonNull Boolean ignoredBoolean) {
@@ -366,6 +377,10 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
         final Intent intent = resultCode == BiometricEnrollBase.RESULT_FINISHED
                 ? createSetResultIntentWithGeneratingChallengeExtra(result.getData())
                 : result.getData();
+        if (DEBUG) {
+            Log.d(TAG, "onSetActivityResult(" + result + "), call setResult(" + resultCode
+                    + ", " + intent + ")");
+        }
         setResult(resultCode, intent);
         finish();
     }
@@ -443,7 +458,8 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
                 return;
             }
             case FINGERPRINT_ENROLL_FIND_SENSOR_ACTION_DIALOG: {
-                startSkipSetupFindFpsDialog();
+                new SkipSetupFindFpsDialog().show(getSupportFragmentManager(),
+                        SKIP_SETUP_FIND_FPS_DIALOG_TAG);
                 return;
             }
             case FINGERPRINT_ENROLL_FIND_SENSOR_ACTION_START: {
@@ -452,36 +468,43 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
         }
     }
 
-    private void onEnrollingDone(boolean isDone) {
-        if (!isDone) {
-            return;
+    private void onEnrollingAction(@FingerprintEnrollEnrollingAction int action) {
+        switch (action) {
+            case FINGERPRINT_ENROLL_ENROLLING_ACTION_DONE: {
+                startFinishActivity();
+                break;
+            }
+            case FINGERPRINT_ENROLL_ENROLLING_ACTION_SKIP: {
+                onSetActivityResult(new ActivityResult(BiometricEnrollBase.RESULT_SKIP, null));
+                break;
+            }
+            case FINGERPRINT_ENROLL_ENROLLING_ACTION_SHOW_ICON_TOUCH_DIALOG: {
+                new FingerprintEnrollEnrollingIconTouchDialog().show(getSupportFragmentManager(),
+                        SKIP_SETUP_FIND_FPS_DIALOG_TAG);
+                break;
+            }
+            case FINGERPRINT_ENROLL_ENROLLING_ACTION_DISMISS_ICON_TOUCH_DIALOG: {
+                onSetActivityResult(new ActivityResult(BiometricEnrollBase.RESULT_TIMEOUT, null));
+                break;
+            }
         }
-        final FingerprintEnrollProgressViewModel progressViewModel =
-                mViewModelProvider.get(FingerprintEnrollProgressViewModel.class);
-        progressViewModel.clearProgressLiveData();
+    }
 
-        startFinishActivity();
+    private void onEnrollingErrorDialogAction(@FingerprintErrorDialogAction int action) {
+        switch (action) {
+            case FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_FINISH:
+                onSetActivityResult(new ActivityResult(BiometricEnrollBase.RESULT_FINISHED, null));
+                break;
+            case FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_TIMEOUT:
+                onSetActivityResult(new ActivityResult(BiometricEnrollBase.RESULT_TIMEOUT, null));
+                break;
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         mViewModel.checkFinishActivityDuringOnPause(isFinishing(), isChangingConfigurations());
-    }
-
-    @Override
-    public void onBackPressed() {
-        final FragmentManager manager = getSupportFragmentManager();
-        final String[] tags = new String[] {ENROLLING_UDFPS_TAG, ENROLLING_SFPS_TAG,
-                ENROLLING_RFPS_TAG };
-        for (String tag: tags) {
-            final Fragment fragment = manager.findFragmentByTag(tag);
-            if (fragment != null) {
-                mViewModelProvider.get(FingerprintEnrollEnrollingViewModel.class).onBackPressed();
-                break;
-            }
-        }
-        super.onBackPressed();
     }
 
     @Override
