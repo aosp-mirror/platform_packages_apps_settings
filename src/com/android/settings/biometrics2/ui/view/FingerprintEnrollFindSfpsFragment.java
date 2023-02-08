@@ -98,6 +98,7 @@ public class FingerprintEnrollFindSfpsFragment extends Fragment {
             Log.d(TAG, "mProgressObserver(" + progress + ")");
         }
         if (progress != null && !progress.isInitialStep()) {
+            mProgressViewModel.clearProgressLiveData();
             mViewModel.onStartButtonClick();
         }
     };

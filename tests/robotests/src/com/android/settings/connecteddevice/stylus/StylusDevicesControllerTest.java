@@ -364,7 +364,7 @@ public class StylusDevicesControllerTest {
     @Test
     public void buttonsPreference_checkedWhenFlagTrue() {
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.STYLUS_BUTTONS_DISABLED, 1);
+                Settings.Secure.STYLUS_BUTTONS_ENABLED, 0);
 
         showScreen(mController);
         SwitchPreference buttonsPref = (SwitchPreference) mPreferenceContainer.getPreference(2);
@@ -375,7 +375,7 @@ public class StylusDevicesControllerTest {
     @Test
     public void buttonsPreference_uncheckedWhenFlagFalse() {
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.STYLUS_BUTTONS_DISABLED, 0);
+                Settings.Secure.STYLUS_BUTTONS_ENABLED, 1);
 
         showScreen(mController);
         SwitchPreference buttonsPref = (SwitchPreference) mPreferenceContainer.getPreference(2);
@@ -386,7 +386,7 @@ public class StylusDevicesControllerTest {
     @Test
     public void buttonsPreference_updatesFlagOnClick() {
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.STYLUS_BUTTONS_DISABLED, 1);
+                Settings.Secure.STYLUS_BUTTONS_ENABLED, 0);
         showScreen(mController);
         SwitchPreference buttonsPref = (SwitchPreference) mPreferenceContainer.getPreference(2);
 
@@ -394,7 +394,7 @@ public class StylusDevicesControllerTest {
 
         assertThat(buttonsPref.isChecked()).isEqualTo(false);
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
-                Secure.STYLUS_BUTTONS_DISABLED, -1)).isEqualTo(0);
+                Secure.STYLUS_BUTTONS_ENABLED, -1)).isEqualTo(0);
     }
 
     private void showScreen(StylusDevicesController controller) {

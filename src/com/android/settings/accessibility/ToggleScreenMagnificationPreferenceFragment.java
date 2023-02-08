@@ -31,6 +31,7 @@ import android.content.pm.PackageManager;
 import android.icu.text.CaseMap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -212,6 +213,32 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 getContext(), MagnificationFollowTypingPreferenceController.PREF_KEY);
         getSettingsLifecycle().addObserver(mFollowTypingPreferenceController);
         mFollowTypingPreferenceController.displayPreference(getPreferenceScreen());
+
+        addAlwaysOnSetting(generalCategory);
+    }
+
+    private void addAlwaysOnSetting(PreferenceCategory generalCategory) {
+        if (!DeviceConfig.getBoolean(
+                DeviceConfig.NAMESPACE_WINDOW_MANAGER,
+                "AlwaysOnMagnifier__enable_always_on_magnifier",
+                false
+        )) {
+            return;
+        }
+
+        var alwaysOnPreference = new SwitchPreference(getPrefContext());
+        alwaysOnPreference.setTitle(
+                R.string.accessibility_screen_magnification_always_on_title);
+        alwaysOnPreference.setSummary(
+                R.string.accessibility_screen_magnification_always_on_summary);
+        alwaysOnPreference.setKey(
+                MagnificationAlwaysOnPreferenceController.PREF_KEY);
+        generalCategory.addPreference(alwaysOnPreference);
+
+        var alwaysOnPreferenceController = new MagnificationAlwaysOnPreferenceController(
+                getContext(), MagnificationAlwaysOnPreferenceController.PREF_KEY);
+        getSettingsLifecycle().addObserver(alwaysOnPreferenceController);
+        alwaysOnPreferenceController.displayPreference(getPreferenceScreen());
     }
 
     @Override
