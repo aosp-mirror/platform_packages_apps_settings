@@ -87,6 +87,9 @@ public class UsbConnectionBroadcastReceiver extends BroadcastReceiver implements
             if (intent.getExtras().getBoolean(UsbManager.USB_FUNCTION_NCM)) {
                 functions |= UsbManager.FUNCTION_NCM;
             }
+            if (intent.getExtras().getBoolean(UsbManager.USB_FUNCTION_UVC)) {
+                functions |= UsbManager.FUNCTION_UVC;
+            }
             mFunctions = functions;
             mDataRole = mUsbBackend.getDataRole();
             mPowerRole = mUsbBackend.getPowerRole();
