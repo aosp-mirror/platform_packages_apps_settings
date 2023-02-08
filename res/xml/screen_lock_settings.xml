@@ -27,6 +27,12 @@
         android:key="visiblepattern"
         android:title="@string/lockpattern_settings_enable_visible_pattern_title" />
 
+    <!-- available in pin -->
+    <SwitchPreference
+        android:key="enhancedPinPrivacy"
+        android:title="@string/lockpattern_settings_enhanced_pin_privacy_title"
+        android:summary="@string/lockpattern_settings_enhanced_pin_privacy_summary" />
+
     <!-- available in pin/pattern/password -->
     <com.android.settings.display.TimeoutListPreference
         android:key="lock_after_timeout"
