@@ -98,6 +98,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -704,23 +705,26 @@ public final class Utils extends com.android.settingslib.Utils {
                 && bundle.getBoolean(ChooseLockSettingsHelper.EXTRA_KEY_ALLOW_ANY_USER, false);
         final int userId = bundle.getInt(Intent.EXTRA_USER_ID, UserHandle.myUserId());
         if (userId == LockPatternUtils.USER_FRP) {
-            return allowAnyUser ? userId : enforceSystemUser(context, userId);
+            return allowAnyUser ? userId : checkUserOwnsFrpCredential(context, userId);
         } else {
             return allowAnyUser ? userId : enforceSameOwner(context, userId);
         }
     }
 
     /**
-     * Returns the given user id if the current user is the system user.
+     * Returns the given user id if the current user owns frp credential.
      *
-     * @throws SecurityException if the current user is not the system user.
+     * @throws SecurityException if the current user do not own the frp credential.
      */
-    public static int enforceSystemUser(Context context, int userId) {
-        if (UserHandle.myUserId() == UserHandle.USER_SYSTEM) {
+    @VisibleForTesting
+    static int checkUserOwnsFrpCredential(Context context, int userId) {
+        final UserManager um = context.getSystemService(UserManager.class);
+        if (LockPatternUtils.userOwnsFrpCredential(context,
+                um.getUserInfo(UserHandle.myUserId()))) {
             return userId;
         }
-        throw new SecurityException("Given user id " + userId + " must only be used from "
-                + "USER_SYSTEM, but current user is " + UserHandle.myUserId());
+        throw new SecurityException("Current user id " + UserHandle.myUserId()
+                + " does not own frp credential.");
     }
 
     /**
