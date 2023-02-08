@@ -170,7 +170,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private boolean mCanAssumeUdfps;
     private boolean mCanAssumeSfps;
     @Nullable private ProgressBar mProgressBar;
-    @Nullable private UdfpsEnrollHelper mUdfpsEnrollHelper;
+    @VisibleForTesting
+    @Nullable
+    UdfpsEnrollHelper mUdfpsEnrollHelper;
     // TODO(b/260617060): Do not hard-code mScaleFactor, referring to AuthController.
     private float mScaleFactor = 1.0f;
     private ObjectAnimator mProgressAnim;
