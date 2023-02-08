@@ -293,15 +293,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
                         return true;
                     } else {
-                        // Show the confirm disable dialog.
-                        final DialogFragment fragment =
-                                newConfirmationDialogFragment(packageName, title, pref);
-
-                        if (fragment == null || mFragmentManager == null) {
-                            return true;
-                        }
-
-                        fragment.show(mFragmentManager, ConfirmationDialogFragment.TAG);
+                        // Disable the provider.
+                        togglePackageNameDisabled(packageName);
                     }
 
                     return true;
@@ -332,29 +325,6 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                         Log.e(TAG, "setEnabledProviders error: " + e.toString());
                     }
                 });
-    }
-
-    private @Nullable ConfirmationDialogFragment newConfirmationDialogFragment(
-            @NonNull String packageName,
-            @NonNull CharSequence appName,
-            @NonNull SwitchPreference pref) {
-        DialogHost host =
-                new DialogHost() {
-                    @Override
-                    public void onDialogClick(int whichButton) {
-                        if (whichButton == DialogInterface.BUTTON_POSITIVE) {
-                            // Since the package is now enabled then we
-                            // should remove it from the enabled list.
-                            togglePackageNameDisabled(packageName);
-                        } else if (whichButton == DialogInterface.BUTTON_NEGATIVE) {
-                            // Set the checked back to true because we
-                            // backed out of turning this off.
-                            pref.setChecked(true);
-                        }
-                    }
-                };
-
-        return new ConfirmationDialogFragment(host, packageName, appName);
     }
 
     private @Nullable ErrorDialogFragment newErrorDialogFragment() {
@@ -415,45 +385,5 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         @Override
         public void onClick(DialogInterface dialog, int which) {}
-    }
-
-    /**
-     * Confirmation dialog fragment shows a dialog to the user to confirm that they are disabling a
-     * provider.
-     */
-    public static class ConfirmationDialogFragment extends CredentialManagerDialogFragment {
-
-        ConfirmationDialogFragment(
-                DialogHost dialogHost, @NonNull String packageName, @NonNull CharSequence appName) {
-            super(dialogHost);
-
-            final Bundle argument = new Bundle();
-            argument.putString(PACKAGE_NAME_KEY, packageName);
-            argument.putCharSequence(APP_NAME_KEY, appName);
-            setArguments(argument);
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Bundle bundle = getArguments();
-            final String title =
-                    getContext()
-                            .getString(
-                                    R.string.credman_confirmation_message_title,
-                                    bundle.getCharSequence(
-                                            CredentialManagerDialogFragment.APP_NAME_KEY));
-
-            return new AlertDialog.Builder(getActivity())
-                    .setTitle(title)
-                    .setMessage(getContext().getString(R.string.credman_confirmation_message))
-                    .setPositiveButton(R.string.credman_confirmation_message_positive_button, this)
-                    .setNegativeButton(android.R.string.cancel, this)
-                    .create();
-        }
-
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            getDialogHost().onDialogClick(which);
-        }
     }
 }
