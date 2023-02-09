@@ -36,6 +36,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Controller in charge of the battery tip group
@@ -98,15 +99,7 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
         if (batteryTips == null) {
             return;
         }
-        if (mBatteryTips == null) {
-            mBatteryTips = batteryTips;
-        } else {
-            // mBatteryTips and batteryTips always have the same length and same sequence.
-            for (int i = 0, size = batteryTips.size(); i < size; i++) {
-                mBatteryTips.get(i).updateState(batteryTips.get(i));
-            }
-        }
-
+        mBatteryTips = batteryTips;
         mCardPreference.setVisible(false);
         for (int i = 0, size = batteryTips.size(); i < size; i++) {
             final BatteryTip batteryTip = mBatteryTips.get(i);
@@ -171,9 +164,9 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
         if (mBatteryTips == null) {
             return null;
         }
-
-        return mBatteryTips.stream().anyMatch(BatteryTip::isVisible)
-                ? mBatteryTips.stream().filter(BatteryTip::isVisible).findFirst().get() : null;
+        Optional<BatteryTip> visibleBatteryTip =
+                mBatteryTips.stream().filter(BatteryTip::isVisible).findFirst();
+        return visibleBatteryTip.orElse(null);
     }
 
     /**
