@@ -36,7 +36,7 @@ import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 /**
  * App specific activity to show details about
- * {@link android.Manifest.permission#RUN_LONG_JOBS}.
+ * {@link android.Manifest.permission#RUN_USER_INITIATED_JOBS}.
  */
 public class LongBackgroundTasksDetails extends AppInfoWithHeader
         implements OnPreferenceChangeListener {
@@ -52,7 +52,7 @@ public class LongBackgroundTasksDetails extends AppInfoWithHeader
 
     /**
      * Returns the string that states whether the app has access to
-     * {@link android.Manifest.permission#RUN_LONG_JOBS}.
+     * {@link android.Manifest.permission#RUN_USER_INITIATED_JOBS}.
      */
     public static CharSequence getSummary(Context context, AppEntry entry) {
         final AppStateLongBackgroundTasksBridge.LongBackgroundTasksState state =
@@ -104,9 +104,9 @@ public class LongBackgroundTasksDetails extends AppInfoWithHeader
         return false;
     }
 
-    private void setCanRunLongJobs(boolean newState) {
+    private void setCanRunUserInitiatedJobs(boolean newState) {
         final int uid = mPackageInfo.applicationInfo.uid;
-        mAppOpsManager.setUidMode(AppOpsManager.OPSTR_RUN_LONG_JOBS, uid,
+        mAppOpsManager.setUidMode(AppOpsManager.OPSTR_RUN_USER_INITIATED_JOBS, uid,
                 newState ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_ERRORED);
     }
 
@@ -132,7 +132,7 @@ public class LongBackgroundTasksDetails extends AppInfoWithHeader
         }
         if (mPermissionState != null && mUncommittedState != null
                 && mUncommittedState != mPermissionState.isAllowed()) {
-            setCanRunLongJobs(mUncommittedState);
+            setCanRunUserInitiatedJobs(mUncommittedState);
             logPermissionChange(mUncommittedState, mPackageName);
             mUncommittedState = null;
         }
