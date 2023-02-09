@@ -38,6 +38,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 
 /**
@@ -77,8 +78,9 @@ public class UdfpsEnrollProgressBarDrawable extends Drawable {
     private final Interpolator mCheckmarkInterpolator;
     @NonNull
     private final Paint mBackgroundPaint;
+    @VisibleForTesting
     @NonNull
-    private final Paint mFillPaint;
+    final Paint mFillPaint;
     @NonNull
     private final Vibrator mVibrator;
     @NonNull

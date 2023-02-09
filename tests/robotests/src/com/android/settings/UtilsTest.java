@@ -18,6 +18,7 @@ package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
@@ -59,6 +60,9 @@ import android.widget.TextView;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,6 +71,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowBinder;
 
 import java.net.InetAddress;
@@ -74,6 +79,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowLockPatternUtils.class)
 public class UtilsTest {
 
     private static final String PACKAGE_NAME = "com.android.app";
@@ -88,7 +94,7 @@ public class UtilsTest {
     @Mock
     private DevicePolicyManager mDevicePolicyManager;
     @Mock
-    private UserManager mUserManager;
+    private UserManager mMockUserManager;
     @Mock
     private PackageManager mPackageManager;
     @Mock
@@ -96,16 +102,25 @@ public class UtilsTest {
     @Mock
     private ApplicationInfo mApplicationInfo;
     private Context mContext;
+    private UserManager mUserManager;
+    private static final int FLAG_SYSTEM = 0x00000000;
+    private static final int FLAG_MAIN = 0x00004000;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
+        mUserManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
         when(mContext.getSystemService(WifiManager.class)).thenReturn(wifiManager);
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
                 .thenReturn(connectivityManager);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowLockPatternUtils.reset();
     }
 
     @Test
@@ -173,8 +188,9 @@ public class UtilsTest {
     public void isProfileOrDeviceOwner_deviceOwnerApp_returnTrue() {
         when(mDevicePolicyManager.isDeviceOwnerAppOnAnyUser(PACKAGE_NAME)).thenReturn(true);
 
-        assertThat(Utils.isProfileOrDeviceOwner(mUserManager, mDevicePolicyManager, PACKAGE_NAME))
-            .isTrue();
+        assertThat(
+            Utils.isProfileOrDeviceOwner(mMockUserManager, mDevicePolicyManager, PACKAGE_NAME))
+                .isTrue();
     }
 
     @Test
@@ -182,12 +198,13 @@ public class UtilsTest {
         final List<UserInfo> userInfos = new ArrayList<>();
         userInfos.add(new UserInfo());
 
-        when(mUserManager.getUsers()).thenReturn(userInfos);
+        when(mMockUserManager.getUsers()).thenReturn(userInfos);
         when(mDevicePolicyManager.getProfileOwnerAsUser(userInfos.get(0).id))
             .thenReturn(new ComponentName(PACKAGE_NAME, ""));
 
-        assertThat(Utils.isProfileOrDeviceOwner(mUserManager, mDevicePolicyManager, PACKAGE_NAME))
-            .isTrue();
+        assertThat(
+            Utils.isProfileOrDeviceOwner(mMockUserManager, mDevicePolicyManager, PACKAGE_NAME))
+                .isTrue();
     }
 
     @Test
@@ -338,5 +355,21 @@ public class UtilsTest {
         when(mockUserManager.isUserForeground()).thenReturn(false);
 
         assertThat(Utils.canCurrentUserDream(mockContext)).isFalse();
+    }
+
+    @Test
+    public void checkUserOwnsFrpCredential_userOwnsFrpCredential_returnUserId() {
+        ShadowLockPatternUtils.setUserOwnsFrpCredential(true);
+
+        assertThat(Utils.checkUserOwnsFrpCredential(mContext, 123)).isEqualTo(123);
+    }
+
+    @Test
+    public void checkUserOwnsFrpCredential_userNotOwnsFrpCredential_returnUserId() {
+        ShadowLockPatternUtils.setUserOwnsFrpCredential(false);
+
+        assertThrows(
+                SecurityException.class,
+                () -> Utils.checkUserOwnsFrpCredential(mContext, 123));
     }
 }

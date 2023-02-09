@@ -5301,6 +5301,10 @@
     <string name="battery_usage_screen_footer_empty">Battery usage data will be available in a few hours once fully charged</string>
     <!-- [CHAR_LIMIT=NONE] Battery chart label for the current time. -->
     <string name="battery_usage_chart_label_now">now</string>
+    <!-- [CHAR_LIMIT=NONE] A hyphen for two timestamps. For example, "6 AM - 8 AM", which means "from 6 AM to 8 AM". Please notice the spaces around the hyphen -->
+    <string name="battery_usage_timestamps_hyphen"><xliff:g id="from_timestamp">%1$s</xliff:g> - <xliff:g id="to_timestamp">%2$s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] The first slot is a week day (e.g. "Monday"); the second slot is a hourly time span (e.g. "6 AM - 8 AM"). -->
+    <string name="battery_usage_day_and_hour"><xliff:g id="day">%1$s</xliff:g> <xliff:g id="hour">%2$s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Accessibility content description for battery chart view. -->
     <string name="battery_usage_chart">Battery usage chart</string>
     <!-- [CHAR_LIMIT=NONE] Accessibility content description for daily battery chart view. -->
@@ -8943,6 +8947,15 @@
     <string name="allow_manage_external_storage_description">Allow this app to read, modify and delete all files on this device or any connected storage volumes. If granted, app may access files without your explicit knowledge.</string>
     <!-- Label for showing apps that can manage external storage[CHAR LIMIT=45] -->
     <string name="filter_manage_external_storage">Can access all files</string>
+
+    <!-- Manage full screen intent permission title [CHAR LIMIT=40] -->
+    <string name="full_screen_intent_title">Manage full screen intents</string>
+
+    <!-- Label for setting that allows apps to send full screen intents. [CHAR LIMIT=NONE] -->
+    <string name="permit_full_screen_intent">Allow apps to send full screen intents</string>
+
+    <!-- Description for setting that allows apps to send full screen intents. [CHAR LIMIT=NONE] -->
+    <string name="footer_description_full_screen_intent">Allow this app to send full screen intent notifications that cover the entire screen.</string>
 
     <!-- Media management apps settings title [CHAR LIMIT=40] -->
     <string name="media_management_apps_title">Media management apps</string>

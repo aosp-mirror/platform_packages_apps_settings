@@ -1681,6 +1681,25 @@
                        android:value="@string/menu_key_apps"/>
         </activity-alias>
 
+        <activity-alias android:name="com.google.android.settings.ManageFullScreenIntent"
+                        android:exported="true"
+                        android:targetActivity=".spa.SpaBridgeActivity">
+            <meta-data android:name="com.android.settings.spa.DESTINATION"
+                       android:value="TogglePermissionAppList/UseFullScreenIntent"/>
+        </activity-alias>
+
+        <activity-alias android:name="com.google.android.settings.AppManageFullScreenIntent"
+                        android:exported="true"
+                        android:targetActivity=".spa.SpaAppBridgeActivity">
+            <intent-filter>
+                <action android:name="android.settings.MANAGE_APP_USE_FULL_SCREEN_INTENT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.spa.DESTINATION"
+                       android:value="TogglePermissionAppInfoPage/UseFullScreenIntent"/>
+        </activity-alias>
+
         <activity android:name=".applications.InstalledAppOpenByDefaultActivity"
                   android:label="@string/application_info_label"
                   android:exported="true">

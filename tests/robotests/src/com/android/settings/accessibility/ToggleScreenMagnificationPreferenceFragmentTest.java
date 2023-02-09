@@ -175,6 +175,11 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
                         Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED)),
                 eq(false),
                 any(AccessibilitySettingsContentObserver.class));
+        verify(mContentResolver).registerContentObserver(
+                eq(Settings.Secure.getUriFor(
+                        Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED)),
+                eq(false),
+                any(AccessibilitySettingsContentObserver.class));
     }
 
     @Test
