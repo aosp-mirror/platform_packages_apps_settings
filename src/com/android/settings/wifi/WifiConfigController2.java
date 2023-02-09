@@ -97,6 +97,8 @@ public class WifiConfigController2 implements TextWatcher,
         AdapterView.OnItemSelectedListener, OnCheckedChangeListener,
         TextView.OnEditorActionListener, View.OnKeyListener {
     private static final String TAG = "WifiConfigController2";
+    @VisibleForTesting
+    static final String DEFAULT_ANONYMOUS_ID = "anonymous";
 
     private static final String SYSTEM_CA_STORE_PATH = "/system/etc/security/cacerts";
 
@@ -187,7 +189,8 @@ public class WifiConfigController2 implements TextWatcher,
     private ArrayAdapter<CharSequence> mPhase2Adapter;
     private Spinner mEapUserCertSpinner;
     private TextView mEapIdentityView;
-    private TextView mEapAnonymousView;
+    @VisibleForTesting
+    TextView mEapAnonymousView;
 
     private Spinner mIpSettingsSpinner;
     private TextView mIpAddressView;
@@ -1256,7 +1259,7 @@ public class WifiConfigController2 implements TextWatcher,
                     mPhase2Spinner.setAdapter(mPhase2Adapter);
                 }
                 mView.findViewById(R.id.l_phase2).setVisibility(View.VISIBLE);
-                mView.findViewById(R.id.l_anonymous).setVisibility(View.VISIBLE);
+                setAnonymousIdVisible();
                 showPeapFields();
                 setUserCertInvisible();
                 break;
@@ -1267,7 +1270,7 @@ public class WifiConfigController2 implements TextWatcher,
                     mPhase2Spinner.setAdapter(mPhase2Adapter);
                 }
                 mView.findViewById(R.id.l_phase2).setVisibility(View.VISIBLE);
-                mView.findViewById(R.id.l_anonymous).setVisibility(View.VISIBLE);
+                setAnonymousIdVisible();
                 setUserCertInvisible();
                 mView.findViewById(R.id.l_sim).setVisibility(View.GONE);
                 break;
@@ -1313,7 +1316,6 @@ public class WifiConfigController2 implements TextWatcher,
             mView.findViewById(R.id.l_sim).setVisibility(View.VISIBLE);
         } else {
             mView.findViewById(R.id.l_identity).setVisibility(View.VISIBLE);
-            mView.findViewById(R.id.l_anonymous).setVisibility(View.VISIBLE);
             mView.findViewById(R.id.password_layout).setVisibility(View.VISIBLE);
             mView.findViewById(R.id.show_password_layout).setVisibility(View.VISIBLE);
             mView.findViewById(R.id.l_sim).setVisibility(View.GONE);
@@ -1356,6 +1358,12 @@ public class WifiConfigController2 implements TextWatcher,
     private void setAnonymousIdentInvisible() {
         mView.findViewById(R.id.l_anonymous).setVisibility(View.GONE);
         mEapAnonymousView.setText("");
+    }
+
+    @VisibleForTesting
+    void setAnonymousIdVisible() {
+        mView.findViewById(R.id.l_anonymous).setVisibility(View.VISIBLE);
+        mEapAnonymousView.setText(DEFAULT_ANONYMOUS_ID);
     }
 
     private void setPasswordInvisible() {

@@ -16,6 +16,7 @@
 
 package com.android.settings.wifi;
 
+import static com.android.settings.wifi.WifiConfigController2.DEFAULT_ANONYMOUS_ID;
 import static com.android.settings.wifi.WifiConfigController2.WIFI_EAP_METHOD_SIM;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -961,6 +962,20 @@ public class WifiConfigController2Test {
                 .mapToObj(spinner.getAdapter()::getItem)
                 .collect(Collectors.toList());
         assertThat(list).doesNotContain(WIFI_EAP_TLS_V1_3);
+    }
+
+    @Test
+    public void setAnonymousIdVisible_showAnonymousIdAndSetDefaultId() {
+        View anonymousLayout = mView.findViewById(R.id.l_anonymous);
+        TextView anonymousId = mView.findViewById(R.id.anonymous);
+        mController.mEapAnonymousView = anonymousId;
+        anonymousLayout.setVisibility(View.GONE);
+        anonymousId.setText("");
+
+        mController.setAnonymousIdVisible();
+
+        assertThat(anonymousLayout.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(anonymousId.getText().toString()).isEqualTo(DEFAULT_ANONYMOUS_ID);
     }
 
     private void setUpModifyingSavedCertificateConfigController(String savedCaCertificate,
