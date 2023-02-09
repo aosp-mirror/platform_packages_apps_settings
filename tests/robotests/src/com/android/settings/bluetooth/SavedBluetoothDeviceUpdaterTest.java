@@ -91,8 +91,8 @@ public class SavedBluetoothDeviceUpdaterTest {
         when(mBluetoothDevice.getBondState()).thenReturn(BluetoothDevice.BOND_BONDED);
         when(mCachedBluetoothDevice.getDrawableWithDescription()).thenReturn(pairs);
 
-        mBluetoothDeviceUpdater = spy(new SavedBluetoothDeviceUpdater(mContext, mDashboardFragment,
-                mDevicePreferenceCallback));
+        mBluetoothDeviceUpdater = spy(new SavedBluetoothDeviceUpdater(mContext,
+                mDevicePreferenceCallback, false, /* metricsCategory= */ 0));
         mBluetoothDeviceUpdater.setPrefContext(mContext);
         mBluetoothDeviceUpdater.mBluetoothAdapter = mBluetoothAdapter;
         mBluetoothDeviceUpdater.mLocalManager = mBluetoothManager;

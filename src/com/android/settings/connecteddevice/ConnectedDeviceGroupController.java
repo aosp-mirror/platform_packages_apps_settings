@@ -184,7 +184,8 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
         final DockUpdater connectedDockUpdater =
                 dockUpdaterFeatureProvider.getConnectedDockUpdater(context, this);
         init(hasBluetoothFeature()
-                        ? new ConnectedBluetoothDeviceUpdater(context, fragment, this)
+                        ? new ConnectedBluetoothDeviceUpdater(context, this,
+                        fragment.getMetricsCategory())
                         : null,
                 hasUsbFeature()
                         ? new ConnectedUsbDeviceUpdater(context, fragment, this)
