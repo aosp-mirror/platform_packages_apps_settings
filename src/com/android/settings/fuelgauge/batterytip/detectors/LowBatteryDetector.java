@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.batterytip.detectors;
 
 import android.content.Context;
-import android.os.PowerManager;
 
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
@@ -30,26 +29,27 @@ import java.util.concurrent.TimeUnit;
  * Detect whether the battery is too low
  */
 public class LowBatteryDetector implements BatteryTipDetector {
-    private BatteryInfo mBatteryInfo;
-    private BatteryTipPolicy mPolicy;
-    private PowerManager mPowerManager;
-    private int mWarningLevel;
+    private final BatteryInfo mBatteryInfo;
+    private final BatteryTipPolicy mPolicy;
+    private final boolean mIsPowerSaveMode;
+    private final int mWarningLevel;
 
-    public LowBatteryDetector(Context context, BatteryTipPolicy policy, BatteryInfo batteryInfo) {
+
+    public LowBatteryDetector(Context context, BatteryTipPolicy policy, BatteryInfo batteryInfo,
+            boolean isPowerSaveMode) {
         mPolicy = policy;
         mBatteryInfo = batteryInfo;
-        mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         mWarningLevel = context.getResources().getInteger(
                 com.android.internal.R.integer.config_lowBatteryWarningLevel);
+        mIsPowerSaveMode = isPowerSaveMode;
     }
 
     @Override
     public BatteryTip detect() {
-        final boolean powerSaveModeOn = mPowerManager.isPowerSaveMode();
         final boolean lowBattery = mBatteryInfo.batteryLevel <= mWarningLevel
                 || (mBatteryInfo.discharging && mBatteryInfo.remainingTimeUs != 0
                 && mBatteryInfo.remainingTimeUs < TimeUnit.HOURS.toMicros(mPolicy.lowBatteryHour));
-        final boolean lowBatteryEnabled = mPolicy.lowBatteryEnabled && !powerSaveModeOn;
+        final boolean lowBatteryEnabled = mPolicy.lowBatteryEnabled && !mIsPowerSaveMode;
         final boolean dischargingLowBatteryState =
                 mPolicy.testLowBatteryTip || (mBatteryInfo.discharging && lowBattery);
 
@@ -61,6 +61,6 @@ public class LowBatteryDetector implements BatteryTipDetector {
             state = BatteryTip.StateType.NEW;
         }
 
-        return new LowBatteryTip(state, powerSaveModeOn);
+        return new LowBatteryTip(state, mIsPowerSaveMode);
     }
 }

@@ -91,5 +91,4 @@ public class LowBatteryTip extends BatteryTip {
             return new LowBatteryTip[size];
         }
     };
-
 }
