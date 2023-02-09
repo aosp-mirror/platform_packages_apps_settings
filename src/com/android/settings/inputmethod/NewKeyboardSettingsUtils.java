@@ -17,7 +17,7 @@
 package com.android.settings.inputmethod;
 
 import android.content.Context;
-import android.provider.Settings;
+import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
@@ -38,17 +38,18 @@ public class NewKeyboardSettingsUtils {
     static final String EXTRA_INPUT_METHOD_INFO = "input_method_info";
     static final String EXTRA_INPUT_METHOD_SUBTYPE = "input_method_subtype";
 
-    static InputMethodInfo getActiveIme(Context context, InputMethodManager imm) {
-        InputMethodInfo activeIme = null;
-        List<InputMethodInfo> infoList = imm.getEnabledInputMethodList();
-        String imeId = Settings.Secure.getStringForUser(context.getContentResolver(),
-                Settings.Secure.DEFAULT_INPUT_METHOD, context.getUserId());
-        for (InputMethodInfo method : infoList) {
-            if (method.getId().equals(imeId)) {
-                activeIme = method;
+    static boolean isTouchpad() {
+        for (int deviceId : InputDevice.getDeviceIds()) {
+            final InputDevice device = InputDevice.getDevice(deviceId);
+            if (device == null) {
+                continue;
+            }
+            if ((device.getSources() & InputDevice.SOURCE_TOUCHPAD)
+                    == InputDevice.SOURCE_TOUCHPAD) {
+                return true;
             }
         }
-        return activeIme;
+        return false;
     }
 
     static List<String> getSuitableImeLabels(Context context, InputMethodManager imm, int userId) {

@@ -57,7 +57,7 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
         boolean hasLeAudio = mCachedDevice.getConnectableProfiles()
                 .stream()
                 .anyMatch(profile -> profile.getProfileId() == BluetoothProfile.LE_AUDIO);
-        return !Utils.isAdvancedDetailsHeader(mCachedDevice.getDevice()) && !hasLeAudio;
+        return !BluetoothUtils.isAdvancedDetailsHeader(mCachedDevice.getDevice()) && !hasLeAudio;
     }
 
     @Override
