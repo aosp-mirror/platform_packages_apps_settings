@@ -41,7 +41,7 @@ public class ScaryWarningDialogFragment extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.DIALOG_SERVICE_ACCESS_WARNING;
+        return SettingsEnums.DIALOG_NOTIFICATION_ACCESS_GRANT;
     }
 
     public ScaryWarningDialogFragment setServiceInfo(ComponentName cn, CharSequence label,

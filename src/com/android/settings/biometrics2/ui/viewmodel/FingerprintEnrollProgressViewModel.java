@@ -190,6 +190,12 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
             Log.e(TAG, "startEnrollment(" + reason + ")");
         }
 
+        // Clear data
+        mProgressLiveData.setValue(new EnrollmentProgress(INITIAL_STEPS, INITIAL_REMAINING));
+        mDoneLiveData.setValue(false);
+        mHelpMessageLiveData.setValue(null);
+        mErrorMessageLiveData.setValue(null);
+
         mCancellationSignal = new CancellationSignal();
         mFingerprintUpdater.enroll(mToken, mCancellationSignal, mUserId,
                 mMessageDisplayController != null ? mMessageDisplayController : mEnrollmentCallback,
