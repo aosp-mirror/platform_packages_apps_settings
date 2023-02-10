@@ -17,10 +17,13 @@
 package com.android.settings.bluetooth;
 
 import static com.android.settings.bluetooth.BluetoothDeviceDetailsFragment.FEATURE_AUDIO_ROUTING_ORDER;
+import static com.android.settings.bluetooth.BluetoothDeviceDetailsFragment.KEY_DEVICE_ADDRESS;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.FeatureFlagUtils;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
@@ -36,7 +39,8 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 public class BluetoothDetailsAudioRoutingController extends BluetoothDetailsController  {
 
     private static final String KEY_FEATURE_CONTROLS_GROUP = "feature_controls_group";
-    private static final String KEY_AUDIO_ROUTING = "audio_routing";
+    @VisibleForTesting
+    static final String KEY_AUDIO_ROUTING = "audio_routing";
 
     public BluetoothDetailsAudioRoutingController(Context context,
             PreferenceFragmentCompat fragment, CachedBluetoothDevice device, Lifecycle lifecycle) {
@@ -71,9 +75,13 @@ public class BluetoothDetailsAudioRoutingController extends BluetoothDetailsCont
 
     private Preference createAudioRoutingPreference(Context context) {
         final Preference preference = new Preference(context);
+
         preference.setKey(KEY_AUDIO_ROUTING);
         preference.setTitle(context.getString(R.string.bluetooth_audio_routing_title));
         preference.setSummary(context.getString(R.string.bluetooth_audio_routing_summary));
+        final Bundle extras = preference.getExtras();
+        extras.putString(KEY_DEVICE_ADDRESS, mCachedDevice.getAddress());
+        preference.setFragment(BluetoothDetailsAudioRoutingFragment.class.getName());
 
         return preference;
     }

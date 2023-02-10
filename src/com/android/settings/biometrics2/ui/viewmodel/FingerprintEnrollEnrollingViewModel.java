@@ -64,18 +64,18 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
     /**
      * Icon touch dialog show
      */
-    public static final int FINGERPRINT_ENROLL_ENROLLING_ACTION_SHOW_DIALOG = 2;
+    public static final int FINGERPRINT_ENROLL_ENROLLING_ACTION_SHOW_ICON_TOUCH_DIALOG = 2;
 
     /**
      * Icon touch dialog dismiss
      */
-    public static final int FINGERPRINT_ENROLL_ENROLLING_ACTION_DISMISS_DIALOG = 3;
+    public static final int FINGERPRINT_ENROLL_ENROLLING_ACTION_DISMISS_ICON_TOUCH_DIALOG = 3;
 
     @IntDef(prefix = { "FINGERPRINT_ENROLL_ENROLLING_ACTION_" }, value = {
             FINGERPRINT_ENROLL_ENROLLING_ACTION_SKIP,
             FINGERPRINT_ENROLL_ENROLLING_ACTION_DONE,
-            FINGERPRINT_ENROLL_ENROLLING_ACTION_SHOW_DIALOG,
-            FINGERPRINT_ENROLL_ENROLLING_ACTION_DISMISS_DIALOG
+            FINGERPRINT_ENROLL_ENROLLING_ACTION_SHOW_ICON_TOUCH_DIALOG,
+            FINGERPRINT_ENROLL_ENROLLING_ACTION_DISMISS_ICON_TOUCH_DIALOG
     })
     @Retention(RetentionPolicy.SOURCE)
     public @interface FingerprintEnrollEnrollingAction {}
@@ -109,8 +109,7 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
     private final AccessibilityRepository mAccessibilityRepository;
     private final VibratorRepository mVibratorRepository;
 
-    private final MutableLiveData<Boolean> mBackPressedLiveData = new MutableLiveData<>(false);
-    private final MutableLiveData<Integer> mEnrollingLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Integer> mActionLiveData = new MutableLiveData<>();
     private final MutableLiveData<Integer> mIconTouchDialogLiveData = new MutableLiveData<>();
     private final MutableLiveData<ErrorDialogData> mErrorDialogLiveData = new MutableLiveData<>();
     private final MutableLiveData<Integer> mErrorDialogActionLiveData = new MutableLiveData<>();
@@ -138,6 +137,21 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
         return mErrorDialogLiveData;
     }
 
+    public LiveData<Integer> getErrorDialogActionLiveData() {
+        return mErrorDialogActionLiveData;
+    }
+
+    public LiveData<Integer> getActionLiveData() {
+        return mActionLiveData;
+    }
+
+    /**
+     * Clears action live data
+     */
+    public void clearActionLiveData() {
+        mActionLiveData.setValue(null);
+    }
+
     /**
      * Saves new user dialog action to mErrorDialogActionLiveData
      */
@@ -149,20 +163,6 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
     }
 
     /**
-     * Clears back press data
-     */
-    public void clearBackPressedData() {
-        mBackPressedLiveData.setValue(false);
-    }
-
-    /**
-     * User trigger back pressed
-     */
-    public void onBackPressed() {
-        mBackPressedLiveData.postValue(true);
-    }
-
-    /**
      * User clicks skip button
      */
     public void onSkipButtonClick() {
@@ -170,25 +170,25 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
         if (DEBUG) {
             Log.d(TAG, "onSkipButtonClick, post action " + action);
         }
-        mEnrollingLiveData.postValue(action);
+        mActionLiveData.postValue(action);
     }
 
     /**
      * Is enrolling finished
      */
     public void onEnrollingDone() {
-        final int action = FINGERPRINT_ENROLL_ENROLLING_ACTION_SKIP;
+        final int action = FINGERPRINT_ENROLL_ENROLLING_ACTION_DONE;
         if (DEBUG) {
             Log.d(TAG, "onEnrollingDone, post action " + action);
         }
-        mEnrollingLiveData.postValue(action);
+        mActionLiveData.postValue(action);
     }
 
     /**
      * Icon touch dialog show
      */
     public void onIconTouchDialogShow() {
-        final int action = FINGERPRINT_ENROLL_ENROLLING_ACTION_SHOW_DIALOG;
+        final int action = FINGERPRINT_ENROLL_ENROLLING_ACTION_SHOW_ICON_TOUCH_DIALOG;
         if (DEBUG) {
             Log.d(TAG, "onIconTouchDialogShow, post action " + action);
         }
@@ -199,7 +199,7 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
      * Icon touch dialog dismiss
      */
     public void onIconTouchDialogDismiss() {
-        final int action = FINGERPRINT_ENROLL_ENROLLING_ACTION_DISMISS_DIALOG;
+        final int action = FINGERPRINT_ENROLL_ENROLLING_ACTION_DISMISS_ICON_TOUCH_DIALOG;
         if (DEBUG) {
             Log.d(TAG, "onIconTouchDialogDismiss, post action " + action);
         }
@@ -313,7 +313,8 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
 
         @Override
         public String toString() {
-            return ErrorDialogData.class.getSimpleName() + "{id:" + mErrMsgId + "}";
+            return getClass().getSimpleName() + "@" + Integer.toHexString(hashCode())
+                    + "{id:" + mErrMsgId + "}";
         }
     }
 }
