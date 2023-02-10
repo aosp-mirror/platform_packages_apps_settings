@@ -21,7 +21,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.provider.Settings;
 
-import com.android.settings.R;
+import com.android.settingslib.R;
 
 import java.util.Arrays;
 import java.util.List;
