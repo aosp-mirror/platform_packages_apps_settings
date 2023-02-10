@@ -27,6 +27,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
@@ -39,6 +40,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.network.ActiveSubscriptionsListener;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settings.widget.RtlCompatibleViewPager;
@@ -92,6 +94,9 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        if (MobileNetworkUtils.isMobileNetworkUserRestricted(getActivity())) {
+            return new ViewStub(getActivity());
+        }
         final View view = inflater.inflate(R.layout.wifi_calling_settings_tabs, container, false);
 
         mTabLayout = view.findViewById(R.id.sliding_tabs);
@@ -138,6 +143,10 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
     public void onCreate(Bundle icicle) {
         mConstructionSubId = getConstructionSubId(icicle);
         super.onCreate(icicle);
+        if (MobileNetworkUtils.isMobileNetworkUserRestricted(getActivity())) {
+            finish();
+            return;
+        }
         Log.d(TAG, "SubId=" + mConstructionSubId);
 
         if (mConstructionSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
