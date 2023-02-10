@@ -19,6 +19,7 @@ package com.android.settings.development;
 import static android.service.quicksettings.TileService.ACTION_QS_TILE_PREFERENCES;
 
 import android.app.Activity;
+import android.app.UiModeManager;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
@@ -63,6 +64,7 @@ import com.android.settings.development.storage.SharedDataPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.actionbar.SearchMenuController;
+import com.android.settings.theme.ContrastPreferenceController;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -685,6 +687,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new IngressRateLimitPreferenceController((context)));
         controllers.add(new BackAnimationPreferenceController(context, fragment));
         controllers.add(new PhantomProcessPreferenceController(context));
+        controllers.add(new ContrastPreferenceController(
+                context, context.getSystemService(UiModeManager.class)));
 
         return controllers;
     }
