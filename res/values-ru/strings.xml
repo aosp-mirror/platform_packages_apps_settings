@@ -531,8 +531,7 @@
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Достигнуто максимально допустимое количество попыток."</string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Разблокировка с помощью часов"</string>
     <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"Если вы настроили фейсконтроль и разблокировку по отпечатку пальца, телефон будет предлагать использовать отпечаток, когда вы в маске или вокруг вас темно.\n\nВы можете снимать блокировку с помощью часов, когда у системы не получается распознать ваше лицо или отпечаток пальца."</string>
-    <!-- no translation found for biometric_settings_intro_with_activeunlock (8930396405433023076) -->
-    <skip />
+    <string name="biometric_settings_intro_with_activeunlock" product="tablet" msgid="8930396405433023076">"Если вы настроили фейсконтроль и разблокировку по отпечатку пальца, то отпечаток будет запрашиваться, когда вы в маске или вокруг вас темно.\n\nЕсли распознать лицо или отпечаток пальца не удается, вы можете разблокировать планшет с помощью часов."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Вы можете снимать блокировку с помощью часов, когда системе не удается распознать ваш отпечаток пальца."</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Вы можете снимать блокировку с помощью часов, когда системе не удается распознать ваше лицо."</string>
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"С помощью фейсконтроля или часов"</string>
@@ -621,7 +620,7 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"Теперь вы можете использовать отпечаток пальца, чтобы снимать блокировку с планшета или подтверждать свою личность, например для входа в приложения и одобрения покупок. \n\nДобавьте отпечаток другого пальца – так вам будет удобно пользоваться этой функцией, как бы вы ни держали планшет."</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"Теперь вы можете использовать отпечаток пальца, чтобы снимать блокировку с устройства или подтверждать свою личность, например для входа в приложения и одобрения покупок.\n\nДобавьте отпечаток другого пальца – так вам будет удобно пользоваться этой функцией, как бы вы ни держали устройство."</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"Теперь вы можете использовать отпечаток пальца, чтобы снимать блокировку с телефона или подтверждать свою личность, например для входа в приложения и одобрения покупок.\n\nДобавьте отпечаток другого пальца – так вам будет удобно пользоваться этой функцией, как бы вы ни держали телефон."</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Всегда разблокировать касанием"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Разблокировать даже при выключенном экране"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Коснитесь сканера, чтобы разблокировать устройство, даже если экран отключен. Это повышает вероятность случайной разблокировки."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Экран, разблокировка"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Не сейчас"</string>
@@ -6019,7 +6018,7 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Номер телефона не указан."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"ОК"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"Разрешить 2G"</string>
-    <string name="enable_2g_summary" msgid="2794534052372565914">"Сеть 2G менее безопасна, однако в некоторых регионах подключение может быть более стабильным. Для экстренных вызовов сеть 2G всегда разрешена."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"Сеть 2G менее безопасна, однако в некоторых местах подключение может быть более стабильным. Для экстренных вызовов сеть 2G всегда разрешена."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Оператору \"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>\" требуется доступ к сети 2G"</string>
     <string name="app_info_all_services_label" msgid="3600929226735860271">"Все сервисы"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Уведомления о доступе к буферу обмена"</string>
@@ -6098,6 +6097,7 @@
     <string name="dream_setup_title" msgid="2458303874255396142">"Выберите заставку"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Выберите, что будет показано на экране, когда планшет подключен к док-станции. Устройство может потреблять больше энергии, если включена заставка."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Настроить"</string>
+    <string name="customize_button_description" msgid="7440248477266126231">"Настроить заставку \"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>\""</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Чтобы включить поддержку создания окон произвольной формы, требуется перезагрузка."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Чтобы принудительно включить режим рабочего стола на дополнительных экранах, требуется перезагрузка."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Перезагрузить сейчас"</string>
