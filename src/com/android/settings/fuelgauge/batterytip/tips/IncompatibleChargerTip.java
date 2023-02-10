@@ -19,7 +19,6 @@ package com.android.settings.fuelgauge.batterytip.tips;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcel;
 import android.util.Log;
 
 import androidx.preference.Preference;
@@ -35,10 +34,6 @@ public final class IncompatibleChargerTip extends BatteryTip {
 
     public IncompatibleChargerTip(@StateType int state) {
         super(TipType.INCOMPATIBLE_CHARGER, state, /* showDialog */ false);
-    }
-
-    private IncompatibleChargerTip(Parcel in) {
-        super(in);
     }
 
     @Override
@@ -89,14 +84,4 @@ public final class IncompatibleChargerTip extends BatteryTip {
         cardPreference.setSecondaryButtonContentDescription(context.getString(
                 R.string.battery_tip_incompatible_charging_content_description));
     }
-
-    public static final Creator CREATOR = new Creator() {
-        public BatteryTip createFromParcel(Parcel in) {
-            return new IncompatibleChargerTip(in);
-        }
-
-        public BatteryTip[] newArray(int size) {
-            return new IncompatibleChargerTip[size];
-        }
-    };
 }

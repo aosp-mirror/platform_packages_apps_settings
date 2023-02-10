@@ -26,9 +26,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.BatteryManager;
 import android.util.Log;
 
 import androidx.preference.Preference;
@@ -66,7 +63,8 @@ public class BatteryDefenderTipTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
         mContext = RuntimeEnvironment.application;
-        mBatteryDefenderTip = new BatteryDefenderTip(BatteryTip.StateType.NEW);
+        mBatteryDefenderTip = new BatteryDefenderTip(BatteryTip.StateType.NEW,
+                false /* isPluggedIn */);
 
         when(mPreference.getContext()).thenReturn(mContext);
         when(mCardPreference.getContext()).thenReturn(mContext);
@@ -133,7 +131,8 @@ public class BatteryDefenderTipTest {
 
     @Test
     public void updatePreference_whenCharging_setPrimaryButtonVisibleToBeTrue() {
-        fakeDeviceIsCharging(true);
+        mBatteryDefenderTip = new BatteryDefenderTip(BatteryTip.StateType.NEW,
+                true /* isPluggedIn */);
 
         mBatteryDefenderTip.updatePreference(mCardPreference);
 
@@ -142,8 +141,6 @@ public class BatteryDefenderTipTest {
 
     @Test
     public void updatePreference_whenNotCharging_setPrimaryButtonVisibleToBeFalse() {
-        fakeDeviceIsCharging(false);
-
         mBatteryDefenderTip.updatePreference(mCardPreference);
 
         verify(mCardPreference).setPrimaryButtonVisible(false);
@@ -158,23 +155,10 @@ public class BatteryDefenderTipTest {
         verify(mCardPreference).setPrimaryButtonVisible(false);
     }
 
-    private void fakeDeviceIsCharging(boolean charging) {
-        int charged = charging ? 1 : 0; // 1 means charging, 0:not charging
-        Intent batteryChangedIntent = new Intent(Intent.ACTION_BATTERY_CHANGED);
-        batteryChangedIntent.putExtra(BatteryManager.EXTRA_PLUGGED, charged);
-
-        Context mockContext = mock(Context.class);
-        when(mockContext.getString(anyInt())).thenReturn("fake_string");
-        when(mCardPreference.getContext()).thenReturn(mockContext);
-        when(mockContext.registerReceiver(eq(null), any(IntentFilter.class)))
-                .thenReturn(batteryChangedIntent);
-    }
-
     private void fakeGetChargingStatusFailed() {
         Context mockContext = mock(Context.class);
         when(mockContext.getString(anyInt())).thenReturn("fake_string");
         when(mCardPreference.getContext()).thenReturn(mockContext);
-        when(mockContext.registerReceiver(eq(null), any(IntentFilter.class))).thenReturn(null);
     }
 
     private String getLastErrorLog() {

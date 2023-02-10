@@ -228,7 +228,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             return;
         }
 
-        SwitchPreference alwaysOnPreference = new SwitchPreference(getPrefContext());
+        var alwaysOnPreference = new SwitchPreference(getPrefContext());
         alwaysOnPreference.setTitle(
                 R.string.accessibility_screen_magnification_always_on_title);
         alwaysOnPreference.setSummary(
@@ -237,9 +237,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 MagnificationAlwaysOnPreferenceController.PREF_KEY);
         generalCategory.addPreference(alwaysOnPreference);
 
-        MagnificationAlwaysOnPreferenceController alwaysOnPreferenceController =
-                new MagnificationAlwaysOnPreferenceController(
-                        getContext(), MagnificationAlwaysOnPreferenceController.PREF_KEY);
+        var alwaysOnPreferenceController = new MagnificationAlwaysOnPreferenceController(
+                getContext(), MagnificationAlwaysOnPreferenceController.PREF_KEY);
         getSettingsLifecycle().addObserver(alwaysOnPreferenceController);
         alwaysOnPreferenceController.displayPreference(getPreferenceScreen());
         addPreferenceController(alwaysOnPreferenceController);
@@ -348,7 +347,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             AccessibilitySettingsContentObserver contentObserver) {
         super.registerKeysToObserverCallback(contentObserver);
 
-        List<String> keysToObserve = List.of(
+        var keysToObserve = List.of(
             Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED,
             Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED
         );
