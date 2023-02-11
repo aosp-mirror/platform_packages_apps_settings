@@ -217,6 +217,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         addPreferenceController(mFollowTypingPreferenceController);
 
         addAlwaysOnSetting(generalCategory);
+        addJoystickSetting(generalCategory);
     }
 
     private void addAlwaysOnSetting(PreferenceCategory generalCategory) {
@@ -242,6 +243,34 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         getSettingsLifecycle().addObserver(alwaysOnPreferenceController);
         alwaysOnPreferenceController.displayPreference(getPreferenceScreen());
         addPreferenceController(alwaysOnPreferenceController);
+    }
+
+    private void addJoystickSetting(PreferenceCategory generalCategory) {
+        if (!DeviceConfig.getBoolean(
+                DeviceConfig.NAMESPACE_WINDOW_MANAGER,
+                "MagnificationJoystick__enable_magnification_joystick",
+                false
+        )) {
+            return;
+        }
+
+        SwitchPreference joystickPreference = new SwitchPreference(getPrefContext());
+        joystickPreference.setTitle(
+                R.string.accessibility_screen_magnification_joystick_title);
+        joystickPreference.setSummary(
+                R.string.accessibility_screen_magnification_joystick_summary);
+        joystickPreference.setKey(
+                MagnificationJoystickPreferenceController.PREF_KEY);
+        generalCategory.addPreference(joystickPreference);
+
+        MagnificationJoystickPreferenceController joystickPreferenceController =
+                new MagnificationJoystickPreferenceController(
+                        getContext(),
+                        MagnificationJoystickPreferenceController.PREF_KEY
+                );
+        getSettingsLifecycle().addObserver(joystickPreferenceController);
+        joystickPreferenceController.displayPreference(getPreferenceScreen());
+        addPreferenceController(joystickPreferenceController);
     }
 
     @Override
@@ -349,7 +378,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
         var keysToObserve = List.of(
             Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED,
-            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED
+            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED,
+            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_JOYSTICK_ENABLED
         );
         contentObserver.registerKeysToObserverCallback(keysToObserve,
                 key -> updatePreferencesState());
