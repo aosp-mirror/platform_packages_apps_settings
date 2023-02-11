@@ -88,8 +88,7 @@
     <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="6983939010814873996"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="6983939010814873996"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="6983939010814873996"></string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v3_message (2145273491174234191) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_v3_message" msgid="2145273491174234191">"Gunakan sidik jari untuk membuka kunci <xliff:g id="DEVICENAME">%s</xliff:g> atau memverifikasi diri Anda, seperti saat login ke aplikasi atau menyetujui pembelian"</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="5101253231118659496">"Izinkan anak Anda menggunakan sidik jari untuk membuka kunci ponsel atau memverifikasi dirinya. Hal ini dilakukan saat dia login ke aplikasi, menyetujui pembelian, dan lainnya."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="3063978167545799342">"Izinkan anak Anda menggunakan sidik jarinya untuk membuka kunci tablet atau memverifikasi dirinya. Hal ini dilakukan saat dia login ke aplikasi, menyetujui pembelian, dan lainnya."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="4399560001732497632">"Izinkan anak Anda menggunakan sidik jarinya untuk membuka kunci perangkat atau memverifikasi dirinya. Hal ini dilakukan saat dia login ke aplikasi, menyetujui pembelian, dan lainnya."</string>
@@ -279,9 +278,6 @@
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="236339248261391160">"Aplikasi Anda menggunakan baterai secara normal. Jika aplikasi terlalu banyak menggunakan daya baterai, tablet Anda akan menyarankan beberapa tindakan.\n\nAnda selalu dapat mengaktifkan Penghemat Baterai jika daya baterai hampir habis."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="7885502661524685786">"Aplikasi Anda menggunakan baterai secara normal. Jika aplikasi terlalu banyak menggunakan daya baterai, perangkat Anda akan menyarankan beberapa tindakan.\n\nAnda selalu dapat mengaktifkan Penghemat Baterai jika daya baterai hampir habis."</string>
     <string name="smart_battery_summary" product="default" msgid="1210637215867635435">"Batasi baterai untuk aplikasi yang tidak sering digunakan"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="5575448894010064508">"Penghemat Baterai nonaktif saat daya ponsel terisi lebih dari <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="3691094425050449325">"Penghemat Baterai nonaktif saat daya tablet terisi lebih dari <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="183319530239501162">"Penghemat Baterai nonaktif saat daya perangkat terisi lebih dari <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_screen_footer_since_last_full_charge" product="default" msgid="6975198602070957876">"Jumlah penggunaan sebanding dengan penggunaan baterai sejak terakhir kali baterai terisi penuh dan data penggunaan tidak diukur saat ponsel mengisi daya"</string>
     <string name="battery_usage_screen_footer_since_last_full_charge" product="tablet" msgid="6849106636898562108">"Jumlah penggunaan sebanding dengan penggunaan baterai sejak terakhir kali baterai terisi penuh dan data penggunaan tidak diukur saat tablet mengisi daya"</string>
     <string name="battery_usage_screen_footer_since_last_full_charge" product="device" msgid="2576593281687022333">"Jumlah penggunaan sebanding dengan penggunaan baterai sejak terakhir kali baterai terisi penuh dan data penggunaan tidak diukur saat perangkat mengisi daya"</string>
@@ -327,22 +323,13 @@
     <string name="no_5g_in_dsds_text" product="device" msgid="2081735896122371350">"Saat menggunakan 2 SIM, perangkat ini akan dibatasi ke 4G. "<annotation id="url">"Pelajari lebih lanjut"</annotation></string>
     <string name="reset_internet_text" product="default" msgid="8672305377652449075">"Tindakan ini akan mengakhiri panggilan telepon"</string>
     <string name="reset_internet_text" product="tablet" msgid="8672305377652449075">"Tindakan ini akan mengakhiri panggilan telepon"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_details_frp (8795084788352126815) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_details_frp (1816846183732787701) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_details_frp (7897925268003690167) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_details_frp (2027547169650312092) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_details_frp (8264086895022779707) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_details_frp (1654340132011802578) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_details_frp (1465326741724776281) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_details_frp (1333164951750797865) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_details_frp (116667646012224967) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="8795084788352126815">"Ponsel direset ke setelan pabrik. Untuk menggunakan ponsel ini, masukkan pola sebelumnya."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="1816846183732787701">"Tablet direset ke setelan pabrik. Untuk menggunakan tablet ini, masukkan pola sebelumnya."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="7897925268003690167">"Perangkat direset ke setelan pabrik. Untuk menggunakan perangkat ini, masukkan pola sebelumnya."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2027547169650312092">"Ponsel direset ke setelan pabrik. Untuk menggunakan ponsel ini, masukkan PIN sebelumnya."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8264086895022779707">"Tablet direset ke setelan pabrik. Untuk menggunakan tablet ini, masukkan PIN sebelumnya."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1654340132011802578">"Perangkat direset ke setelan pabrik. Untuk menggunakan perangkat ini, masukkan PIN sebelumnya."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="1465326741724776281">"Ponsel direset ke setelan pabrik. Untuk menggunakan ponsel ini, masukkan sandi sebelumnya."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="1333164951750797865">"Tablet direset ke setelan pabrik. Untuk menggunakan tablet ini, masukkan sandi sebelumnya."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="116667646012224967">"Perangkat direset ke setelan pabrik. Untuk menggunakan perangkat ini, masukkan sandi sebelumnya."</string>
 </resources>
