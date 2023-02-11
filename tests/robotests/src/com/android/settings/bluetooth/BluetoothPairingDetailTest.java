@@ -30,6 +30,7 @@ import android.os.Bundle;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.widget.FooterPreference;
 
@@ -43,6 +44,8 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 
+import java.util.Collections;
+
 @RunWith(RobolectricTestRunner.class)
 public class BluetoothPairingDetailTest {
     @Rule
@@ -52,6 +55,8 @@ public class BluetoothPairingDetailTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private LocalBluetoothManager mLocalManager;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private CachedBluetoothDeviceManager mDeviceManager;
     private BluetoothPairingDetail mFragment;
     private BluetoothProgressCategory mAvailableDevicesCategory;
     private FooterPreference mFooterPreference;
@@ -69,9 +74,11 @@ public class BluetoothPairingDetailTest {
                 .findPreference(BluetoothPairingDetail.KEY_AVAIL_DEVICES);
         doReturn(mFooterPreference).when(mFragment)
                 .findPreference(BluetoothPairingDetail.KEY_FOOTER_PREF);
+        doReturn(Collections.emptyList()).when(mDeviceManager).getCachedDevicesCopy();
 
         mFragment.mBluetoothAdapter = mBluetoothAdapter;
         mFragment.mLocalManager = mLocalManager;
+        mFragment.mCachedDeviceManager = mDeviceManager;
         mFragment.mDeviceListGroup = mAvailableDevicesCategory;
         mFragment.onViewCreated(mFragment.getView(), Bundle.EMPTY);
     }

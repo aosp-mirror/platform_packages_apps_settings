@@ -17,12 +17,9 @@
 package com.android.settings.regionalpreferences;
 
 import android.content.Context;
-import android.os.LocaleList;
 
 import com.android.settings.core.BasePreferenceController;
-
-import java.util.Locale;
-import java.util.StringJoiner;
+import com.android.settings.localepicker.LocaleFeatureProviderImpl;
 
 /** A controller for the entry of Numbering System's page */
 public class NumberingSystemController extends BasePreferenceController {
@@ -50,12 +47,6 @@ public class NumberingSystemController extends BasePreferenceController {
 
     @Override
     public CharSequence getSummary() {
-        LocaleList localeList = LocaleList.getDefault();
-        StringJoiner stringJoiner = new StringJoiner(", ");
-        for (int i = 0; i < localeList.size(); i++) {
-            Locale locale = localeList.get(i);
-            stringJoiner.add(locale.stripExtensions().getDisplayName(locale));
-        }
-        return stringJoiner.toString();
+        return new LocaleFeatureProviderImpl().getLocaleNames();
     }
 }

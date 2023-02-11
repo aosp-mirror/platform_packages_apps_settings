@@ -74,6 +74,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
+import org.robolectric.shadows.ShadowToast;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -111,6 +112,16 @@ public class FingerprintEnrollEnrollingTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest();
+    }
+
+    @Test
+    public void fingerprintMultiWindowMode() {
+        initializeActivityWithoutCreate(TYPE_UDFPS_OPTICAL);
+        when(mActivity.isInMultiWindowMode()).thenReturn(true);
+        createActivity();
+
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.dock_multi_instances_not_supported_text));
     }
 
     @Test
@@ -438,7 +449,7 @@ public class FingerprintEnrollEnrollingTest {
         assertThat(appliedThemes.contains("SetupWizardPartnerResource")).isTrue();
     }
 
-    private void initializeActivityFor(int sensorType) {
+    private void initializeActivityWithoutCreate(int sensorType) {
         final List<ComponentInfoInternal> componentInfo = new ArrayList<>();
         final FingerprintSensorPropertiesInternal prop =
                 new FingerprintSensorPropertiesInternal(
@@ -449,8 +460,6 @@ public class FingerprintEnrollEnrollingTest {
                         sensorType,
                         true /* resetLockoutRequiresHardwareAuthToken */);
         final ArrayList<FingerprintSensorPropertiesInternal> props = new ArrayList<>();
-        final Bundle savedInstanceState = new Bundle();
-        savedInstanceState.putInt(KEY_STATE_PREVIOUS_ROTATION, Surface.ROTATION_90);
         props.add(prop);
         when(mFingerprintManager.getSensorPropertiesInternal()).thenReturn(props);
         mContext = spy(RuntimeEnvironment.application);
@@ -483,9 +492,19 @@ public class FingerprintEnrollEnrollingTest {
             }
             doReturn(true).when(mSidecar).isEnrolling();
         }
+    }
+
+    private void createActivity() {
+        final Bundle savedInstanceState = new Bundle();
+        savedInstanceState.putInt(KEY_STATE_PREVIOUS_ROTATION, Surface.ROTATION_90);
 
         ActivityController.of(mActivity).create(savedInstanceState);
         mTheme = mActivity.getTheme();
+    }
+
+    private void initializeActivityFor(int sensorType) {
+        initializeActivityWithoutCreate(sensorType);
+        createActivity();
     }
 
     private EnrollmentCallback verifyAndCaptureEnrollmentCallback() {
