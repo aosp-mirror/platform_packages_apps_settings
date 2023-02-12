@@ -437,7 +437,7 @@ public class Settings extends SettingsActivity {
         }
     }
 
-    /** Actviity to manage apps with {@link android.Manifest.permission#RUN_LONG_JOBS} */
+    /** Actviity to manage apps with {@link android.Manifest.permission#RUN_USER_INITIATED_JOBS} */
     public static class LongBackgroundTasksActivity extends SettingsActivity { /* empty */ }
     /** App specific version of {@link LongBackgroundTasksActivity} */
     public static class LongBackgroundTasksAppActivity extends SettingsActivity { /* empty */ }
