@@ -47,7 +47,6 @@ import androidx.appcompat.app.AlertDialog;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.network.SubscriptionUtil;
-import com.android.settingslib.DeviceInfoUtils;
 
 import com.google.common.collect.ImmutableMap;
 
@@ -184,7 +183,7 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
         phoneTitle.setVisibility(info.isOpportunistic() ? View.GONE : View.VISIBLE);
 
         final TextView phoneNumber = view.findViewById(R.id.number_value);
-        final String pn = DeviceInfoUtils.getBidiFormattedPhoneNumber(getContext(), info);
+        final String pn = SubscriptionUtil.getBidiFormattedPhoneNumber(getContext(), info);
         if (!TextUtils.isEmpty(pn)) {
             phoneNumber.setText(pn);
         }
