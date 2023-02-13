@@ -965,7 +965,7 @@ public class MobileNetworkUtils {
      */
     public static CharSequence getPreferredStatus(boolean isRtlMode, Context context,
             boolean isPreferredCallStatus, List<SubscriptionInfoEntity> entityList) {
-        if (entityList != null || !entityList.isEmpty()) {
+        if (entityList != null && !entityList.isEmpty()) {
             final StringBuilder summary = new StringBuilder();
             for (SubscriptionInfoEntity subInfo : entityList) {
                 int subsSize = entityList.size();
