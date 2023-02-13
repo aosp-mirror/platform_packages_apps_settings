@@ -81,7 +81,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         implements OnMainSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost,
         AdbClearKeysDialogHost, LogPersistDialogHost,
         BluetoothRebootDialog.OnRebootDialogListener,
-        AbstractBluetoothPreferenceController.Callback {
+        AbstractBluetoothPreferenceController.Callback, BluetoothSnoopLogHost {
 
     private static final String TAG = "DevSettingsDashboard";
 
@@ -396,6 +396,18 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     @Override
+    public void onSettingChanged() {
+        final BluetoothSnoopLogFilterProfileMapPreferenceController controllerMap =
+                getDevelopmentOptionsController(
+                        BluetoothSnoopLogFilterProfileMapPreferenceController.class);
+        final BluetoothSnoopLogFilterProfilePbapPreferenceController controllerPbap =
+                getDevelopmentOptionsController(
+                        BluetoothSnoopLogFilterProfilePbapPreferenceController.class);
+        controllerMap.onSettingChanged();
+        controllerPbap.onSettingChanged();
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         boolean handledResult = false;
         for (AbstractPreferenceController controller : mPreferenceControllers) {
@@ -513,7 +525,11 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new LocalBackupPasswordPreferenceController(context));
         controllers.add(new StayAwakePreferenceController(context, lifecycle));
         controllers.add(new HdcpCheckingPreferenceController(context));
-        controllers.add(new BluetoothSnoopLogPreferenceController(context));
+        controllers.add(new BluetoothSnoopLogPreferenceController(context, fragment));
+        controllers.add(new DefaultLaunchPreferenceController(context,
+                "snoop_logger_filters_dashboard"));
+        controllers.add(new BluetoothSnoopLogFilterProfilePbapPreferenceController(context));
+        controllers.add(new BluetoothSnoopLogFilterProfileMapPreferenceController(context));
         controllers.add(new OemUnlockPreferenceController(context, activity, fragment));
         controllers.add(new PictureColorModePreferenceController(context, lifecycle));
         controllers.add(new WebViewAppPreferenceController(context));
