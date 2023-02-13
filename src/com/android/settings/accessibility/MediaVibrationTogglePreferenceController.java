@@ -19,6 +19,7 @@ package com.android.settings.accessibility;
 import android.content.Context;
 
 import com.android.settings.accessibility.MediaVibrationIntensityPreferenceController.MediaVibrationPreferenceConfig;
+import com.android.settings.R;
 
 /** Preference controller for alarm vibration with only a toggle for on/off states. */
 public class MediaVibrationTogglePreferenceController extends VibrationTogglePreferenceController {
@@ -29,6 +30,7 @@ public class MediaVibrationTogglePreferenceController extends VibrationTogglePre
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mContext.getResources().getBoolean(R.bool.config_media_vibration_supported) ?
+                AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 }
