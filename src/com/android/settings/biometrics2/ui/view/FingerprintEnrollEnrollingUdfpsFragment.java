@@ -107,7 +107,7 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
     private boolean mIsAccessibilityEnabled;
 
     private final View.OnClickListener mOnSkipClickListener =
-            (v) -> mEnrollingViewModel.onSkipButtonClick();
+            (v) -> mEnrollingViewModel.onCancelledDueToOnSkipPressed();
     private final Observer<EnrollmentProgress> mProgressObserver = progress -> {
         // TODO
     };

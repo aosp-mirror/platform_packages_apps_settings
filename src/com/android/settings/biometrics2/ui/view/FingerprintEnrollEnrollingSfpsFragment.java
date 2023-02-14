@@ -113,7 +113,7 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
     private boolean mHaveShownSfpsRightEdgeLottie;
 
     private final View.OnClickListener mOnSkipClickListener =
-            (v) -> mEnrollingViewModel.onSkipButtonClick();
+            (v) -> mEnrollingViewModel.onCancelledDueToOnSkipPressed();
     private final Observer<EnrollmentProgress> mProgressObserver = progress -> {
         // TODO
     };
