@@ -91,6 +91,8 @@ public class BatteryDiffData {
     private static void purgeBatteryDiffData(
             final PowerUsageFeatureProvider featureProvider,
             final List<BatteryDiffEntry> entries) {
+        final double screenOnTimeThresholdInMs =
+                featureProvider.getBatteryUsageListScreenOnTimeThresholdInMs();
         final double consumePowerThreshold =
                 featureProvider.getBatteryUsageListConsumePowerThreshold();
         final Set<Integer> hideSystemComponentSet = featureProvider.getHideSystemComponentSet();
@@ -100,10 +102,12 @@ public class BatteryDiffData {
         final Iterator<BatteryDiffEntry> iterator = entries.iterator();
         while (iterator.hasNext()) {
             final BatteryDiffEntry entry = iterator.next();
+            final long screenOnTimeInMs = entry.mScreenOnTimeInMs;
             final double comsumePower = entry.mConsumePower;
             final String packageName = entry.getPackageName();
             final Integer componentId = entry.mBatteryHistEntry.mDrainType;
-            if (comsumePower < consumePowerThreshold
+            if ((screenOnTimeInMs < screenOnTimeThresholdInMs
+                    && comsumePower < consumePowerThreshold)
                     || ConvertUtils.FAKE_PACKAGE_NAME.equals(packageName)
                     || hideSystemComponentSet.contains(componentId)
                     || (packageName != null && hideApplicationSet.contains(packageName))) {

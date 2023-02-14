@@ -14,34 +14,43 @@
  * limitations under the License.
  */
 
-package com.android.settings.nearby;
+package com.android.settings.development.snooplogger;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.app.Instrumentation;
 import android.app.settings.SettingsEnums;
 
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.platform.app.InstrumentationRegistry;
+import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(AndroidJUnit4.class)
-public class FastPairSettingsFragmentTest {
+@RunWith(RobolectricTestRunner.class)
+public class SnoopLoggerFiltersDashboardTest {
 
-    private FastPairSettingsFragment mFragment;
+    private SnoopLoggerFiltersDashboard mDashboard;
 
     @Before
     public void setUp() {
-        final Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
-        instrumentation.runOnMainSync(() -> mFragment = new FastPairSettingsFragment());
+        mDashboard = new SnoopLoggerFiltersDashboard();
     }
 
     @Test
-    public void getCategoryKey_isNetwork() {
-        assertThat(mFragment.getMetricsCategory())
-                .isEqualTo(SettingsEnums.CONNECTION_DEVICE_ADVANCED_FAST_PAIR);
+    public void shouldNotHaveHelpResource() {
+        assertThat(mDashboard.getHelpResource()).isEqualTo(0);
+    }
+
+    @Test
+    public void shouldLogAsSnoopLoggerFiltersPage() {
+        assertThat(mDashboard.getMetricsCategory())
+                .isEqualTo(SettingsEnums.SETTINGS_SNOOP_LOGGER_DASHBOARD);
+    }
+
+    @Test
+    public void shouldUseSnoopLoggerFiltersPreferenceLayout() {
+        assertThat(mDashboard.getPreferenceScreenResId())
+                .isEqualTo(R.xml.snoop_logger_filters_settings);
     }
 }
