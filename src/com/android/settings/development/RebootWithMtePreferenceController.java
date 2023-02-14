@@ -17,32 +17,35 @@
 package com.android.settings.development;
 
 import android.content.Context;
+import android.os.SystemProperties;
 import android.text.TextUtils;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.security.MemtagHelper;
-import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
-public class RebootWithMtePreferenceController extends DeveloperOptionsPreferenceController
+public class RebootWithMtePreferenceController extends BasePreferenceController
         implements PreferenceControllerMixin {
-
     private static final String KEY_REBOOT_WITH_MTE = "reboot_with_mte";
 
-    private final DevelopmentSettingsDashboardFragment mFragment;
+    private Fragment mFragment;
 
-    public RebootWithMtePreferenceController(
-            Context context, DevelopmentSettingsDashboardFragment fragment) {
-        super(context);
-        mFragment = fragment;
+    public RebootWithMtePreferenceController(Context context) {
+        super(context, KEY_REBOOT_WITH_MTE);
     }
 
     @Override
-    public boolean isAvailable() {
-        return android.os.SystemProperties.getBoolean("ro.arm64.memtag.bootctl_supported", false);
+    public int getAvailabilityStatus() {
+        return DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)
+                        && SystemProperties.getBoolean("ro.arm64.memtag.bootctl_supported", false)
+                ? BasePreferenceController.AVAILABLE
+                : BasePreferenceController.UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -62,6 +65,10 @@ public class RebootWithMtePreferenceController extends DeveloperOptionsPreferenc
     @Override
     public String getPreferenceKey() {
         return KEY_REBOOT_WITH_MTE;
+    }
+
+    public void setFragment(Fragment fragment) {
+        mFragment = fragment;
     }
 
     @Override

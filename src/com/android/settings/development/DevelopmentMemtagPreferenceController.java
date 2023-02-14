@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2022 The Android Open Source Project
-
+ * Copyright (C) 2023 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,36 +14,44 @@
  * limitations under the License.
  */
 
-package com.android.settings.security;
+package com.android.settings.development;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.content.Context;
+import android.os.SystemProperties;
 
-import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.security.MemtagHelper;
+import com.android.settings.security.MemtagRebootDialog;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
-public class MemtagPreferenceController extends TogglePreferenceController {
+public class DevelopmentMemtagPreferenceController extends TogglePreferenceController {
     private Preference mPreference;
-    private Fragment mFragment;
+    private DashboardFragment mFragment;
 
-    public MemtagPreferenceController(Context context, String key) {
+    public DevelopmentMemtagPreferenceController(Context context, String key) {
         super(context, key);
     }
 
-    public void setFragment(Fragment fragment) {
+    public void setFragment(DashboardFragment fragment) {
         mFragment = fragment;
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return MemtagHelper.getAvailabilityStatus();
+        return DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)
+                        && SystemProperties.getBoolean("ro.arm64.memtag.bootctl_supported", false)
+                ? BasePreferenceController.AVAILABLE
+                : BasePreferenceController.UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -61,16 +68,17 @@ public class MemtagPreferenceController extends TogglePreferenceController {
         if (isChecked != MemtagHelper.isOn()) {
             int msg =
                     isChecked
-                            ? R.string.memtag_reboot_message_on
-                            : R.string.memtag_reboot_message_off;
+                            ? R.string.development_memtag_reboot_message_on
+                            : R.string.development_memtag_reboot_message_off;
             MemtagRebootDialog.show(mContext, mFragment, msg);
         }
+        mFragment.forceUpdatePreferences();
         return true;
     }
 
     @Override
     public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_security;
+        return R.string.menu_key_system;
     }
 
     @Override
