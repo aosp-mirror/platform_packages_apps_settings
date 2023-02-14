@@ -17,7 +17,7 @@
 package com.android.settings.inputmethod;
 
 import android.content.Context;
-import android.hardware.input.InputManager;
+import android.hardware.input.InputSettings;
 
 import androidx.preference.PreferenceScreen;
 
@@ -26,13 +26,10 @@ import com.android.settings.widget.SeekBarPreference;
 
 public class TrackpadPointerSpeedPreferenceController extends SliderPreferenceController {
 
-    private InputManager mIm;
     private SeekBarPreference mPreference;
 
     public TrackpadPointerSpeedPreferenceController(Context context, String key) {
         super(context, key);
-
-        mIm = context.getSystemService(InputManager.class);
     }
 
     @Override
@@ -55,22 +52,22 @@ public class TrackpadPointerSpeedPreferenceController extends SliderPreferenceCo
         if (position < getMin() || position > getMax()) {
             return false;
         }
-        mIm.setTouchpadPointerSpeed(mContext, position);
+        InputSettings.setTouchpadPointerSpeed(mContext, position);
         return true;
     }
 
     @Override
     public int getSliderPosition() {
-        return mIm.getTouchpadPointerSpeed(mContext);
+        return InputSettings.getTouchpadPointerSpeed(mContext);
     }
 
     @Override
     public int getMin() {
-        return InputManager.MIN_POINTER_SPEED;
+        return InputSettings.MIN_POINTER_SPEED;
     }
 
     @Override
     public int getMax() {
-        return InputManager.MAX_POINTER_SPEED;
+        return InputSettings.MAX_POINTER_SPEED;
     }
 }
