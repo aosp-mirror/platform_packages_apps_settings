@@ -111,15 +111,15 @@ public class AccessibilityButtonPreviewPreferenceController extends BasePreferen
             final int opacity = (int) (Settings.Secure.getFloat(mContentResolver,
                     Settings.Secure.ACCESSIBILITY_FLOATING_MENU_OPACITY, DEFAULT_OPACITY) * 100);
             final int floatingMenuIconId = (size == SMALL_SIZE)
-                    ? R.drawable.accessibility_button_preview_small_floating_menu
-                    : R.drawable.accessibility_button_preview_large_floating_menu;
+                    ? R.drawable.a11y_button_preview_small_floating_menu
+                    : R.drawable.a11y_button_preview_large_floating_menu;
             mIllustrationPreference.setImageDrawable(
                     getAccessibilityPreviewDrawable(floatingMenuIconId, opacity));
         } else if (AccessibilityUtil.isGestureNavigateEnabled(mContext)) {
             mIllustrationPreference.setImageDrawable(mContext.getDrawable(
                     AccessibilityUtil.isTouchExploreEnabled(mContext)
-                            ? R.drawable.accessibility_button_preview_three_finger
-                            : R.drawable.accessibility_button_preview_two_finger));
+                            ? R.drawable.a11y_button_preview_three_finger
+                            : R.drawable.a11y_button_preview_two_finger));
         } else {
             mIllustrationPreference.setImageDrawable(
                     mContext.getDrawable(R.drawable.accessibility_button_navigation));
