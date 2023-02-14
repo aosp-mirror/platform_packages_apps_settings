@@ -139,7 +139,7 @@ public class FlashNotificationsUtilTest {
 
     @Test
     public void getScreenColor_azureColor_returnAzure() throws Exception {
-        assertThat(getScreenColor(0x4D0000FF)).isEqualTo(ScreenFlashNotificationColor.AZURE);
+        assertThat(getScreenColor(0x660080FF)).isEqualTo(ScreenFlashNotificationColor.AZURE);
     }
 
     @Test

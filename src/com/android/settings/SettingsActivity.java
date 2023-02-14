@@ -466,7 +466,8 @@ public class SettingsActivity extends SettingsBaseActivity
             if (userInfo.isManagedProfile()) {
                 trampolineIntent.setClass(this, DeepLinkHomepageActivityInternal.class)
                         .putExtra(EXTRA_USER_HANDLE, getUser());
-                startActivityAsUser(trampolineIntent, um.getPrimaryUser().getUserHandle());
+                startActivityAsUser(trampolineIntent,
+                        um.getProfileParent(userInfo.id).getUserHandle());
             } else {
                 startActivity(trampolineIntent);
             }
