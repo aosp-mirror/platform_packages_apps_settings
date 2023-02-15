@@ -155,8 +155,10 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         boolean activityEmbedded = isActivityEmbedded();
         if (icicle != null) {
             mHighlightMixin = icicle.getParcelable(SAVED_HIGHLIGHT_MIXIN);
-            mScrollNeeded = !mHighlightMixin.isActivityEmbedded() && activityEmbedded;
-            mHighlightMixin.setActivityEmbedded(activityEmbedded);
+            if (mHighlightMixin != null) {
+                mScrollNeeded = !mHighlightMixin.isActivityEmbedded() && activityEmbedded;
+                mHighlightMixin.setActivityEmbedded(activityEmbedded);
+            }
         }
         if (mHighlightMixin == null) {
             mHighlightMixin = new TopLevelHighlightMixin(activityEmbedded);
