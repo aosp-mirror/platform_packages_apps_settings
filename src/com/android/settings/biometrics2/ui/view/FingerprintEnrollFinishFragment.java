@@ -26,7 +26,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.android.settings.R;
@@ -36,37 +35,23 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 
-
 /**
  * Fragment which concludes fingerprint enrollment.
  */
 public class FingerprintEnrollFinishFragment extends Fragment {
 
-    private static final String TAG = FingerprintEnrollFinishFragment.class.getSimpleName();
-
-    private FingerprintEnrollFinishViewModel mFingerprintEnrollFinishViewModel;
-    private boolean mCanAssumeSfps;
-
-    private View mView;
-    private FooterBarMixin mFooterBarMixin;
+    private FingerprintEnrollFinishViewModel mViewModel;
 
     private final View.OnClickListener mAddButtonClickListener =
-            (v) -> mFingerprintEnrollFinishViewModel.onAddButtonClick();
+            (v) -> mViewModel.onAddButtonClick();
     private final View.OnClickListener mNextButtonClickListener =
-            (v) -> mFingerprintEnrollFinishViewModel.onNextButtonClick();
+            (v) -> mViewModel.onNextButtonClick();
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        final FragmentActivity activity = getActivity();
-        final ViewModelProvider provider = new ViewModelProvider(activity);
-        mFingerprintEnrollFinishViewModel = provider.get(FingerprintEnrollFinishViewModel.class);
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mCanAssumeSfps = mFingerprintEnrollFinishViewModel.canAssumeSfps();
+        final ViewModelProvider provider = new ViewModelProvider(getActivity());
+        mViewModel = provider.get(FingerprintEnrollFinishViewModel.class);
     }
 
     @Nullable
@@ -74,55 +59,45 @@ public class FingerprintEnrollFinishFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
 
-        if (mCanAssumeSfps) {
-            mView = inflater.inflate(R.layout.sfps_enroll_finish, container, false);
-        } else {
-            mView = inflater.inflate(R.layout.fingerprint_enroll_finish, container, false);
-        }
+        GlifLayout view = (GlifLayout) inflater.inflate(
+                mViewModel.canAssumeSfps()
+                        ? R.layout.sfps_enroll_finish
+                        : R.layout.fingerprint_enroll_finish,
+                container,
+                false);
 
         final Activity activity = getActivity();
-        final GlifLayoutHelper glifLayoutHelper = new GlifLayoutHelper(activity,
-                (GlifLayout) mView);
+        final GlifLayoutHelper glifLayoutHelper = new GlifLayoutHelper(activity, view);
 
         glifLayoutHelper.setHeaderText(R.string.security_settings_fingerprint_enroll_finish_title);
-        glifLayoutHelper.setDescriptionText(
-                R.string.security_settings_fingerprint_enroll_finish_v2_message);
-
-        final int maxEnrollments = mFingerprintEnrollFinishViewModel.getMaxFingerprints();
-        final int enrolled = mFingerprintEnrollFinishViewModel.getNumOfEnrolledFingerprintsSize();
-        if (mCanAssumeSfps) {
-            if (enrolled < maxEnrollments) {
-                glifLayoutHelper.setDescriptionText(R.string
-                        .security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message);
-            }
+        if (mViewModel.canAssumeSfps() && mViewModel.isAnotherFingerprintEnrollable()) {
+            glifLayoutHelper.setDescriptionText(getString(R.string
+                    .security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message));
+        } else {
+            glifLayoutHelper.setDescriptionText(getString(
+                    R.string.security_settings_fingerprint_enroll_finish_v2_message));
         }
 
-        mFooterBarMixin = ((GlifLayout) mView).getMixin(FooterBarMixin.class);
-        mFooterBarMixin.setSecondaryButton(
-                new FooterButton.Builder(getActivity())
-                        .setText(R.string.fingerprint_enroll_button_add)
-                        .setButtonType(FooterButton.ButtonType.SKIP)
-                        .setTheme(R.style.SudGlifButton_Secondary)
-                        .build()
-        );
-
-        mFooterBarMixin.setPrimaryButton(
-                new FooterButton.Builder(getActivity())
-                        .setText(R.string.security_settings_fingerprint_enroll_done)
+        final FooterBarMixin footerBarMixin = view.getMixin(FooterBarMixin.class);
+        footerBarMixin.setPrimaryButton(
+                new FooterButton.Builder(activity)
+                        .setText(mViewModel.getRequest().isSuw()
+                                ? R.string.next_label
+                                : R.string.security_settings_fingerprint_enroll_done)
                         .setListener(mNextButtonClickListener)
                         .setButtonType(FooterButton.ButtonType.NEXT)
                         .setTheme(R.style.SudGlifButton_Primary)
                         .build()
         );
-
-        FooterButton addButton = mFooterBarMixin.getSecondaryButton();
-        if (enrolled >= maxEnrollments) {
-            addButton.setVisibility(View.INVISIBLE);
-        } else {
-            addButton.setOnClickListener(mAddButtonClickListener);
+        if (mViewModel.isAnotherFingerprintEnrollable()) {
+            footerBarMixin.setSecondaryButton(new FooterButton.Builder(activity)
+                    .setText(R.string.fingerprint_enroll_button_add)
+                    .setListener(mAddButtonClickListener)
+                    .setButtonType(FooterButton.ButtonType.SKIP)
+                    .setTheme(R.style.SudGlifButton_Secondary)
+                    .build());
         }
 
-        return mView;
+        return view;
     }
-
 }

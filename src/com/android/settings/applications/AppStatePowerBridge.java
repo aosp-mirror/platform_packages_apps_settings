@@ -43,14 +43,14 @@ public class AppStatePowerBridge extends AppStateBaseBridge {
         final int N = apps.size();
         for (int i = 0; i < N; i++) {
             AppEntry app = apps.get(i);
-            app.extraInfo = mBackend.isAllowlisted(app.info.packageName)
+            app.extraInfo = mBackend.isAllowlisted(app.info.packageName, app.info.uid)
                     ? Boolean.TRUE : Boolean.FALSE;
         }
     }
 
     @Override
     protected void updateExtraInfo(AppEntry app, String pkg, int uid) {
-        app.extraInfo = mBackend.isAllowlisted(pkg) ? Boolean.TRUE : Boolean.FALSE;
+        app.extraInfo = mBackend.isAllowlisted(pkg, uid) ? Boolean.TRUE : Boolean.FALSE;
     }
 
     public static final AppFilter FILTER_POWER_ALLOWLISTED = new CompoundFilter(

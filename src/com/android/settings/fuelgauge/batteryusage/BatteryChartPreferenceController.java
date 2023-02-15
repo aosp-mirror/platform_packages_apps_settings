@@ -440,7 +440,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             return selectedHourText;
         }
 
-        return String.format("%s %s", selectedDayText, selectedHourText);
+        return mContext.getString(
+                R.string.battery_usage_day_and_hour, selectedDayText, selectedHourText);
     }
 
     private String getAccessibilityAnnounceMessage() {
@@ -666,8 +667,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             }
             return index == timestamps.size() - 1
                     ? generateText(timestamps, index)
-                    : String.format("%s%s%s", generateText(timestamps, index),
-                    mIs24HourFormat ? "-" : " - ", generateText(timestamps, index + 1));
+                    : mContext.getString(R.string.battery_usage_timestamps_hyphen,
+                            generateText(timestamps, index), generateText(timestamps, index + 1));
         }
 
         public HourlyChartLabelTextGenerator setLatestTimestamp(Long latestTimestamp) {

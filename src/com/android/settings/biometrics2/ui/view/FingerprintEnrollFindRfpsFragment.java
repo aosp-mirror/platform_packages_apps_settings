@@ -21,6 +21,7 @@ import static android.view.View.OnClickListener;
 
 import android.app.Activity;
 import android.content.Context;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,6 +38,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.android.settings.R;
 import com.android.settings.biometrics.fingerprint.FingerprintFindSensorAnimation;
 import com.android.settings.biometrics2.ui.model.EnrollmentProgress;
+import com.android.settings.biometrics2.ui.model.EnrollmentStatusMessage;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFindSensorViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollProgressViewModel;
 
@@ -64,7 +66,7 @@ public class FingerprintEnrollFindRfpsFragment extends Fragment {
     private static final String TAG = "FingerprintEnrollFindRfpsFragment";
 
     private FingerprintEnrollFindSensorViewModel mViewModel;
-    private FingerprintEnrollProgressViewModel mPorgressViewModel;
+    private FingerprintEnrollProgressViewModel mProgressViewModel;
 
     private View mView;
     private GlifLayout mGlifLayout;
@@ -77,7 +79,21 @@ public class FingerprintEnrollFindRfpsFragment extends Fragment {
             Log.d(TAG, "mProgressObserver(" + progress + ")");
         }
         if (progress != null && !progress.isInitialStep()) {
-            mViewModel.onStartButtonClick();
+            stopLookingForFingerprint(true);
+        }
+    };
+
+    private final Observer<EnrollmentStatusMessage> mLastCancelMessageObserver = errorMessage -> {
+        if (DEBUG) {
+            Log.d(TAG, "mErrorMessageObserver(" + errorMessage + ")");
+        }
+        if (errorMessage != null) {
+            if (errorMessage.getMsgId() == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
+                mProgressViewModel.clearProgressLiveData();
+                mViewModel.onStartButtonClick();
+            } else {
+                Log.e(TAG, "mErrorMessageObserver(" + errorMessage + ")");
+            }
         }
     };
 
@@ -151,39 +167,46 @@ public class FingerprintEnrollFindRfpsFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
+        final boolean isEnrolling = mProgressViewModel.isEnrolling();
         if (DEBUG) {
-            Log.d(TAG, "onStop(), stop looking for fingerprint, animation exist:"
+            Log.d(TAG, "onStop(), current enrolling: " + isEnrolling + ", animation exist:"
                     + (mAnimation != null));
         }
-        stopLookingForFingerprint();
+        if (isEnrolling) {
+            stopLookingForFingerprint(false);
+        }
     }
 
     private void startLookingForFingerprint() {
-        if (mPorgressViewModel.isEnrolling()) {
+        if (mProgressViewModel.isEnrolling()) {
             Log.d(TAG, "startLookingForFingerprint(), failed because isEnrolling is true before"
                     + " starting");
             return;
         }
 
-        mPorgressViewModel.clearProgressLiveData();
-        mPorgressViewModel.getProgressLiveData().observe(this, mProgressObserver);
-        final boolean startResult = mPorgressViewModel.startEnrollment(ENROLL_FIND_SENSOR);
+        final boolean startResult = mProgressViewModel.startEnrollment(ENROLL_FIND_SENSOR);
         if (!startResult) {
             Log.e(TAG, "startLookingForFingerprint(), failed to start enrollment");
         }
+        mProgressViewModel.getProgressLiveData().observe(this, mProgressObserver);
     }
 
-    private void stopLookingForFingerprint() {
-        if (!mPorgressViewModel.isEnrolling()) {
+    private void stopLookingForFingerprint(boolean waitForLastCancelErrMsg) {
+        if (!mProgressViewModel.isEnrolling()) {
             Log.d(TAG, "stopLookingForFingerprint(), failed because isEnrolling is false before"
                     + " stopping");
             return;
         }
 
-        mPorgressViewModel.getProgressLiveData().removeObserver(mProgressObserver);
-        final boolean cancelResult = mPorgressViewModel.cancelEnrollment();
+        mProgressViewModel.getProgressLiveData().removeObserver(mProgressObserver);
+        final boolean cancelResult = mProgressViewModel.cancelEnrollment();
         if (!cancelResult) {
             Log.e(TAG, "stopLookingForFingerprint(), failed to cancel enrollment");
+        }
+
+        if (waitForLastCancelErrMsg) {
+            mProgressViewModel.getErrorMessageLiveData().observe(this,
+                    mLastCancelMessageObserver);
         }
     }
 
@@ -203,7 +226,7 @@ public class FingerprintEnrollFindRfpsFragment extends Fragment {
         final FragmentActivity activity = getActivity();
         final ViewModelProvider provider = new ViewModelProvider(activity);
         mViewModel = provider.get(FingerprintEnrollFindSensorViewModel.class);
-        mPorgressViewModel = provider.get(FingerprintEnrollProgressViewModel.class);
+        mProgressViewModel = provider.get(FingerprintEnrollProgressViewModel.class);
         super.onAttach(context);
     }
 }

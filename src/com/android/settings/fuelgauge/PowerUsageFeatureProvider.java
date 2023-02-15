@@ -36,6 +36,11 @@ public interface PowerUsageFeatureProvider {
     boolean isBatteryUsageEnabled();
 
     /**
+     * Returns a threshold (in milliseconds) for the minimal screen on time in battery usage list
+     */
+    double getBatteryUsageListScreenOnTimeThresholdInMs();
+
+    /**
      * Returns a threshold (mA) for the minimal comsume power in battery usage list
      */
     double getBatteryUsageListConsumePowerThreshold();

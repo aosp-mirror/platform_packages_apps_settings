@@ -4080,6 +4080,18 @@
     <string name="experimental_category_title">Experimental</string>
     <!-- Title for feature flags dashboard where developers can turn on experimental features [CHAR LIMIT=50] -->
     <string name="feature_flags_dashboard_title">Feature flags</string>
+    <!-- Title for snoop logger filters dashboard where developers can turn on filters [CHAR LIMIT=50] -->
+    <string name="snoop_logger_filters_dashboard_title">Snoop Logger Filters</string>
+    <!-- Summary for the snoop logger filters [CHAR LIMIT=50] -->
+    <string name="bt_hci_snoop_log_filters_dashboard_summary">Set filters (Toggle Bluetooth after changing this setting)</string>
+    <!-- Title for the snoop logger pbap filter [CHAR LIMIT=50] -->
+    <string name="bt_hci_snoop_log_filter_pbap_title">Snoop Logger Filter PBAP</string>
+    <!-- Title for the snoop logger map filter [CHAR LIMIT=50] -->
+    <string name="bt_hci_snoop_log_filter_map_title">Snoop Logger Filter MAP</string>
+    <!-- Summary for the snoop logger filters [CHAR LIMIT=50] -->
+    <string name="bt_hci_snoop_log_filter_summary">Set filtering mode. (Toggle Bluetooth after changing this setting)</string>
+    <!-- Summary for the snoop logger profile filters while disabled [CHAR LIMIT=50] -->
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary">Enable Snoop Log Mode Filtered to change this option.</string>
     <!-- Title for the Talkback Accessibility Service. Displayed on the Accessibility Settings screen in Setup Wizard. [CHAR_LIMIT=25] -->
     <string name="talkback_title">Talkback</string>
     <!-- Summary for the Talkback Accessibility Service. Lets the user know that Talkback is a screenreader and that it is usually most helpful to blind and low vision users and whether the service is on. [CHAR_LIMIT=none] -->
@@ -4100,6 +4112,14 @@
     <string name="accessibility_screen_magnification_follow_typing_title">Magnify typing</string>
     <!-- Summary for accessibility follow typing preference for magnification. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_follow_typing_summary">Magnifier follows text as you type</string>
+    <!-- Title for accessibility magnifier preference where the magnifier never turns off on its own. [CHAR LIMIT=35] -->
+    <string name="accessibility_screen_magnification_always_on_title">Always On</string>
+    <!-- Summary for accessibility magnifier preference where the magnifier never turns off on its own. [CHAR LIMIT=none] -->
+    <string name="accessibility_screen_magnification_always_on_summary">Instead of deactivating magnification when changing apps, it simply zooms out to normal size. Pinch to zoom back in whenever you want.</string>
+    <!-- Title for accessibility on-screen joystick controller preference that controls magnification position. [CHAR LIMIT=35] -->
+    <string name="accessibility_screen_magnification_joystick_title">Joystick</string>
+    <!-- Summary for accessibility on-screen joystick controller preference that controls magnification position. [CHAR LIMIT=none] -->
+    <string name="accessibility_screen_magnification_joystick_summary">Activate and move the magnifier with an on-screen joystick. Tap and hold, then drag on the joystick to control the magnifier. Tap and drag to move the joystick itself.</string>
     <!-- Title for screen magnification footer. [CHAR LIMIT=60] -->
     <string name="accessibility_screen_magnification_about_title">About magnification</string>
     <!-- Screen magnification footer link content description [CHAR LIMIT=NONE] -->
@@ -4541,6 +4561,8 @@
     <!-- Title for the hearing device pairing preference. [CHAR LIMIT=20] -->
     <string name="accessibility_hearing_device_pairing_title">Pair new device</string>
     <!-- Title for the preference category containing the connected hearing device group. [CHAR LIMIT=20]-->
+    <string name="accessibility_hearing_device_connected_title">Hearing devices</string>
+    <!-- Title for the preference category containing the previously connected hearing device group. [CHAR LIMIT=20]-->
     <string name="accessibility_hearing_device_saved_title">Saved devices</string>
     <!-- Title for the preference category containing the controls of the hearing device. [CHAR LIMIT=35] -->
     <string name="accessibility_hearing_device_control">Hearing device controls</string>
@@ -4555,7 +4577,7 @@
     <!-- Title for the pair hearing device page. [CHAR LIMIT=25] -->
     <string name="accessibility_hearing_device_pairing_page_title">Pair hearing device</string>
     <!-- Title for the preference category containing the list of the available hearing during and after bluetooth scanning devices. [CHAR LIMIT=30] -->
-    <string name="accessibility_found_hearing_devices">Available devices</string>
+    <string name="accessibility_found_hearing_devices">Available hearing devices</string>
     <!-- Title for the preference category containing the all bluetooth devices during and after bluetooth scanning devices. Used when people can not find their hearing device in hearing device pairing list. [CHAR LIMIT=45] -->
     <string name="accessibility_found_all_devices">Don\u2019t see your hearing device?</string>
     <!-- Title for listing all bluetooth devices preference in the accessibility page. [CHAR LIMIT=40] -->
@@ -4818,19 +4840,6 @@
     <!-- List of synonyms used in the settings search bar to find the “Voice Access”. [CHAR LIMIT=NONE] -->
     <string name="keywords_voice_access"></string>
 
-    <!-- Fast Pair settings -->
-    <skip />
-
-    <!-- Title in main settings screen for Fast Pair settings [CHAR LIMIT=15] -->
-    <string name="fast_pair_settings">Fast Pair</string>
-
-    <!-- Fast Pair setting summary in settings screen [CHAR LIMIT=50] -->
-    <string name="fast_pair_settings_summary">Nearby detection of Fast Pair bluetooth devices.</string>
-    <!-- Title for Fast Pair main switch preferences. [CHAR LIMIT=50] -->
-    <string name="fast_pair_main_switch_title">Scan for nearby devices</string>
-    <!-- Title for Fast Pair saved devices preferences. [CHAR LIMIT=50] -->
-    <string name="fast_pair_saved_devices_title">Saved devices</string>
-    <!-- Printing settings -->
     <skip />
 
     <!-- Title in main settings screen for printing settings [CHAR LIMIT=15] -->
@@ -5239,6 +5248,9 @@
     <!-- Battery Saver: Title for sticky battery saver preference [CHAR_LIMIT=60] -->
     <string name="battery_saver_sticky_title_new">Turn off when charged</string>
 
+    <!-- Battery Saver: Description for sticky battery saver preference [CHAR_LIMIT=NONE] -->
+    <string name="battery_saver_sticky_description_new">Battery Saver turns off when battery reaches <xliff:g id="battery_percentage" example="80%">%1$s</xliff:g></string>
+
     <!-- Battery saver: Label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
     <string name="battery_saver_seekbar_title"><xliff:g id="percent">%1$s</xliff:g></string>
 
@@ -5294,6 +5306,10 @@
     <string name="battery_usage_screen_footer_empty">Battery usage data will be available in a few hours once fully charged</string>
     <!-- [CHAR_LIMIT=NONE] Battery chart label for the current time. -->
     <string name="battery_usage_chart_label_now">now</string>
+    <!-- [CHAR_LIMIT=NONE] A hyphen for two timestamps. For example, "6 AM - 8 AM", which means "from 6 AM to 8 AM". Please notice the spaces around the hyphen -->
+    <string name="battery_usage_timestamps_hyphen"><xliff:g id="from_timestamp">%1$s</xliff:g> - <xliff:g id="to_timestamp">%2$s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] The first slot is a week day (e.g. "Monday"); the second slot is a hourly time span (e.g. "6 AM - 8 AM"). -->
+    <string name="battery_usage_day_and_hour"><xliff:g id="day">%1$s</xliff:g> <xliff:g id="hour">%2$s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Accessibility content description for battery chart view. -->
     <string name="battery_usage_chart">Battery usage chart</string>
     <!-- [CHAR_LIMIT=NONE] Accessibility content description for daily battery chart view. -->
@@ -6440,6 +6456,7 @@
     <string name="help_url_privacy_dashboard" translatable="false"></string>
 
     <string name="help_url_memtag" translatable="false"></string>
+    <string name="help_url_development_memtag" translatable="false"></string>
     <string name="help_url_network_dashboard" translatable="false"></string>
     <string name="help_url_connected_devices" translatable="false"></string>
     <string name="help_url_apps_and_notifications" translatable="false"></string>
@@ -6463,6 +6480,8 @@
     <string name="help_url_timeout" translatable="false"></string>
     <!-- Help URL, Accessibility Color Inversion [DO NOT TRANSLATE] -->
     <string name="help_url_color_inversion" translatable="false"></string>
+    <!-- Help URL, Accessibility Flash Notification [DO NOT TRANSLATE] -->
+    <string name="help_url_flash_notifications" translatable="false"></string>
     <string name="help_url_system_dashboard" translatable="false"></string>
     <string name="help_url_double_tap_screen" translatable="false"></string>
     <string name="help_url_account_detail" translatable="false"></string>
@@ -6865,9 +6884,6 @@
 
     <!-- List of synonyms for the Bluetooth setting, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_bluetooth_settings">connected, device, headphones, headset, speaker, wireless, pair, earbuds, music, media </string>
-
-    <!-- List of synonyms for the Fast Pair setting, used to match in settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_fast_pair">pair, earbuds, bluetooth</string>
 
     <!-- List of synonyms for the Wallpaper picker setting, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_wallpaper">background, theme, grid, customize, personalize</string>
@@ -8564,11 +8580,11 @@
     <!-- Label for list that shows all permissions -->
     <string name="app_permissions">Permission manager</string>
 
-    <!-- Label for the list that shows all data sharing updates. TODO b/261914980 finalize string [CHAR LIMIT=30]-->
-    <string name="app_data_sharing_updates_title">Data sharing updates</string>
+    <!-- Title for the entrypoint that navigates to the App Data Sharing Updates page. [CHAR LIMIT=70]-->
+    <string name="app_data_sharing_updates_title">Data sharing updates for location</string>
 
-    <!-- Label for the list that shows all data sharing updates TODO b/261914980 finalize string [CHAR LIMIT=NONE]-->
-    <string name="app_data_sharing_updates_summary">Show which apps recently updated data sharing policy</string>
+    <!-- Summary for the entrypoint that navigates to the App Data Sharing Updates page. [CHAR LIMIT=130]-->
+    <string name="app_data_sharing_updates_summary">Review apps that changed the way they may share your location data</string>
 
     <!-- Label for tap to wake setting [CHAR LIMIT=30] -->
     <string name="tap_to_wake">Tap to wake</string>
@@ -8718,6 +8734,10 @@
     <string name="usb_use_photo_transfers">PTP</string>
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
+         is for using the device as a Webcam. -->
+    <string name="usb_use_uvc_webcam">Webcam</string>
+    <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
+         select what the USB connection for this device should be used for. This choice
          is for transcoding the files that are transferred via MTP. -->
     <string name="usb_transcode_files">Convert videos to AVC</string>
     <!-- The summary text that appears when the user enables the 'Convert videos to AVC' option for
@@ -8781,6 +8801,8 @@
     <string name="usb_summary_photo_transfers">PTP</string>
     <!-- Settings item summary for USB preference when set to entering MIDI mode [CHAR LIMIT=NONE] -->
     <string name="usb_summary_MIDI">MIDI</string>
+    <!-- Settings item summary for USB preference when set to entering UVC mode [CHAR LIMIT=NONE] -->
+    <string name="usb_summary_UVC">Webcam</string>
     <!-- Settings item summary for USB preference when set to transferring files via MTP
           and powering other device [CHAR LIMIT=NONE] -->
     <string name="usb_summary_file_transfers_power">File transfer and supplying power</string>
@@ -8793,6 +8815,9 @@
     <!-- Settings item summary for USB preference when set to entering MIDI mode
          and powering other device [CHAR LIMIT=NONE] -->
     <string name="usb_summary_MIDI_power">MIDI and supplying power</string>
+    <!-- Settings item summary for USB preference when set to entering UVC mode
+         and powering other device [CHAR LIMIT=NONE] -->
+    <string name="usb_summary_UVC_power">Webcam and supplying power</string>
 
     <!-- Settings item title for background check prefs [CHAR LIMIT=35] -->
     <string name="background_check_pref">Background check</string>
@@ -8927,6 +8952,15 @@
     <string name="allow_manage_external_storage_description">Allow this app to read, modify and delete all files on this device or any connected storage volumes. If granted, app may access files without your explicit knowledge.</string>
     <!-- Label for showing apps that can manage external storage[CHAR LIMIT=45] -->
     <string name="filter_manage_external_storage">Can access all files</string>
+
+    <!-- Manage full screen intent permission title [CHAR LIMIT=40] -->
+    <string name="full_screen_intent_title">Manage full screen intents</string>
+
+    <!-- Label for setting that allows apps to send full screen intents. [CHAR LIMIT=NONE] -->
+    <string name="permit_full_screen_intent">Allow apps to send full screen intents</string>
+
+    <!-- Description for setting that allows apps to send full screen intents. [CHAR LIMIT=NONE] -->
+    <string name="footer_description_full_screen_intent">Allow this app to send full screen intent notifications that cover the entire screen.</string>
 
     <!-- Media management apps settings title [CHAR LIMIT=40] -->
     <string name="media_management_apps_title">Media management apps</string>
@@ -9570,7 +9604,7 @@
     <string name="double_twist_for_camera_mode_summary"></string>
 
     <!-- Title text for system navigation [CHAR LIMIT=60] -->
-    <string name="system_navigation_title">System navigation</string>
+    <string name="system_navigation_title">Navigation mode</string>
 
     <!-- Title text for swipe up to switch apps [CHAR LIMIT=60] -->
     <string name="swipe_up_to_switch_apps_title">2-button navigation</string>
@@ -10834,14 +10868,26 @@
 
     <!-- Title for the button to initiate a heap dump for the system server. [CHAR LIMIT=NONE] -->
     <string name="capture_system_heap_dump_title">Capture system heap dump</string>
+
+    <!-- [CHAR LIMIT=32] Name of MTE page in "Developer Options" and heading of page. -->
+    <string name="development_memtag_page_title">Memory Tagging Extension</string>
+    <!-- [CHAR LIMIT=52] Label for button to turn on / off MTE protection.-->
+    <string name="development_memtag_intro">Memory Tagging Extension (MTE) makes it easier to find memory safety issues in your app and make native code in it more secure.</string>
+    <string name="development_memtag_footer">Turning on MTE might cause slower device performance.</string>
+    <string name="development_memtag_learn_more">Learn more about MTE</string>
+    <string name="development_memtag_toggle">Enable MTE until you turn it off</string>
+    <!-- [CHAR LIMIT=NONE] Message shown in dialog prompting user to reboot device to turn on MTE.-->
+    <string name="development_memtag_reboot_message_on">You\u0027ll need to restart your device to turn on MTE.</string>
+    <!-- [CHAR LIMIT=NONE] Message shown in dialog prompting user to reboot device to turn off MTE.-->
+    <string name="development_memtag_reboot_message_off">You\u0027ll need to restart your device to turn off MTE.</string>
     <!-- Title for the button to reboot with MTE enabled. [CHAR LIMIT=NONE] -->
-    <string name="reboot_with_mte_title">Reboot with MTE</string>
-    <string name="reboot_with_mte_message">System will reboot and allow to experiment with Memory Tagging Extension (MTE). MTE may negatively impact system performance and stability. Will be reset on next subsequent reboot.</string>
+    <string name="reboot_with_mte_title">Enable MTE for a single session</string>
+    <string name="reboot_with_mte_message">System will restart and allow to experiment with Memory Tagging Extension (MTE). MTE may negatively impact system performance and stability. Will be reset on next subsequent reboot.</string>
     <!-- Subtext for button if MTE is not enabled through Advanced memory protection. -->
-    <string name="reboot_with_mte_summary">Try MTE for a single boot for app development</string>
+    <string name="reboot_with_mte_summary">Restart for a single session with MTE enabled</string>
     <!-- Subtext for button if MTE is already enabled through Advanced memory protection.
          The string for "Advanced memory protection" needs to match "memtag_toggle" above -->
-    <string name="reboot_with_mte_already_enabled">MTE is enabled through Advanced memory protection</string>
+    <string name="reboot_with_mte_already_enabled">MTE is already enabled</string>
     <!-- Toast that is shown when the user initiates capturing a heap dump for the system server. [CHAR LIMIT=NONE] -->
     <string name="capturing_system_heap_dump_message">Capturing system heap dump</string>
     <!-- Toast that is shown if there's an error capturing the user initiated heap dump. [CHAR LIMIT=NONE] -->
@@ -11708,4 +11754,59 @@
 
     <!-- Accessibility label for fingerprint sensor [CHAR LIMIT=NONE] -->
     <string name="accessibility_fingerprint_label">Fingerprint sensor</string>
+
+    <!-- Accessibility Flash Notification -->
+    <!-- Title of the Flash Notification entry [CHAR LIMIT=NONE] -->
+    <string name="flash_notifications_title">Flash notifications</string>
+    <!-- Summary of the Flash Notification preference if all flash alerts are off. [CHAR LIMIT=60] -->
+    <string name="flash_notifications_summary_off">Off</string>
+    <!-- Summary of the Flash Notification preference if only camera flash is on. [CHAR LIMIT=60] -->
+    <string name="flash_notifications_summary_on_camera">On / camera flash</string>
+    <!-- Summary of the Flash Notification preference if only screen flash is on. [CHAR LIMIT=60] -->
+    <string name="flash_notifications_summary_on_screen">On / screen flash</string>
+    <!-- Summary of the Flash Notification preference if both flash alerts are on. [CHAR LIMIT=60] -->
+    <string name="flash_notifications_summary_on_camera_and_screen">On / camera and screen flash</string>
+    <!-- Introduction in Flash Notification page to introduce flash notifications feature. [CHAR LIMIT=NONE]  -->
+    <string name="flash_notifications_intro">Flash the camera light or the screen when you receive notifications or when alarms sound.</string>
+    <!-- Notes in Flash Notification page footer for something should be aware. [CHAR LIMIT=NONE]  -->
+    <string name="flash_notifications_note">Use flash notifications with caution if your are light sensitive</string>
+    <!-- Label of the button to preview the selected Flash Notification effects. [CHAR LIMIT=20]-->
+    <string name="flash_notifications_preview">Preview</string>
+    <!-- Title of the camera flash in Flash Notification page. [CHAR LIMIT=60] -->
+    <string name="camera_flash_notification_title">Camera flash notification</string>
+    <!-- Title of the screen flash in Flash Notification page. [CHAR LIMIT=60] -->
+    <string name="screen_flash_notification_title">Screen flash notification</string>
+    <!-- Title of the screen flash color selection dialog. [CHAR LIMIT=NONE] -->
+    <string name="screen_flash_notification_color_title">Screen flash color</string>
+    <!-- Label of the color option show in the summary of screen flash preference. [CHAR LIMIT=60] -->
+    <string name="screen_flash_color_blue">Blue</string>
+    <!-- Label of the color option show in the summary of screen flash preference. [CHAR LIMIT=60] -->
+    <string name="screen_flash_color_azure">Azure</string>
+    <!-- Label of the color option show in the summary of screen flash preference. [CHAR LIMIT=60] -->
+    <string name="screen_flash_color_cyan">Cyan</string>
+    <!-- Label of the color option show in the summary of screen flash preference. [CHAR LIMIT=60] -->
+    <string name="screen_flash_color_spring_green">Spring green</string>
+    <!-- Label of the color option show in the summary of screen flash preference. [CHAR LIMIT=60] -->
+    <string name="screen_flash_color_green">Green</string>
+    <!-- Label of the color option show in the summary of screen flash preference. [CHAR LIMIT=60] -->
+    <string name="screen_flash_color_chartreuse_green">Chartreuse green</string>
+    <!-- Label of the color option show in the summary of screen flash preference. [CHAR LIMIT=60] -->
+    <string name="screen_flash_color_yellow">Yellow</string>
+    <!-- Label of the color option show in the summary of screen flash preference. [CHAR LIMIT=60] -->
+    <string name="screen_flash_color_orange">Orange</string>
+    <!-- Label of the color option show in the summary of screen flash preference. [CHAR LIMIT=60] -->
+    <string name="screen_flash_color_red">Red</string>
+    <!-- Label of the color option show in the summary of screen flash preference. [CHAR LIMIT=60] -->
+    <string name="screen_flash_color_rose">Rose</string>
+    <!-- Label of the color option show in the summary of screen flash preference. [CHAR LIMIT=60] -->
+    <string name="screen_flash_color_magenta">Magenta</string>
+    <!-- Label of the color option show in the summary of screen flash preference. [CHAR LIMIT=60] -->
+    <string name="screen_flash_color_violet">Violet</string>
+    <!-- Button to save the selection in screen flash color selection dialog. [CHAR LIMIT=20] -->
+    <string name="color_selector_dialog_done">Done</string>
+    <!-- Button to close the dialog without saving in screen flash color selection dialog. [CHAR LIMIT=20] -->
+    <string name="color_selector_dialog_cancel">Cancel</string>
+
+    <!-- Warning message when we try to dock an app not supporting multiple instances split into multiple sides [CHAR LIMIT=NONE] -->
+    <string name="dock_multi_instances_not_supported_text">"This app can only be opened in 1 window"</string>
 </resources>

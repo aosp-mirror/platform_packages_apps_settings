@@ -114,7 +114,7 @@ public class BatteryTipDialogFragmentTest {
                 new ArrayList<>(restrictApps));
 
         mUnrestrictAppTip = new UnrestrictAppTip(BatteryTip.StateType.NEW, mAppInfo);
-        mDefenderTip = new BatteryDefenderTip(BatteryTip.StateType.NEW);
+        mDefenderTip = new BatteryDefenderTip(BatteryTip.StateType.NEW, false /* isPluggedIn */);
     }
 
     @After

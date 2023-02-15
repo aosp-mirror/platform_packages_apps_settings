@@ -35,6 +35,7 @@ import android.net.Uri;
 
 import com.android.settings.notification.MediaVolumePreferenceController;
 import com.android.settings.notification.RingVolumePreferenceController;
+import com.android.settings.notification.SeparateRingVolumePreferenceController;
 import com.android.settings.notification.VolumeSeekBarPreferenceController;
 import com.android.settingslib.SliceBroadcastRelay;
 
@@ -62,6 +63,7 @@ public class VolumeSliceHelperTest {
     private Intent mIntent;
     private VolumeSeekBarPreferenceController mMediaController;
     private VolumeSeekBarPreferenceController mRingController;
+    private VolumeSeekBarPreferenceController mSeparateRingController;
 
     @Before
     public void setUp() {
@@ -70,6 +72,7 @@ public class VolumeSliceHelperTest {
         when(mContext.getContentResolver()).thenReturn(mResolver);
 
         mMediaController = new MediaVolumePreferenceController(mContext);
+        mSeparateRingController = new SeparateRingVolumePreferenceController(mContext);
         mRingController = new RingVolumePreferenceController(mContext);
 
         mIntent = createIntent(AudioManager.VOLUME_CHANGED_ACTION)
@@ -184,6 +187,43 @@ public class VolumeSliceHelperTest {
         VolumeSliceHelper.onReceive(mContext, mIntent);
 
         verify(mResolver, never()).notifyChange(mMediaController.getSliceUri(), null);
+    }
+
+    @Test
+    public void onReceive_ringStreamVolumeMuted_shouldNotifySeparateRing() {
+        final Intent intent = createIntent(AudioManager.STREAM_MUTE_CHANGED_ACTION)
+                .putExtra(AudioManager.EXTRA_VOLUME_STREAM_TYPE, mRingController.getAudioStream());
+        registerIntentToUri(mRingController);
+        registerIntentToUri(mSeparateRingController);
+
+        VolumeSliceHelper.onReceive(mContext, intent);
+
+        verify(mResolver).notifyChange(mSeparateRingController.getSliceUri(), null);
+    }
+
+    @Test
+    public void onReceive_ringStreamVolumeMuted_shouldNotifyRing() {
+        final Intent intent = createIntent(AudioManager.STREAM_MUTE_CHANGED_ACTION)
+                .putExtra(AudioManager.EXTRA_VOLUME_STREAM_TYPE, mRingController.getAudioStream());
+        registerIntentToUri(mRingController);
+        registerIntentToUri(mSeparateRingController);
+
+        VolumeSliceHelper.onReceive(mContext, intent);
+
+        verify(mResolver).notifyChange(mRingController.getSliceUri(), null);
+    }
+
+    @Test
+    public void onReceive_ringStreamVolumeMuted_shouldNotifyBothRings() {
+        final Intent intent = createIntent(AudioManager.STREAM_MUTE_CHANGED_ACTION)
+                .putExtra(AudioManager.EXTRA_VOLUME_STREAM_TYPE, mRingController.getAudioStream());
+        registerIntentToUri(mRingController);
+        registerIntentToUri(mSeparateRingController);
+
+        VolumeSliceHelper.onReceive(mContext, intent);
+
+        verify(mResolver).notifyChange(mSeparateRingController.getSliceUri(), null);
+        verify(mResolver).notifyChange(mRingController.getSliceUri(), null);
     }
 
     @Test

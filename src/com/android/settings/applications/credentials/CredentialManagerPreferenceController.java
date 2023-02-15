@@ -35,7 +35,6 @@ import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.OutcomeReceiver;
 import android.os.UserHandle;
-import android.service.credentials.CredentialProviderInfo;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
@@ -129,12 +128,10 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             return;
         }
 
-        List<ServiceInfo> services = new ArrayList<>();
-        for (CredentialProviderInfo cpi :
-                CredentialProviderInfo.getAvailableServices(mContext, getUser())) {
-            services.add(cpi.getServiceInfo());
-        }
-        setAvailableServices(lifecycleOwner, services);
+        setAvailableServices(
+                lifecycleOwner,
+                mCredentialManager.getCredentialProviderServices(
+                        getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY));
 
         mCredentialManager.listEnabledProviders(
                 mCancellationSignal,
@@ -293,15 +290,19 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
                         return true;
                     } else {
-                        // Show the confirm disable dialog.
-                        final DialogFragment fragment =
-                                newConfirmationDialogFragment(packageName, title, pref);
+                        // If we are disabling the last enabled provider then show a warning.
+                        if (mEnabledPackageNames.size() <= 1) {
+                            final DialogFragment fragment =
+                                    newConfirmationDialogFragment(packageName, title, pref);
 
-                        if (fragment == null || mFragmentManager == null) {
-                            return true;
+                            if (fragment == null || mFragmentManager == null) {
+                                return true;
+                            }
+
+                            fragment.show(mFragmentManager, ConfirmationDialogFragment.TAG);
+                        } else {
+                            togglePackageNameDisabled(packageName);
                         }
-
-                        fragment.show(mFragmentManager, ConfirmationDialogFragment.TAG);
                     }
 
                     return true;
@@ -334,6 +335,16 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 });
     }
 
+    private @Nullable ErrorDialogFragment newErrorDialogFragment() {
+        DialogHost host =
+                new DialogHost() {
+                    @Override
+                    public void onDialogClick(int whichButton) {}
+                };
+
+        return new ErrorDialogFragment(host);
+    }
+
     private @Nullable ConfirmationDialogFragment newConfirmationDialogFragment(
             @NonNull String packageName,
             @NonNull CharSequence appName,
@@ -355,16 +366,6 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 };
 
         return new ConfirmationDialogFragment(host, packageName, appName);
-    }
-
-    private @Nullable ErrorDialogFragment newErrorDialogFragment() {
-        DialogHost host =
-                new DialogHost() {
-                    @Override
-                    public void onDialogClick(int whichButton) {}
-                };
-
-        return new ErrorDialogFragment(host);
     }
 
     private int getUser() {

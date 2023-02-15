@@ -88,9 +88,7 @@
     <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="6983939010814873996"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="6983939010814873996"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="6983939010814873996"></string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="576075217523281005">"የጣት አሻራዎትን ለምሳሌ ግዢ ሲያጸድቁ አልያም ደግሞ ወደ መተግበሪያዎች ሲገቡ እርስዎ መሆንዎትን ለማረጋገጥ ወይም ጡባዊዎትን ለመክፈት ይጠቀሙበት።"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="2613589252279036009">"የጣት አሻራዎትን ለምሳሌ ግዢ ሲያጸድቁ አልያም ደግሞ ወደ መተግበሪያዎች ሲገቡ እርስዎ መሆንዎትን ለማረጋገጥ ወይም መሣሪያዎትን ለመክፈት ይጠቀሙበት።"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="7582164897191194462">"የጣት አሻራዎትን ለምሳሌ ግዢ ሲያጸድቁ አልያም ደግሞ ወደ መተግበሪያዎች ሲገቡ እርስዎ መሆንዎትን ለማረጋገጥ ወይም ስልክዎትን ለመክፈት ይጠቀሙበት።"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v3_message" msgid="2145273491174234191">"እንደ ወደ መተግበሪያዎች ሲገቡ ወይም ግዢን ሲያጸድቁ የእርስዎን <xliff:g id="DEVICENAME">%s</xliff:g> ለመክፈት ወይም እርስዎ እንደሆኑ ለማረጋገጥ አሻራዎን ይጠቀሙ።"</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="5101253231118659496">"ልጅዎ ስልካቸውን ለመክፈት ወይም እነሱ መሆናቸውን እንዲያረጋግጡ የጣት አሻራቸውን እንዲጠቀሙ ይፍቀዱ። ይህ የሚሆነው ወደ መተግበሪያዎች ሲገቡ፣ ግዢን ሲያጸድቁ እና ሌሎችም ሲያደርጉ ነው"</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="3063978167545799342">"ልጅዎ ጡባዊያቸውን ለመክፈት ወይም እርሳቸው መሆናቸውን ለማረጋገጥ የጣት አሻራቸውን እንዲጠቀሙ ይፍቀዱ። ይህ የሚሆነው ወደ መተግበሪያዎች ሲገቡ፣ ግዢን ሲያጸድቁ እና ሌሎችንም ሲያደርጉ ነው።"</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="4399560001732497632">"ልጅዎ መሣሪያቸውን ለመክፈት ወይም እርሳቸው መሆናቸውን ለማረጋገጥ የጣት አሻራቸውን እንዲጠቀሙ ይፍቀዱ። ይህ የሚሆነው ወደ መተግበሪያዎች ሲገቡ፣ ግዢን ሲያጸድቁ እና ሌሎችንም ሲያደርጉ ነው።"</string>
@@ -127,15 +125,15 @@
     <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="1957425614489669582">"የመሣሪያ ጥበቃ ባህሪያት አይበሩም። ይህ ጡባዊ ቢጠፋ ወይም ቢሰረቅ ሌሎች እንዳይጠቀሙበት መከላከል አይችሉም።"</string>
     <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="7427748422888413977">"የመሣሪያ ጥበቃ ባህሪያት አይበሩም። ይህ መሣሪያ ቢጠፋ ወይም ቢሰረቅ ሌሎች እንዳይጠቀሙበት መከላከል አይችሉም።"</string>
     <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="8970036878014302990">"የመሣሪያ ጥበቃ ባህሪያት አይበሩም። ይህ ስልክ ቢጠፋ ወይም ቢሰረቅ ሌሎች እንዳይጠቀሙበት መከላከል አይችሉም።"</string>
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (2006739081527422127) -->
-    <skip />
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (1209233633252372907) -->
-    <skip />
-    <!-- no translation found for security_settings_sfps_enroll_find_sensor_message (6862493139500275821) -->
-    <skip />
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="2006739081527422127">"የጣት አሻራ ዳሳሹ በማብሪያ/ማጥፊያ ቁልፉ ላይ ነው። በጡባዊው ጫፍ ላይ ከፍ ካለው የድምፅ አዝራር ቀጥሎ ያለው ጠፍጣፋ አዝራር ነው።"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="1209233633252372907">"የጣት አሻራ ዳሳሹ በማብሪያ/ማጥፊያ ቁልፉ ላይ ነው። በመሣሪያው ጫፍ ላይ ከፍ ካለው የድምፅ አዝራር ቀጥሎ ያለው ጠፍጣፋ አዝራር ነው።"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="6862493139500275821">"የጣት አሻራ ዳሳሹ በማብሪያ/ማጥፊያ ቁልፉ ላይ ነው። በስልኩ ጫፍ ላይ ከፍ ካለው የድምፅ አዝራር ቀጥሎ ያለው ጠፍጣፋ አዝራር ነው።"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="2012126789397819713">"አሁን የእርስዎን ጡባዊ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች ሲገቡ ወይም አንድን ግዢ ሲያጸድቁ እርስዎ መሆንዎን ለማረጋገጥ የጣት አሻራዎን መጠቀም ይችላሉ"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="7119860465479161782">"አሁን የእርስዎን መሣሪያ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች በመለያ ሲገቡ ወይም አንድን ግዢ ሲያጸድቁ እርስዎ መሆንዎን ለማረጋገጥ የጣት አሻራዎን መጠቀም ይችላሉ"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="8255422287180693200">"አሁን የእርስዎን ስልክ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች ሲገቡ ወይም አንድን ግዢ ሲያጸድቁ እርስዎ መሆንዎን ለማረጋገጥ የጣት አሻራዎን መጠቀም ይችላሉ"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="7814892482046294464">"አሁን የእርስዎን ጡባዊ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች በመለያ ሲገቡ ወይም አንድን ግዢ ሲያጸድቁ እርስዎ መሆንዎን ለማረጋገጥ የጣት አሻራዎን መጠቀም ይችላሉ። \n\nጡባዊዎን በተለያዩ መንገዶች በሚይዙበት ጊዜ ለመክፈት ቀላል እንዲሆን ሌላ የጣት አሻራ ያክሉ።"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="8418220207105495988">"አሁን የእርስዎን መሣሪያ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች በመለያ ሲገቡ ወይም አንድን ግዢ ሲያጸድቁ እርስዎ መሆንዎን ለማረጋገጥ የጣት አሻራዎን መጠቀም ይችላሉ።\n\nመሣሪያዎን በተለያዩ መንገዶች ሲይዙት ለመክፈት ቀላል እንዲሆን ሌላ የጣት አሻራ ያክሉ።"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="3545300825124248359">"አሁን የእርስዎን ስልክ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች በመለያ ሲገቡ ወይም አንድን ግዢ ሲያጸድቁ እርስዎ መሆንዎን ለማረጋገጥ የጣት አሻራዎን መጠቀም ይችላሉ።\n\nስልክዎን በተለያዩ መንገዶች ሲይዙት ለመክፈት ቀላል እንዲሆን ሌላ የጣት አሻራ ያክሉ።"</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="2125894016330764666">"ጡባዊው ከጠፋ ወይም ከተሰረቀ ፒን ይጠብቀዋል"</string>
     <string name="lock_screen_pattern_skip_message" product="tablet" msgid="7022124791463099454">"ጡባዊው ከጠፋ ወይም ከተሰረቀ ሥርዓተ ጥለት ይጠብቀዋል"</string>
     <string name="lock_screen_password_skip_message" product="tablet" msgid="7117050321575989041">"ጡባዊው ከጠፋ ወይም ከተሰረቀ የይለፍ ቃል ይጠብቀዋል"</string>
@@ -280,9 +278,6 @@
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="236339248261391160">"የእርስዎ መተግበሪያዎች መደበኛ የባትሪ መጠንን በመጠቀም ላይ ናቸው። መተግበሪያዎች ከልክ በላይ ብዙ ባትሪ የሚጠቀሙ ከሆነ፣ የእርስዎ ጡባዊ እርስዎ የሚወስዱዋቸውን እርምጃዎች ጥቆማ ይሰጣል።\n\nባትሪ እየጨረሱ ያሉ ከሆነ ባትሪ ቆጣቢን ሁልጊዜ ማብራት ይችላሉ።"</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="7885502661524685786">"የእርስዎ መተግበሪያዎች መደበኛ የባትሪ መጠንን በመጠቀም ላይ ናቸው። መተግበሪያዎች ከልክ በላይ ብዙ ባትሪ የሚጠቀሙ ከሆነ፣ የእርስዎ መሣሪያ እርስዎ የሚወስዱዋቸውን እርምጃዎች ጥቆማ ይሰጣል።\n\nባትሪ እየጨረሱ ያሉ ከሆነ ባትሪ ቆጣቢን ሁልጊዜ ማብራት ይችላሉ።"</string>
     <string name="smart_battery_summary" product="default" msgid="1210637215867635435">"ብዙውን ጊዜ ለማይጠቀሙባቸው መተግበሪያዎች ባትሪ ይገድቡ"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="5575448894010064508">"የእርስዎ ስልክ ከ<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> በላይ ኃይል ሲሞላ የባትሪ ኃይል ቆጣቢ ይጠፋል"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="3691094425050449325">"የእርስዎ ጡባዊ ከ<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> በላይ ኃይል ሲሞላ የባትሪ ኃይል ቆጣቢ ይጠፋል"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="183319530239501162">"የእርስዎ መሣሪያ ከ<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> በላይ ኃይል ሲሞላ የባትሪ ኃይል ቆጣቢ ይጠፋል"</string>
     <string name="battery_usage_screen_footer_since_last_full_charge" product="default" msgid="6975198602070957876">"የአጠቃቀም ቁጥሮች ከመጨረሻው የኃይል ሙሌት ጀምሮ ከባትሪ አጠቃቀም ጋር ተመጣጣኝ ናቸው እና ስልክ ኃይል በሚሞላበት ጊዜ የአጠቃቀም ውሂብ አይለካም"</string>
     <string name="battery_usage_screen_footer_since_last_full_charge" product="tablet" msgid="6849106636898562108">"የአጠቃቀም ቁጥሮች ከመጨረሻው የኃይል ሙሌት ጀምሮ ከባትሪ አጠቃቀም ጋር ተመጣጣኝ ናቸው እና ጡባዊ ኃይል በሚሞላበት ጊዜ የአጠቃቀም ውሂብ አይለካም"</string>
     <string name="battery_usage_screen_footer_since_last_full_charge" product="device" msgid="2576593281687022333">"የአጠቃቀም ቁጥሮች ከመጨረሻው የኃይል ሙሌት ጀምሮ ከባትሪ አጠቃቀም ጋር ተመጣጣኝ ናቸው እና መሣሪያ ኃይል በሚሞላበት ጊዜ የአጠቃቀም ውሂብ አይለካም"</string>
@@ -328,4 +323,13 @@
     <string name="no_5g_in_dsds_text" product="device" msgid="2081735896122371350">"2 ሲሞችን በሚጠቀሙበት ጊዜ ይህ መሣሪያ በ4ጂ ይገደባል። "<annotation id="url">"የበለጠ ለመረዳት"</annotation></string>
     <string name="reset_internet_text" product="default" msgid="8672305377652449075">"ይህ የስልክ ጥሪዎን ይጨርሳል"</string>
     <string name="reset_internet_text" product="tablet" msgid="8672305377652449075">"ይህ የስልክ ጥሪዎን ይጨርሳል"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="8795084788352126815">"የእርስዎ ስልክ ወደ የፋብሪካ ቅንብሮች ዳግም ተጀምሯል። ይህን ስልክ ለመጠቀም የእርስዎን ቀዳሚ ስርዓተ-ጥለት ያስገቡ።"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="1816846183732787701">"የእርስዎ ጡባዊ ወደ የፋብሪካ ቅንብሮች ዳግም ተጀምሯል። ይህን ጡባዊ ለመጠቀም የእርስዎን ቀዳሚ ስርዓተ ጥለት ያስገቡ።"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="7897925268003690167">"የእርስዎ መሣሪያ ወደ የፋብሪካ ቅንብሮች ዳግም ተጀምሯል። ይህን መሣሪያ ለመጠቀም የእርስዎን ቀዳሚ ስርዓተ ጥለት ያስገቡ።"</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2027547169650312092">"የእርስዎ ስልክ ወደ የፋብሪካ ቅንብሮች ዳግም ተጀምሯል። ይህን ስልክ ለመጠቀም የእርስዎን ቀዳሚ ፒን ያስገቡ።"</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8264086895022779707">"የእርስዎ ጡባዊ ወደ የፋብሪካ ቅንብሮች ዳግም ተጀምሯል። ይህን ጡባዊ ለመጠቀም የእርስዎን ቀዳሚ ፒን ያስገቡ።"</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1654340132011802578">"የእርስዎ መሣሪያ ወደ የፋብሪካ ቅንብሮች ዳግም ተጀምሯል። ይህን መሣሪያ ለመጠቀም የእርስዎን ቀዳሚ ፒን ያስገቡ።"</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="1465326741724776281">"የእርስዎ ስልክ ወደ የፋብሪካ ቅንብሮች ዳግም ተጀምሯል። ይህን ስልክ ለመጠቀም ቀዳሚውን ይለፍ ቃልዎን ያስገቡ።"</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="1333164951750797865">"የእርስዎ ጡባዊ ወደ የፋብሪካ ቅንብሮች ዳግም ተጀምሯል። ይህን ጡባዊ ለመጠቀም የእርስዎን ቀዳሚ የይለፍ ቃል ያስገቡ።"</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="116667646012224967">"የእርስዎ መሣሪያ ወደ የፋብሪካ ቅንብሮች ዳግም ተጀምሯል። ይህን መሣሪያ ለመጠቀም የእርስዎን ቀዳሚ የይለፍ ቃል ያስገቡ።"</string>
 </resources>

@@ -121,11 +121,11 @@ public class SimEidPreferenceController extends BasePreferenceController
 
     @Override
     public CharSequence getSummary() {
-        String summary = mShowEidOnSummary ? mEidStatus.getEid() : null;
-        if (TextUtils.isEmpty(summary)) {
-            summary = mContext.getString(R.string.device_info_protected_single_press);
+        if (!mShowEidOnSummary) {
+            return mContext.getString(R.string.device_info_protected_single_press);
         }
-        return summary;
+        String summary = mEidStatus.getEid();
+        return (summary == null) ? "" : summary;
     }
 
     @Override
@@ -135,7 +135,8 @@ public class SimEidPreferenceController extends BasePreferenceController
         }
         boolean isAvailable = SubscriptionUtil.isSimHardwareVisible(mContext) &&
                 mContext.getSystemService(UserManager.class).isAdminUser() &&
-                !Utils.isWifiOnly(mContext);
+                !Utils.isWifiOnly(mContext) &&
+                ((mEidStatus != null) && !TextUtils.isEmpty(mEidStatus.getEid()));
         return isAvailable ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
@@ -149,15 +150,20 @@ public class SimEidPreferenceController extends BasePreferenceController
                 WindowManager.LayoutParams.FLAG_SECURE);
         dialogShwon.setCanceledOnTouchOutside(false);
 
-        TextView textView = dialogShwon.findViewById(R.id.esim_id_value);
-        textView.setText(PhoneNumberUtil.expandByTts(mEidStatus.getEid()));
-        textView.setTextIsSelectable(true);
+        String eid = mEidStatus.getEid();
+        if (eid != null) {
+            TextView textView = dialogShwon.findViewById(R.id.esim_id_value);
+            textView.setText(PhoneNumberUtil.expandByTts(eid));
+            textView.setTextIsSelectable(true);
 
-        ImageView qrCodeView = dialogShwon.findViewById(R.id.esim_id_qrcode);
-        qrCodeView.setImageBitmap(getEidQRcode(mEidStatus.getEid().toString(),
-                qrCodeView.getWidth()));
-
+            ImageView qrCodeView = dialogShwon.findViewById(R.id.esim_id_qrcode);
+            qrCodeView.setImageBitmap(getEidQRcode(eid, qrCodeView.getWidth()));
+        }
         mShowEidOnSummary = true;
+
+        dialogShwon.setOnDismissListener(dlg -> {
+            mPreference.setSummary(getSummary());
+        });
     }
 
     /**

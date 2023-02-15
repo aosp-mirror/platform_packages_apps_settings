@@ -21,8 +21,6 @@ import static android.hardware.fingerprint.FingerprintManager.ENROLL_FIND_SENSOR
 import static android.hardware.fingerprint.FingerprintManager.EnrollReason;
 import static android.hardware.fingerprint.FingerprintManager.EnrollmentCallback;
 
-import static com.android.settings.biometrics2.ui.model.EnrollmentProgress.INITIAL_STEPS;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -147,24 +145,14 @@ public class FingerprintEnrollProgressViewModelTest {
         EnrollmentProgress progress = mViewModel.getProgressLiveData().getValue();
         assertThat(progress).isNotNull();
         assertThat(progress.getSteps()).isEqualTo(25);
-        // TODO(b/260957933) verify getRemaining() when it is really used
-        //assertThat(progress.getRemaining()).isEqualTo(25);
+        assertThat(progress.getRemaining()).isEqualTo(25);
 
         // Update second progress
         callbackWrapper.mValue.onEnrollmentProgress(20);
         progress = mViewModel.getProgressLiveData().getValue();
         assertThat(progress).isNotNull();
         assertThat(progress.getSteps()).isEqualTo(25);
-        // TODO(b/260957933) verify getRemaining() when it is really used
-        //assertThat(progress.getRemaining()).isEqualTo(20);
-
-        // Clear progress
-        mViewModel.clearProgressLiveData();
-        progress = mViewModel.getProgressLiveData().getValue();
-        assertThat(progress).isNotNull();
-        assertThat(progress.getSteps()).isEqualTo(INITIAL_STEPS);
-        // TODO(b/260957933) verify getRemaining() when it is really used
-        //assertThat(progress.getRemaining()).isEqualTo(INITIAL_REMAINING);
+        assertThat(progress.getRemaining()).isEqualTo(20);
     }
 
     // TODO(b/260957933): FingerprintEnrollProgressViewModel::getErrorLiveData() and

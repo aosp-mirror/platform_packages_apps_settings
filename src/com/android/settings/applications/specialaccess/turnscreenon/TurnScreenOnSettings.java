@@ -170,7 +170,7 @@ public class TurnScreenOnSettings extends EmptyTextSettings {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.SETTINGS_MANAGE_TURN_SCREEN_ON;
+        return SettingsEnums.SETTINGS_TURN_SCREEN_ON_ACCESS;
     }
 
     /**

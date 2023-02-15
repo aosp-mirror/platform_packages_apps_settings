@@ -52,6 +52,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.testutils.XmlTestUtils;
@@ -333,11 +334,11 @@ public class AccessibilitySettingsTest {
     public void testAccessibilityMenuInSystem_IncludedInInteractionControl() {
         mShadowAccessibilityManager.setInstalledAccessibilityServiceList(
                 List.of(getMockAccessibilityServiceInfo(
-                        AccessibilityManager.ACCESSIBILITY_MENU_IN_SYSTEM)));
+                        AccessibilityUtils.ACCESSIBILITY_MENU_IN_SYSTEM)));
         setupFragment();
 
         final RestrictedPreference pref = mFragment.getPreferenceScreen().findPreference(
-                AccessibilityManager.ACCESSIBILITY_MENU_IN_SYSTEM.flattenToString());
+                AccessibilityUtils.ACCESSIBILITY_MENU_IN_SYSTEM.flattenToString());
         final String prefCategory = mFragment.mServicePreferenceToPreferenceCategoryMap.get(
                 pref).getKey();
         assertThat(prefCategory).isEqualTo(AccessibilitySettings.CATEGORY_INTERACTION_CONTROL);
@@ -350,7 +351,7 @@ public class AccessibilitySettingsTest {
         setupFragment();
 
         final RestrictedPreference pref = mFragment.getPreferenceScreen().findPreference(
-                AccessibilityManager.ACCESSIBILITY_MENU_IN_SYSTEM.flattenToString());
+                AccessibilityUtils.ACCESSIBILITY_MENU_IN_SYSTEM.flattenToString());
         assertThat(pref).isNull();
     }
 

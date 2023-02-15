@@ -36,9 +36,13 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.hardware.biometrics.ComponentInfoInternal;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.fingerprint.FingerprintManager;
@@ -48,14 +52,18 @@ import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.Vibrator;
+import android.util.FeatureFlagUtils;
 import android.view.Display;
 import android.view.Surface;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.widget.RingProgressBar;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -66,6 +74,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
+import org.robolectric.shadows.ShadowToast;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -73,12 +82,17 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class FingerprintEnrollEnrollingTest {
+    private static final String ENROLL_PROGRESS_COLOR_LIGHT = "#699FF3";
+    private static final String ENROLL_PROGRESS_COLOR_DARK = "#7DA7F1";
+
 
     @Mock private FingerprintManager mFingerprintManager;
 
     @Mock private Vibrator mVibrator;
 
     @Mock private LottieAnimationView mIllustrationLottie;
+
+    @Mock private ObjectAnimator mHelpAnimation;
 
     @Mock private FingerprintEnrollSidecar mSidecar;
 
@@ -98,6 +112,16 @@ public class FingerprintEnrollEnrollingTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest();
+    }
+
+    @Test
+    public void fingerprintMultiWindowMode() {
+        initializeActivityWithoutCreate(TYPE_UDFPS_OPTICAL);
+        when(mActivity.isInMultiWindowMode()).thenReturn(true);
+        createActivity();
+
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.dock_multi_instances_not_supported_text));
     }
 
     @Test
@@ -181,6 +205,129 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     @Test
+    public void fingerprintUdfpsOverlayEnrollment_showOverlayPortrait() {
+        FeatureFlagUtils.setEnabled(mContext,
+                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+        when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_0);
+
+        final FrameLayout portraitLayoutContainer = mActivity.findViewById(R.id.layout_container);
+        final UdfpsEnrollView udfpsEnrollView =
+                portraitLayoutContainer.findViewById(R.id.udfps_animation_view);
+        assertThat(udfpsEnrollView).isNotNull();
+    }
+
+    @Test
+    public void fingerprintUdfpsOverlayEnrollment_showOverlayLandscape() {
+        FeatureFlagUtils.setEnabled(mContext,
+                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+        when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_90);
+
+        final GlifLayout defaultLayout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final UdfpsEnrollView udfpsEnrollView =
+                defaultLayout.findViewById(R.id.udfps_animation_view);
+        assertThat(udfpsEnrollView).isNotNull();
+    }
+
+    @Test
+    public void fingerprintUdfpsOverlayEnrollment_usesCorrectProgressBarFillColor() {
+        FeatureFlagUtils.setEnabled(mContext,
+                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+        final TypedArray ta = mActivity.obtainStyledAttributes(null,
+                R.styleable.BiometricsEnrollView, R.attr.biometricsEnrollStyle,
+                R.style.BiometricsEnrollStyle);
+        final int progressColor = ta.getColor(
+                R.styleable.BiometricsEnrollView_biometricsEnrollProgress, 0);
+        final ImageView progressBar = mActivity.findViewById(
+                R.id.udfps_enroll_animation_fp_progress_view);
+
+        configureSfpsStageColorTest();
+
+        assertThat(
+                ((UdfpsEnrollProgressBarDrawable) (progressBar.getDrawable()))
+                        .mFillPaint.getColor())
+                .isEqualTo(progressColor);
+    }
+
+    @Test
+    public void forwardEnrollProgressEvents() {
+        FeatureFlagUtils.setEnabled(mContext,
+                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+
+        EnrollListener listener = new EnrollListener(mActivity);
+        mActivity.onEnrollmentProgressChange(20, 10);
+        assertThat(listener.mProgress).isTrue();
+        assertThat(listener.mHelp).isFalse();
+        assertThat(listener.mAcquired).isFalse();
+        assertThat(listener.mPointerUp).isFalse();
+        assertThat(listener.mPointerDown).isFalse();
+    }
+
+    @Test
+    public void forwardEnrollHelpEvents() {
+        FeatureFlagUtils.setEnabled(mContext,
+                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+
+        EnrollListener listener = new EnrollListener(mActivity);
+        mActivity.onEnrollmentHelp(20, "test enrollment help");
+        assertThat(listener.mProgress).isFalse();
+        assertThat(listener.mHelp).isTrue();
+        assertThat(listener.mAcquired).isFalse();
+        assertThat(listener.mPointerUp).isFalse();
+        assertThat(listener.mPointerDown).isFalse();
+    }
+
+    @Test
+    public void forwardEnrollAcquiredEvents() {
+        FeatureFlagUtils.setEnabled(mContext,
+                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+
+        EnrollListener listener = new EnrollListener(mActivity);
+        mActivity.onEnrollmentProgressChange(20, 10);
+        mActivity.onAcquired(false);
+        assertThat(listener.mProgress).isTrue();
+        assertThat(listener.mHelp).isFalse();
+        assertThat(listener.mAcquired).isTrue();
+        assertThat(listener.mPointerUp).isFalse();
+        assertThat(listener.mPointerDown).isFalse();
+    }
+
+    @Test
+    public void forwardEnrollPointerDownEvents() {
+        FeatureFlagUtils.setEnabled(mContext,
+                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+
+        EnrollListener listener = new EnrollListener(mActivity);
+        mActivity.onPointerDown(0);
+        assertThat(listener.mProgress).isFalse();
+        assertThat(listener.mHelp).isFalse();
+        assertThat(listener.mAcquired).isFalse();
+        assertThat(listener.mPointerUp).isFalse();
+        assertThat(listener.mPointerDown).isTrue();
+    }
+
+    @Test
+    public void forwardEnrollPointerUpEvents() {
+        FeatureFlagUtils.setEnabled(mContext,
+                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+
+        EnrollListener listener = new EnrollListener(mActivity);
+        mActivity.onPointerUp(0);
+        assertThat(listener.mProgress).isFalse();
+        assertThat(listener.mHelp).isFalse();
+        assertThat(listener.mAcquired).isFalse();
+        assertThat(listener.mPointerUp).isTrue();
+        assertThat(listener.mPointerDown).isFalse();
+    }
+
+    @Test
     public void fingerprintSfpsEnroll_PlaysAllAnimationsAssetsCorrectly() {
         initializeActivityFor(TYPE_POWER_BUTTON);
 
@@ -210,6 +357,15 @@ public class FingerprintEnrollEnrollingTest {
         verify(mIllustrationLottie, times(5)).setAnimation(lottieAssetCaptor.capture());
         List<Integer> observedLottieAssetOrder = lottieAssetCaptor.getAllValues();
         assertThat(observedLottieAssetOrder).isEqualTo(expectedLottieAssetOrder);
+    }
+
+    @Test
+    public void fingerprintSfpsEnrollHelpAnimation() {
+        initializeActivityFor(TYPE_POWER_BUTTON);
+        ReflectionHelpers.setField(mActivity, "mHelpAnimation", mHelpAnimation);
+        mActivity.onEnrollmentHelp(0 /* helpMsgId */, "Test help message" /* helpString */);
+
+        verify(mHelpAnimation).start();
     }
 
     // SFPS_STAGE_CENTER is first stage with progress bar colors, starts at steps=25, remaining=25
@@ -273,6 +429,14 @@ public class FingerprintEnrollEnrollingTest {
 
         final String appliedThemes = mTheme.toString();
         assertThat(appliedThemes.contains("SetupWizardPartnerResource")).isTrue();
+
+        final Configuration config = mContext.getResources().getConfiguration();
+        final boolean isDarkThemeOn = (config.uiMode & Configuration.UI_MODE_NIGHT_MASK)
+                == Configuration.UI_MODE_NIGHT_YES;
+        final int currentColor = mContext.getColor(R.color.udfps_enroll_progress);
+        assertThat(currentColor).isEqualTo(Color.parseColor(isDarkThemeOn
+                ? ENROLL_PROGRESS_COLOR_DARK : ENROLL_PROGRESS_COLOR_LIGHT));
+
     }
 
     @Test
@@ -285,7 +449,7 @@ public class FingerprintEnrollEnrollingTest {
         assertThat(appliedThemes.contains("SetupWizardPartnerResource")).isTrue();
     }
 
-    private void initializeActivityFor(int sensorType) {
+    private void initializeActivityWithoutCreate(int sensorType) {
         final List<ComponentInfoInternal> componentInfo = new ArrayList<>();
         final FingerprintSensorPropertiesInternal prop =
                 new FingerprintSensorPropertiesInternal(
@@ -296,8 +460,6 @@ public class FingerprintEnrollEnrollingTest {
                         sensorType,
                         true /* resetLockoutRequiresHardwareAuthToken */);
         final ArrayList<FingerprintSensorPropertiesInternal> props = new ArrayList<>();
-        final Bundle savedInstanceState = new Bundle();
-        savedInstanceState.putInt(KEY_STATE_PREVIOUS_ROTATION, Surface.ROTATION_90);
         props.add(prop);
         when(mFingerprintManager.getSensorPropertiesInternal()).thenReturn(props);
         mContext = spy(RuntimeEnvironment.application);
@@ -330,9 +492,19 @@ public class FingerprintEnrollEnrollingTest {
             }
             doReturn(true).when(mSidecar).isEnrolling();
         }
+    }
+
+    private void createActivity() {
+        final Bundle savedInstanceState = new Bundle();
+        savedInstanceState.putInt(KEY_STATE_PREVIOUS_ROTATION, Surface.ROTATION_90);
 
         ActivityController.of(mActivity).create(savedInstanceState);
         mTheme = mActivity.getTheme();
+    }
+
+    private void initializeActivityFor(int sensorType) {
+        initializeActivityWithoutCreate(sensorType);
+        createActivity();
     }
 
     private EnrollmentCallback verifyAndCaptureEnrollmentCallback() {
@@ -347,5 +519,44 @@ public class FingerprintEnrollEnrollingTest {
                         eq(FingerprintManager.ENROLL_ENROLL));
 
         return callbackCaptor.getValue();
+    }
+
+    private static class EnrollListener implements  UdfpsEnrollHelper.Listener {
+        private final FingerprintEnrollEnrolling mActivity;
+        private boolean mProgress = false;
+        private boolean mHelp = false;
+        private boolean mAcquired = false;
+        private boolean mPointerDown = false;
+        private boolean mPointerUp = false;
+
+        EnrollListener(FingerprintEnrollEnrolling activity) {
+            mActivity = activity;
+            mActivity.mUdfpsEnrollHelper.setListener(this);
+        }
+
+        @Override
+        public void onEnrollmentProgress(int remaining, int totalSteps) {
+            mProgress = true;
+        }
+
+        @Override
+        public void onEnrollmentHelp(int remaining, int totalSteps) {
+            mHelp = true;
+        }
+
+        @Override
+        public void onAcquired(boolean animateIfLastStepGood) {
+            mAcquired = true;
+        }
+
+        @Override
+        public void onPointerDown(int sensorId) {
+            mPointerDown = true;
+        }
+
+        @Override
+        public void onPointerUp(int sensorId) {
+            mPointerUp = true;
+        }
     }
 }

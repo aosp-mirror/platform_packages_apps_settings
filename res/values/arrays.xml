@@ -105,18 +105,6 @@
         <item>1800000</item>
     </string-array>
 
-    <!-- NOTE: if you change this, you must also add the corresponding scale key and lookup table to
-         frameworks/base/core/java/android/content/res/FontScaleLookupTableFactory.java -->
-    <string-array name="entryvalues_font_size" translatable="false">
-        <item>0.85</item>
-        <item>1.0</item>
-        <item>1.15</item>
-        <item>1.30</item>
-        <item>1.50</item>
-        <item>1.80</item>
-        <item>2.0</item>
-    </string-array>
-
     <!-- Wi-Fi settings -->
 
     <!-- Match this with the order of NetworkInfo.DetailedState. --> <skip />
@@ -263,6 +251,23 @@
         <item>3</item>
         <item>4</item>
         <item>5</item>
+    </string-array>
+
+    <!-- Bluetooth audio routing settings: Titles for audio routing options -->
+    <string-array name="bluetooth_audio_routing_titles">
+        <item>Decide automatically</item>
+        <item>Play on hearing device</item>
+        <item>Play on phone speaker</item>
+    </string-array>
+
+    <!-- Bluetooth audio routing settings: Values for audio routing options -->
+    <string-array name="bluetooth_audio_routing_values" translatable="false">
+        <!-- Decide automatically -->
+        <item>0</item>
+        <!-- Play on hearing device -->
+        <item>1</item>
+        <!-- Play on phone speaker -->
+        <item>2</item>
     </string-array>
 
     <!-- Match this with drawable.wifi_signal. --> <skip />
@@ -1105,6 +1110,10 @@
         <item>"0"</item>
     </string-array>
 
+    <string-array name="enabled_networks_except_gsm_3g_values" translatable="false">
+        <item>"9"</item>
+    </string-array>
+
     <string-array name="enabled_networks_except_lte_values" translatable="false">
         <item>"0"</item>
         <item>"1"</item>
@@ -1394,4 +1403,19 @@
         <item>persian</item>
     </string-array>
 
+    <!-- Screen flash notification color when activating -->
+    <array name="screen_flash_notification_preset_opacity_colors">
+        <item>@color/screen_flash_preset_opacity_color_01</item>
+        <item>@color/screen_flash_preset_opacity_color_02</item>
+        <item>@color/screen_flash_preset_opacity_color_03</item>
+        <item>@color/screen_flash_preset_opacity_color_04</item>
+        <item>@color/screen_flash_preset_opacity_color_05</item>
+        <item>@color/screen_flash_preset_opacity_color_06</item>
+        <item>@color/screen_flash_preset_opacity_color_07</item>
+        <item>@color/screen_flash_preset_opacity_color_08</item>
+        <item>@color/screen_flash_preset_opacity_color_09</item>
+        <item>@color/screen_flash_preset_opacity_color_10</item>
+        <item>@color/screen_flash_preset_opacity_color_11</item>
+        <item>@color/screen_flash_preset_opacity_color_12</item>
+    </array>
 </resources>

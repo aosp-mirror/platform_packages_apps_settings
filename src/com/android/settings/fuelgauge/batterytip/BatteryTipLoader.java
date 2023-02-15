@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batterytip;
 
 import android.content.Context;
 import android.os.BatteryUsageStats;
+import android.os.PowerManager;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -61,11 +62,14 @@ public class BatteryTipLoader extends AsyncLoaderCompat<List<BatteryTip>> {
         final BatteryTipPolicy policy = new BatteryTipPolicy(getContext());
         final BatteryInfo batteryInfo = mBatteryUtils.getBatteryInfo(TAG);
         final Context context = getContext().getApplicationContext();
+        final boolean isPowerSaveMode =
+                context.getSystemService(PowerManager.class).isPowerSaveMode();
 
-        tips.add(new LowBatteryDetector(context, policy, batteryInfo).detect());
+        tips.add(new LowBatteryDetector(context, policy, batteryInfo, isPowerSaveMode).detect());
         tips.add(new HighUsageDetector(context, policy, mBatteryUsageStats, batteryInfo).detect());
         tips.add(new SmartBatteryDetector(
-                context, policy, batteryInfo, context.getContentResolver()).detect());
+                context, policy, batteryInfo, context.getContentResolver(), isPowerSaveMode)
+                        .detect());
         tips.add(new BatteryDefenderDetector(batteryInfo, context).detect());
         tips.add(new DockDefenderDetector(batteryInfo, context).detect());
         tips.add(new IncompatibleChargerDetector(context, batteryInfo).detect());

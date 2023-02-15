@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2022 The Android Open Source Project
+
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,7 +59,11 @@ public class MemtagPreferenceController extends TogglePreferenceController {
             refreshSummary(mPreference);
         }
         if (isChecked != MemtagHelper.isOn()) {
-            MemtagRebootDialog.show(mContext, mFragment, isChecked);
+            int msg =
+                    isChecked
+                            ? R.string.memtag_reboot_message_on
+                            : R.string.memtag_reboot_message_off;
+            MemtagRebootDialog.show(mContext, mFragment, msg);
         }
         return true;
     }

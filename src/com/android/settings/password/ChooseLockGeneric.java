@@ -70,6 +70,7 @@ import com.android.settings.EventLogTags;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollBase;
@@ -417,6 +418,9 @@ public class ChooseLockGeneric extends SettingsActivity {
                 Intent chooseLockGenericIntent = new Intent(getActivity(),
                     getInternalActivityClass());
                 chooseLockGenericIntent.setAction(getIntent().getAction());
+                if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+                    SetupWizardUtils.copySetupExtras(getIntent(), chooseLockGenericIntent);
+                }
                 // Forward the target user id to  ChooseLockGeneric.
                 chooseLockGenericIntent.putExtra(Intent.EXTRA_USER_ID, mUserId);
                 chooseLockGenericIntent.putExtra(CONFIRM_CREDENTIALS, !mPasswordConfirmed);

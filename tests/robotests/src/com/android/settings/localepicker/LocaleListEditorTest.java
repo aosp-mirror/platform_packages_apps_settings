@@ -28,6 +28,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
+import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
@@ -43,6 +44,8 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
+
+import java.util.Locale;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowAlertDialogCompat.class)
@@ -159,5 +162,16 @@ public class LocaleListEditorTest {
         final ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
 
         assertThat(shadowDialog.getMessage()).isNull();
+    }
+
+    @Test
+    public void mayAppendUnicodeTags_appendUnicodeTags_success() {
+        LocaleStore.LocaleInfo localeInfo = LocaleStore.fromLocale(Locale.forLanguageTag("en-US"));
+
+        LocaleStore.LocaleInfo result =
+                LocaleListEditor.mayAppendUnicodeTags(localeInfo, "und-u-fw-wed-mu-celsius");
+
+        assertThat(result.getLocale().getUnicodeLocaleType("fw")).isEqualTo("wed");
+        assertThat(result.getLocale().getUnicodeLocaleType("mu")).isEqualTo("celsius");
     }
 }

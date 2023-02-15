@@ -17,29 +17,25 @@
 package com.android.settings.inputmethod;
 
 import android.content.Context;
-import android.hardware.input.InputManager;
+import android.hardware.input.InputSettings;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 public class TrackpadBottomPreferenceController extends TogglePreferenceController {
 
-    private InputManager mIm;
-
     public TrackpadBottomPreferenceController(Context context, String key) {
         super(context, key);
-
-        mIm =  context.getSystemService(InputManager.class);
     }
 
     @Override
     public boolean isChecked() {
-        return mIm.useTouchpadRightClickZone(mContext);
+        return InputSettings.useTouchpadRightClickZone(mContext);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        mIm.setTouchpadRightClickZone(mContext, isChecked);
+        InputSettings.setTouchpadRightClickZone(mContext, isChecked);
         return true;
     }
 

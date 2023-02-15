@@ -70,9 +70,9 @@ public class AccountPersonalDashboardFragment extends DashboardFragment {
             CredentialManagerPreferenceController cmpp =
                     use(CredentialManagerPreferenceController.class);
             cmpp.init(this, getFragmentManager());
+        } else {
+            getSettingsLifecycle().addObserver(use(PasswordsPreferenceController.class));
         }
-
-        getSettingsLifecycle().addObserver(use(PasswordsPreferenceController.class));
     }
 
     @Override

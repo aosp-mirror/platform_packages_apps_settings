@@ -24,6 +24,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.system.ResetDashboardFragment;
 
 /**
@@ -52,6 +53,7 @@ public class EraseEuiccDataController extends BasePreferenceController {
     @Override
     public int getAvailabilityStatus() {
         return SubscriptionUtil.isSimHardwareVisible(mContext) &&
+                (!MobileNetworkUtils.isMobileNetworkUserRestricted(mContext)) &&
                 mContext.getPackageManager().hasSystemFeature(
                 PackageManager.FEATURE_TELEPHONY_EUICC) ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;

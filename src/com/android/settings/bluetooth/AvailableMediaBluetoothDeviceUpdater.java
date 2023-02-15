@@ -23,7 +23,6 @@ import android.util.Log;
 import androidx.preference.Preference;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 /**
@@ -39,9 +38,9 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
 
     private final AudioManager mAudioManager;
 
-    public AvailableMediaBluetoothDeviceUpdater(Context context, DashboardFragment fragment,
-            DevicePreferenceCallback devicePreferenceCallback) {
-        super(context, fragment, devicePreferenceCallback);
+    public AvailableMediaBluetoothDeviceUpdater(Context context,
+            DevicePreferenceCallback devicePreferenceCallback, int metricsCategory) {
+        super(context, devicePreferenceCallback, metricsCategory);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
     }
 
@@ -102,7 +101,7 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        mMetricsFeatureProvider.logClickedPreference(preference, mFragment.getMetricsCategory());
+        mMetricsFeatureProvider.logClickedPreference(preference, mMetricsCategory);
         final CachedBluetoothDevice device = ((BluetoothDevicePreference) preference)
                 .getBluetoothDevice();
         return device.setActive();

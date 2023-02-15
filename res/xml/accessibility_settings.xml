@@ -151,6 +151,14 @@
             settings:controller="com.android.settings.accessibility.AudioDescriptionPreferenceController"/>
 
         <Preference
+            android:fragment="com.android.settings.accessibility.FlashNotificationsPreferenceFragment"
+            android:icon="@drawable/ic_flash_notification"
+            android:key="flash_notifications_preference"
+            android:persistent="false"
+            android:title="@string/flash_notifications_title"
+            settings:controller="com.android.settings.accessibility.FlashNotificationsPreferenceController" />
+
+        <Preference
             android:key="hearing_aid_preference"
             android:icon="@drawable/ic_hearing_aid"
             android:persistent="false"

@@ -529,7 +529,7 @@ public class BatteryUtils {
             return true;
         }
 
-        return isSystemUid(uid) || powerAllowlistBackend.isAllowlisted(packageNames)
+        return isSystemUid(uid) || powerAllowlistBackend.isAllowlisted(packageNames, uid)
                 || (isSystemApp(mPackageManager, packageNames) && !hasLauncherEntry(packageNames))
                 || (isExcessiveBackgroundAnomaly(anomalyInfo) && !isPreOApp(packageNames));
     }
@@ -618,8 +618,7 @@ public class BatteryUtils {
 
     /** Gets the latest sticky battery intent from the Android system. */
     public static Intent getBatteryIntent(Context context) {
-        return context.registerReceiver(
-                /*receiver=*/ null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        return com.android.settingslib.fuelgauge.BatteryUtils.getBatteryIntent(context);
     }
 
     /** Gets the current dock defender mode */

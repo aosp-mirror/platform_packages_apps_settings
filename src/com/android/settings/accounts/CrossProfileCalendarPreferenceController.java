@@ -19,10 +19,14 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 
 import java.util.Set;
@@ -35,9 +39,14 @@ public class CrossProfileCalendarPreferenceController extends TogglePreferenceCo
 
     public CrossProfileCalendarPreferenceController(Context context, String key) {
         super(context, key);
+        // Set default managed profile for the current user, otherwise isAvailable will be false and
+        // the setting won't be searchable.
+        UserManager userManager = context.getSystemService(UserManager.class);
+        mManagedUser = Utils.getManagedProfile(userManager);
     }
 
-    public void setManagedUser(UserHandle managedUser) {
+    @VisibleForTesting
+    void setManagedUser(UserHandle managedUser) {
         mManagedUser = managedUser;
     }
 
