@@ -115,7 +115,9 @@ public class VolumeSliceHelper {
             for (Map.Entry<Uri, Integer> entry : sRegisteredUri.entrySet()) {
                 if (entry.getValue() == inputType) {
                     context.getContentResolver().notifyChange(entry.getKey(), null /* observer */);
-                    break;
+                    if (inputType != AudioManager.STREAM_RING) { // Two URIs are mapped to ring
+                        break;
+                    }
                 }
             }
         }
