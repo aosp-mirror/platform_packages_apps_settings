@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static android.app.Activity.RESULT_CANCELED;
+
 import static com.android.settings.Utils.getAdaptiveIcon;
 import static com.android.settingslib.widget.TwoTargetPreference.ICON_SIZE_MEDIUM;
 
@@ -41,6 +43,7 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.RestrictedPreference;
 
+import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupdesign.GlifPreferenceLayout;
 
 import java.util.List;
@@ -90,6 +93,12 @@ public class AccessibilitySettingsForSetupWizard extends DashboardFragment
         final Drawable icon = getContext().getDrawable(R.drawable.ic_accessibility_visibility);
         AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
                 description, icon);
+
+        final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
+        AccessibilitySetupWizardUtils.setPrimaryButton(getContext(), mixin, R.string.done, () -> {
+            setResult(RESULT_CANCELED);
+            finish();
+        });
     }
 
     @Override

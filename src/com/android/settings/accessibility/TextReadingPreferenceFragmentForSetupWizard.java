@@ -33,7 +33,6 @@ import com.android.settings.R;
 import com.android.settingslib.Utils;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
-import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifPreferenceLayout;
 
 /**
@@ -55,26 +54,14 @@ public class TextReadingPreferenceFragmentForSetupWizard extends TextReadingPref
                 /* description= */ null, icon);
 
         final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
-        mixin.setSecondaryButton(
-                new FooterButton.Builder(getContext())
-                        .setText(R.string.accessibility_text_reading_reset_button_title)
-                        .setListener(l -> showDialog(DIALOG_RESET_SETTINGS))
-                        .setButtonType(FooterButton.ButtonType.CLEAR)
-                        .setTheme(R.style.SudGlifButton_Secondary)
-                        .build());
-
-        if (isCallingFromAnythingElseEntryPoint()) {
-            mixin.setPrimaryButton(
-                    new FooterButton.Builder(getContext())
-                            .setText(R.string.done)
-                            .setListener(l -> {
-                                setResult(RESULT_CANCELED);
-                                finish();
-                            })
-                            .setButtonType(FooterButton.ButtonType.DONE)
-                            .setTheme(R.style.SudGlifButton_Primary)
-                            .build());
-        }
+        AccessibilitySetupWizardUtils.setPrimaryButton(getContext(), mixin, R.string.done, () -> {
+            setResult(RESULT_CANCELED);
+            finish();
+        });
+        AccessibilitySetupWizardUtils.setSecondaryButton(getContext(), mixin,
+                R.string.accessibility_text_reading_reset_button_title,
+                () -> showDialog(DIALOG_RESET_SETTINGS)
+        );
     }
 
     @Override

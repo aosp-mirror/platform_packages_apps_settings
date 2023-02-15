@@ -6456,6 +6456,7 @@
     <string name="help_url_privacy_dashboard" translatable="false"></string>
 
     <string name="help_url_memtag" translatable="false"></string>
+    <string name="help_url_development_memtag" translatable="false"></string>
     <string name="help_url_network_dashboard" translatable="false"></string>
     <string name="help_url_connected_devices" translatable="false"></string>
     <string name="help_url_apps_and_notifications" translatable="false"></string>
@@ -8579,11 +8580,11 @@
     <!-- Label for list that shows all permissions -->
     <string name="app_permissions">Permission manager</string>
 
-    <!-- Label for the list that shows all data sharing updates. TODO b/261914980 finalize string [CHAR LIMIT=30]-->
-    <string name="app_data_sharing_updates_title">Data sharing updates</string>
+    <!-- Title for the entrypoint that navigates to the App Data Sharing Updates page. [CHAR LIMIT=70]-->
+    <string name="app_data_sharing_updates_title">Data sharing updates for location</string>
 
-    <!-- Label for the list that shows all data sharing updates TODO b/261914980 finalize string [CHAR LIMIT=NONE]-->
-    <string name="app_data_sharing_updates_summary">Show which apps recently updated data sharing policy</string>
+    <!-- Summary for the entrypoint that navigates to the App Data Sharing Updates page. [CHAR LIMIT=130]-->
+    <string name="app_data_sharing_updates_summary">Review apps that changed the way they may share your location data</string>
 
     <!-- Label for tap to wake setting [CHAR LIMIT=30] -->
     <string name="tap_to_wake">Tap to wake</string>
@@ -10867,14 +10868,26 @@
 
     <!-- Title for the button to initiate a heap dump for the system server. [CHAR LIMIT=NONE] -->
     <string name="capture_system_heap_dump_title">Capture system heap dump</string>
+
+    <!-- [CHAR LIMIT=32] Name of MTE page in "Developer Options" and heading of page. -->
+    <string name="development_memtag_page_title">Memory Tagging Extension</string>
+    <!-- [CHAR LIMIT=52] Label for button to turn on / off MTE protection.-->
+    <string name="development_memtag_intro">Memory Tagging Extension (MTE) makes it easier to find memory safety issues in your app and make native code in it more secure.</string>
+    <string name="development_memtag_footer">Turning on MTE might cause slower device performance.</string>
+    <string name="development_memtag_learn_more">Learn more about MTE</string>
+    <string name="development_memtag_toggle">Enable MTE until you turn it off</string>
+    <!-- [CHAR LIMIT=NONE] Message shown in dialog prompting user to reboot device to turn on MTE.-->
+    <string name="development_memtag_reboot_message_on">You\u0027ll need to restart your device to turn on MTE.</string>
+    <!-- [CHAR LIMIT=NONE] Message shown in dialog prompting user to reboot device to turn off MTE.-->
+    <string name="development_memtag_reboot_message_off">You\u0027ll need to restart your device to turn off MTE.</string>
     <!-- Title for the button to reboot with MTE enabled. [CHAR LIMIT=NONE] -->
-    <string name="reboot_with_mte_title">Reboot with MTE</string>
-    <string name="reboot_with_mte_message">System will reboot and allow to experiment with Memory Tagging Extension (MTE). MTE may negatively impact system performance and stability. Will be reset on next subsequent reboot.</string>
+    <string name="reboot_with_mte_title">Enable MTE for a single session</string>
+    <string name="reboot_with_mte_message">System will restart and allow to experiment with Memory Tagging Extension (MTE). MTE may negatively impact system performance and stability. Will be reset on next subsequent reboot.</string>
     <!-- Subtext for button if MTE is not enabled through Advanced memory protection. -->
-    <string name="reboot_with_mte_summary">Try MTE for a single boot for app development</string>
+    <string name="reboot_with_mte_summary">Restart for a single session with MTE enabled</string>
     <!-- Subtext for button if MTE is already enabled through Advanced memory protection.
          The string for "Advanced memory protection" needs to match "memtag_toggle" above -->
-    <string name="reboot_with_mte_already_enabled">MTE is enabled through Advanced memory protection</string>
+    <string name="reboot_with_mte_already_enabled">MTE is already enabled</string>
     <!-- Toast that is shown when the user initiates capturing a heap dump for the system server. [CHAR LIMIT=NONE] -->
     <string name="capturing_system_heap_dump_message">Capturing system heap dump</string>
     <!-- Toast that is shown if there's an error capturing the user initiated heap dump. [CHAR LIMIT=NONE] -->

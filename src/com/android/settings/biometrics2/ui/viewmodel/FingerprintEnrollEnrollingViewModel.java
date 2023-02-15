@@ -71,11 +71,17 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
      */
     public static final int FINGERPRINT_ENROLL_ENROLLING_ACTION_DISMISS_ICON_TOUCH_DIALOG = 3;
 
+    /**
+     * Has got latest cancelled event due to back key
+     */
+    public static final int FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_BACK_PRESSED = 4;
+
     @IntDef(prefix = { "FINGERPRINT_ENROLL_ENROLLING_ACTION_" }, value = {
             FINGERPRINT_ENROLL_ENROLLING_ACTION_SKIP,
             FINGERPRINT_ENROLL_ENROLLING_ACTION_DONE,
             FINGERPRINT_ENROLL_ENROLLING_ACTION_SHOW_ICON_TOUCH_DIALOG,
-            FINGERPRINT_ENROLL_ENROLLING_ACTION_DISMISS_ICON_TOUCH_DIALOG
+            FINGERPRINT_ENROLL_ENROLLING_ACTION_DISMISS_ICON_TOUCH_DIALOG,
+            FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_BACK_PRESSED
     })
     @Retention(RetentionPolicy.SOURCE)
     public @interface FingerprintEnrollEnrollingAction {}
@@ -103,8 +109,9 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
     @Retention(RetentionPolicy.SOURCE)
     public @interface FingerprintErrorDialogAction {}
 
-
     private final int mUserId;
+    private boolean mOnBackPressed;
+    private boolean mOnSkipPressed;
     private final FingerprintRepository mFingerprintRepository;
     private final AccessibilityRepository mAccessibilityRepository;
     private final VibratorRepository mVibratorRepository;
@@ -162,14 +169,26 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
         mErrorDialogActionLiveData.postValue(action);
     }
 
+    public boolean getOnSkipPressed() {
+        return mOnSkipPressed;
+    }
+
     /**
      * User clicks skip button
      */
-    public void onSkipButtonClick() {
+    public void setOnSkipPressed() {
+        mOnSkipPressed = true;
+    }
+
+    /**
+     * Enrolling is cacelled because user clicks skip
+     */
+    public void onCancelledDueToOnSkipPressed() {
         final int action = FINGERPRINT_ENROLL_ENROLLING_ACTION_SKIP;
         if (DEBUG) {
             Log.d(TAG, "onSkipButtonClick, post action " + action);
         }
+        mOnSkipPressed = false;
         mActionLiveData.postValue(action);
     }
 
@@ -181,6 +200,29 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
         if (DEBUG) {
             Log.d(TAG, "onEnrollingDone, post action " + action);
         }
+        mActionLiveData.postValue(action);
+    }
+
+    public boolean getOnBackPressed() {
+        return mOnBackPressed;
+    }
+
+    /**
+     * Back key is pressed.
+     */
+    public void setOnBackPressed() {
+        mOnBackPressed = true;
+    }
+
+    /**
+     * Enrollment is cancelled because back key is pressed.
+     */
+    public void onCancelledDueToOnBackPressed() {
+        final int action = FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_BACK_PRESSED;
+        if (DEBUG) {
+            Log.d(TAG, "onCancelledEventReceivedAfterOnBackPressed, post action " + action);
+        }
+        mOnBackPressed = false;
         mActionLiveData.postValue(action);
     }
 

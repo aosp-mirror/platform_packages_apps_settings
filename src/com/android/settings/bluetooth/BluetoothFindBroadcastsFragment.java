@@ -239,8 +239,7 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
 
     @Override
     public int getMetricsCategory() {
-        //TODO(b/228255796) : add new enum for find broadcast fragment
-        return SettingsEnums.PAGE_UNKNOWN;
+        return SettingsEnums.LE_AUDIO_BROADCAST_FIND_BROADCAST;
     }
 
     /**
