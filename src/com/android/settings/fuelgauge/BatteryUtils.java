@@ -529,7 +529,7 @@ public class BatteryUtils {
             return true;
         }
 
-        return isSystemUid(uid) || powerAllowlistBackend.isAllowlisted(packageNames)
+        return isSystemUid(uid) || powerAllowlistBackend.isAllowlisted(packageNames, uid)
                 || (isSystemApp(mPackageManager, packageNames) && !hasLauncherEntry(packageNames))
                 || (isExcessiveBackgroundAnomaly(anomalyInfo) && !isPreOApp(packageNames));
     }
