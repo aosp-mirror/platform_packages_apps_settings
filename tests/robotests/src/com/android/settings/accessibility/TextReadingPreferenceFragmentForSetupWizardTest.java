@@ -100,19 +100,10 @@ public class TextReadingPreferenceFragmentForSetupWizardTest {
     }
 
     @Test
-    public void onViewCreated_verifySetSecondaryButton() {
-        mFragment.onViewCreated(mGlifLayoutView, null);
-
-        verify(mFooterBarMixin).setSecondaryButton(any());
-    }
-
-    @Test
-    public void onViewCreated_verifySetPrimaryButton() {
-        doReturn(mActivity).when(mFragment).getActivity();
-        doReturn("setupwizard").when(mActivity).getCallingPackage();
-
+    public void onViewCreated_verifyAction() {
         mFragment.onViewCreated(mGlifLayoutView, null);
 
         verify(mFooterBarMixin).setPrimaryButton(any());
+        verify(mFooterBarMixin).setSecondaryButton(any());
     }
 }

@@ -109,8 +109,6 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                                             mRequestType);
             connectionAccessIntent.putExtra(BluetoothDevice.EXTRA_DEVICE, mDevice);
 
-            String deviceAddress = mDevice != null ? mDevice.getAddress() : null;
-            String deviceName = mDevice != null ? mDevice.getName() : null;
             String title = null;
             String message = null;
             PowerManager powerManager =
@@ -118,7 +116,7 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
 
             if (powerManager.isScreenOn()
                     && LocalBluetoothPreferences.shouldShowDialogInForeground(
-                            context, deviceAddress, deviceName)) {
+                            context, mDevice)) {
                 context.startActivity(connectionAccessIntent);
             } else {
                 // Put up a notification that leads to the dialog
