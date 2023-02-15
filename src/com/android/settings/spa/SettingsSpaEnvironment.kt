@@ -17,6 +17,7 @@
 package com.android.settings.spa
 
 import android.content.Context
+import com.android.settings.spa.about.AboutPhonePageProvider
 import com.android.settings.spa.app.AllAppListPageProvider
 import com.android.settings.spa.app.AppsMainPageProvider
 import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
@@ -81,6 +82,7 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
                 BackgroundInstalledAppsPageProvider,
                 CloneAppInfoSettingsProvider,
                 NetworkAndInternetPageProvider,
+                AboutPhonePageProvider,
                 ) + togglePermissionAppListTemplate.createPageProviders(),
             rootPages = listOf(
                 SettingsPage.create(HomePageProvider.name),
