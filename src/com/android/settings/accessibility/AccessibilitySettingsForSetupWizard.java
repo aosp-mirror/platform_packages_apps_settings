@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static android.app.Activity.RESULT_CANCELED;
+
 import static com.android.settings.Utils.getAdaptiveIcon;
 import static com.android.settings.accessibility.AccessibilityUtil.AccessibilityServiceFragmentType.VOLUME_SHORTCUT_TOGGLE;
 import static com.android.settingslib.widget.TwoTargetPreference.ICON_SIZE_MEDIUM;
@@ -34,6 +36,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,6 +44,7 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.RestrictedPreference;
 
+import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupdesign.GlifPreferenceLayout;
 
 import java.util.List;
@@ -59,17 +63,21 @@ public class AccessibilitySettingsForSetupWizard extends DashboardFragment
     private static final String SELECT_TO_SPEAK_PREFERENCE = "select_to_speak_preference";
 
     // Package names and service names used to identify screen reader and SelectToSpeak services.
-    private static final String SCREEN_READER_PACKAGE_NAME = "com.google.android.marvin.talkback";
-    private static final String SCREEN_READER_SERVICE_NAME =
+    @VisibleForTesting
+    static final String SCREEN_READER_PACKAGE_NAME = "com.google.android.marvin.talkback";
+    @VisibleForTesting
+    static final String SCREEN_READER_SERVICE_NAME =
             "com.google.android.marvin.talkback.TalkBackService";
-    private static final String SELECT_TO_SPEAK_PACKAGE_NAME = "com.google.android.marvin.talkback";
-    private static final String SELECT_TO_SPEAK_SERVICE_NAME =
+    @VisibleForTesting
+    static final String SELECT_TO_SPEAK_PACKAGE_NAME = "com.google.android.marvin.talkback";
+    @VisibleForTesting
+    static final String SELECT_TO_SPEAK_SERVICE_NAME =
             "com.google.android.accessibility.selecttospeak.SelectToSpeakService";
 
     // Preference controls.
-    private Preference mDisplayMagnificationPreference;
-    private RestrictedPreference mScreenReaderPreference;
-    private RestrictedPreference mSelectToSpeakPreference;
+    protected Preference mDisplayMagnificationPreference;
+    protected RestrictedPreference mScreenReaderPreference;
+    protected RestrictedPreference mSelectToSpeakPreference;
 
     @Override
     public int getMetricsCategory() {
@@ -86,6 +94,12 @@ public class AccessibilitySettingsForSetupWizard extends DashboardFragment
         final Drawable icon = getContext().getDrawable(R.drawable.ic_accessibility_visibility);
         AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
                 description, icon);
+
+        final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
+        AccessibilitySetupWizardUtils.setPrimaryButton(getContext(), mixin, R.string.done, () -> {
+            setResult(RESULT_CANCELED);
+            finish();
+        });
     }
 
     @Override
