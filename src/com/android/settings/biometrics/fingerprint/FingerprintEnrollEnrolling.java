@@ -106,6 +106,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private static final String TAG = "FingerprintEnrollEnrolling";
     static final String TAG_SIDECAR = "sidecar";
     static final String TAG_UDFPS_HELPER = "udfps_helper";
+    static final String ICON_TOUCH_DIALOG = "fps_icon_touch_dialog";
     static final String KEY_STATE_CANCELED = "is_canceled";
     static final String KEY_STATE_PREVIOUS_ROTATION = "previous_rotation";
 
@@ -868,11 +869,14 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
             if (mUdfpsEnrollHelper != null) mUdfpsEnrollHelper.onEnrollmentHelp();
         }
+
+        dismissTouchDialogIfSfps();
     }
 
     @Override
     public void onEnrollmentError(int errMsgId, CharSequence errString) {
         onCancelEnrollment(errMsgId);
+        dismissTouchDialogIfSfps();
     }
 
     private void announceEnrollmentProgress(CharSequence announcement) {
@@ -911,6 +915,18 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         } else if (!mCanAssumeSfps) {
             mErrorText.removeCallbacks(mTouchAgainRunnable);
             mErrorText.postDelayed(mTouchAgainRunnable, HINT_TIMEOUT_DURATION);
+        }
+        dismissTouchDialogIfSfps();
+    }
+
+    private void dismissTouchDialogIfSfps() {
+        if (!mCanAssumeSfps) {
+            return;
+        }
+        final IconTouchDialog dialog = (IconTouchDialog)
+                getSupportFragmentManager().findFragmentByTag(ICON_TOUCH_DIALOG);
+        if (dialog != null && dialog.isResumed()) {
+            dialog.dismiss();
         }
     }
 
@@ -976,7 +992,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     private void showIconTouchDialog() {
         mIconTouchCount = 0;
-        new IconTouchDialog().show(getSupportFragmentManager(), null /* tag */);
+        new IconTouchDialog().show(getSupportFragmentManager(), ICON_TOUCH_DIALOG);
     }
 
     private void showError(CharSequence error) {
