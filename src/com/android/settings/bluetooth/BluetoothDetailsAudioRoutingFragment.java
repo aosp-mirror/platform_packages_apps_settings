@@ -65,7 +65,10 @@ public class BluetoothDetailsAudioRoutingFragment extends RestrictedDashboardFra
             return;
         }
 
-        // TODO: mCachedDevice will pass to control in next CLs.
+        use(HearingDeviceRingtoneRoutingPreferenceController.class).init(mCachedDevice);
+        use(HearingDeviceCallRoutingPreferenceController.class).init(mCachedDevice);
+        use(HearingDeviceMediaRoutingPreferenceController.class).init(mCachedDevice);
+        use(HearingDeviceSystemSoundsRoutingPreferenceController.class).init(mCachedDevice);
     }
 
     @Override

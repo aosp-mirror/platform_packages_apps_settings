@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The Android Open Source Project
+ * Copyright (C) 2023 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.emergency;
+package com.android.settings.development;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -24,17 +24,13 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
-/**
- * Settings page for emergency gesture
- */
 @SearchIndexable
-public class EmergencyGestureSettings extends DashboardFragment {
-
-    private static final String TAG = "EmergencyGestureSetting";
+public class DevelopmentMemtagPage extends DashboardFragment {
+    private static final String TAG = "DevelopmentMemtagPage";
 
     @Override
-    protected int getPreferenceScreenResId() {
-        return R.xml.emergency_gesture_settings;
+    public int getMetricsCategory() {
+        return SettingsEnums.SETTINGS_DEVELOPMENT_MEMTAG_CATEGORY;
     }
 
     @Override
@@ -43,19 +39,18 @@ public class EmergencyGestureSettings extends DashboardFragment {
     }
 
     @Override
-    public int getMetricsCategory() {
-        return SettingsEnums.EMERGENCY_SOS_GESTURE_SETTINGS;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        use(RebootWithMtePreferenceController.class).setFragment(this);
+        use(DevelopmentMemtagPreferenceController.class).setFragment(this);
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.development_memtag_page;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.emergency_gesture_settings) {
-                @Override
-                protected boolean isPageSearchEnabled(Context context) {
-                    final EmergencyGestureEntrypointPreferenceController controller =
-                            new EmergencyGestureEntrypointPreferenceController(context,
-                                    "dummy_emergency_gesture_pref_key");
-                    return controller.isAvailable()
-                            && !controller.shouldSuppressFromSearch();
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.development_memtag_page);
 }

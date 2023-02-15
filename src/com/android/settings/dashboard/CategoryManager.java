@@ -26,6 +26,7 @@ import android.util.Pair;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.homepage.HighlightableMenu;
+import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settingslib.applications.InterestingConfigChanges;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -38,6 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 
 public class CategoryManager {
@@ -151,6 +153,7 @@ public class CategoryManager {
                 mCategoryByKeyMap.put(category.key, category);
             }
             backwardCompatCleanupForCategory(mTileByComponentCache, mCategoryByKeyMap);
+            mergeSecurityPrivacyKeys(context, mTileByComponentCache, mCategoryByKeyMap);
             sortCategories(context, mCategoryByKeyMap);
             filterDuplicateTiles(mCategoryByKeyMap);
             if (firstLoading) {
@@ -220,6 +223,36 @@ public class CategoryManager {
                     }
                     newCategory.addTile(tile);
                 }
+            }
+        }
+    }
+
+    /**
+     * Merges {@link CategoryKey#CATEGORY_SECURITY_ADVANCED_SETTINGS} and {@link
+     * CategoryKey#CATEGORY_PRIVACY} into {@link
+     * CategoryKey#CATEGORY_MORE_SECURITY_PRIVACY_SETTINGS}
+     */
+    @VisibleForTesting
+    synchronized void mergeSecurityPrivacyKeys(
+            Context context,
+            Map<Pair<String, String>, Tile> tileByComponentCache,
+            Map<String, DashboardCategory> categoryByKeyMap) {
+        if (!SafetyCenterManagerWrapper.get().isEnabled(context)) {
+            return;
+        }
+        for (Entry<Pair<String, String>, Tile> tileEntry : tileByComponentCache.entrySet()) {
+            Tile tile = tileEntry.getValue();
+            if (Objects.equals(tile.getCategory(), CategoryKey.CATEGORY_SECURITY_ADVANCED_SETTINGS)
+                    || Objects.equals(tile.getCategory(), CategoryKey.CATEGORY_PRIVACY)) {
+                final String newCategoryKey = CategoryKey.CATEGORY_MORE_SECURITY_PRIVACY_SETTINGS;
+                tile.setCategory(newCategoryKey);
+                // move tile to new category.
+                DashboardCategory newCategory = categoryByKeyMap.get(newCategoryKey);
+                if (newCategory == null) {
+                    newCategory = new DashboardCategory(newCategoryKey);
+                    categoryByKeyMap.put(newCategoryKey, newCategory);
+                }
+                newCategory.addTile(tile);
             }
         }
     }

@@ -125,8 +125,7 @@ public class BluetoothBroadcastDialog extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        //TODO(b/228255796) : add new enum for find broadcast fragment
-        return SettingsEnums.PAGE_UNKNOWN;
+        return SettingsEnums.DIALOG_LE_AUDIO_BROADCAST;
     }
 
     private void launchFindBroadcastsActivity() {
