@@ -398,7 +398,8 @@ public class BatteryUtilsTest {
     @Test
     public void testShouldHideAnomaly_AppInDozeList_returnTrue() {
         doReturn(new String[]{HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
-        doReturn(true).when(mPowerAllowlistBackend).isAllowlisted(new String[]{HIGH_SDK_PACKAGE});
+        doReturn(true).when(mPowerAllowlistBackend)
+                .isAllowlisted(new String[]{HIGH_SDK_PACKAGE}, UID);
 
         assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, UID,
                 mAnomalyInfo)).isTrue();

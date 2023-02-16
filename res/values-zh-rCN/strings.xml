@@ -1715,6 +1715,18 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"已下载的应用"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"实验性功能"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"功能标记"</string>
+    <!-- no translation found for snoop_logger_filters_dashboard_title (3082744626059215281) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (626757789702677076) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (5508775381082875785) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (5700678748422653316) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (6235819710248503870) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (272884193300382035) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"主要适用于盲人和视力不佳者的屏幕阅读器"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"点按屏幕上的内容即可让系统大声朗读出来"</string>
@@ -1725,9 +1737,11 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"放大功能快捷方式"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"输入时使用放大功能"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"输入时放大镜跟随文字移动"</string>
-    <!-- no translation found for accessibility_screen_magnification_always_on_title (3738009998799304549) -->
+    <string name="accessibility_screen_magnification_always_on_title" msgid="3738009998799304549">"始终开启"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="8946516092699010033">"此设置不会在您更改应用时停用放大功能，而只是缩小至正常大小。随时双指张合即可重新放大。"</string>
+    <!-- no translation found for accessibility_screen_magnification_joystick_title (1803769708582404964) -->
     <skip />
-    <!-- no translation found for accessibility_screen_magnification_always_on_summary (8946516092699010033) -->
+    <!-- no translation found for accessibility_screen_magnification_joystick_summary (4640300148573982720) -->
     <skip />
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"关于放大功能"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"详细了解放大功能"</string>
@@ -2047,10 +2061,6 @@
     <string name="keywords_hearing_aids" msgid="524979615168196199">"听障, 听力受损, hard of hearing, hearing loss"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"听障, 听力受损, 字幕, 电传, hard of hearing, hearing loss, captions, Teletype, tty"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
-    <string name="fast_pair_settings" msgid="3308819519080016185">"快速配对"</string>
-    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"检测附近具备快速配对功能的蓝牙设备。"</string>
-    <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"扫描附近的设备"</string>
-    <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"保存的设备"</string>
     <string name="print_settings" msgid="8519810615863882491">"打印"</string>
     <string name="print_settings_summary" msgid="1458773840720811915">"{count,plural, =1{1 个打印服务已开启}other{# 个打印服务已开启}}"</string>
     <string name="print_jobs_summary" msgid="7040836482336577323">"{count,plural, =1{1 个打印作业}other{# 个打印作业}}"</string>
@@ -2205,8 +2215,7 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"设置时间表"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"延长电池续航时间"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"充够电时关闭"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (6472610662679038342) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"在电池电量达到 <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> 时关闭省电模式"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"开启"</string>
@@ -2232,10 +2241,8 @@
     <string name="battery_usage_screen_time" msgid="3973865893520804115">"设备使用时间：<xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"充满电几小时后，设备才会显示电池用量数据"</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"现在"</string>
-    <!-- no translation found for battery_usage_timestamps_hyphen (7401188432989043905) -->
-    <skip />
-    <!-- no translation found for battery_usage_day_and_hour (1417890420844950881) -->
-    <skip />
+    <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> - <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
+    <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g><xliff:g id="HOUR">%2$s</xliff:g>"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"电池用量图表"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"每日电池用量图表"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"每小时电池用量图表"</string>
@@ -2862,7 +2869,6 @@
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"屏幕, 锁定时间, 超时, 锁屏"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"内存, 缓存, 数据, 删除, 清除, 释放, 空间"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"已连接, 设备, 头戴式耳机, 耳机, 扬声器, 无线, 配对, 入耳式耳机, 音乐, 媒体"</string>
-    <string name="keywords_fast_pair" msgid="5422942398816611159">"配对, 入耳式耳机, 蓝牙"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"背景, 主题, 网格, 自定义, 个性化"</string>
     <string name="keywords_styles" msgid="5291614313348476068">"图标, 强调色, 颜色"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"默认, 智能助理"</string>
@@ -3443,8 +3449,10 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"已关闭"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"高级"</string>
     <string name="app_permissions" msgid="8666537659217653626">"权限管理器"</string>
-    <string name="app_data_sharing_updates_title" msgid="921888411974134089">"数据分享方面的更新"</string>
-    <string name="app_data_sharing_updates_summary" msgid="1500580254161164185">"显示哪些应用最近更新过数据分享政策"</string>
+    <!-- no translation found for app_data_sharing_updates_title (1694297952320402788) -->
+    <skip />
+    <!-- no translation found for app_data_sharing_updates_summary (4465929918457739443) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"点按唤醒"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"在屏幕上的任意位置点按两次即可唤醒设备"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"打开链接"</string>
@@ -3493,8 +3501,7 @@
     <string name="usb_use_power_only" msgid="3408055485802114621">"为连接的设备充电"</string>
     <string name="usb_use_file_transfers" msgid="483915710802018503">"文件传输"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <!-- no translation found for usb_use_uvc_webcam (6595429508472038732) -->
-    <skip />
+    <string name="usb_use_uvc_webcam" msgid="6595429508472038732">"摄像头"</string>
     <string name="usb_transcode_files" msgid="2441954752105119109">"将视频转换成 AVC 格式"</string>
     <string name="usb_transcode_files_summary" msgid="307102635711961513">"转换后视频将能在更多媒体播放器中播放，不过视频质量可能会降低"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB 网络共享"</string>
@@ -3517,14 +3524,12 @@
     <string name="usb_summary_tether" msgid="2554569836525075702">"USB 网络共享"</string>
     <string name="usb_summary_photo_transfers" msgid="7331503733435780492">"PTP"</string>
     <string name="usb_summary_MIDI" msgid="2372443732675899571">"MIDI"</string>
-    <!-- no translation found for usb_summary_UVC (8733131110899174299) -->
-    <skip />
+    <string name="usb_summary_UVC" msgid="8733131110899174299">"摄像头"</string>
     <string name="usb_summary_file_transfers_power" msgid="2788374660532868630">"开启文件传输模式并为其他设备充电"</string>
     <string name="usb_summary_tether_power" msgid="4853034392919904792">"开启 USB 网络共享模式并为其他设备充电"</string>
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"开启 PTP 模式并为其他设备充电"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"开启 MIDI 模式并为其他设备充电"</string>
-    <!-- no translation found for usb_summary_UVC_power (226810354412154061) -->
-    <skip />
+    <string name="usb_summary_UVC_power" msgid="226810354412154061">"摄像头和为其他设备充电"</string>
     <string name="background_check_pref" msgid="5304564658578987535">"后台检查"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"使用屏幕上的文字内容"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"允许助手应用获取屏幕上的文字内容"</string>
@@ -3570,12 +3575,9 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"授予管理所有文件的权限"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"允许此应用读取、修改和删除此设备或任何已连接存储卷上的所有文件。如果您授予该权限，应用无需明确通知您即可访问文件。"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"可以访问所有文件"</string>
-    <!-- no translation found for full_screen_intent_title (1068024949389956404) -->
-    <skip />
-    <!-- no translation found for permit_full_screen_intent (2251949245519201421) -->
-    <skip />
-    <!-- no translation found for footer_description_full_screen_intent (8322826300555418227) -->
-    <skip />
+    <string name="full_screen_intent_title" msgid="1068024949389956404">"管理全屏 intent"</string>
+    <string name="permit_full_screen_intent" msgid="2251949245519201421">"允许应用发送全屏 intent"</string>
+    <string name="footer_description_full_screen_intent" msgid="8322826300555418227">"允许此应用发送可覆盖整个屏幕的全屏 intent 通知。"</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"媒体管理应用"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"允许应用管理媒体"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"如果允许，此应用可以直接修改或删除通过其他应用创建的媒体文件，无需事先征得您的同意。应用必须有访问文件和媒体的权限。"</string>
@@ -3612,7 +3614,7 @@
     <string name="users_summary" msgid="8473589474976307510">"目前的登录身份：<xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"已更新至 Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"有新版本可用"</string>
-    <string name="disabled_by_policy_title" msgid="6852347040813204503">"已被工作政策禁止"</string>
+    <string name="disabled_by_policy_title" msgid="6852347040813204503">"已被工作政策禁用"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="1669689058213728099">"无法调节音量"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="400089720689494562">"无法拨打电话"</string>
     <string name="disabled_by_policy_title_sms" msgid="8951840850778406831">"无法发送短信"</string>
@@ -4270,10 +4272,28 @@
     <string name="content_capture" msgid="868372905432812238">"应用内容"</string>
     <string name="content_capture_summary" msgid="49720773699715531">"允许应用将内容发送到 Android 系统"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"捕获系统堆转储数据"</string>
-    <string name="reboot_with_mte_title" msgid="9167242803901899693">"重新启动并启用 MTE"</string>
-    <string name="reboot_with_mte_message" msgid="7675836625682561153">"系统将重新启动并允许尝试内存标记扩展 (MTE)。MTE 可能会对系统性能和稳定性产生负面影响。将在下一次重新启动时重置。"</string>
-    <string name="reboot_with_mte_summary" msgid="879384278357305846">"尝试将 MTE 用于应用开发的单次启动"</string>
-    <string name="reboot_with_mte_already_enabled" msgid="7708271355555880940">"MTE 通过高级内存保护功能启用"</string>
+    <!-- no translation found for development_memtag_page_title (3546667618748029188) -->
+    <skip />
+    <!-- no translation found for development_memtag_intro (8032596625527637164) -->
+    <skip />
+    <!-- no translation found for development_memtag_footer (5681925148773626562) -->
+    <skip />
+    <!-- no translation found for development_memtag_learn_more (8961984806973926704) -->
+    <skip />
+    <!-- no translation found for development_memtag_toggle (2474420239518386894) -->
+    <skip />
+    <!-- no translation found for development_memtag_reboot_message_on (8100075676107327847) -->
+    <skip />
+    <!-- no translation found for development_memtag_reboot_message_off (3703925647922079456) -->
+    <skip />
+    <!-- no translation found for reboot_with_mte_title (2320125810211279) -->
+    <skip />
+    <!-- no translation found for reboot_with_mte_message (1232881567956207641) -->
+    <skip />
+    <!-- no translation found for reboot_with_mte_summary (3896537791216432882) -->
+    <skip />
+    <!-- no translation found for reboot_with_mte_already_enabled (4439168867613407167) -->
+    <skip />
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"正在捕获系统堆转储数据"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"无法捕获系统堆转储数据"</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"自动捕获堆转储数据"</string>
@@ -4612,5 +4632,7 @@
     <!-- no translation found for color_selector_dialog_done (121253968943363376) -->
     <skip />
     <!-- no translation found for color_selector_dialog_cancel (8667350644753900701) -->
+    <skip />
+    <!-- no translation found for dock_multi_instances_not_supported_text (3513493664467667084) -->
     <skip />
 </resources>

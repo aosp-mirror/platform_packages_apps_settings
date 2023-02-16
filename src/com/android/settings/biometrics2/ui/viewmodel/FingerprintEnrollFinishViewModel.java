@@ -16,17 +16,20 @@
 
 package com.android.settings.biometrics2.ui.viewmodel;
 
-
+import android.annotation.IntDef;
 import android.app.Application;
-import android.content.ComponentName;
-import android.content.pm.PackageManager;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.android.settings.biometrics2.data.repository.FingerprintRepository;
-import com.android.settings.biometrics2.data.repository.PackageManagerRepository;
+import com.android.settings.biometrics2.ui.model.EnrollmentRequest;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * Finish ViewModel handles the state of the fingerprint renroll final stage
@@ -34,29 +37,43 @@ import com.android.settings.biometrics2.data.repository.PackageManagerRepository
 public class FingerprintEnrollFinishViewModel extends AndroidViewModel {
 
     private static final String TAG = FingerprintEnrollFinishViewModel.class.getSimpleName();
+    private static final boolean DEBUG = false;
 
-    private static final String FINGERPRINT_SUGGESTION_ACTIVITY =
-            "com.android.settings.SetupFingerprintSuggestionActivity";
+    /**
+     * User clicks "Add" button
+     */
+    public static final int FINGERPRINT_ENROLL_FINISH_ACTION_ADD_BUTTON_CLICK = 0;
 
-    private static final int ACTION_NONE = -1;
-    private static final int ACTION_ADD_BUTTON_CLICK = 0;
-    private static final int ACTION_NEXT_BUTTON_CLICK = 1;
+    /**
+     * User clicks "Next" button
+     */
+    public static final int FINGERPRINT_ENROLL_FINISH_ACTION_NEXT_BUTTON_CLICK = 1;
 
-    private final FingerprintRepository mFingerprintRepository;
-    private final PackageManagerRepository mPackageManagerRepository;
+    @IntDef(prefix = { "FINGERPRINT_ENROLL_FINISH_ACTION_" }, value = {
+            FINGERPRINT_ENROLL_FINISH_ACTION_ADD_BUTTON_CLICK,
+            FINGERPRINT_ENROLL_FINISH_ACTION_NEXT_BUTTON_CLICK
+    })
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface FingerprintEnrollFinishAction {}
+
+    @NonNull private final FingerprintRepository mFingerprintRepository;
+    @NonNull private final EnrollmentRequest mRequest;
     private final int mUserId;
 
     private final MutableLiveData<Integer> mActionLiveData = new MutableLiveData<>();
 
-    public FingerprintEnrollFinishViewModel(@NonNull Application application,
-            FingerprintRepository fingerprintRepository,
-            PackageManagerRepository packageManagerRepository,
-            int userId) {
+    public FingerprintEnrollFinishViewModel(@NonNull Application application, int userId,
+            @NonNull EnrollmentRequest request,
+            @NonNull FingerprintRepository fingerprintRepository) {
         super(application);
-        mFingerprintRepository = fingerprintRepository;
-        mPackageManagerRepository = packageManagerRepository;
         mUserId = userId;
-        mActionLiveData.setValue(ACTION_NONE);
+        mRequest = request;
+        mFingerprintRepository = fingerprintRepository;
+    }
+
+    @NonNull
+    public EnrollmentRequest getRequest() {
+        return mRequest;
     }
 
     /**
@@ -67,57 +84,46 @@ public class FingerprintEnrollFinishViewModel extends AndroidViewModel {
     }
 
     /**
-     * Get number of fingerprints that this user enrolled.
+     * Device allows user to enroll another fingerprint or not.
      */
-    public int getNumOfEnrolledFingerprintsSize() {
-        return mFingerprintRepository.getNumOfEnrolledFingerprintsSize(mUserId);
+    public boolean isAnotherFingerprintEnrollable() {
+        return mFingerprintRepository.getNumOfEnrolledFingerprintsSize(mUserId)
+                < mFingerprintRepository.getMaxFingerprints();
     }
 
     /**
-     * Get max possible number of fingerprints for a user
+     * Clear action LiveData
      */
-    public int getMaxFingerprints() {
-        return mFingerprintRepository.getMaxFingerprints();
+    public void clearActionLiveData() {
+        mActionLiveData.setValue(null);
     }
 
     /**
-     * Clear life data
+     * Get action LiveData
      */
-    public void clearLiveData() {
-        mActionLiveData.setValue(ACTION_NONE);
+    public LiveData<Integer> getActionLiveData() {
+        return mActionLiveData;
     }
 
     /**
      * Handle add button Click
      */
     public void onAddButtonClick() {
-        mActionLiveData.postValue(ACTION_ADD_BUTTON_CLICK);
+        final int action = FINGERPRINT_ENROLL_FINISH_ACTION_ADD_BUTTON_CLICK;
+        if (DEBUG) {
+            Log.d(TAG, "onAddButtonClick post(" + action + ")");
+        }
+        mActionLiveData.postValue(action);
     }
 
     /**
      * Handle next button Click
      */
     public void onNextButtonClick() {
-        updateFingerprintSuggestionEnableState();
-        mActionLiveData.postValue(ACTION_NEXT_BUTTON_CLICK);
-    }
-
-    /**
-     * Handle back key pressed
-     */
-    public void onBackKeyPressed() {
-        updateFingerprintSuggestionEnableState();
-    }
-
-    private void updateFingerprintSuggestionEnableState() {
-        final int enrollNum = mFingerprintRepository.getNumOfEnrolledFingerprintsSize(mUserId);
-        final int flag = (enrollNum == 1) ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-                : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
-
-        ComponentName componentName = new ComponentName(getApplication(),
-                FINGERPRINT_SUGGESTION_ACTIVITY);
-
-        mPackageManagerRepository.setComponentEnabledSetting(componentName, flag,
-                PackageManager.DONT_KILL_APP);
+        final int action = FINGERPRINT_ENROLL_FINISH_ACTION_NEXT_BUTTON_CLICK;
+        if (DEBUG) {
+            Log.d(TAG, "onNextButtonClick post(" + action + ")");
+        }
+        mActionLiveData.postValue(action);
     }
 }

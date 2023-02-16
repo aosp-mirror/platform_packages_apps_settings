@@ -85,7 +85,7 @@ public class HighPowerDetailTest {
     @Test
     public void onClick_appAddedToDozeAllowlist_getsUnrestricted() {
         mFragment.mIsEnabled = true;
-        when(mPowerAllowlistBackend.isAllowlisted(TEST_PACKAGE)).thenReturn(false);
+        when(mPowerAllowlistBackend.isAllowlisted(TEST_PACKAGE, TEST_UID)).thenReturn(false);
         mFragment.onClick(null, DialogInterface.BUTTON_POSITIVE);
         verify(mBatteryUtils).setForceAppStandby(TEST_UID, TEST_PACKAGE,
                 AppOpsManager.MODE_ALLOWED);
@@ -93,9 +93,9 @@ public class HighPowerDetailTest {
 
     @Test
     public void getSummary_defaultActivePackage_returnUnavailable() {
-        doReturn(true).when(mPowerAllowlistBackend).isDefaultActiveApp(TEST_PACKAGE);
+        doReturn(true).when(mPowerAllowlistBackend).isDefaultActiveApp(TEST_PACKAGE, TEST_UID);
 
-        assertThat(HighPowerDetail.getSummary(mContext, mPowerAllowlistBackend, TEST_PACKAGE))
-                .isEqualTo(mContext.getString(R.string.high_power_system));
+        assertThat(HighPowerDetail.getSummary(mContext, mPowerAllowlistBackend, TEST_PACKAGE,
+                TEST_UID)).isEqualTo(mContext.getString(R.string.high_power_system));
     }
 }

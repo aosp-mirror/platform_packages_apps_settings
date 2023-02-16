@@ -1715,6 +1715,12 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Downloaded apps"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Feature flags"</string>
+    <string name="snoop_logger_filters_dashboard_title" msgid="3082744626059215281">"Snoop logger filters"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="626757789702677076">"Set filters (toggle Bluetooth after changing this setting)"</string>
+    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="5508775381082875785">"Snoop logger filter PBAP"</string>
+    <string name="bt_hci_snoop_log_filter_map_title" msgid="5700678748422653316">"Snoop logger filter MAP"</string>
+    <string name="bt_hci_snoop_log_filter_summary" msgid="6235819710248503870">"Set filtering mode. (Toggle Bluetooth after changing this setting)"</string>
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="272884193300382035">"Enable Snoop log mode filtered to change this option."</string>
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Screen reader primarily for people with blindness and low vision"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Tap items on your screen to hear them read aloud"</string>
@@ -1727,6 +1733,8 @@
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Magnifier follows text as you type"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3738009998799304549">"Always on"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="8946516092699010033">"Instead of deactivating magnification when changing apps, it simply zooms out to normal size. Pinch to zoom back in whenever you want."</string>
+    <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Joystick"</string>
+    <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Activate and move the magnifier with an on-screen joystick. Tap and hold, then drag on the joystick to control the magnifier. Tap and drag to move the joystick itself."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"About magnification"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Learn more about magnification"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Magnification type"</string>
@@ -1933,8 +1941,7 @@
     <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, left and right"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> +1 more"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Pair new device"</string>
-    <!-- no translation found for accessibility_hearing_device_connected_title (3785140037249487287) -->
-    <skip />
+    <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Hearing devices"</string>
     <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Saved devices"</string>
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Hearing device controls"</string>
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Hearing device shortcut"</string>
@@ -1942,8 +1949,7 @@
     <string name="accessibility_hac_mode_summary" msgid="5164793702798871478">"Improve audio for some hearing devices"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="4636110586636490256">"Make sure that your hearing devices are turned on and in pairing mode"</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Pair hearing device"</string>
-    <!-- no translation found for accessibility_found_hearing_devices (637407580358386553) -->
-    <skip />
+    <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Available hearing devices"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Don’t see your hearing device?"</string>
     <string name="accessibility_list_all_devices_title" msgid="3555097127022458571">"View all Bluetooth devices"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Audio adjustment"</string>
@@ -2045,10 +2051,6 @@
     <string name="keywords_hearing_aids" msgid="524979615168196199">"hard of hearing, hearing loss"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"hard of hearing, hearing loss, captions, Teletype, TTY"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
-    <string name="fast_pair_settings" msgid="3308819519080016185">"Fast Pair"</string>
-    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Nearby detection of Fast Pair Bluetooth devices."</string>
-    <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Scan for nearby devices"</string>
-    <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Saved devices"</string>
     <string name="print_settings" msgid="8519810615863882491">"Printing"</string>
     <string name="print_settings_summary" msgid="1458773840720811915">"{count,plural, =1{1 print service on}other{# print services on}}"</string>
     <string name="print_jobs_summary" msgid="7040836482336577323">"{count,plural, =1{1 print job}other{# print jobs}}"</string>
@@ -2229,7 +2231,7 @@
     <string name="battery_usage_screen_time" msgid="3973865893520804115">"Screen time: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Battery usage data will be available in a few hours once fully charged"</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"now"</string>
-    <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>–<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
+    <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> – <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>⁠"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Battery usage chart"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Daily battery usage chart"</string>
@@ -2857,7 +2859,6 @@
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"screen, lock time, timeout, lockscreen"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"memory, cache, data, delete, clear, free, space"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"connected, device, headphones, headset, speaker, wireless, pair, earbuds, music, media"</string>
-    <string name="keywords_fast_pair" msgid="5422942398816611159">"pair, earbuds, Bluetooth"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"background, theme, grid, customise, personalise"</string>
     <string name="keywords_styles" msgid="5291614313348476068">"icon, accent, colour"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"default, assistant"</string>
@@ -3438,8 +3439,10 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Turned off"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Advanced"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Permission manager"</string>
-    <string name="app_data_sharing_updates_title" msgid="921888411974134089">"Data sharing updates"</string>
-    <string name="app_data_sharing_updates_summary" msgid="1500580254161164185">"Show which apps recently updated data sharing policy"</string>
+    <!-- no translation found for app_data_sharing_updates_title (1694297952320402788) -->
+    <skip />
+    <!-- no translation found for app_data_sharing_updates_summary (4465929918457739443) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"Tap to wake"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Double-tap anywhere on the screen to wake device"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Opening links"</string>
@@ -4259,10 +4262,28 @@
     <string name="content_capture" msgid="868372905432812238">"App content"</string>
     <string name="content_capture_summary" msgid="49720773699715531">"Allow apps to send content to the Android system"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"Capture system heap dump"</string>
-    <string name="reboot_with_mte_title" msgid="9167242803901899693">"Reboot with MTE"</string>
-    <string name="reboot_with_mte_message" msgid="7675836625682561153">"System will reboot and allow to experiment with Memory Tagging Extension (MTE). MTE may negatively impact system performance and stability. Will be reset on next subsequent reboot."</string>
-    <string name="reboot_with_mte_summary" msgid="879384278357305846">"Try MTE for a single boot for app development"</string>
-    <string name="reboot_with_mte_already_enabled" msgid="7708271355555880940">"MTE is enabled through advanced memory protection"</string>
+    <!-- no translation found for development_memtag_page_title (3546667618748029188) -->
+    <skip />
+    <!-- no translation found for development_memtag_intro (8032596625527637164) -->
+    <skip />
+    <!-- no translation found for development_memtag_footer (5681925148773626562) -->
+    <skip />
+    <!-- no translation found for development_memtag_learn_more (8961984806973926704) -->
+    <skip />
+    <!-- no translation found for development_memtag_toggle (2474420239518386894) -->
+    <skip />
+    <!-- no translation found for development_memtag_reboot_message_on (8100075676107327847) -->
+    <skip />
+    <!-- no translation found for development_memtag_reboot_message_off (3703925647922079456) -->
+    <skip />
+    <!-- no translation found for reboot_with_mte_title (2320125810211279) -->
+    <skip />
+    <!-- no translation found for reboot_with_mte_message (1232881567956207641) -->
+    <skip />
+    <!-- no translation found for reboot_with_mte_summary (3896537791216432882) -->
+    <skip />
+    <!-- no translation found for reboot_with_mte_already_enabled (4439168867613407167) -->
+    <skip />
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"Capturing system heap dump"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"Couldn’t capture system heap dump"</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"Automatically capture system heap dumps"</string>
@@ -4552,54 +4573,30 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Apps installed in the last # month}other{Apps installed in the last # months}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Apps installed more than # month ago}other{Apps installed more than # months ago}}"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Fingerprint sensor"</string>
-    <!-- no translation found for flash_notifications_title (4490438861180492311) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_off (6056282996770691461) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_on_camera (455038312752009971) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_on_screen (7321838939240499267) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_on_camera_and_screen (6515622987118268649) -->
-    <skip />
-    <!-- no translation found for flash_notifications_intro (1506414740603805778) -->
-    <skip />
-    <!-- no translation found for flash_notifications_note (7258551860911169239) -->
-    <skip />
-    <!-- no translation found for flash_notifications_preview (5320176885050440874) -->
-    <skip />
-    <!-- no translation found for camera_flash_notification_title (1605639711485773787) -->
-    <skip />
-    <!-- no translation found for screen_flash_notification_title (8008197872050400734) -->
-    <skip />
-    <!-- no translation found for screen_flash_notification_color_title (7213407653340970790) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_blue (3585766657607931371) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_azure (8691198532944992243) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_cyan (6878780006173747267) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_spring_green (4466548514738457815) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_green (8418019648507964564) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_chartreuse_green (7456381649919010366) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_yellow (7413465411615454556) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_orange (979177126315557656) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_red (8954162219886445491) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_rose (1216848195972231251) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_magenta (7726221666557102155) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_violet (1279950780509029495) -->
-    <skip />
-    <!-- no translation found for color_selector_dialog_done (121253968943363376) -->
-    <skip />
-    <!-- no translation found for color_selector_dialog_cancel (8667350644753900701) -->
-    <skip />
+    <string name="flash_notifications_title" msgid="4490438861180492311">"Flash notifications"</string>
+    <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Off"</string>
+    <string name="flash_notifications_summary_on_camera" msgid="455038312752009971">"On/camera flash"</string>
+    <string name="flash_notifications_summary_on_screen" msgid="7321838939240499267">"On/screen flash"</string>
+    <string name="flash_notifications_summary_on_camera_and_screen" msgid="6515622987118268649">"On/camera and screen flash"</string>
+    <string name="flash_notifications_intro" msgid="1506414740603805778">"Flash the camera light or the screen when you receive notifications or when alarms sound."</string>
+    <string name="flash_notifications_note" msgid="7258551860911169239">"Use flash notifications with caution if you are light sensitive"</string>
+    <string name="flash_notifications_preview" msgid="5320176885050440874">"Preview"</string>
+    <string name="camera_flash_notification_title" msgid="1605639711485773787">"Camera flash notification"</string>
+    <string name="screen_flash_notification_title" msgid="8008197872050400734">"Screen flash notification"</string>
+    <string name="screen_flash_notification_color_title" msgid="7213407653340970790">"Screen flash colour"</string>
+    <string name="screen_flash_color_blue" msgid="3585766657607931371">"Blue"</string>
+    <string name="screen_flash_color_azure" msgid="8691198532944992243">"Azure"</string>
+    <string name="screen_flash_color_cyan" msgid="6878780006173747267">"Cyan"</string>
+    <string name="screen_flash_color_spring_green" msgid="4466548514738457815">"Spring green"</string>
+    <string name="screen_flash_color_green" msgid="8418019648507964564">"Green"</string>
+    <string name="screen_flash_color_chartreuse_green" msgid="7456381649919010366">"Chartreuse green"</string>
+    <string name="screen_flash_color_yellow" msgid="7413465411615454556">"Yellow"</string>
+    <string name="screen_flash_color_orange" msgid="979177126315557656">"Orange"</string>
+    <string name="screen_flash_color_red" msgid="8954162219886445491">"Red"</string>
+    <string name="screen_flash_color_rose" msgid="1216848195972231251">"Rose"</string>
+    <string name="screen_flash_color_magenta" msgid="7726221666557102155">"Magenta"</string>
+    <string name="screen_flash_color_violet" msgid="1279950780509029495">"Violet"</string>
+    <string name="color_selector_dialog_done" msgid="121253968943363376">"Done"</string>
+    <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Cancel"</string>
+    <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"This app can only be opened in one window"</string>
 </resources>
