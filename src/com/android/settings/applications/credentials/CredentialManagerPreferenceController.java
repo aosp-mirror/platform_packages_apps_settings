@@ -35,7 +35,6 @@ import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.OutcomeReceiver;
 import android.os.UserHandle;
-import android.service.credentials.CredentialProviderInfo;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
@@ -129,12 +128,10 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             return;
         }
 
-        List<ServiceInfo> services = new ArrayList<>();
-        for (CredentialProviderInfo cpi :
-                CredentialProviderInfo.getAvailableServices(mContext, getUser())) {
-            services.add(cpi.getServiceInfo());
-        }
-        setAvailableServices(lifecycleOwner, services);
+        setAvailableServices(
+                lifecycleOwner,
+                mCredentialManager.getCredentialProviderServices(
+                        getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY));
 
         mCredentialManager.listEnabledProviders(
                 mCancellationSignal,

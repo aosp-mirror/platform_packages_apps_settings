@@ -185,6 +185,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     }
 
     public void removeRegister() {
+        mSubscriptionManager.removeOnSubscriptionsChangedListener(this);
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             mDataContentObserver.unRegister(mContext);
         }

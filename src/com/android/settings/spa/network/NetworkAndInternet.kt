@@ -27,7 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
-import com.android.settings.spa.app.network.AirplaneModePreference
+import com.android.settings.spa.network.AirplaneModePreference
 import com.android.settingslib.RestrictedLockUtilsInternal
 import com.android.settingslib.Utils
 import com.android.settingslib.spa.framework.common.SettingsEntryBuilder

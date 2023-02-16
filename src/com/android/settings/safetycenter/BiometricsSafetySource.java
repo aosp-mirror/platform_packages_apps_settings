@@ -29,6 +29,7 @@ import android.safetycenter.SafetySourceStatus;
 
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricNavigationUtils;
+import com.android.settings.biometrics.activeunlock.ActiveUnlockStatusUtils;
 import com.android.settings.biometrics.combination.CombinedBiometricStatusUtils;
 import com.android.settings.biometrics.face.FaceStatusUtils;
 import com.android.settings.biometrics.fingerprint.FingerprintStatusUtils;
@@ -57,7 +58,25 @@ public final class BiometricsSafetySource {
                 userId);
         final CombinedBiometricStatusUtils combinedBiometricStatusUtils =
                 new CombinedBiometricStatusUtils(context, userId);
+        final ActiveUnlockStatusUtils activeUnlockStatusUtils =
+                new ActiveUnlockStatusUtils(context);
+        if (activeUnlockStatusUtils.isAvailable()) {
+            final RestrictedLockUtils.EnforcedAdmin disablingAdmin =
+                    combinedBiometricStatusUtils.getDisablingAdmin();
+            setBiometricSafetySourceData(context,
+                    activeUnlockStatusUtils.getTitleForActiveUnlock(),
+                    combinedBiometricStatusUtils.getSummary(),
+                    createPendingIntent(context,
+                            biometricNavigationUtils.getBiometricSettingsIntent(context,
+                                    combinedBiometricStatusUtils.getSettingsClassName(),
+                                    disablingAdmin, Bundle.EMPTY),
+                            REQUEST_CODE_COMBINED_BIOMETRIC_SETTING),
+                    disablingAdmin == null /* enabled */,
+                    combinedBiometricStatusUtils.hasEnrolled(),
+                    safetyEvent);
+            return;
 
+        }
         if (combinedBiometricStatusUtils.isAvailable()) {
             final RestrictedLockUtils.EnforcedAdmin disablingAdmin =
                     combinedBiometricStatusUtils.getDisablingAdmin();
