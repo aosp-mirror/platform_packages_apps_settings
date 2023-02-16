@@ -34,6 +34,7 @@ import android.media.AudioManager;
 import android.net.Uri;
 
 import com.android.settings.notification.MediaVolumePreferenceController;
+import com.android.settings.notification.NotificationVolumePreferenceController;
 import com.android.settings.notification.RingVolumePreferenceController;
 import com.android.settings.notification.SeparateRingVolumePreferenceController;
 import com.android.settings.notification.VolumeSeekBarPreferenceController;
@@ -64,6 +65,7 @@ public class VolumeSliceHelperTest {
     private VolumeSeekBarPreferenceController mMediaController;
     private VolumeSeekBarPreferenceController mRingController;
     private VolumeSeekBarPreferenceController mSeparateRingController;
+    private VolumeSeekBarPreferenceController mNotificationController;
 
     @Before
     public void setUp() {
@@ -72,8 +74,9 @@ public class VolumeSliceHelperTest {
         when(mContext.getContentResolver()).thenReturn(mResolver);
 
         mMediaController = new MediaVolumePreferenceController(mContext);
-        mSeparateRingController = new SeparateRingVolumePreferenceController(mContext);
         mRingController = new RingVolumePreferenceController(mContext);
+        mSeparateRingController = new SeparateRingVolumePreferenceController(mContext);
+        mNotificationController = new NotificationVolumePreferenceController(mContext);
 
         mIntent = createIntent(AudioManager.VOLUME_CHANGED_ACTION)
                 .putExtra(AudioManager.EXTRA_VOLUME_STREAM_VALUE, 1)
@@ -236,6 +239,40 @@ public class VolumeSliceHelperTest {
         VolumeSliceHelper.onReceive(mContext, intent);
 
         verify(mResolver).notifyChange(mMediaController.getSliceUri(), null);
+    }
+
+    /**
+     * Without this test passing, when notification is separated from ring and its value is already
+     * zero, setting ringermode to silent would not disable notification slider.
+     * Note: the above scenario happens only in volume panel where controllers do not get to
+     * register for events such as RINGER_MODE_CHANGE.
+     */
+    @Test
+    public void onReceive_ringVolumeMuted_shouldNotifyChangeNotificationSlice() {
+        final Intent intent = createIntent(AudioManager.STREAM_MUTE_CHANGED_ACTION)
+                .putExtra(AudioManager.EXTRA_VOLUME_STREAM_TYPE, mRingController.getAudioStream());
+        registerIntentToUri(mRingController);
+        registerIntentToUri(mNotificationController);
+
+        VolumeSliceHelper.onReceive(mContext, intent);
+
+        verify(mResolver).notifyChange(mNotificationController.getSliceUri(), null);
+    }
+
+    /**
+     * Notifying notification slice on ring mute does not mean it should not notify ring slice.
+     * Rather, it should notify both slices.
+     */
+    @Test
+    public void onReceive_ringVolumeMuted_shouldNotifyChangeRingSlice() {
+        final Intent intent = createIntent(AudioManager.STREAM_MUTE_CHANGED_ACTION)
+                .putExtra(AudioManager.EXTRA_VOLUME_STREAM_TYPE, mRingController.getAudioStream());
+        registerIntentToUri(mRingController);
+        registerIntentToUri(mNotificationController);
+
+        VolumeSliceHelper.onReceive(mContext, intent);
+
+        verify(mResolver).notifyChange(mRingController.getSliceUri(), null);
     }
 
     @Test

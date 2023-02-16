@@ -86,8 +86,8 @@
         android:icon="@drawable/ic_notifications"
         android:title="@string/notification_volume_option_title"
         android:order="-150"
-        settings:controller=
-            "com.android.settings.notification.NotificationVolumePreferenceController"/>
+        settings:controller="com.android.settings.notification.NotificationVolumePreferenceController"
+        settings:unavailableSliceSubtitle="@string/notification_volume_disabled_summary"/>
 
     <!-- Alarm volume -->
     <com.android.settings.notification.VolumeSeekBarPreference
