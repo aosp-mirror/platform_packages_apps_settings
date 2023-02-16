@@ -555,15 +555,20 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
      * updates the relevant info.
      */
     public interface MobileNetworkCallback {
-        void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList);
+        default void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
+        }
 
-        void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList);
+        default void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
+        }
 
-        void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList);
+        default void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
+        }
 
-        void onAllMobileNetworkInfoChanged(
-                List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList);
+        default void onAllMobileNetworkInfoChanged(
+                List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
+        }
 
-        void onAirplaneModeChanged(boolean enabled);
+        default void onAirplaneModeChanged(boolean enabled) {
+        }
     }
 }
