@@ -392,7 +392,7 @@ public final class AccessibilityGestureNavigationTutorial {
         final CharSequence title =
                 context.getText(R.string.accessibility_tutorial_dialog_title_volume);
         final View image =
-                createIllustrationView(context, R.drawable.accessibility_shortcut_type_hardware);
+                createIllustrationView(context, R.drawable.a11y_shortcut_type_hardware);
         final ImageView indicatorIcon =
                 createImageView(context, R.drawable.ic_accessibility_page_indicator);
         final CharSequence instruction =
@@ -408,7 +408,7 @@ public final class AccessibilityGestureNavigationTutorial {
                 context.getText(R.string.accessibility_tutorial_dialog_title_triple);
         final View image =
                 createIllustrationViewWithImageRawResource(context,
-                        R.raw.accessibility_shortcut_type_triple_tap);
+                        R.raw.a11y_shortcut_type_triple_tap);
         final CharSequence instruction =
                 context.getText(R.string.accessibility_tutorial_dialog_message_triple);
         final ImageView indicatorIcon =
@@ -440,13 +440,13 @@ public final class AccessibilityGestureNavigationTutorial {
     private static View createSoftwareImage(Context context) {
         int resId;
         if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
-            resId = R.drawable.accessibility_shortcut_type_software_floating;
+            resId = R.drawable.a11y_shortcut_type_software_floating;
         } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
             resId = AccessibilityUtil.isTouchExploreEnabled(context)
-                    ? R.drawable.accessibility_shortcut_type_software_gesture_talkback
-                    : R.drawable.accessibility_shortcut_type_software_gesture;
+                    ? R.drawable.a11y_shortcut_type_software_gesture_talkback
+                    : R.drawable.a11y_shortcut_type_software_gesture;
         } else {
-            resId = R.drawable.accessibility_shortcut_type_software;
+            resId = R.drawable.a11y_shortcut_type_software;
         }
         return createIllustrationView(context, resId);
     }
