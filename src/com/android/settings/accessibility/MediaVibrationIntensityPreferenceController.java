@@ -20,6 +20,8 @@ import android.content.Context;
 import android.os.VibrationAttributes;
 import android.provider.Settings;
 
+import com.android.settings.R;
+
 /** Preference controller for am vibration intensity */
 public class MediaVibrationIntensityPreferenceController
         extends VibrationIntensityPreferenceController {
@@ -46,6 +48,7 @@ public class MediaVibrationIntensityPreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mContext.getResources().getBoolean(R.bool.config_media_vibration_supported) ?
+                AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 }
