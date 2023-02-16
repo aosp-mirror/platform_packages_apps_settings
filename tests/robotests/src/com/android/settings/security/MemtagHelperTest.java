@@ -176,4 +176,16 @@ public class MemtagHelperTest {
         ShadowSystemProperties.override(mMemtagProperty, "memtag");
         assertThat(MemtagHelper.getSummary()).isEqualTo(R.string.memtag_force_on);
     }
+
+    @Test
+    public void isForcedOn_forceOnOverride_isTrue() {
+        ShadowSystemProperties.override(mDeviceConfigOverride, "force_on");
+        assertThat(MemtagHelper.isForcedOn()).isTrue();
+    }
+
+    @Test
+    public void isForcedOff_forceOffOverride_isTrue() {
+        ShadowSystemProperties.override(mDeviceConfigOverride, "force_off");
+        assertThat(MemtagHelper.isForcedOff()).isTrue();
+    }
 }
