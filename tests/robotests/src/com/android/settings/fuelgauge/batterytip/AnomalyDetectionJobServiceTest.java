@@ -146,7 +146,8 @@ public class AnomalyDetectionJobServiceTest {
     @Test
     public void saveAnomalyToDatabase_systemAllowlisted_doNotSave() {
         doReturn(UID).when(mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
-        doReturn(true).when(mPowerAllowlistBackend).isAllowlisted(any(String[].class));
+        doReturn(true).when(mPowerAllowlistBackend)
+                .isAllowlisted(any(String[].class), any(Integer.class));
 
         mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext,
                 mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,

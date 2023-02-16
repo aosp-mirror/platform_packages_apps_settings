@@ -47,7 +47,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     private static final String ACTION_FINGERPRINT_SETTINGS =
             "android.settings.FINGERPRINT_SETTINGS";
     @VisibleForTesting
-    static final String FINGERPRINT_SUGGESTION_ACTIVITY =
+    public static final String FINGERPRINT_SUGGESTION_ACTIVITY =
             "com.android.settings.SetupFingerprintSuggestionActivity";
 
     private FingerprintManager mFingerprintManager;

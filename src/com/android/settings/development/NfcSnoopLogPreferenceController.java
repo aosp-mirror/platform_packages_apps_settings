@@ -36,7 +36,7 @@ public class NfcSnoopLogPreferenceController extends
             "nfc_snoop_log";
     @VisibleForTesting
     static final String NFC_NFCSNOOP_LOG_MODE_PROPERTY =
-            "persist.nfc.nfcsnooplogmode";
+            "persist.nfc.snoop_log_mode";
     @VisibleForTesting
     static final String NFCSNOOP_MODE_FILTERED = "filtered";
     @VisibleForTesting

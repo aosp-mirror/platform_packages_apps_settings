@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.spa.app.network
+package com.android.settings.spa.network
 
 import android.content.Context
 import android.content.pm.PackageManager
@@ -65,7 +65,6 @@ private class AirplaneModeController(private val context: Context) : OnAirplaneM
         return context.resources.getBoolean(R.bool.config_show_toggle_airplane)
                 && !context.packageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK)
     }
-
 
     fun isAirplaneModeOn(): Boolean {
         return airplaneModeEnabler.isAirplaneModeOn()
