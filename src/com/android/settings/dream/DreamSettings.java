@@ -90,12 +90,14 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
         }
     }
 
-    static int getDreamSettingDescriptionResId(@WhenToDream int dreamSetting) {
+    static int getDreamSettingDescriptionResId(@WhenToDream int dreamSetting,
+            boolean enabledOnBattery) {
         switch (dreamSetting) {
             case WHILE_CHARGING:
                 return R.string.screensaver_settings_summary_sleep;
             case WHILE_DOCKED:
-                return R.string.screensaver_settings_summary_dock;
+                return enabledOnBattery ? R.string.screensaver_settings_summary_dock
+                        : R.string.screensaver_settings_summary_dock_and_charging;
             case EITHER:
                 return R.string.screensaver_settings_summary_either_long;
             case NEVER:
@@ -136,10 +138,11 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
 
     @VisibleForTesting
     static CharSequence getSummaryTextFromBackend(DreamBackend backend, Context context) {
-        if (!backend.isEnabled()) {
-            return context.getString(R.string.screensaver_settings_summary_off);
+        if (backend.isEnabled()) {
+            return context.getString(R.string.screensaver_settings_summary_on,
+                    backend.getActiveDreamName());
         } else {
-            return backend.getActiveDreamName();
+            return context.getString(R.string.screensaver_settings_summary_off);
         }
     }
 

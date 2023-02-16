@@ -135,7 +135,7 @@ public class ContextualCardManagerTest {
 
         final List<String> actualCards = mManager.mSavedCards.stream().collect(Collectors.toList());
         final List<String> expectedCards = Arrays.asList("test_low_storage", "test_flashlight",
-                "test_dark_theme", "test_gesture", "test_battery");
+                "test_dark_theme", "test_gesture", "test_face_enroll");
         assertThat(actualCards).containsExactlyElementsIn(expectedCards);
     }
 
@@ -695,9 +695,9 @@ public class ContextualCardManagerTest {
                 .setViewType(VIEW_TYPE_FULL_WIDTH)
                 .build());
         cards.add(new ContextualCard.Builder()
-                .setName("test_battery")
+                .setName("test_face_enroll")
                 .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(CustomSliceRegistry.BATTERY_FIX_SLICE_URI)
+                .setSliceUri(CustomSliceRegistry.FACE_ENROLL_SLICE_URI)
                 .setViewType(VIEW_TYPE_FULL_WIDTH)
                 .build());
         return cards;

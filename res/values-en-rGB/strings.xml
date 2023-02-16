@@ -216,15 +216,13 @@
     <string name="skip_label" msgid="6380034601349015895">"Skip"</string>
     <string name="next_label" msgid="1248293387735652187">"Next"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Languages"</string>
-    <string name="language_picker_category_title" msgid="1792199453060454565">"Preferred language order"</string>
-    <string name="desc_current_default_language" msgid="1901157141663662859">"System language"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Remove"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Add a language"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Language"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Preferred language"</string>
-    <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"App languages"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"App languages"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Set the language for each app"</string>
-    <string name="app_locale_picker_title" msgid="2431448962911301366">"App language"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"App language"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Suggested languages"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"All languages"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"System language"</string>
@@ -232,9 +230,6 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Language selection for this app isn’t available from Settings."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Language may differ from languages available in the app. Some apps may not support this setting."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Only apps that support language selection are shown here."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Your system, apps and websites use the first supported language from your preferred languages."</string>
-    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"To select a language for each app, go to app language settings."</string>
-    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Learn more about languages"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Remove selected languages?</item>
       <item quantity="one">Remove selected language?</item>
@@ -242,7 +237,7 @@
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Text will be displayed in another language."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Can’t remove all languages"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Keep at least one preferred language"</string>
-    <string name="locale_not_translated" msgid="3071618135527110152">"Not available as system language"</string>
+    <string name="locale_not_translated" msgid="5079729745235316146">"May not be available in some apps"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Move up"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Move down"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Move to top"</string>
@@ -458,6 +453,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your PIN, pattern or password to unlock your phone."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Use Face Unlock to unlock your phone"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Fingerprint"</string>
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"When using Fingerprint Unlock"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingerprint for work"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Manage fingerprints"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Use fingerprint for"</string>
@@ -525,9 +521,6 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Lift your finger after you feel a vibration"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Move somewhere with gentler lighting and try again"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"You’ve reached the maximum number of attempts"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Use your fingerprint to unlock your tablet or verify that it’s you, like when you sign in to apps"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Use your fingerprint to unlock your device or verify that it’s you, like when you sign in to apps"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Use your fingerprint to unlock your phone or verify that it’s you, like when you sign in to apps"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Face and Fingerprint Unlock"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Tap to set up"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Face and fingerprints added"</string>
@@ -592,10 +585,12 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Enrolled <xliff:g id="PERCENTAGE">%d</xliff:g> per cent"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Enrolling fingerprint <xliff:g id="PERCENTAGE">%d</xliff:g> per cent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingerprint added"</string>
-    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Now you can use your fingerprint to unlock your tablet or verify that it’s you, like when you sign in to apps or approve a purchase"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Now you can use your fingerprint to unlock your tablet or verify that it’s you, like when you sign in to apps"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Now you can use your fingerprint to unlock your device or verify that it’s you, like when you sign in to apps"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Now you can use your fingerprint to unlock your phone or verify that it’s you, like when you sign in to apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Now you can use your fingerprint to unlock your tablet or verify that it’s you, like when you sign in to apps or approve a purchase"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Now you can use your fingerprint to unlock your device or verify that it’s you, like when you sign in to apps or approve a purchase"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Now you can use your fingerprint to unlock your phone or verify that it’s you, like when you sign in to apps or approve a purchase"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Unlock only when screen is on"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"The screen must be on before you can unlock with your fingerprint. This makes accidental unlocking less likely."</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Screen, unlock"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Do it later"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Lift, then touch again"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Place the side of your fingerprint on the sensor and hold, then switch to the other side"</string>
@@ -739,17 +734,29 @@
     <string name="fingerprint_unlock_set_unlock_pin" msgid="4724451168139460493">"Fingerprint + PIN"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"Fingerprint + Password"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Continue without fingerprint"</string>
-    <string name="fingerprint_unlock_title" msgid="4978686534505944042">"You can unlock your phone using your fingerprint. For security, this option requires a backup screen lock."</string>
+    <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"You can unlock your phone using your fingerprint. For security, this option requires a backup screen lock."</string>
+    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
+    <skip />
+    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
+    <skip />
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"Face Unlock + pattern"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Face Unlock + PIN"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Face Unlock + password"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Continue without Face Unlock"</string>
-    <string name="face_unlock_title" msgid="7344830351598247267">"You can unlock your phone using your face. For security, this option requires a backup screen lock."</string>
+    <string name="face_unlock_title" product="default" msgid="7344830351598247267">"You can unlock your phone using your face. For security, this option requires a backup screen lock."</string>
+    <!-- no translation found for face_unlock_title (5695698036499155727) -->
+    <skip />
+    <!-- no translation found for face_unlock_title (6768108756755361161) -->
+    <skip />
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Pattern • Face • Fingerprint"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • Face • Fingerprint"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Password • Face • Fingerprint"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Continue without face or fingerprint"</string>
-    <string name="biometrics_unlock_title" msgid="616524056055233041">"You can unlock your phone using your face or fingerprint. For security, this option requires a backup screen lock."</string>
+    <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"You can unlock your phone using your face or fingerprint. For security, this option requires a backup screen lock."</string>
+    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
+    <skip />
+    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
+    <skip />
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"Disabled by admin, encryption policy or credential storage"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"None"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Swipe"</string>
@@ -1517,11 +1524,14 @@
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Try different styles, wallpapers and more"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Screen saver"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"screensaver"</string>
+    <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Unavailable because bedtime mode is on"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Use screen saver"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"While charging or docked"</string>
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"While docked and charging"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"While charging"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"While docked"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Never"</string>
+    <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"On/<xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Off"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"When to start"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Current screen saver"</string>
@@ -1787,6 +1797,8 @@
     <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"You can start using your <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Battery status"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Battery level"</string>
+    <string name="communal_settings_title" msgid="2845678473945902115">"Communal"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"Communal settings"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Edit access point"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Not set"</string>
@@ -1918,6 +1930,7 @@
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> will be untethered."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet tethering"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Share phone’s Internet connection via Ethernet"</string>
+    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"Share tablet’s Internet connection via Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Use hotspot and tethering to provide Internet to other devices through your mobile data connection. Apps can also create a hotspot to share content with nearby devices."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Use hotspot and tethering to provide Internet to other devices through your Wi‑Fi or mobile data connection. Apps can also create a hotspot to share content with nearby devices."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Help"</string>
@@ -2437,7 +2450,7 @@
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;To zoom in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Use shortcut to start magnification&lt;br/&gt; {1,number,integer}. Tap the screen&lt;br/&gt; {2,number,integer}. Drag two fingers to move around screen&lt;br/&gt; {3,number,integer}. Pinch with two fingers to adjust zoom&lt;br/&gt; {4,number,integer}. Use shortcut to stop magnification&lt;br/&gt;&lt;br/&gt; &lt;b&gt;To zoom in temporarily:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Make sure that your magnification type is set to full screen&lt;br/&gt; {1,number,integer}. Use shortcut to start magnification&lt;br/&gt; {2,number,integer}. Touch and hold anywhere on the screen&lt;br/&gt; {3,number,integer}. Drag finger to move around screen&lt;br/&gt; {4,number,integer}. Lift finger to stop magnification"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"When magnification is turned on, you can zoom in on your screen.\n\n"<b>"To zoom"</b>", start magnification, then tap anywhere on the screen.\n"<ul><li>"Drag 2 or more fingers to scroll"</li>\n<li>"Pinch 2 or more fingers to adjust zoom"</li></ul>\n\n<b>"To zoom temporarily"</b>", start magnification, then touch and hold anywhere on the screen.\n"<ul><li>"Drag to move around the screen"</li>\n<li>"Lift finger to zoom out"</li></ul>\n\n"You can’t zoom in on the keyboard or navigation bar."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Page <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> of <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Use accessibility button to open"</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Use Accessibility button to open"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Hold volume keys to open"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Triple-tap screen to open"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Use gesture to open"</string>
@@ -2807,7 +2820,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"History details"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Battery usage"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"View usage for past 24 hours"</string>
-    <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"View usage from last full charge"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"View usage since last full charge"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"App battery usage"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Use details"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Adjust power use"</string>
@@ -2827,10 +2840,14 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Some features may be limited"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Higher battery usage"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"See apps with highest usage"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"Charging is paused"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"Protecting battery to extend battery lifespan"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Charging optimised to protect your battery"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"To help extend your batter\'s lifespan, charging is optimised"</string>
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Charging optimised to protect your battery"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"To help extend your battery\'s lifespan, charging is optimised while docked"</string>
+    <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Charging optimised to protect your battery"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"To help extend your battery\'s lifespan, charging is optimised while docked"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Charging to full"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"To protect your battery, charging will be optimised the next time your tablet is docked"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Learn more about charging is paused"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Resume charging"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"In certain conditions, like high temperatures and long charging periods, charging may be limited to <xliff:g id="PERCENT">%1$s</xliff:g> to help preserve battery health.\n\nWhen those conditions end, your phone will automatically charge normally."</string>
@@ -2988,25 +3005,25 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Battery usage"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Since full charge"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Manage battery usage"</string>
-    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> total • <xliff:g id="TIME_1">^2</xliff:g> background\nfrom last full charge"</string>
+    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"<xliff:g id="TIME_0">^1</xliff:g> total • <xliff:g id="TIME_1">^2</xliff:g> background\nsince last full charge"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> total • <xliff:g id="TIME_1">^2</xliff:g> background\nfor past 24 hours"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"<xliff:g id="TIME_0">^1</xliff:g> total • <xliff:g id="TIME_1">^2</xliff:g> background\nfor <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
-    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"Total less than a minute from last full charge"</string>
+    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"Total less than a minute since last full charge"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"Total less than a minute for past 24 hr"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Total less than a minute for <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"Background less than a minute from last full charge"</string>
+    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"Background less than a minute since last full charge"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"Background less than a minute for past 24 hr"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Background less than a minute for <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_total_usage" msgid="4685408616230899847">"<xliff:g id="TIME">^1</xliff:g> total from last full charge"</string>
+    <string name="battery_total_usage" msgid="4811532932663354619">"<xliff:g id="TIME">^1</xliff:g> total since last full charge"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"<xliff:g id="TIME">^1</xliff:g> total for past 24 hr"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_0">^1</xliff:g> total for <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="548670902301883980">"<xliff:g id="TIME">^1</xliff:g> background from last full charge"</string>
+    <string name="battery_bg_usage" msgid="8262917746299259350">"<xliff:g id="TIME">^1</xliff:g> background since last full charge"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"<xliff:g id="TIME">^1</xliff:g> background for past 24 hr"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> background for <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"<xliff:g id="TIME">^1</xliff:g> total • background less than a minute\nfrom last full charge"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"<xliff:g id="TIME">^1</xliff:g> total • background less than a minute\nsince last full charge"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"<xliff:g id="TIME">^1</xliff:g> total • background less than a minute\nfor past 24 hours"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"<xliff:g id="TIME_0">^1</xliff:g> total • background less than a minute\nfor <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_not_usage" msgid="1472275761547230196">"No usage from last full charge"</string>
+    <string name="battery_not_usage" msgid="3851536644733662392">"No usage since last full charge"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"No usage for past 24 hr"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"Other users"</string>
@@ -3486,7 +3503,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Delete <xliff:g id="USER_NAME">%1$s</xliff:g> from this device"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Lock screen settings"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Add users from lock screen"</string>
-    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"Switch to admin user when docked"</string>
+    <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Switch to admin user when docked"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Delete yourself?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Delete this user?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Remove this profile?"</string>
@@ -3802,6 +3819,7 @@
     <string name="call_volume_option_title" msgid="1461105986437268924">"Call volume"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"Alarm volume"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Ring and notification volume"</string>
+    <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Ring volume"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Notification volume"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Phone ringtone"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Default notification sound"</string>
@@ -4198,6 +4216,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"At your request, Android is blocking this app\'s notifications from appearing on this device"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"At your request, Android is blocking this category of notifications from appearing on this device"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"At your request, Android is blocking this group of notifications from appearing on this device"</string>
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"This app does not send notifications"</string>
     <string name="notification_channels" msgid="1502969522886493799">"Categories"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Other"</string>
     <plurals name="notification_group_summary" formatted="false" msgid="483490958130993160">
@@ -5486,6 +5505,7 @@
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"App data usage"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Invalid network mode <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignore."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Access point names"</string>
+    <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Unavailable when connected to <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"See more"</string>
     <string name="see_less" msgid="2642392725363552793">"See less"</string>
@@ -5666,6 +5686,11 @@
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"To use, first turn on ‘Show device controls’"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Show double-line clock when available"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Double-line clock"</string>
+    <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"Shortcuts"</string>
+    <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
+      <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
+      <item quantity="one"><xliff:g id="FIRST_0">%1$s</xliff:g></item>
+    </plurals>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>

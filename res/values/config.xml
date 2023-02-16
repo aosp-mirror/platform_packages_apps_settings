@@ -331,6 +331,9 @@
     surface in search results or not.-->
     <bool name="config_show_wifi_settings">true</bool>
 
+    <!-- Whether Wi-Fi hotspot settings should be shown or not. -->
+    <bool name="config_show_wifi_hotspot_settings">true</bool>
+
     <!-- Whether toggle_airplane is available or not. -->
     <bool name="config_show_toggle_airplane">true</bool>
 
@@ -619,14 +622,14 @@
     <!-- Whether the dream setup activity should be enabled as part of setupwizard -->
     <bool name="dream_setup_supported">false</bool>
 
+    <!-- Whether to show communal settings at the top level. -->
+    <bool name="config_show_communal_settings">false</bool>
+
     <!-- Whether to put the apps with system UID into system component bucket or not -->
     <bool name="config_battery_combine_system_components">false</bool>
 
     <!-- The extra value for battery tip -->
     <integer name="config_battery_extra_tip_value">12</integer>
-
-    <!-- Whether to enable the advanced vpn feature. The default is not to. -->
-    <bool name="config_advanced_vpn_enabled">false</bool>
 
     <!-- An array of uid name for which packages exempt from Wi-Fi permission check. -->
     <string-array name="config_exempt_wifi_permission_uid_name" translatable="false">
@@ -634,6 +637,22 @@
         <item>android.uid.system:1000</item>
     </string-array>
 
+    <!-- The default value for RedactionInterstitial in SUW -->
+    <bool name="default_allow_sensitive_lockscreen_content">true</bool>
+
     <!-- Whether to enable the app battery usage list page feature. -->
     <bool name="config_app_battery_usage_list_enabled">false</bool>
+
+    <!-- Whether sim related information is visible to the end user. -->
+    <bool name="config_show_sim_info">true</bool>
+
+    <!-- Whether the toggle for Auto-rotate with Face Detection should be shown. -->
+    <bool name="config_auto_rotate_face_detection_available">true</bool>
+    <!-- In the case of receiving both help and progress message, display progress message. -->
+    <bool name="enrollment_progress_priority_over_help">false</bool>
+    <!-- Prioritize help message by their occurrence -->
+    <bool name="enrollment_prioritize_acquire_messages">false</bool>
+    <!-- Control messages displayed during enrollment -->
+    <bool name="enrollment_message_display_controller_flag">false</bool>
+
 </resources>

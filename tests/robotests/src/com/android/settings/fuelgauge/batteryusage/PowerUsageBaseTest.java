@@ -15,18 +15,26 @@
  */
 package com.android.settings.fuelgauge.batteryusage;
 
+import static com.android.settings.fuelgauge.batteryusage.PowerUsageBase.KEY_INCLUDE_HISTORY;
+import static com.android.settings.fuelgauge.batteryusage.PowerUsageBase.KEY_REFRESH_TYPE;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.refEq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
+import android.os.BatteryUsageStats;
 import android.os.Bundle;
 
 import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
+import com.android.settings.fuelgauge.BatteryBroadcastReceiver;
 import com.android.settings.testutils.shadow.ShadowDashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -46,14 +54,15 @@ public class PowerUsageBaseTest {
 
     @Mock
     private LoaderManager mLoaderManager;
+    @Mock
+    private Loader<BatteryUsageStats> mBatteryUsageStatsLoader;
     private TestFragment mFragment;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mFragment = spy(new TestFragment());
-        doReturn(mLoaderManager).when(mFragment).getLoaderManager();
+        mFragment = spy(new TestFragment(mLoaderManager));
     }
 
     @Test
@@ -63,7 +72,62 @@ public class PowerUsageBaseTest {
         verify(mLoaderManager, never()).initLoader(anyInt(), any(Bundle.class), any());
     }
 
-    public static class TestFragment extends PowerUsageBase {
+    @Test
+    public void restartBatteryInfoLoader() {
+        final Bundle bundle = new Bundle();
+        bundle.putInt(KEY_REFRESH_TYPE, BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_STATUS);
+        bundle.putBoolean(KEY_INCLUDE_HISTORY, false);
+        doReturn(mBatteryUsageStatsLoader).when(mLoaderManager).getLoader(
+                PowerUsageBase.LoaderIndex.BATTERY_USAGE_STATS_LOADER);
+        doReturn(false).when(mBatteryUsageStatsLoader).isReset();
+
+        mFragment.restartBatteryStatsLoader(
+                BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_STATUS);
+
+        verify(mLoaderManager)
+                .restartLoader(eq(PowerUsageBase.LoaderIndex.BATTERY_USAGE_STATS_LOADER),
+                        refEq(bundle), any());
+    }
+
+    @Test
+    public void restartBatteryInfoLoader_loaderReset_initLoader() {
+        final Bundle bundle = new Bundle();
+        bundle.putInt(KEY_REFRESH_TYPE, BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_STATUS);
+        bundle.putBoolean(KEY_INCLUDE_HISTORY, false);
+        doReturn(mBatteryUsageStatsLoader).when(mLoaderManager).getLoader(
+                PowerUsageBase.LoaderIndex.BATTERY_USAGE_STATS_LOADER);
+        doReturn(true).when(mBatteryUsageStatsLoader).isReset();
+
+        mFragment.restartBatteryStatsLoader(
+                BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_STATUS);
+
+        verify(mLoaderManager)
+                .initLoader(eq(PowerUsageBase.LoaderIndex.BATTERY_USAGE_STATS_LOADER),
+                        refEq(bundle), any());
+    }
+
+    @Test
+    public void restartBatteryInfoLoader_nullLoader_initLoader() {
+        final Bundle bundle = new Bundle();
+        bundle.putInt(KEY_REFRESH_TYPE, BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_STATUS);
+        bundle.putBoolean(KEY_INCLUDE_HISTORY, false);
+        doReturn(null).when(mLoaderManager).getLoader(
+                PowerUsageBase.LoaderIndex.BATTERY_USAGE_STATS_LOADER);
+
+        mFragment.restartBatteryStatsLoader(
+                BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_STATUS);
+
+        verify(mLoaderManager).initLoader(eq(PowerUsageBase.LoaderIndex.BATTERY_USAGE_STATS_LOADER),
+                refEq(bundle), any());
+    }
+
+    private static class TestFragment extends PowerUsageBase {
+
+        private LoaderManager mLoaderManager;
+
+        TestFragment(LoaderManager loaderManager) {
+            mLoaderManager = loaderManager;
+        }
 
         @Override
         public int getMetricsCategory() {
@@ -93,6 +157,11 @@ public class PowerUsageBaseTest {
         @Override
         protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
             return null;
+        }
+
+        @Override
+        protected LoaderManager getLoaderManagerForCurrentFragment() {
+            return mLoaderManager;
         }
     }
 }

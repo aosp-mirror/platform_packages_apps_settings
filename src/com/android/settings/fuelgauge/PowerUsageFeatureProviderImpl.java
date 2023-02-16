@@ -156,7 +156,7 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public Intent getResumeChargeIntent() {
+    public Intent getResumeChargeIntent(boolean isDockDefender) {
         return null;
     }
 

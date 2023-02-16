@@ -1012,6 +1012,8 @@
     <!-- Note: Update FingerprintEnrollParentalConsent.CONSENT_STRING_RESOURCES when any _consent_ strings are added or removed. -->
     <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_preference_title">Fingerprint</string>
+    <!-- Title for a category shown for the fingerprint settings page, followed by items that the user can toggle on/off to require/disable. [CHAR LIMIT=50] -->
+    <string name="security_settings_fingerprint_settings_preferences_category">When using Fingerprint Unlock</string>
     <!-- Fingerprint enrollment and settings --><skip />
     <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
     <string name="security_settings_work_fingerprint_preference_title">Fingerprint for work</string>
@@ -1148,13 +1150,6 @@
     <!-- Acquire message received during fingerprint enrollment to inform the user they've reached the maximum number of enrollments. [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts">You\u2019ve reached the maximum number of attempts</string>
 
-    <!-- Message text only shown in fingerprint security settings home screen. (tablet) [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet">Use your fingerprint to unlock your tablet or verify it\u2019s you, like when you sign in to apps</string>
-    <!-- Message text only shown in fingerprint security settings home screen. (device) [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device">Use your fingerprint to unlock your device or verify it\u2019s you, like when you sign in to apps</string>
-    <!-- Message text only shown in fingerprint security settings home screen. (phone) [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default">Use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps</string>
-
     <!-- Biometric settings --><skip />
     <!-- Title shown for menu item that launches biometric settings. [CHAR LIMIT=66] -->
     <string name="security_settings_biometric_preference_title">Face &amp; Fingerprint Unlock</string>
@@ -1285,14 +1280,18 @@
     <string name="security_settings_udfps_enroll_progress_a11y_message">Enrolling fingerprint <xliff:g id="percentage" example="10">%d</xliff:g> percent</string>
     <!-- Title shown in fingerprint enrollment dialog once enrollment is completed [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_finish_title">Fingerprint added</string>
-    <!-- Message shown in SFPS enrollment dialog once enrollment is completed [CHAR LIMIT=NONE] -->
-    <string name="security_settings_sfps_enroll_finish">Now you can use your fingerprint to unlock your tablet or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
     <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (tablet) [CHAR LIMIT=NONE] -->
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet">Now you can use your fingerprint to unlock your tablet or verify it\u2019s you, like when you sign in to apps</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet">Now you can use your fingerprint to unlock your tablet or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
     <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (device) [CHAR LIMIT=NONE] -->
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device">Now you can use your fingerprint to unlock your device or verify it\u2019s you, like when you sign in to apps</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device">Now you can use your fingerprint to unlock your device or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
     <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (default) [CHAR LIMIT=NONE] -->
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default">Now you can use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default">Now you can use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
+    <!-- Title for require screen on to auth toggle shown in fingerprint enrollment dialog once enrollment is completed. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_require_screen_on_to_auth_title">Unlock only when screen is on</string>
+    <!-- Description for require screen on to auth toggle shown in fingerprint enrollment dialog once enrollment is completed. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_require_screen_on_to_auth_description">The screen must be on before you can unlock with your fingerprint. This makes accidental unlocking less likely.</string>
+    <!-- Description for require screen on to auth toggle shown in fingerprint enrollment dialog once enrollment is completed. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_require_screen_on_to_auth_keywords">Screen, Unlock</string>
     <!-- Button text to skip enrollment of fingerprint [CHAR LIMIT=40] -->
     <string name="security_settings_fingerprint_enroll_enrolling_skip">Do it later</string>
     <!-- Accessibility message for fingerprint enrollment asking the user to place the tip of their finger on the fingerprint sensor [CHAR LIMIT=NONE] -->
@@ -1629,7 +1628,11 @@
     <!-- Title for preference that guides the user to skip fingerprint setup [CHAR LIMIT=60]-->
     <string name="fingerprint_unlock_skip_fingerprint">Continue without fingerprint</string>
     <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
-    <string name="fingerprint_unlock_title">You can unlock your phone using your fingerprint. For security, this option requires a backup screen lock.</string>
+    <string name="fingerprint_unlock_title" product="default">You can unlock your phone using your fingerprint. For security, this option requires a backup screen lock.</string>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title" product="tablet">You can unlock your tablet using your fingerprint. For security, this option requires a backup screen lock.</string>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title" product="device">You can unlock your device using your fingerprint. For security, this option requires a backup screen lock.</string>
 
     <!-- Title for preference that guides the user through creating a backup unlock pattern for Face Unlock [CHAR LIMIT=45]-->
     <string name="face_unlock_set_unlock_pattern">Face Unlock + Pattern</string>
@@ -1640,7 +1643,11 @@
     <!-- Title for preference that guides the user to skip Face Unlock setup [CHAR LIMIT=60]-->
     <string name="face_unlock_skip_face">Continue without Face Unlock</string>
     <!-- Message shown in screen lock picker while setting up the new screen lock with face unlock option. [CHAR LIMIT=NONE] -->
-    <string name="face_unlock_title">You can unlock your phone using your face. For security, this option requires a backup screen lock.</string>
+    <string name="face_unlock_title" product="default">You can unlock your phone using your face. For security, this option requires a backup screen lock.</string>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with face unlock option. [CHAR LIMIT=NONE] -->
+    <string name="face_unlock_title" product="tablet">You can unlock your tablet using your face. For security, this option requires a backup screen lock.</string>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with face unlock option. [CHAR LIMIT=NONE] -->
+    <string name="face_unlock_title" product="device">You can unlock your device using your face. For security, this option requires a backup screen lock.</string>
 
     <!-- Title for preference that guides the user through creating a backup unlock pattern for biometrics unlock [CHAR LIMIT=45]-->
     <string name="biometrics_unlock_set_unlock_pattern">Pattern \u2022 Face \u2022 Fingerprint</string>
@@ -1651,7 +1658,11 @@
     <!-- Title for preference that guides the user to skip face unlock setup [CHAR LIMIT=60]-->
     <string name="biometrics_unlock_skip_biometrics">Continue without face or fingerprint</string>
     <!-- Message shown in screen lock picker while setting up the new screen lock with biometrics option. [CHAR LIMIT=NONE] -->
-    <string name="biometrics_unlock_title">You can unlock your phone using your face or fingerprint. For security, this option requires a backup screen lock.</string>
+    <string name="biometrics_unlock_title" product="default">You can unlock your phone using your face or fingerprint. For security, this option requires a backup screen lock.</string>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with biometrics option. [CHAR LIMIT=NONE] -->
+    <string name="biometrics_unlock_title" product="tablet">You can unlock your tablet using your face or fingerprint. For security, this option requires a backup screen lock.</string>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with biometrics option. [CHAR LIMIT=NONE] -->
+    <string name="biometrics_unlock_title" product="device">You can unlock your device using your face or fingerprint. For security, this option requires a backup screen lock.</string>
 
     <!-- Summary for preference that has been disabled by because of the DevicePolicyAdmin, or because device encryption is enabled, or because there are credentials in the credential storage [CHAR LIMIT=50] -->
     <string name="unlock_set_unlock_disabled_summary">Disabled by admin, encryption policy, or
@@ -3359,16 +3370,24 @@
     <string name="screensaver_settings_title">Screen saver</string>
     <!-- List of synonyms used in the settings search bar to find the “Screen saver”. [CHAR LIMIT=NONE] -->
     <string name="keywords_screensaver">screensaver</string>
+    <!-- Summary for screensaver unavailable when Bedtime mode is on [CHAR LIMIT=50] -->
+    <string name="screensaver_settings_when_to_dream_bedtime">Unavailable because bedtime mode is on</string>
     <!-- The title for the toggle which disables/enables screen savers [CHAR_LIMIT=30] -->
     <string name="screensaver_settings_toggle_title">Use screen saver</string>
     <!-- Display settings screen, summary fragment for screen saver options, activated when docked or asleep and charging [CHAR LIMIT=35] -->
     <string name="screensaver_settings_summary_either_long">While charging or docked</string>
+    <!-- Display settings screen, summary fragment for screen saver options, actived while docked and charging [CHAR LIMIT=35] -->
+    <string name="screensaver_settings_summary_dock_and_charging">While docked and charging</string>
     <!-- Display settings screen, summary fragment for screen saver options, activated when asleep and charging [CHAR LIMIT=35] -->
     <string name="screensaver_settings_summary_sleep">While charging</string>
     <!-- Display settings screen, summary fragment for screen saver options, activated when docked [CHAR LIMIT=35] -->
     <string name="screensaver_settings_summary_dock">While docked</string>
     <!-- Display settings screen, summary fragment for screen saver options, activated never [CHAR LIMIT=35] -->
     <string name="screensaver_settings_summary_never">Never</string>
+    <!-- Display settings screen, summary for screen saver options, screen saver is turned on [CHAR LIMIT=50] -->
+    <string name="screensaver_settings_summary_on">
+        On / <xliff:g id="screen_saver" example="Art gallery">%1$s</xliff:g>
+    </string>
     <!-- Display settings screen, summary for screen saver options, screen saver is turned off [CHAR LIMIT=20] -->
     <string name="screensaver_settings_summary_off">Off</string>
     <!-- Dream settings screen, action label, when to dream [CHAR LIMIT=20] -->
@@ -4012,6 +4031,12 @@
     <!-- Phone info screen, section titles: -->
     <string name="battery_level_title">Battery level</string>
 
+    <!-- Communal Settings -->
+    <!-- Title of the communal settings under Settings > Communal [CHAR LIMIT=30] -->
+    <string name="communal_settings_title">Communal</string>
+    <!-- Summary of the communal settings under Settings > Communal [CHAR LIMIT=50] -->
+    <string name="communal_settings_summary">Communal settings</string>
+
     <!-- APN Settings -->
     <!-- APN settings screen title -->
     <string name="apn_settings">APNs</string>
@@ -4294,6 +4319,8 @@
     <string name="ethernet_tether_checkbox_text">Ethernet tethering</string>
     <!-- Ethernet Tethering subtext [CHAR LIMIT=NONE]-->
     <string name="ethernet_tethering_subtext" product="default">Share phone\u2019s internet connection via Ethernet</string>
+    <!-- Ethernet Tethering subtext for tablet [CHAR LIMIT=NONE]-->
+    <string name="ethernet_tethering_subtext" product="tablet">Share tablet\u2019s internet connection via Ethernet</string>
 
     <!-- Tethering footer info [CHAR LIMIT=NONE]-->
     <string name="tethering_footer_info">Use hotspot and tethering to provide internet to other devices through your mobile data connection. Apps can also create a hotspot to share content with nearby devices.</string>
@@ -6358,8 +6385,8 @@
     <string name="advanced_battery_preference_title">Battery usage</string>
     <!-- Preference summary for advanced battery usage, for past 24 hours [CHAR LIMIT=40] -->
     <string name="advanced_battery_preference_summary_with_hours">View usage for past 24 hours</string>
-    <!-- Preference summary for advanced battery usage, from last full charge [CHAR LIMIT=40] -->
-    <string name="advanced_battery_preference_summary">View usage from last full charge</string>
+    <!-- Preference summary for advanced battery usage, since last full charge [CHAR LIMIT=40] -->
+    <string name="advanced_battery_preference_summary">View usage since last full charge</string>
 
     <!-- Activity title for battery usage details for an app. or power consumer -->
     <string name="battery_details_title">App battery usage</string>
@@ -6401,11 +6428,21 @@
     <!-- Summary for the battery high usage tip, which presents apps with highest usage [CHAR LIMIT=NONE] -->
     <string name="battery_tip_high_usage_summary">See apps with highest usage</string>
     <!-- Title for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_limited_temporarily_title">Charging is paused</string>
+    <string name="battery_tip_limited_temporarily_title">Charging optimized to protect your battery</string>
     <!-- Summary for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_limited_temporarily_summary">Protecting battery to extend battery lifespan</string>
-    <!-- Summary for the battery limited temporarily extra tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_limited_temporarily_extra_summary"><xliff:g id="percent" example="10%">%1$s</xliff:g></string>
+    <string name="battery_tip_limited_temporarily_summary">To help extend your batter\'s lifespan, charging is optimized</string>
+    <!-- Title for the battery dock defender future bypass tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_dock_defender_future_bypass_title">Charging optimized to protect your battery</string>
+    <!-- Summary for the battery dock defender future bypass tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_dock_defender_future_bypass_summary">To help extend your battery\'s lifespan, charging is optimized while docked</string>
+    <!-- Title for the battery dock defender active tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_dock_defender_active_title">Charging optimized to protect your battery</string>
+    <!-- Summary for the battery dock defender active tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_dock_defender_active_summary">To help extend your battery\'s lifespan, charging is optimized while docked</string>
+    <!-- Title for the battery dock defender temporarily bypassed tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_dock_defender_temporarily_bypassed_title">Charging to full</string>
+    <!-- Summary for the battery dock defender temporarily bypassed tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary">To protect your battery, charging will be optimized the next time your tablet is docked</string>
     <!-- Content description for the battery limited temporarily tip secondary button [CHAR LIMIT=NONE] -->
     <string name="battery_tip_limited_temporarily_sec_button_content_description">Learn more about charging is paused</string>
     <!-- Text of battery limited temporarily tip resume charge button. [CHAR LIMIT=NONE] -->
@@ -6734,50 +6771,50 @@
     <!-- Title for the battery management group [CHAR LIMIT=40] -->
     <string name ="battery_detail_manage_title">Manage battery usage</string>
 
-    <!-- Description for battery total and background usage time for an app, i.e. 1 hr 15 min total • 39 min background from last full charge. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_and_bg_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background\nfrom last full charge</string>
+    <!-- Description for battery total and background usage time for an app, i.e. 1 hr 15 min total • 39 min background since last full charge. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_total_and_bg_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background\nsince last full charge</string>
     <!-- Description for battery total and background usage time for an app, i.e. 1 hr 15 min total • 39 min background for past 24 hr. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_total_and_bg_usage_24hr"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background\nfor past 24 hr</string>
     <!-- Description for battery total and background usage time in a time period for an app, i.e. 1 hr 15 min total • 39 min background for 12 am-2 am. Note: ^1, ^2 and ^3 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_total_and_bg_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • <xliff:g id="time" example="39 min">^2</xliff:g> background\nfor <xliff:g id="time_period" example="12 am-2 am">^3</xliff:g></string>
 
-    <!-- Description for battery total usage time is less than a minute for an app from last full charge [CHAR LIMIT=120] -->
-    <string name="battery_total_usage_less_minute">Total less than a minute from last full charge</string>
+    <!-- Description for battery total usage time is less than a minute for an app since last full charge [CHAR LIMIT=120] -->
+    <string name="battery_total_usage_less_minute">Total less than a minute since last full charge</string>
     <!-- Description for battery total usage time is less than a minute for an app for past 24 hr [CHAR LIMIT=120] -->
     <string name="battery_total_usage_less_minute_24hr">Total less than a minute for past 24 hr</string>
     <!-- Description for battery total usage time is less than a minute in a time period for an app, i.e. Total less than a minute for 12 am-2 am. Note: ^1 should be used in all translations[CHAR LIMIT=120] -->
     <string name="battery_total_usage_less_minute_with_period">Total less than a minute for <xliff:g id="time_period" example="12 am-2 am">^1</xliff:g></string>
 
-    <!-- Description for battery background usage time is less than a minute for an app from last full charge [CHAR LIMIT=120] -->
-    <string name="battery_bg_usage_less_minute">Background less than a minute from last full charge</string>
+    <!-- Description for battery background usage time is less than a minute for an app since last full charge [CHAR LIMIT=120] -->
+    <string name="battery_bg_usage_less_minute">Background less than a minute since last full charge</string>
     <!-- Description for battery background usage time is less than a minute for an app for past 24 hr [CHAR LIMIT=120] -->
     <string name="battery_bg_usage_less_minute_24hr">Background less than a minute for past 24 hr</string>
     <!-- Description for battery background usage time is less than a minute in a time period for an app, i.e. Background less than a minute for 12 am-2 am. Note: ^1 should be used in all translations[CHAR LIMIT=120] -->
     <string name="battery_bg_usage_less_minute_with_period">Background less than a minute for <xliff:g id="time_period" example="12 am-2 am">^1</xliff:g></string>
 
-    <!-- Description for battery total usage time for an app, i.e. 1 hr 15 min total from last full charge. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total from last full charge</string>
+    <!-- Description for battery total usage time for an app, i.e. 1 hr 15 min total since last full charge. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_total_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total since last full charge</string>
     <!-- Description for battery total usage time for an app, i.e. 1 hr 15 min total for past 24 hr. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_total_usage_24hr"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total for past 24 hr</string>
     <!-- Description for battery total usage time in a time period for an app, i.e. 1 hr 15 min total for 12 am-2 am. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_total_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total for <xliff:g id="time_period" example="12 am-2 am">^2</xliff:g></string>
 
-    <!-- Description for battery background usage time for an app, i.e. 1 hr 15 min background from last full charge. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_bg_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> background from last full charge</string>
+    <!-- Description for battery background usage time for an app, i.e. 1 hr 15 min background since last full charge. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_bg_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> background since last full charge</string>
     <!-- Description for battery background usage time for an app, i.e. 1 hr 15 min background for past 24 hr. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_bg_usage_24hr"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> background for past 24 hr</string>
     <!-- Description for battery background usage time in a time period for an app, i.e. 1 hr 15 min background for 12 am-2 am. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_bg_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> background for <xliff:g id="time_period" example="12 am-2 am">^2</xliff:g></string>
 
-    <!-- Description for battery total usage with background usage time less than a minute for an app, i.e. 1 hr 15 min total • background less than a minute from last full charge. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
-    <string name="battery_total_usage_and_bg_less_minute_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute\nfrom last full charge</string>
+    <!-- Description for battery total usage with background usage time less than a minute for an app, i.e. 1 hr 15 min total • background less than a minute since last full charge. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
+    <string name="battery_total_usage_and_bg_less_minute_usage"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute\nsince last full charge</string>
     <!-- Description for battery total usage with background usage time less than a minute for an app, i.e. 1 hr 15 min total • background less than a minute for past 24 hr. Note: ^1 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute\nfor past 24 hr</string>
     <!-- Description for battery total usage with background usage time less than a minute in a time period for an app, i.e. 1 hr 15 min total • background less than a minute for 12 am-2 am. Note: ^1 and ^2 should be used in all translations [CHAR LIMIT=120] -->
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period"><xliff:g id="time" example="1 hr 15 min">^1</xliff:g> total • background less than a minute\nfor <xliff:g id="time_period" example="12 am-2 am">^2</xliff:g></string>
 
-    <!-- Description for no any battery usage from last full charge [CHAR LIMIT=120] -->
-    <string name="battery_not_usage">No usage from last full charge</string>
+    <!-- Description for no any battery usage since last full charge [CHAR LIMIT=120] -->
+    <string name="battery_not_usage">No usage since last full charge</string>
     <!-- Description for no any battery usage for past 24 hr [CHAR LIMIT=120] -->
     <string name="battery_not_usage_24hr">No usage for past 24 hr</string>
     <!-- Description for no usage time but have battery usage [CHAR LIMIT=120] -->
@@ -7878,9 +7915,10 @@
     <string name="user_lockscreen_settings">Lock screen settings</string>
     <!-- User settings item to allow creating new users from locks screen [CHAR LIMIT=50] -->
     <string name="user_add_on_lockscreen_menu">Add users from lock screen</string>
-    <!-- User settings item to allow the system to automatically switch back to the admin user when
+    <!-- TODO(b/257333623): HSUM has no 1:1 admin:dream relationship. There can even be >1 admin -->
+    <!-- User settings item to allow the system to automatically switch back to the Dock User when
          the device is docked. [CHAR LIMIT=50] -->
-    <string name="switch_to_user_zero_when_docked">Switch to admin user when docked</string>
+    <string name="switch_to_dock_user_when_docked">Switch to admin user when docked</string>
 
     <!-- User (self) removal confirmation title [CHAR LIMIT=30] -->
     <string name="user_confirm_remove_self_title">Delete yourself?</string>
@@ -8121,6 +8159,8 @@
     <string name="help_url_battery" translatable="false"></string>
     <!-- Help URL, Battery Defender [DO NOT TRANSLATE] -->
     <string name="help_url_battery_defender" translatable="false"></string>
+    <!-- Help URL, Dock Defender [DO NOT TRANSLATE] -->
+    <string name="help_url_dock_defender" translatable="false"></string>
     <!-- Help URL, Accounts [DO NOT TRANSLATE] -->
     <string name="help_url_accounts" translatable="false"></string>
     <!-- Help URL, Choose lockscreen [DO NOT TRANSLATE] -->
@@ -8727,8 +8767,11 @@
     <!-- Sound: Title for the option managing alarm volume. [CHAR LIMIT=30] -->
     <string name="alarm_volume_option_title">Alarm volume</string>
 
-    <!-- Sound: Title for the option managing ring volume. [CHAR LIMIT=30] -->
+    <!-- Sound: Title for the option managing ring & notification volume. [CHAR LIMIT=30] -->
     <string name="ring_volume_option_title">Ring &amp; notification volume</string>
+
+    <!-- Sound: Title for the option managing ring volume. [CHAR LIMIT=30] -->
+    <string name="separate_ring_volume_option_title">Ring volume</string>
 
     <!-- Sound: Title for the option managing notification volume. [CHAR LIMIT=30] -->
     <string name="notification_volume_option_title">Notification volume</string>
@@ -9887,6 +9930,9 @@
 
     <!-- [CHAR LIMIT=NONE] Text appearing when channel group notifications are off -->
     <string name="channel_group_notifications_off_desc">At your request, Android is blocking this group of notifications from appearing on this device</string>
+
+    <!-- [CHAR LIMIT=NONE] Text appearing when app does not send notifications -->
+    <string name="app_notifications_not_send_desc">This app does not send notifications</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: channels title -->
     <string name="notification_channels">Categories</string>
@@ -13281,6 +13327,8 @@
     <string name="mobile_network_mode_error">Invalid Network Mode <xliff:g id="networkModeId" example="0">%1$d</xliff:g>. Ignore.</string>
     <!-- Title for Apn settings in mobile network settings [CHAR LIMIT=60] -->
     <string name="mobile_network_apn_title">Access Point Names</string>
+    <!-- Search keywords for "Access Point Names" [CHAR_LIMIT=NONE] -->
+    <string name="keywords_access_point_names">apn</string>
 
     <!-- Available networks screen, summary when button disallowed due to permanent automatic mode [CHAR LIMIT=NONE] -->
     <string name="manual_mode_disallowed_summary">Unavailable when connected to <xliff:g id="carrier" example="verizon">%1$s</xliff:g></string>
@@ -13725,6 +13773,14 @@
     <string name="lockscreen_double_line_clock_summary">Show double-line clock when available</string>
     <!-- Lockscreen double-line clock toggle [CHAR LIMIT=60] -->
     <string name="lockscreen_double_line_clock_setting_toggle">Double-line clock</string>
+    <!-- Lock screen shortcuts preference [CHAR LIMIT=60] -->
+    <string name="lockscreen_quick_affordances_title">Shortcuts</string>
+    <!-- Summary for the lock screen button preference [CHAR LIMIT=60] -->
+    <plurals name="lockscreen_quick_affordances_summary">
+        <item quantity="zero">None</item>
+        <item quantity="one"><xliff:g id="first">%1$s</xliff:g></item>
+        <item quantity="other"><xliff:g id="first">%1$s</xliff:g>, <xliff:g id="second">%2$s</xliff:g></item>
+    </plurals>
 
     <!-- Title for RTT setting. [CHAR LIMIT=NONE] -->
     <string name="rtt_settings_title"></string>
@@ -14350,9 +14406,6 @@
     <string name="reboot_dialog_reboot_now">Reboot now</string>
     <!-- Text on the dialog button to reboot the device later [CHAR LIMIT=50] -->
     <string name="reboot_dialog_reboot_later">Reboot later</string>
-
-    <!-- Text to explain an activity is a temporary placeholder [CHAR LIMIT=none] -->
-    <string name="placeholder_activity" translatable="false">*This is a temporary placeholder fallback activity.</string>
 
     <!-- The title of the spatial audio [CHAR LIMIT=none] -->
     <string name="bluetooth_details_spatial_audio_title">Spatial Audio</string>
