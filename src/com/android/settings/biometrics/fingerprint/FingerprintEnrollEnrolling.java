@@ -63,6 +63,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -328,6 +329,23 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                             final ViewGroup.LayoutParams containerLp =
                                     portraitLayoutContainer.getLayoutParams();
                             containerLp.height = 0;
+
+                            // In the portrait mode, the title and lottie animation view may
+                            // overlap when title needs three lines, so adding some paddings
+                            // between them, and adjusting the fp progress view here accordingly.
+                            final int layoutLottieAnimationPadding = (int) getResources()
+                                    .getDimension(R.dimen.udfps_lottie_padding_top);
+                            portraitLayoutContainer.setPadding(0,
+                                    layoutLottieAnimationPadding, 0, 0);
+                            final ImageView progressView = udfpsEnrollView.findViewById(
+                                    R.id.udfps_enroll_animation_fp_progress_view);
+                            progressView.setPadding(0, -(layoutLottieAnimationPadding),
+                                    0, layoutLottieAnimationPadding);
+                            final ImageView fingerprintView = udfpsEnrollView.findViewById(
+                                    R.id.udfps_enroll_animation_fp_view);
+                            fingerprintView.setPadding(0, -layoutLottieAnimationPadding,
+                                    0, layoutLottieAnimationPadding);
+
                             portraitLayoutContainer.addView(udfpsEnrollView);
                             setOnHoverListener(false, defaultLayout, udfpsEnrollView);
                         } else if (rotation == Surface.ROTATION_270) {
