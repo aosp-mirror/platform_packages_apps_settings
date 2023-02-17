@@ -25,6 +25,8 @@ import static android.app.admin.DevicePolicyResources.UNDEFINED;
 import android.annotation.Nullable;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.KeyguardManager;
+import android.app.RemoteLockscreenValidationResult;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -33,6 +35,7 @@ import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.os.UserManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -89,7 +92,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
     }
 
     public static class ConfirmLockPatternFragment extends ConfirmDeviceCredentialBaseFragment
-            implements AppearAnimationCreator<Object>, CredentialCheckResultTracker.Listener {
+            implements AppearAnimationCreator<Object>, CredentialCheckResultTracker.Listener,
+            SaveChosenLockWorkerBase.Listener {
 
         private static final String FRAGMENT_TAG_CHECK_LOCK_RESULT = "check_lock_result";
 
@@ -105,6 +109,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         // caller-supplied text for various prompts
         private CharSequence mHeaderText;
         private CharSequence mDetailsText;
+        private CharSequence mCheckBoxLabel;
 
         private AppearAnimationUtils mAppearAnimationUtils;
         private DisappearAnimationUtils mDisappearAnimationUtils;
@@ -148,6 +153,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                         ConfirmDeviceCredentialBaseFragment.HEADER_TEXT);
                 mDetailsText = intent.getCharSequenceExtra(
                         ConfirmDeviceCredentialBaseFragment.DETAILS_TEXT);
+                mCheckBoxLabel = intent.getCharSequenceExtra(KeyguardManager.EXTRA_CHECKBOX_LABEL);
             }
             if (TextUtils.isEmpty(mHeaderText) && mIsManagedProfile) {
                 mHeaderText = mDevicePolicyManager.getOrganizationNameForUser(mUserId);
@@ -174,7 +180,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 //              ability to disable the pattern in L. Remove this block after
                 //              ensuring it's safe to do so. (Note that ConfirmLockPassword
                 //              doesn't have this).
-                if (!mFrp && !mLockPatternUtils.isLockPatternEnabled(mEffectiveUserId)) {
+                if (!mFrp && !mRemoteValidation
+                        && !mLockPatternUtils.isLockPatternEnabled(mEffectiveUserId)) {
                     getActivity().setResult(Activity.RESULT_OK);
                     getActivity().finish();
                 }
@@ -203,12 +210,33 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                         FRAGMENT_TAG_CHECK_LOCK_RESULT).commit();
             }
 
+            if (mRemoteValidation) {
+                // ProgressBar visibility is set to GONE until interacted with.
+                // Set progress bar to INVISIBLE, so the pattern does not get bumped down later.
+                mGlifLayout.setProgressBarShown(false);
+                // Lock pattern is generally not visible until the user has set a lockscreen for the
+                // first time. For a new user, this means that the pattern will always be hidden.
+                // Despite this prerequisite, we want to show the pattern anyway for this flow.
+                mLockPatternView.setInStealthMode(false);
+            }
+
             return view;
         }
 
         @Override
         public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
+            if (mRemoteValidation) {
+                if (mCheckBox != null) {
+                    mCheckBox.setText(TextUtils.isEmpty(mCheckBoxLabel)
+                            ? getDefaultCheckboxLabel()
+                            : mCheckBoxLabel);
+                }
+                if (mCancelButton != null && TextUtils.isEmpty(mAlternateButtonText)) {
+                    mCancelButton.setText(R.string.lockpassword_forgot_pattern);
+                }
+            }
+
             if (mForgotButton != null) {
                 mForgotButton.setText(R.string.lockpassword_forgot_pattern);
             }
@@ -270,6 +298,10 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         private String getDefaultDetails() {
             if (mFrp) {
                 return getString(R.string.lockpassword_confirm_your_pattern_details_frp);
+            }
+            if (mRemoteValidation) {
+                return getString(
+                        R.string.lockpassword_remote_validation_pattern_details);
             }
             final boolean isStrongAuthRequired = isStrongAuthRequired();
             if (mIsManagedProfile) {
@@ -335,11 +367,11 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     } else {
                         mGlifLayout.setHeaderText(getDefaultHeader());
                     }
-                    if (mDetailsText != null) {
-                        mGlifLayout.setDescriptionText(mDetailsText);
-                    } else {
-                        mGlifLayout.setDescriptionText(getDefaultDetails());
-                    }
+
+                    CharSequence detailsText =
+                            mDetailsText == null ? getDefaultDetails() : mDetailsText;
+                    mGlifLayout.setDescriptionText(detailsText);
+
                     mErrorTextView.setText("");
                     updateErrorMessage(
                             mLockPatternUtils.getCurrentFailedPasswordAttempts(mEffectiveUserId));
@@ -371,7 +403,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
         private String getDefaultHeader() {
             if (mFrp) return getString(R.string.lockpassword_confirm_your_pattern_header_frp);
-
+            if (mRemoteValidation) {
+                return getString(R.string.lockpassword_remote_validation_header);
+            }
             if (mIsManagedProfile) {
                 return mDevicePolicyManager.getResources().getString(
                         CONFIRM_WORK_PROFILE_PATTERN_HEADER,
@@ -379,6 +413,14 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             }
 
             return getString(R.string.lockpassword_confirm_your_pattern_header);
+        }
+
+        private String getDefaultCheckboxLabel() {
+            if (mRemoteValidation) {
+                return getString(R.string.lockpassword_remote_validation_set_pattern_as_screenlock);
+            }
+            throw new IllegalStateException(
+                    "Trying to get default checkbox label for illegal flow");
         }
 
         private Runnable mClearPatternRunnable = new Runnable() {
@@ -431,7 +473,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
          * an existing lock pattern.
          */
         private LockPatternView.OnPatternListener mConfirmExistingLockPatternListener
-                = new LockPatternView.OnPatternListener()  {
+                = new LockPatternView.OnPatternListener() {
 
             public void onPatternStart() {
                 mLockPatternView.removeCallbacks(mClearPatternRunnable);
@@ -453,6 +495,13 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 mLockPatternView.setEnabled(false);
 
                 final LockscreenCredential credential = LockscreenCredential.createPattern(pattern);
+
+                if (mRemoteValidation) {
+                    validateGuess(credential);
+                    mGlifLayout.setProgressBarShown(true);
+                    return;
+                }
+
                 // TODO(b/161956762): Sanitize this
                 Intent intent = new Intent();
                 if (mReturnGatekeeperPassword) {
@@ -564,6 +613,44 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         }
 
         @Override
+        protected void onRemoteDeviceCredentialValidationResult(
+                RemoteLockscreenValidationResult result) {
+            switch (result.getResultCode()) {
+                case RemoteLockscreenValidationResult.RESULT_GUESS_VALID:
+                    if (mCheckBox.isChecked()) {
+                        Log.i(TAG, "Setting device screen lock to the other device's screen lock.");
+                        ChooseLockPattern.SaveAndFinishWorker saveAndFinishWorker =
+                                new ChooseLockPattern.SaveAndFinishWorker();
+                        getFragmentManager().beginTransaction().add(saveAndFinishWorker, null)
+                                .commit();
+                        getFragmentManager().executePendingTransactions();
+                        saveAndFinishWorker.setListener(this);
+                        saveAndFinishWorker.start(
+                                mLockPatternUtils,
+                                /* requestGatekeeperPassword= */ false,
+                                mDeviceCredentialGuess,
+                                /* currentCredential= */ null,
+                                mEffectiveUserId);
+                        return;
+                    }
+                    mCredentialCheckResultTracker.setResult(/* matched= */ true, new Intent(),
+                            /* timeoutMs= */ 0, mEffectiveUserId);
+                    break;
+                case RemoteLockscreenValidationResult.RESULT_GUESS_INVALID:
+                    mCredentialCheckResultTracker.setResult(/* matched= */ false, new Intent(),
+                            /* timeoutMs= */ 0, mEffectiveUserId);
+                    break;
+                case RemoteLockscreenValidationResult.RESULT_LOCKOUT:
+                    mCredentialCheckResultTracker.setResult(/* matched= */ false, new Intent(),
+                            (int) result.getTimeoutMillis(), mEffectiveUserId);
+                    break;
+                case RemoteLockscreenValidationResult.RESULT_NO_REMAINING_ATTEMPTS:
+                    getActivity().finish();
+            }
+            mGlifLayout.setProgressBarShown(false);
+        }
+
+        @Override
         public void onCredentialChecked(boolean matched, Intent intent, int timeoutMs,
                 int effectiveUserId, boolean newResult) {
             onPatternChecked(matched, intent, timeoutMs, effectiveUserId, newResult);
@@ -631,6 +718,20 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 mAppearAnimationUtils.createAnimation((View) obj, delay, duration, translationY,
                         appearing, interpolator, finishListener);
             }
+        }
+
+        /**
+         * Callback for when the device credential guess used for remote validation was set as the
+         * current device's device credential.
+         */
+        @Override
+        public void onChosenLockSaveFinished(boolean wasSecureBefore, Intent resultData) {
+            if (mDeviceCredentialGuess != null) {
+                mDeviceCredentialGuess.zeroize();
+            }
+            mGlifLayout.setProgressBarShown(false);
+            mCredentialCheckResultTracker.setResult(/* matched= */ true, new Intent(),
+                    /* timeoutMs= */ 0, mEffectiveUserId);
         }
     }
 }
