@@ -56,6 +56,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.window.embedding.ActivityEmbeddingController;
 import androidx.window.embedding.SplitController;
 import androidx.window.embedding.SplitRule;
 
@@ -102,7 +103,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     private View mTwoPaneSuggestionView;
     private CategoryMixin mCategoryMixin;
     private Set<HomepageLoadedListener> mLoadedListeners;
-    private SplitController mSplitController;
+    private ActivityEmbeddingController mActivityEmbeddingController;
     private boolean mIsEmbeddingActivityEnabled;
     private boolean mIsTwoPane;
     // A regular layout shows icons on homepage, whereas a simplified layout doesn't.
@@ -190,8 +191,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         setupEdgeToEdge();
         setContentView(R.layout.settings_homepage_container);
 
-        mSplitController = SplitController.getInstance();
-        mIsTwoPane = mSplitController.isActivityEmbedded(this);
+        mActivityEmbeddingController = ActivityEmbeddingController.getInstance(this);
+        mIsTwoPane = mActivityEmbeddingController.isActivityEmbedded(this);
 
         updateAppBarMinHeight();
         initHomepageContainer();
@@ -266,7 +267,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        final boolean newTwoPaneState = mSplitController.isActivityEmbedded(this);
+        final boolean newTwoPaneState = mActivityEmbeddingController.isActivityEmbedded(this);
         if (mIsTwoPane != newTwoPaneState) {
             mIsTwoPane = newTwoPaneState;
             updateHomepageAppBar();
@@ -518,15 +519,15 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 new ComponentName(getApplicationContext(), getClass()),
                 targetComponentName,
                 targetIntent.getAction(),
-                SplitRule.FINISH_ALWAYS,
-                SplitRule.FINISH_ALWAYS,
+                SplitRule.FinishBehavior.ALWAYS,
+                SplitRule.FinishBehavior.ALWAYS,
                 true /* clearTop */);
         ActivityEmbeddingRulesController.registerTwoPanePairRule(this,
                 new ComponentName(getApplicationContext(), Settings.class),
                 targetComponentName,
                 targetIntent.getAction(),
-                SplitRule.FINISH_ALWAYS,
-                SplitRule.FINISH_ALWAYS,
+                SplitRule.FinishBehavior.ALWAYS,
+                SplitRule.FinishBehavior.ALWAYS,
                 true /* clearTop */);
 
         final UserHandle user = intent.getParcelableExtra(EXTRA_USER_HANDLE, UserHandle.class);
