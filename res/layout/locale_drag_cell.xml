@@ -20,6 +20,8 @@
               android:layout_height="wrap_content"
               android:minHeight="?android:listPreferredItemHeight"
               android:background="?android:colorBackground"
+              android:layout_marginTop="4dp"
+              android:layout_marginBottom="4dp"
               android:layoutDirection="locale"
               android:textDirection="locale">
 
@@ -27,12 +29,6 @@
         android:id="@+id/checkbox"
         style="@style/LanguageCheckboxAndLabel"
         android:paddingStart="24dp"
-        android:layout_toStartOf="@+id/dragHandle"/>
-
-    <TextView
-        android:id="@+id/label"
-        style="@style/LanguageCheckboxAndLabel"
-        android:paddingStart="56dp"
         android:layout_toStartOf="@+id/dragHandle"/>
 
     <TextView
@@ -45,27 +41,34 @@
         android:layout_alignTop="@id/checkbox"
         android:layout_alignBottom="@id/checkbox"/>
 
-    <TextView
-        android:id="@+id/l10nWarn"
-        style="@style/LanguageCheckboxAndLabel"
-        android:layout_marginTop="-28dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:minHeight="?android:listPreferredItemHeight"
         android:paddingStart="56dp"
-        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-        android:textColor="?android:textColorSecondary"
-        android:text="@string/locale_not_translated"
-        android:layout_toStartOf="@+id/dragHandle"
-        android:layout_below="@id/label"/>
+        android:layout_toStartOf="@+id/dragHandle">
+        <TextView
+            android:id="@+id/label"
+            style="@style/LanguageCheckboxAndLabel"/>
 
-    <TextView
-        android:id="@+id/default_locale"
-        style="@style/LanguageCheckboxAndLabel"
-        android:layout_marginTop="-28dp"
-        android:paddingStart="56dp"
-        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-        android:textColor="?android:textColorSecondary"
-        android:text="@string/desc_current_default_language"
-        android:layout_toStartOf="@+id/dragHandle"
-        android:layout_below="@id/label"/>
+        <TextView
+            android:id="@+id/l10nWarn"
+            style="@style/LanguageCheckboxAndLabel"
+            android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+            android:textColor="?android:textColorSecondary"
+            android:layout_marginBottom="4dp"
+            android:text="@string/locale_not_translated"/>
+
+        <TextView
+            android:id="@+id/default_locale"
+            style="@style/LanguageCheckboxAndLabel"
+            android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+            android:textColor="?android:textColorSecondary"
+            android:layout_marginBottom="4dp"
+            android:text="@string/desc_current_default_language"/>
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/dragHandle"
