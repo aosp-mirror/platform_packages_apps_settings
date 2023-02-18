@@ -238,22 +238,6 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
     }
 
     @Override
-    public void onAirplaneModeChanged(boolean airplaneModeEnabled) {
-    }
-
-    @Override
-    public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-    }
-
-    @Override
-    public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-    }
-
-    @Override
-    public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
-    }
-
-    @Override
     public void onAllMobileNetworkInfoChanged(
             List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
         mMobileNetworkInfoEntityList = mobileNetworkInfoEntityList;
