@@ -112,14 +112,6 @@ public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceCo
     }
 
     @Override
-    public void onAirplaneModeChanged(boolean airplaneModeEnabled) {
-    }
-
-    @Override
-    public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-    }
-
-    @Override
     public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
         // TODO(b/262195754): Need the intent to enabled the feature.
 //        if (DataServiceUtils.shouldUpdateEntityList(mSubscriptionInfoEntityList,
@@ -132,14 +124,5 @@ public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceCo
 //                }
 //            });
 //        }
-    }
-
-    @Override
-    public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
-    }
-
-    @Override
-    public void onAllMobileNetworkInfoChanged(
-            List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
     }
 }

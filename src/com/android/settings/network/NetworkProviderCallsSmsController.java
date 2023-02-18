@@ -218,21 +218,8 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
     }
 
     @Override
-    public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-    }
-
-    @Override
     public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> activeSubInfoList) {
         mSubInfoEntityList = activeSubInfoList;
         update();
-    }
-
-    @Override
-    public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
-    }
-
-    @Override
-    public void onAllMobileNetworkInfoChanged(
-            List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
     }
 }

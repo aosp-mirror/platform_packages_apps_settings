@@ -497,21 +497,4 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
             }
         });
     }
-
-    @Override
-    public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-    }
-
-    @Override
-    public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
-    }
-
-    @Override
-    public void onAllMobileNetworkInfoChanged(
-            List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
-    }
-
-    @Override
-    public void onAirplaneModeChanged(boolean enabled) {
-    }
 }
