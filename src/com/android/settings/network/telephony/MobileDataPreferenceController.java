@@ -233,14 +233,6 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     }
 
     @Override
-    public void onAirplaneModeChanged(boolean airplaneModeEnabled) {
-    }
-
-    @Override
-    public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-    }
-
-    @Override
     public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
         mSubscriptionInfoEntityList = subInfoEntityList;
         mSubscriptionInfoEntityList.forEach(entity -> {
@@ -256,9 +248,6 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         refreshSummary(mPreference);
     }
 
-    @Override
-    public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
-    }
 
     @Override
     public void onAllMobileNetworkInfoChanged(
