@@ -163,17 +163,18 @@ public class AccessibilityDialogUtils {
     }
 
     /**
-     * Updates the software shortcut in edit shortcut dialog.
+     * Updates the shortcut content in edit shortcut dialog.
      *
      * @param context A valid context
      * @param editShortcutDialog Need to be a type of edit shortcut dialog
      * @return True if the update is successful
      */
-    public static boolean updateSoftwareShortcutInDialog(Context context,
+    public static boolean updateShortcutInDialog(Context context,
             Dialog editShortcutDialog) {
         final View container = editShortcutDialog.findViewById(R.id.container_layout);
         if (container != null) {
             initSoftwareShortcut(context, container);
+            initHardwareShortcut(context, container);
             return true;
         }
         return false;
@@ -340,7 +341,7 @@ public class AccessibilityDialogUtils {
         final CharSequence summary = context.getText(
                 R.string.accessibility_shortcut_edit_dialog_summary_hardware);
         setupShortcutWidget(dialogView, title, summary,
-                R.drawable.accessibility_shortcut_type_hardware);
+                R.drawable.a11y_shortcut_type_hardware);
     }
 
     private static void initMagnifyShortcut(Context context, View view) {
@@ -354,7 +355,7 @@ public class AccessibilityDialogUtils {
         summary = MessageFormat.format(summary, arguments);
 
         setupShortcutWidgetWithImageRawResource(context, dialogView, title, summary,
-                R.raw.accessibility_shortcut_type_triple_tap);
+                R.raw.a11y_shortcut_type_triple_tap);
     }
 
     private static void initAdvancedWidget(View view) {
@@ -409,13 +410,13 @@ public class AccessibilityDialogUtils {
     private static int retrieveSoftwareShortcutImageResId(Context context) {
         int resId;
         if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
-            resId = R.drawable.accessibility_shortcut_type_software_floating;
+            resId = R.drawable.a11y_shortcut_type_software_floating;
         } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
             resId = AccessibilityUtil.isTouchExploreEnabled(context)
-                    ? R.drawable.accessibility_shortcut_type_software_gesture_talkback
-                    : R.drawable.accessibility_shortcut_type_software_gesture;
+                    ? R.drawable.a11y_shortcut_type_software_gesture_talkback
+                    : R.drawable.a11y_shortcut_type_software_gesture;
         } else {
-            resId = R.drawable.accessibility_shortcut_type_software;
+            resId = R.drawable.a11y_shortcut_type_software;
         }
         return resId;
     }
