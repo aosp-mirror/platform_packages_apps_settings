@@ -35,6 +35,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
@@ -86,6 +87,8 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     FooterPreference mFooterPreference;
     @VisibleForTesting
     BatteryDiffData mBatteryDiffData;
+    @VisibleForTesting
+    String mPercentLessThanThresholdText;
 
     public BatteryUsageBreakdownController(
             Context context, Lifecycle lifecycle, SettingsActivity activity,
@@ -147,11 +150,11 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
                         : SettingsEnums.ACTION_BATTERY_USAGE_SYSTEM_ITEM,
                 /* pageId */ SettingsEnums.OPEN_BATTERY_USAGE,
                 TextUtils.isEmpty(packageName) ? PACKAGE_NAME_NONE : packageName,
-                (int) Math.round(diffEntry.getPercentOfTotal()));
+                (int) Math.round(diffEntry.getPercentage()));
         Log.d(TAG, String.format("handleClick() label=%s key=%s package=%s",
                 diffEntry.getAppLabel(), histEntry.getKey(), histEntry.mPackageName));
         AdvancedPowerUsageDetail.startBatteryDetailPage(
-                mActivity, mFragment, diffEntry, powerPref.getPercent(), mSlotTimestamp);
+                mActivity, mFragment, diffEntry, powerPref.getPercentage(), mSlotTimestamp);
         return true;
     }
 
@@ -163,6 +166,9 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
         mSpinnerPreference = screen.findPreference(SPINNER_PREFERENCE_KEY);
         mAppListPreferenceGroup = screen.findPreference(APP_LIST_PREFERENCE_KEY);
         mFooterPreference = screen.findPreference(FOOTER_PREFERENCE_KEY);
+        mPercentLessThanThresholdText = mPrefContext.getString(
+                R.string.battery_usage_less_than_percent,
+                Utils.formatPercentage(BatteryDiffData.SMALL_PERCENTAGE_THRESHOLD, false));
 
         mAppListPreferenceGroup.setOrderingAsAdded(false);
         mSpinnerPreference.initializeSpinner(
@@ -279,11 +285,11 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
             pref.setIcon(appIcon);
             pref.setTitle(appLabel);
             pref.setOrder(prefIndex);
-            pref.setPercent(entry.getPercentOfTotal());
             pref.setSingleLineTitle(true);
             // Sets the BatteryDiffEntry to preference for launching detailed page.
             pref.setBatteryDiffEntry(entry);
             pref.setSelectable(entry.validForRestriction());
+            setPreferencePercentage(pref, entry);
             setPreferenceSummary(pref, entry);
             if (!isAdded) {
                 mAppListPreferenceGroup.addPreference(pref);
@@ -305,6 +311,17 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
             mPreferenceCache.put(pref.getKey(), pref);
         }
         mAppListPreferenceGroup.removeAll();
+    }
+
+    @VisibleForTesting
+    void setPreferencePercentage(
+            PowerGaugePreference preference, BatteryDiffEntry entry) {
+        preference.setPercentage(
+                entry.getPercentage() < BatteryDiffData.SMALL_PERCENTAGE_THRESHOLD
+                        ? mPercentLessThanThresholdText
+                        : Utils.formatPercentage(
+                                entry.getPercentage() + entry.getAdjustPercentageOffset(),
+                                /* round= */ true));
     }
 
     @VisibleForTesting
