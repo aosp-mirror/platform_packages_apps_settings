@@ -410,12 +410,6 @@ public class FingerprintEnrollEnrollingRfpsFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onDestroy() {
-        // TODO stopListenOrientationEvent();
-        super.onDestroy();
-    }
-
     private void animateProgress(int progress) {
         if (mProgressAnim != null) {
             mProgressAnim.cancel();
