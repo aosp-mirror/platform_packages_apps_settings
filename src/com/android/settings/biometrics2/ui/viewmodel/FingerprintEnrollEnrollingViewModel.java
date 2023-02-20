@@ -23,6 +23,8 @@ import android.os.Bundle;
 import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.util.Log;
+import android.view.View;
+import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
@@ -276,6 +278,23 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
      */
     public boolean isAccessibilityEnabled() {
         return mAccessibilityRepository.isEnabled();
+    }
+
+    /**
+     * Sends an {@link AccessibilityEvent}.
+     *
+     * @param event The event to send.
+     *
+     * @throws IllegalStateException if accessibility is not enabled.
+     *
+     * <strong>Note:</strong> The preferred mechanism for sending custom accessibility
+     * events is through calling
+     * {@link android.view.ViewParent#requestSendAccessibilityEvent(View, AccessibilityEvent)}
+     * instead of this method to allow predecessors to augment/filter events sent by
+     * their descendants.
+     */
+    public void sendAccessibilityEvent(@NonNull AccessibilityEvent event) {
+        mAccessibilityRepository.sendAccessibilityEvent(event);
     }
 
     /**
