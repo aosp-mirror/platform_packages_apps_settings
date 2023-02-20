@@ -92,6 +92,9 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
 
         @Override
         public void onEnrollmentError(int errMsgId, CharSequence errString) {
+            if (DEBUG) {
+                Log.d(TAG, "onEnrollmentError(" + errMsgId + ", " + errString + ")");
+            }
             mErrorMessageLiveData.postValue(new EnrollmentStatusMessage(errMsgId, errString));
         }
 
@@ -143,6 +146,13 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
         mDoneLiveData.setValue(false);
         mProgressLiveData.setValue(new EnrollmentProgress(INITIAL_STEPS, INITIAL_REMAINING));
         mHelpMessageLiveData.setValue(null);
+        mErrorMessageLiveData.setValue(null);
+    }
+
+    /**
+     * clear error message
+     */
+    public void clearErrorMessageLiveData() {
         mErrorMessageLiveData.setValue(null);
     }
 
