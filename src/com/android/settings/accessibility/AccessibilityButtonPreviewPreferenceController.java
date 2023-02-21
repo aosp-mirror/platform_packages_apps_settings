@@ -122,7 +122,7 @@ public class AccessibilityButtonPreviewPreferenceController extends BasePreferen
                             : R.drawable.a11y_button_preview_two_finger));
         } else {
             mIllustrationPreference.setImageDrawable(
-                    mContext.getDrawable(R.drawable.accessibility_button_navigation));
+                    mContext.getDrawable(R.drawable.a11y_button_navigation));
         }
     }
 

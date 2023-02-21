@@ -74,7 +74,7 @@ public class AccessibilityButtonPreviewPreferenceControllerTest {
         mController.mContentObserver.onChange(false);
 
         final Drawable navigationBarDrawable = mContext.getDrawable(
-                R.drawable.accessibility_button_navigation);
+                R.drawable.a11y_button_navigation);
         assertThat(drawableToBitmap(mController.mIllustrationPreference.getImageDrawable()).sameAs(
                 drawableToBitmap(navigationBarDrawable))).isTrue();
     }
