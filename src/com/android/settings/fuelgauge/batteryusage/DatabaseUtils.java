@@ -28,7 +28,6 @@ import android.os.BatteryUsageStats;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
-import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 
@@ -109,7 +108,7 @@ public final class DatabaseUtils {
     /** Returns true if current user is a work profile user. */
     public static boolean isWorkProfile(Context context) {
         final UserManager userManager = context.getSystemService(UserManager.class);
-        return userManager.isManagedProfile() && !userManager.isSystemUser();
+        return userManager.isManagedProfile();
     }
 
     /** Returns the latest timestamp current user data in app usage event table. */
@@ -239,15 +238,15 @@ public final class DatabaseUtils {
         return startCalendar.getTimeInMillis();
     }
 
-    /** Returns the context with OWNER identity when current user is work profile. */
-    public static Context getOwnerContext(Context context) {
-        final boolean isWorkProfileUser = isWorkProfile(context);
-        if (isWorkProfileUser) {
+    /** Returns the context with profile parent identity when current user is work profile. */
+    public static Context getParentContext(Context context) {
+        if (isWorkProfile(context)) {
             try {
                 return context.createPackageContextAsUser(
                         /*packageName=*/ context.getPackageName(),
                         /*flags=*/ 0,
-                        /*user=*/ UserHandle.OWNER);
+                        /*user=*/ context.getSystemService(UserManager.class)
+                                .getProfileParent(context.getUser()));
             } catch (PackageManager.NameNotFoundException e) {
                 Log.e(TAG, "context.createPackageContextAsUser() fail:" + e);
                 return null;
@@ -380,8 +379,8 @@ public final class DatabaseUtils {
 
     private static long loadAppUsageLatestTimestampFromContentProvider(
             Context context, final Uri appUsageLatestTimestampUri) {
-        // We have already make sure the context here is with OWNER user identity. Don't need to
-        // check whether current user is work profile.
+        // We have already make sure the context here is with profile parent's user identity. Don't
+        // need to check whether current user is work profile.
         try (Cursor cursor = sFakeAppUsageLatestTimestampSupplier != null
                 ? sFakeAppUsageLatestTimestampSupplier.get()
                 : context.getContentResolver().query(
@@ -405,7 +404,7 @@ public final class DatabaseUtils {
     private static List<AppUsageEvent> loadAppUsageEventsFromContentProvider(
             Context context, Uri appUsageEventUri) {
         final List<AppUsageEvent> appUsageEventList = new ArrayList<>();
-        context = getOwnerContext(context);
+        context = getParentContext(context);
         if (context == null) {
             return appUsageEventList;
         }
@@ -430,7 +429,7 @@ public final class DatabaseUtils {
 
     private static Map<Long, Map<String, BatteryHistEntry>> loadHistoryMapFromContentProvider(
             Context context, Uri batteryStateUri) {
-        context = DatabaseUtils.getOwnerContext(context);
+        context = DatabaseUtils.getParentContext(context);
         if (context == null) {
             return null;
         }
