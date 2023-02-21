@@ -27,35 +27,34 @@ import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.graphics.drawable.Animatable2;
-import android.graphics.drawable.AnimatedVectorDrawable;
-import android.graphics.drawable.Drawable;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityEvent;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.transition.Transition;
-import androidx.transition.TransitionSet;
 
 import com.android.settings.R;
+import com.android.settings.biometrics.fingerprint.FingerprintErrorDialog;
 import com.android.settings.biometrics2.ui.model.EnrollmentProgress;
 import com.android.settings.biometrics2.ui.model.EnrollmentStatusMessage;
-import com.android.settings.biometrics2.ui.viewmodel.DeviceRotationViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollProgressViewModel;
-import com.android.settingslib.display.DisplayDensityUtils;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieCompositionFactory;
@@ -73,8 +72,10 @@ import com.google.android.setupdesign.template.HeaderMixin;
 public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
 
     private static final String TAG = FingerprintEnrollEnrollingSfpsFragment.class.getSimpleName();
+    private static final boolean DEBUG = false;
 
     private static final int PROGRESS_BAR_MAX = 10000;
+    private static final long ANIMATION_DURATION = 250L;
     private static final long ICON_TOUCH_DURATION_UNTIL_DIALOG_SHOWN = 500;
     private static final int ICON_TOUCH_COUNT_SHOW_UNTIL_DIALOG_SHOWN = 3;
 
@@ -86,101 +87,75 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
     private static final int SFPS_STAGE_RIGHT_EDGE = 4;
 
     private FingerprintEnrollEnrollingViewModel mEnrollingViewModel;
-    private DeviceRotationViewModel mRotationViewModel;
     private FingerprintEnrollProgressViewModel mProgressViewModel;
 
     private Interpolator mFastOutSlowInInterpolator;
-    private Interpolator mLinearOutSlowInInterpolator;
-    private Interpolator mFastOutLinearInInterpolator;
-    private boolean mAnimationCancelled;
 
     private GlifLayout mView;
     private ProgressBar mProgressBar;
     private ObjectAnimator mProgressAnim;
-    private TextView mErrorText;
-    private FooterBarMixin mFooterBarMixin;
-    private AnimatedVectorDrawable mIconAnimationDrawable;
-    private AnimatedVectorDrawable mIconBackgroundBlinksDrawable;
 
     private LottieAnimationView mIllustrationLottie;
-    private boolean mShouldShowLottie;
-    private boolean mIsAccessibilityEnabled;
 
     private boolean mHaveShownSfpsNoAnimationLottie;
     private boolean mHaveShownSfpsCenterLottie;
     private boolean mHaveShownSfpsTipLottie;
     private boolean mHaveShownSfpsLeftEdgeLottie;
     private boolean mHaveShownSfpsRightEdgeLottie;
+    private ObjectAnimator mHelpAnimation;
+    private int mIconTouchCount;
 
     private final View.OnClickListener mOnSkipClickListener =
             (v) -> mEnrollingViewModel.onCancelledDueToOnSkipPressed();
+
     private final Observer<EnrollmentProgress> mProgressObserver = progress -> {
-        // TODO
-    };
-    private final Observer<EnrollmentStatusMessage> mHelpMessageObserver = helpMessage -> {
-        // TODO
-    };
-    private final Observer<EnrollmentStatusMessage> mErrorMessageObserver = errorMessage -> {
-        // TODO
-    };
-    private final Observer<Boolean> mAcquireObserver = isAcquiredGood -> {
-        // TODO
-    };
-    private final Observer<Integer> mPointerDownObserver = sensorId -> {
-        // TODO
-    };
-    private final Observer<Integer> mPointerUpObserver = sensorId -> {
-        // TODO
+        if (DEBUG) {
+            Log.d(TAG, "mProgressObserver(" + progress + ")");
+        }
+        if (progress != null && progress.getSteps() >= 0) {
+            onEnrollmentProgressChange(progress);
+        }
     };
 
-    private int mIconTouchCount;
+    private final Observer<EnrollmentStatusMessage> mHelpMessageObserver = helpMessage -> {
+        if (DEBUG) {
+            Log.d(TAG, "mHelpMessageObserver(" + helpMessage + ")");
+        }
+        if (helpMessage != null) {
+            onEnrollmentHelp(helpMessage);
+        }
+    };
+
+    private final Observer<EnrollmentStatusMessage> mErrorMessageObserver = errorMessage -> {
+        if (DEBUG) {
+            Log.d(TAG, "mErrorMessageObserver(" + errorMessage + ")");
+        }
+        if (errorMessage != null) {
+            onEnrollmentError(errorMessage);
+        }
+    };
 
     @Override
     public void onAttach(@NonNull Context context) {
         final FragmentActivity activity = getActivity();
         final ViewModelProvider provider = new ViewModelProvider(activity);
         mEnrollingViewModel = provider.get(FingerprintEnrollEnrollingViewModel.class);
-        mRotationViewModel = provider.get(DeviceRotationViewModel.class);
         mProgressViewModel = provider.get(FingerprintEnrollProgressViewModel.class);
         super.onAttach(context);
-        final TransitionSet transitionSet = (TransitionSet) getSharedElementEnterTransition();
-        if (transitionSet != null) {
-            transitionSet.addListener(new Transition.TransitionListener() {
-                @Override
-                public void onTransitionStart(@NonNull Transition transition) {
-
-                }
-
-                @Override
-                public void onTransitionEnd(@NonNull Transition transition) {
-                    transition.removeListener(this);
-                    mAnimationCancelled = false;
-                    startIconAnimation();
-                }
-
-                @Override
-                public void onTransitionCancel(@NonNull Transition transition) {
-
-                }
-
-                @Override
-                public void onTransitionPause(@NonNull Transition transition) {
-
-                }
-
-                @Override
-                public void onTransitionResume(@NonNull Transition transition) {
-
-                }
-            });
-        }
+        requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                setEnabled(false);
+                mEnrollingViewModel.setOnBackPressed();
+                cancelEnrollment();
+            }
+        });
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mEnrollingViewModel.restoreSavedState(savedInstanceState);
-        mIsAccessibilityEnabled = mEnrollingViewModel.isAccessibilityEnabled();
     }
 
     @Override
@@ -193,6 +168,7 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         mView = initSfpsLayout(inflater, container);
+        maybeHideSfpsText(getActivity().getResources().getConfiguration());
         return mView;
     }
 
@@ -204,13 +180,22 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
         new GlifLayoutHelper(activity, containView).setDescriptionText(
                 getString(R.string.security_settings_fingerprint_enroll_start_message));
 
-        mShouldShowLottie = shouldShowLottie(); // Move shouldShowLottie into updateOrientation()?
+        // setHelpAnimation()
+        final float translationX = 40;
+        final int duration = 550;
+        final RelativeLayout progressLottieLayout = containView.findViewById(R.id.progress_lottie);
+        mHelpAnimation = ObjectAnimator.ofFloat(progressLottieLayout,
+                "translationX" /* propertyName */,
+                0, translationX, -1 * translationX, translationX, 0f);
+        mHelpAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
+        mHelpAnimation.setDuration(duration);
+        mHelpAnimation.setAutoCancel(false);
+
         mIllustrationLottie = containView.findViewById(R.id.illustration_lottie);
 
-        mErrorText = containView.findViewById(R.id.error_text);
         mProgressBar = containView.findViewById(R.id.fingerprint_progress_bar);
-        mFooterBarMixin = containView.getMixin(FooterBarMixin.class);
-        mFooterBarMixin.setSecondaryButton(
+        final FooterBarMixin footerBarMixin = containView.getMixin(FooterBarMixin.class);
+        footerBarMixin.setSecondaryButton(
                 new FooterButton.Builder(activity)
                         .setText(R.string.security_settings_fingerprint_enroll_enrolling_skip)
                         .setListener(mOnSkipClickListener)
@@ -221,10 +206,6 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
 
         mFastOutSlowInInterpolator = AnimationUtils.loadInterpolator(
                 activity, android.R.interpolator.fast_out_slow_in);
-        mLinearOutSlowInInterpolator = AnimationUtils.loadInterpolator(
-                activity, android.R.interpolator.linear_out_slow_in);
-        mFastOutLinearInInterpolator = AnimationUtils.loadInterpolator(
-                activity, android.R.interpolator.fast_out_linear_in);
 
         mProgressBar.setProgressBackgroundTintMode(PorterDuff.Mode.SRC);
         mProgressBar.setOnTouchListener((v, event) -> {
@@ -243,7 +224,6 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
             return true;
         });
 
-        maybeHideSfpsText(activity.getResources().getConfiguration());
         return containView;
     }
 
@@ -251,46 +231,135 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
     public void onStart() {
         super.onStart();
         startEnrollment();
-        updateProgress(false /* animate */);
-        updateTitleAndDescription(new GlifLayoutHelper(getActivity(), mView));
-        if (true /* TODO mRestoring */) {
-            startIconAnimation();
-        }
+        updateProgress(false /* animate */, mProgressViewModel.getProgressLiveData().getValue());
+        updateTitleAndDescription();
     }
 
     @Override
     public void onStop() {
-        stopIconAnimation();
-        mProgressViewModel.getProgressLiveData().removeObserver(mProgressObserver);
-        mProgressViewModel.getHelpMessageLiveData().removeObserver(mHelpMessageObserver);
-        mProgressViewModel.getErrorMessageLiveData().removeObserver(mErrorMessageObserver);
-        mProgressViewModel.getAcquireLiveData().removeObserver(mAcquireObserver);
-        mProgressViewModel.getPointerDownLiveData().removeObserver(mPointerDownObserver);
-        mProgressViewModel.getPointerUpLiveData().removeObserver(mPointerUpObserver);
-        if (!getActivity().isChangingConfigurations()) {
+        removeEnrollmentObservers();
+        if (!getActivity().isChangingConfigurations() && mProgressViewModel.isEnrolling()) {
             mProgressViewModel.cancelEnrollment();
         }
         super.onStop();
     }
 
+    private void removeEnrollmentObservers() {
+        preRemoveEnrollmentObservers();
+        mProgressViewModel.getErrorMessageLiveData().removeObserver(mErrorMessageObserver);
+    }
+
+    private void preRemoveEnrollmentObservers() {
+        mProgressViewModel.getProgressLiveData().removeObserver(mProgressObserver);
+        mProgressViewModel.getHelpMessageLiveData().removeObserver(mHelpMessageObserver);
+    }
+
+    private void cancelEnrollment() {
+        preRemoveEnrollmentObservers();
+        mProgressViewModel.cancelEnrollment();
+    }
+
     private void startEnrollment() {
+        final boolean startResult = mProgressViewModel.startEnrollment(ENROLL_ENROLL);
+        if (!startResult) {
+            Log.e(TAG, "startEnrollment(), failed");
+        }
         mProgressViewModel.getProgressLiveData().observe(this, mProgressObserver);
         mProgressViewModel.getHelpMessageLiveData().observe(this, mHelpMessageObserver);
         mProgressViewModel.getErrorMessageLiveData().observe(this, mErrorMessageObserver);
-        mProgressViewModel.getAcquireLiveData().observe(this, mAcquireObserver);
-        mProgressViewModel.getPointerDownLiveData().observe(this, mPointerDownObserver);
-        mProgressViewModel.getPointerUpLiveData().observe(this, mPointerUpObserver);
-        mProgressViewModel.startEnrollment(ENROLL_ENROLL);
     }
 
-    private void updateProgress(boolean animate) {
+    private void configureEnrollmentStage(CharSequence description, @RawRes int lottie) {
+        new GlifLayoutHelper(getActivity(), mView).setDescriptionText(description);
+        LottieCompositionFactory.fromRawRes(getActivity(), lottie)
+                .addListener((c) -> {
+                    mIllustrationLottie.setComposition(c);
+                    mIllustrationLottie.setVisibility(View.VISIBLE);
+                    mIllustrationLottie.playAnimation();
+                });
+    }
+
+    private int getCurrentSfpsStage() {
+        EnrollmentProgress progressLiveData = mProgressViewModel.getProgressLiveData().getValue();
+
+        if (progressLiveData == null) {
+            return STAGE_UNKNOWN;
+        }
+
+        final int progressSteps = progressLiveData.getSteps() - progressLiveData.getRemaining();
+        if (progressSteps < getStageThresholdSteps(0)) {
+            return SFPS_STAGE_NO_ANIMATION;
+        } else if (progressSteps < getStageThresholdSteps(1)) {
+            return SFPS_STAGE_CENTER;
+        } else if (progressSteps < getStageThresholdSteps(2)) {
+            return SFPS_STAGE_FINGERTIP;
+        } else if (progressSteps < getStageThresholdSteps(3)) {
+            return SFPS_STAGE_LEFT_EDGE;
+        } else {
+            return SFPS_STAGE_RIGHT_EDGE;
+        }
+    }
+
+    private void onEnrollmentHelp(@NonNull EnrollmentStatusMessage helpMessage) {
+        final CharSequence helpStr = helpMessage.getStr();
+        if (!TextUtils.isEmpty(helpStr)) {
+            showError(helpStr);
+        }
+    }
+
+    private void onEnrollmentError(@NonNull EnrollmentStatusMessage errorMessage) {
+        removeEnrollmentObservers();
+
+        if (mEnrollingViewModel.getOnBackPressed()
+                && errorMessage.getMsgId() == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
+            mEnrollingViewModel.onCancelledDueToOnBackPressed();
+        } else if (mEnrollingViewModel.getOnSkipPressed()
+                && errorMessage.getMsgId() == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
+            mEnrollingViewModel.onCancelledDueToOnSkipPressed();
+        } else {
+            final int errMsgId = errorMessage.getMsgId();
+            mEnrollingViewModel.showErrorDialog(
+                    new FingerprintEnrollEnrollingViewModel.ErrorDialogData(
+                            getString(FingerprintErrorDialog.getErrorMessage(errMsgId)),
+                            getString(FingerprintErrorDialog.getErrorTitle(errMsgId)),
+                            errMsgId
+                    ));
+            mProgressViewModel.cancelEnrollment();
+        }
+    }
+
+    private void announceEnrollmentProgress(CharSequence announcement) {
+        AccessibilityEvent event = new AccessibilityEvent();
+        event.setEventType(AccessibilityEvent.TYPE_ANNOUNCEMENT);
+        event.setClassName(getClass().getName());
+        event.setPackageName(getClass().getPackageName());
+        event.getText().add(announcement);
+        mEnrollingViewModel.sendAccessibilityEvent(event);
+    }
+
+    private void onEnrollmentProgressChange(@NonNull EnrollmentProgress progress) {
+        updateProgress(true /* animate */, progress);
+        if (mEnrollingViewModel.isAccessibilityEnabled()) {
+            final int percent = (int) (((float) (progress.getSteps() - progress.getRemaining())
+                    / (float) progress.getSteps()) * 100);
+
+            CharSequence announcement = getString(
+                    R.string.security_settings_sfps_enroll_progress_a11y_message, percent);
+            announceEnrollmentProgress(announcement);
+
+            mIllustrationLottie.setContentDescription(
+                    getString(R.string.security_settings_sfps_animation_a11y_label, percent)
+            );
+        }
+        updateTitleAndDescription();
+    }
+
+    private void updateProgress(boolean animate, @NonNull EnrollmentProgress enrollmentProgress) {
         if (!mProgressViewModel.isEnrolling()) {
             Log.d(TAG, "Enrollment not started yet");
             return;
         }
 
-        final EnrollmentProgress enrollmentProgress =
-                mProgressViewModel.getProgressLiveData().getValue();
         final int progress = getProgress(enrollmentProgress);
         // Only clear the error when progress has been made.
         // TODO (b/234772728) Add tests.
@@ -318,8 +387,34 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
         return PROGRESS_BAR_MAX * displayProgress / (progress.getSteps() + 1);
     }
 
+    private void showError(CharSequence error) {
+        mView.setHeaderText(error);
+        mView.getHeaderTextView().setContentDescription(error);
+        new GlifLayoutHelper(getActivity(), mView).setDescriptionText("");
+        if (!mHelpAnimation.isRunning()) {
+            mHelpAnimation.start();
+        }
+        applySfpsErrorDynamicColors(true);
+        if (isResumed() && mEnrollingViewModel.isAccessibilityEnabled()) {
+            mEnrollingViewModel.vibrateError(getClass().getSimpleName() + "::showError");
+        }
+    }
+
     private void clearError() {
         applySfpsErrorDynamicColors(false);
+    }
+
+    private void animateProgress(int progress) {
+        if (mProgressAnim != null) {
+            mProgressAnim.cancel();
+        }
+        ObjectAnimator anim = ObjectAnimator.ofInt(mProgressBar, "progress",
+                mProgressBar.getProgress(), progress);
+        anim.addListener(mProgressAnimationListener);
+        anim.setInterpolator(mFastOutSlowInInterpolator);
+        anim.setDuration(ANIMATION_DURATION);
+        anim.start();
+        mProgressAnim = anim;
     }
 
     /**
@@ -328,9 +423,7 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
      */
     private void applySfpsErrorDynamicColors(boolean isError) {
         applyProgressBarDynamicColor(isError);
-        if (mIllustrationLottie != null) {
-            applyLottieDynamicColor(isError);
-        }
+        applyLottieDynamicColor(isError);
     }
 
     private void applyProgressBarDynamicColor(boolean isError) {
@@ -358,36 +451,39 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
         mIllustrationLottie.invalidate();
     }
 
-    @Override
-    public void onDestroy() {
-        // TODO stopListenOrientationEvent();
-        super.onDestroy();
-    }
+    private int getStageThresholdSteps(int index) {
+        final EnrollmentProgress progressLiveData =
+                mProgressViewModel.getProgressLiveData().getValue();
 
-    private void animateProgress(int progress) {
-        if (mProgressAnim != null) {
-            mProgressAnim.cancel();
+        if (progressLiveData == null || progressLiveData.getSteps() == -1) {
+            Log.w(TAG, "getStageThresholdSteps: Enrollment not started yet");
+            return 1;
         }
-        ObjectAnimator anim = ObjectAnimator.ofInt(mProgressBar, "progress",
-                mProgressBar.getProgress(), progress);
-        anim.addListener(mProgressAnimationListener);
-        anim.setInterpolator(mFastOutSlowInInterpolator);
-        anim.setDuration(250);
-        anim.start();
-        mProgressAnim = anim;
+        return Math.round(progressLiveData.getSteps()
+                * mEnrollingViewModel.getEnrollStageThreshold(index));
     }
 
-    private void updateTitleAndDescription(@NonNull GlifLayoutHelper glifLayoutHelper) {
-        if (mIsAccessibilityEnabled) {
+    private void updateTitleAndDescription() {
+        final GlifLayoutHelper glifLayoutHelper = new GlifLayoutHelper(getActivity(), mView);
+        if (mEnrollingViewModel.isAccessibilityEnabled()) {
             mEnrollingViewModel.clearTalkback();
             glifLayoutHelper.getGlifLayout().getDescriptionTextView().setAccessibilityLiveRegion(
                     View.ACCESSIBILITY_LIVE_REGION_POLITE);
         }
-        switch (getCurrentSfpsStage()) {
+        final int stage = getCurrentSfpsStage();
+        if (DEBUG) {
+            Log.d(TAG, "updateTitleAndDescription, stage:" + stage
+                    + ", noAnimation:" + mHaveShownSfpsNoAnimationLottie
+                    + ", center:" + mHaveShownSfpsCenterLottie
+                    + ", tip:" + mHaveShownSfpsTipLottie
+                    + ", leftEdge:" + mHaveShownSfpsLeftEdgeLottie
+                    + ", rightEdge:" + mHaveShownSfpsRightEdgeLottie);
+        }
+        switch (stage) {
             case SFPS_STAGE_NO_ANIMATION:
                 glifLayoutHelper.setHeaderText(
                         R.string.security_settings_fingerprint_enroll_repeat_title);
-                if (!mHaveShownSfpsNoAnimationLottie && mIllustrationLottie != null) {
+                if (!mHaveShownSfpsNoAnimationLottie) {
                     mHaveShownSfpsNoAnimationLottie = true;
                     mIllustrationLottie.setContentDescription(
                             getString(
@@ -405,7 +501,7 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
             case SFPS_STAGE_CENTER:
                 glifLayoutHelper.setHeaderText(
                         R.string.security_settings_sfps_enroll_finger_center_title);
-                if (!mHaveShownSfpsCenterLottie && mIllustrationLottie != null) {
+                if (!mHaveShownSfpsCenterLottie) {
                     mHaveShownSfpsCenterLottie = true;
                     configureEnrollmentStage(
                             getString(R.string.security_settings_sfps_enroll_start_message),
@@ -417,7 +513,7 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
             case SFPS_STAGE_FINGERTIP:
                 glifLayoutHelper.setHeaderText(
                         R.string.security_settings_sfps_enroll_fingertip_title);
-                if (!mHaveShownSfpsTipLottie && mIllustrationLottie != null) {
+                if (!mHaveShownSfpsTipLottie) {
                     mHaveShownSfpsTipLottie = true;
                     configureEnrollmentStage("", R.raw.sfps_lottie_tip);
                 }
@@ -426,7 +522,7 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
             case SFPS_STAGE_LEFT_EDGE:
                 glifLayoutHelper.setHeaderText(
                         R.string.security_settings_sfps_enroll_left_edge_title);
-                if (!mHaveShownSfpsLeftEdgeLottie && mIllustrationLottie != null) {
+                if (!mHaveShownSfpsLeftEdgeLottie) {
                     mHaveShownSfpsLeftEdgeLottie = true;
                     configureEnrollmentStage("", R.raw.sfps_lottie_left_edge);
                 }
@@ -435,7 +531,7 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
             case SFPS_STAGE_RIGHT_EDGE:
                 glifLayoutHelper.setHeaderText(
                         R.string.security_settings_sfps_enroll_right_edge_title);
-                if (!mHaveShownSfpsRightEdgeLottie && mIllustrationLottie != null) {
+                if (!mHaveShownSfpsRightEdgeLottie) {
                     mHaveShownSfpsRightEdgeLottie = true;
                     configureEnrollmentStage("", R.raw.sfps_lottie_right_edge);
                 }
@@ -460,7 +556,38 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
         }
     }
 
-    private void maybeHideSfpsText(@android.annotation.NonNull Configuration newConfig) {
+    private void showIconTouchDialog() {
+        mIconTouchCount = 0;
+        //TODO EnrollingActivity should observe live data and add dialog fragment
+        mEnrollingViewModel.onIconTouchDialogShow();
+    }
+
+    private final Runnable mShowDialogRunnable = () -> showIconTouchDialog();
+
+    private final Animator.AnimatorListener mProgressAnimationListener =
+            new Animator.AnimatorListener() {
+
+                @Override
+                public void onAnimationStart(Animator animation) { }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) { }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    if (mProgressBar.getProgress() >= PROGRESS_BAR_MAX) {
+                        mProgressBar.postDelayed(mDelayedFinishRunnable, ANIMATION_DURATION);
+                    }
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) { }
+            };
+
+    // Give the user a chance to see progress completed before jumping to the next stage.
+    private final Runnable mDelayedFinishRunnable = () -> mEnrollingViewModel.onEnrollingDone();
+
+    private void maybeHideSfpsText(@NonNull Configuration newConfig) {
         final HeaderMixin headerMixin = ((GlifLayout) mView).getMixin(HeaderMixin.class);
         final DescriptionMixin descriptionMixin = ((GlifLayout) mView).getMixin(
                 DescriptionMixin.class);
@@ -480,137 +607,4 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
         }
 
     }
-
-    private int getCurrentSfpsStage() {
-        EnrollmentProgress progressLiveData = mProgressViewModel.getProgressLiveData().getValue();
-
-        if (progressLiveData == null || progressLiveData.getSteps() == -1) {
-            return STAGE_UNKNOWN;
-        }
-
-        final int progressSteps = progressLiveData.getSteps() - progressLiveData.getRemaining();
-        if (progressSteps < getStageThresholdSteps(0)) {
-            return SFPS_STAGE_NO_ANIMATION;
-        } else if (progressSteps < getStageThresholdSteps(1)) {
-            return SFPS_STAGE_CENTER;
-        } else if (progressSteps < getStageThresholdSteps(2)) {
-            return SFPS_STAGE_FINGERTIP;
-        } else if (progressSteps < getStageThresholdSteps(3)) {
-            return SFPS_STAGE_LEFT_EDGE;
-        } else {
-            return SFPS_STAGE_RIGHT_EDGE;
-        }
-    }
-
-    private int getStageThresholdSteps(int index) {
-        final EnrollmentProgress progressLiveData =
-                mProgressViewModel.getProgressLiveData().getValue();
-
-        if (progressLiveData == null || progressLiveData.getSteps() == -1) {
-            Log.w(TAG, "getStageThresholdSteps: Enrollment not started yet");
-            return 1;
-        }
-        return Math.round(progressLiveData.getSteps()
-                * mEnrollingViewModel.getEnrollStageThreshold(index));
-    }
-
-    private void updateOrientation() {
-        mIllustrationLottie = mView.findViewById(R.id.illustration_lottie);
-    }
-
-    private boolean shouldShowLottie() {
-        DisplayDensityUtils displayDensity = new DisplayDensityUtils(getContext());
-        int currentDensityIndex = displayDensity.getCurrentIndexForDefaultDisplay();
-        final int currentDensity = displayDensity.getDefaultDisplayDensityValues()
-                [currentDensityIndex];
-        final int defaultDensity = displayDensity.getDefaultDensityForDefaultDisplay();
-        return defaultDensity == currentDensity;
-    }
-
-
-    private void startIconAnimation() {
-        if (mIconAnimationDrawable != null) {
-            mIconAnimationDrawable.start();
-        }
-    }
-
-    private void stopIconAnimation() {
-        mAnimationCancelled = true;
-        if (mIconAnimationDrawable != null) {
-            mIconAnimationDrawable.stop();
-        }
-    }
-
-    private void showIconTouchDialog() {
-        mIconTouchCount = 0;
-        //TODO EnrollingActivity should observe live data and add dialog fragment
-        mEnrollingViewModel.onIconTouchDialogShow();
-    }
-
-    private void configureEnrollmentStage(CharSequence description, @RawRes int lottie) {
-        new GlifLayoutHelper(getActivity(), mView).setDescriptionText(description);
-        LottieCompositionFactory.fromRawRes(getActivity(), lottie)
-                .addListener((c) -> {
-                    mIllustrationLottie.setComposition(c);
-                    mIllustrationLottie.setVisibility(View.VISIBLE);
-                    mIllustrationLottie.playAnimation();
-                });
-    }
-
-    private final Runnable mShowDialogRunnable = new Runnable() {
-        @Override
-        public void run() {
-            showIconTouchDialog();
-        }
-    };
-
-    private final Animator.AnimatorListener mProgressAnimationListener =
-            new Animator.AnimatorListener() {
-
-                @Override
-                public void onAnimationStart(Animator animation) {
-                    startIconAnimation();
-                }
-
-                @Override
-                public void onAnimationRepeat(Animator animation) { }
-
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    stopIconAnimation();
-
-                    if (mProgressBar.getProgress() >= PROGRESS_BAR_MAX) {
-                        mProgressBar.postDelayed(mDelayedFinishRunnable, 250L);
-                    }
-                }
-
-                @Override
-                public void onAnimationCancel(Animator animation) { }
-            };
-
-    // Give the user a chance to see progress completed before jumping to the next stage.
-    private final Runnable mDelayedFinishRunnable = new Runnable() {
-        @Override
-        public void run() {
-            /* TODO launchFinish(); */
-        }
-    };
-
-    private final Animatable2.AnimationCallback mIconAnimationCallback =
-            new Animatable2.AnimationCallback() {
-                @Override
-                public void onAnimationEnd(Drawable d) {
-                    if (mAnimationCancelled) {
-                        return;
-                    }
-
-                    // Start animation after it has ended.
-                    mProgressBar.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            startIconAnimation();
-                        }
-                    });
-                }
-            };
 }
