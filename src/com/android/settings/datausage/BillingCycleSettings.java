@@ -27,6 +27,7 @@ import android.icu.util.MeasureUnit;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.method.NumberKeyListener;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -54,6 +55,7 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.Optional;
 import java.util.TimeZone;
 
 @SearchIndexable
@@ -115,6 +117,18 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
 
         Bundle args = getArguments();
         mNetworkTemplate = args.getParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE);
+        if (mNetworkTemplate == null && getIntent() != null) {
+            mNetworkTemplate = getIntent().getParcelableExtra(Settings.EXTRA_NETWORK_TEMPLATE);
+        }
+
+        if (mNetworkTemplate == null) {
+            Optional<NetworkTemplate> mobileNetworkTemplateFromSim =
+                    DataUsageUtils.getMobileNetworkTemplateFromSubId(context, getIntent());
+            if (mobileNetworkTemplateFromSim.isPresent()) {
+                mNetworkTemplate = mobileNetworkTemplateFromSim.get();
+            }
+        }
+
         if (mNetworkTemplate == null) {
             mNetworkTemplate = DataUsageUtils.getDefaultTemplate(context,
                 DataUsageUtils.getDefaultSubscriptionId(context));

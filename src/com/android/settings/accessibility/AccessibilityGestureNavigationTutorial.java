@@ -230,8 +230,8 @@ public final class AccessibilityGestureNavigationTutorial {
 
         final ImageView imageView = view.findViewById(R.id.image);
         final int gestureSettingsImageResId =
-                isTouchExploreEnabled ? R.drawable.illustration_accessibility_gesture_three_finger
-                        : R.drawable.illustration_accessibility_gesture_two_finger;
+                isTouchExploreEnabled ? R.drawable.a11y_gesture_navigation_three_finger_preview
+                        : R.drawable.a11y_gesture_navigation_two_finger_preview;
         imageView.setImageResource(gestureSettingsImageResId);
 
         final TextView textView = view.findViewById(R.id.gesture_tutorial_message);
