@@ -195,6 +195,7 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
         mPreviewButton.setOnClickListener(v -> dreamBackend.preview(dreamBackend.getActiveDream()));
 
         mRecyclerView = super.onCreateRecyclerView(inflater, parent, bundle);
+        mRecyclerView.setFocusable(false);
         updatePaddingForPreviewButton();
         return mRecyclerView;
     }

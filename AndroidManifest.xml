@@ -90,6 +90,7 @@
     <uses-permission android:name="android.permission.MANAGE_DEVICE_ADMINS" />
     <uses-permission android:name="android.permission.READ_SEARCH_INDEXABLES" />
     <uses-permission android:name="android.permission.BIND_SETTINGS_SUGGESTIONS_SERVICE" />
+    <uses-permission android:name="android.permission.BIND_REMOTE_LOCKSCREEN_VALIDATION_SERVICE" />
     <uses-permission android:name="android.permission.OEM_UNLOCK_STATE" />
     <uses-permission android:name="android.permission.MANAGE_USER_OEM_UNLOCK_STATE" />
     <uses-permission android:name="android.permission.OVERRIDE_WIFI_CONFIG" />
@@ -2372,6 +2373,17 @@
         <activity-alias android:name=".ConfirmDeviceCredentialActivity"
             android:targetActivity=".password.ConfirmDeviceCredentialActivity"
             android:exported="true" />
+        <!-- Activity alias for remote lockscreen validation. Enforces required permission -->
+        <activity-alias
+            android:name=".ConfirmRemoteDeviceCredentialActivity"
+            android:targetActivity=".password.ConfirmDeviceCredentialActivity"
+            android:permission="android.permission.CHECK_REMOTE_LOCKSCREEN"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.app.action.CONFIRM_REMOTE_DEVICE_CREDENTIAL"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity-alias>
 
         <!-- Note this must not be exported since it authenticates the given user -->
         <activity android:name=".password.ConfirmDeviceCredentialActivity$InternalActivity"

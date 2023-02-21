@@ -25,6 +25,7 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -32,6 +33,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -39,6 +41,7 @@ import com.android.settings.R;
 import com.android.settings.biometrics.fingerprint.FingerprintFindSensorAnimation;
 import com.android.settings.biometrics2.ui.model.EnrollmentProgress;
 import com.android.settings.biometrics2.ui.model.EnrollmentStatusMessage;
+import com.android.settings.biometrics2.ui.viewmodel.DeviceRotationViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFindSensorViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollProgressViewModel;
 
@@ -67,12 +70,23 @@ public class FingerprintEnrollFindRfpsFragment extends Fragment {
 
     private FingerprintEnrollFindSensorViewModel mViewModel;
     private FingerprintEnrollProgressViewModel mProgressViewModel;
+    private DeviceRotationViewModel mRotationViewModel;
 
     private View mView;
     private GlifLayout mGlifLayout;
     private FooterBarMixin mFooterBarMixin;
     private final OnClickListener mOnSkipClickListener = (v) -> mViewModel.onSkipButtonClick();
     @Nullable private FingerprintFindSensorAnimation mAnimation;
+    @Surface.Rotation private int mLastRotation = -1;
+
+    private final Observer<Integer> mRotationObserver = rotation -> {
+        if (DEBUG) {
+            Log.d(TAG, "rotationObserver " + rotation);
+        }
+        if (rotation != null) {
+            onRotationChanged(rotation);
+        }
+    };
 
     private final Observer<EnrollmentProgress> mProgressObserver = progress -> {
         if (DEBUG) {
@@ -85,15 +99,10 @@ public class FingerprintEnrollFindRfpsFragment extends Fragment {
 
     private final Observer<EnrollmentStatusMessage> mLastCancelMessageObserver = errorMessage -> {
         if (DEBUG) {
-            Log.d(TAG, "mErrorMessageObserver(" + errorMessage + ")");
+            Log.d(TAG, "mLastCancelMessageObserver(" + errorMessage + ")");
         }
         if (errorMessage != null) {
-            if (errorMessage.getMsgId() == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
-                mProgressViewModel.clearProgressLiveData();
-                mViewModel.onStartButtonClick();
-            } else {
-                Log.e(TAG, "mErrorMessageObserver(" + errorMessage + ")");
-            }
+            onLastCancelMessage(errorMessage);
         }
     };
 
@@ -144,6 +153,10 @@ public class FingerprintEnrollFindRfpsFragment extends Fragment {
 
     @Override
     public void onResume() {
+        final LiveData<Integer> rotationLiveData = mRotationViewModel.getLiveData();
+        mLastRotation = rotationLiveData.getValue();
+        rotationLiveData.observe(this, mRotationObserver);
+
         if (mAnimation != null) {
             if (DEBUG) {
                 Log.d(TAG, "onResume(), start animation");
@@ -198,15 +211,39 @@ public class FingerprintEnrollFindRfpsFragment extends Fragment {
             return;
         }
 
+        if (waitForLastCancelErrMsg) {
+            mProgressViewModel.clearErrorMessageLiveData(); // Prevent got previous error message
+            mProgressViewModel.getErrorMessageLiveData().observe(this,
+                    mLastCancelMessageObserver);
+        }
+
         mProgressViewModel.getProgressLiveData().removeObserver(mProgressObserver);
         final boolean cancelResult = mProgressViewModel.cancelEnrollment();
         if (!cancelResult) {
             Log.e(TAG, "stopLookingForFingerprint(), failed to cancel enrollment");
         }
+    }
 
-        if (waitForLastCancelErrMsg) {
-            mProgressViewModel.getErrorMessageLiveData().observe(this,
-                    mLastCancelMessageObserver);
+    private void onRotationChanged(@Surface.Rotation int newRotation) {
+        if (DEBUG) {
+            Log.d(TAG, "onRotationChanged() from " + mLastRotation + " to " + newRotation);
+        }
+        if (newRotation % 2 != mLastRotation % 2) {
+            // Fragment is going to be recreated, just stopLookingForFingerprint() here.
+            stopLookingForFingerprint(true);
+        }
+    }
+
+    private void onLastCancelMessage(@NonNull EnrollmentStatusMessage errorMessage) {
+        if (errorMessage.getMsgId() == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
+            final EnrollmentProgress progress = mProgressViewModel.getProgressLiveData().getValue();
+            mProgressViewModel.clearProgressLiveData();
+            mProgressViewModel.getErrorMessageLiveData().removeObserver(mLastCancelMessageObserver);
+            if (progress != null && !progress.isInitialStep()) {
+                mViewModel.onStartButtonClick();
+            }
+        } else {
+            Log.e(TAG, "mErrorMessageObserver(" + errorMessage + ")");
         }
     }
 
@@ -227,6 +264,7 @@ public class FingerprintEnrollFindRfpsFragment extends Fragment {
         final ViewModelProvider provider = new ViewModelProvider(activity);
         mViewModel = provider.get(FingerprintEnrollFindSensorViewModel.class);
         mProgressViewModel = provider.get(FingerprintEnrollProgressViewModel.class);
+        mRotationViewModel = provider.get(DeviceRotationViewModel.class);
         super.onAttach(context);
     }
 }

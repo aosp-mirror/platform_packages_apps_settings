@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.util.Log;
+import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
@@ -276,6 +277,27 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
      */
     public boolean isAccessibilityEnabled() {
         return mAccessibilityRepository.isEnabled();
+    }
+
+    /**
+     * Sends an {@link AccessibilityEvent}.
+     */
+    public void sendAccessibilityEvent(CharSequence announcement) {
+        AccessibilityEvent e = AccessibilityEvent.obtain();
+        e.setEventType(AccessibilityEvent.TYPE_ANNOUNCEMENT);
+        e.setClassName(getClass().getName());
+        e.setPackageName(getApplication().getPackageName());
+        e.getText().add(announcement);
+        mAccessibilityRepository.sendAccessibilityEvent(e);
+    }
+
+     /**
+     * Returns if the touch exploration in the system is enabled.
+     *
+     * @return True if touch exploration is enabled, false otherwise.
+     */
+    public boolean isTouchExplorationEnabled() {
+        return mAccessibilityRepository.isTouchExplorationEnabled();
     }
 
     /**

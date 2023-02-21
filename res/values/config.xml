@@ -225,6 +225,10 @@
     -->
     <integer name="config_vibration_supported_intensity_levels">1</integer>
 
+    <!-- Whether or not to show Media vibration settings in the vibration and haptics screen.
+         Can be overridden for specific product builds if the target device does not support it -->
+    <bool name="config_media_vibration_supported">true</bool>
+
     <!--
         Whether or not the homepage should be powered by legacy suggestion (versus contextual cards)
         Default to true as not all devices support contextual cards.
@@ -691,5 +695,4 @@
 
     <!-- Whether auto data switching on secondary SIM enables cross-SIM calling on both SIMs. -->
     <bool name="config_auto_data_switch_enables_cross_sim_calling">false</bool>
-
 </resources>

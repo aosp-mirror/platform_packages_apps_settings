@@ -382,13 +382,13 @@
     <!-- The subtitle of option's page of regional preferences for Temperature units, Calendar and First day of week. [CHAR LIMIT=NONE] -->
     <string name="regional_preferences_option_page_sub_title">Apps will use your regional preferences where possible.</string>
     <!-- The title of menu entry of Temperature unit preference. [CHAR LIMIT=50] -->
-    <string name="temperature_preferences_title">Temperature units</string>
+    <string name="temperature_preferences_title">Temperature</string>
     <!-- The title of the  menu entry of Calendar type preference. [CHAR LIMIT=50]  -->
     <string name="calendar_preferences_title">Calendar</string>
     <!-- The title of the  menu entry of First day of week preference. [CHAR LIMIT=50]  -->
     <string name="first_day_of_week_preferences_title">First day of week</string>
     <!-- The title of the menu entry of Numbers system preference. [CHAR LIMIT=50]  -->
-    <string name="numbers_preferences_title">Numbers</string>
+    <string name="numbers_preferences_title">Numbers preferences</string>
     <!-- The summary of default string for each regional preference. [CHAR LIMIT=50] -->
     <string name="default_string_of_regional_preference">Use app default</string>
     <!-- The title of Celsius for preference of temperature unit. [CHAR LIMIT=50] -->
@@ -1438,7 +1438,9 @@
     <!-- Bluetooth settings. Text displayed when Bluetooth is off and device list is empty [CHAR LIMIT=50]-->
     <string name="bluetooth_empty_list_bluetooth_off">When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices.</string>
     <!-- Bluetooth settings. Text displayed when Bluetooth is off and bluetooth scanning is turned on [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_scanning_on_info_message">When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices.\n\nTo improve device experience, apps and services can still scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services. You can change this in <annotation id="link">Bluetooth scanning settings</annotation>.</string>
+    <string name="bluetooth_scanning_on_info_message">When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices.\n\nTo improve device experience, apps and services can still scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services. You can change this in Bluetooth scanning settings.</string>
+    <!-- Bluetooth settings. Link text to bring the user to "scanning settings" screen. [CHAR LIMIT=NONE]-->
+    <string name="bluetooth_scan_change">Change</string>
 
     <!-- Title of device details screen [CHAR LIMIT=28]-->
     <string name="device_details_title">Device details</string>
@@ -3338,6 +3340,24 @@
     <string name="lockpassword_confirm_your_pin_header_frp">Verify PIN</string>
     <!-- Header shown when the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
     <string name="lockpassword_confirm_your_password_header_frp">Verify password</string>
+
+    <!-- Header shown when prompted for remote device credential validation. [CHAR LIMIT=17] -->
+    <string name="lockpassword_remote_validation_header">Verify it\u0027s you</string>
+
+    <!-- Details shown when pattern is prompted for remote device credential validation. [CHAR LIMIT=100] -->
+    <string name="lockpassword_remote_validation_pattern_details">Enter your other device\u0027s pattern to securely transfer Google Accounts, settings, and more. Your pattern is encrypted.</string>
+    <!-- Details shown when PIN is prompted for remote device credential validation. [CHAR LIMIT=100] -->
+    <string name="lockpassword_remote_validation_pin_details">Enter your other device\u0027s PIN to securely transfer Google Accounts, settings, and more. Your PIN is encrypted.</string>
+    <!-- Details shown when password is prompted for remote device credential validation. [CHAR LIMIT=100] -->
+    <string name="lockpassword_remote_validation_password_details">Enter your other device\u0027s password to securely transfer Google Accounts, settings, and more. Your password is encrypted.</string>
+
+    <!-- Checkbox label to set pattern as new screen lock if remote device credential validation succeeds. [CHAR LIMIT=43] -->
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock">Also use pattern to unlock this device</string>
+    <!-- Checkbox label to set PIN as new screen lock if remote device credential validation succeeds. [CHAR LIMIT=43] -->
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock">Also use PIN to unlock this device</string>
+    <!-- Checkbox label to set password as new screen lock if remote device credential validation succeeds. [CHAR LIMIT=43] -->
+    <string name="lockpassword_remote_validation_set_password_as_screenlock">Also use password to unlock this device</string>
+
 
     <!-- Security & location settings screen, change security method screen instruction if user
          enters incorrect PIN [CHAR LIMIT=30] -->
@@ -6965,6 +6985,9 @@
 
     <!-- Sound: Title for the option managing notification volume. [CHAR LIMIT=30] -->
     <string name="notification_volume_option_title">Notification volume</string>
+
+    <!-- Sound: Summary for when notification volume is disabled. [CHAR LIMIT=100] -->
+    <string name="notification_volume_disabled_summary">Unavailable because ring is muted</string>
 
     <!-- Sound: Title for the option defining the phone ringtone. [CHAR LIMIT=30] -->
     <string name="ringtone_title">Phone ringtone</string>
@@ -10871,10 +10894,13 @@
 
     <!-- [CHAR LIMIT=32] Name of MTE page in "Developer Options" and heading of page. -->
     <string name="development_memtag_page_title">Memory Tagging Extension</string>
-    <!-- [CHAR LIMIT=52] Label for button to turn on / off MTE protection.-->
+    <!-- [CHAR LIMIT=NONE] Explanation shown under heading of the page.-->
     <string name="development_memtag_intro">Memory Tagging Extension (MTE) makes it easier to find memory safety issues in your app and make native code in it more secure.</string>
+    <!-- [CHAR LIMIT=NONE] Further explanation shown at the bottom of the page.-->
     <string name="development_memtag_footer">Turning on MTE might cause slower device performance.</string>
+    <!-- [CHAR LIMIT=NONE] String for link to learn more about MTE.-->
     <string name="development_memtag_learn_more">Learn more about MTE</string>
+    <!-- [CHAR LIMIT=52] Label for button to turn on / off MTE protection.-->
     <string name="development_memtag_toggle">Enable MTE until you turn it off</string>
     <!-- [CHAR LIMIT=NONE] Message shown in dialog prompting user to reboot device to turn on MTE.-->
     <string name="development_memtag_reboot_message_on">You\u0027ll need to restart your device to turn on MTE.</string>

@@ -831,14 +831,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         if (mDialog == null || !mDialog.isShowing()) {
             return;
         }
-
-        // Content in software shortcut need to be adjusted depend on the accessibility button
-        // mode status which can be changed in background.
-        final boolean valueChanged = mSavedAccessibilityFloatingMenuEnabled
-                != AccessibilityUtil.isFloatingMenuEnabled(getContext());
-        if (valueChanged) {
-            AccessibilityDialogUtils.updateSoftwareShortcutInDialog(getContext(), mDialog);
-        }
+        AccessibilityDialogUtils.updateShortcutInDialog(getContext(), mDialog);
     }
 
     @VisibleForTesting
