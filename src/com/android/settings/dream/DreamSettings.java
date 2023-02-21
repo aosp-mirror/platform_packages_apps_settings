@@ -195,6 +195,10 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
         mPreviewButton.setOnClickListener(v -> dreamBackend.preview(dreamBackend.getActiveDream()));
 
         mRecyclerView = super.onCreateRecyclerView(inflater, parent, bundle);
+        // The enable/disable status change of the nested RecyclerView(Dream Picker) causes the
+        // focus moving. Make the RecyclerView unfocusable to prevent the unexpected scrolling when
+        // the focus changes in the TalkBack mode.
+        mRecyclerView.setFocusable(false);
         updatePaddingForPreviewButton();
         return mRecyclerView;
     }
