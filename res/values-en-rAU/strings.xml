@@ -166,10 +166,11 @@
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Set units and number preferences"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Let apps know your regional preferences so that they can personalise your experience."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Apps will use your regional preferences where possible."</string>
-    <string name="temperature_preferences_title" msgid="9067783912861473593">"Temperature units"</string>
+    <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperature"</string>
     <string name="calendar_preferences_title" msgid="8312485828206542600">"Calendar"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"First day of week"</string>
-    <string name="numbers_preferences_title" msgid="6094837605398562369">"Numbers"</string>
+    <!-- no translation found for numbers_preferences_title (8197418984391195446) -->
+    <skip />
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Use app default"</string>
     <string name="celsius_temperature_unit" msgid="6118523647432383132">"Celsius (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Fahrenheit (°F)"</string>
@@ -621,7 +622,8 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Disconnect"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Pair &amp; connect"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices.\n\nTo improve device experience, apps and services can still scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services. You can change this in "<annotation id="link">"Bluetooth scanning settings"</annotation>"."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices.\n\nTo improve device experience, apps and services can still scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services. You can change this in Bluetooth scanning settings."</string>
+    <string name="bluetooth_scan_change" msgid="1744636222637390367">"Change"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Device details"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Keyboard settings"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Device\'s Bluetooth address: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -1391,6 +1393,13 @@
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Verify pattern"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Verify PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Verify password"</string>
+    <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Verify it\'s you"</string>
+    <string name="lockpassword_remote_validation_pattern_details" msgid="7738124461482712491">"Enter your other device\'s pattern to securely transfer Google Accounts, settings &amp; more. Your pattern\'s encrypted."</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="8924028697135308390">"Enter your other device\'s PIN to securely transfer Google Accounts, settings &amp; more. Your PIN is encrypted."</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="8478926171431523279">"Enter your other device\'s password to securely transfer Google Accounts, settings and more. Your password\'s encrypted."</string>
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Also use pattern to unlock this device"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Also use PIN to unlock this device"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Also use password to unlock this device"</string>
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"Wrong PIN"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Wrong password"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Wrong pattern"</string>
@@ -2889,6 +2898,7 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Ring and notification volume"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Ring volume"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Notification volume"</string>
+    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Unavailable because ring is muted"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Phone ringtone"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Default notification sound"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"App provided sound"</string>
@@ -3439,10 +3449,8 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Turned off"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Advanced"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Permission manager"</string>
-    <!-- no translation found for app_data_sharing_updates_title (1694297952320402788) -->
-    <skip />
-    <!-- no translation found for app_data_sharing_updates_summary (4465929918457739443) -->
-    <skip />
+    <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Data sharing updates for location"</string>
+    <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Review apps that changed the way they may share your location data"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Tap to wake"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Double-tap anywhere on the screen to wake device"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Opening links"</string>
@@ -4262,28 +4270,17 @@
     <string name="content_capture" msgid="868372905432812238">"App content"</string>
     <string name="content_capture_summary" msgid="49720773699715531">"Allow apps to send content to the Android system"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"Capture system heap dump"</string>
-    <!-- no translation found for development_memtag_page_title (3546667618748029188) -->
-    <skip />
-    <!-- no translation found for development_memtag_intro (8032596625527637164) -->
-    <skip />
-    <!-- no translation found for development_memtag_footer (5681925148773626562) -->
-    <skip />
-    <!-- no translation found for development_memtag_learn_more (8961984806973926704) -->
-    <skip />
-    <!-- no translation found for development_memtag_toggle (2474420239518386894) -->
-    <skip />
-    <!-- no translation found for development_memtag_reboot_message_on (8100075676107327847) -->
-    <skip />
-    <!-- no translation found for development_memtag_reboot_message_off (3703925647922079456) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_title (2320125810211279) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_message (1232881567956207641) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_summary (3896537791216432882) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_already_enabled (4439168867613407167) -->
-    <skip />
+    <string name="development_memtag_page_title" msgid="3546667618748029188">"Memory Tagging Extension"</string>
+    <string name="development_memtag_intro" msgid="8032596625527637164">"Memory Tagging Extension (MTE) makes it easier to find memory safety issues in your app and make native code in it more secure."</string>
+    <string name="development_memtag_footer" msgid="5681925148773626562">"Turning on MTE might cause slower device performance."</string>
+    <string name="development_memtag_learn_more" msgid="8961984806973926704">"Learn more about MTE"</string>
+    <string name="development_memtag_toggle" msgid="2474420239518386894">"Enable MTE until you turn it off"</string>
+    <string name="development_memtag_reboot_message_on" msgid="8100075676107327847">"You\'ll need to restart your device to turn on MTE."</string>
+    <string name="development_memtag_reboot_message_off" msgid="3703925647922079456">"You\'ll need to restart your device to turn off MTE."</string>
+    <string name="reboot_with_mte_title" msgid="2320125810211279">"Enable MTE for a single session"</string>
+    <string name="reboot_with_mte_message" msgid="1232881567956207641">"System will restart and allow experimenting with Memory Tagging Extension (MTE). MTE may negatively impact system performance and stability. Will be reset on next subsequent reboot."</string>
+    <string name="reboot_with_mte_summary" msgid="3896537791216432882">"Restart for a single session with MTE enabled"</string>
+    <string name="reboot_with_mte_already_enabled" msgid="4439168867613407167">"MTE is already enabled"</string>
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"Capturing system heap dump"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"Couldn’t capture system heap dump"</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"Automatically capture system heap dumps"</string>
