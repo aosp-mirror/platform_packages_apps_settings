@@ -142,7 +142,10 @@ public class UdfpsEnrollHelper extends InstrumentedFragment {
         setRetainInstance(true);
     }
 
-    void onEnrollmentProgress(int totalSteps, int remaining) {
+    /**
+     * Called when a enroll progress update
+     */
+    public void onEnrollmentProgress(int totalSteps, int remaining) {
         if (mTotalSteps == -1) {
             mTotalSteps = totalSteps;
         }
@@ -161,25 +164,37 @@ public class UdfpsEnrollHelper extends InstrumentedFragment {
         }
     }
 
-    void onEnrollmentHelp() {
+    /**
+     * Called when a receive error has been encountered during enrollment.
+     */
+    public void onEnrollmentHelp() {
         if (mListener != null) {
             mListener.onEnrollmentHelp(mRemainingSteps, mTotalSteps);
         }
     }
 
-    void onAcquired(boolean isAcquiredGood) {
+    /**
+     * Called when a fingerprint image has been acquired, but wasn't processed yet.
+     */
+    public void onAcquired(boolean isAcquiredGood) {
         if (mListener != null && mTotalSteps != -1) {
             mListener.onAcquired(isAcquiredGood && animateIfLastStep());
         }
     }
 
-    void onPointerDown(int sensorId) {
+    /**
+     * Called when pointer down
+     */
+    public void onPointerDown(int sensorId) {
         if (mListener != null) {
             mListener.onPointerDown(sensorId);
         }
     }
 
-    void onPointerUp(int sensorId) {
+    /**
+     * Called when pointer up
+     */
+    public void onPointerUp(int sensorId) {
         if (mListener != null) {
             mListener.onPointerUp(sensorId);
         }
