@@ -30,7 +30,8 @@
         android:summary="%s"
         android:key="audio_routing_ringtone"
         android:persistent="false"
-        android:title="@string/bluetooth_ringtone_title" />
+        android:title="@string/bluetooth_ringtone_title"
+        settings:controller="com.android.settings.bluetooth.HearingDeviceRingtoneRoutingPreferenceController" />
 
     <ListPreference
         android:entries="@array/bluetooth_audio_routing_titles"
@@ -38,7 +39,8 @@
         android:summary="%s"
         android:key="audio_routing_call"
         android:persistent="false"
-        android:title="@string/bluetooth_call_title" />
+        android:title="@string/bluetooth_call_title"
+        settings:controller="com.android.settings.bluetooth.HearingDeviceCallRoutingPreferenceController" />
 
     <ListPreference
         android:entries="@array/bluetooth_audio_routing_titles"
@@ -46,7 +48,8 @@
         android:summary="%s"
         android:key="audio_routing_media"
         android:persistent="false"
-        android:title="@string/bluetooth_media_title" />
+        android:title="@string/bluetooth_media_title"
+        settings:controller="com.android.settings.bluetooth.HearingDeviceMediaRoutingPreferenceController" />
 
     <ListPreference
         android:entries="@array/bluetooth_audio_routing_titles"
@@ -54,6 +57,7 @@
         android:summary="%s"
         android:key="audio_routing_system_sounds"
         android:persistent="false"
-        android:title="@string/bluetooth_system_sounds_title" />
+        android:title="@string/bluetooth_system_sounds_title"
+        settings:controller="com.android.settings.bluetooth.HearingDeviceSystemSoundsRoutingPreferenceController" />
 
 </PreferenceScreen>

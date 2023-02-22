@@ -565,7 +565,7 @@ public class BatteryEntry {
                 break;
             case BatteryConsumer.POWER_COMPONENT_CPU:  // id: 1
                 name = context.getResources().getString(R.string.power_cpu);
-                iconId = R.drawable.ic_power_system;
+                iconId = R.drawable.ic_settings_cpu;
                 break;
             case BatteryConsumer.POWER_COMPONENT_BLUETOOTH: // id: 2
                 name = context.getResources().getString(R.string.power_bluetooth);
@@ -577,15 +577,15 @@ public class BatteryEntry {
                 break;
             case BatteryConsumer.POWER_COMPONENT_FLASHLIGHT:  // id: 6
                 name = context.getResources().getString(R.string.power_flashlight);
-                iconId = R.drawable.ic_settings_display;
+                iconId = R.drawable.ic_settings_flashlight;
                 break;
             case BatteryConsumer.POWER_COMPONENT_MOBILE_RADIO: // id: 8
                 name = context.getResources().getString(R.string.power_cell);
-                iconId = R.drawable.ic_cellular_1_bar;
+                iconId = R.drawable.ic_settings_cellular;
                 break;
             case BatteryConsumer.POWER_COMPONENT_GNSS:  // id: 10
                 name = context.getResources().getString(R.string.power_gps);
-                iconId = R.drawable.ic_power_system;
+                iconId = R.drawable.ic_settings_gps;
                 break;
             case BatteryConsumer.POWER_COMPONENT_WIFI:  // id: 11
                 name = context.getResources().getString(R.string.power_wifi);

@@ -26,6 +26,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.LocaleList;
+import android.provider.Settings;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -178,13 +180,34 @@ public class LocaleListEditor extends RestrictedSettingsFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_LOCALE_PICKER && resultCode == Activity.RESULT_OK
                 && data != null) {
-            final LocaleStore.LocaleInfo locale =
+            final LocaleStore.LocaleInfo localeInfo =
                     (LocaleStore.LocaleInfo) data.getSerializableExtra(
                             INTENT_LOCALE_KEY);
-            mAdapter.addLocale(locale);
+
+            String preferencesTags = Settings.System.getString(
+                    getContext().getContentResolver(), Settings.System.LOCALE_PREFERENCES);
+
+            mAdapter.addLocale(mayAppendUnicodeTags(localeInfo, preferencesTags));
             updateVisibilityOfRemoveMenu();
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @VisibleForTesting
+    static LocaleStore.LocaleInfo mayAppendUnicodeTags(
+            LocaleStore.LocaleInfo localeInfo, String recordTags) {
+        if (TextUtils.isEmpty(recordTags) || TextUtils.equals("und", recordTags)) {
+            // No recorded tag, return inputted LocaleInfo.
+            return localeInfo;
+        }
+        Locale recordLocale = Locale.forLanguageTag(recordTags);
+        Locale.Builder builder = new Locale.Builder()
+                .setLocale(localeInfo.getLocale());
+        recordLocale.getUnicodeLocaleKeys().forEach(key ->
+                builder.setUnicodeLocaleKeyword(key, recordLocale.getUnicodeLocaleType(key)));
+        LocaleStore.LocaleInfo newLocaleInfo = LocaleStore.fromLocale(builder.build());
+        newLocaleInfo.setTranslated(localeInfo.isTranslated());
+        return newLocaleInfo;
     }
 
     private void setRemoveMode(boolean mRemoveMode) {

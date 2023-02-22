@@ -27,6 +27,7 @@ import android.graphics.drawable.Animatable2;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -40,7 +41,7 @@ import android.view.animation.Interpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.IdRes;
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -52,7 +53,6 @@ import com.android.settings.R;
 import com.android.settings.biometrics.fingerprint.FingerprintErrorDialog;
 import com.android.settings.biometrics2.ui.model.EnrollmentProgress;
 import com.android.settings.biometrics2.ui.model.EnrollmentStatusMessage;
-import com.android.settings.biometrics2.ui.viewmodel.DeviceRotationViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollProgressViewModel;
 
@@ -80,7 +80,6 @@ public class FingerprintEnrollEnrollingRfpsFragment extends Fragment {
     private static final int HINT_TIMEOUT_DURATION = 2500;
 
     private FingerprintEnrollEnrollingViewModel mEnrollingViewModel;
-    private DeviceRotationViewModel mRotationViewModel;
     private FingerprintEnrollProgressViewModel mProgressViewModel;
 
     private Interpolator mFastOutSlowInInterpolator;
@@ -92,13 +91,13 @@ public class FingerprintEnrollEnrollingRfpsFragment extends Fragment {
     private ProgressBar mProgressBar;
     private ObjectAnimator mProgressAnim;
     private TextView mErrorText;
-    private FooterBarMixin mFooterBarMixin;
     private AnimatedVectorDrawable mIconAnimationDrawable;
     private AnimatedVectorDrawable mIconBackgroundBlinksDrawable;
+    private int mIconTouchCount;
 
     private final View.OnClickListener mOnSkipClickListener = v -> {
-        mProgressViewModel.cancelEnrollment();
-        mEnrollingViewModel.onSkipButtonClick();
+        mEnrollingViewModel.setOnSkipPressed();
+        cancelEnrollment();
     };
 
     private final Observer<EnrollmentProgress> mProgressObserver = progress -> {
@@ -128,16 +127,21 @@ public class FingerprintEnrollEnrollingRfpsFragment extends Fragment {
         }
     };
 
-    private int mIconTouchCount;
-
     @Override
     public void onAttach(@NonNull Context context) {
         final FragmentActivity activity = getActivity();
         final ViewModelProvider provider = new ViewModelProvider(activity);
         mEnrollingViewModel = provider.get(FingerprintEnrollEnrollingViewModel.class);
-        mRotationViewModel = provider.get(DeviceRotationViewModel.class);
         mProgressViewModel = provider.get(FingerprintEnrollProgressViewModel.class);
         super.onAttach(context);
+        requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                setEnabled(false);
+                mEnrollingViewModel.setOnBackPressed();
+                cancelEnrollment();
+            }
+        });
     }
 
     @Nullable
@@ -198,8 +202,7 @@ public class FingerprintEnrollEnrollingRfpsFragment extends Fragment {
 
         mErrorText = containView.findViewById(R.id.error_text);
         mProgressBar = containView.findViewById(R.id.fingerprint_progress_bar);
-        mFooterBarMixin = containView.getMixin(FooterBarMixin.class);
-        mFooterBarMixin.setSecondaryButton(
+        containView.getMixin(FooterBarMixin.class).setSecondaryButton(
                 new FooterButton.Builder(activity)
                         .setText(R.string.security_settings_fingerprint_enroll_enrolling_skip)
                         .setListener(mOnSkipClickListener)
@@ -263,39 +266,28 @@ public class FingerprintEnrollEnrollingRfpsFragment extends Fragment {
         }
     }
 
-    private void onCancelEnrollment(@IdRes int errorMsgId) {
-        // TODO
-        // showErrorDialog() will cause onWindowFocusChanged(false), set mIsCanceled to false
-        // before showErrorDialog() to prevent that another error dialog is triggered again.
-// TODO       mIsCanceled = true;
-// TODO       mIsOrientationChanged = false;
-        mEnrollingViewModel.showErrorDialog(new FingerprintEnrollEnrollingViewModel.ErrorDialogData(
-                mView.getContext().getString(FingerprintErrorDialog.getErrorMessage(errorMsgId)),
-                mView.getContext().getString(FingerprintErrorDialog.getErrorTitle(errorMsgId)),
-                errorMsgId
-        ));
-        cancelEnrollment();
-        stopIconAnimation();
-    }
-
     @Override
     public void onStop() {
         stopIconAnimation();
-        removeEnrollmentObserver();
-        if (!getActivity().isChangingConfigurations()) {
+        removeEnrollmentObservers();
+        if (!getActivity().isChangingConfigurations() && mProgressViewModel.isEnrolling()) {
             mProgressViewModel.cancelEnrollment();
         }
         super.onStop();
     }
 
-    private void removeEnrollmentObserver() {
-        mProgressViewModel.getProgressLiveData().removeObserver(mProgressObserver);
-        mProgressViewModel.getHelpMessageLiveData().removeObserver(mHelpMessageObserver);
+    private void removeEnrollmentObservers() {
+        preRemoveEnrollmentObservers();
         mProgressViewModel.getErrorMessageLiveData().removeObserver(mErrorMessageObserver);
     }
 
+    private void preRemoveEnrollmentObservers() {
+        mProgressViewModel.getProgressLiveData().removeObserver(mProgressObserver);
+        mProgressViewModel.getHelpMessageLiveData().removeObserver(mHelpMessageObserver);
+    }
+
     private void cancelEnrollment() {
-        removeEnrollmentObserver();
+        preRemoveEnrollmentObservers();
         mProgressViewModel.cancelEnrollment();
     }
 
@@ -318,7 +310,27 @@ public class FingerprintEnrollEnrollingRfpsFragment extends Fragment {
     }
 
     private void onEnrollmentError(@NonNull EnrollmentStatusMessage errorMessage) {
-        onCancelEnrollment(errorMessage.getMsgId());
+        stopIconAnimation();
+        removeEnrollmentObservers();
+
+        if (mEnrollingViewModel.getOnBackPressed()
+                && errorMessage.getMsgId() == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
+            mEnrollingViewModel.onCancelledDueToOnBackPressed();
+        } else if (mEnrollingViewModel.getOnSkipPressed()
+                && errorMessage.getMsgId() == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
+            mEnrollingViewModel.onCancelledDueToOnSkipPressed();
+        } else {
+            final int errMsgId = errorMessage.getMsgId();
+            mEnrollingViewModel.showErrorDialog(
+                    new FingerprintEnrollEnrollingViewModel.ErrorDialogData(
+                            mView.getContext().getString(
+                                    FingerprintErrorDialog.getErrorMessage(errMsgId)),
+                            mView.getContext().getString(
+                                    FingerprintErrorDialog.getErrorTitle(errMsgId)),
+                            errMsgId
+                    ));
+            mProgressViewModel.cancelEnrollment();
+        }
     }
 
     private void onEnrollmentProgressChange(@NonNull EnrollmentProgress progress) {
@@ -398,13 +410,6 @@ public class FingerprintEnrollEnrollingRfpsFragment extends Fragment {
         }
     }
 
-
-    @Override
-    public void onDestroy() {
-        // TODO stopListenOrientationEvent();
-        super.onDestroy();
-    }
-
     private void animateProgress(int progress) {
         if (mProgressAnim != null) {
             mProgressAnim.cancel();
@@ -444,7 +449,6 @@ public class FingerprintEnrollEnrollingRfpsFragment extends Fragment {
 
     private void showIconTouchDialog() {
         mIconTouchCount = 0;
-        //TODO EnrollingActivity should observe live data and add dialog fragment
         mEnrollingViewModel.onIconTouchDialogShow();
     }
 

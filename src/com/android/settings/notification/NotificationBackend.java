@@ -413,18 +413,6 @@ public class NotificationBackend {
         }
     }
 
-    public void allowAssistantAdjustment(String capability, boolean allowed) {
-        try {
-            if (allowed) {
-                sINM.allowAssistantAdjustment(capability);
-            } else {
-                sINM.disallowAssistantAdjustment(capability);
-            }
-        } catch (Exception e) {
-            Log.w(TAG, "Error calling NoMan", e);
-        }
-    }
-
     public List<String> getAssistantAdjustments(String pkg) {
         try {
             return sINM.getAllowedAssistantAdjustments(pkg);

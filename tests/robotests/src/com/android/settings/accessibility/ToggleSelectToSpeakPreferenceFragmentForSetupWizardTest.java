@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -37,6 +38,7 @@ import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.widget.TopIntroPreference;
 
+import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupdesign.GlifPreferenceLayout;
 
 import org.junit.Before;
@@ -62,6 +64,8 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizardTest {
     private GlifPreferenceLayout mGlifLayoutView;
     @Mock
     private SettingsMainSwitchBar mSwitchBar;
+    @Mock
+    private FooterBarMixin mFooterBarMixin;
     private ToggleSelectToSpeakPreferenceFragmentForSetupWizard mFragment;
 
     @Before
@@ -69,6 +73,7 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizardTest {
         mFragment = spy(new TestToggleSelectToSpeakPreferenceFragmentForSetupWizard(mContext));
         doReturn(mActivity).when(mFragment).getActivity();
         when(mActivity.getSwitchBar()).thenReturn(mSwitchBar);
+        doReturn(mFooterBarMixin).when(mGlifLayoutView).getMixin(FooterBarMixin.class);
     }
 
     @Test
@@ -79,6 +84,7 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizardTest {
         verify(mGlifLayoutView).setDescriptionText(
                 mContext.getString(R.string.select_to_speak_summary));
         verify(mGlifLayoutView).setDividerInsets(Integer.MAX_VALUE, 0);
+        verify(mFooterBarMixin).setPrimaryButton(any());
         assertThat(mFragment.mTopIntroPreference.isVisible()).isFalse();
     }
 

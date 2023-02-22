@@ -16,7 +16,11 @@
 
 package com.android.settings.biometrics2.data.repository;
 
+import android.view.View;
+import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
+
+import androidx.annotation.NonNull;
 
 /**
  * This repository is used to call all APIs in {@link AccessibilityManager}
@@ -43,5 +47,31 @@ public class AccessibilityRepository {
      */
     public boolean isEnabled() {
         return mAccessibilityManager.isEnabled();
+    }
+
+    /**
+     * Sends an {@link AccessibilityEvent}.
+     *
+     * @param event The event to send.
+     *
+     * @throws IllegalStateException if accessibility is not enabled.
+     *
+     * <strong>Note:</strong> The preferred mechanism for sending custom accessibility
+     * events is through calling
+     * {@link android.view.ViewParent#requestSendAccessibilityEvent(View, AccessibilityEvent)}
+     * instead of this method to allow predecessors to augment/filter events sent by
+     * their descendants.
+     */
+    public void sendAccessibilityEvent(@NonNull AccessibilityEvent event) {
+        mAccessibilityManager.sendAccessibilityEvent(event);
+    }
+
+    /**
+     * Returns if the touch exploration in the system is enabled.
+     *
+     * @return True if touch exploration is enabled, false otherwise.
+     */
+    public boolean isTouchExplorationEnabled() {
+        return mAccessibilityManager.isTouchExplorationEnabled();
     }
 }

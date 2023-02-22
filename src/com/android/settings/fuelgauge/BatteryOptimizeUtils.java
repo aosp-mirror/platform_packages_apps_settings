@@ -85,7 +85,7 @@ public class BatteryOptimizeUtils {
         mPowerAllowListBackend = PowerAllowlistBackend.getInstance(context);
         mMode = mAppOpsManager
                 .checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, mUid, mPackageName);
-        mAllowListed = mPowerAllowListBackend.isAllowlisted(mPackageName);
+        mAllowListed = mPowerAllowListBackend.isAllowlisted(mPackageName, mUid);
     }
 
     /** Gets the {@link OptimizationMode} based on mode and allowed list. */
@@ -138,7 +138,7 @@ public class BatteryOptimizeUtils {
      */
     public boolean isSystemOrDefaultApp() {
         mPowerAllowListBackend.refreshList();
-        return isSystemOrDefaultApp(mPowerAllowListBackend, mPackageName);
+        return isSystemOrDefaultApp(mPowerAllowListBackend, mPackageName, mUid);
     }
 
     /**
@@ -186,11 +186,11 @@ public class BatteryOptimizeUtils {
                     AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, info.uid, info.packageName);
             @OptimizationMode
             final int optimizationMode = getAppOptimizationMode(
-                    mode, allowlistBackend.isAllowlisted(info.packageName));
+                    mode, allowlistBackend.isAllowlisted(info.packageName, info.uid));
             // Ignores default optimized/unknown state or system/default apps.
             if (optimizationMode == MODE_OPTIMIZED
                     || optimizationMode == MODE_UNKNOWN
-                    || isSystemOrDefaultApp(allowlistBackend, info.packageName)) {
+                    || isSystemOrDefaultApp(allowlistBackend, info.packageName, info.uid)) {
                 continue;
             }
 
@@ -205,9 +205,9 @@ public class BatteryOptimizeUtils {
     }
 
     private static boolean isSystemOrDefaultApp(
-            PowerAllowlistBackend powerAllowlistBackend, String packageName) {
+            PowerAllowlistBackend powerAllowlistBackend, String packageName, int uid) {
         return powerAllowlistBackend.isSysAllowlisted(packageName)
-                || powerAllowlistBackend.isDefaultActiveApp(packageName);
+                || powerAllowlistBackend.isDefaultActiveApp(packageName, uid);
     }
 
     private static void setAppUsageStateInternal(
@@ -257,7 +257,7 @@ public class BatteryOptimizeUtils {
 
     private void refreshState() {
         mPowerAllowListBackend.refreshList();
-        mAllowListed = mPowerAllowListBackend.isAllowlisted(mPackageName);
+        mAllowListed = mPowerAllowListBackend.isAllowlisted(mPackageName, mUid);
         mMode = mAppOpsManager
                 .checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, mUid, mPackageName);
         Log.d(TAG, String.format("refresh %s state, allowlisted = %s, mode = %d",

@@ -240,17 +240,4 @@ public class InternetPreferenceController extends AbstractPreferenceController i
         mSubInfoEntityList = subInfoEntityList;
         updateState(mPreference);
     }
-
-    @Override
-    public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> activeSubInfoList) {
-    }
-
-    @Override
-    public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
-    }
-
-    @Override
-    public void onAllMobileNetworkInfoChanged(
-            List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
-    }
 }
