@@ -132,7 +132,7 @@ final class LocalBluetoothPreferences {
 
         if (device != null) {
             ActivityManager activityManager = context.getSystemService(ActivityManager.class);
-            String packageName = device.getCreateBondCaller();
+            String packageName = device.getPackageNameOfBondingApplication();
 
             if (packageName != null && activityManager.getPackageImportance(packageName)
                     == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
