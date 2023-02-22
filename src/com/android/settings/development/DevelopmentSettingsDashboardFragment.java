@@ -417,6 +417,10 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         final NfcSnoopLogPreferenceController controller =
                 getDevelopmentOptionsController(NfcSnoopLogPreferenceController.class);
         controller.onNfcRebootDialogConfirmed();
+
+        final NfcVerboseVendorLogPreferenceController vendorLogController =
+                getDevelopmentOptionsController(NfcVerboseVendorLogPreferenceController.class);
+        vendorLogController.onNfcRebootDialogConfirmed();
     }
 
     @Override
@@ -424,6 +428,10 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         final NfcSnoopLogPreferenceController controller =
                 getDevelopmentOptionsController(NfcSnoopLogPreferenceController.class);
         controller.onNfcRebootDialogCanceled();
+
+        final NfcVerboseVendorLogPreferenceController vendorLogController =
+                getDevelopmentOptionsController(NfcVerboseVendorLogPreferenceController.class);
+        vendorLogController.onNfcRebootDialogCanceled();
     }
 
     @Override
@@ -591,6 +599,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothMaxConnectedAudioDevicesPreferenceController(context));
         controllers.add(new NfcStackDebugLogPreferenceController(context));
         controllers.add(new NfcSnoopLogPreferenceController(context, fragment));
+        controllers.add(new NfcVerboseVendorLogPreferenceController(context, fragment));
         controllers.add(new ShowTapsPreferenceController(context));
         controllers.add(new PointerLocationPreferenceController(context));
         controllers.add(new ShowSurfaceUpdatesPreferenceController(context));
