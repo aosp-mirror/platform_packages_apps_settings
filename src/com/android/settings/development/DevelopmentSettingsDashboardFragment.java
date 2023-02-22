@@ -82,7 +82,9 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         implements OnMainSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost,
         AdbClearKeysDialogHost, LogPersistDialogHost,
         BluetoothRebootDialog.OnRebootDialogListener,
-        AbstractBluetoothPreferenceController.Callback, BluetoothSnoopLogHost {
+        AbstractBluetoothPreferenceController.Callback,
+        BluetoothSnoopLogHost,
+        NfcRebootDialog.OnNfcRebootDialogConfirmedListener {
 
     private static final String TAG = "DevSettingsDashboard";
 
@@ -411,6 +413,20 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     @Override
+    public void onNfcRebootDialogConfirmed() {
+        final NfcSnoopLogPreferenceController controller =
+                getDevelopmentOptionsController(NfcSnoopLogPreferenceController.class);
+        controller.onNfcRebootDialogConfirmed();
+    }
+
+    @Override
+    public void onNfcRebootDialogCanceled() {
+        final NfcSnoopLogPreferenceController controller =
+                getDevelopmentOptionsController(NfcSnoopLogPreferenceController.class);
+        controller.onNfcRebootDialogCanceled();
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         boolean handledResult = false;
         for (AbstractPreferenceController controller : mPreferenceControllers) {
@@ -574,6 +590,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothLeAudioHwOffloadPreferenceController(context, fragment));
         controllers.add(new BluetoothMaxConnectedAudioDevicesPreferenceController(context));
         controllers.add(new NfcStackDebugLogPreferenceController(context));
+        controllers.add(new NfcSnoopLogPreferenceController(context, fragment));
         controllers.add(new ShowTapsPreferenceController(context));
         controllers.add(new PointerLocationPreferenceController(context));
         controllers.add(new ShowSurfaceUpdatesPreferenceController(context));
