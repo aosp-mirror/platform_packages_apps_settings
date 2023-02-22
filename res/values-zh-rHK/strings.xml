@@ -166,10 +166,11 @@
     <string name="regional_preferences_summary" msgid="1189876997389469650">"設定單位及數字偏好設定"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"讓應用程式取得區域偏好設定，為您提供個人化體驗。"</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"應用程式會盡可能利用您的地區偏好設定。"</string>
-    <string name="temperature_preferences_title" msgid="9067783912861473593">"溫度單位"</string>
+    <string name="temperature_preferences_title" msgid="5009881556503629058">"溫度"</string>
     <string name="calendar_preferences_title" msgid="8312485828206542600">"日曆"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"每週的第一天"</string>
-    <string name="numbers_preferences_title" msgid="6094837605398562369">"數字"</string>
+    <!-- no translation found for numbers_preferences_title (8197418984391195446) -->
+    <skip />
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"使用應用程式預設值"</string>
     <string name="celsius_temperature_unit" msgid="6118523647432383132">"攝氏 (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"華氏 (°F)"</string>
@@ -621,7 +622,10 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"中斷連線"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"配對並連線"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"當啟用藍牙功能後，您的裝置可以與其他附近的藍牙裝置通訊。"</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"啟用藍牙功能後，您的裝置可與附近的其他藍牙裝置通訊。\n\n為改善裝置的使用體驗，應用程式和服務仍可隨時掃瞄附近的裝置 (即使藍牙功能已關閉)。此操作可用來改善適地性功能和服務。您可在"<annotation id="link">"藍牙掃瞄設定"</annotation>"中變更此設定。"</string>
+    <!-- no translation found for bluetooth_scanning_on_info_message (786648535600075223) -->
+    <skip />
+    <!-- no translation found for bluetooth_scan_change (1744636222637390367) -->
+    <skip />
     <string name="device_details_title" msgid="1155622417516195481">"裝置詳情"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"鍵盤設定"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"裝置的藍牙位址：<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -1391,6 +1395,20 @@
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"驗證上鎖圖案"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"驗證 PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"驗證密碼"</string>
+    <!-- no translation found for lockpassword_remote_validation_header (4992647285784962073) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (7738124461482712491) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (8924028697135308390) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (8478926171431523279) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (7595104317648465901) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (509672303005547218) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (2066701840753591922) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"PIN 碼錯誤"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"密碼錯誤"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"圖案錯誤"</string>
@@ -1715,18 +1733,12 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"已下載的應用程式"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"實驗性"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"功能標示"</string>
-    <!-- no translation found for snoop_logger_filters_dashboard_title (3082744626059215281) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (626757789702677076) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (5508775381082875785) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_map_title (5700678748422653316) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_summary (6235819710248503870) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (272884193300382035) -->
-    <skip />
+    <string name="snoop_logger_filters_dashboard_title" msgid="3082744626059215281">"窺探記錄器篩選器"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="626757789702677076">"設定篩選器 (變更此設定後必須切換藍牙)"</string>
+    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="5508775381082875785">"窺探記錄器 PBAP 篩選器"</string>
+    <string name="bt_hci_snoop_log_filter_map_title" msgid="5700678748422653316">"窺探記錄器 MAP 篩選器"</string>
+    <string name="bt_hci_snoop_log_filter_summary" msgid="6235819710248503870">"設定篩選模式 (變更此設定後必須切換藍牙)"</string>
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="272884193300382035">"啟用窺探記錄篩選模式以變更此選項。"</string>
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"主要為失明和弱視人士而設的螢幕閱讀器"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"輕按畫面上的項目即可收聽系統朗讀項目"</string>
@@ -1739,10 +1751,8 @@
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"放大輸入中的文字"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3738009998799304549">"保持開啟"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="8946516092699010033">"變更應用程式時，系統並不會停用放大功能，只會縮小為正常大小。您可隨時用兩指放大畫面。"</string>
-    <!-- no translation found for accessibility_screen_magnification_joystick_title (1803769708582404964) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_joystick_summary (4640300148573982720) -->
-    <skip />
+    <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"操控桿"</string>
+    <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"使用螢幕上的操控桿啟用及移動放大鏡。按住並在操控桿上拖曳，即可控制放大鏡；輕按並拖曳則可移動操控桿。"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"關於放大功能"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"進一步了解放大功能"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"放大類型"</string>
@@ -1957,7 +1967,7 @@
     <string name="accessibility_hac_mode_summary" msgid="5164793702798871478">"改善部分助聽器的音訊效果"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="4636110586636490256">"請確定助聽器已開啟並處於配對模式"</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"配對助聽器"</string>
-    <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"可用的助聽器"</string>
+    <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"可供使用的助聽器"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"看不到您的助聽器嗎？"</string>
     <string name="accessibility_list_all_devices_title" msgid="3555097127022458571">"查看所有藍牙裝置"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"音訊調整"</string>
@@ -2897,6 +2907,8 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"鈴聲和通知音量"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"鈴聲音量"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"通知音量"</string>
+    <!-- no translation found for notification_volume_disabled_summary (8679988555852056079) -->
+    <skip />
     <string name="ringtone_title" msgid="3271453110387368088">"電話鈴聲"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"預設通知音效"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"應用程式提供的音效"</string>
@@ -3447,10 +3459,8 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"已關閉"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"進階"</string>
     <string name="app_permissions" msgid="8666537659217653626">"權限管理工具"</string>
-    <!-- no translation found for app_data_sharing_updates_title (1694297952320402788) -->
-    <skip />
-    <!-- no translation found for app_data_sharing_updates_summary (4465929918457739443) -->
-    <skip />
+    <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"位置資料分享更新"</string>
+    <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"查看已變更位置資料分享方式的應用程式"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"輕按以喚醒"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"在螢幕上任何地方連按兩下即可喚醒裝置"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"開啟連結"</string>
@@ -4270,28 +4280,17 @@
     <string name="content_capture" msgid="868372905432812238">"應用程式內容"</string>
     <string name="content_capture_summary" msgid="49720773699715531">"允許應用程式向 Android 系統傳送內容"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"擷取系統堆轉儲"</string>
-    <!-- no translation found for development_memtag_page_title (3546667618748029188) -->
-    <skip />
-    <!-- no translation found for development_memtag_intro (8032596625527637164) -->
-    <skip />
-    <!-- no translation found for development_memtag_footer (5681925148773626562) -->
-    <skip />
-    <!-- no translation found for development_memtag_learn_more (8961984806973926704) -->
-    <skip />
-    <!-- no translation found for development_memtag_toggle (2474420239518386894) -->
-    <skip />
-    <!-- no translation found for development_memtag_reboot_message_on (8100075676107327847) -->
-    <skip />
-    <!-- no translation found for development_memtag_reboot_message_off (3703925647922079456) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_title (2320125810211279) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_message (1232881567956207641) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_summary (3896537791216432882) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_already_enabled (4439168867613407167) -->
-    <skip />
+    <string name="development_memtag_page_title" msgid="3546667618748029188">"Memory Tagging Extension"</string>
+    <string name="development_memtag_intro" msgid="8032596625527637164">"Memory Tagging Extension (MTE) 助您找出應用程式中的記憶體安全性問題，並提升應用程式原生程式碼的安全性。"</string>
+    <string name="development_memtag_footer" msgid="5681925148773626562">"開啟 MTE 可能會導致裝置效能下降。"</string>
+    <string name="development_memtag_learn_more" msgid="8961984806973926704">"進一步瞭解 MTE"</string>
+    <string name="development_memtag_toggle" msgid="2474420239518386894">"啟用 MTE 直到手動關閉為止"</string>
+    <string name="development_memtag_reboot_message_on" msgid="8100075676107327847">"需要重新啟動裝置才能開啟 MTE。"</string>
+    <string name="development_memtag_reboot_message_off" msgid="3703925647922079456">"需要重新啟動裝置才能關閉 MTE。"</string>
+    <string name="reboot_with_mte_title" msgid="2320125810211279">"在單一工作階段中啟用 MTE"</string>
+    <string name="reboot_with_mte_message" msgid="1232881567956207641">"系統將重新啟動並允許進行 Memory Tagging Extension (MTE) 實驗。MTE 可能會降低系統效能和穩定性。系統將在下次重新開機時重設。"</string>
+    <string name="reboot_with_mte_summary" msgid="3896537791216432882">"重新啟動並執行啟用 MTE 的單一工作階段"</string>
+    <string name="reboot_with_mte_already_enabled" msgid="4439168867613407167">"MTE 已啟用"</string>
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"正在擷取系統堆轉儲"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"無法擷取系統堆轉儲"</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"自動擷取系統堆轉儲"</string>
@@ -4581,31 +4580,30 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{過去 # 個月安裝的應用程式}other{過去 # 個月安裝的應用程式}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{超過 # 個月前安裝的應用程式}other{超過 # 個月前安裝的應用程式}}"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"指紋感應器"</string>
-    <string name="flash_notifications_title" msgid="4490438861180492311">"閃光燈通知"</string>
+    <string name="flash_notifications_title" msgid="4490438861180492311">"閃動通知"</string>
     <string name="flash_notifications_summary_off" msgid="6056282996770691461">"已關閉"</string>
     <string name="flash_notifications_summary_on_camera" msgid="455038312752009971">"已開啟/相機閃光燈"</string>
-    <string name="flash_notifications_summary_on_screen" msgid="7321838939240499267">"已開啟/螢幕閃光燈"</string>
-    <string name="flash_notifications_summary_on_camera_and_screen" msgid="6515622987118268649">"已開啟/相機和螢幕閃光燈"</string>
-    <string name="flash_notifications_intro" msgid="1506414740603805778">"收到通知或鬧鐘響起時閃爍相機閃光燈或螢幕。"</string>
-    <string name="flash_notifications_note" msgid="7258551860911169239">"如果你畏光，請謹慎使用閃光燈通知"</string>
+    <string name="flash_notifications_summary_on_screen" msgid="7321838939240499267">"已開啟/螢幕閃動"</string>
+    <string name="flash_notifications_summary_on_camera_and_screen" msgid="6515622987118268649">"已開啟/相機閃光燈和螢幕閃動"</string>
+    <string name="flash_notifications_intro" msgid="1506414740603805778">"在您接收通知或警報響起時，讓相機燈或螢幕閃動。"</string>
+    <string name="flash_notifications_note" msgid="7258551860911169239">"對光敏感者，請小心使用閃動通知"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"預覽"</string>
     <string name="camera_flash_notification_title" msgid="1605639711485773787">"相機閃光燈通知"</string>
-    <string name="screen_flash_notification_title" msgid="8008197872050400734">"螢幕閃光燈通知"</string>
-    <string name="screen_flash_notification_color_title" msgid="7213407653340970790">"螢幕閃光燈顏色"</string>
+    <string name="screen_flash_notification_title" msgid="8008197872050400734">"螢幕閃動通知"</string>
+    <string name="screen_flash_notification_color_title" msgid="7213407653340970790">"螢幕閃動顏色"</string>
     <string name="screen_flash_color_blue" msgid="3585766657607931371">"藍色"</string>
-    <string name="screen_flash_color_azure" msgid="8691198532944992243">"天藍色"</string>
+    <string name="screen_flash_color_azure" msgid="8691198532944992243">"蔚藍色"</string>
     <string name="screen_flash_color_cyan" msgid="6878780006173747267">"青色"</string>
     <string name="screen_flash_color_spring_green" msgid="4466548514738457815">"春綠色"</string>
     <string name="screen_flash_color_green" msgid="8418019648507964564">"綠色"</string>
-    <string name="screen_flash_color_chartreuse_green" msgid="7456381649919010366">"黃綠色"</string>
+    <string name="screen_flash_color_chartreuse_green" msgid="7456381649919010366">"查特酒綠色"</string>
     <string name="screen_flash_color_yellow" msgid="7413465411615454556">"黃色"</string>
-    <string name="screen_flash_color_orange" msgid="979177126315557656">"橘色"</string>
+    <string name="screen_flash_color_orange" msgid="979177126315557656">"橙色"</string>
     <string name="screen_flash_color_red" msgid="8954162219886445491">"紅色"</string>
     <string name="screen_flash_color_rose" msgid="1216848195972231251">"玫瑰"</string>
-    <string name="screen_flash_color_magenta" msgid="7726221666557102155">"洋紅色"</string>
-    <string name="screen_flash_color_violet" msgid="1279950780509029495">"紫羅蘭"</string>
+    <string name="screen_flash_color_magenta" msgid="7726221666557102155">"紫紅色"</string>
+    <string name="screen_flash_color_violet" msgid="1279950780509029495">"紫羅蘭色"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"完成"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"取消"</string>
-    <!-- no translation found for dock_multi_instances_not_supported_text (3513493664467667084) -->
-    <skip />
+    <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"此應用程式只可在 1 個視窗中開啟"</string>
 </resources>
