@@ -181,7 +181,7 @@ public final class DataProcessor {
     @Nullable
     public static Map<Long, UsageEvents> getAppUsageEvents(Context context) {
         final long start = System.currentTimeMillis();
-        context = DatabaseUtils.getOwnerContext(context);
+        context = DatabaseUtils.getParentContext(context);
         if (context == null) {
             return null;
         }
@@ -212,7 +212,7 @@ public final class DataProcessor {
     public static UsageEvents getAppUsageEventsForUser(
             Context context, final int userID, final long startTimestampOfLevelData) {
         final long start = System.currentTimeMillis();
-        context = DatabaseUtils.getOwnerContext(context);
+        context = DatabaseUtils.getParentContext(context);
         if (context == null) {
             return null;
         }

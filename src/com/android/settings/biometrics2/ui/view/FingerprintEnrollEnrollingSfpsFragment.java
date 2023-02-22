@@ -35,7 +35,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.accessibility.AccessibilityEvent;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
@@ -329,12 +328,7 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
     }
 
     private void announceEnrollmentProgress(CharSequence announcement) {
-        AccessibilityEvent event = new AccessibilityEvent();
-        event.setEventType(AccessibilityEvent.TYPE_ANNOUNCEMENT);
-        event.setClassName(getClass().getName());
-        event.setPackageName(getClass().getPackageName());
-        event.getText().add(announcement);
-        mEnrollingViewModel.sendAccessibilityEvent(event);
+        mEnrollingViewModel.sendAccessibilityEvent(announcement);
     }
 
     private void onEnrollmentProgressChange(@NonNull EnrollmentProgress progress) {

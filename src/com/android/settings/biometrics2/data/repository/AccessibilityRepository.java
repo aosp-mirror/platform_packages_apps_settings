@@ -65,4 +65,13 @@ public class AccessibilityRepository {
     public void sendAccessibilityEvent(@NonNull AccessibilityEvent event) {
         mAccessibilityManager.sendAccessibilityEvent(event);
     }
+
+    /**
+     * Returns if the touch exploration in the system is enabled.
+     *
+     * @return True if touch exploration is enabled, false otherwise.
+     */
+    public boolean isTouchExplorationEnabled() {
+        return mAccessibilityManager.isTouchExplorationEnabled();
+    }
 }
