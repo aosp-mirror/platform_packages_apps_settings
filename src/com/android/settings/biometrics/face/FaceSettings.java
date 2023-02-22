@@ -203,7 +203,11 @@ public class FaceSettings extends DashboardFragment {
         if (savedInstanceState != null) {
             mToken = savedInstanceState.getByteArray(KEY_TOKEN);
         }
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
         final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
         mEnrollButton.setVisible(!hasEnrolled);
         mRemoveButton.setVisible(hasEnrolled);
