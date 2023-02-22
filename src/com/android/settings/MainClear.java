@@ -64,6 +64,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -382,6 +383,14 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
     }
 
     /**
+     * Whether to show any UI which is SIM related.
+     */
+    @VisibleForTesting
+    boolean showAnySubscriptionInfo(Context context) {
+        return (context != null) && SubscriptionUtil.isSimHardwareVisible(context);
+    }
+
+    /**
      * Whether to show strings indicating that the eUICC will be wiped.
      *
      * <p>We show the strings on any device which supports eUICC as long as the eUICC was ever
@@ -390,7 +399,7 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
     @VisibleForTesting
     boolean showWipeEuicc() {
         Context context = getContext();
-        if (!isEuiccEnabled(context)) {
+        if (!showAnySubscriptionInfo(context) || !isEuiccEnabled(context)) {
             return false;
         }
         ContentResolver cr = context.getContentResolver();

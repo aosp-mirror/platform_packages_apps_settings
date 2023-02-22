@@ -16,11 +16,18 @@
 
 package com.android.settings.bluetooth;
 
+import static android.os.Process.BLUETOOTH_UID;
+
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.UserHandle;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -188,5 +195,49 @@ public final class Utils {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Returns the Bluetooth Package name
+     */
+    public static String findBluetoothPackageName(Context context)
+            throws NameNotFoundException {
+        // this activity will always be in the package where the rest of Bluetooth lives
+        final String sentinelActivity = "com.android.bluetooth.opp.BluetoothOppLauncherActivity";
+        PackageManager packageManager = context.createContextAsUser(UserHandle.SYSTEM, 0)
+                .getPackageManager();
+        String[] allPackages = packageManager.getPackagesForUid(BLUETOOTH_UID);
+        String matchedPackage = null;
+        for (String candidatePackage : allPackages) {
+            PackageInfo packageInfo;
+            try {
+                packageInfo =
+                        packageManager.getPackageInfo(
+                                candidatePackage,
+                                PackageManager.GET_ACTIVITIES
+                                        | PackageManager.MATCH_ANY_USER
+                                        | PackageManager.MATCH_UNINSTALLED_PACKAGES
+                                        | PackageManager.MATCH_DISABLED_COMPONENTS);
+            } catch (NameNotFoundException e) {
+                // rethrow
+                throw e;
+            }
+            if (packageInfo.activities == null) {
+                continue;
+            }
+            for (ActivityInfo activity : packageInfo.activities) {
+                if (sentinelActivity.equals(activity.name)) {
+                    if (matchedPackage == null) {
+                        matchedPackage = candidatePackage;
+                    } else {
+                        throw new NameNotFoundException("multiple main bluetooth packages found");
+                    }
+                }
+            }
+        }
+        if (matchedPackage != null) {
+            return matchedPackage;
+        }
+        throw new NameNotFoundException("Could not find main bluetooth package");
     }
 }

@@ -50,7 +50,6 @@ import android.os.CancellationSignal;
 import android.os.Vibrator;
 import android.view.Display;
 import android.view.Surface;
-import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -59,7 +58,6 @@ import com.android.settings.widget.RingProgressBar;
 import com.airbnb.lottie.LottieAnimationView;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -100,19 +98,6 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     @Test
-    @Ignore
-    public void fingerprintEnrollHelp_shouldShowHelpText() {
-        EnrollmentCallback enrollmentCallback = verifyAndCaptureEnrollmentCallback();
-
-        enrollmentCallback.onEnrollmentProgress(123);
-        enrollmentCallback.onEnrollmentHelp(
-                FingerprintManager.FINGERPRINT_ERROR_UNABLE_TO_PROCESS, "test enrollment help");
-
-        TextView errorText = mActivity.findViewById(R.id.error_text);
-        assertThat(errorText.getText()).isEqualTo("test enrollment help");
-    }
-
-    @Test
     public void fingerprintUdfpsEnrollSuccessProgress_shouldNotVibrate() {
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
@@ -146,6 +131,16 @@ public class FingerprintEnrollEnrollingTest {
 
         mActivity.onEnrollmentProgressChange(1, 1);
         mActivity.onWindowFocusChanged(false);
+
+        verify(mActivity, never()).onCancelEnrollment(anyInt());
+    }
+
+    @Test
+    public void fingerprintUdfpsOverlayEnrollment_loseFocusWithCancelFlag_shouldNotCancelAgain() {
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+
+        mActivity.mIsCanceled = true;
+        mActivity.onWindowFocusChanged(true);
 
         verify(mActivity, never()).onCancelEnrollment(anyInt());
     }

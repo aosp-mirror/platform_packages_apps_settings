@@ -37,6 +37,7 @@
     <Preference
         android:key="erase_euicc_data"
         android:title="@string/reset_esim_title"
+        settings:isPreferenceVisible="@bool/config_show_sim_info"
         settings:controller="com.android.settings.network.EraseEuiccDataController" />
 
     <!-- Factory reset -->

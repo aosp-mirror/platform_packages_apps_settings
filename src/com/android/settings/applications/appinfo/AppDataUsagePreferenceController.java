@@ -35,6 +35,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.datausage.DataUsageUtils;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -147,7 +148,8 @@ public class AppDataUsagePreferenceController extends AppInfoPreferenceControlle
     }
 
     private static NetworkTemplate getTemplate(Context context) {
-        if (DataUsageUtils.hasReadyMobileRadio(context)) {
+        if (SubscriptionUtil.isSimHardwareVisible(context)
+                && DataUsageUtils.hasReadyMobileRadio(context)) {
             return new NetworkTemplate.Builder(NetworkTemplate.MATCH_MOBILE).setMeteredness(
                     NetworkStats.METERED_YES).build();
         }

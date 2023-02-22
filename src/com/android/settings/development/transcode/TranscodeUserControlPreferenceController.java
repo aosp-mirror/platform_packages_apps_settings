@@ -21,6 +21,7 @@ import android.os.SystemProperties;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
 /**
  * The controller for the User's control (over other transcoding preferences) preference switch on
@@ -47,7 +48,11 @@ public class TranscodeUserControlPreferenceController extends TogglePreferenceCo
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        if (DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)) {
+            return AVAILABLE;
+        } else {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
     }
 
     @Override

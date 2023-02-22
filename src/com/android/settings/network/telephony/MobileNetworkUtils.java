@@ -263,6 +263,9 @@ public class MobileNetworkUtils {
      * the user has enabled development mode.
      */
     public static boolean showEuiccSettings(Context context) {
+        if (!SubscriptionUtil.isSimHardwareVisible(context)) {
+            return false;
+        }
         long timeForAccess = SystemClock.elapsedRealtime();
         try {
             Boolean isShow = ((Future<Boolean>) ThreadUtils.postOnBackgroundThread(() -> {

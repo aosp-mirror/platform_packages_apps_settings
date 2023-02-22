@@ -36,6 +36,7 @@ import android.os.BatteryManager;
 import android.os.BatteryStats;
 import android.os.BatteryUsageStats;
 import android.os.SystemClock;
+import android.provider.Settings;
 import android.util.SparseIntArray;
 
 import com.android.internal.os.BatteryStatsHistoryIterator;
@@ -66,6 +67,8 @@ public class BatteryInfoTest {
     private static final String STATUS_CHARGING_NO_TIME = "50% - charging";
     private static final String STATUS_CHARGING_TIME = "50% - 0 min left until full";
     private static final String STATUS_NOT_CHARGING = "Not charging";
+    private static final String STATUS_CHARGING_FUTURE_BYPASS = "50% - Charging optimized";
+    private static final String STATUS_CHARGING_PAUSED = "50% - Charging optimized";
     private static final long REMAINING_TIME_NULL = -1;
     private static final long REMAINING_TIME = 2;
     // Strings are defined in frameworks/base/packages/SettingsLib/res/values/strings.xml
@@ -97,6 +100,10 @@ public class BatteryInfoTest {
         mDisChargingBatteryBroadcast = BatteryTestUtils.getDischargingIntent();
 
         mChargingBatteryBroadcast = BatteryTestUtils.getChargingIntent();
+
+        doReturn(false).when(mFeatureFactory.powerUsageFeatureProvider).isExtraDefend();
+        Settings.Global.putInt(mContext.getContentResolver(),
+                BatteryUtils.SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS, 0);
     }
 
     @Test
@@ -231,6 +238,7 @@ public class BatteryInfoTest {
         BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mChargingBatteryBroadcast,
                 mBatteryUsageStats, MOCK_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
                 false /* shortString */);
+
         assertThat(info.remainingTimeUs).isEqualTo(TEST_CHARGE_TIME_REMAINING);
         assertThat(info.remainingLabel.toString())
                 .isEqualTo(TEST_CHARGE_TIME_REMAINING_STRINGIFIED);
@@ -249,8 +257,6 @@ public class BatteryInfoTest {
 
     @Test
     public void testGetBatteryInfo_chargingWithOverheated_updateChargeLabel() {
-        final String expectedString =
-                mContext.getString(R.string.battery_tip_limited_temporarily_title);
         doReturn(TEST_CHARGE_TIME_REMAINING)
                 .when(mBatteryUsageStats)
                 .getChargeTimeRemainingMs();
@@ -262,7 +268,61 @@ public class BatteryInfoTest {
                 false /* shortString */);
 
         assertThat(info.isOverheated).isTrue();
-        assertThat(info.chargeLabel.toString()).contains(expectedString);
+        assertThat(info.chargeLabel.toString()).contains(STATUS_CHARGING_PAUSED);
+    }
+
+    @Test
+    public void testGetBatteryInfo_dockDefenderActive_updateChargeString() {
+        doReturn(TEST_CHARGE_TIME_REMAINING / 1000)
+                .when(mBatteryUsageStats).getChargeTimeRemainingMs();
+        doReturn(true).when(mFeatureFactory.powerUsageFeatureProvider).isExtraDefend();
+        Intent intent = BatteryTestUtils.getCustomBatteryIntent(BatteryManager.BATTERY_PLUGGED_DOCK,
+                        50 /* level */,
+                        100 /* scale */,
+                        BatteryManager.BATTERY_STATUS_CHARGING)
+                .putExtra(BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_OVERHEAT);
+
+        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, intent,
+                mBatteryUsageStats, MOCK_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
+                false /* shortString */);
+
+        assertThat(info.chargeLabel.toString()).contains(STATUS_CHARGING_PAUSED);
+    }
+
+    @Test
+    public void testGetBatteryInfo_dockDefenderTemporarilyBypassed_updateChargeLabel() {
+        doReturn(REMAINING_TIME).when(mBatteryUsageStats).getChargeTimeRemainingMs();
+        mChargingBatteryBroadcast
+                .putExtra(BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_GOOD);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                BatteryUtils.SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS, 1);
+
+        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext,
+                BatteryTestUtils.getCustomBatteryIntent(BatteryManager.BATTERY_PLUGGED_DOCK,
+                        50 /* level */,
+                        100 /* scale */,
+                        BatteryManager.BATTERY_STATUS_CHARGING),
+                mBatteryUsageStats, MOCK_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
+                false /* shortString */);
+
+        assertThat(info.chargeLabel.toString()).contains(STATUS_CHARGING_TIME);
+    }
+
+    @Test
+    public void testGetBatteryInfo_dockDefenderFutureBypass_updateChargeLabel() {
+        doReturn(false).when(mFeatureFactory.powerUsageFeatureProvider).isExtraDefend();
+        mChargingBatteryBroadcast
+                .putExtra(BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_GOOD);
+
+        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext,
+                BatteryTestUtils.getCustomBatteryIntent(BatteryManager.BATTERY_PLUGGED_DOCK,
+                        50 /* level */,
+                        100 /* scale */,
+                        BatteryManager.BATTERY_STATUS_CHARGING),
+                mBatteryUsageStats, MOCK_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
+                false /* shortString */);
+
+        assertThat(info.chargeLabel.toString()).contains(STATUS_CHARGING_FUTURE_BYPASS);
     }
 
     // Make our battery stats return a sequence of battery events.

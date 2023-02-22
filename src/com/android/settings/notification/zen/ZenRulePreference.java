@@ -22,8 +22,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeConfig.ScheduleInfo;
+import android.util.Log;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -34,9 +36,11 @@ import com.android.settings.utils.ZenServiceListing;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
+import java.util.List;
 import java.util.Map;
 
 public class ZenRulePreference extends PrimarySwitchPreference {
+    private static final String TAG = "ZenRulePreference";
     private static final ManagedServiceSettings.Config CONFIG =
             ZenModeAutomationSettings.getConditionProviderConfig();
     final String mId;
@@ -119,8 +123,14 @@ public class ZenRulePreference extends PrimarySwitchPreference {
                 getSettingsActivity(mPm, rule, si);
         mIntent = AbstractZenModeAutomaticRulePreferenceController.getRuleIntent(action,
                 settingsActivity, mId);
-        if (mIntent.resolveActivity(mPm) == null) {
+        // If the intent's activity for this rule doesn't exist or resolve to anything, disable the
+        // preference and rule.
+        List<ResolveInfo> results = mPm.queryIntentActivities(
+                mIntent, PackageManager.ResolveInfoFlags.of(0));
+        if (mIntent.resolveActivity(mPm) == null || results.size() == 0) {
+            Log.w(TAG, "intent for zen rule invalid: " + mIntent);
             mIntent = null;
+            setEnabled(false);
         }
         setKey(mId);
     }

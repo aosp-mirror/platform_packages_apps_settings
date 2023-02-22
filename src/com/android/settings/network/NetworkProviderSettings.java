@@ -34,6 +34,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
@@ -333,6 +334,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         addConnectedEthernetNetworkController();
         addWifiSwitchPreferenceController();
         mWifiStatusMessagePreference = findPreference(PREF_KEY_WIFI_STATUS_MESSAGE);
+
+        checkConnectivityRecovering();
     }
 
     private void updateAirplaneModeMsgPreference(boolean visible) {
@@ -341,7 +344,18 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
     }
 
+    /**
+     * Whether to show any UI which is SIM related.
+     */
+    @VisibleForTesting
+    boolean showAnySubscriptionInfo(Context context) {
+        return (context != null) && SubscriptionUtil.isSimHardwareVisible(context);
+    }
+
     private void addNetworkMobileProviderController() {
+        if (!showAnySubscriptionInfo(getContext())) {
+            return;
+        }
         if (mNetworkMobileProviderController == null) {
             mNetworkMobileProviderController = new NetworkMobileProviderController(
                     getContext(), PREF_KEY_PROVIDER_MOBILE_NETWORK);
@@ -365,6 +379,17 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                     new WifiSwitchPreferenceController(getContext(), getSettingsLifecycle());
         }
         mWifiSwitchPreferenceController.displayPreference(getPreferenceScreen());
+    }
+
+    private void checkConnectivityRecovering() {
+        mInternetResetHelper = new InternetResetHelper(getContext(), getLifecycle(),
+                mNetworkMobileProviderController,
+                findPreference(WifiSwitchPreferenceController.KEY),
+                mConnectedWifiEntryPreferenceCategory,
+                mFirstWifiEntryPreferenceCategory,
+                mWifiEntryPreferenceCategory,
+                mResetInternetPreference);
+        mInternetResetHelper.checkRecovering();
     }
 
     @Override
@@ -598,10 +623,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
             return;
         }
 
-        if (mSelectedWifiEntry.isSaved() && mSelectedWifiEntry.getConnectedState()
-                != WifiEntry.CONNECTED_STATE_CONNECTED) {
-            menu.add(Menu.NONE, MENU_ID_MODIFY, 0 /* order */, R.string.wifi_modify);
-        }
+        addModifyMenuIfSuitable(menu, mSelectedWifiEntry);
     }
 
     @VisibleForTesting
@@ -618,6 +640,14 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     void addForgetMenuIfSuitable(ContextMenu menu) {
         if (mIsAdmin) {
             menu.add(Menu.NONE, MENU_ID_FORGET, 0 /* order */, R.string.forget);
+        }
+    }
+
+    @VisibleForTesting
+    void addModifyMenuIfSuitable(ContextMenu menu, WifiEntry wifiEntry) {
+        if (mIsAdmin && wifiEntry.isSaved()
+                && wifiEntry.getConnectedState() != WifiEntry.CONNECTED_STATE_CONNECTED) {
+            menu.add(Menu.NONE, MENU_ID_MODIFY, 0 /* order */, R.string.wifi_modify);
         }
     }
 
@@ -643,6 +673,12 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                         () -> launchWifiDppConfiguratorActivity(mSelectedWifiEntry));
                 return true;
             case MENU_ID_MODIFY:
+                if (!mIsAdmin) {
+                    Log.e(TAG, "Can't modify Wi-Fi because the user isn't admin.");
+                    EventLog.writeEvent(0x534e4554, "237672190", UserHandle.myUserId(),
+                            "User isn't admin");
+                    return true;
+                }
                 showDialog(mSelectedWifiEntry, WifiConfigUiBase2.MODE_MODIFY);
                 return true;
             default:
@@ -1424,16 +1460,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     }
 
     private void fixConnectivity() {
-        if (mInternetResetHelper == null) {
-            mInternetResetHelper = new InternetResetHelper(getContext(), getLifecycle());
-            mInternetResetHelper.setResettingPreference(mResetInternetPreference);
-            mInternetResetHelper.setMobileNetworkController(mNetworkMobileProviderController);
-            mInternetResetHelper.setWifiTogglePreference(
-                    findPreference(WifiSwitchPreferenceController.KEY));
-            mInternetResetHelper.addWifiNetworkPreference(mConnectedWifiEntryPreferenceCategory);
-            mInternetResetHelper.addWifiNetworkPreference(mFirstWifiEntryPreferenceCategory);
-            mInternetResetHelper.addWifiNetworkPreference(mWifiEntryPreferenceCategory);
-        }
         mInternetResetHelper.restart();
     }
 
