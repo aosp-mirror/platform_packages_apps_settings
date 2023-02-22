@@ -108,7 +108,10 @@ public class UdfpsEnrollView extends FrameLayout implements UdfpsEnrollHelper.Li
         return mOverlayParams;
     }
 
-    void setOverlayParams(UdfpsOverlayParams params) {
+    /**
+     * Set UdfpsOverlayParams
+     */
+    public void setOverlayParams(UdfpsOverlayParams params) {
         mOverlayParams = params;
 
         post(() -> {
@@ -121,7 +124,10 @@ public class UdfpsEnrollView extends FrameLayout implements UdfpsEnrollHelper.Li
         });
     }
 
-    void setEnrollHelper(UdfpsEnrollHelper enrollHelper) {
+    /**
+     * Set UdfpsEnrollHelper
+     */
+    public void setEnrollHelper(UdfpsEnrollHelper enrollHelper) {
         mFingerprintDrawable.setEnrollHelper(enrollHelper);
         enrollHelper.setListener(this);
     }
@@ -193,6 +199,8 @@ public class UdfpsEnrollView extends FrameLayout implements UdfpsEnrollHelper.Li
         params.height = rotatedBounds.height() + 2 * getPaddingX();
         params.width = rotatedBounds.width() + 2 * getPaddingY();
         setLayoutParams(params);
+
+
     }
 
     private void onFingerDown() {
