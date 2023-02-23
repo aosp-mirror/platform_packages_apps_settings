@@ -166,10 +166,11 @@
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Nastavte předvolby jednotek a čísel"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Sdělte aplikacím své regionální preference, aby vám mohly přizpůsobit prostředí."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Aplikace vaše regionální preference použijí všude, kde je to možné."</string>
-    <string name="temperature_preferences_title" msgid="9067783912861473593">"Jednotky teploty"</string>
+    <string name="temperature_preferences_title" msgid="5009881556503629058">"Teplota"</string>
     <string name="calendar_preferences_title" msgid="8312485828206542600">"Kalendář"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"První den týdne"</string>
-    <string name="numbers_preferences_title" msgid="6094837605398562369">"Čísla"</string>
+    <!-- no translation found for numbers_preferences_title (8197418984391195446) -->
+    <skip />
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Použít výchozí nastavení aplikace"</string>
     <string name="celsius_temperature_unit" msgid="6118523647432383132">"Stupně Celsia (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Stupně Fahrenheita (°F)"</string>
@@ -621,7 +622,10 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Odpojit"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Párovat a připojit"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Když je připojení Bluetooth zapnuto, vaše zařízení může komunikovat s ostatními zařízeními Bluetooth v okolí."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Když je zapnuté připojení Bluetooth, zařízení může komunikovat s ostatními zařízeními Bluetooth v okolí.\n\nZa účelem vylepšení funkcí mohou aplikace a služby nadále vyhledávat zařízení v okolí, i když je Bluetooth vypnuté. Lze tak například vylepšit funkce a služby založené na poloze. Toto chování můžete změnit v "<annotation id="link">"nastavení vyhledávání Bluetooth"</annotation>"."</string>
+    <!-- no translation found for bluetooth_scanning_on_info_message (786648535600075223) -->
+    <skip />
+    <!-- no translation found for bluetooth_scan_change (1744636222637390367) -->
+    <skip />
     <string name="device_details_title" msgid="1155622417516195481">"O zařízení"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Nastavení klávesnice"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Adresa Bluetooth zařízení: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -1391,6 +1395,20 @@
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Ověřte gesto"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Ověřte PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Ověřte heslo"</string>
+    <!-- no translation found for lockpassword_remote_validation_header (4992647285784962073) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (7738124461482712491) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (8924028697135308390) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (8478926171431523279) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (7595104317648465901) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (509672303005547218) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (2066701840753591922) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"Nesprávný kód PIN"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Nesprávné heslo"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Nesprávné gesto"</string>
@@ -1715,18 +1733,12 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Stažené aplikace"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimentální"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Příznaky experimentálních funkcí"</string>
-    <!-- no translation found for snoop_logger_filters_dashboard_title (3082744626059215281) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (626757789702677076) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (5508775381082875785) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_map_title (5700678748422653316) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_summary (6235819710248503870) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (272884193300382035) -->
-    <skip />
+    <string name="snoop_logger_filters_dashboard_title" msgid="3082744626059215281">"Filtry protokolovacího nástroje"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="626757789702677076">"Nastavte filtry (po změně tohoto nastavení zapněte nebo vypněte Bluetooth)"</string>
+    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="5508775381082875785">"Filtr protokolovacího nástroje PBAP"</string>
+    <string name="bt_hci_snoop_log_filter_map_title" msgid="5700678748422653316">"Filtr protokolovacího nástroje MAP"</string>
+    <string name="bt_hci_snoop_log_filter_summary" msgid="6235819710248503870">"Nastavte režim filtrování. (Po změně tohoto nastavení zapněte nebo vypněte Bluetooth.)"</string>
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="272884193300382035">"Povolit filtrovanému režimu protokolu změnit tuto možnost."</string>
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Čtečka obrazovky určená primárně pro nevidomé a slabozraké"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Klepněte na položky na obrazovce, které chcete přečíst"</string>
@@ -1739,10 +1751,8 @@
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Lupa sleduje text během psaní"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3738009998799304549">"Vždy zapnuto"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="8946516092699010033">"Namísto deaktivace zvětšení dojde při změně aplikací jen k oddálení na normální velikost. Přiblížení můžete kdykoli vrátit zpět stažením prstů."</string>
-    <!-- no translation found for accessibility_screen_magnification_joystick_title (1803769708582404964) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_joystick_summary (4640300148573982720) -->
-    <skip />
+    <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Joystick"</string>
+    <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Lupu aktivujete a posouváte pomocí joysticku na obrazovce. Klepněte na obrazovku a podržte ji, poté přetahováním prstu po joysticku ovládejte lupu. Joystick můžete přesunout klepnutím a přetažením."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Zvětšení"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Další informace o zvětšení"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Typ zvětšení"</string>
@@ -2897,6 +2907,8 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Hlasitost vyzvánění a oznámení"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Hlasitost vyzvánění"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Hlasitost oznámení"</string>
+    <!-- no translation found for notification_volume_disabled_summary (8679988555852056079) -->
+    <skip />
     <string name="ringtone_title" msgid="3271453110387368088">"Vyzvánění telefonu"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Výchozí zvuk oznámení"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Zvuk z aplikace"</string>
@@ -3447,10 +3459,8 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Vypnuto"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Rozšířená nastavení"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Správce oprávnění"</string>
-    <!-- no translation found for app_data_sharing_updates_title (1694297952320402788) -->
-    <skip />
-    <!-- no translation found for app_data_sharing_updates_summary (4465929918457739443) -->
-    <skip />
+    <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Aktualizace sdílení dat pro zjišťování polohy"</string>
+    <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Zkontrolujte aplikace, které změnily způsob, jakým mohou sdílet vaše údaje o poloze"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Probudit klepnutím"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Dvojitým klepnutím kamkoli na obrazovku zařízení probudíte"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Otevírání odkazů"</string>
@@ -4272,28 +4282,17 @@
     <string name="content_capture" msgid="868372905432812238">"Obsah aplikace"</string>
     <string name="content_capture_summary" msgid="49720773699715531">"Povolte aplikacím odesílat obsah do systému Android"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"Zaznamenávat výpis haldy systému"</string>
-    <!-- no translation found for development_memtag_page_title (3546667618748029188) -->
-    <skip />
-    <!-- no translation found for development_memtag_intro (8032596625527637164) -->
-    <skip />
-    <!-- no translation found for development_memtag_footer (5681925148773626562) -->
-    <skip />
-    <!-- no translation found for development_memtag_learn_more (8961984806973926704) -->
-    <skip />
-    <!-- no translation found for development_memtag_toggle (2474420239518386894) -->
-    <skip />
-    <!-- no translation found for development_memtag_reboot_message_on (8100075676107327847) -->
-    <skip />
-    <!-- no translation found for development_memtag_reboot_message_off (3703925647922079456) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_title (2320125810211279) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_message (1232881567956207641) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_summary (3896537791216432882) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_already_enabled (4439168867613407167) -->
-    <skip />
+    <string name="development_memtag_page_title" msgid="3546667618748029188">"Memory Tagging Extension"</string>
+    <string name="development_memtag_intro" msgid="8032596625527637164">"Funkce MTE (Memory Tagging Extension) usnadňuje zjišťování bezpečnostních problémů s pamětí v aplikaci a zajišťuje bezpečnější nativní kód aplikace."</string>
+    <string name="development_memtag_footer" msgid="5681925148773626562">"Zapnutí funkce MTE může způsobit pomalejší výkon zařízení."</string>
+    <string name="development_memtag_learn_more" msgid="8961984806973926704">"Další informace o funkci MTE"</string>
+    <string name="development_memtag_toggle" msgid="2474420239518386894">"Aktivovat funkci MTE, dokud ji nevypnete"</string>
+    <string name="development_memtag_reboot_message_on" msgid="8100075676107327847">"Pokud chcete funkci MTE zapnout, musíte restartovat zařízení."</string>
+    <string name="development_memtag_reboot_message_off" msgid="3703925647922079456">"Pokud chcete funkci MTE vypnout, musíte restartovat zařízení."</string>
+    <string name="reboot_with_mte_title" msgid="2320125810211279">"Aktivovat funkci MTE v jedné relaci"</string>
+    <string name="reboot_with_mte_message" msgid="1232881567956207641">"Systém se restartuje a bude možné experimentovat s technologií Memory Tagging Extension (MTE). Technologie MTE může nepříznivě ovlivnit výkon a stabilitu systému. Při dalším restartu se nastavení resetuje."</string>
+    <string name="reboot_with_mte_summary" msgid="3896537791216432882">"Restartováním zahájíte jednu relaci s aktivovanou funkcí MTE"</string>
+    <string name="reboot_with_mte_already_enabled" msgid="4439168867613407167">"Funkce MTE již je aktivovaná"</string>
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"Zaznamenávání výpisu haldy systému"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"Výpis haldy systému se nepodařilo získat"</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"Automaticky zaznamenávat výpisy haldy systému"</string>
@@ -4610,6 +4609,5 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Fialová"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Hotovo"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Zrušit"</string>
-    <!-- no translation found for dock_multi_instances_not_supported_text (3513493664467667084) -->
-    <skip />
+    <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Tuto aplikaci lze otevřít jen v jednom okně"</string>
 </resources>

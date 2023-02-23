@@ -166,10 +166,11 @@
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Defina preferências de números e unidades"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Permita que as apps conheçam as suas preferências regionais para poderem personalizar a sua experiência."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"As apps vão usar as suas preferências regionais sempre que possível."</string>
-    <string name="temperature_preferences_title" msgid="9067783912861473593">"Unidades de temperatura"</string>
+    <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperatura"</string>
     <string name="calendar_preferences_title" msgid="8312485828206542600">"Calendário"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Primeiro dia da semana"</string>
-    <string name="numbers_preferences_title" msgid="6094837605398562369">"Números"</string>
+    <!-- no translation found for numbers_preferences_title (8197418984391195446) -->
+    <skip />
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Usar predefinição da app"</string>
     <string name="celsius_temperature_unit" msgid="6118523647432383132">"Celsius (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Fahrenheit (°F)"</string>
@@ -611,7 +612,7 @@
     <string name="bluetooth_pin_values_hint" msgid="2753202519050044670">"Geralmente 0000 ou 1234"</string>
     <string name="bluetooth_pin_values_hint_16_digits" msgid="5603928271430883558">"Deve ter 16 dígitos"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"Poderá também ter de introduzir este PIN no outro aparelho."</string>
-    <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Poderá também ter de introduzir a chave de acesso no outro aparelho."</string>
+    <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Poderá também ter de introduzir a token de acesso no outro aparelho."</string>
     <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Confirme para sincronizar com o conjunto coordenado"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Permitir o acesso aos contactos e ao histórico de chamadas"</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
@@ -621,7 +622,8 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Desligar"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Emparelhar e ligar"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Com o Bluetooth ativado, o dispositivo pode comunicar com dispositivos próximos."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Quando o Bluetooth está ativado, o dispositivo pode comunicar com outros dispositivos Bluetooth próximos.\n\nPara melhorar a experiência do dispositivo, as apps e os serviços podem continuar a procurar dispositivos próximos em qualquer altura, mesmo quando o Bluetooth está desativado. Pode utilizar esta opção, por exemplo, para melhorar as funcionalidades e os serviços baseados na localização. Pode alterar esta opção nas "<annotation id="link">"definições de procura de Bluetooth"</annotation>"."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Quando o Bluetooth está ativado, o dispositivo pode comunicar com outros dispositivos Bluetooth próximos.\n\nPara melhorar a experiência do dispositivo, as apps e os serviços podem continuar a procurar dispositivos próximos em qualquer altura, mesmo quando o Bluetooth está desativado. Pode usar esta opção, por exemplo, para melhorar as funcionalidades e os serviços baseados na localização. Pode alterar esta opção nas definições de procura de Bluetooth."</string>
+    <string name="bluetooth_scan_change" msgid="1744636222637390367">"Altere"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detalhes do dispositivo"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Definições do teclado"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Endereço Bluetooth do dispositivo: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -1391,6 +1393,13 @@
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Validar padrão"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Validar o PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Validar palavra-passe"</string>
+    <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Valide-se"</string>
+    <string name="lockpassword_remote_validation_pattern_details" msgid="7738124461482712491">"Introduza o padrão do outro dispositivo para transferir Contas Google, definições, etc. O padrão é encriptado."</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="8924028697135308390">"Introduza o PIN do outro dispositivo para transferir Contas Google, definições, etc. O PIN é encriptado."</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="8478926171431523279">"Introduza a palavra-passe do outro disposit. p/ transferir Contas Google, definições, etc. A palavra-passe é encriptada."</string>
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Usar padrão para desbloquear o dispositivo"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Usar PIN para desbloquear o dispositivo"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Usar palavra-passe p/ desbloq. dispositivo"</string>
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"PIN incorreto"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Palavra-passe incorreta"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Padrão incorreto"</string>
@@ -2889,6 +2898,7 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Volume de notificações e toque"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Volume do toque"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Volume de notificações"</string>
+    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Indisponível porque o som do toque está desativado"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Toque do telemóvel"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Som de notificação padrão"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Som fornecido pela aplicação"</string>
@@ -3439,10 +3449,8 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Desativadas"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Avançadas"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Gestor de autorizações"</string>
-    <!-- no translation found for app_data_sharing_updates_title (1694297952320402788) -->
-    <skip />
-    <!-- no translation found for app_data_sharing_updates_summary (4465929918457739443) -->
-    <skip />
+    <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Atualizações da partilha de dados para a localização"</string>
+    <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Reveja apps que mudaram a forma como podem partilhar os seus dados de localização"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Tocar para ativar"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Tocar duas vezes em qualquer ponto do ecrã para ativar o dispositivo"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Links de abertura"</string>
@@ -3970,7 +3978,7 @@
     <string name="credman_credentials" msgid="5937331545565783811">"Serviços de palavras-passe e identidades"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# palavra-passe}other{# palavras-passe}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"automático, preenchimento, preenchimento automático, palavra-passe"</string>
-    <string name="credman_keywords" msgid="7236954350284379264">"credenciais, chave de acesso, palavra-passe"</string>
+    <string name="credman_keywords" msgid="7236954350284379264">"credenciais, token de acesso, palavra-passe"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Certifique-se de que confia nesta app&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=O Preenchimento automático do Google&gt;%1$s&lt;/xliff:g&gt; utiliza o que está no ecrã para determinar o que pode ser preenchido automaticamente."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Desativar %1$s?"</string>
     <string name="credman_confirmation_message" msgid="1485617504425237430">"As informações guardadas, como moradas ou métodos de pagamento, não vão ser preenchidas quando iniciar sessão. Para manter as informações preenchidas guardadas, predefina um serviço de preenchimento automático."</string>
@@ -4003,7 +4011,7 @@
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"Esta funcionalidade foi desativada porque torna o seu telemóvel lento."</string>
     <string name="show_first_crash_dialog" msgid="1696584857732637389">"Mostrar sempre a caixa de diálogo de falhas"</string>
     <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"Mostrar a caixa de diálogo sempre que uma aplicação falhar"</string>
-    <string name="angle_enabled_app" msgid="6044941043384239076">"Selecionar aplicação compatível com o ANGLE"</string>
+    <string name="angle_enabled_app" msgid="6044941043384239076">"Selecionar app compatível com o ANGLE"</string>
     <string name="angle_enabled_app_not_set" msgid="4472572224881726067">"Nenhuma aplicação compatível com o ANGLE definida."</string>
     <string name="angle_enabled_app_set" msgid="7811829383833353021">"Aplicação compatível com o ANGLE: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="graphics_driver_dashboard_title" msgid="5661084817492587796">"Preferências da placa gráfica"</string>
@@ -4262,28 +4270,17 @@
     <string name="content_capture" msgid="868372905432812238">"Conteúdo da aplicação"</string>
     <string name="content_capture_summary" msgid="49720773699715531">"Permitir que as apps enviem conteúdo para o sistema Android"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"Fazer a captura da área dinâmica para dados do sistema"</string>
-    <!-- no translation found for development_memtag_page_title (3546667618748029188) -->
-    <skip />
-    <!-- no translation found for development_memtag_intro (8032596625527637164) -->
-    <skip />
-    <!-- no translation found for development_memtag_footer (5681925148773626562) -->
-    <skip />
-    <!-- no translation found for development_memtag_learn_more (8961984806973926704) -->
-    <skip />
-    <!-- no translation found for development_memtag_toggle (2474420239518386894) -->
-    <skip />
-    <!-- no translation found for development_memtag_reboot_message_on (8100075676107327847) -->
-    <skip />
-    <!-- no translation found for development_memtag_reboot_message_off (3703925647922079456) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_title (2320125810211279) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_message (1232881567956207641) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_summary (3896537791216432882) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_already_enabled (4439168867613407167) -->
-    <skip />
+    <string name="development_memtag_page_title" msgid="3546667618748029188">"Memory Tagging Extension"</string>
+    <string name="development_memtag_intro" msgid="8032596625527637164">"MTE: encontre problemas e proteja o código nativo."</string>
+    <string name="development_memtag_footer" msgid="5681925148773626562">"A ativação da MTE (Memory Tagging Extension) pode tornar o desempenho do dispositivo mais lento."</string>
+    <string name="development_memtag_learn_more" msgid="8961984806973926704">"Saiba mais sobre a MTE"</string>
+    <string name="development_memtag_toggle" msgid="2474420239518386894">"Ative a MTE até a desativar"</string>
+    <string name="development_memtag_reboot_message_on" msgid="8100075676107327847">"Tem de reiniciar o dispositivo para ativar a MTE."</string>
+    <string name="development_memtag_reboot_message_off" msgid="3703925647922079456">"Tem de reiniciar o dispositivo para desativar a MTE."</string>
+    <string name="reboot_with_mte_title" msgid="2320125810211279">"Ative a MTE para uma sessão única"</string>
+    <string name="reboot_with_mte_message" msgid="1232881567956207641">"O sistema vai reiniciar e permitir experiências com a Memory Tagging Extension (MTE). A MTE pode afetar negativamente o desempenho e a estabilidade do sistema. Será reposto no próximo reinício subsequente."</string>
+    <string name="reboot_with_mte_summary" msgid="3896537791216432882">"Reinicie para uma sessão única com a MTE ativada"</string>
+    <string name="reboot_with_mte_already_enabled" msgid="4439168867613407167">"A MTE já está ativada"</string>
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"A fazer a captura da área dinâmica para dados do sistema…"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"Não foi possível fazer a captura da área dinâmica para dados do sistema."</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"Fazer automaticamente capturas da área dinâmica para dados do sistema"</string>

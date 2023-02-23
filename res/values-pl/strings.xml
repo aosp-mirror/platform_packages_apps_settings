@@ -166,10 +166,11 @@
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Ustaw preferencje dotyczące jednostek i liczb"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Powiadom aplikacje o swoich regionalnych preferencjach, aby mogły dokonać personalizacji."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Aplikacje będą korzystać z preferencji regionalnych, kiedy jest to możliwe."</string>
-    <string name="temperature_preferences_title" msgid="9067783912861473593">"Jednostki temperatury"</string>
+    <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperatura"</string>
     <string name="calendar_preferences_title" msgid="8312485828206542600">"Kalendarz"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Pierwszy dzień tygodnia"</string>
-    <string name="numbers_preferences_title" msgid="6094837605398562369">"Liczby"</string>
+    <!-- no translation found for numbers_preferences_title (8197418984391195446) -->
+    <skip />
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Użyj aplikacji domyślnej"</string>
     <string name="celsius_temperature_unit" msgid="6118523647432383132">"Stopnie Celsjusza – °C"</string>
     <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Stopnie Fahrenheita – °F"</string>
@@ -621,7 +622,10 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Rozłącz"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Sparuj i połącz"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Po włączeniu Bluetootha urządzenie może komunikować się z innymi urządzeniami Bluetooth w pobliżu."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Po włączeniu Bluetootha urządzenie może komunikować się z innymi urządzeniami Bluetooth w pobliżu.\n\nAby zwiększyć komfort korzystania z urządzenia, aplikacje i usługi mogą wyszukiwać urządzenia w pobliżu nawet wtedy, gdy Bluetooth jest wyłączony. Może to np. pomóc usprawnić działanie funkcji i usług opartych na lokalizacji. Możesz zmienić tę opcję w "<annotation id="link">"ustawieniach skanowania Bluetooth"</annotation>"."</string>
+    <!-- no translation found for bluetooth_scanning_on_info_message (786648535600075223) -->
+    <skip />
+    <!-- no translation found for bluetooth_scan_change (1744636222637390367) -->
+    <skip />
     <string name="device_details_title" msgid="1155622417516195481">"Szczegóły urządzenia"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Ustawienia klawiatury"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Adres Bluetooth urządzenia: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -1391,6 +1395,20 @@
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Zweryfikuj wzór"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Zweryfikuj PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Zweryfikuj hasło"</string>
+    <!-- no translation found for lockpassword_remote_validation_header (4992647285784962073) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (7738124461482712491) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (8924028697135308390) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (8478926171431523279) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (7595104317648465901) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (509672303005547218) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (2066701840753591922) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"Nieprawidłowy kod PIN"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Nieprawidłowe hasło"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Nieprawidłowy wzór"</string>
@@ -1715,18 +1733,12 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Pobrane aplikacje"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Eksperymentalne"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Flagi funkcji"</string>
-    <!-- no translation found for snoop_logger_filters_dashboard_title (3082744626059215281) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (626757789702677076) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (5508775381082875785) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_map_title (5700678748422653316) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_summary (6235819710248503870) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (272884193300382035) -->
-    <skip />
+    <string name="snoop_logger_filters_dashboard_title" msgid="3082744626059215281">"Filtry Snoop Logger"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="626757789702677076">"Ustaw filtry (przełącz Bluetooth po zmianie tego ustawienia)"</string>
+    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="5508775381082875785">"Snoop Logger Filter PBAP"</string>
+    <string name="bt_hci_snoop_log_filter_map_title" msgid="5700678748422653316">"Snoop Logger Filter MAP"</string>
+    <string name="bt_hci_snoop_log_filter_summary" msgid="6235819710248503870">"Ustaw tryb filtrowania (przełącz Bluetooth po zmianie tego ustawienia)."</string>
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="272884193300382035">"Włącz Snoop Log Mode Filtered, aby zmienić tę opcję."</string>
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Czytnik ekranu przeznaczony głównie dla osób niewidomych i słabowidzących"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Klikaj elementy na ekranie, aby zostały odczytane na głos"</string>
@@ -1739,10 +1751,8 @@
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Lupa podąża za wpisywanym tekstem"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3738009998799304549">"Zawsze włączony"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="8946516092699010033">"Zamiast dezaktywacji powiększenia przy zmianie aplikacji następuje powiększenie do standardowego rozmiaru. Ściągnij palce, aby powiększyć w dowolnym momencie."</string>
-    <!-- no translation found for accessibility_screen_magnification_joystick_title (1803769708582404964) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_joystick_summary (4640300148573982720) -->
-    <skip />
+    <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Joystick"</string>
+    <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Aktywuj powiększanie okna i poruszaj lupą za pomocą joysticku na ekranie. Naciśnij i przytrzymaj, a następnie przeciągnij joystick, aby zarządzać powiększeniem okna. Klikaj i przeciągaj, aby poruszać joystickiem."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"O powiększeniu"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Więcej informacji o powiększeniu"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Typ powiększenia"</string>
@@ -2897,6 +2907,8 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Głośność dzwonka i powiadomień"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Głośność dzwonka"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Głośność powiadomień"</string>
+    <!-- no translation found for notification_volume_disabled_summary (8679988555852056079) -->
+    <skip />
     <string name="ringtone_title" msgid="3271453110387368088">"Dzwonek telefonu"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Domyślny dźwięk powiadomienia"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Dźwięk z aplikacji"</string>
@@ -3447,10 +3459,8 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Wyłączone"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Zaawansowane"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Menedżer uprawnień"</string>
-    <!-- no translation found for app_data_sharing_updates_title (1694297952320402788) -->
-    <skip />
-    <!-- no translation found for app_data_sharing_updates_summary (4465929918457739443) -->
-    <skip />
+    <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Zmiany w udostępnianiu danych o lokalizacji"</string>
+    <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Przejrzyj aplikacje, które zmieniły sposób udostępniania Twoich danych o lokalizacji"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Kliknij, by wybudzić"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Kliknij dwukrotnie w dowolnym miejscu na ekranie, by wybudzić urządzenie"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Otwieranie linków"</string>
@@ -4272,28 +4282,17 @@
     <string name="content_capture" msgid="868372905432812238">"Zawartość aplikacji"</string>
     <string name="content_capture_summary" msgid="49720773699715531">"Zezwalaj na wysyłanie przez aplikacje treści do systemu Android"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"Zapisuj zrzut stosu systemu"</string>
-    <!-- no translation found for development_memtag_page_title (3546667618748029188) -->
-    <skip />
-    <!-- no translation found for development_memtag_intro (8032596625527637164) -->
-    <skip />
-    <!-- no translation found for development_memtag_footer (5681925148773626562) -->
-    <skip />
-    <!-- no translation found for development_memtag_learn_more (8961984806973926704) -->
-    <skip />
-    <!-- no translation found for development_memtag_toggle (2474420239518386894) -->
-    <skip />
-    <!-- no translation found for development_memtag_reboot_message_on (8100075676107327847) -->
-    <skip />
-    <!-- no translation found for development_memtag_reboot_message_off (3703925647922079456) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_title (2320125810211279) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_message (1232881567956207641) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_summary (3896537791216432882) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_already_enabled (4439168867613407167) -->
-    <skip />
+    <string name="development_memtag_page_title" msgid="3546667618748029188">"Memory Tagging Extension"</string>
+    <string name="development_memtag_intro" msgid="8032596625527637164">"Rozszerzenie Memory Tagging Extension (MTE) ułatwia znajdowanie w aplikacji zagrożeń dotyczących pamięci i zapewnia większe bezpieczeństwo kodu natywnego w tej aplikacji."</string>
+    <string name="development_memtag_footer" msgid="5681925148773626562">"Włączenie MTE może zmniejszyć wydajność urządzenia."</string>
+    <string name="development_memtag_learn_more" msgid="8961984806973926704">"Więcej informacji o MTE"</string>
+    <string name="development_memtag_toggle" msgid="2474420239518386894">"Pozostaw rozszerzenie MTE włączone, dopóki go nie wyłączysz"</string>
+    <string name="development_memtag_reboot_message_on" msgid="8100075676107327847">"Aby włączyć MTE, musisz ponownie uruchomić urządzenie."</string>
+    <string name="development_memtag_reboot_message_off" msgid="3703925647922079456">"Aby wyłączyć MTE, musisz ponownie uruchomić urządzenie."</string>
+    <string name="reboot_with_mte_title" msgid="2320125810211279">"Włącz MTE na pojedynczą sesję"</string>
+    <string name="reboot_with_mte_message" msgid="1232881567956207641">"System zostanie uruchomiony ponownie i będzie można poeksperymentować z rozszerzeniem Memory Tagging Extension (MTE). MTE może negatywnie wpłynąć na wydajność i stabilność systemu. Podczas następnego ponownego uruchamiania rozszerzenie zostanie zresetowane."</string>
+    <string name="reboot_with_mte_summary" msgid="3896537791216432882">"Uruchom ponownie na pojedynczą sesję z włączonym rozszerzeniem MTE"</string>
+    <string name="reboot_with_mte_already_enabled" msgid="4439168867613407167">"Rozszerzenie MTE jest już włączone"</string>
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"Rejestruję zrzut stosu systemu"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"Nie można zapisać zrzutu stosu systemu"</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"Automatycznie zapisuj zrzuty stosu systemu"</string>
@@ -4610,6 +4609,5 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Fioletowy"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Gotowe"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Anuluj"</string>
-    <!-- no translation found for dock_multi_instances_not_supported_text (3513493664467667084) -->
-    <skip />
+    <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Ta aplikacja może być otwarta tylko w 1 oknie."</string>
 </resources>
