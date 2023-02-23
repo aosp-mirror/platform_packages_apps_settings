@@ -173,6 +173,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public Set<String> getOthersCustomComponentNameSet() {
+        return new ArraySet<>();
+    }
+
+    @Override
     public Set<Integer> getHideSystemComponentSet() {
         return new ArraySet<>();
     }
