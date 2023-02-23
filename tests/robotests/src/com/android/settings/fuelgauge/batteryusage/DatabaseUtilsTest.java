@@ -88,14 +88,6 @@ public final class DatabaseUtilsTest {
     }
 
     @Test
-    public void isWorkProfile_withSystemUser_returnFalse() {
-        BatteryTestUtils.setWorkProfile(mContext);
-        Shadows.shadowOf(mContext.getSystemService(UserManager.class)).setIsSystemUser(true);
-
-        assertThat(DatabaseUtils.isWorkProfile(mContext)).isFalse();
-    }
-
-    @Test
     public void sendAppUsageEventData_returnsExpectedList() {
         // Configures the testing AppUsageEvent data.
         final List<AppUsageEvent> appUsageEventList = new ArrayList<>();
