@@ -863,7 +863,6 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         if (!TextUtils.isEmpty(helpString)) {
             if (!(mCanAssumeUdfps || mCanAssumeSfps)) {
                 mErrorText.removeCallbacks(mTouchAgainRunnable);
-                mErrorText.removeCallbacks(mTouchAgainRunnable);
             }
             showError(helpString);
 
