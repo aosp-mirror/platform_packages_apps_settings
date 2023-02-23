@@ -322,7 +322,7 @@ public class BatteryEntryTest {
                 R.drawable.ic_settings_display);
         assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_CPU,
                 R.string.power_cpu,
-                R.drawable.ic_power_system);
+                R.drawable.ic_settings_cpu);
         assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_BLUETOOTH,
                 R.string.power_bluetooth,
                 R.drawable.ic_settings_bluetooth);
@@ -331,13 +331,13 @@ public class BatteryEntryTest {
                 R.drawable.ic_settings_camera);
         assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_FLASHLIGHT,
                 R.string.power_flashlight,
-                R.drawable.ic_settings_display);
+                R.drawable.ic_settings_flashlight);
         assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_MOBILE_RADIO,
                 R.string.power_cell,
-                R.drawable.ic_cellular_1_bar);
+                R.drawable.ic_settings_cellular);
         assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_GNSS,
                 R.string.power_gps,
-                R.drawable.ic_power_system);
+                R.drawable.ic_settings_gps);
         assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_WIFI,
                 R.string.power_wifi,
                 R.drawable.ic_settings_wireless_no_theme);
