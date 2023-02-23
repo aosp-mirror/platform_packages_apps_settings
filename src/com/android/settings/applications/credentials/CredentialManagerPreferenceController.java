@@ -176,7 +176,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 context,
                 label == null ? "" : label,
                 service.getServiceIcon(mContext),
-                service.getServiceInfo().packageName);
+                service.getServiceInfo().packageName,
+                service.getSettingsSubtitle());
     }
 
     /**
@@ -234,7 +235,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             @NonNull Context prefContext,
             @NonNull CharSequence title,
             @Nullable Drawable icon,
-            @NonNull String packageName) {
+            @NonNull String packageName,
+            @Nullable CharSequence subtitle) {
         final SwitchPreference pref = new SwitchPreference(prefContext);
         pref.setTitle(title);
         pref.setChecked(mEnabledPackageNames.contains(packageName));
@@ -242,6 +244,10 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         if (icon != null) {
             pref.setIcon(Utils.getSafeIcon(icon));
+        }
+
+        if (subtitle != null) {
+            pref.setSummary(subtitle);
         }
 
         pref.setOnPreferenceClickListener(
