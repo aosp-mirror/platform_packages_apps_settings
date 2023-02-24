@@ -20,7 +20,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -67,8 +66,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     // Keys for bundle instance to restore configurations.
     private static final String KEY_DAILY_CHART_INDEX = "daily_chart_index";
     private static final String KEY_HOURLY_CHART_INDEX = "hourly_chart_index";
-
-    private static int sUiMode = Configuration.UI_MODE_NIGHT_UNDEFINED;
 
     /**
      * A callback listener for battery usage is updated.
@@ -167,14 +164,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
     @Override
     public void onResume() {
-        final int currentUiMode =
-                mContext.getResources().getConfiguration().uiMode
-                        & Configuration.UI_MODE_NIGHT_MASK;
-        if (sUiMode != currentUiMode) {
-            sUiMode = currentUiMode;
-            BatteryDiffEntry.clearCache();
-            Log.d(TAG, "clear icon and label cache since uiMode is changed");
-        }
         mIs24HourFormat = DateFormat.is24HourFormat(mContext);
         mMetricsFeatureProvider.action(mPrefContext, SettingsEnums.OPEN_BATTERY_USAGE);
     }
