@@ -16,17 +16,23 @@
 
 package com.android.settings.security.screenlock;
 
+import static android.provider.DeviceConfig.NAMESPACE_AUTO_PIN_CONFIRMATION;
+
+import static com.android.internal.widget.LockPatternUtils.FLAG_ENABLE_AUTO_PIN_CONFIRMATION;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.provider.DeviceConfig;
 
 import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,8 +40,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowDeviceConfig.class})
 public class AutoPinConfirmPreferenceControllerTest {
     private static final Integer TEST_USER_ID = 1;
     @Mock
@@ -54,16 +62,18 @@ public class AutoPinConfirmPreferenceControllerTest {
 
     @Test
     public void isAvailable_featureEnabledAndLockSetToNone_shouldReturnFalse() {
+        DeviceConfig.setProperty(NAMESPACE_AUTO_PIN_CONFIRMATION, FLAG_ENABLE_AUTO_PIN_CONFIRMATION,
+                "true", /* makeDefault */ false);
         when(mLockPatternUtils.isSecure(TEST_USER_ID)).thenReturn(true);
-        when(mLockPatternUtils.isAutoPinConfirmFeatureAvailable()).thenReturn(true);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void isAvailable_featureEnabledAndLockSetToPassword_shouldReturnFalse() {
+        DeviceConfig.setProperty(NAMESPACE_AUTO_PIN_CONFIRMATION, FLAG_ENABLE_AUTO_PIN_CONFIRMATION,
+                "true", /* makeDefault */ false);
         when(mLockPatternUtils.isSecure(TEST_USER_ID)).thenReturn(true);
-        when(mLockPatternUtils.isAutoPinConfirmFeatureAvailable()).thenReturn(true);
         when(mLockPatternUtils.getCredentialTypeForUser(TEST_USER_ID))
                 .thenReturn(LockPatternUtils.CREDENTIAL_TYPE_PASSWORD);
 
@@ -72,7 +82,8 @@ public class AutoPinConfirmPreferenceControllerTest {
 
     @Test
     public void isAvailable_featureEnabledAndLockSetToPIN_lengthLessThanSix_shouldReturnFalse() {
-        when(mLockPatternUtils.isAutoPinConfirmFeatureAvailable()).thenReturn(true);
+        DeviceConfig.setProperty(NAMESPACE_AUTO_PIN_CONFIRMATION, FLAG_ENABLE_AUTO_PIN_CONFIRMATION,
+                "true", /* makeDefault */ false);
         when(mLockPatternUtils.getCredentialTypeForUser(TEST_USER_ID))
                 .thenReturn(LockPatternUtils.CREDENTIAL_TYPE_PIN);
         when(mLockPatternUtils.getPinLength(TEST_USER_ID)).thenReturn(5L);
@@ -82,8 +93,9 @@ public class AutoPinConfirmPreferenceControllerTest {
 
     @Test
     public void isAvailable_featureEnabledAndLockSetToPIN_lengthMoreThanEqSix_shouldReturnTrue() {
+        DeviceConfig.setProperty(NAMESPACE_AUTO_PIN_CONFIRMATION, FLAG_ENABLE_AUTO_PIN_CONFIRMATION,
+                "true", /* makeDefault */ false);
         when(mLockPatternUtils.isSecure(TEST_USER_ID)).thenReturn(true);
-        when(mLockPatternUtils.isAutoPinConfirmFeatureAvailable()).thenReturn(true);
         when(mLockPatternUtils.getCredentialTypeForUser(TEST_USER_ID))
                 .thenReturn(LockPatternUtils.CREDENTIAL_TYPE_PIN);
         when(mLockPatternUtils.getPinLength(TEST_USER_ID)).thenReturn(6L);
@@ -93,7 +105,8 @@ public class AutoPinConfirmPreferenceControllerTest {
 
     @Test
     public void isAvailable_featureDisabledAndLockSetToPIN_shouldReturnFalse() {
-        when(mLockPatternUtils.isAutoPinConfirmFeatureAvailable()).thenReturn(false);
+        DeviceConfig.setProperty(NAMESPACE_AUTO_PIN_CONFIRMATION, FLAG_ENABLE_AUTO_PIN_CONFIRMATION,
+                "false", /* makeDefault */ false);
         when(mLockPatternUtils.isSecure(TEST_USER_ID)).thenReturn(true);
         when(mLockPatternUtils.getCredentialTypeForUser(TEST_USER_ID))
                 .thenReturn(LockPatternUtils.CREDENTIAL_TYPE_PIN);
@@ -103,7 +116,8 @@ public class AutoPinConfirmPreferenceControllerTest {
 
     @Test
     public void updateState_ChangingSettingState_shouldSetPreferenceToAppropriateCheckedState() {
-        when(mLockPatternUtils.isAutoPinConfirmFeatureAvailable()).thenReturn(true);
+        DeviceConfig.setProperty(NAMESPACE_AUTO_PIN_CONFIRMATION, FLAG_ENABLE_AUTO_PIN_CONFIRMATION,
+                "true", /* makeDefault */ false);
         // When auto_pin_confirm setting is disabled, switchPreference is unchecked
         when(mLockPatternUtils.isAutoPinConfirmEnabled(TEST_USER_ID)).thenReturn(false);
         mController.updateState(mPreference);
@@ -117,7 +131,8 @@ public class AutoPinConfirmPreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_shouldUpdatePinAutoConfirmSetting() {
-        when(mLockPatternUtils.isAutoPinConfirmFeatureAvailable()).thenReturn(true);
+        DeviceConfig.setProperty(NAMESPACE_AUTO_PIN_CONFIRMATION, FLAG_ENABLE_AUTO_PIN_CONFIRMATION,
+                "true", /* makeDefault */ false);
         mController.onPreferenceChange(mPreference, /* newValue= */ true);
         verify(mLockPatternUtils).setAutoPinConfirm(true, TEST_USER_ID);
     }
