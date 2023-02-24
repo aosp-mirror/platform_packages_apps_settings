@@ -66,15 +66,6 @@ public class PowerGaugePreferenceTest {
     }
 
     @Test
-    public void testOnBindViewHolder_bindSubtitle() {
-        mPowerGaugePreference.setSubtitle(SUBTITLE);
-        mPowerGaugePreference.onBindViewHolder(mPreferenceViewHolder);
-
-        TextView widgetSummary = (TextView) mPreferenceViewHolder.findViewById(R.id.widget_summary);
-        assertThat(widgetSummary.getText()).isEqualTo(SUBTITLE);
-    }
-
-    @Test
     public void testOnBindViewHolder_showAnomaly_bindAnomalyIcon() {
         mPowerGaugePreference.shouldShowAnomalyIcon(true);
         mPowerGaugePreference.onBindViewHolder(mPreferenceViewHolder);
@@ -103,19 +94,5 @@ public class PowerGaugePreferenceTest {
 
         assertThat(mPreferenceViewHolder.findViewById(android.R.id.title).getContentDescription())
                 .isEqualTo(CONTENT_DESCRIPTION);
-    }
-
-    @Test
-    public void setPercent_greaterThanThreshold_showNumber() {
-        mPowerGaugePreference.setPercent(99.5);
-
-        assertThat(mPowerGaugePreference.getPercent()).isEqualTo("100%");
-    }
-
-    @Test
-    public void setPercent_lessThanThreshold_showBar() {
-        mPowerGaugePreference.setPercent(0.95);
-
-        assertThat(mPowerGaugePreference.getPercent()).isEqualTo("-");
     }
 }
