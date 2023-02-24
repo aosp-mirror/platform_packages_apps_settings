@@ -179,11 +179,11 @@ public class FingerprintStatusUtilsTest {
     }
 
     @Test
-    public void getSettingsClassName_whenNotEnrolled_returnsFingerprintEnrollInduction() {
+    public void getSettingsClassName_whenNotEnrolled_returnsFingerprintSettings() {
         when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(false);
 
         assertThat(mFingerprintStatusUtils.getSettingsClassName())
-                .isEqualTo(FingerprintEnrollIntroductionInternal.class.getName());
+                .isEqualTo(FingerprintSettings.class.getName());
     }
 
     @Test

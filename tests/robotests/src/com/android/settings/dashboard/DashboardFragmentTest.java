@@ -298,6 +298,14 @@ public class DashboardFragmentTest {
     }
 
     @Test
+    public void forceUpdatePreferences_prefKeyNull_shouldNotCrash() {
+        mTestFragment.addPreferenceController(new TestPreferenceController(mContext));
+
+        // Should not crash
+        mTestFragment.forceUpdatePreferences();
+    }
+
+    @Test
     public void checkUiBlocker_noUiBlocker_controllerIsNull() {
         mTestFragment.mBlockerController = null;
         mControllers.add(new TestPreferenceController(mContext));

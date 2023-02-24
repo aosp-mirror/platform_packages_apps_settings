@@ -143,7 +143,8 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
             }
 
             final GlifLayout layout = getActivity().findViewById(R.id.setup_wizard_layout);
-            layout.setDescriptionText("");
+            layout.setDescriptionText(
+                    getString(R.string.lockpassword_choose_your_pattern_description));
         }
 
         @Override

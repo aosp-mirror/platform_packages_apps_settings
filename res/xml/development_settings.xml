@@ -80,6 +80,26 @@
             android:entries="@array/bt_hci_snoop_log_entries"
             android:entryValues="@array/bt_hci_snoop_log_values" />
 
+        <Preference
+            android:key="snoop_logger_filters_dashboard"
+            android:title="@string/bt_hci_snoop_log_filters_dashboard_title"
+            android:fragment=
+                "com.android.settings.development.snooplogger.SnoopLoggerFiltersDashboard" />
+
+        <ListPreference
+            android:key="bt_hci_snoop_log_filter_pbap"
+            android:title="@string/bt_hci_snoop_log_filter_pbap_title"
+            android:dialogTitle="@string/bt_hci_snoop_log_filter_summary"
+            android:entries="@array/bt_hci_snoop_log_profile_filter_entries"
+            android:entryValues="@array/bt_hci_snoop_log_profile_filter_values" />
+
+        <ListPreference
+            android:key="bt_hci_snoop_log_filter_map"
+            android:title="@string/bt_hci_snoop_log_filter_map_title"
+            android:dialogTitle="@string/bt_hci_snoop_log_filter_summary"
+            android:entries="@array/bt_hci_snoop_log_profile_filter_entries"
+            android:entryValues="@array/bt_hci_snoop_log_profile_filter_values" />
+
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="oem_unlock_enable"
             android:title="@string/oem_unlock_enable"
@@ -402,6 +422,16 @@
             android:title="@string/nfc_stack_debuglog_title"
             android:summary="@string/nfc_stack_debuglog_summary" />
 
+        <SwitchPreference
+            android:key="nfc_verbose_vendor_log"
+            android:title="@string/nfc_verbose_vendor_log_title"
+            android:summary="@string/nfc_verbose_vendor_log_summary" />
+
+        <SwitchPreference
+            android:key="nfc_snoop_log"
+            android:title="@string/nfc_snoop_log_title"
+            android:summary="@string/nfc_snoop_log_summary"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -609,11 +639,9 @@
             android:title="@string/show_notification_channel_warnings"
             android:summary="@string/show_notification_channel_warnings_summary" />
 
-        <com.android.settingslib.widget.LayoutPreference
+        <Preference
             android:key="asst_importance_reset"
             android:title="@string/asst_importance_reset_title"
-            android:selectable="false"
-            android:layout="@layout/reset_importance_button"
             settings:controller="com.android.settings.notification.ImportanceResetPreferenceController" />
 
         <Preference

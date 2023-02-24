@@ -24,16 +24,13 @@ import android.app.backup.BackupHelper;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
-import android.content.pm.PackageManager;
-import android.content.pm.ParceledListSlice;
-import android.content.pm.UserInfo;
 import android.os.Build;
 import android.os.IDeviceIdleController;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
-import android.os.UserManager;
+import android.util.ArraySet;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -53,22 +50,13 @@ public final class BatteryBackupHelper implements BackupHelper {
     private static final String DEVICE_IDLE_SERVICE = "deviceidle";
     private static final boolean DEBUG = Build.TYPE.equals("userdebug");
 
-    // Only the owner can see all apps.
-    private static final int RETRIEVE_FLAG_ADMIN =
-            PackageManager.MATCH_ANY_USER |
-            PackageManager.MATCH_DISABLED_COMPONENTS |
-            PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS;
-    private static final int RETRIEVE_FLAG =
-            PackageManager.MATCH_DISABLED_COMPONENTS |
-            PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS;
-
     static final String DELIMITER = ",";
     static final String DELIMITER_MODE = ":";
     static final String KEY_FULL_POWER_LIST = "full_power_list";
     static final String KEY_OPTIMIZATION_LIST = "optimization_mode_list";
 
     @VisibleForTesting
-    List<ApplicationInfo> mTestApplicationInfoList = null;
+    ArraySet<ApplicationInfo> mTestApplicationInfoList = null;
 
     @VisibleForTesting
     PowerAllowlistBackend mPowerAllowlistBackend;
@@ -146,7 +134,7 @@ public final class BatteryBackupHelper implements BackupHelper {
     @VisibleForTesting
     void backupOptimizationMode(BackupDataOutput data, List<String> allowlistedApps) {
         final long timestamp = System.currentTimeMillis();
-        final List<ApplicationInfo> applications = getInstalledApplications();
+        final ArraySet<ApplicationInfo> applications = getInstalledApplications();
         if (applications == null || applications.isEmpty()) {
             Log.w(TAG, "no data found in the getInstalledApplications()");
             return;
@@ -269,36 +257,11 @@ public final class BatteryBackupHelper implements BackupHelper {
                 || powerAllowlistBackend.isDefaultActiveApp(packageName);
     }
 
-    private List<ApplicationInfo> getInstalledApplications() {
+    private ArraySet<ApplicationInfo> getInstalledApplications() {
         if (mTestApplicationInfoList != null) {
             return mTestApplicationInfoList;
         }
-        final List<ApplicationInfo> applications = new ArrayList<>();
-        final UserManager um = mContext.getSystemService(UserManager.class);
-        for (UserInfo userInfo : um.getProfiles(UserHandle.myUserId())) {
-            try {
-                @SuppressWarnings("unchecked")
-                final ParceledListSlice<ApplicationInfo> infoList =
-                        getIPackageManager().getInstalledApplications(
-                                userInfo.isAdmin() ? RETRIEVE_FLAG_ADMIN : RETRIEVE_FLAG,
-                                userInfo.id);
-                if (infoList != null) {
-                    applications.addAll(infoList.getList());
-                }
-            } catch (Exception e) {
-                Log.e(TAG, "getInstalledApplications() is failed", e);
-                return null;
-            }
-        }
-        // Removes the application which is disabled by the system.
-        for (int index = applications.size() - 1; index >= 0; index--) {
-            final ApplicationInfo info = applications.get(index);
-            if (info.enabledSetting != PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER
-                    && !info.enabled) {
-                applications.remove(index);
-            }
-        }
-        return applications;
+        return BatteryOptimizeUtils.getInstalledApplications(mContext, getIPackageManager());
     }
 
     private void debugLog(String debugContent) {

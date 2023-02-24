@@ -103,8 +103,7 @@ public class ZenRuleButtonsPreferenceController extends AbstractZenModePreferenc
                     new ZenDeleteRuleDialog.PositiveClickListener() {
                         @Override
                         public void onOk(String id) {
-                            Bundle bundle = new Bundle();
-                            bundle.putString(ZenModeAutomationSettings.DELETE, id);
+                            mBackend.removeZenRule(id);
                             mMetricsFeatureProvider.action(mContext,
                                     SettingsEnums.ACTION_ZEN_DELETE_RULE_OK);
                             new SubSettingLauncher(mContext)
@@ -112,7 +111,6 @@ public class ZenRuleButtonsPreferenceController extends AbstractZenModePreferenc
                                     .setDestination(ZenModeAutomationSettings.class.getName())
                                     .setSourceMetricsCategory(MetricsProto.MetricsEvent
                                             .NOTIFICATION_ZEN_MODE_AUTOMATION)
-                                    .setArguments(bundle)
                                     .launch();
                         }
             });

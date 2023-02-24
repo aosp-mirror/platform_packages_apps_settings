@@ -16,6 +16,8 @@
 
 package com.android.settings.network;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -51,19 +53,20 @@ public class MobileNetworkIntentConverter implements Function<Intent, Intent> {
     private static final String TAG = "MobileNetworkIntentConverter";
 
     private static final ComponentName sTargetComponent = ComponentName
-            .createRelative("com.android.settings",
+            .createRelative(SETTINGS_PACKAGE_NAME,
                     MobileNetworkActivity.class.getTypeName());
-
+    private static final String INTENT_TRAMPOLINE = "android.settings.SEARCH_RESULT_TRAMPOLINE";
     /**
      * These actions has better aligned with definitions within AndroidManifest.xml
      */
-    private static final String [] sPotentialActions = new String [] {
-        null,
-        Intent.ACTION_MAIN,
-        android.provider.Settings.ACTION_NETWORK_OPERATOR_SETTINGS,
-        android.provider.Settings.ACTION_DATA_ROAMING_SETTINGS,
-        android.provider.Settings.ACTION_MMS_MESSAGE_SETTING,
-        ImsRcsManager.ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN
+    private static final String[] sPotentialActions = new String[]{
+            null,
+            Intent.ACTION_MAIN,
+            android.provider.Settings.ACTION_NETWORK_OPERATOR_SETTINGS,
+            android.provider.Settings.ACTION_DATA_ROAMING_SETTINGS,
+            android.provider.Settings.ACTION_MMS_MESSAGE_SETTING,
+            ImsRcsManager.ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN,
+            INTENT_TRAMPOLINE
     };
 
     private static final String RE_ROUTE_TAG = ":reroute:" + TAG;
@@ -112,30 +115,31 @@ public class MobileNetworkIntentConverter implements Function<Intent, Intent> {
         if (TextUtils.equals(action,
                 android.provider.Settings.ACTION_NETWORK_OPERATOR_SETTINGS)
                 || TextUtils.equals(action,
-                        android.provider.Settings.ACTION_DATA_ROAMING_SETTINGS)) {
+                android.provider.Settings.ACTION_DATA_ROAMING_SETTINGS)
+                || TextUtils.equals(action, INTENT_TRAMPOLINE)) {
             // Accepted.
             ops = ops.andThen(intent -> extractArguments(intent, subId))
-                     .andThen(args -> rePackIntent(args, reqIntent))
-                     .andThen(intent -> updateFragment(intent, mAppContext, subId));
+                    .andThen(args -> rePackIntent(args, reqIntent))
+                    .andThen(intent -> updateFragment(intent, mAppContext, subId));
         } else if (TextUtils.equals(action,
                 android.provider.Settings.ACTION_MMS_MESSAGE_SETTING)) {
             ops = ops.andThen(intent -> extractArguments(intent, subId))
-                     .andThen(args -> convertMmsArguments(args))
-                     .andThen(args -> rePackIntent(args, reqIntent))
-                     .andThen(intent -> updateFragment(intent, mAppContext, subId));
+                    .andThen(args -> convertMmsArguments(args))
+                    .andThen(args -> rePackIntent(args, reqIntent))
+                    .andThen(intent -> updateFragment(intent, mAppContext, subId));
         } else if (TextUtils.equals(action,
                 ImsRcsManager.ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN)) {
             ops = ops.andThen(intent -> extractArguments(intent, subId))
-                     .andThen(args -> supportContactDiscoveryDialog(args, mAppContext, subId))
-                     .andThen(args -> rePackIntent(args, reqIntent))
-                     .andThen(intent -> updateFragment(intent, mAppContext, subId));
+                    .andThen(args -> supportContactDiscoveryDialog(args, mAppContext, subId))
+                    .andThen(args -> rePackIntent(args, reqIntent))
+                    .andThen(intent -> updateFragment(intent, mAppContext, subId));
         } else if ((sTargetComponent.compareTo(mComponent) == 0)
                 && ((action == null) || Intent.ACTION_MAIN.equals(action))) {
             Log.d(TAG, "Support default actions direct to this component");
             ops = ops.andThen(intent -> extractArguments(intent, subId))
-                     .andThen(args -> rePackIntent(args, reqIntent))
-                     .andThen(intent -> replaceIntentAction(intent))
-                     .andThen(intent -> updateFragment(intent, mAppContext, subId));
+                    .andThen(args -> rePackIntent(args, reqIntent))
+                    .andThen(intent -> replaceIntentAction(intent))
+                    .andThen(intent -> updateFragment(intent, mAppContext, subId));
         } else {
             return null;
         }

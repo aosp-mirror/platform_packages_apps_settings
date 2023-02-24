@@ -49,6 +49,10 @@
     <string name="config_wallpaper_picker_class" translatable="false">com.android.settings.Settings$WallpaperSettingsActivity</string>
     <!-- Fully-qualified class name for the styles & wallpaper picker activity. -->
     <string name="config_styles_and_wallpaper_picker_class" translatable="false"></string>
+    <!-- Action name for the wallpaper picker activity. -->
+    <string name="config_wallpaper_picker_action" translatable="false"></string>
+    <!-- Action name for the styles & wallpaper picker activity. -->
+    <string name="config_styles_and_wallpaper_picker_action" translatable="false"></string>
     <!-- Intent extra for wallpaper picker activity. -->
     <string name="config_wallpaper_picker_launch_extra" translatable="false">com.android.wallpaper.LAUNCH_SOURCE</string>
 
@@ -212,6 +216,10 @@
          should be either LOW (1) or HIGH (3).
     -->
     <integer name="config_vibration_supported_intensity_levels">1</integer>
+
+    <!-- Whether or not to show Media vibration settings in the vibration and haptics screen.
+         Can be overridden for specific product builds if the target device does not support it -->
+    <bool name="config_media_vibration_supported">true</bool>
 
     <!--
         Whether or not the homepage should be powered by legacy suggestion (versus contextual cards)
@@ -621,11 +629,20 @@
     <!-- Whether to put the apps with system UID into system component bucket or not -->
     <bool name="config_battery_combine_system_components">false</bool>
 
+    <!-- The extra value for battery tip -->
+    <integer name="config_battery_extra_tip_value">12</integer>
+
+    <!-- Whether to enable the advanced vpn feature. The default is not to. -->
+    <bool name="config_advanced_vpn_enabled">false</bool>
+
     <!-- An array of uid name for which packages exempt from Wi-Fi permission check. -->
     <string-array name="config_exempt_wifi_permission_uid_name" translatable="false">
         <item>@string/config_settingsintelligence_package_name</item>
         <item>android.uid.system:1000</item>
     </string-array>
+
+    <!-- Whether to enable the app battery usage list page feature. -->
+    <bool name="config_app_battery_usage_list_enabled">false</bool>
 
     <!-- Whether sim related information is visible to the end user. -->
     <bool name="config_show_sim_info">true</bool>

@@ -27,15 +27,12 @@ import android.view.Display;
 
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-@RunWith(AndroidJUnit4.class)
 public class ScreenResolutionFragmentTest {
 
     private Context mContext;
@@ -56,6 +53,7 @@ public class ScreenResolutionFragmentTest {
     public void getDefaultKey_FHD() {
         Display.Mode mode = new Display.Mode(0, FHD_WIDTH, 0, 0);
         doReturn(mode).when(mFragment).getDisplayMode();
+        doReturn(mContext).when(mFragment).getContext();
 
         mFragment.onAttach(mContext);
         assertThat(mFragment.getDefaultKey()).isEqualTo(mFragment.getKeyForResolution(FHD_WIDTH));
@@ -66,6 +64,7 @@ public class ScreenResolutionFragmentTest {
     public void getDefaultKey_QHD() {
         Display.Mode mode = new Display.Mode(0, QHD_WIDTH, 0, 0);
         doReturn(mode).when(mFragment).getDisplayMode();
+        doReturn(mContext).when(mFragment).getContext();
 
         mFragment.onAttach(mContext);
         assertThat(mFragment.getDefaultKey()).isEqualTo(mFragment.getKeyForResolution(QHD_WIDTH));
@@ -74,6 +73,7 @@ public class ScreenResolutionFragmentTest {
     @Test
     @UiThreadTest
     public void setDefaultKey_FHD() {
+        doReturn(mContext).when(mFragment).getContext();
         mFragment.onAttach(mContext);
 
         mFragment.setDefaultKey(mFragment.getKeyForResolution(FHD_WIDTH));
@@ -84,6 +84,7 @@ public class ScreenResolutionFragmentTest {
     @Test
     @UiThreadTest
     public void setDefaultKey_QHD() {
+        doReturn(mContext).when(mFragment).getContext();
         mFragment.onAttach(mContext);
 
         mFragment.setDefaultKey(mFragment.getKeyForResolution(QHD_WIDTH));
@@ -94,6 +95,7 @@ public class ScreenResolutionFragmentTest {
     @Test
     @UiThreadTest
     public void bindPreferenceExtra_setSummary() {
+        doReturn(mContext).when(mFragment).getContext();
         mFragment.onAttach(mContext);
         SelectorWithWidgetPreference preference = new SelectorWithWidgetPreference(mContext);
         ScreenResolutionFragment.ScreenResolutionCandidateInfo candidates =

@@ -47,7 +47,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.Settings;
 import com.android.settings.biometrics.face.FaceEnrollIntroductionInternal;
-import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroductionInternal;
 import com.android.settings.biometrics.fingerprint.FingerprintSettings;
 import com.android.settings.testutils.ResourcesUtils;
 
@@ -186,7 +185,7 @@ public class BiometricsSafetySourceTest {
         assertSafetySourceEnabledDataSetWithSingularSummary(
                 "security_settings_fingerprint_preference_title",
                 "security_settings_fingerprint_preference_summary_none",
-                FingerprintEnrollIntroductionInternal.class.getName());
+                FingerprintSettings.class.getName());
     }
 
     @Test
