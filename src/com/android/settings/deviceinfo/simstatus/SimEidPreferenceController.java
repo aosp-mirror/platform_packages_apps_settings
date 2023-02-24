@@ -162,7 +162,7 @@ public class SimEidPreferenceController extends BasePreferenceController
         mShowEidOnSummary = true;
 
         dialogShwon.setOnDismissListener(dlg -> {
-            mPreference.setSummary(getSummary());
+            mPreference.setSummary(PhoneNumberUtil.expandByTts(getSummary()));
         });
     }
 

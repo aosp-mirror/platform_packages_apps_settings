@@ -166,10 +166,11 @@
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Establece tus preferencias de unidades y números"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Permite que las apps sepan tus preferencias regionales para que puedan personalizar la experiencia."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Las apps usarán tus preferencias regionales cuando sea posible."</string>
-    <string name="temperature_preferences_title" msgid="9067783912861473593">"Unidades de temperatura"</string>
+    <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperatura"</string>
     <string name="calendar_preferences_title" msgid="8312485828206542600">"Calendario"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Primer día de la semana"</string>
-    <string name="numbers_preferences_title" msgid="6094837605398562369">"Numbers"</string>
+    <!-- no translation found for numbers_preferences_title (8197418984391195446) -->
+    <skip />
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Usar la configuración predeterminada de la app"</string>
     <string name="celsius_temperature_unit" msgid="6118523647432383132">"Celsius (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Fahrenheit (°F)"</string>
@@ -621,7 +622,10 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Desconectar"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Vincular y conectar"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Cuando Bluetooth está activado, permite conectarse con dispositivos cercanos que tengan Bluetooth."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Cuando Bluetooth está activado, tu dispositivo puede usarlo para comunicarse con otros dispositivos Bluetooth cercanos.\n\nA fin de mejorar la experiencia, las apps y los servicios pueden buscar dispositivos cercanos incluso cuando la conexión Bluetooth esté desactivada. Esta función puede usarse, por ejemplo, para mejorar las funciones y los servicios basados en la ubicación. Puedes cambiar esta opción en la "<annotation id="link">"configuración de búsqueda de Bluetooth"</annotation>"."</string>
+    <!-- no translation found for bluetooth_scanning_on_info_message (786648535600075223) -->
+    <skip />
+    <!-- no translation found for bluetooth_scan_change (1744636222637390367) -->
+    <skip />
     <string name="device_details_title" msgid="1155622417516195481">"Detalles del dispositivo"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Configuración del teclado"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Dirección Bluetooth del dispositivo: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -1391,6 +1395,20 @@
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Verificar patrón"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Verificar PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Verificar contraseña"</string>
+    <!-- no translation found for lockpassword_remote_validation_header (4992647285784962073) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (7738124461482712491) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (8924028697135308390) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (8478926171431523279) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (7595104317648465901) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (509672303005547218) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (2066701840753591922) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"PIN incorrecto"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Contraseña incorrecta"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Patrón incorrecto"</string>
@@ -1715,18 +1733,12 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Apps descargadas"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Marcas de función"</string>
-    <!-- no translation found for snoop_logger_filters_dashboard_title (3082744626059215281) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (626757789702677076) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (5508775381082875785) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_map_title (5700678748422653316) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_summary (6235819710248503870) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (272884193300382035) -->
-    <skip />
+    <string name="snoop_logger_filters_dashboard_title" msgid="3082744626059215281">"Filtros de registro de búsqueda"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="626757789702677076">"Configura filtros (activa Bluetooth después)"</string>
+    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="5508775381082875785">"Filtro de registro de búsqueda PBAP"</string>
+    <string name="bt_hci_snoop_log_filter_map_title" msgid="5700678748422653316">"Filtro de registro de búsqueda MAP"</string>
+    <string name="bt_hci_snoop_log_filter_summary" msgid="6235819710248503870">"Modo filtro. (Activa/desactiva el Bluetooth luego)"</string>
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="272884193300382035">"Activa registro de búsqueda filtrado para cambiar."</string>
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Lector de pantalla, principalmente, para personas con ceguera o visión reducida"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Presiona los elementos en tu pantalla para escuchar la lectura en voz alta"</string>
@@ -1739,10 +1751,8 @@
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"La lupa sigue el texto a medida que escribes"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3738009998799304549">"Siempre encendida"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="8946516092699010033">"En lugar de desactivar la ampliación al cambiar de apps, simplemente se aleja al tamaño normal. Pellizca para volver a acercar cuando quieras."</string>
-    <!-- no translation found for accessibility_screen_magnification_joystick_title (1803769708582404964) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_joystick_summary (4640300148573982720) -->
-    <skip />
+    <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Joystick"</string>
+    <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Activa y mueve la lupa con un joystick en pantalla. Mantén presionado y, luego, arrastra el joystick para controlar la lupa. Presiona y arrastra para mover el joystick."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Acerca de la ampliación"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Más información sobre la ampliación"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Tipo de ampliación"</string>
@@ -1949,8 +1959,7 @@
     <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, izquierdo y derecho"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"Más de 1 <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Vincular nuevo disp."</string>
-    <!-- no translation found for accessibility_hearing_device_connected_title (3785140037249487287) -->
-    <skip />
+    <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Disp. auditivos"</string>
     <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Disp. guardados"</string>
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Controles del dispositivo auditivo"</string>
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Acc. directo de disp. auditivos"</string>
@@ -1958,8 +1967,7 @@
     <string name="accessibility_hac_mode_summary" msgid="5164793702798871478">"Mejora el audio de algunos dispositivos auditivos"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="4636110586636490256">"Asegúrate de que los dispositivos auditivos estén encendidos y en el modo de vinculación"</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Vincular dispos. auditivo"</string>
-    <!-- no translation found for accessibility_found_hearing_devices (637407580358386553) -->
-    <skip />
+    <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Disp. auditivos disponibles"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"¿No ves tu dispositivo auditivo?"</string>
     <string name="accessibility_list_all_devices_title" msgid="3555097127022458571">"Ver todos los dispositivos Bluetooth"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Ajuste de audio"</string>
@@ -2899,13 +2907,15 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Volumen de tono y notificaciones"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Volumen de tono"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Volumen de notificación"</string>
+    <!-- no translation found for notification_volume_disabled_summary (8679988555852056079) -->
+    <skip />
     <string name="ringtone_title" msgid="3271453110387368088">"Tono de llamada"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Sonido de notificación predeterminado"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Sonido que proporcionó la app"</string>
     <string name="notification_sound_default" msgid="8630353701915294299">"Sonido de notificaciones predeterminado"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Sonido de alarma predeterminado"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Primero vibrar, luego sonar gradualmente"</string>
-    <string name="spatial_audio_title" msgid="6591051622375191603">"Sonido espacial"</string>
+    <string name="spatial_audio_title" msgid="6591051622375191603">"Audio espacial"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Tonos del teclado"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Sonido de bloqueo de pantalla"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Vibración y sonidos de carga"</string>
@@ -3449,10 +3459,8 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Desactivadas"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Avanzado"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Administrador de permisos"</string>
-    <!-- no translation found for app_data_sharing_updates_title (1694297952320402788) -->
-    <skip />
-    <!-- no translation found for app_data_sharing_updates_summary (4465929918457739443) -->
-    <skip />
+    <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Actualizaciones del uso compartido de los datos de ubicación"</string>
+    <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Revisa las apps que cambiaron la forma en que comparten tus datos de ubicación"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Presionar para activar"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Presiona dos veces en cualquier lugar de la pantalla para activar el dispositivo."</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Abrir vínculos"</string>
@@ -4272,28 +4280,17 @@
     <string name="content_capture" msgid="868372905432812238">"Contenido de la app"</string>
     <string name="content_capture_summary" msgid="49720773699715531">"Permite que las apps envíen contenido al sistema Android"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"Capturar volcado de pila del sistema"</string>
-    <!-- no translation found for development_memtag_page_title (3546667618748029188) -->
-    <skip />
-    <!-- no translation found for development_memtag_intro (8032596625527637164) -->
-    <skip />
-    <!-- no translation found for development_memtag_footer (5681925148773626562) -->
-    <skip />
-    <!-- no translation found for development_memtag_learn_more (8961984806973926704) -->
-    <skip />
-    <!-- no translation found for development_memtag_toggle (2474420239518386894) -->
-    <skip />
-    <!-- no translation found for development_memtag_reboot_message_on (8100075676107327847) -->
-    <skip />
-    <!-- no translation found for development_memtag_reboot_message_off (3703925647922079456) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_title (2320125810211279) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_message (1232881567956207641) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_summary (3896537791216432882) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_already_enabled (4439168867613407167) -->
-    <skip />
+    <string name="development_memtag_page_title" msgid="3546667618748029188">"Extensión de etiquetado de mem."</string>
+    <string name="development_memtag_intro" msgid="8032596625527637164">"La extensión de etiquetado de memoria (MTE) facilita la detección de problemas de seguridad de memoria en tu aplicación y hace que su código nativo sea más seguro."</string>
+    <string name="development_memtag_footer" msgid="5681925148773626562">"Activar MTE puede reducir el rendimiento del dispositivo."</string>
+    <string name="development_memtag_learn_more" msgid="8961984806973926704">"Más información sobre MTE"</string>
+    <string name="development_memtag_toggle" msgid="2474420239518386894">"Habilita la MTE hasta que la desactives"</string>
+    <string name="development_memtag_reboot_message_on" msgid="8100075676107327847">"Tendrás que reiniciar el dispositivo para activar la MTE."</string>
+    <string name="development_memtag_reboot_message_off" msgid="3703925647922079456">"Tendrás que reiniciar el dispositivo para desactivar la MTE."</string>
+    <string name="reboot_with_mte_title" msgid="2320125810211279">"Habilitar la MTE para una única sesión"</string>
+    <string name="reboot_with_mte_message" msgid="1232881567956207641">"Se reiniciará el sistema y se permitirán los experimentos con la extensión de etiquetado de memoria (MTE). Es posible que esto afecte negativamente el rendimiento y la estabilidad. Se restablecerá en el reinicio subsiguiente."</string>
+    <string name="reboot_with_mte_summary" msgid="3896537791216432882">"Reiniciar para una única sesión con MTE habilitada"</string>
+    <string name="reboot_with_mte_already_enabled" msgid="4439168867613407167">"La MTE ya está habilitada"</string>
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"Capturando volcado del montón del sistema"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"No se pudo capturar el volcado de pila del sistema"</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"Capturar automáticamente volcados de pila del sistema"</string>
@@ -4549,7 +4546,7 @@
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Se debe reiniciar para forzar el modo de computadora en las pantallas secundarias."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Reiniciar ahora"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Reiniciar más adelante"</string>
-    <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Sonido espacial"</string>
+    <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Audio espacial"</string>
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"El audio de contenido multimedia compatible se hace más envolvente"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Seguimiento de cabeza"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"El audio cambia a medida que mueves la cabeza para sonar más natural"</string>
@@ -4583,56 +4580,30 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Apps instaladas en el último # mes}other{Apps instaladas en los últimos # meses}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Apps instaladas hace más de # mes}other{Apps instaladas hace más de # meses}}"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensor de huellas dactilares"</string>
-    <!-- no translation found for flash_notifications_title (4490438861180492311) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_off (6056282996770691461) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_on_camera (455038312752009971) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_on_screen (7321838939240499267) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_on_camera_and_screen (6515622987118268649) -->
-    <skip />
-    <!-- no translation found for flash_notifications_intro (1506414740603805778) -->
-    <skip />
-    <!-- no translation found for flash_notifications_note (7258551860911169239) -->
-    <skip />
-    <!-- no translation found for flash_notifications_preview (5320176885050440874) -->
-    <skip />
-    <!-- no translation found for camera_flash_notification_title (1605639711485773787) -->
-    <skip />
-    <!-- no translation found for screen_flash_notification_title (8008197872050400734) -->
-    <skip />
-    <!-- no translation found for screen_flash_notification_color_title (7213407653340970790) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_blue (3585766657607931371) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_azure (8691198532944992243) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_cyan (6878780006173747267) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_spring_green (4466548514738457815) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_green (8418019648507964564) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_chartreuse_green (7456381649919010366) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_yellow (7413465411615454556) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_orange (979177126315557656) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_red (8954162219886445491) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_rose (1216848195972231251) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_magenta (7726221666557102155) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_violet (1279950780509029495) -->
-    <skip />
-    <!-- no translation found for color_selector_dialog_done (121253968943363376) -->
-    <skip />
-    <!-- no translation found for color_selector_dialog_cancel (8667350644753900701) -->
-    <skip />
-    <!-- no translation found for dock_multi_instances_not_supported_text (3513493664467667084) -->
-    <skip />
+    <string name="flash_notifications_title" msgid="4490438861180492311">"Notificaciones con flash"</string>
+    <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Desactivado"</string>
+    <string name="flash_notifications_summary_on_camera" msgid="455038312752009971">"Activado / flash de la cámara"</string>
+    <string name="flash_notifications_summary_on_screen" msgid="7321838939240499267">"Activado / flash de la pantalla"</string>
+    <string name="flash_notifications_summary_on_camera_and_screen" msgid="6515622987118268649">"Activado / flash de la cámara y pantalla"</string>
+    <string name="flash_notifications_intro" msgid="1506414740603805778">"Ilumina la luz de la cámara o de la pantalla cuando recibes notificaciones o cuando suena una alarma"</string>
+    <string name="flash_notifications_note" msgid="7258551860911169239">"Usa las notificaciones con flash con precaución si eres sensible a la luz"</string>
+    <string name="flash_notifications_preview" msgid="5320176885050440874">"Vista previa"</string>
+    <string name="camera_flash_notification_title" msgid="1605639711485773787">"Notificación con flash de la cámara"</string>
+    <string name="screen_flash_notification_title" msgid="8008197872050400734">"Notificación con flash de la pantalla"</string>
+    <string name="screen_flash_notification_color_title" msgid="7213407653340970790">"Color del flash de la pantalla"</string>
+    <string name="screen_flash_color_blue" msgid="3585766657607931371">"Azul"</string>
+    <string name="screen_flash_color_azure" msgid="8691198532944992243">"Azul celeste"</string>
+    <string name="screen_flash_color_cyan" msgid="6878780006173747267">"Cian"</string>
+    <string name="screen_flash_color_spring_green" msgid="4466548514738457815">"Verde primavera"</string>
+    <string name="screen_flash_color_green" msgid="8418019648507964564">"Verde"</string>
+    <string name="screen_flash_color_chartreuse_green" msgid="7456381649919010366">"Verde chartreuse"</string>
+    <string name="screen_flash_color_yellow" msgid="7413465411615454556">"Amarillo"</string>
+    <string name="screen_flash_color_orange" msgid="979177126315557656">"Naranja"</string>
+    <string name="screen_flash_color_red" msgid="8954162219886445491">"Rojo"</string>
+    <string name="screen_flash_color_rose" msgid="1216848195972231251">"Rosa"</string>
+    <string name="screen_flash_color_magenta" msgid="7726221666557102155">"Magenta"</string>
+    <string name="screen_flash_color_violet" msgid="1279950780509029495">"Violeta"</string>
+    <string name="color_selector_dialog_done" msgid="121253968943363376">"Listo"</string>
+    <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Cancelar"</string>
+    <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Esta app solo puede estar abierta en 1 ventana"</string>
 </resources>

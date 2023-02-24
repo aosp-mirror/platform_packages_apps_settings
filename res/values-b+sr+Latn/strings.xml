@@ -166,10 +166,11 @@
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Izaberite podešavanja jedinica i broja"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Omogućite aplikacijama da saznaju vaša regionalna podešavanja da bi mogle da personalizuju vaš doživljaj."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Aplikacije će koristiti regionalna podešavanja kada je to moguće."</string>
-    <string name="temperature_preferences_title" msgid="9067783912861473593">"Jedinice za temperaturu"</string>
+    <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperatura"</string>
     <string name="calendar_preferences_title" msgid="8312485828206542600">"Kalendar"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Prvi dan nedelje"</string>
-    <string name="numbers_preferences_title" msgid="6094837605398562369">"Brojevi"</string>
+    <!-- no translation found for numbers_preferences_title (8197418984391195446) -->
+    <skip />
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Koristi podrazumevanu aplikaciju"</string>
     <string name="celsius_temperature_unit" msgid="6118523647432383132">"Celzijus (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Farenhajt (°F)"</string>
@@ -621,7 +622,10 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Prekini vezu"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Upari i poveži"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Kada je Bluetooth uključen, uređaj može da komunicira sa drugim Bluetooth uređajima u blizini."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Kada je Bluetooth uključen, uređaj može da komunicira sa drugim Bluetooth uređajima u blizini.\n\nRadi boljeg doživljaja uređaja, aplikacije i usluge i dalje mogu da traže uređaje u blizini u bilo kom trenutku, čak i kada je Bluetooth isključen. Ovo može da se koristi, na primer, za poboljšanje funkcija i usluga zasnovanih na lokaciji. To možete da promenite u "<annotation id="link">"podešavanjima Bluetooth skeniranja"</annotation>"."</string>
+    <!-- no translation found for bluetooth_scanning_on_info_message (786648535600075223) -->
+    <skip />
+    <!-- no translation found for bluetooth_scan_change (1744636222637390367) -->
+    <skip />
     <string name="device_details_title" msgid="1155622417516195481">"Detalji o uređaju"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Podešavanja tastature"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Bluetooth adresa uređaja: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -1391,6 +1395,20 @@
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Verifikujte šablon"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Verifikujte PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Verifikujte lozinku"</string>
+    <!-- no translation found for lockpassword_remote_validation_header (4992647285784962073) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (7738124461482712491) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (8924028697135308390) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (8478926171431523279) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (7595104317648465901) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (509672303005547218) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (2066701840753591922) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"Pogrešan PIN"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Pogrešna lozinka"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Pogrešan šablon"</string>
@@ -1715,18 +1733,12 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Preuzete aplikacije"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Eksperimentalno"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Oznake funkcija"</string>
-    <!-- no translation found for snoop_logger_filters_dashboard_title (3082744626059215281) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (626757789702677076) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (5508775381082875785) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_map_title (5700678748422653316) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_summary (6235819710248503870) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (272884193300382035) -->
-    <skip />
+    <string name="snoop_logger_filters_dashboard_title" msgid="3082744626059215281">"Filteri alatke Snoop Logger"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="626757789702677076">"Podesite filtere (sa/bez Bluetooth-a po menjanju podešavanja)"</string>
+    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="5508775381082875785">"PBAP filtera alatke Snoop Logger"</string>
+    <string name="bt_hci_snoop_log_filter_map_title" msgid="5700678748422653316">"MAP filtera alatke Snoop Logger"</string>
+    <string name="bt_hci_snoop_log_filter_summary" msgid="6235819710248503870">"Podesite režim filtera. (Sa/bez Bluetooth-a po menjanju podešavanja)"</string>
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="272884193300382035">"Filter režima alatke Snoop Logger za menjanje opcije."</string>
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Čitač ekrana prvenstveno namenjen slepim i slabovidim osobama"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Dodirnite stavke na ekranu da biste ih čuli"</string>
@@ -1739,10 +1751,8 @@
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Lupa automatski prati tekst dok ga unosite"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3738009998799304549">"Uvek uključeno"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="8946516092699010033">"Umesto deaktiviranja uvećanja pri promeni aplikacija samo se umanjuje na normalnu veličinu. Uštinite da biste ponovo zumirali kada god želite."</string>
-    <!-- no translation found for accessibility_screen_magnification_joystick_title (1803769708582404964) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_joystick_summary (4640300148573982720) -->
-    <skip />
+    <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Džojstik"</string>
+    <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Aktivirajte i premestite lupu pomoću džojstika na ekranu. Dodirnite i zadržite, pa prevlačite po džojstiku da biste kontrolisali lupu. Dodirnite i prevucite da biste pomerili i sam džojstik."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"O uvećanju"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Saznajte više o uvećanju"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Tip uvećanja"</string>
@@ -2897,6 +2907,8 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Jačina zvuka za zvono i obaveštenja"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Jačina zvuka zvona"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Jačina zvuka za obaveštenja"</string>
+    <!-- no translation found for notification_volume_disabled_summary (8679988555852056079) -->
+    <skip />
     <string name="ringtone_title" msgid="3271453110387368088">"Zvuk zvona telefona"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Podrazumevani zvuk obaveštenja"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Zvuk aplikacije"</string>
@@ -3447,10 +3459,8 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Isključeno"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Napredno"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Menadžer dozvola"</string>
-    <!-- no translation found for app_data_sharing_updates_title (1694297952320402788) -->
-    <skip />
-    <!-- no translation found for app_data_sharing_updates_summary (4465929918457739443) -->
-    <skip />
+    <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Ažuriranja deljenja podataka za lokaciju"</string>
+    <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Pregledajte aplikacije koje su promenile način na koji mogu da dele podatke o lokaciji"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Dodirnite za buđenje"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Dvaput dodirnite bilo koji deo ekrana da biste probudili uređaj"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Otvaranje linkova"</string>
@@ -4271,28 +4281,17 @@
     <string name="content_capture" msgid="868372905432812238">"Sadržaj aplikacije"</string>
     <string name="content_capture_summary" msgid="49720773699715531">"Dozvolite aplikacijama da šalju sadržaj Android sistemu"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"Snimi dinamički deo memorije sistema"</string>
-    <!-- no translation found for development_memtag_page_title (3546667618748029188) -->
-    <skip />
-    <!-- no translation found for development_memtag_intro (8032596625527637164) -->
-    <skip />
-    <!-- no translation found for development_memtag_footer (5681925148773626562) -->
-    <skip />
-    <!-- no translation found for development_memtag_learn_more (8961984806973926704) -->
-    <skip />
-    <!-- no translation found for development_memtag_toggle (2474420239518386894) -->
-    <skip />
-    <!-- no translation found for development_memtag_reboot_message_on (8100075676107327847) -->
-    <skip />
-    <!-- no translation found for development_memtag_reboot_message_off (3703925647922079456) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_title (2320125810211279) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_message (1232881567956207641) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_summary (3896537791216432882) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_already_enabled (4439168867613407167) -->
-    <skip />
+    <string name="development_memtag_page_title" msgid="3546667618748029188">"Dodatak za označavanje memorije"</string>
+    <string name="development_memtag_intro" msgid="8032596625527637164">"Dodatak za označavanje memorije (MTE) olakšava da pronađete bezbednosne probleme memorije u aplikaciji i osigurate matični kôd."</string>
+    <string name="development_memtag_footer" msgid="5681925148773626562">"Uključivanje MTE-a može da uspori performanse uređaja."</string>
+    <string name="development_memtag_learn_more" msgid="8961984806973926704">"Saznajte više o MTE-u"</string>
+    <string name="development_memtag_toggle" msgid="2474420239518386894">"Omogućite MTE dok ga ne isključite"</string>
+    <string name="development_memtag_reboot_message_on" msgid="8100075676107327847">"Morate da restartujete uređaj da biste uključili MTE."</string>
+    <string name="development_memtag_reboot_message_off" msgid="3703925647922079456">"Morate da restartujete uređaj da biste isključili MTE."</string>
+    <string name="reboot_with_mte_title" msgid="2320125810211279">"Omogući MTE za jednu sesiju"</string>
+    <string name="reboot_with_mte_message" msgid="1232881567956207641">"Sistem će se restartovati i omogućiti eksperimentisanje sa Dodatkom za označavanje memorije (MTE). MTE može negativno da utiče na performanse i stabilnost sistema. Resetovanje će se obaviti pri sledećem restartovanju."</string>
+    <string name="reboot_with_mte_summary" msgid="3896537791216432882">"Restartujte za jednu sesiju sa omogućenim MTE-om"</string>
+    <string name="reboot_with_mte_already_enabled" msgid="4439168867613407167">"MTE je već omogućen"</string>
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"Snimanje dinamičkog dela memorije sistema"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"Snimanje dinamičkog dela memorije sistema nije uspelo"</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"Automatski snimaj dinamički deo memorije sistema"</string>
@@ -4608,6 +4607,5 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Ljubičasta"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Gotovo"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Otkaži"</string>
-    <!-- no translation found for dock_multi_instances_not_supported_text (3513493664467667084) -->
-    <skip />
+    <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Ova aplikacija može da se otvori samo u jednom prozoru"</string>
 </resources>

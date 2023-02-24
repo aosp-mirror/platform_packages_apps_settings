@@ -166,10 +166,11 @@
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Aseta yksikkö- ja numeroasetukset"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Ilmoita alueellisista asetuksista sovelluksille, jotta ne voivat personoida kokemuksesi."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Sovellukset käyttävät alueellisia asetuksia, mikäli mahdollista."</string>
-    <string name="temperature_preferences_title" msgid="9067783912861473593">"Lämpötilayksiköt"</string>
+    <string name="temperature_preferences_title" msgid="5009881556503629058">"Lämpötila"</string>
     <string name="calendar_preferences_title" msgid="8312485828206542600">"Kalenteri"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Viikon ensimmäinen päivä"</string>
-    <string name="numbers_preferences_title" msgid="6094837605398562369">"Numerot"</string>
+    <!-- no translation found for numbers_preferences_title (8197418984391195446) -->
+    <skip />
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Käytä sovelluksen oletusvaihtoehtoa"</string>
     <string name="celsius_temperature_unit" msgid="6118523647432383132">"Celsius (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Fahrenheit (°F)"</string>
@@ -621,7 +622,10 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Katkaise yhteys"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Muodosta laitepari ja yhdistä"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Kun Bluetooth on käytössä, laite voi viestiä lähiympäristön Bluetooth-laitteiden kanssa."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Kun Bluetooth on käytössä, laitteesi voi kommunikoida muiden lähellä olevien Bluetooth-laitteiden kanssa.\n\nKun Bluetooth on poissa käytöstä, sovellukset ja palvelut voivat silti hakea lähellä olevia laitteita käyttökokemuksen parantamiseksi. Näin voidaan esimerkiksi kehittää sijaintiin perustuvia ominaisuuksia ja palveluita. Voit muuttaa tätä "<annotation id="link">"Bluetooth-haun asetuksissa"</annotation>"."</string>
+    <!-- no translation found for bluetooth_scanning_on_info_message (786648535600075223) -->
+    <skip />
+    <!-- no translation found for bluetooth_scan_change (1744636222637390367) -->
+    <skip />
     <string name="device_details_title" msgid="1155622417516195481">"Laitteen tiedot"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Näppäimistön asetukset"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Laitteen Bluetooth-osoite: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -1391,6 +1395,20 @@
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Vahvista kuvio"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Vahvista PIN-koodi"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Vahvista salasana"</string>
+    <!-- no translation found for lockpassword_remote_validation_header (4992647285784962073) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (7738124461482712491) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_pin_details (8924028697135308390) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_password_details (8478926171431523279) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (7595104317648465901) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (509672303005547218) -->
+    <skip />
+    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (2066701840753591922) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"Väärä PIN-koodi"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Väärä salasana"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Väärä kuvio"</string>
@@ -1715,18 +1733,12 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Ladatut sovellukset"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Kokeellinen"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Ominaisuusilmoitukset"</string>
-    <!-- no translation found for snoop_logger_filters_dashboard_title (3082744626059215281) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (626757789702677076) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (5508775381082875785) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_map_title (5700678748422653316) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_summary (6235819710248503870) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (272884193300382035) -->
-    <skip />
+    <string name="snoop_logger_filters_dashboard_title" msgid="3082744626059215281">"Snoop Logger ‑suodattimet"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="626757789702677076">"Aseta suodattimia (sitten Bluetooth päälle/pois)"</string>
+    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="5508775381082875785">"Snoop Logger ‑suodatuksen PBAP"</string>
+    <string name="bt_hci_snoop_log_filter_map_title" msgid="5700678748422653316">"Snoop Logger ‑suodatuksen MAP"</string>
+    <string name="bt_hci_snoop_log_filter_summary" msgid="6235819710248503870">"Aseta suodatus (sitten Bluetooth päälle/pois)"</string>
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="272884193300382035">"Muuta valintaa valitsemalla Snoop Log ‑suodatus"</string>
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Näytönlukuohjelma ensisijaisesti näkövammaisille ja heikkonäköisille"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Napauta kohteita näytöllä, niin ne luetaan ääneen"</string>
@@ -1739,10 +1751,8 @@
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Suurennuslasi seuraa kohtaan, johon kirjoitat tekstiä"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3738009998799304549">"Aina päällä"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="8946516092699010033">"Kun vaihdat sovellusta, suurennus ei mene pois päältä vaan loitontaa tavalliseen kokoon. Voit lähentää koska tahansa uudelleen nipistämällä."</string>
-    <!-- no translation found for accessibility_screen_magnification_joystick_title (1803769708582404964) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_joystick_summary (4640300148573982720) -->
-    <skip />
+    <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Ohjainsauva"</string>
+    <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Aktivoi suurennuslasi ja siirrä sitä näytöllä näkyvällä ohjainsauvalla. Kosketa pitkään ja vedä sitten ohjainsauvaa, niin voit muokata suurennuslasia. Siirrä ohjainsauvaa napauttamalla ja vetämällä."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Tietoja suurennuksesta"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Lue lisää suurennuksesta"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Suurennustapa"</string>
@@ -1949,8 +1959,7 @@
     <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, vasen ja oikea"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ja 1 muu"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Uusi laitepari"</string>
-    <!-- no translation found for accessibility_hearing_device_connected_title (3785140037249487287) -->
-    <skip />
+    <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Kuulolaitteet"</string>
     <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Tallennetut laitteet"</string>
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Kuulolaitteen ohjaimet"</string>
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Kuulolaitteen pikakomento"</string>
@@ -1958,8 +1967,7 @@
     <string name="accessibility_hac_mode_summary" msgid="5164793702798871478">"Kehitä joidenkin kuulolaitteiden audiota"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="4636110586636490256">"Varmista, että kuulolaitteet ovat päällä ja parinmuodostustilassa"</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Laiteparin muodostaminen"</string>
-    <!-- no translation found for accessibility_found_hearing_devices (637407580358386553) -->
-    <skip />
+    <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Käytettävät kuulolaitteet"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Etkö näe kuulolaitettasi?"</string>
     <string name="accessibility_list_all_devices_title" msgid="3555097127022458571">"Katso kaikki Bluetooth-laitteet"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Audion säätö"</string>
@@ -2899,6 +2907,8 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Soittoäänen/ilmoitusten voimakkuus"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Soittoäänen voimakkuus"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Ilmoituksen äänenvoimakkuus"</string>
+    <!-- no translation found for notification_volume_disabled_summary (8679988555852056079) -->
+    <skip />
     <string name="ringtone_title" msgid="3271453110387368088">"Puhelimen soittoääni"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Ilmoituksen oletusääni"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Sovelluksen oletusääni"</string>
@@ -3449,10 +3459,8 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Poistettu käytöstä"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Lisäasetukset"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Lupien ylläpito"</string>
-    <!-- no translation found for app_data_sharing_updates_title (1694297952320402788) -->
-    <skip />
-    <!-- no translation found for app_data_sharing_updates_summary (4465929918457739443) -->
-    <skip />
+    <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Sijainnin datan jakamisen päivitykset"</string>
+    <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Tarkista sovellukset, jotka ovat muuttaneet tapaa, jolla ne voivat jakaa sijaintitietoja"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Herätä napauttamalla"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Herätä laite napauttamalla näyttöä kahdesti."</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Linkkien avautuminen"</string>
@@ -4272,28 +4280,17 @@
     <string name="content_capture" msgid="868372905432812238">"Sovelluksen sisältö"</string>
     <string name="content_capture_summary" msgid="49720773699715531">"Salli sovellusten lähettää sisältöä Android-järjestelmään"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"Tallenna järjestelmän keon vedos"</string>
-    <!-- no translation found for development_memtag_page_title (3546667618748029188) -->
-    <skip />
-    <!-- no translation found for development_memtag_intro (8032596625527637164) -->
-    <skip />
-    <!-- no translation found for development_memtag_footer (5681925148773626562) -->
-    <skip />
-    <!-- no translation found for development_memtag_learn_more (8961984806973926704) -->
-    <skip />
-    <!-- no translation found for development_memtag_toggle (2474420239518386894) -->
-    <skip />
-    <!-- no translation found for development_memtag_reboot_message_on (8100075676107327847) -->
-    <skip />
-    <!-- no translation found for development_memtag_reboot_message_off (3703925647922079456) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_title (2320125810211279) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_message (1232881567956207641) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_summary (3896537791216432882) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_already_enabled (4439168867613407167) -->
-    <skip />
+    <string name="development_memtag_page_title" msgid="3546667618748029188">"Memory Tagging Extension"</string>
+    <string name="development_memtag_intro" msgid="8032596625527637164">"Memory Tagging Extension (MTE) helpottaa sovelluksesi muistin turvallisuusongelmien löytämistä ja tekee sen natiivista koodista suojatumman."</string>
+    <string name="development_memtag_footer" msgid="5681925148773626562">"MTE:n laittaminen päälle saattaa hidastaa laitetta."</string>
+    <string name="development_memtag_learn_more" msgid="8961984806973926704">"Lue lisää MTE:stä"</string>
+    <string name="development_memtag_toggle" msgid="2474420239518386894">"Ota MTE käyttöön, kunnes laitat sen pois päältä"</string>
+    <string name="development_memtag_reboot_message_on" msgid="8100075676107327847">"Laite täytyy käynnistää uudelleen, jotta voit laittaa MTE:n päälle."</string>
+    <string name="development_memtag_reboot_message_off" msgid="3703925647922079456">"Laite täytyy käynnistää uudelleen, jotta voit laittaa MTE:n pois päältä."</string>
+    <string name="reboot_with_mte_title" msgid="2320125810211279">"Ota MTE käyttöön yhdellä käyttökerralla"</string>
+    <string name="reboot_with_mte_message" msgid="1232881567956207641">"Järjestelmä käynnistyy uudelleen ja sallii Memory Tagging Extensionilla (MTE) kokeilun. MTE saattaa vaikuttaa negatiivisesti järjestelmän suorituskykyyn ja vakauteen. Nollautuu seuraavassa uudelleenkäynnistyksessä."</string>
+    <string name="reboot_with_mte_summary" msgid="3896537791216432882">"Käynnistä uudelleen yksi käyttökerta MTE:n kanssa"</string>
+    <string name="reboot_with_mte_already_enabled" msgid="4439168867613407167">"MTE on jo käytössä"</string>
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"Tallennetaan järjestelmän keon vedosta"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"Keon vedoksen tallennus epäonnistui"</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"Tallenna järjestelmän keon vedokset automaattisesti"</string>
@@ -4583,56 +4580,30 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Viimeisen # kuukauden aikana asennetut sovellukset}other{Viimeisten # kuukauden aikana asennetut sovellukset}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Yli # kuukausi sitten asennetut sovellukset}other{Yli # kuukautta sitten asennetut sovellukset}}"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sormenjälkitunnistin"</string>
-    <!-- no translation found for flash_notifications_title (4490438861180492311) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_off (6056282996770691461) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_on_camera (455038312752009971) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_on_screen (7321838939240499267) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_on_camera_and_screen (6515622987118268649) -->
-    <skip />
-    <!-- no translation found for flash_notifications_intro (1506414740603805778) -->
-    <skip />
-    <!-- no translation found for flash_notifications_note (7258551860911169239) -->
-    <skip />
-    <!-- no translation found for flash_notifications_preview (5320176885050440874) -->
-    <skip />
-    <!-- no translation found for camera_flash_notification_title (1605639711485773787) -->
-    <skip />
-    <!-- no translation found for screen_flash_notification_title (8008197872050400734) -->
-    <skip />
-    <!-- no translation found for screen_flash_notification_color_title (7213407653340970790) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_blue (3585766657607931371) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_azure (8691198532944992243) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_cyan (6878780006173747267) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_spring_green (4466548514738457815) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_green (8418019648507964564) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_chartreuse_green (7456381649919010366) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_yellow (7413465411615454556) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_orange (979177126315557656) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_red (8954162219886445491) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_rose (1216848195972231251) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_magenta (7726221666557102155) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_violet (1279950780509029495) -->
-    <skip />
-    <!-- no translation found for color_selector_dialog_done (121253968943363376) -->
-    <skip />
-    <!-- no translation found for color_selector_dialog_cancel (8667350644753900701) -->
-    <skip />
-    <!-- no translation found for dock_multi_instances_not_supported_text (3513493664467667084) -->
-    <skip />
+    <string name="flash_notifications_title" msgid="4490438861180492311">"Valoilmoitukset"</string>
+    <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Pois päältä"</string>
+    <string name="flash_notifications_summary_on_camera" msgid="455038312752009971">"Päällä / kameran valoilmoitus"</string>
+    <string name="flash_notifications_summary_on_screen" msgid="7321838939240499267">"Päällä / näytön valoilmoitus"</string>
+    <string name="flash_notifications_summary_on_camera_and_screen" msgid="6515622987118268649">"Päällä / kameran ja näytön valoilmoitus"</string>
+    <string name="flash_notifications_intro" msgid="1506414740603805778">"Käytä kamerassa tai näytöllä välkkyvää valoa ilmoituksen tai ilmoitusäänen aikana."</string>
+    <string name="flash_notifications_note" msgid="7258551860911169239">"Käytä valoilmoituksia harkiten, jos olet herkkä valolle"</string>
+    <string name="flash_notifications_preview" msgid="5320176885050440874">"Esikatselu"</string>
+    <string name="camera_flash_notification_title" msgid="1605639711485773787">"Kameran valoilmoitus"</string>
+    <string name="screen_flash_notification_title" msgid="8008197872050400734">"Näytön valoilmoitus"</string>
+    <string name="screen_flash_notification_color_title" msgid="7213407653340970790">"Näytön valoilmoituksen väri"</string>
+    <string name="screen_flash_color_blue" msgid="3585766657607931371">"Sininen"</string>
+    <string name="screen_flash_color_azure" msgid="8691198532944992243">"Azure"</string>
+    <string name="screen_flash_color_cyan" msgid="6878780006173747267">"Syaani"</string>
+    <string name="screen_flash_color_spring_green" msgid="4466548514738457815">"Keväinen vihreä"</string>
+    <string name="screen_flash_color_green" msgid="8418019648507964564">"Vihreä"</string>
+    <string name="screen_flash_color_chartreuse_green" msgid="7456381649919010366">"Keltavihreä"</string>
+    <string name="screen_flash_color_yellow" msgid="7413465411615454556">"Keltainen"</string>
+    <string name="screen_flash_color_orange" msgid="979177126315557656">"Oranssi"</string>
+    <string name="screen_flash_color_red" msgid="8954162219886445491">"Punainen"</string>
+    <string name="screen_flash_color_rose" msgid="1216848195972231251">"Ruusu"</string>
+    <string name="screen_flash_color_magenta" msgid="7726221666557102155">"Magenta"</string>
+    <string name="screen_flash_color_violet" msgid="1279950780509029495">"Violetti"</string>
+    <string name="color_selector_dialog_done" msgid="121253968943363376">"Valmis"</string>
+    <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Peru"</string>
+    <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Tämän sovelluksen voi avata vain yhdessä ikkunassa"</string>
 </resources>

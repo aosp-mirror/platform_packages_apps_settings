@@ -22,6 +22,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
@@ -244,6 +245,24 @@ public class EnabledNetworkModePreferenceController extends
                 // TODO: Using the carrier config.
                 mDisplay3gOptions = getResourcesForSubId().getBoolean(
                         R.bool.config_display_network_mode_3g_option);
+
+                int[] carriersWithout3gMenu = getResourcesForSubId().getIntArray(
+                        R.array.network_mode_3g_deprecated_carrier_id);
+                if ((carriersWithout3gMenu != null) && (carriersWithout3gMenu.length > 0)) {
+                    SubscriptionManager sm = mContext.getSystemService(SubscriptionManager.class);
+                    SubscriptionInfo subInfo = sm.getActiveSubscriptionInfo(mSubId);
+                    if (subInfo != null) {
+                        int carrierId = subInfo.getCarrierId();
+
+                        for (int idx = 0; idx < carriersWithout3gMenu.length; idx++) {
+                            if (carrierId == carriersWithout3gMenu[idx]) {
+                                mDisplay3gOptions = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+
                 mLteEnabled = carrierConfig.getBoolean(CarrierConfigManager.KEY_LTE_ENABLED_BOOL);
             }
             Log.d(LOG_TAG, "PreferenceEntriesBuilder: subId" + mSubId
