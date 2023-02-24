@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
@@ -43,6 +44,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.HashMap;
@@ -51,15 +53,15 @@ import java.util.Map;
 
 /** Controller for battery usage breakdown preference group. */
 public class BatteryUsageBreakdownController extends BasePreferenceController
-        implements LifecycleObserver, OnDestroy  {
+        implements LifecycleObserver, OnResume, OnDestroy  {
     private static final String TAG = "BatteryUsageBreakdownController";
     private static final String ROOT_PREFERENCE_KEY = "battery_usage_breakdown";
     private static final String FOOTER_PREFERENCE_KEY = "battery_usage_footer";
     private static final String SPINNER_PREFERENCE_KEY = "battery_usage_spinner";
     private static final String APP_LIST_PREFERENCE_KEY = "app_list";
     private static final String PACKAGE_NAME_NONE = "none";
-    private static final int ENABLED_ICON_ALPHA = 255;
-    private static final int DISABLED_ICON_ALPHA = 255 / 3;
+
+    private static int sUiMode = Configuration.UI_MODE_NIGHT_UNDEFINED;
 
     private final SettingsActivity mActivity;
     private final InstrumentedPreferenceFragment mFragment;
@@ -95,6 +97,19 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
                 FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         if (lifecycle != null) {
             lifecycle.addObserver(this);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        final int currentUiMode =
+                mContext.getResources().getConfiguration().uiMode
+                        & Configuration.UI_MODE_NIGHT_MASK;
+        if (sUiMode != currentUiMode) {
+            sUiMode = currentUiMode;
+            BatteryDiffEntry.clearCache();
+            mPreferenceCache.clear();
+            Log.d(TAG, "clear icon and label cache since uiMode is changed");
         }
     }
 
@@ -268,12 +283,11 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
             pref.setSingleLineTitle(true);
             // Sets the BatteryDiffEntry to preference for launching detailed page.
             pref.setBatteryDiffEntry(entry);
-            pref.setEnabled(entry.validForRestriction());
+            pref.setSelectable(entry.validForRestriction());
             setPreferenceSummary(pref, entry);
             if (!isAdded) {
                 mAppListPreferenceGroup.addPreference(pref);
             }
-            appIcon.setAlpha(pref.isEnabled() ? ENABLED_ICON_ALPHA : DISABLED_ICON_ALPHA);
             prefIndex++;
         }
         Log.d(TAG, String.format("addAllPreferences() is finished in %d/ms",
