@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge.batteryusage;
 
 import android.content.Context;
+import android.os.BatteryConsumer;
 
 import androidx.annotation.NonNull;
 
@@ -151,11 +152,17 @@ public class BatteryDiffData {
             final PowerUsageFeatureProvider featureProvider,
             final List<BatteryDiffEntry> systemEntries) {
         final Set<Integer> othersSystemComponentSet = featureProvider.getOthersSystemComponentSet();
+        final Set<String> othersCustomComponentNameSet =
+                featureProvider.getOthersCustomComponentNameSet();
         BatteryDiffEntry.OthersBatteryDiffEntry othersDiffEntry = null;
         final Iterator<BatteryDiffEntry> systemListIterator = systemEntries.iterator();
         while (systemListIterator.hasNext()) {
             final BatteryDiffEntry batteryDiffEntry = systemListIterator.next();
-            if (othersSystemComponentSet.contains(batteryDiffEntry.mBatteryHistEntry.mDrainType)) {
+            final int componentId = batteryDiffEntry.mBatteryHistEntry.mDrainType;
+            if (othersSystemComponentSet.contains(componentId) || (
+                    componentId >= BatteryConsumer.FIRST_CUSTOM_POWER_COMPONENT_ID
+                            && othersCustomComponentNameSet.contains(
+                                    batteryDiffEntry.getAppLabel()))) {
                 if (othersDiffEntry == null) {
                     othersDiffEntry = new BatteryDiffEntry.OthersBatteryDiffEntry(context);
                 }
