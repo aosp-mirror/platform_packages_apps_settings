@@ -157,7 +157,7 @@ public final class BatteryUsageBreakdownControllerTest {
         assertThat(pref.getOrder()).isEqualTo(1);
         assertThat(pref.getBatteryDiffEntry()).isSameInstanceAs(mBatteryDiffEntry);
         assertThat(pref.isSingleLineTitle()).isTrue();
-        assertThat(pref.isEnabled()).isFalse();
+        assertThat(pref.isSelectable()).isFalse();
     }
 
     @Test
