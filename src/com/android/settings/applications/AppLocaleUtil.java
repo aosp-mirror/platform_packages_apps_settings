@@ -100,8 +100,8 @@ public class AppLocaleUtil {
      */
     public static boolean isAppLocaleSupported(Context context, String packageName) {
         LocaleList localeList = getPackageLocales(context, packageName);
-        if (localeList != null && localeList.size() > 0) {
-            return true;
+        if (localeList != null) {
+            return localeList.size() > 0;
         }
 
         if (FeatureFlagUtils.isEnabled(

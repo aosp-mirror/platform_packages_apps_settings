@@ -29,6 +29,7 @@ import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.bluetooth.BluetoothBroadcastDialog;
@@ -90,13 +91,16 @@ public class MediaVolumePreferenceController extends VolumeSeekBarPreferenceCont
         return R.drawable.ic_media_stream_off;
     }
 
-    private boolean isSupportEndItem() {
-        return getWorker() != null
-            && getWorker().getActiveLocalMediaController() != null
-            && isConnectedBLEDevice();
+    @VisibleForTesting
+    boolean isSupportEndItem() {
+        return isConnectedBLEDevice();
     }
 
     private boolean isConnectedBLEDevice() {
+        if (getWorker() == null) {
+            Log.d(TAG, "The Worker is null");
+            return false;
+        }
         mMediaDevice = getWorker().getCurrentConnectedMediaDevice();
         if (mMediaDevice != null) {
             return mMediaDevice.isBLEDevice();
@@ -133,6 +137,8 @@ public class MediaVolumePreferenceController extends VolumeSeekBarPreferenceCont
                     Utils.getApplicationLabel(mContext, getWorker().getPackageName()));
             intent.putExtra(BluetoothBroadcastDialog.KEY_DEVICE_ADDRESS,
                     bluetoothDevice.getAddress());
+            intent.putExtra(BluetoothBroadcastDialog.KEY_MEDIA_STREAMING, getWorker() != null
+                    && getWorker().getActiveLocalMediaController() != null);
 
             pi = PendingIntent.getActivity(context, 0 /* requestCode */, intent,
                     PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);

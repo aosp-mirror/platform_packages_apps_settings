@@ -201,6 +201,13 @@
     <!-- Fingerprint enrollment color -->
     <color name="fingerprint_enrollment_finish_color_outline">#1A73E8</color>
 
+    <!-- Side fingerprint sensor guided enrollment fill colors -->
+    <color name="sfps_enrollment_fp_captured_color">#d2e3fc</color> <!-- Blue 100 -->
+    <color name="sfps_enrollment_fp_error_color">#fad2cf</color> <!-- Red 100 -->
+    <color name="sfps_enrollment_progress_bar_bg_color">#E8EAED</color> <!-- Gray 200 -->
+    <color name="sfps_enrollment_progress_bar_fill_color">#1a73e8</color> <!-- Blue 600 -->
+    <color name="sfps_enrollment_progress_bar_error_color">#d93025</color> <!-- Red 600 -->
+
     <!-- Material inverse ripple color, useful for inverted backgrounds. -->
     <color name="ripple_material_inverse">@*android:color/ripple_material_dark</color>
 
@@ -209,4 +216,7 @@
 
     <!-- Background for multiple user settings page avatars -->
     <color name="user_avatar_color_bg">?androidprv:attr/colorSurface</color>
+
+    <!-- Icon tint color for battery usage system icon -->
+    <color name="battery_usage_system_icon_color">?android:attr/textColorPrimary</color>
 </resources>

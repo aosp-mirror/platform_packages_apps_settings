@@ -51,6 +51,12 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
  */
 public class BiometricUtils {
     private static final String TAG = "BiometricUtils";
+
+    /**
+     * Request was sent for starting another enrollment of a previously
+     * enrolled biometric of the same type.
+     */
+    public static int REQUEST_ADD_ANOTHER = 7;
     /**
      * Given the result from confirming or choosing a credential, request Gatekeeper to generate
      * a HardwareAuthToken with the Gatekeeper Password together with a biometric challenge.
@@ -223,38 +229,77 @@ public class BiometricUtils {
     }
 
     /**
+     * Used for checking if a multi-biometric enrollment flow starts with Face and
+     * ends with Fingerprint.
+     *
      * @param activity Activity that we want to check
-     * @return True if the activity is going through a multi-biometric enrollment flow.
+     * @return True if the activity is going through a multi-biometric enrollment flow, that starts
+     * with Face.
      */
-    public static boolean isMultiBiometricEnrollmentFlow(@NonNull Activity activity) {
+    public static boolean isMultiBiometricFaceEnrollmentFlow(@NonNull Activity activity) {
         return activity.getIntent().hasExtra(MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FACE);
+    }
+
+    /**
+     * Used for checking if a multi-biometric enrollment flowstarts with Fingerprint
+     * and ends with Face.
+     *
+     * @param activity Activity that we want to check
+     * @return True if the activity is going through a multi-biometric enrollment flow, that starts
+     * with Fingerprint.
+     */
+    public static boolean isMultiBiometricFingerprintEnrollmentFlow(@NonNull Activity activity) {
+        return activity.getIntent().hasExtra(
+                MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FINGERPRINT);
+    }
+
+    /**
+     * Used to check if the activity is a multi biometric flow activity.
+     *
+     * @param activity Activity to check
+     * @return True if the activity is going through a multi-biometric enrollment flow, that starts
+     * with Fingerprint.
+     */
+    public static boolean isAnyMultiBiometricFlow(@NonNull Activity activity) {
+        return isMultiBiometricFaceEnrollmentFlow(activity)
+                || isMultiBiometricFingerprintEnrollmentFlow(activity);
     }
 
     public static void copyMultiBiometricExtras(@NonNull Intent fromIntent,
             @NonNull Intent toIntent) {
-        final PendingIntent pendingIntent = (PendingIntent) fromIntent.getExtra(
+        PendingIntent pendingIntent = (PendingIntent) fromIntent.getExtra(
                 MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FACE, null);
         if (pendingIntent != null) {
-            toIntent.putExtra(MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FACE, pendingIntent);
+            toIntent.putExtra(MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FACE,
+                    pendingIntent);
+        }
+
+        pendingIntent = (PendingIntent) fromIntent.getExtra(
+                MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FINGERPRINT, null);
+        if (pendingIntent != null) {
+            toIntent.putExtra(MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FINGERPRINT,
+                    pendingIntent);
         }
     }
 
     /**
-     * If the current biometric enrollment (e.g. face) should be followed by another one (e.g.
-     * fingerprint) (see {@link #isMultiBiometricEnrollmentFlow(Activity)}), retrieves the
-     * PendingIntent pointing to the next enrollment and starts it. The caller will receive the
-     * result in onActivityResult.
+     * If the current biometric enrollment (e.g. face/fingerprint) should be followed by another
+     * one (e.g. fingerprint/face) retrieves the PendingIntent pointing to the next enrollment
+     * and starts it. The caller will receive the result in onActivityResult.
      * @return true if the next enrollment was started
      */
     public static boolean tryStartingNextBiometricEnroll(@NonNull Activity activity,
             int requestCode, String debugReason) {
 
-        Log.d(TAG, "tryStartingNextBiometricEnroll, debugReason: " + debugReason);
-        final PendingIntent pendingIntent = (PendingIntent) activity.getIntent()
+        PendingIntent pendingIntent = (PendingIntent) activity.getIntent()
                 .getExtra(MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FACE);
+        if (pendingIntent == null) {
+            pendingIntent = (PendingIntent) activity.getIntent()
+                .getExtra(MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FINGERPRINT);
+        }
+
         if (pendingIntent != null) {
             try {
-                Log.d(TAG, "Starting pendingIntent: " + pendingIntent);
                 IntentSender intentSender = pendingIntent.getIntentSender();
                 activity.startIntentSenderForResult(intentSender, requestCode,
                         null /* fillInIntent */, 0 /* flagMask */, 0 /* flagValues */,

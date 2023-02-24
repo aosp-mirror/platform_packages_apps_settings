@@ -42,6 +42,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.os.UserManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
@@ -87,6 +88,8 @@ public class ProviderModelSliceTest {
     private MockNetworkProviderWorker mMockNetworkProviderWorker;
 
     @Mock
+    private UserManager mUserManager;
+    @Mock
     private SubscriptionManager mSubscriptionManager;
     @Mock
     private ConnectivityManager mConnectivityManager;
@@ -122,6 +125,8 @@ public class ProviderModelSliceTest {
                         any(), any(), any(), any(), any(), anyLong(), anyLong(), any()))
                 .thenReturn(mWifiPickerTracker);
 
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(mUserManager.isGuestUser()).thenReturn(false);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(mConnectivityManager);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
@@ -160,6 +165,17 @@ public class ProviderModelSliceTest {
         final int flags = pendingIntent.getIntent().getFlags();
         assertThat(flags & Intent.FLAG_RECEIVER_FOREGROUND)
                 .isEqualTo(Intent.FLAG_RECEIVER_FOREGROUND);
+    }
+
+    @Test
+    @UiThreadTest
+    public void getSlice_isGuestUser_shouldNotAddRow() {
+        when(mUserManager.isGuestUser()).thenReturn(true);
+
+        final Slice slice = mMockProviderModelSlice.getSlice();
+
+        assertThat(slice).isNotNull();
+        verify(mListBuilder, never()).addRow(any());
     }
 
     @Test
@@ -317,6 +333,21 @@ public class ProviderModelSliceTest {
         verify(mListBuilder, times(1)).addRow(mMockCarrierRowBuild);
         verify(mListBuilder, times(6)).addRow(any(ListBuilder.RowBuilder.class));
         assertThat(mMockProviderModelSlice.hasSeeAllRow()).isTrue();
+    }
+
+    @Test
+    public void getBackgroundWorkerClass_isGuestUser_returnNull() {
+        when(mUserManager.isGuestUser()).thenReturn(true);
+
+        assertThat(mMockProviderModelSlice.getBackgroundWorkerClass()).isNull();
+    }
+
+    @Test
+    public void getBackgroundWorkerClass_notGuestUser_returnWorkerClass() {
+        when(mUserManager.isGuestUser()).thenReturn(false);
+
+        assertThat(mMockProviderModelSlice.getBackgroundWorkerClass())
+                .isEqualTo(NetworkProviderWorker.class);
     }
 
     @Test

@@ -35,6 +35,15 @@ java_library {
     ],
 }
 
+java_library {
+    name: "Settings-change-ids",
+    srcs: ["src/com/android/settings/ChangeIds.java"],
+    libs: [
+        "app-compat-annotations",
+    ],
+}
+
+
 // Build the Settings APK
 android_library {
     name: "Settings-core",
@@ -78,18 +87,18 @@ android_library {
         "lottie",
         "WifiTrackerLib",
         "SettingsLibActivityEmbedding",
+        "Settings-change-ids",
     ],
 
     libs: [
         "telephony-common",
         "ims-common",
-        "app-compat-annotations",
     ],
 }
 
 platform_compat_config {
     name: "settings-platform-compat-config",
-    src: ":Settings-core",
+    src: ":Settings-change-ids",
     system_ext_specific: true,
 }
 
@@ -127,7 +136,7 @@ filegroup {
 // over all the sources together.
 filegroup {
     name: "Settings_srcs",
-    srcs: ["src/**/*.java"],
+    srcs: ["src/**/*.java", "src/**/*.kt"],
 }
 
 filegroup {

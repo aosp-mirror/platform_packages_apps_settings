@@ -26,7 +26,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.autofill.PasswordsPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultAutofillPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultWorkAutofillPreferenceController;
@@ -96,7 +95,7 @@ public class AccountDashboardFragment extends DashboardFragment {
     }
 
     private static void buildAccountPreferenceControllers(
-            Context context, SettingsPreferenceFragment parent, String[] authorities,
+            Context context, DashboardFragment parent, String[] authorities,
             List<AbstractPreferenceController> controllers) {
         final AccountPreferenceController accountPrefController =
                 new AccountPreferenceController(context, parent, authorities,

@@ -15,6 +15,7 @@
 package com.android.settings.datausage;
 
 import static android.content.pm.PackageManager.FEATURE_ETHERNET;
+import static android.content.pm.PackageManager.FEATURE_USB_HOST;
 import static android.content.pm.PackageManager.FEATURE_WIFI;
 import static android.telephony.TelephonyManager.SIM_STATE_READY;
 
@@ -70,7 +71,9 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
             return SystemProperties.get(DataUsageUtils.TEST_RADIOS_PROP).contains(ETHERNET);
         }
 
-        if (!context.getPackageManager().hasSystemFeature(FEATURE_ETHERNET)) {
+        // See ConnectivityService#deviceSupportsEthernet.
+        final PackageManager pm = context.getPackageManager();
+        if (!pm.hasSystemFeature(FEATURE_ETHERNET) && !pm.hasSystemFeature(FEATURE_USB_HOST)) {
             return false;
         }
 

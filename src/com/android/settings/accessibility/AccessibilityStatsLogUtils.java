@@ -28,6 +28,7 @@ import static com.android.settings.accessibility.TextReadingPreferenceFragment.R
 
 import android.content.ComponentName;
 
+import com.android.internal.util.FrameworkStatsLog;
 import com.android.settings.core.instrumentation.SettingsStatsLog;
 
 /** Methods for logging accessibility states. */
@@ -110,6 +111,28 @@ public final class AccessibilityStatsLogUtils {
                 return SettingsStatsLog.ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED__ENTRY_POINT__TEXT_READING_ACCESSIBILITY_SETTINGS;
             default:
                 return SettingsStatsLog.ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED__ENTRY_POINT__TEXT_READING_UNKNOWN_ENTRY;
+        }
+    }
+
+    /**
+     * Converts the entering page id where the hearing aid binding process starts for logging.
+     *
+     * @param pageId the entry page id where the hearing aid binding process starts
+     * @return the int value for logging mapped from some page ids defined in
+     * {@link SettingsStatsLog}
+     */
+    public static int convertToHearingAidInfoBondEntry(int pageId) {
+        switch (pageId) {
+            case SettingsStatsLog.SETTINGS_UICHANGED__PAGE_ID__SETTINGS_CONNECTED_DEVICE_CATEGORY:
+                return FrameworkStatsLog.HEARING_AID_INFO_REPORTED__BOND_ENTRY__CONNECTED_DEVICES;
+            case SettingsStatsLog.SETTINGS_UICHANGED__PAGE_ID__DIALOG_ACCESSIBILITY_HEARINGAID:
+                return FrameworkStatsLog.HEARING_AID_INFO_REPORTED__BOND_ENTRY__ACCESSIBILITY_HEARING_AIDS;
+            case SettingsStatsLog.SETTINGS_UICHANGED__PAGE_ID__DIALOG_ACCESSIBILITY_HEARING_AID_PAIR_ANOTHER:
+                return FrameworkStatsLog.HEARING_AID_INFO_REPORTED__BOND_ENTRY__ACCESSIBILITY_HEARING_AID_PAIR_ANOTHER;
+            case SettingsStatsLog.SETTINGS_UICHANGED__PAGE_ID__BLUETOOTH_FRAGMENT:
+                return FrameworkStatsLog.HEARING_AID_INFO_REPORTED__BOND_ENTRY__BLUETOOTH;
+            default:
+                return FrameworkStatsLog.HEARING_AID_INFO_REPORTED__BOND_ENTRY__PAGE_UNKNOWN;
         }
     }
 }

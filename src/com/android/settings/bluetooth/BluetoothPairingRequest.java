@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.os.PowerManager;
 import android.os.UserHandle;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
@@ -34,6 +35,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
  * starts a notification in the status bar that can be clicked to bring up the same dialog.
  */
 public final class BluetoothPairingRequest extends BroadcastReceiver {
+    private static final String TAG = "BluetoothPairingRequest";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -48,10 +50,8 @@ public final class BluetoothPairingRequest extends BroadcastReceiver {
             PowerManager powerManager = context.getSystemService(PowerManager.class);
             int pairingVariant = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT,
                     BluetoothDevice.ERROR);
-            String deviceAddress = device != null ? device.getAddress() : null;
-            String deviceName = device != null ? device.getName() : null;
             boolean shouldShowDialog = LocalBluetoothPreferences.shouldShowDialogInForeground(
-                    context, deviceAddress, deviceName);
+                    context, device);
 
             // Skips consent pairing dialog if the device was recently associated with CDM
             if (pairingVariant == BluetoothDevice.PAIRING_VARIANT_CONSENT
@@ -74,6 +74,7 @@ public final class BluetoothPairingRequest extends BroadcastReceiver {
             }
         } else if (TextUtils.equals(action,
                 BluetoothCsipSetCoordinator.ACTION_CSIS_SET_MEMBER_AVAILABLE)) {
+            Log.d(TAG, "Receive ACTION_CSIS_SET_MEMBER_AVAILABLE");
             if (device == null) {
                 return;
             }

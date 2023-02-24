@@ -33,15 +33,12 @@ public class PrivacyControlsFragment extends DashboardFragment {
     private static final String TAG = "PrivacyDashboardFrag";
     private static final String CAMERA_KEY = "privacy_camera_toggle";
     private static final String MIC_KEY = "privacy_mic_toggle";
-    private static final String LOCATION_KEY = "privacy_location_toggle";
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new CameraToggleController(context, CAMERA_KEY));
         controllers.add(new MicToggleController(context, MIC_KEY));
-        controllers.add(new LocationToggleController(context, LOCATION_KEY,
-                getSettingsLifecycle()));
         controllers.add(new ShowClipAccessNotificationPreferenceController(context));
         return controllers;
     }

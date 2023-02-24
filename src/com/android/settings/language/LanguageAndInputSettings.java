@@ -50,6 +50,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
     private static final String KEY_KEYBOARDS_CATEGORY = "keyboards_category";
     private static final String KEY_SPEECH_CATEGORY = "speech_category";
+    private static final String KEY_ON_DEVICE_RECOGNITION = "odsr_settings";
     private static final String KEY_TEXT_TO_SPEECH = "tts_settings_summary";
     private static final String KEY_POINTER_CATEGORY = "pointer_category";
 
@@ -123,11 +124,21 @@ public class LanguageAndInputSettings extends DashboardFragment {
                 new DefaultVoiceInputPreferenceController(context, lifecycle);
         final TtsPreferenceController ttsPreferenceController =
                 new TtsPreferenceController(context, KEY_TEXT_TO_SPEECH);
+        final OnDeviceRecognitionPreferenceController onDeviceRecognitionPreferenceController =
+                new OnDeviceRecognitionPreferenceController(context, KEY_ON_DEVICE_RECOGNITION);
+
         controllers.add(defaultVoiceInputPreferenceController);
         controllers.add(ttsPreferenceController);
-        controllers.add(new PreferenceCategoryController(context,
-                KEY_SPEECH_CATEGORY).setChildren(
-                Arrays.asList(defaultVoiceInputPreferenceController, ttsPreferenceController)));
+        List<AbstractPreferenceController> speechCategoryChildren = new ArrayList<>(
+                List.of(defaultVoiceInputPreferenceController, ttsPreferenceController));
+
+        if (onDeviceRecognitionPreferenceController.isAvailable()) {
+            controllers.add(onDeviceRecognitionPreferenceController);
+            speechCategoryChildren.add(onDeviceRecognitionPreferenceController);
+        }
+
+        controllers.add(new PreferenceCategoryController(context, KEY_SPEECH_CATEGORY)
+                .setChildren(speechCategoryChildren));
 
         // Pointer
         final PointerSpeedController pointerController = new PointerSpeedController(context);

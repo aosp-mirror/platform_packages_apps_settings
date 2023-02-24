@@ -26,6 +26,8 @@ import android.graphics.SurfaceTexture;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.util.Size;
 import android.view.LayoutInflater;
@@ -36,15 +38,16 @@ import android.view.ViewOutlineProvider;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settingslib.R;
 import com.android.settingslib.bluetooth.BluetoothBroadcastUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils;
-import com.android.settingslib.core.lifecycle.ObservableFragment;
 import com.android.settingslib.qrcode.QrCamera;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
+import java.time.Duration;
 
 public class QrCodeScanModeFragment extends InstrumentedFragment implements
         TextureView.SurfaceTextureListener,
@@ -61,6 +64,8 @@ public class QrCodeScanModeFragment extends InstrumentedFragment implements
 
     private static final long SHOW_ERROR_MESSAGE_INTERVAL = 10000;
     private static final long SHOW_SUCCESS_SQUARE_INTERVAL = 1000;
+
+    private static final Duration VIBRATE_DURATION_QR_CODE_RECOGNITION = Duration.ofMillis(3);
 
     private boolean mIsGroupOp;
     private int mCornerRadius;
@@ -210,15 +215,38 @@ public class QrCodeScanModeFragment extends InstrumentedFragment implements
                     break;
 
                 case MESSAGE_SCAN_BROADCAST_SUCCESS:
+                    /* TODO(b/265281156) : Move the logic to BluetoothFindBroadcastsFragment.
+                    *  We only pass the QR code string to the previous page.
+                    */
                     mController.addSource(mSink, mBroadcastMetadata, mIsGroupOp);
-                    updateSummary();
-                    mSummary.sendAccessibilityEvent(
-                            AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
+                    notifyUserForQrCodeRecognition();
                     break;
                 default:
             }
         }
     };
+
+    private void notifyUserForQrCodeRecognition() {
+        if (mCamera != null) {
+            mCamera.stop();
+        }
+
+        mErrorMessage.setVisibility(View.INVISIBLE);
+
+        triggerVibrationForQrCodeRecognition(getContext());
+
+        getActivity().finish();
+    }
+
+    private static void triggerVibrationForQrCodeRecognition(Context context) {
+        Vibrator vibrator = context.getSystemService(Vibrator.class);
+        if (vibrator == null) {
+            return;
+        }
+        vibrator.vibrate(VibrationEffect.createOneShot(
+                VIBRATE_DURATION_QR_CODE_RECOGNITION.toMillis(),
+                VibrationEffect.DEFAULT_AMPLITUDE));
+    }
 
     private void showErrorMessage(@StringRes int messageResId) {
         final Message message = mHandler.obtainMessage(MESSAGE_SHOW_ERROR_MESSAGE,
@@ -232,7 +260,7 @@ public class QrCodeScanModeFragment extends InstrumentedFragment implements
     }
 
     private void updateSummary() {
-        mSummary.setText(R.string.bt_le_audio_scan_qr_code_scanner);
+        mSummary.setText(getString(R.string.bt_le_audio_scan_qr_code_scanner));
     }
 
     @Override
