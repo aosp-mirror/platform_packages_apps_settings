@@ -20,7 +20,6 @@ import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
-import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodSubtype;
 
@@ -75,13 +74,12 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
     @Override
     public void onStart() {
         mIm.registerInputDeviceListener(this, null);
-        final InputDevice inputDevice =
-                mIm.getInputDeviceByDescriptor(mInputDeviceIdentifier.getDescriptor());
-        if (inputDevice == null) {
-            mParent.getActivity().finish();
+        if (mInputDeviceIdentifier == null
+                || NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier) == null) {
             return;
         }
-        mInputDeviceId = inputDevice.getId();
+        mInputDeviceId =
+                NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier).getId();
     }
 
     @Override
@@ -138,6 +136,9 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
     }
 
     private void createPreferenceHierarchy() {
+        if (mKeyboardLayouts == null) {
+            return;
+        }
         for (KeyboardLayout layout : mKeyboardLayouts) {
             final KeyboardLayoutPreference pref;
             if (mLayout.equals(layout.getLabel())) {
