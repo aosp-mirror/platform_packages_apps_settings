@@ -153,6 +153,11 @@ public interface PowerUsageFeatureProvider {
     Set<Integer> getOthersSystemComponentSet();
 
     /**
+     * Returns {@link Set} for the custom system component names which are combined into others
+     */
+    Set<String> getOthersCustomComponentNameSet();
+
+    /**
      * Returns {@link Set} for hiding system component ids in the usage screen
      */
     Set<Integer> getHideSystemComponentSet();

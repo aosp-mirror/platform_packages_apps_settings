@@ -3916,8 +3916,8 @@
     <string name="modifier_keys_caps_lock" translatable="false">Caps lock</string>
     <!-- Title for the button to trigger the 'modifier keys ctrl'. [CHAR LIMIT=15] -->
     <string name="modifier_keys_ctrl" translatable="false">Ctrl</string>
-    <!-- Title for the button to trigger the 'modifier keys meta'. [CHAR LIMIT=15] -->
-    <string name="modifier_keys_meta" translatable="false">Meta</string>
+    <!-- Title for the button to trigger the 'modifier keys action key'. [CHAR LIMIT=15] -->
+    <string name="modifier_keys_meta" translatable="false">Action key</string>
     <!-- Title for the button to trigger the 'modifier keys alt'. [CHAR LIMIT=15] -->
     <string name="modifier_keys_alt" translatable="false">Alt</string>
 
@@ -4100,18 +4100,20 @@
     <string name="experimental_category_title">Experimental</string>
     <!-- Title for feature flags dashboard where developers can turn on experimental features [CHAR LIMIT=50] -->
     <string name="feature_flags_dashboard_title">Feature flags</string>
-    <!-- Title for snoop logger filters dashboard where developers can turn on filters [CHAR LIMIT=50] -->
-    <string name="snoop_logger_filters_dashboard_title">Snoop Logger Filters</string>
-    <!-- Summary for the snoop logger filters [CHAR LIMIT=50] -->
-    <string name="bt_hci_snoop_log_filters_dashboard_summary">Set filters (Toggle Bluetooth after changing this setting)</string>
-    <!-- Title for the snoop logger pbap filter [CHAR LIMIT=50] -->
-    <string name="bt_hci_snoop_log_filter_pbap_title">Snoop Logger Filter PBAP</string>
-    <!-- Title for the snoop logger map filter [CHAR LIMIT=50] -->
-    <string name="bt_hci_snoop_log_filter_map_title">Snoop Logger Filter MAP</string>
-    <!-- Summary for the snoop logger filters [CHAR LIMIT=50] -->
-    <string name="bt_hci_snoop_log_filter_summary">Set filtering mode. (Toggle Bluetooth after changing this setting)</string>
-    <!-- Summary for the snoop logger profile filters while disabled [CHAR LIMIT=50] -->
-    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary">Enable Snoop Log Mode Filtered to change this option.</string>
+    <!-- Title for snoop logger filters dashboard where developers can turn on filters [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_filters_dashboard_title">Bluetooth HCI snoop log filtering</string>
+    <!-- Summary for the snoop logger filters [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_filters_dashboard_summary">Set filters</string>
+    <!-- Summary for the snoop logger filters [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_filters_dashboard_footer">Disable and enable Bluetooth for the changes to take effect</string>
+    <!-- Title for the snoop logger pbap filter [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_filter_pbap_title">Bluetooth HCI snoop log filtering PBAP</string>
+    <!-- Title for the snoop logger map filter [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_filter_map_title">Bluetooth HCI snoop log filtering MAP</string>
+    <!-- Summary for the snoop logger filters [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_filter_summary">Set filtering mode. (Disable and enable Bluetooth for the changes to take effect)</string>
+    <!-- Summary for the snoop logger profile filters while disabled [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary">Set Bluetooth HCI snoop log mode to Enabled Filtered to change this option</string>
     <!-- Title for the Talkback Accessibility Service. Displayed on the Accessibility Settings screen in Setup Wizard. [CHAR_LIMIT=25] -->
     <string name="talkback_title">Talkback</string>
     <!-- Summary for the Talkback Accessibility Service. Lets the user know that Talkback is a screenreader and that it is usually most helpful to blind and low vision users and whether the service is on. [CHAR_LIMIT=none] -->
@@ -7784,12 +7786,12 @@
     <!-- Summary for a warning message about security implications of enabling a notification
           listener, displayed as a dialog message. [CHAR LIMIT=NONE] -->
     <string name="notification_listener_security_warning_summary">
-        <xliff:g id="notification_listener_name">%1$s</xliff:g> will be able to read all notifications,
+        The <xliff:g id="notification_listener_name">%1$s</xliff:g> app will be able to read all notifications,
         including personal information such as contact names, photos, and the text of messages you receive.
         This app will also be able to snooze or dismiss notifications or take action on buttons in notifications, including answering phone calls.
         \n\nThis will also give the app the ability to turn Do Not Disturb on or off and change related settings.
     </string>
-    <string name="nls_warning_prompt"><xliff:g id="notification_listener_name">%1$s</xliff:g> will be able to:</string>
+    <string name="nls_warning_prompt">The <xliff:g id="notification_listener_name">%1$s</xliff:g> app will be able to:</string>
     <string name="nls_feature_read_title">Read your notifications</string>
     <string name="nls_feature_read_summary">It can read your notifications, including personal information such as contacts, messages, and photos.</string>
     <string name="nls_feature_reply_title">Reply to messages</string>
