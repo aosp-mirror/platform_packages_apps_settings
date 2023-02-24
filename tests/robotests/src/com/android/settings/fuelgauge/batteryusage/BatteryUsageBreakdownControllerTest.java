@@ -235,6 +235,40 @@ public final class BatteryUsageBreakdownControllerTest {
     }
 
     @Test
+    public void setPreferencePercent_lessThanThreshold_expectedFormat() {
+        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
+        final BatteryDiffEntry batteryDiffEntry = createBatteryDiffEntry(
+                /*isSystem=*/ true,
+                /*screenOnTimeInMs=*/ 0,
+                /*foregroundUsageTimeInMs=*/ 0,
+                /*backgroundUsageTimeInMs=*/ 0);
+        batteryDiffEntry.mConsumePower = 0.8;
+        batteryDiffEntry.setTotalConsumePower(100);
+        mBatteryUsageBreakdownController.mPercentLessThanThresholdText = "< 1%";
+
+        mBatteryUsageBreakdownController.setPreferencePercentage(pref, batteryDiffEntry);
+
+        assertThat(pref.getPercentage()).isEqualTo("< 1%");
+    }
+
+    @Test
+    public void setPreferencePercent_greaterThanThreshold_expectedFormat() {
+        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
+        final BatteryDiffEntry batteryDiffEntry = createBatteryDiffEntry(
+                /*isSystem=*/ true,
+                /*screenOnTimeInMs=*/ 0,
+                /*foregroundUsageTimeInMs=*/ 0,
+                /*backgroundUsageTimeInMs=*/ 0);
+        batteryDiffEntry.mConsumePower = 16;
+        batteryDiffEntry.setTotalConsumePower(100);
+        mBatteryUsageBreakdownController.mPercentLessThanThresholdText = "< 1%";
+
+        mBatteryUsageBreakdownController.setPreferencePercentage(pref, batteryDiffEntry);
+
+        assertThat(pref.getPercentage()).isEqualTo("16%");
+    }
+
+    @Test
     public void setPreferenceSummary_systemEntryTotalUsageTimeIsZero_emptySummary() {
         final PowerGaugePreference pref = new PowerGaugePreference(mContext);
         pref.setSummary(PREF_SUMMARY);
