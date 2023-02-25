@@ -32,6 +32,8 @@ import java.util.Set;
 
 /** Wraps the battery usage diff data for each entry used for battery usage app list. */
 public class BatteryDiffData {
+    static final double SMALL_PERCENTAGE_THRESHOLD = 1f;
+
     private final List<BatteryDiffEntry> mAppEntries;
     private final List<BatteryDiffEntry> mSystemEntries;
 
@@ -52,8 +54,8 @@ public class BatteryDiffData {
             combineBatteryDiffEntry(context, featureProvider, systemAppsSet);
         }
 
-        setTotalConsumePower();
-        sortEntries();
+        processAndSortEntries(mAppEntries);
+        processAndSortEntries(mSystemEntries);
     }
 
     public List<BatteryDiffEntry> getAppDiffEntryList() {
@@ -75,18 +77,6 @@ public class BatteryDiffData {
             final PowerUsageFeatureProvider featureProvider, final Set<String> systemAppsSet) {
         combineIntoSystemApps(context, featureProvider, systemAppsSet, mAppEntries);
         combineSystemItemsIntoOthers(context, featureProvider, mSystemEntries);
-    }
-
-    /** Sets total consume power for app and system entries separately. */
-    private void setTotalConsumePower() {
-        setTotalConsumePowerForAllEntries(mAppEntries);
-        setTotalConsumePowerForAllEntries(mSystemEntries);
-    }
-
-    /** Sorts entries based on consumed percentage. */
-    private void sortEntries() {
-        Collections.sort(mAppEntries, BatteryDiffEntry.COMPARATOR);
-        Collections.sort(mSystemEntries, BatteryDiffEntry.COMPARATOR);
     }
 
     private static void purgeBatteryDiffData(
@@ -177,18 +167,6 @@ public class BatteryDiffData {
         }
     }
 
-    // Sets total consume power for each entry.
-    private static void setTotalConsumePowerForAllEntries(
-            final List<BatteryDiffEntry> batteryDiffEntries) {
-        double totalConsumePower = 0.0;
-        for (BatteryDiffEntry batteryDiffEntry : batteryDiffEntries) {
-            totalConsumePower += batteryDiffEntry.mConsumePower;
-        }
-        for (BatteryDiffEntry batteryDiffEntry : batteryDiffEntries) {
-            batteryDiffEntry.setTotalConsumePower(totalConsumePower);
-        }
-    }
-
     @VisibleForTesting
     static boolean needsCombineInSystemApp(final BatteryDiffEntry batteryDiffEntry,
             final List<String> systemAppsAllowlist, final Set<String> systemAppsSet) {
@@ -206,5 +184,52 @@ public class BatteryDiffData {
         }
 
         return systemAppsSet != null && systemAppsSet.contains(packageName);
+    }
+
+    /**
+     * Sets total consume power, and adjusts the percentages to ensure the total round percentage
+     * could be 100%, and then sorts entries based on the sorting key.
+     */
+    @VisibleForTesting
+    static void processAndSortEntries(final List<BatteryDiffEntry> batteryDiffEntries) {
+        if (batteryDiffEntries.isEmpty()) {
+            return;
+        }
+
+        // Sets total consume power.
+        double totalConsumePower = 0.0;
+        for (BatteryDiffEntry batteryDiffEntry : batteryDiffEntries) {
+            totalConsumePower += batteryDiffEntry.mConsumePower;
+        }
+        for (BatteryDiffEntry batteryDiffEntry : batteryDiffEntries) {
+            batteryDiffEntry.setTotalConsumePower(totalConsumePower);
+        }
+
+        // Adjusts percentages to show.
+        // The lower bound is treating all the small percentages as 0.
+        // The upper bound is treating all the small percentages as 1.
+        int totalLowerBound = 0;
+        int totalUpperBound = 0;
+        for (BatteryDiffEntry entry : batteryDiffEntries) {
+            if (entry.getPercentage() < SMALL_PERCENTAGE_THRESHOLD) {
+                totalUpperBound += 1;
+            } else {
+                int roundPercentage = Math.round((float) entry.getPercentage());
+                totalLowerBound += roundPercentage;
+                totalUpperBound += roundPercentage;
+            }
+        }
+        if (totalLowerBound > 100 || totalUpperBound < 100) {
+            Collections.sort(batteryDiffEntries, BatteryDiffEntry.COMPARATOR);
+            for (int i = 0; i < totalLowerBound - 100 && i < batteryDiffEntries.size(); i++) {
+                batteryDiffEntries.get(i).setAdjustPercentageOffset(-1);
+            }
+            for (int i = 0; i < 100 - totalUpperBound && i < batteryDiffEntries.size(); i++) {
+                batteryDiffEntries.get(i).setAdjustPercentageOffset(1);
+            }
+        }
+
+        // Sorts entries.
+        Collections.sort(batteryDiffEntries, BatteryDiffEntry.COMPARATOR);
     }
 }
