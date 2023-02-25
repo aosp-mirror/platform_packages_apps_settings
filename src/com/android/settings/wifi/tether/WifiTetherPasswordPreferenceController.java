@@ -33,9 +33,8 @@ import com.android.settings.core.FeatureFlags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ValidatedEditTextPreference;
 import com.android.settings.wifi.WifiUtils;
+import com.android.settings.wifi.repository.WifiHotspotRepository;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-
-import java.util.UUID;
 
 /**
  * Controller for logic pertaining to the password of Wi-Fi tethering.
@@ -49,18 +48,22 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
     private int mSecurityType;
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
+    private final WifiHotspotRepository mWifiHotspotRepository;
 
     @VisibleForTesting
     WifiTetherPasswordPreferenceController(Context context, OnTetherConfigUpdateListener listener,
             MetricsFeatureProvider provider) {
         super(context, listener);
-        mMetricsFeatureProvider = provider;
+        FeatureFactory featureFactory = FeatureFactory.getFactory(context);
+        mMetricsFeatureProvider = (provider != null) ? provider
+                : featureFactory.getMetricsFeatureProvider();
+        mWifiHotspotRepository = featureFactory.getWifiFeatureProvider().getWifiHotspotRepository();
+        mWifiHotspotRepository.queryLastPasswordIfNeeded();
     }
 
     public WifiTetherPasswordPreferenceController(Context context,
             OnTetherConfigUpdateListener listener) {
-        super(context, listener);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        this(context, listener, null /* MetricsFeatureProvider */);
     }
 
     @Override
@@ -74,7 +77,7 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
         final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
         if (config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_OPEN
                 && TextUtils.isEmpty(config.getPassphrase())) {
-            mPassword = generateRandomPassword();
+            mPassword = mWifiHotspotRepository.generatePassword();
         } else {
             mPassword = config.getPassphrase();
         }
@@ -110,7 +113,7 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
         if (securityType == SoftApConfiguration.SECURITY_TYPE_OPEN) {
             return "";
         } else if (!WifiUtils.isHotspotPasswordValid(mPassword, securityType)) {
-            mPassword = generateRandomPassword();
+            mPassword = mWifiHotspotRepository.generatePassword();
             updatePasswordDisplay((EditTextPreference) mPreference);
         }
         return mPassword;
@@ -130,12 +133,6 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
     @Override
     public boolean isTextValid(String value) {
         return WifiUtils.isHotspotPasswordValid(value, mSecurityType);
-    }
-
-    private static String generateRandomPassword() {
-        String randomUUID = UUID.randomUUID().toString();
-        //first 12 chars from xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
-        return randomUUID.substring(0, 8) + randomUUID.substring(9, 13);
     }
 
     private void updatePasswordDisplay(EditTextPreference preference) {

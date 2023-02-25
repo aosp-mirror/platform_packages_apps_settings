@@ -46,6 +46,7 @@ import com.android.settings.slices.SlicesFeatureProvider
 import com.android.settings.users.UserFeatureProvider
 import com.android.settings.vpn2.AdvancedVpnFeatureProvider
 import com.android.settings.wifi.WifiTrackerLibProvider
+import com.android.settings.wifi.factory.WifiFeatureProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider
 import org.mockito.Mockito.mock
 
@@ -175,6 +176,10 @@ class FakeFeatureFactory : FeatureFactory() {
     }
 
     override fun getAdvancedVpnFeatureProvider(): AdvancedVpnFeatureProvider {
+        TODO("Not yet implemented")
+    }
+
+    override fun getWifiFeatureProvider(): WifiFeatureProvider {
         TODO("Not yet implemented")
     }
 }
