@@ -106,7 +106,7 @@ public final class BatteryDiffEntryTest {
                         /*batteryHistEntry=*/ null);
         entry.setTotalConsumePower(100.0);
 
-        assertThat(entry.getPercentOfTotal()).isEqualTo(22.0);
+        assertThat(entry.getPercentage()).isEqualTo(22.0);
     }
 
     @Test
@@ -125,21 +125,28 @@ public final class BatteryDiffEntryTest {
                         /*batteryHistEntry=*/ null);
         entry.setTotalConsumePower(0);
 
-        assertThat(entry.getPercentOfTotal()).isEqualTo(0);
+        assertThat(entry.getPercentage()).isEqualTo(0);
     }
 
     @Test
     public void testComparator_sortCollectionsInDescOrder() {
         final List<BatteryDiffEntry> entryList = new ArrayList<>();
         // Generates fake testing data.
+        BatteryDiffEntry systemAppsBatteryDiffEntry =
+                new BatteryDiffEntry.SystemAppsBatteryDiffEntry(mContext);
+        systemAppsBatteryDiffEntry.mConsumePower = 16;
+        systemAppsBatteryDiffEntry.setTotalConsumePower(100);
+        entryList.add(systemAppsBatteryDiffEntry);
         entryList.add(createBatteryDiffEntry(30, mBatteryHistEntry));
         entryList.add(createBatteryDiffEntry(20, mBatteryHistEntry));
         entryList.add(createBatteryDiffEntry(10, mBatteryHistEntry));
+
         Collections.sort(entryList, BatteryDiffEntry.COMPARATOR);
 
-        assertThat(entryList.get(0).getPercentOfTotal()).isEqualTo(30);
-        assertThat(entryList.get(1).getPercentOfTotal()).isEqualTo(20);
-        assertThat(entryList.get(2).getPercentOfTotal()).isEqualTo(10);
+        assertThat(entryList.get(0).getPercentage()).isEqualTo(30);
+        assertThat(entryList.get(1).getPercentage()).isEqualTo(20);
+        assertThat(entryList.get(2).getPercentage()).isEqualTo(10);
+        assertThat(entryList.get(3).getPercentage()).isEqualTo(16);
     }
 
     @Test

@@ -122,7 +122,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     private int mNeedsQSTooltipType = QuickSettingsTooltipType.GUIDE_TO_EDIT;
     private boolean mSavedAccessibilityFloatingMenuEnabled;
     private ImageView mImageGetterCacheView;
-    private final Html.ImageGetter mImageGetter = (String str) -> {
+    protected final Html.ImageGetter mImageGetter = (String str) -> {
         if (str != null && str.startsWith(IMG_PREFIX)) {
             final String fileName = str.substring(IMG_PREFIX.length());
             return getDrawableFromUri(Uri.parse(
