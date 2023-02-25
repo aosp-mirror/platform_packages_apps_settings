@@ -59,7 +59,13 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
 
     private MainSwitchPreference mMainSwitchPreference;
     private Button mPreviewButton;
+    private Preference mComplicationsTogglePreference;
     private RecyclerView mRecyclerView;
+
+    private DreamPickerController mDreamPickerController;
+
+    private final DreamPickerController.Callback mCallback =
+            this::updateComplicationsToggleVisibility;
 
     @WhenToDream
     static int getSettingFromPrefKey(String key) {
@@ -128,7 +134,13 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context);
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        if (mDreamPickerController == null) {
+            mDreamPickerController = new DreamPickerController(context);
+        }
+        controllers.add(mDreamPickerController);
+        controllers.add(new WhenToDreamPreferenceController(context));
+        return controllers;
     }
 
     public static CharSequence getSummaryTextWithDreamName(Context context) {
@@ -146,10 +158,9 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
         }
     }
 
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new WhenToDreamPreferenceController(context));
-        return controllers;
+    @VisibleForTesting
+    void setDreamPickerController(DreamPickerController dreamPickerController) {
+        mDreamPickerController = dreamPickerController;
     }
 
     private void setAllPreferencesEnabled(boolean isEnabled) {
@@ -174,12 +185,29 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
 
         final DreamBackend dreamBackend = DreamBackend.getInstance(getContext());
 
+        mComplicationsTogglePreference = findPreference(
+                DreamComplicationPreferenceController.PREF_KEY);
+        updateComplicationsToggleVisibility();
+
         mMainSwitchPreference = findPreference(MAIN_SWITCH_PREF_KEY);
         if (mMainSwitchPreference != null) {
             mMainSwitchPreference.addOnSwitchChangeListener(this);
         }
 
         setAllPreferencesEnabled(dreamBackend.isEnabled());
+
+        if (mDreamPickerController != null) {
+            mDreamPickerController.addCallback(mCallback);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mDreamPickerController != null) {
+            mDreamPickerController.removeCallback(mCallback);
+        }
+
+        super.onDestroy();
     }
 
     @Override
@@ -197,6 +225,16 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
         mRecyclerView = super.onCreateRecyclerView(inflater, parent, bundle);
         updatePaddingForPreviewButton();
         return mRecyclerView;
+    }
+
+    private void updateComplicationsToggleVisibility() {
+        if (mDreamPickerController == null || mComplicationsTogglePreference == null) {
+            return;
+        }
+
+        final DreamBackend.DreamInfo activeDream = mDreamPickerController.getActiveDreamInfo();
+        mComplicationsTogglePreference.setVisible(
+                activeDream != null && activeDream.supportsComplications);
     }
 
     private void updatePaddingForPreviewButton() {
