@@ -5350,6 +5350,8 @@
     <string name="battery_usage_spinner_breakdown_by_apps">Breakdown by apps</string>
     <!-- [CHAR_LIMIT=NONE] The spinner item text in the battery usage breakdown. -->
     <string name="battery_usage_spinner_breakdown_by_system">Breakdown by system</string>
+    <!-- [CHAR_LIMIT=NONE] Less than some percentage, e.g. < 1% -->
+    <string name="battery_usage_less_than_percent">&lt; <xliff:g id="percentage">%1$s</xliff:g></string>
     <!-- Process Stats strings -->
     <skip />
 
@@ -10070,7 +10072,7 @@
     <!-- Preference category for showing auto-fill services with saved passwords. [CHAR LIMIT=60] -->
     <string name="autofill_passwords">Passwords</string>
     <!-- Preference category for showing credman services with saved credentials. [CHAR LIMIT=60] -->
-    <string name="credman_credentials">Password and identity services</string>
+    <string name="credman_credentials">Passwords, passkeys and data services</string>
     <!-- Summary for passwords settings that shows how many passwords are saved for each autofill
          service. [CHAR LIMIT=NONE] -->
     <string name="autofill_passwords_count">{count, plural,
@@ -10083,7 +10085,7 @@
     <!-- Keywords for the auto-fill feature. [CHAR LIMIT=NONE] -->
     <string name="autofill_keywords">auto, fill, autofill, password</string>
     <!-- Keywords for the credman feature. [CHAR LIMIT=NONE] -->
-    <string name="credman_keywords">credentials, passkey, password</string>
+    <string name="credman_keywords">data, passkey, password</string>
 
     <!-- Message of the warning dialog for setting the auto-fill app. [CHAR_LIMIT=NONE] -->
     <string name="autofill_confirmation_message">
@@ -10100,13 +10102,13 @@
     <string name="credman_confirmation_message_title">Turn off %1$s\?</string>
 
     <!-- Message of the warning dialog for disabling the credential provider. [CHAR_LIMIT=NONE] -->
-    <string name="credman_confirmation_message">Saved info like addresses or payment methods won\'t be filled in when you sign in. To keep your saved info filled in, set a default autofill service.</string>
+    <string name="credman_confirmation_message">Saved info like addresses or payment methods won\'t be filled in when you sign in. To keep your saved info filled in, set enable a password, passkey and data/or service.</string>
 
     <!-- Title of the error dialog when too many credential providers are selected. [CHAR_LIMIT=NONE] -->
-    <string name="credman_error_message_title">Password and identity services limit</string>
+    <string name="credman_error_message_title">Passwords, passkeys and data services limit</string>
 
     <!-- Message of the error dialog when too many credential providers are selected. [CHAR_LIMIT=NONE] -->
-    <string name="credman_error_message">You can have up to 5 autofill and password services active at the same time. Turn off a service to add more.</string>
+    <string name="credman_error_message">You can have up to 5 passwords, passkeys and data services active at the same time. Turn off a service to add more.</string>
 
     <!-- Positive button to turn off credential manager provider (confirmation). [CHAR LIMIT=60] -->
     <string name="credman_confirmation_message_positive_button">Turn off</string>

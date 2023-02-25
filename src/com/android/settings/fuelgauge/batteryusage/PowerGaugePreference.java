@@ -38,7 +38,6 @@ import com.android.settingslib.widget.AppPreference;
  */
 public class PowerGaugePreference extends AppPreference {
 
-    private static final double PERCENTAGE_TO_SHOW_THRESHOLD = 1f;
     // Please see go/battery-usage-app-list-alpha
     private static final float SELECTABLE_ALPHA = 1f;
     private static final float UNSELECTABLE_ALPHA_LIGHT_MODE = 0.65f;
@@ -81,27 +80,15 @@ public class PowerGaugePreference extends AppPreference {
         notifyChanged();
     }
 
-    /** Sets the percent of total. */
-    public void setPercent(double percentOfTotal) {
-        mProgress = percentOfTotal < PERCENTAGE_TO_SHOW_THRESHOLD
-                ? "-" : Utils.formatPercentage(percentOfTotal, true);
+    /** Sets the percentage to show. */
+    public void setPercentage(CharSequence percentage) {
+        mProgress = percentage;
         notifyChanged();
     }
 
-    /** Gets the percent of total. */
-    public String getPercent() {
+    /** Gets the percentage to show. */
+    public String getPercentage() {
         return mProgress.toString();
-    }
-
-    /** Sets the subtitle. */
-    public void setSubtitle(CharSequence subtitle) {
-        mProgress = subtitle;
-        notifyChanged();
-    }
-
-    /** Gets the subtitle. */
-    public CharSequence getSubtitle() {
-        return mProgress;
     }
 
     /** Sets whether to show anomaly icon */

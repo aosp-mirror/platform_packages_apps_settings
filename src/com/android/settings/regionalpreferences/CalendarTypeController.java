@@ -17,6 +17,7 @@
 package com.android.settings.regionalpreferences;
 
 import android.content.Context;
+import android.os.SystemProperties;
 import android.provider.Settings;
 
 import com.android.settings.core.BasePreferenceController;
@@ -27,6 +28,8 @@ import java.util.Locale;
  * A controller for the entry of Calendar types' page
  */
 public class CalendarTypeController extends BasePreferenceController {
+    private static final String CALENDAR_FEATURE_PROPERTY =
+            "i18n-feature-locale-preference-calendar";
     private static final String TAG = CalendarTypeController.class.getSimpleName();
     public CalendarTypeController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -45,7 +48,8 @@ public class CalendarTypeController extends BasePreferenceController {
      */
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return SystemProperties.getBoolean(CALENDAR_FEATURE_PROPERTY, false)
+                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

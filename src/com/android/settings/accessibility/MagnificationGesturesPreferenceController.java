@@ -14,7 +14,6 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
-import android.icu.text.MessageFormat;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -94,19 +93,11 @@ public class MagnificationGesturesPreferenceController extends TogglePreferenceC
     }
 
     static void populateMagnificationGesturesPreferenceExtras(Bundle extras, Context context) {
-        extras.putString(AccessibilitySettings.EXTRA_PREFERENCE_KEY,
-                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED);
+        // TODO(b/270481978): It seems not necessary to put EXTRA_TITLE_RES.
         extras.putInt(AccessibilitySettings.EXTRA_TITLE_RES,
                 R.string.accessibility_screen_magnification_gestures_title);
 
-        String intro = context.getString(R.string.accessibility_screen_magnification_intro_text);
-        extras.putCharSequence(AccessibilitySettings.EXTRA_INTRO, intro);
-
-        String summary = context.getString(R.string.accessibility_screen_magnification_summary);
-        final Object[] numberArguments = {1, 2, 3, 4, 5};
-        summary = MessageFormat.format(summary, numberArguments);
-        extras.putCharSequence(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, summary);
-
+        // TODO(b/270481978): It seems not necessary to put EXTRA_VIDEO_RAW_RESOURCE_ID.
         extras.putInt(AccessibilitySettings.EXTRA_VIDEO_RAW_RESOURCE_ID,
                 R.raw.accessibility_screen_magnification);
     }
