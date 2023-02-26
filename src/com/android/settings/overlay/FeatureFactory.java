@@ -48,6 +48,7 @@ import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.users.UserFeatureProvider;
 import com.android.settings.vpn2.AdvancedVpnFeatureProvider;
 import com.android.settings.wifi.WifiTrackerLibProvider;
+import com.android.settings.wifi.factory.WifiFeatureProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
@@ -191,6 +192,11 @@ public abstract class FeatureFactory {
      * Retrieves implementation for advanced vpn feature.
      */
     public abstract AdvancedVpnFeatureProvider getAdvancedVpnFeatureProvider();
+
+    /**
+     * Retrieves implementation for Wi-Fi feature.
+     */
+    public abstract WifiFeatureProvider getWifiFeatureProvider();
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {
