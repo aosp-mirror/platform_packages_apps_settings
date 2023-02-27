@@ -622,10 +622,8 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Odpojiť"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Párovať a pripojiť"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Keď je zapnuté pripojenie Bluetooth, zariadenie môže komunikovať s ostatnými zariadeniami s funkciou Bluetooth v okolí."</string>
-    <!-- no translation found for bluetooth_scanning_on_info_message (786648535600075223) -->
-    <skip />
-    <!-- no translation found for bluetooth_scan_change (1744636222637390367) -->
-    <skip />
+    <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Keď je zapnuté rozhranie Bluetooth, zariadenie môže komunikovať s ostatnými zariadeniami s rozhraním Bluetooth v okolí.\n\nNa zlepšenie prostredia zariadenia môžu aplikácie a služby kedykoľvek vyhľadávať zariadenia v okolí, a to aj vtedy, keď je rozhranie Bluetooth vypnuté. Vďaka tomu je napríklad možné zlepšiť funkcie a služby podmienené polohou. Môžete to zmeniť v nastaveniach vyhľadávania rozhraním Bluetooth."</string>
+    <string name="bluetooth_scan_change" msgid="1744636222637390367">"Zmeniť"</string>
     <string name="device_details_title" msgid="1155622417516195481">"O zariadení"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Nastavenia klávesnice"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Adresa Bluetooth zariadenia: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -1395,20 +1393,16 @@
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Overenie vzoru"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Overenie kódu PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Overenie hesla"</string>
-    <!-- no translation found for lockpassword_remote_validation_header (4992647285784962073) -->
+    <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Overte totožnosť"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (4655537780358707983) -->
     <skip />
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (7738124461482712491) -->
+    <!-- no translation found for lockpassword_remote_validation_pin_details (2373654227583206297) -->
     <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (8924028697135308390) -->
+    <!-- no translation found for lockpassword_remote_validation_password_details (3482328925925888340) -->
     <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (8478926171431523279) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (7595104317648465901) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (509672303005547218) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (2066701840753591922) -->
-    <skip />
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Toto zariadenie odomykať aj vzorom"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Toto zariadenie odomykať aj kódom PIN"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Toto zariadenie odomykať aj heslom"</string>
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"Nesprávny kód PIN"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Nesprávne heslo"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Nesprávny vzor"</string>
@@ -1733,12 +1727,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Stiahnuté aplikácie"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimentálne"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Experimentálne funkcie"</string>
-    <string name="snoop_logger_filters_dashboard_title" msgid="3082744626059215281">"Filtre nástroja zaznamenávania Snoop"</string>
-    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="626757789702677076">"Nastavte filtre (po zmene tohto nastavenia prepnite Bluetooth)"</string>
-    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="5508775381082875785">"Filter PBAP nástroja zaznamenávania Snoop"</string>
-    <string name="bt_hci_snoop_log_filter_map_title" msgid="5700678748422653316">"Filter MAP nástroja zaznamenávania Snoop"</string>
-    <string name="bt_hci_snoop_log_filter_summary" msgid="6235819710248503870">"Nastavte režim filtrovania. (Prepnite Bluetooth po zmene tohto nastavenia.)"</string>
-    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="272884193300382035">"Ak chcete túto možnosť zmeniť, povoľte režimu Snoop Log filtrovanie."</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Čítačka obrazovky určená hlavne pre nevidiacich a slabozrakých"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Položky na obrazovke si môžete vypočuť nahlas klepnutím"</string>
@@ -2182,7 +2184,8 @@
     <string name="battery_missing_message" msgid="400958471814422770">"Pri čítaní merača batérie sa vyskytol problém."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Klepnutím získate ďalšie informácie o tejto chybe"</string>
-    <string name="power_screen" msgid="4596900105850963806">"Obrazovka"</string>
+    <!-- no translation found for power_screen (3926703168513988776) -->
+    <skip />
     <string name="power_cpu" msgid="1820472721627148746">"Procesor"</string>
     <string name="power_flashlight" msgid="8993388636332573202">"Baterka"</string>
     <string name="power_camera" msgid="4778315081581293923">"Fotoaparát"</string>
@@ -2260,6 +2263,8 @@
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Čas používania: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_spinner_breakdown_by_apps" msgid="7746337368402445072">"Rozdelenie podľa aplikácií"</string>
     <string name="battery_usage_spinner_breakdown_by_system" msgid="4646952798665973464">"Rozdelenie podľa systému"</string>
+    <!-- no translation found for battery_usage_less_than_percent (5873099028895001082) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Štatistiky procesov"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Podrobné štatistiky spustených procesov"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Využitie pamäte"</string>
@@ -2907,8 +2912,7 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Hlasitosť zvonení a upozornení"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Hlasitosť zvonenia"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Hlasitosť upozornení"</string>
-    <!-- no translation found for notification_volume_disabled_summary (8679988555852056079) -->
-    <skip />
+    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Nedostupné, pretože je vypnuté zvonenie"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Tón zvonenia telefónu"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Predvolený zvuk upozornenia"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Zvuk z aplikácie"</string>
@@ -3174,8 +3178,10 @@
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Povoliť prístup k upozorneniam"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Adaptívne upozornenia Androidu boli v Androide 12 nahradené zlepšenými upozorneniami. Táto funkcia zobrazuje navrhované akcie aj odpovede a organizuje vaše upozornenia. \n\nZlepšené upozornenia majú prístup k obsahu upozornení vrátane osobných údajov, ako sú mená kontaktov a správy. Táto funkcia tiež môže zavrieť upozornenia alebo na ne reagovať, napríklad prijať telefonáty a ovládať režim bez vyrušení."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Povoliť prístup k upozorneniam pre službu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> bude môcť čítať všetky upozornenia vrátane osobných údajov, ako sú mená kontaktov, fotky a texty prijatých správ. Bude môcť tiež stlmiť alebo zrušiť upozornenia, prípadne spustiť v nich obsiahnuté tlačidlá spúšťajúce akcie vrátane prijatia telefonického hovoru. \n\nAplikácia tým získa aj možnosť vypnúť alebo zapnúť režim bez vyrušení a meniť súvisiace nastavenia."</string>
-    <string name="nls_warning_prompt" msgid="9143226910825830619">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> bude môcť:"</string>
+    <!-- no translation found for notification_listener_security_warning_summary (1131986567509818121) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (1486887096703743841) -->
+    <skip />
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Čítať vaše upozornenia"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"Môže čítať vaše upozornenia vrátane osobných údajov, ako sú kontakty, správy a fotky."</string>
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"Odpovedať na správy"</string>
@@ -3987,15 +3993,20 @@
     <string name="autofill_app" msgid="7595308061826307921">"Služba automatického dopĺňania"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Predvolená služba automatického dopĺňania"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Heslá"</string>
-    <string name="credman_credentials" msgid="5937331545565783811">"Služby na overovanie totožnosti a správu hesiel"</string>
+    <!-- no translation found for credman_credentials (7413302794874989255) -->
+    <skip />
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# heslo}few{# heslá}many{# passwords}other{# hesiel}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"automaticky, vypĺňanie, automatické dopĺňanie, heslo"</string>
-    <string name="credman_keywords" msgid="7236954350284379264">"prihlasovacie údaje, prístupový kľúč, heslo"</string>
+    <!-- no translation found for credman_keywords (8305600680836806170) -->
+    <skip />
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Skontrolujte, či ide o dôveryhodnú aplikáciu&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Automatické dopĺňanie Google&gt;%1$s&lt;/xliff:g&gt; určuje na základe obsahu obrazovky, čo je možné automaticky vyplniť."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Chcete službu %1$s vypnúť?"</string>
-    <string name="credman_confirmation_message" msgid="1485617504425237430">"Uložené informácie, ako sú adresy alebo spôsoby platby, sa pri prihlasovaní nebudú dopĺňať. Ak chcete, aby sa uložené informácie naďalej dopĺňali, nastavte predvolenú službu automatického dopĺňania"</string>
-    <string name="credman_error_message_title" msgid="5108868200002966901">"Obmedzenie počtu služieb na overovanie totožnosti a správu hesiel"</string>
-    <string name="credman_error_message" msgid="4058425433345908579">"Súčasne môžete mať aktívnych maximálne päť služieb na automatické dopĺňanie a správu hesiel. Ak chcete pridať ďalšiu službu, jednu vypnite."</string>
+    <!-- no translation found for credman_confirmation_message (3499478570809427026) -->
+    <skip />
+    <!-- no translation found for credman_error_message_title (4741457523969373713) -->
+    <skip />
+    <!-- no translation found for credman_error_message (6793314648458925172) -->
+    <skip />
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Vypnúť"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Automatické dopĺňanie"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Úroveň zaznamenávania"</string>

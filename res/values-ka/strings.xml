@@ -169,8 +169,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"ტემპერატურა"</string>
     <string name="calendar_preferences_title" msgid="8312485828206542600">"კალენდარი"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"კვირის პირველი დღე"</string>
-    <!-- no translation found for numbers_preferences_title (8197418984391195446) -->
-    <skip />
+    <string name="numbers_preferences_title" msgid="8197418984391195446">"ნომრების უპირატესობები"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"გამოიყენე აპის ნაგულისხმევი პარამეტრები"</string>
     <string name="celsius_temperature_unit" msgid="6118523647432383132">"ცელსიუსი (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"ფარენჰაიტი (°F)"</string>
@@ -622,10 +621,8 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"კავშირის გაწყვეტა"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"დაწყვილება და შეერთება"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"როდესაც Bluetooth ჩართულია, თქვენს მოწყობილობას ახლომდებარე Bluetooth მოწყობილობებთან კომუნიკაცია შეუძლია."</string>
-    <!-- no translation found for bluetooth_scanning_on_info_message (786648535600075223) -->
-    <skip />
-    <!-- no translation found for bluetooth_scan_change (1744636222637390367) -->
-    <skip />
+    <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"როცა Bluetooth ჩართულია, თქვენს მოწყობილობას შეუძლია სხვა ახლომდებარე Bluetooth მოწყობილობებთან კომუნიკაცია.\n\nმოწყობილობის საუკეთესოდ მოხმარებისთვის, აპები და სერვისები მაშინაც კი შეძლებს ახლომდებარე მოწყობილობათა აღმოსაჩენად სკანირებას, როცა Bluetooth გამორთულია. ამის გამოყენება შესაძლებელია, მაგალითად, მდებარეობაზე დაფუძნებული ფუნქციების და სერვისების გასაუმჯობესებლად. ამის შეცვლა Bluetooth-ით სკანირების პარამეტრებში შეგიძლიათ."</string>
+    <string name="bluetooth_scan_change" msgid="1744636222637390367">"შეცვლა"</string>
     <string name="device_details_title" msgid="1155622417516195481">"მოწყობილობის დეტალები"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"კლავიატურის პარამეტრები"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"მოწყობილობის Bluetooth მისამართი: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -1395,20 +1392,16 @@
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"განმბლოკავი ნიმუშის დადასტურება"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"PIN-კოდის დადასტურება"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"პაროლის დადასტურება"</string>
-    <!-- no translation found for lockpassword_remote_validation_header (4992647285784962073) -->
+    <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"დაადასტურეთ, რომ თქვენ ხართ"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (4655537780358707983) -->
     <skip />
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (7738124461482712491) -->
+    <!-- no translation found for lockpassword_remote_validation_pin_details (2373654227583206297) -->
     <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (8924028697135308390) -->
+    <!-- no translation found for lockpassword_remote_validation_password_details (3482328925925888340) -->
     <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (8478926171431523279) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (7595104317648465901) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (509672303005547218) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (2066701840753591922) -->
-    <skip />
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"ამ მოწყობილობის განბლოკვისთვის ასევე ნიმუში გამოიყენეთ"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"ამ მოწყობილობის განბლოკვისთვის ასევე PIN-კოდი გამოიყენეთ"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"ამ მოწყობილობის განბლოკვისთვის ასევე პაროლი გამოიყენეთ"</string>
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"არასწორი PIN"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"არასწორი პაროლი"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"არასწორი ნიმუში"</string>
@@ -1733,12 +1726,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"ჩამოტვირთული აპები"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"ექსპერიმენტული"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"ფუნქციების ალმები"</string>
-    <string name="snoop_logger_filters_dashboard_title" msgid="3082744626059215281">"მიყუდების ჟურნალის ფილტრები"</string>
-    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="626757789702677076">"დააყენეთ ფილტრები (გადართეთ Bluetooth ამ პარამ. ჩართვის შემდეგ)"</string>
-    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="5508775381082875785">"მიყურადების ჟურნალის ფილტრი PBAP"</string>
-    <string name="bt_hci_snoop_log_filter_map_title" msgid="5700678748422653316">"მიყურადების ჟურნალის ფილტრი MAP"</string>
-    <string name="bt_hci_snoop_log_filter_summary" msgid="6235819710248503870">"ფილტ რეჟ. დაყ. (გადართეთ Bluetooth ამ პარამ. ჩართვის შემდეგ)"</string>
-    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="272884193300382035">"ჩართეთ მიყ. ჟურნ. რეჟიმის გაფილტვრა ამ პარ. შესაცვლელად."</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"ეკრანის წამკითხველი შექმნილია მხედველობის პრობლემების მქონე ადამიანებისთვის"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"ერთეულების მოსასმენად, შეეხეთ მათ თქვენს ეკრანზე"</string>
@@ -2182,7 +2183,8 @@
     <string name="battery_missing_message" msgid="400958471814422770">"ბატარეის მზომის წაკითხვასთან დაკავშირებით პრობლემა დაფიქსირდა"</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"შეეხეთ ამ შეცდომის შესახებ მეტის გასაგებად"</string>
-    <string name="power_screen" msgid="4596900105850963806">"ეკრანი"</string>
+    <!-- no translation found for power_screen (3926703168513988776) -->
+    <skip />
     <string name="power_cpu" msgid="1820472721627148746">"CPU"</string>
     <string name="power_flashlight" msgid="8993388636332573202">"ფანარი"</string>
     <string name="power_camera" msgid="4778315081581293923">"კამერა"</string>
@@ -2260,6 +2262,8 @@
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"ეკრანთან დრო <xliff:g id="SLOT">%s</xliff:g> პერიოდში"</string>
     <string name="battery_usage_spinner_breakdown_by_apps" msgid="7746337368402445072">"აპების მიხედვით"</string>
     <string name="battery_usage_spinner_breakdown_by_system" msgid="4646952798665973464">"სისტემის მიხედვით"</string>
+    <!-- no translation found for battery_usage_less_than_percent (5873099028895001082) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"პროცესის სტატისტიკა"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"მიმდინარე პროცესების შემაჯამებელი სტატისტიკა"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"გამოყენებული მეხსიერება"</string>
@@ -2907,8 +2911,7 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"ზარების/შეტყობინებების ხმა"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"ზარის ხმა"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"შეტყობინების ხმა"</string>
-    <!-- no translation found for notification_volume_disabled_summary (8679988555852056079) -->
-    <skip />
+    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"არ არის ხელმისაწვდომი, რადგან დარეკვა დადუმებულია"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"ტელეფონის ზარი"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"შეტყობინებების ნაგულისხმევი ხმა"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"აპის მიერ უზრუნველყოფილი ხმა"</string>
@@ -3174,8 +3177,10 @@
     <string name="notification_access_detail_switch" msgid="46386786409608330">"დაუშვით წვდომა შეტყობინებებზე"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"გაფართოებულმა შეტყობინებებმა ჩაანაცვლა Android-ის ადაპტაციური შეტყობინებების ფუნქცია Android 12-ში. ეს ფუნქცია გაჩვენებთ შემოთავაზებულ მოქმედებებს და პასუხებს, ამასთანავე კი ახდენს თქვენი შეტყობინებების ორგანიზებას. \n\nგაფართოებულ შეტყობინებებს შეუძლია ყველა შეტყობინების კონტენტზე, მათ შორის, ისეთ პერსონალურ ინფორმაციაზე წვდომა, როგორიცაა კონტაქტების სახელები და შეტყობინებები. ამ ფუნქციას ასევე შეუძლია შეტყობინებათა დახურვა ან მათზე პასუხის გაცემა, მაგალითად, სატელეფონო ზარებზე პასუხი და „არ შემაწუხოთ“ რეჟიმის მართვა."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"გსურთ მიანიჭოთ <xliff:g id="SERVICE">%1$s</xliff:g>-ს შეტყობინებებზე წვდომა?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> შეძლებს ყველა შეტყობინების, მაგალითად, ისეთი პერსონალური ინფორმაციის წაკითხვას, როგორიცაა კონტაქტების სახელები, ფოტოები და თქვენ მიერ მიღებული შეტყობინებების ტექსტი. ეს აპი ასევე შეძლებს, ჩააჩუმოს ან დახუროს შეტყობინებები და აამოქმედოს შეტყობინებათა ღილაკები, მათ შორის, სატელეფონო ზარებზე პასუხი. \n\nაპს მიეცემა „არ შემაწუხოთ“ რეჟიმის ჩართვის ან გამორთვის და დაკავშირებული პარამეტრების შეცვლის შესაძლებლობაც."</string>
-    <string name="nls_warning_prompt" msgid="9143226910825830619">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>-ს შეეძლება:"</string>
+    <!-- no translation found for notification_listener_security_warning_summary (1131986567509818121) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (1486887096703743841) -->
+    <skip />
     <string name="nls_feature_read_title" msgid="7629713268744220437">"წაიკითხეთ შეტყობინებები"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"მას შეუძლია თქვენი შეტყობინებების, მაგალითად, პერსონალური ინფორმაციის წაკითხვა, როგორიცაა კონტაქტები, გზავნილები და ფოტოები."</string>
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"შეტყობინებებზე პასუხი"</string>
@@ -3985,15 +3990,20 @@
     <string name="autofill_app" msgid="7595308061826307921">"ავტომატური შევსების სერვისი"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"ავტომატური შევსების ნაგულისხმევი სერვისი"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"პაროლები"</string>
-    <string name="credman_credentials" msgid="5937331545565783811">"პაროლის და ვინაობის სერვისები"</string>
+    <!-- no translation found for credman_credentials (7413302794874989255) -->
+    <skip />
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# პაროლი}other{# პაროლი}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"ავტომატური, შევსება, ავტომატური შევსება, პაროლი"</string>
-    <string name="credman_keywords" msgid="7236954350284379264">"ავტორიზაციის მონაცემები, წვდომის გასაღები, პაროლი"</string>
+    <!-- no translation found for credman_keywords (8305600680836806170) -->
+    <skip />
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;დარწმუნდით, რომ ენდობით ამ აპს&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google-ის ავტომატური შევსება&gt;%1$s&lt;/xliff:g&gt; იყენებს თქვენს ეკრანზე არსებულ კონტენტს, რათა გაარკვიოს, რა შეიძლება შეივსოს ავტომატურად."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"გამოირთოს %1$s?"</string>
-    <string name="credman_confirmation_message" msgid="1485617504425237430">"შენახული ინფორმაცია, მათ შორის, მისამართები ან გადახდის მეთოდები, შესვლისას არ შეივსება. შენახული მონაცემებით შევსებისთვის დააყენეთ ავტომატური შევსების სერვისი."</string>
-    <string name="credman_error_message_title" msgid="5108868200002966901">"პაროლისა და ვინაობის სერვისების ლიმიტი"</string>
-    <string name="credman_error_message" msgid="4058425433345908579">"ერთდროულად შესაძლებელია ავტომატური შევსებისა და პაროლის მაქსიმუმ 5 სერვისით სარგებლობა. მეტის დასამატებლად გამორთეთ სერვისი."</string>
+    <!-- no translation found for credman_confirmation_message (3499478570809427026) -->
+    <skip />
+    <!-- no translation found for credman_error_message_title (4741457523969373713) -->
+    <skip />
+    <!-- no translation found for credman_error_message (6793314648458925172) -->
+    <skip />
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"გამორთვა"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"ავტომატური შევსება"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"აღრიცხვის დონე"</string>

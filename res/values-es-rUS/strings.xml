@@ -169,8 +169,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperatura"</string>
     <string name="calendar_preferences_title" msgid="8312485828206542600">"Calendario"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Primer día de la semana"</string>
-    <!-- no translation found for numbers_preferences_title (8197418984391195446) -->
-    <skip />
+    <string name="numbers_preferences_title" msgid="8197418984391195446">"Preferencias de números"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Usar la configuración predeterminada de la app"</string>
     <string name="celsius_temperature_unit" msgid="6118523647432383132">"Celsius (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Fahrenheit (°F)"</string>
@@ -622,10 +621,8 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Desconectar"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Vincular y conectar"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Cuando Bluetooth está activado, permite conectarse con dispositivos cercanos que tengan Bluetooth."</string>
-    <!-- no translation found for bluetooth_scanning_on_info_message (786648535600075223) -->
-    <skip />
-    <!-- no translation found for bluetooth_scan_change (1744636222637390367) -->
-    <skip />
+    <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Cuando Bluetooth está activado, tu dispositivo puede usarlo para comunicarse con otros dispositivos Bluetooth cercanos.\n\nPara mejorar la experiencia, las apps y los servicios pueden buscar dispositivos cercanos incluso cuando la conexión Bluetooth esté desactivada. Esta función puede usarse, por ejemplo, para mejorar las funciones y los servicios basados en la ubicación. Puedes cambiar esta opción en la configuración de búsqueda de Bluetooth."</string>
+    <string name="bluetooth_scan_change" msgid="1744636222637390367">"Cambiar"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detalles del dispositivo"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Configuración del teclado"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Dirección Bluetooth del dispositivo: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -1395,20 +1392,16 @@
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Verificar patrón"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Verificar PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Verificar contraseña"</string>
-    <!-- no translation found for lockpassword_remote_validation_header (4992647285784962073) -->
+    <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Validar identidad"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (4655537780358707983) -->
     <skip />
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (7738124461482712491) -->
+    <!-- no translation found for lockpassword_remote_validation_pin_details (2373654227583206297) -->
     <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (8924028697135308390) -->
+    <!-- no translation found for lockpassword_remote_validation_password_details (3482328925925888340) -->
     <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (8478926171431523279) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (7595104317648465901) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (509672303005547218) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (2066701840753591922) -->
-    <skip />
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Desbloquear este dispositivo con el patrón"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Desbloquear este dispositivo con el PIN"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Desbloquear este dispositivo con contraseña"</string>
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"PIN incorrecto"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Contraseña incorrecta"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Patrón incorrecto"</string>
@@ -1733,12 +1726,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Apps descargadas"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Marcas de función"</string>
-    <string name="snoop_logger_filters_dashboard_title" msgid="3082744626059215281">"Filtros de registro de búsqueda"</string>
-    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="626757789702677076">"Configura filtros (activa Bluetooth después)"</string>
-    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="5508775381082875785">"Filtro de registro de búsqueda PBAP"</string>
-    <string name="bt_hci_snoop_log_filter_map_title" msgid="5700678748422653316">"Filtro de registro de búsqueda MAP"</string>
-    <string name="bt_hci_snoop_log_filter_summary" msgid="6235819710248503870">"Modo filtro. (Activa/desactiva el Bluetooth luego)"</string>
-    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="272884193300382035">"Activa registro de búsqueda filtrado para cambiar."</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Lector de pantalla, principalmente, para personas con ceguera o visión reducida"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Presiona los elementos en tu pantalla para escuchar la lectura en voz alta"</string>
@@ -2182,7 +2183,8 @@
     <string name="battery_missing_message" msgid="400958471814422770">"Se produjo un error al leer el medidor de batería."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Presiona para obtener más información sobre este error"</string>
-    <string name="power_screen" msgid="4596900105850963806">"Pantalla"</string>
+    <!-- no translation found for power_screen (3926703168513988776) -->
+    <skip />
     <string name="power_cpu" msgid="1820472721627148746">"CPU"</string>
     <string name="power_flashlight" msgid="8993388636332573202">"Linterna"</string>
     <string name="power_camera" msgid="4778315081581293923">"Cámara"</string>
@@ -2222,7 +2224,7 @@
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Se activará cuando quede <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Establecer un programa"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Extender la duración de la batería"</string>
-    <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Desactivar después de la carga"</string>
+    <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Desactivar cuando la batería esté cargada"</string>
     <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Cuando el dispositivo tiene más del <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> de carga, se desactiva el Ahorro de batería"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
@@ -2260,6 +2262,8 @@
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Tiempo de uso <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_spinner_breakdown_by_apps" msgid="7746337368402445072">"Desglose por app"</string>
     <string name="battery_usage_spinner_breakdown_by_system" msgid="4646952798665973464">"Desglose por sistema"</string>
+    <!-- no translation found for battery_usage_less_than_percent (5873099028895001082) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Estadísticas de procesos"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Estadísticas para geeks sobre procesos activos"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Uso de memoria"</string>
@@ -2883,14 +2887,14 @@
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"pago, predeterminado"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"notificación entrante"</string>
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"conexión USB, conexión Bluetooth, hotspot de Wi-Fi"</string>
-    <string name="keywords_accessibility_vibration_primary_switch" msgid="730692154347231253">"tecnología háptica, vibrar, vibración"</string>
-    <string name="keywords_touch_vibration" msgid="1125291201902251273">"tecnología háptica, vibrar, pantalla, sensibilidad"</string>
-    <string name="keywords_ring_vibration" msgid="1736301626537417541">"háptica, vibrar, teléfono, llamada, sensibilidad, tono"</string>
-    <string name="keywords_ramping_ringer_vibration" msgid="3678966746742257366">"háptica, vibrar, teléfono, llamada, hacer sonar, gradual"</string>
-    <string name="keywords_notification_vibration" msgid="2620799301276142183">"háptica, vibrar, sensibilidad, notificación"</string>
-    <string name="keywords_alarm_vibration" msgid="4833220371621521817">"háptica, vibrar, sensibilidad, alarma"</string>
-    <string name="keywords_media_vibration" msgid="723896490102792327">"háptica, vibrar, sensibilidad, contenido multimedia"</string>
-    <string name="keywords_vibration" msgid="670455132028025952">"tecnología háptica, vibrar, vibración"</string>
+    <string name="keywords_accessibility_vibration_primary_switch" msgid="730692154347231253">"tecnología táctil, vibrar, vibración"</string>
+    <string name="keywords_touch_vibration" msgid="1125291201902251273">"tecnología táctil, vibrar, pantalla, sensibilidad"</string>
+    <string name="keywords_ring_vibration" msgid="1736301626537417541">"tecnología táctil, vibrar, teléfono, llamada, sensibilidad, tono"</string>
+    <string name="keywords_ramping_ringer_vibration" msgid="3678966746742257366">"tecnología táctil, vibrar, teléfono, llamada, hacer sonar, gradual"</string>
+    <string name="keywords_notification_vibration" msgid="2620799301276142183">"tecnología táctil, vibrar, sensibilidad, notificación"</string>
+    <string name="keywords_alarm_vibration" msgid="4833220371621521817">"tecnología táctil, vibrar, sensibilidad, alarma"</string>
+    <string name="keywords_media_vibration" msgid="723896490102792327">"tecnología táctil, vibrar, sensibilidad, contenido multimedia"</string>
+    <string name="keywords_vibration" msgid="670455132028025952">"tecnología táctil, vibrar, vibración"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"ahorro de batería, fijo, permanente, ahorro de energía, batería"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutina, programa, ahorro de batería, ahorro de energía, batería, automático, porcentaje"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, llamadas avanzadas, llamadas mediante 4G"</string>
@@ -2907,8 +2911,7 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Volumen de tono y notificaciones"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Volumen de tono"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Volumen de notificación"</string>
-    <!-- no translation found for notification_volume_disabled_summary (8679988555852056079) -->
-    <skip />
+    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"No disponible porque el timbre está silenciado"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Tono de llamada"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Sonido de notificación predeterminado"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Sonido que proporcionó la app"</string>
@@ -3174,8 +3177,10 @@
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Permitir acceso a las notificaciones"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Las notificaciones mejoradas reemplazaron a las notificaciones adaptables en Android 12. Esta función muestra respuestas y acciones sugeridas, y organiza tus notificaciones. \n\nLas notificaciones mejoradas pueden acceder a todo el contenido de notificaciones, lo que incluye información personal, como nombres de contactos y mensajes. También puede descartar o responder notificaciones (como contestar llamadas) y controlar la función No interrumpir."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"¿Deseas permitir que <xliff:g id="SERVICE">%1$s</xliff:g> tenga acceso a las notificaciones?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrá leer todas las notificaciones, incluidas las que contienen información personal, como los nombres de los contactos, las fotos y el texto de los mensajes que recibas. Esta app también podrá posponer o descartar notificaciones y realizar acciones en botones de notificaciones (por ejemplo, para responder llamadas). \n\nAdemás, podrá activar y desactivar No interrumpir y cambiar la configuración relacionada."</string>
-    <string name="nls_warning_prompt" msgid="9143226910825830619">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrá realizar lo siguiente:"</string>
+    <!-- no translation found for notification_listener_security_warning_summary (1131986567509818121) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (1486887096703743841) -->
+    <skip />
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Lee notificaciones"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"Puede leer tus notificaciones, incluidas las que contienen información personal como contactos, mensajes y fotos."</string>
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"Responde los mensajes"</string>
@@ -3985,15 +3990,20 @@
     <string name="autofill_app" msgid="7595308061826307921">"Servicio Autocompletar"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Servicio de autocompletado predeterminado"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Contraseñas"</string>
-    <string name="credman_credentials" msgid="5937331545565783811">"Servicios de identidad y contraseña"</string>
+    <!-- no translation found for credman_credentials (7413302794874989255) -->
+    <skip />
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# contraseña}other{# contraseñas}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"automático, completar, autocompletar, contraseña"</string>
-    <string name="credman_keywords" msgid="7236954350284379264">"credenciales, llave de acceso, contraseña"</string>
+    <!-- no translation found for credman_keywords (8305600680836806170) -->
+    <skip />
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Asegúrate de que esta app sea confiable&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; usa el contenido de tu pantalla para determinar qué se puede autocompletar."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"¿Quieres desactivar %1$s?"</string>
-    <string name="credman_confirmation_message" msgid="1485617504425237430">"La información guardada, como direcciones y formas de pago, no se rellenará al acceder. Para que la información guardada quede rellenada, configura un servicio de autocompletado predeterminado."</string>
-    <string name="credman_error_message_title" msgid="5108868200002966901">"Límite de servicios de identidad y contraseña"</string>
-    <string name="credman_error_message" msgid="4058425433345908579">"Puedes tener hasta 5 servicios de autocompletado y contraseña activos al mismo tiempo. Desactiva un servicio para agregar otros."</string>
+    <!-- no translation found for credman_confirmation_message (3499478570809427026) -->
+    <skip />
+    <!-- no translation found for credman_error_message_title (4741457523969373713) -->
+    <skip />
+    <!-- no translation found for credman_error_message (6793314648458925172) -->
+    <skip />
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Desactivar"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Autocompletar"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Nivel de registro"</string>
