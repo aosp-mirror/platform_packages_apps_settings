@@ -54,6 +54,7 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
 
     private Preference mPreference;
     private String mKeyDefaultName;
+    private String mKeyFocus;
     private Context mContext;
     private InputManager mIm;
 
@@ -72,6 +73,7 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
     public ModifierKeysPickerDialogFragment(Preference preference, InputManager inputManager) {
         mPreference = preference;
         mKeyDefaultName = preference.getTitle().toString();
+        mKeyFocus = preference.getSummary().toString();
         mIm = inputManager;
     }
 
@@ -101,11 +103,11 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
         ModifierKeyAdapter adapter = new ModifierKeyAdapter(modifierKeys);
         ListView listView = dialoglayout.findViewById(R.id.modifier_key_picker);
         listView.setAdapter(adapter);
+        setInitialFocusItem(modifierKeys, adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 adapter.setCurrentItem(i);
-                adapter.setClick(true);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -165,13 +167,22 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
         return modifierKeyDialog;
     }
 
+    private void setInitialFocusItem(
+            List<String> modifierKeys, ModifierKeyAdapter adapter) {
+        if (modifierKeys.indexOf(mKeyFocus) == -1) {
+            adapter.setCurrentItem(modifierKeys.indexOf(mKeyDefaultName));
+        } else {
+            adapter.setCurrentItem(modifierKeys.indexOf(mKeyFocus));
+        }
+        adapter.notifyDataSetChanged();
+    }
+
     private static boolean isKeyCapsLock(Context context, String key) {
         return key.equals(context.getString(R.string.modifier_keys_caps_lock));
     }
 
     class ModifierKeyAdapter extends BaseAdapter {
         private int mCurrentItem = 0;
-        private boolean mIsClick = false;
         private List<String> mList;
 
         ModifierKeyAdapter(List<String> list) {
@@ -201,12 +212,15 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
             TextView textView = view.findViewById(R.id.modifier_key_text);
             ImageView checkIcon = view.findViewById(R.id.modifier_key_check_icon);
             textView.setText(mList.get(i));
-            if (mCurrentItem == i && mIsClick) {
+            if (mCurrentItem == i) {
                 textView.setTextColor(getColorOfColorAccentPrimaryVariant());
                 checkIcon.setImageAlpha(255);
+                view.setBackground(
+                        mContext.getDrawable(R.drawable.modifier_key_lisetview_background));
             } else {
                 textView.setTextColor(getColorOfTextColorPrimary());
                 checkIcon.setImageAlpha(0);
+                view.setBackground(null);
             }
             return view;
         }
@@ -217,10 +231,6 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
 
         public int getCurrentItem() {
             return this.mCurrentItem;
-        }
-
-        public void setClick(boolean click) {
-            this.mIsClick = click;
         }
     }
 

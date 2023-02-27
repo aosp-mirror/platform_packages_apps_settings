@@ -157,7 +157,7 @@ public final class BatteryUsageBreakdownControllerTest {
         assertThat(pref.getOrder()).isEqualTo(1);
         assertThat(pref.getBatteryDiffEntry()).isSameInstanceAs(mBatteryDiffEntry);
         assertThat(pref.isSingleLineTitle()).isTrue();
-        assertThat(pref.isEnabled()).isFalse();
+        assertThat(pref.isSelectable()).isFalse();
     }
 
     @Test
@@ -232,6 +232,40 @@ public final class BatteryUsageBreakdownControllerTest {
                         SettingsEnums.OPEN_BATTERY_USAGE,
                         /* package name */ "none",
                         /* percentage of total */ 100);
+    }
+
+    @Test
+    public void setPreferencePercent_lessThanThreshold_expectedFormat() {
+        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
+        final BatteryDiffEntry batteryDiffEntry = createBatteryDiffEntry(
+                /*isSystem=*/ true,
+                /*screenOnTimeInMs=*/ 0,
+                /*foregroundUsageTimeInMs=*/ 0,
+                /*backgroundUsageTimeInMs=*/ 0);
+        batteryDiffEntry.mConsumePower = 0.8;
+        batteryDiffEntry.setTotalConsumePower(100);
+        mBatteryUsageBreakdownController.mPercentLessThanThresholdText = "< 1%";
+
+        mBatteryUsageBreakdownController.setPreferencePercentage(pref, batteryDiffEntry);
+
+        assertThat(pref.getPercentage()).isEqualTo("< 1%");
+    }
+
+    @Test
+    public void setPreferencePercent_greaterThanThreshold_expectedFormat() {
+        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
+        final BatteryDiffEntry batteryDiffEntry = createBatteryDiffEntry(
+                /*isSystem=*/ true,
+                /*screenOnTimeInMs=*/ 0,
+                /*foregroundUsageTimeInMs=*/ 0,
+                /*backgroundUsageTimeInMs=*/ 0);
+        batteryDiffEntry.mConsumePower = 16;
+        batteryDiffEntry.setTotalConsumePower(100);
+        mBatteryUsageBreakdownController.mPercentLessThanThresholdText = "< 1%";
+
+        mBatteryUsageBreakdownController.setPreferencePercentage(pref, batteryDiffEntry);
+
+        assertThat(pref.getPercentage()).isEqualTo("16%");
     }
 
     @Test
