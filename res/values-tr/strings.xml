@@ -622,10 +622,8 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Bağlantıyı kes"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Eşle ve bağlan"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Bluetooth açık olduğunda, cihazınız yakındaki Bluetooth cihazlarla iletişim kurabilir."</string>
-    <!-- no translation found for bluetooth_scanning_on_info_message (786648535600075223) -->
-    <skip />
-    <!-- no translation found for bluetooth_scan_change (1744636222637390367) -->
-    <skip />
+    <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Bluetooth açıkken cihazınız yakındaki diğer Bluetooth cihazlarla iletişim kurabilir.\n\nUygulamalar ve hizmetler, cihaz deneyimini iyileştirmek için Bluetooth kapalıyken bile yakında cihaz olup olmadığını belirlemek her zaman için tarama yapabilir. Bu özellik, örneğin, konuma dayalı özellikleri ve hizmetleri iyileştirmek için kullanılabilir. Bunu istediğiniz zaman Bluetooth tarama ayarlarından değiştirebilirsiniz."</string>
+    <string name="bluetooth_scan_change" msgid="1744636222637390367">"Değiştir"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Cihaz ayrıntıları"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Klavye ayarları"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Cihazın Bluetooth adresi: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -1395,20 +1393,16 @@
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Deseni doğrulayın"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"PIN\'i doğrulayın"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Şifreyi doğrulayın"</string>
-    <!-- no translation found for lockpassword_remote_validation_header (4992647285784962073) -->
+    <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Kimliğinizi doğrulayın"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (4655537780358707983) -->
     <skip />
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (7738124461482712491) -->
+    <!-- no translation found for lockpassword_remote_validation_pin_details (2373654227583206297) -->
     <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (8924028697135308390) -->
+    <!-- no translation found for lockpassword_remote_validation_password_details (3482328925925888340) -->
     <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (8478926171431523279) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (7595104317648465901) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (509672303005547218) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (2066701840753591922) -->
-    <skip />
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Bu cihazın kilidini desenle de aç"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Bu cihazın kilidini PIN\'le de aç"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Bu cihazın kilidini şifreyle de aç"</string>
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"Yanlış PIN"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Yanlış şifre"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Yanlış desen"</string>
@@ -1733,12 +1727,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"İndirilen uygulamalar"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Deneysel"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Özellik işaretleri"</string>
-    <string name="snoop_logger_filters_dashboard_title" msgid="3082744626059215281">"Araştırma Günlüğüne Kaydedici Filtreleri"</string>
-    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="626757789702677076">"Filtreleri ayarlayın (Bu ayarı değiştirdikten sonra Bluetooth seçimini değiştirin)"</string>
-    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="5508775381082875785">"Araştırma Günlüğüne Kaydedici PBAP Filtresi"</string>
-    <string name="bt_hci_snoop_log_filter_map_title" msgid="5700678748422653316">"Araştırma Günlüğüne Kaydedici MAP Filtresi"</string>
-    <string name="bt_hci_snoop_log_filter_summary" msgid="6235819710248503870">"Filtreleme modunu ayarlayın. (Bu ayarı değiştirdikten sonra Bluetooth seçimini değiştirin)"</string>
-    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="272884193300382035">"Bu seçeneği değiştirmek için Araştırma Günlüğü Modu Filtrelendi ayarını etkinleştirin."</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Özellikle görme engelliler ve gözleri az görenler için tasarlanmış bir ekran okuyucu"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Sesli okunması için ekranınızdaki öğelere dokunun"</string>
@@ -2182,7 +2184,8 @@
     <string name="battery_missing_message" msgid="400958471814422770">"Pil ölçer okunurken sorun oluştu."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Bu hata hakkında daha fazla bilgi edinmek için dokunun"</string>
-    <string name="power_screen" msgid="4596900105850963806">"Ekran"</string>
+    <!-- no translation found for power_screen (3926703168513988776) -->
+    <skip />
     <string name="power_cpu" msgid="1820472721627148746">"CPU"</string>
     <string name="power_flashlight" msgid="8993388636332573202">"El feneri"</string>
     <string name="power_camera" msgid="4778315081581293923">"Kamera"</string>
@@ -2260,6 +2263,8 @@
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"<xliff:g id="SLOT">%s</xliff:g> arası ekran süresi"</string>
     <string name="battery_usage_spinner_breakdown_by_apps" msgid="7746337368402445072">"Uygulamalara göre döküm"</string>
     <string name="battery_usage_spinner_breakdown_by_system" msgid="4646952798665973464">"Sisteme göre döküm"</string>
+    <!-- no translation found for battery_usage_less_than_percent (5873099028895001082) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"İşlem İstatistikleri"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Meraklısı için, çalışan işlemlerle ilgili istatistikler"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Bellek kullanımı"</string>
@@ -2724,7 +2729,7 @@
     <string name="mms_message_title" msgid="6624505196063391964">"MMS mesajları"</string>
     <string name="mms_message_summary" msgid="2855847140141698341">"Mobil veri kapalıyken mesaj gönderip alın"</string>
     <string name="auto_data_switch_title" msgid="5862200603753603464">"Otomatik olarak mobil veriye geçin"</string>
-    <string name="auto_data_switch_summary" msgid="1934340931995429057">"Daha uygun olduğunda bu ağı kullanın"</string>
+    <string name="auto_data_switch_summary" msgid="1934340931995429057">"Daha uygun olduğunda bu ağı kullan"</string>
     <string name="work_sim_title" msgid="8999872928646924429">"İş SIM\'i"</string>
     <string name="user_restrictions_title" msgid="4068914244980335993">"Uygulama ve içerik erişimi"</string>
     <string name="user_rename" msgid="8735940847878484249">"ADI DEĞİŞTİR"</string>
@@ -2907,8 +2912,7 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Zil ve bildirim ses düzeyi"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Zil sesi düzeyi"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Bildirim ses düzeyi"</string>
-    <!-- no translation found for notification_volume_disabled_summary (8679988555852056079) -->
-    <skip />
+    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Zil sesi kapatıldığı için kullanılamıyor"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Telefon zil sesi"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Varsayılan bildirim sesi"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Uygulama ile sağlanan ses"</string>
@@ -3174,8 +3178,10 @@
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Bildirimlere erişime izin ver"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Gelişmiş bildirimler, Android 12\'de Android Uyarlanabilir Bildirimler\'in yerini aldı. Bu özellik, önerilen işlem ve yanıtları gösterir ve bildirimlerinizi organize eder. \n\nGelişmiş bildirimler, kişi adları ve mesajlar gibi kişisel bilgiler dahil olmak üzere bildirim içeriklerine erişebilir. Bu özellik ayrıca bildirimleri kapatabilir veya telefon aramalarını yanıtlamak ve Rahatsız Etmeyin modunu kontrol etmek gibi işlemlerle bildirimlere yanıt verebilir."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> için bildirim erişimine izin verilsin mi?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, kişi adları, fotoğraflar ve gelen mesajların metni gibi kişisel bilgiler de dahil olmak üzere tüm bildirimleri okuyabilir. Bu uygulama ayrıca bildirimleri erteleyebilir ya da kapatabilir veya telefon çağrılarını yanıtlamak da dahil olmak üzere bildirimlerdeki düğmeler üzerinde işlem yapabilir. \n\nBu izin, uygulamaya, Rahatsız Etmeyin ayarını açma veya kapatma ve ilgili ayarları değiştirme olanağı da verir."</string>
-    <string name="nls_warning_prompt" msgid="9143226910825830619">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> şu işlemleri yapabilecek:"</string>
+    <!-- no translation found for notification_listener_security_warning_summary (1131986567509818121) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (1486887096703743841) -->
+    <skip />
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Bildirimlerinizi okuma"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"Kişiler, mesajlar ve fotoğraflar gibi kişisel bilgiler de dahil olmak üzere bildirimlerinizi okuyabilir."</string>
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"Mesajları yanıtlama"</string>
@@ -3985,15 +3991,20 @@
     <string name="autofill_app" msgid="7595308061826307921">"Otomatik doldurma hizmeti"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Varsayılan otomatik doldurma hizmeti"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Şifreler"</string>
-    <string name="credman_credentials" msgid="5937331545565783811">"Şifre ve kimlik hizmetleri"</string>
+    <!-- no translation found for credman_credentials (7413302794874989255) -->
+    <skip />
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# şifre}other{# şifre}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"otomatik, doldurma, otomatik doldurma, şifre"</string>
-    <string name="credman_keywords" msgid="7236954350284379264">"kimlik bilgisi, şifre anahtarı, şifre"</string>
+    <!-- no translation found for credman_keywords (8305600680836806170) -->
+    <skip />
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Bu uygulamaya güvendiğinizden emin olun&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Otomatik Doldurma&gt;%1$s&lt;/xliff:g&gt; otomatik doldurulabilecek öğeleri belirlemek için ekranınızdaki bilgileri kullanır."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s kapatılsın mı?"</string>
-    <string name="credman_confirmation_message" msgid="1485617504425237430">"Adres veya ödeme yöntemi gibi kayıtlı bilgiler oturum açtığınızda doldurulmaz. Kayıtlı bilgilerinizin doldurulmaya devam etmesi için varsayılan bir otomatik doldurma hizmeti belirleyin."</string>
-    <string name="credman_error_message_title" msgid="5108868200002966901">"Şifre ve kimlik hizmetleri sınırı"</string>
-    <string name="credman_error_message" msgid="4058425433345908579">"Aynı anda en fazla 5 tane otomatik doldurma ve şifre hizmetini etkinleştirebilirsiniz. Başka hizmet eklemek için bir hizmeti devre dışı bırakın."</string>
+    <!-- no translation found for credman_confirmation_message (3499478570809427026) -->
+    <skip />
+    <!-- no translation found for credman_error_message_title (4741457523969373713) -->
+    <skip />
+    <!-- no translation found for credman_error_message (6793314648458925172) -->
+    <skip />
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Kapat"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Otomatik doldur"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Günlük kaydı düzeyi"</string>
