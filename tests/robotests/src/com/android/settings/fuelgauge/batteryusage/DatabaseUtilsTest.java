@@ -36,6 +36,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryEventEntity;
 import com.android.settings.testutils.BatteryTestUtils;
 
 import org.junit.Before;
@@ -134,6 +135,28 @@ public final class DatabaseUtilsTest {
                 DatabaseUtils.sendAppUsageEventData(mContext, new ArrayList<>());
         assertThat(valuesList).hasSize(0);
         verifyNoMoreInteractions(mMockContentResolver);
+    }
+
+    @Test
+    public void sendBatteryEventData_returnsExpectedList() {
+        final BatteryEvent batteryEvent =
+                BatteryEvent.newBuilder()
+                        .setTimestamp(10001L)
+                        .setType(BatteryEventType.POWER_CONNECTED)
+                        .setBatteryLevel(66)
+                        .build();
+
+        final ContentValues contentValues =
+                DatabaseUtils.sendBatteryEventData(mContext, batteryEvent);
+
+        assertThat(contentValues.getAsInteger(BatteryEventEntity.KEY_TIMESTAMP))
+                .isEqualTo(10001L);
+        assertThat(contentValues.getAsInteger(BatteryEventEntity.KEY_BATTERY_EVENT_TYPE))
+                .isEqualTo(BatteryEventType.POWER_CONNECTED.getNumber());
+        assertThat(contentValues.getAsInteger(BatteryEventEntity.KEY_BATTERY_LEVEL))
+                .isEqualTo(66);
+        // Verifies the inserted ContentValues into content provider.
+        verify(mMockContentResolver).insert(DatabaseUtils.BATTERY_EVENT_URI, contentValues);
     }
 
     @Test
