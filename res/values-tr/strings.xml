@@ -654,7 +654,7 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"İşaret parmağınızla telefonunun arkasındaki sensöre dokunun."</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Parmak izi kurulumu zaman aşımına uğradı"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Şimdi tekrar deneyin veya parmak izini daha sonra Ayarlar\'da kurun"</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Parmak izi kaydı çalışmadı. Tekrar deneyin veya farklı bir parmak kullanın."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Parmak izi kaydı tamamlanamadı. Tekrar deneyin veya farklı bir parmak kullanın."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Başka ekle"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"İleri"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Telefonunuzun kilidini açmanın yanında satın alma işlemlerini ve uygulama erişimini yetkilendirmek için de parmak izinizi kullanabilirsiniz. "<annotation id="url">"Daha fazla bilgi edinin"</annotation></string>
@@ -973,6 +973,13 @@
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Maksimum sayıda bağlı Bluetooth ses cihazı seç"</string>
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"NFC yığını hata ayıklama günlüğü"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"NFC yığını günlük kaydı seviyesini artırın"</string>
+    <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"NFC ayrıntılı satıcı hata ayıklama günlüğü"</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Hata raporlarına cihaza özgü ek satıcı günlükleri ekleyin. Bu günlükler gizli bilgiler içerebilir."</string>
+    <string name="nfc_snoop_log_title" msgid="1072690687525472163">"NFC NCI filtresiz araştırma günlüğü"</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Özel bilgiler içerebilen ayrıntılı NFC paketlerini yakalayın."</string>
+    <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Cihaz Yeniden Başlatılsın mı?"</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Ayrıntılı NFC günlük kaydı, yalnızca geliştirme amaçlıdır. Hata raporlarında, özel bilgiler içerebilen ek NFC verileri yer alır. Bu ayarı değiştirmek için cihazınızı yeniden başlatın."</string>
+    <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Yeniden başlat"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Yayınlama"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"ayna"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Kablosuz görüntülemeyi etkinleştir"</string>
@@ -1043,7 +1050,7 @@
     <string name="use_open_wifi_automatically_summary" msgid="6663890845558591023">"Herkese açık yüksek kaliteli ağlara otomatik olarak bağlan"</string>
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"Bu özelliği kullanmak için ağ derecelendirme sağlayıcısı seçin"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"Bu özelliği kullanmak için uygun bir ağ derecelendirme sağlayıcısı seçin"</string>
-    <string name="wifi_install_credentials" msgid="5192903644606839972">"Sertifika yükle"</string>
+    <string name="wifi_install_credentials" msgid="5192903644606839972">"Sertifika yükleme"</string>
     <string name="wifi_scan_notify_text" msgid="7163137260385995873">"Uygulamalar ve hizmetler, konum doğruluğunu iyileştirmek için kablosuz ağları kablosuz özelliği kapalıyken bile her zaman tarayabilir. Bu özellik örneğin konuma dayalı özellikleri ve hizmetleri iyileştirmek için kullanılabilir. Bunu <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>Kablosuz ağ taraması ayarlarından<xliff:g id="LINK_END_1">LINK_END</xliff:g> değiştirebilirsiniz."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="7439201783168213149">"Konum doğruluğunu iyileştirmek için <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>kablosuz ağ taraması ayarlarında<xliff:g id="LINK_END_1">LINK_END</xliff:g> kablosuz ağ taramasını açın."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="8436897497968907701">"Bir daha gösterme"</string>
@@ -2383,6 +2390,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"İndirilen uygulamalar"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Deneysel"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Özellik işaretleri"</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Özellikle görme engelliler ve gözleri az görenler için tasarlanmış bir ekran okuyucu"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Sesli okunması için ekranınızdaki öğelere dokunun"</string>
@@ -3132,11 +3153,11 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Açık"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Kapalı"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Kimlik bilgileri deposu"</string>
-    <string name="credentials_install" msgid="3933218407598415827">"Sertifika yükle"</string>
+    <string name="credentials_install" msgid="3933218407598415827">"Sertifika yükleme"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Sertifikaları depolama biriminden yükleyin"</string>
     <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"Sertifikaları SD karttan yükle"</string>
-    <string name="credentials_reset" msgid="4246628389366452655">"Kimlik bilgilerini temizle"</string>
-    <string name="credentials_reset_summary" msgid="5400585520572874255">"Tüm sertifikaları kaldır"</string>
+    <string name="credentials_reset" msgid="4246628389366452655">"Kimlik bilgilerini temizleme"</string>
+    <string name="credentials_reset_summary" msgid="5400585520572874255">"Tüm sertifikaları kaldırın"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"Güvenilen kimlik bilgileri"</string>
     <string name="trusted_credentials_summary" msgid="345822338358409468">"Güvenilen CA sertifikalarını görüntüleyin"</string>
     <string name="user_credentials" msgid="4044405430790970775">"Kullanıcı kimlik bilgileri"</string>
@@ -4420,7 +4441,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Sabitlemeyi kaldırmadan önce şifre sor"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Sabitlemeyi kaldırırken cihazı kilitle"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"SIM\'in silinmesini onayla"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"eSIM\'i silmeden önce siz olduğunuzu doğrulayın"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"eSIM\'i silmeden önce siz olduğunuzu doğrulayın"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Bu iş profili şunun tarafından yönetiliyor:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> tarafından yönetiliyor"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Deneysel)"</string>
@@ -5882,7 +5903,7 @@
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Ek bilgi göster"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Ekran koruyucuda saat, hava durumu veya diğer bilgileri göster"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Diğer ayarlar"</string>
-    <string name="dream_setup_title" msgid="2458303874255396142">"Ekran koruyucunuzu seçme"</string>
+    <string name="dream_setup_title" msgid="2458303874255396142">"Ekran koruyucunuzu seçin"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Tabletiniz yuvaya yerleştirildiğinde ekranınızda nelerin görünmesini istediğinizi seçin. Ekran koruyucu kullanıldığında cihazınız daha fazla enerji tüketebilir."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Özelleştir"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Serbest biçimli desteğin etkinleştirilmesi için yeniden başlatma gerekir."</string>

@@ -277,7 +277,7 @@
     <string name="roaming_reenable_title" msgid="770824950144026180">"Cho phép chuyển vùng dữ liệu?"</string>
     <string name="networks" msgid="5184501333492775095">"Chọn nhà cung cấp dịch vụ"</string>
     <string name="sum_carrier_select" msgid="1669911795517995916">"Chọn nhà cung cấp dịch vụ mạng"</string>
-    <string name="date_and_time_settings_title" msgid="2305454529709812364">"Ngày &amp; giờ"</string>
+    <string name="date_and_time_settings_title" msgid="2305454529709812364">"Ngày và giờ"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"Đặt ngày giờ"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"Đặt ngày, giờ, múi giờ &amp; định dạng"</string>
     <string name="date_time_auto" msgid="4239202185055225869">"Tự động đặt giờ"</string>
@@ -346,7 +346,7 @@
     <string name="security_passwords_title" msgid="4154420930973818581">"Quyền riêng tư"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Không có sẵn"</string>
     <string name="security_status_title" msgid="6958004275337618656">"Trạng thái bảo mật"</string>
-    <string name="security_dashboard_summary" msgid="7571035662779425918">"Phương thức khóa màn hình, Tìm thiết bị, bảo mật ứng dụng"</string>
+    <string name="security_dashboard_summary" msgid="7571035662779425918">"Phương thức khóa màn hình, Tìm thiết bị của tôi, bảo mật ứng dụng"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Bảo mật và quyền riêng tư"</string>
     <string name="safety_center_summary" msgid="3554867379951053869">"Bảo mật ứng dụng, khoá thiết bị, quyền"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Đã thêm khuôn mặt"</string>
@@ -587,15 +587,9 @@
     <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"Cuối cùng, hãy đặt cạnh phải của ngón tay lên cảm biến"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Đặt vân tay ở phần bên của ngón tay lên cảm biến rồi giữ, sau đó chuyển sang phần bên kia"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Thao tác này giúp ghi lại được nhiều vân tay hơn"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for security_settings_sfps_enroll_progress_a11y_message (6450772721691523736) -->
-    <skip />
-    <!-- String.format failed for translation -->
-    <!-- no translation found for security_settings_sfps_animation_a11y_label (8808819903730940446) -->
-    <skip />
-    <!-- String.format failed for translation -->
-    <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
-    <skip />
+    <string name="security_settings_sfps_enroll_progress_a11y_message" msgid="6450772721691523736">"Đã hoàn tất <xliff:g id="PERCENTAGE">%d</xliff:g>%% bước đăng ký vân tay"</string>
+    <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Đã hoàn tất <xliff:g id="PERCENTAGE">%d</xliff:g> %%"</string>
+    <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Đã hoàn tất <xliff:g id="PERCENTAGE">%d</xliff:g>%% bước đăng ký vân tay"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Đã thêm vân tay"</string>
     <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Giờ đây, bạn có thể dùng vân tay để mở khoá máy tính bảng hoặc xác minh danh tính, chẳng hạn như khi đăng nhập vào ứng dụng hoặc phê duyệt giao dịch mua"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Giờ đây, bạn có thể dùng vân tay để mở khóa máy tính bảng hoặc xác minh danh tính, chẳng hạn như khi bạn đăng nhập vào các ứng dụng"</string>
@@ -979,6 +973,13 @@
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Chọn số thiết bị âm thanh được kết nối qua Bluetooth tối đa"</string>
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Nhật ký gỡ lỗi của ngăn xếp NFC"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Tăng cấp độ ghi nhật ký của ngăn xếp NFC"</string>
+    <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Nhật ký gỡ lỗi chi tiết của nhà cung cấp về NFC"</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Đưa nhật ký bổ sung dành riêng cho thiết bị của nhà cung cấp vào báo cáo lỗi. Nhật ký này có thể chứa thông tin riêng tư."</string>
+    <string name="nfc_snoop_log_title" msgid="1072690687525472163">"Nhật ký theo dõi chưa lọc của NCI về NFC"</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Thu thập các gói dữ liệu chi tiết về NFC. Gói dữ liệu này có thể chứa thông tin riêng tư."</string>
+    <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Khởi động lại thiết bị?"</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Chế độ ghi nhật ký chi tiết về Giao tiếp phạm vi gần (NFC) chỉ dành cho mục đích phát triển. Dữ liệu bổ sung về NFC sẽ được đưa vào báo cáo lỗi. Dữ liệu này có thể chứa thông tin riêng tư. Hãy khởi động lại thiết bị để thay đổi chế độ cài đặt này."</string>
+    <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Khởi động lại"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Truyền"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"phản chiếu"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Bật hiển thị không dây"</string>
@@ -2389,6 +2390,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Ứng dụng đã tải xuống"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Thử nghiệm"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Cờ tính năng"</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Trình đọc màn hình chủ yếu dành cho những người khiếm thị và thị lực kém"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Nhấn vào các mục trên màn hình để nghe hệ thống đọc to những mục đó"</string>
@@ -4426,7 +4441,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Hỏi mật khẩu trước khi bỏ khóa màn hình"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Khóa thiết bị khi bỏ ghim"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Xác nhận việc xóa SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Xác minh danh tính của bạn trước khi xoá eSIM"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Hãy xác minh danh tính của bạn trước khi xoá eSIM"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Hồ sơ công việc này được quản lý bằng:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Quản lý bởi <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Thử nghiệm)"</string>
@@ -5652,7 +5667,7 @@
     <string name="bug_report_handler_title" msgid="713439959113250125">"Trình xử lý báo cáo lỗi"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Xác định ứng dụng nào xử lý phím tắt Báo cáo lỗi trên thiết bị của bạn."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Cá nhân"</string>
-    <string name="work_profile_app_subtext" msgid="5043419461440127879">"Cơ quan"</string>
+    <string name="work_profile_app_subtext" msgid="5043419461440127879">"Nơi làm việc"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Theo chế độ mặc định của hệ thống"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Lựa chọn này không còn hợp lệ nữa. Hãy thử lại."</string>
     <string name="quick_controls_lower" msgid="6675573610027367819">"tùy chọn điều khiển thiết bị"</string>

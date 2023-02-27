@@ -164,7 +164,7 @@
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"その他のデバイス"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"保存済みのデバイス"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"ペア設定できるよう Bluetooth が ON になります"</string>
-    <string name="connected_device_connections_title" msgid="4164120115341579170">"接続の設定"</string>
+    <string name="connected_device_connections_title" msgid="4164120115341579170">"接続の詳細設定"</string>
     <string name="connected_device_previously_connected_title" msgid="605808252622814415">"ペア設定済みのデバイス"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"ペア設定済み"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth を ON にしました"</string>
@@ -571,13 +571,13 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"センサーを指でタッチ"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"指をセンサーに当て、振動したら離します。"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"振動を感じるまでセンサーに指を平らに押し当てます"</string>
-    <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"ボタンを強く押さずに、振動を感じるまでセンターから指紋を離さないでください。\n\n毎回、指を少し動かしてください。それで指紋を正しく登録できるようになります。"</string>
+    <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"ボタンを強く押さずに、振動を感じるまでセンターから指紋を離さないでください。\n\n指は毎回、少しずつ動かしてください。それで指紋を正しく登録することができます。"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"指紋認証センサーを長押ししてください"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"指を離して、もう一度タッチ"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"もう一度"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"指紋アイコンに合わせて操作"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"指を何度か離して、あらゆる角度から指紋を登録します。"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"指紋アイコンの動きに合わせて長押ししてください。これで指紋を正しく登録できるようになります。"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"指紋アイコンの動きに合わせて長押ししてください。それで指紋を正しく登録することができます。"</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"指先をセンサーに当ててください"</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"指の左端を押し当ててください"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"指の右端を押し当ててください"</string>
@@ -586,7 +586,7 @@
     <string name="security_settings_sfps_enroll_left_edge_title" msgid="9022963735924413343">"指の左端をセンサーに当ててください"</string>
     <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"最後に、指の右端をセンサーに当ててください"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"指の一方の端をセンサーに押し当て、その後他方の端を押し当てます"</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"これで指紋を正しく登録できるようになります。"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"それで指紋を正しく登録することができます。"</string>
     <string name="security_settings_sfps_enroll_progress_a11y_message" msgid="6450772721691523736">"指紋の登録中: <xliff:g id="PERCENTAGE">%d</xliff:g> パーセント"</string>
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"登録済み: <xliff:g id="PERCENTAGE">%d</xliff:g> パーセント"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"指紋の登録中: <xliff:g id="PERCENTAGE">%d</xliff:g> パーセント"</string>
@@ -973,6 +973,13 @@
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"接続できる Bluetooth オーディオ デバイス数の上限の選択"</string>
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"NFC スタック デバッグログ"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"NFC スタック ロギングレベルを増やす"</string>
+    <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"NFC ベンダーの詳細なデバッグログ"</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"バグレポートには、その他のデバイス固有のベンダーログが含まれます。これには、非公開の情報が含まれることがあります。"</string>
+    <string name="nfc_snoop_log_title" msgid="1072690687525472163">"フィルタされていない NFC NCI スヌープログ"</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"NFC の詳細パケットをキャプチャします。これには、非公開の情報が含まれることがあります。"</string>
+    <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"デバイスを再起動しますか？"</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"NFC 詳細ログは開発専用に設計されています。バグレポートには、追加の NFC データが含まれます。これには、非公開の情報が含まれることがあります。この設定を変更するには、デバイスを再起動してください。"</string>
+    <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"再開"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"キャスト"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"ミラー"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"ワイヤレス ディスプレイの有効化"</string>
@@ -1331,7 +1338,7 @@
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"<xliff:g id="SSID">%1$s</xliff:g> との接続を解除しました"</string>
     <string name="carrier" msgid="1755020806290963951">"携帯通信会社"</string>
     <string name="display_settings_title" msgid="626835071804834218">"表示"</string>
-    <string name="sound_settings" msgid="7622986039384531304">"サウンドとバイブレーション"</string>
+    <string name="sound_settings" msgid="7622986039384531304">"音とバイブレーション"</string>
     <string name="all_volume_title" msgid="6196367642878437513">"音量"</string>
     <string name="musicfx_title" msgid="5458574743312283473">"サウンド効果"</string>
     <string name="ring_volume_title" msgid="4869034595079914541">"着信音と通知の音量"</string>
@@ -2383,6 +2390,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"ダウンロードしたアプリ"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"試験運用機能"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"機能フラグ"</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"主に視覚障害者を対象としたスクリーンリーダー ツールです"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"画面上の項目をタップすると、読み上げます"</string>
@@ -4420,7 +4441,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"画面固定の解除前にパスワードを要求"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"アプリ固定の解除時にデバイスをロック"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"SIM の削除の確認"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"eSIM を消去する前に本人確認を行います"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"eSIM を消去する前に本人確認を行います"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"この仕事用プロファイルを管理するアプリ:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>によって管理されています"</string>
     <string name="experimental_preference" msgid="869354050717870055">"（試験運用）"</string>
