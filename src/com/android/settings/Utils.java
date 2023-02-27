@@ -1293,4 +1293,15 @@ public final class Utils extends com.android.settingslib.Utils {
         return context.createContextAsUser(mainUser, 0).getSystemService(UserManager.class)
                .isUserForeground();
     }
+
+    /**
+     * Returns if dreams are available to the current user.
+     */
+    public static boolean areDreamsAvailableToCurrentUser(Context context) {
+        final boolean dreamsSupported = context.getResources().getBoolean(
+                com.android.internal.R.bool.config_dreamsSupported);
+        final boolean dreamsOnlyEnabledForDockUser = context.getResources().getBoolean(
+                com.android.internal.R.bool.config_dreamsOnlyEnabledForDockUser);
+        return dreamsSupported && (!dreamsOnlyEnabledForDockUser || canCurrentUserDream(context));
+    }
 }

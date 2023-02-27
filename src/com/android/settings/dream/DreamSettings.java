@@ -36,6 +36,7 @@ import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -214,6 +215,17 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.dream_fragment_overview);
+            new SearchIndexProvider(R.xml.dream_fragment_overview);
+
+    static class SearchIndexProvider extends BaseSearchIndexProvider {
+        SearchIndexProvider(int xmlRes) {
+            super(xmlRes);
+        }
+
+        @Override
+        protected boolean isPageSearchEnabled(Context context) {
+            return Utils.areDreamsAvailableToCurrentUser(context);
+        }
+    }
 }
 
