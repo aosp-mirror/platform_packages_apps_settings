@@ -51,12 +51,14 @@ import android.os.CancellationSignal;
 import android.os.Vibrator;
 import android.view.Display;
 import android.view.Surface;
+import android.view.View;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.widget.RingProgressBar;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -263,6 +265,28 @@ public class FingerprintEnrollEnrollingTest {
         assertThat(appliedThemes.contains("SetupWizardPartnerResource")).isTrue();
     }
 
+    @Test
+    public void fingerprintSfpsEnroll_descriptionTextVisibility() {
+        initializeActivityFor(TYPE_POWER_BUTTON);
+
+        mActivity.onEnrollmentProgressChange(1 /* steps */, 1 /* remaining */);
+
+        assertThat(getLayout().getDescriptionTextView().getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void fingerprintUdfpsEnroll_descriptionTextVisibility() {
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+
+        mActivity.onEnrollmentProgressChange(1 /* steps */, 1 /* remaining */);
+
+        assertThat(getLayout().getDescriptionTextView().getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    private GlifLayout getLayout() {
+        return (GlifLayout) mActivity.findViewById(R.id.setup_wizard_layout);
+    }
+
     private void initializeActivityFor(int sensorType) {
         final List<ComponentInfoInternal> componentInfo = new ArrayList<>();
         final FingerprintSensorPropertiesInternal prop =
@@ -297,6 +321,9 @@ public class FingerprintEnrollEnrollingTest {
                 doReturn(mSfpsStageThresholds[stage]).when(mActivity).getStageThresholdSteps(stage);
             }
             doReturn(true).when(mSidecar).isEnrolling();
+            ReflectionHelpers.setField(mActivity, "mCanAssumeSfps", true);
+        } else if (sensorType == TYPE_UDFPS_OPTICAL) {
+            ReflectionHelpers.setField(mActivity, "mCanAssumeUdfps", true);
         }
 
         ActivityController.of(mActivity).create(savedInstanceState);
