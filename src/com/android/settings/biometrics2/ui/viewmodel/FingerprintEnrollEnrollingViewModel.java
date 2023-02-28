@@ -19,7 +19,6 @@ package com.android.settings.biometrics2.ui.viewmodel;
 import android.annotation.IntDef;
 import android.app.Application;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
-import android.os.Bundle;
 import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.util.Log;
@@ -322,30 +321,6 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
      */
     public boolean canAssumeUdfps() {
         return mFingerprintRepository.canAssumeUdfps();
-    }
-
-    /**
-     * Saves current state to outState
-     */
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        // TODO
-//        mRestoring = true;
-//        mIsCanceled = savedInstanceState.getBoolean(KEY_STATE_CANCELED, false);
-//        mPreviousRotation = savedInstanceState.getInt(KEY_STATE_PREVIOUS_ROTATION,
-//                getDisplay().getRotation());
-//        mIsOrientationChanged = mPreviousRotation != getDisplay().getRotation();
-    }
-
-    /**
-     * Restores saved state from previous savedInstanceState
-     */
-    public void restoreSavedState(@Nullable Bundle savedInstanceState) {
-        if (savedInstanceState == null) {
-            return;
-        }
-        // TODO
-//        outState.putBoolean(KEY_STATE_CANCELED, mIsCanceled);
-//        outState.putInt(KEY_STATE_PREVIOUS_ROTATION, mPreviousRotation);
     }
 
     /**
