@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,10 @@
  */
 
 package com.android.settings.security.screenlock;
+
+import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_PASSWORD_OR_PIN;
+import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_PATTERN;
+import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_PIN;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -36,14 +40,14 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class PatternVisiblePreferenceControllerTest {
+public class PinPrivacyPreferenceControllerTest {
 
     private static final int TEST_USER_ID = 0;
 
     @Mock
     private LockPatternUtils mLockPatternUtils;
     private Context mContext;
-    private PatternVisiblePreferenceController mController;
+    private PinPrivacyPreferenceController mController;
     private SwitchPreference mPreference;
 
     @Before
@@ -51,48 +55,53 @@ public class PatternVisiblePreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mController =
-                new PatternVisiblePreferenceController(mContext, TEST_USER_ID, mLockPatternUtils);
+                new PinPrivacyPreferenceController(mContext, TEST_USER_ID, mLockPatternUtils);
         mPreference = new SwitchPreference(mContext);
     }
 
     @Test
-    public void isAvailable_lockSetToPattern_shouldReturnTrue() {
-        when(mLockPatternUtils.getCredentialTypeForUser(TEST_USER_ID))
-                .thenReturn(LockPatternUtils.CREDENTIAL_TYPE_PATTERN);
-
+    public void isAvailable_lockSetToPin_shouldReturnTrue() {
+        when(mLockPatternUtils.getCredentialTypeForUser(TEST_USER_ID)).thenReturn(
+                CREDENTIAL_TYPE_PIN);
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
-    public void isAvailable_lockSetToPin_shouldReturnFalse() {
+    public void isAvailable_lockSetToPinOrPw_shouldReturnTrue() {
         when(mLockPatternUtils.getCredentialTypeForUser(TEST_USER_ID)).thenReturn(
-                LockPatternUtils.CREDENTIAL_TYPE_PIN);
-
-        assertThat(mController.isAvailable()).isFalse();
+                CREDENTIAL_TYPE_PASSWORD_OR_PIN);
+        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
-    public void isAvailable_lockSetToNone_shouldReturnFalse() {
-        when(mLockPatternUtils.isSecure(TEST_USER_ID)).thenReturn(false);
-
+    public void isAvailable_lockSetToOther_shouldReturnFalse() {
+        when(mLockPatternUtils.getCredentialTypeForUser(TEST_USER_ID)).thenReturn(
+                CREDENTIAL_TYPE_PATTERN);
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void updateState_shouldSetPref() {
-        when(mLockPatternUtils.isVisiblePatternEnabled(TEST_USER_ID)).thenReturn(true);
+        when(mLockPatternUtils.isPinEnhancedPrivacyEnabled(TEST_USER_ID)).thenReturn(true);
         mController.updateState(mPreference);
         assertThat(mPreference.isChecked()).isTrue();
+    }
 
-        when(mLockPatternUtils.isVisiblePatternEnabled(TEST_USER_ID)).thenReturn(false);
+    @Test
+    public void updateState_shouldSetPref_false() {
+        when(mLockPatternUtils.isPinEnhancedPrivacyEnabled(TEST_USER_ID)).thenReturn(false);
         mController.updateState(mPreference);
         assertThat(mPreference.isChecked()).isFalse();
     }
 
     @Test
     public void onPreferenceChange_shouldUpdateLockPatternUtils() {
-        mController.onPreferenceChange(mPreference, true /* newValue */);
+        mController.onPreferenceChange(mPreference, true);
+        verify(mLockPatternUtils).setPinEnhancedPrivacyEnabled(true, TEST_USER_ID);
+    }
 
-        verify(mLockPatternUtils).setVisiblePatternEnabled(true, TEST_USER_ID);
+    @Test
+    public void getPreferenceKey_returnsConst() {
+        assertThat(mController.getPreferenceKey().equals("enhancedPinPrivacy")).isTrue();
     }
 }
