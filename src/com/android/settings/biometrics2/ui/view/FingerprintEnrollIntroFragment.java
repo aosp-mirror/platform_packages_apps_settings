@@ -76,10 +76,6 @@ public class FingerprintEnrollIntroFragment extends Fragment {
     private TextView mFooterMessage6 = null;
     @Nullable private PorterDuffColorFilter mIconColorFilter;
 
-    public FingerprintEnrollIntroFragment() {
-        super();
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
