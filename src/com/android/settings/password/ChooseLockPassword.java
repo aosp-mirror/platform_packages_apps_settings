@@ -225,6 +225,8 @@ public class ChooseLockPassword extends SettingsActivity {
         private static final String KEY_UI_STAGE = "ui_stage";
         private static final String KEY_CURRENT_CREDENTIAL = "current_credential";
         private static final String FRAGMENT_TAG_SAVE_AND_FINISH = "save_and_finish_worker";
+        private static final String KEY_IS_AUTO_CONFIRM_CHECK_MANUALLY_CHANGED =
+                "auto_confirm_option_set_manually";
 
         private static final int MIN_AUTO_PIN_REQUIREMENT_LENGTH = 6;
 
@@ -578,6 +580,8 @@ public class ChooseLockPassword extends SettingsActivity {
                     mUiStage = Stage.valueOf(state);
                     updateStage(mUiStage);
                 }
+                mIsAutoPinConfirmOptionSetManually =
+                        savedInstanceState.getBoolean(KEY_IS_AUTO_CONFIRM_CHECK_MANUALLY_CHANGED);
 
                 mCurrentCredential = savedInstanceState.getParcelable(KEY_CURRENT_CREDENTIAL);
 
@@ -660,6 +664,8 @@ public class ChooseLockPassword extends SettingsActivity {
             if (mCurrentCredential != null) {
                 outState.putParcelable(KEY_CURRENT_CREDENTIAL, mCurrentCredential.duplicate());
             }
+            outState.putBoolean(KEY_IS_AUTO_CONFIRM_CHECK_MANUALLY_CHANGED,
+                    mIsAutoPinConfirmOptionSetManually);
         }
 
         @Override
