@@ -32,6 +32,8 @@ object HomePageProvider : SettingsPageProvider {
     override val name = "Home"
     private val owner = createSettingsPage()
 
+    override fun isEnabled(arguments: Bundle?) = false
+
     override fun buildEntry(arguments: Bundle?): List<SettingsEntry> {
         return listOf(
 

@@ -37,6 +37,8 @@ object SystemMainPageProvider : SettingsPageProvider {
     override val name = "SystemMain"
     private val owner = createSettingsPage()
 
+    override fun isEnabled(arguments: Bundle?) = false
+
     @Composable
     override fun Page(arguments: Bundle?) {
         RegularScaffold(title = getTitle(arguments)) {
