@@ -33,6 +33,8 @@ object SpecialAppAccessPageProvider : SettingsPageProvider {
     override val name = "SpecialAppAccess"
     private val owner = createSettingsPage()
 
+    override fun isEnabled(arguments: Bundle?) = false
+
     @Composable
     override fun Page(arguments: Bundle?) {
         RegularScaffold(title = stringResource(R.string.special_access)) {
