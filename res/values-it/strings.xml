@@ -622,10 +622,8 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Disconnetti"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Accoppia e connetti"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Quando il Bluetooth è attivato, il dispositivo può comunicare con altri dispositivi che si trovano nelle vicinanze."</string>
-    <!-- no translation found for bluetooth_scanning_on_info_message (786648535600075223) -->
-    <skip />
-    <!-- no translation found for bluetooth_scan_change (1744636222637390367) -->
-    <skip />
+    <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Quando il Bluetooth è attivo, il dispositivo può comunicare con altri dispositivi Bluetooth nelle vicinanze.\n\nPer migliorare l\'esperienza sul dispositivo, app e servizi possono comunque cercare dispositivi nelle vicinanze in qualsiasi momento, anche quando il Bluetooth non è attivo. Questo può essere utile, ad esempio, per migliorare funzionalità e servizi basati sulla posizione. Puoi modificare questa opzione nelle impostazioni relative alla scansione Bluetooth."</string>
+    <string name="bluetooth_scan_change" msgid="1744636222637390367">"Modifica"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Dettagli dispositivo"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Impostazioni tastiera"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Indirizzo Bluetooth del dispositivo: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -1106,7 +1104,7 @@
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Espelli"</string>
     <string name="storage_menu_format" msgid="8903698999905354146">"Formatta la scheda SD per archiviazione portatile"</string>
     <string name="storage_menu_format_button" msgid="7623565190643699626">"Formatta scheda"</string>
-    <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatta come memoria portatile"</string>
+    <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatta come portatile"</string>
     <string name="storage_menu_format_option" msgid="4886059624052908432">"Formatta"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Esegui migrazione dati"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Elimina"</string>
@@ -1156,7 +1154,7 @@
     <string name="storage_wizard_migrate_v2_later" msgid="6067756122853315642">"Sposta i contenuti più tardi"</string>
     <string name="storage_wizard_migrate_progress_v2_title" msgid="8791318509516968103">"Spostamento dei contenuti…"</string>
     <string name="storage_wizard_slow_v2_title" msgid="3760766921170980221">"Dispositivo <xliff:g id="NAME">^1</xliff:g> lento"</string>
-    <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Puoi continuare a usare il dispositivo <xliff:g id="NAME_0">^1</xliff:g>, che però potrebbe essere lento. \n\nLe app memorizzate su <xliff:g id="NAME_1">^2</xliff:g> potrebbero non funzionare correttamente e i trasferimenti dei contenuti potrebbero richiedere molto tempo. \n\nProva a usare un dispositivo <xliff:g id="NAME_2">^3</xliff:g> più veloce oppure usa <xliff:g id="NAME_3">^4</xliff:g> come memoria portatile."</string>
+    <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Puoi continuare a usare il dispositivo <xliff:g id="NAME_0">^1</xliff:g>, che però potrebbe essere lento. \n\nLe app memorizzate su <xliff:g id="NAME_1">^2</xliff:g> potrebbero non funzionare correttamente e i trasferimenti dei contenuti potrebbero richiedere molto tempo. \n\nProva a usare un dispositivo <xliff:g id="NAME_2">^3</xliff:g> più veloce oppure usa <xliff:g id="NAME_3">^4</xliff:g> come archiviazione portatile."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Ricomincia"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Continua"</string>
     <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Puoi iniziare a utilizzare la tua <xliff:g id="NAME">^1</xliff:g>"</string>
@@ -1395,20 +1393,16 @@
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Verifica sequenza"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Verifica PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Verifica password"</string>
-    <!-- no translation found for lockpassword_remote_validation_header (4992647285784962073) -->
+    <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Verifica identità"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (4655537780358707983) -->
     <skip />
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (7738124461482712491) -->
+    <!-- no translation found for lockpassword_remote_validation_pin_details (2373654227583206297) -->
     <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (8924028697135308390) -->
+    <!-- no translation found for lockpassword_remote_validation_password_details (3482328925925888340) -->
     <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (8478926171431523279) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (7595104317648465901) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (509672303005547218) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (2066701840753591922) -->
-    <skip />
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Usa sequenza per sbloccare dispositivo"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Usa PIN per sbloccare dispositivo"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Usa password per sbloccare dispositivo"</string>
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"PIN errato"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Password errata"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Sequenza errata"</string>
@@ -1733,12 +1727,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"App scaricate"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Sperimentali"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Flag funzionalità"</string>
-    <string name="snoop_logger_filters_dashboard_title" msgid="3082744626059215281">"Filtri Snoop Logger"</string>
-    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="626757789702677076">"Impos. filtri (Bluetooth on/off dopo modif. impost.)"</string>
-    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="5508775381082875785">"PBAP filtri Snoop Logger"</string>
-    <string name="bt_hci_snoop_log_filter_map_title" msgid="5700678748422653316">"MAP filtri Snoop Logger"</string>
-    <string name="bt_hci_snoop_log_filter_summary" msgid="6235819710248503870">"Imposta mod. filtro. (Bluetooth on/off dopo modif. impost.)"</string>
-    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="272884193300382035">"Attiva mod. filtr. Snoop Logger per modif. l\'opz."</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Lo screen reader è rivolto principalmente a utenti ciechi o con problemi di vista"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Tocca gli elementi sullo schermo per ascoltarne la lettura ad alta voce"</string>
@@ -2182,7 +2184,8 @@
     <string name="battery_missing_message" msgid="400958471814422770">"Problema durante la lettura dell\'indicatore di livello della batteria."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Tocca per saperne di più su questo errore"</string>
-    <string name="power_screen" msgid="4596900105850963806">"Schermo"</string>
+    <!-- no translation found for power_screen (3926703168513988776) -->
+    <skip />
     <string name="power_cpu" msgid="1820472721627148746">"CPU"</string>
     <string name="power_flashlight" msgid="8993388636332573202">"Torcia"</string>
     <string name="power_camera" msgid="4778315081581293923">"Fotocamera"</string>
@@ -2223,7 +2226,7 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Imposta una pianificazione"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Prolunga la durata della batteria"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Disattiva quando la batteria è carica"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"L\'opzione Risparmio energetico viene disattivata quando la batteria raggiunge <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Il risparmio energetico viene disattivato quando la batteria raggiunge <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Attiva"</string>
@@ -2260,6 +2263,8 @@
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Tempo di utilizzo nel periodo <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_spinner_breakdown_by_apps" msgid="7746337368402445072">"Suddivisione per app"</string>
     <string name="battery_usage_spinner_breakdown_by_system" msgid="4646952798665973464">"Suddivisione per sistema"</string>
+    <!-- no translation found for battery_usage_less_than_percent (5873099028895001082) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistiche sui processi"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistiche tecniche sui processi in esecuzione"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Memoria usata"</string>
@@ -2907,8 +2912,7 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Volume suoneria e notifiche"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Volume suoneria"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Volume notifiche"</string>
-    <!-- no translation found for notification_volume_disabled_summary (8679988555852056079) -->
-    <skip />
+    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"L\'opzione non è disponibile perché l\'audio è disattivato"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Suoneria telefono"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Suono di notifica predefinito"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Audio fornito dall\'app"</string>
@@ -3174,8 +3178,10 @@
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Consenti l\'accesso alle notifiche"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Le notifiche adattive sono state sostituite dalle notifiche avanzate in Android 12. Questa funzionalità mostra risposte e azioni suggerite e organizza le tue notifiche. \n\nLe notifiche avanzate possono accedere ai contenuti delle notifiche, incluse le informazioni personali, come i nomi dei contatti e i messaggi. Questa funzionalità può anche ignorare le notifiche o rispondervi, ad esempio accettando le telefonate, e controllare la modalità Non disturbare."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Consentire a <xliff:g id="SERVICE">%1$s</xliff:g> di accedere alle notifiche?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> potrà leggere tutte le notifiche, incluse informazioni personali quali nomi dei contatti, foto e il testo dei messaggi ricevuti. Questa app potrà inoltre posticipare o ignorare le notifiche oppure agire sui pulsanti nelle notifiche, ad esempio rispondere alle telefonate. \n\nL\'app potrà anche attivare o disattivare la funzionalità Non disturbare e modificare le relative impostazioni."</string>
-    <string name="nls_warning_prompt" msgid="9143226910825830619">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> potrà:"</string>
+    <!-- no translation found for notification_listener_security_warning_summary (1131986567509818121) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (1486887096703743841) -->
+    <skip />
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Leggere le tue notifiche"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"Può leggere le tue notifiche, incluse informazioni personali quali contatti, messaggi e foto."</string>
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"Rispondere ai messaggi"</string>
@@ -3985,15 +3991,20 @@
     <string name="autofill_app" msgid="7595308061826307921">"Servizio di compilazione automatica"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Servizio di compilazione automatica predefinito"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Password"</string>
-    <string name="credman_credentials" msgid="5937331545565783811">"Servizi di password e identità"</string>
+    <!-- no translation found for credman_credentials (7413302794874989255) -->
+    <skip />
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# password}other{# password}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"automatica, compilazione, compilazione automatica, password"</string>
-    <string name="credman_keywords" msgid="7236954350284379264">"credenziali, passkey, password"</string>
+    <!-- no translation found for credman_keywords (8305600680836806170) -->
+    <skip />
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Verifica che questa app sia attendibile&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=La Compilazione automatica di Google&gt;%1$s&lt;/xliff:g&gt; usa ciò che appare sullo schermo per stabilire quali contenuti possono essere compilati automaticamente."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Vuoi disattivare %1$s?"</string>
-    <string name="credman_confirmation_message" msgid="1485617504425237430">"I dati salvati, ad esempio indirizzi o metodi di pagamento, non verranno inseriti quando accedi. Per fare in modo che i dati salvati rimangano inseriti, imposta un servizio di compilazione automatica predefinito."</string>
-    <string name="credman_error_message_title" msgid="5108868200002966901">"Limite di servizi di password e identità"</string>
-    <string name="credman_error_message" msgid="4058425433345908579">"Puoi attivare contemporaneamente fino a 5 servizi di compilazione automatica e password. Per aggiungere un altro servizio devi disattivarne uno."</string>
+    <!-- no translation found for credman_confirmation_message (3499478570809427026) -->
+    <skip />
+    <!-- no translation found for credman_error_message_title (4741457523969373713) -->
+    <skip />
+    <!-- no translation found for credman_error_message (6793314648458925172) -->
+    <skip />
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Disattiva"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Compilazione automatica"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Livello di logging"</string>
