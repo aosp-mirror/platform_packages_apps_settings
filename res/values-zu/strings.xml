@@ -169,8 +169,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Izinga lokushisa"</string>
     <string name="calendar_preferences_title" msgid="8312485828206542600">"Ikhalenda"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Usuku lokuqala lweviki"</string>
-    <!-- no translation found for numbers_preferences_title (8197418984391195446) -->
-    <skip />
+    <string name="numbers_preferences_title" msgid="8197418984391195446">"Izintandokazi zezinombolo"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Sebenzisa okuzenzakalelayo kwe-app"</string>
     <string name="celsius_temperature_unit" msgid="6118523647432383132">"I-Celsius(°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"I-Fahrenheit(°F)"</string>
@@ -622,10 +621,8 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Nqamula"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Bhangqa; uxhume"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Uma i-Bluetooth ivuliwe, idivayisi yakho ingakwazi ukuxhumana namanye amadivayisi aseduze we-Bluetooth."</string>
-    <!-- no translation found for bluetooth_scanning_on_info_message (786648535600075223) -->
-    <skip />
-    <!-- no translation found for bluetooth_scan_change (1744636222637390367) -->
-    <skip />
+    <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Uma i-Bluetooth ivuliwe, idivayisi yakho ingaxhumana namanye amadivayisi e-Bluetooth aseduze.\n\nUkuze uthuthukise umuzwa wedivayisi, ama-app namasevisi asengaskena amadivayisi aseduze noma kunini, ngisho noma i-Bluetooth ivaliwe. Lokhu, ngokwesibonelo, kungasetshenziswa ukuthuthukisa izakhi namasevisi asuselwa endaweni. Ungakuguqula lokhu kumasethingi okuskena e-Bluetooth."</string>
+    <string name="bluetooth_scan_change" msgid="1744636222637390367">"Shintsha"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Imininingwane yedivayisi"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Izilungiselelo zekhibhodi"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Ikheli le-Bluetooth yedivayisi: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -1396,20 +1393,16 @@
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Qinisekisa iphethini"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Qinisekisa iphinikhodi"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Qinisekisa iphasiwedi"</string>
-    <!-- no translation found for lockpassword_remote_validation_header (4992647285784962073) -->
+    <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Qinisekisa ukuthi nguwe"</string>
+    <!-- no translation found for lockpassword_remote_validation_pattern_details (4655537780358707983) -->
     <skip />
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (7738124461482712491) -->
+    <!-- no translation found for lockpassword_remote_validation_pin_details (2373654227583206297) -->
     <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (8924028697135308390) -->
+    <!-- no translation found for lockpassword_remote_validation_password_details (3482328925925888340) -->
     <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (8478926171431523279) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pattern_as_screenlock (7595104317648465901) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_pin_as_screenlock (509672303005547218) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_set_password_as_screenlock (2066701840753591922) -->
-    <skip />
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Futhi sebenzisa iphethini ukuvula le divayisi"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Futhi sebenzisa Iphinikhodi ukuvula le divayisi"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Futhi sebenzisa iphasiwedi ukuvula le divayisi"</string>
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"Iphinikhodi engalungile"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Iphasiwedi engalungile"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Iphethini engalungile"</string>
@@ -1734,12 +1727,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Izinhlelo zokusebenza ezila"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Okokulinga"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Faka amafulegi"</string>
-    <string name="snoop_logger_filters_dashboard_title" msgid="3082744626059215281">"Izihlungi ze-Snoop Logger"</string>
-    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="626757789702677076">"Setha izihlungi (Shintsha i-Bluetooth ngemva kokushintsha le sethimgi)"</string>
-    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="5508775381082875785">"Isihlungi se-Snoop Logger PBAP"</string>
-    <string name="bt_hci_snoop_log_filter_map_title" msgid="5700678748422653316">"I-MAP yesihlungi se-Snoop Logger"</string>
-    <string name="bt_hci_snoop_log_filter_summary" msgid="6235819710248503870">"Setha imodi yokuhlunga. (Guqula i-Bluetooth ngemuva kokushintsha le sethingi)"</string>
-    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="272884193300382035">"Nika amandla Imodi Yelogi ye-Snoop Ehlungiwe ukuze ushintshe le nketho."</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"I-Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Isifundi sesikrini kakhulukazi esabantu abangaboni nabanokubona okuncane"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Thepha izinto esikrinini sakho ukuze uzizwe zifundelwa phezulu"</string>
@@ -2183,7 +2184,8 @@
     <string name="battery_missing_message" msgid="400958471814422770">"Inkinga yokufunda imitha yebhethri."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Thepha ukuze ufunde kabanzi ngaleli phutha"</string>
-    <string name="power_screen" msgid="4596900105850963806">"Isikrini"</string>
+    <!-- no translation found for power_screen (3926703168513988776) -->
+    <skip />
     <string name="power_cpu" msgid="1820472721627148746">"I-CPU"</string>
     <string name="power_flashlight" msgid="8993388636332573202">"I-Flashlight"</string>
     <string name="power_camera" msgid="4778315081581293923">"Ikhamera"</string>
@@ -2261,6 +2263,8 @@
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Isikhathi sesikrini se-<xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_spinner_breakdown_by_apps" msgid="7746337368402445072">"Ukuhlukaniswa ngama-app"</string>
     <string name="battery_usage_spinner_breakdown_by_system" msgid="4646952798665973464">"Ukuhlukaniswa ngesistimu"</string>
+    <!-- no translation found for battery_usage_less_than_percent (5873099028895001082) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Izibalo zenqubo"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Izibalo ze-Geeky mayelana nezinqubo zokuqalisa"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Ukusetshenziswa kwememori"</string>
@@ -2908,8 +2912,7 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Ivolumu yokukhala neyesaziso"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Ivolumu yokukhalisa"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Ivolumu yesaziso"</string>
-    <!-- no translation found for notification_volume_disabled_summary (8679988555852056079) -->
-    <skip />
+    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Ayitholakali ngoba ukukhala kuthulisiwe"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Iringithoni yefoni"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Umsindo wesaziso ozenzakalelayo"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Uhlelo lokusebenza lunikezele ngomsindo"</string>
@@ -3175,8 +3178,10 @@
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Vumela ukufinyelela kwesaziso"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Izaziso ezandisiwe zithathe isikhundla sezaziso eziguqukayo ze-Android ku-Android 12. Lesi sici sikhombisa izenzo eziphakanyisiwe nezimpendulo, futhi sihlela izaziso zakho \n\nIzaziso ezandisiwe zingafinyelela kokuqukethwe kwesaziso, kuhlanganise nemininingwane yomuntu efana namagama woxhumana nabo nemilayezo. Lesi sakhi singacashisa noma siphendule izaziso, njengokuphendula amakholi wefoni, nokulawula okuthi Ungaphazamisi."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Vumela ukufinyelela kwe-<xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"I-<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> izokwazi ukufunda zonke izaziso, okufaka phakathi ulwazi lomuntu siqu njengamagama abathintwayo, izithombe, nemilayezo yombhalo oyitholayo. Le app izokwazi futhi ukusnuza noma ukucashisa izaziso noma ukwenza isenzo kwizinkinobho ezikuzaziso, okufaka phakathi ukuphendula amakholi wefoni. \n\nLokhu kuzonikeza futhi uhlelo lokusebenza ikhono lokuvula noma ukuvala okuthi Ungaphazamisi nokushintsha amasethingi ahambisanayo."</string>
-    <string name="nls_warning_prompt" msgid="9143226910825830619">"U-<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> uzokwazi ukuthi:"</string>
+    <!-- no translation found for notification_listener_security_warning_summary (1131986567509818121) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (1486887096703743841) -->
+    <skip />
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Funda izaziso zakho"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"Ingafunda izaziso zakho, okuhlanganisa ulwazi lomuntu siqu olufana noxhumana nabo, imilayezo, nezithombe."</string>
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"Phendula imilayezo"</string>
@@ -3986,15 +3991,20 @@
     <string name="autofill_app" msgid="7595308061826307921">"Isevisi yokugcwalisa ngokuzenzekela"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Isevisi yokugcwalisa okuzenzakalelayo"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Amaphasiwedi"</string>
-    <string name="credman_credentials" msgid="5937331545565783811">"Iphasiwedi kanye nezinsizakalo zobunikazi"</string>
+    <!-- no translation found for credman_credentials (7413302794874989255) -->
+    <skip />
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{iphasiwedi e-#}one{amaphasiwedi angu-#}other{amaphasiwedi angu-#}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"okuzenzakalelayo, gcwalisa, gcwalisa ngokuzenzakalelayo, iphasiwedi"</string>
-    <string name="credman_keywords" msgid="7236954350284379264">"izimfanelo, ukhiye wokudlula, iphasiwedi"</string>
+    <!-- no translation found for credman_keywords (8305600680836806170) -->
+    <skip />
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Qiniseka ukuthi wethemba lolu hlelo lokusebenza&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; isebenzisa okusesikrinini sakho ukunquma okungagcwaliswa ngokuzenzakalela."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Vala i-%1$s?"</string>
-    <string name="credman_confirmation_message" msgid="1485617504425237430">"Ulwazi olulondoloziwe olufana namakheli noma izindlela zokukhokha ngeke lugcwaliswe uma ungena ngemvume. Ukuze ugcine ulwazi lwakho olulondoloziwe lugcwalisiwe, setha isevisi yokugcwalisa okuzenzakalelayo."</string>
-    <string name="credman_error_message_title" msgid="5108868200002966901">"Umkhawulo wephasiwedi kanye namasevisi kamazisi"</string>
-    <string name="credman_error_message" msgid="4058425433345908579">"Ungaba nezinsizakalo ezifika kwezi-5 zokugcwalisa okuzenzakalelayo nephasiwedi ngesikhathi esisodwa. Vala isevisi ukuze wengeze okwengeziwe."</string>
+    <!-- no translation found for credman_confirmation_message (3499478570809427026) -->
+    <skip />
+    <!-- no translation found for credman_error_message_title (4741457523969373713) -->
+    <skip />
+    <!-- no translation found for credman_error_message (6793314648458925172) -->
+    <skip />
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Vala"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Ukugcwalisa okuzenzakalelayo"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Ileveli lokuloga"</string>
