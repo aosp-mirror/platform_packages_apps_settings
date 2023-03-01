@@ -581,7 +581,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
                         .append(bold(getString(
                                 R.string.notification_log_details_title)))
                         .append(delim)
-                        .append(action.title);
+                        .append(action.title != null ? action.title : "");
                 if (action.actionIntent != null) {
                     sb.append("\n    ")
                             .append(bold(getString(

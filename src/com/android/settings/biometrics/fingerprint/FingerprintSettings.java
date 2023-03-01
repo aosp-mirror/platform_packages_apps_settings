@@ -68,6 +68,7 @@ import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.GatekeeperPasswordProvider;
+import com.android.settings.biometrics2.ui.model.EnrollmentRequest;
 import com.android.settings.biometrics2.ui.view.FingerprintEnrollmentActivity;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -687,8 +688,15 @@ public class FingerprintSettings extends SubSettings {
             if (KEY_FINGERPRINT_ADD.equals(key)) {
                 mIsEnrolling = true;
                 Intent intent = new Intent();
-                intent.setClassName(SETTINGS_PACKAGE_NAME,
-                        FingerprintEnrollEnrolling.class.getName());
+                if (FeatureFlagUtils.isEnabled(getContext(),
+                        FeatureFlagUtils.SETTINGS_BIOMETRICS2_ENROLLMENT)) {
+                    intent.setClassName(SETTINGS_PACKAGE_NAME,
+                            FingerprintEnrollmentActivity.class.getName());
+                    intent.putExtra(EnrollmentRequest.EXTRA_SKIP_FIND_SENSOR, true);
+                } else {
+                    intent.setClassName(SETTINGS_PACKAGE_NAME,
+                            FingerprintEnrollEnrolling.class.getName());
+                }
                 intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
                 startActivityForResult(intent, ADD_FINGERPRINT_REQUEST);
