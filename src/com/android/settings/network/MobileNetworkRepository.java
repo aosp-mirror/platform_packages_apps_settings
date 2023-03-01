@@ -125,7 +125,8 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         mContext = context;
         mMobileNetworkDatabase = MobileNetworkDatabase.getInstance(context);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_MOBILE_NETWORK_DB_CREATED);
+        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_MOBILE_NETWORK_DB_CREATED,
+                subId);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mCallback = mobileNetworkCallback;
         mSubscriptionInfoDao = mMobileNetworkDatabase.mSubscriptionInfoDao();
@@ -327,7 +328,8 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             }
         }
         mMetricsFeatureProvider.action(mContext,
-                SettingsEnums.ACTION_MOBILE_NETWORK_DB_GET_UICC_INFO);
+                SettingsEnums.ACTION_MOBILE_NETWORK_DB_GET_UICC_INFO,
+                subInfo.getSubscriptionId());
     }
 
     private void onAvailableSubInfoChanged(
@@ -343,7 +345,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
         mCallback.onAvailableSubInfoChanged(availableSubInfoEntityList);
         mMetricsFeatureProvider.action(mContext,
-                SettingsEnums.ACTION_MOBILE_NETWORK_DB_NOTIFY_SUB_INFO_IS_CHANGED);
+                SettingsEnums.ACTION_MOBILE_NETWORK_DB_NOTIFY_SUB_INFO_IS_CHANGED, 0);
         setActiveSubInfoList(mActiveSubInfoEntityList);
     }
 
@@ -359,7 +361,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         mUiccInfoEntityList = uiccInfoEntityList;
         mCallback.onAllUiccInfoChanged(uiccInfoEntityList);
         mMetricsFeatureProvider.action(mContext,
-                SettingsEnums.ACTION_MOBILE_NETWORK_DB_NOTIFY_UICC_INFO_IS_CHANGED);
+                SettingsEnums.ACTION_MOBILE_NETWORK_DB_NOTIFY_UICC_INFO_IS_CHANGED, 0);
     }
 
     private void onAllMobileNetworkInfoChanged(
@@ -367,7 +369,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         mMobileNetworkInfoEntityList = mobileNetworkInfoEntityList;
         mCallback.onAllMobileNetworkInfoChanged(mobileNetworkInfoEntityList);
         mMetricsFeatureProvider.action(mContext,
-                SettingsEnums.ACTION_MOBILE_NETWORK_DB_NOTIFY_MOBILE_NETWORK_INFO_IS_CHANGED);
+                SettingsEnums.ACTION_MOBILE_NETWORK_DB_NOTIFY_MOBILE_NETWORK_INFO_IS_CHANGED, 0);
     }
 
     public void insertSubInfo(Context context, SubscriptionInfo info) {
@@ -388,7 +390,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                 insertUiccInfo(subId);
                 insertMobileNetworkInfo(context, subId);
                 mMetricsFeatureProvider.action(mContext,
-                        SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_SUB_INFO);
+                        SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_SUB_INFO, mSubId);
             } else if (DEBUG) {
                 Log.d(TAG, "Can not insert subInfo, the entity is null");
             }
@@ -414,7 +416,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         sCacheUiccInfoEntityMap.remove(subId);
         sCacheMobileNetworkInfoEntityMap.remove(subId);
         mMetricsFeatureProvider.action(mContext,
-                SettingsEnums.ACTION_MOBILE_NETWORK_DB_DELETE_DATA);
+                SettingsEnums.ACTION_MOBILE_NETWORK_DB_DELETE_DATA, id);
     }
 
     public SubscriptionInfoEntity convertToSubscriptionInfoEntity(Context context,
@@ -477,7 +479,8 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             sCacheUiccInfoEntityMap.put(subId, uiccInfoEntity);
             mMobileNetworkDatabase.insertUiccInfo(uiccInfoEntity);
             mMetricsFeatureProvider.action(mContext,
-                    SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_UICC_INFO);
+                    SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_UICC_INFO,
+                    Integer.parseInt(subId));
         }
     }
 
@@ -491,7 +494,8 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             sCacheMobileNetworkInfoEntityMap.put(subId, mobileNetworkInfoEntity);
             mMobileNetworkDatabase.insertMobileNetworkInfo(mobileNetworkInfoEntity);
             mMetricsFeatureProvider.action(mContext,
-                    SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_MOBILE_NETWORK_INFO);
+                    SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_MOBILE_NETWORK_INFO,
+                    Integer.parseInt(subId));
         }
     }
 
