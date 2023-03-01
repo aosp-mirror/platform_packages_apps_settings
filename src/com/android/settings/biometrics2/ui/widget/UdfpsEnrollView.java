@@ -226,6 +226,10 @@ public class UdfpsEnrollView extends FrameLayout {
         }
 
         DisplayInfo displayInfo = new DisplayInfo();
+        if (getDisplay() == null) {
+            android.util.Log.e(TAG, "Can not get display");
+            return;
+        }
         getDisplay().getDisplayInfo(displayInfo);
         Rect udfpsBounds = mSensorProperties.getLocation().getRect();
         float scaleFactor = mUdfpsUtils.getScaleFactor(displayInfo);
