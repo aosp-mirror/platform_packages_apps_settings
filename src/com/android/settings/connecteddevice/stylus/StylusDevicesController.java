@@ -127,8 +127,9 @@ public class StylusDevicesController extends AbstractPreferenceController implem
         pref.setTitle(mContext.getString(R.string.stylus_textfield_handwriting));
         pref.setIcon(R.drawable.ic_text_fields_alt);
         pref.setOnPreferenceClickListener(this);
-        pref.setChecked(Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.STYLUS_HANDWRITING_ENABLED, 0) == 1);
+        pref.setChecked(Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_HANDWRITING_ENABLED,
+                Secure.STYLUS_HANDWRITING_DEFAULT_VALUE) == 1);
         pref.setVisible(currentInputMethodSupportsHandwriting());
         return pref;
     }
@@ -157,8 +158,8 @@ public class StylusDevicesController extends AbstractPreferenceController implem
                 mContext.startActivity(intent);
                 break;
             case KEY_HANDWRITING:
-                Settings.Global.putInt(mContext.getContentResolver(),
-                        Settings.Global.STYLUS_HANDWRITING_ENABLED,
+                Settings.Secure.putInt(mContext.getContentResolver(),
+                        Settings.Secure.STYLUS_HANDWRITING_ENABLED,
                         ((SwitchPreference) preference).isChecked() ? 1 : 0);
 
                 if (((SwitchPreference) preference).isChecked()) {

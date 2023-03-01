@@ -286,8 +286,8 @@ public class StylusDevicesControllerTest {
 
     @Test
     public void handwritingPreference_checkedWhenFlagTrue() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.STYLUS_HANDWRITING_ENABLED, 1);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_HANDWRITING_ENABLED, 1);
 
         showScreen(mController);
         SwitchPreference handwritingPref = (SwitchPreference) mPreferenceContainer.getPreference(1);
@@ -297,8 +297,8 @@ public class StylusDevicesControllerTest {
 
     @Test
     public void handwritingPreference_uncheckedWhenFlagFalse() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.STYLUS_HANDWRITING_ENABLED, 0);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_HANDWRITING_ENABLED, 0);
 
         showScreen(mController);
         SwitchPreference handwritingPref = (SwitchPreference) mPreferenceContainer.getPreference(1);
@@ -308,22 +308,22 @@ public class StylusDevicesControllerTest {
 
     @Test
     public void handwritingPreference_updatesFlagOnClick() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.STYLUS_HANDWRITING_ENABLED, 0);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_HANDWRITING_ENABLED, 0);
         showScreen(mController);
         SwitchPreference handwritingPref = (SwitchPreference) mPreferenceContainer.getPreference(1);
 
         handwritingPref.performClick();
 
         assertThat(handwritingPref.isChecked()).isEqualTo(true);
-        assertThat(Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.STYLUS_HANDWRITING_ENABLED, -1)).isEqualTo(1);
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_HANDWRITING_ENABLED, -1)).isEqualTo(1);
     }
 
     @Test
     public void handwritingPreference_startsHandwritingSettingsOnClickIfChecked() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.STYLUS_HANDWRITING_ENABLED, 0);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_HANDWRITING_ENABLED, 0);
         showScreen(mController);
         SwitchPreference handwritingPref = (SwitchPreference) mPreferenceContainer.getPreference(1);
 
@@ -335,8 +335,8 @@ public class StylusDevicesControllerTest {
 
     @Test
     public void handwritingPreference_doesNotStartHandwritingSettingsOnClickIfNotChecked() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.STYLUS_HANDWRITING_ENABLED, 1);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_HANDWRITING_ENABLED, 1);
         showScreen(mController);
         SwitchPreference handwritingPref = (SwitchPreference) mPreferenceContainer.getPreference(1);
 
@@ -350,8 +350,8 @@ public class StylusDevicesControllerTest {
     public void handwritingPreference_doesNotStartHandwritingSettingsIfNoIntent() {
         when(mInputMethodInfo.createStylusHandwritingSettingsActivityIntent())
                 .thenReturn(null);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.STYLUS_HANDWRITING_ENABLED, 1);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_HANDWRITING_ENABLED, 1);
         showScreen(mController);
         SwitchPreference handwritingPref = (SwitchPreference) mPreferenceContainer.getPreference(1);
 
