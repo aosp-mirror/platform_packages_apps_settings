@@ -20,7 +20,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.accessibility.AccessibilityEvent;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -33,15 +32,12 @@ import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.transition.SettingsTransitionHelper;
 
+import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivity {
 
     private static final String SAVE_KEY_TITLE = "activity_title";
-
-    @VisibleForTesting
-    static final String CLASS_NAME_FONT_SIZE_SETTINGS_FOR_SUW =
-            "com.android.settings.FontSizeSettingsForSetupWizardActivity";
 
     @Override
     protected void onSaveInstanceState(Bundle savedState) {
@@ -101,8 +97,11 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
     }
 
     private void applyTheme() {
-        setTheme(SetupWizardUtils.getTheme(this, getIntent()));
-        setTheme(R.style.SettingsPreferenceTheme_SetupWizard);
-        ThemeHelper.trySetDynamicColor(this);
+        final boolean isAnySetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
+        if (isAnySetupWizard) {
+            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+            setTheme(R.style.SettingsPreferenceTheme_SetupWizard);
+            ThemeHelper.trySetDynamicColor(this);
+        }
     }
 }
