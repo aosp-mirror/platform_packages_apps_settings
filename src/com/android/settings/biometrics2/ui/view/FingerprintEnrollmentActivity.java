@@ -114,6 +114,10 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
 
     protected static final int LAUNCH_CONFIRM_LOCK_ACTIVITY = 1;
 
+    // This flag is used for addBackStack(), we do not save it in ViewModel because it is just used
+    // during FragmentManager calls
+    private boolean mIsFirstFragmentAdded = false;
+
     private ViewModelProvider mViewModelProvider;
     private FingerprintEnrollmentViewModel mViewModel;
     private AutoCredentialViewModel mAutoCredentialViewModel;
@@ -195,8 +199,16 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
             Log.e(TAG, "onCreate() has savedInstance:" + (savedInstanceState != null));
         }
         if (savedInstanceState == null) {
+            Log.d(TAG, "onCreate()"); // Use to differentiate biometrics v2
             checkCredential();
-            startIntroFragment();
+            final EnrollmentRequest request = mViewModel.getRequest();
+            if (request.isSkipFindSensor()) {
+                startEnrollingFragment();
+            } else if (request.isSkipIntro()) {
+                startFindSensorFragment();
+            } else {
+                startIntroFragment();
+            }
         } else {
             final FragmentManager manager = getSupportFragmentManager();
             String[] tags = new String[] {
@@ -244,16 +256,36 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
                 this::onGenerateChallengeFailed);
     }
 
+    private void startFragment(@NonNull Class<? extends Fragment> fragmentClass,
+            @NonNull String tag) {
+        if (!mIsFirstFragmentAdded) {
+            getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .replace(R.id.fragment_container_view, fragmentClass, null, tag)
+                    .commit();
+            mIsFirstFragmentAdded = true;
+        } else {
+            getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .replace(R.id.fragment_container_view, fragmentClass, null, tag)
+                    .setCustomAnimations(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out,
+                            R.anim.sud_slide_back_in, R.anim.sud_slide_back_out)
+                    .addToBackStack(tag)
+                    .commit();
+        }
+    }
+
     private void startIntroFragment() {
         attachIntroViewModel();
-        getSupportFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
-                .replace(R.id.fragment_container_view, FingerprintEnrollIntroFragment.class, null,
-                        INTRO_TAG)
-                .commit();
+        startFragment(FingerprintEnrollIntroFragment.class, INTRO_TAG);
     }
 
     private void attachIntroViewModel() {
+        final EnrollmentRequest request = mViewModel.getRequest();
+        if (request.isSkipIntro() || request.isSkipFindSensor()) {
+            return;
+        }
+
         final FingerprintEnrollIntroViewModel introViewModel =
                 mViewModelProvider.get(FingerprintEnrollIntroViewModel.class);
 
@@ -283,16 +315,14 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
             tag = FIND_RFPS_TAG;
             fragmentClass = FingerprintEnrollFindRfpsFragment.class;
         }
-        getSupportFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
-                .setCustomAnimations(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out,
-                        R.anim.sud_slide_back_in, R.anim.sud_slide_back_out)
-                .replace(R.id.fragment_container_view, fragmentClass, null, tag)
-                .addToBackStack(tag)
-                .commit();
+        startFragment(fragmentClass, tag);
     }
 
     private void attachFindSensorViewModel() {
+        if (mViewModel.getRequest().isSkipFindSensor()) {
+            return;
+        }
+
         final FingerprintEnrollFindSensorViewModel findSensorViewModel =
                 mViewModelProvider.get(FingerprintEnrollFindSensorViewModel.class);
 
@@ -321,14 +351,7 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
             tag = ENROLLING_RFPS_TAG;
             fragmentClass = FingerprintEnrollEnrollingRfpsFragment.class;
         }
-
-        getSupportFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
-                .setCustomAnimations(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out,
-                        R.anim.sud_slide_back_in, R.anim.sud_slide_back_out)
-                .replace(R.id.fragment_container_view, fragmentClass, null, tag)
-                .addToBackStack(tag)
-                .commit();
+        startFragment(fragmentClass, tag);
     }
 
     private void attachEnrollingViewModel() {
@@ -342,16 +365,31 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
     }
 
     private void startFinishFragment() {
+        mViewModel.setIsNewFingerprintAdded();
         attachFinishViewModel();
 
-        getSupportFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
-                .setCustomAnimations(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out,
-                        R.anim.sud_slide_back_in, R.anim.sud_slide_back_out)
-                .replace(R.id.fragment_container_view, FingerprintEnrollFinishFragment.class, null,
-                        FINISH_TAG)
-                .addToBackStack(FINISH_TAG)
-                .commit();
+        getSupportFragmentManager().popBackStack();
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            // Replace enrolling page
+            getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .replace(R.id.fragment_container_view, FingerprintEnrollFinishFragment.class,
+                            null, FINISH_TAG)
+                    .setCustomAnimations(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out,
+                            R.anim.sud_slide_back_in, R.anim.sud_slide_back_out)
+                    .commit();
+        } else {
+            // Remove Enrolling page from backstack, and add Finish page. Latest backstack will
+            // be changed from Intro->FindSensor->Enrolling to Intro->FindSensor->Finish
+            getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .replace(R.id.fragment_container_view, FingerprintEnrollFinishFragment.class,
+                            null, FINISH_TAG)
+                    .setCustomAnimations(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out,
+                            R.anim.sud_slide_back_in, R.anim.sud_slide_back_out)
+                    .addToBackStack(FINISH_TAG)
+                    .commit();
+        }
     }
 
     private void attachFinishViewModel() {
@@ -366,10 +404,12 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
     }
 
     private void onSetActivityResult(@NonNull ActivityResult result) {
+        final Bundle challengeExtras = mAutoCredentialViewModel.createGeneratingChallengeExtras();
         final ActivityResult overrideResult = mViewModel.getOverrideActivityResult(
-                result, mAutoCredentialViewModel.createGeneratingChallengeExtras());
+                result, challengeExtras);
         if (DEBUG) {
-            Log.d(TAG, "onSetActivityResult(" + result + "), override:" + overrideResult + ")");
+            Log.d(TAG, "onSetActivityResult(" + result + "), override:" + overrideResult
+                    + ") challengeExtras:" + challengeExtras);
         }
         setResult(overrideResult.getResultCode(), overrideResult.getData());
         finish();
@@ -460,11 +500,6 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
     private void onEnrollingAction(@FingerprintEnrollEnrollingAction int action) {
         switch (action) {
             case FINGERPRINT_ENROLL_ENROLLING_ACTION_DONE: {
-                mViewModel.setIsNewFingerprintAdded();
-
-                // Remove Enrolling page from backstack, and add Finish page. Latest backstack will
-                // be changed from Intro->FindSensor->Enrolling to Intro->FindSensor->Finish
-                getSupportFragmentManager().popBackStack();
                 startFinishFragment();
                 break;
             }
@@ -482,17 +517,10 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
                 break;
             }
             case FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_BACK_PRESSED: {
-                if (mViewModel.isNewFingerprintAdded()) {
-                    // Add another fingerprint case. Remove Enrolling page from
-                    // backstack, and add Finish page. Latest backstack will be changed from
-                    // Intro->FindSensor->Enrolling to Intro->FindSensor->Finish
+                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
                     getSupportFragmentManager().popBackStack();
-                    startFinishFragment();
                 } else {
-                    // First fingerprint case. Remove Enrolling page from backstack, and add Finish
-                    // page. Latest backstack will be changed from
-                    // Intro->FindSensor->Enrolling to Intro->FindSensor
-                    getSupportFragmentManager().popBackStack();
+                    onSetActivityResult(new ActivityResult(RESULT_CANCELED, null));
                 }
                 break;
             }
@@ -513,7 +541,6 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
     private void onFinishAction(@FingerprintEnrollFinishAction int action) {
         switch (action) {
             case FINGERPRINT_ENROLL_FINISH_ACTION_ADD_BUTTON_CLICK: {
-                getSupportFragmentManager().popBackStack(); // Remove Finish page from backstack
                 startEnrollingFragment();
                 break;
             }

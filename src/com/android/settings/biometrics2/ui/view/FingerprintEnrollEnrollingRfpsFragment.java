@@ -35,7 +35,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.widget.ProgressBar;
@@ -43,7 +42,6 @@ import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
@@ -127,6 +125,15 @@ public class FingerprintEnrollEnrollingRfpsFragment extends Fragment {
         }
     };
 
+    private final OnBackPressedCallback mOnBackPressedCallback = new OnBackPressedCallback(true) {
+        @Override
+        public void handleOnBackPressed() {
+            setEnabled(false);
+            mEnrollingViewModel.setOnBackPressed();
+            cancelEnrollment();
+        }
+    };
+
     @Override
     public void onAttach(@NonNull Context context) {
         final FragmentActivity activity = getActivity();
@@ -134,53 +141,13 @@ public class FingerprintEnrollEnrollingRfpsFragment extends Fragment {
         mEnrollingViewModel = provider.get(FingerprintEnrollEnrollingViewModel.class);
         mProgressViewModel = provider.get(FingerprintEnrollProgressViewModel.class);
         super.onAttach(context);
-        requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                setEnabled(false);
-                mEnrollingViewModel.setOnBackPressed();
-                cancelEnrollment();
-            }
-        });
-    }
-
-    @Nullable
-    @Override
-    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        if (enter && nextAnim == R.anim.sud_slide_next_in) {
-            final Animation animation = AnimationUtils.loadAnimation(getActivity(), nextAnim);
-            if (animation != null) {
-                animation.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        mAnimationCancelled = false;
-                        startIconAnimation();
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-                    }
-                });
-                return animation;
-            }
-        }
-        return super.onCreateAnimation(transit, enter, nextAnim);
+        activity.getOnBackPressedDispatcher().addCallback(mOnBackPressedCallback);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mEnrollingViewModel.restoreSavedState(savedInstanceState);
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        mEnrollingViewModel.onSaveInstanceState(outState);
-        super.onSaveInstanceState(outState);
+    public void onDetach() {
+        mOnBackPressedCallback.setEnabled(false);
+        super.onDetach();
     }
 
     @Override
@@ -248,6 +215,8 @@ public class FingerprintEnrollEnrollingRfpsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        mAnimationCancelled = false;
+        startIconAnimation();
         startEnrollment();
         updateProgress(false /* animate */, mProgressViewModel.getProgressLiveData().getValue());
         updateTitleAndDescription();
