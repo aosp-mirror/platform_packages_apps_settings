@@ -973,6 +973,13 @@
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Välj ett maxantal för ljudenheter anslutna via Bluetooth"</string>
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Felsökningslogg för NFC-stack"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Öka loggningsnivå för NFC-stack"</string>
+    <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Verbose-logg för NFC för leverantörens felsökning"</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Ta med ytterligare enhetsspecifika leverantörsloggar i felrapporterna, vilka kan innehålla privata uppgifter."</string>
+    <string name="nfc_snoop_log_title" msgid="1072690687525472163">"Ofiltrerad NFC NCI-snoop logg"</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Samla detaljerade NFC-paket, vilka kan innehålla privata uppgifter."</string>
+    <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Vill du starta om enheten?"</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Detaljerad NFC-loggning är endast avsedd för utvecklingssyfte. Ytterligare NFC-data ingår i felrapporterna, vilka kan innehålla privata uppgifter. Starta om enheten för att ändra den här inställningen."</string>
+    <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Starta om"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Casta"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"spegling"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Aktivera wifi-skärmdelning"</string>
@@ -2383,6 +2390,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Nedladdade appar"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimentella"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Funktionsflaggor"</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Skärmläsaren är främst avsedd för blinda eller personer med nedsatt syn"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Tryck på objekt på skärmen om du vill höra dem upplästa"</string>
@@ -3441,7 +3462,7 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Vill du att systemets CA-certifikat ska aktiveras?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Vill du att systemets CA-certifikat ska inaktiveras?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Vill du att användarens CA-certifikat ska tas bort permanent?"</string>
-    <string name="credential_contains" msgid="407972262032275476">"Inlägget innehåller:"</string>
+    <string name="credential_contains" msgid="407972262032275476">"Denna post innehåller:"</string>
     <string name="one_userkey" msgid="4417212932385103517">"en användarnyckel"</string>
     <string name="one_usercrt" msgid="1865069301105101370">"ett användarcertifikat"</string>
     <string name="one_cacrt" msgid="7467796501404158399">"ett CA-certifikat"</string>
@@ -3491,7 +3512,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Lägg till användare från låsskärmen"</string>
     <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"Byt till administratörsanvändare vid dockning"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Vill du ta bort dig själv?"</string>
-    <string name="user_confirm_remove_title" msgid="3626559103278006002">"Ska användaren raderas?"</string>
+    <string name="user_confirm_remove_title" msgid="3626559103278006002">"Vill du ta bort andvändaren?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Vill du ta bort profilen?"</string>
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Ta bort jobbprofilen?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="439222554798995592">"Ditt utrymme och din data tas bort från surfplattan. Det går inte att ångra den här åtgärden."</string>
@@ -3513,7 +3534,7 @@
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Appar och data från den här gästsessionen raderas nu och i fortsättningen raderas all gästaktivitet när du avslutar gästläget"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Aktivera telefonsamtal"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Aktivera telefonsamtal och sms"</string>
-    <string name="user_remove_user" msgid="8468203789739693845">"Radera användare"</string>
+    <string name="user_remove_user" msgid="8468203789739693845">"Ta bort användare"</string>
     <string name="user_enable_calling_confirm_title" msgid="7868894792723368364">"Vill du aktivera telefonsamtal?"</string>
     <string name="user_enable_calling_confirm_message" msgid="4924965198409050155">"Samtalshistoriken delas med den här användaren."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Vill du aktivera telefonsamtal och sms?"</string>
@@ -4420,7 +4441,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Be om lösenord innan skärmen lossas"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Lås enheten när skärmen lossas"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Bekräfta borttagning av SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Verifiera din identitet innan du tar bort ett eSIM-kort"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Verifiera din identitet innan du tar bort ett eSIM"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Den här jobbprofilen hanteras av:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Hanteras av <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(experimentellt)"</string>
@@ -5495,7 +5516,7 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Kontakta din nätoperatör för priser."</string>
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"Appars dataanvändning"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Ogiltigt nätverksläge: <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignorera."</string>
-    <string name="mobile_network_apn_title" msgid="5582995550142073054">"Åtkomstpunktens namn (APN)"</string>
+    <string name="mobile_network_apn_title" msgid="5582995550142073054">"Namn på åtkomstpunkter"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Inte tillgänglig vid anslutning till <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Visa mer"</string>
     <string name="see_less" msgid="2642392725363552793">"Visa färre"</string>

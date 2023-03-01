@@ -973,6 +973,13 @@
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Zgjidh numrin maksimal të pajisjeve të lidhura audio me Bluetooth"</string>
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Evidenca e korrigjimit të grumbullit të NFC-së"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Rrit nivelin e regjistrimit të grumbullit të NFC-së"</string>
+    <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Evidenca e zgjeruar i korrigjimit të shitësit të NFC-së"</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Përfshi evidenca shtesë të shitësve, specifike për pajisjen, në raportet e defekteve në kod që mund të përfshijnë informacione private."</string>
+    <string name="nfc_snoop_log_title" msgid="1072690687525472163">"Evidenca eksploruese e pafiltruar për NFC NCI"</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Kap paketat e detajuara të NFC-së, të cilat mund të përmbajnë informacione private."</string>
+    <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Të riniset pajisja?"</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Regjistrimi i detajuar i lidhjes NFC është i planifikuar vetëm për qëllime zhvillimi. Të dhënat shtesë të lidhjes NFC përfshihen në raportet e defekteve në kod, të cilat mund të përmbajnë informacione private. Rinise pajisjen tënde për ta ndryshuar këtë cilësim."</string>
+    <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Rinis"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Transmetimi"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"pasqyro"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Aktivizo ekranin pa tel"</string>
@@ -1331,7 +1338,7 @@
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"U shkëput nga <xliff:g id="SSID">%1$s</xliff:g>"</string>
     <string name="carrier" msgid="1755020806290963951">"Operatori celular"</string>
     <string name="display_settings_title" msgid="626835071804834218">"Paraqitja"</string>
-    <string name="sound_settings" msgid="7622986039384531304">"Tingulli dhe dridhjet"</string>
+    <string name="sound_settings" msgid="7622986039384531304">"Tingulli dhe dridhja"</string>
     <string name="all_volume_title" msgid="6196367642878437513">"Volumet"</string>
     <string name="musicfx_title" msgid="5458574743312283473">"Efektet e muzikës"</string>
     <string name="ring_volume_title" msgid="4869034595079914541">"Volumi i ziles dhe njoftimeve"</string>
@@ -2383,6 +2390,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Aplikacionet e shkarkuara"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Eksperimentale"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Raportimet e veçorive"</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Një lexues i ekranit kryesisht për personat e verbër dhe me shikim të dobët"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Trokit artikujt në ekran për t\'i dëgjuar të lexuar me zë të lartë"</string>
@@ -4118,7 +4139,7 @@
       <item quantity="one">Rreth <xliff:g id="NUMBER_0">%d</xliff:g> njoftim në javë</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Asnjëherë"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"Njoftimet e pajisjes dhe aplikacioneve"</string>
+    <string name="manage_notification_access_title" msgid="6481256069087219982">"Njoftime të pajisjes dhe të aplikacioneve"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Kontrollo se cilat aplikacione dhe pajisje mund të lexojnë njoftime"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Qasja në njoftimet e profilit të punës është bllokuar"</string>
     <string name="manage_notification_access_summary_zero" msgid="7528633634628627431">"Aplikacionet nuk mund t\'i lexojnë njoftimet"</string>
@@ -4420,7 +4441,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Kërko fjalëkalim para heqjes nga gozhdimi"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Kyçe pajisjen kur heq gozhdimin"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Konfirmo fshirjen e kartës SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Verifiko që je ti përpara se të spastrosh një kartë eSIM"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Verifiko që je ti përpara se të spastrosh një kartë eSIM"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Ky profil pune menaxhohet nga:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"I menaxhuar nga <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Eksperimentale)"</string>

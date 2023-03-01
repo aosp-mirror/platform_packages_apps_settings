@@ -973,6 +973,13 @@
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Chagua kima cha juu zaidi cha vifaa vya sauti vya Bluetooth vilivyounganishwa"</string>
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Kumbukumbu ya utatuzi wa rafu za NFC"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Ongeza kiwango cha kuweka kumbukumbu ya rafu za NFC"</string>
+    <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Kumbukumbu ya kina ya utatuzi ya mtoa huduma"</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Jumuisha kumbukumbu za ziada za mtoa huduma mahususi kwa kifaa katika ripoti za hitilafu ambazo huenda zikawa na taarifa ya faragha."</string>
+    <string name="nfc_snoop_log_title" msgid="1072690687525472163">"Kumbukumbu dukizi isiyochujwa ya NFC NCI"</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Nasa vifurushi vya maelezo vya NFC ambavyo huenda vikawa na taarifa ya faragha."</string>
+    <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Ungependa kuzima kisha uwashe kifaa?"</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Uwekaji maelezo ya kumbukumbu ya NFC ni kwa madhumuni ya usanidi pekee. Vilevile data ya NFC inajumuishwa katika ripoti za hitilafu ambazo huenda zikawa na taarifa ya faragha. Zima kisha uwashe kifaa chako ili ubadili mipangilio hii."</string>
+    <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Zima kisha uwashe"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Tuma"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"kioo"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Washa kuonyesha skrini bila kutumia waya"</string>
@@ -2383,6 +2390,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Programu ulizopakua"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Ya majaribio"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Alama za vipengele"</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Kisoma skrini hasa kwa watu wenye upofu na wenye matatizo ya kuona"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Gusa vipengee kwenye skrini yako ili usikie vikisomwa kwa sauti"</string>
@@ -2552,7 +2573,7 @@
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Simu"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Arifa na kengele"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Mtetemo wa maudhui"</string>
-    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Tumia mtetemo na kuhisi"</string>
+    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Tumia mtetemo na miguso"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Mtetemo wa kengele"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Mtetemo wa maudhui"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Mtetemo wa mlio"</string>
@@ -4118,7 +4139,7 @@
       <item quantity="one">Karibu arifa <xliff:g id="NUMBER_0">%d</xliff:g> kwa wiki</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Kamwe"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"Arifa za programu na vifaa"</string>
+    <string name="manage_notification_access_title" msgid="6481256069087219982">"Arifa za kifaa na programu"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Dhibiti programu na vifaa vinavyoweza kusoma arifa"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Ufikiaji kwenye arifa za wasifu wa kazi umezuiwa"</string>
     <string name="manage_notification_access_summary_zero" msgid="7528633634628627431">"Programu haziwezi kusoma arifa"</string>
@@ -4420,7 +4441,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Omba nenosiri kabla hujabandua"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Funga kifaa wakati wa kubandua"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Thibitisha hatua ya kufuta SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Thibitisha kuwa ni wewe kabla ya kufuta eSIM"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Thibitisha kuwa ni wewe kabla ya kufuta eSIM"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Wasifu huu wa kazini unasimamiwa na:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Inasimamiwa na <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Majaribio)"</string>
