@@ -442,7 +442,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_message_3" product="default" msgid="4757472591076060066">"O seu telemóvel irá utilizar ocasionalmente as suas imagens de impressões digitais recentes para criar modelos de impressões digitais melhorados."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Utilize a sua impressão digital para desbloquear o telemóvel ou para autorizar compras.\n\nNota: não pode utilizar a sua impressão digital para desbloquear este dispositivo. Para mais informações, contacte o gestor da sua entidade."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Cancelar"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"Não, obrigado"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"Não"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Aceito"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Ignorar impressão digital?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"A configuração da impressão digital demora apenas um ou dois minutos. Se ignorar este passo, pode adicionar a impressão digital mais tarde nas Definições."</string>
@@ -828,8 +828,8 @@
     <string name="bluetooth_pin_values_hint" msgid="2753202519050044670">"Geralmente 0000 ou 1234"</string>
     <string name="bluetooth_pin_values_hint_16_digits" msgid="5603928271430883558">"Deve ter 16 dígitos"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"Poderá também ter de introduzir este PIN no outro aparelho."</string>
-    <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Poderá também ter de introduzir a chave de acesso no outro aparelho."</string>
-    <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"Para sincronizar com: &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Verifique se apresenta esta chave de acesso: &lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Poderá também ter de introduzir a token de acesso no outro aparelho."</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"Para sincronizar com: &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Verifique se apresenta esta token de acesso: &lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Confirme para sincronizar com o conjunto coordenado"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"De: &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt; Sincronizar com este aparelho?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"Para sincronizar com:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Introduza no mesmo:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> e, em seguida, prima Enter."</string>
@@ -1151,7 +1151,7 @@
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"Máscara de sub-rede"</string>
     <string name="wifi_type_title" msgid="2174893488722015838">"Tipo"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
-    <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"Moradas IPv6"</string>
+    <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"Endereços IPv6"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Redes guardadas"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Subscrições"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Outras redes"</string>
@@ -1906,7 +1906,7 @@
     <string name="location_access_summary" msgid="8634100005481578143">"Permitir que app com permissão utilizem informações sobre a sua localização"</string>
     <string name="location_sources_heading" msgid="6126965815860570524">"Origens da localização"</string>
     <string name="about_settings" product="tablet" msgid="2888705054709289693">"Acerca do tablet"</string>
-    <string name="about_settings" product="default" msgid="4038626127378127613">"Acerca do telefone"</string>
+    <string name="about_settings" product="default" msgid="4038626127378127613">"Acerca do telemóvel"</string>
     <string name="about_settings" product="device" msgid="9012888717090302815">"Acerca do dispositivo"</string>
     <string name="about_settings" product="emulator" msgid="2516560858771320366">"Acerca do dispositivo emulado"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Ver informações jurídicas, estado, versão de software"</string>
@@ -2105,7 +2105,7 @@
     <string name="no_applications" msgid="985069304755391640">"Sem apps."</string>
     <string name="internal_storage" msgid="999496851424448809">"Armaz. interno"</string>
     <string name="recompute_size" msgid="1098091228370999128">"A recalcular tamanho..."</string>
-    <string name="clear_data_dlg_title" msgid="180446967743732410">"Eliminar dados da app?"</string>
+    <string name="clear_data_dlg_title" msgid="180446967743732410">"Apagar dados da app?"</string>
     <string name="clear_data_dlg_text" msgid="3440011276559762619">"Os dados desta app, incluindo ficheiros e definições, vão ser eliminados permanentemente deste dispositivo"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"OK"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Cancelar"</string>
@@ -2469,7 +2469,7 @@
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Chamadas"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Notificações e alarmes"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Resposta interativa"</string>
-    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Usar vibração e a funcionalidade tátil"</string>
+    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Usar vibração e funcionalidade tátil"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibração do alarme"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibração de multimédia"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibração do toque"</string>
@@ -3347,7 +3347,7 @@
     <string name="one_usercrt" msgid="1865069301105101370">"um certificado do utilizador"</string>
     <string name="one_cacrt" msgid="7467796501404158399">"um certificado da AC"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"%d certificados da AC"</string>
-    <string name="user_credential_title" msgid="4686178602575567298">"Detalhes das credenciais"</string>
+    <string name="user_credential_title" msgid="4686178602575567298">"Detalhes da credencial"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"Credencial removida: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
     <string name="user_credential_none_installed" msgid="918620912366836994">"Sem credenciais de utilizador instaladas"</string>
     <string name="spellcheckers_settings_title" msgid="2799021700580591443">"Corretor ortográfico"</string>
@@ -3368,8 +3368,8 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} instalou uma autoridade de certificação para o seu perfil de trabalho, o que pode permitir monitorizar a atividade na rede de trabalho, incluindo emails, apps e Websites seguros.\n\nPara obter mais informações sobre este certificado, contacte o administrador.}other{{orgName} instalou autoridades de certificação para o seu perfil de trabalho, o que pode permitir monitorizar a atividade na rede de trabalho, incluindo emails, apps e Websites seguros.\n\nPara obter mais informações sobre estes certificados, contacte o administrador.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"A sua atividade de rede, incluindo emails, aplicações e Sites seguros, pode ser monitorizada por terceiros.\n\nIsto é possível através de uma credencial fidedigna instalada no seu dispositivo."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
-      <item quantity="other">Verificar certificados</item>
-      <item quantity="one">Verificar certificado</item>
+      <item quantity="other">Rever certificados</item>
+      <item quantity="one">Rever certificado</item>
     </plurals>
     <string name="user_settings_title" msgid="6550866465409807877">"Vários utilizadores"</string>
     <string name="user_settings_footer_text" product="device" msgid="7523914344521302179">"Partilhe o seu dispositivo ao adicionar novos utilizadores. Cada utilizador tem um espaço pessoal no dispositivo, onde pode guardar ecrãs principais personalizados, contas, aplicações, definições e muito mais."</string>
@@ -5178,7 +5178,7 @@
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"Esta funcionalidade foi desativada porque torna o seu telemóvel lento."</string>
     <string name="show_first_crash_dialog" msgid="1696584857732637389">"Mostrar sempre a caixa de diálogo de falhas"</string>
     <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"Mostrar a caixa de diálogo sempre que uma aplicação falhar"</string>
-    <string name="angle_enabled_app" msgid="6044941043384239076">"Selecionar aplicação compatível com o ANGLE"</string>
+    <string name="angle_enabled_app" msgid="6044941043384239076">"Selecionar app compatível com o ANGLE"</string>
     <string name="angle_enabled_app_not_set" msgid="4472572224881726067">"Nenhuma aplicação compatível com o ANGLE definida."</string>
     <string name="angle_enabled_app_set" msgid="7811829383833353021">"Aplicação compatível com o ANGLE: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="graphics_driver_dashboard_title" msgid="5661084817492587796">"Preferências da placa gráfica"</string>

@@ -519,9 +519,7 @@
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Поставете го десниот раб од прстот"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Поставете го отпечатокот странично на сензорот и задржете, а потоа направете исто со другата страна"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Ова помага за да се сними повеќе од отпечатокот"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
-    <skip />
+    <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Регистрирање на отпечатокот: <xliff:g id="PERCENTAGE">%d</xliff:g> %%"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Отпечатокот е додаден"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Колку повеќе го користите за отклучување на таблетот или потврдување дека сте вие во апликациите, толку повеќе се подобрува „Отклучувањето со отпечаток на прст“"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Колку повеќе го користите за отклучување на уредот или потврдување дека сте вие во апликациите, толку повеќе се подобрува „Отклучувањето со отпечаток на прст“"</string>
@@ -2470,8 +2468,8 @@
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Поставката е оневозможена бидејќи уредот е поставен на тивко"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Повици"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Известувања и аларми"</string>
-    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Интерактивни вибрации"</string>
-    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Користење вибрации и допир"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Интерактивна хаптика"</string>
+    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Користи вибрации и хаптика"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Вибрации за аларм"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Вибрации за аудиовизуелни содржини"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Вибрации при ѕвонење"</string>
@@ -4008,7 +4006,7 @@
       <item quantity="other">околу <xliff:g id="NUMBER_1">%,d</xliff:g> известувања неделно</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Никогаш"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"Известувања во уреди и апликации"</string>
+    <string name="manage_notification_access_title" msgid="6481256069087219982">"Известувања од уредот и апликациите"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Контролирајте кои апликации и уреди може да ги читаат известувањата"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Пристапот до известувањата на работниот профил е блокиран"</string>
     <string name="manage_notification_access_summary_zero" msgid="7528633634628627431">"Апликациите не можат да читаат известувања"</string>
@@ -4374,7 +4372,7 @@
     <string name="storage_type_internal" msgid="979243131665635278">"внатрешна меморија"</string>
     <string name="storage_type_external" msgid="125078274000280821">"надворешна меморија"</string>
     <string name="data_summary_format" msgid="8802057788950096650">"<xliff:g id="SIZE">%1$s</xliff:g> користени од <xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <string name="storage_used" msgid="2591194906751432725">"Искористена меморија"</string>
+    <string name="storage_used" msgid="2591194906751432725">"Искористен простор"</string>
     <string name="change" msgid="273206077375322595">"Промени"</string>
     <string name="change_storage" msgid="8773820275624113401">"Промени ја меморијата"</string>
     <string name="notifications_label" msgid="8471624476040164538">"Известувања"</string>
@@ -4665,7 +4663,7 @@
     <string name="display_summary" msgid="5526061030874717172">"Стави го во режим на мирување по <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> неактивност"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Темна тема, големина на фонт, осветленост"</string>
     <string name="display_summary_example" msgid="4275121979039344438">"Стави го во режим на мирување по 10 минути неактивност"</string>
-    <string name="memory_summary" msgid="8221954450951651735">"Искористена меморија: просечно <xliff:g id="USED_MEMORY">%1$s</xliff:g> од <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
+    <string name="memory_summary" msgid="8221954450951651735">"Искористен простор: просечно <xliff:g id="USED_MEMORY">%1$s</xliff:g> од <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="8473589474976307510">"Најавени сте како <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="5513009140568552693">"<xliff:g id="APP_NAME">%1$s</xliff:g> е стандардна"</string>
     <string name="backup_disabled" msgid="4503062265560959320">"Бекапот е оневозможен"</string>
