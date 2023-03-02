@@ -33,6 +33,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
+import android.widget.Button;
 
 import androidx.preference.Preference;
 
@@ -47,6 +48,7 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,6 +62,7 @@ public class FaceSettings extends DashboardFragment {
 
     private static final String TAG = "FaceSettings";
     private static final String KEY_TOKEN = "hw_auth_token";
+    private static final String KEY_RE_ENROLL_FACE = "re_enroll_face_unlock";
 
     private static final String PREF_KEY_DELETE_FACE_DATA =
             "security_settings_face_delete_faces_container";
@@ -211,6 +214,20 @@ public class FaceSettings extends DashboardFragment {
         final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
         mEnrollButton.setVisible(!hasEnrolled);
         mRemoveButton.setVisible(hasEnrolled);
+
+        // When the user has face id registered but failed enrolling in device lock state,
+        // lead users directly to the confirm deletion dialog in Face Unlock settings.
+        if (hasEnrolled) {
+            final boolean isReEnrollFaceUnlock = getIntent().getBooleanExtra(
+                    FaceSettings.KEY_RE_ENROLL_FACE, false);
+            if (isReEnrollFaceUnlock) {
+                final Button removeBtn = ((LayoutPreference) mRemoveButton).findViewById(
+                        R.id.security_settings_face_settings_remove_button);
+                if (removeBtn != null && removeBtn.isEnabled()) {
+                    mRemoveController.onClick(removeBtn);
+                }
+            }
+        }
     }
 
     @Override
