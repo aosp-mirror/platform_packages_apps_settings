@@ -2108,6 +2108,21 @@
     <!-- Nfc developer settings: The description of the setting. -->
     <string name="nfc_stack_debuglog_summary">Increase NFC stack logging level</string>
 
+    <!-- Nfc developer settings: The title of the setting to enable nfc verbose vendor log. [CHAR LIMIT=60] -->
+    <string name="nfc_verbose_vendor_log_title">NFC verbose vendor debug log</string>
+    <!-- Nfc developer settings: The description of the setting to enable nfc verbose vendor log. [CHAR_LIMIT=NONE] -->
+    <string name="nfc_verbose_vendor_log_summary">Include additional device-specific vendor logs in bugreports, which may contain private information. </string>
+    <!-- Nfc developer settings: The title of the setting to enable full nfc snoop log. [CHAR LIMIT=60] -->
+    <string name="nfc_snoop_log_title">NFC NCI unfiltered snoop log</string>
+    <!-- Nfc developer settings: The description of the setting to enable full nfc snoop log. [CHAR_LIMIT=NONE] -->
+    <string name="nfc_snoop_log_summary">Capture detail NFC packets, which may contain private information. </string>
+    <!-- Nfc developer settings: The title of the popup dialog. [CHAR_LIMIT=60] -->
+    <string name="nfc_reboot_dialog_title">Restart Device?</string>
+    <!-- Nfc developer settings: The content of the popup dialog. [CHAR_LIMIT=NONE] -->
+    <string name="nfc_reboot_dialog_message">Detail NFC logging is intended for development purposes only. Additional NFC data is included in bug reports, which may contain private information. Restart your device to change this setting. </string>
+    <!-- Nfc developer settings: The confirm button of the popup dialog. [CHAR_LIMIT=60] -->
+    <string name="nfc_reboot_dialog_confirm">Restart</string>
+
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="wifi_display_settings_title">Cast</string>
     <!-- Wifi Display settings. The keywords of the setting. [CHAR LIMIT=NONE] -->
@@ -5399,6 +5414,20 @@
     <string name="experimental_category_title">Experimental</string>
     <!-- Title for feature flags dashboard where developers can turn on experimental features [CHAR LIMIT=50] -->
     <string name="feature_flags_dashboard_title">Feature flags</string>
+    <!-- Title for snoop logger filters dashboard where developers can turn on filters [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_filters_dashboard_title">Bluetooth HCI snoop log filtering</string>
+    <!-- Summary for the snoop logger filters [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_filters_dashboard_summary">Set filters</string>
+    <!-- Summary for the snoop logger filters [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_filters_dashboard_footer">Disable and enable Bluetooth for the changes to take effect</string>
+    <!-- Title for the snoop logger pbap filter [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_filter_pbap_title">Bluetooth HCI snoop log filtering PBAP</string>
+    <!-- Title for the snoop logger map filter [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_filter_map_title">Bluetooth HCI snoop log filtering MAP</string>
+    <!-- Summary for the snoop logger filters [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_filter_summary">Set filtering mode. (Disable and enable Bluetooth for the changes to take effect)</string>
+    <!-- Summary for the snoop logger profile filters while disabled [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary">Set Bluetooth HCI snoop log mode to Enabled Filtered to change this option</string>
     <!-- Title for the Talkback Accessibility Service. Displayed on the Accessibility Settings screen in Setup Wizard. [CHAR_LIMIT=25] -->
     <string name="talkback_title">Talkback</string>
     <!-- Summary for the Talkback Accessibility Service. Lets the user know that Talkback is a screenreader and that it is usually most helpful to blind and low vision users and whether the service is on. [CHAR_LIMIT=none] -->

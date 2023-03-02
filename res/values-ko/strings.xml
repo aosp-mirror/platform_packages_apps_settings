@@ -476,7 +476,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="1833139688278350628">"자녀가 지문을 사용해 휴대전화를 잠금 해제하거나 본인을 인증할 수 있도록 허용합니다. 본인 인증은 앱에 로그인하거나 구매를 승인하는 등의 경우에 이뤄집니다."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="9019236661560266282">"자녀가 지문을 사용해 태블릿을 잠금 해제하거나 본인을 인증할 수 있도록 허용합니다. 본인 인증은 앱에 로그인하거나 구매를 승인하는 등의 경우에 이뤄집니다."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"자녀가 지문을 사용해 기기를 잠금 해제하거나 본인을 인증할 수 있도록 허용합니다. 본인 인증은 앱에 로그인하거나 구매를 승인하는 등의 경우에 이뤄집니다."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"한 곳에서 편리하게 계정 관리"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"사용자가 직접 관리"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"부모와 자녀가 함께 설정"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"주의사항"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_message_1" msgid="7817635368506064516">"Fingerprint에서 기록한 데이터는 휴대전화에 안전하게 저장되며 외부로 유출되지 않습니다. 언제든지 설정에서 데이터를 삭제할 수 있습니다."</string>
@@ -517,7 +517,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"최상의 결과를 얻으려면 Made For Google 인증 화면 보호재를 사용하세요. 다른 화면 보호재를 사용할 경우 지문이 인식되지 않을 수 있습니다."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"최상의 결과를 얻으려면 Made For Google 인증 화면 보호재를 사용하세요. 다른 화면 보호재를 사용할 경우 자녀의 지문이 인식되지 않을 수 있습니다."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
-    <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"지문을 등록할 때마다 손가락을 조금씩 이동하세요"</string>
+    <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"지문이 인식될 때마다 손가락을 조금씩 이동하세요"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"지문 중앙으로 아이콘을 가리세요."</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_already_enrolled" msgid="8616678833080422946">"이미 추가된 지문입니다."</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_clean_sensor" msgid="3501453094314993113">"센서 주변 화면을 닦고 다시 시도하세요."</string>
@@ -587,15 +587,9 @@
     <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"마지막으로 손가락의 오른쪽 가장자리가 센서에 닿게 하세요"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"센서에 손가락 한쪽을 올리고 잠시 기다린 후에 다른 쪽을 올리세요"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"이렇게 하면 지문을 더 많이 캡처할 수 있습니다"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for security_settings_sfps_enroll_progress_a11y_message (6450772721691523736) -->
-    <skip />
-    <!-- String.format failed for translation -->
-    <!-- no translation found for security_settings_sfps_animation_a11y_label (8808819903730940446) -->
-    <skip />
-    <!-- String.format failed for translation -->
-    <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
-    <skip />
+    <string name="security_settings_sfps_enroll_progress_a11y_message" msgid="6450772721691523736">"지문 등록 <xliff:g id="PERCENTAGE">%d</xliff:g>%% 완료"</string>
+    <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"등록 <xliff:g id="PERCENTAGE">%d</xliff:g>%% 완료"</string>
+    <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"지문 등록 <xliff:g id="PERCENTAGE">%d</xliff:g>%% 완료"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"지문 추가됨"</string>
     <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"이제 지문을 사용하여 태블릿을 잠금 해제하거나 앱 로그인, 구매 승인 등을 위해 본인 인증을 진행할 수 있습니다."</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"이제 지문을 사용하여 태블릿을 잠금 해제하거나 앱 로그인 등을 위해 본인을 인증할 수 있습니다."</string>
@@ -979,6 +973,13 @@
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"연결된 블루투스 오디오 기기의 최대 개수 선택"</string>
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"NFC 스택 디버그 로그"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"NFC 스택 로깅 수준 높이기"</string>
+    <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"NFC 상세 공급업체 디버그 로그"</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"버그 신고에 추가적인 기기별 공급업체 로그를 포함합니다. 여기에는 개인 정보가 포함될 수 있습니다."</string>
+    <string name="nfc_snoop_log_title" msgid="1072690687525472163">"NFC NCI 필터링되지 않은 스누프 로그"</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"세부 NFC 패킷을 캡처합니다. 여기에는 개인 정보가 포함될 수 있습니다."</string>
+    <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"기기를 다시 시작하시겠습니까?"</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"세부 NFC 로깅은 개발용으로만 사용됩니다. 추가 NFC 데이터는 버그 신고에 포함되며, 여기에는 개인 정보가 포함될 수 있습니다. 이 설정을 변경하려면 기기를 다시 시작하세요."</string>
+    <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"다시 시작"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"전송"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"미러링"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"무선 디스플레이 사용"</string>
@@ -1065,7 +1066,7 @@
     <string name="wifi_cellular_data_fallback_summary" msgid="7039944853033554386">"Wi‑Fi 인터넷 액세스가 끊기면 모바일 데이터를 사용합니다. 데이터 사용 요금이 부과될 수 있습니다."</string>
     <string name="wifi_add_network" msgid="4178564862173751181">"네트워크 추가"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2536725796700696566">"Wi‑Fi 환경설정"</string>
-    <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"Wi‑Fi가 자동으로 다시 사용 설정됩니다."</string>
+    <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"Wi‑Fi가 자동으로 다시 사용 설정됨"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"Wi‑Fi가 자동으로 다시 사용 설정되지 않음"</string>
     <string name="wifi_access_points" msgid="5846755709207101844">"Wi-Fi 네트워크"</string>
     <string name="wifi_menu_more_options" msgid="1236651929987819716">"추가 옵션"</string>
@@ -2389,6 +2390,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"다운로드한 앱"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"실험"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"기능 플래그"</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"주로 시각 장애가 있는 사용자를 위한 스크린 리더"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"화면에서 항목을 탭하여 읽는 소리 듣기"</string>
@@ -3053,7 +3068,7 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"배터리 잔량 <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"배터리 잔량 비율"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"상태 표시줄에 배터리 잔량 비율 표시"</string>
-    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"마지막 충전 완료 후 배터리 잔량"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"마지막 완충 이후 배터리 잔량"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"지난 24시간 동안의 배터리 잔량"</string>
     <string name="battery_app_usage" msgid="8976453608783133770">"마지막 충전 완료 후 앱 사용"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"지난 24시간 동안의 앱 사용량"</string>
@@ -4426,7 +4441,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"고정 해제 이전에 비밀번호 요청"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"화면 고정 해제 시 기기 잠금"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"SIM 삭제 확인"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"eSIM을 삭제하기 전에 본인 확인을 진행하세요."</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"eSIM을 삭제하기 전에 본인 확인을 진행하세요"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"다음에서 이 직장 프로필을 관리합니다."</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>에서 관리"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(베타)"</string>

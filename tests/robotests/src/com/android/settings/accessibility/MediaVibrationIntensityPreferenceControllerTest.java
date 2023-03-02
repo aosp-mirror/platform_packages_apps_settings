@@ -31,10 +31,13 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,7 +48,7 @@ import org.robolectric.annotation.Config;
 
 /** Test for {@link MediaVibrationIntensityPreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowInteractionJankMonitor.class})
+@Config(shadows = {ShadowInteractionJankMonitor.class, SettingsShadowResources.class})
 public class MediaVibrationIntensityPreferenceControllerTest {
 
     private static final String PREFERENCE_KEY = "preference_key";
@@ -74,6 +77,11 @@ public class MediaVibrationIntensityPreferenceControllerTest {
         mPreference.setSummary("Test summary");
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
+    }
+
+    @After
+    public void tearDown() {
+        SettingsShadowResources.reset();
     }
 
     @Test
@@ -154,6 +162,32 @@ public class MediaVibrationIntensityPreferenceControllerTest {
         mController.setSliderPosition(Vibrator.VIBRATION_INTENSITY_HIGH);
         assertThat(readSetting(Settings.System.MEDIA_VIBRATION_INTENSITY))
                 .isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH);
+    }
+
+    @Test
+    public void configForMediaVibration_enabled_shouldShowSlider() {
+        SettingsShadowResources.overrideResource(R.bool.config_media_vibration_supported, true);
+        mController.updateState(mPreference);
+
+        final boolean mediaVibrationConfig = mContext.getResources()
+                .getBoolean(R.bool.config_media_vibration_supported);
+
+        assertThat(mediaVibrationConfig).isTrue();
+        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.isSupported()).isTrue();
+    }
+
+    @Test
+    public void configForMediaVibration_disabled_shouldHideSlider() {
+        SettingsShadowResources.overrideResource(R.bool.config_media_vibration_supported, false);
+        mController.updateState(mPreference);
+
+        final boolean mediaVibrationConfig = mContext.getResources()
+                .getBoolean(R.bool.config_media_vibration_supported);
+
+        assertThat(mediaVibrationConfig).isFalse();
+        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.isSupported()).isFalse();
     }
 
     private void updateSetting(String key, int value) {
