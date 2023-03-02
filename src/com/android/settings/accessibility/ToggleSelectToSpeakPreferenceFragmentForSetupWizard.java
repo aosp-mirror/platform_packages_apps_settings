@@ -41,18 +41,21 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizard
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
-        final String title = getArguments().getString(AccessibilitySettings.EXTRA_TITLE);
-        final String description = getContext().getString(R.string.select_to_speak_summary);
-        final Drawable icon = getContext().getDrawable(R.drawable.ic_accessibility_visibility);
-        AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
-                description, icon);
+        if (view instanceof GlifPreferenceLayout) {
+            final GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
+            final String title = getArguments().getString(AccessibilitySettings.EXTRA_TITLE);
+            final String description = getContext().getString(R.string.select_to_speak_summary);
+            final Drawable icon = getContext().getDrawable(R.drawable.ic_accessibility_visibility);
+            AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
+                    description, icon);
 
-        final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
-        AccessibilitySetupWizardUtils.setPrimaryButton(getContext(), mixin, R.string.done, () -> {
-            setResult(RESULT_CANCELED);
-            finish();
-        });
+            final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
+            AccessibilitySetupWizardUtils.setPrimaryButton(getContext(), mixin, R.string.done,
+                    () -> {
+                        setResult(RESULT_CANCELED);
+                        finish();
+                    });
+        }
 
         mToggleSwitchWasInitiallyChecked = mToggleServiceSwitchPreference.isChecked();
         if (mTopIntroPreference != null) {
@@ -63,8 +66,11 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizard
     @Override
     public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
             Bundle savedInstanceState) {
-        final GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
-        return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
+        if (parent instanceof GlifPreferenceLayout) {
+            final GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
+            return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
+        }
+        return super.onCreateRecyclerView(inflater, parent, savedInstanceState);
     }
 
     @Override

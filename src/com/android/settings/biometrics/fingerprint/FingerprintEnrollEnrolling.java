@@ -1295,6 +1295,11 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                     mUdfpsUtils.getTouchInNativeCoordinates(event.getPointerId(0),
                             event, udfpsEnrollView.getOverlayParams());
 
+            if (mUdfpsUtils.isWithinSensorArea(event.getPointerId(0), event,
+                    udfpsEnrollView.getOverlayParams())) {
+                return false;
+            }
+
             final String theStr = mUdfpsUtils.onTouchOutsideOfSensorArea(
                     mAccessibilityManager.isTouchExplorationEnabled(), context,
                     scaledTouch.x, scaledTouch.y, udfpsEnrollView.getOverlayParams());
