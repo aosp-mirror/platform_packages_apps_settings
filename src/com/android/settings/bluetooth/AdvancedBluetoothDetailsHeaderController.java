@@ -192,7 +192,8 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             final String deviceType = BluetoothUtils.getStringMetaData(device,
                     BluetoothDevice.METADATA_DEVICE_TYPE);
             if (TextUtils.equals(deviceType, BluetoothDevice.DEVICE_TYPE_WATCH)
-                    || TextUtils.equals(deviceType, BluetoothDevice.DEVICE_TYPE_DEFAULT)) {
+                    || TextUtils.equals(deviceType, BluetoothDevice.DEVICE_TYPE_DEFAULT)
+                    || TextUtils.equals(deviceType, BluetoothDevice.DEVICE_TYPE_STYLUS)) {
                 mLayoutPreference.findViewById(R.id.layout_left).setVisibility(View.GONE);
                 mLayoutPreference.findViewById(R.id.layout_right).setVisibility(View.GONE);
 
