@@ -163,6 +163,26 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     }
 
     @Test
+    public void refresh_connectedStylus_behaveAsExpected() {
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
+                BluetoothDevice.DEVICE_TYPE_STYLUS.getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn(
+                String.valueOf(false).getBytes());
+        when(mCachedDevice.isConnected()).thenReturn(true);
+
+        mController.refresh();
+
+        assertThat(mLayoutPreference.findViewById(R.id.layout_left).getVisibility()).isEqualTo(
+                View.GONE);
+        assertThat(mLayoutPreference.findViewById(R.id.layout_right).getVisibility()).isEqualTo(
+                View.GONE);
+        assertThat(mLayoutPreference.findViewById(R.id.layout_middle).getVisibility()).isEqualTo(
+                View.VISIBLE);
+    }
+
+    @Test
     public void refresh_connectedUntetheredHeadset_behaveAsExpected() {
         when(mBluetoothDevice.getMetadata(
                 BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
