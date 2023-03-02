@@ -55,6 +55,7 @@ import android.os.Vibrator;
 import android.util.FeatureFlagUtils;
 import android.view.Display;
 import android.view.Surface;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -433,6 +434,28 @@ public class FingerprintEnrollEnrollingTest {
         assertThat(appliedThemes.contains("SetupWizardPartnerResource")).isTrue();
     }
 
+    @Test
+    public void fingerprintSfpsEnroll_descriptionTextVisibility() {
+        initializeActivityFor(TYPE_POWER_BUTTON);
+
+        mActivity.onEnrollmentProgressChange(1 /* steps */, 1 /* remaining */);
+
+        assertThat(getLayout().getDescriptionTextView().getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void fingerprintUdfpsEnroll_descriptionTextVisibility() {
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+
+        mActivity.onEnrollmentProgressChange(1 /* steps */, 1 /* remaining */);
+
+        assertThat(getLayout().getDescriptionTextView().getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    private GlifLayout getLayout() {
+        return (GlifLayout) mActivity.findViewById(R.id.setup_wizard_layout);
+    }
+
     private void initializeActivityWithoutCreate(int sensorType) {
         final List<ComponentInfoInternal> componentInfo = new ArrayList<>();
         final FingerprintSensorPropertiesInternal prop =
@@ -465,6 +488,9 @@ public class FingerprintEnrollEnrollingTest {
                 doReturn(mSfpsStageThresholds[stage]).when(mActivity).getStageThresholdSteps(stage);
             }
             doReturn(true).when(mSidecar).isEnrolling();
+            ReflectionHelpers.setField(mActivity, "mCanAssumeSfps", true);
+        } else if (sensorType == TYPE_UDFPS_OPTICAL) {
+            ReflectionHelpers.setField(mActivity, "mCanAssumeUdfps", true);
         }
 
         if (sensorType == TYPE_UDFPS_OPTICAL) {
