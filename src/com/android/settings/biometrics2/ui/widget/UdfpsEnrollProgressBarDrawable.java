@@ -180,8 +180,6 @@ public class UdfpsEnrollProgressBarDrawable extends Drawable {
     }
 
     void onEnrollmentProgress(final int remaining, final int totalSteps) {
-        android.util.Log.e(TAG, "remaining =" + remaining);
-        android.util.Log.e(TAG, "totalSteps =" + totalSteps);
         mAfterFirstTouch = true;
         updateState(remaining, totalSteps, false /* showingHelp */);
     }
