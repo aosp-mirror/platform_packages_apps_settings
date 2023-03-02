@@ -87,9 +87,13 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
     private TextView mTitleText;
     private TextView mSubTitleText;
     private UdfpsEnrollView mUdfpsEnrollView;
+    private Button mSkipBtn;
+    private ImageView mIcon;
 
     private boolean mShouldShowLottie;
     private boolean mIsAccessibilityEnabled;
+
+    private int mRotation = -1;
 
     private final View.OnClickListener mOnSkipClickListener =
             (v) -> mEnrollingViewModel.onCancelledDueToOnSkipPressed();
@@ -124,6 +128,13 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
             onPointerUp(sensorId);
         }
     };
+
+    private final Observer<Integer> mRotationObserver = rotation -> {
+        if (rotation != null) {
+            onRotationChanged(rotation);
+        }
+    };
+
     private final OnBackPressedCallback mOnBackPressedCallback = new OnBackPressedCallback(true) {
         @Override
         public void handleOnBackPressed() {
@@ -132,7 +143,6 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
             cancelEnrollment();
         }
     };
-
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -164,11 +174,11 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
                 R.layout.udfps_enroll_enrolling_v2, container, false);
 
         final Activity activity = getActivity();
-        final ImageView icon = containView.findViewById(R.id.sud_layout_icon);
+        mIcon = containView.findViewById(R.id.sud_layout_icon);
         mTitleText = containView.findViewById(R.id.suc_layout_title);
         mSubTitleText = containView.findViewById(R.id.sud_layout_subtitle);
-        final Button skipBtn = containView.findViewById(R.id.skip_btn);
-        skipBtn.setOnClickListener(mOnSkipClickListener);
+        mSkipBtn = containView.findViewById(R.id.skip_btn);
+        mSkipBtn.setOnClickListener(mOnSkipClickListener);
         mUdfpsEnrollView = containView.findViewById(R.id.udfps_animation_view);
         mUdfpsEnrollView.setSensorProperties(
                 mEnrollingViewModel.getFirstFingerprintSensorPropertiesInternal());
@@ -178,61 +188,8 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
         updateOrientation(containView, (isLandscape
                 ? Configuration.ORIENTATION_LANDSCAPE : Configuration.ORIENTATION_PORTRAIT));
 
-        final int rotation = mRotationViewModel.getLiveData().getValue();
-        if (rotation == Surface.ROTATION_270) {
-            RelativeLayout.LayoutParams iconLP = new RelativeLayout.LayoutParams(-2, -2);
-            iconLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            iconLP.addRule(RelativeLayout.END_OF, R.id.udfps_animation_view);
-            iconLP.topMargin = (int) convertDpToPixel(76.64f, activity);
-            iconLP.leftMargin = (int) convertDpToPixel(151.54f, activity);
-            icon.setLayoutParams(iconLP);
-
-            RelativeLayout.LayoutParams titleLP = new RelativeLayout.LayoutParams(-1, -2);
-            titleLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            titleLP.addRule(RelativeLayout.END_OF, R.id.udfps_animation_view);
-            titleLP.topMargin = (int) convertDpToPixel(138f, activity);
-            titleLP.leftMargin = (int) convertDpToPixel(144f, activity);
-            mTitleText.setLayoutParams(titleLP);
-
-            RelativeLayout.LayoutParams subtitleLP = new RelativeLayout.LayoutParams(-1, -2);
-            subtitleLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            subtitleLP.addRule(RelativeLayout.END_OF, R.id.udfps_animation_view);
-            subtitleLP.topMargin = (int) convertDpToPixel(198f, activity);
-            subtitleLP.leftMargin = (int) convertDpToPixel(144f, activity);
-            mSubTitleText.setLayoutParams(subtitleLP);
-        } else if (rotation == Surface.ROTATION_90) {
-            DisplayMetrics metrics = activity.getResources().getDisplayMetrics();
-            RelativeLayout.LayoutParams iconLP = new RelativeLayout.LayoutParams(-2, -2);
-            iconLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            iconLP.addRule(RelativeLayout.ALIGN_PARENT_START);
-            iconLP.topMargin = (int) convertDpToPixel(76.64f, activity);
-            iconLP.leftMargin = (int) convertDpToPixel(71.99f, activity);
-            icon.setLayoutParams(iconLP);
-
-            RelativeLayout.LayoutParams titleLP = new RelativeLayout.LayoutParams(
-                    metrics.widthPixels / 2, -2);
-            titleLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            titleLP.addRule(RelativeLayout.ALIGN_PARENT_START, R.id.udfps_animation_view);
-            titleLP.topMargin = (int) convertDpToPixel(138f, activity);
-            titleLP.leftMargin = (int) convertDpToPixel(66f, activity);
-            mTitleText.setLayoutParams(titleLP);
-
-            RelativeLayout.LayoutParams subtitleLP = new RelativeLayout.LayoutParams(
-                    metrics.widthPixels / 2, -2);
-            subtitleLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            subtitleLP.addRule(RelativeLayout.ALIGN_PARENT_START);
-            subtitleLP.topMargin = (int) convertDpToPixel(198f, activity);
-            subtitleLP.leftMargin = (int) convertDpToPixel(66f, activity);
-            mSubTitleText.setLayoutParams(subtitleLP);
-        }
-
-        if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
-            RelativeLayout.LayoutParams skipBtnLP =
-                    (RelativeLayout.LayoutParams) icon.getLayoutParams();
-            skipBtnLP.topMargin = (int) convertDpToPixel(26f, activity);
-            skipBtnLP.leftMargin = (int) convertDpToPixel(54f, activity);
-            skipBtn.requestLayout();
-        }
+        mRotation = mRotationViewModel.getLiveData().getValue();
+        configLayout(mRotation);
         return containView;
     }
 
@@ -242,6 +199,18 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
         startEnrollment();
         updateProgress(false /* animate */, mProgressViewModel.getProgressLiveData().getValue());
         updateTitleAndDescription();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mRotationViewModel.getLiveData().observe(this, mRotationObserver);
+    }
+
+    @Override
+    public void onPause() {
+        mRotationViewModel.getLiveData().removeObserver(mRotationObserver);
+        super.onPause();
     }
 
     @Override
@@ -564,6 +533,71 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
         mTitleText.setText(error);
         mTitleText.setContentDescription(error);
         mSubTitleText.setContentDescription("");
+    }
+
+    private void onRotationChanged(int newRotation) {
+        if( (newRotation +2) % 4 == mRotation) {
+            mRotation = newRotation;
+            configLayout(newRotation);
+        }
+    }
+
+    private void configLayout(int newRotation) {
+        final Activity activity = getActivity();
+        if (newRotation == Surface.ROTATION_270) {
+            RelativeLayout.LayoutParams iconLP = new RelativeLayout.LayoutParams(-2, -2);
+            iconLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            iconLP.addRule(RelativeLayout.END_OF, R.id.udfps_animation_view);
+            iconLP.topMargin = (int) convertDpToPixel(76.64f, activity);
+            iconLP.leftMargin = (int) convertDpToPixel(151.54f, activity);
+            mIcon.setLayoutParams(iconLP);
+
+            RelativeLayout.LayoutParams titleLP = new RelativeLayout.LayoutParams(-1, -2);
+            titleLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            titleLP.addRule(RelativeLayout.END_OF, R.id.udfps_animation_view);
+            titleLP.topMargin = (int) convertDpToPixel(138f, activity);
+            titleLP.leftMargin = (int) convertDpToPixel(144f, activity);
+            mTitleText.setLayoutParams(titleLP);
+
+            RelativeLayout.LayoutParams subtitleLP = new RelativeLayout.LayoutParams(-1, -2);
+            subtitleLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            subtitleLP.addRule(RelativeLayout.END_OF, R.id.udfps_animation_view);
+            subtitleLP.topMargin = (int) convertDpToPixel(198f, activity);
+            subtitleLP.leftMargin = (int) convertDpToPixel(144f, activity);
+            mSubTitleText.setLayoutParams(subtitleLP);
+        } else if (newRotation == Surface.ROTATION_90) {
+            DisplayMetrics metrics = activity.getResources().getDisplayMetrics();
+            RelativeLayout.LayoutParams iconLP = new RelativeLayout.LayoutParams(-2, -2);
+            iconLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            iconLP.addRule(RelativeLayout.ALIGN_PARENT_START);
+            iconLP.topMargin = (int) convertDpToPixel(76.64f, activity);
+            iconLP.leftMargin = (int) convertDpToPixel(71.99f, activity);
+            mIcon.setLayoutParams(iconLP);
+
+            RelativeLayout.LayoutParams titleLP = new RelativeLayout.LayoutParams(
+                    metrics.widthPixels / 2, -2);
+            titleLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            titleLP.addRule(RelativeLayout.ALIGN_PARENT_START, R.id.udfps_animation_view);
+            titleLP.topMargin = (int) convertDpToPixel(138f, activity);
+            titleLP.leftMargin = (int) convertDpToPixel(66f, activity);
+            mTitleText.setLayoutParams(titleLP);
+
+            RelativeLayout.LayoutParams subtitleLP = new RelativeLayout.LayoutParams(
+                    metrics.widthPixels / 2, -2);
+            subtitleLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            subtitleLP.addRule(RelativeLayout.ALIGN_PARENT_START);
+            subtitleLP.topMargin = (int) convertDpToPixel(198f, activity);
+            subtitleLP.leftMargin = (int) convertDpToPixel(66f, activity);
+            mSubTitleText.setLayoutParams(subtitleLP);
+        }
+
+        if (newRotation == Surface.ROTATION_90 || newRotation == Surface.ROTATION_270) {
+            RelativeLayout.LayoutParams skipBtnLP =
+                    (RelativeLayout.LayoutParams) mSkipBtn.getLayoutParams();
+            skipBtnLP.topMargin = (int) convertDpToPixel(26f, activity);
+            skipBtnLP.leftMargin = (int) convertDpToPixel(54f, activity);
+            mSkipBtn.requestLayout();
+        }
     }
 
     private float convertDpToPixel(float dp, Context context) {

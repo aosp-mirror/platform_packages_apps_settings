@@ -17,29 +17,22 @@
 package com.android.settings.security.screenlock;
 
 import android.content.Context;
-import android.os.UserHandle;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 public class LockScreenPreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnResume {
 
-    private static final int MY_USER_ID = UserHandle.myUserId();
-    private final LockPatternUtils mLockPatternUtils;
     private Preference mPreference;
 
     public LockScreenPreferenceController(Context context, String key) {
         super(context, key);
-        mLockPatternUtils = FeatureFactory.getFactory(context)
-                .getSecurityFeatureProvider().getLockPatternUtils(context);
     }
 
     @Override
