@@ -86,6 +86,7 @@ public class BatteryManagerPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_supportBatteryManager_showPrefPage() {
         when(mPowerUsageFeatureProvider.isBatteryManagerSupported()).thenReturn(true);
+        when(mPowerUsageFeatureProvider.isAdaptiveChargingSupported()).thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BatteryManagerPreferenceController.AVAILABLE_UNSEARCHABLE);
@@ -94,6 +95,15 @@ public class BatteryManagerPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_notSupportBatteryManager_notShowPrefPage() {
         when(mPowerUsageFeatureProvider.isBatteryManagerSupported()).thenReturn(false);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BatteryManagerPreferenceController.UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_supportBatteryManagerWithoutAC_notShowPrefPage() {
+        when(mPowerUsageFeatureProvider.isBatteryManagerSupported()).thenReturn(true);
+        when(mPowerUsageFeatureProvider.isAdaptiveChargingSupported()).thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BatteryManagerPreferenceController.UNSUPPORTED_ON_DEVICE);
