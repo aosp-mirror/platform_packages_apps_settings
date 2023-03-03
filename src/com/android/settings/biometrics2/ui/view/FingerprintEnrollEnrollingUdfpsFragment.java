@@ -261,9 +261,10 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
 
         final int progress = getProgress(enrollmentProgress);
 
-
-        mUdfpsEnrollView.onEnrollmentProgress(enrollmentProgress.getRemaining(),
-                enrollmentProgress.getSteps());
+        if (mProgressViewModel.getProgressLiveData().getValue().getSteps() != -1) {
+            mUdfpsEnrollView.onEnrollmentProgress(enrollmentProgress.getRemaining(),
+                    enrollmentProgress.getSteps());
+        }
 
         if (animate) {
             animateProgress(progress);
