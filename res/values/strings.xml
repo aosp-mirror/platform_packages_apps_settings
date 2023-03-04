@@ -4386,12 +4386,6 @@
     <string name="accessibility_disable_animations">Remove animations</string>
     <!-- Summary for the accessibility preference for disabling animations. [CHAR LIMIT=60] -->
     <string name="accessibility_disable_animations_summary">Reduce movement on the screen</string>
-    <!-- Title for the accessibility preference for the contrast level slider. [CHAR LIMIT=35] -->
-    <string name="accessibility_contrast_level_title">Contrast Level</string>
-    <!-- 'Low' text at the left of the contrast level slider. [CHAR LIMIT=20] -->
-    <string name="accessibility_contrast_level_left_label">Standard</string>
-    <!-- 'High' text at the right of the contrast level slider. [CHAR LIMIT=20] -->
-    <string name="accessibility_contrast_level_right_label">High</string>
     <!-- Title for the accessibility preference for primary mono. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_primary_mono_title">Mono audio</string>
     <!-- Summary for the accessibility preference for primary mono. [CHAR LIMIT=60] -->
@@ -5123,9 +5117,9 @@
     <!-- Charge to full button for battery defender tips [CHAR LIMIT=NONE] -->
     <string name="battery_tip_charge_to_full_button">Charge to full</string>
     <!-- Title of incompatible charging battery tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_incompatible_charging_title">Incompatible charging setup</string>
+    <string name="battery_tip_incompatible_charging_title">Issue with charging accessory</string>
     <!-- Message of incompatible charging battery tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_incompatible_charging_message">Your battery is not charging or is charging very slowly</string>
+    <string name="battery_tip_incompatible_charging_message">Battery charging slowly or won\'t charge. Check if the cable and power adapter work with your phone</string>
     <!-- Content description for the incompatible charging battery tip button [CHAR LIMIT=NONE] -->
     <string name="battery_tip_incompatible_charging_content_description">Learn more about incompatible charging</string>
 
@@ -5274,6 +5268,9 @@
 
     <!-- Battery Saver: Title for sticky battery saver preference [CHAR_LIMIT=60] -->
     <string name="battery_saver_sticky_title_new">Turn off when charged</string>
+
+    <!-- Battery Saver: Title for sticky battery saver preference with percentage [CHAR_LIMIT=60] -->
+    <string name="battery_saver_sticky_title_percentage">Turn off at <xliff:g id="battery_percentage" example="80%">%1$s</xliff:g></string>
 
     <!-- Battery Saver: Description for sticky battery saver preference [CHAR_LIMIT=NONE] -->
     <string name="battery_saver_sticky_description_new">Battery Saver turns off when battery reaches <xliff:g id="battery_percentage" example="80%">%1$s</xliff:g></string>
