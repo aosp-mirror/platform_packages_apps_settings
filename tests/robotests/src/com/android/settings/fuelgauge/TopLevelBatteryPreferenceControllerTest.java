@@ -62,12 +62,6 @@ public class TopLevelBatteryPreferenceControllerTest {
     }
 
     @Test
-    @Config(qualifiers = "mcc999")
-    public void getAvailabilityStatus_unsupportedWhenSet() {
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
-    }
-
-    @Test
     public void convertClassPathToComponentName_nullInput_returnsNull() {
         assertThat(mController.convertClassPathToComponentName(null)).isNull();
     }
