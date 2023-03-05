@@ -540,7 +540,7 @@
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Usando seu rosto ou sua impressão digital"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"Entregue o tablet ao seu familiar responsável"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"Entregue o dispositivo ao seu familiar responsável"</string>
-    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"Entregue o smartphone ao seu pai/mãe"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"Entregue o smartphone ao seu familiar responsável"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Pular bloqueio de tela?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Os recursos de proteção do dispositivo não serão ativados. Você não poderá impedir que outras pessoas usem este tablet se ele for perdido, roubado ou redefinido."</string>
@@ -562,7 +562,7 @@
     <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"O sensor de impressão digital fica no botão liga/desliga. Ele é plano e está ao lado do botão de volume na borda do smartphone.\n\nAo pressionar o botão liga/desliga, a tela é desativada."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"O sensor de impressão digital está na sua tela. A captura será feita na próxima etapa."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Iniciar"</string>
-    <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Mova o dedo pela tela para encontrá-lo. Toque no sensor de impressão digital e o mantenha pressionado."</string>
+    <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Mova o dedo pela tela para encontrá-lo. Toque no sensor de impressão digital e o pressione."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Ilustração mostrando a localização do sensor de impressão digital no dispositivo"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Nome"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"Ok"</string>
@@ -572,7 +572,7 @@
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Encoste o dedo no sensor e, após sentir uma vibração, tire o dedo"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Mantenha a impressão digital no sensor até sentir uma vibração"</string>
     <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"Sem pressionar o botão, mantenha a impressão digital no sensor até sentir uma vibração.\n\nMova o dedo ligeiramente sempre que o dispositivo vibrar. Isso ajuda na captura da sua impressão digital."</string>
-    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Toque e mantenha pressionado o sensor de impressão digital"</string>
+    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Toque e pressione o sensor de impressão digital"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Tire o dedo e toque novamente"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Mais uma vez"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Siga o ícone de impressão digital"</string>
@@ -587,15 +587,9 @@
     <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"Por fim, coloque a lateral direita do dedo no sensor"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Coloque a lateral da sua impressão digital no sensor e mantenha o dedo parado por alguns instantes. Depois, mude para o outro lado"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Isso ajuda na captura da sua impressão digital"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for security_settings_sfps_enroll_progress_a11y_message (6450772721691523736) -->
-    <skip />
-    <!-- String.format failed for translation -->
-    <!-- no translation found for security_settings_sfps_animation_a11y_label (8808819903730940446) -->
-    <skip />
-    <!-- String.format failed for translation -->
-    <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
-    <skip />
+    <string name="security_settings_sfps_enroll_progress_a11y_message" msgid="6450772721691523736">"Cadastro de impressão digital em <xliff:g id="PERCENTAGE">%d</xliff:g>%%"</string>
+    <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Registro em <xliff:g id="PERCENTAGE">%d</xliff:g>%%"</string>
+    <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Cadastro de impressão digital em <xliff:g id="PERCENTAGE">%d</xliff:g>%%"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Impressão digital adicionada"</string>
     <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Agora você pode usar sua impressão digital para desbloquear o tablet ou confirmar sua identidade, como ao fazer login em apps ou aprovar uma compra"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Agora, você pode usar a impressão digital para desbloquear o tablet ou confirmar sua identidade, como ao fazer login em apps"</string>
@@ -979,6 +973,13 @@
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Selecione o número máximo de dispositivos de áudio Bluetooth conectados"</string>
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Registro de depuração da pilha NFC"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Aumentar o nível de registros da pilha NFC"</string>
+    <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Registro de depuração NFC detalhado do fornecedor"</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Incluir mais registros de fornecedores específicos do dispositivo em relatórios de bugs, que podem conter informações particulares."</string>
+    <string name="nfc_snoop_log_title" msgid="1072690687525472163">"Registro de rastreamento NCI NFC sem filtro"</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Capturar detalhes de pacotes NFC, que podem conter informações particulares."</string>
+    <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Reiniciar o dispositivo?"</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"O registro detalhado de NFC é destinado apenas a fins de desenvolvimento. Dados NFC extras estão incluídos em relatórios de bugs, que podem conter informações particulares. Reinicie o dispositivo para mudar essa configuração."</string>
+    <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Reiniciar"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Transmitir"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"espelho"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Ativar tela sem fio"</string>
@@ -1930,7 +1931,7 @@
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Use o ponto de acesso e tethering para que outros dispositivos possam usar a Internet pela sua conexão de dados móveis. Os apps também podem criar um ponto de acesso para compartilhar conteúdo com dispositivos por perto."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Ajuda"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Rede móvel"</string>
-    <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Plano para dispositivos móveis"</string>
+    <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Plano de serviço móvel"</string>
     <string name="sms_application_title" msgid="4791107002724108809">"App de SMS"</string>
     <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"Alterar app de SMS?"</string>
     <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"Usar o <xliff:g id="NEW_APP">%1$s</xliff:g> em vez do <xliff:g id="CURRENT_APP">%2$s</xliff:g> como app de SMS?"</string>
@@ -2389,6 +2390,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Apps transferidos por download"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimentais"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Sinalizações de recursos"</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Leitor de tela, usado principalmente para pessoas com deficiência visual total ou parcial"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Tocar nos itens da tela para ouvir a leitura em voz alta"</string>
@@ -2450,7 +2465,7 @@
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Toque três vezes na tela para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Usar gesto para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Usar o gesto de acessibilidade"</string>
-    <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Para usar esse recurso, toque no botão de acessibilidade <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na parte inferior da tela.\n\nPara alternar entre os recursos, toque no botão de acessibilidade e o mantenha pressionado."</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Para usar esse recurso, toque no botão de acessibilidade <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na parte inferior da tela.\n\nPara alternar entre os recursos, toque no botão de acessibilidade e o pressione."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"Para usar esse recurso, toque no botão de acessibilidade na sua tela."</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Para usar esse recurso, toque nas duas teclas de volume e as mantenha pressionadas."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Para iniciar ou interromper a ampliação, toque três vezes em qualquer lugar da tela."</string>
@@ -4426,7 +4441,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Pedir senha antes de liberar a tela"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Bloquear dispositivo ao liberar a tela"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Confirmar exclusão do chip"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Confirme sua identidade antes de apagar o eSIM"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Confirme sua identidade antes de apagar um eSIM"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"O perfil de trabalho é gerenciado por:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Gerenciado por <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Experimental)"</string>
@@ -4796,7 +4811,7 @@
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"Não é possível abrir este app"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Configuração bloqueada pelo provedor de crédito"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Consentimento necessário"</string>
-    <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Para iniciar a configuração, entregue o smartphone ao seu pai/mãe"</string>
+    <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Para iniciar a configuração, entregue o smartphone ao seu familiar responsável"</string>
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Se você tiver perguntas, entre em contato com o administrador de TI"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Mais detalhes"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Seu administrador pode monitorar e gerenciar apps e dados associados ao seu perfil de trabalho, incluindo configurações, permissões, acesso corporativo, atividade de rede e informações de local do dispositivo."</string>
@@ -4993,7 +5008,7 @@
     <string name="bluetooth_disabled" msgid="835838280837359514">"Desativado"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"Conectado a <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Conectado a vários dispositivos"</string>
-    <string name="demo_mode" msgid="6566167465451386728">"Modo de demonstração da IU do sistema"</string>
+    <string name="demo_mode" msgid="6566167465451386728">"Modo de demonstração da interface do sistema"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Tema escuro"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"Desativado temporariamente pela Economia de bateria"</string>
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Desativado temporariamente pela Economia de bateria"</string>
@@ -5059,7 +5074,7 @@
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Deslize para invocar o assistente"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Deslize de baixo para cima no canto da tela para invocar o app assistente digital."</string>
     <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Segure o botão home para ativar o Google Assistente"</string>
-    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Aperte o botão home e o mantenha pressionado para invocar o app assistente digital."</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Aperte o botão home e o pressione para invocar o app assistente digital."</string>
     <string name="information_label" msgid="6939310810756569298">"Informações"</string>
     <string name="low_label" msgid="6525629096999711220">"Baixa"</string>
     <string name="high_label" msgid="357503396626018487">"Alta"</string>
@@ -5121,7 +5136,7 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="8045017109714463041">"Conecte-se à Internet primeiro"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="7425519481227423860">"Conecte-se à Internet ou entre em contato com sua operadora"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="168124660162907358">"Indisponível em dispositivos bloqueados pela operadora"</string>
-    <string name="oem_lock_info_message" msgid="8843145669619429197">"Reinicie o dispositivo para ativar o recurso de proteção para dispositivo."</string>
+    <string name="oem_lock_info_message" msgid="8843145669619429197">"Reinicie o aparelho para ativar o recurso de proteção do dispositivo."</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="706230592123831676">"Total de <xliff:g id="SIZE">%1$s</xliff:g> disponibilizado\n\nÚltima execução em <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="web_action_enable_title" msgid="6654581786741216382">"Apps instantâneos"</string>
     <string name="web_action_enable_summary" msgid="2658930257777545990">"Abrir links em apps, mesmo que eles não estejam instalados"</string>
@@ -5368,7 +5383,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Não fazer nada"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Vibrar"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Desativar som"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"Para ativar, mude a opção \"Aperte o botão liga/desliga e o mantenha pressionado\" para o menu liga/desliga."</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"Para ativar, mude a opção \"Aperte o botão liga/desliga e o pressione\" para o menu liga/desliga."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Detalhes da rede"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"O nome do seu dispositivo está visível para os apps no smartphone. Ele também pode ser visto por outras pessoas quando você se conecta a dispositivos Bluetooth ou a uma rede Wi-Fi ou quando configura um ponto de acesso Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Dispositivos"</string>
@@ -5613,7 +5628,7 @@
       <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> apps com acesso total ao seu dispositivo</item>
     </plurals>
     <string name="media_output_panel_title" msgid="5920946795078065159">"Alterar saída"</string>
-    <string name="media_output_panel_summary_of_playing_device" msgid="6998758947764222915">"Tocando atualmente no <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="media_output_panel_summary_of_playing_device" msgid="6998758947764222915">"Tocando agora no <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="media_output_disconnected_status" msgid="5567111639832431865">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> (desconectado)"</string>
     <string name="media_output_switch_error_text" msgid="603563475910236831">"Impossível mudar. Toque e tente de novo."</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Informações importantes"</string>
@@ -5658,7 +5673,7 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"controles do dispositivo"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Cartões de pagamento e de transporte"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"cartões e tickets"</string>
-    <string name="power_menu_setting_name" msgid="2394440932633137229">"Aperte o botão liga/desliga e o mantenha pressionado"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Aperte o botão liga/desliga e o pressione"</string>
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Mantenha o botão liga/desliga pressionado para acessar"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Menu liga/desliga"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Assistente digital"</string>

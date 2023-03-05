@@ -973,6 +973,13 @@
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Sélectionnez le nombre maximal d\'appareils Bluetooth connectés"</string>
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Journal de débogage de la pile de la CCP"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Accroître le niveau de journalisation de la pile de la CCP"</string>
+    <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Journal de débogage détaillé des fournisseurs CCP"</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Incluez les journaux supplémentaires du fournisseur propres à l\'appareil dans les rapports de bogue, qui peuvent contenir des renseignements confidentiels."</string>
+    <string name="nfc_snoop_log_title" msgid="1072690687525472163">"Journal CCP Snoop non filtré d\'ACTA"</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Capturez les détails des paquets CCP, qui peuvent contenir des renseignements confidentiels."</string>
+    <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Redémarrer l\'appareil?"</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Les détails de la journalisation CCP sont enregistrés à des fins de développement uniquement. Des données CCP supplémentaires sont comprises dans les rapports de bogue, qui peuvent contenir des renseignements confidentiels. Redémarrez votre appareil pour modifier ce paramètre."</string>
+    <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Redémarrer"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"miroir"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Activer l\'affichage sans fil"</string>
@@ -2383,6 +2390,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Applications téléchargées"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Fonctions expérimentales"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Indicateurs de fonctionnalité"</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Le lecteur d\'écran est destiné principalement aux personnes atteintes de cécité et de troubles de la vue"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Touchez les éléments à l\'écran pour les entendre à haute voix"</string>
@@ -3041,7 +3062,7 @@
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Activer"</string>
-    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"Utiliser le mode Économiseur de pile"</string>
+    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"Utiliser l\'économiseur de pile"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="7857393318205740864">"Activer automatiquement"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6194649389871448663">"Jamais"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"à <xliff:g id="PERCENT">%1$s</xliff:g> d\'autonomie restante"</string>
@@ -4243,7 +4264,7 @@
     <string name="notification_vibrate_title" msgid="1422330728336623351">"Vibration"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"Son"</string>
     <string name="notification_conversation_important" msgid="4365437037763608045">"Priorité"</string>
-    <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"Ajouter au domicile"</string>
+    <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"Ajouter à l\'écran d\'accueil"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"Supprimer"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"Renommer"</string>
     <string name="zen_mode_rule_name" msgid="7303080427006917702">"Nom de l\'horaire"</string>
@@ -4420,7 +4441,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Demander le mot de passe avant d\'annuler l\'épinglage"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Verrouiller l\'écran après l\'annulation de l\'épinglage"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Confirmer la suppression du module eSIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Vérifier qu\'il s\'agit bien de vous avant d\'effacer la carte eSIM"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Vérifiez qu\'il s\'agit bien de vous avant d\'effacer la carte eSIM"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Le profil professionnel est géré par :"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Géré par <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Expérimentale)"</string>
@@ -4968,7 +4989,7 @@
     <string name="display_cutout_emulation_keywords" msgid="4506580703807358127">"découpe d\'affichage, encoche"</string>
     <string name="overlay_option_device_default" msgid="7986355499809313848">"Valeurs par défaut de l\'appareil"</string>
     <string name="overlay_toast_failed_to_apply" msgid="4839587811338164960">"Impossible d\'appliquer la superposition"</string>
-    <string name="special_access" msgid="1767980727423395147">"Accès spécial des applis"</string>
+    <string name="special_access" msgid="1767980727423395147">"Accès spécial des applications"</string>
     <plurals name="special_access_summary" formatted="false" msgid="4995506406763570815">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> application peut utiliser les données sans restriction</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> applications peuvent utiliser les données sans restriction</item>

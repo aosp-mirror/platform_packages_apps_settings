@@ -516,7 +516,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"Ty i Twoje dziecko w dowolnej chwili możecie usunąć obrazy oraz model odcisku palca i wyłączyć odblokowywanie odciskiem palca w Ustawieniach. Obrazy i modele odcisku palca są przechowywane na telefonie, dopóki nie zostaną usunięte."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"Ty i Twoje dziecko w dowolnej chwili możecie usunąć obrazy oraz model odcisku palca i wyłączyć odblokowywanie odciskiem palca w Ustawieniach. Obrazy i modele odcisku palca są przechowywane na tablecie, dopóki nie zostaną usunięte."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"Ty i Twoje dziecko w dowolnej chwili możecie usunąć obrazy oraz model odcisku palca i wyłączyć odblokowywanie odciskiem palca w Ustawieniach. Obrazy i modele odcisku palca są przechowywane na urządzeniu, dopóki nie zostaną usunięte."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Telefon może się niechcący odblokować, jeżeli inna osoba przyłoży do niego Twój palec."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Telefon może zostać odblokowany bez Twojej zgody, jeżeli inna osoba przyłoży do niego Twój palec."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"Tablet może się odblokować wbrew Twojej woli, jeżeli inna osoba przyłoży do niego Twój palec."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"Urządzenie może się odblokować wbrew Twojej woli, jeżeli inna osoba przyłoży do niego Twój palec."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"Telefon dziecka może zostać odblokowany, jeżeli inna osoba go do palca dziecka."</string>
@@ -579,7 +579,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Dotknij czytnika"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Przyłóż palec do czytnika. Podnieś go, gdy poczujesz wibracje."</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Trzymaj palec na czytniku linii papilarnych do chwili, aż poczujesz wibracje"</string>
-    <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"Trzymaj palec na czytniku, bez naciskania, dopóki nie poczujesz wibracji.\n\nPrzesuwaj palcem delikatnie, aż poczujesz wibracje. Dzięki temu zeskanujesz większą część odcisku palca."</string>
+    <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"Trzymaj palec na czytniku, bez naciskania, dopóki nie poczujesz wibracji.\n\nZa każdym razem lekko obracaj palec. Dzięki temu zeskanujesz większą część odcisku palca."</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Połóż palec na czytniku linii papilarnych i przytrzymaj"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Podnieś palec i przyłóż go ponownie"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Jeszcze raz"</string>
@@ -592,7 +592,7 @@
     <string name="security_settings_sfps_enroll_finger_center_title" msgid="1320688855767675739">"Umieść na czytniku środkową część palca"</string>
     <string name="security_settings_sfps_enroll_fingertip_title" msgid="2737520837684516446">"Umieść na czytniku koniuszek palca"</string>
     <string name="security_settings_sfps_enroll_left_edge_title" msgid="9022963735924413343">"Umieść na czytniku lewą krawędź palca"</string>
-    <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"Ostatnia rzecz: umieść prawą krawędź palca na czytniku"</string>
+    <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"Ostatnia rzecz: umieść na czytniku prawą krawędź palca"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Umieść na czytniku palec bokiem i przytrzymaj, a następnie obróć na drugi bok"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Dzięki temu zeskanujesz większą część odcisku palca"</string>
     <string name="security_settings_sfps_enroll_progress_a11y_message" msgid="6450772721691523736">"Rejestruję odcisk palca – <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
@@ -1007,6 +1007,13 @@
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Wybierz maksymalną liczbę podłączonych urządzeń audio Bluetooth"</string>
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Dziennik debugowania stosów NFC"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Zwiększ poziom rejestrowania stosów NFC"</string>
+    <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Dziennik debugowania szczegółowości NFC"</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Dołączaj do raportów o błędach dodatkowe dane dostawcy dotyczące konkretnego urządzenia, które mogą zawierać informacje prywatne."</string>
+    <string name="nfc_snoop_log_title" msgid="1072690687525472163">"Dziennik snoop niefiltrowanych danych NFC NCI"</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Zapisuj szczegółowe pakiety NFC, które mogą zawierać informacje prywatne."</string>
+    <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Uruchomić urządzenie ponownie?"</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Szczegółowe logowanie NFC jest przeznaczone tylko dla programistów. Dodatkowe dane NFC są dołączane do raportów o błędach i mogą zawierać informacje prywatne. Uruchom urządzenie ponownie, aby zmienić to ustawienie."</string>
+    <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Uruchom ponownie"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Przesyłanie ekranu"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"odbicie lustrzane"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Wyświetlacz bezprzewodowy"</string>
@@ -2431,6 +2438,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Pobrane aplikacje"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Eksperymentalne"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Flagi funkcji"</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Czytnik ekranu przeznaczony głównie dla osób niewidomych i słabowidzących"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Klikaj elementy na ekranie, aby zostały odczytane na głos"</string>
@@ -4526,7 +4547,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Aby odpiąć, poproś o hasło"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Zablokuj urządzenie przy odpinaniu"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Potwierdź chęć usunięcia karty SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Zanim wykasujesz kartę eSIM, potwierdź swoją tożsamość"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Zanim wykasujesz kartę eSIM, potwierdź swoją tożsamość"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Tym profilem służbowym zarządza:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Zarządzane przez: <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Funkcja eksperymentalna)"</string>
