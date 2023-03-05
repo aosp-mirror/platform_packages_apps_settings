@@ -1007,6 +1007,13 @@
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Укажите максимальное количество подключенных Bluetooth-аудиоустройств"</string>
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Журнал отладки стека NFC"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Ведение подробного журнала стека NFC"</string>
+    <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Подробный журнал отладки NFC"</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Включать в отчеты об ошибках дополнительные записи поставщика об устройстве, которые могут содержать конфиденциальную информацию"</string>
+    <string name="nfc_snoop_log_title" msgid="1072690687525472163">"Журнал NFC NCI без фильтрации"</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Сохранять пакеты NFC, которые могут содержать конфиденциальную информацию"</string>
+    <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Перезапустить устройство?"</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Подробный журнал NFC ведется только в целях разработки. Дополнительные данные NFC будут включены в отчеты об ошибках и могут содержать конфиденциальную информацию. Чтобы изменить этот параметр, перезапустите устройство."</string>
+    <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Перезапустить"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Трансляция"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"дублирование"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Включить"</string>
@@ -2431,6 +2438,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Скачанные приложения"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Экспериментальные функции"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Экспериментальные функции"</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Инструмент для озвучивания данных с экрана для людей с нарушениями зрения"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Чтобы услышать описание элемента, нажмите на него"</string>
@@ -4526,7 +4547,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Запрашивать пароль"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Блокировать устройство при отключении функции"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Подтверждение удаления SIM-карты"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Запрашивать подтверждение личности перед удалением eSIM"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Запрашивать подтверждение личности перед удалением eSIM"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Профилем управляет"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Управляется <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(экспериментальная настройка)"</string>
@@ -5980,7 +6001,7 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Номер телефона не указан."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"ОК"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"Разрешить 2G"</string>
-    <string name="enable_2g_summary" msgid="2794534052372565914">"Сеть 2G менее безопасна, однако в некоторых регионах подключение может быть более стабильным. Для экстренных вызовов сеть 2G всегда разрешена."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"Сеть 2G менее безопасна, однако в некоторых местах подключение может быть более стабильным. Для экстренных вызовов сеть 2G всегда разрешена."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Оператору \"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>\" требуется доступ к сети 2G"</string>
     <string name="app_info_all_services_label" msgid="3600929226735860271">"Все сервисы"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Уведомления о доступе к буферу обмена"</string>

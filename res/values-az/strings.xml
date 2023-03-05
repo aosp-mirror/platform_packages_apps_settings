@@ -973,6 +973,13 @@
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Qoşulu Bluetooth audiocihazlarının maksimal sayını bildirin"</string>
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"NFC yığın sazlama qeydiyyatı"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"NFC yığın qeydiyyat səviyyəsini artırın"</string>
+    <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"NFC təfsilatlı təchizatçı sazlama jurnalı"</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Xəta hesabatlarına şəxsi məlumatları ehtiva edə biləcək təchizatçının cihaz haqqında əlavə qeydləri daxil edilsin."</string>
+    <string name="nfc_snoop_log_title" msgid="1072690687525472163">"NFC NCI filtrsiz jurnalı"</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Şəxsi məlumatı ehtiva edə bilən detallı NFC paketlərini çəkin."</string>
+    <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Cihaz yenidən başladılsın?"</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Detallı NFC qeydi yalnız inkişaf məqsədləri üçün nəzərdə tutulub. Əlavə NFC məlumatları şəxsi məlumatları ehtiva edə bilən baq hesabatlarına daxil edilir. Bu ayarı dəyişmək üçün cihazı yenidən başladın."</string>
+    <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Yenidən başladın"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Yayım"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"güzgü"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Naqilsiz displeyi aktivləşdirin"</string>
@@ -2383,6 +2390,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Endirilmiş tətbiqlər"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Eksperimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Eksperimental funksiyalar"</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Ekran oxucusu əsasən korluq və aşağı görmə qabiliyyəti olan insanlar üçündür"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Səsli oxunuş üçün ekrandakı elementlərə toxunun"</string>
@@ -2573,7 +2594,7 @@
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Qapadın"</string>
     <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"Telefonunuzda rənglərin necə göstərilməsini tənzimləyin"</string>
     <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"Planşetinizdə rənglərin necə göstərilməsini tənzimləyin"</string>
-    <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Rəng korreksiyası istifadə edilsin"</string>
+    <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Rəng korreksiyası işlədilsin"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Rəng korreksiyası qısayolu"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Rəng korreksiyası haqqında"</string>
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Rəng korreksiyası haqqında ətraflı öyrənin"</string>
@@ -3321,7 +3342,7 @@
     <string name="data_usage_enable_mobile" msgid="1996943748103310201">"Mobil data"</string>
     <string name="data_usage_enable_3g" msgid="2818189799905446932">"2G-3G data"</string>
     <string name="data_usage_enable_4g" msgid="1526584080251993023">"4G data"</string>
-    <string name="data_roaming_enable_mobile" msgid="5745287603577995977">"Rominq"</string>
+    <string name="data_roaming_enable_mobile" msgid="5745287603577995977">"Rouminq"</string>
     <string name="data_usage_forground_label" msgid="5762048187044975428">"Ön fon:"</string>
     <string name="data_usage_background_label" msgid="5363718469293175279">"Arxa fon:"</string>
     <string name="data_usage_app_settings" msgid="5693524672522122485">"Tətbiq ayarları"</string>
@@ -4277,7 +4298,7 @@
     <string name="zen_mode_rule_summary_enabled_combination" msgid="1183604368083885789">"Yandır / <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_rule_summary_provider_combination" msgid="785343032708491365">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="8633770815307716351">"Günlər"</string>
-    <string name="zen_mode_schedule_rule_days_none" msgid="5636604196262227070">"Heç bir"</string>
+    <string name="zen_mode_schedule_rule_days_none" msgid="5636604196262227070">"Heç biri"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="1583884351893245169">"Hər gün"</string>
     <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"Zəngli saat bitmə vaxtını əvəzləyə bilər"</string>
     <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Zəngli saat çalınanda rejim deaktiv edilir"</string>
@@ -4420,7 +4441,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Ayırmadan öncə parol istənilsin"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Bərkidilmə ləğv ediləndə cihaz kilidlənsin"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"SIM\'in silinməsini təsdiq edin"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"eSIM\'i silməzdən əvvəl kimliyinizi doğrulayın"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"eSIM\'i silməzdən əvvəl kimliyinizi doğrulayın"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Bu iş profilini idarə edir:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> tərəfindən idarə olunur"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Eksperimental)"</string>
@@ -4566,7 +4587,7 @@
     <string name="default_for_work" msgid="537558180548617528">"İş üçün defolt"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"Yardım və səsli daxiletmə"</string>
     <string name="default_assist_title" msgid="1182435129627493758">"Rəq. assistent tətbiqi"</string>
-    <string name="default_digital_assistant_title" msgid="5654663086385490838">"Standart rəqəmsal assistent"</string>
+    <string name="default_digital_assistant_title" msgid="5654663086385490838">"Defolt rəq. assistent"</string>
     <string name="assistant_security_warning_title" msgid="6444187332360938730">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> Sizin köməkçiniz olsun?"</string>
     <string name="assistant_security_warning" msgid="5623237187748811070">"Köməkçi sisteminizdə istifadə olunan tətbiqlər haqqında məlumatı oxuya biləcək, bura ekranınızda görünən və tətbiqlər daxilində əlçatan olan məlumat da daxildir."</string>
     <string name="assistant_security_warning_agree" msgid="9013334158753473359">"Razıyam"</string>
