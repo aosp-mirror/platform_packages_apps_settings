@@ -85,7 +85,7 @@ public final class IncompatibleChargerTipTest {
     @Test
     public void getIcon_showIcon() {
         assertThat(mIncompatibleChargerTip.getIconId())
-                .isEqualTo(R.drawable.ic_battery_charging);
+                .isEqualTo(R.drawable.ic_battery_alert_24dp);
     }
 
     @Test
