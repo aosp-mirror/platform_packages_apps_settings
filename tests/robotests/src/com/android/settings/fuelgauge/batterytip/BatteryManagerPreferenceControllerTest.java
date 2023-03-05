@@ -26,8 +26,10 @@ import android.provider.Settings;
 
 import androidx.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,8 +38,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = SettingsShadowResources.class)
 public class BatteryManagerPreferenceControllerTest {
     private static final int ON = 1;
     private static final int OFF = 0;
@@ -85,6 +89,8 @@ public class BatteryManagerPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_supportBatteryManager_showPrefPage() {
+        SettingsShadowResources.overrideResource(
+                R.bool.config_battery_manager_consider_ac, true);
         when(mPowerUsageFeatureProvider.isBatteryManagerSupported()).thenReturn(true);
         when(mPowerUsageFeatureProvider.isAdaptiveChargingSupported()).thenReturn(true);
 
@@ -102,10 +108,23 @@ public class BatteryManagerPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_supportBatteryManagerWithoutAC_notShowPrefPage() {
+        SettingsShadowResources.overrideResource(
+                R.bool.config_battery_manager_consider_ac, true);
         when(mPowerUsageFeatureProvider.isBatteryManagerSupported()).thenReturn(true);
         when(mPowerUsageFeatureProvider.isAdaptiveChargingSupported()).thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BatteryManagerPreferenceController.UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_ignoreBatteryManagerWithoutAC_showPrefPage() {
+        SettingsShadowResources.overrideResource(
+                R.bool.config_battery_manager_consider_ac, false);
+        when(mPowerUsageFeatureProvider.isBatteryManagerSupported()).thenReturn(true);
+        when(mPowerUsageFeatureProvider.isAdaptiveChargingSupported()).thenReturn(false);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BatteryManagerPreferenceController.AVAILABLE_UNSEARCHABLE);
     }
 }
