@@ -553,7 +553,7 @@
     <!-- Cell broacast receiver package name -->
     <string name="config_cell_broadcast_receiver_package" translatable="false">com.android.cellbroadcastreceiver.module</string>
 
-    <!-- TODO(b/174964885): These media Uri are not defined in framework yet. Replace with framework defined variables once it's available. -->
+    <!-- These media Uri are not defined in framework yet. Replace with framework defined variables once it's available. -->
     <!-- Media Uri to view images storage category. -->
     <string name="config_images_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/images_root</string>
 
@@ -695,4 +695,7 @@
 
     <!-- Whether auto data switching on secondary SIM enables cross-SIM calling on both SIMs. -->
     <bool name="config_auto_data_switch_enables_cross_sim_calling">false</bool>
+
+    <!-- Whether checking adaptive charging to define battery manager visibility. -->
+    <bool name="config_battery_manager_consider_ac">false</bool>
 </resources>
