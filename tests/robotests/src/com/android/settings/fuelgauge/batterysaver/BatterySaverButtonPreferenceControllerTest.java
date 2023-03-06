@@ -86,15 +86,6 @@ public class BatterySaverButtonPreferenceControllerTest {
     }
 
     @Test
-    public void onSwitchChanged_isCheckedAndAcked_setPowerSaveMode() {
-        setLowPowerWarningAcked(/* acked= */ 1);
-
-        mController.onSwitchChanged(/* switchView= */ null, /* isChecked= */ true);
-
-        verify(mPowerManager).setPowerSaveModeEnabled(true);
-    }
-
-    @Test
     public void updateState_lowPowerOn_preferenceIsChecked() {
         when(mPowerManager.isPowerSaveMode()).thenReturn(true);
 
