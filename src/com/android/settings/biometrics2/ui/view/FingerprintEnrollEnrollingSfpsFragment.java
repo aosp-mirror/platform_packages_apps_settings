@@ -540,8 +540,7 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
 
     private void showIconTouchDialog() {
         mIconTouchCount = 0;
-        //TODO EnrollingActivity should observe live data and add dialog fragment
-        mEnrollingViewModel.onIconTouchDialogShow();
+        mEnrollingViewModel.showIconTouchDialog();
     }
 
     private final Runnable mShowDialogRunnable = () -> showIconTouchDialog();
