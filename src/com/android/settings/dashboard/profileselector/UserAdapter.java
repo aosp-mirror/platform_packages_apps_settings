@@ -58,7 +58,7 @@ public class UserAdapter extends BaseAdapter {
             mUserHandle = userHandle;
             UserInfo userInfo = um.getUserInfo(mUserHandle.getIdentifier());
             int tintColor = Utils.getColorAttrDefaultColor(context,
-                    com.android.internal.R.attr.colorAccentPrimaryVariant);
+                    com.android.internal.R.attr.materialColorPrimaryContainer);
             if (userInfo.isManagedProfile()) {
                 mIcon = context.getPackageManager().getUserBadgeForDensityNoBackground(
                         userHandle, /* density= */ 0);
