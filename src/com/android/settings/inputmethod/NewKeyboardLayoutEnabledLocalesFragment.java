@@ -68,6 +68,9 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
     }
 
     private void updateCheckedState() {
+        if (NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier) == null) {
+            return;
+        }
         PreferenceScreen preferenceScreen = getPreferenceScreen();
         preferenceScreen.removeAll();
         List<InputMethodInfo> infoList = mImm.getEnabledInputMethodListAsUser(mUserId);
@@ -174,8 +177,8 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
     public void onStart() {
         super.onStart();
         mIm.registerInputDeviceListener(this, null);
-        final InputDevice inputDevice =
-                mIm.getInputDeviceByDescriptor(mInputDeviceIdentifier.getDescriptor());
+        InputDevice inputDevice =
+                NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier);
         if (inputDevice == null) {
             getActivity().finish();
             return;
