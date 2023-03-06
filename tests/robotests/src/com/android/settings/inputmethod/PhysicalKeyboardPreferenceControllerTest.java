@@ -24,12 +24,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.view.InputDevice;
 
 import androidx.preference.Preference;
 
-import com.android.settings.R;
+import com.android.settings.inputmethod.PhysicalKeyboardFragment.HardKeyboardDeviceInfo;
 import com.android.settings.testutils.shadow.ShadowInputDevice;
 
 import org.junit.After;
@@ -42,8 +43,15 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(RobolectricTestRunner.class)
 public class PhysicalKeyboardPreferenceControllerTest {
+
+    private static final String DEVICE_NAME = "deviceName";
+    private static final String LAYOUT_LABEL = "deviceLayutLabel";
+    private static final String BLUETOOTHADDRESS = "deviceBluetoothAddress";
 
     @Mock
     private Context mContext;
@@ -51,6 +59,8 @@ public class PhysicalKeyboardPreferenceControllerTest {
     private InputManager mIm;
     @Mock
     private Preference mPreference;
+    @Mock
+    private InputDeviceIdentifier mIdentifier;
 
     private PhysicalKeyboardPreferenceController mController;
 
@@ -69,9 +79,18 @@ public class PhysicalKeyboardPreferenceControllerTest {
     @Test
     public void testPhysicalKeyboard_byDefault_shouldBeShown() {
         final Context context = spy(RuntimeEnvironment.application.getApplicationContext());
-        mController = new PhysicalKeyboardPreferenceController(context, null);
+        List<HardKeyboardDeviceInfo> keyboards = new ArrayList<>();
+        keyboards.add(new HardKeyboardDeviceInfo(
+                DEVICE_NAME,
+                mIdentifier,
+                LAYOUT_LABEL,
+                BLUETOOTHADDRESS));
+        mController = spy(new PhysicalKeyboardPreferenceController(context, null));
+        when(mController.getKeyboards()).thenReturn(keyboards);
 
-        assertThat(mController.isAvailable()).isTrue();
+        boolean result = mController.isAvailable();
+
+        assertThat(result).isTrue();
     }
 
     @Test
@@ -85,11 +104,11 @@ public class PhysicalKeyboardPreferenceControllerTest {
 
     @Test
     @Config(shadows = ShadowInputDevice.class)
-    public void updateState_noKeyboard_setDisconnectedSummary() {
+    public void updateState_noKeyboard_setPreferenceVisibleFalse() {
         ShadowInputDevice.sDeviceIds = new int[0];
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(R.string.keyboard_disconnected);
+        verify(mPreference).setVisible(false);
     }
 
     @Test
