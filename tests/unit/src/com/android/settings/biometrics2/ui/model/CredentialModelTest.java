@@ -48,11 +48,10 @@ public class CredentialModelTest {
 
     private final Clock mClock = SystemClock.elapsedRealtimeClock();
 
-    public static Bundle newCredentialModelIntentExtras(int userId, long challenge, int sensorId,
+    public static Bundle newCredentialModelIntentExtras(int userId, long challenge,
             @Nullable byte[] token, long gkPwHandle) {
         final Bundle bundle = new Bundle();
         bundle.putInt(Intent.EXTRA_USER_ID, userId);
-        bundle.putInt(EXTRA_KEY_SENSOR_ID, sensorId);
         bundle.putLong(EXTRA_KEY_CHALLENGE, challenge);
         bundle.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
         bundle.putLong(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, gkPwHandle);
@@ -60,17 +59,17 @@ public class CredentialModelTest {
     }
 
     public static Bundle newValidTokenCredentialIntentExtras(int userId) {
-        return newCredentialModelIntentExtras(userId, 1L, 1, new byte[] { 0, 1, 2 },
+        return newCredentialModelIntentExtras(userId, 1L, new byte[] { 0, 1, 2 },
                 INVALID_GK_PW_HANDLE);
     }
 
     public static Bundle newOnlySensorValidCredentialIntentExtras(int userId) {
-        return newCredentialModelIntentExtras(userId, INVALID_CHALLENGE, 1, null,
+        return newCredentialModelIntentExtras(userId, INVALID_CHALLENGE, null,
                 INVALID_GK_PW_HANDLE);
     }
 
     public static Bundle newGkPwHandleCredentialIntentExtras(int userId, long gkPwHandle) {
-        return newCredentialModelIntentExtras(userId, INVALID_CHALLENGE, 1, null, gkPwHandle);
+        return newCredentialModelIntentExtras(userId, INVALID_CHALLENGE, null, gkPwHandle);
     }
 
     private static void checkBundleLongValue(@NonNull Bundle bundle1, @NonNull Bundle bundle2,
@@ -118,7 +117,6 @@ public class CredentialModelTest {
             @NonNull CredentialModel model2) {
 
         assertThat(model1.getUserId()).isEqualTo(model2.getUserId());
-        assertThat(model1.getSensorId()).isEqualTo(model2.getSensorId());
         assertThat(model1.getChallenge()).isEqualTo(model2.getChallenge());
         assertThat(model1.getGkPwHandle()).isEqualTo(model2.getGkPwHandle());
 
@@ -154,7 +152,7 @@ public class CredentialModelTest {
 
     @Test
     public void testSameValueFromBundle() {
-        final Bundle bundle = newCredentialModelIntentExtras(1234, 6677L, 1,
+        final Bundle bundle = newCredentialModelIntentExtras(1234, 6677L,
                 new byte[] { 33, 44, 55 }, 987654321);
 
         final CredentialModel model1 = new CredentialModel(bundle, mClock);
@@ -165,7 +163,7 @@ public class CredentialModelTest {
 
     @Test
     public void testSameValueFromBundle_nullToken() {
-        final Bundle bundle = newCredentialModelIntentExtras(22, 33L, 1, null, 21L);
+        final Bundle bundle = newCredentialModelIntentExtras(22, 33L, null, 21L);
 
         final CredentialModel model1 = new CredentialModel(bundle, mClock);
         final CredentialModel model2 = new CredentialModel(model1.getBundle(), mClock);
