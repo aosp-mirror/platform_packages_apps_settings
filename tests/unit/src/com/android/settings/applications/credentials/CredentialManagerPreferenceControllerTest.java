@@ -27,12 +27,14 @@ import static org.mockito.Mockito.spy;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ServiceInfo;
+import android.credentials.CredentialProviderInfo;
 import android.os.Looper;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -87,7 +89,7 @@ public class CredentialManagerPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_withServices_returnsAvailable() {
         CredentialManagerPreferenceController controller =
-                createControllerWithServices(Lists.newArrayList(createServiceInfo()));
+                createControllerWithServices(Lists.newArrayList(createCredentialProviderInfo()));
         assertThat(controller.isConnected()).isFalse();
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
@@ -103,10 +105,45 @@ public class CredentialManagerPreferenceControllerTest {
     @Test
     public void displayPreference_withServices_preferencesAdded() {
         CredentialManagerPreferenceController controller =
-                createControllerWithServices(Lists.newArrayList(createServiceInfo()));
+                createControllerWithServices(Lists.newArrayList(createCredentialProviderInfo()));
         controller.displayPreference(mScreen);
         assertThat(controller.isConnected()).isFalse();
         assertThat(mCredentialsPreferenceCategory.getPreferenceCount()).isEqualTo(1);
+    }
+
+    @Test
+    public void buildSwitchPreference() {
+        CredentialProviderInfo providerInfo1 =
+                createCredentialProviderInfo(
+                        "com.android.provider1", "ClassA", "Service Title", false);
+        CredentialProviderInfo providerInfo2 =
+                createCredentialProviderInfo(
+                        "com.android.provider2", "ClassA", "Service Title", false);
+        CredentialManagerPreferenceController controller =
+                createControllerWithServices(Lists.newArrayList(providerInfo1, providerInfo2));
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+        assertThat(controller.isConnected()).isFalse();
+
+        // Test the data is correct.
+        assertThat(providerInfo1.isEnabled()).isFalse();
+        assertThat(providerInfo2.isEnabled()).isFalse();
+        assertThat(controller.getEnabledProviders().size()).isEqualTo(0);
+
+        // Toggle one provider and make sure it worked.
+        assertThat(controller.togglePackageNameEnabled("com.android.provider1")).isTrue();
+        Set<String> enabledProviders = controller.getEnabledProviders();
+        assertThat(enabledProviders.size()).isEqualTo(1);
+        assertThat(enabledProviders.contains("com.android.provider1")).isTrue();
+
+        // Create the pref (checked).
+        SwitchPreference pref = controller.createPreference(mContext, providerInfo1);
+        assertThat(pref.getTitle().toString()).isEqualTo("Service Title");
+        assertThat(pref.isChecked()).isTrue();
+
+        // Create the pref (not checked).
+        SwitchPreference pref2 = controller.createPreference(mContext, providerInfo2);
+        assertThat(pref2.getTitle().toString()).isEqualTo("Service Title");
+        assertThat(pref2.isChecked()).isFalse();
     }
 
     @Test
@@ -114,13 +151,13 @@ public class CredentialManagerPreferenceControllerTest {
         CredentialManagerPreferenceController controller =
                 createControllerWithServices(
                         Lists.newArrayList(
-                                createServiceInfo("com.android.provider1", "ClassA"),
-                                createServiceInfo("com.android.provider1", "ClassB"),
-                                createServiceInfo("com.android.provider2", "ClassA"),
-                                createServiceInfo("com.android.provider3", "ClassA"),
-                                createServiceInfo("com.android.provider4", "ClassA"),
-                                createServiceInfo("com.android.provider5", "ClassA"),
-                                createServiceInfo("com.android.provider6", "ClassA")));
+                                createCredentialProviderInfo("com.android.provider1", "ClassA"),
+                                createCredentialProviderInfo("com.android.provider1", "ClassB"),
+                                createCredentialProviderInfo("com.android.provider2", "ClassA"),
+                                createCredentialProviderInfo("com.android.provider3", "ClassA"),
+                                createCredentialProviderInfo("com.android.provider4", "ClassA"),
+                                createCredentialProviderInfo("com.android.provider5", "ClassA"),
+                                createCredentialProviderInfo("com.android.provider6", "ClassA")));
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
         assertThat(controller.isConnected()).isFalse();
 
@@ -177,8 +214,38 @@ public class CredentialManagerPreferenceControllerTest {
         assertThat(currentlyEnabledServices.contains("com.android.provider6/ClassA")).isFalse();
     }
 
+    @Test
+    public void handlesCredentialProviderInfoEnabledDisabled() {
+        CredentialProviderInfo providerInfo1 =
+                createCredentialProviderInfo(
+                        "com.android.provider1", "ClassA", "Service Title", false);
+        CredentialProviderInfo providerInfo2 =
+                createCredentialProviderInfo(
+                        "com.android.provider2", "ClassA", "Service Title", true);
+        CredentialManagerPreferenceController controller =
+                createControllerWithServices(Lists.newArrayList(providerInfo1, providerInfo2));
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+        assertThat(controller.isConnected()).isFalse();
+
+        // Test the data is correct.
+        assertThat(providerInfo1.isEnabled()).isFalse();
+        assertThat(providerInfo2.isEnabled()).isTrue();
+
+        // Check that they are all actually registered.
+        Set<String> enabledProviders = controller.getEnabledProviders();
+        assertThat(enabledProviders.size()).isEqualTo(1);
+        assertThat(enabledProviders.contains("com.android.provider1")).isFalse();
+        assertThat(enabledProviders.contains("com.android.provider2")).isTrue();
+
+        // Check that the settings string has the right component names.
+        List<String> enabledServices = controller.getEnabledSettings();
+        assertThat(enabledServices.size()).isEqualTo(1);
+        assertThat(enabledServices.contains("com.android.provider1/ClassA")).isFalse();
+        assertThat(enabledServices.contains("com.android.provider2/ClassA")).isTrue();
+    }
+
     private CredentialManagerPreferenceController createControllerWithServices(
-            List<ServiceInfo> availableServices) {
+            List<CredentialProviderInfo> availableServices) {
         CredentialManagerPreferenceController controller =
                 new CredentialManagerPreferenceController(
                         mContext, mCredentialsPreferenceCategory.getKey());
@@ -186,11 +253,17 @@ public class CredentialManagerPreferenceControllerTest {
         return controller;
     }
 
-    private ServiceInfo createServiceInfo() {
-        return createServiceInfo("com.android.provider", "CredManProvider");
+    private CredentialProviderInfo createCredentialProviderInfo() {
+        return createCredentialProviderInfo("com.android.provider", "CredManProvider");
     }
 
-    private ServiceInfo createServiceInfo(String packageName, String className) {
+    private CredentialProviderInfo createCredentialProviderInfo(
+            String packageName, String className) {
+        return createCredentialProviderInfo(packageName, className, null, false);
+    }
+
+    private CredentialProviderInfo createCredentialProviderInfo(
+            String packageName, String className, CharSequence label, boolean isEnabled) {
         ServiceInfo si = new ServiceInfo();
         si.packageName = packageName;
         si.name = className;
@@ -200,6 +273,9 @@ public class CredentialManagerPreferenceControllerTest {
         si.applicationInfo.packageName = packageName;
         si.applicationInfo.nonLocalizedLabel = "test";
 
-        return si;
+        return new CredentialProviderInfo.Builder(si)
+                .setOverrideLabel(label)
+                .setEnabled(isEnabled)
+                .build();
     }
 }
