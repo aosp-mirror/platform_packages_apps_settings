@@ -16,6 +16,9 @@
 
 package com.android.settings.applications.specialaccess.notificationaccess;
 
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+
+import android.Manifest;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
@@ -30,6 +33,7 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
+import android.text.TextUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.util.Slog;
@@ -42,6 +46,7 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.password.PasswordUtils;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 
@@ -137,6 +142,41 @@ public class NotificationAccessDetails extends AppInfoBase {
     @Override
     protected AlertDialog createDialog(int id, int errorCode) {
         return null;
+    }
+
+    @Override
+    protected String retrieveAppEntry() {
+        final Bundle args = getArguments();
+        final Intent intent = (args == null) ?
+                getIntent() : (Intent) args.getParcelable("intent");
+        
+        if (intent != null && intent.hasExtra(Intent.EXTRA_USER_HANDLE)) {
+            if (!hasInteractAcrossUsersPermission()) {
+                finish();
+            }
+        }
+
+        return super.retrieveAppEntry();
+    }
+
+    private boolean hasInteractAcrossUsersPermission() {
+        final String callingPackageName = PasswordUtils.getCallingAppPackageName(
+                getActivity().getActivityToken());
+
+        if (TextUtils.isEmpty(callingPackageName)) {
+            Log.w(TAG, "Not able to get calling package name for permission check");
+            return false;
+        }
+
+        if (getContext().getPackageManager().checkPermission(
+                Manifest.permission.INTERACT_ACROSS_USERS_FULL, callingPackageName)
+                != PERMISSION_GRANTED) {
+            Log.w(TAG, "Package " + callingPackageName + " does not have required permission "
+                    + Manifest.permission.INTERACT_ACROSS_USERS_FULL);
+            return false;
+        }
+
+        return true;
     }
 
     public void updatePreference(SwitchPreference preference) {
