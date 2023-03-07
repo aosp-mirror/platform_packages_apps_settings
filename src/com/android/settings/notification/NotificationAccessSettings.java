@@ -57,6 +57,9 @@ import java.util.List;
 @SearchIndexable
 public class NotificationAccessSettings extends EmptyTextSettings {
     private static final String TAG = "NotifAccessSettings";
+
+    private static final int MAX_CN_LENGTH = 500;
+
     private static final ManagedServiceSettings.Config CONFIG =
             new ManagedServiceSettings.Config.Builder()
                     .setTag(TAG)
@@ -91,6 +94,12 @@ public class NotificationAccessSettings extends EmptyTextSettings {
                 .setNoun(CONFIG.noun)
                 .setSetting(CONFIG.setting)
                 .setTag(CONFIG.tag)
+                .setValidator(info -> {
+                    if (info.getComponentName().flattenToString().length() > MAX_CN_LENGTH) {
+                        return false;
+                    }
+                    return true;
+                })
                 .build();
         mServiceListing.addCallback(this::updateList);
         setPreferenceScreen(getPreferenceManager().createPreferenceScreen(mContext));
