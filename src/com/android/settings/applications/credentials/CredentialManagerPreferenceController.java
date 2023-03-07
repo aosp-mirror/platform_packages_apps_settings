@@ -25,14 +25,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.content.pm.ServiceInfo;
 import android.credentials.CredentialManager;
-import android.credentials.ListEnabledProvidersException;
-import android.credentials.ListEnabledProvidersResponse;
+import android.credentials.CredentialProviderInfo;
 import android.credentials.SetEnabledProvidersException;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.CancellationSignal;
 import android.os.OutcomeReceiver;
 import android.os.UserHandle;
 import android.util.IconDrawableFactory;
@@ -71,10 +68,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
     private final PackageManager mPm;
     private final IconDrawableFactory mIconFactory;
-    private final List<ServiceInfo> mServices;
+    private final List<CredentialProviderInfo> mServices;
     private final Set<String> mEnabledPackageNames;
     private final @Nullable CredentialManager mCredentialManager;
-    private final CancellationSignal mCancellationSignal = new CancellationSignal();
     private final Executor mExecutor;
     private final Map<String, SwitchPreference> mPrefs = new HashMap<>(); // key is package name
 
@@ -132,42 +128,20 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 lifecycleOwner,
                 mCredentialManager.getCredentialProviderServices(
                         getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY));
-
-        mCredentialManager.listEnabledProviders(
-                mCancellationSignal,
-                mExecutor,
-                new OutcomeReceiver<ListEnabledProvidersResponse, ListEnabledProvidersException>() {
-                    @Override
-                    public void onResult(ListEnabledProvidersResponse result) {
-                        Set<String> enabledPackages = new HashSet<>();
-                        for (String flattenedComponentName : result.getProviderComponentNames()) {
-                            ComponentName cn =
-                                    ComponentName.unflattenFromString(flattenedComponentName);
-                            if (cn != null) {
-                                enabledPackages.add(cn.getPackageName());
-                            }
-                        }
-
-                        setEnabledPackageNames(enabledPackages);
-                    }
-
-                    @Override
-                    public void onError(ListEnabledProvidersException e) {
-                        Log.e(TAG, "listEnabledProviders error: " + e.toString());
-                    }
-                });
     }
 
     @VisibleForTesting
-    void setAvailableServices(LifecycleOwner lifecycleOwner, List<ServiceInfo> availableServices) {
+    void setAvailableServices(
+            LifecycleOwner lifecycleOwner, List<CredentialProviderInfo> availableServices) {
         mServices.clear();
         mServices.addAll(availableServices);
-    }
 
-    @VisibleForTesting
-    void setEnabledPackageNames(Set<String> enabledPackages) {
         mEnabledPackageNames.clear();
-        mEnabledPackageNames.addAll(enabledPackages);
+        for (CredentialProviderInfo cpi : availableServices) {
+            if (cpi.isEnabled()) {
+                mEnabledPackageNames.add(cpi.getServiceInfo().packageName);
+            }
+        }
 
         for (String packageName : mPrefs.keySet()) {
             mPrefs.get(packageName).setChecked(mEnabledPackageNames.contains(packageName));
@@ -189,20 +163,20 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         PreferenceGroup group = screen.findPreference(getPreferenceKey());
         Context context = screen.getContext();
 
-        for (ServiceInfo serviceInfo : mServices) {
-            CharSequence title = "";
-            if (serviceInfo.nonLocalizedLabel != null) {
-                title = serviceInfo.loadLabel(mPm);
-            }
-
-            group.addPreference(
-                    addProviderPreference(
-                            context,
-                            title,
-                            mIconFactory.getBadgedIcon(
-                                    serviceInfo, serviceInfo.applicationInfo, getUser()),
-                            serviceInfo.packageName));
+        for (CredentialProviderInfo service : mServices) {
+            group.addPreference(createPreference(context, service));
         }
+    }
+
+    /** Creates a preference object based on the provider info. */
+    @VisibleForTesting
+    public SwitchPreference createPreference(Context context, CredentialProviderInfo service) {
+        CharSequence label = service.getLabel(context);
+        return addProviderPreference(
+                context,
+                label == null ? "" : label,
+                service.getServiceIcon(mContext),
+                service.getServiceInfo().packageName);
     }
 
     /**
@@ -246,9 +220,10 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     public List<String> getEnabledSettings() {
         // Get all the component names that match the enabled package names.
         List<String> enabledServices = new ArrayList<>();
-        for (ServiceInfo service : mServices) {
-            if (mEnabledPackageNames.contains(service.packageName)) {
-                enabledServices.add(service.getComponentName().flattenToString());
+        for (CredentialProviderInfo service : mServices) {
+            ComponentName cn = service.getServiceInfo().getComponentName();
+            if (mEnabledPackageNames.contains(service.getServiceInfo().packageName)) {
+                enabledServices.add(cn.flattenToString());
             }
         }
 
