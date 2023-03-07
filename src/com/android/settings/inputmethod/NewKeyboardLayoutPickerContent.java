@@ -36,7 +36,7 @@ public class NewKeyboardLayoutPickerContent extends DashboardFragment {
         super.onAttach(context);
         InputManager inputManager = getContext().getSystemService(InputManager.class);
         Bundle arguments = getArguments();
-        final String title = arguments.getString(NewKeyboardSettingsUtils.EXTRA_TITLE);
+        final CharSequence title = arguments.getCharSequence(NewKeyboardSettingsUtils.EXTRA_TITLE);
         final String layout = arguments.getString(NewKeyboardSettingsUtils.EXTRA_KEYBOARD_LAYOUT);
         final int userId = arguments.getInt(NewKeyboardSettingsUtils.EXTRA_USER_ID);
         final InputDeviceIdentifier identifier =
