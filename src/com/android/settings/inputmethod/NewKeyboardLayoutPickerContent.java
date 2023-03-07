@@ -19,6 +19,7 @@ package com.android.settings.inputmethod;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
+import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodSubtype;
@@ -33,25 +34,24 @@ public class NewKeyboardLayoutPickerContent extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
+        InputManager inputManager = getContext().getSystemService(InputManager.class);
         Bundle arguments = getArguments();
         final String title = arguments.getString(NewKeyboardSettingsUtils.EXTRA_TITLE);
         final String layout = arguments.getString(NewKeyboardSettingsUtils.EXTRA_KEYBOARD_LAYOUT);
         final int userId = arguments.getInt(NewKeyboardSettingsUtils.EXTRA_USER_ID);
-        final InputDeviceIdentifier inputDeviceIdentifier =
+        final InputDeviceIdentifier identifier =
                 arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER);
         final InputMethodInfo inputMethodInfo =
                 arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_METHOD_INFO);
         final InputMethodSubtype inputMethodSubtype =
                 arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_METHOD_SUBTYPE);
-
-
-        if (inputDeviceIdentifier == null) {
-            getActivity().finish();
+        if (identifier == null
+                || NewKeyboardSettingsUtils.getInputDevice(inputManager, identifier) == null) {
+            return;
         }
         getActivity().setTitle(title);
         use(NewKeyboardLayoutPickerController.class).initialize(this /*parent*/, userId,
-                inputDeviceIdentifier, inputMethodInfo, inputMethodSubtype, layout);
+                identifier, inputMethodInfo, inputMethodSubtype, layout);
     }
 
     @Override
