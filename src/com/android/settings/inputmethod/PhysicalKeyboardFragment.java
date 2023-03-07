@@ -160,6 +160,10 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         final Context context = getContext();
         ThreadUtils.postOnBackgroundThread(() -> {
             final List<HardKeyboardDeviceInfo> newHardKeyboards = getHardKeyboards(context);
+            if (newHardKeyboards.isEmpty()) {
+                getActivity().finish();
+                return;
+            }
             ThreadUtils.postOnMainThread(() -> updateHardKeyboards(newHardKeyboards));
         });
     }
