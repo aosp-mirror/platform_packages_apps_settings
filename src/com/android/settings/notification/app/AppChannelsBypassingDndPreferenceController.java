@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.core.text.BidiFormatter;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.preference.Preference;
@@ -54,7 +55,7 @@ import java.util.List;
 public class AppChannelsBypassingDndPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver {
 
-    private static final String KEY = "zen_mode_bypassing_app_channels_list";
+    @VisibleForTesting static final String KEY = "zen_mode_bypassing_app_channels_list";
     private static final String ARG_FROM_SETTINGS = "fromSettings";
 
     private RestrictedSwitchPreference mAllNotificationsToggle;
@@ -74,8 +75,8 @@ public class AppChannelsBypassingDndPreferenceController extends NotificationPre
         mAllNotificationsToggle = new RestrictedSwitchPreference(mPreferenceCategory.getContext());
         mAllNotificationsToggle.setTitle(R.string.zen_mode_bypassing_app_channels_toggle_all);
         mAllNotificationsToggle.setDisabledByAdmin(mAdmin);
-        mAllNotificationsToggle.setEnabled(
-                (mAdmin == null || !mAllNotificationsToggle.isDisabledByAdmin()));
+        mAllNotificationsToggle.setEnabled(!mAppRow.banned
+                && (mAdmin == null || !mAllNotificationsToggle.isDisabledByAdmin()));
         mAllNotificationsToggle.setOnPreferenceClickListener(
                 new Preference.OnPreferenceClickListener() {
                     @Override
@@ -206,6 +207,9 @@ public class AppChannelsBypassingDndPreferenceController extends NotificationPre
     }
 
     private boolean areAllChannelsBypassing() {
+        if (mAppRow.banned) {
+            return false;
+        }
         boolean allChannelsBypassing = true;
         for (NotificationChannel channel : mChannels) {
             if (showNotification(channel)) {
@@ -226,7 +230,7 @@ public class AppChannelsBypassingDndPreferenceController extends NotificationPre
      * Whether notifications from this channel would show if DND weren't on.
      */
     private boolean showNotification(NotificationChannel channel) {
-        return channel.getImportance() != IMPORTANCE_NONE;
+        return !mAppRow.banned && channel.getImportance() != IMPORTANCE_NONE;
     }
 
     /**
