@@ -34,11 +34,13 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.wifi.WifiUtils;
@@ -69,6 +71,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @VisibleForTesting
     static final String KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY =
             WifiTetherMaximizeCompatibilityPreferenceController.PREF_KEY;
+    @VisibleForTesting
+    static final String KEY_WIFI_HOTSPOT_SPEED = "wifi_hotspot_speed";
 
     private WifiTetherSwitchBarController mSwitchBarController;
     private WifiTetherSSIDPreferenceController mSSIDPreferenceController;
@@ -83,6 +87,11 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     private WifiRestriction mWifiRestriction;
     @VisibleForTesting
     TetherChangeReceiver mTetherChangeReceiver;
+
+    @VisibleForTesting
+    WifiTetherViewModel mWifiTetherViewModel;
+    @VisibleForTesting
+    Preference mWifiHotspotSpeed;
 
     static {
         TETHER_STATE_CHANGE_FILTER = new IntentFilter(WIFI_AP_STATE_CHANGED_ACTION);
@@ -120,6 +129,13 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
         setIfOnlyAvailableForAdmins(true);
         mUnavailable = isUiRestricted() || !mWifiRestriction.isHotspotAvailable(getContext());
+
+        mWifiTetherViewModel = FeatureFactory.getFactory(getContext()).getWifiFeatureProvider()
+                .getWifiTetherViewModel(this);
+        mWifiHotspotSpeed = findPreference(KEY_WIFI_HOTSPOT_SPEED);
+        if (mWifiHotspotSpeed != null && mWifiHotspotSpeed.isVisible()) {
+            mWifiTetherViewModel.getSpeedSummary().observe(this, this::onSpeedSummaryChanged);
+        }
     }
 
     @Override
@@ -175,6 +191,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
             // Handle the initial state after register the receiver.
             updateDisplayWithNewConfig();
         }
+        mWifiTetherViewModel.refresh();
     }
 
     @Override
@@ -189,6 +206,9 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         }
     }
 
+    protected void onSpeedSummaryChanged(Integer summaryResId) {
+        mWifiHotspotSpeed.setSummary(summaryResId);
+    }
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -228,7 +248,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
             mRestartWifiApAfterConfigChange = true;
             mSwitchBarController.stopTether();
         }
-        mWifiManager.setSoftApConfiguration(config);
+        mWifiTetherViewModel.setSoftApConfiguration(config);
     }
 
     private SoftApConfiguration buildNewConfig() {

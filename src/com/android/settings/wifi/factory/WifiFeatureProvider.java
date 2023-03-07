@@ -20,8 +20,13 @@ import android.content.Context;
 import android.net.wifi.WifiManager;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.android.settings.wifi.repository.WifiHotspotRepository;
+import com.android.settings.wifi.tether.WifiTetherViewModel;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Wi-Fi Feature Provider
@@ -55,5 +60,13 @@ public class WifiFeatureProvider {
         }
         return mWifiHotspotRepository;
     }
+
+    /**
+     * Get WifiTetherViewModel
+     */
+    public WifiTetherViewModel getWifiTetherViewModel(@NotNull ViewModelStoreOwner owner) {
+        return new ViewModelProvider(owner).get(WifiTetherViewModel.class);
+    }
+
 }
 
