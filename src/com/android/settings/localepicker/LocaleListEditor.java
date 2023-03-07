@@ -105,7 +105,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment {
 
         LocaleStore.fillCache(this.getContext());
         final List<LocaleStore.LocaleInfo> feedsList = getUserLocaleList();
-        mAdapter = new LocaleDragAndDropAdapter(this.getContext(), feedsList);
+        mAdapter = new LocaleDragAndDropAdapter(this, feedsList);
     }
 
     @Override
