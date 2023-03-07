@@ -63,6 +63,7 @@ import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListPro
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.MediaManagementAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
+import com.android.settings.spa.app.specialaccess.NfcTagAppsSettingsProvider
 import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
 import com.android.settings.spa.notification.AppListNotificationsPageProvider
 import com.android.settings.spa.system.AppLanguagesPageProvider
@@ -112,6 +113,7 @@ object ManageApplicationsUtil {
             LIST_TYPE_NOTIFICATION -> AppListNotificationsPageProvider.name
             LIST_TYPE_APPS_LOCALE -> AppLanguagesPageProvider.name
             LIST_TYPE_MAIN -> AllAppListPageProvider.name
+            LIST_TYPE_NFC_TAG_APPS -> NfcTagAppsSettingsProvider.getAppListRoute()
             else -> null
         }
     }
