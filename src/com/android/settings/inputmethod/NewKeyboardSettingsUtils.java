@@ -17,6 +17,8 @@
 package com.android.settings.inputmethod;
 
 import android.content.Context;
+import android.hardware.input.InputDeviceIdentifier;
+import android.hardware.input.InputManager;
 import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -101,5 +103,9 @@ public class NewKeyboardSettingsUtils {
         InputMethodSubtype getInputMethodSubtype() {
             return mInputMethodSubtype;
         }
+    }
+
+    static InputDevice getInputDevice(InputManager im, InputDeviceIdentifier identifier) {
+        return im.getInputDeviceByDescriptor(identifier.getDescriptor());
     }
 }

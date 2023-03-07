@@ -418,7 +418,7 @@ public class FingerprintEnrollEnrollingRfpsFragment extends Fragment {
 
     private void showIconTouchDialog() {
         mIconTouchCount = 0;
-        mEnrollingViewModel.onIconTouchDialogShow();
+        mEnrollingViewModel.showIconTouchDialog();
     }
 
     private final Runnable mShowDialogRunnable = () -> showIconTouchDialog();
