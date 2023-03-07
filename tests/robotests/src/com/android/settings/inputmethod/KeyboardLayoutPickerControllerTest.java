@@ -93,13 +93,13 @@ public class KeyboardLayoutPickerControllerTest {
     }
 
     @Test
-    public void testLifecycle_onStart_NoInputDevice_shouldFinish() {
+    public void testLifecycle_onStart_NoInputDevice_shouldReturn() {
         final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
         when(mInputManager.getInputDeviceByDescriptor(anyString())).thenReturn(null);
         when(mFragment.getActivity()).thenReturn(activity);
 
         mController.onStart();
-        assertThat(activity.isFinishing()).isTrue();
+        verify(mInputManager, never()).getEnabledKeyboardLayoutsForInputDevice(any());
     }
 
     @Test
