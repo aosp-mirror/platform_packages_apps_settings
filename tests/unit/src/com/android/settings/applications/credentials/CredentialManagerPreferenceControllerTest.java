@@ -115,10 +115,10 @@ public class CredentialManagerPreferenceControllerTest {
     public void buildSwitchPreference() {
         CredentialProviderInfo providerInfo1 =
                 createCredentialProviderInfo(
-                        "com.android.provider1", "ClassA", "Service Title", false);
+                        "com.android.provider1", "ClassA", "Service Title", false, null);
         CredentialProviderInfo providerInfo2 =
                 createCredentialProviderInfo(
-                        "com.android.provider2", "ClassA", "Service Title", false);
+                        "com.android.provider2", "ClassA", "Service Title", false, "Summary Text");
         CredentialManagerPreferenceController controller =
                 createControllerWithServices(Lists.newArrayList(providerInfo1, providerInfo2));
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
@@ -139,11 +139,13 @@ public class CredentialManagerPreferenceControllerTest {
         SwitchPreference pref = controller.createPreference(mContext, providerInfo1);
         assertThat(pref.getTitle().toString()).isEqualTo("Service Title");
         assertThat(pref.isChecked()).isTrue();
+        assertThat(pref.getSummary()).isNull();
 
         // Create the pref (not checked).
         SwitchPreference pref2 = controller.createPreference(mContext, providerInfo2);
         assertThat(pref2.getTitle().toString()).isEqualTo("Service Title");
         assertThat(pref2.isChecked()).isFalse();
+        assertThat(pref2.getSummary().toString()).isEqualTo("Summary Text");
     }
 
     @Test
@@ -264,6 +266,15 @@ public class CredentialManagerPreferenceControllerTest {
 
     private CredentialProviderInfo createCredentialProviderInfo(
             String packageName, String className, CharSequence label, boolean isEnabled) {
+        return createCredentialProviderInfo(packageName, className, label, isEnabled, null);
+    }
+
+    private CredentialProviderInfo createCredentialProviderInfo(
+            String packageName,
+            String className,
+            CharSequence label,
+            boolean isEnabled,
+            CharSequence subtitle) {
         ServiceInfo si = new ServiceInfo();
         si.packageName = packageName;
         si.name = className;
@@ -276,6 +287,7 @@ public class CredentialManagerPreferenceControllerTest {
         return new CredentialProviderInfo.Builder(si)
                 .setOverrideLabel(label)
                 .setEnabled(isEnabled)
+                .setSettingsSubtitle(subtitle)
                 .build();
     }
 }
