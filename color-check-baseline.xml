@@ -4485,6 +4485,22 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="            android:tint=&quot;#4F8438&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/layout/locale_dialog.xml"
+            line="36"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
         errorLine1="    android:background=&quot;#FF80CBC4&quot; >"
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
