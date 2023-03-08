@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -34,6 +35,8 @@ import com.android.settingslib.utils.ThreadUtils;
 public class TopLevelBatteryPreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnStart, OnStop, BatteryPreferenceController {
 
+    private static final String TAG = "TopLvBatteryPrefControl";
+
     @VisibleForTesting
     protected boolean mIsBatteryPresent = true;
     @VisibleForTesting
@@ -47,6 +50,7 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
         super(context, preferenceKey);
         mBatteryBroadcastReceiver = new BatteryBroadcastReceiver(mContext);
         mBatteryBroadcastReceiver.setBatteryChangedListener(type -> {
+            Log.d(TAG, "onBatteryChanged: type=" + type);
             if (type == BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_NOT_PRESENT) {
                 mIsBatteryPresent = false;
             }
@@ -101,6 +105,8 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
             return null;
         }
 
+        Log.d(TAG, "getDashboardLabel: batteryStatusUpdate=" + batteryStatusUpdate);
+
         if (batteryStatusUpdate) {
             setSummaryAsync(info);
         }
@@ -137,6 +143,7 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
     /**
      * Callback which receives text for the label.
      */
+    @Override
     public void updateBatteryStatus(String label, BatteryInfo info) {
         mBatteryStatusLabel = label; // Null if adaptive charging is not active
 
