@@ -587,15 +587,9 @@
     <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"И накрая, поставете десния край на пръста си върху сензора"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Поставете едната страна на пръста си върху сензора и задръжте, след това поставете другата"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"По този начин се улавя най-голяма част от отпечатъка ви"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for security_settings_sfps_enroll_progress_a11y_message (6450772721691523736) -->
-    <skip />
-    <!-- String.format failed for translation -->
-    <!-- no translation found for security_settings_sfps_animation_a11y_label (8808819903730940446) -->
-    <skip />
-    <!-- String.format failed for translation -->
-    <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
-    <skip />
+    <string name="security_settings_sfps_enroll_progress_a11y_message" msgid="6450772721691523736">"Регистрирането на отпечатъка е завършено на <xliff:g id="PERCENTAGE">%d</xliff:g>%%"</string>
+    <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Регистрирането е завършено на <xliff:g id="PERCENTAGE">%d</xliff:g>%%"</string>
+    <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Регистрирането на отпечатъка е завършено на <xliff:g id="PERCENTAGE">%d</xliff:g>%%"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Отпечатъкът е добавен"</string>
     <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Вече можете да използвате отпечатъка си, за да отключвате таблета или да потвърждавате самоличността си, например при влизане в приложения или одобряване на покупки"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Вече можете да използвате отпечатъка си, за да отключвате таблета или да потвърждавате самоличността си, например при влизане в приложения"</string>
@@ -979,6 +973,13 @@
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Изберете максималния брой свързани аудиоустройства с Bluetooth"</string>
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Регистрац. файлове за отстраняване на грешки за стека за NFC"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Увеличаване на нивото на регистриране за стека за NFC"</string>
+    <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Подробен рег. файл (NFC) за отстр. на грешки за доставчиците"</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Включване на допълнителни регистрационни файлове за доставчиците на конкретни устройства в сигналите за програмни грешки, които може да съдържат лична информация."</string>
+    <string name="nfc_snoop_log_title" msgid="1072690687525472163">"Нефилтриран регистрационен файл за анализ на NFC чрез NCI"</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Запис на подробни NFC пакети, които може да съдържат лична информация."</string>
+    <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Да се рестартира ли устройството?"</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Подробното записване в регистрационни файлове посредством NFC е предназначено само за програмни цели. В сигналите за програмни грешки, които може да съдържат лична информация, са включени допълнителни данни от NFC. За да промените тази настройка, рестартирайте устройството си."</string>
+    <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Рестартиране"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Предаване"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"дублиране"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Активир. на безжичния дисплей"</string>
@@ -2389,6 +2390,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Изтеглени приложения"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Експериментални"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Флагове за функции"</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Екранен четец, предимно за хора със слепота и слабо зрение"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Докоснете елементи на екрана си, за да ги чуете прочетени на глас"</string>
@@ -4426,7 +4441,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Запитване за парола преди освобождаване"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Заключване на устройството при освобождаване"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Потвърждаване на изтриването на SIM картата"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Потвърдете самоличността си, преди да изтриете електронна SIM карта"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Потвърдете самоличността си, преди да изтриете електронна SIM карта"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Този служебен потребителски профил се управлява от:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Управлява се от <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Експериментално)"</string>
@@ -4974,7 +4989,7 @@
     <string name="display_cutout_emulation_keywords" msgid="4506580703807358127">"прорез на екрана, изрез"</string>
     <string name="overlay_option_device_default" msgid="7986355499809313848">"Стандартна настройка за устройството"</string>
     <string name="overlay_toast_failed_to_apply" msgid="4839587811338164960">"Прилагането на наслагване не бе успешно"</string>
-    <string name="special_access" msgid="1767980727423395147">"Специален достъп за приложението"</string>
+    <string name="special_access" msgid="1767980727423395147">"Специален достъп за приложения"</string>
     <plurals name="special_access_summary" formatted="false" msgid="4995506406763570815">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> приложения могат да използват неограничено количество данни</item>
       <item quantity="one">1 приложение може да използва неограничено количество данни</item>

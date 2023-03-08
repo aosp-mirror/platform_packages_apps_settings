@@ -588,9 +588,7 @@
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Placez le côté de votre empreinte sur le capteur, maintenez-le, puis passez à l\'autre côté"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Cela permet de mieux capturer votre empreinte"</string>
     <string name="security_settings_sfps_enroll_progress_a11y_message" msgid="6450772721691523736">"Enregistrement de l\'empreinte digitale à <xliff:g id="PERCENTAGE">%d</xliff:g> pour cent"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for security_settings_sfps_animation_a11y_label (8808819903730940446) -->
-    <skip />
+    <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Enregistrement à <xliff:g id="PERCENTAGE">%d</xliff:g> %%"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Enregistrement de l\'empreinte digitale à <xliff:g id="PERCENTAGE">%d</xliff:g> pour cent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Empreinte digitale ajoutée"</string>
     <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"Vous pouvez désormais utiliser votre empreinte digitale pour déverrouiller votre tablette ou valider votre identité (par exemple, pour vous connecter à des applis ou approuver un achat)"</string>
@@ -975,6 +973,13 @@
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Sélectionner le nombre maximal d\'appareils audio Bluetooth connectés"</string>
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Journal de débogage des piles NFC"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Accroître le niveau de journalisation des piles NFC"</string>
+    <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Journaux de débogage NFC détaillé du fournisseur"</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Incluez les journaux supplémentaires du fournisseur, spécifiques à l\'appareil, dans les rapports de bug. Ils peuvent contenir des informations privées."</string>
+    <string name="nfc_snoop_log_title" msgid="1072690687525472163">"Journaux de surveillance non filtrés NFC NCI"</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Capturez des paquets de détails NFC pouvant contenir des informations privées."</string>
+    <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Redémarrer l\'appareil ?"</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"La journalisation des détails NFC est destinée exclusivement au développement. Des données NFC supplémentaires sont incluses dans les rapports de bug. Ils peuvent contenir des informations privées. Redémarrez votre appareil pour modifier ce paramètre."</string>
+    <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Redémarrer"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"duplication d\'écran"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Activer l\'affichage sans fil"</string>
@@ -2022,7 +2027,7 @@
     <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Pour plus de sécurité, définissez un schéma pour déverrouiller l\'appareil"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Définir un schéma professionnel"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Définissez un mot de passe"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Définissez un schéma"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Pour utiliser votre empreinte, définissez un schéma"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Pour des raisons de sécurité, définissez un code"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Définissez un code"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Saisissez de nouveau votre mot de passe"</string>
@@ -2385,6 +2390,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Applications téléchargées"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Paramètres expérimentaux"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Fonctionnalités expérimentales"</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Le lecteur d\'écran est destiné principalement aux personnes atteintes de cécité ou de troubles de la vue"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Appuyez sur des éléments à l\'écran pour qu\'ils soient lus à voix haute"</string>
@@ -3515,7 +3534,7 @@
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Les applis et données de cette session Invité seront immédiatement supprimées, et toute l\'activité des futures sessions sera supprimée à chaque fois que vous quitterez le mode Invité"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Activer les appels téléphoniques"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Activer les appels téléphoniques et les SMS"</string>
-    <string name="user_remove_user" msgid="8468203789739693845">"Supprimer un compte utilisateur"</string>
+    <string name="user_remove_user" msgid="8468203789739693845">"Supprimer l\'utilisateur"</string>
     <string name="user_enable_calling_confirm_title" msgid="7868894792723368364">"Activer les appels téléphoniques ?"</string>
     <string name="user_enable_calling_confirm_message" msgid="4924965198409050155">"L\'historique des appels sera partagé avec cet utilisateur."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Activer les appels téléphoniques et les SMS ?"</string>
@@ -4422,7 +4441,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Demander le mot de passe avant de retirer l\'épingle"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Verrouiller l\'appareil quand l\'épingle est retirée"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Confirmer la suppression du profil SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Confirmez votre identité avant d\'effacer une eSIM"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Validez votre identité avant d\'effacer une eSIM"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Ce profil professionnel est géré par"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Géré par <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Expérimental)"</string>
@@ -5667,8 +5686,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Ajustez la sensibilité en choisissant la durée de l\'appui"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Court"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Long"</string>
-    <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Afficher le portefeuille"</string>
-    <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"Autoriser l\'accès au portefeuille depuis l\'écran de verrouillage"</string>
+    <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Afficher Wallet"</string>
+    <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"Autoriser l\'accès à Wallet depuis l\'écran de verrouillage"</string>
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"Afficher le lecteur de code QR"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Autoriser l\'accès au lecteur de code QR depuis l\'écran de verrouillage"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Afficher les commandes de contrôle des appareils"</string>
