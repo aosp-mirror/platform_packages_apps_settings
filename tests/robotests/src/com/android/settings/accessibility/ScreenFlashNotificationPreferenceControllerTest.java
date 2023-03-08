@@ -16,9 +16,9 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import static com.android.settings.accessibility.FlashNotificationsUtil.DEFAULT_SCREEN_FLASH_COLOR;
-import static com.android.settings.accessibility.FlashNotificationsUtil.SETTING_KEY_SCREEN_FLASH_NOTIFICATION;
-import static com.android.settings.accessibility.FlashNotificationsUtil.SETTING_KEY_SCREEN_FLASH_NOTIFICATION_COLOR;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -114,48 +114,50 @@ public class ScreenFlashNotificationPreferenceControllerTest {
 
     @Test
     public void isChecked_setOff_assertFalse() {
-        Settings.System.putInt(mContentResolver, SETTING_KEY_SCREEN_FLASH_NOTIFICATION, 0);
+        Settings.System.putInt(mContentResolver, Settings.System.SCREEN_FLASH_NOTIFICATION, OFF);
         assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
     public void isChecked_setOn_assertTrue() {
-        Settings.System.putInt(mContentResolver, SETTING_KEY_SCREEN_FLASH_NOTIFICATION, 1);
+        Settings.System.putInt(mContentResolver, Settings.System.SCREEN_FLASH_NOTIFICATION, ON);
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
     public void setChecked_whenTransparentColor_setTrue_assertNotTransparentColor() {
         Settings.System.putInt(mContentResolver,
-                SETTING_KEY_SCREEN_FLASH_NOTIFICATION_COLOR, Color.TRANSPARENT);
+                Settings.System.SCREEN_FLASH_NOTIFICATION_COLOR, Color.TRANSPARENT);
         mController.setChecked(true);
         assertThat(Settings.System.getInt(mContentResolver,
-                SETTING_KEY_SCREEN_FLASH_NOTIFICATION_COLOR, 0))
-                .isEqualTo(DEFAULT_SCREEN_FLASH_COLOR);
+                Settings.System.SCREEN_FLASH_NOTIFICATION_COLOR, 0)).isEqualTo(
+                DEFAULT_SCREEN_FLASH_COLOR);
     }
 
     @Test
     public void setChecked_whenNotTransparent_setTrue_assertSameColor() {
         Settings.System.putInt(mContentResolver,
-                SETTING_KEY_SCREEN_FLASH_NOTIFICATION_COLOR, 0x4D0000FF);
+                Settings.System.SCREEN_FLASH_NOTIFICATION_COLOR, 0x4D0000FF);
         mController.setChecked(true);
         assertThat(Settings.System.getInt(mContentResolver,
-                SETTING_KEY_SCREEN_FLASH_NOTIFICATION_COLOR, 0))
+                Settings.System.SCREEN_FLASH_NOTIFICATION_COLOR, 0))
                 .isEqualTo(0x4D0000FF);
     }
 
     @Test
     public void setChecked_setTrue_assertOn() {
         mController.setChecked(true);
-        assertThat(Settings.System.getInt(mContentResolver, SETTING_KEY_SCREEN_FLASH_NOTIFICATION,
-                0)).isEqualTo(1);
+        assertThat(
+                Settings.System.getInt(mContentResolver, Settings.System.SCREEN_FLASH_NOTIFICATION,
+                        OFF)).isEqualTo(ON);
     }
 
     @Test
     public void setChecked_setFalse_assertOff() {
         mController.setChecked(false);
-        assertThat(Settings.System.getInt(mContentResolver, SETTING_KEY_SCREEN_FLASH_NOTIFICATION,
-                1)).isEqualTo(0);
+        assertThat(
+                Settings.System.getInt(mContentResolver, Settings.System.SCREEN_FLASH_NOTIFICATION,
+                        OFF)).isEqualTo(OFF);
     }
 
     @Test

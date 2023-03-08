@@ -32,6 +32,7 @@ import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
 import com.android.settings.spa.app.specialaccess.SpecialAppAccessPageProvider
 import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
 import com.android.settings.spa.app.specialaccess.UseFullScreenIntentAppListProvider
+import com.android.settings.spa.core.instrumentation.SpaLogProvider
 import com.android.settings.spa.development.UsageStatsPageProvider
 import com.android.settings.spa.home.HomePageProvider
 import com.android.settings.spa.network.NetworkAndInternetPageProvider
@@ -87,4 +88,5 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
             ),
         )
     }
+    override val logger = SpaLogProvider
 }

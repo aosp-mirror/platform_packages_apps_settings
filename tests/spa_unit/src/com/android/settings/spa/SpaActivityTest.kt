@@ -25,12 +25,15 @@ import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivityForApp
 import com.android.settingslib.spa.framework.util.KEY_DESTINATION
 import com.google.common.truth.Truth.assertThat
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Answers
 import org.mockito.ArgumentCaptor
 import org.mockito.Mock
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 
@@ -39,8 +42,13 @@ class SpaActivityTest {
     @get:Rule
     val mockito: MockitoRule = MockitoJUnit.rule()
 
-    @Mock
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private lateinit var context: Context
+
+    @Before
+    fun setUp() {
+        `when`(context.applicationContext.packageName).thenReturn("com.android.settings")
+    }
 
     @Test
     fun startSpaActivity() {
