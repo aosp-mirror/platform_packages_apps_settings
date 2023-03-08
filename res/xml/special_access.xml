@@ -95,6 +95,11 @@
         settings:controller="com.android.settings.applications.specialaccess.notificationaccess.NotificationAccessController" />
 
     <Preference
+        android:key="use_full_screen_intent"
+        android:title="@string/full_screen_intent_title"
+        settings:controller="com.android.settings.spa.app.specialaccess.UseFullScreenIntentPreferenceController" />
+
+    <Preference
         android:key="picture_in_picture"
         android:title="@string/picture_in_picture_title"
         android:order="-1100"

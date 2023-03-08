@@ -31,6 +31,8 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.UiccCardInfo;
 import android.telephony.UiccSlotInfo;
+import android.text.BidiFormatter;
+import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -42,13 +44,13 @@ import com.android.settings.network.helper.SelectableSubscriptions;
 import com.android.settings.network.helper.SubscriptionAnnotation;
 import com.android.settings.network.telephony.DeleteEuiccSubscriptionDialogActivity;
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity;
-import com.android.settingslib.DeviceInfoUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -292,7 +294,7 @@ public class SubscriptionUtil {
         final Supplier<Stream<DisplayInfo>> uniqueInfos = () -> originalInfos.get().map(info -> {
             if (duplicateOriginalNames.contains(info.originalName)) {
                 // This may return null, if the user cannot view the phone number itself.
-                final String phoneNumber = DeviceInfoUtils.getBidiFormattedPhoneNumber(context,
+                final String phoneNumber = getBidiFormattedPhoneNumber(context,
                         info.subscriptionInfo);
                 String lastFourDigits = "";
                 if (phoneNumber != null) {
@@ -559,8 +561,23 @@ public class SubscriptionUtil {
         if (TextUtils.isEmpty(rawPhoneNumber)) {
             return null;
         }
-        String countryIso = MccTable.countryCodeForMcc(subscriptionInfo.getMccString());
+        String countryIso = MccTable.countryCodeForMcc(subscriptionInfo.getMccString())
+                .toUpperCase(Locale.ROOT);
         return PhoneNumberUtils.formatNumber(rawPhoneNumber, countryIso);
+    }
+
+    /**
+     * To get the formatting text for display in a potentially opposite-directionality context
+     * without garbling.
+     * @param subscriptionInfo {@link SubscriptionInfo} subscription information.
+     * @return Returns phone number with Bidi format.
+     */
+    @Nullable
+    public static String getBidiFormattedPhoneNumber(Context context,
+            SubscriptionInfo subscriptionInfo) {
+        String phoneNumber = getFormattedPhoneNumber(context, subscriptionInfo);
+        return (phoneNumber == null) ? phoneNumber :
+                BidiFormatter.getInstance().unicodeWrap(phoneNumber, TextDirectionHeuristics.LTR);
     }
 
     /**

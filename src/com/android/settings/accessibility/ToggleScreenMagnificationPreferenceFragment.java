@@ -29,8 +29,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.icu.text.CaseMap;
+import android.icu.text.MessageFormat;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -51,6 +53,7 @@ import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.utils.LocaleUtils;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -94,7 +97,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         mPackageName = getString(R.string.accessibility_screen_magnification_title);
         mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
                 .authority(getPrefContext().getPackageName())
-                .appendPath(String.valueOf(R.raw.accessibility_magnification_banner))
+                .appendPath(String.valueOf(R.raw.a11y_magnification_banner))
                 .build();
         mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
             removeDialog(DialogEnums.EDIT_SHORTCUT);
@@ -212,6 +215,91 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 getContext(), MagnificationFollowTypingPreferenceController.PREF_KEY);
         getSettingsLifecycle().addObserver(mFollowTypingPreferenceController);
         mFollowTypingPreferenceController.displayPreference(getPreferenceScreen());
+        addPreferenceController(mFollowTypingPreferenceController);
+
+        addAlwaysOnSetting(generalCategory);
+        addJoystickSetting(generalCategory);
+    }
+
+    @Override
+    protected void onProcessArguments(Bundle arguments) {
+        Context context = getContext();
+
+        // This Fragment may get arguments from MagnificationGesturesPreferenceController or
+        // MagnificationNavbarPreferenceController and it's necessary to check if a key exists
+        // before putting a new value into arguments.
+
+        if (!arguments.containsKey(AccessibilitySettings.EXTRA_PREFERENCE_KEY)) {
+            arguments.putString(AccessibilitySettings.EXTRA_PREFERENCE_KEY,
+                    Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED);
+        }
+
+        if (!arguments.containsKey(AccessibilitySettings.EXTRA_INTRO)) {
+            arguments.putCharSequence(AccessibilitySettings.EXTRA_INTRO,
+                    context.getString(R.string.accessibility_screen_magnification_intro_text));
+        }
+
+        if (!arguments.containsKey(AccessibilitySettings.EXTRA_HTML_DESCRIPTION)) {
+            String summary = MessageFormat.format(
+                    context.getString(R.string.accessibility_screen_magnification_summary),
+                            new Object[]{1, 2, 3, 4, 5});
+            arguments.putCharSequence(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, summary);
+        }
+
+        super.onProcessArguments(arguments);
+    }
+
+    private void addAlwaysOnSetting(PreferenceCategory generalCategory) {
+        if (!DeviceConfig.getBoolean(
+                DeviceConfig.NAMESPACE_WINDOW_MANAGER,
+                "AlwaysOnMagnifier__enable_always_on_magnifier",
+                false
+        )) {
+            return;
+        }
+
+        var alwaysOnPreference = new SwitchPreference(getPrefContext());
+        alwaysOnPreference.setTitle(
+                R.string.accessibility_screen_magnification_always_on_title);
+        alwaysOnPreference.setSummary(
+                R.string.accessibility_screen_magnification_always_on_summary);
+        alwaysOnPreference.setKey(
+                MagnificationAlwaysOnPreferenceController.PREF_KEY);
+        generalCategory.addPreference(alwaysOnPreference);
+
+        var alwaysOnPreferenceController = new MagnificationAlwaysOnPreferenceController(
+                getContext(), MagnificationAlwaysOnPreferenceController.PREF_KEY);
+        getSettingsLifecycle().addObserver(alwaysOnPreferenceController);
+        alwaysOnPreferenceController.displayPreference(getPreferenceScreen());
+        addPreferenceController(alwaysOnPreferenceController);
+    }
+
+    private void addJoystickSetting(PreferenceCategory generalCategory) {
+        if (!DeviceConfig.getBoolean(
+                DeviceConfig.NAMESPACE_WINDOW_MANAGER,
+                "MagnificationJoystick__enable_magnification_joystick",
+                false
+        )) {
+            return;
+        }
+
+        SwitchPreference joystickPreference = new SwitchPreference(getPrefContext());
+        joystickPreference.setTitle(
+                R.string.accessibility_screen_magnification_joystick_title);
+        joystickPreference.setSummary(
+                R.string.accessibility_screen_magnification_joystick_summary);
+        joystickPreference.setKey(
+                MagnificationJoystickPreferenceController.PREF_KEY);
+        generalCategory.addPreference(joystickPreference);
+
+        MagnificationJoystickPreferenceController joystickPreferenceController =
+                new MagnificationJoystickPreferenceController(
+                        getContext(),
+                        MagnificationJoystickPreferenceController.PREF_KEY
+                );
+        getSettingsLifecycle().addObserver(joystickPreferenceController);
+        joystickPreferenceController.displayPreference(getPreferenceScreen());
+        addPreferenceController(joystickPreferenceController);
     }
 
     @Override
@@ -317,14 +405,20 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             AccessibilitySettingsContentObserver contentObserver) {
         super.registerKeysToObserverCallback(contentObserver);
 
-        final List<String> followingTypingKeys = new ArrayList<>();
-        followingTypingKeys.add(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED);
-        contentObserver.registerKeysToObserverCallback(followingTypingKeys,
-                key -> updateFollowTypingState());
+        var keysToObserve = List.of(
+            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED,
+            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED,
+            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_JOYSTICK_ENABLED
+        );
+        contentObserver.registerKeysToObserverCallback(keysToObserve,
+                key -> updatePreferencesState());
     }
 
-    private void updateFollowTypingState() {
-        mFollowTypingPreferenceController.updateState();
+    private void updatePreferencesState() {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        getPreferenceControllers().forEach(controllers::addAll);
+        controllers.forEach(controller -> controller.updateState(
+                findPreference(controller.getPreferenceKey())));
     }
 
     @Override

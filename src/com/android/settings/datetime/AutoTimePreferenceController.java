@@ -53,16 +53,25 @@ public class AutoTimePreferenceController extends AbstractPreferenceController
                 getTimeCapabilitiesAndConfig().getCapabilities();
         int capability = timeCapabilities.getConfigureAutoDetectionEnabledCapability();
 
-        // The preference only has two states: present and not present. The preference is never
-        // present but disabled.
-        if (capability == CAPABILITY_NOT_SUPPORTED
-                || capability == CAPABILITY_NOT_ALLOWED
-                || capability == CAPABILITY_NOT_APPLICABLE) {
-            return false;
-        } else if (capability == CAPABILITY_POSSESSED) {
-            return true;
-        } else {
-            throw new IllegalStateException("Unknown capability=" + capability);
+        // The preference has three states: visible, not visible, and visible but disabled.
+        // This method handles the "is visible?" check.
+        switch (capability) {
+            case CAPABILITY_NOT_SUPPORTED:
+                return false;
+            case CAPABILITY_POSSESSED:
+                return true;
+            case CAPABILITY_NOT_ALLOWED:
+                // This case is expected for enterprise restrictions, where the toggle should be
+                // present but disabled. Disabling is handled declaratively via the
+                // settings:userRestriction attribute in .xml. The client-side logic is expected to
+                // concur with the capabilities logic in the system server.
+                return true;
+            case CAPABILITY_NOT_APPLICABLE:
+                // CAPABILITY_NOT_APPLICABLE is not currently expected, so this is return value is
+                // arbitrary.
+                return true;
+            default:
+                throw new IllegalStateException("Unknown capability=" + capability);
         }
     }
 
@@ -71,6 +80,7 @@ public class AutoTimePreferenceController extends AbstractPreferenceController
         if (!(preference instanceof SwitchPreference)) {
             return;
         }
+
         ((SwitchPreference) preference).setChecked(isEnabled());
     }
 

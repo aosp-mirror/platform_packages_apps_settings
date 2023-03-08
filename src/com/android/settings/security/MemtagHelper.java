@@ -25,18 +25,18 @@ import com.android.settings.core.BasePreferenceController;
 import java.util.Arrays;
 
 public class MemtagHelper {
-    private static boolean isForcedOff() {
+    public static boolean isForcedOff() {
         return "force_off"
                 .equals(
                         SystemProperties.get(
-                                "persist.device_config.memory_safety_native.bootloader_override"));
+                                "persist.device_config.memory_safety_native_boot.bootloader_override"));
     }
 
-    private static boolean isForcedOn() {
+    public static boolean isForcedOn() {
         return "force_on"
                 .equals(
                         SystemProperties.get(
-                                "persist.device_config.memory_safety_native.bootloader_override"));
+                                "persist.device_config.memory_safety_native_boot.bootloader_override"));
     }
 
     public static boolean isChecked() {

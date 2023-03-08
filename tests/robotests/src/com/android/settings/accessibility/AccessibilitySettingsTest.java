@@ -52,12 +52,15 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.testutils.XmlTestUtils;
+import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexableRaw;
 
@@ -84,6 +87,7 @@ import java.util.List;
 
 /** Test for {@link AccessibilitySettings}. */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowBluetoothUtils.class})
 public class AccessibilitySettingsTest {
     private static final String PACKAGE_NAME = "com.android.test";
     private static final String CLASS_NAME = PACKAGE_NAME + ".test_a11y_service";
@@ -115,6 +119,8 @@ public class AccessibilitySettingsTest {
     private ShadowAccessibilityManager mShadowAccessibilityManager;
     @Mock
     private AppOpsManager mAppOpsManager;
+    @Mock
+    private LocalBluetoothManager mLocalBluetoothManager;
 
     private Lifecycle mLifecycle;
 
@@ -133,6 +139,7 @@ public class AccessibilitySettingsTest {
                 anyInt(), anyString())).thenReturn(AppOpsManager.MODE_ALLOWED);
         mLifecycle = new Lifecycle(() -> mLifecycle);
         when(mFragment.getSettingsLifecycle()).thenReturn(mLifecycle);
+        ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
     }
 
     @Test
@@ -333,11 +340,11 @@ public class AccessibilitySettingsTest {
     public void testAccessibilityMenuInSystem_IncludedInInteractionControl() {
         mShadowAccessibilityManager.setInstalledAccessibilityServiceList(
                 List.of(getMockAccessibilityServiceInfo(
-                        AccessibilityManager.ACCESSIBILITY_MENU_IN_SYSTEM)));
+                        AccessibilityUtils.ACCESSIBILITY_MENU_IN_SYSTEM)));
         setupFragment();
 
         final RestrictedPreference pref = mFragment.getPreferenceScreen().findPreference(
-                AccessibilityManager.ACCESSIBILITY_MENU_IN_SYSTEM.flattenToString());
+                AccessibilityUtils.ACCESSIBILITY_MENU_IN_SYSTEM.flattenToString());
         final String prefCategory = mFragment.mServicePreferenceToPreferenceCategoryMap.get(
                 pref).getKey();
         assertThat(prefCategory).isEqualTo(AccessibilitySettings.CATEGORY_INTERACTION_CONTROL);
@@ -350,7 +357,7 @@ public class AccessibilitySettingsTest {
         setupFragment();
 
         final RestrictedPreference pref = mFragment.getPreferenceScreen().findPreference(
-                AccessibilityManager.ACCESSIBILITY_MENU_IN_SYSTEM.flattenToString());
+                AccessibilityUtils.ACCESSIBILITY_MENU_IN_SYSTEM.flattenToString());
         assertThat(pref).isNull();
     }
 

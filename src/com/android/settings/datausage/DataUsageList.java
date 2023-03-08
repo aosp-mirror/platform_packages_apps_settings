@@ -69,6 +69,7 @@ import com.android.settingslib.net.UidDetailProvider;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Panel showing data usage history across various networks, including options
@@ -266,6 +267,14 @@ public class DataUsageList extends DataUsageBaseFragment
             mSubId = intent.getIntExtra(Settings.EXTRA_SUB_ID,
                     SubscriptionManager.INVALID_SUBSCRIPTION_ID);
             mTemplate = intent.getParcelableExtra(Settings.EXTRA_NETWORK_TEMPLATE);
+
+            if (mTemplate == null) {
+                Optional<NetworkTemplate> mobileNetworkTemplateFromSim =
+                        DataUsageUtils.getMobileNetworkTemplateFromSubId(getContext(), getIntent());
+                if (mobileNetworkTemplateFromSim.isPresent()) {
+                    mTemplate = mobileNetworkTemplateFromSim.get();
+                }
+            }
         }
     }
 

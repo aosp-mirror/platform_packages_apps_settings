@@ -1993,7 +1993,7 @@ public final class DataProcessorTest {
         assertThat(entry.mBatteryHistEntry.mUserId).isEqualTo(userId);
         assertThat(entry.mBatteryHistEntry.mUid).isEqualTo(uid);
         assertThat(entry.mBatteryHistEntry.mConsumerType).isEqualTo(consumerType);
-        assertThat(entry.getPercentOfTotal()).isEqualTo(consumePercentage);
+        assertThat(entry.getPercentage()).isEqualTo(consumePercentage);
         assertThat(entry.mForegroundUsageConsumePower).isEqualTo(foregroundUsageConsumePower);
         assertThat(entry.mForegroundServiceUsageConsumePower)
                 .isEqualTo(foregroundServiceUsageConsumePower);

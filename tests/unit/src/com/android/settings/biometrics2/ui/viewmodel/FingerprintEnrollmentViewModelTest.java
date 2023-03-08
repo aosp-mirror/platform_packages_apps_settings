@@ -16,31 +16,20 @@
 
 package com.android.settings.biometrics2.ui.viewmodel;
 
-import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
-import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_SKIP;
-import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_TIMEOUT;
-import static com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollIntroduction.EXTRA_FINGERPRINT_ENROLLED_COUNT;
+import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollmentViewModel.SAVED_STATE_IS_NEW_FINGERPRINT_ADDED;
 import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollmentViewModel.SAVED_STATE_IS_WAITING_ACTIVITY_RESULT;
 import static com.android.settings.biometrics2.utils.EnrollmentRequestUtils.newAllFalseRequest;
-import static com.android.settings.biometrics2.utils.EnrollmentRequestUtils.newIsSuwRequest;
-import static com.android.settings.biometrics2.utils.FingerprintRepositoryUtils.setupFingerprintEnrolledFingerprints;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.when;
-
 import android.app.Application;
-import android.app.KeyguardManager;
-import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResult;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.biometrics2.data.repository.FingerprintRepository;
-import com.android.settings.password.SetupSkipDialog;
 import com.android.settings.testutils.InstantTaskExecutorRule;
 
 import org.junit.Before;
@@ -58,7 +47,6 @@ public class FingerprintEnrollmentViewModelTest {
     @Rule public final InstantTaskExecutorRule mTaskExecutorRule = new InstantTaskExecutorRule();
 
     @Mock private FingerprintManager mFingerprintManager;
-    @Mock private KeyguardManager mKeyguardManager;
 
     private Application mApplication;
     private FingerprintRepository mFingerprintRepository;
@@ -69,7 +57,7 @@ public class FingerprintEnrollmentViewModelTest {
         mApplication = ApplicationProvider.getApplicationContext();
         mFingerprintRepository = new FingerprintRepository(mFingerprintManager);
         mViewModel = new FingerprintEnrollmentViewModel(mApplication, mFingerprintRepository,
-                mKeyguardManager, newAllFalseRequest(mApplication));
+                newAllFalseRequest(mApplication));
     }
 
     @Test
@@ -78,164 +66,62 @@ public class FingerprintEnrollmentViewModelTest {
     }
 
     @Test
-    public void testGetNextActivityBaseIntentExtras() {
-        assertThat(mViewModel.getNextActivityBaseIntentExtras()).isNotNull();
-    }
-
-    @Test
-    public void testOnContinueEnrollActivityResult_shouldRelaySkip1Result() {
-        final ActivityResult result = new ActivityResult(RESULT_SKIP, null);
-
-        // Run onContinueEnrollActivityResult
-        mViewModel.onContinueEnrollActivityResult(result, 100);
-
-        assertThat(mViewModel.getSetResultLiveData().getValue()).isEqualTo(result);
-    }
-
-    @Test
-    public void testOnContinueEnrollActivityResult_shouldRelaySkip2Result() {
-        final ActivityResult result = new ActivityResult(SetupSkipDialog.RESULT_SKIP, null);
-
-        // Run onContinueEnrollActivityResult
-        mViewModel.onContinueEnrollActivityResult(result, 100);
-
-        assertThat(mViewModel.getSetResultLiveData().getValue()).isEqualTo(result);
-    }
-
-    @Test
-    public void testOnContinueEnrollActivityResult_shouldRelayNullDataTimeoutResult() {
-        final ActivityResult result = new ActivityResult(RESULT_TIMEOUT, null);
-
-        // Run onContinueEnrollActivityResult
-        mViewModel.onContinueEnrollActivityResult(result, 100);
-        final ActivityResult setResult = mViewModel.getSetResultLiveData().getValue();
-
-        assertThat(setResult).isNotNull();
-        assertThat(setResult.getResultCode()).isEqualTo(result.getResultCode());
-        assertThat(setResult.getData()).isEqualTo(result.getData());
-    }
-
-    @Test
-    public void testOnContinueEnrollActivityResult_shouldRelayWithDataTimeoutResult() {
-        final Intent intent = new Intent("testAction");
-        intent.putExtra("testKey", "testValue");
-        final ActivityResult result = new ActivityResult(RESULT_TIMEOUT, intent);
-
-        // Run onContinueEnrollActivityResult
-        mViewModel.onContinueEnrollActivityResult(result, 100);
-        final ActivityResult setResult = mViewModel.getSetResultLiveData().getValue();
-
-        assertThat(setResult).isNotNull();
-        assertThat(setResult.getResultCode()).isEqualTo(result.getResultCode());
-        assertThat(setResult.getData()).isEqualTo(intent);
-    }
-
-    @Test
-    public void testOnContinueEnrollActivityResult_shouldRelayNullDataFinishResult() {
-        final ActivityResult result = new ActivityResult(RESULT_FINISHED, null);
-
-        // Run onContinueEnrollActivityResult
-        mViewModel.onContinueEnrollActivityResult(result, 100);
-        final ActivityResult setResult = mViewModel.getSetResultLiveData().getValue();
-
-        assertThat(setResult).isNotNull();
-        assertThat(setResult.getResultCode()).isEqualTo(result.getResultCode());
-        assertThat(setResult.getData()).isEqualTo(result.getData());
-    }
-
-    @Test
-    public void testOnContinueEnrollActivityResult_shouldRelayWithDataFinishResult() {
-        final Intent intent = new Intent("testAction");
-        intent.putExtra("testKey", "testValue");
-        final ActivityResult result = new ActivityResult(RESULT_FINISHED, intent);
-
-        // Run onContinueEnrollActivityResult
-        mViewModel.onContinueEnrollActivityResult(result, 100);
-        final ActivityResult setResult = mViewModel.getSetResultLiveData().getValue();
-
-        assertThat(setResult).isNotNull();
-        assertThat(setResult.getResultCode()).isEqualTo(result.getResultCode());
-        assertThat(setResult.getData()).isEqualTo(intent);
-    }
-
-    @Test
-    public void testOnContinueEnrollActivityResult_shouldRelayNullDataFinishResultAsNewData() {
-        mViewModel = new FingerprintEnrollmentViewModel(mApplication, mFingerprintRepository,
-                mKeyguardManager, newIsSuwRequest(mApplication));
-        when(mKeyguardManager.isKeyguardSecure()).thenReturn(true);
-        final int userId = 111;
-        final int numOfFp = 4;
-        setupFingerprintEnrolledFingerprints(mFingerprintManager, userId, numOfFp);
-        final ActivityResult result = new ActivityResult(RESULT_FINISHED, null);
-
-        // Run onContinueEnrollActivityResult
-        mViewModel.onContinueEnrollActivityResult(result, userId);
-        final ActivityResult setResult = mViewModel.getSetResultLiveData().getValue();
-
-        assertThat(setResult).isNotNull();
-        assertThat(setResult.getResultCode()).isEqualTo(result.getResultCode());
-        assertThat(setResult.getData()).isNotNull();
-        assertThat(setResult.getData().getExtras()).isNotNull();
-        assertThat(setResult.getData().getExtras().getInt(EXTRA_FINGERPRINT_ENROLLED_COUNT, -1))
-                .isEqualTo(numOfFp);
-    }
-
-    @Test
-    public void testOnContinueEnrollActivityResult_shouldRelayWithDataFinishResultAsNewData() {
-        mViewModel = new FingerprintEnrollmentViewModel(mApplication, mFingerprintRepository,
-                mKeyguardManager, newIsSuwRequest(mApplication));
-        when(mKeyguardManager.isKeyguardSecure()).thenReturn(true);
-        final int userId = 20;
-        final int numOfFp = 9;
-        setupFingerprintEnrolledFingerprints(mFingerprintManager, userId, numOfFp);
-        final String action = "testAction";
-        final String key = "testKey";
-        final String value = "testValue";
-        final Intent intent = new Intent(action);
-        intent.putExtra(key, value);
-        final ActivityResult result = new ActivityResult(RESULT_FINISHED, intent);
-
-        // Run onContinueEnrollActivityResult
-        mViewModel.onContinueEnrollActivityResult(result, userId);
-        final ActivityResult setResult = mViewModel.getSetResultLiveData().getValue();
-
-        assertThat(setResult).isNotNull();
-        assertThat(setResult.getResultCode()).isEqualTo(result.getResultCode());
-        assertThat(setResult.getData()).isNotNull();
-        assertThat(setResult.getData().getExtras()).isNotNull();
-        assertThat(setResult.getData().getExtras().getInt(EXTRA_FINGERPRINT_ENROLLED_COUNT, -1))
-                .isEqualTo(numOfFp);
-        assertThat(setResult.getData().getExtras().getString(key)).isEqualTo(value);
-    }
-
-    @Test
     public void testSetSavedInstanceState() {
-        final Bundle bundle = new Bundle();
-        mViewModel.isWaitingActivityResult().set(true);
-
         // setSavedInstanceState() as false
+        final Bundle bundle = new Bundle();
+        final Bundle outBundle = new Bundle();
+
+        // Set SAVED_STATE_IS_WAITING_ACTIVITY_RESULT to true
         bundle.putBoolean(SAVED_STATE_IS_WAITING_ACTIVITY_RESULT, false);
         mViewModel.setSavedInstanceState(bundle);
         assertThat(mViewModel.isWaitingActivityResult().get()).isFalse();
 
-        // setSavedInstanceState() as false
+        // Set SAVED_STATE_IS_WAITING_ACTIVITY_RESULT to true
+        bundle.clear();
         bundle.putBoolean(SAVED_STATE_IS_WAITING_ACTIVITY_RESULT, true);
         mViewModel.setSavedInstanceState(bundle);
         assertThat(mViewModel.isWaitingActivityResult().get()).isTrue();
+
+        // Set SAVED_STATE_IS_NEW_FINGERPRINT_ADDED to false
+        bundle.clear();
+        bundle.putBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED, false);
+        mViewModel.setSavedInstanceState(bundle);
+        outBundle.clear();
+        mViewModel.onSaveInstanceState(outBundle);
+        assertThat(outBundle.getBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isFalse();
+
+        // Set SAVED_STATE_IS_NEW_FINGERPRINT_ADDED to true
+        bundle.clear();
+        bundle.putBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED, true);
+        mViewModel.setSavedInstanceState(bundle);
+        outBundle.clear();
+        mViewModel.onSaveInstanceState(outBundle);
+        assertThat(outBundle.getBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isTrue();
     }
 
     @Test
     public void testOnSaveInstanceState() {
-        final Bundle bundle = new Bundle();
-
-        // setSavedInstanceState() as false
+        // Test isWaitingActivityResult false
         mViewModel.isWaitingActivityResult().set(false);
+        final Bundle bundle = new Bundle();
         mViewModel.onSaveInstanceState(bundle);
         assertThat(bundle.getBoolean(SAVED_STATE_IS_WAITING_ACTIVITY_RESULT)).isFalse();
 
-        // setSavedInstanceState() as false
+        // Test isWaitingActivityResult true
         mViewModel.isWaitingActivityResult().set(true);
+        bundle.clear();
         mViewModel.onSaveInstanceState(bundle);
         assertThat(bundle.getBoolean(SAVED_STATE_IS_WAITING_ACTIVITY_RESULT)).isTrue();
+
+        // Test isNewFingerprintAdded default false
+        bundle.clear();
+        mViewModel.onSaveInstanceState(bundle);
+        assertThat(bundle.getBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isFalse();
+
+        // Test isNewFingerprintAdded true
+        mViewModel.setIsNewFingerprintAdded();
+        bundle.clear();
+        mViewModel.onSaveInstanceState(bundle);
+        assertThat(bundle.getBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isTrue();
     }
 }

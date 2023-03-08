@@ -35,7 +35,6 @@ import com.android.settings.fuelgauge.batterytip.tips.BatteryDefenderTip;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
-import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
@@ -74,7 +73,6 @@ public class BatteryTipDialogFragmentTest {
     private RestrictAppTip mRestrictedOneAppTip;
     private RestrictAppTip mRestrictTwoAppsTip;
     private UnrestrictAppTip mUnrestrictAppTip;
-    private SummaryTip mSummaryTip;
     private BatteryDefenderTip mDefenderTip;
     private AppInfo mAppInfo;
     private ShadowPackageManager mPackageManager;
@@ -116,9 +114,7 @@ public class BatteryTipDialogFragmentTest {
                 new ArrayList<>(restrictApps));
 
         mUnrestrictAppTip = new UnrestrictAppTip(BatteryTip.StateType.NEW, mAppInfo);
-        mSummaryTip = spy(new SummaryTip(BatteryTip.StateType.NEW,
-                EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN));
-        mDefenderTip = new BatteryDefenderTip(BatteryTip.StateType.NEW);
+        mDefenderTip = new BatteryDefenderTip(BatteryTip.StateType.NEW, false /* isPluggedIn */);
     }
 
     @After
@@ -228,20 +224,5 @@ public class BatteryTipDialogFragmentTest {
         assertThat(shadowDialog.getTitle()).isEqualTo("Remove restriction?");
         assertThat(shadowDialog.getMessage())
                 .isEqualTo(mContext.getString(R.string.battery_tip_unrestrict_app_dialog_message));
-    }
-
-    @Test
-    public void testOnCreateDialog_summaryTip_fireDialog() {
-        doReturn(AVERAGE_TIME_MS).when(mSummaryTip).getAverageTimeMs();
-        mDialogFragment = BatteryTipDialogFragment.newInstance(mSummaryTip, METRICS_KEY);
-
-        FragmentController.setupFragment(mDialogFragment, FragmentActivity.class,
-                0 /* containerViewId */, null /* bundle */);
-
-        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
-
-        assertThat(shadowDialog.getMessage()).isEqualTo(
-                mContext.getText(R.string.battery_tip_dialog_summary_message));
     }
 }

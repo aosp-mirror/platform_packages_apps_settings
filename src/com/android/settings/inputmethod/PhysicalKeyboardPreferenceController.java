@@ -22,6 +22,7 @@ import android.icu.text.ListFormatter;
 
 import androidx.preference.Preference;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment.HardKeyboardDeviceInfo;
@@ -33,7 +34,6 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class PhysicalKeyboardPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause,
@@ -54,13 +54,14 @@ public class PhysicalKeyboardPreferenceController extends AbstractPreferenceCont
 
     @Override
     public boolean isAvailable() {
-        return mContext.getResources().getBoolean(R.bool.config_show_physical_keyboard_pref);
+        return !getKeyboards().isEmpty()
+                && mContext.getResources().getBoolean(R.bool.config_show_physical_keyboard_pref);
     }
 
     @Override
     public void updateState(Preference preference) {
         mPreference = preference;
-        updateSummary();
+        updateEntry();
     }
 
     @Override
@@ -80,33 +81,42 @@ public class PhysicalKeyboardPreferenceController extends AbstractPreferenceCont
 
     @Override
     public void onInputDeviceAdded(int deviceId) {
-        updateSummary();
+        updateEntry();
     }
 
     @Override
     public void onInputDeviceRemoved(int deviceId) {
-        updateSummary();
+        updateEntry();
     }
 
     @Override
     public void onInputDeviceChanged(int deviceId) {
-        updateSummary();
+        updateEntry();
     }
 
-    private void updateSummary() {
+    private void updateEntry() {
         if (mPreference == null) {
             return;
         }
-        final List<HardKeyboardDeviceInfo> keyboards =
-                PhysicalKeyboardFragment.getHardKeyboards(mContext);
+        List<HardKeyboardDeviceInfo> keyboards = getKeyboards();
         if (keyboards.isEmpty()) {
-            mPreference.setSummary(R.string.keyboard_disconnected);
+            mPreference.setVisible(false);
             return;
         }
-        final List<String> summaries = new ArrayList<>();
+        updateSummary(keyboards);
+    }
+
+    private void updateSummary(List<HardKeyboardDeviceInfo> keyboards) {
+        mPreference.setVisible(true);
+        List<String> summaries = new ArrayList<>();
         for (HardKeyboardDeviceInfo info : keyboards) {
             summaries.add(info.mDeviceName);
         }
         mPreference.setSummary(ListFormatter.getInstance().format(summaries));
+    }
+
+    @VisibleForTesting
+    List<HardKeyboardDeviceInfo> getKeyboards() {
+        return PhysicalKeyboardFragment.getHardKeyboards(mContext);
     }
 }

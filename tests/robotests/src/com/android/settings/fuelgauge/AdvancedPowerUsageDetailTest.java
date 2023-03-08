@@ -20,9 +20,8 @@ import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENT
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
@@ -38,9 +37,9 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.InstallSourceInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
@@ -79,6 +78,8 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.concurrent.TimeUnit;
+
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowEntityHeaderController.class, ShadowActivityManager.class})
 public class AdvancedPowerUsageDetailTest {
@@ -116,11 +117,11 @@ public class AdvancedPowerUsageDetailTest {
     @Mock
     private PackageManager mPackageManager;
     @Mock
+    private InstallSourceInfo mInstallSourceInfo;
+    @Mock
     private AppOpsManager mAppOpsManager;
     @Mock
     private LoaderManager mLoaderManager;
-    @Mock
-    private BatteryUtils mBatteryUtils;
     @Mock
     private BatteryOptimizeUtils mBatteryOptimizeUtils;
     @Mock
@@ -179,7 +180,6 @@ public class AdvancedPowerUsageDetailTest {
 
         mFragment.mHeaderPreference = mHeaderPreference;
         mFragment.mState = mState;
-        mFragment.mBatteryUtils = new BatteryUtils(RuntimeEnvironment.application);
         mFragment.mBatteryOptimizeUtils = mBatteryOptimizeUtils;
         mFragment.mBackupManager = mBackupManager;
         mFragment.mLogStringBuilder = new StringBuilder();
@@ -189,10 +189,6 @@ public class AdvancedPowerUsageDetailTest {
         doReturn(mPackageManager).when(mTestActivity).getPackageManager();
         doReturn(mPackageManager).when(mActivity).getPackageManager();
         doReturn(mAppOpsManager).when(mTestActivity).getSystemService(Context.APP_OPS_SERVICE);
-
-        mBatteryUtils = spy(new BatteryUtils(mContext));
-        doReturn(FOREGROUND_SERVICE_TIME_US).when(mBatteryUtils).getForegroundServiceTotalTimeUs(
-                any(BatteryStats.Uid.class), anyLong());
 
         final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
 
@@ -757,34 +753,46 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void onPause_optimizationModeChanged_logPreference() {
+    public void onPause_optimizationModeChanged_logPreference()
+            throws PackageManager.NameNotFoundException, InterruptedException {
+        final String packageName = "testPackageName";
         final int mode = BatteryOptimizeUtils.MODE_RESTRICTED;
         mFragment.mOptimizationMode = mode;
         when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(mode);
+        when(mBatteryOptimizeUtils.getPackageName()).thenReturn(packageName);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mPackageManager.getInstallSourceInfo(anyString())).thenReturn(mInstallSourceInfo);
+        when(mInstallSourceInfo.getInitiatingPackageName()).thenReturn("com.android.vending");
         mOptimizePreference.setKey(KEY_PREF_OPTIMIZED);
 
         mFragment.onRadioButtonClicked(mOptimizePreference);
         mFragment.onPause();
 
+        TimeUnit.SECONDS.sleep(100);
         verify(mMetricsFeatureProvider)
                 .action(
                         SettingsEnums.OPEN_APP_BATTERY_USAGE,
                         SettingsEnums.ACTION_APP_BATTERY_USAGE_OPTIMIZED,
                         SettingsEnums.OPEN_APP_BATTERY_USAGE,
-                        /* package name*/ "none",
+                        packageName,
                         /* consumed battery */ 0);
     }
 
     @Test
-    public void onPause_optimizationModeIsNotChanged_notInvokeLogging() {
+    public void onPause_optimizationModeIsNotChanged_notInvokeLogging()
+            throws PackageManager.NameNotFoundException, InterruptedException {
         final int mode = BatteryOptimizeUtils.MODE_OPTIMIZED;
         mFragment.mOptimizationMode = mode;
         when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(mode);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mPackageManager.getInstallSourceInfo(anyString())).thenReturn(mInstallSourceInfo);
+        when(mInstallSourceInfo.getInitiatingPackageName()).thenReturn("com.android.vending");
         mOptimizePreference.setKey(KEY_PREF_OPTIMIZED);
 
         mFragment.onRadioButtonClicked(mOptimizePreference);
         mFragment.onPause();
 
+        TimeUnit.SECONDS.sleep(100);
         verifyNoInteractions(mMetricsFeatureProvider);
     }
 

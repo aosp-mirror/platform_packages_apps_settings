@@ -56,7 +56,9 @@ public class ClonedAppsPreferenceController extends BasePreferenceController
     @Override
     public int getAvailabilityStatus() {
         return DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_APP_CLONING,
-                PROPERTY_CLONED_APPS_ENABLED, false) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+                PROPERTY_CLONED_APPS_ENABLED, false)
+                && mContext.getResources().getBoolean(R.bool.config_cloned_apps_page_enabled)
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

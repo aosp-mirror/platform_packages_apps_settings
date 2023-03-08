@@ -28,8 +28,10 @@ import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
 import android.app.Activity;
 import android.app.KeyguardManager;
+import android.app.StartLockscreenValidationRequest;
 import android.app.admin.DevicePolicyManager;
 import android.app.trust.TrustManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -97,7 +99,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     private boolean mCheckDevicePolicyManager;
 
     private String mTitle;
-    private String mDetails;
+    private CharSequence mDetails;
     private int mUserId;
     private int mCredentialMode;
     private boolean mGoingToBackground;
@@ -178,10 +180,12 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         mCheckDevicePolicyManager = intent
                 .getBooleanExtra(KeyguardManager.EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS, false);
         mTitle = intent.getStringExtra(KeyguardManager.EXTRA_TITLE);
-        mDetails = intent.getStringExtra(KeyguardManager.EXTRA_DESCRIPTION);
+        mDetails = intent.getCharSequenceExtra(KeyguardManager.EXTRA_DESCRIPTION);
         String alternateButton = intent.getStringExtra(
                 KeyguardManager.EXTRA_ALTERNATE_BUTTON_LABEL);
         boolean frp = KeyguardManager.ACTION_CONFIRM_FRP_CREDENTIAL.equals(intent.getAction());
+        boolean remoteValidation =
+                KeyguardManager.ACTION_CONFIRM_REMOTE_DEVICE_CREDENTIAL.equals(intent.getAction());
 
         mUserId = UserHandle.myUserId();
         if (isInternalActivity()) {
@@ -212,7 +216,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     getTitleFromCredentialType(credentialType, isEffectiveUserManagedProfile));
         }
         if (mDetails == null) {
-            promptInfo.setSubtitle(
+            promptInfo.setDeviceCredentialSubtitle(
                     getDetailsFromCredentialType(credentialType, isEffectiveUserManagedProfile));
         }
 
@@ -229,6 +233,28 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     .setAlternateButton(alternateButton)
                     .setExternal(true)
                     .setUserId(LockPatternUtils.USER_FRP)
+                    .show();
+        } else if (remoteValidation) {
+            StartLockscreenValidationRequest startLockScreenValidationRequest =
+                    intent.getParcelableExtra(
+                            KeyguardManager.EXTRA_START_LOCKSCREEN_VALIDATION_REQUEST,
+                            StartLockscreenValidationRequest.class);
+            ComponentName remoteLockscreenValidationServiceComponent =
+                    intent.getParcelableExtra(Intent.EXTRA_COMPONENT_NAME, ComponentName.class);
+
+            String checkboxLabel = intent.getStringExtra(KeyguardManager.EXTRA_CHECKBOX_LABEL);
+            final ChooseLockSettingsHelper.Builder builder =
+                    new ChooseLockSettingsHelper.Builder(this);
+            launchedCDC = builder
+                    .setRemoteLockscreenValidation(true)
+                    .setStartLockscreenValidationRequest(startLockScreenValidationRequest)
+                    .setRemoteLockscreenValidationServiceComponent(
+                            remoteLockscreenValidationServiceComponent)
+                    .setHeader(mTitle) // Show the title in the header location
+                    .setDescription(mDetails)
+                    .setCheckboxLabel(checkboxLabel)
+                    .setAlternateButton(alternateButton)
+                    .setExternal(true)
                     .show();
         } else if (isEffectiveUserManagedProfile && isInternalActivity()) {
             mCredentialMode = CREDENTIAL_MANAGED;

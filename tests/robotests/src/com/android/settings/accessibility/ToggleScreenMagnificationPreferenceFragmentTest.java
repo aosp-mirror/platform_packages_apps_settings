@@ -23,6 +23,7 @@ import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
@@ -173,6 +174,11 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         verify(mContentResolver).registerContentObserver(
                 eq(Settings.Secure.getUriFor(
                         Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED)),
+                eq(false),
+                any(AccessibilitySettingsContentObserver.class));
+        verify(mContentResolver).registerContentObserver(
+                eq(Settings.Secure.getUriFor(
+                        Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED)),
                 eq(false),
                 any(AccessibilitySettingsContentObserver.class));
     }
@@ -398,6 +404,17 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     @Test
     public void getHelpResource_returnsCorrectHelpResource() {
         assertThat(mFragment.getHelpResource()).isEqualTo(R.string.help_url_magnification);
+    }
+
+    @Test
+    public void onProcessArguments_defaultArgumentUnavailable_shouldSetDefaultArguments() {
+        Bundle arguments = new Bundle();
+
+        mFragment.onProcessArguments(arguments);
+
+        assertTrue(arguments.containsKey(AccessibilitySettings.EXTRA_PREFERENCE_KEY));
+        assertTrue(arguments.containsKey(AccessibilitySettings.EXTRA_INTRO));
+        assertTrue(arguments.containsKey(AccessibilitySettings.EXTRA_HTML_DESCRIPTION));
     }
 
     private void putStringIntoSettings(String key, String componentName) {

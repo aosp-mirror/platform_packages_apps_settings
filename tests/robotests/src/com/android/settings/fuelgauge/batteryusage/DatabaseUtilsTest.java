@@ -45,7 +45,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,8 +55,8 @@ public final class DatabaseUtilsTest {
 
     private Context mContext;
 
-    @Mock
-    private PackageManager mPackageManager;
+    @Mock private PackageManager mPackageManager;
+    @Mock private UserManager mUserManager;
     @Mock private ContentResolver mMockContentResolver;
     @Mock private ContentResolver mMockContentResolver2;
     @Mock private BatteryUsageStats mBatteryUsageStats;
@@ -85,14 +84,6 @@ public final class DatabaseUtilsTest {
     public void isWorkProfile_withManagedUser_returnTrue() {
         BatteryTestUtils.setWorkProfile(mContext);
         assertThat(DatabaseUtils.isWorkProfile(mContext)).isTrue();
-    }
-
-    @Test
-    public void isWorkProfile_withSystemUser_returnFalse() {
-        BatteryTestUtils.setWorkProfile(mContext);
-        Shadows.shadowOf(mContext.getSystemService(UserManager.class)).setIsSystemUser(true);
-
-        assertThat(DatabaseUtils.isWorkProfile(mContext)).isFalse();
     }
 
     @Test
@@ -391,7 +382,11 @@ public final class DatabaseUtilsTest {
         doReturn("com.fake.package").when(mContext).getPackageName();
         doReturn(mMockContext).when(mContext).createPackageContextAsUser(
                 "com.fake.package", /*flags=*/ 0, UserHandle.OWNER);
-        BatteryTestUtils.setWorkProfile(mContext);
+        doReturn(UserHandle.CURRENT).when(mContext).getUser();
+        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
+        doReturn(true).when(mUserManager).isManagedProfile();
+        doReturn(UserHandle.SYSTEM).when(mUserManager).getProfileParent(UserHandle.CURRENT);
+
         DatabaseUtils.sFakeBatteryStateSupplier = () -> getMatrixCursor();
 
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistMap =

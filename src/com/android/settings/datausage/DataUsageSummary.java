@@ -36,6 +36,7 @@ import com.android.settings.R;
 import com.android.settings.datausage.lib.DataUsageLib;
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -84,7 +85,8 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
         super.onCreate(icicle);
         Context context = getContext();
 
-        if (!isSimHardwareVisible(context)) {
+        if (!isSimHardwareVisible(context) ||
+            MobileNetworkUtils.isMobileNetworkUserRestricted(context)) {
             finish();
             return;
         }
@@ -145,7 +147,8 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final Activity activity = getActivity();
         final ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
-        if (!isSimHardwareVisible(context)) {
+        if (!isSimHardwareVisible(context) ||
+            MobileNetworkUtils.isMobileNetworkUserRestricted(context)) {
             return controllers;
         }
         mSummaryController =

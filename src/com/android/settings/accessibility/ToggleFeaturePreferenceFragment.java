@@ -122,7 +122,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     private int mNeedsQSTooltipType = QuickSettingsTooltipType.GUIDE_TO_EDIT;
     private boolean mSavedAccessibilityFloatingMenuEnabled;
     private ImageView mImageGetterCacheView;
-    private final Html.ImageGetter mImageGetter = (String str) -> {
+    protected final Html.ImageGetter mImageGetter = (String str) -> {
         if (str != null && str.startsWith(IMG_PREFIX)) {
             final String fileName = str.substring(IMG_PREFIX.length());
             return getDrawableFromUri(Uri.parse(
@@ -831,14 +831,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         if (mDialog == null || !mDialog.isShowing()) {
             return;
         }
-
-        // Content in software shortcut need to be adjusted depend on the accessibility button
-        // mode status which can be changed in background.
-        final boolean valueChanged = mSavedAccessibilityFloatingMenuEnabled
-                != AccessibilityUtil.isFloatingMenuEnabled(getContext());
-        if (valueChanged) {
-            AccessibilityDialogUtils.updateSoftwareShortcutInDialog(getContext(), mDialog);
-        }
+        AccessibilityDialogUtils.updateShortcutInDialog(getContext(), mDialog);
     }
 
     @VisibleForTesting

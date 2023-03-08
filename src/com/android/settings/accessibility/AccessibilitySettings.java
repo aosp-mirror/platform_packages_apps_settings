@@ -37,6 +37,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
+import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.AccessibilityServiceFragmentType;
@@ -360,7 +361,7 @@ public class AccessibilitySettings extends DashboardFragment {
         // ACCESSIBILITY_MENU_IN_SYSTEM is a default pre-bundled interaction control service.
         // If the device opts out of including this service then this is a no-op.
         mPreBundledServiceComponentToCategoryMap.put(
-                AccessibilityManager.ACCESSIBILITY_MENU_IN_SYSTEM,
+                AccessibilityUtils.ACCESSIBILITY_MENU_IN_SYSTEM,
                 mCategoryToPrefCategoryMap.get(CATEGORY_INTERACTION_CONTROL));
 
         final List<RestrictedPreference> preferenceList = getInstalledAccessibilityList(

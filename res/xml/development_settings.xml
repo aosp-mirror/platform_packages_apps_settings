@@ -45,8 +45,9 @@
             android:title="@string/capture_system_heap_dump_title" />
 
         <Preference
-            android:key="reboot_with_mte"
-            android:title="@string/reboot_with_mte_title" />
+            android:key="development_memtag_page"
+            android:title="@string/development_memtag_page_title"
+            android:fragment="com.android.settings.development.DevelopmentMemtagPage" />
 
         <Preference
             android:key="local_backup_password"
@@ -79,6 +80,26 @@
             android:dialogTitle="@string/bt_hci_snoop_log_summary"
             android:entries="@array/bt_hci_snoop_log_entries"
             android:entryValues="@array/bt_hci_snoop_log_values" />
+
+        <Preference
+            android:key="snoop_logger_filters_dashboard"
+            android:title="@string/bt_hci_snoop_log_filters_dashboard_title"
+            android:fragment=
+                "com.android.settings.development.snooplogger.SnoopLoggerFiltersDashboard" />
+
+        <ListPreference
+            android:key="bt_hci_snoop_log_filter_pbap"
+            android:title="@string/bt_hci_snoop_log_filter_pbap_title"
+            android:dialogTitle="@string/bt_hci_snoop_log_filter_summary"
+            android:entries="@array/bt_hci_snoop_log_profile_filter_entries"
+            android:entryValues="@array/bt_hci_snoop_log_profile_filter_values" />
+
+        <ListPreference
+            android:key="bt_hci_snoop_log_filter_map"
+            android:title="@string/bt_hci_snoop_log_filter_map_title"
+            android:dialogTitle="@string/bt_hci_snoop_log_filter_summary"
+            android:entries="@array/bt_hci_snoop_log_profile_filter_entries"
+            android:entryValues="@array/bt_hci_snoop_log_profile_filter_values" />
 
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="oem_unlock_enable"
@@ -325,6 +346,11 @@
             android:summary="@string/bluetooth_enable_leaudio_summary" />
 
         <SwitchPreference
+            android:key="bluetooth_enable_leaudio_allow_list"
+            android:title="@string/bluetooth_enable_leaudio_allow_list"
+            android:summary="@string/bluetooth_enable_leaudio_allow_list_summary" />
+
+        <SwitchPreference
             android:key="bluetooth_disable_le_audio_hw_offload"
             android:title="@string/bluetooth_disable_le_audio_hw_offload" />
 
@@ -483,6 +509,11 @@
             android:key="display_cutout_emulation"
             android:title="@string/display_cutout_emulation"
             settings:keywords="@string/display_cutout_emulation_keywords" />
+
+        <SwitchPreference
+            android:key="transparent_navigation_bar"
+            android:title="@string/transparent_navigation_bar"
+            android:summary="@string/transparent_navigation_bar_summary" />
 
     </PreferenceCategory>
 

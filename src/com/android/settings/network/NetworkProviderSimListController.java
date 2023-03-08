@@ -172,27 +172,10 @@ public class NetworkProviderSimListController extends AbstractPreferenceControll
     }
 
     @Override
-    public void onAirplaneModeChanged(boolean airplaneModeEnabled) {
-    }
-
-    @Override
     public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
         mSubInfoEntityList = subInfoEntityList;
         mPreferenceCategory.setVisible(isAvailable());
         update();
-    }
-
-    @Override
-    public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> activeSubInfoList) {
-    }
-
-    @Override
-    public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
-    }
-
-    @Override
-    public void onAllMobileNetworkInfoChanged(
-            List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
     }
 
     @Override

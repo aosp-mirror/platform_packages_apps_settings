@@ -27,6 +27,7 @@ import android.icu.util.MeasureUnit;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.method.NumberKeyListener;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,6 +47,7 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
@@ -53,6 +55,7 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.Optional;
 import java.util.TimeZone;
 
 @SearchIndexable
@@ -114,6 +117,18 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
 
         Bundle args = getArguments();
         mNetworkTemplate = args.getParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE);
+        if (mNetworkTemplate == null && getIntent() != null) {
+            mNetworkTemplate = getIntent().getParcelableExtra(Settings.EXTRA_NETWORK_TEMPLATE);
+        }
+
+        if (mNetworkTemplate == null) {
+            Optional<NetworkTemplate> mobileNetworkTemplateFromSim =
+                    DataUsageUtils.getMobileNetworkTemplateFromSubId(context, getIntent());
+            if (mobileNetworkTemplateFromSim.isPresent()) {
+                mNetworkTemplate = mobileNetworkTemplateFromSim.get();
+            }
+        }
+
         if (mNetworkTemplate == null) {
             mNetworkTemplate = DataUsageUtils.getDefaultTemplate(context,
                 DataUsageUtils.getDefaultSubscriptionId(context));
@@ -517,7 +532,8 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return SubscriptionUtil.isSimHardwareVisible(context)
+                    return (!MobileNetworkUtils.isMobileNetworkUserRestricted(context))
+                            && SubscriptionUtil.isSimHardwareVisible(context)
                             && DataUsageUtils.hasMobileData(context);
                 }
             };

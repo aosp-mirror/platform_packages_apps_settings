@@ -15,10 +15,12 @@
 -->
 <com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:icon="@drawable/ic_lock">
+    android:icon="@drawable/ic_lock"
+    app:sudUseBottomProgressBar="true">
 
     <com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
         android:id="@+id/topLayout"
@@ -60,6 +62,16 @@
                 android:layout_marginEnd="?attr/sudMarginEnd"
                 android:gravity="center_vertical"/>
 
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="?attr/sudMarginStart"
+                android:layout_marginEnd="?attr/sudMarginEnd"
+                android:layout_marginTop="12dp"
+                android:visibility="gone"
+                android:checked="true" />
+
             <Button
                 android:id="@+id/cancelButton"
                 style="@style/SudGlifButton.Secondary"
@@ -69,6 +81,19 @@
                 android:layout_marginEnd="?attr/sudMarginEnd"
                 android:layout_marginBottom="80dp"
                 android:text="@string/cancel" />
+
+            <Button
+                android:id="@+id/emergencyCallButton"
+                style="@style/WorkChallengeEmergencyButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="?attr/sudMarginStart"
+                android:layout_marginEnd="?attr/sudMarginEnd"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="14dp"
+                android:visibility="gone"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/work_challenge_emergency_button_text"/>
 
         </LinearLayout>
 

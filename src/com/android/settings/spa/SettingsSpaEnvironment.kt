@@ -31,16 +31,19 @@ import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListPro
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
 import com.android.settings.spa.app.specialaccess.SpecialAppAccessPageProvider
 import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
+import com.android.settings.spa.app.specialaccess.UseFullScreenIntentAppListProvider
+import com.android.settings.spa.core.instrumentation.SpaLogProvider
 import com.android.settings.spa.development.UsageStatsPageProvider
 import com.android.settings.spa.home.HomePageProvider
+import com.android.settings.spa.network.NetworkAndInternetPageProvider
 import com.android.settings.spa.notification.AppListNotificationsPageProvider
 import com.android.settings.spa.notification.NotificationMainPageProvider
 import com.android.settings.spa.system.AppLanguagesPageProvider
 import com.android.settings.spa.system.LanguageAndInputPageProvider
 import com.android.settings.spa.system.SystemMainPageProvider
-import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settingslib.spa.framework.common.SettingsPageProviderRepository
 import com.android.settingslib.spa.framework.common.SpaEnvironment
+import com.android.settingslib.spa.framework.common.createSettingsPage
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListProvider
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListTemplate
 
@@ -51,6 +54,7 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
             DisplayOverOtherAppsAppListProvider,
             MediaManagementAppsAppListProvider,
             ModifySystemSettingsAppListProvider,
+            UseFullScreenIntentAppListProvider,
             PictureInPictureListProvider,
             InstallUnknownAppsListProvider,
             AlarmsAndRemindersAppListProvider,
@@ -77,10 +81,12 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
                 UsageStatsPageProvider,
                 BackgroundInstalledAppsPageProvider,
                 CloneAppInfoSettingsProvider,
-            ) + togglePermissionAppListTemplate.createPageProviders(),
+                NetworkAndInternetPageProvider,
+                ) + togglePermissionAppListTemplate.createPageProviders(),
             rootPages = listOf(
-                SettingsPage.create(HomePageProvider.name),
+                HomePageProvider.createSettingsPage()
             ),
         )
     }
+    override val logger = SpaLogProvider
 }

@@ -37,6 +37,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -58,26 +59,10 @@ public class BatteryDiffDataTest {
 
     @Test
     public void needsCombineInSystemApp_isHidden_returnTrue() {
-        final int currentUserId = mContext.getUserId();
-        final BatteryHistEntry hiddenHistEntry = createBatteryHistEntry(
-                ConvertUtils.FAKE_PACKAGE_NAME, "fake_label", /*consumePower=*/ 0,
-                /*foregroundUsageConsumePower=*/ 0, /*foregroundServiceUsageConsumePower=*/ 0,
-                /*backgroundUsageConsumePower=*/ 0, /*cachedUsageConsumePower=*/ 0,
-                /*uid=*/ 0L, currentUserId, ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
-                /*foregroundUsageTimeInMs=*/ 0L,  /*backgroundUsageTimeInMs=*/ 0L, true);
-        final BatteryDiffEntry hiddenDiffEntry = new BatteryDiffEntry(
-                mContext,
-                /*foregroundUsageTimeInMs=*/ 0,
-                /*backgroundUsageTimeInMs=*/ 0,
-                /*screenOnTimeInMs=*/ 0,
-                /*consumePower=*/ 0,
-                /*foregroundUsageConsumePower=*/ 0,
-                /*foregroundServiceUsageConsumePower=*/ 0,
-                /*backgroundUsageConsumePower=*/ 0,
-                /*cachedUsageConsumePower=*/ 0,
-                hiddenHistEntry);
+        final BatteryDiffEntry hiddenDiffEntry =
+                createBatteryDiffEntry(mContext, /*consumePower=*/ 0, /*isHidden=*/ true);
 
-        boolean needsCombineInSystemApp = BatteryDiffData.needsCombineInSystemApp(
+        final boolean needsCombineInSystemApp = BatteryDiffData.needsCombineInSystemApp(
                 hiddenDiffEntry, List.of(), Set.of());
 
         assertThat(needsCombineInSystemApp).isTrue();
@@ -85,29 +70,13 @@ public class BatteryDiffDataTest {
 
     @Test
     public void needsCombineInSystemApp_isSystemApp_returnTrue() {
-        final int currentUserId = mContext.getUserId();
-        final BatteryHistEntry batteryHistEntry = createBatteryHistEntry(
-                ConvertUtils.FAKE_PACKAGE_NAME, "fake_label", /*consumePower=*/ 0,
-                /*foregroundUsageConsumePower=*/ 0, /*foregroundServiceUsageConsumePower=*/ 0,
-                /*backgroundUsageConsumePower=*/ 0, /*cachedUsageConsumePower=*/ 0,
-                /*uid=*/ 0L, currentUserId, ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
-                /*foregroundUsageTimeInMs=*/ 0L,  /*backgroundUsageTimeInMs=*/ 0L, false);
-        final BatteryDiffEntry batteryDiffEntry = new BatteryDiffEntry(
-                mContext,
-                /*foregroundUsageTimeInMs=*/ 0,
-                /*backgroundUsageTimeInMs=*/ 0,
-                /*screenOnTimeInMs=*/ 0,
-                /*consumePower=*/ 0,
-                /*foregroundUsageConsumePower=*/ 0,
-                /*foregroundServiceUsageConsumePower=*/ 0,
-                /*backgroundUsageConsumePower=*/ 0,
-                /*cachedUsageConsumePower=*/ 0,
-                batteryHistEntry);
+        final BatteryDiffEntry batteryDiffEntry =
+                createBatteryDiffEntry(mContext, /*consumePower=*/ 0, /*isHidden=*/ false);
         doReturn(mAppEntry).when(mApplicationsState).getEntry(anyString(), anyInt());
         mAppEntry.info = mApplicationInfo;
         mApplicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
 
-        boolean needsCombineInSystemApp = BatteryDiffData.needsCombineInSystemApp(
+        final boolean needsCombineInSystemApp = BatteryDiffData.needsCombineInSystemApp(
                 batteryDiffEntry, List.of(), Set.of(ConvertUtils.FAKE_PACKAGE_NAME));
 
         assertThat(needsCombineInSystemApp).isTrue();
@@ -115,32 +84,78 @@ public class BatteryDiffDataTest {
 
     @Test
     public void needsCombineInSystemApp_notSystemApp_returnFalse() {
-        final int currentUserId = mContext.getUserId();
+        final BatteryDiffEntry batteryDiffEntry =
+                createBatteryDiffEntry(mContext, /*consumePower=*/ 0, /*isHidden=*/ false);
+        doReturn(mAppEntry).when(mApplicationsState).getEntry(anyString(), anyInt());
+        mAppEntry.info = mApplicationInfo;
+        mApplicationInfo.flags = 0;
+
+        final boolean needsCombineInSystemApp = BatteryDiffData.needsCombineInSystemApp(
+                batteryDiffEntry, List.of(), Set.of());
+
+        assertThat(needsCombineInSystemApp).isFalse();
+    }
+
+    @Test
+    public void processPercentsAndSort_sumLessThan100_adjustTo100() {
+        List<BatteryDiffEntry> batteryDiffEntries = new ArrayList<>();
+        batteryDiffEntries.add(
+                createBatteryDiffEntry(mContext, /*consumePower=*/ 33.33, /*isHidden=*/ false));
+        batteryDiffEntries.add(
+                createBatteryDiffEntry(mContext, /*consumePower=*/ 33.34, /*isHidden=*/ false));
+        batteryDiffEntries.add(
+                createBatteryDiffEntry(mContext, /*consumePower=*/ 33.33, /*isHidden=*/ false));
+
+        BatteryDiffData.processAndSortEntries(batteryDiffEntries);
+
+        assertThat(batteryDiffEntries.get(0).getPercentage()).isEqualTo(33.34);
+        assertThat(batteryDiffEntries.get(0).getAdjustPercentageOffset()).isEqualTo(1);
+        assertThat(batteryDiffEntries.get(1).getPercentage()).isEqualTo(33.33);
+        assertThat(batteryDiffEntries.get(1).getAdjustPercentageOffset()).isEqualTo(0);
+        assertThat(batteryDiffEntries.get(2).getPercentage()).isEqualTo(33.33);
+        assertThat(batteryDiffEntries.get(2).getAdjustPercentageOffset()).isEqualTo(0);
+    }
+
+    @Test
+    public void processPercentsAndSort_sumGreaterThan100_adjustTo100() {
+        List<BatteryDiffEntry> batteryDiffEntries = new ArrayList<>();
+        batteryDiffEntries.add(
+                createBatteryDiffEntry(mContext, /*consumePower=*/ 48.5, /*isHidden=*/ false));
+        batteryDiffEntries.add(
+                createBatteryDiffEntry(mContext, /*consumePower=*/ 3, /*isHidden=*/ false));
+        batteryDiffEntries.add(
+                createBatteryDiffEntry(mContext, /*consumePower=*/ 48.5, /*isHidden=*/ false));
+
+        BatteryDiffData.processAndSortEntries(batteryDiffEntries);
+
+        assertThat(batteryDiffEntries.get(0).getPercentage()).isEqualTo(48.5);
+        assertThat(batteryDiffEntries.get(0).getAdjustPercentageOffset()).isEqualTo(0);
+        assertThat(batteryDiffEntries.get(1).getPercentage()).isEqualTo(48.5);
+        assertThat(batteryDiffEntries.get(1).getAdjustPercentageOffset()).isEqualTo(-1);
+        assertThat(batteryDiffEntries.get(2).getPercentage()).isEqualTo(3);
+        assertThat(batteryDiffEntries.get(2).getAdjustPercentageOffset()).isEqualTo(0);
+    }
+
+    private static BatteryDiffEntry createBatteryDiffEntry(
+            Context context, double consumePower, boolean isHidden) {
+        final int currentUserId = context.getUserId();
         final BatteryHistEntry batteryHistEntry = createBatteryHistEntry(
-                ConvertUtils.FAKE_PACKAGE_NAME, "fake_label", /*consumePower=*/ 0,
+                ConvertUtils.FAKE_PACKAGE_NAME, "fake_label", consumePower,
                 /*foregroundUsageConsumePower=*/ 0, /*foregroundServiceUsageConsumePower=*/ 0,
                 /*backgroundUsageConsumePower=*/ 0, /*cachedUsageConsumePower=*/ 0,
                 /*uid=*/ 0L, currentUserId, ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
-                /*foregroundUsageTimeInMs=*/ 0L,  /*backgroundUsageTimeInMs=*/ 0L, false);
-        final BatteryDiffEntry batteryDiffEntry = new BatteryDiffEntry(
-                mContext,
+                /*foregroundUsageTimeInMs=*/ 0L,  /*backgroundUsageTimeInMs=*/ 0L, isHidden);
+        return new BatteryDiffEntry(
+                context,
                 /*foregroundUsageTimeInMs=*/ 0,
                 /*backgroundUsageTimeInMs=*/ 0,
                 /*screenOnTimeInMs=*/ 0,
-                /*consumePower=*/ 0,
+                /*consumePower=*/ consumePower,
                 /*foregroundUsageConsumePower=*/ 0,
                 /*foregroundServiceUsageConsumePower=*/ 0,
                 /*backgroundUsageConsumePower=*/ 0,
                 /*cachedUsageConsumePower=*/ 0,
                 batteryHistEntry);
-        doReturn(mAppEntry).when(mApplicationsState).getEntry(anyString(), anyInt());
-        mAppEntry.info = mApplicationInfo;
-        mApplicationInfo.flags = 0;
-
-        boolean needsCombineInSystemApp = BatteryDiffData.needsCombineInSystemApp(
-                batteryDiffEntry, List.of(), Set.of());
-
-        assertThat(needsCombineInSystemApp).isFalse();
     }
 
     private static BatteryHistEntry createBatteryHistEntry(

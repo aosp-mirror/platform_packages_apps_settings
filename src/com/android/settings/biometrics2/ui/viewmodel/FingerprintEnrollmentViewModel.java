@@ -16,15 +16,13 @@
 
 package com.android.settings.biometrics2.ui.viewmodel;
 
-import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY;
-import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
-import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_SKIP;
-import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_TIMEOUT;
+import static com.android.settings.biometrics.fingerprint.FingerprintEnrollFinish.FINGERPRINT_SUGGESTION_ACTIVITY;
 import static com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollIntroduction.EXTRA_FINGERPRINT_ENROLLED_COUNT;
 
 import android.app.Application;
-import android.app.KeyguardManager;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -39,7 +37,6 @@ import androidx.lifecycle.MutableLiveData;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics2.data.repository.FingerprintRepository;
 import com.android.settings.biometrics2.ui.model.EnrollmentRequest;
-import com.android.settings.password.SetupSkipDialog;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -53,21 +50,22 @@ public class FingerprintEnrollmentViewModel extends AndroidViewModel {
     @VisibleForTesting
     static final String SAVED_STATE_IS_WAITING_ACTIVITY_RESULT = "is_waiting_activity_result";
 
+    @VisibleForTesting
+    static final String SAVED_STATE_IS_NEW_FINGERPRINT_ADDED = "is_new_fingerprint_added";
+
     @NonNull private final FingerprintRepository mFingerprintRepository;
-    @Nullable private final KeyguardManager mKeyguardManager;
 
     private final AtomicBoolean mIsWaitingActivityResult = new AtomicBoolean(false);
     private final MutableLiveData<ActivityResult> mSetResultLiveData = new MutableLiveData<>();
     @NonNull private final EnrollmentRequest mRequest;
+    private boolean mIsNewFingerprintAdded = false;
 
     public FingerprintEnrollmentViewModel(
             @NonNull Application application,
             @NonNull FingerprintRepository fingerprintRepository,
-            @Nullable KeyguardManager keyguardManager,
             @NonNull EnrollmentRequest request) {
         super(application);
         mFingerprintRepository = fingerprintRepository;
-        mKeyguardManager = keyguardManager;
         mRequest = request;
     }
 
@@ -80,41 +78,31 @@ public class FingerprintEnrollmentViewModel extends AndroidViewModel {
     }
 
     /**
-     * Copy necessary extra data from activity intent
+     * Get override activity result as current ViewModel status.
+     *
+     * FingerprintEnrollmentActivity supports user enrolls 2nd fingerprint or starts a new flow
+     * through Deferred-SUW, Portal-SUW, or SUW Suggestion. Use a method to get override activity
+     * result instead of putting these if-else on every setResult(), .
      */
     @NonNull
-    public Bundle getNextActivityBaseIntentExtras() {
-        final Bundle bundle = mRequest.getSuwExtras();
-        bundle.putBoolean(EXTRA_FROM_SETTINGS_SUMMARY, mRequest.isFromSettingsSummery());
-        return bundle;
-    }
+    public ActivityResult getOverrideActivityResult(@NonNull ActivityResult result,
+            @Nullable Bundle generatingChallengeExtras) {
+        // TODO write tests
+        final int newResultCode = mIsNewFingerprintAdded
+                ? BiometricEnrollBase.RESULT_FINISHED
+                : (mRequest.isAfterSuwOrSuwSuggestedAction()
+                        ? BiometricEnrollBase.RESULT_CANCELED
+                        : result.getResultCode());
 
-    /**
-     * Handle activity result from FingerprintFindSensor
-     */
-    public void onContinueEnrollActivityResult(@NonNull ActivityResult result, int userId) {
-        if (!mIsWaitingActivityResult.compareAndSet(true, false)) {
-            Log.w(TAG, "fail to reset isWaiting flag for enrollment");
-        }
-        if (result.getResultCode() == RESULT_FINISHED
-                || result.getResultCode() == RESULT_TIMEOUT) {
-            Intent data = result.getData();
-            if (mRequest.isSuw() && isKeyguardSecure()
-                    && result.getResultCode() == RESULT_FINISHED) {
-                if (data == null) {
-                    data = new Intent();
-                }
-                data.putExtras(getSuwFingerprintCountExtra(userId));
+        Intent newData = result.getData();
+        if (newResultCode == BiometricEnrollBase.RESULT_FINISHED
+                && generatingChallengeExtras != null) {
+            if (newData == null) {
+                newData = new Intent();
             }
-            mSetResultLiveData.postValue(new ActivityResult(result.getResultCode(), data));
-        } else if (result.getResultCode() == RESULT_SKIP
-                || result.getResultCode() == SetupSkipDialog.RESULT_SKIP) {
-            mSetResultLiveData.postValue(result);
+            newData.putExtras(generatingChallengeExtras);
         }
-    }
-
-    private boolean isKeyguardSecure() {
-        return mKeyguardManager != null && mKeyguardManager.isKeyguardSecure();
+        return new ActivityResult(newResultCode, newData);
     }
 
     /**
@@ -130,11 +118,15 @@ public class FingerprintEnrollmentViewModel extends AndroidViewModel {
             return;
         }
 
-        mSetResultLiveData.postValue(new ActivityResult(BiometricEnrollBase.RESULT_TIMEOUT, null));
+        mSetResultLiveData.postValue(
+                new ActivityResult(BiometricEnrollBase.RESULT_TIMEOUT, null));
     }
 
+    /**
+     * Get Suw fingerprint count extra for statistics
+     */
     @NonNull
-    private Bundle getSuwFingerprintCountExtra(int userId) {
+    public Bundle getSuwFingerprintCountExtra(int userId) {
         final Bundle bundle = new Bundle();
         bundle.putInt(EXTRA_FINGERPRINT_ENROLLED_COUNT,
                 mFingerprintRepository.getNumOfEnrolledFingerprintsSize(userId));
@@ -161,6 +153,8 @@ public class FingerprintEnrollmentViewModel extends AndroidViewModel {
         mIsWaitingActivityResult.set(
                 savedInstanceState.getBoolean(SAVED_STATE_IS_WAITING_ACTIVITY_RESULT, false)
         );
+        mIsNewFingerprintAdded = savedInstanceState.getBoolean(
+                SAVED_STATE_IS_NEW_FINGERPRINT_ADDED, false);
     }
 
     /**
@@ -168,6 +162,7 @@ public class FingerprintEnrollmentViewModel extends AndroidViewModel {
      */
     public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putBoolean(SAVED_STATE_IS_WAITING_ACTIVITY_RESULT, mIsWaitingActivityResult.get());
+        outState.putBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED, mIsNewFingerprintAdded);
     }
 
     /**
@@ -182,5 +177,32 @@ public class FingerprintEnrollmentViewModel extends AndroidViewModel {
      */
     public boolean canAssumeSfps() {
         return mFingerprintRepository.canAssumeSfps();
+    }
+
+    /**
+     * Sets mIsNewFingerprintAdded to true
+     */
+    public void setIsNewFingerprintAdded() {
+        mIsNewFingerprintAdded = true;
+    }
+
+    /**
+     * Update FINGERPRINT_SUGGESTION_ACTIVITY into package manager
+     */
+    public void updateFingerprintSuggestionEnableState(int userId) {
+        final int enrolled = mFingerprintRepository.getNumOfEnrolledFingerprintsSize(userId);
+
+        // Only show "Add another fingerprint" if the user already enrolled one.
+        // "Add fingerprint" will be shown in the main flow if the user hasn't enrolled any
+        // fingerprints. If the user already added more than one fingerprint, they already know
+        // to add multiple fingerprints so we don't show the suggestion.
+        final int flag = (enrolled == 1) ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+                : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
+
+        ComponentName componentName = new ComponentName(getApplication(),
+                FINGERPRINT_SUGGESTION_ACTIVITY);
+        getApplication().getPackageManager().setComponentEnabledSetting(componentName, flag,
+                PackageManager.DONT_KILL_APP);
+        Log.d(TAG, FINGERPRINT_SUGGESTION_ACTIVITY + " enabled state = " + (enrolled == 1));
     }
 }

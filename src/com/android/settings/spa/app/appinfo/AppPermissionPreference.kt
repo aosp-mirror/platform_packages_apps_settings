@@ -27,6 +27,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.LiveData
 import com.android.settings.R
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
@@ -36,13 +37,17 @@ private const val TAG = "AppPermissionPreference"
 private const val EXTRA_HIDE_INFO_BUTTON = "hideInfoButton"
 
 @Composable
-fun AppPermissionPreference(app: ApplicationInfo) {
+fun AppPermissionPreference(
+    app: ApplicationInfo,
+    summaryLiveData: LiveData<AppPermissionSummaryState> = rememberAppPermissionSummary(app),
+) {
     val context = LocalContext.current
-    val summaryLiveData = remember { AppPermissionSummaryLiveData(context, app) }
-    val summaryState = summaryLiveData.observeAsState(initial = AppPermissionSummaryState(
-        summary = stringResource(R.string.summary_placeholder),
-        enabled = false,
-    ))
+    val summaryState = summaryLiveData.observeAsState(
+        initial = AppPermissionSummaryState(
+            summary = stringResource(R.string.summary_placeholder),
+            enabled = false,
+        )
+    )
     Preference(
         model = remember {
             object : PreferenceModel {

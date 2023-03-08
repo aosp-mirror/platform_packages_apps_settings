@@ -83,7 +83,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         AdbClearKeysDialogHost, LogPersistDialogHost,
         BluetoothRebootDialog.OnRebootDialogListener,
         AbstractBluetoothPreferenceController.Callback,
-        NfcRebootDialog.OnNfcRebootDialogConfirmedListener {
+        NfcRebootDialog.OnNfcRebootDialogConfirmedListener, BluetoothSnoopLogHost {
 
     private static final String TAG = "DevSettingsDashboard";
 
@@ -389,6 +389,11 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 getDevelopmentOptionsController(
                         BluetoothLeAudioPreferenceController.class);
         leAudioFeatureController.onRebootDialogConfirmed();
+
+        final BluetoothLeAudioAllowListPreferenceController leAudioAllowListController =
+                getDevelopmentOptionsController(
+                    BluetoothLeAudioAllowListPreferenceController.class);
+        leAudioAllowListController.onRebootDialogConfirmed();
     }
 
     @Override
@@ -406,6 +411,11 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 getDevelopmentOptionsController(
                         BluetoothLeAudioPreferenceController.class);
         leAudioFeatureController.onRebootDialogCanceled();
+
+        final BluetoothLeAudioAllowListPreferenceController leAudioAllowListController =
+                getDevelopmentOptionsController(
+                    BluetoothLeAudioAllowListPreferenceController.class);
+        leAudioAllowListController.onRebootDialogCanceled();
     }
 
     @Override
@@ -428,6 +438,18 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         final NfcVerboseVendorLogPreferenceController vendorLogController =
                 getDevelopmentOptionsController(NfcVerboseVendorLogPreferenceController.class);
         vendorLogController.onNfcRebootDialogCanceled();
+    }
+
+    @Override
+    public void onSettingChanged() {
+        final BluetoothSnoopLogFilterProfileMapPreferenceController controllerMap =
+                getDevelopmentOptionsController(
+                        BluetoothSnoopLogFilterProfileMapPreferenceController.class);
+        final BluetoothSnoopLogFilterProfilePbapPreferenceController controllerPbap =
+                getDevelopmentOptionsController(
+                        BluetoothSnoopLogFilterProfilePbapPreferenceController.class);
+        controllerMap.onSettingChanged();
+        controllerPbap.onSettingChanged();
     }
 
     @Override
@@ -544,11 +566,15 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BugReportPreferenceController(context));
         controllers.add(new BugReportHandlerPreferenceController(context));
         controllers.add(new SystemServerHeapDumpPreferenceController(context));
-        controllers.add(new RebootWithMtePreferenceController(context, fragment));
+        controllers.add(new DevelopmentMemtagPagePreferenceController(context, fragment));
         controllers.add(new LocalBackupPasswordPreferenceController(context));
         controllers.add(new StayAwakePreferenceController(context, lifecycle));
         controllers.add(new HdcpCheckingPreferenceController(context));
-        controllers.add(new BluetoothSnoopLogPreferenceController(context));
+        controllers.add(new BluetoothSnoopLogPreferenceController(context, fragment));
+        controllers.add(new DefaultLaunchPreferenceController(context,
+                "snoop_logger_filters_dashboard"));
+        controllers.add(new BluetoothSnoopLogFilterProfilePbapPreferenceController(context));
+        controllers.add(new BluetoothSnoopLogFilterProfileMapPreferenceController(context));
         controllers.add(new OemUnlockPreferenceController(context, activity, fragment));
         controllers.add(new PictureColorModePreferenceController(context, lifecycle));
         controllers.add(new WebViewAppPreferenceController(context));
@@ -586,6 +612,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothAvrcpVersionPreferenceController(context));
         controllers.add(new BluetoothMapVersionPreferenceController(context));
         controllers.add(new BluetoothLeAudioPreferenceController(context, fragment));
+        controllers.add(new BluetoothLeAudioAllowListPreferenceController(context, fragment));
         controllers.add(new BluetoothA2dpHwOffloadPreferenceController(context, fragment));
         controllers.add(new BluetoothLeAudioHwOffloadPreferenceController(context, fragment));
         controllers.add(new BluetoothMaxConnectedAudioDevicesPreferenceController(context));
@@ -600,6 +627,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new RtlLayoutPreferenceController(context));
         controllers.add(new WindowAnimationScalePreferenceController(context));
         controllers.add(new EmulateDisplayCutoutPreferenceController(context));
+        controllers.add(new TransparentNavigationBarPreferenceController(context));
         controllers.add(new TransitionAnimationScalePreferenceController(context));
         controllers.add(new AnimatorDurationScalePreferenceController(context));
         controllers.add(new SecondaryDisplayPreferenceController(context));

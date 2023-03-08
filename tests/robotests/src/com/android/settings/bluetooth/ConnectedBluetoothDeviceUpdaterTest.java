@@ -97,7 +97,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
         when(mCachedBluetoothDevice.getDrawableWithDescription()).thenReturn(pairs);
         mShadowCachedBluetoothDeviceManager.setCachedDevicesCopy(mCachedDevices);
         mBluetoothDeviceUpdater = spy(new ConnectedBluetoothDeviceUpdater(mContext,
-                mDashboardFragment, mDevicePreferenceCallback));
+                mDevicePreferenceCallback, /* metricsCategory= */ 0));
         mBluetoothDeviceUpdater.setPrefContext(mContext);
         doNothing().when(mBluetoothDeviceUpdater).addPreference(any());
         doNothing().when(mBluetoothDeviceUpdater).removePreference(any());

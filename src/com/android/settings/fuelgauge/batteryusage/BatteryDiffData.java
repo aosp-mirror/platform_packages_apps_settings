@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge.batteryusage;
 
 import android.content.Context;
+import android.os.BatteryConsumer;
 
 import androidx.annotation.NonNull;
 
@@ -31,6 +32,8 @@ import java.util.Set;
 
 /** Wraps the battery usage diff data for each entry used for battery usage app list. */
 public class BatteryDiffData {
+    static final double SMALL_PERCENTAGE_THRESHOLD = 1f;
+
     private final List<BatteryDiffEntry> mAppEntries;
     private final List<BatteryDiffEntry> mSystemEntries;
 
@@ -51,8 +54,8 @@ public class BatteryDiffData {
             combineBatteryDiffEntry(context, featureProvider, systemAppsSet);
         }
 
-        setTotalConsumePower();
-        sortEntries();
+        processAndSortEntries(mAppEntries);
+        processAndSortEntries(mSystemEntries);
     }
 
     public List<BatteryDiffEntry> getAppDiffEntryList() {
@@ -76,21 +79,11 @@ public class BatteryDiffData {
         combineSystemItemsIntoOthers(context, featureProvider, mSystemEntries);
     }
 
-    /** Sets total consume power for app and system entries separately. */
-    private void setTotalConsumePower() {
-        setTotalConsumePowerForAllEntries(mAppEntries);
-        setTotalConsumePowerForAllEntries(mSystemEntries);
-    }
-
-    /** Sorts entries based on consumed percentage. */
-    private void sortEntries() {
-        Collections.sort(mAppEntries, BatteryDiffEntry.COMPARATOR);
-        Collections.sort(mSystemEntries, BatteryDiffEntry.COMPARATOR);
-    }
-
     private static void purgeBatteryDiffData(
             final PowerUsageFeatureProvider featureProvider,
             final List<BatteryDiffEntry> entries) {
+        final double screenOnTimeThresholdInMs =
+                featureProvider.getBatteryUsageListScreenOnTimeThresholdInMs();
         final double consumePowerThreshold =
                 featureProvider.getBatteryUsageListConsumePowerThreshold();
         final Set<Integer> hideSystemComponentSet = featureProvider.getHideSystemComponentSet();
@@ -100,10 +93,12 @@ public class BatteryDiffData {
         final Iterator<BatteryDiffEntry> iterator = entries.iterator();
         while (iterator.hasNext()) {
             final BatteryDiffEntry entry = iterator.next();
+            final long screenOnTimeInMs = entry.mScreenOnTimeInMs;
             final double comsumePower = entry.mConsumePower;
             final String packageName = entry.getPackageName();
             final Integer componentId = entry.mBatteryHistEntry.mDrainType;
-            if (comsumePower < consumePowerThreshold
+            if ((screenOnTimeInMs < screenOnTimeThresholdInMs
+                    && comsumePower < consumePowerThreshold)
                     || ConvertUtils.FAKE_PACKAGE_NAME.equals(packageName)
                     || hideSystemComponentSet.contains(componentId)
                     || (packageName != null && hideApplicationSet.contains(packageName))) {
@@ -147,11 +142,17 @@ public class BatteryDiffData {
             final PowerUsageFeatureProvider featureProvider,
             final List<BatteryDiffEntry> systemEntries) {
         final Set<Integer> othersSystemComponentSet = featureProvider.getOthersSystemComponentSet();
+        final Set<String> othersCustomComponentNameSet =
+                featureProvider.getOthersCustomComponentNameSet();
         BatteryDiffEntry.OthersBatteryDiffEntry othersDiffEntry = null;
         final Iterator<BatteryDiffEntry> systemListIterator = systemEntries.iterator();
         while (systemListIterator.hasNext()) {
             final BatteryDiffEntry batteryDiffEntry = systemListIterator.next();
-            if (othersSystemComponentSet.contains(batteryDiffEntry.mBatteryHistEntry.mDrainType)) {
+            final int componentId = batteryDiffEntry.mBatteryHistEntry.mDrainType;
+            if (othersSystemComponentSet.contains(componentId) || (
+                    componentId >= BatteryConsumer.FIRST_CUSTOM_POWER_COMPONENT_ID
+                            && othersCustomComponentNameSet.contains(
+                                    batteryDiffEntry.getAppLabel()))) {
                 if (othersDiffEntry == null) {
                     othersDiffEntry = new BatteryDiffEntry.OthersBatteryDiffEntry(context);
                 }
@@ -163,18 +164,6 @@ public class BatteryDiffData {
         }
         if (othersDiffEntry != null) {
             systemEntries.add(othersDiffEntry);
-        }
-    }
-
-    // Sets total consume power for each entry.
-    private static void setTotalConsumePowerForAllEntries(
-            final List<BatteryDiffEntry> batteryDiffEntries) {
-        double totalConsumePower = 0.0;
-        for (BatteryDiffEntry batteryDiffEntry : batteryDiffEntries) {
-            totalConsumePower += batteryDiffEntry.mConsumePower;
-        }
-        for (BatteryDiffEntry batteryDiffEntry : batteryDiffEntries) {
-            batteryDiffEntry.setTotalConsumePower(totalConsumePower);
         }
     }
 
@@ -195,5 +184,52 @@ public class BatteryDiffData {
         }
 
         return systemAppsSet != null && systemAppsSet.contains(packageName);
+    }
+
+    /**
+     * Sets total consume power, and adjusts the percentages to ensure the total round percentage
+     * could be 100%, and then sorts entries based on the sorting key.
+     */
+    @VisibleForTesting
+    static void processAndSortEntries(final List<BatteryDiffEntry> batteryDiffEntries) {
+        if (batteryDiffEntries.isEmpty()) {
+            return;
+        }
+
+        // Sets total consume power.
+        double totalConsumePower = 0.0;
+        for (BatteryDiffEntry batteryDiffEntry : batteryDiffEntries) {
+            totalConsumePower += batteryDiffEntry.mConsumePower;
+        }
+        for (BatteryDiffEntry batteryDiffEntry : batteryDiffEntries) {
+            batteryDiffEntry.setTotalConsumePower(totalConsumePower);
+        }
+
+        // Adjusts percentages to show.
+        // The lower bound is treating all the small percentages as 0.
+        // The upper bound is treating all the small percentages as 1.
+        int totalLowerBound = 0;
+        int totalUpperBound = 0;
+        for (BatteryDiffEntry entry : batteryDiffEntries) {
+            if (entry.getPercentage() < SMALL_PERCENTAGE_THRESHOLD) {
+                totalUpperBound += 1;
+            } else {
+                int roundPercentage = Math.round((float) entry.getPercentage());
+                totalLowerBound += roundPercentage;
+                totalUpperBound += roundPercentage;
+            }
+        }
+        if (totalLowerBound > 100 || totalUpperBound < 100) {
+            Collections.sort(batteryDiffEntries, BatteryDiffEntry.COMPARATOR);
+            for (int i = 0; i < totalLowerBound - 100 && i < batteryDiffEntries.size(); i++) {
+                batteryDiffEntries.get(i).setAdjustPercentageOffset(-1);
+            }
+            for (int i = 0; i < 100 - totalUpperBound && i < batteryDiffEntries.size(); i++) {
+                batteryDiffEntries.get(i).setAdjustPercentageOffset(1);
+            }
+        }
+
+        // Sorts entries.
+        Collections.sort(batteryDiffEntries, BatteryDiffEntry.COMPARATOR);
     }
 }

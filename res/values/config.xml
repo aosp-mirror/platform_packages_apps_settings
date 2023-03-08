@@ -225,6 +225,10 @@
     -->
     <integer name="config_vibration_supported_intensity_levels">1</integer>
 
+    <!-- Whether or not to show Media vibration settings in the vibration and haptics screen.
+         Can be overridden for specific product builds if the target device does not support it -->
+    <bool name="config_media_vibration_supported">true</bool>
+
     <!--
         Whether or not the homepage should be powered by legacy suggestion (versus contextual cards)
         Default to true as not all devices support contextual cards.
@@ -549,7 +553,7 @@
     <!-- Cell broacast receiver package name -->
     <string name="config_cell_broadcast_receiver_package" translatable="false">com.android.cellbroadcastreceiver.module</string>
 
-    <!-- TODO(b/174964885): These media Uri are not defined in framework yet. Replace with framework defined variables once it's available. -->
+    <!-- These media Uri are not defined in framework yet. Replace with framework defined variables once it's available. -->
     <!-- Media Uri to view images storage category. -->
     <string name="config_images_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/images_root</string>
 
@@ -600,13 +604,7 @@
     <!-- The option list for switch screen resolution -->
     <string-array name="config_screen_resolution_options_strings" translatable="false">
         <item>@string/screen_resolution_option_high</item>
-        <item>@string/screen_resolution_option_highest</item>
-    </string-array>
-
-    <!-- The option summary list for screen resolution -->
-    <string-array name="config_screen_resolution_summaries_strings" translatable="false">
-        <item>@string/screen_resolution_summary_high</item>
-        <item>@string/screen_resolution_summary_highest</item>
+        <item>@string/screen_resolution_option_full</item>
     </string-array>
 
     <!-- Whether to aggregate for network selection list-->
@@ -672,6 +670,9 @@
     <!-- Whether the toggle for Auto-rotate with Face Detection should be shown. -->
     <bool name="config_auto_rotate_face_detection_available">true</bool>
 
+    <!-- Whether to display the 3G option at network mode.-->
+    <bool name="config_display_network_mode_3g_option">true</bool>
+
     <!-- The radius of the enrollment progress bar, in dp -->
     <integer name="config_udfpsEnrollProgressBar" translatable="false">
         280
@@ -692,4 +693,12 @@
         58.0001 29.2229,56.9551 26.8945,55.195
     </string>
 
+    <!-- Whether auto data switching on secondary SIM enables cross-SIM calling on both SIMs. -->
+    <bool name="config_auto_data_switch_enables_cross_sim_calling">false</bool>
+
+    <!-- Whether checking adaptive charging to define battery manager visibility. -->
+    <bool name="config_battery_manager_consider_ac">false</bool>
+
+    <!-- Whether to display Cloned Apps page in Settings (Settings > Apps > Cloned Apps).-->
+    <bool name="config_cloned_apps_page_enabled">false</bool>
 </resources>

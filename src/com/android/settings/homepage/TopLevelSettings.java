@@ -36,7 +36,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.window.embedding.SplitController;
+import androidx.window.embedding.ActivityEmbeddingController;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -66,6 +66,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     private int mPaddingHorizontal;
     private boolean mScrollNeeded = true;
     private boolean mFirstStarted = true;
+    private ActivityEmbeddingController mActivityEmbeddingController;
 
     public TopLevelSettings() {
         final Bundle args = new Bundle();
@@ -151,15 +152,26 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             return;
         }
 
-        boolean activityEmbedded = SplitController.getInstance().isActivityEmbedded(getActivity());
+        boolean activityEmbedded = isActivityEmbedded();
         if (icicle != null) {
             mHighlightMixin = icicle.getParcelable(SAVED_HIGHLIGHT_MIXIN);
-            mScrollNeeded = !mHighlightMixin.isActivityEmbedded() && activityEmbedded;
-            mHighlightMixin.setActivityEmbedded(activityEmbedded);
+            if (mHighlightMixin != null) {
+                mScrollNeeded = !mHighlightMixin.isActivityEmbedded() && activityEmbedded;
+                mHighlightMixin.setActivityEmbedded(activityEmbedded);
+            }
         }
         if (mHighlightMixin == null) {
             mHighlightMixin = new TopLevelHighlightMixin(activityEmbedded);
         }
+    }
+
+    /** Wrap ActivityEmbeddingController#isActivityEmbedded for testing. */
+    @VisibleForTesting
+    public boolean isActivityEmbedded() {
+        if (mActivityEmbeddingController == null) {
+            mActivityEmbeddingController = ActivityEmbeddingController.getInstance(getActivity());
+        }
+        return mActivityEmbeddingController.isActivityEmbedded(getActivity());
     }
 
     @Override
@@ -169,7 +181,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             FeatureFactory.getFactory(getContext()).getSearchFeatureProvider().sendPreIndexIntent(
                     getContext());
         } else if (mIsEmbeddingActivityEnabled && isOnlyOneActivityInTask()
-                && !SplitController.getInstance().isActivityEmbedded(getActivity())) {
+                && !isActivityEmbedded()) {
             // Set default highlight menu key for 1-pane homepage since it will show the placeholder
             // page once changing back to 2-pane.
             Log.i(TAG, "Set default menu key");
@@ -294,7 +306,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
          * 3. the current activity is embedded */
         return mHighlightMixin != null
                 && TextUtils.equals(pref.getKey(), mHighlightMixin.getHighlightPreferenceKey())
-                && SplitController.getInstance().isActivityEmbedded(getActivity());
+                && isActivityEmbedded();
     }
 
     /** Show/hide the highlight on the menu entry for the search page presence */

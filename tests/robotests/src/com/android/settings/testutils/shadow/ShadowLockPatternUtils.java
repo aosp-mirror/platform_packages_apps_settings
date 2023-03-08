@@ -16,9 +16,13 @@
 
 package com.android.settings.testutils.shadow;
 
+import android.annotation.NonNull;
+import android.annotation.Nullable;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.PasswordMetrics;
 import android.content.ComponentName;
+import android.content.Context;
+import android.content.pm.UserInfo;
 import android.os.UserHandle;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -41,6 +45,12 @@ public class ShadowLockPatternUtils {
     private static Map<Integer, PasswordMetrics> sUserToMetricsMap = new HashMap<>();
     private static Map<Integer, PasswordMetrics> sUserToProfileMetricsMap = new HashMap<>();
     private static Map<Integer, Boolean> sUserToIsSecureMap = new HashMap<>();
+    private static Map<Integer, Boolean> sUserToPatternEverChosenMap = new HashMap<>();
+    private static Map<Integer, Boolean> sUserToVisiblePatternEnabledMap = new HashMap<>();
+    private static Map<Integer, Boolean> sUserToBiometricAllowedMap = new HashMap<>();
+    private static Map<Integer, Boolean> sUserToLockPatternEnabledMap = new HashMap<>();
+
+    private static boolean sIsUserOwnsFrpCredential;
 
     @Resetter
     public static void reset() {
@@ -49,7 +59,12 @@ public class ShadowLockPatternUtils {
         sUserToMetricsMap.clear();
         sUserToProfileMetricsMap.clear();
         sUserToIsSecureMap.clear();
+        sUserToPatternEverChosenMap.clear();
+        sUserToVisiblePatternEnabledMap.clear();
+        sUserToBiometricAllowedMap.clear();
+        sUserToLockPatternEnabledMap.clear();
         sDeviceEncryptionEnabled = false;
+        sIsUserOwnsFrpCredential = false;
     }
 
     @Implementation
@@ -120,6 +135,65 @@ public class ShadowLockPatternUtils {
                     DevicePolicyManager.PASSWORD_COMPLEXITY_NONE));
         }
         return complexity;
+    }
+
+    @Implementation
+    public static boolean userOwnsFrpCredential(Context context, UserInfo info) {
+        return sIsUserOwnsFrpCredential;
+    }
+
+    public static void setUserOwnsFrpCredential(boolean isUserOwnsFrpCredential) {
+        sIsUserOwnsFrpCredential = isUserOwnsFrpCredential;
+    }
+
+    @Implementation
+    public boolean isVisiblePatternEnabled(int userId) {
+        return sUserToVisiblePatternEnabledMap.getOrDefault(userId, false);
+    }
+
+    public static void setIsVisiblePatternEnabled(int userId, boolean isVisiblePatternEnabled) {
+        sUserToVisiblePatternEnabledMap.put(userId, isVisiblePatternEnabled);
+    }
+
+    @Implementation
+    public boolean isPatternEverChosen(int userId) {
+        return sUserToPatternEverChosenMap.getOrDefault(userId, true);
+    }
+
+    public static void setIsPatternEverChosen(int userId, boolean isPatternEverChosen) {
+        sUserToPatternEverChosenMap.put(userId, isPatternEverChosen);
+    }
+
+    @Implementation
+    public boolean isBiometricAllowedForUser(int userId) {
+        return sUserToBiometricAllowedMap.getOrDefault(userId, false);
+    }
+
+    public static void setIsBiometricAllowedForUser(int userId, boolean isBiometricAllowed) {
+        sUserToBiometricAllowedMap.put(userId, isBiometricAllowed);
+    }
+
+    @Implementation
+    public boolean isLockPatternEnabled(int userId) {
+        return sUserToBiometricAllowedMap.getOrDefault(userId, false);
+    }
+
+    public static void setIsLockPatternEnabled(int userId, boolean isLockPatternEnabled) {
+        sUserToLockPatternEnabledMap.put(userId, isLockPatternEnabled);
+    }
+
+    @Implementation
+    public boolean setLockCredential(@NonNull LockscreenCredential newCredential,
+            @NonNull LockscreenCredential savedCredential, int userHandle) {
+        setIsSecure(userHandle, true);
+        return true;
+    }
+
+    @Implementation
+    public boolean checkCredential(@NonNull LockscreenCredential credential, int userId,
+            @Nullable LockPatternUtils.CheckCredentialProgressCallback progressCallback)
+            throws LockPatternUtils.RequestThrottledException {
+        return true;
     }
 
     public static void setRequiredPasswordComplexity(int userHandle, int complexity) {

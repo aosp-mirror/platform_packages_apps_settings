@@ -33,6 +33,7 @@ import com.android.settings.security.LockUnificationPreferenceController;
 import com.android.settings.security.trustagent.TrustAgentListPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -57,6 +58,11 @@ public class MoreSecurityPrivacyFragment extends DashboardFragment {
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.more_security_privacy_settings;
+    }
+
+    @Override
+    public String getCategoryKey() {
+        return CategoryKey.CATEGORY_MORE_SECURITY_PRIVACY_SETTINGS;
     }
 
     @Override

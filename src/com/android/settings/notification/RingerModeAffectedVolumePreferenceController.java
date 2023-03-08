@@ -140,11 +140,18 @@ public abstract class RingerModeAffectedVolumePreferenceController extends
         return valueUpdated;
     }
 
-    protected void updateRingerMode() {
+    /**
+     * Updates UI Icon in response to ringer mode changes.
+     * @return whether the ringer mode has changed.
+     */
+    protected boolean updateRingerMode() {
         final int ringerMode = mHelper.getRingerModeInternal();
-        if (mRingerMode == ringerMode) return;
+        if (mRingerMode == ringerMode) {
+            return false;
+        }
         mRingerMode = ringerMode;
         selectPreferenceIconState();
+        return true;
     }
 
     /**

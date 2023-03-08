@@ -21,6 +21,7 @@ import static android.app.time.DetectorStatusTypes.DETECTOR_STATUS_RUNNING;
 import static android.app.time.LocationTimeZoneAlgorithmStatus.PROVIDER_STATUS_IS_CERTAIN;
 import static android.app.time.LocationTimeZoneAlgorithmStatus.PROVIDER_STATUS_IS_UNCERTAIN;
 import static android.service.timezone.TimeZoneProviderStatus.DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS;
+import static android.service.timezone.TimeZoneProviderStatus.DEPENDENCY_STATUS_DEGRADED_BY_SETTINGS;
 import static android.service.timezone.TimeZoneProviderStatus.DEPENDENCY_STATUS_OK;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -72,42 +73,9 @@ public class LocationProviderStatusPreferenceControllerTest {
         when(mContext.getString(
                 R.string.location_time_zone_detection_status_summary_blocked_by_settings))
                 .thenReturn("BBS");
-    }
-
-    @Test
-    public void testCapabilityStatus() {
-        LocationProviderStatusPreferenceController controller =
-                new LocationProviderStatusPreferenceController(mContext, "LPSPC");
-
-        TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(false,
-                DEPENDENCY_STATUS_OK, DEPENDENCY_STATUS_OK);
-        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
-
-        assertThat(controller.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
-
-        capabilitiesAndConfig = createCapabilitiesAndConfig(true, DEPENDENCY_STATUS_OK,
-                DEPENDENCY_STATUS_OK);
-        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
-
-        assertThat(controller.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
-
-        capabilitiesAndConfig = createCapabilitiesAndConfig(false,
-                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS,
-                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_OK);
-        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
-
-        assertThat(controller.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.AVAILABLE_UNSEARCHABLE);
-
-        capabilitiesAndConfig = createCapabilitiesAndConfig(true,
-                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS,
-                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_OK);
-        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
-
-        assertThat(controller.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.AVAILABLE_UNSEARCHABLE);
+        when(mContext.getString(
+                R.string.location_time_zone_detection_status_summary_degraded_by_settings))
+                .thenReturn("DBS");
     }
 
     @Test
@@ -124,7 +92,26 @@ public class LocationProviderStatusPreferenceControllerTest {
                 BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
 
         capabilitiesAndConfig = createCapabilitiesAndConfig(false,
-                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS,
+                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_OK,
+                PROVIDER_STATUS_IS_UNCERTAIN, DEPENDENCY_STATUS_OK);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+
+        capabilitiesAndConfig = createCapabilitiesAndConfig(false,
+                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_OK,
+                PROVIDER_STATUS_IS_UNCERTAIN, DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE_UNSEARCHABLE);
+
+        // Test whether reportable statuses that can still result in the LTZP being "certain" are
+        // reported.
+
+        capabilitiesAndConfig = createCapabilitiesAndConfig(false,
+                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_DEGRADED_BY_SETTINGS,
                 PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_OK);
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
 
@@ -132,20 +119,28 @@ public class LocationProviderStatusPreferenceControllerTest {
                 BasePreferenceController.AVAILABLE_UNSEARCHABLE);
 
         capabilitiesAndConfig = createCapabilitiesAndConfig(false,
-                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_OK,
-                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS);
+                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_DEGRADED_BY_SETTINGS,
+                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_DEGRADED_BY_SETTINGS);
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
 
         assertThat(controller.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+                BasePreferenceController.AVAILABLE_UNSEARCHABLE);
+
+        capabilitiesAndConfig = createCapabilitiesAndConfig(false,
+                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_DEGRADED_BY_SETTINGS,
+                PROVIDER_STATUS_IS_UNCERTAIN, DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE_UNSEARCHABLE);
 
         capabilitiesAndConfig = createCapabilitiesAndConfig(false,
                 PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_OK,
-                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS);
+                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_DEGRADED_BY_SETTINGS);
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
 
         assertThat(controller.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+                BasePreferenceController.AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
@@ -154,7 +149,7 @@ public class LocationProviderStatusPreferenceControllerTest {
                 new LocationProviderStatusPreferenceController(mContext, "LPSPC");
 
         TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(false,
-                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_OK,
+                PROVIDER_STATUS_IS_UNCERTAIN, DEPENDENCY_STATUS_OK,
                 PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_OK);
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
 
@@ -162,7 +157,15 @@ public class LocationProviderStatusPreferenceControllerTest {
                 BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
 
         capabilitiesAndConfig = createCapabilitiesAndConfig(false,
-                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS,
+                PROVIDER_STATUS_IS_UNCERTAIN, DEPENDENCY_STATUS_OK,
+                PROVIDER_STATUS_IS_UNCERTAIN, DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE_UNSEARCHABLE);
+
+        capabilitiesAndConfig = createCapabilitiesAndConfig(false,
+                PROVIDER_STATUS_IS_UNCERTAIN, DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS,
                 PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_OK);
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
 
@@ -170,20 +173,20 @@ public class LocationProviderStatusPreferenceControllerTest {
                 BasePreferenceController.AVAILABLE_UNSEARCHABLE);
 
         capabilitiesAndConfig = createCapabilitiesAndConfig(false,
-                PROVIDER_STATUS_IS_UNCERTAIN, DEPENDENCY_STATUS_OK,
-                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS);
+                PROVIDER_STATUS_IS_UNCERTAIN, DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS,
+                PROVIDER_STATUS_IS_UNCERTAIN, DEPENDENCY_STATUS_OK);
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
 
         assertThat(controller.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.AVAILABLE_UNSEARCHABLE);
 
         capabilitiesAndConfig = createCapabilitiesAndConfig(false,
-                PROVIDER_STATUS_IS_UNCERTAIN, DEPENDENCY_STATUS_OK,
-                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_OK);
+                PROVIDER_STATUS_IS_UNCERTAIN, DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS,
+                PROVIDER_STATUS_IS_UNCERTAIN, DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS);
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
 
         assertThat(controller.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+                BasePreferenceController.AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
@@ -200,35 +203,36 @@ public class LocationProviderStatusPreferenceControllerTest {
                 BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
 
         capabilitiesAndConfig = createCapabilitiesAndConfig(false,
-                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS,
-                PROVIDER_STATUS_IS_CERTAIN, null);
-        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
-
-        assertThat(controller.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.AVAILABLE_UNSEARCHABLE);
-
-        capabilitiesAndConfig = createCapabilitiesAndConfig(false, DEPENDENCY_STATUS_OK, null);
+                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_OK,
+                PROVIDER_STATUS_IS_UNCERTAIN, null);
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
 
         assertThat(controller.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
 
         capabilitiesAndConfig = createCapabilitiesAndConfig(false,
-                PROVIDER_STATUS_IS_CERTAIN, null,
-                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS);
+                PROVIDER_STATUS_IS_CERTAIN, DEPENDENCY_STATUS_OK,
+                PROVIDER_STATUS_IS_CERTAIN, null);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+
+        capabilitiesAndConfig = createCapabilitiesAndConfig(false,
+                PROVIDER_STATUS_IS_UNCERTAIN, DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS,
+                PROVIDER_STATUS_IS_CERTAIN, null);
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
 
         assertThat(controller.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.AVAILABLE_UNSEARCHABLE);
-    }
 
-    private static TimeZoneCapabilitiesAndConfig createCapabilitiesAndConfig(
-            boolean userCanConfigureGeoDetection,
-            @Nullable @DependencyStatus Integer primaryProviderLocationStatus,
-            @Nullable @DependencyStatus Integer secondaryProviderLocationStatus) {
-        return createCapabilitiesAndConfig(userCanConfigureGeoDetection,
-                PROVIDER_STATUS_IS_CERTAIN, primaryProviderLocationStatus,
-                PROVIDER_STATUS_IS_CERTAIN, secondaryProviderLocationStatus);
+        capabilitiesAndConfig = createCapabilitiesAndConfig(false,
+                PROVIDER_STATUS_IS_CERTAIN, null,
+                PROVIDER_STATUS_IS_UNCERTAIN, DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE_UNSEARCHABLE);
     }
 
     private static TimeZoneCapabilitiesAndConfig createCapabilitiesAndConfig(

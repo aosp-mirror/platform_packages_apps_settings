@@ -72,8 +72,13 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public double getBatteryUsageListScreenOnTimeThresholdInMs() {
+        return 0;
+    }
+
+    @Override
     public double getBatteryUsageListConsumePowerThreshold() {
-        return 0.0;
+        return 0;
     }
 
     @Override
@@ -164,6 +169,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
 
     @Override
     public Set<Integer> getOthersSystemComponentSet() {
+        return new ArraySet<>();
+    }
+
+    @Override
+    public Set<String> getOthersCustomComponentNameSet() {
         return new ArraySet<>();
     }
 

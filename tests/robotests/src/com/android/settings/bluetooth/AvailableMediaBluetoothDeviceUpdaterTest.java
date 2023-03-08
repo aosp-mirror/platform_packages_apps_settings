@@ -96,7 +96,7 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
         when(mCachedBluetoothDevice.getDrawableWithDescription()).thenReturn(pairs);
 
         mBluetoothDeviceUpdater = spy(new AvailableMediaBluetoothDeviceUpdater(mContext,
-                mDashboardFragment, mDevicePreferenceCallback));
+                mDevicePreferenceCallback, /* metricsCategory= */ 0));
         mBluetoothDeviceUpdater.setPrefContext(mContext);
         mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice, false,
                 BluetoothDevicePreference.SortType.TYPE_DEFAULT);

@@ -42,7 +42,8 @@ import java.util.List;
 public class FingerprintRepository {
 
     private static final String TAG = "FingerprintRepository";
-    @NonNull private final FingerprintManager mFingerprintManager;
+    @NonNull
+    private final FingerprintManager mFingerprintManager;
 
     private List<FingerprintSensorPropertiesInternal> mSensorPropertiesCache;
 
@@ -97,8 +98,11 @@ public class FingerprintRepository {
         return resources.getInteger(R.integer.suw_max_fingerprints_enrollable);
     }
 
+    /**
+     * Gets the first FingerprintSensorPropertiesInternal from FingerprintManager
+     */
     @Nullable
-    private FingerprintSensorPropertiesInternal getFirstFingerprintSensorPropertiesInternal() {
+    public FingerprintSensorPropertiesInternal getFirstFingerprintSensorPropertiesInternal() {
         final List<FingerprintSensorPropertiesInternal> props = mSensorPropertiesCache;
         if (props == null) {
             // Handle this case if it really happens
@@ -129,5 +133,19 @@ public class FingerprintRepository {
     public boolean isDisabledByAdmin(@NonNull Context context, int userId) {
         return RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
                 context, DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT, userId) != null;
+    }
+
+    /**
+     * Get fingerprint enroll stage threshold
+     */
+    public float getEnrollStageThreshold(int index) {
+        return mFingerprintManager.getEnrollStageThreshold(index);
+    }
+
+    /**
+     * Get fingerprint enroll stage count
+     */
+    public int getEnrollStageCount() {
+        return mFingerprintManager.getEnrollStageCount();
     }
 }

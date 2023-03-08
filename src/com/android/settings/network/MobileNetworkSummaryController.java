@@ -207,10 +207,6 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
     }
 
     @Override
-    public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> activeSubInfoList) {
-    }
-
-    @Override
     public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
         mUiccInfoEntityList = uiccInfoEntityList;
         update();

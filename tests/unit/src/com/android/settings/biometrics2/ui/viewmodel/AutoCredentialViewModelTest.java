@@ -22,10 +22,8 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
 
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_CHALLENGE;
-import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_SENSOR_ID;
 import static com.android.settings.biometrics2.ui.model.CredentialModel.INVALID_CHALLENGE;
 import static com.android.settings.biometrics2.ui.model.CredentialModel.INVALID_GK_PW_HANDLE;
-import static com.android.settings.biometrics2.ui.model.CredentialModel.INVALID_SENSOR_ID;
 import static com.android.settings.biometrics2.ui.model.CredentialModelTest.newCredentialModelIntentExtras;
 import static com.android.settings.biometrics2.ui.model.CredentialModelTest.newGkPwHandleCredentialIntentExtras;
 import static com.android.settings.biometrics2.ui.model.CredentialModelTest.newOnlySensorValidCredentialIntentExtras;
@@ -103,7 +101,7 @@ public class AutoCredentialViewModelTest {
 
     @Test
     public void testSetCredentialModel_sameResultFromSavedInstanceOrIntent() {
-        final Bundle extras = newCredentialModelIntentExtras(12, 33, 1, new byte[] { 2, 3 }, 3L);
+        final Bundle extras = newCredentialModelIntentExtras(12, 33, new byte[] { 2, 3 }, 3L);
 
         AutoCredentialViewModel viewModel2 = new AutoCredentialViewModel(
                 ApplicationProvider.getApplicationContext(),
@@ -115,18 +113,9 @@ public class AutoCredentialViewModelTest {
         mViewModel.onSaveInstanceState(savedInstance);
         viewModel2.setCredentialModel(savedInstance, new Intent());
 
-        final Bundle bundle1 = mViewModel.createCredentialIntentExtra();
-        final Bundle bundle2 = viewModel2.createCredentialIntentExtra();
-        assertThat(bundle1.getLong(EXTRA_KEY_GK_PW_HANDLE))
-                .isEqualTo(bundle2.getLong(EXTRA_KEY_GK_PW_HANDLE));
-        assertThat(bundle1.getLong(Intent.EXTRA_USER_ID))
-                .isEqualTo(bundle2.getLong(Intent.EXTRA_USER_ID));
-        assertThat(bundle1.getLong(EXTRA_KEY_CHALLENGE))
-                .isEqualTo(bundle2.getLong(EXTRA_KEY_CHALLENGE));
-        assertThat(bundle1.getInt(EXTRA_KEY_SENSOR_ID))
-                .isEqualTo(bundle2.getInt(EXTRA_KEY_SENSOR_ID));
-        final byte[] token1 = bundle1.getByteArray(EXTRA_KEY_CHALLENGE_TOKEN);
-        final byte[] token2 = bundle2.getByteArray(EXTRA_KEY_CHALLENGE_TOKEN);
+        assertThat(mViewModel.getUserId()).isEqualTo(viewModel2.getUserId());
+        final byte[] token1 = mViewModel.getToken();
+        final byte[] token2 = viewModel2.getToken();
         assertThat(token1).isNotNull();
         assertThat(token2).isNotNull();
         assertThat(token1.length).isEqualTo(token2.length);
@@ -138,7 +127,7 @@ public class AutoCredentialViewModelTest {
     @Test
     public void testSetCredentialModel_sameResultFromSavedInstanceOrIntent_invalidValues() {
         final Bundle extras = newCredentialModelIntentExtras(UserHandle.USER_NULL,
-                INVALID_CHALLENGE, INVALID_SENSOR_ID, null, INVALID_GK_PW_HANDLE);
+                INVALID_CHALLENGE, null, INVALID_GK_PW_HANDLE);
 
         AutoCredentialViewModel viewModel2 = new AutoCredentialViewModel(
                 ApplicationProvider.getApplicationContext(),
@@ -150,16 +139,10 @@ public class AutoCredentialViewModelTest {
         mViewModel.onSaveInstanceState(savedInstance);
         viewModel2.setCredentialModel(savedInstance, new Intent());
 
-        final Bundle bundle1 = mViewModel.createCredentialIntentExtra();
-        final Bundle bundle2 = viewModel2.createCredentialIntentExtra();
-        assertThat(bundle1.containsKey(EXTRA_KEY_GK_PW_HANDLE)).isFalse();
-        assertThat(bundle2.containsKey(EXTRA_KEY_GK_PW_HANDLE)).isFalse();
-        assertThat(bundle1.containsKey(EXTRA_KEY_CHALLENGE_TOKEN)).isFalse();
-        assertThat(bundle2.containsKey(EXTRA_KEY_CHALLENGE_TOKEN)).isFalse();
-        assertThat(bundle1.containsKey(EXTRA_KEY_SENSOR_ID)).isTrue();
-        assertThat(bundle2.containsKey(EXTRA_KEY_SENSOR_ID)).isTrue();
-        assertThat(bundle1.containsKey(Intent.EXTRA_USER_ID)).isFalse();
-        assertThat(bundle2.containsKey(Intent.EXTRA_USER_ID)).isFalse();
+        assertThat(mViewModel.getUserId()).isEqualTo(UserHandle.USER_NULL);
+        assertThat(viewModel2.getUserId()).isEqualTo(UserHandle.USER_NULL);
+        assertThat(mViewModel.getToken()).isNull();
+        assertThat(viewModel2.getToken()).isNull();
     }
 
     @Test
@@ -316,12 +299,7 @@ public class AutoCredentialViewModelTest {
         assertThat(mViewModel.getGenerateChallengeFailedLiveData().getValue()).isNull();
 
         // Check data inside CredentialModel
-        final Bundle extras = mViewModel.createCredentialIntentExtra();
-        assertThat(extras.getInt(EXTRA_KEY_SENSOR_ID)).isEqualTo(newSensorId);
-        assertThat(extras.getLong(EXTRA_KEY_CHALLENGE)).isEqualTo(newChallenge);
-        assertThat(extras.getByteArray(EXTRA_KEY_CHALLENGE_TOKEN)).isNotNull();
-        assertThat(extras.getLong(EXTRA_KEY_GK_PW_HANDLE)).isEqualTo(INVALID_GK_PW_HANDLE);
-        assertThat(extras.getLong(EXTRA_KEY_CHALLENGE)).isNotEqualTo(INVALID_CHALLENGE);
+        assertThat(mViewModel.getToken()).isNotNull();
         assertThat(mChallengeGenerator.mCallbackRunCount).isEqualTo(1);
         assertThat(hasCalledRemoveGkPwHandle.get()).isFalse();
 
@@ -534,11 +512,7 @@ public class AutoCredentialViewModelTest {
 
         assertThat(ret).isTrue();
         assertThat(mViewModel.getGenerateChallengeFailedLiveData().getValue()).isNull();
-        final Bundle extras = mViewModel.createCredentialIntentExtra();
-        assertThat(extras.getInt(EXTRA_KEY_SENSOR_ID)).isEqualTo(newSensorId);
-        assertThat(extras.getLong(EXTRA_KEY_CHALLENGE)).isEqualTo(newChallenge);
-        assertThat(extras.getByteArray(EXTRA_KEY_CHALLENGE_TOKEN)).isNotNull();
-        assertThat(extras.getLong(EXTRA_KEY_GK_PW_HANDLE)).isEqualTo(INVALID_GK_PW_HANDLE);
+        assertThat(mViewModel.getToken()).isNotNull();
         assertThat(mChallengeGenerator.mCallbackRunCount).isEqualTo(1);
         assertThat(hasCalledRemoveGkPwHandle.get()).isTrue();
     }
@@ -571,17 +545,13 @@ public class AutoCredentialViewModelTest {
 
         assertThat(ret).isTrue();
         assertThat(mViewModel.getGenerateChallengeFailedLiveData().getValue()).isNull();
-        final Bundle extras = mViewModel.createCredentialIntentExtra();
-        assertThat(extras.getInt(EXTRA_KEY_SENSOR_ID)).isEqualTo(newSensorId);
-        assertThat(extras.getLong(EXTRA_KEY_CHALLENGE)).isEqualTo(newChallenge);
-        assertThat(extras.getByteArray(EXTRA_KEY_CHALLENGE_TOKEN)).isNotNull();
-        assertThat(extras.getLong(EXTRA_KEY_GK_PW_HANDLE)).isEqualTo(INVALID_GK_PW_HANDLE);
+        assertThat(mViewModel.getToken()).isNotNull();
         assertThat(mChallengeGenerator.mCallbackRunCount).isEqualTo(1);
         assertThat(hasCalledRemoveGkPwHandle.get()).isTrue();
     }
 
     public static class TestChallengeGenerator implements ChallengeGenerator {
-        public int mSensorId = INVALID_SENSOR_ID;
+        public int mSensorId = -1;
         public int mUserId = UserHandle.myUserId();
         public long mChallenge = INVALID_CHALLENGE;
         public int mCallbackRunCount = 0;

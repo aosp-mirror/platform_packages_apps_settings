@@ -19,6 +19,7 @@ package com.android.settings.biometrics.face;
 import android.content.Context;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.FaceManager;
+import android.os.UserManager;
 
 import com.android.settings.R;
 import com.android.settings.Settings;
@@ -56,6 +57,18 @@ public class FaceStatusUtils {
     public EnforcedAdmin getDisablingAdmin() {
         return ParentalControlsUtils.parentConsentRequired(
                 mContext, BiometricAuthenticator.TYPE_FACE);
+    }
+
+    /**
+     * Returns the title of face settings entity.
+     */
+    public String getTitle() {
+        UserManager userManager = mContext.getSystemService(UserManager.class);
+        if (userManager != null && userManager.isProfile()) {
+            return mContext.getString(R.string.security_settings_face_profile_preference_title);
+        } else {
+            return mContext.getString(R.string.security_settings_face_preference_title);
+        }
     }
 
     /**

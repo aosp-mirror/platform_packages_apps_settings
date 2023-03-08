@@ -571,24 +571,12 @@
     <string name="battery_tip_dialog_summary_message" product="device">Your apps are using a normal amount of battery. If apps use too much battery, your device will suggest actions you can take.\n\nYou can always turn on Battery Saver if you\u2019re running low on battery.</string>
     <!-- Summary for the smart battery toggle [CHAR LIMIT=NONE] -->
     <string name="smart_battery_summary" product="default">Limit battery for apps that you don\u2019t use often</string>
-    <!-- Battery Saver: Description for sticky battery saver preference [CHAR_LIMIT=NONE] -->
-    <string name="battery_saver_sticky_description_new" product="default">Battery Saver turns off when your phone charges above <xliff:g id="battery_percentage" example="80%">%1$s</xliff:g></string>
-    <!-- Battery Saver: Description for sticky battery saver preference [CHAR_LIMIT=NONE] -->
-    <string name="battery_saver_sticky_description_new" product="tablet">Battery Saver turns off when your tablet charges above <xliff:g id="battery_percentage" example="80%">%1$s</xliff:g></string>
-    <!-- Battery Saver: Description for sticky battery saver preference [CHAR_LIMIT=NONE] -->
-    <string name="battery_saver_sticky_description_new" product="device">Battery Saver turns off when your device charges above <xliff:g id="battery_percentage" example="80%">%1$s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Battery usage main screen footer content -->
-    <string name="battery_usage_screen_footer_since_last_full_charge" product="default">Usage numbers are proportional to battery usage since last full charge and usage data is not measured when phone is charging</string>
+    <string name="battery_usage_screen_footer" product="default">Battery usage and screen time are not measured while the phone is charging</string>
     <!-- [CHAR_LIMIT=NONE] Battery usage main screen footer content -->
-    <string name="battery_usage_screen_footer_since_last_full_charge" product="tablet">Usage numbers are proportional to battery usage since last full charge and usage data is not measured when tablet is charging</string>
+    <string name="battery_usage_screen_footer" product="tablet">Battery usage and screen time are not measured while the tablet is charging</string>
     <!-- [CHAR_LIMIT=NONE] Battery usage main screen footer content -->
-    <string name="battery_usage_screen_footer_since_last_full_charge" product="device">Usage numbers are proportional to battery usage since last full charge and usage data is not measured when device is charging</string>
-    <!-- [CHAR_LIMIT=NONE] Battery usage main screen footer content -->
-    <string name="battery_usage_screen_footer_of_timestamp" product="default">Usage numbers are proportional to battery usage of <xliff:g id="slot">%s</xliff:g> and usage data is not measured when phone is charging</string>
-    <!-- [CHAR_LIMIT=NONE] Battery usage main screen footer content -->
-    <string name="battery_usage_screen_footer_of_timestamp" product="tablet">Usage numbers are proportional to battery usage of <xliff:g id="slot">%s</xliff:g> and usage data is not measured when tablet is charging</string>
-    <!-- [CHAR_LIMIT=NONE] Battery usage main screen footer content -->
-    <string name="battery_usage_screen_footer_of_timestamp" product="device">Usage numbers are proportional to battery usage of <xliff:g id="slot">%s</xliff:g> and usage data is not measured when device is charging</string>
+    <string name="battery_usage_screen_footer" product="device">Battery usage and screen time are not measured while the device is charging</string>
     <!-- Summary of preference to install certificates from SD card [CHAR LIMIT=NONE] -->
     <string name="credentials_install_summary" product="nosdcard">Install certificates from storage</string>
     <!-- Summary of preference to install certificates from SD card [CHAR LIMIT=NONE] -->
@@ -667,4 +655,25 @@
     <string name="reset_internet_text" product="default">This will end your phone call</string>
     <!-- Description for interrupting the voice call alert. [CHAR_LIMIT=NONE] -->
     <string name="reset_internet_text" product="tablet">This will end your phone call</string>
+
+    <!-- An explanation text that the pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default">Your phone was reset to factory settings. To use this phone, enter your previous pattern.</string>
+    <!-- An explanation text that the pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet">Your tablet was reset to factory settings. To use this tablet, enter your previous pattern.</string>
+    <!-- An explanation text that the pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device">Your device was reset to factory settings. To use this device, enter your previous pattern.</string>
+
+    <!-- An explanation text that the pin needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default">Your phone was reset to factory settings. To use this phone, enter your previous PIN.</string>
+    <!-- An explanation text that the pin needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet">Your tablet was reset to factory settings. To use this tablet, enter your previous PIN.</string>
+    <!-- An explanation text that the pin needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device">Your device was reset to factory settings. To use this device, enter your previous PIN.</string>
+
+    <!-- An explanation text that the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_password_details_frp" product="default">Your phone was reset to factory settings. To use this phone, enter your previous password.</string>
+    <!-- An explanation text that the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet">Your tablet was reset to factory settings. To use this tablet, enter your previous password.</string>
+    <!-- An explanation text that the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_password_details_frp" product="device">Your device was reset to factory settings. To use this device, enter your previous password.</string>
 </resources>

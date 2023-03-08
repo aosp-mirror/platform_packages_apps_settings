@@ -19,7 +19,6 @@ package com.android.settings.fuelgauge.batterytip.tips;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcel;
 import android.util.Log;
 
 import androidx.preference.Preference;
@@ -42,10 +41,6 @@ public class DockDefenderTip extends BatteryTip {
     public DockDefenderTip(@StateType int state, @DockDefenderMode int mode) {
         super(TipType.DOCK_DEFENDER, state, false);
         mMode = mode;
-    }
-
-    private DockDefenderTip(Parcel in) {
-        super(in);
     }
 
     public int getMode() {
@@ -151,10 +146,6 @@ public class DockDefenderTip extends BatteryTip {
 
     }
 
-    private CardPreference castToCardPreferenceSafely(Preference preference) {
-        return preference instanceof CardPreference ? (CardPreference) preference : null;
-    }
-
     private void resumeCharging(Context context) {
         final Intent intent =
                 FeatureFactory.getFactory(context)
@@ -166,14 +157,4 @@ public class DockDefenderTip extends BatteryTip {
 
         Log.i(TAG, "send resume charging broadcast intent=" + intent);
     }
-
-    public static final Creator CREATOR = new Creator() {
-        public BatteryTip createFromParcel(Parcel in) {
-            return new DockDefenderTip(in);
-        }
-
-        public BatteryTip[] newArray(int size) {
-            return new DockDefenderTip[size];
-        }
-    };
 }
