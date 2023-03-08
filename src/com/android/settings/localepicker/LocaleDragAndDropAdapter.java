@@ -16,10 +16,14 @@
 
 package com.android.settings.localepicker;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.LocaleList;
+import android.os.Looper;
+import android.os.ResultReceiver;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -49,9 +53,11 @@ class LocaleDragAndDropAdapter
     private static final String TAG = "LocaleDragAndDropAdapter";
     private static final String CFGKEY_SELECTED_LOCALES = "selectedLocales";
     private final Context mContext;
-    private final List<LocaleStore.LocaleInfo> mFeedItemList;
+    private List<LocaleStore.LocaleInfo> mFeedItemList;
+    private List<LocaleStore.LocaleInfo> mCacheItemList;
     private final ItemTouchHelper mItemTouchHelper;
     private RecyclerView mParentView = null;
+    private LocaleListEditor mParent;
     private boolean mRemoveMode = false;
     private boolean mDragEnabled = true;
     private NumberFormat mNumberFormatter = NumberFormat.getNumberInstance();
@@ -81,12 +87,15 @@ class LocaleDragAndDropAdapter
         }
     }
 
-    public LocaleDragAndDropAdapter(Context context, List<LocaleStore.LocaleInfo> feedItemList) {
+    LocaleDragAndDropAdapter(LocaleListEditor parent,
+            List<LocaleStore.LocaleInfo> feedItemList) {
         mFeedItemList = feedItemList;
-        mContext = context;
+        mParent = parent;
+        mCacheItemList = new ArrayList<>(feedItemList);
+        mContext = parent.getContext();
 
         final float dragElevation = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8,
-                context.getResources().getDisplayMetrics());
+                mContext.getResources().getDisplayMetrics());
 
         mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
                 ItemTouchHelper.UP | ItemTouchHelper.DOWN, 0 /* no swipe */) {
@@ -168,13 +177,13 @@ class LocaleDragAndDropAdapter
         checkbox.setOnCheckedChangeListener(null);
         checkbox.setChecked(mRemoveMode ? feedItem.getChecked() : false);
         checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        LocaleStore.LocaleInfo feedItem =
-                                (LocaleStore.LocaleInfo) dragCell.getTag();
-                        feedItem.setChecked(isChecked);
-                    }
-                });
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                LocaleStore.LocaleInfo feedItem =
+                        (LocaleStore.LocaleInfo) dragCell.getTag();
+                feedItem.setChecked(isChecked);
+            }
+        });
     }
 
     @Override
@@ -308,6 +317,42 @@ class LocaleDragAndDropAdapter
         });
     }
 
+    public void doTheUpdateWithMovingLocaleItem() {
+        LocaleStore.LocaleInfo localeInfo = mFeedItemList.get(0);
+        if (!localeInfo.getLocale().equals(LocalePicker.getLocales().get(0))) {
+            LocaleDialogFragment.show(mParent,
+                    LocaleDialogFragment.DIALOG_CONFIRM_SYSTEM_DEFAULT,
+                    localeInfo,
+                    new ResultReceiver(new Handler(Looper.getMainLooper())) {
+                        @Override
+                        protected void onReceiveResult(int resultCode, Bundle resultData) {
+                            super.onReceiveResult(resultCode, resultData);
+                            int type = resultData.getInt(LocaleDialogFragment.ARG_DIALOG_TYPE);
+                            if (type == LocaleDialogFragment.DIALOG_CONFIRM_SYSTEM_DEFAULT) {
+                                if (resultCode == Activity.RESULT_OK) {
+                                    doTheUpdate();
+                                    if (!localeInfo.isTranslated()) {
+                                        LocaleDialogFragment.show(mParent,
+                                                        LocaleDialogFragment
+                                                                .DIALOG_NOT_AVAILABLE_LOCALE,
+                                                        localeInfo);
+                                    }
+                                } else {
+                                    if (!localeInfo.getLocale()
+                                            .equals(mCacheItemList.get(0).getLocale())) {
+                                        mFeedItemList = new ArrayList<>(mCacheItemList);
+                                        notifyDataSetChanged();
+                                    }
+                                }
+                                mCacheItemList = new ArrayList<>(mFeedItemList);
+                            }
+                        }
+                    });
+        } else {
+            doTheUpdate();
+        }
+    }
+
     private void setDragEnabled(boolean enabled) {
         mDragEnabled = enabled;
     }
@@ -315,6 +360,7 @@ class LocaleDragAndDropAdapter
     /**
      * Saves the list of checked locales to preserve status when the list is destroyed.
      * (for instance when the device is rotated)
+     *
      * @param outInstanceState Bundle in which to place the saved state
      */
     public void saveState(Bundle outInstanceState) {
@@ -332,6 +378,7 @@ class LocaleDragAndDropAdapter
     /**
      * Restores the list of checked locales to preserve status when the list is recreated.
      * (for instance when the device is rotated)
+     *
      * @param savedInstanceState Bundle with the data saved by {@link #saveState(Bundle)}
      */
     public void restoreState(Bundle savedInstanceState) {

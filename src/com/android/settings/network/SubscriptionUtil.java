@@ -50,6 +50,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -560,7 +561,8 @@ public class SubscriptionUtil {
         if (TextUtils.isEmpty(rawPhoneNumber)) {
             return null;
         }
-        String countryIso = MccTable.countryCodeForMcc(subscriptionInfo.getMccString());
+        String countryIso = MccTable.countryCodeForMcc(subscriptionInfo.getMccString())
+                .toUpperCase(Locale.ROOT);
         return PhoneNumberUtils.formatNumber(rawPhoneNumber, countryIso);
     }
 

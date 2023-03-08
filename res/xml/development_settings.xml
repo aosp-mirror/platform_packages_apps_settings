@@ -346,6 +346,11 @@
             android:summary="@string/bluetooth_enable_leaudio_summary" />
 
         <SwitchPreference
+            android:key="bluetooth_enable_leaudio_allow_list"
+            android:title="@string/bluetooth_enable_leaudio_allow_list"
+            android:summary="@string/bluetooth_enable_leaudio_allow_list_summary" />
+
+        <SwitchPreference
             android:key="bluetooth_disable_le_audio_hw_offload"
             android:title="@string/bluetooth_disable_le_audio_hw_offload" />
 
