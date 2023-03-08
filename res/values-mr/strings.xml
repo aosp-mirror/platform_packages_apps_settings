@@ -973,6 +973,13 @@
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"जास्तीत जास्त कनेक्ट होऊ शकणार्‍या ऑडिओ डिव्हाइसची संख्या निवडा"</string>
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"NFC स्टॅक डीबग लॉग"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"NFC स्टॅक लॉग करण्याची पातळी वाढवा"</string>
+    <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"NFC व्हर्बोझ विक्रेता डीबग लॉग"</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"बगरिपोर्टमध्ये अतिरिक्त डिव्हाइस विशिष्ट विक्रेता लॉगचा समावेश करा, ज्यामध्ये खाजगी माहितीचा समावेश असू शकतो."</string>
+    <string name="nfc_snoop_log_title" msgid="1072690687525472163">"NFC NCI फिल्‍टर न केलेले स्नूप लॉग"</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"तपशीलवार NFC पॅकेट कॅप्चर करा, ज्यामध्ये खाजगी माहितीचा समावेश असू शकतो."</string>
+    <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"डिव्हाइस रीस्टार्ट करायचे आहे का?"</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"तपशीलवार NFC लॉगिंग हे फक्त विकासाच्या उद्देशाने आहे. बग रिपोर्टमध्ये अतिरिक्त NFC डेटाचा समावेश केला आहे, ज्यामध्ये खाजगी माहितीचा समावेश असू शकतो. हे सेटिंग बदलण्यासाठी तुमचे डिव्हाइस रीस्टार्ट करा."</string>
+    <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"रीस्टार्ट करा"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"कास्‍ट करा"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"मिरर करा"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"वायरलेस डिस्प्ले सुरू करा"</string>
@@ -1101,7 +1108,7 @@
     <string name="wifi_eap_method" msgid="3776009521349381742">"EAP पद्धत"</string>
     <string name="please_select_phase2" msgid="577633852089847142">"टप्पा 2 प्रमाणीकरण"</string>
     <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"CA प्रमाणपत्र"</string>
-    <string name="wifi_eap_ocsp" msgid="8713933962516871238">"ऑनलाइन प्रमाणपत्र स्थिती"</string>
+    <string name="wifi_eap_ocsp" msgid="8713933962516871238">"ऑनलाइन प्रमाणपत्र स्टेटस"</string>
     <string name="wifi_eap_domain" msgid="8304301470752333203">"डोमेन"</string>
     <string name="wifi_eap_user_cert" msgid="3569182430929173220">"वापरकर्ता प्रमाणपत्र"</string>
     <string name="wifi_eap_identity" msgid="3629406902174137028">"ओळख"</string>
@@ -1331,7 +1338,7 @@
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"<xliff:g id="SSID">%1$s</xliff:g> वरून डिस्कनेक्ट झाले"</string>
     <string name="carrier" msgid="1755020806290963951">"वाहक"</string>
     <string name="display_settings_title" msgid="626835071804834218">"डिस्प्ले"</string>
-    <string name="sound_settings" msgid="7622986039384531304">"आवाज &amp; व्हायब्रेशन"</string>
+    <string name="sound_settings" msgid="7622986039384531304">"आवाज आणि व्हायब्रेशन"</string>
     <string name="all_volume_title" msgid="6196367642878437513">"आवाज"</string>
     <string name="musicfx_title" msgid="5458574743312283473">"संगीत प्रभाव"</string>
     <string name="ring_volume_title" msgid="4869034595079914541">"रिंग आणि सूचनेचा व्हॉल्यूम"</string>
@@ -2383,6 +2390,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"डाउनलोड केलेली अ‍ॅप्स"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"प्रायोगिक"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"वैशिष्‍ट्य फ्लॅग"</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"स्क्रीन रीडर प्रामुख्याने दृष्टीहीन किंवा कमी दृष्टी असलेल्या लोकांसाठी आहे"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"आयटमना मोठ्याने ऐकण्यासाठी स्क्रीनवरील आयटमवर टॅप करा"</string>
@@ -4420,7 +4441,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"अनपिन करण्‍यापूर्वी पासवर्ड विचारा"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"अनपिन करताना डिव्हाइस लॉक करा"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"सिम हटवण्याची खात्री करा"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"eSIM मिटवण्याआधी हे तुम्हीच आहात याची पडताळणी करा"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"eSIM मिटवण्याआधी हे तुम्हीच आहात याची पडताळणी करा"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"हे कार्य प्रोफाइल याद्वारे व्यवस्थापित केले आहे:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> द्वारे व्यवस्थापित"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(प्रायोगिक)"</string>
@@ -4484,7 +4505,7 @@
     <string name="storage_type_internal" msgid="979243131665635278">"अंतर्गत स्टोरेज"</string>
     <string name="storage_type_external" msgid="125078274000280821">"बाह्य स्टोरेज"</string>
     <string name="data_summary_format" msgid="8802057788950096650">"<xliff:g id="DATE">%2$s</xliff:g> पासून <xliff:g id="SIZE">%1$s</xliff:g> वापरले"</string>
-    <string name="storage_used" msgid="2591194906751432725">"वापरलेले संचयन"</string>
+    <string name="storage_used" msgid="2591194906751432725">"वापरलेले स्टोरेज"</string>
     <string name="change" msgid="273206077375322595">"बदला"</string>
     <string name="change_storage" msgid="8773820275624113401">"संचयन बदला"</string>
     <string name="notifications_label" msgid="8471624476040164538">"सूचना"</string>

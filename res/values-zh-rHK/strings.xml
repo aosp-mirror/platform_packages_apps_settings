@@ -589,9 +589,7 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"此操作可擷取您更完整的指紋"</string>
     <string name="security_settings_sfps_enroll_progress_a11y_message" msgid="6450772721691523736">"指紋註冊進度為百分之 <xliff:g id="PERCENTAGE">%d</xliff:g>"</string>
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"註冊進度為百分之 <xliff:g id="PERCENTAGE">%d</xliff:g>"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
-    <skip />
+    <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"指紋註冊進度為 <xliff:g id="PERCENTAGE">%d</xliff:g>%%"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"已加入指紋"</string>
     <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"現在可使用指紋解鎖平板電腦或驗證身分，例如用來登入應用程式或核准購買交易"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"現在可使用指紋解鎖平板電腦或驗證身分，例如用來登入應用程式"</string>
@@ -975,6 +973,13 @@
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"選取已連接藍牙音訊裝置的數量上限"</string>
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"NFC 堆疊偵錯記錄"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"提高 NFC 堆疊記錄等級"</string>
+    <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"NFC 詳細供應商偵錯記錄"</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"在錯誤報告中包括其他裝置專屬供應商記錄，其中可能包含私人資料。"</string>
+    <string name="nfc_snoop_log_title" msgid="1072690687525472163">"NFC NCI 未篩選窺探記錄"</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"擷取詳細 NFC 封包，其中可能包含私人資料。"</string>
+    <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"要重新啟動裝置嗎？"</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"詳細 NFC 記錄僅適用於開發用途。錯誤報告中包括有其他 NFC 資料，其中可能包含私人資料。重新啟動裝置即可變更此設定。"</string>
+    <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"重新啟動"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"投放"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"鏡像"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"啟用無線螢幕分享"</string>
@@ -2386,6 +2391,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"已下載的應用程式"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"實驗性"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"功能標示"</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"主要為失明和弱視人士而設的螢幕閱讀器"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"輕按畫面上的項目即可收聽系統朗讀項目"</string>
@@ -4423,7 +4442,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"取消固定時必須輸入密碼"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"取消固定時鎖定裝置"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"確認刪除 SIM 卡"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"如要清除 eSIM 卡，請先驗證您的身分"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"如要清除 eSIM 卡，請先驗證您的身分"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"這個工作設定檔由以下應用程式管理："</string>
     <string name="managing_admin" msgid="2633920317425356619">"由<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>管理"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(實驗性)"</string>

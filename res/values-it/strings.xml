@@ -973,6 +973,13 @@
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Seleziona il numero massimo di dispositivi audio Bluetooth connessi"</string>
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Log di debug stack NFC"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Aumenta livello di logging stack NFC"</string>
+    <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Log di debug di fornitori dettagliato NFC"</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Includi log aggiuntivi di fornitori relativi a un dispositivo specifico nelle segnalazioni di bug, che potrebbero contenere informazioni private."</string>
+    <string name="nfc_snoop_log_title" msgid="1072690687525472163">"Log di esame NCI NFC non filtrato"</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Acquisisci pacchetti di dati NFC dettagliati, che potrebbero contenere informazioni private."</string>
+    <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Vuoi riavviare il dispositivo?"</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"La registrazione di dati NFC dettagliati è a solo scopo di sviluppo. Vengono inclusi dati NFC aggiuntivi nelle segnalazioni di bug, che potrebbero contenere informazioni private. Riavvia il dispositivo per cambiare questa impostazione."</string>
+    <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Riavvia"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Trasmissione"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"mirroring"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Attiva display wireless"</string>
@@ -1101,7 +1108,7 @@
     <string name="wifi_eap_method" msgid="3776009521349381742">"Metodo EAP"</string>
     <string name="please_select_phase2" msgid="577633852089847142">"Autenticazione fase 2"</string>
     <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"Certificato CA"</string>
-    <string name="wifi_eap_ocsp" msgid="8713933962516871238">"Stato dei certificati online"</string>
+    <string name="wifi_eap_ocsp" msgid="8713933962516871238">"Stato del certificato online"</string>
     <string name="wifi_eap_domain" msgid="8304301470752333203">"Dominio"</string>
     <string name="wifi_eap_user_cert" msgid="3569182430929173220">"Certificato utente"</string>
     <string name="wifi_eap_identity" msgid="3629406902174137028">"Identità"</string>
@@ -1684,7 +1691,7 @@
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Espelli"</string>
     <string name="storage_menu_format" msgid="8903698999905354146">"Formatta la scheda SD per archiviazione portatile"</string>
     <string name="storage_menu_format_button" msgid="7623565190643699626">"Formatta scheda"</string>
-    <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatta come memoria portatile"</string>
+    <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatta come portatile"</string>
     <string name="storage_menu_format_option" msgid="4886059624052908432">"Formatta"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Esegui migrazione dati"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Elimina"</string>
@@ -1704,7 +1711,7 @@
     <string name="usb_midi_summary" msgid="1842457325845863840">"Consente alle applicazioni MIDI di funzionare tramite USB con software MIDI sul computer."</string>
     <string name="storage_other_users" msgid="7017206190449510992">"Altri utenti"</string>
     <string name="storage_internal_title" msgid="3265098802217660829">"Memoria dispositivo"</string>
-    <string name="storage_external_title" msgid="8984075540312137135">"Memoria portatile"</string>
+    <string name="storage_external_title" msgid="8984075540312137135">"Archiviazione portatile"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g> montata"</string>
     <string name="storage_mount_failure" msgid="3667915814876418011">"Impossibile montare la <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -1729,7 +1736,7 @@
     <string name="storage_wizard_init_internal_summary" msgid="8224648610422581704">"Salva le app e i contenuti multimediali da usare solo su questo telefono"</string>
     <string name="storage_wizard_format_confirm_title" msgid="4898014527956178762">"Formatta memoria interna"</string>
     <string name="storage_wizard_format_confirm_body" msgid="5514665245241830772">"È necessario formattare la <xliff:g id="NAME_0">^1</xliff:g> per proteggerla. \n\nDopo la formattazione, questa <xliff:g id="NAME_1">^1</xliff:g> funzionerà soltanto in questo dispositivo. \n\n"<b>"La formattazione cancella tutti i dati attualmente memorizzati sulla <xliff:g id="NAME_2">^1</xliff:g>."</b>" Per evitare di perdere i dati, effettua il backup."</string>
-    <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Formatta come memoria portatile"</string>
+    <string name="storage_wizard_format_confirm_public_title" msgid="649252654496577680">"Formatta come archiviazione portatile"</string>
     <string name="storage_wizard_format_confirm_public_body" msgid="6219883780307218266">"È necessario formattare la <xliff:g id="NAME_0">^1</xliff:g>. \n\n"<b>"La formattazione cancella tutti i dati attualmente memorizzati sulla <xliff:g id="NAME_1">^1</xliff:g>."</b>" Per evitare di perdere i dati, effettua il backup."</string>
     <string name="storage_wizard_format_confirm_next" msgid="4412063054982084056">"Cancella e formatta"</string>
     <string name="storage_wizard_format_progress_title" msgid="9170393018855949774">"Formattazione della <xliff:g id="NAME">^1</xliff:g>…"</string>
@@ -1781,7 +1788,7 @@
     <string name="storage_wizard_migrate_v2_later" msgid="6067756122853315642">"Sposta i contenuti più tardi"</string>
     <string name="storage_wizard_migrate_progress_v2_title" msgid="8791318509516968103">"Spostamento dei contenuti…"</string>
     <string name="storage_wizard_slow_v2_title" msgid="3760766921170980221">"Dispositivo <xliff:g id="NAME">^1</xliff:g> lento"</string>
-    <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Puoi continuare a usare il dispositivo <xliff:g id="NAME_0">^1</xliff:g>, che però potrebbe essere lento. \n\nLe app memorizzate su <xliff:g id="NAME_1">^2</xliff:g> potrebbero non funzionare correttamente e i trasferimenti dei contenuti potrebbero richiedere molto tempo. \n\nProva a usare un dispositivo <xliff:g id="NAME_2">^3</xliff:g> più veloce oppure usa <xliff:g id="NAME_3">^4</xliff:g> come memoria portatile."</string>
+    <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Puoi continuare a usare il dispositivo <xliff:g id="NAME_0">^1</xliff:g>, che però potrebbe essere lento. \n\nLe app memorizzate su <xliff:g id="NAME_1">^2</xliff:g> potrebbero non funzionare correttamente e i trasferimenti dei contenuti potrebbero richiedere molto tempo. \n\nProva a usare un dispositivo <xliff:g id="NAME_2">^3</xliff:g> più veloce oppure usa <xliff:g id="NAME_3">^4</xliff:g> come archiviazione portatile."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Ricomincia"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Continua"</string>
     <string name="storage_wizard_ready_v2_external_body" msgid="7688457485389886923">"Puoi iniziare a utilizzare la tua <xliff:g id="NAME">^1</xliff:g>"</string>
@@ -2383,6 +2390,20 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"App scaricate"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Sperimentali"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Flag funzionalità"</string>
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
+    <skip />
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Lo screen reader è rivolto principalmente a utenti ciechi o con problemi di vista"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Tocca gli elementi sullo schermo per ascoltarne la lettura ad alta voce"</string>
@@ -2805,9 +2826,9 @@
     <string name="awake" msgid="5405871714019268978">"Tempo di attività dispositivo"</string>
     <string name="wifi_on_time" msgid="3880778525760926066">"Tempo accensione Wi‑Fi"</string>
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Tempo accensione Wi‑Fi"</string>
-    <string name="advanced_battery_title" msgid="3005993394776555079">"Utilizzo batteria"</string>
+    <string name="advanced_battery_title" msgid="3005993394776555079">"Utilizzo della batteria"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Dettagli cronologia"</string>
-    <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Utilizzo batteria"</string>
+    <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Utilizzo della batteria"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Visualizza utilizzo delle ultime 24 ore"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Utilizzo dall\'ultima ricarica completa"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"Utilizzo della batteria per l\'app"</string>
@@ -2987,7 +3008,7 @@
     <string name="battery_footer_summary" msgid="8221691063048377342">"I dati sull\'utilizzo della batteria sono approssimativi e possono variare in base all\'utilizzo."</string>
     <string name="battery_detail_foreground" msgid="3312280147931093967">"Durante l\'utilizzo attivo"</string>
     <string name="battery_detail_background" msgid="3333915023706228000">"In background"</string>
-    <string name="battery_detail_power_usage" msgid="1492926471397355477">"Utilizzo batteria"</string>
+    <string name="battery_detail_power_usage" msgid="1492926471397355477">"Utilizzo della batteria"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Dalla ricarica completa"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Gestisci utilizzo batteria"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Totale: <xliff:g id="TIME_0">^1</xliff:g> • In background: <xliff:g id="TIME_1">^2</xliff:g>\ndall\'ultima ricarica completa"</string>
@@ -3056,7 +3077,7 @@
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Utilizzo da parte del sistema nell\'intervallo di tempo <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Utilizzo da parte delle app nell\'intervallo di tempo <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Totale: meno di un minuto"</string>
-    <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Background: meno di un minuto"</string>
+    <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"In background: meno di un minuto"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Totale: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"In background: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"I dati sull\'utilizzo della batteria sono approssimativi e l\'utilizzo non viene misurato quando il telefono è in carica"</string>
@@ -3304,7 +3325,7 @@
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Giorno del mese in cui reimpostare ciclo di utilizzo dei dati:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Nessuna app ha utilizzato dati in questo periodo."</string>
     <string name="data_usage_label_foreground" msgid="8782117644558473624">"Primo piano"</string>
-    <string name="data_usage_label_background" msgid="8862781660427421859">"Background"</string>
+    <string name="data_usage_label_background" msgid="8862781660427421859">"In background"</string>
     <string name="data_usage_app_restricted" msgid="312065316274378518">"limitato"</string>
     <string name="data_usage_disable_mobile" msgid="6183809500102606801">"Disattivare i dati mobili?"</string>
     <string name="data_usage_disable_mobile_limit" msgid="1370147078938479538">"Imposta limite dati mobili"</string>
@@ -3446,7 +3467,7 @@
     <string name="one_usercrt" msgid="1865069301105101370">"un certificato utente"</string>
     <string name="one_cacrt" msgid="7467796501404158399">"un certificato CA"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"Certificati CA %d"</string>
-    <string name="user_credential_title" msgid="4686178602575567298">"Dettagli credenziali"</string>
+    <string name="user_credential_title" msgid="4686178602575567298">"Dettagli credenziale"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"Credenziali rimosse: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
     <string name="user_credential_none_installed" msgid="918620912366836994">"Non ci sono credenziali utente installate"</string>
     <string name="spellcheckers_settings_title" msgid="2799021700580591443">"Controllo ortografico"</string>
@@ -3677,7 +3698,7 @@
       <item quantity="other">Mostra %d elementi nascosti</item>
       <item quantity="one">Mostra %d elemento nascosto</item>
     </plurals>
-    <string name="network_dashboard_title" msgid="788543070557731240">"Rete e Internet"</string>
+    <string name="network_dashboard_title" msgid="788543070557731240">"Rete e internet"</string>
     <string name="network_dashboard_summary_mobile" msgid="7750924671970583670">"Dati mobili, Wi‑Fi, hotspot"</string>
     <string name="network_dashboard_summary_no_mobile" msgid="4022575916334910790">"Wi‑Fi, hotspot"</string>
     <string name="connected_devices_dashboard_title" msgid="19868275519754895">"Dispositivi connessi"</string>
@@ -4420,7 +4441,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Richiedi password prima di sbloccare"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Blocca dispositivo dopo lo sblocco app"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Conferma eliminazione della SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="5090811029854329373">"Verifica la tua identità prima di resettare una eSIM"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Verifica la tua identità prima di resettare una eSIM"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Questo profilo di lavoro è gestito da:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Gestito da <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Sperimentale)"</string>
