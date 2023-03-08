@@ -19,8 +19,6 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.FlashNotificationsUtil.ACTION_FLASH_NOTIFICATION_START_PREVIEW;
 import static com.android.settings.accessibility.FlashNotificationsUtil.EXTRA_FLASH_NOTIFICATION_PREVIEW_TYPE;
-import static com.android.settings.accessibility.FlashNotificationsUtil.SETTING_KEY_CAMERA_FLASH_NOTIFICATION;
-import static com.android.settings.accessibility.FlashNotificationsUtil.SETTING_KEY_SCREEN_FLASH_NOTIFICATION;
 import static com.android.settings.accessibility.FlashNotificationsUtil.TYPE_SHORT_PREVIEW;
 
 import android.content.ContentResolver;
@@ -95,10 +93,10 @@ public class FlashNotificationsPreviewPreferenceController extends
             @NonNull Lifecycle.Event event) {
         if (event == Lifecycle.Event.ON_RESUME) {
             mContentResolver.registerContentObserver(
-                    Settings.System.getUriFor(SETTING_KEY_CAMERA_FLASH_NOTIFICATION),
+                    Settings.System.getUriFor(Settings.System.CAMERA_FLASH_NOTIFICATION),
                     /* notifyForDescendants= */ false, mContentObserver);
             mContentResolver.registerContentObserver(
-                    Settings.System.getUriFor(SETTING_KEY_SCREEN_FLASH_NOTIFICATION),
+                    Settings.System.getUriFor(Settings.System.SCREEN_FLASH_NOTIFICATION),
                     /* notifyForDescendants= */ false, mContentObserver);
         } else if (event == Lifecycle.Event.ON_PAUSE) {
             mContentResolver.unregisterContentObserver(mContentObserver);
