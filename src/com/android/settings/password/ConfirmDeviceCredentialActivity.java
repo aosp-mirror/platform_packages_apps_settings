@@ -28,7 +28,7 @@ import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
 import android.app.Activity;
 import android.app.KeyguardManager;
-import android.app.StartLockscreenValidationRequest;
+import android.app.RemoteLockscreenValidationSession;
 import android.app.admin.DevicePolicyManager;
 import android.app.trust.TrustManager;
 import android.content.ComponentName;
@@ -235,10 +235,10 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     .setUserId(LockPatternUtils.USER_FRP)
                     .show();
         } else if (remoteValidation) {
-            StartLockscreenValidationRequest startLockScreenValidationRequest =
+            RemoteLockscreenValidationSession remoteLockscreenValidationSession =
                     intent.getParcelableExtra(
-                            KeyguardManager.EXTRA_START_LOCKSCREEN_VALIDATION_REQUEST,
-                            StartLockscreenValidationRequest.class);
+                            KeyguardManager.EXTRA_REMOTE_LOCKSCREEN_VALIDATION_SESSION,
+                            RemoteLockscreenValidationSession.class);
             ComponentName remoteLockscreenValidationServiceComponent =
                     intent.getParcelableExtra(Intent.EXTRA_COMPONENT_NAME, ComponentName.class);
 
@@ -247,7 +247,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     new ChooseLockSettingsHelper.Builder(this);
             launchedCDC = builder
                     .setRemoteLockscreenValidation(true)
-                    .setStartLockscreenValidationRequest(startLockScreenValidationRequest)
+                    .setRemoteLockscreenValidationSession(remoteLockscreenValidationSession)
                     .setRemoteLockscreenValidationServiceComponent(
                             remoteLockscreenValidationServiceComponent)
                     .setHeader(mTitle) // Show the title in the header location
