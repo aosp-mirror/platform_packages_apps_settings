@@ -3073,7 +3073,8 @@
             android:name="Settings$PowerUsageSummaryActivity"
             android:label="@string/power_usage_summary_title"
             android:exported="true"
-            android:icon="@drawable/ic_homepage_battery">
+            android:icon="@drawable/ic_homepage_battery"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize">
             <intent-filter android:priority="1">
                 <action android:name="android.intent.action.POWER_USAGE_SUMMARY" />
                 <category android:name="android.intent.category.DEFAULT" />
