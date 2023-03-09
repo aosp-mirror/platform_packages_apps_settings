@@ -50,7 +50,7 @@ public final class EthernetTetherPreferenceController extends TetherBasePreferen
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStart() {
         mEthernetListener = (iface, state, role, configuration) -> {
-            if (state == EthernetManager.STATE_LINK_UP) {
+            if (state != EthernetManager.STATE_ABSENT) {
                 mAvailableInterfaces.add(iface);
             } else {
                 mAvailableInterfaces.remove(iface);
