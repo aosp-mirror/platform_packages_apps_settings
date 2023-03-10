@@ -45,4 +45,10 @@
     <SwitchPreference
         android:key="wifi_tether_maximize_compatibility"
         android:title="@string/wifi_hotspot_maximize_compatibility"/>
+
+    <Preference
+        android:key="wifi_hotspot_speed"
+        android:title="@string/wifi_hotspot_speed_title"
+        android:summary="@string/summary_placeholder"
+        settings:isPreferenceVisible="@bool/config_show_wifi_hotspot_speed"/>
 </PreferenceScreen>
