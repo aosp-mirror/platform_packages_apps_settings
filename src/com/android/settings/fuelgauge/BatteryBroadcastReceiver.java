@@ -116,12 +116,21 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
             return;
         }
         final String action = intent.getAction();
+        Log.d(TAG, "updateBatteryStatus: action=" + action);
         if (Intent.ACTION_BATTERY_CHANGED.equals(action)) {
             final String batteryLevel = Utils.getBatteryPercentage(intent);
             final String batteryStatus =
                     Utils.getBatteryStatus(mContext, intent, /* compactStatus= */ false);
             final int batteryHealth = intent.getIntExtra(
                     BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_UNKNOWN);
+            Log.d(
+                    TAG,
+                    "Battery changed: level="
+                            + batteryLevel
+                            + ", status="
+                            + batteryStatus
+                            + ", health="
+                            + batteryHealth);
             if (!Utils.isBatteryPresent(intent)) {
                 Log.w(TAG, "Problem reading the battery meter.");
                 mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_NOT_PRESENT);
