@@ -106,6 +106,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Cancel"</string>
     <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Enable Bluetooth LE audio"</string>
     <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Enables Bluetooth LE audio feature if the device supports LE audio hardware capabilities."</string>
+    <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Enable Bluetooth LE audio Allow List"</string>
+    <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Enable Bluetooth LE audio allow list feature."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Media devices"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Call devices"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Other devices"</string>
@@ -162,6 +164,11 @@
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Your system, apps, and websites use the first supported language from your preferred languages."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"To select a language for each app, go to app language settings."</string>
     <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Learn more about languages"</string>
+    <string name="title_change_system_locale" msgid="8589844586256566951">"Change system language to %s ?"</string>
+    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Your device settings and regional preferences will change."</string>
+    <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Change"</string>
+    <string name="title_unavailable_locale" msgid="2628898110416542386">"%s not available"</string>
+    <string name="desc_unavailable_locale" msgid="2201756477400935896">"This language can’t be used as a system language, but you’ve let apps and websites know you prefer this language."</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regional preferences"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Set units and number preferences"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Let apps know your regional preferences so they can personalize your experience."</string>
@@ -325,6 +332,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Set up your fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Allow fingerprint unlock"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Use your fingerprint"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Learn more about Fingerprint Unlock"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"You’re in control"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"You and your child are in control"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Keep in mind"</string>
@@ -1421,6 +1429,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Require pattern"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Must draw pattern to unlock screen"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Make pattern visible"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Enhanced PIN privacy"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Disable animations while entering the PIN"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Make profile pattern visible"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibrate on tap"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Power button instantly locks"</string>
@@ -1855,9 +1865,6 @@
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Make the mouse pointer more noticeable"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Remove animations"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Reduce movement on the screen"</string>
-    <string name="accessibility_contrast_level_title" msgid="8044307040061738158">"Contrast Level"</string>
-    <string name="accessibility_contrast_level_left_label" msgid="732834661342809574">"Standard"</string>
-    <string name="accessibility_contrast_level_right_label" msgid="5381154127087484725">"High"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Mono audio"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Combine channels when playing audio"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Audio balance"</string>
@@ -2154,8 +2161,8 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Remove"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Cancel"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Charge to full"</string>
-    <string name="battery_tip_incompatible_charging_title" msgid="654267494395731975">"Incompatible charging setup"</string>
-    <string name="battery_tip_incompatible_charging_message" msgid="6031184746350185256">"Your battery is not charging or is charging very slowly"</string>
+    <string name="battery_tip_incompatible_charging_title" msgid="5120763575150751300">"Issue with charging accessory"</string>
+    <string name="battery_tip_incompatible_charging_message" msgid="8812537213731730513">"Battery charging slowly or won\'t charge. Check if the cable and power adapter work with your phone"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"Learn more about incompatible charging"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Battery Manager"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Manage apps automatically"</string>
@@ -2214,6 +2221,7 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Set a schedule"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Extend battery life"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Turn off when charged"</string>
+    <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Turn off at <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Battery Saver turns off when battery reaches <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
@@ -2786,6 +2794,10 @@
     <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"Delete all App clones failed"</string>
     <string name="cloned_app_creation_summary" msgid="4642627294993918502">"Creating…"</string>
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Cloned"</string>
+    <!-- no translation found for cloned_app_creation_toast_summary (3854494347144867870) -->
+    <skip />
+    <!-- no translation found for cloned_app_created_toast_summary (755225403495544163) -->
+    <skip />
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Languages, gestures, time, backup"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"System languages, app languages"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, network connection, internet, wireless, data, wi fi"</string>
@@ -3038,7 +3050,7 @@
     <string name="notification_dashboard_summary" msgid="7530169251902320652">"Notification history, conversations"</string>
     <string name="conversation_notifs_category" msgid="2549844862379963273">"Conversation"</string>
     <string name="general_notification_header" msgid="3669031068980713359">"Manage"</string>
-    <string name="app_notification_field" msgid="3858667320444612716">"App settings"</string>
+    <string name="app_notification_field" msgid="3208079070539894909">"App notifications"</string>
     <string name="app_notification_field_summary" msgid="5981393613897713471">"Control notifications from individual apps"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"General"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Work notifications"</string>
@@ -3092,7 +3104,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Lock screen, Lockscreen, Skip, Bypass"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"When work profile is locked"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Show only new notifications on lock screen"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"After each unlock, remove existing notifications from the lock screen"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Automatically remove previously viewed notifications from the lock screen"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notifications on lock screen"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Show conversations, default, and silent"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Show conversations, default, and silent"</string>
@@ -3976,20 +3988,15 @@
     <string name="autofill_app" msgid="7595308061826307921">"Autofill service"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Default autofill service"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Passwords"</string>
-    <!-- no translation found for credman_credentials (7413302794874989255) -->
-    <skip />
+    <string name="credman_credentials" msgid="7413302794874989255">"Passwords, passkeys and data services"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# password}other{# passwords}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"auto, fill, autofill, password"</string>
-    <!-- no translation found for credman_keywords (8305600680836806170) -->
-    <skip />
+    <string name="credman_keywords" msgid="8305600680836806170">"data, passkey, password"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Make sure you trust this app&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; uses what\'s on your screen to determine what can be autofilled."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Turn off %1$s?"</string>
-    <!-- no translation found for credman_confirmation_message (3499478570809427026) -->
-    <skip />
-    <!-- no translation found for credman_error_message_title (4741457523969373713) -->
-    <skip />
-    <!-- no translation found for credman_error_message (6793314648458925172) -->
-    <skip />
+    <string name="credman_confirmation_message" msgid="3499478570809427026">"Saved info like addresses or payment methods won\'t be filled in when you sign in. To keep your saved info filled in, set enable a password, passkey and data/or service."</string>
+    <string name="credman_error_message_title" msgid="4741457523969373713">"Passwords, passkeys and data services limit"</string>
+    <string name="credman_error_message" msgid="6793314648458925172">"You can have up to 5 passwords, passkeys and data services active at the same time. Turn off a service to add more."</string>
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Turn off"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Autofill"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Logging level"</string>
@@ -4578,14 +4585,14 @@
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Fingerprint sensor"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Flash notifications"</string>
     <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Off"</string>
-    <string name="flash_notifications_summary_on_camera" msgid="455038312752009971">"On / camera flash"</string>
-    <string name="flash_notifications_summary_on_screen" msgid="7321838939240499267">"On / screen flash"</string>
-    <string name="flash_notifications_summary_on_camera_and_screen" msgid="6515622987118268649">"On / camera and screen flash"</string>
-    <string name="flash_notifications_intro" msgid="1506414740603805778">"Flash the camera light or the screen when you receive notifications or when alarms sound."</string>
-    <string name="flash_notifications_note" msgid="7258551860911169239">"Use flash notifications with caution if your are light sensitive"</string>
+    <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"On / Camera flash"</string>
+    <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"On / Screen flash"</string>
+    <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"On / Camera and screen flash"</string>
+    <string name="flash_notifications_intro" msgid="8409873413480928249">"Flash the camera light or the screen when you receive notifications or when alarms sound"</string>
+    <string name="flash_notifications_note" msgid="2426125248448055075">"Use flash notifications with caution if you\'re light sensitive"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"Preview"</string>
-    <string name="camera_flash_notification_title" msgid="1605639711485773787">"Camera flash notification"</string>
-    <string name="screen_flash_notification_title" msgid="8008197872050400734">"Screen flash notification"</string>
+    <string name="camera_flash_notification_title" msgid="2475084876382922732">"Camera flash"</string>
+    <string name="screen_flash_notification_title" msgid="3773100725793316708">"Screen flash"</string>
     <string name="screen_flash_notification_color_title" msgid="7213407653340970790">"Screen flash color"</string>
     <string name="screen_flash_color_blue" msgid="3585766657607931371">"Blue"</string>
     <string name="screen_flash_color_azure" msgid="8691198532944992243">"Azure"</string>
