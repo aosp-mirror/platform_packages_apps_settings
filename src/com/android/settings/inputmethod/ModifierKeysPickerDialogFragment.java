@@ -244,6 +244,6 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
 
     private int getColorOfColorAccentPrimaryVariant() {
         return Utils.getColorAttrDefaultColor(
-                mContext, com.android.internal.R.attr.materialColorPrimaryContainer);
+                mContext, com.android.internal.R.attr.colorAccentPrimaryVariant);
     }
 }
