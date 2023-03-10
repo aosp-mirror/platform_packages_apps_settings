@@ -101,7 +101,9 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
             return setSummaryResId(R.string.calls_sms_no_sim);
         } else {
             final StringBuilder summary = new StringBuilder();
-            for (SubscriptionInfoEntity subInfo : list) {
+            SubscriptionInfoEntity[] entityArray = list.toArray(
+                    new SubscriptionInfoEntity[0]);
+            for (SubscriptionInfoEntity subInfo : entityArray) {
                 int subsSize = list.size();
                 int subId = Integer.parseInt(subInfo.subId);
                 final CharSequence displayName = subInfo.uniqueName;
@@ -125,7 +127,7 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
                             .append(")");
                 }
                 // Do not add ", " for the last subscription.
-                if (!subInfo.equals(list.get(list.size() - 1))) {
+                if (list.size() > 0 && !subInfo.equals(list.get(list.size() - 1))) {
                     summary.append(", ");
                 }
 

@@ -688,6 +688,12 @@ public class SubscriptionUtil {
                         .findFirst().orElse(null);
     }
 
+    public static boolean isDefaultSubscription(Context context, int subId) {
+        SubscriptionAnnotation subInfo = getDefaultSubscriptionSelection(
+                new SelectableSubscriptions(context, true).call());
+        return subInfo != null && subInfo.getSubscriptionId() == subId;
+    }
+
     public static SubscriptionInfo getSubscriptionOrDefault(Context context, int subscriptionId) {
         return getSubscription(context, subscriptionId,
                 (subscriptionId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) ? null : (

@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -150,7 +151,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                         MobileNetworkUtils.getSearchableSubscriptionId(context));
                 Log.d(LOG_TAG, "display subId from intent: " + mSubId);
             } else {
-                Log.d(LOG_TAG, "intent is null, can not get the subId from intent.");
+                Log.d(LOG_TAG, "intent is null, can not get subId " + mSubId + " from intent.");
             }
         } else {
             mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID,
@@ -165,9 +166,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                     mMobileNetworkRepository.queryMobileNetworkInfoBySubId(
                             String.valueOf(mSubId));
         });
-        if (mSubId <= SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            return Arrays.asList();
-        }
+
         return Arrays.asList(
                 new DataUsageSummaryPreferenceController(getActivity(), getSettingsLifecycle(),
                         this, mSubId),
@@ -178,8 +177,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 new SmsDefaultSubscriptionController(context, KEY_SMS_PREF, getSettingsLifecycle(),
                         this),
                 new MobileDataPreferenceController(context, KEY_MOBILE_DATA_PREF,
-                        getSettingsLifecycle(), this, mSubId),
-                new ConvertToEsimPreferenceController(context, KEY_CONVERT_TO_ESIM_PREF,
                         getSettingsLifecycle(), this, mSubId));
     }
 
@@ -188,8 +185,14 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         super.onAttach(context);
 
         if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            Log.d(LOG_TAG, "Invalid subId request " + mSubId);
-            return;
+            Log.d(LOG_TAG, "Invalid subId, get the default subscription to show.");
+            SubscriptionInfo info = SubscriptionUtil.getSubscriptionOrDefault(context, mSubId);
+            if (info == null) {
+                Log.d(LOG_TAG, "Invalid subId request " + mSubId);
+                return;
+            }
+            mSubId = info.getSubscriptionId();
+            Log.d(LOG_TAG, "Show NetworkSettings fragment for subId" + mSubId);
         }
 
         Intent intent = getIntent();
@@ -291,7 +294,11 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         use(ContactDiscoveryPreferenceController.class).init(getParentFragmentManager(), mSubId);
         use(NrAdvancedCallingPreferenceController.class).init(mSubId);
         use(TransferEsimPreferenceController.class).init(mSubId, mSubscriptionInfoEntity);
-        use(ConvertToEsimPreferenceController.class).init(mSubId, mSubscriptionInfoEntity);
+        final ConvertToEsimPreferenceController convertToEsimPreferenceController =
+                use(ConvertToEsimPreferenceController.class);
+        if (convertToEsimPreferenceController != null) {
+            convertToEsimPreferenceController.init(mSubId, mSubscriptionInfoEntity);
+        }
     }
 
     @Override
@@ -321,7 +328,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     }
 
     private void onSubscriptionDetailChanged() {
-
         if (mSubscriptionInfoEntity != null) {
             /**
              * Update the title when SIM stats got changed
@@ -451,7 +457,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         ContactDiscoveryDialogFragment fragment = getContactDiscoveryFragment(mSubId);
 
         if (mSubscriptionInfoEntity == null) {
-            Log.d(LOG_TAG, "Zoey, showContactDiscoveryDialog, Invalid subId request " + mSubId);
+            Log.d(LOG_TAG, "showContactDiscoveryDialog, Invalid subId request " + mSubId);
             onDestroy();
             return;
         }
@@ -488,13 +494,20 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         }
 
         mSubInfoEntityList = subInfoEntityList;
-        mSubInfoEntityList.forEach(entity -> {
+        SubscriptionInfoEntity[] entityArray = mSubInfoEntityList.toArray(
+                new SubscriptionInfoEntity[0]);
+        for (SubscriptionInfoEntity entity : entityArray) {
             int subId = Integer.parseInt(entity.subId);
             mSubscriptionInfoMap.put(subId, entity);
-            if (subId == mSubId) {
+            if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID && subId == mSubId) {
                 mSubscriptionInfoEntity = entity;
-                onSubscriptionDetailChanged();
+                Log.d(LOG_TAG, "Set subInfo for subId " + mSubId);
+                break;
+            } else if (entity.isDefaultSubscriptionSelection) {
+                mSubscriptionInfoEntity = entity;
+                Log.d(LOG_TAG, "Set subInfo to the default subInfo.");
             }
-        });
+        }
+        onSubscriptionDetailChanged();
     }
 }
