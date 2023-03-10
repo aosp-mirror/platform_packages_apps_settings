@@ -23,7 +23,7 @@ import static com.android.settings.password.TestUtils.VALID_REMAINING_ATTEMPTS;
 import static com.android.settings.password.TestUtils.buildConfirmDeviceCredentialBaseActivity;
 import static com.android.settings.password.TestUtils.createPackageInfoWithService;
 import static com.android.settings.password.TestUtils.createRemoteLockscreenValidationIntent;
-import static com.android.settings.password.TestUtils.createRemoteLockscreenValidationSession;
+import static com.android.settings.password.TestUtils.createStartLockscreenValidationRequest;
 import static com.android.settings.password.TestUtils.getConfirmDeviceCredentialBaseFragment;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -132,8 +132,8 @@ public class ConfirmCredentialTest {
             throws Exception {
         Intent intentWithInvalidComponentName = new Intent()
                 .putExtra(ConfirmDeviceCredentialBaseFragment.IS_REMOTE_LOCKSCREEN_VALIDATION, true)
-                .putExtra(KeyguardManager.EXTRA_REMOTE_LOCKSCREEN_VALIDATION_SESSION,
-                        createRemoteLockscreenValidationSession(
+                .putExtra(KeyguardManager.EXTRA_START_LOCKSCREEN_VALIDATION_REQUEST,
+                        createStartLockscreenValidationRequest(
                                 KeyguardManager.PASSWORD, VALID_REMAINING_ATTEMPTS))
                 .putExtra(Intent.EXTRA_COMPONENT_NAME, new ComponentName("pkg", "cls"));
 

@@ -646,9 +646,6 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     break;
                 case RemoteLockscreenValidationResult.RESULT_NO_REMAINING_ATTEMPTS:
                     getActivity().finish();
-                    break;
-                case RemoteLockscreenValidationResult.RESULT_SESSION_EXPIRED:
-                    getActivity().finish();
             }
             mGlifLayout.setProgressBarShown(false);
         }

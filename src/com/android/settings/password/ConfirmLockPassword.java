@@ -166,7 +166,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);
 
             if (mRemoteValidation) {
-                mIsAlpha = mRemoteLockscreenValidationSession.getLockType()
+                mIsAlpha = mStartLockscreenValidationRequest.getLockscreenUiType()
                         == KeyguardManager.PASSWORD;
                 // ProgressBar visibility is set to GONE until interacted with.
                 // Set progress bar to INVISIBLE, so the EditText does not get bumped down later.
@@ -632,9 +632,6 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                             (int) result.getTimeoutMillis(), mEffectiveUserId);
                     break;
                 case RemoteLockscreenValidationResult.RESULT_NO_REMAINING_ATTEMPTS:
-                    getActivity().finish();
-                    break;
-                case RemoteLockscreenValidationResult.RESULT_SESSION_EXPIRED:
                     getActivity().finish();
             }
             mGlifLayout.setProgressBarShown(false);
