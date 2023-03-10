@@ -41,6 +41,8 @@ import android.util.FeatureFlagUtils;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
@@ -49,6 +51,8 @@ import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowFragment;
+import com.android.settings.wifi.factory.WifiFeatureProvider;
+import com.android.settings.wifi.repository.WifiHotspotRepository;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -90,6 +94,10 @@ public class WifiTetherSettingsTest {
     private PreferenceScreen mPreferenceScreen;
     @Mock
     private TextView mEmptyTextView;
+    @Mock
+    WifiTetherViewModel mWifiTetherViewModel;
+    @Mock
+    WifiHotspotRepository mWifiHotspotRepository;
 
     private WifiTetherSettings mWifiTetherSettings;
 
@@ -105,6 +113,11 @@ public class WifiTetherSettingsTest {
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
         when(mWifiRestriction.isTetherAvailable(mContext)).thenReturn(true);
         when(mWifiRestriction.isHotspotAvailable(mContext)).thenReturn(true);
+
+        WifiFeatureProvider provider = FakeFeatureFactory.setupForTest().getWifiFeatureProvider();
+        when(provider.getWifiHotspotRepository()).thenReturn(mWifiHotspotRepository);
+        when(provider.getWifiTetherViewModel(mock(ViewModelStoreOwner.class)))
+                .thenReturn(mWifiTetherViewModel);
 
         mWifiTetherSettings = new WifiTetherSettings(mWifiRestriction);
     }
@@ -140,6 +153,16 @@ public class WifiTetherSettingsTest {
 
         verify(mPreferenceScreen).removeAll();
         verify(mEmptyTextView).setText(anyInt());
+    }
+
+    @Test
+    public void onSpeedSummaryChanged_canNotShowWifiHotspot_returnFalse() {
+        int stringResId = R.string.wifi_hotspot_speed_6g_summary;
+        mWifiTetherSettings.mWifiHotspotSpeed = mock(Preference.class);
+
+        mWifiTetherSettings.onSpeedSummaryChanged(stringResId);
+
+        verify(mWifiTetherSettings.mWifiHotspotSpeed).setSummary(stringResId);
     }
 
     @Test
