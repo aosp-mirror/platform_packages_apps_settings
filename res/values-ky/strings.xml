@@ -521,6 +521,28 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Дирилдегенин сезгенден кийин манжаңызды көтөрүңүз"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Азыраак жарыктандырылган жерге өтүп, кайталап көрүңүз"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Аракеттериңиздин саны чекке жетти"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Кулпуну саат менен ачуу"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"Эгер манжа изи менен ачуу жана жүзүнөн таанып ачуу функцияларын тууралаган болсоңуз, беткап тагынып же караңгы жерде турганыңызда телефонуңуз манжаңыздын изин сурайт.\n\nЖүзүңүз же манжаңыздын изи таанылбаганда, кулпуну саатыңыз менен ача аласыз."</string>
+    <!-- no translation found for biometric_settings_intro_with_activeunlock (8930396405433023076) -->
+    <skip />
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Манжаңыздын изи таанылбаганда, кулпуну саатыңыз менен ача аласыз."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Жүзүңүз таанылбаганда, кулпуну саатыңыз менен ача аласыз."</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Жүз же саатты колдонуу"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Манжа изи же саат аркылуу"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Жүз, манжа изи же саат аркылуу"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"Саат аркылуу"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Алгач Жүзүнөн таанып же Манжа изи менен ачууну тууралаңыз"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"Жүзүңүз же манжаңыздын изи таанылбаганда, кулпуну саатыңыз менен ача аласыз"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Алгач Манжа изи менен ачууну тууралаңыз"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"Манжаңыздын изи таанылбаганда, кулпуну саатыңыз менен ача аласыз"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"Алгач Жүзүнөн таанып ачууну тууралаңыз"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"Жүзүңүз таанылбаганда, кулпуну саатыңыз менен ача аласыз"</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"Тууралоо"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"Манжа изи жана <xliff:g id="WATCH">%s</xliff:g> кошулду"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"Манжа издери жана <xliff:g id="WATCH">%s</xliff:g> кошулду"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Жүз жана <xliff:g id="WATCH">%s</xliff:g> кошулду"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Жүз, манжа издери жана <xliff:g id="WATCH">%s</xliff:g> кошулду"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Жүз, манжа издери жана <xliff:g id="WATCH">%s</xliff:g> кошулду"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Кулпуланган түзмөктү жүз жана манжа изи менен ачуу"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Жөндөө үчүн таптаңыз"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Жүз жана манжа изи кошулду"</string>
@@ -588,12 +610,9 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Эми манжаңыздын изи менен планшетиңиздин кулпусун ачып же колдонмолорго кирүүдө өзүңүздү же сатып алууну ырастай аласыз"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Эми манжаңыздын изи менен түзмөгүңүздүн кулпусун ачып же колдонмолорго кирүүдө өзүңүздү же сатып алууну ырастай аласыз"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Эми манжаңыздын изи менен телефонуңуздун кулпусун ачып же колдонмолорго кирүүдө өзүңүздү же сатып алууну ырастай аласыз"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"Эми манжаңыздын изи менен планшетиңиздин кулпусун ачып же колдонмолорго кирүүдө же кандайдыр бир нерсени сатып алууда өзүңүздү ырастай аласыз. \n\nДагы башка манжаңыздын изин кошуп койсоңуз, планшетиңизди каалаган абалда ача бересиз."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"Эми манжаңыздын изи менен түзмөгүңүздүн кулпусун ачып же колдонмолорго кирүүдө же кандайдыр бир нерсени сатып алууда өзүңүздү ырастай аласыз.\n\nДагы башка манжаңыздын изин кошуп койсоңуз, түзмөгүңүздү каалаган абалда ача бересиз."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"Эми манжаңыздын изи менен телефонуңуздун кулпусун ачып же колдонмолорго кирүүдө же кандайдыр бир нерсени сатып алууда өзүңүздү ырастай аласыз.\n\nДагы башка манжаңыздын изин кошуп койсоңуз, телефонуңузду каалаган абалда ача бересиз."</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Түзмөктү ачуу үчүн тийүү"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Экран өчүп турганда да түзмөктү ачуу үчүн сенсорго тийип коюңуз. Ушуну менен, түзмөктүн кокустан ачылып кетүү ыктымалдыгы жогорулашы мүмкүн."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Экран, кулпуну ачуу"</string>
@@ -3063,7 +3082,7 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"<xliff:g id="PERCENT">%1$s</xliff:g> батарея менен"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Батареянын деңгээли"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Батареянын деңгээли (%%) абал тилкесинде көрүнүп турат"</string>
-    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Акыркы жолу толук кубатталгандан бери батареянын кубатынын деңгээли"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Акыркы жолу толук кубатталгандан бери батареянын деңгээли"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Батареянын кубатынын акыркы 24 сааттагы деңгээли"</string>
     <string name="battery_app_usage" msgid="8976453608783133770">"Акыркы жолу толук кубатталгандан бери колдонмолордун пайдаланылышы"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Колдонмонун акыркы 24 саатта иштетилиши"</string>
@@ -4597,7 +4616,7 @@
     <string name="usage_access" msgid="5487993885373893282">"Колдонуу таржымалын көрүү"</string>
     <string name="permit_usage_access" msgid="179630895262172674">"Таржымалды көрүүгө уруксат берүү"</string>
     <string name="app_usage_preference" msgid="7062447555623339120">"Колдонмону пайдалануунун параметрлери"</string>
-    <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"Түзмөктү колдонуу убакыты"</string>
+    <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"Канча убакыт колдонулду"</string>
     <string name="usage_access_description" msgid="8547716253713890707">"Колдонуу таржымалы аркылуу кайсы колдонмолор канчалык көп колдонула турганын, ошондой эле байланыш операторуңузду, тил параметрлерин жана башка параметрлерди көрө аласыз."</string>
     <string name="memory_settings_title" msgid="6582588646363308430">"Эстутум"</string>
     <string name="memory_details_title" msgid="3048107441540417799">"Эстутумдун чоо-жайы"</string>
@@ -5217,7 +5236,7 @@
     <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"Түзмөктү демейки жөндөөлөргө кайтаруу"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Эгер түзмөк кулпуланып калса, аны төмөнкүлөр үчүн гана колдоно аласыз:"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Шашылыш чалуу"</string>
-    <string name="financed_privacy_system_info" msgid="4158031444108708927">"Күн, убакыт, тармактын статусу жана батареянын кубатынын деңгээли сыяктуу системанын маалыматын көрүү"</string>
+    <string name="financed_privacy_system_info" msgid="4158031444108708927">"Күн, убакыт, тармактын статусу жана батареянын деңгээли сыяктуу системанын маалыматын көрүү"</string>
     <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"Түзмөктү күйгүзүү же өчүрүү"</string>
     <string name="financed_privacy_notifications" msgid="5932303271274089968">"Билдирмелерди жана SMS билдирүүлөрүн көрүү"</string>
     <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"Насыя берүүчү уруксат берген колдонмолордо иштеңиз"</string>

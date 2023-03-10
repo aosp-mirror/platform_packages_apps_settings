@@ -521,6 +521,28 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Til je vinger op zodra je een trilling voelt"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Ga naar een plek met zachter licht en probeer het opnieuw"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Je hebt het maximale aantal pogingen bereikt"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Ontgrendelen via smartwatch"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"Als je Ontgrendelen via gezichtsherkenning en Ontgrendelen met vingerafdruk instelt, vraagt je telefoon naar je vingerafdruk als je een mondkapje draagt of in een donkere omgeving bent.\n\nJe kunt ontgrendelen met je smartwatch als je gezicht of vingerafdruk niet wordt herkend."</string>
+    <!-- no translation found for biometric_settings_intro_with_activeunlock (8930396405433023076) -->
+    <skip />
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Je kunt ontgrendelen met je smartwatch als je vingerafdruk niet wordt herkend."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Je kunt ontgrendelen met je smartwatch als je gezicht niet wordt herkend."</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Gezicht of smartwatch gebruiken"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Vingerafdruk of smartwatch gebruiken"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Gezicht, vingerafdruk of smartwatch gebruiken"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"Smartwatch gebruiken"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Stel eerst Ontgrendelen via gezicht of vingerafdruk in"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"Je kunt ontgrendelen met je smartwatch als je gezicht of vingerafdruk niet wordt herkend"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Stel eerst Ontgrendelen met vingerafdruk in"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"Je kunt ontgrendelen met je smartwatch als je vingerafdruk niet wordt herkend"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"Stel eerst Ontgrendelen via gezichtsherkenning in"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"Je kunt ontgrendelen met je smartwatch als je gezicht niet wordt herkend"</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"Instellen"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"Vingerafdruk en <xliff:g id="WATCH">%s</xliff:g> toegevoegd"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"Vingerafdrukken en <xliff:g id="WATCH">%s</xliff:g> toegevoegd"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Gezicht en <xliff:g id="WATCH">%s</xliff:g> toegevoegd"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Gezicht, vingerafdruk en <xliff:g id="WATCH">%s</xliff:g> toegevoegd"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Gezicht, vingerafdrukken en <xliff:g id="WATCH">%s</xliff:g> toegevoegd"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Ontgrendelen via gezichtsherkenning en vingerafdruk"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Tik om in te stellen"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Gezicht en vingerafdrukken toegevoegd"</string>
@@ -588,12 +610,9 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Je kunt nu je vingerafdruk gebruiken om je tablet te ontgrendelen of om te bevestigen dat jij het bent, bijvoorbeeld als je inlogt bij apps of een aankoop goedkeurt"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Je kunt nu je vingerafdruk gebruiken om je apparaat te ontgrendelen of om te bevestigen dat jij het bent, bijvoorbeeld als je inlogt bij apps of een aankoop goedkeurt"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Je kunt nu je vingerafdruk gebruiken om je telefoon te ontgrendelen of om te bevestigen dat jij het bent, bijvoorbeeld als je inlogt bij apps of een aankoop goedkeurt"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (308213612040535580) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (911541337099737104) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message (5261993991973265283) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"Je kunt nu met je vingerafdruk gebruiken je tablet ontgrendelen of bevestigen dat jij het bent, bijvoorbeeld als je inlogt bij apps of een aankoop goedkeurt. \n\nVoeg nog een vingerafdruk toe zodat je de tablet makkelijker kunt ontgrendelen als je die op verschillende manieren vasthoudt."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"Je kunt nu met je vingerafdruk je apparaat ontgrendelen of bevestigen dat jij het bent, bijvoorbeeld als je inlogt bij apps of een aankoop goedkeurt.\n\nVoeg nog een vingerafdruk toe zodat je je het apparaat makkelijker kunt ontgrendelen als je het op verschillende manieren vasthoudt."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"Je kunt nu met je vingerafdruk je telefoon ontgrendelen of bevestigen dat jij het bent, bijvoorbeeld als je inlogt bij apps of een aankoop goedkeurt.\n\nVoeg nog een vingerafdruk toe zodat je je de telefoon makkelijker kunt ontgrendelen als je op die verschillende manieren vasthoudt."</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Aanraken om op elk moment te ontgrendelen"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Raak de sensor aan om te ontgrendelen, ook als het scherm uitstaat. Hierdoor neemt de kans op per ongeluk ontgrendelen toe."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Scherm, Ontgrendelen"</string>
@@ -3063,7 +3082,7 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"bij <xliff:g id="PERCENT">%1$s</xliff:g> batterijlading"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Batterijpercentage"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Toon batterijpercentage in statusbalk"</string>
-    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Batterijniveau sinds de laatste volledige lading"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Batterijniveau sinds de laatste keer dat de batterij volledig is opgeladen"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Batterijniveau voor afgelopen 24 uur"</string>
     <string name="battery_app_usage" msgid="8976453608783133770">"App-gebruik sinds de laatste volledige lading"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"App-gebruik voor afgelopen 24 uur"</string>
