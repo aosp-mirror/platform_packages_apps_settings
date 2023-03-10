@@ -22,7 +22,7 @@ import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.KeyguardManager;
-import android.app.RemoteLockscreenValidationSession;
+import android.app.StartLockscreenValidationRequest;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -145,7 +145,7 @@ public final class ChooseLockSettingsHelper {
         private boolean mAllowAnyUserId;
         private boolean mForceVerifyPath;
         private boolean mRemoteLockscreenValidation;
-        @Nullable private RemoteLockscreenValidationSession mRemoteLockscreenValidationSession;
+        @Nullable private StartLockscreenValidationRequest mStartLockscreenValidationRequest;
         @Nullable private ComponentName mRemoteLockscreenValidationServiceComponent;
         boolean mRequestGatekeeperPasswordHandle;
 
@@ -272,7 +272,7 @@ public final class ChooseLockSettingsHelper {
 
         /**
          * @param isRemoteLockscreenValidation if true, remote device validation flow will be
-         *                                 started. {@link #setRemoteLockscreenValidationSession},
+         *                                 started. {@link #setStartLockscreenValidationRequest} and
          *                                 {@link #setRemoteLockscreenValidationServiceComponent}
          *                                 must also be used to set the required data.
          */
@@ -283,14 +283,14 @@ public final class ChooseLockSettingsHelper {
         }
 
         /**
-         * @param remoteLockscreenValidationSession contains information necessary to perform remote
+         * @param startLockScreenValidationRequest contains information necessary to perform remote
          *                                         lockscreen validation such as the remote device's
          *                                         lockscreen type, public key to be used for
          *                                         encryption, and remaining attempts.
          */
-        @NonNull public Builder setRemoteLockscreenValidationSession(
-                RemoteLockscreenValidationSession remoteLockscreenValidationSession) {
-            mRemoteLockscreenValidationSession = remoteLockscreenValidationSession;
+        @NonNull public Builder setStartLockscreenValidationRequest(
+                StartLockscreenValidationRequest startLockScreenValidationRequest) {
+            mStartLockscreenValidationRequest = startLockScreenValidationRequest;
             return this;
         }
 
@@ -369,7 +369,7 @@ public final class ChooseLockSettingsHelper {
                 mBuilder.mDescription, mBuilder.mReturnCredentials, mBuilder.mExternal,
                 mBuilder.mForceVerifyPath, mBuilder.mUserId, mBuilder.mAlternateButton,
                 mBuilder.mCheckBoxLabel, mBuilder.mRemoteLockscreenValidation,
-                mBuilder.mRemoteLockscreenValidationSession,
+                mBuilder.mStartLockscreenValidationRequest,
                 mBuilder.mRemoteLockscreenValidationServiceComponent, mBuilder.mAllowAnyUserId,
                 mBuilder.mForegroundOnly, mBuilder.mRequestGatekeeperPasswordHandle);
     }
@@ -379,18 +379,18 @@ public final class ChooseLockSettingsHelper {
             boolean returnCredentials, boolean external, boolean forceVerifyPath,
             int userId, @Nullable CharSequence alternateButton,
             @Nullable CharSequence checkboxLabel, boolean remoteLockscreenValidation,
-            @Nullable RemoteLockscreenValidationSession remoteLockscreenValidationSession,
+            @Nullable StartLockscreenValidationRequest startLockScreenValidationRequest,
             @Nullable ComponentName remoteLockscreenValidationServiceComponent,
             boolean allowAnyUser, boolean foregroundOnly, boolean requestGatekeeperPasswordHandle) {
         Optional<Class<?>> activityClass = determineAppropriateActivityClass(
-                returnCredentials, forceVerifyPath, userId, remoteLockscreenValidationSession);
+                returnCredentials, forceVerifyPath, userId, startLockScreenValidationRequest);
         if (activityClass.isEmpty()) {
             return false;
         }
 
         return launchConfirmationActivity(request, title, header, description, activityClass.get(),
                 returnCredentials, external, forceVerifyPath, userId, alternateButton,
-                checkboxLabel, remoteLockscreenValidation, remoteLockscreenValidationSession,
+                checkboxLabel, remoteLockscreenValidation, startLockScreenValidationRequest,
                 remoteLockscreenValidationServiceComponent, allowAnyUser, foregroundOnly,
                 requestGatekeeperPasswordHandle);
     }
@@ -400,7 +400,7 @@ public final class ChooseLockSettingsHelper {
             boolean external, boolean forceVerifyPath, int userId,
             @Nullable CharSequence alternateButton, @Nullable CharSequence checkbox,
             boolean remoteLockscreenValidation,
-            @Nullable RemoteLockscreenValidationSession remoteLockscreenValidationSession,
+            @Nullable StartLockscreenValidationRequest startLockScreenValidationRequest,
             @Nullable ComponentName remoteLockscreenValidationServiceComponent,
             boolean allowAnyUser, boolean foregroundOnly, boolean requestGatekeeperPasswordHandle) {
         final Intent intent = new Intent();
@@ -419,8 +419,8 @@ public final class ChooseLockSettingsHelper {
         intent.putExtra(Intent.EXTRA_USER_ID, userId);
         intent.putExtra(KeyguardManager.EXTRA_ALTERNATE_BUTTON_LABEL, alternateButton);
         intent.putExtra(KeyguardManager.EXTRA_CHECKBOX_LABEL, checkbox);
-        intent.putExtra(KeyguardManager.EXTRA_REMOTE_LOCKSCREEN_VALIDATION_SESSION,
-                remoteLockscreenValidationSession);
+        intent.putExtra(KeyguardManager.EXTRA_START_LOCKSCREEN_VALIDATION_REQUEST,
+                startLockScreenValidationRequest);
         intent.putExtra(Intent.EXTRA_COMPONENT_NAME, remoteLockscreenValidationServiceComponent);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOREGROUND_ONLY, foregroundOnly);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_ALLOW_ANY_USER, allowAnyUser);
@@ -477,10 +477,10 @@ public final class ChooseLockSettingsHelper {
 
     private Optional<Class<?>> determineAppropriateActivityClass(boolean returnCredentials,
             boolean forceVerifyPath, int userId,
-            @Nullable RemoteLockscreenValidationSession remoteLockscreenValidationSession) {
+            @Nullable StartLockscreenValidationRequest startLockscreenValidationRequest) {
         int lockType;
-        if (remoteLockscreenValidationSession != null) {
-            lockType = remoteLockscreenValidationSession.getLockType();
+        if (startLockscreenValidationRequest != null) {
+            lockType = startLockscreenValidationRequest.getLockscreenUiType();
         } else {
             final int effectiveUserId = UserManager
                     .get(mActivity).getCredentialOwnerProfile(userId);

@@ -18,7 +18,7 @@ package com.android.settings.password;
 
 import android.app.KeyguardManager;
 import android.app.RemoteLockscreenValidationResult;
-import android.app.RemoteLockscreenValidationSession;
+import android.app.StartLockscreenValidationRequest;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -79,15 +79,15 @@ public final class TestUtils {
             int lockscreenType, int remainingAttempts) throws Exception {
         return new Intent()
                 .putExtra(ConfirmDeviceCredentialBaseFragment.IS_REMOTE_LOCKSCREEN_VALIDATION, true)
-                .putExtra(KeyguardManager.EXTRA_REMOTE_LOCKSCREEN_VALIDATION_SESSION,
-                        createRemoteLockscreenValidationSession(lockscreenType, remainingAttempts))
+                .putExtra(KeyguardManager.EXTRA_START_LOCKSCREEN_VALIDATION_REQUEST,
+                        createStartLockscreenValidationRequest(lockscreenType, remainingAttempts))
                 .putExtra(Intent.EXTRA_COMPONENT_NAME, COMPONENT_NAME);
     }
 
-    public static RemoteLockscreenValidationSession createRemoteLockscreenValidationSession(
+    public static StartLockscreenValidationRequest createStartLockscreenValidationRequest(
             int lockscreenType, int remainingAttempts) throws NoSuchAlgorithmException {
-        return new RemoteLockscreenValidationSession.Builder()
-                .setLockType(lockscreenType)
+        return new StartLockscreenValidationRequest.Builder()
+                .setLockscreenUiType(lockscreenType)
                 .setRemainingAttempts(remainingAttempts)
                 .setSourcePublicKey(SecureBox.genKeyPair().getPublic().getEncoded())
                 .build();
