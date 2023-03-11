@@ -769,7 +769,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         }
     }
 
-    private void configureEnrollmentStage(@RawRes int lottie) {
+    @VisibleForTesting void configureEnrollmentStage(@RawRes int lottie) {
+        if (!mCanAssumeSfps) {
+            setDescriptionText("");
+        }
         LottieCompositionFactory.fromRawRes(this, lottie)
                 .addListener((c) -> {
                     mIllustrationLottie.setComposition(c);

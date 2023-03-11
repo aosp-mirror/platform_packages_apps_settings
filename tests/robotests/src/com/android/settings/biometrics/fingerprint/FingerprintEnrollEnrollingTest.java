@@ -452,6 +452,28 @@ public class FingerprintEnrollEnrollingTest {
         assertThat(getLayout().getDescriptionTextView().getVisibility()).isEqualTo(View.VISIBLE);
     }
 
+    @Test
+    public void testUdfpsConfigureEnrollmentStage_descriptionText() {
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+
+        assertThat(getLayout().getDescriptionText()).isNotEqualTo("");
+
+        mActivity.configureEnrollmentStage(0 /* lottie */);
+
+        assertThat(getLayout().getDescriptionText()).isEqualTo("");
+    }
+
+    @Test
+    public void testSfpsConfigureEnrollmentStage_descriptionText() {
+        initializeActivityFor(TYPE_POWER_BUTTON);
+
+        assertThat(getLayout().getDescriptionTextView().getVisibility()).isEqualTo(View.GONE);
+
+        mActivity.configureEnrollmentStage(0 /* lottie */);
+
+        assertThat(getLayout().getDescriptionTextView().getVisibility()).isEqualTo(View.GONE);
+    }
+
     private GlifLayout getLayout() {
         return (GlifLayout) mActivity.findViewById(R.id.setup_wizard_layout);
     }
