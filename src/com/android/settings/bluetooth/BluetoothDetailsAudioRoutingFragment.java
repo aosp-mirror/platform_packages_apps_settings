@@ -32,10 +32,8 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.search.SearchIndexable;
 
 /** Settings fragment containing bluetooth audio routing. */
-@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class BluetoothDetailsAudioRoutingFragment extends RestrictedDashboardFragment {
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
