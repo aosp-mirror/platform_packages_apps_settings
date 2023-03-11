@@ -106,6 +106,10 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"キャンセル"</string>
     <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Bluetooth LE オーディオの有効化"</string>
     <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"デバイスが LE オーディオ ハードウェア機能に対応している場合に、Bluetooth LE オーディオ機能を有効にします。"</string>
+    <!-- no translation found for bluetooth_enable_leaudio_allow_list (1692999156437357534) -->
+    <skip />
+    <!-- no translation found for bluetooth_enable_leaudio_allow_list_summary (725601205276008525) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"メディア デバイス"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"通話デバイス"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"その他のデバイス"</string>
@@ -162,6 +166,16 @@
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"システム、アプリ、ウェブサイトでは、ご指定の優先言語のうちサポートされている最初の言語が使用されます。"</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"アプリごとに言語を選択するには、アプリの言語設定に移動してください。"</string>
     <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"言語の詳細"</string>
+    <!-- no translation found for title_change_system_locale (8589844586256566951) -->
+    <skip />
+    <!-- no translation found for desc_notice_device_locale_settings_change (8311132485850714160) -->
+    <skip />
+    <!-- no translation found for button_label_confirmation_of_system_locale_change (5593798559604894733) -->
+    <skip />
+    <!-- no translation found for title_unavailable_locale (2628898110416542386) -->
+    <skip />
+    <!-- no translation found for desc_unavailable_locale (2201756477400935896) -->
+    <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"地域の設定"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"単位と数字の設定を指定する"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"アプリが地域の設定を使用して、アプリの機能をカスタマイズできるようにします。"</string>
@@ -325,6 +339,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"指紋の設定"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"指紋認証によるロック解除の許可"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"指紋の使用"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"指紋認証の詳細"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"データはデバイス内だけに保存"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"あなたとお子様が管理できます"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"注意事項"</string>
@@ -1393,12 +1408,9 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"PIN の確認"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"パスワードの確認"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"本人確認"</string>
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (4655537780358707983) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (2373654227583206297) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (3482328925925888340) -->
-    <skip />
+    <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"Google アカウント、設定などを移行するには、他のデバイスのパターンを入力してください。パターンは暗号化されます。"</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Google アカウント、設定などを移行するには、他のデバイスの PIN を入力してください。PIN は暗号化されます。"</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Google アカウント、設定などを移行するには、他のデバイスのパスワードを入力してください。パスワードは暗号化されます。"</string>
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"パターンでこのデバイスのロックも解除されます"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"PIN でこのデバイスのロックも解除されます"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"パスワードでこのデバイスのロックも解除されます"</string>
@@ -1424,6 +1436,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"パターン入力が必要"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"画面ロックを解除するにはパターンの入力が必要"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"パターンを表示する"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"PIN のプライバシーを強化する"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"PIN 入力中のアニメーションを無効にする"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"プロファイルのパターンを表示する"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"タップ操作時のバイブ"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"電源ボタンですぐにロックする"</string>
@@ -1726,20 +1740,13 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"ダウンロードしたアプリ"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"試験運用機能"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"機能フラグ"</string>
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
-    <skip />
+    <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Bluetooth HCI スヌープログ フィルタリング"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"フィルタを設定"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"変更を反映するには、Bluetooth を無効にしてから有効にしてください"</string>
+    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="1735427364451634823">"Bluetooth HCI スヌープログ フィルタリング（PBAP）"</string>
+    <string name="bt_hci_snoop_log_filter_map_title" msgid="180092480793945544">"Bluetooth HCI スヌープログ フィルタリング（MAP）"</string>
+    <string name="bt_hci_snoop_log_filter_summary" msgid="7217091930762522599">"フィルタリング モードを設定します（変更を反映するには Bluetooth を無効にしてから有効にします）。"</string>
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="8824952559433361848">"このオプションを変更するには Bluetooth HCI スヌープログ モードを [有効（フィルタ済み）] に設定します"</string>
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"主に視覚障害者を対象としたスクリーンリーダー ツールです"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"画面上の項目をタップすると、読み上げます"</string>
@@ -1865,9 +1872,6 @@
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"マウスポインタを目立たせることができます"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"アニメーションを無効化"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"画面上の動きを軽減できます"</string>
-    <string name="accessibility_contrast_level_title" msgid="8044307040061738158">"コントラスト レベル"</string>
-    <string name="accessibility_contrast_level_left_label" msgid="732834661342809574">"標準"</string>
-    <string name="accessibility_contrast_level_right_label" msgid="5381154127087484725">"高"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"モノラル音声"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"音声再生時のチャンネルを統合する"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"オーディオ バランス"</string>
@@ -2139,14 +2143,14 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"一部の機能が制限される可能性があります"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"バッテリー使用量が多くなっています"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"使用量の多いアプリを確認"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"バッテリーを保護するために充電が最適化されます"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"バッテリーを保護するために、充電が最適化されています"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"バッテリーを長持ちさせるために、充電が最適化されます"</string>
-    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"バッテリーを保護するために充電が最適化されます"</string>
-    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"バッテリーを長持ちさせるために、ホルダーに置いたときは充電が最適化されます"</string>
-    <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"バッテリーを保護するために充電が最適化されます"</string>
-    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"バッテリーを長持ちさせるために、ホルダーに置いたときは充電が最適化されます"</string>
-    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"フル充電する"</string>
-    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"バッテリーを保護するために、次回タブレットをホルダーに置いたときは充電が最適化されます"</string>
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"バッテリーを保護するために、充電が最適化されています"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"バッテリーを長持ちさせるために、ホルダーにセットされているときは充電が最適化されます"</string>
+    <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"バッテリーを保護するために、充電が最適化されています"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"バッテリーを長持ちさせるために、ホルダーにセットされているときは充電が最適化されます"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"フル充電しています"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"バッテリーを保護するために、次回タブレットをホルダーにセットしたときには充電が最適化されます"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"充電一時停止の詳細"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"充電を再開"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"電力消費量の多いバックグラウンド アクティビティを含める"</string>
@@ -2163,9 +2167,9 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"このアプリがバックグラウンドで電池を使用できるようになるため、電池を予想より早く消費する可能性があります。"</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"解除"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"キャンセル"</string>
-    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"フル充電"</string>
-    <string name="battery_tip_incompatible_charging_title" msgid="654267494395731975">"充電の設定が対応していません"</string>
-    <string name="battery_tip_incompatible_charging_message" msgid="6031184746350185256">"バッテリーが充電されていないか、充電に非常に時間がかかっています"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"フル充電する"</string>
+    <string name="battery_tip_incompatible_charging_title" msgid="5120763575150751300">"充電用アクセサリに関する問題"</string>
+    <string name="battery_tip_incompatible_charging_message" msgid="8812537213731730513">"バッテリーの充電が遅くなるか、充電されないおそれがあります。お使いのスマートフォンで利用できるケーブルと電源アダプターであるか確認してください。"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"互換性のない充電方法の詳細"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"バッテリー マネージャ"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"アプリを自動的に管理"</string>
@@ -2183,8 +2187,7 @@
     <string name="battery_missing_message" msgid="400958471814422770">"バッテリー残量の読み取り中に問題が発生しました。"</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"タップすると、このエラーの詳細が表示されます"</string>
-    <!-- no translation found for power_screen (3926703168513988776) -->
-    <skip />
+    <string name="power_screen" msgid="3926703168513988776">"ディスプレイ"</string>
     <string name="power_cpu" msgid="1820472721627148746">"CPU"</string>
     <string name="power_flashlight" msgid="8993388636332573202">"ライト"</string>
     <string name="power_camera" msgid="4778315081581293923">"カメラ"</string>
@@ -2225,6 +2228,7 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"スケジュールの設定"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"電池を長持ちさせる"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"充電時に OFF にする"</string>
+    <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> 充電されたら OFF にする"</string>
     <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"バッテリーの残量が <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> に達すると、バッテリー セーバーが OFF になります"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
@@ -2262,8 +2266,7 @@
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"<xliff:g id="SLOT">%s</xliff:g> の利用時間"</string>
     <string name="battery_usage_spinner_breakdown_by_apps" msgid="7746337368402445072">"アプリごとの内訳"</string>
     <string name="battery_usage_spinner_breakdown_by_system" msgid="4646952798665973464">"システムごとの内訳"</string>
-    <!-- no translation found for battery_usage_less_than_percent (5873099028895001082) -->
-    <skip />
+    <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"プロセスの統計情報"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"プロセスの実行に関する独自の統計情報"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"メモリ使用"</string>
@@ -2790,7 +2793,7 @@
     <string name="account_dashboard_title" msgid="8228773251948253914">"パスワードとアカウント"</string>
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"保存されているパスワード、自動入力、同期されているアカウント"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"デフォルトのアプリ"</string>
-    <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"クローン済みアプリ"</string>
+    <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"クローン作成済みアプリ"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"アプリのインスタンスをもう 1 つ作成して、2 つのアカウントを同時に使用できるようにします。"</string>
     <string name="desc_cloneable_app_list_text" msgid="3354586725814708688">"クローンを作成できるアプリ。"</string>
     <string name="cloned_apps_summary" msgid="8805362440770795709">"クローン作成済み: <xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g>、クローン作成可能: <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g>"</string>
@@ -2798,6 +2801,10 @@
     <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"アプリクローンを一部削除できませんでした"</string>
     <string name="cloned_app_creation_summary" msgid="4642627294993918502">"作成しています…"</string>
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"クローン作成完了"</string>
+    <!-- no translation found for cloned_app_creation_toast_summary (3854494347144867870) -->
+    <skip />
+    <!-- no translation found for cloned_app_created_toast_summary (755225403495544163) -->
+    <skip />
     <string name="system_dashboard_summary" msgid="7400745270362833832">"言語、ジェスチャー、時間、バックアップ"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"システムの言語、アプリの言語"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, ネットワーク接続, インターネット, ワイヤレス, データ, wi fi"</string>
@@ -3050,7 +3057,7 @@
     <string name="notification_dashboard_summary" msgid="7530169251902320652">"通知履歴、会話"</string>
     <string name="conversation_notifs_category" msgid="2549844862379963273">"会話"</string>
     <string name="general_notification_header" msgid="3669031068980713359">"管理"</string>
-    <string name="app_notification_field" msgid="3858667320444612716">"アプリの設定"</string>
+    <string name="app_notification_field" msgid="3208079070539894909">"アプリの通知"</string>
     <string name="app_notification_field_summary" msgid="5981393613897713471">"各アプリからの通知の管理"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"全般"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"仕事用プロファイルの通知"</string>
@@ -3074,7 +3081,7 @@
     <string name="history_toggled_on_summary" msgid="9034278971358282728">"ここには、最近の通知とスヌーズに設定した通知が表示されます"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"通知設定を表示"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"通知を開く"</string>
-    <string name="snooze_options_title" msgid="2109795569568344617">"通知のスヌーズを許可"</string>
+    <string name="snooze_options_title" msgid="2109795569568344617">"通知のスヌーズを許可する"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"アプリアイコン上の通知ドット"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"バブル"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"バブル"</string>
@@ -3104,7 +3111,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"ロック 画面, ロック画面, スキップ, バイパス"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"仕事用プロファイルのロック時"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"ロック画面に新着の通知のみを表示する"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"ロックを解除するたびに、ロック画面から既存の通知を削除します"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"以前表示された通知をロック画面から自動的に削除します"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"ロック画面上の通知"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"デフォルトとサイレントの会話と通知を表示する"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"デフォルトとサイレントの会話と通知を表示する"</string>
@@ -3177,10 +3184,8 @@
     <string name="notification_access_detail_switch" msgid="46386786409608330">"通知へのアクセスを許可"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12 では Android 通知の自動調整が拡張通知に切り替えられました。この機能が操作や返信の候補を提示し、通知の整理を行います。\n\n拡張通知は通知コンテンツにアクセスできます。これには、連絡先の名前などの個人情報やメッセージも含まれます。また、この機能は、通知を非表示にしたり通知に応答したりすることもできます。たとえば、電話に出ることやサイレント モードを管理することができます。"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> による通知へのアクセスを許可しますか？"</string>
-    <!-- no translation found for notification_listener_security_warning_summary (1131986567509818121) -->
-    <skip />
-    <!-- no translation found for nls_warning_prompt (1486887096703743841) -->
-    <skip />
+    <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> アプリはすべての通知を読み取ることができます。通知には、連絡先名、写真などの個人情報や受信したメッセージの本文も含まれます。また、通知をスヌーズ、非表示にしたり、電話に出るなどの通知内のボタン操作を実行したりすることもできます。\n\nこれにより、アプリがサイレント モード設定を切り替えたり、関連する設定を変更したりすることも可能になります。"</string>
+    <string name="nls_warning_prompt" msgid="1486887096703743841">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> アプリは次のことができるようになります。"</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"通知の読み取り"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"通知を読み取ることができます。通知には、連絡先、メッセージ、写真などの個人情報も含まれます。"</string>
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"メールへの返信"</string>
@@ -3465,7 +3470,7 @@
     <string name="advanced_apps" msgid="7643010673326578815">"詳細設定"</string>
     <string name="app_permissions" msgid="8666537659217653626">"権限マネージャー"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"位置情報を共有する方法の更新"</string>
-    <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"位置情報を共有する方法が変更されたアプリを確認できます"</string>
+    <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"ユーザーの位置情報を共有する方法が変更されたアプリを確認"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"タップして復帰"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"画面をダブルタップするとデバイスが復帰します"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"リンクを開く"</string>
@@ -3990,20 +3995,15 @@
     <string name="autofill_app" msgid="7595308061826307921">"自動入力サービス"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"デフォルトの自動入力サービス"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"パスワード"</string>
-    <!-- no translation found for credman_credentials (7413302794874989255) -->
-    <skip />
+    <string name="credman_credentials" msgid="7413302794874989255">"パスワード、パスキー、データのサービス"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# 件のパスワード}other{# 件のパスワード}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"自動, 入力, 自動入力, パスワード"</string>
-    <!-- no translation found for credman_keywords (8305600680836806170) -->
-    <skip />
+    <string name="credman_keywords" msgid="8305600680836806170">"データ, パスキー, パスワード"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;このアプリが信頼できることを確認してください&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; は画面上の内容に基づいて、自動入力可能な情報を判別します。"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s を OFF にしますか？"</string>
-    <!-- no translation found for credman_confirmation_message (3499478570809427026) -->
-    <skip />
-    <!-- no translation found for credman_error_message_title (4741457523969373713) -->
-    <skip />
-    <!-- no translation found for credman_error_message (6793314648458925172) -->
-    <skip />
+    <string name="credman_confirmation_message" msgid="3499478570809427026">"住所やお支払い方法などの保存された情報はログイン時に入力されません。入力されるようにするには、パスワード、パスキー、データのサービスを有効にするよう設定してください。"</string>
+    <string name="credman_error_message_title" msgid="4741457523969373713">"パスワード、パスキー、データのサービスの上限に達しました"</string>
+    <string name="credman_error_message" msgid="6793314648458925172">"一度に有効にできるパスワード、パスキー、データのサービスは 5 個までです。追加するには、いずれかのサービスを OFF にしてください。"</string>
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"OFF にする"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"自動入力"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"ロギングレベル"</string>
@@ -4592,14 +4592,14 @@
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"指紋認証センサー"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"点滅による通知"</string>
     <string name="flash_notifications_summary_off" msgid="6056282996770691461">"OFF"</string>
-    <string name="flash_notifications_summary_on_camera" msgid="455038312752009971">"ON / カメラの点滅"</string>
-    <string name="flash_notifications_summary_on_screen" msgid="7321838939240499267">"ON / 画面の点滅"</string>
-    <string name="flash_notifications_summary_on_camera_and_screen" msgid="6515622987118268649">"ON / カメラと画面の点滅"</string>
-    <string name="flash_notifications_intro" msgid="1506414740603805778">"通知を受け取ったときやアラームが鳴ったときにカメラのライトまたは画面が点滅します。"</string>
-    <string name="flash_notifications_note" msgid="7258551860911169239">"光に敏感な方は、点滅による通知は慎重に使用してください"</string>
+    <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"ON / カメラの点滅"</string>
+    <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"ON / 画面の点滅"</string>
+    <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"ON / カメラと画面の点滅"</string>
+    <string name="flash_notifications_intro" msgid="8409873413480928249">"通知を受け取ったときやアラームが鳴ったときにカメラのライトまたは画面が点滅します"</string>
+    <string name="flash_notifications_note" msgid="2426125248448055075">"光に敏感な方は、点滅による通知は慎重に使用してください"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"プレビュー"</string>
-    <string name="camera_flash_notification_title" msgid="1605639711485773787">"カメラの点滅による通知"</string>
-    <string name="screen_flash_notification_title" msgid="8008197872050400734">"画面の点滅による通知"</string>
+    <string name="camera_flash_notification_title" msgid="2475084876382922732">"カメラの点滅"</string>
+    <string name="screen_flash_notification_title" msgid="3773100725793316708">"画面の点滅"</string>
     <string name="screen_flash_notification_color_title" msgid="7213407653340970790">"画面点滅時の色"</string>
     <string name="screen_flash_color_blue" msgid="3585766657607931371">"ブルー"</string>
     <string name="screen_flash_color_azure" msgid="8691198532944992243">"アジュール"</string>
