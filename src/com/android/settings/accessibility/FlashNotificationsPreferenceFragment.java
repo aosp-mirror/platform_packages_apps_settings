@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import com.android.settings.R;
@@ -41,8 +42,7 @@ public class FlashNotificationsPreferenceFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        // TODO: Flash notifications have to add SettingsEnums.
-        return 0;
+        return SettingsEnums.FLASH_NOTIFICATION_SETTINGS;
     }
 
     @Override
