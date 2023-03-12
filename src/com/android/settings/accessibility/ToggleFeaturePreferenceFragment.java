@@ -120,7 +120,6 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     private AccessibilityQuickSettingsTooltipWindow mTooltipWindow;
     private boolean mNeedsQSTooltipReshow = false;
     private int mNeedsQSTooltipType = QuickSettingsTooltipType.GUIDE_TO_EDIT;
-    private boolean mSavedAccessibilityFloatingMenuEnabled;
     private ImageView mImageGetterCacheView;
     protected final Html.ImageGetter mImageGetter = (String str) -> {
         if (str != null && str.startsWith(IMG_PREFIX)) {
@@ -276,8 +275,6 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
                 AccessibilityManager.class);
         am.removeTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
         mSettingsContentObserver.unregister(getContentResolver());
-        mSavedAccessibilityFloatingMenuEnabled = AccessibilityUtil.isFloatingMenuEnabled(
-                getContext());
         super.onPause();
     }
 

@@ -66,6 +66,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
     protected int mSavedCheckBoxValue = NOT_SET;
 
     protected ShortcutPreference mShortcutPreference;
+    protected Dialog mDialog;
     private AccessibilityManager.TouchExplorationStateChangeListener
             mTouchExplorationStateChangeListener;
     private AccessibilitySettingsContentObserver mSettingsContentObserver;
@@ -167,12 +168,15 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
     @Override
     public void onResume() {
         super.onResume();
+
         final AccessibilityManager am = getPrefContext().getSystemService(
                 AccessibilityManager.class);
         am.addTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
         mSettingsContentObserver.register(getContentResolver());
         updateShortcutPreferenceData();
         updateShortcutPreference();
+
+        updateEditShortcutDialogIfNeeded();
     }
 
     @Override
@@ -200,31 +204,30 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
 
     @Override
     public Dialog onCreateDialog(int dialogId) {
-        final Dialog dialog;
         switch (dialogId) {
             case DialogEnums.EDIT_SHORTCUT:
                 final int dialogType = WizardManagerHelper.isAnySetupWizard(getIntent())
                         ? AccessibilityDialogUtils.DialogType.EDIT_SHORTCUT_GENERIC_SUW :
                         AccessibilityDialogUtils.DialogType.EDIT_SHORTCUT_GENERIC;
-                dialog = AccessibilityDialogUtils.showEditShortcutDialog(
+                mDialog = AccessibilityDialogUtils.showEditShortcutDialog(
                         getPrefContext(), dialogType, getShortcutTitle(),
                         this::callOnAlertDialogCheckboxClicked);
-                setupEditShortcutDialog(dialog);
-                return dialog;
+                setupEditShortcutDialog(mDialog);
+                return mDialog;
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
                 if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
-                    dialog = AccessibilityGestureNavigationTutorial
+                    mDialog = AccessibilityGestureNavigationTutorial
                             .createAccessibilityTutorialDialogForSetupWizard(
                                     getPrefContext(), getUserShortcutTypes(),
                                     this::callOnTutorialDialogButtonClicked);
                 } else {
-                    dialog = AccessibilityGestureNavigationTutorial
+                    mDialog = AccessibilityGestureNavigationTutorial
                             .createAccessibilityTutorialDialog(
                                     getPrefContext(), getUserShortcutTypes(),
                                     this::callOnTutorialDialogButtonClicked);
                 }
-                dialog.setCanceledOnTouchOutside(false);
-                return dialog;
+                mDialog.setCanceledOnTouchOutside(false);
+                return mDialog;
             default:
                 throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
         }
@@ -366,6 +369,13 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         generalCategory.setTitle(getGeneralCategoryDescription(null));
 
         getPreferenceScreen().addPreference(generalCategory);
+    }
+
+    private void updateEditShortcutDialogIfNeeded() {
+        if (mDialog == null || !mDialog.isShowing()) {
+            return;
+        }
+        AccessibilityDialogUtils.updateShortcutInDialog(getContext(), mDialog);
     }
 
     @VisibleForTesting
