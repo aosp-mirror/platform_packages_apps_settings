@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import static com.android.settings.display.ToggleFontSizePreferenceFragment.fontSizeValueToIndex;
 
 import android.content.ContentResolver;
@@ -52,6 +54,12 @@ final class FontSizeData extends PreviewSizeData<Float> {
     @Override
     void commit(int currentProgress) {
         final ContentResolver resolver = getContext().getContentResolver();
+        if (Settings.Secure.getInt(resolver,
+                Settings.Secure.ACCESSIBILITY_FONT_SCALING_HAS_BEEN_CHANGED,
+                /* def= */ OFF) != ON) {
+            Settings.Secure.putInt(resolver,
+                    Settings.Secure.ACCESSIBILITY_FONT_SCALING_HAS_BEEN_CHANGED, ON);
+        }
         Settings.System.putFloat(resolver, Settings.System.FONT_SCALE,
                 getValues().get(currentProgress));
     }
