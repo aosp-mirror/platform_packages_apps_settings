@@ -114,15 +114,12 @@ public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceCo
     @Override
     public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
         // TODO(b/262195754): Need the intent to enabled the feature.
-//        if (DataServiceUtils.shouldUpdateEntityList(mSubscriptionInfoEntityList,
-//                subInfoEntityList)) {
-//            mSubscriptionInfoEntityList = subInfoEntityList;
-//            mSubscriptionInfoEntityList.forEach(entity -> {
-//                if (Integer.parseInt(entity.subId) == mSubId) {
-//                    mSubscriptionInfoEntity = entity;
-//                    update();
-//                }
-//            });
-//        }
+//        mSubscriptionInfoEntityList = subInfoEntityList;
+//        mSubscriptionInfoEntityList.forEach(entity -> {
+//            if (Integer.parseInt(entity.subId) == mSubId) {
+//                mSubscriptionInfoEntity = entity;
+//                update();
+//            }
+//        });
     }
 }
