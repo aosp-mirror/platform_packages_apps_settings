@@ -93,7 +93,7 @@ public final class DataProcessorTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mPowerUsageFeatureProvider = mFeatureFactory.powerUsageFeatureProvider;
 
-        DataProcessor.sTestSystemAppsSet = Set.of();
+        DataProcessor.sTestSystemAppsPackageNames = Set.of();
         DataProcessor.sUsageStatsManager = mUsageStatsManager;
         doReturn(mIntent).when(mContext).registerReceiver(
                 isA(BroadcastReceiver.class), isA(IntentFilter.class));
