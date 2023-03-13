@@ -158,7 +158,7 @@ public class ModifierKeysPreferenceController extends BasePreferenceController {
 
     private int getColorOfColorAccentPrimaryVariant() {
         return Utils.getColorAttrDefaultColor(
-                mContext, com.android.internal.R.attr.colorAccentPrimaryVariant);
+                mContext, com.android.internal.R.attr.materialColorPrimaryContainer);
     }
 
     private static boolean isCtrl(int keyCode) {
