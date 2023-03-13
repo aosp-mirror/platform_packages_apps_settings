@@ -265,8 +265,9 @@ public final class DataProcessor {
     @Nullable
     public static Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>>
             generateAppUsagePeriodMap(
-            final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay,
-            final List<AppUsageEvent> appUsageEventList) {
+                    final long rawStartTimestamp,
+                    final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay,
+                    final List<AppUsageEvent> appUsageEventList) {
         if (appUsageEventList.isEmpty()) {
             Log.w(TAG, "appUsageEventList is empty");
             return null;
@@ -288,8 +289,12 @@ public final class DataProcessor {
             final List<Long> timestamps = hourlyBatteryLevelsPerDay.get(dailyIndex).getTimestamps();
             final long hourlySize = timestamps.size() - 1;
             for (int hourlyIndex = 0; hourlyIndex < timestamps.size() - 1; hourlyIndex++) {
-                // The start and end timestamps of this slot should be the adjacent timestamps.
-                final long startTimestamp = timestamps.get(hourlyIndex);
+                // The start slot timestape is the near hour timestamp instead of the last full
+                // charge time. So use rawStartTimestamp instead of reading the timestamp from
+                // hourlyBatteryLevelsPerDay here.
+                final long startTimestamp =
+                        dailyIndex == 0 && hourlyIndex == 0 && !sDebug
+                                ? rawStartTimestamp : timestamps.get(hourlyIndex);
                 // The final slot is to show the data from last even hour until now but the
                 // timestamp in hourlyBatteryLevelsPerDay is not the real value. So use current
                 // timestamp instead of reading the timestamp from hourlyBatteryLevelsPerDay here.

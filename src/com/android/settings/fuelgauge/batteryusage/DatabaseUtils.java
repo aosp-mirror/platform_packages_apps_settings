@@ -139,13 +139,13 @@ public final class DatabaseUtils {
             Context context,
             final Calendar calendar,
             final List<Integer> userIds,
-            final long startTimestampOfLevelData) {
+            final long rawStartTimestamp) {
         final long startTime = System.currentTimeMillis();
         final long sixDaysAgoTimestamp = getTimestampSixDaysAgo(calendar);
         // Query a longer time period and then trim to the original time period in order to make
         // sure the app usage calculation near the boundaries is correct.
         final long queryTimestamp =
-                Math.max(startTimestampOfLevelData, sixDaysAgoTimestamp) - USAGE_QUERY_BUFFER_HOURS;
+                Math.max(rawStartTimestamp, sixDaysAgoTimestamp) - USAGE_QUERY_BUFFER_HOURS;
         Log.d(TAG, "sixDayAgoTimestamp: " + sixDaysAgoTimestamp);
         final String queryUserIdString = userIds.stream()
                 .map(userId -> String.valueOf(userId))
