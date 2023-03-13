@@ -77,10 +77,8 @@ public class DataProcessManager {
     private List<BatteryLevelData.PeriodBatteryLevelData> mHourlyBatteryLevelsPerDay;
     private Map<Long, Map<String, BatteryHistEntry>> mBatteryHistoryMap;
 
-    // The start timestamp of battery level data. As we don't know when is the full charge cycle
-    // start time when loading app usage data, this value is used as the start time of querying app
-    // usage data.
-    private long mStartTimestampOfLevelData;
+    // Raw start timestamp with round to the nearest hour.
+    private long mRawStartTimestamp;
 
     private boolean mIsCurrentBatteryHistoryLoaded = false;
     private boolean mIsCurrentAppUsageLoaded = false;
@@ -105,6 +103,7 @@ public class DataProcessManager {
     DataProcessManager(
             Context context,
             Handler handler,
+            final long rawStartTimestamp,
             @NonNull final DataProcessor.UsageMapAsyncResponse callbackFunction,
             @NonNull final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay,
             @NonNull final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
@@ -114,7 +113,7 @@ public class DataProcessManager {
         mCallbackFunction = callbackFunction;
         mHourlyBatteryLevelsPerDay = hourlyBatteryLevelsPerDay;
         mBatteryHistoryMap = batteryHistoryMap;
-        mStartTimestampOfLevelData = getStartTimestampOfBatteryLevelData();
+        mRawStartTimestamp = rawStartTimestamp;
     }
 
     /**
@@ -151,21 +150,6 @@ public class DataProcessManager {
             // and show it as the app list directly.
             loadAndApplyBatteryMapFromServiceOnly();
         }
-    }
-
-    @VisibleForTesting
-    long getStartTimestampOfBatteryLevelData() {
-        for (int dailyIndex = 0; dailyIndex < mHourlyBatteryLevelsPerDay.size(); dailyIndex++) {
-            if (mHourlyBatteryLevelsPerDay.get(dailyIndex) == null) {
-                continue;
-            }
-            final List<Long> timestamps =
-                    mHourlyBatteryLevelsPerDay.get(dailyIndex).getTimestamps();
-            if (timestamps.size() > 0) {
-                return timestamps.get(0);
-            }
-        }
-        return 0;
     }
 
     @VisibleForTesting
@@ -251,7 +235,7 @@ public class DataProcessManager {
                 final int workProfileUserId = getWorkProfileUserId();
                 final UsageEvents usageEventsForCurrentUser =
                         DataProcessor.getAppUsageEventsForUser(
-                                mContext, currentUserId, mStartTimestampOfLevelData);
+                                mContext, currentUserId, mRawStartTimestamp);
                 // If fail to load usage events for current user, return null directly and screen-on
                 // time will not be shown in the UI.
                 if (usageEventsForCurrentUser == null) {
@@ -262,7 +246,7 @@ public class DataProcessManager {
                 if (workProfileUserId != Integer.MIN_VALUE) {
                     usageEventsForWorkProfile =
                             DataProcessor.getAppUsageEventsForUser(
-                                    mContext, workProfileUserId, mStartTimestampOfLevelData);
+                                    mContext, workProfileUserId, mRawStartTimestamp);
                 } else {
                     Log.d(TAG, "there is no work profile");
                 }
@@ -309,7 +293,7 @@ public class DataProcessManager {
                 final List<AppUsageEvent> appUsageEventList =
                         DatabaseUtils.getAppUsageEventForUsers(
                                 mContext, Calendar.getInstance(), getCurrentUserIds(),
-                                mStartTimestampOfLevelData);
+                                mRawStartTimestamp);
                 Log.d(TAG, String.format("execute loadDatabaseAppUsageList size=%d in %d/ms",
                         appUsageEventList.size(), (System.currentTimeMillis() - startTime)));
                 return appUsageEventList;
@@ -376,7 +360,7 @@ public class DataProcessManager {
         // Generates the indexed AppUsagePeriod list data for each corresponding time slot for
         // further use.
         mAppUsagePeriodMap = DataProcessor.generateAppUsagePeriodMap(
-                mHourlyBatteryLevelsPerDay, mAppUsageEventList);
+                mRawStartTimestamp, mHourlyBatteryLevelsPerDay, mAppUsageEventList);
     }
 
     private void tryToGenerateFinalDataAndApplyCallback() {
@@ -489,10 +473,13 @@ public class DataProcessManager {
             return null;
         }
 
+        final long rawStartTimestamp =
+                batteryHistoryMap.keySet().stream().min(Long::compare).orElse(0L);
         // Start the async task to compute diff usage data and load labels and icons.
         new DataProcessManager(
                 context,
                 handler,
+                rawStartTimestamp,
                 asyncResponseDelegate,
                 batteryLevelData.getHourlyBatteryLevelsPerDay(),
                 processedBatteryHistoryMap).start();
