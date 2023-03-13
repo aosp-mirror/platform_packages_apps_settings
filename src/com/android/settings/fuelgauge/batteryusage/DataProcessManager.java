@@ -33,6 +33,7 @@ import com.android.settings.Utils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -473,8 +474,7 @@ public class DataProcessManager {
             return null;
         }
 
-        final long rawStartTimestamp =
-                batteryHistoryMap.keySet().stream().min(Long::compare).orElse(0L);
+        final long rawStartTimestamp = Collections.min(batteryHistoryMap.keySet());
         // Start the async task to compute diff usage data and load labels and icons.
         new DataProcessManager(
                 context,
