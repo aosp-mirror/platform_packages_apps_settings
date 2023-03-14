@@ -179,7 +179,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     }
 
     private void addRegisterBySubId(int subId) {
-        if (!mTelephonyCallbackMap.containsKey(subId)) {
+        if (!mTelephonyCallbackMap.containsKey(subId) || !mTelephonyManagerMap.containsKey(subId)) {
             PhoneCallStateTelephonyCallback
                     telephonyCallback = new PhoneCallStateTelephonyCallback();
             mTelephonyManager.registerTelephonyCallback(mContext.getMainExecutor(),
@@ -435,8 +435,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             getUiccInfoBySubscriptionInfo(uiccSlotInfos, subInfo);
             SubscriptionInfo firstRemovableSubInfo = SubscriptionUtil.getFirstRemovableSubscription(
                     context);
-            SubscriptionInfo subscriptionOrDefault = SubscriptionUtil.getSubscriptionOrDefault(
-                    context, mSubId);
             if(DEBUG){
                 Log.d(TAG, "convert subscriptionInfo to entity for subId = " + mSubId);
             }
@@ -455,8 +453,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                     firstRemovableSubInfo == null ? false
                             : firstRemovableSubInfo.getSubscriptionId() == mSubId,
                     String.valueOf(SubscriptionUtil.getDefaultSimConfig(context, mSubId)),
-                    subscriptionOrDefault == null ? false
-                            : subscriptionOrDefault.getSubscriptionId() == mSubId,
+                    SubscriptionUtil.isDefaultSubscription(context, mSubId),
                     mSubscriptionManager.isValidSubscriptionId(mSubId),
                     mSubscriptionManager.isUsableSubscriptionId(mSubId),
                     mSubscriptionManager.isActiveSubscriptionId(mSubId),
@@ -540,11 +537,11 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                 SubscriptionUtil.getSelectableSubscriptionInfoList(mContext));
     }
 
-    private void insertAvailableSubInfoToEntity(List<SubscriptionInfo> availableInfoList) {
+    private void insertAvailableSubInfoToEntity(List<SubscriptionInfo> inputAvailableInfoList) {
         sExecutor.execute(() -> {
             SubscriptionInfoEntity[] availableInfoArray = mAvailableSubInfoEntityList.toArray(
                     new SubscriptionInfoEntity[0]);
-            if ((availableInfoList == null || availableInfoList.size() == 0)
+            if ((inputAvailableInfoList == null || inputAvailableInfoList.size() == 0)
                     && mAvailableSubInfoEntityList.size() != 0) {
                 if (DEBUG) {
                     Log.d(TAG, "availableSudInfoList from framework is empty, remove all subs");
@@ -554,11 +551,12 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                     deleteAllInfoBySubId(info.subId);
                 }
 
-            } else if (availableInfoList != null) {
-                SubscriptionInfo[] infoArray = availableInfoList.toArray(new SubscriptionInfo[0]);
+            } else if (inputAvailableInfoList != null) {
+                SubscriptionInfo[] inputAvailableInfoArray = inputAvailableInfoList.toArray(
+                        new SubscriptionInfo[0]);
                 // Remove the redundant subInfo
-                if (availableInfoList.size() <= mAvailableSubInfoEntityList.size()) {
-                    for (SubscriptionInfo subInfo : infoArray) {
+                if (inputAvailableInfoList.size() <= mAvailableSubInfoEntityList.size()) {
+                    for (SubscriptionInfo subInfo : inputAvailableInfoArray) {
                         int subId = subInfo.getSubscriptionId();
                         if (mSubscriptionInfoMap.containsKey(subId)) {
                             mSubscriptionInfoMap.remove(subId);
@@ -571,11 +569,20 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                                 deleteAllInfoBySubId(String.valueOf(key));
                             }
                         }
+                    } else if (inputAvailableInfoList.size() < mAvailableSubInfoEntityList.size()) {
+                        // Check the subInfo between the new list from framework and old list in
+                        // the database, if the subInfo is not existed in the new list, delete it
+                        // from the database.
+                        for (SubscriptionInfoEntity info : availableInfoArray) {
+                            if (sCacheSubscriptionInfoEntityMap.containsKey(info.subId)) {
+                                deleteAllInfoBySubId(info.subId);
+                            }
+                        }
                     }
                 }
 
                 // Insert all new available subInfo to database.
-                for (SubscriptionInfo subInfo : infoArray) {
+                for (SubscriptionInfo subInfo : inputAvailableInfoArray) {
                     if (DEBUG) {
                         Log.d(TAG, "insert subInfo to subInfoEntity, subInfo = " + subInfo);
                     }
