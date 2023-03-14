@@ -24,7 +24,9 @@ import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ServiceInfo;
 import android.credentials.CredentialManager;
 import android.credentials.CredentialProviderInfo;
 import android.credentials.SetEnabledProvidersException;
@@ -32,6 +34,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.OutcomeReceiver;
 import android.os.UserHandle;
+import android.text.TextUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
@@ -162,22 +165,64 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         PreferenceGroup group = screen.findPreference(getPreferenceKey());
         Context context = screen.getContext();
+        mPrefs.putAll(buildPreferenceList(context, group));
+    }
 
-        for (CredentialProviderInfo service : mServices) {
-            group.addPreference(createPreference(context, service));
+    /** Aggregates the list of services and builds a list of UI prefs to show. */
+    @VisibleForTesting
+    public Map<String, SwitchPreference> buildPreferenceList(
+            Context context, PreferenceGroup group) {
+        // Group the services by package name.
+        Map<String, List<CredentialProviderInfo>> groupedInfos = new HashMap<>();
+        for (CredentialProviderInfo cpi : mServices) {
+            String packageName = cpi.getServiceInfo().packageName;
+            if (!groupedInfos.containsKey(packageName)) {
+                groupedInfos.put(packageName, new ArrayList<>());
+            }
+
+            groupedInfos.get(packageName).add(cpi);
         }
+
+        // Build the pref list.
+        Map<String, SwitchPreference> output = new HashMap<>();
+        for (String packageName : groupedInfos.keySet()) {
+            List<CredentialProviderInfo> infos = groupedInfos.get(packageName);
+            SwitchPreference pref = createPreference(context, groupedInfos.get(packageName));
+            if (pref != null) {
+                output.put(packageName, pref);
+                group.addPreference(pref);
+            }
+        }
+
+        return output;
     }
 
     /** Creates a preference object based on the provider info. */
     @VisibleForTesting
-    public SwitchPreference createPreference(Context context, CredentialProviderInfo service) {
-        CharSequence label = service.getLabel(context);
+    public @Nullable SwitchPreference createPreference(
+            Context context, List<CredentialProviderInfo> infos) {
+        final CredentialProviderInfo firstInfo = infos.get(0);
+        final ServiceInfo firstServiceInfo = firstInfo.getServiceInfo();
+        final String packageName = firstServiceInfo.packageName;
+        CharSequence title = firstInfo.getLabel(context);
+        Drawable icon = firstInfo.getServiceIcon(context);
+
+        if (infos.size() > 1) {
+            // If there is more than one then group them under the package.
+            ApplicationInfo appInfo = firstServiceInfo.applicationInfo;
+            if (appInfo.nonLocalizedLabel != null) {
+                title = appInfo.loadLabel(mPm);
+            }
+            icon = mIconFactory.getBadgedIcon(appInfo, getUser());
+        }
+
+        // If there is no title then don't show anything.
+        if (TextUtils.isEmpty(title)) {
+            return null;
+        }
+
         return addProviderPreference(
-                context,
-                label == null ? "" : label,
-                service.getServiceIcon(mContext),
-                service.getServiceInfo().packageName,
-                service.getSettingsSubtitle());
+                context, title, icon, packageName, firstInfo.getSettingsSubtitle());
     }
 
     /**
@@ -240,7 +285,6 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         final SwitchPreference pref = new SwitchPreference(prefContext);
         pref.setTitle(title);
         pref.setChecked(mEnabledPackageNames.contains(packageName));
-        mPrefs.put(packageName, pref);
 
         if (icon != null) {
             pref.setIcon(Utils.getSafeIcon(icon));
