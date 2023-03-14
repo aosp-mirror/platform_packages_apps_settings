@@ -58,7 +58,6 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
     private final MutableLiveData<Boolean> mAcquireLiveData = new MutableLiveData<>();
     private final MutableLiveData<Integer> mPointerDownLiveData = new MutableLiveData<>();
     private final MutableLiveData<Integer> mPointerUpLiveData = new MutableLiveData<>();
-    private final MutableLiveData<Boolean> mDoneLiveData = new MutableLiveData<>(false);
 
     private byte[] mToken = null;
     private final int mUserId;
@@ -78,11 +77,6 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
                         + ", post progress as " + progress);
             }
             mProgressLiveData.postValue(progress);
-
-            final Boolean done = remaining == 0;
-            if (!done.equals(mDoneLiveData.getValue())) {
-                mDoneLiveData.postValue(done);
-            }
         }
 
         @Override
@@ -143,7 +137,6 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
      * clear progress
      */
     public void clearProgressLiveData() {
-        mDoneLiveData.setValue(false);
         mProgressLiveData.setValue(new EnrollmentProgress(INITIAL_STEPS, INITIAL_REMAINING));
         mHelpMessageLiveData.setValue(null);
         mErrorMessageLiveData.setValue(null);
@@ -180,10 +173,6 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
         return mPointerUpLiveData;
     }
 
-    public LiveData<Boolean> getDoneLiveData() {
-        return mDoneLiveData;
-    }
-
     /**
      * Starts enrollment and return latest isEnrolling() result
      */
@@ -202,7 +191,6 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
 
         // Clear data
         mProgressLiveData.setValue(new EnrollmentProgress(INITIAL_STEPS, INITIAL_REMAINING));
-        mDoneLiveData.setValue(false);
         mHelpMessageLiveData.setValue(null);
         mErrorMessageLiveData.setValue(null);
 
