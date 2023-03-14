@@ -63,7 +63,7 @@ public class BatteryDiffDataTest {
                 createBatteryDiffEntry(mContext, /*consumePower=*/ 0, /*isHidden=*/ true);
 
         final boolean needsCombineInSystemApp = BatteryDiffData.needsCombineInSystemApp(
-                hiddenDiffEntry, List.of(), Set.of());
+                hiddenDiffEntry, List.of(), Set.of(), Set.of());
 
         assertThat(needsCombineInSystemApp).isTrue();
     }
@@ -77,7 +77,7 @@ public class BatteryDiffDataTest {
         mApplicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
 
         final boolean needsCombineInSystemApp = BatteryDiffData.needsCombineInSystemApp(
-                batteryDiffEntry, List.of(), Set.of(ConvertUtils.FAKE_PACKAGE_NAME));
+                batteryDiffEntry, List.of(), Set.of(ConvertUtils.FAKE_PACKAGE_NAME), Set.of());
 
         assertThat(needsCombineInSystemApp).isTrue();
     }
@@ -91,7 +91,7 @@ public class BatteryDiffDataTest {
         mApplicationInfo.flags = 0;
 
         final boolean needsCombineInSystemApp = BatteryDiffData.needsCombineInSystemApp(
-                batteryDiffEntry, List.of(), Set.of());
+                batteryDiffEntry, List.of(), Set.of(), Set.of());
 
         assertThat(needsCombineInSystemApp).isFalse();
     }
