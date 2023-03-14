@@ -21,12 +21,14 @@ import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.app.KeyguardManager;
 import android.app.StartLockscreenValidationRequest;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.os.Bundle;
 import android.os.UserManager;
 import android.util.Log;
 
@@ -147,7 +149,8 @@ public final class ChooseLockSettingsHelper {
         private boolean mRemoteLockscreenValidation;
         @Nullable private StartLockscreenValidationRequest mStartLockscreenValidationRequest;
         @Nullable private ComponentName mRemoteLockscreenValidationServiceComponent;
-        boolean mRequestGatekeeperPasswordHandle;
+        private boolean mRequestGatekeeperPasswordHandle;
+        private boolean mTaskOverlay;
 
         public Builder(@NonNull Activity activity) {
             mActivity = activity;
@@ -249,6 +252,14 @@ public final class ChooseLockSettingsHelper {
          */
         @NonNull public Builder setExternal(boolean external) {
             mExternal = external;
+            return this;
+        }
+
+        /**
+         * @param taskOverlay specifies whether the activity should be launched as a task overlay.
+         */
+        @NonNull public Builder setTaskOverlay(boolean taskOverlay) {
+            mTaskOverlay = taskOverlay;
             return this;
         }
 
@@ -371,7 +382,8 @@ public final class ChooseLockSettingsHelper {
                 mBuilder.mCheckBoxLabel, mBuilder.mRemoteLockscreenValidation,
                 mBuilder.mStartLockscreenValidationRequest,
                 mBuilder.mRemoteLockscreenValidationServiceComponent, mBuilder.mAllowAnyUserId,
-                mBuilder.mForegroundOnly, mBuilder.mRequestGatekeeperPasswordHandle);
+                mBuilder.mForegroundOnly, mBuilder.mRequestGatekeeperPasswordHandle,
+                mBuilder.mTaskOverlay);
     }
 
     private boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
@@ -381,7 +393,8 @@ public final class ChooseLockSettingsHelper {
             @Nullable CharSequence checkboxLabel, boolean remoteLockscreenValidation,
             @Nullable StartLockscreenValidationRequest startLockScreenValidationRequest,
             @Nullable ComponentName remoteLockscreenValidationServiceComponent,
-            boolean allowAnyUser, boolean foregroundOnly, boolean requestGatekeeperPasswordHandle) {
+            boolean allowAnyUser, boolean foregroundOnly, boolean requestGatekeeperPasswordHandle,
+            boolean taskOverlay) {
         Optional<Class<?>> activityClass = determineAppropriateActivityClass(
                 returnCredentials, forceVerifyPath, userId, startLockScreenValidationRequest);
         if (activityClass.isEmpty()) {
@@ -392,7 +405,7 @@ public final class ChooseLockSettingsHelper {
                 returnCredentials, external, forceVerifyPath, userId, alternateButton,
                 checkboxLabel, remoteLockscreenValidation, startLockScreenValidationRequest,
                 remoteLockscreenValidationServiceComponent, allowAnyUser, foregroundOnly,
-                requestGatekeeperPasswordHandle);
+                requestGatekeeperPasswordHandle, taskOverlay);
     }
 
     private boolean launchConfirmationActivity(int request, CharSequence title, CharSequence header,
@@ -402,7 +415,8 @@ public final class ChooseLockSettingsHelper {
             boolean remoteLockscreenValidation,
             @Nullable StartLockscreenValidationRequest startLockScreenValidationRequest,
             @Nullable ComponentName remoteLockscreenValidationServiceComponent,
-            boolean allowAnyUser, boolean foregroundOnly, boolean requestGatekeeperPasswordHandle) {
+            boolean allowAnyUser, boolean foregroundOnly, boolean requestGatekeeperPasswordHandle,
+            boolean taskOverlay) {
         final Intent intent = new Intent();
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.TITLE_TEXT, title);
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.HEADER_TEXT, header);
@@ -434,26 +448,37 @@ public final class ChooseLockSettingsHelper {
         Intent inIntent = mFragment != null ? mFragment.getActivity().getIntent() :
                 mActivity.getIntent();
         copyInternalExtras(inIntent, intent);
+        Bundle launchOptions = createLaunchOptions(taskOverlay);
         if (external) {
             intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
             copyOptionalExtras(inIntent, intent);
             if (mActivityResultLauncher != null) {
                 mActivityResultLauncher.launch(intent);
             } else if (mFragment != null) {
-                mFragment.startActivity(intent);
+                mFragment.startActivity(intent, launchOptions);
             } else {
-                mActivity.startActivity(intent);
+                mActivity.startActivity(intent, launchOptions);
             }
         } else {
             if (mActivityResultLauncher != null) {
                 mActivityResultLauncher.launch(intent);
             } else if (mFragment != null) {
-                mFragment.startActivityForResult(intent, request);
+                mFragment.startActivityForResult(intent, request, launchOptions);
             } else {
-                mActivity.startActivityForResult(intent, request);
+                mActivity.startActivityForResult(intent, request, launchOptions);
             }
         }
         return true;
+    }
+
+    private Bundle createLaunchOptions(boolean taskOverlay) {
+        if (!taskOverlay) {
+            return null;
+        }
+        ActivityOptions options = ActivityOptions.makeBasic();
+        options.setLaunchTaskId(mActivity.getTaskId());
+        options.setTaskOverlay(true /* taskOverlay */, true /* canResume */);
+        return options.toBundle();
     }
 
     private Optional<Integer> passwordQualityToLockTypes(int quality) {
