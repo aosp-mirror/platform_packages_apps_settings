@@ -250,7 +250,7 @@ public final class DataProcessorTest {
 
         final Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>> periodMap =
                 DataProcessor.generateAppUsagePeriodMap(
-                        hourlyBatteryLevelsPerDay, appUsageEventList);
+                        14400000L, hourlyBatteryLevelsPerDay, appUsageEventList);
 
         assertThat(periodMap).hasSize(3);
         // Day 1
@@ -288,7 +288,7 @@ public final class DataProcessorTest {
         hourlyBatteryLevelsPerDay.add(
                 new BatteryLevelData.PeriodBatteryLevelData(new ArrayList<>(), new ArrayList<>()));
         assertThat(DataProcessor.generateAppUsagePeriodMap(
-                hourlyBatteryLevelsPerDay, new ArrayList<>())).isNull();
+                0L, hourlyBatteryLevelsPerDay, new ArrayList<>())).isNull();
     }
 
     @Test

@@ -77,17 +77,19 @@ public class BluetoothLeAudioPreferenceController
             return;
         }
 
-        final boolean leAudioEnabled =
-                (mBluetoothAdapter.isLeAudioSupported() == BluetoothStatusCodes.FEATURE_SUPPORTED);
-        ((SwitchPreference) mPreference).setChecked(leAudioEnabled);
-
         final boolean leAudioSwitchSupported =
                 SystemProperties.getBoolean(LE_AUDIO_DYNAMIC_SWITCH_PROPERTY, false);
-        if (!leAudioSwitchSupported) {
+
+        final int isLeAudioSupportedStatus = mBluetoothAdapter.isLeAudioSupported();
+        final boolean leAudioEnabled =
+                (isLeAudioSupportedStatus == BluetoothStatusCodes.FEATURE_SUPPORTED);
+
+        ((SwitchPreference) mPreference).setChecked(leAudioEnabled);
+
+        // Disable option if Bluetooth is disabled or if switch is not supported
+        if (isLeAudioSupportedStatus == BluetoothStatusCodes.ERROR_BLUETOOTH_NOT_ENABLED
+                || !leAudioSwitchSupported) {
             mPreference.setEnabled(false);
-        } else {
-            SystemProperties.set(LE_AUDIO_DYNAMIC_ENABLED_PROPERTY,
-                    Boolean.toString(leAudioEnabled));
         }
     }
 
