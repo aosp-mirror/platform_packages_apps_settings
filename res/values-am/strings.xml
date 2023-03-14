@@ -457,6 +457,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"የእርስዎ የመልክ ሞዴል በቋሚነት እና ደህንነቱ በተጠበቀ መንገድ ይሰረዛል።\n\nከስረዛ በኋላ ስልክዎን ለመክፈት የእርስዎ ፒን፣ ስርዓተ-ጥለት ወይም የይለፍ ቃል ያስፈልገዎታል።"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"የእርስዎን ስልክ ለመክፈት በመልክ መክፈትን ይጠቀሙ"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"የጣት አሻራ"</string>
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"የጣት አሻራ መክፈቻን ሲጠቀሙ"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"የጣት አሻራ ለሥራ"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"የጣት አሻራዎችን ያስተዳድሩ"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"የጣት አሻራን ይጠቀሙ ለ"</string>
@@ -524,9 +525,6 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"ንዝረት ከተሰማዎት በኋላ ጣትዎን ያንሱ"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"ለስላሳ ብርሃን ወዳለበት አንድ ቦታ ይሂዱ እና እንደገና ይሞክሩ"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"ከፍተኛው የሙከራ ብዛት ላይ ደርሰዋል"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"ጡባዊዎን ለመክፈት ወይም እንደ በመለያ ወደ መተግበሪያዎች ሲገቡ ባለ ጊዜ ላይ እርስዎ መሆንዎን ለማረጋገጥ የጣት አሻራዎን ይጠቀሙ።"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"መሣሪያዎን ለመክፈት ወይም እንደ በመለያ ወደ መተግበሪያዎች ሲገቡ ባለ ጊዜ ላይ እርስዎ መሆንዎን ለማረጋገጥ የጣት አሻራዎን ይጠቀሙ።"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"ስልክዎን ለመክፈት ወይም እንደ በመለያ ወደ መተግበሪያዎች ሲገቡ ባለ ጊዜ ላይ እርስዎ መሆንዎን ለማረጋገጥ የጣት አሻራዎን ይጠቀሙ።"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"በመልክ እና በጣት አሻራ መክፈት"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"ለማቀናበር መታ ያድርጉ"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"መልክ እና የጣት አሻራዎች ታክለዋል"</string>
@@ -591,10 +589,12 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"የተመዘገበ <xliff:g id="PERCENTAGE">%d</xliff:g> መቶኛ"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"የጣት አሻራ <xliff:g id="PERCENTAGE">%d</xliff:g> መቶኛን በመመዝገብ ላይ"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"የጣት አሻራ ታክሏል"</string>
-    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"የእርስዎን ጡባዊ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች በመለያ ሲገቡ ወይም አንድን ግዢ ሲያጸድቁ እርስዎ መሆንዎን ለማረጋገጥ ከአሁን በኋላ የጣት አሻራዎን መጠቀም ይችላሉ"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"አሁን የጣት አሻራዎትን የእርስዎን ጡባዊ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች በሚገቡበት ጊዜ እርስዎ መሆንዎትን ለማረጋገጥ ሊጠቀሙበት ይችላሉ"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"አሁን የጣት አሻራዎትን የእርስዎን መሣሪያ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች በሚገቡበት ጊዜ እርስዎ መሆንዎትን ለማረጋገጥ ሊጠቀሙበት ይችላሉ"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"አሁን የጣት አሻራዎትን የእርስዎን ስልክ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች በሚገቡበት ጊዜ እርስዎ መሆንዎትን ለማረጋገጥ ሊጠቀሙበት ይችላሉ"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"አሁን የእርስዎን ጡባዊ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች በመለያ ሲገቡ ወይም አንድን ግዢ ሲያጸድቁ እርስዎ መሆንዎን ለማረጋገጥ የጣት አሻራዎን መጠቀም ይችላሉ"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"አሁን የእርስዎን መሣሪያ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች በመለያ ሲገቡ ወይም አንድን ግዢ ሲያጸድቁ እርስዎ መሆንዎን ለማረጋገጥ የጣት አሻራዎን መጠቀም ይችላሉ"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"አሁን የእርስዎን ስልክ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች በመለያ ሲገቡ ወይም አንድን ግዢ ሲያጸድቁ እርስዎ መሆንዎን ለማረጋገጥ የጣት አሻራዎን መጠቀም ይችላሉ"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"ማያ ገጽ ሲበራ ብቻ ይክፈቱ"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"በጣት አሻራዎ ከመክፈትዎ በፊት ማያ ገጹ ክፍት መሆን አለበት። ይህ በስህተት የመከፈትን ዕድል ይቀንሳል።"</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"ማያ ገጽ፣ ይክፈቱ"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"በኋላ ላይ ያድርጉት"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"ያንሱ፣ በመቀጠል መልሰው ይንኩ"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"የጣት አሻራዎን ጎን በዳሳሹ ላይ አስቀምጠው ይያዙት፣ ከዚያ ወደ ሌላኛው ጎን ይቀይሩ"</string>
@@ -738,17 +738,23 @@
     <string name="fingerprint_unlock_set_unlock_pin" msgid="4724451168139460493">"የጣት አሻራ + ፒን"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"የጣት አሻራ + የይለፍ ቃል"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"ያለጣት አሻራ ይቀጥሉ"</string>
-    <string name="fingerprint_unlock_title" msgid="4978686534505944042">"የእርስዎን የጣት አሻራ ተጠቅመው ስልክዎን መክፈት ይችላሉ። ለደህንነት ሲባል ይህ አማራጭ የመጠባበቂያ ማያ ገጽ መቆለፊያ ያስፈልገዋል።"</string>
+    <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"የእርስዎን የጣት አሻራ ተጠቅመው ስልክዎን መክፈት ይችላሉ። ለደህንነት ሲባል ይህ አማራጭ የመጠባበቂያ ማያ ገጽ መቆለፊያ ያስፈልገዋል።"</string>
+    <string name="fingerprint_unlock_title" product="tablet" msgid="8674718459462612186">"የእርስዎን የጣት አሻራ በመጠቀም ጡባዊዎን መክፈት ይችላሉ። ለደህንነት ሲባል ይህ አማራጭ ምትኬ ማያ ገጽ መቆለፊያ ያስፈልገዋል።"</string>
+    <string name="fingerprint_unlock_title" product="device" msgid="3224468142599659740">"የእርስዎን የጣት አሻራ በመጠቀም መሣሪያዎን መክፈት ይችላሉ። ለደህንነት ሲባል ይህ አማራጭ ምትኬ ማያ ገጽ መቆለፊያ ያስፈልገዋል።"</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"በመልክ መክፈት + ስርዓተ ጥለት"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"በመልክ መክፈት + ፒን"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"በመልክ መክፈት + የይለፍ ቃል"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"ያለመልክ መክፈት ይቀጥሉ"</string>
-    <string name="face_unlock_title" msgid="7344830351598247267">"የእርስዎን መልክ ተጠቅመው ስልክዎን መክፈት ይችላሉ። ለደህንነት ሲባል ይህ አማራጭ የመጠባበቂያ ማያ ገጽ መቆለፊያ ያስፈልገዋል።"</string>
+    <string name="face_unlock_title" product="default" msgid="7344830351598247267">"የእርስዎን መልክ ተጠቅመው ስልክዎን መክፈት ይችላሉ። ለደህንነት ሲባል ይህ አማራጭ የመጠባበቂያ ማያ ገጽ መቆለፊያ ያስፈልገዋል።"</string>
+    <string name="face_unlock_title" product="tablet" msgid="5695698036499155727">"የእርስዎን ጡባዊ በመጠቀም ስልክዎን መክፈት ይችላሉ። ለደህንነት ሲባል ይህ አማራጭ ምትኬ ማያ ገጽ መቆለፊያ ያስፈልገዋል።"</string>
+    <string name="face_unlock_title" product="device" msgid="6768108756755361161">"የእርስዎን መልክ በመጠቀም መሣሪያዎን መክፈት ይችላሉ። ለደህንነት ሲባል ይህ አማራጭ ምትኬ ማያ ገጽ መቆለፊያ ያስፈልገዋል።"</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"ስርዓተ ጥለት • መልክ • የጣት አሻራ"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"ፒን • መልክ • የጣት አሻራ"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"የይለፍ ቃል • መልክ • የጣት አሻራ"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"ያለመልክ ወይም የጣት አሻራ ይቀጥሉ"</string>
-    <string name="biometrics_unlock_title" msgid="616524056055233041">"የእርስዎን መልክ ወይም የጣት አሻራ በመጠቀም ስልክዎን መክፈት ይችላሉ። ለደህንነት ሲባል ይህ አማራጭ የምትኬ የማያ ገጽ መቆለፊያ ያስፈልገዋል።"</string>
+    <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"የእርስዎን መልክ ወይም የጣት አሻራ በመጠቀም ስልክዎን መክፈት ይችላሉ። ለደህንነት ሲባል ይህ አማራጭ የምትኬ የማያ ገጽ መቆለፊያ ያስፈልገዋል።"</string>
+    <string name="biometrics_unlock_title" product="tablet" msgid="5808626401936488028">"የእርስዎን መልክ ወይም የጣት አሻራ በመጠቀም ጡባዊዎን መክፈት ይችላሉ። ለደህንነት ሲባል ይህ አማራጭ ምትኬ የማያ ገጽ መቆለፊያ ያስፈልገዋል።"</string>
+    <string name="biometrics_unlock_title" product="device" msgid="4912499343509046929">"የእርስዎን መልክ ወይም የጣት አሻራ በመጠቀም መሣሪያዎን መክፈት ይችላሉ። ለደህንነት ሲባል ይህ አማራጭ ምትኬ የማያ ገጽ መቆለፊያ ያስፈልገዋል።"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"በአስተዳዳሪ፣ የምስጠራ መመሪያ ወይም የምስክርነት ማከማቻ ተሰናክሏል"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"ምንም"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"ማንሸራተት"</string>
@@ -1524,11 +1530,14 @@
     <string name="style_suggestion_summary" msgid="4271131877800968159">"የተለያዩ ቅጦችን፣ ልጣፎችን እና ተጨማሪ ነገሮችን ይሞክሩ"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"የማያ ገጽ ማቆያ"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"የማያ ገጽ ማቆያ"</string>
+    <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"የመኝታ ሰዓት ሁነታ ስለበራ የማይገኝ"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"የማያ ገጽ አዳኝን ይጠቀሙ"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"ኃይል እየሞላ ወይም ተተክሎ ሳለ"</string>
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"ተተክሎ እና ኃይል በመሙላት ላይ እያለ"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"ባትሪ በመሙላት ላይ ሳለ"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"ተተክሎ ሳለ"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"በጭራሽ"</string>
+    <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"በርቷል / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"ጠፍቷል"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"መቼ እንደሚጀመር"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"የአሁኑ ማያ ገጽ ማሳረፊያ"</string>
@@ -1796,6 +1805,8 @@
     <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"የእርስዎን <xliff:g id="NAME">^1</xliff:g> መጠቀም መጀመር ይችላሉ"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"የባትሪሁኔታ"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"የባትሪደረጃ፡"</string>
+    <string name="communal_settings_title" msgid="2845678473945902115">"የጋራ"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"የጋራ ቅንብሮች"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
     <string name="apn_edit" msgid="2003683641840248741">"የመዳረሻ ነጥብ አርትዕ"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"አልተዘጋጀም"</string>
@@ -1927,6 +1938,7 @@
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> አይያያዝም።"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"የኢተርኔት ማስተሳሰር"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"የስልክ በይነመረብ ግንኙነትን በዩኤስቢ ኢተርኔት በኩል አጋራ"</string>
+    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"የጡባዊ በይነመረብ ግንኙነትን በኢተርኔት በኩል አጋራ"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"በእርስዎ የተንቀሳቃሽ ስልክ ውሂብ ግንኙነት በኩል በይነመረቡ ለሌሎች መሣሪያዎች ለማቅረብ የመገናኛ ነጥብን እና እንደ ሞደም መሰካትን ይጠቀሙ። መተግበሪያዎች በአቅራቢያ ላሉ መሣሪያዎች ይዘትን ለማጋራት መገናኛ ነጥብን ሊፈጥሩ ይችላሉ።"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"በእርስዎ Wi-Fi ወይም የተንቀሳቃሽ ስልክ ውሂብ ግንኙነት በኩል በይነመረቡ ለሌሎች መሣሪያዎች ለማቅረብ የመገናኛ ነጥብን እና እንደ ሞደም መሰካትን ይጠቀሙ። መተግበሪያዎች እንዲሁም ይዘቶችን በአቅራቢያ ላሉ መሣሪያዎች ለማጋራት መገናኛ ነጥብን መፍጠር ይችላሉ።"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"እገዛ"</string>
@@ -2830,7 +2842,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"የታሪክ ዝርዝሮች"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"የባትሪ አጠቃቀም"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"ያለፉት 24 ሰዓቶች አጠቃቀምን ይመልከቱ"</string>
-    <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"ካለፈው የተሞላ ኃይል የአጠቃቀም ታሪክ ይመልከቱ"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"ከመጨረሻው ሙሉ የኃይል ሙሌት በኋላ አጠቃቀምን አሳይ"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"የመተግበሪያ የባትሪ አጠቃቀም"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"ዝርዝሮችን ተጠቀም"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"የኃይል አጠቃቀም አስተካክል"</string>
@@ -2850,10 +2862,14 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"አንዳንድ ባህሪዎች ሊገደቡ ይችላሉ"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"ከፍተኛ የባትሪ አጠቃቀም"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"ከፍተኛ አጠቃቀም ያላቸውን መተግበሪያዎች ይመልከቱ"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"ኃይል መሙላት ባለበት ቆሟል"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"የባትሪ ዕድሜን ለማራዘም ለባትሪ ጥበቃ በማድረግ ላይ"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"ባትሪዎን ለመጠበቅ ኃይል መሙላት እንዲተባ ተደርጓል"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"የባትሪዎን ዕድሜ ዘመን ለማራዘም እንዲያግዝ ኃይል መሙላት እንዲተባ ተደርጓል"</string>
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"ባትሪዎን ለመጠበቅ ኃይል መሙላት እንዲተባ ተደርጓል"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"የባትሪዎን ዕድሜ ለማራዘም እንዲያግዝ ኃይል መሙላት ተሰክቶ እያለ እንዲተባ ተደርጓል"</string>
+    <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"ባትሪዎን ለመጠበቅ ኃይል መሙላት እንዲተባ ተደርጓል"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"የባትሪዎን ዕድሜ ለማራዘም እንዲያግዝ ኃይል መሙላት ተሰክቶ እያለ እንዲተባ ተደርጓል"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"እስኪሞላ ደረስ ኃይል መሙላት"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"ባትሪዎን ለመጠበቅ የእርስዎ ጡባዊ በሚተከልበት በቀጣዩ ጊዜ ላይ ኃይል መሙላት እንዲተባ ይደረጋል"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"ስለኃይል መሙላት ባለበት ቆሟል የበለጠ ይወቁ"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"ኃይል መሙላትን ከቆመበት ቀጥል"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"እንደ ከፍተኛ የሙቀት መጠኖች እና ረጅም የኃይል መሙያ ጊዜያት ባሉ በተወሰኑ ሁኔታዎች ላይ የባትሪ ጤናን ለመጠበቅ ለማገዝ ባትሪ መሙላት በ<xliff:g id="PERCENT">%1$s</xliff:g> የተገደበ ሊሆን ይችላል።\n\nእነዚያ ሁኔታዎች ሲያበቁ ስልክዎ በራስ-ሰር በመደበኛ ሁኔታ ኃይል ይሞላል።"</string>
@@ -3011,25 +3027,25 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"የባትሪ አጠቃቀም"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"የባትሪው ኃይል ሙሉ ከሆነ በኋላ"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"የባትሪ አጠቃቀምን ያቀናብሩ"</string>
-    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> ጠቅላላ • ከመጨረሻው ሙሉ ኃይል\nሙሌት በኋላ <xliff:g id="TIME_1">^2</xliff:g> ዳራ"</string>
+    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"<xliff:g id="TIME_0">^1</xliff:g> ጠቅላላ • ከመጨረሻው ሙሉ የኃይል ሙሌት በኋላ\n<xliff:g id="TIME_1">^2</xliff:g> ዳራ"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> ጠቅላላ • ላለፉት 24 ሰዓታት\n<xliff:g id="TIME_1">^2</xliff:g> ዳራ"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"<xliff:g id="TIME_0">^1</xliff:g> ጠቅላላ • የ<xliff:g id="TIME_1">^2</xliff:g> ዳራ\nለ<xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
-    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"ከመጨረሻው ሙሉ የኃይል ሙሌት በኋላ ጠቅላላ ከአንድ ደቂቃ ያነሰ"</string>
+    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"ከመጨረሻው ሙሉ የኃይል ሙሌት በኋላ ጠቅላላ ከአንድ ደቂቃ ያነሰ"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"ላለፉት 24 ሰዓቶች ጠቅላላ ከአንድ ደቂቃ ያነሰ"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"ለ<xliff:g id="TIME_PERIOD">^1</xliff:g> ጠቅላላ ከአንድ ደቂቃ"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"ከመጨረሻው ሙሉ የኃይል ሙሌት በኋላ ከአንድ ደቂቃ ያነሰ ዳራ"</string>
+    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"ከመጨረሻው ሙሉ የኃይል ሙሌት በኋላ ዳራ ከአንድ ደቂቃ ያነሰ"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"ላለፉት 24 ሰዓታት ዳራ ከአንድ ደቂቃ በታች"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"ለ<xliff:g id="TIME_PERIOD">^1</xliff:g> ዳራ ከአንድ ደቂቃ በታች"</string>
-    <string name="battery_total_usage" msgid="4685408616230899847">"<xliff:g id="TIME">^1</xliff:g> ጠቅላላ ከመጨረሻው ሙሉ ኃይል ሙሌት በኋላ"</string>
+    <string name="battery_total_usage" msgid="4811532932663354619">"<xliff:g id="TIME">^1</xliff:g> ጠቅላላ ከመጨረሻው ሙሉ የኃይል ሙሌት በኋላ"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"ላለፉት 24 ሰዓታት <xliff:g id="TIME">^1</xliff:g> ጠቅላላ"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"ለ<xliff:g id="TIME_PERIOD">^2</xliff:g> ጠቅላላ <xliff:g id="TIME_0">^1</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="548670902301883980">"ከመጨረሻው ሙሉ ኃይል ሙሌት በኋላ <xliff:g id="TIME">^1</xliff:g> ዳራ"</string>
+    <string name="battery_bg_usage" msgid="8262917746299259350">"ከመጨረሻው ሙሉ የኃይል ሙሌት በኋላ <xliff:g id="TIME">^1</xliff:g> ዳራ"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"ላለፉት 24 ሰዓታት የ<xliff:g id="TIME">^1</xliff:g> ዳራ"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"ለ<xliff:g id="TIME_PERIOD">^2</xliff:g> የ<xliff:g id="TIME_0">^1</xliff:g> ዳራ"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"<xliff:g id="TIME">^1</xliff:g> ጠቅላላ • ከመጨረሻው ሙሉ ኃይል ሙሌት በኋላ\nዳራ ከአንድ ደቂቃ ያነሰ"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"<xliff:g id="TIME">^1</xliff:g> ጠቅላላ • ከመጨረሻው ሙሉ የኃይል ሙሌት በኋላ\nዳራ ከአንድ ደቂቃ ያነሰ"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"<xliff:g id="TIME">^1</xliff:g> ጠቅላላ • ላለፉት 24 ሰዓታት\nዳራ ከአንድ ደቂቃ በታች"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"<xliff:g id="TIME_0">^1</xliff:g> ጠቅላላ • ለ<xliff:g id="TIME_PERIOD">^2</xliff:g>\nዳራ ከአንድ ደቂቃ በታች"</string>
-    <string name="battery_not_usage" msgid="1472275761547230196">"ካለፈው ሙሉ ኃይል ሙሌት በኋላ ጥቅም ላይ አልዋለም"</string>
+    <string name="battery_not_usage" msgid="3851536644733662392">"ከመጨረሻው ሙሉ የኃይል ሙሌት በኋላ ምንም አጠቃቀም የለም"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"ላለፉት 24 ሰዓታት ጥቅም ላይ አልዋለም"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"ሌሎች ተጠቃሚዎች"</string>
@@ -3510,7 +3526,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"<xliff:g id="USER_NAME">%1$s</xliff:g>ን ከዚህ መሣሪያ ሰርዝ"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"የገጽ ቆልፍ ቅንብሮች"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"ከማያ ገጽ ቁልፍ ሆነው ተጠቃሚዎችን ያክሉ"</string>
-    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"በሚተከልበት ጊዜ ወደ የአስተዳዳሪ ተጠቃሚ ይቀይሩ"</string>
+    <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"በሚተከልበት ጊዜ ወደ የአስተዳዳሪ ተጠቃሚ ይቀይሩ"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"እራስዎን ይሰርዙ?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"ይህ ተጠቃሚ ይሰረዝ?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"ይህ መገለጫ ይወገድ?"</string>
@@ -3830,6 +3846,7 @@
     <string name="call_volume_option_title" msgid="1461105986437268924">"የስልክ ጥሪ ድምፅ መጠን"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"የማንቂያ ድምፅ መጠን"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"የጥሪ ድምፅ እና ማሳወቂያ ድምፅ መጠን"</string>
+    <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"የጥሪ የድምጽ መጠን"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"የማሳወቂያ ድምፅ መጠን"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"የስልክ ጥሪ ድምፅ"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"ነባሪ የማሳወቂያ ድምፅ"</string>
@@ -4226,6 +4243,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"በጥያቄዎ መሠረት Android የዚህ መተግበሪያ ማሳወቂያዎች በዚህ መሣሪያ ላይ እንዳይታዩ እያገደ ነው"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"በጥያቄዎ መሠረት Android ይህ የማሳወቂያዎች ምድብ በዚህ መሣሪያ ላይ እንዳይታይ እያገደ ነው"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"በጥያቄዎ መሠረት Android ይህን የማሳወቂያዎች ስብስብ በዚህ መሣሪያ ላይ እንዳይታይ እያገደ ነው"</string>
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"ይህ መተግበሪያ ማሳወቂያዎችን አይልክም"</string>
     <string name="notification_channels" msgid="1502969522886493799">"ምድቦች"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"ሌላ"</string>
     <plurals name="notification_group_summary" formatted="false" msgid="483490958130993160">
@@ -5517,6 +5535,7 @@
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"የመተግበሪያ ውሂብ አጠቃቀም"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"ልክ ያልሆነ አውታረ መረብ ሁነታ <xliff:g id="NETWORKMODEID">%1$d</xliff:g>። ችላ በል።"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"የመዳረሻ ነጥብ ስም"</string>
+    <string name="keywords_access_point_names" msgid="8174967126858505945">"ኤፒኤን"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"ከ<xliff:g id="CARRIER">%1$s</xliff:g> ጋር ሲገናኝ የማይገኝ"</string>
     <string name="see_more" msgid="7499355691042812723">"ተጨማሪ ይመልከቱ"</string>
     <string name="see_less" msgid="2642392725363552793">"ያነሰ ይመልከቱ"</string>
@@ -5697,6 +5716,11 @@
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"ለመጠቀም መጀመሪያ «የመሣሪያ መቆጣጠሪያዎችን አሳይ» የሚለውን ያብሩ"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"የሚገኝ ሲሆን ባለ ሁለት-መስመር ሰዓት አሳይ"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"ባለ ሁለት-መስመር ሰዓት"</string>
+    <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"አቋራጮች"</string>
+    <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
+      <item quantity="one"><xliff:g id="FIRST_1">%1$s</xliff:g>፣ <xliff:g id="SECOND">%2$s</xliff:g></item>
+      <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>፣ <xliff:g id="SECOND">%2$s</xliff:g></item>
+    </plurals>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>

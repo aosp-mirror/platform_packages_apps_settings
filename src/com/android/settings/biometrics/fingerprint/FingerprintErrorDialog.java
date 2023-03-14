@@ -41,12 +41,14 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
 
     public static final String KEY_ERROR_MSG = "error_msg";
     public static final String KEY_ERROR_ID = "error_id";
+    public static final String KEY_UDFPS = "is_udfps";
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         CharSequence errorString = getArguments().getCharSequence(KEY_ERROR_MSG);
         final int errMsgId = getArguments().getInt(KEY_ERROR_ID);
+        final boolean canAssumeUdfps = getArguments().getBoolean(KEY_UDFPS, false);
         boolean wasTimeout = errMsgId == BiometricConstants.BIOMETRIC_ERROR_TIMEOUT;
 
         builder.setTitle(R.string.security_settings_fingerprint_enroll_error_dialog_title)
@@ -59,11 +61,15 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
                                 Activity activity = getActivity();
-                                activity.setResult(RESULT_FINISHED);
+                                if (wasTimeout && !canAssumeUdfps) {
+                                    activity.setResult(RESULT_TIMEOUT);
+                                } else {
+                                    activity.setResult(RESULT_FINISHED);
+                                }
                                 activity.finish();
                             }
                         });
-        if (wasTimeout) {
+        if (wasTimeout && canAssumeUdfps) {
             builder.setPositiveButton(
                             R.string.security_settings_fingerprint_enroll_dialog_try_again,
                             new DialogInterface.OnClickListener() {
@@ -72,6 +78,7 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
                                     dialog.dismiss();
                                     Activity activity = getActivity();
                                     Intent intent = activity.getIntent();
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                     intent.putExtra(KEY_STATE_CANCELED, false);
                                     activity.startActivity(intent);
                                     activity.finish();
@@ -94,18 +101,21 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
         return dialog;
     }
 
-    public static void showErrorDialog(BiometricEnrollBase host, int errMsgId) {
+    public static void showErrorDialog(BiometricEnrollBase host, int errMsgId,
+            boolean canAssumeUdfps) {
         if (host.isFinishing()) {
             return;
         }
-
         final FragmentManager fragmentManager = host.getSupportFragmentManager();
         if (fragmentManager.isDestroyed() || fragmentManager.isStateSaved()) {
             return;
         }
-
-        final CharSequence errMsg = host.getText(getErrorMessage(errMsgId));
-        final FingerprintErrorDialog dialog = newInstance(errMsg, errMsgId);
+        CharSequence errMsg = host.getText(getErrorMessage(errMsgId));
+        if (!canAssumeUdfps
+                && errMsgId == BiometricConstants.BIOMETRIC_ERROR_TIMEOUT) {
+            errMsg = host.getText(getErrorMessage(BiometricConstants.BIOMETRIC_ERROR_CANCELED));
+        }
+        final FingerprintErrorDialog dialog = newInstance(errMsg, errMsgId, canAssumeUdfps);
         dialog.show(fragmentManager, FingerprintErrorDialog.class.getName());
     }
 
@@ -123,11 +133,13 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
         }
     }
 
-    private static FingerprintErrorDialog newInstance(CharSequence msg, int msgId) {
+    private static FingerprintErrorDialog newInstance(CharSequence msg, int msgId,
+            boolean canAssumeUdfps) {
         FingerprintErrorDialog dialog = new FingerprintErrorDialog();
         Bundle args = new Bundle();
         args.putCharSequence(KEY_ERROR_MSG, msg);
         args.putInt(KEY_ERROR_ID, msgId);
+        args.putBoolean(KEY_UDFPS, canAssumeUdfps);
         dialog.setArguments(args);
         return dialog;
     }

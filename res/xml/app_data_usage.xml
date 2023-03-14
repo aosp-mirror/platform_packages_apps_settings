@@ -51,6 +51,7 @@
 
     <PreferenceCategory
         android:key="app_data_usage_settings_category"
+        settings:isPreferenceVisible="@bool/config_show_sim_info"
         android:layout="@layout/preference_category_no_label">
 
         <Preference
