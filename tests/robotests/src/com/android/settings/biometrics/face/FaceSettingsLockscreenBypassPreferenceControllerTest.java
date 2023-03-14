@@ -31,6 +31,7 @@ import android.hardware.face.FaceManager;
 import android.os.UserManager;
 import android.provider.Settings;
 
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -65,6 +66,9 @@ public class FaceSettingsLockscreenBypassPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        ShadowUtils.setFaceManager(mFaceManager);
+        FakeFeatureFactory.setupForTest();
+
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(eq(Context.FACE_SERVICE))).thenReturn(mFaceManager);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);

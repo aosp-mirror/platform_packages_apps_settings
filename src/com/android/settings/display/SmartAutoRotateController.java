@@ -180,6 +180,10 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
      * Returns true if there is a {@link RotationResolverService} available
      */
     public static boolean isRotationResolverServiceAvailable(Context context) {
+        if (!context.getResources().getBoolean(
+                R.bool.config_auto_rotate_face_detection_available)) {
+            return false;
+        }
         final PackageManager packageManager = context.getPackageManager();
         final String resolvePackage = packageManager.getRotationResolverPackageName();
         if (TextUtils.isEmpty(resolvePackage)) {

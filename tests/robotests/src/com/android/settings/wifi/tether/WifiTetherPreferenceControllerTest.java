@@ -16,13 +16,14 @@
 
 package com.android.settings.wifi.tether;
 
+import static com.android.settings.wifi.WifiUtils.setCanShowWifiHotspotCached;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.net.TetheringManager;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 
@@ -62,8 +63,6 @@ public class WifiTetherPreferenceControllerTest {
     @Mock
     private Lifecycle mLifecycle;
     @Mock
-    private TetheringManager mTetheringManager;
-    @Mock
     private WifiManager mWifiManager;
     @Mock
     private PreferenceScreen mScreen;
@@ -74,38 +73,37 @@ public class WifiTetherPreferenceControllerTest {
 
     @Before
     public void setUp() {
+        setCanShowWifiHotspotCached(true);
         FakeFeatureFactory.setupForTest();
         mPreference = new PrimarySwitchPreference(mContext);
-        when(mContext.getSystemService(Context.TETHERING_SERVICE)).thenReturn(mTetheringManager);
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
         mSoftApConfiguration = new SoftApConfiguration.Builder().setSsid(SSID).build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(mSoftApConfiguration);
 
-        when(mTetheringManager.getTetherableWifiRegexs()).thenReturn(new String[]{"1", "2"});
         mController = new WifiTetherPreferenceController(mContext, mLifecycle, mWifiManager,
-                mTetheringManager, false /* initSoftApManager */, true /* isWifiTetheringAllow */);
+                false /* initSoftApManager */, true /* isWifiTetheringAllow */);
         mController.displayPreference(mScreen);
     }
 
     @Test
-    public void isAvailable_noTetherRegex_shouldReturnFalse() {
-        when(mTetheringManager.getTetherableWifiRegexs()).thenReturn(new String[]{});
-        mController = new WifiTetherPreferenceController(mContext, mLifecycle, mWifiManager,
-                mTetheringManager, false /* initSoftApManager */, true /* isWifiTetheringAllow */);
+    public void isAvailable_canNotShowWifiHotspot_shouldReturnFalse() {
+        setCanShowWifiHotspotCached(false);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
-    public void isAvailable_hasTetherRegex_shouldReturnTrue() {
+    public void isAvailable_canShowWifiHostspot_shouldReturnTrue() {
+        setCanShowWifiHotspotCached(true);
+
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void displayPreference_wifiTetheringNotAllowed_shouldDisable() {
         mController = new WifiTetherPreferenceController(mContext, mLifecycle, mWifiManager,
-                mTetheringManager, false /* initSoftApManager */, false /* isWifiTetheringAllow */);
+                false /* initSoftApManager */, false /* isWifiTetheringAllow */);
 
         mController.displayPreference(mScreen);
 
@@ -116,7 +114,7 @@ public class WifiTetherPreferenceControllerTest {
     @Test
     public void displayPreference_wifiTetheringAllowed_shouldEnable() {
         mController = new WifiTetherPreferenceController(mContext, mLifecycle, mWifiManager,
-                mTetheringManager, false /* initSoftApManager */, true /* isWifiTetheringAllow */);
+                false /* initSoftApManager */, true /* isWifiTetheringAllow */);
 
         mController.displayPreference(mScreen);
 
