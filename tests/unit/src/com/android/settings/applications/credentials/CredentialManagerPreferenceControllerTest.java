@@ -298,13 +298,13 @@ public class CredentialManagerPreferenceControllerTest {
         Map<String, SwitchPreference> prefs =
                 controller.buildPreferenceList(mContext, mCredentialsPreferenceCategory);
         assertThat(prefs.size()).isEqualTo(3);
-        assertThat(prefs.containsKey(TEST_PACKAGE_NAME_A));
+        assertThat(prefs.containsKey(TEST_PACKAGE_NAME_A)).isTrue();
         assertThat(prefs.get(TEST_PACKAGE_NAME_A).getTitle()).isEqualTo(TEST_TITLE_APP_A);
         assertThat(prefs.get(TEST_PACKAGE_NAME_A).isChecked()).isFalse();
-        assertThat(prefs.containsKey(TEST_PACKAGE_NAME_B));
+        assertThat(prefs.containsKey(TEST_PACKAGE_NAME_B)).isTrue();
         assertThat(prefs.get(TEST_PACKAGE_NAME_B).getTitle()).isEqualTo(TEST_TITLE_APP_B);
         assertThat(prefs.get(TEST_PACKAGE_NAME_B).isChecked()).isFalse();
-        assertThat(prefs.containsKey(TEST_PACKAGE_NAME_C));
+        assertThat(prefs.containsKey(TEST_PACKAGE_NAME_C)).isTrue();
         assertThat(prefs.get(TEST_PACKAGE_NAME_C).getTitle()).isEqualTo(TEST_TITLE_SERVICE_C);
         assertThat(prefs.get(TEST_PACKAGE_NAME_C).isChecked()).isTrue();
     }
