@@ -65,11 +65,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
     static final String KEY_BATTERY_USAGE = "battery_usage_summary";
 
     @VisibleForTesting
-    static final int BATTERY_INFO_LOADER = 1;
-    @VisibleForTesting
-    static final int BATTERY_TIP_LOADER = 2;
-
-    @VisibleForTesting
     PowerUsageFeatureProvider mPowerFeatureProvider;
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
@@ -241,7 +236,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
     @VisibleForTesting
     void restartBatteryTipLoader() {
-        getLoaderManager().restartLoader(BATTERY_TIP_LOADER, Bundle.EMPTY, mBatteryTipsCallbacks);
+        restartLoader(LoaderIndex.BATTERY_TIP_LOADER, Bundle.EMPTY, mBatteryTipsCallbacks);
     }
 
     @VisibleForTesting
@@ -274,8 +269,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
         if (!mIsBatteryPresent) {
             return;
         }
-        getLoaderManager().restartLoader(BATTERY_INFO_LOADER, Bundle.EMPTY,
-                mBatteryInfoLoaderCallbacks);
+        restartLoader(LoaderIndex.BATTERY_INFO_LOADER, Bundle.EMPTY, mBatteryInfoLoaderCallbacks);
     }
 
     @VisibleForTesting

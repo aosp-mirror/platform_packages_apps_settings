@@ -42,11 +42,11 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowFragment.class})
-public class TimeoutToUserZeroSettingsTest {
+public class TimeoutToDockUserSettingsTest {
     @Mock
     private FragmentActivity mActivity;
 
-    private TimeoutToUserZeroSettings mSettings;
+    private TimeoutToDockUserSettings mSettings;
 
     private String[] mEntries;
     private String[] mValues;
@@ -57,10 +57,10 @@ public class TimeoutToUserZeroSettingsTest {
 
         final Context context = spy(ApplicationProvider.getApplicationContext());
         mEntries = context.getResources().getStringArray(
-                R.array.switch_to_user_zero_when_docked_timeout_entries);
+                R.array.switch_to_dock_user_when_docked_timeout_entries);
         mValues = context.getResources().getStringArray(
-                R.array.switch_to_user_zero_when_docked_timeout_values);
-        mSettings = spy(new TimeoutToUserZeroSettings());
+                R.array.switch_to_dock_user_when_docked_timeout_values);
+        mSettings = spy(new TimeoutToDockUserSettings());
 
         doReturn(context).when(mSettings).getContext();
         doReturn(mActivity).when(mSettings).getActivity();
@@ -78,8 +78,9 @@ public class TimeoutToUserZeroSettingsTest {
     }
 
     @Test
-    public void defaultKey_settingNotSet_shouldReturnFirstValueAsDefault() {
-        assertThat(mSettings.getDefaultKey()).isEqualTo(mValues[0]);
+    public void defaultKey_settingNotSet_shouldReturnSecondValueAsDefault() {
+        assertThat(mSettings.getDefaultKey()).isEqualTo(
+                mValues[TimeoutToDockUserSettings.DEFAULT_TIMEOUT_SETTING_VALUE_INDEX]);
     }
 
     @Test
@@ -92,6 +93,13 @@ public class TimeoutToUserZeroSettingsTest {
     @Test
     public void defaultKey_setToSecondValue_shouldSaveToSettings() {
         final String expectedKey = mValues[1];
+        mSettings.setDefaultKey(expectedKey);
+        assertThat(mSettings.getDefaultKey()).isEqualTo(expectedKey);
+    }
+
+    @Test
+    public void defaultKey_setToThirdValue_shouldSaveToSettings() {
+        final String expectedKey = mValues[2];
         mSettings.setDefaultKey(expectedKey);
         assertThat(mSettings.getDefaultKey()).isEqualTo(expectedKey);
     }

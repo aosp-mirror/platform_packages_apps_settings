@@ -16,11 +16,16 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import static android.hardware.fingerprint.FingerprintManager.ENROLL_ENROLL;
+
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
+import android.os.SystemClock;
 import android.util.Log;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 
@@ -32,6 +37,36 @@ public class FingerprintEnrollSidecar extends BiometricEnrollSidecar {
 
     private FingerprintUpdater mFingerprintUpdater;
     private @FingerprintManager.EnrollReason int mEnrollReason;
+    private final MessageDisplayController mMessageDisplayController;
+    private final boolean mMessageDisplayControllerFlag;
+
+    /**
+     * Create a new FingerprintEnrollSidecar object.
+     * @param context associated context
+     * @param enrollReason reason for enrollment
+     */
+    public FingerprintEnrollSidecar(Context context,
+            @FingerprintManager.EnrollReason int enrollReason) {
+        mEnrollReason = enrollReason;
+
+        int helpMinimumDisplayTime = context.getResources().getInteger(
+                R.integer.enrollment_help_minimum_time_display);
+        int progressMinimumDisplayTime = context.getResources().getInteger(
+                R.integer.enrollment_progress_minimum_time_display);
+        boolean progressPriorityOverHelp = context.getResources().getBoolean(
+                R.bool.enrollment_progress_priority_over_help);
+        boolean prioritizeAcquireMessages = context.getResources().getBoolean(
+                R.bool.enrollment_prioritize_acquire_messages);
+        int collectTime = context.getResources().getInteger(
+                R.integer.enrollment_collect_time);
+        mMessageDisplayControllerFlag = context.getResources().getBoolean(
+                R.bool.enrollment_message_display_controller_flag);
+
+        mMessageDisplayController = new MessageDisplayController(context.getMainThreadHandler(),
+                mEnrollmentCallback, SystemClock.elapsedRealtimeClock(), helpMinimumDisplayTime,
+                progressMinimumDisplayTime, progressPriorityOverHelp, prioritizeAcquireMessages,
+                collectTime);
+    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -50,15 +85,22 @@ public class FingerprintEnrollSidecar extends BiometricEnrollSidecar {
             return;
         }
 
-        mFingerprintUpdater.enroll(mToken, mEnrollmentCancel, mUserId, mEnrollmentCallback,
-                mEnrollReason);
+        if (mEnrollReason == ENROLL_ENROLL && mMessageDisplayControllerFlag) {
+            //API calls need to be processed for {@link FingerprintEnrollEnrolling}
+            mFingerprintUpdater.enroll(mToken, mEnrollmentCancel, mUserId,
+                    mMessageDisplayController, mEnrollReason);
+        } else {
+            //No processing required for {@link FingerprintEnrollFindSensor}
+            mFingerprintUpdater.enroll(mToken, mEnrollmentCancel, mUserId, mEnrollmentCallback,
+                    mEnrollReason);
+        }
     }
 
     public void setEnrollReason(@FingerprintManager.EnrollReason int enrollReason) {
         mEnrollReason = enrollReason;
     }
 
-    private FingerprintManager.EnrollmentCallback mEnrollmentCallback
+    @VisibleForTesting FingerprintManager.EnrollmentCallback mEnrollmentCallback
             = new FingerprintManager.EnrollmentCallback() {
 
         @Override

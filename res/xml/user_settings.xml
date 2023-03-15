@@ -86,10 +86,10 @@
         settings:allowDividerAbove="true"/>
 
     <com.android.settingslib.RestrictedPreference
-        android:key="timeout_to_user_zero_preference"
-        android:title="@string/switch_to_user_zero_when_docked"
+        android:key="timeout_to_dock_user_preference"
+        android:title="@string/switch_to_dock_user_when_docked"
         android:order="106"
-        android:fragment="com.android.settings.users.TimeoutToUserZeroSettings"
-        settings:controller="com.android.settings.users.TimeoutToUserZeroPreferenceController"/>
+        android:fragment="com.android.settings.users.TimeoutToDockUserSettings"
+        settings:controller="com.android.settings.users.TimeoutToDockUserPreferenceController"/>
 
 </PreferenceScreen>

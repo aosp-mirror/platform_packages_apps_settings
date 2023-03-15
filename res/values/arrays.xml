@@ -1216,6 +1216,20 @@
         <item>90</item>
     </string-array>
 
+    <!-- Options for screensaver "When to start" for devices that do not support screensavers
+         while on battery -->
+    <string-array name="when_to_start_screensaver_entries_no_battery" translatable="false">
+        <item>@string/screensaver_settings_summary_sleep</item>
+        <item>@string/screensaver_settings_summary_dock_and_charging</item>
+    </string-array>
+
+    <!-- Values for screensaver "When to start" for devices that do not support screensavers
+         while on battery -->
+    <string-array name="when_to_start_screensaver_values_no_battery" translatable="false">
+        <item>while_charging_only</item>
+        <item>while_docked_only</item>
+    </string-array>
+
     <string-array name="when_to_start_screensaver_entries" translatable="false">
         <item>@string/screensaver_settings_summary_sleep</item>
         <item>@string/screensaver_settings_summary_dock</item>
@@ -1609,15 +1623,15 @@
         <item>1</item>
     </string-array>
 
-    <!-- Setting entries for timing out to user 0 when docked. -->
-    <string-array name="switch_to_user_zero_when_docked_timeout_entries">
+    <!-- Setting entries for timing out to the Dock User when docked. -->
+    <string-array name="switch_to_dock_user_when_docked_timeout_entries">
         <item>Never</item>
         <item>After 1 minute</item>
         <item>After 5 minutes</item>
     </string-array>
 
-    <!-- Setting values for timing out to user 0 when docked. [DO NOT TRANSLATE] -->
-    <string-array name="switch_to_user_zero_when_docked_timeout_values" translatable="false">
+    <!-- Setting values for timing out to the Dock User when docked. [DO NOT TRANSLATE] -->
+    <string-array name="switch_to_dock_user_when_docked_timeout_values" translatable="false">
         <!-- Never -->
         <item>0</item>
         <!-- 1 minute -->
