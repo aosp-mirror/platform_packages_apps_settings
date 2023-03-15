@@ -58,7 +58,7 @@ public class CaptioningPreferenceControllerTest {
                 Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, ON);
 
         assertThat(mController.getSummary()).isEqualTo(
-                mContext.getText(R.string.on));
+                mContext.getText(R.string.accessibility_feature_state_on));
     }
 
     @Test
@@ -67,6 +67,6 @@ public class CaptioningPreferenceControllerTest {
                 Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, OFF);
 
         assertThat(mController.getSummary()).isEqualTo(
-                mContext.getText(R.string.off));
+                mContext.getText(R.string.accessibility_feature_state_off));
     }
 }

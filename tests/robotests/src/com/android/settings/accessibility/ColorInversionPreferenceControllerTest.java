@@ -52,7 +52,7 @@ public class ColorInversionPreferenceControllerTest {
                 DISPLAY_INVERSION_ENABLED, State.ON);
 
         assertThat(mController.getSummary().toString().contains(
-                mContext.getText(R.string.on))).isTrue();
+                mContext.getText(R.string.accessibility_feature_state_on))).isTrue();
     }
 
     @Test
@@ -61,7 +61,7 @@ public class ColorInversionPreferenceControllerTest {
                 DISPLAY_INVERSION_ENABLED, State.OFF);
 
         assertThat(mController.getSummary().toString().contains(
-                mContext.getText(R.string.off))).isTrue();
+                mContext.getText(R.string.accessibility_feature_state_off))).isTrue();
     }
 
     @Retention(RetentionPolicy.SOURCE)

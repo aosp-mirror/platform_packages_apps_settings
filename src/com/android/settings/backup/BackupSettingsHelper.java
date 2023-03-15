@@ -58,7 +58,8 @@ public class BackupSettingsHelper {
         UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
         if (userManager.getUserProfiles().size() == 1) {
             try {
-                int resId = mBackupManager.isBackupEnabled() ? R.string.on : R.string.off;
+                int resId = mBackupManager.isBackupEnabled()
+                        ? R.string.backup_summary_state_on : R.string.backup_summary_state_off;
                 return mContext.getText(resId).toString();
             } catch (RemoteException e) {
                 Log.e(TAG, "Error getting isBackupEnabled", e);

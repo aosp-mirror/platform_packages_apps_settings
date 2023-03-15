@@ -51,7 +51,7 @@ public class OneHandedEnablePreferenceController extends BasePreferenceControlle
     public CharSequence getSummary() {
         return mContext.getText(
                 OneHandedSettingsUtils.isOneHandedModeEnabled(mContext)
-                        ? R.string.on : R.string.off);
+                        ? R.string.gesture_setting_on : R.string.gesture_setting_off);
     }
 
     @Override

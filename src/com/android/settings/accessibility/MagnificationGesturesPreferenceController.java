@@ -87,7 +87,8 @@ public class MagnificationGesturesPreferenceController extends TogglePreferenceC
             resId = R.string.accessibility_screen_magnification_short_summary;
         } else {
             final boolean enabled = isChecked();
-            resId = (enabled ? R.string.on : R.string.off);
+            resId = (enabled ? R.string.accessibility_feature_state_on :
+                    R.string.accessibility_feature_state_off);
         }
         return mContext.getString(resId);
     }

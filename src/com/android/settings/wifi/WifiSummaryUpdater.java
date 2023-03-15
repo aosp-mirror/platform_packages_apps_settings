@@ -87,7 +87,7 @@ public final class WifiSummaryUpdater extends SummaryUpdater {
     @Override
     public String getSummary() {
         if (!mWifiTracker.enabled) {
-            return mContext.getString(R.string.off);
+            return mContext.getString(R.string.switch_off_text);
         }
         if (!mWifiTracker.connected) {
             return mContext.getString(R.string.disconnected);

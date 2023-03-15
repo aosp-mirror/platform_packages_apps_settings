@@ -99,11 +99,11 @@ public class AppNotificationPreferenceController extends AppInfoPreferenceContro
             return "";
         }
         if (appRow.banned) {
-            return context.getText(R.string.off);
+            return context.getText(R.string.notifications_disabled);
         } else if (appRow.channelCount == 0) {
             return NotificationBackend.getSentSummary(context, appRow.sentByApp, false);
         } else if (appRow.channelCount == appRow.blockedChannelCount) {
-            return context.getText(R.string.off);
+            return context.getText(R.string.notifications_disabled);
         } else {
             if (appRow.blockedChannelCount == 0) {
                 return NotificationBackend.getSentSummary(context, appRow.sentByApp, false);

@@ -194,7 +194,7 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_ENABLED);
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.on));
+                mContext.getString(R.string.accessibility_summary_state_enabled));
     }
 
     @Test
@@ -205,13 +205,13 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_DISABLED);
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.off));
+                mContext.getString(R.string.accessibility_summary_state_disabled));
     }
 
     @Test
     public void getServiceSummary_enableServiceAndHasSummary_showsEnabledSummary() {
         final String service_enabled = mContext.getString(
-                R.string.on);
+                R.string.accessibility_summary_state_enabled);
         doReturn(DEFAULT_SUMMARY).when(mServiceInfo).loadSummary(any());
 
         final CharSequence summary = AccessibilitySettings.getServiceSummary(mContext,
@@ -225,7 +225,7 @@ public class AccessibilitySettingsTest {
     @Test
     public void getServiceSummary_disableServiceAndHasSummary_showsCombineDisabledSummary() {
         final String service_disabled = mContext.getString(
-                R.string.off);
+                R.string.accessibility_summary_state_disabled);
         doReturn(DEFAULT_SUMMARY).when(mServiceInfo).loadSummary(any());
 
         final CharSequence summary = AccessibilitySettings.getServiceSummary(mContext,
