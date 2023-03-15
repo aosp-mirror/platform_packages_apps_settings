@@ -153,7 +153,7 @@ public class AppBatteryPreferenceController extends BasePreferenceController
         } else {
             Log.i(TAG, "Launch : " + mPackageName + " with package name");
             AdvancedPowerUsageDetail.startBatteryDetailPage(mParent.getActivity(), mParent,
-                    mPackageName);
+                    mPackageName, UserHandle.CURRENT);
         }
         return true;
     }
@@ -169,6 +169,7 @@ public class AppBatteryPreferenceController extends BasePreferenceController
     public void onPause() {
         mParent.getLoaderManager().destroyLoader(
                 AppInfoDashboardFragment.LOADER_BATTERY_USAGE_STATS);
+        closeBatteryUsageStats();
     }
 
     private void loadBatteryDiffEntries() {
@@ -292,12 +293,25 @@ public class AppBatteryPreferenceController extends BasePreferenceController
         @Override
         public void onLoadFinished(Loader<BatteryUsageStats> loader,
                 BatteryUsageStats batteryUsageStats) {
+            closeBatteryUsageStats();
             mBatteryUsageStats = batteryUsageStats;
             AppBatteryPreferenceController.this.onLoadFinished();
         }
 
         @Override
         public void onLoaderReset(Loader<BatteryUsageStats> loader) {
+        }
+    }
+
+    private void closeBatteryUsageStats() {
+        if (mBatteryUsageStats != null) {
+            try {
+                mBatteryUsageStats.close();
+            } catch (Exception e) {
+                Log.e(TAG, "BatteryUsageStats.close() failed", e);
+            } finally {
+                mBatteryUsageStats = null;
+            }
         }
     }
 }

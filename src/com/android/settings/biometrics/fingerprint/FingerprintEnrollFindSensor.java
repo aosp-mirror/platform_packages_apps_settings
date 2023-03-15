@@ -18,6 +18,7 @@ package com.android.settings.biometrics.fingerprint;
 
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
@@ -29,6 +30,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.accessibility.AccessibilityManager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
@@ -38,6 +40,8 @@ import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.widget.LottieColorUtils;
+import com.android.systemui.unfold.compat.ScreenSizeFoldProvider;
+import com.android.systemui.unfold.updates.FoldProvider;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -49,7 +53,7 @@ import java.util.List;
  * Activity explaining the fingerprint sensor location for fingerprint enrollment.
  */
 public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
-        BiometricEnrollSidecar.Listener {
+        BiometricEnrollSidecar.Listener, FoldProvider.FoldCallback {
 
     private static final String TAG = "FingerprintEnrollFindSensor";
     private static final String SAVED_STATE_IS_NEXT_CLICKED = "is_next_clicked";
@@ -67,6 +71,9 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
 
     private OrientationEventListener mOrientationEventListener;
     private int mPreviousRotation = 0;
+    private ScreenSizeFoldProvider mScreenSizeFoldProvider;
+    private boolean mIsFolded;
+    private boolean mIsReverseDefaultRotation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +85,10 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         mCanAssumeUdfps = props != null && props.size() == 1 && props.get(0).isAnyUdfpsType();
         mCanAssumeSfps = props != null && props.size() == 1 && props.get(0).isAnySidefpsType();
         setContentView(getContentView());
+        mScreenSizeFoldProvider = new ScreenSizeFoldProvider(getApplicationContext());
+        mScreenSizeFoldProvider.registerCallback(this, getApplicationContext().getMainExecutor());
+        mScreenSizeFoldProvider
+                .onConfigurationChange(getApplicationContext().getResources().getConfiguration());
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
                 new FooterButton.Builder(this)
@@ -110,6 +121,8 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         } else if (mCanAssumeSfps) {
             setHeaderText(R.string.security_settings_sfps_enroll_find_sensor_title);
             setDescriptionText(R.string.security_settings_sfps_enroll_find_sensor_message);
+            mIsReverseDefaultRotation = getApplicationContext().getResources().getBoolean(
+                    com.android.internal.R.bool.config_reverseDefaultRotation);
         } else {
             setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
             setDescriptionText(R.string.security_settings_fingerprint_enroll_find_sensor_message);
@@ -165,32 +178,69 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         }
     }
 
+    private int getRotationFromDefault(int rotation) {
+        if (mIsReverseDefaultRotation) {
+            return (rotation + 1) % 4;
+        } else {
+            return rotation;
+        }
+    }
+
     private void updateSfpsFindSensorAnimationAsset() {
+        mScreenSizeFoldProvider
+                .onConfigurationChange(getApplicationContext().getResources().getConfiguration());
         mIllustrationLottie = findViewById(R.id.illustration_lottie);
-        final int rotation = getApplicationContext().getDisplay().getRotation();
+        final int rotation = getRotationFromDefault(
+                getApplicationContext().getDisplay().getRotation());
 
         switch (rotation) {
             case Surface.ROTATION_90:
-                mIllustrationLottie.setAnimation(
-                        R.raw.fingerprint_edu_lottie_portrait_top_left);
+                if (mIsFolded) {
+                    mIllustrationLottie.setAnimation(
+                            R.raw.fingerprint_edu_lottie_folded_top_left);
+                } else {
+                    mIllustrationLottie.setAnimation(
+                            R.raw.fingerprint_edu_lottie_portrait_top_left);
+                }
                 break;
             case Surface.ROTATION_180:
-                mIllustrationLottie.setAnimation(
-                        R.raw.fingerprint_edu_lottie_landscape_bottom_left);
+                if (mIsFolded) {
+                    mIllustrationLottie.setAnimation(
+                            R.raw.fingerprint_edu_lottie_folded_bottom_left);
+                } else {
+                    mIllustrationLottie.setAnimation(
+                            R.raw.fingerprint_edu_lottie_landscape_bottom_left);
+                }
                 break;
             case Surface.ROTATION_270:
-                mIllustrationLottie.setAnimation(
-                        R.raw.fingerprint_edu_lottie_portrait_bottom_right);
+                if (mIsFolded) {
+                    mIllustrationLottie.setAnimation(
+                            R.raw.fingerprint_edu_lottie_folded_bottom_right);
+                } else {
+                    mIllustrationLottie.setAnimation(
+                            R.raw.fingerprint_edu_lottie_portrait_bottom_right);
+                }
                 break;
             default:
-                mIllustrationLottie.setAnimation(
-                        R.raw.fingerprint_edu_lottie_landscape_top_right);
+                if (mIsFolded) {
+                    mIllustrationLottie.setAnimation(
+                            R.raw.fingerprint_edu_lottie_folded_top_right);
+                } else {
+                    mIllustrationLottie.setAnimation(
+                            R.raw.fingerprint_edu_lottie_landscape_top_right);
+                }
                 break;
         }
 
         LottieColorUtils.applyDynamicColors(getApplicationContext(), mIllustrationLottie);
         mIllustrationLottie.setVisibility(View.VISIBLE);
         mIllustrationLottie.playAnimation();
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mScreenSizeFoldProvider.onConfigurationChange(newConfig);
     }
 
     @Override
@@ -255,8 +305,8 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         mSidecar = (FingerprintEnrollSidecar) getSupportFragmentManager().findFragmentByTag(
                 FingerprintEnrollEnrolling.TAG_SIDECAR);
         if (mSidecar == null) {
-            mSidecar = new FingerprintEnrollSidecar();
-            mSidecar.setEnrollReason(FingerprintManager.ENROLL_FIND_SENSOR);
+            mSidecar = new FingerprintEnrollSidecar(this,
+                    FingerprintManager.ENROLL_FIND_SENSOR);
             getSupportFragmentManager().beginTransaction()
                     .add(mSidecar, FingerprintEnrollEnrolling.TAG_SIDECAR)
                     .commitAllowingStateLoss();
@@ -279,13 +329,14 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         if (mNextClicked && errMsgId == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
             proceedToEnrolling(false /* cancelEnrollment */);
         } else {
-            FingerprintErrorDialog.showErrorDialog(this, errMsgId);
+            FingerprintErrorDialog.showErrorDialog(this, errMsgId, mCanAssumeUdfps);
         }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        mScreenSizeFoldProvider.unregisterCallback(this);
         if (mAnimation != null) {
             mAnimation.pauseAnimation();
         }
@@ -402,7 +453,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         mOrientationEventListener = new OrientationEventListener(this) {
             @Override
             public void onOrientationChanged(int orientation) {
-                final int currentRotation = getDisplay().getRotation();
+                final int currentRotation = getRotationFromDefault(getDisplay().getRotation());
                 if ((currentRotation + 2) % 4 == mPreviousRotation) {
                     mPreviousRotation = currentRotation;
                     recreate();
@@ -410,7 +461,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
             }
         };
         mOrientationEventListener.enable();
-        mPreviousRotation = getDisplay().getRotation();
+        mPreviousRotation = getRotationFromDefault(getDisplay().getRotation());
     }
 
     private void stopListenOrientationEvent() {
@@ -422,5 +473,11 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
             mOrientationEventListener.disable();
         }
         mOrientationEventListener = null;
+    }
+
+    @Override
+    public void onFoldUpdated(boolean isFolded) {
+        Log.d(TAG, "onFoldUpdated= " + isFolded);
+        mIsFolded = isFolded;
     }
 }

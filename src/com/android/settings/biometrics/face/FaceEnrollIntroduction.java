@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.hardware.SensorPrivacyManager;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.FaceManager;
-import android.hardware.face.FaceSensorPropertiesInternal;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -53,8 +52,6 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.span.LinkSpan;
-
-import java.util.List;
 
 /**
  * Provides introductory info about face unlock and prompts the user to agree before starting face
@@ -289,20 +286,12 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     private boolean maxFacesEnrolled() {
-        final boolean isSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
         if (mFaceManager != null) {
-            final List<FaceSensorPropertiesInternal> props =
-                    mFaceManager.getSensorPropertiesInternal();
             // This will need to be updated for devices with multiple face sensors.
-            final int max = props.get(0).maxEnrollmentsPerUser;
             final int numEnrolledFaces = mFaceManager.getEnrolledFaces(mUserId).size();
-            final int maxFacesEnrollableIfSUW = getApplicationContext().getResources()
+            final int maxFacesEnrollable = getApplicationContext().getResources()
                     .getInteger(R.integer.suw_max_faces_enrollable);
-            if (isSetupWizard) {
-                return numEnrolledFaces >= maxFacesEnrollableIfSUW;
-            } else {
-                return numEnrolledFaces >= max;
-            }
+            return numEnrolledFaces >= maxFacesEnrollable;
         } else {
             return false;
         }

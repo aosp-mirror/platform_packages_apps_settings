@@ -49,6 +49,7 @@ public class BatteryInfo {
     public CharSequence remainingLabel;
     public int batteryLevel;
     public int batteryStatus;
+    public int pluggedStatus;
     public boolean discharging = true;
     public boolean isOverheated;
     public long remainingTimeUs = 0;
@@ -253,7 +254,8 @@ public class BatteryInfo {
         info.mBatteryUsageStats = batteryUsageStats;
         info.batteryLevel = Utils.getBatteryLevel(batteryBroadcast);
         info.batteryPercentString = Utils.formatPercentage(info.batteryLevel);
-        info.mCharging = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) != 0;
+        info.pluggedStatus = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
+        info.mCharging = info.pluggedStatus != 0;
         info.averageTimeToDischarge = estimate.getAverageDischargeTime();
         info.isOverheated = batteryBroadcast.getIntExtra(
                 BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_UNKNOWN)
@@ -280,25 +282,33 @@ public class BatteryInfo {
                 BatteryManager.BATTERY_STATUS_UNKNOWN);
         info.discharging = false;
         info.suggestionLabel = null;
-        if (info.isOverheated && status != BatteryManager.BATTERY_STATUS_FULL) {
+        int dockDefenderMode = BatteryUtils.getCurrentDockDefenderMode(context, info);
+        if ((info.isOverheated && status != BatteryManager.BATTERY_STATUS_FULL
+                && dockDefenderMode == BatteryUtils.DockDefenderMode.DISABLED)
+                || dockDefenderMode == BatteryUtils.DockDefenderMode.ACTIVE) {
+            // Battery defender active, battery charging paused
             info.remainingLabel = null;
             int chargingLimitedResId = R.string.power_charging_limited;
-            info.chargeLabel =
-                context.getString(chargingLimitedResId, info.batteryPercentString);
-        } else if (chargeTimeMs > 0 && status != BatteryManager.BATTERY_STATUS_FULL) {
+            info.chargeLabel = context.getString(chargingLimitedResId, info.batteryPercentString);
+        } else if ((chargeTimeMs > 0 && status != BatteryManager.BATTERY_STATUS_FULL
+                && dockDefenderMode == BatteryUtils.DockDefenderMode.DISABLED)
+                || dockDefenderMode == BatteryUtils.DockDefenderMode.TEMPORARILY_BYPASSED) {
+            // Battery is charging to full
             info.remainingTimeUs = PowerUtil.convertMsToUs(chargeTimeMs);
-            final CharSequence timeString = StringUtil.formatElapsedTime(
-                    context,
-                    PowerUtil.convertUsToMs(info.remainingTimeUs),
-                    false /* withSeconds */,
+            final CharSequence timeString = StringUtil.formatElapsedTime(context,
+                    (double) PowerUtil.convertUsToMs(info.remainingTimeUs), false /* withSeconds */,
                     true /* collapseTimeUnit */);
             int resId = R.string.power_charging_duration;
-            info.remainingLabel = context.getString(
-                    R.string.power_remaining_charging_duration_only, timeString);
+            info.remainingLabel = context.getString(R.string.power_remaining_charging_duration_only,
+                    timeString);
             info.chargeLabel = context.getString(resId, info.batteryPercentString, timeString);
+        } else if (dockDefenderMode == BatteryUtils.DockDefenderMode.FUTURE_BYPASS) {
+            // Dock defender will be triggered in the future, charging will be optimized.
+            info.chargeLabel = context.getString(R.string.power_charging_future_paused,
+                    info.batteryPercentString);
         } else {
-            final String chargeStatusLabel =
-                    Utils.getBatteryStatus(context, batteryBroadcast, compactStatus);
+            final String chargeStatusLabel = Utils.getBatteryStatus(context, batteryBroadcast,
+                    compactStatus);
             info.remainingLabel = null;
             info.chargeLabel = info.batteryLevel == 100 ? info.batteryPercentString :
                     resources.getString(R.string.power_charging, info.batteryPercentString,

@@ -114,9 +114,14 @@ public class TopLevelHighlightMixin implements Parcelable, DialogInterface.OnSho
         }
 
         Log.d(TAG, "onCreateAdapter, pref key: " + mCurrentKey);
+
+        // Remove the animator to avoid a RecyclerView crash.
+        RecyclerView recyclerView = topLevelSettings.getListView();
+        recyclerView.setItemAnimator(null);
+
         mTopLevelAdapter = new HighlightableTopLevelPreferenceAdapter(
                 (SettingsHomepageActivity) topLevelSettings.getActivity(), preferenceScreen,
-                topLevelSettings.getListView(), mCurrentKey, scrollNeeded);
+                recyclerView, mCurrentKey, scrollNeeded);
         return mTopLevelAdapter;
     }
 

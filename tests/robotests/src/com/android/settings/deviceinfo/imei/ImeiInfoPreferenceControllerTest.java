@@ -29,6 +29,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.UserManager;
 import android.telephony.TelephonyManager;
 
@@ -69,12 +70,18 @@ public class ImeiInfoPreferenceControllerTest {
     private PreferenceCategory mCategory;
 
     private Context mContext;
+    private Resources mResources;
     private ImeiInfoPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+
+        mResources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(mResources);
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
+
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
         mController = spy(new ImeiInfoPreferenceController(mContext, "imei_info"));
         mController.setHost(mFragment);

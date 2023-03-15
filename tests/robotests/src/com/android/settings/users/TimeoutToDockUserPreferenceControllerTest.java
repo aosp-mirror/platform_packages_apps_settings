@@ -16,7 +16,7 @@
 
 package com.android.settings.users;
 
-import static android.provider.Settings.Secure.TIMEOUT_TO_USER_ZERO;
+import static android.provider.Settings.Secure.TIMEOUT_TO_DOCK_USER;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -45,12 +45,12 @@ import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowSecureSettings.class, ShadowUserHandle.class})
-public class TimeoutToUserZeroPreferenceControllerTest {
+public class TimeoutToDockUserPreferenceControllerTest {
     private Context mContext;
     private Resources mResources;
-    private TimeoutToUserZeroPreferenceController mController;
+    private TimeoutToDockUserPreferenceController mController;
 
-    private static final String FAKE_PREFERENCE_KEY = "timeout_to_user_zero_preference";
+    private static final String FAKE_PREFERENCE_KEY = "timeout_to_dock_user_preference";
 
     private String[] mEntries;
     private String[] mValues;
@@ -62,15 +62,15 @@ public class TimeoutToUserZeroPreferenceControllerTest {
         doReturn(mResources).when(mContext).getResources();
 
         mEntries = mResources.getStringArray(
-                R.array.switch_to_user_zero_when_docked_timeout_entries);
+                R.array.switch_to_dock_user_when_docked_timeout_entries);
         mValues = mResources.getStringArray(
-                R.array.switch_to_user_zero_when_docked_timeout_values);
+                R.array.switch_to_dock_user_when_docked_timeout_values);
 
-        mController = new TimeoutToUserZeroPreferenceController(mContext, FAKE_PREFERENCE_KEY);
+        mController = new TimeoutToDockUserPreferenceController(mContext, FAKE_PREFERENCE_KEY);
 
         // Feature enabled.
         when(mResources.getBoolean(
-                com.android.internal.R.bool.config_enableTimeoutToUserZeroWhenDocked)).thenReturn(
+                com.android.internal.R.bool.config_enableTimeoutToDockUserWhenDocked)).thenReturn(
                 true);
 
         // Multi-user feature enabled.
@@ -89,7 +89,7 @@ public class TimeoutToUserZeroPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_featureFlagDisabled_returnUnsupportedOnDevice() {
         when(mResources.getBoolean(
-                com.android.internal.R.bool.config_enableTimeoutToUserZeroWhenDocked)).thenReturn(
+                com.android.internal.R.bool.config_enableTimeoutToDockUserWhenDocked)).thenReturn(
                 false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
@@ -121,15 +121,16 @@ public class TimeoutToUserZeroPreferenceControllerTest {
 
     @Test
     public void getSummary_settingNotSet() {
-        Settings.Secure.putStringForUser(mContext.getContentResolver(), TIMEOUT_TO_USER_ZERO,
+        Settings.Secure.putStringForUser(mContext.getContentResolver(), TIMEOUT_TO_DOCK_USER,
                 null, UserHandle.myUserId());
 
-        assertThat(mController.getSummary().toString()).isEqualTo(mEntries[0]);
+        assertThat(mController.getSummary().toString()).isEqualTo(
+                mEntries[TimeoutToDockUserSettings.DEFAULT_TIMEOUT_SETTING_VALUE_INDEX]);
     }
 
     @Test
     public void getSummary_setToNever() {
-        Settings.Secure.putStringForUser(mContext.getContentResolver(), TIMEOUT_TO_USER_ZERO,
+        Settings.Secure.putStringForUser(mContext.getContentResolver(), TIMEOUT_TO_DOCK_USER,
                 mValues[0], UserHandle.myUserId());
 
         assertThat(mController.getSummary().toString()).isEqualTo(mEntries[0]);
@@ -137,7 +138,7 @@ public class TimeoutToUserZeroPreferenceControllerTest {
 
     @Test
     public void getSummary_setToOneMinute() {
-        Settings.Secure.putStringForUser(mContext.getContentResolver(), TIMEOUT_TO_USER_ZERO,
+        Settings.Secure.putStringForUser(mContext.getContentResolver(), TIMEOUT_TO_DOCK_USER,
                 mValues[1], UserHandle.myUserId());
 
         assertThat(mController.getSummary().toString()).isEqualTo(mEntries[1]);

@@ -16,6 +16,10 @@
 
 package com.android.settings.wifi.dpp;
 
+import static android.view.WindowManager.LayoutParams.FLAG_SECURE;
+
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -70,6 +74,12 @@ public class WifiDppConfiguratorActivityTest {
     public void launchActivity_noIntentAction_shouldNotFatalException() {
         WifiDppConfiguratorActivity wifiDppConfiguratorActivity =
                 Robolectric.setupActivity(WifiDppConfiguratorActivity.class);
+    }
+
+    @Test
+    public void launchActivity_shouldAddFlagSecure() {
+        assertThat(mActivity.getWindow().getAttributes().flags & FLAG_SECURE)
+                .isEqualTo(FLAG_SECURE);
     }
 
     @Test
