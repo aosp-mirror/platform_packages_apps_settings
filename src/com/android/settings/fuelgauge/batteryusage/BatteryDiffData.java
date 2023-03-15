@@ -42,7 +42,8 @@ public class BatteryDiffData {
             final Context context,
             final @NonNull List<BatteryDiffEntry> appDiffEntries,
             final @NonNull List<BatteryDiffEntry> systemDiffEntries,
-            final Set<String> systemAppsSet,
+            final @NonNull Set<String> systemAppsPackageNames,
+            final @NonNull Set<Integer> systemAppsUids,
             final boolean isAccumulated) {
         mAppEntries = appDiffEntries;
         mSystemEntries = systemDiffEntries;
@@ -51,7 +52,8 @@ public class BatteryDiffData {
             final PowerUsageFeatureProvider featureProvider =
                     FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context);
             purgeBatteryDiffData(featureProvider);
-            combineBatteryDiffEntry(context, featureProvider, systemAppsSet);
+            combineBatteryDiffEntry(
+                    context, featureProvider, systemAppsPackageNames, systemAppsUids);
         }
 
         processAndSortEntries(mAppEntries);
@@ -73,9 +75,13 @@ public class BatteryDiffData {
     }
 
     /** Combines into SystemAppsBatteryDiffEntry and OthersBatteryDiffEntry. */
-    private void combineBatteryDiffEntry(final Context context,
-            final PowerUsageFeatureProvider featureProvider, final Set<String> systemAppsSet) {
-        combineIntoSystemApps(context, featureProvider, systemAppsSet, mAppEntries);
+    private void combineBatteryDiffEntry(
+            final Context context,
+            final PowerUsageFeatureProvider featureProvider,
+            final @NonNull Set<String> systemAppsPackageNames,
+            final @NonNull Set<Integer> systemAppsUids) {
+        combineIntoSystemApps(
+                context, featureProvider, systemAppsPackageNames, systemAppsUids, mAppEntries);
         combineSystemItemsIntoOthers(context, featureProvider, mSystemEntries);
     }
 
@@ -113,14 +119,16 @@ public class BatteryDiffData {
     private static void combineIntoSystemApps(
             final Context context,
             final PowerUsageFeatureProvider featureProvider,
-            final Set<String> systemAppsSet,
-            final List<BatteryDiffEntry> appEntries) {
+            final @NonNull Set<String> systemAppsPackageNames,
+            final @NonNull Set<Integer> systemAppsUids,
+            final @NonNull List<BatteryDiffEntry> appEntries) {
         final List<String> systemAppsAllowlist = featureProvider.getSystemAppsAllowlist();
         BatteryDiffEntry.SystemAppsBatteryDiffEntry systemAppsDiffEntry = null;
         final Iterator<BatteryDiffEntry> appListIterator = appEntries.iterator();
         while (appListIterator.hasNext()) {
             final BatteryDiffEntry batteryDiffEntry = appListIterator.next();
-            if (needsCombineInSystemApp(batteryDiffEntry, systemAppsAllowlist, systemAppsSet)) {
+            if (needsCombineInSystemApp(batteryDiffEntry, systemAppsAllowlist,
+                    systemAppsPackageNames, systemAppsUids)) {
                 if (systemAppsDiffEntry == null) {
                     systemAppsDiffEntry = new BatteryDiffEntry.SystemAppsBatteryDiffEntry(context);
                 }
@@ -168,8 +176,11 @@ public class BatteryDiffData {
     }
 
     @VisibleForTesting
-    static boolean needsCombineInSystemApp(final BatteryDiffEntry batteryDiffEntry,
-            final List<String> systemAppsAllowlist, final Set<String> systemAppsSet) {
+    static boolean needsCombineInSystemApp(
+            final BatteryDiffEntry batteryDiffEntry,
+            final @NonNull List<String> systemAppsAllowlist,
+            final @NonNull Set<String> systemAppsPackageNames,
+            final @NonNull Set<Integer> systemAppsUids) {
         if (batteryDiffEntry.mBatteryHistEntry.mIsHidden) {
             return true;
         }
@@ -179,11 +190,12 @@ public class BatteryDiffData {
             return false;
         }
 
-        if (systemAppsAllowlist != null && systemAppsAllowlist.contains(packageName)) {
+        if (systemAppsAllowlist.contains(packageName)) {
             return true;
         }
 
-        return systemAppsSet != null && systemAppsSet.contains(packageName);
+        int uid = (int) batteryDiffEntry.mBatteryHistEntry.mUid;
+        return systemAppsPackageNames.contains(packageName) || systemAppsUids.contains(uid);
     }
 
     /**
