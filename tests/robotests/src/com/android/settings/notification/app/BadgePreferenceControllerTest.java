@@ -97,6 +97,7 @@ public class BadgePreferenceControllerTest {
     @Test
     public void testIsAvailable_notIfAppBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.channelCount = 1;
         appRow.banned = true;
         mController.onResume(appRow, mock(NotificationChannel.class), null, null, null, null, null);
         assertFalse(mController.isAvailable());
@@ -105,6 +106,7 @@ public class BadgePreferenceControllerTest {
     @Test
     public void testIsAvailable_notIfChannelBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.channelCount = 1;
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
         mController.onResume(appRow, channel, null, null, null, null, null);
@@ -114,6 +116,7 @@ public class BadgePreferenceControllerTest {
     @Test
     public void testIsAvailable_channel_notIfAppOff() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.channelCount = 1;
         appRow.showBadge = false;
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
@@ -125,6 +128,7 @@ public class BadgePreferenceControllerTest {
     @Test
     public void testIsAvailable_notIfOffGlobally() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.channelCount = 1;
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(appRow, channel, null, null, null, null, null);
@@ -136,6 +140,7 @@ public class BadgePreferenceControllerTest {
     @Test
     public void testIsAvailable_app() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.channelCount = 1;
         mController.onResume(appRow, null, null, null, null, null, null);
         Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BADGING, 1);
 
@@ -143,9 +148,20 @@ public class BadgePreferenceControllerTest {
     }
 
     @Test
+    public void testIsAvailable_appNoChannels() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.channelCount = 0;
+        mController.onResume(appRow, null, null, null, null, null, null);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BADGING, 1);
+
+        assertFalse(mController.isAvailable());
+    }
+
+    @Test
     public void testIsAvailable_defaultChannel() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.showBadge = true;
+        appRow.channelCount = 1;
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         when(channel.getId()).thenReturn(DEFAULT_CHANNEL_ID);
@@ -159,6 +175,7 @@ public class BadgePreferenceControllerTest {
     public void testIsAvailable_channel() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.showBadge = true;
+        appRow.channelCount = 1;
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(appRow, channel, null, null, null, null, null);
@@ -183,6 +200,7 @@ public class BadgePreferenceControllerTest {
     public void testIsAvailable_filteredOut() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.showBadge = true;
+        appRow.channelCount = 1;
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(appRow, channel, null, null, null, null, new ArrayList<>());
@@ -195,6 +213,7 @@ public class BadgePreferenceControllerTest {
     public void testIsAvailable_filteredIn() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.showBadge = true;
+        appRow.channelCount = 1;
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(appRow, channel, null, null, null, null,
@@ -206,9 +225,11 @@ public class BadgePreferenceControllerTest {
 
     @Test
     public void testUpdateState_disabledByAdmin() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.channelCount = 1;
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something");
-        mController.onResume(new NotificationBackend.AppRow(), channel, null,
+        mController.onResume(appRow, channel, null,
                 null, null, mock(RestrictedLockUtils.EnforcedAdmin.class), null);
 
         Preference pref = new RestrictedSwitchPreference(mContext);
@@ -220,6 +241,7 @@ public class BadgePreferenceControllerTest {
     @Test
     public void testUpdateState_channel() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.channelCount = 1;
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.canShowBadge()).thenReturn(true);
         mController.onResume(appRow, channel, null, null, null, null, null);
@@ -240,6 +262,7 @@ public class BadgePreferenceControllerTest {
     public void testUpdateState_app() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.showBadge = true;
+        appRow.channelCount = 1;
         mController.onResume(appRow, null, null, null, null, null, null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
@@ -257,6 +280,7 @@ public class BadgePreferenceControllerTest {
     public void testOnPreferenceChange_on_channel() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.showBadge = true;
+        appRow.channelCount = 1;
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_LOW);
         channel.setShowBadge(false);
@@ -276,6 +300,7 @@ public class BadgePreferenceControllerTest {
     public void testOnPreferenceChange_off_channel() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.showBadge = true;
+        appRow.channelCount = 1;
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_HIGH);
         channel.setShowBadge(true);
@@ -295,6 +320,7 @@ public class BadgePreferenceControllerTest {
     public void testOnPreferenceChange_on_app() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.showBadge = false;
+        appRow.channelCount = 1;
         mController.onResume(appRow, null, null, null, null, null, null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
@@ -312,6 +338,7 @@ public class BadgePreferenceControllerTest {
     public void testOnPreferenceChange_off_app() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.showBadge = true;
+        appRow.channelCount = 1;
         mController.onResume(appRow, null, null, null, null, null, null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
