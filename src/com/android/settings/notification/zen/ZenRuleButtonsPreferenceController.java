@@ -39,11 +39,11 @@ public class ZenRuleButtonsPreferenceController extends AbstractZenModePreferenc
     implements PreferenceControllerMixin {
     public static final String KEY = "zen_action_buttons";
 
-    private final PreferenceFragmentCompat mFragment;
+    private final ZenModeRuleSettingsBase mFragment;
     private String mId;
     private AutomaticZenRule mRule;
 
-    public ZenRuleButtonsPreferenceController(Context context, PreferenceFragmentCompat fragment,
+    public ZenRuleButtonsPreferenceController(Context context, ZenModeRuleSettingsBase fragment,
             Lifecycle lc) {
         super(context, KEY, lc);
         mFragment = fragment;
@@ -106,12 +106,7 @@ public class ZenRuleButtonsPreferenceController extends AbstractZenModePreferenc
                             mBackend.removeZenRule(id);
                             mMetricsFeatureProvider.action(mContext,
                                     SettingsEnums.ACTION_ZEN_DELETE_RULE_OK);
-                            new SubSettingLauncher(mContext)
-                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                    .setDestination(ZenModeAutomationSettings.class.getName())
-                                    .setSourceMetricsCategory(MetricsProto.MetricsEvent
-                                            .NOTIFICATION_ZEN_MODE_AUTOMATION)
-                                    .launch();
+                            mFragment.onRuleRemoved();
                         }
             });
         }

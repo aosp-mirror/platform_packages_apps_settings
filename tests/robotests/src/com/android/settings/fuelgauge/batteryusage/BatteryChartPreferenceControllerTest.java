@@ -88,7 +88,7 @@ public final class BatteryChartPreferenceControllerTest {
         Locale.setDefault(new Locale("en_US"));
         org.robolectric.shadows.ShadowSettings.set24HourTimeFormat(false);
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-        DataProcessor.sTestSystemAppsSet = Set.of();
+        DataProcessor.sTestSystemAppsPackageNames = Set.of();
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mContext).when(mContext).getApplicationContext();
