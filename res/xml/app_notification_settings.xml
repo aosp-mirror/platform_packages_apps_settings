@@ -26,17 +26,15 @@
     <com.android.settings.widget.SettingsMainSwitchPreference
         android:key="block" />
 
-    <com.android.settingslib.widget.FooterPreference
+    <Preference
         android:key="block_desc" />
-
 
     <!-- Conversations added here -->
     <PreferenceCategory
         android:title="@string/conversations_category_title"
         android:key="conversations"
-        android:visibility="gone"
-        settings:allowDividerAbove="false"
-        settings:allowDividerBelow="false">
+        android:visibility="gone">
+
     </PreferenceCategory>
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="invalid_conversation_switch"
@@ -49,25 +47,13 @@
         android:key="bubble_pref_link"
         android:title="@string/notification_bubbles_title"
         android:icon="@drawable/ic_create_bubble"
-        settings:allowDividerAbove="false"
         settings:controller="com.android.settings.notification.app.BubbleSummaryPreferenceController">
     </Preference>
 
     <!-- Channels/Channel groups added here -->
     <PreferenceCategory
         android:key="channels"
-        android:layout="@layout/empty_view"
-        settings:allowDividerAbove="true"
-        settings:allowDividerBelow="true" />
-
-    <!-- Show badge -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="badge"
-        android:title="@string/notification_badge_title"
-        settings:useAdditionalSummary="true"
-        android:order="1001"
-        settings:allowDividerAbove="true"
-        settings:restrictedSwitchSummary="@string/enabled_by_admin" />
+        android:layout="@layout/empty_view" />
 
     <!-- Importance toggle -->
     <com.android.settingslib.RestrictedSwitchPreference
@@ -86,18 +72,25 @@
         android:title="@string/app_notification_override_dnd_title"
         android:summary="@string/app_notification_override_dnd_summary"/>
 
-        <Preference
-            android:key="app_link"
-            android:order="1003"
-            android:icon="@drawable/ic_settings_24dp"
-            android:title="@string/app_settings_link" />
+    <!-- Show badge -->
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="badge"
+        android:title="@string/notification_badge_title"
+        settings:useAdditionalSummary="true"
+        android:order="1001"
+        android:icon="@drawable/ic_notification_dot"
+        settings:allowDividerAbove="true"
+        settings:restrictedSwitchSummary="@string/enabled_by_admin" />
 
-    <com.android.settingslib.widget.FooterPreference
-        android:key="desc"
-        android:order="5000" />
+    <Preference
+        android:key="app_link"
+        android:order="1003"
+        android:icon="@drawable/ic_settings_24dp"
+        android:title="@string/app_settings_link" />
 
     <com.android.settingslib.widget.FooterPreference
         android:key="deleted"
+        android:icon="@drawable/ic_trash_can"
         android:order="8000" />
 
 </PreferenceScreen>
