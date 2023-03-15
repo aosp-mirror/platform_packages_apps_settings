@@ -20,6 +20,7 @@ import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 import static com.android.settings.bluetooth.BluetoothDeviceDetailsFragment.KEY_DEVICE_ADDRESS;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.util.Log;
@@ -73,8 +74,7 @@ public class BluetoothDetailsAudioRoutingFragment extends RestrictedDashboardFra
 
     @Override
     public int getMetricsCategory() {
-        // TODO(b/262839191): To be updated settings_enums.proto
-        return 0;
+        return SettingsEnums.BLUETOOTH_AUDIO_ROUTING;
     }
 
     @Override
