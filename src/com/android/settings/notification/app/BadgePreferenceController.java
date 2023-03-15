@@ -62,8 +62,15 @@ public class BadgePreferenceController extends NotificationPreferenceController
             if (isDefaultChannel()) {
                 return true;
             } else {
-                return mAppRow == null ? false : mAppRow.showBadge;
+                return mAppRow == null
+                        ? false
+                        : mAppRow.channelCount == 0
+                                ? false
+                                : mAppRow.showBadge;
             }
+        }
+        if (mAppRow.channelCount == 0) {
+            return false;
         }
         return true;
     }
