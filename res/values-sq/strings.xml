@@ -467,6 +467,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Konfiguro gjurmën e gishtit"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Lejo shkyçjen me gjurmën e gishtit"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Përdor gjurmën e gishtit"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Mëso më shumë për \"Shkyçjen me gjurmën e gishtit\""</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Përdor gjurmën e gishtit për të shkyçur tabletin tënd ose për të verifikuar që je ti, si p.sh. kur identifikohesh në aplikacione ose kur miraton një blerje."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Përdor gjurmën e gishtit për të shkyçur pajisjen ose për të verifikuar që je ti, si p.sh. kur identifikohesh në aplikacione ose kur miraton një blerje."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Përdor gjurmën e gishtit për të shkyçur telefonin tënd ose për të verifikuar që je ti, si p.sh. kur identifikohesh në aplikacione ose kur miraton një blerje."</string>
@@ -2089,9 +2090,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Për më shumë siguri, përdor motivin e punës"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Për më shumë siguri, fut kodin PIN të punës"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Për më shumë siguri, fut fjalëkalimin e punës"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Telefoni u vendos në cilësimet e fabrikës. Për ta përdorur këtë telefon, fut motivin e mëparshëm."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"Telefoni u vendos në cilësimet e fabrikës. Për ta përdorur këtë telefon, fut kodin PIN të mëparshëm."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"Telefoni u vendos në cilësimet e fabrikës. Për ta përdorur këtë telefon, fut fjalëkalimin e mëparshëm."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"Telefoni u vendos në cilësimet e fabrikës. Për ta përdorur këtë telefon, fut motivin e mëparshëm."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"Tableti u rivendos në cilësimet e fabrikës. Për të përdorur tabletin, fut motivin e mëparshëm."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"Pajisja u rivendos në cilësimet e fabrikës. Për të përdorur pajisjen, fut motivin e mëparshëm."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"Telefoni u vendos në cilësimet e fabrikës. Për ta përdorur këtë telefon, fut kodin PIN të mëparshëm."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"Tableti u rivendos në cilësimet e fabrikës. Për të përdorur tabletin, fut PIN-in e mëparshëm."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"Pajisja u rivendos në cilësimet e fabrikës. Për të përdorur pajisjen, fut PIN-in e mëparshëm."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"Telefoni u vendos në cilësimet e fabrikës. Për ta përdorur këtë telefon, fut fjalëkalimin e mëparshëm."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"Tableti u rivendos në cilësimet e fabrikës. Për të përdorur tabletin, fut fjalëkalimin e mëparshëm."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"Pajisja u rivendos në cilësimet e fabrikës. Për të përdorur pajisjen, fut fjalëkalimin e mëparshëm."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Verifiko motivin"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Verifiko kodin PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Verifiko fjalëkalimin"</string>
@@ -2116,6 +2123,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Kërko motivin"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Duhet të vizatosh motivin për të shkyçur ekranin"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Bëje motivin të dukshëm"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Privatësi e përmirësuar e kodit PIN"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Çaktivizo animacionet ndërsa fur kodin PIN"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Bëje të dukshëm motivin e profilit"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Dridhje pas trokitjes"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Butoni i fikjes e kyç menjëherë"</string>
@@ -2250,7 +2259,7 @@
     <string name="app_disable_notifications_dlg_title" msgid="6686569904059411780">"Të çaktivizohen njoftimet?"</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Dyqani"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Detajet e aplikacioneve"</string>
-    <string name="app_install_details_summary" msgid="2013043219249992373">"Aplikacioni i instaluar nga <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="app_install_details_summary" msgid="2013043219249992373">"Aplikacioni i instaluar nga \"<xliff:g id="APP_STORE">%1$s</xliff:g>\""</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"Më shumë informacion rreth <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Në funksionim"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Nuk përdoret asnjëherë)"</string>
@@ -4063,7 +4072,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Ekrani i kyçjes, ekrani i bllokimit, kapërce, anashkalo"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Kur profili i punës është i kyçur"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Shfaq vetëm njoftimet e reja në ekranin e kyçjes"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"Pas çdo shkyçjeje,. hiq njoftimet ekzistuese nga ekrani i kyçjes"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Hiq automatikisht njoftimet e shikuara më parë nga ekrani i kyçjes"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Njoftimet në ekranin e kyçjes"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Shfaq bisedat, të parazgjedhura dhe të heshtura"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Shfaq bisedat, të parazgjedhura dhe të heshtura"</string>
@@ -5918,6 +5927,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Zgjidh një mbrojtës ekrani"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Shfaq informacione shtesë"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Shfaq gjëra të tilla si ora, moti ose informacione të tjera në mbrojtësin e ekranit"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Cilësime të tjera"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Zgjidh mbrojtësin e ekranit"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Zgjidh se çfarë do të shohësh në ekranin tënd kur tableti të jetë lidhur me stacionin. Pajisja jote mund të përdorë më shumë energji kur përdoret një mbrojtës ekrani."</string>

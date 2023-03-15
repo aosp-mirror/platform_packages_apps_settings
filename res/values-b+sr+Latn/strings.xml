@@ -271,7 +271,7 @@
     <string name="roaming_disable" msgid="729512894708689604">"Poveži sa uslugom za podatke u romingu"</string>
     <string name="roaming_reenable_message" msgid="5150423860521673540">"Veza za prenos podataka je prekinuta zato što ste napustili matičnu mrežu sa isključenim prenosom podataka u romingu."</string>
     <string name="roaming_turn_it_on_button" msgid="6999283810847157816">"Uključi"</string>
-    <string name="roaming_warning" msgid="7703647889040229013">"Važe naknade za roming."</string>
+    <string name="roaming_warning" msgid="7703647889040229013">"Mogu da važe naknade za roming."</string>
     <string name="roaming_warning_multiuser" product="tablet" msgid="5629953315019604726">"Kada omogućite prenos podataka u romingu, važe naknade za roming.\n\nOvo podešavanje utiče na sve korisnike ovog tableta."</string>
     <string name="roaming_warning_multiuser" product="default" msgid="3693719745119874126">"Kada omogućite prenos podataka u romingu, važe naknade za roming.\n\nOvo podešavanje utiče na sve korisnike ovog telefona."</string>
     <string name="roaming_reenable_title" msgid="770824950144026180">"Dozvolite prenos podataka u romingu?"</string>
@@ -471,6 +471,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Podesite otisak prsta"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Otključavanje otiskom prsta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Koristite otisak prsta"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Saznajte više o otključavanju otiskom prsta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Koristite otisak prsta da biste otključavali tablet ili potvrđivali identitet, na primer, kada se prijavljujete u aplikacije ili odobravate kupovinu."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Koristite otisak prsta da biste otključavali uređaj ili potvrđivali identitet, na primer, kada se prijavljujete u aplikacije ili odobravate kupovinu."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Koristite otisak prsta da biste otključavali telefon ili potvrđivali identitet, na primer, kada se prijavljujete u aplikacije ili odobravate kupovinu."</string>
@@ -2111,9 +2112,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Radi veće bezbednosti koristite šablon za posao"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Radi veće bezbednosti unesite poslovni PIN"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Radi veće bezbednosti unesite poslovnu lozinku"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Telefon je resetovan na fabrička podešavanja. Da biste ga koristili, unesite prethodni šablon."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"Telefon je resetovan na fabrička podešavanja. Da biste ga koristili, unesite prethodni PIN."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"Telefon je resetovan na fabrička podešavanja. Da biste ga koristili, unesite prethodnu lozinku."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"Telefon je resetovan na fabrička podešavanja. Da biste ga koristili, unesite prethodni šablon."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"Tablet je resetovan na fabrička podešavanja. Da biste ga koristili, unesite prethodni šablon."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"Uređaj je resetovan na fabrička podešavanja. Da biste ga koristili, unesite prethodni šablon."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"Telefon je resetovan na fabrička podešavanja. Da biste ga koristili, unesite prethodni PIN."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"Tablet je resetovan na fabrička podešavanja. Da biste ga koristili, unesite prethodni PIN."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"Uređaj je resetovan na fabrička podešavanja. Da biste ga koristili, unesite prethodni PIN."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"Telefon je resetovan na fabrička podešavanja. Da biste ga koristili, unesite prethodnu lozinku."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"Tablet je resetovan na fabrička podešavanja. Da biste ga koristili, unesite prethodnu lozinku."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"Uređaj je resetovan na fabrička podešavanja. Da biste ga koristili, unesite prethodnu lozinku."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Verifikujte šablon"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Verifikujte PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Verifikujte lozinku"</string>
@@ -2138,6 +2145,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Zahtevaj šablon"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Potrebno je da nacrtate šablon za otključavanje ekrana"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Učini šablon vidljivim"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Poboljšana PIN privatnost"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Onemogućava animacije pri unosu PIN-a"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Učini šablon za profil vidljivim"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibriraj pri dodiru"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Dugme za uključivanje odmah zaključava"</string>
@@ -4106,7 +4115,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"zaključani ekran, preskočiti, zaobići"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Kada je poslovni profil zaključan"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Prikazuj samo nova obaveštenja na zaključanom ekranu"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"Posle svakog otključavanja, uklonite postojeća obaveštenja sa zaključanog ekrana"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Automatski uklanja prethodno pregledana obaveštenja sa zaključanog ekrana"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Obaveštenja na zaključanom ekranu"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Prikazuje konverzacije, i podrazumevane i nečujne"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Prikazuj konverzacije, i podrazumevane i nečujne"</string>
@@ -4650,7 +4659,7 @@
       <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aplikacije otvaraju podržane linkove</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikacija otvara podržane linkove</item>
     </plurals>
-    <string name="app_link_open_always" msgid="9167065494930657503">"Dozvoli aplikaciji da otvara podržane linkove"</string>
+    <string name="app_link_open_always" msgid="9167065494930657503">"Dozvolite aplikaciji da otvara podržane linkove"</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"Pitaj svaki put"</string>
     <string name="app_link_open_never" msgid="5299808605386052350">"Ne dozvoli aplikaciji da otvara linkove"</string>
     <plurals name="app_link_open_always_summary" formatted="false" msgid="1816161439007251694">
@@ -6006,6 +6015,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Odaberite čuvar ekrana"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Prikazuj dodatne informacije"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Omogućite da se na čuvaru ekrana prikazuju stavke poput vremena, vremenske prognoze ili drugih informacija"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Još podešavanja"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Izaberite čuvar ekrana"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Izaberite šta ćete videti na ekranu kada je tablet na baznoj stanici. Uređaj može da troši više energije kada se koristi čuvar ekrana."</string>

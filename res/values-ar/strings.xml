@@ -483,6 +483,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"إعداد بصمة الإصبع"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"سماح بفتح الجهاز ببصمة الإصبع"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"استخدام بصمة الإصبع"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"مزيد من المعلومات عن ميزة \"فتح الجهاز ببصمة الإصبع\""</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"يمكنك استخدام بصمة إصبعك لفتح قفل جهازك اللوحي أو لإثبات هويتك، مثلاً عند تسجيل الدخول إلى التطبيقات أو الموافقة على عملية شراء."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"يمكنك استخدام بصمة الإصبع لفتح قفل جهازك أو لإثبات هويتك، مثلاً عند تسجيل الدخول إلى التطبيقات أو الموافقة على عملية شراء."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"يمكنك استخدام بصمة الإصبع لفتح قفل هاتفك أو لإثبات هويتك، مثلاً عند تسجيل الدخول إلى التطبيقات أو الموافقة على عملية شراء."</string>
@@ -2177,9 +2178,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"استخدام نقش للملف الشخصي للعمل لزيادة الأمان"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"إدخال رقم تعريف شخصي للملف الشخصي للعمل لزيادة الأمان"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"إدخال كلمة مرور للملف الشخصي للعمل لزيادة الأمان"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"تم إعادة ضبط هاتفك على الإعدادات الأصلية. لاستخدام هذا الهاتف، أدخل النقش السابق."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"تم إعادة ضبط هاتفك على الإعدادات الأصلية. لاستخدام هذا الهاتف، أدخل رقم التعريف الشخصي السابق."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"تم إعادة ضبط هاتفك على الإعدادات الأصلية. لاستخدام هذا الهاتف، أدخل كلمة المرور السابقة."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"تم إعادة ضبط هاتفك على الإعدادات الأصلية. لاستخدام هذا الهاتف، أدخل النقش السابق."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"تمت إعادة ضبط جهازك اللوحي على الإعدادات الأصلية. لاستخدام هذا الجهاز اللوحي، أدخِل النقش السابق."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"تمت إعادة ضبط جهازك على الإعدادات الأصلية. لاستخدام هذا الجهاز، أدخِل النقش السابق."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"تم إعادة ضبط هاتفك على الإعدادات الأصلية. لاستخدام هذا الهاتف، أدخل رقم التعريف الشخصي السابق."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"تمت إعادة ضبط جهازك اللوحي على الإعدادات الأصلية. لاستخدام الجهاز، أدخل رقم التعريف الشخصي السابق."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"تمت إعادة ضبط جهازك على الإعدادات الأصلية. لاستخدام هذا الجهاز، أدخِل رقم التعريف الشخصي السابق."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"تم إعادة ضبط هاتفك على الإعدادات الأصلية. لاستخدام هذا الهاتف، أدخل كلمة المرور السابقة."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"تمت إعادة ضبط جهازك اللوحي على الإعدادات الأصلية. لاستخدام جهازك اللوحي، أدخِل كلمة المرور السابقة."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"تمت إعادة ضبط جهازك على الإعدادات الأصلية. لاستخدام هذا الجهاز، أدخِل كلمة المرور السابقة."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"التحقق من النقش"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"التحقق من رقم التعريف الشخصي"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"التحقق من كلمة المرور"</string>
@@ -2204,6 +2211,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"النقش مطلوب"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"يجب رسم نقش لإلغاء قفل الشاشة"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"جعل النقش مرئيًا"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"تحسين خصوصية رقم التعريف الشخصي"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"إيقاف الصور المتحركة أثناء إدخال رقم التعريف الشخصي"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"إظهار نقش الملف الشخصي"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"اهتزاز عند النقر"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"القفل فورًا باستخدام زر التشغيل"</string>
@@ -4192,7 +4201,7 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"السماح بتأجيل الإشعارات"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"إخفاء الرموز من الإشعارات الهادئة"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"لا تظهر الرموز من الإشعارات الهادئة في شريط الحالة."</string>
-    <string name="notification_badging_title" msgid="5469616894819568917">"نقطة إشعار على رمز التطبيق"</string>
+    <string name="notification_badging_title" msgid="5469616894819568917">"نقطة الإشعار على رموز التطبيقات"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"عرض شريط أحدث المحادثات"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"فقاعات المحادثات"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"يمكن أن تظهر بعض الإشعارات وأنواع المحتوى الأخرى في شكل فقاعات المحادثات على الشاشة. لفتح فقاعة محادثة، يمكنك النقر عليها. ولإخفائها، يمكنك سحبها لأسفل الشاشة."</string>
@@ -4235,7 +4244,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"شاشة القفل، شاشة القفل، التخطي، التجاوز"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"عند قفل الملف الشخصي للعمل"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"إظهار الإشعارات الجديدة فقط على شاشة القفل"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"بعد كل عملية فتح قفل، تتم إزالة الإشعارات الحالية من شاشة القفل."</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"الإشعارات التي سبق الاطّلاع عليها تتم إزالتها تلقائيًا من شاشة القفل."</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"الإشعارات على شاشة القفل"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"إظهار إشعارات المحادثات والإشعارات التلقائية والصامتة"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"إظهار إشعارات المحادثات والإشعارات التلقائية والصامتة"</string>
@@ -4789,7 +4798,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> من الأذونات الإضافية</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> إذن إضافي</item>
     </plurals>
-    <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"لم يتم منح أي أذونات"</string>
+    <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"لم يتم منح أي أذونات."</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"لم يتم طلب أي أذونات."</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"التحكّم في وصول التطبيقات إلى بياناتك"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"لوحة بيانات الخصوصية"</string>
@@ -6270,6 +6279,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"اختيار شاشة استراحة"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"إظهار معلومات إضافية"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"يتم عرض الوقت أو الطقس أو غير ذلك من المعلومات على شاشة الاستراحة."</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"إعدادات إضافية"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"اختيار شاشة الاستراحة"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"اختَر ما تريد أن يظهر على شاشتك عندما يكون جهازك اللوحي في حالة إرساء. قد يستهلك جهازك قدرًا أكبر من الطاقة عند استخدام شاشة الاستراحة."</string>

@@ -467,6 +467,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Fingerabdruck einrichten"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Fingerabdruck zulassen"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Fingerabdruck verwenden"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Weitere Informationen zur Entsperrung per Fingerabdruck"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Du kannst deinen Fingerabdruck verwenden, um dein Tablet zu entsperren oder dich in Apps zu authentifizieren, beispielsweise um dich anzumelden oder einen Kauf zu autorisieren."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Du kannst deinen Fingerabdruck verwenden, um dein Gerät zu entsperren oder deine Identität zu bestätigen, beispielsweise um dich in Apps anzumelden oder einen Kauf zu autorisieren."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Du kannst deinen Fingerabdruck verwenden, um dein Smartphone zu entsperren oder deine Identität zu bestätigen, beispielsweise um dich in Apps anzumelden oder einen Kauf zu autorisieren."</string>
@@ -2090,9 +2091,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Verwende das Muster deines Arbeitsprofils, um die Sicherheit zu erhöhen"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Gib die PIN deines Arbeitsprofils ein, um die Sicherheit zu erhöhen"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Gib das Passwort deines Arbeitsprofils ein, um die Sicherheit zu erhöhen"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Dein Smartphone auf die Werkseinstellungen zurückgesetzt. Gib dein früheres Muster ein."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"Dein Smartphone auf die Werkseinstellungen zurückgesetzt. Gib deine frühere PIN ein."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"Dein Smartphone wurde auf die Werkseinstellungen zurückgesetzt. Gib dein früheres Passwort ein."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"Dein Smartphone auf die Werkseinstellungen zurückgesetzt. Gib dein früheres Muster ein."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"Tablet auf Werkseinstellungen zurückgesetzt. Um es zu verwenden, gib dein früheres Muster ein."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"Gerät auf Werkseinstellungen zurückgesetzt. Um es zu verwenden, gib dein früheres Muster ein."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"Dein Smartphone auf die Werkseinstellungen zurückgesetzt. Gib deine frühere PIN ein."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"Tablet auf Werkseinstellungen zurückgesetzt. Um es verwenden, gib deine frühere PIN ein."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"Gerät auf Werkseinstellungen zurückgesetzt. Um es zu verwenden, gib deine frühere PIN ein."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"Dein Smartphone wurde auf die Werkseinstellungen zurückgesetzt. Gib dein früheres Passwort ein."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"Tablet auf Werkseinstellungen zurückgesetzt. Um es zu verwenden, gib dein früheres Passwort ein."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"Gerät auf Werkseinstellungen zurückgesetzt. Um es zu verwenden, gib dein früheres Passwort ein."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Muster bestätigen"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"PIN bestätigen"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Passwort bestätigen"</string>
@@ -2117,6 +2124,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Muster erforderlich"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Zum Entsperren muss ein Muster gezeichnet werden"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Muster sichtbar machen"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Erweiterter Datenschutz bei der PIN-Eingabe"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Animationen bei PIN-Eingabe deaktivieren"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Muster für das Profil anzeigen"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Bei Berührung vibrieren"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Ein/Aus sperrt Gerät sofort"</string>
@@ -4064,7 +4073,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Sperrbildschirm, überspringen, umgehen"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Wenn das Arbeitsprofil gesperrt ist"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Nur neue Benachrichtigungen auf dem Sperrbildschirm anzeigen"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"Nach jeder Entsperrung werden bestehende Benachrichtigungen vom Sperrbildschirm entfernt"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Zuvor angesehene Benachrichtigungen werden automatisch vom Sperrbildschirm entfernt"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Benachrichtigungen auf Sperrbildschirm"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Lautlose und Standardunterhaltungen anzeigen"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Alle Benachrichtigungen anzeigen"</string>
@@ -4560,7 +4569,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> nicht verwendete Apps</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> nicht verwendete App</item>
     </plurals>
-    <string name="unused_apps_category" msgid="8954930958175500851">"Nicht verwendete App-Einstellungen"</string>
+    <string name="unused_apps_category" msgid="8954930958175500851">"Einstellungen für App bei Nichtnutzung"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"App-Aktivität bei Nichtnutzung stoppen"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Berechtigungen entfernen, temporäre Dateien löschen und Benachrichtigungen stoppen"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Alle Apps"</string>
@@ -4960,7 +4969,7 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Jetzt aktivieren"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Jetzt deaktivieren"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Akkuoptimierung wird nicht verwendet"</string>
-    <string name="app_battery_usage_title" msgid="346558380609793334">"Akkunutzung von Apps"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Akkunutzung der App"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Akkunutzung für Apps festlegen"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Uneingeschränkt"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimiert"</string>
@@ -5919,6 +5928,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Bildschirmschoner auswählen"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Zusätzliche Informationen anzeigen"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Uhrzeit, Wetter oder andere Informationen auf dem Bildschirmschoner anzeigen"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Weitere Einstellungen"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Bildschirmschoner auswählen"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Hier kannst du festlegen, was auf dem Display angezeigt werden soll, wenn das Tablet angedockt ist. Das Gerät verbraucht möglicherweise mehr Strom, wenn ein Bildschirmschoner verwendet wird."</string>
