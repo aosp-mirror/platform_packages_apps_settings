@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothUuid;
 import android.bluetooth.le.ScanFilter;
@@ -61,8 +62,7 @@ public class HearingDevicePairingDetail extends BluetoothDevicePairingDetailBase
 
     @Override
     public int getMetricsCategory() {
-        // TODO(b/262839191): To be updated settings_enums.proto
-        return 0;
+        return SettingsEnums.HEARING_AID_PAIRING;
     }
 
     @Override
