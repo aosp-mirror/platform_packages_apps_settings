@@ -106,10 +106,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Скасувати"</string>
     <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Увімкнути Bluetooth LE Audio"</string>
     <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Вмикає функцію Bluetooth LE Audio, якщо пристрій підтримує апаратні можливості LE Audio."</string>
-    <!-- no translation found for bluetooth_enable_leaudio_allow_list (1692999156437357534) -->
-    <skip />
-    <!-- no translation found for bluetooth_enable_leaudio_allow_list_summary (725601205276008525) -->
-    <skip />
+    <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Увімкнути список дозволів Bluetooth LE Audio"</string>
+    <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Увімкніть функцію списку дозволів Bluetooth LE Audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Носії"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Пристрої для дзвінків"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Інші пристрої"</string>
@@ -166,16 +164,11 @@
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Система, додатки й веб-сайти використовують першу підтримувану мову з вибраних вами."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Щоб вибрати мову для кожного додатка, перейдіть у його налаштування мови."</string>
     <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Докладніше про мови"</string>
-    <!-- no translation found for title_change_system_locale (8589844586256566951) -->
-    <skip />
-    <!-- no translation found for desc_notice_device_locale_settings_change (8311132485850714160) -->
-    <skip />
-    <!-- no translation found for button_label_confirmation_of_system_locale_change (5593798559604894733) -->
-    <skip />
-    <!-- no translation found for title_unavailable_locale (2628898110416542386) -->
-    <skip />
-    <!-- no translation found for desc_unavailable_locale (2201756477400935896) -->
-    <skip />
+    <string name="title_change_system_locale" msgid="8589844586256566951">"Змінити мову системи на таку: %s?"</string>
+    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Налаштування та регіональні параметри вашого пристрою буде змінено."</string>
+    <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Змінити"</string>
+    <string name="title_unavailable_locale" msgid="2628898110416542386">"Вибрана мова (%s) недоступна"</string>
+    <string name="desc_unavailable_locale" msgid="2201756477400935896">"Цю мову не можна використовувати як мову системи, однак додатки й веб-сайти знатимуть, що ви надаєте їй перевагу."</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Регіональні параметри"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Установіть параметри одиниць і чисел"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Укажіть регіональні параметри, щоб додатки могли персоналізувати для вас свій інтерфейс."</string>
@@ -653,7 +646,7 @@
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Журнал налагодження стеку NFC"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Підвищити рівень реєстрації в журналі стеку NFC"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Детальний журнал налагодження для постачальника NFC"</string>
-    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Додаткові журнали постачальників для певних пристроїв включатимуться у звіти про помилки, які можуть містити приватну інформацію."</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"У звіти про помилки включатимуться додаткові журнали постачальника щодо пристрою, які можуть містити приватну інформацію."</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"Нефільтрований журнал інтерфейсу NFC NCI"</string>
     <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Реєструватимуться детальні пакети даних NFC, які можуть містити приватну інформацію."</string>
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Перезапустити пристрій?"</string>
@@ -881,6 +874,16 @@
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Розширити сумісність"</string>
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Допомагає іншим пристроям знаходити цю точку доступу. Знижує швидкість з\'єднання через неї."</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Допомагає іншим пристроям знаходити цю точку доступу. Підвищує використання заряду акумулятора."</string>
+    <!-- no translation found for wifi_hotspot_speed_title (8629448084180512685) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_summary (6727230647098551051) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_5g_summary (5009644494425227175) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_6g_summary (1504496768686645945) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_and_5g_summary (2392283008301109037) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Увімкнення точки доступу…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Вимкнення точки доступу…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Використання телефона як модема недоступне"</string>
@@ -1551,7 +1554,7 @@
     <string name="app_ops_running" msgid="6127474473137428721">"Виконується"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Ніколи не використовується)"</string>
     <string name="storageuse_settings_title" msgid="3125650750657988194">"Використання пам\'яті"</string>
-    <string name="service_restarting" msgid="5104563288155809226">"Перезавантаж."</string>
+    <string name="service_restarting" msgid="5104563288155809226">"Перезапуск"</string>
     <string name="cached" msgid="5379485147573438201">"Кешований фоновий процес"</string>
     <string name="no_running_services" msgid="9079738069349859373">"Нічого не працює."</string>
     <string name="service_started_by_app" msgid="6845028506417670179">"Запущено програмою."</string>
@@ -2168,10 +2171,7 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Видалити"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Скасувати"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Зарядити повністю"</string>
-    <!-- no translation found for battery_tip_incompatible_charging_title (5120763575150751300) -->
-    <skip />
-    <!-- no translation found for battery_tip_incompatible_charging_message (8812537213731730513) -->
-    <skip />
+    <string name="battery_tip_incompatible_charging_title" msgid="5120763575150751300">"Проблема із зарядним пристроєм"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"Докладніше про використання несумісних зарядних пристроїв"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Диспетчер заряду акумулятора"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Керувати додатками автоматично"</string>
@@ -2230,8 +2230,7 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Налаштувати розклад"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Подовжте час роботи акумулятора"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Вимикати, коли заряджено"</string>
-    <!-- no translation found for battery_saver_sticky_title_percentage (1178162022087559148) -->
-    <skip />
+    <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Вимикати, коли акумулятор зарядиться до <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Режим енергозбереження вимкнеться, коли акумулятор зарядиться до <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
@@ -4071,7 +4070,8 @@
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Керування Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Дозволити додатку керувати Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Дозволити цьому додатку вмикати чи вимикати Wi-Fi, шукати мережі Wi-Fi та підключатися до них, додавати або видаляти мережі чи запускати лише локальну точку доступу"</string>
-    <string name="change_nfc_tag_apps_title" msgid="8720243766338657008">"Запуск під час сканування NFC"</string>
+    <!-- no translation found for change_nfc_tag_apps_title (91514009058149617) -->
+    <skip />
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"Дозволити запуск під час сканування NFC"</string>
     <string name="change_nfc_tag_apps_detail_summary" msgid="7083666814715607078">"Дозвольте цьому додатку запускатися під час сканування NFC-міток.\nЯкщо цей дозвіл ввімкнено, у разі виявлення мітки додаток відображатиметься серед доступних опцій."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Де відтворювати мультимедіа"</string>
@@ -4554,6 +4554,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Виберіть заставку"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Показувати додаткову інформацію"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Відображення часу, погоди чи іншої інформації на заставці"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Інші налаштування"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Виберіть заставку"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Виберіть, що має відображатися на екрані, коли планшет у док-станції. Із заставкою ваш пристрій може споживати більше енергії."</string>

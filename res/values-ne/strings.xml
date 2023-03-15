@@ -106,10 +106,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"रद्द गर्नुहोस्"</string>
     <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"ब्लुटुथ LE अडियो अन गर्नुहोस्"</string>
     <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"डिभाइसमा LE अडियो हार्डवेयर चलाउन मिल्छ भने ब्लुटुथ LE अडियो सुविधा अन गर्छ।"</string>
-    <!-- no translation found for bluetooth_enable_leaudio_allow_list (1692999156437357534) -->
-    <skip />
-    <!-- no translation found for bluetooth_enable_leaudio_allow_list_summary (725601205276008525) -->
-    <skip />
+    <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"ब्लुटुथ लो इनर्जी अडियोको श्वेतसूची अन गर्नुहोस्"</string>
+    <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"ब्लुटुथ लो इनर्जी अडियोको श्वेतसूचीसम्बन्धी सुविधा अन गर्नुहोस्।"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"मिडियासम्बन्धी यन्त्रहरू"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"कल गर्ने सुविधा भएका यन्त्रहरू"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"अन्य डिभाइसहरू"</string>
@@ -166,16 +164,11 @@
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"तपाईंका सिस्टम, एप र वेबसाइटहरूले तपाईंले रुचाएको भाषाको सूचीमा रहेको प्रयोग गर्न सकिने पहिलो भाषा प्रयोग गर्छन्।"</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"हरेक एपका हकमा बेग्लाबेग्लै भाषा चयन गर्न एपको भाषासम्बन्धी सेटिङमा जानुहोस्।"</string>
     <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"भाषाहरूका बारेमा थप जान्नुहोस्"</string>
-    <!-- no translation found for title_change_system_locale (8589844586256566951) -->
-    <skip />
-    <!-- no translation found for desc_notice_device_locale_settings_change (8311132485850714160) -->
-    <skip />
-    <!-- no translation found for button_label_confirmation_of_system_locale_change (5593798559604894733) -->
-    <skip />
-    <!-- no translation found for title_unavailable_locale (2628898110416542386) -->
-    <skip />
-    <!-- no translation found for desc_unavailable_locale (2201756477400935896) -->
-    <skip />
+    <string name="title_change_system_locale" msgid="8589844586256566951">"सिस्टमको भाषा परिवर्तन गरी %s बनाउने हो?"</string>
+    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"तपाईंको डिभाइसका सेटिङ र क्षेत्रसम्बन्धी प्राथमिकताहरू परिवर्तन हुने छन्।"</string>
+    <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"परिवर्तन गर्नुहोस्"</string>
+    <string name="title_unavailable_locale" msgid="2628898110416542386">"%s उपलब्ध छैन"</string>
+    <string name="desc_unavailable_locale" msgid="2201756477400935896">"यो भाषालाई सिस्टमको भाषाका रूपमा प्रयोग गर्न सकिँदैन तर तपाईंले एप तथा वेबसाइटलाई तपाईं यो भाषा रुचाउनुहुन्छ भन्ने कुराको जानकारी दिनुभएको छ।"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"क्षेत्रसम्बन्धी प्राथमिकताहरू"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"एकाइ तथा सङ्ख्यासम्बन्धी प्राथमिकताहरू तोक्नुहोस्"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"एपहरूले तपाईंलाई पर्सनलाइज गरिएका सुविधा प्रदान गर्न सकुन् भन्नाका लागि ती एपहरूलाई तपाईंका क्षेत्रसम्बन्धी प्राथमिकताहरू बारेमा जानकारी दिनुहोस्।"</string>
@@ -657,7 +650,7 @@
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"NFC NCI को फिल्टर नगरिएको लग"</string>
     <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"NFC का विस्तृत प्याकेटहरू समावेश गरियोस्। यी प्याकेटमा निजी जानकारी समावेश हुन सक्छन्।"</string>
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"डिभाइस रिस्टार्ट गर्ने हो?"</string>
-    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"NFC को विस्तृत लग राख्ने सुविधा सफ्टवेयर विकास गर्ने प्रयोजनका लागि मात्र बनाइएको हो। बग रिपोर्टहरूमा NFC का अतिरिक्त डेटा समावेश हुन्छ। यी डेटामा निजी जानकारी समावेश हुन सक्छन्। यो सेटिङ बदल्न आफ्नो डिभाइस रिस्टार्ट गर्नुहोस्।"</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"NFC को विस्तृत लग राख्ने सुविधा सफ्टवेयर विकास गर्ने प्रयोजनका लागि मात्र बनाइएको हो। बग रिपोर्टहरूमा NFC का अतिरिक्त डेटा समावेश हुन्छन्। यी डेटामा निजी जानकारी पनि समावेश हुन सक्छन्। यो सेटिङ बदल्न आफ्नो डिभाइस रिस्टार्ट गर्नुहोस्।"</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"रिस्टार्ट गर्नुहोस्"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"स्क्रिन मिरर गर्नुहोस्"</string>
@@ -881,6 +874,16 @@
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"कम्प्याटिबिलिटी बढाइयोस्"</string>
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"यो सुविधाको सहायताले अन्य डिभाइसहरू यो हटस्पट भेट्टाउन सक्छन्। यसले गर्दा हटस्पट कनेक्सनको गति घट्छ।"</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"यो सुविधाको सहायताले अन्य डिभाइसहरू यो हटस्पट भेट्टाउन सक्छन्। यसले गर्दा ब्याट्रीको खपत बढ्छ।"</string>
+    <!-- no translation found for wifi_hotspot_speed_title (8629448084180512685) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_summary (6727230647098551051) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_5g_summary (5009644494425227175) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_6g_summary (1504496768686645945) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_and_5g_summary (2392283008301109037) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"हटस्पट खुल्दै..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"हटस्पट बन्द गरिँदै..."</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"टेदरिङ उपलब्ध छैन"</string>
@@ -2169,7 +2172,6 @@
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"रद्द गर्नुहोस्"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"फुल चार्ज गर्नुहोस्"</string>
     <string name="battery_tip_incompatible_charging_title" msgid="5120763575150751300">"चार्ज गर्ने एक्सेसरीमा कुनै समस्या आयो"</string>
-    <string name="battery_tip_incompatible_charging_message" msgid="8812537213731730513">"ब्याट्री बिस्तारै चार्ज हुँदै छ वा चार्ज भइरहेकै छैन। केबल र पावर एडाप्टर तपाईंको फोनसँग कम्प्याटिबल छ भन्ने कुरा सुनिश्चित गर्नुहोस्"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"नमिल्दो चार्जिङका बारेमा थप जान्नुहोस्"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"ब्याट्री प्रबन्धक"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"एपहरूलाई स्वतः व्यवस्थित गर्नुहोस्"</string>
@@ -2794,13 +2796,13 @@
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"सेभ गरिएका पासवर्ड, अटोफिल गर्ने सुविधा, सिंक गरिएका खाता"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"डिफल्ट एपहरू"</string>
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"क्लोन गरिएका एप"</string>
-    <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"तपाईं एकै पटक दुई वटा खाता प्रयोग गर्न सक्नुहोस् भन्नाका लागि एप क्लोन गर्नुहोस्।"</string>
+    <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"एकै पटक दुई वटा खाता प्रयोग गर्न एप क्लोन गर्नुहोस्।"</string>
     <string name="desc_cloneable_app_list_text" msgid="3354586725814708688">"क्लोन गर्न मिल्ने एपहरू।"</string>
     <string name="cloned_apps_summary" msgid="8805362440770795709">"<xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g> वटा एप क्लोन गरिएको छ, <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g> वटा एप क्लोन गर्न मिल्छ"</string>
     <string name="delete_all_app_clones" msgid="3489053361980624999">"क्लोन गरिएका सबै एप मेटाउनुहोस्"</string>
     <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"क्लोन गरिएका सबै एप मेटाउन सकिएन"</string>
     <string name="cloned_app_creation_summary" msgid="4642627294993918502">"सिर्जना गरिँदै छ…"</string>
-    <string name="cloned_app_created_summary" msgid="7277912971544890710">"क्लोन गरियो"</string>
+    <string name="cloned_app_created_summary" msgid="7277912971544890710">"क्लोन गरिएको छ"</string>
     <!-- no translation found for cloned_app_creation_toast_summary (3854494347144867870) -->
     <skip />
     <!-- no translation found for cloned_app_created_toast_summary (755225403495544163) -->
@@ -3453,7 +3455,7 @@
     <string name="notifications_enabled_with_info" msgid="1808946629277684308">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g> / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
     <string name="notifications_categories_off" msgid="7712037485557237328">"{count,plural, =1{# वटा कोटी अफ गरिएको छ}other{# वटा कोटी अफ गरिएका छन्}}"</string>
     <string name="runtime_permissions_additional_count" msgid="6071909675951786523">"{count,plural, =1{# वटा अतिरिक्त अनुमति}other{# वटा अतिरिक्त अनुमति}}"</string>
-    <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"कुनै अनुमतिहरू प्रदान गरिएको छैन"</string>
+    <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"कुनै पनि अनुमति दिइएको छैन"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"कुनै अनुमतिहरू अनुरोध गरिएको छैन"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"एपहरूलाई आफ्नो जानकारी कसरी प्रयोग गर्न दिने भन्ने कुरा निर्धारण गर्नुहोस्"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"गोपनीयतासम्बन्धी ड्यासबोर्ड"</string>
@@ -4066,7 +4068,8 @@
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Wi-Fi कन्ट्रोल"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"एपलाई Wi-Fi नियन्त्रण गर्ने अनुमति दिइयोस्"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"यो एपलाई Wi-Fi अन वा अफ गर्ने, स्क्यान गरी Wi-Fi नेटवर्कमा कनेक्ट गर्ने, नेटवर्क हाल्ने वा हटाउने वा स्थानीय रूपमा मात्र प्रयोग गर्न मिल्ने हटस्पट सुरु गर्ने अनुमति दिनुहोस्"</string>
-    <string name="change_nfc_tag_apps_title" msgid="8720243766338657008">"NFC ट्याग स्क्यान गरिँदा सुरु हुने अनुमति"</string>
+    <!-- no translation found for change_nfc_tag_apps_title (91514009058149617) -->
+    <skip />
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"NFC ट्याग स्क्यान गरिँदा सुरु हुने अनुमति दिइयोस्"</string>
     <string name="change_nfc_tag_apps_detail_summary" msgid="7083666814715607078">"कुनै NFC ट्याग स्क्यान गरिँदा यो एपलाई सुरु हुने अनुमति दिनुहोस्।\nतपाईंले यो अनुमति दिनुभयो भने कुनै ट्याग पत्ता लाग्दा कारबाही गर्नका लागि देखाइने विकल्पमध्ये एउटा विकल्पका रूपमा यो एप उपलब्ध हुने छ।"</string>
     <string name="media_output_title" msgid="8283629315159510680">"मिडिया यसमा प्ले गर्नुहोस्"</string>
@@ -4547,6 +4550,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"स्क्रिन सेभर छनौट गर्नुहोस्"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"अतिरिक्त जानकारी देखाइयोस्"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"स्क्रिन सेभरमा समय, मौसमलगायतका जानकारी देखाइयोस्"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"थप सेटिङ"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"स्क्रिन सेभर छान्नुहोस्"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"तपाईंको ट्याब्लेट डक गरिएका बेला तपाईंको डिभाइसमा देखाइनु पर्ने कुराहरू छान्नुहोस्। स्क्रिन सेभर प्रयोग गरिएका बेला तपाईंको डिभाइसले अरू बेलाको तुलनामा बढी ब्याट्री खपत गर्न सक्छ।"</string>

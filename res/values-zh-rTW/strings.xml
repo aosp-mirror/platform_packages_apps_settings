@@ -106,10 +106,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"取消"</string>
     <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"啟用藍牙低功耗音訊"</string>
     <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"如果裝置支援低功耗音訊硬體功能，則啟用藍牙低功耗音訊功能。"</string>
-    <!-- no translation found for bluetooth_enable_leaudio_allow_list (1692999156437357534) -->
-    <skip />
-    <!-- no translation found for bluetooth_enable_leaudio_allow_list_summary (725601205276008525) -->
-    <skip />
+    <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"啟用藍牙 LE Audio 許可清單"</string>
+    <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"啟用藍牙 LE Audio 許可清單功能。"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"媒體裝置"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"通話裝置"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"其他裝置"</string>
@@ -166,16 +164,11 @@
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"你的系統、應用程式和網站會使用偏好語言中第一個支援的語言。"</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"如要為各應用程式選取語言，請前往應用程式語言設定。"</string>
     <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"進一步瞭解語言"</string>
-    <!-- no translation found for title_change_system_locale (8589844586256566951) -->
-    <skip />
-    <!-- no translation found for desc_notice_device_locale_settings_change (8311132485850714160) -->
-    <skip />
-    <!-- no translation found for button_label_confirmation_of_system_locale_change (5593798559604894733) -->
-    <skip />
-    <!-- no translation found for title_unavailable_locale (2628898110416542386) -->
-    <skip />
-    <!-- no translation found for desc_unavailable_locale (2201756477400935896) -->
-    <skip />
+    <string name="title_change_system_locale" msgid="8589844586256566951">"要將系統語言變更為「%s」嗎？"</string>
+    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"系統將變更裝置設定和地區偏好設定。"</string>
+    <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"變更"</string>
+    <string name="title_unavailable_locale" msgid="2628898110416542386">"「%s」無法使用"</string>
+    <string name="desc_unavailable_locale" msgid="2201756477400935896">"這個語言無法做為系統語言，但你已在應用程式和網站上將此設為偏好語言。"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"地區偏好設定"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"設定單位和數字偏好設定"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"讓應用程式取得區域偏好設定，為你提供個人化體驗。"</string>
@@ -881,6 +874,16 @@
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"擴充相容性"</string>
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"讓其他裝置較容易找到這個無線基地台。請注意，開啟這項設定會降低無線基地台連線速度。"</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"讓其他裝置較容易找到這個無線基地台。請注意，開啟這項設定會增加電池用量。"</string>
+    <!-- no translation found for wifi_hotspot_speed_title (8629448084180512685) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_summary (6727230647098551051) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_5g_summary (5009644494425227175) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_6g_summary (1504496768686645945) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_and_5g_summary (2392283008301109037) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"正在開啟無線基地台…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"正在關閉無線基地台…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"不支援網路共用功能"</string>
@@ -2169,7 +2172,6 @@
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"取消"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"將電池充飽"</string>
     <string name="battery_tip_incompatible_charging_title" msgid="5120763575150751300">"充電配件有問題"</string>
-    <string name="battery_tip_incompatible_charging_message" msgid="8812537213731730513">"充電速度太慢或未充電，請檢查充電線和電源變壓器是否支援你的手機"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"進一步瞭解不相容的變壓器充電"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Battery Manager"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"自動管理應用程式"</string>
@@ -4066,7 +4068,8 @@
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Wi-Fi 控制"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"允許應用程式控制 Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"允許這個應用程式開啟或關閉 Wi-Fi、掃描及連上 Wi-Fi 網路、新增或移除網路，或啟動僅限本機的無線基地台"</string>
-    <string name="change_nfc_tag_apps_title" msgid="8720243766338657008">"啟動 NFC"</string>
+    <!-- no translation found for change_nfc_tag_apps_title (91514009058149617) -->
+    <skip />
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"允許在掃描 NFC 時啟動"</string>
     <string name="change_nfc_tag_apps_detail_summary" msgid="7083666814715607078">"允許系統掃描到 NFC 標記時啟用這個應用程式。\n如果開啟這項權限，系統會在偵測到標記時，將這個應用程式列為選項。"</string>
     <string name="media_output_title" msgid="8283629315159510680">"播放媒體"</string>
@@ -4547,6 +4550,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"選擇螢幕保護程式"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"顯示其他資訊"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"在螢幕保護程式上顯示時間、天氣或其他資訊"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"更多設定"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"選擇要使用的螢幕保護程式"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"選擇平板電腦插入座架時螢幕上要顯示的內容。請注意，如果裝置使用螢幕保護程式，可能會比較耗電。"</string>

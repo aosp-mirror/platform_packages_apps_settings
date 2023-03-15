@@ -106,10 +106,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Otkaži"</string>
     <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Omogući Bluetooth LE audio"</string>
     <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Omogućava funkciju Bluetooth LE audio ako uređaj podržava mogućnosti hardvera za LE audio."</string>
-    <!-- no translation found for bluetooth_enable_leaudio_allow_list (1692999156437357534) -->
-    <skip />
-    <!-- no translation found for bluetooth_enable_leaudio_allow_list_summary (725601205276008525) -->
-    <skip />
+    <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Omogući listu dozvoljenih za Bluetooth LE Audio"</string>
+    <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Omogućite funkciju liste dozvoljenih za Bluetooth LE Audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Uređaji za medije"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Uređaji za pozive"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Drugi uređaji"</string>
@@ -166,16 +164,11 @@
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Vaš sistem, apikacije i web lokacije koriste prvi podržani od vaših preferiranih jezika."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Da odaberete jezik za svaku aplikaciju, idite u postavke jezika aplikacije."</string>
     <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Saznajte više o jezicima"</string>
-    <!-- no translation found for title_change_system_locale (8589844586256566951) -->
-    <skip />
-    <!-- no translation found for desc_notice_device_locale_settings_change (8311132485850714160) -->
-    <skip />
-    <!-- no translation found for button_label_confirmation_of_system_locale_change (5593798559604894733) -->
-    <skip />
-    <!-- no translation found for title_unavailable_locale (2628898110416542386) -->
-    <skip />
-    <!-- no translation found for desc_unavailable_locale (2201756477400935896) -->
-    <skip />
+    <string name="title_change_system_locale" msgid="8589844586256566951">"Promijeniti jezik sistema u %s?"</string>
+    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Postavke uređaja i regionalne postavke će se promijeniti."</string>
+    <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Promijeni"</string>
+    <string name="title_unavailable_locale" msgid="2628898110416542386">"%s nije dostupan"</string>
+    <string name="desc_unavailable_locale" msgid="2201756477400935896">"Taj jezik se ne može koristiti kao jezik sistema, ali ste ga postavili kao preferirani jezik za aplikacije i web lokacije."</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionalne preference"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Postavite preference za jedinice i brojeve"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Omogućite aplikacijama da znaju vaše regionalne postavke da mogu personalizirati vaše iskustvo."</string>
@@ -654,7 +647,7 @@
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Povećajte nivo zapisivanja za NFC grupu"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Opširni NFC zapisnik dobavljača o otklanjanju grešaka"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"U izvještaje o greškama uključite dodatne zapisnike dobavljača specifične za uređaj, koji mogu sadržavati privatne podatke."</string>
-    <string name="nfc_snoop_log_title" msgid="1576197495976952388">"Nefiltrirani NFC NCI zapis"</string>
+    <string name="nfc_snoop_log_title" msgid="1576197495976952388">"Nefiltrirani NFC NCI zapisnik"</string>
     <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Snimajte detaljne NFC pakete, koji mogu sadržavati privatne podatke."</string>
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Ponovo pokrenuti uređaj?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Detaljno zapisivanje NFC podataka je namijenjeno samo za svrhe programiranja. Dodatni NFC podaci su uključeni u izvještaje o greškama, koji mogu sadržavati privatne podatke. Ponovo pokrenite uređaj da promijenite ovu postavku."</string>
@@ -881,6 +874,16 @@
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Proširi kompatibilnost"</string>
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Pomaže ostalim uređajima da pronađu ovu pristupnu tačku. Smanjuje brzinu povezivanja pristupne tačke."</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Pomaže ostalim uređajima da pronađu ovu pristupnu tačku. Povećava potrošnju baterije."</string>
+    <!-- no translation found for wifi_hotspot_speed_title (8629448084180512685) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_summary (6727230647098551051) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_5g_summary (5009644494425227175) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_6g_summary (1504496768686645945) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_and_5g_summary (2392283008301109037) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Uključivanje pristupne tačke…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Isključivanje pristupne tačke…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Dijeljenje internetske veze nije dostupno"</string>
@@ -2169,7 +2172,6 @@
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Otkaži"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Punjenje do kraja"</string>
     <string name="battery_tip_incompatible_charging_title" msgid="5120763575150751300">"Problem s opremom za punjenje"</string>
-    <string name="battery_tip_incompatible_charging_message" msgid="8812537213731730513">"Punjenje baterije je sporo ili se baterija ne puni. Provjerite funkcioniraju li kabl i adapter za napajanje s telefonom"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"Saznajte više o nekompatibilnom punjenju"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Upravitelj baterije"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Automatsko upravljanje aplikacijama"</string>
@@ -2796,7 +2798,7 @@
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Klonirane aplikacije"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Kreirajte drugu instancu aplikacije tako da možete istovremeno koristiti dva računa."</string>
     <string name="desc_cloneable_app_list_text" msgid="3354586725814708688">"Aplikacije koje se mogu klonirati."</string>
-    <string name="cloned_apps_summary" msgid="8805362440770795709">"Klonirano: <xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g>. Dostupno za kloniranje: <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g>"</string>
+    <string name="cloned_apps_summary" msgid="8805362440770795709">"Klonirano: <xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g>; dostupno za kloniranje: <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g>"</string>
     <string name="delete_all_app_clones" msgid="3489053361980624999">"Brisanje svih klonova aplikacije"</string>
     <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"Brisanje klonova aplikacije nije uspjelo"</string>
     <string name="cloned_app_creation_summary" msgid="4642627294993918502">"Kreiranje…"</string>
@@ -4067,7 +4069,8 @@
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Upravljanje WiFi-jem"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Dozvoli aplikaciji da upravlja WiFi-jem"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Dozvolite ovoj aplikaciji da uključuje ili isključuje WiFi, skenira i povezuje se s WiFi mrežama, dodaje ili uklanja mreže te pokreće lokalnu pristupnu tačku"</string>
-    <string name="change_nfc_tag_apps_title" msgid="8720243766338657008">"Pokretanje NFC-a"</string>
+    <!-- no translation found for change_nfc_tag_apps_title (91514009058149617) -->
+    <skip />
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"Dozvoli pokretanje kada se NFC skenira"</string>
     <string name="change_nfc_tag_apps_detail_summary" msgid="7083666814715607078">"Dozvolite aplikaciji da se pokrene kada se NFC oznaka skenira.\nAko je ovo odobrenje uključeno, aplikacija će biti dostupna kao opcija kad god se oznaka otkrije."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Reprodukcija medija na"</string>
@@ -4549,6 +4552,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Odaberite čuvara ekrana"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Prikaži dodatne informacije"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Prikazivanje stvari kao što su vrijeme, vremenska prognoza ili druge informacije na čuvaru ekrana"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Više postavki"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Odaberite čuvara ekrana"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Odaberite šta će se prikazivati na ekranu kada je tablet na priključnoj stanici. Uređaj može trošiti više energije kada se koristi čuvar ekrana."</string>
