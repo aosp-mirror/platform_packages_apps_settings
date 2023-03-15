@@ -467,6 +467,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"ನಿಮ್ಮ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅನ್ನು ಸೆಟಪ್‌ ಮಾಡಿ"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅನ್‌ಲಾಕ್ ಅನುಮತಿಸಿ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"ನಿಮ್ಮ ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಬಳಸಿ"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಅನ್‌ಲಾಕ್ ಕುರಿತು ಇನ್ನಷ್ಟು ತಿಳಿದುಕೊಳ್ಳಿ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"ನೀವು ಆ್ಯಪ್‌ಗಳಿಗೆ ಸೈನ್ ಇನ್ ಮಾಡುವಂತೆ ಅಥವಾ ಖರೀದಿಯನ್ನು ಅನುಮೋದಿಸುವಂತೆಯೇ, ನಿಮ್ಮ ಟ್ಯಾಬ್ಲೆಟ್ ಅನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು ಅಥವಾ ನಿಮ್ಮ ಗುರುತನ್ನು ದೃಢೀಕರಿಸಲು ನಿಮ್ಮ ಫಿಂಗರ್ ಪ್ರಿಂಟ್ ಅನ್ನು ಬಳಸಿ."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"ನೀವು ಆ್ಯಪ್‌ಗಳಿಗೆ ಸೈನ್ ಇನ್ ಮಾಡುವಂತೆ ಅಥವಾ ಖರೀದಿಯನ್ನು ಅನುಮೋದಿಸುವಂತೆಯೇ, ನಿಮ್ಮ ಸಾಧನವನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು ಅಥವಾ ನಿಮ್ಮ ಗುರುತನ್ನು ದೃಢೀಕರಿಸಲು ನಿಮ್ಮ ಫಿಂಗರ್ ಪ್ರಿಂಟ್ ಅನ್ನು ಬಳಸಿ."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"ನೀವು ಆ್ಯಪ್‌ಗಳಿಗೆ ಸೈನ್ ಇನ್ ಮಾಡುವಂತೆ ಅಥವಾ ಖರೀದಿಯನ್ನು ಅನುಮೋದಿಸುವಂತೆಯೇ, ನಿಮ್ಮ ಫೋನ್ ಅನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು ಅಥವಾ ನಿಮ್ಮ ಗುರುತನ್ನು ದೃಢೀಕರಿಸಲು ನಿಮ್ಮ ಫಿಂಗರ್ ಪ್ರಿಂಟ್ ಅನ್ನು ಬಳಸಿ."</string>
@@ -1549,7 +1550,7 @@
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"ಡಾಕ್ ಮಾಡುವಾಗ ಮತ್ತು ಚಾರ್ಜ್ ಮಾಡುವಾಗ"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"ಚಾರ್ಜ್‌ ಆಗುತ್ತಿರುವಾಗ"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"ಡಾಕ್‌ ಆಗಿರುವಾಗ"</string>
-    <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"ಎಂದಿಗೂ ಇಲ್ಲ"</string>
+    <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"ಎಂದಿಗೂ ಬೇಡ"</string>
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"ಆನ್ / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"ಆಫ್"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"ಯಾವಾಗ ಪ್ರಾರಂಭಿಸಬೇಕು"</string>
@@ -2089,9 +2090,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"ಹೆಚ್ಚಿನ ಸುರಕ್ಷತೆಗಾಗಿ, ನಿಮ್ಮ ಕೆಲಸದ ಪಾಸ್‌ವರ್ಡ್‌ ಬಳಸಿ"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"ಹೆಚ್ಚಿನ ಸುರಕ್ಷತೆಗಾಗಿ, ನಿಮ್ಮ ಕೆಲಸದ ಪಿನ್‌ ನಮೂದಿಸಿ"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"ಹೆಚ್ಚಿನ ಸುರಕ್ಷತೆಗಾಗಿ, ನಿಮ್ಮ ಕೆಲಸದ ಪಾಸ್‌ವರ್ಡ್‌ ನಮೂದಿಸಿ"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"ನಿಮ್ಮ ಫೋನ್‌ ಅನ್ನು ಫ್ಯಾಕ್ಟರಿ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಮರುಹೊಂದಿಸಲಾಗಿದೆ. ಈ ಫೋನ್‌ ಬಳಸಲು, ನಿಮ್ಮ ಹಿಂದಿನ ಪ್ಯಾಟರ್ನ್‌ ನಮೂದಿಸಿ."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"ನಿಮ್ಮ ಫೋನ್‌ ಅನ್ನು ಫ್ಯಾಕ್ಟರಿ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಮರುಹೊಂದಿಸಲಾಗಿದೆ. ಈ ಫೋನ್‌ ಬಳಸಲು, ನಿಮ್ಮ ಹಿಂದಿನ ಪಿನ್‌ ನಮೂದಿಸಿ."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"ನಿಮ್ಮ ಫೋನ್‌ ಅನ್ನು ಫ್ಯಾಕ್ಟರಿ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಮರುಹೊಂದಿಸಲಾಗಿದೆ. ಈ ಫೋನ್‌ ಬಳಸಲು, ನಿಮ್ಮ ಹಿಂದಿನ ಪಾಸ್‌ವರ್ಡ್‌ ನಮೂದಿಸಿ."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"ನಿಮ್ಮ ಫೋನ್‌ ಅನ್ನು ಫ್ಯಾಕ್ಟರಿ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಮರುಹೊಂದಿಸಲಾಗಿದೆ. ಈ ಫೋನ್‌ ಬಳಸಲು, ನಿಮ್ಮ ಹಿಂದಿನ ಪ್ಯಾಟರ್ನ್‌ ನಮೂದಿಸಿ."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"ಟ್ಯಾಬ್ಲೆಟ್ ಫ್ಯಾಕ್ಟರಿ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ರೀಸೆಟ್ ಆಗಿದೆ. ಈ ಟ್ಯಾಬ್ಲೆಟ್ ಬಳಸಲು, ಹಿಂದಿನ ಪ್ಯಾಟರ್ನ್ ನಮೂದಿಸಿ."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"ನಿಮ್ಮ ಸಾಧನ ಫ್ಯಾಕ್ಟರಿ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ರೀಸೆಟ್ ಆಗಿದೆ. ಈ ಸಾಧನ ಬಳಸಲು, ನಿಮ್ಮ ಹಿಂದಿನ ಪ್ಯಾಟರ್ನ್ ನಮೂದಿಸಿ."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"ನಿಮ್ಮ ಫೋನ್‌ ಅನ್ನು ಫ್ಯಾಕ್ಟರಿ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಮರುಹೊಂದಿಸಲಾಗಿದೆ. ಈ ಫೋನ್‌ ಬಳಸಲು, ನಿಮ್ಮ ಹಿಂದಿನ ಪಿನ್‌ ನಮೂದಿಸಿ."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"ಟ್ಯಾಬ್ಲೆಟ್ ಫ್ಯಾಕ್ಟರಿ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ರೀಸೆಟ್ ಆಗಿದೆ. ಈ ಟ್ಯಾಬ್ಲೆಟ್ ಬಳಸಲು, ನಿಮ್ಮ ಹಿಂದಿನ ಪಿನ್‌‌ ನಮೂದಿಸಿ."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"ನಿಮ್ಮ ಸಾಧನ ಫ್ಯಾಕ್ಟರಿ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ರೀಸೆಟ್ ಆಗಿದೆ. ಈ ಸಾಧನವನ್ನು ಬಳಸಲು, ನಿಮ್ಮ ಹಿಂದಿನ ಪಿನ್‌‌ ನಮೂದಿಸಿ."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"ನಿಮ್ಮ ಫೋನ್‌ ಅನ್ನು ಫ್ಯಾಕ್ಟರಿ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಮರುಹೊಂದಿಸಲಾಗಿದೆ. ಈ ಫೋನ್‌ ಬಳಸಲು, ನಿಮ್ಮ ಹಿಂದಿನ ಪಾಸ್‌ವರ್ಡ್‌ ನಮೂದಿಸಿ."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"ಟ್ಯಾಬ್ಲೆಟ್ ಫ್ಯಾಕ್ಟರಿ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ರೀಸೆಟ್ ಆಗಿದೆ. ಈ ಟ್ಯಾಬ್ಲೆಟ್ ಬಳಸಲು, ಹಿಂದಿನ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"ನಿಮ್ಮ ಸಾಧನ ಫ್ಯಾಕ್ಟರಿ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ರೀಸೆಟ್ ಆಗಿದೆ. ಈ ಸಾಧನ ಬಳಸಲು, ಹಿಂದಿನ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"ಪ್ಯಾಟರ್ನ್‌ ಪರಿಶೀಲಿಸಿ"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"ಪಿನ್‌ ಪರಿಶೀಲಿಸಿ"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"ಪಾಸ್‌ವರ್ಡ್‌ ಪರಿಶೀಲಿಸಿ"</string>
@@ -2116,6 +2123,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"ಪ್ಯಾಟರ್ನ್ ಅಗತ್ಯವಿದೆ"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"ಪರದೆಯನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು ಪ್ಯಾಟರ್ನ್ ಅನ್ನು ಚಿತ್ರಿಸಬೇಕು"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"ಪ್ಯಾಟರ್ನ್ ಕಾಣಿಸುವಂತೆ ಮಾಡಿ"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"ವರ್ಧಿತ ಪಿನ್ ಗೌಪ್ಯತೆ"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"PIN ನಮೂದಿಸುವಾಗ ಅನಿಮೇಷನ್‌ಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"ಪ್ರೊಫೈಲ್ ಪ್ಯಾಟರ್ನ್ ಕಾಣಿಸುವಂತೆ ಮಾಡಿ"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"ಟ್ಯಾಪ್ ಮಾಡಿದಾಗ ವೈಬ್ರೇಟ್‌ ಆಗು"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"ಪವರ್ ಬಟನ್ ಲಾಕ್ ಆಗುತ್ತದೆ"</string>
@@ -4063,7 +4072,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"ಲಾಕ್ ಸ್ಕ್ರೀನ್, ಲಾಕ್‌ಸ್ಕ್ರೀನ್, ಸ್ಕಿಪ್ ಮಾಡಿ, ಬೈಪಾಸ್"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"ಕೆಲಸದ ಪ್ರೊಫೈಲ್ ಅನ್ನು ಲಾಕ್ ಮಾಡಿದಾಗ"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"ಲಾಕ್ ಸ್ಕ್ರೀನ್‌ನಲ್ಲಿ ಹೊಸ ಅಧಿಸೂಚನೆಗಳನ್ನು ಮಾತ್ರ ತೋರಿಸಿ"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"ಪ್ರತಿಬಾರಿ ಅನ್‌ಲಾಕ್ ಮಾಡಿದ ನಂತರ, ಲಾಕ್ ಸ್ಕ್ರೀನ್‌ನಿಂದ ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ ಅಧಿಸೂಚನೆಗಳನ್ನು ತೆಗೆದುಹಾಕಿ"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"ಲಾಕ್ ಸ್ಕ್ರೀನ್‌ನಿಂದ ಈ ಹಿಂದೆಯೇ ವೀಕ್ಷಿಸಿರುವ ಅಧಿಸೂಚನೆಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ತೆಗೆದುಹಾಕಿ"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"ಲಾಕ್‌ ಸ್ಕ್ರೀನ್ ಮೇಲೆ ಅಧಿಸೂಚನೆಗಳು"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"ಡೀಫಾಲ್ಟ್ ಮತ್ತು ನಿಶ್ಯಬ್ಧಗೊಳಿಸಿದ ಸಂಭಾಷಣೆಗಳನ್ನು ತೋರಿಸಿ"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"ಡೀಫಾಲ್ಟ್ ಮತ್ತು ನಿಶ್ಯಬ್ಧಗೊಳಿಸಿದ ಸಂಭಾಷಣೆಗಳನ್ನು ತೋರಿಸಿ"</string>
@@ -5918,6 +5927,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"ಸ್ಕ್ರೀನ್‌ಸೇವರ್ ಆಯ್ಕೆಮಾಡಿ"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"ಹೆಚ್ಚುವರಿ ಮಾಹಿತಿಯನ್ನು ತೋರಿಸಿ"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"ಸ್ಕ್ರೀನ್ ಸೇವರ್‌ನಲ್ಲಿ ಸಮಯ, ಹವಾಮಾನ ಅಥವಾ ಇತರ ಮಾಹಿತಿಯಂತಹ ವಿಷಯಗಳನ್ನು ಪ್ರದರ್ಶಿಸಿ"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"ಇನ್ನಷ್ಟು ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"ನಿಮ್ಮ ಸ್ಕ್ರೀನ್ ಸೇವರ್ ಆಯ್ಕೆಮಾಡಿ"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"ನಿಮ್ಮ ಟ್ಯಾಬ್ಲೆಟ್ ಅನ್ನು ಡಾಕ್ ಮಾಡಿದಾಗ ನಿಮ್ಮ ಸ್ಕ್ರೀನ್‌ನ ಮೇಲೆ ನಿಮಗೇನು ಕಾಣಿಸುತ್ತದೆ ಎಂಬುದನ್ನು ಆಯ್ಕೆಮಾಡಿ. ಸ್ಕ್ರೀನ್ ಸೇವರ್ ಬಳಸಿದಾಗ ನಿಮ್ಮ ಸಾಧನ ಹೆಚ್ಚಿನ ಶಕ್ತಿಯನ್ನು ಬಳಸಬಹುದು."</string>

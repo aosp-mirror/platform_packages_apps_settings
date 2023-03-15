@@ -467,6 +467,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"设置指纹"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"允许使用指纹解锁功能"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"使用指纹"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"详细了解“指纹解锁”"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"您可以使用指纹解锁平板电脑或验证自己的身份，例如在登录应用或批准购买交易时。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"指纹可用于解锁设备或验证您的身份，例如在登录应用或批准购买交易时。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"您可以使用指纹解锁手机或验证自己的身份，例如在登录应用或批准购买交易时。"</string>
@@ -2089,9 +2090,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"为了提升安全性，请绘制您的工作资料解锁图案"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"为了提升安全性，请输入您的工作资料 PIN 码"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"为了提升安全性，请输入您的工作资料密码"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"您的手机已恢复出厂设置。要使用此手机，请输入您以前的解锁图案。"</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"您的手机已恢复出厂设置。要使用此手机，请输入您以前的 PIN 码。"</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"您的手机已恢复出厂设置。要使用此手机，请输入您以前的密码。"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"您的手机已恢复出厂设置。要使用此手机，请输入您以前的解锁图案。"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"您的平板电脑已恢复出厂设置。如要使用此平板电脑，请绘制之前使用的解锁图案。"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"您的设备已恢复出厂设置。如要使用此设备，请绘制之前使用的解锁图案。"</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"您的手机已恢复出厂设置。要使用此手机，请输入您以前的 PIN 码。"</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"您的平板电脑已恢复出厂设置。如要使用此平板电脑，请输入之前使用的 PIN 码。"</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"您的设备已恢复出厂设置。如要使用此设备，请输入之前使用的 PIN 码。"</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"您的手机已恢复出厂设置。要使用此手机，请输入您以前的密码。"</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"您的平板电脑已恢复出厂设置。如要使用此平板电脑，请输入之前使用的密码。"</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"您的设备已恢复出厂设置。如要使用此设备，请输入之前使用的密码。"</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"验证图案"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"验证 PIN 码"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"验证密码"</string>
@@ -2116,6 +2123,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"需要解锁图案"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"必须绘制图案才能解锁屏幕"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"显示图案"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"增强型 PIN 码隐私保护"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"输入 PIN 码时停用动画功能"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"显示资料解锁图案"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"点按时振动"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"按下电源按钮即时锁定"</string>
@@ -4063,8 +4072,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"锁定屏幕, 锁屏, 跳过, 绕过"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"当工作资料遭到锁定时"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"在锁屏状态下仅显示新通知"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"每次解锁后，系统都会从锁定的屏幕中移除现有通知"</string>
-    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"锁定屏幕上的通知"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"自动从锁定的屏幕中移除之前看过的通知"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"锁屏通知"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"显示对话通知、默认通知和无声通知"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"显示默认对话和已设为静音的对话"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"隐藏已设为静音的对话和通知"</string>
@@ -5856,8 +5865,8 @@
     <string name="camera_toggle_title" msgid="8952668677727244992">"摄像头使用权限"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"麦克风使用权限"</string>
     <string name="location_toggle_title" msgid="5229867700421750868">"位置信息使用权"</string>
-    <string name="perm_toggle_description" msgid="5754629581767319022">"针对应用和服务"</string>
-    <string name="mic_toggle_description" msgid="484139688645092237">"对于应用和服务。如果您关闭此设置，那么当您拨打紧急电话号码时，系统可能仍会分享麦克风数据。"</string>
+    <string name="perm_toggle_description" msgid="5754629581767319022">"会影响应用和服务"</string>
+    <string name="mic_toggle_description" msgid="484139688645092237">"会影响应用和服务。如果您关闭此设置，那么当您拨打紧急电话号码时，系统可能仍会分享麦克风数据。"</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"上一页"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"下一页"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"颜色预览"</string>
@@ -5918,6 +5927,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"选择屏保"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"显示其他信息"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"在屏保上显示时间、天气或其他信息"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"更多设置"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"选择屏保"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"选择平板电脑锁定时您希望在屏幕上看到的内容。使用屏保时，您的设备可能会消耗更多能量。"</string>

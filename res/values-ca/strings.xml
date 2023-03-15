@@ -467,6 +467,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Configura l\'empremta digital"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Permet desbloqueig amb empremta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Utilitzar l\'empremta digital"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Més informació sobre Desbloqueig amb empremta digital"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Utilitza l\'empremta digital per desbloquejar la tauleta o verificar que ets tu, com ara quan inicies la sessió en aplicacions o aproves una compra."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Utilitza l\'empremta digital per desbloquejar el dispositiu o verificar la teva identitat, com ara quan inicies la sessió en aplicacions o aproves una compra."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Utilitza l\'empremta digital per desbloquejar el telèfon o verificar la teva identitat, com ara quan inicies la sessió en aplicacions o aproves una compra."</string>
@@ -586,7 +587,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Toca el sensor"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Col·loca el dit al sensor i aixeca\'l quan notis una vibració"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Mantén tota l\'empremta digital sobre el sensor fins que notis una vibració"</string>
-    <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"Sense prémer el botó, mantén l\'empremta digital al sensor fins que sentis una vibració.\n\nMou una mica el dit cada vegada. Això ajuda a capturar millor l\'empremta digital."</string>
+    <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"Sense prémer el botó, mantén l\'empremta digital al sensor fins que sentis una vibració.\n\nMou una mica el dit cada vegada. Això ajuda a capturar una part més gran de l\'empremta digital."</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Mantén premut el sensor d\'empremtes digitals"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Aixeca el dit i toca de nou"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Un cop més"</string>
@@ -1202,7 +1203,7 @@
     <string name="wifi_carrier_content" msgid="2876499905644083615">"Connecta\'t mitjançant <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"Per millorar la precisió de la ubicació i per a altres finalitats, <xliff:g id="APP_NAME">%1$s</xliff:g> vol activar la cerca de xarxes tot i que la connexió Wi-Fi estigui desactivada.\n\nVols permetre-ho per a totes les aplicacions que vulguin cercar xarxes?"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Per millorar la precisió de la ubicació i per a altres finalitats, una aplicació desconeguda vol activar la cerca de xarxes tot i que la Wi‑Fi està desactivada.\n\nVols permetre-ho per a totes les aplicacions?"</string>
-    <string name="wifi_scan_always_turnoff_message" msgid="93691286302680448">"Per desactivar aquesta funció, ves a Configuració avançada al menú addicional."</string>
+    <string name="wifi_scan_always_turnoff_message" msgid="93691286302680448">"Per desactivar aquesta funció, ves a Configuració avançada al menú de desbordament."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Permet"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Denega"</string>
     <string name="wifi_hotspot_title" msgid="1918712370697971229">"Vols iniciar la sessió per connectar-te?"</string>
@@ -2089,9 +2090,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Per a més seguretat, utilitza el patró de la feina"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Per a més seguretat, introdueix el PIN de la feina"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Per a més seguretat, introdueix la contrasenya de la feina"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"S\'ha restablert la configuració de fàbrica del dispositiu. Per utilitzar-lo, dibuixa el patró antic."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"S\'ha restablert la configuració de fàbrica del dispositiu. Per utilitzar-lo, escriu el PIN antic."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"S\'ha restablert la configuració de fàbrica del dispositiu. Per utilitzar-lo, escriu la contrasenya antiga."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"S\'ha restablert la configuració de fàbrica del dispositiu. Per utilitzar-lo, dibuixa el patró antic."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"S\'ha restablert la configuració de fàbrica de la tauleta. Per utilitzar-la, introdueix el patró antic."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"S\'ha restablert la configuració de fàbrica del dispositiu. Per utilitzar-lo, introdueix el patró antic."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"S\'ha restablert la configuració de fàbrica del dispositiu. Per utilitzar-lo, escriu el PIN antic."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"S\'ha restablert la configuració de fàbrica de la tauleta. Per utilitzar-la, introdueix el PIN antic."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"S\'ha restablert la configuració de fàbrica del dispositiu. Per utilitzar-lo, introdueix el PIN antic."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"S\'ha restablert la configuració de fàbrica del dispositiu. Per utilitzar-lo, escriu la contrasenya antiga."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"S\'ha restablert la config. de fàbrica de la tauleta. Per utilitzar-la, escriu la contrasenya antiga."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"S\'ha restablert la config. de fàbrica del dispositiu. Per utilitzar-lo, escriu la contrasenya antiga."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Verifica el patró"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Verifica el PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Verifica la contrasenya"</string>
@@ -2116,6 +2123,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Requereix un patró"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Cal dibuixar el patró per desbloquejar la pantalla"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Fes que el patró sigui visible"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Privadesa del PIN millorada"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Desactiva les animacions mentre introdueixes el PIN"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Mostra el patró del perfil"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibra en tocar"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"El botó d\'engegada bloqueja"</string>
@@ -3870,7 +3879,7 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Subtitula el contingut multimèdia automàticament"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Altaveu del telèfon"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Auriculars amb cable"</string>
-    <string name="spatial_audio_text" msgid="8201387855375146000">"L\'àudio dels continguts multimèdia compatibles passa a ser més immersiu"</string>
+    <string name="spatial_audio_text" msgid="8201387855375146000">"L\'àudio dels continguts multimèdia compatibles esdevé més immersiu"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Desactivat"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Activat / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Activat / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> i <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
@@ -4063,7 +4072,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"pantalla de bloqueig, bloqueig, ometre, saltar"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Amb el perfil de treball bloquejat"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Mostra només notificacions noves a la pantalla de bloqueig"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"Després de cada desbloqueig, suprimeix les notificacions existents de la pantalla de bloqueig"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Suprimeix automàticament de la pantalla de bloqueig les notificacions vistes anteriorment"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificacions a la pantalla de bloqueig"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Mostra les converses, predeterminades i silencioses"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostra les converses, predeterminades i silencioses"</string>
@@ -4560,7 +4569,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> aplicació no utilitzada</item>
     </plurals>
     <string name="unused_apps_category" msgid="8954930958175500851">"Configuració d\'apps no utilitzades"</string>
-    <string name="unused_apps_switch" msgid="7595419855882245772">"Posa en pausa activitat a app si no s\'usa"</string>
+    <string name="unused_apps_switch" msgid="7595419855882245772">"Activitat a l\'app en pausa si no s\'usa"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Suprimeix els permisos i els fitxers temporals, i atura les notificacions"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Totes les aplicacions"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Aplicacions instal·lades"</string>
@@ -5918,6 +5927,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Tria un estalvi de pantalla"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Mostra informació addicional"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Mostra informació com ara l\'hora, el temps o altres dades a l\'estalvi de pantalla"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Més opcions de configuració"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Tria l\'estalvi de pantalla"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Tria què vols veure a la pantalla quan la tauleta estigui acoblada. És possible que el dispositiu utilitzi més energia si es fa servir un estalvi de pantalla."</string>
@@ -5928,7 +5941,7 @@
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Reinicia ara"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Reinicia més tard"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Àudio espacial"</string>
-    <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"L\'àudio dels continguts multimèdia compatibles passa a ser més immersiu"</string>
+    <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"L\'àudio dels continguts multimèdia compatibles esdevé més immersiu"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Seguiment del cap"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"L\'àudio canvia a mesura que mous el cap per sonar més natural"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Límit de velocitat de baixada de la xarxa"</string>

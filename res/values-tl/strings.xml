@@ -467,6 +467,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"I-set up ang fingerprint mo"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Payagan ang pag-unlock gamit ang fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Gamitin ang iyong fingerprint"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Matuto pa tungkol sa Pag-unlock Gamit ang Fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Gamitin ang iyong fingerprint para i-unlock ang tablet mo o i-verify na ikaw ito, halimbawa, kapag nagsa-sign in ka sa mga app o nag-aapruba ka ng pagbili."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Gamitin ang iyong fingerprint para i-unlock ang device mo o i-verify na ikaw ito, halimbawa, kapag nagsa-sign in ka sa mga app o nag-aapruba ka ng pagbili."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Gamitin ang iyong fingerprint para i-unlock ang telepono mo o i-verify na ikaw ito, halimbawa, kapag nagsa-sign in ka sa mga app o nag-aapruba ka ng pagbili."</string>
@@ -2089,9 +2090,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Para sa karagdagang seguridad, gamitin ang iyong pattern sa trabaho"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Para sa karagdagang seguridad, ilagay ang iyong PIN sa trabaho"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Para sa karagdagang seguridad, ilagay ang iyong password sa trabaho"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Na-reset sa mga factory setting ang iyong telepono. Ilagay ang dati mong pattern upang magamit ito."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"Na-reset sa mga factory setting ang iyong telepono. Ilagay ang dati mong PIN upang magamit ito."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"Na-reset sa mga factory setting ang iyong telepono. Ilagay ang dati mong password upang magamit ito."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"Na-reset sa mga factory setting ang iyong telepono. Ilagay ang dati mong pattern upang magamit ito."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"Na-reset sa factory setting ang tablet mo. Para magamit itong tablet, ilagay ang pattern mo noon."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"Na-reset sa factory setting ang device mo. Para magamit itong device, ilagay ang pattern mo noon."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"Na-reset sa mga factory setting ang iyong telepono. Ilagay ang dati mong PIN upang magamit ito."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"Na-reset sa factory setting ang tablet mo. Para magamit itong tablet, ilagay ang PIN mo noon."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"Na-reset sa factory setting ang device mo. Para magamit itong device, ilagay ang PIN mo noon."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"Na-reset sa mga factory setting ang iyong telepono. Ilagay ang dati mong password upang magamit ito."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"Na-reset sa factory setting ang tablet mo. Para magamit itong tablet, ilagay ang password mo noon."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"Na-reset sa factory setting ang device mo. Para magamit itong device, ilagay ang password mo noon."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"I-verify ang pattern"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"I-verify ang PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"I-verify ang password"</string>
@@ -2116,6 +2123,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Nangangailangan ng pattern"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Dapat kang kumuha ng pattern upang ma-unlock ang screen"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Gawing nakikita ang pattern"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Pinahusay na privacy ng PIN"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"I-disable ang mga animation habang inilalagay ang PIN"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Gawing nakikita ang pattern ng profile"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Mag-vibrate kapag na-tap"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Instant lock sa power button"</string>
@@ -4063,7 +4072,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Lock screen, Lockscreen, Laktawan, I-bypass"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Kapag naka-lock ang work profile"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Ipakita ang mga bagong notification lang sa lock screen"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"Pagkatapos ng bawat pag-unlock, alisin sa lock screen ang mga kasalukuyang notification"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Awtomatikong alisin ang mga natingnan nang notification sa lock screen"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Mga notification sa lock screen"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Ipakita ang mga pag-uusap, default, at naka-silent"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Ipakita ang mga pag-uusap, default, at naka-silent"</string>
@@ -5918,6 +5927,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Pumili ng screen saver"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Magpakita ng karagdagang impormasyon"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Magpakita ng mga bagay gaya ng oras, lagay ng panahon, o iba pang impormasyon sa screen saver"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Higit pang setting"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Piliin ang iyong screen saver"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Piliin ang makikita mo sa iyong screen kapag naka-dock ang iyong tablet. Posibleng gumamit ng mas maraming enerhiya ang iyong device kapag gumagamit ng screen saver."</string>

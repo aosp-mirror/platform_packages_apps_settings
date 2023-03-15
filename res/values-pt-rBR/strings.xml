@@ -467,6 +467,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Configurar impressão digital"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Permitir Desbloqueio por impressão digital"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Usar a impressão digital"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Saiba mais sobre o Desbloqueio por impressão digital"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Use a impressão digital para desbloquear o tablet ou confirmar sua identidade, como ao fazer login em apps ou aprovar uma compra."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Use a impressão digital para desbloquear o dispositivo ou confirmar sua identidade, como ao fazer login em apps ou aprovar uma compra."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Use a impressão digital para desbloquear o smartphone ou confirmar sua identidade, como ao fazer login em apps ou aprovar uma compra."</string>
@@ -1551,7 +1552,7 @@
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Encaixado na base"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Nunca"</string>
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Ativada / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
-    <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Desativado"</string>
+    <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Desativada"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Quando começar"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Protetor de tela atual"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Brilho automático"</string>
@@ -2089,9 +2090,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Para aumentar a segurança, use o padrão de trabalho"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Para aumentar a segurança, digite o PIN de trabalho"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Para aumentar a segurança, digite a senha de trabalho"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Seu smartphone foi redefinido para a configuração original. Para usá-lo, digite seu padrão anterior."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"Seu smartphone foi redefinido para a configuração original. Para usá-lo, digite seu PIN anterior."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"Seu smartphone foi redefinido para a configuração original. Para usá-lo, digite sua senha anterior."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"Seu smartphone foi redefinido para a configuração original. Para usá-lo, digite seu padrão anterior."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"O tablet foi redefinido para as configurações originais. Para usá-lo, insira o padrão anterior."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"O dispositivo foi redefinido para as configurações originais. Para usá-lo, insira o padrão anterior."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"Seu smartphone foi redefinido para a configuração original. Para usá-lo, digite seu PIN anterior."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"O tablet foi redefinido para as configurações originais. Para usá-lo, insira o PIN anterior."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"O dispositivo foi redefinido para as configurações originais. Para usá-lo, insira o PIN anterior."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"Seu smartphone foi redefinido para a configuração original. Para usá-lo, digite sua senha anterior."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"O tablet foi redefinido para as configurações originais. Para usá-lo, insira a senha anterior."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"O dispositivo foi redefinido para as configurações originais. Para usá-lo, insira a senha anterior."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Verificar padrão"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Verificar PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Verificar senha"</string>
@@ -2116,6 +2123,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Exigir padrão"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"É necessário desenhar o padrão para desbloquear a tela"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Tornar o padrão visível"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Privacidade de PIN melhorada"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Desativar animações ao inserir o PIN"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Tornar o padrão de perfil visível"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibrar ao tocar"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Bloquear com botão liga/desliga"</string>
@@ -4063,7 +4072,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Bloquear tela, tela de bloqueio, pular, ignorar"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Quando o perfil de trabalho está bloqueado"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Mostrar somente notificações novas na tela de bloqueio"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"Após cada desbloqueio, as notificações são removidas da tela de bloqueio"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Remover automaticamente da tela de bloqueio as notificações visualizadas anteriormente"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificações na tela de bloqueio"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Mostrar conversas, padrão e silenciosas"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostrar conversas, padrão e silenciosas"</string>
@@ -5918,6 +5927,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Escolher um protetor de tela"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Mostrar outras informações"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Mostra dados como o horário, o clima ou outras informações no protetor de tela"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Mais configurações"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Escolha o protetor de tela"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Escolha o que ver na tela quando o tablet estiver na base. O dispositivo pode consumir mais energia quando o protetor de tela é usado."</string>

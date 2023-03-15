@@ -467,6 +467,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Siapkan sidik jari Anda"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Izinkan buka kunci dengan sidik jari"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Menggunakan sidik jari"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Pelajari Buka dengan Sidik Jari lebih lanjut"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Gunakan sidik jari untuk membuka kunci tablet atau memverifikasi diri Anda, misalnya saat login ke aplikasi atau menyetujui pembelian."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Gunakan sidik jari untuk membuka kunci perangkat atau memverifikasi diri Anda, seperti saat login ke aplikasi atau menyetujui pembelian."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Gunakan sidik jari untuk membuka kunci ponsel atau memverifikasi diri Anda, seperti saat login ke aplikasi atau menyetujui pembelian."</string>
@@ -2089,9 +2090,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Untuk keamanan tambahan, gunakan pola profil kerja"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Untuk keamanan tambahan, masukkan PIN profil kerja"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Untuk keamanan tambahan, masukkan sandi profil kerja"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Ponsel telah direset ke setelan pabrik. Masukkan pola sebelumnya untuk menggunakan ponsel."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"Ponsel telah direset ke setelan pabrik. Masukkan PIN sebelumnya untuk menggunakan ponsel."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"Ponsel telah direset ke setelan pabrik. Masukkan sandi sebelumnya untuk menggunakan ponsel."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"Ponsel telah direset ke setelan pabrik. Masukkan pola sebelumnya untuk menggunakan ponsel."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"Tablet direset ke setelan pabrik. Untuk menggunakan tablet ini, masukkan pola sebelumnya."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"Perangkat direset ke setelan pabrik. Untuk menggunakan perangkat ini, masukkan pola sebelumnya."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"Ponsel telah direset ke setelan pabrik. Masukkan PIN sebelumnya untuk menggunakan ponsel."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"Tablet direset ke setelan pabrik. Untuk menggunakan tablet ini, masukkan PIN sebelumnya."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"Perangkat direset ke setelan pabrik. Untuk menggunakan perangkat ini, masukkan PIN sebelumnya."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"Ponsel telah direset ke setelan pabrik. Masukkan sandi sebelumnya untuk menggunakan ponsel."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"Tablet direset ke setelan pabrik. Untuk menggunakan tablet ini, masukkan sandi sebelumnya."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"Perangkat direset ke setelan pabrik. Untuk menggunakan perangkat ini, masukkan sandi sebelumnya."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Verifikasi pola"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Verifikasi PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Verifikasi sandi"</string>
@@ -2116,6 +2123,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Memerlukan pola"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Harus membuat pola untuk membuka layar"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Perlihatkan pola"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Privasi PIN yang ditingkatkan"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Nonaktifkan animasi saat memasukkan PIN"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Perlihatkan pola profil"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Bergetar saat diketuk"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Tombol daya langsung mengunci"</string>
@@ -4063,7 +4072,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Layar kunci, Layar kunci, Lewati, Abaikan"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Saat profil kerja dikunci"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Hanya tampilkan notifikasi baru di layar kunci"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"Setelah membuka kunci, hapus notifikasi yang ada dari layar kunci"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Otomatis hapus notifikasi yang telah dilihat sebelumnya dari layar kunci"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notifikasi di layar kunci"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Menampilkan percakapan, default, dan senyap"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Menampilkan percakapan, default, dan senyap"</string>
@@ -4561,7 +4570,7 @@
     </plurals>
     <string name="unused_apps_category" msgid="8954930958175500851">"Setelan aplikasi yang tidak digunakan"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"Jeda aktivitas aplikasi jika tak dipakai"</string>
-    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Menghapus izin dan file sementara, serta menghentikan notifikasi"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Hapus izin dan file sementara, serta hentikan notifikasi"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Semua aplikasi"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Aplikasi terinstal"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Aplikasi instan"</string>
@@ -4588,7 +4597,7 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikasi membuka link yang didukung</item>
       <item quantity="one">1 aplikasi membuka link yang didukung</item>
     </plurals>
-    <string name="app_link_open_always" msgid="9167065494930657503">"Mengizinkan aplikasi membuka link yang didukung"</string>
+    <string name="app_link_open_always" msgid="9167065494930657503">"Izinkan aplikasi membuka link yang didukung"</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"Selalu tanya"</string>
     <string name="app_link_open_never" msgid="5299808605386052350">"Jangan izinkan aplikasi membuka link"</string>
     <plurals name="app_link_open_always_summary" formatted="false" msgid="1816161439007251694">
@@ -5918,6 +5927,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Pilih screensaver"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Tampilkan informasi tambahan"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Tampilkan berbagai informasi seperti waktu, cuaca, dan lainnya di screen saver"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Setelan lainnya"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Pilih screensaver"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Pilih screensaver yang akan ditampilkan di layar saat tablet dipasang ke dok. Perangkat Anda mungkin menggunakan lebih banyak daya saat screensaver digunakan."</string>

@@ -475,6 +475,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Добавьте отпечаток пальца"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Разблокировка по отпечатку"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Сканер отпечатков пальцев"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Подробнее о разблокировке по отпечатку пальца"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Используйте отпечаток пальца, чтобы разблокировать планшет или подтверждать свою личность, например для входа в приложения или одобрения покупок."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Используйте отпечаток пальца, чтобы снимать блокировку устройства или подтверждать свою личность, например для входа в приложения и одобрения покупок."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Используйте отпечаток пальца, чтобы разблокировать телефон или подтверждать свою личность, например для входа в приложения или одобрения покупок."</string>
@@ -2133,9 +2134,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Укажите графический ключ от рабочего профиля"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Для дополнительной защиты введите PIN-код рабочего профиля."</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Введите пароль от рабочего профиля"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Настройки вашего телефона были сброшены. Чтобы использовать его, введите свой прежний графический ключ."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"Настройки вашего телефона были сброшены. Чтобы использовать его, введите свой прежний PIN-код."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"Настройки вашего телефона были сброшены. Чтобы использовать его, введите свой прежний пароль."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"Настройки вашего телефона были сброшены. Чтобы использовать его, введите свой прежний графический ключ."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"Настройки планшета были сброшены. Чтобы использовать его, введите прежний графический ключ."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"Настройки устройства были сброшены. Чтобы использовать его, введите прежний графический ключ."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"Настройки вашего телефона были сброшены. Чтобы использовать его, введите свой прежний PIN-код."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"Настройки планшета были сброшены. Чтобы использовать его, введите свой прежний PIN-код."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"Настройки устройства были сброшены. Чтобы использовать его, введите свой прежний PIN-код."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"Настройки вашего телефона были сброшены. Чтобы использовать его, введите свой прежний пароль."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"Настройки планшета были сброшены. Чтобы использовать его, введите свой прежний пароль."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"Настройки устройства были сброшены. Чтобы использовать его, введите свой прежний пароль."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Подтверждение графического ключа"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Подтверждение PIN-кода"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Подтверждение пароля"</string>
@@ -2160,6 +2167,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Запрашивать ключ"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Использовать графический ключ для защиты телефона"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Показывать ключ"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Повышенная конфиденциальность PIN-кода"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Отключить анимации при вводе PIN-кода"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Показывать графический ключ"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Виброотклик"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Блокировать кнопкой питания"</string>
@@ -4149,7 +4158,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Заблокированный экран, пропустить, перейти"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Рабочий профиль заблокирован"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Только новые уведомления на заблокированном экране"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"При каждой разблокировке устройства удалять уведомления с заблокированного экрана"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Автоматически удалять просмотренные уведомления с заблокированного экрана"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Уведомления на заблок. экране"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Показывать все"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Показывать все"</string>
@@ -5103,7 +5112,7 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Включить"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Отключить сейчас"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Режим экономии заряда отключен"</string>
-    <string name="app_battery_usage_title" msgid="346558380609793334">"Расход заряда батареи для приложений"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Расход заряда батареи приложениями"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Настройка расхода заряда батареи для приложений"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Без ограничений"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Оптимально"</string>
@@ -5931,7 +5940,7 @@
     <string name="calls_sms_preferred" msgid="6016477652522583496">"предпочтительно"</string>
     <string name="calls_sms_calls_preferred" msgid="9004261125829377885">"Для звонков"</string>
     <string name="calls_sms_sms_preferred" msgid="3855778890660922711">"Для SMS"</string>
-    <string name="calls_sms_unavailable" msgid="4055729705246556529">"Недоступно"</string>
+    <string name="calls_sms_unavailable" msgid="4055729705246556529">"недоступно"</string>
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Временно недоступно"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"Нет SIM-карты"</string>
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"Настройки подключения"</string>
@@ -6094,6 +6103,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Выберите заставку"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Показывать дополнительную информацию"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Показывать время, погоду и другую информацию поверх заставки"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Дополнительные настройки"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Выберите заставку"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Выберите, что будет показано на экране, когда планшет подключен к док-станции. Устройство может потреблять больше энергии, если включена заставка."</string>

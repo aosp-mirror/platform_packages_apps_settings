@@ -467,6 +467,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"지문 설정"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"지문 잠금 해제 허용"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"지문 사용"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"지문 잠금 해제에 관해 자세히 알아보기"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"지문을 사용하여 태블릿을 잠금 해제하거나 앱 로그인 또는 구매 승인 등을 위해 본인 인증을 할 수 있습니다."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"기기를 잠금 해제하거나 앱 로그인 또는 구매 승인 등을 위해 본인을 인증할 때 지문을 사용하세요."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"지문을 사용하여 휴대전화를 잠금 해제하거나 앱 로그인 또는 구매 승인 등을 위해 본인을 인증하세요."</string>
@@ -2089,9 +2090,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"보안을 강화하려면 직장 패턴을 사용하세요."</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"보안을 강화하려면 직장 PIN을 사용하세요."</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"보안을 강화하려면 직장 비밀번호를 입력하세요."</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"휴대전화가 초기화되었습니다. 이 기기를 사용하려면 이전 패턴을 입력하세요."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"휴대전화가 초기화되었습니다. 이 기기를 사용하려면 이전 PIN을 입력하세요."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"휴대전화가 초기화되었습니다. 이 기기를 사용하려면 이전 비밀번호를 입력하세요."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"휴대전화가 초기화되었습니다. 이 기기를 사용하려면 이전 패턴을 입력하세요."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"태블릿이 기본 설정으로 초기화되었습니다. 이 태블릿을 사용하려면 이전 패턴을 입력하세요."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"기기가 기본 설정으로 초기화되었습니다. 이 기기를 사용하려면 이전 패턴을 입력하세요."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"휴대전화가 초기화되었습니다. 이 기기를 사용하려면 이전 PIN을 입력하세요."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"태블릿이 기본 설정으로 초기화되었습니다. 이 태블릿을 사용하려면 이전 PIN을 입력하세요."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"기기가 기본 설정으로 초기화되었습니다. 이 기기를 사용하려면 이전 PIN을 입력하세요."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"휴대전화가 초기화되었습니다. 이 기기를 사용하려면 이전 비밀번호를 입력하세요."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"태블릿이 기본 설정으로 초기화되었습니다. 이 태블릿을 사용하려면 이전 비밀번호를 입력하세요."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"기기가 기본 설정으로 초기화되었습니다. 이 기기를 사용하려면 이전 비밀번호를 입력하세요."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"패턴 확인"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"PIN 확인"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"비밀번호 확인"</string>
@@ -2116,6 +2123,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"패턴 설정"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"화면 잠금을 해제하려면 패턴을 그려야 합니다."</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"패턴 표시"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"향상된 PIN 개인 정보 보호"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"PIN 입력 시 애니메이션 사용 중지"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"프로필 패턴 표시"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"탭하면 진동"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"전원 버튼 즉시 잠금"</string>
@@ -2903,7 +2912,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"이 앱이 백그라운드에서 배터리를 사용할 수 있게 되며 배터리가 예상보다 빨리 소진될 수 있습니다."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"삭제"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"취소"</string>
-    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"완충"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"완충하기"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"앱의 배터리 사용량이 평소와 같습니다. 앱에서 배터리를 너무 많이 사용하면 휴대전화에서 취하실 수 있는 조치를 알려 드리겠습니다.\n\n배터리가 부족하면 언제든지 절전 모드를 사용 설정하세요."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"앱의 배터리 사용량이 평소와 같습니다. 앱에서 배터리를 너무 많이 사용하면 태블릿에서 취하실 수 있는 조치를 알려 드리겠습니다.\n\n배터리가 부족하면 언제든지 절전 모드를 사용 설정하세요."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"앱의 배터리 사용량이 평소와 같습니다. 앱에서 배터리를 너무 많이 사용하면 기기에서 취하실 수 있는 조치를 알려 드리겠습니다.\n\n배터리가 부족하면 언제든지 절전 모드를 사용 설정하세요."</string>
@@ -4063,7 +4072,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"잠금 화면, 잠금화면, 건너뛰기, 우회"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"직장 프로필이 잠긴 경우"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"잠금 화면에 새 알림만 표시"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"잠금을 해제할 때마다 잠금 화면에서 기존 알림 삭제"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"잠금 화면에서 이미 본 알림 자동으로 삭제"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"잠금 화면에 표시할 알림"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"대화, 기본 및 무음 알림 표시"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"모든 대화와 기본 및 무음 알림 표시"</string>
@@ -5856,7 +5865,7 @@
     <string name="camera_toggle_title" msgid="8952668677727244992">"카메라 액세스"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"마이크 액세스"</string>
     <string name="location_toggle_title" msgid="5229867700421750868">"위치 정보 액세스"</string>
-    <string name="perm_toggle_description" msgid="5754629581767319022">"앱 및 서비스의 경우"</string>
+    <string name="perm_toggle_description" msgid="5754629581767319022">"앱 및 서비스에 적용"</string>
     <string name="mic_toggle_description" msgid="484139688645092237">"앱 및 서비스에 적용. 설정이 꺼져 있어도 긴급 전화번호로 전화를 걸 때 마이크 데이터가 공유될 수 있습니다."</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"이전"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"다음"</string>
@@ -5918,6 +5927,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"화면 보호기 선택"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"추가 정보 표시"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"시간, 날씨 또는 기타 정보를 화면 보호기에 표시"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"설정 더보기"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"화면 보호기 선택"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"태블릿이 도킹되었을 때 화면에 표시할 항목을 선택하세요. 화면 보호기를 사용하면 기기에서 더 많은 에너지를 사용할 수 있습니다."</string>

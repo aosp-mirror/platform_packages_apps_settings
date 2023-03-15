@@ -467,6 +467,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Configura a impresión dixital"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Permitir desbloqueo dactilar"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Usa a túa impresión dixital"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Máis información sobre o desbloqueo dactilar"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Utiliza a impresión dixital para desbloquear a tableta ou verificar a túa identidade (por exemplo, cando queiras iniciar sesión nunha aplicación ou aprobar unha compra)."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Utiliza a impresión dixital para desbloquear o dispositivo ou verificar a túa identidade (por exemplo, cando queiras iniciar sesión nunha aplicación ou aprobar unha compra)."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Utiliza a impresión dixital para desbloquear o teléfono ou verificar a túa identidade (por exemplo, cando queiras iniciar sesión nunha aplicación ou aprobar unha compra)."</string>
@@ -2089,9 +2090,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Utiliza o padrón do traballo para conseguir unha maior seguranza"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Introduce o PIN do traballo para conseguir unha maior seguranza"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Introduce o contrasinal do traballo para conseguir unha maior seguranza"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Restableceuse a configuración de fábrica do teléfono. Introduce o padrón anterior."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"Restableceuse a configuración de fábrica do teléfono. Introduce o PIN anterior."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"Restableceuse a configuración de fábrica do teléfono. Introduce o contrasinal anterior."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"Restableceuse a configuración de fábrica do teléfono. Introduce o padrón anterior."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"Restableceuse a configuración de fábrica da tableta. Para usala, insire o padrón antigo."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"Restableceuse a configuración de fábrica do dispositivo. Para usalo, insire o padrón antigo."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"Restableceuse a configuración de fábrica do teléfono. Introduce o PIN anterior."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"Restableceuse a configuración de fábrica da tableta. Para usala, insire o PIN antigo."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"Restableceuse a configuración de fábrica do dispositivo. Para usalo, insire o PIN antigo."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"Restableceuse a configuración de fábrica do teléfono. Introduce o contrasinal anterior."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"Restableceuse a configuración de fábrica da tableta. Para usala, insire o contrasinal antigo."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"Restableceuse a configuración de fábrica do dispositivo. Para usalo, insire o contrasinal antigo."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Verifica o padrón"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Verifica o PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Verifica o contrasinal"</string>
@@ -2116,6 +2123,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Padrón obrigatorio"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Debes debuxar o padrón para desbloquear a pantalla"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Facer visible o padrón"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Privacidade do PIN mellorada"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Desactiva as animacións mentres metes o PIN"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Facer visible o padrón do perfil"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibrar ao tocar"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Bloquear co botón de acender"</string>
@@ -4063,7 +4072,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Pantalla de bloqueo, bloquear pantalla, omitir, saltar"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Perfil de traballo bloqueado"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Mostrar só notificacións novas na pantalla de bloqueo"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"Despois de cada desbloqueo, quitaranse as notificacións da pantalla de bloqueo"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Quita automaticamente da pantalla de bloqueo as notificacións que xa viches"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificacións na pantalla de bloqueo"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Mostra conversas predeterminadas e silenciadas"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostrar conversas predeterminadas e silenciadas"</string>
@@ -4560,7 +4569,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> aplicación que non se usa</item>
     </plurals>
     <string name="unused_apps_category" msgid="8954930958175500851">"Configuración das aplicacións sen uso"</string>
-    <string name="unused_apps_switch" msgid="7595419855882245772">"Pór en pausa actividade de apps sen uso"</string>
+    <string name="unused_apps_switch" msgid="7595419855882245772">"Pór en pausa actividade da aplicación se non se usa"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Quita permisos, elimina ficheiros temporais e detén as notificacións"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Todas as aplicacións"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Aplicacións instaladas"</string>
@@ -4959,7 +4968,7 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Activar agora"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Desactivar agora"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Sen usar optimización da batería"</string>
-    <string name="app_battery_usage_title" msgid="346558380609793334">"Uso da batería para as aplicacións"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Uso da batería pola aplicación"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Define o uso da batería para as aplicacións"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Sen restricións"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimizada"</string>
@@ -5918,6 +5927,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Escolle un protector de pantalla"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Mostrar información adicional"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Mostra a hora, o tempo ou outra información no protector de pantalla"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Máis opcións de configuración"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Escolle o protector de pantalla"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Escolle o que aparecerá na pantalla cando a tableta estea na súa base. Pode que o dispositivo utilice máis enerxía se se usa un protector de pantalla."</string>
