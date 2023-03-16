@@ -72,24 +72,28 @@ public class NewKeyboardSettingsUtils {
     }
 
     static class KeyboardInfo {
-        String mLanguage;
+        CharSequence mSubtypeLabel;
         String mLayout;
         InputMethodInfo mInputMethodInfo;
         InputMethodSubtype mInputMethodSubtype;
 
         KeyboardInfo(
-                String language,
+                CharSequence subtypeLabel,
                 String layout,
                 InputMethodInfo inputMethodInfo,
                 InputMethodSubtype inputMethodSubtype) {
-            mLanguage = language;
+            mSubtypeLabel = subtypeLabel;
             mLayout = layout;
             mInputMethodInfo = inputMethodInfo;
             mInputMethodSubtype = inputMethodSubtype;
         }
 
-        String getLanguage() {
-            return mLanguage;
+        String getPrefId() {
+            return mInputMethodInfo.getId() + "_" + mInputMethodSubtype.hashCode();
+        }
+
+        CharSequence getSubtypeLabel() {
+            return mSubtypeLabel;
         }
 
         String getLayout() {

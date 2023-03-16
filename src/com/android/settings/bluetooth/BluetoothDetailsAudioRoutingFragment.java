@@ -20,6 +20,7 @@ import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 import static com.android.settings.bluetooth.BluetoothDeviceDetailsFragment.KEY_DEVICE_ADDRESS;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.util.Log;
@@ -32,10 +33,8 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.search.SearchIndexable;
 
 /** Settings fragment containing bluetooth audio routing. */
-@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class BluetoothDetailsAudioRoutingFragment extends RestrictedDashboardFragment {
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -73,8 +72,7 @@ public class BluetoothDetailsAudioRoutingFragment extends RestrictedDashboardFra
 
     @Override
     public int getMetricsCategory() {
-        // TODO(b/262839191): To be updated settings_enums.proto
-        return 0;
+        return SettingsEnums.BLUETOOTH_AUDIO_ROUTING;
     }
 
     @Override
