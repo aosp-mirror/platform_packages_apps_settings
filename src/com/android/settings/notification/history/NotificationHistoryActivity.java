@@ -78,6 +78,7 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
     // R.integer.config_notificationServiceArchiveSize, which is the Number of notifications kept
     // in the notification service historical archive
     private static final int MAX_RECENT_DISMISS_ITEM_COUNT = 50;
+    private static final int HISTORY_HOURS = 24;
 
     private ViewGroup mHistoryOn;
     private ViewGroup mHistoryOff;
@@ -243,6 +244,8 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
         mHistoryOn = findViewById(R.id.history_on);
         mHistoryEmpty = findViewById(R.id.history_on_empty);
         mSwitchBar = findViewById(R.id.main_switch_bar);
+        ((TextView) findViewById(R.id.today_header)).setText(
+                getString(R.string.notification_history_today, HISTORY_HOURS));
 
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
