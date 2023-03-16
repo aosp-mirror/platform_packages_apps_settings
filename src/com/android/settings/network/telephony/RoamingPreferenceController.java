@@ -81,7 +81,7 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
         super(context, key);
         mSubId = subId;
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
-        mMobileNetworkRepository = MobileNetworkRepository.createBySubId(context, this, mSubId);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         mLifecycleOwner = lifecycleOwner;
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -100,7 +100,8 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
 
     @OnLifecycleEvent(ON_START)
     public void onStart() {
-        mMobileNetworkRepository.addRegister(mLifecycleOwner);
+        mMobileNetworkRepository.addRegister(mLifecycleOwner, this, mSubId);
+        mMobileNetworkRepository.updateEntity();
         if (mListener == null) {
             mListener = new GlobalSettingsChangeListener(mContext,
                     Settings.Global.DATA_ROAMING) {
@@ -126,7 +127,7 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
-        mMobileNetworkRepository.removeRegister();
+        mMobileNetworkRepository.removeRegister(this);
         stopMonitor();
         stopMonitorSubIdSpecific();
     }
