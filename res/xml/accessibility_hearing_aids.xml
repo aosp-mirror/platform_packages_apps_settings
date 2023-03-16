@@ -19,6 +19,9 @@
     android:key="accessibility_hearing_devices_screen"
     android:title="@string/accessibility_hearingaid_title">
 
+    <com.android.settingslib.widget.TopIntroPreference
+        android:title="@string/accessibility_hearingaid_intro" />
+
     <PreferenceCategory
         android:key="available_hearing_devices"
         android:title="@string/accessibility_hearing_device_connected_title"
@@ -40,8 +43,8 @@
         settings:controller="com.android.settings.accessibility.SavedHearingDevicePreferenceController"/>
 
     <PreferenceCategory
-        android:key="device_control_category"
-        android:title="@string/accessibility_hearing_device_control">
+        android:key="hearing_options_category"
+        android:title="@string/accessibility_screen_option">
         <SwitchPreference
             android:key="hearing_aid_compatibility"
             android:title="@string/accessibility_hac_mode_title"
