@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
@@ -72,8 +73,7 @@ public class AccessibilityHearingAidsFragment extends AccessibilityShortcutPrefe
 
     @Override
     public int getMetricsCategory() {
-        // TODO(b/262839191): To be updated settings_enums.proto
-        return 0;
+        return SettingsEnums.ACCESSIBILITY_HEARING_AID_SETTINGS;
     }
 
     @Override
