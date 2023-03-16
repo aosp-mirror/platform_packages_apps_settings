@@ -106,10 +106,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Kanselleer"</string>
     <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Aktiveer Bluetooth LE Audio"</string>
     <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Aktiveer Bluetooth LE Audio-kenmerk as die toestel LE Audio-hardewarevermoëns ondersteun."</string>
-    <!-- no translation found for bluetooth_enable_leaudio_allow_list (1692999156437357534) -->
-    <skip />
-    <!-- no translation found for bluetooth_enable_leaudio_allow_list_summary (725601205276008525) -->
-    <skip />
+    <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Aktiveer Bluetooth LE-oudiotoelaatlys"</string>
+    <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Aktiveer Bluetooth LE-oudiotoelaatlyskenmerk."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Mediatoestelle"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Oproeptoestelle"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Ander toestelle"</string>
@@ -166,16 +164,11 @@
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Jou stelsel, programme en webwerwe gebruik die eerste gesteunde taal uit jou voorkeurtale."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Gaan na programtaalinstellings vir elke program om ’n taal te kies."</string>
     <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Kom meer te wete oor tale"</string>
-    <!-- no translation found for title_change_system_locale (8589844586256566951) -->
-    <skip />
-    <!-- no translation found for desc_notice_device_locale_settings_change (8311132485850714160) -->
-    <skip />
-    <!-- no translation found for button_label_confirmation_of_system_locale_change (5593798559604894733) -->
-    <skip />
-    <!-- no translation found for title_unavailable_locale (2628898110416542386) -->
-    <skip />
-    <!-- no translation found for desc_unavailable_locale (2201756477400935896) -->
-    <skip />
+    <string name="title_change_system_locale" msgid="8589844586256566951">"Verander stelseltaal na %s ?"</string>
+    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Jou toestelinstellings en streeksvoorkeure sal verander."</string>
+    <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Verander"</string>
+    <string name="title_unavailable_locale" msgid="2628898110416542386">"%s is nie beskikbaar nie"</string>
+    <string name="desc_unavailable_locale" msgid="2201756477400935896">"Hierdie taal kan nie as ’n stelseltaal gebruik word nie, maar jy het apps en webwerwe ingelig dat jy hierdie taal verkies."</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Streeksvoorkeure"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Stel eenheid- en nommervoorkeure"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Lig apps in oor jou streekvoorkeure sodat hulle jou ervaring kan personaliseer."</string>
@@ -881,6 +874,16 @@
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Brei versoenbaarheid uit"</string>
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Help ander toestelle om hierdie warmkol te kry. Verminder warmkol se verbindingspoed."</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Help ander toestelle om hierdie warmkol te kry. Verhoog batterygebruik."</string>
+    <!-- no translation found for wifi_hotspot_speed_title (8629448084180512685) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_summary (6727230647098551051) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_5g_summary (5009644494425227175) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_6g_summary (1504496768686645945) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_and_5g_summary (2392283008301109037) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Skakel tans Wi-Fi-warmkol aan..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Skakel tans Wi-Fi-warmkol af..."</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Verbinding is nie beskikbaar nie"</string>
@@ -2169,7 +2172,6 @@
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Kanselleer"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Laai tot vol"</string>
     <string name="battery_tip_incompatible_charging_title" msgid="5120763575150751300">"Kwessie met laaibykomstigheid"</string>
-    <string name="battery_tip_incompatible_charging_message" msgid="8812537213731730513">"Battery laai stadig of wil nie laai nie. Kyk of die kabel en kragprop met jou foon werk"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"Kom meer te wete oor onversoenbare laaiproses"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Batterybestuurder"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Bestuur programme outomaties"</string>
@@ -4066,7 +4068,8 @@
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Wi-Fi-beheer"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Laat program toe om Wi-Fi te beheer"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Laat hierdie program toe om Wi-Fi aan of af te skakel, Wi-Fi-netwerke te soek en aan hulle te koppel, netwerke by te voeg en te verwyder, en om \'n slegsplaaslike warmkol te begin"</string>
-    <string name="change_nfc_tag_apps_title" msgid="8720243766338657008">"NFC-begin"</string>
+    <!-- no translation found for change_nfc_tag_apps_title (91514009058149617) -->
+    <skip />
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"Laat toe dat dit met NFC-skandering begin"</string>
     <string name="change_nfc_tag_apps_detail_summary" msgid="7083666814715607078">"Laat hierdie app toe om te begin wanneer ’n NFC-merker geskandeer word.\nAs hierdie toestemming aan is, sal die app as ’n opsie beskikbaar wees elke keer wanneer ’n merker bespeur word."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Speel media na"</string>
@@ -4547,6 +4550,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Kies \'n sluimerskerm"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Wys bykomende inligting"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Wys goed soos die tyd, weer of ander inligting op die sluimerskerm"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Nog instellings"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Kies jou sluimerskerm"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Kies wat jy op jou skerm sal sien wanneer jou tablet gedok is. Jou toestel kan meer energie gebruik wanneer ’n sluimerskerm gebruik word."</string>
