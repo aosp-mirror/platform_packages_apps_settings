@@ -57,7 +57,9 @@ public class AutoBrightnessPreferenceController extends TogglePreferenceControll
 
     @Override
     public CharSequence getSummary() {
-        return mContext.getText(isChecked() ? R.string.on : R.string.off);
+        return mContext.getText(isChecked()
+                ? R.string.auto_brightness_summary_on
+                : R.string.auto_brightness_summary_off);
     }
 
     @Override

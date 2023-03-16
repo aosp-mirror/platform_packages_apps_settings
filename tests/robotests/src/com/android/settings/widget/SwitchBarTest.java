@@ -55,8 +55,8 @@ public class SwitchBarTest {
 
     @Test
     public void cycleChecked_defaultLabel_shouldUpdateTextAndBackground() {
-        final int defaultOnText = R.string.on;
-        final int defaultOffText = R.string.off;
+        final int defaultOnText = R.string.switch_on_text;
+        final int defaultOffText = R.string.switch_off_text;
 
         assertThat(((TextView) mBar.findViewById(R.id.switch_text)).getText())
                 .isEqualTo(mContext.getString(defaultOffText));

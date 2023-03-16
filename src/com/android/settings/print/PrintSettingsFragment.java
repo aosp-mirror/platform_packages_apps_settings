@@ -204,9 +204,9 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
                 preference.setPersistent(false);
 
                 if (service.isEnabled()) {
-                    preference.setSummary(getString(R.string.on));
+                    preference.setSummary(getString(R.string.print_feature_state_on));
                 } else {
-                    preference.setSummary(getString(R.string.off));
+                    preference.setSummary(getString(R.string.print_feature_state_off));
                 }
 
                 Drawable drawable = service.getResolveInfo().loadIcon(pm);

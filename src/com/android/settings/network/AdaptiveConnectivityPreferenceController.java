@@ -48,7 +48,7 @@ public class AdaptiveConnectivityPreferenceController extends BasePreferenceCont
     public CharSequence getSummary() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED, 1) == 1
-                ? mContext.getString(R.string.on)
-                : mContext.getString(R.string.off);
+                ? mContext.getString(R.string.adaptive_connectivity_switch_on)
+                : mContext.getString(R.string.adaptive_connectivity_switch_off);
     }
 }
