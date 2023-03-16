@@ -23,6 +23,7 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.internal.app.LocaleHelper;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -53,9 +54,8 @@ public class NumberingPreferencesFragment  extends DashboardFragment {
                 Log.w(getLogTag(), "No selected language.");
                 return "";
             }
-            return Locale.forLanguageTag(selectedLanguage)
-                    .stripExtensions()
-                    .getDisplayName(Locale.forLanguageTag(selectedLanguage));
+            Locale locale = Locale.forLanguageTag(selectedLanguage);
+            return LocaleHelper.getDisplayName(locale.stripExtensions(), locale, true);
         }
         Log.w(getLogTag(), "Incorrect option : " + option);
         return "";
