@@ -76,7 +76,7 @@ public class ScreenPinningPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getString(R.string.off));
+                .isEqualTo(mContext.getString(R.string.switch_off_text));
     }
 
     @Test
@@ -87,7 +87,7 @@ public class ScreenPinningPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getString(R.string.on));
+                .isEqualTo(mContext.getString(R.string.switch_on_text));
     }
 
     @Test
