@@ -467,6 +467,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"設定指紋"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"允許使用指紋解鎖"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"使用您的指紋"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"進一步瞭解「指紋解鎖」"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"使用指紋解鎖平板電腦或驗證身分，例如用來登入應用程式或核准購買交易"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"使用指紋解鎖裝置或驗證身分，例如用來登入應用程式或核准購買交易"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"使用指紋解鎖手機或驗證身分，例如用來登入應用程式或核准購買交易"</string>
@@ -2090,9 +2091,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"為提升安全性，請畫出您的工作設定檔上鎖圖案"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"為提升安全性，請輸入您的工作設定檔 PIN"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"為提升安全性，請輸入您的工作設定檔密碼"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"您的手機已回復原廠設定。如要使用這部手機，請畫出先前的上鎖圖案。"</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"您的手機已回復原廠設定。如要使用這部手機，請輸入先前的 PIN。"</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"您的手機已回復原廠設定。如要使用這部手機，請輸入先前的密碼。"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"您的手機已回復原廠設定。如要使用這部手機，請畫出先前的上鎖圖案。"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"您的平板電腦已回復原廠設定。如要使用此平板電腦，請畫出先前的上鎖圖案。"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"您的裝置已回復原廠設定。如要使用此裝置，請畫出先前的上鎖圖案。"</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"您的手機已回復原廠設定。如要使用這部手機，請輸入先前的 PIN。"</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"您的平板電腦已回復原廠設定。如要使用此平板電腦，請輸入先前的 PIN。"</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"您的裝置已回復原廠設定。如要使用此裝置，請輸入先前的 PIN。"</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"您的手機已回復原廠設定。如要使用這部手機，請輸入先前的密碼。"</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"您的平板電腦已回復原廠設定。如要使用此平板電腦，請輸入先前的密碼。"</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"您的裝置已回復原廠設定。如要使用此裝置，請輸入先前的密碼。"</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"驗證上鎖圖案"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"驗證 PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"驗證密碼"</string>
@@ -2117,6 +2124,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"需要解鎖圖案"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"必須畫出圖案來為螢幕解鎖"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"顯示解鎖圖案"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"進階 PIN 私隱保護"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"輸入 PIN 時停用動畫"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"顯示設定檔的解鎖圖案"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"輕按時震動"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"按開關按鈕立即上鎖"</string>
@@ -4064,7 +4073,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"上鎖畫面, 鎖定螢幕, 略過, 繞過"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"當工作設定檔被鎖定時"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"在上鎖畫面上只顯示新通知"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"每次解鎖後，系統就會移除上鎖畫面上的現有通知"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"自動移除上鎖畫面上先前查看過的通知"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"上鎖畫面上的通知"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"顯示對話通知、預設通知和已靜音通知"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"顯示預設對話和靜音對話"</string>
@@ -4561,7 +4570,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 個不使用的應用程式</item>
     </plurals>
     <string name="unused_apps_category" msgid="8954930958175500851">"未使用的應用程式設定"</string>
-    <string name="unused_apps_switch" msgid="7595419855882245772">"如果未使用就暫停應用程式活動"</string>
+    <string name="unused_apps_switch" msgid="7595419855882245772">"暫停未使用應用程式的活動"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"移除權限、刪除暫存檔案和停止通知"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"所有應用程式"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"已安裝的應用程式"</string>
@@ -5919,6 +5928,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"選擇螢幕保護程式"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"顯示其他資訊"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"在螢幕保護程式顯示時間、天氣或其他資訊"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"更多設定"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"選擇螢幕保護程式"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"選擇平板電腦放上插座時螢幕上顯示的內容。如果裝置使用螢幕保護程式，可能會比較耗電。"</string>

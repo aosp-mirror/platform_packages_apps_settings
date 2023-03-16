@@ -471,6 +471,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"הגדרת טביעת האצבע"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"הרשאה לבטל נעילה בטביעת אצבע"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"שימוש בטביעת האצבע"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"מידע נוסף על ביטול הנעילה בטביעת אצבע"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"אפשר להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטאבלט או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות או באישור רכישה."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"אפשר להשתמש בטביעת האצבע כדי לבטל את נעילת המכשיר או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות או באישור רכישה."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"אפשר להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטלפון או כדי לאמת את הזהות שלך, למשל בכניסה לאפליקציות או באישור רכישה."</string>
@@ -927,7 +928,7 @@
       <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> אפליקציות פעילות</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> אפליקציות פעילות</item>
     </plurals>
-    <string name="manage_trust_agents" msgid="6410149930029992356">"סביבות מהימנות"</string>
+    <string name="manage_trust_agents" msgid="6410149930029992356">"סביבות אמינות"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"כדי להשתמש בתכונה הזו, צריך קודם להגדיר נעילת מסך"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"ללא"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
@@ -2111,9 +2112,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"מטעמי אבטחה, עליך להזין את קו ביטול הנעילה של פרופיל העבודה"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"מטעמי אבטחה, עליך להזין את קוד הגישה לפרופיל העבודה"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"מטעמי אבטחה, עליך להזין את הסיסמה לפרופיל העבודה"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"הטלפון שלך עבר איפוס להגדרות היצרן. כדי להשתמש בטלפון, יש להזין את קו ביטול הנעילה הקודם."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"הטלפון שלך עבר איפוס להגדרות היצרן. כדי להשתמש בטלפון, יש להזין את קוד הגישה הקודם."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"הטלפון שלך עבר איפוס להגדרות היצרן. כדי להשתמש בטלפון, יש להזין את הסיסמה הקודמת."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"הטלפון שלך עבר איפוס להגדרות היצרן. כדי להשתמש בטלפון, יש להזין את קו ביטול הנעילה הקודם."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"הטאבלט שלך עבר איפוס להגדרות המקוריות. כדי להשתמש בטאבלט הזה, יש להזין את קו ביטול הנעילה הקודם."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"המכשיר שלך עבר איפוס להגדרות המקוריות. כדי להשתמש במכשיר הזה, יש להזין את הסיסמה הקודמת."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"הטלפון שלך עבר איפוס להגדרות היצרן. כדי להשתמש בטלפון, יש להזין את קוד הגישה הקודם."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"הטאבלט שלך עבר איפוס להגדרות המקוריות. כדי להשתמש בטאבלט הזה, יש להזין את קוד האימות הקודם."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"המכשיר שלך עבר איפוס להגדרות המקוריות. כדי להשתמש במכשיר הזה, יש להזין את קוד האימות הקודם."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"הטלפון שלך עבר איפוס להגדרות היצרן. כדי להשתמש בטלפון, יש להזין את הסיסמה הקודמת."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"הטאבלט שלך עבר איפוס להגדרות המקוריות. כדי להשתמש בטאבלט הזה, יש להזין את הסיסמה הקודמת."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"המכשיר שלך עבר איפוס להגדרות המקוריות. כדי להשתמש במכשיר הזה, יש להזין את הסיסמה הקודמת."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"אימות של קו ביטול נעילה"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"אימות של קוד הגישה"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"אימות סיסמה"</string>
@@ -2138,6 +2145,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"יש צורך בקו לביטול הנעילה"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"יש לצייר קו לביטול נעילת המסך"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"הקו לביטול נעילה יהיה גלוי"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"פרטיות משופרת עם קוד אימות"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"השבתת האנימציות כשמזינים קוד אימות"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"הפיכת קו ביטול הנעילה של הפרופיל לגלוי"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"רטט בעת הקשה"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"לחצן ההפעלה נועל באופן מיידי"</string>
@@ -3795,7 +3804,7 @@
     <string name="keywords_battery" msgid="7040323668283600530">"צריכת חשמל, טעינה"</string>
     <string name="keywords_battery_usage" msgid="1763573071014260220">"השימוש בסוללה, השימוש בסוללה, צריכת החשמל"</string>
     <string name="keywords_battery_saver" msgid="6289682844453234359">"חיסכון בסוללה, חיסכון בחשמל, חיסכון"</string>
-    <string name="keywords_battery_adaptive_preferences" msgid="1774870663426502938">"העדפות שניתנות להתאמה, סוללה שניתנת להתאמה"</string>
+    <string name="keywords_battery_adaptive_preferences" msgid="1774870663426502938">"העדפות שניתנות להתאמה, אופטימיזציה של ניצול הסוללה"</string>
     <string name="keywords_spell_checker" msgid="5148906820603481657">"איות, מילון, בדיקת איות, תיקון אוטומטי"</string>
     <string name="keywords_voice_input" msgid="7534900094659358971">"‏מזהה, קלט, דיבור, דבר, שפה, דיבורית, ללא מגע, זיהוי, פוגעני, מילה, אודיו, היסטוריה, אוזניות bluetooth"</string>
     <string name="keywords_text_to_speech_output" msgid="6728080502619011668">"‏דירוג, שפה, ברירת מחדל, לדבר, מדבר, tts, נגישות, קורא מסך, עיוור"</string>
@@ -4106,7 +4115,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"מסך נעילה, דילוג, מעקף"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"כשפרופיל העבודה נעול"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"הצגת התראות חדשות בלבד במסך הנעילה"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"אחרי כל ביטול נעילה, ההתראות הקיימות יוסרו ממסך הנעילה"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"הסרה אוטומטית של התראות שנצפו ממסך הנעילה"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"התראות במסך הנעילה"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"הצגת שיחות, ברירת מחדל והתראות שקטות"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"הצגת שיחות, ברירת מחדל והתראות שקטות"</string>
@@ -4620,7 +4629,7 @@
       <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> אפליקציות שמזמן לא השתמשת בהן</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> אפליקציות שמזמן לא השתמשת בהן</item>
     </plurals>
-    <string name="unused_apps_category" msgid="8954930958175500851">"הגדרות של אפליקציות שמזמן לא השתמשת בהן"</string>
+    <string name="unused_apps_category" msgid="8954930958175500851">"הגדרות של האפליקציה שלא נמצאות בשימוש"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"השהיית הפעילות באפליקציה אם אין בה שימוש"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"ההרשאות של האפליקציה יוסרו, הקבצים הזמניים יימחקו ותופסק קבלת ההתראות ממנה"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"כל האפליקציות"</string>
@@ -4797,7 +4806,7 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"צריך להיות מופעל מפני שהגישה להתראות מופעלת"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"לבטל את הגישה של <xliff:g id="APP">%1$s</xliff:g> ל\'נא לא להפריע\'?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"כל כללי \'נא לא להפריע\' שנוצרו על ידי האפליקציה הזו יוסרו."</string>
-    <string name="ignore_optimizations_on" msgid="6865583039303804932">"אל תבצע אופטימיזציה"</string>
+    <string name="ignore_optimizations_on" msgid="6865583039303804932">"אין לבצע אופטימיזציה"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"ביצוע אופטימיזציה"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"הסוללה עלולה להתרוקן מהר יותר. האפליקציה תוכל להשתמש בסוללה ברקע."</string>
     <string name="ignore_optimizations_off_desc" msgid="3324571675983286177">"מומלץ להארכת חיי הסוללה"</string>
@@ -5914,7 +5923,7 @@
     <string name="do_not_disturb_main_switch_title_off" msgid="7088088515823752545">"הפעלה"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"שימוש בתאורת לילה"</string>
     <string name="nfc_main_switch_title" msgid="6295839988954817432">"‏שימוש ב-NFC"</string>
-    <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"שימוש בסוללה שניתנת להתאמה"</string>
+    <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"שימוש באופטימיזציה של ניצול הסוללה"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"התאמה אוטומטית של הבהירות"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"‏שימוש בשיחות Wi-Fi"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"הצגת כל האפליקציות"</string>
@@ -6006,6 +6015,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"בחירה של שומר מסך"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"הצגת מידע נוסף"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"הצגת פרטים כמו השעה, מזג האוויר ומידע אחר בשומר המסך"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"הגדרות נוספות"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"בחירת שומר מסך"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"אפשר לבחור מה יוצג במסך כשהטאבלט בעגינה. יכול להיות שהמכשיר ינצל יותר אנרגיה בזמן השימוש בשומר מסך."</string>

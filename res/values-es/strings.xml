@@ -467,6 +467,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Configura tu huella digital"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Permitir desbloqueo con huella digital"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Usar tu huella digital"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Más información sobre Desbloqueo con huella digital"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Usa tu huella digital para desbloquear tu tablet o verificar que eres tú (por ejemplo, al iniciar sesión en aplicaciones o aprobar compras)."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Usa tu huella digital para desbloquear tu dispositivo o verificar que eres tú (por ejemplo, al iniciar sesión en aplicaciones o aprobar compras)."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Usa tu huella digital para desbloquear tu teléfono o verificar que eres tú (por ejemplo, al iniciar sesión en aplicaciones o aprobar compras)."</string>
@@ -586,7 +587,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Toca el sensor"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Pon el dedo en el sensor y levántalo cuando notes una vibración"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Mantén toda tu huella digital en el sensor hasta que notes una vibración"</string>
-    <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"Sin pulsar el botón, mantén tu huella en el sensor hasta que sientas una vibración.\n\nMueve el dedo ligeramente cada vez que la sientas para poder capturar mejor tu huella completa."</string>
+    <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"Sin pulsar el botón, mantén tu huella en el sensor hasta que sientas una vibración.\n\nMueve el dedo ligeramente cada vez que la sientas para poder capturar más parte de tu huella digital."</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Mantén pulsado el sensor de huellas digitales"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Levanta el dedo y toca de nuevo"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Otra vez"</string>
@@ -2089,9 +2090,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Para mayor seguridad, utiliza el patrón del perfil de trabajo"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Para mayor seguridad, introduce el PIN del perfil de trabajo"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Para mayor seguridad, introduce la contraseña del perfil de trabajo"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Se ha restablecido el estado de fábrica del teléfono. Para usarlo, introduce tu antiguo patrón."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"Se ha restablecido el estado de fábrica del teléfono. Para usarlo, introduce tu antiguo PIN."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"Se ha restablecido el estado de fábrica del teléfono. Para usarlo, introduce tu antigua contraseña."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"Se ha restablecido el estado de fábrica del teléfono. Para usarlo, introduce tu antiguo patrón."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"Ajustes de fábrica de la tablet restablecidos. Para usarla, introduce tu patrón anterior."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"Ajustes de fábrica del dispositivo restablecidos. Para usarlo, introduce tu patrón anterior."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"Se ha restablecido el estado de fábrica del teléfono. Para usarlo, introduce tu antiguo PIN."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"Ajustes de fábrica de la tablet restablecidos. Para usarla, introduce tu PIN anterior."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"Ajustes de fábrica del dispositivo restablecidos. Para usarlo, introduce tu PIN anterior."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"Se ha restablecido el estado de fábrica del teléfono. Para usarlo, introduce tu antigua contraseña."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"Ajustes de fábrica de la tablet restablecidos. Para usarla, introduce tu contraseña anterior."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"Ajustes de fábrica del dispositivo restablecidos. Para usarlo, introduce tu contraseña anterior."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Verificar patrón"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Verificar PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Verificar contraseña"</string>
@@ -2116,6 +2123,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Patrón obligatorio"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Debes crear un patrón para desbloquear la pantalla."</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Mostrar el patrón mientras se dibuja"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Privacidad del PIN mejorada"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Inhabilitar animaciones al introducir el PIN"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Mostrar el patrón del perfil"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibrar al tocar"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Bloquear con botón de encendido"</string>
@@ -4063,7 +4072,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Pantalla de bloqueo, pantalla bloqueo, saltar, evitar"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Con el perfil de trabajo bloqueado"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Mostrar solo notificaciones nuevas en la pantalla de bloqueo"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"Después de cada desbloqueo, se eliminan las notificaciones de la pantalla de bloqueo"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Quitar automáticamente las notificaciones ya vistas de la pantalla de bloqueo"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificaciones en pantalla de bloqueo"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Mostrar conversaciones predeterminadas y silenciosas"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostrar conversaciones predeterminadas y silenciosas"</string>
@@ -5918,9 +5927,13 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Elige un salvapantallas"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Mostrar información adicional"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Muestra información como la hora, el tiempo u otros datos en el salvapantallas"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Más ajustes"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Elegir el salvapantallas"</string>
-    <string name="dream_setup_description" msgid="7508547154038580296">"Elige lo que quieres ver en tu pantalla cuando tu tablet está conectado. Es posible que el dispositivo gaste más energía si se usa un salvapantallas."</string>
+    <string name="dream_setup_description" msgid="7508547154038580296">"Elige lo que quieres ver en tu pantalla cuando tu tablet está conectada. Es posible que el dispositivo gaste más energía si se usa un salvapantallas."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Personalizar"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Personalizar <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Debes reiniciar para habilitar el formato libre."</string>

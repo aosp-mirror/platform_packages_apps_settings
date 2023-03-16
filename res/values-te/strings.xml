@@ -467,6 +467,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"మీ వేలిముద్రను సెటప్ చేయండి"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"వేలిముద్ర అన్‌లాక్ అనుమతి"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"మీ వేలిముద్రను ఉపయోగించండి"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"వేలిముద్ర అన్‌లాక్ ఫీచర్ గురించి మరింత తెలుసుకోండి"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"మీ టాబ్లెట్‌ను అన్‌లాక్ చేయడానికి గానీ లేదా మీరు యాప్‌లకు సైన్ ఇన్ చేసినప్పుడు లేదా కొనుగోలును ఆమోదించినప్పుడు ఇది మీరేనని వెరిఫై చేయడానికి మీ వేలిముద్రను ఉపయోగించండి."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"మీరు మీ పరికరాన్ని అన్‌లాక్ చేయడానికి లేదా మీరు యాప్‌లకు సైన్ ఇన్ చేసినప్పుడు లేదా కొనుగోలును ఆమోదించినప్పుడు ఇది మీరేనని వెరిఫై చేయడానికి మీ వేలిముద్రను ఉపయోగించండి."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి గానీ లేదా మీరు యాప్‌లకు సైన్ ఇన్ చేసినప్పుడు లేదా కొనుగోలును ఆమోదించినప్పుడు ఇది మీరేనని వెరిఫై చేయడానికి మీ వేలిముద్రను ఉపయోగించండి."</string>
@@ -2089,9 +2090,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"అదనపు సెక్యూరిటీ కోసం, మీ వర్క్ చేసే చోటుకు సంబంధించిన ఆకృతిని ఉపయోగించండి"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"అదనపు సెక్యూరిటీ కోసం, మీరు వర్క్‌ చేసే చోటుకు సంబంధించిన పిన్‌ను ఎంటర్ చేయండి"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"అదనపు సెక్యూరిటీ కోసం, మీరు వర్క్ చేసే చోటుకు సంబంధించిన పాస్‌వర్డ్‌ను ఎంటర్ చేయండి"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"మీ ఫోన్ ఫ్యాక్టరీ సెట్టింగ్‌లకు రీసెట్ అయింది. ఈ ఫోన్‌ని ఉపయోగించాలంటే, మీ గత నమూనాను నమోదు చేయండి."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"మీ ఫోన్ ఫ్యాక్టరీ సెట్టింగ్‌లకు రీసెట్ అయింది. ఈ ఫోన్‌ని ఉపయోగించాలంటే, మీ గత పిన్‌ని నమోదు చేయండి."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"మీ ఫోన్ ఫ్యాక్టరీ సెట్టింగ్‌లకు రీసెట్ అయింది. ఈ ఫోన్‌ని ఉపయోగించాలంటే, మీ గత పాస్‌వర్డ్ నమోదు చేయండి."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"మీ ఫోన్ ఫ్యాక్టరీ సెట్టింగ్‌లకు రీసెట్ అయింది. ఈ ఫోన్‌ని ఉపయోగించాలంటే, మీ గత నమూనాను నమోదు చేయండి."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"మీ టాబ్లెట్, ఫ్యాక్టరీ సెట్టింగ్‌కు రీసెట్ అయింది. ఈ టాబ్లెట్ వాడాలంటే, మీ పాత ఆకృతిని ఎంటర్ చేయండి."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"మీ పరికరం, ఫ్యాక్టరీ సెట్టింగ్‌లకు రీసెట్ అయింది. ఈ పరికరం వాడాలంటే, మీ పాత ఆకృతిని ఎంటర్ చేయండి."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"మీ ఫోన్ ఫ్యాక్టరీ సెట్టింగ్‌లకు రీసెట్ అయింది. ఈ ఫోన్‌ని ఉపయోగించాలంటే, మీ గత పిన్‌ని నమోదు చేయండి."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"మీ టాబ్లెట్, ఫ్యాక్టరీ సెట్టింగ్‌కు రీసెట్ అయింది. ఈ టాబ్లెట్ వాడాలంటే, మీ పాత పిన్ ఎంటర్ చేయండి."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"మీ పరికరం, ఫ్యాక్టరీ సెట్టింగ్‌లకు రీసెట్ అయింది. ఈ పరికరాన్ని వాడాలంటే, మీ పాత పిన్ ఎంటర్ చేయండి."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"మీ ఫోన్ ఫ్యాక్టరీ సెట్టింగ్‌లకు రీసెట్ అయింది. ఈ ఫోన్‌ని ఉపయోగించాలంటే, మీ గత పాస్‌వర్డ్ నమోదు చేయండి."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"మీ టాబ్లెట్, ఫ్యాక్టరీ సెట్టింగ్‌కు రీసెట్ అయింది. ఈ టాబ్లెట్ వాడాలంటే, పాత పాస్‌వర్డ్ ఎంటర్ చేయండి."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"మీ పరికరం, ఫ్యాక్టరీ సెట్టింగ్‌లకు రీసెట్ అయింది. ఈ పరికరం వాడాలంటే, మీ పాత పాస్‌వర్డ్ ఎంటర్ చేయండి."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"నమూనాను ధృవీకరించండి"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"పిన్‌ని ధృవీకరించండి"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"పాస్‌వర్డ్‌ని ధృవీకరించండి"</string>
@@ -2116,6 +2123,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"ఆకృతి అవసరం"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"స్క్రీన్‌ను అన్‌లాక్ చేయడానికి తప్పనిసరిగా నమూనాను గీయాలి"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"ఆకృతిని కనిపించేలా చేయి"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"మెరుగైన PIN గోప్యత"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"PINను ఎంటర్ చేస్తున్నప్పుడు యానిమేషన్‌లను డిజేబుల్ చేయండి"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"ప్రొఫైల్ నమూనాను కనిపించేలా చేయి"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"నొక్కినప్పుడు వైబ్రేట్ చేయి"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"పవర్ బటన్ తక్షణమే లాక్ చేస్తుంది"</string>
@@ -4063,7 +4072,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"లాక్ స్క్రీన్, లాక్ స్క్రీన్, దాటవేయి, బైపాస్"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"వర్క్ ప్రొఫైల్ లాక్ అయినప్పుడు"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"లాక్ స్క్రీన్‌లో కొత్త నోటిఫికేషన్‌లను మాత్రమే చూడండి"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"అన్‌లాక్ చేసిన ప్రతిసారి, లాక్ స్క్రీన్ నుండి ఇప్పటికే ఉన్న నోటిఫికేషన్‌లను తీసివేయండి"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"లాక్ స్క్రీన్ నుండి మునుపు చూసిన నోటిఫికేషన్‌లను ఆటోమేటిక్‌గా తీసివేయండి"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"లాక్‌స్క్రీన్‌లో నోటిఫికేషన్‌లు"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"సంభాషణలు, ఆటోమేటిక్, నిశ్శబ్దం - ఈ నోటిఫికేషన్‌లను చూపండి"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"సంభాషణలు, ఆటోమేటిక్, నిశ్శబ్దం - ఈ నోటిఫికేషన్లను చూపాలి"</string>
@@ -5843,7 +5852,7 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"ఫోన్ నంబర్ లేదు."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"సరే"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"2Gని అనుమతించండి"</string>
-    <string name="enable_2g_summary" msgid="2794534052372565914">"2G తక్కువ సురక్షితమైనది, కానీ కొన్ని లొకేషన్‌లో మీ కనెక్షన్‌ని మెరుగుపరచవచ్చు. ఎమర్జెన్సీ కాల్స్ కోసం, 2G ఎల్లప్పుడూ అనుమతించబడుతుంది."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G తక్కువ సురక్షితమైనది, కానీ కొన్ని లొకేషన్‌లలో మీ కనెక్షన్‌ని మెరుగుపరచవచ్చు. ఎమర్జెన్సీ కాల్స్ కోసం, 2G ఎల్లప్పుడూ అనుమతించబడుతుంది."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>కి 2G అందుబాటులో ఉండాలి"</string>
     <string name="app_info_all_services_label" msgid="3600929226735860271">"అన్ని సర్వీస్‌లు"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"క్లిప్‌బోర్డ్ యాక్సెస్‌ను చూపించు"</string>
@@ -5918,6 +5927,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"స్క్రీన్ సేవర్‌ను ఎంచుకోండి"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"అదనపు సమాచారాన్ని చూపించండి"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"స్క్రీన్ సేవర్‌లో టైమ్, వాతావరణం లేదా ఇతర సమాచారం వంటి అంశాలను ప్రదర్శించండి"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"మరిన్ని సెట్టింగ్‌లు"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"మీ స్క్రీన్ సేవర్‌ను ఎంచుకోండి"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"మీ టాబ్లెట్ డాక్ చేయబడినప్పుడు మీ స్క్రీన్‌పై మీకు ఏమి కనిపించాలో ఎంచుకోండి. స్క్రీన్ సేవర్‌ను ఉపయోగించినప్పుడు మీ పరికరం మరింత శక్తిని ఉపయోగించుకోవచ్చు."</string>

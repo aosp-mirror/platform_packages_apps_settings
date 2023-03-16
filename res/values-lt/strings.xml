@@ -475,6 +475,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Kontrolinio kodo nustatymas"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Atrakinimo kontroliniu kodu leidimas"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Piršto antspaudo naudojimas"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Sužinokite daugiau apie atrakinimą piršto atspaudu"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Naudodami kontrolinį kodą atrakinkite planšetinį kompiuterį ar patvirtinkite savo tapatybę, pvz., kai prisijungiate prie programų ar patvirtinate pirkinį."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Naudodami kontrolinį kodą atrakinkite įrenginį ar patvirtinkite savo tapatybę, pvz., kai prisijungiate prie programų ar patvirtinate pirkinį."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Naudodami kontrolinį kodą atrakinkite telefoną ar patvirtinkite savo tapatybę, pvz., kai prisijungiate prie programų ar patvirtinate pirkinį."</string>
@@ -2133,9 +2134,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Kad dar labiau apsaugotumėte įrenginį, naudokite darbo profilio atrakinimo piešinį"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Kad dar labiau apsaugotumėte įrenginį, įveskite darbo profilio PIN kodą"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Kad dar labiau apsaugotumėte įrenginį, įveskite darbo profilio slaptažodį"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Atkurti telefono gamykl. nust. Jei norite naudoti šį telef., įveskite ankstesnį atrakinimo piešinį."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"Atkurti telefono gamykl. nustatymai. Jei norite naudoti šį telefoną, įveskite ankstesnį PIN kodą."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"Atkurti telefono gamykl. nustatymai. Jei norite naudoti šį telefoną, įveskite ankstesnį slaptažodį."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"Atkurti telefono gamykl. nust. Jei norite naudoti šį telef., įveskite ankstesnį atrakinimo piešinį."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"Atkurti gamykliniai planšetinio kompiuterio nustatymai. Naudokite jį įvedę ankstesnį atrakinimo piešinį."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"Atkurti gamykliniai įrenginio nustatymai. Naudokite šį įrenginį įvedę ankstesnį atrakinimo piešinį."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"Atkurti telefono gamykl. nustatymai. Jei norite naudoti šį telefoną, įveskite ankstesnį PIN kodą."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"Atkurti gamykliniai planšetinio kompiuterio nustatymai. Naudokite jį įvedę ankstesnį PIN kodą."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"Atkurti gamykliniai įrenginio nustatymai. Naudokite šį įrenginį įvedę ankstesnį PIN kodą."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"Atkurti telefono gamykl. nustatymai. Jei norite naudoti šį telefoną, įveskite ankstesnį slaptažodį."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"Atkurti gamykliniai planšetinio kompiuterio nustatymai. Naudokite jį įvedę ankstesnį slaptažodį."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"Atkurti gamykliniai įrenginio nustatymai. Naudokite šį įrenginį įvedę ankstesnį slaptažodį."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Patvirtinkite atrakinimo piešinį"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Patvirtinkite PIN kodą"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Patvirtinkite slaptažodį"</string>
@@ -2160,6 +2167,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Reikalauti modelio"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Jei norite atrakinti ekraną, reikia nustatyti modelį"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Padaryti piešinį matomą"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Patobulintas PIN kodu užtikrinamas privatumas"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Išjungti animacijas įvedant PIN kodą"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Padaryti profilio atrakinimo piešinį matomą"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibruoti palietus"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Maitin. myg. iškart užrakin."</string>
@@ -2924,9 +2933,9 @@
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Įkrovimas optimizuotas, siekiant apsaugoti akumuliatorių"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"Kad akumuliatorius veiktų ilgiau, įkrovimas optimizuotas"</string>
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Įkrovimas optimizuotas, siekiant apsaugoti akumuliatorių"</string>
-    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Kad akumuliatorius veiktų ilgiau, įkrovimas optimizuotas, kai prijungta prie doko"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Kad akumuliatorius veiktų ilgiau, įkrovimas optimizuotas, kai prijungta prie doko."</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Įkrovimas optimizuotas, siekiant apsaugoti akumuliatorių"</string>
-    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Kad akumuliatorius veiktų ilgiau, įkrovimas optimizuotas, kai prijungta prie doko"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Kad akumuliatorius veiktų ilgiau, įkrovimas optimizuotas, kai prijungta prie doko."</string>
     <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Visiškas įkrovimas"</string>
     <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"Siekiant apsaugoti akumuliatorių, įkrovimas bus optimizuotas kitą kartą, kai planšetinis kompiuteris bus prijungtas prie doko"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Sužinokite daugiau apie pristabdyto įkrovimo būseną"</string>
@@ -4149,7 +4158,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"užrakinimo ekranas, praleisti, apeiti"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Kai darbo profilis užrakintas"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Užrakinimo ekrane rodyti tik naujus pranešimus"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"Po kiekvieno atrakinimo panaikinti esamus pranešimus iš užrakinimo ekrano"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Automatiškai pašalinti anksčiau žiūrėtus pranešimus iš užrakinimo ekrano"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Pranešimai užrakinimo ekrane"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Rodyti pokalbius, numatytuosius ir tylius"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Rodyti pokalbius, numatytuosius ir tylius"</string>
@@ -6094,6 +6103,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Ekrano užsklandos pasirinkimas"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Papildomos informacijos rodymas"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Rodyti tokią informaciją kaip laikas, orai ir pan. ekrano užsklandoje"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Daugiau nustatymų"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Ekrano užsklandos pasirinkimas"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Pasirinkite, kas bus rodoma ekrane, kai planšetinis kompiuteris bus prijungtas prie doko. Naudojant ekrano užsklandą gali būti eikvojama daugiau įrenginio energijos."</string>

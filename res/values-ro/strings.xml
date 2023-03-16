@@ -471,6 +471,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Configurează amprenta"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Permite deblocarea cu amprenta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Folosește amprenta"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Află mai multe despre Deblocarea cu amprenta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Folosește amprenta ca să deblochezi tableta sau ca să-ți confirmi identitatea, de exemplu, când te conectezi la aplicații sau aprobi o achiziție."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Folosești amprenta ca să-ți deblochezi dispozitivul sau ca să-ți confirmi identitatea, de exemplu, când te conectezi la aplicații sau aprobi o achiziție."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Folosește amprenta ca să deblochezi telefonul sau să-ți confirmi identitatea, de exemplu, când te conectezi la aplicații sau aprobi o achiziție."</string>
@@ -2111,9 +2112,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Pentru mai multă siguranță, folosește modelul de serviciu"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Pentru mai multă siguranță, introdu codul PIN de serviciu"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Pentru mai multă siguranță, introdu parola de serviciu"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"S-a revenit la setările din fabrică ale telefonului. Pentru a-l folosi, formează modelul precedent."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"S-a revenit la setările din fabrică ale telefonului. Pentru a-l folosi, scrie codul PIN precedent."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"S-a revenit la setările din fabrică ale telefonului. Pentru a-l folosi, scrie parola precedentă."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"S-a revenit la setările din fabrică ale telefonului. Pentru a-l folosi, formează modelul precedent."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"Tableta s-a resetat la setările din fabrică. Ca să o folosești, introdu modelul anterior."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"Dispozitivul s-a resetat la setările din fabrică. Ca să-l folosești, introdu modelul anterior."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"S-a revenit la setările din fabrică ale telefonului. Pentru a-l folosi, scrie codul PIN precedent."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"Tableta s-a resetat la setările din fabrică. Ca să o folosești, introdu codul PIN anterior."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"Dispozitivul s-a resetat la setările din fabrică. Ca să-l folosești, introdu codul PIN anterior."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"S-a revenit la setările din fabrică ale telefonului. Pentru a-l folosi, scrie parola precedentă."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"Tableta s-a resetat la setările din fabrică. Ca să o folosești, introdu parola anterioară."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"Dispozitivul s-a resetat la setările din fabrică. Ca să-l folosești, introdu parola anterioară."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Confirmă modelul"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Confirmă codul PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Confirmă parola"</string>
@@ -2138,6 +2145,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Solicită un model"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Trebuie să desenezi modelul pentru a debloca ecranul"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Faceți modelul vizibil"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Confidențialitate îmbunătățită pentru codul PIN"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Dezactivează animațiile când introduci codul PIN"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Setează modelul profilului ca vizibil"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibrare la atingere"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Blocare rapidă cu butonul de pornire"</string>
@@ -2895,7 +2904,7 @@
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Încărcarea este optimizată pentru a proteja bateria"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Pentru a mări autonomia bateriei, încărcarea este optimizată cât timp dispozitivul este andocat"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Încărcarea este optimizată pentru a proteja bateria"</string>
-    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Pentru a mări autonomia bateriei, încărcarea este optimizată cât timp dispozitivul este andocat"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Pentru a mări durata de viață a bateriei, încărcarea este optimizată cât timp dispozitivul este andocat"</string>
     <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Se încarcă la capacitate maximă"</string>
     <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"Pentru a proteja bateria, încărcarea va fi optimizată data viitoare când tableta va fi andocată"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Află mai multe despre întreruperea încărcării"</string>
@@ -4075,7 +4084,7 @@
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"Activezi baloanele pentru dispozitiv?"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Dacă activezi baloanele pentru această aplicație, se vor activa și cele pentru dispozitiv.\n\nAceasta afectează alte aplicații sau conversații care pot apărea în balon."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"Activează"</string>
-    <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Anulați"</string>
+    <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Anulează"</string>
     <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Activate / Conversațiile pot apărea ca pictograme flotante"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Permite ca aplicațiile să afișeze baloane"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Unele conversații vor apărea ca pictograme flotante deasupra altor aplicații"</string>
@@ -4106,7 +4115,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Ecran de blocare, Ecran de blocare, Omitere, Evitare"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Când este blocat profilul de serviciu"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Afișează doar notificări noi pe ecranul de blocare"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"După fiecare deblocare, închide notificările existente din ecranul de blocare"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Elimină automat notificările afișate anterior de pe ecranul de pornire"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificări pe ecranul de blocare"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Afișează conversațiile prestabilite și silențioase"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Afișează conversațiile prestabilite și silențioase"</string>
@@ -6006,6 +6015,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Alege un screensaver"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Afișează informații suplimentare"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Afișează informații cum ar fi ora, condițiile meteo sau altele pe screensaver"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Mai multe setări"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Alege screensaverul"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Alege ce vei vedea pe ecran când tableta este andocată. Dispozitivul poate consuma mai multă energie când folosește un screensaver."</string>

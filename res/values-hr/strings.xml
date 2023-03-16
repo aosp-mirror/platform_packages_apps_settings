@@ -471,6 +471,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Postavljanje otiska prsta"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Dopuštanje otključavanja otiskom prsta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Upotreba otiska prsta"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Saznajte više o otključavanju otiskom prsta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Pomoću otiska prsta možete otključati tablet ili potvrditi da ste to vi, na primjer kad se prijavljujete u aplikacije ili odobravate kupnje."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Pomoću otiska prsta možete otključati uređaj ili potvrditi da ste to vi, na primjer kad se prijavljujete u aplikacije ili odobravate kupnje."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Pomoću otiska prsta možete otključati telefon ili potvrditi da ste to vi, na primjer kad se prijavljujete u aplikacije ili odobravate kupnje."</string>
@@ -2111,9 +2112,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Za dodatnu sigurnost upotrijebite uzorak radnog profila"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Za dodatnu sigurnost unesite PIN radnog profila"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Za dodatnu sigurnost unesite zaporku radnog profila"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Vaš je telefon vraćen na tvorničke postavke. Da biste ga upotrebljavali, unesite prethodni uzorak."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"Vaš je telefon vraćen na tvorničke postavke. Da biste ga upotrebljavali, unesite prethodni PIN."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"Vaš je telefon vraćen na tvorničke postavke. Da biste ga upotrebljavali, unesite prethodnu zaporku."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"Vaš je telefon vraćen na tvorničke postavke. Da biste ga upotrebljavali, unesite prethodni uzorak."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"Tablet je vraćen na tvorničke postavke. Da biste ga koristili, unesite prethodni uzorak."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"Uređaj je vraćen na tvorničke postavke. Da biste ga koristili, unesite prethodni uzorak."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"Vaš je telefon vraćen na tvorničke postavke. Da biste ga upotrebljavali, unesite prethodni PIN."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"Tablet je vraćen na tvorničke postavke. Da biste ga koristili, unesite prethodni PIN."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"Uređaj je vraćen na tvorničke postavke. Da biste ga koristili, unesite prethodni PIN."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"Vaš je telefon vraćen na tvorničke postavke. Da biste ga upotrebljavali, unesite prethodnu zaporku."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"Tablet je vraćen na tvorničke postavke. Da biste ga koristili, unesite prethodnu zaporku."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"Uređaj je vraćen na tvorničke postavke. Da biste ga koristili, unesite prethodnu zaporku."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Potvrdite uzorak"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Potvrdite PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Potvrdite zaporku"</string>
@@ -2138,6 +2145,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Potreban je uzorak"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Morate iscrtati uzorak za otključavanje zaslona"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Učini uzorak vidljivim"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Poboljšana privatnost PIN-a"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Onemogući animacije tijekom unosa PIN-a"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Učini uzorak profila vidljivim"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibracija prilikom dodira"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Gumb za uklj. zaključava telefon"</string>
@@ -2891,13 +2900,13 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Velika potrošnja baterije"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Pogledajte aplikacije s najvećom potrošnjom baterije"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Punjenje se optimizira radi zaštite baterije"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"Radi produljenja trajanja baterije punjenje se optimizira"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"Radi produljenja trajanja baterije, punjenje se optimizira"</string>
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Punjenje se optimizira radi zaštite baterije"</string>
-    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Radi produljenja trajanja baterije punjenje se optimizira dok je uređaj na priključnoj stanici"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Radi produljenja trajanja baterije, punjenje se optimizira dok je uređaj na priključnoj stanici"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Punjenje se optimizira radi zaštite baterije"</string>
-    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Radi produljenja trajanja baterije punjenje se optimizira dok je uređaj na priključnoj stanici"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Radi produljenja trajanja baterije, punjenje se optimizira dok je uređaj na priključnoj stanici"</string>
     <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Punjenje do kraja"</string>
-    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"Radi zaštite baterije punjenje će se optimizirati kada tablet sljedeći put bude na priključnoj stanici"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"Radi zaštite baterije, punjenje će se optimizirati kada tablet sljedeći put bude na priključnoj stanici"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Saznajte više o pauziranom punjenju"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Nastavi s punjenjem"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"U određenim uvjetima kao što su visoke temperature i kada je uređaj priključen na punjenje duže vrijeme, punjenje se može ograničiti na <xliff:g id="PERCENT">%1$s</xliff:g> radi očuvanja baterije.\n\nKada se uvjeti promijene, telefon će se automatski puniti na uobičajen način."</string>
@@ -4106,7 +4115,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Zaključan zaslon, preskakanje, zaobilaženje"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Kad je poslovni profil zaključan"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Prikazuj samo nove obavijesti na zaključanom zaslonu"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"Nakon svakog otključavanja ukloni postojeće obavijesti sa zaključanog zaslona"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Automatsko uklanjanje prethodno pregledanih obavijesti sa zaključanog zaslona"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Obavijesti na zaklj. zaslonu"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Prikaži razgovore, zadane i bešumne"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Prikaži razgovore, zadane i bešumne"</string>
@@ -6006,6 +6015,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Odabir čuvara zaslona"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Prikaz dodatnih informacija"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Na čuvaru zaslona prikazujte vrijeme, vremenske uvjete i druge informacije"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Više postavki"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Odaberite čuvar zaslona"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Odaberite što će se prikazivati na zaslonu kad se tablet nalazi na priključnoj stanici. Uređaj može trošiti više energije kad se koristi čuvar zaslona."</string>

@@ -467,6 +467,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Imposta la tua impronta"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Consenti sblocco con l\'impronta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Usa la tua impronta"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Scopri di più sullo sblocco con l\'impronta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Usa l\'impronta per sbloccare il tablet o per verificare la tua identità, ad esempio per accedere alle app o approvare un acquisto."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Usa l\'impronta per sbloccare il dispositivo o verificare la tua identità, ad esempio per accedere alle app o approvare un acquisto."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Usa l\'impronta per sbloccare il telefono o per verificare la tua identità, ad esempio per accedere alle app o approvare un acquisto."</string>
@@ -2089,9 +2090,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Per maggiore sicurezza, usa la sequenza del tuo profilo di lavoro"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Per maggiore sicurezza, inserisci il PIN del tuo profilo di lavoro"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Per maggiore sicurezza, inserisci la password del tuo profilo di lavoro"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"I dati fabbrica del dispositivo sono stati ripristinati: puoi sbloccarlo con la sequenza precedente."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"I dati fabbrica del dispositivo sono stati ripristinati: puoi sbloccarlo con il PIN precedente."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"I dati fabbrica del dispositivo sono stati ripristinati: puoi sbloccarlo con la password precedente."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"I dati fabbrica del dispositivo sono stati ripristinati: puoi sbloccarlo con la sequenza precedente."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"Impostazioni di fabbrica ripristinate. Per usare il tablet, inserisci la sequenza precedente."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"Impostazioni di fabbrica ripristinate. Per usare il dispositivo, inserisci la sequenza precedente."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"I dati fabbrica del dispositivo sono stati ripristinati: puoi sbloccarlo con il PIN precedente."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"Impostazioni di fabbrica ripristinate. Per usare il tablet, inserisci il PIN precedente."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"Impostazioni di fabbrica ripristinate. Per usare il dispositivo, inserisci il PIN precedente."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"I dati fabbrica del dispositivo sono stati ripristinati: puoi sbloccarlo con la password precedente."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"Impostazioni di fabbrica ripristinate. Per usare il tablet, inserisci la password precedente."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"Impostazioni di fabbrica ripristinate. Per usare il dispositivo, inserisci la password precedente."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Verifica sequenza"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Verifica PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Verifica password"</string>
@@ -2116,6 +2123,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Richiedi sequenza"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Devi inserire la sequenza per sbloccare lo schermo"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Rendi visibile la sequenza"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Maggiore privacy per il PIN"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Disattiva le animazioni durante l\'inserimento del PIN"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Rendi visibile la sequenza del profilo"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibra alla pressione"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Blocca con tasto accensione"</string>
@@ -2862,11 +2871,11 @@
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Ricarica ottimizzata per proteggere la batteria"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"Per contribuire a prolungare la durata della batteria, la ricarica viene ottimizzata"</string>
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Ricarica ottimizzata per proteggere la batteria"</string>
-    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Per contribuire a prolungare la durata della batteria, la ricarica viene ottimizzata quando il dispositivo è inserito nel dock"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Per prolungare la durata della batteria, la ricarica viene ottimizzata quando il dispositivo è agganciato alla base"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Ricarica ottimizzata per proteggere la batteria"</string>
-    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Per contribuire a prolungare la durata della batteria, la ricarica viene ottimizzata quando il dispositivo è inserito nel dock"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Per prolungare la durata della batteria, la ricarica viene ottimizzata quando il dispositivo è agganciato alla base"</string>
     <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Ricarica completa"</string>
-    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"Per proteggere la batteria, la ricarica verrà ottimizzata la prossima volta che il tablet verrà inserito nel dock"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"Per proteggere la batteria, la ricarica verrà ottimizzata la prossima volta che il tablet verrà agganciato alla base"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Scopri di più sulla ricarica in pausa"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Riprendi la ricarica"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"In alcune condizioni, ad esempio in caso di temperature elevate e lunghi periodi di ricarica, è possibile che la ricarica venga momentaneamente interrotta al raggiungimento di una percentuale pari a <xliff:g id="PERCENT">%1$s</xliff:g> per preservare meglio l\'integrità della batteria.\n\nQuando queste condizioni non sono più presenti, viene ripristinata automaticamente la normale ricarica del telefono."</string>
@@ -2903,7 +2912,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Questa app potrà usare la batteria in background. La batteria potrebbe esaurirsi prima del previsto."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Rimuovi"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Annulla"</string>
-    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Ricarica completa"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Carica completamente"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Le tue app stanno utilizzando un livello di batteria normale. Se le app consumano troppa batteria, il dispositivo ti suggerirà come rimediare.\n\nSe la batteria è in esaurimento, puoi attivare il risparmio energetico in qualsiasi momento."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Le tue app stanno utilizzando un livello di batteria normale. Se le app consumano troppa batteria, il dispositivo ti suggerirà come rimediare.\n\nSe la batteria è in esaurimento, puoi attivare il risparmio energetico in qualsiasi momento."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Le tue app stanno utilizzando un livello di batteria normale. Se le app consumano troppa batteria, il dispositivo ti suggerirà come rimediare.\n\nSe la batteria è in esaurimento, puoi attivare il risparmio energetico in qualsiasi momento."</string>
@@ -4063,7 +4072,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Schermata di blocco, Schermata blocco, Salta, Ignora"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Con profilo di lavoro bloccato"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Mostra solo le nuove notifiche sulla schermata di blocco"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"Dopo ogni sblocco, rimuovi le notifiche esistenti dalla schermata di blocco"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Rimuovi automaticamente dalla schermata di blocco le notifiche già visualizzate"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notifiche sulla schermata di blocco"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Mostra conversazioni, notifiche predefinite e silenziose"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostra conversazioni, notifiche predefinite e silenziose"</string>
@@ -4895,7 +4904,7 @@
     <string name="app_usage_cycle" msgid="341009528778520583">"Ciclo di utilizzo dati mobili"</string>
     <string name="cell_data_warning" msgid="5664921950473359634">"Avviso sui dati: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="256855024790622112">"Limite dati: <xliff:g id="ID_1">^1</xliff:g>"</string>
-    <string name="cell_data_warning_and_limit" msgid="8393200831986035724">"Avviso relativo ai dati: <xliff:g id="ID_1">^1</xliff:g>/Limite dati: <xliff:g id="ID_2">^2</xliff:g>"</string>
+    <string name="cell_data_warning_and_limit" msgid="8393200831986035724">"Avviso relativo ai dati: <xliff:g id="ID_1">^1</xliff:g> / Limite dati: <xliff:g id="ID_2">^2</xliff:g>"</string>
     <string name="billing_cycle_fragment_summary" msgid="6346655500491631357">"Il giorno <xliff:g id="ID_1">%1$s</xliff:g> di ogni mese"</string>
     <string name="network_restrictions" msgid="8385824604048229846">"Restrizioni di rete"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="3875128958788008975">
@@ -5786,7 +5795,7 @@
     <string name="wifi_scan_notify_message" msgid="1331238142061476869">"Per migliorare l\'esperienza con il dispositivo, le app e i servizi possono continuare a cercare reti Wi-Fi in qualsiasi momento, anche quando la connessione Wi-Fi non è attiva. Questo può essere utile, ad esempio, per migliorare funzionalità e servizi basati sulla posizione geografica. Puoi modificare questa preferenza nelle impostazioni relative alla ricerca di reti Wi-Fi."</string>
     <string name="wifi_scan_change" msgid="8438320311511852918">"Modifica"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
-    <string name="mobile_data_connection_active" msgid="2422223108911581552">"Connessione attiva"</string>
+    <string name="mobile_data_connection_active" msgid="2422223108911581552">"Connessa"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Nessuna connessione"</string>
     <string name="mobile_data_off_summary" msgid="1884248776904165539">"La rete mobile non si connetterà automaticamente"</string>
     <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"Nessun\'altra rete disponibile"</string>
@@ -5918,9 +5927,13 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Scegli un salvaschermo"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Mostra informazioni aggiuntive"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Mostra sul salvaschermo elementi come l\'orario, il meteo o altre informazioni"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Altre impostazioni"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Scegli il salvaschermo"</string>
-    <string name="dream_setup_description" msgid="7508547154038580296">"Scegli cosa visualizzare sullo schermo quando il tablet è inserito nel dock. Il dispositivo potrebbe consumare più energia quando viene usato un salvaschermo."</string>
+    <string name="dream_setup_description" msgid="7508547154038580296">"Scegli cosa visualizzare sullo schermo quando il tablet è agganciato alla base. Il dispositivo potrebbe consumare più energia quando viene usato un salvaschermo."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Personalizza"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Personalizza <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"È necessario riavviare per attivare il supporto del formato libero."</string>

@@ -475,6 +475,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Наладзьце адбітак пальца"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Дазволіць разблакіраванне адбіткам"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Сканер адбіткаў пальцаў"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Даведацца больш пра разблакіроўку адбіткам пальца"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Адбітак пальца можна выкарыстоўваць для разблакіроўкі планшэта ці спраўджання вашай асобы, напрыклад падчас уваходу ў праграмы ці ўхвалення куплі."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Адбітак пальца можна выкарыстоўваць для разблакіроўкі прылады ці спраўджання вашай асобы, напрыклад падчас уваходу ў праграмы ці ўхвалення куплі."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Адбітак пальца можна выкарыстоўваць для разблакіроўкі тэлефона ці спраўджання вашай асобы, напрыклад падчас уваходу ў праграмы ці ўхвалення куплі."</string>
@@ -2133,9 +2134,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Для большай бяспекі выкарыстоўвайце ўзор разблакіроўкі свайго працоўнага профілю"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Для большай бяспекі ўвядзіце PIN-код свайго працоўнага профілю"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Для большай бяспекі ўвядзіце пароль свайго працоўнага профілю"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Тэлефон скінуты да заводскіх налад. Каб выкарыстаць яго, увядзіце папярэдні ўзор разблакіроўкі."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"Тэлефон скінуты да заводскіх налад. Каб выкарыстаць яго, увядзіце папярэдні PIN-код."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"Тэлефон скінуты да заводскіх налад. Каб выкарыстаць яго, увядзіце папярэдні пароль."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"Тэлефон скінуты да заводскіх налад. Каб выкарыстаць яго, увядзіце папярэдні ўзор разблакіроўкі."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"Налады планшэта скінуты да заводскіх значэнняў. Каб карыстацца ім, увядзіце былы ўзор разблакіроўкі."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"Налады прылады скінуты да заводскіх значэнняў. Каб карыстацца ёю, увядзіце былы ўзор разблакіроўкі."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"Тэлефон скінуты да заводскіх налад. Каб выкарыстаць яго, увядзіце папярэдні PIN-код."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"Налады планшэта скінуты да заводскіх значэнняў. Каб карыстацца ім, увядзіце былы PIN-код."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"Налады прылады скінуты да заводскіх значэнняў. Каб карыстацца ёю, увядзіце былы PIN-код."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"Тэлефон скінуты да заводскіх налад. Каб выкарыстаць яго, увядзіце папярэдні пароль."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"Налады планшэта скінуты да заводскіх значэнняў. Каб карыстацца ім, увядзіце свой былы пароль."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"Налады прылады скінуты да заводскіх значэнняў. Каб карыстацца ёю, увядзіце свой былы пароль."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Пацвердзіць узор разблакіроўкі"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Пацвердзіць PIN-код"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Пацвердзіць пароль"</string>
@@ -2160,6 +2167,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Патрабаваць камбінацыю разблакавання"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Патрабаваць камбінацыю разблакоўкі, каб разблакаваць экран"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Зрабіць узор бачным"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Палепшаная прыватнасць PIN-кода"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Адключыць анімацыю падчас уводу PIN-кода"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Зрабіць узор разблакіроўкі профілю бачным"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Вібрацыя пры дотыку"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Блакір. кнопкай сілкавання"</string>
@@ -2298,7 +2307,7 @@
     <string name="app_disable_notifications_dlg_title" msgid="6686569904059411780">"Выключыць апавяшчэнні?"</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Крама"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Звесткi пра праграму"</string>
-    <string name="app_install_details_summary" msgid="2013043219249992373">"Праграма ўсталявана з <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="app_install_details_summary" msgid="2013043219249992373">"Праграма ўсталявана з: <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"Дадатковая інфармацыя ў <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Выконваецца"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Не выкарыстоўваецца)"</string>
@@ -4149,7 +4158,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Экран блакіроўкі, экран блакіроўкі, прапусціць, абысці"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Працоўны профіль заблакіраваны"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Паказваць на экране блакіроўкі толькі новыя апавяшчэнні"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"Пасля кожнай разблакіроўкі існуючыя апавяшчэнні будуць выдаляцца з экрана блакіроўкі"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Аўтаматычна выдаляць прагледжаныя апавяшчэнні з экрана блакіроўкі"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Апавяшчэнні на экране блакіроўкі"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Паказваць усе размовы: стандартныя і без гуку"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Паказваць усе размовы: стандартныя і без гуку"</string>
@@ -6094,6 +6103,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Выберыце экранную застаўку"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Паказваць дадатковую інфармацыю"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Паказваць час, надвор\'е і іншую інфармацыю на экраннай застаўцы"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Дадатковыя налады"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Выберыце экранную застаўку"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Выберыце змесціва, якое будзе паказвацца на экране, калі планшэт падключаны да док-станцыі. Пры выкарыстанні экраннай застаўкі прылада можа спажываць больш энергіі."</string>

@@ -467,6 +467,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"指紋の設定"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"指紋認証によるロック解除の許可"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"指紋の使用"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"指紋認証の詳細"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"指紋を使ってタブレットのロック解除や本人確認（アプリへのログインや購入の承認など）を行えるようになります。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"指紋を使ってデバイスのロック解除や本人確認（アプリへのログインや購入の承認など）を行えるようにします。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"指紋を使ってスマートフォンのロック解除や本人確認（アプリへのログインや購入の承認など）を行えるようにします。"</string>
@@ -2089,9 +2090,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"セキュリティ強化のため、仕事用のパターンを入力してください"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"セキュリティ強化のため、仕事用の PIN を入力してください"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"セキュリティ強化のため、仕事用のパスワードを入力してください"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"スマートフォンは出荷時の設定にリセットされました。使用するには、以前のパターンを入力してください。"</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"スマートフォンは出荷時の設定にリセットされました。使用するには、以前の PIN を入力してください。"</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"スマートフォンは出荷時の設定にリセットされました。使用するには、以前のパスワードを入力してください。"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"スマートフォンは出荷時の設定にリセットされました。使用するには、以前のパターンを入力してください。"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"タブレットを出荷時設定にリセットしました。このタブレットを使うには以前のパターンを入力してください。"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"デバイスを出荷時設定にリセットしました。このデバイスを使うには以前のパターンを入力してください。"</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"スマートフォンは出荷時の設定にリセットされました。使用するには、以前の PIN を入力してください。"</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"タブレットを出荷時設定にリセットしました。このタブレットを使うには以前の PIN を入力してください。"</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"デバイスを出荷時設定にリセットしました。このデバイスを使うには以前の PIN を入力してください。"</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"スマートフォンは出荷時の設定にリセットされました。使用するには、以前のパスワードを入力してください。"</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"タブレットを出荷時設定にリセットしました。このタブレットを使うには以前のパスワードを入力してください。"</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"デバイスを出荷時設定にリセットしました。このデバイスを使うには以前のパスワードを入力してください。"</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"パターンの確認"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"PIN の確認"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"パスワードの確認"</string>
@@ -2116,6 +2123,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"パターン入力が必要"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"画面ロックを解除するにはパターンの入力が必要"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"パターンを表示する"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"PIN のプライバシーを強化する"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"PIN 入力中のアニメーションを無効にする"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"プロファイルのパターンを表示する"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"タップ操作時のバイブ"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"電源ボタンですぐにロックする"</string>
@@ -2859,14 +2868,14 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"一部の機能が制限される可能性があります"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"バッテリー使用量が多くなっています"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"使用量の多いアプリを確認"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"バッテリーを保護するために充電が最適化されます"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"バッテリーを保護するために、充電が最適化されています"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"バッテリーを長持ちさせるために、充電が最適化されます"</string>
-    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"バッテリーを保護するために充電が最適化されます"</string>
-    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"バッテリーを長持ちさせるために、ホルダーに置いたときは充電が最適化されます"</string>
-    <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"バッテリーを保護するために充電が最適化されます"</string>
-    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"バッテリーを長持ちさせるために、ホルダーに置いたときは充電が最適化されます"</string>
-    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"フル充電する"</string>
-    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"バッテリーを保護するために、次回タブレットをホルダーに置いたときは充電が最適化されます"</string>
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"バッテリーを保護するために、充電が最適化されています"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"バッテリーを長持ちさせるために、ホルダーにセットされているときは充電が最適化されます"</string>
+    <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"バッテリーを保護するために、充電が最適化されています"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"バッテリーを長持ちさせるために、ホルダーにセットされているときは充電が最適化されます"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"フル充電しています"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"バッテリーを保護するために、次回タブレットをホルダーにセットしたときには充電が最適化されます"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"充電一時停止の詳細"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"充電を再開"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"気温が高い、充電時間が長いなど、条件によって、バッテリーの状態を保つために充電が <xliff:g id="PERCENT">%1$s</xliff:g> に制限されることがあります。\n\nこれらの条件が解消されると、スマートフォンは自動的に通常どおり充電されます。"</string>
@@ -2903,7 +2912,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"このアプリがバックグラウンドで電池を使用できるようになるため、電池を予想より早く消費する可能性があります。"</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"解除"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"キャンセル"</string>
-    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"フル充電"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"フル充電する"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"アプリのバッテリー使用量は正常です。アプリがバッテリーを使いすぎる場合は、おすすめの対処方法をスマートフォンがお知らせします。\n\nバッテリーの残量が少なくなったら、いつでもバッテリー セーバーを ON にできます。"</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"アプリのバッテリー使用量は正常です。アプリがバッテリーを使いすぎる場合は、対処可能なおすすめの方法がタブレットに表示されます。\n\nバッテリーの残量が少なくなったら、いつでもバッテリー セーバーを ON にできます。"</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"アプリのバッテリー使用量は正常です。アプリがバッテリーを使いすぎる場合は、対処可能なおすすめの方法がデバイスに表示されます。\n\nバッテリーの残量が少なくなったら、いつでもバッテリー セーバーを ON にできます。"</string>
@@ -4017,7 +4026,7 @@
     <string name="history_toggled_on_summary" msgid="9034278971358282728">"ここには、最近の通知とスヌーズに設定した通知が表示されます"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"通知設定を表示"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"通知を開く"</string>
-    <string name="snooze_options_title" msgid="2109795569568344617">"通知のスヌーズを許可"</string>
+    <string name="snooze_options_title" msgid="2109795569568344617">"通知のスヌーズを許可する"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"通知音なしの通知でアイコンを非表示にする"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"通知音なしの通知のアイコンはステータスバーに表示されません"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"アプリアイコン上の通知ドット"</string>
@@ -4063,7 +4072,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"ロック 画面, ロック画面, スキップ, バイパス"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"仕事用プロファイルのロック時"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"ロック画面に新着の通知のみを表示する"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"ロックを解除するたびに、ロック画面から既存の通知を削除します"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"以前表示された通知をロック画面から自動的に削除します"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"ロック画面上の通知"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"デフォルトとサイレントの会話と通知を表示する"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"デフォルトとサイレントの会話と通知を表示する"</string>
@@ -4650,7 +4659,7 @@
     <string name="high_power_prompt_body" msgid="6029266540782139941">"<xliff:g id="APP_NAME">%1$s</xliff:g> にバックグラウンドでの常時実行を許可すると、バッテリーの消費量が増える場合があります。\n\nこれは後から [設定] &gt; [アプリ] で変更できます。"</string>
     <string name="battery_summary" msgid="2491764359695671207">"前回のフル充電以降 <xliff:g id="PERCENTAGE">%1$s</xliff:g> 使用しています"</string>
     <string name="battery_summary_24hr" msgid="7656033283282656551">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> 使用（過去 24 時間）"</string>
-    <string name="no_battery_summary" msgid="5769159953384122003">"前回のフル充電から電池を使用していません"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"前回のフル充電からバッテリーを使用していません"</string>
     <string name="no_battery_summary_24hr" msgid="6280079526797873842">"バッテリー使用なし（過去 24 時間）"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"アプリの設定"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"SystemUI調整ツールを表示"</string>
@@ -5918,6 +5927,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"スクリーン セーバーの選択"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"その他の情報の表示"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"時刻や天気などの情報をスクリーン セーバーに表示します"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"その他の設定"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"スクリーン セーバーの選択"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"タブレットが装着されているときに画面に表示するものを選択してください。スクリーン セーバーを使用すると、デバイスの電力使用量が増えることがあります。"</string>

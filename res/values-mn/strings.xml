@@ -467,6 +467,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Хурууны хээгээ тохируулна уу"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Хурууны хээгээр түгжээ тайлахыг зөвшөөрөх"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Хурууныхаа хээг ашиглах"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Хурууны хээгээр түгжээ тайлах талаар нэмэлт мэдээлэл авах"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Таблетынхаа түгжээг тайлах эсвэл аппуудад нэвтрэх, худалдан авалтыг зөвшөөрөх зэргээр өөрийгөө мөн болохыг баталгаажуулахын тулд хурууны хээгээ ашиглана уу."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Төхөөрөмжийнхөө түгжээг тайлах эсвэл аппуудад нэвтрэх, худалдан авалтыг зөвшөөрөх зэргээр өөрийгөө мөн болохыг баталгаажуулахын тулд хурууны хээгээ ашиглана уу."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Утасныхаа түгжээг тайлах эсвэл аппуудад нэвтрэх, худалдан авалтыг зөвшөөрөх зэргээр өөрийгөө мөн болохыг баталгаажуулахын тулд хурууны хээгээ ашиглана уу."</string>
@@ -2089,9 +2090,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Хамгаалалтыг сайжруулахын тулд ажлынхаа зурган түгжээг ашиглана уу"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Хамгаалалтыг сайжруулахын тулд ажлынхаа ПИН-ийг оруулна уу"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Хамгаалалтыг сайжруулахын тулд ажлынхаа нууц үгийг оруулна уу"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Таны утсыг үйлдвэрийн тохиргоонд шинэчилсэн байна. Энэ утсыг ашиглахын тулд өмнөх загвараа оруулна уу."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"Таны утсыг үйлдвэрийн тохиргоонд шинэчилсэн байна. Энэ утсыг ашиглахын тулд өмнөх ПИН-ээ оруулна уу."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"Таны утсыг үйлдвэрийн тохиргоонд шинэчилсэн байна. Энэ утсыг ашиглахын тулд өмнөх нууц үгээ оруулна уу."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"Таны утсыг үйлдвэрийн тохиргоонд шинэчилсэн байна. Энэ утсыг ашиглахын тулд өмнөх загвараа оруулна уу."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"Таны таблетыг үйлдвэрийн тохиргоонд шинэчилсэн. Өмнөх хээгээ оруулж энэ таблетыг ашиглана уу."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"Таны төхөөрөмжийг үйлдвэрийн тохиргоонд шинэчилсэн. Өмнөх хээгээ оруулж энэ төхөөрөмжийг ашиглана уу."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"Таны утсыг үйлдвэрийн тохиргоонд шинэчилсэн байна. Энэ утсыг ашиглахын тулд өмнөх ПИН-ээ оруулна уу."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"Таны таблетыг үйлдвэрийн тохиргоонд шинэчилсэн. Өмнөх ПИН-ээ оруулж энэ таблетыг ашиглана уу."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"Таны төхөөрөмжийг үйлдвэрийн тохиргоонд шинэчилсэн. Өмнөх ПИН-ээ оруулж энэ төхөөрөмжийг ашиглана уу."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"Таны утсыг үйлдвэрийн тохиргоонд шинэчилсэн байна. Энэ утсыг ашиглахын тулд өмнөх нууц үгээ оруулна уу."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"Таны таблетыг үйлдвэрийн тохиргоонд шинэчилсэн. Өмнөх нууц үгээ оруулж энэ таблетыг ашиглана уу."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"Таны төхөөрөмжийг үйлдвэрийн тохиргоонд шинэчилсэн. Өмнөх нууц үгээ оруулж төхөөрөмжийг ашиглана уу."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Загварыг баталгаажуулах"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"ПИН баталгаажуулах"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Нууц үг баталгаажуулах"</string>
@@ -2116,6 +2123,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Загвар шаардах"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Дэлгэцийг тайлахын тулд хээгээ зурна уу"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Хээг харуулах"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Сайжруулсан ПИН нууцлал"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"ПИН оруулах үед анимацийг идэвхгүй болгох"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Профайлын зурган түгжээг харагддаг болгох"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Дарахад чичрэх"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Асаах товч шууд түгжигдэнэ"</string>
@@ -2903,7 +2912,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Энэ апп батарейг цаана ашиглах боломжтой болно. Таны батарей тооцоолж байснаас хурдан дуусаж болзошгүй."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Устгах"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Цуцлах"</string>
-    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Бүрэн цэнэглэ"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Бүрэн цэнэглэх"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Таны апп хэвийн хэмжээний батарей ашиглаж байна. Хэрэв апп хэт их батарей ашиглаж байвал таны утас танд авах боломжтой алхмуудыг санал болгоно.\n\nХэрэв таны батарей дуусах гэж байвал та Батарей хэмнэгчийг хүссэн үедээ асаах боломжтой."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Таны апп хэвийн хэмжээний батарей ашиглаж байна. Хэрэв апп хэт их батарей ашиглаж байвал таны таблет танд авах боломжтой алхмуудыг санал болгоно.\n\nХэрэв таны батарей дуусах гэж байвал та Батарей хэмнэгчийг хүссэн үедээ асаах боломжтой."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Таны апп хэвийн хэмжээний батарей ашиглаж байна. Хэрэв апп хэт их батарей ашиглаж байвал таны төхөөрөмж танд авах боломжтой алхмуудыг санал болгоно.\n\nХэрэв таны батарей дуусах гэж байвал та Батарей хэмнэгчийг хүссэн үедээ асаах боломжтой."</string>
@@ -4062,8 +4071,8 @@
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Түгжээг тайлсны дараа хамгийн сүүлд ашигласан дэлгэц рүү шууд очно уу"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Түгжигдсэн дэлгэц, Түгжигдсэн дэлгэц, Алгасах, Тойрох"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Ажлын профайлыг түгжсэн үед"</string>
-    <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Түгжигдсэн дэлгэцэд зөвхөн шинэ мэдэгдэл харуулна"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"Түгжээг тайлах бүрд түгжигдсэн дэлгэцээс одоо байгаа мэдэгдлийг хасна"</string>
+    <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Түгжигдсэн дэлгэцэд зөвхөн шинэ мэдэгдэл харуулах"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Өмнө нь үзсэн мэдэгдлийг түгжигдсэн дэлгэцээс автоматаар хасах"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Түгжигдсэн дэлгэц дээрх мэдэгдэл"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Харилцан яриа, өгөгдмөл болон чимээгүй мэдэгдлийг харуулна"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Харилцан яриа, өгөгдмөл болон чимээгүй мэдэгдлийг харуулна"</string>
@@ -5918,6 +5927,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Дэлгэц амраагчийг сонгох"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Нэмэлт мэдээллийг харуул"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Дэлгэц амраагч дээр цаг, цаг агаар болон бусад мэдээллийг харуулах"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Бусад тохиргоо"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Дэлгэц амраагчаа сонгох"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Таблетаа холбох үед дэлгэцэн дээр юу харагдахыг сонгоно уу. Дэлгэц амраагч ашиглах үед таны төхөөрөмж илүү их эрчим хүч зарцуулж болзошгүй."</string>
