@@ -86,9 +86,9 @@ public class SmartAutoRotatePreferenceControllerTest {
         doReturn(PACKAGE_NAME).when(mPackageManager).getRotationResolverPackageName();
         doReturn(PackageManager.PERMISSION_GRANTED).when(mPackageManager).checkPermission(
                 Manifest.permission.CAMERA, PACKAGE_NAME);
-        when(mContext.getString(R.string.off))
+        when(mContext.getString(R.string.auto_rotate_option_off))
                 .thenReturn("Off");
-        when(mContext.getString(R.string.on))
+        when(mContext.getString(R.string.auto_rotate_option_on))
                 .thenReturn("On");
         when(mContext.getString(R.string.auto_rotate_option_face_based))
                 .thenReturn("On - Face-based");

@@ -658,7 +658,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         }
 
         if (!mShortcutPreference.isChecked()) {
-            return context.getText(R.string.off);
+            return context.getText(R.string.switch_off_text);
         }
 
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(context,

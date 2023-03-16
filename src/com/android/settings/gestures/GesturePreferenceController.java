@@ -60,7 +60,8 @@ public abstract class GesturePreferenceController extends TogglePreferenceContro
 
     @Override
     public CharSequence getSummary() {
-        return mContext.getText(isChecked() ? R.string.on : R.string.off);
+        return mContext.getText(
+                isChecked() ? R.string.gesture_setting_on : R.string.gesture_setting_off);
     }
 
     @Override
