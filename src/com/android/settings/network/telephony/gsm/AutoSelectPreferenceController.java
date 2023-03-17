@@ -211,6 +211,7 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
                             mSwitchPreference.setChecked(isChecked());
                         }
                         mRecursiveUpdate.decrementAndGet();
+                        updateListenerValue();
                         dismissProgressBar();
                     });
                 });
@@ -245,13 +246,13 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
 
         ThreadUtils.postOnBackgroundThread(() -> {
             queryNetworkSelectionMode(INTERNAL_LOG_TAG_INIT);
-
             //Update UI in UI thread
             mUiHandler.post(() -> {
                 if (mSwitchPreference != null) {
                     mRecursiveUpdate.getAndIncrement();
                     mSwitchPreference.setChecked(isChecked());
                     mRecursiveUpdate.decrementAndGet();
+                    updateListenerValue();
                 }
             });
         });
@@ -267,7 +268,6 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     private void queryNetworkSelectionMode(String tag) {
         mCacheOfModeStatus = mTelephonyManager.getNetworkSelectionMode();
         Log.d(LOG_TAG, tag + ": query commend done. mCacheOfModeStatus: " + mCacheOfModeStatus);
-        updateListenerValue();
     }
 
     @VisibleForTesting
@@ -284,12 +284,11 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
             }
             mCacheOfModeStatus = networkSelectionMode;
             Log.d(LOG_TAG, "updateUiAutoSelectValue: mCacheOfModeStatus: " + mCacheOfModeStatus);
-            updateListenerValue();
 
             mRecursiveUpdate.getAndIncrement();
             updateState(mSwitchPreference);
             mRecursiveUpdate.decrementAndGet();
-
+            updateListenerValue();
         }
     }
 
