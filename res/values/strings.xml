@@ -26,10 +26,6 @@
     <string name="deny">Deny</string>
     <!-- Used in confirmation dialogs as the action that the user will tap to turn on the feature. [CHAR LIMIT=40]-->
     <string name="confirmation_turn_on">Turn on</string>
-    <!-- State enabled. [CHAR LIMIT=NONE] -->
-    <string name="on">On</string>
-    <!-- State is disabled. [CHAR LIMIT=NONE] -->
-    <string name="off">Off</string>
 
     <!-- Device Info screen. Used for a status item's value when the proper value is not known -->
     <string name="device_info_default">Unknown</string>
@@ -137,22 +133,20 @@
     <!-- Connected devices settings. Title of the preference to show the entrance of the audio output page. It can change different types of audio are played on phone or other bluetooth devices. [CHAR LIMIT=35] -->
     <string name="bluetooth_audio_routing_title">Audio output</string>
     <!-- Connected devices settings. Summary of the preference to show the entrance of the audio output page. [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_audio_routing_summary">Choose whether different types of audio are played on your hearing device or phone speaker</string>
+    <string name="bluetooth_audio_routing_summary">Route sounds to your hearing device or phone speaker</string>
     <!-- Title for related tools section. This section will list related tools below. [CHAR LIMIT=15] -->
     <string name="bluetooth_screen_related">Related</string>
 
-    <!-- Bluetooth audio output settings. Title of the option managing ringtone audio path. [CHAR LIMIT=30] -->
-    <string name="bluetooth_ringtone_title">Ringtone</string>
+    <!-- Bluetooth audio output settings. Title of the option managing ringtone and alarms audio path. [CHAR LIMIT=30] -->
+    <string name="bluetooth_ringtone_title">Ringtone and alarms</string>
     <!-- Bluetooth audio output settings. Title of the option managing call audio path. [CHAR LIMIT=30] -->
-    <string name="bluetooth_call_title">Call</string>
+    <string name="bluetooth_call_title">Audio during calls</string>
     <!-- Bluetooth audio output settings. Title of the option managing media audio path. [CHAR LIMIT=30] -->
     <string name="bluetooth_media_title">Media</string>
-    <!-- Bluetooth audio output settings. Title of the option managing system sounds audio path. [CHAR LIMIT=30] -->
-    <string name="bluetooth_system_sounds_title">System sounds</string>
-    <!-- Bluetooth audio output settings. Title of the option to play audio on hearing aids. [CHAR LIMIT=40] -->
-    <string name="bluetooth_audio_path_hearing_device_title">Play on hearing device</string>
-    <!-- Bluetooth audio output settings. Title of the option to play audio on phone speaker. [CHAR LIMIT=40] -->
-    <string name="bluetooth_audio_path_phone_speaker_title">Play on phone speaker</string>
+    <!-- Bluetooth audio output settings. Title of the option managing system sounds related audio path. [CHAR LIMIT=30] -->
+    <string name="bluetooth_system_sounds_title">Notifications and other system sounds</string>
+    <!-- Description for text in accessibility hearing aids footer. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_audio_routing_footer_summary">By default, audio output is determined by individual apps</string>
 
     <!--Bluetooth settings screen, summary text for Bluetooth device with no name -->
     <string name="bluetooth_device">Unnamed Bluetooth device</string>
@@ -567,6 +561,8 @@
     <string name="location_settings_title">Location</string>
     <!-- Used in the location settings to control turning on/off the feature entirely [CHAR LIMIT=60] -->
     <string name="location_settings_primary_switch_title">Use location</string>
+    <!-- Summary for Location settings when location is off [CHAR LIMIT=NONE] -->
+    <string name="location_settings_summary_location_off">Off</string>
     <!-- Summary for Location settings when location is on, explaining how many apps have location permission [CHAR LIMIT=NONE]-->
     <string name="location_settings_summary_location_on">{count, plural,
       =1      {On - # app has access to location}
@@ -1601,6 +1597,8 @@
     <string name="android_beam_settings_title">Android Beam</string>
     <!-- Used to describe the on state of the Android Beam feature [CHAR LIMIT=NONE] -->
     <string name="android_beam_on_summary">Ready to transmit app content via NFC</string>
+    <!-- Used to describe the off state of the Android Beam feature [CHAR LIMIT=NONE] -->
+    <string name="android_beam_off_summary">Off</string>
     <!-- Used to describe the enabled state of the Android Beam feature when NFC, which it relies on, is turned off [CHAR LIMIT=NONE] -->
     <string name="nfc_disabled_summary">Unavailable because NFC is turned off</string>
     <!-- Explanation of the Android Beam feature in the Android Beam settings panel. The use of "beam" here is as a verb and not considered trademarked. [CHAR LIMIT=NONE] -->
@@ -2200,6 +2198,8 @@
     <string name="emergency_address_summary">Used as your location when you make an emergency call over Wi\u2011Fi</string>
     <!-- Message of private dns that provides a help link. [CHAR LIMIT=NONE] -->
     <string name="private_dns_help_message"><annotation id="url">Learn more</annotation> about Private DNS features</string>
+    <!-- Message to display when private dns is on. [CHAR LIMIT=10] -->
+    <string name="private_dns_mode_on">On</string>
 
     <!-- Message to display when wifi calling needs activation [CHAR LIMIT=NONE] -->
     <string name="wifi_calling_settings_activation_instructions">Activate Wi\u2011Fi Calling</string>
@@ -2233,6 +2233,10 @@
     <string name="display_settings">Display</string>
     <!-- Sound & display settings screen, accelerometer-based rotation check box label -->
     <string name="accelerometer_title">Auto-rotate screen</string>
+    <!-- Sound & display settings screen, locked rotation check box label [CHAR LIMIT=30] -->
+    <string name="auto_rotate_option_off">Off</string>
+    <!-- Sound & display settings screen, accelerometer-based rotation check box label [CHAR LIMIT=30] -->
+    <string name="auto_rotate_option_on">On</string>
     <!-- Sound & display settings screen, face-based rotation check box label [CHAR LIMIT=30] -->
     <string name="auto_rotate_option_face_based">On - Face-based</string>
     <!-- SmartAutoRotatePreferenceFragment settings screen, face-based rotation switch label [CHAR LIMIT=30] -->
@@ -2270,6 +2274,10 @@
     <string name="auto_brightness_title">Adaptive brightness</string>
     <!-- Description about the feature adaptive brightness -->
     <string name="auto_brightness_description">Your screen brightness will automatically adjust to your environment and activities. You can move the slider manually to help adaptive brightness learn your preferences.</string>
+    <!-- Setting option summary when adaptive brightness is on [CHAR LIMIT=NONE] -->
+    <string name="auto_brightness_summary_on">On</string>
+    <!-- Setting option summary when adaptive brightness is off [CHAR LIMIT=NONE] -->
+    <string name="auto_brightness_summary_off">Off</string>
 
     <!-- Display settings screen, display white balance settings title [CHAR LIMIT=30] -->
     <string name="display_white_balance_title">Display white balance</string>
@@ -2471,6 +2479,7 @@
     <string name="sim_lock_settings">SIM lock settings</string>
     <!-- Security & screen lock settings screen, SIM lock setting option name  [CHAR LIMIT=40] -->
     <string name="sim_lock_settings_category">SIM lock</string>
+    <!-- Security & screen lock settings screen, SIM card lock setting summary when on [CHAR LIMIT=NONE] -->
     <!-- SIM lock settings screen, setting check box label  [CHAR LIMIT=40] -->
     <string name="sim_pin_toggle">Lock SIM</string>
     <!-- SIM card lock settings screen, setting option name to change the SIM PIN  [CHAR LIMIT=40] -->
@@ -2604,6 +2613,10 @@
     <string name="meid_multi_sim">MEID (sim slot <xliff:g id="meid_slot_id">%1$d</xliff:g>)</string>
     <!-- About phone screen, title for primary MEID for multi-sim devices -->
     <string name="meid_multi_sim_primary">MEID (sim slot <xliff:g id="meid_slot_id_primary">%1$d</xliff:g>) (primary)</string>
+    <!-- The status text when (Wi-Fi or Bluetooth) scanning is on. [CHAR LIMIT=100] -->
+    <string name="scanning_status_text_on">On</string>
+    <!-- The status text when (Wi-Fi or Bluetooth) scanning is off. [CHAR LIMIT=100] -->
+    <string name="scanning_status_text_off">Off</string>
     <!-- About phone, status item title.  The phone MEID number of the current LTE/CDMA device. [CHAR LIMIT=30] -->
     <string name="status_meid_number">MEID</string>
     <!-- About phone, status item title.  The ICCID of the current LTE device. [CHAR LIMIT=30] -->
@@ -4506,6 +4519,10 @@
     <string name="accessibility_vibration_settings_title">Vibration &amp; haptics</string>
     <!-- Summary for preference screen for configuring vibrations. [CHAR LIMIT=NONE] -->
     <string name="accessibility_vibration_settings_summary">Control the vibration strength for different usages</string>
+    <!-- "Vibration & haptics" preference's state when enabled. This text is shown next to the "Vibration & haptics" preference title. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_vibration_settings_state_on">On</string>
+    <!-- "Vibration & haptics" preference's state when disabled. This text is shown next to the "Vibration & haptics" preference title. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_vibration_settings_state_off">Off</string>
     <!-- Summary for vibration preference shown when it is disabled because the device is in silent mode. [CHAR LIMIT=NONE] -->
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary">Setting disabled because device is set to silent</string>
     <!-- Title for the category of preferences to configure device vibrations related to calls. [CHAR LIMIT=NONE] -->
@@ -4591,6 +4608,8 @@
     <string name="accessibility_hearingaid_instruction_continue_button">Continue</string>
     <!-- Title for the accessibility preference for hearing devices. [CHAR LIMIT=35] -->
     <string name="accessibility_hearingaid_title">Hearing devices</string>
+    <!-- Introduction for the Hearing devices page to introduce feature. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_hearingaid_intro">You can use hearing aids, cochlear implants, and other amplification devices with your phone</string>
     <!-- Summary for the accessibility preference for hearing aid when not connected. [CHAR LIMIT=50] -->
     <string name="accessibility_hearingaid_not_connected_summary">No hearing aids connected</string>
     <!-- Summary for the accessibility preference for hearing aid when adding new devices. [CHAR LIMIT=50] -->
@@ -4622,9 +4641,9 @@
     <!-- Title for the Hearing Aid Compatibility preference in the accessibility page. [CHAR LIMIT=35] -->
     <string name="accessibility_hac_mode_title">Hearing aid compatibility</string>
     <!--Summary for the Hearing Aid Compatibility preference in the accessibility page. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_hac_mode_summary">Improve audio for some hearing devices</string>
+    <string name="accessibility_hac_mode_summary">Improves compatibility with telecoils and reduces unwanted noise</string>
     <!-- Description for text in accessibility hearing aids footer. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_hearing_device_footer_summary">Make sure your hearing devices are turned on and in pairing mode</string>
+    <string name="accessibility_hearing_device_footer_summary">Make sure your hearing device is turned on and ready to pair</string>
     <!-- Title for the pair hearing device page. [CHAR LIMIT=25] -->
     <string name="accessibility_hearing_device_pairing_page_title">Pair hearing device</string>
     <!-- Title for the preference category containing the list of the available hearing during and after bluetooth scanning devices. [CHAR LIMIT=30] -->
@@ -4632,7 +4651,7 @@
     <!-- Title for the preference category containing the all bluetooth devices during and after bluetooth scanning devices. Used when people can not find their hearing device in hearing device pairing list. [CHAR LIMIT=45] -->
     <string name="accessibility_found_all_devices">Don\u2019t see your hearing device?</string>
     <!-- Title for listing all bluetooth devices preference in the accessibility page. [CHAR LIMIT=40] -->
-    <string name="accessibility_list_all_devices_title">View all Bluetooth devices</string>
+    <string name="accessibility_list_all_devices_title">See more devices</string>
 
     <!-- Title for the accessibility audio adjustment page. [CHAR LIMIT=50] -->
     <string name="accessibility_audio_adjustment_title">Audio adjustment</string>
@@ -4648,6 +4667,10 @@
     <string name="accessibility_summary_shortcut_enabled">Shortcut on</string>
     <!-- Preference's shortcut when disabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_summary_shortcut_disabled">Off</string>
+    <!-- Preference's state when enabled. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_summary_state_enabled">On</string>
+    <!-- Preference's state when disabled. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_summary_state_disabled">Off</string>
     <!-- Accessibility service's preference's state when enabled but not running (like maybe it crashed). -->
     <string name="accessibility_summary_state_stopped">Not working. Tap for info.</string>
     <!-- Accessibility service's description when enabled but not running (like maybe it crashed). -->
@@ -4715,6 +4738,11 @@
 
     <!-- Title for accessibility menu item to launch a settings activity. [CHAR LIMIT=15] -->
     <string name="accessibility_menu_item_settings">Settings</string>
+
+    <!-- Summary for the enabled state of an accessibility feature. [CHAR LIMIT=10] -->
+    <string name="accessibility_feature_state_on">On</string>
+    <!-- Summary for the disabled state of an accessibility feature. [CHAR LIMIT=10] -->
+    <string name="accessibility_feature_state_off">Off</string>
 
     <!-- Title for the preference category containing the video caption preview. [CHAR LIMIT=35] -->
     <string name="captioning_preview_title">Preview</string>
@@ -4885,7 +4913,7 @@
     <!-- List of synonyms used in the settings search bar to find the “Autoclick(dwell timing)”. [CHAR LIMIT=NONE] -->
     <string name="keywords_auto_click">motor, mouse</string>
     <!-- List of synonyms used in the settings search bar to find the “Hearing aids”. [CHAR LIMIT=NONE] -->
-    <string name="keywords_hearing_aids">hard of hearing, hearing loss</string>
+    <string name="keywords_hearing_aids">hearing aids, hard of hearing, hearing loss, cochlear implants, amplification devices, sound processors</string>
     <!-- List of synonyms used in the settings search bar to find the “Real-time text (RTT)”. [CHAR LIMIT=NONE] -->
     <string name="keywords_rtt">hard of hearing, hearing loss, captions, Teletype, tty</string>
     <!-- List of synonyms used in the settings search bar to find the “Voice Access”. [CHAR LIMIT=NONE] -->
@@ -4897,6 +4925,8 @@
     <string name="print_settings">Printing</string>
 
     <!-- Print setting summary in settings screen [CHAR LIMIT=50] -->
+    <string name="print_settings_summary_no_service">Off</string>
+
     <string name="print_settings_summary">{count, plural,
       =1      {1 print service on}
       other   {# print services on}
@@ -4922,6 +4952,11 @@
 
     <!-- Title for print menu item to launch the add printers activity. [CHAR LIMIT=25] -->
     <string name="print_menu_item_add_printers">Add printers</string>
+
+    <!-- Summary for the enabled state of a print feature. [CHAR LIMIT=10] -->
+    <string name="print_feature_state_on">On</string>
+    <!-- Summary for the disabled state of a print feature. [CHAR LIMIT=10] -->
+    <string name="print_feature_state_off">Off</string>
 
     <!-- Title of the action bar button to got to Play Store to download a print service. [CHAR LIMIT=25] -->
     <string name="print_menu_item_add_service">Add service</string>
@@ -5544,6 +5579,10 @@
     <string name="adaptive_connectivity_title">Adaptive connectivity</string>
     <!-- Summary of Adaptive connectivity preference. [CHAR LIMIT=NONE] -->
     <string name="adaptive_connectivity_summary">Extends battery life and improves device performance by automatically managing your network connections</string>
+    <!-- Switch on text of Adaptive connectivity preference. [CHAR LIMIT=NONE]-->
+    <string name="adaptive_connectivity_switch_on">On</string>
+    <!-- Switch off text of Adaptive connectivity preference. [CHAR LIMIT=NONE]-->
+    <string name="adaptive_connectivity_switch_off">Off</string>
     <!-- Title for adaptive connectivity main switch preferences. [CHAR LIMIT=50] -->
     <string name="adaptive_connectivity_main_switch_title">Use adaptive connectivity</string>
 
@@ -5636,6 +5675,10 @@
     <!-- Backup and reset Settings screen --><skip />
     <!-- Backup and reset settings menu and activity title -->
     <string name="privacy_settings_title">Backup</string>
+    <!-- Summary for the Backup settings when it is turned on. -->
+    <string name="backup_summary_state_on">On</string>
+    <!-- Summary for the Backup settings when it is turned off. -->
+    <string name="backup_summary_state_off">Off</string>
     <!-- Backup section title -->
     <string name="backup_section_title">Backup &amp; restore</string>
     <!-- Personal data section title -->
@@ -5722,7 +5765,7 @@
     <string name="notification_log_title">Notification log</string>
 
     <string name="notification_history_title">Notification history</string>
-    <string name="notification_history_today">Last 24 hours</string>
+    <string name="notification_history_today">Last %d hours</string>
     <string name="notification_history_snooze">Snoozed</string>
     <string name="notification_history_dismiss">Recently dismissed</string>
 
@@ -7102,6 +7145,9 @@
     <!-- Sound: Summary for the spatializer effect. [CHAR LIMIT=NONE]-->
     <string name="spatial_audio_text">Audio from compatible media becomes more immersive</string>
 
+    <!-- Sound: Summary for the Spatial audio setting when it is off. [CHAR LIMIT=NONE]-->
+    <string name="spatial_summary_off">Off</string>
+
     <!-- Sound: Summary for the Spatial audio setting when it is on with one output device enabled. [CHAR LIMIT=NONE]-->
     <string name="spatial_summary_on_one">On / <xliff:g id="output device" example="Phone speaker">%1$s</xliff:g></string>
 
@@ -7293,6 +7339,9 @@
 
     <!-- Sound settings screen, summary format of do not disturb when on with extra info. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_sound_summary_on_with_info">On / <xliff:g name="dnd_summary" example="No sound except alarms and media">%1$s</xliff:g></string>
+
+    <!-- Sound settings screen, summary format of do not disturb when on with no extra information. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_sound_summary_on">On</string>
 
     <!--  Do not disturb: Summary for zen mode duration setting indicating user will be prompted to set dnd duration whenever dnd is manually toggled on [CHAR LIMIT=NONE]-->
     <string name="zen_mode_duration_summary_always_prompt">Ask every time</string>
@@ -8423,6 +8472,19 @@
     <!-- PIN entry dialog title for entering the administrator PIN [CHAR LIMIT=none] -->
     <string name="restr_pin_enter_admin_pin">Enter admin PIN</string>
 
+    <!-- Switch On/Off  -->
+    <string name="switch_on_text">On</string>
+    <string name="switch_off_text">Off</string>
+
+    <!-- Switch text for nfc feature being on [CHAR LIMIT=NONE] -->
+    <string name="nfc_setting_on">On</string>
+    <!-- Switch text for nfc feature being off [CHAR LIMIT=NONE] -->
+    <string name="nfc_setting_off">Off</string>
+
+    <!-- The subtext when screen pinning feature is enabled. [CHAR LIMIT=28] -->
+    <string name="screen_pinning_switch_on_text">On</string>
+    <!-- The subtext when screen pinning feature is disabled. [CHAR LIMIT=28] -->
+    <string name="screen_pinning_switch_off_text">Off</string>
     <!-- [CHAR LIMIT=28] Screen pinning title -->
     <string name="screen_pinning_title">App pinning</string>
     <!-- [CHAR LIMIT=none] Screen pinning introduction -->
@@ -8576,7 +8638,11 @@
     <!-- Label for notification settings for an specific app [CHAR LIMIT=40] -->
     <string name="notifications_label">Notifications</string>
     <!-- App notification summary with notifications enabled [CHAR LIMIT=40] -->
+    <string name="notifications_enabled">On</string>
+    <!-- App notification summary with notifications enabled [CHAR LIMIT=40] -->
     <string name="notifications_enabled_with_info"><xliff:g id="notifications_sent" example="~6 per week">%1$s</xliff:g> / <xliff:g id="notifications_categories_off" example="3 categories turned off">%2$s</xliff:g> </string>
+    <!-- Label for showing apps with blocked notifications in list [CHAR LIMIT=30] -->
+    <string name="notifications_disabled">Off</string>
 
     <!-- Permissions preference summary [CHAR LIMIT=40] -->
     <string name="notifications_categories_off">{count, plural,
@@ -9411,6 +9477,12 @@
     <!-- Description of message shown when app is blocklisted for background data access [CHAR LIMIT=NONE] -->
     <string name="restrict_background_blocklisted">Background data is turned off</string>
 
+    <!-- Summary for the Data Saver feature being on [CHAR LIMIT=NONE] -->
+    <string name="data_saver_on">On</string>
+
+    <!-- Summary for the Data Saver feature being off [CHAR LIMIT=NONE] -->
+    <string name="data_saver_off">Off</string>
+
     <!-- Switch label to enable the Data Saver feature [CHAR LIMIT=NONE] -->
     <string name="data_saver_switch_title">Use Data Saver</string>
 
@@ -9429,8 +9501,14 @@
     <!-- Summary for suggestion adding more fingerprints [CHAR LIMIT=55] -->
     <string name="suggestion_additional_fingerprints_summary">Unlock with a different finger</string>
 
+    <!-- Summary of battery saver when on [CHAR LIMIT=NONE] -->
+    <string name="battery_saver_on_summary">On</string>
+
     <!-- Summary of battery saver when it is off and scheduled [CHAR LIMIT=NONE] -->
     <string name="battery_saver_off_scheduled_summary">Will turn on at <xliff:g id="battery_percentage" example="15%">%1$s</xliff:g></string>
+
+    <!-- Summary of battery saver when it is off and scheduled [CHAR LIMIT=NONE] -->
+    <string name="battery_saver_off_summary">Off</string>
 
     <!-- Preference title for battery usage list page[CHAR_LIMIT=50]-->
     <string name="app_battery_usage_title">App battery usage</string>
@@ -9576,6 +9654,9 @@
 
     <!-- Title of screen controlling which apps have access to send premium SMS messages [CHAR LIMIT=60] -->
     <string name="premium_sms_access">Premium SMS access</string>
+
+    <!-- Summary for Bluetooth when disabled. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_disabled">Off</string>
 
     <!-- Summary for Bluetooth when connected to one device. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_connected_summary">Connected to <xliff:g name="device">%1$s</xliff:g></string>
@@ -9812,6 +9893,10 @@
 
     <!-- Title text for the assist gesture [CHAR LIMIT=60] DO NOT TRANSLATE -->
     <string name="assist_gesture_title" translatable="false">Assist gesture</string>
+
+    <!-- Switch text for each gesture setting state -->
+    <string name="gesture_setting_on">On</string>
+    <string name="gesture_setting_off">Off</string>
 
     <!-- setting enable OEM unlock Checkbox's summary to explain this Checkbox is disabled because the bootloader has been unlocked [CHAR_LIMIT=60] -->
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked">Bootloader is already unlocked</string>
@@ -10616,6 +10701,9 @@
     <!-- Label for the on position of a switch on the mobile network details page which allows
          disabling/enabling a SIM. The SIM is enabled in this state. [CHAR LIMIT=40] -->
     <string name="mobile_network_use_sim_on">Use SIM</string>
+    <!-- Label for the off position of a switch on the mobile network details page which allows
+         disabling/enabling a SIM. The SIM is disabled in this state. [CHAR LIMIT=40] -->
+    <string name="mobile_network_use_sim_off">Off</string>
     <!-- Text shown in an information footer on the SIM details page for a physical SIM notifying
          the user that the way to disable this SIM is to physically remove it. This is in contrast
          to eSIM's, which can disabled using an on/off toggle switch. [CHAR LIMIT=NONE] -->
@@ -11435,6 +11523,10 @@
     <!-- TARE settings title in developer options; "TARE" is the name of the feature and cannot be
      translated. [CHAR LIMIT=40] -->
     <string name="tare_settings">TARE Settings</string>
+    <!-- Summary for the TARE feature being on (ie. enabled) [CHAR LIMIT=NONE] -->
+    <string name="tare_on">On</string>
+    <!-- Summary for the TARE feature being off (ie. disabled) [CHAR LIMIT=NONE] -->
+    <string name="tare_off">Off</string>
     <!-- Allows user to revert the TARE settings to their default values [CHAR LIMIT=40] -->
     <string name="tare_revert">Revert to Default Settings</string>
     <!-- Allows user to view AlarmManager policy factors. Alarm in this context is referring to the

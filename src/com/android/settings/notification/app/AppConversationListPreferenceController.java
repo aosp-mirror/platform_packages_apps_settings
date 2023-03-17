@@ -127,15 +127,13 @@ public class AppConversationListPreferenceController extends NotificationPrefere
             return;
         }
 
-        if (!mConversations.isEmpty()) {
-            // TODO: if preference has children, compare with newly loaded list
-            mPreference.removeAll();
-            mPreference.setTitle(getTitleResId());
-            populateConversations();
-        }
+        mPreference.setTitle(getTitleResId());
+        populateConversations();
     }
 
     private void populateConversations() {
+        mPreference.removeAll();
+        mPreference.setVisible(!mConversations.isEmpty());
         for (ConversationChannelWrapper conversation : mConversations) {
             if (conversation.getNotificationChannel().isDemoted()) {
                 continue;
