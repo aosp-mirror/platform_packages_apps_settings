@@ -165,7 +165,7 @@ public class ZenRulePreference extends PrimarySwitchPreference {
         }
 
         return (rule == null || !rule.isEnabled())
-                ? mContext.getResources().getString(R.string.off)
-                : mContext.getResources().getString(R.string.on);
+                ? mContext.getResources().getString(R.string.switch_off_text)
+                : mContext.getResources().getString(R.string.switch_on_text);
     }
 }

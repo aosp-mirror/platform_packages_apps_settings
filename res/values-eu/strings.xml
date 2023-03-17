@@ -106,10 +106,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Utzi"</string>
     <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Gaitu Bluetooth LE audio"</string>
     <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"LE audio darabilten hardwareak gailuarekin bateragarriak badira, Bluetooth LE audioa eginbidea gaitzen du"</string>
-    <!-- no translation found for bluetooth_enable_leaudio_allow_list (1692999156437357534) -->
-    <skip />
-    <!-- no translation found for bluetooth_enable_leaudio_allow_list_summary (725601205276008525) -->
-    <skip />
+    <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Gaitu kontsumo txikiko Bluetooth bidezko audioaren Onartutakoen zerrenda"</string>
+    <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Gaitu kontsumo txikiko Bluetooth bidezko audioaren Onartutakoen zerrenda eginbidea."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Multimedia-gailuak"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Deiak jaso eta egiteko gailuak"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Beste gailu batzuk"</string>
@@ -166,16 +164,11 @@
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Sistemak, aplikazioek eta webguneek hizkuntza hobetsien zerrendako lehen hizkuntza bateragarria erabiltzen dute."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Aplikazio bakoitzerako hizkuntza bat hautatzeko, joan aplikazioaren hizkuntza-ezarpenetara."</string>
     <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Lortu hizkuntzei buruzko informazio gehiago"</string>
-    <!-- no translation found for title_change_system_locale (8589844586256566951) -->
-    <skip />
-    <!-- no translation found for desc_notice_device_locale_settings_change (8311132485850714160) -->
-    <skip />
-    <!-- no translation found for button_label_confirmation_of_system_locale_change (5593798559604894733) -->
-    <skip />
-    <!-- no translation found for title_unavailable_locale (2628898110416542386) -->
-    <skip />
-    <!-- no translation found for desc_unavailable_locale (2201756477400935896) -->
-    <skip />
+    <string name="title_change_system_locale" msgid="8589844586256566951">"Sistemaren hizkuntza aldatu nahi duzu, eta %s ezarri?"</string>
+    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Gailuaren ezarpenak eta lurraldeko hobespenak aldatuko dira."</string>
+    <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Aldatu"</string>
+    <string name="title_unavailable_locale" msgid="2628898110416542386">"%s ez dago erabilgarri"</string>
+    <string name="desc_unavailable_locale" msgid="2201756477400935896">"Hizkuntza hau ezin da erabili sistemaren hizkuntza gisa, baina hura hobesten duzula jakinarazi diezu aplikazio eta webguneei."</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Lurraldeko hobespenak"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Ezarri unitate- eta zenbaki-hobespenak"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Eman tokiko hobespenen berri aplikazioei zerbitzuak pertsonaliza ditzaten."</string>
@@ -657,7 +650,7 @@
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"NFC bidezko NCI paketeen iragazi gabeko erregistroa"</string>
     <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Bildu NFC bidezko pakete xehatuak; baliteke haiek informazio pribatua izatea."</string>
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Gailua berrabiarazi nahi duzu?"</string>
-    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"NFCaren erregistro xehatuak garapen-helburuetarako soilik dira. NFC bidezko datu gehigarriak daude akatsen txostenetan, eta baliteke haiek informazio pribatua izatea. Ezarpen hori aldatzeko, berrabiarazi gailua."</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"NFCaren erregistro xehatuak garapen-helburuetarako soilik dira. NFCari buruzko datu gehigarriak daude akatsen txostenetan, eta baliteke haiek informazio pribatua izatea. Ezarpen hori aldatzeko, berrabiarazi gailua."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Berrabiarazi"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Igorpena"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"islatzea"</string>
@@ -881,6 +874,16 @@
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Hedatu bateragarritasuna"</string>
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Wifi-gune hau aurkitzen laguntzen die beste gailuei. Wifi-gunearen konexio-abiadura murrizten du."</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Wifi-gune hau aurkitzen laguntzen die beste gailuei. Bateria-erabilera areagotzen du."</string>
+    <!-- no translation found for wifi_hotspot_speed_title (8629448084180512685) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_summary (6727230647098551051) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_5g_summary (5009644494425227175) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_6g_summary (1504496768686645945) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_and_5g_summary (2392283008301109037) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Wifi-gunea aktibatzen…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Wifi-gunea desaktibatzen…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Ez dago erabilgarri konexioa partekatzeko aukera"</string>
@@ -2127,7 +2130,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Bateria-erabilera"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Ikusi azken 24 orduetako erabilera"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Ikusi guztiz kargatu zenetik emandako erabilera"</string>
-    <string name="battery_details_title" msgid="3289680399291090588">"Aplikazioek erabiltzen duten bateria"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Bateria-erabilera"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Erabilera-xehetasunak"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Doitu energia-erabilera"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Sartutako paketeak"</string>
@@ -2169,7 +2172,6 @@
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Utzi"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Kargatu guztiz"</string>
     <string name="battery_tip_incompatible_charging_title" msgid="5120763575150751300">"Arazo bat dago kargatzeko osagarriarekin"</string>
-    <string name="battery_tip_incompatible_charging_message" msgid="8812537213731730513">"Bateria mantso kargatzen ari da edo ez da kargatzen. Egiaztatu kableak eta egokigailuak telefonoarekin funtzionatzen dutela."</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"Lortu kargatze bateraezinei buruzko informazio gehiago"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Bateria-kudeatzailea"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Kudeatu aplikazioak automatikoki"</string>
@@ -3461,7 +3463,7 @@
     <string name="unused_apps" msgid="4566272194756830656">"Erabiltzen ez diren aplikazioak"</string>
     <string name="unused_apps_summary" msgid="4236371818881973021">"{count,plural, =1{Erabiltzen ez den # aplikazio}other{Erabiltzen ez diren # aplikazio}}"</string>
     <string name="unused_apps_category" msgid="8954930958175500851">"Erabili gabeko aplikazio-ezarpenak"</string>
-    <string name="unused_apps_switch" msgid="7595419855882245772">"Pausatu erabiltzen ez diren aplikazioetako jarduerak"</string>
+    <string name="unused_apps_switch" msgid="7595419855882245772">"Pausatu aplikazioko jarduerak, erabiltzen ez bada"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Kendu baimenak, ezabatu aldi baterako fitxategiak eta geldiarazi jakinarazpenak"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Aplikazio guztiak"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Instalatutako aplikazioak"</string>
@@ -3739,7 +3741,7 @@
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Gehitu beste hatz-marka bat"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Desblokeatu beste hatz batekin"</string>
     <string name="battery_saver_off_scheduled_summary" msgid="2193875981740829819">"Bateria <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> denean aktibatuko da"</string>
-    <string name="app_battery_usage_title" msgid="346558380609793334">"Aplikazioek erabiltzen duten bateria"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Bateria-erabilera"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Ezarri zenbat bateria erabil dezaketen aplikazioek"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Mugagabea"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimizatua"</string>
@@ -4066,7 +4068,8 @@
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Wifi-konexioa kontrolatzeko aukera"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Eman wifi-konexioa kontrolatzeko baimena aplikazioari"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Eman wifi-konexioa aktibatzeko edo desaktibatzeko, wifi-sareak bilatzeko eta haietara konektatzeko, sareak gehitzeko edo kentzeko, edota wifi-gune lokalak sortzeko baimena aplikazioari."</string>
-    <string name="change_nfc_tag_apps_title" msgid="8720243766338657008">"NFC exekutatzea"</string>
+    <!-- no translation found for change_nfc_tag_apps_title (91514009058149617) -->
+    <skip />
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"Eman exekutatzeko baimena NFC etiketak eskaneatzeko"</string>
     <string name="change_nfc_tag_apps_detail_summary" msgid="7083666814715607078">"Eman NFC etiketak eskaneatzen direnean exekutatzeko baimena aplikazioari.\nBaimena aktibatuta badago, aplikazio hau aukeren artean agertuko da etiketak hautematen direnean."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Erreproduzitu multimedia-edukia hemen:"</string>
@@ -4547,6 +4550,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Aukeratu pantaila-babesle bat"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Erakutsi informazio gehiago"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Ikusi informazioa pantaila-babeslean; besteak beste, ordua eta eguraldia"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Ezarpen gehiago"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Aukeratu pantaila-babeslea"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Aukeratu zer ikusiko den pantailan tableta oinarrian dagoenean. Baliteke gailuak energia gehiago erabiltzea pantaila-babeslea erabiltzen denean."</string>

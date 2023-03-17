@@ -106,10 +106,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"إلغاء"</string>
     <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"‏تفعيل ميزة Bluetooth LE audio"</string>
     <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"‏تفعيل ميزة Bluetooth LE audio في حال إتاحة الجهاز لإمكانات جهاز الصوت المنخفض الطاقة."</string>
-    <!-- no translation found for bluetooth_enable_leaudio_allow_list (1692999156437357534) -->
-    <skip />
-    <!-- no translation found for bluetooth_enable_leaudio_allow_list_summary (725601205276008525) -->
-    <skip />
+    <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"‏تفعيل القائمة المسموح بها لتطبيق Bluetooth LE Audio"</string>
+    <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"‏يسمح هذا الخيار بتفعيل ميزة القائمة المسموح بها لتطبيق Bluetooth LE Audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"أجهزة الوسائط"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"أجهزة الاتصال"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"أجهزة أخرى"</string>
@@ -166,16 +164,11 @@
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"يستخدم النظام والتطبيقات والمواقع الإلكترونية أول لغة متوافقة من اللغات المفضّلة."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"لاختيار لغة لكل تطبيق، انتقِل إلى إعدادات لغة التطبيق."</string>
     <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"مزيد من المعلومات عن اللغات"</string>
-    <!-- no translation found for title_change_system_locale (8589844586256566951) -->
-    <skip />
-    <!-- no translation found for desc_notice_device_locale_settings_change (8311132485850714160) -->
-    <skip />
-    <!-- no translation found for button_label_confirmation_of_system_locale_change (5593798559604894733) -->
-    <skip />
-    <!-- no translation found for title_unavailable_locale (2628898110416542386) -->
-    <skip />
-    <!-- no translation found for desc_unavailable_locale (2201756477400935896) -->
-    <skip />
+    <string name="title_change_system_locale" msgid="8589844586256566951">"‏هل تريد تغيير لغة النظام إلى %s ؟"</string>
+    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"سيتم تغيير إعدادات الجهاز والإعدادات المفضّلة لمنطقتك."</string>
+    <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"تغيير"</string>
+    <string name="title_unavailable_locale" msgid="2628898110416542386">"‏لا تتوفّر اللغة %s"</string>
+    <string name="desc_unavailable_locale" msgid="2201756477400935896">"لا يمكن استخدام هذه اللغة كلغة النظام، ولكن تم السماح للتطبيقات والمواقع الإلكترونية بمعرفة أنّك تفضّل هذه اللغة."</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"الإعدادات المفضّلة لمنطقتك"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"يمكنك ضبط الإعدادات المفضّلة لوحدات القياس والأرقام."</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"السماح للتطبيقات بمعرفة الإعدادات المفضّلة لمنطقتك لتتمكن من تخصيص تجربتك."</string>
@@ -653,7 +646,7 @@
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"‏سجلّ تصحيح أخطاء حزمة الاتصال القصير المدى (NFC)"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"‏زيادة مستوى التسجيل لحزمة الاتصال القصير المدى (NFC)"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"‏سجلّ تصحيح أخطاء مطوَّل لمورِّد الاتصال القصير المدى (NFC)"</string>
-    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"يمكنك تضمين سجلّات المورِّدين الإضافية الخاصة بالجهاز في تقارير الخطأ، وقد تحتوي على معلومات شخصية."</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"تضمين سجلّات المورِّدين الإضافية الخاصة بالجهاز في تقارير الخطأ، وقد تحتوي على معلومات شخصية"</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"‏سجل إحصاءات المستهلكين في أخبار Google لاتصال NFC بدون فلترة"</string>
     <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"‏تسجيل حِزم الاتصال القصير المدى (NFC) التي قد تحتوي على معلومات خاصة"</string>
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"هل تريد إعادة تشغيل الجهاز؟"</string>
@@ -881,6 +874,16 @@
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"زيادة التوافق"</string>
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"يساعد هذا الخيار الأجهزة الأخرى في العثور على نقطة الاتصال هذه. ويؤدي إلى تقليل سرعة اتصال نقطة الاتصال."</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"يساعد هذا الخيار الأجهزة الأخرى في العثور على نقطة الاتصال هذه. ويؤدي إلى زيادة استخدام البطارية."</string>
+    <!-- no translation found for wifi_hotspot_speed_title (8629448084180512685) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_summary (6727230647098551051) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_5g_summary (5009644494425227175) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_6g_summary (1504496768686645945) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_and_5g_summary (2392283008301109037) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"جارٍ تفعيل نقطة الاتصال…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"جارٍ إيقاف نقطة الاتصال…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"التوصيل غير متاح"</string>
@@ -2168,10 +2171,7 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"إزالة"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"إلغاء"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"شحن الجهاز تمامًا"</string>
-    <!-- no translation found for battery_tip_incompatible_charging_title (5120763575150751300) -->
-    <skip />
-    <!-- no translation found for battery_tip_incompatible_charging_message (8812537213731730513) -->
-    <skip />
+    <string name="battery_tip_incompatible_charging_title" msgid="5120763575150751300">"مشكلة متعلّقة بجهاز الشحن الملحق"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"مزيد من المعلومات عن الشحن بمحوِّل طاقة غير متوافق"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"مدير البطارية"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"إدارة التطبيقات تلقائيًا"</string>
@@ -2230,8 +2230,7 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"ضبط جدول زمني"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"إطالة عمر البطارية"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"إيقاف الميزة عندما يكون الجهاز مشحونًا"</string>
-    <!-- no translation found for battery_saver_sticky_title_percentage (1178162022087559148) -->
-    <skip />
+    <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"إيقاف شحن البطارية عند <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"تتوقَّف ميزة \"توفير شحن البطارية\" عندما يصل مستوى شحن البطارية إلى <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>."</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
@@ -2797,13 +2796,13 @@
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"الملء التلقائي والحسابات التي تتم مزامنتها وكلمات المرور المحفوظة"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"التطبيقات التلقائية"</string>
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"التطبيقات المنسوخة"</string>
-    <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"يمكنك إنشاء نسخة ثانية من أحد التطبيقات لتتمكن من استخدام الحسابَين في الوقت نفسه."</string>
+    <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"يمكنك إنشاء نسخة ثانية من أحد التطبيقات لتتمكن من استخدام حسابَين في الوقت نفسه."</string>
     <string name="desc_cloneable_app_list_text" msgid="3354586725814708688">"التطبيقات التي يمكن نسخها"</string>
     <string name="cloned_apps_summary" msgid="8805362440770795709">"تم نسخ <xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g>، ويمكن أيضًا نسخ <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g>."</string>
     <string name="delete_all_app_clones" msgid="3489053361980624999">"حذف جميع نُسخ التطبيقات"</string>
     <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"تعذّر حذف جميع نُسخ التطبيقات."</string>
     <string name="cloned_app_creation_summary" msgid="4642627294993918502">"جارٍ إنشاء نسخة من التطبيق…"</string>
-    <string name="cloned_app_created_summary" msgid="7277912971544890710">"تم نسخ التطبيق."</string>
+    <string name="cloned_app_created_summary" msgid="7277912971544890710">"تم إنشاء نسخة طبق الأصل من التطبيق."</string>
     <!-- no translation found for cloned_app_creation_toast_summary (3854494347144867870) -->
     <skip />
     <!-- no translation found for cloned_app_created_toast_summary (755225403495544163) -->
@@ -3456,7 +3455,7 @@
     <string name="notifications_enabled_with_info" msgid="1808946629277684308">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g> / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
     <string name="notifications_categories_off" msgid="7712037485557237328">"{count,plural, =1{تم إيقاف فئة واحدة.}zero{تم إيقاف # فئة.}two{تم إيقاف فئتَين.}few{تم إيقاف # فئات.}many{تم إيقاف # فئة.}other{تم إيقاف # فئة.}}"</string>
     <string name="runtime_permissions_additional_count" msgid="6071909675951786523">"{count,plural, =1{إذن واحد إضافي}zero{# إذن إضافي}two{إذنان إضافيان}few{# أذونات إضافية}many{# إذنًا إضافيًا}other{# إذن إضافي}}"</string>
-    <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"لم يتم منح أي أذونات"</string>
+    <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"لم يتم منح أي أذونات."</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"لم يتم طلب أي أذونات."</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"التحكّم في وصول التطبيقات إلى بياناتك"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"لوحة بيانات الخصوصية"</string>
@@ -4073,7 +4072,8 @@
     <string name="change_wifi_state_title" msgid="5629648102837821525">"‏التحكّم في شبكة Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"‏السماح للتطبيق بالتحكم في شبكة Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"‏يمكنك السماح لهذا التطبيق بتفعيل شبكة Wi-Fi أو إيقافها، أو البحث عن شبكات Wi-Fi والاتصال بها، أو إضافة الشبكات أو إزالتها، أو بدء نقطة اتصال للأجهزة المحلية فقط."</string>
-    <string name="change_nfc_tag_apps_title" msgid="8720243766338657008">"‏تشغيل التطبيق عن طريق NFC"</string>
+    <!-- no translation found for change_nfc_tag_apps_title (91514009058149617) -->
+    <skip />
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"‏السماح بتشغيل التطبيق عند مسح علامة NFC ضوئيًا"</string>
     <string name="change_nfc_tag_apps_detail_summary" msgid="7083666814715607078">"‏اسمح بتشغيل هذا التطبيق عندما يتم مسح علامة NFC ضوئيًا.\nإذا كان هذا الإذن مفعّلاً، سيتوفّر التطبيق كخيار كلّما تم رصد علامة."</string>
     <string name="media_output_title" msgid="8283629315159510680">"تشغيل الوسائط على"</string>
@@ -4558,6 +4558,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"اختيار شاشة استراحة"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"إظهار معلومات إضافية"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"يتم عرض الوقت أو الطقس أو غير ذلك من المعلومات على شاشة الاستراحة."</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"إعدادات إضافية"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"اختيار شاشة الاستراحة"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"اختَر ما تريد أن يظهر على شاشتك عندما يكون جهازك اللوحي في حالة إرساء. قد يستهلك جهازك قدرًا أكبر من الطاقة عند استخدام شاشة الاستراحة."</string>

@@ -106,10 +106,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"取消"</string>
     <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"启用蓝牙 LE 音频功能"</string>
     <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"如果设备支持 LE 音频硬件功能，则启用蓝牙 LE 音频功能。"</string>
-    <!-- no translation found for bluetooth_enable_leaudio_allow_list (1692999156437357534) -->
-    <skip />
-    <!-- no translation found for bluetooth_enable_leaudio_allow_list_summary (725601205276008525) -->
-    <skip />
+    <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"启用蓝牙 LE 音频许可名单"</string>
+    <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"启用蓝牙 LE 音频许可名单功能。"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"媒体设备"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"通话设备"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"其他设备"</string>
@@ -166,16 +164,11 @@
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"系统、应用和网站会使用首选语言中的第一个受支持的语言。"</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"如需为每个应用选择语言，请进入应用语言设置页面。"</string>
     <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"详细了解语言"</string>
-    <!-- no translation found for title_change_system_locale (8589844586256566951) -->
-    <skip />
-    <!-- no translation found for desc_notice_device_locale_settings_change (8311132485850714160) -->
-    <skip />
-    <!-- no translation found for button_label_confirmation_of_system_locale_change (5593798559604894733) -->
-    <skip />
-    <!-- no translation found for title_unavailable_locale (2628898110416542386) -->
-    <skip />
-    <!-- no translation found for desc_unavailable_locale (2201756477400935896) -->
-    <skip />
+    <string name="title_change_system_locale" msgid="8589844586256566951">"将系统语言更改为%s？"</string>
+    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"您的设备设置和区域偏好设置将更改。"</string>
+    <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"更改"</string>
+    <string name="title_unavailable_locale" msgid="2628898110416542386">"无法使用%s"</string>
+    <string name="desc_unavailable_locale" msgid="2201756477400935896">"此语言无法用作系统语言，但应用和网站已知晓您选择此语言为您的首选语言。"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"区域偏好设置"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"设置单位和数字偏好设置"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"将您的区域偏好设置告知应用，使应用能够为您提供个性化体验。"</string>
@@ -881,6 +874,16 @@
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"扩大兼容性"</string>
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"这有助于其他设备发现此热点，但会降低热点连接速度。"</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"这有助于其他设备发现此热点，但会增加耗电量。"</string>
+    <!-- no translation found for wifi_hotspot_speed_title (8629448084180512685) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_summary (6727230647098551051) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_5g_summary (5009644494425227175) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_6g_summary (1504496768686645945) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_and_5g_summary (2392283008301109037) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"正在打开热点..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"正在关闭热点..."</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"网络共享不可用"</string>
@@ -2169,7 +2172,6 @@
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"取消"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"充满电"</string>
     <string name="battery_tip_incompatible_charging_title" msgid="5120763575150751300">"充电配件有问题"</string>
-    <string name="battery_tip_incompatible_charging_message" msgid="8812537213731730513">"电池充电缓慢或无法充电。请检查数据线和电源适配器与您的手机是否适配"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"详细了解不兼容的充电装置"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"电池管理器"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"自动管理应用"</string>
@@ -4066,7 +4068,8 @@
     <string name="change_wifi_state_title" msgid="5629648102837821525">"WLAN 控制"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"允许应用控制 WLAN"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"允许此应用开启或关闭 WLAN、扫描及连接到 WLAN 网络、添加或移除网络，或启动仅限本地的热点"</string>
-    <string name="change_nfc_tag_apps_title" msgid="8720243766338657008">"启动 NFC"</string>
+    <!-- no translation found for change_nfc_tag_apps_title (91514009058149617) -->
+    <skip />
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"允许在扫描 NFC 时启动"</string>
     <string name="change_nfc_tag_apps_detail_summary" msgid="7083666814715607078">"扫描到 NFC 标签时，允许此应用启动。\n如果启用此权限，则每当检测到 NFC 标签时，此应用都会列为启动选项。"</string>
     <string name="media_output_title" msgid="8283629315159510680">"媒体播放到"</string>
@@ -4547,6 +4550,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"选择屏保"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"显示其他信息"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"在屏保上显示时间、天气或其他信息"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"更多设置"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"选择屏保"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"选择平板电脑锁定时您希望在屏幕上看到的内容。使用屏保时，您的设备可能会消耗更多能量。"</string>

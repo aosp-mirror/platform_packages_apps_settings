@@ -106,10 +106,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Cancelar"</string>
     <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Habilitar Bluetooth LE audio"</string>
     <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Habilita la función Bluetooth LE audio si el dispositivo admite funciones de hardware de ese tipo."</string>
-    <!-- no translation found for bluetooth_enable_leaudio_allow_list (1692999156437357534) -->
-    <skip />
-    <!-- no translation found for bluetooth_enable_leaudio_allow_list_summary (725601205276008525) -->
-    <skip />
+    <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Habilitar la lista de permitidos de Bluetooth LE Audio"</string>
+    <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Habilita la función de la lista de permitidos de Bluetooth LE Audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Dispositivos de medios"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Dispositivos para llamar"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Otros dispositivos"</string>
@@ -166,16 +164,11 @@
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"El sistema, las apps y los sitios web usan el primer idioma compatible de entre los preferidos."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Para seleccionar un idioma para cada app, ve a la configuración del idioma de la app."</string>
     <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Más información sobre idiomas"</string>
-    <!-- no translation found for title_change_system_locale (8589844586256566951) -->
-    <skip />
-    <!-- no translation found for desc_notice_device_locale_settings_change (8311132485850714160) -->
-    <skip />
-    <!-- no translation found for button_label_confirmation_of_system_locale_change (5593798559604894733) -->
-    <skip />
-    <!-- no translation found for title_unavailable_locale (2628898110416542386) -->
-    <skip />
-    <!-- no translation found for desc_unavailable_locale (2201756477400935896) -->
-    <skip />
+    <string name="title_change_system_locale" msgid="8589844586256566951">"¿Deseas cambiar el idioma del sistema a %s?"</string>
+    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Cambiarán la configuración y las preferencias regionales de tu dispositivo."</string>
+    <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Cambiar"</string>
+    <string name="title_unavailable_locale" msgid="2628898110416542386">"%s no está disponible"</string>
+    <string name="desc_unavailable_locale" msgid="2201756477400935896">"Este idioma no se puede usar como idioma del sistema, pero permitiste que las apps y los sitios web sepan que lo prefieres."</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Preferencias regionales"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Establece tus preferencias de unidades y números"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Permite que las apps sepan tus preferencias regionales para que puedan personalizar la experiencia."</string>
@@ -881,6 +874,16 @@
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Extender la compatibilidad"</string>
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Ayuda a que otros dispositivos encuentren este hotspot. Disminuye la velocidad de conexión de hotspot."</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Ayuda a que otros dispositivos encuentren este hotspot. Incrementa el uso de batería."</string>
+    <!-- no translation found for wifi_hotspot_speed_title (8629448084180512685) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_summary (6727230647098551051) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_5g_summary (5009644494425227175) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_6g_summary (1504496768686645945) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_and_5g_summary (2392283008301109037) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Activando hotspot…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Desactivando hotspot…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Conexión mediante dispositivo móvil no disponible"</string>
@@ -1544,7 +1547,7 @@
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"Si fuerzas la detención de una aplicación, es posible que funcione incorrectamente."</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"Inhabilitar la aplicación"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"Si inhabilitas esta app, es posible que Android y otras apps ya no funcionen correctamente. Ten en cuenta que no puedes borrar esta app ya que vino preinstalada en el dispositivo. Si la inhabilitas, se desactivarás y se ocultará en tu dispositivo."</string>
-    <string name="app_install_details_group_title" msgid="1172114479073704677">"Store"</string>
+    <string name="app_install_details_group_title" msgid="1172114479073704677">"Tienda"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Detalles de la app"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"App instalada desde <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"Más información en <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -2168,10 +2171,7 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Quitar"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Cancelar"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Cargar por completo"</string>
-    <!-- no translation found for battery_tip_incompatible_charging_title (5120763575150751300) -->
-    <skip />
-    <!-- no translation found for battery_tip_incompatible_charging_message (8812537213731730513) -->
-    <skip />
+    <string name="battery_tip_incompatible_charging_title" msgid="5120763575150751300">"Problema con el accesorio de carga"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"Más información sobre la carga no compatible"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Administrador de batería"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Administra apps automáticamente"</string>
@@ -2230,8 +2230,7 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Establecer un programa"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Extender la duración de la batería"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Desactivar cuando la batería esté cargada"</string>
-    <!-- no translation found for battery_saver_sticky_title_percentage (1178162022087559148) -->
-    <skip />
+    <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Desactivar a la(s) <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Cuando el dispositivo tiene más del <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> de carga, se desactiva el Ahorro de batería"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
@@ -3463,7 +3462,7 @@
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Muestra qué apps usaron permisos recientemente"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Apps que no usas"</string>
     <string name="unused_apps_summary" msgid="4236371818881973021">"{count,plural, =1{# app en desuso}other{# apps en desuso}}"</string>
-    <string name="unused_apps_category" msgid="8954930958175500851">"Configuración de apps sin usar"</string>
+    <string name="unused_apps_category" msgid="8954930958175500851">"Configuración de app sin usar"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"Pausar actividad en la app si no se usa"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Quitar permisos, borrar archivos temporales y detener notificaciones"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Todas las apps"</string>
@@ -3742,7 +3741,7 @@
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Agregar otra huella dactilar"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Desbloquea con otro dedo"</string>
     <string name="battery_saver_off_scheduled_summary" msgid="2193875981740829819">"Se activará cuando quede <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="app_battery_usage_title" msgid="346558380609793334">"Uso de batería de las apps"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Uso de batería de la app"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Establecer uso de batería para apps"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Sin restricciones"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimizada"</string>
@@ -3781,8 +3780,8 @@
     <string name="overlay_toast_failed_to_apply" msgid="4839587811338164960">"Error al aplicar superposición"</string>
     <string name="special_access" msgid="1767980727423395147">"Acceso especial de apps"</string>
     <plurals name="special_access_summary" formatted="false" msgid="4995506406763570815">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> apps pueden usar datos sin restricciones</item>
-      <item quantity="one">1 app puede usar datos sin restricciones</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> apps pueden usar datos ilimitados</item>
+      <item quantity="one">1 app puede usar datos ilimitados</item>
     </plurals>
     <string name="special_access_more" msgid="132919514147475846">"Ver más"</string>
     <string name="long_background_tasks_label" msgid="3169590134850226687">"Tareas largas en segundo plano"</string>
@@ -4069,7 +4068,8 @@
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Control de Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Permitir que la app controle Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Permite que esta app active o desactive la conexión Wi-Fi, busque y se conecte a redes Wi-Fi, agregue o quite redes, o inicie un hotspot de acceso local exclusivo."</string>
-    <string name="change_nfc_tag_apps_title" msgid="8720243766338657008">"Inicio de NFC"</string>
+    <!-- no translation found for change_nfc_tag_apps_title (91514009058149617) -->
+    <skip />
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"Permitir inicio del escáner de NFC"</string>
     <string name="change_nfc_tag_apps_detail_summary" msgid="7083666814715607078">"Permite que se inicie esta app cuando se escanee una etiqueta NFC.\nSi este permiso se activa, la app estará disponible como opción siempre que se detecte una etiqueta."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Reproducir contenido multimedia en"</string>
@@ -4550,6 +4550,10 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Selecciona un protector de pantalla"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Mostrar información adicional"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Mostrar datos como la hora, el clima o demás información en el protector de pantalla"</string>
+    <!-- no translation found for dream_home_controls_toggle_title (706799741564479248) -->
+    <skip />
+    <!-- no translation found for dream_home_controls_toggle_summary (4102519907917430579) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Más parámetros de configuración"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Elige tu protector de pantalla"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Elige lo que quieres ver en la pantalla cuando la tablet no está conectada. Es posible que el dispositivo use más energía cuando se utiliza el protector de pantalla."</string>
