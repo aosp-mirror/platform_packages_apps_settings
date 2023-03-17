@@ -19,6 +19,7 @@ package com.android.settings.bluetooth;
 import static android.bluetooth.BluetoothDevice.BOND_NONE;
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
@@ -27,6 +28,7 @@ import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.le.ScanFilter;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,6 +36,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -43,6 +46,7 @@ import com.android.settings.R;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
+import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastMetadata;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -65,6 +69,7 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
 
     public static final String KEY_DEVICE_ADDRESS = "device_address";
     public static final String PREF_KEY_BROADCAST_SOURCE_LIST = "broadcast_source_list";
+    public static final int REQUEST_SCAN_BT_BROADCAST_QR_CODE = 0;
 
     @VisibleForTesting
     String mDeviceAddress;
@@ -79,6 +84,7 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
     BluetoothFindBroadcastsHeaderController mBluetoothFindBroadcastsHeaderController;
 
     private LocalBluetoothLeBroadcastAssistant mLeBroadcastAssistant;
+    private LocalBluetoothLeBroadcastMetadata mLocalBroadcastMetadata;
     private Executor mExecutor;
     private int mSourceId;
 
@@ -183,6 +189,7 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
         mCachedDevice = getCachedDevice(mDeviceAddress);
         mLeBroadcastAssistant = getLeBroadcastAssistant();
         mExecutor = Executors.newSingleThreadExecutor();
+        mLocalBroadcastMetadata = new LocalBluetoothLeBroadcastMetadata();
 
         super.onAttach(context);
         if (mCachedDevice == null || mLeBroadcastAssistant == null) {
@@ -226,6 +233,34 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
         super.onStop();
         if (mLeBroadcastAssistant != null) {
             mLeBroadcastAssistant.unregisterServiceCallBack(mBroadcastAssistantCallback);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult: " + requestCode + ", resultCode: " + resultCode);
+        if (requestCode == REQUEST_SCAN_BT_BROADCAST_QR_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+
+                //Get BroadcastMetadata
+                String broadcastMetadata = data.getStringExtra(
+                        QrCodeScanModeFragment.KEY_BROADCAST_METADATA);
+                BluetoothLeBroadcastMetadata source = convertToBroadcastMetadata(broadcastMetadata);
+
+                if (source != null) {
+                    Log.d(TAG, "onActivityResult source Id = " + source.getBroadcastId());
+                    //Create preference for the broadcast source
+                    updateListCategoryFromBroadcastMetadata(source, false);
+                    //Add Source
+                    addSource(mBroadcastSourceListCategory.findPreference(
+                            Integer.toString(source.getBroadcastId())));
+                } else {
+                    Toast.makeText(getContext(),
+                        R.string.find_broadcast_join_broadcast_error, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
         }
     }
 
@@ -465,5 +500,9 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
 
     public void setSourceId(int sourceId) {
         mSourceId = sourceId;
+    }
+
+    private BluetoothLeBroadcastMetadata convertToBroadcastMetadata(String qrCodeString) {
+        return mLocalBroadcastMetadata.convertToBroadcastMetadata(qrCodeString);
     }
 }
