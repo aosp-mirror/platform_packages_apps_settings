@@ -92,8 +92,11 @@ class SpaLogData(val id: String, val event: LogEvent,
         return null
     }
 
-    fun getAction(): Int {
-        return event.action
+    fun getAction(): Int = when (event) {
+        LogEvent.PAGE_ENTER -> SettingsEnums.PAGE_VISIBLE
+        LogEvent.PAGE_LEAVE -> SettingsEnums.PAGE_HIDE
+        LogEvent.ENTRY_CLICK -> SettingsEnums.ACTION_SETTINGS_TILE_CLICK
+        LogEvent.ENTRY_SWITCH -> SettingsEnums.ACTION_SETTINGS_PREFERENCE_CHANGE
     }
 
     //TODO(b/253979024): Will be implemented in subsequent CLs.

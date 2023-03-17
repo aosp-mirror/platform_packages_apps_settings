@@ -92,13 +92,13 @@ public class NfcAndPaymentFragmentControllerTest {
     public void getSummary_nfcOn_shouldProvideOnSummary() {
         mShadowNfcAdapter.setEnabled(true);
         assertThat(mController.getSummary().toString()).contains(
-                mContext.getString(R.string.on));
+                mContext.getString(R.string.switch_on_text));
     }
 
     @Test
     public void getSummary_nfcOff_shouldProvideOffSummary() {
         mShadowNfcAdapter.setEnabled(false);
         assertThat(mController.getSummary().toString()).contains(
-                mContext.getString(R.string.off));
+                mContext.getString(R.string.switch_off_text));
     }
 }

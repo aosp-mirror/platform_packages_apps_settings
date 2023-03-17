@@ -80,7 +80,7 @@ public final class AccessibilityUtilTest {
         final CharSequence result = AccessibilityUtil.getSummary(mContext, SECURE_TEST_KEY);
 
         assertThat(result)
-                .isEqualTo(mContext.getText(R.string.on));
+                .isEqualTo(mContext.getText(R.string.accessibility_feature_state_on));
     }
 
     @Test
@@ -90,7 +90,7 @@ public final class AccessibilityUtilTest {
         final CharSequence result = AccessibilityUtil.getSummary(mContext, SECURE_TEST_KEY);
 
         assertThat(result)
-                .isEqualTo(mContext.getText(R.string.off));
+                .isEqualTo(mContext.getText(R.string.accessibility_feature_state_off));
     }
 
     @Test
@@ -98,7 +98,7 @@ public final class AccessibilityUtilTest {
         final CharSequence result = AccessibilityUtil.getSummary(mContext, SECURE_TEST_KEY);
 
         assertThat(result)
-                .isEqualTo(mContext.getText(R.string.off));
+                .isEqualTo(mContext.getText(R.string.accessibility_feature_state_off));
     }
 
     @Test

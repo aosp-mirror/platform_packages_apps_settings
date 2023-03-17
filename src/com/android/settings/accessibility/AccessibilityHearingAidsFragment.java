@@ -38,7 +38,7 @@ import com.android.settingslib.search.SearchIndexable;
 public class AccessibilityHearingAidsFragment extends AccessibilityShortcutPreferenceFragment {
 
     private static final String TAG = "AccessibilityHearingAidsFragment";
-    private static final String KEY_DEVICE_CONTROL_CATEGORY = "device_control_category";
+    private static final String KEY_HEARING_OPTIONS_CATEGORY = "hearing_options_category";
     private static final int FIRST_PREFERENCE_IN_CATEGORY_INDEX = -1;
     private String mFeatureName;
 
@@ -63,8 +63,8 @@ public class AccessibilityHearingAidsFragment extends AccessibilityShortcutPrefe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final View view = super.onCreateView(inflater, container, savedInstanceState);
-        final PreferenceCategory controlCategory = findPreference(KEY_DEVICE_CONTROL_CATEGORY);
-        // Move the preference under controlCategory need to remove the original first.
+        final PreferenceCategory controlCategory = findPreference(KEY_HEARING_OPTIONS_CATEGORY);
+        // To move the shortcut preference under controlCategory need to remove the original added.
         mShortcutPreference.setOrder(FIRST_PREFERENCE_IN_CATEGORY_INDEX);
         getPreferenceScreen().removePreference(mShortcutPreference);
         controlCategory.addPreference(mShortcutPreference);
@@ -110,7 +110,8 @@ public class AccessibilityHearingAidsFragment extends AccessibilityShortcutPrefe
 
     @Override
     protected boolean showGeneralCategory() {
-        // Have customized category for accessibility hearings aids page.
+        // Have static preference under dynamically created PreferenceCategory KEY_GENERAL_CATEGORY.
+        // In order to modify that, we need to use our own PreferenceCategory for this page.
         return false;
     }
 
