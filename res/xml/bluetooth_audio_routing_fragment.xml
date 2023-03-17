@@ -64,6 +64,7 @@
         android:key="hearing_device_footer"
         android:title="@string/bluetooth_audio_routing_footer_summary"
         android:selectable="false"
-        settings:searchable="false" />
+        settings:searchable="false"
+        settings:controller="com.android.settings.bluetooth.BluetoothDetailsAudioRoutingFooterPreferenceController"/>
 
 </PreferenceScreen>
