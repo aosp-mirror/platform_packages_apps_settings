@@ -46,10 +46,11 @@
         android:title="@string/flash_notifications_preview"
         settings:controller="com.android.settings.accessibility.FlashNotificationsPreviewPreferenceController" />
 
-    <com.android.settingslib.widget.FooterPreference
+    <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="flash_notifications_footer"
-        android:selectable="false"
         android:title="@string/flash_notifications_note"
-        settings:searchable="false" />
+        android:selectable="false"
+        settings:searchable="false"
+        settings:controller="com.android.settings.accessibility.FlashNotificationsFooterPreferenceController"/>
 
 </PreferenceScreen>
