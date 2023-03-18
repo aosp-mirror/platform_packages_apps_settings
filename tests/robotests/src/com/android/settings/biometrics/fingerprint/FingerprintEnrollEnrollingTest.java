@@ -43,6 +43,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.hardware.biometrics.ComponentInfoInternal;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.fingerprint.FingerprintManager;
@@ -58,6 +59,7 @@ import android.view.Surface;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -81,6 +83,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 @RunWith(RobolectricTestRunner.class)
 public class FingerprintEnrollEnrollingTest {
@@ -243,6 +246,78 @@ public class FingerprintEnrollEnrollingTest {
                 ((UdfpsEnrollProgressBarDrawable) (progressBar.getDrawable()))
                         .mFillPaint.getColor())
                 .isEqualTo(progressColor);
+    }
+
+    @Test
+    public void fingerprintUdfpsOverlayEnrollment_checkViewOverlapPortrait() {
+        FeatureFlagUtils.setEnabled(mContext,
+                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
+        when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_90);
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+
+        final GlifLayout defaultLayout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final TextView headerTextView = defaultLayout.getHeaderTextView();
+        final TextView descriptionTextView = defaultLayout.getDescriptionTextView();
+        final FrameLayout lottieAnimationContainer = mActivity.findViewById(R.id.layout_container);
+        final UdfpsEnrollView udfpsEnrollView =
+                defaultLayout.findViewById(R.id.udfps_animation_view);
+
+        final int[] headerTextViewPosition = new int[2];
+        final int[] descriptionTextViewPosition = new int[2];
+        final int[] lottieAnimationPosition = new int[2];
+        final int[] udfpsEnrollViewPosition = new int[2];
+        final AtomicReference<Rect> rectHeaderTextView = new AtomicReference<>(
+                new Rect(0, 0, 0, 0));
+        final AtomicReference<Rect> rectDescriptionTextView =
+                new AtomicReference<>(new Rect(0, 0, 0, 0));
+        final AtomicReference<Rect> rectLottieAnimationView = new AtomicReference<>(
+                new Rect(0, 0, 0, 0));
+        final AtomicReference<Rect> rectUdfpsEnrollView = new AtomicReference<>(
+                new Rect(0, 0, 0, 0));
+
+        headerTextView.getViewTreeObserver().addOnDrawListener(() -> {
+            headerTextView.getLocationOnScreen(headerTextViewPosition);
+            rectHeaderTextView.set(new Rect(headerTextViewPosition[0], headerTextViewPosition[1],
+                    headerTextViewPosition[0] + headerTextView.getWidth(),
+                    headerTextViewPosition[1] + headerTextView.getHeight()));
+        });
+
+        descriptionTextView.getViewTreeObserver().addOnDrawListener(() -> {
+            descriptionTextView.getLocationOnScreen(descriptionTextViewPosition);
+            rectDescriptionTextView.set(new Rect(descriptionTextViewPosition[0],
+                    descriptionTextViewPosition[1], descriptionTextViewPosition[0]
+                    + descriptionTextView.getWidth(), descriptionTextViewPosition[1]
+                    + descriptionTextView.getHeight()));
+
+        });
+
+        udfpsEnrollView.getViewTreeObserver().addOnDrawListener(() -> {
+            udfpsEnrollView.getLocationOnScreen(udfpsEnrollViewPosition);
+            rectUdfpsEnrollView.set(new Rect(udfpsEnrollViewPosition[0],
+                            udfpsEnrollViewPosition[1], udfpsEnrollViewPosition[0]
+                            + udfpsEnrollView.getWidth(), udfpsEnrollViewPosition[1]
+                            + udfpsEnrollView.getHeight()));
+        });
+
+        lottieAnimationContainer.getViewTreeObserver().addOnDrawListener(() -> {
+            lottieAnimationContainer.getLocationOnScreen(lottieAnimationPosition);
+            rectLottieAnimationView.set(new Rect(lottieAnimationPosition[0],
+                    lottieAnimationPosition[1], lottieAnimationPosition[0]
+                    + lottieAnimationContainer.getWidth(), lottieAnimationPosition[1]
+                    + lottieAnimationContainer.getHeight()));
+        });
+
+        // Check if the HeaderTextView and DescriptionTextView overlapped
+        assertThat(rectHeaderTextView.get()
+                .intersect(rectDescriptionTextView.get())).isFalse();
+
+        // Check if the DescriptionTextView and Lottie animation overlapped
+        assertThat(rectDescriptionTextView.get()
+                .intersect(rectLottieAnimationView.get())).isFalse();
+
+        // Check if the Lottie animation and UDSPFEnrollView overlapped
+        assertThat(rectLottieAnimationView.get()
+                .intersect(rectUdfpsEnrollView.get())).isFalse();
     }
 
     @Test
