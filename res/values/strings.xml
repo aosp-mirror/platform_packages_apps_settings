@@ -132,6 +132,8 @@
     <string name="bluetooth_device_controls_summary">Hearing device shortcut, hearing aid compatibility</string>
     <!-- Connected devices settings. Title of the preference to show the entrance of the audio output page. It can change different types of audio are played on phone or other bluetooth devices. [CHAR LIMIT=35] -->
     <string name="bluetooth_audio_routing_title">Audio output</string>
+    <!-- Title for bluetooth audio routing page footer. [CHAR LIMIT=30] -->
+    <string name="bluetooth_audio_routing_about_title">About audio output</string>
     <!-- Connected devices settings. Summary of the preference to show the entrance of the audio output page. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_audio_routing_summary">Route sounds to your hearing device or phone speaker</string>
     <!-- Title for related tools section. This section will list related tools below. [CHAR LIMIT=15] -->
@@ -4630,6 +4632,8 @@
     <string name="accessibility_hearingaid_more_device_summary"><xliff:g id="device_name" example="GN Hearing Aids">%1$s</xliff:g> +1 more</string>
     <!-- Title for the hearing device pairing preference. [CHAR LIMIT=20] -->
     <string name="accessibility_hearing_device_pairing_title">Pair new device</string>
+    <!-- Title for accessibility pair new hearing device page footer. [CHAR LIMIT=60] -->
+    <string name="accessibility_pair_hearing_device_about_title">About Pair new device</string>
     <!-- Title for the preference category containing the connected hearing device group. [CHAR LIMIT=20]-->
     <string name="accessibility_hearing_device_connected_title">Hearing devices</string>
     <!-- Title for the preference category containing the previously connected hearing device group. [CHAR LIMIT=20]-->
@@ -4642,6 +4646,8 @@
     <string name="accessibility_hac_mode_title">Hearing aid compatibility</string>
     <!--Summary for the Hearing Aid Compatibility preference in the accessibility page. [CHAR LIMIT=NONE] -->
     <string name="accessibility_hac_mode_summary">Improves compatibility with telecoils and reduces unwanted noise</string>
+    <!-- Title for accessibility hearing device page footer. [CHAR LIMIT=40] -->
+    <string name="accessibility_hearing_device_about_title">About hearing devices</string>
     <!-- Description for text in accessibility hearing aids footer. [CHAR LIMIT=NONE] -->
     <string name="accessibility_hearing_device_footer_summary">Make sure your hearing device is turned on and ready to pair</string>
     <!-- Title for the pair hearing device page. [CHAR LIMIT=25] -->
@@ -11865,7 +11871,8 @@
     <string name="find_broadcast_password_dialog_connection_error">Can\u2019t connect. Try again.</string>
     <!-- The error message of enter password dialog in bluetooth find broadcast page [CHAR LIMIT=none] -->
     <string name="find_broadcast_password_dialog_password_error">Wrong password</string>
-
+    <!-- The error message of join the broadcast session by scanning the QR code [CHAR LIMIT=none] -->
+    <string name="find_broadcast_join_broadcast_error">Can\u2019t join the broadcast</string>
 
     <!-- [CHAR LIMIT=NONE] Le audio QR code scanner sub-title -->
     <string name="bt_le_audio_scan_qr_code_scanner">To start listening, center the QR code below</string>
@@ -11914,8 +11921,10 @@
     <string name="accessibility_fingerprint_label">Fingerprint sensor</string>
 
     <!-- Accessibility Flash Notification -->
-    <!-- Title of the Flash Notification entry [CHAR LIMIT=NONE] -->
+    <!-- Title of the Flash Notification entry [CHAR LIMIT=35] -->
     <string name="flash_notifications_title">Flash notifications</string>
+    <!-- Title for flash notifications page footer. [CHAR LIMIT=45] -->
+    <string name="flash_notifications_about_title">About flash notifications</string>
     <!-- Summary of the Flash Notification preference if all flash alerts are off. [CHAR LIMIT=60] -->
     <string name="flash_notifications_summary_off">Off</string>
     <!-- Summary of the Flash Notification preference if only camera flash is on. [CHAR LIMIT=60] -->

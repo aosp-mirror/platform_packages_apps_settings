@@ -57,5 +57,6 @@
         android:key="hearing_device_footer"
         android:title="@string/accessibility_hearing_device_footer_summary"
         android:selectable="false"
-        settings:searchable="false" />
+        settings:searchable="false"
+        settings:controller="com.android.settings.accessibility.HearingDeviceFooterPreferenceController"/>
 </PreferenceScreen>
