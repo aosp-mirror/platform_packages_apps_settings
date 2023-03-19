@@ -50,11 +50,9 @@ public class SelectLongPressTimeoutPreferenceController extends BasePreferenceCo
         if (!(preference instanceof ListPreference)) {
             return false;
         }
-        final ListPreference listPreference = (ListPreference) preference;
         final int newValue = Integer.parseInt((String) object);
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.LONG_PRESS_TIMEOUT, newValue);
-        updateState(listPreference);
         return true;
 
     }
@@ -62,16 +60,9 @@ public class SelectLongPressTimeoutPreferenceController extends BasePreferenceCo
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        if (!(preference instanceof ListPreference)) {
-            return;
-        }
         final ListPreference listPreference = (ListPreference) preference;
-        listPreference.setValue(getLongPressTimeoutValue());
-    }
 
-    @Override
-    public CharSequence getSummary() {
-        return mLongPressTimeoutValueToTitleMap.get(getLongPressTimeoutValue());
+        listPreference.setValue(getLongPressTimeoutValue());
     }
 
     private String getLongPressTimeoutValue() {
