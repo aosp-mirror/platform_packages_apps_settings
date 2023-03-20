@@ -58,7 +58,6 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     private SwitchPreference mPreference;
     private TelephonyManager mTelephonyManager;
     private SubscriptionManager mSubscriptionManager;
-    private MobileDataContentObserver mDataContentObserver;
     private FragmentManager mFragmentManager;
     @VisibleForTesting
     int mDialogType;
@@ -79,9 +78,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         super(context, key);
         mSubId = subId;
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
-        mDataContentObserver = new MobileDataContentObserver(new Handler(Looper.getMainLooper()));
-        mDataContentObserver.setOnMobileDataChangedListener(() -> updateState(mPreference));
-        mMobileNetworkRepository = MobileNetworkRepository.createBySubId(context, this, mSubId);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         mLifecycleOwner = lifecycleOwner;
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -103,12 +100,13 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
 
     @OnLifecycleEvent(ON_START)
     public void onStart() {
-        mMobileNetworkRepository.addRegister(mLifecycleOwner);
+        mMobileNetworkRepository.addRegister(mLifecycleOwner, this, mSubId);
+        mMobileNetworkRepository.updateEntity();
     }
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
-        mMobileNetworkRepository.removeRegister();
+        mMobileNetworkRepository.removeRegister(this);
     }
 
     @Override
