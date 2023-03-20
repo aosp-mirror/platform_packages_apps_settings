@@ -21,6 +21,7 @@ import static androidx.lifecycle.Lifecycle.Event;
 import android.content.Context;
 import android.os.UserManager;
 import android.telephony.ServiceState;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
@@ -71,7 +72,7 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
         mIsRtlMode = context.getResources().getConfiguration().getLayoutDirection()
                 == View.LAYOUT_DIRECTION_RTL;
         mLifecycleOwner = lifecycleOwner;
-        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -79,13 +80,14 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
 
     @OnLifecycleEvent(Event.ON_RESUME)
     public void onResume() {
-        mMobileNetworkRepository.addRegister(mLifecycleOwner);
-        update();
+        mMobileNetworkRepository.addRegister(mLifecycleOwner, this,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        mMobileNetworkRepository.updateEntity();
     }
 
     @OnLifecycleEvent(Event.ON_PAUSE)
     public void onPause() {
-        mMobileNetworkRepository.removeRegister();
+        mMobileNetworkRepository.removeRegister(this);
     }
 
     @Override
