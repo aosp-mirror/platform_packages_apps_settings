@@ -52,7 +52,7 @@ public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceCo
             LifecycleOwner lifecycleOwner, int subId) {
         super(context, key);
         mSubId = subId;
-        mMobileNetworkRepository = MobileNetworkRepository.createBySubId(context, this, mSubId);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         mLifecycleOwner = lifecycleOwner;
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -66,12 +66,13 @@ public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceCo
 
     @OnLifecycleEvent(ON_START)
     public void onStart() {
-        mMobileNetworkRepository.addRegister(mLifecycleOwner);
+        mMobileNetworkRepository.addRegister(mLifecycleOwner, this, mSubId);
+        mMobileNetworkRepository.updateEntity();
     }
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
-        mMobileNetworkRepository.removeRegister();
+        mMobileNetworkRepository.removeRegister(this);
     }
 
     @Override
