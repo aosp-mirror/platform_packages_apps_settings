@@ -267,7 +267,7 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
 
     private void queryNetworkSelectionMode(String tag) {
         mCacheOfModeStatus = mTelephonyManager.getNetworkSelectionMode();
-        Log.d(LOG_TAG, tag + ": query commend done. mCacheOfModeStatus: " + mCacheOfModeStatus);
+        Log.d(LOG_TAG, tag + ": query command done. mCacheOfModeStatus: " + mCacheOfModeStatus);
     }
 
     @VisibleForTesting
