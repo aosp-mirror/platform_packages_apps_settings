@@ -325,9 +325,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             icon = mIconFactory.getBadgedIcon(appInfo, getUser());
         }
 
-        // If there is no title then don't show anything.
+        // If there is no title then show the package manager.
         if (TextUtils.isEmpty(title)) {
-            return null;
+            title = firstServiceInfo.packageName;
         }
 
         return addProviderPreference(
