@@ -257,7 +257,8 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         for (SubscriptionInfo subInfo : subInfoList) {
             int subId = subInfo.getSubscriptionId();
             try {
-                if (queryImsState(subId).isWifiCallingProvisioned()) {
+                if (MobileNetworkUtils.isWifiCallingEnabled(getContext(), subId,
+                        queryImsState(subId), null)) {
                     selectedList.add(subInfo);
                 }
             } catch (Exception exception) {}
