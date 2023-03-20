@@ -37,7 +37,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
 import com.android.settings.R;
@@ -75,9 +74,11 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
     CachedBluetoothDevice mCachedDevice;
     @VisibleForTesting
     PreferenceCategory mBroadcastSourceListCategory;
+    @VisibleForTesting
+    BluetoothBroadcastSourcePreference mSelectedPreference;
     BluetoothFindBroadcastsHeaderController mBluetoothFindBroadcastsHeaderController;
+
     private LocalBluetoothLeBroadcastAssistant mLeBroadcastAssistant;
-    private BluetoothBroadcastSourcePreference mSelectedPreference;
     private Executor mExecutor;
     private int mSourceId;
 
@@ -369,19 +370,31 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
         return pref;
     }
 
-    private void addSource(BluetoothBroadcastSourcePreference pref) {
+    @VisibleForTesting
+    void addSource(BluetoothBroadcastSourcePreference pref) {
         if (mLeBroadcastAssistant == null || mCachedDevice == null) {
             Log.w(TAG, "addSource: LeBroadcastAssistant or CachedDevice is null!");
             return;
         }
         if (mSelectedPreference != null) {
-            // The previous preference status set false after user selects the new Preference.
-            getActivity().runOnUiThread(
+            if (mSelectedPreference.isCreatedByReceiveState()) {
+                Log.d(TAG, "addSource: Remove preference that created by getAllSources()");
+                getActivity().runOnUiThread(() ->
+                        mBroadcastSourceListCategory.removePreference(mSelectedPreference));
+                if (mLeBroadcastAssistant != null && !mLeBroadcastAssistant.isSearchInProgress()) {
+                    Log.d(TAG, "addSource: Start Searching For Broadcast Sources");
+                    mLeBroadcastAssistant.startSearchingForSources(getScanFilter());
+                }
+            } else {
+                Log.d(TAG, "addSource: Update preference that created by onSourceFound()");
+                // The previous preference status set false after user selects the new Preference.
+                getActivity().runOnUiThread(
                     () -> {
                         mSelectedPreference.updateMetadataAndRefreshUi(
                                 mSelectedPreference.getBluetoothLeBroadcastMetadata(), false);
                         mSelectedPreference.setOrder(1);
                     });
+            }
         }
         mSelectedPreference = pref;
         mLeBroadcastAssistant.addSource(mCachedDevice.getDevice(),
