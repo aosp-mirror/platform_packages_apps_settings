@@ -75,7 +75,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         mManager = context.getSystemService(SubscriptionManager.class);
         mIsRtlMode = context.getResources().getConfiguration().getLayoutDirection()
                 == View.LAYOUT_DIRECTION_RTL;
-        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         mLifecycleOwner = lifecycleOwner;
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -104,13 +104,13 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
-        mMobileNetworkRepository.addRegister(mLifecycleOwner);
-        updateEntries();
+        mMobileNetworkRepository.addRegister(mLifecycleOwner, this, getDefaultSubscriptionId());
+        mMobileNetworkRepository.updateEntity();
     }
 
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
-        mMobileNetworkRepository.removeRegister();
+        mMobileNetworkRepository.removeRegister(this);
     }
 
     @Override
@@ -303,6 +303,4 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         updateEntries();
         refreshSummary(mPreference);
     }
-
-
 }

@@ -20,6 +20,7 @@ import static android.telephony.UiccSlotInfo.CARD_STATE_INFO_PRESENT;
 
 import static com.android.internal.telephony.TelephonyIntents.ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED;
 
+import android.annotation.NonNull;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -56,10 +57,12 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
+import androidx.annotation.GuardedBy;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
@@ -72,14 +75,17 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private static ExecutorService sExecutor = Executors.newSingleThreadExecutor();
-    private static Map<String, SubscriptionInfoEntity> sCacheSubscriptionInfoEntityMap =
+    private static Map<Integer, SubscriptionInfoEntity> sCacheSubscriptionInfoEntityMap =
             new ArrayMap<>();
-    private static Map<String, MobileNetworkInfoEntity> sCacheMobileNetworkInfoEntityMap =
+    private static Map<Integer, MobileNetworkInfoEntity> sCacheMobileNetworkInfoEntityMap =
             new ArrayMap<>();
-    private static Map<String, UiccInfoEntity> sCacheUiccInfoEntityMap = new ArrayMap<>();
+    private static Map<Integer, UiccInfoEntity> sCacheUiccInfoEntityMap = new ArrayMap<>();
+    private static Collection<MobileNetworkCallback> sCallbacks = new CopyOnWriteArrayList<>();
+    private static final Object sInstanceLock = new Object();
+    @GuardedBy("sInstanceLock")
+    private static MobileNetworkRepository sInstance;
 
     private SubscriptionManager mSubscriptionManager;
-    private TelephonyManager mTelephonyManager;
     private MobileNetworkDatabase mMobileNetworkDatabase;
     private SubscriptionInfoDao mSubscriptionInfoDao;
     private UiccInfoDao mUiccInfoDao;
@@ -88,7 +94,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private List<SubscriptionInfoEntity> mActiveSubInfoEntityList = new ArrayList<>();
     private List<UiccInfoEntity> mUiccInfoEntityList = new ArrayList<>();
     private List<MobileNetworkInfoEntity> mMobileNetworkInfoEntityList = new ArrayList<>();
-    private MobileNetworkCallback mCallback;
     private Context mContext;
     private AirplaneModeObserver mAirplaneModeObserver;
     private Uri mAirplaneModeSettingUri;
@@ -100,35 +105,34 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private int mCardState = UiccSlotInfo.CARD_STATE_INFO_ABSENT;
     private int mPortIndex = TelephonyManager.INVALID_PORT_INDEX;
     private int mCardId = TelephonyManager.UNINITIALIZED_CARD_ID;
-    private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private boolean mIsEuicc = false;
     private boolean mIsRemovable = false;
     private boolean mIsActive = false;
     private Map<Integer, SubscriptionInfo> mSubscriptionInfoMap = new ArrayMap<>();
     private Map<Integer, TelephonyManager> mTelephonyManagerMap = new HashMap<>();
     private Map<Integer, PhoneCallStateTelephonyCallback> mTelephonyCallbackMap = new HashMap<>();
+    private BroadcastReceiver mDataSubscriptionChangedReceiver = null;
 
-    public static MobileNetworkRepository create(Context context,
-            MobileNetworkCallback mobileNetworkCallback) {
-        return new MobileNetworkRepository(context, mobileNetworkCallback,
-                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+    @NonNull
+    public static MobileNetworkRepository getInstance(Context context) {
+        synchronized (sInstanceLock) {
+            if (sInstance != null) {
+                return sInstance;
+            }
+            if (DEBUG) {
+                Log.d(TAG, "Init the instance.");
+            }
+            sInstance = new MobileNetworkRepository(context);
+            return sInstance;
+        }
     }
 
-    public static MobileNetworkRepository createBySubId(Context context,
-            MobileNetworkCallback mobileNetworkCallback, int subId) {
-        return new MobileNetworkRepository(context, mobileNetworkCallback, subId);
-    }
-
-    private MobileNetworkRepository(Context context, MobileNetworkCallback mobileNetworkCallback,
-            int subId) {
-        mSubId = subId;
+    private MobileNetworkRepository(Context context) {
         mContext = context;
         mMobileNetworkDatabase = MobileNetworkDatabase.getInstance(context);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_MOBILE_NETWORK_DB_CREATED,
-                subId);
+        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_MOBILE_NETWORK_DB_CREATED);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
-        mCallback = mobileNetworkCallback;
         mSubscriptionInfoDao = mMobileNetworkDatabase.mSubscriptionInfoDao();
         mUiccInfoDao = mMobileNetworkDatabase.mUiccInfoDao();
         mMobileNetworkInfoDao = mMobileNetworkDatabase.mMobileNetworkInfoDao();
@@ -138,6 +142,8 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         mFilter.addAction(SubscriptionManager.ACTION_DEFAULT_SUBSCRIPTION_CHANGED);
         mFilter.addAction(ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED);
         mFilter.addAction(SubscriptionManager.ACTION_DEFAULT_SMS_SUBSCRIPTION_CHANGED);
+        mDataSubscriptionChangedReceiver = new DataSubscriptionChangedReceiver();
+        mContext.registerReceiver(mDataSubscriptionChangedReceiver, mFilter);
     }
 
     private class AirplaneModeObserver extends ContentObserver {
@@ -157,56 +163,98 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             if (uri.equals(mAirplaneModeSettingUri)) {
-                mCallback.onAirplaneModeChanged(isAirplaneModeOn());
+                boolean isAirplaneModeOn = isAirplaneModeOn();
+                for (MobileNetworkCallback callback : sCallbacks) {
+                    callback.onAirplaneModeChanged(isAirplaneModeOn);
+                }
             }
         }
     }
 
-    private final BroadcastReceiver mDataSubscriptionChangedReceiver = new BroadcastReceiver() {
+    private class DataSubscriptionChangedReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             onSubscriptionsChanged();
         }
-    };
+    }
 
-    public void addRegister(LifecycleOwner lifecycleOwner) {
+    /**
+     * Register all callbacks and listener.
+     *
+     * @param lifecycleOwner The lifecycle owner.
+     * @param mobileNetworkCallback A callback to receive all MobileNetwork's changes.
+     * @param subId The subscription ID to register relevant changes and listener for specific
+     *              subscription.
+     */
+    public void addRegister(LifecycleOwner lifecycleOwner,
+            MobileNetworkCallback mobileNetworkCallback, int subId) {
+        sCallbacks.add(mobileNetworkCallback);
         mSubscriptionManager.addOnSubscriptionsChangedListener(mContext.getMainExecutor(), this);
         mAirplaneModeObserver.register(mContext);
-        mContext.registerReceiver(mDataSubscriptionChangedReceiver, mFilter);
         observeAllSubInfo(lifecycleOwner);
         observeAllUiccInfo(lifecycleOwner);
         observeAllMobileNetworkInfo(lifecycleOwner);
+        if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            addRegisterBySubId(subId);
+            createTelephonyManagerBySubId(subId);
+        }
     }
 
     private void addRegisterBySubId(int subId) {
-        if (!mTelephonyCallbackMap.containsKey(subId) || !mTelephonyManagerMap.containsKey(subId)) {
-            PhoneCallStateTelephonyCallback
-                    telephonyCallback = new PhoneCallStateTelephonyCallback();
-            mTelephonyManager.registerTelephonyCallback(mContext.getMainExecutor(),
-                    telephonyCallback);
-            mTelephonyCallbackMap.put(subId, telephonyCallback);
-            mTelephonyManagerMap.put(subId, mTelephonyManager);
-        }
-        if (!mDataContentObserverMap.containsKey(subId)) {
-            MobileDataContentObserver dataContentObserver = new MobileDataContentObserver(
-                    new Handler(Looper.getMainLooper()));
-            dataContentObserver.register(mContext, subId);
-            dataContentObserver.setOnMobileDataChangedListener(() -> {
-                sExecutor.execute(() -> {
-                    insertMobileNetworkInfo(mContext, String.valueOf(subId));
-                });
+        MobileDataContentObserver dataContentObserver = new MobileDataContentObserver(
+                new Handler(Looper.getMainLooper()));
+        dataContentObserver.setOnMobileDataChangedListener(() -> {
+            sExecutor.execute(() -> {
+                insertMobileNetworkInfo(mContext, subId,
+                        getTelephonyManagerBySubId(mContext, subId));
             });
-            mDataContentObserverMap.put(subId, dataContentObserver);
+        });
+        dataContentObserver.register(mContext, subId);
+        mDataContentObserverMap.put(subId, dataContentObserver);
+    }
+
+    private void createTelephonyManagerBySubId(int subId) {
+        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            return;
         }
+        PhoneCallStateTelephonyCallback
+                telephonyCallback = new PhoneCallStateTelephonyCallback();
+        TelephonyManager telephonyManager = mContext.getSystemService(
+                TelephonyManager.class).createForSubscriptionId(subId);
+        telephonyManager.registerTelephonyCallback(mContext.getMainExecutor(),
+                telephonyCallback);
+        mTelephonyCallbackMap.put(subId, telephonyCallback);
+        mTelephonyManagerMap.put(subId, telephonyManager);
+    }
+
+    private TelephonyManager getTelephonyManagerBySubId(Context context, int subId) {
+        TelephonyManager telephonyManager = mTelephonyManagerMap.get(subId);
+        if (telephonyManager != null) {
+            return telephonyManager;
+        }
+
+        if (context != null) {
+            telephonyManager = context.getSystemService(TelephonyManager.class);
+            if (telephonyManager != null) {
+                telephonyManager = telephonyManager.createForSubscriptionId(subId);
+            } else if (DEBUG) {
+                Log.d(TAG, "Can not get TelephonyManager for subId " + subId);
+            }
+        }
+
+        return telephonyManager;
+
     }
 
     private void removerRegisterBySubId(int subId) {
         if (mTelephonyCallbackMap.containsKey(subId)) {
-            TelephonyManager tm = mTelephonyManagerMap.get(subId);
-            PhoneCallStateTelephonyCallback callback = mTelephonyCallbackMap.get(subId);
-            if (callback != null) {
-                tm.unregisterTelephonyCallback(callback);
-                mTelephonyCallbackMap.remove(subId);
+            TelephonyManager telephonyManager = getTelephonyManagerBySubId(mContext, subId);
+            if (telephonyManager != null) {
+                PhoneCallStateTelephonyCallback callback = mTelephonyCallbackMap.get(subId);
+                if (callback != null) {
+                    telephonyManager.unregisterTelephonyCallback(callback);
+                    mTelephonyCallbackMap.remove(subId);
+                }
             }
         }
         if (mDataContentObserverMap.containsKey(subId)) {
@@ -215,25 +263,43 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
     }
 
-    public void removeRegister() {
-        mSubscriptionManager.removeOnSubscriptionsChangedListener(this);
-        mAirplaneModeObserver.unRegister(mContext);
-        if (mDataSubscriptionChangedReceiver != null) {
-            mContext.unregisterReceiver(mDataSubscriptionChangedReceiver);
-        }
-        mDataContentObserverMap.forEach((id, observer) -> {
-            observer.unRegister(mContext);
-        });
-        mDataContentObserverMap.clear();
-
-        mTelephonyManagerMap.forEach((id, manager) -> {
-            TelephonyCallback callback = mTelephonyCallbackMap.get(manager.getSubscriptionId());
-            if (callback != null) {
-                manager.unregisterTelephonyCallback(callback);
+    public void removeRegister(MobileNetworkCallback mobileNetworkCallback) {
+        sCallbacks.remove(mobileNetworkCallback);
+        if (sCallbacks.isEmpty()) {
+            mSubscriptionManager.removeOnSubscriptionsChangedListener(this);
+            mAirplaneModeObserver.unRegister(mContext);
+            if (mDataSubscriptionChangedReceiver != null) {
+                mContext.unregisterReceiver(mDataSubscriptionChangedReceiver);
+                mDataSubscriptionChangedReceiver = null;
             }
-        });
-        mTelephonyCallbackMap.clear();
-        mTelephonyManagerMap.clear();
+            mDataContentObserverMap.forEach((id, observer) -> {
+                observer.unRegister(mContext);
+            });
+            mDataContentObserverMap.clear();
+
+            mTelephonyManagerMap.forEach((id, manager) -> {
+                TelephonyCallback callback = mTelephonyCallbackMap.get(id);
+                if (callback != null) {
+                    manager.unregisterTelephonyCallback(callback);
+                }
+            });
+            mTelephonyCallbackMap.clear();
+            mTelephonyManagerMap.clear();
+        }
+    }
+
+    public void updateEntity() {
+        // Check the latest state after back to the UI.
+        if (sCacheSubscriptionInfoEntityMap != null || !sCacheSubscriptionInfoEntityMap.isEmpty()) {
+            sExecutor.execute(() -> {
+                onSubscriptionsChanged();
+            });
+        }
+
+        boolean isAirplaneModeOn = isAirplaneModeOn();
+        for (MobileNetworkCallback callback : sCallbacks) {
+            callback.onAirplaneModeChanged(isAirplaneModeOn);
+        }
     }
 
     private void observeAllSubInfo(LifecycleOwner lifecycleOwner) {
@@ -284,18 +350,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         return mMobileNetworkInfoDao.queryMobileNetworkInfoBySubId(subId);
     }
 
-    public int getSubInfosCount() {
-        return mSubscriptionInfoDao.count();
-    }
-
-    public int getUiccInfosCount() {
-        return mUiccInfoDao.count();
-    }
-
-    public int getMobileNetworkInfosCount() {
-        return mMobileNetworkInfoDao.count();
-    }
-
     private void getUiccInfoBySubscriptionInfo(UiccSlotInfo[] uiccSlotInfos,
             SubscriptionInfo subInfo) {
         for (int i = 0; i < uiccSlotInfos.length; i++) {
@@ -317,7 +371,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                         mPortIndex = portInfo.getPortIndex();
                     } else if (DEBUG) {
                         Log.d(TAG, "Can not get port index and physicalSlotIndex for subId "
-                                + mSubId);
+                                + subInfo.getSubscriptionId());
                     }
                 });
                 if (mPhysicalSlotIndex != SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
@@ -334,70 +388,82 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
 
     private void onAvailableSubInfoChanged(
             List<SubscriptionInfoEntity> availableSubInfoEntityList) {
-        mAvailableSubInfoEntityList = availableSubInfoEntityList;
-        mActiveSubInfoEntityList = mAvailableSubInfoEntityList.stream()
-                .filter(SubscriptionInfoEntity::isActiveSubscription)
-                .filter(SubscriptionInfoEntity::isSubscriptionVisible)
-                .collect(Collectors.toList());
+        mAvailableSubInfoEntityList = new ArrayList<>(availableSubInfoEntityList);
         if (DEBUG) {
             Log.d(TAG, "onAvailableSubInfoChanged, availableSubInfoEntityList = "
                     + availableSubInfoEntityList);
         }
-        mCallback.onAvailableSubInfoChanged(availableSubInfoEntityList);
+        for (MobileNetworkCallback callback : sCallbacks) {
+            callback.onAvailableSubInfoChanged(availableSubInfoEntityList);
+        }
         mMetricsFeatureProvider.action(mContext,
                 SettingsEnums.ACTION_MOBILE_NETWORK_DB_NOTIFY_SUB_INFO_IS_CHANGED, 0);
-        setActiveSubInfoList(mActiveSubInfoEntityList);
+        onActiveSubInfoListChanged(mAvailableSubInfoEntityList);
     }
 
-    private void setActiveSubInfoList(List<SubscriptionInfoEntity> activeSubInfoEntityList) {
+    private void onActiveSubInfoListChanged(
+            List<SubscriptionInfoEntity> availableSubInfoEntityList) {
+        mActiveSubInfoEntityList = availableSubInfoEntityList.stream()
+                .filter(SubscriptionInfoEntity::isActiveSubscription)
+                .filter(SubscriptionInfoEntity::isSubscriptionVisible)
+                .collect(Collectors.toList());
         if (DEBUG) {
-            Log.d(TAG,
-                    "onActiveSubInfoChanged, activeSubInfoEntityList = " + activeSubInfoEntityList);
+            Log.d(TAG, "onActiveSubInfoChanged, activeSubInfoEntityList = "
+                    + mActiveSubInfoEntityList);
         }
-        mCallback.onActiveSubInfoChanged(mActiveSubInfoEntityList);
+        List<SubscriptionInfoEntity> activeSubInfoEntityList = new ArrayList<>(
+                mActiveSubInfoEntityList);
+        for (MobileNetworkCallback callback : sCallbacks) {
+            callback.onActiveSubInfoChanged(activeSubInfoEntityList);
+        }
     }
 
     private void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
-        mUiccInfoEntityList = uiccInfoEntityList;
-        mCallback.onAllUiccInfoChanged(uiccInfoEntityList);
+        mUiccInfoEntityList = new ArrayList<>(uiccInfoEntityList);
+        for (MobileNetworkCallback callback : sCallbacks) {
+            callback.onAllUiccInfoChanged(uiccInfoEntityList);
+        }
         mMetricsFeatureProvider.action(mContext,
                 SettingsEnums.ACTION_MOBILE_NETWORK_DB_NOTIFY_UICC_INFO_IS_CHANGED, 0);
     }
 
     private void onAllMobileNetworkInfoChanged(
             List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
-        mMobileNetworkInfoEntityList = mobileNetworkInfoEntityList;
-        mCallback.onAllMobileNetworkInfoChanged(mobileNetworkInfoEntityList);
+        mMobileNetworkInfoEntityList = new ArrayList<>(mobileNetworkInfoEntityList);
+        for (MobileNetworkCallback callback : sCallbacks) {
+            callback.onAllMobileNetworkInfoChanged(mobileNetworkInfoEntityList);
+        }
         mMetricsFeatureProvider.action(mContext,
                 SettingsEnums.ACTION_MOBILE_NETWORK_DB_NOTIFY_MOBILE_NETWORK_INFO_IS_CHANGED, 0);
     }
 
-    public void insertSubInfo(Context context, SubscriptionInfo info) {
+    private void insertSubInfo(Context context, SubscriptionInfo info) {
+        int subId = info.getSubscriptionId();
+        createTelephonyManagerBySubId(subId);
+        TelephonyManager telephonyManager = getTelephonyManagerBySubId(context, subId);
         SubscriptionInfoEntity subInfoEntity =
-                convertToSubscriptionInfoEntity(context, info);
-        String subId = String.valueOf(mSubId);
+                convertToSubscriptionInfoEntity(context, info, telephonyManager);
         if (subInfoEntity != null) {
             if (!sCacheSubscriptionInfoEntityMap.containsKey(subId)
                     || (sCacheSubscriptionInfoEntityMap.get(subId) != null
                     && !sCacheSubscriptionInfoEntityMap.get(subId).equals(subInfoEntity))) {
                 sCacheSubscriptionInfoEntityMap.put(subId, subInfoEntity);
                 if (DEBUG) {
-                    Log.d(TAG, "convert subId " + subId + "to SubscriptionInfoEntity: "
+                    Log.d(TAG, "Convert subId " + subId + " to SubscriptionInfoEntity: "
                             + subInfoEntity);
                 }
                 mMobileNetworkDatabase.insertSubsInfo(subInfoEntity);
-                addRegisterBySubId(mSubId);
-                insertUiccInfo(subId);
-                insertMobileNetworkInfo(context, subId);
                 mMetricsFeatureProvider.action(mContext,
-                        SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_SUB_INFO, mSubId);
-            } else if (DEBUG) {
-                Log.d(TAG, "Can not insert subInfo, the entity is null");
+                        SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_SUB_INFO, subId);
+                insertUiccInfo(subId, telephonyManager);
+                insertMobileNetworkInfo(context, subId, telephonyManager);
             }
+        } else if (DEBUG) {
+            Log.d(TAG, "Can not insert subInfo, the entity is null");
         }
     }
 
-    public void deleteAllInfoBySubId(String subId) {
+    private void deleteAllInfoBySubId(String subId) {
         if (DEBUG) {
             Log.d(TAG, "deleteAllInfoBySubId, subId = " + subId);
         }
@@ -412,20 +478,23 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         removerRegisterBySubId(id);
         mSubscriptionInfoMap.remove(id);
         mTelephonyManagerMap.remove(id);
-        sCacheSubscriptionInfoEntityMap.remove(subId);
-        sCacheUiccInfoEntityMap.remove(subId);
-        sCacheMobileNetworkInfoEntityMap.remove(subId);
+        sCacheSubscriptionInfoEntityMap.remove(id);
+        sCacheUiccInfoEntityMap.remove(id);
+        sCacheMobileNetworkInfoEntityMap.remove(id);
         mMetricsFeatureProvider.action(mContext,
                 SettingsEnums.ACTION_MOBILE_NETWORK_DB_DELETE_DATA, id);
     }
 
-    public SubscriptionInfoEntity convertToSubscriptionInfoEntity(Context context,
-            SubscriptionInfo subInfo) {
-        mSubId = subInfo.getSubscriptionId();
-        mTelephonyManager = context.getSystemService(
-                TelephonyManager.class).createForSubscriptionId(mSubId);
-
-        UiccSlotInfo[] uiccSlotInfos = mTelephonyManager.getUiccSlotsInfo();
+    private SubscriptionInfoEntity convertToSubscriptionInfoEntity(Context context,
+            SubscriptionInfo subInfo, TelephonyManager telephonyManager) {
+        int subId = subInfo.getSubscriptionId();
+        if (telephonyManager == null) {
+            if (DEBUG) {
+                Log.d(TAG, "Can not get TelephonyManager for subId " + subId);
+            }
+            return null;
+        }
+        UiccSlotInfo[] uiccSlotInfos = telephonyManager.getUiccSlotsInfo();
         if (uiccSlotInfos == null || uiccSlotInfos.length == 0) {
             if (DEBUG) {
                 Log.d(TAG, "uiccSlotInfos = null or empty");
@@ -435,10 +504,10 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             getUiccInfoBySubscriptionInfo(uiccSlotInfos, subInfo);
             SubscriptionInfo firstRemovableSubInfo = SubscriptionUtil.getFirstRemovableSubscription(
                     context);
-            if(DEBUG){
-                Log.d(TAG, "convert subscriptionInfo to entity for subId = " + mSubId);
+            if (DEBUG) {
+                Log.d(TAG, "convert subscriptionInfo to entity for subId = " + subId);
             }
-            return new SubscriptionInfoEntity(String.valueOf(mSubId),
+            return new SubscriptionInfoEntity(String.valueOf(subId),
                     subInfo.getSimSlotIndex(),
                     subInfo.getCarrierId(), subInfo.getDisplayName().toString(),
                     subInfo.getCarrierName() != null ? subInfo.getCarrierName().toString() : "",
@@ -451,23 +520,23 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                     SubscriptionUtil.isSubscriptionVisible(mSubscriptionManager, context, subInfo),
                     SubscriptionUtil.getFormattedPhoneNumber(context, subInfo),
                     firstRemovableSubInfo == null ? false
-                            : firstRemovableSubInfo.getSubscriptionId() == mSubId,
-                    String.valueOf(SubscriptionUtil.getDefaultSimConfig(context, mSubId)),
-                    SubscriptionUtil.isDefaultSubscription(context, mSubId),
-                    mSubscriptionManager.isValidSubscriptionId(mSubId),
-                    mSubscriptionManager.isUsableSubscriptionId(mSubId),
-                    mSubscriptionManager.isActiveSubscriptionId(mSubId),
+                            : firstRemovableSubInfo.getSubscriptionId() == subId,
+                    String.valueOf(SubscriptionUtil.getDefaultSimConfig(context, subId)),
+                    SubscriptionUtil.isDefaultSubscription(context, subId),
+                    mSubscriptionManager.isValidSubscriptionId(subId),
+                    mSubscriptionManager.isUsableSubscriptionId(subId),
+                    mSubscriptionManager.isActiveSubscriptionId(subId),
                     true /*availableSubInfo*/,
-                    mSubscriptionManager.getDefaultVoiceSubscriptionId() == mSubId,
-                    mSubscriptionManager.getDefaultSmsSubscriptionId() == mSubId,
-                    mSubscriptionManager.getDefaultDataSubscriptionId() == mSubId,
-                    mSubscriptionManager.getDefaultSubscriptionId() == mSubId,
-                    mSubscriptionManager.getActiveDataSubscriptionId() == mSubId);
+                    mSubscriptionManager.getDefaultVoiceSubscriptionId() == subId,
+                    mSubscriptionManager.getDefaultSmsSubscriptionId() == subId,
+                    mSubscriptionManager.getDefaultDataSubscriptionId() == subId,
+                    mSubscriptionManager.getDefaultSubscriptionId() == subId,
+                    mSubscriptionManager.getActiveDataSubscriptionId() == subId);
         }
     }
 
-    public void insertUiccInfo(String subId) {
-        UiccInfoEntity uiccInfoEntity = convertToUiccInfoEntity();
+    private void insertUiccInfo(int subId, TelephonyManager telephonyManager) {
+        UiccInfoEntity uiccInfoEntity = convertToUiccInfoEntity(subId, telephonyManager);
         if (DEBUG) {
             Log.d(TAG, "uiccInfoEntity = " + uiccInfoEntity);
         }
@@ -476,51 +545,76 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             sCacheUiccInfoEntityMap.put(subId, uiccInfoEntity);
             mMobileNetworkDatabase.insertUiccInfo(uiccInfoEntity);
             mMetricsFeatureProvider.action(mContext,
-                    SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_UICC_INFO,
-                    Integer.parseInt(subId));
+                    SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_UICC_INFO, subId);
         }
     }
 
-    public void insertMobileNetworkInfo(Context context, String subId) {
-        MobileNetworkInfoEntity mobileNetworkInfoEntity = convertToMobileNetworkInfoEntity(context);
+    private void insertMobileNetworkInfo(Context context, int subId,
+            TelephonyManager telephonyManager) {
+        MobileNetworkInfoEntity mobileNetworkInfoEntity = convertToMobileNetworkInfoEntity(context,
+                subId, telephonyManager);
+
         if (DEBUG) {
-            Log.d(TAG, "mobileNetworkInfoEntity = " + mobileNetworkInfoEntity);
+            Log.d(TAG, "insertMobileNetworkInfo, mobileNetworkInfoEntity = "
+                    + mobileNetworkInfoEntity);
         }
+
+        if (mobileNetworkInfoEntity == null) {
+            return;
+        }
+
         if (!sCacheMobileNetworkInfoEntityMap.containsKey(subId)
                 || !sCacheMobileNetworkInfoEntityMap.get(subId).equals(mobileNetworkInfoEntity)) {
             sCacheMobileNetworkInfoEntityMap.put(subId, mobileNetworkInfoEntity);
             mMobileNetworkDatabase.insertMobileNetworkInfo(mobileNetworkInfoEntity);
             mMetricsFeatureProvider.action(mContext,
-                    SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_MOBILE_NETWORK_INFO,
-                    Integer.parseInt(subId));
+                    SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_MOBILE_NETWORK_INFO, subId);
         }
     }
 
-    public MobileNetworkInfoEntity convertToMobileNetworkInfoEntity(Context context) {
-        return new MobileNetworkInfoEntity(String.valueOf(mSubId),
-                MobileNetworkUtils.isContactDiscoveryEnabled(context, mSubId),
-                MobileNetworkUtils.isContactDiscoveryVisible(context, mSubId),
-                mTelephonyManager.isDataEnabled(),
-                MobileNetworkUtils.isCdmaOptions(context, mSubId),
-                MobileNetworkUtils.isGsmOptions(context, mSubId),
-                MobileNetworkUtils.isWorldMode(context, mSubId),
-                MobileNetworkUtils.shouldDisplayNetworkSelectOptions(context, mSubId),
-                MobileNetworkUtils.isTdscdmaSupported(context, mSubId),
+    private MobileNetworkInfoEntity convertToMobileNetworkInfoEntity(Context context, int subId,
+            TelephonyManager telephonyManager) {
+        boolean isDataEnabled = false;
+        boolean isDataRoamingEnabled = false;
+        if (telephonyManager != null) {
+            isDataEnabled = telephonyManager.isDataEnabled();
+            isDataRoamingEnabled = telephonyManager.isDataRoamingEnabled();
+        } else if (DEBUG) {
+            Log.d(TAG, "TelephonyManager is null, subId = " + subId);
+        }
+
+        return new MobileNetworkInfoEntity(String.valueOf(subId),
+                MobileNetworkUtils.isContactDiscoveryEnabled(context, subId),
+                MobileNetworkUtils.isContactDiscoveryVisible(context, subId),
+                isDataEnabled,
+                MobileNetworkUtils.isCdmaOptions(context, subId),
+                MobileNetworkUtils.isGsmOptions(context, subId),
+                MobileNetworkUtils.isWorldMode(context, subId),
+                MobileNetworkUtils.shouldDisplayNetworkSelectOptions(context, subId),
+                MobileNetworkUtils.isTdscdmaSupported(context, subId),
                 MobileNetworkUtils.activeNetworkIsCellular(context),
                 SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager),
-                mTelephonyManager.isDataRoamingEnabled()
+                isDataRoamingEnabled
         );
     }
 
-    private UiccInfoEntity convertToUiccInfoEntity() {
-        return new UiccInfoEntity(String.valueOf(mSubId), String.valueOf(mPhysicalSlotIndex),
-                mLogicalSlotIndex, mCardId, mIsEuicc, isMultipleEnabledProfilesSupported(),
-                mCardState, mIsRemovable, mIsActive, mPortIndex
+    private UiccInfoEntity convertToUiccInfoEntity(int subId, TelephonyManager telephonyManager) {
+        return new UiccInfoEntity(String.valueOf(subId), String.valueOf(mPhysicalSlotIndex),
+                mLogicalSlotIndex, mCardId, mIsEuicc,
+                isMultipleEnabledProfilesSupported(telephonyManager), mCardState, mIsRemovable,
+                mIsActive, mPortIndex
         );
     }
 
-    private boolean isMultipleEnabledProfilesSupported() {
-        List<UiccCardInfo> cardInfos = mTelephonyManager.getUiccCardsInfo();
+    private boolean isMultipleEnabledProfilesSupported(TelephonyManager telephonyManager) {
+        if (telephonyManager == null) {
+            if (DEBUG) {
+                Log.d(TAG, "TelephonyManager is null");
+            }
+            return false;
+        }
+
+        List<UiccCardInfo> cardInfos = telephonyManager.getUiccCardsInfo();
         if (cardInfos == null) {
             if (DEBUG) {
                 Log.d(TAG, "UICC card info list is empty.");
@@ -574,7 +668,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                         // the database, if the subInfo is not existed in the new list, delete it
                         // from the database.
                         for (SubscriptionInfoEntity info : availableInfoArray) {
-                            if (sCacheSubscriptionInfoEntityMap.containsKey(info.subId)) {
+                            if (sCacheSubscriptionInfoEntityMap.containsKey(info.getSubId())) {
                                 deleteAllInfoBySubId(info.subId);
                             }
                         }
@@ -593,7 +687,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                         }
                         continue;
                     }
-                    mSubscriptionInfoMap.put(mSubId, subInfo);
+                    mSubscriptionInfoMap.put(subInfo.getSubscriptionId(), subInfo);
                     insertSubInfo(mContext, subInfo);
                 }
             }
@@ -610,7 +704,9 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
 
         @Override
         public void onCallStateChanged(int state) {
-            mCallback.onCallStateChanged(state);
+            for (MobileNetworkCallback callback : sCallbacks) {
+                callback.onCallStateChanged(state);
+            }
         }
     }
 
