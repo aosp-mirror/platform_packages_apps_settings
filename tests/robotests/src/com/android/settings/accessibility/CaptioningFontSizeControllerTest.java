@@ -64,6 +64,7 @@ public class CaptioningFontSizeControllerTest {
         mPreference = new ListPreference(mContext);
         mPreference.setEntries(R.array.captioning_font_size_selector_titles);
         mPreference.setEntryValues(R.array.captioning_font_size_selector_values);
+        mPreference.setSummary("%s");
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         CaptioningManager captioningManager = mContext.getSystemService(CaptioningManager.class);
         mShadowCaptioningManager = Shadow.extract(captioningManager);
@@ -76,28 +77,19 @@ public class CaptioningFontSizeControllerTest {
     }
 
     @Test
-    public void displayPreference_byDefault_shouldReturnDefault() {
-        mController.displayPreference(mScreen);
+    public void updateState_byDefault_shouldReturnDefault() {
+        mController.updateState(mPreference);
 
-        assertThat(mPreference.getEntry().toString()).isEqualTo("Medium");
+        assertThat(mPreference.getSummary().toString()).isEqualTo("Medium");
     }
 
     @Test
-    public void displayPreference_bySmallValue_shouldReturnSmall() {
+    public void updateState_bySmallValue_shouldReturnSmall() {
         mShadowCaptioningManager.setFontScale(0.5f);
 
-        mController.displayPreference(mScreen);
+        mController.updateState(mPreference);
 
-        assertThat(mPreference.getEntry().toString()).isEqualTo("Small");
-    }
-
-    @Test
-    public void onPreferenceChange_shouldReturnSmall() {
-        mController.displayPreference(mScreen);
-
-        mController.onPreferenceChange(mPreference, "0.5");
-
-        assertThat(mPreference.getEntry().toString()).isEqualTo("Small");
+        assertThat(mPreference.getSummary().toString()).isEqualTo("Small");
     }
 
     @Test
