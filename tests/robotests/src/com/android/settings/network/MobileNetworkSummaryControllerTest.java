@@ -95,10 +95,11 @@ public class MobileNetworkSummaryControllerTest {
         doReturn(mSubscriptionManager).when(mContext).getSystemService(SubscriptionManager.class);
         doReturn(mEuiccManager).when(mContext).getSystemService(EuiccManager.class);
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
-        mMobileNetworkRepository = MobileNetworkRepository.create(mContext, mMobileNetworkCallback);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(mContext);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mMobileNetworkRepository.addRegister(mLifecycleOwner);
+        mMobileNetworkRepository.addRegister(mLifecycleOwner, mMobileNetworkCallback,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
         when(mTelephonyManager.getNetworkCountryIso()).thenReturn("");
         when(mSubscriptionManager.isActiveSubscriptionId(anyInt())).thenReturn(true);
@@ -114,7 +115,7 @@ public class MobileNetworkSummaryControllerTest {
 
     @After
     public void tearDown() {
-        mMobileNetworkRepository.removeRegister();
+        mMobileNetworkRepository.removeRegister(mMobileNetworkCallback);
         SubscriptionUtil.setActiveSubscriptionsForTesting(null);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(null);
     }
