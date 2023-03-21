@@ -25,7 +25,7 @@ import android.annotation.Nullable;
 import android.app.Dialog;
 import android.app.KeyguardManager;
 import android.app.RemoteLockscreenValidationResult;
-import android.app.StartLockscreenValidationRequest;
+import android.app.RemoteLockscreenValidationSession;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.ManagedSubscriptionsPolicy;
 import android.content.ComponentName;
@@ -107,7 +107,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     protected boolean mRemoteValidation;
     protected CharSequence mAlternateButtonText;
     protected BiometricManager mBiometricManager;
-    @Nullable protected StartLockscreenValidationRequest mStartLockscreenValidationRequest;
+    @Nullable protected RemoteLockscreenValidationSession mRemoteLockscreenValidationSession;
     /** Credential saved so the credential can be set for device if remote validation passes */
     @Nullable protected LockscreenCredential mDeviceCredentialGuess;
     @Nullable protected RemoteLockscreenValidationClient mRemoteLockscreenValidationClient;
@@ -141,12 +141,12 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
             }
         }
         if (mRemoteValidation) {
-            mStartLockscreenValidationRequest = intent.getParcelableExtra(
-                    KeyguardManager.EXTRA_START_LOCKSCREEN_VALIDATION_REQUEST,
-                    StartLockscreenValidationRequest.class);
-            if (mStartLockscreenValidationRequest == null
-                    || mStartLockscreenValidationRequest.getRemainingAttempts() == 0) {
-                Log.e(TAG, "StartLockscreenValidationRequest is null or "
+            mRemoteLockscreenValidationSession = intent.getParcelableExtra(
+                    KeyguardManager.EXTRA_REMOTE_LOCKSCREEN_VALIDATION_SESSION,
+                    RemoteLockscreenValidationSession.class);
+            if (mRemoteLockscreenValidationSession == null
+                    || mRemoteLockscreenValidationSession.getRemainingAttempts() == 0) {
+                Log.e(TAG, "RemoteLockscreenValidationSession is null or "
                         + "no more attempts for remote lockscreen validation.");
                 getActivity().finish();
             }
@@ -437,7 +437,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
 
     private byte[] encryptDeviceCredentialGuess(byte[] guess) {
         try {
-            byte[] encodedPublicKey = mStartLockscreenValidationRequest.getSourcePublicKey();
+            byte[] encodedPublicKey = mRemoteLockscreenValidationSession.getSourcePublicKey();
             PublicKey publicKey = SecureBox.decodePublicKey(encodedPublicKey);
             return SecureBox.encrypt(
                     publicKey,
