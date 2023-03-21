@@ -16,14 +16,12 @@
 
 package com.android.settings.accessibility;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 import android.view.accessibility.CaptioningManager;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 
@@ -46,22 +44,20 @@ public class CaptioningFontSizeController extends BasePreferenceController
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        final ListPreference listPreference = screen.findPreference(getPreferenceKey());
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        final ListPreference listPreference = (ListPreference) preference;
         final float fontSize = mCaptioningManager.getFontScale();
+
         listPreference.setValue(Float.toString(fontSize));
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final ListPreference listPreference = (ListPreference) preference;
-        final ContentResolver cr = mContext.getContentResolver();
         Settings.Secure.putFloat(
-                cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_FONT_SCALE,
+                mContext.getContentResolver(), Settings.Secure.ACCESSIBILITY_CAPTIONING_FONT_SCALE,
                 Float.parseFloat((String) newValue));
-        listPreference.setValue((String) newValue);
         mCaptionHelper.setEnabled(true);
-        return false;
+        return true;
     }
 }
