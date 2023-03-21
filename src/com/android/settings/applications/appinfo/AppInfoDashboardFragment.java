@@ -437,7 +437,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
         }
     }
 
-    private static void showLockScreen(Context context, Runnable successRunnable) {
+    /** Shows the lock screen if the keyguard is secured. */
+    public static void showLockScreen(Context context, Runnable successRunnable) {
         final KeyguardManager keyguardManager = context.getSystemService(
                 KeyguardManager.class);
 

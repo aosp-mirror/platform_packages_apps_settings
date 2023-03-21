@@ -101,7 +101,7 @@ public class InternetPreferenceController extends AbstractPreferenceController i
         mInternetUpdater = new InternetUpdater(context, lifecycle, this);
         mInternetType = mInternetUpdater.getInternetType();
         mLifecycleOwner = lifecycleOwner;
-        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         lifecycle.addObserver(this);
     }
 
@@ -156,14 +156,16 @@ public class InternetPreferenceController extends AbstractPreferenceController i
     /** @OnLifecycleEvent(ON_RESUME) */
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
-        mMobileNetworkRepository.addRegister(mLifecycleOwner);
+        mMobileNetworkRepository.addRegister(mLifecycleOwner, this,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        mMobileNetworkRepository.updateEntity();
         mSummaryHelper.register(true);
     }
 
     /** @OnLifecycleEvent(ON_PAUSE) */
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
-        mMobileNetworkRepository.removeRegister();
+        mMobileNetworkRepository.removeRegister(this);
         mSummaryHelper.register(false);
     }
 
