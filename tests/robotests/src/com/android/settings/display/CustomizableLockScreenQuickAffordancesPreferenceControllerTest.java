@@ -21,6 +21,8 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -28,6 +30,10 @@ import static org.mockito.Mockito.when;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.database.MatrixCursor;
 import android.text.TextUtils;
 
@@ -54,6 +60,7 @@ public class CustomizableLockScreenQuickAffordancesPreferenceControllerTest {
 
     @Mock private Context mContext;
     @Mock private ContentResolver mContentResolver;
+    @Mock private PackageManager mPackageManager;
 
     private CustomizableLockScreenQuickAffordancesPreferenceController mUnderTest;
 
@@ -63,20 +70,28 @@ public class CustomizableLockScreenQuickAffordancesPreferenceControllerTest {
         when(mContext.getContentResolver()).thenReturn(mContentResolver);
         when(mContext.getResources())
                 .thenReturn(ApplicationProvider.getApplicationContext().getResources());
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
 
         mUnderTest = new CustomizableLockScreenQuickAffordancesPreferenceController(mContext, KEY);
     }
 
     @Test
-    public void getAvailabilityStatus_whenEnabled() {
-        setEnabled(true);
+    public void getAvailabilityStatus_whenFeatureEnabled() {
+        setEnabled(/* isWallpaperPickerInstalled= */ true, /* isFeatureEnabled = */ true);
 
         assertThat(mUnderTest.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
-    public void getAvailabilityStatus_whenNotEnabled() {
-        setEnabled(false);
+    public void getAvailabilityStatus_whenWallpaperPickerNotInstalledEnabled() {
+        setEnabled(/* isWallpaperPickerInstalled= */ false, /* isFeatureEnabled = */ true);
+
+        assertThat(mUnderTest.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_whenFeatureNotEnabled() {
+        setEnabled(/* isWallpaperPickerInstalled= */ true, /* isFeatureEnabled = */ false);
 
         assertThat(mUnderTest.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
@@ -127,13 +142,29 @@ public class CustomizableLockScreenQuickAffordancesPreferenceControllerTest {
         assertThat(TextUtils.equals(mUnderTest.getSummary(), "one, two")).isTrue();
     }
 
-    private void setEnabled(boolean isEnabled) {
+    private void setEnabled(boolean isWallpaperPickerInstalled, boolean isFeatureEnabled) {
+        if (isWallpaperPickerInstalled) {
+            final ResolveInfo resolveInfo = new ResolveInfo();
+            final ActivityInfo activityInfo = new ActivityInfo();
+            final ApplicationInfo applicationInfo = new ApplicationInfo();
+            applicationInfo.packageName = "com.fake.name";
+            activityInfo.applicationInfo = applicationInfo;
+            activityInfo.name = "someName";
+            resolveInfo.activityInfo = activityInfo;
+            when(mPackageManager.resolveActivity(any(), anyInt())).thenReturn(resolveInfo);
+        } else {
+            when(mPackageManager.resolveActivity(any(), anyInt())).thenReturn(null);
+        }
+
         final MatrixCursor cursor = new MatrixCursor(
                 new String[] {
                         CustomizableLockScreenUtils.NAME,
                         CustomizableLockScreenUtils.VALUE
                 });
-        cursor.addRow(new Object[] { CustomizableLockScreenUtils.ENABLED_FLAG, isEnabled ? 1 : 0 });
+        cursor.addRow(
+                new Object[] {
+                    CustomizableLockScreenUtils.ENABLED_FLAG, isFeatureEnabled ? 1 : 0
+                });
         when(
                 mContentResolver.query(
                         CustomizableLockScreenUtils.FLAGS_URI, null, null, null))
