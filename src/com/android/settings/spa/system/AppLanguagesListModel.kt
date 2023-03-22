@@ -21,6 +21,7 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.UserHandle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
@@ -94,9 +95,9 @@ class AppLanguagesListModel(private val context: Context) : AppListModel<AppLang
         AppListItem {
             val intent = Intent(context, AppLocalePickerActivity::class.java).apply {
                 data = Uri.parse("package:${record.app.packageName}")
-                this.putExtra("uid", record.app.uid)
             }
-            context.startActivity(intent)
+            val userHandle : UserHandle = UserHandle.getUserHandleForUid(record.app.uid)
+            context.startActivityAsUser(intent, userHandle)
         }
     }
 }
