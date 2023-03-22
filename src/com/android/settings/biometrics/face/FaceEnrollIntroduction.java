@@ -28,6 +28,7 @@ import android.hardware.SensorPrivacyManager;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.FaceManager;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
@@ -42,6 +43,7 @@ import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.Settings;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
@@ -110,7 +112,25 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mFaceManager = getFaceManager();
+
+        if (savedInstanceState == null
+                && !WizardManagerHelper.isAnySetupWizard(getIntent())
+                && !getIntent().getBooleanExtra(EXTRA_FROM_SETTINGS_SUMMARY, false)
+                && maxFacesEnrolled()) {
+            // from tips && maxEnrolled
+            Log.d(TAG, "launch face settings");
+            launchFaceSettingsActivity();
+            finish();
+        }
+
         super.onCreate(savedInstanceState);
+
+        // Wait super::onCreated() then return because SuperNotCalledExceptio will be thrown
+        // if we don't wait for it.
+        if (isFinishing()) {
+            return;
+        }
 
         // Apply extracted theme color to icons.
         final ImageView iconGlasses = findViewById(R.id.icon_glasses);
@@ -152,8 +172,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             infoMessageRequireEyes.setText(getInfoMessageRequireEyes());
         }
 
-        mFaceManager = getFaceManager();
-
         // This path is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
         if (mToken == null && BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
@@ -189,6 +207,24 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         final boolean cameraPrivacyEnabled = helper
                 .isSensorBlocked(SensorPrivacyManagerHelper.SENSOR_CAMERA);
         Log.v(TAG, "cameraPrivacyEnabled : " + cameraPrivacyEnabled);
+    }
+
+    private void launchFaceSettingsActivity() {
+        final Intent intent = new Intent(this, Settings.FaceSettingsInternalActivity.class);
+        final byte[] token = getIntent().getByteArrayExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+        if (token != null) {
+            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
+        }
+        final int userId = getIntent().getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
+        if (userId != UserHandle.USER_NULL) {
+            intent.putExtra(Intent.EXTRA_USER_ID, userId);
+        }
+        BiometricUtils.copyMultiBiometricExtras(getIntent(), intent);
+        intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, true);
+        intent.putExtra(EXTRA_KEY_CHALLENGE, getIntent().getLongExtra(EXTRA_KEY_CHALLENGE, -1L));
+        intent.putExtra(EXTRA_KEY_SENSOR_ID, getIntent().getIntExtra(EXTRA_KEY_SENSOR_ID, -1));
+        startActivity(intent);
     }
 
     @VisibleForTesting
@@ -232,6 +268,15 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     @Override
     protected void onStart() {
         super.onStart();
+        listenFoldEventForPostureGuidance();
+    }
+
+    private void listenFoldEventForPostureGuidance() {
+        if (maxFacesEnrolled()) {
+            Log.d(TAG, "Device has enrolled face, do not show posture guidance");
+            return;
+        }
+
         if (getPostureGuidanceIntent() == null) {
             Log.d(TAG, "Device do not support posture guidance");
             return;
