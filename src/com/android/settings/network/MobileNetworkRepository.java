@@ -111,8 +111,12 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private Map<Integer, SubscriptionInfo> mSubscriptionInfoMap = new ArrayMap<>();
     private Map<Integer, TelephonyManager> mTelephonyManagerMap = new HashMap<>();
     private Map<Integer, PhoneCallStateTelephonyCallback> mTelephonyCallbackMap = new HashMap<>();
-    private BroadcastReceiver mDataSubscriptionChangedReceiver = null;
-
+    private BroadcastReceiver mDataSubscriptionChangedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            onSubscriptionsChanged();
+        }
+    };
     @NonNull
     public static MobileNetworkRepository getInstance(Context context) {
         synchronized (sInstanceLock) {
@@ -142,8 +146,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         mFilter.addAction(SubscriptionManager.ACTION_DEFAULT_SUBSCRIPTION_CHANGED);
         mFilter.addAction(ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED);
         mFilter.addAction(SubscriptionManager.ACTION_DEFAULT_SMS_SUBSCRIPTION_CHANGED);
-        mDataSubscriptionChangedReceiver = new DataSubscriptionChangedReceiver();
-        mContext.registerReceiver(mDataSubscriptionChangedReceiver, mFilter);
     }
 
     private class AirplaneModeObserver extends ContentObserver {
@@ -171,13 +173,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
     }
 
-    private class DataSubscriptionChangedReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            onSubscriptionsChanged();
-        }
-    }
-
     /**
      * Register all callbacks and listener.
      *
@@ -188,9 +183,16 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
      */
     public void addRegister(LifecycleOwner lifecycleOwner,
             MobileNetworkCallback mobileNetworkCallback, int subId) {
+        if (sCallbacks.isEmpty()) {
+            mSubscriptionManager.addOnSubscriptionsChangedListener(mContext.getMainExecutor(),
+                    this);
+            mAirplaneModeObserver.register(mContext);
+            mContext.registerReceiver(mDataSubscriptionChangedReceiver, mFilter);
+            if (DEBUG) {
+                Log.d(TAG, "addRegister done");
+            }
+        }
         sCallbacks.add(mobileNetworkCallback);
-        mSubscriptionManager.addOnSubscriptionsChangedListener(mContext.getMainExecutor(), this);
-        mAirplaneModeObserver.register(mContext);
         observeAllSubInfo(lifecycleOwner);
         observeAllUiccInfo(lifecycleOwner);
         observeAllMobileNetworkInfo(lifecycleOwner);
@@ -200,7 +202,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
     }
 
-    private void addRegisterBySubId(int subId) {
+    public void addRegisterBySubId(int subId) {
         MobileDataContentObserver dataContentObserver = new MobileDataContentObserver(
                 new Handler(Looper.getMainLooper()));
         dataContentObserver.setOnMobileDataChangedListener(() -> {
@@ -268,10 +270,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         if (sCallbacks.isEmpty()) {
             mSubscriptionManager.removeOnSubscriptionsChangedListener(this);
             mAirplaneModeObserver.unRegister(mContext);
-            if (mDataSubscriptionChangedReceiver != null) {
-                mContext.unregisterReceiver(mDataSubscriptionChangedReceiver);
-                mDataSubscriptionChangedReceiver = null;
-            }
+            mContext.unregisterReceiver(mDataSubscriptionChangedReceiver);
             mDataContentObserverMap.forEach((id, observer) -> {
                 observer.unRegister(mContext);
             });
@@ -285,6 +284,9 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             });
             mTelephonyCallbackMap.clear();
             mTelephonyManagerMap.clear();
+            if (DEBUG) {
+                Log.d(TAG, "removeRegister done");
+            }
         }
     }
 
