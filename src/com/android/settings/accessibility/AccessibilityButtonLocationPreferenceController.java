@@ -19,21 +19,30 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.annotation.IntDef;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 import com.google.common.primitives.Ints;
 
-import java.util.Optional;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /** Preference controller that controls the preferred location in accessibility button page. */
 public class AccessibilityButtonLocationPreferenceController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {
 
-    private Optional<Integer> mDefaultLocation = Optional.empty();
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({
+            Location.FLOATING_MENU,
+            Location.NAVIGATION_BAR,
+    })
+    private @interface Location {
+        int FLOATING_MENU = 1;
+        int NAVIGATION_BAR = 0;
+    }
 
     public AccessibilityButtonLocationPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -47,12 +56,9 @@ public class AccessibilityButtonLocationPreferenceController extends BasePrefere
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final ListPreference listPreference = (ListPreference) preference;
         final Integer value = Ints.tryParse((String) newValue);
         if (value != null) {
-            Settings.Secure.putInt(mContext.getContentResolver(),
-                    Settings.Secure.ACCESSIBILITY_BUTTON_MODE, value);
-            updateState(listPreference);
+            putCurrentAccessibilityButtonMode(value);
         }
         return true;
     }
@@ -62,21 +68,17 @@ public class AccessibilityButtonLocationPreferenceController extends BasePrefere
         super.updateState(preference);
         final ListPreference listPreference = (ListPreference) preference;
 
-        listPreference.setValue(getCurrentAccessibilityButtonMode());
+        listPreference.setValue(String.valueOf(getCurrentAccessibilityButtonMode()));
     }
 
-    private String getCurrentAccessibilityButtonMode() {
-        final int mode = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_BUTTON_MODE, getDefaultLocationValue());
-        return String.valueOf(mode);
+    @Location
+    private int getCurrentAccessibilityButtonMode() {
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_BUTTON_MODE, Location.FLOATING_MENU);
     }
 
-    private int getDefaultLocationValue() {
-        if (!mDefaultLocation.isPresent()) {
-            final String[] valuesList = mContext.getResources().getStringArray(
-                    R.array.accessibility_button_location_selector_values);
-            mDefaultLocation = Optional.of(Integer.parseInt(valuesList[0]));
-        }
-        return mDefaultLocation.get();
+    private void putCurrentAccessibilityButtonMode(@Location int location) {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_BUTTON_MODE, location);
     }
 }

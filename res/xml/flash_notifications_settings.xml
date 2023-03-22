@@ -20,14 +20,13 @@
     android:title="@string/flash_notifications_title">
 
     <com.android.settingslib.widget.TopIntroPreference
+        android:key="flash_notifications_intro"
         android:title="@string/flash_notifications_intro" />
 
-    <!-- TODO update when rawRes added
     <com.android.settingslib.widget.IllustrationPreference
-        android:key="flash_notifications_guide_preference"
-        settings:lottie_rawRes="@raw/NOT ADDED"
-        settings:searchable="false" />
-    -->
+        android:key="flash_notifications_illustration"
+        settings:searchable="false"
+        settings:lottie_rawRes="@drawable/flash_notifications_illustration"/>
 
     <SwitchPreference
         android:key="camera_flash_notification_preference"
