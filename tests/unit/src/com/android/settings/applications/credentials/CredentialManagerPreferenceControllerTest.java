@@ -318,11 +318,11 @@ public class CredentialManagerPreferenceControllerTest {
         Map<String, SwitchPreference> prefs =
                 controller.buildPreferenceList(mContext, mCredentialsPreferenceCategory);
         assertThat(prefs.size()).isEqualTo(3);
-        SwitchPreference pref1 = prefs.get(TEST_PACKAGE_NAME_C);
+        SwitchPreference pref1 = prefs.get(TEST_PACKAGE_NAME_A);
         assertThat(pref1).isNotNull();
         assertThat(pref1.getTitle()).isEqualTo(TEST_TITLE_APP_A);
         assertThat(pref1.isChecked()).isFalse();
-        SwitchPreference pref2 = prefs.get(TEST_PACKAGE_NAME_C);
+        SwitchPreference pref2 = prefs.get(TEST_PACKAGE_NAME_B);
         assertThat(pref2).isNotNull();
         assertThat(pref2.getTitle()).isEqualTo(TEST_TITLE_APP_B);
         assertThat(pref2.isChecked()).isFalse();
