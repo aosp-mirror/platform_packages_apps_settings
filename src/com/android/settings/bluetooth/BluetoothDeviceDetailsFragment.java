@@ -63,9 +63,6 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     public static final String KEY_DEVICE_ADDRESS = "device_address";
     private static final String TAG = "BTDeviceDetailsFrg";
 
-    static final int FEATURE_HEARING_DEVICE_CONTROLS_ORDER = 1;
-    static final int FEATURE_AUDIO_ROUTING_ORDER = 2;
-
     @VisibleForTesting
     static int EDIT_DEVICE_NAME_ITEM_ID = Menu.FIRST;
 
