@@ -50,7 +50,7 @@ public class CustomizableLockScreenQuickAffordancesPreferenceController extends
         final Preference preference = screen.findPreference(getPreferenceKey());
         if (preference != null) {
             preference.setOnPreferenceClickListener(preference1 -> {
-                final Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
+                final Intent intent = CustomizableLockScreenUtils.newIntent();
                 final String packageName =
                         mContext.getString(R.string.config_wallpaper_picker_package);
                 if (!TextUtils.isEmpty(packageName)) {
