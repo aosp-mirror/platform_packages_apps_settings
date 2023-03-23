@@ -108,6 +108,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             super.onViewCreated(view, savedInstanceState);
 
             GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
+            layout.setDescriptionText(loadDescriptionText());
             layout.setDividerItemDecoration(new SettingsDividerItemDecoration(getContext()));
             layout.setDividerInset(getContext().getResources().getDimensionPixelSize(
                     R.dimen.sud_items_glif_text_divider_inset));
@@ -128,11 +129,9 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
 
         @Override
         protected void addHeaderView() {
-            if (isForBiometric()) {
-                setHeaderView(R.layout.setup_choose_lock_generic_biometrics_header);
-            } else {
-                setHeaderView(R.layout.setup_choose_lock_generic_header);
-            }
+            // The original logic has been moved to onViewCreated and
+            // uses GlifLayout#setDescriptionText instead,
+            // keep empty body here since we won't call super method.
         }
 
         @Override
@@ -228,6 +227,12 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
 
         private boolean isForBiometric() {
             return mForFingerprint || mForFace || mForBiometrics;
+        }
+
+        String loadDescriptionText() {
+            return getString(isForBiometric()
+                    ? R.string.lock_settings_picker_biometrics_added_security_message
+                    : R.string.setup_lock_settings_picker_message);
         }
     }
 
