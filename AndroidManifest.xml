@@ -178,6 +178,7 @@
                   android:exported="true"
                   android:enabled="false"
                   android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize"
+                  android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
                   android:permission="android.permission.LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK">
             <intent-filter>
                 <action android:name="android.settings.SETTINGS_EMBED_DEEP_LINK_ACTIVITY" />
@@ -224,6 +225,7 @@
         <activity android:name=".SubSettings"
                   android:exported="false"
                   android:theme="@style/Theme.SubSettings"
+                  android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
                   android:taskAffinity="com.android.settings.root" />
 
         <activity android:name=".Settings$CreateShortcutActivity"
@@ -333,6 +335,7 @@
         <activity android:name=".search.SearchResultTrampoline"
                   android:theme="@android:style/Theme.NoDisplay"
                   android:excludeFromRecents="true"
+                  android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
                   android:exported="true">
             <intent-filter>
                 <action android:name="com.android.settings.SEARCH_RESULT_TRAMPOLINE" />
@@ -1628,6 +1631,7 @@
             android:excludeFromRecents="true"
             android:theme="@android:style/Theme.NoDisplay"
             android:exported="true"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
             android:permission="android.permission.MODIFY_PHONE_STATE">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
