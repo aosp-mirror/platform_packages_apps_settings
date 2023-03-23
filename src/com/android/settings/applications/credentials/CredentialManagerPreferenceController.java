@@ -20,10 +20,12 @@ import static androidx.lifecycle.Lifecycle.Event.ON_CREATE;
 
 import android.annotation.NonNull;
 import android.annotation.Nullable;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
@@ -34,6 +36,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.OutcomeReceiver;
 import android.os.UserHandle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
@@ -67,6 +70,8 @@ import java.util.concurrent.Executor;
 public class CredentialManagerPreferenceController extends BasePreferenceController
         implements LifecycleObserver {
     private static final String TAG = "CredentialManagerPreferenceController";
+    private static final String ALTERNATE_INTENT = "android.settings.SYNC_SETTINGS";
+    private static final String PRIMARY_INTENT = "android.settings.CREDENTIAL_PROVIDER";
     private static final int MAX_SELECTABLE_PROVIDERS = 5;
 
     private final PackageManager mPm;
@@ -76,8 +81,10 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private final @Nullable CredentialManager mCredentialManager;
     private final Executor mExecutor;
     private final Map<String, SwitchPreference> mPrefs = new HashMap<>(); // key is package name
+    private final List<ServiceInfo> mPendingServiceInfos = new ArrayList<>();
 
     private @Nullable FragmentManager mFragmentManager = null;
+    private @Nullable Delegate mDelegate = null;
 
     public CredentialManagerPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -115,10 +122,110 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
      *
      * @param fragment the fragment to use as the parent
      * @param fragmentManager the fragment manager to use
+     * @param intent the intent used to start the activity
+     * @param delegate the delegate to send results back to
      */
-    public void init(DashboardFragment fragment, FragmentManager fragmentManager) {
+    public void init(
+            DashboardFragment fragment,
+            FragmentManager fragmentManager,
+            @Nullable Intent launchIntent,
+            @NonNull Delegate delegate) {
         fragment.getSettingsLifecycle().addObserver(this);
         mFragmentManager = fragmentManager;
+        setDelegate(delegate);
+        verifyReceivedIntent(launchIntent);
+    }
+
+    /**
+     * Parses and sets the package component name. Returns a boolean as to whether this was
+     * successful.
+     */
+    @VisibleForTesting
+    boolean verifyReceivedIntent(Intent launchIntent) {
+        if (launchIntent == null || launchIntent.getAction() == null) {
+            return false;
+        }
+
+        final String action = launchIntent.getAction();
+        final boolean isCredProviderAction =
+                TextUtils.equals(action, PRIMARY_INTENT);
+        final boolean isExistingAction = TextUtils.equals(action, ALTERNATE_INTENT);
+        final boolean isValid = isCredProviderAction || isExistingAction;
+
+        if (!isValid) {
+            return false;
+        }
+
+        // After this point we have received a set credential manager provider intent
+        // so we should return a cancelled result if the data we got is no good.
+        if (launchIntent.getData() == null) {
+            setActivityResult(Activity.RESULT_CANCELED);
+            return false;
+        }
+
+        String packageName = launchIntent.getData().getSchemeSpecificPart();
+        if (packageName == null) {
+            setActivityResult(Activity.RESULT_CANCELED);
+            return false;
+        }
+
+        mPendingServiceInfos.clear();
+        for (CredentialProviderInfo cpi : mServices) {
+            final ServiceInfo serviceInfo = cpi.getServiceInfo();
+            if (serviceInfo.packageName.equals(packageName)) {
+                mPendingServiceInfos.add(serviceInfo);
+            }
+        }
+
+        // Don't set the result as RESULT_OK here because we should wait for the user to
+        // enable the provider.
+        if (!mPendingServiceInfos.isEmpty()) {
+            return true;
+        }
+
+        setActivityResult(Activity.RESULT_CANCELED);
+        return false;
+    }
+
+    @VisibleForTesting
+    void setDelegate(Delegate delegate) {
+        mDelegate = delegate;
+    }
+
+    private void setActivityResult(int resultCode) {
+        if (mDelegate == null) {
+            Log.e(TAG, "Missing delegate");
+            return;
+        }
+        mDelegate.setActivityResult(resultCode);
+    }
+
+    private void handleIntent() {
+        List<ServiceInfo> pendingServiceInfos = new ArrayList<>(mPendingServiceInfos);
+        mPendingServiceInfos.clear();
+        if (pendingServiceInfos.isEmpty()) {
+            return;
+        }
+
+        ServiceInfo serviceInfo = pendingServiceInfos.get(0);
+        ApplicationInfo appInfo = serviceInfo.applicationInfo;
+        CharSequence appName = "";
+        if (appInfo.nonLocalizedLabel != null) {
+            appName = appInfo.loadLabel(mPm);
+        }
+
+        // Stop if there is no name.
+        if (TextUtils.isEmpty(appName)) {
+            return;
+        }
+
+        NewProviderConfirmationDialogFragment fragment =
+                newNewProviderConfirmationDialogFragment(serviceInfo.packageName, appName);
+        if (fragment == null || mFragmentManager == null) {
+            return;
+        }
+
+        fragment.show(mFragmentManager, NewProviderConfirmationDialogFragment.TAG);
     }
 
     @OnLifecycleEvent(ON_CREATE)
@@ -138,6 +245,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             LifecycleOwner lifecycleOwner, List<CredentialProviderInfo> availableServices) {
         mServices.clear();
         mServices.addAll(availableServices);
+
+        // If there is a pending dialog then show it.
+        handleIntent();
 
         mEnabledPackageNames.clear();
         for (CredentialProviderInfo cpi : availableServices) {
@@ -201,9 +311,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 icon = mIconFactory.getBadgedIcon(appInfo, getUser());
             }
 
-            // If there is no title then don't show anything.
+            // If there is no title then show the package manager.
             if (TextUtils.isEmpty(title)) {
-                continue;
+                title = firstServiceInfo.packageName;
             }
 
             // Build the pref and add it to the output & group.
@@ -362,6 +472,49 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 });
     }
 
+    /** Create the new provider confirmation dialog. */
+    private @Nullable NewProviderConfirmationDialogFragment
+            newNewProviderConfirmationDialogFragment(
+                    @NonNull String packageName, @NonNull CharSequence appName) {
+        DialogHost host =
+                new DialogHost() {
+                    @Override
+                    public void onDialogClick(int whichButton) {
+                        completeEnableProviderDialogBox(whichButton, packageName);
+                    }
+                };
+
+        return new NewProviderConfirmationDialogFragment(host, packageName, appName);
+    }
+
+    @VisibleForTesting
+    void completeEnableProviderDialogBox(int whichButton, String packageName) {
+        if (whichButton == DialogInterface.BUTTON_POSITIVE) {
+            if (togglePackageNameEnabled(packageName)) {
+                // Enable all prefs.
+                if (mPrefs.containsKey(packageName)) {
+                    mPrefs.get(packageName).setChecked(true);
+                }
+                setActivityResult(Activity.RESULT_OK);
+            } else {
+                // There are too many providers so set the result as cancelled.
+                setActivityResult(Activity.RESULT_CANCELED);
+
+                // Show the error if too many enabled.
+                final DialogFragment fragment = newErrorDialogFragment();
+
+                if (fragment == null || mFragmentManager == null) {
+                    return;
+                }
+
+                fragment.show(mFragmentManager, ErrorDialogFragment.TAG);
+            }
+        } else {
+            // The user clicked the cancel button so send that result back.
+            setActivityResult(Activity.RESULT_CANCELED);
+        }
+    }
+
     private @Nullable ErrorDialogFragment newErrorDialogFragment() {
         DialogHost host =
                 new DialogHost() {
@@ -401,8 +554,13 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     }
 
     /** Called when the dialog button is clicked. */
-    private interface DialogHost {
+    private static interface DialogHost {
         void onDialogClick(int whichButton);
+    }
+
+    /** Called to send messages back to the parent fragment. */
+    public static interface Delegate {
+        void setActivityResult(int resultCode);
     }
 
     /** Dialog fragment parent class. */
@@ -475,6 +633,47 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                     .setTitle(title)
                     .setMessage(getContext().getString(R.string.credman_confirmation_message))
                     .setPositiveButton(R.string.credman_confirmation_message_positive_button, this)
+                    .setNegativeButton(android.R.string.cancel, this)
+                    .create();
+        }
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            getDialogHost().onDialogClick(which);
+        }
+    }
+
+    /**
+     * Confirmation dialog fragment shows a dialog to the user to confirm that they would like to
+     * enable the new provider.
+     */
+    public static class NewProviderConfirmationDialogFragment
+            extends CredentialManagerDialogFragment {
+
+        NewProviderConfirmationDialogFragment(
+                DialogHost dialogHost, @NonNull String packageName, @NonNull CharSequence appName) {
+            super(dialogHost);
+
+            final Bundle argument = new Bundle();
+            argument.putString(PACKAGE_NAME_KEY, packageName);
+            argument.putCharSequence(APP_NAME_KEY, appName);
+            setArguments(argument);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Bundle bundle = getArguments();
+            final Context context = getContext();
+            final String title =
+                    context.getString(
+                            R.string.credman_enable_confirmation_message_title,
+                            bundle.getCharSequence(CredentialManagerDialogFragment.APP_NAME_KEY));
+
+            return new AlertDialog.Builder(getActivity())
+                    .setTitle(title)
+                    .setMessage(context.getString(R.string.credman_enable_confirmation_message))
+                    .setPositiveButton(
+                            R.string.credman_enable_confirmation_message_positive_button, this)
                     .setNegativeButton(android.R.string.cancel, this)
                     .create();
         }

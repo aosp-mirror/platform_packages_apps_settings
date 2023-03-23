@@ -17,10 +17,10 @@
 package com.android.settings.bluetooth;
 
 import android.content.Context;
-import android.media.AudioAttributes;
 import android.provider.Settings;
 
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.HearingAidAudioRoutingConstants;
 
 /**
  * The controller of the hearing device ringtone routing list preference.
@@ -45,7 +45,8 @@ public class HearingDeviceRingtoneRoutingPreferenceController extends
 
     @Override
     protected int[] getSupportedAttributeList() {
-        return new int[] {AudioAttributes.USAGE_NOTIFICATION_RINGTONE};
+        return HearingAidAudioRoutingConstants.RINGTONE_ROUTING_ATTRIBUTE;
+
     }
 
     @Override
@@ -62,6 +63,7 @@ public class HearingDeviceRingtoneRoutingPreferenceController extends
     @Override
     protected int restoreRoutingValue(Context context) {
         return Settings.Secure.getInt(context.getContentResolver(),
-                Settings.Secure.HEARING_AID_RINGTONE_ROUTING, RoutingValue.AUTO);
+                Settings.Secure.HEARING_AID_RINGTONE_ROUTING,
+                HearingAidAudioRoutingConstants.RoutingValue.AUTO);
     }
 }

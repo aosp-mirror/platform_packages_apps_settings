@@ -185,7 +185,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         mUserManager = getUserManager();
         updatePasswordQuality();
 
-        if (!mConfirmingCredentials) {
+        // Check isFinishing() because FaceEnrollIntroduction may finish self to launch
+        // FaceSettings during onCreate()
+        if (!mConfirmingCredentials && !isFinishing()) {
             if (!mHasPassword) {
                 // No password registered, launch into enrollment wizard.
                 mConfirmingCredentials = true;

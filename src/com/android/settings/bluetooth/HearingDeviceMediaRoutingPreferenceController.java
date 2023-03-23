@@ -17,10 +17,10 @@
 package com.android.settings.bluetooth;
 
 import android.content.Context;
-import android.media.AudioAttributes;
 import android.provider.Settings;
 
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.HearingAidAudioRoutingConstants;
 
 /**
  * The controller of the hearing device media routing list preference.
@@ -45,9 +45,8 @@ public class HearingDeviceMediaRoutingPreferenceController extends
 
     @Override
     protected int[] getSupportedAttributeList() {
-        return new int[]{
-                AudioAttributes.USAGE_MEDIA,
-                AudioAttributes.USAGE_GAME};
+        return HearingAidAudioRoutingConstants.MEDIA_ROUTING_ATTRIBUTES;
+
     }
 
     @Override
@@ -64,6 +63,7 @@ public class HearingDeviceMediaRoutingPreferenceController extends
     @Override
     protected int restoreRoutingValue(Context context) {
         return Settings.Secure.getInt(context.getContentResolver(),
-                Settings.Secure.HEARING_AID_MEDIA_ROUTING, RoutingValue.AUTO);
+                Settings.Secure.HEARING_AID_MEDIA_ROUTING,
+                HearingAidAudioRoutingConstants.RoutingValue.AUTO);
     }
 }
