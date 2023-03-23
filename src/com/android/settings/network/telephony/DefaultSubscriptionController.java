@@ -104,8 +104,13 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
-        mMobileNetworkRepository.addRegister(mLifecycleOwner, this, getDefaultSubscriptionId());
+        mMobileNetworkRepository.addRegister(mLifecycleOwner, this,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         mMobileNetworkRepository.updateEntity();
+        // Can not get default subId from database until get the callback, add register by subId
+        // later.
+        mMobileNetworkRepository.addRegisterBySubId(getDefaultSubscriptionId());
+
     }
 
     @OnLifecycleEvent(ON_PAUSE)
