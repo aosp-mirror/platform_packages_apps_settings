@@ -24,11 +24,16 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ServiceInfo;
 import android.credentials.CredentialProviderInfo;
+import android.net.Uri;
 import android.os.Looper;
+import android.provider.Settings;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.preference.PreferenceCategory;
@@ -47,6 +52,7 @@ import org.junit.runner.RunWith;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 @RunWith(AndroidJUnit4.class)
@@ -55,6 +61,8 @@ public class CredentialManagerPreferenceControllerTest {
     private Context mContext;
     private PreferenceScreen mScreen;
     private PreferenceCategory mCredentialsPreferenceCategory;
+    private CredentialManagerPreferenceController.Delegate mDelegate;
+    private Optional<Integer> mReceivedResultCode;
 
     private static final String TEST_PACKAGE_NAME_A = "com.android.providerA";
     private static final String TEST_PACKAGE_NAME_B = "com.android.providerB";
@@ -62,6 +70,8 @@ public class CredentialManagerPreferenceControllerTest {
     private static final String TEST_TITLE_APP_A = "test app A";
     private static final String TEST_TITLE_APP_B = "test app B";
     private static final String TEST_TITLE_SERVICE_C = "test service C1";
+    private static final String PRIMARY_INTENT = "android.settings.CREDENTIAL_PROVIDER";
+    private static final String ALTERNATE_INTENT = "android.settings.SYNC_SETTINGS";
 
     @Before
     public void setUp() {
@@ -73,9 +83,17 @@ public class CredentialManagerPreferenceControllerTest {
         mCredentialsPreferenceCategory = new PreferenceCategory(mContext);
         mCredentialsPreferenceCategory.setKey("credentials_test");
         mScreen.addPreference(mCredentialsPreferenceCategory);
+        mReceivedResultCode = Optional.empty();
+        mDelegate =
+                new CredentialManagerPreferenceController.Delegate() {
+                    @Override
+                    public void setActivityResult(int resultCode) {
+                        mReceivedResultCode = Optional.of(resultCode);
+                    }
+                };
     }
 
-    /*@Test
+    @Test
     // Tests that getAvailabilityStatus() does not throw an exception if it's called before the
     // Controller is initialized (this can happen during indexing).
     public void getAvailabilityStatus_withoutInit_returnsUnavailable() {
@@ -252,7 +270,7 @@ public class CredentialManagerPreferenceControllerTest {
         assertThat(enabledServices.size()).isEqualTo(1);
         assertThat(enabledServices.contains("com.android.provider1/ClassA")).isFalse();
         assertThat(enabledServices.contains("com.android.provider2/ClassA")).isTrue();
-    }*/
+    }
 
     @Test
     public void displayPreference_withServices_preferencesAdded_sameAppShouldBeMerged() {
@@ -312,12 +330,120 @@ public class CredentialManagerPreferenceControllerTest {
         assertThat(prefs.get(TEST_PACKAGE_NAME_C).isChecked()).isTrue();
     }
 
+    @Test
+    public void handleIntentWithProviderServiceInfo_handleBadIntent_missingData() {
+        CredentialProviderInfo cpi = createCredentialProviderInfo();
+        CredentialManagerPreferenceController controller =
+                createControllerWithServices(Lists.newArrayList(cpi));
+
+        // Create an intent with missing data.
+        Intent missingDataIntent = new Intent(PRIMARY_INTENT);
+        assertThat(controller.verifyReceivedIntent(missingDataIntent)).isFalse();
+    }
+
+    @Test
+    public void handleIntentWithProviderServiceInfo_handleBadIntent_successDialog() {
+        CredentialProviderInfo cpi = createCredentialProviderInfo();
+        CredentialManagerPreferenceController controller =
+                createControllerWithServices(Lists.newArrayList(cpi));
+        String packageName = cpi.getServiceInfo().packageName;
+
+        // Create an intent with valid data.
+        Intent intent = new Intent(PRIMARY_INTENT);
+        intent.setData(Uri.parse("package:" + packageName));
+        assertThat(controller.verifyReceivedIntent(intent)).isTrue();
+        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_POSITIVE, packageName);
+        assertThat(mReceivedResultCode.get()).isEqualTo(Activity.RESULT_OK);
+    }
+
+    @Test
+    public void handleIntentWithProviderServiceInfo_handleIntent_cancelDialog() {
+        CredentialProviderInfo cpi = createCredentialProviderInfo();
+        CredentialManagerPreferenceController controller =
+                createControllerWithServices(Lists.newArrayList(cpi));
+        String packageName = cpi.getServiceInfo().packageName;
+
+        // Create an intent with valid data.
+        Intent intent = new Intent(PRIMARY_INTENT);
+        intent.setData(Uri.parse("package:" + packageName));
+        assertThat(controller.verifyReceivedIntent(intent)).isTrue();
+        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_NEGATIVE, packageName);
+        assertThat(mReceivedResultCode.get()).isEqualTo(Activity.RESULT_CANCELED);
+    }
+
+    @Test
+    public void handleOtherIntentWithProviderServiceInfo_handleBadIntent_missingData() {
+        CredentialProviderInfo cpi = createCredentialProviderInfo();
+        CredentialManagerPreferenceController controller =
+                createControllerWithServices(Lists.newArrayList(cpi));
+
+        // Create an intent with missing data.
+        Intent missingDataIntent = new Intent(ALTERNATE_INTENT);
+        assertThat(controller.verifyReceivedIntent(missingDataIntent)).isFalse();
+    }
+
+    @Test
+    public void handleOtherIntentWithProviderServiceInfo_handleBadIntent_successDialog() {
+        CredentialProviderInfo cpi = createCredentialProviderInfo();
+        CredentialManagerPreferenceController controller =
+                createControllerWithServices(Lists.newArrayList(cpi));
+        String packageName = cpi.getServiceInfo().packageName;
+
+        // Create an intent with valid data.
+        Intent intent = new Intent(ALTERNATE_INTENT);
+        intent.setData(Uri.parse("package:" + packageName));
+        assertThat(controller.verifyReceivedIntent(intent)).isTrue();
+        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_POSITIVE, packageName);
+        assertThat(mReceivedResultCode.get()).isEqualTo(Activity.RESULT_OK);
+    }
+
+    @Test
+    public void handleOtherIntentWithProviderServiceInfo_handleIntent_cancelDialog() {
+        CredentialProviderInfo cpi = createCredentialProviderInfo();
+        CredentialManagerPreferenceController controller =
+                createControllerWithServices(Lists.newArrayList(cpi));
+        String packageName = cpi.getServiceInfo().packageName;
+
+        // Create an intent with valid data.
+        Intent intent = new Intent(ALTERNATE_INTENT);
+        intent.setData(Uri.parse("package:" + packageName));
+        assertThat(controller.verifyReceivedIntent(intent)).isTrue();
+        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_NEGATIVE, packageName);
+        assertThat(mReceivedResultCode.get()).isEqualTo(Activity.RESULT_CANCELED);
+    }
+
+    @Test
+    public void handleIntentWithProviderServiceInfo_handleIntent_incorrectAction() {
+        CredentialProviderInfo cpi = createCredentialProviderInfo();
+        CredentialManagerPreferenceController controller =
+                createControllerWithServices(Lists.newArrayList(cpi));
+        String packageName = cpi.getServiceInfo().packageName;
+
+        // Create an intent with valid data.
+        Intent intent = new Intent(Settings.ACTION_REQUEST_SET_AUTOFILL_SERVICE);
+        intent.setData(Uri.parse("package:" + packageName));
+        assertThat(controller.verifyReceivedIntent(intent)).isFalse();
+        assertThat(mReceivedResultCode.isPresent()).isFalse();
+    }
+
+    @Test
+    public void handleIntentWithProviderServiceInfo_handleNullIntent() {
+        CredentialProviderInfo cpi = createCredentialProviderInfo();
+        CredentialManagerPreferenceController controller =
+                createControllerWithServices(Lists.newArrayList(cpi));
+
+        // Use a null intent.
+        assertThat(controller.verifyReceivedIntent(null)).isFalse();
+        assertThat(mReceivedResultCode.isPresent()).isFalse();
+    }
+
     private CredentialManagerPreferenceController createControllerWithServices(
             List<CredentialProviderInfo> availableServices) {
         CredentialManagerPreferenceController controller =
                 new CredentialManagerPreferenceController(
                         mContext, mCredentialsPreferenceCategory.getKey());
         controller.setAvailableServices(() -> mock(Lifecycle.class), availableServices);
+        controller.setDelegate(mDelegate);
         return controller;
     }
 
