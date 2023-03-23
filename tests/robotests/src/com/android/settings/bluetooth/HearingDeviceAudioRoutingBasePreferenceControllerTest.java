@@ -20,15 +20,13 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
+import static org.mockito.ArgumentMatchers.isNull;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.AudioDeviceAttributes;
 import android.media.AudioDeviceInfo;
@@ -38,7 +36,10 @@ import android.media.audiopolicy.AudioProductStrategy;
 import androidx.preference.ListPreference;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.R;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.HearingAidAudioRoutingConstants;
+import com.android.settingslib.bluetooth.HearingAidAudioRoutingHelper;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -63,71 +64,67 @@ public class HearingDeviceAudioRoutingBasePreferenceControllerTest {
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private static final String TEST_DEVICE_ADDRESS = "00:A1:A1:A1:A1:A1";
     private static final String FAKE_KEY = "fake_key";
-    private static final String TEST_SHARED_PREFERENCE = "test_bluetooth_settings";
 
+    @Mock
+    private AudioProductStrategy mAudioProductStrategyMedia;
     @Mock
     private CachedBluetoothDevice mCachedBluetoothDevice;
     @Mock
-    private AudioProductStrategy mAudioProductStrategyMedia;
-    private AudioDeviceAttributes mHearingDeviceAttribute;
-    private ListPreference mListPreference;
+    private BluetoothDevice mBluetoothDevice;
+    @Spy
+    private HearingAidAudioRoutingHelper mHelper = new HearingAidAudioRoutingHelper(mContext);
+    private final ListPreference mListPreference = new ListPreference(mContext);
     private TestHearingDeviceAudioRoutingBasePreferenceController mController;
 
     @Before
     public void setUp() {
-        mListPreference = new ListPreference(mContext);
-        when(mCachedBluetoothDevice.getAddress()).thenReturn(TEST_DEVICE_ADDRESS);
-        mHearingDeviceAttribute = new AudioDeviceAttributes(
+        final AudioDeviceAttributes hearingDeviceAttribute = new AudioDeviceAttributes(
                 AudioDeviceAttributes.ROLE_OUTPUT,
                 AudioDeviceInfo.TYPE_HEARING_AID,
                 TEST_DEVICE_ADDRESS);
+
+        when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
+        when(mBluetoothDevice.getAnonymizedAddress()).thenReturn(TEST_DEVICE_ADDRESS);
+        when(mCachedBluetoothDevice.getAddress()).thenReturn(TEST_DEVICE_ADDRESS);
+        when(mHelper.getMatchedHearingDeviceAttributes(any())).thenReturn(hearingDeviceAttribute);
         when(mAudioProductStrategyMedia.getAudioAttributesForLegacyStreamType(
                 AudioManager.STREAM_MUSIC))
                 .thenReturn((new AudioAttributes.Builder()).build());
-        doReturn(getSharedPreferences()).when(mContext).getSharedPreferences(anyString(), anyInt());
+        when(mHelper.getAudioProductStrategies()).thenReturn(List.of(mAudioProductStrategyMedia));
 
-        mController = spy(
-                new TestHearingDeviceAudioRoutingBasePreferenceController(mContext, FAKE_KEY));
-        mController.setupForTesting(mCachedBluetoothDevice);
-        doReturn(List.of(mAudioProductStrategyMedia)).when(mController).getAudioProductStrategies();
+        mController = new TestHearingDeviceAudioRoutingBasePreferenceController(mContext, FAKE_KEY,
+                mHelper);
+        TestHearingDeviceAudioRoutingBasePreferenceController.setupForTesting(
+                mCachedBluetoothDevice);
+        mListPreference.setEntries(R.array.bluetooth_audio_routing_titles);
+        mListPreference.setEntryValues(R.array.bluetooth_audio_routing_values);
+        mListPreference.setSummary("%s");
     }
 
     @Test
-    public void onPreferenceChange_routingValueAuto_expectedListValue() {
-        mController.onPreferenceChange(mListPreference, String.valueOf(
-                HearingDeviceAudioRoutingBasePreferenceController.RoutingValue.AUTO));
+    public void updateState_routingValueAuto_expectedSummary() {
+        mController.saveRoutingValue(mContext, HearingAidAudioRoutingConstants.RoutingValue.AUTO);
 
-        verify(mController).removePreferredDeviceForStrategies(any());
-        assertThat(mListPreference.getValue()).isEqualTo(String.valueOf(
-                HearingDeviceAudioRoutingBasePreferenceController.RoutingValue.AUTO));
+        mController.updateState(mListPreference);
+
+        assertThat(mListPreference.getSummary().toString()).isEqualTo(
+                mListPreference.getEntries()[0].toString());
     }
 
     @Test
-    public void onPreferenceChange_routingValueHearingDevice_expectedListValue() {
+    public void onPreferenceChange_routingValueHearingDevice_restoreSameValue() {
         mController.onPreferenceChange(mListPreference, String.valueOf(
-                HearingDeviceAudioRoutingBasePreferenceController.RoutingValue.HEARING_DEVICE));
+                HearingAidAudioRoutingConstants.RoutingValue.HEARING_DEVICE));
 
-        verify(mController).setPreferredDeviceForStrategies(any(), eq(mHearingDeviceAttribute));
-        assertThat(mListPreference.getValue()).isEqualTo(String.valueOf(
-                HearingDeviceAudioRoutingBasePreferenceController.RoutingValue.HEARING_DEVICE));
+        assertThat(mController.restoreRoutingValue(mContext)).isEqualTo(
+                HearingAidAudioRoutingConstants.RoutingValue.HEARING_DEVICE);
     }
 
     @Test
-    public void onPreferenceChange_routingValueDeviceSpeaker_expectedListValue() {
-        final AudioDeviceAttributes deviceSpeakerOut = new AudioDeviceAttributes(
-                AudioDeviceAttributes.ROLE_OUTPUT, AudioDeviceInfo.TYPE_BUILTIN_SPEAKER, "");
+    public void onPreferenceChange_noMatchedDeviceAttributes_notCallSetStrategies() {
+        when(mHelper.getMatchedHearingDeviceAttributes(any())).thenReturn(null);
 
-        mController.onPreferenceChange(mListPreference, String.valueOf(
-                HearingDeviceAudioRoutingBasePreferenceController.RoutingValue.DEVICE_SPEAKER));
-
-        verify(mController).setPreferredDeviceForStrategies(any(), eq(deviceSpeakerOut));
-        assertThat(mListPreference.getValue()).isEqualTo(String.valueOf(
-                HearingDeviceAudioRoutingBasePreferenceController.RoutingValue.DEVICE_SPEAKER));
-
-    }
-
-    private SharedPreferences getSharedPreferences() {
-        return mContext.getSharedPreferences(TEST_SHARED_PREFERENCE, Context.MODE_PRIVATE);
+        verify(mHelper, never()).setPreferredDeviceRoutingStrategies(any(), isNull(), anyInt());
     }
 
     private static class TestHearingDeviceAudioRoutingBasePreferenceController extends
@@ -137,8 +134,8 @@ public class HearingDeviceAudioRoutingBasePreferenceControllerTest {
         private static int sSavedRoutingValue;
 
         TestHearingDeviceAudioRoutingBasePreferenceController(Context context,
-                String preferenceKey) {
-            super(context, preferenceKey);
+                String preferenceKey, HearingAidAudioRoutingHelper helper) {
+            super(context, preferenceKey, helper);
         }
 
         @Override
