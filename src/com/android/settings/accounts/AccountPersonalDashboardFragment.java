@@ -69,7 +69,9 @@ public class AccountPersonalDashboardFragment extends DashboardFragment {
         if (CredentialManager.isServiceEnabled(context)) {
             CredentialManagerPreferenceController cmpp =
                     use(CredentialManagerPreferenceController.class);
-            cmpp.init(this, getFragmentManager());
+            CredentialManagerPreferenceController.Delegate delegate =
+                result -> getActivity().setResult(result);
+            cmpp.init(this, getFragmentManager(), getIntent(), delegate);
         } else {
             getSettingsLifecycle().addObserver(use(PasswordsPreferenceController.class));
         }
