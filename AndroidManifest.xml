@@ -4204,6 +4204,12 @@
                 <action android:name="android.settings.SYNC_SETTINGS" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.CREDENTIAL_PROVIDER" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
             </intent-filter>
             <intent-filter android:priority="53">
                 <action android:name="android.intent.action.MAIN" />
