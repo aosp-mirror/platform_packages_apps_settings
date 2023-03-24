@@ -22,8 +22,6 @@
     <string name="allow" msgid="3763244945363657722">"Permitir"</string>
     <string name="deny" msgid="7326117222944479942">"Recusar"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"Ativar"</string>
-    <string name="on" msgid="1702751473920047">"Ativado"</string>
-    <string name="off" msgid="2898123876644709799">"Desativado"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Desconhecido"</string>
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"Toque para apresentar informações"</string>
     <string name="show_dev_countdown" msgid="2936506773086395069">"{count,plural, =1{Está agora a # passo de se tornar um programador.}other{Está agora a # passos de se tornar um programador.}}"</string>
@@ -65,17 +63,21 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"O seu aparelho auditivo direito está ligado.\n\nPara sincronizar o esquerdo, certifique-se de que o mesmo está ativado e pronto a sincronizar."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Sincr. ouv. direito"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Sincr. ouv. esquerdo"</string>
-    <string name="bluetooth_device_controls_title" msgid="7115710864094259075">"Controlos do dispositivo auditivo"</string>
-    <string name="bluetooth_device_controls_summary" msgid="5843475712424478172">"Atalho do dispositivo auditivo, compatibilidade com aparelhos auditivos"</string>
+    <!-- no translation found for bluetooth_device_controls_general (1399214835599665488) -->
+    <skip />
+    <!-- no translation found for bluetooth_device_controls_title (4293399064818086587) -->
+    <skip />
+    <!-- no translation found for bluetooth_device_controls_specific (7706863288754077107) -->
+    <skip />
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Saída de áudio"</string>
-    <string name="bluetooth_audio_routing_summary" msgid="7236959154306472259">"Escolha se diferentes tipos de áudio são reproduzidos no dispositivo auditivo ou altifalante do telemóvel"</string>
+    <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Acerca da saída de áudio"</string>
+    <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Encaminhe sons para o seu dispositivo auditivo ou altifalante do telemóvel"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Relacionados"</string>
-    <string name="bluetooth_ringtone_title" msgid="3049822968673742328">"Toque"</string>
-    <string name="bluetooth_call_title" msgid="3170657843273743928">"Chamada"</string>
+    <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Toque e alarmes"</string>
+    <string name="bluetooth_call_title" msgid="6851464952021874072">"Áudio durante chamadas"</string>
     <string name="bluetooth_media_title" msgid="343705257183053699">"Multimédia"</string>
-    <string name="bluetooth_system_sounds_title" msgid="5331556107110163039">"Sons do sistema"</string>
-    <string name="bluetooth_audio_path_hearing_device_title" msgid="2073463574123159850">"Reproduzir no dispositivo auditivo"</string>
-    <string name="bluetooth_audio_path_phone_speaker_title" msgid="4259772328898172657">"Reproduzir no altifalante do telemóvel"</string>
+    <string name="bluetooth_system_sounds_title" msgid="6746938637128763205">"Notificações e outros sons"</string>
+    <string name="bluetooth_audio_routing_footer_summary" msgid="410260713589309293">"Por predefinição, a saída de áudio é determinada por apps individuais"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"Aparelho Bluetooth sem nome"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"A pesquisar"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"Nenhum aparelho Bluetooth nas proximid."</string>
@@ -106,6 +108,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Cancelar"</string>
     <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Ativar Bluetooth LE audio"</string>
     <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Ativa a funcionalidade Bluetooth LE audio se o dispositivo suportar as capacidades de hardware LE audio."</string>
+    <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Ativar lista de autorizações do Bluetooth LE Audio"</string>
+    <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Ative a funcionalidade da lista de autorizações do Bluetooth LE Audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Dispositivos multimédia"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Dispositivos de chamada"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Outros dispositivos"</string>
@@ -162,6 +166,11 @@
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"O seu sistema, apps e Websites usam o primeiro idioma suportado dos seus idiomas preferidos."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Para selecionar um idioma para cada app, aceda às definições de idioma da app."</string>
     <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Saiba mais acerca dos idiomas"</string>
+    <string name="title_change_system_locale" msgid="8589844586256566951">"Alterar o idioma do sistema para %s?"</string>
+    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"As preferências regionais e as definições do dispositivo vão ser alteradas."</string>
+    <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Alterar"</string>
+    <string name="title_unavailable_locale" msgid="2628898110416542386">"%s não está disponível"</string>
+    <string name="desc_unavailable_locale" msgid="2201756477400935896">"Este idioma não pode ser usado como um idioma do sistema, mas indicou às apps e aos Websites que prefere este idioma."</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Preferências regionais"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Defina preferências de números e unidades"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Permita que as apps conheçam as suas preferências regionais para poderem personalizar a sua experiência."</string>
@@ -212,8 +221,8 @@
     <string name="date_time_auto" msgid="4239202185055225869">"Definir a hora automaticamente"</string>
     <string name="zone_auto_title" msgid="5141692422373097957">"Definir automaticamente"</string>
     <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"A localização vai ser usada para definir o fuso horário quando este botão estiver ativado"</string>
-    <string name="date_time_24hour_auto" msgid="6583078135067804252">"Utilizar local predefinido"</string>
-    <string name="date_time_24hour" msgid="286679379105653406">"Utilizar formato de 24 horas"</string>
+    <string name="date_time_24hour_auto" msgid="6583078135067804252">"Usar local predefinido"</string>
+    <string name="date_time_24hour" msgid="286679379105653406">"Usar formato de 24 horas"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Hora"</string>
     <string name="time_format_category_title" msgid="7108616745509689991">"Formato de hora"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Fuso horário"</string>
@@ -240,6 +249,7 @@
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"Por exemplo, Android do João."</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Localização"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Usar localização"</string>
+    <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Desativada"</string>
     <string name="location_settings_summary_location_on" msgid="7029728269719893381">"{count,plural, =1{Ativada – # app tem acesso à localização}other{Ativada – # apps têm acesso à localização}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"A carregar…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"As apps com a autorização Dispositivos próximos podem determinar a posição relativa dos dispositivos ligados."</string>
@@ -276,7 +286,7 @@
     <string name="security_settings_face_enroll_introduction_more" msgid="1970820298889710532">"Mais"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Desbloquear com o rosto"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Permita o desbloqueio facial"</string>
-    <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Utilizar o rosto para autenticação"</string>
+    <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Usar o rosto para autenticação"</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Utilize o seu rosto para desbloquear o telemóvel ou autorizar compras.\n\nNota: não pode utilizar o seu rosto para desbloquear este dispositivo. Para mais informações, contacte o administrador da sua entidade."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Utilize o seu rosto para desbloquear o telemóvel, autorizar compras ou iniciar sessão em apps."</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -324,7 +334,8 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Configure a sua impressão digital"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Permita desbl. impr. digital"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Utilizar a impressão digital"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Usar a impressão digital"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Saiba mais sobre o Desbloqueio por impressão digital"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"O controlo é seu"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"O controlo é seu e da criança"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Tenha em atenção"</string>
@@ -369,10 +380,10 @@
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Rosto e impressão digital adicionados"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Ao configurar o Desbloqueio facial e o Desbloqueio por impressão digital, o telemóvel pede a sua impressão digital quando usar uma máscara ou estiver numa área escura"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Formas de desbloquear"</string>
-    <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"Use o rosto ou a impressão digital para"</string>
+    <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"Use o rosto ou a impressão digital para:"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"Desbloquear o telemóvel"</string>
     <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Validar a sua identidade nas apps"</string>
-    <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Utilizar o rosto"</string>
+    <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Usar o rosto"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Usar a impressão digital"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Usar o rosto ou a impressão digital"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
@@ -611,7 +622,7 @@
     <string name="bluetooth_pin_values_hint" msgid="2753202519050044670">"Geralmente 0000 ou 1234"</string>
     <string name="bluetooth_pin_values_hint_16_digits" msgid="5603928271430883558">"Deve ter 16 dígitos"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"Poderá também ter de introduzir este PIN no outro aparelho."</string>
-    <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Poderá também ter de introduzir a token de acesso no outro aparelho."</string>
+    <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Poderá também ter de introduzir o token de acesso no outro aparelho."</string>
     <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Confirme para sincronizar com o conjunto coordenado"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Permitir o acesso aos contactos e ao histórico de chamadas"</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
@@ -676,10 +687,11 @@
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Pedir o desbloqueio do dispositivo para o NFC"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Pronto para transmitir conteúdo da aplicação via NFC"</string>
+    <string name="android_beam_off_summary" msgid="5693961375631325042">"Desativado"</string>
     <string name="nfc_disabled_summary" msgid="8737797364522502351">"Não disponível, porque o NFC está desativado"</string>
     <string name="android_beam_explained" msgid="5684416131846701256">"Quando esta funcionalidade está ativada, pode transmitir conteúdo da aplicação para outro dispositivo compatível com NFC ao manter os dispositivos próximos um do outro. Por exemplo, pode transmitir páginas Web, vídeos do YouTube, contactos e muito mais.\n\nBasta aproximar os dispositivos um do outro (normalmente, de costas) e, em seguida, tocar no ecrã. A aplicação determina o que é transmitido."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi‑Fi"</string>
-    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Utilizar o Wi-Fi"</string>
+    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Usar o Wi-Fi"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Definições de Wi-Fi"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"Selecionar Wi-Fi"</string>
     <string name="wifi_starting" msgid="6147022683967506341">"A ligar Wi-Fi..."</string>
@@ -786,7 +798,7 @@
     <string name="wifi_unchanged" msgid="8026045290856150191">"(sem alteração)"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"Selecione"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(Vários certificados adicionados)"</string>
-    <string name="wifi_use_system_certs" msgid="5587866698144996931">"Utilizar certificados do sistema"</string>
+    <string name="wifi_use_system_certs" msgid="5587866698144996931">"Usar certificados do sistema"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Não fornecer"</string>
     <string name="wifi_trust_on_first_use" msgid="7488431582505858774">"Confiar na primeira utilização"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"O nome da rede é demasiado longo."</string>
@@ -866,6 +878,11 @@
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Expandir compatibilidade"</string>
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Ajuda outros dispositivos a encontrar esta zona Wi-Fi. Reduz a velocidade de ligação da zona Wi-Fi."</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Ajuda outros dispositivos a encontrar esta zona Wi-Fi. Aumenta a utilização da bateria."</string>
+    <string name="wifi_hotspot_speed_title" msgid="8629448084180512685">"Velocidade e compatibilidade"</string>
+    <string name="wifi_hotspot_speed_2g_summary" msgid="6727230647098551051">"2,4 GHz/Qualquer dispositivo pode estabelecer ligação"</string>
+    <string name="wifi_hotspot_speed_5g_summary" msgid="5009644494425227175">"5 GHz/A maioria dos dispositivos pode estabelecer ligação"</string>
+    <string name="wifi_hotspot_speed_6g_summary" msgid="1504496768686645945">"6 GHz/Poucos dispositivos podem estabelecer ligação"</string>
+    <string name="wifi_hotspot_speed_2g_and_5g_summary" msgid="2392283008301109037">"2,4 e 5 GHz/Qualquer dispositivo pode estabelecer ligação"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"A ativar zona Wi-Fi..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"A desativar zona Wi-Fi..."</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Ligação (à Internet) via telemóvel indisponível"</string>
@@ -905,6 +922,7 @@
     <string name="emergency_address_title" msgid="8102786488994263815">"Endereço de emergência"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Utilizado como a sua localização quando efetuar chamadas de emergência através de Wi‑Fi."</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Saiba mais"</annotation>" acerca das funcionalidades de DNS privado"</string>
+    <string name="private_dns_mode_on" msgid="8878679071975375696">"Ativado"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Ativar Chamadas Wi-Fi"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"Ativar Chamadas Wi-Fi"</string>
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"Desligado de <xliff:g id="SSID">%1$s</xliff:g>"</string>
@@ -917,6 +935,8 @@
     <string name="search_settings" msgid="7573686516434589771">"Pesquisar"</string>
     <string name="display_settings" msgid="7197750639709493852">"Ecrã"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Rotação automática do ecrã"</string>
+    <string name="auto_rotate_option_off" msgid="2788096269396290731">"Desativado"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"Ativado"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Ativada – Com base no rosto"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Deteção facial"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Saiba mais sobre a rotação automática"</string>
@@ -934,6 +954,8 @@
     <string name="brightness" msgid="6216871641021779698">"Nível de luminosidade"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Luminosidade adaptável"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"A luminosidade do ecrã vai ajustar-se automaticamente ao ambiente e às atividades. Pode mover o controlo de deslize manualmente para ajudar a luminosidade adaptável a aprender as suas preferências."</string>
+    <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Ativada"</string>
+    <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Desativada"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Apresentar equilíb. de brancos"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
@@ -1044,9 +1066,9 @@
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"Não é possível ativar o PIN."</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"OK"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Cancelar"</string>
-    <string name="sim_change_data_title" msgid="4663239438584588847">"Utilizar <xliff:g id="CARRIER">%1$s</xliff:g> para dados móveis?"</string>
+    <string name="sim_change_data_title" msgid="4663239438584588847">"Usar <xliff:g id="CARRIER">%1$s</xliff:g> para dados móveis?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Está a utilizar o operador <xliff:g id="CARRIER2_0">%2$s</xliff:g> para dados móveis. Se mudar para o operador <xliff:g id="CARRIER1">%1$s</xliff:g>, o operador <xliff:g id="CARRIER2_1">%2$s</xliff:g> deixa de ser utilizado para dados móveis."</string>
-    <string name="sim_change_data_ok" msgid="4922114750417276560">"Utilizar <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
+    <string name="sim_change_data_ok" msgid="4922114750417276560">"Usar <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="sim_preferred_title" msgid="8850185380445309835">"Atualizar o SIM favorito?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"O <xliff:g id="NEW_SIM">%1$s</xliff:g> é o único cartão SIM no dispositivo. Pretende utilizar este cartão SIM para os dados móveis, as chamadas e as mensagens SMS?"</string>
     <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Melhor cobertura dados móveis?"</string>
@@ -1081,6 +1103,8 @@
     <string name="status_prl_version" msgid="9002131357502714281">"Versão de PRL"</string>
     <string name="meid_multi_sim" msgid="1460689549266621286">"MEID (ranhura para SIM <xliff:g id="MEID_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="meid_multi_sim_primary" msgid="8921262417580407201">"MEID (ranhura para SIM <xliff:g id="MEID_SLOT_ID_PRIMARY">%1$d</xliff:g>) (principal)"</string>
+    <string name="scanning_status_text_on" msgid="3846571210578042940">"Ativado"</string>
+    <string name="scanning_status_text_off" msgid="4002352668313705132">"Desativado"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"Tipo de rede de dados móveis"</string>
@@ -1281,11 +1305,11 @@
     <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Plano de telemóvel"</string>
     <string name="sms_application_title" msgid="4791107002724108809">"Aplicação de SMS"</string>
     <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"Alterar aplicação de SMS?"</string>
-    <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"Utilizar <xliff:g id="NEW_APP">%1$s</xliff:g> em vez de <xliff:g id="CURRENT_APP">%2$s</xliff:g> como a aplicação de SMS predefinida?"</string>
-    <string name="sms_change_default_no_previous_dialog_text" msgid="6215622785087181275">"Utilizar <xliff:g id="NEW_APP">%s</xliff:g> como a aplicação de SMS predefinida?"</string>
+    <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"Usar <xliff:g id="NEW_APP">%1$s</xliff:g> em vez de <xliff:g id="CURRENT_APP">%2$s</xliff:g> como a aplicação de SMS predefinida?"</string>
+    <string name="sms_change_default_no_previous_dialog_text" msgid="6215622785087181275">"Usar <xliff:g id="NEW_APP">%s</xliff:g> como a aplicação de SMS predefinida?"</string>
     <string name="network_scorer_change_active_dialog_title" msgid="7005220310238618141">"Alterar assistente Wi-Fi?"</string>
-    <string name="network_scorer_change_active_dialog_text" msgid="7006057749370850706">"Utilizar <xliff:g id="NEW_APP">%1$s</xliff:g> em vez de <xliff:g id="CURRENT_APP">%2$s</xliff:g> para gerir as ligações de rede?"</string>
-    <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Utilizar <xliff:g id="NEW_APP">%s</xliff:g> para gerir as ligações de rede?"</string>
+    <string name="network_scorer_change_active_dialog_text" msgid="7006057749370850706">"Usar <xliff:g id="NEW_APP">%1$s</xliff:g> em vez de <xliff:g id="CURRENT_APP">%2$s</xliff:g> para gerir as ligações de rede?"</string>
+    <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Usar <xliff:g id="NEW_APP">%s</xliff:g> para gerir as ligações de rede?"</string>
     <string name="mobile_unknown_sim_operator" msgid="6650422533065760963">"Operador SIM desconhecido"</string>
     <string name="mobile_no_provisioning_url" msgid="609462719893503773">"A <xliff:g id="OPERATOR">%1$s</xliff:g> não possui um Website de gestão conhecido"</string>
     <string name="mobile_insert_sim_card" msgid="3639245241283948038">"Insira o cartão SIM e reinicie"</string>
@@ -1393,12 +1417,9 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Validar o PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Validar palavra-passe"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Valide-se"</string>
-    <!-- no translation found for lockpassword_remote_validation_pattern_details (4655537780358707983) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_pin_details (2373654227583206297) -->
-    <skip />
-    <!-- no translation found for lockpassword_remote_validation_password_details (3482328925925888340) -->
-    <skip />
+    <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"Para transferir Contas Google, definições e muito mais, introduza o padrão do outro dispositivo. O padrão é encriptado."</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Para transferir Contas Google, definições e muito mais, introduza o PIN do outro dispositivo. O PIN é encriptado."</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Para transferir Contas Google, definições e muito mais, introduza a palavra-passe do outro dispositivo. A palavra-passe é encriptada."</string>
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Usar padrão para desbloquear o dispositivo"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Usar PIN para desbloquear o dispositivo"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Usar palavra-passe p/ desbloq. dispositivo"</string>
@@ -1424,6 +1445,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Solicitar padrão"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"É necessário desenhar padrão para desbloquear ecrã"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Ver padrão de desbloqueio"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Privacidade do PIN melhorada"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Desativar animações enquanto introduz o PIN"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Tornar o padrão do perfil visível"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibrar ao tocar"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Bloquear com botão ligar/desligar"</string>
@@ -1435,13 +1458,13 @@
     <string name="activity_not_found" msgid="5464331414465894254">"A aplicação não está instalada no telemóvel."</string>
     <string name="lock_settings_profile_title" msgid="103605580492566086">"Segurança do perfil de trabalho"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3776275029218681815">"Bloqueio de ecrã do perfil de trabalho"</string>
-    <string name="lock_settings_profile_unification_title" msgid="5777961097706546513">"Utilizar um bloqueio"</string>
-    <string name="lock_settings_profile_unification_summary" msgid="1317553536289481654">"Utilizar um bloqueio para o perfil de trabalho e o ecrã do dispositivo"</string>
+    <string name="lock_settings_profile_unification_title" msgid="5777961097706546513">"Usar um bloqueio"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="1317553536289481654">"Usar um bloqueio para o perfil de trabalho e o ecrã do dispositivo"</string>
     <string name="lock_settings_profile_unification_dialog_title" msgid="5163178097464820825">"Pretende utilizar um bloqueio?"</string>
     <string name="lock_settings_profile_unification_dialog_body" msgid="1222905637428672355">"O dispositivo irá utilizar o bloqueio de ecrã do seu perfil de trabalho. As políticas de trabalho serão aplicadas a ambos os bloqueios."</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="8844682343443755895">"O bloqueio do perfil de trabalho não cumpre os requisitos de segurança da sua entidade. Pode utilizar o mesmo bloqueio para o ecrã do dispositivo e o perfil de trabalho, mas serão aplicadas todas as políticas do bloqueio de trabalho."</string>
-    <string name="lock_settings_profile_unification_dialog_confirm" msgid="6276915393736137843">"Utilizar um bloqueio"</string>
-    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="8509287115116369677">"Utilizar um bloqueio"</string>
+    <string name="lock_settings_profile_unification_dialog_confirm" msgid="6276915393736137843">"Usar um bloqueio"</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="8509287115116369677">"Usar um bloqueio"</string>
     <string name="lock_settings_profile_unified_summary" msgid="777095092175037385">"O mesmo que o bloqueio de ecrã do dispositivo"</string>
     <string name="manageapplications_settings_title" msgid="9198876415524237657">"Gerir aplicações"</string>
     <string name="applications_settings" msgid="1941993743933425622">"Info. da app"</string>
@@ -1459,7 +1482,7 @@
     <string name="auto_launch_label" msgid="4069860409309364872">"Abrir por predefinição"</string>
     <string name="auto_launch_label_generic" msgid="5033137408273064599">"Predefinições"</string>
     <string name="screen_compatibility_label" msgid="7549658546078613431">"Compatibilidade do ecrã"</string>
-    <string name="permissions_label" msgid="1708927634370314404">"Permissões"</string>
+    <string name="permissions_label" msgid="1708927634370314404">"Autorizações"</string>
     <string name="cache_header_label" msgid="2441967971921741047">"Cache"</string>
     <string name="clear_cache_btn_text" msgid="8597272828928143723">"Limpar cache"</string>
     <string name="cache_size_label" msgid="313456088966822757">"Cache"</string>
@@ -1596,7 +1619,7 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Premir duas vezes a tecla Espaço para inserir \".\""</string>
     <string name="show_password" msgid="7101900779571040117">"Mostrar palavras-passe"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Apresentar rapidamente os carateres ao escrever"</string>
-    <string name="spellchecker_security_warning" msgid="2016059050608271820">"Este corretor ortográfico pode permitir a recolha de todo o texto que introduzir, incluindo dados pessoais, como palavras-passe e números de cartões de crédito. Decorre da aplicação <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Utilizar este corretor ortográfico?"</string>
+    <string name="spellchecker_security_warning" msgid="2016059050608271820">"Este corretor ortográfico pode permitir a recolha de todo o texto que introduzir, incluindo dados pessoais, como palavras-passe e números de cartões de crédito. Decorre da aplicação <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Usar este corretor ortográfico?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Definições"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Idioma"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Teclados"</string>
@@ -1606,7 +1629,7 @@
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Gerir teclados no ecrã"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opções"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teclado físico"</string>
-    <string name="show_ime" msgid="4334255501724746849">"Utilizar o teclado no ecrã"</string>
+    <string name="show_ime" msgid="4334255501724746849">"Usar o teclado no ecrã"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Manter no ecrã enquanto o teclado físico estiver ativo"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Atalhos de teclado"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Mostre a lista de atalhos"</string>
@@ -1639,7 +1662,7 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Seguinte"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"Reiniciar"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Concluir"</string>
-    <string name="trackpad_go_back_title" msgid="5312164160947491440">"Retroceder"</string>
+    <string name="trackpad_go_back_title" msgid="5312164160947491440">"Anterior"</string>
     <string name="trackpad_go_back_summary" msgid="4201901101085902768">"Deslize rapidamente para a esquerda ou direita com 3 dedos"</string>
     <string name="trackpad_go_home_title" msgid="2146525662148291552">"Aceder ao ecrã principal"</string>
     <string name="trackpad_go_home_summary" msgid="2222744701528360887">"Deslize rapidamente para cima com três dedos"</string>
@@ -1726,20 +1749,13 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Apps transferidas"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Sinalizadores de funcionalidades"</string>
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
-    <skip />
+    <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Filtro de registo de monitorização Bluetooth HCI"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Defina os filtros"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Desative ou ative o Bluetooth para que as alterações entrem em vigor"</string>
+    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="1735427364451634823">"Filtro de registo de monitorização PBAP Bluetooth HCI"</string>
+    <string name="bt_hci_snoop_log_filter_map_title" msgid="180092480793945544">"Filtro de registo de monitorização MAP Bluetooth HCI"</string>
+    <string name="bt_hci_snoop_log_filter_summary" msgid="7217091930762522599">"Defina o modo de filtragem. (Desative ou ative o Bluetooth para que as alterações entrem em vigor)"</string>
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="8824952559433361848">"Defina modo de registo de monitorização Bluetooth HCI como Filtrado ativado para alterar esta opção"</string>
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Leitor de ecrã principalmente para pessoas invisuais ou com visão reduzida"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Toque nos itens no ecrã para que sejam lidos em voz alta"</string>
@@ -1767,9 +1783,9 @@
     <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"Alternar entre ecrã inteiro e parte do ecrã"</string>
     <string name="accessibility_magnification_area_settings_mode_switch_summary" msgid="2885238806099080966">"Toque no botão Mudar para se mover entre ambas as opções"</string>
     <string name="accessibility_magnification_switch_shortcut_title" msgid="3671432048806533079">"Mudar para o botão Acessibilidade?"</string>
-    <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"Utilizar a ação de tocar três vezes para ampliar parte do ecrã provoca atrasos na escrita e noutras ações.\n\nO botão Acessibilidade flutua no seu ecrã por cima de outras apps. Toque no mesmo para ampliar."</string>
+    <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"Usar a ação de tocar três vezes para ampliar parte do ecrã provoca atrasos na escrita e noutras ações.\n\nO botão Acessibilidade flutua no seu ecrã por cima de outras apps. Toque no mesmo para ampliar."</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"Mudar para o botão Acessibilidade"</string>
-    <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"Utilizar a ação de tocar três vezes"</string>
+    <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"Usar a ação de tocar três vezes"</string>
     <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"Isto pode tornar o teclado mais lento"</string>
     <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"Quando usar a ação de tocar três vezes para ampliar parte do ecrã, podem ocorrer problemas com o teclado.\n\nPara evitar isto, pode alterar o atalho de ampliação da ação de tocar três vezes para outra opção.\n"<annotation id="link">"Alterar definição"</annotation></string>
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Continuar mesmo assim"</string>
@@ -1844,7 +1860,7 @@
     <string name="accessibility_button_about_title" msgid="3581116105084067926">"Acerca do botão Acessibilidade"</string>
     <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Acerca do gesto e botão Acessibilidade"</string>
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Saiba mais acerca do gesto e botão Acessibilidade"</string>
-    <string name="accessibility_button_intro" msgid="2601976470525277903">"Utilizar o botão Acessibilidade. O gesto não está disponível com a navegação com 3 botões."</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"Usar o botão Acessibilidade. O gesto não está disponível com a navegação com 3 botões."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Aceda rapidamente às funcionalidades de acessib."</string>
     <string name="accessibility_button_gesture_description" msgid="7507097717493960397"><b>"Para começar"</b>\n"1. Aceda às definições de acessibilidade\n2. Selecione uma funcionalidade e toque no atalho\n3. Escolha se quer usar um botão ou um gesto para aceder à funcionalidade"</string>
     <string name="accessibility_button_description" msgid="1261273371298608222"><b>"Para começar"</b>\n"1. Aceda às definições de acessibilidade\n2. Selecione uma funcionalidade e toque no atalho\n3. Escolha o botão para aceder à funcionalidade"</string>
@@ -1865,9 +1881,6 @@
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Torne o ponteiro do rato mais visível"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Remover animações"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Reduza o movimento no ecrã"</string>
-    <string name="accessibility_contrast_level_title" msgid="8044307040061738158">"Nível de contraste"</string>
-    <string name="accessibility_contrast_level_left_label" msgid="732834661342809574">"Padrão"</string>
-    <string name="accessibility_contrast_level_right_label" msgid="5381154127087484725">"Alto"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Áudio mono"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Combine canais ao reproduzir áudio"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Equilíbrio de áudio"</string>
@@ -1908,6 +1921,8 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Tempo do clique automático."</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibração e funcionalidade tátil"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Controle a intensidade da vibração para utilizações diferentes"</string>
+    <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Ativado"</string>
+    <string name="accessibility_vibration_settings_state_off" msgid="7946588741954981703">"Desativado"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Definição desativada porque o dispositivo está no modo silencioso"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Chamadas"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Notificações e alarmes"</string>
@@ -1950,6 +1965,7 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Tocar três vezes no ecrã."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continuar"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Dispositivos auditivos"</string>
+    <string name="accessibility_hearingaid_intro" msgid="5856992709195963850">"Pode usar aparelhos auditivos, implantes cocleares e outros dispositivos de amplificação com o seu telemóvel"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Nenhum aparelho auditivo associado"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Adicione aparelhos auditivos"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Sincronizar aparelhos auditivos"</string>
@@ -1960,23 +1976,27 @@
     <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, esquerdo e direito"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> mais 1"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Sincron. novo disp."</string>
+    <string name="accessibility_pair_hearing_device_about_title" msgid="5870335480815052755">"Acerca de Sincronizar novo dispositivo"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Disposit. auditivos"</string>
     <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Disposit. guardados"</string>
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Controlos do dispositivo auditivo"</string>
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Atalho do dispositivo auditivo"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Compatibilid. c/aparelhos auditivos"</string>
-    <string name="accessibility_hac_mode_summary" msgid="5164793702798871478">"Melhore o áudio de alguns dispositivos auditivos"</string>
-    <string name="accessibility_hearing_device_footer_summary" msgid="4636110586636490256">"Certifique-se de que os seus dispositivos auditivos estão ligados e no modo de sincronização"</string>
+    <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Melhora a compatibilidade com telebobinas e reduz o ruído indesejado"</string>
+    <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Acerca de dispositivos auditivos"</string>
+    <string name="accessibility_hearing_device_footer_summary" msgid="7451899224828040581">"Certifique-se de que o dispositivo auditivo está ativado e pronto para ser sincronizado"</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Sincronize disp. auditivo"</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Disp. auditivos disponíveis"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Não está a ver o seu dispositivo auditivo?"</string>
-    <string name="accessibility_list_all_devices_title" msgid="3555097127022458571">"Veja todos os dispositivos Bluetooth"</string>
+    <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"Veja mais dispositivos"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Ajuste de áudio"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Descrição áudio"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Ouça uma descrição do que se passa no ecrã em filmes e programas suportados"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"descrição áudio, áudio, descrição, visão reduzida,"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Atalho ativado"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Desativado"</string>
+    <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"Ativado"</string>
+    <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Desativado"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Não está a funcionar. Toque para obter informações."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Este serviço está a funcionar incorretamente."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Atalhos de acessibilidade"</string>
@@ -2002,6 +2022,8 @@
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{Longo ({time} segundo)}other{Longo ({time} segundos)}}"</string>
     <string name="accessibilty_autoclick_delay_unit_second" msgid="5979297390686370567">"{count,plural, =1{{time} segundo}other{{time} segundos}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Definições"</string>
+    <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Ativado"</string>
+    <string name="accessibility_feature_state_off" msgid="169119895905460512">"Desativado"</string>
     <string name="captioning_preview_title" msgid="2888561631323180535">"Pré-visualizar"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Opções padrão"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"Idioma"</string>
@@ -2067,10 +2089,11 @@
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="7151756353013736931">"incapacidade motora, rato"</string>
-    <string name="keywords_hearing_aids" msgid="524979615168196199">"dificuldade de audição, perda de audição"</string>
+    <string name="keywords_hearing_aids" msgid="4550504337687223314">"aparelhos auditivos, dificuldade de audição, perda de audição, implantes cocleares, dispositivos de amplificação, processadores de som"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"dificuldade de audição, perda de audição, legendas, teletipo"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
     <string name="print_settings" msgid="8519810615863882491">"Impressão"</string>
+    <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Desativado"</string>
     <string name="print_settings_summary" msgid="1458773840720811915">"{count,plural, =1{1 serviço de impressão ativado}other{# serviços de impressão ativados}}"</string>
     <string name="print_jobs_summary" msgid="7040836482336577323">"{count,plural, =1{1 tarefa de impressão}other{# tarefas de impressão}}"</string>
     <string name="print_settings_title" msgid="7680498284751129935">"Serviços de impressão"</string>
@@ -2078,6 +2101,8 @@
     <string name="print_no_printers_found" msgid="4833082484646109486">"Nenhuma impressora encontrada"</string>
     <string name="print_menu_item_settings" msgid="8202755044784599740">"Definições"</string>
     <string name="print_menu_item_add_printers" msgid="7958192149202584039">"Adicionar impressoras"</string>
+    <string name="print_feature_state_on" msgid="7132063461008624685">"Ativado"</string>
+    <string name="print_feature_state_off" msgid="1466195699995209446">"Desativado"</string>
     <string name="print_menu_item_add_service" msgid="1549091062463044676">"Adicionar serviço"</string>
     <string name="print_menu_item_add_printer" msgid="8711630848324870892">"Adicionar impressora"</string>
     <string name="print_menu_item_search" msgid="5989979785203603169">"Pesquisar"</string>
@@ -2124,7 +2149,7 @@
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Veja a utilização das últimas 24 horas"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Ver uso desde o último carreg. completo"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"Utilização da bateria para apps"</string>
-    <string name="details_subtitle" msgid="2550872569652785527">"Utilizar detalhes"</string>
+    <string name="details_subtitle" msgid="2550872569652785527">"Usar detalhes"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Ajustar utilização de energia"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Pacotes incluídos"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"As apps estão a ser executadas normalmente"</string>
@@ -2164,8 +2189,7 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Remover"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Cancelar"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Carregar até carga completa"</string>
-    <string name="battery_tip_incompatible_charging_title" msgid="654267494395731975">"Configuração do carregamento incompatível"</string>
-    <string name="battery_tip_incompatible_charging_message" msgid="6031184746350185256">"A sua bateria não está a carregar ou está a carregar muito lentamente"</string>
+    <string name="battery_tip_incompatible_charging_title" msgid="5120763575150751300">"Problema com o acessório de carregamento"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"Saiba mais sobre o carregamento com um carregador incompatível"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Battery Manager"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Gerir aplicações automaticamente"</string>
@@ -2174,7 +2198,7 @@
     <string name="restricted_app_summary" msgid="1022307922754893997">"{count,plural, =1{Limitar a utilização da bateria para # app}other{Limitar a utilização da bateria para # apps}}"</string>
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"Restrita <xliff:g id="TIME">%1$s</xliff:g>."</string>
     <string name="restricted_app_detail_footer" msgid="3495725286882138803">"A utilização da bateria em segundo plano é restrita nestas apps. Podem não funcionar conforme esperado e as notificações podem sofrer atrasos."</string>
-    <string name="battery_auto_restriction_title" msgid="827206218118093357">"Utilizar o Battery Manager"</string>
+    <string name="battery_auto_restriction_title" msgid="827206218118093357">"Usar o Battery Manager"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Detetar quando as aplicações consomem rapidamente a bateria"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"Detetar quando as apps consomem rapidamente a bateria"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"Detetar quando as apps consomem rapidamente a bateria"</string>
@@ -2183,8 +2207,7 @@
     <string name="battery_missing_message" msgid="400958471814422770">"Ocorreu um problema ao ler o medidor da bateria."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Toque para saber mais acerca deste erro"</string>
-    <!-- no translation found for power_screen (3926703168513988776) -->
-    <skip />
+    <string name="power_screen" msgid="3926703168513988776">"Ecrã"</string>
     <string name="power_cpu" msgid="1820472721627148746">"CPU"</string>
     <string name="power_flashlight" msgid="8993388636332573202">"Lanterna"</string>
     <string name="power_camera" msgid="4778315081581293923">"Câmara"</string>
@@ -2225,6 +2248,7 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Definir um horário"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Prolongue a autonomia da bateria"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Desativar após o carregamento"</string>
+    <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Desativar ao alcançar <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"A Poupança de bateria é desativada quando a bateria chega a <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
@@ -2262,8 +2286,7 @@
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Tempo de utilização: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_spinner_breakdown_by_apps" msgid="7746337368402445072">"Discriminação por apps"</string>
     <string name="battery_usage_spinner_breakdown_by_system" msgid="4646952798665973464">"Discriminação por sistema"</string>
-    <!-- no translation found for battery_usage_less_than_percent (5873099028895001082) -->
-    <skip />
+    <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Estatísticas do Processo"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Estatísticas de peritos acerca dos processos em execução"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Utilização da memória"</string>
@@ -2291,7 +2314,7 @@
     <string name="menu_show_system" msgid="3780310384799907818">"Mostrar sistema"</string>
     <string name="menu_hide_system" msgid="5197937451381420622">"Ocultar sistema"</string>
     <string name="menu_show_percentage" msgid="6143205879027928330">"Mostrar percentagens"</string>
-    <string name="menu_use_uss" msgid="1663914348353623749">"Utilizar Uss"</string>
+    <string name="menu_use_uss" msgid="1663914348353623749">"Usar Uss"</string>
     <string name="menu_proc_stats_type" msgid="5048575824389855689">"Tipo de estatísticas"</string>
     <string name="menu_proc_stats_type_background" msgid="6796434633192284607">"Em segundo plano"</string>
     <string name="menu_proc_stats_type_foreground" msgid="9011432748521890803">"Em primeiro plano"</string>
@@ -2327,6 +2350,8 @@
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> não seguras"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Conetividade adaptável"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Prolonga a autonomia da bateria e melhora o desempenho do dispositivo ao gerir as suas ligações de rede automaticamente"</string>
+    <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Ativado"</string>
+    <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Desativado"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Use a Conetividade adaptável"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Armazenamento de credenciais"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Instalar um certificado"</string>
@@ -2369,6 +2394,8 @@
     <string name="emergency_tone_title" msgid="6673118505206685168">"Sinal para marcação de emergência"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Definir o comportamento quando é efetuada uma chamada de emergência"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Cópia de segurança"</string>
+    <string name="backup_summary_state_on" msgid="9018954639693085240">"Ativada"</string>
+    <string name="backup_summary_state_off" msgid="5341339397224835909">"Desativada"</string>
     <string name="backup_section_title" msgid="6539706829848457794">"Fazer cópia de segurança e restaurar"</string>
     <string name="personal_data_section_title" msgid="6368610168625722682">"Dados pessoais"</string>
     <string name="backup_data_title" msgid="507663517227498525">"Fazer cópia de segurança dos dados"</string>
@@ -2405,7 +2432,7 @@
     <string name="admin_more_details" msgid="4928985331640193758">"Saber mais"</string>
     <string name="notification_log_title" msgid="2812594935014664891">"Registo de notificações"</string>
     <string name="notification_history_title" msgid="8821060912502593309">"Histórico de notificações"</string>
-    <string name="notification_history_today" msgid="5828496957208237230">"Últimas 24 horas"</string>
+    <string name="notification_history_today" msgid="6081829638548808795">"Últimas %d horas"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"Suspensas"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"Ignoradas recentemente"</string>
     <string name="notification_history_count" msgid="885305572972482838">"{count,plural, =1{# notificação}other{# notificações}}"</string>
@@ -2753,9 +2780,9 @@
     <string name="select_sim_for_data" msgid="2642305487659432499">"Escolha o SIM para os dados móveis"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Selecione um SIM para SMS."</string>
     <string name="data_switch_started" msgid="6292759843974720112">"A mudar o SIM de dados. Esta ação pode demorar, no máximo, 1 minuto…"</string>
-    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"Utilizar <xliff:g id="NEW_SIM">%1$s</xliff:g> para dados móveis?"</string>
+    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"Usar <xliff:g id="NEW_SIM">%1$s</xliff:g> para dados móveis?"</string>
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Se mudar para o operador <xliff:g id="NEW_SIM">%1$s</xliff:g>, o operador <xliff:g id="OLD_SIM">%2$s</xliff:g> deixa de ser utilizado para dados móveis."</string>
-    <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Utilizar <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
+    <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Usar <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Telefonar com"</string>
     <string name="sim_name_hint" msgid="8231524869124193119">"Introduzir nome do SIM"</string>
     <string name="sim_editor_title" msgid="918655391915256859">"Ranhura para cartão SIM %1$d"</string>
@@ -2792,18 +2819,20 @@
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Apps predefinidas"</string>
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Apps clonadas"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Crie uma segunda instância de uma app para que possa usar duas contas ao mesmo tempo."</string>
-    <string name="desc_cloneable_app_list_text" msgid="3354586725814708688">"Apps que podem ser clonadas."</string>
+    <string name="desc_cloneable_app_list_text" msgid="3354586725814708688">"Apps que podem ser clonadas:"</string>
     <string name="cloned_apps_summary" msgid="8805362440770795709">"<xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g> clonadas, <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g> disponíveis para clonar"</string>
     <string name="delete_all_app_clones" msgid="3489053361980624999">"Apague todos os clones de apps"</string>
     <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"Falha ao apagar todos os clones de apps"</string>
     <string name="cloned_app_creation_summary" msgid="4642627294993918502">"A criar…"</string>
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Clonada"</string>
+    <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"A criar um clone de <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
+    <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Clone de <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> criado"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Idiomas, gestos, hora, cópia de segurança"</string>
     <string name="languages_setting_summary" msgid="4924440599794956443">"Idiomas do sistema, idiomas de apps"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, Wi-Fi, ligação de rede, Internet, sem fios, dados, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Notificação Wi‑Fi, notificação wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"utilização de dados"</string>
-    <string name="keywords_time_format" msgid="5384803098766166820">"Utilizar formato de 24 horas"</string>
+    <string name="keywords_time_format" msgid="5384803098766166820">"Usar formato de 24 horas"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Abrir com"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"Apps"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"fuso horário"</string>
@@ -2937,6 +2966,7 @@
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Altifalante do telemóvel"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Auscultadores com fios"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"O áudio de conteúdos multimédia compatíveis torna-se mais envolvente"</string>
+    <string name="spatial_summary_off" msgid="8272678804629774378">"Desativado"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Ativado/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Ativado/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> e <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Também pode ativar o áudio espacial para dispositivos Bluetooth."</string>
@@ -3009,6 +3039,7 @@
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Apenas prioridade"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"Ativado/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"Ativado"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"Perguntar sempre"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Até desativar"</string>
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 hora}other{# horas}}"</string>
@@ -3050,7 +3081,7 @@
     <string name="notification_dashboard_summary" msgid="7530169251902320652">"Histórico de notificações, conversas"</string>
     <string name="conversation_notifs_category" msgid="2549844862379963273">"Conversa"</string>
     <string name="general_notification_header" msgid="3669031068980713359">"Faça a gestão"</string>
-    <string name="app_notification_field" msgid="3858667320444612716">"Definições da app"</string>
+    <string name="app_notification_field" msgid="3208079070539894909">"Notificações de apps"</string>
     <string name="app_notification_field_summary" msgid="5981393613897713471">"Controle as notificações de apps individuais"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Geral"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Notificações de trabalho"</string>
@@ -3104,7 +3135,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Ecrã de bloqueio, ignorar"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Quando o perfil de trabalho está bloqueado"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Mostre apenas novas notificações no ecrã de bloqueio"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"Após cada desbloqueio, remova as notificações existentes do ecrã de bloqueio"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Remova automaticamente as notificações visualizadas anteriormente do ecrã de bloqueio"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificações no ecrã de bloqueio"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Mostrar conversas predefinidas e silenciosas"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostrar conversas predefinidas e silenciosas"</string>
@@ -3177,10 +3208,8 @@
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Permitir o acesso a notificações"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"As notificações melhoradas substituíram as notificações adaptáveis do Android no Android 12. Esta funcionalidade mostra ações e respostas sugeridas e organiza as suas notificações. \n\nAs notificações melhoradas podem aceder a todo o conteúdo das notificações, incluindo informações pessoais como nomes de contactos e mensagens. Esta funcionalidade também pode ignorar ou responder a notificações, como atender chamadas telefónicas, e controlar o modo Não incomodar."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Permitir o acesso a notificações do <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <!-- no translation found for notification_listener_security_warning_summary (1131986567509818121) -->
-    <skip />
-    <!-- no translation found for nls_warning_prompt (1486887096703743841) -->
-    <skip />
+    <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"A app <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> vai poder ler todas as notificações, incluindo informações pessoais como nomes de contactos, fotos e o texto das mensagens recebidas. Esta app também pode suspender ou ignorar notificações, ou acionar botões em notificações, incluindo atender chamadas telefónicas. \n\nDeste modo, a app também pode ativar ou desativar o modo Não incomodar e alterar as definições relacionadas."</string>
+    <string name="nls_warning_prompt" msgid="1486887096703743841">"A app <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> vai poder:"</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Leia as suas notificações"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"Pode ler as suas notificações, incluindo informações pessoais como contactos, mensagens e fotos."</string>
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"Responda a mensagens"</string>
@@ -3294,13 +3323,12 @@
     <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"O alarme pode substituir a hora de fim"</string>
     <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"O horário desliga-se quando um alarme toca"</string>
     <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Comportamento do Não incomodar"</string>
-    <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Utilizar predefinições"</string>
+    <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Usar predefinições"</string>
     <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Criar definições personalizadas para este horário"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"Para \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\""</string>
     <string name="summary_divider_text" msgid="8836285171484563986">", "</string>
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> – <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Conversas"</string>
-    <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"Conversas que podem interromper"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Todas as conversas"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Conversas com prioridade"</string>
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"conversas com prioridade"</string>
@@ -3391,6 +3419,12 @@
     <string name="suggestion_button_close" msgid="6865170855573283759">"Fechar"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Enviar feedback do dispositivo"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Introduzir o PIN do gestor"</string>
+    <string name="switch_on_text" msgid="5664542327776075105">"Ativado"</string>
+    <string name="switch_off_text" msgid="1315547447393646667">"Desativado"</string>
+    <string name="nfc_setting_on" msgid="7701896496026725772">"Ativado"</string>
+    <string name="nfc_setting_off" msgid="7142103438532732309">"Desativado"</string>
+    <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"Ativada"</string>
+    <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Desativada"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Fixação de apps"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"A fixação de apps permite-lhe manter a app atual visível até a soltar. Esta funcionalidade pode ser utilizada, por exemplo, para permitir que um amigo fidedigno jogue um jogo específico."</string>
     <string name="screen_pinning_description" msgid="4305370471370474846">"Quando uma app está fixada, a mesma pode abrir outras apps e os dados pessoais podem ficar acessíveis. \n\nPara usar a fixação de apps: 	\n1. Ative a fixação de apps 	\n2. Abra a Vista geral 	\n3. Toque no ícone da app na parte superior do ecrã e, em seguida, toque em Fixar"</string>
@@ -3445,10 +3479,12 @@
     <string name="change" msgid="273206077375322595">"Alterar"</string>
     <string name="change_storage" msgid="8773820275624113401">"Alterar armazenamento"</string>
     <string name="notifications_label" msgid="8471624476040164538">"Notificações"</string>
+    <string name="notifications_enabled" msgid="7743168481579361019">"Ativado"</string>
     <string name="notifications_enabled_with_info" msgid="1808946629277684308">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g>/<xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
+    <string name="notifications_disabled" msgid="5603160425378437143">"Desativada"</string>
     <string name="notifications_categories_off" msgid="7712037485557237328">"{count,plural, =1{# categoria desativada}other{# categorias desativadas}}"</string>
     <string name="runtime_permissions_additional_count" msgid="6071909675951786523">"{count,plural, =1{# autorização adicional}other{# autorizações adicionais}}"</string>
-    <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Nenhuma permissão concedida"</string>
+    <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Nenhuma autorização concedida"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Nenhuma permissão solicitada"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Controle o acesso de apps aos seus dados"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"Painel de privacidade"</string>
@@ -3519,7 +3555,7 @@
     <string name="usb_transcode_files_summary" msgid="307102635711961513">"Os vídeos serão apresentados em mais leitores de multimédia, mas a qualidade poderá ser reduzida"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"Ligação USB via telemóvel"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
-    <string name="usb_use" msgid="6783183432648438528">"Utilizar USB para"</string>
+    <string name="usb_use" msgid="6783183432648438528">"Usar USB para"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"Configuração USB predefinida"</string>
     <string name="usb_default_info" msgid="167172599497085266">"Quando outro dispositivo estiver ligado e o telemóvel estiver desbloqueado, estas definições serão aplicadas. Ligue-se apenas a dispositivos fidedignos."</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Opções para ligar/desligar"</string>
@@ -3588,9 +3624,9 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Permitir acesso para gerir todos os ficheiros"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Permita que esta app leia, modifique e elimine todos os ficheiros neste dispositivo ou em qualquer volume de armazenamento ligado. Se a autorização for concedida, a app poderá aceder aos ficheiros sem o seu conhecimento explícito."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Pode aceder a todos os ficheiros"</string>
-    <string name="full_screen_intent_title" msgid="1068024949389956404">"Faça gestão de intenções de ecrã inteiro"</string>
+    <string name="full_screen_intent_title" msgid="1068024949389956404">"Gestão de intenções de ecrã inteiro"</string>
     <string name="permit_full_screen_intent" msgid="2251949245519201421">"Permitir que as apps enviem intenções de ecrã inteiro"</string>
-    <string name="footer_description_full_screen_intent" msgid="8322826300555418227">"Permita que esta app envie notificações de intenções de ecrã inteiro que cobrem todo o ecrã"</string>
+    <string name="footer_description_full_screen_intent" msgid="8322826300555418227">"Permita que esta app envie notificações de intenções de ecrã inteiro que cobrem todo o ecrã."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Apps de gestão de multimédia"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Permitir que a app gira conteúdo multimédia"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Se for permitido, esta app pode modificar ou eliminar ficheiros multimédia criados com outras apps sem lhe pedir autorização. A app tem de ter autorização para aceder a ficheiros e a multimédia."</string>
@@ -3620,7 +3656,7 @@
     <string name="screen_zoom_make_larger_desc" msgid="7268794713428853139">"Aumentar"</string>
     <string name="disconnected" msgid="3469373726996129247">"Não ligado"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Desligado"</string>
-    <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> aplicações instaladas"</string>
+    <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> apps instaladas"</string>
     <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> utilizado – <xliff:g id="FREE_SPACE">%2$s</xliff:g> livre(s)"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Tema escuro, tamanho do tipo de letra, brilho"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Média de <xliff:g id="USED_MEMORY">%1$s</xliff:g> de <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> de memória utilizado(s)"</string>
@@ -3675,7 +3711,7 @@
     <string name="condition_grayscale_summary" msgid="1306034149271251292">"Apresentar apenas em cinzento"</string>
     <string name="homepage_condition_footer_content_description" msgid="1568313430995646108">"Reduzir"</string>
     <string name="color_temperature" msgid="8256912135746305176">"Temperatura da cor fria"</string>
-    <string name="color_temperature_desc" msgid="6713259535885669622">"Utilizar cores de visualização mais frias"</string>
+    <string name="color_temperature_desc" msgid="6713259535885669622">"Usar cores de visualização mais frias"</string>
     <string name="color_temperature_toast" msgid="7611532183532407342">"Para aplicar uma alteração de cor, desligue o ecrã"</string>
     <string name="camera_laser_sensor_switch" msgid="7097842750947187671">"Sensor de laser da câmara"</string>
     <string name="ota_disable_automatic_update" msgid="1953894421412420231">"Atualizações do sistema automáticas"</string>
@@ -3727,13 +3763,17 @@
     <string name="data_saver_title" msgid="2593804270788863815">"Poupança de dados"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"Dados sem restrições"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Os dados de segundo plano estão desativados"</string>
+    <string name="data_saver_on" msgid="7848893946018448793">"Ativada"</string>
+    <string name="data_saver_off" msgid="5891210864117269045">"Desativada"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Usar Poupança de dados"</string>
     <string name="unrestricted_app_title" msgid="7117585996574329284">"Uso de dados sem restrições"</string>
     <string name="unrestricted_app_summary" msgid="282698963532000403">"Permitir acesso de dados sem restrições com Poupança de dados ativada"</string>
     <string name="home_app" msgid="6056850504746902747">"Aplicação Página inicial"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Adic. outra impressão digital"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Desbloquear com um dedo diferente"</string>
+    <string name="battery_saver_on_summary" msgid="4605146593966255848">"Ativada"</string>
     <string name="battery_saver_off_scheduled_summary" msgid="2193875981740829819">"É ativada quando a bateria estiver a <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_saver_off_summary" msgid="4411561435493109261">"Desativada"</string>
     <string name="app_battery_usage_title" msgid="346558380609793334">"Utilização da bateria para apps"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Definir a utilização da bateria para apps"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Sem restrições"</string>
@@ -3791,6 +3831,7 @@
     <string name="premium_sms_none" msgid="8737045049886416739">"Nenhuma app instalada solicitou acesso a SMS premium"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"O serviço de SMS premium pode custar dinheiro e, nesse caso, será adicionado às faturas do seu operador. Se ativar a autorização para uma aplicação, poderá enviar SMS premium através da mesma."</string>
     <string name="premium_sms_access" msgid="5605970342699013212">"Acesso a SMS premium"</string>
+    <string name="bluetooth_disabled" msgid="835838280837359514">"Desativado"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"Ligado a <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Ligado a vários dispositivos"</string>
     <string name="demo_mode" msgid="6566167465451386728">"Modo de demonstração da IU do sistema"</string>
@@ -3815,7 +3856,7 @@
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"Para ajudar a libertar espaço de armazenamento, o gestor de armazenamento remove cópias de segurança de fotos e vídeos do dispositivo."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Remover fotos e vídeos"</string>
     <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"Gestor de armazenamento"</string>
-    <string name="automatic_storage_manager_primary_switch_title" msgid="9131959126462101994">"Utilizar o gestor de armazenamento"</string>
+    <string name="automatic_storage_manager_primary_switch_title" msgid="9131959126462101994">"Usar o gestor de armazenamento"</string>
     <string name="gesture_preference_title" msgid="8291899281322647187">"Gestos"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Abrir a câmara rapidamente"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Para abrir rapidamente a câmara, prima duas vezes o botão ligar/desligar. Funciona a partir de qualquer ecrã."</string>
@@ -3862,7 +3903,7 @@
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"Ativar ecrã"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Para consultar a hora, as notificações e outras informações, toque no ecrã."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Urgência SOS"</string>
-    <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"Utilizar Urgência SOS"</string>
+    <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"Usar Urgência SOS"</string>
     <string name="emergency_gesture_screen_summary" msgid="6640521030845132507">"Prima o botão ligar/desligar rapidamente 5 ou mais vezes para iniciar as ações abaixo"</string>
     <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"Reproduzir alarme de contagem decrescente"</string>
     <string name="emergency_gesture_sound_setting_summary" msgid="6573377104470235173">"Reproduzir um som alto no início do Urgência SOS"</string>
@@ -3871,9 +3912,11 @@
     <string name="emergency_gesture_call_for_help_dialog_title" msgid="8901271205171421201">"Número a ligar para obter ajuda"</string>
     <string name="emergency_gesture_call_for_help_summary" msgid="6552830427932669221">"<xliff:g id="PHONE_NUMBER">%1$s</xliff:g>. Toque para alterar."</string>
     <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"Se introduzir um número que não é de emergência:\n • O dispositivo tem de estar desbloqueado para utilizar a Urgência SOS\n • A sua chamada pode não ser atendida"</string>
-    <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Utilizar impressão digital para ver as notificações"</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Usar impressão digital para ver as notificações"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Usar impressão digital"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="2956636269742745449">"Ver as notificações rapidamente"</string>
+    <string name="gesture_setting_on" msgid="3223448394997988591">"Ativado"</string>
+    <string name="gesture_setting_off" msgid="3444029475726294919">"Desativado"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="65713754674288193">"O carregador de arranque já está desbloqueado"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="7425519481227423860">"Ligar à Internet ou contactar o operador"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="168124660162907358">"Indisponível em dispositivos vinculados ao operador"</string>
@@ -3887,7 +3930,7 @@
     <string name="automatic_storage_manager_activation_warning" msgid="170508173207142665">"O seu armazenamento está agora a ser gerido pelo gestor de armazenamento"</string>
     <string name="account_for_section_header" msgid="7466759342105251096">"Contas de <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="auto_sync_account_title" msgid="1070908045600374254">"Sincronizar automaticamente dados de apps"</string>
-    <string name="auto_sync_account_summary" msgid="7580352130028957346">"Permitir que as apps atualizem os dados automaticamente"</string>
+    <string name="auto_sync_account_summary" msgid="7580352130028957346">"Permitir que apps atualizem dados automaticamente"</string>
     <string name="account_sync_title" msgid="7036067017433297574">"Sincronização da conta"</string>
     <string name="account_sync_summary_some_on" msgid="911460286297968724">"Sincronização ativada para <xliff:g id="ID_1">%1$d</xliff:g> de <xliff:g id="ID_2">%2$d</xliff:g> itens"</string>
     <string name="account_sync_summary_all_on" msgid="2953682111836599841">"Sincronização ativada para todos os itens"</string>
@@ -3990,20 +4033,15 @@
     <string name="autofill_app" msgid="7595308061826307921">"Preenchimento automático"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Serviço de preenchimento automático predefinido"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Palavras-passe"</string>
-    <!-- no translation found for credman_credentials (7413302794874989255) -->
-    <skip />
+    <string name="credman_credentials" msgid="7413302794874989255">"Palavras-passe, chaves de acesso e serviços de dados"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# palavra-passe}other{# palavras-passe}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"automático, preenchimento, preenchimento automático, palavra-passe"</string>
-    <!-- no translation found for credman_keywords (8305600680836806170) -->
-    <skip />
+    <string name="credman_keywords" msgid="8305600680836806170">"dados, chave de acesso, palavra-passe"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Certifique-se de que confia nesta app&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=O Preenchimento automático do Google&gt;%1$s&lt;/xliff:g&gt; utiliza o que está no ecrã para determinar o que pode ser preenchido automaticamente."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Desativar %1$s?"</string>
-    <!-- no translation found for credman_confirmation_message (3499478570809427026) -->
-    <skip />
-    <!-- no translation found for credman_error_message_title (4741457523969373713) -->
-    <skip />
-    <!-- no translation found for credman_error_message (6793314648458925172) -->
-    <skip />
+    <string name="credman_confirmation_message" msgid="3499478570809427026">"As informações guardadas, como moradas ou métodos de pagamento, não vão ser preenchidas quando iniciar sessão. Para manter as informações preenchidas guardadas, defina a ativação de uma palavra-passe, uma chave de acesso e/ou um serviço de dados."</string>
+    <string name="credman_error_message_title" msgid="4741457523969373713">"Limite de palavras-passe, chaves de acesso e serviços de dados"</string>
+    <string name="credman_error_message" msgid="6793314648458925172">"Pode ter até 5 palavras-passe, chaves de acesso e serviços de dados ativos em simultâneo. Desative um serviço para adicionar mais."</string>
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Desativar"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Preenchimento automático"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Nível de registo"</string>
@@ -4066,7 +4104,7 @@
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Controlo do Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Permitir  controlar o Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Permitir a esta aplicação ativar ou desativar o Wi-Fi, procurar e estabelecer ligação a redes Wi-Fi, adicionar ou remover redes, assim como iniciar uma zona Wi-Fi apenas local."</string>
-    <string name="change_nfc_tag_apps_title" msgid="8720243766338657008">"Início com NFC"</string>
+    <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"Lançamento por NFC"</string>
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"Permitir início com a leitura de NFC"</string>
     <string name="change_nfc_tag_apps_detail_summary" msgid="7083666814715607078">"Permita que esta app inicie quando uma etiqueta NFC for lida.\nSe esta autorização for ativada, a app vai ficar disponível como opção sempre que for detetada uma etiqueta."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Reproduzir multimédia:"</string>
@@ -4168,6 +4206,7 @@
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Cor (usada por apps compatíveis)"</string>
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"Guardar"</string>
     <string name="mobile_network_use_sim_on" msgid="7298332437547707908">"Usar SIM"</string>
+    <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"Desativado"</string>
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"Para desativar este SIM, remova o cartão SIM"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Toque para ativar o operador <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"Apagar SIM"</string>
@@ -4197,7 +4236,7 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Ativar o SIM?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Mudar para <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Mudar para a utilização do cartão SIM?"</string>
-    <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Utilizar o operador <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Usar o operador <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Só pode ter um SIM ativo de cada vez.\n\nMudar para o operador <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> não cancela o seu serviço no operador <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="8977951796005849471">"Só pode ter 1 eSIM ativo de cada vez.\n\nMudar para o operador <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> não cancela o seu serviço do operador <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Só pode ter um SIM ativo de cada vez.\n\nMudar não cancela o seu serviço no operador <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
@@ -4443,19 +4482,19 @@
     <string name="category_name_general" msgid="7737273712848115886">"Geral"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Usar tema escuro"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Usar Bluetooth"</string>
-    <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Utilizar Impedir o toque"</string>
+    <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Usar Impedir o toque"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Usar zona Wi-Fi"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Usar fixação de apps"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Usar opções de programador"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Usar serviço de impressão"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Permitir vários utilizadores"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"autorizar, vários, utilizador, permitir, muitos"</string>
-    <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Utilizar depuração sem fios"</string>
-    <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Utilizar preferências da placa gráfica"</string>
+    <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Usar depuração sem fios"</string>
+    <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Usar preferências da placa gráfica"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Usar Luz noturna"</string>
     <string name="nfc_main_switch_title" msgid="6295839988954817432">"Usar NFC"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Usar luminosidade adaptável"</string>
-    <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Utilizar Chamadas Wi-Fi"</string>
+    <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Usar Chamadas Wi-Fi"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Ver todas as apps"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Encaminhamento inteligente"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Encaminhamento inteligente ativado"</string>
@@ -4500,6 +4539,8 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Não ligar"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Ligar"</string>
     <string name="tare_settings" msgid="3788654800004869077">"Definições de TARE"</string>
+    <string name="tare_on" msgid="2386073225978684535">"Ativado"</string>
+    <string name="tare_off" msgid="6305694402929756726">"Desativado"</string>
     <string name="tare_revert" msgid="3855325741125236638">"Reverter para predefinições"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Definições revertidas para predefinição."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Saldo máximo quando totalmente carregado"</string>
@@ -4547,6 +4588,8 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Escolha uma proteção de ecrã"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Mostrar informações adicionais"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Apresente itens como a hora, a meteorologia ou outras informações na proteção de ecrã"</string>
+    <string name="dream_home_controls_toggle_title" msgid="706799741564479248">"Mostre os controlos domésticos"</string>
+    <string name="dream_home_controls_toggle_summary" msgid="4102519907917430579">"Mostre o botão de controlos domésticos na proteção de ecrã"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Mais definições"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Escolha a proteção de ecrã"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Escolha o que é apresentado no ecrã quando o seu tablet está na estação de ancoragem. O seu dispositivo pode consumir mais energia quando é usada uma proteção de ecrã."</string>
@@ -4578,6 +4621,7 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Introduza a palavra-passe"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Não é possível ligar. Tente novamente."</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Palavra-passe incorreta"</string>
+    <string name="find_broadcast_join_broadcast_error" msgid="5486980388774711346">"Não é possível participar na transmissão"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Para começar a ouvir, centre o código QR abaixo"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"O código QR não é um formato válido"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"Converta num eSIM"</string>
@@ -4591,15 +4635,16 @@
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Apps instaladas há mais de # mês}other{Apps instaladas há mais de # meses}}"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensor de impressões digitais"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Notificações com flash"</string>
+    <string name="flash_notifications_about_title" msgid="9004351252928121214">"Acerca das notificações com flash"</string>
     <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Desativados"</string>
-    <string name="flash_notifications_summary_on_camera" msgid="455038312752009971">"Ativado/flash da câmara"</string>
-    <string name="flash_notifications_summary_on_screen" msgid="7321838939240499267">"Ativado/flash do ecrã"</string>
-    <string name="flash_notifications_summary_on_camera_and_screen" msgid="6515622987118268649">"Ativados/flash da câmara e do ecrã"</string>
-    <string name="flash_notifications_intro" msgid="1506414740603805778">"Use o flash da câmara ou do ecrã quando receber notificações ou quando os alarmes forem ativados."</string>
-    <string name="flash_notifications_note" msgid="7258551860911169239">"Use as notificações com precaução se for sensível à luz"</string>
+    <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"Ativado/flash da câmara"</string>
+    <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Ativado/flash do ecrã"</string>
+    <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Ativados/flash da câmara e do ecrã"</string>
+    <string name="flash_notifications_intro" msgid="8409873413480928249">"Use o flash da câmara ou do ecrã quando receber notificações ou quando os alarmes forem ativados"</string>
+    <string name="flash_notifications_note" msgid="2426125248448055075">"Use as notificações com flash com precaução se for sensível à luz"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"Pré-visualizar"</string>
-    <string name="camera_flash_notification_title" msgid="1605639711485773787">"Notificação com flash da câmara"</string>
-    <string name="screen_flash_notification_title" msgid="8008197872050400734">"Notificação com flash do ecrã"</string>
+    <string name="camera_flash_notification_title" msgid="2475084876382922732">"Flash da câmara"</string>
+    <string name="screen_flash_notification_title" msgid="3773100725793316708">"Flash do ecrã"</string>
     <string name="screen_flash_notification_color_title" msgid="7213407653340970790">"Cor do flash do ecrã"</string>
     <string name="screen_flash_color_blue" msgid="3585766657607931371">"Azul"</string>
     <string name="screen_flash_color_azure" msgid="8691198532944992243">"Azul-celeste"</string>

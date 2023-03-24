@@ -50,6 +50,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.resources.TextAppearanceConfig;
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.transition.TransitionHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 /** Base activity for Settings pages */
@@ -77,6 +78,11 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        final boolean isAnySetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
+        if (isAnySetupWizard) {
+            TransitionHelper.applyForwardTransition(this);
+            TransitionHelper.applyBackwardTransition(this);
+        }
         super.onCreate(savedInstanceState);
         if (isFinishing()) {
             return;
@@ -97,7 +103,6 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             requestWindowFeature(Window.FEATURE_NO_TITLE);
         }
         // Apply SetupWizard light theme during setup flow. This is for SubSettings pages.
-        final boolean isAnySetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
         if (isAnySetupWizard && this instanceof SubSettings) {
             setTheme(SetupWizardUtils.getTheme(this, getIntent()));
             setTheme(R.style.SettingsPreferenceTheme_SetupWizard);
