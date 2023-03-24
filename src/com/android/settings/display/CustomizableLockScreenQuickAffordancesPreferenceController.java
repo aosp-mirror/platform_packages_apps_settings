@@ -26,6 +26,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.utils.ThreadUtils;
 
 /**
  * Preference for accessing an experience to customize lock screen quick affordances.
@@ -65,7 +66,11 @@ public class CustomizableLockScreenQuickAffordancesPreferenceController extends
     }
 
     @Override
-    public CharSequence getSummary() {
-        return CustomizableLockScreenUtils.getQuickAffordanceSummary(mContext);
+    protected void refreshSummary(Preference preference) {
+        ThreadUtils.postOnBackgroundThread(() -> {
+            final CharSequence summary =
+                    CustomizableLockScreenUtils.getQuickAffordanceSummary(mContext);
+            ThreadUtils.postOnMainThread(() -> preference.setSummary(summary));
+        });
     }
 }
