@@ -5272,7 +5272,7 @@
     <!-- Title for usage time that full charge lasts. [CHAR LIMIT=60] -->
     <string name="battery_full_charge_last">Full charge lasts about</string>
     <!-- Description for text in battery footer. [CHAR LIMIT=NONE] -->
-    <string name="battery_footer_summary">Battery usage data is approximate and can change based on usage.</string>
+    <string name="battery_footer_summary">Remaining battery life is approximate and can change based on usage</string>
     <!-- Title for battery usage amount by this app. [CHAR LIMIT=80] -->
     <string name="battery_detail_power_usage">Battery usage</string>
 
@@ -10228,6 +10228,15 @@
 
     <!-- Message of the warning dialog for disabling the credential provider. [CHAR_LIMIT=NONE] -->
     <string name="credman_confirmation_message">Saved info like addresses or payment methods won\'t be filled in when you sign in. To keep your saved info filled in, set enable a password, passkey and data/or service.</string>
+
+    <!-- Title of the warning dialog for enabling the credential provider. [CHAR_LIMIT=NONE] -->
+    <string name="credman_enable_confirmation_message_title">Turn on %1$s\?</string>
+
+    <!-- Message of the warning dialog for enabling the credential provider. [CHAR_LIMIT=NONE] -->
+    <string name="credman_enable_confirmation_message">Saved info like addresses or payment methods will be shared with this provider.</string>
+
+    <!-- Positive button to turn on credential manager provider (confirmation). [CHAR LIMIT=60] -->
+    <string name="credman_enable_confirmation_message_positive_button">Turn on</string>
 
     <!-- Title of the error dialog when too many credential providers are selected. [CHAR_LIMIT=NONE] -->
     <string name="credman_error_message_title">Passwords, passkeys and data services limit</string>

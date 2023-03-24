@@ -704,4 +704,10 @@
 
     <!-- Whether to display Cloned Apps page in Settings (Settings > Apps > Cloned Apps).-->
     <bool name="config_cloned_apps_page_enabled">false</bool>
+
+    <!-- Certificates of apps which are allowed to use activity embedding with Settings.-->
+    <string-array name="config_known_host_certs" translatable="false">
+        <item></item>
+    </string-array>
+
 </resources>
