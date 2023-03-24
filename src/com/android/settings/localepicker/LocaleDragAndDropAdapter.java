@@ -165,7 +165,7 @@ class LocaleDragAndDropAdapter
 
         dragCell.setLabelAndDescription(label, description);
         dragCell.setLocalized(feedItem.isTranslated());
-        dragCell.setCurrentDefault(feedItem.getLocale().equals(Locale.getDefault()));
+        dragCell.setCurrentDefault(feedItem.getLocale().equals(LocalePicker.getLocales().get(0)));
         dragCell.setMiniLabel(mNumberFormatter.format(i + 1));
         dragCell.setShowCheckbox(mRemoveMode);
         dragCell.setShowMiniLabel(!mRemoveMode);
