@@ -17,10 +17,10 @@
 package com.android.settings.bluetooth;
 
 import android.content.Context;
-import android.media.AudioAttributes;
 import android.provider.Settings;
 
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.HearingAidAudioRoutingConstants;
 
 /**
  * The controller of the hearing device system sounds routing list preference.
@@ -46,14 +46,8 @@ public class HearingDeviceSystemSoundsRoutingPreferenceController extends
 
     @Override
     protected int[] getSupportedAttributeList() {
-        return new int[]{
-                AudioAttributes.USAGE_ALARM,
-                AudioAttributes.USAGE_NOTIFICATION,
-                AudioAttributes.USAGE_NOTIFICATION_EVENT,
-                AudioAttributes.USAGE_ASSISTANCE_ACCESSIBILITY,
-                AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE,
-                AudioAttributes.USAGE_ASSISTANCE_SONIFICATION,
-                AudioAttributes.USAGE_ASSISTANT};
+        return HearingAidAudioRoutingConstants.SYSTEM_SOUNDS_ROUTING_ATTRIBUTES;
+
     }
 
     @Override
@@ -71,6 +65,7 @@ public class HearingDeviceSystemSoundsRoutingPreferenceController extends
     @Override
     protected int restoreRoutingValue(Context context) {
         return Settings.Secure.getInt(context.getContentResolver(),
-                Settings.Secure.HEARING_AID_SYSTEM_SOUNDS_ROUTING, RoutingValue.AUTO);
+                Settings.Secure.HEARING_AID_SYSTEM_SOUNDS_ROUTING,
+                HearingAidAudioRoutingConstants.RoutingValue.AUTO);
     }
 }
