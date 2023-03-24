@@ -175,7 +175,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         }
         use(AdvancedBluetoothDetailsHeaderController.class).init(mCachedDevice);
         use(LeAudioBluetoothDetailsHeaderController.class).init(mCachedDevice, mManager);
-        use(KeyboardSettingsPreferenceController.class).init(mCachedDevice, getActivity());
+        use(KeyboardSettingsPreferenceController.class).init(mCachedDevice);
 
         final BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(
                 context).getBluetoothFeatureProvider();
