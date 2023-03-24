@@ -21,13 +21,13 @@ import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.SearchIndexable;
 
 /**
  * A page that configures the Location Services settings for work profile.
+ *
+ * Note that this page should not provide indexes because it is only used in the two tabs
+ * {@link ProfileSelectFragment} scenario and should not be launched independently.
  */
-@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class LocationServicesForWork extends DashboardFragment {
     private static final String TAG = "LocationServicesForWork";
 
@@ -51,10 +51,4 @@ public class LocationServicesForWork extends DashboardFragment {
         super.onAttach(context);
         use(LocationInjectedServicesForWorkPreferenceController.class).init(this);
     }
-
-    /**
-     * For Search.
-     */
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.location_services_workprofile);
 }
