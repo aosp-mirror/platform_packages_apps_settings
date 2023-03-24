@@ -489,7 +489,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
             Iterator<Integer> iterator = mSubscriptionInfoMap.keySet().iterator();
             while (iterator.hasNext()) {
-                if (iterator.next() == mSubId) {
+                if (iterator.next() == mSubId && getActivity() != null) {
                     finishFragment();
                     return;
                 }
