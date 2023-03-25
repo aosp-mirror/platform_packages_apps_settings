@@ -157,7 +157,7 @@ public class WifiTetherSettingsTest {
 
     @Test
     public void onSpeedSummaryChanged_canNotShowWifiHotspot_returnFalse() {
-        int stringResId = R.string.wifi_hotspot_speed_6g_summary;
+        int stringResId = R.string.wifi_hotspot_speed_summary_6g;
         mWifiTetherSettings.mWifiHotspotSpeed = mock(Preference.class);
 
         mWifiTetherSettings.onSpeedSummaryChanged(stringResId);

@@ -50,5 +50,6 @@
         android:key="wifi_hotspot_speed"
         android:title="@string/wifi_hotspot_speed_title"
         android:summary="@string/summary_placeholder"
+        android:fragment="com.android.settings.wifi.tether.WifiHotspotSpeedSettings"
         settings:isPreferenceVisible="@bool/config_show_wifi_hotspot_speed"/>
 </PreferenceScreen>

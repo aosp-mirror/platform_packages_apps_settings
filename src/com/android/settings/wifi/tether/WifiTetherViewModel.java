@@ -46,13 +46,12 @@ public class WifiTetherViewModel extends AndroidViewModel {
     private static final String TAG = "WifiTetherViewModel";
 
     protected static Map<Integer, Integer> sSpeedSummaryResMap = new HashMap<>();
-
     static {
         sSpeedSummaryResMap.put(SPEED_UNKNOWN, R.string.summary_placeholder);
-        sSpeedSummaryResMap.put(SPEED_2GHZ, R.string.wifi_hotspot_speed_2g_summary);
-        sSpeedSummaryResMap.put(SPEED_5GHZ, R.string.wifi_hotspot_speed_5g_summary);
-        sSpeedSummaryResMap.put(SPEED_6GHZ, R.string.wifi_hotspot_speed_6g_summary);
-        sSpeedSummaryResMap.put(SPEED_2GHZ_5GHZ, R.string.wifi_hotspot_speed_2g_and_5g_summary);
+        sSpeedSummaryResMap.put(SPEED_2GHZ, R.string.wifi_hotspot_speed_summary_2g);
+        sSpeedSummaryResMap.put(SPEED_5GHZ, R.string.wifi_hotspot_speed_summary_5g);
+        sSpeedSummaryResMap.put(SPEED_6GHZ, R.string.wifi_hotspot_speed_summary_6g);
+        sSpeedSummaryResMap.put(SPEED_2GHZ_5GHZ, R.string.wifi_hotspot_speed_summary_2g_and_5g);
     }
 
     protected final WifiHotspotRepository mWifiHotspotRepository;
