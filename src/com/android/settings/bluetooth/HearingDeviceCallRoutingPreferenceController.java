@@ -19,6 +19,7 @@ package com.android.settings.bluetooth;
 import android.content.Context;
 import android.provider.Settings;
 
+import com.android.settings.Utils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HearingAidAudioRoutingConstants;
 
@@ -41,6 +42,11 @@ public class HearingDeviceCallRoutingPreferenceController extends
      */
     public void init(CachedBluetoothDevice cachedBluetoothDevice) {
         mHearingDevice = cachedBluetoothDevice;
+    }
+
+    @Override
+    public int getAvailabilityStatus() {
+        return Utils.isVoiceCapable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
