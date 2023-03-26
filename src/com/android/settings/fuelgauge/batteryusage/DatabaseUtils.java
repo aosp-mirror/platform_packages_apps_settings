@@ -19,6 +19,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -37,12 +38,16 @@ import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
 import com.android.settingslib.fuelgauge.BatteryStatus;
 
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.time.Clock;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -50,12 +55,15 @@ import java.util.stream.Collectors;
 /** A utility class to operate battery usage database. */
 public final class DatabaseUtils {
     private static final String TAG = "DatabaseUtils";
+    private static final String SHARED_PREFS_FILE = "battery_usage_shared_prefs";
+
     /** Clear memory threshold for device booting phase. **/
     private static final long CLEAR_MEMORY_THRESHOLD_MS = Duration.ofMinutes(5).toMillis();
     private static final long CLEAR_MEMORY_DELAYED_MS = Duration.ofSeconds(2).toMillis();
 
-    @VisibleForTesting
     static final int DATA_RETENTION_INTERVAL_DAY = 9;
+    static final String KEY_LAST_LOAD_FULL_CHARGE_TIME = "last_load_full_charge_time";
+    static final String KEY_LAST_UPLOAD_FULL_CHARGE_TIME = "last_upload_full_charge_time";
 
     /** An authority name of the battery content provider. */
     public static final String AUTHORITY = "com.android.settings.battery.usage.provider";
@@ -373,8 +381,46 @@ public final class DatabaseUtils {
         resolver.notifyChange(BATTERY_CONTENT_URI, /*observer=*/ null);
         Log.d(TAG, String.format("sendBatteryEntryData() size=%d in %d/ms",
                 size, (System.currentTimeMillis() - startTime)));
+        if (isFullChargeStart) {
+            recordDateTime(context, KEY_LAST_UPLOAD_FULL_CHARGE_TIME);
+        }
         clearMemory();
         return valuesList;
+    }
+
+    /** Dump all required data into {@link PrintWriter}. */
+    public static void dump(Context context, PrintWriter writer) {
+        writeString(context, writer, "BatteryLevelChanged",
+                Intent.ACTION_BATTERY_LEVEL_CHANGED);
+        writeString(context, writer, "BatteryUnplugging",
+                BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING);
+        writeString(context, writer, "ClearBatteryCacheData",
+                BatteryUsageBroadcastReceiver.ACTION_CLEAR_BATTERY_CACHE_DATA);
+        writeString(context, writer, "LastLoadFullChargeTime",
+                KEY_LAST_LOAD_FULL_CHARGE_TIME);
+        writeString(context, writer, "LastUploadFullChargeTime",
+                KEY_LAST_UPLOAD_FULL_CHARGE_TIME);
+    }
+
+    static SharedPreferences getSharedPreferences(Context context) {
+        return context.getApplicationContext().getSharedPreferences(
+                SHARED_PREFS_FILE, Context.MODE_PRIVATE);
+    }
+
+    static void recordDateTime(Context context, String preferenceKey) {
+        final SharedPreferences sharedPreferences = getSharedPreferences(context);
+        if (sharedPreferences != null) {
+            sharedPreferences.edit().putString(preferenceKey, getCurrentDateTime()).apply();
+        }
+    }
+
+    private static void writeString(
+            Context context, PrintWriter writer, String prefix, String key) {
+        final SharedPreferences sharedPreferences = getSharedPreferences(context);
+        if (sharedPreferences != null) {
+            final String content = sharedPreferences.getString(key, "");
+            writer.println(String.format("\t\t%s: %s", prefix, content));
+        }
     }
 
     private static long loadAppUsageLatestTimestampFromContentProvider(
@@ -472,5 +518,10 @@ public final class DatabaseUtils {
             System.gc();
             Log.w(TAG, "invoke clearMemory()");
         }, CLEAR_MEMORY_DELAYED_MS);
+    }
+
+    private static String getCurrentDateTime() {
+        return new SimpleDateFormat("MMM dd,yyyy HH:mm:ss", Locale.getDefault())
+                .format(new Date(System.currentTimeMillis()));
     }
 }

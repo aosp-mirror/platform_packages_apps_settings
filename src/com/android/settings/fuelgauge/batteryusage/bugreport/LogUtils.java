@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge.batteryusage.bugreport;
 import android.content.Context;
 import android.util.Log;
 
+import com.android.settings.fuelgauge.batteryusage.DatabaseUtils;
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventDao;
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryState;
@@ -41,6 +42,8 @@ public final class LogUtils {
 
     @SuppressWarnings("JavaUtilDate")
     static void dumpBatteryUsageDatabaseHist(Context context, PrintWriter writer) {
+        DatabaseUtils.dump(context, writer);
+        writer.flush();
         final BatteryStateDao dao =
                 BatteryStateDatabase
                         .getInstance(context.getApplicationContext())
@@ -64,6 +67,7 @@ public final class LogUtils {
             writer.println("\t" + formattedTimestamp);
             Log.w(TAG, "\t" + formattedTimestamp);
         });
+        writer.flush();
 
         final List<BatteryState> stateList = dao.getAllAfter(
                 Clock.systemUTC().millis() - DUMP_TIME_OFFSET_FOR_ENTRY.toMillis());
@@ -80,6 +84,7 @@ public final class LogUtils {
         final List<AppUsageEventEntity> eventList = dao.getAllAfter(
                 Clock.systemUTC().millis() - DUMP_TIME_OFFSET_FOR_ENTRY.toMillis());
         eventList.stream().forEach(event -> writer.println(event));
+        writer.flush();
     }
 
     private LogUtils() {}
