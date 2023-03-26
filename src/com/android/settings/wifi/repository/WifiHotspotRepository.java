@@ -32,7 +32,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Transformations;
+
+import com.android.settings.overlay.FeatureFactory;
 
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +46,6 @@ import java.util.function.Consumer;
  */
 public class WifiHotspotRepository {
     private static final String TAG = "WifiHotspotRepository";
-    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     /** Wi-Fi hotspot band unknown. */
     public static final int BAND_UNKNOWN = 0;
@@ -84,8 +84,12 @@ public class WifiHotspotRepository {
     protected MutableLiveData<Integer> mSpeedType;
 
     protected Boolean mIsDualBand;
+    protected Boolean mIs5gBandSupported;
     protected Boolean mIs5gAvailable;
+    protected MutableLiveData<Boolean> m5gAvailable;
+    protected Boolean mIs6gBandSupported;
     protected Boolean mIs6gAvailable;
+    protected MutableLiveData<Boolean> m6gAvailable;
     protected String mCurrentCountryCode;
     protected ActiveCountryCodeChangedCallback mActiveCountryCodeChangedCallback;
 
@@ -140,6 +144,8 @@ public class WifiHotspotRepository {
      * Refresh data from the SoftApConfiguration.
      */
     public void refresh() {
+        update6gAvailable();
+        update5gAvailable();
         updateSpeedType();
     }
 
@@ -163,8 +169,9 @@ public class WifiHotspotRepository {
         if (mSpeedType == null) {
             mSpeedType = new MutableLiveData<>();
             updateSpeedType();
+            log("getSpeedType():" + mSpeedType.getValue());
         }
-        return Transformations.distinctUntilChanged(mSpeedType);
+        return mSpeedType;
     }
 
     protected void updateSpeedType() {
@@ -177,7 +184,7 @@ public class WifiHotspotRepository {
             return;
         }
         int keyBand = config.getBand();
-        logd("updateSpeedType(), getBand():" + keyBand);
+        log("updateSpeedType(), getBand():" + keyBand);
         if (!is5gAvailable()) {
             keyBand &= ~BAND_5GHZ;
         }
@@ -195,52 +202,172 @@ public class WifiHotspotRepository {
         } else {
             keyBand = 0;
         }
-        logd("updateSpeedType(), keyBand:" + keyBand);
+        log("updateSpeedType(), keyBand:" + keyBand);
         mSpeedType.setValue(sSpeedMap.get(keyBand));
     }
 
-    protected boolean isDualBand() {
+    /**
+     * Sets SpeedType
+     *
+     * @param speedType the Wi-Fi hotspot speed type.
+     */
+    public void setSpeedType(int speedType) {
+        log("setSpeedType():" + speedType);
+        if (mSpeedType == null) {
+            getSpeedType();
+        }
+        if (speedType == mSpeedType.getValue()) {
+            Log.w(TAG, "setSpeedType() is no changed! mSpeedType:" + mSpeedType.getValue());
+            return;
+        }
+        SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
+        if (config == null) {
+            mSpeedType.setValue(SPEED_UNKNOWN);
+            Log.e(TAG, "setSpeedType(), WifiManager#getSoftApConfiguration() return null!");
+            return;
+        }
+        SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder(config);
+        if (speedType == SPEED_6GHZ) {
+            log("setSpeedType(), setBand(BAND_2GHZ_5GHZ_6GHZ)");
+            configBuilder.setBand(BAND_2GHZ_5GHZ_6GHZ);
+        } else if (speedType == SPEED_5GHZ) {
+            log("setSpeedType(), setBand(BAND_2GHZ_5GHZ)");
+            configBuilder.setBand(BAND_2GHZ_5GHZ);
+        } else if (mIsDualBand) {
+            log("setSpeedType(), setBands(BAND_2GHZ + BAND_2GHZ_5GHZ)");
+            int[] bands = {BAND_2GHZ, BAND_2GHZ_5GHZ};
+            configBuilder.setBands(bands);
+        } else {
+            log("setSpeedType(), setBand(BAND_2GHZ)");
+            configBuilder.setBand(BAND_2GHZ);
+        }
+        setSoftApConfiguration(configBuilder.build());
+    }
+
+    /**
+     * Return whether Wi-Fi Dual Band is supported or not.
+     * @return {@code true} if Wi-Fi Dual Band is supported
+     */
+    public boolean isDualBand() {
         if (mIsDualBand == null) {
             mIsDualBand = mWifiManager.isBridgedApConcurrencySupported();
-            logd("isDualBand():" + mIsDualBand);
+            log("isDualBand():" + mIsDualBand);
         }
         return mIsDualBand;
     }
 
-    protected boolean is5gAvailable() {
+    /**
+     * Return whether Wi-Fi 5 GHz band is supported or not.
+     * @return {@code true} if Wi-Fi 5 GHz Band is supported
+     */
+    public boolean is5GHzBandSupported() {
+        if (mIs5gBandSupported == null) {
+            mIs5gBandSupported = mWifiManager.is5GHzBandSupported();
+            log("is5GHzBandSupported():" + mIs5gBandSupported);
+        }
+        return mIs5gBandSupported;
+    }
+
+    /**
+     * Return whether Wi-Fi Hotspot 5 GHz band is available or not.
+     * @return {@code true} if Wi-Fi Hotspot 5 GHz Band is available
+     */
+    public boolean is5gAvailable() {
         if (mIs5gAvailable == null) {
-            // TODO(b/272450463): isBandAvailable(WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS) will
-            //  cause crash in the old model device, use a simple check to workaround it first.
-            mIs5gAvailable = (mWifiManager.is5GHzBandSupported() && mCurrentCountryCode != null);
-            logd("is5gAvailable():" + mIs5gAvailable);
+            // If Settings is unable to get available 5GHz SAP information, Wi-Fi Framework's
+            // proposal is to assume that 5GHz is available. (See b/272450463#comment16)
+            mIs5gAvailable = is5GHzBandSupported()
+                    && isChannelAvailable(WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS,
+                    true /* defaultValue */);
+            log("is5gAvailable():" + mIs5gAvailable);
         }
         return mIs5gAvailable;
     }
 
-    protected boolean is6gAvailable() {
+    /**
+     * Gets is5gAvailable LiveData
+     */
+    public LiveData<Boolean> get5gAvailable() {
+        if (m5gAvailable == null) {
+            m5gAvailable = new MutableLiveData<>();
+            m5gAvailable.setValue(is5gAvailable());
+        }
+        return m5gAvailable;
+    }
+
+    protected void update5gAvailable() {
+        if (m5gAvailable != null) {
+            m5gAvailable.setValue(is5gAvailable());
+        }
+    }
+
+    /**
+     * Return whether Wi-Fi 6 GHz band is supported or not.
+     * @return {@code true} if Wi-Fi 6 GHz Band is supported
+     */
+    public boolean is6GHzBandSupported() {
+        if (mIs6gBandSupported == null) {
+            mIs6gBandSupported = mWifiManager.is6GHzBandSupported();
+            log("is6GHzBandSupported():" + mIs6gBandSupported);
+        }
+        return mIs6gBandSupported;
+    }
+
+    /**
+     * Return whether Wi-Fi Hotspot 6 GHz band is available or not.
+     * @return {@code true} if Wi-Fi Hotspot 6 GHz Band is available
+     */
+    public boolean is6gAvailable() {
         if (mIs6gAvailable == null) {
-            mIs6gAvailable = mWifiManager.is6GHzBandSupported()
-                    && isBandAvailable(WifiScanner.WIFI_BAND_6_GHZ);
-            logd("is6gAvailable():" + mIs6gAvailable);
+            mIs6gAvailable = is6GHzBandSupported()
+                    && isChannelAvailable(WifiScanner.WIFI_BAND_6_GHZ, false /* defaultValue */);
+            log("is6gAvailable():" + mIs6gAvailable);
         }
         return mIs6gAvailable;
     }
 
     /**
-     * Return whether the Hotspot band is available or not.
-     *
-     * @param band one of the following band constants defined in {@code WifiScanner#WIFI_BAND_*}
-     *             constants.
-     *             1. {@code WifiScanner#WIFI_BAND_5_GHZ_WITH_DFS}
-     *             2. {@code WifiScanner#WIFI_BAND_6_GHZ}
+     * Gets is6gAvailable LiveData
      */
-    protected boolean isBandAvailable(int band) {
-        List<WifiAvailableChannel> channels = mWifiManager.getUsableChannels(band, OP_MODE_SAP);
-        return (channels != null && channels.size() > 0);
+    public LiveData<Boolean> get6gAvailable() {
+        if (m6gAvailable == null) {
+            m6gAvailable = new MutableLiveData<>();
+            m6gAvailable.setValue(is6gAvailable());
+        }
+        return m6gAvailable;
+    }
+
+    protected void update6gAvailable() {
+        if (m6gAvailable != null) {
+            m6gAvailable.setValue(is6gAvailable());
+        }
+    }
+
+    /**
+     * Return whether the Hotspot channel is available or not.
+     *
+     * @param band         one of the following band constants defined in
+     *                     {@code WifiScanner#WIFI_BAND_*} constants.
+     *                     1. {@code WifiScanner#WIFI_BAND_5_GHZ_WITH_DFS}
+     *                     2. {@code WifiScanner#WIFI_BAND_6_GHZ}
+     * @param defaultValue returns the default value if WifiManager#getUsableChannels is
+     *                     unavailable to get the SAP information.
+     */
+    protected boolean isChannelAvailable(int band, boolean defaultValue) {
+        try {
+            List<WifiAvailableChannel> channels = mWifiManager.getUsableChannels(band, OP_MODE_SAP);
+            log("isChannelAvailable(), band:" + band + ", channels:" + channels);
+            return (channels != null && channels.size() > 0);
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "Querying usable SAP channels failed, band:" + band);
+        } catch (UnsupportedOperationException e) {
+            // This is expected on some hardware.
+            Log.e(TAG, "Querying usable SAP channels is unsupported, band:" + band);
+        }
+        return defaultValue;
     }
 
     protected void purgeRefreshData() {
-        mIsDualBand = null;
         mIs5gAvailable = null;
         mIs6gAvailable = null;
     }
@@ -249,7 +376,7 @@ public class WifiHotspotRepository {
         if (mActiveCountryCodeChangedCallback != null) {
             return;
         }
-        logd("startMonitorSoftApConfiguration()");
+        log("startMonitorSoftApConfiguration()");
         mActiveCountryCodeChangedCallback = new ActiveCountryCodeChangedCallback();
         mWifiManager.registerActiveCountryCodeChangedCallback(mAppContext.getMainExecutor(),
                 mActiveCountryCodeChangedCallback);
@@ -259,7 +386,7 @@ public class WifiHotspotRepository {
         if (mActiveCountryCodeChangedCallback == null) {
             return;
         }
-        logd("stopMonitorSoftApConfiguration()");
+        log("stopMonitorSoftApConfiguration()");
         mWifiManager.unregisterActiveCountryCodeChangedCallback(mActiveCountryCodeChangedCallback);
         mActiveCountryCodeChangedCallback = null;
     }
@@ -268,7 +395,7 @@ public class WifiHotspotRepository {
             WifiManager.ActiveCountryCodeChangedCallback {
         @Override
         public void onActiveCountryCodeChanged(String country) {
-            logd("onActiveCountryCodeChanged(), country:" + country);
+            log("onActiveCountryCodeChanged(), country:" + country);
             mCurrentCountryCode = country;
             purgeRefreshData();
             refresh();
@@ -276,16 +403,14 @@ public class WifiHotspotRepository {
 
         @Override
         public void onCountryCodeInactive() {
-            logd("onCountryCodeInactive()");
+            log("onCountryCodeInactive()");
             mCurrentCountryCode = null;
             purgeRefreshData();
             refresh();
         }
     }
 
-    private static void logd(String msg) {
-        if (DEBUG) {
-            Log.d(TAG, msg);
-        }
+    private void log(String msg) {
+        FeatureFactory.getFactory(mAppContext).getWifiFeatureProvider().verboseLog(TAG, msg);
     }
 }
