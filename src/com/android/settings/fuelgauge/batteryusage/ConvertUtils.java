@@ -237,9 +237,10 @@ public final class ConvertUtils {
         return eventBuilder.build();
     }
 
-    /** Converts UTC timestamp to human readable local time string. */
-    public static String utcToLocalTime(Context context, long timestamp) {
-        final Locale locale = getLocale(context);
+    /** Converts UTC timestamp to local time string for logging only, so use the US locale for
+     *  better readability in debugging. */
+    public static String utcToLocalTimeForLogging(long timestamp) {
+        final Locale locale = Locale.US;
         final String pattern =
                 DateFormat.getBestDateTimePattern(locale, "MMM dd,yyyy HH:mm:ss");
         return DateFormat.format(pattern, timestamp).toString();
