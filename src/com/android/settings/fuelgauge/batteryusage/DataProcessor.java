@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.batteryusage;
 
 import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.getEffectivePackageName;
-import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.utcToLocalTime;
 
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
@@ -1357,7 +1356,7 @@ public final class DataProcessor {
         final Map<String, BatteryHistEntry> entryMap = processedBatteryHistoryMap.get(timestamp);
         if (entryMap == null || entryMap.isEmpty()) {
             Log.e(TAG, "abnormal entry list in the timestamp:"
-                    + utcToLocalTime(context, timestamp));
+                    + ConvertUtils.utcToLocalTimeForLogging(timestamp));
             return null;
         }
         // The current time battery history hasn't been loaded yet, returns the current battery
@@ -1934,7 +1933,7 @@ public final class DataProcessor {
             final BatteryHistEntry entry) {
         if (sDebug) {
             Log.d(TAG, String.format(entry != null ? "%s %s:\n%s" : "%s %s:%s",
-                    utcToLocalTime(context, timestamp), content, entry));
+                    ConvertUtils.utcToLocalTimeForLogging(timestamp), content, entry));
         }
     }
 }
