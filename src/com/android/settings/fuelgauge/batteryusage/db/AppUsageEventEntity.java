@@ -21,19 +21,15 @@ import android.content.ContentValues;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
+
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
-import java.util.TimeZone;
 
 /** A {@link Entity} class to save app usage events into database. */
 @Entity
 public class AppUsageEventEntity {
-    private static String sCacheZoneId;
-    private static SimpleDateFormat sCacheSimpleDateFormat;
-
     /** Keys for accessing {@link ContentValues}. */
     public static final String KEY_UID = "uid";
     public static final String KEY_USER_ID = "userId";
@@ -83,14 +79,8 @@ public class AppUsageEventEntity {
     }
 
     @Override
-    @SuppressWarnings("JavaUtilDate")
     public String toString() {
-        final String currentZoneId = TimeZone.getDefault().getID();
-        if (!currentZoneId.equals(sCacheZoneId) || sCacheSimpleDateFormat == null) {
-            sCacheZoneId = currentZoneId;
-            sCacheSimpleDateFormat = new SimpleDateFormat("MMM dd,yyyy HH:mm:ss", Locale.US);
-        }
-        final String recordAtDateTime = sCacheSimpleDateFormat.format(new Date(timestamp));
+        final String recordAtDateTime = ConvertUtils.utcToLocalTimeForLogging(timestamp);
         final StringBuilder builder = new StringBuilder()
                 .append("\nAppUsageEvent{")
                 .append(String.format(Locale.US,
