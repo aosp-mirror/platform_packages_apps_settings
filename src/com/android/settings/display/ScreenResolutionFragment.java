@@ -251,10 +251,10 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
 
         if (TextUtils.equals(
                 mScreenResolutionOptions[ScreenResolutionController.HIGHRESOLUTION_IDX], key)) {
-            preference.setLottieAnimationResId(R.drawable.screen_resolution_1080p);
+            preference.setLottieAnimationResId(R.drawable.screen_resolution_high);
         } else if (TextUtils.equals(
                 mScreenResolutionOptions[ScreenResolutionController.FULLRESOLUTION_IDX], key)) {
-            preference.setLottieAnimationResId(R.drawable.screen_resolution_1440p);
+            preference.setLottieAnimationResId(R.drawable.screen_resolution_full);
         }
     }
 
