@@ -452,6 +452,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             item.registerCallback(this);
         }
         mProfileManager.addServiceListener(this);
+        refresh();
     }
 
     @Override
