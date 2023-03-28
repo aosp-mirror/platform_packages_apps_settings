@@ -44,10 +44,12 @@ public class SmsDefaultSubscriptionController extends DefaultSubscriptionControl
 
     @Override
     protected int getDefaultSubscriptionId() {
+        int defaultSmsSubId = SubscriptionManager.getDefaultSmsSubscriptionId();
         for (SubscriptionInfoEntity subInfo : mSubInfoEntityList) {
-            if (subInfo.isActiveSubscriptionId && subInfo.isDefaultSmsSubscription) {
+            int subId = subInfo.getSubId();
+            if (subInfo.isActiveSubscriptionId && subId == defaultSmsSubId) {
                 mSubscriptionInfoEntity = subInfo;
-                return Integer.parseInt(subInfo.subId);
+                return subId;
             }
         }
         return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
