@@ -19,6 +19,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -37,6 +38,7 @@ import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
 import com.android.settingslib.fuelgauge.BatteryStatus;
 
+import java.io.PrintWriter;
 import java.time.Clock;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -50,12 +52,15 @@ import java.util.stream.Collectors;
 /** A utility class to operate battery usage database. */
 public final class DatabaseUtils {
     private static final String TAG = "DatabaseUtils";
+    private static final String SHARED_PREFS_FILE = "battery_usage_shared_prefs";
+
     /** Clear memory threshold for device booting phase. **/
     private static final long CLEAR_MEMORY_THRESHOLD_MS = Duration.ofMinutes(5).toMillis();
     private static final long CLEAR_MEMORY_DELAYED_MS = Duration.ofSeconds(2).toMillis();
 
-    @VisibleForTesting
     static final int DATA_RETENTION_INTERVAL_DAY = 9;
+    static final String KEY_LAST_LOAD_FULL_CHARGE_TIME = "last_load_full_charge_time";
+    static final String KEY_LAST_UPLOAD_FULL_CHARGE_TIME = "last_upload_full_charge_time";
 
     /** An authority name of the battery content provider. */
     public static final String AUTHORITY = "com.android.settings.battery.usage.provider";
@@ -126,9 +131,10 @@ public final class DatabaseUtils {
                         .build();
         final long latestTimestamp =
                 loadAppUsageLatestTimestampFromContentProvider(context, appUsageLatestTimestampUri);
+        final String latestTimestampString = ConvertUtils.utcToLocalTimeForLogging(latestTimestamp);
         Log.d(TAG, String.format(
-                "getAppUsageStartTimestampOfUser() userId=%d latestTimestamp=%d in %d/ms",
-                userId, latestTimestamp, (System.currentTimeMillis() - startTime)));
+                "getAppUsageStartTimestampOfUser() userId=%d latestTimestamp=%s in %d/ms",
+                userId, latestTimestampString, (System.currentTimeMillis() - startTime)));
         // Use (latestTimestamp + 1) here to avoid loading the events of the latestTimestamp
         // repeatedly.
         return Math.max(latestTimestamp + 1, earliestTimestamp);
@@ -146,7 +152,8 @@ public final class DatabaseUtils {
         // sure the app usage calculation near the boundaries is correct.
         final long queryTimestamp =
                 Math.max(rawStartTimestamp, sixDaysAgoTimestamp) - USAGE_QUERY_BUFFER_HOURS;
-        Log.d(TAG, "sixDayAgoTimestamp: " + sixDaysAgoTimestamp);
+        Log.d(TAG, "sixDayAgoTimestamp: " + ConvertUtils.utcToLocalTimeForLogging(
+                sixDaysAgoTimestamp));
         final String queryUserIdString = userIds.stream()
                 .map(userId -> String.valueOf(userId))
                 .collect(Collectors.joining(","));
@@ -174,7 +181,8 @@ public final class DatabaseUtils {
             Context context, Calendar calendar) {
         final long startTime = System.currentTimeMillis();
         final long sixDaysAgoTimestamp = getTimestampSixDaysAgo(calendar);
-        Log.d(TAG, "sixDayAgoTimestamp: " + sixDaysAgoTimestamp);
+        Log.d(TAG, "sixDayAgoTimestamp: " + ConvertUtils.utcToLocalTimeForLogging(
+                sixDaysAgoTimestamp));
         // Builds the content uri everytime to avoid cache.
         final Uri batteryStateUri =
                 new Uri.Builder()
@@ -373,8 +381,48 @@ public final class DatabaseUtils {
         resolver.notifyChange(BATTERY_CONTENT_URI, /*observer=*/ null);
         Log.d(TAG, String.format("sendBatteryEntryData() size=%d in %d/ms",
                 size, (System.currentTimeMillis() - startTime)));
+        if (isFullChargeStart) {
+            recordDateTime(context, KEY_LAST_UPLOAD_FULL_CHARGE_TIME);
+        }
         clearMemory();
         return valuesList;
+    }
+
+    /** Dump all required data into {@link PrintWriter}. */
+    public static void dump(Context context, PrintWriter writer) {
+        writeString(context, writer, "BatteryLevelChanged",
+                Intent.ACTION_BATTERY_LEVEL_CHANGED);
+        writeString(context, writer, "BatteryUnplugging",
+                BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING);
+        writeString(context, writer, "ClearBatteryCacheData",
+                BatteryUsageBroadcastReceiver.ACTION_CLEAR_BATTERY_CACHE_DATA);
+        writeString(context, writer, "LastLoadFullChargeTime",
+                KEY_LAST_LOAD_FULL_CHARGE_TIME);
+        writeString(context, writer, "LastUploadFullChargeTime",
+                KEY_LAST_UPLOAD_FULL_CHARGE_TIME);
+    }
+
+    static SharedPreferences getSharedPreferences(Context context) {
+        return context.getApplicationContext().getSharedPreferences(
+                SHARED_PREFS_FILE, Context.MODE_PRIVATE);
+    }
+
+    static void recordDateTime(Context context, String preferenceKey) {
+        final SharedPreferences sharedPreferences = getSharedPreferences(context);
+        if (sharedPreferences != null) {
+            final String currentTime = ConvertUtils.utcToLocalTimeForLogging(
+                    System.currentTimeMillis());
+            sharedPreferences.edit().putString(preferenceKey, currentTime).apply();
+        }
+    }
+
+    private static void writeString(
+            Context context, PrintWriter writer, String prefix, String key) {
+        final SharedPreferences sharedPreferences = getSharedPreferences(context);
+        if (sharedPreferences != null) {
+            final String content = sharedPreferences.getString(key, "");
+            writer.println(String.format("\t\t%s: %s", prefix, content));
+        }
     }
 
     private static long loadAppUsageLatestTimestampFromContentProvider(
