@@ -16,14 +16,14 @@
 
 package com.android.settings.applications.specialaccess.notificationaccess;
 
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+
 import static com.android.settings.applications.AppInfoBase.ARG_PACKAGE_NAME;
 
-import android.app.Activity;
+import android.Manifest;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.companion.ICompanionDeviceManager;
-import android.compat.annotation.ChangeId;
-import android.compat.annotation.EnabledAfter;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -37,8 +37,8 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.service.notification.NotificationListenerFilter;
 import android.service.notification.NotificationListenerService;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Slog;
 
@@ -48,7 +48,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.AppInfoBase;
-import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
@@ -208,8 +207,12 @@ public class NotificationAccessDetails extends DashboardFragment {
             }
         }
         if (intent != null && intent.hasExtra(Intent.EXTRA_USER_HANDLE)) {
-            mUserId = ((UserHandle) intent.getParcelableExtra(
-                    Intent.EXTRA_USER_HANDLE)).getIdentifier();
+            if (hasInteractAcrossUsersPermission()) {
+                mUserId = ((UserHandle) intent.getParcelableExtra(
+                        Intent.EXTRA_USER_HANDLE)).getIdentifier();
+            } else {
+                finish();
+            }
         } else {
             mUserId = UserHandle.myUserId();
         }
@@ -222,6 +225,26 @@ public class NotificationAccessDetails extends DashboardFragment {
         } catch (PackageManager.NameNotFoundException e) {
             // oh well
         }
+    }
+
+    private boolean hasInteractAcrossUsersPermission() {
+        final String callingPackageName =
+                ((SettingsActivity) getActivity()).getInitialCallingPackage();
+
+        if (TextUtils.isEmpty(callingPackageName)) {
+            Log.w(TAG, "Not able to get calling package name for permission check");
+            return false;
+        }
+
+        if (getContext().getPackageManager().checkPermission(
+                Manifest.permission.INTERACT_ACROSS_USERS_FULL, callingPackageName)
+                != PERMISSION_GRANTED) {
+            Log.w(TAG, "Package " + callingPackageName + " does not have required permission "
+                    + Manifest.permission.INTERACT_ACROSS_USERS_FULL);
+            return false;
+        }
+
+        return true;
     }
 
     // Dialogs only have access to the parent fragment, not the controller, so pass the information
