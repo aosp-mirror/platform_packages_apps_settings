@@ -86,7 +86,7 @@ public class AutoPinConfirmPreferenceControllerTest {
                 "true", /* makeDefault */ false);
         when(mLockPatternUtils.getCredentialTypeForUser(TEST_USER_ID))
                 .thenReturn(LockPatternUtils.CREDENTIAL_TYPE_PIN);
-        when(mLockPatternUtils.getPinLength(TEST_USER_ID)).thenReturn(5L);
+        when(mLockPatternUtils.getPinLength(TEST_USER_ID)).thenReturn(5);
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -98,7 +98,7 @@ public class AutoPinConfirmPreferenceControllerTest {
         when(mLockPatternUtils.isSecure(TEST_USER_ID)).thenReturn(true);
         when(mLockPatternUtils.getCredentialTypeForUser(TEST_USER_ID))
                 .thenReturn(LockPatternUtils.CREDENTIAL_TYPE_PIN);
-        when(mLockPatternUtils.getPinLength(TEST_USER_ID)).thenReturn(6L);
+        when(mLockPatternUtils.getPinLength(TEST_USER_ID)).thenReturn(6);
 
         assertThat(mController.isAvailable()).isTrue();
     }

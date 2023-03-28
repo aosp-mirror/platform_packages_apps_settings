@@ -39,15 +39,12 @@ import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
 import com.android.settingslib.fuelgauge.BatteryStatus;
 
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.time.Clock;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -134,9 +131,10 @@ public final class DatabaseUtils {
                         .build();
         final long latestTimestamp =
                 loadAppUsageLatestTimestampFromContentProvider(context, appUsageLatestTimestampUri);
+        final String latestTimestampString = ConvertUtils.utcToLocalTimeForLogging(latestTimestamp);
         Log.d(TAG, String.format(
-                "getAppUsageStartTimestampOfUser() userId=%d latestTimestamp=%d in %d/ms",
-                userId, latestTimestamp, (System.currentTimeMillis() - startTime)));
+                "getAppUsageStartTimestampOfUser() userId=%d latestTimestamp=%s in %d/ms",
+                userId, latestTimestampString, (System.currentTimeMillis() - startTime)));
         // Use (latestTimestamp + 1) here to avoid loading the events of the latestTimestamp
         // repeatedly.
         return Math.max(latestTimestamp + 1, earliestTimestamp);
@@ -154,7 +152,8 @@ public final class DatabaseUtils {
         // sure the app usage calculation near the boundaries is correct.
         final long queryTimestamp =
                 Math.max(rawStartTimestamp, sixDaysAgoTimestamp) - USAGE_QUERY_BUFFER_HOURS;
-        Log.d(TAG, "sixDayAgoTimestamp: " + sixDaysAgoTimestamp);
+        Log.d(TAG, "sixDayAgoTimestamp: " + ConvertUtils.utcToLocalTimeForLogging(
+                sixDaysAgoTimestamp));
         final String queryUserIdString = userIds.stream()
                 .map(userId -> String.valueOf(userId))
                 .collect(Collectors.joining(","));
@@ -182,7 +181,8 @@ public final class DatabaseUtils {
             Context context, Calendar calendar) {
         final long startTime = System.currentTimeMillis();
         final long sixDaysAgoTimestamp = getTimestampSixDaysAgo(calendar);
-        Log.d(TAG, "sixDayAgoTimestamp: " + sixDaysAgoTimestamp);
+        Log.d(TAG, "sixDayAgoTimestamp: " + ConvertUtils.utcToLocalTimeForLogging(
+                sixDaysAgoTimestamp));
         // Builds the content uri everytime to avoid cache.
         final Uri batteryStateUri =
                 new Uri.Builder()
@@ -410,7 +410,9 @@ public final class DatabaseUtils {
     static void recordDateTime(Context context, String preferenceKey) {
         final SharedPreferences sharedPreferences = getSharedPreferences(context);
         if (sharedPreferences != null) {
-            sharedPreferences.edit().putString(preferenceKey, getCurrentDateTime()).apply();
+            final String currentTime = ConvertUtils.utcToLocalTimeForLogging(
+                    System.currentTimeMillis());
+            sharedPreferences.edit().putString(preferenceKey, currentTime).apply();
         }
     }
 
@@ -518,10 +520,5 @@ public final class DatabaseUtils {
             System.gc();
             Log.w(TAG, "invoke clearMemory()");
         }, CLEAR_MEMORY_DELAYED_MS);
-    }
-
-    private static String getCurrentDateTime() {
-        return new SimpleDateFormat("MMM dd,yyyy HH:mm:ss", Locale.getDefault())
-                .format(new Date(System.currentTimeMillis()));
     }
 }
