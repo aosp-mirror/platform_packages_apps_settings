@@ -1011,7 +1011,7 @@ public class MobileNetworkUtils {
     private static CharSequence getPreferredCallStatus(Context context,
             SubscriptionInfoEntity subInfo) {
         String status = "";
-        if (subInfo.isDefaultVoiceSubscription) {
+        if (subInfo.getSubId() == SubscriptionManager.getDefaultVoiceSubscriptionId()) {
             status = setSummaryResId(context, R.string.calls_sms_preferred);
         }
 
@@ -1021,7 +1021,7 @@ public class MobileNetworkUtils {
     private static CharSequence getPreferredSmsStatus(Context context,
             SubscriptionInfoEntity subInfo) {
         String status = "";
-        if (subInfo.isDefaultSmsSubscription) {
+        if (subInfo.getSubId() == SubscriptionManager.getDefaultSmsSubscriptionId()) {
             status = setSummaryResId(context, R.string.calls_sms_preferred);
         }
 

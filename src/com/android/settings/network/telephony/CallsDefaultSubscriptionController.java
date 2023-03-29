@@ -40,10 +40,12 @@ public class CallsDefaultSubscriptionController extends DefaultSubscriptionContr
 
     @Override
     protected int getDefaultSubscriptionId() {
+        int defaultCallSubId = SubscriptionManager.getDefaultVoiceSubscriptionId();
         for (SubscriptionInfoEntity subInfo : mSubInfoEntityList) {
-            if (subInfo.isActiveSubscriptionId && subInfo.isDefaultVoiceSubscription) {
+            int subId = subInfo.getSubId();
+            if (subInfo.isActiveSubscriptionId && subId == defaultCallSubId) {
                 mSubscriptionInfoEntity = subInfo;
-                return Integer.parseInt(subInfo.subId);
+                return subId;
             }
         }
         return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
