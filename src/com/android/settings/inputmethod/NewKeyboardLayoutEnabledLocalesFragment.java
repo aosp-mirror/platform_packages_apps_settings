@@ -23,6 +23,7 @@ import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.util.Log;
 import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -59,10 +60,19 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
     public void onActivityCreated(final Bundle icicle) {
         super.onActivityCreated(icicle);
         Bundle arguments = getArguments();
-        final String title =
-                arguments.getString(NewKeyboardSettingsUtils.EXTRA_KEYBOARD_DEVICE_NAME);
         mInputDeviceIdentifier =
                 arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER);
+        if (mInputDeviceIdentifier == null) {
+            Log.e(TAG, "The inputDeviceIdentifier should not be null");
+            return;
+        }
+        InputDevice inputDevice =
+                NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier);
+        if (inputDevice == null) {
+            Log.e(TAG, "inputDevice is null");
+            return;
+        }
+        final String title = inputDevice.getName();
         getActivity().setTitle(title);
         updateCheckedState();
     }

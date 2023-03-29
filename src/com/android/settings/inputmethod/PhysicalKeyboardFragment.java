@@ -87,7 +87,6 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
         Activity activity = Preconditions.checkNotNull(getActivity());
-        mBluetoothAddress = activity.getIntent().getStringExtra(EXTRA_BT_ADDRESS);
         addPreferencesFromResource(R.xml.physical_keyboard_settings);
         mIm = Preconditions.checkNotNull(activity.getSystemService(InputManager.class));
         mImm = Preconditions.checkNotNull(activity.getSystemService(InputMethodManager.class));
@@ -103,6 +102,19 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                 .isEnabled(getContext(), FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_MODIFIER_KEY);
         if (!isModifierKeySettingsEnabled) {
             mKeyboardAssistanceCategory.removePreference(findPreference(MODIFIER_KEYS_SETTINGS));
+        }
+        InputDeviceIdentifier inputDeviceIdentifier = activity.getIntent().getParcelableExtra(
+                KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_IDENTIFIER);
+        // TODO (b/271391879): The EXTRA_INTENT_FROM is used for the future metrics.
+        if (inputDeviceIdentifier != null) {
+            Bundle arguments = new Bundle();
+            arguments.putParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER,
+                    inputDeviceIdentifier);
+            new SubSettingLauncher(getContext())
+                    .setSourceMetricsCategory(getMetricsCategory())
+                    .setDestination(NewKeyboardLayoutEnabledLocalesFragment.class.getName())
+                    .setArguments(arguments)
+                    .launch();
         }
     }
 
@@ -187,14 +199,6 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         preferenceScreen.addPreference(category);
 
         for (HardKeyboardDeviceInfo hardKeyboardDeviceInfo : newHardKeyboards) {
-
-            // if user go into this page from Connected devices entry, we should distinguish the
-            // user-selected keyboard from all enabled keyboards.
-            if (mBluetoothAddress != null
-                    && !mBluetoothAddress.equals(hardKeyboardDeviceInfo.mBluetoothAddress)) {
-                continue;
-            }
-
             // TODO(yukawa): Consider using com.android.settings.widget.GearPreference
             final Preference pref = new Preference(getPrefContext());
             pref.setTitle(hardKeyboardDeviceInfo.mDeviceName);
@@ -247,7 +251,6 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         Bundle arguments = new Bundle();
         arguments.putParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER,
                 inputDeviceIdentifier);
-        arguments.putString(NewKeyboardSettingsUtils.EXTRA_KEYBOARD_DEVICE_NAME, keyboardName);
         new SubSettingLauncher(getContext())
                 .setSourceMetricsCategory(getMetricsCategory())
                 .setDestination(NewKeyboardLayoutEnabledLocalesFragment.class.getName())
