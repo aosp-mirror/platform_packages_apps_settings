@@ -267,9 +267,11 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
         } else {
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
+                    .setCustomAnimations(R.anim.shared_x_axis_activity_open_enter_dynamic_color,
+                            R.anim.shared_x_axis_activity_open_exit,
+                            R.anim.shared_x_axis_activity_close_enter_dynamic_color,
+                            R.anim.shared_x_axis_activity_close_exit)
                     .replace(R.id.fragment_container_view, fragmentClass, null, tag)
-                    .setCustomAnimations(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out,
-                            R.anim.sud_slide_back_in, R.anim.sud_slide_back_out)
                     .addToBackStack(tag)
                     .commit();
         }
@@ -373,20 +375,24 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
             // Replace enrolling page
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
+                    .setCustomAnimations(R.anim.shared_x_axis_activity_open_enter_dynamic_color,
+                            R.anim.shared_x_axis_activity_open_exit,
+                            R.anim.shared_x_axis_activity_close_enter_dynamic_color,
+                            R.anim.shared_x_axis_activity_close_exit)
                     .replace(R.id.fragment_container_view, FingerprintEnrollFinishFragment.class,
                             null, FINISH_TAG)
-                    .setCustomAnimations(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out,
-                            R.anim.sud_slide_back_in, R.anim.sud_slide_back_out)
                     .commit();
         } else {
             // Remove Enrolling page from backstack, and add Finish page. Latest backstack will
             // be changed from Intro->FindSensor->Enrolling to Intro->FindSensor->Finish
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
+                    .setCustomAnimations(R.anim.shared_x_axis_activity_open_enter_dynamic_color,
+                            R.anim.shared_x_axis_activity_open_exit,
+                            R.anim.shared_x_axis_activity_close_enter_dynamic_color,
+                            R.anim.shared_x_axis_activity_close_exit)
                     .replace(R.id.fragment_container_view, FingerprintEnrollFinishFragment.class,
                             null, FINISH_TAG)
-                    .setCustomAnimations(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out,
-                            R.anim.sud_slide_back_in, R.anim.sud_slide_back_out)
                     .addToBackStack(FINISH_TAG)
                     .commit();
         }
