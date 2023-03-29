@@ -152,13 +152,11 @@ public class NetworkProviderSimListControllerTest {
 
     private SubscriptionInfoEntity setupSubscriptionInfoEntity(String subId, int slotId,
             int carrierId, String displayName, String mcc, String mnc, String countryIso,
-            int cardId, CharSequence defaultSimConfig, boolean isValid, boolean isActive,
-            boolean isAvailable, boolean isDefaultCall, boolean isDefaultSms) {
+            int cardId, boolean isValid, boolean isActive, boolean isAvailable) {
         return new SubscriptionInfoEntity(subId, slotId, carrierId, displayName, displayName, 0,
                 mcc, mnc, countryIso, false, cardId, TelephonyManager.DEFAULT_PORT_INDEX, false,
                 null, SubscriptionManager.SUBSCRIPTION_TYPE_LOCAL_SIM, displayName, false,
-                "1234567890", true, defaultSimConfig.toString(), false, isValid, true, isActive,
-                isAvailable, isDefaultCall, isDefaultSms, false, false, false);
+                "1234567890", true, false, isValid, true, isActive, isAvailable, false);
     }
 
     private String setSummaryResId(String resName, String value) {
@@ -173,7 +171,7 @@ public class NetworkProviderSimListControllerTest {
     @UiThreadTest
     public void getSummary_tapToActivePSim() {
         mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, "", true, false, true, false, false);
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, false, true);
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
         displayPreferenceWithLifecycle();
@@ -186,7 +184,7 @@ public class NetworkProviderSimListControllerTest {
     @UiThreadTest
     public void getSummary_inactivePSim() {
         mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, "", true, false, true, false, false);
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, false, true);
         doReturn(true).when(mSubscriptionManager).canDisablePhysicalSubscription();
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
@@ -201,15 +199,13 @@ public class NetworkProviderSimListControllerTest {
     @UiThreadTest
     public void getSummary_defaultCalls() {
         mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1,
-                setSummaryResId("sim_category_default_active_sim",
-                        setSummaryResId("default_active_sim_calls")), true, true, true, true,
-                false);
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true);
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
 
         displayPreferenceWithLifecycle();
-        CharSequence defaultCall = mSubInfo1.defaultSimConfig;
+        CharSequence defaultCall = SubscriptionUtil.getDefaultSimConfig(mContext,
+                Integer.parseInt(SUB_ID_1));
         final StringBuilder summary = new StringBuilder();
         summary.append(setSummaryResId("sim_category_active_sim", null))
                 .append(defaultCall);
@@ -225,14 +221,13 @@ public class NetworkProviderSimListControllerTest {
                 .append(", ")
                 .append(setSummaryResId("default_active_sim_sms"));
         mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1,
-                setSummaryResId("sim_category_default_active_sim", defaultConfig.toString()), true,
-                true, true, true, true);
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true);
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
 
         displayPreferenceWithLifecycle();
-        CharSequence defaultCall = mSubInfo1.defaultSimConfig;
+        CharSequence defaultCall = SubscriptionUtil.getDefaultSimConfig(mContext,
+                Integer.parseInt(SUB_ID_1));
         final StringBuilder summary = new StringBuilder();
         summary.append(setSummaryResId("sim_category_active_sim", null))
                 .append(defaultCall);
@@ -245,9 +240,9 @@ public class NetworkProviderSimListControllerTest {
     @UiThreadTest
     public void getAvailablePhysicalSubscription_withTwoPhysicalSims_returnTwo() {
         mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, "", true, true, true, true, true);
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true);
         mSubInfo2 = setupSubscriptionInfoEntity(SUB_ID_2, 1, 1, DISPLAY_NAME_2, SUB_MCC_2,
-                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, "", true, true, true, false, false);
+                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true);
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mSubscriptionInfoEntityList.add(mSubInfo2);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
