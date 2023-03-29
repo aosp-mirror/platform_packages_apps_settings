@@ -911,6 +911,10 @@ public class ChooseLockPassword extends SettingsActivity {
                         mIsManagedProfile));
                 setNextEnabled(canInput && length >= LockPatternUtils.MIN_LOCK_PASSWORD_SIZE);
                 mSkipOrClearButton.setVisibility(toVisibility(canInput && length > 0));
+
+                // Hide the pin_confirm option when we are just asking user to confirm the pwd.
+                mAutoPinConfirmOption.setVisibility(View.GONE);
+                mAutoConfirmSecurityMessage.setVisibility(View.GONE);
             }
             final int stage = getStageType();
             if (getStageType() != Stage.TYPE_NONE) {
@@ -1017,12 +1021,14 @@ public class ChooseLockPassword extends SettingsActivity {
                             profileCredential);
                 }
             }
-            mSaveAndFinishWorker.start(mLockPatternUtils, mRequestGatekeeperPassword,
-                    mChosenPassword, mCurrentCredential, mUserId);
-            // update the pin_auto_confirm setting accordingly.
+            // update the setting before triggering the password save workflow,
+            // so that pinLength information is stored accordingly when setting is turned on.
             mLockPatternUtils.setAutoPinConfirm(
                     (mAutoPinConfirmOption != null && mAutoPinConfirmOption.isChecked()),
                     mUserId);
+
+            mSaveAndFinishWorker.start(mLockPatternUtils, mRequestGatekeeperPassword,
+                    mChosenPassword, mCurrentCredential, mUserId);
         }
 
         @Override
