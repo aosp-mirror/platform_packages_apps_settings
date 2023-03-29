@@ -22,7 +22,6 @@ import static com.android.internal.widget.LockPatternUtils.FLAG_ENABLE_AUTO_PIN_
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -33,6 +32,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
+import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,6 +48,8 @@ public class AutoPinConfirmPreferenceControllerTest {
     private static final Integer TEST_USER_ID = 1;
     @Mock
     private LockPatternUtils mLockPatternUtils;
+    @Mock
+    private ObservablePreferenceFragment mParentFragment;
     private AutoPinConfirmPreferenceController mController;
     private SwitchPreference mPreference;
 
@@ -56,7 +58,8 @@ public class AutoPinConfirmPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         Context context = ApplicationProvider.getApplicationContext();
         mController =
-                new AutoPinConfirmPreferenceController(context, TEST_USER_ID, mLockPatternUtils);
+                new AutoPinConfirmPreferenceController(context, TEST_USER_ID, mLockPatternUtils,
+                        mParentFragment);
         mPreference = new SwitchPreference(context);
     }
 
@@ -127,13 +130,5 @@ public class AutoPinConfirmPreferenceControllerTest {
         when(mLockPatternUtils.isAutoPinConfirmEnabled(TEST_USER_ID)).thenReturn(true);
         mController.updateState(mPreference);
         assertThat(mPreference.isChecked()).isTrue();
-    }
-
-    @Test
-    public void onPreferenceChange_shouldUpdatePinAutoConfirmSetting() {
-        DeviceConfig.setProperty(NAMESPACE_AUTO_PIN_CONFIRMATION, FLAG_ENABLE_AUTO_PIN_CONFIRMATION,
-                "true", /* makeDefault */ false);
-        mController.onPreferenceChange(mPreference, /* newValue= */ true);
-        verify(mLockPatternUtils).setAutoPinConfirm(true, TEST_USER_ID);
     }
 }
