@@ -47,6 +47,7 @@ public class NewKeyboardLayoutPickerContent extends DashboardFragment {
                 arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_METHOD_SUBTYPE);
         if (identifier == null
                 || NewKeyboardSettingsUtils.getInputDevice(inputManager, identifier) == null) {
+            getActivity().finish();
             return;
         }
         getActivity().setTitle(title);
