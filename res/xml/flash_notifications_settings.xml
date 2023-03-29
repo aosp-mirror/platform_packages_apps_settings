@@ -21,6 +21,7 @@
 
     <com.android.settingslib.widget.TopIntroPreference
         android:key="flash_notifications_intro"
+        settings:searchable="false"
         settings:controller="com.android.settings.accessibility.FlashNotificationsIntroPreferenceController" />
 
     <com.android.settingslib.widget.IllustrationPreference
@@ -43,6 +44,7 @@
     <com.android.settings.accessibility.FlashNotificationsPreviewPreference
         android:key="flash_notifications_preview"
         android:title="@string/flash_notifications_preview"
+        settings:searchable="false"
         settings:controller="com.android.settings.accessibility.FlashNotificationsPreviewPreferenceController" />
 
     <com.android.settings.accessibility.AccessibilityFooterPreference
