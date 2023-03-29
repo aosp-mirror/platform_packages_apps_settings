@@ -16,14 +16,22 @@
 
 package com.android.settings.accessibility;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Handler;
 import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.widget.LabeledSeekBarPreference;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnCreate;
+import com.android.settingslib.core.lifecycle.events.OnDestroy;
+import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
 import java.util.Optional;
 
@@ -31,12 +39,19 @@ import java.util.Optional;
  * The controller of {@link LabeledSeekBarPreference} that listens to display size and font size
  * settings changes and updates preview size threshold smoothly.
  */
-class PreviewSizeSeekBarController extends BasePreferenceController implements
-        TextReadingResetController.ResetStateListener {
+abstract class PreviewSizeSeekBarController extends BasePreferenceController implements
+        TextReadingResetController.ResetStateListener, LifecycleObserver, OnCreate,
+        OnDestroy, OnSaveInstanceState {
     private final PreviewSizeData<? extends Number> mSizeData;
+    private static final String KEY_SAVED_QS_TOOLTIP_RESHOW = "qs_tooltip_reshow";
     private boolean mSeekByTouch;
     private Optional<ProgressInteractionListener> mInteractionListener = Optional.empty();
     private LabeledSeekBarPreference mSeekBarPreference;
+    private int mLastProgress;
+    private boolean mNeedsQSTooltipReshow = false;
+    private AccessibilityQuickSettingsTooltipWindow mTooltipWindow;
+    private final Handler mHandler;
+
 
     private final SeekBar.OnSeekBarChangeListener mSeekBarChangeListener =
             new SeekBar.OnSeekBarChangeListener() {
@@ -54,6 +69,7 @@ class PreviewSizeSeekBarController extends BasePreferenceController implements
 
                     if (!mSeekByTouch) {
                         interactionListener.onProgressChanged();
+                        onProgressFinalized();
                     }
                 }
 
@@ -67,6 +83,7 @@ class PreviewSizeSeekBarController extends BasePreferenceController implements
                     mSeekByTouch = false;
 
                     mInteractionListener.ifPresent(ProgressInteractionListener::onEndTrackingTouch);
+                    onProgressFinalized();
                 }
             };
 
@@ -74,6 +91,30 @@ class PreviewSizeSeekBarController extends BasePreferenceController implements
             @NonNull PreviewSizeData<? extends Number> sizeData) {
         super(context, preferenceKey);
         mSizeData = sizeData;
+        mHandler = new Handler(context.getMainLooper());
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        // Restore the tooltip.
+        if (savedInstanceState != null
+                && savedInstanceState.containsKey(KEY_SAVED_QS_TOOLTIP_RESHOW)) {
+            mNeedsQSTooltipReshow = savedInstanceState.getBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        // remove runnables in the queue.
+        mHandler.removeCallbacksAndMessages(null);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        final boolean isTooltipWindowShowing = mTooltipWindow != null && mTooltipWindow.isShowing();
+        if (mNeedsQSTooltipReshow || isTooltipWindowShowing) {
+            outState.putBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW, /* value= */ true);
+        }
     }
 
     void setInteractionListener(ProgressInteractionListener interactionListener) {
@@ -91,11 +132,15 @@ class PreviewSizeSeekBarController extends BasePreferenceController implements
 
         final int dataSize = mSizeData.getValues().size();
         final int initialIndex = mSizeData.getInitialIndex();
+        mLastProgress = initialIndex;
         mSeekBarPreference = screen.findPreference(getPreferenceKey());
         mSeekBarPreference.setMax(dataSize - 1);
         mSeekBarPreference.setProgress(initialIndex);
         mSeekBarPreference.setContinuousUpdates(true);
         mSeekBarPreference.setOnSeekBarChangeListener(mSeekBarChangeListener);
+        if (mNeedsQSTooltipReshow) {
+            mHandler.post(this::showQuickSettingsTooltipIfNeeded);
+        }
     }
 
     @Override
@@ -107,6 +152,44 @@ class PreviewSizeSeekBarController extends BasePreferenceController implements
         // the event to delay update.
         mInteractionListener.ifPresent(ProgressInteractionListener::onProgressChanged);
     }
+
+    private void onProgressFinalized() {
+        // Using progress in SeekBarPreference since the progresses in
+        // SeekBarPreference and seekbar are not always the same.
+        // See {@link androidx.preference.Preference#callChangeListener(Object)}
+        int seekBarPreferenceProgress = mSeekBarPreference.getProgress();
+        if (seekBarPreferenceProgress != mLastProgress) {
+            showQuickSettingsTooltipIfNeeded();
+            mLastProgress = seekBarPreferenceProgress;
+        }
+    }
+
+    private void showQuickSettingsTooltipIfNeeded() {
+        final ComponentName tileComponentName = getTileComponentName();
+        if (tileComponentName == null) {
+            // Returns if no tile service assigned.
+            return;
+        }
+
+        if (!mNeedsQSTooltipReshow && AccessibilityQuickSettingUtils.hasValueInSharedPreferences(
+                mContext, tileComponentName)) {
+            // Returns if quick settings tooltip only show once.
+            return;
+        }
+
+        mTooltipWindow = new AccessibilityQuickSettingsTooltipWindow(mContext);
+        mTooltipWindow.setup(getTileTooltipContent(),
+                R.drawable.accessibility_auto_added_qs_tooltip_illustration);
+        mTooltipWindow.showAtTopCenter(mSeekBarPreference.getSeekbar());
+        AccessibilityQuickSettingUtils.optInValueToSharedPreferences(mContext, tileComponentName);
+        mNeedsQSTooltipReshow = false;
+    }
+
+    /** Returns the accessibility Quick Settings tile component name. */
+    abstract ComponentName getTileComponentName();
+
+    /** Returns accessibility Quick Settings tile tooltip content. */
+    abstract CharSequence getTileTooltipContent();
 
 
     /**
