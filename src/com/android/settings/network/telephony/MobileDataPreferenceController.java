@@ -20,8 +20,6 @@ import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -36,13 +34,11 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
-import com.android.settings.network.MobileDataContentObserver;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
-import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -234,13 +230,14 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
         mSubscriptionInfoEntityList = subInfoEntityList;
         mSubscriptionInfoEntityList.forEach(entity -> {
-            if (Integer.parseInt(entity.subId) == mSubId) {
+            if (entity.getSubId() == mSubId) {
                 mSubscriptionInfoEntity = entity;
             }
         });
+        int subId = mSubscriptionInfoEntity.getSubId();
         if (mSubscriptionInfoEntity != null
-                && mSubscriptionInfoEntity.isDefaultDataSubscription) {
-            mDefaultSubId = Integer.parseInt(mSubscriptionInfoEntity.subId);
+                && subId == SubscriptionManager.getDefaultDataSubscriptionId()) {
+            mDefaultSubId = subId;
         }
         update();
         refreshSummary(mPreference);

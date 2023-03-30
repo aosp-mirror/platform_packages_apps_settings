@@ -29,13 +29,16 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
+import android.content.res.Resources;
 import android.credentials.CredentialManager;
 import android.credentials.CredentialProviderInfo;
 import android.credentials.SetEnabledProvidersException;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.OutcomeReceiver;
 import android.os.UserHandle;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.IconDrawableFactory;
@@ -48,6 +51,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
@@ -69,6 +73,7 @@ import java.util.concurrent.Executor;
 /** Queries available credential manager providers and adds preferences for them. */
 public class CredentialManagerPreferenceController extends BasePreferenceController
         implements LifecycleObserver {
+    public static final String ADD_SERVICE_DEVICE_CONFIG = "credential_manager_service_search_uri";
     private static final String TAG = "CredentialManagerPreferenceController";
     private static final String ALTERNATE_INTENT = "android.settings.SYNC_SETTINGS";
     private static final String PRIMARY_INTENT = "android.settings.CREDENTIAL_PROVIDER";
@@ -85,6 +90,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
     private @Nullable FragmentManager mFragmentManager = null;
     private @Nullable Delegate mDelegate = null;
+    private @Nullable String mFlagOverrideForTest = null;
 
     public CredentialManagerPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -237,12 +243,16 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         setAvailableServices(
                 lifecycleOwner,
                 mCredentialManager.getCredentialProviderServices(
-                        getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY));
+                        getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY),
+                null);
     }
 
     @VisibleForTesting
     void setAvailableServices(
-            LifecycleOwner lifecycleOwner, List<CredentialProviderInfo> availableServices) {
+            LifecycleOwner lifecycleOwner,
+            List<CredentialProviderInfo> availableServices,
+            String flagOverrideForTest) {
+        mFlagOverrideForTest = flagOverrideForTest;
         mServices.clear();
         mServices.addAll(availableServices);
 
@@ -276,6 +286,65 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         PreferenceGroup group = screen.findPreference(getPreferenceKey());
         Context context = screen.getContext();
         mPrefs.putAll(buildPreferenceList(context, group));
+
+        // Add the "add service" button only when there are no providers.
+        if (mPrefs.isEmpty()) {
+            String searchUri = getAddServiceUri(context);
+            if (!TextUtils.isEmpty(searchUri)) {
+                group.addPreference(newAddServicePreference(searchUri, context));
+            }
+        }
+    }
+
+    /**
+     * Returns the "add service" URI to show the play store. It will first try and use the
+     * credential manager specific search URI and if that is null it will fallback to the autofill
+     * one.
+     */
+    public @NonNull String getAddServiceUri(@NonNull Context context) {
+        // Check the credential manager gflag for a link.
+        String searchUri =
+                DeviceConfig.getString(
+                        DeviceConfig.NAMESPACE_CREDENTIAL,
+                        ADD_SERVICE_DEVICE_CONFIG,
+                        mFlagOverrideForTest);
+        if (!TextUtils.isEmpty(searchUri)) {
+            return searchUri;
+        }
+
+        // If not fall back on autofill.
+        return Settings.Secure.getStringForUser(
+                context.getContentResolver(),
+                Settings.Secure.AUTOFILL_SERVICE_SEARCH_URI,
+                getUser());
+    }
+
+    /**
+     * Gets the preference that allows to add a new cred man service.
+     *
+     * @return the pref to be added
+     */
+    @VisibleForTesting
+    public Preference newAddServicePreference(String searchUri, Context context) {
+        final Intent addNewServiceIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(searchUri));
+        final Preference preference = new Preference(context);
+        preference.setOnPreferenceClickListener(
+                p -> {
+                    context.startActivityAsUser(addNewServiceIntent, UserHandle.of(getUser()));
+                    return true;
+                });
+        preference.setTitle(R.string.print_menu_item_add_service);
+        preference.setOrder(Integer.MAX_VALUE - 1);
+        preference.setPersistent(false);
+
+        // Try to set the icon this should fail in a test environment but work
+        // in the actual app.
+        try {
+            preference.setIcon(R.drawable.ic_add_24dp);
+        } catch (Resources.NotFoundException e) {
+            Log.e(TAG, "Failed to find icon for add services link", e);
+        }
+        return preference;
     }
 
     /** Aggregates the list of services and builds a list of UI prefs to show. */
@@ -317,7 +386,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             }
 
             // Build the pref and add it to the output & group.
-            SwitchPreference pref = addProviderPreference(context, title, icon, packageName, firstInfo.getSettingsSubtitle());
+            SwitchPreference pref =
+                    addProviderPreference(
+                            context, title, icon, packageName, firstInfo.getSettingsSubtitle());
             output.put(packageName, pref);
             group.addPreference(pref);
         }
