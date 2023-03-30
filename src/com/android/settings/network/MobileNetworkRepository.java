@@ -18,14 +18,9 @@ package com.android.settings.network;
 import static android.telephony.SubscriptionManager.PROFILE_CLASS_PROVISIONING;
 import static android.telephony.UiccSlotInfo.CARD_STATE_INFO_PRESENT;
 
-import static com.android.internal.telephony.TelephonyIntents.ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED;
-
 import android.annotation.NonNull;
 import android.app.settings.SettingsEnums;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
@@ -39,6 +34,7 @@ import android.telephony.UiccCardInfo;
 import android.telephony.UiccPortInfo;
 import android.telephony.UiccSlotInfo;
 import android.util.ArrayMap;
+import android.util.IndentingPrintWriter;
 import android.util.Log;
 
 import com.android.settings.network.telephony.MobileNetworkUtils;
@@ -98,7 +94,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private AirplaneModeObserver mAirplaneModeObserver;
     private Uri mAirplaneModeSettingUri;
     private MetricsFeatureProvider mMetricsFeatureProvider;
-    private IntentFilter mFilter = new IntentFilter();
     private Map<Integer, MobileDataContentObserver> mDataContentObserverMap = new HashMap<>();
     private int mPhysicalSlotIndex = SubscriptionManager.INVALID_SIM_SLOT_INDEX;
     private int mLogicalSlotIndex = SubscriptionManager.INVALID_SIM_SLOT_INDEX;
@@ -111,12 +106,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private Map<Integer, SubscriptionInfo> mSubscriptionInfoMap = new ArrayMap<>();
     private Map<Integer, TelephonyManager> mTelephonyManagerMap = new HashMap<>();
     private Map<Integer, PhoneCallStateTelephonyCallback> mTelephonyCallbackMap = new HashMap<>();
-    private BroadcastReceiver mDataSubscriptionChangedReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            onSubscriptionsChanged();
-        }
-    };
+
     @NonNull
     public static MobileNetworkRepository getInstance(Context context) {
         synchronized (sInstanceLock) {
@@ -142,10 +132,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         mMobileNetworkInfoDao = mMobileNetworkDatabase.mMobileNetworkInfoDao();
         mAirplaneModeObserver = new AirplaneModeObserver(new Handler(Looper.getMainLooper()));
         mAirplaneModeSettingUri = Settings.Global.getUriFor(Settings.Global.AIRPLANE_MODE_ON);
-        mFilter.addAction(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED);
-        mFilter.addAction(SubscriptionManager.ACTION_DEFAULT_SUBSCRIPTION_CHANGED);
-        mFilter.addAction(ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED);
-        mFilter.addAction(SubscriptionManager.ACTION_DEFAULT_SMS_SUBSCRIPTION_CHANGED);
     }
 
     private class AirplaneModeObserver extends ContentObserver {
@@ -187,7 +173,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             mSubscriptionManager.addOnSubscriptionsChangedListener(mContext.getMainExecutor(),
                     this);
             mAirplaneModeObserver.register(mContext);
-            mContext.registerReceiver(mDataSubscriptionChangedReceiver, mFilter);
             if (DEBUG) {
                 Log.d(TAG, "addRegister done");
             }
@@ -270,7 +255,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         if (sCallbacks.isEmpty()) {
             mSubscriptionManager.removeOnSubscriptionsChangedListener(this);
             mAirplaneModeObserver.unRegister(mContext);
-            mContext.unregisterReceiver(mDataSubscriptionChangedReceiver);
             mDataContentObserverMap.forEach((id, observer) -> {
                 observer.unRegister(mContext);
             });
@@ -523,16 +507,11 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                     SubscriptionUtil.getFormattedPhoneNumber(context, subInfo),
                     firstRemovableSubInfo == null ? false
                             : firstRemovableSubInfo.getSubscriptionId() == subId,
-                    String.valueOf(SubscriptionUtil.getDefaultSimConfig(context, subId)),
                     SubscriptionUtil.isDefaultSubscription(context, subId),
                     mSubscriptionManager.isValidSubscriptionId(subId),
                     mSubscriptionManager.isUsableSubscriptionId(subId),
                     mSubscriptionManager.isActiveSubscriptionId(subId),
                     true /*availableSubInfo*/,
-                    mSubscriptionManager.getDefaultVoiceSubscriptionId() == subId,
-                    mSubscriptionManager.getDefaultSmsSubscriptionId() == subId,
-                    mSubscriptionManager.getDefaultDataSubscriptionId() == subId,
-                    mSubscriptionManager.getDefaultSubscriptionId() == subId,
                     mSubscriptionManager.getActiveDataSubscriptionId() == subId);
         }
     }
@@ -735,5 +714,18 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
 
         default void onCallStateChanged(int state) {
         }
+    }
+
+    public void dump(IndentingPrintWriter printwriter) {
+        printwriter.println(TAG + ": ");
+        printwriter.increaseIndent();
+        printwriter.println(" availableSubInfoEntityList= " + mAvailableSubInfoEntityList);
+        printwriter.println(" activeSubInfoEntityList=" + mActiveSubInfoEntityList);
+        printwriter.println(" mobileNetworkInfoEntityList= " + mMobileNetworkInfoEntityList);
+        printwriter.println(" uiccInfoEntityList= " + mUiccInfoEntityList);
+        printwriter.println(" CacheSubscriptionInfoEntityMap= " + sCacheSubscriptionInfoEntityMap);
+        printwriter.println(" SubscriptionInfoMap= " + mSubscriptionInfoMap);
+        printwriter.flush();
+        printwriter.decreaseIndent();
     }
 }

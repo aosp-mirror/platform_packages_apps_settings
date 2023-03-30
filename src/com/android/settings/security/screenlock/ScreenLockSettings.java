@@ -16,9 +16,13 @@
 
 package com.android.settings.security.screenlock;
 
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
 import android.os.UserHandle;
+
+import androidx.annotation.Nullable;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -38,6 +42,10 @@ public class ScreenLockSettings extends DashboardFragment
     private static final String TAG = "ScreenLockSettings";
 
     private static final int MY_USER_ID = UserHandle.myUserId();
+
+    static final int AUTO_PIN_SETTING_ENABLING_REQUEST_CODE = 111;
+    static final int AUTO_PIN_SETTING_DISABLING_REQUEST_CODE = 112;
+
     private LockPatternUtils mLockPatternUtils;
 
     @Override
@@ -79,7 +87,7 @@ public class ScreenLockSettings extends DashboardFragment
         controllers.add(new LockAfterTimeoutPreferenceController(
                 context, MY_USER_ID, lockPatternUtils));
         controllers.add(new AutoPinConfirmPreferenceController(
-                context, MY_USER_ID, lockPatternUtils));
+                context, MY_USER_ID, lockPatternUtils, parent));
         controllers.add(new OwnerInfoPreferenceController(context, parent));
         return controllers;
     }
@@ -94,4 +102,17 @@ public class ScreenLockSettings extends DashboardFragment
                             new LockPatternUtils(context));
                 }
             };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == AUTO_PIN_SETTING_ENABLING_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                mLockPatternUtils.setAutoPinConfirm(/* enabled= */ true, MY_USER_ID);
+            }
+        } else if (requestCode == AUTO_PIN_SETTING_DISABLING_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                mLockPatternUtils.setAutoPinConfirm(/* enabled= */ false, MY_USER_ID);
+            }
+        }
+    }
 }
