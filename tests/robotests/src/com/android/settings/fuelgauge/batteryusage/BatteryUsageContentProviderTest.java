@@ -31,6 +31,7 @@ import android.net.Uri;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryEventEntity;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryState;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
 import com.android.settings.testutils.BatteryTestUtils;
@@ -351,6 +352,28 @@ public final class BatteryUsageContentProviderTest {
         assertThat(entities.get(0).packageName).isEqualTo("com.android.settings1");
         assertThat(entities.get(0).instanceId).isEqualTo(100001L);
         assertThat(entities.get(0).taskRootPackageName).isEqualTo("com.android.settings2");
+    }
+
+    @Test
+    public void insert_batteryEvent_returnsExpectedResult() {
+        mProvider.onCreate();
+        ContentValues values = new ContentValues();
+        values.put(BatteryEventEntity.KEY_TIMESTAMP, 10001L);
+        values.put(BatteryEventEntity.KEY_BATTERY_EVENT_TYPE,
+                BatteryEventType.POWER_CONNECTED.getNumber());
+        values.put(BatteryEventEntity.KEY_BATTERY_LEVEL, 66);
+
+        final Uri uri = mProvider.insert(DatabaseUtils.BATTERY_EVENT_URI, values);
+
+        assertThat(uri).isEqualTo(DatabaseUtils.BATTERY_EVENT_URI);
+        // Verifies the AppUsageEventEntity content.
+        final List<BatteryEventEntity> entities =
+                BatteryStateDatabase.getInstance(mContext).batteryEventDao().getAll();
+        assertThat(entities).hasSize(1);
+        assertThat(entities.get(0).timestamp).isEqualTo(10001L);
+        assertThat(entities.get(0).batteryEventType).isEqualTo(
+                BatteryEventType.POWER_CONNECTED.getNumber());
+        assertThat(entities.get(0).batteryLevel).isEqualTo(66);
     }
 
     @Test
