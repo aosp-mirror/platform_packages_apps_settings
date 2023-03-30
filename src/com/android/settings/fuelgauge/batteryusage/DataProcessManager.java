@@ -72,6 +72,8 @@ public class DataProcessManager {
 
     private final Handler mHandler;
     private final DataProcessor.UsageMapAsyncResponse mCallbackFunction;
+    private final List<AppUsageEvent> mAppUsageEventList = new ArrayList<>();
+    private final List<BatteryEvent> mBatteryEventList = new ArrayList<>();
 
     private Context mContext;
     private UserManager mUserManager;
@@ -84,12 +86,12 @@ public class DataProcessManager {
     private boolean mIsCurrentBatteryHistoryLoaded = false;
     private boolean mIsCurrentAppUsageLoaded = false;
     private boolean mIsDatabaseAppUsageLoaded = false;
+    private boolean mIsBatteryEventLoaded = false;
     // Used to identify whether screen-on time data should be shown in the UI.
     private boolean mShowScreenOnTime = true;
     // Used to identify whether battery level data should be shown in the UI.
     private boolean mShowBatteryLevel = true;
 
-    private List<AppUsageEvent> mAppUsageEventList = new ArrayList<>();
     /**
      * The indexed {@link AppUsagePeriod} list data for each corresponding time slot.
      * <p>{@code Long} stands for the userId.</p>
@@ -146,6 +148,8 @@ public class DataProcessManager {
             loadDatabaseAppUsageList();
             // Loads the latest app usage list from the service.
             loadCurrentAppUsageList();
+            // Loads the battery event list from database.
+            loadBatteryEventList();
         } else {
             // If there is no battery level data, only load the battery history data from service
             // and show it as the app list directly.
@@ -172,6 +176,11 @@ public class DataProcessManager {
     @VisibleForTesting
     boolean getIsDatabaseAppUsageLoaded() {
         return mIsDatabaseAppUsageLoaded;
+    }
+
+    @VisibleForTesting
+    boolean getIsBatteryEventLoaded() {
+        return mIsBatteryEventLoaded;
     }
 
     @VisibleForTesting
@@ -290,7 +299,7 @@ public class DataProcessManager {
                     return null;
                 }
                 final long startTime = System.currentTimeMillis();
-                // Loads the current battery usage data from the battery stats service.
+                // Loads the app usage data from the database.
                 final List<AppUsageEvent> appUsageEventList =
                         DatabaseUtils.getAppUsageEventForUsers(
                                 mContext, Calendar.getInstance(), getCurrentUserIds(),
@@ -309,6 +318,35 @@ public class DataProcessManager {
                     mAppUsageEventList.addAll(databaseAppUsageList);
                 }
                 mIsDatabaseAppUsageLoaded = true;
+                tryToProcessAppUsageData();
+            }
+        }.execute();
+    }
+
+    private void loadBatteryEventList() {
+        new AsyncTask<Void, Void, List<BatteryEvent>>() {
+            @Override
+            protected List<BatteryEvent> doInBackground(Void... voids) {
+                final long startTime = System.currentTimeMillis();
+                // Loads the battery event data from the database.
+                final List<BatteryEvent> batteryEventList =
+                        DatabaseUtils.getBatteryEvents(
+                                mContext, Calendar.getInstance(), mRawStartTimestamp);
+                Log.d(TAG, String.format("execute loadBatteryEventList size=%d in %d/ms",
+                        batteryEventList.size(), (System.currentTimeMillis() - startTime)));
+                return batteryEventList;
+            }
+
+            @Override
+            protected void onPostExecute(
+                    final List<BatteryEvent> batteryEventList) {
+                if (batteryEventList == null || batteryEventList.isEmpty()) {
+                    Log.d(TAG, "batteryEventList is null or empty");
+                } else {
+                    mBatteryEventList.clear();
+                    mBatteryEventList.addAll(batteryEventList);
+                }
+                mIsBatteryEventLoaded = true;
                 tryToProcessAppUsageData();
             }
         }.execute();
@@ -344,9 +382,8 @@ public class DataProcessManager {
     }
 
     private void tryToProcessAppUsageData() {
-        // Only when all app usage events has been loaded, start processing app usage data to an
-        // intermediate result for further use.
-        if (!mIsCurrentAppUsageLoaded || !mIsDatabaseAppUsageLoaded) {
+        // Ignore processing the data if any required data is not loaded.
+        if (!mIsCurrentAppUsageLoaded || !mIsDatabaseAppUsageLoaded || !mIsBatteryEventLoaded) {
             return;
         }
         processAppUsageData();
@@ -360,16 +397,16 @@ public class DataProcessManager {
         }
         // Generates the indexed AppUsagePeriod list data for each corresponding time slot for
         // further use.
-        mAppUsagePeriodMap = DataProcessor.generateAppUsagePeriodMap(
-                mRawStartTimestamp, mHourlyBatteryLevelsPerDay, mAppUsageEventList);
+        mAppUsagePeriodMap = DataProcessor.generateAppUsagePeriodMap(mRawStartTimestamp,
+                mHourlyBatteryLevelsPerDay, mAppUsageEventList, mBatteryEventList);
     }
 
     private void tryToGenerateFinalDataAndApplyCallback() {
-        // Only when both battery history data and app usage events data has been loaded, start the
-        // final data processing.
+        // Ignore processing the data if any required data is not loaded.
         if (!mIsCurrentBatteryHistoryLoaded
                 || !mIsCurrentAppUsageLoaded
-                || !mIsDatabaseAppUsageLoaded) {
+                || !mIsDatabaseAppUsageLoaded
+                || !mIsBatteryEventLoaded) {
             return;
         }
         generateFinalDataAndApplyCallback();
