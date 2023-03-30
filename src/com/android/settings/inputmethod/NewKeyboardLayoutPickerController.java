@@ -28,6 +28,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.widget.TickButtonPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -38,7 +39,7 @@ import java.util.Map;
 public class NewKeyboardLayoutPickerController extends BasePreferenceController implements
         InputManager.InputDeviceListener, LifecycleObserver, OnStart, OnStop {
     private final InputManager mIm;
-    private final Map<KeyboardLayoutPreference, KeyboardLayout> mPreferenceMap;
+    private final Map<TickButtonPreference, KeyboardLayout> mPreferenceMap;
 
     private Fragment mParent;
     private int mInputDeviceId;
@@ -102,16 +103,15 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-
-        if (!(preference instanceof KeyboardLayoutPreference)) {
+        if (!(preference instanceof TickButtonPreference)) {
             return false;
         }
 
-        final KeyboardLayoutPreference pref = (KeyboardLayoutPreference) preference;
-        pref.setCheckMark(true);
+        final TickButtonPreference pref = (TickButtonPreference) preference;
+        pref.setSelected(true);
         if (mPreviousSelection != null && !mPreviousSelection.equals(preference.getKey())) {
-            KeyboardLayoutPreference preSelectedPref = mScreen.findPreference(mPreviousSelection);
-            preSelectedPref.setCheckMark(false);
+            TickButtonPreference preSelectedPref = mScreen.findPreference(mPreviousSelection);
+            preSelectedPref.setSelected(false);
         }
         setLayout(pref);
         mPreviousSelection = preference.getKey();
@@ -140,12 +140,13 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
             return;
         }
         for (KeyboardLayout layout : mKeyboardLayouts) {
-            final KeyboardLayoutPreference pref;
+            final TickButtonPreference pref;
+            pref = new TickButtonPreference(mScreen.getContext());
+            pref.setTitle(layout.getLabel());
+
             if (mLayout.equals(layout.getLabel())) {
-                pref = new KeyboardLayoutPreference(mScreen.getContext(), layout.getLabel(), true);
+                pref.setSelected(true);
                 mPreviousSelection = layout.getDescriptor();
-            } else {
-                pref = new KeyboardLayoutPreference(mScreen.getContext(), layout.getLabel(), false);
             }
             pref.setKey(layout.getDescriptor());
             mScreen.addPreference(pref);
@@ -153,7 +154,7 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
         }
     }
 
-    private void setLayout(KeyboardLayoutPreference preference) {
+    private void setLayout(TickButtonPreference preference) {
         mIm.setKeyboardLayoutForInputDevice(
                 mInputDeviceIdentifier,
                 mUserId,
