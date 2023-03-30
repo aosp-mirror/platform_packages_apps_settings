@@ -104,7 +104,7 @@ public class CloneBackend {
                         new HashSet<>());
             } catch (Exception e) {
                 if (ManageApplications.DEBUG) {
-                    Log.e("ankita", "Error occurred creating clone user" + e.getMessage());
+                    Log.e(TAG, "Error occurred creating clone user" + e.getMessage());
                 }
                 return ERROR_CREATING_CLONE_USER;
             }
@@ -125,7 +125,7 @@ public class CloneBackend {
             if (newlyCreated) {
                 IActivityManager am = ActivityManagerNative.getDefault();
                 try {
-                    am.startUserInBackground(mCloneUserId);
+                    am.startProfile(mCloneUserId);
                 } catch (RemoteException e) {
                     if (ManageApplications.DEBUG) {
                         Log.e(TAG, "Error starting clone user " + e.getMessage());

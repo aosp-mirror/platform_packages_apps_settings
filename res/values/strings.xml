@@ -1126,6 +1126,10 @@
     <string name="auto_pin_confirm_user_message">Auto-confirm correct PIN</string>
     <!-- Message shown to explain the security concern if a user opts-in to the auto-pin feature. [CHAR LIMIT=NONE] -->
     <string name="auto_pin_confirm_opt_in_security_message">Confirming your PIN by tapping Enter is more secure than using auto-confirm</string>
+    <!-- Description of pin confirmation screen when auto confirm setting is turned on. [CHAR LIMIT=NONE] -->
+    <string name="auto_confirm_on_pin_verify_description">Enter device PIN to enable auto-confirm</string>
+    <!-- Description of pin confirmation screen when auto confirm setting is turned off. [CHAR LIMIT=NONE] -->
+    <string name="auto_confirm_off_pin_verify_description">Enter device PIN to disable auto-confirm</string>
 
     <!--  Main Security lock settings --><skip />
     <!--  Title for PreferenceScreen to launch picker for security method when there is none [CHAR LIMIT=22] -->
@@ -4210,10 +4214,10 @@
     <string name="accessibility_screen_magnification_follow_typing_title">Magnify typing</string>
     <!-- Summary for accessibility follow typing preference for magnification. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_follow_typing_summary">Magnifier follows text as you type</string>
-    <!-- Title for accessibility magnifier preference where the magnifier never turns off on its own. [CHAR LIMIT=35] -->
-    <string name="accessibility_screen_magnification_always_on_title">Always On</string>
-    <!-- Summary for accessibility magnifier preference where the magnifier never turns off on its own. [CHAR LIMIT=none] -->
-    <string name="accessibility_screen_magnification_always_on_summary">Instead of deactivating magnification when changing apps, it simply zooms out to normal size. Pinch to zoom back in whenever you want.</string>
+    <!-- Title for accessibility magnifier preference where the magnifier never turns off while switching apps. [CHAR LIMIT=35] -->
+    <string name="accessibility_screen_magnification_always_on_title">Keep on while switching apps</string>
+    <!-- Summary for accessibility magnifier preference where the magnifier never turns off while switching apps. [CHAR LIMIT=none] -->
+    <string name="accessibility_screen_magnification_always_on_summary">Magnifier stays on and zooms out when you switch apps</string>
     <!-- Title for accessibility on-screen joystick controller preference that controls magnification position. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_magnification_joystick_title">Joystick</string>
     <!-- Summary for accessibility on-screen joystick controller preference that controls magnification position. [CHAR LIMIT=none] -->
