@@ -183,7 +183,7 @@ public final class DataProcessManagerTest {
         assertThat(dataProcessManager.getIsCurrentBatteryHistoryLoaded()).isTrue();
         assertThat(dataProcessManager.getShowScreenOnTime()).isTrue();
         final List<AppUsageEvent> appUsageEventList = dataProcessManager.getAppUsageEventList();
-        Collections.sort(appUsageEventList, DataProcessor.TIMESTAMP_COMPARATOR);
+        Collections.sort(appUsageEventList, DataProcessor.APP_USAGE_EVENT_TIMESTAMP_COMPARATOR);
         assertThat(appUsageEventList.size()).isEqualTo(6);
         assertAppUsageEvent(
                 appUsageEventList.get(0), AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 1);
