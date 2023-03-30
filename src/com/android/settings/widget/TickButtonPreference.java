@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Android Open Source Project
+ * Copyright (C) 2023 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.inputmethod;
+package com.android.settings.widget;
 
 import android.content.Context;
 import android.view.View;
@@ -25,29 +25,33 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 
-public class KeyboardLayoutPreference extends Preference {
-
+/** A preference with tick icon. */
+public class TickButtonPreference extends Preference {
     private ImageView mCheckIcon;
-    private boolean mIsMark;
+    private boolean mIsSelected = false;
 
-    public KeyboardLayoutPreference(Context context, String layoutName, boolean defaultMark) {
+    public TickButtonPreference(Context context) {
         super(context);
         setWidgetLayoutResource(R.layout.preference_check_icon);
-        setTitle(layoutName);
-        mIsMark = defaultMark;
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-        mCheckIcon = (ImageView) holder.findViewById(R.id.keyboard_check_icon);
-        setCheckMark(mIsMark);
+        mCheckIcon = (ImageView) holder.findViewById(R.id.check_icon);
+        setSelected(mIsSelected);
     }
 
-    public void setCheckMark(boolean isMark) {
+    /** Set icon state.*/
+    public void setSelected(boolean isSelected) {
         if (mCheckIcon != null) {
-            mCheckIcon.setVisibility(isMark ? View.VISIBLE : View.INVISIBLE);
-            mIsMark = isMark;
+            mCheckIcon.setVisibility(isSelected ? View.VISIBLE : View.INVISIBLE);
         }
+        mIsSelected = isSelected;
+    }
+
+    /** Return state of presenting icon. */
+    public boolean isSelected() {
+        return mIsSelected;
     }
 }

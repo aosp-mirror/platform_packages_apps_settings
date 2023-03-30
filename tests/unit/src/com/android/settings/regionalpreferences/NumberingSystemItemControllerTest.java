@@ -33,6 +33,8 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.widget.TickButtonPreference;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
