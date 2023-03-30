@@ -54,13 +54,11 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
         if (intent == null || intent.getAction() == null) {
             return;
         }
-        final String action = intent.getAction();
-        Log.d(TAG, "onReceive:" + action);
-        DatabaseUtils.recordDateTime(context, action);
+        Log.d(TAG, "onReceive:" + intent.getAction());
         final String fullChargeIntentAction = FeatureFactory.getFactory(context)
                 .getPowerUsageFeatureProvider(context)
                 .getFullChargeIntentAction();
-        switch (action) {
+        switch (intent.getAction()) {
             case Intent.ACTION_BATTERY_LEVEL_CHANGED:
                 // Only when fullChargeIntentAction is ACTION_BATTERY_LEVEL_CHANGED,
                 // ACTION_BATTERY_LEVEL_CHANGED will be considered as the full charge event and then

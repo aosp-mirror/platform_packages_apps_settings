@@ -29,12 +29,11 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.ApplicationInfoFlags;
 import android.content.pm.UserInfo;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Process;
+import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
@@ -72,6 +71,7 @@ import com.android.settings.core.CategoryMixin;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.password.PasswordUtils;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
@@ -95,10 +95,6 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     // Set & get Uri of the Intent separately to prevent failure of Intent#ParseUri.
     public static final String EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_DATA =
             "settings_large_screen_deep_link_intent_data";
-
-    // The referrer who fires the initial intent to start the homepage
-    @VisibleForTesting
-    static final String EXTRA_INITIAL_REFERRER = "initial_referrer";
 
     static final int DEFAULT_HIGHLIGHT_MENU_KEY = R.string.menu_key_network;
     private static final long HOMEPAGE_LOADING_TIMEOUT_MS = 300;
@@ -181,16 +177,12 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         mIsEmbeddingActivityEnabled = ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this);
         if (mIsEmbeddingActivityEnabled) {
             final UserManager um = getSystemService(UserManager.class);
-            final UserInfo userInfo = um.getUserInfo(getUserId());
+            final UserInfo userInfo = um.getUserInfo(getUser().getIdentifier());
             if (userInfo.isManagedProfile()) {
                 final Intent intent = new Intent(getIntent())
+                        .setClass(this, DeepLinkHomepageActivityInternal.class)
                         .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
-                        .putExtra(EXTRA_USER_HANDLE, getUser())
-                        .putExtra(EXTRA_INITIAL_REFERRER, getCurrentReferrer());
-                if (TextUtils.equals(intent.getAction(), ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY)
-                        && this instanceof DeepLinkHomepageActivity) {
-                    intent.setClass(this, DeepLinkHomepageActivityInternal.class);
-                }
+                        .putExtra(EXTRA_USER_HANDLE, getUser());
                 intent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivityAsUser(intent, um.getProfileParent(userInfo.id).getUserHandle());
                 finish();
@@ -479,7 +471,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             return;
         }
 
-        ActivityInfo targetActivityInfo;
+        ActivityInfo targetActivityInfo = null;
         try {
             targetActivityInfo = getPackageManager().getActivityInfo(targetComponentName,
                     /* flags= */ 0);
@@ -489,29 +481,23 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             return;
         }
 
-        UserHandle user = intent.getParcelableExtra(EXTRA_USER_HANDLE, UserHandle.class);
-        String caller = getInitialReferrer();
-        int callerUid = -1;
-        if (caller != null) {
-            try {
-                callerUid = getPackageManager().getApplicationInfoAsUser(caller,
-                        ApplicationInfoFlags.of(/* flags= */ 0),
-                        user != null ? user.getIdentifier() : getUserId()).uid;
-            } catch (PackageManager.NameNotFoundException e) {
-                Log.e(TAG, "Not able to get callerUid: " + e);
-                finish();
-                return;
-            }
+        int callingUid = -1;
+        try {
+            callingUid = ActivityManager.getService().getLaunchedFromUid(getActivityToken());
+        } catch (RemoteException re) {
+            Log.e(TAG, "Not able to get callingUid: " + re);
+            finish();
+            return;
         }
 
-        if (!hasPrivilegedAccess(caller, callerUid, targetActivityInfo.packageName)) {
+        if (!hasPrivilegedAccess(callingUid, targetActivityInfo)) {
             if (!targetActivityInfo.exported) {
                 Log.e(TAG, "Target Activity is not exported");
                 finish();
                 return;
             }
 
-            if (!isCallingAppPermitted(targetActivityInfo.permission, callerUid)) {
+            if (!isCallingAppPermitted(targetActivityInfo.permission)) {
                 Log.e(TAG, "Calling app must have the permission of deep link Activity");
                 finish();
                 return;
@@ -524,7 +510,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 & (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         if (targetIntent.getData() != null
                 && uriPermissionFlags != 0
-                && checkUriPermission(targetIntent.getData(), /* pid= */ -1, callerUid,
+                && checkUriPermission(targetIntent.getData(), /* pid= */ -1, callingUid,
                         uriPermissionFlags) == PackageManager.PERMISSION_DENIED) {
             Log.e(TAG, "Calling app must have the permission to access Uri and grant permission");
             finish();
@@ -561,6 +547,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 SplitRule.FinishBehavior.ALWAYS,
                 true /* clearTop */);
 
+        final UserHandle user = intent.getParcelableExtra(EXTRA_USER_HANDLE, UserHandle.class);
         if (user != null) {
             startActivityAsUser(targetIntent, user);
         } else {
@@ -568,30 +555,31 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         }
     }
 
-    // Check if the caller has privileged access to launch the target page.
-    private boolean hasPrivilegedAccess(String callerPkg, int callerUid, String targetPackage) {
-        if (TextUtils.equals(callerPkg, getPackageName())) {
+    // Check if calling app has privileged access to launch Activity of activityInfo.
+    private boolean hasPrivilegedAccess(int callingUid, ActivityInfo activityInfo) {
+        if (TextUtils.equals(PasswordUtils.getCallingAppPackageName(getActivityToken()),
+                    getPackageName())) {
             return true;
         }
 
         int targetUid = -1;
         try {
-            targetUid = getPackageManager().getApplicationInfo(targetPackage,
-                    ApplicationInfoFlags.of(/* flags= */ 0)).uid;
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.e(TAG, "Not able to get targetUid: " + e);
+            targetUid = getPackageManager().getApplicationInfo(activityInfo.packageName,
+                    /* flags= */ 0).uid;
+        } catch (PackageManager.NameNotFoundException nnfe) {
+            Log.e(TAG, "Not able to get targetUid: " + nnfe);
             return false;
         }
 
         // When activityInfo.exported is false, Activity still can be launched if applications have
         // the same user ID.
-        if (UserHandle.isSameApp(callerUid, targetUid)) {
+        if (UserHandle.isSameApp(callingUid, targetUid)) {
             return true;
         }
 
         // When activityInfo.exported is false, Activity still can be launched if calling app has
         // root or system privilege.
-        int callingAppId = UserHandle.getAppId(callerUid);
+        int callingAppId = UserHandle.getAppId(callingUid);
         if (callingAppId == Process.ROOT_UID || callingAppId == Process.SYSTEM_UID) {
             return true;
         }
@@ -600,31 +588,9 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     }
 
     @VisibleForTesting
-    String getInitialReferrer() {
-        String referrer = getCurrentReferrer();
-        if (!TextUtils.equals(referrer, getPackageName())) {
-            return referrer;
-        }
-
-        String initialReferrer = getIntent().getStringExtra(EXTRA_INITIAL_REFERRER);
-        return TextUtils.isEmpty(initialReferrer) ? referrer : initialReferrer;
-    }
-
-    @VisibleForTesting
-    String getCurrentReferrer() {
-        Intent intent = getIntent();
-        // Clear extras to get the real referrer
-        intent.removeExtra(Intent.EXTRA_REFERRER);
-        intent.removeExtra(Intent.EXTRA_REFERRER_NAME);
-        Uri referrer = getReferrer();
-        return referrer != null ? referrer.getHost() : null;
-    }
-
-    @VisibleForTesting
-    boolean isCallingAppPermitted(String permission, int callerUid) {
-        return TextUtils.isEmpty(permission)
-                || checkPermission(permission, /* pid= */ -1, callerUid)
-                        == PackageManager.PERMISSION_GRANTED;
+    boolean isCallingAppPermitted(String permission) {
+        return TextUtils.isEmpty(permission) || PasswordUtils.isCallingAppPermitted(
+                this, getActivityToken(), permission);
     }
 
     private String getHighlightMenuKey() {

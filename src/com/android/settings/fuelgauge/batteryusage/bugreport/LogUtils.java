@@ -19,8 +19,6 @@ package com.android.settings.fuelgauge.batteryusage.bugreport;
 import android.content.Context;
 import android.util.Log;
 
-import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
-import com.android.settings.fuelgauge.batteryusage.DatabaseUtils;
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventDao;
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryState;
@@ -28,9 +26,12 @@ import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
 
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.time.Clock;
 import java.time.Duration;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /** A utility class to aggregate and provide required log data. */
 public final class LogUtils {
@@ -38,9 +39,8 @@ public final class LogUtils {
     private static final Duration DUMP_TIME_OFFSET = Duration.ofHours(24);
     private static final Duration DUMP_TIME_OFFSET_FOR_ENTRY = Duration.ofHours(4);
 
+    @SuppressWarnings("JavaUtilDate")
     static void dumpBatteryUsageDatabaseHist(Context context, PrintWriter writer) {
-        DatabaseUtils.dump(context, writer);
-        writer.flush();
         final BatteryStateDao dao =
                 BatteryStateDatabase
                         .getInstance(context.getApplicationContext())
@@ -57,18 +57,20 @@ public final class LogUtils {
             return;
         }
         // Dumps all distinct timestamps.
+        final SimpleDateFormat formatter =
+                new SimpleDateFormat("MMM dd, HH:mm:ss", Locale.US);
         timestamps.forEach(timestamp -> {
-            final String formattedTimestamp = ConvertUtils.utcToLocalTimeForLogging(timestamp);
+            final String formattedTimestamp = formatter.format(new Date(timestamp));
             writer.println("\t" + formattedTimestamp);
             Log.w(TAG, "\t" + formattedTimestamp);
         });
-        writer.flush();
 
         final List<BatteryState> stateList = dao.getAllAfter(
                 Clock.systemUTC().millis() - DUMP_TIME_OFFSET_FOR_ENTRY.toMillis());
         stateList.stream().forEach(state -> writer.println(state));
     }
 
+    @SuppressWarnings("JavaUtilDate")
     static void dumpAppUsageDatabaseHist(Context context, PrintWriter writer) {
         final AppUsageEventDao dao =
                 BatteryStateDatabase
@@ -78,7 +80,6 @@ public final class LogUtils {
         final List<AppUsageEventEntity> eventList = dao.getAllAfter(
                 Clock.systemUTC().millis() - DUMP_TIME_OFFSET_FOR_ENTRY.toMillis());
         eventList.stream().forEach(event -> writer.println(event));
-        writer.flush();
     }
 
     private LogUtils() {}

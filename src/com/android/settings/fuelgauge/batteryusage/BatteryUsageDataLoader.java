@@ -57,10 +57,6 @@ public final class BatteryUsageDataLoader {
         }
         final long elapsedTime = System.currentTimeMillis() - start;
         Log.d(TAG, String.format("getBatteryUsageStats() in %d/ms", elapsedTime));
-        if (isFullChargeStart) {
-            DatabaseUtils.recordDateTime(
-                    context, DatabaseUtils.KEY_LAST_LOAD_FULL_CHARGE_TIME);
-        }
 
         // Uploads the BatteryEntry data into database.
         DatabaseUtils.sendBatteryEntryData(

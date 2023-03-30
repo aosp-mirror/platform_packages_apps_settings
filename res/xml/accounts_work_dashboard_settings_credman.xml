@@ -22,9 +22,9 @@
     android:title="@string/account_dashboard_title"
     settings:keywords="@string/keywords_accounts">
 
-    <PreferenceCategory
-        android:key="default_service_category"
-        android:order="10"
+    <com.android.settings.widget.WorkOnlyCategory
+        android:key="autofill_work_app_defaults"
+        android:order="30"
         android:title="@string/default_autofill_app">
 
         <com.android.settings.widget.GearPreference
@@ -36,11 +36,11 @@
                 android:name="for_work"
                 android:value="true" />
         </com.android.settings.widget.GearPreference>
-    </PreferenceCategory>
+    </com.android.settings.widget.WorkOnlyCategory>
 
     <PreferenceCategory
         android:key="credman_category"
-        android:order="50"
+        android:order="20"
         android:persistent="false"
         android:title="@string/credman_credentials"
         settings:controller="com.android.settings.applications.credentials.CredentialManagerPreferenceController"

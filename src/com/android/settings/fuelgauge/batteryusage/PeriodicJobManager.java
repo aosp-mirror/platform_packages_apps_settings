@@ -26,8 +26,11 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.overlay.FeatureFactory;
 
+import java.text.SimpleDateFormat;
 import java.time.Clock;
 import java.time.Duration;
+import java.util.Date;
+import java.util.Locale;
 
 /** Manages the periodic job to schedule or cancel the next job. */
 public final class PeriodicJobManager {
@@ -38,6 +41,8 @@ public final class PeriodicJobManager {
 
     private final Context mContext;
     private final AlarmManager mAlarmManager;
+    private final SimpleDateFormat mSimpleDateFormat =
+            new SimpleDateFormat("MMM dd,yyyy HH:mm:ss", Locale.ENGLISH);
 
     @VisibleForTesting
     static final int DATA_FETCH_INTERVAL_MINUTE = 60;
@@ -64,6 +69,7 @@ public final class PeriodicJobManager {
     }
 
     /** Schedules the next alarm job if it is available. */
+    @SuppressWarnings("JavaUtilDate")
     public void refreshJob(final boolean fromBoot) {
         if (mAlarmManager == null) {
             Log.e(TAG, "cannot schedule next alarm job");
@@ -77,7 +83,7 @@ public final class PeriodicJobManager {
         mAlarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
         Log.d(TAG, "schedule next alarm job at "
-                + ConvertUtils.utcToLocalTimeForLogging(triggerAtMillis));
+                + mSimpleDateFormat.format(new Date(triggerAtMillis)));
     }
 
     void cancelJob(PendingIntent pendingIntent) {

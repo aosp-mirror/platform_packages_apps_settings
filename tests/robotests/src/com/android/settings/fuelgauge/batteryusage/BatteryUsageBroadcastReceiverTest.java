@@ -57,7 +57,6 @@ public final class BatteryUsageBroadcastReceiverTest {
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mBatteryUsageBroadcastReceiver = new BatteryUsageBroadcastReceiver();
         doReturn(mPackageManager).when(mContext).getPackageManager();
-        DatabaseUtils.getSharedPreferences(mContext).edit().clear().apply();
     }
 
     @Test
@@ -78,7 +77,6 @@ public final class BatteryUsageBroadcastReceiverTest {
                 new Intent(Intent.ACTION_BATTERY_LEVEL_CHANGED));
 
         assertThat(mBatteryUsageBroadcastReceiver.mFetchBatteryUsageData).isFalse();
-        assertSharedPreferences(Intent.ACTION_BATTERY_LEVEL_CHANGED);
     }
 
     @Test
@@ -96,7 +94,6 @@ public final class BatteryUsageBroadcastReceiverTest {
                 new Intent(Intent.ACTION_BATTERY_LEVEL_CHANGED));
 
         assertThat(mBatteryUsageBroadcastReceiver.mFetchBatteryUsageData).isFalse();
-        assertSharedPreferences(Intent.ACTION_BATTERY_LEVEL_CHANGED);
     }
 
     @Test
@@ -113,7 +110,6 @@ public final class BatteryUsageBroadcastReceiverTest {
                 new Intent(Intent.ACTION_BATTERY_LEVEL_CHANGED));
 
         assertThat(mBatteryUsageBroadcastReceiver.mFetchBatteryUsageData).isFalse();
-        assertSharedPreferences(Intent.ACTION_BATTERY_LEVEL_CHANGED);
     }
 
     @Test
@@ -130,7 +126,6 @@ public final class BatteryUsageBroadcastReceiverTest {
                 new Intent(Intent.ACTION_BATTERY_LEVEL_CHANGED));
 
         assertThat(mBatteryUsageBroadcastReceiver.mFetchBatteryUsageData).isTrue();
-        assertSharedPreferences(Intent.ACTION_BATTERY_LEVEL_CHANGED);
     }
 
     @Test
@@ -144,7 +139,6 @@ public final class BatteryUsageBroadcastReceiverTest {
                 new Intent(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING));
 
         assertThat(mBatteryUsageBroadcastReceiver.mFetchBatteryUsageData).isFalse();
-        assertSharedPreferences(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING);
     }
 
     @Test
@@ -162,7 +156,6 @@ public final class BatteryUsageBroadcastReceiverTest {
                 new Intent(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING));
 
         assertThat(mBatteryUsageBroadcastReceiver.mFetchBatteryUsageData).isFalse();
-        assertSharedPreferences(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING);
     }
 
     @Test
@@ -179,7 +172,6 @@ public final class BatteryUsageBroadcastReceiverTest {
                 new Intent(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING));
 
         assertThat(mBatteryUsageBroadcastReceiver.mFetchBatteryUsageData).isFalse();
-        assertSharedPreferences(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING);
     }
 
     @Test
@@ -196,7 +188,6 @@ public final class BatteryUsageBroadcastReceiverTest {
                 new Intent(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING));
 
         assertThat(mBatteryUsageBroadcastReceiver.mFetchBatteryUsageData).isTrue();
-        assertSharedPreferences(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING);
     }
 
     @Test
@@ -211,8 +202,6 @@ public final class BatteryUsageBroadcastReceiverTest {
                 new Intent(BatteryUsageBroadcastReceiver.ACTION_CLEAR_BATTERY_CACHE_DATA));
 
         assertThat(BatteryDiffEntry.sValidForRestriction).isEmpty();
-        assertSharedPreferences(
-                BatteryUsageBroadcastReceiver.ACTION_CLEAR_BATTERY_CACHE_DATA);
     }
 
     @Test
@@ -227,8 +216,6 @@ public final class BatteryUsageBroadcastReceiverTest {
                 new Intent(BatteryUsageBroadcastReceiver.ACTION_CLEAR_BATTERY_CACHE_DATA));
 
         assertThat(BatteryDiffEntry.sValidForRestriction).isNotEmpty();
-        assertSharedPreferences(
-                BatteryUsageBroadcastReceiver.ACTION_CLEAR_BATTERY_CACHE_DATA);
     }
 
     private static Intent getBatteryIntent(int level, int status) {
@@ -237,10 +224,5 @@ public final class BatteryUsageBroadcastReceiverTest {
         intent.putExtra(BatteryManager.EXTRA_SCALE, 100);
         intent.putExtra(BatteryManager.EXTRA_STATUS, status);
         return intent;
-    }
-
-    private void assertSharedPreferences(String preferenceKey) {
-        assertThat(DatabaseUtils.getSharedPreferences(mContext).contains(preferenceKey))
-                .isTrue();
     }
 }
