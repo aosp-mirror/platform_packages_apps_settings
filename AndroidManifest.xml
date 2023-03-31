@@ -3110,6 +3110,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.BATTERY_LEVEL_CHANGED"/>
                 <action android:name="com.android.settings.battery.action.CLEAR_BATTERY_CACHE_DATA"/>
+                <action android:name="com.android.settings.battery.action.ACTION_BATTERY_PLUGGING"/>
                 <action android:name="com.android.settings.battery.action.ACTION_BATTERY_UNPLUGGING"/>
             </intent-filter>
         </receiver>
