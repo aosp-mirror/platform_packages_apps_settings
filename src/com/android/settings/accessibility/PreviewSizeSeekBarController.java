@@ -28,6 +28,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.widget.LabeledSeekBarPreference;
+import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
@@ -52,11 +53,14 @@ abstract class PreviewSizeSeekBarController extends BasePreferenceController imp
     private AccessibilityQuickSettingsTooltipWindow mTooltipWindow;
     private final Handler mHandler;
 
+    private String[] mStateLabels = null;
 
     private final SeekBar.OnSeekBarChangeListener mSeekBarChangeListener =
             new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    setSeekbarStateDescription(progress);
+
                     if (mInteractionListener.isEmpty()) {
                         return;
                     }
@@ -141,6 +145,7 @@ abstract class PreviewSizeSeekBarController extends BasePreferenceController imp
         if (mNeedsQSTooltipReshow) {
             mHandler.post(this::showQuickSettingsTooltipIfNeeded);
         }
+        setSeekbarStateDescription(mSeekBarPreference.getProgress());
     }
 
     @Override
@@ -151,6 +156,34 @@ abstract class PreviewSizeSeekBarController extends BasePreferenceController imp
         // Immediately take the effect of updating the progress to avoid waiting for receiving
         // the event to delay update.
         mInteractionListener.ifPresent(ProgressInteractionListener::onProgressChanged);
+    }
+
+    /**
+     * Stores the String array we would like to use for describing the state of seekbar progress
+     * and updates the state description with current progress.
+     *
+     * @param labels The state descriptions to be announced for each progress.
+     */
+    public void setProgressStateLabels(String[] labels) {
+        mStateLabels = labels;
+        if (mStateLabels == null) {
+            return;
+        }
+        updateState(mSeekBarPreference);
+    }
+
+    /**
+     * Sets the state of seekbar based on current progress. The progress of seekbar is
+     * corresponding to the index of the string array. If the progress is larger than or equals
+     * to the length of the array, the state description is set to an empty string.
+     */
+    private void setSeekbarStateDescription(int index) {
+        if (mStateLabels == null) {
+            return;
+        }
+        mSeekBarPreference.setSeekBarStateDescription(
+                (index < mStateLabels.length)
+                        ? mStateLabels[index] : "");
     }
 
     private void onProgressFinalized() {
