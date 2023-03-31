@@ -325,6 +325,8 @@ public class FaceSettings extends DashboardFragment {
                 mFaceManager.revokeChallenge(mSensorId, mUserId, mChallenge);
                 mToken = null;
             }
+            // Let parent "Face & Fingerprint Unlock" can use this error code to close itself.
+            setResult(RESULT_TIMEOUT);
             finish();
         }
     }
