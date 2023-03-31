@@ -44,12 +44,6 @@ public class BluetoothLeAudioAllowListPreferenceController
     static final String LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY =
             "persist.bluetooth.leaudio.enable_allow_list";
 
-    private static final String LE_AUDIO_DYNAMIC_SWITCH_PROPERTY =
-            "ro.bluetooth.leaudio_switcher.supported";
-    @VisibleForTesting
-    static final String LE_AUDIO_DYNAMIC_ENABLED_PROPERTY =
-            "persist.bluetooth.leaudio_switcher.enabled";
-
     @VisibleForTesting
     BluetoothAdapter mBluetoothAdapter;
 
@@ -83,16 +77,9 @@ public class BluetoothLeAudioAllowListPreferenceController
             return;
         }
 
-        int leAudioSupportedState = mBluetoothAdapter.isLeAudioSupported();
-        boolean leAudioEnabled = false;
-
-        if ((leAudioSupportedState == BluetoothStatusCodes.FEATURE_SUPPORTED)
-                || (leAudioSupportedState == BluetoothStatusCodes.ERROR_BLUETOOTH_NOT_ENABLED
-                && SystemProperties.getBoolean(LE_AUDIO_DYNAMIC_SWITCH_PROPERTY, false)
-                && SystemProperties.getBoolean(LE_AUDIO_DYNAMIC_ENABLED_PROPERTY, false))) {
-            leAudioEnabled = true;
-        }
-
+        final int leAudioSupportedState = mBluetoothAdapter.isLeAudioSupported();
+        final boolean leAudioEnabled =
+                (leAudioSupportedState == BluetoothStatusCodes.FEATURE_SUPPORTED);
         final boolean leAudioAllowListSupport =
                 SystemProperties.getBoolean(LE_AUDIO_ALLOW_LIST_SWITCH_SUPPORT_PROPERTY, false);
 
