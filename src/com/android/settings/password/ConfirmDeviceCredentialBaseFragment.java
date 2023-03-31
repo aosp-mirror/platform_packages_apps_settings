@@ -17,6 +17,7 @@
 // TODO (b/35202196): move this class out of the root of the package.
 package com.android.settings.password;
 
+import static android.app.Activity.RESULT_FIRST_USER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LOCK_ATTEMPTS_FAILED;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
@@ -24,7 +25,6 @@ import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import android.annotation.Nullable;
 import android.app.Dialog;
 import android.app.KeyguardManager;
-import android.app.RemoteLockscreenValidationResult;
 import android.app.RemoteLockscreenValidationSession;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.ManagedSubscriptionsPolicy;
@@ -38,7 +38,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.service.remotelockscreenvalidation.IRemoteLockscreenValidationCallback;
 import android.service.remotelockscreenvalidation.RemoteLockscreenValidationClient;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
@@ -55,14 +54,11 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
-import com.android.security.SecureBox;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.PublicKey;
+import com.google.android.setupdesign.GlifLayout;
 
 /**
  * Base fragment to be shared for PIN/Pattern/Password confirmation fragments.
@@ -89,9 +85,13 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     /** Time we wait before clearing a wrong input attempt (e.g. pattern) and the error message. */
     protected static final long CLEAR_WRONG_ATTEMPT_TIMEOUT_MS = 3000;
 
+    protected static final String FRAGMENT_TAG_REMOTE_LOCKSCREEN_VALIDATION =
+            "remote_lockscreen_validation";
+
     protected boolean mReturnCredentials = false;
     protected boolean mReturnGatekeeperPassword = false;
     protected boolean mForceVerifyPath = false;
+    protected GlifLayout mGlifLayout;
     protected CheckBox mCheckBox;
     protected Button mCancelButton;
     /** Button allowing managed profile password reset, null when is not shown. */
@@ -109,8 +109,8 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     protected BiometricManager mBiometricManager;
     @Nullable protected RemoteLockscreenValidationSession mRemoteLockscreenValidationSession;
     /** Credential saved so the credential can be set for device if remote validation passes */
-    @Nullable protected LockscreenCredential mDeviceCredentialGuess;
     @Nullable protected RemoteLockscreenValidationClient mRemoteLockscreenValidationClient;
+    protected RemoteLockscreenValidationFragment mRemoteLockscreenValidationFragment;
 
     private boolean isInternalActivity() {
         return (getActivity() instanceof ConfirmLockPassword.InternalActivity)
@@ -136,8 +136,8 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
                     FeatureFlagUtils.SETTINGS_REMOTE_DEVICE_CREDENTIAL_VALIDATION)) {
                 mRemoteValidation = true;
             } else {
-                Log.e(TAG, "Remote device credential validation not enabled.");
-                getActivity().finish();
+                onRemoteLockscreenValidationFailure(
+                        "Remote lockscreen validation not enabled.");
             }
         }
         if (mRemoteValidation) {
@@ -146,23 +146,31 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
                     RemoteLockscreenValidationSession.class);
             if (mRemoteLockscreenValidationSession == null
                     || mRemoteLockscreenValidationSession.getRemainingAttempts() == 0) {
-                Log.e(TAG, "RemoteLockscreenValidationSession is null or "
+                onRemoteLockscreenValidationFailure("RemoteLockscreenValidationSession is null or "
                         + "no more attempts for remote lockscreen validation.");
-                getActivity().finish();
             }
 
             ComponentName remoteLockscreenValidationServiceComponent =
                     intent.getParcelableExtra(Intent.EXTRA_COMPONENT_NAME, ComponentName.class);
             if (remoteLockscreenValidationServiceComponent == null) {
-                Log.e(TAG, "RemoteLockscreenValidationService ComponentName is null");
-                getActivity().finish();
+                onRemoteLockscreenValidationFailure(
+                        "RemoteLockscreenValidationService ComponentName is null");
             }
             mRemoteLockscreenValidationClient = RemoteLockscreenValidationClient
                     .create(getContext(), remoteLockscreenValidationServiceComponent);
             if (!mRemoteLockscreenValidationClient.isServiceAvailable()) {
-                Log.e(TAG, String.format("RemoteLockscreenValidationService at %s is not available",
+                onRemoteLockscreenValidationFailure(String.format(
+                        "RemoteLockscreenValidationService at %s is not available",
                         remoteLockscreenValidationServiceComponent.getClassName()));
-                getActivity().finish();
+            }
+
+            mRemoteLockscreenValidationFragment =
+                    (RemoteLockscreenValidationFragment) getFragmentManager()
+                            .findFragmentByTag(FRAGMENT_TAG_REMOTE_LOCKSCREEN_VALIDATION);
+            if (mRemoteLockscreenValidationFragment == null) {
+                mRemoteLockscreenValidationFragment = new RemoteLockscreenValidationFragment();
+                getFragmentManager().beginTransaction().add(mRemoteLockscreenValidationFragment,
+                        FRAGMENT_TAG_REMOTE_LOCKSCREEN_VALIDATION).commit();
             }
         }
 
@@ -194,8 +202,10 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         mCancelButton.setOnClickListener(v -> {
             if (hasAlternateButton) {
                 getActivity().setResult(KeyguardManager.RESULT_ALTERNATE);
+                getActivity().finish();
+            } else if (mRemoteValidation) {
+                onRemoteLockscreenValidationFailure("Forgot lockscreen credential button pressed.");
             }
-            getActivity().finish();
         });
         setupForgotButtonIfManagedProfile(view);
 
@@ -299,16 +309,10 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         if (mRemoteLockscreenValidationClient != null) {
             mRemoteLockscreenValidationClient.disconnect();
         }
-        if (mDeviceCredentialGuess != null) {
-            mDeviceCredentialGuess.zeroize();
-        }
         super.onDestroy();
     }
 
     protected abstract void authenticationSucceeded();
-
-    protected abstract void onRemoteDeviceCredentialValidationResult(
-            RemoteLockscreenValidationResult result);
 
     public void prepareEnterAnimation() {
     }
@@ -411,43 +415,33 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     }
 
     protected void validateGuess(LockscreenCredential credentialGuess) {
-        if (mCheckBox.isChecked()) {
-            // Keep credential in memory since user wants to set guess as screen lock.
-            mDeviceCredentialGuess = credentialGuess;
-        } else if (mDeviceCredentialGuess != null) {
-            mDeviceCredentialGuess.zeroize();
-        }
-
-        mRemoteLockscreenValidationClient.validateLockscreenGuess(
-                encryptDeviceCredentialGuess(credentialGuess.getCredential()),
-                new IRemoteLockscreenValidationCallback.Stub() {
-                    @Override
-                    public void onSuccess(RemoteLockscreenValidationResult result) {
-                        mHandler.post(()->onRemoteDeviceCredentialValidationResult(result));
-                    }
-
-                    @Override
-                    public void onFailure(String message) {
-                        Log.e(TAG, "A failure occurred while trying "
-                                + "to validate lockscreen guess: " + message);
-                        mHandler.post(()->getActivity().finish());
-                    }
-                });
+        mRemoteLockscreenValidationFragment.validateLockscreenGuess(
+                mRemoteLockscreenValidationClient, credentialGuess,
+                mRemoteLockscreenValidationSession.getSourcePublicKey(), mCheckBox.isChecked());
     }
 
-    private byte[] encryptDeviceCredentialGuess(byte[] guess) {
-        try {
-            byte[] encodedPublicKey = mRemoteLockscreenValidationSession.getSourcePublicKey();
-            PublicKey publicKey = SecureBox.decodePublicKey(encodedPublicKey);
-            return SecureBox.encrypt(
-                    publicKey,
-                    /* sharedSecret= */ null,
-                    LockPatternUtils.ENCRYPTED_REMOTE_CREDENTIALS_HEADER,
-                    guess);
-        } catch (NoSuchAlgorithmException | InvalidKeyException e) {
-            Log.w(TAG, "Error encrypting device credential guess. Returning empty byte[].", e);
-            return new byte[0];
+    protected void updateRemoteLockscreenValidationViews() {
+        if (!mRemoteValidation || mRemoteLockscreenValidationFragment == null) {
+            return;
         }
+
+        boolean enable = mRemoteLockscreenValidationFragment.isRemoteValidationInProgress();
+        mGlifLayout.setProgressBarShown(enable);
+        mCheckBox.setEnabled(!enable);
+        mCancelButton.setEnabled(!enable);
+    }
+
+    /**
+     * Finishes the activity with result code {@link android.app.Activity#RESULT_FIRST_USER}
+     * after logging the error message.
+     * @param message Optional message to log.
+     */
+    public void onRemoteLockscreenValidationFailure(String message) {
+        if (!TextUtils.isEmpty(message)) {
+            Log.w(TAG, message);
+        }
+        getActivity().setResult(RESULT_FIRST_USER);
+        getActivity().finish();
     }
 
     protected abstract void onShowError();
