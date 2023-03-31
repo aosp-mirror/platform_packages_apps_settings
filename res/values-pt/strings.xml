@@ -63,12 +63,9 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Seu aparelho auditivo direito está conectado.\n\nPara parear o esquerdo, confira se ele está ligado e pronto para parear."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Parear lado direito"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Parear lado esquerdo"</string>
-    <!-- no translation found for bluetooth_device_controls_general (1399214835599665488) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_controls_title (4293399064818086587) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_controls_specific (7706863288754077107) -->
-    <skip />
+    <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Para todos os aparelhos auditivos disponíveis"</string>
+    <string name="bluetooth_device_controls_title" msgid="4293399064818086587">"Atalhos e compatibilidade com aparelhos auditivos"</string>
+    <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Para este aparelho"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Saída de áudio"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Sobre a saída de áudio"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Encaminhe sons para seu aparelho auditivo ou o alto-falante do smartphone"</string>
@@ -165,7 +162,7 @@
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Apenas apps que têm suporte à seleção de idioma são mostrados aqui."</string>
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"O sistema, os apps e os sites usam o primeiro idioma com suporte na sua lista de idiomas preferenciais."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Para selecionar um idioma para cada app, acesse as configurações de idioma deles."</string>
-    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Saiba mais sobre os idiomas"</string>
+    <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Saiba mais sobre idiomas de apps"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Mudar idioma do sistema para o %s?"</string>
     <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"As configurações e as preferências regionais do seu dispositivo vão mudar."</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Mudar"</string>
@@ -879,10 +876,38 @@
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Ajuda outros dispositivos a encontrarem esse ponto de acesso. A velocidade da conexão do ponto de acesso é reduzida."</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Ajuda outros dispositivos a encontrarem esse ponto de acesso. Maior uso da bateria."</string>
     <string name="wifi_hotspot_speed_title" msgid="8629448084180512685">"Velocidade e compatibilidade"</string>
-    <string name="wifi_hotspot_speed_2g_summary" msgid="6727230647098551051">"2,4 GHz / Qualquer dispositivo pode se conectar"</string>
-    <string name="wifi_hotspot_speed_5g_summary" msgid="5009644494425227175">"5 GHz / A maioria dos dispositivos pode se conectar"</string>
-    <string name="wifi_hotspot_speed_6g_summary" msgid="1504496768686645945">"6 GHz / Poucos dispositivos podem se conectar"</string>
-    <string name="wifi_hotspot_speed_2g_and_5g_summary" msgid="2392283008301109037">"2,4 e 5 GHz / Qualquer dispositivo pode se conectar"</string>
+    <!-- no translation found for wifi_hotspot_speed_summary_2g (2280013579858833466) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_summary_5g (8006841294118040080) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_summary_6g (5398769134180715191) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_5g (6471272988396018113) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_intro (6973482196363758925) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_category (5265655850463630286) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g (3400600834257664480) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_summary (2737911775799813597) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_5g (4058116867148848395) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_5g_summary (8979160165280825325) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_5g (9192756255938408285) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_5g_summary (2901777498770191018) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_6g (3787697484862730500) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_6g_summary (1170553321510689693) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_summary_unavailable (7276080644693388756) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_footer (8846939503916795002) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Ativando o ponto de acesso..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Desativando o ponto de acesso..."</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Tethering indisponível"</string>
@@ -1679,7 +1704,8 @@
     <string name="modifier_keys_reset_message" msgid="5236994817619936058">"Tem certeza de que quer redefinir todas as teclas modificadoras para o padrão?"</string>
     <string name="modifier_keys_done" msgid="8196199314913909700">"Concluído"</string>
     <string name="modifier_keys_cancel" msgid="7136520252570826772">"Cancelar"</string>
-    <string name="modifier_keys_restore" msgid="7627661630556839268">"Restaurar"</string>
+    <!-- no translation found for modifier_keys_reset (551170906710422041) -->
+    <skip />
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Escolher a tecla modificadora"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Escolha uma nova tecla para <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Padrão"</string>
@@ -1945,6 +1971,8 @@
     <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"Também é possível adicionar o recurso Mais escuro às Configurações rápidas na parte de cima da tela"</string>
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"O modo para uma mão foi adicionado às Configurações rápidas. Deslize para baixo para ativar ou desativar a qualquer momento."</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"Também é possível adicionar o modo para uma mão às Configurações rápidas na parte de cima da tela"</string>
+    <!-- no translation found for accessibility_font_scaling_auto_added_qs_tooltip_content (7229921960884718332) -->
+    <skip />
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Dispensar"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Usar correção de cor"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Atalho para correção de cor"</string>
@@ -2222,7 +2250,7 @@
     <string name="battery_detail_since_full_charge" msgid="5650946565524184582">"Detalhamento desde a última carga completa"</string>
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Última carga completa"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"A carga completa dura cerca de"</string>
-    <string name="battery_footer_summary" msgid="8221691063048377342">"Os dados de uso da bateria são aproximados e podem mudar conforme o uso."</string>
+    <string name="battery_footer_summary" msgid="6753248007004259000">"A duração restante da bateria é aproximada e pode mudar de acordo com o uso"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Uso da bateria"</string>
     <string name="battery_not_usage" msgid="3851536644733662392">"Não houve uso desde a última carga completa"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Sem uso nas últimas 24h"</string>
@@ -3131,7 +3159,7 @@
     <string name="notification_pulse_title" msgid="8013178454646671529">"Piscar a luz"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"Privacidade"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Pular tela de bloqueio"</string>
-    <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Após desbloquear, a última tela usada será exibida"</string>
+    <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"Após o desbloqueio, a última tela usada será mostrada. As notificações não vão aparecer na tela de bloqueio. Deslize de cima para baixo para conferir."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Bloquear tela, tela de bloqueio, pular, ignorar"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Quando o perfil de trabalho está bloqueado"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Mostrar somente notificações novas na tela de bloqueio"</string>
@@ -4040,12 +4068,9 @@
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Você precisa confiar nesse app&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=O Preenchimento automático do Google&gt;%1$s&lt;/xliff:g&gt; usa o que está na sua tela para determinar o que pode ser preenchido automaticamente."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Desativar %1$s?"</string>
     <string name="credman_confirmation_message" msgid="3499478570809427026">"Informações salvas, como endereços ou formas de pagamento, não vão ser preenchidas quando você fizer login. Para mudar essa configuração, ative uma senha, uma chave de acesso e/ou serviços de dados."</string>
-    <!-- no translation found for credman_enable_confirmation_message_title (3722566298090698004) -->
-    <skip />
-    <!-- no translation found for credman_enable_confirmation_message (4466773747277583461) -->
-    <skip />
-    <!-- no translation found for credman_enable_confirmation_message_positive_button (3479082692924433102) -->
-    <skip />
+    <string name="credman_enable_confirmation_message_title" msgid="3722566298090698004">"Ativar %1$s?"</string>
+    <string name="credman_enable_confirmation_message" msgid="4466773747277583461">"As informações salvas, como endereços ou formas de pagamento, serão compartilhadas com esse provedor."</string>
+    <string name="credman_enable_confirmation_message_positive_button" msgid="3479082692924433102">"Ativar"</string>
     <string name="credman_error_message_title" msgid="4741457523969373713">"Limite de senhas, chaves de acesso e serviços de dados"</string>
     <string name="credman_error_message" msgid="6793314648458925172">"É possível ter até cinco senhas, chaves de acesso e serviços de dados ao mesmo tempo. Desative um para adicionar outro."</string>
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Desativar"</string>
@@ -4647,6 +4672,8 @@
     <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Ativado / Flash da tela"</string>
     <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Ativado / Flash da câmera e da tela"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Pisca a luz da câmera ou a tela ao receber notificações ou soar alarmes"</string>
+    <!-- no translation found for flash_notifications_intro_without_camera_flash (6297337174487793891) -->
+    <skip />
     <string name="flash_notifications_note" msgid="2426125248448055075">"Tenha cuidado com as notificações com flash se você tiver sensibilidade à luz"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"Visualizar"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"Flash da câmera"</string>

@@ -63,12 +63,9 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Eskuineko audifonoa konektatuta dago.\n\nEzkerrekoa parekatzeko, ziurtatu piztuta eta parekatzeko prest dagoela."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Parekatu eskuineko audifonoa"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Parekatu ezkerreko audifonoa"</string>
-    <!-- no translation found for bluetooth_device_controls_general (1399214835599665488) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_controls_title (4293399064818086587) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_controls_specific (7706863288754077107) -->
-    <skip />
+    <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Audifono erabilgarri guztietarako"</string>
+    <string name="bluetooth_device_controls_title" msgid="4293399064818086587">"Lasterbideak eta audifonoekiko bateragarritasuna"</string>
+    <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Gailu honetarako"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Audio-irteera"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Audio-irteerari buruz"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Bideratu soinuak audifonora edo telefonoaren bozgorailura"</string>
@@ -165,7 +162,7 @@
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Hizkuntza hautatzeko aukera duten aplikazioak soilik agertzen dira hemen."</string>
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Sistemak, aplikazioek eta webguneek hizkuntza hobetsien zerrendako lehen hizkuntza bateragarria erabiltzen dute."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Aplikazio bakoitzerako hizkuntza bat hautatzeko, joan aplikazioaren hizkuntza-ezarpenetara."</string>
-    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Lortu hizkuntzei buruzko informazio gehiago"</string>
+    <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Lortu aplikazioen hizkuntzei buruzko informazio gehiago"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Sistemaren hizkuntza aldatu nahi duzu, eta %s ezarri?"</string>
     <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Gailuaren ezarpenak eta lurraldeko hobespenak aldatuko dira."</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Aldatu"</string>
@@ -353,7 +350,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Emaitza onenak lortzeko, erabili Made for Google ziurtagiria duen pantaila babesteko osagarri bat. Besterik erabiliz gero, baliteke hatz-markak ez funtzionatzea."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Emaitza onenak lortzeko, erabili Made for Google ziurtagiria duen pantaila babesteko osagarri bat. Besterik erabiliz gero, baliteke haurraren hatz-markak ez funtzionatzea."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
-    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Erlojuaren bidez telefonoa desblokeatzea"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Erloju bidez desblokeatzea"</string>
     <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Aurpegi eta hatz-marka bidez desblokeatzeko eginbideak konfiguratzen badituzu, telefonoak hatz-marka eskatuko dizu inoiz maskara bat jantzita edo argi gutxirekin telefonoa aurpegiaren bidez desblokeatzen saiatuz gero.\n\nAurpegia edo hatz-marka ezagutzen ez bada, erlojuaren bidez desblokea dezakezu telefonoa."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Hatz-marka ezagutzen ez bada, erlojuaren bidez desblokea dezakezu telefonoa."</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Aurpegia ezagutzen ez bada, erlojuaren bidez desblokea dezakezu telefonoa."</string>
@@ -879,10 +876,38 @@
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Wifi-gune hau aurkitzen laguntzen die beste gailuei. Wifi-gunearen konexio-abiadura murrizten du."</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Wifi-gune hau aurkitzen laguntzen die beste gailuei. Bateria-erabilera areagotzen du."</string>
     <string name="wifi_hotspot_speed_title" msgid="8629448084180512685">"Abiadura eta bateragarritasuna"</string>
-    <string name="wifi_hotspot_speed_2g_summary" msgid="6727230647098551051">"2,4 GHz / Edozein gailu konekta daiteke"</string>
-    <string name="wifi_hotspot_speed_5g_summary" msgid="5009644494425227175">"5 GHz / Gailu gehienak konekta daitezke"</string>
-    <string name="wifi_hotspot_speed_6g_summary" msgid="1504496768686645945">"6 GHz / Gailu gutxi batzuk konekta daitezke"</string>
-    <string name="wifi_hotspot_speed_2g_and_5g_summary" msgid="2392283008301109037">"2,4 eta 5 GHz / Edozein gailu konekta daiteke"</string>
+    <!-- no translation found for wifi_hotspot_speed_summary_2g (2280013579858833466) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_summary_5g (8006841294118040080) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_summary_6g (5398769134180715191) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_5g (6471272988396018113) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_intro (6973482196363758925) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_category (5265655850463630286) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g (3400600834257664480) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_summary (2737911775799813597) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_5g (4058116867148848395) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_5g_summary (8979160165280825325) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_5g (9192756255938408285) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_2g_5g_summary (2901777498770191018) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_6g (3787697484862730500) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_6g_summary (1170553321510689693) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_summary_unavailable (7276080644693388756) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_footer (8846939503916795002) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Wifi-gunea aktibatzen…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Wifi-gunea desaktibatzen…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Ez dago erabilgarri konexioa partekatzeko aukera"</string>
@@ -1679,7 +1704,8 @@
     <string name="modifier_keys_reset_message" msgid="5236994817619936058">"Ziur tekla aldatzaile guztien balio lehenetsiak berrezarri nahi dituzula?"</string>
     <string name="modifier_keys_done" msgid="8196199314913909700">"Eginda"</string>
     <string name="modifier_keys_cancel" msgid="7136520252570826772">"Utzi"</string>
-    <string name="modifier_keys_restore" msgid="7627661630556839268">"Leheneratu"</string>
+    <!-- no translation found for modifier_keys_reset (551170906710422041) -->
+    <skip />
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Aukeratu tekla aldatzailea"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Aukeratu <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> teklarako beste tekla bat:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Lehenetsia"</string>
@@ -1945,6 +1971,8 @@
     <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"Pantailaren goialdetik ere gehi dezakezu Are ilunago Ezarpen bizkorrak menuan"</string>
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"Gehitu da esku bakarreko modua Ezarpen bizkorrak menuan. Eginbide hori aktibatu edo desaktibatzeko, pasatu hatza behera."</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"Pantailaren goialdetik ere gehi dezakezu esku bakarreko modua Ezarpen bizkorrak menuan"</string>
+    <!-- no translation found for accessibility_font_scaling_auto_added_qs_tooltip_content (7229921960884718332) -->
+    <skip />
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Baztertu"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Erabili koloreen zuzenketa"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Kolorea zuzentzeko lasterbidea"</string>
@@ -2222,7 +2250,7 @@
     <string name="battery_detail_since_full_charge" msgid="5650946565524184582">"Guztiz kargatu zenetik izandako erabilera-datuak"</string>
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Guztiz kargatu zen azken aldia"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"Bateria osoaren iraupena, gutxi gorabehera"</string>
-    <string name="battery_footer_summary" msgid="8221691063048377342">"Bateria-erabileraren datuak gutxi gorabeherakoak dira, eta baliteke erabileraren arabera aldatzea"</string>
+    <string name="battery_footer_summary" msgid="6753248007004259000">"Gelditzen den bateriari buruzko informazioa gutxi gorabeherakoa da, eta baliteke erabileraren arabera aldatzea"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Bateria-erabilera"</string>
     <string name="battery_not_usage" msgid="3851536644733662392">"Erabilerarik ez bateria guztiz kargatu zenetik"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Erabilerarik ez azken 24 orduetan"</string>
@@ -3131,7 +3159,7 @@
     <string name="notification_pulse_title" msgid="8013178454646671529">"Argi keinukaria"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"Pribatutasuna"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Saltatu pantaila blokeatua"</string>
-    <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Desblokeatu ondoren, joan zuzenean erabilitako azken pantailara"</string>
+    <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"Desblokeatu ondoren, joan zuzenean erabilitako azken pantailara. Jakinarazpenak ez dira agertuko pantaila blokeatuan. Haiek ikusteko, pasatu hatza pantailaren goialdetik behera."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"pantaila blokeatua, blokeo pantaila, saltatu, zeharbidea"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Laneko profila blokeatu bada"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Erakutsi jakinarazpen berriak soilik pantaila blokeatuan"</string>
@@ -4040,12 +4068,9 @@
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Ziurtatu aplikazioa fidagarria dela&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; aplikazioak pantailan dagoena erabiltzen du automatikoki bete daitekeena zehazteko."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s desaktibatu nahi duzu?"</string>
     <string name="credman_confirmation_message" msgid="3499478570809427026">"Eremuak ez dira beteko gordetako informazioarekin (adibidez, helbideak edo ordainketa-metodoak) saioa hasten duzunean. Eremuak gordetako informazioarekin betetzeko, ezarri pasahitz bat, sarbide-gako bat edo datu-zerbitzu bat."</string>
-    <!-- no translation found for credman_enable_confirmation_message_title (3722566298090698004) -->
-    <skip />
-    <!-- no translation found for credman_enable_confirmation_message (4466773747277583461) -->
-    <skip />
-    <!-- no translation found for credman_enable_confirmation_message_positive_button (3479082692924433102) -->
-    <skip />
+    <string name="credman_enable_confirmation_message_title" msgid="3722566298090698004">"%1$s aktibatu nahi duzu?"</string>
+    <string name="credman_enable_confirmation_message" msgid="4466773747277583461">"Gordetako informazioa (adibidez, helbideak edo ordainketa-metodoak) hornitzaile honekin partekatuko dira."</string>
+    <string name="credman_enable_confirmation_message_positive_button" msgid="3479082692924433102">"Aktibatu"</string>
     <string name="credman_error_message_title" msgid="4741457523969373713">"Pasahitzen, sarbide-gakoen eta datu-zerbitzuen muga"</string>
     <string name="credman_error_message" msgid="6793314648458925172">"Gehienez ere bost pasahitz, sarbide-gako eta datu-zerbitzu aktibo eduki ditzakezu aktibo aldi berean. Desaktibatu zerbitzu bat beste bat gehitzeko."</string>
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Desaktibatu"</string>
@@ -4647,6 +4672,8 @@
     <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Aktibatuta / Pantailaren flasha"</string>
     <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Aktibatuta / Kameraren eta pantailaren flasha"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Jakinarazpenak jasotzean edo alarmek jotzean, kameraren flasha piztuko da, edo pantaila argituko"</string>
+    <!-- no translation found for flash_notifications_intro_without_camera_flash (6297337174487793891) -->
+    <skip />
     <string name="flash_notifications_note" msgid="2426125248448055075">"Argirako sentibera bazara, erabili kontuz flasharen bidezko jakinarazpenak"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"Aurreikusi"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"Kameraren flasha"</string>
