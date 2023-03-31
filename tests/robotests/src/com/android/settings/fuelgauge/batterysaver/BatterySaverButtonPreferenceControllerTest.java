@@ -26,7 +26,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.PowerManager;
-import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
 
 import androidx.preference.PreferenceScreen;
@@ -70,24 +69,6 @@ public class BatterySaverButtonPreferenceControllerTest {
     public void getSliceUri_shouldUsePlatformAuthority() {
         assertThat(mController.getSliceUri().getAuthority())
                 .isEqualTo(SettingsSlicesContract.AUTHORITY);
-    }
-
-    @Test
-    public void onSwitchChanged_isCheckedButNotAcked_preferenceIsUnchecked() {
-        setLowPowerWarningAcked(/* acked= */ 0);
-
-        mController.onSwitchChanged(/* switchView= */ null, /* isChecked= */ true);
-
-        assertThat(mPreference.isChecked()).isFalse();
-    }
-
-    @Test
-    public void onSwitchChanged_isCheckedAndAcked_setPowerSaveMode() {
-        setLowPowerWarningAcked(/* acked= */ 1);
-
-        mController.onSwitchChanged(/* switchView= */ null, /* isChecked= */ true);
-
-        verify(mPowerManager).setPowerSaveModeEnabled(true);
     }
 
     @Test
@@ -139,17 +120,5 @@ public class BatterySaverButtonPreferenceControllerTest {
     @Test
     public void isPublicSlice_returnsTrue() {
         assertThat(mController.isPublicSlice()).isTrue();
-    }
-
-    // 0 means not acked, 1 means acked.
-    private void setLowPowerWarningAcked(int acked) {
-        Settings.Secure.putInt(
-                mContext.getContentResolver(),
-                Settings.Secure.LOW_POWER_WARNING_ACKNOWLEDGED,
-                acked);
-        Settings.Secure.putInt(
-                mContext.getContentResolver(),
-                Settings.Secure.EXTRA_LOW_POWER_WARNING_ACKNOWLEDGED,
-                acked);
     }
 }
