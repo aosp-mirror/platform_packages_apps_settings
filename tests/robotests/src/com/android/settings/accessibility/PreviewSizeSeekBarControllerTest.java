@@ -43,6 +43,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settings.widget.LabeledSeekBarPreference;
+import com.android.settings.widget.SeekBarPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -75,6 +76,7 @@ public class PreviewSizeSeekBarControllerTest {
     private PreferenceViewHolder mHolder;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceManager mPreferenceManager;
+    private SeekBar mSeekBar;
 
     @Mock
     private PreviewSizeSeekBarController.ProgressInteractionListener mInteractionListener;
@@ -101,8 +103,10 @@ public class PreviewSizeSeekBarControllerTest {
         mSeekBarPreference.setKey(FONT_SIZE_KEY);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        mHolder = PreferenceViewHolder.createInstanceForTests(inflater.inflate(
-                R.layout.preference_labeled_slider, null));
+        mHolder = spy(PreferenceViewHolder.createInstanceForTests(inflater.inflate(
+                R.layout.preference_labeled_slider, null)));
+        mSeekBar = spy(new SeekBar(mContext));
+        doReturn(mSeekBar).when(mHolder).findViewById(com.android.internal.R.id.seekbar);
         mSeekBarPreference.onBindViewHolder(mHolder);
 
         when(mPreferenceScreen.findPreference(anyString())).thenReturn(mSeekBarPreference);
@@ -222,6 +226,22 @@ public class PreviewSizeSeekBarControllerTest {
         mSeekBarController.displayPreference(mPreferenceScreen);
 
         assertThat(getLatestPopupWindow().isShowing()).isTrue();
+    }
+
+    @Test
+    public void onProgressChanged_setCorrespondingCustomizedStateDescription() {
+        String[] stateLabels = new String[]{"1", "2", "3", "4", "5"};
+        mSeekBarController.setProgressStateLabels(stateLabels);
+        mSeekBarController.displayPreference(mPreferenceScreen);
+
+        int progress = 3;
+        mSeekBarPreference.setProgress(progress);
+        mSeekBarPreference.onProgressChanged(mSeekBar,
+                progress,
+                /* fromUser= */ false);
+
+        verify(mSeekBarPreference).setSeekBarStateDescription(stateLabels[progress]);
+        assertThat(mSeekBar.getStateDescription().toString()).isEqualTo(stateLabels[progress]);
     }
 
     private static class TestFragment extends SettingsPreferenceFragment {

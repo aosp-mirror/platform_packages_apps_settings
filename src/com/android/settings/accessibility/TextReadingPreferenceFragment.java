@@ -170,6 +170,15 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
                         R.string.accessibility_font_scaling_auto_added_qs_tooltip_content);
             }
         };
+        final String[] labelArray = new String[fontSizeData.getValues().size()];
+        for (int i = 0; i < labelArray.length; i++) {
+            labelArray[i] =
+                    context.getResources().getString(
+                            com.android.settingslib.R.string.font_scale_percentage,
+                            (int) (fontSizeData.getValues().get(i) * 100)
+                    );
+        }
+        fontSizeController.setProgressStateLabels(labelArray);
         fontSizeController.setInteractionListener(mPreviewController);
         getSettingsLifecycle().addObserver(fontSizeController);
         controllers.add(fontSizeController);
