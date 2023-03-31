@@ -250,7 +250,7 @@ public final class DataProcessorTest {
 
         final Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>> periodMap =
                 DataProcessor.generateAppUsagePeriodMap(
-                        14400000L, hourlyBatteryLevelsPerDay, appUsageEventList);
+                        14400000L, hourlyBatteryLevelsPerDay, appUsageEventList, new ArrayList<>());
 
         assertThat(periodMap).hasSize(3);
         // Day 1
@@ -288,7 +288,7 @@ public final class DataProcessorTest {
         hourlyBatteryLevelsPerDay.add(
                 new BatteryLevelData.PeriodBatteryLevelData(new ArrayList<>(), new ArrayList<>()));
         assertThat(DataProcessor.generateAppUsagePeriodMap(
-                0L, hourlyBatteryLevelsPerDay, new ArrayList<>())).isNull();
+                0L, hourlyBatteryLevelsPerDay, new ArrayList<>(), new ArrayList<>())).isNull();
     }
 
     @Test
@@ -1669,7 +1669,8 @@ public final class DataProcessorTest {
                 /*instanceId=*/ 4, packageName2));
 
         final Map<Long, Map<String, List<AppUsagePeriod>>> appUsagePeriodMap =
-                DataProcessor.buildAppUsagePeriodList(appUsageEvents, 0, 5);
+                DataProcessor.buildAppUsagePeriodList(
+                        appUsageEvents, new ArrayList<>(), 0, 5);
 
         assertThat(appUsagePeriodMap).hasSize(2);
         final Map<String, List<AppUsagePeriod>> userMap1 = appUsagePeriodMap.get(1L);
@@ -1693,7 +1694,7 @@ public final class DataProcessorTest {
     @Test
     public void buildAppUsagePeriodList_emptyEventList_returnNull() {
         assertThat(DataProcessor.buildAppUsagePeriodList(
-                new ArrayList<>(), 0, 1)).isNull();
+                new ArrayList<>(), new ArrayList<>(), 0, 1)).isNull();
     }
 
     @Test
@@ -1705,7 +1706,7 @@ public final class DataProcessorTest {
                 AppUsageEventType.DEVICE_SHUTDOWN, /*timestamp=*/ 2));
 
         assertThat(DataProcessor.buildAppUsagePeriodList(
-                appUsageEvents, 0, 3)).isNull();
+                appUsageEvents, new ArrayList<>(), 0, 3)).isNull();
     }
 
     @Test
@@ -1763,6 +1764,89 @@ public final class DataProcessorTest {
         assertAppUsagePeriod(appUsagePeriodList.get(4), 700000, 730000);
         assertAppUsagePeriod(appUsagePeriodList.get(5), 900000, 910000);
         assertAppUsagePeriod(appUsagePeriodList.get(6), 1000000, 1100000);
+    }
+
+    @Test
+    public void excludePowerConnectedTime_startEndNotCharging_returnExpectedResult() {
+        final List<AppUsagePeriod> appUsagePeriodList = List.of(
+                AppUsagePeriod.newBuilder().setStartTime(100).setEndTime(200).build());
+        final List<BatteryEvent> batteryEventList = List.of(
+                BatteryEvent.newBuilder().setTimestamp(50).setType(
+                        BatteryEventType.POWER_DISCONNECTED).build(),
+                BatteryEvent.newBuilder().setTimestamp(166).setType(
+                        BatteryEventType.POWER_CONNECTED).build(),
+                BatteryEvent.newBuilder().setTimestamp(188).setType(
+                        BatteryEventType.POWER_DISCONNECTED).build(),
+                BatteryEvent.newBuilder().setTimestamp(280).setType(
+                        BatteryEventType.POWER_CONNECTED).build());
+
+        final List<AppUsagePeriod> resultList =
+                DataProcessor.excludePowerConnectedTimeFromAppUsagePeriodList(
+                        appUsagePeriodList, batteryEventList);
+
+        assertThat(resultList).hasSize(2);
+        assertAppUsagePeriod(resultList.get(0), 100, 166);
+        assertAppUsagePeriod(resultList.get(1), 188, 200);
+    }
+
+    @Test
+    public void excludePowerConnectedTime_startEndInCharging_returnExpectedResult() {
+        final List<AppUsagePeriod> appUsagePeriodList = List.of(
+                AppUsagePeriod.newBuilder().setStartTime(100).setEndTime(200).build());
+        final List<BatteryEvent> batteryEventList = List.of(
+                BatteryEvent.newBuilder().setTimestamp(50).setType(
+                        BatteryEventType.POWER_DISCONNECTED).build(),
+                BatteryEvent.newBuilder().setTimestamp(80).setType(
+                        BatteryEventType.POWER_CONNECTED).build(),
+                BatteryEvent.newBuilder().setTimestamp(120).setType(
+                        BatteryEventType.POWER_DISCONNECTED).build(),
+                BatteryEvent.newBuilder().setTimestamp(150).setType(
+                        BatteryEventType.POWER_CONNECTED).build(),
+                BatteryEvent.newBuilder().setTimestamp(160).setType(
+                        BatteryEventType.POWER_DISCONNECTED).build(),
+                BatteryEvent.newBuilder().setTimestamp(180).setType(
+                        BatteryEventType.POWER_CONNECTED).build());
+
+        final List<AppUsagePeriod> resultList =
+                DataProcessor.excludePowerConnectedTimeFromAppUsagePeriodList(
+                        appUsagePeriodList, batteryEventList);
+
+        assertThat(resultList).hasSize(2);
+        assertAppUsagePeriod(resultList.get(0), 120, 150);
+        assertAppUsagePeriod(resultList.get(1), 160, 180);
+    }
+
+    @Test
+    public void excludePowerConnectedTime_wholePeriodNotCharging_returnExpectedResult() {
+        final List<AppUsagePeriod> appUsagePeriodList = List.of(
+                AppUsagePeriod.newBuilder().setStartTime(100).setEndTime(200).build());
+        final List<BatteryEvent> batteryEventList = List.of(
+                BatteryEvent.newBuilder().setTimestamp(50).setType(
+                        BatteryEventType.POWER_DISCONNECTED).build(),
+                BatteryEvent.newBuilder().setTimestamp(80).setType(
+                        BatteryEventType.POWER_CONNECTED).build());
+
+        final List<AppUsagePeriod> resultList =
+                DataProcessor.excludePowerConnectedTimeFromAppUsagePeriodList(
+                        appUsagePeriodList, batteryEventList);
+
+        assertThat(resultList).isEmpty();
+    }
+
+    @Test
+    public void excludePowerConnectedTime_wholePeriodInCharging_returnExpectedResult() {
+        final List<AppUsagePeriod> appUsagePeriodList = List.of(
+                AppUsagePeriod.newBuilder().setStartTime(100).setEndTime(200).build());
+        final List<BatteryEvent> batteryEventList = List.of(
+                BatteryEvent.newBuilder().setTimestamp(50).setType(
+                        BatteryEventType.POWER_DISCONNECTED).build());
+
+        final List<AppUsagePeriod> resultList =
+                DataProcessor.excludePowerConnectedTimeFromAppUsagePeriodList(
+                        appUsagePeriodList, batteryEventList);
+
+        assertThat(resultList).hasSize(1);
+        assertAppUsagePeriod(resultList.get(0), 100, 200);
     }
 
     @Test

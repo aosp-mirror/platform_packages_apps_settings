@@ -31,13 +31,14 @@ import android.app.usage.NetworkStatsManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.NetworkPolicyManager;
+import android.os.UserManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-
 import com.android.settings.testutils.shadow.ShadowDashboardFragment;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -45,13 +46,15 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
@@ -66,15 +69,21 @@ import org.robolectric.shadows.ShadowTelephonyManager;
 })
 @RunWith(RobolectricTestRunner.class)
 public class DataUsageSummaryTest {
-
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Spy
+    Context mContext = ApplicationProvider.getApplicationContext();
+    @Mock
+    private UserManager mUserManager;
     @Mock
     private NetworkPolicyManager mNetworkPolicyManager;
     @Mock
     private NetworkStatsManager mNetworkStatsManager;
     private TelephonyManager mTelephonyManager;
-    private Context mContext;
     private Resources mResources;
     private FragmentActivity mActivity;
+
+    private DataUsageSummary mDataUsageSummary;
 
     /**
      * This set up is contrived to get a passing test so that the build doesn't block without tests.
@@ -83,12 +92,13 @@ public class DataUsageSummaryTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
+        doReturn(false).when(mUserManager).isGuestUser();
+
         ShadowApplication shadowContext = ShadowApplication.getInstance();
         ShadowUserManager.getShadow().setIsAdminUser(true);
         shadowContext.setSystemService(Context.NETWORK_POLICY_SERVICE, mNetworkPolicyManager);
 
-        mContext = spy(RuntimeEnvironment.application);
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
         final ShadowTelephonyManager shadowTelephonyManager = Shadows.shadowOf(mTelephonyManager);
         shadowTelephonyManager.setTelephonyManagerForSubscriptionId(
@@ -101,6 +111,12 @@ public class DataUsageSummaryTest {
         doReturn(true).when(mResources).getBoolean(R.bool.config_show_sim_info);
 
         doReturn(mNetworkStatsManager).when(mActivity).getSystemService(NetworkStatsManager.class);
+
+        mDataUsageSummary = spy(new DataUsageSummary());
+        doReturn(mContext).when(mDataUsageSummary).getContext();
+        doNothing().when(mDataUsageSummary).enableProxySubscriptionManager(any());
+        doReturn(true).when(mDataUsageSummary).removePreference(anyString());
+        doNothing().when(mDataUsageSummary).addWifiSection();
     }
 
     @Test
@@ -200,5 +216,23 @@ public class DataUsageSummaryTest {
 
         verify(dataUsageSummary).addWifiSection();
         verify(dataUsageSummary, never()).addMobileSection(anyInt());
+    }
+
+    @Test
+    public void onCreate_isNotGuestUser_shouldNotFinish() {
+        doReturn(false).when(mUserManager).isGuestUser();
+
+        mDataUsageSummary.onCreate(null);
+
+        verify(mDataUsageSummary, never()).finish();
+    }
+
+    @Test
+    public void onCreate_isGuestUser_shouldFinish() {
+        doReturn(true).when(mUserManager).isGuestUser();
+
+        mDataUsageSummary.onCreate(null);
+
+        verify(mDataUsageSummary).finish();
     }
 }
