@@ -101,6 +101,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
                 R.layout.locale_dialog, null);
         setDialogTitle(viewGroup, dialogContent.mTitle);
         setDialogMessage(viewGroup, dialogContent.mMessage);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
                 .setView(viewGroup);
         if (!dialogContent.mPositiveButton.isEmpty()) {
@@ -109,7 +110,9 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
         if (!dialogContent.mNegativeButton.isEmpty()) {
             builder.setNegativeButton(dialogContent.mNegativeButton, controller);
         }
-        return builder.create();
+        AlertDialog alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        return alertDialog;
     }
 
     private static void setDialogTitle(View root, String content) {
