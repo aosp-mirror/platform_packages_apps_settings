@@ -55,7 +55,10 @@ public class AvailableVirtualKeyboardFragment extends DashboardFragment
 
     @VisibleForTesting
     InputMethodSettingValuesWrapper mInputMethodSettingValues;
-    private Context mUserAwareContext;
+
+    @VisibleForTesting
+    Context mUserAwareContext;
+
     private int mUserId;
 
     @Override
@@ -82,9 +85,16 @@ public class AvailableVirtualKeyboardFragment extends DashboardFragment
                 break;
             }
             case ProfileSelectFragment.ProfileType.PERSONAL: {
-                final UserHandle primaryUser = userManager.getPrimaryUser().getUserHandle();
-                newUserId = primaryUser.getIdentifier();
-                newUserAwareContext = context.createContextAsUser(primaryUser, 0);
+                // Use the parent user of the current user if the current user is profile.
+                final UserHandle currentUser = UserHandle.of(currentUserId);
+                final UserHandle userProfileParent = userManager.getProfileParent(currentUser);
+                if (userProfileParent != null) {
+                    newUserId = userProfileParent.getIdentifier();
+                    newUserAwareContext = context.createContextAsUser(userProfileParent, 0);
+                } else {
+                    newUserId = currentUserId;
+                    newUserAwareContext = context;
+                }
                 break;
             }
             default:
