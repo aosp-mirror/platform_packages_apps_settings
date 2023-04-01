@@ -35,7 +35,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.MatrixCursor;
-import android.text.TextUtils;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -43,6 +42,7 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.filters.SmallTest;
 
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.ShadowThreadUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -71,6 +71,7 @@ public class CustomizableLockScreenQuickAffordancesPreferenceControllerTest {
         when(mContext.getResources())
                 .thenReturn(ApplicationProvider.getApplicationContext().getResources());
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        ShadowThreadUtils.setIsMainThread(true);
 
         mUnderTest = new CustomizableLockScreenQuickAffordancesPreferenceController(mContext, KEY);
     }
@@ -99,11 +100,7 @@ public class CustomizableLockScreenQuickAffordancesPreferenceControllerTest {
     @Test
     public void displayPreference_click() {
         setSelectedAffordanceNames("one", "two");
-        final PreferenceScreen screen = mock(PreferenceScreen.class);
-        final Preference preference = mock(Preference.class);
-        when(screen.findPreference(KEY)).thenReturn(preference);
-
-        mUnderTest.displayPreference(screen);
+        final Preference preference = invokeDisplayPreference();
 
         final ArgumentCaptor<Preference.OnPreferenceClickListener> clickCaptor =
                 ArgumentCaptor.forClass(Preference.OnPreferenceClickListener.class);
@@ -124,22 +121,25 @@ public class CustomizableLockScreenQuickAffordancesPreferenceControllerTest {
     @Test
     public void getSummary_whenNoneAreSelected() {
         setSelectedAffordanceNames();
+        final Preference preference = invokeDisplayPreference();
 
-        assertThat(mUnderTest.getSummary()).isNull();
+        verify(preference).setSummary(null);
     }
 
     @Test
     public void getSummary_whenOneIsSelected() {
         setSelectedAffordanceNames("one");
+        final Preference preference = invokeDisplayPreference();
 
-        assertThat(TextUtils.equals(mUnderTest.getSummary(), "one")).isTrue();
+        verify(preference).setSummary("one");
     }
 
     @Test
     public void getSummary_whenTwoAreSelected() {
         setSelectedAffordanceNames("one", "two");
+        final Preference preference = invokeDisplayPreference();
 
-        assertThat(TextUtils.equals(mUnderTest.getSummary(), "one, two")).isTrue();
+        verify(preference).setSummary("one, two");
     }
 
     private void setEnabled(boolean isWallpaperPickerInstalled, boolean isFeatureEnabled) {
@@ -182,5 +182,13 @@ public class CustomizableLockScreenQuickAffordancesPreferenceControllerTest {
                 mContentResolver.query(
                         CustomizableLockScreenUtils.SELECTIONS_URI, null, null, null))
                 .thenReturn(cursor);
+    }
+
+    private Preference invokeDisplayPreference() {
+        final PreferenceScreen screen = mock(PreferenceScreen.class);
+        final Preference preference = mock(Preference.class);
+        when(screen.findPreference(KEY)).thenReturn(preference);
+        mUnderTest.displayPreference(screen);
+        return preference;
     }
 }

@@ -267,8 +267,6 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             for (LocalBluetoothProfile profile : tmpResult) {
                 if (mProfileDeviceMap.containsKey(profile.toString())) {
                     mProfileDeviceMap.get(profile.toString()).add(cachedItem);
-                    Log.d(TAG, "getProfiles: " + profile.toString() + " add device "
-                            + cachedItem.getDevice().getAnonymizedAddress());
                 } else {
                     List<CachedBluetoothDevice> tmpCachedDeviceList =
                             new ArrayList<CachedBluetoothDevice>();
@@ -303,7 +301,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             result.remove(mManager.getProfileManager().getA2dpProfile());
             result.remove(mManager.getProfileManager().getHeadsetProfile());
         }
-        Log.d(TAG, "getProfiles:result:" + result);
+        Log.d(TAG, "getProfiles:Map:" + mProfileDeviceMap);
         return result;
     }
 
@@ -336,7 +334,8 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
 
         for (CachedBluetoothDevice leAudioDevice : mProfileDeviceMap.get(profile.toString())) {
             Log.d(TAG,
-                    "User disable LE device: " + leAudioDevice.getDevice().getAnonymizedAddress());
+                    "device:" + leAudioDevice.getDevice().getAnonymizedAddress()
+                            + "disable LE profile");
             profile.setEnabled(leAudioDevice.getDevice(), false);
             if (vcp != null) {
                 vcp.setEnabled(leAudioDevice.getDevice(), false);
@@ -374,7 +373,8 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         LocalBluetoothProfile csip = mProfileManager.getCsipSetCoordinatorProfile();
         for (CachedBluetoothDevice leAudioDevice : mProfileDeviceMap.get(profile.toString())) {
             Log.d(TAG,
-                    "User enable LE device: " + leAudioDevice.getDevice().getAnonymizedAddress());
+                    "device:" + leAudioDevice.getDevice().getAnonymizedAddress()
+                            + "enable LE profile");
             profile.setEnabled(leAudioDevice.getDevice(), true);
             if (vcp != null) {
                 vcp.setEnabled(leAudioDevice.getDevice(), true);
@@ -390,9 +390,12 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             Log.d(TAG, "Disable " + profile.toString() + " before user enables LE");
             for (CachedBluetoothDevice profileDevice : mProfileDeviceMap.get(profile.toString())) {
                 if (profile.isEnabled(profileDevice.getDevice())) {
+                    Log.d(TAG, "The " + profileDevice.getDevice().getAnonymizedAddress() + ":"
+                            + profile.toString() + " set disable");
                     profile.setEnabled(profileDevice.getDevice(), false);
                 } else {
-                    Log.d(TAG, "The " + profile.toString() + " profile is disabled. Do nothing.");
+                    Log.d(TAG, "The " + profileDevice.getDevice().getAnonymizedAddress() + ":"
+                            + profile.toString() + " profile is disabled. Do nothing.");
                 }
             }
         }
@@ -403,9 +406,12 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             Log.d(TAG, "enable " + profile.toString() + "after user disables LE");
             for (CachedBluetoothDevice profileDevice : mProfileDeviceMap.get(profile.toString())) {
                 if (!profile.isEnabled(profileDevice.getDevice())) {
+                    Log.d(TAG, "The " + profileDevice.getDevice().getAnonymizedAddress() + ":"
+                            + profile.toString() + " set enable");
                     profile.setEnabled(profileDevice.getDevice(), true);
                 } else {
-                    Log.d(TAG, "The " + profile.toString() + " profile is enabled. Do nothing.");
+                    Log.d(TAG, "The " + profileDevice.getDevice().getAnonymizedAddress() + ":"
+                            + profile.toString() + " profile is enabled. Do nothing.");
                 }
             }
         }

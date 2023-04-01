@@ -38,7 +38,7 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         implements Preference.OnPreferenceClickListener {
 
     private static final String TAG = "SavedBluetoothDeviceUpdater";
-    private static final boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
+    private static final boolean DBG = Log.isLoggable(BluetoothDeviceUpdater.TAG, Log.DEBUG);
 
     private static final String PREF_KEY = "saved_bt";
 
@@ -94,6 +94,7 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         } else {
             removePreference(cachedDevice);
         }
+        Log.d(TAG, "Map : " + mPreferenceMap);
     }
 
     @Override
@@ -126,5 +127,10 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
     @Override
     protected String getPreferenceKey() {
         return PREF_KEY;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 }

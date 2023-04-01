@@ -221,10 +221,10 @@
     <!-- UI debug setting: Disable Bluetooth hardware offload [CHAR LIMIT=none] -->
     <string name="bluetooth_disable_hw_offload_dialog_cancel">Cancel</string>
 
-    <!-- Setting Checkbox title for enabling Bluetooth LE Audio feature. [CHAR LIMIT=40] -->
-    <string name="bluetooth_enable_leaudio">Enable Bluetooth LE audio</string>
-    <!-- Summary of checkbox for enabling Bluetooth LE audio [CHAR LIMIT=none]-->
-    <string name="bluetooth_enable_leaudio_summary">Enables Bluetooth LE audio feature if the device supports LE audio hardware capabilities.</string>
+    <!-- Setting Checkbox title for disabling Bluetooth LE Audio feature. [CHAR LIMIT=40] -->
+    <string name="bluetooth_disable_leaudio">Disable Bluetooth LE audio</string>
+    <!-- Summary of checkbox for disabling Bluetooth LE audio [CHAR LIMIT=none]-->
+    <string name="bluetooth_disable_leaudio_summary">Disables Bluetooth LE audio feature if the device supports LE audio hardware capabilities.</string>
 
     <!-- Setting Checkbox title for enabling Bluetooth LE Audio Allow List. [CHAR LIMIT=none] -->
     <string name="bluetooth_enable_leaudio_allow_list">Enable Bluetooth LE audio Allow List</string>
@@ -621,7 +621,7 @@
     <!-- Message shown in summary field when face unlock is set up. [CHAR LIMIT=40] -->
     <string name="security_settings_face_preference_summary">Face added</string>
     <!-- Message shown in summary field when Face Unlock is not set up. [CHAR LIMIT=54] -->
-    <string name="security_settings_face_preference_summary_none">Tap to set up face</string>
+    <string name="security_settings_face_preference_summary_none">Setup needed</string>
     <!-- Title shown for menu item that launches face settings or enrollment. [CHAR LIMIT=32] -->
     <string name="security_settings_face_preference_title">Face Unlock</string>
     <!-- Title shown for menu item that launches face settings or enrollment, for work profile [CHAR LIMIT=50] -->
@@ -729,11 +729,7 @@
     <string name="security_settings_face_settings_remove_face_model">Delete face model</string>
     <!-- Button text in face settings which lets the user enroll their face [CHAR LIMIT=40] -->
     <string name="security_settings_face_settings_enroll">Set up Face Unlock</string>
-    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_footer">Use your face to unlock your phone or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
-    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_footer_attention_not_supported">Use your face to unlock your phone or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
-    <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
+   <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
     <string name="security_settings_face_settings_remove_dialog_title">Delete face model?</string>
     <!-- Dialog contents shown when the user removes an enrollment [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_remove_dialog_details">Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your PIN, pattern, or password to unlock your phone or for authentication in apps.</string>
@@ -758,7 +754,7 @@
       other   {# fingerprints added}
     }</string>
     <!-- message shown in summary field when no fingerprints are registered -->
-    <string name="security_settings_fingerprint_preference_summary_none"></string>
+    <string name="security_settings_fingerprint_preference_summary_none">Setup needed</string>
     <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_introduction_title">Set up your fingerprint</string>
     <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
@@ -852,7 +848,7 @@
     <!-- Title shown for work menu item that launches biometric settings. [CHAR LIMIT=66] -->
     <string name="security_settings_work_biometric_preference_title">Face &amp; Fingerprint Unlock for work</string>
     <!-- Message shown in summary field of biometric settings. [CHAR LIMIT=66] -->
-    <string name="security_settings_biometric_preference_summary_none_enrolled">Tap to set up</string>
+    <string name="security_settings_biometric_preference_summary_none_enrolled">Setup needed</string>
     <!-- Message shown in summary field of biometric settings when face is enrolled, and multiple fingerprints are enrolled. [CHAR LIMIT=66]-->
     <string name="security_settings_biometric_preference_summary_both_fp_multiple">Face and fingerprints added</string>
     <!-- Message shown in summary field of biometric settings when face is enrolled, and a single fingerprintis enrolled. [CHAR LIMIT=66]-->
@@ -1036,13 +1032,13 @@
     <!-- Title for the section that has additional privacy settings. [CHAR LIMIT=60] -->
     <string name="privacy_advanced_settings">More privacy settings</string>
 
-    <!-- Title for the subpage in the "Security & privacy". This page consists of the more security and privacy settings. Can be navigated by Settings -> Security & privacy -> More Settings [CHAR LIMIT=NONE] -->
-    <string name="more_security_privacy_settings">More settings</string>
-    <!-- Title for the section that has security entries in the More Settings page. [CHAR LIMIT=60] -->
+    <!-- Title for the subpage in the "Security & privacy". This page consists of the more security and privacy settings. Can be navigated by Settings -> Security & privacy -> More security & privacy [CHAR LIMIT=NONE] -->
+    <string name="more_security_privacy_settings">More security &amp; privacy</string>
+    <!-- Title for the section that has security entries in the More security & privacy page. [CHAR LIMIT=60] -->
     <string name="security_header">Security</string>
-    <!-- Title for the section that has privacy entries in the More Settings page. [CHAR LIMIT=60] -->
+    <!-- Title for the section that has privacy entries in the More security & privacy page. [CHAR LIMIT=60] -->
     <string name="privacy_header">Privacy</string>
-    <!-- Title for the section that has work profile entries in the More Settings page. [CHAR LIMIT=60] -->
+    <!-- Title for the section that has work profile entries in the More security & privacy page. [CHAR LIMIT=60] -->
     <string name="work_profile_category_header">Work profile</string>
 
     <!-- Text shown when "Add fingerprint" button is disabled -->

@@ -162,7 +162,7 @@
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Only apps that support language selection are shown here."</string>
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Your system, apps, and websites use the first supported language from your preferred languages."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"To select a language for each app, go to app language settings."</string>
-    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"Learn more about languages"</string>
+    <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Learn more about app languages"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Change system language to %s ?"</string>
     <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Your device settings and regional preferences will change."</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Change"</string>
@@ -876,10 +876,22 @@
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Helps other devices find this hotspot. Reduces hotspot connection speed."</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Helps other devices find this hotspot. Increases battery usage."</string>
     <string name="wifi_hotspot_speed_title" msgid="8629448084180512685">"Speed &amp; compatibility"</string>
-    <string name="wifi_hotspot_speed_2g_summary" msgid="6727230647098551051">"2.4 GHz / Any device can connect"</string>
-    <string name="wifi_hotspot_speed_5g_summary" msgid="5009644494425227175">"5 GHz / Most devices can connect"</string>
-    <string name="wifi_hotspot_speed_6g_summary" msgid="1504496768686645945">"6 GHz / Few devices can connect"</string>
-    <string name="wifi_hotspot_speed_2g_and_5g_summary" msgid="2392283008301109037">"2.4 and 5 GHz / Any device can connect"</string>
+    <string name="wifi_hotspot_speed_summary_2g" msgid="2280013579858833466">"2.4 GHz / Any device can connect"</string>
+    <string name="wifi_hotspot_speed_summary_5g" msgid="8006841294118040080">"5 GHz / Most devices can connect"</string>
+    <string name="wifi_hotspot_speed_summary_6g" msgid="5398769134180715191">"6 GHz / Few devices can connect"</string>
+    <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="6471272988396018113">"2.4 and 5 GHz / Any device can connect"</string>
+    <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"Choose a frequency for your hotspot. The frequency affects the connection speed and what types of devices can find your hotspot."</string>
+    <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"Preferred frequency"</string>
+    <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2.4 GHz"</string>
+    <string name="wifi_hotspot_speed_2g_summary" msgid="2737911775799813597">"Slower speeds. Any device can connect."</string>
+    <string name="wifi_hotspot_speed_5g" msgid="4058116867148848395">"5 GHz"</string>
+    <string name="wifi_hotspot_speed_5g_summary" msgid="8979160165280825325">"Fast speeds. Most devices can connect."</string>
+    <string name="wifi_hotspot_speed_2g_5g" msgid="9192756255938408285">"2.4 and 5 GHz"</string>
+    <string name="wifi_hotspot_speed_2g_5g_summary" msgid="2901777498770191018">"Fast speeds. Any device can connect to this dual-band hotspot."</string>
+    <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
+    <string name="wifi_hotspot_speed_6g_summary" msgid="1170553321510689693">"Fastest speeds. Fewest devices can connect."</string>
+    <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"Not available in your country or region"</string>
+    <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"If your preferred frequency isn\'t available, your hotspot may use a different one. Hotspot security settings may change if you change the frequency."</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Turning hotspot on…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Turning off hotspot…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Tethering unavailable"</string>
@@ -1676,7 +1688,8 @@
     <string name="modifier_keys_reset_message" msgid="5236994817619936058">"Are you sure you would like to reset all the modifier keys to their default?"</string>
     <string name="modifier_keys_done" msgid="8196199314913909700">"Done"</string>
     <string name="modifier_keys_cancel" msgid="7136520252570826772">"Cancel"</string>
-    <string name="modifier_keys_restore" msgid="7627661630556839268">"Restore"</string>
+    <!-- no translation found for modifier_keys_reset (551170906710422041) -->
+    <skip />
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Choose modifier key"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Choose a new key for <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Default"</string>
@@ -1813,7 +1826,7 @@
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Page <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> of <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Use accessibility button to open"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Hold volume keys to open"</string>
-    <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Triple tap screen to open"</string>
+    <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Triple-tap screen to open"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Use gesture to open"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Use accessibility gesture"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"To use this feature, tap the accessibility button <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> on the bottom of your screen.\n\nTo switch between features, touch &amp; hold the accessibility button."</string>
@@ -1942,6 +1955,8 @@
     <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"You can also add extra dim to Quick Settings from the top of your screen"</string>
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"One-handed mode added to Quick Settings. Swipe down to turn it on or off anytime."</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"You can also add one-handed mode to Quick Settings from the top of your screen"</string>
+    <!-- no translation found for accessibility_font_scaling_auto_added_qs_tooltip_content (7229921960884718332) -->
+    <skip />
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Dismiss"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Use color correction"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Color correction shortcut"</string>
@@ -2219,7 +2234,7 @@
     <string name="battery_detail_since_full_charge" msgid="5650946565524184582">"Breakdown since last full charge"</string>
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Last full charge"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"Full charge lasts about"</string>
-    <string name="battery_footer_summary" msgid="8221691063048377342">"Battery usage data is approximate and can change based on usage."</string>
+    <string name="battery_footer_summary" msgid="6753248007004259000">"Remaining battery life is approximate and can change based on usage"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Battery usage"</string>
     <string name="battery_not_usage" msgid="3851536644733662392">"No usage since last full charge"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"No usage for past 24 hr"</string>
@@ -2377,7 +2392,7 @@
     <string name="cert_not_installed" msgid="6725137773549974522">"Certificate not installed"</string>
     <string name="request_manage_credentials_title" msgid="596805634568013413">"Allow "<b>"<xliff:g id="APP_NAME">^1</xliff:g>"</b>" to install certificates on this device?"</string>
     <string name="request_manage_credentials_description" msgid="8044839857171509619">"These certificates will verify you by sharing your device’s unique ID with the apps and URLs below"</string>
-    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"Don’t allow"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"Don\'t allow"</string>
     <string name="request_manage_credentials_allow" msgid="4910940118408348245">"Allow"</string>
     <string name="request_manage_credentials_more" msgid="6101210283534101582">"Show more"</string>
     <string name="certificate_management_app" msgid="8086699498358080826">"Certificate management app"</string>
@@ -3128,7 +3143,7 @@
     <string name="notification_pulse_title" msgid="8013178454646671529">"Blink light"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"Privacy"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Skip lock screen"</string>
-    <string name="lockscreen_bypass_summary" msgid="464277506200346748">"After unlocking, go directly to last used screen"</string>
+    <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"After unlocking, go directly to last used screen. Notifications won’t show on lock screen. Swipe down from top to see them."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Lock screen, Lockscreen, Skip, Bypass"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"When work profile is locked"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Show only new notifications on lock screen"</string>
@@ -3144,7 +3159,7 @@
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Show sensitive work profile content when locked"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Show all notification content"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Show sensitive content only when unlocked"</string>
-    <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Don’t show notifications at all"</string>
+    <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Don\'t show notifications at all"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"How do you want the lock screen to display?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Lock screen"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Show all work notification content"</string>
@@ -3866,8 +3881,8 @@
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Emergency SOS, medical info, alerts"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Gesture navigation"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"To go Home, swipe up from the bottom of the screen. To switch apps, swipe up from the bottom, hold, then release. To go back, swipe from either the left or right edge."</string>
-    <string name="legacy_navigation_title" msgid="7877402855994423727">"3-button navigation"</string>
-    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Go back, Home, and switch apps with buttons at the bottom of your screen."</string>
+    <string name="legacy_navigation_title" msgid="7877402855994423727">"Three-button navigation"</string>
+    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Go back, Home and switch apps with buttons at the bottom of your screen."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"system navigation, 2 button navigation, 3 button navigation, gesture navigation, swipe"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digital assistant"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Swipe to invoke assistant"</string>
@@ -4037,6 +4052,9 @@
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Make sure you trust this app&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; uses what\'s on your screen to determine what can be autofilled."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Turn off %1$s?"</string>
     <string name="credman_confirmation_message" msgid="3499478570809427026">"Saved info like addresses or payment methods won\'t be filled in when you sign in. To keep your saved info filled in, set enable a password, passkey and data/or service."</string>
+    <string name="credman_enable_confirmation_message_title" msgid="3722566298090698004">"Turn on %1$s?"</string>
+    <string name="credman_enable_confirmation_message" msgid="4466773747277583461">"Saved info like addresses or payment methods will be shared with this provider."</string>
+    <string name="credman_enable_confirmation_message_positive_button" msgid="3479082692924433102">"Turn on"</string>
     <string name="credman_error_message_title" msgid="4741457523969373713">"Passwords, passkeys and data services limit"</string>
     <string name="credman_error_message" msgid="6793314648458925172">"You can have up to 5 passwords, passkeys and data services active at the same time. Turn off a service to add more."</string>
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Turn off"</string>
@@ -4638,6 +4656,8 @@
     <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"On / Screen flash"</string>
     <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"On / Camera and screen flash"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Flash the camera light or the screen when you receive notifications or when alarms sound"</string>
+    <!-- no translation found for flash_notifications_intro_without_camera_flash (6297337174487793891) -->
+    <skip />
     <string name="flash_notifications_note" msgid="2426125248448055075">"Use flash notifications with caution if you\'re light sensitive"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"Preview"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"Camera flash"</string>

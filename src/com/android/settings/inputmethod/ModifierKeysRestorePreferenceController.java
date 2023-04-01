@@ -96,7 +96,7 @@ public class ModifierKeysRestorePreferenceController extends BasePreferenceContr
 
     private int getColorOfColorAccentPrimaryVariant() {
         return Utils.getColorAttrDefaultColor(
-                mParent.getActivity(), com.android.internal.R.attr.colorAccentPrimaryVariant);
+                mParent.getActivity(), com.android.internal.R.attr.materialColorPrimaryContainer);
     }
 
     private void clearPreviousDialog() {
