@@ -152,10 +152,12 @@
 
         <Preference
             android:fragment="com.android.settings.accessibility.FlashNotificationsPreferenceFragment"
+            android:key="flash_notifications_preference_accessibility"
             android:icon="@drawable/ic_flash_notification"
-            android:key="flash_notifications_preference"
             android:persistent="false"
             android:title="@string/flash_notifications_title"
+            settings:keywords="@string/flash_notifications_keywords"
+            settings:searchable="true"
             settings:controller="com.android.settings.accessibility.FlashNotificationsPreferenceController" />
 
         <Preference
