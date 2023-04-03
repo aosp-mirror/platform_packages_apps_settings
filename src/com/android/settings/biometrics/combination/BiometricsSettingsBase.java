@@ -41,6 +41,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.password.ChooseLockGeneric;
@@ -166,6 +167,14 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
             return true;
         } else if (getFingerprintPreferenceKey().equals(key)) {
             mDoNotFinishActivity = true;
+
+            if (shouldSkipForUdfpsInMultiWindowMode()) {
+                new FingerprintSettingsFragment.FingerprintSplitScreenDialog().show(
+                        getActivity().getSupportFragmentManager(),
+                        FingerprintSettingsFragment.FingerprintSplitScreenDialog.class.getName());
+                return true;
+            }
+
             mFingerprintManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
                 try {
                     final byte[] token = requestGatekeeperHat(context, mGkPwHandle, mUserId,
@@ -376,5 +385,28 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
         } else {
             return 0;
         }
+    }
+
+    /**
+     * Returns whether the click should be skipped.
+     * True if the following conditions are all met:
+     * 1. It's split mode.
+     * 2. It's udfps.
+     * 3. There is no enrolled fingerprint. (If there is enrolled fingerprint, FingerprintSettings
+     * will handle the adding fingerprint.
+     */
+    private boolean shouldSkipForUdfpsInMultiWindowMode() {
+        if (!getActivity().isInMultiWindowMode() || mFingerprintManager.hasEnrolledFingerprints(
+                mUserId)) {
+            return false;
+        }
+
+        for (FingerprintSensorPropertiesInternal prop :
+                mFingerprintManager.getSensorPropertiesInternal()) {
+            if (prop.isAnyUdfpsType()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
