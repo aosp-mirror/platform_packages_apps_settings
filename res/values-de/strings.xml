@@ -63,12 +63,9 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Dein rechtes Hörgerät ist verbunden.\n\nWenn du dein linkes Hörgerät koppeln möchtest, muss es eingeschaltet und bereit zum Koppeln sein."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Rechtes Ohr koppeln"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Linkes Ohr koppeln"</string>
-    <!-- no translation found for bluetooth_device_controls_general (1399214835599665488) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_controls_title (4293399064818086587) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_controls_specific (7706863288754077107) -->
-    <skip />
+    <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Für alle verfügbaren Hörgeräte"</string>
+    <string name="bluetooth_device_controls_title" msgid="4293399064818086587">"Kurzbefehle und Kompatibilität mit Hörgeräten"</string>
+    <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Für dieses Gerät"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Audioausgabe"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Informationen zur Audioausgabe"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Audio an dein Hörgerät oder den Lautsprecher deines Smartphones weiterleiten lassen"</string>
@@ -106,8 +103,10 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Die Änderung erfordert einen Neustart des Geräts."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Neu starten"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Abbrechen"</string>
-    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Bluetooth LE Audio aktivieren"</string>
-    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Aktiviert die Bluetooth LE Audio-Funktion, wenn das Gerät LE-Hardwarefunktionen für Audio unterstützt."</string>
+    <!-- no translation found for bluetooth_disable_leaudio (8619410595945155354) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_leaudio_summary (4756307633476985470) -->
+    <skip />
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Zulassungsliste für Bluetooth LE-Audio aktivieren"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Aktiviert die Zulassungslistenfunktion für Bluetooth LE-Audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Mediengeräte"</string>
@@ -165,8 +164,7 @@
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Hier werden nur Apps angezeigt, die die Sprachauswahl unterstützen."</string>
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Dein System, deine Apps und deine Websites verwenden die erste deiner bevorzugten Sprachen, die unterstützt wird."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Unter „App-Sprache“ kannst du für jede App eine Sprache auswählen."</string>
-    <!-- no translation found for desc_locale_helper_footer_general (6112153921151780303) -->
-    <skip />
+    <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Weitere Informationen zu App-Sprachen"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Systemsprache ändern in %s?"</string>
     <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Hierdurch werden deine Geräte- und Regionaleinstellungen geändert."</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Ändern"</string>
@@ -267,7 +265,8 @@
     <string name="safety_center_title" msgid="7732397372178774777">"Sicherheit &amp; Datenschutz"</string>
     <string name="safety_center_summary" msgid="3554867379951053869">"App-Sicherheit, Gerätesperre, Berechtigungen"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Gesicht hinzugefügt"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Zum Einrichten der Gesichtsentsperrung tippen"</string>
+    <!-- no translation found for security_settings_face_preference_summary_none (523320857738436024) -->
+    <skip />
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Entsperrung per Gesicht"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Entsperrung per Gesichtserkennung für die Arbeit"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"So richtest du die Gesichtsentsperrung ein"</string>
@@ -321,8 +320,6 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Bei Gesichtsentsperrung in Apps immer Bestätigung anfordern"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Gesichtsmodell löschen"</string>
     <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"Entsperrung per Gesicht einrichten"</string>
-    <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Du kannst die Entsperrung per Gesichtserkennung zum Entsperren deines Smartphones oder zur Authentifizierung in Apps verwenden, beispielsweise um dich anzumelden oder um Käufe zu autorisieren.\n\nHinweis:\nEs kann immer nur jeweils ein Gesicht eingerichtet sein. Wenn du ein anderes hinzufügen möchtest, lösche zuerst das aktuelle.\n\nEs kann passieren, dass das Smartphone unbeabsichtigt entsperrt wird, wenn du auf das Gerät blickst.\n\nEine andere Person kann dein Smartphone entsperren, indem sie es vor dein Gesicht hält.\n\nDein Smartphone kann eventuell auch von jemandem entsperrt werden, der dir sehr ähnlich sieht, beispielsweise von einem eineiigen Zwilling."</string>
-    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Du kannst die Entsperrung per Gesichtserkennung zum Entsperren deines Smartphones oder zur Authentifizierung in Apps verwenden, beispielsweise um dich anzumelden oder um Käufe zu autorisieren.\n\nHinweis:\nEs kann immer nur jeweils ein Gesicht eingerichtet sein. Wenn du ein anderes hinzufügen möchtest, lösche zuerst das aktuelle.\n\nEs kann passieren, dass das Smartphone unbeabsichtigt entsperrt wird, wenn du auf das Gerät blickst.\n\nEine andere Person kann dein Smartphone dadurch entsperren, dass sie es vor dein Gesicht hält, auch wenn deine Augen geschlossen sind.\n\nDein Smartphone kann eventuell auch von jemandem entsperrt werden, der dir sehr ähnlich sieht, beispielsweise von einem eineiigen Zwilling."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Gesichtsmodell löschen?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Dein Gesichtsmodell wird dauerhaft und sicher gelöscht.\n\nNach dem Löschen benötigst du deine PIN, dein Muster oder dein Passwort, um dein Smartphone zu entsperren und dich in Apps zu authentifizieren."</string>
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Dein Gesichtsmodell wird dauerhaft und sicher gelöscht.\n\nNach dem Löschen benötigst du deine PIN, dein Muster oder dein Passwort, um dein Smartphone zu entsperren."</string>
@@ -332,7 +329,8 @@
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingerabdruck-Einstellungen für die Arbeit"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Fingerabdruck hinzufügen"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Fingerabdruck hinzugefügt}other{# Fingerabdrücke hinzugefügt}}"</string>
-    <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
+    <!-- no translation found for security_settings_fingerprint_preference_summary_none (1146977379031250790) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Fingerabdruck einrichten"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Fingerabdruck zulassen"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Fingerabdruck verwenden"</string>
@@ -376,7 +374,8 @@
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Gesicht, Fingerabdrücke und <xliff:g id="WATCH">%s</xliff:g> hinzugefügt"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Entsperrung per Gesichtserkennung &amp; Fingerabdruck"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Gesichts- und Fingerabdruckentsperrung für die Arbeit"</string>
-    <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Zum Einrichten tippen"</string>
+    <!-- no translation found for security_settings_biometric_preference_summary_none_enrolled (213377753727694575) -->
+    <skip />
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Gesicht und Fingerabdrücke hinzugefügt"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Gesicht und Fingerabdruck hinzugefügt"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Wenn du die Entsperrung per Gesichtserkennung und die Entsperrung per Fingerabdruck einrichtest, fragt dein Smartphone nach deinem Fingerabdruck, falls du eine Maske trägst oder dich im Dunkeln befindest"</string>
@@ -467,7 +466,8 @@
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Verschlüsselung, Anmeldedaten und mehr"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"Sicherheit, weitere Sicherheitseinstellungen, weitere Einstellungen, erweiterte Sicherheitseinstellungen"</string>
     <string name="privacy_advanced_settings" msgid="8828215456566937719">"Weitere Datenschutzeinstellungen"</string>
-    <string name="more_security_privacy_settings" msgid="977191087706506398">"Weitere Einstellungen"</string>
+    <!-- no translation found for more_security_privacy_settings (123465614090328851) -->
+    <skip />
     <string name="security_header" msgid="961514795852103424">"Sicherheit"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Datenschutz"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Arbeitsprofil"</string>
@@ -501,6 +501,10 @@
     <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"Der Bildschirm wird automatisch entsperrt, wenn du eine korrekte PIN mit 6 oder mehr Ziffern eingibst. Diese Option ist etwas weniger sicher, als wenn du zum Bestätigen auf „Eingabe“ tippst."</string>
     <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"Korrekte PIN automatisch bestätigen"</string>
     <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"Die Bestätigung deiner PIN durch Tippen auf „Eingabe“ ist sicherer als die automatische Bestätigung"</string>
+    <!-- no translation found for auto_confirm_on_pin_verify_description (2052240431173223502) -->
+    <skip />
+    <!-- no translation found for auto_confirm_off_pin_verify_description (4256219155659760047) -->
+    <skip />
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"Dis­play­sper­re"</string>
     <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"Sperre des Arbeitsprofils"</string>
     <string name="unlock_set_unlock_off_title" msgid="2831957685685921667">"Keine"</string>
@@ -880,38 +884,22 @@
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Hilft anderen Geräten dabei, diesen Hotspot zu finden. Verringert die Verbindungsgeschwindigkeit mit dem Hotspot."</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Hilft anderen Geräten dabei, diesen Hotspot zu finden. Erhöht den Akkuverbrauch."</string>
     <string name="wifi_hotspot_speed_title" msgid="8629448084180512685">"Geschwindigkeit &amp; Kompatibilität"</string>
-    <!-- no translation found for wifi_hotspot_speed_summary_2g (2280013579858833466) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_summary_5g (8006841294118040080) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_summary_6g (5398769134180715191) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_5g (6471272988396018113) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_intro (6973482196363758925) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_category (5265655850463630286) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_2g (3400600834257664480) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_2g_summary (2737911775799813597) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_5g (4058116867148848395) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_5g_summary (8979160165280825325) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_2g_5g (9192756255938408285) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_2g_5g_summary (2901777498770191018) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_6g (3787697484862730500) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_6g_summary (1170553321510689693) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_summary_unavailable (7276080644693388756) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_footer (8846939503916795002) -->
-    <skip />
+    <string name="wifi_hotspot_speed_summary_2g" msgid="2280013579858833466">"2,4 GHz / Alle Geräte können eine Verbindung herstellen"</string>
+    <string name="wifi_hotspot_speed_summary_5g" msgid="8006841294118040080">"5 GHz / Die meisten Geräte können eine Verbindung herstellen"</string>
+    <string name="wifi_hotspot_speed_summary_6g" msgid="5398769134180715191">"6 GHz / Nur wenige Geräte können eine Verbindung herstellen"</string>
+    <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="6471272988396018113">"2,4 und 5 GHz / Alle Geräte können eine Verbindung herstellen"</string>
+    <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"Wähle eine Frequenz für den Hotspot aus. Die Frequenz wirkt sich auf die Verbindungsgeschwindigkeit aus und hat Einfluss darauf, welche Arten von Geräten den Hotspot finden können."</string>
+    <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"Bevorzugte Frequenz"</string>
+    <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2,4 GHz"</string>
+    <string name="wifi_hotspot_speed_2g_summary" msgid="2737911775799813597">"Niedrigere Geschwindigkeit. Jedes Gerät kann eine Verbindung herstellen."</string>
+    <string name="wifi_hotspot_speed_5g" msgid="4058116867148848395">"5 GHz"</string>
+    <string name="wifi_hotspot_speed_5g_summary" msgid="8979160165280825325">"Hohe Geschwindigkeit. Die meisten Geräte können eine Verbindung herstellen."</string>
+    <string name="wifi_hotspot_speed_2g_5g" msgid="9192756255938408285">"2,4 und 5 GHz"</string>
+    <string name="wifi_hotspot_speed_2g_5g_summary" msgid="2901777498770191018">"Hohe Geschwindigkeit. Jedes Gerät kann eine Verbindung zu diesem Dualband-Hotspot herstellen."</string>
+    <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
+    <string name="wifi_hotspot_speed_6g_summary" msgid="1170553321510689693">"Höchste Geschwindigkeit. Nur wenige Geräte können eine Verbindung herstellen."</string>
+    <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"In deinem Land oder deiner Region nicht verfügbar"</string>
+    <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Wenn die bevorzugte Frequenz nicht verfügbar ist, verwendet dein Hotspot möglicherweise eine andere Frequenz. Die Sicherheitseinstellungen für den Hotspot ändern sich unter Umständen, wenn du die Frequenz änderst."</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Hotspot wird aktiviert…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Hotspot wird deaktiviert…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Tethering nicht verfügbar"</string>
@@ -1796,8 +1784,10 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Kurzbefehl für Vergrößerung"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Eingetippten Text vergrößern"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Lupe folgt dem Text, während du tippst"</string>
-    <string name="accessibility_screen_magnification_always_on_title" msgid="3738009998799304549">"Immer aktiviert"</string>
-    <string name="accessibility_screen_magnification_always_on_summary" msgid="8946516092699010033">"Anstatt die Vergrößerung beim Wechseln von Apps zu deaktivieren, wird einfach auf die normale Größe verkleinert. Durch Auseinanderziehen kannst du jederzeit wieder vergrößern."</string>
+    <!-- no translation found for accessibility_screen_magnification_always_on_title (3814297443759580936) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_always_on_summary (306908451430863049) -->
+    <skip />
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Joystick"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Du kannst die Lupe aktivieren und mit dem Joystick auf dem Bildschirm bewegen. Halte den Joystick gedrückt und ziehe, um die Lupe zu bewegen. Tippe und ziehe, um den Joystick zu verschieben."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Über die Vergrößerung"</string>
@@ -1826,7 +1816,7 @@
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Mit Tastenkombination und 3-mal Tippen vergrößern"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Die Bedienungshilfe „<xliff:g id="SERVICE">%1$s</xliff:g>“"</string>
     <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Anzeigegröße und Text"</string>
-    <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Textanzeige ändern"</string>
+    <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Einstellungen für Textanzeige ändern"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Betreff: Designs für Heißluftballons"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Von: Bernd"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Guten Morgen,\n\nwie geht es mit den Entwürfen voran? Werden sie fertig sein, bevor wir mit der Herstellung der neuen Ballons beginnen?"</string>
@@ -2025,7 +2015,7 @@
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Audiobeschreibung"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Höre dir bei unterstützten Filmen und Serien eine Beschreibung der Ereignisse auf dem Bildschirm an"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"Audiobeschreibung, Audio, Beschreibung, eingeschränktes Sehvermögen"</string>
-    <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Verknüpfung aktiviert"</string>
+    <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Kurzbefehl aktiviert"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Aus"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"An"</string>
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Aus"</string>
@@ -2092,7 +2082,7 @@
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> fordert eine volle Kontrolle für dieses Gerät an. Der Dienst kann den Bildschirm lesen und im Namen von Nutzern mit Bedarf an Bedienungshilfen handeln. Dieses Maß an Kontrolle ist für die meisten Apps ungeeignet."</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Die vollständige Kontrolle sollte nur für Apps aktiviert werden, die dir Zugang zu App-Funktionen erleichtern. Das ist in der Regel nur ein kleiner Teil der Apps."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Bildschirm aufrufen und steuern"</string>
-    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Die Funktion kann alle Inhalte auf dem Bildschirm lesen und diese Inhalte über andere Apps anzeigen."</string>
+    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Die Funktion kann alle Inhalte auf dem Bildschirm lesen und diese Inhalte über anderen Apps anzeigen."</string>
     <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Aktionen aufrufen und durchführen"</string>
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Die Funktion kann deine Interaktionen mit einer App oder einem Hardwaresensor verfolgen und in deinem Namen mit Apps interagieren."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Zulassen"</string>
@@ -2254,8 +2244,7 @@
     <string name="battery_detail_since_full_charge" msgid="5650946565524184582">"Verbrauchsdetails seit letztem kompletten Aufladen"</string>
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Letztes komplettes Aufladen"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"Ungefähre Nutzungsdauer bei vollständiger Aufladung"</string>
-    <!-- no translation found for battery_footer_summary (6753248007004259000) -->
-    <skip />
+    <string name="battery_footer_summary" msgid="6753248007004259000">"Die verbleibende Akkulaufzeit ist eine Schätzung und kann sich je nach Nutzung ändern"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Akkunutzung"</string>
     <string name="battery_not_usage" msgid="3851536644733662392">"Keine Nutzung seit der letzten vollständigen Aufladung"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Keine Nutzung in den letzten 24 Stunden"</string>
@@ -3164,8 +3153,7 @@
     <string name="notification_pulse_title" msgid="8013178454646671529">"Benachrichtigungslicht blinkt"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"Datenschutz"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Sperrbildschirm überspringen"</string>
-    <!-- no translation found for lockscreen_bypass_summary (4578154430436224161) -->
-    <skip />
+    <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"Nach Entsperrung wird direkt der letzte Bildschirm angezeigt. Sperrbildschirm zeigt keine Benachrichtigungen. Um diese zu sehen, von oben wischen."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Sperrbildschirm, überspringen, umgehen"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Wenn das Arbeitsprofil gesperrt ist"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Nur neue Benachrichtigungen auf dem Sperrbildschirm anzeigen"</string>
@@ -4074,12 +4062,9 @@
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Nur für vertrauenswürdige Apps&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; greift auf die Displayanzeige zu, um zu bestimmen, welche Felder automatisch ausgefüllt werden können. Die Funktion sollte daher nur für vertrauenswürdige Apps zugelassen werden."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s deaktivieren?"</string>
     <string name="credman_confirmation_message" msgid="3499478570809427026">"Gespeicherte Daten wie Adressen oder Zahlungsmethoden werden nicht ausgefüllt, wenn du dich anmeldest. Wenn du möchtest, dass deine gespeicherten Daten ausgefüllt werden, aktiviere die entsprechenden Optionen für Passwörter, Passkeys und Daten / oder Dienste."</string>
-    <!-- no translation found for credman_enable_confirmation_message_title (3722566298090698004) -->
-    <skip />
-    <!-- no translation found for credman_enable_confirmation_message (4466773747277583461) -->
-    <skip />
-    <!-- no translation found for credman_enable_confirmation_message_positive_button (3479082692924433102) -->
-    <skip />
+    <string name="credman_enable_confirmation_message_title" msgid="3722566298090698004">"%1$s aktivieren?"</string>
+    <string name="credman_enable_confirmation_message" msgid="4466773747277583461">"Gespeicherte Daten wie Adressen oder Zahlungsmethoden werden mit diesem Anbieter geteilt."</string>
+    <string name="credman_enable_confirmation_message_positive_button" msgid="3479082692924433102">"Aktivieren"</string>
     <string name="credman_error_message_title" msgid="4741457523969373713">"Beschränkung für Passwörter, Passkeys und Datendienste"</string>
     <string name="credman_error_message" msgid="6793314648458925172">"Es können bis zu 5 Passwörter, Passkeys und Datendienste gleichzeitig aktiviert sein. Wenn du einen weiteren Dienst hinzufügen möchtest, deaktiviere einen anderen."</string>
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Deaktivieren"</string>
@@ -4684,6 +4669,8 @@
     <!-- no translation found for flash_notifications_intro_without_camera_flash (6297337174487793891) -->
     <skip />
     <string name="flash_notifications_note" msgid="2426125248448055075">"Wenn du lichtempfindlich bist, solltest du das Aufleuchten bei Benachrichtigungen mit Vorsicht verwenden"</string>
+    <!-- no translation found for flash_notifications_keywords (2458759275318514836) -->
+    <skip />
     <string name="flash_notifications_preview" msgid="5320176885050440874">"Als Vorschau ansehen"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"Aufleuchten des Kamerablitzes bei Benachrichtigungen"</string>
     <string name="screen_flash_notification_title" msgid="3773100725793316708">"Aufleuchten des Bildschirms bei Benachrichtigungen"</string>
