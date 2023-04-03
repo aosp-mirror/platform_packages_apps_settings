@@ -26,7 +26,10 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.hardware.SensorPrivacyManager;
 import android.hardware.biometrics.BiometricAuthenticator;
+import android.hardware.biometrics.SensorProperties;
 import android.hardware.face.FaceManager;
+import android.hardware.face.FaceSensorPropertiesInternal;
+import android.hardware.face.IFaceAuthenticatorsRegisteredCallback;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.Html;
@@ -60,6 +63,8 @@ import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.span.LinkSpan;
 
+import java.util.List;
+
 /**
  * Provides introductory info about face unlock and prompts the user to agree before starting face
  * enrollment.
@@ -71,6 +76,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     @Nullable private FooterButton mPrimaryFooterButton;
     @Nullable private FooterButton mSecondaryFooterButton;
     @Nullable private SensorPrivacyManager mSensorPrivacyManager;
+    private boolean mIsFaceStrong;
 
     @Override
     protected void onCancelButtonClick(View view) {
@@ -154,14 +160,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         inControlMessage.setMovementMethod(LinkMovementMethod.getInstance());
         lessSecure.setText(getLessSecureMessage());
 
-        // Set up and show the "less secure" info section if necessary.
-        if (getResources().getBoolean(R.bool.config_face_intro_show_less_secure)) {
-            final LinearLayout infoRowLessSecure = findViewById(R.id.info_row_less_secure);
-            final ImageView iconLessSecure = findViewById(R.id.icon_less_secure);
-            infoRowLessSecure.setVisibility(View.VISIBLE);
-            iconLessSecure.getBackground().setColorFilter(getIconColorFilter());
-        }
-
         // Set up and show the "require eyes" info section if necessary.
         if (getResources().getBoolean(R.bool.config_face_intro_show_require_eyes)) {
             final LinearLayout infoRowRequireEyes = findViewById(R.id.info_row_require_eyes);
@@ -171,6 +169,28 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             iconRequireEyes.getBackground().setColorFilter(getIconColorFilter());
             infoMessageRequireEyes.setText(getInfoMessageRequireEyes());
         }
+
+        mFaceManager.addAuthenticatorsRegisteredCallback(
+                new IFaceAuthenticatorsRegisteredCallback.Stub() {
+                    @Override
+                    public void onAllAuthenticatorsRegistered(
+                            @NonNull List<FaceSensorPropertiesInternal> sensors) {
+                        if (sensors.isEmpty()) {
+                            Log.e(TAG, "No sensors");
+                            return;
+                        }
+
+                        boolean isFaceStrong = sensors.get(0).sensorStrength
+                                == SensorProperties.STRENGTH_STRONG;
+                        if (mIsFaceStrong == isFaceStrong) {
+                            return;
+                        }
+                        mIsFaceStrong = isFaceStrong;
+                        onFaceStrengthChanged();
+                    }
+                });
+
+        onFaceStrengthChanged();
 
         // This path is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
@@ -554,6 +574,15 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         return R.string.security_settings_face_enroll_introduction_more;
     }
 
+    @Override
+    protected void updateDescriptionText() {
+        if (mIsFaceStrong) {
+            setDescriptionText(getString(
+                    R.string.security_settings_face_enroll_introduction_message_class3));
+        }
+        super.updateDescriptionText();
+    }
+
     @NonNull
     protected static Intent setSkipPendingEnroll(@Nullable Intent data) {
         if (data == null) {
@@ -561,5 +590,17 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         }
         data.putExtra(MultiBiometricEnrollHelper.EXTRA_SKIP_PENDING_ENROLL, true);
         return data;
+    }
+
+    private void onFaceStrengthChanged() {
+        // Set up and show the "less secure" info section if necessary.
+        if (!mIsFaceStrong && getResources().getBoolean(
+                R.bool.config_face_intro_show_less_secure)) {
+            final LinearLayout infoRowLessSecure = findViewById(R.id.info_row_less_secure);
+            final ImageView iconLessSecure = findViewById(R.id.icon_less_secure);
+            infoRowLessSecure.setVisibility(View.VISIBLE);
+            iconLessSecure.getBackground().setColorFilter(getIconColorFilter());
+        }
+        updateDescriptionText();
     }
 }
