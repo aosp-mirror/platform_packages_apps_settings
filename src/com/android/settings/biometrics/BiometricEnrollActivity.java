@@ -135,6 +135,11 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
             if (BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
                 mGkPwHandle = BiometricUtils.getGatekeeperPasswordHandle(getIntent());
             }
+        } else if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            if (BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
+                mGkPwHandle = BiometricUtils.getGatekeeperPasswordHandle(getIntent());
+            }
+
         }
 
         if (savedInstanceState != null) {
