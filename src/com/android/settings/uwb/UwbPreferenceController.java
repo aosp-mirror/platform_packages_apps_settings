@@ -16,6 +16,9 @@
 
 package com.android.settings.uwb;
 
+import static android.uwb.UwbManager.AdapterStateCallback.STATE_ENABLED_ACTIVE;
+import static android.uwb.UwbManager.AdapterStateCallback.STATE_ENABLED_INACTIVE;
+
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
@@ -25,7 +28,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Handler;
-import android.provider.Settings;
+import android.os.HandlerExecutor;
 import android.uwb.UwbManager;
 import android.uwb.UwbManager.AdapterStateCallback;
 
@@ -39,40 +42,50 @@ import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 /** Controller for "UWB" toggle. */
 public class UwbPreferenceController extends TogglePreferenceController implements
-        AdapterStateCallback, LifecycleObserver {
-    @VisibleForTesting
-    static final String KEY_UWB_SETTINGS = "uwb_settings";
-    @VisibleForTesting
-    UwbManager mUwbManager;
-    @VisibleForTesting
-    boolean mAirplaneModeOn;
-    @VisibleForTesting
+        LifecycleObserver {
+    private final UwbManager mUwbManager;
+    private final UwbUtils mUwbUtils;
+    private boolean mAirplaneModeOn;
+    private /* @AdapterStateCallback.State */ int mState;
+    private /* @AdapterStateCallback.StateChangedReason */ int mReason;
     private final BroadcastReceiver mAirplaneModeChangedReceiver;
+    private final AdapterStateCallback mAdapterStateCallback;
     private final Executor mExecutor;
     private final Handler mHandler;
     private Preference mPreference;
 
-    public UwbPreferenceController(Context context, String key) {
+    @VisibleForTesting
+    public UwbPreferenceController(Context context, String key, UwbUtils uwbUtils) {
         super(context, key);
-        mExecutor = Executors.newSingleThreadExecutor();
         mHandler = new Handler(context.getMainLooper());
+        mExecutor = new HandlerExecutor(mHandler);
+        mUwbUtils = uwbUtils;
         if (isUwbSupportedOnDevice()) {
             mUwbManager = context.getSystemService(UwbManager.class);
-        }
-        mAirplaneModeOn = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_ON, 0) == 1;
-        mAirplaneModeChangedReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                mAirplaneModeOn = Settings.Global.getInt(mContext.getContentResolver(),
-                        Settings.Global.AIRPLANE_MODE_ON, 0) == 1;
+            mAirplaneModeChangedReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    mAirplaneModeOn = mUwbUtils.isAirplaneModeOn(mContext);
+                    updateState(mPreference);
+                }
+            };
+            mAdapterStateCallback = (state, reason) -> {
+                mState = state;
+                mReason = reason;
                 updateState(mPreference);
-            }
-        };
+            };
+        } else {
+            mUwbManager = null;
+            mAirplaneModeChangedReceiver = null;
+            mAdapterStateCallback = null;
+        }
+    }
+
+    public UwbPreferenceController(Context context, String key) {
+        this(context, key, new UwbUtils());
     }
 
     public boolean isUwbSupportedOnDevice() {
@@ -101,14 +114,11 @@ public class UwbPreferenceController extends TogglePreferenceController implemen
         if (!isUwbSupportedOnDevice()) {
             return false;
         }
-        int state = mUwbManager.getAdapterState();
-        return state == STATE_ENABLED_ACTIVE || state == STATE_ENABLED_INACTIVE;
+        return mState == STATE_ENABLED_ACTIVE || mState == STATE_ENABLED_INACTIVE;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        mAirplaneModeOn = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_ON, 0) == 1;
         if (isUwbSupportedOnDevice()) {
             if (mAirplaneModeOn) {
                 mUwbManager.setUwbEnabled(false);
@@ -119,32 +129,25 @@ public class UwbPreferenceController extends TogglePreferenceController implemen
         return true;
     }
 
-    @Override
-    public void onStateChanged(int state, int reason) {
-        Runnable runnable = () -> updateState(mPreference);
-        mHandler.post(runnable);
-    }
-
     /** Called when activity starts being displayed to user. */
     @OnLifecycleEvent(ON_START)
     public void onStart() {
         if (isUwbSupportedOnDevice()) {
-            mUwbManager.registerAdapterStateCallback(mExecutor, this);
-        }
-        if (mAirplaneModeChangedReceiver != null) {
+            mState = mUwbManager.getAdapterState();
+            mReason = AdapterStateCallback.STATE_CHANGED_REASON_ERROR_UNKNOWN;
+            mAirplaneModeOn = mUwbUtils.isAirplaneModeOn(mContext);
+            mUwbManager.registerAdapterStateCallback(mExecutor, mAdapterStateCallback);
             mContext.registerReceiver(mAirplaneModeChangedReceiver,
-                    new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED));
+                    new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED), null, mHandler);
+            refreshSummary(mPreference);
         }
-        refreshSummary(mPreference);
     }
 
     /** Called when activity stops being displayed to user. */
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
         if (isUwbSupportedOnDevice()) {
-            mUwbManager.unregisterAdapterStateCallback(this);
-        }
-        if (mAirplaneModeChangedReceiver != null) {
+            mUwbManager.unregisterAdapterStateCallback(mAdapterStateCallback);
             mContext.unregisterReceiver(mAirplaneModeChangedReceiver);
         }
     }
@@ -153,7 +156,7 @@ public class UwbPreferenceController extends TogglePreferenceController implemen
     public void updateState(Preference preference) {
         super.updateState(preference);
         preference.setEnabled(!mAirplaneModeOn);
-        refreshSummary(preference);
+        refreshSummary(mPreference);
     }
 
     @Override
