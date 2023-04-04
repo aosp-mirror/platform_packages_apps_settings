@@ -16,6 +16,8 @@
 package com.android.settings.biometrics.combination;
 
 import static android.app.Activity.RESULT_OK;
+import static android.hardware.biometrics.BiometricAuthenticator.TYPE_FACE;
+import static android.hardware.biometrics.BiometricAuthenticator.TYPE_FINGERPRINT;
 
 import static com.android.settings.password.ChooseLockPattern.RESULT_FINISHED;
 
@@ -41,7 +43,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
-import com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment;
+import com.android.settings.biometrics.BiometricsSplitScreenDialog;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.password.ChooseLockGeneric;
@@ -143,6 +145,18 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
         // since FingerprintSettings and FaceSettings revoke the challenge when finishing.
         if (getFacePreferenceKey().equals(key)) {
             mDoNotFinishActivity = true;
+
+            //  If it's split mode and there is no enrolled face, show the dialog. (if there is
+            //  enrolled face, FaceSettingsEnrollButtonPreferenceController#onClick will handle
+            //  the dialog)
+            if (getActivity().isInMultiWindowMode() && !mFaceManager.hasEnrolledTemplates(
+                    mUserId)) {
+                BiometricsSplitScreenDialog.newInstance(TYPE_FACE).show(
+                        getActivity().getSupportFragmentManager(),
+                        BiometricsSplitScreenDialog.class.getName());
+                return true;
+            }
+
             mFaceManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
                 try {
                     final byte[] token = requestGatekeeperHat(context, mGkPwHandle, mUserId,
@@ -168,10 +182,14 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
         } else if (getFingerprintPreferenceKey().equals(key)) {
             mDoNotFinishActivity = true;
 
-            if (shouldSkipForUdfpsInMultiWindowMode()) {
-                new FingerprintSettingsFragment.FingerprintSplitScreenDialog().show(
+            //  If it's split mode and there is no enrolled fingerprint, show the dialog. (if
+            //  there is enrolled fingerprint, FingerprintSettingsFragment#onPreferenceTreeClick
+            //  will handle the dialog)
+            if (getActivity().isInMultiWindowMode() && !mFingerprintManager.hasEnrolledFingerprints(
+                    mUserId)) {
+                BiometricsSplitScreenDialog.newInstance(TYPE_FINGERPRINT).show(
                         getActivity().getSupportFragmentManager(),
-                        FingerprintSettingsFragment.FingerprintSplitScreenDialog.class.getName());
+                        BiometricsSplitScreenDialog.class.getName());
                 return true;
             }
 
@@ -385,28 +403,5 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
         } else {
             return 0;
         }
-    }
-
-    /**
-     * Returns whether the click should be skipped.
-     * True if the following conditions are all met:
-     * 1. It's split mode.
-     * 2. It's udfps.
-     * 3. There is no enrolled fingerprint. (If there is enrolled fingerprint, FingerprintSettings
-     * will handle the adding fingerprint.
-     */
-    private boolean shouldSkipForUdfpsInMultiWindowMode() {
-        if (!getActivity().isInMultiWindowMode() || mFingerprintManager.hasEnrolledFingerprints(
-                mUserId)) {
-            return false;
-        }
-
-        for (FingerprintSensorPropertiesInternal prop :
-                mFingerprintManager.getSensorPropertiesInternal()) {
-            if (prop.isAnyUdfpsType()) {
-                return true;
-            }
-        }
-        return false;
     }
 }

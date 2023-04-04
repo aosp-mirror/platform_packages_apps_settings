@@ -20,6 +20,7 @@ package com.android.settings.biometrics.fingerprint;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.FINGERPRINT_UNLOCK_DISABLED_EXPLANATION;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_FINGERPRINT_LAST_DELETE_MESSAGE;
 import static android.app.admin.DevicePolicyResources.UNDEFINED;
+import static android.hardware.biometrics.BiometricAuthenticator.TYPE_FINGERPRINT;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY;
@@ -67,6 +68,7 @@ import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.biometrics.BiometricsSplitScreenDialog;
 import com.android.settings.biometrics.GatekeeperPasswordProvider;
 import com.android.settings.biometrics2.ui.model.EnrollmentRequest;
 import com.android.settings.biometrics2.ui.view.FingerprintEnrollmentActivity;
@@ -695,12 +697,12 @@ public class FingerprintSettings extends SubSettings {
         public boolean onPreferenceTreeClick(Preference pref) {
             final String key = pref.getKey();
             if (KEY_FINGERPRINT_ADD.equals(key)) {
-                // If it's udfps in split mode, show the error dialog and don't need to show adding
+                // If it's in split mode, show the error dialog and don't need to show adding
                 // fingerprint intent.
-                if (shouldSkipForUdfpsInMultiWindowMode()) {
-                    new FingerprintSplitScreenDialog().show(
+                if (getActivity().isInMultiWindowMode()) {
+                    BiometricsSplitScreenDialog.newInstance(TYPE_FINGERPRINT).show(
                             getActivity().getSupportFragmentManager(),
-                            FingerprintSplitScreenDialog.class.getName());
+                            BiometricsSplitScreenDialog.class.getName());
                     return true;
                 }
 
@@ -1007,14 +1009,6 @@ public class FingerprintSettings extends SubSettings {
             updatePreferences();
         }
 
-        /**
-         * Returns whether the click should be skipped.
-         * True if it's udfps and it's in split mode.
-         */
-        private boolean shouldSkipForUdfpsInMultiWindowMode() {
-            return getActivity().isInMultiWindowMode() && isUdfps();
-        }
-
         private final Runnable mFingerprintLockoutReset = new Runnable() {
             @Override
             public void run() {
@@ -1262,29 +1256,6 @@ public class FingerprintSettings extends SubSettings {
                                 })
                         .create();
                 return alertDialog;
-            }
-        }
-
-        /**
-         * This alert dialog shows when fingerprint is being added in multi window mode.
-         */
-        public static class FingerprintSplitScreenDialog extends InstrumentedDialogFragment {
-            @Override
-            public Dialog onCreateDialog(Bundle savedInstanceState) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle(
-                                R.string.biometric_settings_add_fingerprint_in_split_mode_title)
-                        .setMessage(
-                                R.string.biometric_settings_add_fingerprint_in_split_mode_message)
-                        .setPositiveButton(
-                                R.string.biometric_settings_add_fingerprint_in_split_mode_ok,
-                                (DialogInterface.OnClickListener) (dialog, which) -> dialog.dismiss());
-                return builder.create();
-            }
-
-            @Override
-            public int getMetricsCategory() {
-                return SettingsEnums.DIALOG_ADD_FINGERPRINT_ERROR_IN_SPLIT_MODE;
             }
         }
     }
