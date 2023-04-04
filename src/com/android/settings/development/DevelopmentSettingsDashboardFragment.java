@@ -689,6 +689,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new PhantomProcessPreferenceController(context));
         controllers.add(new ContrastPreferenceController(
                 context, context.getSystemService(UiModeManager.class)));
+        controllers.add(new ForceEnableNotesRolePreferenceController(context));
 
         return controllers;
     }
