@@ -26,6 +26,10 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROF
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_PIN_REQUIRED;
 import static android.app.admin.DevicePolicyResources.UNDEFINED;
 
+import static com.android.settings.biometrics.GatekeeperPasswordProvider.containsGatekeeperPasswordHandle;
+import static com.android.settings.biometrics.GatekeeperPasswordProvider.getGatekeeperPasswordHandle;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE;
+
 import android.annotation.Nullable;
 import android.app.KeyguardManager;
 import android.app.RemoteLockscreenValidationResult;
@@ -614,7 +618,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                         saveAndFinishWorker.setListener(this);
                         saveAndFinishWorker.start(
                                 mLockPatternUtils,
-                                /* requestGatekeeperPassword= */ false,
+                                /* requestGatekeeperPassword= */ true,
                                 mDeviceCredentialGuess,
                                 /* currentCredential= */ null,
                                 mEffectiveUserId);
@@ -705,8 +709,14 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             if (mDeviceCredentialGuess != null) {
                 mDeviceCredentialGuess.zeroize();
             }
+
+            Intent result = new Intent();
+            if (mRemoteValidation && containsGatekeeperPasswordHandle(resultData)) {
+                result.putExtra(EXTRA_KEY_GK_PW_HANDLE, getGatekeeperPasswordHandle(resultData));
+            }
+
             mGlifLayout.setProgressBarShown(false);
-            mCredentialCheckResultTracker.setResult(/* matched= */ true, new Intent(),
+            mCredentialCheckResultTracker.setResult(/* matched= */ true, result,
                     /* timeoutMs= */ 0, mEffectiveUserId);
         }
     }
