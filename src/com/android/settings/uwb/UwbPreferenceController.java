@@ -16,6 +16,8 @@
 
 package com.android.settings.uwb;
 
+import static android.uwb.UwbManager.AdapterStateCallback.STATE_CHANGED_REASON_SYSTEM_REGULATION;
+import static android.uwb.UwbManager.AdapterStateCallback.STATE_DISABLED;
 import static android.uwb.UwbManager.AdapterStateCallback.STATE_ENABLED_ACTIVE;
 import static android.uwb.UwbManager.AdapterStateCallback.STATE_ENABLED_INACTIVE;
 
@@ -50,7 +52,7 @@ public class UwbPreferenceController extends TogglePreferenceController implemen
     private final UwbUtils mUwbUtils;
     private boolean mAirplaneModeOn;
     private /* @AdapterStateCallback.State */ int mState;
-    private /* @AdapterStateCallback.StateChangedReason */ int mReason;
+    private /* @AdapterStateCallback.StateChangedReason */ int mStateReason;
     private final BroadcastReceiver mAirplaneModeChangedReceiver;
     private final AdapterStateCallback mAdapterStateCallback;
     private final Executor mExecutor;
@@ -74,7 +76,7 @@ public class UwbPreferenceController extends TogglePreferenceController implemen
             };
             mAdapterStateCallback = (state, reason) -> {
                 mState = state;
-                mReason = reason;
+                mStateReason = reason;
                 updateState(mPreference);
             };
         } else {
@@ -92,12 +94,18 @@ public class UwbPreferenceController extends TogglePreferenceController implemen
         return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_UWB);
     }
 
+    private boolean isUwbDisabledDueToRegulatory() {
+        return mState == STATE_DISABLED && mStateReason == STATE_CHANGED_REASON_SYSTEM_REGULATION;
+    }
+
     @Override
     public int getAvailabilityStatus() {
         if (!isUwbSupportedOnDevice()) {
             return UNSUPPORTED_ON_DEVICE;
         } else if (mAirplaneModeOn) {
             return DISABLED_DEPENDENT_SETTING;
+        } else if (isUwbDisabledDueToRegulatory()) {
+            return CONDITIONALLY_UNAVAILABLE;
         } else {
             return AVAILABLE;
         }
@@ -134,7 +142,7 @@ public class UwbPreferenceController extends TogglePreferenceController implemen
     public void onStart() {
         if (isUwbSupportedOnDevice()) {
             mState = mUwbManager.getAdapterState();
-            mReason = AdapterStateCallback.STATE_CHANGED_REASON_ERROR_UNKNOWN;
+            mStateReason = AdapterStateCallback.STATE_CHANGED_REASON_ERROR_UNKNOWN;
             mAirplaneModeOn = mUwbUtils.isAirplaneModeOn(mContext);
             mUwbManager.registerAdapterStateCallback(mExecutor, mAdapterStateCallback);
             mContext.registerReceiver(mAirplaneModeChangedReceiver,
@@ -163,6 +171,9 @@ public class UwbPreferenceController extends TogglePreferenceController implemen
     public CharSequence getSummary() {
         if (mAirplaneModeOn) {
             return mContext.getResources().getString(R.string.uwb_settings_summary_airplane_mode);
+        } else if (isUwbDisabledDueToRegulatory()) {
+            return mContext.getResources().getString(
+                    R.string.uwb_settings_summary_no_uwb_regulatory);
         } else {
             return mContext.getResources().getString(R.string.uwb_settings_summary);
         }

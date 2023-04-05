@@ -17,6 +17,7 @@
 package com.android.settings.uwb;
 
 import static android.uwb.UwbManager.AdapterStateCallback.STATE_CHANGED_REASON_SYSTEM_POLICY;
+import static android.uwb.UwbManager.AdapterStateCallback.STATE_CHANGED_REASON_SYSTEM_REGULATION;
 import static android.uwb.UwbManager.AdapterStateCallback.STATE_DISABLED;
 import static android.uwb.UwbManager.AdapterStateCallback.STATE_ENABLED_ACTIVE;
 import static android.uwb.UwbManager.AdapterStateCallback.STATE_ENABLED_INACTIVE;
@@ -62,6 +63,7 @@ import org.robolectric.RobolectricTestRunner;
 public class UwbPreferenceControllerTest {
     private static final String TEST_SUMMARY = "uwb";
     private static final String TEST_AIRPLANE_SUMMARY = "apm_uwb";
+    private static final String TEST_NO_UWB_REGULATORY_SUMMARY = "regulatory_uwb";
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
 
@@ -96,6 +98,8 @@ public class UwbPreferenceControllerTest {
                 .thenReturn(TEST_SUMMARY);
         when(mResources.getString(R.string.uwb_settings_summary_airplane_mode))
                 .thenReturn(TEST_AIRPLANE_SUMMARY);
+        when(mResources.getString(R.string.uwb_settings_summary_no_uwb_regulatory))
+                .thenReturn(TEST_NO_UWB_REGULATORY_SUMMARY);
         when(mContext.getMainLooper()).thenReturn(mTestLooper.getLooper());
         when(mContext.getSystemService(UwbManager.class)).thenReturn(mUwbManager);
         when(mContext.getResources()).thenReturn(mResources);
@@ -218,6 +222,19 @@ public class UwbPreferenceControllerTest {
 
         verify(mPreference).setEnabled(true);
         verify(mPreference, times(2)).setSummary(TEST_SUMMARY);
+    }
+
+    @Test
+    public void updateStateAndSummary_uwbDisabledDueToRegulatory() {
+        startControllerAndCaptureCallbacks();
+        clearInvocations(mUwbManager, mPreference);
+
+        mAdapterStateCallbackArgumentCaptor.getValue().onStateChanged(
+                STATE_DISABLED, STATE_CHANGED_REASON_SYSTEM_REGULATION);
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+        verify(mPreference, times(2)).setSummary(TEST_NO_UWB_REGULATORY_SUMMARY);
     }
 }
 
