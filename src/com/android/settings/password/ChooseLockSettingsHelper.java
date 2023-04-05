@@ -350,7 +350,7 @@ public final class ChooseLockSettingsHelper {
                 Utils.enforceSameOwner(mActivity, mUserId);
             }
 
-            if (mExternal && mReturnCredentials) {
+            if (mExternal && mReturnCredentials && !mRemoteLockscreenValidation) {
                 throw new IllegalArgumentException("External and ReturnCredentials specified. "
                         + " External callers should never be allowed to receive credentials in"
                         + " onActivityResult");
