@@ -197,7 +197,7 @@ public class ConfirmLockPasswordTest {
         verify(mCredentialCheckResultTracker).setResult(
                 eq(true), any(), eq(0), eq(fragment.mEffectiveUserId));
         assertThat(mLockPatternUtils.isSecure(fragment.mEffectiveUserId)).isTrue();
-        assertThat(fragment.mDeviceCredentialGuess).isNotNull();
+        assertThat(fragment.mRemoteLockscreenValidationFragment.getLockscreenCredential()).isNull();
     }
 
     @Test
@@ -223,7 +223,7 @@ public class ConfirmLockPasswordTest {
         verify(mCredentialCheckResultTracker).setResult(
                 eq(true), any(), eq(0), eq(fragment.mEffectiveUserId));
         assertThat(mLockPatternUtils.isSecure(fragment.mEffectiveUserId)).isFalse();
-        assertThat(fragment.mDeviceCredentialGuess).isNull();
+        assertThat(fragment.mRemoteLockscreenValidationFragment.getLockscreenCredential()).isNull();
     }
 
     @Test
