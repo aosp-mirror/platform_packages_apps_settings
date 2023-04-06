@@ -23,6 +23,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
+import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -48,9 +49,11 @@ import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.widget.FooterPreference;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /** Controller for battery usage breakdown preference group. */
 public class BatteryUsageBreakdownController extends BasePreferenceController
@@ -61,6 +64,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     private static final String SPINNER_PREFERENCE_KEY = "battery_usage_spinner";
     private static final String APP_LIST_PREFERENCE_KEY = "app_list";
     private static final String PACKAGE_NAME_NONE = "none";
+    private static final List<BatteryDiffEntry> EMPTY_ENTRY_LIST = new ArrayList<>();
 
     private static int sUiMode = Configuration.UI_MODE_NIGHT_UNDEFINED;
 
@@ -183,7 +187,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
                         if (mSpinnerPosition != position) {
                             mSpinnerPosition = position;
                             mHandler.post(() -> {
-                                removeAndCacheAllPreferences();
+                                removeAndCacheAllUnusedPreferences();
                                 addAllPreferences();
                                 mMetricsFeatureProvider.action(
                                         mPrefContext,
@@ -238,16 +242,25 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     private void showSpinnerAndAppList() {
         if (mBatteryDiffData == null) {
             mHandler.post(() -> {
-                removeAndCacheAllPreferences();
+                removeAndCacheAllUnusedPreferences();
             });
             return;
         }
         mSpinnerPreference.setVisible(true);
         mAppListPreferenceGroup.setVisible(true);
         mHandler.post(() -> {
-            removeAndCacheAllPreferences();
+            removeAndCacheAllUnusedPreferences();
             addAllPreferences();
         });
+    }
+
+    private List<BatteryDiffEntry> getBatteryDiffEntries() {
+        if (mBatteryDiffData == null) {
+            return EMPTY_ENTRY_LIST;
+        }
+        return mSpinnerPosition == 0
+                ? mBatteryDiffData.getAppDiffEntryList()
+                : mBatteryDiffData.getSystemDiffEntryList();
     }
 
     @VisibleForTesting
@@ -256,9 +269,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
             return;
         }
         final long start = System.currentTimeMillis();
-        final List<BatteryDiffEntry> entries = mSpinnerPosition == 0
-                ? mBatteryDiffData.getAppDiffEntryList()
-                : mBatteryDiffData.getSystemDiffEntryList();
+        final List<BatteryDiffEntry> entries = getBatteryDiffEntries();
         int prefIndex = mAppListPreferenceGroup.getPreferenceCount();
         for (BatteryDiffEntry entry : entries) {
             boolean isAdded = false;
@@ -272,7 +283,6 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
             PowerGaugePreference pref = mAppListPreferenceGroup.findPreference(prefKey);
             if (pref != null) {
                 isAdded = true;
-                Log.w(TAG, "preference should be removed for:" + entry.getPackageName());
             } else {
                 pref = (PowerGaugePreference) mPreferenceCache.get(prefKey);
             }
@@ -301,16 +311,25 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     }
 
     @VisibleForTesting
-    void removeAndCacheAllPreferences() {
+    void removeAndCacheAllUnusedPreferences() {
+        List<BatteryDiffEntry> entries = getBatteryDiffEntries();
+        Set<String> entryKeySet = new ArraySet<>();
+        for (BatteryDiffEntry entry : entries) {
+            entryKeySet.add(entry.getKey());
+        }
+
         final int prefsCount = mAppListPreferenceGroup.getPreferenceCount();
-        for (int index = 0; index < prefsCount; index++) {
+        for (int index = prefsCount - 1; index >= 0; index--) {
             final Preference pref = mAppListPreferenceGroup.getPreference(index);
-            if (TextUtils.isEmpty(pref.getKey())) {
+            if (entryKeySet.contains(pref.getKey())) {
+                // The pref is still used, don't remove.
                 continue;
             }
-            mPreferenceCache.put(pref.getKey(), pref);
+            if (!TextUtils.isEmpty(pref.getKey())) {
+                mPreferenceCache.put(pref.getKey(), pref);
+            }
+            mAppListPreferenceGroup.removePreference(pref);
         }
-        mAppListPreferenceGroup.removeAll();
     }
 
     @VisibleForTesting
