@@ -351,9 +351,14 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     }
 
     @Override
+    public void onPause() {
+        mMobileNetworkRepository.removeRegister(this);
+        super.onPause();
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
-        mMobileNetworkRepository.removeRegister(this);
     }
 
     @VisibleForTesting
