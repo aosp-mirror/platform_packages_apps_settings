@@ -16,9 +16,9 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import static com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
 import static com.android.settings.accessibility.MagnificationModePreferenceController.MagnificationModeInfo;
-import static com.android.settings.accessibility.MagnificationPreferenceFragment.ON;
 
 import static com.google.common.truth.Truth.assertThat;
 

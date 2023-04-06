@@ -24,7 +24,6 @@ import static com.android.settingslib.widget.TwoTargetPreference.ICON_SIZE_MEDIU
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.pm.ServiceInfo;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -129,7 +128,6 @@ public class AccessibilitySettingsForSetupWizard extends DashboardFragment
                 SCREEN_READER_PACKAGE_NAME, SCREEN_READER_SERVICE_NAME);
         updateAccessibilityServicePreference(mSelectToSpeakPreference,
                 SELECT_TO_SPEAK_PACKAGE_NAME, SELECT_TO_SPEAK_SERVICE_NAME);
-        configureMagnificationPreferenceIfNeeded(mDisplayMagnificationPreference);
     }
 
     @Override
@@ -219,14 +217,5 @@ public class AccessibilitySettingsForSetupWizard extends DashboardFragment
 
         final String htmlDescription = info.loadHtmlDescription(getPackageManager());
         extras.putString(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, htmlDescription);
-    }
-
-    private static void configureMagnificationPreferenceIfNeeded(Preference preference) {
-        final Context context = preference.getContext();
-        preference.setFragment(
-                ToggleScreenMagnificationPreferenceFragmentForSetupWizard.class.getName());
-        final Bundle extras = preference.getExtras();
-        MagnificationGesturesPreferenceController
-                .populateMagnificationGesturesPreferenceExtras(extras, context);
     }
 }

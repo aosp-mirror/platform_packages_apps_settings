@@ -104,10 +104,7 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
             @Nullable ComponentName componentName) {
         if (MAGNIFICATION_COMPONENT_NAME.equals(componentName)) {
             final String destination = ToggleScreenMagnificationPreferenceFragment.class.getName();
-            final Bundle arguments = new Bundle();
-            MagnificationGesturesPreferenceController.populateMagnificationGesturesPreferenceExtras(
-                    arguments, getContext());
-            return new LaunchFragmentArguments(destination, arguments);
+            return new LaunchFragmentArguments(destination, /* arguments= */ null);
         }
 
         if (ACCESSIBILITY_BUTTON_COMPONENT_NAME.equals(componentName)) {

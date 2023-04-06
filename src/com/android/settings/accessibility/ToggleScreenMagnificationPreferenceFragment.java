@@ -225,10 +225,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     protected void onProcessArguments(Bundle arguments) {
         Context context = getContext();
 
-        // This Fragment may get arguments from MagnificationGesturesPreferenceController or
-        // MagnificationNavbarPreferenceController and it's necessary to check if a key exists
-        // before putting a new value into arguments.
-
         if (!arguments.containsKey(AccessibilitySettings.EXTRA_PREFERENCE_KEY)) {
             arguments.putString(AccessibilitySettings.EXTRA_PREFERENCE_KEY,
                     Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED);
@@ -531,7 +527,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 preferenceKey)) {
             showDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
         }
-        MagnificationPreferenceFragment.setChecked(getContentResolver(), preferenceKey, enabled);
+        Settings.Secure.putInt(getContentResolver(), preferenceKey, enabled ? ON : OFF);
     }
 
     @Override
