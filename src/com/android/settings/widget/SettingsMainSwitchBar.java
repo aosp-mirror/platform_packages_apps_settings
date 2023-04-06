@@ -21,14 +21,12 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Switch;
 
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.widget.MainSwitchBar;
-import com.android.settingslib.widget.R;
 
 /**
  * A {@link MainSwitchBar} with a customized Switch and provides the metrics feature.
@@ -47,7 +45,6 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
         boolean onBeforeCheckedChanged(Switch switchView, boolean isChecked);
     }
 
-    private ImageView mRestrictedIcon;
     private EnforcedAdmin mEnforcedAdmin;
     private boolean mDisabledByAdmin;
 
@@ -74,14 +71,6 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
 
         addOnSwitchChangeListener((switchView, isChecked) -> logMetrics(isChecked));
-
-        mRestrictedIcon = findViewById(R.id.restricted_icon);
-        mRestrictedIcon.setOnClickListener((View v) -> {
-            if (mDisabledByAdmin) {
-                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(context, mEnforcedAdmin);
-                onRestrictedIconClick();
-            }
-        });
     }
 
     /**
@@ -95,12 +84,9 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
             mDisabledByAdmin = true;
             mTextView.setEnabled(false);
             mSwitch.setEnabled(false);
-            mSwitch.setVisibility(View.GONE);
-            mRestrictedIcon.setVisibility(View.VISIBLE);
         } else {
             mDisabledByAdmin = false;
             mSwitch.setVisibility(View.VISIBLE);
-            mRestrictedIcon.setVisibility(View.GONE);
             setEnabled(isEnabled());
         }
     }
@@ -120,11 +106,12 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
 
     @Override
     public boolean performClick() {
-        return getDelegatingView().performClick();
-    }
+        if (mDisabledByAdmin) {
+            performRestrictedClick();
+            return true;
+        }
 
-    protected void onRestrictedIconClick() {
-        mMetricsFeatureProvider.clicked(mMetricsCategory, "switch_bar|restricted");
+        return mSwitch.performClick();
     }
 
     @Override
@@ -157,11 +144,12 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
         mMetricsCategory = category;
     }
 
-    private View getDelegatingView() {
-        return mDisabledByAdmin ? mRestrictedIcon : mSwitch;
-    }
-
     private void logMetrics(boolean isChecked) {
         mMetricsFeatureProvider.changed(mMetricsCategory, "switch_bar", isChecked ? 1 : 0);
+    }
+
+    private void performRestrictedClick() {
+        RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(), mEnforcedAdmin);
+        mMetricsFeatureProvider.clicked(mMetricsCategory, "switch_bar|restricted");
     }
 }
