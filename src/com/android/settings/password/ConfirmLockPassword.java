@@ -71,8 +71,6 @@ import com.android.settings.R;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
 
-import com.google.android.setupdesign.GlifLayout;
-
 import java.util.ArrayList;
 
 public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
@@ -127,7 +125,8 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
     public static class ConfirmLockPasswordFragment extends ConfirmDeviceCredentialBaseFragment
             implements OnClickListener, OnEditorActionListener,
-            CredentialCheckResultTracker.Listener, SaveChosenLockWorkerBase.Listener {
+            CredentialCheckResultTracker.Listener, SaveChosenLockWorkerBase.Listener,
+            RemoteLockscreenValidationFragment.Listener {
         private static final String FRAGMENT_TAG_CHECK_LOCK_RESULT = "check_lock_result";
         private ImeAwareEditText mPasswordEntry;
         private TextViewInputDisabler mPasswordEntryInputDisabler;
@@ -140,7 +139,6 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         private AppearAnimationUtils mAppearAnimationUtils;
         private DisappearAnimationUtils mDisappearAnimationUtils;
         private boolean mIsManagedProfile;
-        private GlifLayout mGlifLayout;
         private CharSequence mCheckBoxLabel;
 
         // required constructor for fragments
@@ -255,6 +253,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                             ? R.string.lockpassword_forgot_password
                             : R.string.lockpassword_forgot_pin);
                 }
+                updateRemoteLockscreenValidationViews();
             }
 
             if (mForgotButton != null) {
@@ -405,6 +404,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 mCountdownTimer = null;
             }
             mCredentialCheckResultTracker.setListener(null);
+            if (mRemoteLockscreenValidationFragment != null) {
+                mRemoteLockscreenValidationFragment.setListener(null, /* handler= */ null);
+            }
         }
 
         @Override
@@ -426,6 +428,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                         mLockPatternUtils.getCurrentFailedPasswordAttempts(mEffectiveUserId));
             }
             mCredentialCheckResultTracker.setListener(this);
+            if (mRemoteLockscreenValidationFragment != null) {
+                mRemoteLockscreenValidationFragment.setListener(this, mHandler);
+            }
         }
 
         @Override
@@ -436,13 +441,17 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         private void updatePasswordEntry() {
             final boolean isLockedOut =
                     mLockPatternUtils.getLockoutAttemptDeadline(mEffectiveUserId) != 0;
-            mPasswordEntry.setEnabled(!isLockedOut);
-            mPasswordEntryInputDisabler.setInputEnabled(!isLockedOut);
-            if (isLockedOut) {
-                mImm.hideSoftInputFromWindow(mPasswordEntry.getWindowToken(), 0 /*flags*/);
-            } else {
+            final boolean isRemoteLockscreenValidationInProgress =
+                    mRemoteLockscreenValidationFragment != null
+                    && mRemoteLockscreenValidationFragment.isRemoteValidationInProgress();
+            boolean shouldEnableInput = !isLockedOut && !isRemoteLockscreenValidationInProgress;
+            mPasswordEntry.setEnabled(shouldEnableInput);
+            mPasswordEntryInputDisabler.setInputEnabled(shouldEnableInput);
+            if (shouldEnableInput) {
                 mPasswordEntry.scheduleShowSoftInput();
                 mPasswordEntry.requestFocus();
+            } else {
+                mImm.hideSoftInputFromWindow(mPasswordEntry.getWindowToken(), /* flags= */0);
             }
         }
 
@@ -472,7 +481,8 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
             if (mRemoteValidation) {
                 validateGuess(credential);
-                mGlifLayout.setProgressBarShown(true);
+                updateRemoteLockscreenValidationViews();
+                updatePasswordEntry();
                 return;
             }
 
@@ -604,14 +614,15 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         }
 
         @Override
-        protected void onRemoteDeviceCredentialValidationResult(
+        public void onRemoteLockscreenValidationResult(
                 RemoteLockscreenValidationResult result) {
             switch (result.getResultCode()) {
                 case RemoteLockscreenValidationResult.RESULT_GUESS_VALID:
-                    if (mCheckBox.isChecked()) {
+                    if (mCheckBox.isChecked() && mRemoteLockscreenValidationFragment
+                            .getLockscreenCredential() != null) {
+                        Log.i(TAG, "Setting device screen lock to the other device's screen lock.");
                         ChooseLockPassword.SaveAndFinishWorker saveAndFinishWorker =
                                 new ChooseLockPassword.SaveAndFinishWorker();
-                        Log.i(TAG, "Setting device screen lock to the other device's screen lock.");
                         getFragmentManager().beginTransaction().add(saveAndFinishWorker, null)
                                 .commit();
                         getFragmentManager().executePendingTransactions();
@@ -619,14 +630,14 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                         saveAndFinishWorker.start(
                                 mLockPatternUtils,
                                 /* requestGatekeeperPassword= */ true,
-                                mDeviceCredentialGuess,
+                                mRemoteLockscreenValidationFragment.getLockscreenCredential(),
                                 /* currentCredential= */ null,
                                 mEffectiveUserId);
-                        return;
+                    } else {
+                        mCredentialCheckResultTracker.setResult(/* matched= */ true, new Intent(),
+                                /* timeoutMs= */ 0, mEffectiveUserId);
                     }
-                    mCredentialCheckResultTracker.setResult(/* matched= */ true, new Intent(),
-                            /* timeoutMs= */ 0, mEffectiveUserId);
-                    break;
+                    return;
                 case RemoteLockscreenValidationResult.RESULT_GUESS_INVALID:
                     mCredentialCheckResultTracker.setResult(/* matched= */ false, new Intent(),
                             /* timeoutMs= */ 0, mEffectiveUserId);
@@ -636,12 +647,15 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                             (int) result.getTimeoutMillis(), mEffectiveUserId);
                     break;
                 case RemoteLockscreenValidationResult.RESULT_NO_REMAINING_ATTEMPTS:
-                    getActivity().finish();
-                    break;
                 case RemoteLockscreenValidationResult.RESULT_SESSION_EXPIRED:
-                    getActivity().finish();
+                    onRemoteLockscreenValidationFailure(String.format(
+                            "Cannot continue remote lockscreen validation. ResultCode=%d",
+                            result.getResultCode()));
+                    break;
             }
-            mGlifLayout.setProgressBarShown(false);
+            updateRemoteLockscreenValidationViews();
+            updatePasswordEntry();
+            mRemoteLockscreenValidationFragment.clearLockscreenCredential();
         }
 
         @Override
@@ -701,21 +715,18 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         }
 
         /**
-         * Callback for when the device credential guess used for remote validation was set as the
-         * current device's device credential.
+         * Callback for when the current device's lockscreen was set to the guess used for
+         * remote lockscreen validation.
          */
         @Override
         public void onChosenLockSaveFinished(boolean wasSecureBefore, Intent resultData) {
-            if (mDeviceCredentialGuess != null) {
-                mDeviceCredentialGuess.zeroize();
-            }
+            Log.i(TAG, "Device lockscreen has been set to remote device's lockscreen.");
+            mRemoteLockscreenValidationFragment.clearLockscreenCredential();
 
             Intent result = new Intent();
             if (mRemoteValidation && containsGatekeeperPasswordHandle(resultData)) {
                 result.putExtra(EXTRA_KEY_GK_PW_HANDLE, getGatekeeperPasswordHandle(resultData));
             }
-
-            mGlifLayout.setProgressBarShown(false);
             mCredentialCheckResultTracker.setResult(/* matched= */ true, result,
                     /* timeoutMs= */ 0, mEffectiveUserId);
         }

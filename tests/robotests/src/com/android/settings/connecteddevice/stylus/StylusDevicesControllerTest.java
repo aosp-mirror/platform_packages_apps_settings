@@ -394,7 +394,7 @@ public class StylusDevicesControllerTest {
 
         assertThat(buttonsPref.isChecked()).isEqualTo(false);
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
-                Secure.STYLUS_BUTTONS_ENABLED, -1)).isEqualTo(0);
+                Secure.STYLUS_BUTTONS_ENABLED, -1)).isEqualTo(1);
     }
 
     private void showScreen(StylusDevicesController controller) {
