@@ -27,6 +27,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -41,6 +42,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
@@ -51,6 +54,9 @@ public class TimeoutToDockUserPreferenceControllerTest {
     private Resources mResources;
     private TimeoutToDockUserPreferenceController mController;
 
+    @Mock
+    private UserManager mUserManager;
+
     private static final String FAKE_PREFERENCE_KEY = "timeout_to_dock_user_preference";
 
     private String[] mEntries;
@@ -58,9 +64,12 @@ public class TimeoutToDockUserPreferenceControllerTest {
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
+
         mContext = spy(ApplicationProvider.getApplicationContext());
         mResources = spy(mContext.getResources());
         doReturn(mResources).when(mContext).getResources();
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
 
         mEntries = mResources.getStringArray(
                 R.array.switch_to_dock_user_when_docked_timeout_entries);
@@ -77,6 +86,9 @@ public class TimeoutToDockUserPreferenceControllerTest {
         // Multi-user feature enabled.
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.USER_SWITCHER_ENABLED,
                 1);
+
+        // User switching not blocked.
+        when(mUserManager.hasUserRestriction(UserManager.DISALLOW_USER_SWITCH)).thenReturn(false);
 
         // Set to user 1;
         ShadowUserHandle.setUid(1);
@@ -101,6 +113,14 @@ public class TimeoutToDockUserPreferenceControllerTest {
     public void getAvailabilityStatus_multiUserDisabled_returnConditionallyUnavailable() {
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.USER_SWITCHER_ENABLED,
                 0);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_userSwitchingBlocked_returnConditionallyUnavailable() {
+        when(mUserManager.hasUserRestriction(UserManager.DISALLOW_USER_SWITCH)).thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
