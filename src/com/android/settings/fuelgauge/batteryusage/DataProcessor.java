@@ -1446,31 +1446,39 @@ public final class DataProcessor {
         final int workProfileUserId =
                 userHandle != null ? userHandle.getIdentifier() : Integer.MIN_VALUE;
         // Each time slot usage diff data =
-        //     Math.abs(timestamp[i+2] data - timestamp[i+1] data) +
-        //     Math.abs(timestamp[i+1] data - timestamp[i] data);
-        // since we want to aggregate every two hours data into a single time slot.
+        //     sum(Math.abs(timestamp[i+1] data - timestamp[i] data));
+        // since we want to aggregate every hour usage diff data into a single time slot.
         for (int dailyIndex = 0; dailyIndex < hourlyBatteryLevelsPerDay.size(); dailyIndex++) {
             final Map<Integer, BatteryDiffData> dailyDiffMap = new ArrayMap<>();
             resultMap.put(dailyIndex, dailyDiffMap);
             if (hourlyBatteryLevelsPerDay.get(dailyIndex) == null) {
                 continue;
             }
-            final List<Long> timestamps = hourlyBatteryLevelsPerDay.get(dailyIndex).getTimestamps();
-            for (int hourlyIndex = 0; hourlyIndex < timestamps.size() - 1; hourlyIndex++) {
+            final List<Long> hourlyTimestamps =
+                    hourlyBatteryLevelsPerDay.get(dailyIndex).getTimestamps();
+            for (int hourlyIndex = 0; hourlyIndex < hourlyTimestamps.size() - 1; hourlyIndex++) {
+                final Long startTimestamp = hourlyTimestamps.get(hourlyIndex);
+                final Long endTimestamp = hourlyTimestamps.get(hourlyIndex + 1);
+                final long slotDuration = endTimestamp - startTimestamp;
+                List<Map<String, BatteryHistEntry>> slotBatteryHistoryList = new ArrayList<>();
+                for (Long timestamp = startTimestamp; timestamp <= endTimestamp;
+                        timestamp += DateUtils.HOUR_IN_MILLIS) {
+                    slotBatteryHistoryList.add(
+                            batteryHistoryMap.getOrDefault(timestamp, EMPTY_BATTERY_MAP));
+                }
                 final BatteryDiffData hourlyBatteryDiffData =
                         insertHourlyUsageDiffDataPerSlot(
                                 context,
                                 currentUserId,
                                 workProfileUserId,
-                                hourlyIndex,
-                                timestamps,
+                                slotDuration,
                                 systemAppsPackageNames,
                                 systemAppsUids,
                                 appUsagePeriodMap == null
                                         || appUsagePeriodMap.get(dailyIndex) == null
                                         ? null
                                         : appUsagePeriodMap.get(dailyIndex).get(hourlyIndex),
-                                batteryHistoryMap);
+                                slotBatteryHistoryList);
                 dailyDiffMap.put(hourlyIndex, hourlyBatteryDiffData);
             }
         }
@@ -1508,54 +1516,42 @@ public final class DataProcessor {
             final Context context,
             final int currentUserId,
             final int workProfileUserId,
-            final int currentIndex,
-            final List<Long> timestamps,
+            final long slotDuration,
             final Set<String> systemAppsPackageNames,
             final Set<Integer> systemAppsUids,
             final Map<Long, Map<String, List<AppUsagePeriod>>> appUsageMap,
-            final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
+            final List<Map<String, BatteryHistEntry>> slotBatteryHistoryList) {
         final List<BatteryDiffEntry> appEntries = new ArrayList<>();
         final List<BatteryDiffEntry> systemEntries = new ArrayList<>();
 
-        final Long currentTimestamp = timestamps.get(currentIndex);
-        final Long nextTimestamp = currentTimestamp + DateUtils.HOUR_IN_MILLIS;
-        final Long nextTwoTimestamp = nextTimestamp + DateUtils.HOUR_IN_MILLIS;
-        // Fetches BatteryHistEntry data from corresponding time slot.
-        final Map<String, BatteryHistEntry> currentBatteryHistMap =
-                batteryHistoryMap.getOrDefault(currentTimestamp, EMPTY_BATTERY_MAP);
-        final Map<String, BatteryHistEntry> nextBatteryHistMap =
-                batteryHistoryMap.getOrDefault(nextTimestamp, EMPTY_BATTERY_MAP);
-        final Map<String, BatteryHistEntry> nextTwoBatteryHistMap =
-                batteryHistoryMap.getOrDefault(nextTwoTimestamp, EMPTY_BATTERY_MAP);
-        // We should not get the empty list since we have at least one fake data to record
-        // the battery level and status in each time slot, the empty list is used to
-        // represent there is no enough data to apply interpolation arithmetic.
-        if (currentBatteryHistMap.isEmpty()
-                || nextBatteryHistMap.isEmpty()
-                || nextTwoBatteryHistMap.isEmpty()) {
-            return null;
-        }
-
         // Collects all keys in these three time slot records as all populations.
         final Set<String> allBatteryHistEntryKeys = new ArraySet<>();
-        allBatteryHistEntryKeys.addAll(currentBatteryHistMap.keySet());
-        allBatteryHistEntryKeys.addAll(nextBatteryHistMap.keySet());
-        allBatteryHistEntryKeys.addAll(nextTwoBatteryHistMap.keySet());
+        for (Map<String, BatteryHistEntry> slotBatteryHistMap : slotBatteryHistoryList) {
+            if (slotBatteryHistMap.isEmpty()) {
+                // We should not get the empty list since we have at least one fake data to record
+                // the battery level and status in each time slot, the empty list is used to
+                // represent there is no enough data to apply interpolation arithmetic.
+                return null;
+            }
+            allBatteryHistEntryKeys.addAll(slotBatteryHistMap.keySet());
+        }
 
         // Calculates all packages diff usage data in a specific time slot.
         for (String key : allBatteryHistEntryKeys) {
             if (key == null) {
                 continue;
             }
-            final BatteryHistEntry currentEntry =
-                    currentBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
-            final BatteryHistEntry nextEntry =
-                    nextBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
-            final BatteryHistEntry nextTwoEntry =
-                    nextTwoBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
 
-            final BatteryHistEntry selectedBatteryEntry =
-                    selectBatteryHistEntry(currentEntry, nextEntry, nextTwoEntry);
+            BatteryHistEntry selectedBatteryEntry = null;
+            final List<BatteryHistEntry> batteryHistEntries = new ArrayList<>();
+            for (Map<String, BatteryHistEntry> slotBatteryHistMap : slotBatteryHistoryList) {
+                BatteryHistEntry entry =
+                        slotBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
+                batteryHistEntries.add(entry);
+                if (selectedBatteryEntry == null && entry != EMPTY_BATTERY_HIST_ENTRY) {
+                    selectedBatteryEntry = entry;
+                }
+            }
             if (selectedBatteryEntry == null) {
                 continue;
             }
@@ -1568,41 +1564,45 @@ public final class DataProcessor {
             }
 
             // Cumulative values is a specific time slot for a specific app.
-            long foregroundUsageTimeInMs =
-                    getDiffValue(
-                            currentEntry.mForegroundUsageTimeInMs,
-                            nextEntry.mForegroundUsageTimeInMs,
-                            nextTwoEntry.mForegroundUsageTimeInMs);
-            long backgroundUsageTimeInMs =
-                    getDiffValue(
-                            currentEntry.mBackgroundUsageTimeInMs,
-                            nextEntry.mBackgroundUsageTimeInMs,
-                            nextTwoEntry.mBackgroundUsageTimeInMs);
-            double consumePower =
-                    getDiffValue(
-                            currentEntry.mConsumePower,
-                            nextEntry.mConsumePower,
-                            nextTwoEntry.mConsumePower);
-            double foregroundUsageConsumePower =
-                    getDiffValue(
-                            currentEntry.mForegroundUsageConsumePower,
-                            nextEntry.mForegroundUsageConsumePower,
-                            nextTwoEntry.mForegroundUsageConsumePower);
-            double foregroundServiceUsageConsumePower =
-                    getDiffValue(
-                            currentEntry.mForegroundServiceUsageConsumePower,
-                            nextEntry.mForegroundServiceUsageConsumePower,
-                            nextTwoEntry.mForegroundServiceUsageConsumePower);
-            double backgroundUsageConsumePower =
-                    getDiffValue(
-                            currentEntry.mBackgroundUsageConsumePower,
-                            nextEntry.mBackgroundUsageConsumePower,
-                            nextTwoEntry.mBackgroundUsageConsumePower);
-            double cachedUsageConsumePower =
-                    getDiffValue(
-                            currentEntry.mCachedUsageConsumePower,
-                            nextEntry.mCachedUsageConsumePower,
-                            nextTwoEntry.mCachedUsageConsumePower);
+            long foregroundUsageTimeInMs = 0;
+            long backgroundUsageTimeInMs = 0;
+            double consumePower = 0;
+            double foregroundUsageConsumePower = 0;
+            double foregroundServiceUsageConsumePower = 0;
+            double backgroundUsageConsumePower = 0;
+            double cachedUsageConsumePower = 0;
+            for (int i = 0; i < batteryHistEntries.size() - 1; i++) {
+                final BatteryHistEntry currentEntry = batteryHistEntries.get(i);
+                final BatteryHistEntry nextEntry = batteryHistEntries.get(i + 1);
+                foregroundUsageTimeInMs +=
+                        getDiffValue(
+                                currentEntry.mForegroundUsageTimeInMs,
+                                nextEntry.mForegroundUsageTimeInMs);
+                backgroundUsageTimeInMs +=
+                        getDiffValue(
+                                currentEntry.mBackgroundUsageTimeInMs,
+                                nextEntry.mBackgroundUsageTimeInMs);
+                consumePower +=
+                        getDiffValue(
+                                currentEntry.mConsumePower,
+                                nextEntry.mConsumePower);
+                foregroundUsageConsumePower +=
+                        getDiffValue(
+                                currentEntry.mForegroundUsageConsumePower,
+                                nextEntry.mForegroundUsageConsumePower);
+                foregroundServiceUsageConsumePower +=
+                        getDiffValue(
+                                currentEntry.mForegroundServiceUsageConsumePower,
+                                nextEntry.mForegroundServiceUsageConsumePower);
+                backgroundUsageConsumePower +=
+                        getDiffValue(
+                                currentEntry.mBackgroundUsageConsumePower,
+                                nextEntry.mBackgroundUsageConsumePower);
+                cachedUsageConsumePower +=
+                        getDiffValue(
+                                currentEntry.mCachedUsageConsumePower,
+                                nextEntry.mCachedUsageConsumePower);
+            }
             // Excludes entry since we don't have enough data to calculate.
             if (foregroundUsageTimeInMs == 0
                     && backgroundUsageTimeInMs == 0
@@ -1613,13 +1613,13 @@ public final class DataProcessor {
             // will apply the interpolation arithmetic.
             final float totalUsageTimeInMs =
                     foregroundUsageTimeInMs + backgroundUsageTimeInMs;
-            if (totalUsageTimeInMs > TOTAL_HOURLY_TIME_THRESHOLD) {
-                final float ratio = TOTAL_HOURLY_TIME_THRESHOLD / totalUsageTimeInMs;
+            if (totalUsageTimeInMs > slotDuration) {
+                final float ratio = slotDuration / totalUsageTimeInMs;
                 if (sDebug) {
                     Log.w(TAG, String.format("abnormal usage time %d|%d for:\n%s",
                             Duration.ofMillis(foregroundUsageTimeInMs).getSeconds(),
                             Duration.ofMillis(backgroundUsageTimeInMs).getSeconds(),
-                            currentEntry));
+                            selectedBatteryEntry));
                 }
                 foregroundUsageTimeInMs =
                         Math.round(foregroundUsageTimeInMs * ratio);
@@ -1634,14 +1634,14 @@ public final class DataProcessor {
 
             // Compute the screen on time and make sure it won't exceed the threshold.
             final long screenOnTime = Math.min(
-                    (long) TOTAL_HOURLY_TIME_THRESHOLD,
+                    (long) slotDuration,
                     getScreenOnTime(
                             appUsageMap,
                             selectedBatteryEntry.mUserId,
                             selectedBatteryEntry.mPackageName));
             // Make sure the background + screen-on time will not exceed the threshold.
             backgroundUsageTimeInMs = Math.min(
-                    backgroundUsageTimeInMs, (long) TOTAL_HOURLY_TIME_THRESHOLD - screenOnTime);
+                    backgroundUsageTimeInMs, (long) slotDuration - screenOnTime);
             final BatteryDiffEntry currentBatteryDiffEntry = new BatteryDiffEntry(
                     context,
                     foregroundUsageTimeInMs,
@@ -1948,23 +1948,12 @@ public final class DataProcessor {
         return calendar.getTimeInMillis();
     }
 
-    private static long getDiffValue(long v1, long v2, long v3) {
-        return (v2 > v1 ? v2 - v1 : 0) + (v3 > v2 ? v3 - v2 : 0);
+    private static long getDiffValue(long v1, long v2) {
+        return v2 > v1 ? v2 - v1 : 0;
     }
 
-    private static double getDiffValue(double v1, double v2, double v3) {
-        return (v2 > v1 ? v2 - v1 : 0) + (v3 > v2 ? v3 - v2 : 0);
-    }
-
-    @Nullable
-    private static BatteryHistEntry selectBatteryHistEntry(
-            final BatteryHistEntry... batteryHistEntries) {
-        for (BatteryHistEntry entry : batteryHistEntries) {
-            if (entry != null && entry != EMPTY_BATTERY_HIST_ENTRY) {
-                return entry;
-            }
-        }
-        return null;
+    private static double getDiffValue(double v1, double v2) {
+        return v2 > v1 ? v2 - v1 : 0;
     }
 
     private static Set<String> getSystemAppsPackageNames(Context context) {
