@@ -23,6 +23,7 @@ import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.util.Log;
 import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
@@ -34,8 +35,10 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.inputmethod.NewKeyboardSettingsUtils.KeyboardInfo;
 
 import java.util.ArrayList;
@@ -57,6 +60,39 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
     private ArrayList<KeyboardInfo> mKeyboardInfoList = new ArrayList<>();
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mContext = context;
+        final int profileType = getArguments().getInt(ProfileSelectFragment.EXTRA_PROFILE);
+        final int currentUserId = UserHandle.myUserId();
+        final int newUserId;
+        final UserManager userManager = mContext.getSystemService(UserManager.class);
+
+        switch (profileType) {
+            case ProfileSelectFragment.ProfileType.WORK: {
+                // If the user is a managed profile user, use currentUserId directly. Or get the
+                // managed profile userId instead.
+                newUserId = userManager.isManagedProfile()
+                        ? currentUserId : Utils.getManagedProfileId(userManager, currentUserId);
+                break;
+            }
+            case ProfileSelectFragment.ProfileType.PERSONAL: {
+                final UserHandle primaryUser = userManager.getPrimaryUser().getUserHandle();
+                newUserId = primaryUser.getIdentifier();
+                break;
+            }
+            default:
+                newUserId = currentUserId;
+        }
+
+        mUserId = newUserId;
+        mIm = mContext.getSystemService(InputManager.class);
+        mImm = mContext.getSystemService(InputMethodManager.class);
+        mInputDeviceId = -1;
+    }
+
+    @Override
     public void onActivityCreated(final Bundle icicle) {
         super.onActivityCreated(icicle);
         Bundle arguments = getArguments();
@@ -74,13 +110,39 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
         }
         final String title = inputDevice.getName();
         getActivity().setTitle(title);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mIm.registerInputDeviceListener(this, null);
+        InputDevice inputDevice =
+                NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier);
+        if (inputDevice == null) {
+            getActivity().finish();
+            return;
+        }
+        mInputDeviceId = inputDevice.getId();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         updateCheckedState();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mIm.unregisterInputDeviceListener(this);
+        mInputDeviceId = -1;
     }
 
     private void updateCheckedState() {
         if (NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier) == null) {
             return;
         }
+
         PreferenceScreen preferenceScreen = getPreferenceScreen();
         preferenceScreen.removeAll();
         List<InputMethodInfo> infoList = mImm.getEnabledInputMethodListAsUser(mUserId);
@@ -95,7 +157,7 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
         for (InputMethodInfo info : infoList) {
             mKeyboardInfoList.clear();
             List<InputMethodSubtype> subtypes =
-                    mImm.getEnabledInputMethodSubtypeList(info, true);
+                    mImm.getEnabledInputMethodSubtypeListAsUser(info.getId(), true, mUserId);
             for (InputMethodSubtype subtype : subtypes) {
                 if (subtype.isSuitableForPhysicalKeyboardLayoutMapping()) {
                     mapLanguageWithLayout(info, subtype);
@@ -186,42 +248,6 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
         if (mInputDeviceId >= 0 && deviceId == mInputDeviceId) {
             updateCheckedState();
         }
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mContext = getContext();
-        mIm = mContext.getSystemService(InputManager.class);
-        mImm = mContext.getSystemService(InputMethodManager.class);
-        mInputDeviceId = -1;
-        mUserId = UserHandle.myUserId();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        mIm.registerInputDeviceListener(this, null);
-        InputDevice inputDevice =
-                NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier);
-        if (inputDevice == null) {
-            getActivity().finish();
-            return;
-        }
-        mInputDeviceId = inputDevice.getId();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        mIm.unregisterInputDeviceListener(this);
-        mInputDeviceId = -1;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        updateCheckedState();
     }
 
     @Override

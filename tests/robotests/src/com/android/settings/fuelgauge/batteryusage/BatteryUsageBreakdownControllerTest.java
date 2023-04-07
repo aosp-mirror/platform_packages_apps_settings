@@ -55,6 +55,7 @@ import java.util.TimeZone;
 @RunWith(RobolectricTestRunner.class)
 public final class BatteryUsageBreakdownControllerTest {
     private static final String PREF_KEY = "pref_key";
+    private static final String PREF_KEY2 = "pref_key2";
     private static final String PREF_SUMMARY = "fake preference summary";
 
     @Mock
@@ -175,7 +176,24 @@ public final class BatteryUsageBreakdownControllerTest {
     }
 
     @Test
-    public void removeAndCacheAllPreferences_buildCacheAndRemoveAllPreference() {
+    public void removeAndCacheAllUnusedPreferences_removePerf_buildCacheAndRemoveAllPreference() {
+        doReturn(1).when(mAppListPreferenceGroup).getPreferenceCount();
+        doReturn(mPowerGaugePreference).when(mAppListPreferenceGroup).getPreference(0);
+        doReturn(PREF_KEY2).when(mBatteryHistEntry).getKey();
+        doReturn(PREF_KEY).when(mPowerGaugePreference).getKey();
+        doReturn(mPowerGaugePreference).when(mAppListPreferenceGroup).findPreference(PREF_KEY);
+        // Ensures the testing data is correct.
+        assertThat(mBatteryUsageBreakdownController.mPreferenceCache).isEmpty();
+
+        mBatteryUsageBreakdownController.removeAndCacheAllUnusedPreferences();
+
+        assertThat(mBatteryUsageBreakdownController.mPreferenceCache.get(PREF_KEY))
+                .isEqualTo(mPowerGaugePreference);
+        verify(mAppListPreferenceGroup).removePreference(mPowerGaugePreference);
+    }
+
+    @Test
+    public void removeAndCacheAllUnusedPreferences_keepPerf_KeepAllPreference() {
         doReturn(1).when(mAppListPreferenceGroup).getPreferenceCount();
         doReturn(mPowerGaugePreference).when(mAppListPreferenceGroup).getPreference(0);
         doReturn(PREF_KEY).when(mBatteryHistEntry).getKey();
@@ -184,11 +202,10 @@ public final class BatteryUsageBreakdownControllerTest {
         // Ensures the testing data is correct.
         assertThat(mBatteryUsageBreakdownController.mPreferenceCache).isEmpty();
 
-        mBatteryUsageBreakdownController.removeAndCacheAllPreferences();
+        mBatteryUsageBreakdownController.removeAndCacheAllUnusedPreferences();
 
-        assertThat(mBatteryUsageBreakdownController.mPreferenceCache.get(PREF_KEY))
-                .isEqualTo(mPowerGaugePreference);
-        verify(mAppListPreferenceGroup).removeAll();
+        verify(mAppListPreferenceGroup, never()).removePreference(any());
+        assertThat(mBatteryUsageBreakdownController.mPreferenceCache).isEmpty();
     }
 
     @Test

@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics2.ui.viewmodel;
 
+import static android.hardware.fingerprint.FingerprintManager.ENROLL_ENROLL;
+
 import static com.android.settings.biometrics2.ui.model.EnrollmentProgress.INITIAL_REMAINING;
 import static com.android.settings.biometrics2.ui.model.EnrollmentProgress.INITIAL_STEPS;
 
@@ -63,7 +65,6 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
     private final int mUserId;
 
     private final FingerprintUpdater mFingerprintUpdater;
-    private final MessageDisplayController mMessageDisplayController;
     @Nullable private CancellationSignal mCancellationSignal = null;
     private final EnrollmentCallback mEnrollmentCallback = new EnrollmentCallback() {
 
@@ -81,6 +82,9 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
 
         @Override
         public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
+            if (DEBUG) {
+                Log.d(TAG, "onEnrollmentHelp(" + helpMsgId + ", " + helpString + ")");
+            }
             mHelpMessageLiveData.postValue(new EnrollmentStatusMessage(helpMsgId, helpString));
         }
 
@@ -113,20 +117,6 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
         super(application);
         mFingerprintUpdater = fingerprintUpdater;
         mUserId = userId;
-
-        final Resources res = application.getResources();
-        mMessageDisplayController =
-                res.getBoolean(R.bool.enrollment_message_display_controller_flag)
-                        ? new MessageDisplayController(
-                                application.getMainThreadHandler(),
-                                mEnrollmentCallback,
-                                SystemClock.elapsedRealtimeClock(),
-                                res.getInteger(R.integer.enrollment_help_minimum_time_display),
-                                res.getInteger(R.integer.enrollment_progress_minimum_time_display),
-                                res.getBoolean(R.bool.enrollment_progress_priority_over_help),
-                                res.getBoolean(R.bool.enrollment_prioritize_acquire_messages),
-                                res.getInteger(R.integer.enrollment_collect_time))
-                        : null;
     }
 
     public void setToken(byte[] token) {
@@ -195,9 +185,24 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
         mErrorMessageLiveData.setValue(null);
 
         mCancellationSignal = new CancellationSignal();
-        mFingerprintUpdater.enroll(mToken, mCancellationSignal, mUserId,
-                mMessageDisplayController != null ? mMessageDisplayController : mEnrollmentCallback,
-                reason);
+
+        final Resources res = getApplication().getResources();
+        if (reason == ENROLL_ENROLL
+                && res.getBoolean(R.bool.enrollment_message_display_controller_flag)) {
+            final EnrollmentCallback callback = new MessageDisplayController(
+                    getApplication().getMainThreadHandler(),
+                    mEnrollmentCallback,
+                    SystemClock.elapsedRealtimeClock(),
+                    res.getInteger(R.integer.enrollment_help_minimum_time_display),
+                    res.getInteger(R.integer.enrollment_progress_minimum_time_display),
+                    res.getBoolean(R.bool.enrollment_progress_priority_over_help),
+                    res.getBoolean(R.bool.enrollment_prioritize_acquire_messages),
+                    res.getInteger(R.integer.enrollment_collect_time));
+            mFingerprintUpdater.enroll(mToken, mCancellationSignal, mUserId, callback, reason);
+        } else {
+            mFingerprintUpdater.enroll(mToken, mCancellationSignal, mUserId, mEnrollmentCallback,
+                    reason);
+        }
         return true;
     }
 
