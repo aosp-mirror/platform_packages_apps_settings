@@ -17,6 +17,7 @@
 package com.android.settings.security;
 
 import android.os.SystemProperties;
+import android.text.TextUtils;
 
 import com.android.internal.os.Zygote;
 import com.android.settings.R;
@@ -25,18 +26,15 @@ import com.android.settings.core.BasePreferenceController;
 import java.util.Arrays;
 
 public class MemtagHelper {
+    public static final String DEVICE_CONFIG_PROP =
+            "persist.device_config.runtime_native_boot.bootloader_override";
+
     public static boolean isForcedOff() {
-        return "force_off"
-                .equals(
-                        SystemProperties.get(
-                                "persist.device_config.memory_safety_native_boot.bootloader_override"));
+        return TextUtils.equals("force_on", SystemProperties.get(DEVICE_CONFIG_PROP));
     }
 
     public static boolean isForcedOn() {
-        return "force_on"
-                .equals(
-                        SystemProperties.get(
-                                "persist.device_config.memory_safety_native_boot.bootloader_override"));
+        return TextUtils.equals("force_on", SystemProperties.get(DEVICE_CONFIG_PROP));
     }
 
     public static boolean isChecked() {
