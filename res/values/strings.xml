@@ -871,9 +871,9 @@
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary">Using face or fingerprint</string>
     <!-- Button text shown during enrollment to proceed after a child user has handed the device to a parent or guardian. [CHAR LIMIT=22] -->
     <string name="biometric_settings_hand_back_to_guardian_ok">OK</string>
-    <!-- Dialog title for dialog which shows when trying to add fingerprint in split mode. [CHAR LIMIT=45] -->
+    <!-- Dialog title for dialog which shows when trying to add fingerprint in split mode. [CHAR LIMIT=80] -->
     <string name="biometric_settings_add_fingerprint_in_split_mode_title">Can\u2019t set up fingerprint</string>
-    <!-- Dialog message for dialog which shows when trying to add fingerprint in split mode. [CHAR LIMIT=45] -->
+    <!-- Dialog message for dialog which shows when trying to add fingerprint in split mode. [CHAR LIMIT=NONE] -->
     <string name="biometric_settings_add_fingerprint_in_split_mode_message">Exit split screen to set up Fingerprint Unlock</string>
     <!-- Button text shown in adding fingerprint dialog that allows the user to go back to the settings page [CHAR LIMIT=22] -->
     <string name="biometric_settings_add_fingerprint_in_split_mode_ok">OK</string>
@@ -11524,8 +11524,11 @@
     <!-- Summary for UWB preference. [CHAR_LIMIT=NONE]-->
     <string name="uwb_settings_summary">Helps identify the relative position of nearby devices that have UWB</string>
 
-    <!-- Summary for UWB preference when airplane mode is disabled. [CHAR_LIMIT=NONE]-->
+    <!-- Summary for UWB preference when airplane mode is enabled. [CHAR_LIMIT=NONE]-->
     <string name="uwb_settings_summary_airplane_mode">Turn off airplane mode to use UWB </string>
+
+    <!-- Summary for UWB preference when UWB is unavailable due to regulatory requirements. [CHAR_LIMIT=NONE]-->
+    <string name="uwb_settings_summary_no_uwb_regulatory">UWB is unavailable in the current location</string>
 
     <!-- Label for the camera use toggle [CHAR LIMIT=40] -->
     <string name="camera_toggle_title">Camera access</string>

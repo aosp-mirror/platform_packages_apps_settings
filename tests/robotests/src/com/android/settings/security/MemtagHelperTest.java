@@ -33,8 +33,6 @@ import org.robolectric.shadows.ShadowSystemProperties;
 public class MemtagHelperTest {
     private final String mMemtagProperty = "arm64.memtag.bootctl";
     private final String mMemtagSupportedProperty = "ro.arm64.memtag.bootctl_settings_toggle";
-    private final String mDeviceConfigOverride =
-            "persist.device_config.memory_safety_native_boot.bootloader_override";
 
     @Test
     public void isChecked_empty_isFalse() {
@@ -80,7 +78,7 @@ public class MemtagHelperTest {
 
     @Test
     public void getAvailabilityStatus_isForcedOff_isDISABLED_DEPENDENT_SETTING() {
-        ShadowSystemProperties.override(mDeviceConfigOverride, "force_off");
+        ShadowSystemProperties.override(MemtagHelper.DEVICE_CONFIG_PROP, "force_off");
         ShadowSystemProperties.override(mMemtagSupportedProperty, "true");
         assertThat(MemtagHelper.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.DISABLED_DEPENDENT_SETTING);
@@ -88,7 +86,7 @@ public class MemtagHelperTest {
 
     @Test
     public void getAvailabilityStatus_isForcedOn_isDISABLED_DEPENDENT_SETTING() {
-        ShadowSystemProperties.override(mDeviceConfigOverride, "force_on");
+        ShadowSystemProperties.override(MemtagHelper.DEVICE_CONFIG_PROP, "force_on");
         ShadowSystemProperties.override(mMemtagSupportedProperty, "true");
         assertThat(MemtagHelper.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.DISABLED_DEPENDENT_SETTING);
@@ -96,7 +94,7 @@ public class MemtagHelperTest {
 
     @Test
     public void getAvailabilityStatus_isUnsupported_isUNSUPPORTED_ON_DEVICE() {
-        ShadowSystemProperties.override(mDeviceConfigOverride, "");
+        ShadowSystemProperties.override(MemtagHelper.DEVICE_CONFIG_PROP, "");
         ShadowSystemProperties.override(mMemtagSupportedProperty, "false");
         assertThat(MemtagHelper.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
@@ -127,7 +125,7 @@ public class MemtagHelperTest {
     @Config(shadows = {ZygoteShadow.class})
     public void getSummary_memtagAndZygoteSupportsMemoryTagging_memtag_on() {
         ZygoteShadow.setSupportsMemoryTagging(true);
-        ShadowSystemProperties.override(mDeviceConfigOverride, "");
+        ShadowSystemProperties.override(MemtagHelper.DEVICE_CONFIG_PROP, "");
         ShadowSystemProperties.override(mMemtagProperty, "memtag");
         assertThat(MemtagHelper.getSummary()).isEqualTo(R.string.memtag_on);
     }
@@ -136,7 +134,7 @@ public class MemtagHelperTest {
     @Config(shadows = {ZygoteShadow.class})
     public void getSummary_noMemtagAndZygoteSupportsMemoryTagging_memtag_off_pending() {
         ZygoteShadow.setSupportsMemoryTagging(true);
-        ShadowSystemProperties.override(mDeviceConfigOverride, "");
+        ShadowSystemProperties.override(MemtagHelper.DEVICE_CONFIG_PROP, "");
         ShadowSystemProperties.override(mMemtagProperty, "");
         assertThat(MemtagHelper.getSummary()).isEqualTo(R.string.memtag_off_pending);
     }
@@ -145,7 +143,7 @@ public class MemtagHelperTest {
     @Config(shadows = {ZygoteShadow.class})
     public void getSummary_noMemtagAndNoZygoteSupportsMemoryTagging_memtag_off() {
         ZygoteShadow.setSupportsMemoryTagging(false);
-        ShadowSystemProperties.override(mDeviceConfigOverride, "");
+        ShadowSystemProperties.override(MemtagHelper.DEVICE_CONFIG_PROP, "");
         ShadowSystemProperties.override(mMemtagProperty, "");
         assertThat(MemtagHelper.getSummary()).isEqualTo(R.string.memtag_off);
     }
@@ -154,7 +152,7 @@ public class MemtagHelperTest {
     @Config(shadows = {ZygoteShadow.class})
     public void getSummary_memtagAndNoZygoteSupportsMemoryTagging_memtag_on_pending() {
         ZygoteShadow.setSupportsMemoryTagging(false);
-        ShadowSystemProperties.override(mDeviceConfigOverride, "");
+        ShadowSystemProperties.override(MemtagHelper.DEVICE_CONFIG_PROP, "");
         ShadowSystemProperties.override(mMemtagProperty, "memtag");
         assertThat(MemtagHelper.getSummary()).isEqualTo(R.string.memtag_on_pending);
     }
@@ -163,7 +161,7 @@ public class MemtagHelperTest {
     @Config(shadows = {ZygoteShadow.class})
     public void getSummary_forceOffOverride_memtag_force_off() {
         ZygoteShadow.setSupportsMemoryTagging(false);
-        ShadowSystemProperties.override(mDeviceConfigOverride, "force_off");
+        ShadowSystemProperties.override(MemtagHelper.DEVICE_CONFIG_PROP, "force_off");
         ShadowSystemProperties.override(mMemtagProperty, "memtag");
         assertThat(MemtagHelper.getSummary()).isEqualTo(R.string.memtag_force_off);
     }
@@ -172,20 +170,20 @@ public class MemtagHelperTest {
     @Config(shadows = {ZygoteShadow.class})
     public void getSummary_forceOffOverride_memtag_force_on() {
         ZygoteShadow.setSupportsMemoryTagging(false);
-        ShadowSystemProperties.override(mDeviceConfigOverride, "force_on");
+        ShadowSystemProperties.override(MemtagHelper.DEVICE_CONFIG_PROP, "force_on");
         ShadowSystemProperties.override(mMemtagProperty, "memtag");
         assertThat(MemtagHelper.getSummary()).isEqualTo(R.string.memtag_force_on);
     }
 
     @Test
     public void isForcedOn_forceOnOverride_isTrue() {
-        ShadowSystemProperties.override(mDeviceConfigOverride, "force_on");
+        ShadowSystemProperties.override(MemtagHelper.DEVICE_CONFIG_PROP, "force_on");
         assertThat(MemtagHelper.isForcedOn()).isTrue();
     }
 
     @Test
     public void isForcedOff_forceOffOverride_isTrue() {
-        ShadowSystemProperties.override(mDeviceConfigOverride, "force_off");
+        ShadowSystemProperties.override(MemtagHelper.DEVICE_CONFIG_PROP, "force_off");
         assertThat(MemtagHelper.isForcedOff()).isTrue();
     }
 }
