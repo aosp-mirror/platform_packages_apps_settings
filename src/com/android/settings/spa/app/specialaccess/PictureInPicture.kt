@@ -28,6 +28,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import com.android.settings.R
 import com.android.settingslib.spaprivileged.model.app.AppOpsController
 import com.android.settingslib.spaprivileged.model.app.AppRecord
+import com.android.settingslib.spaprivileged.model.app.installed
 import com.android.settingslib.spaprivileged.model.app.userId
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListModel
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListProvider
@@ -67,11 +68,12 @@ class PictureInPictureListModel(private val context: Context) :
         }
 
     override fun transformItem(app: ApplicationInfo): PictureInPictureRecord {
-        val packageInfo =
-            packageManager.getPackageInfoAsUser(app.packageName, GET_ACTIVITIES_FLAGS, app.userId)
         return createPictureInPictureRecord(
             app = app,
-            isSupport = packageInfo.supportsPictureInPicture(),
+            isSupport = app.installed &&
+                packageManager
+                    .getPackageInfoAsUser(app.packageName, GET_ACTIVITIES_FLAGS, app.userId)
+                    .supportsPictureInPicture(),
         )
     }
 
