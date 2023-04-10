@@ -18,29 +18,17 @@ package com.android.settings.biometrics2.ui.view;
 
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.android.settings.R;
-import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 /**
  * Icon Touch dialog
  */
 public class FingerprintEnrollEnrollingIconTouchDialog extends InstrumentedDialogFragment {
-
-    private FingerprintEnrollEnrollingViewModel mViewModel;
-
-    @Override
-    public void onAttach(Context context) {
-        mViewModel = new ViewModelProvider(getActivity()).get(
-                FingerprintEnrollEnrollingViewModel.class);
-        super.onAttach(context);
-    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -50,10 +38,7 @@ public class FingerprintEnrollEnrollingIconTouchDialog extends InstrumentedDialo
                 .setMessage(R.string.security_settings_fingerprint_enroll_touch_dialog_message)
                 .setPositiveButton(
                         R.string.security_settings_fingerprint_enroll_dialog_ok,
-                        (dialog, which) -> {
-                            dialog.dismiss();
-                            mViewModel.onIconTouchDialogDismiss();
-                        });
+                        (dialog, which) -> dialog.dismiss());
         return builder.create();
     }
 
