@@ -26,7 +26,6 @@ import android.widget.Button;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.widget.LayoutPreference;
@@ -47,7 +46,6 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
 
     private int mUserId;
     private byte[] mToken;
-    private SettingsActivity mActivity;
     private Button mButton;
     private boolean mIsClicked;
     private Listener mListener;
@@ -77,6 +75,11 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
 
     @Override
     public void onClick(View v) {
+        // If it's in multi window mode, do not start the introduction intent.
+        if (mListener != null && mListener.checkInMultiWindowMode()) {
+            return;
+        }
+
         mIsClicked = true;
         final Intent intent = new Intent();
         intent.setClassName(SETTINGS_PACKAGE_NAME, FaceEnrollIntroduction.class.getName());
@@ -109,10 +112,6 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
         return wasClicked;
     }
 
-    public void setActivity(SettingsActivity activity) {
-        mActivity = activity;
-    }
-
     public void setListener(Listener listener) {
         mListener = listener;
     }
@@ -121,6 +120,12 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
      * Interface for registering callbacks related to the face enroll preference button.
      */
     public interface Listener {
+        /**
+         * Called to check whether it's in multi window mode
+         * @return Whether it's in multi window mode.
+         */
+        boolean checkInMultiWindowMode();
+
         /**
          * Called when the user has indicated an intent to begin enrolling a new face.
          * @param intent The Intent that should be used to launch face enrollment.
