@@ -25,6 +25,7 @@ import androidx.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.activeunlock.ActiveUnlockStatusUtils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 
@@ -37,11 +38,17 @@ public abstract class BiometricStatusPreferenceController extends BasePreference
     protected final int mProfileChallengeUserId;
 
     private final BiometricNavigationUtils mBiometricNavigationUtils;
+    private final ActiveUnlockStatusUtils mActiveUnlockStatusUtils;
+
+    /**
+     * @return true if the controller should be shown exclusively.
+     */
+    protected abstract boolean isDeviceSupported();
 
     /**
      * @return true if the manager is not null and the hardware is detected.
      */
-    protected abstract boolean isDeviceSupported();
+    protected abstract boolean isHardwareSupported();
 
     /**
      * @return the summary text.
@@ -61,18 +68,41 @@ public abstract class BiometricStatusPreferenceController extends BasePreference
                 .getLockPatternUtils(context);
         mProfileChallengeUserId = Utils.getManagedProfileId(mUm, mUserId);
         mBiometricNavigationUtils = new BiometricNavigationUtils(getUserId());
+        mActiveUnlockStatusUtils = new ActiveUnlockStatusUtils(context);
     }
 
     @Override
     public int getAvailabilityStatus() {
+        if (mActiveUnlockStatusUtils.isAvailable()) {
+            return getAvailabilityStatusWithWorkProfileCheck();
+        }
         if (!isDeviceSupported()) {
             return UNSUPPORTED_ON_DEVICE;
         }
+        return getAvailabilityFromUserSupported();
+    }
+
+    private int getAvailabilityFromUserSupported() {
         if (isUserSupported()) {
             return AVAILABLE;
         } else {
             return DISABLED_FOR_USER;
         }
+    }
+
+    // Since this code is flag guarded by mActiveUnlockStatusUtils.isAvailable(), we don't need to
+    // do another check here.
+    private int getAvailabilityStatusWithWorkProfileCheck() {
+        if (!isHardwareSupported()) {
+            // no hardware, never show
+            return UNSUPPORTED_ON_DEVICE;
+        }
+        if (!isDeviceSupported() && isWorkProfileController()) {
+            // hardware supported but work profile, don't show
+            return UNSUPPORTED_ON_DEVICE;
+        }
+        // hardware supported, not work profile, active unlock enabled
+        return getAvailabilityFromUserSupported();
     }
 
     @Override
@@ -104,5 +134,12 @@ public abstract class BiometricStatusPreferenceController extends BasePreference
 
     protected boolean isUserSupported() {
         return true;
+    }
+
+    /**
+     * Returns true if the controller controls is used for work profile.
+     */
+    protected boolean isWorkProfileController() {
+        return false;
     }
 }

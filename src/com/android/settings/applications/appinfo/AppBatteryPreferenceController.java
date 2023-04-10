@@ -124,7 +124,7 @@ public class AppBatteryPreferenceController extends BasePreferenceController
                     mParent.getMetricsCategory(),
                     mBatteryDiffEntry,
                     Utils.formatPercentage(
-                            mBatteryDiffEntry.getPercentOfTotal(), /* round */ true),
+                            mBatteryDiffEntry.getPercentage(), /* round */ true),
                     /*slotInformation=*/ null, /*showTimeInformation=*/ false);
             return true;
         }
@@ -190,7 +190,7 @@ public class AppBatteryPreferenceController extends BasePreferenceController
     void updateBatteryWithDiffEntry() {
         if (mBatteryDiffEntry != null && mBatteryDiffEntry.mConsumePower > 0) {
             mBatteryPercent = Utils.formatPercentage(
-                    mBatteryDiffEntry.getPercentOfTotal(), /* round */ true);
+                    mBatteryDiffEntry.getPercentage(), /* round */ true);
             mPreference.setSummary(mContext.getString(
                     R.string.battery_summary, mBatteryPercent));
         } else {

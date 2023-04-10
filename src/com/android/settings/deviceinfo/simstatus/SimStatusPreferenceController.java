@@ -24,6 +24,8 @@ import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -44,6 +46,7 @@ public class SimStatusPreferenceController extends BasePreferenceController {
 
     private Fragment mFragment;
     private SlotSimStatus mSlotSimStatus;
+    private Observer<LifecycleOwner> mLifecycleOwnerObserver;
     private Observer mSimChangeObserver;
 
     public SimStatusPreferenceController(Context context, String prefKey) {
@@ -109,12 +112,30 @@ public class SimStatusPreferenceController extends BasePreferenceController {
 
     @Override
     public void updateState(Preference preference) {
-        final int simSlot = getSimSlotIndex();
-        if (mSimChangeObserver == null) {
-            mSimChangeObserver = x -> updateStateBySlot(preference, simSlot);
-            mSlotSimStatus.observe(mFragment.getViewLifecycleOwner(), mSimChangeObserver);
+        if (mFragment == null) {
+            return;
         }
-        updateStateBySlot(preference, simSlot);
+        if (mLifecycleOwnerObserver == null) {
+            final LiveData<LifecycleOwner> dataLifecycleOwner
+                    = mFragment.getViewLifecycleOwnerLiveData();
+            mLifecycleOwnerObserver = owner -> {
+                if (owner != null) {
+                    final int simSlot = getSimSlotIndex();
+                    mSimChangeObserver = x -> updateStateBySlot(preference, simSlot);
+                    mSlotSimStatus.observe(owner, mSimChangeObserver);
+                } else {
+                    if (mSimChangeObserver != null) {
+                        mSlotSimStatus.removeObserver(mSimChangeObserver);
+                        mSimChangeObserver = null;
+                    }
+                    dataLifecycleOwner.removeObserver(mLifecycleOwnerObserver);
+                }
+            };
+            dataLifecycleOwner.observeForever(mLifecycleOwnerObserver);
+        } else if (mSimChangeObserver != null) {
+            final int simSlot = getSimSlotIndex();
+            updateStateBySlot(preference, simSlot);
+        }
     }
 
     protected void updateStateBySlot(Preference preference, int simSlot) {

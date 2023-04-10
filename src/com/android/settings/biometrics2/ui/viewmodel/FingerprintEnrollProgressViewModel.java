@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics2.ui.viewmodel;
 
+import static android.hardware.fingerprint.FingerprintManager.ENROLL_ENROLL;
+
 import static com.android.settings.biometrics2.ui.model.EnrollmentProgress.INITIAL_REMAINING;
 import static com.android.settings.biometrics2.ui.model.EnrollmentProgress.INITIAL_STEPS;
 
@@ -25,7 +27,6 @@ import android.hardware.fingerprint.FingerprintManager.EnrollReason;
 import android.hardware.fingerprint.FingerprintManager.EnrollmentCallback;
 import android.os.CancellationSignal;
 import android.os.SystemClock;
-import android.os.UserHandle;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -56,13 +57,15 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
             new MutableLiveData<>();
     private final MutableLiveData<EnrollmentStatusMessage> mErrorMessageLiveData =
             new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mAcquireLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Integer> mPointerDownLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Integer> mPointerUpLiveData = new MutableLiveData<>();
 
     private byte[] mToken = null;
-    private int mUserId = UserHandle.myUserId();
+    private final int mUserId;
 
     private final FingerprintUpdater mFingerprintUpdater;
-    private final MessageDisplayController mMessageDisplayController;
-    private EnrollmentHelper mEnrollmentHelper;
+    @Nullable private CancellationSignal mCancellationSignal = null;
     private final EnrollmentCallback mEnrollmentCallback = new EnrollmentCallback() {
 
         @Override
@@ -75,45 +78,49 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
                         + ", post progress as " + progress);
             }
             mProgressLiveData.postValue(progress);
-            // TODO set enrolling to false when remaining is 0 during implementing b/260957933
         }
 
         @Override
         public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
+            if (DEBUG) {
+                Log.d(TAG, "onEnrollmentHelp(" + helpMsgId + ", " + helpString + ")");
+            }
             mHelpMessageLiveData.postValue(new EnrollmentStatusMessage(helpMsgId, helpString));
         }
 
         @Override
         public void onEnrollmentError(int errMsgId, CharSequence errString) {
+            if (DEBUG) {
+                Log.d(TAG, "onEnrollmentError(" + errMsgId + ", " + errString + ")");
+            }
             mErrorMessageLiveData.postValue(new EnrollmentStatusMessage(errMsgId, errString));
+        }
+
+        @Override
+        public void onAcquired(boolean isAcquiredGood) {
+            mAcquireLiveData.postValue(isAcquiredGood);
+        }
+
+        @Override
+        public void onPointerDown(int sensorId) {
+            mPointerDownLiveData.postValue(sensorId);
+        }
+
+        @Override
+        public void onPointerUp(int sensorId) {
+            mPointerUpLiveData.postValue(sensorId);
         }
     };
 
     public FingerprintEnrollProgressViewModel(@NonNull Application application,
-            @NonNull FingerprintUpdater fingerprintUpdater) {
+            @NonNull FingerprintUpdater fingerprintUpdater, int userId) {
         super(application);
         mFingerprintUpdater = fingerprintUpdater;
-        final Resources res = application.getResources();
-        mMessageDisplayController =
-                res.getBoolean(R.bool.enrollment_message_display_controller_flag)
-                        ? new MessageDisplayController(
-                                application.getMainThreadHandler(),
-                                mEnrollmentCallback,
-                                SystemClock.elapsedRealtimeClock(),
-                                res.getInteger(R.integer.enrollment_help_minimum_time_display),
-                                res.getInteger(R.integer.enrollment_progress_minimum_time_display),
-                                res.getBoolean(R.bool.enrollment_progress_priority_over_help),
-                                res.getBoolean(R.bool.enrollment_prioritize_acquire_messages),
-                                res.getInteger(R.integer.enrollment_collect_time))
-                        : null;
+        mUserId = userId;
     }
 
     public void setToken(byte[] token) {
         mToken = token;
-    }
-
-    public void setUserId(int userId) {
-        mUserId = userId;
     }
 
     /**
@@ -121,6 +128,15 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
      */
     public void clearProgressLiveData() {
         mProgressLiveData.setValue(new EnrollmentProgress(INITIAL_STEPS, INITIAL_REMAINING));
+        mHelpMessageLiveData.setValue(null);
+        mErrorMessageLiveData.setValue(null);
+    }
+
+    /**
+     * clear error message
+     */
+    public void clearErrorMessageLiveData() {
+        mErrorMessageLiveData.setValue(null);
     }
 
     public LiveData<EnrollmentProgress> getProgressLiveData() {
@@ -135,6 +151,18 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
         return mErrorMessageLiveData;
     }
 
+    public LiveData<Boolean> getAcquireLiveData() {
+        return mAcquireLiveData;
+    }
+
+    public LiveData<Integer> getPointerDownLiveData() {
+        return mPointerDownLiveData;
+    }
+
+    public LiveData<Integer> getPointerUpLiveData() {
+        return mPointerUpLiveData;
+    }
+
     /**
      * Starts enrollment and return latest isEnrolling() result
      */
@@ -143,16 +171,38 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
             Log.e(TAG, "Null hardware auth token for enroll");
             return false;
         }
-        if (isEnrolling()) {
+        if (mCancellationSignal != null) {
             Log.w(TAG, "Enrolling has started, shall not start again");
             return true;
         }
+        if (DEBUG) {
+            Log.e(TAG, "startEnrollment(" + reason + ")");
+        }
 
-        mEnrollmentHelper = new EnrollmentHelper(
-                mMessageDisplayController != null
-                        ? mMessageDisplayController
-                        : mEnrollmentCallback);
-        mEnrollmentHelper.startEnrollment(mFingerprintUpdater, mToken, mUserId, reason);
+        // Clear data
+        mProgressLiveData.setValue(new EnrollmentProgress(INITIAL_STEPS, INITIAL_REMAINING));
+        mHelpMessageLiveData.setValue(null);
+        mErrorMessageLiveData.setValue(null);
+
+        mCancellationSignal = new CancellationSignal();
+
+        final Resources res = getApplication().getResources();
+        if (reason == ENROLL_ENROLL
+                && res.getBoolean(R.bool.enrollment_message_display_controller_flag)) {
+            final EnrollmentCallback callback = new MessageDisplayController(
+                    getApplication().getMainThreadHandler(),
+                    mEnrollmentCallback,
+                    SystemClock.elapsedRealtimeClock(),
+                    res.getInteger(R.integer.enrollment_help_minimum_time_display),
+                    res.getInteger(R.integer.enrollment_progress_minimum_time_display),
+                    res.getBoolean(R.bool.enrollment_progress_priority_over_help),
+                    res.getBoolean(R.bool.enrollment_prioritize_acquire_messages),
+                    res.getInteger(R.integer.enrollment_collect_time));
+            mFingerprintUpdater.enroll(mToken, mCancellationSignal, mUserId, callback, reason);
+        } else {
+            mFingerprintUpdater.enroll(mToken, mCancellationSignal, mUserId, mEnrollmentCallback,
+                    reason);
+        }
         return true;
     }
 
@@ -160,86 +210,22 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
      * Cancels enrollment and return latest isEnrolling result
      */
     public boolean cancelEnrollment() {
-        if (!isEnrolling() || mEnrollmentHelper == null) {
-            Log.e(TAG, "Fail to cancel enrollment, enrollmentController exist:"
-                    + (mEnrollmentHelper != null));
+        final CancellationSignal cancellationSignal = mCancellationSignal;
+        if (cancellationSignal == null) {
+            Log.e(TAG, "Fail to cancel enrollment, has cancelled or not start");
             return false;
         }
 
-        mEnrollmentHelper.cancelEnrollment();
-        mEnrollmentHelper = null;
+        mCancellationSignal = null;
+        cancellationSignal.cancel();
         return true;
     }
 
     public boolean isEnrolling() {
-        return (mEnrollmentHelper != null);
+        return (mCancellationSignal != null);
     }
 
     private int getSteps() {
         return mProgressLiveData.getValue().getSteps();
-    }
-
-    /**
-     * This class is used to stop latest message from onEnrollmentError() after user cancelled
-     * enrollment. This class will not forward message anymore after mCancellationSignal is sent.
-     */
-    private static class EnrollmentHelper extends EnrollmentCallback {
-
-        @NonNull private final EnrollmentCallback mEnrollmentCallback;
-        @Nullable private CancellationSignal mCancellationSignal = new CancellationSignal();
-
-        EnrollmentHelper(@NonNull EnrollmentCallback enrollmentCallback) {
-            mEnrollmentCallback = enrollmentCallback;
-        }
-
-        @Override
-        public void onEnrollmentError(int errMsgId, CharSequence errString) {
-            if (mCancellationSignal == null) {
-                return;
-            }
-            mEnrollmentCallback.onEnrollmentError(errMsgId, errString);
-        }
-
-        @Override
-        public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
-            if (mCancellationSignal == null) {
-                return;
-            }
-            mEnrollmentCallback.onEnrollmentHelp(helpMsgId, helpString);
-        }
-
-        @Override
-        public void onEnrollmentProgress(int remaining) {
-            if (mCancellationSignal == null) {
-                return;
-            }
-            mEnrollmentCallback.onEnrollmentProgress(remaining);
-        }
-
-        /**
-         * Starts enrollment
-         */
-        public boolean startEnrollment(@NonNull FingerprintUpdater fingerprintUpdater,
-                @NonNull byte[] token, int userId, @EnrollReason int reason) {
-            if (mCancellationSignal == null) {
-                // Not allow enrolling twice as same instance. Allocate a new instance for second
-                // enrollment.
-                return false;
-            }
-            fingerprintUpdater.enroll(token, mCancellationSignal, userId, this, reason);
-            return true;
-        }
-
-        /**
-         * Cancels current enrollment
-         */
-        public void cancelEnrollment() {
-            final CancellationSignal cancellationSignal = mCancellationSignal;
-            mCancellationSignal = null;
-
-            if (cancellationSignal != null) {
-                cancellationSignal.cancel();
-            }
-        }
     }
 }

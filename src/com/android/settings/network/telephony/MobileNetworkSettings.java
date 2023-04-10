@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -49,7 +50,6 @@ import com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenc
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.mobile.dataservice.DataServiceUtils;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
@@ -151,14 +151,14 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                         MobileNetworkUtils.getSearchableSubscriptionId(context));
                 Log.d(LOG_TAG, "display subId from intent: " + mSubId);
             } else {
-                Log.d(LOG_TAG, "intent is null, can not get the subId from intent.");
+                Log.d(LOG_TAG, "intent is null, can not get subId " + mSubId + " from intent.");
             }
         } else {
             mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID,
                     MobileNetworkUtils.getSearchableSubscriptionId(context));
             Log.d(LOG_TAG, "display subId from getArguments(): " + mSubId);
         }
-        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         mExecutor.execute(() -> {
             mSubscriptionInfoEntity = mMobileNetworkRepository.getSubInfoById(
                     String.valueOf(mSubId));
@@ -166,9 +166,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                     mMobileNetworkRepository.queryMobileNetworkInfoBySubId(
                             String.valueOf(mSubId));
         });
-        if (mSubId <= SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            return Arrays.asList();
-        }
+
         return Arrays.asList(
                 new DataUsageSummaryPreferenceController(getActivity(), getSettingsLifecycle(),
                         this, mSubId),
@@ -189,8 +187,14 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         super.onAttach(context);
 
         if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            Log.d(LOG_TAG, "Invalid subId request " + mSubId);
-            return;
+            Log.d(LOG_TAG, "Invalid subId, get the default subscription to show.");
+            SubscriptionInfo info = SubscriptionUtil.getSubscriptionOrDefault(context, mSubId);
+            if (info == null) {
+                Log.d(LOG_TAG, "Invalid subId request " + mSubId);
+                return;
+            }
+            mSubId = info.getSubscriptionId();
+            Log.d(LOG_TAG, "Show NetworkSettings fragment for subId" + mSubId);
         }
 
         Intent intent = getIntent();
@@ -270,7 +274,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 use(OpenNetworkSelectPagePreferenceController.class).init(mSubId);
         final AutoSelectPreferenceController autoSelectPreferenceController =
                 use(AutoSelectPreferenceController.class)
-                        .init(mSubId)
+                        .init(getLifecycle(), mSubId)
                         .addListener(openNetworkSelectPagePreferenceController);
         use(NetworkPreferenceCategoryController.class).init(mSubId)
                 .setChildren(Arrays.asList(autoSelectPreferenceController));
@@ -281,11 +285,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
         final VideoCallingPreferenceController videoCallingPreferenceController =
                 use(VideoCallingPreferenceController.class).init(mSubId);
-        final BackupCallingPreferenceController crossSimCallingPreferenceController =
-                use(BackupCallingPreferenceController.class).init(mSubId);
         use(CallingPreferenceCategoryController.class).setChildren(
-                Arrays.asList(wifiCallingPreferenceController, videoCallingPreferenceController,
-                        crossSimCallingPreferenceController));
+                Arrays.asList(wifiCallingPreferenceController, videoCallingPreferenceController));
         use(Enhanced4gLtePreferenceController.class).init(mSubId)
                 .addListener(videoCallingPreferenceController);
         use(Enhanced4gCallingPreferenceController.class).init(mSubId)
@@ -295,7 +296,11 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         use(ContactDiscoveryPreferenceController.class).init(getParentFragmentManager(), mSubId);
         use(NrAdvancedCallingPreferenceController.class).init(mSubId);
         use(TransferEsimPreferenceController.class).init(mSubId, mSubscriptionInfoEntity);
-        use(ConvertToEsimPreferenceController.class).init(mSubId, mSubscriptionInfoEntity);
+        final ConvertToEsimPreferenceController convertToEsimPreferenceController =
+                use(ConvertToEsimPreferenceController.class);
+        if (convertToEsimPreferenceController != null) {
+            convertToEsimPreferenceController.init(mSubId, mSubscriptionInfoEntity);
+        }
     }
 
     @Override
@@ -319,13 +324,13 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @Override
     public void onResume() {
         super.onResume();
-        mMobileNetworkRepository.addRegister(this);
+        mMobileNetworkRepository.addRegister(this, this, mSubId);
+        mMobileNetworkRepository.updateEntity();
         // TODO: remove log after fixing b/182326102
         Log.d(LOG_TAG, "onResume() subId=" + mSubId);
     }
 
     private void onSubscriptionDetailChanged() {
-
         if (mSubscriptionInfoEntity != null) {
             /**
              * Update the title when SIM stats got changed
@@ -346,9 +351,14 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     }
 
     @Override
+    public void onPause() {
+        mMobileNetworkRepository.removeRegister(this);
+        super.onPause();
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
-        mMobileNetworkRepository.removeRegister();
     }
 
     @VisibleForTesting
@@ -455,7 +465,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         ContactDiscoveryDialogFragment fragment = getContactDiscoveryFragment(mSubId);
 
         if (mSubscriptionInfoEntity == null) {
-            Log.d(LOG_TAG, "Zoey, showContactDiscoveryDialog, Invalid subId request " + mSubId);
+            Log.d(LOG_TAG, "showContactDiscoveryDialog, Invalid subId request " + mSubId);
             onDestroy();
             return;
         }
@@ -474,51 +484,38 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
     @Override
     public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-        if (DataServiceUtils.shouldUpdateEntityList(mSubInfoEntityList, subInfoEntityList)) {
+        // Check the current subId is existed or not, if so, finish it.
+        if (!mSubscriptionInfoMap.isEmpty()) {
 
-            // Check the current subId is existed or not, if so, finish it.
-            if (!mSubscriptionInfoMap.isEmpty()) {
-
-                // Check each subInfo and remove it in the map based on the new list.
-                for (SubscriptionInfoEntity entity : subInfoEntityList) {
-                    mSubscriptionInfoMap.remove(Integer.parseInt(entity.subId));
-                }
-
-                Iterator<Integer> iterator = mSubscriptionInfoMap.keySet().iterator();
-                while (iterator.hasNext()) {
-                    if (iterator.next() == mSubId) {
-                        finishFragment();
-                        return;
-                    }
-                }
+            // Check each subInfo and remove it in the map based on the new list.
+            for (SubscriptionInfoEntity entity : subInfoEntityList) {
+                mSubscriptionInfoMap.remove(Integer.parseInt(entity.subId));
             }
 
-            mSubInfoEntityList = subInfoEntityList;
-            mSubInfoEntityList.forEach(entity -> {
-                int subId = Integer.parseInt(entity.subId);
-                mSubscriptionInfoMap.put(subId, entity);
-                if (subId == mSubId) {
-                    mSubscriptionInfoEntity = entity;
-                    onSubscriptionDetailChanged();
+            Iterator<Integer> iterator = mSubscriptionInfoMap.keySet().iterator();
+            while (iterator.hasNext()) {
+                if (iterator.next() == mSubId && getActivity() != null) {
+                    finishFragment();
+                    return;
                 }
-            });
+            }
         }
-    }
 
-    @Override
-    public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-    }
-
-    @Override
-    public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
-    }
-
-    @Override
-    public void onAllMobileNetworkInfoChanged(
-            List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
-    }
-
-    @Override
-    public void onAirplaneModeChanged(boolean enabled) {
+        mSubInfoEntityList = subInfoEntityList;
+        SubscriptionInfoEntity[] entityArray = mSubInfoEntityList.toArray(
+                new SubscriptionInfoEntity[0]);
+        for (SubscriptionInfoEntity entity : entityArray) {
+            int subId = Integer.parseInt(entity.subId);
+            mSubscriptionInfoMap.put(subId, entity);
+            if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID && subId == mSubId) {
+                mSubscriptionInfoEntity = entity;
+                Log.d(LOG_TAG, "Set subInfo for subId " + mSubId);
+                break;
+            } else if (entity.isDefaultSubscriptionSelection) {
+                mSubscriptionInfoEntity = entity;
+                Log.d(LOG_TAG, "Set subInfo to default subInfo.");
+            }
+        }
+        onSubscriptionDetailChanged();
     }
 }

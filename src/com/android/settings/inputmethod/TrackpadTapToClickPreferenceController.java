@@ -17,29 +17,25 @@
 package com.android.settings.inputmethod;
 
 import android.content.Context;
-import android.hardware.input.InputManager;
+import android.hardware.input.InputSettings;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 public class TrackpadTapToClickPreferenceController extends TogglePreferenceController {
 
-    private InputManager mIm;
-
     public TrackpadTapToClickPreferenceController(Context context, String key) {
         super(context, key);
-
-        mIm = context.getSystemService(InputManager.class);
     }
 
     @Override
     public boolean isChecked() {
-        return mIm.useTouchpadTapToClick(mContext);
+        return InputSettings.useTouchpadTapToClick(mContext);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        mIm.setTouchpadTapToClick(mContext, isChecked);
+        InputSettings.setTouchpadTapToClick(mContext, isChecked);
         return true;
     }
 

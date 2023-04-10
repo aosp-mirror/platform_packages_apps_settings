@@ -16,7 +16,11 @@
 
 package com.android.settings.biometrics.combination;
 
+import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_POWER_BUTTON;
+import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_OPTICAL;
+
 import static com.android.settings.biometrics.combination.BiometricsSettingsBase.CONFIRM_REQUEST;
+import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment;
 import static com.android.settings.password.ChooseLockPattern.RESULT_FINISHED;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -24,17 +28,24 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.biometrics.ComponentInfoInternal;
+import android.hardware.biometrics.SensorProperties;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
+import android.hardware.fingerprint.FingerprintSensorProperties;
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +54,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.XmlRes;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -56,6 +69,7 @@ import com.android.settings.testutils.shadow.ShadowSettingsPreferenceFragment;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -80,6 +94,7 @@ public class CombinedBiometricProfileSettingsTest {
 
     private TestCombinedBiometricProfileSettings mFragment;
     private Context mContext;
+    private FragmentActivity mActivity;
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
@@ -91,6 +106,8 @@ public class CombinedBiometricProfileSettingsTest {
     private BiometricSettingsAppPreferenceController mBiometricSettingsAppPreferenceController;
     @Mock
     private FaceManager mFaceManager;
+    @Mock
+    private FragmentTransaction mFragmentTransaction;
 
     @Before
     public void setUp() {
@@ -98,11 +115,11 @@ public class CombinedBiometricProfileSettingsTest {
         ShadowUtils.setFaceManager(mFaceManager);
         FakeFeatureFactory.setupForTest();
 
-        FragmentActivity activity = Robolectric.buildActivity(FragmentActivity.class,
-                new Intent().putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 1L)).get();
+        mActivity = spy(Robolectric.buildActivity(FragmentActivity.class,
+                new Intent().putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 1L)).get());
         mContext = spy(ApplicationProvider.getApplicationContext());
         mFragment = spy(new TestCombinedBiometricProfileSettings(mContext));
-        doReturn(activity).when(mFragment).getActivity();
+        doReturn(mActivity).when(mFragment).getActivity();
 
         ReflectionHelpers.setField(mFragment, "mDashboardFeatureProvider",
                 FakeFeatureFactory.setupForTest().dashboardFeatureProvider);
@@ -119,6 +136,11 @@ public class CombinedBiometricProfileSettingsTest {
             preference.setKey(key.toString());
             return preference;
         }).when(mFragment).findPreference(any());
+    }
+
+    @After
+    public void tearDown() {
+        ShadowUtils.reset();
     }
 
     @Test
@@ -299,6 +321,84 @@ public class CombinedBiometricProfileSettingsTest {
         assertThat(capturedPreferences.get(0).getKey()).isEqualTo(mFragment.getFacePreferenceKey());
     }
 
+    @Test
+    public void testClickFingerprintUnlockInMultiWindow_onUdfpsDevice_withoutEnrolledFp_showsDialog() {
+        clickFingerprintUnlockInSplitScreenMode(TYPE_UDFPS_OPTICAL, /*hasEnrolledFingerprint*/
+                false);
+
+        verify(mBiometricSettingsAppPreferenceController, times(0)).handlePreferenceTreeClick(
+                any());
+        verify(mFragmentTransaction).add(any(),
+                eq(FingerprintSettingsFragment.FingerprintSplitScreenDialog.class.getName()));
+    }
+
+    @Test
+    public void testClickFingerprintUnlockInMultiWindow_onUdfpsDevice_withEnrolledFp_noDialog() {
+        clickFingerprintUnlockInSplitScreenMode(TYPE_UDFPS_OPTICAL, /*hasEnrolledFingerprint*/true);
+
+        verify(mBiometricSettingsAppPreferenceController).handlePreferenceTreeClick(
+                mPreferenceCaptor.capture());
+        List<Preference> capturedPreferences = mPreferenceCaptor.getAllValues();
+        assertThat(capturedPreferences.size()).isEqualTo(1);
+        assertThat(capturedPreferences.get(0).getKey()).isEqualTo(
+                mFragment.getFingerprintPreferenceKey());
+        verify(mFragmentTransaction, never()).add(any(),
+                eq(FingerprintSettingsFragment.FingerprintSplitScreenDialog.class.getName()));
+    }
+
+    @Test
+    public void testClickFingerprintUnlockInMultiWindow_onSfpsDevice_withoutEnrolledFp_noDialog() {
+        clickFingerprintUnlockInSplitScreenMode(TYPE_POWER_BUTTON, /*hasEnrolledFingerprint*/false);
+
+        verify(mBiometricSettingsAppPreferenceController).handlePreferenceTreeClick(
+                mPreferenceCaptor.capture());
+        List<Preference> capturedPreferences = mPreferenceCaptor.getAllValues();
+        assertThat(capturedPreferences.size()).isEqualTo(1);
+        assertThat(capturedPreferences.get(0).getKey()).isEqualTo(
+                mFragment.getFingerprintPreferenceKey());
+        verify(mFragmentTransaction, never()).add(any(),
+                eq(FingerprintSettingsFragment.FingerprintSplitScreenDialog.class.getName()));
+    }
+
+    private void clickFingerprintUnlockInSplitScreenMode(
+            @FingerprintSensorProperties.SensorType int sensorType,
+            boolean hasEnrolledFingerprint) {
+        final ArrayList<FingerprintSensorPropertiesInternal> props = new ArrayList<>();
+        props.add(new FingerprintSensorPropertiesInternal(
+                0 /* sensorId */,
+                SensorProperties.STRENGTH_STRONG,
+                1 /* maxEnrollmentsPerUser */,
+                new ArrayList<ComponentInfoInternal>(),
+                sensorType,
+                true /* resetLockoutRequiresHardwareAuthToken */));
+        doReturn(props).when(mFingerprintManager).getSensorPropertiesInternal();
+
+        doAnswer(invocation -> {
+            final FingerprintManager.GenerateChallengeCallback callback =
+                    invocation.getArgument(1);
+            callback.onChallengeGenerated(0, 0, 1L);
+            return null;
+        }).when(mFingerprintManager).generateChallenge(anyInt(), any());
+        doReturn(new byte[]{1}).when(mFragment).requestGatekeeperHat(any(), anyLong(), anyInt(),
+                anyLong());
+        FragmentManager fragmentManager = mock(FragmentManager.class);
+        doReturn(fragmentManager).when(mActivity).getSupportFragmentManager();
+        doReturn(mFragmentTransaction).when(fragmentManager).beginTransaction();
+        doReturn(true).when(mActivity).isInMultiWindowMode();
+        doReturn(hasEnrolledFingerprint).when(mFingerprintManager).hasEnrolledFingerprints(
+                anyInt());
+
+        // Start fragment
+        mFragment.onAttach(mContext);
+        mFragment.onCreate(null);
+        mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);
+        mFragment.onResume();
+
+        // User clicks on "Fingerprint Unlock"
+        final Preference preference = new Preference(mContext);
+        preference.setKey(mFragment.getFingerprintPreferenceKey());
+        mFragment.onPreferenceTreeClick(preference);
+    }
     /**
      * a test fragment that initializes PreferenceScreen for testing.
      */

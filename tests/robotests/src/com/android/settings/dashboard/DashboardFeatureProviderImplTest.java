@@ -564,8 +564,10 @@ public class DashboardFeatureProviderImplTest {
         mActivityInfo.metaData.putString("com.android.settings.intent.action", "TestAction");
         tile.userHandle = null;
 
-        TopLevelSettings largeScreenTopLevelSettings = new TopLevelSettings(
-                new TestTopLevelHighlightMixin(highlightMixinPrefKey, true /* activityEmbedded */));
+        TopLevelSettings largeScreenTopLevelSettings = spy(new TopLevelSettings(
+                new TestTopLevelHighlightMixin(highlightMixinPrefKey,
+                true /* activityEmbedded */)));
+        doReturn(true).when(largeScreenTopLevelSettings).isActivityEmbedded();
         largeScreenTopLevelSettings.setHighlightPreferenceKey(clickPrefKey);
 
         mImpl.bindPreferenceToTileAndGetObservers(activity, largeScreenTopLevelSettings,
@@ -593,8 +595,10 @@ public class DashboardFeatureProviderImplTest {
         mActivityInfo.metaData.putString("com.android.settings.intent.action", "TestAction");
         tile.userHandle = null;
 
-        TopLevelSettings largeScreenTopLevelSettings = new TopLevelSettings(
-                new TestTopLevelHighlightMixin(highlightMixinPrefKey, true /* activityEmbedded */));
+        TopLevelSettings largeScreenTopLevelSettings = spy(new TopLevelSettings(
+                new TestTopLevelHighlightMixin(highlightMixinPrefKey,
+                true /* activityEmbedded */)));
+        doReturn(true).when(largeScreenTopLevelSettings).isActivityEmbedded();
         largeScreenTopLevelSettings.setHighlightPreferenceKey(clickPrefKey);
 
         mImpl.bindPreferenceToTileAndGetObservers(activity, largeScreenTopLevelSettings,

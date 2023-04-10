@@ -33,7 +33,6 @@ import com.android.settings.R;
 import com.android.settingslib.Utils;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
-import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifPreferenceLayout;
 
 /**
@@ -46,42 +45,36 @@ public class TextReadingPreferenceFragmentForSetupWizard extends TextReadingPref
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
-        final String title = getContext().getString(
-                R.string.accessibility_text_reading_options_title);
-        final Drawable icon = getContext().getDrawable(R.drawable.ic_accessibility_visibility);
-        icon.setTintList(Utils.getColorAttr(getContext(), android.R.attr.colorPrimary));
-        AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
-                /* description= */ null, icon);
+        if (view instanceof GlifPreferenceLayout) {
+            final GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
+            final String title = getContext().getString(
+                    R.string.accessibility_text_reading_options_title);
+            final Drawable icon = getContext().getDrawable(R.drawable.ic_accessibility_visibility);
+            icon.setTintList(Utils.getColorAttr(getContext(), android.R.attr.colorPrimary));
+            AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
+                    /* description= */ null, icon);
 
-        final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
-        mixin.setSecondaryButton(
-                new FooterButton.Builder(getContext())
-                        .setText(R.string.accessibility_text_reading_reset_button_title)
-                        .setListener(l -> showDialog(DIALOG_RESET_SETTINGS))
-                        .setButtonType(FooterButton.ButtonType.CLEAR)
-                        .setTheme(R.style.SudGlifButton_Secondary)
-                        .build());
-
-        if (isCallingFromAnythingElseEntryPoint()) {
-            mixin.setPrimaryButton(
-                    new FooterButton.Builder(getContext())
-                            .setText(R.string.done)
-                            .setListener(l -> {
-                                setResult(RESULT_CANCELED);
-                                finish();
-                            })
-                            .setButtonType(FooterButton.ButtonType.DONE)
-                            .setTheme(R.style.SudGlifButton_Primary)
-                            .build());
+            final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
+            AccessibilitySetupWizardUtils.setPrimaryButton(getContext(), mixin, R.string.done,
+                    () -> {
+                        setResult(RESULT_CANCELED);
+                        finish();
+                    });
+            AccessibilitySetupWizardUtils.setSecondaryButton(getContext(), mixin,
+                    R.string.accessibility_text_reading_reset_button_title,
+                    () -> showDialog(DIALOG_RESET_SETTINGS)
+            );
         }
     }
 
     @Override
     public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
             Bundle savedInstanceState) {
-        final GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
-        return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
+        if (parent instanceof GlifPreferenceLayout) {
+            final GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
+            return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
+        }
+        return super.onCreateRecyclerView(inflater, parent, savedInstanceState);
     }
 
     @Override

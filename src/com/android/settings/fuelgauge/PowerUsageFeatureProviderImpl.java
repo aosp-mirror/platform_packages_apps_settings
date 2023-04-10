@@ -26,6 +26,7 @@ import android.util.SparseIntArray;
 import com.android.internal.util.ArrayUtils;
 import com.android.settingslib.fuelgauge.Estimate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -72,13 +73,18 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public double getBatteryUsageListScreenOnTimeThresholdInMs() {
+        return 0;
+    }
+
+    @Override
     public double getBatteryUsageListConsumePowerThreshold() {
-        return 0.0;
+        return 0;
     }
 
     @Override
     public List<String> getSystemAppsAllowlist() {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
@@ -164,6 +170,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
 
     @Override
     public Set<Integer> getOthersSystemComponentSet() {
+        return new ArraySet<>();
+    }
+
+    @Override
+    public Set<String> getOthersCustomComponentNameSet() {
         return new ArraySet<>();
     }
 

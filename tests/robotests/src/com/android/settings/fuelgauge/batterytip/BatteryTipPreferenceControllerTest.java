@@ -37,7 +37,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
-import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.widget.CardPreference;
 
@@ -88,9 +87,7 @@ public class BatteryTipPreferenceControllerTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         mOldBatteryTips = new ArrayList<>();
-        mOldBatteryTips.add(new SummaryTip(BatteryTip.StateType.NEW, AVERAGE_TIME_MS));
         mNewBatteryTips = new ArrayList<>();
-        mNewBatteryTips.add(new SummaryTip(BatteryTip.StateType.INVISIBLE, AVERAGE_TIME_MS));
 
         mBatteryTipPreferenceController = buildBatteryTipPreferenceController();
         mBatteryTipPreferenceController.mCardPreference = mCardPreference;
@@ -105,26 +102,10 @@ public class BatteryTipPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateBatteryTips_tipsStateNew_isVisible() {
-        mBatteryTipPreferenceController.updateBatteryTips(mOldBatteryTips);
-
-        assertThat(mCardPreference.isVisible()).isTrue();
-    }
-
-    @Test
     public void testUpdateBatteryTips_tipsStateInvisible_isInvisible() {
         mBatteryTipPreferenceController.updateBatteryTips(mNewBatteryTips);
 
         assertThat(mCardPreference.isVisible()).isFalse();
-    }
-
-    @Test
-    public void testUpdateBatteryTips_logBatteryTip() {
-        mBatteryTipPreferenceController.updateBatteryTips(mOldBatteryTips);
-
-        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
-                MetricsProto.MetricsEvent.ACTION_SUMMARY_TIP,
-                BatteryTip.StateType.NEW);
     }
 
     @Test
@@ -136,28 +117,6 @@ public class BatteryTipPreferenceControllerTest {
     public void testGetCurrentBatteryTip_tipsInvisible_isNull() {
         mBatteryTipPreferenceController.updateBatteryTips(mNewBatteryTips);
         assertThat(mBatteryTipPreferenceController.getCurrentBatteryTip()).isNull();
-    }
-
-    @Test
-    public void testGetCurrentBatteryTip_tipsVisible_returnTips() {
-        mBatteryTipPreferenceController.updateBatteryTips(mOldBatteryTips);
-
-        assertThat(mBatteryTipPreferenceController.getCurrentBatteryTip().getType()).isEqualTo(
-                BatteryTip.TipType.SUMMARY);
-    }
-
-    @Test
-    public void testSaveAndRestore() {
-        mBatteryTipPreferenceController.updateBatteryTips(mOldBatteryTips);
-        final Bundle bundle = new Bundle();
-        mBatteryTipPreferenceController.saveInstanceState(bundle);
-
-        final BatteryTipPreferenceController controller = buildBatteryTipPreferenceController();
-        controller.mCardPreference = mCardPreference;
-        controller.mPrefContext = mContext;
-        controller.restoreInstanceState(bundle);
-
-        assertOnlyContainsSummaryTip(mCardPreference);
     }
 
     @Test
@@ -190,13 +149,6 @@ public class BatteryTipPreferenceControllerTest {
     public void getAvailabilityStatus_returnAvailableUnsearchable() {
         assertThat(mBatteryTipPreferenceController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.AVAILABLE_UNSEARCHABLE);
-    }
-
-    private void assertOnlyContainsSummaryTip(CardPreference preference) {
-        assertThat(preference.getTitle()).isEqualTo(
-                mContext.getString(R.string.battery_tip_summary_title));
-        assertThat(preference.getSummary()).isEqualTo(
-                mContext.getString(R.string.battery_tip_summary_summary));
     }
 
     private BatteryTipPreferenceController buildBatteryTipPreferenceController() {

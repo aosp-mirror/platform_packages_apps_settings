@@ -62,4 +62,9 @@ public class CombinedBiometricProfileStatusPreferenceController extends
     protected String getSettingsClassName() {
         return mCombinedBiometricStatusUtils.getProfileSettingsClassName();
     }
+
+    @Override
+    protected boolean isWorkProfileController() {
+        return true;
+    }
 }

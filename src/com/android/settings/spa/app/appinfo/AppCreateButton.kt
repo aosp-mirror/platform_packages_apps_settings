@@ -16,7 +16,6 @@
 
 package com.android.settings.spa.app.appinfo
 
-import android.app.Activity
 import android.app.settings.SettingsEnums
 import android.content.pm.ApplicationInfo
 import androidx.compose.material.icons.Icons
@@ -33,6 +32,7 @@ import com.android.settingslib.spa.widget.button.ActionButton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import android.widget.Toast;
 
 class AppCreateButton(packageInfoPresenter: PackageInfoPresenter) {
     private val context = packageInfoPresenter.context
@@ -56,11 +56,18 @@ class AppCreateButton(packageInfoPresenter: PackageInfoPresenter) {
             val cloneBackend = CloneBackend.getInstance(context)
             FeatureFactory.getFactory(context).metricsFeatureProvider.action(context,
                     SettingsEnums.ACTION_CREATE_CLONE_APP)
+            val appLabel = app.loadLabel(context.packageManager)
+            Toast.makeText(context, context.getString(R.string.cloned_app_creation_toast_summary,
+                appLabel),Toast.LENGTH_SHORT).show()
             coroutineScope.launch {
                 enabledState.value = false
                 val result = installCloneApp(app, cloneBackend)
                 if (result == CloneBackend.SUCCESS) {
-                    navController.navigate(getRoute(app.packageName, cloneBackend.cloneUserId))
+                    Toast.makeText(context,
+                        context.getString(R.string.cloned_app_created_toast_summary, appLabel),
+                            Toast.LENGTH_SHORT).show()
+                    navController.navigate(getRoute(app.packageName, cloneBackend.cloneUserId),
+                            /* popUpCurrent*/ true)
                 } else {
                     enabledState.value = true
                 }

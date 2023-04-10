@@ -127,7 +127,7 @@ public class StylusDeviceUpdaterTest {
     @Test
     public void click_usiPreference_launchUsiDetailsPage() {
         doReturn(mSettingsActivity).when(mDashboardFragment).getContext();
-        doReturn(true).when(mStylusDeviceUpdater).isUsiConnectionValid();
+        doReturn(true).when(mStylusDeviceUpdater).isUsiBatteryValid();
         doReturn(false).when(mStylusDeviceUpdater).hasConnectedBluetoothStylusDevice();
         mStylusDeviceUpdater.forceUpdate();
         mStylusDeviceUpdater.mLastDetectedUsiId = 1;
@@ -144,7 +144,7 @@ public class StylusDeviceUpdaterTest {
 
     @Test
     public void forceUpdate_addsUsiPreference_validUsiDevice() {
-        doReturn(true).when(mStylusDeviceUpdater).isUsiConnectionValid();
+        doReturn(true).when(mStylusDeviceUpdater).isUsiBatteryValid();
         doReturn(false).when(mStylusDeviceUpdater).hasConnectedBluetoothStylusDevice();
 
         mStylusDeviceUpdater.forceUpdate();
@@ -154,7 +154,7 @@ public class StylusDeviceUpdaterTest {
 
     @Test
     public void forceUpdate_doesNotAddPreference_invalidUsiDevice() {
-        doReturn(false).when(mStylusDeviceUpdater).isUsiConnectionValid();
+        doReturn(false).when(mStylusDeviceUpdater).isUsiBatteryValid();
         doReturn(false).when(mStylusDeviceUpdater).hasConnectedBluetoothStylusDevice();
 
         mStylusDeviceUpdater.forceUpdate();
@@ -164,12 +164,12 @@ public class StylusDeviceUpdaterTest {
 
     @Test
     public void forceUpdate_removesUsiPreference_existingPreference_invalidUsiDevice() {
-        doReturn(true).when(mStylusDeviceUpdater).isUsiConnectionValid();
+        doReturn(true).when(mStylusDeviceUpdater).isUsiBatteryValid();
         doReturn(false).when(mStylusDeviceUpdater).hasConnectedBluetoothStylusDevice();
 
         mStylusDeviceUpdater.forceUpdate();
 
-        doReturn(false).when(mStylusDeviceUpdater).isUsiConnectionValid();
+        doReturn(false).when(mStylusDeviceUpdater).isUsiBatteryValid();
         mStylusDeviceUpdater.forceUpdate();
 
         assertThat(mStylusDeviceUpdater.mUsiPreference).isNull();
@@ -177,7 +177,7 @@ public class StylusDeviceUpdaterTest {
 
     @Test
     public void forceUpdate_doesNotAddUsiPreference_bluetoothStylusConnected() {
-        doReturn(true).when(mStylusDeviceUpdater).isUsiConnectionValid();
+        doReturn(true).when(mStylusDeviceUpdater).isUsiBatteryValid();
         doReturn(true).when(mStylusDeviceUpdater).hasConnectedBluetoothStylusDevice();
 
         mStylusDeviceUpdater.forceUpdate();
@@ -187,7 +187,7 @@ public class StylusDeviceUpdaterTest {
 
     @Test
     public void forceUpdate_addsUsiPreference_bluetoothStylusDisconnected() {
-        doReturn(true).when(mStylusDeviceUpdater).isUsiConnectionValid();
+        doReturn(true).when(mStylusDeviceUpdater).isUsiBatteryValid();
         doReturn(true).when(mStylusDeviceUpdater).hasConnectedBluetoothStylusDevice();
         mStylusDeviceUpdater.forceUpdate();
 
@@ -199,7 +199,7 @@ public class StylusDeviceUpdaterTest {
 
     @Test
     public void forceUpdate_removesUsiPreference_existingPreference_bluetoothStylusConnected() {
-        doReturn(true).when(mStylusDeviceUpdater).isUsiConnectionValid();
+        doReturn(true).when(mStylusDeviceUpdater).isUsiBatteryValid();
         doReturn(false).when(mStylusDeviceUpdater).hasConnectedBluetoothStylusDevice();
         mStylusDeviceUpdater.forceUpdate();
         doReturn(true).when(mStylusDeviceUpdater).hasConnectedBluetoothStylusDevice();
@@ -218,7 +218,7 @@ public class StylusDeviceUpdaterTest {
         mStylusDeviceUpdater.onBatteryStateChanged(1, SystemClock.uptimeMillis(),
                 batteryState);
 
-        assertThat(mStylusDeviceUpdater.isUsiConnectionValid()).isTrue();
+        assertThat(mStylusDeviceUpdater.isUsiBatteryValid()).isTrue();
     }
 
     @Test
@@ -230,19 +230,7 @@ public class StylusDeviceUpdaterTest {
         mStylusDeviceUpdater.onBatteryStateChanged(1, SystemClock.uptimeMillis(),
                 batteryState);
 
-        assertThat(mStylusDeviceUpdater.isUsiConnectionValid()).isFalse();
-    }
-
-    @Test
-    public void onBatteryStateChanged_ddetectsInvalidUsi_staleBatteryEventTime() {
-        doReturn(false).when(mStylusDeviceUpdater).hasConnectedBluetoothStylusDevice();
-        BatteryState batteryState = mock(BatteryState.class);
-        doReturn(true).when(batteryState).isPresent();
-        doReturn(0.5f).when(batteryState).getCapacity();
-
-        mStylusDeviceUpdater.onBatteryStateChanged(1, 0, batteryState);
-
-        assertThat(mStylusDeviceUpdater.isUsiConnectionValid()).isFalse();
+        assertThat(mStylusDeviceUpdater.isUsiBatteryValid()).isFalse();
     }
 
     @Test

@@ -40,8 +40,8 @@ import com.android.settings.R
 import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
 import com.android.settings.spa.app.startUninstallActivity
 import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
-import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
+import com.android.settingslib.spa.framework.common.createSettingsPage
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.framework.compose.rememberContext
 import com.android.settingslib.spa.framework.theme.SettingsDimension
@@ -74,6 +74,7 @@ const val BACKGROUND_INSTALL_CONTROL_FLAG = PackageManager.MATCH_ALL.toLong()
 
 object BackgroundInstalledAppsPageProvider : SettingsPageProvider {
     override val name = "BackgroundInstalledAppsPage"
+    private val owner = createSettingsPage()
     private var backgroundInstallService = IBackgroundInstallControlService.Stub.asInterface(
         ServiceManager.getService(Context.BACKGROUND_INSTALL_CONTROL_SERVICE))
     private var featureIsDisabled = featureIsDisabled()
@@ -95,7 +96,7 @@ object BackgroundInstalledAppsPageProvider : SettingsPageProvider {
     }
 
     fun buildInjectEntry() = SettingsEntryBuilder
-        .createInject(owner = SettingsPage.create(name))
+        .createInject(owner)
         .setSearchDataFn { null }
         .setUiLayoutFn { EntryItem() }
 

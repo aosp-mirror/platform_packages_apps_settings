@@ -17,29 +17,25 @@
 package com.android.settings.inputmethod;
 
 import android.content.Context;
-import android.hardware.input.InputManager;
+import android.hardware.input.InputSettings;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 public class TrackpadReverseScrollingPreferenceController extends TogglePreferenceController {
 
-    private InputManager mIm;
-
     public TrackpadReverseScrollingPreferenceController(Context context, String key) {
         super(context, key);
-
-        mIm =  context.getSystemService(InputManager.class);
     }
 
     @Override
     public boolean isChecked() {
-        return mIm.useTouchpadNaturalScrolling(mContext);
+        return InputSettings.useTouchpadNaturalScrolling(mContext);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        mIm.setTouchpadNaturalScrolling(mContext, isChecked);
+        InputSettings.setTouchpadNaturalScrolling(mContext, isChecked);
         return true;
     }
 

@@ -57,7 +57,8 @@ public class ConfirmSimDeletionPreferenceController extends BasePreferenceContro
     @Override
     public int getAvailabilityStatus() {
         // hide if eSim is not supported on the device
-        return MobileNetworkUtils.showEuiccSettings(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return (!MobileNetworkUtils.isMobileNetworkUserRestricted(mContext)) &&
+                MobileNetworkUtils.showEuiccSettings(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     private boolean getGlobalState() {

@@ -27,8 +27,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.util.Log;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 
@@ -68,7 +68,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
     }
 
     @Override
-    void initPreferencesFromPreferenceScreen() {
+    public void initPreferencesFromPreferenceScreen() {
         Intent intent = getActivity().getIntent();
         mNeedAuth = intent.getBooleanExtra(BluetoothDevicePicker.EXTRA_NEED_AUTH, false);
         setFilter(intent.getIntExtra(BluetoothDevicePicker.EXTRA_FILTER_TYPE,
@@ -136,7 +136,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
     }
 
     @Override
-    void onDevicePreferenceClick(BluetoothDevicePreference btPreference) {
+    public void onDevicePreferenceClick(BluetoothDevicePreference btPreference) {
         disableScanning();
         LocalBluetoothPreferences.persistSelectedDeviceInPicker(
                 getActivity(), mSelectedDevice.getAddress());

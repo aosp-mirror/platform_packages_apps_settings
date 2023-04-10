@@ -33,6 +33,8 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.widget.TickButtonPreference;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -111,8 +113,8 @@ public class NumberingSystemItemControllerTest {
 
     @Test
     @UiThreadTest
-    public void displayPreference_languageOptAndHas2Locale_show2Options() {
-        LocaleList.setDefault(LocaleList.forLanguageTags("en-US, zh-TW"));
+    public void displayPreference_languageOptAndHas2LocaleWithSingleNu_showNothing() {
+        LocaleList.setDefault(LocaleList.forLanguageTags("en-US,zh-TW"));
         Bundle bundle = new Bundle();
         bundle.putString(RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE,
                 NumberingSystemItemController.ARG_VALUE_LANGUAGE_SELECT);
@@ -123,13 +125,31 @@ public class NumberingSystemItemControllerTest {
 
         mController.displayPreference(mPreferenceScreen);
 
-        assertEquals(LocaleList.getDefault().size(), mPreferenceScreen.getPreferenceCount());
+        assertEquals(0, mPreferenceScreen.getPreferenceCount());
+    }
+
+    @Test
+    @UiThreadTest
+    public void displayPreference_languageOptAndHas2LocaleWithMultiNu_showLocaleWithMultiNuOnly() {
+        // ar-JO and dz-BT have multiple numbering systems.
+        LocaleList.setDefault(LocaleList.forLanguageTags("en-US,zh-TW,ar-JO,dz-BT"));
+        Bundle bundle = new Bundle();
+        bundle.putString(RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE,
+                NumberingSystemItemController.ARG_VALUE_LANGUAGE_SELECT);
+        bundle.putString(
+                NumberingSystemItemController.KEY_SELECTED_LANGUAGE, Locale.US.toLanguageTag());
+        mController = new NumberingSystemItemController(mApplicationContext, bundle);
+        mController.setParentFragment(mFragment);
+
+        mController.displayPreference(mPreferenceScreen);
+
+        assertEquals(2, mPreferenceScreen.getPreferenceCount());
     }
 
     @Test
     @UiThreadTest
     public void displayPreference_enUsNumbersOpt_show1Option() {
-        LocaleList.setDefault(LocaleList.forLanguageTags("en-US, zh-TW"));
+        LocaleList.setDefault(LocaleList.forLanguageTags("en-US,zh-TW"));
         Bundle bundle = new Bundle();
         bundle.putString(RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE,
                 NumberingSystemItemController.ARG_VALUE_NUMBERING_SYSTEM_SELECT);

@@ -198,6 +198,7 @@ public class NotificationVolumePreferenceControllerTest {
                 com.android.settings.R.bool.config_show_notification_volume)).thenReturn(true);
         // block the alternative condition to enable controller
         when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
+        when(mAudioManager.getRingerModeInternal()).thenReturn(AudioManager.RINGER_MODE_NORMAL);
 
         DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SYSTEMUI,
                 SystemUiDeviceConfigFlags.VOLUME_SEPARATE_NOTIFICATION, "false", false);
@@ -217,8 +218,8 @@ public class NotificationVolumePreferenceControllerTest {
                 SystemUiDeviceConfigFlags.VOLUME_SEPARATE_NOTIFICATION, Boolean.toString(true),
                 false);
 
-        assertThat(controller.getAvailabilityStatus()
-                == BasePreferenceController.AVAILABLE).isTrue();
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE);
     }
 
     @Test
@@ -233,9 +234,10 @@ public class NotificationVolumePreferenceControllerTest {
         // block the alternative condition to enable controller
         when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
 
+        when(mAudioManager.getRingerModeInternal()).thenReturn(AudioManager.RINGER_MODE_NORMAL);
+
         DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SYSTEMUI,
                 SystemUiDeviceConfigFlags.VOLUME_SEPARATE_NOTIFICATION, "true", false);
-
         NotificationVolumePreferenceController controller =
                 new NotificationVolumePreferenceController(mContext);
 
@@ -252,6 +254,21 @@ public class NotificationVolumePreferenceControllerTest {
 
         assertThat(controller.getAvailabilityStatus()
                 == BasePreferenceController.UNSUPPORTED_ON_DEVICE).isTrue();
+    }
+
+    @Test
+    public void ringerModeSilent_unaliased_getAvailability_returnsDisabled() {
+        when(mResources.getBoolean(
+                com.android.settings.R.bool.config_show_notification_volume)).thenReturn(true);
+        when(mHelper.isSingleVolume()).thenReturn(false);
+
+        when(mAudioManager.getRingerModeInternal()).thenReturn(AudioManager.RINGER_MODE_SILENT);
+
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SYSTEMUI,
+                SystemUiDeviceConfigFlags.VOLUME_SEPARATE_NOTIFICATION, "true", false);
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.DISABLED_DEPENDENT_SETTING);
     }
 
 }

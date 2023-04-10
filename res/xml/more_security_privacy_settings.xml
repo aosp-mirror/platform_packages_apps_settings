@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2023 The Android Open Source Project
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="more_security_privacy_settings"
+    android:title="@string/more_security_privacy_settings">
+
+    <!-- work profile security section. See also: security_advanced_settings.xml and
+    privacy_advanced_settings.xml. That page also has these same entries.
+     The order is -10 to make sure it is always at the top. -->
+    <PreferenceCategory
+        android:order="-10"
+        android:key="work_profile_category"
+        android:title="@string/work_profile_category_header">
+
+        <!-- security_settings_unification -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="unification"
+            android:title="@string/lock_settings_profile_unification_title"
+            android:summary="@string/lock_settings_profile_unification_summary"
+            settings:keywords="@string/keywords_unification" />
+
+        <com.android.settingslib.RestrictedPreference
+            android:key="unlock_set_or_change_profile"
+            android:title="@string/unlock_set_unlock_launch_picker_title_profile"
+            android:summary="@string/unlock_set_unlock_mode_pattern"
+            settings:keywords="@string/keywords_lockscreen" />
+
+        <SwitchPreference
+            android:key="visiblepattern_profile"
+            android:title="@string/lockpattern_settings_enable_visible_pattern_title_profile" />
+
+        <com.android.settings.RestrictedListPreference
+            android:key="privacy_lock_screen_work_profile_notifications"
+            android:title="@string/locked_work_profile_notification_title"
+            android:summary="@string/summary_placeholder"
+            settings:searchable="false"/>
+
+        <!-- Connected work and personal apps -->
+        <Preference
+            android:key="interact_across_profiles_privacy"
+            android:title="@string/interact_across_profiles_title"
+            android:fragment="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings"
+            settings:searchable="false"
+            settings:controller="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesController" />
+
+    </PreferenceCategory>
+
+
+    <!-- Privacy section -->
+    <!-- The order is -1 to make sure it is above all the privacy entries. Some dynamically injected entries have order 0. -->
+    <PreferenceCategory
+        android:order="-1"
+        android:key="privacy_category"
+        android:title="@string/privacy_header">
+        <!-- Accessibility usage -->
+        <Preference
+            android:key="privacy_accessibility_usage"
+            android:title="@string/accessibility_usage_title"
+            settings:controller="com.android.settings.privacy.AccessibilityUsagePreferenceController">
+            <intent android:action="android.intent.action.REVIEW_ACCESSIBILITY_SERVICES"/>
+        </Preference>
+
+        <!-- On lock screen notifications -->
+        <com.android.settings.RestrictedListPreference
+            android:key="privacy_lock_screen_notifications"
+            android:title="@string/lock_screen_notifs_title"
+            android:summary="@string/summary_placeholder"
+            settings:searchable="false"/>
+
+        <!-- Show media on lock screen -->
+        <SwitchPreference
+            android:key="privacy_media_controls_lockscreen"
+            android:title="@string/media_controls_lockscreen_title"
+            android:summary="@string/media_controls_lockscreen_description"
+            settings:controller=
+                "com.android.settings.sound.MediaControlsLockScreenPreferenceController" />
+
+        <!-- Content Capture -->
+        <!-- NOTE: content capture has a different preference, depending whether or not the
+             ContentCaptureService implementations defines a custom settings activitiy on its manifest.
+             Hence, we show both here, but the controller itself will decide if it's available or not.
+        -->
+        <SwitchPreference
+            android:key="content_capture"
+            android:title="@string/content_capture"
+            android:summary="@string/content_capture_summary"
+            settings:controller="com.android.settings.privacy.EnableContentCapturePreferenceController"/>
+
+        <com.android.settingslib.PrimarySwitchPreference
+            android:key="content_capture_custom_settings"
+            android:title="@string/content_capture"
+            android:summary="@string/content_capture_summary"
+            settings:controller="com.android.settings.privacy.EnableContentCaptureWithServiceSettingsPreferenceController"/>
+
+    </PreferenceCategory>
+
+    <!-- Security section. -->
+    <!-- "security_category" is used to add trust agents by TrustAgentListPreferenceController -->
+    <PreferenceCategory
+        android:order="200"
+        android:key="security_category"
+        android:title="@string/security_header" />
+
+    <PreferenceCategory
+        android:order="240"
+        android:key="security_settings_device_admin_category"
+        android:layout="@layout/preference_category_no_label">
+
+        <Preference
+            android:key="manage_device_admin"
+            android:title="@string/manage_device_admin"
+            android:summary="@string/summary_placeholder"
+            android:fragment=
+                "com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings"
+            settings:controller=
+                "com.android.settings.enterprise.ManageDeviceAdminPreferenceController" />
+
+        <Preference
+            android:key="enterprise_privacy"
+            android:title="@string/enterprise_privacy_settings"
+            android:summary="@string/summary_placeholder"
+            android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings"
+            settings:controller="com.android.settings.enterprise.EnterprisePrivacyPreferenceController"/>
+
+        <Preference
+            android:key="financed_privacy"
+            android:title="@string/financed_privacy_settings"
+            android:summary="@string/summary_placeholder"
+            android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings"
+            settings:controller="com.android.settings.enterprise.FinancedPrivacyPreferenceController"/>
+
+    </PreferenceCategory>
+
+    <Preference
+        android:order="250"
+        android:key="sim_lock_settings"
+        android:title="@string/sim_lock_settings_category"
+        settings:isPreferenceVisible="@bool/config_show_sim_info"
+        settings:controller="com.android.settings.security.SimLockPreferenceController">
+
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.android.settings"
+            android:targetClass="com.android.settings.Settings$IccLockSettingsActivity" />
+
+    </Preference>
+
+    <Preference
+        android:order="260"
+        android:key="encryption_and_credential"
+        android:title="@string/encryption_and_credential_settings_title"
+        android:summary="@string/encryption_and_credential_settings_summary"
+        android:fragment="com.android.settings.security.EncryptionAndCredential"
+        settings:controller="com.android.settings.security.EncryptionStatusPreferenceController" />
+
+    <Preference
+        android:order="270"
+        android:key="manage_trust_agents"
+        android:title="@string/manage_trust_agents"
+        android:summary="@string/summary_placeholder"
+        android:fragment="com.android.settings.security.trustagent.TrustAgentSettings"
+        settings:controller="com.android.settings.security.trustagent.ManageTrustAgentsPreferenceController" />
+
+    <Preference
+        android:order="280"
+        android:key="screen_pinning_settings"
+        android:title="@string/screen_pinning_title"
+        android:summary="@string/summary_placeholder"
+        android:fragment="com.android.settings.security.ScreenPinningSettings"
+        settings:keywords="@string/keywords_app_pinning"
+        settings:controller="com.android.settings.security.ScreenPinningPreferenceController" />
+
+    <SwitchPreference
+        android:order="290"
+        android:key="confirm_sim_deletion"
+        android:title="@string/confirm_sim_deletion_title"
+        android:summary="@string/confirm_sim_deletion_description"
+        settings:isPreferenceVisible="@bool/config_show_sim_info"
+        settings:controller="com.android.settings.security.ConfirmSimDeletionPreferenceController" />
+
+    <Preference
+        android:order="300"
+        android:id="@+id/memtag_page"
+        android:key="memtag_page"
+        android:title="@string/memtag_title"
+        android:fragment="com.android.settings.security.MemtagPage"
+        settings:controller="com.android.settings.security.MemtagPagePreferenceController" />
+
+
+
+</PreferenceScreen>

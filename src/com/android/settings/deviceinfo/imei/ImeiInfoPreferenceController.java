@@ -101,6 +101,8 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
             Preference multiImeiPreference = createNewPreference(screen.getContext());
             multiImeiPreference.setOrder(imeiPreferenceOrder + 1 + simSlotNumber);
             multiImeiPreference.setKey(DEFAULT_KEY + (1 + simSlotNumber));
+            multiImeiPreference.setEnabled(true);
+            multiImeiPreference.setCopyingEnabled(true);
             category.addPreference(multiImeiPreference);
        }
     }
@@ -146,10 +148,9 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
         return true;
     }
 
-    private void updatePreference(Preference preference, int simSlot) {
+    @VisibleForTesting
+    protected void updatePreference(Preference preference, int simSlot) {
         SubscriptionInfo subInfo = getSubscriptionInfo(simSlot);
-        preference.setEnabled(subInfo != null);
-        preference.setCopyingEnabled(subInfo != null);
         preference.setTitle(getTitle(simSlot));
         preference.setSummary(getSummary());
     }

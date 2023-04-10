@@ -19,17 +19,24 @@ package com.android.settings.regionalpreferences;
 import android.content.Context;
 import android.os.LocaleList;
 
+import com.android.internal.app.LocaleStore;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.localepicker.LocaleFeatureProviderImpl;
 
+import java.util.HashSet;
 import java.util.Locale;
-import java.util.StringJoiner;
+import java.util.Set;
 
 /** A controller for the entry of Numbering System's page */
 public class NumberingSystemController extends BasePreferenceController {
     private static final String TAG = NumberingSystemController.class.getSimpleName();
 
+    private LocaleList mLocaleList;
     public NumberingSystemController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        // Initialize the supported languages to LocaleInfos
+        LocaleStore.fillCache(context);
+        mLocaleList = getNumberingSystemLocale();
     }
 
     /**
@@ -45,17 +52,31 @@ public class NumberingSystemController extends BasePreferenceController {
      */
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mLocaleList.isEmpty() ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
+    }
+
+    private static LocaleList getNumberingSystemLocale() {
+        LocaleList localeList = LocaleList.getDefault();
+        Set<Locale> localesHasNumberingSystems = new HashSet<>();
+        for (int i = 0; i < localeList.size(); i++) {
+            Locale locale = localeList.get(i);
+            LocaleStore.LocaleInfo localeInfo = LocaleStore.getLocaleInfo(locale);
+            if (localeInfo.hasNumberingSystems()) {
+                localesHasNumberingSystems.add(locale);
+            }
+        }
+        return convertToLocaleList(localesHasNumberingSystems);
+    }
+
+    private static LocaleList convertToLocaleList(Set<Locale> locales) {
+        if (locales.isEmpty()) {
+            return LocaleList.getEmptyLocaleList();
+        }
+        return new LocaleList(locales.stream().toArray(Locale[]::new));
     }
 
     @Override
     public CharSequence getSummary() {
-        LocaleList localeList = LocaleList.getDefault();
-        StringJoiner stringJoiner = new StringJoiner(", ");
-        for (int i = 0; i < localeList.size(); i++) {
-            Locale locale = localeList.get(i);
-            stringJoiner.add(locale.stripExtensions().getDisplayName(locale));
-        }
-        return stringJoiner.toString();
+        return new LocaleFeatureProviderImpl().getLocaleNames(getNumberingSystemLocale());
     }
 }

@@ -16,11 +16,16 @@
 
 package com.android.settings.bluetooth;
 
+import static com.android.settings.bluetooth.BluetoothDetailsAudioRoutingController.KEY_AUDIO_ROUTING;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.when;
 
 import android.util.FeatureFlagUtils;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -36,6 +41,8 @@ public class BluetoothDetailsAudioRoutingControllerTest extends
     @Rule
     public final MockitoRule mockito = MockitoJUnit.rule();
 
+    private static final String TEST_ADDRESS = "55:66:77:88:99:AA";
+
     private BluetoothDetailsAudioRoutingController mController;
 
     @Override
@@ -44,7 +51,9 @@ public class BluetoothDetailsAudioRoutingControllerTest extends
 
         mController = new BluetoothDetailsAudioRoutingController(mContext, mFragment, mCachedDevice,
                 mLifecycle);
-        mController.init(mScreen);
+        final PreferenceCategory preferenceCategory = new PreferenceCategory(mContext);
+        preferenceCategory.setKey(mController.getPreferenceKey());
+        mScreen.addPreference(preferenceCategory);
     }
 
     @Test
@@ -63,5 +72,21 @@ public class BluetoothDetailsAudioRoutingControllerTest extends
         when(mCachedDevice.isHearingAidDevice()).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void init_isHearingAidDevice_expectedAudioRoutingPreference() {
+        when(mCachedDevice.isHearingAidDevice()).thenReturn(true);
+        when(mCachedDevice.getAddress()).thenReturn(TEST_ADDRESS);
+
+        mController.init(mScreen);
+        final Preference preference = mScreen.findPreference(KEY_AUDIO_ROUTING);
+        final String address = preference.getExtras().getString(
+                BluetoothDeviceDetailsFragment.KEY_DEVICE_ADDRESS);
+        final String fragment = preference.getFragment();
+
+        assertThat(address).isEqualTo(TEST_ADDRESS);
+        assertThat(fragment).isEqualTo(BluetoothDetailsAudioRoutingFragment.class.getName());
+
     }
 }

@@ -20,6 +20,7 @@ import static android.telephony.TelephonyManager.PHONE_TYPE_CDMA;
 import static android.telephony.TelephonyManager.PHONE_TYPE_GSM;
 import static android.telephony.TelephonyManager.PHONE_TYPE_NONE;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -115,6 +116,16 @@ public class ImeiInfoPreferenceControllerTest {
                 "imei_info1", mPreference, phoneType1);
         mSecondController = createPreferenceController(slotSimStatus,
                 "imei_info2", mSecondSimPreference, phoneType2);
+    }
+
+    @Test
+    public void updatePreference_simSlotWithoutSim_shouldBeEnabled() {
+        mSecondController = createPreferenceController(null,
+                "imei_info2", mSecondSimPreference, PHONE_TYPE_NONE);
+
+        mSecondController.updatePreference(mSecondSimPreference, -1);
+
+        assertThat(mSecondSimPreference.isEnabled()).isTrue();
     }
 
     @Ignore

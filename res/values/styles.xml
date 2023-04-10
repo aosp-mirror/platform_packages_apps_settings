@@ -322,7 +322,6 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">?android:attr/listPreferredItemPaddingStart</item>
-        <item name="android:minHeight">?android:attr/listPreferredItemHeight</item>
         <item name="android:textAppearance">?android:attr/textAppearanceListItem</item>
         <item name="android:gravity">center_vertical</item>
     </style>
@@ -406,6 +405,17 @@
         <item name="android:layout_gravity">start|top</item>
     </style>
 
+    <style name="WorkChallengeEmergencyButtonStyle">
+        <item name="android:background">@drawable/work_challenge_emergency_button_background</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:outlineProvider">none</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:paddingLeft">30dp</item>
+        <item name="android:paddingRight">30dp</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
     <style name="device_info_dialog_label">
         <item name="android:textAlignment">viewStart</item>
         <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
@@ -425,7 +435,7 @@
         <item name="android:layout_marginBottom">@dimen/contextual_card_vertical_margin</item>
         <item name="android:layout_marginStart">@dimen/contextual_card_side_margin</item>
         <item name="android:layout_marginEnd">@dimen/contextual_card_side_margin</item>
-        <item name="cardBackgroundColor">?androidprv:attr/colorSurface</item>
+        <item name="cardBackgroundColor">?androidprv:attr/materialColorSurfaceContainer</item>
         <item name="cardCornerRadius">@dimen/contextual_card_corner_radius</item>
         <item name="cardElevation">0dp</item>
         <item name="rippleColor">?android:attr/colorControlHighlight</item>

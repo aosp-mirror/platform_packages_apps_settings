@@ -37,7 +37,6 @@ import android.app.time.TimeZoneCapabilitiesAndConfig;
 import android.app.time.TimeZoneConfiguration;
 import android.app.time.TimeZoneDetectorStatus;
 import android.content.Context;
-import android.location.LocationManager;
 import android.os.UserHandle;
 
 import androidx.preference.Preference;
@@ -62,8 +61,6 @@ public class AutoTimeZonePreferenceControllerTest {
     private Preference mPreference;
     @Mock
     private TimeManager mTimeManager;
-    @Mock
-    private LocationManager mLocationManager;
 
     @Before
     public void setUp() {
@@ -73,9 +70,6 @@ public class AutoTimeZonePreferenceControllerTest {
         mPreference = new Preference(mContext);
 
         when(mContext.getSystemService(TimeManager.class)).thenReturn(mTimeManager);
-        when(mContext.getSystemService(LocationManager.class)).thenReturn(mLocationManager);
-
-        when(mLocationManager.isLocationEnabled()).thenReturn(true);
     }
 
     @Test
@@ -267,6 +261,7 @@ public class AutoTimeZonePreferenceControllerTest {
                         : Capabilities.CAPABILITY_NOT_SUPPORTED;
         TimeZoneCapabilities capabilities = new TimeZoneCapabilities.Builder(UserHandle.SYSTEM)
                 .setConfigureAutoDetectionEnabledCapability(configureAutoDetectionEnabledCapability)
+                .setUseLocationEnabled(true)
                 .setConfigureGeoDetectionEnabledCapability(Capabilities.CAPABILITY_NOT_SUPPORTED)
                 .setSetManualTimeZoneCapability(Capabilities.CAPABILITY_POSSESSED)
                 .build();

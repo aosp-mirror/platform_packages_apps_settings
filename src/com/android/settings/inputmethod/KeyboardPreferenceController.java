@@ -27,13 +27,13 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment.HardKeyboardDeviceInfo;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
-import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.util.List;
 
 public class KeyboardPreferenceController extends BasePreferenceController
-        implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause,
+        implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop,
         InputManager.InputDeviceListener {
 
     private final InputManager mIm;
@@ -61,13 +61,13 @@ public class KeyboardPreferenceController extends BasePreferenceController
     }
 
     @Override
-    public void onPause() {
-        mIm.unregisterInputDeviceListener(this);
+    public void onStart() {
+        mIm.registerInputDeviceListener(this, null);
     }
 
     @Override
-    public void onResume() {
-        mIm.registerInputDeviceListener(this, null);
+    public void onStop() {
+        mIm.unregisterInputDeviceListener(this);
     }
 
     @Override
@@ -84,6 +84,9 @@ public class KeyboardPreferenceController extends BasePreferenceController
     }
 
     private void updateSummary() {
+        if (mPreference == null) {
+            return;
+        }
         final List<HardKeyboardDeviceInfo> keyboards =
                 PhysicalKeyboardFragment.getHardKeyboards(mContext);
         if (keyboards.isEmpty()) {

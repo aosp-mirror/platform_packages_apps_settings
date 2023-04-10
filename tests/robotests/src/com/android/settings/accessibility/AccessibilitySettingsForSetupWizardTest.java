@@ -23,6 +23,7 @@ import static com.android.settings.accessibility.AccessibilitySettingsForSetupWi
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -45,6 +46,7 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.settings.R;
 import com.android.settingslib.RestrictedPreference;
 
+import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupdesign.GlifPreferenceLayout;
 
 import org.junit.Before;
@@ -79,6 +81,8 @@ public class AccessibilitySettingsForSetupWizardTest {
     private FragmentActivity mActivity;
     @Mock
     private GlifPreferenceLayout mGlifLayoutView;
+    @Mock
+    private FooterBarMixin mFooterBarMixin;
     private AccessibilitySettingsForSetupWizard mFragment;
 
     @Before
@@ -89,6 +93,7 @@ public class AccessibilitySettingsForSetupWizardTest {
         when(mAccessibilityManager.getInstalledAccessibilityServiceList()).thenReturn(
                 mAccessibilityServices);
         doReturn(mActivity).when(mFragment).getActivity();
+        doReturn(mFooterBarMixin).when(mGlifLayoutView).getMixin(FooterBarMixin.class);
     }
 
     @Test
@@ -99,6 +104,7 @@ public class AccessibilitySettingsForSetupWizardTest {
                 mContext.getString(R.string.vision_settings_title));
         verify(mGlifLayoutView).setDescriptionText(
                 mContext.getString(R.string.vision_settings_description));
+        verify(mFooterBarMixin).setPrimaryButton(any());
     }
 
     @Test

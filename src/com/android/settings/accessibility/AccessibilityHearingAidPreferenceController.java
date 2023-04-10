@@ -29,7 +29,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
@@ -55,8 +54,6 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
 import java.util.stream.Collectors;
 
 /**
@@ -84,7 +81,8 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
 
     public AccessibilityHearingAidPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mLocalBluetoothManager = getLocalBluetoothManager();
+        mLocalBluetoothManager = com.android.settings.bluetooth.Utils.getLocalBluetoothManager(
+                context);
         mProfileManager = mLocalBluetoothManager.getProfileManager();
         mCachedDeviceManager = mLocalBluetoothManager.getCachedDeviceManager();
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -267,19 +265,6 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
             return true;
         }
         return false;
-    }
-
-    private LocalBluetoothManager getLocalBluetoothManager() {
-        final FutureTask<LocalBluetoothManager> localBtManagerFutureTask = new FutureTask<>(
-                // Avoid StrictMode ThreadPolicy violation
-                () -> com.android.settings.bluetooth.Utils.getLocalBtManager(mContext));
-        try {
-            localBtManagerFutureTask.run();
-            return localBtManagerFutureTask.get();
-        } catch (InterruptedException | ExecutionException e) {
-            Log.w(TAG, "Error getting LocalBluetoothManager.", e);
-            return null;
-        }
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)

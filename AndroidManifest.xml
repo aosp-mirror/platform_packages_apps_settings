@@ -51,6 +51,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
+    <uses-permission android:name="android.permission.USE_ICC_AUTH_WITH_DEVICE_IDENTIFIER" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.WRITE_APN_SETTINGS"/>
     <uses-permission android:name="android.permission.ACCESS_CHECKIN_PROPERTIES"/>
@@ -88,6 +90,7 @@
     <uses-permission android:name="android.permission.MANAGE_DEVICE_ADMINS" />
     <uses-permission android:name="android.permission.READ_SEARCH_INDEXABLES" />
     <uses-permission android:name="android.permission.BIND_SETTINGS_SUGGESTIONS_SERVICE" />
+    <uses-permission android:name="android.permission.BIND_REMOTE_LOCKSCREEN_VALIDATION_SERVICE" />
     <uses-permission android:name="android.permission.OEM_UNLOCK_STATE" />
     <uses-permission android:name="android.permission.MANAGE_USER_OEM_UNLOCK_STATE" />
     <uses-permission android:name="android.permission.OVERRIDE_WIFI_CONFIG" />
@@ -175,6 +178,7 @@
                   android:exported="true"
                   android:enabled="false"
                   android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize"
+                  android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
                   android:permission="android.permission.LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK">
             <intent-filter>
                 <action android:name="android.settings.SETTINGS_EMBED_DEEP_LINK_ACTIVITY" />
@@ -221,6 +225,7 @@
         <activity android:name=".SubSettings"
                   android:exported="false"
                   android:theme="@style/Theme.SubSettings"
+                  android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
                   android:taskAffinity="com.android.settings.root" />
 
         <activity android:name=".Settings$CreateShortcutActivity"
@@ -330,6 +335,7 @@
         <activity android:name=".search.SearchResultTrampoline"
                   android:theme="@android:style/Theme.NoDisplay"
                   android:excludeFromRecents="true"
+                  android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
                   android:exported="true">
             <intent-filter>
                 <action android:name="com.android.settings.SEARCH_RESULT_TRAMPOLINE" />
@@ -1625,6 +1631,7 @@
             android:excludeFromRecents="true"
             android:theme="@android:style/Theme.NoDisplay"
             android:exported="true"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
             android:permission="android.permission.MODIFY_PHONE_STATE">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -1679,6 +1686,25 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_apps"/>
+        </activity-alias>
+
+        <activity-alias android:name="com.google.android.settings.ManageFullScreenIntent"
+                        android:exported="true"
+                        android:targetActivity=".spa.SpaBridgeActivity">
+            <meta-data android:name="com.android.settings.spa.DESTINATION"
+                       android:value="TogglePermissionAppList/UseFullScreenIntent"/>
+        </activity-alias>
+
+        <activity-alias android:name="com.google.android.settings.AppManageFullScreenIntent"
+                        android:exported="true"
+                        android:targetActivity=".spa.SpaAppBridgeActivity">
+            <intent-filter>
+                <action android:name="android.settings.MANAGE_APP_USE_FULL_SCREEN_INTENT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.spa.DESTINATION"
+                       android:value="TogglePermissionAppInfoPage/UseFullScreenIntent"/>
         </activity-alias>
 
         <activity android:name=".applications.InstalledAppOpenByDefaultActivity"
@@ -1875,6 +1901,24 @@
                        android:value="@string/menu_key_security"/>
         </activity>
 
+        <activity
+            android:name="Settings$MoreSecurityPrivacySettingsActivity"
+            android:label="@string/more_security_privacy_settings"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.MORE_SECURITY_PRIVACY_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.settings.PRIVACY_ADVANCED_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.safetycenter.MoreSecurityPrivacyFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_safety_center"/>
+        </activity>
+
         <activity android:name="MonitoringCertInfoActivity"
                 android:label=""
                 android:theme="@style/Transparent"
@@ -1929,10 +1973,6 @@
             <intent-filter>
                 <action android:name="android.settings.PRIVACY_SETTINGS" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.settings.PRIVACY_ADVANCED_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter android:priority="1">
@@ -2337,6 +2377,17 @@
         <activity-alias android:name=".ConfirmDeviceCredentialActivity"
             android:targetActivity=".password.ConfirmDeviceCredentialActivity"
             android:exported="true" />
+        <!-- Activity alias for remote lockscreen validation. Enforces required permission -->
+        <activity-alias
+            android:name=".ConfirmRemoteDeviceCredentialActivity"
+            android:targetActivity=".password.ConfirmDeviceCredentialActivity"
+            android:permission="android.permission.CHECK_REMOTE_LOCKSCREEN"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.app.action.CONFIRM_REMOTE_DEVICE_CREDENTIAL"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity-alias>
 
         <!-- Note this must not be exported since it authenticates the given user -->
         <activity android:name=".password.ConfirmDeviceCredentialActivity$InternalActivity"
@@ -2509,6 +2560,8 @@
                        android:resource="@string/suggestion_additional_fingerprints_summary" />
             <meta-data android:name="com.android.settings.icon_tintable" android:value="true" />
         </activity-alias>
+
+        <activity android:name=".biometrics.activeunlock.ActiveUnlockRequireBiometricSetup" android:exported="false"/>
 
         <!-- Note this must not be exported since it returns the password in the intent -->
         <activity android:name=".password.ConfirmLockPattern$InternalActivity"
@@ -2732,6 +2785,7 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS" />
+                <action android:name="com.android.intent.action.SHOW_CONTRAST_DIALOG" />
             </intent-filter>
             <meta-data android:name="com.android.settings.order" android:value="-40"/>
             <meta-data android:name="com.android.settings.category"
@@ -3024,7 +3078,8 @@
             android:name="Settings$PowerUsageSummaryActivity"
             android:label="@string/power_usage_summary_title"
             android:exported="true"
-            android:icon="@drawable/ic_homepage_battery">
+            android:icon="@drawable/ic_homepage_battery"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize">
             <intent-filter android:priority="1">
                 <action android:name="android.intent.action.POWER_USAGE_SUMMARY" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -3056,6 +3111,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.BATTERY_LEVEL_CHANGED"/>
                 <action android:name="com.android.settings.battery.action.CLEAR_BATTERY_CACHE_DATA"/>
+                <action android:name="com.android.settings.battery.action.ACTION_BATTERY_PLUGGING"/>
                 <action android:name="com.android.settings.battery.action.ACTION_BATTERY_UNPLUGGING"/>
             </intent-filter>
         </receiver>
@@ -3065,8 +3121,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
-                <action android:name="android.intent.action.MY_PACKAGE_UNSUSPENDED"/>
                 <action android:name="com.google.android.setupwizard.SETUP_WIZARD_FINISHED"/>
                 <action android:name="com.android.settings.battery.action.PERIODIC_JOB_RECHECK"/>
             </intent-filter>
@@ -3175,7 +3229,6 @@
         <activity android:name=".FallbackHome"
                   android:excludeFromRecents="true"
                   android:label=""
-                  android:screenOrientation="nosensor"
                   android:taskAffinity="com.android.settings.FallbackHome"
                   android:exported="true"
                   android:theme="@style/FallbackHome"
@@ -3623,7 +3676,7 @@
                   android:label="@string/notification_channel_title"
                   android:theme="@style/Theme.Panel"
                   android:excludeFromRecents="true"
-                  android:configChanges="orientation|keyboardHidden|screenSize"
+                  android:configChanges="keyboardHidden|screenSize"
                   android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.CHANNEL_NOTIFICATION_SETTINGS" />
@@ -4151,6 +4204,12 @@
                 <action android:name="android.settings.SYNC_SETTINGS" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.CREDENTIAL_PROVIDER" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
             </intent-filter>
             <intent-filter android:priority="53">
                 <action android:name="android.intent.action.MAIN" />

@@ -22,6 +22,8 @@ import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_KEYH
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
@@ -32,6 +34,7 @@ import android.util.Pair;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settingslib.drawer.ActivityTile;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -41,6 +44,8 @@ import com.android.settingslib.drawer.Tile;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,8 +59,11 @@ public class CategoryManagerTest {
     private Map<Pair<String, String>, Tile> mTileByComponentCache;
     private Map<String, DashboardCategory> mCategoryByKeyMap;
 
+    @Mock private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
+
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = ApplicationProvider.getApplicationContext();
         mActivityInfo = new ActivityInfo();
         mActivityInfo.packageName = "pkg";
@@ -64,6 +72,7 @@ public class CategoryManagerTest {
         mTileByComponentCache = new HashMap<>();
         mCategoryByKeyMap = new HashMap<>();
         mCategoryManager = CategoryManager.get(mContext);
+        SafetyCenterManagerWrapper.sInstance = mSafetyCenterManagerWrapper;
     }
 
     @Test
@@ -129,6 +138,90 @@ public class CategoryManagerTest {
                 mCategoryByKeyMap.get(CategoryKey.CATEGORY_NETWORK).getTilesCount()).isEqualTo(1);
         // Old category still exists.
         assertThat(mCategoryByKeyMap.get(oldCategory).getTilesCount()).isEqualTo(1);
+    }
+
+    @Test
+    public void mergeSecurityPrivacyKeys_safetyCenterEnabled_shouldNotChangeOtherKeys() {
+        when(mSafetyCenterManagerWrapper.isEnabled(mContext)).thenReturn(true);
+
+        final Tile tile1 = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT);
+        final String oldCategory = "com.android.settings.category.wireless";
+        final Tile tile2 = new ActivityTile(mActivityInfo, oldCategory);
+        final DashboardCategory category1 = new DashboardCategory(CategoryKey.CATEGORY_ACCOUNT);
+        category1.addTile(tile1);
+        final DashboardCategory category2 = new DashboardCategory(oldCategory);
+        category2.addTile(tile2);
+        mCategoryByKeyMap.put(CategoryKey.CATEGORY_ACCOUNT, category1);
+        mCategoryByKeyMap.put(oldCategory, category2);
+        mTileByComponentCache.put(new Pair<>("PACKAGE", "CLASS1"), tile1);
+        mTileByComponentCache.put(new Pair<>("PACKAGE", "CLASS2"), tile2);
+
+        mCategoryManager.mergeSecurityPrivacyKeys(
+                mContext, mTileByComponentCache, mCategoryByKeyMap);
+
+        assertThat(mCategoryByKeyMap.size()).isEqualTo(2);
+        assertThat(mCategoryByKeyMap.get(CategoryKey.CATEGORY_ACCOUNT).getTilesCount())
+                .isEqualTo(1);
+        assertThat(mCategoryByKeyMap.get(oldCategory).getTilesCount()).isEqualTo(1);
+        assertThat(mCategoryByKeyMap.get(CategoryKey.CATEGORY_MORE_SECURITY_PRIVACY_SETTINGS))
+                .isNull();
+    }
+
+    @Test
+    public void mergeSecurityPrivacyKeys_safetyCenterEnabled_shouldChangeSecurityPrivacyKeys() {
+        when(mSafetyCenterManagerWrapper.isEnabled(mContext)).thenReturn(true);
+
+        final Tile tileWithSecurityCategory =
+                new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_SECURITY_ADVANCED_SETTINGS);
+        final Tile tileWithPrivacyCategory =
+                new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_PRIVACY);
+        final DashboardCategory categoryAdvancedSecurity =
+                new DashboardCategory(CategoryKey.CATEGORY_SECURITY_ADVANCED_SETTINGS);
+        categoryAdvancedSecurity.addTile(tileWithSecurityCategory);
+        final DashboardCategory categoryPrivacy =
+                new DashboardCategory(CategoryKey.CATEGORY_PRIVACY);
+        categoryPrivacy.addTile(tileWithPrivacyCategory);
+        mCategoryByKeyMap.put(
+                CategoryKey.CATEGORY_SECURITY_ADVANCED_SETTINGS, categoryAdvancedSecurity);
+        mCategoryByKeyMap.put(CategoryKey.CATEGORY_PRIVACY, categoryPrivacy);
+        mTileByComponentCache.put(new Pair<>("PACKAGE", "CLASS1"), tileWithSecurityCategory);
+        mTileByComponentCache.put(new Pair<>("PACKAGE", "CLASS2"), tileWithPrivacyCategory);
+
+        mCategoryManager.mergeSecurityPrivacyKeys(
+                mContext, mTileByComponentCache, mCategoryByKeyMap);
+
+        assertThat(
+                        mCategoryByKeyMap
+                                .get(CategoryKey.CATEGORY_MORE_SECURITY_PRIVACY_SETTINGS)
+                                .getTilesCount())
+                .isEqualTo(2);
+    }
+
+    @Test
+    public void mergeSecurityPrivacyKeys_safetyCenterDisabled_shouldNotChangeSecurityPrivacyKeys() {
+        when(mSafetyCenterManagerWrapper.isEnabled(mContext)).thenReturn(false);
+
+        final Tile tileWithSecurityCategory =
+                new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_SECURITY_ADVANCED_SETTINGS);
+        final Tile tileWithPrivacyCategory =
+                new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_PRIVACY);
+        final DashboardCategory categoryAdvancedSecurity =
+                new DashboardCategory(CategoryKey.CATEGORY_SECURITY_ADVANCED_SETTINGS);
+        categoryAdvancedSecurity.addTile(tileWithSecurityCategory);
+        final DashboardCategory categoryPrivacy =
+                new DashboardCategory(CategoryKey.CATEGORY_PRIVACY);
+        categoryPrivacy.addTile(tileWithPrivacyCategory);
+        mCategoryByKeyMap.put(
+                CategoryKey.CATEGORY_SECURITY_ADVANCED_SETTINGS, categoryAdvancedSecurity);
+        mCategoryByKeyMap.put(CategoryKey.CATEGORY_PRIVACY, categoryPrivacy);
+        mTileByComponentCache.put(new Pair<>("PACKAGE", "CLASS1"), tileWithSecurityCategory);
+        mTileByComponentCache.put(new Pair<>("PACKAGE", "CLASS2"), tileWithPrivacyCategory);
+
+        mCategoryManager.mergeSecurityPrivacyKeys(
+                mContext, mTileByComponentCache, mCategoryByKeyMap);
+
+        assertThat(mCategoryByKeyMap.get(CategoryKey.CATEGORY_MORE_SECURITY_PRIVACY_SETTINGS))
+                .isNull();
     }
 
     @Test

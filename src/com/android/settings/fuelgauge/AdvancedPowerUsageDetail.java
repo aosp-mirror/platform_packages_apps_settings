@@ -25,7 +25,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -56,6 +55,8 @@ import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Power usage detail fragment for each app, this fragment contains
@@ -91,14 +92,14 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     private static final int REQUEST_UNINSTALL = 0;
     private static final int REQUEST_REMOVE_DEVICE_ADMIN = 1;
 
+    private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
+
     @VisibleForTesting
     LayoutPreference mHeaderPreference;
     @VisibleForTesting
     ApplicationsState mState;
     @VisibleForTesting
     ApplicationsState.AppEntry mAppEntry;
-    @VisibleForTesting
-    BatteryUtils mBatteryUtils;
     @VisibleForTesting
     BatteryOptimizeUtils mBatteryOptimizeUtils;
     @VisibleForTesting
@@ -244,7 +245,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         super.onAttach(activity);
 
         mState = ApplicationsState.getInstance(getActivity().getApplication());
-        mBatteryUtils = BatteryUtils.getInstance(getContext());
     }
 
     @Override
@@ -267,12 +267,15 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         initHeader();
         mOptimizationMode = mBatteryOptimizeUtils.getAppOptimizationMode();
         initPreferenceForTriState(getContext());
-        final String packageName = mBatteryOptimizeUtils.getPackageName();
-        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
-                .action(
-                getContext(),
-                SettingsEnums.OPEN_APP_BATTERY_USAGE,
-                packageName);
+        mExecutor.execute(() -> {
+            String packageName =
+                    getLoggingPackageName(getContext(), mBatteryOptimizeUtils.getPackageName());
+            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+                    .action(
+                            getContext(),
+                            SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                            packageName);
+        });
         mLogStringBuilder = new StringBuilder("onResume mode = ").append(mOptimizationMode);
     }
 
@@ -444,17 +447,21 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                 metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_RESTRICTED;
                 break;
         }
-
-        if (metricCategory != 0) {
-            final String packageName = mBatteryOptimizeUtils.getPackageName();
+        if (metricCategory == 0) {
+            return;
+        }
+        int finalMetricCategory = metricCategory;
+        mExecutor.execute(() -> {
+            String packageName =
+                    getLoggingPackageName(getContext(), mBatteryOptimizeUtils.getPackageName());
             FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
                     .action(
                             /* attribution */ SettingsEnums.OPEN_APP_BATTERY_USAGE,
-                            /* action */ metricCategory,
+                            /* action */ finalMetricCategory,
                             /* pageId */ SettingsEnums.OPEN_APP_BATTERY_USAGE,
-                            TextUtils.isEmpty(packageName) ? PACKAGE_NAME_NONE : packageName,
+                            packageName,
                             getArguments().getInt(EXTRA_POWER_USAGE_AMOUNT));
-        }
+        });
     }
 
     private void onCreateForTriState(String packageName) {
@@ -497,5 +504,10 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                     ? getText(R.string.battery_usage_since_last_full_charge) : slotTime;
             return String.format("%s\n(%s)", usageSummary, slotSummary);
         }
+    }
+
+    private static String getLoggingPackageName(Context context, String originalPackingName) {
+        return BatteryUtils.isAppInstalledFromGooglePlayStore(context, originalPackingName)
+                ? originalPackingName : PACKAGE_NAME_NONE;
     }
 }

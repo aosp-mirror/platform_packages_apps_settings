@@ -59,7 +59,7 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 
 import com.android.settings.R;
-import com.android.settingslib.DeviceInfoUtils;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -329,7 +329,7 @@ public class SimStatusDialogController implements LifecycleObserver {
     public void updatePhoneNumber() {
         // If formattedNumber is null or empty, it'll display as "Unknown".
         mDialog.setText(PHONE_NUMBER_VALUE_ID,
-                DeviceInfoUtils.getBidiFormattedPhoneNumber(mContext, mSubscriptionInfo));
+                SubscriptionUtil.getBidiFormattedPhoneNumber(mContext, mSubscriptionInfo));
     }
 
     private void updateDataState(int state) {

@@ -78,11 +78,7 @@ public class DataSaverSummary extends SettingsPreferenceFragment
 
         addPreferencesFromResource(R.xml.data_saver);
         mUnrestrictedAccess = findPreference(KEY_UNRESTRICTED_ACCESS);
-        mApplicationsState = ApplicationsState.getInstance(
-                (Application) getContext().getApplicationContext());
         mDataSaverBackend = new DataSaverBackend(getContext());
-        mDataUsageBridge = new AppStateDataUsageBridge(mApplicationsState, this, mDataSaverBackend);
-        mSession = mApplicationsState.newSession(this, getSettingsLifecycle());
     }
 
     @Override

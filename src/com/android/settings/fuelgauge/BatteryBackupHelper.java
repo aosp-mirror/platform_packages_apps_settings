@@ -153,7 +153,7 @@ public final class BatteryBackupHelper implements BackupHelper {
             // Ignores default optimized/unknown state or system/default apps.
             if (optimizationMode == BatteryOptimizeUtils.MODE_OPTIMIZED
                     || optimizationMode == BatteryOptimizeUtils.MODE_UNKNOWN
-                    || isSystemOrDefaultApp(info.packageName)) {
+                    || isSystemOrDefaultApp(info.packageName, info.uid)) {
                 continue;
             }
             final String packageOptimizeMode =
@@ -191,8 +191,9 @@ public final class BatteryBackupHelper implements BackupHelper {
                 continue;
             }
             final String packageName = results[0];
+            final int uid = BatteryUtils.getInstance(mContext).getPackageUid(packageName);
             // Ignores system/default apps.
-            if (isSystemOrDefaultApp(packageName)) {
+            if (isSystemOrDefaultApp(packageName, uid)) {
                 Log.w(TAG, "ignore from isSystemOrDefaultApp():" + packageName);
                 continue;
             }
@@ -253,10 +254,10 @@ public final class BatteryBackupHelper implements BackupHelper {
         return mPowerAllowlistBackend;
     }
 
-    private boolean isSystemOrDefaultApp(String packageName) {
+    private boolean isSystemOrDefaultApp(String packageName, int uid) {
         final PowerAllowlistBackend powerAllowlistBackend = getPowerAllowlistBackend();
         return powerAllowlistBackend.isSysAllowlisted(packageName)
-                || powerAllowlistBackend.isDefaultActiveApp(packageName);
+                || powerAllowlistBackend.isDefaultActiveApp(packageName, uid);
     }
 
     private ArraySet<ApplicationInfo> getInstalledApplications() {

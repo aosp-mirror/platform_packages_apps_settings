@@ -26,6 +26,11 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothUuid;
+import android.bluetooth.le.BluetoothLeScanner;
+import android.bluetooth.le.ScanCallback;
+import android.bluetooth.le.ScanFilter;
+import android.bluetooth.le.ScanSettings;
 import android.content.Context;
 import android.content.res.Resources;
 
@@ -45,6 +50,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import java.util.Collections;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
@@ -57,10 +63,14 @@ public class DeviceListPreferenceFragmentTest {
     private Resources mResource;
     @Mock
     private Context mContext;
+    @Mock
+    private BluetoothLeScanner mBluetoothLeScanner;
 
     private TestFragment mFragment;
     private Preference mMyDevicePreference;
 
+
+    private BluetoothAdapter mBluetoothAdapter;
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -68,7 +78,8 @@ public class DeviceListPreferenceFragmentTest {
         mFragment = spy(new TestFragment());
         doReturn(mContext).when(mFragment).getContext();
         doReturn(mResource).when(mFragment).getResources();
-        mFragment.mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mBluetoothAdapter = spy(BluetoothAdapter.getDefaultAdapter());
+        mFragment.mBluetoothAdapter = mBluetoothAdapter;
 
         mMyDevicePreference = new Preference(RuntimeEnvironment.application);
     }
@@ -169,6 +180,20 @@ public class DeviceListPreferenceFragmentTest {
         verify(mFragment, times(1)).startScanning();
     }
 
+    @Test
+    public void startScanning_setLeScanFilter_shouldStartLeScan() {
+        final ScanFilter leScanFilter = new ScanFilter.Builder()
+                .setServiceData(BluetoothUuid.HEARING_AID, new byte[]{0}, new byte[]{0})
+                .build();
+        doReturn(mBluetoothLeScanner).when(mBluetoothAdapter).getBluetoothLeScanner();
+
+        mFragment.setFilter(Collections.singletonList(leScanFilter));
+        mFragment.startScanning();
+
+        verify(mBluetoothLeScanner).startScan(eq(Collections.singletonList(leScanFilter)),
+                any(ScanSettings.class), any(ScanCallback.class));
+    }
+
     /**
      * Fragment to test since {@code DeviceListPreferenceFragment} is abstract
      */
@@ -187,7 +212,7 @@ public class DeviceListPreferenceFragmentTest {
         public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {}
 
         @Override
-        void initPreferencesFromPreferenceScreen() {}
+        protected void initPreferencesFromPreferenceScreen() {}
 
         @Override
         public String getDeviceListKey() {

@@ -38,6 +38,7 @@ public class ShadowNfcAdapter extends org.robolectric.shadows.ShadowNfcAdapter {
     private boolean mIsNfcEnabled = false;
     private int mState = NfcAdapter.STATE_ON;
     private boolean mIsSecureNfcSupported = false;
+    private boolean mIsTagIntentAppPreferenceSupported = false;
 
     @Implementation
     protected void enableReaderMode(Activity activity, NfcAdapter.ReaderCallback callback,
@@ -96,5 +97,14 @@ public class ShadowNfcAdapter extends org.robolectric.shadows.ShadowNfcAdapter {
     @Resetter
     public static void reset() {
         sReaderModeEnabled = false;
+    }
+
+    public void setTagIntentAppPreferenceSupported(boolean supported) {
+        mIsTagIntentAppPreferenceSupported = supported;
+    }
+
+    @Implementation
+    protected boolean isTagIntentAppPreferenceSupported() {
+        return mIsTagIntentAppPreferenceSupported;
     }
 }

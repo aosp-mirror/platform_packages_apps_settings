@@ -36,12 +36,10 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.network.DefaultSubscriptionReceiver;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.mobile.dataservice.DataServiceUtils;
-import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
-import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +51,8 @@ import java.util.List;
  */
 public abstract class DefaultSubscriptionController extends TelephonyBasePreferenceController
         implements LifecycleObserver, Preference.OnPreferenceChangeListener,
-        MobileNetworkRepository.MobileNetworkCallback {
+        MobileNetworkRepository.MobileNetworkCallback,
+        DefaultSubscriptionReceiver.DefaultSubscriptionListener {
     private static final String TAG = "DefaultSubController";
 
     protected ListPreference mPreference;
@@ -61,6 +60,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
     protected TelecomManager mTelecomManager;
     protected MobileNetworkRepository mMobileNetworkRepository;
     protected LifecycleOwner mLifecycleOwner;
+    private DefaultSubscriptionReceiver mDataSubscriptionChangedReceiver;
 
     private static final String EMERGENCY_ACCOUNT_HANDLE_ID = "E";
     private static final ComponentName PSTN_CONNECTION_SERVICE_COMPONENT =
@@ -76,7 +76,8 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         mManager = context.getSystemService(SubscriptionManager.class);
         mIsRtlMode = context.getResources().getConfiguration().getLayoutDirection()
                 == View.LAYOUT_DIRECTION_RTL;
-        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
+        mDataSubscriptionChangedReceiver = new DefaultSubscriptionReceiver(context, this);
         mLifecycleOwner = lifecycleOwner;
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -105,13 +106,19 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
-        mMobileNetworkRepository.addRegister(mLifecycleOwner);
-        updateEntries();
+        mMobileNetworkRepository.addRegister(mLifecycleOwner, this,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        mMobileNetworkRepository.updateEntity();
+        // Can not get default subId from database until get the callback, add register by subId
+        // later.
+        mMobileNetworkRepository.addRegisterBySubId(getDefaultSubscriptionId());
+        mDataSubscriptionChangedReceiver.registerReceiver();
     }
 
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
-        mMobileNetworkRepository.removeRegister();
+        mMobileNetworkRepository.removeRegister(this);
+        mDataSubscriptionChangedReceiver.unRegisterReceiver();
     }
 
     @Override
@@ -294,33 +301,26 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         return true;
     }
 
-    @Override
-    public void onAirplaneModeChanged(boolean airplaneModeEnabled) {
-    }
-
     boolean isRtlMode() {
         return mIsRtlMode;
     }
 
     @Override
-    public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-    }
-
-    @Override
     public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-        if (DataServiceUtils.shouldUpdateEntityList(mSubInfoEntityList, subInfoEntityList)) {
-            mSubInfoEntityList = subInfoEntityList;
-            updateEntries();
-            refreshSummary(mPreference);
-        }
+        mSubInfoEntityList = subInfoEntityList;
+        updateEntries();
+        refreshSummary(mPreference);
     }
 
     @Override
-    public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
+    public void onDefaultVoiceChanged(int defaultVoiceSubId) {
+        updateEntries();
+        refreshSummary(mPreference);
     }
 
     @Override
-    public void onAllMobileNetworkInfoChanged(
-            List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
+    public void onDefaultSmsChanged(int defaultSmsSubId) {
+        updateEntries();
+        refreshSummary(mPreference);
     }
 }

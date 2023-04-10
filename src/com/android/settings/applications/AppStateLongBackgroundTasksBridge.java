@@ -37,11 +37,11 @@ import java.util.List;
 
 /**
  * Connects app op info to the ApplicationsState. Extends {@link AppStateAppOpsBridge} to tailor
- * to the semantics of {@link Manifest.permission#RUN_LONG_JOBS}.
+ * to the semantics of {@link Manifest.permission#RUN_USER_INITIATED_JOBS}.
  * Also provides app filters that can use the info.
  */
 public class AppStateLongBackgroundTasksBridge extends AppStateBaseBridge {
-    private static final String PERMISSION = Manifest.permission.RUN_LONG_JOBS;
+    private static final String PERMISSION = Manifest.permission.RUN_USER_INITIATED_JOBS;
     private static final String TAG = "LongBackgroundTasksBridge";
 
     @VisibleForTesting
@@ -64,15 +64,15 @@ public class AppStateLongBackgroundTasksBridge extends AppStateBaseBridge {
     }
 
     /**
-     * Returns information regarding {@link Manifest.permission#RUN_LONG_JOBS} for the given
-     * package and uid.
+     * Returns information regarding {@link Manifest.permission#RUN_USER_INITIATED_JOBS} for the
+     * given package and uid.
      */
     public LongBackgroundTasksState createPermissionState(String packageName, int uid) {
         final int userId = UserHandle.getUserId(uid);
 
         final boolean permissionRequested = ArrayUtils.contains(mRequesterPackages, packageName);
-        final boolean permissionGranted = mJobScheduler.hasRunLongJobsPermission(packageName,
-                userId);
+        final boolean permissionGranted = mJobScheduler.hasRunUserInitiatedJobsPermission(
+                packageName, userId);
         return new LongBackgroundTasksState(permissionRequested, permissionGranted);
     }
 
@@ -108,7 +108,7 @@ public class AppStateLongBackgroundTasksBridge extends AppStateBaseBridge {
 
     /**
      * Class to denote the state of an app regarding
-     * {@link Manifest.permission#RUN_LONG_JOBS}.
+     * {@link Manifest.permission#RUN_USER_INITIATED_JOBS}.
      */
     public static class LongBackgroundTasksState {
         private boolean mPermissionRequested;

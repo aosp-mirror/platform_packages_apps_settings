@@ -26,12 +26,12 @@
 
     <!-- Main security section - for trust agents added in code. -->
     <PreferenceCategory
-        android:order="10"
+        android:order="210"
         android:key="security_category"
         android:layout="@layout/preference_category_no_label" />
 
     <PreferenceCategory
-        android:order="40"
+        android:order="240"
         android:key="security_settings_device_admin_category"
         android:layout="@layout/preference_category_no_label">
 
@@ -61,7 +61,7 @@
     </PreferenceCategory>
 
     <Preference
-        android:order="50"
+        android:order="250"
         android:key="sim_lock_settings"
         android:title="@string/sim_lock_settings_category"
         settings:isPreferenceVisible="@bool/config_show_sim_info"
@@ -75,7 +75,7 @@
     </Preference>
 
     <Preference
-        android:order="60"
+        android:order="260"
         android:key="encryption_and_credential"
         android:title="@string/encryption_and_credential_settings_title"
         android:summary="@string/encryption_and_credential_settings_summary"
@@ -83,7 +83,7 @@
         settings:controller="com.android.settings.security.EncryptionStatusPreferenceController" />
 
     <Preference
-        android:order="70"
+        android:order="270"
         android:key="manage_trust_agents"
         android:title="@string/manage_trust_agents"
         android:summary="@string/summary_placeholder"
@@ -91,7 +91,7 @@
         settings:controller="com.android.settings.security.trustagent.ManageTrustAgentsPreferenceController" />
 
     <Preference
-        android:order="80"
+        android:order="280"
         android:key="screen_pinning_settings"
         android:title="@string/screen_pinning_title"
         android:summary="@string/summary_placeholder"
@@ -100,7 +100,7 @@
         settings:controller="com.android.settings.security.ScreenPinningPreferenceController" />
 
     <SwitchPreference
-        android:order="90"
+        android:order="290"
         android:key="confirm_sim_deletion"
         android:title="@string/confirm_sim_deletion_title"
         android:summary="@string/confirm_sim_deletion_description"
@@ -108,7 +108,7 @@
         settings:controller="com.android.settings.security.ConfirmSimDeletionPreferenceController" />
 
   <com.android.settingslib.RestrictedPreference
-        android:order="100"
+        android:order="300"
         android:id="@+id/memtag_page"
         android:key="memtag_page"
         android:title="@string/memtag_title"
@@ -118,8 +118,8 @@
 
     <!-- work profile security section -->
     <PreferenceCategory
-        android:order="110"
-        android:key="security_category_profile"
+        android:order="310"
+        android:key="work_profile_category"
         android:title="@string/lock_settings_profile_title">
 
         <!-- security_settings_unification -->
@@ -146,12 +146,12 @@
 
         <com.android.settingslib.RestrictedPreference
             android:key="face_settings_profile"
-            android:title="@string/security_settings_face_preference_title"
+            android:title="@string/security_settings_face_profile_preference_title"
             android:summary="@string/summary_placeholder" />
 
         <com.android.settingslib.RestrictedPreference
             android:key="biometric_settings_profile"
-            android:title="@string/security_settings_biometric_preference_title"
+            android:title="@string/security_settings_work_biometric_preference_title"
             android:summary="@string/summary_placeholder" />
 
     </PreferenceCategory>

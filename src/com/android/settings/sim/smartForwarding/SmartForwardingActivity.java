@@ -137,7 +137,7 @@ public class SmartForwardingActivity extends SettingsBaseActivity {
         TelephonyManager tm = getSystemService(TelephonyManager.class);
         SubscriptionManager sm = getSystemService(SubscriptionManager.class);
 
-        boolean[] callWaitingStatus = getAllSlotCallWaitingStatus(this, sm, tm);
+        boolean[] callWaitingStatus = getAllSlotCallWaitingStatus(this, tm);
         CallForwardingInfo[] callForwardingInfo = getAllSlotCallForwardingStatus(this, sm, tm);
 
         // Disable feature

@@ -23,6 +23,7 @@ import com.android.settings.LegalSettings;
 import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.accounts.AccountDetailDashboardFragment;
 import com.android.settings.applications.AppDashboardFragment;
+import com.android.settings.applications.specialaccess.SpecialAccessSettings;
 import com.android.settings.communal.CommunalDashboardFragment;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
@@ -43,6 +44,7 @@ import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.zen.ZenModeSettings;
 import com.android.settings.privacy.PrivacyDashboardFragment;
+import com.android.settings.safetycenter.MoreSecurityPrivacyFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.security.SecurityAdvancedSettings;
 import com.android.settings.security.SecuritySettings;
@@ -129,6 +131,10 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_SMART_BATTERY_SETTINGS);
         PARENT_TO_CATEGORY_KEY_MAP.put(CommunalDashboardFragment.class.getName(),
                 CategoryKey.CATEGORY_COMMUNAL_SETTINGS);
+        PARENT_TO_CATEGORY_KEY_MAP.put(SpecialAccessSettings.class.getName(),
+                CategoryKey.CATEGORY_SPECIAL_APP_ACCESS);
+        PARENT_TO_CATEGORY_KEY_MAP.put(MoreSecurityPrivacyFragment.class.getName(),
+                CategoryKey.CATEGORY_MORE_SECURITY_PRIVACY_SETTINGS);
 
         CATEGORY_KEY_TO_PARENT_MAP = new ArrayMap<>(PARENT_TO_CATEGORY_KEY_MAP.size());
 

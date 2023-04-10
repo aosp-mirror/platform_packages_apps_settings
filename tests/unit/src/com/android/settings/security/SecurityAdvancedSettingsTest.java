@@ -16,6 +16,7 @@
 
 package com.android.settings.security;
 
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -29,7 +30,9 @@ import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.TestUtils;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.drawer.CategoryKey;
@@ -39,6 +42,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
 public class SecurityAdvancedSettingsTest {
@@ -98,6 +103,18 @@ public class SecurityAdvancedSettingsTest {
 
         assertThat(mSecurityAdvancedSettings.getCategoryKey())
                 .isEqualTo(LEGACY_CATEGORY_KEY);
+    }
+
+    @Test
+    public void whenSafetyCenterIsEnabled_pageIndexExcluded() throws Exception {
+        when(mSafetyCenterManagerWrapper.isEnabled(any())).thenReturn(false);
+        BaseSearchIndexProvider indexProvider = SecurityAdvancedSettings.SEARCH_INDEX_DATA_PROVIDER;
+
+        List<String> allXmlKeys = TestUtils.getAllXmlKeys(mContext, indexProvider);
+        List<String> nonIndexableKeys = indexProvider.getNonIndexableKeys(mContext);
+        allXmlKeys.removeAll(nonIndexableKeys);
+
+        assertThat(allXmlKeys).isEmpty();
     }
 
     private int getXmlResId(String resName) {

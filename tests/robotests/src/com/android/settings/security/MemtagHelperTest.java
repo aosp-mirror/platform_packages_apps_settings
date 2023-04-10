@@ -34,7 +34,7 @@ public class MemtagHelperTest {
     private final String mMemtagProperty = "arm64.memtag.bootctl";
     private final String mMemtagSupportedProperty = "ro.arm64.memtag.bootctl_settings_toggle";
     private final String mDeviceConfigOverride =
-            "persist.device_config.memory_safety_native.bootloader_override";
+            "persist.device_config.memory_safety_native_boot.bootloader_override";
 
     @Test
     public void isChecked_empty_isFalse() {
@@ -175,5 +175,17 @@ public class MemtagHelperTest {
         ShadowSystemProperties.override(mDeviceConfigOverride, "force_on");
         ShadowSystemProperties.override(mMemtagProperty, "memtag");
         assertThat(MemtagHelper.getSummary()).isEqualTo(R.string.memtag_force_on);
+    }
+
+    @Test
+    public void isForcedOn_forceOnOverride_isTrue() {
+        ShadowSystemProperties.override(mDeviceConfigOverride, "force_on");
+        assertThat(MemtagHelper.isForcedOn()).isTrue();
+    }
+
+    @Test
+    public void isForcedOff_forceOffOverride_isTrue() {
+        ShadowSystemProperties.override(mDeviceConfigOverride, "force_off");
+        assertThat(MemtagHelper.isForcedOff()).isTrue();
     }
 }

@@ -8,6 +8,7 @@ import android.annotation.Nullable;
 import android.annotation.UserIdInt;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.DevicePolicyManager.DeviceOwnerType;
+import android.app.admin.ManagedSubscriptionsPolicy;
 import android.app.admin.PasswordMetrics;
 import android.app.admin.PasswordPolicy;
 import android.content.ComponentName;
@@ -29,6 +30,7 @@ public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDev
     private Map<Integer, CharSequence> mSupportMessagesMap = new HashMap<>();
     private boolean mIsAdminActiveAsUser = false;
     private ComponentName mDeviceOwnerComponentName;
+    private ManagedSubscriptionsPolicy mManagedSubscriptionsPolicy;
     private int mDeviceOwnerUserId = -1;
     private int mPasswordMinQuality = PASSWORD_QUALITY_UNSPECIFIED;
     private int mPasswordMinLength = 0;
@@ -85,6 +87,10 @@ public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDev
         mDeviceOwnerTypes.put(admin.getPackageName(), deviceOwnerType);
     }
 
+    public void setManagedSubscriptionsPolicy(ManagedSubscriptionsPolicy policy) {
+        mManagedSubscriptionsPolicy = policy;
+    }
+
     @DeviceOwnerType
     public int getDeviceOwnerType(@NonNull ComponentName admin) {
         return mDeviceOwnerTypes.getOrDefault(admin.getPackageName(), DEVICE_OWNER_TYPE_DEFAULT);
@@ -97,6 +103,11 @@ public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDev
         policy.length = mPasswordMinLength;
         policy.symbols = mPasswordMinSymbols;
         return policy.getMinMetrics();
+    }
+
+    @Implementation
+    public ManagedSubscriptionsPolicy getManagedSubscriptionsPolicy() {
+        return mManagedSubscriptionsPolicy;
     }
 
     public void setPasswordQuality(int quality) {

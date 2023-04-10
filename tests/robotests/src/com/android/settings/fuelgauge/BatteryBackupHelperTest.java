@@ -81,6 +81,7 @@ public final class BatteryBackupHelperTest {
     private static final String PACKAGE_NAME1 = "com.android.testing.1";
     private static final String PACKAGE_NAME2 = "com.android.testing.2";
     private static final String PACKAGE_NAME3 = "com.android.testing.3";
+    private static final int UID1 = 1;
 
     private Context mContext;
     private BatteryBackupHelper mBatteryBackupHelper;
@@ -208,7 +209,7 @@ public final class BatteryBackupHelperTest {
     @Test
     public void backupOptimizationMode_backupOptimizationMode() throws Exception {
         final List<String> allowlistedApps = Arrays.asList(PACKAGE_NAME1);
-        createTestingData(PACKAGE_NAME1, PACKAGE_NAME2, PACKAGE_NAME3);
+        createTestingData(PACKAGE_NAME1, UID1, PACKAGE_NAME2, PACKAGE_NAME3);
 
         mBatteryBackupHelper.backupOptimizationMode(mBackupDataOutput, allowlistedApps);
 
@@ -221,10 +222,10 @@ public final class BatteryBackupHelperTest {
     public void backupOptimizationMode_backupOptimizationModeAndIgnoreSystemApp()
             throws Exception {
         final List<String> allowlistedApps = Arrays.asList(PACKAGE_NAME1);
-        createTestingData(PACKAGE_NAME1, PACKAGE_NAME2, PACKAGE_NAME3);
+        createTestingData(PACKAGE_NAME1, UID1, PACKAGE_NAME2, PACKAGE_NAME3);
         // Sets "com.android.testing.1" as system app.
         doReturn(true).when(mPowerAllowlistBackend).isSysAllowlisted(PACKAGE_NAME1);
-        doReturn(false).when(mPowerAllowlistBackend).isDefaultActiveApp(anyString());
+        doReturn(false).when(mPowerAllowlistBackend).isDefaultActiveApp(anyString(), anyInt());
 
         mBatteryBackupHelper.backupOptimizationMode(mBackupDataOutput, allowlistedApps);
 
@@ -237,9 +238,9 @@ public final class BatteryBackupHelperTest {
     public void backupOptimizationMode_backupOptimizationModeAndIgnoreDefaultApp()
             throws Exception {
         final List<String> allowlistedApps = Arrays.asList(PACKAGE_NAME1);
-        createTestingData(PACKAGE_NAME1, PACKAGE_NAME2, PACKAGE_NAME3);
+        createTestingData(PACKAGE_NAME1, UID1, PACKAGE_NAME2, PACKAGE_NAME3);
         // Sets "com.android.testing.1" as device default app.
-        doReturn(true).when(mPowerAllowlistBackend).isDefaultActiveApp(PACKAGE_NAME1);
+        doReturn(true).when(mPowerAllowlistBackend).isDefaultActiveApp(PACKAGE_NAME1, UID1);
         doReturn(false).when(mPowerAllowlistBackend).isSysAllowlisted(anyString());
 
         mBatteryBackupHelper.backupOptimizationMode(mBackupDataOutput, allowlistedApps);
@@ -371,15 +372,15 @@ public final class BatteryBackupHelperTest {
         assertThat(actualResultSet).isEqualTo(expectedResultSet);
     }
 
-    private void createTestingData(
-            String packageName1, String packageName2, String packageName3) throws Exception {
+    private void createTestingData(String packageName1, int uid1, String packageName2,
+            String packageName3) throws Exception {
         // Sets the getInstalledApplications() method for testing.
         final UserInfo userInfo =
                 new UserInfo(/*userId=*/ 0, /*userName=*/ "google", /*flag=*/ 0);
         doReturn(Arrays.asList(userInfo)).when(mUserManager).getProfiles(anyInt());
         final ApplicationInfo applicationInfo1 = new ApplicationInfo();
         applicationInfo1.enabled = true;
-        applicationInfo1.uid = 1;
+        applicationInfo1.uid = uid1;
         applicationInfo1.packageName = packageName1;
         final ApplicationInfo applicationInfo2 = new ApplicationInfo();
         applicationInfo2.enabled = false;

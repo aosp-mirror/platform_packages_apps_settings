@@ -20,6 +20,7 @@ import android.content.Context;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
+import android.os.UserManager;
 
 import androidx.annotation.Nullable;
 
@@ -84,6 +85,18 @@ public class CombinedBiometricStatusUtils {
         // Result is only required if all modalities require consent.
         // If the admins are non-null, they are actually always the same.
         return faceConsentRequired && fpConsentRequired ? faceAdmin : null;
+    }
+
+    /**
+     * Returns the title of combined biometric settings entity.
+     */
+    public String getTitle() {
+        UserManager userManager = mContext.getSystemService(UserManager.class);
+        if (userManager != null && userManager.isProfile()) {
+            return mContext.getString(R.string.security_settings_work_biometric_preference_title);
+        } else {
+            return mContext.getString(R.string.security_settings_biometric_preference_title);
+        }
     }
 
     /**

@@ -57,6 +57,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
@@ -176,8 +177,9 @@ public class IccLockSettings extends SettingsPreferenceFragment
         super.onCreate(savedInstanceState);
 
         if (Utils.isMonkeyRunning() ||
-                !SubscriptionUtil.isSimHardwareVisible(getContext())) {
-            finishFragment();
+                !SubscriptionUtil.isSimHardwareVisible(getContext()) ||
+                MobileNetworkUtils.isMobileNetworkUserRestricted(getContext())) {
+            finish();
             return;
         }
 

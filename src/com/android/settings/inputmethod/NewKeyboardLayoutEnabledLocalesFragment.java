@@ -20,64 +20,214 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
+import android.hardware.input.KeyboardLayout;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.os.UserManager;
+import android.util.Log;
 import android.view.InputDevice;
+import android.view.inputmethod.InputMethodInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.view.inputmethod.InputMethodSubtype;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
+import com.android.settings.inputmethod.NewKeyboardSettingsUtils.KeyboardInfo;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
         implements InputManager.InputDeviceListener {
 
     private static final String TAG = "NewKeyboardLayoutEnabledLocalesFragment";
-    private static final String PREF_KEY_ENABLED_LOCALES = "enabled_locales_keyboard_layout";
-
-    static final String EXTRA_KEYBOARD_DEVICE_NAME = "extra_keyboard_device_name";
 
     private InputManager mIm;
+    private InputMethodManager mImm;
     private InputDeviceIdentifier mInputDeviceIdentifier;
+    private int mUserId;
     private int mInputDeviceId;
     private Context mContext;
+    private ArrayList<KeyboardInfo> mKeyboardInfoList = new ArrayList<>();
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mContext = context;
+        final int profileType = getArguments().getInt(ProfileSelectFragment.EXTRA_PROFILE);
+        final int currentUserId = UserHandle.myUserId();
+        final int newUserId;
+        final UserManager userManager = mContext.getSystemService(UserManager.class);
+
+        switch (profileType) {
+            case ProfileSelectFragment.ProfileType.WORK: {
+                // If the user is a managed profile user, use currentUserId directly. Or get the
+                // managed profile userId instead.
+                newUserId = userManager.isManagedProfile()
+                        ? currentUserId : Utils.getManagedProfileId(userManager, currentUserId);
+                break;
+            }
+            case ProfileSelectFragment.ProfileType.PERSONAL: {
+                final UserHandle primaryUser = userManager.getPrimaryUser().getUserHandle();
+                newUserId = primaryUser.getIdentifier();
+                break;
+            }
+            default:
+                newUserId = currentUserId;
+        }
+
+        mUserId = newUserId;
+        mIm = mContext.getSystemService(InputManager.class);
+        mImm = mContext.getSystemService(InputMethodManager.class);
+        mInputDeviceId = -1;
+    }
 
     @Override
     public void onActivityCreated(final Bundle icicle) {
         super.onActivityCreated(icicle);
-
         Bundle arguments = getArguments();
-        final String title = arguments.getString(EXTRA_KEYBOARD_DEVICE_NAME);
-        mInputDeviceIdentifier = arguments.getParcelable(
-                KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_IDENTIFIER);
+        mInputDeviceIdentifier =
+                arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER);
+        if (mInputDeviceIdentifier == null) {
+            Log.e(TAG, "The inputDeviceIdentifier should not be null");
+            return;
+        }
+        InputDevice inputDevice =
+                NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier);
+        if (inputDevice == null) {
+            Log.e(TAG, "inputDevice is null");
+            return;
+        }
+        final String title = inputDevice.getName();
         getActivity().setTitle(title);
-        final PreferenceCategory category = findPreference(PREF_KEY_ENABLED_LOCALES);
+    }
 
-        // TODO(b/252816846): Need APIs to get the available keyboards from Inputmanager.
-        // For example: InputMethodManager.getEnabledInputMethodLocales()
-        //              InputManager.getKeyboardLayoutForLocale()
-        // Hardcode the default value for demo purpose
-        String[] keyboardLanguages = {"English (US)", "German (Germany)", "Spanish (Spain)"};
-        String[] keyboardLayouts = {"English (US)", "German", "Spanish"};
-        for (int i = 0; i < keyboardLanguages.length; i++) {
+    @Override
+    public void onStart() {
+        super.onStart();
+        mIm.registerInputDeviceListener(this, null);
+        InputDevice inputDevice =
+                NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier);
+        if (inputDevice == null) {
+            getActivity().finish();
+            return;
+        }
+        mInputDeviceId = inputDevice.getId();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateCheckedState();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mIm.unregisterInputDeviceListener(this);
+        mInputDeviceId = -1;
+    }
+
+    private void updateCheckedState() {
+        if (NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier) == null) {
+            return;
+        }
+
+        PreferenceScreen preferenceScreen = getPreferenceScreen();
+        preferenceScreen.removeAll();
+        List<InputMethodInfo> infoList = mImm.getEnabledInputMethodListAsUser(mUserId);
+        Collections.sort(infoList, new Comparator<InputMethodInfo>() {
+            public int compare(InputMethodInfo o1, InputMethodInfo o2) {
+                String s1 = o1.loadLabel(mContext.getPackageManager()).toString();
+                String s2 = o2.loadLabel(mContext.getPackageManager()).toString();
+                return s1.compareTo(s2);
+            }
+        });
+
+        for (InputMethodInfo info : infoList) {
+            mKeyboardInfoList.clear();
+            List<InputMethodSubtype> subtypes =
+                    mImm.getEnabledInputMethodSubtypeListAsUser(info.getId(), true, mUserId);
+            for (InputMethodSubtype subtype : subtypes) {
+                if (subtype.isSuitableForPhysicalKeyboardLayoutMapping()) {
+                    mapLanguageWithLayout(info, subtype);
+                }
+            }
+            updatePreferenceLayout(preferenceScreen, info);
+        }
+    }
+
+    private void mapLanguageWithLayout(InputMethodInfo info, InputMethodSubtype subtype) {
+        CharSequence subtypeLabel = getSubtypeLabel(mContext, info, subtype);
+        KeyboardLayout[] keyboardLayouts = getKeyboardLayouts(info, subtype);
+        String layout = getKeyboardLayout(info, subtype);
+
+        if (layout != null) {
+            for (int i = 0; i < keyboardLayouts.length; i++) {
+                if (keyboardLayouts[i].getDescriptor().equals(layout)) {
+                    KeyboardInfo keyboardInfo = new KeyboardInfo(
+                            subtypeLabel,
+                            keyboardLayouts[i].getLabel(),
+                            info,
+                            subtype);
+                    mKeyboardInfoList.add(keyboardInfo);
+                    break;
+                }
+            }
+        } else {
+            // if there is no auto-selected layout, we should show "Default"
+            KeyboardInfo keyboardInfo = new KeyboardInfo(
+                    subtypeLabel,
+                    mContext.getString(R.string.keyboard_default_layout),
+                    info,
+                    subtype);
+            mKeyboardInfoList.add(keyboardInfo);
+        }
+    }
+
+    private void updatePreferenceLayout(PreferenceScreen preferenceScreen, InputMethodInfo info) {
+        if (mKeyboardInfoList.isEmpty()) {
+            return;
+        }
+        PreferenceCategory preferenceCategory = new PreferenceCategory(mContext);
+        preferenceCategory.setTitle(info.loadLabel(mContext.getPackageManager()));
+        preferenceCategory.setKey(info.getPackageName());
+        preferenceScreen.addPreference(preferenceCategory);
+        Collections.sort(mKeyboardInfoList, new Comparator<KeyboardInfo>() {
+            public int compare(KeyboardInfo o1, KeyboardInfo o2) {
+                String s1 = o1.getSubtypeLabel().toString();
+                String s2 = o2.getSubtypeLabel().toString();
+                return s1.compareTo(s2);
+            }
+        });
+
+        for (KeyboardInfo keyboardInfo : mKeyboardInfoList) {
             final Preference pref = new Preference(mContext);
-            String key = "keyboard_language_label_" + String.valueOf(i);
-            String keyboardLanguageTitle = keyboardLanguages[i];
-            String keyboardLanguageSummary = keyboardLayouts[i];
-            // TODO: Waiting for new API to use a prefix with special number to setKey
-            pref.setKey(key);
-            pref.setTitle(keyboardLanguageTitle);
-            pref.setSummary(keyboardLanguageSummary);
+            pref.setKey(keyboardInfo.getPrefId());
+            pref.setTitle(keyboardInfo.getSubtypeLabel());
+            pref.setSummary(keyboardInfo.getLayout());
             pref.setOnPreferenceClickListener(
                     preference -> {
                         showKeyboardLayoutPicker(
-                                keyboardLanguageTitle,
-                                keyboardLanguageSummary,
-                                mInputDeviceIdentifier);
+                                keyboardInfo.getSubtypeLabel(),
+                                keyboardInfo.getLayout(),
+                                mInputDeviceIdentifier,
+                                mUserId,
+                                keyboardInfo.getInputMethodInfo(),
+                                keyboardInfo.getInputMethodSubtype());
                         return true;
                     });
-            category.addPreference(pref);
+            preferenceCategory.addPreference(pref);
         }
     }
 
@@ -96,42 +246,8 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
     @Override
     public void onInputDeviceChanged(int deviceId) {
         if (mInputDeviceId >= 0 && deviceId == mInputDeviceId) {
-            // TODO(b/252816846): Need APIs to update the available keyboards.
+            updateCheckedState();
         }
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mContext = getContext();
-        mIm = mContext.getSystemService(InputManager.class);
-        mInputDeviceId = -1;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        mIm.registerInputDeviceListener(this, null);
-        final InputDevice inputDevice =
-                mIm.getInputDeviceByDescriptor(mInputDeviceIdentifier.getDescriptor());
-        if (inputDevice == null) {
-            getActivity().finish();
-            return;
-        }
-        mInputDeviceId = inputDevice.getId();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        mIm.unregisterInputDeviceListener(this);
-        mInputDeviceId = -1;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        // TODO(b/252816846): Need APIs to get the available keyboards from Inputmanager.
     }
 
     @Override
@@ -149,17 +265,43 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
         return R.xml.keyboard_settings_enabled_locales_list;
     }
 
-    private void showKeyboardLayoutPicker(String language, String layout,
-            InputDeviceIdentifier inputDeviceIdentifier) {
+    private void showKeyboardLayoutPicker(
+            CharSequence subtypeLabel,
+            String layout,
+            InputDeviceIdentifier inputDeviceIdentifier,
+            int userId,
+            InputMethodInfo inputMethodInfo,
+            InputMethodSubtype inputMethodSubtype) {
         Bundle arguments = new Bundle();
-        arguments.putParcelable(KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_IDENTIFIER,
-                inputDeviceIdentifier);
-        arguments.putString(NewKeyboardLayoutPickerFragment.EXTRA_TITLE, language);
-        arguments.putString(NewKeyboardLayoutPickerFragment.EXTRA_KEYBOARD_LAYOUT, layout);
+        arguments.putParcelable(
+                NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER, inputDeviceIdentifier);
+        arguments.putParcelable(
+                NewKeyboardSettingsUtils.EXTRA_INPUT_METHOD_INFO, inputMethodInfo);
+        arguments.putParcelable(
+                NewKeyboardSettingsUtils.EXTRA_INPUT_METHOD_SUBTYPE, inputMethodSubtype);
+        arguments.putInt(NewKeyboardSettingsUtils.EXTRA_USER_ID, userId);
+        arguments.putCharSequence(NewKeyboardSettingsUtils.EXTRA_TITLE, subtypeLabel);
+        arguments.putString(NewKeyboardSettingsUtils.EXTRA_KEYBOARD_LAYOUT, layout);
         new SubSettingLauncher(mContext)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .setDestination(NewKeyboardLayoutPickerFragment.class.getName())
                 .setArguments(arguments)
                 .launch();
+    }
+
+    private KeyboardLayout[] getKeyboardLayouts(InputMethodInfo info, InputMethodSubtype subtype) {
+        return mIm.getKeyboardLayoutListForInputDevice(
+                mInputDeviceIdentifier, mUserId, info, subtype);
+    }
+
+    private String getKeyboardLayout(InputMethodInfo info, InputMethodSubtype subtype) {
+        return mIm.getKeyboardLayoutForInputDevice(
+                mInputDeviceIdentifier, mUserId, info, subtype);
+    }
+
+    private CharSequence getSubtypeLabel(
+            Context context, InputMethodInfo info, InputMethodSubtype subtype) {
+        return subtype.getDisplayName(
+                context, info.getPackageName(), info.getServiceInfo().applicationInfo);
     }
 }

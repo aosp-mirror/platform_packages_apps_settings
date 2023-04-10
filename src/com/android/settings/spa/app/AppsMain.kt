@@ -24,10 +24,8 @@ import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settings.spa.app.backgroundinstall.BackgroundInstalledAppsPageProvider
 import com.android.settings.spa.app.specialaccess.SpecialAppAccessPageProvider
-import com.android.settings.spa.home.HomePageProvider
 import com.android.settingslib.spa.framework.common.SettingsEntry
 import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
-import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.common.SpaEnvironmentFactory
 import com.android.settingslib.spa.framework.common.createSettingsPage
@@ -41,6 +39,8 @@ import com.android.settingslib.spa.widget.ui.SettingsIcon
 object AppsMainPageProvider : SettingsPageProvider {
     override val name = "AppsMain"
     private val owner = createSettingsPage()
+
+    override fun isEnabled(arguments: Bundle?) = false
 
     @Composable
     override fun Page(arguments: Bundle?) {

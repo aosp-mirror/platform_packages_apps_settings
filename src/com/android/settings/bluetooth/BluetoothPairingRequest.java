@@ -50,10 +50,8 @@ public final class BluetoothPairingRequest extends BroadcastReceiver {
             PowerManager powerManager = context.getSystemService(PowerManager.class);
             int pairingVariant = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT,
                     BluetoothDevice.ERROR);
-            String deviceAddress = device != null ? device.getAddress() : null;
-            String deviceName = device != null ? device.getName() : null;
             boolean shouldShowDialog = LocalBluetoothPreferences.shouldShowDialogInForeground(
-                    context, deviceAddress, deviceName);
+                    context, device);
 
             // Skips consent pairing dialog if the device was recently associated with CDM
             if (pairingVariant == BluetoothDevice.PAIRING_VARIANT_CONSENT

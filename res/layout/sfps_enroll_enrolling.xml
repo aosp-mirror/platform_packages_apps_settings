@@ -32,11 +32,13 @@
         android:clipChildren="false">
 
         <RelativeLayout
+            android:id="@+id/progress_lottie"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:translationX="0dp">
 
             <!-- Animation res MUST be set in code -->
             <com.airbnb.lottie.LottieAnimationView

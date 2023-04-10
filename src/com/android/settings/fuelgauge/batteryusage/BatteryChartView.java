@@ -301,7 +301,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         mTrapezoidSolidColor = Utils.getColorAccentDefaultColor(context);
         mTrapezoidColor = Utils.getDisabled(context, mTrapezoidSolidColor);
         mTrapezoidHoverColor = Utils.getColorAttrDefaultColor(context,
-                com.android.internal.R.attr.colorAccentSecondaryVariant);
+                com.android.internal.R.attr.materialColorSecondaryContainer);
         // Initializes the divider line paint.
         final Resources resources = getContext().getResources();
         mDividerWidth = resources.getDimensionPixelSize(R.dimen.chartview_divider_width);

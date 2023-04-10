@@ -32,17 +32,22 @@ import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.annotation.Config;
 import org.robolectric.RobolectricTestRunner;
 
 /** Test for {@link MediaVibrationIntensityPreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {SettingsShadowResources.class})
 public class MediaVibrationTogglePreferenceControllerTest {
 
     private static final String PREFERENCE_KEY = "preference_key";
@@ -70,6 +75,11 @@ public class MediaVibrationTogglePreferenceControllerTest {
         mPreference.setSummary("Test summary");
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
+    }
+
+    @After
+    public void tearDown() {
+        SettingsShadowResources.reset();
     }
 
     @Test
@@ -142,6 +152,32 @@ public class MediaVibrationTogglePreferenceControllerTest {
         mController.setChecked(false);
         assertThat(readSetting(Settings.System.MEDIA_VIBRATION_INTENSITY))
                 .isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
+    }
+
+    @Test
+    public void configForMediaVibration_enabled_shouldShowToogle() {
+        SettingsShadowResources.overrideResource(R.bool.config_media_vibration_supported, true);
+        mController.updateState(mPreference);
+
+        final boolean mediaVibrationConfig = mContext.getResources()
+                .getBoolean(R.bool.config_media_vibration_supported);
+
+        assertThat(mediaVibrationConfig).isTrue();
+        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.isSupported()).isTrue();
+    }
+
+    @Test
+    public void configForMediaVibration_disabled_shouldHideToggle() {
+        SettingsShadowResources.overrideResource(R.bool.config_media_vibration_supported, false);
+        mController.updateState(mPreference);
+
+        final boolean mediaVibrationConfig = mContext.getResources()
+                .getBoolean(R.bool.config_media_vibration_supported);
+
+        assertThat(mediaVibrationConfig).isFalse();
+        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.isSupported()).isFalse();
     }
 
     private void updateSetting(String key, int value) {

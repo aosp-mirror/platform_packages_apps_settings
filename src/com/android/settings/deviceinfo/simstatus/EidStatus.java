@@ -144,6 +144,7 @@ public class EidStatus {
                     }
                     return eid;
                 })
+                .filter(Objects::nonNull)
                 .findFirst()
                 .orElse(null);
     }

@@ -23,6 +23,7 @@ import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.util.TypedValue;
 
+import androidx.window.embedding.ActivityEmbeddingController;
 import androidx.window.embedding.SplitController;
 
 import com.android.settings.R;
@@ -32,29 +33,25 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 /** An util class collecting all common methods for the embedding activity features. */
 public class ActivityEmbeddingUtils {
     // The smallest value of current width of the window when the split should be used.
-    private static final float MIN_CURRENT_SCREEN_SPLIT_WIDTH_DP = 720f;
+    private static final int MIN_CURRENT_SCREEN_SPLIT_WIDTH_DP = 720;
     // The smallest value of the smallest-width (sw) of the window in any rotation when
     // the split should be used.
-    private static final float MIN_SMALLEST_SCREEN_SPLIT_WIDTH_DP = 600f;
+    private static final int MIN_SMALLEST_SCREEN_SPLIT_WIDTH_DP = 600;
     // The minimum width of the activity to show the regular homepage layout.
     private static final float MIN_REGULAR_HOMEPAGE_LAYOUT_WIDTH_DP = 380f;
     private static final String TAG = "ActivityEmbeddingUtils";
 
-    /** Get the smallest pixel value of width of the window when the split should be used. */
-    public static int getMinCurrentScreenSplitWidthPx(Context context) {
-        final DisplayMetrics dm = context.getResources().getDisplayMetrics();
-        return (int) TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP, MIN_CURRENT_SCREEN_SPLIT_WIDTH_DP, dm);
+    /** Get the smallest width dp of the window when the split should be used. */
+    public static int getMinCurrentScreenSplitWidthDp() {
+        return MIN_CURRENT_SCREEN_SPLIT_WIDTH_DP;
     }
 
     /**
-     * Get the smallest pixel value of the smallest-width (sw) of the window in any rotation when
+     * Get the smallest dp value of the smallest-width (sw) of the window in any rotation when
      * the split should be used.
      */
-    public static int getMinSmallestScreenSplitWidthPx(Context context) {
-        final DisplayMetrics dm = context.getResources().getDisplayMetrics();
-        return (int) TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP, MIN_SMALLEST_SCREEN_SPLIT_WIDTH_DP, dm);
+    public static int getMinSmallestScreenSplitWidthDp() {
+        return MIN_SMALLEST_SCREEN_SPLIT_WIDTH_DP;
     }
 
     /**
@@ -69,7 +66,7 @@ public class ActivityEmbeddingUtils {
     public static boolean isEmbeddingActivityEnabled(Context context) {
         boolean isFlagEnabled = FeatureFlagUtils.isEnabled(context,
                 FeatureFlagUtils.SETTINGS_SUPPORT_LARGE_SCREEN);
-        boolean isSplitSupported = SplitController.getInstance().isSplitSupported();
+        boolean isSplitSupported = SplitController.getInstance(context).isSplitSupported();
         boolean isUserSetupComplete = WizardManagerHelper.isUserSetupComplete(context);
 
         Log.d(TAG, "isFlagEnabled = " + isFlagEnabled);
@@ -84,5 +81,14 @@ public class ActivityEmbeddingUtils {
         DisplayMetrics dm = activity.getResources().getDisplayMetrics();
         return dm.widthPixels >= (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, MIN_REGULAR_HOMEPAGE_LAYOUT_WIDTH_DP, dm);
+    }
+
+    /**
+     * Check if activity is already embedded
+     */
+    public static boolean isAlreadyEmbedded(Activity activity) {
+        return ActivityEmbeddingController
+                .getInstance(activity)
+                .isActivityEmbedded(activity);
     }
 }

@@ -89,7 +89,7 @@ class AppStoragePreferenceTest {
 
         composeTestRule.onNodeWithText(context.getString(R.string.storage_settings_for_app))
             .assertIsDisplayed()
-        composeTestRule.waitUntilExists(hasText("123 B used in internal storage"))
+        composeTestRule.waitUntilExists(hasText("120 B used in internal storage"))
     }
 
     @Test
@@ -104,7 +104,7 @@ class AppStoragePreferenceTest {
 
         composeTestRule.onNodeWithText(context.getString(R.string.storage_settings_for_app))
             .assertIsDisplayed()
-        composeTestRule.waitUntilExists(hasText("123 B used in external storage"))
+        composeTestRule.waitUntilExists(hasText("120 B used in external storage"))
     }
 
     private fun setContent(app: ApplicationInfo) {

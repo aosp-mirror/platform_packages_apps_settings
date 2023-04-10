@@ -71,7 +71,7 @@ public class StylusUsiHeaderController extends BasePreferenceController implemen
         ImageView iconView = mHeaderPreference.findViewById(R.id.entity_header_icon);
         if (iconView != null) {
             // TODO(b/250909304): get proper icon once VisD ready
-            iconView.setImageResource(R.drawable.circle);
+            iconView.setImageResource(R.drawable.ic_edit);
             iconView.setContentDescription("Icon for stylus");
         }
         refresh();

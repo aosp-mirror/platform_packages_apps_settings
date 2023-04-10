@@ -48,6 +48,7 @@ import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.users.UserFeatureProvider;
 import com.android.settings.vpn2.AdvancedVpnFeatureProvider;
 import com.android.settings.wifi.WifiTrackerLibProvider;
+import com.android.settings.wifi.factory.WifiFeatureProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
@@ -86,6 +87,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public AccessibilitySearchFeatureProvider mAccessibilitySearchFeatureProvider;
     public AccessibilityMetricsFeatureProvider mAccessibilityMetricsFeatureProvider;
     public AdvancedVpnFeatureProvider mAdvancedVpnFeatureProvider;
+    public WifiFeatureProvider mWifiFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -128,6 +130,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         mAccessibilitySearchFeatureProvider = mock(AccessibilitySearchFeatureProvider.class);
         mAccessibilityMetricsFeatureProvider = mock(AccessibilityMetricsFeatureProvider.class);
         mAdvancedVpnFeatureProvider = mock(AdvancedVpnFeatureProvider.class);
+        mWifiFeatureProvider = mock(WifiFeatureProvider.class);
     }
 
     @Override
@@ -273,5 +276,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public AdvancedVpnFeatureProvider getAdvancedVpnFeatureProvider() {
         return mAdvancedVpnFeatureProvider;
+    }
+
+    @Override
+    public WifiFeatureProvider getWifiFeatureProvider() {
+        return mWifiFeatureProvider;
     }
 }

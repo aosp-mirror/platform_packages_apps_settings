@@ -26,8 +26,12 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.hardware.SensorPrivacyManager;
 import android.hardware.biometrics.BiometricAuthenticator;
+import android.hardware.biometrics.SensorProperties;
 import android.hardware.face.FaceManager;
+import android.hardware.face.FaceSensorPropertiesInternal;
+import android.hardware.face.IFaceAuthenticatorsRegisteredCallback;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
@@ -42,6 +46,7 @@ import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.Settings;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
@@ -58,6 +63,8 @@ import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.span.LinkSpan;
 
+import java.util.List;
+
 /**
  * Provides introductory info about face unlock and prompts the user to agree before starting face
  * enrollment.
@@ -69,6 +76,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     @Nullable private FooterButton mPrimaryFooterButton;
     @Nullable private FooterButton mSecondaryFooterButton;
     @Nullable private SensorPrivacyManager mSensorPrivacyManager;
+    private boolean mIsFaceStrong;
 
     @Override
     protected void onCancelButtonClick(View view) {
@@ -110,7 +118,25 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mFaceManager = getFaceManager();
+
+        if (savedInstanceState == null
+                && !WizardManagerHelper.isAnySetupWizard(getIntent())
+                && !getIntent().getBooleanExtra(EXTRA_FROM_SETTINGS_SUMMARY, false)
+                && maxFacesEnrolled()) {
+            // from tips && maxEnrolled
+            Log.d(TAG, "launch face settings");
+            launchFaceSettingsActivity();
+            finish();
+        }
+
         super.onCreate(savedInstanceState);
+
+        // Wait super::onCreated() then return because SuperNotCalledExceptio will be thrown
+        // if we don't wait for it.
+        if (isFinishing()) {
+            return;
+        }
 
         // Apply extracted theme color to icons.
         final ImageView iconGlasses = findViewById(R.id.icon_glasses);
@@ -134,14 +160,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         inControlMessage.setMovementMethod(LinkMovementMethod.getInstance());
         lessSecure.setText(getLessSecureMessage());
 
-        // Set up and show the "less secure" info section if necessary.
-        if (getResources().getBoolean(R.bool.config_face_intro_show_less_secure)) {
-            final LinearLayout infoRowLessSecure = findViewById(R.id.info_row_less_secure);
-            final ImageView iconLessSecure = findViewById(R.id.icon_less_secure);
-            infoRowLessSecure.setVisibility(View.VISIBLE);
-            iconLessSecure.getBackground().setColorFilter(getIconColorFilter());
-        }
-
         // Set up and show the "require eyes" info section if necessary.
         if (getResources().getBoolean(R.bool.config_face_intro_show_require_eyes)) {
             final LinearLayout infoRowRequireEyes = findViewById(R.id.info_row_require_eyes);
@@ -152,7 +170,27 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             infoMessageRequireEyes.setText(getInfoMessageRequireEyes());
         }
 
-        mFaceManager = getFaceManager();
+        mFaceManager.addAuthenticatorsRegisteredCallback(
+                new IFaceAuthenticatorsRegisteredCallback.Stub() {
+                    @Override
+                    public void onAllAuthenticatorsRegistered(
+                            @NonNull List<FaceSensorPropertiesInternal> sensors) {
+                        if (sensors.isEmpty()) {
+                            Log.e(TAG, "No sensors");
+                            return;
+                        }
+
+                        boolean isFaceStrong = sensors.get(0).sensorStrength
+                                == SensorProperties.STRENGTH_STRONG;
+                        if (mIsFaceStrong == isFaceStrong) {
+                            return;
+                        }
+                        mIsFaceStrong = isFaceStrong;
+                        onFaceStrengthChanged();
+                    }
+                });
+
+        onFaceStrengthChanged();
 
         // This path is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
@@ -189,6 +227,24 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         final boolean cameraPrivacyEnabled = helper
                 .isSensorBlocked(SensorPrivacyManagerHelper.SENSOR_CAMERA);
         Log.v(TAG, "cameraPrivacyEnabled : " + cameraPrivacyEnabled);
+    }
+
+    private void launchFaceSettingsActivity() {
+        final Intent intent = new Intent(this, Settings.FaceSettingsInternalActivity.class);
+        final byte[] token = getIntent().getByteArrayExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+        if (token != null) {
+            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
+        }
+        final int userId = getIntent().getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
+        if (userId != UserHandle.USER_NULL) {
+            intent.putExtra(Intent.EXTRA_USER_ID, userId);
+        }
+        BiometricUtils.copyMultiBiometricExtras(getIntent(), intent);
+        intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, true);
+        intent.putExtra(EXTRA_KEY_CHALLENGE, getIntent().getLongExtra(EXTRA_KEY_CHALLENGE, -1L));
+        intent.putExtra(EXTRA_KEY_SENSOR_ID, getIntent().getIntExtra(EXTRA_KEY_SENSOR_ID, -1));
+        startActivity(intent);
     }
 
     @VisibleForTesting
@@ -232,6 +288,15 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     @Override
     protected void onStart() {
         super.onStart();
+        listenFoldEventForPostureGuidance();
+    }
+
+    private void listenFoldEventForPostureGuidance() {
+        if (maxFacesEnrolled()) {
+            Log.d(TAG, "Device has enrolled face, do not show posture guidance");
+            return;
+        }
+
         if (getPostureGuidanceIntent() == null) {
             Log.d(TAG, "Device do not support posture guidance");
             return;
@@ -509,6 +574,15 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         return R.string.security_settings_face_enroll_introduction_more;
     }
 
+    @Override
+    protected void updateDescriptionText() {
+        if (mIsFaceStrong) {
+            setDescriptionText(getString(
+                    R.string.security_settings_face_enroll_introduction_message_class3));
+        }
+        super.updateDescriptionText();
+    }
+
     @NonNull
     protected static Intent setSkipPendingEnroll(@Nullable Intent data) {
         if (data == null) {
@@ -516,5 +590,17 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         }
         data.putExtra(MultiBiometricEnrollHelper.EXTRA_SKIP_PENDING_ENROLL, true);
         return data;
+    }
+
+    private void onFaceStrengthChanged() {
+        // Set up and show the "less secure" info section if necessary.
+        if (!mIsFaceStrong && getResources().getBoolean(
+                R.bool.config_face_intro_show_less_secure)) {
+            final LinearLayout infoRowLessSecure = findViewById(R.id.info_row_less_secure);
+            final ImageView iconLessSecure = findViewById(R.id.icon_less_secure);
+            infoRowLessSecure.setVisibility(View.VISIBLE);
+            iconLessSecure.getBackground().setColorFilter(getIconColorFilter());
+        }
+        updateDescriptionText();
     }
 }

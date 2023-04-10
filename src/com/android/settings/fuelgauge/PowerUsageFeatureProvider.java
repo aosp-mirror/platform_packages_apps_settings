@@ -36,6 +36,11 @@ public interface PowerUsageFeatureProvider {
     boolean isBatteryUsageEnabled();
 
     /**
+     * Returns a threshold (in milliseconds) for the minimal screen on time in battery usage list
+     */
+    double getBatteryUsageListScreenOnTimeThresholdInMs();
+
+    /**
      * Returns a threshold (mA) for the minimal comsume power in battery usage list
      */
     double getBatteryUsageListConsumePowerThreshold();
@@ -146,6 +151,11 @@ public interface PowerUsageFeatureProvider {
      * Returns {@link Set} for the system component ids which are combined into others
      */
     Set<Integer> getOthersSystemComponentSet();
+
+    /**
+     * Returns {@link Set} for the custom system component names which are combined into others
+     */
+    Set<String> getOthersCustomComponentNameSet();
 
     /**
      * Returns {@link Set} for hiding system component ids in the usage screen

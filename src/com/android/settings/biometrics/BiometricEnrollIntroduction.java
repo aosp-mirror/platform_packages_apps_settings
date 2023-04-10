@@ -185,7 +185,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         mUserManager = getUserManager();
         updatePasswordQuality();
 
-        if (!mConfirmingCredentials) {
+        // Check isFinishing() because FaceEnrollIntroduction may finish self to launch
+        // FaceSettings during onCreate()
+        if (!mConfirmingCredentials && !isFinishing()) {
             if (!mHasPassword) {
                 // No password registered, launch into enrollment wizard.
                 mConfirmingCredentials = true;
@@ -222,7 +224,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
 
                     // Show secondary button once scroll is completed.
                     if (!scrollNeeded) {
-                        getSecondaryFooterButton().setVisibility(View.VISIBLE);
+                        if (!enrollmentCompleted) {
+                            getSecondaryFooterButton().setVisibility(View.VISIBLE);
+                        }
                         mHasScrolledToBottom = true;
                     }
                 });
@@ -242,6 +246,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             mErrorText.setVisibility(View.VISIBLE);
             getNextButton().setText(getResources().getString(R.string.done));
             getNextButton().setVisibility(View.VISIBLE);
+            getSecondaryFooterButton().setVisibility(View.INVISIBLE);
         }
     }
 
@@ -484,13 +489,16 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         finish();
     }
 
-    @Override
-    protected void initViews() {
-        super.initViews();
-
+    protected void updateDescriptionText() {
         if (mBiometricUnlockDisabledByAdmin && !mParentalConsentRequired) {
             setDescriptionText(getDescriptionDisabledByAdmin());
         }
+    }
+
+    @Override
+    protected void initViews() {
+        super.initViews();
+        updateDescriptionText();
     }
 
     @NonNull

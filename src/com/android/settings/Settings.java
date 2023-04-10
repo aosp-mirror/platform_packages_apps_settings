@@ -208,7 +208,35 @@ public class Settings extends SettingsActivity {
         }
     }
     /** Activity for the Advanced security settings. */
-    public static class SecurityAdvancedSettings extends SettingsActivity { /* empty */ }
+    public static class SecurityAdvancedSettings extends SettingsActivity {
+        private static final String TAG = "SecurityAdvancedActivity";
+        @Override
+        protected void onCreate(Bundle savedState) {
+            super.onCreate(savedState);
+            handleMoreSettingsRedirection();
+        }
+
+        /** Redirects to More Settings if Safety center is enabled. */
+        @VisibleForTesting
+        public void handleMoreSettingsRedirection() {
+            if (isFinishing()) {
+                // Don't trampoline if already exiting this activity.
+                return;
+            }
+
+            if (SafetyCenterManagerWrapper.get().isEnabled(this)) {
+                try {
+                    startActivity(
+                            new Intent("com.android.settings.MORE_SECURITY_PRIVACY_SETTINGS"));
+                    finish();
+                } catch (ActivityNotFoundException e) {
+                    Log.e(TAG, "Unable to open More Settings", e);
+                }
+            }
+        }
+    }
+    /** Activity for the More settings page. */
+    public static class MoreSecurityPrivacySettingsActivity extends SettingsActivity { /* empty */ }
     public static class UsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppUsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocationSettingsActivity extends SettingsActivity { /* empty */ }
@@ -346,6 +374,8 @@ public class Settings extends SettingsActivity {
     public static class AppMediaManagementAppsActivity extends SettingsActivity { /* empty */ }
     public static class WriteSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChangeWifiStateActivity extends SettingsActivity { /* empty */ }
+    /** Activity to manage NFC Tag applications. */
+    public static class ChangeNfcTagAppsActivity extends SettingsActivity { /* empty */ }
     public static class AppDrawOverlaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppWriteSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity to manage app battery usage details. */
@@ -433,7 +463,7 @@ public class Settings extends SettingsActivity {
         }
     }
 
-    /** Actviity to manage apps with {@link android.Manifest.permission#RUN_LONG_JOBS} */
+    /** Actviity to manage apps with {@link android.Manifest.permission#RUN_USER_INITIATED_JOBS} */
     public static class LongBackgroundTasksActivity extends SettingsActivity { /* empty */ }
     /** App specific version of {@link LongBackgroundTasksActivity} */
     public static class LongBackgroundTasksAppActivity extends SettingsActivity { /* empty */ }

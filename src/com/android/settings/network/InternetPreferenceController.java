@@ -27,9 +27,7 @@ import static com.android.settings.network.InternetUpdater.INTERNET_WIFI;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.util.Log;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.VisibleForTesting;
@@ -45,10 +43,7 @@ import com.android.settings.widget.SummaryUpdater;
 import com.android.settings.wifi.WifiSummaryUpdater;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.mobile.dataservice.DataServiceUtils;
-import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
-import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
@@ -61,7 +56,8 @@ import java.util.Map;
  */
 public class InternetPreferenceController extends AbstractPreferenceController implements
         LifecycleObserver, SummaryUpdater.OnSummaryChangeListener,
-        InternetUpdater.InternetChangeListener, MobileNetworkRepository.MobileNetworkCallback  {
+        InternetUpdater.InternetChangeListener, MobileNetworkRepository.MobileNetworkCallback,
+        DefaultSubscriptionReceiver.DefaultSubscriptionListener {
 
     public static final String KEY = "internet_settings";
 
@@ -72,6 +68,8 @@ public class InternetPreferenceController extends AbstractPreferenceController i
     private LifecycleOwner mLifecycleOwner;
     private MobileNetworkRepository mMobileNetworkRepository;
     private List<SubscriptionInfoEntity> mSubInfoEntityList = new ArrayList<>();
+    private int mDefaultDataSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+    private DefaultSubscriptionReceiver mDataSubscriptionChangedReceiver;
 
     @VisibleForTesting
     static Map<Integer, Integer> sIconMap = new HashMap<>();
@@ -102,7 +100,8 @@ public class InternetPreferenceController extends AbstractPreferenceController i
         mInternetUpdater = new InternetUpdater(context, lifecycle, this);
         mInternetType = mInternetUpdater.getInternetType();
         mLifecycleOwner = lifecycleOwner;
-        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
+        mDataSubscriptionChangedReceiver = new DefaultSubscriptionReceiver(context, this);
         lifecycle.addObserver(this);
     }
 
@@ -157,15 +156,20 @@ public class InternetPreferenceController extends AbstractPreferenceController i
     /** @OnLifecycleEvent(ON_RESUME) */
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
-        mMobileNetworkRepository.addRegister(mLifecycleOwner);
+        mMobileNetworkRepository.addRegister(mLifecycleOwner, this,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        mMobileNetworkRepository.updateEntity();
         mSummaryHelper.register(true);
+        mDataSubscriptionChangedReceiver.registerReceiver();
+        mDefaultDataSubId = SubscriptionManager.getDefaultDataSubscriptionId();
     }
 
     /** @OnLifecycleEvent(ON_PAUSE) */
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
-        mMobileNetworkRepository.removeRegister();
+        mMobileNetworkRepository.removeRegister(this);
         mSummaryHelper.register(false);
+        mDataSubscriptionChangedReceiver.unRegisterReceiver();
     }
 
     /**
@@ -211,11 +215,11 @@ public class InternetPreferenceController extends AbstractPreferenceController i
             if (subInfo.isActiveDataSubscriptionId) {
                 activeSubInfo = subInfo;
             }
-            if (subInfo.isDefaultDataSubscription) {
+            if (subInfo.getSubId() == getDefaultDataSubscriptionId()) {
                 defaultSubInfo = subInfo;
             }
         }
-        if (activeSubInfo == null) {
+        if (activeSubInfo == null || defaultSubInfo == null) {
             return;
         }
         activeSubInfo = activeSubInfo.isSubscriptionVisible ? activeSubInfo : defaultSubInfo;
@@ -236,24 +240,20 @@ public class InternetPreferenceController extends AbstractPreferenceController i
         return mSubInfoEntityList;
     }
 
+    @VisibleForTesting
+    protected int getDefaultDataSubscriptionId() {
+        return mDefaultDataSubId;
+    }
+
     @Override
     public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-        if (DataServiceUtils.shouldUpdateEntityList(mSubInfoEntityList, subInfoEntityList)) {
-            mSubInfoEntityList = subInfoEntityList;
-            updateState(mPreference);
-        }
+        mSubInfoEntityList = subInfoEntityList;
+        updateState(mPreference);
     }
 
     @Override
-    public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> activeSubInfoList) {
-    }
-
-    @Override
-    public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
-    }
-
-    @Override
-    public void onAllMobileNetworkInfoChanged(
-            List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
+    public void onDefaultDataChanged(int defaultDataSubId) {
+        mDefaultDataSubId = defaultDataSubId;
+        updateState(mPreference);
     }
 }

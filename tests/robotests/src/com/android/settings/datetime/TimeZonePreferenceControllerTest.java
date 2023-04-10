@@ -112,8 +112,10 @@ public class TimeZonePreferenceControllerTest {
                         PROVIDER_STATUS_NOT_PRESENT, null));
         int suggestManualCapability = suggestManualAllowed ? Capabilities.CAPABILITY_POSSESSED
                 : Capabilities.CAPABILITY_NOT_SUPPORTED;
+        boolean useLocationEnabled = true;
         TimeZoneCapabilities capabilities = new TimeZoneCapabilities.Builder(UserHandle.SYSTEM)
                 .setConfigureAutoDetectionEnabledCapability(Capabilities.CAPABILITY_POSSESSED)
+                .setUseLocationEnabled(useLocationEnabled)
                 .setConfigureGeoDetectionEnabledCapability(Capabilities.CAPABILITY_NOT_SUPPORTED)
                 .setSetManualTimeZoneCapability(suggestManualCapability)
                 .build();

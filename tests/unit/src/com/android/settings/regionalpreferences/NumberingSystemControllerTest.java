@@ -16,6 +16,9 @@
 
 package com.android.settings.regionalpreferences;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+
 import static org.junit.Assert.assertEquals;
 
 import android.content.Context;
@@ -23,61 +26,36 @@ import android.os.LocaleList;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Locale;
 
 public class NumberingSystemControllerTest {
     private Context mApplicationContext;
     private NumberingSystemController mController;
-    private LocaleList mCacheLocales;
 
     @Before
     public void setUp() throws Exception {
         mApplicationContext = ApplicationProvider.getApplicationContext();
+    }
+
+    @Test
+    public void getAvailabilityStatus_noLocale_unavailable() {
+        LocaleList.setDefault(LocaleList.forLanguageTags("en-US,zh-Hant-TW"));
         mController = new NumberingSystemController(mApplicationContext, "key");
-        mCacheLocales = LocaleList.getDefault();
-    }
 
+        int result = mController.getAvailabilityStatus();
 
-    @After
-    public void tearDown() throws Exception {
-        LocaleList.setDefault(mCacheLocales);
+        assertEquals(CONDITIONALLY_UNAVAILABLE, result);
     }
 
     @Test
-    public void getSummary_has1Locale_showEnUs() {
-        LocaleList.setDefault(LocaleList.forLanguageTags("en-US"));
+    public void getAvailabilityStatus_hasLocaleWithNumberingSystems_available() {
+        // ar-JO has different numbering system.
+        LocaleList.setDefault(LocaleList.forLanguageTags("en-US,zh-Hant-TW,ar-JO"));
+        mController = new NumberingSystemController(mApplicationContext, "key");
 
-        String summary = mController.getSummary().toString();
+        int result = mController.getAvailabilityStatus();
 
-        String expectedResult =
-                Locale.forLanguageTag("en-us").getDisplayName();
-        assertEquals(expectedResult, summary);
-    }
-
-    @Test
-    public void getSummary_has2Locales_showEnUsAndZhTw() {
-        LocaleList.setDefault(LocaleList.forLanguageTags("en-US,zh-TW"));
-
-        String summary = mController.getSummary().toString();
-
-        Locale locale1 = Locale.forLanguageTag("en-US");
-        Locale locale2 = Locale.forLanguageTag("zh-TW");
-        String expectedResult =
-                locale1.getDisplayName(locale1) + ", " + locale2.getDisplayName(locale2);
-        assertEquals(expectedResult, summary);
-    }
-
-    @Test
-    public void getSummary_localeHasExtensionTag_showEnUsWithoutTag() {
-        LocaleList.setDefault(LocaleList.forLanguageTags("en-US-u-ca-chinese"));
-
-        String summary = mController.getSummary().toString();
-
-        String expectedResult = Locale.forLanguageTag("en-US").getDisplayName();
-        assertEquals(expectedResult, summary);
+        assertEquals(AVAILABLE, result);
     }
 }

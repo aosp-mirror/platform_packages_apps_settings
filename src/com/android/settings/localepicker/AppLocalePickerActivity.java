@@ -18,11 +18,10 @@ package com.android.settings.localepicker;
 
 import android.app.FragmentTransaction;
 import android.app.LocaleManager;
-import android.content.Context;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.LocaleList;
-import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -33,7 +32,7 @@ import android.widget.ListView;
 import com.android.internal.app.LocalePickerWithRegion;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
-import com.android.settings.applications.AppInfoBase;
+import com.android.settings.applications.AppLocaleUtil;
 import com.android.settings.applications.appinfo.AppLocaleDetails;
 import com.android.settings.core.SettingsBaseActivity;
 
@@ -44,7 +43,6 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
     private String mPackageName;
     private LocalePickerWithRegion mLocalePickerWithRegion;
     private AppLocaleDetails mAppLocaleDetails;
-    private Context mContextAsUser;
     private View mAppLocaleDetailContainer;
 
     @Override
@@ -62,26 +60,24 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
             finish();
             return;
         }
-        mContextAsUser = this;
-        if (getIntent().hasExtra(AppInfoBase.ARG_PACKAGE_UID)) {
-            int userId = getIntent().getIntExtra(AppInfoBase.ARG_PACKAGE_UID, -1);
-            if (userId != -1) {
-                UserHandle userHandle = UserHandle.getUserHandleForUid(userId);
-                mContextAsUser = createContextAsUser(userHandle, 0);
-            }
+
+        if (!canDisplayLocaleUi()) {
+            Log.w(TAG, "Not allow to display Locale Settings UI.");
+            finish();
+            return;
         }
 
         setTitle(R.string.app_locale_picker_title);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         mLocalePickerWithRegion = LocalePickerWithRegion.createLanguagePicker(
-                mContextAsUser,
+                this,
                 this,
                 false /* translate only */,
                 null,
                 mPackageName,
                 this);
-        mAppLocaleDetails = AppLocaleDetails.newInstance(mPackageName, mContextAsUser.getUserId());
+        mAppLocaleDetails = AppLocaleDetails.newInstance(mPackageName, getUserId());
         mAppLocaleDetailContainer = launchAppLocaleDetailsPage();
         // Launch Locale picker part.
         launchLocalePickerPage();
@@ -121,7 +117,7 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
     /** Sets the app's locale to the supplied language tag */
     private void setAppDefaultLocale(String languageTag) {
         Log.d(TAG, "setAppDefaultLocale: " + languageTag);
-        LocaleManager localeManager = mContextAsUser.getSystemService(LocaleManager.class);
+        LocaleManager localeManager = getSystemService(LocaleManager.class);
         if (localeManager == null) {
             Log.w(TAG, "LocaleManager is null, cannot set default app locale");
             return;
@@ -160,5 +156,19 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .replace(R.id.content_frame, mLocalePickerWithRegion)
                 .commit();
+    }
+
+    private boolean canDisplayLocaleUi() {
+        try {
+            PackageManager packageManager = getPackageManager();
+            return AppLocaleUtil.canDisplayLocaleUi(this,
+                    packageManager.getApplicationInfo(mPackageName, 0),
+                    packageManager.queryIntentActivities(AppLocaleUtil.LAUNCHER_ENTRY_INTENT,
+                            PackageManager.GET_META_DATA));
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Unable to find info for package: " + mPackageName);
+        }
+
+        return false;
     }
 }

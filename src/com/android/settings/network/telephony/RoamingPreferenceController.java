@@ -40,7 +40,6 @@ import com.android.settings.network.GlobalSettingsChangeListener;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.mobile.dataservice.DataServiceUtils;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
@@ -82,7 +81,7 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
         super(context, key);
         mSubId = subId;
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
-        mMobileNetworkRepository = MobileNetworkRepository.createBySubId(context, this, mSubId);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         mLifecycleOwner = lifecycleOwner;
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -101,7 +100,8 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
 
     @OnLifecycleEvent(ON_START)
     public void onStart() {
-        mMobileNetworkRepository.addRegister(mLifecycleOwner);
+        mMobileNetworkRepository.addRegister(mLifecycleOwner, this, mSubId);
+        mMobileNetworkRepository.updateEntity();
         if (mListener == null) {
             mListener = new GlobalSettingsChangeListener(mContext,
                     Settings.Global.DATA_ROAMING) {
@@ -127,7 +127,7 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
-        mMobileNetworkRepository.removeRegister();
+        mMobileNetworkRepository.removeRegister(this);
         stopMonitor();
         stopMonitorSubIdSpecific();
     }
@@ -239,35 +239,16 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
     }
 
     @Override
-    public void onAirplaneModeChanged(boolean airplaneModeEnabled) {
-    }
-
-    @Override
-    public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-    }
-
-    @Override
-    public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-    }
-
-    @Override
-    public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
-    }
-
-    @Override
     public void onAllMobileNetworkInfoChanged(
             List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
-        if (DataServiceUtils.shouldUpdateEntityList(mMobileNetworkInfoEntityList,
-                mobileNetworkInfoEntityList)) {
-            mMobileNetworkInfoEntityList = mobileNetworkInfoEntityList;
-            mMobileNetworkInfoEntityList.forEach(entity -> {
-                if (Integer.parseInt(entity.subId) == mSubId) {
-                    mMobileNetworkInfoEntity = entity;
-                    update();
-                    refreshSummary(mSwitchPreference);
-                    return;
-                }
-            });
-        }
+        mMobileNetworkInfoEntityList = mobileNetworkInfoEntityList;
+        mMobileNetworkInfoEntityList.forEach(entity -> {
+            if (Integer.parseInt(entity.subId) == mSubId) {
+                mMobileNetworkInfoEntity = entity;
+                update();
+                refreshSummary(mSwitchPreference);
+                return;
+            }
+        });
     }
 }

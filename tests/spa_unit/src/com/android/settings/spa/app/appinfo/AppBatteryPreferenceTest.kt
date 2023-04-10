@@ -138,7 +138,7 @@ class AppBatteryPreferenceTest {
         val batteryDiffEntry = mock(BatteryDiffEntry::class.java).apply {
             mConsumePower = 12.3
         }
-        whenever(batteryDiffEntry.percentOfTotal).thenReturn(45.6)
+        whenever(batteryDiffEntry.percentage).thenReturn(45.6)
         mockBatteryDiffEntry(batteryDiffEntry)
 
         setContent()
@@ -149,7 +149,7 @@ class AppBatteryPreferenceTest {
     @Test
     fun whenClick_openDetailsPage() {
         val batteryDiffEntry = mock(BatteryDiffEntry::class.java)
-        whenever(batteryDiffEntry.percentOfTotal).thenReturn(10.0)
+        whenever(batteryDiffEntry.percentage).thenReturn(10.0)
         mockBatteryDiffEntry(batteryDiffEntry)
 
         setContent()

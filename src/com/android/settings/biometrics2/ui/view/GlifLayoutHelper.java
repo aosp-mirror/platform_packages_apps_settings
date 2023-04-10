@@ -67,4 +67,14 @@ public class GlifLayoutHelper {
             mGlifLayout.setDescriptionText(description);
         }
     }
+
+    @NonNull
+    public Activity getActivity() {
+        return mActivity;
+    }
+
+    @NonNull
+    public GlifLayout getGlifLayout() {
+        return mGlifLayout;
+    }
 }

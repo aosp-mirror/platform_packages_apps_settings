@@ -16,7 +16,6 @@
 
 package com.android.settings.privacy;
 
-import static android.safetylabel.SafetyLabelConstants.PERMISSION_RATIONALE_ENABLED;
 import static android.safetylabel.SafetyLabelConstants.SAFETY_LABEL_CHANGE_NOTIFICATIONS_ENABLED;
 
 import android.content.Context;
@@ -39,8 +38,6 @@ public class AppDataSharingUpdatesPreferenceController extends BasePreferenceCon
     public int getAvailabilityStatus() {
         return DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY,
                 SAFETY_LABEL_CHANGE_NOTIFICATIONS_ENABLED, false)
-                && DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY,
-                        PERMISSION_RATIONALE_ENABLED, false)
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 }

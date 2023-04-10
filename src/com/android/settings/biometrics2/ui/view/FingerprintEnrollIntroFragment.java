@@ -54,6 +54,7 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 import com.google.android.setupdesign.template.RequireScrollMixin;
+import com.google.android.setupdesign.util.DeviceHelper;
 import com.google.android.setupdesign.util.DynamicColorPalette;
 
 /**
@@ -74,10 +75,6 @@ public class FingerprintEnrollIntroFragment extends Fragment {
     private ImageView mIconShield = null;
     private TextView mFooterMessage6 = null;
     @Nullable private PorterDuffColorFilter mIconColorFilter;
-
-    public FingerprintEnrollIntroFragment() {
-        super();
-    }
 
     @Nullable
     @Override
@@ -163,7 +160,7 @@ public class FingerprintEnrollIntroFragment extends Fragment {
             mIconShield.setVisibility(View.GONE);
         }
         mSecondaryFooterButton.setText(context,
-                mViewModel.getEnrollmentRequest().isAfterSuwOrSuwSuggestedAction()
+                mViewModel.getRequest().isAfterSuwOrSuwSuggestedAction()
                 ? R.string.security_settings_fingerprint_enroll_introduction_cancel
                 : R.string.security_settings_fingerprint_enroll_introduction_no_thanks);
 
@@ -177,6 +174,9 @@ public class FingerprintEnrollIntroFragment extends Fragment {
         } else {
             glifLayoutHelper.setHeaderText(
                     R.string.security_settings_fingerprint_enroll_introduction_title);
+            glifLayoutHelper.setDescriptionText(getString(
+                    R.string.security_settings_fingerprint_enroll_introduction_v3_message,
+                    DeviceHelper.getDeviceName(context)));
         }
         observePageStatusLiveDataIfNeed();
     }
@@ -209,14 +209,7 @@ public class FingerprintEnrollIntroFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         mViewModel = new ViewModelProvider(getActivity())
                 .get(FingerprintEnrollIntroViewModel.class);
-        getLifecycle().addObserver(mViewModel);
         super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        getLifecycle().removeObserver(mViewModel);
-        super.onDetach();
     }
 
     @NonNull

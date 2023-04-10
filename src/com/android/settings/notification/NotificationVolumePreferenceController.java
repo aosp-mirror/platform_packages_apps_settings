@@ -51,7 +51,6 @@ public class NotificationVolumePreferenceController extends
     private final RingReceiver mReceiver = new RingReceiver();
     private final H mHandler = new H();
 
-
     public NotificationVolumePreferenceController(Context context) {
         this(context, KEY_NOTIFICATION_VOLUME);
     }
@@ -63,7 +62,9 @@ public class NotificationVolumePreferenceController extends
         mVibrateIconId = R.drawable.ic_volume_ringer_vibrate;
         mSilentIconId = R.drawable.ic_notifications_off_24dp;
 
-        updateRingerMode();
+        if (updateRingerMode()) {
+            updateEnabledState();
+        }
     }
 
     /**
@@ -77,12 +78,10 @@ public class NotificationVolumePreferenceController extends
         if (mPreference == null) {
             setupVolPreference(screen);
         }
-        mSeparateNotification = isSeparateNotificationConfigEnabled();
-        if (mPreference != null) {
-            mPreference.setVisible(getAvailabilityStatus() == AVAILABLE);
-        }
+
         updateEffectsSuppressor();
         selectPreferenceIconState();
+        updateEnabledState();
     }
 
     /**
@@ -95,14 +94,18 @@ public class NotificationVolumePreferenceController extends
             boolean newVal = isSeparateNotificationConfigEnabled();
             if (newVal != mSeparateNotification) {
                 mSeparateNotification = newVal;
-                // manually hiding the preference because being unavailable does not do the job
+                // Update UI if config change happens when Sound Settings page is on the foreground
                 if (mPreference != null) {
-                    mPreference.setVisible(getAvailabilityStatus() == AVAILABLE);
+                    int status = getAvailabilityStatus();
+                    mPreference.setVisible(status == AVAILABLE
+                            || status == DISABLED_DEPENDENT_SETTING);
+                    if (status == DISABLED_DEPENDENT_SETTING) {
+                        mPreference.setEnabled(false);
+                    }
                 }
             }
         }
     }
-
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     @Override
@@ -126,10 +129,11 @@ public class NotificationVolumePreferenceController extends
     @Override
     public int getAvailabilityStatus() {
         boolean separateNotification = isSeparateNotificationConfigEnabled();
-
         return mContext.getResources().getBoolean(R.bool.config_show_notification_volume)
                 && !mHelper.isSingleVolume() && separateNotification
-                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+                ? (mRingerMode == AudioManager.RINGER_MODE_NORMAL
+                    ? AVAILABLE : DISABLED_DEPENDENT_SETTING)
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -158,7 +162,6 @@ public class NotificationVolumePreferenceController extends
             if (mVibrator != null && mRingerMode == AudioManager.RINGER_MODE_VIBRATE) {
                 mMuteIcon = mVibrateIconId;
                 mPreference.showIcon(mVibrateIconId);
-
             } else if (mRingerMode == AudioManager.RINGER_MODE_SILENT
                     || mVibrator == null && mRingerMode == AudioManager.RINGER_MODE_VIBRATE) {
                 mMuteIcon = mSilentIconId;
@@ -172,6 +175,12 @@ public class NotificationVolumePreferenceController extends
                     mPreference.showIcon(mNormalIconId);
                 }
             }
+        }
+    }
+
+    private void updateEnabledState() {
+        if (mPreference != null) {
+            mPreference.setEnabled(mRingerMode == AudioManager.RINGER_MODE_NORMAL);
         }
     }
 
@@ -191,10 +200,13 @@ public class NotificationVolumePreferenceController extends
                     updateEffectsSuppressor();
                     break;
                 case UPDATE_RINGER_MODE:
-                    updateRingerMode();
+                    if (updateRingerMode()) {
+                        updateEnabledState();
+                    }
                     break;
                 case NOTIFICATION_VOLUME_CHANGED:
                     selectPreferenceIconState();
+                    updateEnabledState();
                     break;
             }
         }
@@ -239,5 +251,4 @@ public class NotificationVolumePreferenceController extends
             }
         }
     }
-
 }

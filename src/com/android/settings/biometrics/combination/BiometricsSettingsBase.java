@@ -41,6 +41,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.password.ChooseLockGeneric;
@@ -55,6 +56,7 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
     @VisibleForTesting
     static final int CONFIRM_REQUEST = 2001;
     private static final int CHOOSE_LOCK_REQUEST = 2002;
+    protected static final int ACTIVE_UNLOCK_REQUEST = 2003;
 
     private static final String SAVE_STATE_CONFIRM_CREDETIAL = "confirm_credential";
     private static final String DO_NOT_FINISH_ACTIVITY = "do_not_finish_activity";
@@ -68,8 +70,9 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
     private boolean mConfirmCredential;
     @Nullable private FaceManager mFaceManager;
     @Nullable private FingerprintManager mFingerprintManager;
-    // Do not finish() if choosing/confirming credential, or showing fp/face settings
-    private boolean mDoNotFinishActivity;
+    // Do not finish() if choosing/confirming credential, showing fp/face settings, or launching
+    // active unlock
+    protected boolean mDoNotFinishActivity;
     @Nullable private String mRetryPreferenceKey = null;
     @Nullable private Bundle mRetryPreferenceExtra = null;
 
@@ -107,10 +110,7 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
             launchChooseOrConfirmLock();
         }
 
-        final Preference unlockPhonePreference = findPreference(getUnlockPhonePreferenceKey());
-        if (unlockPhonePreference != null) {
-            unlockPhonePreference.setSummary(getUseAnyBiometricSummary());
-        }
+        updateUnlockPhonePreferenceSummary();
 
         final Preference useInAppsPreference = findPreference(getUseInAppsPreferenceKey());
         if (useInAppsPreference != null) {
@@ -135,7 +135,7 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
         }
     }
 
-    private boolean onRetryPreferenceTreeClick(Preference preference, final boolean retry) {
+    protected boolean onRetryPreferenceTreeClick(Preference preference, final boolean retry) {
         final String key = preference.getKey();
         final Context context = requireActivity().getApplicationContext();
 
@@ -167,6 +167,14 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
             return true;
         } else if (getFingerprintPreferenceKey().equals(key)) {
             mDoNotFinishActivity = true;
+
+            if (shouldSkipForUdfpsInMultiWindowMode()) {
+                new FingerprintSettingsFragment.FingerprintSplitScreenDialog().show(
+                        getActivity().getSupportFragmentManager(),
+                        FingerprintSettingsFragment.FingerprintSplitScreenDialog.class.getName());
+                return true;
+            }
+
             mFingerprintManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
                 try {
                     final byte[] token = requestGatekeeperHat(context, mGkPwHandle, mUserId,
@@ -309,14 +317,29 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
         }
     }
 
+    protected void updateUnlockPhonePreferenceSummary() {
+        final Preference unlockPhonePreference = findPreference(getUnlockPhonePreferenceKey());
+        if (unlockPhonePreference != null) {
+            unlockPhonePreference.setSummary(getUseAnyBiometricSummary());
+        }
+    }
+
     @NonNull
-    private String getUseAnyBiometricSummary() {
+    protected String getUseAnyBiometricSummary() {
         boolean isFaceAllowed = mFaceManager != null && mFaceManager.isHardwareDetected();
         boolean isFingerprintAllowed =
                 mFingerprintManager != null && mFingerprintManager.isHardwareDetected();
 
         @StringRes final int resId = getUseBiometricSummaryRes(isFaceAllowed, isFingerprintAllowed);
         return resId == 0 ? "" : getString(resId);
+    }
+
+    protected int getUserId() {
+        return mUserId;
+    }
+
+    protected long getGkPwHandle() {
+        return mGkPwHandle;
     }
 
     @NonNull
@@ -362,5 +385,28 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
         } else {
             return 0;
         }
+    }
+
+    /**
+     * Returns whether the click should be skipped.
+     * True if the following conditions are all met:
+     * 1. It's split mode.
+     * 2. It's udfps.
+     * 3. There is no enrolled fingerprint. (If there is enrolled fingerprint, FingerprintSettings
+     * will handle the adding fingerprint.
+     */
+    private boolean shouldSkipForUdfpsInMultiWindowMode() {
+        if (!getActivity().isInMultiWindowMode() || mFingerprintManager.hasEnrolledFingerprints(
+                mUserId)) {
+            return false;
+        }
+
+        for (FingerprintSensorPropertiesInternal prop :
+                mFingerprintManager.getSensorPropertiesInternal()) {
+            if (prop.isAnyUdfpsType()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

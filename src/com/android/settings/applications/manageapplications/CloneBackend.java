@@ -75,12 +75,13 @@ public class CloneBackend {
      * dialog to the user and handles actual uninstall.
      */
     void uninstallClonedApp(String packageName, boolean allUsers, FragmentActivity activity) {
-        // Create new intent to launch Uninstaller activity
+        // Create new intent to launch Uninstaller activity.
         Uri packageUri = Uri.parse("package:" + packageName);
         Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri);
         uninstallIntent.putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, allUsers);
         uninstallIntent.putExtra(Intent.EXTRA_USER, UserHandle.of(mCloneUserId));
-        activity.startActivityForResult(uninstallIntent, 0);
+        // Trigger uninstall as clone user.
+        activity.startActivityAsUser(uninstallIntent, UserHandle.of(mCloneUserId));
     }
 
     /**
@@ -103,7 +104,7 @@ public class CloneBackend {
                         new HashSet<>());
             } catch (Exception e) {
                 if (ManageApplications.DEBUG) {
-                    Log.e("ankita", "Error occurred creating clone user" + e.getMessage());
+                    Log.e(TAG, "Error occurred creating clone user" + e.getMessage());
                 }
                 return ERROR_CREATING_CLONE_USER;
             }
@@ -124,7 +125,7 @@ public class CloneBackend {
             if (newlyCreated) {
                 IActivityManager am = ActivityManagerNative.getDefault();
                 try {
-                    am.startUserInBackground(mCloneUserId);
+                    am.startProfile(mCloneUserId);
                 } catch (RemoteException e) {
                     if (ManageApplications.DEBUG) {
                         Log.e(TAG, "Error starting clone user " + e.getMessage());

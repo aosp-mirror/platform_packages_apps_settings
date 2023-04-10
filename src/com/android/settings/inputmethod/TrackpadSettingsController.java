@@ -17,21 +17,73 @@
 package com.android.settings.inputmethod;
 
 import android.content.Context;
+import android.hardware.input.InputManager;
 import android.util.FeatureFlagUtils;
 
-import com.android.settings.core.BasePreferenceController;
+import androidx.preference.Preference;
 
-public class TrackpadSettingsController extends BasePreferenceController {
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
+
+public class TrackpadSettingsController extends BasePreferenceController
+        implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop,
+        InputManager.InputDeviceListener {
+
+    private final InputManager mIm;
+
+    private Preference mPreference;
 
     public TrackpadSettingsController(Context context, String key) {
         super(context, key);
+        mIm = context.getSystemService(InputManager.class);
+    }
+
+    @Override
+    public void onInputDeviceAdded(int deviceId) {
+        updateEntry();
+    }
+
+    @Override
+    public void onInputDeviceRemoved(int deviceId) {
+        updateEntry();
+    }
+
+    @Override
+    public void onInputDeviceChanged(int deviceId) {
+        updateEntry();
+    }
+
+    @Override
+    public void onStart() {
+        mIm.registerInputDeviceListener(this, null);
+    }
+
+    @Override
+    public void onStop() {
+        mIm.unregisterInputDeviceListener(this);
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        mPreference = preference;
+        updateEntry();
+    }
+
+    private void updateEntry() {
+        if (mPreference == null) {
+            return;
+        }
+        mPreference.setVisible(isAvailable());
     }
 
     @Override
     public int getAvailabilityStatus() {
-        // TODO: Need to detect if trackpad is connected with device.
         boolean isFeatureOn = FeatureFlagUtils
                 .isEnabled(mContext, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_TRACKPAD);
-        return isFeatureOn ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        boolean isTouchpad = NewKeyboardSettingsUtils.isTouchpad();
+        return (isFeatureOn && isTouchpad) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 }

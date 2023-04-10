@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics2.ui.viewmodel;
 
+import android.content.res.Configuration;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -49,6 +50,13 @@ public class DeviceFoldedViewModel extends ViewModel {
         super();
         mScreenSizeFoldProvider = screenSizeFoldProvider;
         mScreenSizeFoldProvider.registerCallback(mIsFoldedCallback, executor);
+    }
+
+    /**
+     * Calls this method when activity gets configuration change
+     */
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        mScreenSizeFoldProvider.onConfigurationChange(newConfig);
     }
 
     /**

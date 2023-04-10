@@ -47,7 +47,7 @@ public class BatteryDiffEntry {
     @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
     public static final Map<String, Boolean> sValidForRestriction = new HashMap<>();
 
-    /** A comparator for {@link BatteryDiffEntry} based on consumed percentage. */
+    /** A comparator for {@link BatteryDiffEntry} based on the sorting key. */
     public static final Comparator<BatteryDiffEntry> COMPARATOR =
             (a, b) -> Double.compare(b.getSortingKey(), a.getSortingKey());
 
@@ -65,7 +65,8 @@ public class BatteryDiffEntry {
     protected Context mContext;
 
     private double mTotalConsumePower;
-    private double mPercentOfTotal;
+    private double mPercentage;
+    private int mAdjustPercentageOffset;
     private UserManager mUserManager;
     private String mDefaultPackageName = null;
 
@@ -107,8 +108,9 @@ public class BatteryDiffEntry {
     /** Sets the total consumed power in a specific time slot. */
     public void setTotalConsumePower(double totalConsumePower) {
         mTotalConsumePower = totalConsumePower;
-        mPercentOfTotal = totalConsumePower == 0
+        mPercentage = totalConsumePower == 0
                 ? 0 : (mConsumePower / mTotalConsumePower) * 100.0;
+        mAdjustPercentageOffset = 0;
     }
 
     /** Gets the total consumed power in a specific time slot. */
@@ -117,13 +119,23 @@ public class BatteryDiffEntry {
     }
 
     /** Gets the percentage of total consumed power. */
-    public double getPercentOfTotal() {
-        return mPercentOfTotal;
+    public double getPercentage() {
+        return mPercentage;
+    }
+
+    /** Gets the percentage offset to adjust. */
+    public double getAdjustPercentageOffset() {
+        return mAdjustPercentageOffset;
+    }
+
+    /** Sets the percentage offset to adjust. */
+    public void setAdjustPercentageOffset(int offset) {
+        mAdjustPercentageOffset = offset;
     }
 
     /** Gets the key for sorting */
     public double getSortingKey() {
-        return getPercentOfTotal();
+        return getPercentage() + getAdjustPercentageOffset();
     }
 
     /** Clones a new instance. */
@@ -369,7 +381,7 @@ public class BatteryDiffEntry {
                 .append(String.format("\n\tname=%s restrictable=%b",
                         mAppLabel, mValidForRestriction))
                 .append(String.format("\n\tconsume=%.2f%% %f/%f",
-                        mPercentOfTotal, mConsumePower, mTotalConsumePower))
+                        mPercentage, mConsumePower, mTotalConsumePower))
                 .append(String.format("\n\tconsume power= foreground:%f foregroundService:%f",
                         mForegroundUsageConsumePower, mForegroundServiceUsageConsumePower))
                 .append(String.format("\n\tconsume power= background:%f cached:%f",

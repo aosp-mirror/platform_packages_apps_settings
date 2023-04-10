@@ -34,16 +34,16 @@ public class MemtagRebootDialog extends InstrumentedDialogFragment
         implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
 
     public static final String TAG = "MemtagRebootDialog";
-    private boolean mIsChecked;
+    private int mMessage;
 
-    public MemtagRebootDialog(Context context, boolean isChecked) {
-        mIsChecked = isChecked;
+    public MemtagRebootDialog(Context context, int msg) {
+        mMessage = msg;
     }
 
-    public static void show(Context context, Fragment host, boolean isChecked) {
+    public static void show(Context context, Fragment host, int msg) {
         final FragmentManager manager = host.getActivity().getSupportFragmentManager();
         if (manager.findFragmentByTag(TAG) == null) {
-            final MemtagRebootDialog dialog = new MemtagRebootDialog(context, isChecked);
+            final MemtagRebootDialog dialog = new MemtagRebootDialog(context, msg);
             dialog.show(manager, TAG);
         }
     }
@@ -55,11 +55,9 @@ public class MemtagRebootDialog extends InstrumentedDialogFragment
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        int msg =
-                mIsChecked ? R.string.memtag_reboot_message_on : R.string.memtag_reboot_message_off;
         return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.memtag_reboot_title)
-                .setMessage(msg)
+                .setMessage(mMessage)
                 .setPositiveButton(R.string.memtag_reboot_yes, this /* onClickListener */)
                 .setNegativeButton(R.string.memtag_reboot_no, null /* onClickListener */)
                 .create();

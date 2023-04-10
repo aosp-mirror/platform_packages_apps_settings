@@ -36,11 +36,11 @@ public class NfcVerboseVendorLogPreferenceController
     private static final String NFC_VERBOSE_VENDOR_LOG_KEY = "nfc_verbose_vendor_log";
     @VisibleForTesting
     static final String NFC_VERBOSE_VENDOR_LOG_PROPERTY =
-            "persist.nfc.verbosevendorlog";
+            "persist.nfc.vendor_debug_enabled";
     @VisibleForTesting
-    static final String VERBOSE_VENDOR_LOG_ENABLED = "enabled";
+    static final String VERBOSE_VENDOR_LOG_ENABLED = "true";
     @VisibleForTesting
-    static final String VERBOSE_VENDOR_LOG_DISABLED = "disabled";
+    static final String VERBOSE_VENDOR_LOG_DISABLED = "false";
 
     @VisibleForTesting
     boolean mChanged = false;

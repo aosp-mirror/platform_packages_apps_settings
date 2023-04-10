@@ -15,17 +15,20 @@
 package com.android.settings.datausage;
 
 import static android.content.pm.PackageManager.FEATURE_ETHERNET;
+import static android.content.pm.PackageManager.FEATURE_USB_HOST;
 import static android.content.pm.PackageManager.FEATURE_WIFI;
 import static android.telephony.TelephonyManager.SIM_STATE_READY;
 
 import android.app.usage.NetworkStats.Bucket;
 import android.app.usage.NetworkStatsManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
 import android.os.RemoteException;
 import android.os.SystemProperties;
+import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -38,6 +41,7 @@ import com.android.settings.datausage.lib.DataUsageLib;
 import com.android.settings.network.ProxySubscriptionManager;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Utility methods for data usage classes.
@@ -70,7 +74,9 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
             return SystemProperties.get(DataUsageUtils.TEST_RADIOS_PROP).contains(ETHERNET);
         }
 
-        if (!context.getPackageManager().hasSystemFeature(FEATURE_ETHERNET)) {
+        // See ConnectivityService#deviceSupportsEthernet.
+        final PackageManager pm = context.getPackageManager();
+        if (!pm.hasSystemFeature(FEATURE_ETHERNET) && !pm.hasSystemFeature(FEATURE_USB_HOST)) {
             return false;
         }
 
@@ -190,4 +196,22 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
         }
     }
 
+    /**
+     * Returns a mobile NetworkTemplate if EXTRA_SUB_ID of the Intent is available and the subId
+     * is valid & hasMobileData. Otherwise, returns empty data.
+     */
+    public static Optional<NetworkTemplate> getMobileNetworkTemplateFromSubId(Context context,
+            Intent intent) {
+        if (intent == null || !intent.hasExtra(Settings.EXTRA_SUB_ID)) {
+            return Optional.empty();
+        }
+
+        int subId = intent.getIntExtra(Settings.EXTRA_SUB_ID,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        if (SubscriptionManager.isValidSubscriptionId(subId) && hasMobileData(context)) {
+            return Optional.of(DataUsageLib.getMobileTemplate(context, subId));
+        }
+
+        return  Optional.empty();
+    }
 }

@@ -145,7 +145,7 @@ public class AppBatteryPreferenceControllerTest {
         mController.displayPreference(mScreen);
         mBatteryDiffEntry.mConsumePower = 1;
         mController.mBatteryDiffEntry = mBatteryDiffEntry;
-        when(mBatteryDiffEntry.getPercentOfTotal()).thenReturn(60.0);
+        when(mBatteryDiffEntry.getPercentage()).thenReturn(60.0);
 
         mController.updateBatteryWithDiffEntry();
 

@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.batteryusage;
 
 import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.getEffectivePackageName;
-import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.utcToLocalTime;
 
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
@@ -53,7 +52,6 @@ import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.fuelgauge.BatteryStatus;
-import com.android.settingslib.spaprivileged.model.app.AppListConfig;
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryUtil;
 
 import java.time.Duration;
@@ -62,7 +60,6 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -85,7 +82,8 @@ public final class DataProcessor {
     private static final float TOTAL_HOURLY_TIME_THRESHOLD = DateUtils.HOUR_IN_MILLIS * 2;
     private static final long MIN_TIME_SLOT = DateUtils.HOUR_IN_MILLIS * 2;
     private static final String MEDIASERVER_PACKAGE_NAME = "mediaserver";
-    private static final Map<String, BatteryHistEntry> EMPTY_BATTERY_MAP = new HashMap<>();
+    private static final String ANDROID_CORE_APPS_SHARED_USER_ID = "android.uid.shared";
+    private static final Map<String, BatteryHistEntry> EMPTY_BATTERY_MAP = new ArrayMap<>();
     private static final BatteryHistEntry EMPTY_BATTERY_HIST_ENTRY =
             new BatteryHistEntry(new ContentValues());
 
@@ -97,13 +95,21 @@ public final class DataProcessor {
     static final int SELECTED_INDEX_ALL = BatteryChartViewModel.SELECTED_INDEX_ALL;
 
     @VisibleForTesting
+    static final Comparator<AppUsageEvent> APP_USAGE_EVENT_TIMESTAMP_COMPARATOR =
+            Comparator.comparing(AppUsageEvent::getTimestamp);
+
+    @VisibleForTesting
+    static final Comparator<BatteryEvent> BATTERY_EVENT_TIMESTAMP_COMPARATOR =
+            Comparator.comparing(BatteryEvent::getTimestamp);
+
+    @VisibleForTesting
     static boolean sDebug = false;
 
     @VisibleForTesting
-    static long sFakeCurrentTimeMillis = 0;
+    static long sTestCurrentTimeMillis = 0;
 
     @VisibleForTesting
-    static Set<String> sFakeSystemAppsSet;
+    static Set<String> sTestSystemAppsPackageNames;
 
     @VisibleForTesting
     static IUsageStatsManager sUsageStatsManager =
@@ -112,8 +118,6 @@ public final class DataProcessor {
 
     public static final String CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER =
             "CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER";
-    public static final Comparator<AppUsageEvent> TIMESTAMP_COMPARATOR =
-            Comparator.comparing(AppUsageEvent::getTimestamp);
 
     /** A callback listener when battery usage loading async task is executed. */
     public interface UsageMapAsyncResponse {
@@ -182,11 +186,11 @@ public final class DataProcessor {
     @Nullable
     public static Map<Long, UsageEvents> getAppUsageEvents(Context context) {
         final long start = System.currentTimeMillis();
-        context = DatabaseUtils.getOwnerContext(context);
+        context = DatabaseUtils.getParentContext(context);
         if (context == null) {
             return null;
         }
-        final Map<Long, UsageEvents> resultMap = new HashMap();
+        final Map<Long, UsageEvents> resultMap = new ArrayMap();
         final UserManager userManager = context.getSystemService(UserManager.class);
         if (userManager == null) {
             return null;
@@ -213,7 +217,7 @@ public final class DataProcessor {
     public static UsageEvents getAppUsageEventsForUser(
             Context context, final int userID, final long startTimestampOfLevelData) {
         final long start = System.currentTimeMillis();
-        context = DatabaseUtils.getOwnerContext(context);
+        context = DatabaseUtils.getParentContext(context);
         if (context == null) {
             return null;
         }
@@ -266,22 +270,25 @@ public final class DataProcessor {
     @Nullable
     public static Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>>
             generateAppUsagePeriodMap(
-            final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay,
-            final List<AppUsageEvent> appUsageEventList) {
+                    final long rawStartTimestamp,
+                    final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay,
+                    final List<AppUsageEvent> appUsageEventList,
+                    final List<BatteryEvent> batteryEventList) {
         if (appUsageEventList.isEmpty()) {
             Log.w(TAG, "appUsageEventList is empty");
             return null;
         }
-        // Sorts the appUsageEventList in ascending order based on the timestamp before
-        // distribution.
-        Collections.sort(appUsageEventList, TIMESTAMP_COMPARATOR);
+        // Sorts the appUsageEventList and batteryEventList in ascending order based on the
+        // timestamp before distribution.
+        Collections.sort(appUsageEventList, APP_USAGE_EVENT_TIMESTAMP_COMPARATOR);
+        Collections.sort(batteryEventList, BATTERY_EVENT_TIMESTAMP_COMPARATOR);
         final Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>> resultMap =
-                new HashMap<>();
+                new ArrayMap<>();
 
         final long dailySize = hourlyBatteryLevelsPerDay.size();
         for (int dailyIndex = 0; dailyIndex < hourlyBatteryLevelsPerDay.size(); dailyIndex++) {
             final Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>> dailyMap =
-                    new HashMap<>();
+                    new ArrayMap<>();
             resultMap.put(dailyIndex, dailyMap);
             if (hourlyBatteryLevelsPerDay.get(dailyIndex) == null) {
                 continue;
@@ -289,8 +296,12 @@ public final class DataProcessor {
             final List<Long> timestamps = hourlyBatteryLevelsPerDay.get(dailyIndex).getTimestamps();
             final long hourlySize = timestamps.size() - 1;
             for (int hourlyIndex = 0; hourlyIndex < timestamps.size() - 1; hourlyIndex++) {
-                // The start and end timestamps of this slot should be the adjacent timestamps.
-                final long startTimestamp = timestamps.get(hourlyIndex);
+                // The start slot timestape is the near hour timestamp instead of the last full
+                // charge time. So use rawStartTimestamp instead of reading the timestamp from
+                // hourlyBatteryLevelsPerDay here.
+                final long startTimestamp =
+                        dailyIndex == 0 && hourlyIndex == 0 && !sDebug
+                                ? rawStartTimestamp : timestamps.get(hourlyIndex);
                 // The final slot is to show the data from last even hour until now but the
                 // timestamp in hourlyBatteryLevelsPerDay is not the real value. So use current
                 // timestamp instead of reading the timestamp from hourlyBatteryLevelsPerDay here.
@@ -306,8 +317,8 @@ public final class DataProcessor {
                 // The value could be null when there is no data in the hourly slot.
                 dailyMap.put(
                         hourlyIndex,
-                        buildAppUsagePeriodList(
-                                hourlyAppUsageEventList, startTimestamp, endTimestamp));
+                        buildAppUsagePeriodList(hourlyAppUsageEventList, batteryEventList,
+                                startTimestamp, endTimestamp));
             }
         }
         return resultMap;
@@ -387,7 +398,7 @@ public final class DataProcessor {
         if (appUsagePeriodMap == null) {
             return null;
         }
-        final Map<Integer, Map<Integer, Long>> deviceScreenOnTime = new HashMap<>();
+        final Map<Integer, Map<Integer, Long>> deviceScreenOnTime = new ArrayMap<>();
         insertHourlyDeviceScreenOnTime(appUsagePeriodMap, deviceScreenOnTime);
         insertDailyDeviceScreenOnTime(appUsagePeriodMap, deviceScreenOnTime);
         insertAllDeviceScreenOnTime(deviceScreenOnTime);
@@ -429,7 +440,7 @@ public final class DataProcessor {
             final Context context) {
         final List<BatteryHistEntry> batteryHistEntryList =
                 getBatteryHistListFromFromStatsService(context);
-        return batteryHistEntryList == null ? new HashMap<>()
+        return batteryHistEntryList == null ? new ArrayMap<>()
                 : batteryHistEntryList.stream().collect(Collectors.toMap(e -> e.getKey(), e -> e));
     }
 
@@ -437,14 +448,14 @@ public final class DataProcessor {
      * @return Returns the processed history map which has interpolated to every hour data.
      * The start and end timestamp must be the even hours.
      * The keys of processed history map should contain every hour between the start and end
-     * timestamp. If there's no data in some key, the value will be the empty hashmap.
+     * timestamp. If there's no data in some key, the value will be the empty map.
      */
     static Map<Long, Map<String, BatteryHistEntry>> getHistoryMapWithExpectedTimestamps(
             Context context,
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
         final long startTime = System.currentTimeMillis();
         final List<Long> rawTimestampList = new ArrayList<>(batteryHistoryMap.keySet());
-        final Map<Long, Map<String, BatteryHistEntry>> resultMap = new HashMap();
+        final Map<Long, Map<String, BatteryHistEntry>> resultMap = new ArrayMap();
         if (rawTimestampList.isEmpty()) {
             Log.d(TAG, "empty batteryHistoryMap in getHistoryMapWithExpectedTimestamps()");
             return resultMap;
@@ -540,7 +551,7 @@ public final class DataProcessor {
         }
         while (nextDay < endTime) {
             dailyTimestampList.add(nextDay);
-            nextDay += DateUtils.DAY_IN_MILLIS;
+            nextDay = getTimestampOfNextDay(nextDay);
         }
         final long lastDailyTimestamp = dailyTimestampList.get(dailyTimestampList.size() - 1);
         // Only if the timestamp diff in the last day is bigger than MIN_TIME_SLOT, add the
@@ -637,11 +648,12 @@ public final class DataProcessor {
         if (batteryHistoryMap.isEmpty()) {
             return null;
         }
-        final Map<Integer, Map<Integer, BatteryDiffData>> resultMap = new HashMap<>();
-        final Set<String> systemAppsSet = getSystemAppsSet(context);
+        final Map<Integer, Map<Integer, BatteryDiffData>> resultMap = new ArrayMap<>();
+        final Set<String> systemAppsPackageNames = getSystemAppsPackageNames(context);
+        final Set<Integer> systemAppsUids = getSystemAppsUids(context);
         // Insert diff data from [0][0] to [maxDailyIndex][maxHourlyIndex].
-        insertHourlyUsageDiffData(context, systemAppsSet, hourlyBatteryLevelsPerDay,
-                batteryHistoryMap, appUsagePeriodMap, resultMap);
+        insertHourlyUsageDiffData(context, systemAppsPackageNames, systemAppsUids,
+                hourlyBatteryLevelsPerDay, batteryHistoryMap, appUsagePeriodMap, resultMap);
         // Insert diff data from [0][SELECTED_INDEX_ALL] to [maxDailyIndex][SELECTED_INDEX_ALL].
         insertDailyUsageDiffData(context, hourlyBatteryLevelsPerDay, resultMap);
         // Insert diff data [SELECTED_INDEX_ALL][SELECTED_INDEX_ALL].
@@ -700,9 +712,10 @@ public final class DataProcessor {
             return null;
         }
 
-        final Set<String> systemAppsSet = getSystemAppsSet(context);
-        return new BatteryDiffData(
-                context, appEntries, systemEntries, systemAppsSet, /* isAccumulated= */ false);
+        final Set<String> systemAppsPackageNames = getSystemAppsPackageNames(context);
+        final Set<Integer> systemAppsUids = getSystemAppsUids(context);
+        return new BatteryDiffData(context, appEntries, systemEntries,
+                systemAppsPackageNames, systemAppsUids, /* isAccumulated= */ false);
     }
 
     /**
@@ -712,7 +725,8 @@ public final class DataProcessor {
     @VisibleForTesting
     @Nullable
     static Map<Long, Map<String, List<AppUsagePeriod>>> buildAppUsagePeriodList(
-            final List<AppUsageEvent> allAppUsageEvents, final long startTime, final long endTime) {
+            final List<AppUsageEvent> allAppUsageEvents, final List<BatteryEvent> batteryEventList,
+            final long startTime, final long endTime) {
         if (allAppUsageEvents.isEmpty()) {
             return null;
         }
@@ -739,7 +753,7 @@ public final class DataProcessor {
             return null;
         }
 
-        final Map<Long, Map<String, List<AppUsagePeriod>>> allUsagePeriods = new HashMap<>();
+        final Map<Long, Map<String, List<AppUsagePeriod>>> allUsagePeriods = new ArrayMap<>();
 
         for (int i = 0; i < usageEventsByInstanceId.size(); i++) {
             // The usage periods for an instance are determined by the usage events with its
@@ -758,12 +772,14 @@ public final class DataProcessor {
             usageEvents.addAll(deviceEvents);
             // Sorts the usageEvents in ascending order based on the timestamp before computing the
             // period.
-            Collections.sort(usageEvents, TIMESTAMP_COMPARATOR);
+            Collections.sort(usageEvents, APP_USAGE_EVENT_TIMESTAMP_COMPARATOR);
 
             // A package might have multiple instances. Computes the usage period per instance id
             // and then merges them into the same user-package map.
             final List<AppUsagePeriod> usagePeriodList =
-                    buildAppUsagePeriodListPerInstance(usageEvents, startTime, endTime);
+                    excludePowerConnectedTimeFromAppUsagePeriodList(
+                            buildAppUsagePeriodListPerInstance(usageEvents, startTime, endTime),
+                            batteryEventList);
             if (!usagePeriodList.isEmpty()) {
                 addToUsagePeriodMap(allUsagePeriods, usagePeriodList, eventUserId, packageName);
             }
@@ -832,6 +848,53 @@ public final class DataProcessor {
     }
 
     @VisibleForTesting
+    static List<AppUsagePeriod> excludePowerConnectedTimeFromAppUsagePeriodList(
+            final List<AppUsagePeriod> usagePeriodList,
+            final List<BatteryEvent> batteryEventList) {
+        final List<AppUsagePeriod> resultList = new ArrayList<>();
+        for (AppUsagePeriod inputPeriod : usagePeriodList) {
+            long lastStartTime = inputPeriod.getStartTime();
+            for (BatteryEvent batteryEvent : batteryEventList) {
+                if (batteryEvent.getTimestamp() < inputPeriod.getStartTime()) {
+                    // Because the batteryEventList has been sorted, here is to mark the power
+                    // connection state when the usage period starts. If power is connected when
+                    // the usage period starts, the starting period will be ignored; otherwise it
+                    // will be added.
+                    if (batteryEvent.getType() == BatteryEventType.POWER_CONNECTED) {
+                        lastStartTime = 0;
+                    } else if (batteryEvent.getType() == BatteryEventType.POWER_DISCONNECTED) {
+                        lastStartTime = inputPeriod.getStartTime();
+                    }
+                    continue;
+                }
+                if (batteryEvent.getTimestamp() > inputPeriod.getEndTime()) {
+                    // Because the batteryEventList has been sorted, if any event is already after
+                    // the end time, all the following events should be able to drop directly.
+                    break;
+                }
+
+                if (batteryEvent.getType() == BatteryEventType.POWER_CONNECTED
+                        && lastStartTime != 0) {
+                    resultList.add(AppUsagePeriod.newBuilder()
+                            .setStartTime(lastStartTime)
+                            .setEndTime(batteryEvent.getTimestamp())
+                            .build());
+                    lastStartTime = 0;
+                } else if (batteryEvent.getType() == BatteryEventType.POWER_DISCONNECTED) {
+                    lastStartTime = batteryEvent.getTimestamp();
+                }
+            }
+            if (lastStartTime != 0) {
+                resultList.add(AppUsagePeriod.newBuilder()
+                        .setStartTime(lastStartTime)
+                        .setEndTime(inputPeriod.getEndTime())
+                        .build());
+            }
+        }
+        return resultList;
+    }
+
+    @VisibleForTesting
     static long getScreenOnTime(
             final Map<Long, Map<String, List<AppUsagePeriod>>> appUsageMap,
             final long userId,
@@ -851,8 +914,8 @@ public final class DataProcessor {
      */
     static Map<Integer, Map<Integer, BatteryDiffData>> getBatteryUsageMapFromStatsService(
             final Context context) {
-        final Map<Integer, Map<Integer, BatteryDiffData>> resultMap = new HashMap<>();
-        final Map<Integer, BatteryDiffData> allUsageMap = new HashMap<>();
+        final Map<Integer, Map<Integer, BatteryDiffData>> resultMap = new ArrayMap<>();
+        final Map<Integer, BatteryDiffData> allUsageMap = new ArrayMap<>();
         // Always construct the map whether the value is null or not.
         allUsageMap.put(SELECTED_INDEX_ALL,
                 generateBatteryDiffData(context, getBatteryHistListFromFromStatsService(context)));
@@ -933,7 +996,7 @@ public final class DataProcessor {
             final List<AppUsagePeriod> usagePeriodList,
             final long userId,
             final String packageName) {
-        usagePeriodMap.computeIfAbsent(userId, key -> new HashMap<>());
+        usagePeriodMap.computeIfAbsent(userId, key -> new ArrayMap<>());
         final Map<String, List<AppUsagePeriod>> packageNameMap = usagePeriodMap.get(userId);
         packageNameMap.computeIfAbsent(packageName, key -> new ArrayList<>());
         packageNameMap.get(packageName).addAll(usagePeriodList);
@@ -964,7 +1027,7 @@ public final class DataProcessor {
         for (final int dailyIndex : appUsagePeriodMap.keySet()) {
             final Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>> dailyAppUsageMap =
                     appUsagePeriodMap.get(dailyIndex);
-            final Map<Integer, Long> dailyScreenOnTime = new HashMap<>();
+            final Map<Integer, Long> dailyScreenOnTime = new ArrayMap<>();
             resultMap.put(dailyIndex, dailyScreenOnTime);
             if (dailyAppUsageMap == null) {
                 continue;
@@ -1005,7 +1068,7 @@ public final class DataProcessor {
         for (final int dailyIndex : appUsagePeriodMap.keySet()) {
             Map<Integer, Long> dailyResultMap = resultMap.get(dailyIndex);
             if (dailyResultMap == null) {
-                dailyResultMap = new HashMap<>();
+                dailyResultMap = new ArrayMap<>();
                 resultMap.put(dailyIndex, dailyResultMap);
             }
             dailyResultMap.put(
@@ -1016,10 +1079,10 @@ public final class DataProcessor {
 
     private static void insertAllDeviceScreenOnTime(
             final Map<Integer, Map<Integer, Long>> resultMap) {
-        final Map<Integer, Long> dailyAllMap = new HashMap<>();
+        final Map<Integer, Long> dailyAllMap = new ArrayMap<>();
         resultMap.keySet().forEach(
                 key -> dailyAllMap.put(key, resultMap.get(key).get(SELECTED_INDEX_ALL)));
-        final Map<Integer, Long> allUsageMap = new HashMap<>();
+        final Map<Integer, Long> allUsageMap = new ArrayMap<>();
         allUsageMap.put(SELECTED_INDEX_ALL, getAccumulatedScreenOnTime(dailyAllMap));
         resultMap.put(SELECTED_INDEX_ALL, allUsageMap);
     }
@@ -1169,7 +1232,7 @@ public final class DataProcessor {
         // Case 1: upper timestamp is zero since scheduler is delayed!
         if (upperTimestamp == 0) {
             log(context, "job scheduler is delayed", currentSlot, null);
-            resultMap.put(currentSlot, new HashMap<>());
+            resultMap.put(currentSlot, new ArrayMap<>());
             return;
         }
         // Case 2: upper timestamp is closed to the current timestamp.
@@ -1182,7 +1245,7 @@ public final class DataProcessor {
         // Case 3: lower timestamp is zero before starting to collect data.
         if (lowerTimestamp == 0) {
             log(context, "no lower timestamp slot data", currentSlot, null);
-            resultMap.put(currentSlot, new HashMap<>());
+            resultMap.put(currentSlot, new ArrayMap<>());
             return;
         }
         interpolateHistoryForSlot(context,
@@ -1218,12 +1281,12 @@ public final class DataProcessor {
                 resultMap.put(currentSlot, upperEntryDataMap);
             } else {
                 log(context, "in the different booting section", currentSlot, null);
-                resultMap.put(currentSlot, new HashMap<>());
+                resultMap.put(currentSlot, new ArrayMap<>());
             }
             return;
         }
         log(context, "apply interpolation arithmetic", currentSlot, null);
-        final Map<String, BatteryHistEntry> newHistEntryMap = new HashMap<>();
+        final Map<String, BatteryHistEntry> newHistEntryMap = new ArrayMap<>();
         final double timestampLength = upperTimestamp - lowerTimestamp;
         final double timestampDiff = currentSlot - lowerTimestamp;
         // Applies interpolation arithmetic for each BatteryHistEntry.
@@ -1351,7 +1414,7 @@ public final class DataProcessor {
         final Map<String, BatteryHistEntry> entryMap = processedBatteryHistoryMap.get(timestamp);
         if (entryMap == null || entryMap.isEmpty()) {
             Log.e(TAG, "abnormal entry list in the timestamp:"
-                    + utcToLocalTime(context, timestamp));
+                    + ConvertUtils.utcToLocalTimeForLogging(timestamp));
             return null;
         }
         // The current time battery history hasn't been loaded yet, returns the current battery
@@ -1370,7 +1433,8 @@ public final class DataProcessor {
 
     private static void insertHourlyUsageDiffData(
             Context context,
-            final Set<String> systemAppsSet,
+            final Set<String> systemAppsPackageNames,
+            final Set<Integer> systemAppsUids,
             final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay,
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap,
             final Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>>
@@ -1386,7 +1450,7 @@ public final class DataProcessor {
         //     Math.abs(timestamp[i+1] data - timestamp[i] data);
         // since we want to aggregate every two hours data into a single time slot.
         for (int dailyIndex = 0; dailyIndex < hourlyBatteryLevelsPerDay.size(); dailyIndex++) {
-            final Map<Integer, BatteryDiffData> dailyDiffMap = new HashMap<>();
+            final Map<Integer, BatteryDiffData> dailyDiffMap = new ArrayMap<>();
             resultMap.put(dailyIndex, dailyDiffMap);
             if (hourlyBatteryLevelsPerDay.get(dailyIndex) == null) {
                 continue;
@@ -1400,7 +1464,8 @@ public final class DataProcessor {
                                 workProfileUserId,
                                 hourlyIndex,
                                 timestamps,
-                                systemAppsSet,
+                                systemAppsPackageNames,
+                                systemAppsUids,
                                 appUsagePeriodMap == null
                                         || appUsagePeriodMap.get(dailyIndex) == null
                                         ? null
@@ -1418,7 +1483,7 @@ public final class DataProcessor {
         for (int index = 0; index < hourlyBatteryLevelsPerDay.size(); index++) {
             Map<Integer, BatteryDiffData> dailyUsageMap = resultMap.get(index);
             if (dailyUsageMap == null) {
-                dailyUsageMap = new HashMap<>();
+                dailyUsageMap = new ArrayMap<>();
                 resultMap.put(index, dailyUsageMap);
             }
             dailyUsageMap.put(
@@ -1433,7 +1498,7 @@ public final class DataProcessor {
         final List<BatteryDiffData> diffDataList = new ArrayList<>();
         resultMap.keySet().forEach(
                 key -> diffDataList.add(resultMap.get(key).get(SELECTED_INDEX_ALL)));
-        final Map<Integer, BatteryDiffData> allUsageMap = new HashMap<>();
+        final Map<Integer, BatteryDiffData> allUsageMap = new ArrayMap<>();
         allUsageMap.put(SELECTED_INDEX_ALL, getAccumulatedUsageDiffData(context, diffDataList));
         resultMap.put(SELECTED_INDEX_ALL, allUsageMap);
     }
@@ -1445,7 +1510,8 @@ public final class DataProcessor {
             final int workProfileUserId,
             final int currentIndex,
             final List<Long> timestamps,
-            final Set<String> systemAppsSet,
+            final Set<String> systemAppsPackageNames,
+            final Set<Integer> systemAppsUids,
             final Map<Long, Map<String, List<AppUsagePeriod>>> appUsageMap,
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
         final List<BatteryDiffEntry> appEntries = new ArrayList<>();
@@ -1599,8 +1665,8 @@ public final class DataProcessor {
             return null;
         }
 
-        return new BatteryDiffData(
-                context, appEntries, systemEntries, systemAppsSet, /* isAccumulated= */ false);
+        return new BatteryDiffData(context, appEntries, systemEntries,
+                systemAppsPackageNames, systemAppsUids, /* isAccumulated= */ false);
     }
 
     private static long getScreenOnTime(@Nullable final List<AppUsagePeriod> appUsagePeriodList) {
@@ -1658,7 +1724,7 @@ public final class DataProcessor {
     @Nullable
     private static BatteryDiffData getAccumulatedUsageDiffData(
             final Context context, final Collection<BatteryDiffData> diffEntryListData) {
-        final Map<String, BatteryDiffEntry> diffEntryMap = new HashMap<>();
+        final Map<String, BatteryDiffEntry> diffEntryMap = new ArrayMap<>();
         final List<BatteryDiffEntry> appEntries = new ArrayList<>();
         final List<BatteryDiffEntry> systemEntries = new ArrayList<>();
 
@@ -1684,7 +1750,8 @@ public final class DataProcessor {
         }
 
         return diffEntryList.isEmpty() ? null : new BatteryDiffData(context, appEntries,
-                systemEntries, /* systemAppsSet= */ null, /* isAccumulated= */ true);
+                systemEntries, /* systemAppsPackageNames= */ new ArraySet<>(),
+                /* systemAppsUids= */ new ArraySet<>(), /* isAccumulated= */ true);
     }
 
     private static void computeUsageDiffDataPerEntry(
@@ -1900,21 +1967,31 @@ public final class DataProcessor {
         return null;
     }
 
-    private static Set<String> getSystemAppsSet(Context context) {
-        return sFakeSystemAppsSet != null ? sFakeSystemAppsSet
-                : AppListRepositoryUtil.getSystemPackageNames(context,
-                        new AppListConfig(context.getUserId(), false));
+    private static Set<String> getSystemAppsPackageNames(Context context) {
+        return sTestSystemAppsPackageNames != null ? sTestSystemAppsPackageNames
+                : AppListRepositoryUtil.getSystemPackageNames(context, context.getUserId(), false);
+    }
+
+    private static Set<Integer> getSystemAppsUids(Context context) {
+        Set<Integer> result = new ArraySet<>();
+        try {
+            result.add(context.getPackageManager().getUidForSharedUser(
+                    ANDROID_CORE_APPS_SHARED_USER_ID));
+        } catch (PackageManager.NameNotFoundException e) {
+            // No Android Core Apps
+        }
+        return result;
     }
 
     private static long getCurrentTimeMillis() {
-        return sFakeCurrentTimeMillis > 0 ? sFakeCurrentTimeMillis : System.currentTimeMillis();
+        return sTestCurrentTimeMillis > 0 ? sTestCurrentTimeMillis : System.currentTimeMillis();
     }
 
     private static void log(Context context, final String content, final long timestamp,
             final BatteryHistEntry entry) {
         if (sDebug) {
             Log.d(TAG, String.format(entry != null ? "%s %s:\n%s" : "%s %s:%s",
-                    utcToLocalTime(context, timestamp), content, entry));
+                    ConvertUtils.utcToLocalTimeForLogging(timestamp), content, entry));
         }
     }
 }

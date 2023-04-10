@@ -68,6 +68,7 @@ import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.GatekeeperPasswordProvider;
+import com.android.settings.biometrics2.ui.model.EnrollmentRequest;
 import com.android.settings.biometrics2.ui.view.FingerprintEnrollmentActivity;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -83,6 +84,8 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.transition.SettingsTransitionHelper;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.TwoTargetPreference;
+
+import com.google.android.setupdesign.util.DeviceHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -156,7 +159,8 @@ public class FingerprintSettings extends SubSettings {
 
         private static final String TAG = "FingerprintSettings";
         private static final String KEY_FINGERPRINT_ITEM_PREFIX = "key_fingerprint_item";
-        private static final String KEY_FINGERPRINT_ADD = "key_fingerprint_add";
+        @VisibleForTesting
+        static final String KEY_FINGERPRINT_ADD = "key_fingerprint_add";
         private static final String KEY_FINGERPRINT_ENABLE_KEYGUARD_TOGGLE =
                 "fingerprint_enable_keyguard_toggle";
         private static final String KEY_LAUNCHED_CONFIRM = "launched_confirm";
@@ -175,8 +179,8 @@ public class FingerprintSettings extends SubSettings {
 
         private static final int CONFIRM_REQUEST = 101;
         private static final int CHOOSE_LOCK_GENERIC_REQUEST = 102;
-
-        private static final int ADD_FINGERPRINT_REQUEST = 10;
+        @VisibleForTesting
+        static final int ADD_FINGERPRINT_REQUEST = 10;
         private static final int AUTO_ADD_FIRST_FINGERPRINT_REQUEST = 11;
 
         protected static final boolean DEBUG = false;
@@ -447,13 +451,22 @@ public class FingerprintSettings extends SubSettings {
                 column2.mTitle = getText(
                         R.string.security_fingerprint_disclaimer_lockscreen_disabled_2
                 );
+                if (isSfps()) {
+                    column2.mLearnMoreOverrideText = getText(
+                            R.string.security_settings_fingerprint_settings_footer_learn_more);
+                }
                 column2.mLearnMoreClickListener = learnMoreClickListener;
                 mFooterColumns.add(column2);
             } else {
                 final FooterColumn column = new FooterColumn();
-                column.mTitle = getText(
-                        R.string.security_settings_fingerprint_enroll_introduction_v2_message);
+                column.mTitle = getString(
+                        R.string.security_settings_fingerprint_enroll_introduction_v3_message,
+                        DeviceHelper.getDeviceName(getActivity()));
                 column.mLearnMoreClickListener = learnMoreClickListener;
+                if (isSfps()) {
+                    column.mLearnMoreOverrideText = getText(
+                            R.string.security_settings_fingerprint_settings_footer_learn_more);
+                }
                 mFooterColumns.add(column);
             }
         }
@@ -682,10 +695,26 @@ public class FingerprintSettings extends SubSettings {
         public boolean onPreferenceTreeClick(Preference pref) {
             final String key = pref.getKey();
             if (KEY_FINGERPRINT_ADD.equals(key)) {
+                // If it's udfps in split mode, show the error dialog and don't need to show adding
+                // fingerprint intent.
+                if (shouldSkipForUdfpsInMultiWindowMode()) {
+                    new FingerprintSplitScreenDialog().show(
+                            getActivity().getSupportFragmentManager(),
+                            FingerprintSplitScreenDialog.class.getName());
+                    return true;
+                }
+
                 mIsEnrolling = true;
                 Intent intent = new Intent();
-                intent.setClassName(SETTINGS_PACKAGE_NAME,
-                        FingerprintEnrollEnrolling.class.getName());
+                if (FeatureFlagUtils.isEnabled(getContext(),
+                        FeatureFlagUtils.SETTINGS_BIOMETRICS2_ENROLLMENT)) {
+                    intent.setClassName(SETTINGS_PACKAGE_NAME,
+                            FingerprintEnrollmentActivity.class.getName());
+                    intent.putExtra(EnrollmentRequest.EXTRA_SKIP_FIND_SENSOR, true);
+                } else {
+                    intent.setClassName(SETTINGS_PACKAGE_NAME,
+                            FingerprintEnrollEnrolling.class.getName());
+                }
                 intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
                 startActivityForResult(intent, ADD_FINGERPRINT_REQUEST);
@@ -978,6 +1007,14 @@ public class FingerprintSettings extends SubSettings {
             updatePreferences();
         }
 
+        /**
+         * Returns whether the click should be skipped.
+         * True if it's udfps and it's in split mode.
+         */
+        private boolean shouldSkipForUdfpsInMultiWindowMode() {
+            return getActivity().isInMultiWindowMode() && isUdfps();
+        }
+
         private final Runnable mFingerprintLockoutReset = new Runnable() {
             @Override
             public void run() {
@@ -1225,6 +1262,29 @@ public class FingerprintSettings extends SubSettings {
                                 })
                         .create();
                 return alertDialog;
+            }
+        }
+
+        /**
+         * This alert dialog shows when fingerprint is being added in multi window mode.
+         */
+        public static class FingerprintSplitScreenDialog extends InstrumentedDialogFragment {
+            @Override
+            public Dialog onCreateDialog(Bundle savedInstanceState) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(
+                                R.string.biometric_settings_add_fingerprint_in_split_mode_title)
+                        .setMessage(
+                                R.string.biometric_settings_add_fingerprint_in_split_mode_message)
+                        .setPositiveButton(
+                                R.string.biometric_settings_add_fingerprint_in_split_mode_ok,
+                                (DialogInterface.OnClickListener) (dialog, which) -> dialog.dismiss());
+                return builder.create();
+            }
+
+            @Override
+            public int getMetricsCategory() {
+                return SettingsEnums.DIALOG_ADD_FINGERPRINT_ERROR_IN_SPLIT_MODE;
             }
         }
     }

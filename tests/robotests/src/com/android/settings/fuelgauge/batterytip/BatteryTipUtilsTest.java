@@ -63,7 +63,8 @@ public class BatteryTipUtilsTest {
         mRestrictAppTip = spy(new RestrictAppTip(BatteryTip.StateType.NEW, new ArrayList<>()));
         mLowBatteryTip = spy(
                 new LowBatteryTip(BatteryTip.StateType.NEW, false /* powerSaveModeOn */));
-        mBatteryDefenderTip = spy(new BatteryDefenderTip(BatteryTip.StateType.NEW));
+        mBatteryDefenderTip = spy(new BatteryDefenderTip(BatteryTip.StateType.NEW,
+                false /* isPluggedIn */));
     }
 
     @Test

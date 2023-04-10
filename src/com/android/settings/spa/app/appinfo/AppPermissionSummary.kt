@@ -20,6 +20,9 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager.OnPermissionsChangedListener
 import android.icu.text.ListFormatter
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.LiveData
 import com.android.settings.R
 import com.android.settingslib.applications.PermissionsSummaryHelper
@@ -32,6 +35,12 @@ data class AppPermissionSummaryState(
     val summary: String,
     val enabled: Boolean,
 )
+
+@Composable
+fun rememberAppPermissionSummary(app: ApplicationInfo): AppPermissionSummaryLiveData {
+    val context = LocalContext.current
+    return remember { AppPermissionSummaryLiveData(context, app) }
+}
 
 class AppPermissionSummaryLiveData(
     private val context: Context,

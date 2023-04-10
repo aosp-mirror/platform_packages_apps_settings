@@ -948,6 +948,13 @@ public class UserSettings extends SettingsPreferenceFragment
                 getActivity(),
                 (grantAdmin) -> {
                     mGrantAdmin = grantAdmin;
+                    if (mGrantAdmin) {
+                        mMetricsFeatureProvider.action(getActivity(),
+                                SettingsEnums.ACTION_GRANT_ADMIN_FROM_SETTINGS_CREATION_DIALOG);
+                    } else {
+                        mMetricsFeatureProvider.action(getActivity(),
+                                SettingsEnums.ACTION_NOT_GRANT_ADMIN_FROM_SETTINGS_CREATION_DIALOG);
+                    }
                     showDialog(DIALOG_USER_PROFILE_EDITOR_ADD_USER);
                 },
                 () -> {

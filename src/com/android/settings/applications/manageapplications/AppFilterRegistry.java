@@ -32,6 +32,7 @@ import com.android.settings.applications.AppStateOverlayBridge;
 import com.android.settings.applications.AppStatePowerBridge;
 import com.android.settings.applications.AppStateUsageBridge;
 import com.android.settings.applications.AppStateWriteSettingsBridge;
+import com.android.settings.nfc.AppStateNfcTagAppsBridge;
 import com.android.settings.wifi.AppStateChangeWifiStateBridge;
 import com.android.settingslib.applications.ApplicationsState;
 
@@ -65,6 +66,7 @@ public class AppFilterRegistry {
                 FILTER_APPS_BATTERY_RESTRICTED,
                 FILTER_LONG_BACKGROUND_TASKS,
                 FILTER_APPS_CLONE,
+                FILTER_APPS_NFC_TAG,
             })
     @interface FilterType {}
 
@@ -95,8 +97,9 @@ public class AppFilterRegistry {
     public static final int FILTER_APPS_BATTERY_RESTRICTED = 23;
     public static final int FILTER_LONG_BACKGROUND_TASKS = 24;
     public static final int FILTER_APPS_CLONE = 25;
-    // Next id: 26. If you add an entry here, please change NUM_FILTER_ENTRIES.
-    private static final int NUM_FILTER_ENTRIES = 26;
+    public static final int FILTER_APPS_NFC_TAG = 26;
+    private static final int NUM_FILTER_ENTRIES = 27;
+    // Next id: 27. If you add an entry here, please change NUM_FILTER_ENTRIES.
 
     private static AppFilterRegistry sRegistry;
 
@@ -261,6 +264,13 @@ public class AppFilterRegistry {
                         AppStateClonedAppsBridge.FILTER_APPS_CLONE,
                         FILTER_APPS_CLONE,
                         R.string.cloned_apps_dashboard_title);
+
+        // Apps that are nfc tag allowlisted.
+        mFilters[FILTER_APPS_NFC_TAG] =
+                new AppFilterItem(
+                        AppStateNfcTagAppsBridge.FILTER_APPS_NFC_TAG,
+                        FILTER_APPS_NFC_TAG,
+                        R.string.change_nfc_tag_apps_title);
     }
 
     public static AppFilterRegistry getInstance() {
@@ -301,6 +311,8 @@ public class AppFilterRegistry {
                 return FILTER_LONG_BACKGROUND_TASKS;
             case ManageApplications.LIST_TYPE_CLONED_APPS:
                 return FILTER_APPS_CLONE;
+            case ManageApplications.LIST_TYPE_NFC_TAG_APPS:
+                return FILTER_APPS_NFC_TAG;
             default:
                 return FILTER_APPS_ALL;
         }

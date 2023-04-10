@@ -22,6 +22,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserManager;
+import android.telephony.SubscriptionManager;
 import android.telephony.euicc.EuiccManager;
 import android.util.Log;
 
@@ -41,7 +42,6 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.mobile.dataservice.DataServiceUtils;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
@@ -88,7 +88,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
         mMetricsFeatureProvider = FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
         mUserManager = context.getSystemService(UserManager.class);
         mLifecycleOwner = lifecycleOwner;
-        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         mIsAirplaneModeOn = mMobileNetworkRepository.isAirplaneModeOn();
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -97,13 +97,14 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
-        mMobileNetworkRepository.addRegister(mLifecycleOwner);
-        update();
+        mMobileNetworkRepository.addRegister(mLifecycleOwner, this,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        mMobileNetworkRepository.updateEntity();
     }
 
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
-        mMobileNetworkRepository.removeRegister();
+        mMobileNetworkRepository.removeRegister(this);
     }
 
     @Override
@@ -203,31 +204,20 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     @Override
     public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-        if (DataServiceUtils.shouldUpdateEntityList(mSubInfoEntityList, subInfoEntityList)) {
-            mSubInfoEntityList = subInfoEntityList;
-            update();
-        }
-    }
-
-    @Override
-    public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> activeSubInfoList) {
+        mSubInfoEntityList = subInfoEntityList;
+        update();
     }
 
     @Override
     public void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
-        if (DataServiceUtils.shouldUpdateEntityList(mUiccInfoEntityList, uiccInfoEntityList)) {
-            mUiccInfoEntityList = uiccInfoEntityList;
-            update();
-        }
+        mUiccInfoEntityList = uiccInfoEntityList;
+        update();
     }
 
     @Override
     public void onAllMobileNetworkInfoChanged(
             List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
-        if (DataServiceUtils.shouldUpdateEntityList(mMobileNetworkInfoEntityList,
-                mobileNetworkInfoEntityList)) {
-            mMobileNetworkInfoEntityList = mobileNetworkInfoEntityList;
-            update();
-        }
+        mMobileNetworkInfoEntityList = mobileNetworkInfoEntityList;
+        update();
     }
 }

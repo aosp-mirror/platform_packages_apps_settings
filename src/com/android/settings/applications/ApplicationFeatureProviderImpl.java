@@ -16,8 +16,8 @@
 
 package com.android.settings.applications;
 
-import static android.Manifest.permission.RUN_LONG_JOBS;
-import static android.app.AppOpsManager.OP_RUN_LONG_JOBS;
+import static android.Manifest.permission.RUN_USER_INITIATED_JOBS;
+import static android.app.AppOpsManager.OP_RUN_USER_INITIATED_JOBS;
 import static android.app.AppOpsManager.opToPermission;
 
 import android.Manifest;
@@ -345,6 +345,7 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
 
     @Override
     public boolean isLongBackgroundTaskPermissionToggleSupported() {
-        return TextUtils.equals(RUN_LONG_JOBS, opToPermission(OP_RUN_LONG_JOBS));
+        return TextUtils.equals(RUN_USER_INITIATED_JOBS,
+                opToPermission(OP_RUN_USER_INITIATED_JOBS));
     }
 }

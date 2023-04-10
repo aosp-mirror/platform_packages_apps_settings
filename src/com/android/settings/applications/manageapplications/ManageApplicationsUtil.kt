@@ -20,6 +20,7 @@ import android.content.Context
 import android.util.FeatureFlagUtils
 import com.android.settings.Settings.AlarmsAndRemindersActivity
 import com.android.settings.Settings.AppBatteryUsageActivity
+import com.android.settings.Settings.ChangeNfcTagAppsActivity
 import com.android.settings.Settings.ChangeWifiStateActivity
 import com.android.settings.Settings.ClonedAppsListActivity
 import com.android.settings.Settings.GamesStorageActivity
@@ -46,6 +47,7 @@ import com.android.settings.applications.manageapplications.ManageApplications.L
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MAIN
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MANAGE_SOURCES
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MEDIA_MANAGEMENT_APPS
+import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_NFC_TAG_APPS
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_NOTIFICATION
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_OVERLAY
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_STORAGE
@@ -85,6 +87,7 @@ object ManageApplicationsUtil {
         AppBatteryUsageActivity::class to LIST_TYPE_BATTERY_OPTIMIZATION,
         LongBackgroundTasksActivity::class to LIST_TYPE_LONG_BACKGROUND_TASKS,
         ClonedAppsListActivity::class to LIST_TYPE_CLONED_APPS,
+        ChangeNfcTagAppsActivity::class to LIST_TYPE_NFC_TAG_APPS,
     )
 
     @JvmField

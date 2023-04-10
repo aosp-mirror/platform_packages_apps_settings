@@ -129,6 +129,7 @@ public class BiometricFragment extends InstrumentedFragment {
         mBiometricPrompt = new BiometricPrompt.Builder(getContext())
                 .setTitle(promptInfo.getTitle())
                 .setUseDefaultTitle() // use default title if title is null/empty
+                .setUseDefaultSubtitle() // use default subtitle if subtitle is null/empty
                 .setDeviceCredentialAllowed(true)
                 .setSubtitle(promptInfo.getSubtitle())
                 .setDescription(promptInfo.getDescription())

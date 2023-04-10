@@ -47,7 +47,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     private static final String ACTION_FINGERPRINT_SETTINGS =
             "android.settings.FINGERPRINT_SETTINGS";
     @VisibleForTesting
-    static final String FINGERPRINT_SUGGESTION_ACTIVITY =
+    public static final String FINGERPRINT_SUGGESTION_ACTIVITY =
             "com.android.settings.SetupFingerprintSuggestionActivity";
 
     private FingerprintManager mFingerprintManager;
@@ -70,6 +70,9 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
         }
         setHeaderText(R.string.security_settings_fingerprint_enroll_finish_title);
         setDescriptionText(R.string.security_settings_fingerprint_enroll_finish_v2_message);
+        if (mCanAssumeSfps) {
+            setDescriptionForSfps();
+        }
 
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
@@ -88,6 +91,20 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
                         .setTheme(R.style.SudGlifButton_Primary)
                         .build()
         );
+    }
+
+    private void setDescriptionForSfps() {
+        final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(this);
+        if (fpm != null) {
+            final List<FingerprintSensorPropertiesInternal> props =
+                    fpm.getSensorPropertiesInternal();
+            final int maxEnrollments = props.get(0).maxEnrollmentsPerUser;
+            final int enrolled = fpm.getEnrolledFingerprints(mUserId).size();
+            if (enrolled < maxEnrollments) {
+                setDescriptionText(R.string
+                        .security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message);
+            }
+        }
     }
 
     @Override

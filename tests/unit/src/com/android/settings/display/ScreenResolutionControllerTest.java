@@ -35,22 +35,23 @@ import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
 public class ScreenResolutionControllerTest {
-
-    private static final int FHD_WIDTH = 1080;
-    private static final int QHD_WIDTH = 1440;
-
     private ScreenResolutionController mController;
+    private int mHighWidth;
+    private int mFullWidth;
 
     @Before
     public void setUp() {
         Context context = spy(ApplicationProvider.getApplicationContext());
         mController = spy(new ScreenResolutionController(context, "test"));
+
+        mHighWidth = mController.getHighWidth();
+        mFullWidth = mController.getFullWidth();
     }
 
     @Test
     public void getAvailabilityStatus_hasFhdAndQhdModes_returnAvailable() {
-        Display.Mode modeA = new Display.Mode(0, FHD_WIDTH, 0, 0);
-        Display.Mode modeB = new Display.Mode(0, QHD_WIDTH, 0, 0);
+        Display.Mode modeA = new Display.Mode(0, mHighWidth, 0, 0);
+        Display.Mode modeB = new Display.Mode(0, mFullWidth, 0, 0);
         Display.Mode[] modes = {modeA, modeB};
         doReturn(modes).when(mController).getSupportedModes();
 
@@ -60,27 +61,25 @@ public class ScreenResolutionControllerTest {
 
     @Test
     public void getAvailabilityStatus_hasOneMode_returnUnsupported() {
-        Display.Mode modeA = new Display.Mode(0, FHD_WIDTH, 0, 0);
-        Display.Mode[] modes = {modeA};
-        doReturn(modes).when(mController).getSupportedModes();
+        doReturn(0).when(mController).getHighWidth();
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
-    public void updateState_screenResolutionFHD_shouldSetSummaryToFHD() {
-        int width = FHD_WIDTH;
+    public void updateState_HighResolution_shouldSetSummaryToHighResolution() {
+        int width = mHighWidth;
         doReturn(width).when(mController).getDisplayWidth();
 
-        assertThat(mController.getSummary().toString()).isEqualTo("1080p FHD+");
+        assertThat(mController.getSummary().toString()).isEqualTo("High resolution");
     }
 
     @Test
-    public void updateState_screenResolutionQHD_shouldSetSummaryToQHD() {
-        int width = QHD_WIDTH;
+    public void updateState_FullResolution_shouldSetSummaryToFullResolution() {
+        int width = mFullWidth;
         doReturn(width).when(mController).getDisplayWidth();
 
-        assertThat(mController.getSummary().toString()).isEqualTo("1440p QHD+");
+        assertThat(mController.getSummary().toString()).isEqualTo("Full resolution");
     }
 }

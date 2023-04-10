@@ -25,7 +25,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
+import android.text.TextUtils;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +39,9 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
 import com.android.settings.R;
+import com.android.settings.network.SubscriptionUtil;
+
+import java.util.List;
 
 /**
  * BluetoothPermissionActivity shows a dialog for accepting incoming
@@ -184,11 +189,10 @@ public class BluetoothPermissionActivity extends AlertActivity implements
 
     private View createSapDialogView() {
         String mRemoteName = Utils.createRemoteName(this, mDevice);
-        TelephonyManager tm = getSystemService(TelephonyManager.class);
         mView = getLayoutInflater().inflate(R.layout.bluetooth_access, null);
         messageView = (TextView)mView.findViewById(R.id.message);
         messageView.setText(getString(R.string.bluetooth_sim_card_access_dialog_content,
-                mRemoteName, mRemoteName, tm.getLine1Number()));
+                mRemoteName, mRemoteName, getAnyPhoneNumberFromSubscriptions()));
         return mView;
     }
 
@@ -246,5 +250,18 @@ public class BluetoothPermissionActivity extends AlertActivity implements
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         return true;
+    }
+
+    // find any phone number available from active subscriptions
+    String getAnyPhoneNumberFromSubscriptions() {
+        SubscriptionManager sm = getSystemService(SubscriptionManager.class);
+        List<SubscriptionInfo> subs = SubscriptionUtil.getActiveSubscriptions(sm);
+        if ((subs == null) || (subs.size() == 0)) {
+            return "";
+        }
+        return subs.stream()
+                .map(subinfo -> SubscriptionUtil.getFormattedPhoneNumber(this, subinfo))
+                .filter(phoneNumber -> !TextUtils.isEmpty(phoneNumber))
+                .findAny().orElse("");
     }
 }

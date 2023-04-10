@@ -19,6 +19,7 @@ package com.android.settings.biometrics.fingerprint;
 import android.content.Context;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.fingerprint.FingerprintManager;
+import android.os.UserManager;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -58,6 +59,17 @@ public class FingerprintStatusUtils {
     public EnforcedAdmin getDisablingAdmin() {
         return ParentalControlsUtils.parentConsentRequired(
                 mContext, BiometricAuthenticator.TYPE_FINGERPRINT);
+    }
+    /**
+     * Returns the title of fingerprint settings entity.
+     */
+    public String getTitle() {
+        UserManager userManager = mContext.getSystemService(UserManager.class);
+        if (userManager != null && userManager.isProfile()) {
+            return mContext.getString(R.string.security_settings_work_fingerprint_preference_title);
+        } else {
+            return mContext.getString(R.string.security_settings_fingerprint_preference_title);
+        }
     }
 
     /**

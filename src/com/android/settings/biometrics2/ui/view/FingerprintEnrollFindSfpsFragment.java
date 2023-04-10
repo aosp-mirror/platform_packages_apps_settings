@@ -20,6 +20,7 @@ import static android.hardware.fingerprint.FingerprintManager.ENROLL_FIND_SENSOR
 
 import android.app.Activity;
 import android.content.Context;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,6 +40,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.android.settings.R;
 import com.android.settings.biometrics2.ui.model.EnrollmentProgress;
+import com.android.settings.biometrics2.ui.model.EnrollmentStatusMessage;
 import com.android.settings.biometrics2.ui.viewmodel.DeviceFoldedViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.DeviceRotationViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFindSensorViewModel;
@@ -75,30 +77,36 @@ public class FingerprintEnrollFindSfpsFragment extends Fragment {
     private DeviceRotationViewModel mRotationViewModel;
     private DeviceFoldedViewModel mFoldedViewModel;
 
+    private GlifLayout mView;
+    private FooterBarMixin mFooterBarMixin;
+    private final OnClickListener mOnSkipClickListener = (v) -> mViewModel.onSkipButtonClick();
+    private LottieAnimationView mIllustrationLottie;
+    @Surface.Rotation private int mAnimationRotation = -1;
+
     private final Observer<Integer> mRotationObserver = rotation -> {
         if (DEBUG) {
             Log.d(TAG, "rotationObserver " + rotation);
         }
-        if (rotation == null) {
-            return;
+        if (rotation != null) {
+            onRotationChanged(rotation);
         }
-        onRotationChanged(rotation);
     };
-
-    @Surface.Rotation private int mAnimationRotation = -1;
-
-    private View mView;
-    private GlifLayout mGlifLayout;
-    private FooterBarMixin mFooterBarMixin;
-    private final OnClickListener mOnSkipClickListener = (v) -> mViewModel.onSkipButtonClick();
-    private LottieAnimationView mIllustrationLottie;
 
     private final Observer<EnrollmentProgress> mProgressObserver = progress -> {
         if (DEBUG) {
             Log.d(TAG, "mProgressObserver(" + progress + ")");
         }
         if (progress != null && !progress.isInitialStep()) {
-            mViewModel.onStartButtonClick();
+            stopLookingForFingerprint(true);
+        }
+    };
+
+    private final Observer<EnrollmentStatusMessage> mLastCancelMessageObserver = errorMessage -> {
+        if (DEBUG) {
+            Log.d(TAG, "mLastCancelMessageObserver(" + errorMessage + ")");
+        }
+        if (errorMessage != null) {
+            onLastCancelMessage(errorMessage);
         }
     };
 
@@ -107,10 +115,10 @@ public class FingerprintEnrollFindSfpsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
         final Context context = inflater.getContext();
-        mView = inflater.inflate(R.layout.sfps_enroll_find_sensor_layout, container, false);
-        mGlifLayout = mView.findViewById(R.id.setup_wizard_layout);
+        mView = (GlifLayout) inflater.inflate(R.layout.sfps_enroll_find_sensor_layout, container,
+                false);
         mIllustrationLottie = mView.findViewById(R.id.illustration_lottie);
-        mFooterBarMixin = mGlifLayout.getMixin(FooterBarMixin.class);
+        mFooterBarMixin = mView.getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
                 new FooterButton.Builder(context)
                         .setText(R.string.security_settings_fingerprint_enroll_enrolling_skip)
@@ -125,7 +133,7 @@ public class FingerprintEnrollFindSfpsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final Activity activity = getActivity();
-        final GlifLayoutHelper glifLayoutHelper = new GlifLayoutHelper(activity, mGlifLayout);
+        final GlifLayoutHelper glifLayoutHelper = new GlifLayoutHelper(activity, mView);
         glifLayoutHelper.setHeaderText(R.string.security_settings_sfps_enroll_find_sensor_title);
         glifLayoutHelper.setDescriptionText(
                 getText(R.string.security_settings_sfps_enroll_find_sensor_message));
@@ -136,10 +144,13 @@ public class FingerprintEnrollFindSfpsFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
+        final boolean isEnrolling = mProgressViewModel.isEnrolling();
         if (DEBUG) {
-            Log.d(TAG, "onStart(), start looking for fingerprint");
+            Log.d(TAG, "onStart(), isEnrolling:" + isEnrolling);
         }
-        startLookingForFingerprint();
+        if (!isEnrolling) {
+            startLookingForFingerprint();
+        }
     }
 
     @Override
@@ -159,10 +170,13 @@ public class FingerprintEnrollFindSfpsFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
+        final boolean isEnrolling = mProgressViewModel.isEnrolling();
         if (DEBUG) {
-            Log.d(TAG, "onStop(), stop looking for fingerprint");
+            Log.d(TAG, "onStop(), isEnrolling:" + isEnrolling);
         }
-        stopLookingForFingerprint();
+        if (isEnrolling) {
+            stopLookingForFingerprint(false);
+        }
     }
 
     private void startLookingForFingerprint() {
@@ -180,11 +194,17 @@ public class FingerprintEnrollFindSfpsFragment extends Fragment {
         }
     }
 
-    private void stopLookingForFingerprint() {
+    private void stopLookingForFingerprint(boolean waitForLastCancelErrMsg) {
         if (!mProgressViewModel.isEnrolling()) {
             Log.d(TAG, "stopLookingForFingerprint(), failed because isEnrolling is false before"
                     + " stopping");
             return;
+        }
+
+        if (waitForLastCancelErrMsg) {
+            mProgressViewModel.clearErrorMessageLiveData(); // Prevent got previous error message
+            mProgressViewModel.getErrorMessageLiveData().observe(this,
+                    mLastCancelMessageObserver);
         }
 
         mProgressViewModel.getProgressLiveData().removeObserver(mProgressObserver);
@@ -199,10 +219,25 @@ public class FingerprintEnrollFindSfpsFragment extends Fragment {
             Log.d(TAG, "onRotationChanged() from " + mAnimationRotation + " to " + newRotation);
         }
         if ((newRotation + 2) % 4 == mAnimationRotation) {
+            // Fragment not changed, we just need to play correct rotation animation
             playLottieAnimation(newRotation);
+        } else if (newRotation % 2 != mAnimationRotation % 2) {
+            // Fragment is going to be recreated, just stopLookingForFingerprint() here.
+            stopLookingForFingerprint(true);
         }
-        // Fragment will be re-created if it's changed between landscape and portrait, so no need to
-        // handle other cases.
+    }
+
+    private void onLastCancelMessage(@NonNull EnrollmentStatusMessage errorMessage) {
+        if (errorMessage.getMsgId() == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
+            final EnrollmentProgress progress = mProgressViewModel.getProgressLiveData().getValue();
+            mProgressViewModel.clearProgressLiveData();
+            mProgressViewModel.getErrorMessageLiveData().removeObserver(mLastCancelMessageObserver);
+            if (progress != null && !progress.isInitialStep()) {
+                mViewModel.onStartButtonClick();
+            }
+        } else {
+            Log.e(TAG, "mErrorMessageObserver(" + errorMessage + ")");
+        }
     }
 
     private void playLottieAnimation(@Surface.Rotation int rotation) {

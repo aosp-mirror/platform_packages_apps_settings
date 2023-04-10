@@ -22,6 +22,7 @@ import static junit.framework.Assert.assertTrue;
 import android.content.Context;
 import android.os.SystemProperties;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
@@ -42,14 +43,15 @@ import org.robolectric.shadows.ShadowSystemProperties;
 public class RebootWithMtePreferenceControllerTest {
     private Context mContext;
     private RebootWithMtePreferenceController mController;
-    @Mock private DevelopmentSettingsDashboardFragment mSettings;
+    @Mock private Fragment mFragment;
 
     @Before
     public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
 
         mContext = ApplicationProvider.getApplicationContext();
-        mController = new RebootWithMtePreferenceController(mContext, mSettings);
+        mController = new RebootWithMtePreferenceController(mContext);
+        mController.setFragment(mFragment);
     }
 
     @Test

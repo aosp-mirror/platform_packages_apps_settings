@@ -52,12 +52,15 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.testutils.XmlTestUtils;
+import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexableRaw;
 
@@ -84,6 +87,7 @@ import java.util.List;
 
 /** Test for {@link AccessibilitySettings}. */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowBluetoothUtils.class})
 public class AccessibilitySettingsTest {
     private static final String PACKAGE_NAME = "com.android.test";
     private static final String CLASS_NAME = PACKAGE_NAME + ".test_a11y_service";
@@ -115,6 +119,8 @@ public class AccessibilitySettingsTest {
     private ShadowAccessibilityManager mShadowAccessibilityManager;
     @Mock
     private AppOpsManager mAppOpsManager;
+    @Mock
+    private LocalBluetoothManager mLocalBluetoothManager;
 
     private Lifecycle mLifecycle;
 
@@ -133,6 +139,7 @@ public class AccessibilitySettingsTest {
                 anyInt(), anyString())).thenReturn(AppOpsManager.MODE_ALLOWED);
         mLifecycle = new Lifecycle(() -> mLifecycle);
         when(mFragment.getSettingsLifecycle()).thenReturn(mLifecycle);
+        ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
     }
 
     @Test
@@ -187,7 +194,7 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_ENABLED);
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.on));
+                mContext.getString(R.string.accessibility_summary_state_enabled));
     }
 
     @Test
@@ -198,13 +205,13 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_DISABLED);
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.off));
+                mContext.getString(R.string.accessibility_summary_state_disabled));
     }
 
     @Test
     public void getServiceSummary_enableServiceAndHasSummary_showsEnabledSummary() {
         final String service_enabled = mContext.getString(
-                R.string.on);
+                R.string.accessibility_summary_state_enabled);
         doReturn(DEFAULT_SUMMARY).when(mServiceInfo).loadSummary(any());
 
         final CharSequence summary = AccessibilitySettings.getServiceSummary(mContext,
@@ -218,7 +225,7 @@ public class AccessibilitySettingsTest {
     @Test
     public void getServiceSummary_disableServiceAndHasSummary_showsCombineDisabledSummary() {
         final String service_disabled = mContext.getString(
-                R.string.off);
+                R.string.accessibility_summary_state_disabled);
         doReturn(DEFAULT_SUMMARY).when(mServiceInfo).loadSummary(any());
 
         final CharSequence summary = AccessibilitySettings.getServiceSummary(mContext,
@@ -328,13 +335,43 @@ public class AccessibilitySettingsTest {
 
     }
 
+    @Test
+    @Config(shadows = {ShadowFragment.class, ShadowUserManager.class})
+    public void testAccessibilityMenuInSystem_IncludedInInteractionControl() {
+        mShadowAccessibilityManager.setInstalledAccessibilityServiceList(
+                List.of(getMockAccessibilityServiceInfo(
+                        AccessibilityUtils.ACCESSIBILITY_MENU_IN_SYSTEM)));
+        setupFragment();
+
+        final RestrictedPreference pref = mFragment.getPreferenceScreen().findPreference(
+                AccessibilityUtils.ACCESSIBILITY_MENU_IN_SYSTEM.flattenToString());
+        final String prefCategory = mFragment.mServicePreferenceToPreferenceCategoryMap.get(
+                pref).getKey();
+        assertThat(prefCategory).isEqualTo(AccessibilitySettings.CATEGORY_INTERACTION_CONTROL);
+    }
+
+    @Test
+    @Config(shadows = {ShadowFragment.class, ShadowUserManager.class})
+    public void testAccessibilityMenuInSystem_NoPrefWhenNotInstalled() {
+        mShadowAccessibilityManager.setInstalledAccessibilityServiceList(List.of());
+        setupFragment();
+
+        final RestrictedPreference pref = mFragment.getPreferenceScreen().findPreference(
+                AccessibilityUtils.ACCESSIBILITY_MENU_IN_SYSTEM.flattenToString());
+        assertThat(pref).isNull();
+    }
+
     private AccessibilityServiceInfo getMockAccessibilityServiceInfo(String packageName,
             String className) {
+        return getMockAccessibilityServiceInfo(new ComponentName(packageName, className));
+    }
+
+    private AccessibilityServiceInfo getMockAccessibilityServiceInfo(ComponentName componentName) {
         final ApplicationInfo applicationInfo = new ApplicationInfo();
         final ServiceInfo serviceInfo = new ServiceInfo();
-        applicationInfo.packageName = packageName;
-        serviceInfo.packageName = packageName;
-        serviceInfo.name = className;
+        applicationInfo.packageName = componentName.getPackageName();
+        serviceInfo.packageName = componentName.getPackageName();
+        serviceInfo.name = componentName.getClassName();
         serviceInfo.applicationInfo = applicationInfo;
 
         final ResolveInfo resolveInfo = new ResolveInfo();
@@ -342,7 +379,7 @@ public class AccessibilitySettingsTest {
         try {
             final AccessibilityServiceInfo info = new AccessibilityServiceInfo(resolveInfo,
                     mContext);
-            info.setComponentName(new ComponentName(packageName, className));
+            info.setComponentName(componentName);
             return info;
         } catch (XmlPullParserException | IOException e) {
             // Do nothing

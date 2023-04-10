@@ -31,7 +31,7 @@ import com.android.settings.core.SettingsBaseActivity;
 
 /** A activity to show the locale picker page. */
 public class LocalePickerWithRegionActivity extends SettingsBaseActivity
-        implements LocalePickerWithRegion.LocaleSelectedListener {
+        implements LocalePickerWithRegion.LocaleSelectedListener, MenuItem.OnActionExpandListener {
     private static final String TAG = LocalePickerWithRegionActivity.class.getSimpleName();
     private static final String PARENT_FRAGMENT_NAME = "localeListEditor";
 
@@ -53,7 +53,9 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
                 this,
                 LocalePickerWithRegionActivity.this,
                 false /* translate only */,
-                explicitLocales);
+                explicitLocales,
+                null /* appPackageName */,
+                this);
         getFragmentManager()
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
@@ -96,6 +98,18 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
     private boolean isDeviceDemoMode() {
         return Settings.Global.getInt(
                 getContentResolver(), Settings.Global.DEVICE_DEMO_MODE, 0) == 1;
+    }
+
+    @Override
+    public boolean onMenuItemActionExpand(MenuItem item) {
+        mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        return true;
+    }
+
+    @Override
+    public boolean onMenuItemActionCollapse(MenuItem item) {
+        mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        return true;
     }
 }
 

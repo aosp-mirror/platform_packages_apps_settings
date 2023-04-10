@@ -20,29 +20,34 @@ import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
-import android.view.InputDevice;
+import android.view.inputmethod.InputMethodInfo;
+import android.view.inputmethod.InputMethodSubtype;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.widget.TickButtonPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class NewKeyboardLayoutPickerController extends BasePreferenceController implements
         InputManager.InputDeviceListener, LifecycleObserver, OnStart, OnStop {
     private final InputManager mIm;
-    private final Map<KeyboardLayoutPreference, KeyboardLayout> mPreferenceMap;
+    private final Map<TickButtonPreference, KeyboardLayout> mPreferenceMap;
 
     private Fragment mParent;
     private int mInputDeviceId;
+    private int mUserId;
     private InputDeviceIdentifier mInputDeviceIdentifier;
+    private InputMethodInfo mInputMethodInfo;
+    private InputMethodSubtype mInputMethodSubtype;
+
     private KeyboardLayout[] mKeyboardLayouts;
     private PreferenceScreen mScreen;
     private String mPreviousSelection;
@@ -55,25 +60,27 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
         mPreferenceMap = new HashMap<>();
     }
 
-    public void initialize(Fragment parent, InputDeviceIdentifier inputDeviceIdentifier,
-            String layout) {
-        mLayout = layout;
+    public void initialize(Fragment parent, int userId, InputDeviceIdentifier inputDeviceIdentifier,
+            InputMethodInfo imeInfo, InputMethodSubtype imeSubtype, String layout) {
         mParent = parent;
+        mUserId = userId;
         mInputDeviceIdentifier = inputDeviceIdentifier;
-        mKeyboardLayouts = mIm.getKeyboardLayoutsForInputDevice(mInputDeviceIdentifier);
-        Arrays.sort(mKeyboardLayouts);
+        mInputMethodInfo = imeInfo;
+        mInputMethodSubtype = imeSubtype;
+        mLayout = layout;
+        mKeyboardLayouts = mIm.getKeyboardLayoutListForInputDevice(
+                inputDeviceIdentifier, userId, imeInfo, imeSubtype);
     }
 
     @Override
     public void onStart() {
         mIm.registerInputDeviceListener(this, null);
-        final InputDevice inputDevice =
-                mIm.getInputDeviceByDescriptor(mInputDeviceIdentifier.getDescriptor());
-        if (inputDevice == null) {
-            mParent.getActivity().finish();
+        if (mInputDeviceIdentifier == null
+                || NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier) == null) {
             return;
         }
-        mInputDeviceId = inputDevice.getId();
+        mInputDeviceId =
+                NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier).getId();
     }
 
     @Override
@@ -96,21 +103,17 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-
-        if (!(preference instanceof KeyboardLayoutPreference)) {
+        if (!(preference instanceof TickButtonPreference)) {
             return false;
         }
 
-        final KeyboardLayoutPreference pref = (KeyboardLayoutPreference) preference;
-        // TODO(b/259530132): Need APIs to update the available keyboards for input device.
-        // For example:
-        // inputManager.setCurrentKeyboardLayoutForInputDevice(
-        //            InputDevice..., Userid..., ImeSubType ..., String keyboardLayoutDescriptor)
+        final TickButtonPreference pref = (TickButtonPreference) preference;
+        pref.setSelected(true);
         if (mPreviousSelection != null && !mPreviousSelection.equals(preference.getKey())) {
-            KeyboardLayoutPreference preSelectedPref = mScreen.findPreference(mPreviousSelection);
-            pref.setCheckMark(true);
-            preSelectedPref.setCheckMark(false);
+            TickButtonPreference preSelectedPref = mScreen.findPreference(mPreviousSelection);
+            preSelectedPref.setSelected(false);
         }
+        setLayout(pref);
         mPreviousSelection = preference.getKey();
         return true;
     }
@@ -129,28 +132,34 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
 
     @Override
     public void onInputDeviceChanged(int deviceId) {
-        if (mInputDeviceId >= 0 && deviceId == mInputDeviceId) {
-            updateCheckedState();
-        }
-    }
-
-    private void updateCheckedState() {
-        // TODO(b/259530132): Need API to update the keyboard language layout list.
+        // Do nothing.
     }
 
     private void createPreferenceHierarchy() {
+        if (mKeyboardLayouts == null) {
+            return;
+        }
         for (KeyboardLayout layout : mKeyboardLayouts) {
-            final KeyboardLayoutPreference pref;
+            final TickButtonPreference pref;
+            pref = new TickButtonPreference(mScreen.getContext());
+            pref.setTitle(layout.getLabel());
+
             if (mLayout.equals(layout.getLabel())) {
-                pref = new KeyboardLayoutPreference(mScreen.getContext(), layout.getLabel(), true);
-                mPreviousSelection = layout.getLabel();
-            } else {
-                pref = new KeyboardLayoutPreference(mScreen.getContext(), layout.getLabel(), false);
+                pref.setSelected(true);
+                mPreviousSelection = layout.getDescriptor();
             }
-            // TODO: Waiting for new API to use a prefix with special number to setKey
-            pref.setKey(layout.getLabel());
+            pref.setKey(layout.getDescriptor());
             mScreen.addPreference(pref);
             mPreferenceMap.put(pref, layout);
         }
+    }
+
+    private void setLayout(TickButtonPreference preference) {
+        mIm.setKeyboardLayoutForInputDevice(
+                mInputDeviceIdentifier,
+                mUserId,
+                mInputMethodInfo,
+                mInputMethodSubtype,
+                mPreferenceMap.get(preference).getDescriptor());
     }
 }

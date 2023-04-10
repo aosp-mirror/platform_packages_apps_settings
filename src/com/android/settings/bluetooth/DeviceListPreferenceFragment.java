@@ -18,6 +18,11 @@ package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.le.BluetoothLeScanner;
+import android.bluetooth.le.ScanCallback;
+import android.bluetooth.le.ScanFilter;
+import android.bluetooth.le.ScanResult;
+import android.bluetooth.le.ScanSettings;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.text.BidiFormatter;
@@ -33,6 +38,7 @@ import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import java.util.ArrayList;
@@ -59,35 +65,49 @@ public abstract class DeviceListPreferenceFragment extends
             "persist.bluetooth.showdeviceswithoutnames";
 
     private BluetoothDeviceFilter.Filter mFilter;
+    private List<ScanFilter> mLeScanFilters;
+    private ScanCallback mScanCallback;
 
     @VisibleForTesting
-    boolean mScanEnabled;
+    protected boolean mScanEnabled;
 
-    BluetoothDevice mSelectedDevice;
+    protected BluetoothDevice mSelectedDevice;
 
-    BluetoothAdapter mBluetoothAdapter;
-    LocalBluetoothManager mLocalManager;
+    protected BluetoothAdapter mBluetoothAdapter;
+    protected LocalBluetoothManager mLocalManager;
+    protected CachedBluetoothDeviceManager mCachedDeviceManager;
 
     @VisibleForTesting
-    PreferenceGroup mDeviceListGroup;
+    protected PreferenceGroup mDeviceListGroup;
 
-    final HashMap<CachedBluetoothDevice, BluetoothDevicePreference> mDevicePreferenceMap =
+    protected final HashMap<CachedBluetoothDevice, BluetoothDevicePreference> mDevicePreferenceMap =
             new HashMap<>();
-    final List<BluetoothDevice> mSelectedList = new ArrayList<>();
+    protected final List<BluetoothDevice> mSelectedList = new ArrayList<>();
 
-    boolean mShowDevicesWithoutNames;
+    protected boolean mShowDevicesWithoutNames;
 
-    DeviceListPreferenceFragment(String restrictedKey) {
+    public DeviceListPreferenceFragment(String restrictedKey) {
         super(restrictedKey);
         mFilter = BluetoothDeviceFilter.ALL_FILTER;
     }
 
-    final void setFilter(BluetoothDeviceFilter.Filter filter) {
+    protected final void setFilter(BluetoothDeviceFilter.Filter filter) {
         mFilter = filter;
     }
 
-    final void setFilter(int filterType) {
+    protected final void setFilter(int filterType) {
         mFilter = BluetoothDeviceFilter.getFilter(filterType);
+    }
+
+    /**
+     * Sets the bluetooth device scanning filter with {@link ScanFilter}s. It will change to start
+     * {@link BluetoothLeScanner} which will scan BLE device only.
+     *
+     * @param leScanFilters list of settings to filter scan result
+     */
+    protected void setFilter(List<ScanFilter> leScanFilters) {
+        mFilter = null;
+        mLeScanFilters = leScanFilters;
     }
 
     @Override
@@ -100,6 +120,7 @@ public abstract class DeviceListPreferenceFragment extends
             return;
         }
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mCachedDeviceManager = mLocalManager.getCachedDeviceManager();
         mShowDevicesWithoutNames = SystemProperties.getBoolean(
                 BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY, false);
 
@@ -109,7 +130,7 @@ public abstract class DeviceListPreferenceFragment extends
     }
 
     /** find and update preference that already existed in preference screen */
-    abstract void initPreferencesFromPreferenceScreen();
+    protected abstract void initPreferencesFromPreferenceScreen();
 
     @Override
     public void onStart() {
@@ -139,7 +160,7 @@ public abstract class DeviceListPreferenceFragment extends
 
     void addCachedDevices() {
         Collection<CachedBluetoothDevice> cachedDevices =
-                mLocalManager.getCachedDeviceManager().getCachedDevicesCopy();
+                mCachedDeviceManager.getCachedDevicesCopy();
         for (CachedBluetoothDevice cachedDevice : cachedDevices) {
             onDeviceAdded(cachedDevice);
         }
@@ -164,7 +185,7 @@ public abstract class DeviceListPreferenceFragment extends
         return super.onPreferenceTreeClick(preference);
     }
 
-    void onDevicePreferenceClick(BluetoothDevicePreference btPreference) {
+    protected void onDevicePreferenceClick(BluetoothDevicePreference btPreference) {
         btPreference.onClicked();
     }
 
@@ -177,7 +198,8 @@ public abstract class DeviceListPreferenceFragment extends
         // Prevent updates while the list shows one of the state messages
         if (mBluetoothAdapter.getState() != BluetoothAdapter.STATE_ON) return;
 
-        if (mFilter.matches(cachedDevice.getDevice())) {
+        if (mLeScanFilters != null
+                || (mFilter != null && mFilter.matches(cachedDevice.getDevice()))) {
             createDevicePreference(cachedDevice);
         }
     }
@@ -227,7 +249,7 @@ public abstract class DeviceListPreferenceFragment extends
     }
 
     @VisibleForTesting
-    void enableScanning() {
+    protected void enableScanning() {
         // BluetoothAdapter already handles repeated scan requests
         if (!mScanEnabled) {
             startScanning();
@@ -236,7 +258,7 @@ public abstract class DeviceListPreferenceFragment extends
     }
 
     @VisibleForTesting
-    void disableScanning() {
+    protected void disableScanning() {
         if (mScanEnabled) {
             stopScanning();
             mScanEnabled = false;
@@ -251,31 +273,6 @@ public abstract class DeviceListPreferenceFragment extends
     }
 
     /**
-     * Add bluetooth device preferences to {@code preferenceGroup} which satisfy the {@code filter}
-     *
-     * This method will also (1) set the title for {@code preferenceGroup} and (2) change the
-     * default preferenceGroup and filter
-     * @param preferenceGroup
-     * @param titleId
-     * @param filter
-     * @param addCachedDevices
-     */
-    public void addDeviceCategory(PreferenceGroup preferenceGroup, int titleId,
-            BluetoothDeviceFilter.Filter filter, boolean addCachedDevices) {
-        cacheRemoveAllPrefs(preferenceGroup);
-        preferenceGroup.setTitle(titleId);
-        mDeviceListGroup = preferenceGroup;
-        if (addCachedDevices) {
-            // Don't show bonded devices when screen turned back on
-            setFilter(BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER);
-            addCachedDevices();
-        }
-        setFilter(filter);
-        preferenceGroup.setEnabled(true);
-        removeCachedPrefs(preferenceGroup);
-    }
-
-    /**
      * Return the key of the {@link PreferenceGroup} that contains the bluetooth devices
      */
     public abstract String getDeviceListKey();
@@ -284,15 +281,65 @@ public abstract class DeviceListPreferenceFragment extends
         return mShowDevicesWithoutNames;
     }
 
+    @VisibleForTesting
     void startScanning() {
+        if (mFilter != null) {
+            startClassicScanning();
+        } else if (mLeScanFilters != null) {
+            startLeScanning();
+        }
+
+    }
+
+    @VisibleForTesting
+    void stopScanning() {
+        if (mFilter != null) {
+            stopClassicScanning();
+        } else if (mLeScanFilters != null) {
+            stopLeScanning();
+        }
+    }
+
+    private void startClassicScanning() {
         if (!mBluetoothAdapter.isDiscovering()) {
             mBluetoothAdapter.startDiscovery();
         }
     }
 
-    void stopScanning() {
+    private void stopClassicScanning() {
         if (mBluetoothAdapter.isDiscovering()) {
             mBluetoothAdapter.cancelDiscovery();
+        }
+    }
+
+    private void startLeScanning() {
+        final BluetoothLeScanner scanner = mBluetoothAdapter.getBluetoothLeScanner();
+        final ScanSettings settings = new ScanSettings.Builder()
+                .setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
+                .build();
+        mScanCallback = new ScanCallback() {
+            @Override
+            public void onScanResult(int callbackType, ScanResult result) {
+                final BluetoothDevice device = result.getDevice();
+                CachedBluetoothDevice cachedDevice = mCachedDeviceManager.findDevice(device);
+                if (cachedDevice == null) {
+                    cachedDevice = mCachedDeviceManager.addDevice(device);
+                }
+                onDeviceAdded(cachedDevice);
+            }
+
+            @Override
+            public void onScanFailed(int errorCode) {
+                Log.w(TAG, "BLE Scan failed with error code " + errorCode);
+            }
+        };
+        scanner.startScan(mLeScanFilters, settings, mScanCallback);
+    }
+
+    private void stopLeScanning() {
+        final BluetoothLeScanner scanner = mBluetoothAdapter.getBluetoothLeScanner();
+        if (scanner != null) {
+            scanner.stopScan(mScanCallback);
         }
     }
 }

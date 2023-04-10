@@ -22,7 +22,6 @@ import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.InputDevice;
 
@@ -57,11 +56,11 @@ public class StylusDeviceUpdater implements InputManager.InputDeviceListener,
     private final InputManager mInputManager;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
-    private long mLastUsiSeenTime = 0;
     private Context mContext;
 
     @VisibleForTesting
     Integer mLastDetectedUsiId;
+    BatteryState mLastBatteryState;
 
     @VisibleForTesting
     Preference mUsiPreference;
@@ -75,7 +74,6 @@ public class StylusDeviceUpdater implements InputManager.InputDeviceListener,
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         mContext = context;
         mInputManager = context.getSystemService(InputManager.class);
-
     }
 
     /**
@@ -132,13 +130,8 @@ public class StylusDeviceUpdater implements InputManager.InputDeviceListener,
     @Override
     public void onBatteryStateChanged(int deviceId, long eventTimeMillis,
             @NonNull BatteryState batteryState) {
-        if (batteryState.isPresent()) {
-            mLastUsiSeenTime = eventTimeMillis;
-            mLastDetectedUsiId = deviceId;
-        } else {
-            mLastUsiSeenTime = -1;
-            mLastDetectedUsiId = null;
-        }
+        mLastBatteryState = batteryState;
+        mLastDetectedUsiId = deviceId;
         forceUpdate();
     }
 
@@ -168,7 +161,7 @@ public class StylusDeviceUpdater implements InputManager.InputDeviceListener,
         mUsiPreference.setKey(PREF_KEY);
         mUsiPreference.setTitle(R.string.stylus_connected_devices_title);
         // TODO(b/250909304): pending actual icon visD
-        mUsiPreference.setIcon(R.drawable.circle);
+        mUsiPreference.setIcon(R.drawable.ic_edit);
         mUsiPreference.setOnPreferenceClickListener((Preference p) -> {
             mMetricsFeatureProvider.logClickedPreference(p, mFragment.getMetricsCategory());
             launchDeviceDetails();
@@ -184,7 +177,7 @@ public class StylusDeviceUpdater implements InputManager.InputDeviceListener,
     }
 
     private boolean shouldShowUsiPreference() {
-        return isUsiConnectionValid() && !hasConnectedBluetoothStylusDevice();
+        return isUsiBatteryValid() && !hasConnectedBluetoothStylusDevice();
     }
 
     @VisibleForTesting
@@ -206,11 +199,9 @@ public class StylusDeviceUpdater implements InputManager.InputDeviceListener,
     }
 
     @VisibleForTesting
-    boolean isUsiConnectionValid() {
-        // battery listener uses uptimeMillis as its eventTime
-        long currentTime = SystemClock.uptimeMillis();
-        long usiValidityDuration = 60 * 60 * 1000; // 1 hour
-        return mLastUsiSeenTime > 0 && currentTime - usiValidityDuration <= mLastUsiSeenTime;
+    boolean isUsiBatteryValid() {
+        return mLastBatteryState != null
+                && mLastBatteryState.isPresent() && mLastBatteryState.getCapacity() > 0f;
     }
 
     private void launchDeviceDetails() {
