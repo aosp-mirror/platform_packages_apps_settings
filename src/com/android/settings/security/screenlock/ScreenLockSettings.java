@@ -107,12 +107,21 @@ public class ScreenLockSettings extends DashboardFragment
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == AUTO_PIN_SETTING_ENABLING_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                mLockPatternUtils.setAutoPinConfirm(/* enabled= */ true, MY_USER_ID);
+                onAutoPinConfirmSettingChange(/* newState= */ true);
             }
         } else if (requestCode == AUTO_PIN_SETTING_DISABLING_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                mLockPatternUtils.setAutoPinConfirm(/* enabled= */ false, MY_USER_ID);
+                onAutoPinConfirmSettingChange(/* newState= */ false);
             }
+        }
+    }
+
+    private void onAutoPinConfirmSettingChange(boolean newState) {
+        // update the auto pin confirm setting.
+        mLockPatternUtils.setAutoPinConfirm(newState, MY_USER_ID);
+        // store the pin length info to disk; If it fails, reset the setting to prev state.
+        if (!mLockPatternUtils.refreshStoredPinLength(MY_USER_ID)) {
+            mLockPatternUtils.setAutoPinConfirm(!newState, MY_USER_ID);
         }
     }
 }
