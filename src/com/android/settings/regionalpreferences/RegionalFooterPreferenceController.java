@@ -1,5 +1,5 @@
-/*
- * Copyright (C) 2022 The Android Open Source Project
+/**
+ * Copyright (C) 2023 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.localepicker;
+package com.android.settings.regionalpreferences;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,52 +24,46 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.HelpUtils;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.widget.FooterPreference;
 
 /**
- * A controller to update current locale information of application.
+ * Preference controller for regional preference footer.
  */
-public class LocaleHelperPreferenceController extends AbstractPreferenceController {
-    private static final String TAG = LocaleHelperPreferenceController.class.getSimpleName();
+public class RegionalFooterPreferenceController extends BasePreferenceController {
 
-    private static final String KEY_FOOTER_LANGUAGE_PICKER = "footer_languages_picker";
+    private static final String TAG = "RegionalFooterPreferenceController";
 
-    public LocaleHelperPreferenceController(Context context) {
-        super(context);
+    public RegionalFooterPreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_FOOTER_LANGUAGE_PICKER;
+    public int getAvailabilityStatus() {
+        return AVAILABLE_UNSEARCHABLE;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         FooterPreference footerPreference = screen.findPreference(getPreferenceKey());
-        updateFooterPreference(footerPreference);
+        setupFooterPreference(footerPreference);
     }
 
     @VisibleForTesting
-    void updateFooterPreference(FooterPreference footerPreference) {
+    void setupFooterPreference(FooterPreference footerPreference) {
         if (footerPreference != null) {
             footerPreference.setLearnMoreAction(v -> openLocaleLearnMoreLink());
             footerPreference.setLearnMoreText(mContext.getString(
-                    R.string.desc_locale_helper_footer_general));
+                    R.string.desc_regional_pref_footer_learn_more));
         }
     }
 
     private void openLocaleLearnMoreLink() {
         Intent intent = HelpUtils.getHelpIntent(
                 mContext,
-                mContext.getString(R.string.link_locale_picker_footer_learn_more),
+                mContext.getString(R.string.regional_pref_footer_learn_more_link),
                 mContext.getClass().getName());
         if (intent != null) {
             mContext.startActivity(intent);
