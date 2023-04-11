@@ -177,8 +177,10 @@
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"First day of week"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Numbers preferences"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Use app default"</string>
-    <string name="celsius_temperature_unit" msgid="6118523647432383132">"Celsius(°C)"</string>
-    <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Fahrenheit(°F)"</string>
+    <!-- no translation found for celsius_temperature_unit (8896459071273084507) -->
+    <skip />
+    <!-- no translation found for fahrenheit_temperature_unit (1118677820614569801) -->
+    <skip />
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"Sunday"</string>
     <string name="monday_first_day_of_week" msgid="7244698610476506771">"Monday"</string>
     <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"Tuesday"</string>
@@ -382,6 +384,14 @@
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Using fingerprint"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Using face or fingerprint"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_title (6041232223862753222) -->
+    <skip />
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_message (1904738532939614456) -->
+    <skip />
+    <string name="biometric_settings_add_fingerprint_in_split_mode_title" msgid="9194670722730454903">"Can’t set up fingerprint"</string>
+    <string name="biometric_settings_add_fingerprint_in_split_mode_message" msgid="6960548382076629454">"Exit split screen to set up Fingerprint Unlock"</string>
+    <!-- no translation found for biometric_settings_add_biometrics_in_split_mode_ok (564103789097253645) -->
+    <skip />
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Skip screen lock?"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"Skip anyway"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"Go back"</string>
@@ -2096,6 +2106,7 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"adjust color"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"turn screen dark, turn screen light"</string>
+    <string name="keywords_contrast" msgid="4668393735398949873">"color contrast"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="7151756353013736931">"motor, mouse"</string>
@@ -4049,7 +4060,7 @@
     <string name="credman_keywords" msgid="8305600680836806170">"data, passkey, password"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Make sure you trust this app&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; uses what\'s on your screen to determine what can be autofilled."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Turn off %1$s?"</string>
-    <string name="credman_confirmation_message" msgid="3499478570809427026">"Saved info like addresses or payment methods won\'t be filled in when you sign in. To keep your saved info filled in, set enable a password, passkey and data/or service."</string>
+    <string name="credman_confirmation_message" msgid="158362573056996762">"Saved info like passkeys and passwords may not be available when you sign in"</string>
     <string name="credman_enable_confirmation_message_title" msgid="3722566298090698004">"Turn on %1$s?"</string>
     <string name="credman_enable_confirmation_message" msgid="4466773747277583461">"Saved info like addresses or payment methods will be shared with this provider."</string>
     <string name="credman_enable_confirmation_message_positive_button" msgid="3479082692924433102">"Turn on"</string>
@@ -4534,6 +4545,7 @@
     <string name="uwb_settings_title" msgid="8578498712312002231">"Ultra-Wideband (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Helps identify the relative position of nearby devices that have UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Turn off Airplane mode to use UWB"</string>
+    <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB is unavailable in the current location"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Camera access"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Microphone access"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"For apps and services"</string>
@@ -4656,8 +4668,7 @@
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Flash the camera light or the screen when you receive notifications or when alarms sound"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Flash the screen when you receive notifications or when alarms sound"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Use flash notifications with caution if you\'re light sensitive"</string>
-    <!-- no translation found for flash_notifications_keywords (2458759275318514836) -->
-    <skip />
+    <string name="flash_notifications_keywords" msgid="2458759275318514836">"flash, light, hard of hearing, hearing loss"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"Preview"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"Camera flash"</string>
     <string name="screen_flash_notification_title" msgid="3773100725793316708">"Screen flash"</string>
@@ -4676,5 +4687,9 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Violet"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Done"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Cancel"</string>
+    <string name="contrast_title" msgid="6885768151336508075">"Contrast"</string>
+    <string name="contrast_standard" msgid="1097297089917185235">"Standard"</string>
+    <string name="contrast_medium" msgid="384414510709285811">"Medium"</string>
+    <string name="contrast_high" msgid="3988567609694797696">"High"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"This app can only be opened in 1 window"</string>
 </resources>

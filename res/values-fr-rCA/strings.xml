@@ -165,11 +165,11 @@
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Le système, les applications et les sites web utilisent la première langue prise en charge parmi vos langues préférées."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Pour sélectionner une langue pour chaque application, consultez les paramètres de langue de l\'application."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"En savoir plus sur les langages de l\'application"</string>
-    <string name="title_change_system_locale" msgid="8589844586256566951">"Modifier la langue du système à %s?"</string>
+    <string name="title_change_system_locale" msgid="8589844586256566951">"Modifier la langue pour que le système soit en %s?"</string>
     <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Vos préférences régionales et les paramètres de votre appareil seront modifiés."</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Modifier"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s non accessible"</string>
-    <string name="desc_unavailable_locale" msgid="2201756477400935896">"Cette langue ne peut pas être utilisée comme langue du système, mais vous l\'avez indiquée comme langue préférée aux applications et aux sites Web."</string>
+    <string name="desc_unavailable_locale" msgid="2201756477400935896">"Cette langue ne peut pas être utilisée comme langue du système, mais vous avez indiqué aux applications et aux sites Web qu\'il s\'agissait de votre préférence."</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Préférences régionales"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Définissez les unités et les préférences numériques"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Indiquez aux applications vos préférences régionales afin qu\'elles puissent personnaliser votre expérience."</string>
@@ -179,8 +179,10 @@
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Premier jour de la semaine"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Préférences relatives aux chiffres"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Utiliser la valeur par défaut de l\'application"</string>
-    <string name="celsius_temperature_unit" msgid="6118523647432383132">"Celsius(°C)"</string>
-    <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Fahrenheit(°F)"</string>
+    <!-- no translation found for celsius_temperature_unit (8896459071273084507) -->
+    <skip />
+    <!-- no translation found for fahrenheit_temperature_unit (1118677820614569801) -->
+    <skip />
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"Dimanche"</string>
     <string name="monday_first_day_of_week" msgid="7244698610476506771">"Lundi"</string>
     <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"Mardi"</string>
@@ -387,6 +389,14 @@
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Utilisation des empreintes digitales"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Utilisation du visage ou des empreintes digitales"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_title (6041232223862753222) -->
+    <skip />
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_message (1904738532939614456) -->
+    <skip />
+    <string name="biometric_settings_add_fingerprint_in_split_mode_title" msgid="9194670722730454903">"Impossible de configurer l\'empreinte digitale"</string>
+    <string name="biometric_settings_add_fingerprint_in_split_mode_message" msgid="6960548382076629454">"Quitter écran part. pour config. dév. empr. dig."</string>
+    <!-- no translation found for biometric_settings_add_biometrics_in_split_mode_ok (564103789097253645) -->
+    <skip />
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Ignorer verrouillage d\'écran?"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"Ignorer quand même"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"Retour"</string>
@@ -501,10 +511,8 @@
     <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"Déverrouillage automatique si vous entrez un NIP correct de six chiffres ou plus. Cette méthode est un peu moins sécuritaire que de toucher Entrée pour confirmer."</string>
     <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"Confirmation automatique du NIP correct"</string>
     <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"La confirmation de votre NIP en touchant Entrée est plus sécuritaire que la confirmation automatique"</string>
-    <!-- no translation found for auto_confirm_on_pin_verify_description (2052240431173223502) -->
-    <skip />
-    <!-- no translation found for auto_confirm_off_pin_verify_description (4256219155659760047) -->
-    <skip />
+    <string name="auto_confirm_on_pin_verify_description" msgid="2052240431173223502">"Entrez le NIP de l\'appareil pour activer la confirmation automatique"</string>
+    <string name="auto_confirm_off_pin_verify_description" msgid="4256219155659760047">"Entrez le NIP de l\'appareil pour désactiver la confirmation automatique"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"Verrouillage de l\'écran"</string>
     <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"Verrouillage du profil professionnel"</string>
     <string name="unlock_set_unlock_off_title" msgid="2831957685685921667">"Aucun"</string>
@@ -884,38 +892,22 @@
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Aide d\'autres appareils à détecter ce point d\'accès. Réduit la vitesse de connexion du point d\'accès."</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Aide d\'autres appareils à détecter ce point d\'accès. Cette fonction sollicite davantage la pile de l\'appareil."</string>
     <string name="wifi_hotspot_speed_title" msgid="8629448084180512685">"Vitesse et compatibilité"</string>
-    <!-- no translation found for wifi_hotspot_speed_summary_2g (2280013579858833466) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_summary_5g (8006841294118040080) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_summary_6g (5398769134180715191) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_5g (6471272988396018113) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_intro (6973482196363758925) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_category (5265655850463630286) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_2g (3400600834257664480) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_2g_summary (2737911775799813597) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_5g (4058116867148848395) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_5g_summary (8979160165280825325) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_2g_5g (9192756255938408285) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_2g_5g_summary (2901777498770191018) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_6g (3787697484862730500) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_6g_summary (1170553321510689693) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_summary_unavailable (7276080644693388756) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_speed_footer (8846939503916795002) -->
-    <skip />
+    <string name="wifi_hotspot_speed_summary_2g" msgid="2280013579858833466">"2,4 GHz/Tout appareil peut se connecter"</string>
+    <string name="wifi_hotspot_speed_summary_5g" msgid="8006841294118040080">"5 GHz/La plupart des appareils peuvent se connecter"</string>
+    <string name="wifi_hotspot_speed_summary_6g" msgid="5398769134180715191">"6 GHz/Peu d\'appareils peuvent se connecter"</string>
+    <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="6471272988396018113">"2,4 GHz et 5 GHz/Tout appareil peut se connecter"</string>
+    <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"Choisissez une fréquence pour votre point d\'accès sans fil. La fréquence a une incidence sur la vitesse de connexion et sur les types d\'appareils qui peuvent détecter votre point d\'accès sans fil."</string>
+    <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"Fréquence préférée"</string>
+    <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2,4 GHz"</string>
+    <string name="wifi_hotspot_speed_2g_summary" msgid="2737911775799813597">"Vitesses plus lentes. Tout appareil peut se connecter."</string>
+    <string name="wifi_hotspot_speed_5g" msgid="4058116867148848395">"5 GHz"</string>
+    <string name="wifi_hotspot_speed_5g_summary" msgid="8979160165280825325">"Vitesses rapides. La plupart des appareils peuvent se connecter."</string>
+    <string name="wifi_hotspot_speed_2g_5g" msgid="9192756255938408285">"2,4 GHz et 5 GHz"</string>
+    <string name="wifi_hotspot_speed_2g_5g_summary" msgid="2901777498770191018">"Vitesses rapides. Tout appareil peut se connecter à ce point d\'accès sans fil bibande."</string>
+    <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
+    <string name="wifi_hotspot_speed_6g_summary" msgid="1170553321510689693">"Vitesses les plus rapides. Très peu d\'appareils peuvent se connecter."</string>
+    <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"Pas offerte dans votre pays ou région"</string>
+    <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Si votre fréquence préférée n\'est pas offerte, votre point d\'accès sans fil peut en utiliser une autre. Les paramètres de sécurité du point d\'accès sans fil peuvent changer si vous modifiez la fréquence."</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Activation du point d\'accès Wi-Fi en cours…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Désactivation du point d\'accès Wi-Fi en cours…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Le partage de connexion n\'est pas pris en charge"</string>
@@ -1799,10 +1791,8 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Raccourci de l\'agrandissement"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Agrandir l\'entrée"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"La loupe suit le texte lorsque vous tapez"</string>
-    <!-- no translation found for accessibility_screen_magnification_always_on_title (3814297443759580936) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_always_on_summary (306908451430863049) -->
-    <skip />
+    <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Active lors du changement d\'applis"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"La loupe reste activée et dézoome lorsque vous changez d\'application"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Manche"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Activez et déplacez la loupe à l\'aide d\'un manche à l\'écran. Touchez et maintenez, puis faites glisser le manche pour contrôler la loupe. Touchez et faites glisser pour déplacer le manche lui-même."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"À propos de la fonctionnalité d\'agrandissement"</string>
@@ -2122,6 +2112,8 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"ajuster la couleur"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"assombrir l\'écran, éclaircir l\'écran"</string>
+    <!-- no translation found for keywords_contrast (4668393735398949873) -->
+    <skip />
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="7151756353013736931">"motricité, souris"</string>
@@ -4075,7 +4067,8 @@
     <string name="credman_keywords" msgid="8305600680836806170">"données, clé d\'accès, mot de passe"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Assurez-vous de faire confiance à cette application&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Remplissage automatique&gt;%1$s&lt;/xliff:g&gt; utilise les éléments affichés à l\'écran pour déterminer les champs qui peuvent bénéficier de l\'entrée automatique."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Désactiver %1$s?"</string>
-    <string name="credman_confirmation_message" msgid="3499478570809427026">"Lorsque vous vous connectez, les renseignements enregistrés, comme les adresses ou les modes de paiement, ne seront pas remplis. Pour que vos données enregistrées soient remplies, activez un service de mot de passe, de clé d\'accès ou de données."</string>
+    <!-- no translation found for credman_confirmation_message (158362573056996762) -->
+    <skip />
     <string name="credman_enable_confirmation_message_title" msgid="3722566298090698004">"Activer %1$s?"</string>
     <string name="credman_enable_confirmation_message" msgid="4466773747277583461">"Les renseignements enregistrés, tels que les adresses ou les modes de paiement, seront communiqués à ce fournisseur."</string>
     <string name="credman_enable_confirmation_message_positive_button" msgid="3479082692924433102">"Activer"</string>
@@ -4560,6 +4553,8 @@
     <string name="uwb_settings_title" msgid="8578498712312002231">"Bande ultralarge (BUL)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Aide à déterminer la position relative des appareils à proximité qui utilisent la connectivité à bande ultralarge"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Désactivez le mode Avion pour utiliser la connectivité à bande ultralarge"</string>
+    <!-- no translation found for uwb_settings_summary_no_uwb_regulatory (3465456428217979428) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"Accès à l\'appareil photo"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Accès au microphone"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Pour les applications et les services"</string>
@@ -4682,8 +4677,7 @@
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Faites clignoter l\'écran ou la lumière de l\'appareil photo lorsque vous recevez des notifications ou lorsque des alarmes retentissent"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"L\'écran clignote lorsque vous recevez des notifications ou lorsque des alarmes retentissent"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Utilisez les notifications par flash avec précaution si vous êtes sensible à la lumière"</string>
-    <!-- no translation found for flash_notifications_keywords (2458759275318514836) -->
-    <skip />
+    <string name="flash_notifications_keywords" msgid="2458759275318514836">"flash, lumière, malentendant, perte auditive"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"Aperçu"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"Flash de l\'appareil photo"</string>
     <string name="screen_flash_notification_title" msgid="3773100725793316708">"Flash de l\'écran"</string>
@@ -4702,5 +4696,13 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Violet"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Terminé"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Annuler"</string>
+    <!-- no translation found for contrast_title (6885768151336508075) -->
+    <skip />
+    <!-- no translation found for contrast_standard (1097297089917185235) -->
+    <skip />
+    <!-- no translation found for contrast_medium (384414510709285811) -->
+    <skip />
+    <!-- no translation found for contrast_high (3988567609694797696) -->
+    <skip />
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Cette application ne peut être ouverte que dans une seule fenêtre."</string>
 </resources>

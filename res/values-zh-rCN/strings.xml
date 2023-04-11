@@ -103,10 +103,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"您需要重启设备才能让这项设置更改生效。"</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"重启"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"取消"</string>
-    <!-- no translation found for bluetooth_disable_leaudio (8619410595945155354) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_leaudio_summary (4756307633476985470) -->
-    <skip />
+    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"停用蓝牙 LE 音频"</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"如果设备支持 LE 音频硬件功能，则停用蓝牙 LE 音频功能。"</string>
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"启用蓝牙 LE 音频许可名单"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"启用蓝牙 LE 音频许可名单功能。"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"媒体设备"</string>
@@ -179,8 +177,10 @@
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"一周的第一天"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"数字偏好设置"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"使用应用默认设置"</string>
-    <string name="celsius_temperature_unit" msgid="6118523647432383132">"摄氏度 (°C)"</string>
-    <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"华氏度 (°F)"</string>
+    <!-- no translation found for celsius_temperature_unit (8896459071273084507) -->
+    <skip />
+    <!-- no translation found for fahrenheit_temperature_unit (1118677820614569801) -->
+    <skip />
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"星期日"</string>
     <string name="monday_first_day_of_week" msgid="7244698610476506771">"星期一"</string>
     <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"星期二"</string>
@@ -265,8 +265,7 @@
     <string name="safety_center_title" msgid="7732397372178774777">"安全和隐私"</string>
     <string name="safety_center_summary" msgid="3554867379951053869">"应用安全性、设备锁定、权限"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"已添加人脸"</string>
-    <!-- no translation found for security_settings_face_preference_summary_none (523320857738436024) -->
-    <skip />
+    <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"需要设置"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"人脸解锁"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"工作用的人脸解锁"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"如何设置人脸解锁"</string>
@@ -329,8 +328,7 @@
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"工作资料指纹"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"添加指纹"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{已添加指纹}other{已添加 # 个指纹}}"</string>
-    <!-- no translation found for security_settings_fingerprint_preference_summary_none (1146977379031250790) -->
-    <skip />
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"需要设置"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"设置指纹"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"允许使用指纹解锁功能"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"使用指纹"</string>
@@ -374,8 +372,7 @@
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"已添加面孔、指纹和“<xliff:g id="WATCH">%s</xliff:g>”"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"人脸解锁和指纹解锁"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"用于工作资料的人脸解锁和指纹解锁"</string>
-    <!-- no translation found for security_settings_biometric_preference_summary_none_enrolled (213377753727694575) -->
-    <skip />
+    <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"需要设置"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"已添加面孔和多个指纹"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"已添加面孔和一个指纹"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"在设置人脸解锁和指纹解锁时，如果您戴着口罩或所在区域光线较暗，手机会要求您提供指纹"</string>
@@ -387,6 +384,14 @@
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"使用指纹"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"刷脸或使用指纹"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"确定"</string>
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_title (6041232223862753222) -->
+    <skip />
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_message (1904738532939614456) -->
+    <skip />
+    <string name="biometric_settings_add_fingerprint_in_split_mode_title" msgid="9194670722730454903">"无法设置指纹"</string>
+    <string name="biometric_settings_add_fingerprint_in_split_mode_message" msgid="6960548382076629454">"退出分屏模式才能设置“指纹解锁”功能"</string>
+    <!-- no translation found for biometric_settings_add_biometrics_in_split_mode_ok (564103789097253645) -->
+    <skip />
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"要跳过屏幕锁定设置步骤吗？"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"仍然跳过"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"返回"</string>
@@ -466,8 +471,7 @@
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"加密、凭据等"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"安全, 更多安全设置, 更多设置, 高级安全设置, security, more security settings, more settings, advanced security settings"</string>
     <string name="privacy_advanced_settings" msgid="8828215456566937719">"更多隐私设置"</string>
-    <!-- no translation found for more_security_privacy_settings (123465614090328851) -->
-    <skip />
+    <string name="more_security_privacy_settings" msgid="123465614090328851">"更多安全性和隐私权设置"</string>
     <string name="security_header" msgid="961514795852103424">"安全"</string>
     <string name="privacy_header" msgid="5526002421324257007">"隐私"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"工作资料"</string>
@@ -501,10 +505,8 @@
     <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"当您输入 6 位以上的正确 PIN 码时，设备会自动解锁。相较于通过点按 Enter 键来确认，此确认方式在安全性上稍逊色一些。"</string>
     <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"自动确认正确的 PIN 码"</string>
     <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"通过点按 Enter 键确认 PIN 码比使用自动确认功能更加安全"</string>
-    <!-- no translation found for auto_confirm_on_pin_verify_description (2052240431173223502) -->
-    <skip />
-    <!-- no translation found for auto_confirm_off_pin_verify_description (4256219155659760047) -->
-    <skip />
+    <string name="auto_confirm_on_pin_verify_description" msgid="2052240431173223502">"输入设备 PIN 码以启用自动确认功能"</string>
+    <string name="auto_confirm_off_pin_verify_description" msgid="4256219155659760047">"输入设备 PIN 码以停用自动确认功能"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"屏幕锁定"</string>
     <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"工作资料屏幕锁定方式"</string>
     <string name="unlock_set_unlock_off_title" msgid="2831957685685921667">"无"</string>
@@ -1696,8 +1698,7 @@
     <string name="modifier_keys_reset_message" msgid="5236994817619936058">"确定要将所有辅助键重置为默认设置吗？"</string>
     <string name="modifier_keys_done" msgid="8196199314913909700">"完成"</string>
     <string name="modifier_keys_cancel" msgid="7136520252570826772">"取消"</string>
-    <!-- no translation found for modifier_keys_reset (551170906710422041) -->
-    <skip />
+    <string name="modifier_keys_reset" msgid="551170906710422041">"重置"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"选择辅助键"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"为<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>选择新的辅助键："</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"默认"</string>
@@ -1784,10 +1785,8 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"放大功能快捷方式"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"输入时使用放大功能"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"输入时放大镜跟随文字移动"</string>
-    <!-- no translation found for accessibility_screen_magnification_always_on_title (3814297443759580936) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_always_on_summary (306908451430863049) -->
-    <skip />
+    <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"切换应用时保持开启"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"切换应用时，放大镜会保持开启并呈现放大效果"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"操纵杆"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"使用屏幕上的操纵杆激活和移动放大器。点按并按住，然后在操纵杆上拖动即可控制放大器。点按并拖动即可移动操纵杆自身。"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"关于放大功能"</string>
@@ -1965,8 +1964,7 @@
     <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"您还可以将“极暗”功能添加到屏幕顶部的“快捷设置”中"</string>
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"“单手模式”已添加到“快捷设置”中。向下滑动即可随时开启或关闭此功能。"</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"您还可以将“单手模式”添加到屏幕顶部的“快捷设置”中"</string>
-    <!-- no translation found for accessibility_font_scaling_auto_added_qs_tooltip_content (7229921960884718332) -->
-    <skip />
+    <string name="accessibility_font_scaling_auto_added_qs_tooltip_content" msgid="7229921960884718332">"字体大小已添加到“快捷设置”中。向下滑动即可随时更改字体大小。"</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"关闭"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"使用色彩校正"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"色彩校正快捷方式"</string>
@@ -2013,7 +2011,7 @@
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"查看更多设备"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"音频调整"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"语音描述"</string>
-    <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"听取有关当前屏幕画面内容的语音说明（仅限支持该设置的电影或电视节目）"</string>
+    <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"以语音的形式描述当前画面呈现的内容（仅限支持该设置的电影或电视节目）"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"语音描述, 语音, 描述, 弱视, audio description, audio, description, low vision,"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"快捷方式已开启"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"已关闭"</string>
@@ -2108,6 +2106,7 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"调整颜色, adjust color"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"调暗屏幕, 调亮屏幕, turn screen dark, turn screen light"</string>
+    <string name="keywords_contrast" msgid="4668393735398949873">"色彩对比度"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="7151756353013736931">"电机, 鼠标, motor, mouse"</string>
@@ -2962,7 +2961,7 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"铃声和通知音量"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"铃声音量"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"通知音量"</string>
-    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"该功能无法使用，因为铃声被静音"</string>
+    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"铃声已被静音，因此无法调整"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"手机铃声"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"默认通知提示音"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"应用提供的提示音"</string>
@@ -4061,7 +4060,8 @@
     <string name="credman_keywords" msgid="8305600680836806170">"数据, 通行密钥, 密码, data, passkey, password"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;请确认这是您信任的应用&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt;会根据您的屏幕内容判断可自动填充哪些内容。"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"要关闭%1$s吗？"</string>
-    <string name="credman_confirmation_message" msgid="3499478570809427026">"当您登录时，系统不会填充地址或付款方式等已保存的信息。若要让系统填充已保存的信息，请设置并启用密码、通行密钥和数据服务。"</string>
+    <!-- no translation found for credman_confirmation_message (158362573056996762) -->
+    <skip />
     <string name="credman_enable_confirmation_message_title" msgid="3722566298090698004">"要开启%1$s吗？"</string>
     <string name="credman_enable_confirmation_message" msgid="4466773747277583461">"系统会将地址或付款方式等已保存的信息分享给此提供商。"</string>
     <string name="credman_enable_confirmation_message_positive_button" msgid="3479082692924433102">"开启"</string>
@@ -4362,8 +4362,8 @@
     <string name="development_memtag_reboot_message_on" msgid="8100075676107327847">"您需要重启设备，才能开启 MTE。"</string>
     <string name="development_memtag_reboot_message_off" msgid="3703925647922079456">"您需要重启设备，才能关闭 MTE。"</string>
     <string name="reboot_with_mte_title" msgid="2320125810211279">"针对单个会话启用 MTE"</string>
-    <string name="reboot_with_mte_message" msgid="1232881567956207641">"系统将重启并允许尝试内存标记扩展 (MTE)。MTE 可能会对系统性能和稳定性产生负面影响。将在下一次重新启动时重置。"</string>
-    <string name="reboot_with_mte_summary" msgid="3896537791216432882">"针对启用了 MTE 的单个会话重启"</string>
+    <string name="reboot_with_mte_message" msgid="1232881567956207641">"系统将重启并允许尝试内存标记扩展 (MTE)。MTE 可能会导致系统性能和稳定性下降。在系统下一次重新启动时，此设置会被重置。"</string>
+    <string name="reboot_with_mte_summary" msgid="3896537791216432882">"重启设备，以便为单个会话启用 MTE"</string>
     <string name="reboot_with_mte_already_enabled" msgid="4439168867613407167">"MTE 已启用"</string>
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"正在捕获系统堆转储数据"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"无法捕获系统堆转储数据"</string>
@@ -4546,6 +4546,8 @@
     <string name="uwb_settings_title" msgid="8578498712312002231">"超宽带 (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"有助于确定附近支持超宽带 (UWB) 的设备的相对位置"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"会关闭飞行模式，以使用超宽带 (UWB)"</string>
+    <!-- no translation found for uwb_settings_summary_no_uwb_regulatory (3465456428217979428) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"摄像头使用权限"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"麦克风使用权限"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"会影响应用和服务"</string>
@@ -4666,11 +4668,9 @@
     <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"已开启 / 屏幕闪烁"</string>
     <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"已开启 / 相机闪光灯和屏幕闪烁"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"收到通知或闹钟响铃时，闪烁相机闪光灯或屏幕"</string>
-    <!-- no translation found for flash_notifications_intro_without_camera_flash (6297337174487793891) -->
-    <skip />
+    <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"收到通知或闹钟响铃时闪烁屏幕"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"如果您对光敏感，请谨慎使用闪烁通知功能"</string>
-    <!-- no translation found for flash_notifications_keywords (2458759275318514836) -->
-    <skip />
+    <string name="flash_notifications_keywords" msgid="2458759275318514836">"闪烁, 灯光, 听障, 听力受损, flash, light, hard of hearing, hearing loss"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"预览"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"相机闪光灯"</string>
     <string name="screen_flash_notification_title" msgid="3773100725793316708">"屏幕闪烁"</string>
@@ -4689,5 +4689,9 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"紫色"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"完成"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"取消"</string>
+    <string name="contrast_title" msgid="6885768151336508075">"对比度"</string>
+    <string name="contrast_standard" msgid="1097297089917185235">"标准"</string>
+    <string name="contrast_medium" msgid="384414510709285811">"中"</string>
+    <string name="contrast_high" msgid="3988567609694797696">"高"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"此应用只能在 1 个窗口中打开"</string>
 </resources>
