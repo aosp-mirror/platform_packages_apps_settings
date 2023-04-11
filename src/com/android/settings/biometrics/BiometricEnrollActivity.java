@@ -22,6 +22,8 @@ import static android.provider.Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_CONSENT_DENIED;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_CONSENT_GRANTED;
 
+import static com.google.android.setupdesign.transition.TransitionHelper.TRANSITION_FADE_THROUGH;
+
 import android.annotation.NonNull;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
@@ -55,6 +57,7 @@ import com.android.settings.password.ChooseLockPattern;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.transition.TransitionHelper;
 
 import java.util.List;
 
@@ -132,6 +135,11 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
             if (BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
                 mGkPwHandle = BiometricUtils.getGatekeeperPasswordHandle(getIntent());
             }
+        } else if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            if (BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
+                mGkPwHandle = BiometricUtils.getGatekeeperPasswordHandle(getIntent());
+            }
+
         }
 
         if (savedInstanceState != null) {
@@ -457,6 +465,9 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 final boolean isOk =
                         isSuccessfulConfirmOrChooseCredential(requestCode, resultCode);
                 if (isOk && (mHasFeatureFace || mHasFeatureFingerprint)) {
+                    // Apply forward animation during the transition from ChooseLock/ConfirmLock to
+                    // SetupFingerprintEnrollIntroduction/FingerprintEnrollmentActivity
+                    TransitionHelper.applyForwardTransition(this, TRANSITION_FADE_THROUGH);
                     updateGatekeeperPasswordHandle(data);
                     if (mHasFeatureFingerprint) {
                         launchFingerprintOnlyEnroll();
@@ -473,6 +484,10 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 mIsSingleEnrolling = false;
                 if ((resultCode == BiometricEnrollBase.RESULT_SKIP
                         || resultCode == BiometricEnrollBase.RESULT_FINISHED) && mHasFeatureFace) {
+                    // Apply forward animation during the transition from
+                    // SetupFingerprintEnroll*/FingerprintEnrollmentActivity to
+                    // SetupFaceEnrollIntroduction
+                    TransitionHelper.applyForwardTransition(this, TRANSITION_FADE_THROUGH);
                     launchFaceOnlyEnroll();
                 } else {
                     finishOrLaunchHandToParent(resultCode);

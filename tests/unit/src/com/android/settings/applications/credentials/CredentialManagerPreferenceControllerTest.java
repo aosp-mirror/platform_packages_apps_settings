@@ -33,9 +33,11 @@ import android.content.pm.ServiceInfo;
 import android.credentials.CredentialProviderInfo;
 import android.net.Uri;
 import android.os.Looper;
+import android.os.UserHandle;
 import android.provider.Settings;
 
 import androidx.lifecycle.Lifecycle;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -121,11 +123,42 @@ public class CredentialManagerPreferenceControllerTest {
     }
 
     @Test
-    public void displayPreference_noServices_noPreferencesAdded() {
+    public void displayPreference_noServices_noPreferencesAdded_useAutofillUri() {
+        Settings.Secure.putStringForUser(
+                mContext.getContentResolver(),
+                Settings.Secure.AUTOFILL_SERVICE_SEARCH_URI,
+                "test",
+                UserHandle.myUserId());
+
         CredentialManagerPreferenceController controller =
                 createControllerWithServices(Collections.emptyList());
         controller.displayPreference(mScreen);
-        assertThat(mCredentialsPreferenceCategory.getPreferenceCount()).isEqualTo(0);
+        assertThat(mCredentialsPreferenceCategory.getPreferenceCount()).isEqualTo(1);
+
+        Preference pref = mCredentialsPreferenceCategory.getPreference(0);
+        assertThat(pref.getTitle()).isEqualTo("Add service");
+
+        assertThat(controller.getAddServiceUri(mContext)).isEqualTo("test");
+    }
+
+    @Test
+    public void displayPreference_noServices_noPreferencesAdded_useCredManUri() {
+        Settings.Secure.putStringForUser(
+                mContext.getContentResolver(),
+                Settings.Secure.AUTOFILL_SERVICE_SEARCH_URI,
+                "test",
+                UserHandle.myUserId());
+
+        CredentialManagerPreferenceController controller =
+                createControllerWithServicesAndAddServiceOverride(
+                        Collections.emptyList(), "credman");
+        controller.displayPreference(mScreen);
+        assertThat(mCredentialsPreferenceCategory.getPreferenceCount()).isEqualTo(1);
+
+        Preference pref = mCredentialsPreferenceCategory.getPreference(0);
+        assertThat(pref.getTitle()).isEqualTo("Add service");
+
+        assertThat(controller.getAddServiceUri(mContext)).isEqualTo("credman");
     }
 
     @Test
@@ -135,6 +168,9 @@ public class CredentialManagerPreferenceControllerTest {
         controller.displayPreference(mScreen);
         assertThat(controller.isConnected()).isFalse();
         assertThat(mCredentialsPreferenceCategory.getPreferenceCount()).isEqualTo(1);
+
+        Preference pref = mCredentialsPreferenceCategory.getPreference(0);
+        assertThat(pref.getTitle()).isNotEqualTo("Add account");
     }
 
     @Test
@@ -317,7 +353,8 @@ public class CredentialManagerPreferenceControllerTest {
 
         Map<String, SwitchPreference> prefs =
                 controller.buildPreferenceList(mContext, mCredentialsPreferenceCategory);
-        assertThat(prefs.keySet()).containsExactly(TEST_PACKAGE_NAME_A, TEST_PACKAGE_NAME_B, TEST_PACKAGE_NAME_C);
+        assertThat(prefs.keySet())
+                .containsExactly(TEST_PACKAGE_NAME_A, TEST_PACKAGE_NAME_B, TEST_PACKAGE_NAME_C);
         assertThat(prefs.size()).isEqualTo(3);
         assertThat(prefs.containsKey(TEST_PACKAGE_NAME_A)).isTrue();
         assertThat(prefs.get(TEST_PACKAGE_NAME_A).getTitle()).isEqualTo(TEST_TITLE_APP_A);
@@ -439,10 +476,15 @@ public class CredentialManagerPreferenceControllerTest {
 
     private CredentialManagerPreferenceController createControllerWithServices(
             List<CredentialProviderInfo> availableServices) {
+        return createControllerWithServicesAndAddServiceOverride(availableServices, null);
+    }
+
+    private CredentialManagerPreferenceController createControllerWithServicesAndAddServiceOverride(
+            List<CredentialProviderInfo> availableServices, String addServiceOverride) {
         CredentialManagerPreferenceController controller =
                 new CredentialManagerPreferenceController(
                         mContext, mCredentialsPreferenceCategory.getKey());
-        controller.setAvailableServices(() -> mock(Lifecycle.class), availableServices);
+        controller.setAvailableServices(() -> mock(Lifecycle.class), availableServices, addServiceOverride);
         controller.setDelegate(mDelegate);
         return controller;
     }

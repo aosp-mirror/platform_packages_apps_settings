@@ -235,12 +235,15 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     .setRemoteLockscreenValidationSession(remoteLockscreenValidationSession)
                     .setRemoteLockscreenValidationServiceComponent(
                             remoteLockscreenValidationServiceComponent)
+                    .setRequestGatekeeperPasswordHandle(true)
+                    .setReturnCredentials(true) // returns only password handle.
                     .setHeader(mTitle) // Show the title in the header location
                     .setDescription(mDetails)
                     .setCheckboxLabel(checkboxLabel)
                     .setAlternateButton(alternateButton)
                     .setExternal(true)
                     .show();
+            return;
         } else if (isEffectiveUserManagedProfile && isInternalActivity()) {
             mCredentialMode = CREDENTIAL_MANAGED;
             if (isBiometricAllowed(effectiveUserId, mUserId)) {

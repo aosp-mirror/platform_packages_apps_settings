@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.batteryusage;
 
 import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.getEffectivePackageName;
-import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.utcToLocalTime;
 
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
@@ -96,6 +95,14 @@ public final class DataProcessor {
     static final int SELECTED_INDEX_ALL = BatteryChartViewModel.SELECTED_INDEX_ALL;
 
     @VisibleForTesting
+    static final Comparator<AppUsageEvent> APP_USAGE_EVENT_TIMESTAMP_COMPARATOR =
+            Comparator.comparing(AppUsageEvent::getTimestamp);
+
+    @VisibleForTesting
+    static final Comparator<BatteryEvent> BATTERY_EVENT_TIMESTAMP_COMPARATOR =
+            Comparator.comparing(BatteryEvent::getTimestamp);
+
+    @VisibleForTesting
     static boolean sDebug = false;
 
     @VisibleForTesting
@@ -111,8 +118,6 @@ public final class DataProcessor {
 
     public static final String CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER =
             "CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER";
-    public static final Comparator<AppUsageEvent> TIMESTAMP_COMPARATOR =
-            Comparator.comparing(AppUsageEvent::getTimestamp);
 
     /** A callback listener when battery usage loading async task is executed. */
     public interface UsageMapAsyncResponse {
@@ -267,14 +272,16 @@ public final class DataProcessor {
             generateAppUsagePeriodMap(
                     final long rawStartTimestamp,
                     final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay,
-                    final List<AppUsageEvent> appUsageEventList) {
+                    final List<AppUsageEvent> appUsageEventList,
+                    final List<BatteryEvent> batteryEventList) {
         if (appUsageEventList.isEmpty()) {
             Log.w(TAG, "appUsageEventList is empty");
             return null;
         }
-        // Sorts the appUsageEventList in ascending order based on the timestamp before
-        // distribution.
-        Collections.sort(appUsageEventList, TIMESTAMP_COMPARATOR);
+        // Sorts the appUsageEventList and batteryEventList in ascending order based on the
+        // timestamp before distribution.
+        Collections.sort(appUsageEventList, APP_USAGE_EVENT_TIMESTAMP_COMPARATOR);
+        Collections.sort(batteryEventList, BATTERY_EVENT_TIMESTAMP_COMPARATOR);
         final Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>> resultMap =
                 new ArrayMap<>();
 
@@ -310,8 +317,8 @@ public final class DataProcessor {
                 // The value could be null when there is no data in the hourly slot.
                 dailyMap.put(
                         hourlyIndex,
-                        buildAppUsagePeriodList(
-                                hourlyAppUsageEventList, startTimestamp, endTimestamp));
+                        buildAppUsagePeriodList(hourlyAppUsageEventList, batteryEventList,
+                                startTimestamp, endTimestamp));
             }
         }
         return resultMap;
@@ -718,7 +725,8 @@ public final class DataProcessor {
     @VisibleForTesting
     @Nullable
     static Map<Long, Map<String, List<AppUsagePeriod>>> buildAppUsagePeriodList(
-            final List<AppUsageEvent> allAppUsageEvents, final long startTime, final long endTime) {
+            final List<AppUsageEvent> allAppUsageEvents, final List<BatteryEvent> batteryEventList,
+            final long startTime, final long endTime) {
         if (allAppUsageEvents.isEmpty()) {
             return null;
         }
@@ -764,12 +772,14 @@ public final class DataProcessor {
             usageEvents.addAll(deviceEvents);
             // Sorts the usageEvents in ascending order based on the timestamp before computing the
             // period.
-            Collections.sort(usageEvents, TIMESTAMP_COMPARATOR);
+            Collections.sort(usageEvents, APP_USAGE_EVENT_TIMESTAMP_COMPARATOR);
 
             // A package might have multiple instances. Computes the usage period per instance id
             // and then merges them into the same user-package map.
             final List<AppUsagePeriod> usagePeriodList =
-                    buildAppUsagePeriodListPerInstance(usageEvents, startTime, endTime);
+                    excludePowerConnectedTimeFromAppUsagePeriodList(
+                            buildAppUsagePeriodListPerInstance(usageEvents, startTime, endTime),
+                            batteryEventList);
             if (!usagePeriodList.isEmpty()) {
                 addToUsagePeriodMap(allUsagePeriods, usagePeriodList, eventUserId, packageName);
             }
@@ -835,6 +845,53 @@ public final class DataProcessor {
             pendingUsagePeriod.clear();
         }
         return usagePeriodList;
+    }
+
+    @VisibleForTesting
+    static List<AppUsagePeriod> excludePowerConnectedTimeFromAppUsagePeriodList(
+            final List<AppUsagePeriod> usagePeriodList,
+            final List<BatteryEvent> batteryEventList) {
+        final List<AppUsagePeriod> resultList = new ArrayList<>();
+        for (AppUsagePeriod inputPeriod : usagePeriodList) {
+            long lastStartTime = inputPeriod.getStartTime();
+            for (BatteryEvent batteryEvent : batteryEventList) {
+                if (batteryEvent.getTimestamp() < inputPeriod.getStartTime()) {
+                    // Because the batteryEventList has been sorted, here is to mark the power
+                    // connection state when the usage period starts. If power is connected when
+                    // the usage period starts, the starting period will be ignored; otherwise it
+                    // will be added.
+                    if (batteryEvent.getType() == BatteryEventType.POWER_CONNECTED) {
+                        lastStartTime = 0;
+                    } else if (batteryEvent.getType() == BatteryEventType.POWER_DISCONNECTED) {
+                        lastStartTime = inputPeriod.getStartTime();
+                    }
+                    continue;
+                }
+                if (batteryEvent.getTimestamp() > inputPeriod.getEndTime()) {
+                    // Because the batteryEventList has been sorted, if any event is already after
+                    // the end time, all the following events should be able to drop directly.
+                    break;
+                }
+
+                if (batteryEvent.getType() == BatteryEventType.POWER_CONNECTED
+                        && lastStartTime != 0) {
+                    resultList.add(AppUsagePeriod.newBuilder()
+                            .setStartTime(lastStartTime)
+                            .setEndTime(batteryEvent.getTimestamp())
+                            .build());
+                    lastStartTime = 0;
+                } else if (batteryEvent.getType() == BatteryEventType.POWER_DISCONNECTED) {
+                    lastStartTime = batteryEvent.getTimestamp();
+                }
+            }
+            if (lastStartTime != 0) {
+                resultList.add(AppUsagePeriod.newBuilder()
+                        .setStartTime(lastStartTime)
+                        .setEndTime(inputPeriod.getEndTime())
+                        .build());
+            }
+        }
+        return resultList;
     }
 
     @VisibleForTesting
@@ -1357,7 +1414,7 @@ public final class DataProcessor {
         final Map<String, BatteryHistEntry> entryMap = processedBatteryHistoryMap.get(timestamp);
         if (entryMap == null || entryMap.isEmpty()) {
             Log.e(TAG, "abnormal entry list in the timestamp:"
-                    + utcToLocalTime(context, timestamp));
+                    + ConvertUtils.utcToLocalTimeForLogging(timestamp));
             return null;
         }
         // The current time battery history hasn't been loaded yet, returns the current battery
@@ -1934,7 +1991,7 @@ public final class DataProcessor {
             final BatteryHistEntry entry) {
         if (sDebug) {
             Log.d(TAG, String.format(entry != null ? "%s %s:\n%s" : "%s %s:%s",
-                    utcToLocalTime(context, timestamp), content, entry));
+                    ConvertUtils.utcToLocalTimeForLogging(timestamp), content, entry));
         }
     }
 }

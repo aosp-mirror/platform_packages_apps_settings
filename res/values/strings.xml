@@ -221,10 +221,10 @@
     <!-- UI debug setting: Disable Bluetooth hardware offload [CHAR LIMIT=none] -->
     <string name="bluetooth_disable_hw_offload_dialog_cancel">Cancel</string>
 
-    <!-- Setting Checkbox title for enabling Bluetooth LE Audio feature. [CHAR LIMIT=40] -->
-    <string name="bluetooth_enable_leaudio">Enable Bluetooth LE audio</string>
-    <!-- Summary of checkbox for enabling Bluetooth LE audio [CHAR LIMIT=none]-->
-    <string name="bluetooth_enable_leaudio_summary">Enables Bluetooth LE audio feature if the device supports LE audio hardware capabilities.</string>
+    <!-- Setting Checkbox title for disabling Bluetooth LE Audio feature. [CHAR LIMIT=40] -->
+    <string name="bluetooth_disable_leaudio">Disable Bluetooth LE audio</string>
+    <!-- Summary of checkbox for disabling Bluetooth LE audio [CHAR LIMIT=none]-->
+    <string name="bluetooth_disable_leaudio_summary">Disables Bluetooth LE audio feature if the device supports LE audio hardware capabilities.</string>
 
     <!-- Setting Checkbox title for enabling Bluetooth LE Audio Allow List. [CHAR LIMIT=none] -->
     <string name="bluetooth_enable_leaudio_allow_list">Enable Bluetooth LE audio Allow List</string>
@@ -370,7 +370,7 @@
     <string name="desc_notice_of_language_picker">To select a language for each app, go to app language settings.</string>
 
     <!-- Title for locale helper page [CHAR LIMIT=NONE] -->
-    <string name="desc_locale_helper_footer_general">Learn more about languages</string>
+    <string name="desc_locale_helper_footer_general">Learn more about app languages</string>
 
     <!-- Link for Locale helper page. [CHAR LIMIT=NONE]-->
     <string name="link_locale_picker_footer_learn_more" translatable="false">https://support.google.com/android?p=per_language_app_settings</string>
@@ -621,7 +621,7 @@
     <!-- Message shown in summary field when face unlock is set up. [CHAR LIMIT=40] -->
     <string name="security_settings_face_preference_summary">Face added</string>
     <!-- Message shown in summary field when Face Unlock is not set up. [CHAR LIMIT=54] -->
-    <string name="security_settings_face_preference_summary_none">Tap to set up face</string>
+    <string name="security_settings_face_preference_summary_none">Setup needed</string>
     <!-- Title shown for menu item that launches face settings or enrollment. [CHAR LIMIT=32] -->
     <string name="security_settings_face_preference_title">Face Unlock</string>
     <!-- Title shown for menu item that launches face settings or enrollment, for work profile [CHAR LIMIT=50] -->
@@ -729,11 +729,7 @@
     <string name="security_settings_face_settings_remove_face_model">Delete face model</string>
     <!-- Button text in face settings which lets the user enroll their face [CHAR LIMIT=40] -->
     <string name="security_settings_face_settings_enroll">Set up Face Unlock</string>
-    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_footer">Use your face to unlock your phone or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
-    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_footer_attention_not_supported">Use your face to unlock your phone or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
-    <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
+   <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
     <string name="security_settings_face_settings_remove_dialog_title">Delete face model?</string>
     <!-- Dialog contents shown when the user removes an enrollment [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_remove_dialog_details">Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your PIN, pattern, or password to unlock your phone or for authentication in apps.</string>
@@ -758,7 +754,7 @@
       other   {# fingerprints added}
     }</string>
     <!-- message shown in summary field when no fingerprints are registered -->
-    <string name="security_settings_fingerprint_preference_summary_none"></string>
+    <string name="security_settings_fingerprint_preference_summary_none">Setup needed</string>
     <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_introduction_title">Set up your fingerprint</string>
     <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
@@ -852,7 +848,7 @@
     <!-- Title shown for work menu item that launches biometric settings. [CHAR LIMIT=66] -->
     <string name="security_settings_work_biometric_preference_title">Face &amp; Fingerprint Unlock for work</string>
     <!-- Message shown in summary field of biometric settings. [CHAR LIMIT=66] -->
-    <string name="security_settings_biometric_preference_summary_none_enrolled">Tap to set up</string>
+    <string name="security_settings_biometric_preference_summary_none_enrolled">Setup needed</string>
     <!-- Message shown in summary field of biometric settings when face is enrolled, and multiple fingerprints are enrolled. [CHAR LIMIT=66]-->
     <string name="security_settings_biometric_preference_summary_both_fp_multiple">Face and fingerprints added</string>
     <!-- Message shown in summary field of biometric settings when face is enrolled, and a single fingerprintis enrolled. [CHAR LIMIT=66]-->
@@ -875,6 +871,12 @@
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary">Using face or fingerprint</string>
     <!-- Button text shown during enrollment to proceed after a child user has handed the device to a parent or guardian. [CHAR LIMIT=22] -->
     <string name="biometric_settings_hand_back_to_guardian_ok">OK</string>
+    <!-- Dialog title for dialog which shows when trying to add fingerprint in split mode. [CHAR LIMIT=45] -->
+    <string name="biometric_settings_add_fingerprint_in_split_mode_title">Can\u2019t set up fingerprint</string>
+    <!-- Dialog message for dialog which shows when trying to add fingerprint in split mode. [CHAR LIMIT=45] -->
+    <string name="biometric_settings_add_fingerprint_in_split_mode_message">Exit split screen to set up Fingerprint Unlock</string>
+    <!-- Button text shown in adding fingerprint dialog that allows the user to go back to the settings page [CHAR LIMIT=22] -->
+    <string name="biometric_settings_add_fingerprint_in_split_mode_ok">OK</string>
 
     <!-- Title of dialog shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
     <string name="lock_screen_intro_skip_title">Skip screen lock?</string>
@@ -1036,13 +1038,13 @@
     <!-- Title for the section that has additional privacy settings. [CHAR LIMIT=60] -->
     <string name="privacy_advanced_settings">More privacy settings</string>
 
-    <!-- Title for the subpage in the "Security & privacy". This page consists of the more security and privacy settings. Can be navigated by Settings -> Security & privacy -> More Settings [CHAR LIMIT=NONE] -->
-    <string name="more_security_privacy_settings">More settings</string>
-    <!-- Title for the section that has security entries in the More Settings page. [CHAR LIMIT=60] -->
+    <!-- Title for the subpage in the "Security & privacy". This page consists of the more security and privacy settings. Can be navigated by Settings -> Security & privacy -> More security & privacy [CHAR LIMIT=NONE] -->
+    <string name="more_security_privacy_settings">More security &amp; privacy</string>
+    <!-- Title for the section that has security entries in the More security & privacy page. [CHAR LIMIT=60] -->
     <string name="security_header">Security</string>
-    <!-- Title for the section that has privacy entries in the More Settings page. [CHAR LIMIT=60] -->
+    <!-- Title for the section that has privacy entries in the More security & privacy page. [CHAR LIMIT=60] -->
     <string name="privacy_header">Privacy</string>
-    <!-- Title for the section that has work profile entries in the More Settings page. [CHAR LIMIT=60] -->
+    <!-- Title for the section that has work profile entries in the More security & privacy page. [CHAR LIMIT=60] -->
     <string name="work_profile_category_header">Work profile</string>
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
@@ -1126,6 +1128,10 @@
     <string name="auto_pin_confirm_user_message">Auto-confirm correct PIN</string>
     <!-- Message shown to explain the security concern if a user opts-in to the auto-pin feature. [CHAR LIMIT=NONE] -->
     <string name="auto_pin_confirm_opt_in_security_message">Confirming your PIN by tapping Enter is more secure than using auto-confirm</string>
+    <!-- Description of pin confirmation screen when auto confirm setting is turned on. [CHAR LIMIT=NONE] -->
+    <string name="auto_confirm_on_pin_verify_description">Enter device PIN to enable auto-confirm</string>
+    <!-- Description of pin confirmation screen when auto confirm setting is turned off. [CHAR LIMIT=NONE] -->
+    <string name="auto_confirm_off_pin_verify_description">Enter device PIN to disable auto-confirm</string>
 
     <!--  Main Security lock settings --><skip />
     <!--  Title for PreferenceScreen to launch picker for security method when there is none [CHAR LIMIT=22] -->
@@ -2020,13 +2026,37 @@
     <!-- Title for Wifi hotspot speed [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_speed_title">Speed &amp; compatibility</string>
     <!-- Summary for Wifi hotspot speed to 2.4 GHz band [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_speed_2g_summary">2.4 GHz / Any device can connect</string>
+    <string name="wifi_hotspot_speed_summary_2g">2.4 GHz / Any device can connect</string>
     <!-- Summary for Wifi hotspot speed to 5 GHz band [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_speed_5g_summary">5 GHz / Most devices can connect</string>
+    <string name="wifi_hotspot_speed_summary_5g">5 GHz / Most devices can connect</string>
     <!-- Summary for Wifi hotspot speed to 6 GHz band [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_speed_6g_summary">6 GHz / Few devices can connect</string>
+    <string name="wifi_hotspot_speed_summary_6g">6 GHz / Few devices can connect</string>
     <!-- Summary for Wifi hotspot speed to 6 GHz band [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_speed_2g_and_5g_summary">2.4 and 5 GHz / Any device can connect</string>
+    <string name="wifi_hotspot_speed_summary_2g_and_5g">2.4 and 5 GHz / Any device can connect</string>
+    <!-- Top introduction on the Wi-Fi hotspot speed settings, summarizes options available for Wi-Fi hotspot bands. [CHAR LIMIT=NONE] -->
+    <string name="wifi_hotspot_speed_intro">Choose a frequency for your hotspot. The frequency affects the connection speed and what types of devices can find your hotspot.</string>
+    <!-- Category title on the radio button of the Wi-Fi hotspot speed. [CHAR LIMIT=NONE] -->
+    <string name="wifi_hotspot_speed_category">Preferred frequency</string>
+    <!-- Title for radio button of the Wi-Fi hotspot speed to 2.4 GHz band [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_speed_2g">2.4 GHz</string>
+    <!-- Summary for radio button of the Wi-Fi hotspot speed to 2.4 GHz band [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_speed_2g_summary">Slower speeds. Any device can connect.</string>
+    <!-- Title for radio button of the Wi-Fi hotspot speed to 5 GHz band [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_speed_5g">5 GHz</string>
+    <!-- Summary for radio button of the Wi-Fi hotspot speed to 5 GHz band [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_speed_5g_summary">Fast speeds. Most devices can connect.</string>
+    <!-- Title for radio button of the Wi-Fi hotspot speed to 2.4 GHz and 5 GHz bands [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_speed_2g_5g">2.4 and 5 GHz</string>
+    <!-- Summary for radio button of the Wi-Fi hotspot speed to 2.4 GHz and 5 GHz bands [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_speed_2g_5g_summary">Fast speeds. Any device can connect to this dual-band hotspot.</string>
+    <!-- Title for radio button of the Wi-Fi hotspot speed to 6 GHz band [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_speed_6g">6 GHz</string>
+    <!-- Summary for radio button of the Wi-Fi hotspot speed to 6 GHz band [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_speed_6g_summary">Fastest speeds. Fewest devices can connect.</string>
+    <!-- Summary for the Wi-Fi hotspot speed unavailable [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_speed_summary_unavailable">Not available in your country or region</string>
+    <!-- The footer message for switch screen resolution [CHAR LIMIT=NONE] -->
+    <string name="wifi_hotspot_speed_footer">If your preferred frequency isn\u0027t available, your hotspot may use a different one. Hotspot security settings may change if you change the frequency.</string>
 
     <!-- Summary text when turning hotspot on -->
     <string name="wifi_tether_starting">Turning hotspot on\u2026</string>
@@ -3984,7 +4014,7 @@
     <!-- Text of the cancel button. [CHAR LIMIT=15] -->
     <string name="modifier_keys_cancel">Cancel</string>
     <!-- Text of the restore button. [CHAR LIMIT=15] -->
-    <string name="modifier_keys_restore">Restore</string>
+    <string name="modifier_keys_reset">Reset</string>
     <!-- Title for the modifier key picker dialog page [CHAR LIMIT=35] -->
     <string name="modifier_keys_picker_title">Choose modifier key</string>
     <!-- Summary for the modifier key picker dialog page [CHAR LIMIT=35] -->
@@ -4186,10 +4216,10 @@
     <string name="accessibility_screen_magnification_follow_typing_title">Magnify typing</string>
     <!-- Summary for accessibility follow typing preference for magnification. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_follow_typing_summary">Magnifier follows text as you type</string>
-    <!-- Title for accessibility magnifier preference where the magnifier never turns off on its own. [CHAR LIMIT=35] -->
-    <string name="accessibility_screen_magnification_always_on_title">Always On</string>
-    <!-- Summary for accessibility magnifier preference where the magnifier never turns off on its own. [CHAR LIMIT=none] -->
-    <string name="accessibility_screen_magnification_always_on_summary">Instead of deactivating magnification when changing apps, it simply zooms out to normal size. Pinch to zoom back in whenever you want.</string>
+    <!-- Title for accessibility magnifier preference where the magnifier never turns off while switching apps. [CHAR LIMIT=35] -->
+    <string name="accessibility_screen_magnification_always_on_title">Keep on while switching apps</string>
+    <!-- Summary for accessibility magnifier preference where the magnifier never turns off while switching apps. [CHAR LIMIT=none] -->
+    <string name="accessibility_screen_magnification_always_on_summary">Magnifier stays on and zooms out when you switch apps</string>
     <!-- Title for accessibility on-screen joystick controller preference that controls magnification position. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_magnification_joystick_title">Joystick</string>
     <!-- Summary for accessibility on-screen joystick controller preference that controls magnification position. [CHAR LIMIT=none] -->
@@ -4571,6 +4601,8 @@
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content">One-handed mode added to Quick Settings. Swipe down to turn it on or off anytime.</string>
     <!-- Used in the One-hand mode settings to show quick settings tooltip. [CHAR LIMIT=NONE] -->
     <string name="accessibility_one_handed_mode_qs_tooltip_content">You can also add one-handed mode to Quick Settings from the top of your screen</string>
+    <!-- Used in the font size settings to show quick settings tooltip for auto-added feature. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_font_scaling_auto_added_qs_tooltip_content">Font size added to Quick Settings. Swipe down to change the font size anytime.</string>
     <!-- Used in the accessibility action for accessibility quick settings tooltip to dismiss. [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_tooltip_dismiss">Dismiss</string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely [CHAR LIMIT=60] -->
@@ -4914,6 +4946,8 @@
     <string name="keywords_color_correction">adjust color </string>
     <!-- List of synonyms used in the settings search bar to find the “Color inversion”. [CHAR LIMIT=NONE] -->
     <string name="keywords_color_inversion">turn screen dark, turn screen light</string>
+    <!-- List of synonyms used in the settings search bar to find the “Contrast”. [CHAR LIMIT=NONE] -->
+    <string name="keywords_contrast">color contrast</string>
     <!-- List of synonyms used in the settings search bar to find the “Accessibility Menu”. [CHAR LIMIT=NONE] -->
     <string name="keywords_accessibility_menu"></string>
     <!-- List of synonyms used in the settings search bar to find the “Switch Access”. [CHAR LIMIT=NONE] -->
@@ -7611,8 +7645,8 @@
     <!-- Configure lock screen: Title for the option of unlocking directly to home. [CHAR LIMIT=30] -->
     <string name="lockscreen_bypass_title">Skip lock screen</string>
 
-    <!-- Configure lock screen: Summary for the option of unlocking directly to home. [CHAR LIMIT=100] -->
-    <string name="lockscreen_bypass_summary">After unlocking, go directly to last used screen</string>
+    <!-- Configure lock screen: Summary for the option of unlocking directly to home. [CHAR LIMIT=150] -->
+    <string name="lockscreen_bypass_summary">After unlocking, go directly to last used screen. Notifications won’t show on lock screen. Swipe down from top to see them.</string>
 
     <!-- Configure lock screen: Search keywords for the option of unlocking directly to home. [CHAR LIMIT=100] -->
     <string name="keywords_lockscreen_bypass">Lock screen, Lockscreen, Skip, Bypass</string>
@@ -11932,22 +11966,26 @@
     <string name="accessibility_fingerprint_label">Fingerprint sensor</string>
 
     <!-- Accessibility Flash Notification -->
-    <!-- Title of the Flash Notification entry [CHAR LIMIT=35] -->
+    <!-- Title of the Flash Notifications entry. [CHAR LIMIT=35] -->
     <string name="flash_notifications_title">Flash notifications</string>
-    <!-- Title for flash notifications page footer. [CHAR LIMIT=45] -->
+    <!-- Title of the Flash Notifications page footer. [CHAR LIMIT=45] -->
     <string name="flash_notifications_about_title">About flash notifications</string>
-    <!-- Summary of the Flash Notification preference if all flash alerts are off. [CHAR LIMIT=60] -->
+    <!-- Summary of the Flash Notifications preference if all flash alerts are off. [CHAR LIMIT=60] -->
     <string name="flash_notifications_summary_off">Off</string>
-    <!-- Summary of the Flash Notification preference if only camera flash is on. [CHAR LIMIT=60] -->
+    <!-- Summary of the Flash Notifications preference if only camera flash is on. [CHAR LIMIT=60] -->
     <string name="flash_notifications_summary_on_camera">On / Camera flash</string>
-    <!-- Summary of the Flash Notification preference if only screen flash is on. [CHAR LIMIT=60] -->
+    <!-- Summary of the Flash Notifications preference if only screen flash is on. [CHAR LIMIT=60] -->
     <string name="flash_notifications_summary_on_screen">On / Screen flash</string>
-    <!-- Summary of the Flash Notification preference if both flash alerts are on. [CHAR LIMIT=60] -->
+    <!-- Summary of the Flash Notifications preference if both flash alerts are on. [CHAR LIMIT=60] -->
     <string name="flash_notifications_summary_on_camera_and_screen">On / Camera and screen flash</string>
-    <!-- Introduction in Flash Notification page to introduce flash notifications feature. [CHAR LIMIT=NONE]  -->
+    <!-- Introduction in Flash Notifications page to introduce flash notifications feature. [CHAR LIMIT=NONE]  -->
     <string name="flash_notifications_intro">Flash the camera light or the screen when you receive notifications or when alarms sound</string>
-    <!-- Notes in Flash Notification page footer for something should be aware. [CHAR LIMIT=NONE]  -->
+    <!-- Introduction in Flash Notifications page to introduce flash notifications feature without camera flash option. [CHAR LIMIT=NONE]  -->
+    <string name="flash_notifications_intro_without_camera_flash">Flash the screen when you receive notifications or when alarms sound</string>
+    <!-- Notes in Flash Notifications page footer for something should be aware. [CHAR LIMIT=NONE]  -->
     <string name="flash_notifications_note">Use flash notifications with caution if you\u0027re light sensitive</string>
+    <!-- Search keywords for Flash Notifications settings. [CHAR LIMIT=NONE]  -->
+    <string name="flash_notifications_keywords">flash, light, hard of hearing, hearing loss</string>
     <!-- Label of the button to preview the selected Flash Notification effects. [CHAR LIMIT=20]-->
     <string name="flash_notifications_preview">Preview</string>
     <!-- Title of the camera flash in Flash Notification page. [CHAR LIMIT=60] -->
@@ -11984,6 +12022,15 @@
     <string name="color_selector_dialog_done">Done</string>
     <!-- Button to close the dialog without saving in screen flash color selection dialog. [CHAR LIMIT=20] -->
     <string name="color_selector_dialog_cancel">Cancel</string>
+
+    <!-- Title for the contrast preference fragment [CHAR LIMIT=35] -->
+    <string name="contrast_title">Contrast</string>
+    <!-- 'Standard' contrast option [CHAR LIMIT=20] -->
+    <string name="contrast_standard">Standard</string>
+    <!-- 'Medium' contrast option [CHAR LIMIT=20] -->
+    <string name="contrast_medium">Medium</string>
+    <!-- 'High' contrast option [CHAR LIMIT=20] -->
+    <string name="contrast_high">High</string>
 
     <!-- Warning message when we try to dock an app not supporting multiple instances split into multiple sides [CHAR LIMIT=NONE] -->
     <string name="dock_multi_instances_not_supported_text">"This app can only be opened in 1 window"</string>

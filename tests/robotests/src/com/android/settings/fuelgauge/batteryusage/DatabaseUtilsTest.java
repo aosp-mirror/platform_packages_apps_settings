@@ -36,6 +36,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryEventEntity;
 import com.android.settings.testutils.BatteryTestUtils;
 
 import org.junit.Before;
@@ -46,6 +47,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -73,6 +76,7 @@ public final class DatabaseUtilsTest {
         doReturn(mMockContentResolver).when(mContext).getContentResolver();
         doReturn(mPackageManager).when(mMockContext).getPackageManager();
         doReturn(mPackageManager).when(mContext).getPackageManager();
+        DatabaseUtils.getSharedPreferences(mContext).edit().clear().apply();
     }
 
     @Test
@@ -131,6 +135,28 @@ public final class DatabaseUtilsTest {
                 DatabaseUtils.sendAppUsageEventData(mContext, new ArrayList<>());
         assertThat(valuesList).hasSize(0);
         verifyNoMoreInteractions(mMockContentResolver);
+    }
+
+    @Test
+    public void sendBatteryEventData_returnsExpectedList() {
+        final BatteryEvent batteryEvent =
+                BatteryEvent.newBuilder()
+                        .setTimestamp(10001L)
+                        .setType(BatteryEventType.POWER_CONNECTED)
+                        .setBatteryLevel(66)
+                        .build();
+
+        final ContentValues contentValues =
+                DatabaseUtils.sendBatteryEventData(mContext, batteryEvent);
+
+        assertThat(contentValues.getAsInteger(BatteryEventEntity.KEY_TIMESTAMP))
+                .isEqualTo(10001L);
+        assertThat(contentValues.getAsInteger(BatteryEventEntity.KEY_BATTERY_EVENT_TYPE))
+                .isEqualTo(BatteryEventType.POWER_CONNECTED.getNumber());
+        assertThat(contentValues.getAsInteger(BatteryEventEntity.KEY_BATTERY_LEVEL))
+                .isEqualTo(66);
+        // Verifies the inserted ContentValues into content provider.
+        verify(mMockContentResolver).insert(DatabaseUtils.BATTERY_EVENT_URI, contentValues);
     }
 
     @Test
@@ -394,6 +420,38 @@ public final class DatabaseUtilsTest {
                         mContext, /*calendar=*/ null);
 
         assertThat(batteryHistMap).isEmpty();
+    }
+
+    @Test
+    public void recordDateTime_writeDataIntoSharedPreferences() {
+        final String preferenceKey = "test_preference_key";
+        DatabaseUtils.recordDateTime(mContext, preferenceKey);
+
+        assertThat(DatabaseUtils.getSharedPreferences(mContext).contains(preferenceKey))
+                .isTrue();
+    }
+
+    @Test
+    public void dump_dumpExpectedData() {
+        DatabaseUtils.recordDateTime(mContext,
+                Intent.ACTION_BATTERY_LEVEL_CHANGED);
+        DatabaseUtils.recordDateTime(mContext,
+                BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING);
+        DatabaseUtils.recordDateTime(mContext,
+                DatabaseUtils.KEY_LAST_LOAD_FULL_CHARGE_TIME);
+        DatabaseUtils.recordDateTime(mContext,
+                DatabaseUtils.KEY_LAST_UPLOAD_FULL_CHARGE_TIME);
+        final StringWriter stringWriter = new StringWriter();
+        final PrintWriter printWriter = new PrintWriter(stringWriter);
+
+        DatabaseUtils.dump(mContext, printWriter);
+
+        String dumpContent = stringWriter.toString();
+        assertThat(dumpContent.contains("BatteryLevelChanged")).isTrue();
+        assertThat(dumpContent.contains("BatteryUnplugging")).isTrue();
+        assertThat(dumpContent.contains("ClearBatteryCacheData")).isTrue();
+        assertThat(dumpContent.contains("LastLoadFullChargeTime")).isTrue();
+        assertThat(dumpContent.contains("LastUploadFullChargeTime")).isTrue();
     }
 
     private static void verifyBatteryEntryContentValues(

@@ -38,6 +38,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryEventEntity;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -122,6 +123,15 @@ public final class ConvertUtils {
         values.put(AppUsageEventEntity.KEY_PACKAGE_NAME, event.getPackageName());
         values.put(AppUsageEventEntity.KEY_INSTANCE_ID, event.getInstanceId());
         values.put(AppUsageEventEntity.KEY_TASK_ROOT_PACKAGE_NAME, event.getTaskRootPackageName());
+        return values;
+    }
+
+    /** Converts {@link BatteryEvent} to content values */
+    public static ContentValues convertBatteryEventToContentValues(final BatteryEvent event) {
+        final ContentValues values = new ContentValues();
+        values.put(BatteryEventEntity.KEY_TIMESTAMP, event.getTimestamp());
+        values.put(BatteryEventEntity.KEY_BATTERY_EVENT_TYPE, event.getType().getNumber());
+        values.put(BatteryEventEntity.KEY_BATTERY_LEVEL, event.getBatteryLevel());
         return values;
     }
 
@@ -237,9 +247,33 @@ public final class ConvertUtils {
         return eventBuilder.build();
     }
 
-    /** Converts UTC timestamp to human readable local time string. */
-    public static String utcToLocalTime(Context context, long timestamp) {
-        final Locale locale = getLocale(context);
+    /** Converts to {@link BatteryEvent} from {@link BatteryEventType} */
+    public static BatteryEvent convertToBatteryEvent(
+            long timestamp, BatteryEventType type, int batteryLevel) {
+        final BatteryEvent.Builder eventBuilder = BatteryEvent.newBuilder();
+        eventBuilder.setTimestamp(timestamp);
+        eventBuilder.setType(type);
+        eventBuilder.setBatteryLevel(batteryLevel);
+        return eventBuilder.build();
+    }
+
+    /** Converts to {@link BatteryEvent} from {@link Cursor} */
+    public static BatteryEvent convertToBatteryEventFromCursor(final Cursor cursor) {
+        final BatteryEvent.Builder eventBuilder = BatteryEvent.newBuilder();
+        eventBuilder.setTimestamp(getLongFromCursor(cursor, BatteryEventEntity.KEY_TIMESTAMP));
+        eventBuilder.setType(
+                BatteryEventType.forNumber(
+                        getIntegerFromCursor(
+                                cursor, BatteryEventEntity.KEY_BATTERY_EVENT_TYPE)));
+        eventBuilder.setBatteryLevel(
+                getIntegerFromCursor(cursor, BatteryEventEntity.KEY_BATTERY_LEVEL));
+        return eventBuilder.build();
+    }
+
+    /** Converts UTC timestamp to local time string for logging only, so use the US locale for
+     *  better readability in debugging. */
+    public static String utcToLocalTimeForLogging(long timestamp) {
+        final Locale locale = Locale.US;
         final String pattern =
                 DateFormat.getBestDateTimePattern(locale, "MMM dd,yyyy HH:mm:ss");
         return DateFormat.format(pattern, timestamp).toString();

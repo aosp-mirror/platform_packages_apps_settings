@@ -32,7 +32,12 @@ import java.util.List;
  */
 public class NewKeyboardSettingsUtils {
 
-    static final String EXTRA_KEYBOARD_DEVICE_NAME = "extra_keyboard_device_name";
+    /**
+     * Record the class name of the intent sender for metrics.
+     */
+    public static final String EXTRA_INTENT_FROM =
+            "com.android.settings.inputmethod.EXTRA_INTENT_FROM";
+
     static final String EXTRA_TITLE = "keyboard_layout_picker_title";
     static final String EXTRA_KEYBOARD_LAYOUT = "keyboard_layout";
     static final String EXTRA_USER_ID = "user_id";

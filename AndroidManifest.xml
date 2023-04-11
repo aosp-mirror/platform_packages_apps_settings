@@ -2785,6 +2785,7 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS" />
+                <action android:name="com.android.intent.action.SHOW_CONTRAST_DIALOG" />
             </intent-filter>
             <meta-data android:name="com.android.settings.order" android:value="-40"/>
             <meta-data android:name="com.android.settings.category"
@@ -3110,6 +3111,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.BATTERY_LEVEL_CHANGED"/>
                 <action android:name="com.android.settings.battery.action.CLEAR_BATTERY_CACHE_DATA"/>
+                <action android:name="com.android.settings.battery.action.ACTION_BATTERY_PLUGGING"/>
                 <action android:name="com.android.settings.battery.action.ACTION_BATTERY_UNPLUGGING"/>
             </intent-filter>
         </receiver>
@@ -3119,8 +3121,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
-                <action android:name="android.intent.action.MY_PACKAGE_UNSUSPENDED"/>
                 <action android:name="com.google.android.setupwizard.SETUP_WIZARD_FINISHED"/>
                 <action android:name="com.android.settings.battery.action.PERIODIC_JOB_RECHECK"/>
             </intent-filter>

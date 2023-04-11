@@ -351,9 +351,14 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     }
 
     @Override
+    public void onPause() {
+        mMobileNetworkRepository.removeRegister(this);
+        super.onPause();
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
-        mMobileNetworkRepository.removeRegister(this);
     }
 
     @VisibleForTesting
@@ -489,7 +494,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
             Iterator<Integer> iterator = mSubscriptionInfoMap.keySet().iterator();
             while (iterator.hasNext()) {
-                if (iterator.next() == mSubId) {
+                if (iterator.next() == mSubId && getActivity() != null) {
                     finishFragment();
                     return;
                 }

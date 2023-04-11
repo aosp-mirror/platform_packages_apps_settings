@@ -19,6 +19,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -37,6 +38,7 @@ import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
 import com.android.settingslib.fuelgauge.BatteryStatus;
 
+import java.io.PrintWriter;
 import java.time.Clock;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -50,19 +52,24 @@ import java.util.stream.Collectors;
 /** A utility class to operate battery usage database. */
 public final class DatabaseUtils {
     private static final String TAG = "DatabaseUtils";
+    private static final String SHARED_PREFS_FILE = "battery_usage_shared_prefs";
+
     /** Clear memory threshold for device booting phase. **/
     private static final long CLEAR_MEMORY_THRESHOLD_MS = Duration.ofMinutes(5).toMillis();
     private static final long CLEAR_MEMORY_DELAYED_MS = Duration.ofSeconds(2).toMillis();
 
-    @VisibleForTesting
     static final int DATA_RETENTION_INTERVAL_DAY = 9;
+    static final String KEY_LAST_LOAD_FULL_CHARGE_TIME = "last_load_full_charge_time";
+    static final String KEY_LAST_UPLOAD_FULL_CHARGE_TIME = "last_upload_full_charge_time";
 
     /** An authority name of the battery content provider. */
     public static final String AUTHORITY = "com.android.settings.battery.usage.provider";
-    /** A table name for battery usage history. */
-    public static final String BATTERY_STATE_TABLE = "BatteryState";
     /** A table name for app usage events. */
     public static final String APP_USAGE_EVENT_TABLE = "AppUsageEvent";
+    /** A table name for battery events. */
+    public static final String BATTERY_EVENT_TABLE = "BatteryEvent";
+    /** A table name for battery usage history. */
+    public static final String BATTERY_STATE_TABLE = "BatteryState";
     /** A path name for app usage latest timestamp query. */
     public static final String APP_USAGE_LATEST_TIMESTAMP_PATH = "appUsageLatestTimestamp";
     /** A class name for battery usage data provider. */
@@ -79,19 +86,26 @@ public final class DatabaseUtils {
      */
     public static final long USAGE_QUERY_BUFFER_HOURS = Duration.ofHours(3).toMillis();
 
-    /** A content URI to access battery usage states data. */
-    public static final Uri BATTERY_CONTENT_URI =
-            new Uri.Builder()
-                    .scheme(ContentResolver.SCHEME_CONTENT)
-                    .authority(AUTHORITY)
-                    .appendPath(BATTERY_STATE_TABLE)
-                    .build();
     /** A content URI to access app usage events data. */
     public static final Uri APP_USAGE_EVENT_URI =
             new Uri.Builder()
                     .scheme(ContentResolver.SCHEME_CONTENT)
                     .authority(AUTHORITY)
                     .appendPath(APP_USAGE_EVENT_TABLE)
+                    .build();
+    /** A content URI to access battery events data. */
+    public static final Uri BATTERY_EVENT_URI =
+            new Uri.Builder()
+                    .scheme(ContentResolver.SCHEME_CONTENT)
+                    .authority(AUTHORITY)
+                    .appendPath(BATTERY_EVENT_TABLE)
+                    .build();
+    /** A content URI to access battery usage states data. */
+    public static final Uri BATTERY_CONTENT_URI =
+            new Uri.Builder()
+                    .scheme(ContentResolver.SCHEME_CONTENT)
+                    .authority(AUTHORITY)
+                    .appendPath(BATTERY_STATE_TABLE)
                     .build();
 
     // For testing only.
@@ -101,6 +115,8 @@ public final class DatabaseUtils {
     static Supplier<Cursor> sFakeAppUsageEventSupplier;
     @VisibleForTesting
     static Supplier<Cursor> sFakeAppUsageLatestTimestampSupplier;
+    @VisibleForTesting
+    static Supplier<Cursor> sFakeBatteryEventSupplier;
 
     private DatabaseUtils() {
     }
@@ -126,9 +142,10 @@ public final class DatabaseUtils {
                         .build();
         final long latestTimestamp =
                 loadAppUsageLatestTimestampFromContentProvider(context, appUsageLatestTimestampUri);
+        final String latestTimestampString = ConvertUtils.utcToLocalTimeForLogging(latestTimestamp);
         Log.d(TAG, String.format(
-                "getAppUsageStartTimestampOfUser() userId=%d latestTimestamp=%d in %d/ms",
-                userId, latestTimestamp, (System.currentTimeMillis() - startTime)));
+                "getAppUsageStartTimestampOfUser() userId=%d latestTimestamp=%s in %d/ms",
+                userId, latestTimestampString, (System.currentTimeMillis() - startTime)));
         // Use (latestTimestamp + 1) here to avoid loading the events of the latestTimestamp
         // repeatedly.
         return Math.max(latestTimestamp + 1, earliestTimestamp);
@@ -146,7 +163,8 @@ public final class DatabaseUtils {
         // sure the app usage calculation near the boundaries is correct.
         final long queryTimestamp =
                 Math.max(rawStartTimestamp, sixDaysAgoTimestamp) - USAGE_QUERY_BUFFER_HOURS;
-        Log.d(TAG, "sixDayAgoTimestamp: " + sixDaysAgoTimestamp);
+        Log.d(TAG, "sixDayAgoTimestamp: " + ConvertUtils.utcToLocalTimeForLogging(
+                sixDaysAgoTimestamp));
         final String queryUserIdString = userIds.stream()
                 .map(userId -> String.valueOf(userId))
                 .collect(Collectors.joining(","));
@@ -169,12 +187,39 @@ public final class DatabaseUtils {
         return appUsageEventList;
     }
 
+    /** Returns the battery event data since the query timestamp in battery event table. */
+    public static List<BatteryEvent> getBatteryEvents(
+            Context context,
+            final Calendar calendar,
+            final long rawStartTimestamp) {
+        final long startTime = System.currentTimeMillis();
+        final long sixDaysAgoTimestamp = getTimestampSixDaysAgo(calendar);
+        final long queryTimestamp = Math.max(rawStartTimestamp, sixDaysAgoTimestamp);
+        Log.d(TAG, "getBatteryEvents for timestamp: " + queryTimestamp);
+        // Builds the content uri everytime to avoid cache.
+        final Uri batteryEventUri =
+                new Uri.Builder()
+                        .scheme(ContentResolver.SCHEME_CONTENT)
+                        .authority(AUTHORITY)
+                        .appendPath(BATTERY_EVENT_TABLE)
+                        .appendQueryParameter(
+                                QUERY_KEY_TIMESTAMP, Long.toString(queryTimestamp))
+                        .build();
+
+        final List<BatteryEvent> batteryEventList =
+                loadBatteryEventsFromContentProvider(context, batteryEventUri);
+        Log.d(TAG, String.format("getBatteryEvents size=%d in %d/ms", batteryEventList.size(),
+                (System.currentTimeMillis() - startTime)));
+        return batteryEventList;
+    }
+
     /** Long: for timestamp and String: for BatteryHistEntry.getKey() */
     public static Map<Long, Map<String, BatteryHistEntry>> getHistoryMapSinceLastFullCharge(
             Context context, Calendar calendar) {
         final long startTime = System.currentTimeMillis();
         final long sixDaysAgoTimestamp = getTimestampSixDaysAgo(calendar);
-        Log.d(TAG, "sixDayAgoTimestamp: " + sixDaysAgoTimestamp);
+        Log.d(TAG, "sixDayAgoTimestamp: " + ConvertUtils.utcToLocalTimeForLogging(
+                sixDaysAgoTimestamp));
         // Builds the content uri everytime to avoid cache.
         final Uri batteryStateUri =
                 new Uri.Builder()
@@ -202,8 +247,9 @@ public final class DatabaseUtils {
             try {
                 final BatteryStateDatabase database = BatteryStateDatabase
                         .getInstance(context.getApplicationContext());
-                database.batteryStateDao().clearAll();
                 database.appUsageEventDao().clearAll();
+                database.batteryEventDao().clearAll();
+                database.batteryStateDao().clearAll();
             } catch (RuntimeException e) {
                 Log.e(TAG, "clearAll() failed", e);
             }
@@ -218,8 +264,9 @@ public final class DatabaseUtils {
                         .getInstance(context.getApplicationContext());
                 final long earliestTimestamp = Clock.systemUTC().millis()
                         - Duration.ofDays(DATA_RETENTION_INTERVAL_DAY).toMillis();
-                database.batteryStateDao().clearAllBefore(earliestTimestamp);
                 database.appUsageEventDao().clearAllBefore(earliestTimestamp);
+                database.batteryEventDao().clearAllBefore(earliestTimestamp);
+                database.batteryStateDao().clearAllBefore(earliestTimestamp);
             } catch (RuntimeException e) {
                 Log.e(TAG, "clearAllBefore() failed", e);
             }
@@ -282,6 +329,23 @@ public final class DatabaseUtils {
                 size, (System.currentTimeMillis() - startTime)));
         clearMemory();
         return valuesList;
+    }
+
+    static ContentValues sendBatteryEventData(
+            final Context context, final BatteryEvent batteryEvent) {
+        final long startTime = System.currentTimeMillis();
+        ContentValues contentValues = ConvertUtils.convertBatteryEventToContentValues(batteryEvent);
+        final ContentResolver resolver = context.getContentResolver();
+        try {
+            resolver.insert(BATTERY_EVENT_URI, contentValues);
+            Log.d(TAG, "insert() battery event data into database: " + batteryEvent.toString());
+        } catch (Exception e) {
+            Log.e(TAG, "insert() battery event data into database error:\n" + e);
+        }
+        Log.d(TAG, String.format("sendBatteryEventData() in %d/ms",
+                (System.currentTimeMillis() - startTime)));
+        clearMemory();
+        return contentValues;
     }
 
     static List<ContentValues> sendBatteryEntryData(
@@ -373,8 +437,50 @@ public final class DatabaseUtils {
         resolver.notifyChange(BATTERY_CONTENT_URI, /*observer=*/ null);
         Log.d(TAG, String.format("sendBatteryEntryData() size=%d in %d/ms",
                 size, (System.currentTimeMillis() - startTime)));
+        if (isFullChargeStart) {
+            recordDateTime(context, KEY_LAST_UPLOAD_FULL_CHARGE_TIME);
+        }
         clearMemory();
         return valuesList;
+    }
+
+    /** Dump all required data into {@link PrintWriter}. */
+    public static void dump(Context context, PrintWriter writer) {
+        writeString(context, writer, "BatteryLevelChanged",
+                Intent.ACTION_BATTERY_LEVEL_CHANGED);
+        writeString(context, writer, "BatteryPlugging",
+                BatteryUsageBroadcastReceiver.ACTION_BATTERY_PLUGGING);
+        writeString(context, writer, "BatteryUnplugging",
+                BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING);
+        writeString(context, writer, "ClearBatteryCacheData",
+                BatteryUsageBroadcastReceiver.ACTION_CLEAR_BATTERY_CACHE_DATA);
+        writeString(context, writer, "LastLoadFullChargeTime",
+                KEY_LAST_LOAD_FULL_CHARGE_TIME);
+        writeString(context, writer, "LastUploadFullChargeTime",
+                KEY_LAST_UPLOAD_FULL_CHARGE_TIME);
+    }
+
+    static SharedPreferences getSharedPreferences(Context context) {
+        return context.getApplicationContext().getSharedPreferences(
+                SHARED_PREFS_FILE, Context.MODE_PRIVATE);
+    }
+
+    static void recordDateTime(Context context, String preferenceKey) {
+        final SharedPreferences sharedPreferences = getSharedPreferences(context);
+        if (sharedPreferences != null) {
+            final String currentTime = ConvertUtils.utcToLocalTimeForLogging(
+                    System.currentTimeMillis());
+            sharedPreferences.edit().putString(preferenceKey, currentTime).apply();
+        }
+    }
+
+    private static void writeString(
+            Context context, PrintWriter writer, String prefix, String key) {
+        final SharedPreferences sharedPreferences = getSharedPreferences(context);
+        if (sharedPreferences != null) {
+            final String content = sharedPreferences.getString(key, "");
+            writer.println(String.format("\t\t%s: %s", prefix, content));
+        }
     }
 
     private static long loadAppUsageLatestTimestampFromContentProvider(
@@ -425,6 +531,32 @@ public final class DatabaseUtils {
             }
         }
         return appUsageEventList;
+    }
+
+    private static List<BatteryEvent> loadBatteryEventsFromContentProvider(
+            Context context, Uri batteryEventUri) {
+        final List<BatteryEvent> batteryEventList = new ArrayList<>();
+        context = getParentContext(context);
+        if (context == null) {
+            return batteryEventList;
+        }
+        try (Cursor cursor = sFakeBatteryEventSupplier != null
+                ? sFakeBatteryEventSupplier.get()
+                : context.getContentResolver().query(batteryEventUri, null, null, null)) {
+            if (cursor == null || cursor.getCount() == 0) {
+                return batteryEventList;
+            }
+            // Loads and recovers all AppUsageEvent data from cursor.
+            while (cursor.moveToNext()) {
+                batteryEventList.add(ConvertUtils.convertToBatteryEventFromCursor(cursor));
+            }
+            try {
+                cursor.close();
+            } catch (Exception e) {
+                Log.e(TAG, "cursor.close() failed", e);
+            }
+        }
+        return batteryEventList;
     }
 
     private static Map<Long, Map<String, BatteryHistEntry>> loadHistoryMapFromContentProvider(
