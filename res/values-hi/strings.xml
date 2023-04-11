@@ -93,7 +93,7 @@
     <string name="bluetooth_connection_permission_request" msgid="8793131019383198861">"ब्लूटूथ कनेक्शन अनुरोध"</string>
     <string name="bluetooth_phonebook_request" msgid="1085102844577089889">"फ़ोन बुक का इस्तेमाल करने का अनुरोध"</string>
     <string name="bluetooth_map_request" msgid="8664081227240707479">"मैसेज तक पहुंच पाने का अनुरोध किया गया"</string>
-    <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"दूसरे डिवाइसों को \'<xliff:g id="DEVICE_NAME">^1</xliff:g>\' के रूप में दिखता है"</string>
+    <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"दूसरे डिवाइसों को “<xliff:g id="DEVICE_NAME">^1</xliff:g>” के रूप में दिखता है"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"अपने डिवाइस को दूसरे डिवाइस से जोड़ने के लिए ब्लूटूथ चालू करें."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"आपके डिवाइस"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"नया डिवाइस जोड़ें"</string>
@@ -103,10 +103,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"इस सेटिंग को बदलने के लिए, आपको अपना डिवाइस रीस्टार्ट करना होगा."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"रीस्टार्ट करें"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"अभी नहीं"</string>
-    <!-- no translation found for bluetooth_disable_leaudio (8619410595945155354) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_leaudio_summary (4756307633476985470) -->
-    <skip />
+    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"\'ब्लूटूथ LE Audio\' को बंद करें"</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"अगर डिवाइस पर LE Audio हार्डवेयर चलता है, तो \'ब्लूटूथ LE Audio\' को बंद करें."</string>
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"ब्लूटूथ LE Audio की, अनुमति वाली सूची की सेटिंग चालू करें"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"ब्लूटूथ LE Audio की, अनुमति वाली सूची की सुविधा चालू करें."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"मीडिया डिवाइस"</string>
@@ -166,10 +164,10 @@
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"अगर आपको हर ऐप्लिकेशन के लिए अलग भाषा चुननी है, तो ऐप्लिकेशन की भाषा सेटिंग पर जाएं."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"ऐप्लिकेशन की भाषाओं के बारे में ज़्यादा जानें"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"क्या सिस्टम की भाषा बदलकर %s करनी है ?"</string>
-    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"आपकी जगह के हिसाब से भाषाएं और डिवाइस की सेटिंग बदल जाएंगी."</string>
+    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"आपके डिवाइस की सेटिंग और जगह के हिसाब से प्राथमिकताएं बदल जाएंगी."</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"बदलें"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s उपलब्ध नहीं है"</string>
-    <string name="desc_unavailable_locale" msgid="2201756477400935896">"इस भाषा को सिस्टम की भाषा के तौर पर इस्तेमाल नहीं किया जा सकता. हालांकि, आपने ऐप्लिकेशन और वेबसाइटों को बता दिया है कि आपको यह भाषा पसंद है."</string>
+    <string name="desc_unavailable_locale" msgid="2201756477400935896">"इस भाषा को सिस्टम की भाषा के तौर पर इस्तेमाल नहीं किया जा सकता. हालांकि, आपने ऐप्लिकेशन और वेबसाइटों पर इसे अपनी पसंदीदा भाषा के तौर पर चुना है."</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"जगह के हिसाब से प्राथमिकताएं"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"यूनिट और संख्या के लिए प्राथमिकताएं तय करें"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"ऐप्लिकेशन को जगह के हिसाब से तय की गई अपनी प्राथमिकताओं का ऐक्सेस दें, ताकि आपको मनमुताबिक अनुभव मिल सके."</string>
@@ -179,8 +177,10 @@
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"हफ़्ते का पहला दिन"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"नंबर की प्राथमिकताएं"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"डिफ़ॉल्ट रूप से ऐप्लिकेशन इस्तेमाल करें"</string>
-    <string name="celsius_temperature_unit" msgid="6118523647432383132">"सेल्सियस(°C)"</string>
-    <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"फ़ैरनहाइट(°F)"</string>
+    <!-- no translation found for celsius_temperature_unit (8896459071273084507) -->
+    <skip />
+    <!-- no translation found for fahrenheit_temperature_unit (1118677820614569801) -->
+    <skip />
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"रविवार"</string>
     <string name="monday_first_day_of_week" msgid="7244698610476506771">"सोमवार"</string>
     <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"मंगलवार"</string>
@@ -265,8 +265,7 @@
     <string name="safety_center_title" msgid="7732397372178774777">"सुरक्षा और निजता"</string>
     <string name="safety_center_summary" msgid="3554867379951053869">"ऐप्लिकेशन की सुरक्षा, डिवाइस लॉक, और अनुमतियां"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"चेहरा जोड़ा गया"</string>
-    <!-- no translation found for security_settings_face_preference_summary_none (523320857738436024) -->
-    <skip />
+    <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"सेटअप करना होगा"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"फ़ेस अनलॉक"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"वर्क प्रोफ़ाइल के लिए फ़ेस अनलॉक"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"फ़ेस अनलॉक की सुविधा सेटअप करने का तरीका"</string>
@@ -329,8 +328,7 @@
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"वर्क प्रोफ़ाइल के लिए फ़िंगरप्रिंट"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"फ़िंगरप्रिंट जोड़ें"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{फ़िंगरप्रिंट जोड़ा गया}one{# फ़िंगरप्रिंट जोड़ा गया}other{# फ़िंगरप्रिंट जोड़े गए}}"</string>
-    <!-- no translation found for security_settings_fingerprint_preference_summary_none (1146977379031250790) -->
-    <skip />
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"सेटअप करना होगा"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"अपना फ़िंगरप्रिंट सेट अप करें"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"फ़िंगरप्रिंट से अनलॉक करने की सुविधा इस्तेमाल करने की अनुमति दें"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"फ़िंगरप्रिंट का उपयोग करें"</string>
@@ -374,8 +372,7 @@
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"चेहरा, फ़िंगरप्रिंट, और <xliff:g id="WATCH">%s</xliff:g> सेट अप की गई"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"फ़िंगरप्रिंट और फ़ेस अनलॉक"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"वर्क प्रोफ़ाइल के लिए, फ़ेस और फ़िंगरप्रिंट अनलॉक की सुविधा"</string>
-    <!-- no translation found for security_settings_biometric_preference_summary_none_enrolled (213377753727694575) -->
-    <skip />
+    <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"सेटअप करना होगा"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"चेहरे का मॉडल और फ़िंगरप्रिंट जोड़े गए"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"चेहरे का मॉडल और फ़िंगरप्रिंट जोड़ा गया"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"अगर आपके फ़ोन में फ़िंगरप्रिंट अनलॉक और फ़ेस अनलॉक की सुविधा सेट अप है, तो चेहरे पर मास्क होने पर या आस-पास रोशनी न होने पर, फ़ोन आपका फ़िंगरप्रिंट मांगेगा"</string>
@@ -387,6 +384,14 @@
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"अपने फ़िंगरप्रिंट का इस्तेमाल करें"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"अपने फ़िंगरप्रिंट या चेहरे का इस्तेमाल करें"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"ठीक है"</string>
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_title (6041232223862753222) -->
+    <skip />
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_message (1904738532939614456) -->
+    <skip />
+    <string name="biometric_settings_add_fingerprint_in_split_mode_title" msgid="9194670722730454903">"फ़िंगरप्रिंट सेट अप नहीं किया जा सका"</string>
+    <string name="biometric_settings_add_fingerprint_in_split_mode_message" msgid="6960548382076629454">"स्प्लिट स्क्रीन बंद करके फ़िंगरप्रिंट सेट करें"</string>
+    <!-- no translation found for biometric_settings_add_biometrics_in_split_mode_ok (564103789097253645) -->
+    <skip />
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"स्क्रीन लॉक छोड़ें?"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"सेट अप न करें"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"वापस जाएं"</string>
@@ -466,8 +471,7 @@
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"एन्क्रिप्शन, क्रेडेंशियल वगैरह"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"सुरक्षा, सुरक्षा से जुड़ी और सेटिंग, अन्य सेटिंग, बेहतर सुरक्षा सेटिंग"</string>
     <string name="privacy_advanced_settings" msgid="8828215456566937719">"निजता से जुड़ी और सेटिंग"</string>
-    <!-- no translation found for more_security_privacy_settings (123465614090328851) -->
-    <skip />
+    <string name="more_security_privacy_settings" msgid="123465614090328851">"सुरक्षा और निजता की ज़्यादा सेटिंग"</string>
     <string name="security_header" msgid="961514795852103424">"सुरक्षा"</string>
     <string name="privacy_header" msgid="5526002421324257007">"निजता"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"वर्क प्रोफ़ाइल"</string>
@@ -501,10 +505,8 @@
     <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"यह सेटिंग चालू करने पर, छह या इससे ज़्यादा अंकों का सही पिन डालने के बाद डिवाइस अपने-आप अनलॉक हो जाएगा. यह सुविधा, Enter पर टैप करके पिन की पुष्टि करने की सुविधा से कम सुरक्षित होती है."</string>
     <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"पिन सही होने की पुष्टि अपने-आप करने वाली सेटिंग चालू करें"</string>
     <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"Enter पर टैप करके पिन की पुष्टि करना, अपने-आप पुष्टि करने वाली सुविधा से ज़्यादा सुरक्षित होता है"</string>
-    <!-- no translation found for auto_confirm_on_pin_verify_description (2052240431173223502) -->
-    <skip />
-    <!-- no translation found for auto_confirm_off_pin_verify_description (4256219155659760047) -->
-    <skip />
+    <string name="auto_confirm_on_pin_verify_description" msgid="2052240431173223502">"अपने-आप पुष्टि होने की सुविधा को चालू करने के लिए, डिवाइस का पिन डालें"</string>
+    <string name="auto_confirm_off_pin_verify_description" msgid="4256219155659760047">"अपने-आप पुष्टि होने की सुविधा को बंद करने के लिए, डिवाइस का पिन डालें"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"स्क्रीन लॉक"</string>
     <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"वर्क प्रोफ़ाइल लॉक"</string>
     <string name="unlock_set_unlock_off_title" msgid="2831957685685921667">"कोई नहीं"</string>
@@ -643,11 +645,11 @@
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"कीबोर्ड की सेटिंग"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"डिवाइस का ब्लूटूथ पता: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"डिवाइस के ब्लूटूथ का पता:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"डिवाइस को भूलना है?"</string>
+    <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"डिवाइस को हटाना है?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"डिसकनेक्ट करें"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"क्या आप ऐप्लिकेशन को डिसकनेक्ट करना चाहते हैं?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> ऐप्लिकेशन अब आपके <xliff:g id="DEVICE_NAME">%2$s</xliff:g> डिवाइस से कनेक्ट नहीं होगा"</string>
-    <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"डिवाइस भूलें"</string>
+    <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"डिवाइस हटाएं"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"ऐप्लिकेशन डिसकनेक्ट करें"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"ब्लूटूथ के ज़रिए ज़्यादा से ज़्यादा कितने ऑडियो डिवाइस जुड़ सकते हैं"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"यह चुनें कि ब्लूटूथ के ज़रिए ज़्यादा से ज़्यादा कितने ऑडियो डिवाइस जुड़ सकते हैं"</string>
@@ -717,13 +719,13 @@
     <string name="wifi_add_network" msgid="4178564862173751181">"नेटवर्क जोड़ें"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2536725796700696566">"वाई-फ़ाई से जुड़ी पसंद"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"नेटवर्क मिलने पर वाई-फ़ाई अपने-आप चालू हो जाता है"</string>
-    <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"नेटवर्क मिलने पर भी वाई-फ़ाई अपने-आप चालू नहीं होता"</string>
+    <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"नेटवर्क मिलने पर भी वाई-फ़ाई अपने-आप चालू नहीं होगा"</string>
     <string name="wifi_menu_p2p" msgid="5234165837732940385">"Wi‑Fi Direct"</string>
     <string name="wifi_empty_list_wifi_off" msgid="7697422506708419298">"उपलब्‍ध नेटवर्क देखने के लिए, वाई-फ़ाई  चालू करें."</string>
     <string name="wifi_empty_list_wifi_on" msgid="2448010040478321376">"नेटवर्क खोजे जा रहे हैं…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="454861411536708709">"आपको वाई-फ़ाई नेटवर्क बदलने की अनुमति नहीं है."</string>
-    <string name="wifi_settings_scanning_required_title" msgid="1088663325396007484">"वाई-फ़ाई स्कैन करना चालू करें?"</string>
-    <string name="wifi_settings_scanning_required_summary" msgid="4770243653675416569">"पहले आपको वाई-फ़ाई स्कैन करना होगा, इसके बाद आपको अपने-आप वाई-फ़ाई चालू होने की सुविधा मिलेगी."</string>
+    <string name="wifi_settings_scanning_required_title" msgid="1088663325396007484">"वाई-फ़ाई स्कैनिंग चालू करनी है?"</string>
+    <string name="wifi_settings_scanning_required_summary" msgid="4770243653675416569">"वाई-फ़ाई अपने-आप चालू होने की सुविधा पाने के लिए, पहले आपको वाई-फ़ाई स्कैनिंग चालू करनी होगी."</string>
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"वाई-फ़ाई स्कैन करने की सुविधा से ऐप्लिकेशन और सेवाएं, किसी भी समय वाई-फ़ाई नेटवर्क स्कैन कर सकती हैं. वाई-फ़ाई की सुविधा बंद होने पर भी ऐसा किया जा सकता है. उदाहरण के लिए, इसका इस्तेमाल जगह की जानकारी से जुड़ी सुविधाओं और सेवाओं को बेहतर बनाने के लिए किया जा सकता है."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"चालू करें"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"वाई-फ़ाई स्कैन करना चालू हो गया है"</string>
@@ -1783,10 +1785,8 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"ज़ूम करने की सुविधा का शॉर्टकट"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"टाइप किए गए टेक्स्ट को ज़ूम करें"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"ज़ूम करने की सुविधा, टेक्स्ट टाइप किए जाने पर उसे बड़ा करके दिखाती है"</string>
-    <!-- no translation found for accessibility_screen_magnification_always_on_title (3814297443759580936) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_always_on_summary (306908451430863049) -->
-    <skip />
+    <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"ऐप स्विच करते समय ज़ूम चालू रखें"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"ऐप्लिकेशन के बीच स्विच करने पर, ज़ूम करने की सुविधा चालू रहती है और स्क्रीन पर दिख रही चीज़ों को ज़ूम आउट करती है"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"जॉयस्टिक"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"स्क्रीन पर मौजूद कॉन्टेंट को बड़ा करके दिखाने की सुविधा को चालू करें और ऑन-स्क्रीन जॉयस्टिक की मदद से उसे मूव करें. स्क्रीन पर मौजूद कॉन्टेंट को बड़ा करके दिखाने की सुविधा को कंट्रोल करने के लिए, टैप करके रखें. उसके बाद जॉयस्टिक को खींचें और छोड़ें. जॉयस्टिक को मूव करने के लिए, उसे टैप करके खींचें और छोड़ें."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"ज़ूम करने की सुविधा के बारे में जानकारी"</string>
@@ -2106,6 +2106,7 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"रंग में बदलाव करना"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"स्क्रीन को गहरे रंग का करना, स्क्रीन को हल्के रंग का करना"</string>
+    <string name="keywords_contrast" msgid="4668393735398949873">"कलर कंट्रास्ट"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="7151756353013736931">"मोटर, माउस"</string>
@@ -2368,9 +2369,9 @@
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"सुरक्षित नहीं है"</string>
     <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"<xliff:g id="VPN_COUNT">%d</xliff:g> वीपीएन सुरक्षित नहीं है"</string>
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> वीपीएन सुरक्षित नहीं हैं"</string>
-    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Adaptive connectivity"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"अडैप्टिव कनेक्टिविटी"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"अडैप्टिव कनेक्टिविटी का विकल्प चुनने पर, आपका इंटरनेट कनेक्शन अपने-आप मैनेज हो जाएगा. इससे बैटरी लाइफ़ बढ़ती है और डिवाइस की परफ़ॉर्मेंस बेहतर होती है"</string>
-    <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"चालू"</string>
+    <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"चालू है"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"बंद करें"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Adaptive Connectivity सुविधा का इस्तेमाल करें"</string>
     <string name="credentials_title" msgid="7535942196886123656">"क्रेडेंशियल स्टोरेज"</string>
@@ -2960,7 +2961,7 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"घंटी और सूचना का वॉल्यूम"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"रिंग वॉल्यूम"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"सूचना की आवाज़"</string>
-    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"सूचना की आवाज़ म्यूट होने की वजह से उपलब्ध नहीं है"</string>
+    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"सूचना की आवाज़ म्यूट होने की वजह से सुनाई नहीं दे रही"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"फ़ोन रिंगटोन"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"सूचना की डिफ़ॉल्ट आवाज़"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"ऐप की ओर से दी जाने वाली ध्वनि"</string>
@@ -3147,7 +3148,7 @@
     <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"इस बातचीत के लिए बबल्स चालू करें"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"खारिज करने के लिए दाईं ओर स्वाइप करें और मेन्यू दिखाने के लिए बाईं ओर"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"खारिज करने के लिए बाईं ओर स्वाइप करें और मेन्यू दिखाने के लिए दाईं ओर"</string>
-    <string name="silent_notifications_status_bar" msgid="6113307620588767516">"आवाज़ और/या वाइब्रेशन के बिना मिलने वाली सूचनाएं, स्टेटस बार में न दिखाएं"</string>
+    <string name="silent_notifications_status_bar" msgid="6113307620588767516">"साइलेंट मोड पर सेट की गई सूचनाएं, स्टेटस बार में न दिखाएं"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"ब्लिंक लाइट"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"निजता"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"लॉक स्क्रीन छोड़कर आगे बढ़ें"</string>
@@ -3460,9 +3461,9 @@
     <string name="memtag_toggle" msgid="8695028758462939212">"बेहतर मेमोरी सुरक्षा"</string>
     <string name="memtag_intro" msgid="579408691329568953">"यह सुविधा अभी बीटा वर्शन में है. यह आपके डिवाइस को ऐसी गड़बड़ियों से बचाती है जिनसे आपकी सुरक्षा को खतरा हो सकता है."</string>
     <string name="memtag_on" msgid="824938319141503923">"चालू है"</string>
-    <string name="memtag_off" msgid="4835589640091709019">"बंद करें"</string>
-    <string name="memtag_on_pending" msgid="1592053425431532361">"रीस्टार्ट होने के बाद चालू करें"</string>
-    <string name="memtag_off_pending" msgid="1543177181383593726">"रीस्टार्ट होने के बाद बंद करें"</string>
+    <string name="memtag_off" msgid="4835589640091709019">"बंद है"</string>
+    <string name="memtag_on_pending" msgid="1592053425431532361">"रीस्टार्ट होने के बाद चालू है"</string>
+    <string name="memtag_off_pending" msgid="1543177181383593726">"रीस्टार्ट होने के बाद बंद है"</string>
     <string name="memtag_force_off" msgid="1143468955988138470">"अभी आपके डिवाइस के लिए उपलब्ध नहीं है"</string>
     <string name="memtag_force_on" msgid="3254349938627883664">"आपके डिवाइस के लिए हमेशा चालू है"</string>
     <string name="memtag_footer" msgid="8480784485124271376">"बेहतर मेमोरी सुरक्षा की सुविधा को चालू या बंद करने के लिए, आपको अपना डिवाइस रीस्टार्ट करना होगा. इस सुविधा के चालू होने पर, आपके डिवाइस की परफ़ॉर्मेंस कम हो सकती है."</string>
@@ -4356,7 +4357,7 @@
     <string name="development_memtag_intro" msgid="8032596625527637164">"मेमोरी टैगिंग एक्सटेंशन (एमटीई) आपके ऐप्लिकेशन में मेमोरी की सुरक्षा की गड़बड़ियों को ढूंढने में मदद करता है और ऐप्लिकेशन में मौजूद नेटिव कोड को और सुरक्षित बना सकता है."</string>
     <string name="development_memtag_footer" msgid="5681925148773626562">"एमटीई चालू करने पर, डिवाइस की परफ़ॉर्मेंस कम हो सकती है."</string>
     <string name="development_memtag_learn_more" msgid="8961984806973926704">"एमटीई के बारे में ज़्यादा जानें"</string>
-    <string name="development_memtag_toggle" msgid="2474420239518386894">"एमटीई तब तक चालू रहेगा, जब इसे बंद नहीं किया जाता"</string>
+    <string name="development_memtag_toggle" msgid="2474420239518386894">"एमटीई तब तक चालू रहेगा, जब तक इसे बंद नहीं किया जाता"</string>
     <string name="development_memtag_reboot_message_on" msgid="8100075676107327847">"एमटीई को चालू करने के लिए, आपको अपना डिवाइस रीस्टार्ट करना होगा."</string>
     <string name="development_memtag_reboot_message_off" msgid="3703925647922079456">"एमटीई को बंद करने के लिए, आपको अपना डिवाइस रीस्टार्ट करना होगा."</string>
     <string name="reboot_with_mte_title" msgid="2320125810211279">"सिंगल सेशन के लिए एमटीई चालू करें"</string>
@@ -4542,8 +4543,10 @@
     <string name="all_apps" msgid="3054120149509114789">"सभी ऐप्लिकेशन"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"अनुमति न दें"</string>
     <string name="uwb_settings_title" msgid="8578498712312002231">"अल्ट्रा-वाइडबैंड (यूडब्ल्यूबी)"</string>
-    <string name="uwb_settings_summary" msgid="3074271396764672268">"इससे, आपको आस-पास मौजूद UWB वाले डिवाइसों की जगह की जानकारी का पता लगाने में मदद मिलती है"</string>
+    <string name="uwb_settings_summary" msgid="3074271396764672268">"इससे आपको आस-पास मौजूद यूडब्ल्यूबी वाले डिवाइसों की, जगह की जानकारी का पता लगाने में मदद मिलती है"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"यूडब्ल्यूबी की सुविधा का इस्तेमाल करने के लिए, हवाई जहाज़ मोड बंद करें"</string>
+    <!-- no translation found for uwb_settings_summary_no_uwb_regulatory (3465456428217979428) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"कैमरे का ऐक्सेस"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"माइक्रोफ़ोन का ऐक्सेस"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"ऐप्लिकेशन और सेवाओं के लिए"</string>
@@ -4657,7 +4660,7 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{पिछले # महीने में इंस्टॉल किए गए ऐप्लिकेशन}one{पिछले # महीने में इंस्टॉल किए गए ऐप्लिकेशन}other{पिछले # महीनों में इंस्टॉल किए गए ऐप्लिकेशन}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{ऐप्लिकेशन, # महीने से भी पहले इंस्टॉल किए गए}one{ऐप्लिकेशन, # महीने से भी पहले इंस्टॉल किए गए}other{ऐप्लिकेशन, # महीने से भी पहले इंस्टॉल किए गए}}"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"फ़िंगरप्रिंट सेंसर"</string>
-    <string name="flash_notifications_title" msgid="4490438861180492311">"फ़्लैश के साथ सूचनाएं"</string>
+    <string name="flash_notifications_title" msgid="4490438861180492311">"स्क्रीन पर फ़्लैश के साथ मिलने वाली सूचना"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"फ़्लैश के साथ मिलने वाली सूचनाओं की जानकारी"</string>
     <string name="flash_notifications_summary_off" msgid="6056282996770691461">"बंद है"</string>
     <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"कैमरे के फ़्लैश की सुविधा चालू है"</string>
@@ -4666,8 +4669,7 @@
     <string name="flash_notifications_intro" msgid="8409873413480928249">"सूचनाएं पाने या अलार्म बजने पर कैमरे या स्क्रीन का फ़्लैश चालू होने की सुविधा पाएं"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"सूचनाएं पाने या अलार्म बजने पर स्क्रीन का फ़्लैश चालू होने की सुविधा पाएं"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"अगर आपको रोशनी से दिक्कत होती है, तो स्क्रीन पर फ़्लैश के साथ सूचना पाने की सुविधा का इस्तेमाल सावधानी से करें"</string>
-    <!-- no translation found for flash_notifications_keywords (2458759275318514836) -->
-    <skip />
+    <string name="flash_notifications_keywords" msgid="2458759275318514836">"फ़्लैश, लाइट, कम सुनने वाला, सुनने में समस्या"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"झलक देखें"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"कैमरे का फ़्लैश"</string>
     <string name="screen_flash_notification_title" msgid="3773100725793316708">"स्क्रीन का फ़्लैश"</string>
@@ -4686,5 +4688,9 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"बैंगनी"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"हो गया"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"रहने दें"</string>
+    <string name="contrast_title" msgid="6885768151336508075">"कंट्रास्ट"</string>
+    <string name="contrast_standard" msgid="1097297089917185235">"स्टैंडर्ड"</string>
+    <string name="contrast_medium" msgid="384414510709285811">"सामान्य"</string>
+    <string name="contrast_high" msgid="3988567609694797696">"ज़्यादा"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"इस ऐप्लिकेशन को सिर्फ़ एक विंडो में खोला जा सकता है"</string>
 </resources>
