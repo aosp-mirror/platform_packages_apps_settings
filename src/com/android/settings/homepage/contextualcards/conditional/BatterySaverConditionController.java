@@ -16,6 +16,8 @@
 
 package com.android.settings.homepage.contextualcards.conditional;
 
+import static com.android.settingslib.fuelgauge.BatterySaverLogging.SAVER_ENABLED_UNKNOWN;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.PowerManager;
@@ -68,7 +70,7 @@ public class BatterySaverConditionController implements ConditionalCardControlle
     @Override
     public void onActionClick() {
         BatterySaverUtils.setPowerSaveMode(mAppContext, false,
-                /*needFirstTimeWarning*/ false);
+                /*needFirstTimeWarning*/ false, SAVER_ENABLED_UNKNOWN);
     }
 
     @Override

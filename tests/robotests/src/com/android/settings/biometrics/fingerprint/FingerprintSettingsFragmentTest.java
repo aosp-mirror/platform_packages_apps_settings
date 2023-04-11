@@ -16,7 +16,6 @@
 
 package com.android.settings.biometrics.fingerprint;
 
-import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_POWER_BUTTON;
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_OPTICAL;
 
 import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment;
@@ -40,7 +39,6 @@ import android.content.Intent;
 import android.hardware.biometrics.ComponentInfoInternal;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.fingerprint.FingerprintManager;
-import android.hardware.fingerprint.FingerprintSensorProperties;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -52,6 +50,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.biometrics.BiometricsSplitScreenDialog;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowFragment;
@@ -111,6 +110,8 @@ public class FingerprintSettingsFragmentTest {
         doReturn(fragmentManager).when(mActivity).getSupportFragmentManager();
 
         doNothing().when(mFragment).startActivityForResult(any(Intent.class), anyInt());
+
+        setSensor();
     }
 
     @After
@@ -119,9 +120,7 @@ public class FingerprintSettingsFragmentTest {
     }
 
     @Test
-    public void testAddFingerprint_onUdfpsDevice_inFullScreen_noDialog() {
-        setSensorType(TYPE_UDFPS_OPTICAL);
-
+    public void testAddFingerprint_inFullScreen_noDialog() {
         // Start fragment
         mFragment.onAttach(mContext);
         mFragment.onCreate(null);
@@ -135,14 +134,12 @@ public class FingerprintSettingsFragmentTest {
 
         verify(mFragment).startActivityForResult(any(), eq(ADD_FINGERPRINT_REQUEST));
         verify(mFragmentTransaction, never()).add(any(),
-                eq(FingerprintSettingsFragment.FingerprintSplitScreenDialog.class.getName()));
+                eq(BiometricsSplitScreenDialog.class.getName()));
 
     }
 
     @Test
-    public void testAddFingerprint_onUdfpsDevice_inMultiWindow_showsDialog() {
-        setSensorType(TYPE_UDFPS_OPTICAL);
-
+    public void testAddFingerprint_inMultiWindow_showsDialog() {
         // Start fragment
         mFragment.onAttach(mContext);
         mFragment.onCreate(null);
@@ -157,40 +154,17 @@ public class FingerprintSettingsFragmentTest {
         mFragment.onPreferenceTreeClick(preference);
 
         verify(mFragment, times(0)).startActivityForResult(any(), eq(ADD_FINGERPRINT_REQUEST));
-        verify(mFragmentTransaction).add(any(),
-                eq(FingerprintSettingsFragment.FingerprintSplitScreenDialog.class.getName()));
+        verify(mFragmentTransaction).add(any(), eq(BiometricsSplitScreenDialog.class.getName()));
     }
 
-    @Test
-    public void testAddFingerprint_onSfpsDevice_inMultiWindow_noDialog() {
-        setSensorType(TYPE_POWER_BUTTON);
-
-        // Start fragment
-        mFragment.onAttach(mContext);
-        mFragment.onCreate(null);
-        mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);
-        mFragment.onResume();
-
-        doReturn(true).when(mActivity).isInMultiWindowMode();
-
-        // Click "Add Fingerprint"
-        final Preference preference = new Preference(mContext);
-        preference.setKey(KEY_FINGERPRINT_ADD);
-        mFragment.onPreferenceTreeClick(preference);
-
-        verify(mFragment).startActivityForResult(any(), eq(ADD_FINGERPRINT_REQUEST));
-        verify(mFragmentTransaction, never()).add(any(),
-                eq(FingerprintSettingsFragment.FingerprintSplitScreenDialog.class.getName()));
-    }
-
-    private void setSensorType(@FingerprintSensorProperties.SensorType int sensorType) {
+    private void setSensor() {
         final ArrayList<FingerprintSensorPropertiesInternal> props = new ArrayList<>();
         props.add(new FingerprintSensorPropertiesInternal(
                 0 /* sensorId */,
                 SensorProperties.STRENGTH_STRONG,
                 1 /* maxEnrollmentsPerUser */,
                 new ArrayList<ComponentInfoInternal>(),
-                sensorType,
+                TYPE_UDFPS_OPTICAL,
                 true /* resetLockoutRequiresHardwareAuthToken */));
         doReturn(props).when(mFingerprintManager).getSensorPropertiesInternal();
     }
