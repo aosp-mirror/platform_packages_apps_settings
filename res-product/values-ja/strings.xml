@@ -52,6 +52,9 @@
     <string name="security_settings_face_enroll_introduction_message" product="default" msgid="847716059867943459">"顔認証を使用して、スマートフォンのロック解除、購入の許可、アプリへのログインを行うことができます。"</string>
     <string name="security_settings_face_enroll_introduction_message" product="tablet" msgid="3976493376026067375">"顔認証を使用して、タブレットのロック解除、購入の承認、アプリへのログインを行うことができます。"</string>
     <string name="security_settings_face_enroll_introduction_message" product="device" msgid="6432265830098806034">"顔認証を使用して、デバイスのロック解除、購入の承認、アプリへのログインを行うことができます。"</string>
+    <string name="security_settings_face_enroll_introduction_message_class3" product="default" msgid="6769683806920355534">"顔を使って、スマートフォンのロック解除やアプリでの認証（アプリへのログインや購入の承認など）を行います。"</string>
+    <string name="security_settings_face_enroll_introduction_message_class3" product="tablet" msgid="5417577899153380426">"顔を使って、タブレットのロック解除やアプリでの認証（アプリへのログインや購入の承認など）を行います。"</string>
+    <string name="security_settings_face_enroll_introduction_message_class3" product="device" msgid="3308243169735270987">"顔を使って、デバイスのロック解除やアプリでの認証（アプリへのログインや購入の承認など）を行います。"</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="9086377203303858619">"お子様に、顔認証を使ってスマートフォンのロック解除を行うことを許可します"</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="4560949471246282574">"お子様に、顔認証を使ってタブレットのロック解除を行うことを許可します"</string>
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="1156063265854416046">"お子様に、顔認証を使ってデバイスのロック解除を行うことを許可します"</string>
@@ -88,30 +91,18 @@
     <string name="security_settings_face_enroll_introduction_control_consent_message" product="default" msgid="6983939010814873996"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet" msgid="6983939010814873996"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_message" product="device" msgid="6983939010814873996"></string>
-    <!-- no translation found for security_settings_face_settings_footer (3036403896485044957) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_footer (3467711032275909082) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_footer (6237815625247917310) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_footer_attention_not_supported (8266896471278294942) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_footer_attention_not_supported (6932278790700490818) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_footer_attention_not_supported (2559602951942339212) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_footer_class3 (7050076350282827484) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_footer_class3 (8013245173915280810) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_footer_class3 (4411845832787210264) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_footer_class3_attention_not_supported (5512898803063743303) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_footer_class3_attention_not_supported (6790505667764631343) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_footer_class3_attention_not_supported (7858917821957779752) -->
-    <skip />
+    <string name="security_settings_face_settings_footer" product="default" msgid="3036403896485044957">"顔を使って、スマートフォンのロック解除やアプリでの認証（ログインや購入の承認など）を行います。\n\n注意事項:\n一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。\n\nスマートフォンに無意識に顔を向けても、ロックが解除されることがあります。\n\nスマートフォンを顔に近づけられた場合、他のユーザーによってスマートフォンのロックが解除されることがあります。\n\n双子など、あなたによく似た人でもスマートフォンのロックが解除されることがあります。"</string>
+    <string name="security_settings_face_settings_footer" product="tablet" msgid="3467711032275909082">"顔を使って、タブレットのロック解除やアプリでの認証（ログインや購入の承認など）を行います。\n\n注意事項:\n一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。\n\nタブレットに無意識に顔を向けても、ロックが解除されることがあります。\n\nタブレットを顔に近づけられた場合、他のユーザーによってタブレットのロックが解除されることがあります。\n\n双子など、あなたによく似た人でもタブレットのロックが解除されることがあります。"</string>
+    <string name="security_settings_face_settings_footer" product="device" msgid="6237815625247917310">"顔を使って、デバイスのロック解除やアプリでの認証（ログインや購入の承認など）を行います。\n\n注意事項:\n一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。\n\nデバイスに無意識に顔を向けても、ロックが解除されることがあります。\n\nデバイスを顔に近づけられた場合、他のユーザーによってデバイスのロックが解除されることがあります。\n\n双子など、あなたによく似た人でもデバイスのロックが解除されることがあります。"</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" product="default" msgid="8266896471278294942">"顔を使って、スマートフォンのロック解除やアプリでの認証（ログインや購入の承認など）を行います。\n\n注意事項:\n一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。\n\nスマートフォンに無意識に顔を向けても、ロックが解除されることがあります。\n\n目を閉じているときでもスマートフォンを顔に近づけられた場合、他のユーザーによってスマートフォンのロックが解除されることがあります。\n\n双子など、あなたによく似た人でもスマートフォンのロックを解除されることがあります。"</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" product="tablet" msgid="6932278790700490818">"顔を使って、タブレットのロック解除やアプリでの認証（ログインや購入の承認など）を行います。\n\n注意事項:\n一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。\n\nタブレットに無意識に顔を向けても、ロックが解除されることがあります。\n\n目を閉じているときでもタブレットを顔に近づけられた場合、他のユーザーによってタブレットのロックが解除されることがあります。\n\n双子など、あなたによく似た人でもタブレットのロックを解除されることがあります。"</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" product="device" msgid="2559602951942339212">"顔を使って、デバイスのロック解除やアプリでの認証（ログインや購入の承認など）を行います。\n\n注意事項:\n一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。\n\nデバイスに無意識に顔を向けても、ロックが解除されることがあります。\n\n目を閉じているときでもデバイスを顔に近づけられた場合、他のユーザーによってデバイスのロックが解除されることがあります。\n\n双子など、あなたによく似た人でもデバイスのロックを解除されることがあります。"</string>
+    <string name="security_settings_face_settings_footer_class3" product="default" msgid="7050076350282827484">"顔認証を使用して、スマートフォンのロック解除や本人確認（アプリへのログインや購入の承認など）を行います。\n\n注意事項:\n一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。\n\nスマートフォンに無意識に顔を向けても、ロックが解除されることがあります。\n\nスマートフォンを顔に近づけられた場合、他のユーザーによってスマートフォンのロックが解除されることがあります。\n\n双子など、あなたによく似た人でもスマートフォンのロックが解除されることがあります。"</string>
+    <string name="security_settings_face_settings_footer_class3" product="tablet" msgid="8013245173915280810">"顔認証を使用して、タブレットのロック解除や本人確認（アプリへのログインや購入の承認など）を行います。\n\n注意事項:\n一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。\n\nタブレットに無意識に顔を向けても、ロックが解除されることがあります。\n\nタブレットを顔に近づけられた場合、他のユーザーによってタブレットのロックが解除されることがあります。\n\n双子など、あなたによく似た人でもタブレットのロックが解除されることがあります。"</string>
+    <string name="security_settings_face_settings_footer_class3" product="device" msgid="4411845832787210264">"顔認証を使用して、デバイスのロック解除や本人確認（アプリへのログインや購入の承認など）を行います。\n\n注意事項:\n一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。\n\nデバイスに無意識に顔を向けても、ロックが解除されることがあります。\n\nデバイスを顔に近づけられた場合、他のユーザーによってデバイスのロックが解除されることがあります。\n\n双子など、あなたによく似た人でもデバイスのロックが解除されることがあります。"</string>
+    <string name="security_settings_face_settings_footer_class3_attention_not_supported" product="default" msgid="5512898803063743303">"顔認証を使用して、スマートフォンのロック解除や本人確認（アプリへのログインや購入の承認など）を行います。\n\n注意事項:\n一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。\n\nスマートフォンに無意識に顔を向けても、ロックが解除されることがあります。\n\n目を閉じているときでもスマートフォンを顔に近づけられた場合、他のユーザーによってスマートフォンのロックが解除されることがあります。\n\n双子など、あなたによく似た人でもスマートフォンのロックを解除されることがあります。"</string>
+    <string name="security_settings_face_settings_footer_class3_attention_not_supported" product="tablet" msgid="6790505667764631343">"顔認証を使用して、タブレットのロック解除や本人確認（アプリへのログインや購入の承認など）を行います。\n\n注意事項:\n一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。\n\nタブレットに無意識に顔を向けても、ロックが解除されることがあります。\n\n目を閉じているときでもタブレットを顔に近づけられた場合、他のユーザーによってタブレットのロックが解除されることがあります。\n\n双子など、あなたによく似た人でもタブレットのロックを解除されることがあります。"</string>
+    <string name="security_settings_face_settings_footer_class3_attention_not_supported" product="device" msgid="7858917821957779752">"顔認証を使用して、デバイスのロック解除や本人確認（アプリへのログインや購入の承認など）を行います。\n\n注意事項:\n一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。\n\nデバイスに無意識に顔を向けても、ロックが解除されることがあります。\n\n目を閉じているときでもデバイスを顔に近づけられた場合、他のユーザーによってデバイスのロックが解除されることがあります。\n\n双子など、あなたによく似た人でもデバイスのロックを解除されることがあります。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v3_message" msgid="2145273491174234191">"指紋を使って <xliff:g id="DEVICENAME">%s</xliff:g> のロック解除や本人確認（アプリへのログインや購入の承認など）を行えるようにします。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="5101253231118659496">"お子様に、指紋を使ってスマートフォンのロック解除や本人確認を行うことを許可します。アプリへのログインや購入の承認などに顔を使用できるようになります。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="3063978167545799342">"指紋を使ってタブレットのロック解除や本人確認を行うことをお子様に許可します。アプリへのログインや購入の承認などの際に利用できます。"</string>
@@ -327,7 +318,7 @@
     <string name="ambient_display_title" product="default" msgid="8027137727044125809">"画面をダブルタップして通知を確認"</string>
     <string name="ambient_display_title" product="tablet" msgid="2347746118188465334">"タブレットの画面をダブルタップして通知をチェック"</string>
     <string name="ambient_display_title" product="device" msgid="6306105102175823199">"デバイスの画面をダブルタップして通知をチェック"</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="6753194901596847876">"スマートフォンを持ち上げて通知を確認"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="6753194901596847876">"スマートフォンを持ち上げてチェック"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="1166999144900082897">"タブレットを持ち上げて通知をチェック"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="2091669267677915975">"デバイスを持ち上げて通知をチェック"</string>
     <string name="ambient_display_pickup_summary" product="default" msgid="135853288202686097">"スマートフォンを持ち上げることで、時刻、通知などの情報を確認できます。"</string>
