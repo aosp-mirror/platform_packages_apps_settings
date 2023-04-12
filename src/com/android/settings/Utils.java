@@ -986,17 +986,6 @@ public final class Utils extends com.android.settingslib.Utils {
         return false;
     }
 
-    /**
-     * Return the resource id to represent the install status for an app
-     */
-    @StringRes
-    public static int getInstallationStatus(ApplicationInfo info) {
-        if ((info.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {
-            return R.string.not_installed;
-        }
-        return info.enabled ? R.string.installed : R.string.disabled;
-    }
-
     private static boolean isVolumeValid(VolumeInfo volume) {
         return (volume != null) && (volume.getType() == VolumeInfo.TYPE_PRIVATE)
                 && volume.isMountedReadable();

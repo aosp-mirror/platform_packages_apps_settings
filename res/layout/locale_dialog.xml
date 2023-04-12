@@ -21,7 +21,9 @@
     android:paddingStart="@dimen/admin_details_dialog_padding"
     android:paddingEnd="@dimen/admin_details_dialog_padding"
     android:paddingBottom="@dimen/admin_details_dialog_padding_bottom"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layoutDirection="locale"
+    android:textDirection="locale">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,7 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center_horizontal"
-            android:textAppearance="@style/TextAppearance.AdminDialogTitle"/>
+            android:textAppearance="@style/TextAppearance.AdminDialogTitle"
+            android:textAlignment="textStart"/>
     </LinearLayout>
 
     <ScrollView
@@ -51,15 +54,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/dialog_msg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLength="200"
-                android:gravity="left"
                 android:autoLink="email|phone|web"
-                android:textColor="?android:attr/textColorSecondary"/>
+                android:textColor="?android:attr/textColorSecondary"
+                android:textAlignment="textStart"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

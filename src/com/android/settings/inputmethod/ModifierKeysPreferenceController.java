@@ -18,12 +18,12 @@ package com.android.settings.inputmethod;
 
 import android.content.Context;
 import android.hardware.input.InputManager;
+import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -41,8 +41,8 @@ import java.util.Objects;
 
 public class ModifierKeysPreferenceController extends BasePreferenceController {
 
-    private static String KEY_TAG = "modifier_keys_dialog_tag";
-    private static String KEY_RESTORE_PREFERENCE = "modifier_keys_restore";
+    private static final String KEY_TAG = "modifier_keys_dialog_tag";
+    private static final String KEY_RESTORE_PREFERENCE = "modifier_keys_restore";
 
     private static final String KEY_PREFERENCE_CAPS_LOCK = "modifier_keys_caps_lock";
     private static final String KEY_PREFERENCE_CTRL = "modifier_keys_ctrl";
@@ -52,6 +52,7 @@ public class ModifierKeysPreferenceController extends BasePreferenceController {
     private Fragment mParent;
     private FragmentManager mFragmentManager;
     private final InputManager mIm;
+    private PreferenceScreen mScreen;
 
     private final List<Integer> mRemappableKeys = new ArrayList<>(
             Arrays.asList(
@@ -82,40 +83,39 @@ public class ModifierKeysPreferenceController extends BasePreferenceController {
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-
         if (mParent == null) {
             return;
         }
+        mScreen = screen;
+        refreshUi();
+    }
 
+    private void refreshUi() {
         for (Map.Entry<Integer, Integer> entry : mIm.getModifierKeyRemapping().entrySet()) {
             int fromKey = entry.getKey();
             int toKey = entry.getValue();
             int index = mRemappableKeys.indexOf(toKey);
 
             if (isCtrl(fromKey) && mRemappableKeys.contains(toKey)) {
-                Preference preference = screen.findPreference(KEY_PREFERENCE_CTRL);
+                Preference preference = mScreen.findPreference(KEY_PREFERENCE_CTRL);
                 preference.setSummary(changeSummaryColor(mKeyNames[index]));
             }
 
             if (isMeta(fromKey) && mRemappableKeys.contains(toKey)) {
-                Preference preference = screen.findPreference(KEY_PREFERENCE_META);
+                Preference preference = mScreen.findPreference(KEY_PREFERENCE_META);
                 preference.setSummary(changeSummaryColor(mKeyNames[index]));
             }
 
             if (isAlt(fromKey) && mRemappableKeys.contains(toKey)) {
-                Preference preference = screen.findPreference(KEY_PREFERENCE_ALT);
+                Preference preference = mScreen.findPreference(KEY_PREFERENCE_ALT);
                 preference.setSummary(changeSummaryColor(mKeyNames[index]));
             }
 
             if (isCapLock(fromKey) && mRemappableKeys.contains(toKey)) {
-                Preference preference = screen.findPreference(KEY_PREFERENCE_CAPS_LOCK);
+                Preference preference = mScreen.findPreference(KEY_PREFERENCE_CAPS_LOCK);
                 preference.setSummary(changeSummaryColor(mKeyNames[index]));
             }
         }
-
-        // The dialog screen depends on the previous selected key's fragment.
-        // In the rotation scenario, we should remove the previous dialog screen first.
-        clearPreviousDialog();
     }
 
     @Override
@@ -133,19 +133,18 @@ public class ModifierKeysPreferenceController extends BasePreferenceController {
     }
 
     private void showModifierKeysDialog(Preference preference) {
-        ModifierKeysPickerDialogFragment fragment =
-                new ModifierKeysPickerDialogFragment(preference, mIm);
-        fragment.setTargetFragment(mParent, 0);
-        fragment.show(mFragmentManager, KEY_TAG);
-    }
-
-    private void clearPreviousDialog() {
         mFragmentManager = mParent.getFragmentManager();
-        DialogFragment preKeysDialogFragment =
-                (DialogFragment) mFragmentManager.findFragmentByTag(KEY_TAG);
-        if (preKeysDialogFragment != null) {
-            preKeysDialogFragment.dismiss();
-        }
+        ModifierKeysPickerDialogFragment fragment = new ModifierKeysPickerDialogFragment();
+        fragment.setTargetFragment(mParent, 0);
+        Bundle bundle = new Bundle();
+        bundle.putString(
+                ModifierKeysPickerDialogFragment.DEFAULT_KEY,
+                preference.getTitle().toString());
+        bundle.putString(
+                ModifierKeysPickerDialogFragment.SELECTION_KEY,
+                preference.getSummary().toString());
+        fragment.setArguments(bundle);
+        fragment.show(mFragmentManager, KEY_TAG);
     }
 
     private Spannable changeSummaryColor(String summary) {
