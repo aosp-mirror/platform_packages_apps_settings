@@ -18,8 +18,16 @@ package com.android.settings.development;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import android.content.Context;
+import android.content.om.IOverlayManager;
+import android.content.pm.UserInfo;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.os.UserManager;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
@@ -31,14 +39,23 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
+
+import java.util.Arrays;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ForceEnableNotesRolePreferenceControllerTest.ShadowOverlayManagerStub.class)
 public class ForceEnableNotesRolePreferenceControllerTest {
-
     @Mock
     private PreferenceScreen mScreen;
     @Mock
     private SwitchPreference mPreference;
+    @Mock
+    private UserManager mUserManager;
+    @Mock
+    private static IOverlayManager sOverlayManager;
 
     private ForceEnableNotesRolePreferenceController mController;
 
@@ -59,6 +76,27 @@ public class ForceEnableNotesRolePreferenceControllerTest {
         };
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
+    }
+
+    @Test
+    public void setEnabled_updatesForAllFullAndProfileUsers() throws RemoteException {
+        Context context = spy(RuntimeEnvironment.application.getApplicationContext());
+        UserInfo user1 = new UserInfo(1, "Name", "Path", 0x0ff0ff,
+                UserManager.USER_TYPE_FULL_SYSTEM);
+        UserInfo user2 = new UserInfo(2, "Name", "Path", 0x0ff0ff,
+                UserManager.USER_TYPE_PROFILE_MANAGED);
+        UserInfo user3 = new UserInfo(3, "Name", "Path", 0x0ff0ff, "Some other type");
+        when(context.getSystemService(UserManager.class)).thenReturn(mUserManager);
+
+        when(mUserManager.getUsers()).thenReturn(Arrays.asList(user1, user2, user3));
+
+        mController = new ForceEnableNotesRolePreferenceController(context);
+        mController.setEnabled(true);
+
+        verify(sOverlayManager).setEnabled(
+                ForceEnableNotesRolePreferenceController.OVERLAY_PACKAGE_NAME, true, 1);
+        verify(sOverlayManager).setEnabled(
+                ForceEnableNotesRolePreferenceController.OVERLAY_PACKAGE_NAME, true, 2);
     }
 
     @Test
@@ -98,5 +136,13 @@ public class ForceEnableNotesRolePreferenceControllerTest {
         assertFalse(mController.isEnabled());
         verify(mPreference).setEnabled(false);
         verify(mPreference).setChecked(false);
+    }
+
+    @Implements(IOverlayManager.Stub.class)
+    public static class ShadowOverlayManagerStub {
+        @Implementation
+        public static IOverlayManager asInterface(IBinder iBinder) {
+            return sOverlayManager;
+        }
     }
 }
