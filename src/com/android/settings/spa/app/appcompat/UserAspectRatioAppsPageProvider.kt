@@ -32,7 +32,6 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.applications.appcompat.UserAspectRatioManager
@@ -177,7 +176,6 @@ class UserAspectRatioAppListModel(private val context: Context)
         }
     )
 
-    @OptIn(ExperimentalLifecycleComposeApi::class)
     @Composable
     override fun getSummary(option: Int, record: UserAspectRatioAppListItemModel) : State<String> =
         remember(record.override) {
