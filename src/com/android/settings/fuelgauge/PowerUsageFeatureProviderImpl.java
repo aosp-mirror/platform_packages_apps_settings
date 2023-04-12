@@ -16,6 +16,8 @@
 
 package com.android.settings.fuelgauge;
 
+import static com.android.settings.Utils.SYSTEMUI_PACKAGE_NAME;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -35,9 +37,8 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
 
     private static final String PACKAGE_CALENDAR_PROVIDER = "com.android.providers.calendar";
     private static final String PACKAGE_MEDIA_PROVIDER = "com.android.providers.media";
-    private static final String PACKAGE_SYSTEMUI = "com.android.systemui";
     private static final String[] PACKAGES_SYSTEM = {PACKAGE_MEDIA_PROVIDER,
-            PACKAGE_CALENDAR_PROVIDER, PACKAGE_SYSTEMUI};
+            PACKAGE_CALENDAR_PROVIDER, SYSTEMUI_PACKAGE_NAME};
 
     protected PackageManager mPackageManager;
     protected Context mContext;
