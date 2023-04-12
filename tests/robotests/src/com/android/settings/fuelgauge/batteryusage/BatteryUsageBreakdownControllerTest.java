@@ -176,7 +176,7 @@ public final class BatteryUsageBreakdownControllerTest {
     }
 
     @Test
-    public void removeAndCacheAllUnusedPreferences_removePerf_buildCacheAndRemoveAllPreference() {
+    public void removeAndCacheAllUnusedPreferences_removePref_buildCacheAndRemoveAllPreference() {
         doReturn(1).when(mAppListPreferenceGroup).getPreferenceCount();
         doReturn(mPowerGaugePreference).when(mAppListPreferenceGroup).getPreference(0);
         doReturn(PREF_KEY2).when(mBatteryHistEntry).getKey();
@@ -193,7 +193,7 @@ public final class BatteryUsageBreakdownControllerTest {
     }
 
     @Test
-    public void removeAndCacheAllUnusedPreferences_keepPerf_KeepAllPreference() {
+    public void removeAndCacheAllUnusedPreferences_keepPref_KeepAllPreference() {
         doReturn(1).when(mAppListPreferenceGroup).getPreferenceCount();
         doReturn(mPowerGaugePreference).when(mAppListPreferenceGroup).getPreference(0);
         doReturn(PREF_KEY).when(mBatteryHistEntry).getKey();
