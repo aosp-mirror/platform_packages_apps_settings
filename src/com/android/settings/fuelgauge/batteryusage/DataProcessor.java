@@ -725,9 +725,9 @@ public final class DataProcessor {
     @VisibleForTesting
     @Nullable
     static Map<Long, Map<String, List<AppUsagePeriod>>> buildAppUsagePeriodList(
-            final List<AppUsageEvent> allAppUsageEvents, final List<BatteryEvent> batteryEventList,
+            final List<AppUsageEvent> appUsageEvents, final List<BatteryEvent> batteryEventList,
             final long startTime, final long endTime) {
-        if (allAppUsageEvents.isEmpty()) {
+        if (appUsageEvents.isEmpty()) {
             return null;
         }
 
@@ -735,7 +735,7 @@ public final class DataProcessor {
         // use.
         final List<AppUsageEvent> deviceEvents = new ArrayList<>();
         final ArrayMap<Integer, List<AppUsageEvent>> usageEventsByInstanceId = new ArrayMap<>();
-        for (final AppUsageEvent event : allAppUsageEvents) {
+        for (final AppUsageEvent event : appUsageEvents) {
             final AppUsageEventType eventType = event.getType();
             if (eventType == AppUsageEventType.ACTIVITY_RESUMED
                     || eventType == AppUsageEventType.ACTIVITY_STOPPED) {
