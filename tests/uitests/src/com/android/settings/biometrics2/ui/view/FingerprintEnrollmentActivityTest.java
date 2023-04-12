@@ -33,6 +33,7 @@ import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.Until;
 
+import androidx.annotation.NonNull;
 import androidx.test.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
 
@@ -54,11 +55,17 @@ public class FingerprintEnrollmentActivityTest {
     private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
     private static final String ACTIVITY_CLASS_NAME =
             "com.android.settings.biometrics2.ui.view.FingerprintEnrollmentActivity";
-    public static final String EXTRA_IS_SETUP_FLOW = "isSetupFlow";
+    private static final String EXTRA_IS_SETUP_FLOW = "isSetupFlow";
+    private static final String EXTRA_SKIP_FIND_SENSOR = "skip_find_sensor";
     private static final String EXTRA_FROM_SETTINGS_SUMMARY = "from_settings_summary";
     private static final String EXTRA_PAGE_TRANSITION_TYPE = "page_transition_type";
     private static final String EXTRA_KEY_GK_PW_HANDLE = "gk_pw_handle";
     private static final String TEST_PIN = "1234";
+
+    private static final String UDFPS_ENROLLING_TITLE = "Touch & hold the fingerprint sensor";
+    private static final String SFPS_ENROLLING_TITLE =
+            "Lift, then touch. Move your finger slightly each time.";
+    private static final String RFPS_ENROLLING_TITLE = "Lift, then touch again";
 
     private UiDevice mDevice;
     private byte[] mToken = new byte[]{};
@@ -66,6 +73,7 @@ public class FingerprintEnrollmentActivityTest {
     private boolean mFingerprintPropCallbackLaunched;
     private boolean mCanAssumeUdfps;
     private boolean mCanAssumeSfps;
+    private String mEnrollingTitle;
 
     private static final int IDLE_TIMEOUT = 10000;
 
@@ -94,6 +102,13 @@ public class FingerprintEnrollmentActivityTest {
                         final FingerprintSensorPropertiesInternal prop = list.get(0);
                         mCanAssumeUdfps = prop.isAnyUdfpsType();
                         mCanAssumeSfps = prop.isAnySidefpsType();
+                        if (mCanAssumeUdfps) {
+                            mEnrollingTitle = UDFPS_ENROLLING_TITLE;
+                        } else if (mCanAssumeSfps) {
+                            mEnrollingTitle = SFPS_ENROLLING_TITLE;
+                        } else {
+                            mEnrollingTitle = RFPS_ENROLLING_TITLE;
+                        }
                     }
                 });
 
@@ -106,8 +121,9 @@ public class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    public void testLaunchChooseLock() {
-        launchFingerprintEnrollActivity(false, null);
+    public void testIntroChooseLock() {
+        final Intent intent = newActivityIntent();
+        mContext.startActivity(intent);
         assertThat(mDevice.wait(Until.hasObject(By.text("Choose your backup screen lock method")),
                 IDLE_TIMEOUT)).isTrue();
     }
@@ -135,12 +151,12 @@ public class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    public void testLaunchWithGkPwHandle_withUdfps_clickStart() {
+    public void testIntroWithGkPwHandle_withUdfps_clickStart() {
         assumeTrue(mCanAssumeUdfps);
 
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true);
 
-        launchFingerprintEnrollActivityWithGkPwHandle(false);
+        launchIntroWithGkPwHandle(false);
 
         // Intro page
         verifyIntroPage();
@@ -159,17 +175,16 @@ public class FingerprintEnrollmentActivityTest {
         startBtn.click();
 
         // Enrolling page
-        assertThat(mDevice.wait(Until.hasObject(By.text("Touch & hold the fingerprint sensor")),
-                IDLE_TIMEOUT)).isTrue();
+        assertThat(mDevice.wait(Until.hasObject(By.text(mEnrollingTitle)), IDLE_TIMEOUT)).isTrue();
     }
 
     @Test
-    public void testLaunchWithGkPwHandle_withUdfps_clickLottie() {
+    public void testIntroWithGkPwHandle_withUdfps_clickLottie() {
         assumeTrue(mCanAssumeUdfps);
 
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true);
 
-        launchFingerprintEnrollActivityWithGkPwHandle(false);
+        launchIntroWithGkPwHandle(false);
 
         // Intro page
         verifyIntroPage();
@@ -188,17 +203,16 @@ public class FingerprintEnrollmentActivityTest {
         lottie.click();
 
         // Enrolling page
-        assertThat(mDevice.wait(Until.hasObject(By.text("Touch & hold the fingerprint sensor")),
-                IDLE_TIMEOUT)).isTrue();
+        assertThat(mDevice.wait(Until.hasObject(By.text(mEnrollingTitle)), IDLE_TIMEOUT)).isTrue();
     }
 
     @Test
-    public void testLaunchWithGkPwHandle_withSfps() {
+    public void testIntroWithGkPwHandle_withSfps() {
         assumeTrue(mCanAssumeSfps);
 
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true);
 
-        launchFingerprintEnrollActivityWithGkPwHandle(false);
+        launchIntroWithGkPwHandle(false);
 
         // Intro page
         verifyIntroPage();
@@ -216,12 +230,12 @@ public class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    public void testLaunchWithGkPwHandle_withRfps() {
+    public void testIntroWithGkPwHandle_withRfps() {
         assumeFalse(mCanAssumeUdfps || mCanAssumeSfps);
 
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true);
 
-        launchFingerprintEnrollActivityWithGkPwHandle(false);
+        launchIntroWithGkPwHandle(false);
 
         // Intro page
         verifyIntroPage();
@@ -241,10 +255,10 @@ public class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    public void testLaunchWithGkPwHandle_clickNoThanksInIntroPage() {
+    public void testIntroWithGkPwHandle_clickNoThanksInIntroPage() {
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true);
 
-        launchFingerprintEnrollActivityWithGkPwHandle(false);
+        launchIntroWithGkPwHandle(false);
 
         // Intro page
         verifyIntroPage();
@@ -258,10 +272,10 @@ public class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    public void testLaunchWithGkPwHandle_clickSkipInFindSensor() {
+    public void testIntroWithGkPwHandle_clickSkipInFindSensor() {
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true);
 
-        launchFingerprintEnrollActivityWithGkPwHandle(false);
+        launchIntroWithGkPwHandle(false);
 
         // Intro page
         verifyIntroPage();
@@ -282,10 +296,10 @@ public class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    public void testLaunchWithGkPwHandle_clickSkipAnywayInFindFpsDialog_whenIsSuw() {
+    public void testIntroWithGkPwHandle_clickSkipAnywayInFindFpsDialog_whenIsSuw() {
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true);
 
-        launchFingerprintEnrollActivityWithGkPwHandle(true);
+        launchIntroWithGkPwHandle(true);
 
         // Intro page
         verifyIntroPage();
@@ -315,10 +329,10 @@ public class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    public void testLaunchWithGkPwHandle_clickGoBackInFindFpsDialog_whenIsSuw() {
+    public void testIntroWithGkPwHandle_clickGoBackInFindFpsDialog_whenIsSuw() {
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true);
 
-        launchFingerprintEnrollActivityWithGkPwHandle(true);
+        launchIntroWithGkPwHandle(true);
 
         // Intro page
         verifyIntroPage();
@@ -346,11 +360,91 @@ public class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    public void testLaunchCheckPin() {
+    public void testIntroCheckPin() {
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true);
-        launchFingerprintEnrollActivity(false, null);
+        final Intent intent = newActivityIntent();
+        mContext.startActivity(intent);
         assertThat(mDevice.wait(Until.hasObject(By.text("Enter your device PIN to continue")),
                 IDLE_TIMEOUT)).isTrue();
+    }
+
+    @Test
+    public void testEnrollingWithGkPwHandle() {
+        LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true);
+
+        launchEnrollingWithGkPwHandle();
+
+        // Enrolling screen
+        mDevice.waitForIdle();
+        assertThat(mDevice.wait(Until.hasObject(By.text(mEnrollingTitle)), IDLE_TIMEOUT)).isTrue();
+    }
+
+    @Test
+    public void testEnrollingIconTouchDialog_withSfps() {
+        assumeTrue(mCanAssumeSfps);
+
+        LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true);
+
+        launchEnrollingWithGkPwHandle();
+
+        // Enrolling screen
+        mDevice.waitForIdle();
+        assertThat(mDevice.wait(Until.hasObject(By.text(mEnrollingTitle)), IDLE_TIMEOUT)).isTrue();
+
+        final UiObject2 lottie = mDevice.findObject(By.res(SETTINGS_PACKAGE_NAME,
+                "illustration_lottie"));
+        assertThat(lottie).isNotNull();
+
+        lottie.click();
+        lottie.click();
+        lottie.click();
+
+        // IconTouchDialog
+        mDevice.waitForIdle();
+        assertThat(mDevice.wait(Until.hasObject(By.text("Touch the sensor instead")), IDLE_TIMEOUT))
+                .isTrue();
+        final UiObject2 okButton = mDevice.findObject(By.text("OK"));
+        assertThat(okButton).isNotNull();
+
+        okButton.click();
+
+        // Enrolling screen again
+        mDevice.waitForIdle();
+        assertThat(mDevice.wait(Until.hasObject(By.text(mEnrollingTitle)), IDLE_TIMEOUT)).isTrue();
+    }
+
+    @Test
+    public void testEnrollingIconTouchDialog_withRfps() {
+        assumeFalse(mCanAssumeUdfps || mCanAssumeSfps);
+
+        LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true);
+
+        launchEnrollingWithGkPwHandle();
+
+        // Enrolling screen
+        mDevice.waitForIdle();
+        assertThat(mDevice.wait(Until.hasObject(By.text(mEnrollingTitle)), IDLE_TIMEOUT)).isTrue();
+
+        final UiObject2 lottie = mDevice.findObject(By.res(SETTINGS_PACKAGE_NAME,
+                "fingerprint_progress_bar"));
+        assertThat(lottie).isNotNull();
+
+        lottie.click();
+        lottie.click();
+        lottie.click();
+
+        // IconTouchDialog
+        mDevice.waitForIdle();
+        assertThat(mDevice.wait(Until.hasObject(By.text("Whoops, that\u2019s not the sensor")),
+                IDLE_TIMEOUT)).isTrue();
+        final UiObject2 okButton = mDevice.findObject(By.text("OK"));
+        assertThat(okButton).isNotNull();
+
+        okButton.click();
+
+        // Enrolling screen again
+        mDevice.waitForIdle();
+        assertThat(mDevice.wait(Until.hasObject(By.text(mEnrollingTitle)), IDLE_TIMEOUT)).isTrue();
     }
 
     @After
@@ -359,30 +453,45 @@ public class FingerprintEnrollmentActivityTest {
         mDevice.pressHome();
     }
 
-    private void launchFingerprintEnrollActivityWithGkPwHandle(boolean isSuw) {
+    private void launchIntroWithGkPwHandle(boolean isSuw) {
         LockPatternUtils lockPatternUtils = new LockPatternUtils(mContext);
         final LockscreenCredential lockscreenCredential = LockscreenCredential.createPin(TEST_PIN);
         final int userId = UserHandle.myUserId();
         final LockPatternChecker.OnVerifyCallback onVerifyCallback = (response, timeoutMs) -> {
-            launchFingerprintEnrollActivity(isSuw, response.getGatekeeperPasswordHandle());
+            final Intent intent = newActivityIntent();
+            if (isSuw) {
+                intent.putExtra(EXTRA_IS_SETUP_FLOW, true);
+            }
+            intent.putExtra(EXTRA_KEY_GK_PW_HANDLE, response.getGatekeeperPasswordHandle());
+            mContext.startActivity(intent);
         };
         LockPatternChecker.verifyCredential(lockPatternUtils, lockscreenCredential,
                 userId, LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE, onVerifyCallback);
     }
 
-    private void launchFingerprintEnrollActivity(boolean isSuw, Long gkPwHandle) {
+    private void launchEnrollingWithGkPwHandle() {
+        LockPatternUtils lockPatternUtils = new LockPatternUtils(mContext);
+        final LockscreenCredential lockscreenCredential = LockscreenCredential.createPin(TEST_PIN);
+        final int userId = UserHandle.myUserId();
+        final LockPatternChecker.OnVerifyCallback onVerifyCallback = (response, timeoutMs) -> {
+            final Intent intent = newActivityIntent();
+            intent.putExtra(EXTRA_SKIP_FIND_SENSOR, true);
+            intent.putExtra(EXTRA_KEY_GK_PW_HANDLE, response.getGatekeeperPasswordHandle());
+            mContext.startActivity(intent);
+        };
+        LockPatternChecker.verifyCredential(lockPatternUtils, lockscreenCredential,
+                userId, LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE, onVerifyCallback);
+    }
+
+    @NonNull
+    private Intent newActivityIntent() {
         Intent intent = new Intent();
         intent.setClassName(SETTINGS_PACKAGE_NAME, ACTIVITY_CLASS_NAME);
-        if (isSuw) {
-            intent.putExtra(EXTRA_IS_SETUP_FLOW, true);
-        }
         intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, true);
         intent.putExtra(EXTRA_PAGE_TRANSITION_TYPE, 1);
         intent.putExtra(Intent.EXTRA_USER_ID, mContext.getUserId());
-        if (gkPwHandle != null) {
-            intent.putExtra(EXTRA_KEY_GK_PW_HANDLE, gkPwHandle);
-        }
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        mContext.startActivity(intent);
+        return intent;
+
     }
 }
