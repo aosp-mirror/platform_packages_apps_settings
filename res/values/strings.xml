@@ -410,9 +410,9 @@
     <!-- The summary of default string for each regional preference. [CHAR LIMIT=50] -->
     <string name="default_string_of_regional_preference">Use app default</string>
     <!-- The title of Celsius for preference of temperature unit. [CHAR LIMIT=50] -->
-    <string name="celsius_temperature_unit">Celsius(\u00B0C)</string>
+    <string name="celsius_temperature_unit">Celsius (\u00B0C)</string>
     <!-- The title of Fahrenheit for preference of temperature unit. [CHAR LIMIT=50] -->
-    <string name="fahrenheit_temperature_unit">Fahrenheit(\u00B0F)</string>
+    <string name="fahrenheit_temperature_unit">Fahrenheit (\u00B0F)</string>
     <!-- The title of sunday for preference of first day of week. [CHAR LIMIT=50] -->
     <string name="sunday_first_day_of_week">Sunday</string>
     <!-- The title of monday for preference of first day of week. [CHAR LIMIT=50] -->
@@ -427,6 +427,12 @@
     <string name="friday_first_day_of_week">Friday</string>
     <!-- The title of saturday for preference of first day of week. [CHAR LIMIT=50] -->
     <string name="saturday_first_day_of_week">Saturday</string>
+    <!-- Title for regional preference footer. [CHAR LIMIT=NONE] -->
+    <string name="title_regional_pref_footer">If an app doesn’t support regional preferences, the app will use its default locale settings.</string>
+    <!-- Description for text in regional preference footer. [CHAR LIMIT=NONE] -->
+    <string name="desc_regional_pref_footer_learn_more">Learn more about language preferences.</string>
+    <!-- TODO(b/277573274): Update the learn more url in the regional preference. -->
+    <string name="regional_pref_footer_learn_more_link" translatable="false">https://support.google.com/android</string>
 
     <!-- The title of the confirmation dialog shown when the user selects one / several languages and tries to remove them [CHAR LIMIT=60] -->
     <string name="dlg_remove_locales_title">{count, plural,
@@ -12041,4 +12047,7 @@
 
     <!-- Warning message when we try to dock an app not supporting multiple instances split into multiple sides [CHAR LIMIT=NONE] -->
     <string name="dock_multi_instances_not_supported_text">"This app can only be opened in 1 window"</string>
+
+    <!-- [CHAR LIMIT=30] Label used to open Note Task -->
+    <string name="note_task_button_label">Notetaking</string>
 </resources>

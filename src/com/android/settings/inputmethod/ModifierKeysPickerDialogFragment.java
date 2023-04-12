@@ -18,6 +18,7 @@ package com.android.settings.inputmethod;
 
 import static android.view.WindowManager.LayoutParams.TYPE_SYSTEM_DIALOG;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -52,11 +53,13 @@ import java.util.Map;
 
 public class ModifierKeysPickerDialogFragment extends DialogFragment {
 
+    static final String DEFAULT_KEY = "default_key";
+    static final String SELECTION_KEY = "delection_key";
+
     private Preference mPreference;
     private String mKeyDefaultName;
     private String mKeyFocus;
-    private Context mContext;
-    private InputManager mIm;
+    private Activity mActivity;
 
     private List<int[]> mRemappableKeyList =
             new ArrayList<>(Arrays.asList(
@@ -67,36 +70,41 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
 
     private Map<String, int[]> mRemappableKeyMap = new HashMap<>();
 
-    public ModifierKeysPickerDialogFragment() {
-    }
+    public ModifierKeysPickerDialogFragment() {}
 
-    public ModifierKeysPickerDialogFragment(Preference preference, InputManager inputManager) {
-        mPreference = preference;
-        mKeyDefaultName = preference.getTitle().toString();
-        mKeyFocus = preference.getSummary().toString();
-        mIm = inputManager;
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putString(SELECTION_KEY, mKeyFocus);
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
-        mContext = getActivity();
+
+        mActivity = getActivity();
+        InputManager inputManager = mActivity.getSystemService(InputManager.class);
+        mKeyDefaultName = getArguments().getString(DEFAULT_KEY);
+        mKeyFocus = getArguments().getString(SELECTION_KEY);
+        if (savedInstanceState != null) {
+            mKeyFocus = savedInstanceState.getString(SELECTION_KEY);
+        }
         List<String> modifierKeys = new ArrayList<String>(Arrays.asList(
-                mContext.getString(R.string.modifier_keys_caps_lock),
-                mContext.getString(R.string.modifier_keys_ctrl),
-                mContext.getString(R.string.modifier_keys_meta),
-                mContext.getString(R.string.modifier_keys_alt)));
+                mActivity.getString(R.string.modifier_keys_caps_lock),
+                mActivity.getString(R.string.modifier_keys_ctrl),
+                mActivity.getString(R.string.modifier_keys_meta),
+                mActivity.getString(R.string.modifier_keys_alt)));
         for (int i = 0; i < modifierKeys.size(); i++) {
             mRemappableKeyMap.put(modifierKeys.get(i), mRemappableKeyList.get(i));
         }
 
         View dialoglayout  =
-                LayoutInflater.from(mContext).inflate(R.layout.modifier_key_picker_dialog, null);
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
+                LayoutInflater.from(mActivity).inflate(R.layout.modifier_key_picker_dialog, null);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mActivity);
         dialogBuilder.setView(dialoglayout);
 
         TextView summary = dialoglayout.findViewById(R.id.modifier_key_picker_summary);
-        CharSequence summaryText = mContext.getString(
+        CharSequence summaryText = mActivity.getString(
                 R.string.modifier_keys_picker_summary, mKeyDefaultName);
         summary.setText(summaryText);
 
@@ -119,14 +127,14 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
             Spannable itemSummary;
             if (selectedItem.equals(mKeyDefaultName)) {
                 itemSummary = new SpannableString(
-                        mContext.getString(R.string.modifier_keys_default_summary));
+                        mActivity.getString(R.string.modifier_keys_default_summary));
                 itemSummary.setSpan(
                         new ForegroundColorSpan(getColorOfTextColorSecondary()),
                         0, itemSummary.length(), 0);
                 // Set keys to default.
                 int[] keys = mRemappableKeyMap.get(mKeyDefaultName);
                 for (int i = 0; i < keys.length; i++) {
-                    mIm.remapModifierKey(keys[i], keys[i]);
+                    inputManager.remapModifierKey(keys[i], keys[i]);
                 }
             } else {
                 itemSummary = new SpannableString(selectedItem);
@@ -136,29 +144,29 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
                 int[] fromKeys = mRemappableKeyMap.get(mKeyDefaultName);
                 int[] toKeys = mRemappableKeyMap.get(selectedItem);
                 // CAPS_LOCK only one key, so always choose the left key for remapping.
-                if (isKeyCapsLock(mContext, mKeyDefaultName)) {
-                    mIm.remapModifierKey(fromKeys[0], toKeys[0]);
+                if (isKeyCapsLock(mActivity, mKeyDefaultName)) {
+                    inputManager.remapModifierKey(fromKeys[0], toKeys[0]);
                 }
                 // Remap KEY_LEFT and KEY_RIGHT to CAPS_LOCK.
-                if (!isKeyCapsLock(mContext, mKeyDefaultName)
-                        && isKeyCapsLock(mContext, selectedItem)) {
-                    mIm.remapModifierKey(fromKeys[0], toKeys[0]);
-                    mIm.remapModifierKey(fromKeys[1], toKeys[0]);
+                if (!isKeyCapsLock(mActivity, mKeyDefaultName)
+                        && isKeyCapsLock(mActivity, selectedItem)) {
+                    inputManager.remapModifierKey(fromKeys[0], toKeys[0]);
+                    inputManager.remapModifierKey(fromKeys[1], toKeys[0]);
                 }
                 // Auto handle left and right keys remapping.
-                if (!isKeyCapsLock(mContext, mKeyDefaultName)
-                        && !isKeyCapsLock(mContext, selectedItem)) {
-                    mIm.remapModifierKey(fromKeys[0], toKeys[0]);
-                    mIm.remapModifierKey(fromKeys[1], toKeys[1]);
+                if (!isKeyCapsLock(mActivity, mKeyDefaultName)
+                        && !isKeyCapsLock(mActivity, selectedItem)) {
+                    inputManager.remapModifierKey(fromKeys[0], toKeys[0]);
+                    inputManager.remapModifierKey(fromKeys[1], toKeys[1]);
                 }
             }
-            mPreference.setSummary(itemSummary);
-            modifierKeyDialog.dismiss();
+            dismiss();
+            mActivity.recreate();
         });
 
         Button cancelButton = dialoglayout.findViewById(R.id.modifier_key_cancel_button);
         cancelButton.setOnClickListener(v -> {
-            modifierKeyDialog.dismiss();
+            dismiss();
         });
 
         final Window window = modifierKeyDialog.getWindow();
@@ -207,16 +215,17 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             if (view == null) {
-                view = LayoutInflater.from(mContext).inflate(R.layout.modifier_key_item, null);
+                view = LayoutInflater.from(mActivity).inflate(R.layout.modifier_key_item, null);
             }
             TextView textView = view.findViewById(R.id.modifier_key_text);
             ImageView checkIcon = view.findViewById(R.id.modifier_key_check_icon);
             textView.setText(mList.get(i));
             if (mCurrentItem == i) {
+                mKeyFocus = mList.get(i);
                 textView.setTextColor(getColorOfColorAccentPrimaryVariant());
                 checkIcon.setImageAlpha(255);
                 view.setBackground(
-                        mContext.getDrawable(R.drawable.modifier_key_lisetview_background));
+                        mActivity.getDrawable(R.drawable.modifier_key_lisetview_background));
             } else {
                 textView.setTextColor(getColorOfTextColorPrimary());
                 checkIcon.setImageAlpha(0);
@@ -235,15 +244,15 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
     }
 
     private int getColorOfTextColorPrimary() {
-        return Utils.getColorAttrDefaultColor(mContext, android.R.attr.textColorPrimary);
+        return Utils.getColorAttrDefaultColor(mActivity, android.R.attr.textColorPrimary);
     }
 
     private int getColorOfTextColorSecondary() {
-        return Utils.getColorAttrDefaultColor(mContext, android.R.attr.textColorSecondary);
+        return Utils.getColorAttrDefaultColor(mActivity, android.R.attr.textColorSecondary);
     }
 
     private int getColorOfColorAccentPrimaryVariant() {
         return Utils.getColorAttrDefaultColor(
-                mContext, com.android.internal.R.attr.materialColorPrimaryContainer);
+                mActivity, com.android.internal.R.attr.materialColorPrimaryContainer);
     }
 }

@@ -141,7 +141,9 @@ class PackageInfoPresenter(
     private fun getPackageInfo() =
         packageManagers.getPackageInfoAsUser(
             packageName = packageName,
-            flags = PackageManager.MATCH_DISABLED_COMPONENTS or PackageManager.GET_PERMISSIONS,
+            flags = PackageManager.MATCH_ANY_USER or
+                PackageManager.MATCH_DISABLED_COMPONENTS or
+                PackageManager.GET_PERMISSIONS,
             userId = userId,
         )
 }

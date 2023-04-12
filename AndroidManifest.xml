@@ -4204,7 +4204,6 @@
                 <action android:name="android.settings.SYNC_SETTINGS" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="package" />
             </intent-filter>
             <intent-filter android:priority="1">
                 <action android:name="android.settings.CREDENTIAL_PROVIDER" />
@@ -4825,6 +4824,22 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".notetask.shortcut.CreateNoteTaskShortcutActivity"
+            android:enabled="false"
+            android:exported="true"
+            android:excludeFromRecents="true"
+            android:resizeableActivity="false"
+            android:theme="@android:style/Theme.NoDisplay"
+            android:label="@string/note_task_button_label"
+            android:icon="@drawable/ic_note_task_shortcut_widget">
+
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name="com.android.settings.bluetooth.QrCodeScanModeActivity"
