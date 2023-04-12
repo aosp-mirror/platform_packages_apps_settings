@@ -78,6 +78,7 @@ import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.bluetooth.BluetoothFindBroadcastsFragment;
 import com.android.settings.bluetooth.BluetoothPairingDetail;
 import com.android.settings.bugreporthandler.BugReportHandlerPicker;
+import com.android.settings.communal.CommunalDashboardFragment;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.NfcAndPaymentFragment;
@@ -275,6 +276,7 @@ public class SettingsGateway {
             SystemNavigationGestureSettings.class.getName(),
             DataUsageSummary.class.getName(),
             DreamSettings.class.getName(),
+            CommunalDashboardFragment.class.getName(),
             UserSettings.class.getName(),
             NotificationAccessSettings.class.getName(),
             NotificationAccessDetails.class.getName(),
