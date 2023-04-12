@@ -313,11 +313,8 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     @VisibleForTesting
     void removeAndCacheAllUnusedPreferences() {
         List<BatteryDiffEntry> entries = getBatteryDiffEntries();
-        Set<String> entryKeySet = new ArraySet<>();
-        for (BatteryDiffEntry entry : entries) {
-            entryKeySet.add(entry.getKey());
-        }
-
+        Set<String> entryKeySet = new ArraySet<>(entries.size());
+        entries.forEach(entry -> entryKeySet.add(entry.getKey()));
         final int prefsCount = mAppListPreferenceGroup.getPreferenceCount();
         for (int index = prefsCount - 1; index >= 0; index--) {
             final Preference pref = mAppListPreferenceGroup.getPreference(index);

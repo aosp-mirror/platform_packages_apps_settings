@@ -261,7 +261,7 @@ public final class DatabaseUtilsTest {
     public void getAppUsageStartTimestampOfUser_emptyCursorContent_returnEarliestTimestamp() {
         final MatrixCursor cursor =
                 new MatrixCursor(new String[] {AppUsageEventEntity.KEY_TIMESTAMP});
-        DatabaseUtils.sFakeAppUsageLatestTimestampSupplier = () -> cursor;
+        DatabaseUtils.sFakeSupplier = () -> cursor;
 
         final long earliestTimestamp = 10001L;
         assertThat(DatabaseUtils.getAppUsageStartTimestampOfUser(
@@ -270,7 +270,7 @@ public final class DatabaseUtilsTest {
 
     @Test
     public void getAppUsageStartTimestampOfUser_nullCursor_returnEarliestTimestamp() {
-        DatabaseUtils.sFakeAppUsageLatestTimestampSupplier = () -> null;
+        DatabaseUtils.sFakeSupplier = () -> null;
         final long earliestTimestamp = 10001L;
         assertThat(DatabaseUtils.getAppUsageStartTimestampOfUser(
                 mContext, /*userId=*/ 0, earliestTimestamp)).isEqualTo(earliestTimestamp);
@@ -283,7 +283,7 @@ public final class DatabaseUtilsTest {
                 new MatrixCursor(new String[] {AppUsageEventEntity.KEY_TIMESTAMP});
         // Adds fake data into the cursor.
         cursor.addRow(new Object[] {returnedTimestamp});
-        DatabaseUtils.sFakeAppUsageLatestTimestampSupplier = () -> cursor;
+        DatabaseUtils.sFakeSupplier = () -> cursor;
 
         final long earliestTimestamp1 = 1001L;
         assertThat(DatabaseUtils.getAppUsageStartTimestampOfUser(
@@ -302,7 +302,7 @@ public final class DatabaseUtilsTest {
                         AppUsageEventEntity.KEY_PACKAGE_NAME,
                         AppUsageEventEntity.KEY_TIMESTAMP,
                         AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE});
-        DatabaseUtils.sFakeAppUsageEventSupplier = () -> cursor;
+        DatabaseUtils.sFakeSupplier = () -> cursor;
 
         assertThat(DatabaseUtils.getAppUsageEventForUsers(
                 mContext,
@@ -313,7 +313,7 @@ public final class DatabaseUtilsTest {
 
     @Test
     public void getAppUsageEventForUsers_nullCursor_returnEmptyMap() {
-        DatabaseUtils.sFakeAppUsageEventSupplier = () -> null;
+        DatabaseUtils.sFakeSupplier = () -> null;
         assertThat(DatabaseUtils.getAppUsageEventForUsers(
                 mContext,
                 /*calendar=*/ null,
@@ -335,7 +335,7 @@ public final class DatabaseUtilsTest {
         cursor.addRow(new Object[] {101L, "app name2", timestamp2});
         cursor.addRow(new Object[] {101L, "app name3", timestamp2});
         cursor.addRow(new Object[] {101L, "app name4", timestamp2});
-        DatabaseUtils.sFakeAppUsageEventSupplier = () -> cursor;
+        DatabaseUtils.sFakeSupplier = () -> cursor;
 
         final List<AppUsageEvent> appUsageEventList = DatabaseUtils.getAppUsageEventForUsers(
                 mContext,
@@ -356,7 +356,7 @@ public final class DatabaseUtilsTest {
                         BatteryHistEntry.KEY_UID,
                         BatteryHistEntry.KEY_USER_ID,
                         BatteryHistEntry.KEY_TIMESTAMP});
-        DatabaseUtils.sFakeBatteryStateSupplier = () -> cursor;
+        DatabaseUtils.sFakeSupplier = () -> cursor;
 
         assertThat(DatabaseUtils.getHistoryMapSinceLastFullCharge(
                 mContext, /*calendar=*/ null)).isEmpty();
@@ -364,7 +364,7 @@ public final class DatabaseUtilsTest {
 
     @Test
     public void getHistoryMapSinceLastFullCharge_nullCursor_returnEmptyMap() {
-        DatabaseUtils.sFakeBatteryStateSupplier = () -> null;
+        DatabaseUtils.sFakeSupplier = () -> null;
         assertThat(DatabaseUtils.getHistoryMapSinceLastFullCharge(
                 mContext, /*calendar=*/ null)).isEmpty();
     }
@@ -383,7 +383,7 @@ public final class DatabaseUtilsTest {
                 "app name3", timestamp2, 3, ConvertUtils.CONSUMER_TYPE_UID_BATTERY});
         cursor.addRow(new Object[] {
                 "app name4", timestamp2, 4, ConvertUtils.CONSUMER_TYPE_UID_BATTERY});
-        DatabaseUtils.sFakeBatteryStateSupplier = () -> cursor;
+        DatabaseUtils.sFakeSupplier = () -> cursor;
 
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistMap =
                 DatabaseUtils.getHistoryMapSinceLastFullCharge(
@@ -413,7 +413,7 @@ public final class DatabaseUtilsTest {
         doReturn(true).when(mUserManager).isManagedProfile();
         doReturn(UserHandle.SYSTEM).when(mUserManager).getProfileParent(UserHandle.CURRENT);
 
-        DatabaseUtils.sFakeBatteryStateSupplier = () -> getMatrixCursor();
+        DatabaseUtils.sFakeSupplier = () -> getMatrixCursor();
 
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistMap =
                 DatabaseUtils.getHistoryMapSinceLastFullCharge(

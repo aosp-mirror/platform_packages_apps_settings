@@ -102,7 +102,7 @@ public final class DataProcessManagerTest {
                         AppUsageEventEntity.KEY_UID,
                         AppUsageEventEntity.KEY_PACKAGE_NAME,
                         AppUsageEventEntity.KEY_TIMESTAMP});
-        DatabaseUtils.sFakeAppUsageEventSupplier = () -> cursor;
+        DatabaseUtils.sFakeSupplier = () -> cursor;
         doReturn(true).when(mUserManager).isUserUnlocked(anyInt());
 
         mDataProcessManager.start();
@@ -171,7 +171,7 @@ public final class DataProcessManagerTest {
         cursor.addRow(new Object[] {
                 AppUsageEventType.ACTIVITY_STOPPED.getNumber(), /*timestamp=*/ 6, /*userId=*/ 1,
                 /*instanceId=*/ 2, packageName});
-        DatabaseUtils.sFakeAppUsageEventSupplier = () -> cursor;
+        DatabaseUtils.sFakeSupplier = () -> cursor;
 
         final DataProcessManager dataProcessManager = new DataProcessManager(
                 mContext, /*handler=*/ null, /*rawStartTimestamp=*/ 2L,  /*callbackFunction=*/ null,
@@ -240,7 +240,7 @@ public final class DataProcessManagerTest {
                         AppUsageEventEntity.KEY_TIMESTAMP});
         // Adds fake data into the cursor.
         cursor.addRow(new Object[] {101L, "app name1", 1001L});
-        DatabaseUtils.sFakeAppUsageEventSupplier = () -> cursor;
+        DatabaseUtils.sFakeSupplier = () -> cursor;
 
         mDataProcessManager.start();
 
