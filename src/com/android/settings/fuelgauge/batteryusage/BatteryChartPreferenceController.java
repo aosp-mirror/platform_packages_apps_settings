@@ -296,6 +296,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         });
         mHourlyChartView = hourlyChartView;
         mHourlyChartView.setOnSelectListener(trapezoidIndex -> {
+            if (mDailyChartIndex == BatteryChartViewModel.SELECTED_INDEX_ALL) {
+                // This will happen when a daily slot and an hour slot are clicked together.
+                return;
+            }
             if (mHourlyChartIndex == trapezoidIndex) {
                 return;
             }
