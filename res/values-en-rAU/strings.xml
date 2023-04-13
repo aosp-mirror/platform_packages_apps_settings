@@ -103,10 +103,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"You need to restart your device to change this setting."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Restart"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Cancel"</string>
-    <!-- no translation found for bluetooth_disable_leaudio (8619410595945155354) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_leaudio_summary (4756307633476985470) -->
-    <skip />
+    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Disable Bluetooth LE audio"</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Disables the Bluetooth LE audio feature if the device supports LE audio hardware capabilities."</string>
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Enable Bluetooth LE Audio allow List"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Enable Bluetooth LE Audio allow list feature."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Media devices"</string>
@@ -179,8 +177,10 @@
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"First day of week"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Numbers preferences"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Use app default"</string>
-    <string name="celsius_temperature_unit" msgid="6118523647432383132">"Celsius (°C)"</string>
-    <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Fahrenheit (°F)"</string>
+    <!-- no translation found for celsius_temperature_unit (8896459071273084507) -->
+    <skip />
+    <!-- no translation found for fahrenheit_temperature_unit (1118677820614569801) -->
+    <skip />
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"Sunday"</string>
     <string name="monday_first_day_of_week" msgid="7244698610476506771">"Monday"</string>
     <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"Tuesday"</string>
@@ -265,8 +265,7 @@
     <string name="safety_center_title" msgid="7732397372178774777">"Security and privacy"</string>
     <string name="safety_center_summary" msgid="3554867379951053869">"App security, device lock, permissions"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Face added"</string>
-    <!-- no translation found for security_settings_face_preference_summary_none (523320857738436024) -->
-    <skip />
+    <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Setup needed"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Face Unlock"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Face Unlock for work"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"How to set up Face Unlock"</string>
@@ -329,8 +328,7 @@
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingerprint for work"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Add fingerprint"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Fingerprint added}other{# fingerprints added}}"</string>
-    <!-- no translation found for security_settings_fingerprint_preference_summary_none (1146977379031250790) -->
-    <skip />
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"Setup needed"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Set up your fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Allow Fingerprint Unlock"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Use your fingerprint"</string>
@@ -374,8 +372,7 @@
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Face, fingerprints and <xliff:g id="WATCH">%s</xliff:g> added"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Face and Fingerprint Unlock"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Face &amp; Fingerprint Unlock for work"</string>
-    <!-- no translation found for security_settings_biometric_preference_summary_none_enrolled (213377753727694575) -->
-    <skip />
+    <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Setup needed"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Face and fingerprints added"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Face and fingerprint added"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"When you set up Face Unlock and Fingerprint Unlock, your phone will ask for your fingerprint when you wear a mask or are in a dark area"</string>
@@ -387,6 +384,14 @@
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Using fingerprint"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Using face or fingerprint"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_title (6041232223862753222) -->
+    <skip />
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_message (1904738532939614456) -->
+    <skip />
+    <string name="biometric_settings_add_fingerprint_in_split_mode_title" msgid="9194670722730454903">"Can\'t set up fingerprint"</string>
+    <string name="biometric_settings_add_fingerprint_in_split_mode_message" msgid="6960548382076629454">"Exit split screen to set up Fingerprint Unlock"</string>
+    <!-- no translation found for biometric_settings_add_biometrics_in_split_mode_ok (564103789097253645) -->
+    <skip />
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Skip screen lock?"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"Skip anyway"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"Go back"</string>
@@ -466,8 +471,7 @@
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Encryption, credentials and more"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"security, more security settings, more settings, advanced security settings"</string>
     <string name="privacy_advanced_settings" msgid="8828215456566937719">"More privacy settings"</string>
-    <!-- no translation found for more_security_privacy_settings (123465614090328851) -->
-    <skip />
+    <string name="more_security_privacy_settings" msgid="123465614090328851">"More security &amp; privacy"</string>
     <string name="security_header" msgid="961514795852103424">"Security"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Privacy"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Work profile"</string>
@@ -501,10 +505,8 @@
     <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"Unlock automatically if you input a correct PIN of 6 digits or more. This is slightly less secure than tapping Enter to confirm."</string>
     <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"Auto-confirm correct PIN"</string>
     <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"Confirming your PIN by tapping Enter is more secure than using auto-confirm"</string>
-    <!-- no translation found for auto_confirm_on_pin_verify_description (2052240431173223502) -->
-    <skip />
-    <!-- no translation found for auto_confirm_off_pin_verify_description (4256219155659760047) -->
-    <skip />
+    <string name="auto_confirm_on_pin_verify_description" msgid="2052240431173223502">"Enter device PIN to enable auto-confirm"</string>
+    <string name="auto_confirm_off_pin_verify_description" msgid="4256219155659760047">"Enter device PIN to disable auto-confirm"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"Screen lock"</string>
     <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"Work profile lock"</string>
     <string name="unlock_set_unlock_off_title" msgid="2831957685685921667">"None"</string>
@@ -1129,7 +1131,7 @@
     <string name="status_latest_area_info" msgid="8288488664620741734">"Operator info"</string>
     <string name="status_data_state" msgid="525196229491743487">"Mobile network state"</string>
     <string name="status_esim_id" msgid="5158916796362809133">"EID"</string>
-    <string name="status_service_state" msgid="1693424422121058791">"Service status"</string>
+    <string name="status_service_state" msgid="1693424422121058791">"Service state"</string>
     <string name="status_signal_strength" msgid="7644525712554444359">"Signal strength"</string>
     <string name="status_roaming" msgid="1253597174715663778">"Roaming"</string>
     <string name="status_operator" msgid="4335640583552058491">"Network"</string>
@@ -1696,8 +1698,7 @@
     <string name="modifier_keys_reset_message" msgid="5236994817619936058">"Are you sure that you would like to reset all the modifier keys to their default?"</string>
     <string name="modifier_keys_done" msgid="8196199314913909700">"Done"</string>
     <string name="modifier_keys_cancel" msgid="7136520252570826772">"Cancel"</string>
-    <!-- no translation found for modifier_keys_reset (551170906710422041) -->
-    <skip />
+    <string name="modifier_keys_reset" msgid="551170906710422041">"Reset"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Choose modifier key"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Choose a new key for <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Default"</string>
@@ -1784,10 +1785,8 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Magnification shortcut"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Magnify typing"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Magnifier follows text as you type"</string>
-    <!-- no translation found for accessibility_screen_magnification_always_on_title (3814297443759580936) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_always_on_summary (306908451430863049) -->
-    <skip />
+    <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Keep on while switching apps"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Magnifier stays on and zooms out when you switch apps"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Joystick"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Activate and move the magnifier with an on-screen joystick. Tap and hold, then drag on the joystick to control the magnifier. Tap and drag to move the joystick itself."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"About magnification"</string>
@@ -1965,8 +1964,7 @@
     <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"You can also add extra dim to Quick Settings from the top of your screen"</string>
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"One-handed mode added to Quick Settings. Swipe down to turn it on or off at any time."</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"You can also add one-handed mode to Quick Settings from the top of your screen"</string>
-    <!-- no translation found for accessibility_font_scaling_auto_added_qs_tooltip_content (7229921960884718332) -->
-    <skip />
+    <string name="accessibility_font_scaling_auto_added_qs_tooltip_content" msgid="7229921960884718332">"Font size added to Quick Settings. Swipe down to change the font size at any time."</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Dismiss"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Use colour correction"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Colour correction shortcut"</string>
@@ -2108,6 +2106,7 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"adjust colour"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"turn screen dark, turn screen light"</string>
+    <string name="keywords_contrast" msgid="4668393735398949873">"colour contrast"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="7151756353013736931">"motor, mouse"</string>
@@ -4061,7 +4060,8 @@
     <string name="credman_keywords" msgid="8305600680836806170">"data, passkey, password"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Make sure that you trust this app&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Auto-fill&gt;%1$s&lt;/xliff:g&gt; uses what\'s on your screen to determine what can be auto-filled."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Turn off %1$s?"</string>
-    <string name="credman_confirmation_message" msgid="3499478570809427026">"Saved info, such as addresses or payment methods, won\'t be filled in when you sign in. To keep your saved info filled in, set enable a password, passkey and data/or service."</string>
+    <!-- no translation found for credman_confirmation_message (158362573056996762) -->
+    <skip />
     <string name="credman_enable_confirmation_message_title" msgid="3722566298090698004">"Turn on %1$s?"</string>
     <string name="credman_enable_confirmation_message" msgid="4466773747277583461">"Saved info like addresses or payment methods will be shared with this provider."</string>
     <string name="credman_enable_confirmation_message_positive_button" msgid="3479082692924433102">"Turn on"</string>
@@ -4546,6 +4546,8 @@
     <string name="uwb_settings_title" msgid="8578498712312002231">"Ultra-Wideband (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Helps identify the relative position of nearby devices that have UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Turn off aeroplane mode to use UWB"</string>
+    <!-- no translation found for uwb_settings_summary_no_uwb_regulatory (3465456428217979428) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"Camera access"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Microphone access"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"For apps and services"</string>
@@ -4666,11 +4668,9 @@
     <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"On/Screen flash"</string>
     <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"On/Camera and screen flash"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Flash the camera light or the screen when you receive notifications or when alarms sound"</string>
-    <!-- no translation found for flash_notifications_intro_without_camera_flash (6297337174487793891) -->
-    <skip />
+    <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Flash the screen when you receive notifications or when alarms sound"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Use flash notifications with caution if you\'re light sensitive"</string>
-    <!-- no translation found for flash_notifications_keywords (2458759275318514836) -->
-    <skip />
+    <string name="flash_notifications_keywords" msgid="2458759275318514836">"flash, light, hard of hearing, hearing loss"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"Preview"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"Camera flash"</string>
     <string name="screen_flash_notification_title" msgid="3773100725793316708">"Screen flash"</string>
@@ -4689,5 +4689,9 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Violet"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Done"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Cancel"</string>
+    <string name="contrast_title" msgid="6885768151336508075">"Contrast"</string>
+    <string name="contrast_standard" msgid="1097297089917185235">"Standard"</string>
+    <string name="contrast_medium" msgid="384414510709285811">"Medium"</string>
+    <string name="contrast_high" msgid="3988567609694797696">"High"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"This app can only be opened in one window"</string>
 </resources>

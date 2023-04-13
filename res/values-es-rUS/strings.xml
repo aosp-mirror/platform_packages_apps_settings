@@ -103,10 +103,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Debes reiniciar el dispositivo para cambiar este parámetro de configuración."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Reiniciar"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Cancelar"</string>
-    <!-- no translation found for bluetooth_disable_leaudio (8619410595945155354) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_leaudio_summary (4756307633476985470) -->
-    <skip />
+    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Inhabilitar Bluetooth LE Audio"</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Inhabilita la función Bluetooth LE audio si el dispositivo admite funciones de hardware de ese tipo."</string>
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Habilitar la lista de permitidos de Bluetooth LE Audio"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Habilita la función de la lista de permitidos de Bluetooth LE Audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Dispositivos de medios"</string>
@@ -163,7 +161,7 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Puede que el idioma difiera de los idiomas disponibles en la app. Algunas apps no son compatibles con este parámetro de configuración."</string>
     <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Aquí se muestran solo las apps que admiten la selección de idioma."</string>
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"El sistema, las apps y los sitios web usan el primer idioma compatible de entre los preferidos."</string>
-    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Para seleccionar un idioma para cada app, ve a la configuración del idioma de la app."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Para seleccionar un idioma para cada app, ve a la configuración de idioma de la app."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Obtén más información sobre los idiomas de las apps"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"¿Deseas cambiar el idioma del sistema a %s?"</string>
     <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Cambiarán la configuración y las preferencias regionales de tu dispositivo."</string>
@@ -179,8 +177,10 @@
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Primer día de la semana"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Preferencias de números"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Usar la configuración predeterminada de la app"</string>
-    <string name="celsius_temperature_unit" msgid="6118523647432383132">"Celsius (°C)"</string>
-    <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Fahrenheit (°F)"</string>
+    <!-- no translation found for celsius_temperature_unit (8896459071273084507) -->
+    <skip />
+    <!-- no translation found for fahrenheit_temperature_unit (1118677820614569801) -->
+    <skip />
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"Domingo"</string>
     <string name="monday_first_day_of_week" msgid="7244698610476506771">"Lunes"</string>
     <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"Martes"</string>
@@ -265,8 +265,7 @@
     <string name="safety_center_title" msgid="7732397372178774777">"Seguridad y privacidad"</string>
     <string name="safety_center_summary" msgid="3554867379951053869">"Seguridad de apps, bloqueo del dispositivo, permisos"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Se agregó el rostro"</string>
-    <!-- no translation found for security_settings_face_preference_summary_none (523320857738436024) -->
-    <skip />
+    <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Se requiere configuración"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Desbloqueo facial"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Desbloqueo facial para el trabajo"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Cómo configurar Desbloqueo facial"</string>
@@ -329,8 +328,7 @@
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Huella para el trabajo"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Agregar huella dactilar"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Se agregó la huella dactilar}other{Se agregaron # huellas dactilares}}"</string>
-    <!-- no translation found for security_settings_fingerprint_preference_summary_none (1146977379031250790) -->
-    <skip />
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"Se requiere configuración"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Configura tu huella dactilar"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Desbloq. con huella dactilar"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Usa tus huellas dactilares"</string>
@@ -374,8 +372,7 @@
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Rostro, huellas dactilares y <xliff:g id="WATCH">%s</xliff:g> agregados"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Desbloqueo facial y con huellas dactilares"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Desbloqueo facial y con huellas dactilares para el trabajo"</string>
-    <!-- no translation found for security_settings_biometric_preference_summary_none_enrolled (213377753727694575) -->
-    <skip />
+    <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Se requiere configuración"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Se agregaron huellas dactilares y el rostro"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Se agregaron el rostro y la huella dactilar"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Si configuras el Desbloqueo facial y con huellas dactilares, el teléfono te solicitará la huella dactilar en caso de que tengas puesta una mascarilla o estés en una zona oscura."</string>
@@ -387,6 +384,14 @@
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Con la huella dactilar"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Con el rostro o la huella dactilar"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"Aceptar"</string>
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_title (6041232223862753222) -->
+    <skip />
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_message (1904738532939614456) -->
+    <skip />
+    <string name="biometric_settings_add_fingerprint_in_split_mode_title" msgid="9194670722730454903">"No se puede configurar la huella dactilar"</string>
+    <string name="biometric_settings_add_fingerprint_in_split_mode_message" msgid="6960548382076629454">"Sal de la pantalla dividida para configurar"</string>
+    <!-- no translation found for biometric_settings_add_biometrics_in_split_mode_ok (564103789097253645) -->
+    <skip />
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"¿Omitir bloqueo de la pantalla?"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"Omitir"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"Atrás"</string>
@@ -466,8 +471,7 @@
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Encriptación, credenciales y más"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"seguridad, más configuración de seguridad, más configuración, configuración avanzada de seguridad"</string>
     <string name="privacy_advanced_settings" msgid="8828215456566937719">"Más parámetros de privacidad"</string>
-    <!-- no translation found for more_security_privacy_settings (123465614090328851) -->
-    <skip />
+    <string name="more_security_privacy_settings" msgid="123465614090328851">"Mayor seguridad y privacidad"</string>
     <string name="security_header" msgid="961514795852103424">"Seguridad"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Privacidad"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Perfil de trabajo"</string>
@@ -501,10 +505,8 @@
     <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"Desbloquear automáticamente si introduces el PIN correcto de 6 o más dígitos. Esto es menos seguro que presionar Ingresar para confirmar."</string>
     <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"Confirmar automáticamente si el PIN es correcto"</string>
     <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"Presionar Ingresar para confirmar tu PIN es más seguro que usar la confirmación automática"</string>
-    <!-- no translation found for auto_confirm_on_pin_verify_description (2052240431173223502) -->
-    <skip />
-    <!-- no translation found for auto_confirm_off_pin_verify_description (4256219155659760047) -->
-    <skip />
+    <string name="auto_confirm_on_pin_verify_description" msgid="2052240431173223502">"Ingresa el PIN del dispositivo para habilitar la confirmación automática"</string>
+    <string name="auto_confirm_off_pin_verify_description" msgid="4256219155659760047">"Ingresa el PIN del dispositivo para inhabilitar la confirmación automática"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"Bloqueo de pantalla"</string>
     <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"Bloqueo del perfil"</string>
     <string name="unlock_set_unlock_off_title" msgid="2831957685685921667">"Ninguno"</string>
@@ -1696,8 +1698,7 @@
     <string name="modifier_keys_reset_message" msgid="5236994817619936058">"¿Confirmas que quieres restablecer todas las teclas modificadoras a su configuración predeterminada?"</string>
     <string name="modifier_keys_done" msgid="8196199314913909700">"Listo"</string>
     <string name="modifier_keys_cancel" msgid="7136520252570826772">"Cancelar"</string>
-    <!-- no translation found for modifier_keys_reset (551170906710422041) -->
-    <skip />
+    <string name="modifier_keys_reset" msgid="551170906710422041">"Restablecer"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Elegir tecla modificadora"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Elige una nueva tecla para <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Predeterminadas"</string>
@@ -1784,10 +1785,8 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Combinación de accesibilidad de ampliación"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Amplía la escritura"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"La lupa sigue el texto a medida que escribes"</string>
-    <!-- no translation found for accessibility_screen_magnification_always_on_title (3814297443759580936) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_always_on_summary (306908451430863049) -->
-    <skip />
+    <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Mantener activada al cambiar de app"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"La lupa se mantiene activa y se aleja cuando cambias de app"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Joystick"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Activa y mueve la lupa con un joystick en pantalla. Mantén presionado y, luego, arrastra el joystick para controlar la lupa. Presiona y arrastra para mover el joystick."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Acerca de la ampliación"</string>
@@ -1965,8 +1964,7 @@
     <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"También puedes agregar la atenuación extra a la Configuración rápida desde la parte superior de la pantalla"</string>
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"Se agregó el Modo de una mano a la Configuración rápida. Desliza hacia abajo para activarlo o desactivarlo en cualquier momento."</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"También puedes agregar el Modo de una mano a la Configuración rápida desde la parte superior de la pantalla"</string>
-    <!-- no translation found for accessibility_font_scaling_auto_added_qs_tooltip_content (7229921960884718332) -->
-    <skip />
+    <string name="accessibility_font_scaling_auto_added_qs_tooltip_content" msgid="7229921960884718332">"Se agregó el tamaño de la fuente a la Configuración rápida. Desliza el dedo hacia abajo para cambiar el tamaño de la fuente en cualquier momento."</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Descartar"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Usar la corrección de colores"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Acceso directo de corrección de colores"</string>
@@ -2108,6 +2106,7 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"ajustar el color"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"oscurecer pantalla, aclarar pantalla"</string>
+    <string name="keywords_contrast" msgid="4668393735398949873">"contraste de color"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="7151756353013736931">"motor, mouse"</string>
@@ -3463,8 +3462,8 @@
     <string name="memtag_intro" msgid="579408691329568953">"Esta función beta te ayuda a proteger tu dispositivo de errores que pueden poner en riesgo tu seguridad."</string>
     <string name="memtag_on" msgid="824938319141503923">"Activada"</string>
     <string name="memtag_off" msgid="4835589640091709019">"Desactivada"</string>
-    <string name="memtag_on_pending" msgid="1592053425431532361">"Se activará después de reiniciar"</string>
-    <string name="memtag_off_pending" msgid="1543177181383593726">"Se desactivará después de reiniciar"</string>
+    <string name="memtag_on_pending" msgid="1592053425431532361">"Se activará después del reinicio"</string>
+    <string name="memtag_off_pending" msgid="1543177181383593726">"Se desactivará después del reinicio"</string>
     <string name="memtag_force_off" msgid="1143468955988138470">"Ahora no disponible para tu disp."</string>
     <string name="memtag_force_on" msgid="3254349938627883664">"Siempre activada para tu dispositivo"</string>
     <string name="memtag_footer" msgid="8480784485124271376">"Tendrás que reiniciar el dispositivo para activar o desactivar la protección de memoria avanzada. Cuando esté activada, es posible que observes que el dispositivo funciona más lento."</string>
@@ -3657,7 +3656,7 @@
     <string name="overlay_settings" msgid="2030836934139139469">"Mostrar sobre otras apps"</string>
     <string name="filter_overlay_apps" msgid="2483998217116789206">"Aplicaciones con permiso"</string>
     <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Con permiso"</string>
-    <string name="app_permission_summary_not_allowed" msgid="2673793662439097900">"No permitido"</string>
+    <string name="app_permission_summary_not_allowed" msgid="2673793662439097900">"Sin permiso"</string>
     <string name="keywords_install_other_apps" msgid="563895867658775580">"instalar, apps, fuentes desconocidas"</string>
     <string name="write_settings" msgid="6864794401614425894">"Modificar configuración del sistema"</string>
     <string name="keywords_write_settings" msgid="6908708078855507813">"editar, modificar, sistema, configuración"</string>
@@ -4061,7 +4060,8 @@
     <string name="credman_keywords" msgid="8305600680836806170">"datos, llave de acceso, contraseña"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Asegúrate de que esta app sea confiable&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; usa el contenido de tu pantalla para determinar qué se puede autocompletar."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"¿Quieres desactivar %1$s?"</string>
-    <string name="credman_confirmation_message" msgid="3499478570809427026">"La información guardada, como direcciones y formas de pago, no se rellenará al acceder. Para que la información guardada quede rellenada, habilita un servicio de contraseña, llave de acceso o datos."</string>
+    <!-- no translation found for credman_confirmation_message (158362573056996762) -->
+    <skip />
     <string name="credman_enable_confirmation_message_title" msgid="3722566298090698004">"¿Quieres activar %1$s?"</string>
     <string name="credman_enable_confirmation_message" msgid="4466773747277583461">"Información guardada, como direcciones o métodos de pago que se compartirán con este proveedor."</string>
     <string name="credman_enable_confirmation_message_positive_button" msgid="3479082692924433102">"Activar"</string>
@@ -4354,11 +4354,11 @@
     <string name="content_capture" msgid="868372905432812238">"Contenido de la app"</string>
     <string name="content_capture_summary" msgid="49720773699715531">"Permite que las apps envíen contenido al sistema Android"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"Capturar volcado de pila del sistema"</string>
-    <string name="development_memtag_page_title" msgid="3546667618748029188">"Extensión de etiquetado de mem."</string>
+    <string name="development_memtag_page_title" msgid="3546667618748029188">"Ext. de etiquetado de memoria"</string>
     <string name="development_memtag_intro" msgid="8032596625527637164">"La extensión de etiquetado de memoria (MTE) facilita la detección de problemas de seguridad de memoria en tu aplicación y hace que su código nativo sea más seguro."</string>
     <string name="development_memtag_footer" msgid="5681925148773626562">"Activar MTE puede reducir el rendimiento del dispositivo."</string>
     <string name="development_memtag_learn_more" msgid="8961984806973926704">"Más información sobre MTE"</string>
-    <string name="development_memtag_toggle" msgid="2474420239518386894">"Habilita la MTE hasta que la desactives"</string>
+    <string name="development_memtag_toggle" msgid="2474420239518386894">"Habilitar la MTE hasta que la desactives"</string>
     <string name="development_memtag_reboot_message_on" msgid="8100075676107327847">"Tendrás que reiniciar el dispositivo para activar la MTE."</string>
     <string name="development_memtag_reboot_message_off" msgid="3703925647922079456">"Tendrás que reiniciar el dispositivo para desactivar la MTE."</string>
     <string name="reboot_with_mte_title" msgid="2320125810211279">"Habilitar la MTE para una única sesión"</string>
@@ -4546,6 +4546,8 @@
     <string name="uwb_settings_title" msgid="8578498712312002231">"Ultra Wideband (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Ayuda a identificar la posición relativa de dispositivos cercanos que cuentan con UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Desactiva el modo de avión para usar UWB"</string>
+    <!-- no translation found for uwb_settings_summary_no_uwb_regulatory (3465456428217979428) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"Acceso a la cámara"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Acceso al micrófono"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Para apps y servicios"</string>
@@ -4661,16 +4663,14 @@
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensor de huellas dactilares"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Notificaciones con flash"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Info. sobre notificaciones con flash"</string>
-    <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Desactivado"</string>
+    <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Desactivadas"</string>
     <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"Activado / Flash de la cámara"</string>
-    <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Activado / Flash de la pantalla"</string>
-    <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Activado / Flash de la cámara y pantalla"</string>
+    <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Activadas: Flash de la pantalla"</string>
+    <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Activadas: Flash de la cámara y pantalla"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Ilumina la luz de la cámara o de la pantalla cuando recibes notificaciones o cuando suena una alarma"</string>
-    <!-- no translation found for flash_notifications_intro_without_camera_flash (6297337174487793891) -->
-    <skip />
+    <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Ilumina la pantalla cuando recibes notificaciones o cuando suena una alarma"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Usa las notificaciones con flash con precaución si eres sensible a la luz"</string>
-    <!-- no translation found for flash_notifications_keywords (2458759275318514836) -->
-    <skip />
+    <string name="flash_notifications_keywords" msgid="2458759275318514836">"flash, luz, persona con hipoacusia, pérdida de la audición"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"Vista previa"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"Flash de la cámara"</string>
     <string name="screen_flash_notification_title" msgid="3773100725793316708">"Flash de la pantalla"</string>
@@ -4689,5 +4689,9 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Violeta"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Listo"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Cancelar"</string>
+    <string name="contrast_title" msgid="6885768151336508075">"Contraste"</string>
+    <string name="contrast_standard" msgid="1097297089917185235">"Estándar"</string>
+    <string name="contrast_medium" msgid="384414510709285811">"Medio"</string>
+    <string name="contrast_high" msgid="3988567609694797696">"Alto"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Esta app solo puede estar abierta en 1 ventana"</string>
 </resources>

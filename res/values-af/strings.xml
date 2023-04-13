@@ -103,10 +103,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Jy moet jou toestel herbegin om hierdie instelling te verander."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Herbegin"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Kanselleer"</string>
-    <!-- no translation found for bluetooth_disable_leaudio (8619410595945155354) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_leaudio_summary (4756307633476985470) -->
-    <skip />
+    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Deaktiveer Bluetooth LE-oudio"</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Deaktiveer Bluetooth LE oudio-kenmerk as die toestel LE oudiohardewarevermoëns ondersteun."</string>
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Aktiveer Bluetooth LE-oudiotoelaatlys"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Aktiveer Bluetooth LE-oudiotoelaatlyskenmerk."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Mediatoestelle"</string>
@@ -179,8 +177,10 @@
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Eerste dag van die week"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Nommervoorkeure"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Gebruik appverstek"</string>
-    <string name="celsius_temperature_unit" msgid="6118523647432383132">"Celsius (°C)"</string>
-    <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Fahrenheit (°F)"</string>
+    <!-- no translation found for celsius_temperature_unit (8896459071273084507) -->
+    <skip />
+    <!-- no translation found for fahrenheit_temperature_unit (1118677820614569801) -->
+    <skip />
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"Sondag"</string>
     <string name="monday_first_day_of_week" msgid="7244698610476506771">"Maandag"</string>
     <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"Dinsdag"</string>
@@ -265,8 +265,7 @@
     <string name="safety_center_title" msgid="7732397372178774777">"Sekuriteit en privaatheid"</string>
     <string name="safety_center_summary" msgid="3554867379951053869">"Appsekuriteit, toestelslot, toestemmings"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Gesig is bygevoeg"</string>
-    <!-- no translation found for security_settings_face_preference_summary_none (523320857738436024) -->
-    <skip />
+    <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Opstelling is nodig"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Gesigslot"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Gesigslot vir werk"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Hoe om Gesigslot op te stel"</string>
@@ -329,8 +328,7 @@
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Vingerafdruk vir werk"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Voeg vingerafdruk by"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Vingerafdruk is bygevoeg}other{# vingerafdrukke is bygevoeg}}"</string>
-    <!-- no translation found for security_settings_fingerprint_preference_summary_none (1146977379031250790) -->
-    <skip />
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"Opstelling is nodig"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Stel jou vingerafdruk op"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Laat vingerafdrukslot toe"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Gebruik jou vingerafdruk"</string>
@@ -374,8 +372,7 @@
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Gesig, vingerafdrukke en <xliff:g id="WATCH">%s</xliff:g> is bygevoeg"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Gesigslot en vingerafdrukslot"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Gesig- en Vingerafdrukslot vir werk"</string>
-    <!-- no translation found for security_settings_biometric_preference_summary_none_enrolled (213377753727694575) -->
-    <skip />
+    <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Opstelling is nodig"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Gesig en vingerafdrukke is bygevoeg"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Gesig en vingerafdruk is bygevoeg"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Wanneer jy Gesigslot en Vingerafdrukslot opstel, sal jou foon vir jou vingerafdruk vra as jy \'n masker dra of op \'n donker plek is"</string>
@@ -387,6 +384,14 @@
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Gebruik vingerafdruk"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Gebruik gesig of vingerafdruk"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_title (6041232223862753222) -->
+    <skip />
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_message (1904738532939614456) -->
+    <skip />
+    <string name="biometric_settings_add_fingerprint_in_split_mode_title" msgid="9194670722730454903">"Kan nie vingerafdruk opstel nie"</string>
+    <string name="biometric_settings_add_fingerprint_in_split_mode_message" msgid="6960548382076629454">"Verlaat verdeelde skerm om Vingerafdrukslot op te stel"</string>
+    <!-- no translation found for biometric_settings_add_biometrics_in_split_mode_ok (564103789097253645) -->
+    <skip />
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Slaan skermslot oor?"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"Slaan in elk geval oor"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"Gaan terug"</string>
@@ -466,8 +471,7 @@
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Enkripsie, eiebewyse, en meer"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"sekuriteit, meer sekuriteitinstellings, meer instellings, gevorderde sekuriteitinstellings"</string>
     <string name="privacy_advanced_settings" msgid="8828215456566937719">"Meer privaatheidinstellings"</string>
-    <!-- no translation found for more_security_privacy_settings (123465614090328851) -->
-    <skip />
+    <string name="more_security_privacy_settings" msgid="123465614090328851">"Meer sekuriteit en privaatheid"</string>
     <string name="security_header" msgid="961514795852103424">"Sekuriteit"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Privaatheid"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Werkprofiel"</string>
@@ -501,10 +505,8 @@
     <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"Ontsluit outomaties as jy ’n korrekte PIN van 6 of meer syfers invoer. Dit is effens minder veilig as om op Enter te tik om te bevestig."</string>
     <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"Outobevestig korrekte PIN"</string>
     <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"Dit is veiliger om jou PIN te bevestig deur op Enter te tik as om outobevestiging te gebruik"</string>
-    <!-- no translation found for auto_confirm_on_pin_verify_description (2052240431173223502) -->
-    <skip />
-    <!-- no translation found for auto_confirm_off_pin_verify_description (4256219155659760047) -->
-    <skip />
+    <string name="auto_confirm_on_pin_verify_description" msgid="2052240431173223502">"Voer toestel-PIN in om outobevestig te aktiveer"</string>
+    <string name="auto_confirm_off_pin_verify_description" msgid="4256219155659760047">"Voer toestel-PIN in om outobevestig te deaktiveer"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"Skermslot"</string>
     <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"Werkprofielslot"</string>
     <string name="unlock_set_unlock_off_title" msgid="2831957685685921667">"Geen"</string>
@@ -1783,10 +1785,8 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Vergrotingkortpad"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Vergroot tikwerk"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Vergrootglas volg teks terwyl jy tik"</string>
-    <!-- no translation found for accessibility_screen_magnification_always_on_title (3814297443759580936) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_always_on_summary (306908451430863049) -->
-    <skip />
+    <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Hou aan terwyl apps gewissel word"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Vergrootglas bly aan en zoem uit wanneer jy apps wissel"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Speelstok"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Aktiveer en skuif die vergrootglas met ’n speelstok op die skerm. Tik en hou die speelstok, en sleep dit dan om die vergrootglas te beheer. Tik en sleep om die speelstok self te skuif."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Meer oor vergroting"</string>
@@ -2106,6 +2106,7 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"verstel kleur"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"maak skerm donker, maak skerm lig"</string>
+    <string name="keywords_contrast" msgid="4668393735398949873">"kleurkontras"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="7151756353013736931">"motories, muis"</string>
@@ -4059,7 +4060,8 @@
     <string name="credman_keywords" msgid="8305600680836806170">"data, wagwoordsleutel, wagwoord"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Maak seker dat jy hierdie program vertrou&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Outovul&gt;%1$s&lt;/xliff:g&gt; gebruik wat op jou skerm is om te bepaal wat outomaties ingevul kan word."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Skakel %1$s af?"</string>
-    <string name="credman_confirmation_message" msgid="3499478570809427026">"Gestoorde inligting, soos adresse of betaalmetodes, sal nie ingevul word wanneer jy aanmeld nie. Stel of aktiveer ’n wagwoord, wagwoordsleutel en/of datadiens om aan te hou om jou gestoorde inligting te laat invul."</string>
+    <!-- no translation found for credman_confirmation_message (158362573056996762) -->
+    <skip />
     <string name="credman_enable_confirmation_message_title" msgid="3722566298090698004">"Skakel %1$s aan?"</string>
     <string name="credman_enable_confirmation_message" msgid="4466773747277583461">"Gestoorde inligting, soos adresse of betaalmetodes, sal nie met hierdie verskaffer gedeel word."</string>
     <string name="credman_enable_confirmation_message_positive_button" msgid="3479082692924433102">"Skakel aan"</string>
@@ -4127,7 +4129,7 @@
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Wi-Fi-beheer"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Laat program toe om Wi-Fi te beheer"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Laat hierdie program toe om Wi-Fi aan of af te skakel, Wi-Fi-netwerke te soek en aan hulle te koppel, netwerke by te voeg en te verwyder, en om \'n slegsplaaslike warmkol te begin"</string>
-    <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"Stel via NFC beskikbaar"</string>
+    <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"Begin via NFC"</string>
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"Laat toe dat dit met NFC-skandering begin"</string>
     <string name="change_nfc_tag_apps_detail_summary" msgid="7083666814715607078">"Laat hierdie app toe om te begin wanneer ’n NFC-merker geskandeer word.\nAs hierdie toestemming aan is, sal die app as ’n opsie beskikbaar wees elke keer wanneer ’n merker bespeur word."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Speel media na"</string>
@@ -4544,6 +4546,8 @@
     <string name="uwb_settings_title" msgid="8578498712312002231">"Ultrawye band (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Help om die relatiewe posisie te bepaal van toestelle in die omtrek wat UWB het"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Skakel vliegtuigmodus af om UWB te gebruik"</string>
+    <!-- no translation found for uwb_settings_summary_no_uwb_regulatory (3465456428217979428) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"Kameratoegang"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Mikrofoontoegang"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Vir programme en dienste"</string>
@@ -4666,8 +4670,7 @@
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Flits die kameralig of die skerm wanneer jy kennisgewings ontvang of wanneer wekkers lui"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Flits die skerm wanneer jy kennisgewings ontvang of wanneer wekkers lui"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Gebruik flitskennisgewings versigtig as jy ligsensitief is"</string>
-    <!-- no translation found for flash_notifications_keywords (2458759275318514836) -->
-    <skip />
+    <string name="flash_notifications_keywords" msgid="2458759275318514836">"flits, lig, hardhorend, gehoorverlies"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"Voorskou"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"Kameraflits"</string>
     <string name="screen_flash_notification_title" msgid="3773100725793316708">"Skermflits"</string>
@@ -4686,5 +4689,9 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Pers"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Klaar"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Kanselleer"</string>
+    <string name="contrast_title" msgid="6885768151336508075">"Kontras"</string>
+    <string name="contrast_standard" msgid="1097297089917185235">"Standaard"</string>
+    <string name="contrast_medium" msgid="384414510709285811">"Medium"</string>
+    <string name="contrast_high" msgid="3988567609694797696">"Hoog"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Hierdie app kan net in 1 venster oopgemaak word"</string>
 </resources>
