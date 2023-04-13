@@ -280,12 +280,12 @@ public final class ConvertUtils {
     }
 
     /** Converts UTC timestamp to local time hour data. */
-    public static String utcToLocalTimeHour(
-            final Context context, final long timestamp, final boolean is24HourFormat) {
+    public static String utcToLocalTimeHour(final Context context, final long timestamp,
+            final boolean is24HourFormat, final boolean showMinute) {
         final Locale locale = getLocale(context);
         // e.g. for 12-hour format: 9 PM
         // e.g. for 24-hour format: 09:00
-        final String skeleton = is24HourFormat ? "HHm" : "ha";
+        final String skeleton = is24HourFormat ? "HHm" : (showMinute ? "hma" : "ha");
         final String pattern = DateFormat.getBestDateTimePattern(locale, skeleton);
         return DateFormat.format(pattern, timestamp).toString();
     }
