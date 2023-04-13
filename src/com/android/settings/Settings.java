@@ -29,6 +29,7 @@ import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.biometrics.face.FaceSettings;
+import com.android.settings.communal.CommunalPreferenceController;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.network.MobileNetworkIntentConverter;
@@ -314,6 +315,16 @@ public class Settings extends SettingsActivity {
     public static class AndroidBeamSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiDisplaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class DreamSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity to manage communal settings */
+    public static class CommunalSettingsActivity extends SettingsActivity {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            if (!CommunalPreferenceController.isAvailable(this)) {
+                finish();
+            }
+        }
+    }
     public static class NotificationStationActivity extends SettingsActivity { /* empty */ }
     public static class UserSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationAccessSettingsActivity extends SettingsActivity { /* empty */ }
