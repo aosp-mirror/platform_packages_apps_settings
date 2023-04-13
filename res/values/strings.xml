@@ -427,6 +427,12 @@
     <string name="friday_first_day_of_week">Friday</string>
     <!-- The title of saturday for preference of first day of week. [CHAR LIMIT=50] -->
     <string name="saturday_first_day_of_week">Saturday</string>
+    <!-- Title for regional preference footer. [CHAR LIMIT=NONE] -->
+    <string name="title_regional_pref_footer">If an app doesn’t support regional preferences, the app will use its default locale settings.</string>
+    <!-- Description for text in regional preference footer. [CHAR LIMIT=NONE] -->
+    <string name="desc_regional_pref_footer_learn_more">Learn more about language preferences.</string>
+    <!-- TODO(b/277573274): Update the learn more url in the regional preference. -->
+    <string name="regional_pref_footer_learn_more_link" translatable="false">https://support.google.com/android</string>
 
     <!-- The title of the confirmation dialog shown when the user selects one / several languages and tries to remove them [CHAR LIMIT=60] -->
     <string name="dlg_remove_locales_title">{count, plural,
@@ -11898,6 +11904,12 @@
     <!-- Developer settings: Summary for disabling phantom process monitoring. [CHAR LIMIT=NONE]-->
     <string name="disable_phantom_process_monitor_summary">Disable restrictions on the system resource usage of the app child processes</string>
 
+    <!-- Developer settings: Title for force enabling Notes role. [CHAR LIMIT=50]-->
+    <string name="enable_notes_role_title">Force enable Notes role</string>
+    <!-- Developer settings: Summary for disabling phantom process monitoring. [CHAR LIMIT=NONE]-->
+    <string name="enable_notes_role_summary">Enable note-taking system integrations via the Notes role. If the Notes role is already enabled, does nothing.</string>
+
+
     <!-- BT LE Audio Device: Media Broadcast -->
     <!-- The title of the Media Broadcast Dialog [CHAR LIMIT=none] -->
     <string name="bluetooth_broadcast_dialog_title">Broadcast</string>
@@ -12041,4 +12053,7 @@
 
     <!-- Warning message when we try to dock an app not supporting multiple instances split into multiple sides [CHAR LIMIT=NONE] -->
     <string name="dock_multi_instances_not_supported_text">"This app can only be opened in 1 window"</string>
+
+    <!-- [CHAR LIMIT=30] Label used to open Note Task -->
+    <string name="note_task_button_label">Notetaking</string>
 </resources>

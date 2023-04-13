@@ -17,12 +17,10 @@
 package com.android.settings.inputmethod;
 
 import android.content.Context;
-import android.hardware.input.InputManager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -34,16 +32,14 @@ import com.android.settingslib.Utils;
 
 public class ModifierKeysRestorePreferenceController extends BasePreferenceController {
 
-    private static String KEY_TAG = "modifier_keys_dialog_tag";
+    private static final String KEY_TAG = "modifier_keys_restore_dialog_tag";
 
     private Fragment mParent;
     private FragmentManager mFragmentManager;
     private PreferenceScreen mScreen;
-    private final InputManager mIm;
 
     public ModifierKeysRestorePreferenceController(Context context, String key) {
         super(context, key);
-        mIm = context.getSystemService(InputManager.class);
     }
 
     public void setFragment(Fragment parent) {
@@ -57,9 +53,6 @@ public class ModifierKeysRestorePreferenceController extends BasePreferenceContr
             return;
         }
         mScreen = screen;
-        // The dialog screen depends on the previous selected key's fragment.
-        // In the rotation scenario, we should remove the previous dialog first.
-        clearPreviousDialog();
         setResetKeyColor();
     }
 
@@ -78,8 +71,8 @@ public class ModifierKeysRestorePreferenceController extends BasePreferenceContr
     }
 
     private void showResetDialog() {
-        ModifierKeysResetDialogFragment fragment =
-                new ModifierKeysResetDialogFragment(mScreen, mIm);
+        mFragmentManager = mParent.getFragmentManager();
+        ModifierKeysResetDialogFragment fragment = new ModifierKeysResetDialogFragment();
         fragment.setTargetFragment(mParent, 0);
         fragment.show(mFragmentManager, KEY_TAG);
     }
@@ -97,14 +90,5 @@ public class ModifierKeysRestorePreferenceController extends BasePreferenceContr
     private int getColorOfColorAccentPrimaryVariant() {
         return Utils.getColorAttrDefaultColor(
                 mParent.getActivity(), com.android.internal.R.attr.materialColorPrimaryContainer);
-    }
-
-    private void clearPreviousDialog() {
-        mFragmentManager = mParent.getFragmentManager();
-        DialogFragment preResetDialogFragment =
-                (DialogFragment) mFragmentManager.findFragmentByTag(KEY_TAG);
-        if (preResetDialogFragment != null) {
-            preResetDialogFragment.dismiss();
-        }
     }
 }

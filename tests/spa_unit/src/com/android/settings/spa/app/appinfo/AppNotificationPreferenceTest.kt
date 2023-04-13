@@ -21,6 +21,7 @@ import android.content.pm.ApplicationInfo
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
@@ -72,7 +73,7 @@ class AppNotificationPreferenceTest {
 
     @Test
     fun title_displayed() {
-        setContent()
+        setContent(APP)
 
         composeTestRule.onNodeWithText(context.getString(R.string.notifications_label))
             .assertIsDisplayed()
@@ -80,14 +81,25 @@ class AppNotificationPreferenceTest {
 
     @Test
     fun summary_displayed() {
-        setContent()
+        setContent(APP)
 
         composeTestRule.onNodeWithText(SUMMARY).assertIsDisplayed()
     }
 
     @Test
+    fun whenNotInstalled_disable() {
+        setContent(ApplicationInfo().apply {
+            packageName = PACKAGE_NAME
+            uid = UID
+        })
+
+        composeTestRule.onNodeWithText(context.getString(R.string.notifications_label))
+            .assertIsNotEnabled()
+    }
+
+    @Test
     fun onClick_startActivity() {
-        setContent()
+        setContent(APP)
 
         composeTestRule.onRoot().performClick()
         composeTestRule.delay()
@@ -102,10 +114,10 @@ class AppNotificationPreferenceTest {
         }
     }
 
-    private fun setContent() {
+    private fun setContent(app: ApplicationInfo) {
         composeTestRule.setContent {
             CompositionLocalProvider(LocalContext provides context) {
-                AppNotificationPreference(app = APP, repository = repository)
+                AppNotificationPreference(app = app, repository = repository)
             }
         }
     }
@@ -116,6 +128,7 @@ class AppNotificationPreferenceTest {
         val APP = ApplicationInfo().apply {
             packageName = PACKAGE_NAME
             uid = UID
+            flags = ApplicationInfo.FLAG_INSTALLED
         }
         const val SUMMARY = "Summary"
     }
