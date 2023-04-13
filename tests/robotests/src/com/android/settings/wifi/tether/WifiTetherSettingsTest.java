@@ -156,6 +156,16 @@ public class WifiTetherSettingsTest {
     }
 
     @Test
+    public void onSecuritySummaryChanged_canNotShowWifiHotspot_returnFalse() {
+        int stringResId = R.string.wifi_security_sae;
+        mWifiTetherSettings.mWifiHotspotSecurity = mock(Preference.class);
+
+        mWifiTetherSettings.onSecuritySummaryChanged(stringResId);
+
+        verify(mWifiTetherSettings.mWifiHotspotSecurity).setSummary(stringResId);
+    }
+
+    @Test
     public void onSpeedSummaryChanged_canNotShowWifiHotspot_returnFalse() {
         int stringResId = R.string.wifi_hotspot_speed_summary_6g;
         mWifiTetherSettings.mWifiHotspotSpeed = mock(Preference.class);
