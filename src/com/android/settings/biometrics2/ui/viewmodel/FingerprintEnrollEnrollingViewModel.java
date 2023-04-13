@@ -61,24 +61,18 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
     public static final int FINGERPRINT_ENROLL_ENROLLING_ACTION_SHOW_ICON_TOUCH_DIALOG = 1;
 
     /**
-     * Icon touch dialog dismiss
-     */
-    public static final int FINGERPRINT_ENROLL_ENROLLING_ACTION_DISMISS_ICON_TOUCH_DIALOG = 2;
-
-    /**
      * Has got latest cancelled event due to user skip
      */
-    public static final int FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_USER_SKIP = 3;
+    public static final int FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_USER_SKIP = 2;
 
     /**
      * Has got latest cancelled event due to back key
      */
-    public static final int FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_BACK_PRESSED = 4;
+    public static final int FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_BACK_PRESSED = 3;
 
     @IntDef(prefix = { "FINGERPRINT_ENROLL_ENROLLING_ACTION_" }, value = {
             FINGERPRINT_ENROLL_ENROLLING_ACTION_DONE,
             FINGERPRINT_ENROLL_ENROLLING_ACTION_SHOW_ICON_TOUCH_DIALOG,
-            FINGERPRINT_ENROLL_ENROLLING_ACTION_DISMISS_ICON_TOUCH_DIALOG,
             FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_USER_SKIP,
             FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_BACK_PRESSED
     })
@@ -116,7 +110,6 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
     private final Vibrator mVibrator;
 
     private final MutableLiveData<Integer> mActionLiveData = new MutableLiveData<>();
-    private final MutableLiveData<Integer> mIconTouchDialogLiveData = new MutableLiveData<>();
     private final MutableLiveData<ErrorDialogData> mErrorDialogLiveData = new MutableLiveData<>();
     private final MutableLiveData<Integer> mErrorDialogActionLiveData = new MutableLiveData<>();
 
@@ -229,17 +222,6 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
         final int action = FINGERPRINT_ENROLL_ENROLLING_ACTION_SHOW_ICON_TOUCH_DIALOG;
         if (DEBUG) {
             Log.d(TAG, "onIconTouchDialogShow, post action " + action);
-        }
-        mActionLiveData.postValue(action);
-    }
-
-    /**
-     * Icon touch dialog dismiss
-     */
-    public void onIconTouchDialogDismiss() {
-        final int action = FINGERPRINT_ENROLL_ENROLLING_ACTION_DISMISS_ICON_TOUCH_DIALOG;
-        if (DEBUG) {
-            Log.d(TAG, "onIconTouchDialogDismiss, post action " + action);
         }
         mActionLiveData.postValue(action);
     }
