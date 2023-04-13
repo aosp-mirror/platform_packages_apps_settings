@@ -2955,13 +2955,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".bluetooth.RequestPermissionHelperActivity"
-                  android:label="@string/bluetooth_pairing_request"
-                  android:excludeFromRecents="true"
-                  android:permission="android.permission.BLUETOOTH_CONNECT"
-                  android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight">
-        </activity>
-
         <service android:name=".bluetooth.BluetoothPairingService" />
 
         <receiver android:name=".bluetooth.BluetoothPairingRequest"
