@@ -725,9 +725,9 @@ public final class DataProcessor {
     @VisibleForTesting
     @Nullable
     static Map<Long, Map<String, List<AppUsagePeriod>>> buildAppUsagePeriodList(
-            final List<AppUsageEvent> allAppUsageEvents, final List<BatteryEvent> batteryEventList,
+            final List<AppUsageEvent> appUsageEvents, final List<BatteryEvent> batteryEventList,
             final long startTime, final long endTime) {
-        if (allAppUsageEvents.isEmpty()) {
+        if (appUsageEvents.isEmpty()) {
             return null;
         }
 
@@ -735,7 +735,7 @@ public final class DataProcessor {
         // use.
         final List<AppUsageEvent> deviceEvents = new ArrayList<>();
         final ArrayMap<Integer, List<AppUsageEvent>> usageEventsByInstanceId = new ArrayMap<>();
-        for (final AppUsageEvent event : allAppUsageEvents) {
+        for (final AppUsageEvent event : appUsageEvents) {
             final AppUsageEventType eventType = event.getType();
             if (eventType == AppUsageEventType.ACTIVITY_RESUMED
                     || eventType == AppUsageEventType.ACTIVITY_STOPPED) {
@@ -852,9 +852,11 @@ public final class DataProcessor {
             final List<AppUsagePeriod> usagePeriodList,
             final List<BatteryEvent> batteryEventList) {
         final List<AppUsagePeriod> resultList = new ArrayList<>();
+        int index = 0;
         for (AppUsagePeriod inputPeriod : usagePeriodList) {
             long lastStartTime = inputPeriod.getStartTime();
-            for (BatteryEvent batteryEvent : batteryEventList) {
+            while (index < batteryEventList.size()) {
+                BatteryEvent batteryEvent = batteryEventList.get(index);
                 if (batteryEvent.getTimestamp() < inputPeriod.getStartTime()) {
                     // Because the batteryEventList has been sorted, here is to mark the power
                     // connection state when the usage period starts. If power is connected when
@@ -865,6 +867,7 @@ public final class DataProcessor {
                     } else if (batteryEvent.getType() == BatteryEventType.POWER_DISCONNECTED) {
                         lastStartTime = inputPeriod.getStartTime();
                     }
+                    index++;
                     continue;
                 }
                 if (batteryEvent.getTimestamp() > inputPeriod.getEndTime()) {
@@ -883,6 +886,7 @@ public final class DataProcessor {
                 } else if (batteryEvent.getType() == BatteryEventType.POWER_DISCONNECTED) {
                     lastStartTime = batteryEvent.getTimestamp();
                 }
+                index++;
             }
             if (lastStartTime != 0) {
                 resultList.add(AppUsagePeriod.newBuilder()
