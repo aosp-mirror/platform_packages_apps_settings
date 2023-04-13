@@ -103,10 +103,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"您需要重新啟動裝置，才可變更此設定。"</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"重新開始"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"取消"</string>
-    <!-- no translation found for bluetooth_disable_leaudio (8619410595945155354) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_leaudio_summary (4756307633476985470) -->
-    <skip />
+    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"停用藍牙 LE Audio"</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"如果裝置支援 LE Audio 硬件功能，則停用藍牙 LE Audio 功能。"</string>
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"啟用藍牙 LE Audio 許可名單"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"啟用藍牙 LE Audio 許可名單功能。"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"媒體裝置"</string>
@@ -179,8 +177,10 @@
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"每週的第一天"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"數字偏好設定"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"使用應用程式預設值"</string>
-    <string name="celsius_temperature_unit" msgid="6118523647432383132">"攝氏 (°C)"</string>
-    <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"華氏 (°F)"</string>
+    <!-- no translation found for celsius_temperature_unit (8896459071273084507) -->
+    <skip />
+    <!-- no translation found for fahrenheit_temperature_unit (1118677820614569801) -->
+    <skip />
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"星期日"</string>
     <string name="monday_first_day_of_week" msgid="7244698610476506771">"星期一"</string>
     <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"星期二"</string>
@@ -265,8 +265,7 @@
     <string name="safety_center_title" msgid="7732397372178774777">"安全性與私隱權"</string>
     <string name="safety_center_summary" msgid="3554867379951053869">"應用程式安全性、裝置鎖定、權限"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"已加入面孔"</string>
-    <!-- no translation found for security_settings_face_preference_summary_none (523320857738436024) -->
-    <skip />
+    <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"需要設定"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"面孔解鎖"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"工作設定檔的「面孔解鎖」"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"如何設定「面孔解鎖」"</string>
@@ -329,8 +328,7 @@
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"工作設定檔的指紋"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"新增指紋"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{已新增指紋}other{已新增 # 個指紋}}"</string>
-    <!-- no translation found for security_settings_fingerprint_preference_summary_none (1146977379031250790) -->
-    <skip />
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"需要設定"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"設定指紋"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"允許使用指紋解鎖"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"使用您的指紋"</string>
@@ -374,8 +372,7 @@
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"已新增面孔、指紋和<xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"面孔和指紋解鎖"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"用於工作設定檔的面孔和指紋解鎖"</string>
-    <!-- no translation found for security_settings_biometric_preference_summary_none_enrolled (213377753727694575) -->
-    <skip />
+    <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"需要設定"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"已新增面孔和指紋"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"已新增面孔和指紋"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"設定「面孔解鎖」和「指紋解鎖」時，如果您戴著口罩或人在昏暗的地方，手機就會要求您註冊指紋"</string>
@@ -387,6 +384,14 @@
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"使用指紋解鎖"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"使用面孔或指紋解鎖"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"確定"</string>
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_title (6041232223862753222) -->
+    <skip />
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_message (1904738532939614456) -->
+    <skip />
+    <string name="biometric_settings_add_fingerprint_in_split_mode_title" msgid="9194670722730454903">"無法設定指紋"</string>
+    <string name="biometric_settings_add_fingerprint_in_split_mode_message" msgid="6960548382076629454">"退出分割螢幕以設定「指紋解鎖」"</string>
+    <!-- no translation found for biometric_settings_add_biometrics_in_split_mode_ok (564103789097253645) -->
+    <skip />
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"要略過螢幕鎖定設定程序嗎？"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"仍要略過"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"返回"</string>
@@ -466,8 +471,7 @@
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"加密、憑證等"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"安全性, 更多安全性設定, 更多設定, 進階安全性設定"</string>
     <string name="privacy_advanced_settings" msgid="8828215456566937719">"更多私隱權設定"</string>
-    <!-- no translation found for more_security_privacy_settings (123465614090328851) -->
-    <skip />
+    <string name="more_security_privacy_settings" msgid="123465614090328851">"更多安全性和私隱權設定"</string>
     <string name="security_header" msgid="961514795852103424">"安全性"</string>
     <string name="privacy_header" msgid="5526002421324257007">"私隱"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"工作設定檔"</string>
@@ -501,10 +505,8 @@
     <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"輸入的正確 PIN (至少 6 位數)，系統就會自動解鎖。比起輕按 Enter 鍵確認 PIN，此做法較不安全。"</string>
     <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"自動確認正確 PIN"</string>
     <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"輕按 Enter 鍵確認 PIN 比使用自動確認功能更安全"</string>
-    <!-- no translation found for auto_confirm_on_pin_verify_description (2052240431173223502) -->
-    <skip />
-    <!-- no translation found for auto_confirm_off_pin_verify_description (4256219155659760047) -->
-    <skip />
+    <string name="auto_confirm_on_pin_verify_description" msgid="2052240431173223502">"輸入裝置 PIN 即可啟用自動確認設定"</string>
+    <string name="auto_confirm_off_pin_verify_description" msgid="4256219155659760047">"輸入裝置 PIN 即可停用自動確認設定"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"螢幕鎖定"</string>
     <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"工作設定檔鎖定方式"</string>
     <string name="unlock_set_unlock_off_title" msgid="2831957685685921667">"無"</string>
@@ -1783,10 +1785,8 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"放大捷徑"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"放大輸入內容"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"放大輸入中的文字"</string>
-    <!-- no translation found for accessibility_screen_magnification_always_on_title (3814297443759580936) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_always_on_summary (306908451430863049) -->
-    <skip />
+    <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"切換應用程式時保持開啟"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"切換應用程式時，放大鏡保持開啟並縮小畫面"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"操控桿"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"使用螢幕上的操控桿啟用及移動放大鏡。按住並在操控桿上拖曳，即可控制放大鏡；輕按並拖曳則可移動操控桿。"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"關於放大功能"</string>
@@ -2106,6 +2106,8 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"調整顏色"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"調暗螢幕, 調亮螢幕"</string>
+    <!-- no translation found for keywords_contrast (4668393735398949873) -->
+    <skip />
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="7151756353013736931">"行動, 滑鼠"</string>
@@ -2960,7 +2962,7 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"鈴聲和通知音量"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"鈴聲音量"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"通知音量"</string>
-    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"鈴聲已設定為靜音，因此無法使用"</string>
+    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"鈴聲已設為靜音，無法使用"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"電話鈴聲"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"預設通知音效"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"應用程式提供的音效"</string>
@@ -4544,6 +4546,8 @@
     <string name="uwb_settings_title" msgid="8578498712312002231">"超寬頻 (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"協助判斷附近採用超寬頻的裝置的相對位置"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"請關閉飛行模式，以便使用 UWB"</string>
+    <!-- no translation found for uwb_settings_summary_no_uwb_regulatory (3465456428217979428) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"相機存取權"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"麥克風存取權"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"應用程式和服務"</string>
@@ -4657,21 +4661,20 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{過去 # 個月安裝的應用程式}other{過去 # 個月安裝的應用程式}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{超過 # 個月前安裝的應用程式}other{超過 # 個月前安裝的應用程式}}"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"指紋感應器"</string>
-    <string name="flash_notifications_title" msgid="4490438861180492311">"閃動通知"</string>
+    <string name="flash_notifications_title" msgid="4490438861180492311">"閃光通知"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"關於閃燈通知"</string>
-    <string name="flash_notifications_summary_off" msgid="6056282996770691461">"已關閉"</string>
-    <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"已開啟/相機閃光燈"</string>
-    <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"已開啟/螢幕閃動"</string>
-    <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"已開啟/相機閃光燈和螢幕閃動"</string>
-    <string name="flash_notifications_intro" msgid="8409873413480928249">"在您接收通知或警報響起時，讓相機燈或螢幕閃動"</string>
+    <string name="flash_notifications_summary_off" msgid="6056282996770691461">"關閉"</string>
+    <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"開啟/相機閃光燈"</string>
+    <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"開啟/螢幕閃光"</string>
+    <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"開啟/相機閃光燈和螢幕閃光"</string>
+    <string name="flash_notifications_intro" msgid="8409873413480928249">"收到通知或鬧鐘響起時，閃動相機閃光燈或螢幕"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"收到通知或鬧鐘響起時閃爍螢幕"</string>
-    <string name="flash_notifications_note" msgid="2426125248448055075">"對光敏感者，請小心使用閃燈通知"</string>
-    <!-- no translation found for flash_notifications_keywords (2458759275318514836) -->
-    <skip />
+    <string name="flash_notifications_note" msgid="2426125248448055075">"如對光敏感，請小心使用閃光通知"</string>
+    <string name="flash_notifications_keywords" msgid="2458759275318514836">"閃燈, 燈光, 聽障, 失聰"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"預覽"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"相機閃光燈"</string>
-    <string name="screen_flash_notification_title" msgid="3773100725793316708">"螢幕閃動"</string>
-    <string name="screen_flash_notification_color_title" msgid="7213407653340970790">"螢幕閃動顏色"</string>
+    <string name="screen_flash_notification_title" msgid="3773100725793316708">"螢幕閃光"</string>
+    <string name="screen_flash_notification_color_title" msgid="7213407653340970790">"螢幕閃光顏色"</string>
     <string name="screen_flash_color_blue" msgid="3585766657607931371">"藍色"</string>
     <string name="screen_flash_color_azure" msgid="8691198532944992243">"蔚藍色"</string>
     <string name="screen_flash_color_cyan" msgid="6878780006173747267">"青色"</string>
@@ -4686,5 +4689,13 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"紫羅蘭色"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"完成"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"取消"</string>
+    <!-- no translation found for contrast_title (6885768151336508075) -->
+    <skip />
+    <!-- no translation found for contrast_standard (1097297089917185235) -->
+    <skip />
+    <!-- no translation found for contrast_medium (384414510709285811) -->
+    <skip />
+    <!-- no translation found for contrast_high (3988567609694797696) -->
+    <skip />
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"此應用程式只可在 1 個視窗中開啟"</string>
 </resources>
