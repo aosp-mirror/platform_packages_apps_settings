@@ -74,7 +74,7 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
         mController.setConfig(mConfig);
 
         mApplicationInfo.uid = 1;
-        when(mContext.getString(R.string.config_defaultWellbeingPackage)).thenReturn(TEST_PACKAGE);
+        when(mContext.getString(R.string.config_systemWellbeing)).thenReturn(TEST_PACKAGE);
 
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(
