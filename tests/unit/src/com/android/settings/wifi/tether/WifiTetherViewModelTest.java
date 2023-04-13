@@ -52,6 +52,8 @@ public class WifiTetherViewModelTest {
     @Mock
     WifiHotspotRepository mWifiHotspotRepository;
     @Mock
+    MutableLiveData<Integer> mSecurityType;
+    @Mock
     MutableLiveData<Integer> mSpeedType;
 
     WifiTetherViewModel mViewModel;
@@ -63,21 +65,18 @@ public class WifiTetherViewModelTest {
         FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
         when(featureFactory.getWifiFeatureProvider().getWifiHotspotRepository())
                 .thenReturn(mWifiHotspotRepository);
+        when(mWifiHotspotRepository.getSecurityType()).thenReturn(mSecurityType);
         when(mWifiHotspotRepository.getSpeedType()).thenReturn(mSpeedType);
 
         mViewModel = new WifiTetherViewModel(mApplication);
     }
 
     @Test
-    public void constructor_setAutoRefreshTrue() {
-        verify(mWifiHotspotRepository).setAutoRefresh(true);
-    }
-
-    @Test
     public void onCleared_setAutoRefreshFalse() {
         mViewModel.onCleared();
 
-        verify(mWifiHotspotRepository).setAutoRefresh(false);
+        verify(mSecurityType).removeObserver(mViewModel.mSecurityTypeObserver);
+        verify(mSpeedType).removeObserver(mViewModel.mSpeedTypeObserver);
     }
 
     @Test
@@ -98,11 +97,23 @@ public class WifiTetherViewModelTest {
 
     @Test
     @UiThreadTest
+    public void getSecuritySummary_returnNotNull() {
+        mViewModel.mSecuritySummary = null;
+
+        mViewModel.getSecuritySummary();
+
+        assertThat(mViewModel.mSecuritySummary).isNotNull();
+        verify(mSecurityType).observeForever(mViewModel.mSecurityTypeObserver);
+    }
+
+    @Test
+    @UiThreadTest
     public void getSpeedSummary_returnNotNull() {
         mViewModel.mSpeedSummary = null;
 
         mViewModel.getSpeedSummary();
 
         assertThat(mViewModel.mSpeedSummary).isNotNull();
+        verify(mSpeedType).observeForever(mViewModel.mSpeedTypeObserver);
     }
 }
