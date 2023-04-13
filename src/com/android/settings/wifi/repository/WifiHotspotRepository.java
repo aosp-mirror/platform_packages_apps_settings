@@ -19,6 +19,8 @@ package com.android.settings.wifi.repository;
 import static android.net.wifi.SoftApConfiguration.BAND_2GHZ;
 import static android.net.wifi.SoftApConfiguration.BAND_5GHZ;
 import static android.net.wifi.SoftApConfiguration.BAND_6GHZ;
+import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_OPEN;
+import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE;
 import static android.net.wifi.WifiAvailableChannel.OP_MODE_SAP;
 
 import android.content.Context;
@@ -81,6 +83,7 @@ public class WifiHotspotRepository {
     protected String mLastPassword;
     protected LastPasswordListener mLastPasswordListener = new LastPasswordListener();
 
+    protected MutableLiveData<Integer> mSecurityType;
     protected MutableLiveData<Integer> mSpeedType;
 
     protected Boolean mIsDualBand;
@@ -144,6 +147,7 @@ public class WifiHotspotRepository {
      * Refresh data from the SoftApConfiguration.
      */
     public void refresh() {
+        updateSecurityType();
         update6gAvailable();
         update5gAvailable();
         updateSpeedType();
@@ -163,10 +167,70 @@ public class WifiHotspotRepository {
     }
 
     /**
+     * Gets SecurityType LiveData
+     */
+    public LiveData<Integer> getSecurityType() {
+        if (mSecurityType == null) {
+            startAutoRefresh();
+            mSecurityType = new MutableLiveData<>();
+            updateSecurityType();
+            log("getSecurityType():" + mSecurityType.getValue());
+        }
+        return mSecurityType;
+    }
+
+    protected void updateSecurityType() {
+        if (mSecurityType == null) {
+            return;
+        }
+        SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
+        int securityType = (config != null) ? config.getSecurityType() : SECURITY_TYPE_OPEN;
+        log("updateSecurityType(), securityType:" + securityType);
+        mSecurityType.setValue(securityType);
+    }
+
+    /**
+     * Sets SecurityType
+     *
+     * @param securityType the Wi-Fi hotspot security type.
+     */
+    public void setSecurityType(int securityType) {
+        log("setSecurityType():" + securityType);
+        if (mSecurityType == null) {
+            getSecurityType();
+        }
+        if (securityType == mSecurityType.getValue()) {
+            Log.w(TAG, "setSecurityType() is no changed! mSecurityType:"
+                    + mSecurityType.getValue());
+            return;
+        }
+        SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
+        if (config == null) {
+            mSecurityType.setValue(SECURITY_TYPE_OPEN);
+            Log.e(TAG, "setSecurityType(), WifiManager#getSoftApConfiguration() return null!");
+            return;
+        }
+        SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder(config);
+        String passphrase = null;
+        if (securityType != SECURITY_TYPE_OPEN) {
+            passphrase = config.getPassphrase();
+            if (TextUtils.isEmpty(passphrase)) {
+                passphrase = generatePassword();
+            }
+        }
+        configBuilder.setPassphrase(passphrase, securityType);
+        setSoftApConfiguration(configBuilder.build());
+
+        mWifiManager.queryLastConfiguredTetheredApPassphraseSinceBoot(
+                mAppContext.getMainExecutor(), mLastPasswordListener);
+    }
+
+    /**
      * Gets SpeedType LiveData
      */
     public LiveData<Integer> getSpeedType() {
         if (mSpeedType == null) {
+            startAutoRefresh();
             mSpeedType = new MutableLiveData<>();
             updateSpeedType();
             log("getSpeedType():" + mSpeedType.getValue());
@@ -230,6 +294,10 @@ public class WifiHotspotRepository {
         if (speedType == SPEED_6GHZ) {
             log("setSpeedType(), setBand(BAND_2GHZ_5GHZ_6GHZ)");
             configBuilder.setBand(BAND_2GHZ_5GHZ_6GHZ);
+            if (config.getSecurityType() != SECURITY_TYPE_WPA3_SAE) {
+                log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_SAE)");
+                configBuilder.setPassphrase(generatePassword(), SECURITY_TYPE_WPA3_SAE);
+            }
         } else if (speedType == SPEED_5GHZ) {
             log("setSpeedType(), setBand(BAND_2GHZ_5GHZ)");
             configBuilder.setBand(BAND_2GHZ_5GHZ);
