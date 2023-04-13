@@ -16,14 +16,23 @@
 package com.android.settings.applications;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 
+import android.Manifest;
 import android.app.AlarmManager;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.os.PowerExemptionManager;
 import android.os.UserHandle;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import libcore.util.EmptyArray;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,13 +43,15 @@ import org.mockito.MockitoAnnotations;
 
 @RunWith(AndroidJUnit4.class)
 public class AppStateAlarmsAndRemindersBridgeTest {
-    private static final String TEST_PACKAGE_1 = "com.example.test.1";
-    private static final String TEST_PACKAGE_2 = "com.example.test.2";
-    private static final int UID_1 = 12345;
-    private static final int UID_2 = 7654321;
+    private static final String TEST_PACKAGE = "com.example.test.1";
+    private static final int TEST_UID = 12345;
 
     @Mock
     private AlarmManager mAlarmManager;
+    @Mock
+    private PowerExemptionManager mPowerExemptionManager;
+    @Mock
+    private PackageManager mPackageManager;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
 
@@ -50,65 +61,168 @@ public class AppStateAlarmsAndRemindersBridgeTest {
     }
 
     @Test
-    public void shouldBeVisible_permissionRequestedIsTrue_isTrue() {
-        assertThat(new AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState(
-                true /* permissionRequested */,
-                true /* permissionGranted */)
-                .shouldBeVisible()).isTrue();
-        assertThat(new AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState(
-                true /* permissionRequested */,
-                false /* permissionGranted */)
-                .shouldBeVisible()).isTrue();
-        assertThat(new AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState(
-                false /* permissionRequested */,
-                true /* permissionGranted */)
-                .shouldBeVisible()).isFalse();
-        assertThat(new AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState(
-                false /* permissionRequested */,
-                false /* permissionGranted */)
-                .shouldBeVisible()).isFalse();
+    public void alarmsAndRemindersState_shouldBeVisible() {
+        boolean seaPermissionRequested;
+        boolean ueaPermissionRequested;
+        boolean seaPermissionGranted;
+        boolean allowListed;
+
+        for (int i = 0; i < (1 << 4); i++) {
+            seaPermissionRequested = (i & 1) != 0;
+            ueaPermissionRequested = (i & (1 << 1)) != 0;
+            seaPermissionGranted = (i & (1 << 2)) != 0;
+            allowListed = (i & (1 << 3)) != 0;
+
+            final boolean visible = new AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState(
+                    seaPermissionRequested,
+                    ueaPermissionRequested,
+                    seaPermissionGranted,
+                    allowListed).shouldBeVisible();
+
+            assertWithMessage("Wrong return value " + visible
+                    + " for {seaPermissionRequested = " + seaPermissionRequested
+                    + ", ueaPermissionRequested = " + ueaPermissionRequested
+                    + ", seaPermissionGranted = " + seaPermissionGranted
+                    + ", allowListed = " + allowListed + "}")
+                    .that(visible)
+                    .isEqualTo(seaPermissionRequested && !ueaPermissionRequested && !allowListed);
+        }
     }
 
     @Test
-    public void isAllowed_permissionGrantedIsTrue_isTrue() {
-        assertThat(new AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState(
-                true /* permissionRequested */,
-                true /* permissionGranted */)
-                .isAllowed()).isTrue();
-        assertThat(new AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState(
-                true /* permissionRequested */,
-                false /* permissionGranted */)
-                .isAllowed()).isFalse();
-        assertThat(new AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState(
-                false /* permissionRequested */,
-                true /* permissionGranted */)
-                .isAllowed()).isTrue();
-        assertThat(new AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState(
-                false /* permissionRequested */,
-                false /* permissionGranted */)
-                .isAllowed()).isFalse();
+    public void alarmsAndRemindersState_isAllowed() {
+        boolean seaPermissionRequested;
+        boolean ueaPermissionRequested;
+        boolean seaPermissionGranted;
+        boolean allowListed;
+
+        for (int i = 0; i < (1 << 4); i++) {
+            seaPermissionRequested = (i & 1) != 0;
+            ueaPermissionRequested = (i & (1 << 1)) != 0;
+            seaPermissionGranted = (i & (1 << 2)) != 0;
+            allowListed = (i & (1 << 3)) != 0;
+
+            final boolean allowed = new AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState(
+                    seaPermissionRequested,
+                    ueaPermissionRequested,
+                    seaPermissionGranted,
+                    allowListed).isAllowed();
+
+            assertWithMessage("Wrong return value " + allowed
+                    + " for {seaPermissionRequested = " + seaPermissionRequested
+                    + ", ueaPermissionRequested = " + ueaPermissionRequested
+                    + ", seaPermissionGranted = " + seaPermissionGranted
+                    + ", allowListed = " + allowListed + "}")
+                    .that(allowed)
+                    .isEqualTo(seaPermissionGranted || ueaPermissionRequested || allowListed);
+        }
+    }
+
+    private PackageInfo createPackageInfoWithPermissions(String... requestedPermissions) {
+        final PackageInfo info = new PackageInfo();
+        info.requestedPermissions = requestedPermissions;
+        return info;
     }
 
     @Test
-    public void createPermissionState() {
+    public void createPermissionState_SeaGrantedNoUeaNoAllowlist() throws Exception {
         AppStateAlarmsAndRemindersBridge bridge = new AppStateAlarmsAndRemindersBridge(mContext,
                 null, null);
         bridge.mAlarmManager = mAlarmManager;
-        bridge.mRequesterPackages = new String[]{TEST_PACKAGE_1, "some.other.package"};
+        bridge.mPackageManager = mPackageManager;
+        bridge.mPowerExemptionManager = mPowerExemptionManager;
 
-        doReturn(false).when(mAlarmManager).hasScheduleExactAlarm(TEST_PACKAGE_1,
-                UserHandle.getUserId(UID_1));
-        doReturn(true).when(mAlarmManager).hasScheduleExactAlarm(TEST_PACKAGE_2,
-                UserHandle.getUserId(UID_2));
+        doReturn(true).when(mAlarmManager).hasScheduleExactAlarm(TEST_PACKAGE,
+                UserHandle.getUserId(TEST_UID));
+        doReturn(createPackageInfoWithPermissions(Manifest.permission.SCHEDULE_EXACT_ALARM))
+                .when(mPackageManager).getPackageInfoAsUser(eq(TEST_PACKAGE), anyInt(), anyInt());
+        doReturn(false).when(mPowerExemptionManager).isAllowListed(TEST_PACKAGE, true);
 
-        AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState state1 =
-                bridge.createPermissionState(TEST_PACKAGE_1, UID_1);
-        assertThat(state1.shouldBeVisible()).isTrue();
-        assertThat(state1.isAllowed()).isFalse();
+        AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState state =
+                bridge.createPermissionState(TEST_PACKAGE, TEST_UID);
+        assertThat(state.shouldBeVisible()).isTrue();
+        assertThat(state.isAllowed()).isTrue();
+    }
 
-        AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState state2 =
-                bridge.createPermissionState(TEST_PACKAGE_2, UID_2);
-        assertThat(state2.shouldBeVisible()).isFalse();
-        assertThat(state2.isAllowed()).isTrue();
+    @Test
+    public void createPermissionState_requestsBothSeaDeniedNoAllowlist() throws Exception {
+        AppStateAlarmsAndRemindersBridge bridge = new AppStateAlarmsAndRemindersBridge(mContext,
+                null, null);
+        bridge.mAlarmManager = mAlarmManager;
+        bridge.mPackageManager = mPackageManager;
+        bridge.mPowerExemptionManager = mPowerExemptionManager;
+
+        doReturn(false).when(mAlarmManager).hasScheduleExactAlarm(TEST_PACKAGE,
+                UserHandle.getUserId(TEST_UID));
+        doReturn(createPackageInfoWithPermissions(
+                Manifest.permission.SCHEDULE_EXACT_ALARM,
+                Manifest.permission.USE_EXACT_ALARM))
+                .when(mPackageManager).getPackageInfoAsUser(eq(TEST_PACKAGE), anyInt(), anyInt());
+        doReturn(false).when(mPowerExemptionManager).isAllowListed(TEST_PACKAGE, true);
+
+        AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState state =
+                bridge.createPermissionState(TEST_PACKAGE, TEST_UID);
+        assertThat(state.shouldBeVisible()).isFalse();
+        assertThat(state.isAllowed()).isTrue();
+    }
+
+    @Test
+    public void createPermissionState_requestsNoneNoAllowlist() throws Exception {
+        AppStateAlarmsAndRemindersBridge bridge = new AppStateAlarmsAndRemindersBridge(mContext,
+                null, null);
+        bridge.mAlarmManager = mAlarmManager;
+        bridge.mPackageManager = mPackageManager;
+        bridge.mPowerExemptionManager = mPowerExemptionManager;
+
+        doReturn(false).when(mAlarmManager).hasScheduleExactAlarm(TEST_PACKAGE,
+                UserHandle.getUserId(TEST_UID));
+        doReturn(createPackageInfoWithPermissions(EmptyArray.STRING))
+                .when(mPackageManager).getPackageInfoAsUser(eq(TEST_PACKAGE), anyInt(), anyInt());
+        doReturn(false).when(mPowerExemptionManager).isAllowListed(TEST_PACKAGE, true);
+
+        AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState state =
+                bridge.createPermissionState(TEST_PACKAGE, TEST_UID);
+        assertThat(state.shouldBeVisible()).isFalse();
+        assertThat(state.isAllowed()).isFalse();
+    }
+
+    @Test
+    public void createPermissionState_requestsOnlyUeaNoAllowlist() throws Exception {
+        AppStateAlarmsAndRemindersBridge bridge = new AppStateAlarmsAndRemindersBridge(mContext,
+                null, null);
+        bridge.mAlarmManager = mAlarmManager;
+        bridge.mPackageManager = mPackageManager;
+        bridge.mPowerExemptionManager = mPowerExemptionManager;
+
+        doReturn(false).when(mAlarmManager).hasScheduleExactAlarm(TEST_PACKAGE,
+                UserHandle.getUserId(TEST_UID));
+        doReturn(createPackageInfoWithPermissions(Manifest.permission.USE_EXACT_ALARM))
+                .when(mPackageManager).getPackageInfoAsUser(eq(TEST_PACKAGE), anyInt(), anyInt());
+        doReturn(false).when(mPowerExemptionManager).isAllowListed(TEST_PACKAGE, true);
+
+        AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState state =
+                bridge.createPermissionState(TEST_PACKAGE, TEST_UID);
+        assertThat(state.shouldBeVisible()).isFalse();
+        assertThat(state.isAllowed()).isTrue();
+    }
+
+    @Test
+    public void createPermissionState_requestsNoneButAllowlisted() throws Exception {
+        AppStateAlarmsAndRemindersBridge bridge = new AppStateAlarmsAndRemindersBridge(mContext,
+                null, null);
+        bridge.mAlarmManager = mAlarmManager;
+        bridge.mPackageManager = mPackageManager;
+        bridge.mPowerExemptionManager = mPowerExemptionManager;
+
+        doReturn(false).when(mAlarmManager).hasScheduleExactAlarm(TEST_PACKAGE,
+                UserHandle.getUserId(TEST_UID));
+        doReturn(createPackageInfoWithPermissions(EmptyArray.STRING))
+                .when(mPackageManager).getPackageInfoAsUser(eq(TEST_PACKAGE), anyInt(), anyInt());
+        doReturn(true).when(mPowerExemptionManager).isAllowListed(TEST_PACKAGE, true);
+
+        AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState state =
+                bridge.createPermissionState(TEST_PACKAGE, TEST_UID);
+        assertThat(state.shouldBeVisible()).isFalse();
+        assertThat(state.isAllowed()).isTrue();
     }
 }
