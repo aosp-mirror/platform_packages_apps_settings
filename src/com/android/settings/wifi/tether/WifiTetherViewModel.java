@@ -16,11 +16,15 @@
 
 package com.android.settings.wifi.tether;
 
+import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_OPEN;
+import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA2_PSK;
+import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE;
+import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION;
+
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ_5GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_5GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_6GHZ;
-import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_UNKNOWN;
 
 import android.app.Application;
 import android.net.wifi.SoftApConfiguration;
@@ -28,7 +32,7 @@ import android.net.wifi.SoftApConfiguration;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Transformations;
+import androidx.lifecycle.Observer;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
@@ -45,9 +49,19 @@ import java.util.Map;
 public class WifiTetherViewModel extends AndroidViewModel {
     private static final String TAG = "WifiTetherViewModel";
 
-    protected static Map<Integer, Integer> sSpeedSummaryResMap = new HashMap<>();
+    static Map<Integer, Integer> sSecuritySummaryResMap = new HashMap<>();
+
     static {
-        sSpeedSummaryResMap.put(SPEED_UNKNOWN, R.string.summary_placeholder);
+        sSecuritySummaryResMap.put(SECURITY_TYPE_WPA3_SAE, R.string.wifi_security_sae);
+        sSecuritySummaryResMap.put(SECURITY_TYPE_WPA3_SAE_TRANSITION,
+                R.string.wifi_security_psk_sae);
+        sSecuritySummaryResMap.put(SECURITY_TYPE_WPA2_PSK, R.string.wifi_security_wpa2);
+        sSecuritySummaryResMap.put(SECURITY_TYPE_OPEN, R.string.wifi_security_none);
+    }
+
+    static Map<Integer, Integer> sSpeedSummaryResMap = new HashMap<>();
+
+    static {
         sSpeedSummaryResMap.put(SPEED_2GHZ, R.string.wifi_hotspot_speed_summary_2g);
         sSpeedSummaryResMap.put(SPEED_5GHZ, R.string.wifi_hotspot_speed_summary_5g);
         sSpeedSummaryResMap.put(SPEED_6GHZ, R.string.wifi_hotspot_speed_summary_6g);
@@ -55,18 +69,22 @@ public class WifiTetherViewModel extends AndroidViewModel {
     }
 
     protected final WifiHotspotRepository mWifiHotspotRepository;
+    protected MutableLiveData<Integer> mSecuritySummary;
     protected MutableLiveData<Integer> mSpeedSummary;
+
+    protected final Observer<Integer> mSecurityTypeObserver = st -> onSecurityTypeChanged(st);
+    protected final Observer<Integer> mSpeedTypeObserver = st -> onSpeedTypeChanged(st);
 
     public WifiTetherViewModel(@NotNull Application application) {
         super(application);
         mWifiHotspotRepository = FeatureFactory.getFactory(application).getWifiFeatureProvider()
                 .getWifiHotspotRepository();
-        mWifiHotspotRepository.setAutoRefresh(true);
     }
 
     @Override
     protected void onCleared() {
-        mWifiHotspotRepository.setAutoRefresh(false);
+        mWifiHotspotRepository.getSecurityType().removeObserver(mSecurityTypeObserver);
+        mWifiHotspotRepository.getSpeedType().removeObserver(mSpeedTypeObserver);
     }
 
     /**
@@ -86,17 +104,40 @@ public class WifiTetherViewModel extends AndroidViewModel {
     }
 
     /**
+     * Gets SecuritySummary LiveData
+     */
+    public LiveData<Integer> getSecuritySummary() {
+        if (mSecuritySummary == null) {
+            mSecuritySummary = new MutableLiveData<>();
+            mWifiHotspotRepository.getSecurityType().observeForever(mSecurityTypeObserver);
+        }
+        return mSecuritySummary;
+    }
+
+    protected void onSecurityTypeChanged(int securityType) {
+        int resId = R.string.summary_placeholder;
+        if (sSecuritySummaryResMap.containsKey(securityType)) {
+            resId = sSecuritySummaryResMap.get(securityType);
+        }
+        mSecuritySummary.setValue(resId);
+    }
+
+    /**
      * Gets SpeedSummary LiveData
      */
     public LiveData<Integer> getSpeedSummary() {
         if (mSpeedSummary == null) {
             mSpeedSummary = new MutableLiveData<>();
-            mWifiHotspotRepository.getSpeedType().observeForever(this::onSpeedTypeChanged);
+            mWifiHotspotRepository.getSpeedType().observeForever(mSpeedTypeObserver);
         }
-        return Transformations.distinctUntilChanged(mSpeedSummary);
+        return mSpeedSummary;
     }
 
     protected void onSpeedTypeChanged(Integer speedType) {
-        mSpeedSummary.setValue(sSpeedSummaryResMap.get(speedType));
+        int resId = R.string.summary_placeholder;
+        if (sSpeedSummaryResMap.containsKey(speedType)) {
+            resId = sSpeedSummaryResMap.get(speedType);
+        }
+        mSpeedSummary.setValue(resId);
     }
 }
