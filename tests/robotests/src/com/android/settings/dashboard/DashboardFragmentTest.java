@@ -33,10 +33,12 @@ import static org.mockito.Mockito.when;
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ProviderInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager.OnActivityResultListener;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -356,6 +358,19 @@ public class DashboardFragmentTest {
         assertThat(pref).isInstanceOf(PrimarySwitchPreference.class);
     }
 
+    @Test
+    public void onActivityResult_test() {
+        final int requestCode = 10;
+        final int resultCode = 1;
+        final TestOnActivityResultPreferenceController activityResultPref = spy(
+                new TestOnActivityResultPreferenceController(mContext));
+        mTestFragment.addPreferenceController(activityResultPref);
+
+        mTestFragment.onActivityResult(requestCode, resultCode, null);
+
+        verify(activityResultPref).onActivityResult(requestCode, resultCode, null);
+    }
+
     public static class TestPreferenceController extends AbstractPreferenceController
             implements PreferenceControllerMixin {
 
@@ -387,6 +402,19 @@ public class DashboardFragmentTest {
 
         private SubTestPreferenceController(Context context) {
             super(context);
+        }
+    }
+
+    public static class TestOnActivityResultPreferenceController extends
+            TestPreferenceController implements OnActivityResultListener {
+
+        private TestOnActivityResultPreferenceController(Context context) {
+            super(context);
+        }
+
+        @Override
+        public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
+            return true;
         }
     }
 
