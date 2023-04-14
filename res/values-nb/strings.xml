@@ -103,10 +103,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Du må starte enheten på nytt for å endre denne innstillingen."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Start på nytt"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Avbryt"</string>
-    <!-- no translation found for bluetooth_disable_leaudio (8619410595945155354) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_leaudio_summary (4756307633476985470) -->
-    <skip />
+    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Slå av Bluetooth LE-lyd"</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Slår av Bluetooth LE-lydfunksjonen hvis enheten støtter maskinvarefunksjoner for LE-lyd."</string>
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Slå på tillatelseslisten for Bluetooth LE-lyd"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Slå på funksjonen for tillatelseslisten for Bluetooth LE-lyd."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Medieenheter"</string>
@@ -179,8 +177,10 @@
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Første dag i uken"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Tallpreferanser"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Bruk appstandard"</string>
-    <string name="celsius_temperature_unit" msgid="6118523647432383132">"Celsius (°C)"</string>
-    <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Fahrenheit (°F)"</string>
+    <!-- no translation found for celsius_temperature_unit (8896459071273084507) -->
+    <skip />
+    <!-- no translation found for fahrenheit_temperature_unit (1118677820614569801) -->
+    <skip />
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"Søndag"</string>
     <string name="monday_first_day_of_week" msgid="7244698610476506771">"Mandag"</string>
     <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"Tirsdag"</string>
@@ -265,8 +265,7 @@
     <string name="safety_center_title" msgid="7732397372178774777">"Sikkerhet og personvern"</string>
     <string name="safety_center_summary" msgid="3554867379951053869">"Appsikkerhet, enhetslås, tillatelser"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Ansiktet er lagt til"</string>
-    <!-- no translation found for security_settings_face_preference_summary_none (523320857738436024) -->
-    <skip />
+    <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Konfigurering kreves"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Ansiktslås"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Ansiktslås for jobb"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Slik konfigurerer du ansiktslås"</string>
@@ -329,8 +328,7 @@
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingeravtrykk for jobb"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Legg til fingeravtrykk"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{1 fingeravtrykk er lagt til}other{# fingeravtrykk er lagt til}}"</string>
-    <!-- no translation found for security_settings_fingerprint_preference_summary_none (1146977379031250790) -->
-    <skip />
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"Konfigurering kreves"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Konfigurer fingeravtrykket"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Tillat bruk av fingeravtrykk"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Bruk fingeravtrykket ditt"</string>
@@ -374,8 +372,7 @@
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Ansiktet, fingeravtrykkene og <xliff:g id="WATCH">%s</xliff:g> er lagt til"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Opplåsing med ansikt og fingeravtrykk"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Ansiktslås og opplåsing med fingeravtrykk for jobb"</string>
-    <!-- no translation found for security_settings_biometric_preference_summary_none_enrolled (213377753727694575) -->
-    <skip />
+    <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Konfigurering kreves"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Ansikt og fingeravtrykk er lagt til"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Ansikt og fingeravtrykk er lagt til"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Når du konfigurerer ansiktslås og opplåsing med fingeravtrykk, blir du bedt om å bruke fingeravtrykk når du bruker munnbind eller er i et dårlig belyst område."</string>
@@ -387,6 +384,14 @@
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Med fingeravtrykket"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Med ansiktet eller fingeravtrykket"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_title (6041232223862753222) -->
+    <skip />
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_message (1904738532939614456) -->
+    <skip />
+    <string name="biometric_settings_add_fingerprint_in_split_mode_title" msgid="9194670722730454903">"Kan ikke konfigurere fingeravtrykk"</string>
+    <string name="biometric_settings_add_fingerprint_in_split_mode_message" msgid="6960548382076629454">"Lukk delt skjerm og konfigurer fingeravtrykk"</string>
+    <!-- no translation found for biometric_settings_add_biometrics_in_split_mode_ok (564103789097253645) -->
+    <skip />
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Vil du hoppe over skjermlås?"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"Hopp over likevel"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"Gå tilbake"</string>
@@ -455,7 +460,7 @@
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Konfigurering av fingeravtrykk er tidsavbrutt"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Prøv på nytt nå, eller konfigurer fingeravtrykket senere i innstillingene"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Registrering av fingeravtrykket mislyktes. Prøv på nytt, eller bruk en annen finger."</string>
-    <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Legg til ett til"</string>
+    <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Legg til et til"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Neste"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Alternativet for skjermlås er slått av. For å finne ut mer, kontakt administratoren for organisasjonen din."</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Du kan fortsatt bruke fingeravtrykket til å godkjenne kjøp og apptilgang."</string>
@@ -466,8 +471,7 @@
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Kryptering, legitimasjon med mer"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"sikkerhet, flere sikkerhetsinnstillinger, flere innstillinger, avanserte sikkerhetsinnstillinger"</string>
     <string name="privacy_advanced_settings" msgid="8828215456566937719">"Flere personverninnstillinger"</string>
-    <!-- no translation found for more_security_privacy_settings (123465614090328851) -->
-    <skip />
+    <string name="more_security_privacy_settings" msgid="123465614090328851">"Mer sikkerhet og personvern"</string>
     <string name="security_header" msgid="961514795852103424">"Sikkerhet"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Personvern"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Jobbprofil"</string>
@@ -501,10 +505,8 @@
     <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"Lås opp automatisk hvis du legger inn en riktig PIN-kode på minst 6 sifre. Dette er litt mindre sikkert enn å bekrefte med Enter."</string>
     <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"Bekreft korrekt PIN-kode automatisk"</string>
     <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"Det er sikrere å bekrefte PIN-koden med Enter enn å bruke automatisk bekreftelse"</string>
-    <!-- no translation found for auto_confirm_on_pin_verify_description (2052240431173223502) -->
-    <skip />
-    <!-- no translation found for auto_confirm_off_pin_verify_description (4256219155659760047) -->
-    <skip />
+    <string name="auto_confirm_on_pin_verify_description" msgid="2052240431173223502">"Legg inn PIN-koden for enheten for å slå på automatisk bekreftelse"</string>
+    <string name="auto_confirm_off_pin_verify_description" msgid="4256219155659760047">"Legg inn PIN-koden for enheten for å slå av automatisk bekreftelse"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"Skjermlås"</string>
     <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"Lås for jobbprofilen"</string>
     <string name="unlock_set_unlock_off_title" msgid="2831957685685921667">"Ingen"</string>
@@ -706,27 +708,27 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"I flymodus"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Varsle om offentlige nettverk"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Varsle når et offentlig nettverk av høy kvalitet er tilgjengelig"</string>
-    <string name="wifi_wakeup" msgid="3834327315861781611">"Slå på Wi‑Fi automatisk"</string>
-    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi‑Fi slås på igjen i nærheten av lagrede nettverk av høy kvalitet, for eksempel hjemmenettverket ditt"</string>
+    <string name="wifi_wakeup" msgid="3834327315861781611">"Slå på wifi automatisk"</string>
+    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wifi slås på igjen i nærheten av lagrede nettverk av høy kvalitet, for eksempel hjemmenettverket ditt"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Utilgjengelig fordi Posisjon er slått av. Slå på "<annotation id="link">"Posisjon"</annotation>"."</string>
     <string name="wifi_install_credentials" msgid="5192903644606839972">"Installer sertifikater"</string>
-    <string name="wifi_scan_notify_text" msgid="7163137260385995873">"For å forbedre posisjonsnøyaktigheten kan apper og tjenester søke etter Wifi-nettverk når som helst – også når Wifi er slått av. Dette kan for eksempel brukes til å forbedre posisjonsbaserte funksjoner og tjenester. Du kan endre dette i <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>innstillingene for wifi-skanning<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="wifi_scan_notify_text" msgid="7163137260385995873">"For å forbedre posisjonsnøyaktigheten kan apper og tjenester søke etter wifi-nettverk når som helst – også når Wifi er slått av. Dette kan for eksempel brukes til å forbedre posisjonsbaserte funksjoner og tjenester. Du kan endre dette i <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>innstillingene for wifi-skanning<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="7439201783168213149">"For å forbedre posisjonsnøyaktigheten, slå på wifi-skanning i <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>innstillingene for wifi-skanning<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_cellular_data_fallback_title" msgid="2844653839490977040">"Bytt til mobildata automatisk"</string>
     <string name="wifi_cellular_data_fallback_summary" msgid="7039944853033554386">"Bruk mobildata når Wifi ikke har Internett-tilgang. Avgifter for databruk kan påløpe."</string>
     <string name="wifi_add_network" msgid="4178564862173751181">"Legg til nettverk"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2536725796700696566">"Wi‑Fi-innstillinger"</string>
-    <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"Wi‑Fi slås på igjen automatisk"</string>
-    <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"Wi‑Fi slås ikke på igjen automatisk"</string>
+    <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"Wifi slås på igjen automatisk"</string>
+    <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"Wifi slås ikke på igjen automatisk"</string>
     <string name="wifi_menu_p2p" msgid="5234165837732940385">"Wi-Fi Direct"</string>
-    <string name="wifi_empty_list_wifi_off" msgid="7697422506708419298">"Slå på Wifi for å se tilgjengelige nettverk."</string>
+    <string name="wifi_empty_list_wifi_off" msgid="7697422506708419298">"Slå på wifi for å se tilgjengelige nettverk."</string>
     <string name="wifi_empty_list_wifi_on" msgid="2448010040478321376">"Søker etter nettverk …"</string>
     <string name="wifi_empty_list_user_restricted" msgid="454861411536708709">"Du har ikke tillatelse til å endre Wifi-nettverk."</string>
-    <string name="wifi_settings_scanning_required_title" msgid="1088663325396007484">"Vil du slå på Wi‑Fi-skanning?"</string>
+    <string name="wifi_settings_scanning_required_title" msgid="1088663325396007484">"Vil du slå på wifi-skanning?"</string>
     <string name="wifi_settings_scanning_required_summary" msgid="4770243653675416569">"For å slå på Wifi automatisk må du først slå på wifi-skanning."</string>
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Med wifi-skanning kan apper og tjenester søke etter enheter i nærheten når som helst, selv når Wifi er slått av. Dette kan for eksempel brukes til å forbedre posisjonsbaserte funksjoner og tjenester."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Slå på"</string>
-    <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Wi‑Fi-skanning er slått på"</string>
+    <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Wifi-skanning er slått på"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Avanserte alternativer"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Rullegardinliste med avanserte alternativer"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"vis"</string>
@@ -1344,7 +1346,7 @@
     <string name="location_high_battery_use" msgid="4277318891200626524">"Høy batteribruk"</string>
     <string name="location_low_battery_use" msgid="5218950289737996431">"Lav batteribruk"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"Wi‑Fi-skanning"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"La apper og tjenester søke etter Wifi-nettverk når som helst, selv når Wifi er slått av. Dette kan for eksempel brukes til å forbedre posisjonsbaserte funksjoner og tjenester."</string>
+    <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"La apper og tjenester søke etter wifi-nettverk når som helst, selv når Wifi er slått av. Dette kan for eksempel brukes til å forbedre posisjonsbaserte funksjoner og tjenester."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Bluetooth-søking"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"La apper og tjenester søke etter enheter i nærheten når som helst, selv når Bluetooth er slått av. Dette kan for eksempel brukes til å forbedre posisjonsbaserte funksjoner og tjenester."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Posisjonstjenester"</string>
@@ -1696,8 +1698,7 @@
     <string name="modifier_keys_reset_message" msgid="5236994817619936058">"Er du sikker på at du vil tilbakestille alle modifikatortastene til standard?"</string>
     <string name="modifier_keys_done" msgid="8196199314913909700">"Ferdig"</string>
     <string name="modifier_keys_cancel" msgid="7136520252570826772">"Avbryt"</string>
-    <!-- no translation found for modifier_keys_reset (551170906710422041) -->
-    <skip />
+    <string name="modifier_keys_reset" msgid="551170906710422041">"Tilbakestill"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Velg modifikatortast"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Velg en ny nøkkel for <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Standard"</string>
@@ -1784,10 +1785,8 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Forstørring-snarvei"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Forstørr skriving"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Forstørrelsesglasset følger teksten når du skriver"</string>
-    <!-- no translation found for accessibility_screen_magnification_always_on_title (3814297443759580936) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_always_on_summary (306908451430863049) -->
-    <skip />
+    <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"La være på ved appbytte"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Forstørrelsesglasset blir værende på og zoomer ut når du bytter app"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Joystick"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Aktiver og flytt forstørringen med joysticken på skjermen. Trykk og hold og dra joysticken for å kontrollere forstørringen. Trykk og dra for å flytte selve joysticken."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Om forstørring"</string>
@@ -1965,8 +1964,7 @@
     <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"Du kan også legge til ekstra dimmet i hurtiginnstillingene fra toppen av skjermen"</string>
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"Enhåndsmodus er lagt til i hurtiginnstillingene. Sveip ned for å slå den av eller på når som helst."</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"Du kan også legge til enhåndsmodus i hurtiginnstillingene fra toppen av skjermen"</string>
-    <!-- no translation found for accessibility_font_scaling_auto_added_qs_tooltip_content (7229921960884718332) -->
-    <skip />
+    <string name="accessibility_font_scaling_auto_added_qs_tooltip_content" msgid="7229921960884718332">"Skriftstørrelse er lagt til i hurtiginnstillingene. Sveip ned når som helst for å endre skriftstørrelsen."</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Lukk"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Bruk fargekorrigering"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Snarvei til fargekorrigering"</string>
@@ -2108,6 +2106,8 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"juster farge"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"gjør skjermen mørk, gjør skjermen lys"</string>
+    <!-- no translation found for keywords_contrast (4668393735398949873) -->
+    <skip />
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="7151756353013736931">"motor, mus"</string>
@@ -2271,7 +2271,7 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Forleng batteriets levetid"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Slå av når den er ladet"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Slå av ved <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Batterisparingen slås på når batteriet når <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Batterisparingen slås av når batteriet når <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Slå på"</string>
@@ -3572,7 +3572,7 @@
     <string name="usb_use_power_only" msgid="3408055485802114621">"Lad den tilkoblede enheten"</string>
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Filoverføring"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <string name="usb_use_uvc_webcam" msgid="6595429508472038732">"Nettkamera"</string>
+    <string name="usb_use_uvc_webcam" msgid="6595429508472038732">"Webkamera"</string>
     <string name="usb_transcode_files" msgid="2441954752105119109">"Konverter videoer til AVC"</string>
     <string name="usb_transcode_files_summary" msgid="307102635711961513">"Videoer kan spilles av i flere medieavspillere, men kvaliteten kan bli redusert"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB-internettdeling"</string>
@@ -3595,12 +3595,12 @@
     <string name="usb_summary_tether" msgid="2554569836525075702">"USB-internettdeling"</string>
     <string name="usb_summary_photo_transfers" msgid="7331503733435780492">"PTP"</string>
     <string name="usb_summary_MIDI" msgid="2372443732675899571">"MIDI"</string>
-    <string name="usb_summary_UVC" msgid="8733131110899174299">"Nettkamera"</string>
+    <string name="usb_summary_UVC" msgid="8733131110899174299">"Webkamera"</string>
     <string name="usb_summary_file_transfers_power" msgid="2788374660532868630">"Filoverføring og forsyner strøm"</string>
     <string name="usb_summary_tether_power" msgid="4853034392919904792">"USB-internettdeling og forsyner strøm"</string>
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"PTP og forsyner strøm"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"MIDI og forsyner strøm"</string>
-    <string name="usb_summary_UVC_power" msgid="226810354412154061">"Nettkamera og forsyner strøm"</string>
+    <string name="usb_summary_UVC_power" msgid="226810354412154061">"Webkamera og forsyner strøm"</string>
     <string name="background_check_pref" msgid="5304564658578987535">"Bakgrunnssjekk"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"Bruk tekst fra skjermen"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"Gi assistentappen tilgang til skjerminnholdet som tekst"</string>
@@ -4147,7 +4147,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Ignorer"</string>
     <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"For å slå på dette, endre først «Trykk og hold på av/på-knappen» til av/på-menyen."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Nettverksdetaljer"</string>
-    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Enhetsnavnet ditt er synlig for apper på telefonen. Det kan også ses av andre personer når du kobler til Bluetooth-enheter, kobler til et Wifi-nettverk eller konfigurerer en wifi-sone."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Enhetsnavnet ditt er synlig for apper på telefonen. Det kan også ses av andre personer når du kobler til Bluetooth-enheter, kobler til et wifi-nettverk eller konfigurerer en wifi-sone."</string>
     <string name="devices_title" msgid="649715719278562515">"Enheter"</string>
     <string name="choose_network_title" msgid="5355609223363859430">"Velg nettverk"</string>
     <string name="network_disconnected" msgid="8281188173486212661">"Frakoblet"</string>
@@ -4478,7 +4478,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"anrop"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"mobildata"</string>
-    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"For å forbedre brukeropplevelsen på enheten kan apper og tjenester søke etter Wifi-nettverk når som helst – også når Wifi er slått av. Dette kan for eksempel brukes til å forbedre posisjonsbaserte funksjoner og tjenester. Du kan endre dette i innstillingene for wifi-skanning."</string>
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"For å forbedre brukeropplevelsen på enheten kan apper og tjenester søke etter wifi-nettverk når som helst – også når wifi er slått av. Dette kan for eksempel brukes til å forbedre posisjonsbaserte funksjoner og tjenester. Du kan endre dette i innstillingene for wifi-skanning."</string>
     <string name="wifi_scan_change" msgid="8438320311511852918">"Endre"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Tilkoblet"</string>
@@ -4546,6 +4546,8 @@
     <string name="uwb_settings_title" msgid="8578498712312002231">"Ultrabredbånd (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Bidrar til å finne den relative posisjonen til enheter i nærheten som har UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Slå av flymodus for å bruke UWB"</string>
+    <!-- no translation found for uwb_settings_summary_no_uwb_regulatory (3465456428217979428) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"Kameratilgang"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Mikrofontilgang"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"For apper og tjenester"</string>
@@ -4666,11 +4668,9 @@
     <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"På / skjermblink"</string>
     <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"På / kamerablits og skjermblink"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Få kameralyset eller skjermen til å blinke når du mottar varsler, eller når alarmer utløses"</string>
-    <!-- no translation found for flash_notifications_intro_without_camera_flash (6297337174487793891) -->
-    <skip />
+    <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Få skjermen til å blinke når du mottar varsler, eller når alarmer utløses"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Hvis du er lysfølsom, bør du være forsiktig med å bruke blitsvarsler"</string>
-    <!-- no translation found for flash_notifications_keywords (2458759275318514836) -->
-    <skip />
+    <string name="flash_notifications_keywords" msgid="2458759275318514836">"blits, lys, hørshelshemmet, hørselstap"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"Forhåndsvisning"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"Kamerablits"</string>
     <string name="screen_flash_notification_title" msgid="3773100725793316708">"Skjermblink"</string>
@@ -4689,5 +4689,13 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Fiolett"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Ferdig"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Avbryt"</string>
+    <!-- no translation found for contrast_title (6885768151336508075) -->
+    <skip />
+    <!-- no translation found for contrast_standard (1097297089917185235) -->
+    <skip />
+    <!-- no translation found for contrast_medium (384414510709285811) -->
+    <skip />
+    <!-- no translation found for contrast_high (3988567609694797696) -->
+    <skip />
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Denne appen kan bare åpnes i ett vindu"</string>
 </resources>
