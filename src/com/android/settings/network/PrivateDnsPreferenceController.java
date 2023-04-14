@@ -89,8 +89,8 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
             return UNSUPPORTED_ON_DEVICE;
         }
         final UserManager userManager = mContext.getSystemService(UserManager.class);
-        if (userManager.isGuestUser()) return DISABLED_FOR_USER;
-        return AVAILABLE;
+        if (userManager.isAdminUser()) return AVAILABLE;
+        return DISABLED_FOR_USER;
     }
 
     @Override
