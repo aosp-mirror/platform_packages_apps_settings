@@ -285,7 +285,6 @@ public final class DataProcessor {
         final Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>> resultMap =
                 new ArrayMap<>();
 
-        final long dailySize = hourlyBatteryLevelsPerDay.size();
         for (int dailyIndex = 0; dailyIndex < hourlyBatteryLevelsPerDay.size(); dailyIndex++) {
             final Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>> dailyMap =
                     new ArrayMap<>();
@@ -294,21 +293,9 @@ public final class DataProcessor {
                 continue;
             }
             final List<Long> timestamps = hourlyBatteryLevelsPerDay.get(dailyIndex).getTimestamps();
-            final long hourlySize = timestamps.size() - 1;
             for (int hourlyIndex = 0; hourlyIndex < timestamps.size() - 1; hourlyIndex++) {
-                // The start slot timestape is the near hour timestamp instead of the last full
-                // charge time. So use rawStartTimestamp instead of reading the timestamp from
-                // hourlyBatteryLevelsPerDay here.
-                final long startTimestamp =
-                        dailyIndex == 0 && hourlyIndex == 0 && !sDebug
-                                ? rawStartTimestamp : timestamps.get(hourlyIndex);
-                // The final slot is to show the data from last even hour until now but the
-                // timestamp in hourlyBatteryLevelsPerDay is not the real value. So use current
-                // timestamp instead of reading the timestamp from hourlyBatteryLevelsPerDay here.
-                final long endTimestamp =
-                        dailyIndex == dailySize - 1 && hourlyIndex == hourlySize - 1 && !sDebug
-                                ? System.currentTimeMillis() : timestamps.get(hourlyIndex + 1);
-
+                final long startTimestamp = timestamps.get(hourlyIndex);
+                final long endTimestamp = timestamps.get(hourlyIndex + 1);
                 // Gets the app usage event list for this hourly slot first.
                 final List<AppUsageEvent> hourlyAppUsageEventList =
                         getAppUsageEventListWithinTimeRangeWithBuffer(
@@ -463,11 +450,8 @@ public final class DataProcessor {
         Collections.sort(rawTimestampList);
         final long currentTime = getCurrentTimeMillis();
         final List<Long> expectedTimestampList = getTimestampSlots(rawTimestampList, currentTime);
-        final boolean isFromFullCharge =
-                isFromFullCharge(batteryHistoryMap.get(rawTimestampList.get(0)));
         interpolateHistory(
-                context, rawTimestampList, expectedTimestampList, currentTime, isFromFullCharge,
-                batteryHistoryMap, resultMap);
+                context, rawTimestampList, expectedTimestampList, batteryHistoryMap, resultMap);
         Log.d(TAG, String.format("getHistoryMapWithExpectedTimestamps() size=%d in %d/ms",
                 resultMap.size(), (System.currentTimeMillis() - startTime)));
         return resultMap;
@@ -496,8 +480,9 @@ public final class DataProcessor {
     }
 
     /**
-     * Computes expected timestamp slots for last full charge, which will return hourly timestamps
-     * between start and end two even hour values.
+     * Computes expected timestamp slots. The start timestamp is the last full charge time.
+     * The end timestamp is current time. The middle timestamps are the sharp hour timestamps
+     * between the start and end timestamps.
      */
     @VisibleForTesting
     static List<Long> getTimestampSlots(final List<Long> rawTimestampList, final long currentTime) {
@@ -505,19 +490,18 @@ public final class DataProcessor {
         if (rawTimestampList.isEmpty()) {
             return timestampSlots;
         }
-        final long rawStartTimestamp = rawTimestampList.get(0);
-        // No matter the start is from last full charge or 6 days ago, use the nearest even hour.
-        final long startTimestamp = getNearestEvenHourTimestamp(rawStartTimestamp);
-        // Use the first even hour after the current time as the end.
-        final long endTimestamp = getFirstEvenHourAfterTimestamp(currentTime);
+        final long startTimestamp = rawTimestampList.get(0);
+        final long endTimestamp = currentTime;
         // If the start timestamp is later or equal the end one, return the empty list.
         if (startTimestamp >= endTimestamp) {
             return timestampSlots;
         }
-        for (long timestamp = startTimestamp; timestamp <= endTimestamp;
-                timestamp += DateUtils.HOUR_IN_MILLIS) {
+        timestampSlots.add(startTimestamp);
+        for (long timestamp = TimestampUtils.getNextHourTimestamp(startTimestamp);
+                timestamp < endTimestamp; timestamp += DateUtils.HOUR_IN_MILLIS) {
             timestampSlots.add(timestamp);
         }
+        timestampSlots.add(endTimestamp);
         return timestampSlots;
     }
 
@@ -539,32 +523,36 @@ public final class DataProcessor {
         }
         final long startTime = timestampList.get(0);
         final long endTime = timestampList.get(timestampList.size() - 1);
-        // If the timestamp diff is smaller than MIN_TIME_SLOT, returns the empty list directly.
-        if (endTime - startTime < MIN_TIME_SLOT) {
-            return dailyTimestampList;
+        for (long timestamp = startTime; timestamp < endTime;
+                timestamp = TimestampUtils.getNextDayTimestamp(timestamp)) {
+            dailyTimestampList.add(timestamp);
         }
-        long nextDay = getTimestampOfNextDay(startTime);
-        // Only if the timestamp diff in the first day is bigger than MIN_TIME_SLOT, start from the
-        // first day. Otherwise, start from the second day.
-        if (nextDay - startTime >= MIN_TIME_SLOT) {
-            dailyTimestampList.add(startTime);
-        }
-        while (nextDay < endTime) {
-            dailyTimestampList.add(nextDay);
-            nextDay = getTimestampOfNextDay(nextDay);
-        }
-        final long lastDailyTimestamp = dailyTimestampList.get(dailyTimestampList.size() - 1);
-        // Only if the timestamp diff in the last day is bigger than MIN_TIME_SLOT, add the
-        // last day.
-        if (endTime - lastDailyTimestamp >= MIN_TIME_SLOT) {
-            dailyTimestampList.add(endTime);
-        }
-        // The dailyTimestampList must have the start and end timestamp, otherwise, return an empty
-        // list.
-        if (dailyTimestampList.size() < MIN_TIMESTAMP_DATA_SIZE) {
-            return new ArrayList<>();
-        }
+        dailyTimestampList.add(endTime);
         return dailyTimestampList;
+    }
+
+    @VisibleForTesting
+    static List<List<Long>> getHourlyTimestamps(final List<Long> dailyTimestamps) {
+        final List<List<Long>> hourlyTimestamps = new ArrayList<>();
+        if (dailyTimestamps.size() < MIN_DAILY_DATA_SIZE) {
+            return hourlyTimestamps;
+        }
+
+        for (int dailyIndex = 0; dailyIndex < dailyTimestamps.size() - 1; dailyIndex++) {
+            final List<Long> hourlyTimestampsPerDay = new ArrayList<>();
+            final long startTime = dailyTimestamps.get(dailyIndex);
+            final long endTime = dailyTimestamps.get(dailyIndex + 1);
+
+            hourlyTimestampsPerDay.add(startTime);
+            for (long timestamp = TimestampUtils.getNextEvenHourTimestamp(startTime);
+                    timestamp < endTime; timestamp += MIN_TIME_SLOT) {
+                hourlyTimestampsPerDay.add(timestamp);
+            }
+            hourlyTimestampsPerDay.add(endTime);
+
+            hourlyTimestamps.add(hourlyTimestampsPerDay);
+        }
+        return hourlyTimestamps;
     }
 
     @VisibleForTesting
@@ -600,30 +588,6 @@ public final class DataProcessor {
         results[0] = results[0] == Long.MIN_VALUE ? 0 : results[0];
         results[1] = results[1] == Long.MAX_VALUE ? 0 : results[1];
         return results;
-    }
-
-    /**
-     * @return Returns the timestamp for 00:00 1 day after the given timestamp based on local
-     * timezone.
-     */
-    @VisibleForTesting
-    static long getTimestampOfNextDay(long timestamp) {
-        return getTimestampWithDayDiff(timestamp, /*dayDiff=*/ 1);
-    }
-
-    /**
-     * Returns whether currentSlot will be used in daily chart.
-     */
-    @VisibleForTesting
-    static boolean isForDailyChart(final boolean isStartOrEnd, final long currentSlot) {
-        // The start and end timestamps will always be used in daily chart.
-        if (isStartOrEnd) {
-            return true;
-        }
-
-        // The timestamps for 00:00 will be used in daily chart.
-        final long startOfTheDay = getTimestampWithDayDiff(currentSlot, /*dayDiff=*/ 0);
-        return currentSlot == startOfTheDay;
     }
 
     /**
@@ -1184,43 +1148,22 @@ public final class DataProcessor {
             Context context,
             final List<Long> rawTimestampList,
             final List<Long> expectedTimestampSlots,
-            final long currentTime,
-            final boolean isFromFullCharge,
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap,
             final Map<Long, Map<String, BatteryHistEntry>> resultMap) {
         if (rawTimestampList.isEmpty() || expectedTimestampSlots.isEmpty()) {
             return;
         }
-        final long expectedStartTimestamp = expectedTimestampSlots.get(0);
-        final long rawStartTimestamp = rawTimestampList.get(0);
-        int startIndex = 0;
-        // If the expected start timestamp is full charge or earlier than what we have, use the
-        // first data of what we have directly. This should be OK because the expected start
-        // timestamp is the nearest even hour of the raw start timestamp, their time diff is no
-        // more than 1 hour.
-        if (isFromFullCharge || expectedStartTimestamp < rawStartTimestamp) {
-            startIndex = 1;
-            resultMap.put(expectedStartTimestamp, batteryHistoryMap.get(rawStartTimestamp));
-        }
         final int expectedTimestampSlotsSize = expectedTimestampSlots.size();
-        for (int index = startIndex; index < expectedTimestampSlotsSize; index++) {
-            final long currentSlot = expectedTimestampSlots.get(index);
-            if (currentSlot > currentTime) {
-                // The slot timestamp is greater than the current time. Puts a placeholder first,
-                // then in the async task, loads the real time battery usage data from the battery
-                // stats service.
-                // If current time is odd hour, one placeholder is added. If the current hour is
-                // even hour, two placeholders are added. This is because the method
-                // insertHourlyUsageDiffDataPerSlot() requires continuing three hours data.
-                resultMap.put(currentSlot,
-                        Map.of(CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER, EMPTY_BATTERY_HIST_ENTRY));
-                continue;
-            }
-            final boolean isStartOrEnd = index == 0 || index == expectedTimestampSlotsSize - 1;
-            interpolateHistoryForSlot(
-                    context, currentSlot, rawTimestampList, batteryHistoryMap, resultMap,
-                    isStartOrEnd);
+        final long startTimestamp = expectedTimestampSlots.get(0);
+        final long endTimestamp = expectedTimestampSlots.get(expectedTimestampSlotsSize - 1);
+
+        resultMap.put(startTimestamp, batteryHistoryMap.get(startTimestamp));
+        for (int index = 1; index < expectedTimestampSlotsSize - 1; index++) {
+            interpolateHistoryForSlot(context, expectedTimestampSlots.get(index), rawTimestampList,
+                    batteryHistoryMap, resultMap);
         }
+        resultMap.put(endTimestamp,
+                Map.of(CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER, EMPTY_BATTERY_HIST_ENTRY));
     }
 
     private static void interpolateHistoryForSlot(
@@ -1228,8 +1171,7 @@ public final class DataProcessor {
             final long currentSlot,
             final List<Long> rawTimestampList,
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap,
-            final Map<Long, Map<String, BatteryHistEntry>> resultMap,
-            final boolean isStartOrEnd) {
+            final Map<Long, Map<String, BatteryHistEntry>> resultMap) {
         final long[] nearestTimestamps = findNearestTimestamp(rawTimestampList, currentSlot);
         final long lowerTimestamp = nearestTimestamps[0];
         final long upperTimestamp = nearestTimestamps[1];
@@ -1252,9 +1194,8 @@ public final class DataProcessor {
             resultMap.put(currentSlot, new ArrayMap<>());
             return;
         }
-        interpolateHistoryForSlot(context,
-                currentSlot, lowerTimestamp, upperTimestamp, batteryHistoryMap, resultMap,
-                isStartOrEnd);
+        interpolateHistoryForSlot(
+                context, currentSlot, lowerTimestamp, upperTimestamp, batteryHistoryMap, resultMap);
     }
 
     private static void interpolateHistoryForSlot(
@@ -1263,8 +1204,7 @@ public final class DataProcessor {
             final long lowerTimestamp,
             final long upperTimestamp,
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap,
-            final Map<Long, Map<String, BatteryHistEntry>> resultMap,
-            final boolean isStartOrEnd) {
+            final Map<Long, Map<String, BatteryHistEntry>> resultMap) {
         final Map<String, BatteryHistEntry> lowerEntryDataMap =
                 batteryHistoryMap.get(lowerTimestamp);
         final Map<String, BatteryHistEntry> upperEntryDataMap =
@@ -1278,7 +1218,7 @@ public final class DataProcessor {
         // Skips the booting-specific logics and always does interpolation for daily chart level
         // data.
         if (lowerTimestamp < upperEntryDataBootTimestamp
-                && !isForDailyChart(isStartOrEnd, currentSlot)) {
+                && !TimestampUtils.isMidnight(currentSlot)) {
             // Provides an opportunity to force align the slot directly.
             if ((upperTimestamp - currentSlot) < 10 * DateUtils.MINUTE_IN_MILLIS) {
                 log(context, "force align into the nearest slot", currentSlot, null);
@@ -1323,70 +1263,6 @@ public final class DataProcessor {
             }
         }
         resultMap.put(currentSlot, newHistEntryMap);
-    }
-
-    /**
-     * @return Returns the nearest even hour timestamp of the given timestamp.
-     */
-    private static long getNearestEvenHourTimestamp(long rawTimestamp) {
-        // If raw hour is even, the nearest even hour should be the even hour before raw
-        // start. The hour doesn't need to change and just set the minutes and seconds to 0.
-        // Otherwise, the nearest even hour should be raw hour + 1.
-        // For example, the nearest hour of 14:30:50 should be 14:00:00. While the nearest
-        // hour of 15:30:50 should be 16:00:00.
-        return getEvenHourTimestamp(rawTimestamp, /*addHourOfDay*/ 1);
-    }
-
-    /**
-     * @return Returns the fist even hour timestamp after the given timestamp.
-     */
-    private static long getFirstEvenHourAfterTimestamp(long rawTimestamp) {
-        return getLastEvenHourBeforeTimestamp(rawTimestamp + DateUtils.HOUR_IN_MILLIS * 2);
-    }
-
-    /**
-     * @return Returns the last even hour timestamp before the given timestamp.
-     */
-    private static long getLastEvenHourBeforeTimestamp(long rawTimestamp) {
-        // If raw hour is even, the hour doesn't need to change as well.
-        // Otherwise, the even hour before raw end should be raw hour - 1.
-        // For example, the even hour before 14:30:50 should be 14:00:00. While the even
-        // hour before 15:30:50 should be 14:00:00.
-        return getEvenHourTimestamp(rawTimestamp, /*addHourOfDay*/ -1);
-    }
-
-    private static long getEvenHourTimestamp(long rawTimestamp, int addHourOfDay) {
-        final Calendar evenHourCalendar = Calendar.getInstance();
-        evenHourCalendar.setTimeInMillis(rawTimestamp);
-        // Before computing the evenHourCalendar, record raw hour based on local timezone.
-        final int rawHour = evenHourCalendar.get(Calendar.HOUR_OF_DAY);
-        if (rawHour % 2 != 0) {
-            evenHourCalendar.add(Calendar.HOUR_OF_DAY, addHourOfDay);
-        }
-        evenHourCalendar.set(Calendar.MINUTE, 0);
-        evenHourCalendar.set(Calendar.SECOND, 0);
-        evenHourCalendar.set(Calendar.MILLISECOND, 0);
-        return evenHourCalendar.getTimeInMillis();
-    }
-
-    private static List<List<Long>> getHourlyTimestamps(final List<Long> dailyTimestamps) {
-        final List<List<Long>> hourlyTimestamps = new ArrayList<>();
-        if (dailyTimestamps.size() < MIN_DAILY_DATA_SIZE) {
-            return hourlyTimestamps;
-        }
-
-        for (int dailyStartIndex = 0; dailyStartIndex < dailyTimestamps.size() - 1;
-                dailyStartIndex++) {
-            long currentTimestamp = dailyTimestamps.get(dailyStartIndex);
-            final long dailyEndTimestamp = dailyTimestamps.get(dailyStartIndex + 1);
-            final List<Long> hourlyTimestampsPerDay = new ArrayList<>();
-            while (currentTimestamp <= dailyEndTimestamp) {
-                hourlyTimestampsPerDay.add(currentTimestamp);
-                currentTimestamp += MIN_TIME_SLOT;
-            }
-            hourlyTimestamps.add(hourlyTimestampsPerDay);
-        }
-        return hourlyTimestamps;
     }
 
     private static List<BatteryLevelData.PeriodBatteryLevelData> getHourlyPeriodBatteryLevelData(
@@ -1465,11 +1341,16 @@ public final class DataProcessor {
                 final Long endTimestamp = hourlyTimestamps.get(hourlyIndex + 1);
                 final long slotDuration = endTimestamp - startTimestamp;
                 List<Map<String, BatteryHistEntry>> slotBatteryHistoryList = new ArrayList<>();
-                for (Long timestamp = startTimestamp; timestamp <= endTimestamp;
-                        timestamp += DateUtils.HOUR_IN_MILLIS) {
+                slotBatteryHistoryList.add(
+                        batteryHistoryMap.getOrDefault(startTimestamp, EMPTY_BATTERY_MAP));
+                for (Long timestamp = TimestampUtils.getNextHourTimestamp(startTimestamp);
+                        timestamp < endTimestamp; timestamp += DateUtils.HOUR_IN_MILLIS) {
                     slotBatteryHistoryList.add(
                             batteryHistoryMap.getOrDefault(timestamp, EMPTY_BATTERY_MAP));
                 }
+                slotBatteryHistoryList.add(
+                        batteryHistoryMap.getOrDefault(endTimestamp, EMPTY_BATTERY_MAP));
+
                 final BatteryDiffData hourlyBatteryDiffData =
                         insertHourlyUsageDiffDataPerSlot(
                                 context,
@@ -1940,16 +1821,6 @@ public final class DataProcessor {
             }
         }
         return true;
-    }
-
-    private static long getTimestampWithDayDiff(final long timestamp, final int dayDiff) {
-        final Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(timestamp);
-        calendar.add(Calendar.DAY_OF_YEAR, dayDiff);
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        return calendar.getTimeInMillis();
     }
 
     private static long getDiffValue(long v1, long v2) {

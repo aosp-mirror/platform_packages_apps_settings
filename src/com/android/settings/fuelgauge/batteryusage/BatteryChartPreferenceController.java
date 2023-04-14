@@ -251,8 +251,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                     hourlyBatteryLevelsPerDay.getLevels(),
                     hourlyBatteryLevelsPerDay.getTimestamps(),
                     BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS,
-                    mHourlyChartLabelTextGenerator.setLatestTimestamp(getLast(getLast(
-                            batteryLevelData.getHourlyBatteryLevelsPerDay()).getTimestamps()))));
+                    mHourlyChartLabelTextGenerator.updateSpecialCaseContext(batteryLevelData)));
         }
         refreshUi();
     }
@@ -296,6 +295,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         });
         mHourlyChartView = hourlyChartView;
         mHourlyChartView.setOnSelectListener(trapezoidIndex -> {
+            if (mDailyChartIndex == BatteryChartViewModel.SELECTED_INDEX_ALL) {
+                // This will happen when a daily slot and an hour slot are clicked together.
+                return;
+            }
             if (mHourlyChartIndex == trapezoidIndex) {
                 return;
             }
@@ -636,7 +639,11 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
     private final class HourlyChartLabelTextGenerator implements
             BatteryChartViewModel.LabelTextGenerator {
-        private Long mLatestTimestamp;
+        private static final int FULL_CHARGE_BATTERY_LEVEL = 100;
+
+        private boolean mIsFromFullCharge;
+        private long mFistTimestamp;
+        private long mLatestTimestamp;
 
         @Override
         public String generateText(List<Long> timestamps, int index) {
@@ -644,24 +651,37 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 // Replaces the latest timestamp text to "now".
                 return mContext.getString(R.string.battery_usage_chart_label_now);
             }
-            return ConvertUtils.utcToLocalTimeHour(mContext, timestamps.get(index),
-                    mIs24HourFormat);
+            long timestamp = timestamps.get(index);
+            boolean showMinute = false;
+            if (Objects.equal(timestamp, mFistTimestamp)) {
+                if (mIsFromFullCharge) {
+                    showMinute = true;
+                } else {
+                    // starts from 7 days ago
+                    timestamp = TimestampUtils.getLastEvenHourTimestamp(timestamp);
+                }
+            }
+            return ConvertUtils.utcToLocalTimeHour(
+                    mContext, timestamp, mIs24HourFormat, showMinute);
         }
 
         @Override
         public String generateFullText(List<Long> timestamps, int index) {
-            if (Objects.equal(timestamps.get(index), mLatestTimestamp)) {
-                // Replaces the latest timestamp text to "now".
-                return mContext.getString(R.string.battery_usage_chart_label_now);
-            }
             return index == timestamps.size() - 1
                     ? generateText(timestamps, index)
                     : mContext.getString(R.string.battery_usage_timestamps_hyphen,
                             generateText(timestamps, index), generateText(timestamps, index + 1));
         }
 
-        public HourlyChartLabelTextGenerator setLatestTimestamp(Long latestTimestamp) {
-            this.mLatestTimestamp = latestTimestamp;
+        HourlyChartLabelTextGenerator updateSpecialCaseContext(
+                @NonNull final BatteryLevelData batteryLevelData) {
+            BatteryLevelData.PeriodBatteryLevelData firstDayLevelData =
+                    batteryLevelData.getHourlyBatteryLevelsPerDay().get(0);
+            this.mIsFromFullCharge =
+                    firstDayLevelData.getLevels().get(0) == FULL_CHARGE_BATTERY_LEVEL;
+            this.mFistTimestamp = firstDayLevelData.getTimestamps().get(0);
+            this.mLatestTimestamp = getLast(getLast(
+                    batteryLevelData.getHourlyBatteryLevelsPerDay()).getTimestamps());
             return this;
         }
     }

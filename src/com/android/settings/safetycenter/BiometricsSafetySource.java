@@ -85,7 +85,7 @@ public final class BiometricsSafetySource {
                     combinedBiometricStatusUtils.getSummary(),
                     createPendingIntent(context,
                             biometricNavigationUtils.getBiometricSettingsIntent(context,
-                                    combinedBiometricStatusUtils.getSettingsClassName(),
+                                    combinedBiometricStatusUtils.getSettingsClassNameBasedOnUser(),
                                     disablingAdmin, Bundle.EMPTY),
                             REQUEST_CODE_COMBINED_BIOMETRIC_SETTING),
                     disablingAdmin == null /* enabled */,

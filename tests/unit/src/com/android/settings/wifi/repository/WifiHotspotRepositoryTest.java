@@ -18,7 +18,9 @@ package com.android.settings.wifi.repository;
 
 import static android.net.wifi.SoftApConfiguration.BAND_2GHZ;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_OPEN;
+import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA2_PSK;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE;
+import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION;
 import static android.net.wifi.WifiAvailableChannel.OP_MODE_SAP;
 
 import static com.android.settings.wifi.repository.WifiHotspotRepository.BAND_2GHZ_5GHZ;
@@ -32,6 +34,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -81,6 +84,8 @@ public class WifiHotspotRepositoryTest {
     @Mock
     WifiManager mWifiManager;
     @Mock
+    MutableLiveData<Integer> mSecurityType;
+    @Mock
     MutableLiveData<Integer> mSpeedType;
 
     WifiHotspotRepository mWifiHotspotRepository;
@@ -93,6 +98,7 @@ public class WifiHotspotRepositoryTest {
         doReturn(SPEED_6GHZ).when(mSpeedType).getValue();
 
         mWifiHotspotRepository = new WifiHotspotRepository(mContext, mWifiManager);
+        mWifiHotspotRepository.mSecurityType = mSecurityType;
         mWifiHotspotRepository.mSpeedType = mSpeedType;
         mWifiHotspotRepository.mCurrentCountryCode = WIFI_CURRENT_COUNTRY_CODE;
         mWifiHotspotRepository.mIsDualBand = true;
@@ -156,6 +162,7 @@ public class WifiHotspotRepositoryTest {
     @Test
     public void refresh_liveDataNotUsed_doNothing() {
         // If LiveData is not used then it's null.
+        mWifiHotspotRepository.mSecurityType = null;
         mWifiHotspotRepository.mSpeedType = null;
 
         mWifiHotspotRepository.refresh();
@@ -169,7 +176,7 @@ public class WifiHotspotRepositoryTest {
 
         mWifiHotspotRepository.refresh();
 
-        verify(mWifiManager).getSoftApConfiguration();
+        verify(mWifiManager, atLeast(1)).getSoftApConfiguration();
         verify(mSpeedType).setValue(anyInt());
     }
 
@@ -189,6 +196,105 @@ public class WifiHotspotRepositoryTest {
         mWifiHotspotRepository.setAutoRefresh(false);
 
         verify(mWifiManager).unregisterActiveCountryCodeChangedCallback(any());
+    }
+
+    @Test
+    @UiThreadTest
+    public void getSecurityType_shouldNotReturnNull() {
+        // If LiveData is not used then it's null.
+        mWifiHotspotRepository.mSecurityType = null;
+        mockConfigSecurityType(SECURITY_TYPE_OPEN);
+
+        assertThat(mWifiHotspotRepository.getSecurityType()).isNotNull();
+    }
+
+    @Test
+    public void updateSecurityType_securityTypeOpen_setValueCorrectly() {
+        mockConfigSecurityType(SECURITY_TYPE_OPEN);
+
+        mWifiHotspotRepository.updateSecurityType();
+
+        verify(mSecurityType).setValue(SECURITY_TYPE_OPEN);
+    }
+
+    @Test
+    public void updateSecurityType_securityTypeWpa2_setValueCorrectly() {
+        mockConfigSecurityType(SECURITY_TYPE_WPA2_PSK);
+
+        mWifiHotspotRepository.updateSecurityType();
+
+        verify(mSecurityType).setValue(SECURITY_TYPE_WPA2_PSK);
+    }
+
+    @Test
+    public void updateSecurityType_securityTypeWpa2Wpa3_setValueCorrectly() {
+        mockConfigSecurityType(SECURITY_TYPE_WPA3_SAE_TRANSITION);
+
+        mWifiHotspotRepository.updateSecurityType();
+
+        verify(mSecurityType).setValue(SECURITY_TYPE_WPA3_SAE_TRANSITION);
+    }
+
+    @Test
+    public void updateSecurityType_securityTypeWpa3_setValueCorrectly() {
+        mockConfigSecurityType(SECURITY_TYPE_WPA3_SAE);
+
+        mWifiHotspotRepository.updateSecurityType();
+
+        verify(mSecurityType).setValue(SECURITY_TYPE_WPA3_SAE);
+    }
+
+    @Test
+    public void setSecurityType_sameValue_doNotSetConfig() {
+        mockConfigSecurityType(SECURITY_TYPE_WPA3_SAE);
+
+        mWifiHotspotRepository.setSecurityType(SECURITY_TYPE_WPA3_SAE);
+
+        verify(mWifiManager, never()).setSoftApConfiguration(any());
+    }
+
+    @Test
+    public void setSecurityType_wpa3ToWpa2Wpa3_setConfigCorrectly() {
+        mockConfigSecurityType(SECURITY_TYPE_WPA3_SAE);
+
+        mWifiHotspotRepository.setSecurityType(SECURITY_TYPE_WPA3_SAE_TRANSITION);
+
+        verify(mWifiManager).setSoftApConfiguration(mSoftApConfigCaptor.capture());
+        assertThat(mSoftApConfigCaptor.getValue().getSecurityType())
+                .isEqualTo(SECURITY_TYPE_WPA3_SAE_TRANSITION);
+    }
+
+    @Test
+    public void setSecurityType_Wpa2Wpa3ToWpa2_setConfigCorrectly() {
+        mockConfigSecurityType(SECURITY_TYPE_WPA3_SAE_TRANSITION);
+
+        mWifiHotspotRepository.setSecurityType(SECURITY_TYPE_WPA2_PSK);
+
+        verify(mWifiManager).setSoftApConfiguration(mSoftApConfigCaptor.capture());
+        assertThat(mSoftApConfigCaptor.getValue().getSecurityType())
+                .isEqualTo(SECURITY_TYPE_WPA2_PSK);
+    }
+
+    @Test
+    public void setSecurityType_Wpa2ToOpen_setConfigCorrectly() {
+        mockConfigSecurityType(SECURITY_TYPE_WPA2_PSK);
+
+        mWifiHotspotRepository.setSecurityType(SECURITY_TYPE_OPEN);
+
+        verify(mWifiManager).setSoftApConfiguration(mSoftApConfigCaptor.capture());
+        assertThat(mSoftApConfigCaptor.getValue().getSecurityType())
+                .isEqualTo(SECURITY_TYPE_OPEN);
+    }
+
+    @Test
+    public void setSecurityType_OpenToWpa3_setConfigCorrectly() {
+        mockConfigSecurityType(SECURITY_TYPE_OPEN);
+
+        mWifiHotspotRepository.setSecurityType(SECURITY_TYPE_WPA3_SAE);
+
+        verify(mWifiManager).setSoftApConfiguration(mSoftApConfigCaptor.capture());
+        assertThat(mSoftApConfigCaptor.getValue().getSecurityType())
+                .isEqualTo(SECURITY_TYPE_WPA3_SAE);
     }
 
     @Test
@@ -312,8 +418,8 @@ public class WifiHotspotRepositoryTest {
     }
 
     @Test
-    public void setSpeedType_from2g5ghz_setConfigBandTo6ghzPreferred() {
-        mockGetSoftApConfiguration(SPEED_2GHZ_5GHZ);
+    public void setSpeedType_2g5ghzTo6ghz_setConfigBandTo6ghzPreferred() {
+        mockConfigSpeedType(SPEED_2GHZ_5GHZ);
 
         mWifiHotspotRepository.setSpeedType(SPEED_6GHZ);
 
@@ -322,8 +428,19 @@ public class WifiHotspotRepositoryTest {
     }
 
     @Test
-    public void setSpeedType_from6ghz_setConfigBandsTo2g5ghz() {
-        mockGetSoftApConfiguration(SPEED_6GHZ);
+    public void setSpeedType_2g5ghzTo6ghz_setConfigSecurityToWpa3() {
+        mockConfig(SPEED_2GHZ_5GHZ, SECURITY_TYPE_WPA3_SAE_TRANSITION);
+
+        mWifiHotspotRepository.setSpeedType(SPEED_6GHZ);
+
+        verify(mWifiManager).setSoftApConfiguration(mSoftApConfigCaptor.capture());
+        assertThat(mSoftApConfigCaptor.getValue().getSecurityType())
+                .isEqualTo(SECURITY_TYPE_WPA3_SAE);
+    }
+
+    @Test
+    public void setSpeedType_6ghzTo2g5ghz_setConfigBandsTo2g5ghz() {
+        mockConfigSpeedType(SPEED_6GHZ);
         mWifiHotspotRepository.mIsDualBand = true;
 
         mWifiHotspotRepository.setSpeedType(SPEED_2GHZ_5GHZ);
@@ -335,8 +452,8 @@ public class WifiHotspotRepositoryTest {
     }
 
     @Test
-    public void setSpeedType_from2ghz_setConfigBandTo5ghzPreferred() {
-        mockGetSoftApConfiguration(SPEED_2GHZ);
+    public void setSpeedType_2ghzTo5ghz_setConfigBandTo5ghzPreferred() {
+        mockConfigSpeedType(SPEED_2GHZ);
 
         mWifiHotspotRepository.setSpeedType(SPEED_5GHZ);
 
@@ -345,8 +462,8 @@ public class WifiHotspotRepositoryTest {
     }
 
     @Test
-    public void setSpeedType_from5ghz_setConfigBandTo6ghzPreferred() {
-        mockGetSoftApConfiguration(SPEED_5GHZ);
+    public void setSpeedType_5ghzTo6ghz_setConfigBandTo6ghzPreferred() {
+        mockConfigSpeedType(SPEED_5GHZ);
 
         mWifiHotspotRepository.setSpeedType(SPEED_6GHZ);
 
@@ -355,8 +472,8 @@ public class WifiHotspotRepositoryTest {
     }
 
     @Test
-    public void setSpeedType_from5gTo6ghz_setConfigBandTo2ghz() {
-        mockGetSoftApConfiguration(SPEED_6GHZ);
+    public void setSpeedType_6ghzTo2ghz_setConfigBandTo2ghz() {
+        mockConfigSpeedType(SPEED_6GHZ);
 
         mWifiHotspotRepository.setSpeedType(SPEED_2GHZ);
 
@@ -475,10 +592,24 @@ public class WifiHotspotRepositoryTest {
         assertThat(mWifiHotspotRepository.get6gAvailable()).isNotNull();
     }
 
-    private void mockGetSoftApConfiguration(int speedType) {
+    private void mockConfigSecurityType(int securityType) {
+        mockConfig(securityType, SPEED_2GHZ);
+    }
+
+    private void mockConfigSpeedType(int speedType) {
+        mockConfig(SECURITY_TYPE_WPA3_SAE, speedType);
+    }
+
+    private void mockConfig(int securityType, int speedType) {
+        SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
+        // Security Type
+        doReturn(securityType).when(mSecurityType).getValue();
+        String passphrase = (securityType == SECURITY_TYPE_OPEN) ? null : WIFI_PASSWORD;
+        configBuilder.setPassphrase(passphrase, securityType).build();
+
+        // Speed Type
         doReturn(speedType).when(mSpeedType).getValue();
         mWifiHotspotRepository.mIsDualBand = true;
-        SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
         if (speedType == SPEED_2GHZ) {
             mWifiHotspotRepository.mIsDualBand = false;
             configBuilder.setBand(BAND_2GHZ);
