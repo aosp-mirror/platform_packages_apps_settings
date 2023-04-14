@@ -48,6 +48,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.activityembedding.ActivityEmbeddingUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.LayoutPreference;
@@ -106,15 +107,16 @@ public class FaceSettings extends DashboardFragment {
     private final FaceSettingsEnrollButtonPreferenceController.Listener mEnrollListener =
             new FaceSettingsEnrollButtonPreferenceController.Listener() {
                 @Override
-                public boolean checkInMultiWindowMode() {
-                    if (!getActivity().isInMultiWindowMode()) {
-                        return false;
+                public boolean onShowSplitScreenDialog() {
+                    if (getActivity().isInMultiWindowMode()
+                            && !ActivityEmbeddingUtils.isActivityEmbedded(getActivity())) {
+                        // If it's in split mode, show the error dialog.
+                        BiometricsSplitScreenDialog.newInstance(TYPE_FACE).show(
+                                getActivity().getSupportFragmentManager(),
+                                BiometricsSplitScreenDialog.class.getName());
+                        return true;
                     }
-                    // If it's in split mode, show the error dialog.
-                    BiometricsSplitScreenDialog.newInstance(TYPE_FACE).show(
-                            getActivity().getSupportFragmentManager(),
-                            BiometricsSplitScreenDialog.class.getName());
-                    return true;
+                    return false;
                 }
 
                 @Override
