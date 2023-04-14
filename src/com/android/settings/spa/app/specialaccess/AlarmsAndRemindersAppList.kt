@@ -21,12 +21,14 @@ import android.app.AlarmManager
 import android.app.compat.CompatChanges
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.os.PowerExemptionManager
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import com.android.settings.R
+import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spaprivileged.model.app.AppRecord
+import com.android.settingslib.spaprivileged.model.app.IPackageManagers
 import com.android.settingslib.spaprivileged.model.app.PackageManagers
-import com.android.settingslib.spaprivileged.model.app.PackageManagers.hasRequestPermission
 import com.android.settingslib.spaprivileged.model.app.userHandle
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListModel
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListProvider
@@ -41,12 +43,14 @@ object AlarmsAndRemindersAppListProvider : TogglePermissionAppListProvider {
 
 data class AlarmsAndRemindersAppRecord(
     override val app: ApplicationInfo,
+    val isTrumped: Boolean,
     val isChangeable: Boolean,
     var controller: AlarmsAndRemindersController,
 ) : AppRecord
 
 class AlarmsAndRemindersAppListModel(
     private val context: Context,
+    private val packageManagers: IPackageManagers = PackageManagers,
 ) : TogglePermissionAppListModel<AlarmsAndRemindersAppRecord> {
     override val pageTitleResId = R.string.alarms_and_reminders_title
     override val switchTitleResId = R.string.alarms_and_reminders_switch_title
@@ -61,8 +65,9 @@ class AlarmsAndRemindersAppListModel(
             }
         }
 
-    override fun transformItem(app: ApplicationInfo) =
+    override fun transformItem(app: ApplicationInfo) = with(packageManagers) {
         createRecord(app = app, hasRequestPermission = app.hasRequestPermission(PERMISSION))
+    }
 
     override fun filter(
         userIdFlow: Flow<Int>,
@@ -73,7 +78,8 @@ class AlarmsAndRemindersAppListModel(
 
     @Composable
     override fun isAllowed(record: AlarmsAndRemindersAppRecord) =
-        record.controller.isAllowed.observeAsState()
+        if (record.isTrumped) stateOf(true)
+        else record.controller.isAllowed.observeAsState()
 
     override fun isChangeable(record: AlarmsAndRemindersAppRecord) = record.isChangeable
 
@@ -81,17 +87,38 @@ class AlarmsAndRemindersAppListModel(
         record.controller.setAllowed(newAllowed)
     }
 
-    private fun createRecord(app: ApplicationInfo, hasRequestPermission: Boolean) =
-        AlarmsAndRemindersAppRecord(
+    private fun createRecord(
+        app: ApplicationInfo,
+        hasRequestPermission: Boolean,
+    ): AlarmsAndRemindersAppRecord {
+        val hasRequestSeaPermission = hasRequestPermission && app.isSeaEnabled()
+        val isTrumped = hasRequestSeaPermission && app.isTrumped()
+        return AlarmsAndRemindersAppRecord(
             app = app,
-            isChangeable = hasRequestPermission && app.isChangeEnabled(),
+            isTrumped = isTrumped,
+            isChangeable = hasRequestPermission && !isTrumped,
             controller = AlarmsAndRemindersController(context, app),
         )
+    }
+
+    /**
+     * If trumped, this app will be treated as allowed, and the toggle is not changeable by user.
+     */
+    private fun ApplicationInfo.isTrumped(): Boolean = with(packageManagers) {
+        val hasRequestUseExactAlarm = hasRequestPermission(Manifest.permission.USE_EXACT_ALARM) &&
+            CompatChanges.isChangeEnabled(
+                AlarmManager.ENABLE_USE_EXACT_ALARM, packageName, userHandle,
+            )
+        val isPowerAllowListed = context.getSystemService(PowerExemptionManager::class.java)
+            ?.isAllowListed(packageName, true) ?: false
+        return hasRequestUseExactAlarm || isPowerAllowListed
+    }
 
     companion object {
         private const val PERMISSION: String = Manifest.permission.SCHEDULE_EXACT_ALARM
 
-        private fun ApplicationInfo.isChangeEnabled(): Boolean =
+        /** Checks whether [Manifest.permission.SCHEDULE_EXACT_ALARM] is enabled. */
+        private fun ApplicationInfo.isSeaEnabled(): Boolean =
             CompatChanges.isChangeEnabled(
                 AlarmManager.REQUIRE_EXACT_ALARM_PERMISSION, packageName, userHandle,
             )
