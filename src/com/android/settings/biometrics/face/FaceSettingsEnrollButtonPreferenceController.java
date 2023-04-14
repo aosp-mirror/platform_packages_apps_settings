@@ -76,7 +76,7 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
     @Override
     public void onClick(View v) {
         // If it's in multi window mode, do not start the introduction intent.
-        if (mListener != null && mListener.checkInMultiWindowMode()) {
+        if (mListener != null && mListener.onShowSplitScreenDialog()) {
             return;
         }
 
@@ -121,10 +121,10 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
      */
     public interface Listener {
         /**
-         * Called to check whether it's in multi window mode
-         * @return Whether it's in multi window mode.
+         * Called to check whether to show dialog in split screen mode
+         * @return Whether split screen warning dialog shown.
          */
-        boolean checkInMultiWindowMode();
+        boolean onShowSplitScreenDialog();
 
         /**
          * Called when the user has indicated an intent to begin enrolling a new face.
