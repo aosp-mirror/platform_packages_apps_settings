@@ -103,10 +103,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Du måste starta om enheten för att ändra den här inställningen."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Starta om"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Avbryt"</string>
-    <!-- no translation found for bluetooth_disable_leaudio (8619410595945155354) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_leaudio_summary (4756307633476985470) -->
-    <skip />
+    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Inaktivera Bluetooth LE Audio"</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Inaktiverar Bluetooth LE Audio-funktionen om enheten har stöd för funktioner för LE Audio-maskinvara."</string>
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Aktivera godkännandelista för Bluetooth LE Audio"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Aktivera funktionen för godkännandelista för Bluetooth LE Audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Medieenheter"</string>
@@ -168,7 +166,7 @@
     <string name="title_change_system_locale" msgid="8589844586256566951">"Vill du ändra systemspråk till %s?"</string>
     <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Dina enhets- och regionsinställningar ändras."</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Ändra"</string>
-    <string name="title_unavailable_locale" msgid="2628898110416542386">"%s är inte tillgänglig"</string>
+    <string name="title_unavailable_locale" msgid="2628898110416542386">"%s är inte tillgängligt"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Du kan inte använda det här språket som systemspråk, men appar och webbplatser informeras om att du föredrar det."</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionala inställningar"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Anger inställningar för enheter och siffror"</string>
@@ -179,8 +177,10 @@
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Första dagen i veckan"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Sifferinställningar"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Använd appstandard"</string>
-    <string name="celsius_temperature_unit" msgid="6118523647432383132">"Celsius(°C)"</string>
-    <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Fahrenheit(°F)"</string>
+    <!-- no translation found for celsius_temperature_unit (8896459071273084507) -->
+    <skip />
+    <!-- no translation found for fahrenheit_temperature_unit (1118677820614569801) -->
+    <skip />
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"söndag"</string>
     <string name="monday_first_day_of_week" msgid="7244698610476506771">"måndag"</string>
     <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"tisdag"</string>
@@ -265,8 +265,7 @@
     <string name="safety_center_title" msgid="7732397372178774777">"Säkerhet och integritet"</string>
     <string name="safety_center_summary" msgid="3554867379951053869">"Appsäkerhet, enhetslås, behörigheter"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Ansikte har lagts till"</string>
-    <!-- no translation found for security_settings_face_preference_summary_none (523320857738436024) -->
-    <skip />
+    <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Konfigurering krävs"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Ansiktslås"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Ansiktslås för jobbet"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Så här konfigurerar du ansiktslås"</string>
@@ -329,8 +328,7 @@
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingeravtr. för jobbet"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Lägg till fingeravtryck"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Fingeravtryck har lagts till}other{# fingeravtryck har lagts till}}"</string>
-    <!-- no translation found for security_settings_fingerprint_preference_summary_none (1146977379031250790) -->
-    <skip />
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"Konfigurering krävs"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Konfigurera fingeravtryck"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Tillåt fingeravtryckslås"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Använda ditt fingeravtryck"</string>
@@ -374,8 +372,7 @@
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Ansikte, fingeravtryck och <xliff:g id="WATCH">%s</xliff:g> har lagts till"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Ansikts- och fingeravtryckslås"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Ansikts- och fingeravtryckslås för jobbprofilen"</string>
-    <!-- no translation found for security_settings_biometric_preference_summary_none_enrolled (213377753727694575) -->
-    <skip />
+    <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Konfigurering krävs"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Ansikte och fingeravtryck har lagts till"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Ansikte och ett fingeravtryck har lagts till"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Om du konfigurerar ansiktslås och fingeravtryckslås frågar telefonen om fingeravtryck när du använder munskydd eller om det är mörkt"</string>
@@ -387,6 +384,14 @@
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Med fingeravtryck"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Med ansikte eller fingeravtryck"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_title (6041232223862753222) -->
+    <skip />
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_message (1904738532939614456) -->
+    <skip />
+    <string name="biometric_settings_add_fingerprint_in_split_mode_title" msgid="9194670722730454903">"Det gick inte att ställa in fingeravtryck"</string>
+    <string name="biometric_settings_add_fingerprint_in_split_mode_message" msgid="6960548382076629454">"Stäng delad skärm och skapa fingeravtryckslås"</string>
+    <!-- no translation found for biometric_settings_add_biometrics_in_split_mode_ok (564103789097253645) -->
+    <skip />
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Vill du hoppa över skärmlås?"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"Hoppa över ändå"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"Tillbaka"</string>
@@ -466,8 +471,7 @@
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Kryptering, användaruppgifter med mera"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"säkerhet, fler säkerhetsinställningar, fler inställningar, avancerade säkerhetsinställningar"</string>
     <string name="privacy_advanced_settings" msgid="8828215456566937719">"Fler integritetsinställningar"</string>
-    <!-- no translation found for more_security_privacy_settings (123465614090328851) -->
-    <skip />
+    <string name="more_security_privacy_settings" msgid="123465614090328851">"Mer säkerhet och integritet"</string>
     <string name="security_header" msgid="961514795852103424">"Säkerhet"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Integritet"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Jobbprofil"</string>
@@ -501,10 +505,8 @@
     <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"Lås upp automatiskt om du anger rätt pinkod på minst sex siffror. Detta är något mindre säkert än att trycka på Retur för att bekräfta."</string>
     <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"Bekräfta rätt pinkod automatiskt"</string>
     <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"Att bekräfta pinkoden genom att trycka på Retur är säkrare än att använda automatisk bekräftelse"</string>
-    <!-- no translation found for auto_confirm_on_pin_verify_description (2052240431173223502) -->
-    <skip />
-    <!-- no translation found for auto_confirm_off_pin_verify_description (4256219155659760047) -->
-    <skip />
+    <string name="auto_confirm_on_pin_verify_description" msgid="2052240431173223502">"Ange enhetens pinkod för att aktivera automatisk bekräftelse"</string>
+    <string name="auto_confirm_off_pin_verify_description" msgid="4256219155659760047">"Ange enhetens pinkod för att inaktivera automatisk bekräftelse"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"Skärmlås"</string>
     <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"Lås för jobbprofilen"</string>
     <string name="unlock_set_unlock_off_title" msgid="2831957685685921667">"Inget"</string>
@@ -1696,8 +1698,7 @@
     <string name="modifier_keys_reset_message" msgid="5236994817619936058">"Vill du återställa alla specialtangenter till standardinställningarna?"</string>
     <string name="modifier_keys_done" msgid="8196199314913909700">"Klar"</string>
     <string name="modifier_keys_cancel" msgid="7136520252570826772">"Avbryt"</string>
-    <!-- no translation found for modifier_keys_reset (551170906710422041) -->
-    <skip />
+    <string name="modifier_keys_reset" msgid="551170906710422041">"Återställ"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Välj specialtangent"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Välj en ny nyckel för <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Standard"</string>
@@ -1784,10 +1785,8 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Genväg till förstoring"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Förstora texten du skriver"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Förstoraren följer texten medan du skriver"</string>
-    <!-- no translation found for accessibility_screen_magnification_always_on_title (3814297443759580936) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_always_on_summary (306908451430863049) -->
-    <skip />
+    <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Behåll på när du byter app"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Förstoraren är på och zoomar ut när du byter app"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Styrspak"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Aktivera och flytta förstoringsglaset med styrspaken på skärmen. Tryck länge och dra sedan i styrspaken för att styra förstoringsglaset. Tryck på och dra i själva styrspaken för att flytta den."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Om förstoring"</string>
@@ -1965,8 +1964,7 @@
     <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"Du kan även lägga till extradimmat i snabbinställningarna i skärmens överkant"</string>
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"Enhandsläge har lagts till i snabbinställningarna. Du kan när som helst svepa nedåt och aktivera eller inaktivera funktionen."</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"Du kan även lägga till enhandsläge i snabbinställningarna i skärmens överkant"</string>
-    <!-- no translation found for accessibility_font_scaling_auto_added_qs_tooltip_content (7229921960884718332) -->
-    <skip />
+    <string name="accessibility_font_scaling_auto_added_qs_tooltip_content" msgid="7229921960884718332">"Teckensnittstorlek har lagts till i snabbinställningarna. Du kan när som helst svepa nedåt för att byta teckensnittstorlek."</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Stäng"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Använd färgkorrigering"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Genväg till färgkorrigering"</string>
@@ -2108,6 +2106,7 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"justera färg"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"göra skärmen mörk, göra skärmen ljus"</string>
+    <string name="keywords_contrast" msgid="4668393735398949873">"färgkontrast"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="7151756353013736931">"motorik, mus"</string>
@@ -2962,7 +2961,7 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Ring- och aviseringsvolym"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Ringvolym"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Aviseringsvolym"</string>
-    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Ej tillgänglig eftersom ljudet är avstängt för ringsignalen"</string>
+    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Ej tillgänglig – ringsignalen är avstängd"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Ringsignal"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Standardljud för aviseringar"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Ljud från appen"</string>
@@ -4362,7 +4361,7 @@
     <string name="development_memtag_reboot_message_on" msgid="8100075676107327847">"Du måste starta om enheten för att aktivera MTE."</string>
     <string name="development_memtag_reboot_message_off" msgid="3703925647922079456">"Du måste starta om enheten för att inaktivera MTE."</string>
     <string name="reboot_with_mte_title" msgid="2320125810211279">"Aktivera MTE för en enskild session"</string>
-    <string name="reboot_with_mte_message" msgid="1232881567956207641">"Systemet startas om och möjligheten att experimentera med MTE (Memory Tagging Extension) aktiveras. MTE kan påverka systemets prestanda och stabilitet negativt. Den tidigare inställningen återställs nästa gång systemet startas om."</string>
+    <string name="reboot_with_mte_message" msgid="1232881567956207641">"Systemet startas om och möjligheten att experimentera med MTE (Memory Tagging Extension) aktiveras. MTE kan påverka systemets prestanda och stabilitet negativt. Detta återställs nästa gång systemet startas om."</string>
     <string name="reboot_with_mte_summary" msgid="3896537791216432882">"Starta om för en enskild session med MTE aktiverat"</string>
     <string name="reboot_with_mte_already_enabled" msgid="4439168867613407167">"MTE har redan aktiverats"</string>
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"Skapar en minnesdump av systemet"</string>
@@ -4546,6 +4545,8 @@
     <string name="uwb_settings_title" msgid="8578498712312002231">"Ultra Wideband (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Hjälper till att identifiera den relativa positionen för enheter i närheten som har UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Inaktivera flygplansläge för att använda UWB"</string>
+    <!-- no translation found for uwb_settings_summary_no_uwb_regulatory (3465456428217979428) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"Kameraåtkomst"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Mikrofonåtkomst"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"För appar och tjänster"</string>
@@ -4659,18 +4660,16 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Appar som installerades den senaste månaden (# månad)}other{Appar som installerades de senaste # månaderna}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Appar som installerades för över # månad sedan}other{Appar som installerades för över # månader sedan}}"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Fingeravtryckssensor"</string>
-    <string name="flash_notifications_title" msgid="4490438861180492311">"Blixtaviseringar"</string>
+    <string name="flash_notifications_title" msgid="4490438861180492311">"Blinkande aviseringar"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Om blinkande aviseringar"</string>
     <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Av"</string>
     <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"På/kamerablixt"</string>
     <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"På/blinkande skärm"</string>
     <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"På/kamerablixt och blinkande skärm"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Gör så att kamerablixten eller skärmen blinkar till när du får en avisering eller när ett alarm ringer."</string>
-    <!-- no translation found for flash_notifications_intro_without_camera_flash (6297337174487793891) -->
-    <skip />
+    <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Gör så att skärmen blinkar till när du får en avisering eller när ett alarm ringer."</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Använd blinkande aviseringar med försiktighet om du är känslig mot ljus"</string>
-    <!-- no translation found for flash_notifications_keywords (2458759275318514836) -->
-    <skip />
+    <string name="flash_notifications_keywords" msgid="2458759275318514836">"blinka, ljus, hörselskadad, hörselnedsättning"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"Förhandsgranska"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"Kamerablixt"</string>
     <string name="screen_flash_notification_title" msgid="3773100725793316708">"Blinkande skärm"</string>
@@ -4689,5 +4688,9 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Violett"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Klar"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Avbryt"</string>
+    <string name="contrast_title" msgid="6885768151336508075">"Kontrast"</string>
+    <string name="contrast_standard" msgid="1097297089917185235">"Standard"</string>
+    <string name="contrast_medium" msgid="384414510709285811">"Medelhög"</string>
+    <string name="contrast_high" msgid="3988567609694797696">"Hög"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Denna app kan bara vara öppen i ett fönster"</string>
 </resources>

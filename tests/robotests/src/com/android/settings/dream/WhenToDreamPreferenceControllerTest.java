@@ -72,7 +72,7 @@ public class WhenToDreamPreferenceControllerTest {
 
         mApplicationInfo.uid = 1;
         when(mContext.getString(
-                com.android.internal.R.string.config_defaultWellbeingPackage)).thenReturn(
+                com.android.internal.R.string.config_systemWellbeing)).thenReturn(
                 TEST_PACKAGE);
 
         when(mContext.getPackageManager()).thenReturn(mPackageManager);

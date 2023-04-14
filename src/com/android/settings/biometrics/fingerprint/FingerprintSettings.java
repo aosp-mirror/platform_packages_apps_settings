@@ -669,6 +669,7 @@ public class FingerprintSettings extends SubSettings {
         public void onStop() {
             super.onStop();
             if (!getActivity().isChangingConfigurations() && !mLaunchedConfirm && !mIsEnrolling) {
+                setResult(RESULT_TIMEOUT);
                 getActivity().finish();
             }
         }
@@ -874,6 +875,12 @@ public class FingerprintSettings extends SubSettings {
             } else if (requestCode == AUTO_ADD_FIRST_FINGERPRINT_REQUEST) {
                 if (resultCode != RESULT_FINISHED || data == null) {
                     Log.d(TAG, "Add first fingerprint, fail or null data, result:" + resultCode);
+                    if (resultCode == BiometricEnrollBase.RESULT_TIMEOUT) {
+                        // If "Fingerprint Unlock" is closed because of timeout, notify result code
+                        // back because "Face & Fingerprint Unlock" has to close itself for timeout
+                        // case.
+                        setResult(resultCode);
+                    }
                     finish();
                     return;
                 }

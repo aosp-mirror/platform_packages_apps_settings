@@ -17,10 +17,14 @@
 package com.android.settings.biometrics;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -28,6 +32,8 @@ import com.android.settings.Utils;
 import com.android.settings.biometrics.activeunlock.ActiveUnlockStatusUtils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+
+import java.lang.ref.WeakReference;
 
 public abstract class BiometricStatusPreferenceController extends BasePreferenceController {
 
@@ -39,6 +45,8 @@ public abstract class BiometricStatusPreferenceController extends BasePreference
 
     private final BiometricNavigationUtils mBiometricNavigationUtils;
     private final ActiveUnlockStatusUtils mActiveUnlockStatusUtils;
+    @NonNull private WeakReference<ActivityResultLauncher<Intent>> mLauncherWeakReference =
+            new WeakReference<>(null);
 
     /**
      * @return true if the controller should be shown exclusively.
@@ -118,14 +126,31 @@ public abstract class BiometricStatusPreferenceController extends BasePreference
         preference.setSummary(getSummaryText());
     }
 
+    /**
+     * Set ActivityResultLauncher that will be used later during handlePreferenceTreeClick()
+     *
+     * @param preference the preference being compared
+     * @param launcher the ActivityResultLauncher
+     * @return {@code true} if matched preference.
+     */
+    public boolean setPreferenceTreeClickLauncher(@NonNull Preference preference,
+            @Nullable ActivityResultLauncher<Intent> launcher) {
+        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+            return false;
+        }
+
+        mLauncherWeakReference = new WeakReference<>(launcher);
+        return true;
+    }
+
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
             return super.handlePreferenceTreeClick(preference);
         }
 
-        return mBiometricNavigationUtils.launchBiometricSettings(
-                preference.getContext(), getSettingsClassName(), preference.getExtras());
+        return mBiometricNavigationUtils.launchBiometricSettings(preference.getContext(),
+                getSettingsClassName(), preference.getExtras(), mLauncherWeakReference.get());
     }
 
     protected int getUserId() {

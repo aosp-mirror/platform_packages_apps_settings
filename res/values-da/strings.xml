@@ -103,10 +103,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Genstart enheden for at skifte indstilling"</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Genstart"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Deaktiver"</string>
-    <!-- no translation found for bluetooth_disable_leaudio (8619410595945155354) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_leaudio_summary (4756307633476985470) -->
-    <skip />
+    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Deaktiver Bluetooth LE-lyd"</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Deaktiverer funktionen Bluetooth LE-lyd, hvis enheden understøtter denne LE-lyd til hardware."</string>
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Aktivér tilladelseslisten for Bluetooth LE-lyd"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Aktivér funktionen for tilladelseslisten for Bluetooth LE-lyd"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Medieenheder"</string>
@@ -179,8 +177,10 @@
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Ugens første dag"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Præferencer for tal"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Brug appen (standard)"</string>
-    <string name="celsius_temperature_unit" msgid="6118523647432383132">"Celsius (°C)"</string>
-    <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Fahrenheit (°F)"</string>
+    <!-- no translation found for celsius_temperature_unit (8896459071273084507) -->
+    <skip />
+    <!-- no translation found for fahrenheit_temperature_unit (1118677820614569801) -->
+    <skip />
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"Søndag"</string>
     <string name="monday_first_day_of_week" msgid="7244698610476506771">"Mandag"</string>
     <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"Tirsdag"</string>
@@ -265,8 +265,7 @@
     <string name="safety_center_title" msgid="7732397372178774777">"Sikkerhed og privatliv"</string>
     <string name="safety_center_summary" msgid="3554867379951053869">"Appsikkerhed, enhedslås, tilladelser"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Ansigt tilføjet"</string>
-    <!-- no translation found for security_settings_face_preference_summary_none (523320857738436024) -->
-    <skip />
+    <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Konfiguration er påkrævet"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Ansigtslås"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Ansigtslås til arbejdet"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Sådan konfigurerer du ansigtslås"</string>
@@ -329,8 +328,7 @@
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingeraftryk til arbejde"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Tilføj fingeraftryk"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Fingeraftryk er tilføjet}one{# fingeraftryk tilføjet}other{# fingeraftryk tilføjet}}"</string>
-    <!-- no translation found for security_settings_fingerprint_preference_summary_none (1146977379031250790) -->
-    <skip />
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"Konfiguration er påkrævet"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Konfigurer dit fingeraftryk"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Tillad oplåsning med fingeraftryk"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Brug dit fingeraftryk"</string>
@@ -374,8 +372,7 @@
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Ansigt, fingeraftryk og <xliff:g id="WATCH">%s</xliff:g> er tilføjet"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Ansigtslås og oplåsning med fingeraftryk"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Ansigtslås og oplåsning med fingeraftryk til arbejde"</string>
-    <!-- no translation found for security_settings_biometric_preference_summary_none_enrolled (213377753727694575) -->
-    <skip />
+    <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Konfiguration er påkrævet"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Ansigt og fingeraftryk er tilføjet"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Ansigt og fingeraftryk er tilføjet"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Når du konfigurerer ansigtslås og oplåsning med fingeraftryk, beder din telefon om dit fingeraftryk, hvis du er iført en maske eller befinder dig et mørkt sted"</string>
@@ -387,6 +384,14 @@
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Anvend fingeraftryk"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Anvend ansigtsgenkendelse eller fingeraftryk"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_title (6041232223862753222) -->
+    <skip />
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_message (1904738532939614456) -->
+    <skip />
+    <string name="biometric_settings_add_fingerprint_in_split_mode_title" msgid="9194670722730454903">"Du kan ikke konfigurere fingeraftryk"</string>
+    <string name="biometric_settings_add_fingerprint_in_split_mode_message" msgid="6960548382076629454">"Luk opdelt skærm for at konfigurere oplåsning med fingeraftryk"</string>
+    <!-- no translation found for biometric_settings_add_biometrics_in_split_mode_ok (564103789097253645) -->
+    <skip />
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Vil du springe skærmlås over?"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"Spring over alligevel"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"Gå tilbage"</string>
@@ -466,8 +471,7 @@
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Kryptering, loginoplysninger og mere"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"sikkerhed, flere sikkerhedsindstillinger, flere indstillinger, avancerede sikkerhedsindstillinger"</string>
     <string name="privacy_advanced_settings" msgid="8828215456566937719">"Flere privatlivsindstillinger"</string>
-    <!-- no translation found for more_security_privacy_settings (123465614090328851) -->
-    <skip />
+    <string name="more_security_privacy_settings" msgid="123465614090328851">"Mere sikkerhed og privatliv"</string>
     <string name="security_header" msgid="961514795852103424">"Sikkerhed"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Privatliv"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Arbejdsprofil"</string>
@@ -501,10 +505,8 @@
     <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"Låser automatisk op, hvis du indtaster en korrekt pinkode på 6 eller flere cifre. Dette er lidt mindre sikkert end at trykke på Enter for at bekræfte pinkoden."</string>
     <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"Bekræft den korrekte pinkode automatisk"</string>
     <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"Det er mere sikkert at bekræfte din pinkode ved at trykke på Enter end at bruge automatisk bekræftelse"</string>
-    <!-- no translation found for auto_confirm_on_pin_verify_description (2052240431173223502) -->
-    <skip />
-    <!-- no translation found for auto_confirm_off_pin_verify_description (4256219155659760047) -->
-    <skip />
+    <string name="auto_confirm_on_pin_verify_description" msgid="2052240431173223502">"Angiv enhedens pinkode for at aktivere automatisk bekræftelse"</string>
+    <string name="auto_confirm_off_pin_verify_description" msgid="4256219155659760047">"Angiv enhedens pinkode for at deaktivere automatisk bekræftelse"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"Skærm­lås"</string>
     <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"Lås til arbejdsprofil"</string>
     <string name="unlock_set_unlock_off_title" msgid="2831957685685921667">"Ingen"</string>
@@ -705,7 +707,7 @@
     <string name="wifi_sap_no_channel_error" msgid="2126487622024749402">"5 GHz-bånd er ikke tilgængeligt i dette land"</string>
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"I flytilstand"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Underret om offentlige netværk"</string>
-    <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Giv besked om et tilgængeligt offentligt netværk af høj kvalitet"</string>
+    <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Giv besked, hvis et offentligt netværk af høj kvalitet er tilgængeligt"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Aktivér Wi-Fi automatisk"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi-Fi aktiveres igen, når du er i nærheden af gemte netværk af høj kvalitet, f.eks dit hjemmenetværk"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Ikke tilgængelig, fordi lokation er deaktiveret. Aktivér "<annotation id="link">"lokation"</annotation>"."</string>
@@ -1696,8 +1698,7 @@
     <string name="modifier_keys_reset_message" msgid="5236994817619936058">"Er du sikker på, at du vil nulstille alle ændringstasterne til standardindstillingerne?"</string>
     <string name="modifier_keys_done" msgid="8196199314913909700">"Udfør"</string>
     <string name="modifier_keys_cancel" msgid="7136520252570826772">"Annuller"</string>
-    <!-- no translation found for modifier_keys_reset (551170906710422041) -->
-    <skip />
+    <string name="modifier_keys_reset" msgid="551170906710422041">"Nulstil"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Vælg ændringstast"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Vælg en ny ændringstast til <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Standard"</string>
@@ -1784,10 +1785,8 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Genvej til forstørrelse"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Forstør skrift"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Luppen følger teksten, når du skriver"</string>
-    <!-- no translation found for accessibility_screen_magnification_always_on_title (3814297443759580936) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_always_on_summary (306908451430863049) -->
-    <skip />
+    <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Hold aktiveret ved skift af app"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Forstørrelse forbliver aktiveret og zoomer ud, når du skifter app"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Joystick"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Aktivér luppen, og flyt den ved hjælp af et joystick på skærmen. Tryk på luppen, hold fingeren nede, og træk i joysticket for at flytte luppen. Tryk på selve joysticket for at trække i det."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Om forstørrelse"</string>
@@ -1965,8 +1964,7 @@
     <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"Du kan også føje ekstra dæmpet belysning til kvikmenuen fra toppen af skærmen"</string>
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"Enhåndstilstand er føjet til kvikmenuen. Du kan altid stryge nedad for at slå funktionen til eller fra."</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"Du kan også føje enhåndstilstand til kvikmenuen fra toppen af skærmen"</string>
-    <!-- no translation found for accessibility_font_scaling_auto_added_qs_tooltip_content (7229921960884718332) -->
-    <skip />
+    <string name="accessibility_font_scaling_auto_added_qs_tooltip_content" msgid="7229921960884718332">"En skriftstørrelse blev føjet til kvikmenuen. Du kan til enhver tid stryge nedad for at ændre skriftstørrelsen."</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Afvis"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Brug farvekorrigering"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Genvej til farvekorrigering"</string>
@@ -2108,6 +2106,7 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"skift farve"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"gør skærmen mørk, gør skærmen lys"</string>
+    <string name="keywords_contrast" msgid="4668393735398949873">"farvekontrast"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="7151756353013736931">"motorik, fingerfærdighed, mus"</string>
@@ -2391,7 +2390,7 @@
     <string name="credentials_reset_hint" msgid="4054601857203464867">"Vil du fjerne alt indhold?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"Lager for loginoplysninger er slettet."</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"Loginlageret kan ikke ryddes."</string>
-    <string name="usage_access_title" msgid="1580006124578134850">"Apps med adgang til telefonbrug"</string>
+    <string name="usage_access_title" msgid="1580006124578134850">"Apps med adgang til brugsdata"</string>
     <string name="ca_certificate" msgid="3076484307693855611">"CA-certifikat"</string>
     <string name="user_certificate" msgid="6897024598058566466">"VPN- og appbrugercertifikat"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Wi‑Fi-certifikat"</string>
@@ -3543,10 +3542,10 @@
     <string name="default_phone_title" msgid="7616730756650803827">"Opkaldsapp"</string>
     <string name="system_app" msgid="1863291702508355041">"(System)"</string>
     <string name="apps_storage" msgid="643866814746927111">"Applagerplads"</string>
-    <string name="usage_access" msgid="5487993885373893282">"Adgang til telefonbrug"</string>
+    <string name="usage_access" msgid="5487993885373893282">"Adgang til brugsdata"</string>
     <string name="permit_usage_access" msgid="179630895262172674">"Tillad adgang til telefonbrug"</string>
     <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"Skærmtid"</string>
-    <string name="usage_access_description" msgid="8547716253713890707">"Med adgang til telefonbrug kan en app aflæse, hvilke andre apps du anvender og hvor ofte, samt dit mobilselskab, dine sprogindstillinger og andre oplysninger."</string>
+    <string name="usage_access_description" msgid="8547716253713890707">"Med adgang til brugsdata kan en app aflæse, hvilke andre apps du anvender og hvor ofte, samt dit mobilselskab, dine sprogindstillinger og andre oplysninger."</string>
     <string name="memory_settings_title" msgid="6582588646363308430">"Hukommelse"</string>
     <string name="always_running" msgid="9012705720688200252">"Kører altid (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
     <string name="sometimes_running" msgid="7954947311082655448">"Kører nogle gange (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -4546,6 +4545,8 @@
     <string name="uwb_settings_title" msgid="8578498712312002231">"Ultrabredbånd (UWB, Ultra-Wideband)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Hjælper med at identificere den relative position af enheder i nærheden, som har UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Deaktiver flytilstand for at bruge UWB"</string>
+    <!-- no translation found for uwb_settings_summary_no_uwb_regulatory (3465456428217979428) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"Kameraadgang"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Mikrofonadgang"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"For apps og tjenester"</string>
@@ -4666,11 +4667,9 @@
     <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Til/skærmens lys"</string>
     <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Til/kameraets og skærmens lys"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Tænd kameraets eller skærmens lys, når du modtager en notifikation, eller en alarm går i gang"</string>
-    <!-- no translation found for flash_notifications_intro_without_camera_flash (6297337174487793891) -->
-    <skip />
+    <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Blink med skærmens lys, når du modtager notifikationer, eller en alarm går i gang"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Vær forsigtig med at bruge lysnotifikationer, hvis du er lysfølsom"</string>
-    <!-- no translation found for flash_notifications_keywords (2458759275318514836) -->
-    <skip />
+    <string name="flash_notifications_keywords" msgid="2458759275318514836">"lysnotifikation, lys, hørehæmmet, høreskadet"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"Forhåndsvisning"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"Kameraets lys"</string>
     <string name="screen_flash_notification_title" msgid="3773100725793316708">"Skærmens lys"</string>
@@ -4689,5 +4688,9 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Violet"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Udfør"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Annuller"</string>
+    <string name="contrast_title" msgid="6885768151336508075">"Kontrast"</string>
+    <string name="contrast_standard" msgid="1097297089917185235">"Standard"</string>
+    <string name="contrast_medium" msgid="384414510709285811">"Middel"</string>
+    <string name="contrast_high" msgid="3988567609694797696">"Høj"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Denne app kan kun åbnes i 1 vindue"</string>
 </resources>

@@ -103,10 +103,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Bu ayarı değiştirmek için cihazınızı yeniden başlatın."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Yeniden başlat"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"İptal"</string>
-    <!-- no translation found for bluetooth_disable_leaudio (8619410595945155354) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_leaudio_summary (4756307633476985470) -->
-    <skip />
+    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE Audio\'yu devre dışı bırak"</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Cihaz, LE ses donanımı özelliklerini destekliyorsa Bluetooth LE ses özelliğini devre dışı bırakır."</string>
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Bluetooth LE Audio İzin Verilenler Listesi\'ni etkinleştir"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Bluetooth LE Audio izin verilenler listesi özelliğini etkinleştirin."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Medya cihazları"</string>
@@ -179,8 +177,10 @@
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Haftanın ilk günü"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Sayı tercihleri"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Uygulamanın varsayılan ayarını kullan"</string>
-    <string name="celsius_temperature_unit" msgid="6118523647432383132">"Santigrat (°C)"</string>
-    <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Fahrenhayt (°F)"</string>
+    <!-- no translation found for celsius_temperature_unit (8896459071273084507) -->
+    <skip />
+    <!-- no translation found for fahrenheit_temperature_unit (1118677820614569801) -->
+    <skip />
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"Pazar"</string>
     <string name="monday_first_day_of_week" msgid="7244698610476506771">"Pazartesi"</string>
     <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"Salı"</string>
@@ -265,8 +265,7 @@
     <string name="safety_center_title" msgid="7732397372178774777">"Güvenlik ve gizlilik"</string>
     <string name="safety_center_summary" msgid="3554867379951053869">"Uygulama güvenliği, cihaz kilidi, izinler"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Yüz eklendi"</string>
-    <!-- no translation found for security_settings_face_preference_summary_none (523320857738436024) -->
-    <skip />
+    <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Kurulum gerekiyor"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Yüz Tanıma Kilidi"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"İş için Yüz Tanıma Kilidi"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Yüz Tanıma Kilidi\'ni ayarlama"</string>
@@ -329,8 +328,7 @@
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"İş için parmak izi"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Parmak izi ekle"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Parmak izi eklendi}other{# parmak izi eklendi}}"</string>
-    <!-- no translation found for security_settings_fingerprint_preference_summary_none (1146977379031250790) -->
-    <skip />
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"Kurulum gerekiyor"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Parmak izinizi kurun"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Parmak izi kilidine izin verin"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Parmak izinizi kullanma"</string>
@@ -374,8 +372,7 @@
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Yüz, parmak izleri ve <xliff:g id="WATCH">%s</xliff:g> eklendi"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Yüz Tanıma ve Parmak İzi Kilidi"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"İş için Yüz Tanıma ve Parmak İzi Kilidi"</string>
-    <!-- no translation found for security_settings_biometric_preference_summary_none_enrolled (213377753727694575) -->
-    <skip />
+    <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Kurulum gerekiyor"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Yüz ve parmak izleri eklendi"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Yüz ve parmak izi eklendi"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Yüz Tanıma Kilidi ve Parmak İzi Kilidi özelliklerini kurduğunuzda telefonunuz, yüzünüzde maske varken veya karanlık bir yerde bulunuyorsanız parmak izinizi ister."</string>
@@ -387,6 +384,14 @@
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Parmak izi kullanarak"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Yüz tanıma veya parmak izi kullanarak"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"Tamam"</string>
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_title (6041232223862753222) -->
+    <skip />
+    <!-- no translation found for biometric_settings_add_face_in_split_mode_message (1904738532939614456) -->
+    <skip />
+    <string name="biometric_settings_add_fingerprint_in_split_mode_title" msgid="9194670722730454903">"Parmak izi ayarlanamıyor"</string>
+    <string name="biometric_settings_add_fingerprint_in_split_mode_message" msgid="6960548382076629454">"Parmak İzi Kilidi\'ni ayarlamak için bölünmüş ekrandan çıkın"</string>
+    <!-- no translation found for biometric_settings_add_biometrics_in_split_mode_ok (564103789097253645) -->
+    <skip />
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Ekran kilidi atlansın mı?"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"Yine de atla"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"Geri git"</string>
@@ -466,8 +471,7 @@
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Şifreleme, kimlik bilgisi ve daha fazlası"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"güvenlik, daha fazla güvenlik ayarı, daha fazla ayar, gelişmiş güvenlik ayarları"</string>
     <string name="privacy_advanced_settings" msgid="8828215456566937719">"Daha fazla gizlilik ayarı"</string>
-    <!-- no translation found for more_security_privacy_settings (123465614090328851) -->
-    <skip />
+    <string name="more_security_privacy_settings" msgid="123465614090328851">"Daha fazla güvenlik ve gizlilik"</string>
     <string name="security_header" msgid="961514795852103424">"Güvenlik"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Gizlilik"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"İş profili"</string>
@@ -501,10 +505,8 @@
     <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"En az 6 basamaklı doğru bir PIN girerseniz kilit otomatik olarak açılır. Bu, Enter\'a dokunarak onaylamaktan biraz daha az güvenli bir yöntemdir."</string>
     <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"Doğru PIN\'i otomatik olarak onaylayın"</string>
     <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"PIN\'inizi onaylamak için Enter\'a dokunmak, otomatik onaylama özelliğini kullanmaktan daha güvenlidir"</string>
-    <!-- no translation found for auto_confirm_on_pin_verify_description (2052240431173223502) -->
-    <skip />
-    <!-- no translation found for auto_confirm_off_pin_verify_description (4256219155659760047) -->
-    <skip />
+    <string name="auto_confirm_on_pin_verify_description" msgid="2052240431173223502">"Otomatik olarak onaylamayı etkinleştirmek için cihaz PIN\'ini girin"</string>
+    <string name="auto_confirm_off_pin_verify_description" msgid="4256219155659760047">"Otomatik olarak onaylamayı devre dışı bırakmak için cihaz PIN\'ini girin"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"Ekran kilidi"</string>
     <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"İş profili kilidi"</string>
     <string name="unlock_set_unlock_off_title" msgid="2831957685685921667">"Yok"</string>
@@ -1696,8 +1698,7 @@
     <string name="modifier_keys_reset_message" msgid="5236994817619936058">"Değiştirici tuşların tümünü varsayılan değerlerine sıfırlamak istediğinizden emin misiniz?"</string>
     <string name="modifier_keys_done" msgid="8196199314913909700">"Bitti"</string>
     <string name="modifier_keys_cancel" msgid="7136520252570826772">"İptal"</string>
-    <!-- no translation found for modifier_keys_reset (551170906710422041) -->
-    <skip />
+    <string name="modifier_keys_reset" msgid="551170906710422041">"Sıfırla"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Değiştirici tuşu seçin"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> için yeni bir tuş seçin:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Varsayılan"</string>
@@ -1784,10 +1785,8 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Büyütme kısayolu"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Yazma sırasında büyütme"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Büyüteç siz yazarken metni takip eder"</string>
-    <!-- no translation found for accessibility_screen_magnification_always_on_title (3814297443759580936) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_always_on_summary (306908451430863049) -->
-    <skip />
+    <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Uygulama değiştirirken açık kalsın"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Uygulama değiştirirken büyüteç açık kalır ve uzaklaşır"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Kontrol çubuğu"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Büyüteci etkinleştirip ekrandaki kontrol çubuğuyla hareket ettirin. Büyüteci kontrol etmek için kontrol çubuğuna dokunup basılı tutun ve ardından çubuğu sürükleyin. Kontrol çubuğunun yerini değiştirmek için de çubuğa dokunun ve sürükleyin."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Büyütme hakkında"</string>
@@ -1965,8 +1964,7 @@
     <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"Ayrıca, ekstra loş özelliğini ekranınızın üst kısmından Hızlı Ayarlar\'a ekleyebilirsiniz"</string>
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"Tek el modu Hızlı Ayarlar\'a eklendi. İstediğiniz zaman açmak veya kapatmak için aşağı kaydırın."</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"Ayrıca, tek el modu özelliğini ekranınızın üst kısmından Hızlı Ayarlar\'a ekleyebilirsiniz"</string>
-    <!-- no translation found for accessibility_font_scaling_auto_added_qs_tooltip_content (7229921960884718332) -->
-    <skip />
+    <string name="accessibility_font_scaling_auto_added_qs_tooltip_content" msgid="7229921960884718332">"Yazı tipi boyutu Hızlı Ayarlar\'a eklendi. Yazı tipi boyutunu değiştirmek için dilediğiniz zaman aşağı kaydırın."</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Kapat"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Renk düzeltme işlevini kullan"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Renk düzeltme kısayolu"</string>
@@ -2108,6 +2106,7 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"renk ayarlama"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"ekran karartma, ekran rengini açma"</string>
+    <string name="keywords_contrast" msgid="4668393735398949873">"renk kontrastı"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="7151756353013736931">"motor, fare"</string>
@@ -4129,8 +4128,8 @@
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Kablosuz bağlantı denetimi"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Uygulamanın Kablosuz bağlantıyı denetlemesine izin ver"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Bu uygulamanın kablosuz bağlantıyı açmasına veya kapatmasına, kablosuz ağları taramasına, eklemesine veya kaldırmasına, kablosuz ağlara bağlanmasına ya da yalnızca yerel hotspot bağlantısı başlatmasına izin verin"</string>
-    <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"NFC aracılığıyla başlatın"</string>
-    <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"NFC taramasında başlatmaya izin verin"</string>
+    <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"NFC ile başlatma"</string>
+    <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"NFC taramasında başlatmaya izin ver"</string>
     <string name="change_nfc_tag_apps_detail_summary" msgid="7083666814715607078">"Bir NFC etiketi tarandığında bu uygulamanın başlatılmasına izin verin.\nBu izin verilirse uygulama, bir etiket algılandığında kullanılabilir seçenekler arasında olur."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Medyayı oynatma yeri:"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"<xliff:g id="LABEL">%s</xliff:g> ses çıkışı:"</string>
@@ -4358,10 +4357,10 @@
     <string name="development_memtag_intro" msgid="8032596625527637164">"Bellek Etiketleme Uzantısı (MTE), uygulamanızda bellekle ilgili güvenlik sorunlarını bulmanızı ve yerel kodu daha güvenli hale getirmenizi kolaylaştırır."</string>
     <string name="development_memtag_footer" msgid="5681925148773626562">"MTE\'nin etkinleştirilmesi, cihaz performansının yavaşlamasına neden olabilir."</string>
     <string name="development_memtag_learn_more" msgid="8961984806973926704">"MTE hakkında daha fazla bilgi"</string>
-    <string name="development_memtag_toggle" msgid="2474420239518386894">"Devre dışı bırakana kadar MTE\'yi etkinleştirin"</string>
+    <string name="development_memtag_toggle" msgid="2474420239518386894">"Devre dışı bırakana kadar MTE\'yi etkinleştir"</string>
     <string name="development_memtag_reboot_message_on" msgid="8100075676107327847">"MTE\'yi etkinleştirmek için cihazınızı yeniden başlatmanız gerekir."</string>
     <string name="development_memtag_reboot_message_off" msgid="3703925647922079456">"MTE\'yi devre dışı bırakmak için cihazınızı yeniden başlatmanız gerekir."</string>
-    <string name="reboot_with_mte_title" msgid="2320125810211279">"MTE\'yi tek bir oturum için etkinleştirin"</string>
+    <string name="reboot_with_mte_title" msgid="2320125810211279">"MTE\'yi tek bir oturum için etkinleştir"</string>
     <string name="reboot_with_mte_message" msgid="1232881567956207641">"Sistem yeniden başlatılır ve Bellek Etiketleme Uzantısı (MTE) ile deneme yapılmasına izin verir. Bu da sistem performansını ve kararlılığı olumsuz etkileyebilir. Sonraki yeniden başlatma işleminde sıfırlanır."</string>
     <string name="reboot_with_mte_summary" msgid="3896537791216432882">"MTE\'nin etkin olduğu tek bir oturum için yeniden başlatın"</string>
     <string name="reboot_with_mte_already_enabled" msgid="4439168867613407167">"MTE zaten etkin"</string>
@@ -4546,6 +4545,8 @@
     <string name="uwb_settings_title" msgid="8578498712312002231">"Ultra Geniş Bant (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Ultra Geniş Bant özelliğine sahip yakındaki cihazların göreli konumunu belirlemeye yardımcı olur"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Ultra Geniş Bant\'ı kullanmak için uçak modunu kapatın"</string>
+    <!-- no translation found for uwb_settings_summary_no_uwb_regulatory (3465456428217979428) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"Kamera erişimi"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Mikrofon erişimi"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Uygulamalar ve hizmetler için"</string>
@@ -4666,11 +4667,9 @@
     <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Açık/Ekran flaşı"</string>
     <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Açık/Kamera ve ekran flaşı"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Bildirim aldığınızda ya da alarm çaldığında kamera ışığı yanar veya ekran aydınlanır"</string>
-    <!-- no translation found for flash_notifications_intro_without_camera_flash (6297337174487793891) -->
-    <skip />
+    <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Bildirim aldığınızda ya da alarm çaldığında ekran yanıp söner"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Işığa karşı hassasiyetiniz varsa flaşlı bildirimi dikkatle kullanın"</string>
-    <!-- no translation found for flash_notifications_keywords (2458759275318514836) -->
-    <skip />
+    <string name="flash_notifications_keywords" msgid="2458759275318514836">"flaş, ışık, duyma zorluğu çeken, işitme kaybı"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"Önizleme"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"Kamera flaşı"</string>
     <string name="screen_flash_notification_title" msgid="3773100725793316708">"Ekran flaşı"</string>
@@ -4689,5 +4688,9 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Mor"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Bitti"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"İptal"</string>
+    <string name="contrast_title" msgid="6885768151336508075">"Kontrast"</string>
+    <string name="contrast_standard" msgid="1097297089917185235">"Standart"</string>
+    <string name="contrast_medium" msgid="384414510709285811">"Orta"</string>
+    <string name="contrast_high" msgid="3988567609694797696">"Yüksek"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Bu uygulama yalnızca 1 pencerede açılabilir"</string>
 </resources>
