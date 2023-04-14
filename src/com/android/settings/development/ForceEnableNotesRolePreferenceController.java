@@ -31,12 +31,12 @@
 
 package com.android.settings.development;
 
-import static android.os.UserHandle.USER_CURRENT;
-
 import android.content.Context;
 import android.content.om.IOverlayManager;
+import android.content.pm.UserInfo;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.UserManager;
 
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
@@ -50,18 +50,22 @@ public class ForceEnableNotesRolePreferenceController
         extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
+
+    @VisibleForTesting
+    static final String OVERLAY_PACKAGE_NAME =
+            "com.android.role.notes.enabled";
+
     private static final String NOTES_ROLE_ENABLED_KEY =
             "force_enable_notes_role";
 
-    private static final String OVERLAY_PACKAGE_NAME =
-            "com.android.role.notes.enabled";
-
     private final IOverlayManager mOverlayManager;
+    private final UserManager mUserManager;
 
     public ForceEnableNotesRolePreferenceController(Context context) {
         super(context);
         mOverlayManager = IOverlayManager.Stub.asInterface(
                 ServiceManager.getService(Context.OVERLAY_SERVICE));
+        mUserManager = context.getSystemService(UserManager.class);
     }
 
     @Override
@@ -95,7 +99,11 @@ public class ForceEnableNotesRolePreferenceController
     @VisibleForTesting
     protected void setEnabled(boolean enabled) {
         try {
-            mOverlayManager.setEnabled(OVERLAY_PACKAGE_NAME, enabled, USER_CURRENT);
+            for (UserInfo user : mUserManager.getUsers()) {
+                if (user.isFull() || user.isProfile()) {
+                    mOverlayManager.setEnabled(OVERLAY_PACKAGE_NAME, enabled, user.id);
+                }
+            }
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
