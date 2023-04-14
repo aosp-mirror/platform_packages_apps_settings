@@ -82,6 +82,7 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.activityembedding.ActivityEmbeddingUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.transition.SettingsTransitionHelper;
 import com.android.settingslib.widget.FooterPreference;
@@ -700,7 +701,9 @@ public class FingerprintSettings extends SubSettings {
             if (KEY_FINGERPRINT_ADD.equals(key)) {
                 // If it's in split mode, show the error dialog and don't need to show adding
                 // fingerprint intent.
-                if (getActivity().isInMultiWindowMode()) {
+                final boolean isActivityEmbedded = ActivityEmbeddingUtils.isActivityEmbedded(
+                                getActivity());
+                if (getActivity().isInMultiWindowMode() && !isActivityEmbedded) {
                     BiometricsSplitScreenDialog.newInstance(TYPE_FINGERPRINT).show(
                             getActivity().getSupportFragmentManager(),
                             BiometricsSplitScreenDialog.class.getName());
