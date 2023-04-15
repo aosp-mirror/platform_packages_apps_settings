@@ -52,6 +52,7 @@ import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settingslib.activityembedding.ActivityEmbeddingUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.transition.SettingsTransitionHelper;
 
@@ -169,8 +170,8 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
             //  If it's split mode and there is no enrolled face, show the dialog. (if there is
             //  enrolled face, FaceSettingsEnrollButtonPreferenceController#onClick will handle
             //  the dialog)
-            if (getActivity().isInMultiWindowMode() && !mFaceManager.hasEnrolledTemplates(
-                    mUserId)) {
+            if (getActivity().isInMultiWindowMode() && !ActivityEmbeddingUtils.isActivityEmbedded(
+                    getActivity()) && !mFaceManager.hasEnrolledTemplates(mUserId)) {
                 BiometricsSplitScreenDialog.newInstance(TYPE_FACE).show(
                         getActivity().getSupportFragmentManager(),
                         BiometricsSplitScreenDialog.class.getName());
@@ -205,8 +206,8 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
             //  If it's split mode and there is no enrolled fingerprint, show the dialog. (if
             //  there is enrolled fingerprint, FingerprintSettingsFragment#onPreferenceTreeClick
             //  will handle the dialog)
-            if (getActivity().isInMultiWindowMode() && !mFingerprintManager.hasEnrolledFingerprints(
-                    mUserId)) {
+            if (getActivity().isInMultiWindowMode() && !ActivityEmbeddingUtils.isActivityEmbedded(
+                    getActivity()) && !mFingerprintManager.hasEnrolledFingerprints(mUserId)) {
                 BiometricsSplitScreenDialog.newInstance(TYPE_FINGERPRINT).show(
                         getActivity().getSupportFragmentManager(),
                         BiometricsSplitScreenDialog.class.getName());

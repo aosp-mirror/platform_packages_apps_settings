@@ -16,7 +16,6 @@
 
 package com.android.settings.biometrics.fingerprint;
 
-import static android.hardware.biometrics.BiometricFingerprintConstants.FINGERPRINT_ERROR_USER_CANCELED;
 import static android.text.Layout.HYPHENATION_FREQUENCY_NONE;
 
 import android.animation.Animator;
@@ -191,7 +190,6 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private boolean mRestoring;
     private Vibrator mVibrator;
     private boolean mIsSetupWizard;
-    private boolean mIsOrientationChanged;
     @VisibleForTesting
     boolean mIsCanceled;
     private AccessibilityManager mAccessibilityManager;
@@ -222,25 +220,6 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                 [currentDensityIndex];
         final int defaultDensity = displayDensity.getDefaultDensityForDefaultDisplay();
         return defaultDensity == currentDensity;
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        if (hasFocus || mIsCanceled) {
-            return;
-        }
-
-        // By UX design, we should ensure seamless enrollment CUJ even though user rotate device.
-        // Do NOT cancel enrollment progress after rotating, adding mIsOrientationChanged
-        // to judge if the focus changed was triggered by rotation, current WMS has triple callbacks
-        // (true > false > true), we need to reset mIsOrientationChanged when !hasFocus callback.
-        // Side fps do not have to synchronize udfpsController overlay state, we should bypass sfps
-        // from onWindowFocusChanged() as long press sfps power key will prompt dialog to users.
-        if (!mIsOrientationChanged && !mCanAssumeSfps) {
-            onCancelEnrollment(FINGERPRINT_ERROR_USER_CANCELED);
-        } else {
-            mIsOrientationChanged = false;
-        }
     }
 
     @Override
@@ -493,7 +472,6 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         mIsCanceled = savedInstanceState.getBoolean(KEY_STATE_CANCELED, false);
         mPreviousRotation = savedInstanceState.getInt(KEY_STATE_PREVIOUS_ROTATION,
                 getDisplay().getRotation());
-        mIsOrientationChanged = mPreviousRotation != getDisplay().getRotation();
     }
 
     @Override
@@ -537,7 +515,6 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         // before showErrorDialog() to prevent that another error dialog is triggered again.
         mIsCanceled = true;
         FingerprintErrorDialog.showErrorDialog(this, errorMsgId, mCanAssumeUdfps);
-        mIsOrientationChanged = false;
         cancelEnrollment();
         stopIconAnimation();
         stopListenOrientationEvent();
