@@ -62,7 +62,7 @@ public class FaceSettingsEnrollButtonPreferenceControllerTest {
 
     @Test
     public void testOnClick_inFullScreen() {
-        when(mListener.checkInMultiWindowMode()).thenReturn(false);
+        when(mListener.onShowSplitScreenDialog()).thenReturn(false);
         mController.onClick(mButton);
 
         assertThat(mController.isClicked()).isTrue();
@@ -71,7 +71,7 @@ public class FaceSettingsEnrollButtonPreferenceControllerTest {
 
     @Test
     public void testOnClick_inMultiWindow() {
-        when(mListener.checkInMultiWindowMode()).thenReturn(true);
+        when(mListener.onShowSplitScreenDialog()).thenReturn(true);
         mController.onClick(mButton);
 
         assertThat(mController.isClicked()).isFalse();

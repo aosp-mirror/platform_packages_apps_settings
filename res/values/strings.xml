@@ -2036,13 +2036,13 @@
     <!-- Title for Wifi hotspot speed [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_speed_title">Speed &amp; compatibility</string>
     <!-- Summary for Wifi hotspot speed to 2.4 GHz band [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_speed_summary_2g">2.4 GHz / Any device can connect</string>
+    <string name="wifi_hotspot_speed_summary_2g">2.4 GHz / Compatible with most devices</string>
     <!-- Summary for Wifi hotspot speed to 5 GHz band [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_speed_summary_5g">5 GHz / Most devices can connect</string>
+    <string name="wifi_hotspot_speed_summary_5g">5 GHz / Compatible with many devices</string>
     <!-- Summary for Wifi hotspot speed to 6 GHz band [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_speed_summary_6g">6 GHz / Few devices can connect</string>
+    <string name="wifi_hotspot_speed_summary_6g">6 GHz / Compatible with few devices</string>
     <!-- Summary for Wifi hotspot speed to 6 GHz band [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_speed_summary_2g_and_5g">2.4 and 5 GHz / Any device can connect</string>
+    <string name="wifi_hotspot_speed_summary_2g_and_5g">2.4 and 5 GHz / Compatible with most devices</string>
     <!-- Top introduction on the Wi-Fi hotspot speed settings, summarizes options available for Wi-Fi hotspot bands. [CHAR LIMIT=NONE] -->
     <string name="wifi_hotspot_speed_intro">Choose a frequency for your hotspot. The frequency affects the connection speed and what types of devices can find your hotspot.</string>
     <!-- Category title on the radio button of the Wi-Fi hotspot speed. [CHAR LIMIT=NONE] -->
@@ -2050,19 +2050,19 @@
     <!-- Title for radio button of the Wi-Fi hotspot speed to 2.4 GHz band [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_speed_2g">2.4 GHz</string>
     <!-- Summary for radio button of the Wi-Fi hotspot speed to 2.4 GHz band [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_speed_2g_summary">Slower speeds. Any device can connect.</string>
+    <string name="wifi_hotspot_speed_2g_summary">Slower speeds. Compatible with most devices.</string>
     <!-- Title for radio button of the Wi-Fi hotspot speed to 5 GHz band [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_speed_5g">5 GHz</string>
     <!-- Summary for radio button of the Wi-Fi hotspot speed to 5 GHz band [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_speed_5g_summary">Fast speeds. Most devices can connect.</string>
+    <string name="wifi_hotspot_speed_5g_summary">Fast speeds. Compatible with many devices.</string>
     <!-- Title for radio button of the Wi-Fi hotspot speed to 2.4 GHz and 5 GHz bands [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_speed_2g_5g">2.4 and 5 GHz</string>
     <!-- Summary for radio button of the Wi-Fi hotspot speed to 2.4 GHz and 5 GHz bands [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_speed_2g_5g_summary">Fast speeds. Any device can connect to this dual-band hotspot.</string>
+    <string name="wifi_hotspot_speed_2g_5g_summary">Fast speeds. This dual-band hotspot is compatible with most devices.</string>
     <!-- Title for radio button of the Wi-Fi hotspot speed to 6 GHz band [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_speed_6g">6 GHz</string>
     <!-- Summary for radio button of the Wi-Fi hotspot speed to 6 GHz band [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_speed_6g_summary">Fastest speeds. Fewest devices can connect.</string>
+    <string name="wifi_hotspot_speed_6g_summary">Fastest speeds. Compatible with few devices.</string>
     <!-- Summary for the Wi-Fi hotspot speed unavailable [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_speed_summary_unavailable">Not available in your country or region</string>
     <!-- The footer message for switch screen resolution [CHAR LIMIT=NONE] -->
@@ -5433,6 +5433,10 @@
     <string name="battery_system_usage_for">System usage for <xliff:g id="slot">%s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Battery app usage section header -->
     <string name="battery_app_usage_for">App usage for <xliff:g id="slot">%s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] Battery system usage section header since last full charge to slot_timestamp. Please use similar text with tc/3248552137819897140 -->
+    <string name="battery_system_usage_since_last_full_charge_to">System usage since last full charge to <xliff:g id="slot_timestamp" example="Friday 10 am">%s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] Battery app usage section header since last full charge to slot_timestamp. Please use similar text with tc/7309909074935858949 -->
+    <string name="battery_app_usage_since_last_full_charge_to">App usage since last full charge to <xliff:g id="slot_timestamp" example="Friday 10 am">%s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Battery usage item for total usage time less than a minute -->
     <string name="battery_usage_total_less_than_one_minute">Total: less than a min</string>
     <!-- [CHAR_LIMIT=NONE] Battery usage item for total background time less than a minute -->
