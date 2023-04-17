@@ -22,10 +22,12 @@ import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
@@ -63,6 +65,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -77,6 +80,13 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private static final String TAG = "CredentialManagerPreferenceController";
     private static final String ALTERNATE_INTENT = "android.settings.SYNC_SETTINGS";
     private static final int MAX_SELECTABLE_PROVIDERS = 5;
+    private static final Set<String> REFRESH_CONTENTS_INTENTS =
+            new HashSet<>(
+                    Arrays.asList(
+                            Intent.ACTION_PACKAGE_REMOVED,
+                            Intent.ACTION_PACKAGE_REPLACED,
+                            Intent.ACTION_PACKAGE_ADDED,
+                            Intent.ACTION_PACKAGE_CHANGED));
 
     private final PackageManager mPm;
     private final IconDrawableFactory mIconFactory;
@@ -86,6 +96,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private final Executor mExecutor;
     private final Map<String, SwitchPreference> mPrefs = new HashMap<>(); // key is package name
     private final List<ServiceInfo> mPendingServiceInfos = new ArrayList<>();
+    private final RefreshContentsReceiver mReceiver = new RefreshContentsReceiver();
 
     private @Nullable FragmentManager mFragmentManager = null;
     private @Nullable Delegate mDelegate = null;
@@ -100,6 +111,14 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         mExecutor = ContextCompat.getMainExecutor(mContext);
         mCredentialManager =
                 getCredentialManager(context, preferenceKey.equals("credentials_test"));
+
+        // Register the receiver
+        final IntentFilter packageIntentFilter = new IntentFilter();
+        for (String action : REFRESH_CONTENTS_INTENTS) {
+            packageIntentFilter.addAction(action);
+        }
+        packageIntentFilter.addDataScheme("package");
+        context.registerReceiver(mReceiver, packageIntentFilter, Context.RECEIVER_EXPORTED);
     }
 
     private @Nullable CredentialManager getCredentialManager(Context context, boolean isTest) {
@@ -156,7 +175,6 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 TextUtils.equals(action, Settings.ACTION_CREDENTIAL_PROVIDER);
         final boolean isExistingAction = TextUtils.equals(action, ALTERNATE_INTENT);
         final boolean isValid = isCredProviderAction || isExistingAction;
-
         if (!isValid) {
             return false;
         }
@@ -253,6 +271,10 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             List<CredentialProviderInfo> availableServices,
             String flagOverrideForTest) {
         mFlagOverrideForTest = flagOverrideForTest;
+        setAvailableServicesInternal(availableServices);
+    }
+
+    private void setAvailableServicesInternal(List<CredentialProviderInfo> availableServices) {
         mServices.clear();
         mServices.addAll(availableServices);
 
@@ -757,6 +779,26 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         @Override
         public void onClick(DialogInterface dialog, int which) {
             getDialogHost().onDialogClick(which);
+        }
+    }
+
+    @VisibleForTesting
+    public boolean handleRefreshIntent(Intent intent) {
+        if (!REFRESH_CONTENTS_INTENTS.contains(intent.getAction())) {
+            return false;
+        }
+
+        setAvailableServicesInternal(
+                mCredentialManager.getCredentialProviderServices(
+                        getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY));
+
+        return true;
+    }
+
+    private class RefreshContentsReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            handleRefreshIntent(intent);
         }
     }
 }
