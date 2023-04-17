@@ -369,71 +369,6 @@ public class CredentialManagerPreferenceControllerTest {
     }
 
     @Test
-    public void handleRefreshIntent_packageAdded() {
-        CredentialProviderInfo cpi = createCredentialProviderInfo();
-        CredentialManagerPreferenceController controller =
-                createControllerWithServices(Lists.newArrayList(cpi));
-        String packageName = cpi.getServiceInfo().packageName;
-
-        // Create an intent with valid data.
-        Intent intent = new Intent(Intent.ACTION_PACKAGE_ADDED);
-        intent.setData(Uri.parse("package:" + packageName));
-        assertThat(controller.handleRefreshIntent(intent)).isTrue();
-    }
-
-    @Test
-    public void handleRefreshIntent_packageRemoved() {
-        CredentialProviderInfo cpi = createCredentialProviderInfo();
-        CredentialManagerPreferenceController controller =
-                createControllerWithServices(Lists.newArrayList(cpi));
-        String packageName = cpi.getServiceInfo().packageName;
-
-        // Create an intent with valid data.
-        Intent intent = new Intent(Intent.ACTION_PACKAGE_REMOVED);
-        intent.setData(Uri.parse("package:" + packageName));
-        assertThat(controller.handleRefreshIntent(intent)).isTrue();
-    }
-
-    @Test
-    public void handleRefreshIntent_packageReplaced() {
-        CredentialProviderInfo cpi = createCredentialProviderInfo();
-        CredentialManagerPreferenceController controller =
-                createControllerWithServices(Lists.newArrayList(cpi));
-        String packageName = cpi.getServiceInfo().packageName;
-
-        // Create an intent with valid data.
-        Intent intent = new Intent(Intent.ACTION_PACKAGE_REPLACED);
-        intent.setData(Uri.parse("package:" + packageName));
-        assertThat(controller.handleRefreshIntent(intent)).isTrue();
-    }
-
-    @Test
-    public void handleRefreshIntent_packageChanged() {
-        CredentialProviderInfo cpi = createCredentialProviderInfo();
-        CredentialManagerPreferenceController controller =
-                createControllerWithServices(Lists.newArrayList(cpi));
-        String packageName = cpi.getServiceInfo().packageName;
-
-        // Create an intent with valid data.
-        Intent intent = new Intent(Intent.ACTION_PACKAGE_CHANGED);
-        intent.setData(Uri.parse("package:" + packageName));
-        assertThat(controller.handleRefreshIntent(intent)).isTrue();
-    }
-
-    @Test
-    public void handleRefreshIntent_badData() {
-        CredentialProviderInfo cpi = createCredentialProviderInfo();
-        CredentialManagerPreferenceController controller =
-                createControllerWithServices(Lists.newArrayList(cpi));
-        String packageName = cpi.getServiceInfo().packageName;
-
-        // Create an intent with valid data.
-        Intent intent = new Intent(Intent.ACTION_PACKAGE_ENABLE_ROLLBACK);
-        intent.setData(Uri.parse("package:" + packageName));
-        assertThat(controller.handleRefreshIntent(intent)).isTrue();
-    }
-
-    @Test
     public void handleIntentWithProviderServiceInfo_handleBadIntent_missingData() {
         CredentialProviderInfo cpi = createCredentialProviderInfo();
         CredentialManagerPreferenceController controller =
@@ -509,8 +444,7 @@ public class CredentialManagerPreferenceControllerTest {
         CredentialManagerPreferenceController controller =
                 new CredentialManagerPreferenceController(
                         mContext, mCredentialsPreferenceCategory.getKey());
-        controller.setAvailableServices(
-                () -> mock(Lifecycle.class), availableServices, addServiceOverride);
+        controller.setAvailableServices(() -> mock(Lifecycle.class), availableServices, addServiceOverride);
         controller.setDelegate(mDelegate);
         return controller;
     }
