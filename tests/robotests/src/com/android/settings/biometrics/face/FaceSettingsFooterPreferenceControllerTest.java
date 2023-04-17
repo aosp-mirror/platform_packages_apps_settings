@@ -18,10 +18,14 @@ package com.android.settings.biometrics.face;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorProperties;
 import android.hardware.face.FaceSensorPropertiesInternal;
@@ -59,6 +63,8 @@ public class FaceSettingsFooterPreferenceControllerTest {
     private static final String PREF_KEY = "security_face_footer";
     @Mock
     private FaceManager mFaceManager;
+    @Mock
+    PackageManager mPackageManager;
     @Captor
     private ArgumentCaptor<IFaceAuthenticatorsRegisteredCallback> mCaptor;
     private Preference mPreference;
@@ -71,8 +77,20 @@ public class FaceSettingsFooterPreferenceControllerTest {
         if (Looper.myLooper() == null) {
             Looper.prepare(); // needed to create the preference screen
         }
-        ShadowApplication.getInstance().setSystemService(Context.FACE_SERVICE, mFaceManager);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)).thenReturn(true);
+    }
 
+    private void setupHasFaceFeature() {
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(true);
+    }
+
+    private void setupNoFaceFeature() {
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(false);
+    }
+
+    private void displayFaceSettingsFooterPreferenceController() {
+        ShadowApplication.getInstance().setSystemService(Context.FACE_SERVICE, mFaceManager);
         mController = new FaceSettingsFooterPreferenceController(mContext, PREF_KEY);
         PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         mPreference = new FooterPreference(mContext);
@@ -82,13 +100,24 @@ public class FaceSettingsFooterPreferenceControllerTest {
         mController.displayPreference(screen);
     }
 
+    private void createFaceSettingsFooterPreferenceController() {
+        ShadowApplication.getInstance().setSystemService(Context.FACE_SERVICE, mFaceManager);
+        mController = new FaceSettingsFooterPreferenceController(mContext, PREF_KEY);
+    }
+
     @Test
     public void isSliceable_returnFalse() {
+        setupHasFaceFeature();
+        displayFaceSettingsFooterPreferenceController();
+
         assertThat(mController.isSliceable()).isFalse();
     }
 
     @Test
     public void testString_faceNotClass3() throws RemoteException {
+        setupHasFaceFeature();
+        displayFaceSettingsFooterPreferenceController();
+
         verify(mFaceManager).addAuthenticatorsRegisteredCallback(mCaptor.capture());
         mController.updateState(mPreference);
 
@@ -112,6 +141,9 @@ public class FaceSettingsFooterPreferenceControllerTest {
 
     @Test
     public void testString_faceClass3() throws RemoteException {
+        setupHasFaceFeature();
+        displayFaceSettingsFooterPreferenceController();
+
         verify(mFaceManager).addAuthenticatorsRegisteredCallback(mCaptor.capture());
         mController.updateState(mPreference);
 
@@ -131,5 +163,31 @@ public class FaceSettingsFooterPreferenceControllerTest {
 
         assertThat(mPreference.getTitle().toString()).isEqualTo(
                 mContext.getString(R.string.security_settings_face_settings_footer_class3));
+    }
+
+    @Test
+    public void testSupportFaceFeature_shouldAddAuthenticatorsRegisteredCallback() {
+        setupHasFaceFeature();
+        displayFaceSettingsFooterPreferenceController();
+
+        verify(mFaceManager).addAuthenticatorsRegisteredCallback(any());
+    }
+
+    @Test
+    public void testNoFaceFeature_shouldNotAddAuthenticatorsRegisteredCallback() {
+        setupNoFaceFeature();
+        displayFaceSettingsFooterPreferenceController();
+
+        verify(mContext, never()).getSystemService(FaceManager.class);
+        verify(mFaceManager, never()).addAuthenticatorsRegisteredCallback(any());
+    }
+
+    @Test
+    public void testHasFaceFeature_shouldNotAddAuthenticatorsRegisteredCallback_inCtor() {
+        setupHasFaceFeature();
+        createFaceSettingsFooterPreferenceController();
+
+        verify(mContext, never()).getSystemService(FaceManager.class);
+        verify(mFaceManager, never()).addAuthenticatorsRegisteredCallback(any());
     }
 }
