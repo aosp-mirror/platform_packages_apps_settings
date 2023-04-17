@@ -237,20 +237,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 }
             }
         }
-        if (mHasFeatureFingerprint) {
-            final FingerprintManager fpManager = getSystemService(FingerprintManager.class);
-            final List<FingerprintSensorPropertiesInternal> fpProperties =
-                    fpManager.getSensorPropertiesInternal();
-            final int maxFingerprintsEnrollableIfSUW = getApplicationContext().getResources()
-                    .getInteger(R.integer.suw_max_fingerprints_enrollable);
-            if (!fpProperties.isEmpty()) {
-                final int maxEnrolls =
-                        isSetupWizard ? maxFingerprintsEnrollableIfSUW
-                                : fpProperties.get(0).maxEnrollmentsPerUser;
-                mIsFingerprintEnrollable =
-                        fpManager.getEnrolledFingerprints(mUserId).size() < maxEnrolls;
-            }
-        }
+        updateFingerprintEnrollable(isSetupWizard);
 
         // TODO(b/195128094): remove this restriction
         // Consent can only be recorded when this activity is launched directly from the kids
@@ -286,6 +273,23 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         } else {
             // Start enrollment process if we haven't bailed out yet
             startEnrollWith(authenticators, isSetupWizard);
+        }
+    }
+
+    private void updateFingerprintEnrollable(boolean isSetupWizard) {
+        if (mHasFeatureFingerprint) {
+            final FingerprintManager fpManager = getSystemService(FingerprintManager.class);
+            final List<FingerprintSensorPropertiesInternal> fpProperties =
+                    fpManager.getSensorPropertiesInternal();
+            final int maxFingerprintsEnrollableIfSUW = getApplicationContext().getResources()
+                    .getInteger(R.integer.suw_max_fingerprints_enrollable);
+            if (!fpProperties.isEmpty()) {
+                final int maxEnrolls =
+                        isSetupWizard ? maxFingerprintsEnrollableIfSUW
+                                : fpProperties.get(0).maxEnrollmentsPerUser;
+                mIsFingerprintEnrollable =
+                        fpManager.getEnrolledFingerprints(mUserId).size() < maxEnrolls;
+            }
         }
     }
 
@@ -464,12 +468,12 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 mConfirmingCredentials = false;
                 final boolean isOk =
                         isSuccessfulConfirmOrChooseCredential(requestCode, resultCode);
-                if (isOk && (mHasFeatureFace || mHasFeatureFingerprint)) {
+                if (isOk && (mIsFaceEnrollable || mIsFingerprintEnrollable)) {
                     // Apply forward animation during the transition from ChooseLock/ConfirmLock to
                     // SetupFingerprintEnrollIntroduction/FingerprintEnrollmentActivity
                     TransitionHelper.applyForwardTransition(this, TRANSITION_FADE_THROUGH);
                     updateGatekeeperPasswordHandle(data);
-                    if (mHasFeatureFingerprint) {
+                    if (mIsFingerprintEnrollable) {
                         launchFingerprintOnlyEnroll();
                     } else {
                         launchFaceOnlyEnroll();
@@ -482,8 +486,15 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 break;
             case REQUEST_SINGLE_ENROLL_FINGERPRINT:
                 mIsSingleEnrolling = false;
+                if (resultCode == BiometricEnrollBase.RESULT_FINISHED) {
+                    // FingerprintEnrollIntroduction's visibility is determined by
+                    // mIsFingerprintEnrollable. Keep this value up-to-date after a successful
+                    // enrollment.
+                    updateFingerprintEnrollable(WizardManagerHelper.isAnySetupWizard(getIntent()));
+                }
                 if ((resultCode == BiometricEnrollBase.RESULT_SKIP
-                        || resultCode == BiometricEnrollBase.RESULT_FINISHED) && mHasFeatureFace) {
+                        || resultCode == BiometricEnrollBase.RESULT_FINISHED)
+                        && mIsFaceEnrollable) {
                     // Apply forward animation during the transition from
                     // SetupFingerprintEnroll*/FingerprintEnrollmentActivity to
                     // SetupFaceEnrollIntroduction
@@ -495,7 +506,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 break;
             case REQUEST_SINGLE_ENROLL_FACE:
                 mIsSingleEnrolling = false;
-                if (resultCode == Activity.RESULT_CANCELED && mHasFeatureFingerprint) {
+                if (resultCode == Activity.RESULT_CANCELED && mIsFingerprintEnrollable) {
                     launchFingerprintOnlyEnroll();
                 } else {
                     finishOrLaunchHandToParent(resultCode);
