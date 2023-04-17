@@ -19,6 +19,7 @@ package com.android.settings.privacy;
 import static android.safetylabel.SafetyLabelConstants.SAFETY_LABEL_CHANGE_NOTIFICATIONS_ENABLED;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.provider.DeviceConfig;
 
 import com.android.settings.core.BasePreferenceController;
@@ -28,7 +29,6 @@ import com.android.settings.core.BasePreferenceController;
  * TODO b/264939792: Add tests
  */
 public class AppDataSharingUpdatesPreferenceController extends BasePreferenceController {
-
     public AppDataSharingUpdatesPreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey);
@@ -36,8 +36,16 @@ public class AppDataSharingUpdatesPreferenceController extends BasePreferenceCon
 
     @Override
     public int getAvailabilityStatus() {
-        return DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY,
-                SAFETY_LABEL_CHANGE_NOTIFICATIONS_ENABLED, false)
+        return isPrivacySafetyLabelChangeNotificationsEnabled(mContext)
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    private boolean isPrivacySafetyLabelChangeNotificationsEnabled(Context context) {
+        PackageManager packageManager = context.getPackageManager();
+        return DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY,
+                    SAFETY_LABEL_CHANGE_NOTIFICATIONS_ENABLED, false)
+                && !packageManager.hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE)
+                && !packageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK)
+                && !packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH);
     }
 }
