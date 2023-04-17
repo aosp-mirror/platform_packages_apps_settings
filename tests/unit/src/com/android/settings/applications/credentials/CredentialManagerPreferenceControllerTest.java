@@ -389,7 +389,7 @@ public class CredentialManagerPreferenceControllerTest {
         Intent intent = new Intent(PRIMARY_INTENT);
         intent.setData(Uri.parse("package:" + packageName));
         assertThat(controller.verifyReceivedIntent(intent)).isTrue();
-        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_POSITIVE, packageName);
+        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_POSITIVE, packageName, true);
         assertThat(mReceivedResultCode.get()).isEqualTo(Activity.RESULT_OK);
     }
 
@@ -404,7 +404,7 @@ public class CredentialManagerPreferenceControllerTest {
         Intent intent = new Intent(PRIMARY_INTENT);
         intent.setData(Uri.parse("package:" + packageName));
         assertThat(controller.verifyReceivedIntent(intent)).isTrue();
-        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_NEGATIVE, packageName);
+        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_NEGATIVE, packageName, true);
         assertThat(mReceivedResultCode.get()).isEqualTo(Activity.RESULT_CANCELED);
     }
 
@@ -430,7 +430,7 @@ public class CredentialManagerPreferenceControllerTest {
         Intent intent = new Intent(ALTERNATE_INTENT);
         intent.setData(Uri.parse("package:" + packageName));
         assertThat(controller.verifyReceivedIntent(intent)).isTrue();
-        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_POSITIVE, packageName);
+        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_POSITIVE, packageName, true);
         assertThat(mReceivedResultCode.get()).isEqualTo(Activity.RESULT_OK);
     }
 
@@ -445,7 +445,7 @@ public class CredentialManagerPreferenceControllerTest {
         Intent intent = new Intent(ALTERNATE_INTENT);
         intent.setData(Uri.parse("package:" + packageName));
         assertThat(controller.verifyReceivedIntent(intent)).isTrue();
-        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_NEGATIVE, packageName);
+        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_NEGATIVE, packageName, true);
         assertThat(mReceivedResultCode.get()).isEqualTo(Activity.RESULT_CANCELED);
     }
 
