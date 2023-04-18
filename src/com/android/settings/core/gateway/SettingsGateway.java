@@ -50,7 +50,6 @@ import com.android.settings.applications.appinfo.ExternalSourcesDetails;
 import com.android.settings.applications.appinfo.LongBackgroundTasksDetails;
 import com.android.settings.applications.appinfo.ManageExternalStorageDetails;
 import com.android.settings.applications.appinfo.MediaManagementAppsDetails;
-import com.android.settings.applications.appinfo.TurnScreenOnDetails;
 import com.android.settings.applications.appinfo.WriteSettingsDetails;
 import com.android.settings.applications.appops.BackgroundCheckSummary;
 import com.android.settings.applications.assist.ManageAssist;
@@ -63,6 +62,8 @@ import com.android.settings.applications.specialaccess.notificationaccess.Notifi
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetails;
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureSettings;
 import com.android.settings.applications.specialaccess.premiumsms.PremiumSmsAccess;
+import com.android.settings.applications.specialaccess.turnscreenon.TurnScreenOnDetails;
+import com.android.settings.applications.specialaccess.turnscreenon.TurnScreenOnSettings;
 import com.android.settings.applications.specialaccess.vrlistener.VrListenerSettings;
 import com.android.settings.applications.specialaccess.zenaccess.ZenAccessDetails;
 import com.android.settings.backup.PrivacySettings;
@@ -367,6 +368,7 @@ public class SettingsGateway {
             OneHandedSettings.class.getName(),
             MobileNetworkSettings.class.getName(),
             AppLocaleDetails.class.getName(),
+            TurnScreenOnSettings.class.getName(),
             TurnScreenOnDetails.class.getName(),
             NfcAndPaymentFragment.class.getName(),
             ColorAndMotionFragment.class.getName(),
