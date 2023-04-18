@@ -18,6 +18,7 @@ package com.android.settings.biometrics.face;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
@@ -49,32 +50,17 @@ public class FaceSettingsFooterPreferenceController extends BasePreferenceContro
     public FaceSettingsFooterPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mProvider = FeatureFactory.getFactory(context).getFaceFeatureProvider();
-        FaceManager faceManager = context.getSystemService(FaceManager.class);
-        faceManager.addAuthenticatorsRegisteredCallback(
-                new IFaceAuthenticatorsRegisteredCallback.Stub() {
-                    @Override
-                    public void onAllAuthenticatorsRegistered(
-                            @NonNull List<FaceSensorPropertiesInternal> sensors) {
-                        if (sensors.isEmpty()) {
-                            Log.e(TAG, "No sensors");
-                            return;
-                        }
-
-                        boolean isFaceStrong = sensors.get(0).sensorStrength
-                                == SensorProperties.STRENGTH_STRONG;
-                        if (mIsFaceStrong == isFaceStrong) {
-                            return;
-                        }
-                        mIsFaceStrong = isFaceStrong;
-                        updateState(mPreference);
-                    }
-                });
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(mPreferenceKey);
+        if (screen.getContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE)) {
+            addAuthenticatorsRegisteredCallback(screen.getContext());
+        } else {
+            Log.w(TAG, "Not support FEATURE_FACE");
+        }
     }
 
     @Override
@@ -104,5 +90,28 @@ public class FaceSettingsFooterPreferenceController extends BasePreferenceContro
         }
         preference.setTitle(AnnotationSpan.linkify(
                 mContext.getText(footerRes), linkInfo));
+    }
+
+    private void addAuthenticatorsRegisteredCallback(Context context) {
+        final FaceManager faceManager = context.getSystemService(FaceManager.class);
+        faceManager.addAuthenticatorsRegisteredCallback(
+                new IFaceAuthenticatorsRegisteredCallback.Stub() {
+                    @Override
+                    public void onAllAuthenticatorsRegistered(
+                            @NonNull List<FaceSensorPropertiesInternal> sensors) {
+                        if (sensors.isEmpty()) {
+                            Log.e(TAG, "No sensors");
+                            return;
+                        }
+
+                        boolean isFaceStrong = sensors.get(0).sensorStrength
+                                == SensorProperties.STRENGTH_STRONG;
+                        if (mIsFaceStrong == isFaceStrong) {
+                            return;
+                        }
+                        mIsFaceStrong = isFaceStrong;
+                        updateState(mPreference);
+                    }
+                });
     }
 }
