@@ -177,10 +177,8 @@
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"ມື້ທຳອິດຂອງອາທິດ"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"ການຕັ້ງຄ່າຕົວເລກ"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"ໃຊ້ຄ່າເລີ່ມຕົ້ນຂອງແອັບ"</string>
-    <!-- no translation found for celsius_temperature_unit (8896459071273084507) -->
-    <skip />
-    <!-- no translation found for fahrenheit_temperature_unit (1118677820614569801) -->
-    <skip />
+    <string name="celsius_temperature_unit" msgid="8896459071273084507">"ເຊວຊຽສ (°C)"</string>
+    <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"ຟາເຣນຮາຍ (°F)"</string>
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"ວັນອາທິດ"</string>
     <string name="monday_first_day_of_week" msgid="7244698610476506771">"ວັນຈັນ"</string>
     <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"ວັນອັງຄານ"</string>
@@ -188,6 +186,8 @@
     <string name="thursday_first_day_of_week" msgid="3035885630945594833">"ວັນພະຫັດ"</string>
     <string name="friday_first_day_of_week" msgid="7074795061812083541">"ວັນສຸກ"</string>
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"ວັນເສົາ"</string>
+    <string name="title_regional_pref_footer" msgid="7450438024324794380">"ຫາກແອັບບໍ່ຮອງຮັບການຕັ້ງຄ່າພາກພື້ນ, ແອັບກໍຈະໃຊ້ການຕັ້ງຄ່າພາສາເລີ່ມຕົ້ນ."</string>
+    <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"ສຶກສາເພີ່ມເຕີມກ່ຽວກັບການຕັ້ງຄ່າພາສາ."</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{ລຶບພາສາທີ່ເລືອກໄວ້ອອກບໍ?}other{ລຶບພາສາທີ່ເລືອກໄວ້ອອກບໍ?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"ຂໍ້ຄວາມຈະຖືກສະແດງໃນພາສາອື່ນ."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"ບໍ່ສາມາດລຶບທຸກພາສາອອກໄດ້"</string>
@@ -323,6 +323,8 @@
     <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"ຮູບແບບໃບໜ້າຂອງທ່ານຈະຖືກລຶບອອກຢ່າງຖາວອນ ແລະ ປອດໄພ.\n\nຫຼັງຈາກການລຶບແລ້ວ, ທ່ານຈະຕ້ອງໃຊ້ PIN, ຮູບແບບ ຫຼື ລະຫັດຜ່ານຂອງທ່ານເພື່ອປົດລັອກໂທລະສັບຂອງທ່ານ ຫຼື ສຳລັບການພິສູດຢືນຢັນໃນແອັບຕ່າງໆ."</string>
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"ຮູບແບບໃບໜ້າຂອງທ່ານຈະຖືກລຶບອອກຢ່າງຖາວອນ ແລະ ປອດໄພ.\n\nຫຼັງຈາກການລຶບແລ້ວ, ທ່ານຈະຕ້ອງໃຊ້ PIN, ຮູບແບບ ຫຼື ລະຫັດຜ່ານຂອງທ່ານເພື່ອປົດລັອກໂທລະສັບຂອງທ່ານ."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"ໃຊ້ການປົດລັອກດ້ວຍໜ້າເພື່ອປົດລັອກໂທລະສັບຂອງທ່ານ"</string>
+    <!-- no translation found for security_settings_fingerprint (6387775386189204201) -->
+    <skip />
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"ລາຍນີ້ວ​ມື"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"ໃນເວລາໃຊ້ການປົດລັອກດ້ວຍລາຍນິ້ວມື"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"ລາຍນິ້ວມື້ສຳລັບວຽກ"</string>
@@ -384,14 +386,11 @@
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"ກຳລັງໃຊ້ລາຍນິ້ວມື"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"ກຳລັງໃຊ້ໜ້າ ຫຼື ລາຍນິ້ວມື"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"ຕົກລົງ"</string>
-    <!-- no translation found for biometric_settings_add_face_in_split_mode_title (6041232223862753222) -->
-    <skip />
-    <!-- no translation found for biometric_settings_add_face_in_split_mode_message (1904738532939614456) -->
-    <skip />
+    <string name="biometric_settings_add_face_in_split_mode_title" msgid="6041232223862753222">"ບໍ່ສາມາດຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າໄດ້"</string>
+    <string name="biometric_settings_add_face_in_split_mode_message" msgid="1904738532939614456">"ອອກຈາກໂໝດແບ່ງໜ້າຈໍເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າ"</string>
     <string name="biometric_settings_add_fingerprint_in_split_mode_title" msgid="9194670722730454903">"ບໍ່ສາມາດຕັ້ງຄ່າລາຍນິ້ວມືໄດ້"</string>
     <string name="biometric_settings_add_fingerprint_in_split_mode_message" msgid="6960548382076629454">"ອອກຈາກໂໝດແບ່ງໜ້າຈໍເພື່ອຕັ້ງຄ່າການປົດລັອກດ້ວຍລາຍນິ້ວມື"</string>
-    <!-- no translation found for biometric_settings_add_biometrics_in_split_mode_ok (564103789097253645) -->
-    <skip />
+    <string name="biometric_settings_add_biometrics_in_split_mode_ok" msgid="564103789097253645">"ຕົກລົງ"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"ຂ້າມໜ້າຈໍລັອກບໍ?"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"ຢືນຢັນການຂ້າມ"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"​ກັບ​ຄືນ"</string>
@@ -637,7 +636,7 @@
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"ອຸປະກອນທີ່ສາມາດໃຊ້ໄດ້"</string>
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"ເຊື່ອມຕໍ່"</string>
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"ຕັດການເຊື່ອມຕໍ່"</string>
-    <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"ຈັບຄູ່ &amp; ເຊື່ອມຕໍ່"</string>
+    <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"ຈັບຄູ່ ແລະ ເຊື່ອມຕໍ່"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"ເມື່ອ Bluetooth ຖືກ​ເປີດ​ນຳ​ໃຊ້, ອຸ​ປະ​ກອນ​ຂອງ​ທ່ານ​ຈະ​ສາ​ມາດ​ສື່​ສານ​ກັບ​ອຸ​ປະ​ກອນ Bluetooth ອື່ນ​ທີ່​ຢູ່​ໃກ້​ຄຽງ​ໄດ້."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"ເມື່ອເປີດໃຊ້ Bluetooth ແລ້ວ, ອຸປະກອນຂອງທ່ານຈະສາມາດສື່ສານກັບອຸປະກອນ Bluetooth ອື່ນທີ່ຢູ່ໃກ້ຄຽງໄດ້.\n\nເພື່ອປັບປຸງປະສົບການການນຳໃຊ້ອຸປະກອນ, ແອັບ ແລະ ບໍລິການຕ່າງໆຈະຍັງສາມາດສະແກນຫາອຸປະກອນທີ່ຢູ່ໃກ້ຄຽງໄດ້ທຸກເວລາ, ເຖິງແມ່ນວ່າຈະປິດ Bluetooth ໄວ້ກໍຕາມ. ການຕັ້ງຄ່ານີ້ໃຊ້ເພື່ອເຮັດສິ່ງຕ່າງໆ ຕົວຢ່າງ: ໃຊ້ເພື່ອປັບປຸງຄຸນສົມບັດ ແລະ ບໍລິການທີ່ອ້າງອີງສະຖານທີ່ໄດ້. ທ່ານສາມາດປ່ຽນຕົວເລືອກນີ້ໄດ້ໃນການຕັ້ງຄ່າການສະແກນ Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"ປ່ຽນ"</string>
@@ -886,22 +885,34 @@
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"ຊ່ວຍອຸປະກອນອື່ນຊອກຫາຮັອດສະປອດນີ້. ຫຼຸດຄວາມໄວການເຊື່ອມຕໍ່ຮັອດສະປອດ."</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"ຊ່ວຍອຸປະກອນອື່ນຊອກຫາຮັອດສະປອດນີ້. ເພີ່ມການນຳໃຊ້ແບັດເຕີຣີ."</string>
     <string name="wifi_hotspot_speed_title" msgid="8629448084180512685">"ຄວາມໄວ ແລະ ຄວາມເຂົ້າກັນໄດ້"</string>
-    <string name="wifi_hotspot_speed_summary_2g" msgid="2280013579858833466">"2.4 GHz / ທຸກອຸປະກອນສາມາດເຊື່ອມຕໍ່ໄດ້"</string>
-    <string name="wifi_hotspot_speed_summary_5g" msgid="8006841294118040080">"5 GHz / ອຸປະກອນສ່ວນໃຫຍ່ສາມາດເຊື່ອມຕໍ່ໄດ້"</string>
-    <string name="wifi_hotspot_speed_summary_6g" msgid="5398769134180715191">"6 GHz / ອຸປະກອນສ່ວນໜ້ອຍສາມາດເຊື່ອມຕໍ່ໄດ້"</string>
-    <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="6471272988396018113">"2.4 ແລະ 5 GHz / ທຸກອຸປະກອນສາມາດເຊື່ອມຕໍ່ໄດ້"</string>
+    <!-- no translation found for wifi_hotspot_speed_summary_2g (5063438001736234858) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_summary_5g (6221158936983135040) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_summary_6g (8863992901226595544) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_5g (5931052946168943750) -->
+    <skip />
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"ເລືອກຄວາມຖີ່ສຳລັບຮັອດສະປອດຂອງທ່ານ. ຄວາມຖີ່ມີຜົນຕໍ່ຄວາມໄວໃນການເຊື່ອມຕໍ່ ແລະ ປະເພດອຸປະກອນທີ່ສາມາດຊອກຫາຮັອດສະປອດຂອງທ່ານໄດ້."</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"ຄວາມຖີ່ທີ່ຕ້ອງການ"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2.4 GHz"</string>
-    <string name="wifi_hotspot_speed_2g_summary" msgid="2737911775799813597">"ຄວາມໄວຕ່ຳ. ທຸກອຸປະກອນສາມາດເຊື່ອມຕໍ່ໄດ້."</string>
+    <!-- no translation found for wifi_hotspot_speed_2g_summary (6930273933810520155) -->
+    <skip />
     <string name="wifi_hotspot_speed_5g" msgid="4058116867148848395">"5 GHz"</string>
-    <string name="wifi_hotspot_speed_5g_summary" msgid="8979160165280825325">"ຄວາມໄວສູງ. ອຸປະກອນສ່ວນໃຫຍ່ສາມາດເຊື່ອມຕໍ່ໄດ້."</string>
+    <!-- no translation found for wifi_hotspot_speed_5g_summary (562987935924535694) -->
+    <skip />
     <string name="wifi_hotspot_speed_2g_5g" msgid="9192756255938408285">"2.4 ແລະ 5 GHz"</string>
-    <string name="wifi_hotspot_speed_2g_5g_summary" msgid="2901777498770191018">"ຄວາມໄວສູງ. ທຸກອຸປະກອນສາມາດເຊື່ອມຕໍ່ກັບຮັອດສະປອດຄື້ນຄູ່ນີ້ໄດ້."</string>
+    <!-- no translation found for wifi_hotspot_speed_2g_5g_summary (8104575293617700173) -->
+    <skip />
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
-    <string name="wifi_hotspot_speed_6g_summary" msgid="1170553321510689693">"ຄວາມໄວສູງສຸດ. ອຸປະກອນສ່ວນໜ້ອຍສາມາດເຊື່ອມຕໍ່ໄດ້."</string>
+    <!-- no translation found for wifi_hotspot_speed_6g_summary (8675262219242174548) -->
+    <skip />
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"ບໍ່ມີໃຫ້ນຳໃຊ້ໃນປະເທດ ຫຼື ພາກພື້ນຂອງທ່ານ"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"ຫາກບໍ່ມີຄວາມຖີ່ທີ່ທ່ານຕ້ອງການ, ຮັອດສະປອດຂອງທ່ານອາດໃຊ້ຄວາມຖີ່ອື່ນ. ການຕັ້ງຄ່າຄວາມປອດໄພຮັອດສະປອດອາດປ່ຽນແປງຫາກທ່ານປ່ຽນຄວາມຖີ່."</string>
+    <!-- no translation found for wifi_hotspot_security_summary_unavailable (117582979310345853) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_security_footer (4608329688744949796) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"ກຳລັງເປີດໃຊ້ຮັອດສະປອດ..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"ກຳລັງປິດຮັອດສະປອດ..."</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"ບໍ່ສາມາດໃຊ້ການປ່ອຍສັນຍານໄດ້"</string>
@@ -1316,7 +1327,7 @@
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"ການປ່ອຍສັນຍານດ້ວຍ USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"ການປ່ອຍສັນຍານດ້ວຍ Bluetooth"</string>
-    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"ການປ່ອຍສັນຍານ Ethernet"</string>
+    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"ການປ່ອຍສັນຍານອີເທີເນັດ"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"ໃຊ້ຮັອດສະປອດ ແລະ ການປ່ອຍສັນຍານເພື່ອສະໜອງອິນເຕີເນັດໃຫ້ອຸປະກອນອື່ນຜ່ານທາງການເຊື່ອມຕໍ່ອິນເຕີເນັດມືຖືຂອງທ່ານ. ແອັບຕ່າງໆສາມາດສ້າງຮັອດສະປອດ ແລະ ແບ່ງປັນເນື້ອຫາກັບອຸປະກອນທີ່ຢູ່ໃກ້ຄຽງໄດ້."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"ໃຊ້ຮັອດສະປອດ ແລະ ການປ່ອຍສັນຍານເພື່ອສະໜອງອິນເຕີເນັດໃຫ້ກັບອຸປະກອນອື່ນຜ່ານການເຊື່ອມຕໍ່ Wi‑Fi ຫຼື ອິນເຕີເນັດມືຖືຂອງທ່ານ. ແອັບສາມາດສ້າງຮັອດສະປອດເພື່ອແບ່ງປັນເນື້ອຫາກັບອຸປະກອນທີ່ຢູ່ໃກ້ຄຽງໄດ້ນຳ."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"ຊ່ວຍເຫຼືອ"</string>
@@ -1810,7 +1821,6 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"ຢືນຢັນດຳເນີນການຕໍ່"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"ຍົກເລີກ"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"ການຕັ້ງຄ່າການຂະຫຍາຍ"</string>
-    <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"ຂະຫຍາຍດ້ວຍການແຕະສາມເທື່ອ"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"ຂະຫຍາຍດ້ວຍທາງລັດ"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"ຂະຫຍາຍດ້ວຍທາງລັດ ແລະ ການແຕະສາມເທື່ອ"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"ກ່ຽວກັບ <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2288,6 +2298,10 @@
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"ການໃຊ້ລະບົບສຳລັບ 24 ຊມ ທີ່ຜ່ານມາ"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"ການໃຊ້ລະບົບສຳລັບ <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"ການໃຊ້ແອັບສຳລັບ <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <!-- no translation found for battery_system_usage_since_last_full_charge_to (4196795733829841971) -->
+    <skip />
+    <!-- no translation found for battery_app_usage_since_last_full_charge_to (4339201995118102114) -->
+    <skip />
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"ທັງໝົດ: ໜ້ອຍກວ່າໜຶ່ງນາທີ"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"ພື້ນຫຼັງ: ໜ້ອຍກວ່າໜຶ່ງນາທີ"</string>
     <string name="battery_usage_screen_time_less_than_one_minute" msgid="2911989465891679033">"ເວລາໜ້າຈໍ: ໜ້ອຍກວ່າ 1 ນາທີ"</string>
@@ -2690,12 +2704,14 @@
     <string name="enable_guest_calling" msgid="8300355036005240911">"ອະນຸຍາດໃຫ້ແຂກໃຊ້ໂທລະສັບໄດ້"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"ປະ​ຫວັດ​ການ​ໂທ​ຈະ​ຖືກ​ແບ່ງ​ປັນ​ໃຫ້​ກັບ​ຜູ້ໃຊ້ແຂກ"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"ເປີດ​ໂທ​ລະ​ສັບ ແລະ SMS"</string>
-    <string name="user_grant_admin" msgid="6511342422361803820">"ໃຫ້ສິດທິຜູ້ເບິ່ງແຍງລະບົບແກ່ຜູ້ໃຊ້ນີ້"</string>
+    <!-- no translation found for user_grant_admin (5942118263054572074) -->
+    <skip />
     <string name="user_remove_user" msgid="8468203789739693845">"ລຶບຜູ້ໃຊ້"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"ເປີດ​ການໂທ​ ​ແລະ SMS ບໍ?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"ປະ​ຫວັດ​ການ​ໂທ​ ແລະ ​ການ​ສົ່ງ SMS ຈະ​ຖືກ​ແບ່ງ​ປັນ​ໃຫ້​ກັບ​ຜູ້​ໃຊ້​ນີ້."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"ລຶບສິດທິຜູ້ເບິ່ງແຍງລະບົບອອກບໍ?"</string>
-    <string name="user_revoke_admin_confirm_message" msgid="2719667217562982318">"ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບສິດທິຜູ້ເບິ່ງແຍງລະບົບຂອງຜູ້ໃຊ້ນີ້ອອກ?"</string>
+    <!-- no translation found for user_revoke_admin_confirm_message (9207187319308572958) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"ຂໍ້ມູນສຸກເສີນ"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"ຂໍ້ມູນ ແລະ ລາຍຊື່ຜູ້ຕິດຕໍ່ສຳລັບ <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"ເປີດ <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3706,7 +3722,7 @@
     <string name="condition_expand_show" msgid="1501084007540953213">"ສະແດງ"</string>
     <string name="condition_expand_hide" msgid="8347564076209121058">"ເຊື່ອງ"</string>
     <string name="condition_hotspot_title" msgid="7903918338790641071">"ເປີດໃຊ້ຮັອດສະເປີດຢູ່"</string>
-    <string name="condition_airplane_title" msgid="5847967403687381705">"ເປີດໂໝດເຄື່ອງບິນ"</string>
+    <string name="condition_airplane_title" msgid="5847967403687381705">"ເປີດໂໝດຢູ່ໃນຍົນ"</string>
     <string name="condition_airplane_summary" msgid="1964500689287879888">"ເຄືອຂ່າຍບໍ່ສາມາດໃຊ້ໄດ້"</string>
     <string name="condition_zen_title" msgid="7674761111934567490">"ເປີດໂໝດຫ້າມລົບກວນແລ້ວ"</string>
     <string name="condition_zen_summary_phone_muted" msgid="6516753722927681820">"ປິດສຽງໂທລະສັບແລ້ວ"</string>
@@ -4060,11 +4076,11 @@
     <string name="credman_keywords" msgid="8305600680836806170">"ຂໍ້ມູນ, ກະແຈຜ່ານ, ລະຫັດຜ່ານ"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;ໃຫ້ກວດສອບວ່າທ່ານເຊື່ອແອັບນີ້&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; ຈະໃຊ້ສິ່ງທີ່ຢູ່ໃນໜ້າຈໍຂອງທ່ານເພື່ອກວດເບິ່ງວ່າຈະຕື່ມຂໍ້ມູນຫຍັງອັດຕະໂນມັດ."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"ປິດ %1$s ບໍ?"</string>
-    <!-- no translation found for credman_confirmation_message (158362573056996762) -->
+    <string name="credman_confirmation_message" msgid="158362573056996762">"ຂໍ້ມູນທີ່ບັນທຶກໄວ້ ເຊັ່ນ: ກະແຈຜ່ານ ແລະ ລະຫັດຜ່ານ ອາດບໍ່ພ້ອມໃຫ້ນຳໃຊ້ເມື່ອທ່ານເຂົ້າສູ່ລະບົບ"</string>
+    <!-- no translation found for credman_enable_confirmation_message_title (1037501792652277829) -->
     <skip />
-    <string name="credman_enable_confirmation_message_title" msgid="3722566298090698004">"ເປີດໃຊ້ %1$s ບໍ?"</string>
-    <string name="credman_enable_confirmation_message" msgid="4466773747277583461">"ຂໍ້ມູນທີ່ບັນທຶກໄວ້ ເຊັ່ນ: ທີ່ຢູ່ ຫຼື ວິທີການຈ່າຍເງິນ ຈະຖືກແບ່ງປັນກັບຜູ້ໃຫ້ບໍລິການນີ້."</string>
-    <string name="credman_enable_confirmation_message_positive_button" msgid="3479082692924433102">"ເປີດໃຊ້"</string>
+    <!-- no translation found for credman_enable_confirmation_message (8407841892310870169) -->
+    <skip />
     <string name="credman_error_message_title" msgid="4741457523969373713">"ລະຫັດຜ່ານ, ກະແຈຜ່ານ ແລະ ບໍລິການຂໍ້ມູນຈຳກັດ"</string>
     <string name="credman_error_message" msgid="6793314648458925172">"ທ່ານສາມາດມີໄດ້ເຖິງ 5 ລະຫັດຜ່ານ, ກະແຈຜ່ານ ແລະ ການບໍລິການຂໍ້ມູນທີ່ມີການເຄື່ອນໄຫວໃນເວລາດຽວກັນ. ປິດບໍລິການໃດໜຶ່ງເພື່ອເພີ່ມອີກ."</string>
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"ປິດ"</string>
@@ -4411,9 +4427,10 @@
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"ສະແດງຕົວສະແກນລະຫັດ QR"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"ອະນຸຍາດການເຂົ້າເຖິງຕົວສະແກນລະຫັດ QR ຈາກໜ້າຈໍລັອກ"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"ສະແດງການຄວບຄຸມອຸປະກອນ"</string>
-    <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"ສະແດງການຄວບຄຸມສຳລັບອຸປະກອນພາຍນອກຈາກໜ້າຈໍລັອກ"</string>
-    <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"ຄວບຄຸມຈາກອຸປະກອນທີ່ລັອກໄວ້"</string>
-    <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"ຄວບຄຸມອຸປະກອນພາຍນອກໂດຍບໍ່ຕ້ອງປົດລັອກໂທລະສັບ ຫຼື ແທັບເລັດຂອງທ່ານຫາກໄດ້ຮັບອະນຸຍາດໂດຍແອັບການຄວບຄຸມອຸປະກອນ"</string>
+    <!-- no translation found for lockscreen_privacy_controls_summary (7522918441738915364) -->
+    <skip />
+    <!-- no translation found for lockscreen_trivial_controls_setting_toggle (2174300719855112358) -->
+    <skip />
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"ເພື່ອໃຊ້, ທຳອິດໃຫ້ເປີດໃຊ້ \"ສະແດງການຄວບຄຸມອຸປະກອນ\" ກ່ອນ"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"ສະແດງໂມງສອງແຖວເມື່ອສາມາດໃຊ້ໄດ້"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"ໂມງສອງແຖວ"</string>
@@ -4546,8 +4563,7 @@
     <string name="uwb_settings_title" msgid="8578498712312002231">"Ultra-Wideband (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"ຊ່ວຍລະບຸຕຳແໜ່ງທີ່ສຳພັນກັນຂອງອຸປະກອນທີ່ຢູ່ໃກ້ຄຽງທີ່ມີ UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"ປິດໂໝດຢູ່ໃນຍົນເພື່ອໃຊ້ UWB"</string>
-    <!-- no translation found for uwb_settings_summary_no_uwb_regulatory (3465456428217979428) -->
-    <skip />
+    <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB ບໍ່ພ້ອມໃຫ້ນຳໃຊ້ໃນສະຖານທີ່ປັດຈຸບັນ"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"ການເຂົ້າເຖິງກ້ອງຖ່າຍຮູບ"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"ການເຂົ້າເຖິງໄມໂຄຣໂຟນ"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"ສຳລັບແອັບ ແລະ ບໍລິການ"</string>
@@ -4636,6 +4652,8 @@
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"ບໍ່ມີຂີດຈໍາກັດ"</string>
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"ປິດການຈຳກັດການປະມວນຜົນຂໍ້ມູນຍ່ອຍ"</string>
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"ປິດການຈຳກັດການໃຊ້ຊັບພະຍາກອນລະບົບໃນປະມວນຜົນຍ່ອຍຂອງແອັບ"</string>
+    <string name="enable_notes_role_title" msgid="7662702013496114763">"ບັງຄັບເປີດໃຊ້ບົດບາດບັນທຶກ"</string>
+    <string name="enable_notes_role_summary" msgid="136916915155048249">"ເປີດໃຊ້ການເຊື່ອມໂຍງລະບົບການຈົດບັນທຶກຜ່ານບົດບາດບັນທຶກ. ຫາກບົດບາດບັນທຶກຖືກເປີດໃຊ້ໄວ້ຢູ່ແລ້ວ, ກໍບໍ່ຕ້ອງດຳເນີນການໃດໆ."</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"ອອກອາກາດ"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"ອອກອາກາດ <xliff:g id="CURRENTAPP">%1$s</xliff:g>"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"ຟັງການອອກອາກາດທີ່ກຳລັງຫຼິ້ນໃກ້ທ່ານ"</string>
@@ -4694,4 +4712,5 @@
     <string name="contrast_medium" msgid="384414510709285811">"ປານກາງ"</string>
     <string name="contrast_high" msgid="3988567609694797696">"ສູງ"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"ແອັບນີ້ສາມາດເປີດໄດ້ໃນ 1 ໜ້າຈໍເທົ່ານັ້ນ"</string>
+    <string name="note_task_button_label" msgid="1741456863714912927">"ການຈົດບັນທຶກ"</string>
 </resources>
