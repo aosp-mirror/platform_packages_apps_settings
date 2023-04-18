@@ -177,10 +177,8 @@
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"一周的第一天"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"数字偏好设置"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"使用应用默认设置"</string>
-    <!-- no translation found for celsius_temperature_unit (8896459071273084507) -->
-    <skip />
-    <!-- no translation found for fahrenheit_temperature_unit (1118677820614569801) -->
-    <skip />
+    <string name="celsius_temperature_unit" msgid="8896459071273084507">"摄氏度 (°C)"</string>
+    <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"华氏度 (°F)"</string>
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"星期日"</string>
     <string name="monday_first_day_of_week" msgid="7244698610476506771">"星期一"</string>
     <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"星期二"</string>
@@ -188,6 +186,8 @@
     <string name="thursday_first_day_of_week" msgid="3035885630945594833">"星期四"</string>
     <string name="friday_first_day_of_week" msgid="7074795061812083541">"星期五"</string>
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"星期六"</string>
+    <string name="title_regional_pref_footer" msgid="7450438024324794380">"不支持区域偏好设置的应用将使用默认语言区域设置。"</string>
+    <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"详细了解语言偏好设置。"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{要移除所选语言吗？}other{要移除所选语言吗？}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"系统将以其他语言显示文字。"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"无法移除所有语言"</string>
@@ -323,6 +323,8 @@
     <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"系统会安全地永久删除您的脸部模型。\n\n脸部模型删除后，如需解锁手机或在应用内进行身份验证，您将需要使用 PIN 码、解锁图案或密码。"</string>
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"系统会安全地永久删除您的脸部模型。\n\n脸部模型删除后，如需解锁手机，您将需要使用 PIN 码、解锁图案或密码。"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"使用人脸解锁功能解锁手机"</string>
+    <!-- no translation found for security_settings_fingerprint (6387775386189204201) -->
+    <skip />
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"指纹"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"使用指纹解锁功能时"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"工作资料指纹"</string>
@@ -384,14 +386,11 @@
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"使用指纹"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"刷脸或使用指纹"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"确定"</string>
-    <!-- no translation found for biometric_settings_add_face_in_split_mode_title (6041232223862753222) -->
-    <skip />
-    <!-- no translation found for biometric_settings_add_face_in_split_mode_message (1904738532939614456) -->
-    <skip />
+    <string name="biometric_settings_add_face_in_split_mode_title" msgid="6041232223862753222">"无法设置“人脸解锁”功能"</string>
+    <string name="biometric_settings_add_face_in_split_mode_message" msgid="1904738532939614456">"退出分屏模式才能设置“人脸解锁”功能"</string>
     <string name="biometric_settings_add_fingerprint_in_split_mode_title" msgid="9194670722730454903">"无法设置指纹"</string>
     <string name="biometric_settings_add_fingerprint_in_split_mode_message" msgid="6960548382076629454">"退出分屏模式才能设置“指纹解锁”功能"</string>
-    <!-- no translation found for biometric_settings_add_biometrics_in_split_mode_ok (564103789097253645) -->
-    <skip />
+    <string name="biometric_settings_add_biometrics_in_split_mode_ok" msgid="564103789097253645">"确定"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"要跳过屏幕锁定设置步骤吗？"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"仍然跳过"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"返回"</string>
@@ -886,22 +885,32 @@
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"这有助于其他设备发现此热点，但会降低热点连接速度。"</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"这有助于其他设备发现此热点，但会增加耗电量。"</string>
     <string name="wifi_hotspot_speed_title" msgid="8629448084180512685">"速度和兼容性"</string>
-    <string name="wifi_hotspot_speed_summary_2g" msgid="2280013579858833466">"2.4 GHz / 任何设备都能连接"</string>
-    <string name="wifi_hotspot_speed_summary_5g" msgid="8006841294118040080">"5 GHz / 大多数设备能连接"</string>
-    <string name="wifi_hotspot_speed_summary_6g" msgid="5398769134180715191">"6 GHz / 少数设备能连接"</string>
-    <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="6471272988396018113">"2.4 GHz 和 5 GHz / 任何设备都能连接"</string>
+    <!-- no translation found for wifi_hotspot_speed_summary_2g (5063438001736234858) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_summary_5g (6221158936983135040) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_summary_6g (8863992901226595544) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_5g (5931052946168943750) -->
+    <skip />
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"为您的热点选择频率。频率会影响连接速度，以及能找到您的热点的设备类型。"</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"首选频率"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2.4 GHz"</string>
-    <string name="wifi_hotspot_speed_2g_summary" msgid="2737911775799813597">"速度较慢。任何设备都能连接。"</string>
+    <!-- no translation found for wifi_hotspot_speed_2g_summary (6930273933810520155) -->
+    <skip />
     <string name="wifi_hotspot_speed_5g" msgid="4058116867148848395">"5 GHz"</string>
-    <string name="wifi_hotspot_speed_5g_summary" msgid="8979160165280825325">"速度快。大多数设备能连接。"</string>
+    <!-- no translation found for wifi_hotspot_speed_5g_summary (562987935924535694) -->
+    <skip />
     <string name="wifi_hotspot_speed_2g_5g" msgid="9192756255938408285">"2.4 GHz 和 5 GHz"</string>
-    <string name="wifi_hotspot_speed_2g_5g_summary" msgid="2901777498770191018">"速度快。任何设备都能连接到这个双频热点。"</string>
+    <!-- no translation found for wifi_hotspot_speed_2g_5g_summary (8104575293617700173) -->
+    <skip />
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
-    <string name="wifi_hotspot_speed_6g_summary" msgid="1170553321510689693">"速度最快。只有少数设备能连接。"</string>
+    <!-- no translation found for wifi_hotspot_speed_6g_summary (8675262219242174548) -->
+    <skip />
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"您所在的国家或地区无法使用此功能"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"如果首选频率不可用，热点可能会使用其他频率。如果您更改频率，热点的安全设置可能也会改变。"</string>
+    <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"不适用于 6 GHz"</string>
+    <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"如果您更改热点频率，安全设置可能也会改变"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"正在打开热点..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"正在关闭热点..."</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"网络共享不可用"</string>
@@ -2288,6 +2297,10 @@
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"过去 24 小时内的系统耗电量"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"<xliff:g id="SLOT">%s</xliff:g>的系统耗电量"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"<xliff:g id="SLOT">%s</xliff:g>的应用耗电量"</string>
+    <!-- no translation found for battery_system_usage_since_last_full_charge_to (4196795733829841971) -->
+    <skip />
+    <!-- no translation found for battery_app_usage_since_last_full_charge_to (4339201995118102114) -->
+    <skip />
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"总计：不到 1 分钟"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"后台：不到 1 分钟"</string>
     <string name="battery_usage_screen_time_less_than_one_minute" msgid="2911989465891679033">"设备使用时间：不到 1 分钟"</string>
@@ -2690,12 +2703,12 @@
     <string name="enable_guest_calling" msgid="8300355036005240911">"允许访客使用电话"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"将与访客用户共享通话记录"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"开启通话和短信功能"</string>
-    <string name="user_grant_admin" msgid="6511342422361803820">"向此用户授予管理员权限"</string>
+    <string name="user_grant_admin" msgid="5942118263054572074">"将此用户设为管理员"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"删除用户"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"要开启通话和短信功能吗？"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"将与此用户共享通话记录和短信记录。"</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"要撤消管理员权限吗？"</string>
-    <string name="user_revoke_admin_confirm_message" msgid="2719667217562982318">"确定要撤消此用户的管理员权限吗？"</string>
+    <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"如果您撤消该用户的管理员权限，您或其他管理员之后可以重新授予其管理员权限。"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"急救信息"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>的相关信息和联系人信息"</string>
     <string name="open_app_button" msgid="5025229765547191710">"打开“<xliff:g id="APP_NAME">%1$s</xliff:g>”"</string>
@@ -2706,7 +2719,7 @@
     <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"安装可用应用"</string>
     <string name="nfc_payment_settings_title" msgid="2043139180030485500">"感应式付款"</string>
     <string name="nfc_default_payment_settings_title" msgid="2150504446774382261">"默认付款应用"</string>
-    <string name="nfc_default_payment_footer" msgid="978535088340021360">"如需使用付款应用进行付款，请将设备背面靠近付款终端"</string>
+    <string name="nfc_default_payment_footer" msgid="978535088340021360">"如需使用付款应用进行付款，请将设备背面靠近收款终端"</string>
     <string name="nfc_more_details" msgid="1700713533074275233">"了解详情"</string>
     <string name="nfc_default_payment_workapp_confirmation_title" msgid="746921251872504687">"将工作应用设为默认付款应用？"</string>
     <string name="nfc_default_payment_workapp_confirmation_message_title" msgid="1533022606333010329">"若要使用工作应用付款，请执行以下操作："</string>
@@ -3511,9 +3524,9 @@
     <string name="permissions_usage_title" msgid="2942741460679049132">"隐私信息中心"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"显示最近使用过权限的应用"</string>
     <string name="unused_apps" msgid="4566272194756830656">"未使用的应用"</string>
-    <string name="unused_apps_summary" msgid="4236371818881973021">"{count,plural, =1{# 个未使用的应用}other{# 个未使用的应用}}"</string>
-    <string name="unused_apps_category" msgid="8954930958175500851">"关于未使用应用的设置"</string>
-    <string name="unused_apps_switch" msgid="7595419855882245772">"暂停未使用应用的活动"</string>
+    <string name="unused_apps_summary" msgid="4236371818881973021">"{count,plural, =1{# 个闲置应用}other{# 个闲置应用}}"</string>
+    <string name="unused_apps_category" msgid="8954930958175500851">"针对闲置应用的设置"</string>
+    <string name="unused_apps_switch" msgid="7595419855882245772">"暂停闲置应用的活动"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"移除权限、删除临时文件并停止发送通知"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"所有应用"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"已安装的应用"</string>
@@ -3584,7 +3597,7 @@
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB 偏好设置"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB 受控于："</string>
-    <string name="usb_control_host" msgid="7404215921555021871">"连接的设备"</string>
+    <string name="usb_control_host" msgid="7404215921555021871">"已连接的设备"</string>
     <string name="usb_control_device" msgid="527916783743021577">"此设备"</string>
     <string name="usb_switching" msgid="3654709188596609354">"正在切换…"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"无法切换"</string>
@@ -4061,9 +4074,10 @@
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;请确认这是您信任的应用&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt;会根据您的屏幕内容判断可自动填充哪些内容。"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"要关闭%1$s吗？"</string>
     <string name="credman_confirmation_message" msgid="3499478570809427026">"当您登录时，系统不会填充地址或付款方式等已保存的信息。若要让系统填充已保存的信息，请设置并启用密码、通行密钥和数据服务。"</string>
-    <string name="credman_enable_confirmation_message_title" msgid="3722566298090698004">"要开启%1$s吗？"</string>
-    <string name="credman_enable_confirmation_message" msgid="4466773747277583461">"系统会将地址或付款方式等已保存的信息分享给此提供商。"</string>
-    <string name="credman_enable_confirmation_message_positive_button" msgid="3479082692924433102">"开启"</string>
+    <!-- no translation found for credman_enable_confirmation_message_title (1037501792652277829) -->
+    <skip />
+    <!-- no translation found for credman_enable_confirmation_message (8407841892310870169) -->
+    <skip />
     <string name="credman_error_message_title" msgid="4741457523969373713">"密码、通行密钥和数据服务限制"</string>
     <string name="credman_error_message" msgid="6793314648458925172">"同时最多可以启用 5 个密码、通行密钥和数据服务。若要添加其他服务，请先关闭其中一项服务。"</string>
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"关闭"</string>
@@ -4306,7 +4320,7 @@
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"如要在日后使用移动数据、通话和短信功能，请转到“网络设置”部分"</string>
     <string name="sim_card_label" msgid="6263064316075963775">"SIM 卡"</string>
     <string name="erase_sim_dialog_title" msgid="4742077437653028326">"要清空此 eSIM 卡吗？"</string>
-    <string name="erase_sim_dialog_text" msgid="753031064269699885">"清除此 SIM 卡将从此设备中移除<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>服务。\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>的服务不会因此被取消。"</string>
+    <string name="erase_sim_dialog_text" msgid="753031064269699885">"清空此 SIM 卡将从此设备中移除<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>服务。\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>的服务不会因此被取消。"</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"清除"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"正在清空 SIM 卡…"</string>
     <string name="erase_sim_fail_title" msgid="2024446702985862427">"无法清空 SIM 卡"</string>
@@ -4410,9 +4424,10 @@
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"显示二维码扫描器"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"允许在锁定屏幕的情况下使用二维码扫描器"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"显示设备控制器"</string>
-    <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"在锁屏状态下显示外部设备控件"</string>
-    <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"通过已锁定的设备控制"</string>
-    <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"只要设备控制器应用允许，无需解锁手机或平板电脑，也可控制外部设备"</string>
+    <!-- no translation found for lockscreen_privacy_controls_summary (7522918441738915364) -->
+    <skip />
+    <!-- no translation found for lockscreen_trivial_controls_setting_toggle (2174300719855112358) -->
+    <skip />
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"需要先开启“显示设备控制器”才能使用"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"显示双行时钟（若可用）"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"双行时钟"</string>
@@ -4477,7 +4492,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"通话"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"短信"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"移动数据网络"</string>
-    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"为了提升设备的使用体验，即使 WLAN 已关闭，应用和服务仍可以随时扫描 WLAN 网络。此功能有多种用途，例如可用于改进基于位置信息的功能和服务。您可以在 WLAN 扫描设置中更改此设置。"</string>
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"为了提升设备的使用体验，即使 WLAN 已关闭，应用和服务仍可以随时扫描 WLAN 网络。例如，此功能可用于改进需要使用位置信息的功能和服务。您可以在 WLAN 扫描设置中更改此功能。"</string>
     <string name="wifi_scan_change" msgid="8438320311511852918">"更改"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"已连接"</string>
@@ -4545,8 +4560,7 @@
     <string name="uwb_settings_title" msgid="8578498712312002231">"超宽带 (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"有助于确定附近支持超宽带 (UWB) 的设备的相对位置"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"会关闭飞行模式，以使用超宽带 (UWB)"</string>
-    <!-- no translation found for uwb_settings_summary_no_uwb_regulatory (3465456428217979428) -->
-    <skip />
+    <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB 在当前位置不可用"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"摄像头使用权限"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"麦克风使用权限"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"会影响应用和服务"</string>
@@ -4635,6 +4649,8 @@
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"无限制"</string>
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"停止限制子进程"</string>
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"停止限制应用子进程的系统资源用量"</string>
+    <string name="enable_notes_role_title" msgid="7662702013496114763">"强制启用“记事”角色"</string>
+    <string name="enable_notes_role_summary" msgid="136916915155048249">"通过“记事”角色启用记事系统集成。如果“记事”角色已启用，则无需执行任何操作。"</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"广播"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"广播“<xliff:g id="CURRENTAPP">%1$s</xliff:g>”的内容"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"收听在您附近播放的广播"</string>
@@ -4693,4 +4709,5 @@
     <string name="contrast_medium" msgid="384414510709285811">"中"</string>
     <string name="contrast_high" msgid="3988567609694797696">"高"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"此应用只能在 1 个窗口中打开"</string>
+    <string name="note_task_button_label" msgid="1741456863714912927">"记录"</string>
 </resources>
