@@ -72,7 +72,10 @@ public class WifiTetherViewModelTest {
     }
 
     @Test
-    public void onCleared_setAutoRefreshFalse() {
+    public void onCleared_removeObservers() {
+        mViewModel.getSecuritySummary();
+        mViewModel.getSpeedSummary();
+
         mViewModel.onCleared();
 
         verify(mSecurityType).removeObserver(mViewModel.mSecurityTypeObserver);
@@ -115,5 +118,12 @@ public class WifiTetherViewModelTest {
 
         assertThat(mViewModel.mSpeedSummary).isNotNull();
         verify(mSpeedType).observeForever(mViewModel.mSpeedTypeObserver);
+    }
+
+    @Test
+    public void isSpeedFeatureAvailable_verifyRepositoryIsCalled() {
+        mViewModel.isSpeedFeatureAvailable();
+
+        verify(mWifiHotspotRepository).isSpeedFeatureAvailable();
     }
 }
