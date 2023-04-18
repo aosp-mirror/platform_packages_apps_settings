@@ -30,7 +30,6 @@ import com.android.settings.applications.AppStateMediaManagementAppsBridge;
 import com.android.settings.applications.AppStateNotificationBridge;
 import com.android.settings.applications.AppStateOverlayBridge;
 import com.android.settings.applications.AppStatePowerBridge;
-import com.android.settings.applications.AppStateTurnScreenOnBridge;
 import com.android.settings.applications.AppStateUsageBridge;
 import com.android.settings.applications.AppStateWriteSettingsBridge;
 import com.android.settings.nfc.AppStateNfcTagAppsBridge;
@@ -68,7 +67,6 @@ public class AppFilterRegistry {
                 FILTER_LONG_BACKGROUND_TASKS,
                 FILTER_APPS_CLONE,
                 FILTER_APPS_NFC_TAG,
-                FILTER_APPS_TURN_SCREEN_ON,
             })
     @interface FilterType {}
 
@@ -100,9 +98,8 @@ public class AppFilterRegistry {
     public static final int FILTER_LONG_BACKGROUND_TASKS = 24;
     public static final int FILTER_APPS_CLONE = 25;
     public static final int FILTER_APPS_NFC_TAG = 26;
-    public static final int FILTER_APPS_TURN_SCREEN_ON = 27;
-    private static final int NUM_FILTER_ENTRIES = 28;
-    // Next id: 28. If you add an entry here, please change NUM_FILTER_ENTRIES.
+    private static final int NUM_FILTER_ENTRIES = 27;
+    // Next id: 27. If you add an entry here, please change NUM_FILTER_ENTRIES.
 
     private static AppFilterRegistry sRegistry;
 
@@ -274,12 +271,6 @@ public class AppFilterRegistry {
                         AppStateNfcTagAppsBridge.FILTER_APPS_NFC_TAG,
                         FILTER_APPS_NFC_TAG,
                         R.string.change_nfc_tag_apps_title);
-
-        // Apps that are allowed to turn the screen on.
-        mFilters[FILTER_APPS_TURN_SCREEN_ON] = new AppFilterItem(
-                AppStateTurnScreenOnBridge.FILTER_TURN_SCREEN_ON_APPS,
-                FILTER_APPS_TURN_SCREEN_ON,
-                R.string.turn_screen_on_title);
     }
 
     public static AppFilterRegistry getInstance() {
@@ -322,8 +313,6 @@ public class AppFilterRegistry {
                 return FILTER_APPS_CLONE;
             case ManageApplications.LIST_TYPE_NFC_TAG_APPS:
                 return FILTER_APPS_NFC_TAG;
-            case ManageApplications.LIST_TYPE_TURN_SCREEN_ON:
-                return FILTER_APPS_TURN_SCREEN_ON;
             default:
                 return FILTER_APPS_ALL;
         }
