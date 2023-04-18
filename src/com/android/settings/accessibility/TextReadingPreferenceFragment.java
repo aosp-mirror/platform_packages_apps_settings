@@ -18,11 +18,11 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.TextReadingResetController.ResetStateListener;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -36,13 +36,13 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 
+import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -53,8 +53,7 @@ import java.util.stream.Collectors;
 public class TextReadingPreferenceFragment extends DashboardFragment {
     public static final String EXTRA_LAUNCHED_FROM = "launched_from";
     private static final String TAG = "TextReadingPreferenceFragment";
-    private static final String CATEGORY_FOR_ANYTHING_ELSE =
-            "com.android.settings.suggested.category.DISPLAY_SETTINGS";
+    private static final String SETUP_WIZARD_PACKAGE = "setupwizard";
     static final String FONT_SIZE_KEY = "font_size";
     static final String DISPLAY_SIZE_KEY = "display_size";
     static final String BOLD_TEXT_KEY = "toggle_force_bold_text";
@@ -156,6 +155,7 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
                 new TextReadingResetController(context, RESET_KEY,
                         v -> showDialog(DialogEnums.DIALOG_RESET_SETTINGS));
         resetController.setEntryPoint(mEntryPoint);
+        resetController.setVisible(!WizardManagerHelper.isAnySetupWizard(getIntent()));
         controllers.add(resetController);
 
         return controllers;
@@ -193,6 +193,13 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
         }
     }
 
+    protected boolean isCallingFromAnythingElseEntryPoint() {
+        final Activity activity = getActivity();
+        final String callingPackage = activity != null ? activity.getCallingPackage() : null;
+
+        return callingPackage != null && callingPackage.contains(SETUP_WIZARD_PACKAGE);
+    }
+
     @VisibleForTesting
     DisplaySizeData createDisplaySizeData(Context context) {
         return new DisplaySizeData(context);
@@ -205,14 +212,7 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
             return;
         }
 
-        final Intent intent = getIntent();
-        if (intent == null) {
-            mEntryPoint = EntryPoint.UNKNOWN_ENTRY;
-            return;
-        }
-
-        final Set<String> categories = intent.getCategories();
-        mEntryPoint = categories != null && categories.contains(CATEGORY_FOR_ANYTHING_ELSE)
+        mEntryPoint = isCallingFromAnythingElseEntryPoint()
                 ? EntryPoint.SUW_ANYTHING_ELSE : EntryPoint.UNKNOWN_ENTRY;
     }
 

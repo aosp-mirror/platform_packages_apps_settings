@@ -57,6 +57,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.android.settings.R;
+import com.android.settingslib.widget.LottieColorUtils;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieDrawable;
@@ -176,8 +177,8 @@ public final class AccessibilityGestureNavigationTutorial {
 
         final ImageView imageView = view.findViewById(R.id.image);
         final int gestureSettingsImageResId =
-                isTouchExploreEnabled ? R.drawable.illustration_accessibility_gesture_three_finger
-                        : R.drawable.illustration_accessibility_gesture_two_finger;
+                isTouchExploreEnabled ? R.drawable.a11y_gesture_navigation_three_finger_preview
+                        : R.drawable.a11y_gesture_navigation_two_finger_preview;
         imageView.setImageResource(gestureSettingsImageResId);
 
         final TextView textView = view.findViewById(R.id.gesture_tutorial_message);
@@ -300,6 +301,7 @@ public final class AccessibilityGestureNavigationTutorial {
                         result));
         lottieView.setAnimation(imageRawRes);
         lottieView.setRepeatCount(LottieDrawable.INFINITE);
+        LottieColorUtils.applyDynamicColors(context, lottieView);
         lottieView.playAnimation();
 
         return illustrationFrame;
@@ -379,7 +381,7 @@ public final class AccessibilityGestureNavigationTutorial {
         final CharSequence title =
                 context.getText(R.string.accessibility_tutorial_dialog_title_volume);
         final View image =
-                createIllustrationView(context, R.drawable.accessibility_shortcut_type_hardware);
+                createIllustrationView(context, R.drawable.a11y_shortcut_type_hardware);
         final ImageView indicatorIcon =
                 createImageView(context, R.drawable.ic_accessibility_page_indicator);
         final CharSequence instruction =
@@ -394,7 +396,7 @@ public final class AccessibilityGestureNavigationTutorial {
                 context.getText(R.string.accessibility_tutorial_dialog_title_triple);
         final View image =
                 createIllustrationViewWithImageRawResource(context,
-                        R.raw.accessibility_shortcut_type_triple_tap);
+                        R.raw.a11y_shortcut_type_triple_tap);
         final CharSequence instruction =
                 context.getText(R.string.accessibility_tutorial_dialog_message_triple);
         final ImageView indicatorIcon =
@@ -426,13 +428,13 @@ public final class AccessibilityGestureNavigationTutorial {
     private static View createSoftwareImage(Context context) {
         int resId;
         if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
-            resId = R.drawable.accessibility_shortcut_type_software_floating;
+            resId = R.drawable.a11y_shortcut_type_software_floating;
         } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
             resId = AccessibilityUtil.isTouchExploreEnabled(context)
-                    ? R.drawable.accessibility_shortcut_type_software_gesture_talkback
-                    : R.drawable.accessibility_shortcut_type_software_gesture;
+                    ? R.drawable.a11y_shortcut_type_software_gesture_talkback
+                    : R.drawable.a11y_shortcut_type_software_gesture;
         } else {
-            resId = R.drawable.accessibility_shortcut_type_software;
+            resId = R.drawable.a11y_shortcut_type_software;
         }
         return createIllustrationView(context, resId);
     }

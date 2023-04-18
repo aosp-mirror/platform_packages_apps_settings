@@ -18,10 +18,12 @@ package com.android.settings.network.telephony.cdma;
 
 import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA;
 import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA;
+import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_UNKNOWN;
 
 import android.content.Context;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -33,6 +35,7 @@ import com.android.settings.network.telephony.MobileNetworkUtils;
  */
 public class CdmaSystemSelectPreferenceController extends CdmaBasePreferenceController
         implements ListPreference.OnPreferenceChangeListener {
+    private static final String TAG = "CdmaSystemSelectPreferenceController";
 
     public CdmaSystemSelectPreferenceController(Context context, String key) {
         super(context, key);
@@ -42,23 +45,36 @@ public class CdmaSystemSelectPreferenceController extends CdmaBasePreferenceCont
     public void updateState(Preference preference) {
         super.updateState(preference);
         final ListPreference listPreference = (ListPreference) preference;
-        listPreference.setVisible(getAvailabilityStatus() == AVAILABLE);
-        final int mode = mTelephonyManager.getCdmaRoamingMode();
-        if (mode != TelephonyManager.CDMA_ROAMING_MODE_RADIO_DEFAULT) {
-            if (mode == TelephonyManager.CDMA_ROAMING_MODE_HOME
-                    || mode == TelephonyManager.CDMA_ROAMING_MODE_ANY) {
-                listPreference.setValue(Integer.toString(mode));
-            } else {
-                resetCdmaRoamingModeToDefault();
-            }
+        boolean isVisible = (getAvailabilityStatus() == AVAILABLE);
+        listPreference.setVisible(isVisible);
+        if (!isVisible) {
+            return;
         }
+        boolean hasTelephonyMgr = mTelephonyManager != null;
+        try {
+            final int mode =
+                    hasTelephonyMgr ? mTelephonyManager.getCdmaRoamingMode()
+                            : TelephonyManager.CDMA_ROAMING_MODE_RADIO_DEFAULT;
+            if (mode != TelephonyManager.CDMA_ROAMING_MODE_RADIO_DEFAULT) {
+                if (mode == TelephonyManager.CDMA_ROAMING_MODE_HOME
+                        || mode == TelephonyManager.CDMA_ROAMING_MODE_ANY) {
+                    listPreference.setValue(Integer.toString(mode));
+                } else {
+                    resetCdmaRoamingModeToDefault();
+                }
+            }
 
-        final int settingsNetworkMode = MobileNetworkUtils.getNetworkTypeFromRaf(
-                (int) mTelephonyManager.getAllowedNetworkTypesForReason(
-                        TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
-        final boolean enableList = settingsNetworkMode != NETWORK_MODE_LTE_GSM_WCDMA
-                && settingsNetworkMode != NETWORK_MODE_NR_LTE_GSM_WCDMA;
-        listPreference.setEnabled(enableList);
+            final int settingsNetworkMode =
+                    hasTelephonyMgr ? MobileNetworkUtils.getNetworkTypeFromRaf(
+                            (int) mTelephonyManager.getAllowedNetworkTypesForReason(
+                                    TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER))
+                            : NETWORK_MODE_UNKNOWN;
+            final boolean enableList = settingsNetworkMode != NETWORK_MODE_LTE_GSM_WCDMA
+                    && settingsNetworkMode != NETWORK_MODE_NR_LTE_GSM_WCDMA;
+            listPreference.setEnabled(enableList);
+        } catch (Exception exception) {
+            Log.e(TAG, "Fail to access framework API", exception);
+        }
     }
 
     @Override

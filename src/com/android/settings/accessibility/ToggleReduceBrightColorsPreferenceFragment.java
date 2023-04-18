@@ -64,7 +64,7 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
 
         mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
                 .authority(getPrefContext().getPackageName())
-                .appendPath(String.valueOf(R.raw.extra_dim_banner))
+                .appendPath(String.valueOf(R.raw.a11y_extra_dim_banner))
                 .build();
         mComponentName = REDUCE_BRIGHT_COLORS_COMPONENT_NAME;
         mPackageName = getText(R.string.reduce_bright_colors_preference_title);

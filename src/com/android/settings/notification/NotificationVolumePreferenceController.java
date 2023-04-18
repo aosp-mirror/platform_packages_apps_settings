@@ -16,70 +16,95 @@
 
 package com.android.settings.notification;
 
-import android.app.INotificationManager;
+import android.app.ActivityThread;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
+import android.os.Binder;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.os.ServiceManager;
-import android.os.Vibrator;
+import android.provider.DeviceConfig;
 import android.service.notification.NotificationListenerService;
-import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.lifecycle.OnLifecycleEvent;
+import androidx.preference.PreferenceScreen;
 
-import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-import java.util.Objects;
+import java.util.Set;
 
 /**
- * Update notification volume icon in Settings in response to user adjusting volume
+ * Update notification volume icon in Settings in response to user adjusting volume.
  */
-public class NotificationVolumePreferenceController extends VolumeSeekBarPreferenceController {
+public class NotificationVolumePreferenceController extends
+        RingerModeAffectedVolumePreferenceController {
 
-    private static final String TAG = "NotificationVolumePreferenceController";
     private static final String KEY_NOTIFICATION_VOLUME = "notification_volume";
+    private static final String TAG = "NotificationVolumePreferenceController";
 
-    private Vibrator mVibrator;
-    private int mRingerMode = AudioManager.RINGER_MODE_NORMAL;
-    private ComponentName mSuppressor;
     private final RingReceiver mReceiver = new RingReceiver();
     private final H mHandler = new H();
-    private INotificationManager mNoMan;
-
-
-    private int mMuteIcon;
-    private final int mNormalIconId =  R.drawable.ic_notifications;
-    private final int mVibrateIconId = R.drawable.ic_volume_ringer_vibrate;
-    private final int mSilentIconId = R.drawable.ic_notifications_off_24dp;
-
-    private final boolean mRingNotificationAliased;
-
 
     public NotificationVolumePreferenceController(Context context) {
         this(context, KEY_NOTIFICATION_VOLUME);
     }
 
     public NotificationVolumePreferenceController(Context context, String key) {
-        super(context, key);
-        mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
-        if (mVibrator != null && !mVibrator.hasVibrator()) {
-            mVibrator = null;
+        super(context, key, TAG);
+
+        mNormalIconId =  R.drawable.ic_notifications;
+        mVibrateIconId = R.drawable.ic_volume_ringer_vibrate;
+        mSilentIconId = R.drawable.ic_notifications_off_24dp;
+
+        if (updateRingerMode()) {
+            updateEnabledState();
+        }
+    }
+
+    /**
+     * Allow for notification slider to be enabled in the scenario where the config switches on
+     * while settings page is already on the screen by always configuring the preference, even if it
+     * is currently inactive.
+     */
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        if (mPreference == null) {
+            setupVolPreference(screen);
         }
 
-        mRingNotificationAliased = mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_alias_ring_notif_stream_types);
-        updateRingerMode();
+        updateEffectsSuppressor();
+        selectPreferenceIconState();
+        updateEnabledState();
+    }
+
+    /**
+     * Only display the notification slider when the corresponding device config flag is set
+     */
+    private void onDeviceConfigChange(DeviceConfig.Properties properties) {
+        Set<String> changeSet = properties.getKeyset();
+
+        if (changeSet.contains(SystemUiDeviceConfigFlags.VOLUME_SEPARATE_NOTIFICATION)) {
+            boolean newVal = isSeparateNotificationConfigEnabled();
+            if (newVal != mSeparateNotification) {
+                mSeparateNotification = newVal;
+                // Update UI if config change happens when Sound Settings page is on the foreground
+                if (mPreference != null) {
+                    int status = getAvailabilityStatus();
+                    mPreference.setVisible(status == AVAILABLE
+                            || status == DISABLED_DEPENDENT_SETTING);
+                    if (status == DISABLED_DEPENDENT_SETTING) {
+                        mPreference.setEnabled(false);
+                    }
+                }
+            }
+        }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
@@ -87,8 +112,9 @@ public class NotificationVolumePreferenceController extends VolumeSeekBarPrefere
     public void onResume() {
         super.onResume();
         mReceiver.register(true);
-        updateEffectsSuppressor();
-        updatePreferenceIconAndSliderState();
+        Binder.withCleanCallingIdentity(()
+                -> DeviceConfig.addOnPropertiesChangedListener(DeviceConfig.NAMESPACE_SYSTEMUI,
+                ActivityThread.currentApplication().getMainExecutor(), this::onDeviceConfigChange));
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
@@ -96,27 +122,18 @@ public class NotificationVolumePreferenceController extends VolumeSeekBarPrefere
     public void onPause() {
         super.onPause();
         mReceiver.register(false);
+        Binder.withCleanCallingIdentity(() ->
+                DeviceConfig.removeOnPropertiesChangedListener(this::onDeviceConfigChange));
     }
 
     @Override
     public int getAvailabilityStatus() {
-
-        // Show separate notification slider if ring/notification are not aliased by AudioManager --
-        // if they are, notification volume is controlled by RingVolumePreferenceController.
+        boolean separateNotification = isSeparateNotificationConfigEnabled();
         return mContext.getResources().getBoolean(R.bool.config_show_notification_volume)
-                && (!mRingNotificationAliased || !Utils.isVoiceCapable(mContext))
-                && !mHelper.isSingleVolume()
-                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
-    }
-
-    @Override
-    public boolean isSliceable() {
-        return TextUtils.equals(getPreferenceKey(), KEY_NOTIFICATION_VOLUME);
-    }
-
-    @Override
-    public boolean isPublicSlice() {
-        return true;
+                && !mHelper.isSingleVolume() && separateNotification
+                ? (mRingerMode == AudioManager.RINGER_MODE_NORMAL
+                    ? AVAILABLE : DISABLED_DEPENDENT_SETTING)
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -125,56 +142,12 @@ public class NotificationVolumePreferenceController extends VolumeSeekBarPrefere
     }
 
     @Override
-    public boolean useDynamicSliceSummary() {
-        return true;
-    }
-
-    @Override
     public int getAudioStream() {
         return AudioManager.STREAM_NOTIFICATION;
     }
 
     @Override
-    public int getMuteIcon() {
-        return mMuteIcon;
-    }
-
-    private void updateRingerMode() {
-        final int ringerMode = mHelper.getRingerModeInternal();
-        if (mRingerMode == ringerMode) return;
-        mRingerMode = ringerMode;
-        updatePreferenceIconAndSliderState();
-    }
-
-    private void updateEffectsSuppressor() {
-        final ComponentName suppressor = NotificationManager.from(mContext).getEffectsSuppressor();
-        if (Objects.equals(suppressor, mSuppressor)) return;
-
-        if (mNoMan == null) {
-            mNoMan = INotificationManager.Stub.asInterface(
-                    ServiceManager.getService(Context.NOTIFICATION_SERVICE));
-        }
-
-        final int hints;
-        try {
-            hints = mNoMan.getHintsFromListenerNoToken();
-        } catch (android.os.RemoteException exception) {
-            Log.w(TAG, "updateEffectsSuppressor: " + exception.getLocalizedMessage());
-            return;
-        }
-
-        if (hintsMatch(hints)) {
-
-            mSuppressor = suppressor;
-            if (mPreference != null) {
-                final String text = SuppressorHelper.getSuppressionText(mContext, suppressor);
-                mPreference.setSuppressionText(text);
-            }
-        }
-    }
-
-    @VisibleForTesting
-    boolean hintsMatch(int hints) {
+    protected boolean hintsMatch(int hints) {
         boolean allEffectsDisabled =
                 (hints & NotificationListenerService.HINT_HOST_DISABLE_EFFECTS) != 0;
         boolean notificationEffectsDisabled =
@@ -183,20 +156,17 @@ public class NotificationVolumePreferenceController extends VolumeSeekBarPrefere
         return allEffectsDisabled || notificationEffectsDisabled;
     }
 
-    private void updatePreferenceIconAndSliderState() {
+    @Override
+    protected void selectPreferenceIconState() {
         if (mPreference != null) {
             if (mVibrator != null && mRingerMode == AudioManager.RINGER_MODE_VIBRATE) {
                 mMuteIcon = mVibrateIconId;
                 mPreference.showIcon(mVibrateIconId);
-                mPreference.setEnabled(false);
-
             } else if (mRingerMode == AudioManager.RINGER_MODE_SILENT
                     || mVibrator == null && mRingerMode == AudioManager.RINGER_MODE_VIBRATE) {
                 mMuteIcon = mSilentIconId;
                 mPreference.showIcon(mSilentIconId);
-                mPreference.setEnabled(false);
             } else { // ringmode normal: could be that we are still silent
-                mPreference.setEnabled(true);
                 if (mHelper.getStreamVolume(AudioManager.STREAM_NOTIFICATION) == 0) {
                     // ring is in normal, but notification is in silent
                     mMuteIcon = mSilentIconId;
@@ -205,6 +175,12 @@ public class NotificationVolumePreferenceController extends VolumeSeekBarPrefere
                     mPreference.showIcon(mNormalIconId);
                 }
             }
+        }
+    }
+
+    private void updateEnabledState() {
+        if (mPreference != null) {
+            mPreference.setEnabled(mRingerMode == AudioManager.RINGER_MODE_NORMAL);
         }
     }
 
@@ -224,10 +200,13 @@ public class NotificationVolumePreferenceController extends VolumeSeekBarPrefere
                     updateEffectsSuppressor();
                     break;
                 case UPDATE_RINGER_MODE:
-                    updateRingerMode();
+                    if (updateRingerMode()) {
+                        updateEnabledState();
+                    }
                     break;
                 case NOTIFICATION_VOLUME_CHANGED:
-                    updatePreferenceIconAndSliderState();
+                    selectPreferenceIconState();
+                    updateEnabledState();
                     break;
             }
         }
@@ -272,5 +251,4 @@ public class NotificationVolumePreferenceController extends VolumeSeekBarPrefere
             }
         }
     }
-
 }

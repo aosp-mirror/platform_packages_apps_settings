@@ -497,6 +497,7 @@ public class EnabledNetworkModePreferenceControllerTest {
             mPersistableBundle.putBoolean(CarrierConfigManager.KEY_PREFER_2G_BOOL, true);
             mPersistableBundle.putBoolean(CarrierConfigManager.KEY_LTE_ENABLED_BOOL, true);
         }
+        mController.init(SUB_ID);
     }
 
     private void mockAllowedNetworkTypes(long allowedNetworkType) {

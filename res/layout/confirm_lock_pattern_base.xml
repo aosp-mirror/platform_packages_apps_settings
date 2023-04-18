@@ -67,13 +67,12 @@
                 style="@style/LockPatternContainerStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:minHeight="@dimen/choose_lockscreen_min_height"
                 android:layout_weight="1">
 
                 <com.android.internal.widget.LockPatternView
                     android:id="@+id/lockPattern"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/biometric_auth_pattern_view_size"
+                    android:layout_height="@dimen/biometric_auth_pattern_view_size"
                     android:layout_gravity="center" />
 
             </com.google.android.setupdesign.view.FillContentLayout>
