@@ -322,7 +322,6 @@ public class Settings extends SettingsActivity {
     public static class PremiumSmsAccessActivity extends SettingsActivity { /* empty */ }
     public static class PictureInPictureSettingsActivity extends SettingsActivity { /* empty */ }
     public static class TurnScreenOnSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class AppTurnScreenOnSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppPictureInPictureSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenAccessDetailSettingsActivity extends SettingsActivity {}
