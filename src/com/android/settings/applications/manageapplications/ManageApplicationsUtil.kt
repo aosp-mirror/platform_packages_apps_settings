@@ -33,7 +33,6 @@ import com.android.settings.Settings.NotificationAppListActivity
 import com.android.settings.Settings.NotificationReviewPermissionsActivity
 import com.android.settings.Settings.OverlaySettingsActivity
 import com.android.settings.Settings.StorageUseActivity
-import com.android.settings.Settings.TurnScreenOnSettingsActivity
 import com.android.settings.Settings.UsageAccessSettingsActivity
 import com.android.settings.Settings.WriteSettingsActivity
 import com.android.settings.applications.appinfo.AppLocaleDetails
@@ -52,7 +51,6 @@ import com.android.settings.applications.manageapplications.ManageApplications.L
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_NOTIFICATION
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_OVERLAY
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_STORAGE
-import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_TURN_SCREEN_ON
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_USAGE_ACCESS
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_WIFI_ACCESS
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_WRITE_SETTINGS
@@ -90,7 +88,6 @@ object ManageApplicationsUtil {
         LongBackgroundTasksActivity::class to LIST_TYPE_LONG_BACKGROUND_TASKS,
         ClonedAppsListActivity::class to LIST_TYPE_CLONED_APPS,
         ChangeNfcTagAppsActivity::class to LIST_TYPE_NFC_TAG_APPS,
-        TurnScreenOnSettingsActivity::class to LIST_TYPE_TURN_SCREEN_ON,
     )
 
     @JvmField
