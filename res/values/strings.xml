@@ -746,6 +746,8 @@
 
     <!-- Fingerprint enrollment and settings --><skip />
     <!-- Note: Update FingerprintEnrollParentalConsent.CONSENT_STRING_RESOURCES when any _consent_ strings are added or removed. -->
+    <!-- Title shown for choose lock options [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint">Fingerprint</string>
     <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_preference_title">Fingerprint</string>
     <!-- Title for a category shown for the fingerprint settings page, followed by items that the user can toggle on/off to require/disable. [CHAR LIMIT=50] -->
@@ -10282,13 +10284,10 @@
     <string name="credman_confirmation_message">Saved info like addresses or payment methods won\'t be filled in when you sign in. To keep your saved info filled in, set enable a password, passkey and data/or service.</string>
 
     <!-- Title of the warning dialog for enabling the credential provider. [CHAR_LIMIT=NONE] -->
-    <string name="credman_enable_confirmation_message_title">Turn on %1$s\?</string>
+    <string name="credman_enable_confirmation_message_title">Use %1$s\?</string>
 
     <!-- Message of the warning dialog for enabling the credential provider. [CHAR_LIMIT=NONE] -->
-    <string name="credman_enable_confirmation_message">Saved info like addresses or payment methods will be shared with this provider.</string>
-
-    <!-- Positive button to turn on credential manager provider (confirmation). [CHAR LIMIT=60] -->
-    <string name="credman_enable_confirmation_message_positive_button">Turn on</string>
+    <string name="credman_enable_confirmation_message">%1$s uses what\'s on your screen to determine what can be autofilled.</string>
 
     <!-- Title of the error dialog when too many credential providers are selected. [CHAR_LIMIT=NONE] -->
     <string name="credman_error_message_title">Passwords, passkeys and data services limit</string>
@@ -11238,11 +11237,9 @@
     <!-- Device controls toggle name [CHAR LIMIT=60] -->
     <string name="lockscreen_privacy_controls_setting_toggle">Show device controls</string>
     <!-- Device controls summary [CHAR LIMIT=NONE] -->
-    <string name="lockscreen_privacy_controls_summary">Show controls for external devices from the lock screen</string>
+    <string name="lockscreen_privacy_controls_summary">From the lockscreen</string>
     <!-- Trivial Device controls toggle name [CHAR LIMIT=60] -->
-    <string name="lockscreen_trivial_controls_setting_toggle">Control from locked device</string>
-    <!-- Trivial Device controls summary [CHAR LIMIT=NONE] -->
-    <string name="lockscreen_trivial_controls_summary">Control external devices without unlocking your phone or tablet if allowed by the device controls app</string>
+    <string name="lockscreen_trivial_controls_setting_toggle">Use device controls</string>
     <!-- Trivial Device disabled controls summary [CHAR LIMIT=NONE] -->
     <string name="lockscreen_trivial_disabled_controls_summary">To use, first turn on \u0022Show device controls\u0022</string>
     <!-- Lockscreen double-line clock summary [CHAR LIMIT=NONE] -->
