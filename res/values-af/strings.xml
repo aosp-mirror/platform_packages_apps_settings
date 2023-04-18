@@ -177,10 +177,8 @@
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Eerste dag van die week"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Nommervoorkeure"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Gebruik appverstek"</string>
-    <!-- no translation found for celsius_temperature_unit (8896459071273084507) -->
-    <skip />
-    <!-- no translation found for fahrenheit_temperature_unit (1118677820614569801) -->
-    <skip />
+    <string name="celsius_temperature_unit" msgid="8896459071273084507">"Celsius (°C)"</string>
+    <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"Fahrenheit (°F)"</string>
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"Sondag"</string>
     <string name="monday_first_day_of_week" msgid="7244698610476506771">"Maandag"</string>
     <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"Dinsdag"</string>
@@ -188,6 +186,8 @@
     <string name="thursday_first_day_of_week" msgid="3035885630945594833">"Donderdag"</string>
     <string name="friday_first_day_of_week" msgid="7074795061812083541">"Vrydag"</string>
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Saterdag"</string>
+    <string name="title_regional_pref_footer" msgid="7450438024324794380">"As ’n app nie streeksvoorkeure steun nie, sal die app sy versteklocale-instellings gebruik."</string>
+    <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Kom meer te wete oor taalvoorkeure."</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Verwyder geselekteerde taal?}other{Verwyder geselekteerde tale?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Teks sal in \'n ander taal gewys word."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Kan nie alle tale verwyder nie"</string>
@@ -323,6 +323,8 @@
     <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Jou gesigmodel sal permanent en veilig uitgevee word. \n\nNadat dit uitgevee is, sal jy jou PIN, patroon of wagwoord nodig hê om jou foon te ontsluit of vir stawing in programme."</string>
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Jou gesigmodel sal permanent en veilig uitgevee word. \n\nNadat dit uitgevee is, sal jy jou PIN, patroon of wagwoord nodig hê om jou foon te ontsluit."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Gebruik Gesigslot om jou foon te ontsluit"</string>
+    <!-- no translation found for security_settings_fingerprint (6387775386189204201) -->
+    <skip />
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Vingerafdruk"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Wanneer Vingerafdrukslot gebruik word"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Vingerafdruk vir werk"</string>
@@ -384,14 +386,11 @@
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Gebruik vingerafdruk"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Gebruik gesig of vingerafdruk"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
-    <!-- no translation found for biometric_settings_add_face_in_split_mode_title (6041232223862753222) -->
-    <skip />
-    <!-- no translation found for biometric_settings_add_face_in_split_mode_message (1904738532939614456) -->
-    <skip />
+    <string name="biometric_settings_add_face_in_split_mode_title" msgid="6041232223862753222">"Kan nie Gesigslot opstel nie"</string>
+    <string name="biometric_settings_add_face_in_split_mode_message" msgid="1904738532939614456">"Verlaat verdeelde skerm om Gesigslot op te stel"</string>
     <string name="biometric_settings_add_fingerprint_in_split_mode_title" msgid="9194670722730454903">"Kan nie vingerafdruk opstel nie"</string>
     <string name="biometric_settings_add_fingerprint_in_split_mode_message" msgid="6960548382076629454">"Verlaat verdeelde skerm om Vingerafdrukslot op te stel"</string>
-    <!-- no translation found for biometric_settings_add_biometrics_in_split_mode_ok (564103789097253645) -->
-    <skip />
+    <string name="biometric_settings_add_biometrics_in_split_mode_ok" msgid="564103789097253645">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Slaan skermslot oor?"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"Slaan in elk geval oor"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"Gaan terug"</string>
@@ -613,7 +612,7 @@
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"Skermslot is reeds verander. Probeer weer met die nuwe skermslot."</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="775215267818384016">"Kanselleer"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"Volgende"</string>
-    <string name="manage_device_admin" msgid="1044620606203916275">"Toesteladministrasieprogramme"</string>
+    <string name="manage_device_admin" msgid="1044620606203916275">"Toesteladministrasie-apps"</string>
     <string name="number_of_device_admins_none" msgid="152926922020437312">"Geen aktiewe programme nie"</string>
     <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{# aktiewe app}other{# aktiewe apps}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"Vertrouensagente"</string>
@@ -886,22 +885,34 @@
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Help ander toestelle om hierdie warmkol te kry. Verminder warmkol se verbindingspoed."</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Help ander toestelle om hierdie warmkol te kry. Verhoog batterygebruik."</string>
     <string name="wifi_hotspot_speed_title" msgid="8629448084180512685">"Spoed en versoenbaarheid"</string>
-    <string name="wifi_hotspot_speed_summary_2g" msgid="2280013579858833466">"2,4 GHz / Enige toestel kan koppel"</string>
-    <string name="wifi_hotspot_speed_summary_5g" msgid="8006841294118040080">"5 GHz / Die meeste toestelle kan koppel"</string>
-    <string name="wifi_hotspot_speed_summary_6g" msgid="5398769134180715191">"6 GHz / Min toestelle kan koppel"</string>
-    <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="6471272988396018113">"2,4 en 5 GHz / Enige toestel kan koppel"</string>
+    <!-- no translation found for wifi_hotspot_speed_summary_2g (5063438001736234858) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_summary_5g (6221158936983135040) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_summary_6g (8863992901226595544) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_5g (5931052946168943750) -->
+    <skip />
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"Kies ’n frekwensie vir jou warmkol. Die frekwensie beïnvloed die verbindingspoed en watter soorte toestelle jou warmkol kan kry."</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"Voorkeurfrekwensie"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2,4 GHz"</string>
-    <string name="wifi_hotspot_speed_2g_summary" msgid="2737911775799813597">"Stadiger spoed. Enige toestel kan koppel"</string>
+    <!-- no translation found for wifi_hotspot_speed_2g_summary (6930273933810520155) -->
+    <skip />
     <string name="wifi_hotspot_speed_5g" msgid="4058116867148848395">"5 GHz"</string>
-    <string name="wifi_hotspot_speed_5g_summary" msgid="8979160165280825325">"Vinnige spoed. Die meeste toestelle kan koppel."</string>
+    <!-- no translation found for wifi_hotspot_speed_5g_summary (562987935924535694) -->
+    <skip />
     <string name="wifi_hotspot_speed_2g_5g" msgid="9192756255938408285">"2,4 en 5 GHz"</string>
-    <string name="wifi_hotspot_speed_2g_5g_summary" msgid="2901777498770191018">"Vinnige spoed. Enige toestel kan aan hierdie dubbelbandwarmkol koppel."</string>
+    <!-- no translation found for wifi_hotspot_speed_2g_5g_summary (8104575293617700173) -->
+    <skip />
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
-    <string name="wifi_hotspot_speed_6g_summary" msgid="1170553321510689693">"Vinnigste spoed. Minste toestelle kan koppel."</string>
+    <!-- no translation found for wifi_hotspot_speed_6g_summary (8675262219242174548) -->
+    <skip />
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"Nie in jou land of streek beskikbaar nie"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"As jou voorkeurfrekwensie nie beskikbaar is nie, kan jou warmkol ’n ander een gebruik. Warmkolsekuriteitinstellings kan verander as jy die frekwensie verander."</string>
+    <!-- no translation found for wifi_hotspot_security_summary_unavailable (117582979310345853) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_security_footer (4608329688744949796) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Skakel tans Wi-Fi-warmkol aan..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Skakel tans Wi-Fi-warmkol af..."</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Verbinding is nie beskikbaar nie"</string>
@@ -2288,6 +2299,10 @@
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Stelselgebruik vir die afgelope 24 u."</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Stelselgebruik vir <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Programgebruik vir <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <!-- no translation found for battery_system_usage_since_last_full_charge_to (4196795733829841971) -->
+    <skip />
+    <!-- no translation found for battery_app_usage_since_last_full_charge_to (4339201995118102114) -->
+    <skip />
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Total: minder as \'n min."</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Agtergrond: minder as \'n min."</string>
     <string name="battery_usage_screen_time_less_than_one_minute" msgid="2911989465891679033">"Skermtyd: minder as een min."</string>
@@ -2504,7 +2519,7 @@
     <string name="delete" msgid="8330605554706263775">"Vee uit"</string>
     <string name="select_all" msgid="7898929601615536401">"Kies almal"</string>
     <string name="data_usage_summary_title" msgid="394067070764360142">"Datagebruik"</string>
-    <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Mobiele data en Wi‑Fi"</string>
+    <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Mobiele data en wi‑fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Outosinkroniseer persoonlike data"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Outo-sinkroniseer werkdata"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Verander siklus..."</string>
@@ -2690,12 +2705,14 @@
     <string name="enable_guest_calling" msgid="8300355036005240911">"Laat gas toe om foon te gebruik"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"Oproepgeskiedenis sal met gasgebruiker gedeel word"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Skakel foonoproepe en SMS aan"</string>
-    <string name="user_grant_admin" msgid="6511342422361803820">"Gee hierdie gebruiker adminvoorregte"</string>
+    <!-- no translation found for user_grant_admin (5942118263054572074) -->
+    <skip />
     <string name="user_remove_user" msgid="8468203789739693845">"Vee gebruiker uit"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Skakel foonoproepe en SMS aan?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Oproep- en SMS-geskiedenis sal met hierdie gebruiker gedeel word."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Verwyder adminvoorregte?"</string>
-    <string name="user_revoke_admin_confirm_message" msgid="2719667217562982318">"Is jy seker jy wil hierdie gebruiker se adminvoorregte verwyder?"</string>
+    <!-- no translation found for user_revoke_admin_confirm_message (9207187319308572958) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"Noodinligting"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Inligting en kontakte vir <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Maak <xliff:g id="APP_NAME">%1$s</xliff:g> oop"</string>
@@ -4061,9 +4078,10 @@
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Maak seker dat jy hierdie program vertrou&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Outovul&gt;%1$s&lt;/xliff:g&gt; gebruik wat op jou skerm is om te bepaal wat outomaties ingevul kan word."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Skakel %1$s af?"</string>
     <string name="credman_confirmation_message" msgid="3499478570809427026">"Gestoorde inligting, soos adresse of betaalmetodes, sal nie ingevul word wanneer jy aanmeld nie. Stel of aktiveer ’n wagwoord, wagwoordsleutel en/of datadiens om aan te hou om jou gestoorde inligting te laat invul."</string>
-    <string name="credman_enable_confirmation_message_title" msgid="3722566298090698004">"Skakel %1$s aan?"</string>
-    <string name="credman_enable_confirmation_message" msgid="4466773747277583461">"Gestoorde inligting, soos adresse of betaalmetodes, sal nie met hierdie verskaffer gedeel word."</string>
-    <string name="credman_enable_confirmation_message_positive_button" msgid="3479082692924433102">"Skakel aan"</string>
+    <!-- no translation found for credman_enable_confirmation_message_title (1037501792652277829) -->
+    <skip />
+    <!-- no translation found for credman_enable_confirmation_message (8407841892310870169) -->
+    <skip />
     <string name="credman_error_message_title" msgid="4741457523969373713">"Limiet vir wagwoorde, wagwoordsleutels en datadienste"</string>
     <string name="credman_error_message" msgid="6793314648458925172">"Jy kan tot 5 wagwoorde, wagwoordsleutels en datadienste tegelyk aktief hê. Skakel ’n diens af om meer by te voeg."</string>
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Skakel af"</string>
@@ -4410,9 +4428,10 @@
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"Wys QR-kodeskandeerder"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Laat toegang tot QR-kodeskandeerder van sluitskerm af toe"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Wys toestelkontroles"</string>
-    <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Wys kontroles vir eksterne toestelle op die sluitskerm"</string>
-    <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Beheer van geslote toestel af"</string>
-    <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Beheer eksterne toestelle sonder om jou foon of tablet te ontsluit as die toestelkontrolesprogram dit toelaat."</string>
+    <!-- no translation found for lockscreen_privacy_controls_summary (7522918441738915364) -->
+    <skip />
+    <!-- no translation found for lockscreen_trivial_controls_setting_toggle (2174300719855112358) -->
+    <skip />
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Skakel eers \"Wys toestelkontroles\" aan as jy wil gebruik"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Wys dubbellynhorlosie as dit beskikbaar is"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Dubbellynhorlosie"</string>
@@ -4545,8 +4564,7 @@
     <string name="uwb_settings_title" msgid="8578498712312002231">"Ultrawye band (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Help om die relatiewe posisie te bepaal van toestelle in die omtrek wat UWB het"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Skakel vliegtuigmodus af om UWB te gebruik"</string>
-    <!-- no translation found for uwb_settings_summary_no_uwb_regulatory (3465456428217979428) -->
-    <skip />
+    <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB is nie in die huidige ligging beskikbaar nie"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Kameratoegang"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Mikrofoontoegang"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Vir programme en dienste"</string>
@@ -4635,6 +4653,8 @@
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Geen limiet nie"</string>
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"Deaktiveer kindprosesbeperkings"</string>
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Deaktiveer beperkings op die stelselhulpbrongebruik van die app se kindprosesse"</string>
+    <string name="enable_notes_role_title" msgid="7662702013496114763">"Verplig aktivering van Notas-rol"</string>
+    <string name="enable_notes_role_summary" msgid="136916915155048249">"Aktiveer integrasie van stelsels om notas te maak met die Notas-rol. Doen niks as die Notas-rol reeds geaktiveer is nie."</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Saai uit"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"Saai <xliff:g id="CURRENTAPP">%1$s</xliff:g> uit"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Luister na uitsendings wat in jou omtrek speel"</string>
@@ -4693,4 +4713,5 @@
     <string name="contrast_medium" msgid="384414510709285811">"Medium"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Hoog"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Hierdie app kan net in 1 venster oopgemaak word"</string>
+    <string name="note_task_button_label" msgid="1741456863714912927">"Neem notas"</string>
 </resources>
