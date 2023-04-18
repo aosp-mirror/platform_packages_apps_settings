@@ -36,6 +36,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -590,6 +591,65 @@ public class WifiHotspotRepositoryTest {
         mWifiHotspotRepository.m6gAvailable = null;
 
         assertThat(mWifiHotspotRepository.get6gAvailable()).isNotNull();
+    }
+
+    @Test
+    public void isSpeedFeatureAvailable_configNotShow_returnFalse() {
+        mWifiHotspotRepository.mIsConfigShowSpeed = false;
+
+        assertThat(mWifiHotspotRepository.isSpeedFeatureAvailable()).isFalse();
+    }
+
+    @Test
+    public void isSpeedFeatureAvailable_5gBandNotSupported_returnFalse() {
+        mWifiHotspotRepository.mIsConfigShowSpeed = true;
+        mWifiHotspotRepository.mIs5gBandSupported = false;
+
+        assertThat(mWifiHotspotRepository.isSpeedFeatureAvailable()).isFalse();
+    }
+
+    @Test
+    public void isSpeedFeatureAvailable_throwExceptionWhenGet5gSapChannel_returnFalse() {
+        mWifiHotspotRepository.mIsConfigShowSpeed = true;
+        mWifiHotspotRepository.mIs5gBandSupported = true;
+        doThrow(IllegalArgumentException.class).when(mWifiManager)
+                .getUsableChannels(WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS, OP_MODE_SAP);
+
+        assertThat(mWifiHotspotRepository.isSpeedFeatureAvailable()).isFalse();
+
+        doThrow(UnsupportedOperationException.class).when(mWifiManager)
+                .getUsableChannels(WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS, OP_MODE_SAP);
+
+        assertThat(mWifiHotspotRepository.isSpeedFeatureAvailable()).isFalse();
+    }
+
+    @Test
+    public void isSpeedFeatureAvailable_throwExceptionWhenGet6gSapChannel_returnFalse() {
+        mWifiHotspotRepository.mIsConfigShowSpeed = true;
+        mWifiHotspotRepository.mIs5gBandSupported = true;
+        doReturn(Arrays.asList(new WifiAvailableChannel(FREQ_5GHZ, OP_MODE_SAP))).when(mWifiManager)
+                .getUsableChannels(WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS, OP_MODE_SAP);
+        doThrow(IllegalArgumentException.class).when(mWifiManager)
+                .getUsableChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP);
+
+        assertThat(mWifiHotspotRepository.isSpeedFeatureAvailable()).isFalse();
+
+        doThrow(UnsupportedOperationException.class).when(mWifiManager)
+                .getUsableChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP);
+
+        assertThat(mWifiHotspotRepository.isSpeedFeatureAvailable()).isFalse();
+    }
+
+    @Test
+    public void isSpeedFeatureAvailable_conditionsAreReady_returnTrue() {
+        mWifiHotspotRepository.mIsConfigShowSpeed = true;
+        mWifiHotspotRepository.mIs5gBandSupported = true;
+        doReturn(Arrays.asList(new WifiAvailableChannel(FREQ_5GHZ, OP_MODE_SAP))).when(mWifiManager)
+                .getUsableChannels(WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS, OP_MODE_SAP);
+        doReturn(Arrays.asList(new WifiAvailableChannel(FREQ_6GHZ, OP_MODE_SAP))).when(mWifiManager)
+                .getUsableChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP);
+
+        assertThat(mWifiHotspotRepository.isSpeedFeatureAvailable()).isTrue();
     }
 
     private void mockConfigSecurityType(int securityType) {
