@@ -816,14 +816,6 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         @Override
-        public void onStop() {
-            super.onStop();
-            if (!getActivity().isChangingConfigurations() && !mWaitingForConfirmation) {
-                getActivity().finish();
-            }
-        }
-
-        @Override
         public void onDestroy() {
             super.onDestroy();
             if (mUserPassword != null) {
