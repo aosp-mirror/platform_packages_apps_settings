@@ -32,9 +32,11 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.util.HashMap;
@@ -95,6 +97,10 @@ public class WifiHotspotRepository {
     protected MutableLiveData<Boolean> m6gAvailable;
     protected String mCurrentCountryCode;
     protected ActiveCountryCodeChangedCallback mActiveCountryCodeChangedCallback;
+
+    @VisibleForTesting
+    Boolean mIsConfigShowSpeed;
+    private Boolean mIsSpeedFeatureAvailable;
 
     public WifiHotspotRepository(@NonNull Context appContext, @NonNull WifiManager wifiManager) {
         mAppContext = appContext;
@@ -314,6 +320,7 @@ public class WifiHotspotRepository {
 
     /**
      * Return whether Wi-Fi Dual Band is supported or not.
+     *
      * @return {@code true} if Wi-Fi Dual Band is supported
      */
     public boolean isDualBand() {
@@ -326,6 +333,7 @@ public class WifiHotspotRepository {
 
     /**
      * Return whether Wi-Fi 5 GHz band is supported or not.
+     *
      * @return {@code true} if Wi-Fi 5 GHz Band is supported
      */
     public boolean is5GHzBandSupported() {
@@ -338,6 +346,7 @@ public class WifiHotspotRepository {
 
     /**
      * Return whether Wi-Fi Hotspot 5 GHz band is available or not.
+     *
      * @return {@code true} if Wi-Fi Hotspot 5 GHz Band is available
      */
     public boolean is5gAvailable() {
@@ -371,6 +380,7 @@ public class WifiHotspotRepository {
 
     /**
      * Return whether Wi-Fi 6 GHz band is supported or not.
+     *
      * @return {@code true} if Wi-Fi 6 GHz Band is supported
      */
     public boolean is6GHzBandSupported() {
@@ -383,6 +393,7 @@ public class WifiHotspotRepository {
 
     /**
      * Return whether Wi-Fi Hotspot 6 GHz band is available or not.
+     *
      * @return {@code true} if Wi-Fi Hotspot 6 GHz Band is available
      */
     public boolean is6gAvailable() {
@@ -432,7 +443,61 @@ public class WifiHotspotRepository {
             // This is expected on some hardware.
             Log.e(TAG, "Querying usable SAP channels is unsupported, band:" + band);
         }
+        // Disable Wi-Fi hotspot speed feature if an error occurs while getting usable channels.
+        mIsSpeedFeatureAvailable = false;
+        Log.w(TAG, "isChannelAvailable(): Wi-Fi hotspot speed feature disabled");
         return defaultValue;
+    }
+
+    private boolean isConfigShowSpeed() {
+        if (mIsConfigShowSpeed == null) {
+            mIsConfigShowSpeed = mAppContext.getResources()
+                    .getBoolean(R.bool.config_show_wifi_hotspot_speed);
+            log("isConfigShowSpeed():" + mIsConfigShowSpeed);
+        }
+        return mIsConfigShowSpeed;
+    }
+
+    /**
+     * Return whether Wi-Fi Hotspot Speed Feature is available or not.
+     *
+     * @return {@code true} if Wi-Fi Hotspot Speed Feature is available
+     */
+    public boolean isSpeedFeatureAvailable() {
+        if (mIsSpeedFeatureAvailable != null) {
+            return mIsSpeedFeatureAvailable;
+        }
+
+        // Check config to show Wi-Fi hotspot speed feature
+        if (!isConfigShowSpeed()) {
+            mIsSpeedFeatureAvailable = false;
+            log("isSpeedFeatureAvailable():false, isConfigShowSpeed():false");
+            return false;
+        }
+
+        // Check if 5 GHz band is not supported
+        if (!is5GHzBandSupported()) {
+            mIsSpeedFeatureAvailable = false;
+            log("isSpeedFeatureAvailable():false, 5 GHz band is not supported on this device");
+            return false;
+        }
+        // Check if 5 GHz band SAP channel is not ready
+        isChannelAvailable(WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS, true /* defaultValue */);
+        if (mIsSpeedFeatureAvailable != null && !mIsSpeedFeatureAvailable) {
+            log("isSpeedFeatureAvailable():false, error occurred while getting 5 GHz SAP channel");
+            return false;
+        }
+
+        // Check if 6 GHz band SAP channel is not ready
+        isChannelAvailable(WifiScanner.WIFI_BAND_6_GHZ, false /* defaultValue */);
+        if (mIsSpeedFeatureAvailable != null && !mIsSpeedFeatureAvailable) {
+            log("isSpeedFeatureAvailable():false, error occurred while getting 6 GHz SAP channel");
+            return false;
+        }
+
+        mIsSpeedFeatureAvailable = true;
+        log("isSpeedFeatureAvailable():true");
+        return true;
     }
 
     protected void purgeRefreshData() {

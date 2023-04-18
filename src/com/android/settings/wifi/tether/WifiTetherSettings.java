@@ -136,12 +136,22 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
         mWifiTetherViewModel = FeatureFactory.getFactory(getContext()).getWifiFeatureProvider()
                 .getWifiTetherViewModel(this);
-        mWifiHotspotSecurity = findPreference(KEY_WIFI_HOTSPOT_SECURITY);
-        if (mWifiHotspotSecurity != null && mWifiHotspotSecurity.isVisible()) {
-            mWifiTetherViewModel.getSecuritySummary().observe(this, this::onSecuritySummaryChanged);
+        if (mWifiTetherViewModel != null) {
+            setupSpeedFeature(mWifiTetherViewModel.isSpeedFeatureAvailable());
         }
+    }
+
+    @VisibleForTesting
+    void setupSpeedFeature(boolean isSpeedFeatureAvailable) {
+        mWifiHotspotSecurity = findPreference(KEY_WIFI_HOTSPOT_SECURITY);
         mWifiHotspotSpeed = findPreference(KEY_WIFI_HOTSPOT_SPEED);
-        if (mWifiHotspotSpeed != null && mWifiHotspotSpeed.isVisible()) {
+        if (mWifiHotspotSecurity == null || mWifiHotspotSpeed == null) {
+            return;
+        }
+        mWifiHotspotSecurity.setVisible(isSpeedFeatureAvailable);
+        mWifiHotspotSpeed.setVisible(isSpeedFeatureAvailable);
+        if (isSpeedFeatureAvailable) {
+            mWifiTetherViewModel.getSecuritySummary().observe(this, this::onSecuritySummaryChanged);
             mWifiTetherViewModel.getSpeedSummary().observe(this, this::onSpeedSummaryChanged);
         }
     }
