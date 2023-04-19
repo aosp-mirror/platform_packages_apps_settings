@@ -109,13 +109,13 @@ public final class IncompatibleChargerTipTest {
 
         mIncompatibleChargerTip.updatePreference(mCardPreference);
 
-        verify(mCardPreference).setSecondaryButtonText(expected);
+        verify(mCardPreference).setPrimaryButtonText(expected);
     }
 
     @Test
     public void updatePreference_shouldSetSecondaryButtonVisible() {
         mIncompatibleChargerTip.updatePreference(mCardPreference);
-        verify(mCardPreference).setSecondaryButtonVisible(true);
+        verify(mCardPreference).setPrimaryButtonVisible(true);
     }
 
     private String getLastErrorLog() {
