@@ -83,8 +83,21 @@ public class WifiTetherViewModel extends AndroidViewModel {
 
     @Override
     protected void onCleared() {
-        mWifiHotspotRepository.getSecurityType().removeObserver(mSecurityTypeObserver);
-        mWifiHotspotRepository.getSpeedType().removeObserver(mSpeedTypeObserver);
+        if (mSecuritySummary != null) {
+            mWifiHotspotRepository.getSecurityType().removeObserver(mSecurityTypeObserver);
+        }
+        if (mSpeedSummary != null) {
+            mWifiHotspotRepository.getSpeedType().removeObserver(mSpeedTypeObserver);
+        }
+    }
+
+    /**
+     * Return whether Wi-Fi Hotspot Speed Feature is available or not.
+     *
+     * @return {@code true} if Wi-Fi Hotspot Speed Feature is available
+     */
+    public boolean isSpeedFeatureAvailable() {
+        return mWifiHotspotRepository.isSpeedFeatureAvailable();
     }
 
     /**
