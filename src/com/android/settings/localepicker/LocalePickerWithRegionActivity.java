@@ -24,6 +24,8 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 
+import androidx.core.view.ViewCompat;
+
 import com.android.internal.app.LocalePickerWithRegion;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
@@ -34,6 +36,8 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
         implements LocalePickerWithRegion.LocaleSelectedListener, MenuItem.OnActionExpandListener {
     private static final String TAG = LocalePickerWithRegionActivity.class.getSimpleName();
     private static final String PARENT_FRAGMENT_NAME = "localeListEditor";
+
+    private LocalePickerWithRegion mSelector;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +53,7 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
             Log.i(TAG, "Has explicit locales : " + explicitLocales);
         }
 
-        final LocalePickerWithRegion selector = LocalePickerWithRegion.createLanguagePicker(
+        mSelector = LocalePickerWithRegion.createLanguagePicker(
                 this,
                 LocalePickerWithRegionActivity.this,
                 false /* translate only */,
@@ -59,7 +63,7 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
         getFragmentManager()
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.content_frame, selector)
+                .replace(R.id.content_frame, mSelector)
                 .addToBackStack(PARENT_FRAGMENT_NAME)
                 .commit();
     }
@@ -102,13 +106,17 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
 
     @Override
     public boolean onMenuItemActionExpand(MenuItem item) {
+        // To prevent a large space on tool bar.
         mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        // To prevent user can expand the collpasing tool bar view.
+        ViewCompat.setNestedScrollingEnabled(mSelector.getListView(), false);
         return true;
     }
 
     @Override
     public boolean onMenuItemActionCollapse(MenuItem item) {
         mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        ViewCompat.setNestedScrollingEnabled(mSelector.getListView(), true);
         return true;
     }
 }
