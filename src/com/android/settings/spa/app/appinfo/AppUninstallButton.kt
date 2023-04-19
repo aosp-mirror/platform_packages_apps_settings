@@ -16,14 +16,21 @@
 
 package com.android.settings.spa.app.appinfo
 
+import android.app.settings.SettingsEnums
+import android.content.Intent;
 import android.content.om.OverlayManager
 import android.content.pm.ApplicationInfo
 import android.os.UserHandle
 import android.os.UserManager
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
+
+import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAdd
 import com.android.settings.R
+import com.android.settings.spa.SpaActivity
+import com.android.settings.Utils
 import com.android.settingslib.spa.widget.button.ActionButton
+import com.android.settingslib.spaprivileged.framework.common.devicePolicyManager
 import com.android.settingslib.spaprivileged.model.app.hasFlag
 import com.android.settingslib.spaprivileged.model.app.isActiveAdmin
 import com.android.settingslib.spaprivileged.model.app.userHandle
@@ -43,8 +50,8 @@ class AppUninstallButton(private val packageInfoPresenter: PackageInfoPresenter)
     private fun isUninstallButtonEnabled(app: ApplicationInfo): Boolean = when {
         !app.hasFlag(ApplicationInfo.FLAG_INSTALLED) -> false
 
-        // Not allow to uninstall DO/PO.
-        app.isActiveAdmin(context) -> false
+        Utils.isProfileOrDeviceOwner(
+            context.devicePolicyManager, app.packageName, packageInfoPresenter.userId) -> false
 
         appButtonRepository.isDisallowControl(app) -> false
 
@@ -90,7 +97,17 @@ class AppUninstallButton(private val packageInfoPresenter: PackageInfoPresenter)
     ) { onUninstallClicked(app) }
 
     private fun onUninstallClicked(app: ApplicationInfo) {
-        if (appButtonRepository.isUninstallBlockedByAdmin(app)) return
+        if (appButtonRepository.isUninstallBlockedByAdmin(app)) {
+            return
+        } else if (app.isActiveAdmin(context)) {
+                var uninstallDaIntent = Intent(context, DeviceAdminAdd::class.java)
+                uninstallDaIntent.putExtra(DeviceAdminAdd.EXTRA_DEVICE_ADMIN_PACKAGE_NAME,
+                        app.packageName)
+                packageInfoPresenter.logAction(
+                    SettingsEnums.ACTION_SETTINGS_UNINSTALL_DEVICE_ADMIN)
+                context.startActivityAsUser(uninstallDaIntent, app.userHandle)
+                return
+        }
         packageInfoPresenter.startUninstallActivity()
     }
 
