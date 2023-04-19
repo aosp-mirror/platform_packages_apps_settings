@@ -77,6 +77,7 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
                 Log.d(TAG, "onEnrollmentProgress(" + remaining + "), steps: " + currentSteps
                         + ", post progress as " + progress);
             }
+            mHelpMessageLiveData.setValue(null);
             mProgressLiveData.postValue(progress);
         }
 

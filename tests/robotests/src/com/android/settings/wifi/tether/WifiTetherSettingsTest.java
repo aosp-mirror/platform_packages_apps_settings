@@ -17,6 +17,8 @@
 package com.android.settings.wifi.tether;
 
 import static com.android.settings.wifi.WifiUtils.setCanShowWifiHotspotCached;
+import static com.android.settings.wifi.tether.WifiTetherSettings.KEY_WIFI_HOTSPOT_SECURITY;
+import static com.android.settings.wifi.tether.WifiTetherSettings.KEY_WIFI_HOTSPOT_SPEED;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -26,6 +28,7 @@ import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -41,6 +44,7 @@ import android.util.FeatureFlagUtils;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -79,7 +83,7 @@ public class WifiTetherSettingsTest {
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
     @Spy
-    Context mContext = ApplicationProvider.getApplicationContext();
+    private Context mContext = ApplicationProvider.getApplicationContext();
     @Mock
     private WifiManager mWifiManager;
     @Mock
@@ -95,11 +99,19 @@ public class WifiTetherSettingsTest {
     @Mock
     private TextView mEmptyTextView;
     @Mock
-    WifiTetherViewModel mWifiTetherViewModel;
+    private WifiTetherViewModel mWifiTetherViewModel;
     @Mock
-    WifiHotspotRepository mWifiHotspotRepository;
+    private WifiHotspotRepository mWifiHotspotRepository;
+    @Mock
+    private Preference mWifiHotspotSecurity;
+    @Mock
+    private LiveData<Integer> mSecuritySummary;
+    @Mock
+    private Preference mWifiHotspotSpeed;
+    @Mock
+    private LiveData<Integer> mSpeedSummary;
 
-    private WifiTetherSettings mWifiTetherSettings;
+    private WifiTetherSettings mSettings;
 
     @Before
     public void setUp() {
@@ -118,19 +130,25 @@ public class WifiTetherSettingsTest {
         when(provider.getWifiHotspotRepository()).thenReturn(mWifiHotspotRepository);
         when(provider.getWifiTetherViewModel(mock(ViewModelStoreOwner.class)))
                 .thenReturn(mWifiTetherViewModel);
+        when(mWifiTetherViewModel.isSpeedFeatureAvailable()).thenReturn(false);
+        when(mWifiTetherViewModel.getSecuritySummary()).thenReturn(mSecuritySummary);
+        when(mWifiTetherViewModel.getSpeedSummary()).thenReturn(mSpeedSummary);
 
-        mWifiTetherSettings = new WifiTetherSettings(mWifiRestriction);
+        mSettings = spy(new WifiTetherSettings(mWifiRestriction));
+        mSettings.mWifiTetherViewModel = mWifiTetherViewModel;
+        when(mSettings.findPreference(KEY_WIFI_HOTSPOT_SECURITY)).thenReturn(mWifiHotspotSecurity);
+        when(mSettings.findPreference(KEY_WIFI_HOTSPOT_SPEED)).thenReturn(mWifiHotspotSpeed);
     }
 
     @Test
     @Config(shadows = ShadowRestrictedDashboardFragment.class)
     public void onCreate_canNotShowWifiHotspot_shouldFinish() {
         setCanShowWifiHotspotCached(false);
-        mWifiTetherSettings = spy(new WifiTetherSettings(mWifiRestriction));
+        mSettings = spy(new WifiTetherSettings(mWifiRestriction));
 
-        mWifiTetherSettings.onCreate(null);
+        mSettings.onCreate(null);
 
-        verify(mWifiTetherSettings).finish();
+        verify(mSettings).finish();
     }
 
     @Test
@@ -138,7 +156,7 @@ public class WifiTetherSettingsTest {
     public void onStart_uiIsRestricted_removeAllPreferences() {
         spyWifiTetherSettings();
 
-        mWifiTetherSettings.onStart();
+        mSettings.onStart();
 
         verify(mPreferenceScreen).removeAll();
     }
@@ -149,7 +167,7 @@ public class WifiTetherSettingsTest {
         spyWifiTetherSettings();
         when(mWifiRestriction.isHotspotAvailable(mContext)).thenReturn(false);
 
-        mWifiTetherSettings.onStart();
+        mSettings.onStart();
 
         verify(mPreferenceScreen).removeAll();
         verify(mEmptyTextView).setText(anyInt());
@@ -158,21 +176,21 @@ public class WifiTetherSettingsTest {
     @Test
     public void onSecuritySummaryChanged_canNotShowWifiHotspot_returnFalse() {
         int stringResId = R.string.wifi_security_sae;
-        mWifiTetherSettings.mWifiHotspotSecurity = mock(Preference.class);
+        mSettings.mWifiHotspotSecurity = mock(Preference.class);
 
-        mWifiTetherSettings.onSecuritySummaryChanged(stringResId);
+        mSettings.onSecuritySummaryChanged(stringResId);
 
-        verify(mWifiTetherSettings.mWifiHotspotSecurity).setSummary(stringResId);
+        verify(mSettings.mWifiHotspotSecurity).setSummary(stringResId);
     }
 
     @Test
     public void onSpeedSummaryChanged_canNotShowWifiHotspot_returnFalse() {
         int stringResId = R.string.wifi_hotspot_speed_summary_6g;
-        mWifiTetherSettings.mWifiHotspotSpeed = mock(Preference.class);
+        mSettings.mWifiHotspotSpeed = mock(Preference.class);
 
-        mWifiTetherSettings.onSpeedSummaryChanged(stringResId);
+        mSettings.onSpeedSummaryChanged(stringResId);
 
-        verify(mWifiTetherSettings.mWifiHotspotSpeed).setSummary(stringResId);
+        verify(mSettings.mWifiHotspotSpeed).setSummary(stringResId);
     }
 
     @Test
@@ -183,7 +201,7 @@ public class WifiTetherSettingsTest {
 
     @Test
     public void createPreferenceControllers_hasAutoOffPreference() {
-        assertThat(mWifiTetherSettings.createPreferenceControllers(mContext)
+        assertThat(mSettings.createPreferenceControllers(mContext)
                 .stream()
                 .filter(controller -> controller instanceof WifiTetherAutoOffPreferenceController)
                 .count())
@@ -270,23 +288,42 @@ public class WifiTetherSettingsTest {
                 .isFalse();
     }
 
+    @Test
+    public void setupSpeedFeature_speedFeatureIsAvailable_setVisibleToTrue() {
+        mSettings.setupSpeedFeature(true);
+
+        verify(mWifiHotspotSecurity).setVisible(true);
+        verify(mWifiHotspotSpeed).setVisible(true);
+        verify(mSecuritySummary).observe(any(), any());
+        verify(mSpeedSummary).observe(any(), any());
+    }
+
+    @Test
+    public void setupSpeedFeature_speedFeatureIsNotAvailable_setVisibleToFalse() {
+        mSettings.setupSpeedFeature(false);
+
+        verify(mWifiHotspotSecurity).setVisible(false);
+        verify(mWifiHotspotSpeed).setVisible(false);
+        verify(mSecuritySummary, never()).observe(any(), any());
+        verify(mSpeedSummary, never()).observe(any(), any());
+    }
+
     private void spyWifiTetherSettings() {
-        mWifiTetherSettings = spy(new WifiTetherSettings(mWifiRestriction));
+        mSettings = spy(new WifiTetherSettings(mWifiRestriction));
         final FragmentActivity activity = mock(FragmentActivity.class);
-        when(mWifiTetherSettings.getActivity()).thenReturn(activity);
-        when(mWifiTetherSettings.getContext()).thenReturn(mContext);
+        when(mSettings.getActivity()).thenReturn(activity);
+        when(mSettings.getContext()).thenReturn(mContext);
         final Resources.Theme theme = mContext.getTheme();
         when(activity.getTheme()).thenReturn(theme);
         when(activity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
-        doNothing().when(mWifiTetherSettings)
-                .onCreatePreferences(any(Bundle.class), nullable(String.class));
+        doNothing().when(mSettings).onCreatePreferences(any(Bundle.class), nullable(String.class));
         final FakeFeatureFactory fakeFeatureFactory = FakeFeatureFactory.setupForTest();
-        ReflectionHelpers.setField(mWifiTetherSettings, "mDashboardFeatureProvider",
+        ReflectionHelpers.setField(mSettings, "mDashboardFeatureProvider",
                 fakeFeatureFactory.dashboardFeatureProvider);
-        ReflectionHelpers.setField(mWifiTetherSettings, "mEmptyTextView", mEmptyTextView);
-        doReturn(mPreferenceScreen).when(mWifiTetherSettings).getPreferenceScreen();
+        ReflectionHelpers.setField(mSettings, "mEmptyTextView", mEmptyTextView);
+        doReturn(mPreferenceScreen).when(mSettings).getPreferenceScreen();
 
-        mWifiTetherSettings.onCreate(Bundle.EMPTY);
+        mSettings.onCreate(Bundle.EMPTY);
     }
 
     @Implements(RestrictedDashboardFragment.class)

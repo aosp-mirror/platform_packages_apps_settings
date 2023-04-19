@@ -25,6 +25,7 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * This controller helps to manage the state of maximize compatibility switch preference.
@@ -36,11 +37,28 @@ public class WifiTetherMaximizeCompatibilityPreferenceController extends
     public static final String PREF_KEY = "wifi_tether_maximize_compatibility";
 
     private boolean mIsChecked;
+    @VisibleForTesting
+    boolean mShouldHidePreference;
 
     public WifiTetherMaximizeCompatibilityPreferenceController(Context context,
             WifiTetherBasePreferenceController.OnTetherConfigUpdateListener listener) {
         super(context, listener);
+        // If the Wi-Fi Hotspot Speed Feature available, then hide this controller.
+        mShouldHidePreference = FeatureFactory.getFactory(context)
+                .getWifiFeatureProvider().getWifiHotspotRepository().isSpeedFeatureAvailable();
+        Log.d(TAG, "mShouldHidePreference:" + mShouldHidePreference);
+        if (mShouldHidePreference) {
+            return;
+        }
         mIsChecked = isMaximizeCompatibilityEnabled();
+    }
+
+    @Override
+    public boolean isAvailable() {
+        if (mShouldHidePreference) {
+            return false;
+        }
+        return super.isAvailable();
     }
 
     @Override
