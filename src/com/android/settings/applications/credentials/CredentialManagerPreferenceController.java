@@ -39,6 +39,8 @@ import android.os.UserHandle;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.text.TextUtils;
+import com.android.settingslib.utils.ThreadUtils;
+import com.android.internal.content.PackageMonitor;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
@@ -232,20 +234,11 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
     @OnLifecycleEvent(ON_CREATE)
     void onCreate(LifecycleOwner lifecycleOwner) {
-        if (mCredentialManager == null) {
-            return;
-        }
-
-        setAvailableServices(
-                lifecycleOwner,
-                mCredentialManager.getCredentialProviderServices(
-                        getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY),
-                null);
+        update();
     }
 
     @VisibleForTesting
     void setAvailableServices(
-            LifecycleOwner lifecycleOwner,
             List<CredentialProviderInfo> availableServices,
             String flagOverrideForTest) {
         mFlagOverrideForTest = flagOverrideForTest;
@@ -607,6 +600,40 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     /** Called to send messages back to the parent fragment. */
     public static interface Delegate {
         void setActivityResult(int resultCode);
+    }
+
+    /**
+     * Monitor coming and going credman services and calls {@link #update()} when necessary
+     */
+    private final PackageMonitor mSettingsPackageMonitor = new PackageMonitor() {
+        @Override
+        public void onPackageAdded(String packageName, int uid) {
+            ThreadUtils.postOnMainThread(() -> update());
+        }
+
+        @Override
+        public void onPackageModified(String packageName) {
+            ThreadUtils.postOnMainThread(() -> update());
+        }
+
+        @Override
+        public void onPackageRemoved(String packageName, int uid) {
+            ThreadUtils.postOnMainThread(() -> update());
+        }
+    };
+
+    /**
+     * Update the data in this UI.
+     */
+    private void update() {
+        if (mCredentialManager == null) {
+            return;
+        }
+
+        setAvailableServices(
+                mCredentialManager.getCredentialProviderServices(
+                        getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY),
+                null);
     }
 
     /** Dialog fragment parent class. */
