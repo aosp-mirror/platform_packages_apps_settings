@@ -104,7 +104,7 @@
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"No se encontraron dispositivos Bluetooth cercanos."</string>
     <string name="bluetooth_notif_ticker" msgid="209515545257862858">"Solicitud de vinculación de Bluetooth"</string>
     <string name="bluetooth_notif_title" msgid="1196532269131348647">"Solicitud de vinculación"</string>
-    <string name="bluetooth_notif_message" msgid="5584717784198086653">"Presiona para realizar una sincronización con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_notif_message" msgid="5584717784198086653">"Presiona para vincular con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"Archivos recibidos"</string>
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"Bluetooth desactivado"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"Presiona para activarlo"</string>
@@ -678,7 +678,7 @@
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Tiempo para configurar huella dactilar agotado"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Vuelve a intentarlo o hazlo más tarde en Configuración"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Se produjo un error al registrar la huella dactilar. Vuelve a intentarlo o usa otro dedo."</string>
-    <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Agregar otra huella digital"</string>
+    <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Agregar otra"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Siguiente"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Además de desbloquear el teléfono, también puedes utilizar tu huella dactilar para autorizar compras y el acceso a aplicaciones. "<annotation id="url">"Más información"</annotation></string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"La opción de bloqueo de pantalla está inhabilitada. Para obtener más información, comunícate con el administrador de la organización."</string>
@@ -1941,19 +1941,19 @@
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Solo compartir la conexión a Internet mediante USB, Bluetooth y Ethernet"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Conexión a red por USB"</string>
-    <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Compartir la conexión a Internet del teléfono mediante USB"</string>
-    <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"Compartir la conexión a Internet de la tablet mediante USB"</string>
+    <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Compartir la conexión a Internet del teléfono por USB"</string>
+    <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"Compartir la conexión a Internet de la tablet por USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Conexión Bluetooth"</string>
-    <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"Compartir la conexión a Internet de la tablet mediante Bluetooth"</string>
-    <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"Compartir la conexión a Internet del teléfono mediante Bluetooth"</string>
+    <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"Compartir la conexión a Internet de la tablet por Bluetooth"</string>
+    <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"Compartir la conexión a Internet del teléfono por Bluetooth"</string>
     <string name="bluetooth_tethering_off_subtext_config" msgid="6941934844527406581">"Compartiendo la conexión a Internet de <xliff:g id="DEVICE_NAME">%1$d</xliff:g> mediante Bluetooth"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"No se puede anclar a red a más de <xliff:g id="MAXCONNECTION">%1$d</xliff:g> dispositivos."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ya no se anclará a red."</string>
-    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Conexión a Ethernet"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Compartir la conexión a Internet del teléfono mediante Ethernet"</string>
-    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"Compartir la conexión a Internet de la tablet mediante Ethernet"</string>
+    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Conexión Ethernet"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Compartir la conexión a Internet del teléfono por Ethernet"</string>
+    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"Compartir la conexión a Internet de la tablet por Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Usa la función de hotspot y conexión mediante dispositivo portátil para brindar acceso a Internet a otros dispositivos mediante tu conexión de datos móviles. Las apps también pueden crear un hotspot para compartir contenido con dispositivos cercanos."</string>
-    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Usa un hotspot y una conexión mediante dispositivo móvil para brindar acceso a Internet a otros dispositivos a través de una conexión Wi-Fi o de datos móviles. Las apps también pueden crear un hotspot para compartir contenido con dispositivos cercanos."</string>
+    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Usa Hotspot y conexión mediante dispositivos móviles para brindar acceso a Internet a otros dispositivos a través de una conexión Wi-Fi o de datos móviles. Las apps también pueden crear un hotspot para compartir contenido con dispositivos cercanos."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Ayuda"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Red móvil"</string>
     <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Plan móvil"</string>
@@ -3171,7 +3171,7 @@
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"No es segura"</string>
     <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"<xliff:g id="VPN_COUNT">%d</xliff:g> no es segura"</string>
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> no son seguras"</string>
-    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Conectividad adaptable"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Conectividad adaptativa"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Extiende la duración de la batería y mejora el rendimiento del dispositivo mediante la administración automática de las conexiones de red"</string>
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Sí"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"No"</string>
@@ -4660,7 +4660,7 @@
     <string name="high_power_prompt_body" msgid="6029266540782139941">"Si permites que <xliff:g id="APP_NAME">%1$s</xliff:g> se ejecute siempre en segundo plano, es posible que se reduzca la duración de batería. \n\nPuedes cambiar esta opción más tarde en Configuración &gt; Apps."</string>
     <string name="battery_summary" msgid="2491764359695671207">"Se usó el <xliff:g id="PERCENTAGE">%1$s</xliff:g> desde la última carga completa"</string>
     <string name="battery_summary_24hr" msgid="7656033283282656551">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> de uso en las últimas 24 horas"</string>
-    <string name="no_battery_summary" msgid="5769159953384122003">"No se usó la batería desde la última carga completa"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"No usó la batería desde la última carga completa"</string>
     <string name="no_battery_summary_24hr" msgid="6280079526797873842">"No se usó la batería en las últimas 24 horas"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"Configuración de la aplicación"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"Mostrar sintonizador de IU del sistema"</string>
@@ -4687,11 +4687,11 @@
     <string name="usb_use" msgid="6783183432648438528">"Utilizar USB para lo siguiente:"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"Configuración predeterminada de USB"</string>
     <string name="usb_default_info" msgid="167172599497085266">"Si conectas otro dispositivo cuando tu teléfono está desbloqueado, se aplicará esta configuración. Solo debes conectar dispositivos de confianza."</string>
-    <string name="usb_power_title" msgid="5602112548385798646">"Opciones de encendido"</string>
+    <string name="usb_power_title" msgid="5602112548385798646">"Opciones de alimentación"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Opciones de transferencia de archivos"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"Preferencias de USB"</string>
-    <string name="usb_control_title" msgid="1946791559052157693">"USB controlado por"</string>
+    <string name="usb_control_title" msgid="1946791559052157693">"USB controlado por:"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"Dispositivo conectado"</string>
     <string name="usb_control_device" msgid="527916783743021577">"Este dispositivo"</string>
     <string name="usb_switching" msgid="3654709188596609354">"Cambiando…"</string>
@@ -4917,7 +4917,7 @@
     <string name="data_used_template" msgid="8229342096562327646">"Datos usados: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Configurar advertencia"</string>
     <string name="data_warning" msgid="2925054658166062884">"Advertencia de datos"</string>
-    <string name="data_warning_footnote" msgid="5991901765915710592">"El dispositivo mide la advertencia y el límite de datos, que pueden diferir de los que registra tu proveedor."</string>
+    <string name="data_warning_footnote" msgid="5991901765915710592">"La advertencia y el límite de datos se basan en mediciones del dispositivo, que pueden diferir de los que registra tu proveedor."</string>
     <string name="set_data_limit" msgid="9010326815874642680">"Establecer límite de datos"</string>
     <string name="data_limit" msgid="8731731657513652363">"Límite de datos"</string>
     <string name="data_usage_template" msgid="3822452362629968010">"Se usaron <xliff:g id="ID_1">%1$s</xliff:g> en el período: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
@@ -5860,7 +5860,7 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Mostrar un mensaje cuando las apps accedan a textos, imágenes y otro contenido que hayas copiado"</string>
     <string name="all_apps" msgid="3054120149509114789">"Todas las apps"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"No permitir"</string>
-    <string name="uwb_settings_title" msgid="8578498712312002231">"Ultra Wideband (UWB)"</string>
+    <string name="uwb_settings_title" msgid="8578498712312002231">"Banda ultraancha (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Ayuda a identificar la posición relativa de dispositivos cercanos que cuentan con UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Desactiva el modo de avión para usar UWB"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Acceso a la cámara"</string>
