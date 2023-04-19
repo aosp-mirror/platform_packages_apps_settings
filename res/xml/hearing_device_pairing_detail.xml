@@ -26,11 +26,11 @@
         android:key="device_control_category"
         android:title="@string/accessibility_found_all_devices">
         <com.android.settingslib.RestrictedPreference
-            android:key="add_bt_devices"
+            android:key="list_bt_devices"
             android:title="@string/accessibility_list_all_devices_title"
-            android:fragment="com.android.settings.bluetooth.BluetoothPairingDetail"
             settings:userRestriction="no_config_bluetooth"
-            settings:useAdminDisabledSummary="true" />
+            settings:useAdminDisabledSummary="true"
+            settings:controller="com.android.settings.accessibility.ViewAllBluetoothDevicesPreferenceController"/>
     </PreferenceCategory>
 
     <com.android.settings.accessibility.AccessibilityFooterPreference

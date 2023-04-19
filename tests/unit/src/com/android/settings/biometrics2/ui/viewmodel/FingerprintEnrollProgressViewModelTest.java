@@ -225,6 +225,44 @@ public class FingerprintEnrollProgressViewModelTest {
     }
 
     @Test
+    public void testProgressUpdateClearHelpMessage() {
+        // Start enrollment
+        mViewModel.setToken(new byte[] { 1, 2, 3 });
+        final boolean ret = mViewModel.startEnrollment(ENROLL_ENROLL);
+        assertThat(ret).isTrue();
+        assertThat(mCallbackWrapper.mValue).isNotNull();
+        final LiveData<EnrollmentProgress> progressLiveData = mViewModel.getProgressLiveData();
+        final LiveData<EnrollmentStatusMessage> helpMsgLiveData =
+                mViewModel.getHelpMessageLiveData();
+
+        // Update first progress
+        mCallbackWrapper.mValue.onEnrollmentProgress(25);
+        EnrollmentProgress progress = progressLiveData.getValue();
+        assertThat(progress).isNotNull();
+        assertThat(progress.getSteps()).isEqualTo(25);
+        assertThat(progress.getRemaining()).isEqualTo(25);
+
+        // Update help message
+        final int testHelpMsgId = 3;
+        final String testHelpString = "Test Help String";
+        mCallbackWrapper.mValue.onEnrollmentHelp(testHelpMsgId, testHelpString);
+        final EnrollmentStatusMessage helpMsg = helpMsgLiveData.getValue();
+        assertThat(helpMsg).isNotNull();
+        assertThat(helpMsg.getMsgId()).isEqualTo(testHelpMsgId);
+        assertThat(helpMsg.getStr().toString()).isEqualTo(testHelpString);
+
+        // Update second progress
+        mCallbackWrapper.mValue.onEnrollmentProgress(20);
+        progress = progressLiveData.getValue();
+        assertThat(progress).isNotNull();
+        assertThat(progress.getSteps()).isEqualTo(25);
+        assertThat(progress.getRemaining()).isEqualTo(20);
+
+        // Help message shall be set to null
+        assertThat(helpMsgLiveData.getValue()).isNull();
+    }
+
+    @Test
     public void testProgressUpdateWithMessageDisplayController() {
         // Enable MessageDisplayController and mock handler for it
         when(mResources.getBoolean(mEnrollmentMessageDisplayControllerFlagResId)).thenReturn(true);
