@@ -34,17 +34,6 @@
     </Preference>
 
     <Preference
-        android:key="key_calendar_type"
-        android:title="@string/calendar_preferences_title"
-        android:summary="@string/default_string_of_regional_preference"
-        settings:controller="com.android.settings.regionalpreferences.CalendarTypeController"
-        settings:fragment="com.android.settings.regionalpreferences.RegionalPreferencesFragment">
-        <extra
-            android:name="arg_key_regional_preference"
-            android:value="ca" />
-    </Preference>
-
-    <Preference
         android:key="key_first_day_of_week"
         android:title="@string/first_day_of_week_preferences_title"
         android:summary="@string/default_string_of_regional_preference"
