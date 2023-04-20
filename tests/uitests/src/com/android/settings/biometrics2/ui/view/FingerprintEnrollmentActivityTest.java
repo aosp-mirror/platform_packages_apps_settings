@@ -56,11 +56,14 @@ public class FingerprintEnrollmentActivityTest {
     private static final String ACTIVITY_CLASS_NAME =
             "com.android.settings.biometrics2.ui.view.FingerprintEnrollmentActivity";
     private static final String EXTRA_IS_SETUP_FLOW = "isSetupFlow";
+    private static final String EXTRA_SKIP_INTRO = "skip_intro";
     private static final String EXTRA_SKIP_FIND_SENSOR = "skip_find_sensor";
     private static final String EXTRA_FROM_SETTINGS_SUMMARY = "from_settings_summary";
     private static final String EXTRA_PAGE_TRANSITION_TYPE = "page_transition_type";
     private static final String EXTRA_KEY_GK_PW_HANDLE = "gk_pw_handle";
     private static final String TEST_PIN = "1234";
+
+    private static final String DO_IT_LATER = "Do it later";
 
     private static final String UDFPS_ENROLLING_TITLE = "Touch & hold the fingerprint sensor";
     private static final String SFPS_ENROLLING_TITLE =
@@ -120,6 +123,12 @@ public class FingerprintEnrollmentActivityTest {
         mDevice.pressHome();
     }
 
+    @After
+    public void tearDown() throws Exception {
+        LockScreenUtil.resetLockscreen(TEST_PIN);
+        mDevice.pressHome();
+    }
+
     @Test
     public void testIntroChooseLock() {
         final Intent intent = newActivityIntent();
@@ -165,7 +174,7 @@ public class FingerprintEnrollmentActivityTest {
         agreeBtn.click();
 
         // FindUdfps page
-        assertThat(mDevice.wait(Until.hasObject(By.text("Do it later")), IDLE_TIMEOUT)).isTrue();
+        assertThat(mDevice.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue();
         final UiObject2 lottie = mDevice.findObject(By.res(SETTINGS_PACKAGE_NAME,
                 "illustration_lottie"));
         assertThat(lottie).isNotNull();
@@ -193,7 +202,7 @@ public class FingerprintEnrollmentActivityTest {
         agreeBtn.click();
 
         // FindUdfps page
-        assertThat(mDevice.wait(Until.hasObject(By.text("Do it later")), IDLE_TIMEOUT)).isTrue();
+        assertThat(mDevice.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue();
         final UiObject2 lottie = mDevice.findObject(By.res(SETTINGS_PACKAGE_NAME,
                 "illustration_lottie"));
         assertThat(lottie).isNotNull();
@@ -221,7 +230,7 @@ public class FingerprintEnrollmentActivityTest {
         agreeBtn.click();
 
         // FindSfps page
-        assertThat(mDevice.wait(Until.hasObject(By.text("Do it later")), IDLE_TIMEOUT)).isTrue();
+        assertThat(mDevice.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue();
         final UiObject2 lottie = mDevice.findObject(By.res(SETTINGS_PACKAGE_NAME,
                 "illustration_lottie"));
         assertThat(lottie).isNotNull();
@@ -244,7 +253,7 @@ public class FingerprintEnrollmentActivityTest {
         agreeBtn.click();
 
         // FindRfps page
-        assertThat(mDevice.wait(Until.hasObject(By.text("Do it later")), IDLE_TIMEOUT)).isTrue();
+        assertThat(mDevice.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue();
         final UiObject2 lottie = mDevice.findObject(By.res(SETTINGS_PACKAGE_NAME,
                 "illustration_lottie"));
         if (lottie == null) {
@@ -284,15 +293,15 @@ public class FingerprintEnrollmentActivityTest {
         agreeBtn.click();
 
         // FindSensor page
-        assertThat(mDevice.wait(Until.hasObject(By.text("Do it later")), IDLE_TIMEOUT)).isTrue();
-        final UiObject2 doItLaterBtn = mDevice.findObject(By.text("Do it later"));
+        assertThat(mDevice.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue();
+        final UiObject2 doItLaterBtn = mDevice.findObject(By.text(DO_IT_LATER));
         assertThat(doItLaterBtn).isNotNull();
         assertThat(doItLaterBtn.isClickable()).isTrue();
         doItLaterBtn.click();
 
         // Back to home
         mDevice.waitForWindowUpdate("com.android.settings", IDLE_TIMEOUT);
-        assertThat(mDevice.findObject(By.text("Do it later"))).isNull();
+        assertThat(mDevice.findObject(By.text(DO_IT_LATER))).isNull();
     }
 
     @Test
@@ -308,8 +317,8 @@ public class FingerprintEnrollmentActivityTest {
         agreeBtn.click();
 
         // FindSensor page
-        assertThat(mDevice.wait(Until.hasObject(By.text("Do it later")), IDLE_TIMEOUT)).isTrue();
-        final UiObject2 doItLaterBtn = mDevice.findObject(By.text("Do it later"));
+        assertThat(mDevice.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue();
+        final UiObject2 doItLaterBtn = mDevice.findObject(By.text(DO_IT_LATER));
         assertThat(doItLaterBtn).isNotNull();
         assertThat(doItLaterBtn.isClickable()).isTrue();
         doItLaterBtn.click();
@@ -325,7 +334,7 @@ public class FingerprintEnrollmentActivityTest {
         // Back to home
         mDevice.waitForWindowUpdate("com.android.settings", IDLE_TIMEOUT);
         assertThat(mDevice.findObject(By.text("Skip anyway"))).isNull();
-        assertThat(mDevice.findObject(By.text("Do it later"))).isNull();
+        assertThat(mDevice.findObject(By.text(DO_IT_LATER))).isNull();
     }
 
     @Test
@@ -341,8 +350,8 @@ public class FingerprintEnrollmentActivityTest {
         agreeBtn.click();
 
         // FindSensor page
-        assertThat(mDevice.wait(Until.hasObject(By.text("Do it later")), IDLE_TIMEOUT)).isTrue();
-        final UiObject2 doItLaterBtn = mDevice.findObject(By.text("Do it later"));
+        assertThat(mDevice.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue();
+        final UiObject2 doItLaterBtn = mDevice.findObject(By.text(DO_IT_LATER));
         assertThat(doItLaterBtn).isNotNull();
         assertThat(doItLaterBtn.isClickable()).isTrue();
         doItLaterBtn.click();
@@ -356,7 +365,7 @@ public class FingerprintEnrollmentActivityTest {
         goBackBtn.click();
 
         // FindSensor page again
-        assertThat(mDevice.wait(Until.hasObject(By.text("Do it later")), IDLE_TIMEOUT)).isTrue();
+        assertThat(mDevice.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue();
     }
 
     @Test
@@ -447,10 +456,103 @@ public class FingerprintEnrollmentActivityTest {
         assertThat(mDevice.wait(Until.hasObject(By.text(mEnrollingTitle)), IDLE_TIMEOUT)).isTrue();
     }
 
-    @After
-    public void tearDown() throws Exception {
-        LockScreenUtil.resetLockscreen(TEST_PIN);
-        mDevice.pressHome();
+    @Test
+    public void testFindUdfpsWithGkPwHandle_clickStart() {
+        assumeTrue(mCanAssumeUdfps);
+
+        LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true);
+
+        launchFindSensorWithGkPwHandle();
+
+        // FindUdfps page
+        assertThat(mDevice.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue();
+        final UiObject2 lottie = mDevice.findObject(By.res(SETTINGS_PACKAGE_NAME,
+                "illustration_lottie"));
+        assertThat(lottie).isNotNull();
+        assertThat(lottie.isClickable()).isTrue();
+        final UiObject2 startBtn = mDevice.findObject(By.text("Start"));
+        assertThat(startBtn.isClickable()).isTrue();
+        startBtn.click();
+
+        // Enrolling page
+        assertThat(mDevice.wait(Until.hasObject(By.text(mEnrollingTitle)), IDLE_TIMEOUT)).isTrue();
+    }
+
+    @Test
+    public void testFindUdfpsWithGkPwHandle_clickLottie() {
+        assumeTrue(mCanAssumeUdfps);
+
+        LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true);
+
+        launchFindSensorWithGkPwHandle();
+
+        // FindUdfps page
+        assertThat(mDevice.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue();
+        final UiObject2 lottie = mDevice.findObject(By.res(SETTINGS_PACKAGE_NAME,
+                "illustration_lottie"));
+        assertThat(lottie).isNotNull();
+        assertThat(lottie.isClickable()).isTrue();
+        final UiObject2 startBtn = mDevice.findObject(By.text("Start"));
+        assertThat(startBtn.isClickable()).isTrue();
+        lottie.click();
+
+        // Enrolling page
+        assertThat(mDevice.wait(Until.hasObject(By.text(mEnrollingTitle)), IDLE_TIMEOUT)).isTrue();
+    }
+
+    @Test
+    public void testFindSfpsWithGkPwHandle() {
+        assumeTrue(mCanAssumeSfps);
+
+        LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true);
+
+        launchFindSensorWithGkPwHandle();
+
+        // FindSfps page
+        assertThat(mDevice.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue();
+        final UiObject2 lottie = mDevice.findObject(By.res(SETTINGS_PACKAGE_NAME,
+                "illustration_lottie"));
+        assertThat(lottie).isNotNull();
+
+        // We don't have view which can be clicked to run to next page, stop at here.
+    }
+
+    @Test
+    public void testFindRfpsWithGkPwHandle() {
+        assumeFalse(mCanAssumeUdfps || mCanAssumeSfps);
+
+        LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true);
+
+        launchFindSensorWithGkPwHandle();
+
+        // FindRfps page
+        assertThat(mDevice.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue();
+        final UiObject2 lottie = mDevice.findObject(By.res(SETTINGS_PACKAGE_NAME,
+                "illustration_lottie"));
+        if (lottie == null) {
+            // FindSfps page shall have an animation view if no lottie view
+            assertThat(mDevice.findObject(By.res(SETTINGS_PACKAGE_NAME,
+                    "fingerprint_sensor_location_animation"))).isNotNull();
+        }
+    }
+
+
+    @Test
+    public void testFindSensorWithGkPwHandle_clickSkipInFindSensor() {
+        LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true);
+
+        launchFindSensorWithGkPwHandle();
+
+        // FindSensor page
+        assertThat(mDevice.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue();
+        final UiObject2 doItLaterBtn = mDevice.findObject(By.text(DO_IT_LATER));
+        assertThat(doItLaterBtn).isNotNull();
+        assertThat(doItLaterBtn.isClickable()).isTrue();
+        doItLaterBtn.click();
+
+        // Back to home
+        mDevice.waitForWindowUpdate("com.android.settings", IDLE_TIMEOUT);
+        assertThat(mDevice.findObject(By.text(DO_IT_LATER))).isNull();
     }
 
     private void launchIntroWithGkPwHandle(boolean isSuw) {
@@ -462,6 +564,20 @@ public class FingerprintEnrollmentActivityTest {
             if (isSuw) {
                 intent.putExtra(EXTRA_IS_SETUP_FLOW, true);
             }
+            intent.putExtra(EXTRA_KEY_GK_PW_HANDLE, response.getGatekeeperPasswordHandle());
+            mContext.startActivity(intent);
+        };
+        LockPatternChecker.verifyCredential(lockPatternUtils, lockscreenCredential,
+                userId, LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE, onVerifyCallback);
+    }
+
+    private void launchFindSensorWithGkPwHandle() {
+        LockPatternUtils lockPatternUtils = new LockPatternUtils(mContext);
+        final LockscreenCredential lockscreenCredential = LockscreenCredential.createPin(TEST_PIN);
+        final int userId = UserHandle.myUserId();
+        final LockPatternChecker.OnVerifyCallback onVerifyCallback = (response, timeoutMs) -> {
+            final Intent intent = newActivityIntent();
+            intent.putExtra(EXTRA_SKIP_INTRO, true);
             intent.putExtra(EXTRA_KEY_GK_PW_HANDLE, response.getGatekeeperPasswordHandle());
             mContext.startActivity(intent);
         };
