@@ -42,9 +42,6 @@ public class RegionalPreferencesFragment extends SettingsPreferenceFragment {
 
     private String[] initializeUIdata(String type) {
         switch(type) {
-            case ExtensionTypes.TEMPERATURE_UNIT:
-                mTitle = getPrefContext().getString(R.string.temperature_preferences_title);
-                return getPrefContext().getResources().getStringArray(R.array.temperature_units);
             case ExtensionTypes.CALENDAR:
                 mTitle = getPrefContext().getString(R.string.calendar_preferences_title);
                 return getPrefContext().getResources().getStringArray(R.array.calendar_type);
@@ -102,9 +99,6 @@ public class RegionalPreferencesFragment extends SettingsPreferenceFragment {
             if (mType.equals(ExtensionTypes.FIRST_DAY_OF_WEEK)) {
                 pref.setTitle(RegionalPreferencesDataUtils.dayConverter(
                         getPrefContext(), item));
-            } else if (mType.equals(ExtensionTypes.TEMPERATURE_UNIT)) {
-                pref.setTitle(RegionalPreferencesDataUtils.temperatureUnitsConverter(
-                        getPrefContext(), item));
             } else if (mType.equals(ExtensionTypes.CALENDAR)) {
                 pref.setTitle(RegionalPreferencesDataUtils.calendarConverter(
                         getPrefContext(), item));
@@ -133,10 +127,8 @@ public class RegionalPreferencesFragment extends SettingsPreferenceFragment {
         switch(mType) {
             case ExtensionTypes.CALENDAR:
                 return SettingsEnums.CALENDAR_PREFERENCE;
-            case ExtensionTypes.FIRST_DAY_OF_WEEK:
-                return SettingsEnums.FIRST_DAY_OF_WEEK_PREFERENCE;
             default:
-                return SettingsEnums.TEMPERATURE_PREFERENCE;
+                return SettingsEnums.FIRST_DAY_OF_WEEK_PREFERENCE;
         }
     }
 
