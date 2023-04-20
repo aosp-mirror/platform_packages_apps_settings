@@ -88,9 +88,11 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
         // Find active device and set its name as the preference's summary
         List<BluetoothDevice> connectedA2dpDevices = getConnectedA2dpDevices();
         List<BluetoothDevice> connectedHADevices = getConnectedHearingAidDevices();
+        List<BluetoothDevice> connectedLeAudioDevices = getConnectedLeAudioDevices();
         if (mAudioManager.getMode() == AudioManager.MODE_NORMAL
                 && ((connectedA2dpDevices != null && !connectedA2dpDevices.isEmpty())
-                || (connectedHADevices != null && !connectedHADevices.isEmpty()))) {
+                || (connectedHADevices != null && !connectedHADevices.isEmpty())
+                || (connectedLeAudioDevices != null && !connectedLeAudioDevices.isEmpty()))) {
             activeDevice = findActiveDevice();
         }
         mPreference.setTitle(mContext.getString(R.string.media_output_label_title,
@@ -103,13 +105,23 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
 
     @Override
     public BluetoothDevice findActiveDevice() {
-        BluetoothDevice activeDevice = findActiveHearingAidDevice();
+        BluetoothDevice haActiveDevice = findActiveHearingAidDevice();
+        BluetoothDevice leAudioActiveDevice = findActiveLeAudioDevice();
         final A2dpProfile a2dpProfile = mProfileManager.getA2dpProfile();
 
-        if (activeDevice == null && a2dpProfile != null) {
-            activeDevice = a2dpProfile.getActiveDevice();
+        if (haActiveDevice != null) {
+            return haActiveDevice;
         }
-        return activeDevice;
+
+        if (leAudioActiveDevice != null) {
+            return leAudioActiveDevice;
+        }
+
+        if (a2dpProfile != null && a2dpProfile.getActiveDevice() != null) {
+            return a2dpProfile.getActiveDevice();
+        }
+
+        return null;
     }
 
     /**

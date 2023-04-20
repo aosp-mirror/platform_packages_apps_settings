@@ -16,6 +16,8 @@
 
 package com.android.settings.network;
 
+import static com.android.settings.network.InternetResetHelper.RESTART_TIMEOUT_MS;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -29,8 +31,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
-import android.os.Handler;
-import android.os.HandlerThread;
 import android.os.Looper;
 
 import androidx.lifecycle.Lifecycle;
@@ -39,7 +39,6 @@ import androidx.preference.PreferenceCategory;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settingslib.connectivity.ConnectivitySubsystemsRecoveryManager;
 import com.android.settingslib.utils.HandlerInjector;
 
 import org.junit.Before;
@@ -47,6 +46,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
@@ -55,66 +55,46 @@ public class InternetResetHelperTest {
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Spy
+    private final Context mContext = ApplicationProvider.getApplicationContext();
     @Mock
     private WifiManager mWifiManager;
     @Mock
-    public HandlerThread mWorkerThread;
+    InternetResetHelper.RecoveryWorker mRecoveryWorker;
     @Mock
-    public ConnectivitySubsystemsRecoveryManager mConnectivitySubsystemsRecoveryManager;
+    HandlerInjector mHandlerInjector;
     @Mock
     public NetworkMobileProviderController mMobileNetworkController;
 
-    private Context mContext;
     private InternetResetHelper mInternetResetHelper;
     private Preference mResettingPreference;
     private Preference mWifiTogglePreferences;
     private PreferenceCategory mConnectedWifiEntryPreferences;
+    private PreferenceCategory mFirstWifiEntryPreference;
     private PreferenceCategory mWifiEntryPreferences;
-
-    private FakeHandlerInjector mFakeHandlerInjector;
-
-    private static class FakeHandlerInjector extends HandlerInjector {
-
-        private Runnable mRunnable;
-
-        FakeHandlerInjector(Handler handler) {
-            super(handler);
-        }
-
-        @Override
-        public void postDelayed(Runnable runnable, long delayMillis) {
-            mRunnable = runnable;
-        }
-
-        public Runnable getRunnable() {
-            return mRunnable;
-        }
-    }
 
     @Before
     public void setUp() {
-        mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
+        when(mRecoveryWorker.isRecovering()).thenReturn(false);
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }
-        mResettingPreference = new Preference(mContext);
+        mResettingPreference = spy(new Preference(mContext));
         mWifiTogglePreferences = new Preference(mContext);
         mConnectedWifiEntryPreferences = spy(new PreferenceCategory(mContext));
+        mFirstWifiEntryPreference = spy(new PreferenceCategory(mContext));
         mWifiEntryPreferences = spy(new PreferenceCategory(mContext));
 
-        final Lifecycle lifecycle = mock(Lifecycle.class);
-        mInternetResetHelper = new InternetResetHelper(mContext, lifecycle);
-        mInternetResetHelper.mWorkerThread = mWorkerThread;
-        mFakeHandlerInjector = new FakeHandlerInjector(mContext.getMainThreadHandler());
-        mInternetResetHelper.mHandlerInjector = mFakeHandlerInjector;
-        mInternetResetHelper.mConnectivitySubsystemsRecoveryManager =
-                mConnectivitySubsystemsRecoveryManager;
-        mInternetResetHelper.setResettingPreference(mResettingPreference);
-        mInternetResetHelper.setMobileNetworkController(mMobileNetworkController);
-        mInternetResetHelper.setWifiTogglePreference(mWifiTogglePreferences);
-        mInternetResetHelper.addWifiNetworkPreference(mConnectedWifiEntryPreferences);
-        mInternetResetHelper.addWifiNetworkPreference(mWifiEntryPreferences);
+        mInternetResetHelper = new InternetResetHelper(mContext, mock(Lifecycle.class),
+                mMobileNetworkController,
+                mWifiTogglePreferences,
+                mConnectedWifiEntryPreferences,
+                mFirstWifiEntryPreference,
+                mWifiEntryPreferences,
+                mResettingPreference);
+        mInternetResetHelper.mHandlerInjector = mHandlerInjector;
+        mInternetResetHelper.mRecoveryWorker = mRecoveryWorker;
     }
 
     @Test
@@ -135,30 +115,10 @@ public class InternetResetHelperTest {
     }
 
     @Test
-    public void onDestroy_quitWorkerThread() {
+    public void onDestroy_removeCallbacks() {
         mInternetResetHelper.onDestroy();
 
-        verify(mWorkerThread).quit();
-    }
-
-    @Test
-    public void onSubsystemRestartOperationEnd_recoveryIsNotReady_postResumeRunnable() {
-        mInternetResetHelper.mIsRecoveryReady = false;
-
-        mInternetResetHelper.onSubsystemRestartOperationEnd();
-
-        assertThat(mInternetResetHelper.mIsRecoveryReady).isTrue();
-        assertThat(mFakeHandlerInjector.getRunnable())
-                .isEqualTo(mInternetResetHelper.mResumeRunnable);
-    }
-
-    @Test
-    public void onSubsystemRestartOperationEnd_recoveryIsReady_doNothing() {
-        mInternetResetHelper.mIsRecoveryReady = true;
-
-        mInternetResetHelper.onSubsystemRestartOperationEnd();
-
-        assertThat(mFakeHandlerInjector.getRunnable()).isNull();
+        verify(mHandlerInjector).removeCallbacks(any());
     }
 
     @Test
@@ -169,19 +129,16 @@ public class InternetResetHelperTest {
         mInternetResetHelper.updateWifiStateChange();
 
         assertThat(mInternetResetHelper.mIsWifiReady).isFalse();
-        assertThat(mFakeHandlerInjector.getRunnable()).isNull();
     }
 
     @Test
-    public void updateWifiStateChange_wifiIsNotReadyAndWifiEnabled_postResumeRunnable() {
+    public void updateWifiStateChange_wifiIsNotReadyAndWifiEnabled_updateWifiIsReady() {
         mInternetResetHelper.mIsWifiReady = false;
         when(mWifiManager.isWifiEnabled()).thenReturn(true);
 
         mInternetResetHelper.updateWifiStateChange();
 
         assertThat(mInternetResetHelper.mIsWifiReady).isTrue();
-        assertThat(mFakeHandlerInjector.getRunnable())
-                .isEqualTo(mInternetResetHelper.mResumeRunnable);
     }
 
     @Test
@@ -191,7 +148,6 @@ public class InternetResetHelperTest {
         mInternetResetHelper.updateWifiStateChange();
 
         assertThat(mInternetResetHelper.mIsWifiReady).isTrue();
-        assertThat(mFakeHandlerInjector.getRunnable()).isNull();
     }
 
     @Test
@@ -203,16 +159,15 @@ public class InternetResetHelperTest {
         // Hide subsystem preferences
         verify(mMobileNetworkController).hidePreference(true /* hide */, true /* immediately*/);
         assertThat(mWifiTogglePreferences.isVisible()).isFalse();
-        verify(mConnectedWifiEntryPreferences).removeAll();
         assertThat(mConnectedWifiEntryPreferences.isVisible()).isFalse();
-        verify(mWifiEntryPreferences).removeAll();
+        assertThat(mFirstWifiEntryPreference.isVisible()).isFalse();
         assertThat(mWifiEntryPreferences.isVisible()).isFalse();
     }
 
     @Test
     public void resumePreferences_onlyRecoveryReady_shouldShowSubSysHideResetting() {
         mInternetResetHelper.suspendPreferences();
-        mInternetResetHelper.mIsRecoveryReady = true;
+        when(mRecoveryWorker.isRecovering()).thenReturn(false);
         mInternetResetHelper.mIsWifiReady = false;
 
         mInternetResetHelper.resumePreferences();
@@ -224,13 +179,14 @@ public class InternetResetHelperTest {
         // Hide Wi-Fi preferences
         assertThat(mWifiTogglePreferences.isVisible()).isFalse();
         assertThat(mConnectedWifiEntryPreferences.isVisible()).isFalse();
+        assertThat(mFirstWifiEntryPreference.isVisible()).isFalse();
         assertThat(mWifiEntryPreferences.isVisible()).isFalse();
     }
 
     @Test
     public void resumePreferences_onlyWifiReady_shouldShowSubSysHideResetting() {
         mInternetResetHelper.suspendPreferences();
-        mInternetResetHelper.mIsRecoveryReady = false;
+        when(mRecoveryWorker.isRecovering()).thenReturn(true);
         mInternetResetHelper.mIsWifiReady = true;
 
         mInternetResetHelper.resumePreferences();
@@ -240,6 +196,7 @@ public class InternetResetHelperTest {
         // Show Wi-Fi preferences
         assertThat(mWifiTogglePreferences.isVisible()).isTrue();
         assertThat(mConnectedWifiEntryPreferences.isVisible()).isTrue();
+        assertThat(mFirstWifiEntryPreference.isVisible()).isTrue();
         assertThat(mWifiEntryPreferences.isVisible()).isTrue();
         // Hide Mobile Network controller
         verify(mMobileNetworkController, never())
@@ -249,14 +206,16 @@ public class InternetResetHelperTest {
     @Test
     public void resumePreferences_allReady_shouldShowSubSysHideResetting() {
         mInternetResetHelper.suspendPreferences();
-        mInternetResetHelper.mIsRecoveryReady = true;
+        when(mRecoveryWorker.isRecovering()).thenReturn(false);
         mInternetResetHelper.mIsWifiReady = true;
+
         mInternetResetHelper.resumePreferences();
 
         // Show subsystem preferences
         verify(mMobileNetworkController).hidePreference(false, true);
         assertThat(mWifiTogglePreferences.isVisible()).isTrue();
         assertThat(mConnectedWifiEntryPreferences.isVisible()).isTrue();
+        assertThat(mFirstWifiEntryPreference.isVisible()).isTrue();
         assertThat(mWifiEntryPreferences.isVisible()).isTrue();
         // Hide resetting preference
         assertThat(mResettingPreference.isVisible()).isFalse();
@@ -264,22 +223,39 @@ public class InternetResetHelperTest {
 
     @Test
     public void restart_recoveryNotAvailable_shouldDoTriggerSubsystemRestart() {
-        when(mConnectivitySubsystemsRecoveryManager.isRecoveryAvailable()).thenReturn(false);
+        when(mRecoveryWorker.isRecoveryAvailable()).thenReturn(false);
 
         mInternetResetHelper.restart();
 
-        verify(mConnectivitySubsystemsRecoveryManager, never())
-                .triggerSubsystemRestart(any(), any());
+        verify(mRecoveryWorker, never()).triggerRestart();
     }
 
     @Test
     public void restart_recoveryAvailable_triggerSubsystemRestart() {
-        when(mConnectivitySubsystemsRecoveryManager.isRecoveryAvailable()).thenReturn(true);
+        when(mRecoveryWorker.isRecoveryAvailable()).thenReturn(true);
 
         mInternetResetHelper.restart();
 
-        assertThat(mFakeHandlerInjector.getRunnable())
-                .isEqualTo(mInternetResetHelper.mTimeoutRunnable);
-        verify(mConnectivitySubsystemsRecoveryManager).triggerSubsystemRestart(any(), any());
+        verify(mHandlerInjector)
+                .postDelayed(mInternetResetHelper.mTimeoutRunnable, RESTART_TIMEOUT_MS);
+        verify(mRecoveryWorker).triggerRestart();
+    }
+
+    @Test
+    public void checkRecovering_isRecovering_showResetting() {
+        when(mRecoveryWorker.isRecovering()).thenReturn(true);
+
+        mInternetResetHelper.checkRecovering();
+
+        verify(mResettingPreference).setVisible(true);
+    }
+
+    @Test
+    public void checkRecovering_isNotRecovering_doNotShowResetting() {
+        when(mRecoveryWorker.isRecovering()).thenReturn(false);
+
+        mInternetResetHelper.checkRecovering();
+
+        verify(mResettingPreference, never()).setVisible(true);
     }
 }

@@ -97,12 +97,14 @@
         android:key="premium_sms"
         android:title="@string/premium_sms_access"
         android:fragment="com.android.settings.applications.specialaccess.premiumsms.PremiumSmsAccess"
+        settings:isPreferenceVisible="@bool/config_show_premium_sms"
         settings:controller="com.android.settings.applications.specialaccess.premiumsms.PremiumSmsController" />
 
     <Preference
         android:key="data_saver"
         android:title="@string/unrestricted_data_saver"
         android:fragment="com.android.settings.datausage.UnrestrictedDataAccess"
+        settings:isPreferenceVisible="@bool/config_show_data_saver"
         settings:controller="com.android.settings.applications.specialaccess.DataSaverController" />
 
     <Preference

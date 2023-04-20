@@ -457,6 +457,7 @@
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"系统会安全地永久删除您的脸部模型。\n\n脸部模型删除后，如需解锁手机，您将需要使用 PIN 码、解锁图案或密码。"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"使用人脸解锁功能解锁手机"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"指纹"</string>
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"使用指纹解锁功能时"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"工作资料指纹"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"管理指纹"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"将指纹用于以下用途："</string>
@@ -524,9 +525,6 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"请在感觉到振动后抬起手指"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"请移到光线较柔和的地方，然后重试"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"您已达到尝试次数上限"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"您可以使用指纹解锁平板电脑，或验证自己的身份（例如在登录应用时）"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"您可以使用指纹解锁设备或验证自己的身份，例如在登录应用时"</string>
-    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"您可以使用指纹解锁手机或验证自己的身份，例如在登录应用时"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"人脸解锁和指纹解锁"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"点按即可进行设置"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"已添加面孔和多个指纹"</string>
@@ -591,10 +589,12 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"当前注册进度为百分之 <xliff:g id="PERCENTAGE">%d</xliff:g>"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"指纹注册进度为百分之 <xliff:g id="PERCENTAGE">%d</xliff:g>"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"指纹已添加"</string>
-    <string name="security_settings_sfps_enroll_finish" msgid="3948249010300560451">"现在，您可以通过指纹来解锁平板电脑或验证自己的身份，例如登录各种应用或批准购买交易"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"现在您可以使用指纹解锁平板电脑或验证自己的身份，例如在登录应用时"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"现在您可以使用指纹解锁设备或验证自己的身份，例如在登录应用时"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"现在您可以使用指纹解锁手机或验证自己的身份，例如在登录应用时"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"现在您可以使用指纹解锁平板电脑或在需要时验证自己的身份，例如在登录应用或批准购买时"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"现在您可以使用指纹解锁设备或在需要时验证自己的身份，例如在登录应用或批准购买时"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"现在您可以使用指纹解锁手机或在需要时验证自己的身份，例如在登录应用或批准购买时"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"仅在屏幕开启时解锁"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"屏幕必须开启，然后您才能使用指纹解锁。这样可以降低意外解锁的可能性。"</string>
+    <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"屏幕, 解锁, Screen, Unlock"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"以后再说"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"移开手指，然后再次触摸传感器"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"将指纹的一侧放在传感器上并按住，然后切换到另一侧"</string>
@@ -738,17 +738,23 @@
     <string name="fingerprint_unlock_set_unlock_pin" msgid="4724451168139460493">"指纹 + PIN 码"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"指纹 + 密码"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"不设置指纹并继续"</string>
-    <string name="fingerprint_unlock_title" msgid="4978686534505944042">"您可以使用自己的指纹将手机解锁。为了安全起见，要使用此选项，您必须设置备用屏幕锁定方式。"</string>
+    <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"您可以使用自己的指纹将手机解锁。为了安全起见，要使用此选项，您必须设置备用屏幕锁定方式。"</string>
+    <string name="fingerprint_unlock_title" product="tablet" msgid="8674718459462612186">"您可以通过指纹解锁平板电脑。为安全起见，您必须设置备用屏幕锁定方式，才能使用该选项。"</string>
+    <string name="fingerprint_unlock_title" product="device" msgid="3224468142599659740">"您可以通过指纹解锁设备。为安全起见，您必须设置备用屏幕锁定方式，才能使用该选项。"</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"人脸解锁 + 解锁图案"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"人脸解锁 + PIN 码"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"人脸解锁 + 密码"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"不设置人脸解锁并继续"</string>
-    <string name="face_unlock_title" msgid="7344830351598247267">"您可以使用自己的面孔将手机解锁。为了安全起见，要使用此选项，您必须设置备用屏幕锁定方式。"</string>
+    <string name="face_unlock_title" product="default" msgid="7344830351598247267">"您可以使用自己的面孔将手机解锁。为了安全起见，要使用此选项，您必须设置备用屏幕锁定方式。"</string>
+    <string name="face_unlock_title" product="tablet" msgid="5695698036499155727">"您可以通过人脸解锁平板电脑。为安全起见，您必须设置备用屏幕锁定方式，才能使用该选项。"</string>
+    <string name="face_unlock_title" product="device" msgid="6768108756755361161">"您可以通过人脸解锁设备。为安全起见，您必须设置备用屏幕锁定方式，才能使用该选项。"</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"图案 • 人脸 • 指纹"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN 码 • 人脸 • 指纹"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"密码 • 人脸 • 指纹"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"继续，不设置人脸解锁或指纹解锁"</string>
-    <string name="biometrics_unlock_title" msgid="616524056055233041">"您可以通过人脸或指纹解锁手机。为安全起见，您必须设置备用屏幕锁定方式，才能使用该选项。"</string>
+    <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"您可以通过人脸或指纹解锁手机。为安全起见，您必须设置备用屏幕锁定方式，才能使用该选项。"</string>
+    <string name="biometrics_unlock_title" product="tablet" msgid="5808626401936488028">"您可以通过人脸或指纹解锁平板电脑。为安全起见，您必须设置备用屏幕锁定方式，才能使用该选项。"</string>
+    <string name="biometrics_unlock_title" product="device" msgid="4912499343509046929">"您可以通过人脸或指纹解锁设备。为安全起见，您必须设置备用屏幕锁定方式，才能使用该选项。"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"由于管理员、加密策略或凭据存储的要求，您无法使用此选项"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"无"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"滑动"</string>
@@ -1524,11 +1530,14 @@
     <string name="style_suggestion_summary" msgid="4271131877800968159">"尝试不同的样式、壁纸等"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"屏保"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"屏保"</string>
+    <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"就寝模式开启时无法使用"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"使用屏保"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"充电或插入基座时"</string>
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"插入基座充电时"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"充电时"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"插入基座时"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"一律不"</string>
+    <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"已开启 / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"已关闭"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"启用时机"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"当前的屏保"</string>
@@ -1796,6 +1805,8 @@
     <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1163588718127651062">"您可以开始使用<xliff:g id="NAME">^1</xliff:g>了"</string>
     <string name="battery_status_title" msgid="4661768220545945771">"电池状态"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"电池电量"</string>
+    <string name="communal_settings_title" msgid="2845678473945902115">"共用"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"通用设置"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"修改接入点"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"未设置"</string>
@@ -1927,6 +1938,7 @@
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"即将断开与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>的网络共享。"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"以太网络共享"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"通过以太网共享手机的互联网连接"</string>
+    <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"通过以太网共享平板电脑的互联网连接"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"使用热点和网络共享功能，让其他设备能通过您的移动数据网络连接到互联网。应用还可以通过创建热点，与附近的设备共享内容。"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"使用热点和网络共享功能，让其他设备能通过您的 WLAN 或移动数据网络连接到互联网。应用还可以通过创建热点，与附近的设备共享内容。"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"帮助"</string>
@@ -2830,7 +2842,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"详细电量使用记录"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"电池用量"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"查看过去 24 小时的使用情况"</string>
-    <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"查看自上次充满电后的使用情况"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"查看自上次充满电后的电池用量"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"应用的电池用量"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"详细使用情况"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"省电提示"</string>
@@ -2850,10 +2862,14 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"部分功能可能会受到限制"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"耗电量较高"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"查看耗电量较高的应用"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5962767837251276527">"充电已暂停"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="5254922316684499816">"为了延长电池寿命，目前正在保护电池"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_extra_summary (8876637325622106400) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"为保护电池，充电方式已优化"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"为延长电池寿命，充电方式已优化"</string>
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"为保护电池，充电方式已优化"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"为延长电池寿命，在插入基座时充电方式已优化"</string>
+    <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"为保护电池，充电方式已优化"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"为延长电池寿命，在插入基座时充电方式已优化"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"充满电"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"为保护电池，下次平板电脑插入基座时，充电方式将优化"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"详细了解充电暂停的原因"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"继续充电"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"在某些情况下（例如高温和长时间充电时），手机可能会限制充电量，充电到 <xliff:g id="PERCENT">%1$s</xliff:g> 时便暂停充电。这样有助于使电池保持良好状态。\n\n这类情况结束时，手机会自动恢复正常充电。"</string>
@@ -3011,25 +3027,25 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"电池用量"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"自充满电后"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"管理电池用量"</string>
-    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"共 <xliff:g id="TIME_0">^1</xliff:g> • 自电池上次充满电后，在后台使用了 <xliff:g id="TIME_1">^2</xliff:g>\n"</string>
+    <string name="battery_total_and_bg_usage" msgid="8435738393326063685">"共使用了 <xliff:g id="TIME_0">^1</xliff:g> • 自上次充满电后，\n在后台使用了 <xliff:g id="TIME_1">^2</xliff:g>"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"共 <xliff:g id="TIME_0">^1</xliff:g> • 过去 24 小时内在后台使用了 <xliff:g id="TIME_1">^2</xliff:g>\n"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"共 <xliff:g id="TIME_0">^1</xliff:g> • 后台使用了 <xliff:g id="TIME_1">^2</xliff:g>\n（<xliff:g id="TIME_PERIOD">^3</xliff:g>）"</string>
-    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"自电池上次充满电后，共使用了不到 1 分钟"</string>
+    <string name="battery_total_usage_less_minute" msgid="3199193389086828320">"自上次充满电后，共使用了不到 1 分钟"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"过去 24 小时内共使用了不到 1 分钟"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"<xliff:g id="TIME_PERIOD">^1</xliff:g>之间共使用了不到 1 分钟"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"自电池上次充满电后，在后台使用了不到 1 分钟"</string>
+    <string name="battery_bg_usage_less_minute" msgid="7776884932074493406">"自电池上次充满电后，在后台使用了不到 1 分钟"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"过去 24 小时内在后台使用了不到 1 分钟"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"<xliff:g id="TIME_PERIOD">^1</xliff:g>之间在后台使用了不到 1 分钟"</string>
-    <string name="battery_total_usage" msgid="4685408616230899847">"自电池上次充满电后，共使用了 <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_total_usage" msgid="4811532932663354619">"自上次充满电后，共使用了 <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"过去 24 小时内共使用了 <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_PERIOD">^2</xliff:g>之间共使用了 <xliff:g id="TIME_0">^1</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="548670902301883980">"自电池上次充满电后，在后台使用了 <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_bg_usage" msgid="8262917746299259350">"自上次充满电后，在后台使用了 <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"过去 24 小时内在后台使用了 <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_PERIOD">^2</xliff:g>之间在后台使用了 <xliff:g id="TIME_0">^1</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"共 <xliff:g id="TIME">^1</xliff:g> • 自电池上次充满电后，在后台使用了不到 1 分钟\n"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="3861884807364163833">"共使用了 <xliff:g id="TIME">^1</xliff:g> • 自上次充满电后，\n在后台使用了不到 1 分钟"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"共 <xliff:g id="TIME">^1</xliff:g> • 过去 24 小时内在后台使用了不到 1 分钟\n"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"共 <xliff:g id="TIME_0">^1</xliff:g> • 后台使用了不到 1 分钟\n（<xliff:g id="TIME_PERIOD">^2</xliff:g>）"</string>
-    <string name="battery_not_usage" msgid="1472275761547230196">"自电池上次充满电后未使用过"</string>
+    <string name="battery_not_usage" msgid="3851536644733662392">"自上次充满电后，未曾使用"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"过去 24 小时内未使用过"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_other_users" msgid="9002643295562500693">"其他用户"</string>
@@ -3510,7 +3526,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"将<xliff:g id="USER_NAME">%1$s</xliff:g>从此设备中删除"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"锁定屏幕设置"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"从锁定屏幕中添加用户"</string>
-    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"插入基座时切换到管理员用户"</string>
+    <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"插入基座时切换到管理员用户"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"是否删除自己？"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"要删除此用户吗？"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"要移除此个人资料吗？"</string>
@@ -3830,6 +3846,7 @@
     <string name="call_volume_option_title" msgid="1461105986437268924">"通话音量"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"闹钟音量"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"铃声和通知音量"</string>
+    <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"铃声音量"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"通知音量"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"手机铃声"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"默认通知提示音"</string>
@@ -4226,6 +4243,7 @@
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"根据您的要求，Android 会阻止此应用的通知显示在此设备上"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"根据您的要求，Android 会阻止这类通知显示在此设备上"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"根据您的要求，Android 会阻止这组通知显示在此设备上"</string>
+    <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"此应用不会发送通知"</string>
     <string name="notification_channels" msgid="1502969522886493799">"类别"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"其他"</string>
     <plurals name="notification_group_summary" formatted="false" msgid="483490958130993160">
@@ -5517,6 +5535,7 @@
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"应用的流量使用情况"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"无效的网络模式<xliff:g id="NETWORKMODEID">%1$d</xliff:g>。忽略。"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"接入点名称"</string>
+    <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"连接到<xliff:g id="CARRIER">%1$s</xliff:g>时无法使用"</string>
     <string name="see_more" msgid="7499355691042812723">"查看更多"</string>
     <string name="see_less" msgid="2642392725363552793">"隐藏部分"</string>
@@ -5697,6 +5716,11 @@
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"需要先开启“显示设备控制器”才能使用"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"显示双行时钟（若可用）"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"双行时钟"</string>
+    <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"快捷键"</string>
+    <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
+      <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>、<xliff:g id="SECOND">%2$s</xliff:g></item>
+      <item quantity="one"><xliff:g id="FIRST_0">%1$s</xliff:g></item>
+    </plurals>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>

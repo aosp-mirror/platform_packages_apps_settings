@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.util.Log;
 
+import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
@@ -33,17 +34,19 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.fuelgauge.BatteryBroadcastReceiver;
 import com.android.settings.fuelgauge.BatteryUtils;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
  * Common base class for things that need to show the battery usage graph.
  */
 public abstract class PowerUsageBase extends DashboardFragment {
-
     private static final String TAG = "PowerUsageBase";
-    private static final String KEY_REFRESH_TYPE = "refresh_type";
-    private static final String KEY_INCLUDE_HISTORY = "include_history";
 
-    private static final int LOADER_BATTERY_USAGE_STATS = 1;
-
+    @VisibleForTesting
+    static final String KEY_REFRESH_TYPE = "refresh_type";
+    @VisibleForTesting
+    static final String KEY_INCLUDE_HISTORY = "include_history";
     @VisibleForTesting
     BatteryUsageStats mBatteryUsageStats;
 
@@ -54,6 +57,21 @@ public abstract class PowerUsageBase extends DashboardFragment {
     @VisibleForTesting
     final BatteryUsageStatsLoaderCallbacks mBatteryUsageStatsLoaderCallbacks =
             new BatteryUsageStatsLoaderCallbacks();
+
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({
+            LoaderIndex.BATTERY_USAGE_STATS_LOADER,
+            LoaderIndex.BATTERY_INFO_LOADER,
+            LoaderIndex.BATTERY_TIP_LOADER,
+            LoaderIndex.BATTERY_HISTORY_LOADER
+
+    })
+    public @interface LoaderIndex {
+        int BATTERY_USAGE_STATS_LOADER = 0;
+        int BATTERY_INFO_LOADER = 1;
+        int BATTERY_TIP_LOADER = 2;
+        int BATTERY_HISTORY_LOADER = 3;
+    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -91,8 +109,26 @@ public abstract class PowerUsageBase extends DashboardFragment {
         final Bundle bundle = new Bundle();
         bundle.putInt(KEY_REFRESH_TYPE, refreshType);
         bundle.putBoolean(KEY_INCLUDE_HISTORY, isBatteryHistoryNeeded());
-        getLoaderManager().restartLoader(LOADER_BATTERY_USAGE_STATS, bundle,
+        restartLoader(LoaderIndex.BATTERY_USAGE_STATS_LOADER, bundle,
                 mBatteryUsageStatsLoaderCallbacks);
+    }
+
+    protected LoaderManager getLoaderManagerForCurrentFragment() {
+        return LoaderManager.getInstance(this);
+    }
+
+    protected void restartLoader(int loaderId, Bundle bundle,
+            LoaderManager.LoaderCallbacks<?> loaderCallbacks) {
+        LoaderManager loaderManager = getLoaderManagerForCurrentFragment();
+        Loader<?> loader = loaderManager.getLoader(
+                loaderId);
+        if (loader != null && !loader.isReset()) {
+            loaderManager.restartLoader(loaderId, bundle,
+                    loaderCallbacks);
+        } else {
+            loaderManager.initLoader(loaderId, bundle,
+                    loaderCallbacks);
+        }
     }
 
     protected void onLoadFinished(@BatteryUpdateType int refreshType) {

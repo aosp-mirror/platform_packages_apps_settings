@@ -72,6 +72,12 @@ public interface SearchFeatureProvider {
     }
 
     /**
+     * Send the pre-index intent.
+     */
+    default void sendPreIndexIntent(Context context){
+    }
+
+    /**
      * Initializes the search toolbar.
      */
     default void initSearchToolbar(FragmentActivity activity, Toolbar toolbar, int pageId) {

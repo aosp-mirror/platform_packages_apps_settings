@@ -111,6 +111,8 @@ public class SmartAutoRotatePreferenceFragmentTest {
         when(mActivity.getPackageManager()).thenReturn(mPackageManager);
         when(mFragment.getActivity()).thenReturn(mActivity);
         when(mFragment.getContext()).thenReturn(mContext);
+        when(mActivity.getResources()).thenReturn(mResources);
+
         doReturn(mView).when(mFragment).getView();
 
         when(mFragment.findPreference(AUTO_ROTATE_SWITCH_PREFERENCE_KEY)).thenReturn(
@@ -145,6 +147,17 @@ public class SmartAutoRotatePreferenceFragmentTest {
     @Test
     public void createHeader_faceDetectionUnSupported_switchBarIsDisabled() {
         doReturn(null).when(mPackageManager).getRotationResolverPackageName();
+
+        mFragment.createHeader(mActivity);
+
+        verify(mRotateMainSwitchPreference, times(1)).setVisible(false);
+        verify(mRotateSwitchPreference, never()).setVisible(false);
+    }
+
+    @Test
+    public void createHeader_faceDetectionNotEnabledByConfig_switchBarIsDisabled() {
+        doReturn(false).when(mResources).getBoolean(
+                R.bool.config_auto_rotate_face_detection_available);
 
         mFragment.createHeader(mActivity);
 
@@ -198,6 +211,8 @@ public class SmartAutoRotatePreferenceFragmentTest {
         when(mResources.getStringArray(
                 R.array.config_settableAutoRotationDeviceStatesDescriptions)).thenReturn(
                 settableStatesDescriptions);
+        when(mResources.getBoolean(R.bool.config_auto_rotate_face_detection_available)).thenReturn(
+                true);
         DeviceStateRotationLockSettingsManager.resetInstance();
         DeviceStateRotationLockSettingsManager.getInstance(mContext)
                 .resetStateForTesting(mResources);

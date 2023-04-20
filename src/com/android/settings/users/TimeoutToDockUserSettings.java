@@ -16,7 +16,7 @@
 
 package com.android.settings.users;
 
-import static android.provider.Settings.Secure.TIMEOUT_TO_USER_ZERO;
+import static android.provider.Settings.Secure.TIMEOUT_TO_DOCK_USER;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -33,11 +33,12 @@ import java.util.List;
 
 /**
  * Setting screen that lists options for users to configure whether to automatically switch to the
- * admin user when the device is docked, and if so duration of the timeout.
+ * Dock User when the device is docked, and if so duration of the timeout.
  */
-public class TimeoutToUserZeroSettings extends RadioButtonPickerFragment {
+public class TimeoutToDockUserSettings extends RadioButtonPickerFragment {
     // Index of the default key of the timeout setting if it hasn't been changed by the user.
-    public static final int DEFAULT_TIMEOUT_SETTING_VALUE_INDEX = 0;
+    // Default to the smallest non-zero option (which is currently 1 minute).
+    public static final int DEFAULT_TIMEOUT_SETTING_VALUE_INDEX = 1;
 
     // Labels of the options, for example, "never", "after 5 minutes".
     private String[] mEntries;
@@ -52,7 +53,7 @@ public class TimeoutToUserZeroSettings extends RadioButtonPickerFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.user_timeout_to_user_zero_settings;
+        return R.xml.user_timeout_to_dock_user_settings;
     }
 
     @Override
@@ -60,9 +61,9 @@ public class TimeoutToUserZeroSettings extends RadioButtonPickerFragment {
         super.onAttach(context);
 
         mEntries = getContext().getResources().getStringArray(
-                R.array.switch_to_user_zero_when_docked_timeout_entries);
+                R.array.switch_to_dock_user_when_docked_timeout_entries);
         mValues = getContext().getResources().getStringArray(
-                R.array.switch_to_user_zero_when_docked_timeout_values);
+                R.array.switch_to_dock_user_when_docked_timeout_values);
     }
 
     @Override
@@ -83,13 +84,13 @@ public class TimeoutToUserZeroSettings extends RadioButtonPickerFragment {
     @Override
     protected String getDefaultKey() {
         final String defaultKey = Settings.Secure.getStringForUser(
-                getContext().getContentResolver(), TIMEOUT_TO_USER_ZERO, UserHandle.myUserId());
+                getContext().getContentResolver(), TIMEOUT_TO_DOCK_USER, UserHandle.myUserId());
         return defaultKey != null ? defaultKey : mValues[DEFAULT_TIMEOUT_SETTING_VALUE_INDEX];
     }
 
     @Override
     protected boolean setDefaultKey(String key) {
-        Settings.Secure.putStringForUser(getContext().getContentResolver(), TIMEOUT_TO_USER_ZERO,
+        Settings.Secure.putStringForUser(getContext().getContentResolver(), TIMEOUT_TO_DOCK_USER,
                 key, UserHandle.myUserId());
         return true;
     }

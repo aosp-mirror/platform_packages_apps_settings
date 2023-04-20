@@ -376,15 +376,17 @@ public class WifiCallingSliceHelper {
             final WifiCallingQueryImsState queryState = queryImsState(subId);
             if (queryState.isWifiCallingProvisioned()) {
                 final boolean currentValue = isWifiCallingEnabled();
-                final boolean newValue = intent.getBooleanExtra(EXTRA_TOGGLE_STATE,
-                        currentValue);
+                final boolean newValue = !(intent.getBooleanExtra(EXTRA_TOGGLE_STATE,
+                        currentValue));
                 final Intent activationAppIntent =
                         getWifiCallingCarrierActivityIntent(subId);
-                if ((newValue == currentValue) && activationAppIntent == null) {
+                // 1. If activationApp is not null, users only can turn off WFC, or
+                // 2. Turn on/off directly if there is no activationApp.
+                if ((newValue != currentValue) && (activationAppIntent == null || !newValue)) {
                     // If either the action is to turn off wifi calling setting
                     // or there is no activation involved - Update the setting
                     final ImsMmTelManager imsMmTelManager = getImsMmTelManager(subId);
-                    imsMmTelManager.setVoWiFiSettingEnabled(!newValue);
+                    imsMmTelManager.setVoWiFiSettingEnabled(newValue);
                 } else {
                     Log.w(TAG, "action not taken: subId " + subId
                             + " from " + currentValue + " to " + newValue);

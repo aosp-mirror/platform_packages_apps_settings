@@ -31,6 +31,16 @@
         settings:controller="com.android.settings.network.TopLevelNetworkEntryPreferenceController"/>
 
     <com.android.settings.widget.HomepagePreference
+        android:fragment="com.android.settings.communal.CommunalDashboardFragment"
+        android:icon="@drawable/ia_settings_communal"
+        android:key="top_level_communal"
+        android:order="-145"
+        android:title="@string/communal_settings_title"
+        android:summary="@string/communal_settings_summary"
+        settings:highlightableMenuKey="@string/menu_key_communal"
+        settings:controller="com.android.settings.communal.CommunalPreferenceController"/>
+
+    <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"
         android:icon="@drawable/ic_devices_other"
         android:key="top_level_connected_devices"

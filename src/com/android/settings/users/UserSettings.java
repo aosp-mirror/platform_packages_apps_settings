@@ -125,7 +125,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_ADD_SUPERVISED_USER = "supervised_user_add";
     private static final String KEY_ADD_USER_WHEN_LOCKED = "user_settings_add_users_when_locked";
     private static final String KEY_MULTIUSER_TOP_INTRO = "multiuser_top_intro";
-    private static final String KEY_TIMEOUT_TO_USER_ZERO = "timeout_to_user_zero_preference";
+    private static final String KEY_TIMEOUT_TO_DOCK_USER = "timeout_to_dock_user_preference";
     private static final String KEY_GUEST_CATEGORY = "guest_category";
     private static final String KEY_GUEST_RESET = "guest_reset";
     private static final String KEY_GUEST_EXIT = "guest_exit";
@@ -213,7 +213,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private AddUserWhenLockedPreferenceController mAddUserWhenLockedPreferenceController;
     private RemoveGuestOnExitPreferenceController mRemoveGuestOnExitPreferenceController;
     private MultiUserTopIntroPreferenceController mMultiUserTopIntroPreferenceController;
-    private TimeoutToUserZeroPreferenceController mTimeoutToUserZeroPreferenceController;
+    private TimeoutToDockUserPreferenceController mTimeoutToDockUserPreferenceController;
     private UserCreatingDialog mUserCreatingDialog;
     private final AtomicBoolean mGuestCreationScheduled = new AtomicBoolean();
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
@@ -306,14 +306,14 @@ public class UserSettings extends SettingsPreferenceFragment
         mMultiUserTopIntroPreferenceController = new MultiUserTopIntroPreferenceController(activity,
                 KEY_MULTIUSER_TOP_INTRO);
 
-        mTimeoutToUserZeroPreferenceController = new TimeoutToUserZeroPreferenceController(activity,
-                KEY_TIMEOUT_TO_USER_ZERO);
+        mTimeoutToDockUserPreferenceController = new TimeoutToDockUserPreferenceController(
+                activity, KEY_TIMEOUT_TO_DOCK_USER);
 
         final PreferenceScreen screen = getPreferenceScreen();
         mAddUserWhenLockedPreferenceController.displayPreference(screen);
         mRemoveGuestOnExitPreferenceController.displayPreference(screen);
         mMultiUserTopIntroPreferenceController.displayPreference(screen);
-        mTimeoutToUserZeroPreferenceController.displayPreference(screen);
+        mTimeoutToDockUserPreferenceController.displayPreference(screen);
 
         screen.findPreference(mAddUserWhenLockedPreferenceController.getPreferenceKey())
                 .setOnPreferenceChangeListener(mAddUserWhenLockedPreferenceController);
@@ -387,8 +387,8 @@ public class UserSettings extends SettingsPreferenceFragment
 
         mAddUserWhenLockedPreferenceController.updateState(screen.findPreference(
                 mAddUserWhenLockedPreferenceController.getPreferenceKey()));
-        mTimeoutToUserZeroPreferenceController.updateState(screen.findPreference(
-                mTimeoutToUserZeroPreferenceController.getPreferenceKey()));
+        mTimeoutToDockUserPreferenceController.updateState(screen.findPreference(
+                mTimeoutToDockUserPreferenceController.getPreferenceKey()));
         mRemoveGuestOnExitPreferenceController.updateState(screen.findPreference(
                 mRemoveGuestOnExitPreferenceController.getPreferenceKey()));
         if (mShouldUpdateUserList) {
@@ -568,13 +568,6 @@ public class UserSettings extends SettingsPreferenceFragment
                 .setAction(UserManager.ACTION_CREATE_SUPERVISED_USER)
                 .setPackage(mConfigSupervisedUserCreationPackage)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        // TODO(b/209659998): [to-be-removed] fallback activity for supervised user creation.
-        if (getActivity().getPackageManager().resolveActivity(intent, 0) == null) {
-            intent
-                .setClass(getContext(), AddSupervisedUserActivity.class)
-                .setPackage(null);
-        }
 
         startActivity(intent);
     }
@@ -1681,7 +1674,10 @@ public class UserSettings extends SettingsPreferenceFragment
         }
 
         UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        Bitmap icon = BitmapFactory.decodeStream(avatarDataStream);
+        Bitmap decodedIcon = BitmapFactory.decodeStream(avatarDataStream);
+        CircleFramedDrawable drawable = CircleFramedDrawable.getInstance(context, decodedIcon);
+        Bitmap icon = UserIcons.convertToBitmapAtUserIconSize(context.getResources(), drawable);
+
         um.setUserIcon(userId, icon);
         try {
             avatarDataStream.close();

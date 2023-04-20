@@ -54,7 +54,7 @@ public class PanelSlicesAdapter
      * Maximum number of slices allowed on the panel view.
      */
     @VisibleForTesting
-    static final int MAX_NUM_OF_SLICES = 6;
+    static final int MAX_NUM_OF_SLICES = 7;
 
     private final List<LiveData<Slice>> mSliceLiveData;
     private final int mMetricsCategory;
@@ -84,7 +84,7 @@ public class PanelSlicesAdapter
 
     @Override
     public void onBindViewHolder(@NonNull SliceRowViewHolder sliceRowViewHolder, int position) {
-        sliceRowViewHolder.onBind(mSliceLiveData.get(position), position);
+        sliceRowViewHolder.onBind(mSliceLiveData.get(position).getValue());
     }
 
     /**
@@ -132,15 +132,14 @@ public class PanelSlicesAdapter
         /**
          * Called when the view is displayed.
          */
-        public void onBind(LiveData<Slice> sliceLiveData, int position) {
-            sliceLiveData.observe(mPanelFragment.getViewLifecycleOwner(), sliceView);
-
-            // Do not show the divider above media devices switcher slice per request
-            final Slice slice = sliceLiveData.getValue();
-
+        public void onBind(Slice slice) {
             // Hides slice which reports with error hint or not contain any slice sub-item.
             if (slice == null || !isValidSlice(slice)) {
                 sliceView.setVisibility(View.GONE);
+                return;
+            } else {
+                sliceView.setSlice(slice);
+                sliceView.setVisibility(View.VISIBLE);
             }
 
             // Add divider for the end icon
@@ -154,7 +153,7 @@ public class PanelSlicesAdapter
                                 .action(0 /* attribution */,
                                         SettingsEnums.ACTION_PANEL_INTERACTION,
                                         mMetricsCategory,
-                                        sliceLiveData.getValue().getUri().getLastPathSegment()
+                                        slice.getUri().getLastPathSegment()
                                         /* log key */,
                                         eventInfo.actionType /* value */);
                     })

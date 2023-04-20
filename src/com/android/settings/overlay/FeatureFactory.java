@@ -45,7 +45,6 @@ import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.security.SecuritySettingsFeatureProvider;
 import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.users.UserFeatureProvider;
-import com.android.settings.vpn2.AdvancedVpnFeatureProvider;
 import com.android.settings.wifi.WifiTrackerLibProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -177,11 +176,6 @@ public abstract class FeatureFactory {
      * Retrieves implementation for Accessibility metrics category feature.
      */
     public abstract AccessibilityMetricsFeatureProvider getAccessibilityMetricsFeatureProvider();
-
-    /**
-     * Retrieves implementation for advanced vpn feature.
-     */
-    public abstract AdvancedVpnFeatureProvider getAdvancedVpnFeatureProvider();
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {

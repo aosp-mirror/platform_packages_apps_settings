@@ -32,9 +32,20 @@ public class CarrierConfigChangedReceiver extends BroadcastReceiver {
             CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED;
 
     private final CountDownLatch mLatch;
+    private final boolean mIsWaitingForValidSubId;
 
-    public CarrierConfigChangedReceiver(CountDownLatch latch) {
+    /**
+     * This is the CarrierConfigChanged receiver. If it receives the carrier config changed, then it
+     * call the CountDownLatch.countDown().
+     * If the "isWaitingForValidSubId" is true, then the receiver skip the carrier config changed
+     * with the subId = -1. The receiver executes the countDown when the CarrierConfigChanged
+     * with valid subId.
+     * If the "isWaitingForValidSubId" is false, then the receiver executes the countDown when
+     * receiving any CarrierConfigChanged.
+     */
+    public CarrierConfigChangedReceiver(CountDownLatch latch, boolean isWaitingForValidSubId) {
         mLatch = latch;
+        mIsWaitingForValidSubId = isWaitingForValidSubId;
     }
 
     public void registerOn(Context context) {
@@ -53,7 +64,8 @@ public class CarrierConfigChangedReceiver extends BroadcastReceiver {
     }
 
     private void checkSubscriptionIndex(Intent intent) {
-        if (intent.hasExtra(CarrierConfigManager.EXTRA_SUBSCRIPTION_INDEX)) {
+        if (intent.hasExtra(CarrierConfigManager.EXTRA_SUBSCRIPTION_INDEX)
+                || !mIsWaitingForValidSubId) {
             int subId = intent.getIntExtra(CarrierConfigManager.EXTRA_SUBSCRIPTION_INDEX, -1);
             Log.i(TAG, "subId from config changed: " + subId);
             mLatch.countDown();

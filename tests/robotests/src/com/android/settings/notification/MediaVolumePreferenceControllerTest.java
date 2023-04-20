@@ -113,13 +113,23 @@ public class MediaVolumePreferenceControllerTest {
 
     @Test
     public void isSupportEndItem_withBleDevice_returnsTrue() {
+        doReturn(true).when(sMediaOutputIndicatorWorker).isBroadcastSupported();
         doReturn(mDevice1).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
 
         assertThat(mController.isSupportEndItem()).isTrue();
     }
 
     @Test
+    public void isSupportEndItem_notSupportedBroadcast_returnsFalse() {
+        doReturn(false).when(sMediaOutputIndicatorWorker).isBroadcastSupported();
+        doReturn(mDevice1).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
+
+        assertThat(mController.isSupportEndItem()).isFalse();
+    }
+
+    @Test
     public void isSupportEndItem_withNonBleDevice_returnsFalse() {
+        doReturn(true).when(sMediaOutputIndicatorWorker).isBroadcastSupported();
         doReturn(mDevice2).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
 
         assertThat(mController.isSupportEndItem()).isFalse();
@@ -127,6 +137,7 @@ public class MediaVolumePreferenceControllerTest {
 
     @Test
     public void getSliceEndItem_NotSupportEndItem_getsNullSliceAction() {
+        doReturn(true).when(sMediaOutputIndicatorWorker).isBroadcastSupported();
         doReturn(mDevice2).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
 
         final SliceAction sliceAction = mController.getSliceEndItem(mContext);
@@ -136,6 +147,7 @@ public class MediaVolumePreferenceControllerTest {
 
     @Test
     public void getSliceEndItem_deviceIsBroadcasting_getsBroadcastIntent() {
+        doReturn(true).when(sMediaOutputIndicatorWorker).isBroadcastSupported();
         doReturn(mDevice1).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
         doReturn(true).when(sMediaOutputIndicatorWorker).isDeviceBroadcasting();
         doReturn(mMediaController).when(sMediaOutputIndicatorWorker)
@@ -155,6 +167,7 @@ public class MediaVolumePreferenceControllerTest {
         final CachedBluetoothDevice cachedDevice = mock(CachedBluetoothDevice.class);
         when(((BluetoothMediaDevice) device).getCachedDevice()).thenReturn(cachedDevice);
         when(device.isBLEDevice()).thenReturn(true);
+        doReturn(true).when(sMediaOutputIndicatorWorker).isBroadcastSupported();
         doReturn(device).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
         doReturn(false).when(sMediaOutputIndicatorWorker).isDeviceBroadcasting();
         doReturn(mMediaController).when(sMediaOutputIndicatorWorker)

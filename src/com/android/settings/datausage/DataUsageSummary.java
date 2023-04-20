@@ -75,11 +75,19 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
         return R.string.help_url_data_usage;
     }
 
+    public boolean isSimHardwareVisible(Context context) {
+        return SubscriptionUtil.isSimHardwareVisible(context);
+    }
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         Context context = getContext();
 
+        if (!isSimHardwareVisible(context)) {
+            finish();
+            return;
+        }
         enableProxySubscriptionManager(context);
 
         boolean hasMobileData = DataUsageUtils.hasMobileData(context);
@@ -137,6 +145,9 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final Activity activity = getActivity();
         final ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
+        if (!isSimHardwareVisible(context)) {
+            return controllers;
+        }
         mSummaryController =
                 new DataUsageSummaryPreferenceController(activity, getSettingsLifecycle(), this,
                         DataUsageUtils.getDefaultSubscriptionId(activity));

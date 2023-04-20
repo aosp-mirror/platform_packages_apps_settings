@@ -28,6 +28,7 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.util.EventLog;
 import android.util.Log;
+import android.view.WindowManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentTransaction;
@@ -99,6 +100,7 @@ public class WifiDppConfiguratorActivity extends WifiDppBaseActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
 
         if (savedInstanceState != null) {
             String qrCode = savedInstanceState.getString(KEY_QR_CODE);

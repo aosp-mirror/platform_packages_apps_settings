@@ -21,6 +21,7 @@ import android.widget.RadioButton;
 import com.android.settings.R;
 import com.android.settings.RestrictedRadioButton;
 import com.android.settings.notification.RedactionInterstitial.RedactionInterstitialFragment;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
@@ -38,6 +39,7 @@ import org.robolectric.shadows.ShadowUserManager;
 @Config(shadows = {
         ShadowUtils.class,
         ShadowRestrictedLockUtilsInternal.class,
+        SettingsShadowResources.class,
 })
 public class RedactionInterstitialTest {
     private RedactionInterstitial mActivity;
@@ -134,12 +136,39 @@ public class RedactionInterstitialTest {
         assertSelectedButton(R.id.redact_sensitive);
     }
 
+    @Test
+    public void defaultShowSensitiveContent_configDeny() {
+        final ContentResolver resolver = RuntimeEnvironment.application.getContentResolver();
+        Settings.Secure.putIntForUser(resolver,
+                LOCK_SCREEN_SHOW_NOTIFICATIONS, 1, UserHandle.myUserId());
+        setupConfig(false);
+        setupActivity();
+
+        assertSelectedButton(R.id.redact_sensitive);
+    }
+
+    @Test
+    public void defaultShowSensitiveContent_configAllow() {
+        final ContentResolver resolver = RuntimeEnvironment.application.getContentResolver();
+        Settings.Secure.putIntForUser(resolver,
+                LOCK_SCREEN_SHOW_NOTIFICATIONS, 1, UserHandle.myUserId());
+        setupConfig(true);
+        setupActivity();
+
+        assertSelectedButton(R.id.show_all);
+    }
+
     private void setupActivity() {
         mActivity = buildActivity(RedactionInterstitial.class, new Intent()).setup().get();
         mFragment = (RedactionInterstitialFragment)
                 mActivity.getSupportFragmentManager().findFragmentById(R.id.main_content);
         assertThat(mActivity).isNotNull();
         assertThat(mFragment).isNotNull();
+    }
+
+    private void setupConfig(boolean allowSensitiveContent) {
+        SettingsShadowResources.overrideResource(
+                R.bool.default_allow_sensitive_lockscreen_content, allowSensitiveContent);
     }
 
     private void setupSettings(int show, int showUnredacted) {

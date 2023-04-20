@@ -35,6 +35,7 @@ import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -43,8 +44,6 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
-
-import org.junit.Ignore;
 
 @RunWith(RobolectricTestRunner.class)
 public class SoundSettingsTest {
@@ -85,5 +84,20 @@ public class SoundSettingsTest {
         settings.mVolumeCallback.onStreamValueChanged(0, 5);
 
         assertThat(settings.mHandler.hasMessages(SoundSettings.STOP_SAMPLE)).isTrue();
+    }
+
+    @Test
+    public void notificationVolume_isBetweenRingAndAlarm() {
+        final Context context = spy(RuntimeEnvironment.application);
+        final SoundSettings settings = new SoundSettings();
+        final int xmlId = settings.getPreferenceScreenResId();
+        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
+
+        int ring = keys.indexOf("ring_volume");
+        int notification = keys.indexOf("notification_volume");
+        int alarm = keys.indexOf("alarm_volume");
+
+        assertThat(ring < notification).isTrue();
+        assertThat(notification < alarm).isTrue();
     }
 }

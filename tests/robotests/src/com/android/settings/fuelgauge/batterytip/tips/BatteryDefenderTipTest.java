@@ -79,17 +79,9 @@ public class BatteryDefenderTipTest {
     }
 
     @Test
-    public void getSummary_notExtraDefended_showNonExtraDefendedSummary() {
+    public void getSummary_showSummary() {
         assertThat(mBatteryDefenderTip.getSummary(mContext))
                 .isEqualTo(mContext.getString(R.string.battery_tip_limited_temporarily_summary));
-    }
-
-    @Test
-    public void getSummary_extraDefended_showExtraDefendedSummary() {
-        BatteryDefenderTip defenderTip = new BatteryDefenderTip(
-                BatteryTip.StateType.NEW, /* extraDefended= */ true);
-
-        assertThat(defenderTip.getSummary(mContext).toString()).isEqualTo("12%");
     }
 
     @Test

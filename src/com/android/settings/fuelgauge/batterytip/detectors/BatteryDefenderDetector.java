@@ -37,11 +37,10 @@ public class BatteryDefenderDetector implements BatteryTipDetector {
 
     @Override
     public BatteryTip detect() {
-        if (mBatteryInfo.isOverheated) {
-            final boolean extraDefend = FeatureFactory.getFactory(mContext)
-                    .getPowerUsageFeatureProvider(mContext)
-                    .isExtraDefend();
-            return new BatteryDefenderTip(BatteryTip.StateType.NEW, extraDefend);
+        if (mBatteryInfo.isOverheated && !FeatureFactory.getFactory(mContext)
+                .getPowerUsageFeatureProvider(mContext)
+                .isExtraDefend()) {
+            return new BatteryDefenderTip(BatteryTip.StateType.NEW);
         }
         return new BatteryDefenderTip(BatteryTip.StateType.INVISIBLE);
     }

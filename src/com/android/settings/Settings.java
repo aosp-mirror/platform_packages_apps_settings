@@ -152,6 +152,11 @@ public class Settings extends SettingsActivity {
         /** Redirects to SafetyCenter if enabled. */
         @VisibleForTesting
         public void handleSafetyCenterRedirection() {
+            if (isFinishing()) {
+                // Don't trampoline if already exiting this activity.
+                return;
+            }
+
             if (SafetyCenterManagerWrapper.get().isEnabled(this)) {
                 try {
                     startActivity(new Intent(Intent.ACTION_SAFETY_CENTER));
@@ -213,6 +218,11 @@ public class Settings extends SettingsActivity {
         /** Redirects to SafetyCenter if enabled. */
         @VisibleForTesting
         public void handleSafetyCenterRedirection() {
+            if (isFinishing()) {
+                // Don't trampoline if already exiting this activity.
+                return;
+            }
+
             if (ACTION_PRIVACY_SETTINGS.equals(getIntent().getAction())
                     && SafetyCenterManagerWrapper.get().isEnabled(this)) {
                 try {
