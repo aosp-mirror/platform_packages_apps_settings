@@ -17,6 +17,7 @@
 package com.android.settings.applications;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+import static com.android.settings.Utils.SYSTEMUI_PACKAGE_NAME;
 
 import android.app.Application;
 import android.app.usage.UsageStats;
@@ -71,7 +72,7 @@ public class RecentAppStatsMixin implements Comparator<UsageStats>, LifecycleObs
                 "android",
                 "com.android.phone",
                 SETTINGS_PACKAGE_NAME,
-                "com.android.systemui",
+                SYSTEMUI_PACKAGE_NAME,
                 "com.android.providers.calendar",
                 "com.android.providers.media"
         ));
