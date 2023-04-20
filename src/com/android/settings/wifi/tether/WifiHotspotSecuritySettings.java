@@ -19,6 +19,7 @@ package com.android.settings.wifi.tether;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LiveData;
 
 import com.android.settings.R;
@@ -72,6 +73,7 @@ public class WifiHotspotSecuritySettings extends DashboardFragment implements
             SelectorWithWidgetPreference preference = findPreference(viewItem.mKey);
             preference.setOnClickListener(this);
         }
+        mWifiHotspotSecurityViewModel.getRestarting().observe(this, this::onRestartingChanged);
     }
 
     protected void onViewItemListDataChanged(
@@ -94,6 +96,12 @@ public class WifiHotspotSecuritySettings extends DashboardFragment implements
                 }
             }
         }
+    }
+
+    @VisibleForTesting
+    void onRestartingChanged(Boolean restarting) {
+        log("onRestartingChanged(), restarting:" + restarting);
+        setLoading(restarting, false);
     }
 
     @Override
