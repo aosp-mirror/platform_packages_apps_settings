@@ -45,9 +45,6 @@ public class RegionalPreferencesFragment extends SettingsPreferenceFragment {
             case ExtensionTypes.CALENDAR:
                 mTitle = getPrefContext().getString(R.string.calendar_preferences_title);
                 return getPrefContext().getResources().getStringArray(R.array.calendar_type);
-            case ExtensionTypes.FIRST_DAY_OF_WEEK:
-                mTitle = getPrefContext().getString(R.string.first_day_of_week_preferences_title);
-                return getPrefContext().getResources().getStringArray(R.array.first_day_of_week);
             default:
                 mTitle = getPrefContext().getString(R.string.regional_preferences_title);
                 return new String[0];
@@ -96,10 +93,7 @@ public class RegionalPreferencesFragment extends SettingsPreferenceFragment {
         String[] uiData = initializeUIdata(mType);
         for (String item : uiData) {
             TickButtonPreference pref = new TickButtonPreference(getPrefContext());
-            if (mType.equals(ExtensionTypes.FIRST_DAY_OF_WEEK)) {
-                pref.setTitle(RegionalPreferencesDataUtils.dayConverter(
-                        getPrefContext(), item));
-            } else if (mType.equals(ExtensionTypes.CALENDAR)) {
+            if (mType.equals(ExtensionTypes.CALENDAR)) {
                 pref.setTitle(RegionalPreferencesDataUtils.calendarConverter(
                         getPrefContext(), item));
             } else {
@@ -124,11 +118,11 @@ public class RegionalPreferencesFragment extends SettingsPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        switch(mType) {
+        switch (mType) {
             case ExtensionTypes.CALENDAR:
                 return SettingsEnums.CALENDAR_PREFERENCE;
             default:
-                return SettingsEnums.FIRST_DAY_OF_WEEK_PREFERENCE;
+                return SettingsEnums.CALENDAR_PREFERENCE;
         }
     }
 
