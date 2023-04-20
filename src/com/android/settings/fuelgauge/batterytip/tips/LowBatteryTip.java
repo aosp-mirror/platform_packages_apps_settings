@@ -51,12 +51,7 @@ public class LowBatteryTip extends BatteryTip {
 
     @Override
     public int getIconId() {
-        return mState = R.drawable.ic_battery_status_bad_24dp;
-    }
-
-    @Override
-    public int getIconTintColorId() {
-        return mState = R.color.battery_bad_color_light;
+        return mState = R.drawable.ic_battery_saver_accent_24dp;
     }
 
     @Override
