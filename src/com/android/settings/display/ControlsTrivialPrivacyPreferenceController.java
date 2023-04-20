@@ -50,9 +50,11 @@ public class ControlsTrivialPrivacyPreferenceController extends TogglePreference
 
     @Override
     public CharSequence getSummary() {
-        if (getAvailabilityStatus() == DISABLED_DEPENDENT_SETTING) {
+        if (!CustomizableLockScreenUtils.isFeatureEnabled(mContext)
+                && getAvailabilityStatus() == DISABLED_DEPENDENT_SETTING) {
             return mContext.getText(R.string.lockscreen_trivial_disabled_controls_summary);
         }
+
         return mContext.getText(R.string.lockscreen_trivial_controls_summary);
     }
 
@@ -74,13 +76,18 @@ public class ControlsTrivialPrivacyPreferenceController extends TogglePreference
     }
 
     private boolean showDeviceControlsSettingsEnabled() {
-        return Settings.Secure.getInt(mContext.getContentResolver(), DEPENDENCY_SETTING_KEY, 0)
-                != 0;
+        return CustomizableLockScreenUtils.isFeatureEnabled(mContext)
+                || Settings.Secure.getInt(
+                        mContext.getContentResolver(), DEPENDENCY_SETTING_KEY, 0) != 0;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        if (CustomizableLockScreenUtils.isFeatureEnabled(mContext)) {
+            return;
+        }
+
         Preference currentPreference = screen.findPreference(getPreferenceKey());
         currentPreference.setDependency("lockscreen_privacy_controls_switch");
     }

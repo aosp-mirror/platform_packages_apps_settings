@@ -21,14 +21,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
-import android.os.HandlerThread;
-import android.os.Process;
-import android.text.TextUtils;
 import android.util.Log;
 
-import androidx.annotation.UiThread;
 import androidx.annotation.VisibleForTesting;
-import androidx.annotation.WorkerThread;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
@@ -38,14 +33,14 @@ import androidx.preference.PreferenceCategory;
 import com.android.settingslib.connectivity.ConnectivitySubsystemsRecoveryManager;
 import com.android.settingslib.utils.HandlerInjector;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Helper class to restart connectivity for all requested subsystems.
  */
-public class InternetResetHelper implements LifecycleObserver,
-        ConnectivitySubsystemsRecoveryManager.RecoveryStatusCallback {
+public class InternetResetHelper implements LifecycleObserver {
 
     protected static final String TAG = "InternetResetHelper";
     public static final long RESTART_TIMEOUT_MS = 15_000; // 15 seconds
@@ -61,41 +56,40 @@ public class InternetResetHelper implements LifecycleObserver,
     protected final IntentFilter mWifiStateFilter;
     protected final BroadcastReceiver mWifiStateReceiver = new BroadcastReceiver() {
         @Override
-        @WorkerThread
         public void onReceive(Context context, Intent intent) {
-            if (intent != null && TextUtils.equals(intent.getAction(),
-                    WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
-                updateWifiStateChange();
-            }
+            updateWifiStateChange();
         }
     };
 
-    protected ConnectivitySubsystemsRecoveryManager mConnectivitySubsystemsRecoveryManager;
-    protected HandlerThread mWorkerThread;
-    protected boolean mIsRecoveryReady;
-    protected boolean mIsWifiReady;
+    protected RecoveryWorker mRecoveryWorker;
+    protected boolean mIsWifiReady = true;
     protected HandlerInjector mHandlerInjector;
-    protected final Runnable mResumeRunnable = () -> {
-        resumePreferences();
-    };
     protected final Runnable mTimeoutRunnable = () -> {
-        mIsRecoveryReady = true;
+        Log.w(TAG, "Resume preferences due to connectivity subsystems recovery timed out.");
+        mRecoveryWorker.clearRecovering();
         mIsWifiReady = true;
         resumePreferences();
     };
 
-    public InternetResetHelper(Context context, Lifecycle lifecycle) {
+    public InternetResetHelper(Context context, Lifecycle lifecycle,
+            NetworkMobileProviderController mobileNetworkController,
+            Preference wifiTogglePreferences,
+            PreferenceCategory connectedWifiEntryPreferenceCategory,
+            PreferenceCategory firstWifiEntryPreferenceCategory,
+            PreferenceCategory wifiEntryPreferenceCategory,
+            Preference resettingPreference) {
         mContext = context;
+        mMobileNetworkController = mobileNetworkController;
+        mWifiTogglePreferences = wifiTogglePreferences;
+        mWifiNetworkPreferences.add(connectedWifiEntryPreferenceCategory);
+        mWifiNetworkPreferences.add(firstWifiEntryPreferenceCategory);
+        mWifiNetworkPreferences.add(wifiEntryPreferenceCategory);
+        mResettingPreference = resettingPreference;
+
         mHandlerInjector = new HandlerInjector(context.getMainThreadHandler());
         mWifiManager = mContext.getSystemService(WifiManager.class);
         mWifiStateFilter = new IntentFilter(WifiManager.NETWORK_STATE_CHANGED_ACTION);
-
-        mWorkerThread = new HandlerThread(TAG
-                + "{" + Integer.toHexString(System.identityHashCode(this)) + "}",
-                Process.THREAD_PRIORITY_BACKGROUND);
-        mWorkerThread.start();
-        mConnectivitySubsystemsRecoveryManager = new ConnectivitySubsystemsRecoveryManager(
-                mContext, mWorkerThread.getThreadHandler());
+        mRecoveryWorker = RecoveryWorker.getInstance(mContext, this);
 
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -118,72 +112,18 @@ public class InternetResetHelper implements LifecycleObserver,
     /** @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY) */
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void onDestroy() {
-        mHandlerInjector.removeCallbacks(mResumeRunnable);
         mHandlerInjector.removeCallbacks(mTimeoutRunnable);
-        mWorkerThread.quit();
-    }
-
-    @Override
-    @WorkerThread
-    public void onSubsystemRestartOperationBegin() {
-        Log.d(TAG, "The connectivity subsystem is starting for recovery.");
-    }
-
-    @Override
-    @WorkerThread
-    public void onSubsystemRestartOperationEnd() {
-        Log.d(TAG, "The connectivity subsystem is done for recovery.");
-        if (!mIsRecoveryReady) {
-            mIsRecoveryReady = true;
-            mHandlerInjector.postDelayed(mResumeRunnable, 0 /* delayMillis */);
-        }
     }
 
     @VisibleForTesting
-    @WorkerThread
     protected void updateWifiStateChange() {
         if (!mIsWifiReady && mWifiManager.isWifiEnabled()) {
             Log.d(TAG, "The Wi-Fi subsystem is done for recovery.");
             mIsWifiReady = true;
-            mHandlerInjector.postDelayed(mResumeRunnable, 0 /* delayMillis */);
+            resumePreferences();
         }
     }
 
-    /**
-     * Sets the resetting preference.
-     */
-    @UiThread
-    public void setResettingPreference(Preference preference) {
-        mResettingPreference = preference;
-    }
-
-    /**
-     * Sets the mobile network controller.
-     */
-    @UiThread
-    public void setMobileNetworkController(NetworkMobileProviderController controller) {
-        mMobileNetworkController = controller;
-    }
-
-    /**
-     * Sets the Wi-Fi toggle preference.
-     */
-    @UiThread
-    public void setWifiTogglePreference(Preference preference) {
-        mWifiTogglePreferences = preference;
-    }
-
-    /**
-     * Adds the Wi-Fi network preference.
-     */
-    @UiThread
-    public void addWifiNetworkPreference(PreferenceCategory preference) {
-        if (preference != null) {
-            mWifiNetworkPreferences.add(preference);
-        }
-    }
-
-    @UiThread
     protected void suspendPreferences() {
         Log.d(TAG, "Suspend the subsystem preferences");
         if (mMobileNetworkController != null) {
@@ -201,9 +141,9 @@ public class InternetResetHelper implements LifecycleObserver,
         }
     }
 
-    @UiThread
     protected void resumePreferences() {
-        if (mIsRecoveryReady && mMobileNetworkController != null) {
+        boolean isRecoveryReady = !mRecoveryWorker.isRecovering();
+        if (isRecoveryReady && mMobileNetworkController != null) {
             Log.d(TAG, "Resume the Mobile Network controller");
             mMobileNetworkController.hidePreference(false /* hide */, true /* immediately */);
         }
@@ -214,7 +154,7 @@ public class InternetResetHelper implements LifecycleObserver,
                 pref.setVisible(true);
             }
         }
-        if (mIsRecoveryReady && mIsWifiReady) {
+        if (isRecoveryReady && mIsWifiReady) {
             mHandlerInjector.removeCallbacks(mTimeoutRunnable);
             if (mResettingPreference != null) {
                 Log.d(TAG, "Resume the Resetting preference");
@@ -223,21 +163,99 @@ public class InternetResetHelper implements LifecycleObserver,
         }
     }
 
-    /**
-     * Restart connectivity for all requested subsystems.
-     */
-    @UiThread
+    protected void showResettingAndSendTimeoutChecks() {
+        suspendPreferences();
+        mHandlerInjector.postDelayed(mTimeoutRunnable, RESTART_TIMEOUT_MS);
+    }
+
+    /** Restart connectivity for all requested subsystems. */
     public void restart() {
-        if (!mConnectivitySubsystemsRecoveryManager.isRecoveryAvailable()) {
+        if (!mRecoveryWorker.isRecoveryAvailable()) {
             Log.e(TAG, "The connectivity subsystem is not available to restart.");
             return;
         }
-
-        Log.d(TAG, "The connectivity subsystem is restarting for recovery.");
-        suspendPreferences();
-        mIsRecoveryReady = false;
+        showResettingAndSendTimeoutChecks();
         mIsWifiReady = !mWifiManager.isWifiEnabled();
-        mHandlerInjector.postDelayed(mTimeoutRunnable, RESTART_TIMEOUT_MS);
-        mConnectivitySubsystemsRecoveryManager.triggerSubsystemRestart(null /* reason */, this);
+        mRecoveryWorker.triggerRestart();
+    }
+
+    /** Check if the connectivity subsystem is under recovering. */
+    public void checkRecovering() {
+        if (!mRecoveryWorker.isRecovering()) return;
+        mIsWifiReady = false;
+        showResettingAndSendTimeoutChecks();
+    }
+
+    /**
+     * This is a singleton class for ConnectivitySubsystemsRecoveryManager worker.
+     */
+    @VisibleForTesting
+    public static class RecoveryWorker implements
+            ConnectivitySubsystemsRecoveryManager.RecoveryStatusCallback {
+        private static final String TAG = "RecoveryWorker";
+        private static RecoveryWorker sInstance;
+        private static WeakReference<InternetResetHelper> sCallback;
+        private static ConnectivitySubsystemsRecoveryManager sRecoveryManager;
+        private static boolean sIsRecovering;
+
+        /**
+         * Create a singleton class for ConnectivitySubsystemsRecoveryManager.
+         *
+         * @param context  The context to use for the content resolver.
+         * @param callback The callback of {@link InternetResetHelper} object.
+         * @return an instance of {@link RecoveryWorker} object.
+         */
+        public static RecoveryWorker getInstance(Context context, InternetResetHelper callback) {
+            sCallback = new WeakReference<>(callback);
+            if (sInstance != null) return sInstance;
+
+            sInstance = new RecoveryWorker();
+            Context appContext = context.getApplicationContext();
+            sRecoveryManager = new ConnectivitySubsystemsRecoveryManager(appContext,
+                    appContext.getMainThreadHandler());
+            return sInstance;
+        }
+
+        /** Returns true, If the subsystem service is recovering. */
+        public boolean isRecovering() {
+            return sIsRecovering;
+        }
+
+        /** Clear the recovering flag. */
+        public void clearRecovering() {
+            sIsRecovering = false;
+        }
+
+        /** Returns true, If the subsystem service is recovery available. */
+        public boolean isRecoveryAvailable() {
+            return sRecoveryManager.isRecoveryAvailable();
+        }
+
+        /** Trigger connectivity recovery for all requested technologies. */
+        public boolean triggerRestart() {
+            if (!isRecoveryAvailable()) {
+                Log.e(TAG, "The connectivity subsystem is not available to restart.");
+                return false;
+            }
+            sIsRecovering = true;
+            sRecoveryManager.triggerSubsystemRestart(null /* reason */, sInstance);
+            Log.d(TAG, "The connectivity subsystem is restarting for recovery.");
+            return true;
+        }
+
+        @Override
+        public void onSubsystemRestartOperationBegin() {
+            Log.d(TAG, "The connectivity subsystem is starting for recovery.");
+            sIsRecovering = true;
+        }
+
+        @Override
+        public void onSubsystemRestartOperationEnd() {
+            Log.d(TAG, "The connectivity subsystem is done for recovery.");
+            sIsRecovering = false;
+            InternetResetHelper callback = sCallback.get();
+            if (callback == null) return;
+            callback.resumePreferences();
+        }
     }
 }

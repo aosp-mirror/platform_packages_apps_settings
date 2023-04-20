@@ -28,11 +28,13 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
@@ -50,11 +52,16 @@ import com.android.settingslib.transition.SettingsTransitionHelper;
  */
 public abstract class BiometricsSettingsBase extends DashboardFragment {
 
-    private static final int CONFIRM_REQUEST = 2001;
+    @VisibleForTesting
+    static final int CONFIRM_REQUEST = 2001;
     private static final int CHOOSE_LOCK_REQUEST = 2002;
 
     private static final String SAVE_STATE_CONFIRM_CREDETIAL = "confirm_credential";
     private static final String DO_NOT_FINISH_ACTIVITY = "do_not_finish_activity";
+    @VisibleForTesting
+    static final String RETRY_PREFERENCE_KEY = "retry_preference_key";
+    @VisibleForTesting
+    static final String RETRY_PREFERENCE_BUNDLE = "retry_preference_bundle";
 
     protected int mUserId;
     protected long mGkPwHandle;
@@ -63,6 +70,8 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
     @Nullable private FingerprintManager mFingerprintManager;
     // Do not finish() if choosing/confirming credential, or showing fp/face settings
     private boolean mDoNotFinishActivity;
+    @Nullable private String mRetryPreferenceKey = null;
+    @Nullable private Bundle mRetryPreferenceExtra = null;
 
     @Override
     public void onAttach(Context context) {
@@ -84,6 +93,8 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
         if (savedInstanceState != null) {
             mConfirmCredential = savedInstanceState.getBoolean(SAVE_STATE_CONFIRM_CREDETIAL);
             mDoNotFinishActivity = savedInstanceState.getBoolean(DO_NOT_FINISH_ACTIVITY);
+            mRetryPreferenceKey = savedInstanceState.getString(RETRY_PREFERENCE_KEY);
+            mRetryPreferenceExtra = savedInstanceState.getBundle(RETRY_PREFERENCE_BUNDLE);
             if (savedInstanceState.containsKey(
                     ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE)) {
                 mGkPwHandle = savedInstanceState.getLong(
@@ -124,8 +135,7 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
         }
     }
 
-    @Override
-    public boolean onPreferenceTreeClick(Preference preference) {
+    private boolean onRetryPreferenceTreeClick(Preference preference, final boolean retry) {
         final String key = preference.getKey();
         final Context context = requireActivity().getApplicationContext();
 
@@ -134,31 +144,77 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
         if (getFacePreferenceKey().equals(key)) {
             mDoNotFinishActivity = true;
             mFaceManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
-                final byte[] token = BiometricUtils.requestGatekeeperHat(context, mGkPwHandle,
-                        mUserId, challenge);
-                final Bundle extras = preference.getExtras();
-                extras.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
-                extras.putInt(BiometricEnrollBase.EXTRA_KEY_SENSOR_ID, sensorId);
-                extras.putLong(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, challenge);
-                super.onPreferenceTreeClick(preference);
+                try {
+                    final byte[] token = requestGatekeeperHat(context, mGkPwHandle, mUserId,
+                            challenge);
+                    final Bundle extras = preference.getExtras();
+                    extras.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
+                    extras.putInt(BiometricEnrollBase.EXTRA_KEY_SENSOR_ID, sensorId);
+                    extras.putLong(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, challenge);
+                    super.onPreferenceTreeClick(preference);
+                } catch (IllegalStateException e) {
+                    if (retry) {
+                        mRetryPreferenceKey = preference.getKey();
+                        mRetryPreferenceExtra = preference.getExtras();
+                        mConfirmCredential = true;
+                        launchChooseOrConfirmLock();
+                    } else {
+                        Log.e(getLogTag(), "face generateChallenge fail", e);
+                        mDoNotFinishActivity = false;
+                    }
+                }
             });
-
             return true;
         } else if (getFingerprintPreferenceKey().equals(key)) {
             mDoNotFinishActivity = true;
             mFingerprintManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
-                final byte[] token = BiometricUtils.requestGatekeeperHat(context, mGkPwHandle,
-                        mUserId, challenge);
-                final Bundle extras = preference.getExtras();
-                extras.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
-                extras.putLong(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, challenge);
-                super.onPreferenceTreeClick(preference);
+                try {
+                    final byte[] token = requestGatekeeperHat(context, mGkPwHandle, mUserId,
+                            challenge);
+                    final Bundle extras = preference.getExtras();
+                    extras.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
+                    extras.putLong(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, challenge);
+                    super.onPreferenceTreeClick(preference);
+                } catch (IllegalStateException e) {
+                    if (retry) {
+                        mRetryPreferenceKey = preference.getKey();
+                        mRetryPreferenceExtra = preference.getExtras();
+                        mConfirmCredential = true;
+                        launchChooseOrConfirmLock();
+                    } else {
+                        Log.e(getLogTag(), "fingerprint generateChallenge fail", e);
+                        mDoNotFinishActivity = false;
+                    }
+                }
             });
-
             return true;
         }
+        return false;
+    }
 
-        return super.onPreferenceTreeClick(preference);
+    @VisibleForTesting
+    protected byte[] requestGatekeeperHat(@NonNull Context context, long gkPwHandle, int userId,
+            long challenge) {
+        return BiometricUtils.requestGatekeeperHat(context, gkPwHandle, userId, challenge);
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        return onRetryPreferenceTreeClick(preference, true)
+                || super.onPreferenceTreeClick(preference);
+    }
+
+    private void retryPreferenceKey(@NonNull String key, @Nullable Bundle extras) {
+        final Preference preference = findPreference(key);
+        if (preference == null) {
+            Log.w(getLogTag(), ".retryPreferenceKey, fail to find " + key);
+            return;
+        }
+
+        if (extras != null) {
+            preference.getExtras().putAll(extras);
+        }
+        onRetryPreferenceTreeClick(preference, false);
     }
 
     @Override
@@ -168,6 +224,10 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
         outState.putBoolean(DO_NOT_FINISH_ACTIVITY, mDoNotFinishActivity);
         if (mGkPwHandle != 0L) {
             outState.putLong(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, mGkPwHandle);
+        }
+        if (!TextUtils.isEmpty(mRetryPreferenceKey)) {
+            outState.putString(RETRY_PREFERENCE_KEY, mRetryPreferenceKey);
+            outState.putBundle(RETRY_PREFERENCE_BUNDLE, mRetryPreferenceExtra);
         }
     }
 
@@ -180,6 +240,11 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
             if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
                 if (BiometricUtils.containsGatekeeperPasswordHandle(data)) {
                     mGkPwHandle = BiometricUtils.getGatekeeperPasswordHandle(data);
+                    if (!TextUtils.isEmpty(mRetryPreferenceKey)) {
+                        getActivity().overridePendingTransition(R.anim.sud_slide_next_in,
+                                R.anim.sud_slide_next_out);
+                        retryPreferenceKey(mRetryPreferenceKey, mRetryPreferenceExtra);
+                    }
                 } else {
                     Log.d(getLogTag(), "Data null or GK PW missing.");
                     finish();
@@ -188,6 +253,8 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
                 Log.d(getLogTag(), "Password not confirmed.");
                 finish();
             }
+            mRetryPreferenceKey = null;
+            mRetryPreferenceExtra = null;
         }
     }
 
@@ -211,7 +278,8 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
      */
     public abstract String getUseInAppsPreferenceKey();
 
-    private void launchChooseOrConfirmLock() {
+    @VisibleForTesting
+    protected void launchChooseOrConfirmLock() {
         final ChooseLockSettingsHelper.Builder builder =
                 new ChooseLockSettingsHelper.Builder(getActivity(), this)
                         .setRequestCode(CONFIRM_REQUEST)

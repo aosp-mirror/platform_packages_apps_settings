@@ -382,10 +382,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         // Icon provided by the content provider overrides any static icon.
         if (tile.getMetaData() != null
                 && tile.getMetaData().containsKey(META_DATA_PREFERENCE_ICON_URI)) {
-            // Set a transparent color before starting to fetch the real icon, this is necessary
-            // to avoid preference padding change.
-            setPreferenceIcon(preference, tile, forceRoundedIcon, mContext.getPackageName(),
-                    Icon.createWithResource(mContext, android.R.color.transparent));
+            // Reserve the icon space to avoid preference padding change.
+            preference.setIconSpaceReserved(true);
 
             ThreadUtils.postOnBackgroundThread(() -> {
                 final Intent intent = tile.getIntent();

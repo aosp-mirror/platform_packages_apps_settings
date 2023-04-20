@@ -659,7 +659,8 @@ public class ManageApplications extends InstrumentedFragment
                 break;
             case LIST_TYPE_BATTERY_OPTIMIZATION:
                 AdvancedPowerUsageDetail.startBatteryDetailPage(
-                        getActivity(), this, mCurrentPkgName);
+                        getActivity(), this, mCurrentPkgName,
+                        UserHandle.getUserHandleForUid(mCurrentUid));
                 break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed
@@ -691,6 +692,7 @@ public class ManageApplications extends InstrumentedFragment
             mSearchView = (SearchView) searchMenuItem.getActionView();
             mSearchView.setQueryHint(getText(R.string.search_settings));
             mSearchView.setOnQueryTextListener(this);
+            mSearchView.setMaxWidth(Integer.MAX_VALUE);
             if (mExpandSearch) {
                 searchMenuItem.expandActionView();
             }
@@ -1148,7 +1150,8 @@ public class ManageApplications extends InstrumentedFragment
             } else if (mManageApplications.mListType == LIST_TYPE_MEDIA_MANAGEMENT_APPS) {
                 mExtraInfoBridge = new AppStateMediaManagementAppsBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_APPS_LOCALE) {
-                mExtraInfoBridge = new AppStateLocaleBridge(mContext, mState, this);
+                mExtraInfoBridge = new AppStateLocaleBridge(mContext, mState, this,
+                        mManageApplications.mUserManager);
             } else if (mManageApplications.mListType == LIST_TYPE_BATTERY_OPTIMIZATION) {
                 mExtraInfoBridge = new AppStateAppBatteryUsageBridge(mContext, mState, this);
             } else {

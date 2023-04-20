@@ -46,6 +46,7 @@ import com.android.settings.SetupWizardUtils;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
+import com.google.android.setupdesign.template.HeaderMixin;
 import com.google.android.setupdesign.util.ThemeHelper;
 import com.google.android.setupdesign.util.ThemeResolver;
 
@@ -167,7 +168,9 @@ public abstract class StorageWizardBase extends FragmentActivity {
 
     protected void setHeaderText(int resId, CharSequence... args) {
         final CharSequence headerText = TextUtils.expandTemplate(getText(resId), args);
-        getGlifLayout().setHeaderText(headerText);
+        final GlifLayout layout = getGlifLayout();
+        layout.setHeaderText(headerText);
+        layout.getMixin(HeaderMixin.class).setAutoTextSizeEnabled(false);
         setTitle(headerText);
     }
 

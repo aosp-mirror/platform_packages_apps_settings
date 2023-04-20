@@ -60,6 +60,7 @@ import com.android.settings.development.bluetooth.BluetoothQualityDialogPreferen
 import com.android.settings.development.bluetooth.BluetoothSampleRateDialogPreferenceController;
 import com.android.settings.development.qstile.DevelopmentTiles;
 import com.android.settings.development.storage.SharedDataPreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.widget.SettingsMainSwitchBar;
@@ -319,6 +320,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                     DisableDevSettingsDialogFragment.show(this /* host */);
                 }
             }
+            FeatureFactory.getFactory(
+                    getContext()).getSearchFeatureProvider().sendPreIndexIntent(getContext());
         }
     }
 
@@ -380,13 +383,18 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
 
         final BluetoothLeAudioHwOffloadPreferenceController leAudioController =
                 getDevelopmentOptionsController(
-                    BluetoothLeAudioHwOffloadPreferenceController.class);
+                        BluetoothLeAudioHwOffloadPreferenceController.class);
         leAudioController.onRebootDialogConfirmed();
 
         final BluetoothLeAudioPreferenceController leAudioFeatureController =
                 getDevelopmentOptionsController(
-                    BluetoothLeAudioPreferenceController.class);
+                        BluetoothLeAudioPreferenceController.class);
         leAudioFeatureController.onRebootDialogConfirmed();
+
+        final BluetoothLeAudioAllowListPreferenceController leAudioAllowListController =
+                getDevelopmentOptionsController(
+                    BluetoothLeAudioAllowListPreferenceController.class);
+        leAudioAllowListController.onRebootDialogConfirmed();
     }
 
     @Override
@@ -397,13 +405,18 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
 
         final BluetoothLeAudioHwOffloadPreferenceController leAudioController =
                 getDevelopmentOptionsController(
-                    BluetoothLeAudioHwOffloadPreferenceController.class);
+                        BluetoothLeAudioHwOffloadPreferenceController.class);
         leAudioController.onRebootDialogCanceled();
 
         final BluetoothLeAudioPreferenceController leAudioFeatureController =
                 getDevelopmentOptionsController(
-                    BluetoothLeAudioPreferenceController.class);
+                        BluetoothLeAudioPreferenceController.class);
         leAudioFeatureController.onRebootDialogCanceled();
+
+        final BluetoothLeAudioAllowListPreferenceController leAudioAllowListController =
+                getDevelopmentOptionsController(
+                    BluetoothLeAudioAllowListPreferenceController.class);
+        leAudioAllowListController.onRebootDialogCanceled();
     }
 
     @Override
@@ -600,6 +613,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothAvrcpVersionPreferenceController(context));
         controllers.add(new BluetoothMapVersionPreferenceController(context));
         controllers.add(new BluetoothLeAudioPreferenceController(context, fragment));
+        controllers.add(new BluetoothLeAudioAllowListPreferenceController(context, fragment));
         controllers.add(new BluetoothA2dpHwOffloadPreferenceController(context, fragment));
         controllers.add(new BluetoothLeAudioHwOffloadPreferenceController(context, fragment));
         controllers.add(new BluetoothMaxConnectedAudioDevicesPreferenceController(context));

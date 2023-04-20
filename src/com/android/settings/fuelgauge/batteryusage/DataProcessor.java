@@ -67,6 +67,7 @@ public final class DataProcessor {
     private static final int MAX_DIFF_SECONDS_OF_UPPER_TIMESTAMP = 5;
     // Maximum total time value for each hourly slot cumulative data at most 2 hours.
     private static final float TOTAL_HOURLY_TIME_THRESHOLD = DateUtils.HOUR_IN_MILLIS * 2;
+    private static final long MIN_TIME_SLOT = DateUtils.HOUR_IN_MILLIS * 2;
     private static final Map<String, BatteryHistEntry> EMPTY_BATTERY_MAP = new HashMap<>();
     private static final BatteryHistEntry EMPTY_BATTERY_HIST_ENTRY =
             new BatteryHistEntry(new ContentValues());
@@ -270,13 +271,31 @@ public final class DataProcessor {
         }
         final long startTime = timestampList.get(0);
         final long endTime = timestampList.get(timestampList.size() - 1);
+        // If the timestamp diff is smaller than MIN_TIME_SLOT, returns the empty list directly.
+        if (endTime - startTime < MIN_TIME_SLOT) {
+            return dailyTimestampList;
+        }
         long nextDay = getTimestampOfNextDay(startTime);
-        dailyTimestampList.add(startTime);
+        // Only if the timestamp diff in the first day is bigger than MIN_TIME_SLOT, start from the
+        // first day. Otherwise, start from the second day.
+        if (nextDay - startTime >= MIN_TIME_SLOT) {
+            dailyTimestampList.add(startTime);
+        }
         while (nextDay < endTime) {
             dailyTimestampList.add(nextDay);
             nextDay += DateUtils.DAY_IN_MILLIS;
         }
-        dailyTimestampList.add(endTime);
+        final long lastDailyTimestamp = dailyTimestampList.get(dailyTimestampList.size() - 1);
+        // Only if the timestamp diff in the last day is bigger than MIN_TIME_SLOT, add the
+        // last day.
+        if (endTime - lastDailyTimestamp >= MIN_TIME_SLOT) {
+            dailyTimestampList.add(endTime);
+        }
+        // The dailyTimestampList must have the start and end timestamp, otherwise, return an empty
+        // list.
+        if (dailyTimestampList.size() < MIN_TIMESTAMP_DATA_SIZE) {
+            return new ArrayList<>();
+        }
         return dailyTimestampList;
     }
 
@@ -721,7 +740,7 @@ public final class DataProcessor {
             final List<Long> hourlyTimestampsPerDay = new ArrayList<>();
             while (currentTimestamp <= dailyEndTimestamp) {
                 hourlyTimestampsPerDay.add(currentTimestamp);
-                currentTimestamp += 2 * DateUtils.HOUR_IN_MILLIS;
+                currentTimestamp += MIN_TIME_SLOT;
             }
             hourlyTimestamps.add(hourlyTimestampsPerDay);
         }

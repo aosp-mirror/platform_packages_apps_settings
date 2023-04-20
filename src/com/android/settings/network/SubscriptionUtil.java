@@ -86,6 +86,14 @@ public class SubscriptionUtil {
         return subscriptions;
     }
 
+    /**
+     * Check if SIM hardware is visible to the end user.
+     */
+    public static boolean isSimHardwareVisible(Context context) {
+        return context.getResources()
+            .getBoolean(R.bool.config_show_sim_info);
+    }
+
     @VisibleForTesting
     static boolean isInactiveInsertedPSim(UiccSlotInfo slotInfo) {
         if (slotInfo == null)  {

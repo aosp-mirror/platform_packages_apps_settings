@@ -136,6 +136,7 @@ public abstract class BaseTimeZonePicker extends InstrumentedFragment
 
             mSearchView.setQueryHint(getText(mSearchHintResId));
             mSearchView.setOnQueryTextListener(this);
+            mSearchView.setMaxWidth(Integer.MAX_VALUE);
 
             if (mDefaultExpandSearch) {
                 searchMenuItem.expandActionView();

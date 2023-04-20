@@ -331,7 +331,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     public void onClick(LinkSpan span) {
-        if ("url".equals(span.getId())) {
+        if ("url".equals(span.getLink())) {
             String url = getString(R.string.help_url_fingerprint);
             Intent intent = HelpUtils.getHelpIntent(this, url, getClass().getName());
             if (intent == null) {

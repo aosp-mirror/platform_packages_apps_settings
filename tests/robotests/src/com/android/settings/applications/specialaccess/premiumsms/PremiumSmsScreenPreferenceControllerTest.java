@@ -21,8 +21,12 @@ import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.Resources;
+
+import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,23 +40,35 @@ import org.robolectric.annotation.Config;
 public class PremiumSmsScreenPreferenceControllerTest {
 
     private Context mContext;
+    private Resources mResources;
     private PremiumSmsScreenPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
+
+        mResources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(mResources);
+
         mController = new PremiumSmsScreenPreferenceController(mContext, "key");
     }
 
     @Test
     public void getAvailability_byDefault_shouldBeShown() {
+        when(mResources.getBoolean(R.bool.config_show_premium_sms)).thenReturn(true);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
     @Config(qualifiers = "mcc999")
+    public void getAvailability_disabledByCarrier_returnUnavailable() {
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
     public void getAvailability_disabled_returnUnavailable() {
+        when(mResources.getBoolean(R.bool.config_show_premium_sms)).thenReturn(false);
         assertThat(mController.isAvailable()).isFalse();
     }
 }

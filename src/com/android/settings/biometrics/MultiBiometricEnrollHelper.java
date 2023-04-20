@@ -96,13 +96,14 @@ public class MultiBiometricEnrollHelper {
                 // FLAG_UPDATE_CURRENT ensures it is launched with the most recent values.
                 final Intent faceIntent = BiometricUtils.getFaceIntroIntent(mActivity,
                         mActivity.getIntent());
-                faceIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, mGkPwHandle);
+                faceIntent.putExtra(Intent.EXTRA_USER_ID, mUserId);
+                faceIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
+                        mGkPwHandle);
                 final PendingIntent faceAfterFp = PendingIntent.getActivity(mActivity,
                         0 /* requestCode */, faceIntent,
                         PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
                 intent.putExtra(EXTRA_ENROLL_AFTER_FINGERPRINT, faceAfterFp);
             }
-
             BiometricUtils.launchEnrollForResult(mActivity, intent, REQUEST_FINGERPRINT_ENROLL,
                     hardwareAuthToken, mGkPwHandle, mUserId);
         }));

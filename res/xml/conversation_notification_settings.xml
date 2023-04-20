@@ -25,6 +25,9 @@
         android:layout="@layout/settings_entity_header"
         settings:allowDividerBelow="true"/>
 
+    <com.android.settings.widget.SettingsMainSwitchPreference
+        android:key="block" />
+
     <!-- important conversation -->
     <com.android.settings.notification.app.ConversationPriorityPreference
         android:key="priority"
