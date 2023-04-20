@@ -177,10 +177,8 @@
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Eerste dag van de week"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Cijfervoorkeuren"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"App-standaard gebruiken"</string>
-    <!-- no translation found for celsius_temperature_unit (8896459071273084507) -->
-    <skip />
-    <!-- no translation found for fahrenheit_temperature_unit (1118677820614569801) -->
-    <skip />
+    <string name="celsius_temperature_unit" msgid="8896459071273084507">"Celsius (°C)"</string>
+    <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"Fahrenheit (°F)"</string>
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"zondag"</string>
     <string name="monday_first_day_of_week" msgid="7244698610476506771">"maandag"</string>
     <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"dinsdag"</string>
@@ -188,6 +186,8 @@
     <string name="thursday_first_day_of_week" msgid="3035885630945594833">"donderdag"</string>
     <string name="friday_first_day_of_week" msgid="7074795061812083541">"vrijdag"</string>
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"zaterdag"</string>
+    <string name="title_regional_pref_footer" msgid="7450438024324794380">"Als een app geen regionale voorkeuren ondersteunt, gebruikt de app de standaard landinstellingen van de app."</string>
+    <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Meer informatie over taalvoorkeuren"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Geselecteerde taal verwijderen?}other{Geselecteerde talen verwijderen?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Tekst wordt getoond in een andere taal."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Kan niet alle talen verwijderen"</string>
@@ -323,6 +323,8 @@
     <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Je gezichtsmodel wordt definitief en op een beveiligde manier verwijderd.\n\nDaarna heb je je pincode, patroon of wachtwoord nodig om je telefoon te ontgrendelen of voor verificatie in apps."</string>
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Je gezichtsmodel wordt definitief en op een beveiligde manier verwijderd.\n\nDaarna heb je je pincode, patroon of wachtwoord nodig om je telefoon te ontgrendelen."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Ontgrendel je telefoon via gezichtsherkenning"</string>
+    <!-- no translation found for security_settings_fingerprint (6387775386189204201) -->
+    <skip />
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Vingerafdruk"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Bij gebruik van Ontgrendelen met vingerafdruk"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Vingerafdruk voor werk"</string>
@@ -384,14 +386,11 @@
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Met je vingerafdruk"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Met je gezicht of vingerafdruk"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
-    <!-- no translation found for biometric_settings_add_face_in_split_mode_title (6041232223862753222) -->
-    <skip />
-    <!-- no translation found for biometric_settings_add_face_in_split_mode_message (1904738532939614456) -->
-    <skip />
+    <string name="biometric_settings_add_face_in_split_mode_title" msgid="6041232223862753222">"Kan ontgrendelen via gezichtsherkenning niet instellen"</string>
+    <string name="biometric_settings_add_face_in_split_mode_message" msgid="1904738532939614456">"Sluit gesplitst scherm om ontgrendelen via gezichtsherkenning in te stellen"</string>
     <string name="biometric_settings_add_fingerprint_in_split_mode_title" msgid="9194670722730454903">"Kan vingerafdruk niet instellen"</string>
     <string name="biometric_settings_add_fingerprint_in_split_mode_message" msgid="6960548382076629454">"Sluit gesplitst scherm om Ontgrendelen met vingerafdruk in te stellen"</string>
-    <!-- no translation found for biometric_settings_add_biometrics_in_split_mode_ok (564103789097253645) -->
-    <skip />
+    <string name="biometric_settings_add_biometrics_in_split_mode_ok" msgid="564103789097253645">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Schermvergrendeling overslaan?"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"Toch overslaan"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"Terug"</string>
@@ -886,22 +885,34 @@
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Hiermee kunnen andere apparaten deze hotspot vinden. De verbindingssnelheid van de hotspot wordt verlaagd."</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Hiermee kunnen andere apparaten deze hotspot vinden. Het batterijgebruik neemt toe"</string>
     <string name="wifi_hotspot_speed_title" msgid="8629448084180512685">"Snelheid en compatibiliteit"</string>
-    <string name="wifi_hotspot_speed_summary_2g" msgid="2280013579858833466">"2,4 GHz/elk apparaat kan verbinding maken"</string>
-    <string name="wifi_hotspot_speed_summary_5g" msgid="8006841294118040080">"5 GHz/de meeste apparaten kunnen verbinding maken"</string>
-    <string name="wifi_hotspot_speed_summary_6g" msgid="5398769134180715191">"6 GHz/sommige apparaten kunnen verbinding maken"</string>
-    <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="6471272988396018113">"2,4 en 5 GHz/elk apparaat kan verbinding maken"</string>
+    <!-- no translation found for wifi_hotspot_speed_summary_2g (5063438001736234858) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_summary_5g (6221158936983135040) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_summary_6g (8863992901226595544) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_speed_summary_2g_and_5g (5931052946168943750) -->
+    <skip />
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"Kies een frequentie voor je hotspot. De frequentie is van invloed op de verbindingssnelheid en welke soorten apparaten je hotspot kunnen vinden."</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"Voorkeursfrequentie"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2,4 GHz"</string>
-    <string name="wifi_hotspot_speed_2g_summary" msgid="2737911775799813597">"Lagere snelheden. Elk apparaat kan verbinding maken."</string>
+    <!-- no translation found for wifi_hotspot_speed_2g_summary (6930273933810520155) -->
+    <skip />
     <string name="wifi_hotspot_speed_5g" msgid="4058116867148848395">"5 GHz"</string>
-    <string name="wifi_hotspot_speed_5g_summary" msgid="8979160165280825325">"Hoge snelheden. De meeste apparaten kunnen verbinding maken."</string>
+    <!-- no translation found for wifi_hotspot_speed_5g_summary (562987935924535694) -->
+    <skip />
     <string name="wifi_hotspot_speed_2g_5g" msgid="9192756255938408285">"2,4 en 5 GHz"</string>
-    <string name="wifi_hotspot_speed_2g_5g_summary" msgid="2901777498770191018">"Hoge snelheden. Elk apparaat kan verbinding maken met deze dualband hotspot."</string>
+    <!-- no translation found for wifi_hotspot_speed_2g_5g_summary (8104575293617700173) -->
+    <skip />
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
-    <string name="wifi_hotspot_speed_6g_summary" msgid="1170553321510689693">"Hoogste snelheden. Het kleinste aantal apparaten kan verbinding maken."</string>
+    <!-- no translation found for wifi_hotspot_speed_6g_summary (8675262219242174548) -->
+    <skip />
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"Niet beschikbaar in jouw land of regio"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Als je voorkeursfrequentie niet beschikbaar is, kan je hotspot een andere gebruiken. Als je de frequentie wijzigt, kunnen de hotspot-beveiligingsinstellingen veranderen."</string>
+    <!-- no translation found for wifi_hotspot_security_summary_unavailable (117582979310345853) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_security_footer (4608329688744949796) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Hotspot aanzetten…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Hotspot uitzetten…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Tethering niet beschikbaar"</string>
@@ -1938,7 +1949,7 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Korter"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Langer"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Tijd voor automatisch klikken"</string>
-    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Trillen en haptische feedback"</string>
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Trillen en haptische technologie"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"De trillingssterkte beheren voor verschillende typen gebruik"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Aan"</string>
     <string name="accessibility_vibration_settings_state_off" msgid="7946588741954981703">"Uit"</string>
@@ -1946,7 +1957,7 @@
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Gesprekken"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Meldingen en wekkers"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Interactieve haptische technologie"</string>
-    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Trillen en haptische feedback gebruiken"</string>
+    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Trillen en haptische technologie gebruiken"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Trilling bij wekker"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Trilling bij media"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Trilling bij bellen"</string>
@@ -2288,6 +2299,10 @@
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Systeemgebruik voor afgelopen 24 uur"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Systeemgebruik voor <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"App-gebruik voor <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <!-- no translation found for battery_system_usage_since_last_full_charge_to (4196795733829841971) -->
+    <skip />
+    <!-- no translation found for battery_app_usage_since_last_full_charge_to (4339201995118102114) -->
+    <skip />
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Totaal: minder dan een minuut"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Achtergrond: minder dan een minuut"</string>
     <string name="battery_usage_screen_time_less_than_one_minute" msgid="2911989465891679033">"Schermtijd: minder dan een minuut"</string>
@@ -2690,12 +2705,14 @@
     <string name="enable_guest_calling" msgid="8300355036005240911">"Gast toestaan telefoon te gebruiken"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"De gespreksgeschiedenis wordt met de gastgebruiker gedeeld"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Telefoonoproepen en sms aanzetten"</string>
-    <string name="user_grant_admin" msgid="6511342422361803820">"Deze gebruiker beheerdersrechten geven"</string>
+    <!-- no translation found for user_grant_admin (5942118263054572074) -->
+    <skip />
     <string name="user_remove_user" msgid="8468203789739693845">"Gebruiker verwijderen"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Telefoonoproepen en sms aanzetten?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"De gespreks- en sms-geschiedenis wordt gedeeld met deze gebruiker."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Beheerdersrechten verwijderen?"</string>
-    <string name="user_revoke_admin_confirm_message" msgid="2719667217562982318">"Weet je zeker dat je de beheerdersrechten van deze gebruiker wilt verwijderen?"</string>
+    <!-- no translation found for user_revoke_admin_confirm_message (9207187319308572958) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"Noodinformatie"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Informatie en contacten voor <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g> openen"</string>
@@ -3513,7 +3530,7 @@
     <string name="unused_apps" msgid="4566272194756830656">"Niet-gebruikte apps"</string>
     <string name="unused_apps_summary" msgid="4236371818881973021">"{count,plural, =1{# niet-gebruikte app}other{# niet-gebruikte apps}}"</string>
     <string name="unused_apps_category" msgid="8954930958175500851">"Niet-gebruikte app-instellingen"</string>
-    <string name="unused_apps_switch" msgid="7595419855882245772">"App-activiteit onderbreken indien niet gebruikt"</string>
+    <string name="unused_apps_switch" msgid="7595419855882245772">"Onderbreken indien niet gebruikt"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Verwijder rechten en tijdelijke bestanden, en stop meldingen"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Alle apps"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Geïnstalleerde apps"</string>
@@ -3658,12 +3675,12 @@
     <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Toegestaan"</string>
     <string name="app_permission_summary_not_allowed" msgid="2673793662439097900">"Niet toegestaan"</string>
     <string name="keywords_install_other_apps" msgid="563895867658775580">"apps installeren via onbekende bronnen"</string>
-    <string name="write_settings" msgid="6864794401614425894">"Systeeminstellingen aanpassen"</string>
+    <string name="write_settings" msgid="6864794401614425894">"Systeem­instellingen aanpassen"</string>
     <string name="keywords_write_settings" msgid="6908708078855507813">"schrijven aanpassen systeeminstellingen"</string>
     <string name="filter_install_sources_apps" msgid="6930762738519588431">"Kunnen andere apps installeren"</string>
     <string name="filter_write_settings_apps" msgid="4754994984909024093">"Kan systeeminstellingen aanpassen"</string>
     <string name="write_settings_title" msgid="3011034187823288557">"Kan systeeminstellingen aanpassen"</string>
-    <string name="write_system_settings" msgid="5555707701419757421">"Systeeminstellingen aanpassen"</string>
+    <string name="write_system_settings" msgid="5555707701419757421">"Systeem­instellingen aanpassen"</string>
     <string name="permit_write_settings" msgid="3113056800709924871">"Aanpassen van systeeminstellingen toestaan"</string>
     <string name="write_settings_description" msgid="1474881759793261146">"Met deze rechten kan een app de systeeminstellingen aanpassen."</string>
     <string name="external_source_switch_title" msgid="101571983954849473">"Toestaan van deze bron"</string>
@@ -4061,9 +4078,10 @@
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Zorg dat je deze app vertrouwt&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; maakt gebruik van de content op je scherm om te bepalen wat automatisch kan worden aangevuld."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s uitzetten?"</string>
     <string name="credman_confirmation_message" msgid="3499478570809427026">"Opgeslagen informatie, zoals adressen of betaalmethoden, wordt niet ingevuld als je inlogt. Als je je opgeslagen informatie nog steeds wilt laten invullen, stel je een wachtwoord, toegangssleutel en/of gegevensservice in."</string>
-    <string name="credman_enable_confirmation_message_title" msgid="3722566298090698004">"%1$s aanzetten?"</string>
-    <string name="credman_enable_confirmation_message" msgid="4466773747277583461">"Opgeslagen informatie zoals adressen of betaalmethoden worden gedeeld met deze aanbieder."</string>
-    <string name="credman_enable_confirmation_message_positive_button" msgid="3479082692924433102">"Aanzetten"</string>
+    <!-- no translation found for credman_enable_confirmation_message_title (1037501792652277829) -->
+    <skip />
+    <!-- no translation found for credman_enable_confirmation_message (8407841892310870169) -->
+    <skip />
     <string name="credman_error_message_title" msgid="4741457523969373713">"Limiet voor wachtwoorden, toegangssleutels en gegevensservices"</string>
     <string name="credman_error_message" msgid="6793314648458925172">"Je kunt maximaal 5 wachtwoorden, toegangssleutels en gegevensservices tegelijk hebben. Zet een service uit om meer toe te voegen."</string>
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Uitzetten"</string>
@@ -4410,9 +4428,10 @@
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"QR-codescanner tonen"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Toegang tot QR-codescanner toestaan vanaf vergrendelscherm"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Apparaatbediening tonen"</string>
-    <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Toon bedieningselementen voor externe apparaten op het vergrendelscherm"</string>
-    <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Bedienen vanaf vergrendeld apparaat"</string>
-    <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Bedien externe apparaten zonder je telefoon of tablet te ontgrendelen, indien toegestaan door de app voor apparaatbediening"</string>
+    <!-- no translation found for lockscreen_privacy_controls_summary (7522918441738915364) -->
+    <skip />
+    <!-- no translation found for lockscreen_trivial_controls_setting_toggle (2174300719855112358) -->
+    <skip />
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Als je dit wilt gebruiken, zet je eerst Apparaatbediening tonen aan"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Klok met 2 regels laten zien als die beschikbaar is"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Klok met 2 regels"</string>
@@ -4545,8 +4564,7 @@
     <string name="uwb_settings_title" msgid="8578498712312002231">"Ultra-WideBand (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Helpt bij het identificeren van de relatieve positie van apparaten in de buurt die UWB hebben"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Zet de vliegtuigmodus uit om UWB te gebruiken"</string>
-    <!-- no translation found for uwb_settings_summary_no_uwb_regulatory (3465456428217979428) -->
-    <skip />
+    <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB is niet beschikbaar op je huidige locatie"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Cameratoegang"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Microfoontoegang"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Voor apps en services"</string>
@@ -4635,6 +4653,8 @@
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Geen limiet"</string>
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"Beperkingen voor onderliggende processen uitzetten"</string>
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Zet beperkingen voor het gebruik van systeembronnen voor onderliggende app-processen uit"</string>
+    <string name="enable_notes_role_title" msgid="7662702013496114763">"Aanzetten van de rol Notities afdwingen"</string>
+    <string name="enable_notes_role_summary" msgid="136916915155048249">"Zet systeemintegraties voor notities maken aan via de rol Notities. Als de rol Notities al aanstaat, gebeurt er niets."</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Uitzenden"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"<xliff:g id="CURRENTAPP">%1$s</xliff:g> uitzenden"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Luister naar uitzendingen die bij je in de buurt worden afgespeeld"</string>
@@ -4693,4 +4713,5 @@
     <string name="contrast_medium" msgid="384414510709285811">"Gemiddeld"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Hoog"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Deze app kan maar in 1 venster worden geopend"</string>
+    <string name="note_task_button_label" msgid="1741456863714912927">"Aantekeningen maken"</string>
 </resources>

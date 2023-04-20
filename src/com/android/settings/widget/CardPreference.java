@@ -30,9 +30,7 @@ import com.google.android.material.card.MaterialCardView;
 
 import java.util.Optional;
 
-/**
- * Preference that wrapped by {@link MaterialCardView}, only support to set icon, title and summary
- */
+/** Preference that wrapped by {@link MaterialCardView} */
 public class CardPreference extends Preference {
 
     private View.OnClickListener mPrimaryBtnClickListener = null;
@@ -74,6 +72,12 @@ public class CardPreference extends Preference {
         setSecondaryButtonText(mSecondaryButtonText);
         setSecondaryButtonClickListener(mSecondaryBtnClickListener);
         setSecondaryButtonVisible(mSecondaryButtonVisible);
+    }
+
+    /** Clear layout state if needed */
+    public void resetLayoutState() {
+        setPrimaryButtonVisible(false);
+        setSecondaryButtonVisible(false);
     }
 
     /**
@@ -138,6 +142,15 @@ public class CardPreference extends Preference {
                 button -> button.setVisibility(visible ? View.VISIBLE : View.GONE));
         mSecondaryButtonVisible = visible;
         updateButtonGroupsVisibility();
+    }
+
+    /**
+     * Sets the text of content description on primary button.
+     *
+     * @param text text for the content description
+     */
+    public void setPrimaryButtonContentDescription(String text) {
+        mPrimaryButton.ifPresent(button -> button.setContentDescription(text));
     }
 
     /**
