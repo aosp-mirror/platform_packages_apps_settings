@@ -348,6 +348,10 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         Map<String, List<CredentialProviderInfo>> groupedInfos = new HashMap<>();
         for (CredentialProviderInfo cpi : mServices) {
             String packageName = cpi.getServiceInfo().packageName;
+            if (isProviderHiddenBecauseOfAutofill(packageName)) {
+                continue;
+            }
+
             if (!groupedInfos.containsKey(packageName)) {
                 groupedInfos.put(packageName, new ArrayList<>());
             }
@@ -549,6 +553,23 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 };
 
         return new NewProviderConfirmationDialogFragment(host, packageName, appName);
+    }
+
+    /** If the provider is also the autofill provider then hide it. */
+    @VisibleForTesting
+    public boolean isProviderHiddenBecauseOfAutofill(String packageName) {
+        final String autofillService = Settings.Secure.getStringForUser(
+                mContext.getContentResolver(),
+                Settings.Secure.AUTOFILL_SERVICE,
+                getUser());
+        if (autofillService == null || TextUtils.isEmpty(autofillService)) {
+            return false;
+        }
+        if (packageName == null || TextUtils.isEmpty(packageName)) {
+            return false;
+        }
+
+        return autofillService.startsWith(packageName);
     }
 
     @VisibleForTesting
