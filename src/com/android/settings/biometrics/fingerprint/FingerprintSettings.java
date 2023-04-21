@@ -593,9 +593,15 @@ public class FingerprintSettings extends SubSettings {
         }
 
         private void updateAddPreference() {
-            if (getActivity() == null) return; // Activity went away
+            if (getActivity() == null) {
+                return; // Activity went away
+            }
 
             final Preference addPreference = findPreference(KEY_FINGERPRINT_ADD);
+
+            if (addPreference == null) {
+                return; // b/275519315 Skip if updateAddPreference() invoke before addPreference()
+            }
 
             /* Disable preference if too many fingerprints added */
             final int max = getContext().getResources().getInteger(
