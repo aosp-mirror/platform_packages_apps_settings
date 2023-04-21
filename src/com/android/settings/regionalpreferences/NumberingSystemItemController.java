@@ -30,9 +30,11 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.app.LocaleHelper;
 import com.android.internal.app.LocalePicker;
+import com.android.internal.app.LocaleStore;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.widget.TickButtonPreference;
 
 import java.util.Locale;
 
@@ -52,6 +54,8 @@ public class NumberingSystemItemController extends BasePreferenceController {
 
     public NumberingSystemItemController(Context context, Bundle argument) {
         super(context, "no_key");
+        // Initialize the supported languages to LocaleInfos
+        LocaleStore.fillCache(context);
         mOption = argument.getString(
                 RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE, "");
         mSelectedLanguage = argument.getString(
@@ -111,8 +115,12 @@ public class NumberingSystemItemController extends BasePreferenceController {
         // Get current system language list to show on screen.
         LocaleList localeList = LocaleList.getDefault();
         for (int i = 0; i < localeList.size(); i++) {
-            Preference pref = new Preference(mContext);
             Locale locale = localeList.get(i);
+            LocaleStore.LocaleInfo localeInfo = LocaleStore.getLocaleInfo(locale);
+            if (!localeInfo.hasNumberingSystems()) {
+                continue;
+            }
+            Preference pref = new Preference(mContext);
             pref.setTitle(LocaleHelper.getDisplayName(locale.stripExtensions(), locale, true));
             pref.setKey(locale.toLanguageTag());
             pref.setSummary(getNumberingSystem(locale));
@@ -131,7 +139,7 @@ public class NumberingSystemItemController extends BasePreferenceController {
                 String key = supportedLocale.getUnicodeLocaleType(
                         ExtensionTypes.NUMBERING_SYSTEM);
                 pref.setKey(key == null ? RegionalPreferencesDataUtils.DEFAULT_VALUE : key);
-                pref.setTickEnable(isSameNumberingSystem(targetLocale, supportedLocale));
+                pref.setSelected(isSameNumberingSystem(targetLocale, supportedLocale));
                 screen.addPreference(pref);
             }
         }
@@ -155,7 +163,7 @@ public class NumberingSystemItemController extends BasePreferenceController {
             TickButtonPreference pref = (TickButtonPreference) mPreferenceScreen.getPreference(i);
             Log.i(TAG, "[onPreferenceClick] key is " + pref.getKey());
             if (pref.getKey().equals(preference.getKey())) {
-                pref.setTickEnable(true);
+                pref.setSelected(true);
                 Locale updatedLocale =
                         saveNumberingSystemToLocale(
                                 Locale.forLanguageTag(mSelectedLanguage), pref.getKey());
@@ -169,7 +177,7 @@ public class NumberingSystemItemController extends BasePreferenceController {
                 mParentFragment.setArguments(bundle);
                 continue;
             }
-            pref.setTickEnable(false);
+            pref.setSelected(false);
         }
     }
 

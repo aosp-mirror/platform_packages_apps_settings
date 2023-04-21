@@ -17,7 +17,6 @@
 package com.android.settings.biometrics2.ui.model;
 
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_CHALLENGE;
-import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_SENSOR_ID;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE;
 
@@ -34,10 +33,9 @@ import java.time.Clock;
 /**
  * Secret credential data including
  * 1. userId
- * 2. sensorId
- * 3. challenge
- * 4. token
- * 5. gkPwHandle
+ * 2. challenge
+ * 3. token
+ * 4. gkPwHandle
  */
 public final class CredentialModel {
 
@@ -53,21 +51,11 @@ public final class CredentialModel {
     @VisibleForTesting
     public static final long INVALID_GK_PW_HANDLE = 0L;
 
-    /**
-     * Default value for a invalid sensor id
-     */
-    @VisibleForTesting
-    public static final int INVALID_SENSOR_ID = -1;
-
     private final Clock mClock;
 
     private final long mInitMillis;
 
     private final int mUserId;
-
-    private int mSensorId;
-    @Nullable
-    private Long mUpdateSensorIdMillis = null;
 
     private long mChallenge;
     @Nullable
@@ -87,7 +75,6 @@ public final class CredentialModel {
             bundle = new Bundle();
         }
         mUserId = bundle.getInt(Intent.EXTRA_USER_ID, UserHandle.myUserId());
-        mSensorId = bundle.getInt(EXTRA_KEY_SENSOR_ID, INVALID_SENSOR_ID);
         mChallenge = bundle.getLong(EXTRA_KEY_CHALLENGE, INVALID_CHALLENGE);
         mToken = bundle.getByteArray(EXTRA_KEY_CHALLENGE_TOKEN);
         mGkPwHandle = bundle.getLong(EXTRA_KEY_GK_PW_HANDLE, INVALID_GK_PW_HANDLE);
@@ -102,7 +89,6 @@ public final class CredentialModel {
     public Bundle getBundle() {
         final Bundle bundle = new Bundle();
         bundle.putInt(Intent.EXTRA_USER_ID, mUserId);
-        bundle.putInt(EXTRA_KEY_SENSOR_ID, mSensorId);
         bundle.putLong(EXTRA_KEY_CHALLENGE, mChallenge);
         bundle.putByteArray(EXTRA_KEY_CHALLENGE_TOKEN, mToken);
         bundle.putLong(EXTRA_KEY_GK_PW_HANDLE, mGkPwHandle);
@@ -191,21 +177,6 @@ public final class CredentialModel {
     }
 
     /**
-     * Get sensor id
-     */
-    public int getSensorId() {
-        return mSensorId;
-    }
-
-    /**
-     * Set sensor id
-     */
-    public void setSensorId(int value) {
-        mUpdateSensorIdMillis = mClock.millis();
-        mSensorId = value;
-    }
-
-    /**
      * Returns a string representation of the object
      */
     @Override
@@ -221,7 +192,6 @@ public final class CredentialModel {
                 + ", updateMillis:" + mUpdateTokenMillis + "}"
                 + ", gkPwHandle:{len:" + gkPwHandleLen + ", isValid:" + isValidGkPwHandle()
                 + ", clearMillis:" + mClearGkPwHandleMillis + "}"
-                + ", mSensorId:{id:" + mSensorId + ", updateMillis:" + mUpdateSensorIdMillis + "}"
                 + " }";
     }
 }

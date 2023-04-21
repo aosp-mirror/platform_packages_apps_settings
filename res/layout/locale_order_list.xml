@@ -14,11 +14,11 @@
      limitations under the License.
 -->
 
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layoutDirection="locale"
-            android:textDirection="locale">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layoutDirection="locale"
+             android:textDirection="locale">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,7 +36,7 @@
         <Button
             android:id="@+id/add_language"
             android:layout_width="match_parent"
-            android:layout_height="?android:listPreferredItemHeight"
+            android:layout_height="wrap_content"
             android:paddingStart="?android:attr/listPreferredItemPaddingStart"
             android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
             android:drawableStart="@drawable/ic_add_24dp"
@@ -48,4 +48,4 @@
 
     </LinearLayout>
 
-</androidx.core.widget.NestedScrollView>
+</FrameLayout>

@@ -54,7 +54,8 @@ public class BackupDataPreferenceController extends BasePreferenceController {
     public CharSequence getSummary() {
         if (!mPSCD.isBackupGray()) {
             return mPSCD.isBackupEnabled()
-                    ? mContext.getText(R.string.on) : mContext.getText(R.string.off);
+                    ? mContext.getText(R.string.accessibility_feature_state_on)
+                    : mContext.getText(R.string.accessibility_feature_state_off);
         }
         return null;
     }

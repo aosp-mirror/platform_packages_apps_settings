@@ -50,6 +50,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -437,6 +438,7 @@ public class SubscriptionUtil {
                 }
 
             }
+            Log.d(TAG, "getSelectableSubscriptionInfoList: " + selectableList);
             return selectableList;
         }
     }
@@ -560,7 +562,8 @@ public class SubscriptionUtil {
         if (TextUtils.isEmpty(rawPhoneNumber)) {
             return null;
         }
-        String countryIso = MccTable.countryCodeForMcc(subscriptionInfo.getMccString());
+        String countryIso = MccTable.countryCodeForMcc(subscriptionInfo.getMccString())
+                .toUpperCase(Locale.ROOT);
         return PhoneNumberUtils.formatNumber(rawPhoneNumber, countryIso);
     }
 
@@ -684,6 +687,12 @@ public class SubscriptionUtil {
                         .filter(SubscriptionAnnotation::isDisplayAllowed)
                         .filter(SubscriptionAnnotation::isActive)
                         .findFirst().orElse(null);
+    }
+
+    public static boolean isDefaultSubscription(Context context, int subId) {
+        SubscriptionAnnotation subInfo = getDefaultSubscriptionSelection(
+                new SelectableSubscriptions(context, true).call());
+        return subInfo != null && subInfo.getSubscriptionId() == subId;
     }
 
     public static SubscriptionInfo getSubscriptionOrDefault(Context context, int subscriptionId) {

@@ -69,27 +69,34 @@ public class FingerprintEnrollmentViewModelTest {
     public void testSetSavedInstanceState() {
         // setSavedInstanceState() as false
         final Bundle bundle = new Bundle();
+        final Bundle outBundle = new Bundle();
+
+        // Set SAVED_STATE_IS_WAITING_ACTIVITY_RESULT to true
         bundle.putBoolean(SAVED_STATE_IS_WAITING_ACTIVITY_RESULT, false);
         mViewModel.setSavedInstanceState(bundle);
         assertThat(mViewModel.isWaitingActivityResult().get()).isFalse();
 
-        // setSavedInstanceState() as false
+        // Set SAVED_STATE_IS_WAITING_ACTIVITY_RESULT to true
         bundle.clear();
         bundle.putBoolean(SAVED_STATE_IS_WAITING_ACTIVITY_RESULT, true);
         mViewModel.setSavedInstanceState(bundle);
         assertThat(mViewModel.isWaitingActivityResult().get()).isTrue();
 
-        // setSavedInstanceState() as false
+        // Set SAVED_STATE_IS_NEW_FINGERPRINT_ADDED to false
         bundle.clear();
         bundle.putBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED, false);
         mViewModel.setSavedInstanceState(bundle);
-        assertThat(mViewModel.isNewFingerprintAdded()).isFalse();
+        outBundle.clear();
+        mViewModel.onSaveInstanceState(outBundle);
+        assertThat(outBundle.getBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isFalse();
 
-        // setSavedInstanceState() as false
+        // Set SAVED_STATE_IS_NEW_FINGERPRINT_ADDED to true
         bundle.clear();
         bundle.putBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED, true);
         mViewModel.setSavedInstanceState(bundle);
-        assertThat(mViewModel.isNewFingerprintAdded()).isTrue();
+        outBundle.clear();
+        mViewModel.onSaveInstanceState(outBundle);
+        assertThat(outBundle.getBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isTrue();
     }
 
     @Test

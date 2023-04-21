@@ -37,6 +37,7 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.util.EventLog;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
@@ -58,15 +59,20 @@ import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.CycleAdapter.SpinnerInterface;
 import com.android.settings.network.MobileDataEnabledListener;
+import com.android.settings.network.MobileNetworkRepository;
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.AppItem;
+import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.net.NetworkCycleChartData;
 import com.android.settingslib.net.NetworkCycleChartDataLoader;
 import com.android.settingslib.net.NetworkStatsSummaryLoader;
+import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -118,6 +124,8 @@ public class DataUsageList extends DataUsageBaseFragment
     private Preference mUsageAmount;
     private PreferenceGroup mApps;
     private View mHeader;
+    private MobileNetworkRepository mMobileNetworkRepository;
+    private SubscriptionInfoEntity mSubscriptionInfoEntity;
 
     @Override
     public int getMetricsCategory() {
@@ -127,8 +135,14 @@ public class DataUsageList extends DataUsageBaseFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Activity activity = getActivity();
+        if (isGuestUser(getContext())) {
+            Log.e(TAG, "This setting isn't available for guest user");
+            EventLog.writeEvent(0x534e4554, "262741858", -1 /* UID */, "Guest user");
+            finish();
+            return;
+        }
 
+        final Activity activity = getActivity();
         if (!isBandwidthControlEnabled()) {
             Log.w(TAG, "No bandwidth control; leaving");
             activity.finish();
@@ -146,6 +160,11 @@ public class DataUsageList extends DataUsageBaseFragment
         }
 
         processArgument();
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(getContext());
+        ThreadUtils.postOnBackgroundThread(() -> {
+            mSubscriptionInfoEntity = mMobileNetworkRepository.getSubInfoById(
+                    String.valueOf(mSubId));
+        });
         mDataStateListener = new MobileDataEnabledListener(activity, this);
     }
 
@@ -239,9 +258,10 @@ public class DataUsageList extends DataUsageBaseFragment
 
     @Override
     public void onDestroy() {
-        mUidDetailProvider.clearCache();
-        mUidDetailProvider = null;
-
+        if (mUidDetailProvider != null) {
+            mUidDetailProvider.clearCache();
+            mUidDetailProvider = null;
+        }
         super.onDestroy();
     }
 
@@ -451,7 +471,23 @@ public class DataUsageList extends DataUsageBaseFragment
         }
 
         Collections.sort(items);
+        final List<String> packageNames = Arrays.asList(getContext().getResources().getStringArray(
+                R.array.datausage_hiding_carrier_service_package_names));
+        boolean shouldHidePackageName = mSubscriptionInfoEntity != null
+                ? Arrays.stream(getContext().getResources().getIntArray(
+                        R.array.datausage_hiding_carrier_service_carrier_id))
+                .anyMatch(carrierId -> (carrierId == mSubscriptionInfoEntity.carrierId))
+                : false;
+
         for (int i = 0; i < items.size(); i++) {
+            UidDetail detail = mUidDetailProvider.getUidDetail(items.get(i).key, true);
+            // Do not show carrier service package in data usage list if it should be hidden for
+            // the carrier.
+            if (detail != null && shouldHidePackageName && packageNames.contains(
+                    detail.packageName)) {
+                continue;
+            }
+
             final int percentTotal = largest != 0 ? (int) (items.get(i).total * 100 / largest) : 0;
             final AppDataUsagePreference preference = new AppDataUsagePreference(getContext(),
                     items.get(i), percentTotal, mUidDetailProvider);
@@ -618,4 +654,11 @@ public class DataUsageList extends DataUsageBaseFragment
             }
         }
     };
+
+    private static boolean isGuestUser(Context context) {
+        if (context == null) return false;
+        final UserManager userManager = context.getSystemService(UserManager.class);
+        if (userManager == null) return false;
+        return userManager.isGuestUser();
+    }
 }

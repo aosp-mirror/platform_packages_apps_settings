@@ -17,10 +17,11 @@
 package com.android.settings.bluetooth;
 
 import android.content.Context;
-import android.media.AudioAttributes;
 import android.provider.Settings;
 
+import com.android.settings.Utils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.HearingAidAudioRoutingConstants;
 
 /**
  * The controller of the hearing device call routing list preference.
@@ -44,10 +45,13 @@ public class HearingDeviceCallRoutingPreferenceController extends
     }
 
     @Override
+    public int getAvailabilityStatus() {
+        return Utils.isVoiceCapable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
     protected int[] getSupportedAttributeList() {
-        return new int[]{
-                AudioAttributes.USAGE_VOICE_COMMUNICATION,
-                AudioAttributes.USAGE_VOICE_COMMUNICATION_SIGNALLING};
+        return HearingAidAudioRoutingConstants.CALL_ROUTING_ATTRIBUTES;
     }
 
     @Override
@@ -64,6 +68,7 @@ public class HearingDeviceCallRoutingPreferenceController extends
     @Override
     protected int restoreRoutingValue(Context context) {
         return Settings.Secure.getInt(context.getContentResolver(),
-                Settings.Secure.HEARING_AID_CALL_ROUTING, RoutingValue.AUTO);
+                Settings.Secure.HEARING_AID_CALL_ROUTING,
+                HearingAidAudioRoutingConstants.RoutingValue.AUTO);
     }
 }

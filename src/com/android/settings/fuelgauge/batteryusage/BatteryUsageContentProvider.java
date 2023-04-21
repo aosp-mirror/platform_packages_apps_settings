@@ -31,6 +31,8 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventDao;
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryEventDao;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryEventEntity;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryState;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
@@ -52,6 +54,7 @@ public class BatteryUsageContentProvider extends ContentProvider {
     private static final int BATTERY_STATE_CODE = 1;
     private static final int APP_USAGE_LATEST_TIMESTAMP_CODE = 2;
     private static final int APP_USAGE_EVENT_CODE = 3;
+    private static final int BATTERY_EVENT_CODE = 4;
 
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
@@ -68,11 +71,16 @@ public class BatteryUsageContentProvider extends ContentProvider {
                 DatabaseUtils.AUTHORITY,
                 /*path=*/ DatabaseUtils.APP_USAGE_EVENT_TABLE,
                 /*code=*/ APP_USAGE_EVENT_CODE);
+        sUriMatcher.addURI(
+                DatabaseUtils.AUTHORITY,
+                /*path=*/ DatabaseUtils.BATTERY_EVENT_TABLE,
+                /*code=*/ BATTERY_EVENT_CODE);
     }
 
     private Clock mClock;
     private BatteryStateDao mBatteryStateDao;
     private AppUsageEventDao mAppUsageEventDao;
+    private BatteryEventDao mBatteryEventDao;
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     public void setClock(Clock clock) {
@@ -88,6 +96,7 @@ public class BatteryUsageContentProvider extends ContentProvider {
         mClock = Clock.systemUTC();
         mBatteryStateDao = BatteryStateDatabase.getInstance(getContext()).batteryStateDao();
         mAppUsageEventDao = BatteryStateDatabase.getInstance(getContext()).appUsageEventDao();
+        mBatteryEventDao = BatteryStateDatabase.getInstance(getContext()).batteryEventDao();
         Log.w(TAG, "create content provider from " + getCallingPackage());
         return true;
     }
@@ -107,6 +116,8 @@ public class BatteryUsageContentProvider extends ContentProvider {
                 return getAppUsageEvents(uri);
             case APP_USAGE_LATEST_TIMESTAMP_CODE:
                 return getAppUsageLatestTimestamp(uri);
+            case BATTERY_EVENT_CODE:
+                return getBatteryEvents(uri);
             default:
                 throw new IllegalArgumentException("unknown URI: " + uri);
         }
@@ -133,6 +144,14 @@ public class BatteryUsageContentProvider extends ContentProvider {
             case APP_USAGE_EVENT_CODE:
                 try {
                     mAppUsageEventDao.insert(AppUsageEventEntity.create(contentValues));
+                    return uri;
+                } catch (RuntimeException e) {
+                    Log.e(TAG, "insert() from:" + uri + " error:" + e);
+                    return null;
+                }
+            case BATTERY_EVENT_CODE:
+                try {
+                    mBatteryEventDao.insert(BatteryEventEntity.create(contentValues));
                     return uri;
                 } catch (RuntimeException e) {
                     Log.e(TAG, "insert() from:" + uri + " error:" + e);
@@ -190,7 +209,6 @@ public class BatteryUsageContentProvider extends ContentProvider {
         }
         Log.w(TAG, "query app usage events in " + (mClock.millis() - timestamp) + "/ms");
         return cursor;
-
     }
 
     private Cursor getAppUsageLatestTimestamp(Uri uri) {
@@ -207,6 +225,19 @@ public class BatteryUsageContentProvider extends ContentProvider {
         }
         Log.d(TAG, String.format("query app usage latest timestamp %d for user %d in %d/ms",
                 timestamp, queryUserId, (mClock.millis() - timestamp)));
+        return cursor;
+    }
+
+    private Cursor getBatteryEvents(Uri uri) {
+        final long queryTimestamp = getQueryTimestamp(uri);
+        final long timestamp = mClock.millis();
+        Cursor cursor = null;
+        try {
+            cursor = mBatteryEventDao.getAllAfter(queryTimestamp);
+        } catch (RuntimeException e) {
+            Log.e(TAG, "query() from:" + uri + " error:" + e);
+        }
+        Log.w(TAG, "query app usage events in " + (mClock.millis() - timestamp) + "/ms");
         return cursor;
     }
 

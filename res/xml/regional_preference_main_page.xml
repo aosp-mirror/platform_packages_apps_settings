@@ -66,4 +66,11 @@
             android:value="arg_value_language_select" />
     </Preference>
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="regional_pref_footer"
+        android:title="@string/title_regional_pref_footer"
+        android:selectable="false"
+        settings:searchable="false"
+        settings:controller="com.android.settings.regionalpreferences.RegionalFooterPreferenceController"/>
+
 </PreferenceScreen>

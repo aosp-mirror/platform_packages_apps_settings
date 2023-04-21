@@ -135,15 +135,12 @@ public class DefaultSubscriptionControllerTest {
 
     private SubscriptionInfoEntity setupSubscriptionInfoEntity(String subId, int slotId,
             int carrierId, String displayName, String mcc, String mnc, String countryIso,
-            int cardId, boolean isValid, boolean isActive, boolean isAvailable,
-            boolean isDefaultCall, boolean isDefaultSms) {
+            int cardId, boolean isValid, boolean isActive, boolean isAvailable) {
         return new SubscriptionInfoEntity(subId, slotId, carrierId,
                 displayName, displayName, 0, mcc, mnc, countryIso, false, cardId,
                 TelephonyManager.DEFAULT_PORT_INDEX, false, null,
                 SubscriptionManager.SUBSCRIPTION_TYPE_LOCAL_SIM, displayName, false,
-                "1234567890", true, "default", false, isValid,
-                true, isActive, isAvailable, isDefaultCall,
-                isDefaultSms, false, false, false);
+                "1234567890", true, false, isValid, true, isActive, isAvailable, false);
     }
 
     @Test
@@ -164,9 +161,9 @@ public class DefaultSubscriptionControllerTest {
     @Test
     public void onPreferenceChange_prefChangedToSub2_callbackCalledCorrectly() {
         mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true, true, true);
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true);
         mSubInfo2 = setupSubscriptionInfoEntity(SUB_ID_2, 1, 1, DISPLAY_NAME_2, SUB_MCC_2,
-                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true, false, false);
+                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true);
         mController.setDefaultSubscription(Integer.parseInt(mSubInfo1.subId));
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mSubscriptionInfoEntityList.add(mSubInfo2);
@@ -181,9 +178,9 @@ public class DefaultSubscriptionControllerTest {
     @Test
     public void onPreferenceChange_prefChangedToAlwaysAsk_callbackCalledCorrectly() {
         mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true, true, true);
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true);
         mSubInfo2 = setupSubscriptionInfoEntity(SUB_ID_2, 1, 1, DISPLAY_NAME_2, SUB_MCC_2,
-                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true, false, false);
+                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true);
         mController.setDefaultSubscription(Integer.parseInt(mSubInfo1.subId));
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mSubscriptionInfoEntityList.add(mSubInfo2);
@@ -201,9 +198,9 @@ public class DefaultSubscriptionControllerTest {
     public void onPreferenceChange_prefBecomesAvailable_onPreferenceChangeCallbackNotNull() {
         // Start with only one sub active, so the pref is not available
         mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true, true, true);
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true);
         mSubInfo2 = setupSubscriptionInfoEntity(SUB_ID_2, 1, 1, DISPLAY_NAME_2, SUB_MCC_2,
-                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true, false, false);
+                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true);
         mController.setDefaultSubscription(Integer.parseInt(mSubInfo1.subId));
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mController.setDefaultSubscription(Integer.parseInt(mSubInfo1.subId));
@@ -225,9 +222,9 @@ public class DefaultSubscriptionControllerTest {
     @Test
     public void onSubscriptionsChanged_twoSubscriptionsDefaultChanges_selectedEntryGetsUpdated() {
         mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true, true, true);
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true);
         mSubInfo2 = setupSubscriptionInfoEntity(SUB_ID_2, 1, 1, DISPLAY_NAME_2, SUB_MCC_2,
-                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true, false, false);
+                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true);
         mController.setDefaultSubscription(Integer.parseInt(mSubInfo1.subId));
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mSubscriptionInfoEntityList.add(mSubInfo2);
@@ -246,9 +243,9 @@ public class DefaultSubscriptionControllerTest {
     @Test
     public void onSubscriptionsChanged_goFromTwoSubscriptionsToOne_prefDisappears() {
         mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true, true, true);
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true);
         mSubInfo2 = setupSubscriptionInfoEntity(SUB_ID_2, 1, 1, DISPLAY_NAME_2, SUB_MCC_2,
-                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true, false, false);
+                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true);
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mSubscriptionInfoEntityList.add(mSubInfo2);
         mController.setDefaultSubscription(Integer.parseInt(mSubInfo1.subId));
@@ -273,9 +270,9 @@ public class DefaultSubscriptionControllerTest {
     @UiThreadTest
     public void onSubscriptionsChanged_goFromOneSubscriptionToTwo_prefAppears() {
         mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true, true, true);
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true);
         mSubInfo2 = setupSubscriptionInfoEntity(SUB_ID_2, 1, 1, DISPLAY_NAME_2, SUB_MCC_2,
-                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true, false, false);
+                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true);
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mController.setDefaultSubscription(Integer.parseInt(mSubInfo1.subId));
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
@@ -297,11 +294,11 @@ public class DefaultSubscriptionControllerTest {
     @Test
     public void onSubscriptionsChanged_goFromTwoToThreeSubscriptions_listGetsUpdated() {
         mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true, true, true);
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true);
         mSubInfo2 = setupSubscriptionInfoEntity(SUB_ID_2, 1, 1, DISPLAY_NAME_2, SUB_MCC_2,
-                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true, false, false);
+                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true);
         mSubInfo3 = setupSubscriptionInfoEntity(SUB_ID_3, 1, 1, DISPLAY_NAME_3, SUB_MCC_3,
-                SUB_MNC_3, SUB_COUNTRY_ISO_3, 1, true, true, true, false, false);
+                SUB_MNC_3, SUB_COUNTRY_ISO_3, 1, true, true, true);
         mController.setDefaultSubscription(Integer.parseInt(mSubInfo1.subId));
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mSubscriptionInfoEntityList.add(mSubInfo2);

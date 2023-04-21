@@ -35,13 +35,7 @@ public class ScreenSaverPreferenceController extends BasePreferenceController im
 
     @Override
     public int getAvailabilityStatus() {
-        final boolean dreamsSupported = mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_dreamsSupported);
-        final boolean dreamsOnlyEnabledForDockUser = mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_dreamsOnlyEnabledForDockUser);
-        return (dreamsSupported && (!dreamsOnlyEnabledForDockUser
-                || Utils.canCurrentUserDream(mContext)))
-                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return Utils.areDreamsAvailableToCurrentUser(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

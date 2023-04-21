@@ -211,7 +211,7 @@ public class FingerprintEnrollIntroViewModelTest {
     }
 
     @Test
-    public void textCanAssumeUdfps_forUdfpsUltrasonicSensor() {
+    public void testCanAssumeUdfps_forUdfpsUltrasonicSensor() {
         final FingerprintEnrollIntroViewModel viewModel = newFingerprintEnrollIntroViewModel(
                 newFingerprintRepository(mFingerprintManager, TYPE_UDFPS_ULTRASONIC, 5),
                 newAllFalseRequest(mApplication));
@@ -220,7 +220,7 @@ public class FingerprintEnrollIntroViewModelTest {
     }
 
     @Test
-    public void textCanAssumeUdfps_forRearSensor() {
+    public void testCanAssumeUdfps_forRearSensor() {
         final FingerprintEnrollIntroViewModel viewModel = newFingerprintEnrollIntroViewModel(
                 newFingerprintRepository(mFingerprintManager, TYPE_REAR, 5),
                 newAllFalseRequest(mApplication));

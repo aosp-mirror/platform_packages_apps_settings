@@ -29,6 +29,7 @@ import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.biometrics.face.FaceSettings;
+import com.android.settings.communal.CommunalPreferenceController;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.network.MobileNetworkIntentConverter;
@@ -51,9 +52,26 @@ public class Settings extends SettingsActivity {
     public static class AssistGestureSettingsActivity extends SettingsActivity { /* empty */}
     public static class BluetoothSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CreateShortcutActivity extends SettingsActivity { /* empty */ }
-    public static class FaceSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class FaceSettingsActivity extends SettingsActivity {
+        @Override
+        protected void onCreate(Bundle savedState) {
+            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+            setTheme(R.style.SettingsPreferenceTheme_SetupWizard);
+            ThemeHelper.trySetDynamicColor(this);
+            super.onCreate(savedState);
+        }
+    }
     /** Container for {@link FaceSettings} to use with a pre-defined task affinity. */
-    public static class FaceSettingsInternalActivity extends SettingsActivity { /* empty */ }
+    public static class FaceSettingsInternalActivity extends SettingsActivity {
+        @Override
+        protected void onCreate(Bundle savedState) {
+            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+            setTheme(R.style.SettingsPreferenceTheme_SetupWizard);
+            ThemeHelper.trySetDynamicColor(this);
+            super.onCreate(savedState);
+        }
+    }
+
     public static class FingerprintSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CombinedBiometricSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CombinedBiometricProfileSettingsActivity extends SettingsActivity { /* empty */ }
@@ -117,6 +135,8 @@ public class Settings extends SettingsActivity {
     /** Activity for the regional preferences settings. */
     public static class RegionalPreferencesActivity extends SettingsActivity { /* empty */ }
     public static class KeyboardSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity for the navigation mode settings. */
+    public static class NavigationModeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class UserDictionarySettingsActivity extends SettingsActivity { /* empty */ }
     public static class DarkThemeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DisplaySettingsActivity extends SettingsActivity { /* empty */ }
@@ -314,6 +334,16 @@ public class Settings extends SettingsActivity {
     public static class AndroidBeamSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiDisplaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class DreamSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity to manage communal settings */
+    public static class CommunalSettingsActivity extends SettingsActivity {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            if (!CommunalPreferenceController.isAvailable(this)) {
+                finish();
+            }
+        }
+    }
     public static class NotificationStationActivity extends SettingsActivity { /* empty */ }
     public static class UserSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationAccessSettingsActivity extends SettingsActivity { /* empty */ }
@@ -322,6 +352,7 @@ public class Settings extends SettingsActivity {
     public static class PremiumSmsAccessActivity extends SettingsActivity { /* empty */ }
     public static class PictureInPictureSettingsActivity extends SettingsActivity { /* empty */ }
     public static class TurnScreenOnSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class AppTurnScreenOnSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppPictureInPictureSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenAccessDetailSettingsActivity extends SettingsActivity {}

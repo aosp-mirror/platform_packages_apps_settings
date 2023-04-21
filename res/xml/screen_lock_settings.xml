@@ -33,6 +33,12 @@
         android:title="@string/lock_screen_auto_pin_confirm_title"
         android:summary="@string/lock_screen_auto_pin_confirm_summary" />
 
+    <SwitchPreference
+        android:key="enhancedPinPrivacy"
+        android:title="@string/lockpattern_settings_enhanced_pin_privacy_title"
+        android:summary="@string/lockpattern_settings_enhanced_pin_privacy_summary" />
+
+
     <!-- available in pin/pattern/password -->
     <com.android.settings.display.TimeoutListPreference
         android:key="lock_after_timeout"

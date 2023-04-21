@@ -19,8 +19,6 @@ package com.android.settings.accessibility;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import static com.android.settings.accessibility.FlashNotificationsUtil.DEFAULT_SCREEN_FLASH_COLOR;
-import static com.android.settings.accessibility.FlashNotificationsUtil.SETTING_KEY_SCREEN_FLASH_NOTIFICATION;
-import static com.android.settings.accessibility.FlashNotificationsUtil.SETTING_KEY_SCREEN_FLASH_NOTIFICATION_COLOR;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -59,7 +57,7 @@ public class ScreenFlashNotificationPreferenceController extends TogglePreferenc
     @Override
     public boolean isChecked() {
         return Settings.System.getInt(mContext.getContentResolver(),
-                SETTING_KEY_SCREEN_FLASH_NOTIFICATION, OFF) != OFF;
+                Settings.System.SCREEN_FLASH_NOTIFICATION, OFF) != OFF;
     }
 
     @Override
@@ -67,7 +65,7 @@ public class ScreenFlashNotificationPreferenceController extends TogglePreferenc
         if (isChecked) checkAndSetInitialColor();
 
         return Settings.System.putInt(mContext.getContentResolver(),
-                SETTING_KEY_SCREEN_FLASH_NOTIFICATION, (isChecked ? ON : OFF));
+                Settings.System.SCREEN_FLASH_NOTIFICATION, (isChecked ? ON : OFF));
     }
 
     @Override
@@ -79,7 +77,8 @@ public class ScreenFlashNotificationPreferenceController extends TogglePreferenc
     public CharSequence getSummary() {
         return FlashNotificationsUtil.getColorDescriptionText(mContext,
                 Settings.System.getInt(mContext.getContentResolver(),
-                        SETTING_KEY_SCREEN_FLASH_NOTIFICATION_COLOR, DEFAULT_SCREEN_FLASH_COLOR));
+                        Settings.System.SCREEN_FLASH_NOTIFICATION_COLOR,
+                        DEFAULT_SCREEN_FLASH_COLOR));
     }
 
     @Override
@@ -94,12 +93,12 @@ public class ScreenFlashNotificationPreferenceController extends TogglePreferenc
         if (getPreferenceKey().equals(preference.getKey()) && mParentFragment != null) {
 
             final int initialColor = Settings.System.getInt(mContext.getContentResolver(),
-                    SETTING_KEY_SCREEN_FLASH_NOTIFICATION_COLOR,
+                    Settings.System.SCREEN_FLASH_NOTIFICATION_COLOR,
                     DEFAULT_SCREEN_FLASH_COLOR);
 
             final Consumer<Integer> consumer = color -> {
                 Settings.System.putInt(mContext.getContentResolver(),
-                        SETTING_KEY_SCREEN_FLASH_NOTIFICATION_COLOR, color);
+                        Settings.System.SCREEN_FLASH_NOTIFICATION_COLOR, color);
                 refreshColorSummary();
             };
 
@@ -115,10 +114,10 @@ public class ScreenFlashNotificationPreferenceController extends TogglePreferenc
 
     private void checkAndSetInitialColor() {
         if (Settings.System.getInt(mContext.getContentResolver(),
-                SETTING_KEY_SCREEN_FLASH_NOTIFICATION_COLOR, Color.TRANSPARENT)
+                Settings.System.SCREEN_FLASH_NOTIFICATION_COLOR, Color.TRANSPARENT)
                 == Color.TRANSPARENT) {
             Settings.System.putInt(mContext.getContentResolver(),
-                    SETTING_KEY_SCREEN_FLASH_NOTIFICATION_COLOR, DEFAULT_SCREEN_FLASH_COLOR);
+                    Settings.System.SCREEN_FLASH_NOTIFICATION_COLOR, DEFAULT_SCREEN_FLASH_COLOR);
         }
     }
 

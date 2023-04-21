@@ -26,6 +26,8 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.liveData
 import com.android.settings.R
 import com.android.settingslib.spa.widget.preference.Preference
@@ -39,23 +41,28 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 data class DefaultAppShortcut(
     val roleName: String,
     @StringRes val titleResId: Int,
 )
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun DefaultAppShortcutPreference(shortcut: DefaultAppShortcut, app: ApplicationInfo) {
     val context = LocalContext.current
-    val presenter = remember { DefaultAppShortcutPresenter(context, shortcut.roleName, app) }
-    if (!presenter.isAvailable()) return
+    val presenter = remember(shortcut.roleName, app) {
+        DefaultAppShortcutPresenter(context, shortcut.roleName, app)
+    }
+    if (remember(presenter) { !presenter.isAvailable() }) return
     if (presenter.isVisible().observeAsState().value != true) return
 
     Preference(object : PreferenceModel {
         override val title = stringResource(shortcut.titleResId)
-        override val summary = presenter.summaryLiveData.observeAsState(
-            initial = stringResource(R.string.summary_placeholder),
+        override val summary = presenter.summaryFlow.collectAsStateWithLifecycle(
+            initialValue = stringResource(R.string.summary_placeholder),
         )
         override val onClick = presenter::startActivity
     })
@@ -93,13 +100,13 @@ private class DefaultAppShortcutPresenter(
         }
     }
 
-    val summaryLiveData = liveData(Dispatchers.IO) {
-        val defaultApp = roleManager.getRoleHoldersAsUser(roleName, app.userHandle).firstOrNull()
+    val summaryFlow = flow { emit(getSummary()) }.flowOn(Dispatchers.IO)
 
-        emit(context.getString(when (defaultApp) {
-            app.packageName -> R.string.yes
-            else -> R.string.no
-        }))
+    private fun getSummary(): String {
+        val defaultApp = roleManager.getRoleHoldersAsUser(roleName, app.userHandle).firstOrNull()
+        return context.getString(
+            if (defaultApp == app.packageName) R.string.yes else R.string.no
+        )
     }
 
     fun startActivity() {

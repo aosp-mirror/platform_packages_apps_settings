@@ -242,7 +242,14 @@ public class BiometricUtils {
      */
     public static Intent getFingerprintFindSensorIntent(@NonNull Context context,
             @NonNull Intent activityIntent) {
-        if (WizardManagerHelper.isAnySetupWizard(activityIntent)) {
+        if (FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_BIOMETRICS2_ENROLLMENT)) {
+            final Intent intent = new Intent(context, FingerprintEnrollmentActivity.class);
+            intent.putExtra(BiometricEnrollActivity.EXTRA_SKIP_INTRO, true);
+            if (WizardManagerHelper.isAnySetupWizard(activityIntent)) {
+                SetupWizardUtils.copySetupExtras(activityIntent, intent);
+            }
+            return intent;
+        } else if (WizardManagerHelper.isAnySetupWizard(activityIntent)) {
             Intent intent = new Intent(context, SetupFingerprintEnrollFindSensor.class);
             SetupWizardUtils.copySetupExtras(activityIntent, intent);
             return intent;

@@ -29,6 +29,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.widget.TickButtonPreference;
 
 /** A fragment to include each kind of regional preferences. */
 public class RegionalPreferencesFragment extends SettingsPreferenceFragment {
@@ -63,7 +64,7 @@ public class RegionalPreferencesFragment extends SettingsPreferenceFragment {
             TickButtonPreference pref = (TickButtonPreference) mPreferenceScreen.getPreference(i);
             Log.i(TAG, "[onPreferenceClick] key is " + pref.getKey());
             if (pref.getKey().equals(preference.getKey())) {
-                pref.setTickEnable(true);
+                pref.setSelected(true);
                 RegionalPreferencesDataUtils.savePreference(
                         getPrefContext(),
                         mType,
@@ -72,7 +73,7 @@ public class RegionalPreferencesFragment extends SettingsPreferenceFragment {
                                 ? null : preference.getKey());
                 continue;
             }
-            pref.setTickEnable(false);
+            pref.setSelected(false);
         }
         return true;
     }
@@ -115,7 +116,7 @@ public class RegionalPreferencesFragment extends SettingsPreferenceFragment {
             String value = RegionalPreferencesDataUtils.getDefaultUnicodeExtensionData(
                     getPrefContext(), mType);
             pref.setKey(item);
-            pref.setTickEnable(!value.isEmpty() && item.equals(value));
+            pref.setSelected(!value.isEmpty() && item.equals(value));
             mPreferenceScreen.addPreference(pref);
         }
         return super.onCreateView(inflater, container, savedInstanceState);

@@ -185,7 +185,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         mUserManager = getUserManager();
         updatePasswordQuality();
 
-        if (!mConfirmingCredentials) {
+        // Check isFinishing() because FaceEnrollIntroduction may finish self to launch
+        // FaceSettings during onCreate()
+        if (!mConfirmingCredentials && !isFinishing()) {
             if (!mHasPassword) {
                 // No password registered, launch into enrollment wizard.
                 mConfirmingCredentials = true;
@@ -487,13 +489,16 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         finish();
     }
 
-    @Override
-    protected void initViews() {
-        super.initViews();
-
+    protected void updateDescriptionText() {
         if (mBiometricUnlockDisabledByAdmin && !mParentalConsentRequired) {
             setDescriptionText(getDescriptionDisabledByAdmin());
         }
+    }
+
+    @Override
+    protected void initViews() {
+        super.initViews();
+        updateDescriptionText();
     }
 
     @NonNull

@@ -16,7 +16,8 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.FlashNotificationsUtil.SETTING_KEY_CAMERA_FLASH_NOTIFICATION;
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
@@ -81,28 +82,30 @@ public class CameraFlashNotificationPreferenceControllerTest {
 
     @Test
     public void isChecked_setOff_assertFalse() {
-        Settings.System.putInt(mContentResolver, SETTING_KEY_CAMERA_FLASH_NOTIFICATION, 0);
+        Settings.System.putInt(mContentResolver, Settings.System.CAMERA_FLASH_NOTIFICATION, OFF);
         assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
     public void isChecked_setOn_assertTrue() {
-        Settings.System.putInt(mContentResolver, SETTING_KEY_CAMERA_FLASH_NOTIFICATION, 1);
+        Settings.System.putInt(mContentResolver, Settings.System.CAMERA_FLASH_NOTIFICATION, ON);
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
-    public void setChecked_setTrue_assertNotZero() {
+    public void setChecked_setTrue_assertNotOff() {
         mController.setChecked(true);
-        assertThat(Settings.System.getInt(mContentResolver, SETTING_KEY_CAMERA_FLASH_NOTIFICATION,
-                0)).isNotEqualTo(0);
+        assertThat(
+                Settings.System.getInt(mContentResolver, Settings.System.CAMERA_FLASH_NOTIFICATION,
+                        OFF)).isNotEqualTo(OFF);
     }
 
     @Test
-    public void setChecked_setFalse_assertNotOne() {
+    public void setChecked_setFalse_assertNotOn() {
         mController.setChecked(false);
-        assertThat(Settings.System.getInt(mContentResolver, SETTING_KEY_CAMERA_FLASH_NOTIFICATION,
-                1)).isNotEqualTo(1);
+        assertThat(
+                Settings.System.getInt(mContentResolver, Settings.System.CAMERA_FLASH_NOTIFICATION,
+                        OFF)).isNotEqualTo(ON);
     }
 
     @Test

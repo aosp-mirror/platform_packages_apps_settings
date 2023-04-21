@@ -23,6 +23,7 @@ import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.util.TypedValue;
 
+import androidx.window.embedding.ActivityEmbeddingController;
 import androidx.window.embedding.SplitController;
 
 import com.android.settings.R;
@@ -80,5 +81,14 @@ public class ActivityEmbeddingUtils {
         DisplayMetrics dm = activity.getResources().getDisplayMetrics();
         return dm.widthPixels >= (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, MIN_REGULAR_HOMEPAGE_LAYOUT_WIDTH_DP, dm);
+    }
+
+    /**
+     * Check if activity is already embedded
+     */
+    public static boolean isAlreadyEmbedded(Activity activity) {
+        return ActivityEmbeddingController
+                .getInstance(activity)
+                .isActivityEmbedded(activity);
     }
 }

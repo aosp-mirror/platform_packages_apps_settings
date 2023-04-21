@@ -17,6 +17,8 @@
 package com.android.settings.localepicker;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
@@ -65,10 +67,14 @@ public class LocaleHelperPreferenceController extends AbstractPreferenceControll
     }
 
     private void openLocaleLearnMoreLink() {
-        mContext.startActivity(
-                HelpUtils.getHelpIntent(
-                        mContext,
-                        mContext.getString(R.string.link_locale_picker_footer_learn_more),
-                        /*backupContext=*/""));
+        Intent intent = HelpUtils.getHelpIntent(
+                mContext,
+                mContext.getString(R.string.link_locale_picker_footer_learn_more),
+                mContext.getClass().getName());
+        if (intent != null) {
+            mContext.startActivity(intent);
+        } else {
+            Log.w(TAG, "HelpIntent is null");
+        }
     }
 }

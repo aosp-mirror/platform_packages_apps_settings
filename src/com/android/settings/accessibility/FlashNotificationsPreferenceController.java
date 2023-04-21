@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
+import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -32,7 +33,9 @@ public class FlashNotificationsPreferenceController extends BasePreferenceContro
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        boolean isFeatureOn = FeatureFlagUtils.isEnabled(mContext,
+                FeatureFlagUtils.SETTINGS_FLASH_NOTIFICATIONS);
+        return isFeatureOn ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

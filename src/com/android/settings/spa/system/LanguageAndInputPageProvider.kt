@@ -33,6 +33,8 @@ import com.android.settingslib.spa.widget.ui.SettingsIcon
 object LanguageAndInputPageProvider : SettingsPageProvider {
     override val name = "LanguageAndInput"
 
+    override fun isEnabled(arguments: Bundle?) = false
+
     @Composable
     override fun Page(arguments: Bundle?) {
         LanguageAndInput()

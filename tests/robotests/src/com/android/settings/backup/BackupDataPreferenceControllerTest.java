@@ -73,7 +73,7 @@ public class BackupDataPreferenceControllerTest {
 
         mController.updateState(mPreference);
         assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getString(R.string.on));
+                .isEqualTo(mContext.getString(R.string.accessibility_feature_state_on));
     }
 
     @Test
@@ -83,7 +83,7 @@ public class BackupDataPreferenceControllerTest {
 
         mController.updateState(mPreference);
         assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getString(R.string.off));
+                .isEqualTo(mContext.getString(R.string.accessibility_feature_state_off));
     }
 
     @Test

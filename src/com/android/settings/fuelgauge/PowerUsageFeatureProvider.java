@@ -118,16 +118,6 @@ public interface PowerUsageFeatureProvider {
     boolean isChartGraphSlotsEnabled(Context context);
 
     /**
-     * Checks whether adaptive charging feature is supported in this device
-     */
-    boolean isAdaptiveChargingSupported();
-
-    /**
-     * Checks whether battery manager feature is supported in this device
-     */
-    boolean isBatteryManagerSupported();
-
-    /**
      * Returns {@code true} if current defender mode is extra defend
      */
     boolean isExtraDefend();

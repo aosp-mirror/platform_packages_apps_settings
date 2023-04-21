@@ -20,14 +20,14 @@
     android:title="@string/flash_notifications_title">
 
     <com.android.settingslib.widget.TopIntroPreference
-        android:title="@string/flash_notifications_intro" />
+        android:key="flash_notifications_intro"
+        settings:searchable="false"
+        settings:controller="com.android.settings.accessibility.FlashNotificationsIntroPreferenceController" />
 
-    <!-- TODO update when rawRes added
     <com.android.settingslib.widget.IllustrationPreference
-        android:key="flash_notifications_guide_preference"
-        settings:lottie_rawRes="@raw/NOT ADDED"
-        settings:searchable="false" />
-    -->
+        android:key="flash_notifications_illustration"
+        settings:searchable="false"
+        settings:lottie_rawRes="@drawable/flash_notifications_illustration" />
 
     <SwitchPreference
         android:key="camera_flash_notification_preference"
@@ -44,12 +44,14 @@
     <com.android.settings.accessibility.FlashNotificationsPreviewPreference
         android:key="flash_notifications_preview"
         android:title="@string/flash_notifications_preview"
+        settings:searchable="false"
         settings:controller="com.android.settings.accessibility.FlashNotificationsPreviewPreferenceController" />
 
-    <com.android.settingslib.widget.FooterPreference
+    <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="flash_notifications_footer"
-        android:selectable="false"
         android:title="@string/flash_notifications_note"
-        settings:searchable="false" />
+        android:selectable="false"
+        settings:searchable="false"
+        settings:controller="com.android.settings.accessibility.FlashNotificationsFooterPreferenceController"/>
 
 </PreferenceScreen>

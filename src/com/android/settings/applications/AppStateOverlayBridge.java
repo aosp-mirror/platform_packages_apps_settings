@@ -19,6 +19,7 @@ import android.Manifest;
 import android.app.AppOpsManager;
 import android.content.Context;
 
+import com.android.settings.Utils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
@@ -59,7 +60,7 @@ public class AppStateOverlayBridge extends AppStateAppOpsBridge {
         private static final List<String> DISABLE_PACKAGE_LIST = new ArrayList<>();
 
         static {
-            DISABLE_PACKAGE_LIST.add("com.android.systemui");
+            DISABLE_PACKAGE_LIST.add(Utils.SYSTEMUI_PACKAGE_NAME);
         }
 
         public OverlayState(PermissionState permissionState) {

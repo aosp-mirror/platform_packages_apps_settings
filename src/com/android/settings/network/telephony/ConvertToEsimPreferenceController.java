@@ -52,7 +52,7 @@ public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceCo
             LifecycleOwner lifecycleOwner, int subId) {
         super(context, key);
         mSubId = subId;
-        mMobileNetworkRepository = MobileNetworkRepository.createBySubId(context, this, mSubId);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         mLifecycleOwner = lifecycleOwner;
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -66,12 +66,13 @@ public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceCo
 
     @OnLifecycleEvent(ON_START)
     public void onStart() {
-        mMobileNetworkRepository.addRegister(mLifecycleOwner);
+        mMobileNetworkRepository.addRegister(mLifecycleOwner, this, mSubId);
+        mMobileNetworkRepository.updateEntity();
     }
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
-        mMobileNetworkRepository.removeRegister();
+        mMobileNetworkRepository.removeRegister(this);
     }
 
     @Override
@@ -114,15 +115,12 @@ public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceCo
     @Override
     public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
         // TODO(b/262195754): Need the intent to enabled the feature.
-//        if (DataServiceUtils.shouldUpdateEntityList(mSubscriptionInfoEntityList,
-//                subInfoEntityList)) {
-//            mSubscriptionInfoEntityList = subInfoEntityList;
-//            mSubscriptionInfoEntityList.forEach(entity -> {
-//                if (Integer.parseInt(entity.subId) == mSubId) {
-//                    mSubscriptionInfoEntity = entity;
-//                    update();
-//                }
-//            });
-//        }
+//        mSubscriptionInfoEntityList = subInfoEntityList;
+//        mSubscriptionInfoEntityList.forEach(entity -> {
+//            if (Integer.parseInt(entity.subId) == mSubId) {
+//                mSubscriptionInfoEntity = entity;
+//                update();
+//            }
+//        });
     }
 }

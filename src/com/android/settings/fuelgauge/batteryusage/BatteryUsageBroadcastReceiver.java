@@ -30,6 +30,8 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.fuelgauge.BatteryStatus;
 
 import java.time.Duration;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /** A {@link BatteryUsageBroadcastReceiver} for battery usage data requesting. */
 public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
@@ -37,7 +39,10 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
     /** An intent action to request Settings to clear cache data. */
     public static final String ACTION_CLEAR_BATTERY_CACHE_DATA =
             "com.android.settings.battery.action.CLEAR_BATTERY_CACHE_DATA";
-    /** An intent action to request Settings to clear cache data. */
+    /** An intent action for power is plugging. */
+    public static final String ACTION_BATTERY_PLUGGING =
+            "com.android.settings.battery.action.ACTION_BATTERY_PLUGGING";
+    /** An intent action for power is unplugging. */
     public static final String ACTION_BATTERY_UNPLUGGING =
             "com.android.settings.battery.action.ACTION_BATTERY_UNPLUGGING";
 
@@ -49,16 +54,20 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
     @VisibleForTesting
     boolean mFetchBatteryUsageData = false;
 
+    private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
+
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent == null || intent.getAction() == null) {
             return;
         }
-        Log.d(TAG, "onReceive:" + intent.getAction());
+        final String action = intent.getAction();
+        Log.d(TAG, "onReceive:" + action);
+        DatabaseUtils.recordDateTime(context, action);
         final String fullChargeIntentAction = FeatureFactory.getFactory(context)
                 .getPowerUsageFeatureProvider(context)
                 .getFullChargeIntentAction();
-        switch (intent.getAction()) {
+        switch (action) {
             case Intent.ACTION_BATTERY_LEVEL_CHANGED:
                 // Only when fullChargeIntentAction is ACTION_BATTERY_LEVEL_CHANGED,
                 // ACTION_BATTERY_LEVEL_CHANGED will be considered as the full charge event and then
@@ -68,7 +77,11 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
                     tryToFetchUsageData(context);
                 }
                 break;
+            case ACTION_BATTERY_PLUGGING:
+                sendBatteryEventData(context, BatteryEventType.POWER_CONNECTED);
+                break;
             case ACTION_BATTERY_UNPLUGGING:
+                sendBatteryEventData(context, BatteryEventType.POWER_DISCONNECTED);
                 // Only when fullChargeIntentAction is ACTION_POWER_DISCONNECTED,
                 // ACTION_BATTERY_UNPLUGGING will be considered as the full charge event and then
                 // start usage events fetching.
@@ -103,5 +116,13 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
 
         mFetchBatteryUsageData = true;
         BatteryUsageDataLoader.enqueueWork(context, /*isFullChargeStart=*/ true);
+    }
+
+    private void sendBatteryEventData(Context context, BatteryEventType batteryEventType) {
+        final long timestamp = System.currentTimeMillis();
+        final Intent intent = BatteryUtils.getBatteryIntent(context);
+        final int batteryLevel = BatteryStatus.getBatteryLevel(intent);
+        mExecutor.execute(() -> DatabaseUtils.sendBatteryEventData(context,
+                ConvertUtils.convertToBatteryEvent(timestamp, batteryEventType, batteryLevel)));
     }
 }

@@ -48,7 +48,7 @@ public final class IncompatibleChargerTip extends BatteryTip {
 
     @Override
     public int getIconId() {
-        return R.drawable.ic_battery_charging;
+        return R.drawable.ic_battery_alert_theme;
     }
 
     @Override
@@ -73,15 +73,15 @@ public final class IncompatibleChargerTip extends BatteryTip {
         }
 
         cardPreference.setSelectable(false);
-        cardPreference.setSecondaryButtonText(context.getString(R.string.learn_more));
-        cardPreference.setSecondaryButtonClickListener(
+        cardPreference.setPrimaryButtonText(context.getString(R.string.learn_more));
+        cardPreference.setPrimaryButtonClickListener(
                 button -> button.startActivityForResult(
                         HelpUtils.getHelpIntent(
                                 context,
                                 context.getString(R.string.help_url_incompatible_charging),
                                 /* backupContext */ ""), /* requestCode */ 0));
-        cardPreference.setSecondaryButtonVisible(true);
-        cardPreference.setSecondaryButtonContentDescription(context.getString(
+        cardPreference.setPrimaryButtonVisible(true);
+        cardPreference.setPrimaryButtonContentDescription(context.getString(
                 R.string.battery_tip_incompatible_charging_content_description));
     }
 }

@@ -27,9 +27,7 @@ import androidx.lifecycle.viewmodel.CreationExtras;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.biometrics.fingerprint.FingerprintUpdater;
-import com.android.settings.biometrics2.data.repository.AccessibilityRepository;
 import com.android.settings.biometrics2.data.repository.FingerprintRepository;
-import com.android.settings.biometrics2.data.repository.VibratorRepository;
 import com.android.settings.biometrics2.ui.model.EnrollmentRequest;
 import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.ChallengeGenerator;
@@ -115,12 +113,9 @@ public class BiometricsViewModelFactory implements ViewModelProvider.Factory {
             final Integer userId = extras.get(USER_ID_KEY);
             final FingerprintRepository fingerprint = provider.getFingerprintRepository(
                     application);
-            final AccessibilityRepository accessibility = provider.getAccessibilityRepository(
-                    application);
-            final VibratorRepository vibrator = provider.getVibratorRepository(application);
-            if (fingerprint != null && accessibility != null && vibrator != null) {
-                return (T) new FingerprintEnrollEnrollingViewModel(application, userId, fingerprint,
-                        accessibility, vibrator);
+            if (fingerprint != null) {
+                return (T) new FingerprintEnrollEnrollingViewModel(application, userId,
+                        fingerprint);
             }
         } else if (modelClass.isAssignableFrom(FingerprintEnrollFinishViewModel.class)) {
             final Integer userId = extras.get(USER_ID_KEY);
