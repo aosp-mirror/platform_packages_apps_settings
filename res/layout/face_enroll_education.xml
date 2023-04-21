@@ -39,7 +39,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-24dp">
+            android:layout_marginTop="@dimen/face_enroll_education_lottie_frame_margin_top">
 
             <com.google.android.setupdesign.view.IllustrationVideoView
                 android:id="@+id/illustration_default"
@@ -52,8 +52,8 @@
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/illustration_lottie"
                 android:layout_width="match_parent"
-                android:layout_height="440dp"
-                android:layout_marginTop="-52dp"
+                android:layout_height="@dimen/illustration_lottie_height"
+                android:layout_marginTop="@dimen/lottie_animation_view_margin_top"
                 android:scaleType="centerInside"
                 android:visibility="gone"
                 app:lottie_autoPlay="true"
@@ -66,6 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:visibility="invisible"
+                android:layout_marginTop="@dimen/illustration_accessibility_margin_top"
                 android:src="@drawable/face_enroll_icon_large"/>
 
         </FrameLayout>
@@ -83,8 +84,7 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-24dp">
+                android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/accessibility_button"
@@ -92,12 +92,15 @@
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/limited_vision_button_margin_top"
+                    android:layout_marginBottom="@dimen/limited_vision_button_margin_bottom"
                     android:text="@string/security_settings_face_enroll_introduction_accessibility"/>
 
                 <com.android.settings.biometrics.face.FaceEnrollAccessibilityToggle
                     android:id="@+id/toggle_diversity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/limited_vision_button_toggle_margin_top"
                     android:visibility="gone"
                     app:messageText="@string/security_settings_face_enroll_introduction_accessibility"/>
 

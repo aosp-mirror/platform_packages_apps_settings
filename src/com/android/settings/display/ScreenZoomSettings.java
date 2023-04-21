@@ -21,11 +21,9 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.view.Display;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.display.DisplayDensityConfiguration;
 import com.android.settingslib.display.DisplayDensityUtils;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -37,6 +35,7 @@ public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment {
 
     private int mDefaultDensity;
     private int[] mValues;
+    private DisplayDensityUtils mDensity;
 
     @Override
     protected int getActivityLayoutResId() {
@@ -58,9 +57,9 @@ public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final DisplayDensityUtils density = new DisplayDensityUtils(getContext());
+        mDensity = new DisplayDensityUtils(getContext());
 
-        final int initialIndex = density.getCurrentIndex();
+        final int initialIndex = mDensity.getCurrentIndexForDefaultDisplay();
         if (initialIndex < 0) {
             // Failed to obtain default density, which means we failed to
             // connect to the window manager service. Just use the current
@@ -71,10 +70,10 @@ public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment {
             mInitialIndex = 0;
             mDefaultDensity = densityDpi;
         } else {
-            mValues = density.getValues();
-            mEntries = density.getEntries();
+            mValues = mDensity.getDefaultDisplayDensityValues();
+            mEntries = mDensity.getDefaultDisplayDensityEntries();
             mInitialIndex = initialIndex;
-            mDefaultDensity = density.getDefaultDensity();
+            mDefaultDensity = mDensity.getDefaultDensityForDefaultDisplay();
         }
 
         getActivity().setTitle(R.string.screen_zoom_title);
@@ -95,9 +94,9 @@ public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment {
     protected void commit() {
         final int densityDpi = mValues[mCurrentIndex];
         if (densityDpi == mDefaultDensity) {
-            DisplayDensityConfiguration.clearForcedDisplayDensity(Display.DEFAULT_DISPLAY);
+            mDensity.clearForcedDisplayDensity();
         } else {
-            DisplayDensityConfiguration.setForcedDisplayDensity(Display.DEFAULT_DISPLAY, densityDpi);
+            mDensity.setForcedDisplayDensity(densityDpi);
         }
     }
 

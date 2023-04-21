@@ -155,6 +155,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         if (savedInstanceState != null) {
             mConfirmingCredentials = savedInstanceState.getBoolean(KEY_CONFIRMING_CREDENTIALS);
             mHasScrolledToBottom = savedInstanceState.getBoolean(KEY_SCROLLED_TO_BOTTOM);
+            mLaunchedPostureGuidance = savedInstanceState.getBoolean(
+                    EXTRA_LAUNCHED_POSTURE_GUIDANCE);
         }
 
         Intent intent = getIntent();
@@ -181,7 +183,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         mUserManager = UserManager.get(this);
         updatePasswordQuality();
 
-        if (!mConfirmingCredentials) {
+        // Check isFinishing() because FaceEnrollIntroduction may finish self to launch
+        // FaceSettings during onCreate()
+        if (!mConfirmingCredentials && !isFinishing()) {
             if (!mHasPassword) {
                 // No password registered, launch into enrollment wizard.
                 mConfirmingCredentials = true;
@@ -273,6 +277,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 finish();
             }
         }
+        mNextLaunched = true;
     }
 
     private void launchChooseLock() {

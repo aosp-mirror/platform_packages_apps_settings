@@ -37,6 +37,8 @@ import androidx.window.embedding.SplitRule;
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
+import com.android.settings.biometrics.face.FaceEnrollIntroduction;
+import com.android.settings.biometrics.face.FaceEnrollIntroductionInternal;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroductionInternal;
@@ -45,6 +47,7 @@ import com.android.settings.homepage.DeepLinkHomepageActivity;
 import com.android.settings.homepage.DeepLinkHomepageActivityInternal;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.password.ChooseLockPattern;
 import com.android.settingslib.users.AvatarPickerActivity;
 
 import java.util.Collection;
@@ -249,7 +252,10 @@ public class ActivityEmbeddingRulesController {
         addActivityFilter(activityFilters, FingerprintEnrollIntroduction.class);
         addActivityFilter(activityFilters, FingerprintEnrollIntroductionInternal.class);
         addActivityFilter(activityFilters, FingerprintEnrollEnrolling.class);
+        addActivityFilter(activityFilters, FaceEnrollIntroductionInternal.class);
+        addActivityFilter(activityFilters, FaceEnrollIntroduction.class);
         addActivityFilter(activityFilters, AvatarPickerActivity.class);
+        addActivityFilter(activityFilters, ChooseLockPattern.class);
         ActivityRule activityRule = new ActivityRule.Builder(activityFilters).setAlwaysExpand(true)
                 .build();
         mRuleController.addRule(activityRule);

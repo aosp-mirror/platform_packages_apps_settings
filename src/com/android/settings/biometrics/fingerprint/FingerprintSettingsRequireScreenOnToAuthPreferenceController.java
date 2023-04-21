@@ -51,21 +51,26 @@ public class FingerprintSettingsRequireScreenOnToAuthPreferenceController
         } else if (getRestrictingAdmin() != null) {
             return false;
         }
-        int defaultValue = mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_requireScreenOnToAuthEnabled) ? 1 : 0;
-
-        return Settings.Secure.getIntForUser(
+        int toReturn = Settings.Secure.getIntForUser(
                 mContext.getContentResolver(),
-                Settings.Secure.SFPS_REQUIRE_SCREEN_ON_TO_AUTH_ENABLED,
-                defaultValue,
-                getUserHandle()) != 0;
+                Settings.Secure.SFPS_PERFORMANT_AUTH_ENABLED,
+                -1,
+                getUserHandle());
+        if (toReturn == -1) {
+            toReturn = mContext.getResources().getBoolean(
+                    com.android.internal.R.bool.config_performantAuthDefault) ? 1 : 0;
+            Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                    Settings.Secure.SFPS_PERFORMANT_AUTH_ENABLED, toReturn, getUserHandle());
+        }
+
+        return toReturn == 1;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
         Settings.Secure.putIntForUser(
                 mContext.getContentResolver(),
-                Settings.Secure.SFPS_REQUIRE_SCREEN_ON_TO_AUTH_ENABLED,
+                Settings.Secure.SFPS_PERFORMANT_AUTH_ENABLED,
                 isChecked ? 1 : 0,
                 getUserHandle());
         return true;

@@ -16,6 +16,8 @@
 
 package com.android.settings.password;
 
+import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,8 +31,6 @@ import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
-
-import com.google.android.setupdesign.GlifLayout;
 
 /**
  * Setup Wizard's version of ChooseLockPattern screen. It inherits the logic and basic structure
@@ -123,15 +123,25 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
             startChooseLockActivity(lock, getActivity());
         }
 
+        private boolean showMinimalUi() {
+            return getResources().getBoolean(R.bool.config_lock_pattern_minimal_ui);
+        }
+
         @Override
         protected void updateStage(Stage stage) {
             super.updateStage(stage);
-            if (!getResources().getBoolean(R.bool.config_lock_pattern_minimal_ui)
-                    && mOptionsButton != null) {
+            if (!showMinimalUi() && mOptionsButton != null) {
+                // In landscape, keep view stub to avoid pattern view shifting, but in portrait the
+                // header title and description could become multiple lines in confirm stage,
+                // gone the button view to reserve more room for growth height of header.
+                @View.Visibility
+                final int hideOrGone =
+                        getResources().getConfiguration().orientation == ORIENTATION_LANDSCAPE
+                                ? View.INVISIBLE : View.GONE;
                 mOptionsButton.setVisibility(
                         (stage == Stage.Introduction || stage == Stage.HelpScreen ||
                                 stage == Stage.ChoiceTooShort || stage == Stage.FirstChoiceValid)
-                                ? View.VISIBLE : View.INVISIBLE);
+                                ? View.VISIBLE : hideOrGone);
             }
 
             if (stage.leftMode == LeftButtonMode.Gone && stage == Stage.Introduction) {
@@ -141,10 +151,6 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
             } else {
                 mLeftButtonIsSkip = false;
             }
-
-            final GlifLayout layout = getActivity().findViewById(R.id.setup_wizard_layout);
-            layout.setDescriptionText(
-                    getString(R.string.lockpassword_choose_your_pattern_description));
         }
 
         @Override
