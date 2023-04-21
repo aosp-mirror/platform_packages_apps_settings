@@ -417,5 +417,6 @@ public class SettingsGateway {
             Settings.ModuleLicensesActivity.class.getName(),
             UserBackupSettingsActivity.class.getName(),
             Settings.MemtagPageActivity.class.getName(),
+            Settings.NavigationModeSettingsActivity.class.getName(),
     };
 }
