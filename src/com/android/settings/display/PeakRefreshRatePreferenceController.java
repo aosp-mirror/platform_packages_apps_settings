@@ -16,18 +16,20 @@
 
 package com.android.settings.display;
 
+import static com.android.internal.display.RefreshRateSettingsUtils.DEFAULT_REFRESH_RATE;
+
 import android.content.Context;
 import android.hardware.display.DisplayManager;
 import android.os.Handler;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.Display;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.display.RefreshRateSettingsUtils;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -38,8 +40,6 @@ import java.util.concurrent.Executor;
 
 public class PeakRefreshRatePreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnStart, OnStop {
-
-    @VisibleForTesting static float DEFAULT_REFRESH_RATE = 60f;
 
     @VisibleForTesting float mPeakRefreshRate;
 
@@ -65,17 +65,8 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
                         updateState(mPreference);
                     }
                 };
-
-        final DisplayManager dm = mContext.getSystemService(DisplayManager.class);
-        final Display display = dm.getDisplay(Display.DEFAULT_DISPLAY);
-
-        if (display == null) {
-            Log.w(TAG, "No valid default display device");
-            mPeakRefreshRate = DEFAULT_REFRESH_RATE;
-        } else {
-            mPeakRefreshRate = findPeakRefreshRate(display.getSupportedModes());
-        }
-
+        mPeakRefreshRate =
+                RefreshRateSettingsUtils.findHighestRefreshRateForDefaultDisplay(context);
         Log.d(
                 TAG,
                 "DEFAULT_REFRESH_RATE : "
@@ -106,21 +97,15 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
 
     @Override
     public boolean isChecked() {
-        final float peakRefreshRate =
-                Settings.System.getFloat(
-                        mContext.getContentResolver(),
-                        Settings.System.PEAK_REFRESH_RATE,
-                        getDefaultPeakRefreshRate());
-        return Math.round(peakRefreshRate) == Math.round(mPeakRefreshRate);
+        return Settings.System.getInt(mContext.getContentResolver(), Settings.System.SMOOTH_DISPLAY,
+                0) == 1;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        final float peakRefreshRate = isChecked ? mPeakRefreshRate : DEFAULT_REFRESH_RATE;
-        Log.d(TAG, "setChecked to : " + peakRefreshRate);
-
-        return Settings.System.putFloat(
-                mContext.getContentResolver(), Settings.System.PEAK_REFRESH_RATE, peakRefreshRate);
+        Log.d(TAG, "setChecked to : " + isChecked);
+        return Settings.System.putInt(
+                mContext.getContentResolver(), Settings.System.SMOOTH_DISPLAY, isChecked ? 1 : 0);
     }
 
     @Override
@@ -136,17 +121,6 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
     @Override
     public void onStop() {
         mDeviceConfigDisplaySettings.stopListening();
-    }
-
-    @VisibleForTesting
-    float findPeakRefreshRate(Display.Mode[] modes) {
-        float peakRefreshRate = DEFAULT_REFRESH_RATE;
-        for (Display.Mode mode : modes) {
-            if (Math.round(mode.getRefreshRate()) > peakRefreshRate) {
-                peakRefreshRate = mode.getRefreshRate();
-            }
-        }
-        return peakRefreshRate;
     }
 
     private class DeviceConfigDisplaySettings
@@ -190,16 +164,5 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
                 mHandler.post(runnable);
             }
         }
-    }
-
-    private float getDefaultPeakRefreshRate() {
-        float defaultPeakRefreshRate = mDeviceConfigDisplaySettings.getDefaultPeakRefreshRate();
-        if (defaultPeakRefreshRate == INVALIDATE_REFRESH_RATE) {
-            defaultPeakRefreshRate = (float) mContext.getResources().getInteger(
-                    com.android.internal.R.integer.config_defaultPeakRefreshRate);
-        }
-
-        Log.d(TAG, "DeviceConfig getDefaultPeakRefreshRate : " + defaultPeakRefreshRate);
-        return defaultPeakRefreshRate;
     }
 }
