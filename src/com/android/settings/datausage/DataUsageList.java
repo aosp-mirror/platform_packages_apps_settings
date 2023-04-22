@@ -345,9 +345,6 @@ public class DataUsageList extends DataUsageBaseFragment
      */
     @VisibleForTesting
     void updatePolicy() {
-        if (mHeader == null) {
-            return;
-        }
         final NetworkPolicy policy = services.mPolicyEditor.getPolicy(mTemplate);
         final View configureButton = mHeader.findViewById(R.id.filter_settings);
         //SUB SELECT
