@@ -51,20 +51,27 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
     static final String ARG_TARGET_LOCALE = "arg_target_locale";
     static final String ARG_RESULT_RECEIVER = "arg_result_receiver";
 
+    public static LocaleDialogFragment newInstance() {
+        return new LocaleDialogFragment();
+    }
+
     /**
      * Show dialog
      */
-    public static void show(
+    public void show(
             @NonNull RestrictedSettingsFragment fragment,
             int dialogType,
             LocaleStore.LocaleInfo localeInfo) {
+        if (!isAdded()) {
+            return;
+        }
         show(fragment, dialogType, localeInfo, null);
     }
 
     /**
      * Show dialog
      */
-    public static void show(
+    public void show(
             @NonNull RestrictedSettingsFragment fragment,
             int dialogType,
             LocaleStore.LocaleInfo localeInfo,
