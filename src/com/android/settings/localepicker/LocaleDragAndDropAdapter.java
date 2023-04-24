@@ -319,8 +319,9 @@ class LocaleDragAndDropAdapter
 
     public void doTheUpdateWithMovingLocaleItem() {
         LocaleStore.LocaleInfo localeInfo = mFeedItemList.get(0);
+        final LocaleDialogFragment fragment = LocaleDialogFragment.newInstance();
         if (!localeInfo.getLocale().equals(LocalePicker.getLocales().get(0))) {
-            LocaleDialogFragment.show(mParent,
+            fragment.show(mParent,
                     LocaleDialogFragment.DIALOG_CONFIRM_SYSTEM_DEFAULT,
                     localeInfo,
                     new ResultReceiver(new Handler(Looper.getMainLooper())) {
@@ -332,7 +333,7 @@ class LocaleDragAndDropAdapter
                                 if (resultCode == Activity.RESULT_OK) {
                                     doTheUpdate();
                                     if (!localeInfo.isTranslated()) {
-                                        LocaleDialogFragment.show(mParent,
+                                        fragment.show(mParent,
                                                         LocaleDialogFragment
                                                                 .DIALOG_NOT_AVAILABLE_LOCALE,
                                                         localeInfo);
