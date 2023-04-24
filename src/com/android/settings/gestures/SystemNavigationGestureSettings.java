@@ -80,6 +80,8 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
     static final String ACTION_GESTURE_SANDBOX = "com.android.quickstep.action.GESTURE_SANDBOX";
 
     final Intent mLaunchSandboxIntent = new Intent(ACTION_GESTURE_SANDBOX)
+            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            .putExtra("use_tutorial_menu", true)
             .setPackage(LAUNCHER_PACKAGE_NAME);
 
     private static final int MIN_LARGESCREEN_WIDTH_DP = 600;
@@ -246,7 +248,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
             case KEY_SYSTEM_NAV_GESTURAL:
                 if (isGestureTutorialAvailable()){
                     videoPref.setOnPreferenceClickListener(preference -> {
-                        startActivity(mLaunchSandboxIntent.putExtra("use_tutorial_menu", true));
+                        startActivity(mLaunchSandboxIntent);
                         return true;
                     });
                 } else {
