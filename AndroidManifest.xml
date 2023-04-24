@@ -3805,7 +3805,7 @@
             android:documentLaunchMode="always"
             android:exported="true"
             android:permission="android.permission.CHANGE_WIFI_STATE"
-            android:configChanges="orientation|keyboardHidden|screenSize">
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout">
             <intent-filter>
                 <action android:name="com.android.settings.WIFI_DIALOG" />
                 <category android:name="android.intent.category.DEFAULT" />
