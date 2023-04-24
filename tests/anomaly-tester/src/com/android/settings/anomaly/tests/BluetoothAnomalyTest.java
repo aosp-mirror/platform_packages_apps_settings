@@ -19,13 +19,13 @@ import static com.google.common.truth.Truth.assertWithMessage;
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
-import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.UiDevice;
-import android.support.test.uiautomator.Until;
 import android.text.format.DateUtils;
 
 import androidx.test.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
+import androidx.test.uiautomator.By;
+import androidx.test.uiautomator.UiDevice;
+import androidx.test.uiautomator.Until;
 
 import org.junit.After;
 import org.junit.Before;
