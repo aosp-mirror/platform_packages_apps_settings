@@ -106,9 +106,13 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
             return;
         }
 
+        final boolean delayHourlyJobWhenBooting =
+                FeatureFactory.getFactory(context)
+                        .getPowerUsageFeatureProvider(context)
+                        .delayHourlyJobWhenBooting();
         final long broadcastDelay = sBroadcastDelayFromBoot - SystemClock.elapsedRealtime();
         // If current boot time is smaller than expected delay, cancel sending the broadcast.
-        if (broadcastDelay > 0) {
+        if (delayHourlyJobWhenBooting && broadcastDelay > 0) {
             Log.d(TAG, "cancel sendBroadcastToFetchUsageData when broadcastDelay is "
                     + broadcastDelay + "ms.");
             return;
