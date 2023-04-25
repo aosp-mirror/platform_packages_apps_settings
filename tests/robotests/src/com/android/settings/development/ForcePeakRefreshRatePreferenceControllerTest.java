@@ -16,8 +16,8 @@
 
 package com.android.settings.development;
 
-import static com.android.internal.display.RefreshRateSettingsUtils.DEFAULT_REFRESH_RATE;
-
+import static com.android.settings.development.ForcePeakRefreshRatePreferenceController.DEFAULT_REFRESH_RATE;
+import static com.android.settings.development.ForcePeakRefreshRatePreferenceController.NO_CONFIG;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.verify;
@@ -37,6 +37,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import android.util.Log;
 
 @RunWith(RobolectricTestRunner.class)
 public class ForcePeakRefreshRatePreferenceControllerTest {
@@ -61,18 +63,22 @@ public class ForcePeakRefreshRatePreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_preferenceChecked_shouldEnableForcePeak() {
+        mController.mPeakRefreshRate = 88f;
+
         mController.onPreferenceChange(mPreference, true);
 
-        assertThat(Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.FORCE_PEAK_REFRESH_RATE, -1)).isEqualTo(1);
+        assertThat(Settings.System.getFloat(mContext.getContentResolver(),
+                Settings.System.MIN_REFRESH_RATE, NO_CONFIG)).isEqualTo(88f);
     }
 
     @Test
     public void onPreferenceChange_preferenceUnchecked_shouldDisableForcePeak() {
+        mController.mPeakRefreshRate = 88f;
+
         mController.onPreferenceChange(mPreference, false);
 
-        assertThat(Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.FORCE_PEAK_REFRESH_RATE, -1)).isEqualTo(0);
+        assertThat(Settings.System.getFloat(mContext.getContentResolver(),
+                Settings.System.MIN_REFRESH_RATE, NO_CONFIG)).isEqualTo(NO_CONFIG);
     }
 
     @Test
@@ -119,8 +125,8 @@ public class ForcePeakRefreshRatePreferenceControllerTest {
     public void onDeveloperOptionsDisabled_shouldDisablePreference() {
         mController.onDeveloperOptionsSwitchDisabled();
 
-        assertThat(Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.FORCE_PEAK_REFRESH_RATE, -1)).isEqualTo(0);
+        assertThat(Settings.System.getFloat(mContext.getContentResolver(),
+                Settings.System.MIN_REFRESH_RATE, -1f)).isEqualTo(NO_CONFIG);
         assertThat(mPreference.isChecked()).isFalse();
         assertThat(mPreference.isEnabled()).isFalse();
     }
