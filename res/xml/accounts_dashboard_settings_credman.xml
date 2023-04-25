@@ -24,12 +24,12 @@
     <PreferenceCategory
         android:key="default_service_category"
         android:order="10"
-        android:title="@string/default_autofill_app">
+        android:title="@string/credman_chosen_app_title">
 
         <com.android.settings.widget.GearPreference
             android:fragment="com.android.settings.applications.defaultapps.DefaultAutofillPicker"
             android:key="default_autofill_main"
-            android:title="@string/default_autofill_app"
+            android:title="@string/credman_chosen_app_title"
             settings:keywords="@string/autofill_keywords">
             <extra
                 android:name="for_work"
