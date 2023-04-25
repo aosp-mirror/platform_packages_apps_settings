@@ -82,13 +82,13 @@ public class ModifierKeysRestorePreferenceController extends BasePreferenceContr
         Spannable title = new SpannableString(
                 mParent.getActivity().getString(R.string.modifier_keys_reset_title));
         title.setSpan(
-                new ForegroundColorSpan(getColorOfColorAccentPrimaryVariant()),
+                new ForegroundColorSpan(getColorOfMaterialColorPrimary()),
                 0, title.length(), 0);
         preference.setTitle(title);
     }
 
-    private int getColorOfColorAccentPrimaryVariant() {
+    private int getColorOfMaterialColorPrimary() {
         return Utils.getColorAttrDefaultColor(
-                mParent.getActivity(), com.android.internal.R.attr.materialColorPrimaryContainer);
+                mParent.getActivity(), com.android.internal.R.attr.materialColorPrimary);
     }
 }
