@@ -107,8 +107,9 @@ public final class BatteryUsageBreakdownControllerTest {
                 mBatteryHistEntry);
         mBatteryDiffEntry = spy(mBatteryDiffEntry);
         mBatteryUsageBreakdownController.mBatteryDiffData =
-                new BatteryDiffData(mContext, Arrays.asList(mBatteryDiffEntry), Arrays.asList(),
-                        Set.of(), Set.of(), /* isAccumulated= */ false);
+                new BatteryDiffData(mContext, /* screenOnTime= */ 0L,
+                        Arrays.asList(mBatteryDiffEntry), Arrays.asList(), Set.of(), Set.of(),
+                        /* isAccumulated= */ false);
         // Adds fake testing data.
         BatteryDiffEntry.sResourceCache.put(
                 "fakeBatteryDiffEntryKey",
