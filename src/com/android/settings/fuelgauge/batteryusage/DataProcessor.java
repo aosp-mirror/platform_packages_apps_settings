@@ -1402,6 +1402,11 @@ public final class DataProcessor {
                                 currentEntry.mCachedUsageConsumePower,
                                 nextEntry.mCachedUsageConsumePower);
             }
+            if (selectedBatteryEntry.isSystemEntry()
+                    && selectedBatteryEntry.mDrainType == BatteryConsumer.POWER_COMPONENT_SCREEN) {
+                // Replace Screen system component time with screen on time.
+                foregroundUsageTimeInMs = slotScreenOnTime;
+            }
             // Excludes entry since we don't have enough data to calculate.
             if (foregroundUsageTimeInMs == 0
                     && backgroundUsageTimeInMs == 0
