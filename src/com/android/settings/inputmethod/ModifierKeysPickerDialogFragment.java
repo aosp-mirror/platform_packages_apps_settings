@@ -139,7 +139,7 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
             } else {
                 itemSummary = new SpannableString(selectedItem);
                 itemSummary.setSpan(
-                        new ForegroundColorSpan(getColorOfColorAccentPrimaryVariant()),
+                        new ForegroundColorSpan(getColorOfMaterialColorPrimary()),
                         0, itemSummary.length(), 0);
                 int[] fromKeys = mRemappableKeyMap.get(mKeyDefaultName);
                 int[] toKeys = mRemappableKeyMap.get(selectedItem);
@@ -222,7 +222,7 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
             textView.setText(mList.get(i));
             if (mCurrentItem == i) {
                 mKeyFocus = mList.get(i);
-                textView.setTextColor(getColorOfColorAccentPrimaryVariant());
+                textView.setTextColor(getColorOfMaterialColorPrimary());
                 checkIcon.setImageAlpha(255);
                 view.setBackground(
                         mActivity.getDrawable(R.drawable.modifier_key_lisetview_background));
@@ -251,8 +251,8 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
         return Utils.getColorAttrDefaultColor(mActivity, android.R.attr.textColorSecondary);
     }
 
-    private int getColorOfColorAccentPrimaryVariant() {
+    private int getColorOfMaterialColorPrimary() {
         return Utils.getColorAttrDefaultColor(
-                mActivity, com.android.internal.R.attr.materialColorPrimaryContainer);
+                mActivity, com.android.internal.R.attr.materialColorPrimary);
     }
 }
