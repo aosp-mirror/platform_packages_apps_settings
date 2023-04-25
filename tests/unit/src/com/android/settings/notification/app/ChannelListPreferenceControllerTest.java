@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The Android Open Source Project
+ * Copyright (C) 2023 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ import static android.app.NotificationManager.IMPORTANCE_NONE;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
-import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertNull;
 import static junit.framework.TestCase.assertTrue;
 
@@ -37,6 +36,7 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 import androidx.test.annotation.UiThreadTest;
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.SmallTest;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -65,15 +65,14 @@ public class ChannelListPreferenceControllerTest {
 
     @Before
     public void setUp() throws Exception {
+        mContext = ApplicationProvider.getApplicationContext();
         Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
-        mContext = instrumentation.getTargetContext();
-
         instrumentation.runOnMainSync(() -> {
             mBackend = new NotificationBackend();
             mAppRow = mBackend.loadAppRow(mContext,
                     mContext.getPackageManager(), mContext.getApplicationInfo());
             mController = new ChannelListPreferenceController(mContext, mBackend);
-            mController.onResume(mAppRow, null, null, null, null, null);
+            mController.onResume(mAppRow, null, null, null, null, null, null);
             mPreferenceManager = new PreferenceManager(mContext);
             mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
             mGroupList = new PreferenceCategory(mContext);
@@ -103,9 +102,10 @@ public class ChannelListPreferenceControllerTest {
             assertEquals("group1", group1.getKey());
             assertEquals(2, group1.getPreferenceCount());
             assertNull(group1.getPreference(0).getKey());
-            assertEquals("All \"Group 1\" notifications", group1.getPreference(0).getTitle());
+            assertEquals("All \"Group 1\" notifications",
+                    group1.getPreference(0).getTitle().toString());
             assertEquals("ch1a", group1.getPreference(1).getKey());
-            assertEquals("Channel 1A", group1.getPreference(1).getTitle());
+            assertEquals("Channel 1A", group1.getPreference(1).getTitle().toString());
         }
 
         // Test that adding a channel works -- no dupes or omissions
@@ -117,11 +117,12 @@ public class ChannelListPreferenceControllerTest {
             assertEquals("group1", group1.getKey());
             assertEquals(3, group1.getPreferenceCount());
             assertNull(group1.getPreference(0).getKey());
-            assertEquals("All \"Group 1\" notifications", group1.getPreference(0).getTitle());
+            assertEquals("All \"Group 1\" notifications",
+                    group1.getPreference(0).getTitle().toString());
             assertEquals("ch1a", group1.getPreference(1).getKey());
-            assertEquals("Channel 1A", group1.getPreference(1).getTitle());
+            assertEquals("Channel 1A", group1.getPreference(1).getTitle().toString());
             assertEquals("ch1b", group1.getPreference(2).getKey());
-            assertEquals("Channel 1B", group1.getPreference(2).getTitle());
+            assertEquals("Channel 1B", group1.getPreference(2).getTitle().toString());
         }
 
         // Test that renaming a channel does in fact rename the preferences
@@ -133,11 +134,12 @@ public class ChannelListPreferenceControllerTest {
             assertEquals("group1", group1.getKey());
             assertEquals(3, group1.getPreferenceCount());
             assertNull(group1.getPreference(0).getKey());
-            assertEquals("All \"Group 1\" notifications", group1.getPreference(0).getTitle());
+            assertEquals("All \"Group 1\" notifications",
+                    group1.getPreference(0).getTitle().toString());
             assertEquals("ch1a", group1.getPreference(1).getKey());
-            assertEquals("Channel 1A", group1.getPreference(1).getTitle());
+            assertEquals("Channel 1A", group1.getPreference(1).getTitle().toString());
             assertEquals("ch1b", group1.getPreference(2).getKey());
-            assertEquals("Channel 1B - Renamed", group1.getPreference(2).getTitle());
+            assertEquals("Channel 1B - Renamed", group1.getPreference(2).getTitle().toString());
         }
 
         // Test that adding a group works and results in the correct sorting.
@@ -152,18 +154,20 @@ public class ChannelListPreferenceControllerTest {
             assertEquals("group0", group0.getKey());
             assertEquals(2, group0.getPreferenceCount());
             assertNull(group0.getPreference(0).getKey());
-            assertEquals("All \"Group 0\" notifications", group0.getPreference(0).getTitle());
+            assertEquals("All \"Group 0\" notifications",
+                    group0.getPreference(0).getTitle().toString());
             assertEquals("ch0b", group0.getPreference(1).getKey());
-            assertEquals("Channel 0B", group0.getPreference(1).getTitle());
+            assertEquals("Channel 0B", group0.getPreference(1).getTitle().toString());
             PreferenceGroup group1 = (PreferenceGroup) mGroupList.getPreference(1);
             assertEquals("group1", group1.getKey());
             assertEquals(3, group1.getPreferenceCount());
             assertNull(group1.getPreference(0).getKey());
-            assertEquals("All \"Group 1\" notifications", group1.getPreference(0).getTitle());
+            assertEquals("All \"Group 1\" notifications",
+                    group1.getPreference(0).getTitle().toString());
             assertEquals("ch1a", group1.getPreference(1).getKey());
-            assertEquals("Channel 1A", group1.getPreference(1).getTitle());
+            assertEquals("Channel 1A", group1.getPreference(1).getTitle().toString());
             assertEquals("ch1b", group1.getPreference(2).getKey());
-            assertEquals("Channel 1B - Renamed", group1.getPreference(2).getTitle());
+            assertEquals("Channel 1B - Renamed", group1.getPreference(2).getTitle().toString());
         }
 
         // Test that adding a channel that comes before another works and has correct ordering.
@@ -176,20 +180,22 @@ public class ChannelListPreferenceControllerTest {
             assertEquals("group0", group0.getKey());
             assertEquals(3, group0.getPreferenceCount());
             assertNull(group0.getPreference(0).getKey());
-            assertEquals("All \"Group 0\" notifications", group0.getPreference(0).getTitle());
+            assertEquals("All \"Group 0\" notifications",
+                    group0.getPreference(0).getTitle().toString());
             assertEquals("ch0a", group0.getPreference(1).getKey());
-            assertEquals("Channel 0A", group0.getPreference(1).getTitle());
+            assertEquals("Channel 0A", group0.getPreference(1).getTitle().toString());
             assertEquals("ch0b", group0.getPreference(2).getKey());
-            assertEquals("Channel 0B", group0.getPreference(2).getTitle());
+            assertEquals("Channel 0B", group0.getPreference(2).getTitle().toString());
             PreferenceGroup group1 = (PreferenceGroup) mGroupList.getPreference(1);
             assertEquals("group1", group1.getKey());
             assertEquals(3, group1.getPreferenceCount());
             assertNull(group1.getPreference(0).getKey());
-            assertEquals("All \"Group 1\" notifications", group1.getPreference(0).getTitle());
+            assertEquals("All \"Group 1\" notifications",
+                    group1.getPreference(0).getTitle().toString());
             assertEquals("ch1a", group1.getPreference(1).getKey());
-            assertEquals("Channel 1A", group1.getPreference(1).getTitle());
+            assertEquals("Channel 1A", group1.getPreference(1).getTitle().toString());
             assertEquals("ch1b", group1.getPreference(2).getKey());
-            assertEquals("Channel 1B - Renamed", group1.getPreference(2).getTitle());
+            assertEquals("Channel 1B - Renamed", group1.getPreference(2).getTitle().toString());
         }
 
         // Test that the "Other" group works.
@@ -206,18 +212,19 @@ public class ChannelListPreferenceControllerTest {
             assertEquals("group1", group1.getKey());
             assertEquals(3, group1.getPreferenceCount());
             assertNull(group1.getPreference(0).getKey());
-            assertEquals("All \"Group 1\" notifications", group1.getPreference(0).getTitle());
+            assertEquals("All \"Group 1\" notifications",
+                    group1.getPreference(0).getTitle().toString());
             assertEquals("ch1a", group1.getPreference(1).getKey());
-            assertEquals("Channel 1A", group1.getPreference(1).getTitle());
+            assertEquals("Channel 1A", group1.getPreference(1).getTitle().toString());
             assertEquals("ch1b", group1.getPreference(2).getKey());
-            assertEquals("Channel 1B - Renamed", group1.getPreference(2).getTitle());
+            assertEquals("Channel 1B - Renamed", group1.getPreference(2).getTitle().toString());
             PreferenceGroup groupOther = (PreferenceGroup) mGroupList.getPreference(1);
             assertEquals("categories", groupOther.getKey());
             assertEquals(2, groupOther.getPreferenceCount());
             assertEquals("chXa", groupOther.getPreference(0).getKey());
-            assertEquals("Other A", groupOther.getPreference(0).getTitle());
+            assertEquals("Other A", groupOther.getPreference(0).getTitle().toString());
             assertEquals("chXb", groupOther.getPreference(1).getKey());
-            assertEquals("Other B", groupOther.getPreference(1).getTitle());
+            assertEquals("Other B", groupOther.getPreference(1).getTitle().toString());
         }
 
         // Test that the removal of a channel works.
@@ -229,16 +236,17 @@ public class ChannelListPreferenceControllerTest {
             assertEquals("group1", group1.getKey());
             assertEquals(3, group1.getPreferenceCount());
             assertNull(group1.getPreference(0).getKey());
-            assertEquals("All \"Group 1\" notifications", group1.getPreference(0).getTitle());
+            assertEquals("All \"Group 1\" notifications",
+                    group1.getPreference(0).getTitle().toString());
             assertEquals("ch1a", group1.getPreference(1).getKey());
-            assertEquals("Channel 1A", group1.getPreference(1).getTitle());
+            assertEquals("Channel 1A", group1.getPreference(1).getTitle().toString());
             assertEquals("ch1b", group1.getPreference(2).getKey());
-            assertEquals("Channel 1B - Renamed", group1.getPreference(2).getTitle());
+            assertEquals("Channel 1B - Renamed", group1.getPreference(2).getTitle().toString());
             PreferenceGroup groupOther = (PreferenceGroup) mGroupList.getPreference(1);
             assertEquals("categories", groupOther.getKey());
             assertEquals(1, groupOther.getPreferenceCount());
             assertEquals("chXb", groupOther.getPreference(0).getKey());
-            assertEquals("Other B", groupOther.getPreference(0).getTitle());
+            assertEquals("Other B", groupOther.getPreference(0).getTitle().toString());
         }
 
         // Test that we go back to the empty state when clearing all groups and channels.
@@ -269,15 +277,15 @@ public class ChannelListPreferenceControllerTest {
             assertEquals(3, group.getPreferenceCount());
             SwitchPreference groupBlockPref = (SwitchPreference) group.getPreference(0);
             assertNull(groupBlockPref.getKey());
-            assertEquals("All \"My Group\" notifications", groupBlockPref.getTitle());
+            assertEquals("All \"My Group\" notifications", groupBlockPref.getTitle().toString());
             assertTrue(groupBlockPref.isChecked());
             PrimarySwitchPreference channelAPref = (PrimarySwitchPreference) group.getPreference(1);
             assertEquals("channelA", channelAPref.getKey());
-            assertEquals("Channel A", channelAPref.getTitle());
+            assertEquals("Channel A", channelAPref.getTitle().toString());
             assertEquals(Boolean.TRUE, channelAPref.getCheckedState());
             PrimarySwitchPreference channelBPref = (PrimarySwitchPreference) group.getPreference(2);
             assertEquals("channelB", channelBPref.getKey());
-            assertEquals("Channel B", channelBPref.getTitle());
+            assertEquals("Channel B", channelBPref.getTitle().toString());
             assertEquals(Boolean.FALSE, channelBPref.getCheckedState());
         }
 
@@ -291,7 +299,7 @@ public class ChannelListPreferenceControllerTest {
             assertEquals(1, group.getPreferenceCount());
             SwitchPreference groupBlockPref = (SwitchPreference) group.getPreference(0);
             assertNull(groupBlockPref.getKey());
-            assertEquals("All \"My Group\" notifications", groupBlockPref.getTitle());
+            assertEquals("All \"My Group\" notifications", groupBlockPref.getTitle().toString());
             assertFalse(groupBlockPref.isChecked());
         }
 
@@ -305,15 +313,15 @@ public class ChannelListPreferenceControllerTest {
             assertEquals(3, group.getPreferenceCount());
             SwitchPreference groupBlockPref = (SwitchPreference) group.getPreference(0);
             assertNull(groupBlockPref.getKey());
-            assertEquals("All \"My Group\" notifications", groupBlockPref.getTitle());
+            assertEquals("All \"My Group\" notifications", groupBlockPref.getTitle().toString());
             assertTrue(groupBlockPref.isChecked());
             PrimarySwitchPreference channelAPref = (PrimarySwitchPreference) group.getPreference(1);
             assertEquals("channelA", channelAPref.getKey());
-            assertEquals("Channel A", channelAPref.getTitle());
+            assertEquals("Channel A", channelAPref.getTitle().toString());
             assertEquals(Boolean.TRUE, channelAPref.getCheckedState());
             PrimarySwitchPreference channelBPref = (PrimarySwitchPreference) group.getPreference(2);
             assertEquals("channelB", channelBPref.getKey());
-            assertEquals("Channel B", channelBPref.getTitle());
+            assertEquals("Channel B", channelBPref.getTitle().toString());
             assertEquals(Boolean.FALSE, channelBPref.getCheckedState());
         }
     }
@@ -347,19 +355,18 @@ public class ChannelListPreferenceControllerTest {
             assertEquals("group", group.getKey());
             assertEquals(3, group.getPreferenceCount());
             assertNull(group.getPreference(0).getKey());
-            assertEquals("All \"Group\" notifications", group.getPreference(0).getTitle());
+            assertEquals("All \"Group\" notifications",
+                    group.getPreference(0).getTitle().toString());
             PrimarySwitchPreference channelAPref = (PrimarySwitchPreference) group.getPreference(1);
             assertEquals("channelA", channelAPref.getKey());
-            assertEquals("Channel A", channelAPref.getTitle());
+            assertEquals("Channel A", channelAPref.getTitle().toString());
             assertEquals(Boolean.TRUE, channelAPref.getCheckedState());
-            assertEquals("~2 notifications per day", channelAPref.getSummary());
-            assertNotNull(channelAPref.getIcon());
+            assertEquals("About 2 notifications per day", channelAPref.getSummary().toString());
             PrimarySwitchPreference channelBPref = (PrimarySwitchPreference) group.getPreference(2);
             assertEquals("channelB", channelBPref.getKey());
-            assertEquals("Channel B", channelBPref.getTitle());
+            assertEquals("Channel B", channelBPref.getTitle().toString());
             assertEquals(Boolean.FALSE, channelBPref.getCheckedState());
             assertNull(channelBPref.getSummary());
-            assertNull(channelBPref.getIcon());
         }
 
         channelA.setImportance(IMPORTANCE_NONE);
@@ -376,20 +383,18 @@ public class ChannelListPreferenceControllerTest {
             assertEquals("group", group.getKey());
             assertEquals(3, group.getPreferenceCount());
             assertNull(group.getPreference(0).getKey());
-            assertEquals("All \"Group\" notifications", group.getPreference(0).getTitle());
+            assertEquals("All \"Group\" notifications",
+                    group.getPreference(0).getTitle().toString());
             PrimarySwitchPreference channelAPref = (PrimarySwitchPreference) group.getPreference(1);
             assertEquals("channelA", channelAPref.getKey());
-            assertEquals("Channel A", channelAPref.getTitle());
+            assertEquals("Channel A", channelAPref.getTitle().toString());
             assertEquals(Boolean.FALSE, channelAPref.getCheckedState());
             assertNull(channelAPref.getSummary());
-            assertNull(channelAPref.getIcon());
             PrimarySwitchPreference channelBPref = (PrimarySwitchPreference) group.getPreference(2);
             assertEquals("channelB", channelBPref.getKey());
-            assertEquals("Channel B", channelBPref.getTitle());
+            assertEquals("Channel B", channelBPref.getTitle().toString());
             assertEquals(Boolean.TRUE, channelBPref.getCheckedState());
-            assertEquals("~2 notifications per week", channelBPref.getSummary());
-            assertNotNull(channelBPref.getIcon());
+            assertEquals("About 2 notifications per week", channelBPref.getSummary().toString());
         }
     }
-
 }

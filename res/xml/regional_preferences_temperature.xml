@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2022 The Android Open Source Project
+<!-- Copyright (C) 2023 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,19 +14,19 @@
      limitations under the License.
 -->
 
-<inset
+<PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
-    <ripple
-        android:color="?android:attr/colorControlHighlight">
-        <item>
-            <shape android:shape="rectangle">
-                <corners android:radius="24dp"  />
-                <solid android:color="@android:color/transparent"/>
-                <stroke
-                    android:width="1dp"
-                    android:color="?androidprv:attr/materialColorPrimary"/>
-            </shape>
-        </item>
-    </ripple>
-</inset>
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/temperature_preferences_title">
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:title="@string/regional_preferences_option_page_sub_title"
+        android:persistent="false" />
+
+    <PreferenceCategory
+        android:key="temperature_unit_category"
+        android:title="@string/summary_placeholder"
+        android:layout="@layout/preference_category_no_label"
+        settings:controller="com.android.settings.regionalpreferences.TemperatureUnitCategoryController"/>
+
+</PreferenceScreen>
