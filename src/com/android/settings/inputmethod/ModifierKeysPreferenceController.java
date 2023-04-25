@@ -150,14 +150,14 @@ public class ModifierKeysPreferenceController extends BasePreferenceController {
     private Spannable changeSummaryColor(String summary) {
         Spannable spannableSummary = new SpannableString(summary);
         spannableSummary.setSpan(
-                new ForegroundColorSpan(getColorOfColorAccentPrimaryVariant()),
+                new ForegroundColorSpan(getColorOfMaterialColorPrimary()),
                 0, spannableSummary.length(), 0);
         return spannableSummary;
     }
 
-    private int getColorOfColorAccentPrimaryVariant() {
+    private int getColorOfMaterialColorPrimary() {
         return Utils.getColorAttrDefaultColor(
-                mContext, com.android.internal.R.attr.materialColorPrimaryContainer);
+                mContext, com.android.internal.R.attr.materialColorPrimary);
     }
 
     private static boolean isCtrl(int keyCode) {
