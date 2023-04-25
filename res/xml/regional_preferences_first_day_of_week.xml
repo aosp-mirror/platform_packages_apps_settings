@@ -13,10 +13,20 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/first_day_of_week_preferences_title">
 
     <com.android.settingslib.widget.TopIntroPreference
-        android:key="key_option_page_sub_title"
         android:title="@string/regional_preferences_option_page_sub_title"
         android:persistent="false" />
+
+    <PreferenceCategory
+        android:key="first_day_of_week_item_category"
+        android:title="@string/summary_placeholder"
+        android:layout="@layout/preference_category_no_label"
+        settings:controller="com.android.settings.regionalpreferences.FirstDayOfWeekItemCategoryController"/>
+
 </PreferenceScreen>
