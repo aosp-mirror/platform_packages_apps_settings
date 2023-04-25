@@ -16,12 +16,17 @@
 
 package com.android.settings.connecteddevice.stylus;
 
+import android.app.Dialog;
 import android.app.role.RoleManager;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
+import android.os.Process;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
 import android.text.TextUtils;
@@ -38,6 +43,8 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
+import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
+import com.android.settings.dashboard.profileselector.UserAdapter;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -45,6 +52,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -73,6 +81,9 @@ public class StylusDevicesController extends AbstractPreferenceController implem
     @VisibleForTesting
     PreferenceCategory mPreferencesContainer;
 
+    @VisibleForTesting
+    Dialog mDialog;
+
     public StylusDevicesController(Context context, InputDevice inputDevice,
             CachedBluetoothDevice cachedBluetoothDevice, Lifecycle lifecycle) {
         super(context);
@@ -100,8 +111,8 @@ public class StylusDevicesController extends AbstractPreferenceController implem
         pref.setOnPreferenceClickListener(this);
         pref.setEnabled(true);
 
-        List<String> roleHolders = rm.getRoleHoldersAsUser(RoleManager.ROLE_NOTES,
-                mContext.getUser());
+        UserHandle user = getDefaultNoteTaskProfile();
+        List<String> roleHolders = rm.getRoleHoldersAsUser(RoleManager.ROLE_NOTES, user);
         if (roleHolders.isEmpty()) {
             pref.setSummary(R.string.default_app_none);
             return pref;
@@ -117,7 +128,13 @@ public class StylusDevicesController extends AbstractPreferenceController implem
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(TAG, "Notes role package not found.");
         }
-        pref.setSummary(appName);
+
+        if (mContext.getSystemService(UserManager.class).isManagedProfile(user.getIdentifier())) {
+            pref.setSummary(
+                    mContext.getString(R.string.stylus_default_notes_summary_work, appName));
+        } else {
+            pref.setSummary(appName);
+        }
         return pref;
     }
 
@@ -155,7 +172,13 @@ public class StylusDevicesController extends AbstractPreferenceController implem
                 String packageName = pm.getPermissionControllerPackageName();
                 Intent intent = new Intent(Intent.ACTION_MANAGE_DEFAULT_APP).setPackage(
                         packageName).putExtra(Intent.EXTRA_ROLE_NAME, RoleManager.ROLE_NOTES);
-                mContext.startActivity(intent);
+
+                List<UserHandle> users = getUserAndManagedProfiles();
+                if (users.size() <= 1) {
+                    mContext.startActivity(intent);
+                } else {
+                    createAndShowProfileSelectDialog(intent, users);
+                }
                 break;
             case KEY_HANDWRITING:
                 Settings.Secure.putInt(mContext.getContentResolver(),
@@ -227,6 +250,55 @@ public class StylusDevicesController extends AbstractPreferenceController implem
         InputMethodManager imm = mContext.getSystemService(InputMethodManager.class);
         InputMethodInfo inputMethod = imm.getCurrentInputMethodInfo();
         return inputMethod != null && inputMethod.supportsStylusHandwriting();
+    }
+
+    private List<UserHandle> getUserAndManagedProfiles() {
+        UserManager um = mContext.getSystemService(UserManager.class);
+        final ArrayList<UserHandle> userManagedProfiles = new ArrayList<>();
+        // Add the current user, then add all the associated managed profiles.
+        final UserHandle currentUser = Process.myUserHandle();
+        userManagedProfiles.add(currentUser);
+
+        final List<UserInfo> userInfos = um.getUsers();
+        for (UserInfo info : userInfos) {
+            if (um.isManagedProfile(info.id)
+                    && um.getProfileParent(info.id).id == currentUser.getIdentifier()) {
+                userManagedProfiles.add(UserHandle.of(info.id));
+            }
+        }
+        return userManagedProfiles;
+    }
+
+    private UserHandle getDefaultNoteTaskProfile() {
+        final int userId = Secure.getInt(
+                mContext.getContentResolver(),
+                Secure.DEFAULT_NOTE_TASK_PROFILE,
+                UserHandle.myUserId());
+        return UserHandle.of(userId);
+    }
+
+    @VisibleForTesting
+    UserAdapter.OnClickListener createProfileDialogClickCallback(
+            Intent intent, List<UserHandle> users) {
+        // TODO(b/281659827): improve UX flow for when activity is cancelled
+        return (int position) -> {
+            intent.putExtra(Intent.EXTRA_USER, users.get(position));
+
+            Secure.putInt(mContext.getContentResolver(),
+                    Secure.DEFAULT_NOTE_TASK_PROFILE,
+                    users.get(position).getIdentifier());
+            mContext.startActivity(intent);
+
+            mDialog.dismiss();
+        };
+    }
+
+    private void createAndShowProfileSelectDialog(Intent intent, List<UserHandle> users) {
+        mDialog = ProfileSelectDialog.createDialog(
+                mContext,
+                users,
+                createProfileDialogClickCallback(intent, users));
+        mDialog.show();
     }
 
     /**
