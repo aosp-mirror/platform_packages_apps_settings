@@ -37,6 +37,11 @@ import com.android.settings.R
  * shortcut will appear in the widget picker. If the shortcut is selected, the Activity here will be
  * launched, creating a new shortcut for [CreateNoteTaskShortcutActivity], and will finish.
  *
+ * IMPORTANT! The shortcut package name and class should be synchronized with SystemUI controller:
+ * [com.android.systemui.notetask.NoteTaskController#SETTINGS_CREATE_NOTE_TASK_SHORTCUT_COMPONENT].
+ *
+ * Changing the package name or class is a breaking change.
+ *
  * @see <a
  *   href="https://developer.android.com/develop/ui/views/launch/shortcuts/creating-shortcuts#custom-pinned">Creating
  *   a custom shortcut activity</a>
@@ -81,9 +86,16 @@ internal class CreateNoteTaskShortcutActivity : ComponentActivity() {
                 setPackage(systemUiComponent.packageName)
             }
 
-            return ShortcutInfo.Builder(context, SHORTCUT_ID)
+            // Creates a System UI context. That will let the ownership with SystemUI and allows it
+            // to perform updates such as enabling or updating the badge override package.
+            val systemUiContext = context.createPackageContext(
+                    systemUiComponent.packageName,
+                    /* flags */ 0,
+            )
+
+            return ShortcutInfo.Builder(systemUiContext, SHORTCUT_ID)
                     .setIntent(intent)
-                    .setShortLabel(context.getString(R.string.note_task_button_label))
+                    .setShortLabel(context.getString(R.string.note_task_shortcut_label))
                     .setLongLived(true)
                     .setIcon(icon)
                     .setExtras(extras)
