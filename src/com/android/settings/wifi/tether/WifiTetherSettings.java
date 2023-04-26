@@ -17,6 +17,8 @@
 package com.android.settings.wifi.tether;
 
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_CHANGED_ACTION;
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
 
 import static com.android.settings.wifi.WifiUtils.canShowWifiHotspot;
 
@@ -26,7 +28,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.SoftApConfiguration;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.util.FeatureFlagUtils;
@@ -76,6 +77,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @VisibleForTesting
     static final String KEY_WIFI_HOTSPOT_SPEED = "wifi_hotspot_speed";
 
+    @VisibleForTesting
+    SettingsMainSwitchBar mMainSwitchBar;
     private WifiTetherSwitchBarController mSwitchBarController;
     private WifiTetherSSIDPreferenceController mSSIDPreferenceController;
     private WifiTetherPasswordPreferenceController mPasswordPreferenceController;
@@ -83,8 +86,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     private WifiTetherMaximizeCompatibilityPreferenceController mMaxCompatibilityPrefController;
     private WifiTetherAutoOffPreferenceController mWifiTetherAutoOffPreferenceController;
 
-    private WifiManager mWifiManager;
-    private boolean mRestartWifiApAfterConfigChange;
     private boolean mUnavailable;
     private WifiRestriction mWifiRestriction;
     @VisibleForTesting
@@ -138,6 +139,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 .getWifiTetherViewModel(this);
         if (mWifiTetherViewModel != null) {
             setupSpeedFeature(mWifiTetherViewModel.isSpeedFeatureAvailable());
+            mWifiTetherViewModel.getRestarting().observe(this, this::onRestartingChanged);
         }
     }
 
@@ -159,7 +161,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         mTetherChangeReceiver = new TetherChangeReceiver();
 
         mSSIDPreferenceController = use(WifiTetherSSIDPreferenceController.class);
@@ -179,11 +180,11 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         // Assume we are in a SettingsActivity. This is only safe because we currently use
         // SettingsActivity as base for all preference fragments.
         final SettingsActivity activity = (SettingsActivity) getActivity();
-        final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
-        switchBar.setTitle(getContext().getString(R.string.use_wifi_hotsopt_main_switch_title));
-        mSwitchBarController = new WifiTetherSwitchBarController(activity, switchBar);
+        mMainSwitchBar = activity.getSwitchBar();
+        mMainSwitchBar.setTitle(getString(R.string.use_wifi_hotsopt_main_switch_title));
+        mSwitchBarController = new WifiTetherSwitchBarController(activity, mMainSwitchBar);
         getSettingsLifecycle().addObserver(mSwitchBarController);
-        switchBar.show();
+        mMainSwitchBar.show();
     }
 
     @Override
@@ -259,38 +260,32 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         final SoftApConfiguration config = buildNewConfig();
         mPasswordPreferenceController.setSecurityType(config.getSecurityType());
 
-        /**
-         * if soft AP is stopped, bring up
-         * else restart with new config
-         * TODO: update config on a running access point when framework support is added
-         */
-        if (mWifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_ENABLED) {
-            Log.d("TetheringSettings",
-                    "Wifi AP config changed while enabled, stop and restart");
-            mRestartWifiApAfterConfigChange = true;
-            mSwitchBarController.stopTether();
-        }
         mWifiTetherViewModel.setSoftApConfiguration(config);
     }
 
+    @VisibleForTesting
+    void onRestartingChanged(Boolean restarting) {
+        mMainSwitchBar.setVisibility((restarting) ? INVISIBLE : VISIBLE);
+        setLoading(restarting, false);
+    }
+
     private SoftApConfiguration buildNewConfig() {
-        final SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
-        final int securityType = mSecurityPreferenceController.getSecurityType();
+        SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
+        int securityType = (mWifiTetherViewModel.isSpeedFeatureAvailable())
+                ? mWifiTetherViewModel.getSoftApConfiguration().getSecurityType()
+                : mSecurityPreferenceController.getSecurityType();
         configBuilder.setSsid(mSSIDPreferenceController.getSSID());
         if (securityType != SoftApConfiguration.SECURITY_TYPE_OPEN) {
             configBuilder.setPassphrase(
                     mPasswordPreferenceController.getPasswordValidated(securityType),
                     securityType);
         }
-        mMaxCompatibilityPrefController.setupMaximizeCompatibility(configBuilder);
+        if (!mWifiTetherViewModel.isSpeedFeatureAvailable()) {
+            mMaxCompatibilityPrefController.setupMaximizeCompatibility(configBuilder);
+        }
         configBuilder.setAutoShutdownEnabled(
                 mWifiTetherAutoOffPreferenceController.isEnabled());
         return configBuilder.build();
-    }
-
-    private void startTether() {
-        mRestartWifiApAfterConfigChange = false;
-        mSwitchBarController.startTether();
     }
 
     private void updateDisplayWithNewConfig() {
@@ -369,13 +364,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
             String action = intent.getAction();
             Log.d(TAG, "updating display config due to receiving broadcast action " + action);
             updateDisplayWithNewConfig();
-            if (action.equals(WIFI_AP_STATE_CHANGED_ACTION)) {
-                int state = intent.getIntExtra(WifiManager.EXTRA_WIFI_AP_STATE, 0);
-                if (state == WifiManager.WIFI_AP_STATE_DISABLED
-                        && mRestartWifiApAfterConfigChange) {
-                    startTether();
-                }
-            }
         }
     }
 }
