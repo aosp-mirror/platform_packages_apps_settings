@@ -26,6 +26,8 @@ import static com.android.settings.wifi.tether.WifiHotspotSecurityViewModel.KEY_
 import static com.android.settings.wifi.tether.WifiHotspotSecurityViewModel.KEY_SECURITY_WPA2_WPA3;
 import static com.android.settings.wifi.tether.WifiHotspotSecurityViewModel.KEY_SECURITY_WPA3;
 
+import static org.mockito.Mockito.anyBoolean;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -141,6 +143,24 @@ public class WifiHotspotSecuritySettingsTest {
         verify(mRadioButtonWpa2Wpa3).setEnabled(false);
         verify(mRadioButtonWpa2).setEnabled(false);
         verify(mRadioButtonNone).setEnabled(false);
+    }
+
+    @Test
+    public void onRestartingChanged_restartingTrue_setLoadingTrue() {
+        doNothing().when(mSettings).setLoading(anyBoolean(), anyBoolean());
+
+        mSettings.onRestartingChanged(true);
+
+        verify(mSettings).setLoading(true, false);
+    }
+
+    @Test
+    public void onRestartingChanged_restartingFalse_setLoadingFalse() {
+        doNothing().when(mSettings).setLoading(anyBoolean(), anyBoolean());
+
+        mSettings.onRestartingChanged(false);
+
+        verify(mSettings).setLoading(false, false);
     }
 
     @Test
