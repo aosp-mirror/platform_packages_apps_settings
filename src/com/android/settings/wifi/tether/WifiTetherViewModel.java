@@ -101,6 +101,15 @@ public class WifiTetherViewModel extends AndroidViewModel {
     }
 
     /**
+     * Gets the Wi-Fi tethered AP Configuration.
+     *
+     * @return AP details in {@link SoftApConfiguration}
+     */
+    public SoftApConfiguration getSoftApConfiguration() {
+        return mWifiHotspotRepository.getSoftApConfiguration();
+    }
+
+    /**
      * Sets the tethered Wi-Fi AP Configuration.
      *
      * @param config A valid SoftApConfiguration specifying the configuration of the SAP.
@@ -152,5 +161,12 @@ public class WifiTetherViewModel extends AndroidViewModel {
             resId = sSpeedSummaryResMap.get(speedType);
         }
         mSpeedSummary.setValue(resId);
+    }
+
+    /**
+     * Gets Restarting LiveData
+     */
+    public LiveData<Boolean> getRestarting() {
+        return mWifiHotspotRepository.getRestarting();
     }
 }
