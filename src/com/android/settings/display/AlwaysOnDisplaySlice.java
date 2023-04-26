@@ -28,6 +28,7 @@ import android.hardware.display.AmbientDisplayConfiguration;
 import android.net.Uri;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.text.TextUtils;
 
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
@@ -39,6 +40,10 @@ import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
+
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Custom {@link Slice} for Always on Display.
@@ -75,6 +80,7 @@ public class AlwaysOnDisplaySlice implements CustomSliceable {
         return new ListBuilder(mContext, CustomSliceRegistry.ALWAYS_ON_SLICE_URI,
                 ListBuilder.INFINITY)
                 .setAccentColor(color)
+                .setKeywords(getKeywords())
                 .addRow(new ListBuilder.RowBuilder()
                         .setTitle(mContext.getText(R.string.doze_always_on_title))
                         .setSubtitle(mContext.getText(R.string.doze_always_on_summary))
@@ -82,6 +88,13 @@ public class AlwaysOnDisplaySlice implements CustomSliceable {
                                 SliceAction.createToggle(toggleAction, null /* actionTitle */,
                                         isChecked)))
                 .build();
+    }
+
+    private Set<String> getKeywords() {
+        final String keywords = mContext.getString(R.string.keywords_always_show_time_info);
+        return Arrays.stream(TextUtils.split(keywords, ","))
+                .map(String::trim)
+                .collect(Collectors.toSet());
     }
 
     @Override
