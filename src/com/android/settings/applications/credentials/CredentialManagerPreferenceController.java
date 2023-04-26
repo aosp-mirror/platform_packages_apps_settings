@@ -22,6 +22,8 @@ import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,9 +33,11 @@ import android.content.res.Resources;
 import android.credentials.CredentialManager;
 import android.credentials.CredentialProviderInfo;
 import android.credentials.SetEnabledProvidersException;
+import android.database.ContentObserver;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.OutcomeReceiver;
 import android.os.UserHandle;
 import android.provider.DeviceConfig;
@@ -57,10 +61,12 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -86,10 +92,12 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private final Executor mExecutor;
     private final Map<ServiceInfo, SwitchPreference> mPrefs = new HashMap<>();
     private final List<ServiceInfo> mPendingServiceInfos = new ArrayList<>();
+    private final Handler mHandler = new Handler();
 
     private @Nullable FragmentManager mFragmentManager = null;
     private @Nullable Delegate mDelegate = null;
     private @Nullable String mFlagOverrideForTest = null;
+    private @Nullable PreferenceScreen mPreferenceScreen = null;
 
     public CredentialManagerPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -100,6 +108,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         mExecutor = ContextCompat.getMainExecutor(mContext);
         mCredentialManager =
                 getCredentialManager(context, preferenceKey.equals("credentials_test"));
+        new SettingContentObserver(mHandler).register(context.getContentResolver());
     }
 
     private @Nullable CredentialManager getCredentialManager(Context context, boolean isTest) {
@@ -237,6 +246,25 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         update();
     }
 
+    private void update() {
+        if (mCredentialManager == null) {
+            return;
+        }
+
+        setAvailableServices(
+                mCredentialManager.getCredentialProviderServices(
+                        getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY),
+                null);
+    }
+
+    private void updateFromExternal() {
+        update();
+
+        if (mPreferenceScreen != null) {
+            displayPreference(mPreferenceScreen);
+        }
+    }
+
     @VisibleForTesting
     void setAvailableServices(
             List<CredentialProviderInfo> availableServices,
@@ -272,6 +300,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         // Since the UI is being cleared, clear any refs.
         mPrefs.clear();
 
+        mPreferenceScreen = screen;
         PreferenceGroup group = screen.findPreference(getPreferenceKey());
         Context context = screen.getContext();
         mPrefs.putAll(buildPreferenceList(context, group));
@@ -654,20 +683,6 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         }
     };
 
-    /**
-     * Update the data in this UI.
-     */
-    private void update() {
-        if (mCredentialManager == null) {
-            return;
-        }
-
-        setAvailableServices(
-                mCredentialManager.getCredentialProviderServices(
-                        getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY),
-                null);
-    }
-
     /** Dialog fragment parent class. */
     private abstract static class CredentialManagerDialogFragment extends DialogFragment
             implements DialogInterface.OnClickListener {
@@ -791,6 +806,30 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         @Override
         public void onClick(DialogInterface dialog, int which) {
             getDialogHost().onDialogClick(which);
+        }
+    }
+
+    /** Updates the list if setting content changes. */
+    private final class SettingContentObserver extends ContentObserver {
+
+        private final Uri mAutofillService =
+                Settings.Secure.getUriFor(Settings.Secure.AUTOFILL_SERVICE);
+
+        private final Uri mCredentialService =
+                Settings.Secure.getUriFor(Settings.Secure.CREDENTIAL_SERVICE);
+
+        public SettingContentObserver(Handler handler) {
+            super(handler);
+        }
+
+        public void register(ContentResolver contentResolver) {
+            contentResolver.registerContentObserver(mAutofillService, false, this, getUser());
+            contentResolver.registerContentObserver(mCredentialService, false, this, getUser());
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            updateFromExternal();
         }
     }
 }
