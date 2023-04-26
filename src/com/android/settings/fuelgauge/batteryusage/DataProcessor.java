@@ -122,7 +122,8 @@ public final class DataProcessor {
     /** A callback listener when battery usage loading async task is executed. */
     public interface UsageMapAsyncResponse {
         /** The callback function when batteryUsageMap is loaded. */
-        void onBatteryCallbackDataLoaded(BatteryCallbackData batteryCallbackData);
+        void onBatteryCallbackDataLoaded(
+                Map<Integer, Map<Integer, BatteryDiffData>> batteryCallbackData);
     }
 
     private DataProcessor() {
@@ -361,35 +362,6 @@ public final class DataProcessor {
                 "Read %d relevant events (%d total) from UsageStatsManager", numEventsFetched,
                 numAllEventsFetched));
         return appUsageEventList;
-    }
-
-    /**
-     * @return Returns the device screen-on time data.
-     *
-     * <p>There could be 2 cases of the returned value:</p>
-     * <ul>
-     * <li>null: empty or invalid data.</li>
-     * <li>non-null: must be a 2d map and composed by 3 parts:</li>
-     * <p>  1 - [SELECTED_INDEX_ALL][SELECTED_INDEX_ALL]</p>
-     * <p>  2 - [0][SELECTED_INDEX_ALL] ~ [maxDailyIndex][SELECTED_INDEX_ALL]</p>
-     * <p>  3 - [0][0] ~ [maxDailyIndex][maxHourlyIndex]</p>
-     * </ul>
-     *
-     * <p>The structure is consistent with the battery usage map returned by
-     * {@code getBatteryUsageMap}.</p>
-     */
-    @Nullable
-    public static Map<Integer, Map<Integer, Long>> getDeviceScreenOnTime(
-            final Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>>
-                    appUsagePeriodMap) {
-        if (appUsagePeriodMap == null) {
-            return null;
-        }
-        final Map<Integer, Map<Integer, Long>> deviceScreenOnTime = new ArrayMap<>();
-        insertHourlyDeviceScreenOnTime(appUsagePeriodMap, deviceScreenOnTime);
-        insertDailyDeviceScreenOnTime(appUsagePeriodMap, deviceScreenOnTime);
-        insertAllDeviceScreenOnTime(deviceScreenOnTime);
-        return deviceScreenOnTime;
     }
 
     /**
@@ -678,7 +650,7 @@ public final class DataProcessor {
 
         final Set<String> systemAppsPackageNames = getSystemAppsPackageNames(context);
         final Set<Integer> systemAppsUids = getSystemAppsUids(context);
-        return new BatteryDiffData(context, appEntries, systemEntries,
+        return new BatteryDiffData(context, /* screenOnTime= */ 0L, appEntries, systemEntries,
                 systemAppsPackageNames, systemAppsUids, /* isAccumulated= */ false);
     }
 
@@ -988,84 +960,6 @@ public final class DataProcessor {
                 eventTime);
     }
 
-    private static void insertHourlyDeviceScreenOnTime(
-            final Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>>
-                    appUsagePeriodMap,
-            final Map<Integer, Map<Integer, Long>> resultMap) {
-        for (final int dailyIndex : appUsagePeriodMap.keySet()) {
-            final Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>> dailyAppUsageMap =
-                    appUsagePeriodMap.get(dailyIndex);
-            final Map<Integer, Long> dailyScreenOnTime = new ArrayMap<>();
-            resultMap.put(dailyIndex, dailyScreenOnTime);
-            if (dailyAppUsageMap == null) {
-                continue;
-            }
-
-            for (final int hourlyIndex : dailyAppUsageMap.keySet()) {
-                final Map<Long, Map<String, List<AppUsagePeriod>>> appUsageMap =
-                        dailyAppUsageMap.get(hourlyIndex);
-                if (appUsageMap == null || appUsageMap.isEmpty()) {
-                    dailyScreenOnTime.put(hourlyIndex, 0L);
-                } else {
-                    final List<AppUsagePeriod> flatUsageList = new ArrayList<>();
-                    for (final long userId: appUsageMap.keySet()) {
-                        if (appUsageMap.get(userId) == null) {
-                            continue;
-                        }
-                        for (final String packageName: appUsageMap.get(userId).keySet()) {
-                            final List<AppUsagePeriod> appUsagePeriodList =
-                                    appUsageMap.get(userId).get(packageName);
-                            if (appUsagePeriodList != null && !appUsagePeriodList.isEmpty()) {
-                                flatUsageList.addAll(appUsagePeriodList);
-                            }
-                        }
-                    }
-                    // Compute the screen on time and make sure it won't exceed the threshold.
-                    final long screenOnTime = Math.min(
-                            (long) TOTAL_HOURLY_TIME_THRESHOLD, getScreenOnTime(flatUsageList));
-                    dailyScreenOnTime.put(hourlyIndex, screenOnTime);
-                }
-            }
-        }
-    }
-
-    private static void insertDailyDeviceScreenOnTime(
-            final Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>>
-                    appUsagePeriodMap,
-            final Map<Integer, Map<Integer, Long>> resultMap) {
-        for (final int dailyIndex : appUsagePeriodMap.keySet()) {
-            Map<Integer, Long> dailyResultMap = resultMap.get(dailyIndex);
-            if (dailyResultMap == null) {
-                dailyResultMap = new ArrayMap<>();
-                resultMap.put(dailyIndex, dailyResultMap);
-            }
-            dailyResultMap.put(
-                    SELECTED_INDEX_ALL,
-                    getAccumulatedScreenOnTime(dailyResultMap));
-        }
-    }
-
-    private static void insertAllDeviceScreenOnTime(
-            final Map<Integer, Map<Integer, Long>> resultMap) {
-        final Map<Integer, Long> dailyAllMap = new ArrayMap<>();
-        resultMap.keySet().forEach(
-                key -> dailyAllMap.put(key, resultMap.get(key).get(SELECTED_INDEX_ALL)));
-        final Map<Integer, Long> allUsageMap = new ArrayMap<>();
-        allUsageMap.put(SELECTED_INDEX_ALL, getAccumulatedScreenOnTime(dailyAllMap));
-        resultMap.put(SELECTED_INDEX_ALL, allUsageMap);
-    }
-
-    private static long getAccumulatedScreenOnTime(final Map<Integer, Long> screenOnTimeMap) {
-        if (screenOnTimeMap == null || screenOnTimeMap.isEmpty()) {
-            return 0;
-        }
-        long sum = 0;
-        for (final int index : screenOnTimeMap.keySet()) {
-            sum += screenOnTimeMap.get(index) == null ? 0 : screenOnTimeMap.get(index);
-        }
-        return sum;
-    }
-
     @Nullable
     private static UsageEvents getAppUsageEventsForUser(
             Context context, final UserManager userManager, final int userID,
@@ -1113,7 +1007,7 @@ public final class DataProcessor {
             batteryHistEntryList = convertToBatteryHistEntry(batteryEntryList, batteryUsageStats);
             closeBatteryUsageStats(batteryUsageStats);
         } catch (RuntimeException e) {
-            Log.e(TAG, "load batteryUsageStats:" + e);
+            Log.e(TAG, "load batteryUsageStats:", e);
         }
 
         return batteryHistEntryList;
@@ -1406,6 +1300,26 @@ public final class DataProcessor {
             final Set<Integer> systemAppsUids,
             final Map<Long, Map<String, List<AppUsagePeriod>>> appUsageMap,
             final List<Map<String, BatteryHistEntry>> slotBatteryHistoryList) {
+        long slotScreenOnTime = 0L;
+        if (appUsageMap != null) {
+            final List<AppUsagePeriod> flatAppUsagePeriodList = new ArrayList<>();
+            for (final long userId : appUsageMap.keySet()) {
+                if ((userId != currentUserId && userId != workProfileUserId)
+                        || appUsageMap.get(userId) == null) {
+                    continue;
+                }
+                for (final String packageName : appUsageMap.get(userId).keySet()) {
+                    final List<AppUsagePeriod> appUsagePeriodList =
+                            appUsageMap.get(userId).get(packageName);
+                    if (appUsagePeriodList != null) {
+                        flatAppUsagePeriodList.addAll(appUsagePeriodList);
+                    }
+                }
+            }
+            slotScreenOnTime =
+                    Math.min(slotDuration, getScreenOnTime(flatAppUsagePeriodList));
+        }
+
         final List<BatteryDiffEntry> appEntries = new ArrayList<>();
         final List<BatteryDiffEntry> systemEntries = new ArrayList<>();
 
@@ -1488,6 +1402,11 @@ public final class DataProcessor {
                                 currentEntry.mCachedUsageConsumePower,
                                 nextEntry.mCachedUsageConsumePower);
             }
+            if (selectedBatteryEntry.isSystemEntry()
+                    && selectedBatteryEntry.mDrainType == BatteryConsumer.POWER_COMPONENT_SCREEN) {
+                // Replace Screen system component time with screen on time.
+                foregroundUsageTimeInMs = slotScreenOnTime;
+            }
             // Excludes entry since we don't have enough data to calculate.
             if (foregroundUsageTimeInMs == 0
                     && backgroundUsageTimeInMs == 0
@@ -1550,7 +1469,7 @@ public final class DataProcessor {
             return null;
         }
 
-        return new BatteryDiffData(context, appEntries, systemEntries,
+        return new BatteryDiffData(context, slotScreenOnTime, appEntries, systemEntries,
                 systemAppsPackageNames, systemAppsUids, /* isAccumulated= */ false);
     }
 
@@ -1608,19 +1527,21 @@ public final class DataProcessor {
 
     @Nullable
     private static BatteryDiffData getAccumulatedUsageDiffData(
-            final Context context, final Collection<BatteryDiffData> diffEntryListData) {
+            final Context context, final Collection<BatteryDiffData> batteryDiffDataList) {
         final Map<String, BatteryDiffEntry> diffEntryMap = new ArrayMap<>();
         final List<BatteryDiffEntry> appEntries = new ArrayList<>();
         final List<BatteryDiffEntry> systemEntries = new ArrayList<>();
 
-        for (BatteryDiffData diffEntryList : diffEntryListData) {
-            if (diffEntryList == null) {
+        long totalScreenOnTime = 0;
+        for (BatteryDiffData batteryDiffData : batteryDiffDataList) {
+            if (batteryDiffData == null) {
                 continue;
             }
-            for (BatteryDiffEntry entry : diffEntryList.getAppDiffEntryList()) {
+            totalScreenOnTime += batteryDiffData.getScreenOnTime();
+            for (BatteryDiffEntry entry : batteryDiffData.getAppDiffEntryList()) {
                 computeUsageDiffDataPerEntry(entry, diffEntryMap);
             }
-            for (BatteryDiffEntry entry : diffEntryList.getSystemDiffEntryList()) {
+            for (BatteryDiffEntry entry : batteryDiffData.getSystemDiffEntryList()) {
                 computeUsageDiffDataPerEntry(entry, diffEntryMap);
             }
         }
@@ -1634,8 +1555,8 @@ public final class DataProcessor {
             }
         }
 
-        return diffEntryList.isEmpty() ? null : new BatteryDiffData(context, appEntries,
-                systemEntries, /* systemAppsPackageNames= */ new ArraySet<>(),
+        return diffEntryList.isEmpty() ? null : new BatteryDiffData(context, totalScreenOnTime,
+                appEntries, systemEntries, /* systemAppsPackageNames= */ new ArraySet<>(),
                 /* systemAppsUids= */ new ArraySet<>(), /* isAccumulated= */ true);
     }
 
