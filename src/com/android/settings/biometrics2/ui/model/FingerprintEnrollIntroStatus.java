@@ -78,4 +78,11 @@ public final class FingerprintEnrollIntroStatus {
     public boolean hasScrollToBottom() {
         return mHasScrollToBottom;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "@" + Integer.toHexString(hashCode())
+                + "{scrollToBottom:" + mHasScrollToBottom
+                + ", enrollableStatus:" + mEnrollableStatus + "}";
+    }
 }

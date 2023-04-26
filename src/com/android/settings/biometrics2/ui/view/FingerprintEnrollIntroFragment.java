@@ -63,6 +63,7 @@ import com.google.android.setupdesign.util.DynamicColorPalette;
 public class FingerprintEnrollIntroFragment extends Fragment {
 
     private static final String TAG = "FingerprintEnrollIntroFragment";
+    private static final boolean DEBUG = false;
 
     private FingerprintEnrollIntroViewModel mViewModel = null;
 
@@ -128,17 +129,6 @@ public class FingerprintEnrollIntroFragment extends Fragment {
         footerLink.setText(Html.fromHtml(footerLinkStr));
 
         // footer buttons
-        mPrimaryFooterButton = new FooterButton.Builder(context)
-                .setText(R.string.security_settings_fingerprint_enroll_introduction_agree)
-                .setButtonType(FooterButton.ButtonType.OPT_IN)
-                .setTheme(R.style.SudGlifButton_Primary)
-                .build();
-        mSecondaryFooterButton = new FooterButton.Builder(context)
-                .setButtonType(FooterButton.ButtonType.NEXT)
-                .setTheme(R.style.SudGlifButton_Primary)
-                .build();
-        getFooterBarMixin().setPrimaryButton(mPrimaryFooterButton);
-        getFooterBarMixin().setSecondaryButton(mSecondaryFooterButton, true /* usePrimaryStyle */);
 
         return mView;
     }
@@ -149,9 +139,6 @@ public class FingerprintEnrollIntroFragment extends Fragment {
 
         final Context context = view.getContext();
 
-        mPrimaryFooterButton.setOnClickListener(mOnNextClickListener);
-        mSecondaryFooterButton.setOnClickListener(mOnSkipOrCancelClickListener);
-
         if (mViewModel.canAssumeUdfps()) {
             mFooterMessage6.setVisibility(View.VISIBLE);
             mIconShield.setVisibility(View.VISIBLE);
@@ -159,10 +146,6 @@ public class FingerprintEnrollIntroFragment extends Fragment {
             mFooterMessage6.setVisibility(View.GONE);
             mIconShield.setVisibility(View.GONE);
         }
-        mSecondaryFooterButton.setText(context,
-                mViewModel.getRequest().isAfterSuwOrSuwSuggestedAction()
-                ? R.string.security_settings_fingerprint_enroll_introduction_cancel
-                : R.string.security_settings_fingerprint_enroll_introduction_no_thanks);
 
         final GlifLayoutHelper glifLayoutHelper = new GlifLayoutHelper(getActivity(), getLayout());
         if (mViewModel.isBiometricUnlockDisabledByAdmin()
@@ -178,16 +161,64 @@ public class FingerprintEnrollIntroFragment extends Fragment {
                     R.string.security_settings_fingerprint_enroll_introduction_v3_message,
                     DeviceHelper.getDeviceName(context)));
         }
+    }
+
+    @Override
+    public void onStart() {
+        final Context context = requireContext();
+        final FooterBarMixin footerBarMixin = getFooterBarMixin();
+        initPrimaryFooterButton(context, footerBarMixin);
+        initSecondaryFooterButton(context, footerBarMixin);
         observePageStatusLiveDataIfNeed();
+        super.onStart();
+    }
+
+    private void initPrimaryFooterButton(@NonNull Context context,
+            @NonNull FooterBarMixin footerBarMixin) {
+        if (footerBarMixin.getPrimaryButton() != null) {
+            return;
+        }
+
+        mPrimaryFooterButton = new FooterButton.Builder(context)
+                .setText(R.string.security_settings_fingerprint_enroll_introduction_agree)
+                .setButtonType(FooterButton.ButtonType.OPT_IN)
+                .setTheme(R.style.SudGlifButton_Primary)
+                .build();
+        mPrimaryFooterButton.setOnClickListener(mOnNextClickListener);
+        footerBarMixin.setPrimaryButton(mPrimaryFooterButton);
+    }
+
+    private void initSecondaryFooterButton(@NonNull Context context,
+            @NonNull FooterBarMixin footerBarMixin) {
+        if (footerBarMixin.getSecondaryButton() != null) {
+            return;
+        }
+
+        mSecondaryFooterButton = new FooterButton.Builder(context)
+                .setText(mViewModel.getRequest().isAfterSuwOrSuwSuggestedAction()
+                        ? R.string.security_settings_fingerprint_enroll_introduction_cancel
+                        : R.string.security_settings_fingerprint_enroll_introduction_no_thanks)
+                .setButtonType(FooterButton.ButtonType.NEXT)
+                .setTheme(R.style.SudGlifButton_Primary)
+                .build();
+        mSecondaryFooterButton.setOnClickListener(mOnSkipOrCancelClickListener);
+        footerBarMixin.setSecondaryButton(mSecondaryFooterButton, true /* usePrimaryStyle */);
     }
 
     private void observePageStatusLiveDataIfNeed() {
         final LiveData<FingerprintEnrollIntroStatus> statusLiveData =
                 mViewModel.getPageStatusLiveData();
         final FingerprintEnrollIntroStatus status = statusLiveData.getValue();
-        if (status != null && status.hasScrollToBottom()) {
-            // Do not requireScrollWithButton() again when "I agree" or "Done" button is visible,
-            // because if we requireScrollWithButton() again, it will become "More" after scroll-up.
+        if (DEBUG) {
+            Log.e(TAG, "observePageStatusLiveDataIfNeed() requireScrollWithButton, status:"
+                    + status);
+        }
+        if (status != null && (status.hasScrollToBottom()
+                || status.getEnrollableStatus() == FINGERPRINT_ENROLLABLE_ERROR_REACH_MAX)) {
+            // Update once and do not requireScrollWithButton() again when page has scrolled to
+            // bottom or User has enrolled at least a fingerprint, because if we
+            // requireScrollWithButton() again, primary button will become "More" after scrolling.
+            updateFooterButtons(status);
             return;
         }
 
@@ -196,10 +227,6 @@ public class FingerprintEnrollIntroFragment extends Fragment {
         requireScrollMixin.requireScrollWithButton(getActivity(), mPrimaryFooterButton,
                 getMoreButtonTextRes(), mOnNextClickListener);
 
-        // Always set true to setHasScrolledToBottom() before registering listener through
-        // setOnRequireScrollStateChangedListener(), because listener will not be called if first
-        // scrollNeeded is true
-        mViewModel.setHasScrolledToBottom(true);
         requireScrollMixin.setOnRequireScrollStateChangedListener(
                 scrollNeeded -> mViewModel.setHasScrolledToBottom(!scrollNeeded));
         statusLiveData.observe(this, this::updateFooterButtons);
@@ -249,15 +276,19 @@ public class FingerprintEnrollIntroFragment extends Fragment {
     }
 
     void updateFooterButtons(@NonNull FingerprintEnrollIntroStatus status) {
-        @StringRes final int scrollToBottomPrimaryResId =
-                status.getEnrollableStatus() == FINGERPRINT_ENROLLABLE_OK
-                        ? R.string.security_settings_fingerprint_enroll_introduction_agree
-                        : R.string.done;
-
+        if (DEBUG) {
+            Log.d(TAG, "updateFooterButtons(" + status + ")");
+        }
         mPrimaryFooterButton.setText(getContext(),
-                status.hasScrollToBottom() ? scrollToBottomPrimaryResId : getMoreButtonTextRes());
-        mSecondaryFooterButton.setVisibility(
-                status.hasScrollToBottom() ? View.VISIBLE : View.INVISIBLE);
+                status.getEnrollableStatus() == FINGERPRINT_ENROLLABLE_ERROR_REACH_MAX
+                        ? R.string.done
+                        : status.hasScrollToBottom()
+                                ? R.string.security_settings_fingerprint_enroll_introduction_agree
+                                : getMoreButtonTextRes());
+        mSecondaryFooterButton.setVisibility(status.hasScrollToBottom()
+                && status.getEnrollableStatus() != FINGERPRINT_ENROLLABLE_ERROR_REACH_MAX
+                ? View.VISIBLE
+                : View.INVISIBLE);
 
         final TextView errorTextView = mView.findViewById(R.id.error_text);
         switch (status.getEnrollableStatus()) {

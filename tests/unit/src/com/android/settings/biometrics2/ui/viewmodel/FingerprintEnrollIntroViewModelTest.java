@@ -16,9 +16,7 @@
 
 package com.android.settings.biometrics2.ui.viewmodel;
 
-import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_REAR;
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_OPTICAL;
-import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_ULTRASONIC;
 
 import static com.android.settings.biometrics2.ui.model.FingerprintEnrollIntroStatus.FINGERPRINT_ENROLLABLE_ERROR_REACH_MAX;
 import static com.android.settings.biometrics2.ui.model.FingerprintEnrollIntroStatus.FINGERPRINT_ENROLLABLE_OK;
@@ -98,6 +96,25 @@ public class FingerprintEnrollIntroViewModelTest {
         final FingerprintEnrollIntroStatus status = viewModel.getPageStatusLiveData().getValue();
         assertThat(status.hasScrollToBottom()).isFalse();
         assertThat(status.getEnrollableStatus()).isEqualTo(FINGERPRINT_ENROLLABLE_OK);
+    }
+
+    @Test
+    public void testPageStatusLiveDataRefreshWhenRefetch() {
+        final FingerprintRepository repository = newFingerprintRepository(mFingerprintManager,
+                TYPE_UDFPS_OPTICAL, 1);
+        final FingerprintEnrollIntroViewModel viewModel = newFingerprintEnrollIntroViewModel(
+                repository,
+                newAllFalseRequest(mApplication));
+        FingerprintEnrollIntroStatus status = viewModel.getPageStatusLiveData().getValue();
+        assertThat(status.hasScrollToBottom()).isFalse();
+        assertThat(status.getEnrollableStatus()).isEqualTo(FINGERPRINT_ENROLLABLE_OK);
+
+        setupFingerprintEnrolledFingerprints(mFingerprintManager, TEST_USER_ID, 1);
+
+        // Refetch PageStatusLiveData
+        status = viewModel.getPageStatusLiveData().getValue();
+        assertThat(status.hasScrollToBottom()).isFalse();
+        assertThat(status.getEnrollableStatus()).isEqualTo(FINGERPRINT_ENROLLABLE_ERROR_REACH_MAX);
     }
 
     @Test
@@ -208,24 +225,6 @@ public class FingerprintEnrollIntroViewModelTest {
                 request);
         FingerprintEnrollIntroStatus status = viewModel.getPageStatusLiveData().getValue();
         assertThat(status.getEnrollableStatus()).isEqualTo(FINGERPRINT_ENROLLABLE_ERROR_REACH_MAX);
-    }
-
-    @Test
-    public void testCanAssumeUdfps_forUdfpsUltrasonicSensor() {
-        final FingerprintEnrollIntroViewModel viewModel = newFingerprintEnrollIntroViewModel(
-                newFingerprintRepository(mFingerprintManager, TYPE_UDFPS_ULTRASONIC, 5),
-                newAllFalseRequest(mApplication));
-
-        assertThat(viewModel.canAssumeUdfps()).isEqualTo(true);
-    }
-
-    @Test
-    public void testCanAssumeUdfps_forRearSensor() {
-        final FingerprintEnrollIntroViewModel viewModel = newFingerprintEnrollIntroViewModel(
-                newFingerprintRepository(mFingerprintManager, TYPE_REAR, 5),
-                newAllFalseRequest(mApplication));
-
-        assertThat(viewModel.canAssumeUdfps()).isEqualTo(false);
     }
 
     @Test
