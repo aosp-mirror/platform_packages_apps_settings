@@ -7097,8 +7097,8 @@
     <!-- List of synonyms for the font size, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_font_size">text size, large print, large font, large text, low vision, make text bigger, font enlarger, font enlargement</string>
 
-    <!-- List of synonyms for the always show time and info [CHAR LIMIT=NONE] -->
-    <string name="keywords_always_show_time_info">always on display, AOD</string>
+    <!-- List of synonyms for the always show time and info, used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_always_show_time_info">always on ambient display, AOD</string>
 
     <!-- List of synonyms for the nfc tag apps control [CHAR LIMIT=NONE] -->
     <string name="keywords_change_nfc_tag_apps_state">nfc, tag, reader</string>
@@ -10248,8 +10248,10 @@
     <string name="default_autofill_app">Default autofill service</string>
     <!-- Preference category for showing auto-fill services with saved passwords. [CHAR LIMIT=60] -->
     <string name="autofill_passwords">Passwords</string>
-    <!-- Preference category for showing credman services with saved credentials. [CHAR LIMIT=60] -->
-    <string name="credman_credentials">Passwords, passkeys and data services</string>
+    <!-- Preference category for showing autofill and credman services with saved credentials. [CHAR LIMIT=60] -->
+    <string name="credman_chosen_app_title">Passwords, passkeys and data services</string>
+    <!-- Preference category for showing additional credential providers. [CHAR LIMIT=60] -->
+    <string name="credman_credentials">Additional providers</string>
     <!-- Summary for passwords settings that shows how many passwords are saved for each autofill
          service. [CHAR LIMIT=NONE] -->
     <string name="autofill_passwords_count">{count, plural,
@@ -12058,5 +12060,5 @@
     <string name="dock_multi_instances_not_supported_text">"This app can only be opened in 1 window"</string>
 
     <!-- [CHAR LIMIT=30] Label used to open Note Task -->
-    <string name="note_task_button_label">Notetaking</string>
+    <string name="note_task_shortcut_label">Note shortcut</string>
 </resources>
