@@ -16,6 +16,9 @@
 
 package com.android.settings.wifi.tether;
 
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
+
 import static com.android.settings.wifi.WifiUtils.setCanShowWifiHotspotCached;
 import static com.android.settings.wifi.tether.WifiTetherSettings.KEY_WIFI_HOTSPOT_SECURITY;
 import static com.android.settings.wifi.tether.WifiTetherSettings.KEY_WIFI_HOTSPOT_SPEED;
@@ -25,6 +28,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -55,6 +59,7 @@ import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowFragment;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.wifi.factory.WifiFeatureProvider;
 import com.android.settings.wifi.repository.WifiHotspotRepository;
 
@@ -110,6 +115,8 @@ public class WifiTetherSettingsTest {
     private Preference mWifiHotspotSpeed;
     @Mock
     private LiveData<Integer> mSpeedSummary;
+    @Mock
+    private SettingsMainSwitchBar mMainSwitchBar;
 
     private WifiTetherSettings mSettings;
 
@@ -135,6 +142,7 @@ public class WifiTetherSettingsTest {
         when(mWifiTetherViewModel.getSpeedSummary()).thenReturn(mSpeedSummary);
 
         mSettings = spy(new WifiTetherSettings(mWifiRestriction));
+        mSettings.mMainSwitchBar = mMainSwitchBar;
         mSettings.mWifiTetherViewModel = mWifiTetherViewModel;
         when(mSettings.findPreference(KEY_WIFI_HOTSPOT_SECURITY)).thenReturn(mWifiHotspotSecurity);
         when(mSettings.findPreference(KEY_WIFI_HOTSPOT_SPEED)).thenReturn(mWifiHotspotSpeed);
@@ -306,6 +314,26 @@ public class WifiTetherSettingsTest {
         verify(mWifiHotspotSpeed).setVisible(false);
         verify(mSecuritySummary, never()).observe(any(), any());
         verify(mSpeedSummary, never()).observe(any(), any());
+    }
+
+    @Test
+    public void onRestartingChanged_restartingTrue_setLoadingTrue() {
+        doNothing().when(mSettings).setLoading(anyBoolean(), anyBoolean());
+
+        mSettings.onRestartingChanged(true);
+
+        verify(mMainSwitchBar).setVisibility(INVISIBLE);
+        verify(mSettings).setLoading(true, false);
+    }
+
+    @Test
+    public void onRestartingChanged_restartingFalse_setLoadingFalse() {
+        doNothing().when(mSettings).setLoading(anyBoolean(), anyBoolean());
+
+        mSettings.onRestartingChanged(false);
+
+        verify(mMainSwitchBar).setVisibility(VISIBLE);
+        verify(mSettings).setLoading(false, false);
     }
 
     private void spyWifiTetherSettings() {
