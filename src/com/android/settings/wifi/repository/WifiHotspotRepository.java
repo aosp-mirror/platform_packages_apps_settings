@@ -16,14 +16,18 @@
 
 package com.android.settings.wifi.repository;
 
+import static android.net.TetheringManager.TETHERING_WIFI;
 import static android.net.wifi.SoftApConfiguration.BAND_2GHZ;
 import static android.net.wifi.SoftApConfiguration.BAND_5GHZ;
 import static android.net.wifi.SoftApConfiguration.BAND_6GHZ;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_OPEN;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE;
 import static android.net.wifi.WifiAvailableChannel.OP_MODE_SAP;
+import static android.net.wifi.WifiManager.WIFI_AP_STATE_DISABLED;
+import static android.net.wifi.WifiManager.WIFI_AP_STATE_ENABLED;
 
 import android.content.Context;
+import android.net.TetheringManager;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiAvailableChannel;
 import android.net.wifi.WifiManager;
@@ -50,6 +54,8 @@ import java.util.function.Consumer;
  */
 public class WifiHotspotRepository {
     private static final String TAG = "WifiHotspotRepository";
+
+    private static final int RESTART_INTERVAL_MS = 100;
 
     /** Wi-Fi hotspot band unknown. */
     public static final int BAND_UNKNOWN = 0;
@@ -79,8 +85,9 @@ public class WifiHotspotRepository {
         sSpeedMap.put(BAND_2GHZ_5GHZ, SPEED_2GHZ_5GHZ);
     }
 
-    protected final Context mAppContext;
-    protected final WifiManager mWifiManager;
+    private final Context mAppContext;
+    private final WifiManager mWifiManager;
+    private final TetheringManager mTetheringManager;
 
     protected String mLastPassword;
     protected LastPasswordListener mLastPasswordListener = new LastPasswordListener();
@@ -102,9 +109,24 @@ public class WifiHotspotRepository {
     Boolean mIsConfigShowSpeed;
     private Boolean mIsSpeedFeatureAvailable;
 
-    public WifiHotspotRepository(@NonNull Context appContext, @NonNull WifiManager wifiManager) {
+    @VisibleForTesting
+    SoftApCallback mSoftApCallback = new SoftApCallback();
+    @VisibleForTesting
+    StartTetheringCallback mStartTetheringCallback;
+    @VisibleForTesting
+    int mWifiApState = WIFI_AP_STATE_DISABLED;
+
+    @VisibleForTesting
+    boolean mIsRestarting;
+    @VisibleForTesting
+    MutableLiveData<Boolean> mRestarting;
+
+    public WifiHotspotRepository(@NonNull Context appContext, @NonNull WifiManager wifiManager,
+            @NonNull TetheringManager tetheringManager) {
         mAppContext = appContext;
         mWifiManager = wifiManager;
+        mTetheringManager = tetheringManager;
+        mWifiManager.registerSoftApCallback(mAppContext.getMainExecutor(), mSoftApCallback);
     }
 
     /**
@@ -126,6 +148,15 @@ public class WifiHotspotRepository {
         return !TextUtils.isEmpty(mLastPassword) ? mLastPassword : generateRandomPassword();
     }
 
+    @VisibleForTesting
+    String generatePassword(SoftApConfiguration config) {
+        String password = config.getPassphrase();
+        if (TextUtils.isEmpty(password)) {
+            password = generatePassword();
+        }
+        return password;
+    }
+
     private class LastPasswordListener implements Consumer<String> {
         @Override
         public void accept(String password) {
@@ -140,13 +171,27 @@ public class WifiHotspotRepository {
     }
 
     /**
+     * Gets the Wi-Fi tethered AP Configuration.
+     *
+     * @return AP details in {@link SoftApConfiguration}
+     */
+    public SoftApConfiguration getSoftApConfiguration() {
+        return mWifiManager.getSoftApConfiguration();
+    }
+
+    /**
      * Sets the tethered Wi-Fi AP Configuration.
      *
      * @param config A valid SoftApConfiguration specifying the configuration of the SAP.
      */
     public void setSoftApConfiguration(@NonNull SoftApConfiguration config) {
+        if (mIsRestarting) {
+            Log.e(TAG, "Skip setSoftApConfiguration because hotspot is restarting.");
+            return;
+        }
         mWifiManager.setSoftApConfiguration(config);
         refresh();
+        restartTetheringIfNeeded();
     }
 
     /**
@@ -217,13 +262,7 @@ public class WifiHotspotRepository {
             return;
         }
         SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder(config);
-        String passphrase = null;
-        if (securityType != SECURITY_TYPE_OPEN) {
-            passphrase = config.getPassphrase();
-            if (TextUtils.isEmpty(passphrase)) {
-                passphrase = generatePassword();
-            }
-        }
+        String passphrase = (securityType == SECURITY_TYPE_OPEN) ? null : generatePassword(config);
         configBuilder.setPassphrase(passphrase, securityType);
         setSoftApConfiguration(configBuilder.build());
 
@@ -302,7 +341,7 @@ public class WifiHotspotRepository {
             configBuilder.setBand(BAND_2GHZ_5GHZ_6GHZ);
             if (config.getSecurityType() != SECURITY_TYPE_WPA3_SAE) {
                 log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_SAE)");
-                configBuilder.setPassphrase(generatePassword(), SECURITY_TYPE_WPA3_SAE);
+                configBuilder.setPassphrase(generatePassword(config), SECURITY_TYPE_WPA3_SAE);
             }
         } else if (speedType == SPEED_5GHZ) {
             log("setSpeedType(), setBand(BAND_2GHZ_5GHZ)");
@@ -540,6 +579,84 @@ public class WifiHotspotRepository {
             mCurrentCountryCode = null;
             purgeRefreshData();
             refresh();
+        }
+    }
+
+    /**
+     * Gets Restarting LiveData
+     */
+    public LiveData<Boolean> getRestarting() {
+        if (mRestarting == null) {
+            mRestarting = new MutableLiveData<>();
+            mRestarting.setValue(mIsRestarting);
+        }
+        return mRestarting;
+    }
+
+    private void setRestarting(boolean isRestarting) {
+        log("setRestarting(), isRestarting:" + isRestarting);
+        mIsRestarting = isRestarting;
+        if (mRestarting != null) {
+            mRestarting.setValue(mIsRestarting);
+        }
+    }
+
+    @VisibleForTesting
+    void restartTetheringIfNeeded() {
+        if (mWifiApState != WIFI_AP_STATE_ENABLED) {
+            return;
+        }
+        log("restartTetheringIfNeeded()");
+        mAppContext.getMainThreadHandler().postDelayed(() -> {
+            setRestarting(true);
+            stopTethering();
+        }, RESTART_INTERVAL_MS);
+    }
+
+    private void startTethering() {
+        if (mStartTetheringCallback == null) {
+            mStartTetheringCallback = new StartTetheringCallback();
+        }
+        log("startTethering()");
+        mTetheringManager.startTethering(TETHERING_WIFI, mAppContext.getMainExecutor(),
+                mStartTetheringCallback);
+    }
+
+    private void stopTethering() {
+        log("startTethering()");
+        mTetheringManager.stopTethering(TETHERING_WIFI);
+    }
+
+    @VisibleForTesting
+    class SoftApCallback implements WifiManager.SoftApCallback {
+        @Override
+        public void onStateChanged(int state, int failureReason) {
+            log("onStateChanged(), state:" + state + ", failureReason:" + failureReason);
+            mWifiApState = state;
+            if (!mIsRestarting) {
+                return;
+            }
+            if (state == WIFI_AP_STATE_DISABLED) {
+                mAppContext.getMainThreadHandler().postDelayed(() -> startTethering(),
+                        RESTART_INTERVAL_MS);
+                return;
+            }
+            if (state == WIFI_AP_STATE_ENABLED) {
+                refresh();
+                setRestarting(false);
+            }
+        }
+    }
+
+    private class StartTetheringCallback implements TetheringManager.StartTetheringCallback {
+        @Override
+        public void onTetheringStarted() {
+            log("onTetheringStarted()");
+        }
+
+        @Override
+        public void onTetheringFailed(int error) {
+            log("onTetheringFailed(), error:" + error);
         }
     }
 
