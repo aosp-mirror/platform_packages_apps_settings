@@ -104,8 +104,10 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
     private ObjectAnimator mHelpAnimation;
     private int mIconTouchCount;
 
-    private final View.OnClickListener mOnSkipClickListener =
-            (v) -> mEnrollingViewModel.onCancelledDueToOnSkipPressed();
+    private final View.OnClickListener mOnSkipClickListener = v -> {
+        mEnrollingViewModel.setOnSkipPressed();
+        cancelEnrollment();
+    };
 
     private final Observer<EnrollmentProgress> mProgressObserver = progress -> {
         if (DEBUG) {

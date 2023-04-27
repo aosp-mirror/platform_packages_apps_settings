@@ -95,8 +95,10 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
 
     private int mRotation = -1;
 
-    private final View.OnClickListener mOnSkipClickListener =
-            (v) -> mEnrollingViewModel.onCancelledDueToOnSkipPressed();
+    private final View.OnClickListener mOnSkipClickListener = v -> {
+        mEnrollingViewModel.setOnSkipPressed();
+        cancelEnrollment();
+    };
 
     private final Observer<EnrollmentProgress> mProgressObserver = progress -> {
         if (progress != null) {
