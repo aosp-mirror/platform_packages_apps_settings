@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Android Open Source Project
+ * Copyright (C) 2023 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
-import android.provider.Settings;
 
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -48,7 +47,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowUtils.class})
-public class FingerprintSettingsRequireScreenOnToAuthPreferenceControllerTest {
+public class FingerprintSettingsUnlockCategoryControllerTest {
 
     @Mock
     private FingerprintManager mFingerprintManager;
@@ -76,18 +75,6 @@ public class FingerprintSettingsRequireScreenOnToAuthPreferenceControllerTest {
     @After
     public void tearDown() {
         ShadowUtils.reset();
-    }
-
-    @Test
-    public void onPreferenceChange_settingIsUpdated() {
-        boolean state = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.SFPS_PERFORMANT_AUTH_ENABLED, 1) != 0;
-
-        assertThat(mController.isChecked()).isFalse();
-        assertThat(mController.onPreferenceChange(mPreference, !state)).isTrue();
-        boolean newState = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.SFPS_PERFORMANT_AUTH_ENABLED, 1) != 0;
-        assertThat(newState).isEqualTo(!state);
     }
 
     @Test
@@ -144,6 +131,5 @@ public class FingerprintSettingsRequireScreenOnToAuthPreferenceControllerTest {
         when(mFingerprintManager.isPowerbuttonFps()).thenReturn(isPowerbuttonFps);
         when(mFingerprintManager.hasEnrolledTemplates(anyInt())).thenReturn(hasEnrolledTemplates);
     }
-
 
 }
