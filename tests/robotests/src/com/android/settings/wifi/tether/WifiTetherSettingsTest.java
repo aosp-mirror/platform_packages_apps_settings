@@ -16,10 +16,12 @@
 
 package com.android.settings.wifi.tether;
 
+import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
 import static com.android.settings.wifi.WifiUtils.setCanShowWifiHotspotCached;
+import static com.android.settings.wifi.repository.WifiHotspotRepository.BAND_2GHZ_5GHZ_6GHZ;
 import static com.android.settings.wifi.tether.WifiTetherSettings.KEY_WIFI_HOTSPOT_SECURITY;
 import static com.android.settings.wifi.tether.WifiTetherSettings.KEY_WIFI_HOTSPOT_SPEED;
 
@@ -41,6 +43,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.TetheringManager;
+import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -84,6 +87,8 @@ public class WifiTetherSettingsTest {
 
     private static final int XML_RES = R.xml.wifi_tether_settings;
     private static final String[] WIFI_REGEXS = {"wifi_regexs"};
+    private static final String SSID = "ssid";
+    private static final String PASSWORD = "password";
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
@@ -117,6 +122,12 @@ public class WifiTetherSettingsTest {
     private LiveData<Integer> mSpeedSummary;
     @Mock
     private SettingsMainSwitchBar mMainSwitchBar;
+    @Mock
+    private WifiTetherSSIDPreferenceController mSSIDPreferenceController;
+    @Mock
+    private WifiTetherPasswordPreferenceController mPasswordPreferenceController;
+    @Mock
+    private WifiTetherAutoOffPreferenceController mWifiTetherAutoOffPreferenceController;
 
     private WifiTetherSettings mSettings;
 
@@ -143,6 +154,12 @@ public class WifiTetherSettingsTest {
 
         mSettings = spy(new WifiTetherSettings(mWifiRestriction));
         mSettings.mMainSwitchBar = mMainSwitchBar;
+        mSettings.mSSIDPreferenceController = mSSIDPreferenceController;
+        when(mSSIDPreferenceController.getSSID()).thenReturn(SSID);
+        mSettings.mPasswordPreferenceController = mPasswordPreferenceController;
+        when(mPasswordPreferenceController.getPasswordValidated(anyInt())).thenReturn(PASSWORD);
+        mSettings.mWifiTetherAutoOffPreferenceController = mWifiTetherAutoOffPreferenceController;
+        when(mWifiTetherAutoOffPreferenceController.isEnabled()).thenReturn(true);
         mSettings.mWifiTetherViewModel = mWifiTetherViewModel;
         when(mSettings.findPreference(KEY_WIFI_HOTSPOT_SECURITY)).thenReturn(mWifiHotspotSecurity);
         when(mSettings.findPreference(KEY_WIFI_HOTSPOT_SPEED)).thenReturn(mWifiHotspotSpeed);
@@ -324,6 +341,22 @@ public class WifiTetherSettingsTest {
 
         verify(mMainSwitchBar).setVisibility(INVISIBLE);
         verify(mSettings).setLoading(true, false);
+    }
+
+    @Test
+    public void buildNewConfig_speedFeatureIsAvailableAndPasswordChanged_bandShouldNotBeLost() {
+        String newPassword = "new" + PASSWORD;
+        SoftApConfiguration currentConfig = new SoftApConfiguration.Builder()
+                .setPassphrase(PASSWORD, SECURITY_TYPE_WPA3_SAE)
+                .setBand(BAND_2GHZ_5GHZ_6GHZ)
+                .build();
+        when(mWifiTetherViewModel.getSoftApConfiguration()).thenReturn(currentConfig);
+        when(mWifiTetherViewModel.isSpeedFeatureAvailable()).thenReturn(true);
+        when(mPasswordPreferenceController.getPasswordValidated(anyInt())).thenReturn(newPassword);
+
+        SoftApConfiguration newConfig = mSettings.buildNewConfig();
+
+        assertThat(newConfig.getBand()).isEqualTo(currentConfig.getBand());
     }
 
     @Test

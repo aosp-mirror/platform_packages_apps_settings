@@ -80,11 +80,14 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @VisibleForTesting
     SettingsMainSwitchBar mMainSwitchBar;
     private WifiTetherSwitchBarController mSwitchBarController;
-    private WifiTetherSSIDPreferenceController mSSIDPreferenceController;
-    private WifiTetherPasswordPreferenceController mPasswordPreferenceController;
+    @VisibleForTesting
+    WifiTetherSSIDPreferenceController mSSIDPreferenceController;
+    @VisibleForTesting
+    WifiTetherPasswordPreferenceController mPasswordPreferenceController;
     private WifiTetherSecurityPreferenceController mSecurityPreferenceController;
     private WifiTetherMaximizeCompatibilityPreferenceController mMaxCompatibilityPrefController;
-    private WifiTetherAutoOffPreferenceController mWifiTetherAutoOffPreferenceController;
+    @VisibleForTesting
+    WifiTetherAutoOffPreferenceController mWifiTetherAutoOffPreferenceController;
 
     private boolean mUnavailable;
     private WifiRestriction mWifiRestriction;
@@ -269,10 +272,12 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         setLoading(restarting, false);
     }
 
-    private SoftApConfiguration buildNewConfig() {
-        SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
+    @VisibleForTesting
+    SoftApConfiguration buildNewConfig() {
+        SoftApConfiguration currentConfig = mWifiTetherViewModel.getSoftApConfiguration();
+        SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder(currentConfig);
         int securityType = (mWifiTetherViewModel.isSpeedFeatureAvailable())
-                ? mWifiTetherViewModel.getSoftApConfiguration().getSecurityType()
+                ? currentConfig.getSecurityType()
                 : mSecurityPreferenceController.getSecurityType();
         configBuilder.setSsid(mSSIDPreferenceController.getSSID());
         if (securityType != SoftApConfiguration.SECURITY_TYPE_OPEN) {
