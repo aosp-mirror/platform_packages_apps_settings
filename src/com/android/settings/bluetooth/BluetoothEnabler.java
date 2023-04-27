@@ -223,7 +223,6 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
         mSwitchController.setDisabledByAdmin(admin);
         if (admin != null) {
             mSwitchController.setChecked(false);
-            mSwitchController.setEnabled(false);
         }
         return admin != null;
     }
