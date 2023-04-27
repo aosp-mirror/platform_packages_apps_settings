@@ -28,10 +28,13 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
@@ -99,12 +102,35 @@ public class ChannelPanelActivity extends FragmentActivity {
 
         findViewById(R.id.done).setOnClickListener(v -> finish());
         findViewById(R.id.see_more).setOnClickListener(v -> launchFullSettings());
-
+        setupNavigationBar();
         mPanelFragment = callingIntent.hasExtra(Settings.EXTRA_CONVERSATION_ID)
                 ? new ConversationNotificationSettings()
                 : new ChannelNotificationSettings();
         mPanelFragment.setArguments(new Bundle(mBundle));
         fragmentManager.beginTransaction().replace(
                 android.R.id.list_container, mPanelFragment).commit();
+    }
+
+    /**
+     * Adjust bottom edge and color.
+     */
+    private void setupNavigationBar() {
+        // Extend the panel all the way to the bottom of the screen, as opposed to sitting on top of
+        // the navigation bar.
+        ViewCompat.setOnApplyWindowInsetsListener(getWindow().getDecorView(),
+                (v, windowInsets) -> {
+                    v.setPadding(v.getPaddingLeft(), v.getPaddingTop(), v.getPaddingRight(), 0);
+                    return windowInsets; // propagate down to panel layout root element
+                });
+
+        // When using 3-button navigation in light mode, the system picks white navigation buttons
+        // which are not sufficiently contrasted from the panel background.
+        WindowInsetsControllerCompat windowInsetsController =
+                ViewCompat.getWindowInsetsController(getWindow().getDecorView());
+
+        if (windowInsetsController != null) {
+            boolean forceNavigationButtonsDark = !Utils.isNightMode(this);
+            windowInsetsController.setAppearanceLightNavigationBars(forceNavigationButtonsDark);
+        }
     }
 }
