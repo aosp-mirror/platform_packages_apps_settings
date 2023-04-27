@@ -117,7 +117,7 @@
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth er på"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Se alle"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"Pekepenn"</string>
-    <string name="stylus_default_notes_app" msgid="3896158797687806941">"Standard notatapper"</string>
+    <string name="stylus_default_notes_app" msgid="3896158797687806941">"Standard notatapp"</string>
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Skriv i tekstfelt"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignorer alle knappetrykk med pekepenn"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Pekepenn"</string>
@@ -159,7 +159,8 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Systemstandard"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Språkvalg for denne appen er ikke tilgjengelig fra innstillingene."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Språket kan være forskjellig fra språkene som er tilgjengelige i appen. Noen apper støtter muligens ikke denne innstillingen."</string>
-    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Bare apper som støtter språkvalg, vises her."</string>
+    <!-- no translation found for desc_app_locale_selection_supported (6744909281573556379) -->
+    <skip />
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Systemet, apper og nettsteder bruker det første språket som støttes, av de foretrukne språkene dine."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"For å velge et språk for hver app, gå til innstillingene for appspråk."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Finn ut mer om appspråk"</string>
@@ -173,7 +174,6 @@
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"La apper bruke regionsinnstillingene dine til å tilpasse opplevelsen din"</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Apper bruker regionsinnstillingene dine når det er mulig."</string>
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperatur"</string>
-    <string name="calendar_preferences_title" msgid="8312485828206542600">"Kalender"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Første dag i uken"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Tallpreferanser"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Bruk appstandard"</string>
@@ -378,12 +378,12 @@
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Ansikt og fingeravtrykk er lagt til"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Når du konfigurerer ansiktslås og opplåsing med fingeravtrykk, blir du bedt om å bruke fingeravtrykk når du bruker munnbind eller er i et dårlig belyst område."</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Måter å låse opp på"</string>
-    <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"Bruk ansikt eller fingeravtrykk for å"</string>
-    <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"Låse opp telefonen"</string>
-    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Bekrefte at det er deg, i apper"</string>
+    <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"Bruk ansikt eller fingeravtrykk til dette"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"Lås opp telefonen"</string>
+    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Bekreft i apper at du er deg"</string>
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Med ansiktet"</string>
-    <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Med fingeravtrykket"</string>
-    <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Med ansiktet eller fingeravtrykket"</string>
+    <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Bruk fingeravtrykket"</string>
+    <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Bruk ansiktet eller fingeravtrykket"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="biometric_settings_add_face_in_split_mode_title" msgid="6041232223862753222">"Kan ikke konfigurere Ansiktslås"</string>
     <string name="biometric_settings_add_face_in_split_mode_message" msgid="1904738532939614456">"Avslutt delt skjerm for å konfigurere ansiktslås"</string>
@@ -651,8 +651,8 @@
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Koble fra appen"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maksimalt antall Bluetooth-lydenheter"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Velg maksimalt antall tilkoblede Bluetooth-lydenheter"</string>
-    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Feilsøkingslogg for NFC-stabel"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Øk loggføringsnivå for NFC-stabel"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Feilsøkingslogg for NFC-stakk"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Øk loggføringsnivå for NFC-stakk"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Feilsøkingslogg med høyt detaljnivå for leverandører for NFC"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Inkluder flere enhetsspesifikke leverandørlogger i feilrapporter. Disse kan inneholde privat informasjon."</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"Ufiltrert NCI-logg for NFC"</string>
@@ -927,7 +927,7 @@
   <string-array name="wifi_calling_mode_choices_v2">
     <item msgid="6052353275413974742">"Wifi"</item>
     <item msgid="8622872038388687383">"Mobil"</item>
-    <item msgid="3027927219952052398">"Bare Wifi"</item>
+    <item msgid="3027927219952052398">"Bare wifi"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="588620799769664461">"Wifi"</item>
@@ -1136,7 +1136,7 @@
     <string name="status_roaming" msgid="1253597174715663778">"Roaming"</string>
     <string name="status_operator" msgid="4335640583552058491">"Nettverk"</string>
     <string name="status_wifi_mac_address" msgid="4447611754614388914">"MAC-adresse for wifi"</string>
-    <string name="status_device_wifi_mac_address" msgid="1896121694334176494">"Enhetens Wifi-MAC-adresse"</string>
+    <string name="status_device_wifi_mac_address" msgid="1896121694334176494">"Enhetens MAC-adresse for wifi"</string>
     <string name="status_bt_address" msgid="6919660304578476547">"Bluetooth-adresse"</string>
     <string name="status_serial_number" msgid="9060064164331466789">"Serienummer"</string>
     <string name="status_up_time" msgid="1274778533719495438">"Oppetid"</string>
@@ -1335,7 +1335,7 @@
     <string name="mobile_connect_to_internet" msgid="8162654404357069060">"Koble deg til Internett"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Nylige posisjonsforespørsler"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Sted for jobbprofil"</string>
-    <string name="location_app_level_permissions" msgid="907206607664629759">"Appenes posisjonstillatelser"</string>
+    <string name="location_app_level_permissions" msgid="907206607664629759">"Apper med posisjonstillatelse"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Posisjon er slått av"</string>
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{# av {total} apper har tilgang til posisjon}other{# av {total} apper har tilgang til posisjon}}"</string>
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"Nylig tilgang"</string>
@@ -1345,8 +1345,8 @@
     <string name="location_no_recent_accesses" msgid="6031735777805464247">"Ingen apper har brukt posisjon nylig"</string>
     <string name="location_high_battery_use" msgid="4277318891200626524">"Høy batteribruk"</string>
     <string name="location_low_battery_use" msgid="5218950289737996431">"Lav batteribruk"</string>
-    <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"Wi‑Fi-skanning"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"La apper og tjenester søke etter wifi-nettverk når som helst, selv når Wifi er slått av. Dette kan for eksempel brukes til å forbedre posisjonsbaserte funksjoner og tjenester."</string>
+    <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"Wifi-skanning"</string>
+    <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"La apper og tjenester søke etter wifi-nettverk når som helst, selv når wifi er slått av. Dette kan for eksempel brukes til å forbedre posisjonsbaserte funksjoner og tjenester."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Bluetooth-søking"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"La apper og tjenester søke etter enheter i nærheten når som helst, selv når Bluetooth er slått av. Dette kan for eksempel brukes til å forbedre posisjonsbaserte funksjoner og tjenester."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Posisjonstjenester"</string>
@@ -2003,7 +2003,7 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Kompatibilitet med høreapparater"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Forbedrer kompatibiliteten med telespoler og reduserer uønsket støy"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Om høreapparater"</string>
-    <string name="accessibility_hearing_device_footer_summary" msgid="7451899224828040581">"Forsikre deg om at høreapparatet ditt er slått på og klart for tilkobling"</string>
+    <string name="accessibility_hearing_device_footer_summary" msgid="7451899224828040581">"Sjekk at høreapparatet ditt er slått på og klart for tilkobling"</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Koble til høreapparat"</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Tilgjengelige høreapparater"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Ser du ikke høreapparatet ditt?"</string>
@@ -2180,7 +2180,8 @@
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Slå på batterisparing"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Batteriet kan gå tomt raskere enn vanlig"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"Batterisparing er på"</string>
-    <string name="battery_saver_link_a11y" msgid="740558184830458845">"Finn ut mer om batterisparing"</string>
+    <!-- no translation found for battery_saver_link_a11y (6613079613524512257) -->
+    <skip />
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Noen funksjoner kan være begrenset"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Høyere batteribruk"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Se appene med høyest batteribruk"</string>
@@ -2227,7 +2228,7 @@
     <string name="battery_missing_message" msgid="400958471814422770">"Kunne ikke lese batterimåleren."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Trykk for å finne ut mer om denne feilen"</string>
-    <string name="power_screen" msgid="3926703168513988776">"Skjerm"</string>
+    <string name="power_screen" msgid="4596900105850963806">"Skjerm"</string>
     <string name="power_cpu" msgid="1820472721627148746">"Prosessor"</string>
     <string name="power_flashlight" msgid="8993388636332573202">"Lommelykt"</string>
     <string name="power_camera" msgid="4778315081581293923">"Kamera"</string>
@@ -2306,9 +2307,9 @@
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Batteribruk for <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Skjermtid siden sist batteriet var fulladet"</string>
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Skjermtid for <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_spinner_by_apps (78924517671977945) -->
+    <!-- no translation found for battery_usage_spinner_view_by_apps (8769276544072098082) -->
     <skip />
-    <!-- no translation found for battery_usage_spinner_by_systems (6489690892421179515) -->
+    <!-- no translation found for battery_usage_spinner_view_by_systems (7904104223212160541) -->
     <skip />
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Prosess-statistikk"</string>
@@ -2696,7 +2697,7 @@
     <string name="user_grant_admin" msgid="5942118263054572074">"Gjør denne brukeren til administrator"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Slett brukeren"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Vil du slå på telefonsamtaler og SMS?"</string>
-    <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Anrops- og tekstmeldingsloggen deles med denne brukeren."</string>
+    <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Anrops- og SMS-loggen deles med denne brukeren."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Vil du fjerne administratorrettigheter?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Hvis du fjerner denne brukerens administratorrettigheter, kan du eller en annen administrator gi dem tilbake igjen senere."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Nødinformasjon"</string>
@@ -2844,7 +2845,7 @@
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Klonede apper"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Opprett en ny forekomst av en app, slik at du kan bruke to kontoer samtidig."</string>
     <string name="desc_cloneable_app_list_text" msgid="3354586725814708688">"Apper som kan klones."</string>
-    <string name="cloned_apps_summary" msgid="8805362440770795709">"<xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g> er klonet, og <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g> kan klones"</string>
+    <string name="cloned_apps_summary" msgid="8805362440770795709">"<xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g> er klonet og <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g> kan klones"</string>
     <string name="delete_all_app_clones" msgid="3489053361980624999">"Slett alle appkloner"</string>
     <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"Kunne ikke slette alle appkloner"</string>
     <string name="cloned_app_creation_summary" msgid="4642627294993918502">"Oppretter …"</string>
@@ -2954,7 +2955,8 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, avansert ringing, 5g-ringing"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"Legg til språk, legg til et språk"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"tekststørrelse, stor skrift, stor skrifttype, stor tekst, nedsatt synsevne, gjør tekst større, tekstforstørrer, forstørring av tekst"</string>
-    <string name="keywords_always_show_time_info" msgid="645658129239452778">"alltid-på-skjerm, AOD"</string>
+    <!-- no translation found for keywords_always_show_time_info (1066752498285497595) -->
+    <skip />
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, brikke, leser"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volum, vibrasjon, ikke forstyrr"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Medievolum"</string>
@@ -3459,7 +3461,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Krev passord for å løsne apper"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Lås enheten når apper løsnes"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Bekreft sletting av SIM-kort"</string>
-    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Bekreft at det er deg, før du sletter et eSIM-kort"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Bekreft at du er deg, før du sletter et eSIM-kort"</string>
     <string name="memtag_title" msgid="5096176296797727201">"Beta, avansert minnebeskyttelse"</string>
     <string name="memtag_toggle" msgid="8695028758462939212">"Avansert minnebeskyttelse"</string>
     <string name="memtag_intro" msgid="579408691329568953">"Denne betafunksjonen bidrar til å beskytte enheten mot feil som kan utgjøre en sikkerhetsrisiko."</string>
@@ -4057,7 +4059,10 @@
     <string name="autofill_app" msgid="7595308061826307921">"Autofylltjeneste"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Standard autofylltjeneste"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Passord"</string>
-    <string name="credman_credentials" msgid="7413302794874989255">"Passord, passnøkler og datatjenester"</string>
+    <!-- no translation found for credman_chosen_app_title (4547405511458518096) -->
+    <skip />
+    <!-- no translation found for credman_credentials (4931371941253324143) -->
+    <skip />
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# passord}other{# passord}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"auto, fyll, autofyll, passord"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"data, tilgangsnøkkel, passord"</string>
@@ -4394,7 +4399,7 @@
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Systemstandard"</string>
     <string name="default_app_none" msgid="5420632042222036264">"Ingen"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Dette valget er ikke gyldig lenger. Prøv på nytt."</string>
-    <string name="power_menu_setting_name" msgid="2394440932633137229">"Trykk og hold på av/på-knappen"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Trykk og hold av/på-knappen"</string>
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Trykk og hold på av/på-knappen for å åpne"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Av/på-meny"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Digital assistent"</string>
@@ -4412,10 +4417,8 @@
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"Vis QR-kodeskanneren"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Gi tilgang til QR-kodeskanneren fra låseskjermen"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Vis enhetsstyring"</string>
-    <!-- no translation found for lockscreen_privacy_controls_summary (7522918441738915364) -->
-    <skip />
-    <!-- no translation found for lockscreen_trivial_controls_setting_toggle (2174300719855112358) -->
-    <skip />
+    <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"Fra låseskjermen"</string>
+    <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"Bruk enhetskontroller"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"For å bruke, slå først på «Vis enhetsstyring»"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Vis klokken på to linjer når det er tilgjengelig"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Klokke på to linjer"</string>
@@ -4697,5 +4700,6 @@
     <string name="contrast_medium" msgid="384414510709285811">"Middels"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Høy"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Denne appen kan bare åpnes i ett vindu"</string>
-    <string name="note_task_button_label" msgid="1741456863714912927">"Notatskriving"</string>
+    <!-- no translation found for note_task_shortcut_label (1589543982691587932) -->
+    <skip />
 </resources>

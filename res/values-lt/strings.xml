@@ -159,7 +159,8 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Numatytoji sistemos vertė"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Šios programos kalbos pasirinkimas nepasiekiamas iš skilties „Nustatymai“."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Kalba gali skirtis nuo programoje pasiekiamų kalbų. Kai kuriose programose šis nustatymas gali būti nepalaikomas."</string>
-    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Čia rodomos tik kalbos pasirinkimą palaikančios programos."</string>
+    <!-- no translation found for desc_app_locale_selection_supported (6744909281573556379) -->
+    <skip />
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Jūsų sistema, programos ir svetainės naudoja pirmąją palaikomą kalbą iš pageidaujamų sąrašo."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Norėdami pasirinkti kalbą kiekvienai programai, eikite į programų kalbų nustatymus."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Sužinokite daugiau apie programos kalbas"</string>
@@ -173,7 +174,6 @@
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Leiskite programoms žinoti jūsų regiono nuostatas, kad galėtų suasmeninti funkcijas."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Programos naudos jūsų regiono nuostatas, kai bus galima."</string>
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperatūra"</string>
-    <string name="calendar_preferences_title" msgid="8312485828206542600">"Kalendorius"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Pirma savaitės diena"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Skaičių nuostatos"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Naudoti numatytąją programą"</string>
@@ -401,7 +401,7 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Jis yra telefono užpakalinėje dalyje. Naudokite smilių."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Kontrolinio kodo jutiklis yra jūsų ekrane. Kontrolinį kodą užfiksuosite kitame ekrane."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Pradėti"</string>
-    <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Raskite jutiklį pirštu braukdami per ekraną. Palieskite ir palaikykite kontrolinio kodo jutiklį."</string>
+    <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Raskite jutiklį pirštu braukdami per ekraną. Palieskite ir palaikykite piršto atspaudo jutiklį."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Įrenginio ir piršto antspaudo jutiklio vietos iliustracija"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Pavadinimas"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"Gerai"</string>
@@ -411,7 +411,7 @@
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Uždėkite pirštą ant jutiklio ir pakelkite, kai pajusite vibravimą"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Laikykite pirštą prispaustą prie jutiklio, kol pajusite vibraciją"</string>
     <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"Nespausdami mygtuko laikykite kontrolinį kodą ant jutiklio, kol pajusite vibravimą.\n\nKaskart šiek tiek pajudinkite pirštą. Taip užfiksuojama daugiau kontrolinio kodo."</string>
-    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Palieskite ir palaikykite kontrolinio kodo jutiklį"</string>
+    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Palieskite ir palaikykite piršto atspaudo jutiklį"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Patraukite ir vėl prilieskite"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Dar kartą"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Stebėkite kontrolinio kodo piktogramą"</string>
@@ -429,7 +429,7 @@
     <string name="security_settings_sfps_enroll_progress_a11y_message" msgid="6450772721691523736">"Registracija kontroliniu kodu: <xliff:g id="PERCENTAGE">%d</xliff:g> proc."</string>
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Užregistruota <xliff:g id="PERCENTAGE">%d</xliff:g> proc."</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registracija kontroliniu kodu: <xliff:g id="PERCENTAGE">%d</xliff:g> proc."</string>
-    <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Kontrolinis kodas pridėtas"</string>
+    <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Piršto atspaudas pridėtas"</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Palieskite, kad bet kada atrakintumėte"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Palieskite jutiklį, kad atrakintumėte, net kai ekranas išjungtas. Tai padidina atsitiktinio atrakinimo tikimybę."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Ekranas, atrakinti"</string>
@@ -455,7 +455,7 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Oi, tai ne jutiklis"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Smiliumi palieskite jutiklį tel. užp. dalyje."</string>
     <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Registracija neužbaigta"</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Baigėsi kontrolinio kodo sąrankos skirtasis laikas"</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Baigėsi piršto atspaudo sąrankos skirtasis laikas"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Dabar bandykite dar kartą arba vėliau nustatykite kontrolinį kodą skiltyje „Nustatymai“"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Nepavyko užregistruoti piršto antspaudo. Bandykite dar kartą arba atlikite tai kitu pirštu."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Pridėti kitą"</string>
@@ -2180,7 +2180,8 @@
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Įjunkite Akumuliatoriaus tausojimo priemonę"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Akumuliatoriaus energija gali išsekti greičiau nei įprasta"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"Akumuliatoriaus tausojimo priemonė įjungta"</string>
-    <string name="battery_saver_link_a11y" msgid="740558184830458845">"Sužinokite daugiau apie Akumuliatoriaus tausojimo priemonę"</string>
+    <!-- no translation found for battery_saver_link_a11y (6613079613524512257) -->
+    <skip />
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Kai kurios funkcijos gali būti apribotos"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Vartojama daugiau akumuliatoriaus energijos"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Žr. daugiausia energijos vartojančias programas"</string>
@@ -2227,7 +2228,7 @@
     <string name="battery_missing_message" msgid="400958471814422770">"Nuskaitant akumuliatoriaus skaitiklį iškilo problema."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Palieskite, jei norite sužinoti daugiau apie šią klaidą"</string>
-    <string name="power_screen" msgid="3926703168513988776">"Ekranas"</string>
+    <string name="power_screen" msgid="4596900105850963806">"Ekranas"</string>
     <string name="power_cpu" msgid="1820472721627148746">"Centrinis procesorius"</string>
     <string name="power_flashlight" msgid="8993388636332573202">"Žibintuvėlis"</string>
     <string name="power_camera" msgid="4778315081581293923">"Fotoaparatas"</string>
@@ -2306,9 +2307,9 @@
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Akumuliatoriaus naudojimas su pasirinkta <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Įrenginio naudojimo laikas nuo paskutinio visiško įkrovimo"</string>
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Įrenginio naudojimo laikas: <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_spinner_by_apps (78924517671977945) -->
+    <!-- no translation found for battery_usage_spinner_view_by_apps (8769276544072098082) -->
     <skip />
-    <!-- no translation found for battery_usage_spinner_by_systems (6489690892421179515) -->
+    <!-- no translation found for battery_usage_spinner_view_by_systems (7904104223212160541) -->
     <skip />
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Procesų statistika"</string>
@@ -2954,7 +2955,8 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"Vo5G, VoNR, išplėstinės skambinimo parinktys, 5G skambinimas"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"pridėti kalbą"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"teksto dydis, didelis spaudinys, didelis šriftas, didelis tekstas, sutrikusio regėjimo asmuo, padaryti tekstą didesnį, šrifto didinimo priemonė, šrifto padidinimas"</string>
-    <string name="keywords_always_show_time_info" msgid="645658129239452778">"visada veikiantis ekranas, AOD"</string>
+    <!-- no translation found for keywords_always_show_time_info (1066752498285497595) -->
+    <skip />
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, žyma, skaitytuvas"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Garsumas, vibravimas, netrukdymo režimas"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Medijų garsumas"</string>
@@ -4059,7 +4061,10 @@
     <string name="autofill_app" msgid="7595308061826307921">"Aut. pildymo paslauga"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Numatytoji automatinio pildymo paslauga"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Slaptažodžiai"</string>
-    <string name="credman_credentials" msgid="7413302794874989255">"Slaptažodžiai, „passkey“ ir duomenų paslaugos"</string>
+    <!-- no translation found for credman_chosen_app_title (4547405511458518096) -->
+    <skip />
+    <!-- no translation found for credman_credentials (4931371941253324143) -->
+    <skip />
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# slaptažodis}one{# slaptažodis}few{# slaptažodžiai}many{# slaptažodžio}other{# slaptažodžių}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"automatinis, užpildyti, automatinis pildymas, slaptažodis"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"duomenys, „passkey“, slaptažodis"</string>
@@ -4414,10 +4419,8 @@
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"Rodyti QR kodų skaitytuvą"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Leisti prieigą prie QR kodų skaitytuvo iš užrakinimo ekrano"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Rodyti įrenginio valdiklius"</string>
-    <!-- no translation found for lockscreen_privacy_controls_summary (7522918441738915364) -->
-    <skip />
-    <!-- no translation found for lockscreen_trivial_controls_setting_toggle (2174300719855112358) -->
-    <skip />
+    <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"Iš užrakinimo ekrano"</string>
+    <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"Įrenginio valdiklių naudojimas"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Jei norite naudoti, pirmiausia įjunkite parinktį „Rodyti įrenginio valdiklius“"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Rodyti vertikalųjį laikrodį, kai jis pasiekiamas"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Vertikalusis laikrodis"</string>
@@ -4481,9 +4484,9 @@
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Aktyvi"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Neaktyvi"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Numatytoji <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="default_active_sim_calls" msgid="2390973682556353558">"skambučiai"</string>
+    <string name="default_active_sim_calls" msgid="2390973682556353558">"skambučiams"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
-    <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"mobiliojo ryšio duomenys"</string>
+    <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"mobiliojo ryšio duomenims"</string>
     <string name="wifi_scan_notify_message" msgid="1331238142061476869">"Kad pagerintų įrenginio funkcijas, programos ir paslaugos vis tiek gali bet kada nuskaityti ieškodamos „Wi‑Fi“ tinklų, net jei „Wi‑Fi“ išjungtas. Tai gali būti naudojama siekiant pagerinti pagal vietovę teikiamas funkcijas ir paslaugas. Tai galite pakeisti „Wi-Fi“ nuskaitymo nustatymuose."</string>
     <string name="wifi_scan_change" msgid="8438320311511852918">"Pakeisti"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
@@ -4701,5 +4704,6 @@
     <string name="contrast_medium" msgid="384414510709285811">"Vidutinis"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Aukštas"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Šią programą galima atidaryti tik viename lange"</string>
-    <string name="note_task_button_label" msgid="1741456863714912927">"Užrašų kūrimas"</string>
+    <!-- no translation found for note_task_shortcut_label (1589543982691587932) -->
+    <skip />
 </resources>

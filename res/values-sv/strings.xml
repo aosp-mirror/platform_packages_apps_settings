@@ -159,7 +159,8 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Systemets standardinställning"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Det går inte att välja språk för den här appen i Inställningar."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Alla språk kanske inte är tillgängliga i appen. Vissa appar kanske inte har stöd för denna inställning."</string>
-    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Endast appar som har stöd för språkval visas här."</string>
+    <!-- no translation found for desc_app_locale_selection_supported (6744909281573556379) -->
+    <skip />
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Systemet, apparna och webbplatserna använder det första språket som stöds från din lista över föredragna språk."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Gå till en apps inställningar för att välja språk i den."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Läs mer om appspråk"</string>
@@ -173,7 +174,6 @@
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Ge appar åtkomst till dina regionala inställningar så att din upplevelse kan anpassas."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Appar använder dina regionala inställningar om möjligt."</string>
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperatur"</string>
-    <string name="calendar_preferences_title" msgid="8312485828206542600">"Kalender"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Första dagen i veckan"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Sifferinställningar"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Använd appstandard"</string>
@@ -654,7 +654,7 @@
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Felsökningslogg för NFC-stack"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Öka loggningsnivå för NFC-stack"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Verbose-logg för NFC för leverantörens felsökning"</string>
-    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Ta med ytterligare enhetsspecifika leverantörsloggar i felrapporterna, vilka kan innehålla privata uppgifter."</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Inkludera fler leverantörsloggar för enheter i felrapporterna. De kan innehålla privatuppgifter."</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"Ofiltrerad NFC NCI-logg"</string>
     <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Samla detaljerade NFC-paket, vilka kan innehålla privata uppgifter."</string>
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Vill du starta om enheten?"</string>
@@ -1116,7 +1116,7 @@
     <string name="eid_multi_sim" msgid="9087924808336397804">"EID (SIM-kortsplats <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (SIM-kortplats <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (SIM-kortplats <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (primär)"</string>
-    <string name="view_saved_network" msgid="1232387673095080910">"Välj ett sparat nätverk för att visa"</string>
+    <string name="view_saved_network" msgid="1232387673095080910">"Välj ett sparat nätverk att visa"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL-version"</string>
@@ -2180,7 +2180,8 @@
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Aktivera batterisparläget"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Batteriet kan ta slut snabbare än vanligt"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"Batterisparläge på"</string>
-    <string name="battery_saver_link_a11y" msgid="740558184830458845">"Läs mer om batterisparläget"</string>
+    <!-- no translation found for battery_saver_link_a11y (6613079613524512257) -->
+    <skip />
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Vissa funktioner kan begränsas"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Högre batteriförbrukning"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Se appar med högst batteriförbrukning"</string>
@@ -2227,7 +2228,7 @@
     <string name="battery_missing_message" msgid="400958471814422770">"Batteriindikatorn visas inte."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Tryck för att läsa mer om det här felet"</string>
-    <string name="power_screen" msgid="3926703168513988776">"Skärm"</string>
+    <string name="power_screen" msgid="4596900105850963806">"Skärm"</string>
     <string name="power_cpu" msgid="1820472721627148746">"CPU"</string>
     <string name="power_flashlight" msgid="8993388636332573202">"Ficklampa"</string>
     <string name="power_camera" msgid="4778315081581293923">"Kamera"</string>
@@ -2306,9 +2307,9 @@
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Batteriförbrukning för <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Skärmtid sedan batteriet senast var fulladdat"</string>
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Skärmtid för <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_spinner_by_apps (78924517671977945) -->
+    <!-- no translation found for battery_usage_spinner_view_by_apps (8769276544072098082) -->
     <skip />
-    <!-- no translation found for battery_usage_spinner_by_systems (6489690892421179515) -->
+    <!-- no translation found for battery_usage_spinner_view_by_systems (7904104223212160541) -->
     <skip />
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Processtatistik"</string>
@@ -2954,7 +2955,8 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, avancerade samtal, 5g-samtal"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"lägg till språk, lägg till ett språk"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"textstorlek, stora tecken, stort teckensnitt, stor text, nedsatt syn, göra texten större, teckenförstoring, förstora teckensnitt"</string>
-    <string name="keywords_always_show_time_info" msgid="645658129239452778">"alltid på, AOD"</string>
+    <!-- no translation found for keywords_always_show_time_info (1066752498285497595) -->
+    <skip />
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, etikett, läsare"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volym, vibrera, stör ej"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Medievolym"</string>
@@ -3648,12 +3650,9 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Tillåt hanteringsåtkomst för alla filer"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Tillåt att den här appen får läsa, redigera och radera alla filer på enheten och eventuella anslutna lagringsutrymmen. Om du beviljar behörigheten kan appen komma åt filer utan att du informeras."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Har åtkomst till alla filer"</string>
-    <!-- no translation found for full_screen_intent_title (2461171326558306927) -->
-    <skip />
-    <!-- no translation found for permit_full_screen_intent (7103548865544643514) -->
-    <skip />
-    <!-- no translation found for footer_description_full_screen_intent (4600171646567760347) -->
-    <skip />
+    <string name="full_screen_intent_title" msgid="2461171326558306927">"Visa aviseringar på hela skärmen"</string>
+    <string name="permit_full_screen_intent" msgid="7103548865544643514">"Tillåt att appen visar aviseringar på hela skärmen när enheten är låst"</string>
+    <string name="footer_description_full_screen_intent" msgid="4600171646567760347">"Tillåt att appen visar aviseringar som täcker hela skärmen när enheten är låst. Sådana aviseringar kan användas i appar för att lyfta fram alarm, inkommande samtal och andra brådskande aviseringar."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Appar för mediehantering"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Tillåt att appen hanterar media"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Om du tillåter detta kan appen modifiera eller radera mediefiler som skapats med andra appar utan att du tillfrågas. Appen måste ha åtkomst till filer och media."</string>
@@ -4060,7 +4059,10 @@
     <string name="autofill_app" msgid="7595308061826307921">"Autofylltjänst"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Standardtjänst för autofyll"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Lösenord"</string>
-    <string name="credman_credentials" msgid="7413302794874989255">"Lösenord, nycklar och datatjänster"</string>
+    <!-- no translation found for credman_chosen_app_title (4547405511458518096) -->
+    <skip />
+    <!-- no translation found for credman_credentials (4931371941253324143) -->
+    <skip />
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# lösenord}other{# lösenord}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"auto, fyll, autofyll, lösenord"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"data, nyckel, lösenord"</string>
@@ -4415,10 +4417,8 @@
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"Visa QR-skanner"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Ge åtkomst till QR-skanner från låsskärmen"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Visa enhetsstyrning"</string>
-    <!-- no translation found for lockscreen_privacy_controls_summary (7522918441738915364) -->
-    <skip />
-    <!-- no translation found for lockscreen_trivial_controls_setting_toggle (2174300719855112358) -->
-    <skip />
+    <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"Från låsskärmen"</string>
+    <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"Använd enhetsstyrning"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Aktivera först Visa enhetsstyrning för att använda"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Visa klocka på två rader när så är möjligt"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Klocka på två rader"</string>
@@ -4700,5 +4700,6 @@
     <string name="contrast_medium" msgid="384414510709285811">"Medelhög"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Hög"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Denna app kan bara vara öppen i ett fönster"</string>
-    <string name="note_task_button_label" msgid="1741456863714912927">"Anteckna"</string>
+    <!-- no translation found for note_task_shortcut_label (1589543982691587932) -->
+    <skip />
 </resources>

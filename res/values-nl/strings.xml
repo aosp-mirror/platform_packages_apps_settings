@@ -159,7 +159,8 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Systeemstandaard"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Taalselectie voor deze app is niet beschikbaar via Instellingen."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"De taal kan verschillen van de beschikbare talen in de app. Sommige apps ondersteunen deze instelling mogelijk niet."</string>
-    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Hier zie je alleen apps die taalselectie ondersteunen."</string>
+    <!-- no translation found for desc_app_locale_selection_supported (6744909281573556379) -->
+    <skip />
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Je systeem, apps en websites gebruiken de eerste ondersteunde taal uit je voorkeurstalen."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Ga naar de taalinstellingen van een app als je een taal voor elke app wilt selecteren."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Meer informatie over app-talen"</string>
@@ -170,10 +171,9 @@
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Deze taal kan niet worden gebruikt als systeemtaal, maar je hebt apps en websites laten weten dat je de voorkeur geeft aan deze taal."</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionale voorkeuren"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Voorkeuren voor eenheden en cijfers instellen"</string>
-    <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Laat apps je regionale voorkeuren weten zodat ze de functionaliteit kunnen personaliseren."</string>
+    <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Stel je regionale voorkeuren in voor apps, zodat ze de functionaliteit kunnen personaliseren."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Apps gebruiken waar mogelijk je regionale voorkeuren."</string>
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperatuur"</string>
-    <string name="calendar_preferences_title" msgid="8312485828206542600">"Agenda"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Eerste dag van de week"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Cijfervoorkeuren"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"App-standaard gebruiken"</string>
@@ -186,7 +186,7 @@
     <string name="thursday_first_day_of_week" msgid="3035885630945594833">"donderdag"</string>
     <string name="friday_first_day_of_week" msgid="7074795061812083541">"vrijdag"</string>
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"zaterdag"</string>
-    <string name="title_regional_pref_footer" msgid="7450438024324794380">"Als een app geen regionale voorkeuren ondersteunt, gebruikt de app de standaard landinstellingen van de app."</string>
+    <string name="title_regional_pref_footer" msgid="7450438024324794380">"Als een app geen regionale voorkeuren ondersteunt, worden de standaard landinstellingen van de app gebruikt."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Meer informatie over taalvoorkeuren"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Geselecteerde taal verwijderen?}other{Geselecteerde talen verwijderen?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Tekst wordt getoond in een andere taal."</string>
@@ -417,11 +417,11 @@
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Volg het vingerafdrukicoon"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Raak de sensor meerdere keren aan om de verschillende delen van je vingerafdruk toe te voegen."</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Tik en houd het vingerafdrukicoon vast elke keer dat het beweegt. Zo kan er meer van je vingerafdruk worden geregistreerd."</string>
-    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Houd het puntje van je vingertop op de sensor"</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Houd je vingertop op de sensor"</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Plaats de linkerrand van je vinger"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Plaats de rechterrand van je vinger"</string>
     <string name="security_settings_sfps_enroll_finger_center_title" msgid="1320688855767675739">"Plaats het midden van je vingertop op de sensor"</string>
-    <string name="security_settings_sfps_enroll_fingertip_title" msgid="2737520837684516446">"Houd het puntje van je vingertop op de sensor"</string>
+    <string name="security_settings_sfps_enroll_fingertip_title" msgid="2737520837684516446">"Houd je vingertop op de sensor"</string>
     <string name="security_settings_sfps_enroll_left_edge_title" msgid="9022963735924413343">"Plaats de linkerkant van je vinger op de sensor"</string>
     <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"Plaats tot slot de rechterkant van je vinger op de sensor"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Leg de zijkant van je vingerafdruk op de sensor en houd vast. Doe dan hetzelfde aan de andere kant."</string>
@@ -1651,7 +1651,7 @@
     <string name="show_ime" msgid="4334255501724746849">"Schermtoetsenbord gebruiken"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Toon op het scherm terwijl het fysieke toetsenbord actief is"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Sneltoetsen"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Lijst met sneltoetsen tonen"</string>
+    <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Toon lijst met sneltoetsen"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Toetsenborden en tools van werkprofiel"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Schermtoetsenbord voor werk"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Standaard"</string>
@@ -1692,7 +1692,7 @@
     <string name="trackpad_switch_apps_title" msgid="7342032935377284039">"Schakelen tussen apps"</string>
     <string name="trackpad_switch_apps_summary" msgid="9193942041912927440">"Swipe naar links of rechts met 4 vingers"</string>
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Functietoetsen"</string>
-    <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Het gedrag van toetsen wijzigen"</string>
+    <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Wijzig het gedrag van toetsen"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"Alles resetten"</string>
     <string name="modifier_keys_default_summary" msgid="8701640508670973258">"Standaard"</string>
     <string name="modifier_keys_reset_message" msgid="5236994817619936058">"Weet je zeker dat je alle functietoetsen wilt terugzetten op de standaardinstellingen?"</string>
@@ -1785,7 +1785,7 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Snelkoppeling voor vergroting"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Vergrootglas bij typen"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Een vergrootglas volgt de tekst terwijl je typt"</string>
-    <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Actief houden bij wisselen van apps"</string>
+    <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Aan laten bij wisselen van apps"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Vergrootglas blijft aan en zoomt uit als je van app wisselt"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Joystick"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Activeer en verplaats het vergrootglas met een joystick op het scherm. Houd ingedrukt en sleep met de joystick om het vergrootglas te bedienen. Tik en sleep om de joystick zelf te verplaatsen."</string>
@@ -1832,7 +1832,7 @@
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Zo zoom je in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gebruik de snelkoppeling om de vergroting te starten.&lt;br/&gt; {1,number,integer}. Tik op het scherm.&lt;br/&gt; {2,number,integer}. Sleep met 2 vingers om te navigeren op het scherm.&lt;br/&gt; {3,number,integer}. Knijp met 2 vingers om het zoomniveau aan te passen.&lt;br/&gt; {4,number,integer}. Gebruik de snelkoppeling om de vergroting te stoppen.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Zo zoom je tijdelijk in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Zorg dat je vergrotingstype is ingesteld op volledig scherm.&lt;br/&gt; {1,number,integer}. Gebruik de snelkoppeling om de vergroting te starten.&lt;br/&gt; {2,number,integer}. Houd je vinger op het scherm.&lt;br/&gt; {3,number,integer}. Sleep met een vinger om te navigeren op het scherm.&lt;br/&gt; {4,number,integer}. Haal je vinger van het scherm om de vergroting te stoppen."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Als vergroting aanstaat, kun je op je scherm het beeld vergroten.\n\n"<b>"Als je wilt inzoomen"</b>", start je de vergroting en tik je waar dan ook op het scherm.\n"<ul><li>"Veeg met 2 of meer vingers om te scrollen."</li>\n<li>"Knijp 2 of meer vingers samen om de zoom aan te passen."</li></ul>\n\n<b>"Als je tijdelijk wilt zoomen"</b>", start je de vergroting, waarna je ergens op het scherm tikt en vasthoudt.\n"<ul><li>"Sleep om een ander deel van het scherm weer te geven."</li>\n<li>"Haal je vinger van het scherm om uit te zoomen."</li></ul>\n\n"Je kunt niet inzoomen op het toetsenbord of de navigatiebalk."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Pagina <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> van <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Toegankelijkheidsknop gebruiken om te openen"</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Knop Toegankelijkheid gebruiken om te openen"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Houd de volumetoetsen ingedrukt om te openen"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Tik 3 keer op het scherm om te openen"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Gebaar gebruiken om te openen"</string>
@@ -1873,7 +1873,7 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Snelkoppeling vanaf vergrendelscherm"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Sta toe dat de functiesnelkoppeling wordt aangezet vanaf het vergrendelscherm. Houd beide volumetoetsen een paar seconden ingedrukt."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Knop Toegankelijkheid"</string>
-    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Toegankelijkheidsknop en -gebaar"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Knop Toegankelijkheid en gebaar"</string>
     <string name="accessibility_button_intro_text" msgid="80993874471745687">"Krijg snel vanaf elk scherm toegang tot toegankelijkheidsfuncties"</string>
     <string name="accessibility_button_about_title" msgid="3581116105084067926">"Over de knop Toegankelijkheid"</string>
     <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Over de knop en het gebaar voor toegankelijkheid"</string>
@@ -2086,8 +2086,8 @@
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Weigeren"</string>
     <string name="accessibility_dialog_button_stop" msgid="7295448112784528196">"Stoppen"</string>
     <string name="accessibility_dialog_button_cancel" msgid="4813234247237851121">"Annuleren"</string>
-    <string name="disable_service_title" msgid="2909108731776956167">"\'<xliff:g id="SERVICE">%1$s</xliff:g>\' beëindigen?"</string>
-    <string name="disable_service_message" msgid="4814173941688548016">"Als je op <xliff:g id="STOP">%1$s</xliff:g> tikt, wordt \'<xliff:g id="SERVICE">%2$s</xliff:g>\' gestopt."</string>
+    <string name="disable_service_title" msgid="2909108731776956167">"<xliff:g id="SERVICE">%1$s</xliff:g> beëindigen?"</string>
+    <string name="disable_service_message" msgid="4814173941688548016">"Als je op <xliff:g id="STOP">%1$s</xliff:g> tikt, wordt <xliff:g id="SERVICE">%2$s</xliff:g> gestopt."</string>
     <string name="accessibility_no_services_installed" msgid="3725569493860028593">"Geen services geïnstalleerd"</string>
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"Geen service geselecteerd"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"Geen beschrijving opgegeven."</string>
@@ -2180,7 +2180,8 @@
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Batterijbesparing aanzetten"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Batterij is mogelijk eerder leeg dan normaal"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"Batterijbesparing aan"</string>
-    <string name="battery_saver_link_a11y" msgid="740558184830458845">"Meer informatie over Batterijbesparing"</string>
+    <!-- no translation found for battery_saver_link_a11y (6613079613524512257) -->
+    <skip />
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Sommige functies zijn mogelijk beperkt"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Hoger batterijverbruik"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Apps met het hoogste verbruik bekijken"</string>
@@ -2227,7 +2228,7 @@
     <string name="battery_missing_message" msgid="400958471814422770">"Probleem bij het lezen van de batterijmeter."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Tik voor meer informatie over deze fout"</string>
-    <string name="power_screen" msgid="3926703168513988776">"Scherm"</string>
+    <string name="power_screen" msgid="4596900105850963806">"Scherm"</string>
     <string name="power_cpu" msgid="1820472721627148746">"CPU"</string>
     <string name="power_flashlight" msgid="8993388636332573202">"Zaklamp"</string>
     <string name="power_camera" msgid="4778315081581293923">"Camera"</string>
@@ -2306,9 +2307,9 @@
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Batterijgebruik voor <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Schermtijd sinds laatste keer dat de batterij volledig werd opgeladen"</string>
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Schermtijd voor <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_spinner_by_apps (78924517671977945) -->
+    <!-- no translation found for battery_usage_spinner_view_by_apps (8769276544072098082) -->
     <skip />
-    <!-- no translation found for battery_usage_spinner_by_systems (6489690892421179515) -->
+    <!-- no translation found for battery_usage_spinner_view_by_systems (7904104223212160541) -->
     <skip />
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&amp;lt, <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Processtatistieken"</string>
@@ -2954,7 +2955,8 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, geavanceerd bellen, 5g-bellen, bellen via 5g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"taal toevoegen, een taal toevoegen"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"tekstgrootte, grote letters, groot lettertype, grote tekst, slechtziend, tekst groter maken, lettertype vergroten, vergroting van lettertype"</string>
-    <string name="keywords_always_show_time_info" msgid="645658129239452778">"scherm dat altijd actief is, AOD"</string>
+    <!-- no translation found for keywords_always_show_time_info (1066752498285497595) -->
+    <skip />
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tag, lezer"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volume, trillen, niet storen"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Mediavolume"</string>
@@ -3648,12 +3650,9 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Toegang geven om alle bestanden te beheren"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Sta toe dat deze app alle bestanden op dit apparaat of gekoppelde opslagvolumes kan lezen, aanpassen of verwijderen. Als je dit toestaat, kan de app zonder jouw medeweten toegang tot bestanden krijgen."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Mag toegang tot alle bestanden hebben"</string>
-    <!-- no translation found for full_screen_intent_title (2461171326558306927) -->
-    <skip />
-    <!-- no translation found for permit_full_screen_intent (7103548865544643514) -->
-    <skip />
-    <!-- no translation found for footer_description_full_screen_intent (4600171646567760347) -->
-    <skip />
+    <string name="full_screen_intent_title" msgid="2461171326558306927">"Meldingen op volledig scherm tonen"</string>
+    <string name="permit_full_screen_intent" msgid="7103548865544643514">"Toestaan dat de app meldingen op volledig scherm toont als het apparaat is vergrendeld"</string>
+    <string name="footer_description_full_screen_intent" msgid="4600171646567760347">"Toestaan dat de app meldingen op het volledige scherm toont als het apparaat is vergrendeld. Apps kunnen zo alarmen, inkomende gesprekken of andere urgente meldingen onder de aandacht brengen."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Apps voor mediabeheer"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"App toestaan om media te beheren"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Als je dit toestaat, kan deze app ongevraagd mediabestanden bewerken of verwijderen die met andere apps zijn gemaakt. De app heeft toegangsrechten nodig voor bestanden en media."</string>
@@ -4060,7 +4059,10 @@
     <string name="autofill_app" msgid="7595308061826307921">"Service voor automatisch invullen"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Standaardservice voor automatisch invullen"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Wachtwoorden"</string>
-    <string name="credman_credentials" msgid="7413302794874989255">"Wachtwoorden, toegangssleutels en gegevensservices"</string>
+    <!-- no translation found for credman_chosen_app_title (4547405511458518096) -->
+    <skip />
+    <!-- no translation found for credman_credentials (4931371941253324143) -->
+    <skip />
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# wachtwoord}other{# wachtwoorden}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"automatisch, invullen, automatisch invullen, wachtwoord"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"gegevens, toegangssleutel, wachtwoord"</string>
@@ -4415,10 +4417,8 @@
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"QR-codescanner tonen"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Toegang tot QR-codescanner toestaan vanaf vergrendelscherm"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Apparaatbediening tonen"</string>
-    <!-- no translation found for lockscreen_privacy_controls_summary (7522918441738915364) -->
-    <skip />
-    <!-- no translation found for lockscreen_trivial_controls_setting_toggle (2174300719855112358) -->
-    <skip />
+    <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"Vanuit het vergrendelscherm"</string>
+    <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"Apparaatbediening gebruiken"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Als je dit wilt gebruiken, zet je eerst Apparaatbediening tonen aan"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Klok met 2 regels laten zien als die beschikbaar is"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Klok met 2 regels"</string>
@@ -4700,5 +4700,6 @@
     <string name="contrast_medium" msgid="384414510709285811">"Gemiddeld"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Hoog"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Deze app kan maar in 1 venster worden geopend"</string>
-    <string name="note_task_button_label" msgid="1741456863714912927">"Aantekeningen maken"</string>
+    <!-- no translation found for note_task_shortcut_label (1589543982691587932) -->
+    <skip />
 </resources>
