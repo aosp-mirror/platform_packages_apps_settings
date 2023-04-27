@@ -491,6 +491,15 @@
     <!-- Slice Uri to query nearby devices. -->
     <string name="config_nearby_devices_slice_uri" translatable="false">content://com.google.android.gms.nearby.fastpair/device_status_list_item</string>
 
+    <!-- BT Slice intent action. To support Settings 2 panel, BT slice can't use PendingIntent.send(). Therefore, here defines the Slice intent action. -->
+    <string name="config_bt_slice_intent_action" translatable="false"></string>
+    <!-- BT Slice pending intent action. To support Settings 2 panel, BT slice can't use PendingIntent.send(). Therefore, here defines the Slice pending intent action. -->
+    <string name="config_bt_slice_pending_intent_action" translatable="false"></string>
+    <!-- BT Slice EXTRA_INTENT. To support Settings 2 panel, BT slice can't use PendingIntent.send(). Therefore, here defines the Slice EXTRA_INTENT. -->
+    <string name="config_bt_slice_extra_intent" translatable="false"></string>
+    <!-- BT Slice EXTRA_PENDING_INTENT. To support Settings 2 panel, BT slice can't use PendingIntent.send(). Therefore, here defines the Slice EXTRA_PENDING_INTENT. -->
+    <string name="config_bt_slice_extra_pending_intent" translatable="false"></string>
+
     <!-- Grayscale settings intent -->
     <string name="config_grayscale_settings_intent" translatable="false"></string>
 
