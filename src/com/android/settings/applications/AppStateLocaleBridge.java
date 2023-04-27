@@ -85,7 +85,7 @@ public class AppStateLocaleBridge extends AppStateBaseBridge {
                         Log.d(TAG, "[" + entry.info.packageName + "]" + " has No extra info.");
                         return false;
                     }
-                    return (Boolean) entry.extraInfo;
+                    return entry.extraInfo == Boolean.TRUE;
                 }
             };
 
