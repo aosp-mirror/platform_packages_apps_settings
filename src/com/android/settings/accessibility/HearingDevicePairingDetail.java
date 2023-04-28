@@ -20,6 +20,7 @@ import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothUuid;
 import android.bluetooth.le.ScanFilter;
+import android.content.Context;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -45,6 +46,12 @@ public class HearingDevicePairingDetail extends BluetoothDevicePairingDetailBase
                 .setServiceData(BluetoothUuid.HEARING_AID, new byte[]{0}, new byte[]{0})
                 .build();
         setFilter(Collections.singletonList(filter));
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(ViewAllBluetoothDevicesPreferenceController.class).init(this);
     }
 
     @Override

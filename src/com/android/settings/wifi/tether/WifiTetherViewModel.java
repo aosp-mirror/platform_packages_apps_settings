@@ -83,8 +83,30 @@ public class WifiTetherViewModel extends AndroidViewModel {
 
     @Override
     protected void onCleared() {
-        mWifiHotspotRepository.getSecurityType().removeObserver(mSecurityTypeObserver);
-        mWifiHotspotRepository.getSpeedType().removeObserver(mSpeedTypeObserver);
+        if (mSecuritySummary != null) {
+            mWifiHotspotRepository.getSecurityType().removeObserver(mSecurityTypeObserver);
+        }
+        if (mSpeedSummary != null) {
+            mWifiHotspotRepository.getSpeedType().removeObserver(mSpeedTypeObserver);
+        }
+    }
+
+    /**
+     * Return whether Wi-Fi Hotspot Speed Feature is available or not.
+     *
+     * @return {@code true} if Wi-Fi Hotspot Speed Feature is available
+     */
+    public boolean isSpeedFeatureAvailable() {
+        return mWifiHotspotRepository.isSpeedFeatureAvailable();
+    }
+
+    /**
+     * Gets the Wi-Fi tethered AP Configuration.
+     *
+     * @return AP details in {@link SoftApConfiguration}
+     */
+    public SoftApConfiguration getSoftApConfiguration() {
+        return mWifiHotspotRepository.getSoftApConfiguration();
     }
 
     /**
@@ -139,5 +161,12 @@ public class WifiTetherViewModel extends AndroidViewModel {
             resId = sSpeedSummaryResMap.get(speedType);
         }
         mSpeedSummary.setValue(resId);
+    }
+
+    /**
+     * Gets Restarting LiveData
+     */
+    public LiveData<Boolean> getRestarting() {
+        return mWifiHotspotRepository.getRestarting();
     }
 }

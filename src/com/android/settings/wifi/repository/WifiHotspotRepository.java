@@ -16,14 +16,18 @@
 
 package com.android.settings.wifi.repository;
 
+import static android.net.TetheringManager.TETHERING_WIFI;
 import static android.net.wifi.SoftApConfiguration.BAND_2GHZ;
 import static android.net.wifi.SoftApConfiguration.BAND_5GHZ;
 import static android.net.wifi.SoftApConfiguration.BAND_6GHZ;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_OPEN;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE;
 import static android.net.wifi.WifiAvailableChannel.OP_MODE_SAP;
+import static android.net.wifi.WifiManager.WIFI_AP_STATE_DISABLED;
+import static android.net.wifi.WifiManager.WIFI_AP_STATE_ENABLED;
 
 import android.content.Context;
+import android.net.TetheringManager;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiAvailableChannel;
 import android.net.wifi.WifiManager;
@@ -32,9 +36,11 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.util.HashMap;
@@ -48,6 +54,8 @@ import java.util.function.Consumer;
  */
 public class WifiHotspotRepository {
     private static final String TAG = "WifiHotspotRepository";
+
+    private static final int RESTART_INTERVAL_MS = 100;
 
     /** Wi-Fi hotspot band unknown. */
     public static final int BAND_UNKNOWN = 0;
@@ -77,8 +85,9 @@ public class WifiHotspotRepository {
         sSpeedMap.put(BAND_2GHZ_5GHZ, SPEED_2GHZ_5GHZ);
     }
 
-    protected final Context mAppContext;
-    protected final WifiManager mWifiManager;
+    private final Context mAppContext;
+    private final WifiManager mWifiManager;
+    private final TetheringManager mTetheringManager;
 
     protected String mLastPassword;
     protected LastPasswordListener mLastPasswordListener = new LastPasswordListener();
@@ -96,9 +105,28 @@ public class WifiHotspotRepository {
     protected String mCurrentCountryCode;
     protected ActiveCountryCodeChangedCallback mActiveCountryCodeChangedCallback;
 
-    public WifiHotspotRepository(@NonNull Context appContext, @NonNull WifiManager wifiManager) {
+    @VisibleForTesting
+    Boolean mIsConfigShowSpeed;
+    private Boolean mIsSpeedFeatureAvailable;
+
+    @VisibleForTesting
+    SoftApCallback mSoftApCallback = new SoftApCallback();
+    @VisibleForTesting
+    StartTetheringCallback mStartTetheringCallback;
+    @VisibleForTesting
+    int mWifiApState = WIFI_AP_STATE_DISABLED;
+
+    @VisibleForTesting
+    boolean mIsRestarting;
+    @VisibleForTesting
+    MutableLiveData<Boolean> mRestarting;
+
+    public WifiHotspotRepository(@NonNull Context appContext, @NonNull WifiManager wifiManager,
+            @NonNull TetheringManager tetheringManager) {
         mAppContext = appContext;
         mWifiManager = wifiManager;
+        mTetheringManager = tetheringManager;
+        mWifiManager.registerSoftApCallback(mAppContext.getMainExecutor(), mSoftApCallback);
     }
 
     /**
@@ -120,6 +148,15 @@ public class WifiHotspotRepository {
         return !TextUtils.isEmpty(mLastPassword) ? mLastPassword : generateRandomPassword();
     }
 
+    @VisibleForTesting
+    String generatePassword(SoftApConfiguration config) {
+        String password = config.getPassphrase();
+        if (TextUtils.isEmpty(password)) {
+            password = generatePassword();
+        }
+        return password;
+    }
+
     private class LastPasswordListener implements Consumer<String> {
         @Override
         public void accept(String password) {
@@ -134,13 +171,27 @@ public class WifiHotspotRepository {
     }
 
     /**
+     * Gets the Wi-Fi tethered AP Configuration.
+     *
+     * @return AP details in {@link SoftApConfiguration}
+     */
+    public SoftApConfiguration getSoftApConfiguration() {
+        return mWifiManager.getSoftApConfiguration();
+    }
+
+    /**
      * Sets the tethered Wi-Fi AP Configuration.
      *
      * @param config A valid SoftApConfiguration specifying the configuration of the SAP.
      */
     public void setSoftApConfiguration(@NonNull SoftApConfiguration config) {
+        if (mIsRestarting) {
+            Log.e(TAG, "Skip setSoftApConfiguration because hotspot is restarting.");
+            return;
+        }
         mWifiManager.setSoftApConfiguration(config);
         refresh();
+        restartTetheringIfNeeded();
     }
 
     /**
@@ -211,13 +262,7 @@ public class WifiHotspotRepository {
             return;
         }
         SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder(config);
-        String passphrase = null;
-        if (securityType != SECURITY_TYPE_OPEN) {
-            passphrase = config.getPassphrase();
-            if (TextUtils.isEmpty(passphrase)) {
-                passphrase = generatePassword();
-            }
-        }
+        String passphrase = (securityType == SECURITY_TYPE_OPEN) ? null : generatePassword(config);
         configBuilder.setPassphrase(passphrase, securityType);
         setSoftApConfiguration(configBuilder.build());
 
@@ -296,7 +341,7 @@ public class WifiHotspotRepository {
             configBuilder.setBand(BAND_2GHZ_5GHZ_6GHZ);
             if (config.getSecurityType() != SECURITY_TYPE_WPA3_SAE) {
                 log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_SAE)");
-                configBuilder.setPassphrase(generatePassword(), SECURITY_TYPE_WPA3_SAE);
+                configBuilder.setPassphrase(generatePassword(config), SECURITY_TYPE_WPA3_SAE);
             }
         } else if (speedType == SPEED_5GHZ) {
             log("setSpeedType(), setBand(BAND_2GHZ_5GHZ)");
@@ -314,6 +359,7 @@ public class WifiHotspotRepository {
 
     /**
      * Return whether Wi-Fi Dual Band is supported or not.
+     *
      * @return {@code true} if Wi-Fi Dual Band is supported
      */
     public boolean isDualBand() {
@@ -326,6 +372,7 @@ public class WifiHotspotRepository {
 
     /**
      * Return whether Wi-Fi 5 GHz band is supported or not.
+     *
      * @return {@code true} if Wi-Fi 5 GHz Band is supported
      */
     public boolean is5GHzBandSupported() {
@@ -338,6 +385,7 @@ public class WifiHotspotRepository {
 
     /**
      * Return whether Wi-Fi Hotspot 5 GHz band is available or not.
+     *
      * @return {@code true} if Wi-Fi Hotspot 5 GHz Band is available
      */
     public boolean is5gAvailable() {
@@ -371,6 +419,7 @@ public class WifiHotspotRepository {
 
     /**
      * Return whether Wi-Fi 6 GHz band is supported or not.
+     *
      * @return {@code true} if Wi-Fi 6 GHz Band is supported
      */
     public boolean is6GHzBandSupported() {
@@ -383,6 +432,7 @@ public class WifiHotspotRepository {
 
     /**
      * Return whether Wi-Fi Hotspot 6 GHz band is available or not.
+     *
      * @return {@code true} if Wi-Fi Hotspot 6 GHz Band is available
      */
     public boolean is6gAvailable() {
@@ -432,7 +482,61 @@ public class WifiHotspotRepository {
             // This is expected on some hardware.
             Log.e(TAG, "Querying usable SAP channels is unsupported, band:" + band);
         }
+        // Disable Wi-Fi hotspot speed feature if an error occurs while getting usable channels.
+        mIsSpeedFeatureAvailable = false;
+        Log.w(TAG, "isChannelAvailable(): Wi-Fi hotspot speed feature disabled");
         return defaultValue;
+    }
+
+    private boolean isConfigShowSpeed() {
+        if (mIsConfigShowSpeed == null) {
+            mIsConfigShowSpeed = mAppContext.getResources()
+                    .getBoolean(R.bool.config_show_wifi_hotspot_speed);
+            log("isConfigShowSpeed():" + mIsConfigShowSpeed);
+        }
+        return mIsConfigShowSpeed;
+    }
+
+    /**
+     * Return whether Wi-Fi Hotspot Speed Feature is available or not.
+     *
+     * @return {@code true} if Wi-Fi Hotspot Speed Feature is available
+     */
+    public boolean isSpeedFeatureAvailable() {
+        if (mIsSpeedFeatureAvailable != null) {
+            return mIsSpeedFeatureAvailable;
+        }
+
+        // Check config to show Wi-Fi hotspot speed feature
+        if (!isConfigShowSpeed()) {
+            mIsSpeedFeatureAvailable = false;
+            log("isSpeedFeatureAvailable():false, isConfigShowSpeed():false");
+            return false;
+        }
+
+        // Check if 5 GHz band is not supported
+        if (!is5GHzBandSupported()) {
+            mIsSpeedFeatureAvailable = false;
+            log("isSpeedFeatureAvailable():false, 5 GHz band is not supported on this device");
+            return false;
+        }
+        // Check if 5 GHz band SAP channel is not ready
+        isChannelAvailable(WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS, true /* defaultValue */);
+        if (mIsSpeedFeatureAvailable != null && !mIsSpeedFeatureAvailable) {
+            log("isSpeedFeatureAvailable():false, error occurred while getting 5 GHz SAP channel");
+            return false;
+        }
+
+        // Check if 6 GHz band SAP channel is not ready
+        isChannelAvailable(WifiScanner.WIFI_BAND_6_GHZ, false /* defaultValue */);
+        if (mIsSpeedFeatureAvailable != null && !mIsSpeedFeatureAvailable) {
+            log("isSpeedFeatureAvailable():false, error occurred while getting 6 GHz SAP channel");
+            return false;
+        }
+
+        mIsSpeedFeatureAvailable = true;
+        log("isSpeedFeatureAvailable():true");
+        return true;
     }
 
     protected void purgeRefreshData() {
@@ -475,6 +579,84 @@ public class WifiHotspotRepository {
             mCurrentCountryCode = null;
             purgeRefreshData();
             refresh();
+        }
+    }
+
+    /**
+     * Gets Restarting LiveData
+     */
+    public LiveData<Boolean> getRestarting() {
+        if (mRestarting == null) {
+            mRestarting = new MutableLiveData<>();
+            mRestarting.setValue(mIsRestarting);
+        }
+        return mRestarting;
+    }
+
+    private void setRestarting(boolean isRestarting) {
+        log("setRestarting(), isRestarting:" + isRestarting);
+        mIsRestarting = isRestarting;
+        if (mRestarting != null) {
+            mRestarting.setValue(mIsRestarting);
+        }
+    }
+
+    @VisibleForTesting
+    void restartTetheringIfNeeded() {
+        if (mWifiApState != WIFI_AP_STATE_ENABLED) {
+            return;
+        }
+        log("restartTetheringIfNeeded()");
+        mAppContext.getMainThreadHandler().postDelayed(() -> {
+            setRestarting(true);
+            stopTethering();
+        }, RESTART_INTERVAL_MS);
+    }
+
+    private void startTethering() {
+        if (mStartTetheringCallback == null) {
+            mStartTetheringCallback = new StartTetheringCallback();
+        }
+        log("startTethering()");
+        mTetheringManager.startTethering(TETHERING_WIFI, mAppContext.getMainExecutor(),
+                mStartTetheringCallback);
+    }
+
+    private void stopTethering() {
+        log("startTethering()");
+        mTetheringManager.stopTethering(TETHERING_WIFI);
+    }
+
+    @VisibleForTesting
+    class SoftApCallback implements WifiManager.SoftApCallback {
+        @Override
+        public void onStateChanged(int state, int failureReason) {
+            log("onStateChanged(), state:" + state + ", failureReason:" + failureReason);
+            mWifiApState = state;
+            if (!mIsRestarting) {
+                return;
+            }
+            if (state == WIFI_AP_STATE_DISABLED) {
+                mAppContext.getMainThreadHandler().postDelayed(() -> startTethering(),
+                        RESTART_INTERVAL_MS);
+                return;
+            }
+            if (state == WIFI_AP_STATE_ENABLED) {
+                refresh();
+                setRestarting(false);
+            }
+        }
+    }
+
+    private class StartTetheringCallback implements TetheringManager.StartTetheringCallback {
+        @Override
+        public void onTetheringStarted() {
+            log("onTetheringStarted()");
+        }
+
+        @Override
+        public void onTetheringFailed(int error) {
+            log("onTetheringFailed(), error:" + error);
         }
     }
 

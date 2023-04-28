@@ -13,44 +13,48 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/admin_details_dialog_padding"
-    android:paddingStart="@dimen/admin_details_dialog_padding"
-    android:paddingEnd="@dimen/admin_details_dialog_padding"
-    android:paddingBottom="@dimen/admin_details_dialog_padding_bottom"
-    android:orientation="vertical"
-    android:layoutDirection="locale"
-    android:textDirection="locale">
+    android:fadeScrollbars="false"
+    android:scrollbarStyle="outsideOverlay"
+    android:fillViewport="true">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/admin_details_dialog_padding"
+        android:paddingStart="@dimen/admin_details_dialog_padding"
+        android:paddingEnd="@dimen/admin_details_dialog_padding"
+        android:paddingBottom="@dimen/admin_details_dialog_padding_bottom"
         android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:paddingBottom="@dimen/admin_details_dialog_title_bottom_padding">
-        <ImageView
-            android:layout_width="@dimen/admin_details_dialog_icon_size"
-            android:layout_height="@dimen/admin_details_dialog_icon_size"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_settings_language"
-            android:tint="#4F8438"
-            android:contentDescription="@null"/>
-        <TextView
-            android:id="@+id/dialog_title"
-            android:layout_width="wrap_content"
+        android:layoutDirection="locale"
+        android:textDirection="locale">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:textAppearance="@style/TextAppearance.AdminDialogTitle"
-            android:textAlignment="textStart"/>
-    </LinearLayout>
+            android:paddingBottom="@dimen/admin_details_dialog_title_bottom_padding">
+            <ImageView
+                android:layout_width="@dimen/admin_details_dialog_icon_size"
+                android:layout_height="@dimen/admin_details_dialog_icon_size"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_settings_language"
+                android:tint="#4F8438"
+                android:contentDescription="@null"/>
+            <TextView
+                android:id="@+id/dialog_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textColor="?android:attr/textColorPrimary"
+                android:fontFamily="@*android:string/config_headlineFontFamilyMedium"/>
+        </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fadeScrollbars="false">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,10 +64,11 @@
                 android:id="@+id/dialog_msg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="16sp"
                 android:maxLength="200"
                 android:autoLink="email|phone|web"
                 android:textColor="?android:attr/textColorSecondary"
                 android:textAlignment="textStart"/>
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>
