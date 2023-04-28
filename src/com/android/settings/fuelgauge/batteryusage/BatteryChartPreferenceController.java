@@ -593,8 +593,19 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
     private String getSlotInformation(boolean isApp, String slotInformation) {
         // TODO: Updates the right slot information from daily and hourly chart selection.
-        // Null means we show all information without a specific time slot.
-        if (slotInformation == null) {
+        if (mDailyViewModel != null && mHourlyViewModels != null && isAllSelected()) {
+            int lastDailyChartIndex = mDailyViewModel.size() - 2;
+            int lastHourlyChartIndex = mHourlyViewModels.get(lastDailyChartIndex).size() - 1;
+            String lastSlotInformation = getSlotInformation(
+                    lastDailyChartIndex, lastHourlyChartIndex, /*isDayTextOnly=*/ false);
+            return isApp
+                    ? mPrefContext.getString(
+                            R.string.battery_app_usage_since_last_full_charge_to,
+                            lastSlotInformation)
+                    : mPrefContext.getString(
+                            R.string.battery_system_usage_since_last_full_charge_to,
+                            lastSlotInformation);
+        } else if (slotInformation == null) {
             return isApp
                     ? mPrefContext.getString(R.string.battery_app_usage)
                     : mPrefContext.getString(R.string.battery_system_usage);
@@ -614,14 +625,19 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         if (isAllSelected()) {
             return null;
         }
+        return getSlotInformation(mDailyChartIndex, mHourlyChartIndex,
+                /*isDayTextOnly=*/ mHourlyChartIndex == BatteryChartViewModel.SELECTED_INDEX_ALL);
+    }
 
-        final String selectedDayText = mDailyViewModel.getFullText(mDailyChartIndex);
-        if (mHourlyChartIndex == BatteryChartViewModel.SELECTED_INDEX_ALL) {
+    private String getSlotInformation(
+            int dailyChartIndex, int hourlyChartIndex, boolean isDayTextOnly) {
+        final String selectedDayText = mDailyViewModel.getFullText(dailyChartIndex);
+        if (isDayTextOnly) {
             return selectedDayText;
         }
 
-        final String selectedHourText = mHourlyViewModels.get(mDailyChartIndex).getFullText(
-                mHourlyChartIndex);
+        final String selectedHourText = mHourlyViewModels.get(dailyChartIndex).getFullText(
+                hourlyChartIndex);
         if (isBatteryLevelDataInOneDay()) {
             return selectedHourText;
         }
