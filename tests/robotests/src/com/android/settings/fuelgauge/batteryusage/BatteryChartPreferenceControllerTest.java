@@ -571,12 +571,13 @@ public final class BatteryChartPreferenceControllerTest {
     }
 
     @Test
-    public void refreshCategoryTitle_setLastFullChargeIntoBothTitleTextView() {
+    public void refreshCategoryTitle_singleDayData_setLastFullChargeIntoBothTitleTextView() {
         mBatteryChartPreferenceController = createController();
         mBatteryChartPreferenceController.mAppListPrefGroup =
                 spy(new PreferenceCategory(mContext));
         mBatteryChartPreferenceController.mExpandDividerPreference =
                 spy(new ExpandDividerPreference(mContext));
+        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
         // Simulates select all condition.
         mBatteryChartPreferenceController.mDailyChartIndex =
                 BatteryChartViewModel.SELECTED_INDEX_ALL;
@@ -590,13 +591,43 @@ public final class BatteryChartPreferenceControllerTest {
         verify(mBatteryChartPreferenceController.mAppListPrefGroup)
                 .setTitle(captor.capture());
         assertThat(captor.getValue())
-                .isEqualTo("App usage since last full charge");
+                .isEqualTo("App usage since last full charge to 12 PM");
         // Verifies the title in the expandable divider.
         captor = ArgumentCaptor.forClass(String.class);
         verify(mBatteryChartPreferenceController.mExpandDividerPreference)
                 .setTitle(captor.capture());
         assertThat(captor.getValue())
-                .isEqualTo("System usage since last full charge");
+                .isEqualTo("System usage since last full charge to 12 PM");
+    }
+
+    @Test
+    public void refreshCategoryTitle_multiDaysData_setLastFullChargeIntoBothTitleTextView() {
+        mBatteryChartPreferenceController = createController();
+        mBatteryChartPreferenceController.mAppListPrefGroup =
+                spy(new PreferenceCategory(mContext));
+        mBatteryChartPreferenceController.mExpandDividerPreference =
+                spy(new ExpandDividerPreference(mContext));
+        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(60));
+        // Simulates select all condition.
+        mBatteryChartPreferenceController.mDailyChartIndex =
+                BatteryChartViewModel.SELECTED_INDEX_ALL;
+        mBatteryChartPreferenceController.mHourlyChartIndex =
+                BatteryChartViewModel.SELECTED_INDEX_ALL;
+
+        mBatteryChartPreferenceController.refreshCategoryTitle();
+
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        // Verifies the title in the preference group.
+        verify(mBatteryChartPreferenceController.mAppListPrefGroup)
+                .setTitle(captor.capture());
+        assertThat(captor.getValue())
+                .isEqualTo("App usage since last full charge to Monday 6 PM");
+        // Verifies the title in the expandable divider.
+        captor = ArgumentCaptor.forClass(String.class);
+        verify(mBatteryChartPreferenceController.mExpandDividerPreference)
+                .setTitle(captor.capture());
+        assertThat(captor.getValue())
+                .isEqualTo("System usage since last full charge to Monday 6 PM");
     }
 
     @Test
