@@ -1407,7 +1407,7 @@
     <string name="adaptive_sleep_summary_no_permission" msgid="5822591289468803691">"Для работы функции \"Адаптивный спящий режим\" нужен доступ к камере. Нажмите, чтобы настроить разрешения для сервисов персонализации устройств."</string>
     <string name="adaptive_sleep_manage_permission_button" msgid="1404510197847664846">"Управление разрешениями"</string>
     <string name="adaptive_sleep_description" msgid="1835321775327187860">"Не отключать экран, пока вы смотрите на него"</string>
-    <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Когда адаптивный спящий режим включен, устройство определяет через фронтальную камеру, смотрит ли кто-то на экран. Эта функция работает только на вашем устройстве. Изображения не сохраняются и не отправляются в Google."</string>
+    <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Когда адаптивный спящий режим включен, устройство определяет через фронтальную камеру, смотрит ли кто-то на экран. Эта функция работает на уровне устройства – изображения не сохраняются и не отправляются в Google."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Включить адаптивный спящий режим"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Не отключать экран, пока вы смотрите на него"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"Камера заблокирована"</string>
@@ -3039,7 +3039,7 @@
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Расход приложениями за 24 часа"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Расход системой за 24 часа"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Использование системой в период <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <string name="battery_app_usage_for" msgid="7309909074935858949">"Использование приложениями в период <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_app_usage_for" msgid="7309909074935858949">"Расход заряда приложениями в период <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Всего: меньше минуты"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"В фоновом режиме: меньше минуты"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Всего: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -3780,8 +3780,8 @@
     <string name="sound_settings_example_summary" msgid="8125110691864707925">"Громкость сигналов при входящих вызовах и уведомлениях: 80 %."</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Музыка, видео, игры"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Громкость трансляции"</string>
-    <string name="call_volume_option_title" msgid="1461105986437268924">"Разговор"</string>
-    <string name="alarm_volume_option_title" msgid="6398641749273697140">"Будильник"</string>
+    <string name="call_volume_option_title" msgid="1461105986437268924">"Громкость разговора"</string>
+    <string name="alarm_volume_option_title" msgid="6398641749273697140">"Громкость будильника"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Вызовы и уведомления"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Громкость уведомлений"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Рингтон"</string>
@@ -4182,7 +4182,7 @@
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Чтобы связать эти приложения, установите \"<xliff:g id="NAME">%1$s</xliff:g>\" в рабочем профиле"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Чтобы связать эти приложения, установите \"<xliff:g id="NAME">%1$s</xliff:g>\" в личном профиле"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Нажмите, чтобы установить приложение."</string>
-    <string name="manage_zen_access_title" msgid="1562322900340107269">"Доступ к функции \"Не беспокоить\""</string>
+    <string name="manage_zen_access_title" msgid="1562322900340107269">"Доступ к режиму \"Не беспокоить\""</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Разрешить доступ к режиму \"Не беспокоить\""</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Установленные приложения не запрашивали доступ к функции \"Не беспокоить\"."</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"Загрузка приложений…"</string>
@@ -4712,7 +4712,7 @@
     <string name="running_frequency" msgid="7260225121706316639">"Как часто используется"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Макс. памяти использовано"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Трафик не расходовался"</string>
-    <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"Разрешить приложению \"<xliff:g id="APP">%1$s</xliff:g>\" доступ к настройкам режима \"Не беспокоить\"?"</string>
+    <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"Разрешить приложению \"<xliff:g id="APP">%1$s</xliff:g>\" настраивать режим \"Не беспокоить\"?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"Приложение сможет включать и отключать режим \"Не беспокоить\", а также изменять соответствующие настройки."</string>
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Должно быть включено, поскольку разрешен доступ к уведомлениям"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Отменить доступ к режиму \"Не беспокоить\" для приложения <xliff:g id="APP">%1$s</xliff:g>?"</string>
@@ -5726,7 +5726,7 @@
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Показывать виджеты управления устройством"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Показывать элементы управления внешними устройствами на заблокированном экране"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Управление с заблокированного устройства"</string>
-    <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Вы можете управлять внешними устройствами с заблокированного телефона или планшета, установив нужное разрешение в приложении \"Управление устройствами\"."</string>
+    <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Вы можете управлять внешними устройствами с заблокированного телефона или планшета, установив нужное разрешение в приложении \"Управление устройствами\""</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Чтобы использовать эту функцию, включите параметр \"Показывать виджеты управления устройством\""</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Показывать вертикальные часы, если они доступны"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Вертикальные часы"</string>
@@ -5866,7 +5866,7 @@
     <string name="all_apps" msgid="3054120149509114789">"Все приложения"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Запретить"</string>
     <string name="uwb_settings_title" msgid="8578498712312002231">"Сверхширокополосная связь (СШП)"</string>
-    <string name="uwb_settings_summary" msgid="3074271396764672268">"Помогает определить относительное позиционирование устройств с технологией сверхширокополосной связи поблизости"</string>
+    <string name="uwb_settings_summary" msgid="3074271396764672268">"Помогает определить относительное местоположение устройств с технологией сверхширокополосной связи поблизости"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Выключает режим полета, чтобы использовать сверхширокополосную связь"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Доступ к камере"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Доступ к микрофону"</string>
