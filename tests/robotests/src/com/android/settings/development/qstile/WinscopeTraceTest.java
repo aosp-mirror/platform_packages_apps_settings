@@ -16,10 +16,8 @@
 
 package com.android.settings.development.qstile;
 
-import static com.android.settings.development.qstile.DevelopmentTiles.WinscopeTrace
-        .SURFACE_FLINGER_LAYER_TRACE_CONTROL_CODE;
-import static com.android.settings.development.qstile.DevelopmentTiles.WinscopeTrace
-        .SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE;
+import static com.android.settings.development.qstile.DevelopmentTiles.WinscopeTrace.SURFACE_FLINGER_LAYER_TRACE_CONTROL_CODE;
+import static com.android.settings.development.qstile.DevelopmentTiles.WinscopeTrace.SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -36,6 +34,8 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.view.IWindowManager;
 import android.widget.Toast;
+
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.inputmethod.ImeTracing;
 import com.android.settings.testutils.shadow.ShadowParcel;
@@ -68,6 +68,9 @@ public class WinscopeTraceTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mWinscopeTrace = spy(new DevelopmentTiles.WinscopeTrace());
+        doReturn(ApplicationProvider.getApplicationContext()).when(
+                mWinscopeTrace).getApplicationContext();
+
         ReflectionHelpers.setField(mWinscopeTrace, "mWindowManager", mWindowManager);
         ReflectionHelpers.setField(mWinscopeTrace, "mImeTracing", mImeTracing);
         ReflectionHelpers.setField(mWinscopeTrace, "mSurfaceFlinger", mSurfaceFlinger);
@@ -118,7 +121,7 @@ public class WinscopeTraceTest {
         assertThat(mWinscopeTrace.isEnabled()).isFalse();
         verify(mSurfaceFlinger)
                 .transact(eq(SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE), any(), any(),
-                eq(0 /* flags */));
+                        eq(0 /* flags */));
         verifyNoMoreInteractions(mSurfaceFlinger);
     }
 
@@ -131,7 +134,7 @@ public class WinscopeTraceTest {
         assertThat(mWinscopeTrace.isEnabled()).isTrue();
         verify(mSurfaceFlinger)
                 .transact(eq(SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE), any(), any(),
-                eq(0 /* flags */));
+                        eq(0 /* flags */));
         verifyNoMoreInteractions(mSurfaceFlinger);
     }
 
