@@ -58,11 +58,9 @@
         settings:controller="com.android.settings.slices.SlicePreferenceController"
         settings:allowDividerAbove="true"/>
 
-    <com.android.settings.slices.SlicePreference
-        android:key="bt_device_slice"
-        settings:controller="com.android.settings.slices.BlockingSlicePrefController"
-        settings:allowDividerBelow="true"
-        settings:allowDividerAbove="true"/>
+    <PreferenceCategory
+        android:key="bt_device_slice_category"
+        settings:controller="com.android.settings.bluetooth.BlockingPrefWithSliceController"/>
 
     <PreferenceCategory
         android:key="device_companion_apps"/>
