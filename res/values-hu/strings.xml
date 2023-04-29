@@ -301,7 +301,7 @@
     <string name="lock_after_timeout" msgid="8682769000437403444">"Zárolás a képernyő időkorlátja után"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"Az időkorlát után ennyivel: <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Az időkorlát után azonnal, kivéve ha a következő tartja feloldva: <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"Az időkorlát után ennyivel: <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>; kivéve, ha a <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> feloldva tartja"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"Az időkorlát után ennyivel: <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>; kivéve, ha az <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> feloldva tartja"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="197365342192696406">"Tulajdonosi adatok megjelenítése a lezáró képernyőn"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Szöveg a lezárási képernyőn"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Modulengedélyezés"</string>
@@ -1641,7 +1641,7 @@
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Az ezen <xliff:g id="NAME">^1</xliff:g> által tárolt alkalmazások, fotók vagy adatok használatához helyezze be azt újra az eszközbe. \n\nHa azonban már nem áll az Ön rendelkezésére, el is felejtheti. \n\nAmennyiben az elfelejtés lehetőséget választja, akkor a rajta tárolt összes adat örökre elveszik. \n\nAz alkalmazásokat később újratelepítheti, de a tárhelyen lévő adataik megsemmisülnek."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g> elfelejtése?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Az adathordozón (<xliff:g id="NAME">^1</xliff:g>) lévő összes alkalmazás, fotó és adat örökre elvész."</string>
-    <string name="storage_detail_dialog_system" msgid="7461009051858709479">"A rendszer az Android <xliff:g id="VERSION">%s</xliff:g>. verziójának futtatásához használt fájlokat tartalmaz"</string>
+    <string name="storage_detail_dialog_system" msgid="7461009051858709479">"A rendszer az Android <xliff:g id="VERSION">%s</xliff:g> verziójának futtatásához használt fájlokat tartalmaz"</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"<xliff:g id="NAME">^1</xliff:g> – beállítás"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Használat hordozható tárolóként"</string>
     <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Fotók és más médiatartalmak eszközök közötti áthelyezéséhez."</string>
@@ -2007,7 +2007,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Legyen látható a profilhoz tartozó minta"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Rezgés koppintásra"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Bekapcsológomb azonnal zár"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Kivéve, ha a <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> feloldva tartja"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Kivéve, ha az <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> feloldva tartja"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"Feloldási minta beállítása"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"Feloldási minta módosítása"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2093801939046625774">"Hogyan kell feloldási mintát rajzolni"</string>
@@ -2724,7 +2724,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Wi-Fi időben"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Akkuhasználat"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Előzmények részletei"</string>
-    <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Akkumulátorhasználat"</string>
+    <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Akkuhasználat"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Használat az elmúlt 24 óra során"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Használat az utolsó teljes feltöltés óta"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"Akkuhasználat"</string>
@@ -2783,9 +2783,9 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Ez az alkalmazás a háttérben is használhatja az akkumulátort. Emiatt az akkumulátor a vártnál gyorsabban lemerülhet."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Eltávolítás"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Mégse"</string>
-    <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Alkalmazásai akkumulátorhasználata nem tér el az átlagostól. Ha az alkalmazások túlzottan igénybe veszik az akkumulátort, telefonja javaslatot ad a lehetséges intézkedésekre.\n\nAz Akkumulátorkímélő módot bármikor bekapcsolhatja, ha az akkumulátor kezd nagyon lemerülni."</string>
-    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Alkalmazásai akkumulátorhasználata nem tér el az átlagostól. Ha az alkalmazások túlzottan igénybe veszik az akkumulátort, táblagépe javaslatot ad a lehetséges intézkedésekre.\n\nAz Akkumulátorkímélő módot bármikor bekapcsolhatja, ha az akkumulátor kezd nagyon lemerülni."</string>
-    <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Alkalmazásai akkumulátorhasználata nem tér el az átlagostól. Ha az alkalmazások túlzottan igénybe veszik az akkumulátort, eszköze javaslatot ad a lehetséges intézkedésekre.\n\nAz Akkumulátorkímélő módot bármikor bekapcsolhatja, ha az akkumulátor kezd nagyon lemerülni."</string>
+    <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Alkalmazásai akkuhasználata nem tér el az átlagostól. Ha az alkalmazások túlzottan igénybe veszik az akkumulátort, telefonja javaslatot ad a lehetséges intézkedésekre.\n\nAz Akkumulátorkímélő módot bármikor bekapcsolhatja, ha az akkumulátor kezd nagyon lemerülni."</string>
+    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Alkalmazásai akkuhasználata nem tér el az átlagostól. Ha az alkalmazások túlzottan igénybe veszik az akkumulátort, táblagépe javaslatot ad a lehetséges intézkedésekre.\n\nAz Akkumulátorkímélő módot bármikor bekapcsolhatja, ha az akkumulátor kezd nagyon lemerülni."</string>
+    <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Alkalmazásai akkuhasználata nem tér el az átlagostól. Ha az alkalmazások túlzottan igénybe veszik az akkumulátort, eszköze javaslatot ad a lehetséges intézkedésekre.\n\nAz Akkumulátorkímélő módot bármikor bekapcsolhatja, ha az akkumulátor kezd nagyon lemerülni."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Akkumulátorkezelő"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Alkalmazások automatikus kezelése"</string>
     <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Korlátozza a nem gyakran használt alkalmazások akkumulátorhasználatát"</string>
@@ -2884,7 +2884,7 @@
     <string name="battery_sugg_apps_info" msgid="4796917242296658454">"Alkalmazás leállítása vagy eltávolítása"</string>
     <string name="battery_sugg_apps_gps" msgid="7221335088647925110">"Energiatakarékos mód kiválasztása"</string>
     <string name="battery_sugg_apps_settings" msgid="6527223370162382166">"Az alkalmazás felkínálhat olyan beállításokat, amelyek csökkentik az energiafelhasználást"</string>
-    <string name="battery_desc_users" msgid="1959428568888686847">"A felhasználó akkumulátorhasználata"</string>
+    <string name="battery_desc_users" msgid="1959428568888686847">"A felhasználó akkuhasználata"</string>
     <string name="battery_desc_unaccounted" msgid="1649497860893660763">"Egyéb energiafelhasználás"</string>
     <string name="battery_msg_unaccounted" msgid="5647345548624995064">"Az energiahasználat csak becsült érték, és nem tartalmazza az akkuhasználat minden forrását. Az „Egyéb energiafelhasználás” a kalkulált hozzávetőleges energiahasználat és a ténylegesen észlelt akkuhasználat közötti különbség."</string>
     <string name="battery_desc_overcounted" msgid="5982079150027267539">"Túlbecsült energiafogyasztás"</string>
@@ -2965,7 +2965,7 @@
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Rendszer használata: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Alkalmazás használata: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Összesen: kevesebb mint egy perc"</string>
-    <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Háttér: kevesebb mint egy perc"</string>
+    <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Háttér: egy percnél kevesebb"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Összesen: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Háttér: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Az akkumulátorhasználati adatok hozzávetőlegesek; a telefon töltése közben nem mérik a használatot"</string>
@@ -3609,7 +3609,7 @@
     <string name="keywords_display_cast_screen" msgid="2572331770299149370">"vetítés, átküldés, képernyőtükrözés, képernyőmegosztás, tükrözés, képernyő megosztása, képernyő átküldése"</string>
     <string name="keywords_storage" msgid="3004667910133021783">"tárhely, lemez, merevlemez, eszközhasználat"</string>
     <string name="keywords_battery" msgid="7040323668283600530">"áramfogyasztás, töltés"</string>
-    <string name="keywords_battery_usage" msgid="1763573071014260220">"akkuhasználati adatok megtekintése, akkumulátorhasználat, áramfogyasztás"</string>
+    <string name="keywords_battery_usage" msgid="1763573071014260220">"akkuhasználati adatok megtekintése, akkuhasználat, áramfogyasztás"</string>
     <string name="keywords_battery_saver" msgid="6289682844453234359">"akkumulátorkímélő mód, energiamegtakarítás, megtakarítás"</string>
     <string name="keywords_battery_adaptive_preferences" msgid="1774870663426502938">"adaptív beállítások, alkalmazkodó akkumulátor"</string>
     <string name="keywords_spell_checker" msgid="5148906820603481657">"helyesírás, szótár, helyesírás-ellenőrzés, automatikus javítás"</string>
@@ -3989,7 +3989,7 @@
     <string name="notification_priority_title" msgid="5554834239080425229">"Prioritás"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"A beszélgetések szakaszának tetején, lebegő buborékként látható, megjeleníti a profilképet a lezárási képernyőn"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"A(z) <xliff:g id="APP_NAME">%1$s</xliff:g> nem támogatja a legtöbb beszélgetési funkciót. Nem állíthat be beszélgetést prioritásként, és a beszélgetések nem jelennek meg lebegő buborékként."</string>
-    <string name="notification_channel_summary_min" msgid="8823399508450176842">"A lehúzható értesítési felületen egyetlen sorrá csukhatja össze az értesítéseket"</string>
+    <string name="notification_channel_summary_min" msgid="8823399508450176842">"A lehúzható értesítési felületen egyetlen sorrá összecsukja az értesítéseket"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Nincs hang és rezgés"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Nincs hang és rezgés, továbbá lejjebb jelenik meg a beszélgetések szakaszában"</string>
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"A telefonbeállítások alapján csöröghet és rezeghet"</string>
@@ -4050,7 +4050,7 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Az alkalmazás nem támogatja a speciális beállításokat"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Virtuálisvalóság-segédszolgáltatás"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Egy telepített alkalmazás sem kérte, hogy virtuálisvalóság-segédszolgáltatásként legyen futtatva."</string>
-    <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Engedélyezi a(z) <xliff:g id="SERVICE">%1$s</xliff:g> számára a hozzáférést a virtuálisvalóság-szolgáltatáshoz?"</string>
+    <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Hozzáférhet a(z) <xliff:g id="SERVICE">%1$s</xliff:g> a virtuálisvalóság-szolgáltatáshoz?"</string>
     <string name="vr_listener_security_warning_summary" msgid="1888843557687017791">"A(z) <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> futtatható lesz, ha Ön virtuális valóság módban használ alkalmazásokat."</string>
     <string name="display_vr_pref_title" msgid="4850474436291113569">"Ha az eszköz VR módban van"</string>
     <string name="display_vr_pref_low_persistence" msgid="7039841277157739871">"Homályosítás csökkentése (ajánlott)"</string>
@@ -4580,7 +4580,7 @@
     <string name="running_frequency" msgid="7260225121706316639">"Gyakoriság"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Maximális használat"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Nincs felhasznált adatmennyiség"</string>
-    <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"Engedélyezi a(z) <xliff:g id="APP">%1$s</xliff:g> számára a hozzáférést a „Ne zavarjanak” funkcióhoz?"</string>
+    <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"Hozzáférhet a(z) <xliff:g id="APP">%1$s</xliff:g> a „Ne zavarjanak” funkcióhoz?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"Az alkalmazás be- és kikapcsolhatja a „Ne zavarjanak” funkciót, és módosíthatja a vonatkozó beállításokat."</string>
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Bekapcsolva kell hagyni, mert az értesítési hozzáférés be van kapcsolva"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Visszavonja a(z) <xliff:g id="APP">%1$s</xliff:g> hozzáférését a „Ne zavarjanak” szabályhoz?"</string>
