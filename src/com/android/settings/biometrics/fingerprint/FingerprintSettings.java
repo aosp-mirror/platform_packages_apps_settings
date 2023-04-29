@@ -171,8 +171,12 @@ public class FingerprintSettings extends SubSettings {
         private static final String KEY_IS_ENROLLING = "is_enrolled";
         private static final String KEY_REQUIRE_SCREEN_ON_TO_AUTH =
                 "security_settings_require_screen_on_to_auth";
+        private static final String KEY_FINGERPRINTS_ENROLLED_CATEGORY =
+                "security_settings_fingerprints_enrolled";
         private static final String KEY_FINGERPRINT_UNLOCK_CATEGORY =
                 "security_settings_fingerprint_unlock_category";
+        private static final String KEY_FINGERPRINT_UNLOCK_FOOTER =
+                "security_settings_fingerprint_footer";
 
         private static final int MSG_REFRESH_FINGERPRINT_TEMPLATES = 1000;
         private static final int MSG_FINGER_AUTH_SUCCESS = 1001;
@@ -189,10 +193,15 @@ public class FingerprintSettings extends SubSettings {
         protected static final boolean DEBUG = false;
 
         private List<AbstractPreferenceController> mControllers;
+        private FingerprintUnlockCategoryController
+                mFingerprintUnlockCategoryPreferenceController;
         private FingerprintSettingsRequireScreenOnToAuthPreferenceController
                 mRequireScreenOnToAuthPreferenceController;
+        private Preference mAddFingerprintPreference;
         private RestrictedSwitchPreference mRequireScreenOnToAuthPreference;
+        private PreferenceCategory mFingerprintsEnrolledCategory;
         private PreferenceCategory mFingerprintUnlockCategory;
+        private PreferenceCategory mFingerprintUnlockFooter;
 
         private FingerprintManager mFingerprintManager;
         private FingerprintUpdater mFingerprintUpdater;
@@ -259,9 +268,6 @@ public class FingerprintSettings extends SubSettings {
                     }
 
                     private void updateDialog() {
-                        if (isSfps()) {
-                            setRequireScreenOnToAuthVisibility();
-                        }
                         RenameDialog renameDialog = (RenameDialog) getFragmentManager().
                                 findFragmentByTag(RenameDialog.class.getName());
                         if (renameDialog != null) {
@@ -277,7 +283,8 @@ public class FingerprintSettings extends SubSettings {
                     case MSG_REFRESH_FINGERPRINT_TEMPLATES:
                         removeFingerprintPreference(msg.arg1);
                         updateAddPreference();
-                        retryFingerprint();
+                        updateFingerprintUnlockCategoryVisibility();
+                        updatePreferences();
                         break;
                     case MSG_FINGER_AUTH_SUCCESS:
                         highlightFingerprintItem(msg.arg1);
@@ -423,6 +430,9 @@ public class FingerprintSettings extends SubSettings {
                     addFirstFingerprint(null);
                 }
             }
+            final PreferenceScreen root = getPreferenceScreen();
+            root.removeAll();
+            addPreferencesFromResource(getPreferenceScreenResId());
             updateFooterColumns(activity);
         }
 
@@ -512,48 +522,33 @@ public class FingerprintSettings extends SubSettings {
          */
         private PreferenceScreen createPreferenceHierarchy() {
             PreferenceScreen root = getPreferenceScreen();
-            if (root != null) {
-                root.removeAll();
-            }
-            final String fpPrefKey = addFingerprintItemPreferences(root);
-            if (isSfps()) {
-                scrollToPreference(fpPrefKey);
-            }
-            addPreferencesFromResource(getPreferenceScreenResId());
-            mRequireScreenOnToAuthPreference = findPreference(KEY_REQUIRE_SCREEN_ON_TO_AUTH);
-            mFingerprintUnlockCategory = findPreference(KEY_FINGERPRINT_UNLOCK_CATEGORY);
-            for (AbstractPreferenceController controller : mControllers) {
-                ((FingerprintSettingsPreferenceController) controller).setUserId(mUserId);
-            }
-            mRequireScreenOnToAuthPreference.setChecked(
-                    mRequireScreenOnToAuthPreferenceController.isChecked());
-            mRequireScreenOnToAuthPreference.setOnPreferenceChangeListener(
-                    (preference, newValue) -> {
-                        boolean isChecked = ((SwitchPreference) preference).isChecked();
-                        mRequireScreenOnToAuthPreferenceController.setChecked(!isChecked);
-                        return true;
-                    });
-            mFingerprintUnlockCategory.setVisible(false);
-            if (isSfps()) {
-                setRequireScreenOnToAuthVisibility();
-            }
+            addFingerprintPreferences(root);
             setPreferenceScreen(root);
             return root;
         }
 
-        private void setRequireScreenOnToAuthVisibility() {
-            int fingerprintsEnrolled = mFingerprintManager.getEnrolledFingerprints(mUserId).size();
-            final boolean removalInProgress = mRemovalSidecar.inProgress();
-            // Removing last remaining fingerprint
-            if (fingerprintsEnrolled == 0 && removalInProgress) {
-                mFingerprintUnlockCategory.setVisible(false);
-            } else {
-                mFingerprintUnlockCategory.setVisible(true);
+        private void addFingerprintPreferences(PreferenceGroup root) {
+            final String fpPrefKey = addFingerprintItemPreferences(root);
+            if (isSfps()) {
+                scrollToPreference(fpPrefKey);
+                addFingerprintUnlockCategory();
             }
+            for (AbstractPreferenceController controller : mControllers) {
+                if (controller instanceof FingerprintSettingsPreferenceController) {
+                    ((FingerprintSettingsPreferenceController) controller).setUserId(mUserId);
+                } else if (controller instanceof FingerprintUnlockCategoryController) {
+                    ((FingerprintUnlockCategoryController) controller).setUserId(mUserId);
+                }
+            }
+            createFooterPreference(root);
         }
 
         private String addFingerprintItemPreferences(PreferenceGroup root) {
-            root.removeAll();
+            mFingerprintsEnrolledCategory = findPreference(KEY_FINGERPRINTS_ENROLLED_CATEGORY);
+            if (mFingerprintsEnrolledCategory != null) {
+                mFingerprintsEnrolledCategory.removeAll();
+            }
+
             String keyToReturn = KEY_FINGERPRINT_ADD;
             final List<Fingerprint> items = mFingerprintManager.getEnrolledFingerprints(mUserId);
             final int fingerprintCount = items.size();
@@ -576,20 +571,44 @@ public class FingerprintSettings extends SubSettings {
                 if (mFingerprintsRenaming.containsKey(item.getBiometricId())) {
                     pref.setTitle(mFingerprintsRenaming.get(item.getBiometricId()));
                 }
-                root.addPreference(pref);
+                mFingerprintsEnrolledCategory.addPreference(pref);
                 pref.setOnPreferenceChangeListener(this);
             }
-
-            Preference addPreference = new Preference(root.getContext());
-            addPreference.setKey(KEY_FINGERPRINT_ADD);
-            addPreference.setTitle(R.string.fingerprint_add_title);
-            addPreference.setIcon(R.drawable.ic_add_24dp);
-            root.addPreference(addPreference);
-            addPreference.setOnPreferenceChangeListener(this);
-            updateAddPreference();
-            createFooterPreference(root);
-
+            mAddFingerprintPreference = findPreference(KEY_FINGERPRINT_ADD);
+            setupAddFingerprintPreference();
             return keyToReturn;
+        }
+
+        private void setupAddFingerprintPreference() {
+            mAddFingerprintPreference.setOnPreferenceChangeListener(this);
+            updateAddPreference();
+        }
+
+        private void addFingerprintUnlockCategory() {
+            mFingerprintUnlockCategory = findPreference(KEY_FINGERPRINT_UNLOCK_CATEGORY);
+            setupFingerprintUnlockCategoryPreferences();
+            updateFingerprintUnlockCategoryVisibility();
+        }
+
+        private void updateFingerprintUnlockCategoryVisibility() {
+            final boolean mFingerprintUnlockCategoryAvailable =
+                    mFingerprintUnlockCategoryPreferenceController.isAvailable();
+            if (mFingerprintUnlockCategory.isVisible() != mFingerprintUnlockCategoryAvailable) {
+                mFingerprintUnlockCategory.setVisible(
+                        mFingerprintUnlockCategoryAvailable);
+            }
+        }
+
+        private void setupFingerprintUnlockCategoryPreferences() {
+            mRequireScreenOnToAuthPreference = findPreference(KEY_REQUIRE_SCREEN_ON_TO_AUTH);
+            mRequireScreenOnToAuthPreference.setChecked(
+                    mRequireScreenOnToAuthPreferenceController.isChecked());
+            mRequireScreenOnToAuthPreference.setOnPreferenceChangeListener(
+                    (preference, newValue) -> {
+                        final boolean isChecked = ((SwitchPreference) preference).isChecked();
+                        mRequireScreenOnToAuthPreferenceController.setChecked(!isChecked);
+                        return true;
+                    });
         }
 
         private void updateAddPreference() {
@@ -612,14 +631,18 @@ public class FingerprintSettings extends SubSettings {
             final boolean removalInProgress = mRemovalSidecar.inProgress();
             CharSequence maxSummary = tooMany ?
                     getContext().getString(R.string.fingerprint_add_max, max) : "";
-            addPreference.setSummary(maxSummary);
-            addPreference.setEnabled(!tooMany && !removalInProgress && mToken != null);
+            mAddFingerprintPreference.setSummary(maxSummary);
+            mAddFingerprintPreference.setEnabled(!tooMany && !removalInProgress && mToken != null);
         }
 
         private void createFooterPreference(PreferenceGroup root) {
             final Context context = getActivity();
             if (context == null) {
                 return;
+            }
+            mFingerprintUnlockFooter = findPreference(KEY_FINGERPRINT_UNLOCK_FOOTER);
+            if (mFingerprintUnlockFooter != null) {
+                mFingerprintUnlockFooter.removeAll();
             }
             for (int i = 0; i < mFooterColumns.size(); ++i) {
                 final FooterColumn column = mFooterColumns.get(i);
@@ -634,7 +657,7 @@ public class FingerprintSettings extends SubSettings {
                         footer.setLearnMoreText(column.mLearnMoreOverrideText);
                     }
                 }
-                root.addPreference(footer);
+                mFingerprintUnlockFooter.addPreference(footer);
             }
         }
 
@@ -815,11 +838,17 @@ public class FingerprintSettings extends SubSettings {
 
         private List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
             final List<AbstractPreferenceController> controllers = new ArrayList<>();
+            mFingerprintUnlockCategoryPreferenceController =
+                    new FingerprintUnlockCategoryController(
+                            context,
+                            KEY_FINGERPRINT_UNLOCK_CATEGORY
+                    );
             mRequireScreenOnToAuthPreferenceController =
                     new FingerprintSettingsRequireScreenOnToAuthPreferenceController(
                             context,
                             KEY_REQUIRE_SCREEN_ON_TO_AUTH
                     );
+            controllers.add(mFingerprintUnlockCategoryPreferenceController);
             controllers.add(mRequireScreenOnToAuthPreferenceController);
             return controllers;
         }
