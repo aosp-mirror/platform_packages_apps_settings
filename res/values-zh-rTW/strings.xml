@@ -159,7 +159,8 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"系統預設"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"無法從「設定」選取這個應用程式的語言。"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"可用的語言可能與應用程式支援的語言不同，某些應用程式可能不支援這項設定。"</string>
-    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"只有可讓使用者選取語言的應用程式才會顯示在這裡。"</string>
+    <!-- no translation found for desc_app_locale_selection_supported (6744909281573556379) -->
+    <skip />
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"你的系統、應用程式和網站會使用偏好語言中第一個支援的語言。"</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"如要為各應用程式選取語言，請前往應用程式語言設定。"</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"進一步瞭解應用程式的語言"</string>
@@ -173,7 +174,6 @@
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"讓應用程式取得區域偏好設定，為你提供個人化體驗。"</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"應用程式會盡可能採用你的區域偏好設定。"</string>
     <string name="temperature_preferences_title" msgid="5009881556503629058">"溫度"</string>
-    <string name="calendar_preferences_title" msgid="8312485828206542600">"日曆"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"一週的第一天"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"數字顯示方式偏好"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"使用應用程式預設值"</string>
@@ -187,7 +187,7 @@
     <string name="friday_first_day_of_week" msgid="7074795061812083541">"星期五"</string>
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"星期六"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"如果應用程式不支援偏好的地區語言，就會使用預設的語言代碼設定。"</string>
-    <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"進一步瞭解語言偏好設定。"</string>
+    <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"進一步瞭解語言偏好設定"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{要移除所選語言嗎？}other{要移除所選語言嗎？}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"使用介面的文字會切換成另一種語言。"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"無法移除所有語言"</string>
@@ -329,7 +329,7 @@
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"使用指紋解鎖工作資料夾"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"新增指紋"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{已新增 1 個指紋}other{已新增 # 個指紋}}"</string>
-    <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"必須設定"</string>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"需要設定"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"設定指紋"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"允許使用指紋解鎖功能"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"使用指紋"</string>
@@ -373,7 +373,7 @@
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"已新增臉孔、指紋和「<xliff:g id="WATCH">%s</xliff:g>」"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"人臉和指紋解鎖"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"用於工作資料夾的人臉和指紋解鎖"</string>
-    <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"必須設定"</string>
+    <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"需要設定"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"已新增臉孔和指紋"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"已新增臉孔和指紋"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"設定人臉解鎖和指紋解鎖功能時，如果你戴著口罩或人在昏暗的地方，手機會要求你提供指紋"</string>
@@ -456,7 +456,7 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"使用食指輕觸手機背面的感應器。"</string>
     <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"未完成註冊"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"指紋設定已逾時"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"您可以立即重試，也可以稍後再前往「設定」進行指紋設定"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"你可以立即重試，也可以稍後再前往「設定」進行指紋設定"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"無法註冊指紋。請再試一次或用另一隻手指。"</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"新增另一個"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"下一步"</string>
@@ -1799,7 +1799,7 @@
     <string name="accessibility_magnification_mode_dialog_title" msgid="9151027667059878578">"選擇放大模式"</string>
     <string name="accessibility_magnification_mode_dialog_option_full_screen" msgid="4892487869954032029">"放大整個螢幕畫面"</string>
     <string name="accessibility_magnification_mode_dialog_option_window" msgid="4492443201099153362">"放大局部螢幕畫面"</string>
-    <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"切換螢幕畫面全部放大或局部放大模式"</string>
+    <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"螢幕畫面可切換為全部放大或局部放大模式"</string>
     <string name="accessibility_magnification_area_settings_mode_switch_summary" msgid="2885238806099080966">"輕觸切換鈕即可在兩個選項之間切換"</string>
     <string name="accessibility_magnification_switch_shortcut_title" msgid="3671432048806533079">"要改用無障礙工具按鈕嗎？"</string>
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"如果你使用「輕觸三下放大」手勢放大局部螢幕畫面，輸入內容及執行其他操作時會出現延遲。\n\n無障礙工具按鈕會懸浮在畫面中的其他應用程式上。輕觸該按鈕即可放大畫面。"</string>
@@ -2077,7 +2077,7 @@
     <string name="capabilities_list_title" msgid="1225853611983394386">"「<xliff:g id="SERVICE">%1$s</xliff:g>」需要執行下列動作："</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"權限要求遭到其他應用程式畫面遮掩，因此「設定」無法驗證你的回應。"</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g>要求這個裝置的完整控制權。如果你授予相關權限，該服務就能讀取畫面內容及執行動作，以協助需要無障礙服務的使用者。這個等級的控制權不適用於大多數應用程式。"</string>
-    <string name="accessibility_service_warning_description" msgid="6573203795976134751">"如果你有無障礙服務需求，可以將完整控制權授予具有相關功能的應用程式，但請勿將完整控制權授予大多數的應用程式。"</string>
+    <string name="accessibility_service_warning_description" msgid="6573203795976134751">"如果你有無障礙服務需求，建議可將完整控制權授予具有相關功能的應用程式，但請勿將完整控制權授予大多數的應用程式。"</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"查看及控制螢幕"</string>
     <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"可讀取螢幕上的所有內容及在其他應用程式上顯示內容。"</string>
     <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"查看及執行動作"</string>
@@ -2180,7 +2180,8 @@
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"開啟省電模式"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"電池電力可能會比平常更快耗盡"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"省電模式已開啟"</string>
-    <string name="battery_saver_link_a11y" msgid="740558184830458845">"進一步瞭解省電模式"</string>
+    <!-- no translation found for battery_saver_link_a11y (6613079613524512257) -->
+    <skip />
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"部分功能可能受到限制"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"電池用量較高的應用程式"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"查看電池用量最高的應用程式"</string>
@@ -2227,7 +2228,7 @@
     <string name="battery_missing_message" msgid="400958471814422770">"讀取電池計量器時發生問題。"</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"輕觸即可進一步瞭解這個錯誤"</string>
-    <string name="power_screen" msgid="3926703168513988776">"螢幕"</string>
+    <string name="power_screen" msgid="4596900105850963806">"螢幕"</string>
     <string name="power_cpu" msgid="1820472721627148746">"CPU"</string>
     <string name="power_flashlight" msgid="8993388636332573202">"手電筒"</string>
     <string name="power_camera" msgid="4778315081581293923">"相機"</string>
@@ -2306,9 +2307,9 @@
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"<xliff:g id="SLOT">%s</xliff:g>的電池用量"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"自上次充飽電後的裝置使用時間"</string>
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"<xliff:g id="SLOT">%s</xliff:g>的裝置使用時間"</string>
-    <!-- no translation found for battery_usage_spinner_by_apps (78924517671977945) -->
+    <!-- no translation found for battery_usage_spinner_view_by_apps (8769276544072098082) -->
     <skip />
-    <!-- no translation found for battery_usage_spinner_by_systems (6489690892421179515) -->
+    <!-- no translation found for battery_usage_spinner_view_by_systems (7904104223212160541) -->
     <skip />
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"處理程序統計資料"</string>
@@ -2954,7 +2955,8 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, 進階通話, 5g 通話"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"新增語言, 新增一種語言"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"文字大小, 大字, 大字型, 大型文字, 低視能, 放大文字, 放大字型, 使用大字型"</string>
-    <string name="keywords_always_show_time_info" msgid="645658129239452778">"持續待機螢幕，AOD"</string>
+    <!-- no translation found for keywords_always_show_time_info (1066752498285497595) -->
+    <skip />
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, 標記, 感應器"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"音量、震動、零打擾"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"媒體音量"</string>
@@ -3648,12 +3650,9 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"授予管理所有檔案的權限"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"允許這個應用程式讀取、修改及刪除這部裝置或任何已連結儲存空間上的所有檔案。如果應用程式獲得授權，可能會在你不知情的情況下存取檔案。"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"可以存取所有檔案"</string>
-    <!-- no translation found for full_screen_intent_title (2461171326558306927) -->
-    <skip />
-    <!-- no translation found for permit_full_screen_intent (7103548865544643514) -->
-    <skip />
-    <!-- no translation found for footer_description_full_screen_intent (4600171646567760347) -->
-    <skip />
+    <string name="full_screen_intent_title" msgid="2461171326558306927">"顯示全螢幕通知"</string>
+    <string name="permit_full_screen_intent" msgid="7103548865544643514">"允許應用程式在裝置鎖定時顯示全螢幕通知"</string>
+    <string name="footer_description_full_screen_intent" msgid="4600171646567760347">"允許應用程式在裝置鎖定時顯示全螢幕通知。應用程式可能會在這類通知中顯示鬧鐘、來電或其他緊急通知。"</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"媒體管理應用程式"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"允許應用程式管理媒體"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"如果允許，這個應用程式就能直接修改或刪除使用其他應用程式建立的媒體檔案，不用事先取得你的同意。應用程式必須具有檔案和媒體的存取權限。"</string>
@@ -4060,7 +4059,10 @@
     <string name="autofill_app" msgid="7595308061826307921">"自動填入服務"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"預設的自動填入服務"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"密碼"</string>
-    <string name="credman_credentials" msgid="7413302794874989255">"密碼、密碼金鑰和資料服務"</string>
+    <!-- no translation found for credman_chosen_app_title (4547405511458518096) -->
+    <skip />
+    <!-- no translation found for credman_credentials (4931371941253324143) -->
+    <skip />
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# 個密碼}other{# 個密碼}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"自動, 填寫, 自動填入, 密碼"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"資料, 密碼金鑰, 密碼"</string>
@@ -4415,10 +4417,8 @@
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"顯示 QR code 掃描器"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"允許從螢幕鎖定畫面使用 QR code 掃描器"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"顯示裝置控制"</string>
-    <!-- no translation found for lockscreen_privacy_controls_summary (7522918441738915364) -->
-    <skip />
-    <!-- no translation found for lockscreen_trivial_controls_setting_toggle (2174300719855112358) -->
-    <skip />
+    <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"在鎖定畫面中"</string>
+    <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"使用裝置控制功能"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"如要使用，請先開啟「顯示裝置控制」"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"顯示雙行時鐘 (如果可用的話)"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"雙行時鐘"</string>
@@ -4700,5 +4700,6 @@
     <string name="contrast_medium" msgid="384414510709285811">"中"</string>
     <string name="contrast_high" msgid="3988567609694797696">"高"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"這個應用程式只能在 1 個視窗中開啟"</string>
-    <string name="note_task_button_label" msgid="1741456863714912927">"做筆記"</string>
+    <!-- no translation found for note_task_shortcut_label (1589543982691587932) -->
+    <skip />
 </resources>
