@@ -404,7 +404,7 @@
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"現在の顔モデルを削除して顔認証をもう一度設定してください。\n\n顔モデルは安全かつ完全に削除されます。\n\n削除後に、スマートフォンのロック解除やアプリでの認証を行うには、指紋、PIN、パターン、パスワードのいずれかが必要になります。"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"顔認証の用途"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"顔認証を使用する場合"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"目を開く"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"目を開いているか確認"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"デバイスのロックを解除する際に、目を開いていることを確認します"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"常に確認が必要"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"アプリで顔認証を使用する場合、常に確認手順を要求します"</string>
@@ -1453,7 +1453,7 @@
     <string name="lift_to_wake_title" msgid="8994218158737714046">"指を離してスリープ状態から復帰"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"アンビエント表示"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"表示するタイミング"</string>
-    <string name="doze_title" msgid="1523090408230862316">"通知時にスリープ状態から復帰"</string>
+    <string name="doze_title" msgid="1523090408230862316">"通知で画面を ON にする"</string>
     <string name="doze_summary" msgid="8252867381522942804">"画面が暗いときに新しい通知が届いた場合、画面を ON にします"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"時間と情報を常に表示"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"バッテリー使用量が増えます"</string>
@@ -2699,7 +2699,7 @@
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"アプリによるバッテリーの利用方法を変更すると、パフォーマンスに影響することがあります。"</string>
     <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"このアプリでは、バッテリーの使用を「<xliff:g id="STATE">%1$s</xliff:g>」以外に設定できません。"</string>
     <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"制限なし"</string>
-    <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"最適化"</string>
+    <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"最適化済み"</string>
     <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"詳しくは、バッテリー使用状況のオプションに関する説明をご確認ください"</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"最後にフル充電してからの使用時間"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"フル充電以降のバッテリー使用量"</string>
@@ -3777,7 +3777,7 @@
     <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"画面にポップアップ通知を表示しない"</string>
     <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"ステータスバー アイコンを非表示"</string>
     <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"アプリアイコンの通知ドットを非表示"</string>
-    <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"通知で復帰しない"</string>
+    <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"通知で画面を ON にしない"</string>
     <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"プルダウン シェードに通知を表示しない"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"設定しない"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="6989818116297061488">"画面が OFF のとき"</string>
@@ -4042,11 +4042,11 @@
     <string name="notif_type_alerting_summary" msgid="4681068287836313604">"スマートフォンの設定を基に着信音またはバイブレーションが有効になります"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"消音"</string>
     <string name="notif_type_silent_summary" msgid="7820923063105060844">"通知があっても、着信音やバイブレーションは発生しません"</string>
-    <string name="notification_listener_allowed" msgid="5536962633536318551">"許可されたアプリ"</string>
+    <string name="notification_listener_allowed" msgid="5536962633536318551">"許可されているアプリ"</string>
     <string name="notification_listener_not_allowed" msgid="3352962779597846538">"許可されてないアプリ"</string>
     <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"アプリをすべて表示"</string>
     <string name="notif_listener_excluded_app_summary" msgid="2914567678047195396">"通知を送信する各アプリの設定を変更します"</string>
-    <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"デバイスに表示されるアプリ"</string>
+    <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"デバイスに表示するアプリ"</string>
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"このアプリは拡張設定に対応していません"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR ヘルパー サービス"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"VR ヘルパー サービスとしての実行権限をリクエストしたインストール済みアプリはありません。"</string>
@@ -4120,7 +4120,7 @@
     <string name="notification_badge_title" msgid="6854537463548411313">"通知ドットを許可"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"通知ドットの表示"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"サイレント モードの例外"</string>
-    <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"サイレント モードが ON の場合もこの通知を引き続き表示します"</string>
+    <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"サイレント モードが ON の場合も、指定の通知を引き続き表示します"</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"ロック画面"</string>
     <string name="app_notification_row_banned" msgid="4513523107019706924">"ブロック済み"</string>
     <string name="app_notification_row_priority" msgid="8100777138078316446">"優先"</string>
@@ -4236,8 +4236,8 @@
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"割り込み可能なアプリ"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"他のアプリを選択"</string>
     <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"アプリが選択されていません"</string>
-    <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"すべて割り込み不可"</string>
-    <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"アプリの追加"</string>
+    <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"割り込み可能なアプリはありません"</string>
+    <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"アプリを追加"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"すべての通知"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"一部の通知"</string>
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"アプリの割り込みを許可していない場合でも、選択したユーザーからの連絡は引き続き届きます"</string>
@@ -4248,8 +4248,8 @@
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"割り込み可能な通知"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"すべての通知を許可"</string>
     <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{すべて割り込み不可}=1{{sound_category_1} が割り込み可能}=2{{sound_category_1} と {sound_category_2} が割り込み可能}=3{{sound_category_1}、{sound_category_2}、{sound_category_3} が割り込み可能}other{{sound_category_1}、{sound_category_2}、他 # 件が割り込み可能}}"</string>
-    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"すべて割り込み不可"</string>
-    <string name="zen_mode_people_none" msgid="4613147461974255046">"すべて割り込み不可"</string>
+    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"割り込み可能なアラームなどはありません"</string>
+    <string name="zen_mode_people_none" msgid="4613147461974255046">"割り込み可能なユーザーはいません"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"一部のユーザーが割り込み可能"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"すべてのユーザーが割り込み可能"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"同一発信者による再着信"</string>
@@ -5551,7 +5551,7 @@
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"ロック画面からの QR スキャナへのアクセスを許可します"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"デバイス コントロールを表示"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"ロック画面から外部デバイスのコントロールを表示できます"</string>
-    <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"ロックされたデバイスから操作する"</string>
+    <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"ロック状態でも外部デバイスを操作可能"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"デバイス コントロール アプリで許可されていれば、スマートフォンやタブレットのロックを解除しなくても外部デバイスを操作できます"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"使用するには、[デバイス コントロールを表示] を ON にしてください"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"使用可能な場合はダブルライン時計を表示します"</string>
