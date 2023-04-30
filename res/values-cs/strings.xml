@@ -302,12 +302,12 @@
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Vybrat podle posunu od UTC"</string>
     <string name="date_picker_title" msgid="646573308567782578">"Datum"</string>
     <string name="time_picker_title" msgid="1784236407401743393">"Čas"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"Interval zamčení obrazovky"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"Interval uzamčení obrazovky"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po vypršení časového limitu"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Okamžitě po vypršení časového limitu, pokud odemknutí není udržováno funkcí <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po vypršení časového limitu, pokud odemknutí není udržováno funkcí <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="197365342192696406">"Zobrazovat vlastníka na zamčené obrazovce"</string>
-    <string name="owner_info_settings_title" msgid="3555626140700093017">"Přidat text na obrazovku uzamčení"</string>
+    <string name="owner_info_settings_title" msgid="3555626140700093017">"Text na obrazovce uzamčení"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Aktivovat widgety"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Zakázáno administrátorem"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Zamknout obrazovku při ztrátě důvěry"</string>
@@ -702,7 +702,7 @@
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"Gesto chrání telefon v případě ztráty nebo odcizení.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Touto akcí smažete model otisku prstu uložený v zařízení. Bude také trvale a bezpečně smazán model obličeje. Obličej ani otisk prstu nebudete moci používat ani k ověřování v aplikacích."</string>
-    <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"PIN chrání telefon v případě ztráty nebo odcizení."</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"V případě ztráty nebo odcizení telefonu ho PIN chrání."</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"PIN chrání telefon v případě ztráty nebo odcizení.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Touto akcí také vymažete model otisku prstu uložený v zařízení. Otisk prstu nebudete moci používat ani k ověřování v aplikacích."</string>
@@ -1351,7 +1351,7 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Zapnuto"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Zap – podle obličeje"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Rozpoznání obličeje"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Automaticky změnit orientaci obrazovky, když telefon otočíte z režimu na výšku do režimu na šířku a naopak"</string>
+    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Orientace obrazovky se automaticky změní, když telefon otočíte na výšku nebo na šířku"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Další informace o automatickém otáčení"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Když telefon otočíte z režimu na výšku do režimu na šířku"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Rozlišení obrazovky"</string>
@@ -1406,8 +1406,8 @@
     <string name="adaptive_sleep_title_no_permission" msgid="1719759921214237016">"Je třeba udělit přístup k fotoaparátu"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="5822591289468803691">"Funkce vnímavé obrazovky potřebuje přístup k fotoaparátu. Klepnutím můžete spravovat oprávnění služeb personalizace zařízení"</string>
     <string name="adaptive_sleep_manage_permission_button" msgid="1404510197847664846">"Spravovat oprávnění"</string>
-    <string name="adaptive_sleep_description" msgid="1835321775327187860">"Zabrání ve vypnutí obrazovky, když se na ni budete dívat"</string>
-    <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Funkce vnímavá obrazovka dokáže pomocí přední kamery určit, zda se někdo dívá na obrazovku. Data se zpracovávají v zařízení a snímky se nikdy neukládají ani neodesílají do Googlu."</string>
+    <string name="adaptive_sleep_description" msgid="1835321775327187860">"Když se díváte na obrazovku, nevypne se"</string>
+    <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Funkce vnímavá obrazovka dokáže pomocí přední kamery určit, zda se někdo na obrazovku dívá. Data se zpracovávají v zařízení a snímky se nikdy neukládají ani neodesílají do Googlu."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Zapnutí vnímavé obrazovky"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Nechat obrazovku zapnutou, když na ni koukáte"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"Fotoaparát je uzamčený"</string>
@@ -1446,7 +1446,7 @@
     <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"Vypnout do soumraku"</string>
     <string name="dark_ui_title" msgid="3373976268671557416">"Tmavý režim"</string>
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"Plán"</string>
-    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Nikdy"</string>
+    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Nezapne se"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Zapne se od soumraku do úsvitu"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Zapne se ve zvoleném čase"</string>
     <string name="dark_ui_auto_mode_custom_bedtime" msgid="8465023741946439266">"Zapne se během nočního klidu"</string>
@@ -1486,7 +1486,7 @@
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Nikdy"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Vyp."</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Chcete-li nastavit, co se stane, když je telefon vložen do doku nebo je v režimu spánku, zapněte spořič obrazovky."</string>
-    <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Kdy spustit"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Kdy se má spouštět"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Aktuální spořič obrazovky"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Nastavení"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Automatický jas"</string>
@@ -2050,7 +2050,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Zobrazovat gesto"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Zobrazit gesto profilu"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibrovat při klepnutí"</string>
-    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Vypínač zamkne zařízení"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Okamžitě zamknout vypínačem"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Pokud odemknutí není udržováno funkcí <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"Nastavení bezpečnostního gesta"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"Změna bezpečnostního gesta"</string>
@@ -2341,7 +2341,7 @@
     <string name="audio_category_title" msgid="5283853679967605826">"Zvuk"</string>
     <string name="general_category_title" msgid="6298579528716834157">"Obecné"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Zobrazení"</string>
-    <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Barva a pohyb"</string>
+    <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Barvy a pohyb"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Ztmavit obrazovku"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Interaktivní ovládací prvky"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Ovládací prvky časování"</string>
@@ -2400,7 +2400,7 @@
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Přiblížení obrazovky"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Trojitým klepnutím aktivujete přiblížení"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Přiblížení zobrazení klepnutím na tlačítko"</string>
-    <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Obrazovku si můžete rychle přiblížit, aby byl obsah větší"</string>
+    <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Obrazovku si můžete rychle přiblížit, aby byl obsah větší."</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Přiblížení:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Zvětšení spusťte pomocí zkratky.&lt;br/&gt; {1,number,integer}. Klepněte na obrazovku.&lt;br/&gt; {2,number,integer}. Po obrazovce se pohybujte přetažením dvěma prsty.&lt;br/&gt; {3,number,integer}. Přiblížení upravte stažením a roztažením dvou prstů.&lt;br/&gt; {4,number,integer}. Zvětšení ukončete pomocí zkratky.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Dočasné přiblížení:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Zkontrolujte, zda je typ zvětšení nastaven na celou obrazovku.&lt;br/&gt; {1,number,integer}. Zvětšení spusťte pomocí zkratky.&lt;br/&gt; {2,number,integer}. Podržte jakékoli místo na obrazovce.&lt;br/&gt; {3,number,integer}. Po obrazovce se pohybujte přetažením prstu.&lt;br/&gt; {4,number,integer}. Zvětšení ukončete zvednutím prstu."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Když je zapnuté zvětšení, můžete přibližovat obsah na obrazovce.\n\n"<b>"Chcete-li obsah přiblížit"</b>", spusťte zvětšení a poté klepněte kamkoliv na obrazovku.\n"<ul><li>"Přetažením dvěma nebo více prsty můžete obsah posouvat."</li>\n<li>"Stažením nebo roztažením dvou či více prstů upravíte přiblížení."</li></ul>\n\n<b>"Chcete-li obsah přiblížit dočasně"</b>", spusťte zvětšení a poté se dotkněte libovolného místa na obrazovce a podržte ho.\n"<ul><li>"Přetažením se můžete pohybovat po obrazovce."</li>\n<li>"Zvednutím prstu zobrazení vrátíte do původního stavu."</li></ul>\n\n"Na klávesnici a navigačním panelu přiblížení není k dispozici."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Strana <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> z <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
@@ -2489,7 +2489,7 @@
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Vyberte, jak dlouho se mají zobrazovat dočasné zprávy s výzvami k akci"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Prodleva přidržení"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Převrácení barev"</string>
-    <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Použít převrácení barev"</string>
+    <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Převrátit barvy"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Zkratka pro převrácení barev"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Převrácení barev změní světlou obrazovku na tmavou. Změní také tmavou obrazovku na světlou."</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Upozornění&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Barvy se změní v médiích a obrázcích.&lt;/li&gt; &lt;li&gt; Převrácení barev funguje ve všech aplikacích.&lt;/li&gt; &lt;li&gt; Pokud chcete mít tmavé pozadí, stačí použít tmavý motiv.&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -2516,8 +2516,8 @@
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Nastavení bylo vypnuto, protože je zařízení nastaveno na tichý režim"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Volání"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Oznámení a budíky"</string>
-    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Interaktivní odezva"</string>
-    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Použít vibrace a hmatovou odezvu"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Interaktivní hmatová odezva"</string>
+    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Používat vibrace a hmatovou odezvu"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibrace u budíku"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibrace u médií"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibrace při vyzvánění"</string>
@@ -2536,7 +2536,7 @@
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"Režim jedné ruky byl přidán do Rychlého nastavení. Po přejetí prstem dolů jej můžete kdykoli zapnout nebo vypnout."</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"Režim jedné ruky také můžete v horní části obrazovky přidat do Rychlého nastavení"</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Zavřít"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"Upravte si zobrazování barev v telefonu"</string>
+    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"Můžete si upravit, jak se budou v telefonu zobrazovat barvy."</string>
     <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"Upravte si zobrazování barev v tabletu"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Používat korekci barev"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Zkratka pro korekci barev"</string>
@@ -2597,7 +2597,7 @@
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Velmi tmavé"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Ztmavit obrazovku více, než je minimální nastavení jasu na telefonu"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Ztmavit obrazovku více, než je minimální nastavení jasu na tabletu"</string>
-    <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Ztmavte si obrazovku, aby se vám lépe četla"</string>
+    <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Obrazovku si můžete ztmavit. Bude se vám tak lépe číst."</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="8573408446901659333">"Velmi tmavé nastavení se může hodit v těchto případech: &lt;ol&gt; &lt;li&gt; Minimální nastavení jasu na telefonu je stále příliš vysoké.&lt;/li&gt; &lt;li&gt; Používáte telefon v tmavém prostředí, například v noci nebo v tmavém pokoji před spaním.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5158211121482010799">"Velmi tmavé nastavení se může hodit v těchto případech: &lt;ol&gt; &lt;li&gt; Minimální nastavení jasu na tabletu je stále příliš vysoké.&lt;/li&gt; &lt;li&gt; Používáte tablet v tmavém prostředí, například v noci nebo v tmavém pokoji před spaním.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intenzita"</string>
@@ -3128,7 +3128,7 @@
     <string name="credentials_not_erased" msgid="3611058412683184031">"Úložiště pověření nelze smazat."</string>
     <string name="usage_access_title" msgid="1580006124578134850">"Přístup k dat. o používání"</string>
     <string name="ca_certificate" msgid="3076484307693855611">"Certifikát CA"</string>
-    <string name="user_certificate" msgid="6897024598058566466">"Certifikát pro VPN a aplikaci"</string>
+    <string name="user_certificate" msgid="6897024598058566466">"Certifikát uživatele VPN a aplikací"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Certifikát Wi‑Fi"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Nebude zajištěno soukromí vašich dat"</string>
     <string name="ca_certificate_warning_description" msgid="8409850109551028774">"Certifikáty CA slouží k šifrování na webech, v aplikacích a v sítích VPN. Instalujte pouze certifikáty CA od organizací, kterým důvěřujete. \n\nPokud nainstalujete certifikát CA, jeho vlastník může získat přístup k vašim údajům (například heslům nebo podrobnostem o platebních kartách) z webů a aplikací, které používáte – a to i když tyto informace budou šifrované."</string>
@@ -3780,7 +3780,7 @@
     <string name="sound_settings_example_summary" msgid="8125110691864707925">"Hlasitost vyzvánění a oznámení je na 80 %"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Hlasitost médií"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Hlasitost odesílání"</string>
-    <string name="call_volume_option_title" msgid="1461105986437268924">"Hlasitost hovoru"</string>
+    <string name="call_volume_option_title" msgid="1461105986437268924">"Hlasitost hovorů"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"Hlasitost budíků"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Hlasitost vyzvánění a oznámení"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Hlasitost oznámení"</string>
@@ -3863,7 +3863,7 @@
     <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"Nezobrazovat oznámení na obrazovce"</string>
     <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"Skrýt ikony stavového řádku v horní části obrazovky"</string>
     <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Skrýt puntíky s oznámením na ikonách aplikací"</string>
-    <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"Nebudit kvůli oznámením"</string>
+    <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"Neprobouzet obrazovku kvůli oznámením"</string>
     <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"Nezobrazovat na vysouvacím panelu"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"Nikdy"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="6989818116297061488">"Při vypnuté obrazovce"</string>
@@ -4011,11 +4011,11 @@
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Skrýt tiché konverzace a oznámení"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Nezobrazovat žádná oznámení"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Citlivá oznámení"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Při uzamknutí zobrazovat citlivý obsah"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Citlivý obsah zobrazovat při uzamknutí"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Citlivá oznámení v pracovním profilu"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Při uzamknutí zobrazovat citlivý obsah pracovního profilu"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Zobrazovat veškerý obsah oznámení"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Zobrazovat citlivý obsah jen po odemknutí"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Citlivý obsah zobrazovat jen po odemknutí"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Oznámení vůbec nezobrazovat"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Jak chcete obrazovku uzamčení zobrazovat?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Obrazovka uzamčení"</string>
@@ -4286,7 +4286,7 @@
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Žádné"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Žádná}=1{1 konverzace}few{# konverzace}many{# konverzace}other{# konverzací}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Kdo smí vyrušovat"</string>
-    <string name="zen_mode_people_footer" msgid="7710707353004137431">"I když vás nebudou moci informovat aplikace na odesílání zpráv nebo volání, vybraní lidé vás přesto budou moci prostřednictvím těchto aplikací kontaktovat."</string>
+    <string name="zen_mode_people_footer" msgid="7710707353004137431">"Ačkoliv vás nebudou moct informovat aplikace na odesílání zpráv nebo volání, vybraní lidé vás prostřednictvím těchto aplikací zkontaktují."</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Volání"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Volání"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"hovory"</string>
@@ -5078,7 +5078,7 @@
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Bezpečnost a stav nouze"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Tísňové volání, zdravotní údaje, upozornění"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navigace gesty"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Na plochu přejdete přejetím prstem nahoru ze spodní části obrazovky. Aplikace přepnete přejetím prstem zdola nahoru, podržením obrazovky a uvolněním prstu. Zpět se vrátíte přejetím prstem z levého nebo pravého okraje obrazovky."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Na plochu přejdete tak, že prstem přejedete ze spodní části obrazovky nahoru. Aplikace přepnete přejetím prstem zdola nahoru, podržením obrazovky a uvolněním prstu. Zpět se vrátíte tak, že prstem přejedete z levého nebo pravého okraje obrazovky."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigace třemi tlačítky"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"K přechodu zpět, zobrazení plochy a přepínání aplikací slouží tlačítka v dolní části obrazovky."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"systémová navigace, navigace dvěma tlačítky, navigace třemi tlačítky, navigace gesty, přejetí prstem"</string>
@@ -5301,7 +5301,7 @@
     <string name="clear_instant_app_confirmation" msgid="3964731334459209482">"Chcete tuto okamžitou aplikaci odstranit?"</string>
     <string name="launch_instant_app" msgid="8503927414339606561">"Otevřít"</string>
     <string name="game_storage_settings" msgid="2521393115726178837">"Hry"</string>
-    <string name="app_info_storage_title" msgid="4076977173803093808">"Využitý prostor"</string>
+    <string name="app_info_storage_title" msgid="4076977173803093808">"Využité místo"</string>
     <string name="webview_uninstalled_for_user" msgid="627352948986275488">"(pro uživatele <xliff:g id="USER">%s</xliff:g> odinstalováno)"</string>
     <string name="webview_disabled_for_user" msgid="5809886172032644498">"(pro uživatele <xliff:g id="USER">%s</xliff:g> nedostupné)"</string>
     <string name="autofill_app" msgid="7595308061826307921">"Služba automatického vyplňování"</string>
@@ -5842,7 +5842,7 @@
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Používat noční režim"</string>
     <string name="nfc_main_switch_title" msgid="6295839988954817432">"Používat NFC"</string>
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Použít adaptivní baterii"</string>
-    <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Použít adaptivní jas"</string>
+    <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Používat adaptivní jas"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Použít volání přes Wi-Fi"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Zobrazit všechny aplikace"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Chytré přesměrování"</string>
