@@ -30,6 +30,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.Utils;
 import com.android.settingslib.utils.ThreadUtils;
 
 public class TopLevelBatteryPreferenceController extends BasePreferenceController implements
@@ -129,6 +130,9 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
     }
 
     private CharSequence generateLabel(BatteryInfo info) {
+        if (Utils.containsIncompatibleChargers(mContext, TAG)) {
+            return mContext.getString(R.string.battery_tip_incompatible_charging_title);
+        }
         if (!info.discharging && info.chargeLabel != null) {
             return info.chargeLabel;
         } else if (info.remainingLabel == null) {
