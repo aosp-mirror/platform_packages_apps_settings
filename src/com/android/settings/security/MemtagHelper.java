@@ -30,7 +30,7 @@ public class MemtagHelper {
             "persist.device_config.runtime_native_boot.bootloader_override";
 
     public static boolean isForcedOff() {
-        return TextUtils.equals("force_on", SystemProperties.get(DEVICE_CONFIG_PROP));
+        return TextUtils.equals("force_off", SystemProperties.get(DEVICE_CONFIG_PROP));
     }
 
     public static boolean isForcedOn() {
