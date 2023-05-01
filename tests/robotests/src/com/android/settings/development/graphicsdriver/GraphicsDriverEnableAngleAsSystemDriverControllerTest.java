@@ -81,9 +81,10 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerTest {
         // since GraphicsEnvironment is mocked in Robolectric test environment,
         // we will override the system property persist.graphics.egl as if it is changed by
         // mGraphicsEnvironment.toggleAngleAsSystemDriver(true).
-        // TODO: b/270994705 yuxinhu:
-        // add test coverage to test mGraphicsEnvironment.toggleAngleAsSystemDriver()
-        // works properly on Android devices / emulators.
+
+        // for test that actually verifies mGraphicsEnvironment.toggleAngleAsSystemDriver(true)
+        // on a device/emulator, please refer to
+        // GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest
         ShadowSystemProperties.override(PROPERTY_PERSISTENT_GRAPHICS_EGL, ANGLE_DRIVER_SUFFIX);
         mController.onPreferenceChange(mPreference, true);
         final String systemEGLDriver = SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL);
@@ -97,9 +98,10 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerTest {
         // since GraphicsEnvironment is mocked in Robolectric test environment,
         // we will override the system property persist.graphics.egl as if it is changed by
         // mGraphicsEnvironment.toggleAngleAsSystemDriver(false).
-        // TODO: b/270994705 yuxinhu:
-        // add test coverage to test mGraphicsEnvironment.toggleAngleAsSystemDriver()
-        // works properly on Android devices / emulators.
+
+        // for test that actually verifies mGraphicsEnvironment.toggleAngleAsSystemDriver(true)
+        // on a device/emulator, please refer to
+        // GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest
         ShadowSystemProperties.override(PROPERTY_PERSISTENT_GRAPHICS_EGL, "");
         mController.onPreferenceChange(mPreference, false);
         final String systemEGLDriver = SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL);
@@ -124,20 +126,14 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerTest {
     @Test
     public void updateState_angleSupported_angleUsed_preferenceShouldBeChecked() {
         ShadowSystemProperties.override(PROPERTY_RO_GFX_ANGLE_SUPPORTED, "true");
-        // TODO: b/270994705 yuxinhu:
-        // add test coverage to test mGraphicsEnvironment.toggleAngleAsSystemDriver()
-        // works properly on Android devices / emulators.
         ShadowSystemProperties.override(PROPERTY_PERSISTENT_GRAPHICS_EGL, ANGLE_DRIVER_SUFFIX);
         mController.updateState(mPreference);
-        verify(mPreference).setChecked(true); //false
+        verify(mPreference).setChecked(true);
     }
 
     @Test
     public void updateState_angleSupported_angleNotUsed_preferenceShouldNotBeChecked() {
         ShadowSystemProperties.override(PROPERTY_RO_GFX_ANGLE_SUPPORTED, "true");
-        // TODO: b/270994705 yuxinhu:
-        // add test coverage to test mGraphicsEnvironment.toggleAngleAsSystemDriver(false)
-        // works properly on Android devices / emulators.
         ShadowSystemProperties.override(PROPERTY_PERSISTENT_GRAPHICS_EGL, "");
         mController.updateState(mPreference);
         verify(mPreference).setChecked(false);
