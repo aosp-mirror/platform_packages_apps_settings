@@ -44,8 +44,6 @@ import android.os.UserHandle;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.text.TextUtils;
-import com.android.settingslib.utils.ThreadUtils;
-import com.android.internal.content.PackageMonitor;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
@@ -125,6 +123,23 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         }
 
         return null;
+    }
+
+    @Override
+    public int getAvailabilityStatus() {
+        if (mCredentialManager == null) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+
+        if (!isAutofillPrefSelected()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+
+        if (mServices.isEmpty()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+
+        return AVAILABLE;
     }
 
     @VisibleForTesting
@@ -266,12 +281,15 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         if (mPreferenceScreen != null) {
             displayPreference(mPreferenceScreen);
         }
+
+        if (mDelegate != null) {
+            mDelegate.forceDelegateRefresh();
+        }
     }
 
     @VisibleForTesting
     void setAvailableServices(
-            List<CredentialProviderInfo> availableServices,
-            String flagOverrideForTest) {
+            List<CredentialProviderInfo> availableServices, String flagOverrideForTest) {
         mFlagOverrideForTest = flagOverrideForTest;
         mServices.clear();
         mServices.addAll(availableServices);
@@ -292,11 +310,6 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        return mServices.isEmpty() ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
-    }
-
-    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
@@ -305,6 +318,17 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         mPreferenceScreen = screen;
         PreferenceGroup group = screen.findPreference(getPreferenceKey());
+        group.removeAll();
+
+        // Hide/show based on autofill pref.
+        boolean isVisible = isAutofillPrefSelected();
+        screen.setVisible(isVisible);
+        group.setVisible(isVisible);
+
+        if (!isVisible) {
+            return;
+        }
+
         Context context = screen.getContext();
         mPrefs.putAll(buildPreferenceList(context, group));
 
@@ -586,10 +610,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     /** If the provider is also the autofill provider then hide it. */
     @VisibleForTesting
     public boolean isProviderHiddenBecauseOfAutofill(String packageName) {
-        final String autofillService = Settings.Secure.getStringForUser(
-                mContext.getContentResolver(),
-                Settings.Secure.AUTOFILL_SERVICE,
-                getUser());
+        final String autofillService =
+                Settings.Secure.getStringForUser(
+                        mContext.getContentResolver(), Settings.Secure.AUTOFILL_SERVICE, getUser());
         if (autofillService == null || TextUtils.isEmpty(autofillService)) {
             return false;
         }
@@ -598,6 +621,13 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         }
 
         return autofillService.startsWith(packageName);
+    }
+
+    private boolean isAutofillPrefSelected() {
+        final String autofillService =
+                Settings.Secure.getStringForUser(
+                        mContext.getContentResolver(), Settings.Secure.AUTOFILL_SERVICE, getUser());
+        return !TextUtils.isEmpty(autofillService);
     }
 
     @VisibleForTesting
@@ -682,27 +712,31 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     /** Called to send messages back to the parent fragment. */
     public static interface Delegate {
         void setActivityResult(int resultCode);
+
+        void forceDelegateRefresh();
     }
 
     /**
-     * Monitor coming and going credman services and calls {@link #update()} when necessary
+     * Monitor coming and going credman services and calls {@link #DefaultCombinedPicker} when
+     * necessary
      */
-    private final PackageMonitor mSettingsPackageMonitor = new PackageMonitor() {
-        @Override
-        public void onPackageAdded(String packageName, int uid) {
-            ThreadUtils.postOnMainThread(() -> update());
-        }
+    private final PackageMonitor mSettingsPackageMonitor =
+            new PackageMonitor() {
+                @Override
+                public void onPackageAdded(String packageName, int uid) {
+                    ThreadUtils.postOnMainThread(() -> updateFromExternal());
+                }
 
-        @Override
-        public void onPackageModified(String packageName) {
-            ThreadUtils.postOnMainThread(() -> update());
-        }
+                @Override
+                public void onPackageModified(String packageName) {
+                    ThreadUtils.postOnMainThread(() -> updateFromExternal());
+                }
 
-        @Override
-        public void onPackageRemoved(String packageName, int uid) {
-            ThreadUtils.postOnMainThread(() -> update());
-        }
-    };
+                @Override
+                public void onPackageRemoved(String packageName, int uid) {
+                    ThreadUtils.postOnMainThread(() -> updateFromExternal());
+                }
+            };
 
     /** Dialog fragment parent class. */
     private abstract static class CredentialManagerDialogFragment extends DialogFragment
