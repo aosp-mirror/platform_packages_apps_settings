@@ -141,7 +141,7 @@ public class TopLevelBatteryPreferenceControllerTest {
         BatteryInfo info = new BatteryInfo();
 
         assertThat(mController.getDashboardLabel(mContext, info, true))
-                .isEqualTo(mContext.getString(R.string.battery_tip_incompatible_charging_title));
+                .isEqualTo(mContext.getString(R.string.battery_info_status_not_charging));
     }
 
     @Test
