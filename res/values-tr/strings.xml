@@ -104,7 +104,7 @@
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Yeniden başlat"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"İptal"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE Audio\'yu devre dışı bırak"</string>
-    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Cihaz, LE ses donanımı özelliklerini destekliyorsa Bluetooth LE ses özelliğini devre dışı bırakır."</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Cihaz, LE Audio donanımı özelliklerini destekliyorsa Bluetooth LE Audio özelliğini devre dışı bırakır."</string>
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Bluetooth LE Audio İzin Verilenler Listesi\'ni etkinleştir"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Bluetooth LE Audio izin verilenler listesi özelliğini etkinleştirin."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Medya cihazları"</string>
@@ -159,8 +159,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Sistem varsayılanı"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Ayarlar\'da bu uygulama için dil seçimi mevcut değil."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Dil, uygulamada bulunan dillerden farklı olabilir. Bazı uygulamalar bu ayarı desteklemeyebilir."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6744909281573556379) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Her uygulamanın dilini ayarlayın."</string>
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Sisteminiz, uygulamalarınız ve web siteleriniz, tercih ettiğiniz diller arasındaki ilk desteklenen dili kullanır."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Her uygulamaya özel bir dil seçmek için uygulama dil ayarlarına gidin."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Uygulama dilleri hakkında daha fazla bilgi edinin"</string>
@@ -318,7 +317,7 @@
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Her zaman onay gerekli"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Uygulamalarda Yüz Tanıma Kilidi kullanırken daima onay adımı gerektir"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Yüz modelini sil"</string>
-    <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"Yüz Tanıma Kilidi\'ni kurma"</string>
+    <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"Yüz Tanıma Kilidi\'ni kur"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Yüz modeli silinsin mi?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Yüz modeliniz, güvenli bir şekilde kalıcı olarak silinir.\n\nSilme işleminden sonra telefonunuzun kilidini açmak veya uygulamalarda kimliğinizi doğrulamak için PIN kodunuz, deseniniz veya şifreniz gerekir."</string>
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Yüz modeliniz güvenli bir şekilde kalıcı olarak silinir.\n\nSilme işleminden sonra, telefonunuzun kilidini açmak için PIN\'iniz, deseniniz veya şifreniz gerekir."</string>
@@ -476,7 +475,7 @@
     <string name="fingerprint_add_max" msgid="8639321019299347447">"<xliff:g id="COUNT">%d</xliff:g> adede kadar parmak izi ekleyebilirsiniz"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Maksimum sayıda parmak izi eklediniz"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Daha fazla parmak izi eklenemez"</string>
-    <string name="fingerprint_delete_title" msgid="5412123164503407098">"\"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" adlı parmak izini sil"</string>
+    <string name="fingerprint_delete_title" msgid="5412123164503407098">"\"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" adlı parmak izi silinsin mi?"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"İş profilinizin kilidini açmak, satın alma işlemlerini yetkilendirmek veya iş uygulamalarında oturum açmak için parmak izinizi kullanamazsınız."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Şifreleme"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Şifreli"</string>
@@ -1767,7 +1766,7 @@
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Sistem kontrolleri"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"İndirilen uygulamalar"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Deneysel"</string>
-    <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Özellik işaretleri"</string>
+    <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Özellik bayrakları"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Bluetooth HCI araştırma günlüğü filtresi"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Filtreleri ayarla"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Değişikliklerin geçerli olması için Bluetooth\'u kapatıp açın"</string>
@@ -2686,7 +2685,7 @@
     <string name="guest_category_title" msgid="5562663588315329152">"Misafir (Siz)"</string>
     <string name="user_category_title" msgid="4368580529662699083">"Kullanıcılar"</string>
     <string name="other_user_category_title" msgid="7089976887307643217">"Diğer kullanıcılar"</string>
-    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Misafir etkinliğini silme"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Misafir etkinliği silinsin"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Misafir modundan çıkarken tüm misafir uygulamalarını ve verilerini silin"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Misafir etkinliği silinsin mi?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Bu misafir oturumundaki uygulamalar ve veriler şimdi silinecektir. Bundan sonraki tüm misafir etkinlikleri ise misafir modundan her çıktığınızda silinir."</string>
@@ -2955,8 +2954,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, gelişmiş arama, 5g araması"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"dil ekle, bir dil ekle"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"metin boyutu, büyük baskı, büyük harfler, büyük metin, az görme, metni büyüt, yazı tipi büyütücü, yazı tipi büyütme"</string>
-    <!-- no translation found for keywords_always_show_time_info (1066752498285497595) -->
-    <skip />
+    <string name="keywords_always_show_time_info" msgid="1066752498285497595">"ambiyans ekranı her zaman açık, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, etiket, okuyucu"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Ses düzeyi, titreşim, Rahatsız Etmeyin"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Medya ses düzeyi"</string>
@@ -3650,9 +3648,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Tüm dosyaları yönetme erişimine izin ver"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Bu uygulamanın, bu cihazdaki veya cihaza bağlı depolama birimlerindeki tüm dosyaları okumasına, değiştirmesine ve silmesine izin verin. İzin verilirse uygulama size açıkça bildirmeden dosyalara erişebilir."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Tüm dosyalara erişebilir"</string>
-    <string name="full_screen_intent_title" msgid="2461171326558306927">"Tam ekran bildirimler gösterme"</string>
-    <string name="permit_full_screen_intent" msgid="7103548865544643514">"Cihaz kilitliyken uygulamanın tam ekran bildirimler göstermesine izin ver"</string>
-    <string name="footer_description_full_screen_intent" msgid="4600171646567760347">"Cihaz kilitliyken uygulamanın tüm ekranı kaplayan bildirimler göstermesine izin verin. Uygulamalar bunu alarmları, gelen aramaları ve diğer acil bildirimleri göstermek için kullanabilir."</string>
+    <!-- no translation found for full_screen_intent_title (747270185715224130) -->
+    <skip />
+    <!-- no translation found for permit_full_screen_intent (9035367640019960861) -->
+    <skip />
+    <!-- no translation found for footer_description_full_screen_intent (7716518411349225528) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"Medya yönetimi uygulamaları"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Uygulamaya medya dosyalarını yönetme izni ver"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"İzin verilirse bu uygulama, diğer uygulamalarla oluşturulan medya dosyalarını size sormadan değiştirebilir ya da silebilir. Bu uygulamanın dosyalara ve medyaya erişim izni olmalıdır."</string>
@@ -4059,10 +4060,8 @@
     <string name="autofill_app" msgid="7595308061826307921">"Otomatik doldurma hizmeti"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Varsayılan otomatik doldurma hizmeti"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Şifreler"</string>
-    <!-- no translation found for credman_chosen_app_title (4547405511458518096) -->
-    <skip />
-    <!-- no translation found for credman_credentials (4931371941253324143) -->
-    <skip />
+    <string name="credman_chosen_app_title" msgid="4547405511458518096">"Şifreler, şifre anahtarları ve veri hizmetleri"</string>
+    <string name="credman_credentials" msgid="4931371941253324143">"Ek sağlayıcılar"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# şifre}other{# şifre}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"otomatik, doldurma, otomatik doldurma, şifre"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"veri, şifre anahtarı, şifre"</string>
@@ -4119,6 +4118,12 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
+    <!-- no translation found for enable_angle_as_system_driver (3985105681812713612) -->
+    <skip />
+    <!-- no translation found for enable_angle_as_system_driver_summary (4173041926052925436) -->
+    <skip />
+    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (2619263039763150810) -->
+    <skip />
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Uygulama Uyumluluğuyla İlgili Değişiklikler"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Uygulama uyumluluk değişikliklerini aç/kapat"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Varsayılan olarak etkin değişiklikler"</string>
@@ -4336,7 +4341,7 @@
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"İkincil ekranlarda deneysel masaüstü modunu zorunlu kıl"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Çoklu pencerede yeniden boyutlandırılamayan uygulamalara izin ver"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Çoklu pencerede yeniden boyutlandırılamayan uygulamalara izin verir"</string>
-    <string name="hwui_force_dark_title" msgid="4256904905631994219">"Zorunlu koyu rengi geçersiz kıl"</string>
+    <string name="hwui_force_dark_title" msgid="4256904905631994219">"Zorunlu koyu modu geçersiz kıl"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Zorunlu koyu renk özelliğini geçersiz kılma her zaman açık"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Gizlilik"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"İzinler, hesap etkinliği, kişisel veriler"</string>
@@ -4399,7 +4404,7 @@
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Sistem varsayılanı"</string>
     <string name="default_app_none" msgid="5420632042222036264">"Yok"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Bu seçenek artık geçerli değil. Tekrar deneyin."</string>
-    <string name="power_menu_setting_name" msgid="2394440932633137229">"Güç düğmesini basılı tutun"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Güç düğmesini basılı tut"</string>
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Erişmek için güç düğmesini basılı tutun"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Güç menüsü"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Dijital asistan"</string>
@@ -4638,9 +4643,9 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"İnternet bağlantısı sağlayan tüm ağlarda geçerli ağ bant genişliği indirme hızı sınırını yapılandırın."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Ağ indirme hızı sınırını yapılandır"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Sınır yok"</string>
-    <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"Alt işlem kısıtlamalarını devre dışı bırakın"</string>
+    <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"Alt işlem kısıtlamalarını devre dışı bırak"</string>
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Uygulamadaki alt işlemlerin sistem kaynağı kullanımıyla ilgili kısıtlamaları devre dışı bırakın"</string>
-    <string name="enable_notes_role_title" msgid="7662702013496114763">"Notlar rolünü zorla etkinleştirin"</string>
+    <string name="enable_notes_role_title" msgid="7662702013496114763">"Notlar rolünü zorla etkinleştir"</string>
     <string name="enable_notes_role_summary" msgid="136916915155048249">"Notlar rolü aracılığıyla not alma sistemi entegrasyonlarını etkinleştirin. Notlar rolü daha önce etkinleştirilmişse hiçbir değişiklik olmaz."</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Yayın"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"<xliff:g id="CURRENTAPP">%1$s</xliff:g> uygulamasında anons yapın"</string>
@@ -4700,6 +4705,5 @@
     <string name="contrast_medium" msgid="384414510709285811">"Orta"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Yüksek"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Bu uygulama yalnızca 1 pencerede açılabilir"</string>
-    <!-- no translation found for note_task_shortcut_label (1589543982691587932) -->
-    <skip />
+    <string name="note_task_shortcut_label" msgid="1589543982691587932">"Not kısayolu"</string>
 </resources>

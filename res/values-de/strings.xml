@@ -159,8 +159,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Standardeinstellung des Systems"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Für diese App ist in den Einstellungen keine Sprachauswahl verfügbar."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Die Sprache kann von den in der App verfügbaren Sprachen abweichen. Einige Apps unterstützen diese Einstellung möglicherweise nicht."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6744909281573556379) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Leg die Sprache für einzelne Apps fest."</string>
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Dein System, deine Apps und deine Websites verwenden die erste deiner bevorzugten Sprachen, die unterstützt wird."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Unter „App-Sprache“ kannst du für jede App eine Sprache auswählen."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Weitere Informationen zu App-Sprachen"</string>
@@ -431,7 +430,7 @@
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Fingerabdruck zu <xliff:g id="PERCENTAGE">%d</xliff:g> %% eingerichtet"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingerabdruck hinzugefügt"</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Jederzeit durch Berühren entsperren"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Du kannst dein Gerät auch bei deaktiviertem Display per Fingerabdruck entsperren. Das erhöht allerdings die Gefahr eines versehentlichen Entsperrens."</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Du kannst dein Gerät auch bei ausgeschaltetem Display per Fingerabdruck entsperren. Das erhöht allerdings die Gefahr eines versehentlichen Entsperrens."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Display, entsperren"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Später"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Hebe den Finger an und lege ihn dann noch mal auf den Sensor"</string>
@@ -1414,7 +1413,7 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"Für Gesichtsentsperrung Passwort festlegen"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"Für Gesichtsentsperrung Muster festlegen"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"Für Gesichtsentsperrung PIN festlegen"</string>
-    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Passwort für Entsperrung per Gesicht oder Fingerabdruck einrichten"</string>
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Passwort festlegen"</string>
     <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Muster für Entsperrung per Gesicht oder Fingerabdruck einrichten"</string>
     <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"PIN für Entsperrung per Gesicht oder Fingerabdruck einrichten"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Passwort vergessen?"</string>
@@ -2955,8 +2954,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"Vo5g, VoNR, erweiterte Anruffunktionen, 5G-Anrufe"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"Sprache hinzufügen, eine Sprache hinzufügen"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"Textgröße, Großdruck, Großschrift, großer Text, eingeschränktes Sehvermögen, Text vergrößern, Textvergrößerung"</string>
-    <!-- no translation found for keywords_always_show_time_info (1066752498285497595) -->
-    <skip />
+    <string name="keywords_always_show_time_info" msgid="1066752498285497595">"immer aktiver Bildschirmschoner, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, Tag, Lesegerät"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Lautstärke, Vibration, Bitte nicht stören"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Medienlautstärke"</string>
@@ -3650,9 +3648,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Zugriff zum Verwalten aller Dateien zulassen"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Du kannst dieser App erlauben, alle Dateien auf diesem Gerät und auf allen verbundenen Laufwerken zu lesen, zu ändern und zu löschen. Sie kann dann ohne deine explizite Zustimmung auf Dateien zugreifen."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Auf alle Dateien zugreifen"</string>
-    <string name="full_screen_intent_title" msgid="2461171326558306927">"Vollbildbenachrichtigungen anzeigen"</string>
-    <string name="permit_full_screen_intent" msgid="7103548865544643514">"App erlauben, Vollbildbenachrichtigungen anzuzeigen, wenn das Gerät gesperrt ist"</string>
-    <string name="footer_description_full_screen_intent" msgid="4600171646567760347">"Die App darf Benachrichtigungen anzeigen, die das gesamte Display ausfüllen, wenn das Gerät gesperrt ist. Apps können diese verwenden, um Wecker, eingehende Anrufe oder andere dringende Benachrichtigungen hervorzuheben."</string>
+    <!-- no translation found for full_screen_intent_title (747270185715224130) -->
+    <skip />
+    <!-- no translation found for permit_full_screen_intent (9035367640019960861) -->
+    <skip />
+    <!-- no translation found for footer_description_full_screen_intent (7716518411349225528) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"Apps zur Medienverwaltung"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"App erlauben, Medien zu verwalten"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Wenn du es erlaubst, kann diese App Mediendateien ändern oder löschen, die mit anderen Apps erstellt wurden, ohne dich zu fragen. Die App muss berechtigt sein, auf Mediendateien zuzugreifen."</string>
@@ -4059,10 +4060,8 @@
     <string name="autofill_app" msgid="7595308061826307921">"Autofill-Service"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Standard-Autofill-Service"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Passwörter"</string>
-    <!-- no translation found for credman_chosen_app_title (4547405511458518096) -->
-    <skip />
-    <!-- no translation found for credman_credentials (4931371941253324143) -->
-    <skip />
+    <string name="credman_chosen_app_title" msgid="4547405511458518096">"Passwörter, Passkeys und Datendienste"</string>
+    <string name="credman_credentials" msgid="4931371941253324143">"Zusätzliche Anbieter"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# Passwort}other{# Passwörter}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"automatisch, füllen, ausfüllen, Passwort, auto, fill, autofill, password"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"Daten, Passkey, Passwort"</string>
@@ -4119,6 +4118,12 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
+    <!-- no translation found for enable_angle_as_system_driver (3985105681812713612) -->
+    <skip />
+    <!-- no translation found for enable_angle_as_system_driver_summary (4173041926052925436) -->
+    <skip />
+    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (2619263039763150810) -->
+    <skip />
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Änderungen der Kompatibilität von Apps"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Änderungen bei der Kompatibilität von Apps festlegen"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Standardmäßig aktivierte Änderungen"</string>
@@ -4700,6 +4705,5 @@
     <string name="contrast_medium" msgid="384414510709285811">"Mittel"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Hoch"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Diese App kann nur in einem einzigen Fenster geöffnet werden"</string>
-    <!-- no translation found for note_task_shortcut_label (1589543982691587932) -->
-    <skip />
+    <string name="note_task_shortcut_label" msgid="1589543982691587932">"Verknüpfung für Notiz"</string>
 </resources>

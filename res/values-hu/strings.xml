@@ -103,9 +103,9 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"A beállítás módosításához újra kell indítania az eszközt."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Újraindítás"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Mégse"</string>
-    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth alacsony energiaszintű hangátvitel kikapcsolása"</string>
+    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE hangátvitel kikapcsolása"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Kikapcsolja a Bluetooth alacsony energiaszintű hangátvitel funkciót, ha az eszköz támogatja az Alacsony energiaszintű hangátvitel hardver működését."</string>
-    <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"A Bluetooth alacsony energiaszintű hangátvitel engedélyezőlistájának engedélyezése"</string>
+    <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Bluetooth LE hangátvitel engedélyezőlistájának engedélyezése"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Engedélyezi a Bluetooth alacsony energiaszintű hangátvitel engedélyezőlistája funkciót."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Médiaeszközök"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Hívóeszközök"</string>
@@ -159,8 +159,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Rendszerbeállítás"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"A Nyelvválasztás nem áll rendelkezésre ehhez az alkalmazáshoz a Beállításokban."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"A nyelv eltérhet az alkalmazásban rendelkezésre álló nyelvektől. Előfordulhat, hogy egyes alkalmazások nem támogatják ezt a beállítást."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6744909281573556379) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Az egyes alkalmazások nyelvének beállítása."</string>
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"A rendszer, az alkalmazások és a webhelyek a preferált nyelvek közül az első támogatottat fogják használni."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Ha minden alkalmazásnál Ön szeretné kiválasztani a nyelvet, lépjen az egyes alkalmazások nyelvi beállításaihoz."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"További információ az alkalmazások nyelveiről"</string>
@@ -589,7 +588,7 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Amennyiben helytelen mintát ad meg a következő kísérletnél, a rendszer törli munkaprofilját és a kapcsolódó adatokat"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Amennyiben helytelen PIN-kódot ad meg a következő kísérletnél, a rendszer törli munkaprofilját és a kapcsolódó adatokat"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Amennyiben helytelen jelszót ad meg a következő kísérletnél, a rendszer törli munkaprofilját és a kapcsolódó adatokat."</string>
-    <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{Tartalmaznia kell legalább # karaktert}other{Legalább # karaktert kell tartalmaznia}}"</string>
+    <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{Legalább # karakter legyen}other{Legalább # karakter legyen}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Ha csak számokat használ, adjon meg legalább egy számjegyet}other{Ha csak számokat használ, adjon meg legalább # számjegyet}}"</string>
     <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{A PIN-kódnak legalább # számjegyből kell állnia}other{A PIN-kódnak legalább # számjegyből kell állnia}}"</string>
     <string name="lockpassword_pin_too_short_autoConfirm_extra_message" msgid="3271351502900762571">"{count,plural, =1{A PIN-kódnak legalább # számjegyből kell állnia, de a nagyobb biztonság érdekében javasoljuk, hogy {minAutoConfirmLen} jegyű PIN-kódot adjon meg}other{A PIN-kódnak legalább # számjegyből kell állnia, de a nagyobb biztonság érdekében javasoljuk, hogy {minAutoConfirmLen} jegyű PIN-kódot adjon meg}}"</string>
@@ -963,7 +962,7 @@
     <string name="screen_resolution_title" msgid="2690518693139811486">"Képernyőfelbontás"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Nagy felbontás"</string>
     <string name="screen_resolution_option_full" msgid="2694003735219114186">"Teljes felbontás"</string>
-    <string name="screen_resolution_footer" msgid="6772341522952795647">"A teljes felbontás jobban igénybe veszi az akkumulátort. A felbontásra váltásakor előfordulhat, hogy néhány alkalmazás újraindul."</string>
+    <string name="screen_resolution_footer" msgid="6772341522952795647">"A teljes felbontás jobban igénybe veszi az akkumulátort. A felbontás váltásakor előfordulhat, hogy néhány alkalmazás újraindul."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Kijelölve"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Színek"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Természetes"</string>
@@ -1366,7 +1365,7 @@
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"A helyalapú időzóna-meghatározás ki van kapcsolva"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"A helyalapú időzóna-meghatározás nem támogatott"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"A helyalapú időzóna-meghatározásra vonatkozó módosítások nem engedélyezettek"</string>
-    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"A helyadatok az időzóna beállításához használhatók"</string>
+    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"A helyadatok felhasználhatók az időzóna beállításához"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Jogi információk, állapot, szoftververzió megtekintése"</string>
     <string name="legal_information" msgid="7509900979811934843">"Jogi információk"</string>
     <string name="manual" msgid="3651593989906084868">"Útmutató"</string>
@@ -2691,7 +2690,7 @@
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Törli a vendégtevékenységeket?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Az ebből a vendégmunkamenetből származó alkalmazások és adatok azonnal törlődnek, és az összes jövőbeli, vendég módban végzett tevékenység törlődik minden olyan alkalomkor, amikor kilép a vendég módból"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"törlés, vendég, tevékenység, eltávolítás, adatok, látogató, kitörlés"</string>
-    <string name="enable_guest_calling" msgid="8300355036005240911">"Telefonhaszn. engedélyezése a vendégnek"</string>
+    <string name="enable_guest_calling" msgid="8300355036005240911">"A vendég használhatja a telefont"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"A rendszer megosztja a híváslistát ezzel a vendég felhasználóval."</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Hívások és SMS-ek engedélyezése"</string>
     <string name="user_grant_admin" msgid="5942118263054572074">"A felhasználó beállítása adminisztrátorként"</string>
@@ -2955,8 +2954,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, továbbfejlesztett telefonhívás, 5g-s telefonhívás"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"nyelv hozzáadása, egy nyelv hozzáadása"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"betűméret, nagybetű, nagy betűtípus, nagy szöveg, gyengénlátó, szöveg nagyítása, betűtípusnagyító, betűtípus-nagyítás"</string>
-    <!-- no translation found for keywords_always_show_time_info (1066752498285497595) -->
-    <skip />
+    <string name="keywords_always_show_time_info" msgid="1066752498285497595">"Mindig bekapcsolt környezeti kijelző (Always on Ambient Display, AOD)"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, címke, olvasó"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Hangerő, rezgés, Ne zavarjanak"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Média hangereje"</string>
@@ -3650,9 +3648,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Hozzáférés megadása minden fájl kezeléséhez"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Engedélyezi ennek az alkalmazásnak az eszközön és a csatlakoztatott tárolóköteteken található összes fájl olvasását, módosítását és törlését. Ha engedélyezve van, az alkalmazás anélkül férhet hozzá a fájlokhoz, hogy Önt külön tájékoztatná róla."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Minden fájlhoz hozzáférhet"</string>
-    <string name="full_screen_intent_title" msgid="2461171326558306927">"Teljes képernyős értesítések"</string>
-    <string name="permit_full_screen_intent" msgid="7103548865544643514">"Teljes képernyős értesítések megjelenítésének engedélyezése az alkalmazásnak, amikor az eszköz zárolva van"</string>
-    <string name="footer_description_full_screen_intent" msgid="4600171646567760347">"Teljes képernyős értesítések megjelenítésének engedélyezése az alkalmazásnak, amikor az eszköz zárolva van. Az alkalmazások ébresztések, bejövő hívások vagy más sürgős értesítések kiemelésére használhatják ezt a funkciót."</string>
+    <!-- no translation found for full_screen_intent_title (747270185715224130) -->
+    <skip />
+    <!-- no translation found for permit_full_screen_intent (9035367640019960861) -->
+    <skip />
+    <!-- no translation found for footer_description_full_screen_intent (7716518411349225528) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"Médiakezelő alkalmazások"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Az alkalmazás kezelheti a médiafájlokat"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Ha engedélyezte, akkor ez az alkalmazás anélkül módosíthatja vagy törölheti a más alkalmazásokkal létrehozott médiafájlokat, hogy Önt megkérdezné róla. Az alkalmazások csak engedéllyel férhetnek hozzá a fájlokhoz és a médiatartalmakhoz."</string>
@@ -3848,7 +3849,7 @@
     <string name="long_background_tasks_title" msgid="3272230637974707490">"Hosszan futó háttérfeladatok"</string>
     <string name="long_background_tasks_footer_title" msgid="9117342254914743097">"Engedélyezheti, hogy ez az alkalmazás háttérben, hosszan futó feladatokat futtasson. Az alkalmazás ekkor olyan feladatokat futtathat, melyek futása néhány percnél hosszabb ideig tarthat (ilyen például a le- és feltöltés). \n\nAz engedély elutasításával a rendszer korlátozza majd annak időtartamát, hogy az alkalmazás mennyi ideig végezhet ilyen feladatokat a háttérben."</string>
     <string name="keywords_long_background_tasks" msgid="5788956269136054574">"hosszan futó feladatok, adatátvitel, háttérben futó feladatok"</string>
-    <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Visszaállítja a ShortcutManager gyakoriságkorlátozását"</string>
+    <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"ShortcutManager gyakoriságkorlátozásának visszaállítása"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"A ShortcutManager gyakoriságkorlátozása visszaállítva"</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"A lezárási képernyő adatainak kezelése"</string>
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Értesítéstartalom megjelenítése vagy elrejtése"</string>
@@ -3899,9 +3900,9 @@
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Visszaugrás, Kezdőképernyő és alkalmazások közötti váltás a képernyő alján található gombokkal."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"rendszernavigáció, kétgombos navigáció, háromgombos navigáció, navigáció kézmozdulatokkal, csúsztatás"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digitális asszisztens"</string>
-    <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Csúsztassa ujját az asszisztens megnyitásához"</string>
+    <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Asszisztens megnyitása csúsztatással"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Csúsztassa ujját felfelé valamelyik alsó sarokból a digitális asszisztens megnyitásához."</string>
-    <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Tartsa nyomva a Kezdőképernyő gombot a Segéd megnyitásához"</string>
+    <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Segéd megnyitása a Kezdőképernyő gomb nyomva tartásával"</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Tartsa lenyomva a Kezdőképernyő gombot a digitális asszisztens megnyitásához."</string>
     <string name="low_label" msgid="6525629096999711220">"Alacsony"</string>
     <string name="high_label" msgid="357503396626018487">"Magas"</string>
@@ -4059,10 +4060,8 @@
     <string name="autofill_app" msgid="7595308061826307921">"Automatikus kitöltés"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Alapértelmezett automatikus kitöltés"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Jelszavak"</string>
-    <!-- no translation found for credman_chosen_app_title (4547405511458518096) -->
-    <skip />
-    <!-- no translation found for credman_credentials (4931371941253324143) -->
-    <skip />
+    <string name="credman_chosen_app_title" msgid="4547405511458518096">"Jelszavak, azonosítókulcsok és adatszolgáltatások"</string>
+    <string name="credman_credentials" msgid="4931371941253324143">"További szolgáltatók"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# jelszó}other{# jelszó}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"automatikus, kitöltés, automatikus kitöltés, jelszó"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"adat, azonosítókulcs, jelszó"</string>
@@ -4084,7 +4083,7 @@
     <string name="location_indicator_settings_title" msgid="6655916258720093451">"Helyadathasználat jelzése az állapotsoron"</string>
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"Megjelenítés minden helyadathasználat esetén (pl. hálózat és kapcsolódás)"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Teljes GNSS-mérés indítása"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Az összes GNSS-műhold és -frekvencia nyomon követése aktívciklus-szabályozás nélkül"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Az összes GNSS-konstelláció és -frekvencia nyomon követése aktívciklus-szabályozás nélkül"</string>
     <string name="input_method_category" msgid="2252659253631639005">"Beviteli mód"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"Érintőceruzás kézírás"</string>
     <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Ha engedélyezve van, az aktuális beviteli mód fogadja az érintőceruza MotionEvent-eseményeit az aktív szövegszerkesztő ablakban."</string>
@@ -4098,7 +4097,7 @@
     <string name="zen_suggestion_summary" msgid="1984990920503217">"Az összpontosításhoz szüneteltetheti az értesítéseket"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"A funkció nem áll rendelkezésre"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"A rendszer kikapcsolta ezt a funkciót, mert lelassítja a telefont"</string>
-    <string name="show_first_crash_dialog" msgid="1696584857732637389">"Összeomlási párbeszédablak megjelenítése minden alkalommal"</string>
+    <string name="show_first_crash_dialog" msgid="1696584857732637389">"Mindig jelenjen meg összeomlási párbeszédablak"</string>
     <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"Mindig megjeleníti a párbeszédablakot, amikor valamelyik alkalmazás összeomlik"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"ANGLE-kompatibilis alkalmazás kiválasztása"</string>
     <string name="angle_enabled_app_not_set" msgid="4472572224881726067">"Nincs beállítva ANGLE-kompatibilis alkalmazás"</string>
@@ -4119,6 +4118,12 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
+    <!-- no translation found for enable_angle_as_system_driver (3985105681812713612) -->
+    <skip />
+    <!-- no translation found for enable_angle_as_system_driver_summary (4173041926052925436) -->
+    <skip />
+    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (2619263039763150810) -->
+    <skip />
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Az alkalmazás kompatibilitási változtatásai"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Az alkalmazás kompatibilitási változtatásainak be- és kikapcsolása"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Alapértelmezett engedélyezett változtatások"</string>
@@ -4700,6 +4705,5 @@
     <string name="contrast_medium" msgid="384414510709285811">"Közepes"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Nagy"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Ez az alkalmazás csak egy ablakban nyitható meg"</string>
-    <!-- no translation found for note_task_shortcut_label (1589543982691587932) -->
-    <skip />
+    <string name="note_task_shortcut_label" msgid="1589543982691587932">"Jegyzet parancsikonja"</string>
 </resources>

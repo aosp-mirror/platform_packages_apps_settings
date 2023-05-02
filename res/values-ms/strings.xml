@@ -98,7 +98,7 @@
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Peranti anda"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Gandingkan peranti baharu"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Lumpuhkan lepas muatan perkakasan A2DP Bluetooth"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Lumpuhkan lepas muatan perkakasan audio LE Bluetooth"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Lumpuhkan lepas muatan perkakasan Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Mulakan Semula Peranti?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Mulakan semula peranti untuk menukar tetapan ini."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Mulakan semula"</string>
@@ -106,7 +106,7 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Lumpuhkan Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Melumpuhkan ciri Bluetooth LE Audio jika peranti menyokong keupayaan perkakasan LE Audio."</string>
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Dayakan Senarai Dibenarkan untuk Bluetooth LE audio"</string>
-    <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Dayakan ciri senarai dibenarkan untuk Bluetooth LE audio."</string>
+    <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Dayakan ciri senarai dibenarkan untuk Bluetooth LE Audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Peranti media"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Panggil peranti"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Peranti lain"</string>
@@ -159,8 +159,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Lalai sistem"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Pemilihan bahasa untuk apl ini tidak tersedia daripada Tetapan."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Bahasa mungkin berbeza daripada bahasa yang tersedia dalam apl. Sesetengah apl mungkin tidak menyokong tetapan ini."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6744909281573556379) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Tetapkan bahasa untuk setiap apl"</string>
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Sistem, apl dan laman web anda menggunakan bahasa pertama yang disokong daripada bahasa pilihan anda."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Untuk memilih bahasa bagi setiap apl, pergi ke tetapan bahasa apl."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Ketahui lebih lanjut tentang bahasa apl"</string>
@@ -654,9 +653,9 @@
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Log nyahpepijat tindanan NFC"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Tingkatkan tahap pengelogan tindanan NFC"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Log nyahpepijat vendor berjela NFC"</string>
-    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Menyertakan log vendor khusus peranti tambahan dalam laporan pepijat yang mungkin mengandungi maklumat peribadi."</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Sertakan log vendor khusus peranti tambahan dalam laporan pepijat, yang mungkin mengandungi maklumat peribadi."</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"Log NFC NCI yang tidak ditapis"</string>
-    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Menangkap butiran paket NFC yang mungkin mengandungi maklumat peribadi."</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Catat butiran paket NFC yang mungkin mengandungi maklumat peribadi."</string>
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Mulakan Semula Peranti?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Pengelogan butiran NFC adalah khusus untuk tujuan pembangunan sahaja. Data tambahan NFC disertakan dalam laporan pepijat yang mungkin mengandungi maklumat peribadi. Mulakan semula peranti anda untuk menukar tetapan ini."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Mulakan semula"</string>
@@ -963,7 +962,7 @@
     <string name="screen_resolution_title" msgid="2690518693139811486">"Peleraian skrin"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Peleraian tinggi"</string>
     <string name="screen_resolution_option_full" msgid="2694003735219114186">"Peleraian penuh"</string>
-    <string name="screen_resolution_footer" msgid="6772341522952795647">"Peleraian penuh menggunakan lebih banyak bateri anda. Penukaran peleraian anda mungkin menyebabkan sesetengah apl dimulakan semula."</string>
+    <string name="screen_resolution_footer" msgid="6772341522952795647">"Peleraian penuh menggunakan lebih banyak bateri. Penukaran peleraian mungkin menyebabkan sesetengah apl dimulakan semula."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Dipilih"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Warna"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Asli"</string>
@@ -1303,7 +1302,7 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Tempat liputan, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Tidak berkongsi Internet dengan peranti lain"</string>
-    <string name="tether_preference_summary_off" msgid="6266799346319794630">"Dimatikan"</string>
+    <string name="tether_preference_summary_off" msgid="6266799346319794630">"Mati"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Penambatan"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Jangan gunakan tempat liputan Wi-Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Kongsi Internet melalui USB sahaja"</string>
@@ -1453,7 +1452,7 @@
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Tekan Menu untuk mendapatkan bantuan."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Alihkan jari apabila selesai"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Sambung sekurang-kurangnya <xliff:g id="NUMBER">%d</xliff:g> titik. Cuba lagi."</string>
-    <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Corak dirakam"</string>
+    <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Corak direkodkan"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Lukis corak sekali lagi untuk mengesahkan"</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"Corak buka kunci baharu anda"</string>
     <string name="lockpattern_confirm_button_text" msgid="6122815520373044089">"Sahkan"</string>
@@ -1920,7 +1919,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Gunakan penyongsangan warna"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Pintasan penyongsangan warna"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Penyongsangan warna menukar skrin cerah menjadi gelap. Pilihan ini juga menukar skrin gelap menjadi cerah."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Sentiasa ingat&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Warna akan berubah dalam media dan imej&lt;/li&gt; &lt;li&gt; Penyongsangan Warna berfungsi pada semua apl&lt;/li&gt; &lt;li&gt; Untuk memaparkan latar belakang gelap, Tema gelap boleh digunakan&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Sentiasa ingat&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Warna akan berubah dalam media dan imej&lt;/li&gt; &lt;li&gt; Penyongsangan warna berfungsi pada semua apl&lt;/li&gt; &lt;li&gt; Untuk memaparkan latar belakang gelap, Tema gelap boleh digunakan&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Autoklik (masa diam)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Perihal autoklik (masa diam)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Ketahui lebih lanjut tentang autoklik (masa diam)"</string>
@@ -2180,8 +2179,7 @@
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Hidupkan Penjimat Bateri"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Bateri mungkin kehabisan lebih awal daripada yang dijangkakan"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"Penjimat Bateri dihidupkan"</string>
-    <!-- no translation found for battery_saver_link_a11y (6613079613524512257) -->
-    <skip />
+    <string name="battery_saver_link_a11y" msgid="6613079613524512257">"Ketahui lebih lanjut tentang Penjimat Bateri"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Sesetengah ciri mungkin terhad"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Penggunaan bateri tertinggi"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Lihat apl dengan penggunaan tertinggi"</string>
@@ -2307,10 +2305,8 @@
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Penggunaan bateri untuk <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Masa skrin sejak cas penuh terakhir"</string>
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Masa skrin untuk <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_spinner_view_by_apps (8769276544072098082) -->
-    <skip />
-    <!-- no translation found for battery_usage_spinner_view_by_systems (7904104223212160541) -->
-    <skip />
+    <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Lihat mengikut apl"</string>
+    <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Lihat mengikut sistem"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistik Proses"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistik skema tentang proses yang sedang berjalan"</string>
@@ -2955,8 +2951,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, panggilan lanjutan, panggilan 5g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"tambah bahasa, tambah satu bahasa"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"saiz teks, huruf cetak besar, fon besar, teks besar, rabun, jadikan teks lebih besar, besarkan teks, pembesaran fon"</string>
-    <!-- no translation found for keywords_always_show_time_info (1066752498285497595) -->
-    <skip />
+    <string name="keywords_always_show_time_info" msgid="1066752498285497595">"paparan ambien sentiasa hidup, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tag, pembaca"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Kelantangan, getaran, Jangan Ganggu"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Kelantangan media"</string>
@@ -3650,9 +3645,9 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Benarkan akses untuk mengurus semua fail"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Benarkan apl ini membaca, mengubah suai dan memadamkan semula fail pada peranti ini atau mana-mana unit storan yang disambungkan. Jika dibenarkan, apl mungkin mengakses fail tanpa pengetahuan anda secara jelas."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Boleh mengakses semua fail"</string>
-    <string name="full_screen_intent_title" msgid="2461171326558306927">"Paparkan pemberitahuan skrin penuh"</string>
-    <string name="permit_full_screen_intent" msgid="7103548865544643514">"Benarkan apl untuk memaparkan pemberitahuan skrin penuh apabila peranti dikunci"</string>
-    <string name="footer_description_full_screen_intent" msgid="4600171646567760347">"Benarkan apl untuk memaparkan pemberitahuan menggunakan skrin penuh apabila peranti dikunci. Apl mungkin menggunakan ciri ini untuk menyerlahkan penggera, panggilan masuk atau pemberitahuan mustahak yang lain."</string>
+    <string name="full_screen_intent_title" msgid="747270185715224130">"Pemberitahuan skrin penuh"</string>
+    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Benarkan pemberitahuan skrin penuh daripada apl ini"</string>
+    <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Benarkan apl untuk memaparkan pemberitahuan menggunakan skrin penuh apabila peranti dikunci. Apl mungkin menggunakan ciri ini untuk menyerlahkan penggera, panggilan masuk atau pemberitahuan mustahak yang lain."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Apl pengurusan media"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Benarkan apl untuk mengurus media"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Jika dibenarkan, apl ini boleh mengubah suai atau memadamkan fail media yang dibuat dengan apl lain tanpa meminta izin anda. Apl mesti mempunyai kebenaran untuk mengakses fail dan media."</string>
@@ -3905,8 +3900,8 @@
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Tekan dan tahan butang Skrin Utama untuk menggunakan apl pembantu digital."</string>
     <string name="low_label" msgid="6525629096999711220">"Rendah"</string>
     <string name="high_label" msgid="357503396626018487">"Tinggi"</string>
-    <string name="left_edge" msgid="1513576842959071849">"Bahagian tepi sebelah kiri"</string>
-    <string name="right_edge" msgid="1505309103265829121">"Bahagian tepi sebelah kanan"</string>
+    <string name="left_edge" msgid="1513576842959071849">"Tepi kiri"</string>
+    <string name="right_edge" msgid="1505309103265829121">"Tepi kanan"</string>
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Kepekaan yang lebih tinggi mungkin mempengaruhi fungsi gerak isyarat apl di tepi skrin."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Kepekaan Navigasi Kembali"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Kepekaan Navigasi Gerak Isyarat"</string>
@@ -4059,10 +4054,8 @@
     <string name="autofill_app" msgid="7595308061826307921">"Perkhidmatan autolengkap"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Perkhidmatan autolengkap lalai"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Kata laluan"</string>
-    <!-- no translation found for credman_chosen_app_title (4547405511458518096) -->
-    <skip />
-    <!-- no translation found for credman_credentials (4931371941253324143) -->
-    <skip />
+    <string name="credman_chosen_app_title" msgid="4547405511458518096">"Kata laluan, kunci laluan dan perkhidmatan data"</string>
+    <string name="credman_credentials" msgid="4931371941253324143">"Penyedia tambahan"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# kata laluan}other{# kata laluan}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"auto, isi, autolengkap, kata laluan"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"data, kunci laluan, kata laluan"</string>
@@ -4119,6 +4112,12 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
+    <!-- no translation found for enable_angle_as_system_driver (3985105681812713612) -->
+    <skip />
+    <!-- no translation found for enable_angle_as_system_driver_summary (4173041926052925436) -->
+    <skip />
+    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (2619263039763150810) -->
+    <skip />
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Perubahan Keserasian Apl"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Togol perubahan keserasian apl"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Perubahan didayakan tetapan lalai"</string>
@@ -4700,6 +4699,5 @@
     <string name="contrast_medium" msgid="384414510709285811">"Sederhana"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Tinggi"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Apl ini hanya boleh dibuka dalam 1 tetingkap"</string>
-    <!-- no translation found for note_task_shortcut_label (1589543982691587932) -->
-    <skip />
+    <string name="note_task_shortcut_label" msgid="1589543982691587932">"Pintasan nota"</string>
 </resources>
