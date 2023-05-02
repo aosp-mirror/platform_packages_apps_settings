@@ -159,7 +159,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Aplicación predeterminada do sistema"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"A opción de seleccionar un idioma para esta aplicación non está dispoñible en Configuración."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"É posible que o idioma non estea dispoñible na aplicación. Pode que algunhas aplicacións non sexan compatibles con esta opción de configuración."</string>
-    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Aquí só se mostran as aplicacións que admiten a selección de idioma."</string>
+    <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Define o idioma de cada aplicación."</string>
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"O sistema, as aplicacións e os sitios web usan o primeiro idioma dispoñible dos teus idiomas preferidos."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Para seleccionar o idioma de cada aplicación, vai á configuración do idioma das aplicacións."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Máis información sobre os idiomas das aplicacións"</string>
@@ -173,7 +173,6 @@
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Permite que as aplicacións coñezan as túas preferencias rexionais para que poidan personalizar a túa experiencia."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"As aplicacións usarán as túas preferencias rexionais cando sexa posible."</string>
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperatura"</string>
-    <string name="calendar_preferences_title" msgid="8312485828206542600">"Calendario"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Primeiro día da semana"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Preferencias de números"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Usar configuración predeterminada da aplicación"</string>
@@ -383,7 +382,7 @@
     <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Verificar identidade nas aplicacións"</string>
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Coa cara"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Coa impresión dixital"</string>
-    <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Coa cara ou coa impresión dixital"</string>
+    <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Co recoñecemento facial ou coa impresión dixital"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"Aceptar"</string>
     <string name="biometric_settings_add_face_in_split_mode_title" msgid="6041232223862753222">"Non se puido configurar o desbloqueo facial"</string>
     <string name="biometric_settings_add_face_in_split_mode_message" msgid="1904738532939614456">"Sae da pantalla dividida para configurar o desbloqueo facial"</string>
@@ -1265,7 +1264,7 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Restableceuse a configuración da rede"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Non se puideron borrar as SIM"</string>
     <string name="reset_esim_error_msg" msgid="7279607120606365250">"As eSIM non se puideron borrar debido a un erro.\n\nReinicia o dispositivo e téntao de novo."</string>
-    <string name="main_clear_title" msgid="277664302144837723">"Borrar todos os datos (restablecemento da configuración de fábrica)"</string>
+    <string name="main_clear_title" msgid="277664302144837723">"Volver á configuración de fábrica (borrar todos os datos)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Borrar todos os datos"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Música"</li>\n<li>"Fotos"</li>\n<li>"Outros datos do usuario"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM"</li></string>
@@ -2181,7 +2180,8 @@
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Activar a función Aforro de batería"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"A batería pode esgotarse antes do normal"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"A función Aforro de batería está activada"</string>
-    <string name="battery_saver_link_a11y" msgid="740558184830458845">"Máis información sobre a función Aforro de batería"</string>
+    <!-- no translation found for battery_saver_link_a11y (6613079613524512257) -->
+    <skip />
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Algunhas funcións poden estar limitadas"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Aplicacións que máis batería consomen"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Consulta as aplicacións que máis batería consomen"</string>
@@ -2228,7 +2228,7 @@
     <string name="battery_missing_message" msgid="400958471814422770">"Produciuse un problema ao ler o medidor da batería."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Tocar para obter máis información acerca deste erro"</string>
-    <string name="power_screen" msgid="3926703168513988776">"Pantalla"</string>
+    <string name="power_screen" msgid="4596900105850963806">"Pantalla"</string>
     <string name="power_cpu" msgid="1820472721627148746">"CPU"</string>
     <string name="power_flashlight" msgid="8993388636332573202">"Lanterna"</string>
     <string name="power_camera" msgid="4778315081581293923">"Cámara"</string>
@@ -2307,9 +2307,9 @@
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Uso da batería (<xliff:g id="SLOT">%s</xliff:g>)"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Tempo diante da pantalla desde a última carga completa"</string>
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Tempo diante da pantalla (<xliff:g id="SLOT">%s</xliff:g>)"</string>
-    <!-- no translation found for battery_usage_spinner_by_apps (78924517671977945) -->
+    <!-- no translation found for battery_usage_spinner_view_by_apps (8769276544072098082) -->
     <skip />
-    <!-- no translation found for battery_usage_spinner_by_systems (6489690892421179515) -->
+    <!-- no translation found for battery_usage_spinner_view_by_systems (7904104223212160541) -->
     <skip />
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Estatísticas de procesos"</string>
@@ -2845,7 +2845,7 @@
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Aplicacións clonadas"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Crea unha segunda instancia dunha aplicación para poder usar dúas contas á vez."</string>
     <string name="desc_cloneable_app_list_text" msgid="3354586725814708688">"Aplicacións que se poden clonar:"</string>
-    <string name="cloned_apps_summary" msgid="8805362440770795709">"Aplicacións clonadas: <xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g>, aplicacións dispoñibles para clonar: <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g>"</string>
+    <string name="cloned_apps_summary" msgid="8805362440770795709">"Clonadas: <xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g>, dispoñibles para clonar: <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g>"</string>
     <string name="delete_all_app_clones" msgid="3489053361980624999">"Eliminar todos os clons de aplicacións"</string>
     <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"Erro ao eliminar todos os clons de apps"</string>
     <string name="cloned_app_creation_summary" msgid="4642627294993918502">"Creando…"</string>
@@ -2955,7 +2955,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, chamadas avanzadas, chamadas por 5g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"engadir idioma, engadir un idioma"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"tamaño do texto, letra grande, tipo de letra grande, texto grande, visión reducida, agrandar texto, función para aumentar o tamaño da letra, aumento do tamaño da letra"</string>
-    <string name="keywords_always_show_time_info" msgid="645658129239452778">"pantalla sempre activa, AOD"</string>
+    <string name="keywords_always_show_time_info" msgid="1066752498285497595">"pantalla en suspensión sempre acendida, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, etiqueta, lector"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volume, vibración, Non molestar"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volume dos elementos multimedia"</string>
@@ -3649,11 +3649,11 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Permitir xestionar todos os ficheiros"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Permite que esta aplicación lea, modifique e elimine todos os ficheiros deste dispositivo ou de calquera unidade de almacenamento conectada. Se lle dás permiso, a aplicación poderá acceder aos ficheiros sen que se che notifique explicitamente."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Poden acceder a todos os ficheiros"</string>
-    <!-- no translation found for full_screen_intent_title (2461171326558306927) -->
+    <!-- no translation found for full_screen_intent_title (747270185715224130) -->
     <skip />
-    <!-- no translation found for permit_full_screen_intent (7103548865544643514) -->
+    <!-- no translation found for permit_full_screen_intent (9035367640019960861) -->
     <skip />
-    <!-- no translation found for footer_description_full_screen_intent (4600171646567760347) -->
+    <!-- no translation found for footer_description_full_screen_intent (7716518411349225528) -->
     <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"Aplicacións de xestión multimedia"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Permitir á aplicación a xestión multimedia"</string>
@@ -4061,7 +4061,8 @@
     <string name="autofill_app" msgid="7595308061826307921">"Servizo de autocompletar"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Servizo de autocompletar predeterminado"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Contrasinais"</string>
-    <string name="credman_credentials" msgid="7413302794874989255">"Contrasinais, claves de acceso e servizos de datos"</string>
+    <string name="credman_chosen_app_title" msgid="4547405511458518096">"Contrasinais, claves de acceso e servizos de datos"</string>
+    <string name="credman_credentials" msgid="4931371941253324143">"Provedores adicionais"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# contrasinal}other{# contrasinais}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"automaticamente, completar, autocompletar, contrasinal"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"datos, claves de acceso, contrasinal"</string>
@@ -4118,6 +4119,12 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
+    <!-- no translation found for enable_angle_as_system_driver (3985105681812713612) -->
+    <skip />
+    <!-- no translation found for enable_angle_as_system_driver_summary (4173041926052925436) -->
+    <skip />
+    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (2619263039763150810) -->
+    <skip />
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Cambios na compatibilidade das aplicacións"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Activa/desactiva os cambios de compatibilidade das aplicacións"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Cambios activados de modo predeterminado"</string>
@@ -4416,10 +4423,8 @@
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"Mostrar escáner de códigos QR"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Permite acceder ao escáner de códigos QR desde a pantalla de bloqueo"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Mostrar control de dispositivos"</string>
-    <!-- no translation found for lockscreen_privacy_controls_summary (7522918441738915364) -->
-    <skip />
-    <!-- no translation found for lockscreen_trivial_controls_setting_toggle (2174300719855112358) -->
-    <skip />
+    <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"Desde a pantalla de bloqueo"</string>
+    <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"Utilizar controis de dispositivos"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Para usar isto, primeiro activa Mostrar control de dispositivos"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Mostra o reloxo en dúas liñas se está dispoñible"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Reloxo en dúas liñas"</string>
@@ -4701,5 +4706,5 @@
     <string name="contrast_medium" msgid="384414510709285811">"Nivel medio"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Nivel alto"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Esta aplicación só se pode abrir en 1 ventá"</string>
-    <string name="note_task_button_label" msgid="1741456863714912927">"Toma de notas"</string>
+    <string name="note_task_shortcut_label" msgid="1589543982691587932">"Atallo das notas"</string>
 </resources>
