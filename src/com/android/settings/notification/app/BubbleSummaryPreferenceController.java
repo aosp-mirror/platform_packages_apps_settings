@@ -18,18 +18,16 @@ package com.android.settings.notification.app;
 
 import static android.app.NotificationManager.BUBBLE_PREFERENCE_ALL;
 import static android.app.NotificationManager.BUBBLE_PREFERENCE_NONE;
-import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.provider.Settings;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.notification.BubbleHelper;
 import com.android.settings.notification.NotificationBackend;
 
 /**
@@ -37,9 +35,6 @@ import com.android.settings.notification.NotificationBackend;
  */
 public class BubbleSummaryPreferenceController extends NotificationPreferenceController {
     private static final String KEY = "bubble_pref_link";
-
-    @VisibleForTesting
-    static final int ON = 1;
 
     public BubbleSummaryPreferenceController(Context context, NotificationBackend backend) {
         super(context, backend);
@@ -105,8 +100,6 @@ public class BubbleSummaryPreferenceController extends NotificationPreferenceCon
     }
 
     private boolean isGloballyEnabled() {
-        ActivityManager am = mContext.getSystemService(ActivityManager.class);
-        return !am.isLowRamDevice() && Settings.Secure.getInt(mContext.getContentResolver(),
-                NOTIFICATION_BUBBLES, ON) == ON;
+        return BubbleHelper.isEnabledSystemWide(mContext);
     }
 }
