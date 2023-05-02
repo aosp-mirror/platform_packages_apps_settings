@@ -22,6 +22,7 @@ import android.os.PowerManager;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.text.TextUtils;
 
 import androidx.preference.Preference;
 
@@ -63,7 +64,7 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
 
     @Override
     public boolean isPublicSlice() {
-        return true;
+        return TextUtils.equals(getPreferenceKey(), "ambient_display_always_on");
     }
 
     @Override
