@@ -86,13 +86,12 @@ public class CredentialManagerPreferenceControllerTest {
         mCredentialsPreferenceCategory.setKey("credentials_test");
         mScreen.addPreference(mCredentialsPreferenceCategory);
         mReceivedResultCode = Optional.empty();
-        mDelegate =
-                new CredentialManagerPreferenceController.Delegate() {
-                    @Override
-                    public void setActivityResult(int resultCode) {
-                        mReceivedResultCode = Optional.of(resultCode);
-                    }
-                };
+        mDelegate = new CredentialManagerPreferenceController.Delegate() {
+                public void setActivityResult(int resultCode) {
+                    mReceivedResultCode = Optional.of(resultCode);
+                }
+                public void forceDelegateRefresh() {}
+            };
     }
 
     @Test
