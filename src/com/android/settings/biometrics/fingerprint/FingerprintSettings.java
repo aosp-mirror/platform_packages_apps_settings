@@ -283,7 +283,9 @@ public class FingerprintSettings extends SubSettings {
                     case MSG_REFRESH_FINGERPRINT_TEMPLATES:
                         removeFingerprintPreference(msg.arg1);
                         updateAddPreference();
-                        updateFingerprintUnlockCategoryVisibility();
+                        if (isSfps()) {
+                            updateFingerprintUnlockCategoryVisibility();
+                        }
                         updatePreferences();
                         break;
                     case MSG_FINGER_AUTH_SUCCESS:
@@ -494,9 +496,13 @@ public class FingerprintSettings extends SubSettings {
         }
 
         private boolean isSfps() {
-            for (FingerprintSensorPropertiesInternal prop : mSensorProperties) {
-                if (prop.isAnySidefpsType()) {
-                    return true;
+            mFingerprintManager = Utils.getFingerprintManagerOrNull(getActivity());
+            if (mFingerprintManager != null) {
+                mSensorProperties = mFingerprintManager.getSensorPropertiesInternal();
+                for (FingerprintSensorPropertiesInternal prop : mSensorProperties) {
+                    if (prop.isAnySidefpsType()) {
+                        return true;
+                    }
                 }
             }
             return false;
@@ -838,18 +844,20 @@ public class FingerprintSettings extends SubSettings {
 
         private List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
             final List<AbstractPreferenceController> controllers = new ArrayList<>();
-            mFingerprintUnlockCategoryPreferenceController =
+            if (isSfps()) {
+                mFingerprintUnlockCategoryPreferenceController =
                     new FingerprintUnlockCategoryController(
-                            context,
-                            KEY_FINGERPRINT_UNLOCK_CATEGORY
+                        context,
+                        KEY_FINGERPRINT_UNLOCK_CATEGORY
                     );
-            mRequireScreenOnToAuthPreferenceController =
-                    new FingerprintSettingsRequireScreenOnToAuthPreferenceController(
-                            context,
-                            KEY_REQUIRE_SCREEN_ON_TO_AUTH
-                    );
-            controllers.add(mFingerprintUnlockCategoryPreferenceController);
-            controllers.add(mRequireScreenOnToAuthPreferenceController);
+                mRequireScreenOnToAuthPreferenceController =
+                        new FingerprintSettingsRequireScreenOnToAuthPreferenceController(
+                                context,
+                                KEY_REQUIRE_SCREEN_ON_TO_AUTH
+                        );
+                controllers.add(mFingerprintUnlockCategoryPreferenceController);
+                controllers.add(mRequireScreenOnToAuthPreferenceController);
+            }
             return controllers;
         }
 
