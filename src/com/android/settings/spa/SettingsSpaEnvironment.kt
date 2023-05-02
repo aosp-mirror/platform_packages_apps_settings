@@ -30,6 +30,7 @@ import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListPro
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.MediaManagementAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
+import com.android.settings.spa.app.specialaccess.NfcTagAppsSettingsProvider
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
 import com.android.settings.spa.app.specialaccess.SpecialAppAccessPageProvider
 import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
@@ -62,6 +63,7 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
             InstallUnknownAppsListProvider,
             AlarmsAndRemindersAppListProvider,
             WifiControlAppListProvider,
+            NfcTagAppsSettingsProvider,
         )
     }
 
