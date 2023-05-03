@@ -58,6 +58,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.window.embedding.ActivityEmbeddingController;
+import androidx.window.embedding.SplitController;
 import androidx.window.embedding.SplitRule;
 
 import com.android.settings.R;
@@ -428,7 +429,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
     private boolean shouldLaunchDeepLinkIntentToRight() {
         if (!FeatureFlagUtils.isEnabled(this, FeatureFlagUtils.SETTINGS_SUPPORT_LARGE_SCREEN)
-                || !ActivityEmbeddingUtils.isSettingsSplitEnabled(this)) {
+                || !SplitController.getInstance(this).isSplitSupported()) {
             return false;
         }
 
