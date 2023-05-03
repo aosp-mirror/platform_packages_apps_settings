@@ -17,18 +17,17 @@
 package com.android.settings.spa.app.appinfo
 
 import android.app.settings.SettingsEnums
-import android.content.Intent;
+import android.content.Intent
 import android.content.om.OverlayManager
 import android.content.pm.ApplicationInfo
 import android.os.UserHandle
 import android.os.UserManager
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Delete
-
-import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAdd
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import com.android.settings.R
-import com.android.settings.spa.SpaActivity
 import com.android.settings.Utils
+import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAdd
 import com.android.settingslib.spa.widget.button.ActionButton
 import com.android.settingslib.spaprivileged.framework.common.devicePolicyManager
 import com.android.settingslib.spaprivileged.model.app.hasFlag
@@ -41,6 +40,7 @@ class AppUninstallButton(private val packageInfoPresenter: PackageInfoPresenter)
     private val overlayManager = context.getSystemService(OverlayManager::class.java)!!
     private val userManager = context.getSystemService(UserManager::class.java)!!
 
+    @Composable
     fun getActionButton(app: ApplicationInfo): ActionButton? {
         if (app.isSystemApp || app.isInstantApp) return null
         return uninstallButton(app = app, enabled = isUninstallButtonEnabled(app))
@@ -89,10 +89,11 @@ class AppUninstallButton(private val packageInfoPresenter: PackageInfoPresenter)
         isResourceOverlay &&
             overlayManager.getOverlayInfo(packageName, userHandle)?.isEnabled == true
 
+    @Composable
     private fun uninstallButton(app: ApplicationInfo, enabled: Boolean) = ActionButton(
         text = if (isCloneApp(app)) context.getString(R.string.delete) else
             context.getString(R.string.uninstall_text),
-        imageVector = Icons.Outlined.Delete,
+        imageVector = ImageVector.vectorResource(R.drawable.ic_settings_delete),
         enabled = enabled,
     ) { onUninstallClicked(app) }
 
@@ -100,7 +101,7 @@ class AppUninstallButton(private val packageInfoPresenter: PackageInfoPresenter)
         if (appButtonRepository.isUninstallBlockedByAdmin(app)) {
             return
         } else if (app.isActiveAdmin(context)) {
-                var uninstallDaIntent = Intent(context, DeviceAdminAdd::class.java)
+                val uninstallDaIntent = Intent(context, DeviceAdminAdd::class.java)
                 uninstallDaIntent.putExtra(DeviceAdminAdd.EXTRA_DEVICE_ADMIN_PACKAGE_NAME,
                         app.packageName)
                 packageInfoPresenter.logAction(
