@@ -46,7 +46,6 @@ public class ShadowLockPatternUtils {
     private static Map<Integer, PasswordMetrics> sUserToMetricsMap = new HashMap<>();
     private static Map<Integer, PasswordMetrics> sUserToProfileMetricsMap = new HashMap<>();
     private static Map<Integer, Boolean> sUserToIsSecureMap = new HashMap<>();
-    private static Map<Integer, Boolean> sUserToPatternEverChosenMap = new HashMap<>();
     private static Map<Integer, Boolean> sUserToVisiblePatternEnabledMap = new HashMap<>();
     private static Map<Integer, Boolean> sUserToBiometricAllowedMap = new HashMap<>();
     private static Map<Integer, Boolean> sUserToLockPatternEnabledMap = new HashMap<>();
@@ -61,7 +60,6 @@ public class ShadowLockPatternUtils {
         sUserToMetricsMap.clear();
         sUserToProfileMetricsMap.clear();
         sUserToIsSecureMap.clear();
-        sUserToPatternEverChosenMap.clear();
         sUserToVisiblePatternEnabledMap.clear();
         sUserToBiometricAllowedMap.clear();
         sUserToLockPatternEnabledMap.clear();
@@ -159,15 +157,6 @@ public class ShadowLockPatternUtils {
 
     public static void setIsVisiblePatternEnabled(int userId, boolean isVisiblePatternEnabled) {
         sUserToVisiblePatternEnabledMap.put(userId, isVisiblePatternEnabled);
-    }
-
-    @Implementation
-    public boolean isPatternEverChosen(int userId) {
-        return sUserToPatternEverChosenMap.getOrDefault(userId, true);
-    }
-
-    public static void setIsPatternEverChosen(int userId, boolean isPatternEverChosen) {
-        sUserToPatternEverChosenMap.put(userId, isPatternEverChosen);
     }
 
     @Implementation
