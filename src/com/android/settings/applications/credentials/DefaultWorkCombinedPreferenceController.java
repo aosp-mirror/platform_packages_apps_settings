@@ -52,7 +52,7 @@ public class DefaultWorkCombinedPreferenceController extends DefaultCombinedPref
         final String flattenComponent =
                 Settings.Secure.getStringForUser(
                         mContext.getContentResolver(),
-                        DefaultCombinedPicker.SETTING,
+                        DefaultCombinedPicker.AUTOFILL_SETTING,
                         mUserHandle.getIdentifier());
         if (!TextUtils.isEmpty(flattenComponent)) {
             DefaultAppInfo appInfo =
