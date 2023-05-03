@@ -20,6 +20,7 @@ import static android.Manifest.permission.READ_SEARCH_INDEXABLES;
 import static android.app.slice.Slice.HINT_PARTIAL;
 
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.app.slice.SliceManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -162,6 +163,13 @@ public class SettingsSliceProvider extends SliceProvider {
             Log.d(TAG, "onSlicePinned: " + sliceUri);
             mFirstSlicePinned = true;
         }
+        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+                .action(SettingsEnums.PAGE_UNKNOWN,
+                        SettingsEnums.ACTION_SETTINGS_SLICE_REQUESTED,
+                        SettingsEnums.PAGE_UNKNOWN,
+                        sliceUri.getLastPathSegment(),
+                        0);
+
         if (CustomSliceRegistry.isValidUri(sliceUri)) {
             final Context context = getContext();
             final CustomSliceable sliceable = FeatureFactory.getFactory(context)
