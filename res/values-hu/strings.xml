@@ -461,7 +461,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"A legjobb eredmény érdekében használjon Made for Google tanúsítvánnyal rendelkező kijelzővédőt. Előfordulhat, hogy más kijelzővédők esetében az ujjlenyomat nem működik."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"A legjobb eredmény érdekében használjon Made for Google tanúsítvánnyal rendelkező kijelzővédőt. Előfordulhat, hogy más kijelzővédők esetében gyermeke ujjlenyomata nem működik."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
-    <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Módosítsa minden alkalommal kis mértékben ujja helyzetét."</string>
+    <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Mindig tegye odébb egy kicsit az ujját"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Ügyeljen arra, hogy az ujjlenyomata közepe lefedje az ikont."</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_already_enrolled" msgid="8616678833080422946">"Ezt az ujjlenyomatot a rendszer már felvette."</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_clean_sensor" msgid="3501453094314993113">"Tisztítsa meg a képernyőt az érzékelő mellett, és próbálja újra."</string>
@@ -744,8 +744,8 @@
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Amennyiben helytelen PIN-kódot ad meg a következő kísérletnél, a rendszer törli munkaprofilját és a kapcsolódó adatokat"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Amennyiben helytelen jelszót ad meg a következő kísérletnél, a rendszer törli munkaprofilját és a kapcsolódó adatokat."</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
-      <item quantity="other">Legalább <xliff:g id="COUNT_1">%d</xliff:g> karakter hosszúságúnak kell lennie</item>
-      <item quantity="one">Legalább <xliff:g id="COUNT_0">%d</xliff:g> karakter hosszúságúnak kell lennie</item>
+      <item quantity="other">Legalább <xliff:g id="COUNT_1">%d</xliff:g> karakter legyen</item>
+      <item quantity="one">Legalább <xliff:g id="COUNT_0">%d</xliff:g> karakter legyen</item>
     </plurals>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Ha csak számokat használ, adjon meg legalább egy számjegyet}other{Ha csak számokat használ, adjon meg legalább # számjegyet}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
@@ -1774,7 +1774,7 @@
     <string name="main_clear_desc" product="default" msgid="6984348811887162647">"Ez minden adatot töröl a telefon "<b>"belső tárhelyéről"</b>", többek között:\n\n"<li>"az Ön Google-fiókját"</li>\n<li>"a rendszer- és alkalmazásadatokat és a beállításokat"</li>\n<li>"a letöltött alkalmazásokat"</li></string>
     <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"Jelenleg a következő fiókokba van bejelentkezve:\n"</string>
     <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"Más felhasználók is vannak ezen az eszközön.\n"</string>
-    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Zene"</li>\n<li>"Fotók"</li>\n<li>"Más felhasználói adatok"</li></string>
+    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"a zenéket"</li>\n<li>"a fotókat"</li>\n<li>"más felhasználói adatokat"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM-ek"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Ezzel nem szünteti meg mobil-előfizetését."</string>
     <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"A zenék, képek és más felhasználói adatok törléséhez az "<b>"USB-háttértárat"</b>" is törölnie kell."</string>
@@ -4857,7 +4857,7 @@
       <item quantity="one">1 alkalmazás rendelkezik korlátlan adathozzáféréssel</item>
     </plurals>
     <string name="special_access_more" msgid="132919514147475846">"Továbbiak megjelenítése"</string>
-    <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Visszaállítja a ShortcutManager gyakoriságkorlátozását"</string>
+    <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"ShortcutManager gyakoriságkorlátozásának visszaállítása"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"A ShortcutManager gyakoriságkorlátozása visszaállítva"</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"A lezárási képernyő adatainak kezelése"</string>
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Értesítéstartalom megjelenítése vagy elrejtése"</string>
@@ -4933,9 +4933,9 @@
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"Nem támogatja az alapértelmezett kezdőalkalmazás, a(z) <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Alapértelmezett kezdőalkalmazás cseréje"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digitális asszisztens"</string>
-    <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Csúsztassa ujját az asszisztens megnyitásához"</string>
+    <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Asszisztens megnyitása csúsztatással"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Csúsztassa ujját felfelé valamelyik alsó sarokból a digitális asszisztens megnyitásához."</string>
-    <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Tartsa nyomva a Kezdőképernyő gombot a Segéd megnyitásához"</string>
+    <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Segéd megnyitása a Kezdőképernyő gomb nyomva tartásával"</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Tartsa lenyomva a Kezdőképernyő gombot a digitális asszisztens megnyitásához."</string>
     <string name="information_label" msgid="6939310810756569298">"Információ"</string>
     <string name="low_label" msgid="6525629096999711220">"Alacsony"</string>
@@ -5156,7 +5156,7 @@
     <string name="location_indicator_settings_title" msgid="6655916258720093451">"Helyadathasználat jelzése az állapotsoron"</string>
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"Megjelenítés minden helyadathasználat esetén (pl. hálózat és kapcsolódás)"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Teljes GNSS-mérés indítása"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Az összes GNSS-műhold és -frekvencia nyomon követése aktívciklus-szabályozás nélkül"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Az összes GNSS-konstelláció és -frekvencia nyomon követése aktívciklus-szabályozás nélkül"</string>
     <string name="input_method_category" msgid="2252659253631639005">"Beviteli mód"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"Érintőceruzás kézírás"</string>
     <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Ha engedélyezve van, az aktuális beviteli mód fogadja az érintőceruza MotionEvent-eseményeit az aktív szövegszerkesztő ablakban."</string>
@@ -5176,7 +5176,7 @@
     <string name="zen_suggestion_summary" msgid="1984990920503217">"Az összpontosításhoz szüneteltetheti az értesítéseket"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"A funkció nem áll rendelkezésre"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"A rendszer kikapcsolta ezt a funkciót, mert lelassítja a telefont"</string>
-    <string name="show_first_crash_dialog" msgid="1696584857732637389">"Összeomlási párbeszédablak megjelenítése minden alkalommal"</string>
+    <string name="show_first_crash_dialog" msgid="1696584857732637389">"Mindig jelenjen meg összeomlási párbeszédablak"</string>
     <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"Mindig megjeleníti a párbeszédablakot, amikor valamelyik alkalmazás összeomlik"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"ANGLE-kompatibilis alkalmazás kiválasztása"</string>
     <string name="angle_enabled_app_not_set" msgid="4472572224881726067">"Nincs beállítva ANGLE-kompatibilis alkalmazás"</string>
