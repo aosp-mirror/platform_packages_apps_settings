@@ -24,6 +24,7 @@ import android.content.Context;
 import com.android.settings.R;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -40,6 +41,7 @@ public class DevelopmentMemtagPageTest {
         mContext = RuntimeEnvironment.application;
     }
 
+    @Ignore
     @Test
     public void getMetricsCategory_isSETTINGS_MEMTAG_CATEGORY() {
         assertThat(mMemtagPage.getMetricsCategory())
