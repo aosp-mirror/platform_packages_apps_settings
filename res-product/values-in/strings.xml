@@ -225,8 +225,8 @@
     <string name="wifi_add_app_single_network_summary" product="tablet" msgid="93466057231937113">"<xliff:g id="APPNAME">%1$s</xliff:g> ingin menyimpan jaringan ke tablet Anda"</string>
     <string name="wifi_add_app_networks_summary" product="default" msgid="7014504084783236696">"<xliff:g id="APPNAME">%1$s</xliff:g> ingin menyimpan jaringan ini ke ponsel"</string>
     <string name="wifi_add_app_networks_summary" product="tablet" msgid="6433255556506891439">"<xliff:g id="APPNAME">%1$s</xliff:g> ingin menyimpan jaringan ini ke tablet Anda"</string>
-    <string name="auto_rotate_screen_summary" product="default" msgid="5562937346878935483">"Otomatis menyesuaikan orientasi layar antara potret dan lanskap saat Anda memutar ponsel"</string>
-    <string name="auto_rotate_screen_summary" product="tablet" msgid="3163709742477804994">"Otomatis menyesuaikan orientasi layar antara potret dan lanskap saat Anda memutar tablet"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="5562937346878935483">"Otomatis sesuaikan orientasi layar saat posisi ponsel diubah dari potret ke lanskap dan sebaliknya"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="3163709742477804994">"Otomatis sesuaikan orientasi layar saat posisi tablet diubah dari potret ke lanskap dan sebaliknya"</string>
     <string name="sim_lock_on" product="tablet" msgid="227481196121403470">"Memerlukan PIN untuk menggunakan tablet"</string>
     <string name="sim_lock_on" product="default" msgid="6896034657274595838">"Perlu PIN untuk menggunakan ponsel"</string>
     <string name="sim_lock_off" product="tablet" msgid="4619320846576958981">"Memerlukan PIN untuk menggunakan tablet"</string>
@@ -234,7 +234,7 @@
     <string name="status_number" product="tablet" msgid="6746773328312218158">"MDN"</string>
     <string name="status_number" product="default" msgid="2333455505912871374">"Nomor telepon"</string>
     <string name="status_number_sim_slot" product="tablet" msgid="2190552731606069787">"MDN (slot sim %1$d)"</string>
-    <string name="status_number_sim_slot" product="default" msgid="1333171940376236656">"Nomor telepon (slot sim %1$d)"</string>
+    <string name="status_number_sim_slot" product="default" msgid="1333171940376236656">"Nomor telepon (slot SIM %1$d)"</string>
     <string name="status_number_sim_status" product="tablet" msgid="9003886361856568694">"MDN di SIM"</string>
     <string name="status_number_sim_status" product="default" msgid="7536755538266735352">"Nomor telepon di SIM"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="2049551739429034707">"Format kartu SD untuk penyimpanan internal"</string>
@@ -310,7 +310,7 @@
     <string name="data_usage_limit_dialog_mobile" product="default" msgid="4552449053646826676">"Ponsel akan menonaktifkan data seluler jika mencapai batas yang disetel.\n\nPenggunaan data ini diukur oleh ponsel dan dapat berbeda dari perhitungan data oleh operator, maka pertimbangkan untuk menyetel batas secara berhati-hati."</string>
     <string name="user_settings_footer_text" product="device" msgid="8543171604218174424">"Gunakan perangkat bersama orang lain dengan menambahkan pengguna baru. Setiap pengguna memiliki ruang pribadi di perangkat Anda untuk akun, aplikasi, setelan, Layar utama kustom, dan lainnya."</string>
     <string name="user_settings_footer_text" product="tablet" msgid="4749331578207116797">"Gunakan tablet bersama orang lain dengan menambahkan pengguna baru. Setiap pengguna memiliki ruang pribadi di perangkat Anda untuk akun, aplikasi, setelan, Layar utama kustom, dan lainnya."</string>
-    <string name="user_settings_footer_text" product="default" msgid="5440172971747221370">"Gunakan ponsel bersama orang lain dengan menambahkan pengguna baru. Setiap pengguna memiliki ruang pribadi di ponsel Anda untuk akun, aplikasi, setelan, Layar utama kustom, dan lainnya."</string>
+    <string name="user_settings_footer_text" product="default" msgid="5440172971747221370">"Gunakan ponsel bersama orang lain dengan menambahkan pengguna baru. Setiap pengguna memiliki ruang pribadi di ponsel Anda, sehingga akun, aplikasi, setelan, Layar utama, dan lainnya dapat disesuaikan."</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="5566619500245432179">"Hanya pemilik tablet yang dapat mengelola pengguna."</string>
     <string name="user_cannot_manage_message" product="default" msgid="8596259161937605316">"Hanya pemilik ponsel yang dapat mengelola pengguna."</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="6880861846664267876">"Ruang dan data Anda akan hilang dari tablet ini. Anda tidak dapat mengurungkan tindakan ini."</string>
@@ -350,8 +350,6 @@
     <string name="battery_tip_incompatible_charging_message" product="default" msgid="5315451445653379744">"Pengisian daya baterai lambat atau tidak mau mengisi daya sama sekali. Periksa apakah kabel dan adaptor daya berfungsi dengan ponsel Anda"</string>
     <string name="battery_tip_incompatible_charging_message" product="device" msgid="7265524281090787927">"Pengisian daya baterai lambat atau tidak mau mengisi daya sama sekali. Periksa apakah kabel dan adaptor daya berfungsi dengan perangkat Anda"</string>
     <string name="battery_tip_incompatible_charging_message" product="tablet" msgid="174383022413708569">"Pengisian daya baterai lambat atau tidak mau mengisi daya sama sekali. Periksa apakah kabel dan adaptor daya berfungsi dengan tablet Anda"</string>
-    <!-- no translation found for lockscreen_trivial_controls_summary (42562533085885152) -->
-    <skip />
-    <!-- no translation found for lockscreen_trivial_controls_summary (9052068482124729345) -->
-    <skip />
+    <string name="lockscreen_trivial_controls_summary" product="default" msgid="42562533085885152">"Tanpa membuka kunci ponsel Anda"</string>
+    <string name="lockscreen_trivial_controls_summary" product="tabled" msgid="9052068482124729345">"Tanpa membuka kunci tablet Anda"</string>
 </resources>
