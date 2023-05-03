@@ -41,11 +41,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.OutcomeReceiver;
 import android.os.UserHandle;
-import android.provider.DeviceConfig;
 import android.provider.Settings;
+import android.service.autofill.AutofillServiceInfo;
 import android.text.TextUtils;
-import com.android.settingslib.utils.ThreadUtils;
-import com.android.internal.content.PackageMonitor;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
@@ -81,6 +79,15 @@ import java.util.concurrent.Executor;
 public class CredentialManagerPreferenceController extends BasePreferenceController
         implements LifecycleObserver {
     public static final String ADD_SERVICE_DEVICE_CONFIG = "credential_manager_service_search_uri";
+
+    /**
+     * In the settings logic we should hide the list of additional credman providers if there is no
+     * provider selected at the top. The current logic relies on checking whether the autofill
+     * provider is set which won't work for cred-man only providers. Therefore when a CM only
+     * provider is set we will set the autofill setting to be this placeholder.
+     */
+    public static final String AUTOFILL_CREDMAN_ONLY_PROVIDER_PLACEHOLDER = "credential-provider";
+
     private static final String TAG = "CredentialManagerPreferenceController";
     private static final String ALTERNATE_INTENT = "android.settings.SYNC_SETTINGS";
     private static final String PRIMARY_INTENT = "android.settings.CREDENTIAL_PROVIDER";
@@ -100,6 +107,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private @Nullable Delegate mDelegate = null;
     private @Nullable String mFlagOverrideForTest = null;
     private @Nullable PreferenceScreen mPreferenceScreen = null;
+
+    private boolean mVisibility = false;
 
     public CredentialManagerPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -125,6 +134,23 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         }
 
         return null;
+    }
+
+    @Override
+    public int getAvailabilityStatus() {
+        if (mCredentialManager == null) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+
+        if (!mVisibility) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+
+        if (mServices.isEmpty()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+
+        return AVAILABLE;
     }
 
     @VisibleForTesting
@@ -256,7 +282,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         setAvailableServices(
                 mCredentialManager.getCredentialProviderServices(
-                        getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY),
+                        getUser(), CredentialManager.PROVIDER_FILTER_ALL_PROVIDERS),
                 null);
     }
 
@@ -266,12 +292,26 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         if (mPreferenceScreen != null) {
             displayPreference(mPreferenceScreen);
         }
+
+        if (mDelegate != null) {
+            mDelegate.forceDelegateRefresh();
+        }
+    }
+
+    private void setVisibility(boolean newVisibility) {
+        if (newVisibility == mVisibility) {
+            return;
+        }
+
+        mVisibility = newVisibility;
+        if (mDelegate != null) {
+            mDelegate.forceDelegateRefresh();
+        }
     }
 
     @VisibleForTesting
     void setAvailableServices(
-            List<CredentialProviderInfo> availableServices,
-            String flagOverrideForTest) {
+            List<CredentialProviderInfo> availableServices, String flagOverrideForTest) {
         mFlagOverrideForTest = flagOverrideForTest;
         mServices.clear();
         mServices.addAll(availableServices);
@@ -292,11 +332,6 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        return mServices.isEmpty() ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
-    }
-
-    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
@@ -305,39 +340,10 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         mPreferenceScreen = screen;
         PreferenceGroup group = screen.findPreference(getPreferenceKey());
+        group.removeAll();
+
         Context context = screen.getContext();
         mPrefs.putAll(buildPreferenceList(context, group));
-
-        // Add the "add service" button only when there are no providers.
-        if (mPrefs.isEmpty()) {
-            String searchUri = getAddServiceUri(context);
-            if (!TextUtils.isEmpty(searchUri)) {
-                group.addPreference(newAddServicePreference(searchUri, context));
-            }
-        }
-    }
-
-    /**
-     * Returns the "add service" URI to show the play store. It will first try and use the
-     * credential manager specific search URI and if that is null it will fallback to the autofill
-     * one.
-     */
-    public @NonNull String getAddServiceUri(@NonNull Context context) {
-        // Check the credential manager gflag for a link.
-        String searchUri =
-                DeviceConfig.getString(
-                        DeviceConfig.NAMESPACE_CREDENTIAL,
-                        ADD_SERVICE_DEVICE_CONFIG,
-                        mFlagOverrideForTest);
-        if (!TextUtils.isEmpty(searchUri)) {
-            return searchUri;
-        }
-
-        // If not fall back on autofill.
-        return Settings.Secure.getStringForUser(
-                context.getContentResolver(),
-                Settings.Secure.AUTOFILL_SERVICE_SEARCH_URI,
-                getUser());
     }
 
     /**
@@ -372,51 +378,58 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     @VisibleForTesting
     public Map<String, SwitchPreference> buildPreferenceList(
             Context context, PreferenceGroup group) {
-        // Group the services by package name.
-        Map<String, List<CredentialProviderInfo>> groupedInfos = new HashMap<>();
-        for (CredentialProviderInfo cpi : mServices) {
-            String packageName = cpi.getServiceInfo().packageName;
-            if (isProviderHiddenBecauseOfAutofill(packageName)) {
+        // Get the selected autofill provider. If it is the placeholder then replace it with an
+        // empty string.
+        String selectedAutofillProvider =
+                DefaultCombinedPicker.getSelectedAutofillProvider(mContext, getUser());
+        if (TextUtils.equals(
+                selectedAutofillProvider, AUTOFILL_CREDMAN_ONLY_PROVIDER_PLACEHOLDER)) {
+            selectedAutofillProvider = "";
+        }
+
+        // Get the list of combined providers.
+        List<CombinedProviderInfo> providers =
+                CombinedProviderInfo.buildMergedList(
+                        AutofillServiceInfo.getAvailableServices(context, getUser()),
+                        mServices,
+                        selectedAutofillProvider);
+
+        // Get the provider that is displayed at the top. If there is none then hide
+        // everything.
+        CombinedProviderInfo topProvider = CombinedProviderInfo.getTopProvider(providers);
+        if (topProvider == null) {
+            setVisibility(false);
+            return new HashMap<>();
+        }
+
+        Map<String, SwitchPreference> output = new HashMap<>();
+        for (CombinedProviderInfo combinedInfo : providers) {
+            final String packageName = combinedInfo.getApplicationInfo().packageName;
+
+            // If this provider is displayed at the top then we should not show it.
+            if (topProvider != null
+                    && topProvider.getApplicationInfo().packageName.equals(packageName)) {
                 continue;
             }
 
-            if (!groupedInfos.containsKey(packageName)) {
-                groupedInfos.put(packageName, new ArrayList<>());
+            // If this is an autofill provider then don't show it here.
+            if (combinedInfo.getCredentialProviderInfos().isEmpty()) {
+                continue;
             }
 
-            groupedInfos.get(packageName).add(cpi);
-        }
-
-        // Build the pref list.
-        Map<String, SwitchPreference> output = new HashMap<>();
-        for (String packageName : groupedInfos.keySet()) {
-            List<CredentialProviderInfo> infos = groupedInfos.get(packageName);
-            CredentialProviderInfo firstInfo = infos.get(0);
-            ServiceInfo firstServiceInfo = firstInfo.getServiceInfo();
-            CharSequence title = firstInfo.getLabel(context);
-            Drawable icon = firstInfo.getServiceIcon(context);
-
-            if (infos.size() > 1) {
-                // If there is more than one then group them under the package.
-                ApplicationInfo appInfo = firstServiceInfo.applicationInfo;
-                if (appInfo.nonLocalizedLabel != null) {
-                    title = appInfo.loadLabel(mPm);
-                }
-                icon = mIconFactory.getBadgedIcon(appInfo, getUser());
-            }
-
-            // If there is no title then show the package manager.
-            if (TextUtils.isEmpty(title)) {
-                title = firstServiceInfo.packageName;
-            }
+            Drawable icon = combinedInfo.getAppIcon(context);
+            CharSequence title = combinedInfo.getAppName(context);
 
             // Build the pref and add it to the output & group.
             SwitchPreference pref =
                     addProviderPreference(
-                            context, title, icon, packageName, firstInfo.getSettingsSubtitle());
+                            context, title, icon, packageName, combinedInfo.getSettingsSubtitle());
             output.put(packageName, pref);
             group.addPreference(pref);
         }
+
+        // Set the visibility if we have services.
+        setVisibility(!output.isEmpty());
 
         return output;
     }
@@ -583,23 +596,6 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         return new NewProviderConfirmationDialogFragment(host, packageName, appName);
     }
 
-    /** If the provider is also the autofill provider then hide it. */
-    @VisibleForTesting
-    public boolean isProviderHiddenBecauseOfAutofill(String packageName) {
-        final String autofillService = Settings.Secure.getStringForUser(
-                mContext.getContentResolver(),
-                Settings.Secure.AUTOFILL_SERVICE,
-                getUser());
-        if (autofillService == null || TextUtils.isEmpty(autofillService)) {
-            return false;
-        }
-        if (packageName == null || TextUtils.isEmpty(packageName)) {
-            return false;
-        }
-
-        return autofillService.startsWith(packageName);
-    }
-
     @VisibleForTesting
     void completeEnableProviderDialogBox(
             int whichButton, String packageName, boolean setActivityResult) {
@@ -682,27 +678,31 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     /** Called to send messages back to the parent fragment. */
     public static interface Delegate {
         void setActivityResult(int resultCode);
+
+        void forceDelegateRefresh();
     }
 
     /**
-     * Monitor coming and going credman services and calls {@link #update()} when necessary
+     * Monitor coming and going credman services and calls {@link #DefaultCombinedPicker} when
+     * necessary
      */
-    private final PackageMonitor mSettingsPackageMonitor = new PackageMonitor() {
-        @Override
-        public void onPackageAdded(String packageName, int uid) {
-            ThreadUtils.postOnMainThread(() -> update());
-        }
+    private final PackageMonitor mSettingsPackageMonitor =
+            new PackageMonitor() {
+                @Override
+                public void onPackageAdded(String packageName, int uid) {
+                    ThreadUtils.postOnMainThread(() -> updateFromExternal());
+                }
 
-        @Override
-        public void onPackageModified(String packageName) {
-            ThreadUtils.postOnMainThread(() -> update());
-        }
+                @Override
+                public void onPackageModified(String packageName) {
+                    ThreadUtils.postOnMainThread(() -> updateFromExternal());
+                }
 
-        @Override
-        public void onPackageRemoved(String packageName, int uid) {
-            ThreadUtils.postOnMainThread(() -> update());
-        }
-    };
+                @Override
+                public void onPackageRemoved(String packageName, int uid) {
+                    ThreadUtils.postOnMainThread(() -> updateFromExternal());
+                }
+            };
 
     /** Dialog fragment parent class. */
     private abstract static class CredentialManagerDialogFragment extends DialogFragment

@@ -86,13 +86,12 @@ public class CredentialManagerPreferenceControllerTest {
         mCredentialsPreferenceCategory.setKey("credentials_test");
         mScreen.addPreference(mCredentialsPreferenceCategory);
         mReceivedResultCode = Optional.empty();
-        mDelegate =
-                new CredentialManagerPreferenceController.Delegate() {
-                    @Override
-                    public void setActivityResult(int resultCode) {
-                        mReceivedResultCode = Optional.of(resultCode);
-                    }
-                };
+        mDelegate = new CredentialManagerPreferenceController.Delegate() {
+                public void setActivityResult(int resultCode) {
+                    mReceivedResultCode = Optional.of(resultCode);
+                }
+                public void forceDelegateRefresh() {}
+            };
     }
 
     @Test
@@ -120,64 +119,6 @@ public class CredentialManagerPreferenceControllerTest {
                 createControllerWithServices(Lists.newArrayList(createCredentialProviderInfo()));
         assertThat(controller.isConnected()).isFalse();
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
-    }
-
-    @Test
-    public void verifyHiddenIfAutofillSelectedProvider() {
-        CredentialManagerPreferenceController controller =
-                createControllerWithServices(Collections.emptyList());
-
-        // Set the autofill provider.
-        Settings.Secure.putStringForUser(mContext.getContentResolver(),
-                Settings.Secure.AUTOFILL_SERVICE, "com.example.test/AutofillClass",
-                UserHandle.myUserId());
-
-        // Verify the error cases
-        assertThat(controller.isProviderHiddenBecauseOfAutofill(null)).isFalse();
-        assertThat(controller.isProviderHiddenBecauseOfAutofill("")).isFalse();
-        assertThat(controller.isProviderHiddenBecauseOfAutofill("test")).isFalse();
-
-        // Verify the example.
-        assertThat(controller.isProviderHiddenBecauseOfAutofill("com.example.test")).isTrue();
-    }
-
-    @Test
-    public void displayPreference_noServices_noPreferencesAdded_useAutofillUri() {
-        Settings.Secure.putStringForUser(
-                mContext.getContentResolver(),
-                Settings.Secure.AUTOFILL_SERVICE_SEARCH_URI,
-                "test",
-                UserHandle.myUserId());
-
-        CredentialManagerPreferenceController controller =
-                createControllerWithServices(Collections.emptyList());
-        controller.displayPreference(mScreen);
-        assertThat(mCredentialsPreferenceCategory.getPreferenceCount()).isEqualTo(1);
-
-        Preference pref = mCredentialsPreferenceCategory.getPreference(0);
-        assertThat(pref.getTitle()).isEqualTo("Add service");
-
-        assertThat(controller.getAddServiceUri(mContext)).isEqualTo("test");
-    }
-
-    @Test
-    public void displayPreference_noServices_noPreferencesAdded_useCredManUri() {
-        Settings.Secure.putStringForUser(
-                mContext.getContentResolver(),
-                Settings.Secure.AUTOFILL_SERVICE_SEARCH_URI,
-                "test",
-                UserHandle.myUserId());
-
-        CredentialManagerPreferenceController controller =
-                createControllerWithServicesAndAddServiceOverride(
-                        Collections.emptyList(), "credman");
-        controller.displayPreference(mScreen);
-        assertThat(mCredentialsPreferenceCategory.getPreferenceCount()).isEqualTo(1);
-
-        Preference pref = mCredentialsPreferenceCategory.getPreference(0);
-        assertThat(pref.getTitle()).isEqualTo("Add service");
-
-        assertThat(controller.getAddServiceUri(mContext)).isEqualTo("credman");
     }
 
     @Test
