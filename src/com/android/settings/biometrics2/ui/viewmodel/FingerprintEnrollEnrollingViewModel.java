@@ -89,15 +89,9 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
      */
     public static final int FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_TIMEOUT = 1;
 
-    /**
-     * Icon touch dialog show
-     */
-    public static final int FINGERPRINT_ERROR_DIALOG_ACTION_RESTART = 2;
-
     @IntDef(prefix = { "FINGERPRINT_ERROR_DIALOG_ACTION_" }, value = {
             FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_FINISH,
-            FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_TIMEOUT,
-            FINGERPRINT_ERROR_DIALOG_ACTION_RESTART
+            FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_TIMEOUT
     })
     @Retention(RetentionPolicy.SOURCE)
     public @interface FingerprintErrorDialogAction {}
@@ -292,13 +286,6 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
     @Nullable
     public FingerprintSensorPropertiesInternal getFirstFingerprintSensorPropertiesInternal() {
         return mFingerprintRepository.getFirstFingerprintSensorPropertiesInternal();
-    }
-
-    /**
-     * The first sensor type is UDFPS sensor or not
-     */
-    public boolean canAssumeUdfps() {
-        return mFingerprintRepository.canAssumeUdfps();
     }
 
     /**
