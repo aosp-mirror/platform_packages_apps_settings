@@ -237,7 +237,10 @@ public final class CombinedProviderInfo {
             List<CredentialProviderInfo> cpi = credmanServices.get(packageName);
 
             // If there are multiple autofill services then pick the first one.
-            AutofillServiceInfo selectedAsi = asi.isEmpty() ? null : asi.get(0);
+            AutofillServiceInfo selectedAsi = null;
+            if (asi != null && !asi.isEmpty()) {
+                selectedAsi = asi.get(0);
+            }
 
             // Check if we are the default autofill provider.
             boolean isDefaultAutofillProvider = false;

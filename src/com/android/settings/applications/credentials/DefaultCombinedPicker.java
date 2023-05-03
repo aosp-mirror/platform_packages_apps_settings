@@ -16,21 +16,27 @@
 
 package com.android.settings.applications.credentials;
 
+import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ServiceInfo;
+import android.credentials.CredentialManager;
+import android.credentials.CredentialProviderInfo;
+import android.credentials.SetEnabledProvidersException;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.OutcomeReceiver;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.service.autofill.AutofillService;
 import android.service.autofill.AutofillServiceInfo;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 
+import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 
 import com.android.internal.content.PackageMonitor;
@@ -47,14 +53,16 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
 
     private static final String TAG = "DefaultCombinedPicker";
 
-    public static final String SETTING = Settings.Secure.AUTOFILL_SERVICE;
-    public static final Intent AUTOFILL_PROBE = new Intent(AutofillService.SERVICE_INTERFACE);
+    public static final String AUTOFILL_SETTING = Settings.Secure.AUTOFILL_SERVICE;
+    public static final String CREDENTIAL_SETTING = Settings.Secure.CREDENTIAL_SERVICE;
 
     /** Extra set when the fragment is implementing ACTION_REQUEST_SET_AUTOFILL_SERVICE. */
     public static final String EXTRA_PACKAGE_NAME = "package_name";
 
     /** Set when the fragment is implementing ACTION_REQUEST_SET_AUTOFILL_SERVICE. */
     private DialogInterface.OnClickListener mCancelListener;
+
+    private CredentialManager mCredentialManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,6 +79,7 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
             // ACTION_REQUEST_SET_AUTOFILL_SERVICE and we should always use the calling uid.
             mUserId = UserHandle.myUserId();
         }
+
         mSettingsPackageMonitor.register(activity, activity.getMainLooper(), false);
         update();
     }
@@ -187,35 +196,76 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
         }
     }
 
-    @Override
+    /**
+     * Get the Credential Manager service if we haven't already got it. We need to get the service
+     * later because if we do it in onCreate it will fail.
+     */
+    private @Nullable CredentialManager getCredentialProviderService() {
+        if (mCredentialManager == null) {
+            mCredentialManager = getContext().getSystemService(CredentialManager.class);
+        }
+        return mCredentialManager;
+    }
+
+    private List<CombinedProviderInfo> getAllProviders() {
+        final Context context = getContext();
+        final List<AutofillServiceInfo> autofillProviders =
+                AutofillServiceInfo.getAvailableServices(context, mUserId);
+
+        final CredentialManager service = getCredentialProviderService();
+        final List<CredentialProviderInfo> credManProviders = new ArrayList<>();
+        if (service != null) {
+            credManProviders.addAll(
+                    service.getCredentialProviderServices(
+                            mUserId, CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY));
+        }
+
+        final String selectedAutofillProvider = getSelectedAutofillProvider(context, mUserId);
+        return CombinedProviderInfo.buildMergedList(
+                autofillProviders, credManProviders, selectedAutofillProvider);
+    }
+
+    public static String getSelectedAutofillProvider(Context context, int userId) {
+        return Settings.Secure.getStringForUser(
+                context.getContentResolver(), AUTOFILL_SETTING, userId);
+    }
+
     protected List<DefaultAppInfo> getCandidates() {
+        final Context context = getContext();
+        final List<CombinedProviderInfo> allProviders = getAllProviders();
         final List<DefaultAppInfo> candidates = new ArrayList<>();
-        final List<AutofillServiceInfo> services =
-                AutofillServiceInfo.getAvailableServices(getContext(), mUserId);
-        for (AutofillServiceInfo asi : services) {
-            candidates.add(
-                    new DefaultAppInfo(
-                            getContext(), mPm, mUserId, asi.getServiceInfo().getComponentName()));
+
+        for (CombinedProviderInfo cpi : allProviders) {
+            ServiceInfo brandingService = cpi.getBrandingService();
+            if (brandingService == null) {
+                candidates.add(
+                        new DefaultAppInfo(
+                                context,
+                                mPm,
+                                mUserId,
+                                cpi.getApplicationInfo(),
+                                cpi.getSettingsSubtitle(),
+                                true));
+            } else {
+                candidates.add(
+                        new DefaultAppInfo(
+                                context,
+                                mPm,
+                                mUserId,
+                                brandingService,
+                                cpi.getSettingsSubtitle(),
+                                true));
+            }
         }
 
         return candidates;
     }
 
-    public static String getDefaultKey(Context context, int userId) {
-        String setting =
-                Settings.Secure.getStringForUser(context.getContentResolver(), SETTING, userId);
-        if (setting != null) {
-            ComponentName componentName = ComponentName.unflattenFromString(setting);
-            if (componentName != null) {
-                return componentName.flattenToString();
-            }
-        }
-        return null;
-    }
-
     @Override
     protected String getDefaultKey() {
-        return getDefaultKey(getContext(), mUserId);
+        final CombinedProviderInfo topProvider =
+                CombinedProviderInfo.getTopProvider(getAllProviders());
+        return topProvider == null ? "" : topProvider.getApplicationInfo().packageName;
     }
 
     @Override
@@ -234,7 +284,39 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
 
     @Override
     protected boolean setDefaultKey(String key) {
-        Settings.Secure.putStringForUser(getContext().getContentResolver(), SETTING, key, mUserId);
+        // Get the list of providers and see if any match the key (package name).
+        final List<CombinedProviderInfo> allProviders = getAllProviders();
+        CombinedProviderInfo matchedProvider = null;
+        for (CombinedProviderInfo cpi : allProviders) {
+            if (cpi.getApplicationInfo().packageName.equals(key)) {
+                matchedProvider = cpi;
+                break;
+            }
+        }
+
+        // If there were none then clear the stored providers.
+        if (matchedProvider == null) {
+            setProviders(null, new ArrayList<>());
+            return true;
+        }
+
+        // Get the component names and save them.
+        final List<String> credManComponents = new ArrayList<>();
+        for (CredentialProviderInfo pi : matchedProvider.getCredentialProviderInfos()) {
+            credManComponents.add(pi.getServiceInfo().getComponentName().flattenToString());
+        }
+
+        String autofillValue = null;
+        if (matchedProvider.getAutofillServiceInfo() != null) {
+            autofillValue =
+                    matchedProvider
+                            .getAutofillServiceInfo()
+                            .getServiceInfo()
+                            .getComponentName()
+                            .flattenToString();
+        }
+
+        setProviders(autofillValue, credManComponents);
 
         // Check if activity was launched from Settings.ACTION_REQUEST_SET_AUTOFILL_SERVICE
         // intent, and set proper result if so...
@@ -254,5 +336,39 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
         // TODO: Notify the rest
 
         return true;
+    }
+
+    private void setProviders(String autofillProvider, List<String> credManProviders) {
+        if (TextUtils.isEmpty(autofillProvider)) {
+            if (credManProviders.size() > 0) {
+                autofillProvider =
+                        CredentialManagerPreferenceController
+                                .AUTOFILL_CREDMAN_ONLY_PROVIDER_PLACEHOLDER;
+            }
+        }
+
+        Settings.Secure.putStringForUser(
+                getContext().getContentResolver(), AUTOFILL_SETTING, autofillProvider, mUserId);
+
+        CredentialManager service = getCredentialProviderService();
+        if (service == null) {
+            return;
+        }
+
+        service.setEnabledProviders(
+                credManProviders,
+                mUserId,
+                ContextCompat.getMainExecutor(getContext()),
+                new OutcomeReceiver<Void, SetEnabledProvidersException>() {
+                    @Override
+                    public void onResult(Void result) {
+                        Log.i(TAG, "setEnabledProviders success");
+                    }
+
+                    @Override
+                    public void onError(SetEnabledProvidersException e) {
+                        Log.e(TAG, "setEnabledProviders error: " + e.toString());
+                    }
+                });
     }
 }

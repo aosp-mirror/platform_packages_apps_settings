@@ -23,7 +23,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.credentials.CredentialManager;
+import android.credentials.CredentialProviderInfo;
 import android.provider.Settings;
+import android.service.autofill.AutofillService;
 import android.service.autofill.AutofillServiceInfo;
 import android.text.TextUtils;
 import android.util.Log;
@@ -35,6 +37,9 @@ import com.android.settingslib.applications.DefaultAppInfo;
 import java.util.List;
 
 public class DefaultCombinedPreferenceController extends DefaultAppPreferenceController {
+
+    private static final Intent AUTOFILL_PROBE = new Intent(AutofillService.SERVICE_INTERFACE);
+    private static final String TAG = "DefaultCombinedPreferenceController";
 
     private final AutofillManager mAutofillManager;
     private final CredentialManager mCredentialManager;
@@ -76,23 +81,54 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
 
     @Override
     protected DefaultAppInfo getDefaultAppInfo() {
-        final String flattenComponent =
-                Settings.Secure.getString(
-                        mContext.getContentResolver(), DefaultCombinedPicker.SETTING);
-        if (!TextUtils.isEmpty(flattenComponent)) {
-            DefaultAppInfo appInfo =
-                    new DefaultAppInfo(
-                            mContext,
-                            mPackageManager,
-                            mUserId,
-                            ComponentName.unflattenFromString(flattenComponent));
-            return appInfo;
+        List<CombinedProviderInfo> providers = getAllProviders(mUserId);
+        CombinedProviderInfo topProvider = CombinedProviderInfo.getTopProvider(providers);
+        if (topProvider != null) {
+            ServiceInfo brandingService = topProvider.getBrandingService();
+            if (brandingService == null) {
+                return new DefaultAppInfo(
+                        mContext,
+                        mPackageManager,
+                        mUserId,
+                        topProvider.getApplicationInfo(),
+                        topProvider.getSettingsSubtitle(),
+                        true);
+            } else {
+                return new DefaultAppInfo(
+                        mContext,
+                        mPackageManager,
+                        mUserId,
+                        brandingService,
+                        topProvider.getSettingsSubtitle(),
+                        true);
+            }
         }
         return null;
     }
 
+    private List<CombinedProviderInfo> getAllProviders(int userId) {
+        final List<AutofillServiceInfo> autofillProviders =
+                AutofillServiceInfo.getAvailableServices(mContext, userId);
+        final List<CredentialProviderInfo> credManProviders =
+                mCredentialManager.getCredentialProviderServices(
+                        userId, CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY);
+        final String selectedAutofillProvider =
+                Settings.Secure.getStringForUser(
+                        mContext.getContentResolver(),
+                        DefaultCombinedPicker.AUTOFILL_SETTING,
+                        userId);
+
+        return CombinedProviderInfo.buildMergedList(
+                autofillProviders, credManProviders, selectedAutofillProvider);
+    }
+
     @Override
     protected boolean showLabelAsTitle() {
+        return true;
+    }
+
+    @Override
+    protected boolean showAppSummary() {
         return true;
     }
 
@@ -113,9 +149,7 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
             final List<ResolveInfo> resolveInfos =
                     mContext.getPackageManager()
                             .queryIntentServicesAsUser(
-                                    DefaultCombinedPicker.AUTOFILL_PROBE,
-                                    PackageManager.GET_META_DATA,
-                                    mUserId);
+                                    AUTOFILL_PROBE, PackageManager.GET_META_DATA, mUserId);
 
             for (ResolveInfo resolveInfo : resolveInfos) {
                 final ServiceInfo serviceInfo = resolveInfo.serviceInfo;
@@ -130,9 +164,7 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
                                         .getSettingsActivity();
                     } catch (SecurityException e) {
                         // Service does not declare the proper permission, ignore it.
-                        Log.w(
-                                "AutofillSettingIntentProvider",
-                                "Error getting info for " + serviceInfo + ": " + e);
+                        Log.w(TAG, "Error getting info for " + serviceInfo + ": " + e);
                         return null;
                     }
                     if (TextUtils.isEmpty(settingsActivity)) {
