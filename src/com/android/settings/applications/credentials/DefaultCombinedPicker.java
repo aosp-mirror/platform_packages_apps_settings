@@ -356,6 +356,7 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
         }
 
         service.setEnabledProviders(
+                new ArrayList<String>(), // TODO(240466271): pass down primary providers.
                 credManProviders,
                 mUserId,
                 ContextCompat.getMainExecutor(getContext()),
