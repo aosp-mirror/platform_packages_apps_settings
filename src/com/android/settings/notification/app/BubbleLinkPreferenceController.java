@@ -16,20 +16,17 @@
 
 package com.android.settings.notification.app;
 
-import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
-
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+
+import com.android.settings.notification.BubbleHelper;
 
 public class BubbleLinkPreferenceController extends NotificationPreferenceController {
 
     private static final String KEY = "notification_bubbles";
-    @VisibleForTesting
-    static final int ON = 1;
 
     public BubbleLinkPreferenceController(Context context) {
         super(context, null);
@@ -40,7 +37,7 @@ public class BubbleLinkPreferenceController extends NotificationPreferenceContro
         if (!super.isAvailable()) {
             return false;
         }
-        return areBubblesEnabled();
+        return BubbleHelper.isEnabledSystemWide(mContext);
     }
 
     @Override
@@ -63,11 +60,5 @@ public class BubbleLinkPreferenceController extends NotificationPreferenceContro
             intent.putExtra(Settings.EXTRA_APP_UID, mAppRow.uid);
             preference.setIntent(intent);
         }
-    }
-
-
-    private boolean areBubblesEnabled() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
-                NOTIFICATION_BUBBLES, ON) == ON;
     }
 }

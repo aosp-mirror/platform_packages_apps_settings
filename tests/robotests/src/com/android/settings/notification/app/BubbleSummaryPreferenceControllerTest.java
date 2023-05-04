@@ -23,8 +23,8 @@ import static android.app.NotificationManager.BUBBLE_PREFERENCE_SELECTED;
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
 
-import static com.android.settings.notification.app.BubblePreferenceController.SYSTEM_WIDE_OFF;
-import static com.android.settings.notification.app.BubblePreferenceController.SYSTEM_WIDE_ON;
+import static com.android.settings.notification.BubbleHelper.SYSTEM_WIDE_OFF;
+import static com.android.settings.notification.BubbleHelper.SYSTEM_WIDE_ON;
 
 import static junit.framework.TestCase.assertEquals;
 
