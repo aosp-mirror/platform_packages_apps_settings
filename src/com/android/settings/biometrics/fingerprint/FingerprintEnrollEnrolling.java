@@ -259,10 +259,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
         if (mCanAssumeUdfps) {
             int rotation = getApplicationContext().getDisplay().getRotation();
+            final GlifLayout layout = (GlifLayout) getLayoutInflater().inflate(
+                    R.layout.udfps_enroll_enrolling, null, false);
             switch (rotation) {
                 case Surface.ROTATION_90:
-                    final GlifLayout layout = (GlifLayout) getLayoutInflater().inflate(
-                            R.layout.udfps_enroll_enrolling, null, false);
                     final LinearLayout layoutContainer = layout.findViewById(
                             R.id.layout_container);
                     final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
@@ -287,53 +287,56 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
                 case Surface.ROTATION_0:
                 case Surface.ROTATION_180:
-                case Surface.ROTATION_270:
-                default:
-                    final GlifLayout defaultLayout = (GlifLayout) getLayoutInflater().inflate(
-                            R.layout.udfps_enroll_enrolling, null, false);
                     if (FeatureFlagUtils.isEnabled(getApplicationContext(),
                             FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS)) {
                         final UdfpsEnrollView udfpsEnrollView = addUdfpsEnrollView(props.get(0));
-                        if (rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) {
-                            // In the portrait mode, set layout_container's height 0, so it's
-                            // always shown at the bottom of the screen.
-                            // Add udfps enroll view into layout_container instead of
-                            // udfps_enroll_enrolling, so that when the content is too long to
-                            // make udfps_enroll_enrolling larger than the screen, udfps enroll
-                            // view could still be set to right position by setting bottom margin to
-                            // its parent view (layout_container) because it's always at the
-                            // bottom of the screen.
-                            final FrameLayout portraitLayoutContainer = defaultLayout.findViewById(
-                                    R.id.layout_container);
-                            final ViewGroup.LayoutParams containerLp =
-                                    portraitLayoutContainer.getLayoutParams();
-                            containerLp.height = 0;
+                        // In the portrait mode, set layout_container's height 0, so it's
+                        // always shown at the bottom of the screen.
+                        // Add udfps enroll view into layout_container instead of
+                        // udfps_enroll_enrolling, so that when the content is too long to
+                        // make udfps_enroll_enrolling larger than the screen, udfps enroll
+                        // view could still be set to right position by setting bottom margin to
+                        // its parent view (layout_container) because it's always at the
+                        // bottom of the screen.
+                        final FrameLayout portraitLayoutContainer = layout.findViewById(
+                                R.id.layout_container);
+                        final ViewGroup.LayoutParams containerLp =
+                                portraitLayoutContainer.getLayoutParams();
+                        containerLp.height = 0;
 
-                            // In the portrait mode, the title and lottie animation view may
-                            // overlap when title needs three lines, so adding some paddings
-                            // between them, and adjusting the fp progress view here accordingly.
-                            final int layoutLottieAnimationPadding = (int) getResources()
-                                    .getDimension(R.dimen.udfps_lottie_padding_top);
-                            portraitLayoutContainer.setPadding(0,
-                                    layoutLottieAnimationPadding, 0, 0);
-                            final ImageView progressView = udfpsEnrollView.findViewById(
-                                    R.id.udfps_enroll_animation_fp_progress_view);
-                            progressView.setPadding(0, -(layoutLottieAnimationPadding),
-                                    0, layoutLottieAnimationPadding);
-                            final ImageView fingerprintView = udfpsEnrollView.findViewById(
-                                    R.id.udfps_enroll_animation_fp_view);
-                            fingerprintView.setPadding(0, -layoutLottieAnimationPadding,
-                                    0, layoutLottieAnimationPadding);
+                        // In the portrait mode, the title and lottie animation view may
+                        // overlap when title needs three lines, so adding some paddings
+                        // between them, and adjusting the fp progress view here accordingly.
+                        final int layoutLottieAnimationPadding = (int) getResources()
+                                .getDimension(R.dimen.udfps_lottie_padding_top);
+                        portraitLayoutContainer.setPadding(0,
+                                layoutLottieAnimationPadding, 0, 0);
+                        final ImageView progressView = udfpsEnrollView.findViewById(
+                                R.id.udfps_enroll_animation_fp_progress_view);
+                        progressView.setPadding(0, -(layoutLottieAnimationPadding),
+                                0, layoutLottieAnimationPadding);
+                        final ImageView fingerprintView = udfpsEnrollView.findViewById(
+                                R.id.udfps_enroll_animation_fp_view);
+                        fingerprintView.setPadding(0, -layoutLottieAnimationPadding,
+                                0, layoutLottieAnimationPadding);
 
-                            portraitLayoutContainer.addView(udfpsEnrollView);
-                            setOnHoverListener(false, defaultLayout, udfpsEnrollView);
-                        } else if (rotation == Surface.ROTATION_270) {
-                            defaultLayout.addView(udfpsEnrollView);
-                            setOnHoverListener(true, defaultLayout, udfpsEnrollView);
-                        }
+                        portraitLayoutContainer.addView(udfpsEnrollView);
+                        setOnHoverListener(false, layout, udfpsEnrollView);
                     }
 
-                    setContentView(defaultLayout);
+                    setContentView(layout);
+                    break;
+
+                case Surface.ROTATION_270:
+                default:
+                    if (FeatureFlagUtils.isEnabled(getApplicationContext(),
+                            FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS)) {
+                        final UdfpsEnrollView udfpsEnrollView = addUdfpsEnrollView(props.get(0));
+                        layout.addView(udfpsEnrollView);
+                        setOnHoverListener(true, layout, udfpsEnrollView);
+                    }
+
+                    setContentView(layout);
                     break;
             }
             setDescriptionText(R.string.security_settings_udfps_enroll_start_message);
@@ -514,7 +517,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         // showErrorDialog() will cause onWindowFocusChanged(false), set mIsCanceled to false
         // before showErrorDialog() to prevent that another error dialog is triggered again.
         mIsCanceled = true;
-        FingerprintErrorDialog.showErrorDialog(this, errorMsgId, mCanAssumeUdfps);
+        FingerprintErrorDialog.showErrorDialog(this, errorMsgId);
         cancelEnrollment();
         stopIconAnimation();
         stopListenOrientationEvent();

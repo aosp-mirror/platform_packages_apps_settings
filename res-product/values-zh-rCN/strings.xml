@@ -148,8 +148,8 @@
     <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="6862493139500275821">"指纹传感器在电源按钮上。电源按钮是一个扁平按钮，位于手机边缘凸起的音量按钮旁边。"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="2012126789397819713">"现在您可以使用指纹解锁平板电脑或在需要时验证自己的身份，例如在登录应用或批准购买时"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="7119860465479161782">"现在您可以使用指纹解锁设备或在需要时验证自己的身份，例如在登录应用或批准购买时"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="8255422287180693200">"现在您可以使用指纹解锁手机或在需要时验证自己的身份，例如在登录应用或批准购买时"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="7814892482046294464">"现在，您就可以用指纹来解锁平板电脑或验证自己的身份了，例如在登录应用或批准购买交易时进行验证。\n\n如果希望在采用其他方式握持平板电脑时也能更轻松地解锁，可以再添加一个指纹。"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="8255422287180693200">"现在您可以使用指纹解锁手机或在需要时验证自己的身份，例如在登录应用或批准购买交易时"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="7814892482046294464">"现在，您可以使用指纹来解锁平板电脑或在需要时验证自己的身份，例如在登录应用或批准购买交易时。\n\n如果希望在采用其他方式握持平板电脑时也能更轻松地解锁，可以再添加一个指纹。"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="8418220207105495988">"现在，您就可以用指纹来解锁设备或验证自己的身份了，例如在登录应用或批准购买交易时进行验证。\n\n如果希望在采用其他方式握持设备时也能更轻松地解锁，可以再添加一个指纹。"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="3545300825124248359">"现在，您就可以用指纹来解锁手机或验证自己的身份了，例如在登录应用或批准购买交易时进行验证。\n\n如果希望在采用其他方式握持手机时也能更轻松地解锁，可以再添加一个指纹。"</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="2125894016330764666">"平板电脑丢失或被盗时，PIN 码可为其提供保护"</string>
@@ -188,7 +188,7 @@
     <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="2717938545326672010">"必须设置 PIN 码，才能设置人脸解锁和指纹解锁。\n\n手机丢失或被盗时，PIN 码可为其提供保护。"</string>
     <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="6067309080610183546">"必须设置解锁图案，才能设置人脸解锁和指纹解锁。\n\n手机丢失或被盗时，解锁图案可为其提供保护。"</string>
     <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="4739690336878613804">"必须设置密码，才能设置人脸解锁和指纹解锁。\n\n手机丢失或被盗时，密码可为其提供保护。"</string>
-    <string name="fingerprint_v2_delete_message" product="default" msgid="8723083814238510088">"确认删除后，手机上存储的与“<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>”关联的指纹图片和模型将被删除"</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8723083814238510088">"确认删除后，手机上存储的与“<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>”关联的指纹图像和模型将被删除"</string>
     <string name="fingerprint_v2_delete_message" product="tablet" msgid="527375244730792698">"确认删除后，平板电脑上存储的与“<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>”关联的指纹图片和模型将被删除"</string>
     <string name="fingerprint_v2_delete_message" product="device" msgid="4549780655045100171">"确认删除后，设备上存储的与“<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>”关联的指纹图片和模型将被删除"</string>
     <string name="fingerprint_last_delete_message" product="default" msgid="3187410175262625294">"您将无法使用指纹来解锁手机或在应用中验证自己的身份。"</string>
@@ -350,8 +350,6 @@
     <string name="battery_tip_incompatible_charging_message" product="default" msgid="5315451445653379744">"电池充电缓慢或无法充电。请检查数据线和电源适配器与您的手机是否适配"</string>
     <string name="battery_tip_incompatible_charging_message" product="device" msgid="7265524281090787927">"电池充电缓慢或无法充电。请检查数据线和电源适配器与您的设备是否适配"</string>
     <string name="battery_tip_incompatible_charging_message" product="tablet" msgid="174383022413708569">"电池充电缓慢或无法充电。请检查数据线和电源适配器与您的平板电脑是否适配"</string>
-    <!-- no translation found for lockscreen_trivial_controls_summary (42562533085885152) -->
-    <skip />
-    <!-- no translation found for lockscreen_trivial_controls_summary (9052068482124729345) -->
-    <skip />
+    <string name="lockscreen_trivial_controls_summary" product="default" msgid="42562533085885152">"不解锁手机"</string>
+    <string name="lockscreen_trivial_controls_summary" product="tabled" msgid="9052068482124729345">"不解锁平板电脑"</string>
 </resources>
