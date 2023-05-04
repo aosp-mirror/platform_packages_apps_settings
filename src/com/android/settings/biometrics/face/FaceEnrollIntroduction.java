@@ -182,15 +182,10 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
                         boolean isFaceStrong = sensors.get(0).sensorStrength
                                 == SensorProperties.STRENGTH_STRONG;
-                        if (mIsFaceStrong == isFaceStrong) {
-                            return;
-                        }
                         mIsFaceStrong = isFaceStrong;
                         onFaceStrengthChanged();
                     }
                 });
-
-        onFaceStrengthChanged();
 
         // This path is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD

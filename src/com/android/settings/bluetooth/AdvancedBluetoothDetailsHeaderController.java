@@ -107,10 +107,9 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             new BluetoothAdapter.OnMetadataChangedListener() {
                 @Override
                 public void onMetadataChanged(BluetoothDevice device, int key, byte[] value) {
-                    if (DEBUG) {
-                        Log.d(TAG, String.format("Metadata updated in Device %s: %d = %s.", device,
-                                key, value == null ? null : new String(value)));
-                    }
+                    Log.d(TAG, String.format("Metadata updated in Device %s: %d = %s.",
+                            device.getAnonymizedAddress(),
+                            key, value == null ? null : new String(value)));
                     refresh();
                 }
             };
@@ -276,11 +275,22 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         }
         final int batteryLevel = BluetoothUtils.getIntMetaData(bluetoothDevice, batteryMetaKey);
         final boolean charging = BluetoothUtils.getBooleanMetaData(bluetoothDevice, chargeMetaKey);
-        if (DEBUG) {
-            Log.d(TAG, "updateSubLayout() icon : " + iconMetaKey + ", battery : " + batteryMetaKey
-                    + ", charge : " + chargeMetaKey + ", batteryLevel : " + batteryLevel
-                    + ", charging : " + charging + ", iconUri : " + iconUri);
+        int lowBatteryLevel = BluetoothUtils.getIntMetaData(bluetoothDevice,
+                lowBatteryMetaKey);
+        if (lowBatteryLevel == BluetoothUtils.META_INT_ERROR) {
+            if (batteryMetaKey == BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY) {
+                lowBatteryLevel = CASE_LOW_BATTERY_LEVEL;
+            } else {
+                lowBatteryLevel = LOW_BATTERY_LEVEL;
+            }
         }
+
+        Log.d(TAG, "buletoothDevice: " + bluetoothDevice.getAnonymizedAddress()
+                + ", updateSubLayout() icon : " + iconMetaKey + ", battery : " + batteryMetaKey
+                + ", charge : " + chargeMetaKey + ", batteryLevel : " + batteryLevel
+                + ", charging : " + charging + ", iconUri : " + iconUri
+                + ", lowBatteryLevel : " + lowBatteryLevel);
+
         if (deviceId == LEFT_DEVICE_ID || deviceId == RIGHT_DEVICE_ID) {
             showBatteryPredictionIfNecessary(linearLayout, deviceId, batteryLevel);
         }
@@ -291,15 +301,6 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                 batterySummaryView.setText(
                         com.android.settings.Utils.formatPercentage(batteryLevel));
                 batterySummaryView.setVisibility(View.VISIBLE);
-                int lowBatteryLevel = BluetoothUtils.getIntMetaData(bluetoothDevice,
-                        lowBatteryMetaKey);
-                if (lowBatteryLevel == BluetoothUtils.META_INT_ERROR) {
-                    if (batteryMetaKey == BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY) {
-                        lowBatteryLevel = CASE_LOW_BATTERY_LEVEL;
-                    } else {
-                        lowBatteryLevel = LOW_BATTERY_LEVEL;
-                    }
-                }
                 showBatteryIcon(linearLayout, batteryLevel, lowBatteryLevel, charging);
             } else {
                 if (deviceId == MAIN_DEVICE_ID) {
@@ -320,7 +321,15 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                 }
             }
         } else {
-            batterySummaryView.setVisibility(View.GONE);
+            if (batteryLevel != BluetoothUtils.META_INT_ERROR) {
+                linearLayout.setVisibility(View.VISIBLE);
+                batterySummaryView.setText(
+                        com.android.settings.Utils.formatPercentage(batteryLevel));
+                batterySummaryView.setVisibility(View.VISIBLE);
+                showBatteryIcon(linearLayout, batteryLevel, lowBatteryLevel, charging);
+            } else {
+                batterySummaryView.setVisibility(View.GONE);
+            }
         }
         final TextView textView = linearLayout.findViewById(R.id.header_title);
         if (deviceId == MAIN_DEVICE_ID) {
