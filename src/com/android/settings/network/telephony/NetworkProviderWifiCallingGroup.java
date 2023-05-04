@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -314,8 +313,7 @@ public class NetworkProviderWifiCallingGroup extends
     @VisibleForTesting
     protected boolean shouldShowWifiCallingForSub(int subId) {
         if (SubscriptionManager.isValidSubscriptionId(subId)
-                && MobileNetworkUtils.isWifiCallingEnabled(mContext, subId, queryImsState(subId),
-                null)) {
+                && MobileNetworkUtils.isWifiCallingEnabled(mContext, subId, queryImsState(subId))) {
             return true;
         }
         return false;
