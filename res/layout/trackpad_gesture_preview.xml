@@ -29,11 +29,11 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dip"
         android:layout_marginEnd="8dip"
         android:layout_marginTop="6dip"
-        android:layout_marginBottom="6dip"
+        android:layout_marginBottom="48dip"
         android:layout_weight="1">
 
         <Button
@@ -46,7 +46,7 @@
             android:layout_alignParentStart="true"
             android:paddingVertical="14dp"
             android:drawablePadding="9dp"
-            style="@style/ModifierKeyButtonCancel"
+            style="@style/TrackpadButtonCancel"
             android:textColor="?android:attr/textColorPrimary"
             android:text="@string/gesture_button_skip"/>
 
@@ -60,15 +60,16 @@
             android:layout_alignParentStart="true"
             android:paddingVertical="14dp"
             android:drawablePadding="9dp"
-            style="@style/ModifierKeyButtonCancel"
+            style="@style/TrackpadButtonCancel"
             android:textColor="?android:attr/textColorPrimary"
             android:text="@string/gesture_button_restart"/>
 
         <LinearLayout
             android:id="@+id/viewGroup"
-            android:layout_width="fill_parent"
-            android:layout_height="48dp"
-            android:gravity="center"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
 
         <Button
             android:id="@+id/button_next"
@@ -80,7 +81,7 @@
             android:layout_alignParentEnd="true"
             android:paddingVertical="14dp"
             android:drawablePadding="9dp"
-            style="@style/ModifierKeyButtonDone"
+            style="@style/TrackpadButtonDone"
             android:textColor="?androidprv:attr/materialColorOnPrimary"
             android:text="@string/gesture_button_next"/>
 
@@ -94,7 +95,7 @@
             android:layout_alignParentEnd="true"
             android:paddingVertical="14dp"
             android:drawablePadding="9dp"
-            style="@style/ModifierKeyButtonDone"
+            style="@style/TrackpadButtonDone"
             android:textColor="?androidprv:attr/materialColorOnPrimary"
             android:text="@string/gesture_button_done"/>
     </RelativeLayout>
