@@ -562,6 +562,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         List<String> enabledServices = getEnabledSettings();
         mCredentialManager.setEnabledProviders(
+                new ArrayList<String>(), // TODO(240466271): pass down primary providers
                 enabledServices,
                 getUser(),
                 mExecutor,
