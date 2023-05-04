@@ -854,6 +854,19 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         @Override
+        public void onStop() {
+            super.onStop();
+            // hasCredential checks to see if user chooses a password for screen lock. If the
+            // screen lock is None or Swipe, we do not want to call getActivity().finish().
+            // Otherwise, bugs would be caused. (e.g. b/278488549, b/278530059)
+            final boolean hasCredential = mLockPatternUtils.isSecure(mUserId);
+            if (!getActivity().isChangingConfigurations()
+                    && !mWaitingForConfirmation && hasCredential) {
+                getActivity().finish();
+            }
+        }
+
+        @Override
         public void onDestroy() {
             super.onDestroy();
             if (mUserPassword != null) {
