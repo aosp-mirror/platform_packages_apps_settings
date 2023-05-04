@@ -159,8 +159,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"የሥርዓት ነባሪ"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"ለዚህ መተግበሪያ የቋንቋ መረጣ ከቅንብሮች አይገኝም።"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"ቋንቋ በመተግበሪያው ውስጥ ካሉ ቋንቋዎች ሊለያይ ይችላል። አንዳንድ መተግበሪያዎች ይህን ቅንብር ላይደግፉ ይችላሉ።"</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6744909281573556379) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"ለእያንዳንዱ መተግበሪያ ቋንቋውን ያቀናብሩ።"</string>
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"የእርስዎ ስርዓት፣ መተግበሪያዎች እና ድር ጣቢያዎች ከእርስዎ የተመረጡ ቋንቋዎች ውስጥ የመጀመሪያውን የተደገፈ ቋንቋ ይጠቀማሉ።"</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"ለእያንዳንዱ መተግበሪያ ቋንቋ ለመምረጥ ወደ መተግበሪያ ቋንቋ ቅንብሮች ይሂዱ።"</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"ስለ መተግበሪያ ቋንቋዎች የበለጠ ይወቁ"</string>
@@ -469,7 +468,7 @@
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"ምስጠራ፣ የመግቢያ ማስረጃዎች እና ሌሎችም"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"ደህንነት፣ ተጨማሪ የደህንነት ቅንብሮች፣ ተጨማሪ ቅንብሮች፣ የላቁ የደህንነት ቅንብሮች"</string>
     <string name="privacy_advanced_settings" msgid="8828215456566937719">"ተጨማሪ የግላዊነት ቅንብሮች"</string>
-    <string name="more_security_privacy_settings" msgid="123465614090328851">"ተጨማሪ ደህንነት &amp; እና ግላዊነት"</string>
+    <string name="more_security_privacy_settings" msgid="123465614090328851">"ተጨማሪ ደህንነት እና ግላዊነት"</string>
     <string name="security_header" msgid="961514795852103424">"ደህንነት"</string>
     <string name="privacy_header" msgid="5526002421324257007">"ግላዊነት"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"የሥራ መገለጫ"</string>
@@ -2955,8 +2954,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g፣ vonr፣ የላቀ ጥሪ፣ 5ጂ ጥሪ"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"ቋንቋ ያክሉ፣ አንድ ቋንቋ ያክሉ"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"የጽሁፍ መጠን፣ ትልቅ ህትመት፣ ትልቅ ቅርጸ-ቁምፊ፣ ትልቅ ጽሁፍ፣ ዝቅተኛ-ዕይታ፣ ጽሁፍን ያተልቁ መጠን፣ ትልቅ ህትመት፣ ትልቅ ቅርጸ-ቁምፊ፣ ትልቅ ጽሁፍ፣ ዝቅተኛ-ዕይታ፣ ጽሁፍን ያተልቁ፣ ቅርጸ-ቁምፊ ማተለቂያ፣ ቅርጸ-ቁምፊ ማተለቅ"</string>
-    <!-- no translation found for keywords_always_show_time_info (1066752498285497595) -->
-    <skip />
+    <string name="keywords_always_show_time_info" msgid="1066752498285497595">"ሁልጊዜ የበራ የድባብ ማሳያ፣ AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"የኤንኤፍሲ፣ መለያ፣ አንባቢ"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"ድምፅ፣ ንዝረት፣ አትረብሽ"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"የማህደረመረጃ ክፍልፍል"</string>
@@ -3650,9 +3648,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"ሁሉንም ፋይሎች ለማስተዳደር መዳረሻ ፍቀድ"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"ይህ መተግበሪያ በዚህ መሣሪያ ላይ ወይም በማናቸውም የተገናኙ የማከማቻ መጠኖች ላይ ሁሉንም ፋይሎች እንዲያነብ፣ እንዲያሻሽል እና እንዲሰርዝ ይፍቀዱ። ፈቃድ ከተሰጠ፣ መተግበሪያ ያለ የእርስዎ ግልፅ የሆነ ዕውቀት ፋይሎችን መድረስ ይችላል።"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"ሁሉንም ፋይሎች መድረስ ይችላል"</string>
-    <string name="full_screen_intent_title" msgid="2461171326558306927">"የሙሉ ገጽ ዕይታ ማሳወቂያዎችን አሳይ"</string>
-    <string name="permit_full_screen_intent" msgid="7103548865544643514">"መተግበሪያው መሣሪያው በሚቆለፍበት ጊዜ የሙሉ ገጽ ዕይታ ማሳወቂያዎችን እንዲያሳይ ፍቀድ"</string>
-    <string name="footer_description_full_screen_intent" msgid="4600171646567760347">"መተግበሪያው መሣሪያው በሚቆለፍበት ጊዜ ሙሉ ገጽ ዕይታውን የሚይዙ ማሳወቂያዎችን እንዲያሳይ ይፍቀዱለት። መተግበሪያዎች ማንቂያዎችን፣ ገቢ ጥሪዎችን ወይም ሌሎች አስቸኳይ ማሳወቂያዎችን ለማድመቅ እነዚህን ሊጠቀሙ ይችላሉ።"</string>
+    <!-- no translation found for full_screen_intent_title (747270185715224130) -->
+    <skip />
+    <!-- no translation found for permit_full_screen_intent (9035367640019960861) -->
+    <skip />
+    <!-- no translation found for footer_description_full_screen_intent (7716518411349225528) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"የሚዲያ አስተዳደር መተግበሪያዎች"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"መተግበሪያው ሚዲያን እንዲያቀናብር ፍቀድ"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"ከተፈቀደለት ይህ መተግበሪያ እርስዎን ሳይጠይቅ በሌሎች መተግበሪያዎች የተፈጠሩ የሚዲያ ፋይሎችን ማሻሻል ወይም መሰረዝ ይችላል። መተግበሪያው ፋይሎችን እና ሚዲያዎችን ለመድረስ ፈቃድ ሊኖረው ይገባል።"</string>
@@ -4059,10 +4060,8 @@
     <string name="autofill_app" msgid="7595308061826307921">"የራስ-ሙላ አገልግሎት"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"ነባሪ የራስ-ሙላ አገልግሎት"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"የይለፍ ቃላት"</string>
-    <!-- no translation found for credman_chosen_app_title (4547405511458518096) -->
-    <skip />
-    <!-- no translation found for credman_credentials (4931371941253324143) -->
-    <skip />
+    <string name="credman_chosen_app_title" msgid="4547405511458518096">"የይለፍ ቃላት፣ የይለፍ ቁልፎች እና የውሂብ አገልግሎቶች"</string>
+    <string name="credman_credentials" msgid="4931371941253324143">"ተጨማሪ አቅራቢዎች"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# የይለፍ ቃል}one{# የይለፍ ቃል}other{# የይለፍ ቃሎች}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"ራስ-ሰር፣ ሙላ፣ ራስ-ሙላ፣ የይለፍ ቃል"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"ውሂብ፣ የይለፍ ቁልፍ፣ የይለፍ ቃል"</string>
@@ -4119,6 +4118,12 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
+    <!-- no translation found for enable_angle_as_system_driver (3985105681812713612) -->
+    <skip />
+    <!-- no translation found for enable_angle_as_system_driver_summary (4173041926052925436) -->
+    <skip />
+    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (2619263039763150810) -->
+    <skip />
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"የመተግበሪያ ተኳኋኝነት ለውጦች"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"የመተግበሪያ ተኳኋኝነት ለውጦችን ይቀያይሩ"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"ነባሪ የነቁ ለውጦች"</string>
@@ -4700,6 +4705,5 @@
     <string name="contrast_medium" msgid="384414510709285811">"መካከለኛ"</string>
     <string name="contrast_high" msgid="3988567609694797696">"ከፍተኛ"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"ይህ መተግበሪያ መከፈት የሚችለው በ1 መስኮት ብቻ ነው"</string>
-    <!-- no translation found for note_task_shortcut_label (1589543982691587932) -->
-    <skip />
+    <string name="note_task_shortcut_label" msgid="1589543982691587932">"የማስታወሻ አቋራጭ"</string>
 </resources>

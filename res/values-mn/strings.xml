@@ -159,8 +159,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Системийн өгөгдмөл"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Энэ аппын хэлийг Тохиргоо хэсгээс сонгох боломжгүй байна."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Хэл нь аппад боломжтой хэлээс шалтгаалан харилцан адилгүй байж болно. Зарим апп энэ тохиргоог дэмждэггүй байж магадгүй."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6744909281573556379) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Апп тус бүрд хэл тохируулна уу."</string>
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Таны систем, аппууд болон вебсайтууд таны сонгосон хэлээс эхний дэмжигдсэн хэлийг ашигладаг."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Апп тус бүрд хэл сонгохын тулд аппын хэлний тохиргоо руу очно уу."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Аппын хэлний талаар нэмэлт мэдээлэл авах"</string>
@@ -262,7 +261,7 @@
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Боломжгүй"</string>
     <string name="security_status_title" msgid="6958004275337618656">"Аюулгүй байдлын төлөв"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Дэлгэцийн түгжээ, Миний төхөөрөмжийг олох, аппын аюулгүй байдал"</string>
-    <string name="safety_center_title" msgid="7732397372178774777">"Аюулгүй байдал &amp; нууцлал"</string>
+    <string name="safety_center_title" msgid="7732397372178774777">"Аюулгүй байдал, нууцлал"</string>
     <string name="safety_center_summary" msgid="3554867379951053869">"Аппын аюулгүй байдал, төхөөрөмжийн түгжээ, зөвшөөрөл"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Царай нэмсэн"</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Тохируулга шаардлагатай"</string>
@@ -2955,8 +2954,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, дэвшилтэт дуудлага, 5g дуудлага"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"хэл нэмэх, хэл нэмэх"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"текстийн хэмжээ, том хэвлэл, том фонт, том текст, сул хараа, текстийг илүү том болгох, фонт томруулагч, фонт томруулалт"</string>
-    <!-- no translation found for keywords_always_show_time_info (1066752498285497595) -->
-    <skip />
+    <string name="keywords_always_show_time_info" msgid="1066752498285497595">"дэлгэц амраагчид үргэлж, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, шошго, уншигч"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Түвшин, чичиргээ, Бүү саад бол"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Медиа дууны түвшин"</string>
@@ -2975,10 +2973,10 @@
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Эхлээд чичиргээд, дараа нь хонхыг аажмаар дуугаргана"</string>
     <string name="spatial_audio_title" msgid="6591051622375191603">"Орчны аудио"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Залгах товчлуурын ая"</string>
-    <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Дэлгэц түгжих ая"</string>
+    <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Дэлгэц түгжих дуу"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Цэнэглэх дуу болон чичиргээ"</string>
-    <string name="docking_sounds_title" msgid="5341616179210436159">"Док-н ая"</string>
-    <string name="touch_sounds_title" msgid="2200734041857425078">"Хүрэлтийн ая"</string>
+    <string name="docking_sounds_title" msgid="5341616179210436159">"Суурилуулахад гарах дуу"</string>
+    <string name="touch_sounds_title" msgid="2200734041857425078">"Хүрэхэд гарах дуу"</string>
     <string name="vibrate_icon_title" msgid="1281100105045362530">"Чичрэх горимд байхад дүрс тэмдгийг үргэлж харуул"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Док чанга яригчаар тоглуулах"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Бүх аудио"</string>
@@ -3650,9 +3648,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Бүх файлыг удирдахын тулд хандахыг зөвшөөрөх"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Энэ аппад энэ төхөөрөмж дээрх эсвэл холбогдсон дурын хадгалах сангийн бүх файлыг унших, өөрчлөх болон устгахыг зөвшөөрөх. Зөвшөөрөл олгогдсон бол апп нь танд тодорхойлон мэдэгдэлгүйгээр файлд хандаж болзошгүй."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Бүх файлд хандах боломжтой"</string>
-    <string name="full_screen_intent_title" msgid="2461171326558306927">"Бүтэн дэлгэцийн мэдэгдэл харуулах"</string>
-    <string name="permit_full_screen_intent" msgid="7103548865544643514">"Төхөөрөмж түгжээтэй үед аппад бүтэн дэлгэцийн мэдэгдэл харуулахыг зөвшөөрөх"</string>
-    <string name="footer_description_full_screen_intent" msgid="4600171646567760347">"Төхөөрөмжийг түгжээтэй үед аппад бүтэн дэлгэцийг эзлэх мэдэгдэл харуулахыг зөвшөөрнө үү. Сэрүүлэг, ирсэн дуудлага эсвэл бусад яаралтай мэдэгдлийг онцлоход аппууд эдгээрийг ашиглаж магадгүй."</string>
+    <!-- no translation found for full_screen_intent_title (747270185715224130) -->
+    <skip />
+    <!-- no translation found for permit_full_screen_intent (9035367640019960861) -->
+    <skip />
+    <!-- no translation found for footer_description_full_screen_intent (7716518411349225528) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"Медиа удирдлагын аппууд"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Медиаг удирдахын тулд аппыг зөвшөөрөх"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Зөвшөөрсөн тохиолдолд энэ апп бусад апптай хамт үүсгэсэн медиа файлыг танаас асуухгүйгээр өөрчлөх эсвэл устгах боломжтой. Aпп нь файл болон медиад хандах зөвшөөрөлтэй байх ёстой."</string>
@@ -4059,10 +4060,8 @@
     <string name="autofill_app" msgid="7595308061826307921">"Автоматаар бөглөх үйлчилгээ"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Автоматаар бөглөх хэсгийн өгөгдмөл үйлчилгээ"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Нууц үг"</string>
-    <!-- no translation found for credman_chosen_app_title (4547405511458518096) -->
-    <skip />
-    <!-- no translation found for credman_credentials (4931371941253324143) -->
-    <skip />
+    <string name="credman_chosen_app_title" msgid="4547405511458518096">"Нууц үг, нэвтрэх түлхүүр болон өгөгдлийн үйлчилгээнүүд"</string>
+    <string name="credman_credentials" msgid="4931371941253324143">"Нэмэлт үйлчилгээ үзүүлэгчид"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# нууц үг}other{# нууц үг}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"автомат, бөглөх, автоматаар бөглөх хэсэг, нууц үг"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"өгөгдөл, passkey, нууц үг"</string>
@@ -4119,6 +4118,12 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
+    <!-- no translation found for enable_angle_as_system_driver (3985105681812713612) -->
+    <skip />
+    <!-- no translation found for enable_angle_as_system_driver_summary (4173041926052925436) -->
+    <skip />
+    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (2619263039763150810) -->
+    <skip />
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Аппын тохирох байдлын өөрчлөлт"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Аппын тохирох байдлын өөрчлөлтийг идэвхгүй болгох/идэвхжүүлэх"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Өгөгдмөл тохиргоогоор идэвхжүүлсэн өөрчлөлт"</string>
@@ -4700,6 +4705,5 @@
     <string name="contrast_medium" msgid="384414510709285811">"Дунд зэрэг"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Өндөр"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Энэ аппыг зөвхөн 1 цонхонд нээх боломжтой"</string>
-    <!-- no translation found for note_task_shortcut_label (1589543982691587932) -->
-    <skip />
+    <string name="note_task_shortcut_label" msgid="1589543982691587932">"Note-н товчлол"</string>
 </resources>

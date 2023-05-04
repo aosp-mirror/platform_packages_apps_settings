@@ -159,8 +159,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Systemstandard"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Språkvalg for denne appen er ikke tilgjengelig fra innstillingene."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Språket kan være forskjellig fra språkene som er tilgjengelige i appen. Noen apper støtter muligens ikke denne innstillingen."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6744909281573556379) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Angi språket for hver app."</string>
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Systemet, apper og nettsteder bruker det første språket som støttes, av de foretrukne språkene dine."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"For å velge et språk for hver app, gå til innstillingene for appspråk."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Finn ut mer om appspråk"</string>
@@ -411,7 +410,7 @@
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Legg fingeren på sensoren, og løft den når du kjenner en vibrasjon"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Hold fingeravtrykket flatt på sensoren til du føler en vibrering"</string>
     <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"Uten å trykke på knappen holder du fingeravtrykket på sensoren til du føler en vibrasjon.\n\nFlytt fingeren litt hver gang. Dette bidrar til å registrere mer av fingeravtrykket."</string>
-    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Hold på sensoren for fingeravtrykk"</string>
+    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Hold på fingeravtrykkssensoren"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Løft fingeren og berør igjen"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"En gang til"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Følg fingeravtrykkikonet"</string>
@@ -591,7 +590,7 @@
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Hvis du skriver inn feil passord på neste forsøk, slettes jobbprofilen din og tilknyttede data"</string>
     <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{Må inneholde minst # tegn}other{Må inneholde minst # tegn}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Hvis du bare bruker tall, må passordet være minst 1 siffer}other{Hvis du bare bruker tall, må passordet være minst # sifre}}"</string>
-    <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{PIN-koden må inneholde minst # siffer}other{PIN-koden må inneholde på minst # sifre}}"</string>
+    <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{PIN-koden må ha minst # siffer}other{PIN-koden må ha minst # sifre}}"</string>
     <string name="lockpassword_pin_too_short_autoConfirm_extra_message" msgid="3271351502900762571">"{count,plural, =1{PIN-koden må inneholde minst # siffer, men du bør bruke {minAutoConfirmLen} sifre for å få bedre sikkerhet}other{PIN-koden må inneholde minst # sifre, men du bør bruke {minAutoConfirmLen} sifre for å få bedre sikkerhet}}"</string>
     <string name="lockpassword_password_too_long" msgid="1940345313260498308">"{count,plural, =1{Må inneholde færre enn # tegn}other{Må inneholde færre enn # tegn}}"</string>
     <string name="lockpassword_pin_too_long" msgid="1678212054564388576">"{count,plural, =1{Må inneholde færre enn # siffer}other{Må inneholde færre enn # sifre}}"</string>
@@ -881,8 +880,8 @@
     <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Slå av wifi-sone automatisk"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Når ingen enheter er tilkoblet"</string>
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Utvid kompatibilitet"</string>
-    <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Dette hjelper andre enheter med å finne denne Wifi-sonen. Dette reduserer tilkoblingshastigheten."</string>
-    <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Dette hjelper andre enheter med å finne denne Wifi-sonen. Øker batteribruken."</string>
+    <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Dette hjelper andre enheter med å finne denne wifi-sonen. Dette reduserer tilkoblingshastigheten."</string>
+    <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Dette hjelper andre enheter med å finne denne wifi-sonen. Øker batteribruken."</string>
     <string name="wifi_hotspot_speed_title" msgid="8629448084180512685">"Hastighet og kompatibilitet"</string>
     <string name="wifi_hotspot_speed_summary_2g" msgid="5063438001736234858">"2.4 GHz / kompatibel med de fleste enheter"</string>
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 GHz / kompatibel med mange enheter"</string>
@@ -1079,7 +1078,7 @@
     <string name="sim_reenter_new" msgid="6131418271490374263">"Skriv inn ny PIN-kode på nytt"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"SIM-kode for PIN-kort"</string>
     <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"Skriv inn en PIN-kode på 4 til 8 sifre"</string>
-    <string name="sim_pins_dont_match" msgid="1540348773896609260">"De personlige kodene samsvarer ikke"</string>
+    <string name="sim_pins_dont_match" msgid="1540348773896609260">"PIN-kodene er ikke like"</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"PIN-koden for SIM-kortet ble endret."</string>
     <string name="sim_pin_disable_failed" msgid="8719890393181032837">"Kan ikke slå av PIN-koden."</string>
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"Kan ikke slå på PIN-koden."</string>
@@ -1404,8 +1403,8 @@
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Skriv inn PIN-koden på nytt"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Skriv inn jobb-PIN-koden på nytt"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Skriv inn jobb-PIN-koden din"</string>
-    <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Passordene samsvarer ikke"</string>
-    <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"PIN-kodene samsvarer ikke"</string>
+    <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Passordene er ikke like"</string>
+    <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"PIN-kodene er ikke like"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"Tegn mønsteret ditt på nytt"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="5669348379247148696">"Valg for opplåsing"</string>
     <string name="lockpassword_password_set_toast" msgid="6615759749393973795">"Passordet er angitt"</string>
@@ -2377,7 +2376,7 @@
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Forlenger batterilevetiden og enhetsytelsen ved å administrere nettverkstilkoblingene automatisk"</string>
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"På"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Av"</string>
-    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Bruk Adaptive Connectivity"</string>
+    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Bruk tilpasset tilkobling"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Legitimasjonslager"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Installer et sertifikat"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"Tøm legitimasjonslageret"</string>
@@ -2955,8 +2954,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, avansert ringing, 5g-ringing"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"Legg til språk, legg til et språk"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"tekststørrelse, stor skrift, stor skrifttype, stor tekst, nedsatt synsevne, gjør tekst større, tekstforstørrer, forstørring av tekst"</string>
-    <!-- no translation found for keywords_always_show_time_info (1066752498285497595) -->
-    <skip />
+    <string name="keywords_always_show_time_info" msgid="1066752498285497595">"skjermsparer som alltid er på, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, brikke, leser"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volum, vibrasjon, ikke forstyrr"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Medievolum"</string>
@@ -3650,9 +3648,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Kan administrere alle filer"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Gi denne appen tillatelse til å lese, endre og slette alle filer på denne enheten eller tilkoblede lagringsvolum. Hvis du gir appen denne tillatelsen, kan den få tilgang til filer uten at du er klar over det."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Har tilgang til alle filer"</string>
-    <string name="full_screen_intent_title" msgid="2461171326558306927">"Vis varsler i fullskjerm"</string>
-    <string name="permit_full_screen_intent" msgid="7103548865544643514">"La appen vise varsler i fullskjerm når enheten er låst"</string>
-    <string name="footer_description_full_screen_intent" msgid="4600171646567760347">"La appen vise varsler som fyller hele skjermen, når enheten er låst. Apper kan bruke disse til å fremheve alarmer, innkommende anrop eller andre viktige varsler."</string>
+    <!-- no translation found for full_screen_intent_title (747270185715224130) -->
+    <skip />
+    <!-- no translation found for permit_full_screen_intent (9035367640019960861) -->
+    <skip />
+    <!-- no translation found for footer_description_full_screen_intent (7716518411349225528) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"Apper for medieadministrering"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Tillat at appen administrerer medier"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Hvis du tillater det, kan denne appen endre eller slette mediefiler som opprettes med andre apper, uten å spørre deg. Appen må ha tilgang til filer og medier."</string>
@@ -3921,8 +3922,8 @@
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Bruk snarveien til å"</string>
     <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"Trekk ned den øvre halvdelen av skjermen, slik at den blir enklere å nå med én hånd"</string>
     <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"Slik bruker du enhåndsmodus"</b>\n" • Sørg for at navigasjon med bevegelser er valgt i innstillingene for systemnavigasjon\n • Sveip ned i nærheten av bunnkanten"</string>
-    <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Trekk skjermen ned så den blir tilgjengelig"</string>
-    <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Toppen av skjermen flyttes, slik at den blir tilgjengelig med tommelen."</string>
+    <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Trekk skjermen ned så du når den"</string>
+    <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Toppen av skjermen flyttes, slik at du når den med tommelen."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Vis varsler"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"Varsler og innstillinger vises."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Dobbelttrykk på skjermen for å sjekke klokkeslettet, varsler og annen informasjon."</string>
@@ -4059,10 +4060,8 @@
     <string name="autofill_app" msgid="7595308061826307921">"Autofylltjeneste"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Standard autofylltjeneste"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Passord"</string>
-    <!-- no translation found for credman_chosen_app_title (4547405511458518096) -->
-    <skip />
-    <!-- no translation found for credman_credentials (4931371941253324143) -->
-    <skip />
+    <string name="credman_chosen_app_title" msgid="4547405511458518096">"Passord, passnøkler og datatjenester"</string>
+    <string name="credman_credentials" msgid="4931371941253324143">"Andre leverandører"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# passord}other{# passord}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"auto, fyll, autofyll, passord"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"data, tilgangsnøkkel, passord"</string>
@@ -4119,6 +4118,12 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
+    <!-- no translation found for enable_angle_as_system_driver (3985105681812713612) -->
+    <skip />
+    <!-- no translation found for enable_angle_as_system_driver_summary (4173041926052925436) -->
+    <skip />
+    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (2619263039763150810) -->
+    <skip />
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Endringer av appkompatibilitet"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Slå endringer av appkompatibilitet på/av"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Endringer som er aktivert som standard"</string>
@@ -4513,7 +4518,7 @@
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Bruk mørkt tema"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Bruk Bluetooth"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Bruk «Forhindre ringing»"</string>
-    <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Bruk Wi‑Fi-sone"</string>
+    <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Bruk wifi-sone"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Bruk festing av apper"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Bruk utvikleralternativer"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Bruk utskriftstjeneste"</string>
@@ -4700,6 +4705,5 @@
     <string name="contrast_medium" msgid="384414510709285811">"Middels"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Høy"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Denne appen kan bare åpnes i ett vindu"</string>
-    <!-- no translation found for note_task_shortcut_label (1589543982691587932) -->
-    <skip />
+    <string name="note_task_shortcut_label" msgid="1589543982691587932">"Notatsnarvei"</string>
 </resources>
