@@ -43,18 +43,18 @@ public final class CombinedProviderInfo {
     private final List<CredentialProviderInfo> mCredentialProviderInfos;
     private final @Nullable AutofillServiceInfo mAutofillServiceInfo;
     private final boolean mIsDefaultAutofillProvider;
-    private final boolean mIsDefaultCredmanProvider;
+    private final boolean mIsPrimaryCredmanProvider;
 
     /** Constructs an information instance from both autofill and credential provider. */
     public CombinedProviderInfo(
             @Nullable List<CredentialProviderInfo> cpis,
             @Nullable AutofillServiceInfo asi,
             boolean isDefaultAutofillProvider,
-            boolean isDefaultCredmanProvider) {
+            boolean IsPrimaryCredmanProvider) {
         mCredentialProviderInfos = new ArrayList<>(cpis);
         mAutofillServiceInfo = asi;
         mIsDefaultAutofillProvider = isDefaultAutofillProvider;
-        mIsDefaultCredmanProvider = isDefaultCredmanProvider;
+        mIsPrimaryCredmanProvider = IsPrimaryCredmanProvider;
     }
 
     /** Returns the credential provider info. */
@@ -149,8 +149,8 @@ public final class CombinedProviderInfo {
     }
 
     /** Returns whether the provider is the default credman provider. */
-    public boolean isDefaultCredmanProvider() {
-        return mIsDefaultCredmanProvider;
+    public boolean isPrimaryCredmanProvider() {
+        return mIsPrimaryCredmanProvider;
     }
 
     /** Returns the settings subtitle. */
@@ -192,7 +192,13 @@ public final class CombinedProviderInfo {
             }
         }
 
-        // TODO(280454916): Add logic here.
+        // If there is a primary cred man provider then return that.
+        for (CombinedProviderInfo cpi : providers) {
+            if (cpi.isPrimaryCredmanProvider()) {
+                return cpi;
+            }
+        }
+
         return null;
     }
 
@@ -250,14 +256,14 @@ public final class CombinedProviderInfo {
             }
 
             // Check if we have any enabled cred man services.
-            boolean isDefaultCredmanProvider = false;
+            boolean isPrimaryCredmanProvider = false;
             if (!cpi.isEmpty()) {
-                isDefaultCredmanProvider = cpi.get(0).isEnabled();
+                isPrimaryCredmanProvider = cpi.get(0).isPrimary();
             }
 
             cmpi.add(
                     new CombinedProviderInfo(
-                            cpi, selectedAsi, isDefaultAutofillProvider, isDefaultCredmanProvider));
+                            cpi, selectedAsi, isDefaultAutofillProvider, isPrimaryCredmanProvider));
         }
 
         return cmpi;
