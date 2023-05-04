@@ -940,28 +940,11 @@ public class MobileNetworkUtils {
      * Copied from WifiCallingPreferenceController#isWifiCallingEnabled()
      */
     public static boolean isWifiCallingEnabled(Context context, int subId,
-            @Nullable WifiCallingQueryImsState queryImsState,
-            @Nullable PhoneAccountHandle phoneAccountHandle) {
-        if (phoneAccountHandle == null){
-            phoneAccountHandle = context.getSystemService(TelecomManager.class)
-                    .getSimCallManagerForSubscription(subId);
+            @Nullable WifiCallingQueryImsState queryImsState) {
+        if (queryImsState == null) {
+            queryImsState = new WifiCallingQueryImsState(context, subId);
         }
-        boolean isWifiCallingEnabled;
-        if (phoneAccountHandle != null) {
-            final Intent intent = buildPhoneAccountConfigureIntent(context, phoneAccountHandle);
-            if (intent == null) {
-                Log.d(TAG, "Can not get phoneAccount configure intent.");
-                isWifiCallingEnabled = false;
-            } else {
-                isWifiCallingEnabled = true;
-            }
-        } else {
-            if (queryImsState == null) {
-                queryImsState = new WifiCallingQueryImsState(context, subId);
-            }
-            isWifiCallingEnabled = queryImsState.isReadyToWifiCalling();
-        }
-        return isWifiCallingEnabled;
+        return queryImsState.isReadyToWifiCalling();
     }
 
     /**
