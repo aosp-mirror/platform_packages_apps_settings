@@ -18,9 +18,12 @@ package com.android.settings.spa.app.specialaccess
 
 import android.Manifest
 import android.app.AppOpsManager
+import android.app.settings.SettingsEnums
 import android.content.Context
 import com.android.settings.R
+import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionListModel
+import com.android.settingslib.spaprivileged.template.app.AppOpPermissionRecord
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListProvider
 
 object ModifySystemSettingsAppListProvider : TogglePermissionAppListProvider {
@@ -34,4 +37,17 @@ class ModifySystemSettingsListModel(context: Context) : AppOpPermissionListModel
     override val footerResId = R.string.write_settings_description
     override val appOp = AppOpsManager.OP_WRITE_SETTINGS
     override val permission = Manifest.permission.WRITE_SETTINGS
+
+    override fun setAllowed(record: AppOpPermissionRecord, newAllowed: Boolean) {
+        super.setAllowed(record, newAllowed)
+        logPermissionChange(newAllowed)
+    }
+
+    private fun logPermissionChange(newAllowed: Boolean) {
+        val category = when {
+            newAllowed -> SettingsEnums.APP_SPECIAL_PERMISSION_SETTINGS_CHANGE_ALLOW
+            else -> SettingsEnums.APP_SPECIAL_PERMISSION_SETTINGS_CHANGE_DENY
+        }
+        FeatureFactory.getFactory(context).metricsFeatureProvider.action(context, category, "")
+    }
 }
