@@ -51,7 +51,11 @@ public final class CombinedProviderInfo {
             @Nullable AutofillServiceInfo asi,
             boolean isDefaultAutofillProvider,
             boolean IsPrimaryCredmanProvider) {
-        mCredentialProviderInfos = new ArrayList<>(cpis);
+        if (cpis == null) {
+            mCredentialProviderInfos = new ArrayList<>();
+        } else {
+            mCredentialProviderInfos = new ArrayList<>(cpis);
+        }
         mAutofillServiceInfo = asi;
         mIsDefaultAutofillProvider = isDefaultAutofillProvider;
         mIsPrimaryCredmanProvider = IsPrimaryCredmanProvider;
@@ -257,7 +261,7 @@ public final class CombinedProviderInfo {
 
             // Check if we have any enabled cred man services.
             boolean isPrimaryCredmanProvider = false;
-            if (!cpi.isEmpty()) {
+            if (cpi != null && !cpi.isEmpty()) {
                 isPrimaryCredmanProvider = cpi.get(0).isPrimary();
             }
 
