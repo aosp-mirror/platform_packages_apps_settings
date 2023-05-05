@@ -21,33 +21,71 @@ import android.content.Intent
 import android.net.Uri
 import android.os.UserHandle
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.dx.mockito.inline.extended.ExtendedMockito
+import com.android.settings.spa.SpaActivity.Companion.isSuwAndPageBlocked
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivityForApp
+import com.android.settings.spa.app.AllAppListPageProvider
+import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
 import com.android.settingslib.spa.framework.util.KEY_DESTINATION
+import com.google.android.setupcompat.util.WizardManagerHelper
 import com.google.common.truth.Truth.assertThat
+import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Answers
 import org.mockito.ArgumentCaptor
 import org.mockito.Mock
 import org.mockito.Mockito.verify
-import org.mockito.Mockito.`when`
-import org.mockito.junit.MockitoJUnit
-import org.mockito.junit.MockitoRule
+import org.mockito.MockitoSession
+import org.mockito.quality.Strictness
+import org.mockito.Mockito.`when` as whenever
 
 @RunWith(AndroidJUnit4::class)
 class SpaActivityTest {
-    @get:Rule
-    val mockito: MockitoRule = MockitoJUnit.rule()
+    private lateinit var mockSession: MockitoSession
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    @Mock
     private lateinit var context: Context
 
     @Before
     fun setUp() {
-        `when`(context.applicationContext.packageName).thenReturn("com.android.settings")
+        mockSession = ExtendedMockito.mockitoSession()
+            .initMocks(this)
+            .mockStatic(WizardManagerHelper::class.java)
+            .strictness(Strictness.LENIENT)
+            .startMocking()
+        whenever(context.applicationContext).thenReturn(context)
+    }
+
+    @After
+    fun tearDown() {
+        mockSession.finishMocking()
+    }
+
+    @Test
+    fun isSuwAndPageBlocked_regularPage_notBlocked() {
+        val isBlocked = context.isSuwAndPageBlocked(AllAppListPageProvider.name)
+
+        assertThat(isBlocked).isFalse()
+    }
+
+    @Test
+    fun isSuwAndPageBlocked_blocklistedPageInSuw_blocked() {
+        whenever(WizardManagerHelper.isDeviceProvisioned(context)).thenReturn(false)
+
+        val isBlocked = context.isSuwAndPageBlocked(AppInfoSettingsProvider.name)
+
+        assertThat(isBlocked).isTrue()
+    }
+
+    @Test
+    fun isSuwAndPageBlocked_blocklistedPageNotInSuw_notBlocked() {
+        whenever(WizardManagerHelper.isDeviceProvisioned(context)).thenReturn(true)
+
+        val isBlocked = context.isSuwAndPageBlocked(AppInfoSettingsProvider.name)
+
+        assertThat(isBlocked).isFalse()
     }
 
     @Test

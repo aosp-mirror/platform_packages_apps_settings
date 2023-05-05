@@ -22,14 +22,34 @@ import android.content.Intent
 import android.os.RemoteException
 import android.os.UserHandle
 import android.util.Log
+import androidx.annotation.VisibleForTesting
+import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
 import com.android.settingslib.spa.framework.BrowseActivity
+import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settingslib.spa.framework.util.SESSION_BROWSE
 import com.android.settingslib.spa.framework.util.SESSION_EXTERNAL
 import com.android.settingslib.spa.framework.util.appendSpaParams
+import com.google.android.setupcompat.util.WizardManagerHelper
 
 class SpaActivity : BrowseActivity() {
+    override fun isPageEnabled(page: SettingsPage) =
+        super.isPageEnabled(page) && !isSuwAndPageBlocked(page.sppName)
+
     companion object {
         private const val TAG = "SpaActivity"
+
+        /** The pages that blocked from SUW. */
+        private val SuwBlockedPages = setOf(AppInfoSettingsProvider.name)
+
+        @VisibleForTesting
+        fun Context.isSuwAndPageBlocked(name: String): Boolean =
+            if (name in SuwBlockedPages && !WizardManagerHelper.isDeviceProvisioned(this)) {
+                Log.w(TAG, "$name blocked before SUW completed.");
+                true
+            } else {
+                false
+            }
+
         @JvmStatic
         fun Context.startSpaActivity(destination: String) {
             val intent = Intent(this, SpaActivity::class.java)
