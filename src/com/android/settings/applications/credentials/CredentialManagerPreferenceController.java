@@ -102,6 +102,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private final Map<String, SwitchPreference> mPrefs = new HashMap<>(); // key is package name
     private final List<ServiceInfo> mPendingServiceInfos = new ArrayList<>();
     private final Handler mHandler = new Handler();
+    private final SettingContentObserver mSettingsContentObserver;
 
     private @Nullable FragmentManager mFragmentManager = null;
     private @Nullable Delegate mDelegate = null;
@@ -119,7 +120,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         mExecutor = ContextCompat.getMainExecutor(mContext);
         mCredentialManager =
                 getCredentialManager(context, preferenceKey.equals("credentials_test"));
-        new SettingContentObserver(mHandler).register(context.getContentResolver());
+        mSettingsContentObserver = new SettingContentObserver(mHandler);
+        mSettingsContentObserver.register(context.getContentResolver());
         mSettingsPackageMonitor.register(context, context.getMainLooper(), false);
     }
 
