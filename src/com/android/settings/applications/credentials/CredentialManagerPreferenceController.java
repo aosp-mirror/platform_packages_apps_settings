@@ -120,6 +120,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         mCredentialManager =
                 getCredentialManager(context, preferenceKey.equals("credentials_test"));
         new SettingContentObserver(mHandler).register(context.getContentResolver());
+        mSettingsPackageMonitor.register(context, context.getMainLooper(), false);
     }
 
     private @Nullable CredentialManager getCredentialManager(Context context, boolean isTest) {
