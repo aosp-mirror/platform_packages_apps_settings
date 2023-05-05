@@ -18,9 +18,12 @@ package com.android.settings.spa.app.specialaccess
 
 import android.Manifest
 import android.app.AppOpsManager
+import android.app.settings.SettingsEnums
 import android.content.Context
 import com.android.settings.R
+import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionListModel
+import com.android.settingslib.spaprivileged.template.app.AppOpPermissionRecord
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListProvider
 
 object MediaManagementAppsAppListProvider : TogglePermissionAppListProvider {
@@ -35,4 +38,19 @@ class MediaManagementAppsListModel(context: Context) : AppOpPermissionListModel(
     override val appOp = AppOpsManager.OP_MANAGE_MEDIA
     override val permission = Manifest.permission.MANAGE_MEDIA
     override val setModeByUid = true
+
+    override fun setAllowed(record: AppOpPermissionRecord, newAllowed: Boolean) {
+        super.setAllowed(record, newAllowed)
+        logPermissionChange(newAllowed)
+    }
+
+    private fun logPermissionChange(newAllowed: Boolean) {
+        FeatureFactory.getFactory(context).metricsFeatureProvider.action(
+            SettingsEnums.PAGE_UNKNOWN,
+            SettingsEnums.ACTION_MEDIA_MANAGEMENT_APPS_TOGGLE,
+            SettingsEnums.MEDIA_MANAGEMENT_APPS,
+            "",
+            if (newAllowed) 1 else 0
+        )
+    }
 }
