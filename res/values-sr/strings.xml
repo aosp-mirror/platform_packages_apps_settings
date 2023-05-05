@@ -214,7 +214,7 @@
     <string name="next_label" msgid="1248293387735652187">"Даље"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Језици"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Уклони"</string>
-    <string name="add_a_language" msgid="2126220398077503271">"Додајте језик"</string>
+    <string name="add_a_language" msgid="2126220398077503271">"Додај језик"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Језик"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Жељени језик"</string>
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Језици у апликацији"</string>
@@ -364,7 +364,7 @@
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Откажи"</string>
     <string name="security_settings_face_enroll_introduction_no_thanks" msgid="1820618982738898717">"Не, хвала"</string>
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"Прихватам"</string>
-    <string name="security_settings_face_enroll_introduction_more" msgid="1970820298889710532">"Још"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="1970820298889710532">"Више"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Откључајте помоћу лица"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Дозволите откључавање лицем"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Потврдите идентитет лицем"</string>
@@ -465,7 +465,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Да бисте имали најбоље резултате, користите заштиту за екран са сертификатом Направљено за Google. Отисак прста можда неће радити са другим заштитама за екран."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Да бисте имали најбоље резултате, користите заштиту за екран са сертификатом Направљено за Google. Отисак прста детета можда неће радити са другим заштитама за екран."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
-    <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Сваки пут лагано промените положај прста"</string>
+    <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Сваки пут помало промените положај прста"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Покријте икону средином вашег отиска прста"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_already_enrolled" msgid="8616678833080422946">"Овај отисак прста је већ додат"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_clean_sensor" msgid="3501453094314993113">"Обришите екран у близини сензора и пробајте поново"</string>
@@ -748,9 +748,9 @@
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Ако у следећем покушају унесете нетачан PIN, избрисаћемо пословни профил и његове податке"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Ако у следећем покушају унесете нетачну лозинку, избрисаћемо пословни профил и његове податке"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
-      <item quantity="one">Мора да садржи најмање <xliff:g id="COUNT_1">%d</xliff:g> знак</item>
-      <item quantity="few">Мора да садржи најмање <xliff:g id="COUNT_1">%d</xliff:g> знака</item>
-      <item quantity="other">Мора да садржи најмање <xliff:g id="COUNT_1">%d</xliff:g> знакова</item>
+      <item quantity="one">Мора да има бар <xliff:g id="COUNT_1">%d</xliff:g> знак</item>
+      <item quantity="few">Мора да има бар <xliff:g id="COUNT_1">%d</xliff:g> знака</item>
+      <item quantity="other">Мора да има бар <xliff:g id="COUNT_1">%d</xliff:g> знакова</item>
     </plurals>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Ако се користе само бројеви, мора да има бар 1 цифру}one{Ако се користе само бројеви, мора да има бар # цифру}few{Ако се користе само бројеви, мора да има бар # цифре}other{Ако се користе само бројеви, мора да има бар # цифара}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
@@ -771,43 +771,43 @@
     </plurals>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"Администратор уређаја не дозвољава употребу недавно коришћеног PIN-а"</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"Не сме да обухвата неважећи знак"</string>
-    <string name="lockpassword_password_requires_alpha" msgid="721084100957669018">"Мора да садржи најмање једно слово"</string>
-    <string name="lockpassword_password_requires_digit" msgid="312518567592683795">"Мора да садржи најмање једну цифру"</string>
-    <string name="lockpassword_password_requires_symbol" msgid="6178512486154701321">"Мора да садржи најмање један симбол"</string>
+    <string name="lockpassword_password_requires_alpha" msgid="721084100957669018">"Мора да има бар једно слово"</string>
+    <string name="lockpassword_password_requires_digit" msgid="312518567592683795">"Мора да има бар једну цифру"</string>
+    <string name="lockpassword_password_requires_symbol" msgid="6178512486154701321">"Мора да има бар један симбол"</string>
     <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="2385916409676839024">
-      <item quantity="one">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> слово</item>
-      <item quantity="few">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> слова</item>
-      <item quantity="other">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> слова</item>
+      <item quantity="one">Мора да има бар <xliff:g id="COUNT">%d</xliff:g> слово</item>
+      <item quantity="few">Мора да има бар <xliff:g id="COUNT">%d</xliff:g> слова</item>
+      <item quantity="other">Мора да има бар <xliff:g id="COUNT">%d</xliff:g> слова</item>
     </plurals>
     <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="2057467885488612701">
-      <item quantity="one">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> малo слово</item>
-      <item quantity="few">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> мала слова</item>
-      <item quantity="other">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> малих слова</item>
+      <item quantity="one">Мора да има бар <xliff:g id="COUNT">%d</xliff:g> малo слово</item>
+      <item quantity="few">Мора да има бар <xliff:g id="COUNT">%d</xliff:g> мала слова</item>
+      <item quantity="other">Мора да има бар <xliff:g id="COUNT">%d</xliff:g> малих слова</item>
     </plurals>
     <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="4541266279643052025">
-      <item quantity="one">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> велико слово</item>
-      <item quantity="few">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> велика слова</item>
-      <item quantity="other">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> великих слова</item>
+      <item quantity="one">Мора да има бар <xliff:g id="COUNT">%d</xliff:g> велико слово</item>
+      <item quantity="few">Мора да има бар <xliff:g id="COUNT">%d</xliff:g> велика слова</item>
+      <item quantity="other">Мора да има бар <xliff:g id="COUNT">%d</xliff:g> великих слова</item>
     </plurals>
     <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="70617964591376248">
-      <item quantity="one">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> цифру</item>
-      <item quantity="few">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> цифре</item>
-      <item quantity="other">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> цифара</item>
+      <item quantity="one">Мора да има бар <xliff:g id="COUNT">%d</xliff:g> цифру</item>
+      <item quantity="few">Мора да има бар <xliff:g id="COUNT">%d</xliff:g> цифре</item>
+      <item quantity="other">Мора да има бар <xliff:g id="COUNT">%d</xliff:g> цифара</item>
     </plurals>
     <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="7981236881269921943">
-      <item quantity="one">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> специјални симбол</item>
-      <item quantity="few">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> специјална симбола</item>
-      <item quantity="other">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> специјалних симбола</item>
+      <item quantity="one">Мора да има бар <xliff:g id="COUNT">%d</xliff:g> специјални симбол</item>
+      <item quantity="few">Мора да има бар <xliff:g id="COUNT">%d</xliff:g> специјална симбола</item>
+      <item quantity="other">Мора да има бар <xliff:g id="COUNT">%d</xliff:g> специјалних симбола</item>
     </plurals>
     <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="1567877061888948467">
-      <item quantity="one">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> знак који није слово</item>
-      <item quantity="few">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> знака који нису словa</item>
-      <item quantity="other">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> знакова који нису словa</item>
+      <item quantity="one">Мора да има бар <xliff:g id="COUNT">%d</xliff:g> знак који није слово</item>
+      <item quantity="few">Мора да има бар <xliff:g id="COUNT">%d</xliff:g> знака који нису словa</item>
+      <item quantity="other">Мора да има бар <xliff:g id="COUNT">%d</xliff:g> знакова који нису словa</item>
     </plurals>
     <plurals name="lockpassword_password_requires_nonnumerical" formatted="false" msgid="5056743974888384475">
-      <item quantity="one">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> знак који није број</item>
-      <item quantity="few">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> знака који нису бројеви</item>
-      <item quantity="other">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> знакова који нису бројеви</item>
+      <item quantity="one">Мора да има бар <xliff:g id="COUNT">%d</xliff:g> знак који није број</item>
+      <item quantity="few">Мора да има бар <xliff:g id="COUNT">%d</xliff:g> знака који нису бројеви</item>
+      <item quantity="other">Мора да има бар <xliff:g id="COUNT">%d</xliff:g> знакова који нису бројеви</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Администратор уређаја не дозвољава употребу недавно коришћене лозинке"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"Растући, опадајући или поновљени низ цифара није дозвољен"</string>
@@ -1549,7 +1549,7 @@
     <string name="status_number" product="tablet" msgid="3597945414666253183">"Број мобилног фолдера"</string>
     <string name="status_number" product="default" msgid="8407999629121682207">"Број телефона"</string>
     <string name="status_number_sim_slot" product="tablet" msgid="6582203988975619529">"MDN (отвор за SIM: %1$d)"</string>
-    <string name="status_number_sim_slot" product="default" msgid="5724823197745786398">"Бр. тел. (отвор за SIM: %1$d)"</string>
+    <string name="status_number_sim_slot" product="default" msgid="5724823197745786398">"Бр. тел. (отвор за SIM картицу %1$d)"</string>
     <string name="status_number_sim_status" product="tablet" msgid="4239876366511743428">"MDN на SIM картици"</string>
     <string name="status_number_sim_status" product="default" msgid="2772745542921910086">"Број телефона на SIM картици"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
@@ -1574,7 +1574,7 @@
     <string name="status_roaming" msgid="1253597174715663778">"Роминг"</string>
     <string name="status_operator" msgid="4335640583552058491">"Мрежа"</string>
     <string name="status_wifi_mac_address" msgid="4447611754614388914">"WiFi MAC адреса"</string>
-    <string name="status_device_wifi_mac_address" msgid="1896121694334176494">"MAC адреса уређаја за Wi‑Fi"</string>
+    <string name="status_device_wifi_mac_address" msgid="1896121694334176494">"WiFi MAC адреса уређаја"</string>
     <string name="status_bt_address" msgid="6919660304578476547">"Bluetooth адреса"</string>
     <string name="status_serial_number" msgid="9060064164331466789">"Серијски број"</string>
     <string name="status_up_time" msgid="1274778533719495438">"Време рада"</string>
@@ -3191,7 +3191,7 @@
     <string name="sync_in_progress" msgid="6200093151211458977">"Синхронизација је у току..."</string>
     <string name="settings_backup" msgid="5357973563989458049">"Направи резервну копију подешавања"</string>
     <string name="settings_backup_summary" msgid="6803046376335724034">"Прављење резервне копије подешавања"</string>
-    <string name="sync_menu_sync_now" msgid="3948443642329221882">"Синхронизуј одмах"</string>
+    <string name="sync_menu_sync_now" msgid="3948443642329221882">"Синхронизуј"</string>
     <string name="sync_menu_sync_cancel" msgid="2422994461106269813">"Откажи синхронизацију"</string>
     <string name="sync_one_time_sync" msgid="8114337154112057462">"Додирните да бисте синхронизовали одмах <xliff:g id="LAST_SYNC_TIME">
 %1$s</xliff:g>"</string>
@@ -3449,7 +3449,7 @@
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Уклони"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Укључи телефонске позиве"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Укључи телефонске позиве и SMS"</string>
-    <string name="user_remove_user" msgid="8468203789739693845">"Избришите корисника"</string>
+    <string name="user_remove_user" msgid="8468203789739693845">"Избриши корисника"</string>
     <string name="user_enable_calling_confirm_title" msgid="7868894792723368364">"Желите ли да укључите телефонске позиве?"</string>
     <string name="user_enable_calling_confirm_message" msgid="4924965198409050155">"Историја позива ће бити дељена са овим корисником."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Укључујете телефонске позиве и SMS?"</string>
@@ -5012,7 +5012,7 @@
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Превуците да бисте покренули помоћник"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Превуците нагоре из неког од доњих улова да бисте покренули апликацију дигиталног помоћника."</string>
     <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"За покретање Помоћника задржите дугме за почетни екран"</string>
-    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Притисните и задржите за почетни екран да бисте покренули апликацију дигиталног помоћника."</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Притисните и задржите дугме за почетни екран да бисте покренули апликацију дигиталног помоћника."</string>
     <string name="information_label" msgid="6939310810756569298">"Информације"</string>
     <string name="low_label" msgid="6525629096999711220">"Ниска"</string>
     <string name="high_label" msgid="357503396626018487">"Висока"</string>
@@ -5082,7 +5082,7 @@
     <string name="instant_apps_settings" msgid="4280942494969957858">"Подешавања инстант апликација"</string>
     <string name="domain_url_section_title" msgid="9028890472923474958">"Инсталиране апликације"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="170508173207142665">"Меморијским простором сада управља Менаџер меморијског простора"</string>
-    <string name="account_for_section_header" msgid="7466759342105251096">"Налози корисника <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
+    <string name="account_for_section_header" msgid="7466759342105251096">"Налози корисника: <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="configure_section_header" msgid="3126887329521705210">"Конфигуришите"</string>
     <string name="auto_sync_account_title" msgid="1070908045600374254">"Аутоматски синхронизуј податке апликација"</string>
     <string name="auto_sync_personal_account_title" msgid="3544275021920818595">"Аутоматски синхронизуј личне податке"</string>
