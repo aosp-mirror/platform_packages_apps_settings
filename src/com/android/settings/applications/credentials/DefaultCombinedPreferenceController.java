@@ -135,12 +135,12 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
     /** Provides Intent to setting activity for the specified autofill service. */
     static final class AutofillSettingIntentProvider {
 
-        private final String mSelectedKey;
+        private final String mKey;
         private final Context mContext;
         private final int mUserId;
 
         public AutofillSettingIntentProvider(Context context, int userId, String key) {
-            mSelectedKey = key;
+            mKey = key;
             mContext = context;
             mUserId = userId;
         }
@@ -153,10 +153,9 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
 
             for (ResolveInfo resolveInfo : resolveInfos) {
                 final ServiceInfo serviceInfo = resolveInfo.serviceInfo;
-                final String flattenKey =
-                        new ComponentName(serviceInfo.packageName, serviceInfo.name)
-                                .flattenToString();
-                if (TextUtils.equals(mSelectedKey, flattenKey)) {
+
+                // If there are multiple autofill services then pick the first one.
+                if (mKey.startsWith(serviceInfo.packageName)) {
                     final String settingsActivity;
                     try {
                         settingsActivity =
@@ -164,7 +163,7 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
                                         .getSettingsActivity();
                     } catch (SecurityException e) {
                         // Service does not declare the proper permission, ignore it.
-                        Log.w(TAG, "Error getting info for " + serviceInfo + ": " + e);
+                        Log.e(TAG, "Error getting info for " + serviceInfo + ": " + e);
                         return null;
                     }
                     if (TextUtils.isEmpty(settingsActivity)) {
