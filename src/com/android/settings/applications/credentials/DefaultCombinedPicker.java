@@ -369,6 +369,8 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
             }
         }
 
+        credManProviders.addAll(primaryCredManProviders);
+
         service.setEnabledProviders(
                 primaryCredManProviders,
                 credManProviders,
