@@ -72,6 +72,7 @@ public class RequestPermissionActivity extends Activity implements
     private int mRequest;
 
     private AlertDialog mDialog;
+    private AlertDialog mRequestDialog;
 
     private BroadcastReceiver mReceiver;
 
@@ -96,33 +97,35 @@ public class RequestPermissionActivity extends Activity implements
         if (mRequest == REQUEST_DISABLE) {
             switch (btState) {
                 case BluetoothAdapter.STATE_OFF:
-                case BluetoothAdapter.STATE_TURNING_OFF: {
+                case BluetoothAdapter.STATE_TURNING_OFF:
                     proceedAndFinish();
-                } break;
-
+                    break;
                 case BluetoothAdapter.STATE_ON:
-                case BluetoothAdapter.STATE_TURNING_ON: {
-                    RequestPermissionHelper.INSTANCE.requestDisable(this, mAppLabel,
-                            () -> {
-                                onDisableConfirmed();
-                                return Unit.INSTANCE;
-                            },
-                            () -> {
-                                cancelAndFinish();
-                                return Unit.INSTANCE;
-                            });
-                } break;
-
-                default: {
+                case BluetoothAdapter.STATE_TURNING_ON:
+                    mRequestDialog =
+                            RequestPermissionHelper.INSTANCE.requestDisable(this, mAppLabel,
+                                    () -> {
+                                        onDisableConfirmed();
+                                        return Unit.INSTANCE;
+                                    },
+                                    () -> {
+                                        cancelAndFinish();
+                                        return Unit.INSTANCE;
+                                    });
+                    if (mRequestDialog != null) {
+                        mRequestDialog.show();
+                    }
+                    break;
+                default:
                     Log.e(TAG, "Unknown adapter state: " + btState);
                     cancelAndFinish();
-                } break;
+                    break;
             }
         } else {
             switch (btState) {
                 case BluetoothAdapter.STATE_OFF:
                 case BluetoothAdapter.STATE_TURNING_OFF:
-                case BluetoothAdapter.STATE_TURNING_ON: {
+                case BluetoothAdapter.STATE_TURNING_ON:
                     /*
                      * Strictly speaking STATE_TURNING_ON belong with STATE_ON;
                      * however, BT may not be ready when the user clicks yes and we
@@ -131,20 +134,23 @@ public class RequestPermissionActivity extends Activity implements
                      * case via the broadcast receiver.
                      */
 
-                    // Start the helper activity to ask the user about enabling bt AND discovery
-                    RequestPermissionHelper.INSTANCE.requestEnable(this, mAppLabel,
-                            mRequest == REQUEST_ENABLE_DISCOVERABLE ? mTimeout : -1,
-                            () -> {
-                                onEnableConfirmed();
-                                return Unit.INSTANCE;
-                            },
-                            () -> {
-                                cancelAndFinish();
-                                return Unit.INSTANCE;
-                            });
-                } break;
-
-                case BluetoothAdapter.STATE_ON: {
+                    // Show the helper dialog to ask the user about enabling bt AND discovery
+                    mRequestDialog =
+                            RequestPermissionHelper.INSTANCE.requestEnable(this, mAppLabel,
+                                    mRequest == REQUEST_ENABLE_DISCOVERABLE ? mTimeout : -1,
+                                    () -> {
+                                        onEnableConfirmed();
+                                        return Unit.INSTANCE;
+                                    },
+                                    () -> {
+                                        cancelAndFinish();
+                                        return Unit.INSTANCE;
+                                    });
+                    if (mRequestDialog != null) {
+                        mRequestDialog.show();
+                    }
+                    break;
+                case BluetoothAdapter.STATE_ON:
                     if (mRequest == REQUEST_ENABLE) {
                         // Nothing to do. Already enabled.
                         proceedAndFinish();
@@ -152,12 +158,11 @@ public class RequestPermissionActivity extends Activity implements
                         // Ask the user about enabling discovery mode
                         createDialog();
                     }
-                } break;
-
-                default: {
+                    break;
+                default:
                     Log.e(TAG, "Unknown adapter state: " + btState);
                     cancelAndFinish();
-                } break;
+                    break;
             }
         }
     }
@@ -275,10 +280,6 @@ public class RequestPermissionActivity extends Activity implements
             }
         }
 
-        if (mDialog != null) {
-            mDialog.dismiss();
-        }
-
         setResult(returnCode);
         finish();
     }
@@ -364,6 +365,14 @@ public class RequestPermissionActivity extends Activity implements
         if (mReceiver != null) {
             unregisterReceiver(mReceiver);
             mReceiver = null;
+        }
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
+            mDialog = null;
+        }
+        if (mRequestDialog != null && mRequestDialog.isShowing()) {
+            mRequestDialog.dismiss();
+            mRequestDialog = null;
         }
     }
 
