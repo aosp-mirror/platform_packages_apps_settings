@@ -283,7 +283,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         setAvailableServices(
                 mCredentialManager.getCredentialProviderServices(
-                        getUser(), CredentialManager.PROVIDER_FILTER_ALL_PROVIDERS),
+                        getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY),
                 null);
     }
 
