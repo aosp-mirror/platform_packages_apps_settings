@@ -564,15 +564,18 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         // Get the existing primary providers since we don't touch them in
         // this part of the UI we should just copy them over.
         Set<String> primaryServices = new HashSet<>();
+        List<String> enabledServices = getEnabledSettings();
         for (CredentialProviderInfo service : mServices) {
             if (service.isPrimary()) {
-                primaryServices.add(service.getServiceInfo().getComponentName().flattenToString());
+                String flattened = service.getServiceInfo().getComponentName().flattenToString();
+                primaryServices.add(flattened);
+                enabledServices.add(flattened);
             }
         }
 
         mCredentialManager.setEnabledProviders(
                 new ArrayList<>(primaryServices),
-                getEnabledSettings(),
+                enabledServices,
                 getUser(),
                 mExecutor,
                 new OutcomeReceiver<Void, SetEnabledProvidersException>() {
