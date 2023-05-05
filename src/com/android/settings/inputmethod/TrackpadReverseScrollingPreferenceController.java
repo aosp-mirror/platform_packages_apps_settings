@@ -30,12 +30,12 @@ public class TrackpadReverseScrollingPreferenceController extends TogglePreferen
 
     @Override
     public boolean isChecked() {
-        return InputSettings.useTouchpadNaturalScrolling(mContext);
+        return !InputSettings.useTouchpadNaturalScrolling(mContext);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        InputSettings.setTouchpadNaturalScrolling(mContext, isChecked);
+        InputSettings.setTouchpadNaturalScrolling(mContext, !isChecked);
         return true;
     }
 
