@@ -16,15 +16,10 @@
 
 package com.android.settings.network.telephony;
 
-import static androidx.lifecycle.Lifecycle.Event;
-
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -149,13 +144,6 @@ public class DefaultSubscriptionControllerTest {
                 createMockSub(1, "sub1"),
                 createMockSub(2, "sub2")));
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
-    }
-
-    @Test
-    public void isCallingAccountBindToSubscription_invalidAccount_withoutCrash() {
-        doReturn(null).when(mTelecomManager).getPhoneAccount(any());
-
-        mController.isCallingAccountBindToSubscription(null);
     }
 
     @Test
@@ -341,11 +329,6 @@ public class DefaultSubscriptionControllerTest {
         TestDefaultSubscriptionController(Context context, String preferenceKey,
                 Lifecycle lifecycle, LifecycleOwner lifecycleOwner) {
             super(context, preferenceKey, lifecycle, lifecycleOwner);
-        }
-
-        @Override
-        protected SubscriptionInfoEntity getDefaultSubscriptionInfo() {
-            return null;
         }
 
         @Override
