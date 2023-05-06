@@ -47,7 +47,9 @@ import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class DefaultCombinedPicker extends DefaultAppPickerFragment {
 
@@ -338,9 +340,9 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
         return true;
     }
 
-    private void setProviders(String autofillProvider, List<String> credManProviders) {
+    private void setProviders(String autofillProvider, List<String> primaryCredManProviders) {
         if (TextUtils.isEmpty(autofillProvider)) {
-            if (credManProviders.size() > 0) {
+            if (primaryCredManProviders.size() > 0) {
                 autofillProvider =
                         CredentialManagerPreferenceController
                                 .AUTOFILL_CREDMAN_ONLY_PROVIDER_PLACEHOLDER;
@@ -350,12 +352,25 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
         Settings.Secure.putStringForUser(
                 getContext().getContentResolver(), AUTOFILL_SETTING, autofillProvider, mUserId);
 
-        CredentialManager service = getCredentialProviderService();
+        final CredentialManager service = getCredentialProviderService();
         if (service == null) {
             return;
         }
 
+        // Get the existing secondary providers since we don't touch them in
+        // this part of the UI we should just copy them over.
+        final List<String> credManProviders = new ArrayList<>();
+        for (CredentialProviderInfo cpi :
+                service.getCredentialProviderServices(
+                        mUserId, CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY)) {
+
+            if (cpi.isEnabled()) {
+                credManProviders.add(cpi.getServiceInfo().getComponentName().flattenToString());
+            }
+        }
+
         service.setEnabledProviders(
+                primaryCredManProviders,
                 credManProviders,
                 mUserId,
                 ContextCompat.getMainExecutor(getContext()),
