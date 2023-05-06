@@ -102,6 +102,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private final Map<String, SwitchPreference> mPrefs = new HashMap<>(); // key is package name
     private final List<ServiceInfo> mPendingServiceInfos = new ArrayList<>();
     private final Handler mHandler = new Handler();
+    private final SettingContentObserver mSettingsContentObserver;
 
     private @Nullable FragmentManager mFragmentManager = null;
     private @Nullable Delegate mDelegate = null;
@@ -119,7 +120,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         mExecutor = ContextCompat.getMainExecutor(mContext);
         mCredentialManager =
                 getCredentialManager(context, preferenceKey.equals("credentials_test"));
-        new SettingContentObserver(mHandler).register(context.getContentResolver());
+        mSettingsContentObserver = new SettingContentObserver(mHandler);
+        mSettingsContentObserver.register(context.getContentResolver());
         mSettingsPackageMonitor.register(context, context.getMainLooper(), false);
     }
 
@@ -283,7 +285,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         setAvailableServices(
                 mCredentialManager.getCredentialProviderServices(
-                        getUser(), CredentialManager.PROVIDER_FILTER_ALL_PROVIDERS),
+                        getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY),
                 null);
     }
 
@@ -564,15 +566,18 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         // Get the existing primary providers since we don't touch them in
         // this part of the UI we should just copy them over.
         Set<String> primaryServices = new HashSet<>();
+        List<String> enabledServices = getEnabledSettings();
         for (CredentialProviderInfo service : mServices) {
             if (service.isPrimary()) {
-                primaryServices.add(service.getServiceInfo().getComponentName().flattenToString());
+                String flattened = service.getServiceInfo().getComponentName().flattenToString();
+                primaryServices.add(flattened);
+                enabledServices.add(flattened);
             }
         }
 
         mCredentialManager.setEnabledProviders(
                 new ArrayList<>(primaryServices),
-                getEnabledSettings(),
+                enabledServices,
                 getUser(),
                 mExecutor,
                 new OutcomeReceiver<Void, SetEnabledProvidersException>() {
