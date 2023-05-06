@@ -102,6 +102,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private final Map<String, SwitchPreference> mPrefs = new HashMap<>(); // key is package name
     private final List<ServiceInfo> mPendingServiceInfos = new ArrayList<>();
     private final Handler mHandler = new Handler();
+    private final SettingContentObserver mSettingsContentObserver;
 
     private @Nullable FragmentManager mFragmentManager = null;
     private @Nullable Delegate mDelegate = null;
@@ -119,7 +120,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         mExecutor = ContextCompat.getMainExecutor(mContext);
         mCredentialManager =
                 getCredentialManager(context, preferenceKey.equals("credentials_test"));
-        new SettingContentObserver(mHandler).register(context.getContentResolver());
+        mSettingsContentObserver = new SettingContentObserver(mHandler);
+        mSettingsContentObserver.register(context.getContentResolver());
+        mSettingsPackageMonitor.register(context, context.getMainLooper(), false);
     }
 
     private @Nullable CredentialManager getCredentialManager(Context context, boolean isTest) {
@@ -321,7 +324,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         mEnabledPackageNames.clear();
         for (CredentialProviderInfo cpi : availableServices) {
-            if (cpi.isEnabled()) {
+            if (cpi.isEnabled() && !cpi.isPrimary()) {
                 mEnabledPackageNames.add(cpi.getServiceInfo().packageName);
             }
         }
@@ -560,16 +563,25 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             return;
         }
 
-        List<String> enabledServices = getEnabledSettings();
+        // Get the existing primary providers since we don't touch them in
+        // this part of the UI we should just copy them over.
+        Set<String> primaryServices = new HashSet<>();
+        for (CredentialProviderInfo service : mServices) {
+            if (service.isPrimary()) {
+                primaryServices.add(service.getServiceInfo().getComponentName().flattenToString());
+            }
+        }
+
         mCredentialManager.setEnabledProviders(
-                new ArrayList<String>(), // TODO(240466271): pass down primary providers
-                enabledServices,
+                new ArrayList<>(primaryServices),
+                getEnabledSettings(),
                 getUser(),
                 mExecutor,
                 new OutcomeReceiver<Void, SetEnabledProvidersException>() {
                     @Override
                     public void onResult(Void result) {
                         Log.i(TAG, "setEnabledProviders success");
+                        updateFromExternal();
                     }
 
                     @Override
