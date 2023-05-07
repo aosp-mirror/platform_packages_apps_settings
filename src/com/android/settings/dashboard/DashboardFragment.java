@@ -46,8 +46,8 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.drawer.ActivityTile;
 import com.android.settingslib.drawer.DashboardCategory;
-import com.android.settingslib.drawer.ProviderTile;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.search.Indexable;
 
@@ -569,11 +569,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     }
 
     protected Preference createPreference(Tile tile) {
-        return tile instanceof ProviderTile
-                ? new SwitchPreference(getPrefContext())
-                : tile.hasSwitch()
-                        ? new PrimarySwitchPreference(getPrefContext())
-                        : new Preference(getPrefContext());
+        if (tile.hasSwitch()) {
+            return (tile instanceof ActivityTile || tile.hasPendingIntent())
+                    ? new PrimarySwitchPreference(getPrefContext())
+                    : new SwitchPreference(getPrefContext());
+        } else {
+            return new Preference(getPrefContext());
+        }
     }
 
     @VisibleForTesting

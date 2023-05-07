@@ -24,7 +24,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
@@ -115,6 +117,28 @@ public class ProfileSelectDialogTest {
 
         assertThat(tile.userHandle).hasSize(1);
         assertThat(tile.userHandle.get(0).getIdentifier()).isEqualTo(NORMAL_USER.getIdentifier());
+        verify(mUserManager, times(1)).getUserInfo(CLONE_USER.getIdentifier());
+    }
+
+    @Test
+    public void updatePendingIntentsIfNeeded_removesUsersWithNoPendingIntentsAndCloneProfile() {
+        final UserInfo userInfo = new UserInfo(CLONE_USER.getIdentifier(), "clone_user", null,
+                UserInfo.FLAG_PROFILE, UserManager.USER_TYPE_PROFILE_CLONE);
+        when(mUserManager.getUserInfo(CLONE_USER.getIdentifier())).thenReturn(userInfo);
+        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        tile.userHandle.add(CLONE_USER);
+        tile.userHandle.add(NORMAL_USER);
+        tile.userHandle.add(new UserHandle(10));
+        PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, new Intent(), 0);
+        tile.pendingIntentMap.put(CLONE_USER, pendingIntent);
+        tile.pendingIntentMap.put(NORMAL_USER, pendingIntent);
+
+        ProfileSelectDialog.updatePendingIntentsIfNeeded(mContext, tile);
+
+        assertThat(tile.userHandle).hasSize(1);
+        assertThat(tile.userHandle).containsExactly(NORMAL_USER);
+        assertThat(tile.pendingIntentMap).hasSize(1);
+        assertThat(tile.pendingIntentMap).containsKey(NORMAL_USER);
         verify(mUserManager, times(1)).getUserInfo(CLONE_USER.getIdentifier());
     }
 
