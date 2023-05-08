@@ -18,6 +18,7 @@ package com.android.settings.activityembedding;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.SystemProperties;
 import android.util.DisplayMetrics;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
@@ -39,6 +40,21 @@ public class ActivityEmbeddingUtils {
     private static final int MIN_SMALLEST_SCREEN_SPLIT_WIDTH_DP = 600;
     // The minimum width of the activity to show the regular homepage layout.
     private static final float MIN_REGULAR_HOMEPAGE_LAYOUT_WIDTH_DP = 380f;
+
+    /**
+     * Indicates whether to enable large screen optimization if the device supports
+     * the Activity Embedding split feature.
+     * <p>
+     * Note that the large screen optimization won't be enabled if the device doesn't support the
+     * Activity Embedding feature regardless of this property value.
+     *
+     * @see androidx.window.embedding.SplitController#getSplitSupportStatus
+     * @see androidx.window.embedding.SplitController.SplitSupportStatus#SPLIT_AVAILABLE
+     * @see androidx.window.embedding.SplitController.SplitSupportStatus#SPLIT_UNAVAILABLE
+     */
+    private static final boolean SHOULD_ENABLE_LARGE_SCREEN_OPTIMIZATION =
+            SystemProperties.getBoolean("persist.settings.large_screen_opt.enabled", true);
+
     private static final String TAG = "ActivityEmbeddingUtils";
 
     /** Get the smallest width dp of the window when the split should be used. */
@@ -62,18 +78,35 @@ public class ActivityEmbeddingUtils {
         return context.getResources().getFloat(R.dimen.config_activity_embed_split_ratio);
     }
 
-    /** Whether to support embedding activity feature. */
+    /**
+     * Returns {@code true} to indicate that Settings app support the Activity Embedding feature on
+     * this device. Returns {@code false}, otherwise.
+     */
+    public static boolean isSettingsSplitEnabled(Context context) {
+        return SHOULD_ENABLE_LARGE_SCREEN_OPTIMIZATION
+                && SplitController.getInstance(context).getSplitSupportStatus()
+                == SplitController.SplitSupportStatus.SPLIT_AVAILABLE;
+    }
+
+    /**
+     * Checks whether to support embedding activity feature with following conditions:
+     * <ul>
+     *     <li>Whether {@link #isSettingsSplitEnabled(Context)}</li>
+     *     <li>Whether {@link FeatureFlagUtils#SETTINGS_SUPPORT_LARGE_SCREEN} is enabled</li>
+     *     <li>Whether User setup is completed</li>
+     * </ul>
+     */
     public static boolean isEmbeddingActivityEnabled(Context context) {
         boolean isFlagEnabled = FeatureFlagUtils.isEnabled(context,
                 FeatureFlagUtils.SETTINGS_SUPPORT_LARGE_SCREEN);
-        boolean isSplitSupported = SplitController.getInstance(context).isSplitSupported();
+        boolean isSettingsSplitSupported = isSettingsSplitEnabled(context);
         boolean isUserSetupComplete = WizardManagerHelper.isUserSetupComplete(context);
 
         Log.d(TAG, "isFlagEnabled = " + isFlagEnabled);
-        Log.d(TAG, "isSplitSupported = " + isSplitSupported);
+        Log.d(TAG, "isSettingsSplitSupported = " + isSettingsSplitSupported);
         Log.d(TAG, "isUserSetupComplete = " + isUserSetupComplete);
 
-        return isFlagEnabled && isSplitSupported && isUserSetupComplete;
+        return isFlagEnabled && isSettingsSplitSupported && isUserSetupComplete;
     }
 
     /** Whether to show the regular or simplified homepage layout. */
