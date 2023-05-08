@@ -49,6 +49,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.slices.BlockingSlicePrefController;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -352,6 +353,16 @@ public class DashboardFragmentTest {
     }
 
     @Test
+    public void createPreference_isActivityTile_returnPreference() {
+        final Preference pref = mTestFragment.createPreference(mActivityTile);
+
+        assertThat(pref).isInstanceOf(Preference.class);
+        assertThat(pref).isNotInstanceOf(PrimarySwitchPreference.class);
+        assertThat(pref).isNotInstanceOf(SwitchPreference.class);
+        assertThat(pref.getWidgetLayoutResource()).isEqualTo(0);
+    }
+
+    @Test
     public void createPreference_isActivityTileAndHasSwitch_returnPrimarySwitchPreference() {
         mActivityTile.getMetaData().putString(META_DATA_PREFERENCE_SWITCH_URI, "uri");
 
@@ -361,7 +372,7 @@ public class DashboardFragmentTest {
     }
 
     @Test
-    public void createPreference_isProviderTileWithPendingIntent_returnPreference() {
+    public void createPreference_isProviderTileWithPendingIntent_returnPreferenceWithIcon() {
         final ProviderInfo providerInfo = new ProviderInfo();
         providerInfo.packageName = "pkg";
         providerInfo.name = "provider";
@@ -378,6 +389,8 @@ public class DashboardFragmentTest {
         assertThat(pref).isInstanceOf(Preference.class);
         assertThat(pref).isNotInstanceOf(PrimarySwitchPreference.class);
         assertThat(pref).isNotInstanceOf(SwitchPreference.class);
+        assertThat(pref.getWidgetLayoutResource())
+                .isEqualTo(R.layout.preference_external_action_icon);
     }
 
     @Test
