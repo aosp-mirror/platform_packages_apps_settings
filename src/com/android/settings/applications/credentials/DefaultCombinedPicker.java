@@ -371,6 +371,11 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
 
         credManProviders.addAll(primaryCredManProviders);
 
+        // If there is no provider then clear all the providers.
+        if (TextUtils.isEmpty(autofillProvider) && primaryCredManProviders.isEmpty()) {
+            credManProviders.clear();
+        }
+
         service.setEnabledProviders(
                 primaryCredManProviders,
                 credManProviders,
