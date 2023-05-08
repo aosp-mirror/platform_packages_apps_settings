@@ -112,6 +112,8 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
+        // Set a summary placeholder to reduce flicker.
+        mPreference.setSummaryProvider(pref -> mContext.getString(R.string.summary_placeholder));
         updateEntries();
     }
 
@@ -120,7 +122,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         // Currently, cannot use ListPreference.setSummary() when the summary contains user
         // generated string, because ListPreference.getSummary() is using String.format() to format
         // the summary when the summary is set by ListPreference.setSummary().
-        if (preference != null) {
+        if (preference != null && !mSubInfoEntityList.isEmpty()) {
             preference.setSummaryProvider(pref -> getSummary());
         }
     }
@@ -146,6 +148,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         final ArrayList<CharSequence> displayNames = new ArrayList<>();
         final ArrayList<CharSequence> subscriptionIds = new ArrayList<>();
         List<SubscriptionInfoEntity> list = getSubscriptionInfoList();
+        if (list.isEmpty()) return;
 
         if (list.size() == 1) {
             mPreference.setEnabled(false);
