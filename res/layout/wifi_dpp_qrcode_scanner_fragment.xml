@@ -36,19 +36,31 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clipChildren="true">
-                <TextureView
-                    android:id="@+id/preview_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/qrcode_preview_size"/>
-                <com.android.settingslib.qrcode.QrDecorateView
-                    android:id="@+id/decorate_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/qrcode_preview_size"/>
-            </FrameLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxWidth="@dimen/qrcode_preview_size"
+                android:maxHeight="@dimen/qrcode_preview_size">
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:clipChildren="true">
+                    <TextureView
+                        android:id="@+id/preview_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                    <com.android.settingslib.qrcode.QrDecorateView
+                        android:id="@+id/decorate_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </FrameLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/error_message"
