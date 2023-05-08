@@ -17,6 +17,7 @@
 package com.android.settings.biometrics2.ui.view;
 
 import static androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult;
+import static androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
 import static androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY;
 
 import static com.android.settings.biometrics2.factory.BiometricsViewModelFactory.CHALLENGE_GENERATOR_KEY;
@@ -100,12 +101,8 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
     private static final String TAG = "FingerprintEnrollmentActivity";
 
     private static final String INTRO_TAG = "intro";
-    private static final String FIND_UDFPS_TAG = "find-udfps";
-    private static final String FIND_SFPS_TAG = "find-sfps";
-    private static final String FIND_RFPS_TAG = "find-rfps";
-    private static final String ENROLLING_UDFPS_TAG = "enrolling-udfps";
-    private static final String ENROLLING_SFPS_TAG = "enrolling-sfps";
-    private static final String ENROLLING_RFPS_TAG = "enrolling-rfps";
+    private static final String FIND_SENSOR_TAG = "find-sensor";
+    private static final String ENROLLING_TAG = "enrolling";
     private static final String FINISH_TAG = "finish";
     private static final String SKIP_SETUP_FIND_FPS_DIALOG_TAG = "skip-setup-dialog";
     private static final String ENROLLING_ERROR_DIALOG_TAG = "enrolling-error-dialog";
@@ -213,12 +210,10 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
             final String tag = fragment.getTag();
             if (INTRO_TAG.equals(tag)) {
                 attachIntroViewModel();
-            } else if (FIND_UDFPS_TAG.equals(tag) || FIND_SFPS_TAG.equals(tag)
-                    || FIND_RFPS_TAG.equals(tag)) {
+            } else if (FIND_SENSOR_TAG.equals(tag)) {
                 attachFindSensorViewModel();
                 attachIntroViewModel();
-            } else if (ENROLLING_UDFPS_TAG.equals(tag) || ENROLLING_SFPS_TAG.equals(tag)
-                    || ENROLLING_RFPS_TAG.equals(tag)) {
+            } else if (ENROLLING_TAG.equals(tag)) {
                 attachEnrollingViewModel();
                 attachFindSensorViewModel();
                 attachIntroViewModel();
@@ -289,19 +284,15 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
 
         attachFindSensorViewModel();
 
-        final String tag;
         final Class<? extends Fragment> fragmentClass;
         if (mViewModel.canAssumeUdfps()) {
-            tag = FIND_UDFPS_TAG;
             fragmentClass = FingerprintEnrollFindUdfpsFragment.class;
         } else if (mViewModel.canAssumeSfps()) {
-            tag = FIND_SFPS_TAG;
             fragmentClass = FingerprintEnrollFindSfpsFragment.class;
         } else {
-            tag = FIND_RFPS_TAG;
             fragmentClass = FingerprintEnrollFindRfpsFragment.class;
         }
-        startFragment(fragmentClass, tag);
+        startFragment(fragmentClass, FIND_SENSOR_TAG);
     }
 
     private void attachFindSensorViewModel() {
@@ -325,19 +316,15 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
 
         attachEnrollingViewModel();
 
-        final String tag;
         final Class<? extends Fragment> fragmentClass;
         if (mViewModel.canAssumeUdfps()) {
-            tag = ENROLLING_UDFPS_TAG;
             fragmentClass = FingerprintEnrollEnrollingUdfpsFragment.class;
         } else if (mViewModel.canAssumeSfps()) {
-            tag = ENROLLING_SFPS_TAG;
             fragmentClass = FingerprintEnrollEnrollingSfpsFragment.class;
         } else {
-            tag = ENROLLING_RFPS_TAG;
             fragmentClass = FingerprintEnrollEnrollingRfpsFragment.class;
         }
-        startFragment(fragmentClass, tag);
+        startFragment(fragmentClass, ENROLLING_TAG);
     }
 
     private void attachEnrollingViewModel() {
@@ -354,9 +341,8 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
         mViewModel.setIsNewFingerprintAdded();
         attachFinishViewModel();
 
-        getSupportFragmentManager().popBackStack();
-        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-            // Replace enrolling page
+        if (mViewModel.getRequest().isSkipFindSensor()) {
+            // Set page to Finish
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
                     .setCustomAnimations(R.anim.shared_x_axis_activity_open_enter_dynamic_color,
@@ -367,8 +353,21 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
                             null, FINISH_TAG)
                     .commit();
         } else {
-            // Remove Enrolling page from backstack, and add Finish page. Latest backstack will
-            // be changed from Intro->FindSensor->Enrolling to Intro->FindSensor->Finish
+            // Remove Enrolling page
+            getSupportFragmentManager().popBackStack();
+
+            // Remove old Finish page if any
+            if (getSupportFragmentManager().findFragmentByTag(FINISH_TAG) != null) {
+                getSupportFragmentManager().popBackStack(FINISH_TAG, POP_BACK_STACK_INCLUSIVE);
+            }
+
+            // Remove FindSensor page if maxEnrolled
+            if (mViewModel.isMaxEnrolledReached(mAutoCredentialViewModel.getUserId())
+                    && getSupportFragmentManager().findFragmentByTag(FIND_SENSOR_TAG) != null) {
+                getSupportFragmentManager().popBackStack(FIND_SENSOR_TAG, POP_BACK_STACK_INCLUSIVE);
+            }
+
+            // Add Finish page
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
                     .setCustomAnimations(R.anim.shared_x_axis_activity_open_enter_dynamic_color,

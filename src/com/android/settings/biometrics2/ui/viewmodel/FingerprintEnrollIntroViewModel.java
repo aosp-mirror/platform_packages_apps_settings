@@ -107,8 +107,6 @@ public class FingerprintEnrollIntroViewModel extends AndroidViewModel {
                             enrollableValue != null ? enrollableValue : ENROLLABLE_STATUS_DEFAULT);
                     mPageStatusLiveData.setValue(status);
                 });
-
-        updateEnrollableStatus();
     }
 
     /**
@@ -133,6 +131,7 @@ public class FingerprintEnrollIntroViewModel extends AndroidViewModel {
      * Get enrollable status and hasScrollToBottom live data
      */
     public LiveData<FingerprintEnrollIntroStatus> getPageStatusLiveData() {
+        updateEnrollableStatus();
         return mPageStatusLiveData;
     }
 

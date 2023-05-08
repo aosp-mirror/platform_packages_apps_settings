@@ -87,7 +87,6 @@ public class FingerprintEnrollmentViewModel extends AndroidViewModel {
     @NonNull
     public ActivityResult getOverrideActivityResult(@NonNull ActivityResult result,
             @Nullable Bundle generatingChallengeExtras) {
-        // TODO write tests
         final int newResultCode = mIsNewFingerprintAdded
                 ? BiometricEnrollBase.RESULT_FINISHED
                 : (mRequest.isAfterSuwOrSuwSuggestedAction()
@@ -163,6 +162,14 @@ public class FingerprintEnrollmentViewModel extends AndroidViewModel {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putBoolean(SAVED_STATE_IS_WAITING_ACTIVITY_RESULT, mIsWaitingActivityResult.get());
         outState.putBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED, mIsNewFingerprintAdded);
+    }
+
+    /**
+     * Gets the result about fingerprint enrollable
+     */
+    public boolean isMaxEnrolledReached(int userId) {
+        return mFingerprintRepository.getMaxFingerprints()
+                <= mFingerprintRepository.getNumOfEnrolledFingerprintsSize(userId);
     }
 
     /**
