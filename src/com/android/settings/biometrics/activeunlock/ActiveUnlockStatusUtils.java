@@ -268,6 +268,30 @@ public class ActiveUnlockStatusUtils {
         }
     }
 
+    /**
+     * Returns the preference title of how to use biometrics when active unlock is enabled.
+     */
+    public String getUseBiometricTitleForActiveUnlock() {
+        final boolean faceAllowed = Utils.hasFaceHardware(mContext);
+        final boolean fingerprintAllowed = Utils.hasFingerprintHardware(mContext);
+
+        return mContext.getString(getUseBiometricTitleRes(faceAllowed, fingerprintAllowed));
+    }
+
+    @StringRes
+    private static int getUseBiometricTitleRes(
+            boolean isFaceAllowed, boolean isFingerprintAllowed) {
+        if (isFaceAllowed && isFingerprintAllowed) {
+            return R.string.biometric_settings_use_face_fingerprint_or_watch_for;
+        } else if (isFaceAllowed) {
+            return R.string.biometric_settings_use_face_or_watch_for;
+        } else if (isFingerprintAllowed) {
+            return R.string.biometric_settings_use_fingerprint_or_watch_for;
+        } else {
+            return R.string.biometric_settings_use_watch_for;
+        }
+    }
+
     private static String getFlagState() {
         return DeviceConfig.getProperty(DeviceConfig.NAMESPACE_REMOTE_AUTH, CONFIG_FLAG_NAME);
     }
