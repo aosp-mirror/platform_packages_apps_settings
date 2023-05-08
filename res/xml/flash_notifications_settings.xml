@@ -27,7 +27,8 @@
     <com.android.settingslib.widget.IllustrationPreference
         android:key="flash_notifications_illustration"
         settings:searchable="false"
-        settings:lottie_rawRes="@drawable/flash_notifications_illustration" />
+        settings:lottie_rawRes="@drawable/flash_notifications_illustration"
+        settings:controller="com.android.settings.accessibility.FlashNotificationIllustrationPreferenceController"/>
 
     <SwitchPreference
         android:key="camera_flash_notification_preference"
