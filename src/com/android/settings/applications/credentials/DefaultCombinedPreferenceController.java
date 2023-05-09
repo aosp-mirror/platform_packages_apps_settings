@@ -24,6 +24,7 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.credentials.CredentialManager;
 import android.credentials.CredentialProviderInfo;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.autofill.AutofillService;
 import android.service.autofill.AutofillServiceInfo;
@@ -75,13 +76,13 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
             return null;
         }
         final AutofillSettingIntentProvider intentProvider =
-                new AutofillSettingIntentProvider(mContext, mUserId, info.getKey());
+                new AutofillSettingIntentProvider(mContext, getUser(), info.getKey());
         return intentProvider.getIntent();
     }
 
     @Override
     protected DefaultAppInfo getDefaultAppInfo() {
-        List<CombinedProviderInfo> providers = getAllProviders(mUserId);
+        List<CombinedProviderInfo> providers = getAllProviders(getUser());
         CombinedProviderInfo topProvider = CombinedProviderInfo.getTopProvider(providers);
         if (topProvider != null) {
             ServiceInfo brandingService = topProvider.getBrandingService();
@@ -89,7 +90,7 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
                 return new DefaultAppInfo(
                         mContext,
                         mPackageManager,
-                        mUserId,
+                        getUser(),
                         topProvider.getApplicationInfo(),
                         topProvider.getSettingsSubtitle(),
                         true);
@@ -97,7 +98,7 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
                 return new DefaultAppInfo(
                         mContext,
                         mPackageManager,
-                        mUserId,
+                        getUser(),
                         brandingService,
                         topProvider.getSettingsSubtitle(),
                         true);
@@ -177,5 +178,9 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
 
             return null;
         }
+    }
+
+    protected int getUser() {
+        return UserHandle.myUserId();
     }
 }
