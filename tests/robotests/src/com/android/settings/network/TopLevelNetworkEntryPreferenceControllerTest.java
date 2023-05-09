@@ -25,6 +25,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.UserManager;
 import android.text.BidiFormatter;
+import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
@@ -73,8 +74,9 @@ public class TopLevelNetworkEntryPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_demoUser_unsupported() {
+    public void getAvailabilityStatus_demoUser_nonLargeScreen_unsupported() {
         ShadowUtils.setIsDemoUser(true);
+        FeatureFlagUtils.setEnabled(mContext, "settings_support_large_screen", false);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
