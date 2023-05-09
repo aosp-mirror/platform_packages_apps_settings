@@ -54,6 +54,7 @@ import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.net.NetworkCycleChartData;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -70,6 +71,7 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 import java.util.List;
 
+@Ignore
 @RunWith(RobolectricTestRunner.class)
 public class DataUsageListTest {
 

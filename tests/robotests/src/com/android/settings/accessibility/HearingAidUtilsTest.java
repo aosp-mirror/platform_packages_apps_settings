@@ -34,6 +34,7 @@ import com.android.settings.bluetooth.Utils;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
+import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.HearingAidInfo;
@@ -79,7 +80,8 @@ public class HearingAidUtilsTest {
     @Before
     public void setUp() {
         setupEnvironment();
-        final FragmentActivity mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        final FragmentActivity mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(FragmentActivity.class)).get();
         mFragmentManager = mActivity.getSupportFragmentManager();
         ShadowAlertDialogCompat.reset();
         when(mCachedBluetoothDevice.getAddress()).thenReturn(TEST_DEVICE_ADDRESS);
