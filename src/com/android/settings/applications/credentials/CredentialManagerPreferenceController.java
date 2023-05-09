@@ -859,6 +859,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         private final Uri mCredentialService =
                 Settings.Secure.getUriFor(Settings.Secure.CREDENTIAL_SERVICE);
 
+        private final Uri mCredentialPrimaryService =
+                Settings.Secure.getUriFor(Settings.Secure.CREDENTIAL_SERVICE_PRIMARY);
+
         public SettingContentObserver(Handler handler) {
             super(handler);
         }
@@ -866,6 +869,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         public void register(ContentResolver contentResolver) {
             contentResolver.registerContentObserver(mAutofillService, false, this, getUser());
             contentResolver.registerContentObserver(mCredentialService, false, this, getUser());
+            contentResolver.registerContentObserver(
+                    mCredentialPrimaryService, false, this, getUser());
         }
 
         @Override
