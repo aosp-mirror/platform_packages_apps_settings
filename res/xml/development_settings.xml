@@ -258,7 +258,7 @@
             android:key="platform_compat_dashboard"
             android:title="@string/platform_compat_dashboard_title"
             android:summary="@string/platform_compat_dashboard_summary"
-            android:fragment="com.android.settings.development.compat.PlatformCompatDashboard"
+            settings:controller="com.android.settings.spa.development.compat.PlatformCompatPreferenceController"
             />
 
         <SwitchPreference
