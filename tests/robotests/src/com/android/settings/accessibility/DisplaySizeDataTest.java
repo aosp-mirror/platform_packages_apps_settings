@@ -23,7 +23,6 @@ import android.content.Context;
 import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -41,7 +40,6 @@ public class DisplaySizeDataTest {
         mDisplaySizeData = new DisplaySizeData(mContext);
     }
 
-    @Ignore("Ignore it since a NPE is happened in ShadowWindowManagerGlobal. (Ref. b/214161063)")
     @Test
     public void commit_success() {
         final int progress = 4;

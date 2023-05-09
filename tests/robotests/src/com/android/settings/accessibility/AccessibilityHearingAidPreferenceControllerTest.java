@@ -51,7 +51,6 @@ import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -246,7 +245,6 @@ public class AccessibilityHearingAidPreferenceControllerTest {
                 mContext.getText(R.string.accessibility_hearingaid_not_connected_summary));
     }
 
-    @Ignore
     @Test
     public void handleHearingAidPreferenceClick_noHearingAid_launchHearingAidInstructionDialog() {
         mPreferenceController = spy(new AccessibilityHearingAidPreferenceController(mContext,
@@ -258,7 +256,6 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         verify(mPreferenceController).launchHearingAidInstructionDialog();
     }
 
-    @Ignore
     @Test
     public void handleHearingAidPreferenceClick_withHearingAid_launchBluetoothDeviceDetailSetting
             () {

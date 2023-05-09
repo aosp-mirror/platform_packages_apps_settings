@@ -43,7 +43,6 @@ import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -141,7 +140,6 @@ public class TextReadingPreferenceFragmentTest {
                 R.xml.accessibility_text_reading_options);
     }
 
-    @Ignore
     @Test
     public void getLogTag_returnsCorrectTag() {
         assertThat(mFragment.getLogTag()).isEqualTo("TextReadingPreferenceFragment");

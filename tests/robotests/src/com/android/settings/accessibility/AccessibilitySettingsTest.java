@@ -65,7 +65,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -153,7 +152,6 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @Ignore
     public void getRawDataToIndex_isNull() {
         final List<SearchIndexableRaw> indexableRawList =
                 AccessibilitySettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true);
@@ -257,7 +255,6 @@ public class AccessibilitySettingsTest {
         assertThat(description).isEqualTo(DEFAULT_DESCRIPTION);
     }
 
-    @Ignore
     @Test
     @Config(shadows = {ShadowFragment.class, ShadowUserManager.class})
     public void onCreate_haveRegisterToSpecificUrisAndActions() {
@@ -281,7 +278,6 @@ public class AccessibilitySettingsTest {
         assertThat(intentFilter.hasAction(Intent.ACTION_PACKAGE_REMOVED)).isTrue();
     }
 
-    @Ignore
     @Test
     @Config(shadows = {ShadowFragment.class, ShadowUserManager.class})
     public void onDestroy_unregisterObserverAndReceiver() {
@@ -297,7 +293,6 @@ public class AccessibilitySettingsTest {
 
     }
 
-    @Ignore
     @Test
     @Config(shadows = {ShadowFragment.class, ShadowUserManager.class})
     public void onContentChanged_updatePreferenceInForeground_preferenceUpdated() {
@@ -314,7 +309,6 @@ public class AccessibilitySettingsTest {
 
     }
 
-    @Ignore
     @Test
     @Config(shadows = {ShadowFragment.class, ShadowUserManager.class})
     public void onContentChanged_updatePreferenceInBackground_preferenceUpdated() {

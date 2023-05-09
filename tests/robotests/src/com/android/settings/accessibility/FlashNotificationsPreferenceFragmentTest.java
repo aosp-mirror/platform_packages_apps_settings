@@ -30,7 +30,6 @@ import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,7 +65,6 @@ public class FlashNotificationsPreferenceFragmentTest {
         assertThat(mFragment.getLogTag()).isEqualTo("FlashNotificationsPreferenceFragment");
     }
 
-    @Ignore
     @Test
     public void getMetricsCategory_isZero() {
         assertThat(mFragment.getMetricsCategory()).isEqualTo(0); // TODO
