@@ -47,6 +47,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
+import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
@@ -88,7 +89,8 @@ public class WifiP2pSettingsTest {
         mContext = RuntimeEnvironment.application;
         TestWifiP2pSettings.sMockWifiP2pManager = mWifiP2pManager;
 
-        mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(FragmentActivity.class)).get();
         mFragment = new TestWifiP2pSettings();
         mFragment.mWifiP2pManager = mWifiP2pManager;
         doReturn(mChannel).when(mWifiP2pManager).initialize(any(), any(), any());

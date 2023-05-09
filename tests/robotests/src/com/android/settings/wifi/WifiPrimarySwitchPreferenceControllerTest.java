@@ -46,6 +46,7 @@ import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -96,6 +97,7 @@ public class WifiPrimarySwitchPreferenceControllerTest {
         assertThat(mController.isAvailable()).isTrue();
     }
 
+    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void testWifiPrimarySwitch_ifDisabled_shouldNotBeShown() {

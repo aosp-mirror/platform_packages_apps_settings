@@ -24,6 +24,7 @@ import android.os.UserHandle;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.settings.utils.ActivityControllerWrapper;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
@@ -43,7 +44,8 @@ public class ChooseLockSettingsHelperTest {
 
     @Test
     public void testLaunchConfirmationActivityWithExternal() {
-        final Activity activity = Robolectric.setupActivity(Activity.class);
+        final Activity activity  = (Activity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(Activity.class)).get();
 
         ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(activity);
         builder.setRequestCode(100)
@@ -128,7 +130,8 @@ public class ChooseLockSettingsHelperTest {
 
     @Test
     public void launchConfirmPattern_ForceVerify_shouldLaunchInternalActivity() {
-        final Activity activity = Robolectric.setupActivity(Activity.class);
+        final Activity activity  = (Activity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(Activity.class)).get();
 
         ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(activity);
         builder.setRequestCode(100)
@@ -148,7 +151,8 @@ public class ChooseLockSettingsHelperTest {
 
     @Test
     public void launchConfirmPassword_ForceVerify_shouldLaunchInternalActivity() {
-        final Activity activity = Robolectric.setupActivity(Activity.class);
+        final Activity activity  = (Activity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(Activity.class)).get();
 
         ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(activity);
         builder.setRequestCode(100)
@@ -168,7 +172,8 @@ public class ChooseLockSettingsHelperTest {
 
     @Test
     public void launchConfirmPassword_remoteValidation_passwordLockType() throws Exception {
-        Activity activity = Robolectric.setupActivity(Activity.class);
+        final Activity activity  = (Activity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(Activity.class)).get();
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         RemoteLockscreenValidationSession request = createRemoteLockscreenValidationSession(
                 KeyguardManager.PASSWORD, VALID_REMAINING_ATTEMPTS);
@@ -197,7 +202,9 @@ public class ChooseLockSettingsHelperTest {
 
     @Test
     public void launchConfirmPassword_remoteValidation_pinLockType() throws Exception {
-        Activity activity = Robolectric.setupActivity(Activity.class);
+        Activity activity  = (Activity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(Activity.class)).get();
+
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         RemoteLockscreenValidationSession request = createRemoteLockscreenValidationSession(
                 KeyguardManager.PIN, VALID_REMAINING_ATTEMPTS);
@@ -226,7 +233,8 @@ public class ChooseLockSettingsHelperTest {
 
     @Test
     public void launchConfirmPattern_remoteValidation_patternLockType() throws Exception {
-        Activity activity = Robolectric.setupActivity(Activity.class);
+        Activity activity  = (Activity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(Activity.class)).get();
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         RemoteLockscreenValidationSession request = createRemoteLockscreenValidationSession(
                 KeyguardManager.PATTERN, VALID_REMAINING_ATTEMPTS);
