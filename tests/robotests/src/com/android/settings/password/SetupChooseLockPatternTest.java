@@ -38,10 +38,10 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
 import com.android.internal.widget.LockPatternView.DisplayMode;
-import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment;
-import com.android.settings.password.ChooseLockPattern.IntentBuilder;
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
+import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment;
+import com.android.settings.password.ChooseLockPattern.IntentBuilder;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -84,7 +84,7 @@ public class SetupChooseLockPatternTest {
                         new IntentBuilder(application)
                                 .setUserId(UserHandle.myUserId())
                                 .build());
-        //mActivity = ActivityController.of(new SetupChooseLockPattern(), intent).setup().get();
+
         mActivity = (SetupChooseLockPattern) ActivityControllerWrapper.setup(
                 Robolectric.buildActivity(SetupChooseLockPattern.class, intent)).get();
     }

@@ -28,6 +28,8 @@ import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
 import android.os.Bundle;
 import android.os.storage.StorageManager;
+import android.text.BidiFormatter;
+import android.text.SpannableStringBuilder;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.Surface;
@@ -38,6 +40,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.VerifyCredentialResponse;
+import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.biometrics.face.FaceEnrollIntroduction;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollFindSensor;
@@ -45,6 +48,7 @@ import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction
 import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollFindSensor;
 import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollIntroduction;
 import com.android.settings.biometrics2.ui.view.FingerprintEnrollmentActivity;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupChooseLockGeneric;
@@ -59,6 +63,9 @@ import java.lang.annotation.RetentionPolicy;
  */
 public class BiometricUtils {
     private static final String TAG = "BiometricUtils";
+
+    /** The character ' • ' to separate the setup choose options */
+    public static final String SEPARATOR = " \u2022 ";
 
     // Note: Theis IntDef must align SystemUI DevicePostureInt
     @IntDef(prefix = {"DEVICE_POSTURE_"}, value = {
@@ -495,5 +502,46 @@ public class BiometricUtils {
      */
     public static boolean isLandscape(@NonNull Context context) {
         return context.getDisplay().getRotation() == Surface.ROTATION_90;
+    }
+
+    /**
+     * Returns true if the device supports Face enrollment in SUW flow
+     */
+    public static boolean isFaceSupportedInSuw(Context context) {
+        return FeatureFactory.getFactory(context).getFaceFeatureProvider().isSetupWizardSupported(
+                context);
+    }
+
+    /**
+     * Returns the combined screen lock options by device biometrics config
+     * @param context the application context
+     * @param screenLock the type of screen lock(PIN, Pattern, Password) in string
+     * @param hasFingerprint device support fingerprint or not
+     * @param isFaceSupported device support face or not
+     * @return the options combined with screen lock, face, and fingerprint in String format.
+     */
+    public static String getCombinedScreenLockOptions(Context context,
+            CharSequence screenLock, boolean hasFingerprint, boolean isFaceSupported) {
+        final SpannableStringBuilder ssb = new SpannableStringBuilder();
+        final BidiFormatter bidi = BidiFormatter.getInstance();
+        // Assume the flow is "Screen Lock" + "Face" + "Fingerprint"
+        ssb.append(bidi.unicodeWrap(screenLock));
+
+        if (isFaceSupported) {
+            ssb.append(bidi.unicodeWrap(SEPARATOR));
+            ssb.append(bidi.unicodeWrap(
+                    capitalize(context.getString(R.string.keywords_face_settings))));
+        }
+
+        if (hasFingerprint) {
+            ssb.append(bidi.unicodeWrap(SEPARATOR));
+            ssb.append(bidi.unicodeWrap(
+                    capitalize(context.getString(R.string.security_settings_fingerprint))));
+        }
+        return ssb.toString();
+    }
+
+    private static String capitalize(final String input) {
+        return Character.toUpperCase(input.charAt(0)) + input.substring(1);
     }
 }
