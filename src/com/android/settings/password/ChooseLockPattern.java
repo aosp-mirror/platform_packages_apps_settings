@@ -798,7 +798,12 @@ public class ChooseLockPattern extends SettingsActivity {
             // If the stage changed, announce the header for accessibility. This
             // is a no-op when accessibility is disabled.
             if (previousStage != stage || announceAlways) {
-                mHeaderText.announceForAccessibility(mHeaderText.getText());
+                if (stage == Stage.NeedToConfirm) {
+                    // If the Stage is NeedToConfirm, move the a11y focus to the header.
+                    mHeaderText.requestAccessibilityFocus();
+                } else {
+                    mHeaderText.announceForAccessibility(mHeaderText.getText());
+                }
             }
         }
 
