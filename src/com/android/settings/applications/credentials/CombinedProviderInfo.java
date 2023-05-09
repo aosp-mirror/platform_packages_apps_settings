@@ -26,6 +26,7 @@ import android.credentials.CredentialProviderInfo;
 import android.graphics.drawable.Drawable;
 import android.service.autofill.AutofillServiceInfo;
 import android.text.TextUtils;
+import android.util.IconDrawableFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -83,11 +84,12 @@ public final class CombinedProviderInfo {
 
     /** Returns the app icon. */
     @Nullable
-    public Drawable getAppIcon(@NonNull Context context) {
+    public Drawable getAppIcon(@NonNull Context context, int userId) {
+        IconDrawableFactory factory = IconDrawableFactory.newInstance(context);
         Drawable icon = null;
         ServiceInfo brandingService = getBrandingService();
         if (brandingService != null) {
-            icon = brandingService.loadIcon(context.getPackageManager());
+            icon = factory.getBadgedIcon(brandingService, getApplicationInfo(), userId);
         }
 
         // If the branding service gave us a icon then use that.
@@ -95,8 +97,8 @@ public final class CombinedProviderInfo {
             return icon;
         }
 
-        // Otherwise fallback to the app label and then the package name.
-        return getApplicationInfo().loadIcon(context.getPackageManager());
+        // Otherwise fallback to the app icon and then the package name.
+        return factory.getBadgedIcon(getApplicationInfo(), userId);
     }
 
     /** Returns the app name. */
