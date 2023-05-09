@@ -30,6 +30,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
+import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragment.Stage;
 import com.android.settings.password.ChooseLockPassword.IntentBuilder;
@@ -48,6 +49,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.android.controller.ActivityController;
@@ -91,7 +93,9 @@ public class SetupChooseLockPasswordTest {
                         application,
                         new IntentBuilder(application).build());
 
-        ActivityController.of(new SetupChooseLockPassword(), intent).setup().get();
+        //ActivityController.of(new SetupChooseLockPassword(), intent).setup().get();
+        ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(SetupChooseLockPassword.class, intent)).get();
     }
 
     @Test
@@ -198,7 +202,9 @@ public class SetupChooseLockPasswordTest {
                         application,
                         new IntentBuilder(application).build());
         intent.putExtra(ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, true);
-        return ActivityController.of(new SetupChooseLockPassword(), intent).setup().get();
+        return (SetupChooseLockPassword) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(SetupChooseLockPassword.class, intent)).get();
+        //return ActivityController.of(new SetupChooseLockPassword(), intent).setup().get();
     }
 
     @Implements(ChooseLockGenericController.class)

@@ -47,9 +47,7 @@ import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class DefaultCombinedPicker extends DefaultAppPickerFragment {
 
@@ -65,6 +63,7 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
     private DialogInterface.OnClickListener mCancelListener;
 
     private CredentialManager mCredentialManager;
+    private int mIntentSenderUserId = -1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,8 +78,10 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
                     };
             // If mCancelListener is not null, fragment is started from
             // ACTION_REQUEST_SET_AUTOFILL_SERVICE and we should always use the calling uid.
-            mUserId = UserHandle.myUserId();
+            mIntentSenderUserId = UserHandle.myUserId();
         }
+
+        getUser();
 
         mSettingsPackageMonitor.register(activity, activity.getMainLooper(), false);
         update();
@@ -167,7 +168,7 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
                 Settings.Secure.getStringForUser(
                         getActivity().getContentResolver(),
                         Settings.Secure.AUTOFILL_SERVICE_SEARCH_URI,
-                        mUserId);
+                        getUser());
         if (TextUtils.isEmpty(searchUri)) {
             return null;
         }
@@ -177,7 +178,7 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
         final Preference preference = new Preference(context);
         preference.setOnPreferenceClickListener(
                 p -> {
-                    context.startActivityAsUser(addNewServiceIntent, UserHandle.of(mUserId));
+                    context.startActivityAsUser(addNewServiceIntent, UserHandle.of(getUser()));
                     return true;
                 });
         preference.setTitle(R.string.print_menu_item_add_service);
@@ -212,17 +213,17 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
     private List<CombinedProviderInfo> getAllProviders() {
         final Context context = getContext();
         final List<AutofillServiceInfo> autofillProviders =
-                AutofillServiceInfo.getAvailableServices(context, mUserId);
+                AutofillServiceInfo.getAvailableServices(context, getUser());
 
         final CredentialManager service = getCredentialProviderService();
         final List<CredentialProviderInfo> credManProviders = new ArrayList<>();
         if (service != null) {
             credManProviders.addAll(
                     service.getCredentialProviderServices(
-                            mUserId, CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY));
+                            getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY));
         }
 
-        final String selectedAutofillProvider = getSelectedAutofillProvider(context, mUserId);
+        final String selectedAutofillProvider = getSelectedAutofillProvider(context, getUser());
         return CombinedProviderInfo.buildMergedList(
                 autofillProviders, credManProviders, selectedAutofillProvider);
     }
@@ -244,7 +245,7 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
                         new DefaultAppInfo(
                                 context,
                                 mPm,
-                                mUserId,
+                                getUser(),
                                 cpi.getApplicationInfo(),
                                 cpi.getSettingsSubtitle(),
                                 true));
@@ -253,7 +254,7 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
                         new DefaultAppInfo(
                                 context,
                                 mPm,
-                                mUserId,
+                                getUser(),
                                 brandingService,
                                 cpi.getSettingsSubtitle(),
                                 true));
@@ -350,7 +351,7 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
         }
 
         Settings.Secure.putStringForUser(
-                getContext().getContentResolver(), AUTOFILL_SETTING, autofillProvider, mUserId);
+                getContext().getContentResolver(), AUTOFILL_SETTING, autofillProvider, getUser());
 
         final CredentialManager service = getCredentialProviderService();
         if (service == null) {
@@ -362,19 +363,24 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
         final List<String> credManProviders = new ArrayList<>();
         for (CredentialProviderInfo cpi :
                 service.getCredentialProviderServices(
-                        mUserId, CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY)) {
+                        getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY)) {
 
-            if (cpi.isEnabled()) {
+            if (cpi.isEnabled() && !cpi.isPrimary()) {
                 credManProviders.add(cpi.getServiceInfo().getComponentName().flattenToString());
             }
         }
 
         credManProviders.addAll(primaryCredManProviders);
 
+        // If there is no provider then clear all the providers.
+        if (TextUtils.isEmpty(autofillProvider) && primaryCredManProviders.isEmpty()) {
+            credManProviders.clear();
+        }
+
         service.setEnabledProviders(
                 primaryCredManProviders,
                 credManProviders,
-                mUserId,
+                getUser(),
                 ContextCompat.getMainExecutor(getContext()),
                 new OutcomeReceiver<Void, SetEnabledProvidersException>() {
                     @Override
@@ -387,5 +393,12 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
                         Log.e(TAG, "setEnabledProviders error: " + e.toString());
                     }
                 });
+    }
+
+    protected int getUser() {
+        if (mIntentSenderUserId >= 0) {
+            return mIntentSenderUserId;
+        }
+        return UserHandle.myUserId();
     }
 }

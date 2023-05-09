@@ -263,6 +263,12 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                     R.layout.udfps_enroll_enrolling, null, false);
             switch (rotation) {
                 case Surface.ROTATION_90:
+                    final View sudContent = layout.findViewById(R.id.sud_layout_content);
+                    if (sudContent != null) {
+                        sudContent.setPadding(sudContent.getPaddingLeft(), 0,
+                                sudContent.getPaddingRight(), sudContent.getPaddingBottom());
+                    }
+
                     final LinearLayout layoutContainer = layout.findViewById(
                             R.id.layout_container);
                     final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
