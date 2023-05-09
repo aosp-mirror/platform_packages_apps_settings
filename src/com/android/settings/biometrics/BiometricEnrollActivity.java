@@ -326,8 +326,8 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
             }
         }
 
-        boolean canUseFace = mIsFaceEnrollable;
-        boolean canUseFingerprint = mIsFingerprintEnrollable;
+        boolean canUseFace = mHasFeatureFace;
+        boolean canUseFingerprint = mHasFeatureFingerprint;
         if (mParentalOptionsRequired) {
             if (mParentalOptions == null) {
                 throw new IllegalStateException("consent options required, but not set");
@@ -345,10 +345,12 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         } else if (canUseFace || canUseFingerprint) {
             if (mGkPwHandle == null) {
                 setOrConfirmCredentialsNow();
-            } else if (canUseFingerprint) {
+            } else if (canUseFingerprint && mIsFingerprintEnrollable) {
                 launchFingerprintOnlyEnroll();
-            } else {
+            } else if (canUseFace && mIsFaceEnrollable) {
                 launchFaceOnlyEnroll();
+            } else {
+                setOrConfirmCredentialsNow();
             }
         } else { // no modalities available
             if (mParentalOptionsRequired) {
