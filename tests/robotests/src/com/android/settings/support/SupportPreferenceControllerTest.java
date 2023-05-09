@@ -28,6 +28,7 @@ import android.app.Activity;
 import androidx.preference.Preference;
 
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +47,8 @@ public class SupportPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        mActivity = Robolectric.setupActivity(Activity.class);
+        mActivity = (Activity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(Activity.class)).get();
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mPreference = new Preference(mActivity);
         mPreference.setKey("test_key");

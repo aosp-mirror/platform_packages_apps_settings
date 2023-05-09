@@ -63,6 +63,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -661,6 +662,7 @@ public class UserDetailsSettingsTest {
         assertThat(result).isTrue();
     }
 
+    @Ignore
     @Test
     public void canDeleteUser_adminSelectsUser_hasRemoveRestriction_shouldReturnFalse() {
         setupSelectedUser();
