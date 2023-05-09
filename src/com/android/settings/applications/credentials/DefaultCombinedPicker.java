@@ -364,7 +364,7 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
                 service.getCredentialProviderServices(
                         mUserId, CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY)) {
 
-            if (cpi.isEnabled()) {
+            if (cpi.isEnabled() && !cpi.isPrimary()) {
                 credManProviders.add(cpi.getServiceInfo().getComponentName().flattenToString());
             }
         }
