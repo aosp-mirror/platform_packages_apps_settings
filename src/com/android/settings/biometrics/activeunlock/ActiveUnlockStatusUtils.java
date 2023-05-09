@@ -75,7 +75,7 @@ public class ActiveUnlockStatusUtils {
      * used.
      */
     public boolean useUnlockIntentLayout() {
-        return isAvailable() && UNLOCK_INTENT_LAYOUT.equals(getFlagState());
+        return isAvailable();
     }
 
     /**
@@ -84,7 +84,7 @@ public class ActiveUnlockStatusUtils {
      * should be used.
      */
     public boolean useBiometricFailureLayout() {
-        return isAvailable() && BIOMETRIC_FAILURE_LAYOUT.equals(getFlagState());
+        return false;
     }
 
     /**
@@ -155,10 +155,6 @@ public class ActiveUnlockStatusUtils {
     int getAvailability() {
         if (!Utils.hasFingerprintHardware(mContext) && !Utils.hasFaceHardware(mContext)) {
             return BasePreferenceController.UNSUPPORTED_ON_DEVICE;
-        }
-        if (!UNLOCK_INTENT_LAYOUT.equals(getFlagState())
-                  && !BIOMETRIC_FAILURE_LAYOUT.equals(getFlagState())) {
-            return BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
         }
         if (getAuthority() != null && getIntent() != null) {
             return BasePreferenceController.AVAILABLE;
