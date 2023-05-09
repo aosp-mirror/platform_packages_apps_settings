@@ -52,7 +52,12 @@ public class ConfirmDeviceCredentialUtils {
         IntentSender intentSender = activity.getIntent().getParcelableExtra(Intent.EXTRA_INTENT);
         if (intentSender != null) {
             try {
-                activity.startIntentSenderForResult(intentSender, -1, null, 0, 0, 0);
+                ActivityOptions activityOptions =
+                        ActivityOptions.makeBasic()
+                                .setPendingIntentBackgroundActivityStartMode(
+                                        ActivityOptions.MODE_BACKGROUND_ACTIVITY_START_ALLOWED);
+                activity.startIntentSenderForResult(intentSender, -1, null, 0, 0, 0,
+                        activityOptions.toBundle());
             } catch (IntentSender.SendIntentException e) {
                 /* ignore */
             }
