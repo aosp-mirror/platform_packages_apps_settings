@@ -528,16 +528,24 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                     boolean isChecked = pref.isChecked();
 
                     if (isChecked) {
-                        // Since we are enabling it we should confirm the user decision with a
-                        // dialog box.
-                        NewProviderConfirmationDialogFragment fragment =
-                                newNewProviderConfirmationDialogFragment(
-                                        packageName, title, /* setActivityResult= */ false);
-                        if (fragment == null || mFragmentManager == null) {
-                            return true;
-                        }
+                        if (togglePackageNameEnabled(packageName)) {
+                            // Enable all prefs.
+                            if (mPrefs.containsKey(packageName)) {
+                                mPrefs.get(packageName).setChecked(true);
+                            }
+                        } else {
+                            // Since we failed to show toggle the switch back to off.
+                            pref.setChecked(false);
 
-                        fragment.show(mFragmentManager, NewProviderConfirmationDialogFragment.TAG);
+                            // Show the error if too many enabled.
+                            final DialogFragment fragment = newErrorDialogFragment();
+
+                            if (fragment == null || mFragmentManager == null) {
+                                return true;
+                            }
+
+                            fragment.show(mFragmentManager, ErrorDialogFragment.TAG);
+                        }
 
                         return true;
                     } else {
