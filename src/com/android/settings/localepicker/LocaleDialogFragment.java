@@ -168,15 +168,12 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
             if (mResultReceiver != null && mDialogType == DIALOG_CONFIRM_SYSTEM_DEFAULT) {
                 Bundle bundle = new Bundle();
                 bundle.putInt(ARG_DIALOG_TYPE, DIALOG_CONFIRM_SYSTEM_DEFAULT);
-                boolean changed = false;
                 if (which == DialogInterface.BUTTON_POSITIVE) {
-                    changed = true;
                     mResultReceiver.send(Activity.RESULT_OK, bundle);
                 } else if (which == DialogInterface.BUTTON_NEGATIVE) {
                     mResultReceiver.send(Activity.RESULT_CANCELED, bundle);
                 }
-                mMetricsFeatureProvider.action(mContext,
-                        SettingsEnums.ACTION_CHANGE_LANGUAGE, changed);
+                mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_CHANGE_LANGUAGE);
             }
         }
 
