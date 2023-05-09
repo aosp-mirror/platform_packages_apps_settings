@@ -327,7 +327,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     }
 
     /**
-     * Disable the Le Audio profile for each of the Le Audio devices.
+     * Disable the Le Audio profile, VCP, and CSIP for each of the Le Audio devices.
      *
      * @param profile the LeAudio profile
      */
@@ -336,12 +336,20 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             Log.e(TAG, "There is no the LE profile or no device in mProfileDeviceMap. Do nothing.");
             return;
         }
+        LocalBluetoothProfile vcp = mProfileManager.getVolumeControlProfile();
+        LocalBluetoothProfile csip = mProfileManager.getCsipSetCoordinatorProfile();
 
         for (CachedBluetoothDevice leAudioDevice : mProfileDeviceMap.get(profile.toString())) {
             Log.d(TAG,
                     "device:" + leAudioDevice.getDevice().getAnonymizedAddress()
                             + "disable LE profile");
             profile.setEnabled(leAudioDevice.getDevice(), false);
+            if (vcp != null) {
+                vcp.setEnabled(leAudioDevice.getDevice(), false);
+            }
+            if (csip != null) {
+                csip.setEnabled(leAudioDevice.getDevice(), false);
+            }
         }
 
         if (!SystemProperties.getBoolean(ENABLE_DUAL_MODE_AUDIO, false)) {
@@ -352,7 +360,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     }
 
     /**
-     * Enable the Le Audio profile for each of the Le Audio devices.
+     * Enable the Le Audio profile, VCP, and CSIP for each of the Le Audio devices.
      *
      * @param profile the LeAudio profile
      */
@@ -368,11 +376,19 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             disableProfileBeforeUserEnablesLeAudio(mProfileManager.getHeadsetProfile());
         }
 
+        LocalBluetoothProfile vcp = mProfileManager.getVolumeControlProfile();
+        LocalBluetoothProfile csip = mProfileManager.getCsipSetCoordinatorProfile();
         for (CachedBluetoothDevice leAudioDevice : mProfileDeviceMap.get(profile.toString())) {
             Log.d(TAG,
                     "device:" + leAudioDevice.getDevice().getAnonymizedAddress()
                             + "enable LE profile");
             profile.setEnabled(leAudioDevice.getDevice(), true);
+            if (vcp != null) {
+                vcp.setEnabled(leAudioDevice.getDevice(), true);
+            }
+            if (csip != null) {
+                csip.setEnabled(leAudioDevice.getDevice(), true);
+            }
         }
     }
 
