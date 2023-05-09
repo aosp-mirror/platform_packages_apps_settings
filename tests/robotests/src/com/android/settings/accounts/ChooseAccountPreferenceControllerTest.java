@@ -41,6 +41,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
 import com.android.settings.testutils.shadow.ShadowContentResolver;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
+import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.After;
 import org.junit.Before;
@@ -68,7 +69,8 @@ public class ChooseAccountPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mController = spy(new ChooseAccountPreferenceController(mContext, "controller_key"));
-        mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(FragmentActivity.class)).get();
         mPreferenceManager = new PreferenceManager(mContext);
         mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
     }

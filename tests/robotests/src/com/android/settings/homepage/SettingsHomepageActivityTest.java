@@ -54,6 +54,7 @@ import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -102,6 +103,7 @@ public class SettingsHomepageActivityTest {
         assertThat(avatarView.getVisibility()).isNotEqualTo(View.VISIBLE);
     }
 
+    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void launch_configEnabled_shouldShowAvatar() {

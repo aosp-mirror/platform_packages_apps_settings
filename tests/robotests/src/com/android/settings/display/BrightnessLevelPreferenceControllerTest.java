@@ -39,6 +39,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.SettingsBaseActivity;
+import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.transition.SettingsTransitionHelper;
 
 import org.junit.Before;
@@ -164,7 +165,9 @@ public class BrightnessLevelPreferenceControllerTest {
 
     @Test
     public void handlePreferenceTreeClick_transitionTypeNone_shouldPassToNextActivity() {
-        final Activity activity = Robolectric.setupActivity(Activity.class);
+        final Activity activity = (Activity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(Activity.class)).get();
+
         final BrightnessLevelPreferenceController controller =
                 new BrightnessLevelPreferenceController(activity, null);
         final ShadowActivity shadowActivity = shadowOf(activity);
