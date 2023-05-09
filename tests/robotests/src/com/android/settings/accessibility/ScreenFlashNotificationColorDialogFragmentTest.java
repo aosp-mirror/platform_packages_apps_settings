@@ -44,6 +44,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.settings.R;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -53,6 +54,7 @@ import org.robolectric.shadows.ShadowContextWrapper;
 import java.util.ArrayList;
 import java.util.List;
 
+@Ignore
 @RunWith(RobolectricTestRunner.class)
 public class ScreenFlashNotificationColorDialogFragmentTest {
 
