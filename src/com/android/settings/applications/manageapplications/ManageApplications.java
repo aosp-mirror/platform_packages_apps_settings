@@ -880,7 +880,7 @@ public class ManageApplications extends InstrumentedFragment
         mOptionsMenu.findItem(R.id.delete_all_app_clones)
                 .setVisible(mListType == LIST_TYPE_CLONED_APPS  && DeviceConfig.getBoolean(
                         DeviceConfig.NAMESPACE_APP_CLONING, PROPERTY_DELETE_ALL_APP_CLONES_ENABLED,
-                false) && Utils.getCloneUserId(getContext()) != -1);
+                true) && Utils.getCloneUserId(getContext()) != -1);
     }
 
     @Override
