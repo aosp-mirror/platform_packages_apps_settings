@@ -20,6 +20,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
+import android.hardware.input.KeyboardLayout;
 import android.os.Bundle;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodSubtype;
@@ -31,28 +32,50 @@ public class NewKeyboardLayoutPickerContent extends DashboardFragment {
 
     private static final String TAG = "KeyboardLayoutPicker";
 
+    private InputManager mIm;
+    private int mUserId;
+    private InputDeviceIdentifier mIdentifier;
+    private InputMethodInfo mInputMethodInfo;
+    private InputMethodSubtype mInputMethodSubtype;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        InputManager inputManager = getContext().getSystemService(InputManager.class);
+        mIm = getContext().getSystemService(InputManager.class);
         Bundle arguments = getArguments();
         final CharSequence title = arguments.getCharSequence(NewKeyboardSettingsUtils.EXTRA_TITLE);
-        final String layout = arguments.getString(NewKeyboardSettingsUtils.EXTRA_KEYBOARD_LAYOUT);
-        final int userId = arguments.getInt(NewKeyboardSettingsUtils.EXTRA_USER_ID);
-        final InputDeviceIdentifier identifier =
+        mUserId = arguments.getInt(NewKeyboardSettingsUtils.EXTRA_USER_ID);
+        mIdentifier =
                 arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER);
-        final InputMethodInfo inputMethodInfo =
+        mInputMethodInfo =
                 arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_METHOD_INFO);
-        final InputMethodSubtype inputMethodSubtype =
+        mInputMethodSubtype =
                 arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_METHOD_SUBTYPE);
-        if (identifier == null
-                || NewKeyboardSettingsUtils.getInputDevice(inputManager, identifier) == null) {
+        if (mIdentifier == null
+                || NewKeyboardSettingsUtils.getInputDevice(mIm, mIdentifier) == null) {
             getActivity().finish();
             return;
         }
         getActivity().setTitle(title);
-        use(NewKeyboardLayoutPickerController.class).initialize(this /*parent*/, userId,
-                identifier, inputMethodInfo, inputMethodSubtype, layout);
+        use(NewKeyboardLayoutPickerController.class).initialize(this /*parent*/, mUserId,
+                mIdentifier, mInputMethodInfo, mInputMethodSubtype, getSelectedLayoutLabel());
+    }
+
+    private String getSelectedLayoutLabel() {
+        String label = getContext().getString(R.string.keyboard_default_layout);
+        String layout = NewKeyboardSettingsUtils.getKeyboardLayout(
+                mIm, mUserId, mIdentifier, mInputMethodInfo, mInputMethodSubtype);
+        KeyboardLayout[] keyboardLayouts = NewKeyboardSettingsUtils.getKeyboardLayouts(
+                mIm, mUserId, mIdentifier, mInputMethodInfo, mInputMethodSubtype);
+        if (layout != null) {
+            for (int i = 0; i < keyboardLayouts.length; i++) {
+                if (keyboardLayouts[i].getDescriptor().equals(layout)) {
+                    label = keyboardLayouts[i].getLabel();
+                    break;
+                }
+            }
+        }
+        return label;
     }
 
     @Override
