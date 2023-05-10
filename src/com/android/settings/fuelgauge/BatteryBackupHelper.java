@@ -24,7 +24,6 @@ import android.app.backup.BackupHelper;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
-import android.os.Build;
 import android.os.IDeviceIdleController;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
@@ -48,7 +47,6 @@ public final class BatteryBackupHelper implements BackupHelper {
     /** An inditifier for {@link BackupHelper}. */
     public static final String TAG = "BatteryBackupHelper";
     private static final String DEVICE_IDLE_SERVICE = "deviceidle";
-    private static final boolean DEBUG = Build.TYPE.equals("userdebug");
 
     static final String DELIMITER = ",";
     static final String DELIMITER_MODE = ":";
@@ -119,7 +117,7 @@ public final class BatteryBackupHelper implements BackupHelper {
             Log.e(TAG, "backupFullPowerList() failed", e);
             return null;
         }
-        // Ignores unexpected emptty result case.
+        // Ignores unexpected empty result case.
         if (allowlistedApps == null || allowlistedApps.length == 0) {
             Log.w(TAG, "no data found in the getFullPowerList()");
             return new ArrayList<>();
@@ -145,8 +143,7 @@ public final class BatteryBackupHelper implements BackupHelper {
         final AppOpsManager appOps = mContext.getSystemService(AppOpsManager.class);
         // Converts application into the AppUsageState.
         for (ApplicationInfo info : applications) {
-            final int mode = appOps.checkOpNoThrow(
-                    AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, info.uid, info.packageName);
+            final int mode = BatteryOptimizeUtils.getMode(appOps, info.uid, info.packageName);
             @BatteryOptimizeUtils.OptimizationMode
             final int optimizationMode = BatteryOptimizeUtils.getAppOptimizationMode(
                     mode, allowlistedApps.contains(info.packageName));
@@ -159,7 +156,7 @@ public final class BatteryBackupHelper implements BackupHelper {
             final String packageOptimizeMode =
                     info.packageName + DELIMITER_MODE + optimizationMode;
             builder.append(packageOptimizeMode + DELIMITER);
-            debugLog(packageOptimizeMode);
+            Log.d(TAG, "backupOptimizationMode: " + packageOptimizeMode);
             backupCount++;
         }
 
@@ -255,9 +252,8 @@ public final class BatteryBackupHelper implements BackupHelper {
     }
 
     private boolean isSystemOrDefaultApp(String packageName, int uid) {
-        final PowerAllowlistBackend powerAllowlistBackend = getPowerAllowlistBackend();
-        return powerAllowlistBackend.isSysAllowlisted(packageName)
-                || powerAllowlistBackend.isDefaultActiveApp(packageName, uid);
+        return BatteryOptimizeUtils.isSystemOrDefaultApp(
+                getPowerAllowlistBackend(), packageName, uid);
     }
 
     private ArraySet<ApplicationInfo> getInstalledApplications() {
@@ -265,10 +261,6 @@ public final class BatteryBackupHelper implements BackupHelper {
             return mTestApplicationInfoList;
         }
         return BatteryOptimizeUtils.getInstalledApplications(mContext, getIPackageManager());
-    }
-
-    private void debugLog(String debugContent) {
-        if (DEBUG) Log.d(TAG, debugContent);
     }
 
     private static void writeBackupData(
@@ -283,6 +275,6 @@ public final class BatteryBackupHelper implements BackupHelper {
     }
 
     private static boolean isOwner() {
-        return UserHandle.myUserId() == UserHandle.USER_OWNER;
+        return UserHandle.myUserId() == UserHandle.USER_SYSTEM;
     }
 }
