@@ -59,8 +59,10 @@ public class PrivacyDashboardFragment extends DashboardFragment {
                 SafetyCenterUtils.getEnterpriseOverrideStringForPrivacyEntries();
         for (int i = 0; i < privacyOverrideStrings.size(); i++) {
             EnterpriseOverrideString overrideString = privacyOverrideStrings.get(i);
-            replaceEnterpriseStringTitle(overrideString.getPreferenceKey(),
-                    overrideString.getOverrideKey(), overrideString.getResource());
+            replaceEnterpriseStringTitle(
+                    overrideString.getPreferenceKey(),
+                    overrideString.getOverrideKey(),
+                    overrideString.getResource());
         }
     }
 
@@ -93,7 +95,9 @@ public class PrivacyDashboardFragment extends DashboardFragment {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
-                    if (SafetyCenterManagerWrapper.get().isEnabled(context)) {
+                    // NOTE: This check likely should be moved to the super method. This is done
+                    // here to avoid potentially undesired side effects for existing implementors.
+                    if (!isPageSearchEnabled(context)) {
                         return null;
                     }
                     return super.getXmlResourcesToIndex(context, enabled);
@@ -119,6 +123,11 @@ public class PrivacyDashboardFragment extends DashboardFragment {
                     // Otherwise, we should hide the search result.
                     keys.add(KEY_NOTIFICATION_WORK_PROFILE_NOTIFICATIONS);
                     return keys;
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return !SafetyCenterManagerWrapper.get().isEnabled(context);
                 }
             };
 }
