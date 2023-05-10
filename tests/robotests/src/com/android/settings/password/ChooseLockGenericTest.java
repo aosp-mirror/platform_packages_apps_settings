@@ -81,6 +81,7 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowPersistentDataBlockManager;
@@ -100,6 +101,8 @@ public class ChooseLockGenericTest {
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+
+    private ActivityController<ChooseLockGeneric> mActivityController;
     private FakeFeatureFactory mFakeFeatureFactory;
     private ChooseLockGenericFragment mFragment;
     private ChooseLockGeneric mActivity;
@@ -111,7 +114,8 @@ public class ChooseLockGenericTest {
     @Before
     public void setUp() {
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
-        mActivity = Robolectric.buildActivity(ChooseLockGeneric.class)
+        mActivityController = Robolectric.buildActivity(ChooseLockGeneric.class);
+        mActivity = mActivityController
                 .create()
                 .start()
                 .postCreate(null)
@@ -314,6 +318,20 @@ public class ChooseLockGenericTest {
         mFragment.onActivityResult(
                 ChooseLockGenericFragment.SKIP_FINGERPRINT_REQUEST, Activity.RESULT_OK,
                 null /* data */);
+
+        assertThat(mActivity.isFinishing()).isTrue();
+    }
+
+    @Test
+    public void securedScreenLock_notChangingConfig_notWaitForConfirmation_onStopFinishSelf() {
+        Intent intent = new Intent().putExtra(
+                LockPatternUtils.PASSWORD_TYPE_KEY, DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
+        intent.putExtra("waiting_for_confirmation", true);
+        initActivity(intent);
+
+        mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
+        mActivityController.configurationChange();
+        mActivityController.stop();
 
         assertThat(mActivity.isFinishing()).isTrue();
     }
@@ -530,10 +548,10 @@ public class ChooseLockGenericTest {
         final Intent intent = new Intent().putExtra(EXTRA_KEY_FOR_BIOMETRICS, true);
         initActivity(intent);
 
-        final String supportFingerprint = mActivity.getResources().getString(
-                R.string.security_settings_fingerprint);
-        final String supportFace = mActivity.getResources().getString(
-                R.string.keywords_face_settings);
+        final String supportFingerprint = capitalize(mActivity.getResources().getString(
+                R.string.security_settings_fingerprint));
+        final String supportFace = capitalize(mActivity.getResources().getString(
+                R.string.keywords_face_settings));
         String pinTitle =
                 (String) mFragment.findPreference(ScreenLockType.PIN.preferenceKey).getTitle();
         String patternTitle =
@@ -593,5 +611,9 @@ public class ChooseLockGenericTest {
         mActivity = Robolectric.buildActivity(ChooseLockGeneric.InternalActivity.class, intent)
                 .create().start().postCreate(null).resume().get();
         mActivity.getSupportFragmentManager().beginTransaction().add(mFragment, null).commitNow();
+    }
+
+    private static String capitalize(final String input) {
+        return Character.toUpperCase(input.charAt(0)) + input.substring(1);
     }
 }
