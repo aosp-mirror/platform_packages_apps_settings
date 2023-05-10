@@ -41,11 +41,10 @@ public class DevelopmentMemtagPageTest {
         mContext = RuntimeEnvironment.application;
     }
 
-    @Ignore
     @Test
-    public void getMetricsCategory_isSETTINGS_MEMTAG_CATEGORY() {
+    public void getMetricsCategory_isSETTINGS_DEVELOPMENT_MEMTAG_CATEGORY() {
         assertThat(mMemtagPage.getMetricsCategory())
-                .isEqualTo(SettingsEnums.SETTINGS_MEMTAG_CATEGORY);
+                .isEqualTo(SettingsEnums.SETTINGS_DEVELOPMENT_MEMTAG_CATEGORY);
     }
 
     @Test
