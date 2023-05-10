@@ -533,16 +533,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                     boolean isChecked = pref.isChecked();
 
                     if (isChecked) {
-                        if (togglePackageNameEnabled(packageName)) {
-                            // Enable all prefs.
-                            if (mPrefs.containsKey(packageName)) {
-                                mPrefs.get(packageName).setChecked(true);
-                            }
-                        } else {
-                            // Since we failed to show toggle the switch back to off.
-                            pref.setChecked(false);
-
+                        if (mEnabledPackageNames.size() >= MAX_SELECTABLE_PROVIDERS) {
                             // Show the error if too many enabled.
+                            pref.setChecked(false);
                             final DialogFragment fragment = newErrorDialogFragment();
 
                             if (fragment == null || mFragmentManager == null) {
@@ -550,8 +543,15 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                             }
 
                             fragment.show(mFragmentManager, ErrorDialogFragment.TAG);
+                            return true;
                         }
 
+                        togglePackageNameEnabled(packageName);
+
+                        // Enable all prefs.
+                        if (mPrefs.containsKey(packageName)) {
+                            mPrefs.get(packageName).setChecked(true);
+                        }
                         return true;
                     } else {
                         // If we are disabling the last enabled provider then show a warning.
