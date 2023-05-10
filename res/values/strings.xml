@@ -991,6 +991,8 @@
     <string name="setup_fingerprint_enroll_enrolling_skip_title">Skip fingerprint setup?</string>
     <!-- Content of the dialog shown when the user tries to skip fingerprint setup, asking them to confirm the action [CHAR LIMIT=NONE] -->
     <string name="setup_fingerprint_enroll_enrolling_skip_message">You\u2019ve chosen to use your fingerprint as one way to unlock your phone. If you skip now, you\u2019ll need to set this up later. Setup takes only a minute or so.</string>
+    <!-- Title of dialog shown when the user tries to skip for setup screen lock, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
+    <string name="lock_screen_skip_setup_title">Skip setup for <xliff:g id="options" example="PIN • Face • Fingerprint">%s</xliff:g>?</string>
     <!-- Title of dialog shown when the user tries to skip setting up a PIN, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
     <string name="lock_screen_pin_skip_title">Skip PIN setup?</string>
     <!-- Title of dialog shown when the user tries to skip setting up a PIN, warning them of potential consequences of not doing so [CHAR LIMIT=90]-->
@@ -1088,7 +1090,7 @@
     <!-- Action label for the issue card in Safety Center when no screen lock is set [CHAR LIMIT=50] -->
     <string name="no_screen_lock_issue_action_label">Set screen lock</string>
     <!-- Title of the notification shown by Safety Center when no screen lock is set. This notification is shown in the notification shade, outside of the main Safety Center UI. [CHAR LIMIT=50] -->
-    <string name="no_screen_lock_issue_notification_title">Device has no screen lock</string>
+    <string name="no_screen_lock_issue_notification_title">Set a screen lock</string>
     <!-- Summary/body text of the notification shown by Safety Center when no screen lock is set. This notification is shown in the notification shade, outside of the main Safety Center UI. [CHAR LIMIT=NONE] -->
     <string name="no_screen_lock_issue_notification_text">For added security, set a PIN, pattern, or password for this device.</string>
 
@@ -2275,6 +2277,8 @@
     <string name="accessibility_category_work">Work profile accounts - <xliff:g id="managed_by" example="Managed by Corporate application">%s</xliff:g></string>
     <!-- Content description for personal profile accounts group [CHAR LIMIT=NONE] -->
     <string name="accessibility_category_personal">Personal profile accounts</string>
+    <!-- Content description for personal clone accounts group [CHAR LIMIT=NONE] -->
+    <string name="accessibility_category_clone">Clone profile accounts</string>
     <!-- Content description for work profile details page title [CHAR LIMIT=NONE] -->
     <string name="accessibility_work_account_title">Work account - <xliff:g id="managed_by" example="Email provider">%s</xliff:g></string>
     <!-- Content description for personal profile details page title [CHAR LIMIT=NONE] -->
@@ -12086,7 +12090,4 @@
 
     <!-- Warning message when we try to dock an app not supporting multiple instances split into multiple sides [CHAR LIMIT=NONE] -->
     <string name="dock_multi_instances_not_supported_text">"This app can only be opened in 1 window"</string>
-
-    <!-- [CHAR LIMIT=30] Label used to open Note Task -->
-    <string name="note_task_shortcut_label">Note shortcut</string>
 </resources>
