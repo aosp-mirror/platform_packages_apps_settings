@@ -83,8 +83,7 @@ public class BatteryOptimizeUtils {
         mAppOpsManager = context.getSystemService(AppOpsManager.class);
         mBatteryUtils = BatteryUtils.getInstance(context);
         mPowerAllowListBackend = PowerAllowlistBackend.getInstance(context);
-        mMode = mAppOpsManager
-                .checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, mUid, mPackageName);
+        mMode = getMode(mAppOpsManager, mUid, mPackageName);
         mAllowListed = mPowerAllowListBackend.isAllowlisted(mPackageName, mUid);
     }
 
@@ -204,7 +203,12 @@ public class BatteryOptimizeUtils {
         return mPackageName == null ? UNKNOWN_PACKAGE : mPackageName;
     }
 
-    private static boolean isSystemOrDefaultApp(
+    static int getMode(AppOpsManager appOpsManager, int uid, String packageName) {
+        return appOpsManager.checkOpNoThrow(
+                AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, uid, packageName);
+    }
+
+    static boolean isSystemOrDefaultApp(
             PowerAllowlistBackend powerAllowlistBackend, String packageName, int uid) {
         return powerAllowlistBackend.isSysAllowlisted(packageName)
                 || powerAllowlistBackend.isDefaultActiveApp(packageName, uid);
