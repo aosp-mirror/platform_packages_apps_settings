@@ -75,7 +75,7 @@ public class ActiveUnlockStatusUtils {
      * used.
      */
     public boolean useUnlockIntentLayout() {
-        return isAvailable() && UNLOCK_INTENT_LAYOUT.equals(getFlagState());
+        return isAvailable();
     }
 
     /**
@@ -84,7 +84,7 @@ public class ActiveUnlockStatusUtils {
      * should be used.
      */
     public boolean useBiometricFailureLayout() {
-        return isAvailable() && BIOMETRIC_FAILURE_LAYOUT.equals(getFlagState());
+        return false;
     }
 
     /**
@@ -155,10 +155,6 @@ public class ActiveUnlockStatusUtils {
     int getAvailability() {
         if (!Utils.hasFingerprintHardware(mContext) && !Utils.hasFaceHardware(mContext)) {
             return BasePreferenceController.UNSUPPORTED_ON_DEVICE;
-        }
-        if (!UNLOCK_INTENT_LAYOUT.equals(getFlagState())
-                  && !BIOMETRIC_FAILURE_LAYOUT.equals(getFlagState())) {
-            return BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
         }
         if (getAuthority() != null && getIntent() != null) {
             return BasePreferenceController.AVAILABLE;
@@ -265,6 +261,30 @@ public class ActiveUnlockStatusUtils {
             return R.string.security_settings_activeunlock_require_fingerprint_setup_title;
         } else {
             return 0;
+        }
+    }
+
+    /**
+     * Returns the preference title of how to use biometrics when active unlock is enabled.
+     */
+    public String getUseBiometricTitleForActiveUnlock() {
+        final boolean faceAllowed = Utils.hasFaceHardware(mContext);
+        final boolean fingerprintAllowed = Utils.hasFingerprintHardware(mContext);
+
+        return mContext.getString(getUseBiometricTitleRes(faceAllowed, fingerprintAllowed));
+    }
+
+    @StringRes
+    private static int getUseBiometricTitleRes(
+            boolean isFaceAllowed, boolean isFingerprintAllowed) {
+        if (isFaceAllowed && isFingerprintAllowed) {
+            return R.string.biometric_settings_use_face_fingerprint_or_watch_for;
+        } else if (isFaceAllowed) {
+            return R.string.biometric_settings_use_face_or_watch_for;
+        } else if (isFingerprintAllowed) {
+            return R.string.biometric_settings_use_fingerprint_or_watch_for;
+        } else {
+            return R.string.biometric_settings_use_watch_for;
         }
     }
 

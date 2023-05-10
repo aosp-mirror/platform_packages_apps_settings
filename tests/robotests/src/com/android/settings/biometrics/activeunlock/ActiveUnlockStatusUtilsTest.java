@@ -129,15 +129,6 @@ public class ActiveUnlockStatusUtilsTest {
     }
 
     @Test
-    public void configIsBiometricFailure_useBiometricFailureLayoutIsTrue() {
-        ActiveUnlockTestUtils.enable(
-                mApplicationContext, ActiveUnlockStatusUtils.BIOMETRIC_FAILURE_LAYOUT);
-
-        assertThat(mActiveUnlockStatusUtils.useUnlockIntentLayout()).isFalse();
-        assertThat(mActiveUnlockStatusUtils.useBiometricFailureLayout()).isTrue();
-    }
-
-    @Test
     public void getTitle_faceEnabled_returnsFacePreferenceTitle() {
         when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
@@ -155,30 +146,6 @@ public class ActiveUnlockStatusUtilsTest {
         assertThat(mActiveUnlockStatusUtils.getTitleForActiveUnlock())
                 .isEqualTo(mApplicationContext.getString(
                         R.string.security_settings_fingerprint_preference_title));
-    }
-
-    @Test
-    public void getIntro_faceEnabled_returnsIntroWithFace() {
-        ActiveUnlockTestUtils.enable(
-                mApplicationContext, ActiveUnlockStatusUtils.BIOMETRIC_FAILURE_LAYOUT);
-        when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
-        when(mFaceManager.isHardwareDetected()).thenReturn(true);
-
-        assertThat(mActiveUnlockStatusUtils.getIntroForActiveUnlock())
-                .isEqualTo(mApplicationContext.getString(
-                        R.string.biometric_settings_intro_with_face));
-    }
-
-    @Test
-    public void getIntro_fingerprintEnabled_returnsIntroWithFingerprint() {
-        ActiveUnlockTestUtils.enable(
-                mApplicationContext, ActiveUnlockStatusUtils.BIOMETRIC_FAILURE_LAYOUT);
-        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
-        when(mFaceManager.isHardwareDetected()).thenReturn(false);
-
-        assertThat(mActiveUnlockStatusUtils.getIntroForActiveUnlock())
-                .isEqualTo(mApplicationContext.getString(
-                        R.string.biometric_settings_intro_with_fingerprint));
     }
 
     @Test
@@ -221,5 +188,45 @@ public class ActiveUnlockStatusUtilsTest {
         assertThat(mActiveUnlockStatusUtils.getUnlockDeviceSummaryForActiveUnlock())
                 .isEqualTo(mApplicationContext.getString(
                         R.string.biometric_settings_use_face_or_watch_preference_summary));
+    }
+
+    @Test
+    public void getUseBiometricTitle_faceAndFingerprintEnabled_returnsFaceFingerprintOrWatch() {
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+
+        assertThat(mActiveUnlockStatusUtils.getUseBiometricTitleForActiveUnlock())
+                .isEqualTo(mApplicationContext.getString(
+                        R.string.biometric_settings_use_face_fingerprint_or_watch_for));
+    }
+
+    @Test
+    public void getUseBiometricTitle_fingerprintEnabled_returnsFingerprintOrWatch() {
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(false);
+
+        assertThat(mActiveUnlockStatusUtils.getUseBiometricTitleForActiveUnlock())
+                .isEqualTo(mApplicationContext.getString(
+                        R.string.biometric_settings_use_fingerprint_or_watch_for));
+    }
+
+    @Test
+    public void getUseBiometricTitle_faceEnabled_returnsFaceOrWatch() {
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+
+        assertThat(mActiveUnlockStatusUtils.getUseBiometricTitleForActiveUnlock())
+                .isEqualTo(mApplicationContext.getString(
+                        R.string.biometric_settings_use_face_or_watch_for));
+    }
+
+    @Test
+    public void getUseBiometricTitle_withoutFaceOrFingerprint_returnsWatch() {
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
+        when(mFaceManager.isHardwareDetected()).thenReturn(false);
+
+        assertThat(mActiveUnlockStatusUtils.getUseBiometricTitleForActiveUnlock())
+                .isEqualTo(mApplicationContext.getString(
+                        R.string.biometric_settings_use_watch_for));
     }
 }
