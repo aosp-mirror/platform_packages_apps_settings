@@ -311,7 +311,7 @@
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Aktifkan widget"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Dinonaktifkan oleh admin"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Kunci layar saat kepercayaan hilang"</string>
-    <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"Jika diaktifkan, perangkat akan terkunci saat perangkat dipercaya terakhir kehilangan kepercayaan"</string>
+    <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"Jika diaktifkan, perangkat akan terkunci saat perangkat tepercaya terakhir kehilangan kepercayaan"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Tidak ada"</string>
     <string name="owner_info_settings_status" msgid="7488764871758677862">"<xliff:g id="COUNT_0">%1$d</xliff:g> / <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"Misalnya, Android Joko."</string>
@@ -913,12 +913,12 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aplikasi aktif</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> aplikasi aktif</item>
     </plurals>
-    <string name="manage_trust_agents" msgid="6410149930029992356">"Perangkat dipercaya"</string>
+    <string name="manage_trust_agents" msgid="6410149930029992356">"Perangkat tepercaya"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"Untuk menggunakannya, setel kunci layar terlebih dahulu"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"Tidak ada"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> perangkat dipercaya aktif</item>
-      <item quantity="one">1 perangkat dipercaya aktif</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> perangkat tepercaya aktif</item>
+      <item quantity="one">1 perangkat tepercaya aktif</item>
     </plurals>
     <string name="bluetooth_quick_toggle_title" msgid="5955341060378240781">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5257744297562880017">"Hidupkan Bluetooth"</string>
@@ -1882,7 +1882,7 @@
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"SIM hasil download tidak dapat dihapus karena terjadi error.\n\nMulai ulang perangkat Anda, lalu coba lagi."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Hapus semua data (reset ke setelan pabrik)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Hapus semua data"</string>
-    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Tindakan ini akan menghapus semua data dari "<b>"penyimpanan internal"</b>" tablet Anda, termasuk:\n\n"<li>"Akun Google Anda"</li>\n<li>"Data sistem dan aplikasi serta setelan"</li>\n<li>"Aplikasi yang didownload"</li></string>
+    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Tindakan ini akan menghapus semua data dari "<b>"penyimpanan internal"</b>" tablet Anda, termasuk:\n\n"<li>"Akun Google Anda"</li>\n<li>"Data dan setelan sistem dan aplikasi"</li>\n<li>"Aplikasi yang didownload"</li></string>
     <string name="main_clear_desc" product="default" msgid="6984348811887162647">"Tindakan ini akan menghapus semua data dari "<b>"penyimpanan internal"</b>" ponsel Anda, termasuk:\n\n"<li>"Akun Google Anda"</li>\n<li>"Data sistem dan aplikasi serta setelan"</li>\n<li>"Aplikasi yang didownload"</li></string>
     <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"Saat ini Anda login ke akun berikut:\n"</string>
     <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"Ada pengguna lain yang aktif di perangkat ini.\n"</string>
@@ -3246,7 +3246,7 @@
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"Nonaktifkan &amp; uninstal"</string>
     <string name="select_device_admin_msg" msgid="5501360309040114486">"Aplikasi admin perangkat"</string>
     <string name="no_device_admins" msgid="8888779888103079854">"Tidak ada aplikasi admin yang tersedia"</string>
-    <string name="no_trust_agents" msgid="8659098725864191600">"Tidak tersedia perangkat dipercaya"</string>
+    <string name="no_trust_agents" msgid="8659098725864191600">"Tidak tersedia perangkat tepercaya"</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"Aktifkan aplikasi admin perangkat?"</string>
     <string name="add_device_admin" msgid="6252128813507932519">"Aktifkan aplikasi admin perangkat ini"</string>
     <string name="device_admin_add_title" msgid="6087481040932322289">"Admin perangkat"</string>
@@ -3736,7 +3736,7 @@
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Aplikasi &amp; notifikasi"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Aplikasi baru-baru ini, aplikasi default"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"Akses notifikasi tidak tersedia untuk aplikasi di profil kerja"</string>
-    <string name="account_dashboard_title" msgid="8228773251948253914">"Sandi dan akun"</string>
+    <string name="account_dashboard_title" msgid="8228773251948253914">"Sandi &amp; akun"</string>
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Sandi tersimpan, isi otomatis, akun yang disinkronkan"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Aplikasi default"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Bahasa, gestur, waktu, pencadangan"</string>
@@ -3868,7 +3868,7 @@
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Nada tombol nomor"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Suara penguncian layar"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Getaran &amp; suara pengisian daya"</string>
-    <string name="docking_sounds_title" msgid="5341616179210436159">"Memasang suara di dok"</string>
+    <string name="docking_sounds_title" msgid="5341616179210436159">"Suara saat ditaruh di dok"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Suara sentuhan"</string>
     <string name="vibrate_icon_title" msgid="1281100105045362530">"Selalu tampilkan ikon saat dalam mode getar"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Dok pemutaran speaker"</string>
@@ -4688,7 +4688,7 @@
     <string name="usb_use_MIDI_desc" msgid="6464135515868405143">"Menggunakan perangkat ini sebagai MIDI"</string>
     <string name="usb_use" msgid="6783183432648438528">"Gunakan USB untuk"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"Konfigurasi USB default"</string>
-    <string name="usb_default_info" msgid="167172599497085266">"Ketika perangkat lain terhubung dan ponsel Anda terbuka kuncinya, setelan ini akan berlaku. Hanya hubungkan ke perangkat yang dipercaya."</string>
+    <string name="usb_default_info" msgid="167172599497085266">"Ketika perangkat lain terhubung dan ponsel Anda terbuka kuncinya, setelan ini akan berlaku. Hanya hubungkan ke perangkat tepercaya."</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Opsi daya"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Opsi transfer file"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
@@ -5122,9 +5122,9 @@
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Gunakan pintasan untuk"</string>
     <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"Tarik setengah layar bagian atas ke bawah agar lebih mudah dijangkau dengan satu tangan"</string>
     <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"Cara menggunakan mode satu tangan"</b>\n" • Pastikan navigasi gestur dipilih di setelan navigasi sistem\n • Geser ke bawah di dekat tepi bawah layar"</string>
-    <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Tarik layar agar berada dalam jangkauan"</string>
+    <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Menarik layar agar berada dalam jangkauan"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Bagian atas layar akan dapat dijangkau ibu jari Anda."</string>
-    <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Tampilkan notifikasi"</string>
+    <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Menampilkan notifikasi"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"Notifikasi dan setelan akan muncul."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Untuk memeriksa waktu, notifikasi, dan info lainnya, ketuk dua kali layar Anda."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Angkat untuk memeriksa ponsel"</string>
