@@ -156,7 +156,7 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
                 final ServiceInfo serviceInfo = resolveInfo.serviceInfo;
 
                 // If there are multiple autofill services then pick the first one.
-                if (mKey.startsWith(serviceInfo.packageName)) {
+                if (mKey != null && mKey.startsWith(serviceInfo.packageName)) {
                     final String settingsActivity;
                     try {
                         settingsActivity =
