@@ -106,6 +106,7 @@ public class DataUsageListTest {
         ReflectionHelpers.setField(mDataUsageList, "services", mNetworkServices);
         doReturn(mLoaderManager).when(mDataUsageList).getLoaderManager();
         mDataUsageList.mLoadingViewController = mock(LoadingViewController.class);
+        doNothing().when(mDataUsageList).updateSubscriptionInfoEntity();
     }
 
     @Test
