@@ -48,8 +48,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.service.persistentdata.PersistentDataBlockManager;
-import android.text.BidiFormatter;
-import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.util.EventLog;
 import android.util.Log;
@@ -77,9 +75,9 @@ import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollBase;
+import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.safetycenter.LockScreenSafetySource;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settingslib.RestrictedPreference;
@@ -142,9 +140,6 @@ public class ChooseLockGeneric extends SettingsActivity {
          * ChooseLockGeneric can be relaunched with the same extras.
          */
         public static final String EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS = "choose_lock_generic_extras";
-
-        /** The character ' • ' to separate the setup choose options */
-        public static final String SEPARATOR = " \u2022 ";
 
         @VisibleForTesting
         static final int CONFIRM_EXISTING_REQUEST = 100;
@@ -662,32 +657,20 @@ public class ChooseLockGeneric extends SettingsActivity {
 
         @VisibleForTesting
         String getBiometricsPreferenceTitle(@NonNull ScreenLockType secureType) {
-            SpannableStringBuilder ssb = new SpannableStringBuilder();
-            BidiFormatter bidi = BidiFormatter.getInstance();
+            final boolean hasFingerprint = Utils.hasFingerprintHardware(getContext());
+            final boolean hasFace = Utils.hasFaceHardware(getContext());
+            final boolean isSuw = WizardManagerHelper.isAnySetupWizard(getIntent());
+            final boolean isFaceSupported =
+                    hasFace && (!isSuw || BiometricUtils.isFaceSupportedInSuw(getContext()));
+
             // Assume the flow is "Screen Lock" + "Face" + "Fingerprint"
             if (mController != null) {
-                ssb.append(bidi.unicodeWrap(mController.getTitle(secureType)));
+                return BiometricUtils.getCombinedScreenLockOptions(getContext(),
+                        mController.getTitle(secureType), hasFingerprint, isFaceSupported);
             } else {
                 Log.e(TAG, "ChooseLockGenericController is null!");
+                return getResources().getString(R.string.error_title);
             }
-
-            if (mFaceManager != null && mFaceManager.isHardwareDetected() && isFaceSupported()) {
-                ssb.append(bidi.unicodeWrap(SEPARATOR));
-                ssb.append(bidi.unicodeWrap(
-                        getResources().getString(R.string.keywords_face_settings)));
-            }
-            if (mFingerprintManager != null && mFingerprintManager.isHardwareDetected()) {
-                ssb.append(bidi.unicodeWrap(SEPARATOR));
-                ssb.append(bidi.unicodeWrap(
-                        getResources().getString(R.string.security_settings_fingerprint)));
-            }
-            return ssb.toString();
-        }
-
-        private boolean isFaceSupported() {
-            return FeatureFactory.getFactory(getContext().getApplicationContext())
-                    .getFaceFeatureProvider()
-                    .isSetupWizardSupported(getContext().getApplicationContext());
         }
 
         private void setPreferenceTitle(ScreenLockType lock, @StringRes int title) {
