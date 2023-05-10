@@ -281,12 +281,18 @@ public class AppLaunchSettings extends AppInfoBase implements
 
         final List<String> verifiedLinksList = IntentPickerUtils.getLinksList(
                 mDomainVerificationManager, mPackageName, DOMAIN_STATE_VERIFIED);
-        return new AlertDialog.Builder(mContext)
+        AlertDialog dialog = new AlertDialog.Builder(mContext)
                 .setCustomTitle(titleView)
                 .setCancelable(true)
                 .setItems(verifiedLinksList.toArray(new String[0]), /* listener= */ null)
                 .setPositiveButton(R.string.app_launch_dialog_ok, /* listener= */ null)
                 .create();
+        if (dialog.getListView() != null) {
+            dialog.getListView().setTextDirection(View.TEXT_DIRECTION_LOCALE);
+        } else {
+            Log.w(TAG, "createVerifiedLinksDialog: dialog.getListView() is null, please check it.");
+        }
+        return dialog;
     }
 
     @VisibleForTesting

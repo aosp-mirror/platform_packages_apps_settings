@@ -97,7 +97,7 @@ public class SpellCheckerPreferenceControllerTest {
 
         mController.updateState(mPreference);
         assertThat(mPreference.getSummary())
-                .isEqualTo(mAppContext.getString(R.string.off));
+                .isEqualTo(mAppContext.getString(R.string.switch_off_text));
     }
 
     @Test

@@ -17,7 +17,7 @@
 package com.android.settings.development;
 
 import static com.android.settings.development.BluetoothLeAudioPreferenceController
-        .LE_AUDIO_DYNAMIC_ENABLED_PROPERTY;
+        .LE_AUDIO_SWITCHER_DISABLED_PROPERTY;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -75,8 +75,8 @@ public class BluetoothLeAudioPreferenceControllerTest {
 
         mController.onRebootDialogConfirmed();
         final boolean status = SystemProperties
-                .getBoolean(LE_AUDIO_DYNAMIC_ENABLED_PROPERTY, false);
-        assertThat(status).isTrue();
+                .getBoolean(LE_AUDIO_SWITCHER_DISABLED_PROPERTY, true);
+        assertThat(status).isFalse();
     }
 
     @Test
@@ -87,8 +87,8 @@ public class BluetoothLeAudioPreferenceControllerTest {
 
         mController.onRebootDialogConfirmed();
         final boolean status = SystemProperties
-                .getBoolean(LE_AUDIO_DYNAMIC_ENABLED_PROPERTY, false);
-        assertThat(status).isFalse();
+                .getBoolean(LE_AUDIO_SWITCHER_DISABLED_PROPERTY, true);
+        assertThat(status).isTrue();
     }
 
     @Test
@@ -99,7 +99,7 @@ public class BluetoothLeAudioPreferenceControllerTest {
 
         mController.onRebootDialogCanceled();
         final boolean status = SystemProperties
-                .getBoolean(LE_AUDIO_DYNAMIC_ENABLED_PROPERTY, false);
-        assertThat(status).isFalse();
+                .getBoolean(LE_AUDIO_SWITCHER_DISABLED_PROPERTY, true);
+        assertThat(status).isTrue();
     }
 }

@@ -18,18 +18,11 @@ package com.android.settings.notification.app;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
@@ -98,14 +91,13 @@ public class AppNotificationSettings extends NotificationSettings {
                 mBackend));
         mControllers.add(new DndPreferenceController(context, mBackend));
         mControllers.add(new AppLinkPreferenceController(context));
-        mControllers.add(new DescriptionPreferenceController(context));
-        mControllers.add(new NotificationsOffPreferenceController(context));
-        mControllers.add(new DeletedChannelsPreferenceController(context, mBackend));
         mControllers.add(new ChannelListPreferenceController(context, mBackend));
         mControllers.add(new AppConversationListPreferenceController(context, mBackend));
         mControllers.add(new InvalidConversationInfoPreferenceController(context, mBackend));
         mControllers.add(new InvalidConversationPreferenceController(context, mBackend));
         mControllers.add(new BubbleSummaryPreferenceController(context, mBackend));
+        mControllers.add(new NotificationsOffPreferenceController(context));
+        mControllers.add(new DeletedChannelsPreferenceController(context, mBackend));
         return new ArrayList<>(mControllers);
     }
 }

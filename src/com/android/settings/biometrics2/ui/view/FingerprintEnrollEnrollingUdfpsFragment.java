@@ -105,7 +105,7 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
     };
     private final Observer<EnrollmentStatusMessage> mHelpMessageObserver = helpMessage -> {
         if (helpMessage != null) {
-            onEnrollmentHelp(helpMessage.getStr());
+            onEnrollmentHelp(helpMessage);
         }
     };
     private final Observer<EnrollmentStatusMessage> mErrorMessageObserver = errorMessage -> {
@@ -198,7 +198,12 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
         super.onStart();
         startEnrollment();
         updateProgress(false /* animate */, mProgressViewModel.getProgressLiveData().getValue());
-        updateTitleAndDescription();
+        final EnrollmentStatusMessage msg = mProgressViewModel.getHelpMessageLiveData().getValue();
+        if (msg != null) {
+            onEnrollmentHelp(msg);
+        } else {
+            updateTitleAndDescription();
+        }
     }
 
     @Override
@@ -484,13 +489,13 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
 
     }
 
-    private void onEnrollmentHelp(CharSequence helpString) {
-        if (!TextUtils.isEmpty(helpString)) {
-            showError(helpString);
+    private void onEnrollmentHelp(@NonNull EnrollmentStatusMessage helpMessage) {
+        final CharSequence helpStr = helpMessage.getStr();
+        if (!TextUtils.isEmpty(helpStr)) {
+            showError(helpStr);
             mUdfpsEnrollView.onEnrollmentHelp();
         }
     }
-
     private void onEnrollmentError(@NonNull EnrollmentStatusMessage errorMessage) {
         removeEnrollmentObservers();
 

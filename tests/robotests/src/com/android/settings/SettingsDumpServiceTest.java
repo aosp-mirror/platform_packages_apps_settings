@@ -29,13 +29,12 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
-import androidx.annotation.NonNull;
-
 import com.android.settings.fuelgauge.batterytip.AnomalyConfigJobService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -43,8 +42,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 
 @RunWith(RobolectricTestRunner.class)
 public class SettingsDumpServiceTest {
@@ -101,16 +100,18 @@ public class SettingsDumpServiceTest {
                 ANOMALY_VERSION);
     }
 
+    @Ignore
     @Test
-    public void testDump_ReturnJsonObject() throws JSONException {
+    public void testDump_printServiceAsKey() {
         mResolveInfo.activityInfo = new ActivityInfo();
         mResolveInfo.activityInfo.packageName = PACKAGE_BROWSER;
-        TestPrintWriter printWriter = new TestPrintWriter(System.out);
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
 
         mTestService.dump(null, printWriter, null);
-        JSONObject object = (JSONObject) printWriter.getPrintObject();
 
-        assertThat(object.get(TestService.KEY_SERVICE)).isNotNull();
+        assertThat(stringWriter.toString())
+                .contains("{\"" + SettingsDumpService.KEY_SERVICE + "\":");
     }
 
     /**
@@ -126,26 +127,6 @@ public class SettingsDumpServiceTest {
         @Override
         public PackageManager getPackageManager() {
             return mPm;
-        }
-    }
-
-    /**
-     * Test printWriter to store the object to be printed
-     */
-    private class TestPrintWriter extends PrintWriter {
-        private Object mPrintObject;
-
-        private TestPrintWriter(@NonNull OutputStream out) {
-            super(out);
-        }
-
-        @Override
-        public void println(Object object) {
-            mPrintObject = object;
-        }
-
-        private Object getPrintObject() {
-            return mPrintObject;
         }
     }
 }

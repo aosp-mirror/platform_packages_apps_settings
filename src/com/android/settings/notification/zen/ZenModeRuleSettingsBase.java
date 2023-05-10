@@ -48,6 +48,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
     protected boolean mDisableListeners;
     protected AutomaticZenRule mRule;
     protected String mId;
+    private boolean mRuleRemoved;
 
     protected ZenAutomaticRuleHeaderPreferenceController mHeader;
     protected ZenRuleButtonsPreferenceController mActionButtons;
@@ -162,6 +163,10 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
     }
 
     private boolean refreshRuleOrFinish() {
+        if (mRuleRemoved && getActivity() != null) {
+            getActivity().finish();
+            return true;
+        }
         mRule = getZenRule();
         if (DEBUG) Log.d(TAG, "mRule=" + mRule);
         mHeader.setRule(mRule);
@@ -195,5 +200,9 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
             mCustomBehaviorPreference.setSummary(R.string.zen_mode_custom_behavior_summary);
         }
         mDisableListeners = false;
+    }
+
+    void onRuleRemoved() {
+        mRuleRemoved = true;
     }
 }

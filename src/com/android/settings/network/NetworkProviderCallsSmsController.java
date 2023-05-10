@@ -21,6 +21,7 @@ import static androidx.lifecycle.Lifecycle.Event;
 import android.content.Context;
 import android.os.UserManager;
 import android.telephony.ServiceState;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
@@ -37,14 +38,13 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
-import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
 
 import java.util.List;
 
 public class NetworkProviderCallsSmsController extends AbstractPreferenceController implements
-        LifecycleObserver, MobileNetworkRepository.MobileNetworkCallback {
+        LifecycleObserver, MobileNetworkRepository.MobileNetworkCallback,
+        DefaultSubscriptionReceiver.DefaultSubscriptionListener {
 
     private static final String TAG = "NetworkProviderCallsSmsController";
     private static final String KEY = "calls_and_sms";
@@ -57,6 +57,9 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
     private LifecycleOwner mLifecycleOwner;
     private MobileNetworkRepository mMobileNetworkRepository;
     private List<SubscriptionInfoEntity> mSubInfoEntityList;
+    private int mDefaultVoiceSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+    private int mDefaultSmsSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+    private DefaultSubscriptionReceiver mDataSubscriptionChangedReceiver;
 
     /**
      * The summary text and click behavior of the "Calls & SMS" item on the
@@ -71,7 +74,8 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
         mIsRtlMode = context.getResources().getConfiguration().getLayoutDirection()
                 == View.LAYOUT_DIRECTION_RTL;
         mLifecycleOwner = lifecycleOwner;
-        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
+        mDataSubscriptionChangedReceiver = new DefaultSubscriptionReceiver(context, this);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -79,13 +83,18 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
 
     @OnLifecycleEvent(Event.ON_RESUME)
     public void onResume() {
-        mMobileNetworkRepository.addRegister(mLifecycleOwner);
-        update();
+        mMobileNetworkRepository.addRegister(mLifecycleOwner, this,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        mMobileNetworkRepository.updateEntity();
+        mDataSubscriptionChangedReceiver.registerReceiver();
+        mDefaultVoiceSubId = SubscriptionManager.getDefaultVoiceSubscriptionId();
+        mDefaultSmsSubId = SubscriptionManager.getDefaultSmsSubscriptionId();
     }
 
     @OnLifecycleEvent(Event.ON_PAUSE)
     public void onPause() {
-        mMobileNetworkRepository.removeRegister();
+        mMobileNetworkRepository.removeRegister(this);
+        mDataSubscriptionChangedReceiver.unRegisterReceiver();
     }
 
     @Override
@@ -101,7 +110,9 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
             return setSummaryResId(R.string.calls_sms_no_sim);
         } else {
             final StringBuilder summary = new StringBuilder();
-            for (SubscriptionInfoEntity subInfo : list) {
+            SubscriptionInfoEntity[] entityArray = list.toArray(
+                    new SubscriptionInfoEntity[0]);
+            for (SubscriptionInfoEntity subInfo : entityArray) {
                 int subsSize = list.size();
                 int subId = Integer.parseInt(subInfo.subId);
                 final CharSequence displayName = subInfo.uniqueName;
@@ -125,7 +136,7 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
                             .append(")");
                 }
                 // Do not add ", " for the last subscription.
-                if (!subInfo.equals(list.get(list.size() - 1))) {
+                if (list.size() > 0 && !subInfo.equals(list.get(list.size() - 1))) {
                     summary.append(", ");
                 }
 
@@ -141,16 +152,16 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
     protected CharSequence getPreferredStatus(SubscriptionInfoEntity subInfo, int subsSize,
             int subId) {
         String status = "";
-        boolean isDataPreferred = subInfo.isDefaultVoiceSubscription;
-        boolean isSmsPreferred = subInfo.isDefaultSmsSubscription;
+        boolean isCallPreferred = subInfo.getSubId() == getDefaultVoiceSubscriptionId();
+        boolean isSmsPreferred = subInfo.getSubId() == getDefaultSmsSubscriptionId();
 
         if (!subInfo.isValidSubscription || !isInService(subId)) {
             status = setSummaryResId(subsSize > 1 ? R.string.calls_sms_unavailable :
                     R.string.calls_sms_temp_unavailable);
         } else {
-            if (isDataPreferred && isSmsPreferred) {
+            if (isCallPreferred && isSmsPreferred) {
                 status = setSummaryResId(R.string.calls_sms_preferred);
-            } else if (isDataPreferred) {
+            } else if (isCallPreferred) {
                 status = setSummaryResId(R.string.calls_sms_calls_preferred);
             } else if (isSmsPreferred) {
                 status = setSummaryResId(R.string.calls_sms_sms_preferred);
@@ -220,6 +231,28 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
     @Override
     public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> activeSubInfoList) {
         mSubInfoEntityList = activeSubInfoList;
+        update();
+    }
+
+    @VisibleForTesting
+    protected int getDefaultVoiceSubscriptionId() {
+        return mDefaultVoiceSubId;
+    }
+
+    @VisibleForTesting
+    protected int getDefaultSmsSubscriptionId() {
+        return mDefaultSmsSubId;
+    }
+
+    @Override
+    public void onDefaultVoiceChanged(int defaultVoiceSubId) {
+        mDefaultVoiceSubId = defaultVoiceSubId;
+        update();
+    }
+
+    @Override
+    public void onDefaultSmsChanged(int defaultSmsSubId) {
+        mDefaultSmsSubId = defaultSmsSubId;
         update();
     }
 }

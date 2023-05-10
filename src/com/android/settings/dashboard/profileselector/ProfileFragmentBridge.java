@@ -22,6 +22,7 @@ import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
+import com.android.settings.inputmethod.NewKeyboardLayoutEnabledLocalesFragment;
 import com.android.settings.location.LocationServices;
 
 import java.util.Map;
@@ -49,5 +50,7 @@ public class ProfileFragmentBridge {
                 ProfileSelectStorageFragment.class.getName());
         FRAGMENT_MAP.put(AvailableVirtualKeyboardFragment.class.getName(),
                 ProfileSelectKeyboardFragment.class.getName());
+        FRAGMENT_MAP.put(NewKeyboardLayoutEnabledLocalesFragment.class.getName(),
+                ProfileSelectPhysicalKeyboardFragment.class.getName());
     }
 }

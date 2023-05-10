@@ -29,11 +29,14 @@ import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_NONE;
 import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment.KEY_LOCK_SETTINGS_FOOTER;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CALLER_APP_NAME;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_DEVICE_PASSWORD_REQUIREMENT_ONLY;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_IS_CALLING_APP_ADMIN;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static org.robolectric.RuntimeEnvironment.application;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -43,6 +46,8 @@ import android.app.admin.PasswordMetrics;
 import android.app.admin.PasswordPolicy;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.face.FaceManager;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.provider.Settings.Global;
 
@@ -55,6 +60,7 @@ import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.search.SearchFeatureProvider;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowStorageManager;
@@ -65,10 +71,15 @@ import com.android.settingslib.widget.FooterPreference;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowPersistentDataBlockManager;
@@ -86,13 +97,36 @@ import org.robolectric.shadows.ShadowPersistentDataBlockManager;
 @Ignore("b/179136903: Tests failed with collapsing toolbar, plan to figure out root cause later.")
 public class ChooseLockGenericTest {
 
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+
+    private ActivityController<ChooseLockGeneric> mActivityController;
+    private FakeFeatureFactory mFakeFeatureFactory;
     private ChooseLockGenericFragment mFragment;
     private ChooseLockGeneric mActivity;
+    @Mock
+    private FingerprintManager mFingerprintManager;
+    @Mock
+    private FaceManager mFaceManager;
 
     @Before
     public void setUp() {
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
+        mActivityController = Robolectric.buildActivity(ChooseLockGeneric.class);
+        mActivity = mActivityController
+                .create()
+                .start()
+                .postCreate(null)
+                .resume()
+                .get();
+
         Global.putInt(application.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
         mFragment = new ChooseLockGenericFragment();
+
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFakeFeatureFactory.mFaceFeatureProvider.isSetupWizardSupported(any())).thenReturn(
+                false);
     }
 
     @After
@@ -280,6 +314,20 @@ public class ChooseLockGenericTest {
         mFragment.onActivityResult(
                 ChooseLockGenericFragment.SKIP_FINGERPRINT_REQUEST, Activity.RESULT_OK,
                 null /* data */);
+
+        assertThat(mActivity.isFinishing()).isTrue();
+    }
+
+    @Test
+    public void securedScreenLock_notChangingConfig_notWaitForConfirmation_onStopFinishSelf() {
+        Intent intent = new Intent().putExtra(
+                LockPatternUtils.PASSWORD_TYPE_KEY, DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
+        intent.putExtra("waiting_for_confirmation", true);
+        initActivity(intent);
+
+        mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
+        mActivityController.configurationChange();
+        mActivityController.stop();
 
         assertThat(mActivity.isFinishing()).isTrue();
     }
@@ -490,13 +538,51 @@ public class ChooseLockGenericTest {
                         new PasswordMetrics(CREDENTIAL_TYPE_NONE));
     }
 
+    @Test
+    public void updatePreferenceText_supportBiometrics_showFaceAndFingerprint() {
+        ShadowLockPatternUtils.setRequiredPasswordComplexity(PASSWORD_COMPLEXITY_LOW);
+        final PasswordPolicy policy = new PasswordPolicy();
+        policy.quality = PASSWORD_QUALITY_ALPHABETIC;
+        ShadowLockPatternUtils.setRequestedProfilePasswordMetrics(policy.getMinMetrics());
+
+        final Intent intent = new Intent().putExtra(EXTRA_KEY_FOR_BIOMETRICS, true);
+        initActivity(intent);
+
+        final Intent passwordIntent = mFragment.getLockPatternIntent();
+        assertThat(passwordIntent.getIntExtra(ChooseLockPassword.EXTRA_KEY_MIN_COMPLEXITY,
+                PASSWORD_COMPLEXITY_NONE)).isEqualTo(PASSWORD_COMPLEXITY_LOW);
+
+        final String supportFingerprint = capitalize(mActivity.getResources().getString(
+                R.string.security_settings_fingerprint));
+        final String supportFace = capitalize(mActivity.getResources().getString(
+                R.string.keywords_face_settings));
+
+        assertThat(mFragment.getBiometricsPreferenceTitle(ScreenLockType.PIN)).contains(
+                supportFingerprint);
+        assertThat(mFragment.getBiometricsPreferenceTitle(ScreenLockType.PIN)).contains(
+                supportFace);
+        assertThat(mFragment.getBiometricsPreferenceTitle(ScreenLockType.PATTERN)).contains(
+                supportFingerprint);
+        assertThat(mFragment.getBiometricsPreferenceTitle(ScreenLockType.PATTERN)).contains(
+                supportFace);
+        assertThat(mFragment.getBiometricsPreferenceTitle(ScreenLockType.PASSWORD)).contains(
+                supportFingerprint);
+        assertThat(mFragment.getBiometricsPreferenceTitle(ScreenLockType.PASSWORD)).contains(
+                supportFace);
+    }
+
     private void initActivity(@Nullable Intent intent) {
         if (intent == null) {
             intent = new Intent();
         }
         intent.putExtra(ChooseLockGeneric.CONFIRM_CREDENTIALS, false);
+        // TODO(b/275023433) This presents the activity from being made 'visible` is workaround
         mActivity = Robolectric.buildActivity(ChooseLockGeneric.InternalActivity.class, intent)
-                .setup().get();
+                .create().start().postCreate(null).resume().get();
         mActivity.getSupportFragmentManager().beginTransaction().add(mFragment, null).commitNow();
+    }
+
+    private static String capitalize(final String input) {
+        return Character.toUpperCase(input.charAt(0)) + input.substring(1);
     }
 }

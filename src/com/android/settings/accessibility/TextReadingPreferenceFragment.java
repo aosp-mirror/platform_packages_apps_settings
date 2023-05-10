@@ -16,11 +16,13 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.AccessibilityShortcutController.FONT_SIZE_COMPONENT_NAME;
 import static com.android.settings.accessibility.TextReadingResetController.ResetStateListener;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -156,12 +158,43 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
         controllers.add(mPreviewController);
 
         final PreviewSizeSeekBarController fontSizeController = new PreviewSizeSeekBarController(
-                context, FONT_SIZE_KEY, fontSizeData);
+                context, FONT_SIZE_KEY, fontSizeData) {
+            @Override
+            ComponentName getTileComponentName() {
+                return FONT_SIZE_COMPONENT_NAME;
+            }
+
+            @Override
+            CharSequence getTileTooltipContent() {
+                return context.getText(
+                        R.string.accessibility_font_scaling_auto_added_qs_tooltip_content);
+            }
+        };
+        final String[] labelArray = new String[fontSizeData.getValues().size()];
+        for (int i = 0; i < labelArray.length; i++) {
+            labelArray[i] =
+                    context.getResources().getString(
+                            com.android.settingslib.R.string.font_scale_percentage,
+                            (int) (fontSizeData.getValues().get(i) * 100)
+                    );
+        }
+        fontSizeController.setProgressStateLabels(labelArray);
         fontSizeController.setInteractionListener(mPreviewController);
+        getSettingsLifecycle().addObserver(fontSizeController);
         controllers.add(fontSizeController);
 
         final PreviewSizeSeekBarController displaySizeController = new PreviewSizeSeekBarController(
-                context, DISPLAY_SIZE_KEY, displaySizeData);
+                context, DISPLAY_SIZE_KEY, displaySizeData) {
+            @Override
+            ComponentName getTileComponentName() {
+                return null;
+            }
+
+            @Override
+            CharSequence getTileTooltipContent() {
+                return null;
+            }
+        };
         displaySizeController.setInteractionListener(mPreviewController);
         controllers.add(displaySizeController);
 

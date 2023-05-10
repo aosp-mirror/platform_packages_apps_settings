@@ -92,8 +92,11 @@ class SpaLogData(val id: String, val event: LogEvent,
         return null
     }
 
-    fun getAction(): Int {
-        return event.action
+    fun getAction(): Int = when (event) {
+        LogEvent.PAGE_ENTER -> SettingsEnums.PAGE_VISIBLE
+        LogEvent.PAGE_LEAVE -> SettingsEnums.PAGE_HIDE
+        LogEvent.ENTRY_CLICK -> SettingsEnums.ACTION_SETTINGS_TILE_CLICK
+        LogEvent.ENTRY_SWITCH -> SettingsEnums.ACTION_SETTINGS_PREFERENCE_CHANGE
     }
 
     //TODO(b/253979024): Will be implemented in subsequent CLs.
@@ -120,8 +123,8 @@ class SpaLogData(val id: String, val event: LogEvent,
         return ElapsedTimeUtils.getElapsedTime(System.currentTimeMillis())
     }
 
-    //TODO(b/253979024): Will be implemented in subsequent CLs.
-    private fun getPageIdByEntryId(id: String): String {
+    //TODO(b/253979024): Will be implemented in subsequent CLs. Remove @Suppress when done.
+    private fun getPageIdByEntryId(@Suppress("UNUSED_PARAMETER") id: String): String {
         return ""
     }
 }

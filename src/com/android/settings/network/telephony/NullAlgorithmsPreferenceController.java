@@ -59,7 +59,7 @@ public class NullAlgorithmsPreferenceController extends TelephonyTogglePreferenc
         }
 
         if (!DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_CELLULAR_SECURITY,
-                TelephonyManager.PROPERTY_ENABLE_NULL_CIPHER_TOGGLE, false)) {
+                TelephonyManager.PROPERTY_ENABLE_NULL_CIPHER_TOGGLE, true)) {
             Log.i(LOG_TAG, "Null cipher toggle is disabled by DeviceConfig");
             return CONDITIONALLY_UNAVAILABLE;
         }

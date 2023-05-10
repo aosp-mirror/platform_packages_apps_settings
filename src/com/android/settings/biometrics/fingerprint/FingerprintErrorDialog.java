@@ -18,13 +18,10 @@ package com.android.settings.biometrics.fingerprint;
 
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_TIMEOUT;
-import static com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling.KEY_STATE_CANCELED;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.hardware.biometrics.BiometricConstants;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
@@ -50,7 +47,6 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
         final CharSequence errorString = getArguments().getCharSequence(KEY_ERROR_MSG);
         final CharSequence errorTitle = getArguments().getCharSequence(KEY_ERROR_TITLE);
         final int errMsgId = getArguments().getInt(KEY_ERROR_ID);
-        final boolean canAssumeUdfps = getArguments().getBoolean(KEY_UDFPS, false);
         final boolean wasTimeout = errMsgId == BiometricConstants.BIOMETRIC_ERROR_TIMEOUT;
 
         builder.setTitle(errorTitle)
@@ -58,53 +54,22 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
                 .setCancelable(false)
                 .setPositiveButton(
                         R.string.security_settings_fingerprint_enroll_dialog_ok,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                final Activity activity = getActivity();
-                                if (wasTimeout && !canAssumeUdfps) {
-                                    activity.setResult(RESULT_TIMEOUT);
-                                } else {
-                                    activity.setResult(RESULT_FINISHED);
-                                }
-                                activity.finish();
+                        (dialog, which) -> {
+                            dialog.dismiss();
+                            final Activity activity = getActivity();
+                            if (wasTimeout) {
+                                activity.setResult(RESULT_TIMEOUT);
+                            } else {
+                                activity.setResult(RESULT_FINISHED);
                             }
+                            activity.finish();
                         });
-        if (wasTimeout && canAssumeUdfps) {
-            builder.setPositiveButton(
-                            R.string.security_settings_fingerprint_enroll_dialog_try_again,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                    final Activity activity = getActivity();
-                                    final Intent intent = activity.getIntent();
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                                    intent.putExtra(KEY_STATE_CANCELED, false);
-                                    activity.startActivity(intent);
-                                    activity.finish();
-                                }
-                            })
-                    .setNegativeButton(
-                            R.string.security_settings_fingerprint_enroll_dialog_ok,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                    final Activity activity = getActivity();
-                                    activity.setResult(RESULT_TIMEOUT);
-                                    activity.finish();
-                                }
-                            });
-        }
         final AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(false);
         return dialog;
     }
 
-    public static void showErrorDialog(BiometricEnrollBase host, int errMsgId,
-            boolean canAssumeUdfps) {
+    public static void showErrorDialog(BiometricEnrollBase host, int errMsgId) {
         if (host.isFinishing()) {
             return;
         }
@@ -114,12 +79,7 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
         }
         CharSequence errMsg = host.getText(getErrorMessage(errMsgId));
         final CharSequence errTitle = host.getText(getErrorTitle(errMsgId));
-        if (!canAssumeUdfps
-                && errMsgId == BiometricConstants.BIOMETRIC_ERROR_TIMEOUT) {
-            errMsg = host.getText(getErrorMessage(BiometricConstants.BIOMETRIC_ERROR_CANCELED));
-        }
-        final FingerprintErrorDialog dialog = newInstance(errMsg, errTitle,
-                errMsgId, canAssumeUdfps);
+        final FingerprintErrorDialog dialog = newInstance(errMsg, errTitle, errMsgId);
         dialog.show(fragmentManager, FingerprintErrorDialog.class.getName());
     }
 
@@ -154,13 +114,12 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
     }
 
     private static FingerprintErrorDialog newInstance(CharSequence msg, CharSequence title,
-            int msgId, boolean canAssumeUdfps) {
+            int msgId) {
         final FingerprintErrorDialog dialog = new FingerprintErrorDialog();
         final Bundle args = new Bundle();
         args.putCharSequence(KEY_ERROR_MSG, msg);
         args.putCharSequence(KEY_ERROR_TITLE, title);
         args.putInt(KEY_ERROR_ID, msgId);
-        args.putBoolean(KEY_UDFPS, canAssumeUdfps);
         dialog.setArguments(args);
         return dialog;
     }

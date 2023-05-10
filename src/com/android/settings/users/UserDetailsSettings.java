@@ -41,6 +41,7 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.utils.CustomDialogHelper;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -74,6 +75,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private static final int DIALOG_CONFIRM_RESET_GUEST = 4;
     private static final int DIALOG_CONFIRM_RESET_GUEST_AND_SWITCH_USER = 5;
     private static final int DIALOG_CONFIRM_REVOKE_ADMIN = 6;
+    private static final int DIALOG_CONFIRM_GRANT_ADMIN = 7;
 
     /** Whether to enable the app_copying fragment. */
     private static final boolean SHOW_APP_COPYING_PREF = false;
@@ -188,11 +190,12 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 mMetricsFeatureProvider.action(getActivity(),
                         SettingsEnums.ACTION_REVOKE_ADMIN_FROM_SETTINGS);
                 showDialog(DIALOG_CONFIRM_REVOKE_ADMIN);
-                return false;
+            } else {
+                mMetricsFeatureProvider.action(getActivity(),
+                        SettingsEnums.ACTION_GRANT_ADMIN_FROM_SETTINGS);
+                showDialog(DIALOG_CONFIRM_GRANT_ADMIN);
             }
-            mMetricsFeatureProvider.action(getActivity(),
-                    SettingsEnums.ACTION_GRANT_ADMIN_FROM_SETTINGS);
-            updateUserAdminStatus(true);
+            return false;
         }
         return true;
     }
@@ -208,6 +211,8 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 return SettingsEnums.DIALOG_USER_ENABLE_CALLING_AND_SMS;
             case DIALOG_CONFIRM_REVOKE_ADMIN:
                 return SettingsEnums.DIALOG_REVOKE_USER_ADMIN;
+            case DIALOG_CONFIRM_GRANT_ADMIN:
+                return SettingsEnums.DIALOG_GRANT_USER_ADMIN;
             case DIALOG_SETUP_USER:
                 return SettingsEnums.DIALOG_USER_SETUP;
             default:
@@ -252,10 +257,52 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                         (dialog, which) -> switchUser());
                 }
             case DIALOG_CONFIRM_REVOKE_ADMIN:
-                return UserDialogs.createConfirmRevokeAdmin(getActivity(),
-                        (dialog, which) -> updateUserAdminStatus(false));
+                return createRevokeAdminDialog(getContext());
+            case DIALOG_CONFIRM_GRANT_ADMIN:
+                return createGrantAdminDialog(getContext());
         }
         throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
+    }
+
+    /**
+     * Creates dialog to confirm revoking admin rights.
+     * @return created confirmation dialog
+     */
+    private Dialog createRevokeAdminDialog(Context context) {
+        CustomDialogHelper dialogHelper = new CustomDialogHelper(context);
+        dialogHelper.setIcon(
+                context.getDrawable(com.android.settingslib.R.drawable.ic_admin_panel_settings));
+        dialogHelper.setTitle(R.string.user_revoke_admin_confirm_title);
+        dialogHelper.setMessage(R.string.user_revoke_admin_confirm_message);
+        dialogHelper.setPositiveButton(R.string.remove, view -> {
+            updateUserAdminStatus(false);
+            dialogHelper.getDialog().dismiss();
+        });
+        dialogHelper.setBackButton(R.string.cancel, view -> {
+            dialogHelper.getDialog().dismiss();
+        });
+        return dialogHelper.getDialog();
+    }
+
+    /**
+     * Creates dialog to confirm granting admin rights.
+     * @return created confirmation dialog
+     */
+    private Dialog createGrantAdminDialog(Context context) {
+        CustomDialogHelper dialogHelper = new CustomDialogHelper(context);
+        dialogHelper.setIcon(
+                context.getDrawable(com.android.settingslib.R.drawable.ic_admin_panel_settings));
+        dialogHelper.setTitle(com.android.settingslib.R.string.user_grant_admin_title);
+        dialogHelper.setMessage(com.android.settingslib.R.string.user_grant_admin_message);
+        dialogHelper.setPositiveButton(com.android.settingslib.R.string.user_grant_admin_button,
+                view -> {
+                    updateUserAdminStatus(true);
+                    dialogHelper.getDialog().dismiss();
+                });
+        dialogHelper.setBackButton(R.string.cancel, view -> {
+            dialogHelper.getDialog().dismiss();
+        });
+        return dialogHelper.getDialog();
     }
 
     /**

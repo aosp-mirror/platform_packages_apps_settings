@@ -274,7 +274,7 @@ public class ZenModeSettingsFooterPreferenceController extends AbstractZenModePr
         }
 
         private int getAllowRes(boolean allow) {
-            return allow ? R.string.on : R.string.off;
+            return allow ? R.string.zen_mode_sound_summary_on : R.string.switch_off_text;
         }
 
         @Override

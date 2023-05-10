@@ -37,22 +37,33 @@ public class RebootConfirmationDialogFragment extends InstrumentedDialogFragment
     private static final String TAG = "FreeformPrefRebootDlg";
 
     private final int mMessageId;
+    private final int mCancelButtonId;
     private final RebootConfirmationDialogHost mHost;
 
     /**
      * Show an instance of this dialog.
      */
     public static void show(Fragment fragment, int messageId, RebootConfirmationDialogHost host) {
+        show(fragment, messageId, R.string.reboot_dialog_reboot_later, host);
+    }
+
+    /**
+     * Show an instance of this dialog with cancel button string set as cancelButtonId
+     */
+    public static void show(Fragment fragment, int messageId,
+            int cancelButtonId, RebootConfirmationDialogHost host) {
         final FragmentManager manager = fragment.getActivity().getSupportFragmentManager();
         if (manager.findFragmentByTag(TAG) == null) {
             final RebootConfirmationDialogFragment dialog =
-                    new RebootConfirmationDialogFragment(messageId, host);
+                    new RebootConfirmationDialogFragment(messageId, cancelButtonId, host);
             dialog.show(manager, TAG);
         }
     }
 
-    private RebootConfirmationDialogFragment(int messageId, RebootConfirmationDialogHost host) {
+    private RebootConfirmationDialogFragment(int messageId,
+            int cancelButtonId, RebootConfirmationDialogHost host) {
         mMessageId = messageId;
+        mCancelButtonId = cancelButtonId;
         mHost = host;
     }
 
@@ -66,12 +77,16 @@ public class RebootConfirmationDialogFragment extends InstrumentedDialogFragment
         return new AlertDialog.Builder(getActivity())
                 .setMessage(mMessageId)
                 .setPositiveButton(R.string.reboot_dialog_reboot_now, this)
-                .setNegativeButton(R.string.reboot_dialog_reboot_later, null)
+                .setNegativeButton(mCancelButtonId, this)
                 .create();
     }
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        mHost.onRebootConfirmed();
+        if (which == DialogInterface.BUTTON_POSITIVE) {
+            mHost.onRebootConfirmed(getContext());
+        } else {
+            mHost.onRebootCancelled();
+        }
     }
 }

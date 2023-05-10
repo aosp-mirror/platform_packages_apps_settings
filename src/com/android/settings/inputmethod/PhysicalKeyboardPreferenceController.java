@@ -17,8 +17,10 @@
 package com.android.settings.inputmethod;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.input.InputManager;
 import android.icu.text.ListFormatter;
+import android.provider.Settings;
 
 import androidx.preference.Preference;
 
@@ -56,6 +58,19 @@ public class PhysicalKeyboardPreferenceController extends AbstractPreferenceCont
     public boolean isAvailable() {
         return !getKeyboards().isEmpty()
                 && mContext.getResources().getBoolean(R.bool.config_show_physical_keyboard_pref);
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (!getPreferenceKey().equals(preference.getKey())) {
+            return false;
+        }
+        Intent intent = new Intent(Settings.ACTION_HARD_KEYBOARD_SETTINGS);
+        intent.putExtra(
+                NewKeyboardSettingsUtils.EXTRA_INTENT_FROM,
+                "com.android.settings.inputmethod.PhysicalKeyboardPreferenceController");
+        mContext.startActivity(intent);
+        return true;
     }
 
     @Override

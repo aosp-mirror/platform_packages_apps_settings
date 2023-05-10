@@ -19,7 +19,6 @@ package com.android.settings.dream;
 import android.annotation.LayoutRes;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.VectorDrawable;
 import android.text.TextUtils;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
@@ -86,10 +85,6 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             final Drawable icon = item.isActive()
                     ? mContext.getDrawable(R.drawable.ic_dream_check_circle)
                     : item.getIcon().mutate();
-            if (icon instanceof VectorDrawable) {
-                icon.setTintList(
-                        mContext.getColorStateList(R.color.dream_card_icon_color_state_list));
-            }
             final int iconSize = mContext.getResources().getDimensionPixelSize(
                     R.dimen.dream_item_icon_size);
             icon.setBounds(0, 0, iconSize, iconSize);

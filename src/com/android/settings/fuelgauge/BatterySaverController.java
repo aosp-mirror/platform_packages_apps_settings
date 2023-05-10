@@ -97,7 +97,7 @@ public class BatterySaverController extends BasePreferenceController
     public CharSequence getSummary() {
         final boolean isPowerSaveOn = mPowerManager.isPowerSaveMode();
         if (isPowerSaveOn) {
-            return mContext.getString(R.string.on);
+            return mContext.getString(R.string.battery_saver_on_summary);
         }
 
         final ContentResolver resolver = mContext.getContentResolver();
@@ -109,7 +109,7 @@ public class BatterySaverController extends BasePreferenceController
             return percent != 0 ?
                     mContext.getString(R.string.battery_saver_off_scheduled_summary,
                             Utils.formatPercentage(percent)) :
-                    mContext.getString(R.string.off);
+                    mContext.getString(R.string.battery_saver_off_summary);
         } else {
             return mContext.getString(R.string.battery_saver_pref_auto_routine_summary);
         }

@@ -16,17 +16,34 @@
 
 package com.android.settings.password;
 
+import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_PASSWORD;
+import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_PATTERN;
+import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_PIN;
+
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
+import android.hardware.face.FaceManager;
+import android.hardware.fingerprint.FingerprintManager;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
@@ -38,11 +55,25 @@ import org.robolectric.shadows.ShadowApplication;
 @Config(shadows = {ShadowUtils.class, ShadowAlertDialog.class})
 public class SetupSkipDialogTest {
 
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Mock
+    private FingerprintManager mFingerprintManager;
+    @Mock
+    private FaceManager mFaceManager;
     private FragmentActivity mActivity;
+    private FakeFeatureFactory mFakeFeatureFactory;
 
     @Before
     public void setUp() {
-        mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        ShadowUtils.setFingerprintManager(mFingerprintManager);
+        ShadowUtils.setFaceManager(mFaceManager);
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
+        mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(FragmentActivity.class)).get();
+
+        when(mFakeFeatureFactory.mFaceFeatureProvider.isSetupWizardSupported(any())).thenReturn(
+                true);
     }
 
     private ShadowAlertDialog getShadowAlertDialog() {
@@ -53,10 +84,33 @@ public class SetupSkipDialogTest {
         return shadowAlertDialog;
     }
 
+    private String getSkipSetupTitle(int credentialType, boolean hasFingerprint,
+            boolean hasFace) {
+        final int screenLockResId;
+        switch (credentialType) {
+            case CREDENTIAL_TYPE_PATTERN:
+                screenLockResId = R.string.unlock_set_unlock_pattern_title;
+                break;
+            case CREDENTIAL_TYPE_PASSWORD:
+                screenLockResId = R.string.unlock_set_unlock_password_title;
+                break;
+            case CREDENTIAL_TYPE_PIN:
+            default:
+                screenLockResId = R.string.unlock_set_unlock_pin_title;
+                break;
+        }
+        return mActivity.getString(R.string.lock_screen_skip_setup_title,
+                BiometricUtils.getCombinedScreenLockOptions(mActivity,
+                        mActivity.getString(screenLockResId), hasFingerprint, hasFace));
+    }
+
     @Test
     public void frpMessages_areShownCorrectly_whenNotSupported() {
+        when(mFaceManager.isHardwareDetected()).thenReturn(false);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
+
         SetupSkipDialog setupSkipDialog =
-                SetupSkipDialog.newInstance(false, false, false, false, false, false);
+                SetupSkipDialog.newInstance(CREDENTIAL_TYPE_PIN, false, false, false, false, true);
         setupSkipDialog.show(mActivity.getSupportFragmentManager());
 
         ShadowAlertDialog shadowAlertDialog = getShadowAlertDialog();
@@ -68,8 +122,11 @@ public class SetupSkipDialogTest {
 
     @Test
     public void frpMessages_areShownCorrectly_whenSupported() {
+        when(mFaceManager.isHardwareDetected()).thenReturn(false);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
+
         SetupSkipDialog setupSkipDialog =
-                SetupSkipDialog.newInstance(true, false, false, false, false, false);
+                SetupSkipDialog.newInstance(CREDENTIAL_TYPE_PIN, true, false, false, false, true);
         setupSkipDialog.show(mActivity.getSupportFragmentManager());
 
         ShadowAlertDialog shadowAlertDialog = getShadowAlertDialog();
@@ -81,117 +138,175 @@ public class SetupSkipDialogTest {
 
     @Test
     public void dialogMessage_whenSkipPinSetupForFace_shouldShownCorrectly() {
-        SetupSkipDialog setupSkipDialog =
-                SetupSkipDialog.newInstance(true, false, false, false, true, false);
+        final boolean hasFace = true;
+        final boolean hasFingerprint = false;
+
+        when(mFaceManager.isHardwareDetected()).thenReturn(hasFace);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(hasFingerprint);
+
+        SetupSkipDialog setupSkipDialog = SetupSkipDialog.newInstance(CREDENTIAL_TYPE_PIN, false,
+                false, true, false, true);
         setupSkipDialog.show(mActivity.getSupportFragmentManager());
 
         ShadowAlertDialog shadowAlertDialog = getShadowAlertDialog();
         assertThat(shadowAlertDialog.getTitle().toString()).isEqualTo(
-                mActivity.getString(R.string.lock_screen_pin_skip_face_title));
+                getSkipSetupTitle(CREDENTIAL_TYPE_PIN, hasFingerprint, hasFace));
         assertThat(shadowAlertDialog.getMessage().toString()).isEqualTo(
                 mActivity.getString(R.string.lock_screen_pin_skip_face_message));
     }
 
     @Test
     public void dialogMessage_whenSkipPasswordSetupForFace_shouldShownCorrectly() {
-        SetupSkipDialog setupSkipDialog =
-                SetupSkipDialog.newInstance(true, false, true, false, true, false);
+        final boolean hasFace = true;
+        final boolean hasFingerprint = false;
+
+        when(mFaceManager.isHardwareDetected()).thenReturn(hasFace);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(hasFingerprint);
+
+        SetupSkipDialog setupSkipDialog = SetupSkipDialog.newInstance(CREDENTIAL_TYPE_PASSWORD,
+                false, hasFingerprint, hasFace, false, true);
         setupSkipDialog.show(mActivity.getSupportFragmentManager());
 
         ShadowAlertDialog shadowAlertDialog = getShadowAlertDialog();
         assertThat(shadowAlertDialog.getTitle().toString()).isEqualTo(
-                mActivity.getString(R.string.lock_screen_password_skip_face_title));
+                getSkipSetupTitle(CREDENTIAL_TYPE_PASSWORD, hasFingerprint, hasFace));
         assertThat(shadowAlertDialog.getMessage().toString()).isEqualTo(
                 mActivity.getString(R.string.lock_screen_password_skip_face_message));
     }
 
     @Test
     public void dialogMessage_whenSkipPatternSetupForFace_shouldShownCorrectly() {
+        final boolean hasFace = true;
+        final boolean hasFingerprint = false;
+
+        when(mFaceManager.isHardwareDetected()).thenReturn(hasFace);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(hasFingerprint);
+
         SetupSkipDialog setupSkipDialog =
-                SetupSkipDialog.newInstance(true, true, false, false, true, false);
+                SetupSkipDialog.newInstance(CREDENTIAL_TYPE_PATTERN, true, false, true, false,
+                        true);
         setupSkipDialog.show(mActivity.getSupportFragmentManager());
 
         ShadowAlertDialog shadowAlertDialog = getShadowAlertDialog();
         assertThat(shadowAlertDialog.getTitle().toString()).isEqualTo(
-                mActivity.getString(R.string.lock_screen_pattern_skip_face_title));
+                getSkipSetupTitle(CREDENTIAL_TYPE_PATTERN, hasFingerprint, hasFace));
         assertThat(shadowAlertDialog.getMessage().toString()).isEqualTo(
                 mActivity.getString(R.string.lock_screen_pattern_skip_face_message));
     }
 
     @Test
     public void dialogMessage_whenSkipPinSetupForFingerprint_shouldShownCorrectly() {
+        final boolean hasFace = false;
+        final boolean hasFingerprint = true;
+
+        when(mFaceManager.isHardwareDetected()).thenReturn(hasFace);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(hasFingerprint);
+
         SetupSkipDialog setupSkipDialog =
-                SetupSkipDialog.newInstance(true, false, false, true, false, false);
+                SetupSkipDialog.newInstance(CREDENTIAL_TYPE_PIN, true, true, false, false, true);
         setupSkipDialog.show(mActivity.getSupportFragmentManager());
 
         ShadowAlertDialog shadowAlertDialog = getShadowAlertDialog();
         assertThat(shadowAlertDialog.getTitle().toString()).isEqualTo(
-                mActivity.getString(R.string.lock_screen_pin_skip_fingerprint_title));
+                getSkipSetupTitle(CREDENTIAL_TYPE_PIN, hasFingerprint, hasFace));
         assertThat(shadowAlertDialog.getMessage().toString()).isEqualTo(
                 mActivity.getString(R.string.lock_screen_pin_skip_fingerprint_message));
     }
 
     @Test
     public void dialogMessage_whenSkipPasswordSetupForFingerprint_shouldShownCorrectly() {
+        final boolean hasFace = false;
+        final boolean hasFingerprint = true;
+
+        when(mFaceManager.isHardwareDetected()).thenReturn(hasFace);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(hasFingerprint);
+
         SetupSkipDialog setupSkipDialog =
-                SetupSkipDialog.newInstance(true, false, true, true, false, false);
+                SetupSkipDialog.newInstance(CREDENTIAL_TYPE_PASSWORD, true, true, false, false,
+                        true);
         setupSkipDialog.show(mActivity.getSupportFragmentManager());
 
         ShadowAlertDialog shadowAlertDialog = getShadowAlertDialog();
         assertThat(shadowAlertDialog.getTitle().toString()).isEqualTo(
-                mActivity.getString(R.string.lock_screen_password_skip_fingerprint_title));
+                getSkipSetupTitle(CREDENTIAL_TYPE_PASSWORD, hasFingerprint, hasFace));
         assertThat(shadowAlertDialog.getMessage().toString()).isEqualTo(
                 mActivity.getString(R.string.lock_screen_password_skip_fingerprint_message));
     }
 
     @Test
     public void dialogMessage_whenSkipPatternSetupForFingerprint_shouldShownCorrectly() {
-        SetupSkipDialog setupSkipDialog =
-                SetupSkipDialog.newInstance(true, true, false, true, false, false);
+        final boolean hasFace = false;
+        final boolean hasFingerprint = true;
+
+        when(mFaceManager.isHardwareDetected()).thenReturn(hasFace);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(hasFingerprint);
+
+        SetupSkipDialog setupSkipDialog = SetupSkipDialog.newInstance(CREDENTIAL_TYPE_PATTERN, true,
+                true, false, false, true);
         setupSkipDialog.show(mActivity.getSupportFragmentManager());
 
         ShadowAlertDialog shadowAlertDialog = getShadowAlertDialog();
         assertThat(shadowAlertDialog.getTitle().toString()).isEqualTo(
-                mActivity.getString(R.string.lock_screen_pattern_skip_fingerprint_title));
+                getSkipSetupTitle(CREDENTIAL_TYPE_PATTERN, hasFingerprint, hasFace));
         assertThat(shadowAlertDialog.getMessage().toString()).isEqualTo(
                 mActivity.getString(R.string.lock_screen_pattern_skip_fingerprint_message));
     }
 
     @Test
     public void dialogMessage_whenSkipPinSetupForBiometrics_shouldShownCorrectly() {
+        final boolean hasFace = true;
+        final boolean hasFingerprint = true;
+
+        when(mFaceManager.isHardwareDetected()).thenReturn(hasFace);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(hasFingerprint);
+
         SetupSkipDialog setupSkipDialog =
-                SetupSkipDialog.newInstance(true, false, false, false, false, true);
+                SetupSkipDialog.newInstance(CREDENTIAL_TYPE_PIN, true, false, false, true, true);
         setupSkipDialog.show(mActivity.getSupportFragmentManager());
 
         ShadowAlertDialog shadowAlertDialog = getShadowAlertDialog();
         assertThat(shadowAlertDialog.getTitle().toString()).isEqualTo(
-                mActivity.getString(R.string.lock_screen_pin_skip_biometrics_title));
+                getSkipSetupTitle(CREDENTIAL_TYPE_PIN, hasFingerprint, hasFace));
         assertThat(shadowAlertDialog.getMessage().toString()).isEqualTo(
                 mActivity.getString(R.string.lock_screen_pin_skip_biometrics_message));
     }
 
     @Test
     public void dialogMessage_whenSkipPasswordSetupForBiometrics_shouldShownCorrectly() {
+        final boolean hasFace = true;
+        final boolean hasFingerprint = true;
+
+        when(mFaceManager.isHardwareDetected()).thenReturn(hasFace);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(hasFingerprint);
+
         SetupSkipDialog setupSkipDialog =
-                SetupSkipDialog.newInstance(true, false, true, false, false, true);
+                SetupSkipDialog.newInstance(CREDENTIAL_TYPE_PASSWORD, true, false, false, true,
+                        true);
         setupSkipDialog.show(mActivity.getSupportFragmentManager());
 
         ShadowAlertDialog shadowAlertDialog = getShadowAlertDialog();
         assertThat(shadowAlertDialog.getTitle().toString()).isEqualTo(
-                mActivity.getString(R.string.lock_screen_password_skip_biometrics_title));
+                getSkipSetupTitle(CREDENTIAL_TYPE_PASSWORD, hasFingerprint, hasFace));
         assertThat(shadowAlertDialog.getMessage().toString()).isEqualTo(
                 mActivity.getString(R.string.lock_screen_password_skip_biometrics_message));
     }
 
     @Test
     public void dialogMessage_whenSkipPatternSetupForBiometrics_shouldShownCorrectly() {
+        final boolean hasFace = true;
+        final boolean hasFingerprint = true;
+
+        when(mFaceManager.isHardwareDetected()).thenReturn(hasFace);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(hasFingerprint);
+
         SetupSkipDialog setupSkipDialog =
-                SetupSkipDialog.newInstance(true, true, false, false, false, true);
+                SetupSkipDialog.newInstance(CREDENTIAL_TYPE_PATTERN, true, false, false, true,
+                        true);
         setupSkipDialog.show(mActivity.getSupportFragmentManager());
 
         ShadowAlertDialog shadowAlertDialog = getShadowAlertDialog();
         assertThat(shadowAlertDialog.getTitle().toString()).isEqualTo(
-                mActivity.getString(R.string.lock_screen_pattern_skip_biometrics_title));
+                getSkipSetupTitle(CREDENTIAL_TYPE_PATTERN, hasFingerprint, hasFace));
         assertThat(shadowAlertDialog.getMessage().toString()).isEqualTo(
                 mActivity.getString(R.string.lock_screen_pattern_skip_biometrics_message));
     }

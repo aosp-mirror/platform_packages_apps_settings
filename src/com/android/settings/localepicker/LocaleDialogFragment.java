@@ -37,6 +37,8 @@ import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
  * Create a dialog for system locale events.
@@ -51,20 +53,27 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
     static final String ARG_TARGET_LOCALE = "arg_target_locale";
     static final String ARG_RESULT_RECEIVER = "arg_result_receiver";
 
+    public static LocaleDialogFragment newInstance() {
+        return new LocaleDialogFragment();
+    }
+
     /**
      * Show dialog
      */
-    public static void show(
+    public void show(
             @NonNull RestrictedSettingsFragment fragment,
             int dialogType,
             LocaleStore.LocaleInfo localeInfo) {
+        if (!isAdded()) {
+            return;
+        }
         show(fragment, dialogType, localeInfo, null);
     }
 
     /**
      * Show dialog
      */
-    public static void show(
+    public void show(
             @NonNull RestrictedSettingsFragment fragment,
             int dialogType,
             LocaleStore.LocaleInfo localeInfo,
@@ -101,6 +110,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
                 R.layout.locale_dialog, null);
         setDialogTitle(viewGroup, dialogContent.mTitle);
         setDialogMessage(viewGroup, dialogContent.mMessage);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
                 .setView(viewGroup);
         if (!dialogContent.mPositiveButton.isEmpty()) {
@@ -109,7 +119,9 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
         if (!dialogContent.mNegativeButton.isEmpty()) {
             builder.setNegativeButton(dialogContent.mNegativeButton, controller);
         }
-        return builder.create();
+        AlertDialog alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        return alertDialog;
     }
 
     private static void setDialogTitle(View root, String content) {
@@ -133,6 +145,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
         private final int mDialogType;
         private final LocaleStore.LocaleInfo mLocaleInfo;
         private final ResultReceiver mResultReceiver;
+        private final MetricsFeatureProvider mMetricsFeatureProvider;
 
         LocaleDialogController(
                 @NonNull Context context, @NonNull LocaleDialogFragment dialogFragment) {
@@ -142,6 +155,8 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
             mLocaleInfo = (LocaleStore.LocaleInfo) arguments.getSerializable(
                     ARG_TARGET_LOCALE);
             mResultReceiver = (ResultReceiver) arguments.getParcelable(ARG_RESULT_RECEIVER);
+            mMetricsFeatureProvider = FeatureFactory.getFactory(
+                    mContext).getMetricsFeatureProvider();
         }
 
         LocaleDialogController(@NonNull LocaleDialogFragment dialogFragment) {
@@ -158,6 +173,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
                 } else if (which == DialogInterface.BUTTON_NEGATIVE) {
                     mResultReceiver.send(Activity.RESULT_CANCELED, bundle);
                 }
+                mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_CHANGE_LANGUAGE);
             }
         }
 

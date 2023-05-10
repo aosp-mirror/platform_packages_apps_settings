@@ -38,6 +38,7 @@ import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.app.LocaleStore;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.Before;
@@ -55,11 +56,13 @@ public class LocaleDialogFragmentTest {
 
     private Context mContext;
     private LocaleDialogFragment mDialogFragment;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() throws Exception {
         mContext = ApplicationProvider.getApplicationContext();
         mDialogFragment = new LocaleDialogFragment();
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
     }
 
     private void setArgument(
@@ -112,6 +115,8 @@ public class LocaleDialogFragmentTest {
         controller.onClick(null, DialogInterface.BUTTON_POSITIVE);
 
         verify(resultReceiver).send(eq(Activity.RESULT_OK), any());
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                mContext, SettingsEnums.ACTION_CHANGE_LANGUAGE, true);
     }
 
     @Test
@@ -124,6 +129,8 @@ public class LocaleDialogFragmentTest {
         controller.onClick(null, DialogInterface.BUTTON_NEGATIVE);
 
         verify(resultReceiver).send(eq(Activity.RESULT_CANCELED), any());
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                mContext, SettingsEnums.ACTION_CHANGE_LANGUAGE, false);
     }
 
     @Test

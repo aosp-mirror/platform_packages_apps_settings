@@ -130,7 +130,8 @@ public final class AccessibilityUtil {
     static CharSequence getSummary(Context context, String settingsSecureKey) {
         final boolean enabled = Settings.Secure.getInt(context.getContentResolver(),
                 settingsSecureKey, State.OFF) == State.ON;
-        final int resId = enabled ? R.string.on : R.string.off;
+        final int resId = enabled ? R.string.accessibility_feature_state_on
+                : R.string.accessibility_feature_state_off;
         return context.getResources().getText(resId);
     }
 

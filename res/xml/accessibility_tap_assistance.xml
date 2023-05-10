@@ -24,6 +24,7 @@
         android:entries="@array/long_press_timeout_selector_list_titles"
         android:entryValues="@array/long_press_timeout_selector_values"
         android:key="select_long_press_timeout_preference"
+        android:summary="%s"
         android:persistent="false"
         android:title="@string/accessibility_long_press_timeout_preference_title"
         settings:controller="com.android.settings.accessibility.SelectLongPressTimeoutPreferenceController"/>

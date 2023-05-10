@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -29,16 +30,21 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.Utils;
 import com.android.settingslib.utils.ThreadUtils;
 
 public class TopLevelBatteryPreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnStart, OnStop, BatteryPreferenceController {
 
-    @VisibleForTesting
-    protected boolean mIsBatteryPresent = true;
+    private static final String TAG = "TopLvBatteryPrefControl";
+
     @VisibleForTesting
     Preference mPreference;
+    @VisibleForTesting
+    protected boolean mIsBatteryPresent = true;
+
     private final BatteryBroadcastReceiver mBatteryBroadcastReceiver;
+
     private BatteryInfo mBatteryInfo;
     private BatteryStatusFeatureProvider mBatteryStatusFeatureProvider;
     private String mBatteryStatusLabel;
@@ -47,12 +53,16 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
         super(context, preferenceKey);
         mBatteryBroadcastReceiver = new BatteryBroadcastReceiver(mContext);
         mBatteryBroadcastReceiver.setBatteryChangedListener(type -> {
+            Log.d(TAG, "onBatteryChanged: type=" + type);
             if (type == BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_NOT_PRESENT) {
                 mIsBatteryPresent = false;
             }
             BatteryInfo.getBatteryInfo(mContext, info -> {
+                Log.d(TAG, "getBatteryInfo: " + info);
                 mBatteryInfo = info;
                 updateState(mPreference);
+                // Update the preference summary text to the latest state.
+                setSummaryAsync(info);
             }, true /* shortString */);
         });
 
@@ -100,16 +110,19 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
         if (info == null || context == null) {
             return null;
         }
+        Log.d(TAG, "getDashboardLabel: " + mBatteryStatusLabel + " batteryStatusUpdate="
+                + batteryStatusUpdate);
 
         if (batteryStatusUpdate) {
             setSummaryAsync(info);
         }
-
-        return (mBatteryStatusLabel == null) ? generateLabel(info) : mBatteryStatusLabel;
+        return mBatteryStatusLabel == null ? generateLabel(info) : mBatteryStatusLabel;
     }
 
     private void setSummaryAsync(BatteryInfo info) {
         ThreadUtils.postOnBackgroundThread(() -> {
+            // Return false if built-in status should be used, will use updateBatteryStatus()
+            // method to inject the customized battery status label.
             final boolean triggerBatteryStatusUpdate =
                     mBatteryStatusFeatureProvider.triggerBatteryStatusUpdate(this, info);
             ThreadUtils.postOnMainThread(() -> {
@@ -117,12 +130,15 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
                     mBatteryStatusLabel = null; // will generateLabel()
                 }
                 mPreference.setSummary(
-                        (mBatteryStatusLabel == null) ? generateLabel(info) : mBatteryStatusLabel);
+                        mBatteryStatusLabel == null ? generateLabel(info) : mBatteryStatusLabel);
             });
         });
     }
 
     private CharSequence generateLabel(BatteryInfo info) {
+        if (Utils.containsIncompatibleChargers(mContext, TAG)) {
+            return mContext.getString(R.string.battery_info_status_not_charging);
+        }
         if (!info.discharging && info.chargeLabel != null) {
             return info.chargeLabel;
         } else if (info.remainingLabel == null) {
@@ -137,16 +153,18 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
     /**
      * Callback which receives text for the label.
      */
+    @Override
     public void updateBatteryStatus(String label, BatteryInfo info) {
         mBatteryStatusLabel = label; // Null if adaptive charging is not active
-
-        if (mPreference != null) {
-            // Do not triggerBatteryStatusUpdate(), otherwise there will be an infinite loop
-            final CharSequence summary = getSummary(false /* batteryStatusUpdate */);
-            if (summary != null) {
-                mPreference.setSummary(summary);
-            }
+        if (mPreference == null) {
+            return;
         }
+        // Do not triggerBatteryStatusUpdate() here to cause infinite loop
+        final CharSequence summary = getSummary(false /* batteryStatusUpdate */);
+        if (summary != null) {
+            mPreference.setSummary(summary);
+        }
+        Log.d(TAG, "updateBatteryStatus: " + label + " summary: " + summary);
     }
 
     @VisibleForTesting

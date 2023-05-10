@@ -385,35 +385,19 @@ public class MobileNetworkUtilsTest {
     }
 
     @Test
-    public void isWifiCallingEnabled_hasPhoneAccountHandleAndHasActivityHandleIntent_returnTrue() {
-        buildPhoneAccountConfigureIntent(true);
-
-        assertTrue(MobileNetworkUtils.isWifiCallingEnabled(mContext, SUB_ID_1,
-                null, mPhoneAccountHandle));
-    }
-
-    @Test
-    public void isWifiCallingEnabled_hasPhoneAccountHandleAndNoActivityHandleIntent_returnFalse() {
-        buildPhoneAccountConfigureIntent(false);
-
-        assertFalse(MobileNetworkUtils.isWifiCallingEnabled(mContext, SUB_ID_1,
-                null, mPhoneAccountHandle));
-    }
-
-    @Test
-    public void isWifiCallingEnabled_noPhoneAccountHandleAndWifiCallingIsReady_returnTrue() {
+    public void isWifiCallingEnabled_wifiCallingIsReady_returnTrue() {
         setWifiCallingEnabled(true);
 
         assertTrue(MobileNetworkUtils.isWifiCallingEnabled(mContext, SUB_ID_1,
-                mMockQueryWfcState, null));
+                mMockQueryWfcState));
     }
 
     @Test
-    public void isWifiCallingEnabled_noPhoneAccountHandleAndWifiCallingNotReady_returnFalse() {
+    public void isWifiCallingEnabled_wifiCallingNotReady_returnFalse() {
         setWifiCallingEnabled(false);
 
         assertFalse(MobileNetworkUtils.isWifiCallingEnabled(mContext, SUB_ID_1,
-                mMockQueryWfcState, null));
+                mMockQueryWfcState));
     }
 
     private void setWifiCallingEnabled(boolean enabled){

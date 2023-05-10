@@ -16,7 +16,6 @@
 
 package com.android.settings.bluetooth;
 
-import static com.android.settings.bluetooth.BluetoothDeviceDetailsFragment.FEATURE_AUDIO_ROUTING_ORDER;
 import static com.android.settings.bluetooth.BluetoothDeviceDetailsFragment.KEY_DEVICE_ADDRESS;
 
 import android.content.Context;
@@ -38,7 +37,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
  */
 public class BluetoothDetailsAudioRoutingController extends BluetoothDetailsController  {
 
-    private static final String KEY_FEATURE_CONTROLS_GROUP = "feature_controls_group";
+    private static final String KEY_DEVICE_CONTROLS_SPECIFIC_GROUP = "device_controls_specific";
     @VisibleForTesting
     static final String KEY_AUDIO_ROUTING = "audio_routing";
 
@@ -61,7 +60,6 @@ public class BluetoothDetailsAudioRoutingController extends BluetoothDetailsCont
 
         final PreferenceCategory prefCategory = screen.findPreference(getPreferenceKey());
         final Preference pref = createAudioRoutingPreference(prefCategory.getContext());
-        pref.setOrder(FEATURE_AUDIO_ROUTING_ORDER);
         prefCategory.addPreference(pref);
     }
 
@@ -70,7 +68,7 @@ public class BluetoothDetailsAudioRoutingController extends BluetoothDetailsCont
 
     @Override
     public String getPreferenceKey() {
-        return KEY_FEATURE_CONTROLS_GROUP;
+        return KEY_DEVICE_CONTROLS_SPECIFIC_GROUP;
     }
 
     private Preference createAudioRoutingPreference(Context context) {

@@ -23,6 +23,7 @@ import static com.android.settings.applications.manageapplications.AppFilterRegi
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_MEDIA_MANAGEMENT;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_POWER_ALLOWLIST;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_RECENT;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_TURN_SCREEN_ON;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_USAGE_ACCESS;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_WITH_OVERLAY;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_WRITE_SETTINGS;
@@ -38,6 +39,7 @@ import static com.android.settings.applications.manageapplications.ManageApplica
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_NOTIFICATION;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_OVERLAY;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_STORAGE;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_TURN_SCREEN_ON;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_USAGE_ACCESS;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_WRITE_SETTINGS;
 
@@ -82,5 +84,8 @@ public class AppFilterRegistryTest {
 
         assertThat(registry.getDefaultFilterType(LIST_TYPE_LONG_BACKGROUND_TASKS))
                 .isEqualTo(FILTER_LONG_BACKGROUND_TASKS);
+
+        assertThat(registry.getDefaultFilterType(LIST_TYPE_TURN_SCREEN_ON)).isEqualTo(
+                FILTER_APPS_TURN_SCREEN_ON);
     }
 }

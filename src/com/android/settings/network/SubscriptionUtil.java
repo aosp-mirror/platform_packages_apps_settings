@@ -438,6 +438,7 @@ public class SubscriptionUtil {
                 }
 
             }
+            Log.d(TAG, "getSelectableSubscriptionInfoList: " + selectableList);
             return selectableList;
         }
     }
@@ -686,6 +687,12 @@ public class SubscriptionUtil {
                         .filter(SubscriptionAnnotation::isDisplayAllowed)
                         .filter(SubscriptionAnnotation::isActive)
                         .findFirst().orElse(null);
+    }
+
+    public static boolean isDefaultSubscription(Context context, int subId) {
+        SubscriptionAnnotation subInfo = getDefaultSubscriptionSelection(
+                new SelectableSubscriptions(context, true).call());
+        return subInfo != null && subInfo.getSubscriptionId() == subId;
     }
 
     public static SubscriptionInfo getSubscriptionOrDefault(Context context, int subscriptionId) {

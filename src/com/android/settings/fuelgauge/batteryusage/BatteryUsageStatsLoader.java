@@ -45,7 +45,8 @@ public class BatteryUsageStatsLoader extends AsyncLoaderCompat<BatteryUsageStats
             builder.includeBatteryHistory();
         }
         try {
-            return mBatteryStatsManager.getBatteryUsageStats(builder.build());
+            return mBatteryStatsManager.getBatteryUsageStats(
+                    builder.includeProcessStateData().build());
         } catch (RuntimeException e) {
             Log.e(TAG, "loadInBackground() for getBatteryUsageStats()", e);
             // Use default BatteryUsageStats.

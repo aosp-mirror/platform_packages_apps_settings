@@ -26,8 +26,6 @@ import android.os.Bundle;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.R;
-import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
@@ -43,8 +41,6 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-
-import java.util.List;
 
 /** Tests for {@link BluetoothDetailsAudioRoutingFragment}. */
 @RunWith(RobolectricTestRunner.class)
@@ -90,17 +86,6 @@ public class BluetoothDetailsAudioRoutingFragmentTest {
         mFragment.onAttach(mContext);
 
         assertThat(mFragment.mCachedDevice.getAddress()).isEqualTo(TEST_ADDRESS);
-    }
-
-    @Test
-    public void getNonIndexableKeys_existInXmlLayout() {
-        final List<String> niks = BluetoothDetailsAudioRoutingFragment.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(mContext);
-        final List<String> keys =
-                XmlTestUtils.getKeysFromPreferenceXml(mContext,
-                        R.xml.bluetooth_audio_routing_fragment);
-
-        assertThat(keys).containsAtLeastElementsIn(niks);
     }
 
     private void setupEnvironment() {

@@ -592,28 +592,32 @@ public class WifiConfigController2 implements TextWatcher,
             return null;
         }
 
-        WifiConfiguration config = new WifiConfiguration();
-
+        WifiConfiguration config;
         if (mWifiEntry == null) {
+            config = new WifiConfiguration();
             config.SSID = "\"" + mSsidView.getText().toString() + "\"";
             // If the user adds a network manually, assume that it is hidden.
             config.hiddenSSID = mHiddenSettingsSpinner.getSelectedItemPosition() == HIDDEN_NETWORK;
-        } else if (!mWifiEntry.isSaved()) {
-            config.SSID = "\"" + mWifiEntry.getTitle() + "\"";
+        } else if (mWifiEntry.isSaved()) {
+            config = new WifiConfiguration(mWifiEntry.getWifiConfiguration());
         } else {
-            config.networkId = mWifiEntry.getWifiConfiguration().networkId;
-            config.hiddenSSID = mWifiEntry.getWifiConfiguration().hiddenSSID;
+            config = new WifiConfiguration();
+            config.SSID = "\"" + mWifiEntry.getTitle() + "\"";
         }
 
         config.shared = mSharedCheckBox.isChecked();
 
         switch (mWifiEntrySecurity) {
             case WifiEntry.SECURITY_NONE:
-                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_OPEN);
+                if (mWifiEntry == null || !mWifiEntry.isSaved()) {
+                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_OPEN);
+                }
                 break;
 
             case WifiEntry.SECURITY_WEP:
-                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_WEP);
+                if (mWifiEntry == null || !mWifiEntry.isSaved()) {
+                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_WEP);
+                }
                 if (mPasswordView.length() != 0) {
                     int length = mPasswordView.length();
                     String password = mPasswordView.getText().toString();
@@ -628,7 +632,9 @@ public class WifiConfigController2 implements TextWatcher,
                 break;
 
             case WifiEntry.SECURITY_PSK:
-                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_PSK);
+                if (mWifiEntry == null || !mWifiEntry.isSaved()) {
+                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_PSK);
+                }
                 if (mPasswordView.length() != 0) {
                     String password = mPasswordView.getText().toString();
                     if (password.matches("[0-9A-Fa-f]{64}")) {
@@ -642,13 +648,16 @@ public class WifiConfigController2 implements TextWatcher,
             case WifiEntry.SECURITY_EAP:
             case WifiEntry.SECURITY_EAP_WPA3_ENTERPRISE:
             case WifiEntry.SECURITY_EAP_SUITE_B:
-                if (mWifiEntrySecurity == WifiEntry.SECURITY_EAP_SUITE_B) {
-                    // allowedSuiteBCiphers will be set according to certificate type
-                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP_SUITE_B);
-                } else if (mWifiEntrySecurity == WifiEntry.SECURITY_EAP_WPA3_ENTERPRISE) {
-                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP_WPA3_ENTERPRISE);
-                } else {
-                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP);
+                if (mWifiEntry == null || !mWifiEntry.isSaved()) {
+                    if (mWifiEntrySecurity == WifiEntry.SECURITY_EAP_SUITE_B) {
+                        // allowedSuiteBCiphers will be set according to certificate type
+                        config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP_SUITE_B);
+                    } else if (mWifiEntrySecurity == WifiEntry.SECURITY_EAP_WPA3_ENTERPRISE) {
+                        config.setSecurityParams(
+                                WifiConfiguration.SECURITY_TYPE_EAP_WPA3_ENTERPRISE);
+                    } else {
+                        config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP);
+                    }
                 }
                 config.enterpriseConfig = new WifiEnterpriseConfig();
                 int eapMethod = mEapMethodSpinner.getSelectedItemPosition();
@@ -790,7 +799,9 @@ public class WifiConfigController2 implements TextWatcher,
                 }
                 break;
             case WifiEntry.SECURITY_SAE:
-                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_SAE);
+                if (mWifiEntry == null || !mWifiEntry.isSaved()) {
+                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_SAE);
+                }
                 if (mPasswordView.length() != 0) {
                     String password = mPasswordView.getText().toString();
                     config.preSharedKey = '"' + password + '"';
@@ -798,7 +809,9 @@ public class WifiConfigController2 implements TextWatcher,
                 break;
 
             case WifiEntry.SECURITY_OWE:
-                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_OWE);
+                if (mWifiEntry == null || !mWifiEntry.isSaved()) {
+                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_OWE);
+                }
                 break;
 
             default:

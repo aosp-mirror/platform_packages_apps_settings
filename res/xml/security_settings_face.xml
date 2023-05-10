@@ -80,5 +80,6 @@
 
     <com.android.settingslib.widget.FooterPreference
         android:key="security_face_footer"
+        settings:searchable="false"
         settings:controller="com.android.settings.biometrics.face.FaceSettingsFooterPreferenceController" />
 </PreferenceScreen>

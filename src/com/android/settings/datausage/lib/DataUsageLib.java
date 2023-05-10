@@ -22,12 +22,14 @@ import android.net.NetworkTemplate;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.util.ArraySet;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.android.internal.util.ArrayUtils;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -76,16 +78,21 @@ public class DataUsageLib {
     }
 
     private static NetworkTemplate normalizeMobileTemplate(
-            @NonNull NetworkTemplate template, @NonNull String[] mergedSet) {
+            @NonNull NetworkTemplate template, @NonNull String[] merged) {
         if (template.getSubscriberIds().isEmpty()) return template;
         // The input template should have at most 1 subscriberId.
         final String subscriberId = template.getSubscriberIds().iterator().next();
-
-        if (Set.of(mergedSet).contains(subscriberId)) {
+        // In some rare cases (e.g. b/243015487), merged subscriberId list might contain
+        // duplicated items. Deduplication for better error handling.
+        final ArraySet mergedSet = new ArraySet(merged);
+        if (mergedSet.size() != merged.length) {
+            Log.wtf(TAG, "Duplicated merged list detected: " + Arrays.toString(merged));
+        }
+        if (mergedSet.contains(subscriberId)) {
             // Requested template subscriber is part of the merge group; return
             // a template that matches all merged subscribers.
             return new NetworkTemplate.Builder(template.getMatchRule())
-                    .setSubscriberIds(Set.of(mergedSet))
+                    .setSubscriberIds(mergedSet)
                     .setMeteredness(template.getMeteredness()).build();
         }
 

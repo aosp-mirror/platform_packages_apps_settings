@@ -103,11 +103,14 @@ public class DataUsageLibTest {
     public void getMobileTemplate_groupUuidExist_returnMobileMerged() {
         when(mSubscriptionManager.getActiveSubscriptionInfo(SUB_ID)).thenReturn(mInfo1);
         when(mInfo1.getGroupUuid()).thenReturn(mParcelUuid);
+        // In some rare cases (e.g. b/243015487), merged subscriberId list might contain
+        // duplicated items. The implementation should perform deduplication.
         when(mTelephonyManager.getMergedImsisFromGroup())
-                .thenReturn(new String[] {SUBSCRIBER_ID, SUBSCRIBER_ID_2});
+                .thenReturn(new String[] {SUBSCRIBER_ID, SUBSCRIBER_ID, SUBSCRIBER_ID_2});
 
         final NetworkTemplate networkTemplate = DataUsageLib.getMobileTemplate(mContext, SUB_ID);
         assertThat(networkTemplate.getSubscriberIds().contains(SUBSCRIBER_ID)).isTrue();
         assertThat(networkTemplate.getSubscriberIds().contains(SUBSCRIBER_ID_2)).isTrue();
+        assertThat(networkTemplate.getSubscriberIds().size() == 2).isTrue();
     }
 }

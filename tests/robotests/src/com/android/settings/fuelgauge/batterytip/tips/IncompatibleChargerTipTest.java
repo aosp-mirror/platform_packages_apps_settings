@@ -85,7 +85,7 @@ public final class IncompatibleChargerTipTest {
     @Test
     public void getIcon_showIcon() {
         assertThat(mIncompatibleChargerTip.getIconId())
-                .isEqualTo(R.drawable.ic_battery_alert_24dp);
+                .isEqualTo(R.drawable.ic_battery_alert_theme);
     }
 
     @Test
@@ -109,13 +109,13 @@ public final class IncompatibleChargerTipTest {
 
         mIncompatibleChargerTip.updatePreference(mCardPreference);
 
-        verify(mCardPreference).setSecondaryButtonText(expected);
+        verify(mCardPreference).setPrimaryButtonText(expected);
     }
 
     @Test
     public void updatePreference_shouldSetSecondaryButtonVisible() {
         mIncompatibleChargerTip.updatePreference(mCardPreference);
-        verify(mCardPreference).setSecondaryButtonVisible(true);
+        verify(mCardPreference).setPrimaryButtonVisible(true);
     }
 
     private String getLastErrorLog() {

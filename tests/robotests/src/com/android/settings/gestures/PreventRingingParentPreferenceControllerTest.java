@@ -137,7 +137,7 @@ public class PreventRingingParentPreferenceControllerTest {
                 VOLUME_HUSH_OFF);
         mController.updateState(mPreference);
         assertThat(mPreference.getSummary()).isEqualTo(mContext.getResources().getText(
-                R.string.off));
+                R.string.switch_off_text));
     }
 
     @Test

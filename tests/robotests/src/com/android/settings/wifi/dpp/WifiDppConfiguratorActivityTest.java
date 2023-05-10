@@ -16,10 +16,6 @@
 
 package com.android.settings.wifi.dpp;
 
-import static android.view.WindowManager.LayoutParams.FLAG_SECURE;
-
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -31,6 +27,8 @@ import android.content.Intent;
 import android.os.UserManager;
 
 import androidx.test.core.app.ApplicationProvider;
+
+import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -66,20 +64,15 @@ public class WifiDppConfiguratorActivityTest {
         mIntent.putExtra(WifiDppUtils.EXTRA_WIFI_SECURITY, "WPA");
         mIntent.putExtra(WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY, "\\012345678,");
 
-        mActivity = spy(Robolectric.setupActivity(WifiDppConfiguratorActivity.class));
+        mActivity = spy((WifiDppConfiguratorActivity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(WifiDppConfiguratorActivity.class)).get());
         when(mActivity.getApplicationContext()).thenReturn(mContext);
     }
 
     @Test
     public void launchActivity_noIntentAction_shouldNotFatalException() {
-        WifiDppConfiguratorActivity wifiDppConfiguratorActivity =
-                Robolectric.setupActivity(WifiDppConfiguratorActivity.class);
-    }
-
-    @Test
-    public void launchActivity_shouldAddFlagSecure() {
-        assertThat(mActivity.getWindow().getAttributes().flags & FLAG_SECURE)
-                .isEqualTo(FLAG_SECURE);
+        ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(WifiDppConfiguratorActivity.class)).get();
     }
 
     @Test

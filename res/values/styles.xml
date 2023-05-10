@@ -319,9 +319,8 @@
     </style>
 
     <style name="LanguageCheckboxAndLabel">
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginStart">?android:attr/listPreferredItemPaddingStart</item>
         <item name="android:textAppearance">?android:attr/textAppearanceListItem</item>
         <item name="android:gravity">center_vertical</item>
     </style>
@@ -376,6 +375,20 @@
 
     <style name="ModifierKeyButtonDone" parent="@android:style/Widget.Material.Button">
         <item name="android:background">@drawable/modifier_key_colored</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
+    <style name="TrackpadButtonDone" parent="@android:style/Widget.Material.Button">
+        <item name="android:background">@drawable/trackpad_button_done_colored</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
+    <style name="TrackpadButtonCancel" parent="@android:style/Widget.Material.Button">
+        <item name="android:background">@drawable/trackpad_bordered</item>
         <item name="android:stateListAnimator">@null</item>
         <item name="android:textSize">16sp</item>
         <item name="android:padding">4dp</item>

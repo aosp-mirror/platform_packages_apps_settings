@@ -91,6 +91,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
     @VisibleForTesting
     LayoutPreference mLayoutPreference;
     private CachedBluetoothDevice mCachedDevice;
+    private List<CachedBluetoothDevice> mLeAudioDevices;
     @VisibleForTesting
     Handler mHandler = new Handler(Looper.getMainLooper());
     @VisibleForTesting
@@ -128,7 +129,13 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
             return;
         }
         mIsRegisterCallback = true;
-        mCachedDevice.registerCallback(this);
+        if (mLeAudioDevices != null && !mLeAudioDevices.isEmpty()) {
+            for (CachedBluetoothDevice item : mLeAudioDevices) {
+                item.registerCallback(this);
+            }
+        } else {
+            mCachedDevice.registerCallback(this);
+        }
         refresh();
     }
 
@@ -137,7 +144,13 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
         if (!mIsRegisterCallback) {
             return;
         }
-        mCachedDevice.unregisterCallback(this);
+        if (mLeAudioDevices != null && !mLeAudioDevices.isEmpty()) {
+            for (CachedBluetoothDevice item : mLeAudioDevices) {
+                item.unregisterCallback(this);
+            }
+        } else {
+            mCachedDevice.unregisterCallback(this);
+        }
         mIsRegisterCallback = false;
     }
 
@@ -149,6 +162,8 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
             LocalBluetoothManager bluetoothManager) {
         mCachedDevice = cachedBluetoothDevice;
         mProfileManager = bluetoothManager.getProfileManager();
+        mLeAudioDevices = getAllOfLeAudioDevices();
+
     }
 
     @VisibleForTesting
@@ -230,15 +245,15 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
                 leAudioDevices.add(member);
             }
         }
+        Log.d(TAG, "mLeAudioDevices is " + mLeAudioDevices);
         return leAudioDevices;
     }
 
     private void updateBatteryLayout() {
         // Init the battery layouts.
         hideAllOfBatteryLayouts();
-        final List<CachedBluetoothDevice> leAudioDevices = getAllOfLeAudioDevices();
         LeAudioProfile leAudioProfile = mProfileManager.getLeAudioProfile();
-        if (leAudioDevices == null || leAudioDevices.isEmpty()) {
+        if (mLeAudioDevices == null || mLeAudioDevices.isEmpty()) {
             Log.e(TAG, "There is no LeAudioProfile.");
             return;
         }
@@ -252,7 +267,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
             return;
         }
 
-        for (CachedBluetoothDevice cachedDevice : leAudioDevices) {
+        for (CachedBluetoothDevice cachedDevice : mLeAudioDevices) {
             int deviceId = leAudioProfile.getAudioLocation(cachedDevice.getDevice());
             Log.d(TAG, "LeAudioDevices:" + cachedDevice.getDevice().getAnonymizedAddress()
                     + ", deviceId:" + deviceId);

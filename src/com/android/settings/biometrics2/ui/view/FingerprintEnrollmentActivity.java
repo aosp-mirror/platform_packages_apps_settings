@@ -27,7 +27,6 @@ import static com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewMo
 import static com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.CREDENTIAL_IS_GENERATING_CHALLENGE;
 import static com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.CREDENTIAL_VALID;
 import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.ErrorDialogData;
-import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.FINGERPRINT_ENROLL_ENROLLING_ACTION_DISMISS_ICON_TOUCH_DIALOG;
 import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.FINGERPRINT_ENROLL_ENROLLING_ACTION_DONE;
 import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.FINGERPRINT_ENROLL_ENROLLING_ACTION_SHOW_ICON_TOUCH_DIALOG;
 import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_BACK_PRESSED;
@@ -67,7 +66,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.viewmodel.CreationExtras;
@@ -195,11 +193,13 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
         // fragment
         setContentView(R.layout.biometric_enrollment_container);
 
+        final Fragment fragment = getSupportFragmentManager().findFragmentById(
+                R.id.fragment_container_view);
         if (DEBUG) {
-            Log.e(TAG, "onCreate() has savedInstance:" + (savedInstanceState != null));
+            Log.d(TAG, "onCreate() has savedInstance:" + (savedInstanceState != null)
+                    + ", fragment:" + fragment);
         }
-        if (savedInstanceState == null) {
-            Log.d(TAG, "onCreate()"); // Use to differentiate biometrics v2
+        if (fragment == null) {
             checkCredential();
             final EnrollmentRequest request = mViewModel.getRequest();
             if (request.isSkipFindSensor()) {
@@ -210,42 +210,26 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
                 startIntroFragment();
             }
         } else {
-            final FragmentManager manager = getSupportFragmentManager();
-            String[] tags = new String[] {
-                    FINISH_TAG,
-                    ENROLLING_UDFPS_TAG,
-                    ENROLLING_SFPS_TAG,
-                    ENROLLING_RFPS_TAG,
-                    FIND_UDFPS_TAG,
-                    FIND_SFPS_TAG,
-                    FIND_RFPS_TAG,
-                    INTRO_TAG
-            };
-            for (String tag: tags) {
-                final Fragment fragment = manager.findFragmentByTag(tag);
-                if (fragment == null) {
-                    continue;
-                }
-                if (DEBUG) {
-                    Log.e(TAG, "onCreate() currentFragment:" + tag);
-                }
-                if (tag.equals(INTRO_TAG)) {
-                    attachIntroViewModel();
-                } else if (tag.equals(FIND_UDFPS_TAG) || tag.equals(FIND_SFPS_TAG)
-                        || tag.equals(FIND_RFPS_TAG)) {
-                    attachFindSensorViewModel();
-                    attachIntroViewModel();
-                } else if (tag.equals(ENROLLING_UDFPS_TAG) || tag.equals(ENROLLING_SFPS_TAG)
-                        || tag.equals(ENROLLING_RFPS_TAG)) {
-                    attachEnrollingViewModel();
-                    attachFindSensorViewModel();
-                    attachIntroViewModel();
-                } else { // FINISH_TAG
-                    attachFinishViewModel();
-                    attachFindSensorViewModel();
-                    attachIntroViewModel();
-                }
-                break;
+            final String tag = fragment.getTag();
+            if (INTRO_TAG.equals(tag)) {
+                attachIntroViewModel();
+            } else if (FIND_UDFPS_TAG.equals(tag) || FIND_SFPS_TAG.equals(tag)
+                    || FIND_RFPS_TAG.equals(tag)) {
+                attachFindSensorViewModel();
+                attachIntroViewModel();
+            } else if (ENROLLING_UDFPS_TAG.equals(tag) || ENROLLING_SFPS_TAG.equals(tag)
+                    || ENROLLING_RFPS_TAG.equals(tag)) {
+                attachEnrollingViewModel();
+                attachFindSensorViewModel();
+                attachIntroViewModel();
+            } else if (FINISH_TAG.equals(tag)) {
+                attachFinishViewModel();
+                attachFindSensorViewModel();
+                attachIntroViewModel();
+            } else {
+                Log.e(TAG, "fragment tag " + tag + " not found");
+                finish();
+                return;
             }
         }
 
@@ -267,9 +251,11 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
         } else {
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
+                    .setCustomAnimations(R.anim.shared_x_axis_activity_open_enter_dynamic_color,
+                            R.anim.shared_x_axis_activity_open_exit,
+                            R.anim.shared_x_axis_activity_close_enter_dynamic_color,
+                            R.anim.shared_x_axis_activity_close_exit)
                     .replace(R.id.fragment_container_view, fragmentClass, null, tag)
-                    .setCustomAnimations(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out,
-                            R.anim.sud_slide_back_in, R.anim.sud_slide_back_out)
                     .addToBackStack(tag)
                     .commit();
         }
@@ -373,20 +359,24 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
             // Replace enrolling page
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
+                    .setCustomAnimations(R.anim.shared_x_axis_activity_open_enter_dynamic_color,
+                            R.anim.shared_x_axis_activity_open_exit,
+                            R.anim.shared_x_axis_activity_close_enter_dynamic_color,
+                            R.anim.shared_x_axis_activity_close_exit)
                     .replace(R.id.fragment_container_view, FingerprintEnrollFinishFragment.class,
                             null, FINISH_TAG)
-                    .setCustomAnimations(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out,
-                            R.anim.sud_slide_back_in, R.anim.sud_slide_back_out)
                     .commit();
         } else {
             // Remove Enrolling page from backstack, and add Finish page. Latest backstack will
             // be changed from Intro->FindSensor->Enrolling to Intro->FindSensor->Finish
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
+                    .setCustomAnimations(R.anim.shared_x_axis_activity_open_enter_dynamic_color,
+                            R.anim.shared_x_axis_activity_open_exit,
+                            R.anim.shared_x_axis_activity_close_enter_dynamic_color,
+                            R.anim.shared_x_axis_activity_close_exit)
                     .replace(R.id.fragment_container_view, FingerprintEnrollFinishFragment.class,
                             null, FINISH_TAG)
-                    .setCustomAnimations(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out,
-                            R.anim.sud_slide_back_in, R.anim.sud_slide_back_out)
                     .addToBackStack(FINISH_TAG)
                     .commit();
         }
@@ -510,10 +500,6 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
             case FINGERPRINT_ENROLL_ENROLLING_ACTION_SHOW_ICON_TOUCH_DIALOG: {
                 new FingerprintEnrollEnrollingIconTouchDialog().show(getSupportFragmentManager(),
                         SKIP_SETUP_FIND_FPS_DIALOG_TAG);
-                break;
-            }
-            case FINGERPRINT_ENROLL_ENROLLING_ACTION_DISMISS_ICON_TOUCH_DIALOG: {
-                onSetActivityResult(new ActivityResult(BiometricEnrollBase.RESULT_TIMEOUT, null));
                 break;
             }
             case FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_BACK_PRESSED: {

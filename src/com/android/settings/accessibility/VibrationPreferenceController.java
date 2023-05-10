@@ -44,6 +44,9 @@ public class VibrationPreferenceController extends BasePreferenceController {
     public CharSequence getSummary() {
         final boolean isVibrateOn = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.VIBRATE_ON, ON) == ON;
-        return mContext.getText(isVibrateOn ? R.string.on : R.string.off);
+        return mContext.getText(
+                isVibrateOn
+                        ? R.string.accessibility_vibration_settings_state_on
+                        : R.string.accessibility_vibration_settings_state_off);
     }
 }

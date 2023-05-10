@@ -52,7 +52,7 @@ fun AirplaneModePreference() {
 }
 
 private class AirplaneModeController(private val context: Context) : OnAirplaneModeChangedListener {
-    private var airplaneModeEnabler = AirplaneModeEnabler(context, this)!!
+    private var airplaneModeEnabler = AirplaneModeEnabler(context, this)
     private val _airplaneModeState = MutableLiveData<Boolean>()
     val airplaneModeState: LiveData<Boolean>
         get() = _airplaneModeState

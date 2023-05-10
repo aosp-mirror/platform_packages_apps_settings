@@ -329,6 +329,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment {
         list.setLayoutManager(llm);
 
         list.setHasFixedSize(true);
+        list.setNestedScrollingEnabled(false);
         mAdapter.setRecyclerView(list);
         list.setAdapter(mAdapter);
 

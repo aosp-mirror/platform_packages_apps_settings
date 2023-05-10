@@ -54,9 +54,9 @@ public class NfcAndPaymentFragmentController extends BasePreferenceController {
     public CharSequence getSummary() {
         if (mNfcAdapter != null) {
             if (mNfcAdapter.isEnabled()) {
-                return mContext.getText(R.string.on);
+                return mContext.getText(R.string.nfc_setting_on);
             } else {
-                return mContext.getText(R.string.off);
+                return mContext.getText(R.string.nfc_setting_off);
             }
         }
         return null;

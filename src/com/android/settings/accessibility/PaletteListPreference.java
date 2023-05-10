@@ -34,6 +34,7 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.IntDef;
+import androidx.core.text.TextUtilsCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
@@ -49,6 +50,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 /** Preference that easier preview by matching name to color. */
@@ -156,10 +158,11 @@ public final class PaletteListPreference extends Preference {
         mGradientColors.set(Position.END, color);
 
         final GradientDrawable gradientDrawable = new GradientDrawable();
+        final Locale locale = Locale.getDefault();
         final Orientation orientation =
-                rootView.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL
-                        ? Orientation.RIGHT_LEFT
-                        : Orientation.LEFT_RIGHT;
+                TextUtilsCompat.getLayoutDirectionFromLocale(locale) == View.LAYOUT_DIRECTION_RTL
+                    ? Orientation.RIGHT_LEFT
+                    : Orientation.LEFT_RIGHT;
         gradientDrawable.setOrientation(orientation);
         gradientDrawable.setColors(Ints.toArray(mGradientColors), Floats.toArray(mGradientOffsets));
 

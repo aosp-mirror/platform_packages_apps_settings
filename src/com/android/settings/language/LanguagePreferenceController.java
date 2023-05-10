@@ -16,12 +16,22 @@
 
 package com.android.settings.language;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.util.FeatureFlagUtils;
 
+import com.android.settings.Settings;
 import com.android.settings.core.BasePreferenceController;
 
+/**
+ * This is a display controller for new language activity entry.
+ * TODO(b/273642892): When new layout is on board, this class shall be removed.
+ */
 public class LanguagePreferenceController extends BasePreferenceController {
+    private static final String TAG = LanguagePreferenceController.class.getSimpleName();
+
+    private boolean mCacheIsFeatureOn = false;
 
     public LanguagePreferenceController(Context context, String key) {
         super(context, key);
@@ -31,6 +41,27 @@ public class LanguagePreferenceController extends BasePreferenceController {
     public int getAvailabilityStatus() {
         boolean isFeatureOn = FeatureFlagUtils
                 .isEnabled(mContext, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_UI);
+
+        // LanguageSettingsActivity is a new entry page for new language layout.
+        // LanguageAndInputSettingsActivity is existed entry page for current language layout.
+        if (mCacheIsFeatureOn != isFeatureOn) {
+            setActivityEnabled(
+                    mContext, Settings.LanguageAndInputSettingsActivity.class, !isFeatureOn);
+            setActivityEnabled(mContext, Settings.LanguageSettingsActivity.class, isFeatureOn);
+            mCacheIsFeatureOn = isFeatureOn;
+        }
         return isFeatureOn ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+    }
+
+    private static void setActivityEnabled(Context context, Class klass, final boolean isEnabled) {
+        PackageManager packageManager = context.getPackageManager();
+
+        ComponentName componentName =
+                new ComponentName(context, klass);
+        final int flag = isEnabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED :
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
+
+        packageManager.setComponentEnabledSetting(
+                componentName, flag, PackageManager.DONT_KILL_APP);
     }
 }

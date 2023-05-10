@@ -85,7 +85,7 @@ public class BatteryDefenderTipTest {
     @Test
     public void getIcon_showIcon() {
         assertThat(mBatteryDefenderTip.getIconId())
-                .isEqualTo(R.drawable.ic_battery_status_good_24dp);
+                .isEqualTo(R.drawable.ic_battery_status_good_theme);
     }
 
     @Test

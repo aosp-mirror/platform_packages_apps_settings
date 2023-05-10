@@ -29,7 +29,6 @@ import java.util.Locale;
 
 /** Provides utils for regional preferences. */
 public class RegionalPreferencesDataUtils {
-    static final String DISPLAY_KEYWORD_OF_CALENDAR = "calendar";
     static final String DEFAULT_VALUE = "default";
 
     static String getDefaultUnicodeExtensionData(Context contxt, String type) {
@@ -84,18 +83,6 @@ public class RegionalPreferencesDataUtils {
 
     private static Locale addUnicodeKeywordToLocale(String languageTag, String type, String value) {
         return addUnicodeKeywordToLocale(Locale.forLanguageTag(languageTag), type, value);
-    }
-
-    static String calendarConverter(Context context, String calendarType) {
-        if (calendarType.equals(DEFAULT_VALUE)) {
-            return context.getString(R.string.default_string_of_regional_preference);
-        }
-
-        Locale locale = new Locale.Builder()
-                .setUnicodeLocaleKeyword(ExtensionTypes.CALENDAR, calendarType)
-                .build();
-        return ULocale.getDisplayKeywordValue(locale.toLanguageTag(), DISPLAY_KEYWORD_OF_CALENDAR,
-                ULocale.forLocale(Locale.getDefault(Locale.Category.FORMAT)));
     }
 
     static String temperatureUnitsConverter(Context context, String unit) {
