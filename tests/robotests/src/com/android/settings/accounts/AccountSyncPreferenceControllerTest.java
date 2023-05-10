@@ -36,6 +36,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
 import com.android.settings.testutils.shadow.ShadowContentResolver;
+import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.After;
 import org.junit.Before;
@@ -62,7 +63,8 @@ public class AccountSyncPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mActivity = Robolectric.setupActivity(Activity.class);
+        mActivity = (Activity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(Activity.class)).get();
         ShadowApplication.getInstance().setSystemService(Context.ACCOUNT_SERVICE, mAccountManager);
 
         when(mAccountManager.getAuthenticatorTypesAsUser(anyInt())).thenReturn(

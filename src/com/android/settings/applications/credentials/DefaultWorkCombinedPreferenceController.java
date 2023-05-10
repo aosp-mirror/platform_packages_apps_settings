@@ -44,7 +44,7 @@ public class DefaultWorkCombinedPreferenceController extends DefaultCombinedPref
 
     @Override
     public String getPreferenceKey() {
-        return "default_autofill_work";
+        return "default_credman_autofill_main_work";
     }
 
     @Override
@@ -80,5 +80,10 @@ public class DefaultWorkCombinedPreferenceController extends DefaultCombinedPref
     @Override
     protected void startActivity(Intent intent) {
         mContext.startActivityAsUser(intent, mUserHandle);
+    }
+
+    @Override
+    protected int getUser() {
+        return mUserHandle.getIdentifier();
     }
 }

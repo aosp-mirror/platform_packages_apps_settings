@@ -41,6 +41,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.OutcomeReceiver;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.service.autofill.AutofillServiceInfo;
 import android.text.TextUtils;
@@ -110,6 +111,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private @Nullable PreferenceScreen mPreferenceScreen = null;
 
     private boolean mVisibility = false;
+    private boolean mIsWorkProfile = false;
 
     public CredentialManagerPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -169,14 +171,17 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
      * @param fragmentManager the fragment manager to use
      * @param intent the intent used to start the activity
      * @param delegate the delegate to send results back to
+     * @param isWorkProfile whether this controller is under a work profile user
      */
     public void init(
             DashboardFragment fragment,
             FragmentManager fragmentManager,
             @Nullable Intent launchIntent,
-            @NonNull Delegate delegate) {
+            @NonNull Delegate delegate,
+            boolean isWorkProfile) {
         fragment.getSettingsLifecycle().addObserver(this);
         mFragmentManager = fragmentManager;
+        mIsWorkProfile = isWorkProfile;
         setDelegate(delegate);
         verifyReceivedIntent(launchIntent);
     }
@@ -420,7 +425,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 continue;
             }
 
-            Drawable icon = combinedInfo.getAppIcon(context);
+            Drawable icon = combinedInfo.getAppIcon(context, getUser());
             CharSequence title = combinedInfo.getAppName(context);
 
             // Build the pref and add it to the output & group.
@@ -681,9 +686,12 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         return new ConfirmationDialogFragment(host, packageName, appName);
     }
 
-    private int getUser() {
-        UserHandle workUser = getWorkProfileUser();
-        return workUser != null ? workUser.getIdentifier() : UserHandle.myUserId();
+    protected int getUser() {
+        if (mIsWorkProfile) {
+            UserHandle workProfile = Utils.getManagedProfile(UserManager.get(mContext));
+            return workProfile.getIdentifier();
+        }
+        return UserHandle.myUserId();
     }
 
     /** Called when the dialog button is clicked. */

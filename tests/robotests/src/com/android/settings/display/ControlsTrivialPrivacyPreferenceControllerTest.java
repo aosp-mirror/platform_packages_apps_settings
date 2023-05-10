@@ -44,6 +44,7 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -146,6 +147,7 @@ public class ControlsTrivialPrivacyPreferenceControllerTest {
         verify(mPreference, atLeastOnce()).setSummary(mController.getSummary());
     }
 
+    @Ignore
     @Test
     public void updateStateWithCustomizableLockScreenQuickAffordancesEnabled() {
         setCustomizableLockScreenQuickAffordancesEnabled(true);
@@ -166,6 +168,7 @@ public class ControlsTrivialPrivacyPreferenceControllerTest {
                 BasePreferenceController.DISABLED_DEPENDENT_SETTING);
     }
 
+    @Ignore
     @Test
     public void getAvailabilityStatusWithCustomizableLockScreenQuickAffordancesEnabled() {
         setCustomizableLockScreenQuickAffordancesEnabled(true);

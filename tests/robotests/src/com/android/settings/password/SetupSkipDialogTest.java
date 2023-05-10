@@ -23,6 +23,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +43,8 @@ public class SetupSkipDialogTest {
 
     @Before
     public void setUp() {
-        mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(FragmentActivity.class)).get();
     }
 
     private ShadowAlertDialog getShadowAlertDialog() {

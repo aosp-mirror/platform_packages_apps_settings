@@ -222,4 +222,44 @@ public class ActiveUnlockStatusUtilsTest {
                 .isEqualTo(mApplicationContext.getString(
                         R.string.biometric_settings_use_face_or_watch_preference_summary));
     }
+
+    @Test
+    public void getUseBiometricTitle_faceAndFingerprintEnabled_returnsFaceFingerprintOrWatch() {
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+
+        assertThat(mActiveUnlockStatusUtils.getUseBiometricTitleForActiveUnlock())
+                .isEqualTo(mApplicationContext.getString(
+                        R.string.biometric_settings_use_face_fingerprint_or_watch_for));
+    }
+
+    @Test
+    public void getUseBiometricTitle_fingerprintEnabled_returnsFingerprintOrWatch() {
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(false);
+
+        assertThat(mActiveUnlockStatusUtils.getUseBiometricTitleForActiveUnlock())
+                .isEqualTo(mApplicationContext.getString(
+                        R.string.biometric_settings_use_fingerprint_or_watch_for));
+    }
+
+    @Test
+    public void getUseBiometricTitle_faceEnabled_returnsFaceOrWatch() {
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+
+        assertThat(mActiveUnlockStatusUtils.getUseBiometricTitleForActiveUnlock())
+                .isEqualTo(mApplicationContext.getString(
+                        R.string.biometric_settings_use_face_or_watch_for));
+    }
+
+    @Test
+    public void getUseBiometricTitle_withoutFaceOrFingerprint_returnsWatch() {
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
+        when(mFaceManager.isHardwareDetected()).thenReturn(false);
+
+        assertThat(mActiveUnlockStatusUtils.getUseBiometricTitleForActiveUnlock())
+                .isEqualTo(mApplicationContext.getString(
+                        R.string.biometric_settings_use_watch_for));
+    }
 }
