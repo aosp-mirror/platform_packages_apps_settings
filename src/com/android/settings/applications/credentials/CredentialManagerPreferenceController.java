@@ -620,6 +620,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                         completeEnableProviderDialogBox(
                                 whichButton, packageName, setActivityResult);
                     }
+
+                    @Override
+                    public void onCancel() {}
                 };
 
         return new NewProviderConfirmationDialogFragment(host, packageName, appName);
@@ -666,6 +669,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 new DialogHost() {
                     @Override
                     public void onDialogClick(int whichButton) {}
+
+                    @Override
+                    public void onCancel() {}
                 };
 
         return new ErrorDialogFragment(host);
@@ -689,6 +695,12 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                             pref.setChecked(true);
                         }
                     }
+
+                    @Override
+                    public void onCancel() {
+                        // If we dismiss the dialog then re-enable.
+                        pref.setChecked(true);
+                    }
                 };
 
         return new ConfirmationDialogFragment(host, packageName, appName);
@@ -705,6 +717,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     /** Called when the dialog button is clicked. */
     private static interface DialogHost {
         void onDialogClick(int whichButton);
+
+        void onCancel();
     }
 
     /** Called to send messages back to the parent fragment. */
@@ -753,6 +767,11 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         public DialogHost getDialogHost() {
             return mDialogHost;
+        }
+
+        @Override
+        public void onCancel(@NonNull DialogInterface dialog) {
+            getDialogHost().onCancel();
         }
     }
 
