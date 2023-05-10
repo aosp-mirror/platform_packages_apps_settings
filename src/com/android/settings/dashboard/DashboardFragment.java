@@ -592,6 +592,12 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             case SWITCH_WITH_ACTION:
                 return new PrimarySwitchPreference(getPrefContext());
             case GROUP:
+                mMetricsFeatureProvider.action(
+                        mMetricsFeatureProvider.getAttribution(getActivity()),
+                        SettingsEnums.ACTION_SETTINGS_GROUP_TILE_ADDED_TO_SCREEN,
+                        getMetricsCategory(),
+                        tile.getKey(getContext()),
+                        /* value= */ 0);
                 return new PreferenceCategory((getPrefContext()));
             case ACTION:
             default:
