@@ -291,7 +291,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
         BatteryHistoricalLogUtil.writeLog(
                 getContext().getApplicationContext(),
-                Action.MANUAL,
+                Action.LEAVE,
                 BatteryHistoricalLogUtil.getPackageNameWithUserId(
                         mBatteryOptimizeUtils.getPackageName(), UserHandle.myUserId()),
                 mLogStringBuilder.toString());

@@ -15,7 +15,7 @@ message BatteryOptimizeHistoricalLogEntry {
   // The action to set optimize mode
   enum Action {
     UNKNOWN = 0;
-    MANUAL = 1;
+    LEAVE = 1;
     APPLY = 2;
     RESET = 3;
     RESTORE = 4;
@@ -24,4 +24,5 @@ message BatteryOptimizeHistoricalLogEntry {
   optional string package_name = 1;
   optional Action action = 2;
   optional string action_description = 3;
+  optional int64 timestamp = 4;
 }
