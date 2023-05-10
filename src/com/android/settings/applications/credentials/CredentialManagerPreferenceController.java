@@ -41,6 +41,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.OutcomeReceiver;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.service.autofill.AutofillServiceInfo;
 import android.text.TextUtils;
@@ -110,6 +111,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private @Nullable PreferenceScreen mPreferenceScreen = null;
 
     private boolean mVisibility = false;
+    private boolean mIsWorkProfile = false;
 
     public CredentialManagerPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -169,14 +171,17 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
      * @param fragmentManager the fragment manager to use
      * @param intent the intent used to start the activity
      * @param delegate the delegate to send results back to
+     * @param isWorkProfile whether this controller is under a work profile user
      */
     public void init(
             DashboardFragment fragment,
             FragmentManager fragmentManager,
             @Nullable Intent launchIntent,
-            @NonNull Delegate delegate) {
+            @NonNull Delegate delegate,
+            boolean isWorkProfile) {
         fragment.getSettingsLifecycle().addObserver(this);
         mFragmentManager = fragmentManager;
+        mIsWorkProfile = isWorkProfile;
         setDelegate(delegate);
         verifyReceivedIntent(launchIntent);
     }
@@ -420,7 +425,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 continue;
             }
 
-            Drawable icon = combinedInfo.getAppIcon(context);
+            Drawable icon = combinedInfo.getAppIcon(context, getUser());
             CharSequence title = combinedInfo.getAppName(context);
 
             // Build the pref and add it to the output & group.
@@ -523,16 +528,24 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                     boolean isChecked = pref.isChecked();
 
                     if (isChecked) {
-                        // Since we are enabling it we should confirm the user decision with a
-                        // dialog box.
-                        NewProviderConfirmationDialogFragment fragment =
-                                newNewProviderConfirmationDialogFragment(
-                                        packageName, title, /* setActivityResult= */ false);
-                        if (fragment == null || mFragmentManager == null) {
-                            return true;
-                        }
+                        if (togglePackageNameEnabled(packageName)) {
+                            // Enable all prefs.
+                            if (mPrefs.containsKey(packageName)) {
+                                mPrefs.get(packageName).setChecked(true);
+                            }
+                        } else {
+                            // Since we failed to show toggle the switch back to off.
+                            pref.setChecked(false);
 
-                        fragment.show(mFragmentManager, NewProviderConfirmationDialogFragment.TAG);
+                            // Show the error if too many enabled.
+                            final DialogFragment fragment = newErrorDialogFragment();
+
+                            if (fragment == null || mFragmentManager == null) {
+                                return true;
+                            }
+
+                            fragment.show(mFragmentManager, ErrorDialogFragment.TAG);
+                        }
 
                         return true;
                     } else {
@@ -681,9 +694,12 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         return new ConfirmationDialogFragment(host, packageName, appName);
     }
 
-    private int getUser() {
-        UserHandle workUser = getWorkProfileUser();
-        return workUser != null ? workUser.getIdentifier() : UserHandle.myUserId();
+    protected int getUser() {
+        if (mIsWorkProfile) {
+            UserHandle workProfile = Utils.getManagedProfile(UserManager.get(mContext));
+            return workProfile.getIdentifier();
+        }
+        return UserHandle.myUserId();
     }
 
     /** Called when the dialog button is clicked. */
@@ -851,6 +867,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         private final Uri mCredentialService =
                 Settings.Secure.getUriFor(Settings.Secure.CREDENTIAL_SERVICE);
 
+        private final Uri mCredentialPrimaryService =
+                Settings.Secure.getUriFor(Settings.Secure.CREDENTIAL_SERVICE_PRIMARY);
+
         public SettingContentObserver(Handler handler) {
             super(handler);
         }
@@ -858,6 +877,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         public void register(ContentResolver contentResolver) {
             contentResolver.registerContentObserver(mAutofillService, false, this, getUser());
             contentResolver.registerContentObserver(mCredentialService, false, this, getUser());
+            contentResolver.registerContentObserver(
+                    mCredentialPrimaryService, false, this, getUser());
         }
 
         @Override

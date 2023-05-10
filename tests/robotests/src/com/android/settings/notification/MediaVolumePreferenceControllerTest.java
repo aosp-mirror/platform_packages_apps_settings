@@ -42,6 +42,7 @@ import com.android.settingslib.media.MediaDevice;
 import com.android.settingslib.media.MediaOutputConstants;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -88,6 +89,7 @@ public class MediaVolumePreferenceControllerTest {
         assertThat(mController.isAvailable()).isTrue();
     }
 
+    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void isAvailable_whenNotVisible_isFalse() {

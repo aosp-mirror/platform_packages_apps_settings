@@ -40,6 +40,7 @@ import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowDisclaimerItemFactory;
 import com.android.settings.testutils.shadow.ShadowFragment;
+import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -89,7 +90,8 @@ public class WifiCallingDisclaimerFragmentTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(FragmentActivity.class)).get();
         mFragment = spy(new WifiCallingDisclaimerFragment());
 
         doReturn(mActivity).when(mFragment).getActivity();

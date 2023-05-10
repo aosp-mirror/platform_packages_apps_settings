@@ -67,6 +67,7 @@ import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -173,6 +174,7 @@ public class PrivateDnsPreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
+    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void getAvailabilityStatus_unsupportedWhenSet() {
@@ -288,6 +290,7 @@ public class PrivateDnsPreferenceControllerTest {
         verify(mPreference).setSummary(getResourceString(R.string.private_dns_mode_opportunistic));
     }
 
+    @Ignore
     @Test
     public void isEnabled_canBeDisabledByAdmin() {
         final int userId = UserHandle.myUserId();

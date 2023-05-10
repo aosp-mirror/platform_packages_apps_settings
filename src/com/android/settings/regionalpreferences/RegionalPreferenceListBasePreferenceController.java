@@ -64,7 +64,7 @@ public abstract class RegionalPreferenceListBasePreferenceController extends
             pref.setOnPreferenceClickListener(clickedPref -> {
                 setSelected(pref);
                 RegionalPreferencesDataUtils.savePreference(mContext, getExtensionTypes(), item);
-                mMetricsFeatureProvider.action(mContext, getMetricsActionKey(), item);
+                mMetricsFeatureProvider.action(mContext, getMetricsActionKey());
                 return true;
             });
             String value = RegionalPreferencesDataUtils.getDefaultUnicodeExtensionData(mContext,
