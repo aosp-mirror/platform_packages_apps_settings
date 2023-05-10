@@ -105,6 +105,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Prekliči"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Onemogoči funkcijo Bluetooth LE zvok"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Onemogoči funkcijo Bluetooth LE zvok, če naprava podpira strojne zmogljivosti za zvok z majhno porabo energije."</string>
+    <!-- no translation found for bluetooth_show_leaudio_device_details (3306637862550475370) -->
+    <skip />
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Omogoči seznam dovoljenih za Bluetooth LE zvok"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Omogoči funkcijo seznama dovoljenih za Bluetooth LE zvok."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Predstavnostne naprave"</string>
@@ -354,6 +356,14 @@
     <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Če nastavite odklepanje z obrazom in prstnim odtisom, telefon zahteva prstni odtis, ko nosite masko ali ko ste nekje, kjer je temno.\n\nČe obraz ali prstni odtis ni prepoznan, lahko telefon odklenete z uro."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Če prstni odtis ni prepoznan, lahko odklenete z uro."</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Če obraz ni prepoznan, lahko odklenete z uro."</string>
+    <!-- no translation found for biometric_settings_use_fingerprint_or_watch_for (1160830065613858095) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_or_watch_for (1507077107150278532) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_fingerprint_or_watch_for (7495835723072020641) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_watch_for (5454545622244040110) -->
+    <skip />
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Uporaba obraza ali ure"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Uporaba prstnega odtisa ali ure"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Uporaba obraza, prstnega odtisa ali ure"</string>
@@ -455,7 +465,7 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"S kazalcem se dotaknite tipala na hrbtni strani telefona."</string>
     <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Registracija ni bila dokončana."</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Čas za nastavitev prstnega odtisa je potekel"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Poskusite znova zdaj ali nastavite prstni odtis pozneje v nastavitvah."</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"Prstni odtis lahko nastavite pozneje v nastavitvah."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Registracija prstnega odtisa ni uspela. Poskusite znova ali uporabite drug prst."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Dodaj še enega"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Naprej"</string>
@@ -958,7 +968,6 @@
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Vklopljeno – na podlagi obraza"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Zaznavanje obraza"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Več o samodejnem zasuku"</string>
-    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Ko telefon obrnete iz navpičnega v vodoravni položaj ali obratno."</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Ločljivost zaslona"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Visoka ločljivost"</string>
     <string name="screen_resolution_option_full" msgid="2694003735219114186">"Polna ločljivost"</string>
@@ -1661,7 +1670,7 @@
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Poteze na sledilni ploščici"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Prilagajanje potez za krmarjenje na sledilni ploščici"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Obratno pomikanje"</string>
-    <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Pri pomikanju drsnika navzdol se vsebina premika navzgor"</string>
+    <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Pri drsenju navzdol se vsebina premika navzgor"</string>
     <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Dotik spodnjega desnega kota"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Za več možnosti se dotaknite sledilne ploščice spodaj desno."</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Hitrost kazalca"</string>
@@ -2179,13 +2188,13 @@
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Vklop varčevanja z baterijo"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Baterija se bo morda izpraznila prej kot običajno"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"Varčevanje z energijo je vklopljeno"</string>
-    <!-- no translation found for battery_saver_link_a11y (6613079613524512257) -->
-    <skip />
+    <string name="battery_saver_link_a11y" msgid="6613079613524512257">"Preberite več o varčevanju z energijo baterije."</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Nekatere funkcije bodo morda omejene"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Višja poraba energije baterije"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Ogled aplikacij z najvišjo porabo energije"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Polnjenje je optimizirano zaradi zaščite baterije"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"Polnjenje je optimizirano zaradi podaljšanja življenjske dobe baterije."</string>
+    <!-- no translation found for battery_tip_limited_temporarily_summary (5107379280241187562) -->
+    <skip />
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Polnjenje je optimizirano zaradi zaščite baterije"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Zaradi podaljšanja življenjske dobe baterije je polnjenje optimizirano, ko je naprava priklopljena na nosilec."</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Polnjenje je optimizirano zaradi zaščite baterije"</string>
@@ -2306,10 +2315,8 @@
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Poraba energije baterije za <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Čas uporabe od zadnje polne napolnjenosti"</string>
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Čas uporabe za <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_spinner_view_by_apps (8769276544072098082) -->
-    <skip />
-    <!-- no translation found for battery_usage_spinner_view_by_systems (7904104223212160541) -->
-    <skip />
+    <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Prikaz po aplikacijah"</string>
+    <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Prikaz po sistemih"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistični podatki o procesih"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistični podatki o procesih, ki se izvajajo"</string>
@@ -3172,7 +3179,7 @@
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Prikaži vso vsebino obvestil"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Prikaži občutljivo vsebino samo na odklenjenem zaslonu."</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Sploh ne prikazuj obvestil"</string>
-    <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Kaj želite, da je prikazano na zaklenjenem zaslonu?"</string>
+    <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Kaj naj bo prikazano na zaklenjenem zaslonu?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Zaklenjen zaslon"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Pokaži vso vsebino obvestil za delovni profil."</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Skrivanje občutljive vsebine za delovni profil"</string>
@@ -3648,12 +3655,9 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Dovoli dostop za upravljanje vseh datotek"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Tej aplikaciji dovolite, da bere, spreminja in briše vse datoteke v tej napravi ali drugih povezanih nosilcih za shranjevanje. Če daste to dovoljenje, bo aplikacija morda dostopala do datotek brez vaše vednosti."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Lahko dostopa do vseh datotek"</string>
-    <!-- no translation found for full_screen_intent_title (747270185715224130) -->
-    <skip />
-    <!-- no translation found for permit_full_screen_intent (9035367640019960861) -->
-    <skip />
-    <!-- no translation found for footer_description_full_screen_intent (7716518411349225528) -->
-    <skip />
+    <string name="full_screen_intent_title" msgid="747270185715224130">"Celozaslonska obvestila"</string>
+    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Dovoli celozaslonska obvestila te aplikacije"</string>
+    <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Dovolite, da ta aplikacija prikazuje obvestila, ki zavzamejo celoten zaslon, ko je naprava zaklenjena. Aplikacije lahko z njimi izpostavijo alarme, dohodne klice ali druga nujna obvestila."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Aplikacije za upravljanje predstavnosti"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Aplikaciji dovoli upravljanje predstavnosti"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Pri vklopljenem dovoljenju lahko ta aplikacija brez vaše vednosti spreminja ali briše predstavnostne datoteke, ustvarjene z drugimi aplikacijami. Aplikacija mora imeti dovoljenje za dostop do datotek in predstavnosti."</string>
@@ -4067,7 +4071,10 @@
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# geslo}one{# geslo}two{# gesli}few{# gesla}other{# gesel}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"samodejno, izpolnjevanje, samodejno izpolnjevanje, geslo"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"podatki, ključ za dostop, geslo"</string>
+    <string name="credman_autofill_keywords" msgid="701180623776848914">"samodejno, izpolnjevanje, samodejno izpolnjevanje, podatki, ključ za dostop, geslo"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Prepričajte se, da zaupate tej aplikaciji&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Samodejno izpolnjevanje&gt;%1$s&lt;/xliff:g&gt; iz elementov na zaslonu ugotovi, kaj je mogoče samodejno izpolniti."</string>
+    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Uporabi aplikacijo &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; na podlagi prikaza na zaslonu ugotovi, kaj se lahko samodejno izpolni. Nova gesla, ključi za dostop in drugi podatki bodo odslej shranjeni tukaj."</string>
+    <string name="credman_picker_title" msgid="2642776965060619988">"Gesla, ključi za dostop in podatkovne storitve"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Želite izklopiti »%1$s«?"</string>
     <string name="credman_confirmation_message" msgid="158362573056996762">"Shranjeni podatki, kot so ključi za dostop in gesla, morda ne bodo na voljo, ko se boste prijavili."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Želite uporabiti ponudnika %1$s?"</string>
@@ -4120,12 +4127,9 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <!-- no translation found for enable_angle_as_system_driver (3985105681812713612) -->
-    <skip />
-    <!-- no translation found for enable_angle_as_system_driver_summary (4173041926052925436) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (2619263039763150810) -->
-    <skip />
+    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Omogoči gonilnik ANGLE"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"Omogoči gonilnik ANGLE kot sistemski gonilnik OpenGL ES"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Če želite spremeniti sistemski gonilnik OpenGL ES, morate znova zagnati napravo."</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Spremembe združljivosti aplikacij"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Vklop/izklop sprememb združljivosti aplikacij"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Privzeto omogočene spremembe"</string>

@@ -105,6 +105,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Скасувати"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Вимкнути Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Вимикає функцію Bluetooth LE Audio, якщо пристрій підтримує апаратні можливості LE Audio."</string>
+    <!-- no translation found for bluetooth_show_leaudio_device_details (3306637862550475370) -->
+    <skip />
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Увімкнути список дозволів Bluetooth LE Audio"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Увімкнути функцію списку дозволів Bluetooth LE Audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Носії"</string>
@@ -354,6 +356,14 @@
     <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Якщо ви налаштуєте розблокування за допомогою фейс-контролю і відбитка пальця, телефон запитуватиме ваш відбиток пальця, коли ви в масці або навколо вас темно.\n\nЯкщо не вдається розпізнати ваше обличчя або відбиток пальця, ви можете розблокувати пристрій за допомогою годинника."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Якщо ваш відбиток пальця не вдається розпізнати, ви можете розблокувати пристрій за допомогою годинника."</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Якщо ваше обличчя не вдається розпізнати, ви можете розблокувати пристрій за допомогою годинника."</string>
+    <!-- no translation found for biometric_settings_use_fingerprint_or_watch_for (1160830065613858095) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_or_watch_for (1507077107150278532) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_fingerprint_or_watch_for (7495835723072020641) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_watch_for (5454545622244040110) -->
+    <skip />
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"За допомогою фейс-контролю або годинника"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"За допомогою відбитка пальця або годинника"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"За допомогою фейс-контролю, відбитка або годинника"</string>
@@ -448,14 +458,14 @@
     <string name="lock_screen_pattern_skip_title" msgid="7214938393640060932">"Не налаштовувати ключ?"</string>
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Пропустити ключ і фейсконтроль?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"Пропустити налаштування ключа й відбитка?"</string>
-    <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"Пропустити ключ, фейсконтроль і відбиток пальця?"</string>
+    <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"Пропустити ключ, фейс-контроль і відбиток пальця?"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"Налаштувати блокування екрана"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Готово"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Це не датчик"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Торкніться сканера на задній панелі телефона. Прикладіть вказівний палець."</string>
     <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Реєстрацію не завершено"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Час очікування для відбитка пальця минув"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Повторіть спробу зараз або налаштуйте відбиток пальця пізніше в налаштуваннях"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"Ви можете додати відбиток пальця пізніше в налаштуваннях"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Відбиток не зареєстровано. Повторіть спробу або прикладіть інший палець."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Додати ще"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Далі"</string>
@@ -521,9 +531,9 @@
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Фейсконтроль + PIN-код"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Фейсконтроль + пароль"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Продовжити без фейсконтролю"</string>
-    <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Ключ • Фейсконтроль • Відбиток пальця"</string>
-    <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN-код • Фейсконтроль • Відбиток пальця"</string>
-    <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Пароль • Фейсконтроль • Відбиток пальця"</string>
+    <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Ключ • Фейс-контроль • Відбиток пальця"</string>
+    <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN-код • Фейс-контроль • Відбиток пальця"</string>
+    <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Пароль • Фейс-контроль • Відбиток пальця"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Продовжити без фейсконтролю чи відбитка пальця"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Немає"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Провести по екрану"</string>
@@ -958,7 +968,6 @@
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Увімкнути (за обличчям)"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Розпізнавання облич"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Докладніше про автообертання"</string>
-    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Змінення орієнтації з портретної на альбомну та навпаки"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Роздільна здатність екрана"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Висока роздільна здатність"</string>
     <string name="screen_resolution_option_full" msgid="2694003735219114186">"Максимальна роздільна здатність"</string>
@@ -1657,11 +1666,11 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Сенсорна панель"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Сенсорна панель і миша"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Швидкість курсора, жести"</string>
-    <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Швидко торкнутися, щоб натиснути"</string>
+    <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Натискання дотиком"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Жести сенсорної панелі"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Налаштуйте жести для навігації на сенсорній панелі"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Зворотне прокручування"</string>
-    <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Прокручуючи сторінку вниз, ви переміщуєте контент угору"</string>
+    <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Якщо прокручувати вниз, вміст екрана переміщується вгору"</string>
     <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Дотик у нижньому правому куті"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Торкніться правого нижнього кута, щоб переглянути інші опції"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Швидкість курсора"</string>
@@ -2179,13 +2188,13 @@
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Увімкніть режим енергозбереження"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Акумулятор може розрядитися швидше, ніж зазвичай"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"Режим енергозбереження ввімкнено"</string>
-    <!-- no translation found for battery_saver_link_a11y (6613079613524512257) -->
-    <skip />
+    <string name="battery_saver_link_a11y" msgid="6613079613524512257">"Докладніше про режим енергозбереження"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Деякі функції можуть не працювати"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Збільшене використання заряду"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Переглянути додатки, що найбільше використовують заряд"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Заряджання оптимізовано, щоб захистити акумулятор"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"Щоб продовжити термін служби акумулятора, заряджання оптимізовано"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_summary (5107379280241187562) -->
+    <skip />
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Заряджання оптимізовано, щоб захистити акумулятор"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Щоб продовжити строк служби акумулятора, заряджання оптимізовано, поки пристрій у док-станції"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Заряджання оптимізовано, щоб захистити акумулятор"</string>
@@ -2306,10 +2315,8 @@
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Використання заряду акумулятора (<xliff:g id="SLOT">%s</xliff:g>)"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Час використання пристрою після останнього повного заряджання"</string>
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Час використання пристрою (<xliff:g id="SLOT">%s</xliff:g>)"</string>
-    <!-- no translation found for battery_usage_spinner_view_by_apps (8769276544072098082) -->
-    <skip />
-    <!-- no translation found for battery_usage_spinner_view_by_systems (7904104223212160541) -->
-    <skip />
+    <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Переглянути за додатками"</string>
+    <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Переглянути за системами"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Статистика про процеси"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Статистика про запущені процеси"</string>
@@ -3648,12 +3655,9 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Надати доступ до керування всіма файлами"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Дозволити цьому додатку переглядати, змінювати та видаляти всі файли на цьому пристрої або інших підключених носіях пам\'яті. Після надання дозволу додаток може отримувати доступ до файлів без вашого відома."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Мають доступ до всіх файлів"</string>
-    <!-- no translation found for full_screen_intent_title (747270185715224130) -->
-    <skip />
-    <!-- no translation found for permit_full_screen_intent (9035367640019960861) -->
-    <skip />
-    <!-- no translation found for footer_description_full_screen_intent (7716518411349225528) -->
-    <skip />
+    <string name="full_screen_intent_title" msgid="747270185715224130">"Сповіщення на весь екран"</string>
+    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Дозволити сповіщення на весь екран із цього додатка"</string>
+    <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Цьому додатку буде дозволено показувати сповіщення на весь екран, коли пристрій заблоковано. Додатки можуть використовувати це налаштування, щоб показувати будильники, сповіщення про вхідні дзвінки або інші термінові сповіщення."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Додатки для керування медіафайлами"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Дозволити додатку керувати медіафайлами"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Якщо вибрати цей параметр, додаток зможе без вашого підтвердження змінювати чи видаляти медіафайли, створені в інших додатках. У додатка має бути дозвіл на доступ до файлів і медіафайлів."</string>
@@ -4067,7 +4071,10 @@
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# пароль}one{# пароль}few{# паролі}many{# паролів}other{# пароля}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"автоматичний, заповнення, автозаповнення, пароль"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"дані, ключ доступу, пароль"</string>
+    <string name="credman_autofill_keywords" msgid="701180623776848914">"автоматично, заповнення, автозаповнення, дані, ключ доступу, пароль"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Переконайтеся, що додаток надійний&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Функція Автозаповнення Google&gt;%1$s&lt;/xliff:g&gt; використовує інформацію на екрані, щоб визначати поля для автозаповнення."</string>
+    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Використання додатка &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; використовує інформацію на екрані, щоб визначати поля, які можна заповнити автоматично. Відтепер тут зберігатимуться нові паролі, ключі доступу й інша інформація."</string>
+    <string name="credman_picker_title" msgid="2642776965060619988">"Сервіси керування паролями, ключами доступу й даними"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Вимкнути %1$s?"</string>
     <string name="credman_confirmation_message" msgid="158362573056996762">"Збережені дані, наприклад ключі доступу й паролі, можуть бути недоступні, коли ви ввійдете в обліковий запис"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Використовувати %1$s?"</string>
@@ -4120,12 +4127,9 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <!-- no translation found for enable_angle_as_system_driver (3985105681812713612) -->
-    <skip />
-    <!-- no translation found for enable_angle_as_system_driver_summary (4173041926052925436) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (2619263039763150810) -->
-    <skip />
+    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Увімкнути ANGLE"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"Увімкнути ANGLE як системний драйвер OpenGL ES"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Щоб змінити системний драйвер OpenGL ES, перезапустіть пристрій"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Зміни сумісності додатка"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Увімкнути або вимкнути зміни сумісності додатка"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Зміни, увімкнені за умовчанням"</string>

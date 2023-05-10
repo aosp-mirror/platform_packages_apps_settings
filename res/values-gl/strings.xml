@@ -105,6 +105,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Cancelar"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth de baixo consumo (audio): Non"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Desactiva a función de audio por Bluetooth de baixo consumo se o dispositivo é compatible coas funcións do hardware de audio de baixo consumo."</string>
+    <!-- no translation found for bluetooth_show_leaudio_device_details (3306637862550475370) -->
+    <skip />
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Activar lista de permitidos de audio por Bluetooth de baixo consumo"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Activa a función de lista de permitidos de audio por Bluetooth de baixo consumo."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Dispositivos multimedia"</string>
@@ -285,8 +287,8 @@
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Desbloquea coa túa cara"</string>
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Permitir desbloqueo facial"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Utiliza a autenticación facial"</string>
-    <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Utiliza a cara para desbloquear o teléfono ou autorizar as compras.\n\nNota: Non podes utilizar a cara para desbloquear este dispositivo. Para obter máis información, ponte en contacto co administrador da túa organización."</string>
-    <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Utiliza a túa cara para desbloquear o teléfono, autorizar compras e iniciar sesión en aplicacións"</string>
+    <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Utiliza o recoñecemento facial para desbloquear o teléfono ou autorizar as compras.\n\nNota: Non podes utilizar o recoñecemento facial para desbloquear este dispositivo. Para obter máis información, ponte en contacto co administrador da túa organización."</string>
+    <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Utiliza o recoñecemento facial para desbloquear o teléfono, autorizar compras e iniciar sesión en aplicacións"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
@@ -354,6 +356,14 @@
     <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Se configuras o desbloqueo facial e o dactilar, o teléfono pedirache a impresión dixital no caso de que leves máscara ou esteas nun espazo escuro.\n\nPoderás desbloquealo co reloxo cando non se recoñeza a túa cara ou a túa impresión dixital."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Poderás desbloquealo co reloxo cando non se recoñeza a túa impresión dixital."</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Poderás desbloquealo co reloxo cando non se recoñeza a túa cara."</string>
+    <!-- no translation found for biometric_settings_use_fingerprint_or_watch_for (1160830065613858095) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_or_watch_for (1507077107150278532) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_fingerprint_or_watch_for (7495835723072020641) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_watch_for (5454545622244040110) -->
+    <skip />
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Usar recoñecemento facial ou reloxo"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Usar recoñecemento dactilar ou reloxo"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Usar recoñecemento facial, dactilar ou reloxo"</string>
@@ -455,7 +465,7 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Toca co dedo índice o sensor que está detrás do teléfono."</string>
     <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Non se completou o rexistro"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Esgotouse o tempo para configurar a impresión"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Téntao de novo agora mesmo ou configura a impresión dixital máis tarde en Configuración"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"Podes configurar a túa impresión dixital máis tarde en Configuración."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"O rexistro da impresión dixital non funcionou. Téntao de novo ou utiliza outro dedo."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Engadir outra"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Seguinte"</string>
@@ -489,8 +499,8 @@
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Bloqueo de pantalla"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Escolle un bloqueo de pantalla"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Escolle un novo bloqueo"</string>
-    <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Escolle bloqueo de traballo"</string>
-    <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Escolle bloqueo do traballo"</string>
+    <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Escolle un bloqueo de traballo"</string>
+    <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Escolle un novo bloqueo do traballo"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Configura un bloqueo de pantalla alternativo para conseguir unha maior seguranza"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Escolle o método de bloqueo da pantalla alternativo"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Se esqueces o bloqueo de pantalla, o administrador de TI non pode restablecelo."</string>
@@ -958,7 +968,6 @@
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Activada: baseada na cara"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Detección facial"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Máis información sobre xirar automaticamente"</string>
-    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Cando cambias o teléfono do modo vertical ao horizontal"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Resolución da pantalla"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Alta resolución"</string>
     <string name="screen_resolution_option_full" msgid="2694003735219114186">"Máxima resolución"</string>
@@ -1657,12 +1666,12 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Panel táctil"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Panel táctil e rato"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Velocidade do punteiro, xestos"</string>
-    <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Toca e fai clic"</string>
+    <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Toque para facer clic"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Xestos no panel táctil"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Personaliza xestos individuais de navegación no panel táctil"</string>
-    <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Inverter desprazamento"</string>
+    <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Desprazamento inverso"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"O contido móvese cara arriba cando te desprazas cara abaixo"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Toca a parte inferior dereita"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Toque na parte inferior dereita"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Toca a esquina inferior dereita do panel para máis opcións"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Velocidade do punteiro"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Descubrir xestos no panel táctil"</string>
@@ -2179,13 +2188,13 @@
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Activar a función Aforro de batería"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"A batería pode esgotarse antes do normal"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"A función Aforro de batería está activada"</string>
-    <!-- no translation found for battery_saver_link_a11y (6613079613524512257) -->
-    <skip />
+    <string name="battery_saver_link_a11y" msgid="6613079613524512257">"Máis información sobre a función Aforro de batería"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Algunhas funcións poden estar limitadas"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Aplicacións que máis batería consomen"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Consulta as aplicacións que máis batería consomen"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"A carga está optimizada para protexer a batería"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"A carga está optimizada para axudar a aumentar a vida útil da batería"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_summary (5107379280241187562) -->
+    <skip />
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"A carga está optimizada para protexer a batería"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Para aumentar a vida útil da batería, a carga optimízase cando o dispositivo está na base"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"A carga está optimizada para protexer a batería"</string>
@@ -2306,10 +2315,8 @@
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Uso da batería (<xliff:g id="SLOT">%s</xliff:g>)"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Tempo diante da pantalla desde a última carga completa"</string>
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Tempo diante da pantalla (<xliff:g id="SLOT">%s</xliff:g>)"</string>
-    <!-- no translation found for battery_usage_spinner_view_by_apps (8769276544072098082) -->
-    <skip />
-    <!-- no translation found for battery_usage_spinner_view_by_systems (7904104223212160541) -->
-    <skip />
+    <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Ver por aplicacións"</string>
+    <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Ver por sistemas"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Estatísticas de procesos"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Estatísticas frikis sobre procesos en execución"</string>
@@ -3648,12 +3655,9 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Permitir xestionar todos os ficheiros"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Permite que esta aplicación lea, modifique e elimine todos os ficheiros deste dispositivo ou de calquera unidade de almacenamento conectada. Se lle dás permiso, a aplicación poderá acceder aos ficheiros sen que se che notifique explicitamente."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Poden acceder a todos os ficheiros"</string>
-    <!-- no translation found for full_screen_intent_title (747270185715224130) -->
-    <skip />
-    <!-- no translation found for permit_full_screen_intent (9035367640019960861) -->
-    <skip />
-    <!-- no translation found for footer_description_full_screen_intent (7716518411349225528) -->
-    <skip />
+    <string name="full_screen_intent_title" msgid="747270185715224130">"Notificacións en pantalla completa"</string>
+    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Permitir notificacións en pantalla completa procedentes desta aplicación"</string>
+    <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Permite que esta aplicación amose notificacións en pantalla completa cando o dispositivo estea bloqueado. A aplicación pode usar esta opción para destacar alarmas, chamadas entrantes ou outras notificacións urxentes."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Aplicacións de xestión multimedia"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Permitir á aplicación a xestión multimedia"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Se lle concedes os permisos necesarios, esta aplicación non necesitará preguntarche para modificar ou eliminar ficheiros multimedia creados con outras aplicacións. A aplicación debe ter permiso para acceder aos ficheiros e ao contido multimedia."</string>
@@ -4065,7 +4069,10 @@
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# contrasinal}other{# contrasinais}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"automaticamente, completar, autocompletar, contrasinal"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"datos, claves de acceso, contrasinal"</string>
+    <string name="credman_autofill_keywords" msgid="701180623776848914">"automático, completar, autocompletar, datos, clave de acceso, contrasinal"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Asegúrate de que confías nesta aplicación&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Autocompletar de Google&gt;%1$s&lt;/xliff:g&gt; utiliza o contido da pantalla para determinar o que se pode completar."</string>
+    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Utilizas &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; usa o que aparece na pantalla para determinar o que se pode autocompletar. A partir de agora, determinada información nova (contrasinais, claves de acceso e outros datos) gardarase aquí."</string>
+    <string name="credman_picker_title" msgid="2642776965060619988">"Contrasinais, claves de acceso e servizos de datos"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Queres desactivar %1$s?"</string>
     <string name="credman_confirmation_message" msgid="158362573056996762">"É posible que a información gardada (por exemplo, as claves de acceso e os contrasinais) non estea dispoñible cando inicies sesión"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Queres usar %1$s?"</string>
@@ -4118,12 +4125,9 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <!-- no translation found for enable_angle_as_system_driver (3985105681812713612) -->
-    <skip />
-    <!-- no translation found for enable_angle_as_system_driver_summary (4173041926052925436) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (2619263039763150810) -->
-    <skip />
+    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Activar ANGLE"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"Activa ANGLE como controlador do OpenGL ES do sistema"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Cómpre reiniciar o dispositivo para cambiar o controlador do OpenGL ES do sistema"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Cambios na compatibilidade das aplicacións"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Activa/desactiva os cambios de compatibilidade das aplicacións"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Cambios activados de modo predeterminado"</string>

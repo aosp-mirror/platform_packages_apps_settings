@@ -105,6 +105,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"रद्द गर्नुहोस्"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"\"ब्लुटुथ लो इनर्जी अडियो\" अफ गरियोस्"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"डिभाइसमा LE अडियो हार्डवेयर चलाउन मिल्छ भने \"ब्लुटुथ लो इनर्जी अडियो\" सुविधा अफ हुन्छ।"</string>
+    <!-- no translation found for bluetooth_show_leaudio_device_details (3306637862550475370) -->
+    <skip />
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"ब्लुटुथ लो इनर्जी अडियोको श्वेतसूची अन गरियोस्"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"ब्लुटुथ लो इनर्जी अडियोको श्वेतसूचीसम्बन्धी सुविधा अन गर्नुहोस्।"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"मिडियासम्बन्धी यन्त्रहरू"</string>
@@ -159,8 +161,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"सिस्टम डिफल्ट"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"सेटिङबाट यो एपका लागि भाषा चयन गर्न मिल्दैन।"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"यो भाषा एपमा उपलब्ध भाषाहरूभन्दा फरक हुन सक्छ। यो सेटिङले केही एपमा काम नगर्न सक्छ।"</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6744909281573556379) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"हरेक एपमा उक्त भाषा सेट गर्नुहोस्।"</string>
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"तपाईंका सिस्टम, एप र वेबसाइटहरूले तपाईंले रुचाएको भाषाको सूचीमा रहेको प्रयोग गर्न सकिने पहिलो भाषा प्रयोग गर्छन्।"</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"हरेक एपका हकमा बेग्लाबेग्लै भाषा चयन गर्न एपको भाषासम्बन्धी सेटिङमा जानुहोस्।"</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"एपका भाषाहरूका बारेमा थप जान्नुहोस्"</string>
@@ -313,9 +314,9 @@
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"फेरि फेस अनलक सेटअप गर्न आफ्नो हालको फेस मोडेल मेटाउनुहोस्।\n\nतपाईंको फेस मोडेल सुरक्षित रूपले सदाका लागि मेटिने छ।\n\nउक्त फेस मोडेल मेटिएपछि फोन अनलक गर्न वा एपहरूमा आफ्नो पहिचान पुष्टि गर्न तपाईंले आफ्नो फिंगरप्रिन्ट, PIN, प्याटर्न वा पासवर्ड प्रयोग गर्नु पर्ने हुन्छ।"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"निम्न कार्य गर्न फेस अनलक प्रयोग गर्नुहोस्"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"फेस अनलक प्रयोग गर्दा"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"आँखा खुला हुनै पर्छ"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"आँखा खुला राख्न लगाइयोस्"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"फोन अनलक गर्न तपाईंका आँखा खुला हुनै पर्छ"</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"सधैँ पुष्टि गर्न आवश्यक पर्छ"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"सधैँ पुष्टि गर्न लगाइयोस्"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"एपहरूमा फेस अनलक प्रयोग गर्दा सधैँ पुष्टि गर्नु पर्ने बनाउनुहोस्"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"फेस मोडेल मेटाइयोस्"</string>
     <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"फेस अनलक सेटअप गर्नुहोस्"</string>
@@ -328,7 +329,7 @@
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"फिंगरप्रिन्ट अनलक प्रयोग गर्दा"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"कार्य प्रोफाइलका लागि फिंगरप्रिन्ट"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"फिंगरप्रिन्ट हाल्नुहोस्"</string>
-    <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{फिंगरप्रिन्ट हालिएको}other{# वटा फिंगरप्रिन्ट हालिएका छन्}}"</string>
+    <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{फिंगरप्रिन्ट हालिएको छ}other{# वटा फिंगरप्रिन्ट हालिएका छन्}}"</string>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"सेटअप गर्नु पर्ने हुन्छ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"आफ्नो फिंगरप्रिन्ट दर्ता गर्नु…"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"फिंगरप्रिन्ट अनलक प्रयोग गर्न दिनु…"</string>
@@ -355,6 +356,14 @@
     <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"तपाईंले फेस अनलक र फिंगरप्रिन्ट अनलक सेटअप गर्नुभयो भने तपाईंले मास्क लगाएका बेला वा तपाईं कुनै अँध्यारो ठाउँमा हुँदा तपाईंको फोनले तपाईंलाई फिंगरप्रिन्ट प्रयोग गर्न लगाउने छ।\n\nफोनले तपाईंको अनुहार वा फिंगरप्रिन्ट पहिचान गर्न नसकेका खण्डमा तपाईं आफ्नो स्मार्ट वाच प्रयोग गरी अनलक गर्न सक्नुहुन्छ।"</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"फोनले तपाईंको फिंगरप्रिन्ट पहिचान गर्न नसकेका खण्डमा तपाईं आफ्नो स्मार्ट वाच प्रयोग गरी अनलक गर्न सक्नुहुन्छ।"</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"फोनले तपाईंको अनुहार पहिचान गर्न नसकेका खण्डमा तपाईं आफ्नो स्मार्ट वाच प्रयोग गरी अनलक गर्न सक्नुहुन्छ।"</string>
+    <!-- no translation found for biometric_settings_use_fingerprint_or_watch_for (1160830065613858095) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_or_watch_for (1507077107150278532) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_fingerprint_or_watch_for (7495835723072020641) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_watch_for (5454545622244040110) -->
+    <skip />
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"अनुहार वा स्मार्ट वाच प्रयोग गरेर"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"फिंगरप्रिन्ट वा स्मार्ट वाच प्रयोग गरेर"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"अनुहार, फिंगरप्रिन्ट वा स्मार्ट वाच प्रयोग गरेर"</string>
@@ -375,7 +384,7 @@
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"कार्य प्रोफाइलका लागि फेस र फिंगरप्रिन्ट अनलक"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"सेटअप गर्नु पर्ने हुन्छ"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"फेस तथा फिंगरप्रिन्टहरू थपिए"</string>
-    <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"फेस तथा फिंगरप्रिन्ट थपिए"</string>
+    <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"फेस तथा फिंगरप्रिन्ट हालिए"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"तपाईंले फेस अनलक र फिंगरप्रिन्ट अनलक सेटअप गर्नुभयो भने तपाईंले मास्क लगाएका बेला वा तपाईं कुनै अँध्यारो ठाउँमा हुँदा तपाईंको फोनले तपाईंलाई फिंगरप्रिन्ट प्रयोग गर्न लगाउने छ"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"अनलक गर्ने तरिकाहरू"</string>
     <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"निम्न कार्य गर्न अनुहार वा फिंगरप्रिन्ट प्रयोग गर्नुहोस्:"</string>
@@ -456,7 +465,7 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"तपाईंको फोनको पछाडि भागमा रहेको सेन्सरमा छुनुहोस्। चोर औंला प्रयोग गर्नुहोस्‌।"</string>
     <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"दर्ता गर्न सकिएन"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"फिंगरप्रिन्ट सेट अप गर्ने समय सकियो"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"अहिले नै फेरि प्रयास गर्नुहोस् वा पछि सेटिङमा गई फिंगरप्रिन्ट सेटअप गर्नुहोस्"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"तपाईं पछि सेटिङमा गई आफ्नो फिंगरप्रिन्ट सेट अप गर्न सक्नुहुन्छ।"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"फिंगरप्रिन्ट दर्ता गर्न सकिएन। पुन: प्रयास गर्नुहोस् वा अरू औँलाको प्रयोग गर्नुहोस्।"</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"अर्को हाल्नुहोस्"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"अर्को"</string>
@@ -771,7 +780,7 @@
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"“<xliff:g id="SSID">%1$s</xliff:g>” मा कनेक्ट गर्न अर्को डिभाइसबाट यो QR कोड स्क्यान गर्नुहोस्"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"“<xliff:g id="SSID">%1$s</xliff:g>” मा जडान गर्न QR कोड स्क्यान गर्नुहोस्"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"फेरि प्रयास गर्नुहोस्। समस्या यथावत् रहिरहेमा डिभाइसका निर्मातासँग सम्पर्क गर्नुहोस्"</string>
-    <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"केही चिज गडबड भयो"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"कुनै समस्या आयो"</string>
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"यन्त्र प्लग इन गरिएको, चार्ज भएको र सक्रिय पारिएको कुरा सुनिश्चित गर्नुहोस्"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"यन्त्र प्लग इन गरिएको, चार्ज भएको र सक्रिय पारिएको कुरा सुनिश्चित गर्नुहोस्। समस्या यथावत् रहिरहेमा डिभाइसका निर्मातासँग सम्पर्क गर्नुहोस्"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"यस यन्त्रले “<xliff:g id="SSID">%1$s</xliff:g>” थप्न सक्दैन"</string>
@@ -959,7 +968,6 @@
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"अन छ - अनुहारमा आधारित"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"अनुहार पत्ता लगाउने सुविधा"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"अटोरोटेटका बारेमा थप जान्नुहोस्"</string>
-    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"तपाईंले आफ्नो फोन पोर्ट्रेट र ल्यान्डस्केपबिच अदलबदल गर्दा"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"स्क्रिन रिजोल्युसन"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"उच्च रिजोल्युसन"</string>
     <string name="screen_resolution_option_full" msgid="2694003735219114186">"फुल रिजोल्युसन"</string>
@@ -2180,13 +2188,13 @@
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"ब्याट्री सेभर अन गर्नुहोस्"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"ब्याट्री सामान्यभन्दा पहिले सकिन सक्छ"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"ब्याट्री सेभर अन छ"</string>
-    <!-- no translation found for battery_saver_link_a11y (6613079613524512257) -->
-    <skip />
+    <string name="battery_saver_link_a11y" msgid="6613079613524512257">"ब्याट्री सेभरका बारेमा थप जान्नुहोस्"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"केही सुविधाहरू सीमित हुन सक्छन्‌"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"तुलनात्मक रूपमा ब्याट्रीको उच्च खपत"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"ब्याट्री सबैभन्दा धेरै खपत गर्ने एपहरू हेर्नुहोस्"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"तपाईंको डिभाइसको ब्याट्री जोगाउने प्रयोजनका लागि चार्ज गर्ने प्रक्रिया अप्टिमाइज गरिन्छ"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"तपाईंको डिभाइसको ब्याट्रीको आयु बढाउने प्रयोजनका लागि चार्ज गर्ने प्रक्रिया अप्टिमाइज गरिन्छ"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_summary (5107379280241187562) -->
+    <skip />
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"तपाईंको डिभाइसको ब्याट्री जोगाउने प्रयोजनका लागि चार्ज गर्ने प्रक्रिया अप्टिमाइज गरिएको छ"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"तपाईंको डिभाइस डक गरिएका बेला उक्त डिभाइसको ब्याट्रीको आयु बढाउने प्रयोजनका लागि चार्ज गर्ने प्रक्रिया अप्टिमाइज गरिन्छ"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"तपाईंको डिभाइसको ब्याट्री जोगाउने प्रयोजनका लागि चार्ज गर्ने प्रक्रिया अप्टिमाइज गरिन्छ"</string>
@@ -2307,10 +2315,8 @@
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"<xliff:g id="SLOT">%s</xliff:g> का बीचमा खपत भएको ब्याट्री"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"पछिल्लो पटक पूरा चार्ज गरेदेखि अहिलेसम्मको स्क्रिन टाइम"</string>
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"<xliff:g id="SLOT">%s</xliff:g> का लागि स्क्रिन टाइम"</string>
-    <!-- no translation found for battery_usage_spinner_view_by_apps (8769276544072098082) -->
-    <skip />
-    <!-- no translation found for battery_usage_spinner_view_by_systems (7904104223212160541) -->
-    <skip />
+    <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"एपअनुसार हेर्नुहोस्"</string>
+    <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"सिस्टमअनुसार हेर्नुहोस्"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"प्रक्रिया तथ्याङ्क"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"चालु रहने प्रक्रियाहरूको बारेको geeky तथ्याङ्क"</string>
@@ -2663,7 +2669,7 @@
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"सेटअप छैन"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"सेट भएको छैन - सीमित प्रोफाइल"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"सेट भएको छैन - कार्य प्रोफाइल"</string>
-    <string name="user_admin" msgid="4024553191395768119">"प्रशासक"</string>
+    <string name="user_admin" msgid="4024553191395768119">"एडमिन"</string>
     <string name="user_you" msgid="3070562015202859996">"तपाईं (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"तपाईं योभन्दा बढी प्रयोगकर्ता थप्न सक्नुहुन्न। नयाँ प्रयोगकर्ता थप्न कोही प्रयोगकर्ता हटाउनुहोस्।"</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"निषेध लगाइएको प्रोफाइलले खाताहरू थप गर्न सक्दैन"</string>
@@ -2957,7 +2963,7 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"पाठको आकार, ठुलो आकारको पाठ, ठुलो फन्ट, ठुलो पाठ, कमजोर दृष्टि, पाठ अझ ठुलो बनाउनुहोस्, फन्ट ठुलो बनाउने टुल, फन्ट ठुलो बनाउने प्रक्रिया"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"सधैँ अन हुने एम्बियन्ट डिस्प्ले, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, ट्याग, रिडर"</string>
-    <string name="sound_dashboard_summary" msgid="6574444810552643312">"भोल्युम, कम्पन, बाधा नपुर्‍याउनुहोस्"</string>
+    <string name="sound_dashboard_summary" msgid="6574444810552643312">"भोल्युम, भाइब्रेसन, Do Not Disturb"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"मिडियाको भोल्युम"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"भोल्युम cast गर्नुहोस्"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"कलको भोल्युम"</string>
@@ -3649,12 +3655,9 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"सबै फाइलहरूको व्यवस्थापन गर्ने अनुमति दिइयोस्"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"यो एपलाई यो डिभाइस वा जोडिएको कुनै भण्डारणमा रहेका सबै फाइलहरू पढ्ने, परिमार्जन गर्ने तथा मेट्ने अनुमति दिनुहोस्। अनुमति दिइएका खण्डमा यो एपले तपाईंको स्पष्ट अनुमतिविनै फाइलहरू प्रयोग गर्नसक्छ।"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"सबै फाइलहरूमाथि पहुँच राख्न सक्छ।"</string>
-    <!-- no translation found for full_screen_intent_title (747270185715224130) -->
-    <skip />
-    <!-- no translation found for permit_full_screen_intent (9035367640019960861) -->
-    <skip />
-    <!-- no translation found for footer_description_full_screen_intent (7716518411349225528) -->
-    <skip />
+    <string name="full_screen_intent_title" msgid="747270185715224130">"फुल स्क्रिनमा सूचनाहरू देखाउने अनुमति"</string>
+    <string name="permit_full_screen_intent" msgid="9035367640019960861">"यो एपलाई सूचनाहरू फुल स्क्रिनमा देखाउने अनुमति दिनुहोस्"</string>
+    <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"यो एपलाई डिभाइस लक भएका बेला फुल स्क्रिन ढाक्ने खालका सूचनाहरू देखाउने अनुमति दिनुहोस्। एपहरूले अलार्म, आगमन कल वा अन्य महत्त्वपूर्ण सूचनाहरू हाइलाइट गर्ने प्रयोजनका लागि फुल स्क्रिनमा सूचनाहरू देखाउन सक्छन्।"</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"मिडिया व्यवस्थापन गर्ने अनुमति दिइएका एप"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"एपलाई मिडिया व्यवस्थापन गर्ने अनुमति दिनुहोस्"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"तपाईंले यो अनुमति दिनुभयो भने यो एपले तपाईंलाई नसोधिकन अन्य एपमार्फत सिर्जना गरिएका मिडिया फाइलहरूमा फेरबदल गर्न र तिनलाई मेटाउन सक्छ। यो एपलाई फाइल र मिडिया हेर्ने तथा प्रयोग गर्ने अनुमति दिनु पर्ने हुन्छ।"</string>
@@ -4066,7 +4069,10 @@
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# पासवर्ड}other{# वटा पासवर्ड}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"स्वतः, भर्नुहोस्, अटोफिल, पासवर्ड"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"डेटा, पासकी, पासवर्ड"</string>
+    <string name="credman_autofill_keywords" msgid="701180623776848914">"अटो, फिल, अटोफिल, डेटा, पासकी, पासवर्ड"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;तपाईं यो एपमाथि भरोसा गर्नुहुन्छ भन्ने कुरा पक्का गर्नुहोस्&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; यस एपले अटोफिल गर्न सकिने कुराहरूको निर्धारण गर्न तपाईंको स्क्रिनमा भएका वस्तुहरूको प्रयोग गर्छ।"</string>
+    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; प्रयोग गर्ने हो?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; ले के-कस्ता जानकारी अटोफिल गर्न सकिन्छ भन्ने कुरा निर्धारण गर्न तपाईंको स्क्रिनमा भएका कुराहरू प्रयोग गर्छ। अबदेखि नयाँ पासवर्ड, पासकी तथा अन्य जानकारी यहाँ सेभ गरिने छन्।"</string>
+    <string name="credman_picker_title" msgid="2642776965060619988">"पासवर्ड, पासकी र डेटासम्बन्धी सेवा"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s अफ गर्ने हो?"</string>
     <string name="credman_confirmation_message" msgid="158362573056996762">"पासकी र पासवर्डलगायतका सेभ गरिएका जानकारी तपाईंले साइन इन गर्दा उपलब्ध नहुन सक्छ"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"%1$s प्रयोग गर्ने हो?"</string>
@@ -4119,12 +4125,9 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <!-- no translation found for enable_angle_as_system_driver (3985105681812713612) -->
-    <skip />
-    <!-- no translation found for enable_angle_as_system_driver_summary (4173041926052925436) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (2619263039763150810) -->
-    <skip />
+    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"ANGLE अन गर्नुहोस्"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"सिस्टम OpenGL ES ड्राइभरका रूपमा ANGLE अन गर्नुहोस्"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"सिस्टम OpenGL ES ड्राइभर बदल्न रिबुट गर्नु पर्ने हुन्छ"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"एपको कम्प्याटिबिलिटीमा भएका परिवर्तनहरू"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"एपको कम्प्याटिबिलिटीमा गरिएको परिवर्तन टगल गर्नुहोस्"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"डिफल्ट रूपमा सक्षम पारिएका परिवर्तनहरू"</string>
@@ -4289,7 +4292,7 @@
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"SIM अफ गर्ने हो?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"SIM अफ गरिँदै<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
     <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"मोबाइल नेटवर्क अफ गर्न सकिएन"</string>
-    <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"केही चिज गडबड भयो र तपाईंको मोबाइल सेवा प्रदायक असक्षम पार्न सकिएन।"</string>
+    <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"कुनै समस्या आयो र तपाईंको मोबाइल सेवा प्रदायक असक्षम पार्न सकिएन।"</string>
     <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"दुईवटै SIM प्रयोग गर्ने हो?"</string>
     <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"यो डिभाइसमा एकैसाथ २ वटा SIM चलाउन सकिन्छ। एउटा मात्र SIM प्रयोग गरिरहन \"पर्दैन, धन्यवाद\" मा ट्याप गर्नुहोस्।"</string>
     <string name="sim_action_restart_title" msgid="7054617569121993825">"डिभाइस रिस्टार्ट गर्ने हो?"</string>
@@ -4328,7 +4331,7 @@
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"<xliff:g id="APPNAME">%1$s</xliff:g> एप तपाईंको डिभाइसमा कनेक्ट हुन कुनै अस्थायी Wi‑Fi नेटवर्क प्रयोग गर्न चाहन्छ"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"कुनै पनि यन्त्र फेला परेन। यन्त्रहरू सक्रिय हुनुका साथै जडान गर्नका लागि उपलब्ध भएको कुरा सुनिश्चित गर्नुहोस्।"</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"फेरि प्रयास गर्नुहोस्"</string>
-    <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"केही चिज गडबड भयो। यो एपले कुनै यन्त्र छनौट गर्नेसम्बन्धी अनुरोध रद्द गरेको छ।"</string>
+    <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"कुनै समस्या आयो। यो एपले कुनै यन्त्र छनौट गर्नेसम्बन्धी अनुरोध रद्द गरेको छ।"</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"सफलतापूर्वक जोडियो"</string>
     <string name="network_connection_connect_failure" msgid="6803313816657494319">"कनेक्ट गर्न सकिएन"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"सबै देखाउनुहोस्"</string>

@@ -105,6 +105,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Anulo"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Çaktivizo Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Çaktivizon veçorinë Bluetooth LE Audio nëse pajisja mbështet aftësitë e harduerit të LE Audio."</string>
+    <!-- no translation found for bluetooth_show_leaudio_device_details (3306637862550475370) -->
+    <skip />
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Aktivizo listën e autorizimeve të Bluetooth LE Audio"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Aktivizo veçorinë e listës së autorizimeve të Bluetooth LE Audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Pajisjet për median"</string>
@@ -220,7 +222,7 @@
     <string name="zone_auto_title" msgid="5141692422373097957">"Cakto automatikisht"</string>
     <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"Kur ky çelës është aktiv, vendndodhja do të përdoret për caktimin e brezit orar"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Përdor parazgjedhjen e lokalitetit"</string>
-    <string name="date_time_24hour" msgid="286679379105653406">"Përdor formatin 24 orë"</string>
+    <string name="date_time_24hour" msgid="286679379105653406">"Përdor formatin 24-orësh"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Ora"</string>
     <string name="time_format_category_title" msgid="7108616745509689991">"Formati i orës"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Brezi orar"</string>
@@ -354,6 +356,14 @@
     <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Kur konfiguron \"Shkyçjen me fytyrë\" dhe \"Shkyçjen me gjurmën e gishtit\", telefoni yt do të kërkojë gjurmën tënde të gishtit kur mban maskë apo kur je në një zonë të errët.\n\nMund ta shkyçësh nëpërmjet orës kur fytyra ose gjurma e gishtit nuk njihet."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Mund ta shkyçësh nëpërmjet orës kur gjurma e gishtit ose fytyra nuk njihet."</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Mund ta shkyçësh nëpërmjet orës kur fytyra ose gjurma e gishtit nuk njihet."</string>
+    <!-- no translation found for biometric_settings_use_fingerprint_or_watch_for (1160830065613858095) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_or_watch_for (1507077107150278532) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_fingerprint_or_watch_for (7495835723072020641) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_watch_for (5454545622244040110) -->
+    <skip />
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Përdor fytyrën ose orën"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Përdor gjurmën e gishtit ose orën"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Përdor fytyrën, gjurmën e gishtit ose orën"</string>
@@ -455,7 +465,7 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Prek sensorin në pjesën e pasme të telefonit. Përdor gishtin tregues."</string>
     <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Regjistrimi nuk përfundoi"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Konfigurimi i gjurmës së gishtit skadoi"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Provo sërish tani ose konfiguro gjurmën e gishtit më vonë te \"Cilësimet\""</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"Mund ta konfigurosh gjurmën e gishtit më vonë te \"Cilësimet\"."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Regjistrimi i gjurmës së gishtit nuk funksionoi. Provo përsëri ose përdor një gisht tjetër."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Shto një tjetër"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Para"</string>
@@ -521,7 +531,7 @@
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Shkyçja me fytyrë + Kodi PIN"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Shkyçja me fytyrë + Fjalëkalimi"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Vazhdo pa \"Shkyçjen me fytyrë\""</string>
-    <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Motivi • Fytyra • Gjurma e gishtit"</string>
+    <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Motiv • Fytyrë • Gjurmë gishti"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • Fytyra • Gjurma e gishtit"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Fjalëkalimet • Fytyra • Gjurma e gishtit"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Vazhdo pa fytyrë apo gjurmë gishti"</string>
@@ -958,7 +968,6 @@
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Aktiv - Në bazë të fytyrave"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Zbulimi i fytyrës"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Mëso më shumë për rrotullimin automatik"</string>
-    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Kur lëviz telefonin mes modalitetit \"portret\" e \"horizontal\""</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Rezolucioni i ekranit"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Rezolucion i lartë"</string>
     <string name="screen_resolution_option_full" msgid="2694003735219114186">"Rezolucion i plotë"</string>
@@ -1662,7 +1671,7 @@
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Personalizo gjestet individuale të navigimit me bllokun me prekje"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Lëvizja në të kundërt"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Përmbajtja zhvendoset lart kur ti lëviz poshtë"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Trokit poshtë djathtas"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Trokitja poshtë djathtas"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Trokit te këndi poshtë djathtas i bllokut me prekje për më shumë opsione"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Shpejtësia e treguesit"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Mëso gjestet e bllokut me prekje"</string>
@@ -2184,7 +2193,8 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Përdorim më i lartë i baterisë"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Shiko aplikacionet me përdorimin më të lartë"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Karikimi u optimizua për të mbrojtur baterinë tënde"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"Për të ndihmuar në zgjatjen e jetëgjatësisë së baterisë sate, karikimi është optimizuar"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_summary (5107379280241187562) -->
+    <skip />
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Karikimi u optimizua për të mbrojtur baterinë tënde"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Për të ndihmuar në zgjatjen e jetëgjatësisë së baterisë sate, karikimi është i optimizuar gjatë lidhjes me stacionin"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Karikimi u optimizua për të mbrojtur baterinë tënde"</string>
@@ -4059,7 +4069,10 @@
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# fjalëkalim}other{# fjalëkalime}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"automatikisht, plotëso, plotësimi automatik, fjalëkalim"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"të dhëna, çelës kalimi, fjalëkalim"</string>
+    <string name="credman_autofill_keywords" msgid="701180623776848914">"automatik, plotëso, plotësimi automatik, të dhënat, çelësi i kalimit, fjalëkalimi"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Sigurohu që ke besim te ky aplikacion&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Plotësimi automatik i Google&gt;%1$s&lt;/xliff:g&gt; përdor atë që ndodhet në ekranin tënd për të përcaktuar se çfarë mund të plotësohet automatikisht."</string>
+    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Përdor &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; përdor ato që janë në ekranin tënd për të përcaktuar se çfarë mund të plotësohet automatikisht. Fjalëkalimet, çelësat e kalimit dhe informacionet e tjera të reja do të ruhen këtu nga tani e tutje."</string>
+    <string name="credman_picker_title" msgid="2642776965060619988">"Fjalëkalimet, çelësat e kalimit dhe shërbimet e të dhënave"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Të çaktivizohet %1$s?"</string>
     <string name="credman_confirmation_message" msgid="158362573056996762">"Informacionet e ruajtura, si p.sh. çelësat e kalimit dhe fjalëkalimet, mund të mos ofrohen kur të identifikohesh"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Të përdoret %1$s?"</string>
@@ -4112,12 +4125,9 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <!-- no translation found for enable_angle_as_system_driver (3985105681812713612) -->
-    <skip />
-    <!-- no translation found for enable_angle_as_system_driver_summary (4173041926052925436) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (2619263039763150810) -->
-    <skip />
+    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Aktivizo ANGLE"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"Aktivizo ANGLE si drejtues të OpenGL ES për sistemin"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Kërkohet rindezja për të ndryshuar drejtuesin e OpenGL ES për sistemin"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Ndryshimet e pajtueshmërisë së aplikacionit"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Aktivizo ose çaktivizo ndryshimet e përputhshmërisë së aplikacionit"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Ndryshimet të aktivizuara si parazgjedhje"</string>

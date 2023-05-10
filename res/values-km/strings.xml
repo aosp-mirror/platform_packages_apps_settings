@@ -105,6 +105,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"បោះបង់"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"បិទប៊្លូធូស LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"បិទមុខងារប៊្លូធូស LE Audio ប្រសិនបើ​ឧបករណ៍​អាចប្រើសមត្ថភាព​ហាតវែរ LE audio បាន។"</string>
+    <!-- no translation found for bluetooth_show_leaudio_device_details (3306637862550475370) -->
+    <skip />
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"បើក​បញ្ជីអនុញ្ញាត​ប៊្លូធូស LE Audio"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"បើក​មុខងារបញ្ជីអនុញ្ញាត​ប៊្លូធូស LE Audio។"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"ឧបករណ៍ផ្ទុកទិន្នន័យ"</string>
@@ -159,8 +161,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"លំនាំ​ដើម​ប្រព័ន្ធ"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"មិនអាចជ្រើសរើសភាសាសម្រាប់កម្មវិធីនេះពីការកំណត់បានទេ។"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"ភាសាអាចមាន​ភាពខុសគ្នាពី​ភាសាដែលមាននៅក្នុង​កម្មវិធី។ កម្មវិធីមួយចំនួន​ប្រហែលជាមិនអាចប្រើ​ការកំណត់នេះបានទេ។"</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6744909281573556379) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"កំណត់ភាសាសម្រាប់កម្មវិធីនីមួយៗ។"</string>
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"ប្រព័ន្ធ កម្មវិធី និងគេហទំព័រ​របស់អ្នក​ប្រើភាសាដែលស្គាល់ដំបូងគេពី​ភាសាដែលអ្នកចង់ប្រើ។"</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"ដើម្បីជ្រើសរើស​ភាសាសម្រាប់​កម្មវិធីនីមួយៗ សូមចូលទៅកាន់​ការកំណត់ភាសាកម្មវិធី។"</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"ស្វែងយល់បន្ថែម​អំពីភាសាកម្មវិធី"</string>
@@ -316,7 +317,7 @@
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"តម្រូវឱ្យ​បើកភ្នែក"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"ដើម្បី​ដោះសោ​ទូរសព្ទ ភ្នែក​របស់អ្នក​ត្រូវតែបើក"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"តម្រូវឱ្យមាន​ការបញ្ជាក់​ជានិច្ច"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"តម្រូវឱ្យបញ្ជាក់ជានិច្ច នៅពេលប្រើការដោះសោតាមទម្រង់មុខនៅក្នុងកម្មវិធី"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"តម្រូវឱ្យបញ្ជាក់ជានិច្ច នៅពេលប្រើការដោះសោដោយស្កេនមុខនៅក្នុងកម្មវិធី"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"លុប​គំរូមុខ"</string>
     <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"រៀបចំ​ការដោះសោ​តាមទម្រង់មុខ"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"លុប​គំរូមុខ​ឬ?"</string>
@@ -355,11 +356,19 @@
     <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"នៅពេល​អ្នករៀបចំ​ការដោះសោ​តាមទម្រង់មុខ និងការដោះសោ​ដោយប្រើ​ស្នាមម្រាមដៃ ទូរសព្ទ​របស់អ្នក​នឹងសួររក​ស្នាមម្រាមដៃ​របស់អ្នក នៅពេល​អ្នកពាក់ម៉ាស់ ឬស្ថិតនៅក្នុង​ទីងងឹត។\n\nអ្នកអាចដោះសោ​ដោយប្រើនាឡិការបស់អ្នកបាន នៅពេលមិនស្គាល់​ស្នាមម្រាមដៃ ឬមុខរបស់អ្នក។"</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"អ្នកអាចដោះសោ​ដោយប្រើនាឡិកា​របស់អ្នកបាន នៅពេលមិនស្គាល់​ស្នាមម្រាមដៃរបស់អ្នក។"</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"អ្នកអាចដោះសោ​ដោយប្រើនាឡិកា​របស់អ្នកបាន នៅពេលមិនស្គាល់មុខ​របស់អ្នក។"</string>
+    <!-- no translation found for biometric_settings_use_fingerprint_or_watch_for (1160830065613858095) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_or_watch_for (1507077107150278532) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_fingerprint_or_watch_for (7495835723072020641) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_watch_for (5454545622244040110) -->
+    <skip />
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"ការប្រើមុខ ឬនាឡិកា"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"ការប្រើស្នាមម្រាមដៃ ឬនាឡិកា"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"ការប្រើមុខ ស្នាមម្រាមដៃ ឬនាឡិកា"</string>
     <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"ការប្រើនាឡិកា"</string>
-    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"រៀបចំការដោះសោ​ដោយប្រើស្នាមម្រាមដៃ ឬមុខជាមុនសិន"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"រៀបចំការដោះសោ​ដោយស្កេន​ស្នាមម្រាមដៃ ឬមុខជាមុនសិន"</string>
     <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"អ្នកអាចដោះសោ​ដោយប្រើនាឡិកា​របស់អ្នកបាន នៅពេលមិនស្គាល់​ស្នាមម្រាមដៃ ឬមុខរបស់អ្នក"</string>
     <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"រៀបចំ​ការដោះសោដោយប្រើ​ស្នាមម្រាមដៃជាមុនសិន"</string>
     <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"អ្នកអាចដោះសោ​ដោយប្រើនាឡិកា​របស់អ្នកបាន នៅពេលមិនស្គាល់​ស្នាមម្រាមដៃរបស់អ្នក"</string>
@@ -371,8 +380,8 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"បានបញ្ចូលមុខ និង <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"បានបញ្ចូលមុខ ស្នាមម្រាមដៃ និង <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"បានបញ្ចូលមុខ ស្នាមម្រាមដៃ និង <xliff:g id="WATCH">%s</xliff:g>"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"ការដោះសោ​ដោយប្រើ​ស្នាមម្រាមដៃ និងតាមទម្រង់មុខ"</string>
-    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"ការដោះសោដោយប្រើ​ស្នាមម្រាមដៃ និងមុខ​សម្រាប់ការងារ"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"ការដោះសោ​ដោយស្កេន​ស្នាមម្រាមដៃ និងមុខ"</string>
+    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"ការដោះសោដោយស្កេន​ស្នាមម្រាមដៃ និងមុខ​សម្រាប់ការងារ"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"ត្រូវការរៀបចំ"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"បានបញ្ចូលស្នាមម្រាមដៃ និងមុខ"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"បានបញ្ចូលស្នាមម្រាមដៃ និងមុខ"</string>
@@ -456,7 +465,7 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"ប៉ះឧបករណ៍ចាប់ស្នាមម្រាមដៃនៅផ្នែកខាងក្រោយនៃទូរសព្ទរបស់អ្នក។ សូមប្រើម្រាមដៃចង្អុលរបស់អ្នក។"</string>
     <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"ការស្កេនបញ្ចូលមិនបានបញ្ចប់ទេ"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"អស់ម៉ោងក្នុងកា​ររៀបចំ​ស្នាមម្រាមដៃ"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"សាកល្បង​ម្ដ​ងទៀត​ឥឡូវ​នេះ ឬ​រៀបចំ​ស្នាមម្រាមដៃ​របស់​អ្នក​នៅ​ពេល​ក្រោយ​នៅ​ក្នុងការ​កំណត់"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"អ្នកអាចរៀបចំស្នាមម្រាមដៃរបស់អ្នកនៅពេលក្រោយនៅក្នុងការកំណត់។"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"ការបញ្ចូលស្នាមម្រាមដៃមិនដំណើរការទេ សូមព្យាយាមម្តងទៀត ឬប្រើម្រាមដៃផ្សេងពីនេះ។"</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"បញ្ចូលមួយទៀត"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"បន្ទាប់"</string>
@@ -959,7 +968,6 @@
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"បើក - ផ្អែកលើមុខ"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"ការសម្គាល់​មុខ"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"ស្វែងយល់បន្ថែម​អំពីការបង្វិល​ស្វ័យប្រវត្តិ"</string>
-    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"នៅពេលដែល​អ្នកដាក់​ទូរសព្ទ​របស់អ្នកឱ្យ​បញ្ឈរ និងផ្ដេក"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"កម្រិតច្បាស់នៃអេក្រង់"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"កម្រិតច្បាស់ខ្ពស់"</string>
     <string name="screen_resolution_option_full" msgid="2694003735219114186">"កម្រិតគុណភាព​ពេញលេញ"</string>
@@ -2185,7 +2193,8 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"ការប្រើប្រាស់ថ្មខ្ពស់ជាងមុន"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"មើលកម្មវិធី​ដែលមាន​ការប្រើប្រាស់ខ្ពស់បំផុត"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"បានបង្កើនប្រសិទ្ធភាពការសាក ដើម្បីការពារថ្មរបស់អ្នក"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"ដើម្បីជួយបង្កើនអាយុកាលថ្មរបស់អ្នក ការសាកត្រូវបានបង្កើនប្រសិទ្ធភាព"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_summary (5107379280241187562) -->
+    <skip />
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"បានបង្កើនប្រសិទ្ធភាពការសាក ដើម្បីការពារថ្មរបស់អ្នក"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"ដើម្បីជួយបង្កើនអាយុកាលថ្មរបស់អ្នក ការសាកត្រូវបានបង្កើនប្រសិទ្ធភាពពេលភ្ជាប់"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"បានបង្កើនប្រសិទ្ធភាពការសាក ដើម្បីការពារថ្មរបស់អ្នក"</string>
@@ -4060,7 +4069,10 @@
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{ពាក្យសម្ងាត់ #}other{ពាក្យសម្ងាត់ #}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"ស្វ័យប្រវត្តិ បំពេញ បំពេញស្វ័យប្រវត្តិ ពាក្យសម្ងាត់"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"ទិន្នន័យ, កូដសម្ងាត់, ពាក្យ​សម្ងាត់"</string>
+    <string name="credman_autofill_keywords" msgid="701180623776848914">"ស្វ័យប្រវត្តិ, បំពេញ, បំពេញស្វ័យប្រវត្តិ, ទិន្នន័យ, កូដសម្ងាត់, ពាក្យ​សម្ងាត់"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;ត្រូវ​ប្រាកដថា​អ្នក​ទុកចិត្ត​កម្មវិធី​នេះ&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google បំពេញស្វ័យប្រវត្តិ&gt;%1$s&lt;/xliff:g&gt; ប្រើប្រាស់​អ្វី​ដែល​មាននៅ​លើ​អេក្រង់​របស់អ្នក ដើម្បី​កំណត់​អ្វីដែល​អាចបំពេញ​ដោយ​ស្វ័យប្រវត្តិ។"</string>
+    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;ប្រើ &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; ប្រើប្រាស់អ្វីដែលមាននៅលើអេក្រង់របស់អ្នក ដើម្បីកំណត់ថាអាចបំពេញអ្វីខ្លះដោយស្វ័យប្រវត្តិ។ កូដសម្ងាត់ ពាក្យសម្ងាត់ថ្មីៗ និងព័ត៌មានផ្សេងទៀតនឹងត្រូវបានរក្សាទុកនៅទីនេះចាប់ពីឥឡូវតទៅ។"</string>
+    <string name="credman_picker_title" msgid="2642776965060619988">"ពាក្យ​សម្ងាត់ កូដសម្ងាត់ និងសេវាកម្មទិន្នន័យ"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"បិទ %1$s ឬ?"</string>
     <string name="credman_confirmation_message" msgid="158362573056996762">"ព័ត៌មាន​ដែលបានរក្សាទុកដូចជា កូដសម្ងាត់ និងពាក្យសម្ងាត់ជាដើម ប្រហែលជា​មិនអាចប្រើបានទេ នៅពេលអ្នកចូលគណនី"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"ប្រើប្រាស់ %1$s ឬ?"</string>
@@ -4113,12 +4125,9 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <!-- no translation found for enable_angle_as_system_driver (3985105681812713612) -->
-    <skip />
-    <!-- no translation found for enable_angle_as_system_driver_summary (4173041926052925436) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (2619263039763150810) -->
-    <skip />
+    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"បើក ANGLE"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"បើក ANGLE ជាប្រព័ន្ធដ្រាយវើ OpenGL ES"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"តម្រូវឱ្យ​ចាប់ផ្ដើមឡើងវិញ ដើម្បីប្ដូរ​ប្រព័ន្ធដ្រាយវើ OpenGL ES"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"ការផ្លាស់ប្ដូរ​ចំពោះ​ភាពត្រូវគ្នា​នៃ​កម្មវិធី"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"បិទ/បើក​ការផ្លាស់ប្ដូរ​ភាពត្រូវគ្នា​នៃ​កម្មវិធី"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"ការផ្លាស់ប្ដូរ​ដែលបានបើក​តាម​លំនាំដើម"</string>
