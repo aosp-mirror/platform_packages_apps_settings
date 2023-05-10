@@ -122,8 +122,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         mExecutor = ContextCompat.getMainExecutor(mContext);
         mCredentialManager =
                 getCredentialManager(context, preferenceKey.equals("credentials_test"));
-        mSettingsContentObserver = new SettingContentObserver(mHandler);
-        mSettingsContentObserver.register(context.getContentResolver());
+        mSettingsContentObserver =
+                new SettingContentObserver(mHandler, context.getContentResolver());
+        mSettingsContentObserver.register();
         mSettingsPackageMonitor.register(context, context.getMainLooper(), false);
     }
 
@@ -184,6 +185,10 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         mIsWorkProfile = isWorkProfile;
         setDelegate(delegate);
         verifyReceivedIntent(launchIntent);
+
+        // Recreate the content observers because the user might have changed.
+        mSettingsContentObserver.unregister();
+        mSettingsContentObserver.register();
     }
 
     /**
@@ -889,15 +894,22 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         private final Uri mCredentialPrimaryService =
                 Settings.Secure.getUriFor(Settings.Secure.CREDENTIAL_SERVICE_PRIMARY);
 
-        public SettingContentObserver(Handler handler) {
+        private ContentResolver mContentResolver;
+
+        public SettingContentObserver(Handler handler, ContentResolver contentResolver) {
             super(handler);
+            mContentResolver = contentResolver;
         }
 
-        public void register(ContentResolver contentResolver) {
-            contentResolver.registerContentObserver(mAutofillService, false, this, getUser());
-            contentResolver.registerContentObserver(mCredentialService, false, this, getUser());
-            contentResolver.registerContentObserver(
+        public void register() {
+            mContentResolver.registerContentObserver(mAutofillService, false, this, getUser());
+            mContentResolver.registerContentObserver(mCredentialService, false, this, getUser());
+            mContentResolver.registerContentObserver(
                     mCredentialPrimaryService, false, this, getUser());
+        }
+
+        public void unregister() {
+            mContentResolver.unregisterContentObserver(this);
         }
 
         @Override
