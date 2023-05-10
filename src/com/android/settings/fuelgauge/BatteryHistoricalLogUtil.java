@@ -21,6 +21,7 @@ import android.content.SharedPreferences;
 import android.util.Base64;
 
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
+import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -49,6 +50,7 @@ public final class BatteryHistoricalLogUtil {
                         .setPackageName(pkg)
                         .setAction(action)
                         .setActionDescription(actionDescription)
+                        .setTimestamp(System.currentTimeMillis())
                         .build());
     }
 
@@ -89,6 +91,7 @@ public final class BatteryHistoricalLogUtil {
         if (logEntryList.isEmpty()) {
             writer.println("\tNo past logs.");
         } else {
+            writer.println("0:RESTRICTED  1:UNRESTRICTED  2:OPTIMIZED  3:UNKNOWN");
             logEntryList.forEach(entry -> writer.println(toString(entry)));
         }
     }
@@ -101,8 +104,9 @@ public final class BatteryHistoricalLogUtil {
     }
 
     private static String toString(BatteryOptimizeHistoricalLogEntry entry) {
-        return String.format("%s\tAction:%s\tEvent:%s",
-                entry.getPackageName(), entry.getAction(), entry.getActionDescription());
+        return String.format("%s\tAction:%s\tEvent:%s\tTimestamp:%s", entry.getPackageName(),
+                entry.getAction(), entry.getActionDescription(),
+                ConvertUtils.utcToLocalTimeForLogging(entry.getTimestamp()));
     }
 
     @VisibleForTesting
