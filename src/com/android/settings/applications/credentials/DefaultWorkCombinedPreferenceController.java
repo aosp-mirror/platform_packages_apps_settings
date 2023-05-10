@@ -16,12 +16,9 @@
 
 package com.android.settings.applications.credentials;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
-import android.provider.Settings;
-import android.text.TextUtils;
 
 import com.android.settings.Utils;
 import com.android.settingslib.applications.DefaultAppInfo;
@@ -45,25 +42,6 @@ public class DefaultWorkCombinedPreferenceController extends DefaultCombinedPref
     @Override
     public String getPreferenceKey() {
         return "default_credman_autofill_main_work";
-    }
-
-    @Override
-    protected DefaultAppInfo getDefaultAppInfo() {
-        final String flattenComponent =
-                Settings.Secure.getStringForUser(
-                        mContext.getContentResolver(),
-                        DefaultCombinedPicker.AUTOFILL_SETTING,
-                        mUserHandle.getIdentifier());
-        if (!TextUtils.isEmpty(flattenComponent)) {
-            DefaultAppInfo appInfo =
-                    new DefaultAppInfo(
-                            mContext,
-                            mPackageManager,
-                            mUserHandle.getIdentifier(),
-                            ComponentName.unflattenFromString(flattenComponent));
-            return appInfo;
-        }
-        return null;
     }
 
     @Override
