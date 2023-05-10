@@ -21,9 +21,9 @@ import static com.android.settings.wifi.calling.DisclaimerItemListAdapter
 import static com.android.settings.wifi.calling.DisclaimerItemListAdapter
         .DisclaimerItemViewHolder.ID_DISCLAIMER_ITEM_TITLE;
 
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyBoolean;
+import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -75,7 +75,7 @@ public class DisclaimerItemListAdapterTest {
         mDisclaimerItem = spy(new MockDisclaimerItem(mContext, 0 /* subId */));
         mDisclaimerItemList.add(mDisclaimerItem);
 
-        when(mLayoutInflater.inflate(anyInt(), anyObject(), anyBoolean())).thenReturn(mView);
+        when(mLayoutInflater.inflate(anyInt(), any(), anyBoolean())).thenReturn(mView);
         when(mViewGroup.getContext()).thenReturn(mContext);
         when(mViewGroup.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).thenReturn(
                 mLayoutInflater);

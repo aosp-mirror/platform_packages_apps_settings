@@ -19,6 +19,7 @@ package com.android.settings.localepicker;
 import android.app.FragmentTransaction;
 import android.app.LocaleManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.LocaleList;
@@ -34,6 +35,7 @@ import com.android.internal.app.LocalePickerWithRegion;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
+import com.android.settings.applications.AppLocaleUtil;
 import com.android.settings.applications.appinfo.AppLocaleDetails;
 import com.android.settings.core.SettingsBaseActivity;
 
@@ -64,11 +66,16 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
         }
         mContextAsUser = this;
         if (getIntent().hasExtra(AppInfoBase.ARG_PACKAGE_UID)) {
-            int userId = getIntent().getIntExtra(AppInfoBase.ARG_PACKAGE_UID, -1);
-            if (userId != -1) {
-                UserHandle userHandle = UserHandle.getUserHandleForUid(userId);
+            int uid = getIntent().getIntExtra(AppInfoBase.ARG_PACKAGE_UID, -1);
+            if (uid != -1) {
+                UserHandle userHandle = UserHandle.getUserHandleForUid(uid);
                 mContextAsUser = createContextAsUser(userHandle, 0);
             }
+        }
+        if (!canDisplayLocaleUi() || mContextAsUser.getUserId() != UserHandle.myUserId()) {
+            Log.w(TAG, "Not allow to display Locale Settings UI.");
+            finish();
+            return;
         }
 
         setTitle(R.string.app_locale_picker_title);
@@ -159,5 +166,11 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .replace(R.id.content_frame, mLocalePickerWithRegion)
                 .commit();
+    }
+
+    private boolean canDisplayLocaleUi() {
+        return AppLocaleUtil.canDisplayLocaleUi(mContextAsUser, mPackageName,
+                mContextAsUser.getPackageManager().queryIntentActivities(
+                        AppLocaleUtil.LAUNCHER_ENTRY_INTENT, PackageManager.GET_META_DATA));
     }
 }

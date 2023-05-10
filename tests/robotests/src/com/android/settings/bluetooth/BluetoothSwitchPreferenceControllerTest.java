@@ -18,13 +18,14 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.provider.Settings;
-
 import android.text.TextUtils;
+
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.utils.AnnotationSpan;
@@ -109,16 +110,34 @@ public class BluetoothSwitchPreferenceControllerTest {
     }
 
     @Test
-    public void onStart_shouldStartAlwaysDiscoverable() {
+    public void onStart_setAlwaysDiscoverableAsTrue_shouldStartAlwaysDiscoverable() {
+        mController.setAlwaysDiscoverable(true);
         mController.onStart();
 
         verify(mAlwaysDiscoverable).start();
     }
 
     @Test
-    public void onStop_shouldStopAlwaysDiscoverable() {
+    public void onStart_setAlwaysDiscoverableAsFalse_shouldStartAlwaysDiscoverable() {
+        mController.setAlwaysDiscoverable(false);
+        mController.onStart();
+
+        verify(mAlwaysDiscoverable, never()).start();
+    }
+
+    @Test
+    public void onStop_setAlwaysDiscoverableAsTrue_shouldStopAlwaysDiscoverable() {
+        mController.setAlwaysDiscoverable(true);
         mController.onStop();
 
         verify(mAlwaysDiscoverable).stop();
+    }
+
+    @Test
+    public void onStop__setAlwaysDiscoverableAsFalse_shouldStopAlwaysDiscoverable() {
+        mController.setAlwaysDiscoverable(false);
+        mController.onStop();
+
+        verify(mAlwaysDiscoverable, never()).stop();
     }
 }

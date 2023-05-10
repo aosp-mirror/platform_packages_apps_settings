@@ -18,10 +18,10 @@ package com.android.settings.enterprise;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyObject;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -79,7 +79,7 @@ public abstract class AdminGrantedPermissionsPreferenceControllerTestBase {
             }
         }).when(mFeatureFactory.applicationFeatureProvider)
                 .calculateNumberOfAppsWithAdminGrantedPermissions(eq(mPermissions),
-                        eq(async), anyObject());
+                        eq(async), any());
     }
 
     @Test
