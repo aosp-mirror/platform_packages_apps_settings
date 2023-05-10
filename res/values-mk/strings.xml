@@ -105,6 +105,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Откажи"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Оневозможи Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Ја оневозможува функцијата Bluetooth LE Audio ако уредот поддржува хардверски способности за LE Audio."</string>
+    <!-- no translation found for bluetooth_show_leaudio_device_details (3306637862550475370) -->
+    <skip />
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Овозможи список со дозволени за Bluetooth LE Audio"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Овозможи ја функцијата за список со дозволени за Bluetooth LE Audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Преносливи уреди"</string>
@@ -218,7 +220,7 @@
     <string name="roaming_warning" msgid="7703647889040229013">"Може да ви се наплати за роаминг."</string>
     <string name="date_time_auto" msgid="4239202185055225869">"Постави време автоматски"</string>
     <string name="zone_auto_title" msgid="5141692422373097957">"Постави автоматски"</string>
-    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"Локацијата ќе се користи за поставување на временската зона кога прекинувачов е вклучен"</string>
+    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"Локацијата ќе се користи за поставување на часовната зона кога прекинувачов е вклучен"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Користи локален стандард"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Користи 24-часовен формат"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Време"</string>
@@ -354,6 +356,14 @@
     <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Кога ќе поставите „Отклучување со лик“ и „Отклучување со отпечаток“, телефонот ќе го побара вашиот отпечаток кога носите маска или сте на темно место.\n\nМоже да отклучите со часовникот кога нема да се препознае вашиот лик или отпечатокот."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Може да отклучите со часовникот кога нема да се препознае вашиот отпечаток."</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Може да отклучите со часовникот кога нема да се препознае вашиот лик."</string>
+    <!-- no translation found for biometric_settings_use_fingerprint_or_watch_for (1160830065613858095) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_or_watch_for (1507077107150278532) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_fingerprint_or_watch_for (7495835723072020641) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_watch_for (5454545622244040110) -->
+    <skip />
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Со лик или часовник"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Со отпечаток или часовник"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Со лик, отпечаток или часовник"</string>
@@ -455,9 +465,9 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Допрете го сензорот одзади со показалецот."</string>
     <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Регистрацијата не е завршена"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Времето за поставување отпечаток истече"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Обидете се повторно сега или поставете отпечаток подоцна во „Поставки“"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"Може да го поставите отпечатокот подоцна во „Поставки“."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Внесувањето отпечаток не успеа. Обидете се повторно или користете друг прст."</string>
-    <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Додај друг"</string>
+    <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Додајте уште еден"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Следно"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Опцијата за заклучување екран е оневозможена. За да дознаете повеќе, контактирајте со администраторот на организацијата."</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Сѐ уште може да го користите отпечатокот за да овластувате купувања и да пристапувате до апликации."</string>
@@ -950,7 +960,7 @@
     <string name="accessibility_category_personal" msgid="2228088849803484780">"Сметки со личен профил"</string>
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"Работна сметка - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Лична сметка - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
-    <string name="search_settings" msgid="7573686516434589771">"Пребарај"</string>
+    <string name="search_settings" msgid="7573686516434589771">"Пребарување"</string>
     <string name="display_settings" msgid="7197750639709493852">"Приказ"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Автоматско ротирање на екранот"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Исклучено"</string>
@@ -958,7 +968,6 @@
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Вклучено - според лице"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Откривање лица"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Дознајте повеќе за „Автоматско ротирање“"</string>
-    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Кога го вртите телефонот вертикално или хоризонтално"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Резолуција на екран"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Висока резолуција"</string>
     <string name="screen_resolution_option_full" msgid="2694003735219114186">"Полна резолуција"</string>
@@ -1351,7 +1360,7 @@
     <string name="location_services_preference_title" msgid="604317859531782159">"Услуги според локација"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Услуги според локација"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"Користи ја локацијата"</string>
-    <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"Не може да се постави временската зона автоматски"</string>
+    <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"Часовната зона не може да се постави автоматски"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
     <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"„Локацијата“ или „Услугите според локација“ се исклучени"</string>
     <string name="location_time_zone_detection_status_summary_blocked_by_environment" msgid="2279833212923765802"></string>
@@ -1657,12 +1666,12 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Подлога за допир"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Подлога за допир и глувче"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Брзина на покажувач, движења"</string>
-    <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Допрете за да се кликне"</string>
+    <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Кликнување со допир"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Движења на подлогата за допир"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Приспособете поединечни движења на подлогата за допир"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Обратно лизгање"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Содржините се поместуваат нагоре кога лизгате надолу"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Допрете долу десно"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Допир долу десно"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Допрете го долниот десен агол од подлогата за допир за опции"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Брзина на покажувач"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Научете движења за подлога за допир"</string>
@@ -1767,13 +1776,13 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Преземени апликации"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Експериментално"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Ознаки за функции"</string>
-    <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Bluetooth HCI snoop log filtering"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Филтрирање евиденција за Bluetooth HCI"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Поставете филтри"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Исклучете и вклучете Bluetooth за промените да станат активни"</string>
-    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="1735427364451634823">"Bluetooth HCI snoop log filtering PBAP"</string>
-    <string name="bt_hci_snoop_log_filter_map_title" msgid="180092480793945544">"Bluetooth HCI snoop log filtering MAP"</string>
+    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="1735427364451634823">"Филтрирање евиденција за Bluetooth HCI преку PBAP"</string>
+    <string name="bt_hci_snoop_log_filter_map_title" msgid="180092480793945544">"Филтрирање евиденција за Bluetooth HCI преку MAP"</string>
     <string name="bt_hci_snoop_log_filter_summary" msgid="7217091930762522599">"Поставете режим за филтрирање. (Исклучете и вклучете Bluetooth за промените да станат активни)"</string>
-    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="8824952559433361848">"Поставете го режимот Bluetooth HCI snoop log на Enabled Filtered за да ја промените оваа опција"</string>
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="8824952559433361848">"Поставете „Филтрирање евиденција за Bluetooth HCI\" на „Овозможено филтрирање“ за да ја промените опцијава"</string>
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Читач на екран, првенствено за лица со слепило и слаб вид"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Допрете ставки на екранот за да ги слушнете прочитани наглас"</string>
@@ -1960,9 +1969,9 @@
     <string name="accessibility_color_inversion_qs_tooltip_content" msgid="5046332142185711869">"Може да додадете инверзија на боите во „Брзи поставки“ и од врвот на екранот"</string>
     <string name="accessibility_reduce_bright_colors_auto_added_qs_tooltip_content" msgid="1906588335786328512">"Дополнително затемнување е додадено во „Брзи поставки“. Повлечете надолу за да ја вклучите или исклучите кога сакате."</string>
     <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"Може да додадете дополнително затемнување во „Брзи поставки“ и од врвот на екранот"</string>
-    <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"Режимот со една рака е додаден во „Брзи поставки“. Повлечете надолу за да ја вклучите или исклучите кога сакате."</string>
+    <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"Функцијата „Режим со една рака“ е додадена во „Брзи поставки“. Повлечете надолу за да ја вклучите или исклучите."</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"Може да додадете режим со една рака во „Брзи поставки“ и од врвот на екранот"</string>
-    <string name="accessibility_font_scaling_auto_added_qs_tooltip_content" msgid="7229921960884718332">"Големината на фонтот е додадена во „Брзи поставки“. Повлечете надолу за да ја промените големината на фонтот."</string>
+    <string name="accessibility_font_scaling_auto_added_qs_tooltip_content" msgid="7229921960884718332">"Функцијата „Големина на фонт“ е додадена во „Брзи поставки“. Повлечете надолу за да ја промените големината на фонтот."</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Отфрли"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Користи „Корекција на бои“"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Кратенка за корекција на боите"</string>
@@ -2179,13 +2188,13 @@
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Вклучете „Штедач на батерија“"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Батеријата може да се потроши порано од вообичаено"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"„Штедачот на батерија“ е вклучен"</string>
-    <!-- no translation found for battery_saver_link_a11y (6613079613524512257) -->
-    <skip />
+    <string name="battery_saver_link_a11y" msgid="6613079613524512257">"Дознајте повеќе за „Штедачот на батерија“"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Некои функции може да бидат ограничени"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Поголемо користење на батеријата"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Прегледајте ги апликациите со најголемо користење"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Полнењето е оптимизирано за да се заштити батеријата"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"За да помогне да се продолжи работниот век на батеријата, полнењето е оптимизирано"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_summary (5107379280241187562) -->
+    <skip />
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Полнењето е оптимизирано за да се заштити батеријата"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"За да помогне да се продолжи работниот век на батеријата, полнењето е оптимизирано додека е приклучено на док"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Полнењето е оптимизирано за да се заштити батеријата"</string>
@@ -2306,10 +2315,8 @@
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Користење на батеријата за <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Време на користење од последното целосно полнење"</string>
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Време на користење за <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_spinner_view_by_apps (8769276544072098082) -->
-    <skip />
-    <!-- no translation found for battery_usage_spinner_view_by_systems (7904104223212160541) -->
-    <skip />
+    <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Прикажи по апликации"</string>
+    <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Прикажи по системи"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Статистика на процес"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Паметна статистика за процеси кои се извршуваат"</string>
@@ -2975,7 +2982,7 @@
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Тонови на тастатура за бирање"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Звук при заклучување екран"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Звуци и вибрации при полнење"</string>
-    <string name="docking_sounds_title" msgid="5341616179210436159">"Звуци на држач со звучници"</string>
+    <string name="docking_sounds_title" msgid="5341616179210436159">"Звуци при приклучување на док"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Звуци при допир"</string>
     <string name="vibrate_icon_title" msgid="1281100105045362530">"Секогаш прикажувај икона во режим на вибрации"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Држач со звучници"</string>
@@ -3648,12 +3655,9 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Дозволи пристап за управување со датотеки"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Дозволете апликацијава да ги чита, менува и брише сите датотеки на уредов или на поврзаните мемориски уреди. Ако се дозволи, апликацијата може да пристапува до датотеките без ваше изречно знаење."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Може да пристапува до сите датотеки"</string>
-    <!-- no translation found for full_screen_intent_title (747270185715224130) -->
-    <skip />
-    <!-- no translation found for permit_full_screen_intent (9035367640019960861) -->
-    <skip />
-    <!-- no translation found for footer_description_full_screen_intent (7716518411349225528) -->
-    <skip />
+    <string name="full_screen_intent_title" msgid="747270185715224130">"Известувања на цел екран"</string>
+    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Дозволете известувања на цел екран од оваа апликација"</string>
+    <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Дозволете апликацијава да прикажува известувања што го заземаат целиот екран кога уредот е заклучен. Апликациите може да ги користат овие известувања за да ги истакнуваат алармите, дојдовните повици или други итни известувања."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Апликации за управување со содржини"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Дозволи аликацијата да управува со аудиовизуелни содржини"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Ако е дозволено, апликацијава ќе може да ги менува или брише датотеките со аудиовизуелни содржини создадени со други апликации без да ве праша. Апликацијата мора да има дозвола за да пристапува до датотеките со аудиовизуелни содржини."</string>
@@ -3870,8 +3874,8 @@
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"Испробајте ја темната тема"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Батеријата трае подолго"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Програмерски плочки за брзи поставки"</string>
-    <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Оневозможи го времето за авторизација преку ADB"</string>
-    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Оневозможи автоматско отповикување на авторизацијата преку ADB за системите што не се поврзале повторно во стандардниот рок (7 дена) или во рокот конфигуриран од корисникот (најмалку 1 ден)."</string>
+    <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Оневозможи истекување на авторизацијата за ADB"</string>
+    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Оневозможи автоматско повлекување на авторизацијата за ADB за системите што не се поврзале повторно во стандардниот рок (7 дена) или во рокот конфигуриран од корисникот (најмалку 1 ден)."</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Трага од Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Сензорите се исклучени"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Поставки за работен профил"</string>
@@ -4065,7 +4069,10 @@
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# лозинка}one{# лозинка}other{# лозинки}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"автоматско, пополнување, автоматско пополнување, лозинка"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"мобилен интернет, криптографски клуч, лозинка"</string>
+    <string name="credman_autofill_keywords" msgid="701180623776848914">"автоматски, пополнување, автоматско пополнување, податоци, криптографски клуч, лозинка"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Проверете дали е ова апликација на која ѝ верувате&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=„Автоматско пополнување на Google“&gt;%1$s&lt;/xliff:g&gt; го користи она што е на екранот за да утврди што може автоматски да се пополни."</string>
+    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Use &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; го користи она што е на екранот за да утврди што може автоматски да се пополни. Новите лозинки, криптографски клучеви и други податоци отсега ќе се зачувуваат овде."</string>
+    <string name="credman_picker_title" msgid="2642776965060619988">"Услуги за лозинки, криптографски клучеви и податоци"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Да се исклучи %1$s?"</string>
     <string name="credman_confirmation_message" msgid="158362573056996762">"Зачуваните информации како криптографски клучеви и лозинки можеби нема да бидат достапни кога ќе се најавите"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Да се користи %1$s?"</string>
@@ -4082,8 +4089,8 @@
     <string name="location_category" msgid="3496759112306219062">"Локација"</string>
     <string name="location_indicator_settings_title" msgid="6655916258720093451">"Индикатор за локација на статусната лента"</string>
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"Прикажи за сите локации, вклучително и за мрежата и поврзливоста"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Присилување целосни мерења со GNSS"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Следете ги сите констелации и фреквенции со GNSS без работен циклус"</string>
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Наметни целосни мерења со GNSS"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Постојано следи ги сите констелации и фреквенции на GNSS"</string>
     <string name="input_method_category" msgid="2252659253631639005">"Метод за внесување"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"Ракописно пишување со пенкало"</string>
     <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Кога е овозможено, тековниот метод за внесување добива MotionEvent од пенкалото ако е фокусиран уредувач на текст."</string>
@@ -4118,12 +4125,9 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <!-- no translation found for enable_angle_as_system_driver (3985105681812713612) -->
-    <skip />
-    <!-- no translation found for enable_angle_as_system_driver_summary (4173041926052925436) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (2619263039763150810) -->
-    <skip />
+    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Овозможи ANGLE"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"Овозможи ANGLE како драјвер за системот OpenGL ES"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Потребно е рестартирање за да се промени драјверот за системот OpenGL ES"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Промени за компатибилност на апликациите"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Вклучување/исклучување на промените за компатибилност на апликациите"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Стандардно овозможени промени"</string>

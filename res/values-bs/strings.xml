@@ -105,6 +105,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Otkaži"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Onemogući Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Onemogućava funkciju Bluetooth LE Audio ako uređaj podržava mogućnosti hardvera za LE Audio."</string>
+    <!-- no translation found for bluetooth_show_leaudio_device_details (3306637862550475370) -->
+    <skip />
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Omogući listu dozvoljenih za Bluetooth LE Audio"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Omogućite funkciju liste dozvoljenih za Bluetooth LE Audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Uređaji za medije"</string>
@@ -218,7 +220,7 @@
     <string name="roaming_warning" msgid="7703647889040229013">"Mogu nastati troškovi rominga."</string>
     <string name="date_time_auto" msgid="4239202185055225869">"Automatski postavi vrijeme"</string>
     <string name="zone_auto_title" msgid="5141692422373097957">"Postavi automatski"</string>
-    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"Lokacije će se koristiti za postavljanje vremenske zone kada je ovaj prekidač uključen"</string>
+    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"Lokacija će se koristiti za postavljanje vremenske zone kada je ovaj prekidač uključen"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Koristi zadani format jezika/zemlje"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Koristi 24-satni format"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Vrijeme"</string>
@@ -315,11 +317,11 @@
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Traži da oči budu otvorene"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Da otključate telefon, oči vam moraju biti otvorene"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Uvijek traži potvrdu"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Za korištenje otključavanja licem u aplikacijama uvijek tražite potvrdu"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Za korištenje otključavanja licem u aplikacijama uvijek se traži potvrda."</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Izbriši model lica"</string>
     <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"Postavite otključavanje licem"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Izbrisati model lica?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Model lica će se trajno i sigurno izbrisati.\n\nNakon brisanja će vam trebati PIN, uzorak ili lozinka radi otključavanja telefona ili autentifikacije u aplikacijama."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Model lica će se trajno i sigurno izbrisati.\n\nNakon brisanja će vam za otključavanje telefona ili autentifikaciju u aplikacijama trebati PIN, uzorak ili lozinka."</string>
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Model lica će se trajno i sigurno izbrisati.\n\nNakon brisanja će vam trebati PIN, uzorak ili lozinka radi otključavanja telefona."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Otključajte telefon pomoću otključavanja licem"</string>
     <string name="security_settings_fingerprint" msgid="6387775386189204201">"Otisak prsta"</string>
@@ -354,6 +356,14 @@
     <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Kada postavite otključavanje licem i otključavanje otiskom prsta, vaš telefon će tražiti otisak prsta ako nosite masku ili se nalazite u mračnom prostoru.\n\nKada se vaše lice ili otisak prsta ne prepozna, možete otključati pomoću sata."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Kada se vaš otisak prsta ne prepozna možete otključati pomoću sata."</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Kada se vaše lice ne prepozna možete otključati pomoću sata."</string>
+    <!-- no translation found for biometric_settings_use_fingerprint_or_watch_for (1160830065613858095) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_or_watch_for (1507077107150278532) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_fingerprint_or_watch_for (7495835723072020641) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_watch_for (5454545622244040110) -->
+    <skip />
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Pomoću lica ili sata"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Pomoću otiska prsta ili sata"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Pomoću lica, otiska prsta ili sata"</string>
@@ -430,7 +440,7 @@
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Prijava otiska prsta: <xliff:g id="PERCENTAGE">%d</xliff:g> posto"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Dodan je otisak prsta"</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Dodirnite da otključate bilo kada"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Dodirnite senzor da otključate, čak i kada je ekran isključen. Ovo povećava vjerovatnost slučajnog otključavanja."</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Dodirnite senzor da otključate ekran čak i kada je isključen. Ovo povećava vjerovatnost slučajnog otključavanja."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Ekran, otključavanje"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Uradit ću to kasnije"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Podignite i ponovo dodirnite"</string>
@@ -455,7 +465,7 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Dodirnite senzor na poleđini telefona. Koristite kažiprst."</string>
     <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Registracija nije dovršena"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Postavljanje otiska prsta je isteklo"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Pokušajte ponovo sada ili postavite otisak prsta kasnije u Postavkama"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"Možete postaviti otisak prsta kasnije u Postavkama."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Registracija otiska prsta nije uspjela. Pokušajte ponovo ili koristite drugi prst."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Dodajte još jedan"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Naprijed"</string>
@@ -958,7 +968,6 @@
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Uključeno – na osnovu lica"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Prepoznavanje lica"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Saznajte više o automatskom rotiranju"</string>
-    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Kada mijenjate prikaz ekrana između uspravnog i vodoravnog"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Rezolucija ekrana"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Visoka rezolucija"</string>
     <string name="screen_resolution_option_full" msgid="2694003735219114186">"Puna rezolucija"</string>
@@ -1657,7 +1666,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Dodirna površina"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Dodirna podloga i miš"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Brzina pokazivača, pokreti"</string>
-    <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Dodirni za klik"</string>
+    <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Dodir za klik"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Pokreti na dodirnoj podlozi"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Prilagodite pojedinačne pokrete navigacije na dodirnoj podlozi"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Klizanje unazad"</string>
@@ -2184,7 +2193,8 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Veća potrošnja baterije"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Pogledajte aplikacije s najvećom potrošnjom"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Punjenje je optimizirano radi zaštite baterije"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"Radi produženja vijeka trajanja baterije, punjenje je optimizirano"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_summary (5107379280241187562) -->
+    <skip />
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Punjenje je optimizirano radi zaštite baterije"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Radi produženja vijeka trajanja baterije punjenje je optimizirano dok je uređaj priključen"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Punjenje je optimizirano radi zaštite baterije"</string>
@@ -2666,7 +2676,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Izbrišite <xliff:g id="USER_NAME">%1$s</xliff:g> sa uređaja"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Postavke zaključavanja ekrana"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Dodavanje korisnika sa zaključanog ekrana"</string>
-    <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Prebacite se na admin. kada je uređaj priključen"</string>
+    <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Prebaci na administratora kada je uređaj priključen"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Želite li izbrisati sebe?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Izbrisati ovog korisnika?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Ukloniti ovaj profil?"</string>
@@ -4060,7 +4070,10 @@
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# lozinka}one{# lozinka}few{# lozinke}other{# lozinki}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"automatski, popunjavanje, automatsko popunjavanje, lozinka"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"podaci, pristupni ključ, lozinka"</string>
+    <string name="credman_autofill_keywords" msgid="701180623776848914">"automatski, popuniti, automatsko popunjavanje, podaci, pristupni ključ, lozinka"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Provjerite je li ova aplikacija pouzdana&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Automatsko popunjavanje&gt;%1$s&lt;/xliff:g&gt; koristi sadržaj na vašem ekranu da odredi šta se može automatski popuniti."</string>
+    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Koristite aplikaciju &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; koristi ono što je na ekranu radi utvrđivanja podataka koji se mogu automatski popuniti. Nove lozinke, pristupni ključevi i druge informacije od sada će se pohranjivati ovdje."</string>
+    <string name="credman_picker_title" msgid="2642776965060619988">"Usluge za lozinke, pristupne ključeve i podatke"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Isključiti %1$s?"</string>
     <string name="credman_confirmation_message" msgid="158362573056996762">"Sačuvane informacije kao što su pristupni ključevi i lozinke možda neće biti dostupne kada se prijavite"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Koristiti uslugu %1$s?"</string>
@@ -4113,12 +4126,9 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <!-- no translation found for enable_angle_as_system_driver (3985105681812713612) -->
-    <skip />
-    <!-- no translation found for enable_angle_as_system_driver_summary (4173041926052925436) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (2619263039763150810) -->
-    <skip />
+    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Omogući ANGLE"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"Omogući ANGLE kao sistemski drajver OpenGL ES"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Ponovno pokretanje je potrebno za promjenu sistemskog drajvera OpenGL ES"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Izmjene kompatibilnosti aplikacije"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Uključivanje/isključivanje izmjena kompatibilnosti aplikacije"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Zadano omogućene izmjene"</string>

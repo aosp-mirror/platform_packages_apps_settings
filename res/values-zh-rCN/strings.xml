@@ -105,6 +105,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"取消"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"停用蓝牙 LE 音频"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"如果设备支持 LE 音频硬件功能，则停用蓝牙 LE 音频功能。"</string>
+    <!-- no translation found for bluetooth_show_leaudio_device_details (3306637862550475370) -->
+    <skip />
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"启用蓝牙 LE 音频许可名单"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"启用蓝牙 LE 音频许可名单功能。"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"媒体设备"</string>
@@ -218,7 +220,7 @@
     <string name="roaming_warning" msgid="7703647889040229013">"可能需要支付漫游费用。"</string>
     <string name="date_time_auto" msgid="4239202185055225869">"自动设置时间"</string>
     <string name="zone_auto_title" msgid="5141692422373097957">"自动设置"</string>
-    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"这个切换开关开启时，系统会根据位置信息设置时区"</string>
+    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"此切换开关开启时，系统会根据位置信息设置时区"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"使用默认语言区域"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"使用 24 小时制"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"时间"</string>
@@ -354,6 +356,14 @@
     <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"在设置人脸解锁和指纹解锁时，如果您戴着口罩或所在区域光线较暗，手机会要求您提供指纹。\n\n如果系统无法识别您的面孔或指纹，您可以用手表进行解锁。"</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"如果系统无法识别您的指纹，您可以用手表进行解锁。"</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"如果系统无法识别您的面孔，您可以用手表进行解锁。"</string>
+    <!-- no translation found for biometric_settings_use_fingerprint_or_watch_for (1160830065613858095) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_or_watch_for (1507077107150278532) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_fingerprint_or_watch_for (7495835723072020641) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_watch_for (5454545622244040110) -->
+    <skip />
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"使用人脸或手表"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"使用指纹或手表"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"使用人脸、指纹或手表"</string>
@@ -430,7 +440,7 @@
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"指纹注册进度为百分之 <xliff:g id="PERCENTAGE">%d</xliff:g>"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"指纹已添加"</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"无论何时，轻触即可解锁"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"轻触传感器即可解锁，即使屏幕关闭也可以。这样会提高意外解锁的概率。"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"轻触传感器即可解锁，即使屏幕关闭也可以，但这样会提高意外解锁的概率。"</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"屏幕, 解锁, Screen, Unlock"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"以后再说"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"移开手指，然后再次触摸传感器"</string>
@@ -455,7 +465,7 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"请用您的食指触摸位于手机背面的传感器。"</string>
     <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"未完成注册"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"指纹设置已超时"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"立即重试，或之后在“设置”部分进行指纹设置"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"您可以稍后在“设置”中设置指纹。"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"无法注册指纹。请重试或使用其他手指。"</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"再添加一个"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"下一步"</string>
@@ -958,7 +968,6 @@
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"开启 - 基于人脸"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"人脸检测"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"详细了解自动屏幕旋转"</string>
-    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"当您在纵向与横向之间变换手机持握方向时"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"屏幕分辨率"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"高分辨率"</string>
     <string name="screen_resolution_option_full" msgid="2694003735219114186">"完整分辨率"</string>
@@ -1037,7 +1046,7 @@
     <string name="screen_timeout_summary" msgid="5558778019594643427">"闲置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>后"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"未设置"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"壁纸"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"壁纸和样式"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"壁纸与个性化"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"主屏幕、锁定屏幕"</string>
     <string name="wallpaper_suggestion_title" msgid="3812842717939877330">"更换壁纸"</string>
     <string name="wallpaper_suggestion_summary" msgid="9077061486716754784">"对屏幕进行个性化设置"</string>
@@ -1359,7 +1368,7 @@
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"需要设备位置信息"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_message" msgid="5846316326139169523">"如需根据您的位置信息设置时区，请开启位置信息功能，然后更新时区设置"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"位置信息设置"</string>
-    <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"修复此程序"</string>
+    <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"解决此问题"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"取消"</string>
     <string name="location_time_zone_detection_auto_is_off" msgid="6264253990141650280">"自动检测时区功能已关闭"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"位置信息时区检测已停用"</string>
@@ -1953,7 +1962,7 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"使用“<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>”"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"打开“<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>”"</string>
     <string name="accessibility_service_auto_added_qs_tooltip_content" msgid="2941824314912928072">"“<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>”已添加到“快捷设置”中。向下滑动即可随时开启或关闭此功能。"</string>
-    <string name="accessibility_service_qs_tooltip_content" msgid="6002493441414967868">"您还可以将“<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>”添加到屏幕顶部的“快捷设置”中"</string>
+    <string name="accessibility_service_qs_tooltip_content" msgid="6002493441414967868">"您还可以从屏幕顶部将“<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>”添加到“快捷设置”中"</string>
     <string name="accessibility_color_correction_auto_added_qs_tooltip_content" msgid="9092661358437404374">"“色彩校正”已添加到“快捷设置”中。向下滑动即可随时开启或关闭此功能。"</string>
     <string name="accessibility_color_correction_qs_tooltip_content" msgid="3258628434235475205">"您还可以将“色彩校正”添加到屏幕顶部的“快捷设置”中"</string>
     <string name="accessibility_color_inversion_auto_added_qs_tooltip_content" msgid="7267618234972101725">"“颜色反转”已添加到“快捷设置”中。向下滑动即可随时开启或关闭此功能。"</string>
@@ -2184,7 +2193,8 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"耗电量较高"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"查看耗电量较高的应用"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"为保护电池，充电方式已优化"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"为延长电池寿命，充电方式已优化"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_summary (5107379280241187562) -->
+    <skip />
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"为保护电池，充电方式已优化"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"为延长电池寿命，在插入基座时充电方式已优化"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"为保护电池，充电方式已优化"</string>
@@ -2684,7 +2694,7 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"其他用户"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"删除访客活动记录"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"退出访客模式时删除所有访客应用和数据"</string>
-    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"要删除访客活动记录吗？"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"要删除访客活动吗？"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"此访客会话中的应用和数据将会立即删除；日后您每次退出访客模式时，系统都会删除访客活动记录"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"删除, 访客, 活动, 移除, 数据, 访问者, 清除, delete, guest, activity, remove, data, visitor, erase"</string>
     <string name="enable_guest_calling" msgid="8300355036005240911">"允许访客使用电话"</string>
@@ -3152,7 +3162,7 @@
     <string name="notification_pulse_title" msgid="8013178454646671529">"闪烁指示灯"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"隐私"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"跳过锁定屏幕"</string>
-    <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"解锁后直接进入上次使用的页面。锁屏状态下不会显示通知。从屏幕顶部向下滑动可查看通知。"</string>
+    <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"解锁后直接进入上次使用的界面。锁屏状态下不会显示通知。从屏幕顶部向下滑动可查看通知。"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"锁定屏幕, 锁屏, 跳过, 绕过"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"当工作资料遭到锁定时"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"在锁屏状态下仅显示新通知"</string>
@@ -4059,7 +4069,10 @@
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# 个密码}other{# 个密码}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"自动, 填充, 自动填充, 密码, auto, fill, autofill, password"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"数据, 通行密钥, 密码, data, passkey, password"</string>
+    <string name="credman_autofill_keywords" msgid="701180623776848914">"自动, 填充, 自动填充, 数据, 通行密钥, 密码, auto, fill, autofill, data, passkey, password"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;请确认这是您信任的应用&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt;会根据您的屏幕内容判断可自动填充哪些内容。"</string>
+    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;要使用&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;吗？&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;会根据屏幕上的内容判断可以自动填充的内容。从现在起，系统会将新密码、通行密钥和其他信息保存在此处。"</string>
+    <string name="credman_picker_title" msgid="2642776965060619988">"密码、通行密钥和数据服务"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"要关闭%1$s吗？"</string>
     <string name="credman_confirmation_message" msgid="158362573056996762">"当您登录时，系统可能无法提供通行密钥和密码等已保存的信息"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"使用%1$s？"</string>
@@ -4112,12 +4125,9 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <!-- no translation found for enable_angle_as_system_driver (3985105681812713612) -->
-    <skip />
-    <!-- no translation found for enable_angle_as_system_driver_summary (4173041926052925436) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (2619263039763150810) -->
-    <skip />
+    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"启用 ANGLE"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"启用 ANGLE 作为系统 OpenGL ES 驱动程序"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"必须重新启动，才能更改系统 OpenGL ES 驱动程序"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"应用兼容性变更"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"在应用兼容性变更之间切换"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"默认启用的应用兼容性变更"</string>

@@ -105,6 +105,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Huỷ"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Tắt âm thanh năng lượng thấp qua Bluetooth"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Tắt tính năng âm thanh năng lượng thấp qua Bluetooth nếu thiết bị hỗ trợ chức năng phần cứng âm thanh năng lượng thấp."</string>
+    <!-- no translation found for bluetooth_show_leaudio_device_details (3306637862550475370) -->
+    <skip />
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Bật danh sách cho phép Bluetooth Âm thanh năng lượng thấp"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Bật tính năng danh sách cho phép Bluetooth Âm thanh năng lượng thấp."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Thiết bị truyền thông"</string>
@@ -218,7 +220,7 @@
     <string name="roaming_warning" msgid="7703647889040229013">"Bạn có thể bị tính phí chuyển vùng."</string>
     <string name="date_time_auto" msgid="4239202185055225869">"Tự động đặt giờ"</string>
     <string name="zone_auto_title" msgid="5141692422373097957">"Đặt tự động"</string>
-    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"Khi nút này đang bật, thông tin vị trí sẽ được dùng để đặt múi giờ"</string>
+    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"Nếu bạn bật nút này, thông tin vị trí sẽ được dùng để đặt múi giờ"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Sử dụng định dạng của địa phương"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Sử dụng định dạng 24 giờ"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Giờ"</string>
@@ -354,6 +356,14 @@
     <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Khi bạn thiết lập tính năng Mở khóa bằng khuôn mặt và Mở khóa bằng vân tay, điện thoại của bạn sẽ yêu cầu bạn cung cấp vân tay khi bạn đeo khẩu trang hoặc ở chỗ tối.\n\nBạn có thể mở khoá bằng đồng hồ khi điện thoại không nhận dạng được khuôn mặt hoặc vân tay của bạn."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Bạn có thể mở khoá bằng đồng hồ khi điện thoại không nhận dạng được vân tay của bạn."</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Bạn có thể mở khoá bằng đồng hồ khi điện thoại không nhận dạng được khuôn mặt của bạn."</string>
+    <!-- no translation found for biometric_settings_use_fingerprint_or_watch_for (1160830065613858095) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_or_watch_for (1507077107150278532) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_fingerprint_or_watch_for (7495835723072020641) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_watch_for (5454545622244040110) -->
+    <skip />
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Dùng khuôn mặt hoặc đồng hồ"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Dùng vân tay hoặc đồng hồ"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Dùng khuôn mặt, vân tay hoặc đồng hồ"</string>
@@ -455,7 +465,7 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Chạm vào cảm biến ở mặt sau điện thoại. Dùng ngón tay trỏ."</string>
     <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Chưa đăng ký xong"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Hết thời gian chờ thiết lập vân tay"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Hãy thử lại ngay bây giờ hoặc thiết lập vân tay sau trong phần Cài đặt"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"Sau này, bạn có thể thiết lập vân tay của mình trong phần Cài đặt."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Đăng ký dấu vân tay không hoạt động. Hãy thử lại hoặc sử dụng ngón tay khác."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Thêm vân tay khác"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Tiếp theo"</string>
@@ -958,7 +968,6 @@
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Đang bật – Dựa trên khuôn mặt"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Phát hiện khuôn mặt"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Tìm hiểu thêm về chế độ tự động xoay"</string>
-    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Khi bạn chuyển điện thoại giữa chế độ dọc và chế độ ngang"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Độ phân giải màn hình"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Độ phân giải cao"</string>
     <string name="screen_resolution_option_full" msgid="2694003735219114186">"Độ phân giải đầy đủ"</string>
@@ -1064,7 +1073,7 @@
     <string name="doze_always_on_title" msgid="7326245192352868477">"Luôn hiện giờ và thông tin"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Làm tăng mức sử dụng pin"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Văn bản in đậm"</string>
-    <string name="title_font_size" msgid="570613010306330622">"Kích thước phông chữ"</string>
+    <string name="title_font_size" msgid="570613010306330622">"Cỡ chữ"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Phóng to hoặc thu nhỏ văn bản"</string>
     <string name="sim_lock_settings" msgid="7331982427303002613">"Cài đặt khoá SIM"</string>
     <string name="sim_lock_settings_category" msgid="6475255139493877786">"Khoá SIM"</string>
@@ -1781,7 +1790,7 @@
     <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"Giới thiệu các tuỳ chọn phụ đề"</string>
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Tìm hiểu thêm các tuỳ chọn phụ đề"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Phóng to"</string>
-    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Phím tắt phóng to"</string>
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Phím tắt dành cho tính năng phóng to"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Phóng to nội dung nhập"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Kính lúp di chuyển theo văn bản khi bạn nhập"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Tiếp tục bật khi chuyển đổi giữa các ứng dụng"</string>
@@ -2179,13 +2188,13 @@
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Bật Trình tiết kiệm pin"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Pin có thể hết sớm hơn thường lệ"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"Trình tiết kiệm pin đang bật"</string>
-    <!-- no translation found for battery_saver_link_a11y (6613079613524512257) -->
-    <skip />
+    <string name="battery_saver_link_a11y" msgid="6613079613524512257">"Tìm hiểu thêm về Trình tiết kiệm pin"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Một số tính năng có thể bị hạn chế"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Mức sử dụng pin cao"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Xem các ứng dụng có mức sử dụng pin cao nhất"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Quá trình sạc được tối ưu hoá để bảo vệ pin"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"Để giúp kéo dài tuổi thọ pin, quá trình sạc sẽ được tối ưu hoá"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_summary (5107379280241187562) -->
+    <skip />
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Quá trình sạc được tối ưu hoá để bảo vệ pin"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Để giúp kéo dài tuổi thọ pin, quá trình sạc sẽ được tối ưu hoá khi bạn gắn thiết bị vào đế"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Quá trình sạc được tối ưu hoá để bảo vệ pin"</string>
@@ -2306,10 +2315,8 @@
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Mức sử dụng pin: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Thời gian sử dụng thiết bị kể từ lần sạc đầy gần đây nhất"</string>
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Thời gian sử dụng thiết bị: <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_spinner_view_by_apps (8769276544072098082) -->
-    <skip />
-    <!-- no translation found for battery_usage_spinner_view_by_systems (7904104223212160541) -->
-    <skip />
+    <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Xem theo ứng dụng"</string>
+    <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Xem theo hệ thống"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Số liệu thống kê về quy trình"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Số liệu thống kê chi tiết về các quy trình đang chạy"</string>
@@ -2975,7 +2982,7 @@
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Âm bàn phím số"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Âm thanh khóa màn hình"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Âm thanh và rung khi sạc"</string>
-    <string name="docking_sounds_title" msgid="5341616179210436159">"Âm đế kết nối"</string>
+    <string name="docking_sounds_title" msgid="5341616179210436159">"Âm thanh khi kết nối với đế sạc"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Âm thanh khi chạm"</string>
     <string name="vibrate_icon_title" msgid="1281100105045362530">"Luôn hiện biểu tượng khi ở chế độ rung"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Phát âm đế kết nối"</string>
@@ -3060,7 +3067,7 @@
     <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="3401685760954156067">"Chế độ Không làm phiền đã được một ứng dụng (<xliff:g id="APP_NAME">%s</xliff:g>) bật tự động"</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer" msgid="6566115866660865385">"Chế độ Không làm phiền đang bật đối với <xliff:g id="RULE_NAMES">%s</xliff:g> với các mục cài đặt tùy chỉnh."</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="8255159194653341835">" "<annotation id="link">"Xem chế độ cài đặt tùy chỉnh"</annotation></string>
-    <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Chỉ cho các mục ưu tiên"</string>
+    <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Các mục ưu tiên có thể tiếp tục hoạt động"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"Đang bật / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"Đang bật"</string>
@@ -3648,12 +3655,9 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Cho phép truy cập để quản lý tất cả các tệp"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Cho phép ứng dụng này đọc, sửa đổi và xóa tất cả các tệp trên thiết bị này hoặc bất kỳ thiết bị lưu trữ nào đã kết nối. Nếu bạn cho phép, ứng dụng có thể truy cập vào các tệp mà không cần thông báo rõ ràng cho bạn."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Có thể truy cập vào tất cả các tệp"</string>
-    <!-- no translation found for full_screen_intent_title (747270185715224130) -->
-    <skip />
-    <!-- no translation found for permit_full_screen_intent (9035367640019960861) -->
-    <skip />
-    <!-- no translation found for footer_description_full_screen_intent (7716518411349225528) -->
-    <skip />
+    <string name="full_screen_intent_title" msgid="747270185715224130">"Thông báo toàn màn hình"</string>
+    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Cho phép ứng dụng này hiển thị thông báo toàn màn hình"</string>
+    <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Cho phép ứng dụng hiển thị các thông báo chiếm toàn màn hình khi thiết bị đang khoá. Các ứng dụng có thể dùng những thông báo này để làm nổi bật chuông báo, cuộc gọi đến hoặc thông báo khẩn cấp khác."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Ứng dụng quản lý nội dung nghe nhìn"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Cho phép ứng dụng quản lý nội dung nghe nhìn"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Nếu được cho phép, ứng dụng này có thể sửa đổi hoặc xóa tệp nội dung nghe nhìn đã tạo bằng các ứng dụng khác mà không cần hỏi bạn. Ứng dụng phải có quyền truy cập vào tệp và nội dung nghe nhìn."</string>
@@ -3916,7 +3920,7 @@
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"thao tác, nút màn hình chính"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Chế độ một tay"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Sử dụng chế độ một tay"</string>
-    <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Phím tắt chế độ một tay"</string>
+    <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Phím tắt cho chế độ một tay"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"tầm với"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Vuốt xuống để"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Dùng phím tắt để"</string>
@@ -4065,7 +4069,10 @@
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# mật khẩu}other{# mật khẩu}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"tự động, điền, tự động điền, mật khẩu"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"dữ liệu, khoá truy cập, mật khẩu"</string>
+    <string name="credman_autofill_keywords" msgid="701180623776848914">"tự động, điền, tự động điền, dữ liệu, khoá truy cập, mật khẩu"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Hãy đảm bảo bạn tin tưởng ứng dụng này&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; sử dụng thông tin trên màn hình để xác định nội dung nào có thể được tự động điền."</string>
+    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Sử dụng &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; dùng thông tin trên màn hình của bạn để xác định thông tin nào có thể tự động điền. Từ nay, khoá truy cập, mật khẩu mới và thông tin khác sẽ được lưu tại đây."</string>
+    <string name="credman_picker_title" msgid="2642776965060619988">"Dịch vụ dữ liệu, khoá truy cập và mật khẩu"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Tắt %1$s?"</string>
     <string name="credman_confirmation_message" msgid="158362573056996762">"Bạn có thể không dùng được những thông tin đã lưu như khoá truy cập và mật khẩu khi đăng nhập"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Sử dụng %1$s?"</string>
@@ -4102,8 +4109,8 @@
     <string name="angle_enabled_app" msgid="6044941043384239076">"Chọn ứng dụng hỗ trợ ANGLE"</string>
     <string name="angle_enabled_app_not_set" msgid="4472572224881726067">"Chưa đặt ứng dụng hỗ trợ ANGLE nào"</string>
     <string name="angle_enabled_app_set" msgid="7811829383833353021">"Ứng dụng hỗ trợ ANGLE: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="graphics_driver_dashboard_title" msgid="5661084817492587796">"Các tùy chọn của trình điều khiển đồ họa"</string>
-    <string name="graphics_driver_dashboard_summary" msgid="6348759885315793654">"Sửa đổi tùy chọn cài đặt trình điều khiển đồ họa"</string>
+    <string name="graphics_driver_dashboard_title" msgid="5661084817492587796">"Các lựa chọn ưu tiên về trình điều khiển đồ hoạ"</string>
+    <string name="graphics_driver_dashboard_summary" msgid="6348759885315793654">"Sửa đổi các chế độ cài đặt về trình điều khiển đồ hoạ"</string>
     <string name="graphics_driver_footer_text" msgid="5123754522284046790">"Khi có nhiều trình điều khiển đồ họa, bạn có thể chọn sử dụng trình điều khiển đồ họa đã cập nhật cho Ứng dụng được cài đặt trên thiết bị."</string>
     <string name="graphics_driver_all_apps_preference_title" msgid="1343065382898127360">"Bật cho tất cả các ứng dụng"</string>
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Chọn trình điều khiển đồ họa"</string>
@@ -4118,14 +4125,11 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <!-- no translation found for enable_angle_as_system_driver (3985105681812713612) -->
-    <skip />
-    <!-- no translation found for enable_angle_as_system_driver_summary (4173041926052925436) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (2619263039763150810) -->
-    <skip />
+    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Bật ANGLE"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"Bật ANGLE làm trình điều khiển hệ thống OpenGL ES"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Cần phải khởi động lại để thay đổi trình điều khiển hệ thống OpenGL ES"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Các thay đổi về khả năng tương thích của ứng dụng"</string>
-    <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Bật/tắt chế độ thay đổi về khả năng tương thích của ứng dụng"</string>
+    <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Bật/tắt các thay đổi về khả năng tương thích của ứng dụng"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Các thay đổi được bật theo mặc định"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Các thay đổi bị tắt theo mặc định"</string>
     <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Không có ứng dụng"</string>
@@ -4525,7 +4529,7 @@
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Cho phép nhiều người dùng"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"cho phép, nhiều, người dùng"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Sử dụng tính năng gỡ lỗi qua Wi-Fi"</string>
-    <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Dùng lựa chọn ưu tiên của trình điều khiển đồ họa"</string>
+    <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Dùng các lựa chọn ưu tiên về trình điều khiển đồ hoạ"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Sử dụng chế độ Ánh sáng đêm"</string>
     <string name="nfc_main_switch_title" msgid="6295839988954817432">"Sử dụng công nghệ Giao tiếp phạm vi gần (NFC)"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Sử dụng độ sáng thích ứng"</string>

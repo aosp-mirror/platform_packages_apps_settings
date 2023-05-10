@@ -105,6 +105,8 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Batal"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Nonaktifkan Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Nonaktifkan fitur Bluetooth LE Audio jika perangkat mendukung kemampuan hardware LE Audio."</string>
+    <!-- no translation found for bluetooth_show_leaudio_device_details (3306637862550475370) -->
+    <skip />
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Aktifkan Daftar yang Diizinkan Bluetooth LE Audio"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Aktifkan fitur daftar yang diizinkan Bluetooth LE Audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Perangkat Media"</string>
@@ -354,6 +356,14 @@
     <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Jika Anda telah menyiapkan Buka dengan Wajah dan Buka dengan Sidik Jari, ponsel akan meminta sidik jari saat Anda memakai masker atau berada di area yang gelap.\n\nAnda dapat membuka kunci dengan smartwatch saat wajah atau sidik jari Anda tidak dikenali."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Anda dapat membuka kunci dengan smartwatch saat sidik jari Anda tidak dikenali."</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Anda dapat membuka kunci dengan smartwatch saat wajah Anda tidak dikenali."</string>
+    <!-- no translation found for biometric_settings_use_fingerprint_or_watch_for (1160830065613858095) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_or_watch_for (1507077107150278532) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_fingerprint_or_watch_for (7495835723072020641) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_watch_for (5454545622244040110) -->
+    <skip />
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Menggunakan wajah atau smartwatch"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Menggunakan sidik jari atau smartwatch"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Menggunakan wajah, sidik jari, atau smartwatch"</string>
@@ -455,7 +465,7 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Sentuh sensor di bagian belakang ponsel. Gunakan jari telunjuk Anda."</string>
     <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Pendaftaran tidak selesai"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Waktu penyiapan sidik jari habis"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Coba lagi sekarang atau siapkan sidik jari nanti di Setelan"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"Anda dapat menyiapkan sidik jari Anda nanti di Setelan."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Pendaftaran sidik jari tidak berhasil. Coba lagi atau gunakan jari lain."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Tambahkan lainnya"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Berikutnya"</string>
@@ -613,10 +623,10 @@
     <string name="manage_device_admin" msgid="1044620606203916275">"Aplikasi admin perangkat"</string>
     <string name="number_of_device_admins_none" msgid="152926922020437312">"Tidak ada aplikasi aktif"</string>
     <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{# aplikasi aktif}other{# aplikasi aktif}}"</string>
-    <string name="manage_trust_agents" msgid="6410149930029992356">"Perangkat dipercaya"</string>
+    <string name="manage_trust_agents" msgid="6410149930029992356">"Perangkat tepercaya"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"Untuk menggunakannya, setel kunci layar terlebih dahulu"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"Tidak ada"</string>
-    <string name="manage_trust_agents_summary_on" msgid="3302574418419446146">"{count,plural, =1{1 perangkat dipercaya aktif}other{# perangkat dipercaya aktif}}"</string>
+    <string name="manage_trust_agents_summary_on" msgid="3302574418419446146">"{count,plural, =1{1 perangkat tepercaya aktif}other{# perangkat tepercaya aktif}}"</string>
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Sambungkan dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
@@ -958,7 +968,6 @@
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Aktif - Berbasis deteksi wajah"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Deteksi Wajah"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Pelajari putar otomatis lebih lanjut"</string>
-    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Saat berganti posisi ponsel antara potret dan lanskap"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Resolusi layar"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Resolusi tinggi"</string>
     <string name="screen_resolution_option_full" msgid="2694003735219114186">"Resolusi penuh"</string>
@@ -1656,7 +1665,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Default"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad &amp; mouse"</string>
-    <string name="trackpad_settings_summary" msgid="3369855644136760402">"Kecepatan pointer, gestur"</string>
+    <string name="trackpad_settings_summary" msgid="3369855644136760402">"Kecepatan kursor, gestur"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Ketuk untuk mengklik"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Gestur touchpad"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Sesuaikan setiap gestur navigasi touchpad"</string>
@@ -1664,7 +1673,7 @@
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Konten akan bergerak ke atas saat Anda men-scroll ke bawah"</string>
     <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Ketuk kanan bawah"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Ketuk pojok kanan bawah touchpad untuk melihat opsi lainnya"</string>
-    <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Kecepatan pointer"</string>
+    <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Kecepatan kursor"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Pelajari gestur touchpad"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Membuka layar utama"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Geser ke atas dengan tiga jari di touchpad"</string>
@@ -2179,13 +2188,13 @@
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Aktifkan Penghemat Baterai"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Baterai mungkin lebih cepat habis dari biasanya"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"Penghemat Baterai aktif"</string>
-    <!-- no translation found for battery_saver_link_a11y (6613079613524512257) -->
-    <skip />
+    <string name="battery_saver_link_a11y" msgid="6613079613524512257">"Pelajari Penghemat Baterai lebih lanjut"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Beberapa fitur mungkin dibatasi"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Penggunaan baterai tinggi"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Lihat aplikasi dengan penggunaan tertinggi"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Pengisian daya dioptimalkan untuk melindungi baterai"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"Untuk membantu memperpanjang masa pakai baterai, pengisian daya dioptimalkan"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_summary (5107379280241187562) -->
+    <skip />
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Pengisian daya dioptimalkan untuk melindungi baterai"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Untuk membantu memperpanjang masa pakai baterai, pengisian daya dioptimalkan saat dipasang ke dok"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Pengisian daya dioptimalkan untuk melindungi baterai"</string>
@@ -2306,10 +2315,8 @@
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Penggunaan baterai <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Waktu pemakaian perangkat sejak terakhir kali baterai terisi penuh"</string>
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Waktu pemakaian perangkat <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_spinner_view_by_apps (8769276544072098082) -->
-    <skip />
-    <!-- no translation found for battery_usage_spinner_view_by_systems (7904104223212160541) -->
-    <skip />
+    <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Lihat menurut aplikasi"</string>
+    <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Lihat menurut sistem"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistik Proses"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistik teknis tentang proses yang berjalan"</string>
@@ -2442,7 +2449,7 @@
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"Nonaktifkan &amp; uninstal"</string>
     <string name="select_device_admin_msg" msgid="5501360309040114486">"Aplikasi admin perangkat"</string>
     <string name="no_device_admins" msgid="8888779888103079854">"Tidak ada aplikasi admin yang tersedia"</string>
-    <string name="no_trust_agents" msgid="8659098725864191600">"Tidak tersedia perangkat dipercaya"</string>
+    <string name="no_trust_agents" msgid="8659098725864191600">"Tidak tersedia perangkat tepercaya"</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"Aktifkan aplikasi admin perangkat?"</string>
     <string name="add_device_admin" msgid="6252128813507932519">"Aktifkan aplikasi admin perangkat ini"</string>
     <string name="device_admin_add_title" msgid="6087481040932322289">"Admin perangkat"</string>
@@ -2838,7 +2845,7 @@
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Untuk menggunakannya, instal aplikasi pembayaran terlebih dahulu"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Aplikasi baru-baru ini, aplikasi default"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"Akses notifikasi tidak tersedia untuk aplikasi di profil kerja"</string>
-    <string name="account_dashboard_title" msgid="8228773251948253914">"Sandi dan akun"</string>
+    <string name="account_dashboard_title" msgid="8228773251948253914">"Sandi &amp; akun"</string>
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Sandi tersimpan, isi otomatis, akun yang disinkronkan"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Aplikasi default"</string>
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Aplikasi Clone"</string>
@@ -2975,7 +2982,7 @@
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Nada tombol nomor"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Suara penguncian layar"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Getaran &amp; suara pengisian daya"</string>
-    <string name="docking_sounds_title" msgid="5341616179210436159">"Memasang suara di dok"</string>
+    <string name="docking_sounds_title" msgid="5341616179210436159">"Suara saat ditaruh di dok"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Suara sentuhan"</string>
     <string name="vibrate_icon_title" msgid="1281100105045362530">"Selalu tampilkan ikon saat dalam mode getar"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Dok pemutaran speaker"</string>
@@ -3581,7 +3588,7 @@
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
     <string name="usb_use" msgid="6783183432648438528">"Gunakan USB untuk"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"Konfigurasi USB default"</string>
-    <string name="usb_default_info" msgid="167172599497085266">"Ketika perangkat lain terhubung dan ponsel Anda terbuka kuncinya, setelan ini akan berlaku. Hanya hubungkan ke perangkat yang dipercaya."</string>
+    <string name="usb_default_info" msgid="167172599497085266">"Ketika perangkat lain terhubung dan ponsel Anda terbuka kuncinya, setelan ini akan berlaku. Hanya hubungkan ke perangkat tepercaya."</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Opsi daya"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Opsi transfer file"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
@@ -3648,12 +3655,9 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Izinkan akses untuk mengelola semua file"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Mengizinkan aplikasi ini untuk membaca, mengubah, dan menghapus semua file di perangkat ini atau media penyimpanan yang terpasang. Jika diberikan, aplikasi dapat mengakses file tanpa sepengetahuan Anda."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Dapat mengakses semua file"</string>
-    <!-- no translation found for full_screen_intent_title (747270185715224130) -->
-    <skip />
-    <!-- no translation found for permit_full_screen_intent (9035367640019960861) -->
-    <skip />
-    <!-- no translation found for footer_description_full_screen_intent (7716518411349225528) -->
-    <skip />
+    <string name="full_screen_intent_title" msgid="747270185715224130">"Notifikasi layar penuh"</string>
+    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Izinkan notifikasi layar penuh dari aplikasi ini"</string>
+    <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Izinkan aplikasi ini menampilkan notifikasi dalam layar penuh ketika perangkat terkunci. Aplikasi mungkin menggunakan tindakan ini untuk memperjelas alarm, panggilan masuk, atau notifikasi penting lainnya."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Aplikasi pengelolaan media"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Izinkan aplikasi untuk mengelola media"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Jika diizinkan, aplikasi ini dapat mengubah atau menghapus file media yang dibuat dengan aplikasi lain tanpa bertanya kepada Anda. Aplikasi harus memiliki izin untuk mengakses file dan media."</string>
@@ -3922,9 +3926,9 @@
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Gunakan pintasan untuk"</string>
     <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"Tarik setengah layar bagian atas ke bawah agar lebih mudah dijangkau dengan satu tangan"</string>
     <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"Cara menggunakan mode satu tangan"</b>\n" • Pastikan navigasi gestur dipilih di setelan navigasi sistem\n • Geser ke bawah di dekat tepi bawah layar"</string>
-    <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Tarik layar agar berada dalam jangkauan"</string>
+    <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Menarik layar agar berada dalam jangkauan"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Bagian atas layar akan dapat dijangkau ibu jari Anda."</string>
-    <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Tampilkan notifikasi"</string>
+    <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Menampilkan notifikasi"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"Notifikasi dan setelan akan muncul."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Untuk memeriksa waktu, notifikasi, dan info lainnya, ketuk dua kali layar Anda."</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"Aktifkan tampilan"</string>
@@ -4065,7 +4069,10 @@
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# sandi}other{# sandi}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"otomatis, isi, isi otomatis, sandi"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"data, kunci sandi, sandi"</string>
+    <string name="credman_autofill_keywords" msgid="701180623776848914">"otomatis, isi, isi otomatis, data, kunci sandi, sandi"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Pastikan Anda memercayai aplikasi ini&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Isi Otomatis Google&gt;%1$s&lt;/xliff:g&gt; menggunakan item yang ada di layar untuk menentukan item apa saja yang dapat diisi otomatis."</string>
+    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Gunakan &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; menggunakan konten di layar untuk menentukan item yang dapat diisi otomatis. Sandi, kunci sandi, dan info baru lainnya akan disimpan di sini mulai sekarang."</string>
+    <string name="credman_picker_title" msgid="2642776965060619988">"Sandi, kunci sandi, dan layanan data"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Nonaktifkan %1$s?"</string>
     <string name="credman_confirmation_message" msgid="158362573056996762">"Info tersimpan seperti kunci sandi dan sandi mungkin tidak tersedia saat Anda login"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Gunakan %1$s?"</string>
@@ -4118,12 +4125,9 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <!-- no translation found for enable_angle_as_system_driver (3985105681812713612) -->
-    <skip />
-    <!-- no translation found for enable_angle_as_system_driver_summary (4173041926052925436) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_angle_as_system_driver (2619263039763150810) -->
-    <skip />
+    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Aktifkan ANGLE"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"Mengaktifkan ANGLE sebagai driver OpenGL ES sistem"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Perlu memulai ulang untuk mengubah driver OpenGL ES sistem"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Perubahan Kompatibilitas Aplikasi"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Ubah setelan kompatibilitas aplikasi"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Perubahan aktif default"</string>
