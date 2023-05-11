@@ -161,22 +161,20 @@ public class UdfpsEnrollView extends FrameLayout implements UdfpsEnrollHelper.Li
         MarginLayoutParams marginLayoutParams = (MarginLayoutParams) getLayoutParams();
         FrameLayout.LayoutParams params = (LayoutParams) getLayoutParams();
         if (rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) {
-            parentView.getViewTreeObserver().addOnDrawListener(() -> {
-                final int[] coords = parentView.getLocationOnScreen();
-                final int parentLeft = coords[0];
-                final int parentTop = coords[1];
-                final int parentRight = parentLeft + parentView.getWidth();
-                params.gravity = Gravity.RIGHT | Gravity.TOP;
-                final int rightMargin = parentRight - rotatedBounds.right - getPaddingX();
-                final int topMargin = rotatedBounds.top - parentTop - getPaddingY();
-                if (marginLayoutParams.rightMargin == rightMargin
-                        && marginLayoutParams.topMargin == topMargin) {
-                    return;
-                }
-                marginLayoutParams.rightMargin = rightMargin;
-                marginLayoutParams.topMargin = topMargin;
-                setLayoutParams(params);
-            });
+            final int[] coords = parentView.getLocationOnScreen();
+            final int parentLeft = coords[0];
+            final int parentTop = coords[1];
+            final int parentRight = parentLeft + parentView.getWidth();
+            params.gravity = Gravity.RIGHT | Gravity.TOP;
+            final int rightMargin = parentRight - rotatedBounds.right - getPaddingX();
+            final int topMargin = rotatedBounds.top - parentTop - getPaddingY();
+            if (marginLayoutParams.rightMargin == rightMargin
+                    && marginLayoutParams.topMargin == topMargin) {
+                return;
+            }
+            marginLayoutParams.rightMargin = rightMargin;
+            marginLayoutParams.topMargin = topMargin;
+            setLayoutParams(params);
         } else {
             final int[] coords = parentView.getLocationOnScreen();
             final int parentLeft = coords[0];
