@@ -16,6 +16,9 @@
 
 package com.android.settings.password;
 
+import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_PASSWORD;
+import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_PIN;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -30,6 +33,8 @@ import androidx.fragment.app.Fragment;
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
 import com.android.settings.password.ChooseLockTypeDialogFragment.OnLockTypeSelectedListener;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 /**
  * Setup Wizard's version of ChooseLockPassword screen. It inherits the logic and basic structure
@@ -113,12 +118,12 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
                 final boolean forBiometrics = intent
                         .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, false);
                 final SetupSkipDialog dialog = SetupSkipDialog.newInstance(
+                        mIsAlphaMode ? CREDENTIAL_TYPE_PASSWORD : CREDENTIAL_TYPE_PIN,
                         frpSupported,
-                        /* isPatternMode= */ false,
-                        mIsAlphaMode,
                         forFingerprint,
                         forFace,
-                        forBiometrics);
+                        forBiometrics,
+                        WizardManagerHelper.isAnySetupWizard(intent));
 
                 ConfirmDeviceCredentialUtils.hideImeImmediately(
                         getActivity().getWindow().getDecorView());

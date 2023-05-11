@@ -122,8 +122,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         mExecutor = ContextCompat.getMainExecutor(mContext);
         mCredentialManager =
                 getCredentialManager(context, preferenceKey.equals("credentials_test"));
-        mSettingsContentObserver = new SettingContentObserver(mHandler);
-        mSettingsContentObserver.register(context.getContentResolver());
+        mSettingsContentObserver =
+                new SettingContentObserver(mHandler, context.getContentResolver());
+        mSettingsContentObserver.register();
         mSettingsPackageMonitor.register(context, context.getMainLooper(), false);
     }
 
@@ -184,6 +185,10 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         mIsWorkProfile = isWorkProfile;
         setDelegate(delegate);
         verifyReceivedIntent(launchIntent);
+
+        // Recreate the content observers because the user might have changed.
+        mSettingsContentObserver.unregister();
+        mSettingsContentObserver.register();
     }
 
     /**
@@ -528,17 +533,25 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                     boolean isChecked = pref.isChecked();
 
                     if (isChecked) {
-                        // Since we are enabling it we should confirm the user decision with a
-                        // dialog box.
-                        NewProviderConfirmationDialogFragment fragment =
-                                newNewProviderConfirmationDialogFragment(
-                                        packageName, title, /* setActivityResult= */ false);
-                        if (fragment == null || mFragmentManager == null) {
+                        if (mEnabledPackageNames.size() >= MAX_SELECTABLE_PROVIDERS) {
+                            // Show the error if too many enabled.
+                            pref.setChecked(false);
+                            final DialogFragment fragment = newErrorDialogFragment();
+
+                            if (fragment == null || mFragmentManager == null) {
+                                return true;
+                            }
+
+                            fragment.show(mFragmentManager, ErrorDialogFragment.TAG);
                             return true;
                         }
 
-                        fragment.show(mFragmentManager, NewProviderConfirmationDialogFragment.TAG);
+                        togglePackageNameEnabled(packageName);
 
+                        // Enable all prefs.
+                        if (mPrefs.containsKey(packageName)) {
+                            mPrefs.get(packageName).setChecked(true);
+                        }
                         return true;
                     } else {
                         // If we are disabling the last enabled provider then show a warning.
@@ -612,6 +625,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                         completeEnableProviderDialogBox(
                                 whichButton, packageName, setActivityResult);
                     }
+
+                    @Override
+                    public void onCancel() {}
                 };
 
         return new NewProviderConfirmationDialogFragment(host, packageName, appName);
@@ -658,6 +674,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 new DialogHost() {
                     @Override
                     public void onDialogClick(int whichButton) {}
+
+                    @Override
+                    public void onCancel() {}
                 };
 
         return new ErrorDialogFragment(host);
@@ -681,6 +700,12 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                             pref.setChecked(true);
                         }
                     }
+
+                    @Override
+                    public void onCancel() {
+                        // If we dismiss the dialog then re-enable.
+                        pref.setChecked(true);
+                    }
                 };
 
         return new ConfirmationDialogFragment(host, packageName, appName);
@@ -697,6 +722,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     /** Called when the dialog button is clicked. */
     private static interface DialogHost {
         void onDialogClick(int whichButton);
+
+        void onCancel();
     }
 
     /** Called to send messages back to the parent fragment. */
@@ -745,6 +772,11 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         public DialogHost getDialogHost() {
             return mDialogHost;
+        }
+
+        @Override
+        public void onCancel(@NonNull DialogInterface dialog) {
+            getDialogHost().onCancel();
         }
     }
 
@@ -859,13 +891,25 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         private final Uri mCredentialService =
                 Settings.Secure.getUriFor(Settings.Secure.CREDENTIAL_SERVICE);
 
-        public SettingContentObserver(Handler handler) {
+        private final Uri mCredentialPrimaryService =
+                Settings.Secure.getUriFor(Settings.Secure.CREDENTIAL_SERVICE_PRIMARY);
+
+        private ContentResolver mContentResolver;
+
+        public SettingContentObserver(Handler handler, ContentResolver contentResolver) {
             super(handler);
+            mContentResolver = contentResolver;
         }
 
-        public void register(ContentResolver contentResolver) {
-            contentResolver.registerContentObserver(mAutofillService, false, this, getUser());
-            contentResolver.registerContentObserver(mCredentialService, false, this, getUser());
+        public void register() {
+            mContentResolver.registerContentObserver(mAutofillService, false, this, getUser());
+            mContentResolver.registerContentObserver(mCredentialService, false, this, getUser());
+            mContentResolver.registerContentObserver(
+                    mCredentialPrimaryService, false, this, getUser());
+        }
+
+        public void unregister() {
+            mContentResolver.unregisterContentObserver(this);
         }
 
         @Override
