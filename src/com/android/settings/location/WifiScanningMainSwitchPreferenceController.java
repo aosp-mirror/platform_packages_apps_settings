@@ -18,6 +18,7 @@ package com.android.settings.location;
 import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.widget.Switch;
+import android.os.UserManager;
 
 import androidx.preference.PreferenceScreen;
 
@@ -34,10 +35,12 @@ public class WifiScanningMainSwitchPreferenceController extends TogglePreference
 
     private static final String KEY_WIFI_SCANNING_SWITCH = "wifi_always_scanning_switch";
     private final WifiManager mWifiManager;
+    private final UserManager mUserManager;
 
     public WifiScanningMainSwitchPreferenceController(Context context) {
         super(context, KEY_WIFI_SCANNING_SWITCH);
         mWifiManager = context.getSystemService(WifiManager.class);
+        mUserManager = UserManager.get(context);
     }
 
     @Override
@@ -52,7 +55,9 @@ public class WifiScanningMainSwitchPreferenceController extends TogglePreference
     @Override
     public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(R.bool.config_show_location_scanning)
-                ? AVAILABLE
+                ? (mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_LOCATION)
+                       ? DISABLED_DEPENDENT_SETTING
+                       : AVAILABLE)
                 : UNSUPPORTED_ON_DEVICE;
     }
 
