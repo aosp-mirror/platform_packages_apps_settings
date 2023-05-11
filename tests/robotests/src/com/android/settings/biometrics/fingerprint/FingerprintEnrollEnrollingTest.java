@@ -53,7 +53,6 @@ import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.Vibrator;
-import android.util.FeatureFlagUtils;
 import android.view.Display;
 import android.view.Surface;
 import android.view.View;
@@ -203,8 +202,6 @@ public class FingerprintEnrollEnrollingTest {
 
     @Test
     public void fingerprintUdfpsOverlayEnrollment_showOverlayPortrait() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
         when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_0);
 
@@ -216,8 +213,6 @@ public class FingerprintEnrollEnrollingTest {
 
     @Test
     public void fingerprintUdfpsOverlayEnrollment_showOverlayLandscape() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
         when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_90);
 
@@ -229,8 +224,6 @@ public class FingerprintEnrollEnrollingTest {
 
     @Test
     public void fingerprintUdfpsOverlayEnrollment_usesCorrectProgressBarFillColor() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
         final TypedArray ta = mActivity.obtainStyledAttributes(null,
                 R.styleable.BiometricsEnrollView, R.attr.biometricsEnrollStyle,
@@ -250,9 +243,7 @@ public class FingerprintEnrollEnrollingTest {
 
     @Test
     public void fingerprintUdfpsOverlayEnrollment_checkViewOverlapPortrait() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
-        when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_90);
+        when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_0);
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
         final GlifLayout defaultLayout = mActivity.findViewById(R.id.setup_wizard_layout);
@@ -294,9 +285,9 @@ public class FingerprintEnrollEnrollingTest {
         udfpsEnrollView.getViewTreeObserver().addOnDrawListener(() -> {
             udfpsEnrollView.getLocationOnScreen(udfpsEnrollViewPosition);
             rectUdfpsEnrollView.set(new Rect(udfpsEnrollViewPosition[0],
-                            udfpsEnrollViewPosition[1], udfpsEnrollViewPosition[0]
-                            + udfpsEnrollView.getWidth(), udfpsEnrollViewPosition[1]
-                            + udfpsEnrollView.getHeight()));
+                    udfpsEnrollViewPosition[1], udfpsEnrollViewPosition[0]
+                    + udfpsEnrollView.getWidth(), udfpsEnrollViewPosition[1]
+                    + udfpsEnrollView.getHeight()));
         });
 
         lottieAnimationContainer.getViewTreeObserver().addOnDrawListener(() -> {
@@ -321,9 +312,35 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     @Test
+    public void fingerprintUdfpsOverlayEnrollment_descriptionViewGoneWithOverlap() {
+        initializeActivityWithoutCreate(TYPE_UDFPS_OPTICAL);
+        doReturn(true).when(mActivity).hasOverlap(any(), any());
+        when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_0);
+        createActivity();
+
+        final GlifLayout defaultLayout = spy(mActivity.findViewById(R.id.setup_wizard_layout));
+        final TextView descriptionTextView = defaultLayout.getDescriptionTextView();
+
+        defaultLayout.getViewTreeObserver().dispatchOnDraw();
+        assertThat(descriptionTextView.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void fingerprintUdfpsOverlayEnrollment_descriptionViewVisibleWithoutOverlap() {
+        initializeActivityWithoutCreate(TYPE_UDFPS_OPTICAL);
+        doReturn(false).when(mActivity).hasOverlap(any(), any());
+        when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_0);
+        createActivity();
+
+        final GlifLayout defaultLayout = spy(mActivity.findViewById(R.id.setup_wizard_layout));
+        final TextView descriptionTextView = defaultLayout.getDescriptionTextView();
+
+        defaultLayout.getViewTreeObserver().dispatchOnDraw();
+        assertThat(descriptionTextView.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
     public void forwardEnrollProgressEvents() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
         EnrollListener listener = new EnrollListener(mActivity);
@@ -337,8 +354,6 @@ public class FingerprintEnrollEnrollingTest {
 
     @Test
     public void forwardEnrollHelpEvents() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
         EnrollListener listener = new EnrollListener(mActivity);
@@ -352,8 +367,6 @@ public class FingerprintEnrollEnrollingTest {
 
     @Test
     public void forwardEnrollAcquiredEvents() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
         EnrollListener listener = new EnrollListener(mActivity);
@@ -368,8 +381,6 @@ public class FingerprintEnrollEnrollingTest {
 
     @Test
     public void forwardEnrollPointerDownEvents() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
         EnrollListener listener = new EnrollListener(mActivity);
@@ -383,8 +394,6 @@ public class FingerprintEnrollEnrollingTest {
 
     @Test
     public void forwardEnrollPointerUpEvents() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
         EnrollListener listener = new EnrollListener(mActivity);
