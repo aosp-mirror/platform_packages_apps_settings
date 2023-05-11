@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.os.UserManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.euicc.EuiccManager;
-import android.util.Log;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -135,6 +134,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
             return mContext.getString(R.string.mobile_network_tap_to_activate, displayName);
         } else {
             return mSubInfoEntityList.stream()
+                    .sorted((e1, e2) -> Integer.compare(e1.simSlotIndex, e2.simSlotIndex))
                     .map(SubscriptionInfoEntity::getUniqueDisplayName)
                     .collect(Collectors.joining(", "));
         }
