@@ -49,7 +49,7 @@ public final class BatteryHistoricalLogUtilTest {
     @Test
     public void printHistoricalLog_withDefaultLogs() {
         BatteryHistoricalLogUtil.printBatteryOptimizeHistoricalLog(mContext, mTestPrintWriter);
-        assertThat(mTestStringWriter.toString()).contains("No past logs");
+        assertThat(mTestStringWriter.toString()).contains("nothing to dump");
     }
 
     @Test
@@ -58,7 +58,7 @@ public final class BatteryHistoricalLogUtilTest {
         BatteryHistoricalLogUtil.printBatteryOptimizeHistoricalLog(mContext, mTestPrintWriter);
 
         assertThat(mTestStringWriter.toString()).contains(
-                "pkg1\tAction:APPLY\tEvent:logs\tTimestamp:");
+                "pkg1\taction:APPLY\tevent:logs");
     }
 
     @Test
