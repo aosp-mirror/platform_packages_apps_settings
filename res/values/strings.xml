@@ -10306,7 +10306,16 @@
     <string name="credman_confirmation_message_title">Turn off %1$s\?</string>
 
     <!-- Message of the warning dialog for disabling the credential provider. [CHAR_LIMIT=NONE] -->
-    <string name="credman_confirmation_message">Saved info like addresses or payment methods won\'t be filled in when you sign in. To keep your saved info filled in, set enable a password, passkey and data/or service.</string>
+    <string name="credman_confirmation_message">
+        <![CDATA[
+        <b>Turn off this service?</b>
+        <br/>
+        <br/>
+        Save info like passwords, passkeys, payment methods, and other info won\'t be filled
+        in when you sign in. To use your saved info, choose a password, passkey, or data
+        service.
+        ]]>
+    </string>
 
     <!-- Title of the warning dialog for enabling the credential provider. [CHAR_LIMIT=NONE] -->
     <string name="credman_enable_confirmation_message_title">Use %1$s\?</string>
