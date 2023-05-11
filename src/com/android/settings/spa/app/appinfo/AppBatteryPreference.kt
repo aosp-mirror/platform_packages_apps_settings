@@ -54,7 +54,7 @@ fun AppBatteryPreference(app: ApplicationInfo) {
     if (!presenter.isAvailable()) return
 
     Preference(object : PreferenceModel {
-        override val title = stringResource(R.string.app_battery_usage_title)
+        override val title = stringResource(R.string.battery_details_title)
         override val summary = presenter.summary
         override val enabled = presenter.enabled
         override val onClick = presenter::startActivity

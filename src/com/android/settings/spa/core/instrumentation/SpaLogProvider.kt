@@ -123,8 +123,8 @@ class SpaLogData(val id: String, val event: LogEvent,
         return ElapsedTimeUtils.getElapsedTime(System.currentTimeMillis())
     }
 
-    //TODO(b/253979024): Will be implemented in subsequent CLs.
-    private fun getPageIdByEntryId(id: String): String {
+    //TODO(b/253979024): Will be implemented in subsequent CLs. Remove @Suppress when done.
+    private fun getPageIdByEntryId(@Suppress("UNUSED_PARAMETER") id: String): String {
         return ""
     }
 }

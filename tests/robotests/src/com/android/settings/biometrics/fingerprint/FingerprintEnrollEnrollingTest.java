@@ -158,7 +158,7 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     @Test
-    public void fingerprintUdfpsOverlayEnrollment_loseFocus_shouldCancel() {
+    public void fingerprintUdfpsOverlayEnrollment_loseFocus_shouldNotCancel() {
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
         mActivity.onEnrollmentProgressChange(1, 1);

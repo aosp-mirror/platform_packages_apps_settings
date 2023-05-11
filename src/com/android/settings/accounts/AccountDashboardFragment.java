@@ -30,6 +30,8 @@ import android.provider.SearchIndexableResource;
 import com.android.settings.R;
 import com.android.settings.applications.autofill.PasswordsPreferenceController;
 import com.android.settings.applications.credentials.CredentialManagerPreferenceController;
+import com.android.settings.applications.credentials.DefaultCombinedPreferenceController;
+import com.android.settings.applications.credentials.DefaultWorkCombinedPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultAutofillPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultWorkAutofillPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
@@ -76,7 +78,14 @@ public class AccountDashboardFragment extends DashboardFragment {
             CredentialManagerPreferenceController cmpp =
                     use(CredentialManagerPreferenceController.class);
             CredentialManagerPreferenceController.Delegate delegate =
-                result -> getActivity().setResult(result);
+                    new CredentialManagerPreferenceController.Delegate() {
+                public void setActivityResult(int resultCode) {
+                    getActivity().setResult(resultCode);
+                }
+                public void forceDelegateRefresh() {
+                    forceUpdatePreferences();
+                }
+            };
             cmpp.init(this, getFragmentManager(), getIntent(), delegate);
         } else {
             getSettingsLifecycle().addObserver(use(PasswordsPreferenceController.class));
@@ -99,8 +108,13 @@ public class AccountDashboardFragment extends DashboardFragment {
 
     static void buildAutofillPreferenceControllers(
             Context context, List<AbstractPreferenceController> controllers) {
-        controllers.add(new DefaultAutofillPreferenceController(context));
-        controllers.add(new DefaultWorkAutofillPreferenceController(context));
+        if (CredentialManager.isServiceEnabled(context)) {
+            controllers.add(new DefaultCombinedPreferenceController(context));
+            controllers.add(new DefaultWorkCombinedPreferenceController(context));
+        } else {
+            controllers.add(new DefaultAutofillPreferenceController(context));
+            controllers.add(new DefaultWorkAutofillPreferenceController(context));
+        }
     }
 
     private static void buildAccountPreferenceControllers(

@@ -177,8 +177,8 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
         mAppListPreferenceGroup.setOrderingAsAdded(false);
         mSpinnerPreference.initializeSpinner(
                 new String[]{
-                        mPrefContext.getString(R.string.battery_usage_spinner_breakdown_by_apps),
-                        mPrefContext.getString(R.string.battery_usage_spinner_breakdown_by_system)
+                        mPrefContext.getString(R.string.battery_usage_spinner_view_by_apps),
+                        mPrefContext.getString(R.string.battery_usage_spinner_view_by_systems)
                 },
                 new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -313,11 +313,8 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     @VisibleForTesting
     void removeAndCacheAllUnusedPreferences() {
         List<BatteryDiffEntry> entries = getBatteryDiffEntries();
-        Set<String> entryKeySet = new ArraySet<>();
-        for (BatteryDiffEntry entry : entries) {
-            entryKeySet.add(entry.getKey());
-        }
-
+        Set<String> entryKeySet = new ArraySet<>(entries.size());
+        entries.forEach(entry -> entryKeySet.add(entry.getKey()));
         final int prefsCount = mAppListPreferenceGroup.getPreferenceCount();
         for (int index = prefsCount - 1; index >= 0; index--) {
             final Preference pref = mAppListPreferenceGroup.getPreference(index);

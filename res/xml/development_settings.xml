@@ -243,6 +243,11 @@
             android:title="@string/enable_gpu_debug_layers"
             android:summary="@string/enable_gpu_debug_layers_summary" />
 
+        <SwitchPreference
+            android:key="enable_angle_as_system_driver"
+            android:title="@string/enable_angle_as_system_driver"
+            android:summary="@string/enable_angle_as_system_driver_summary" />
+
         <Preference
             android:key="graphics_driver_dashboard"
             android:title="@string/graphics_driver_dashboard_title"
@@ -669,9 +674,6 @@
         <Preference
             android:key="tare"
             android:title="@string/tare_title" >
-            <intent
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.development.tare.TareHomePage" />
         </Preference>
 
         <SwitchPreference
@@ -712,6 +714,11 @@
             android:key="disable_phantom_process_monitor"
             android:title="@string/disable_phantom_process_monitor_title"
             android:summary="@string/disable_phantom_process_monitor_summary" />
+
+        <SwitchPreference
+            android:key="force_enable_notes_role"
+            android:title="@string/enable_notes_role_title"
+            android:summary="@string/enable_notes_role_summary" />
 
     </PreferenceCategory>
 

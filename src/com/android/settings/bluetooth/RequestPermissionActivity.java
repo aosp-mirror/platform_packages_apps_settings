@@ -42,6 +42,8 @@ import androidx.appcompat.app.AlertDialog;
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.BluetoothDiscoverableTimeoutReceiver;
 
+import kotlin.Unit;
+
 import java.time.Duration;
 
 /**
@@ -100,12 +102,15 @@ public class RequestPermissionActivity extends Activity implements
 
                 case BluetoothAdapter.STATE_ON:
                 case BluetoothAdapter.STATE_TURNING_ON: {
-                    Intent intent = new Intent(this, RequestPermissionHelperActivity.class);
-                    intent.putExtra(RequestPermissionHelperActivity.EXTRA_APP_LABEL, mAppLabel);
-                    intent.setAction(RequestPermissionHelperActivity
-                                .ACTION_INTERNAL_REQUEST_BT_OFF);
-
-                    startActivityForResult(intent, 0);
+                    RequestPermissionHelper.INSTANCE.requestDisable(this, mAppLabel,
+                            () -> {
+                                onDisableConfirmed();
+                                return Unit.INSTANCE;
+                            },
+                            () -> {
+                                cancelAndFinish();
+                                return Unit.INSTANCE;
+                            });
                 } break;
 
                 default: {
@@ -126,18 +131,17 @@ public class RequestPermissionActivity extends Activity implements
                      * case via the broadcast receiver.
                      */
 
-                    /*
-                     * Start the helper activity to:
-                     * 1) ask the user about enabling bt AND discovery
-                     * 2) enable BT upon confirmation
-                     */
-                    Intent intent = new Intent(this, RequestPermissionHelperActivity.class);
-                    intent.setAction(RequestPermissionHelperActivity.ACTION_INTERNAL_REQUEST_BT_ON);
-                    intent.putExtra(RequestPermissionHelperActivity.EXTRA_APP_LABEL, mAppLabel);
-                    if (mRequest == REQUEST_ENABLE_DISCOVERABLE) {
-                        intent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, mTimeout);
-                    }
-                    startActivityForResult(intent, 0);
+                    // Start the helper activity to ask the user about enabling bt AND discovery
+                    RequestPermissionHelper.INSTANCE.requestEnable(this, mAppLabel,
+                            mRequest == REQUEST_ENABLE_DISCOVERABLE ? mTimeout : -1,
+                            () -> {
+                                onEnableConfirmed();
+                                return Unit.INSTANCE;
+                            },
+                            () -> {
+                                cancelAndFinish();
+                                return Unit.INSTANCE;
+                            });
                 } break;
 
                 case BluetoothAdapter.STATE_ON: {
@@ -202,42 +206,27 @@ public class RequestPermissionActivity extends Activity implements
         mDialog.show();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != Activity.RESULT_OK) {
-            cancelAndFinish();
-            return;
+    private void onEnableConfirmed() {
+        mBluetoothAdapter.enable();
+        if (mBluetoothAdapter.getState() == BluetoothAdapter.STATE_ON) {
+            proceedAndFinish();
+        } else {
+            // If BT is not up yet, show "Turning on Bluetooth..."
+            mReceiver = new StateChangeReceiver();
+            registerReceiver(mReceiver, new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
+            createDialog();
         }
+    }
 
-        switch (mRequest) {
-            case REQUEST_ENABLE:
-            case REQUEST_ENABLE_DISCOVERABLE: {
-                if (mBluetoothAdapter.getState() == BluetoothAdapter.STATE_ON) {
-                    proceedAndFinish();
-                } else {
-                    // If BT is not up yet, show "Turning on Bluetooth..."
-                    mReceiver = new StateChangeReceiver();
-                    registerReceiver(mReceiver, new IntentFilter(
-                            BluetoothAdapter.ACTION_STATE_CHANGED));
-                    createDialog();
-                }
-            } break;
-
-            case REQUEST_DISABLE: {
-                if (mBluetoothAdapter.getState() == BluetoothAdapter.STATE_OFF) {
-                    proceedAndFinish();
-                } else {
-                    // If BT is not up yet, show "Turning off Bluetooth..."
-                    mReceiver = new StateChangeReceiver();
-                    registerReceiver(mReceiver, new IntentFilter(
-                            BluetoothAdapter.ACTION_STATE_CHANGED));
-                    createDialog();
-                }
-            } break;
-
-            default: {
-                cancelAndFinish();
-            } break;
+    private void onDisableConfirmed() {
+        mBluetoothAdapter.disable();
+        if (mBluetoothAdapter.getState() == BluetoothAdapter.STATE_OFF) {
+            proceedAndFinish();
+        } else {
+            // If BT is not up yet, show "Turning off Bluetooth..."
+            mReceiver = new StateChangeReceiver();
+            registerReceiver(mReceiver, new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
+            createDialog();
         }
     }
 

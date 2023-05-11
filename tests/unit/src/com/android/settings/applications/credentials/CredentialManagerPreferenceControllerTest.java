@@ -86,13 +86,12 @@ public class CredentialManagerPreferenceControllerTest {
         mCredentialsPreferenceCategory.setKey("credentials_test");
         mScreen.addPreference(mCredentialsPreferenceCategory);
         mReceivedResultCode = Optional.empty();
-        mDelegate =
-                new CredentialManagerPreferenceController.Delegate() {
-                    @Override
-                    public void setActivityResult(int resultCode) {
-                        mReceivedResultCode = Optional.of(resultCode);
-                    }
-                };
+        mDelegate = new CredentialManagerPreferenceController.Delegate() {
+                public void setActivityResult(int resultCode) {
+                    mReceivedResultCode = Optional.of(resultCode);
+                }
+                public void forceDelegateRefresh() {}
+            };
     }
 
     @Test
@@ -120,45 +119,6 @@ public class CredentialManagerPreferenceControllerTest {
                 createControllerWithServices(Lists.newArrayList(createCredentialProviderInfo()));
         assertThat(controller.isConnected()).isFalse();
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
-    }
-
-    @Test
-    public void displayPreference_noServices_noPreferencesAdded_useAutofillUri() {
-        Settings.Secure.putStringForUser(
-                mContext.getContentResolver(),
-                Settings.Secure.AUTOFILL_SERVICE_SEARCH_URI,
-                "test",
-                UserHandle.myUserId());
-
-        CredentialManagerPreferenceController controller =
-                createControllerWithServices(Collections.emptyList());
-        controller.displayPreference(mScreen);
-        assertThat(mCredentialsPreferenceCategory.getPreferenceCount()).isEqualTo(1);
-
-        Preference pref = mCredentialsPreferenceCategory.getPreference(0);
-        assertThat(pref.getTitle()).isEqualTo("Add service");
-
-        assertThat(controller.getAddServiceUri(mContext)).isEqualTo("test");
-    }
-
-    @Test
-    public void displayPreference_noServices_noPreferencesAdded_useCredManUri() {
-        Settings.Secure.putStringForUser(
-                mContext.getContentResolver(),
-                Settings.Secure.AUTOFILL_SERVICE_SEARCH_URI,
-                "test",
-                UserHandle.myUserId());
-
-        CredentialManagerPreferenceController controller =
-                createControllerWithServicesAndAddServiceOverride(
-                        Collections.emptyList(), "credman");
-        controller.displayPreference(mScreen);
-        assertThat(mCredentialsPreferenceCategory.getPreferenceCount()).isEqualTo(1);
-
-        Preference pref = mCredentialsPreferenceCategory.getPreference(0);
-        assertThat(pref.getTitle()).isEqualTo("Add service");
-
-        assertThat(controller.getAddServiceUri(mContext)).isEqualTo("credman");
     }
 
     @Test
@@ -389,7 +349,7 @@ public class CredentialManagerPreferenceControllerTest {
         Intent intent = new Intent(PRIMARY_INTENT);
         intent.setData(Uri.parse("package:" + packageName));
         assertThat(controller.verifyReceivedIntent(intent)).isTrue();
-        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_POSITIVE, packageName);
+        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_POSITIVE, packageName, true);
         assertThat(mReceivedResultCode.get()).isEqualTo(Activity.RESULT_OK);
     }
 
@@ -404,7 +364,7 @@ public class CredentialManagerPreferenceControllerTest {
         Intent intent = new Intent(PRIMARY_INTENT);
         intent.setData(Uri.parse("package:" + packageName));
         assertThat(controller.verifyReceivedIntent(intent)).isTrue();
-        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_NEGATIVE, packageName);
+        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_NEGATIVE, packageName, true);
         assertThat(mReceivedResultCode.get()).isEqualTo(Activity.RESULT_CANCELED);
     }
 
@@ -430,7 +390,7 @@ public class CredentialManagerPreferenceControllerTest {
         Intent intent = new Intent(ALTERNATE_INTENT);
         intent.setData(Uri.parse("package:" + packageName));
         assertThat(controller.verifyReceivedIntent(intent)).isTrue();
-        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_POSITIVE, packageName);
+        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_POSITIVE, packageName, true);
         assertThat(mReceivedResultCode.get()).isEqualTo(Activity.RESULT_OK);
     }
 
@@ -445,7 +405,7 @@ public class CredentialManagerPreferenceControllerTest {
         Intent intent = new Intent(ALTERNATE_INTENT);
         intent.setData(Uri.parse("package:" + packageName));
         assertThat(controller.verifyReceivedIntent(intent)).isTrue();
-        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_NEGATIVE, packageName);
+        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_NEGATIVE, packageName, true);
         assertThat(mReceivedResultCode.get()).isEqualTo(Activity.RESULT_CANCELED);
     }
 
@@ -484,7 +444,7 @@ public class CredentialManagerPreferenceControllerTest {
         CredentialManagerPreferenceController controller =
                 new CredentialManagerPreferenceController(
                         mContext, mCredentialsPreferenceCategory.getKey());
-        controller.setAvailableServices(() -> mock(Lifecycle.class), availableServices, addServiceOverride);
+        controller.setAvailableServices(availableServices, addServiceOverride);
         controller.setDelegate(mDelegate);
         return controller;
     }

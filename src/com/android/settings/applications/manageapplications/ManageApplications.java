@@ -110,6 +110,7 @@ import com.android.settings.Settings.MediaManagementAppsActivity;
 import com.android.settings.Settings.NotificationAppListActivity;
 import com.android.settings.Settings.NotificationReviewPermissionsActivity;
 import com.android.settings.Settings.OverlaySettingsActivity;
+import com.android.settings.Settings.TurnScreenOnSettingsActivity;
 import com.android.settings.Settings.UsageAccessSettingsActivity;
 import com.android.settings.Settings.WriteSettingsActivity;
 import com.android.settings.SettingsActivity;
@@ -129,6 +130,7 @@ import com.android.settings.applications.AppStateNotificationBridge;
 import com.android.settings.applications.AppStateNotificationBridge.NotificationsSentState;
 import com.android.settings.applications.AppStateOverlayBridge;
 import com.android.settings.applications.AppStatePowerBridge;
+import com.android.settings.applications.AppStateTurnScreenOnBridge;
 import com.android.settings.applications.AppStateUsageBridge;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
 import com.android.settings.applications.AppStateWriteSettingsBridge;
@@ -142,6 +144,7 @@ import com.android.settings.applications.appinfo.ExternalSourcesDetails;
 import com.android.settings.applications.appinfo.LongBackgroundTasksDetails;
 import com.android.settings.applications.appinfo.ManageExternalStorageDetails;
 import com.android.settings.applications.appinfo.MediaManagementAppsDetails;
+import com.android.settings.applications.appinfo.TurnScreenOnDetails;
 import com.android.settings.applications.appinfo.WriteSettingsDetails;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
@@ -268,6 +271,7 @@ public class ManageApplications extends InstrumentedFragment
     public static final int LIST_TYPE_LONG_BACKGROUND_TASKS = 16;
     public static final int LIST_TYPE_CLONED_APPS = 17;
     public static final int LIST_TYPE_NFC_TAG_APPS = 18;
+    public static final int LIST_TYPE_TURN_SCREEN_ON = 19;
 
     // List types that should show instant apps.
     public static final Set<Integer> LIST_TYPES_WITH_INSTANT = new ArraySet<>(Arrays.asList(
@@ -569,6 +573,8 @@ public class ManageApplications extends InstrumentedFragment
                 return SettingsEnums.CLONED_APPS;
             case LIST_TYPE_NFC_TAG_APPS:
                 return SettingsEnums.CONFIG_NFC_TAG_APP_PREF;
+            case LIST_TYPE_TURN_SCREEN_ON:
+                return SettingsEnums.SETTINGS_TURN_SCREEN_ON_ACCESS;
             default:
                 return SettingsEnums.PAGE_UNKNOWN;
         }
@@ -738,6 +744,9 @@ public class ManageApplications extends InstrumentedFragment
             case LIST_TYPE_NFC_TAG_APPS:
                 startAppInfoFragment(ChangeNfcTagAppsStateDetails.class,
                         R.string.change_nfc_tag_apps_title);
+                break;
+            case LIST_TYPE_TURN_SCREEN_ON:
+                startAppInfoFragment(TurnScreenOnDetails.class, R.string.turn_screen_on_title);
                 break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed
@@ -1066,6 +1075,8 @@ public class ManageApplications extends InstrumentedFragment
             screenTitle = R.string.cloned_apps_dashboard_title;
         } else if (className.equals(ChangeNfcTagAppsActivity.class.getName())) {
             screenTitle = R.string.change_nfc_tag_apps_title;
+        } else if (className.equals(TurnScreenOnSettingsActivity.class.getName())) {
+            screenTitle = R.string.turn_screen_on_title;
         } else {
             if (screenTitle == -1) {
                 screenTitle = R.string.all_apps;
@@ -1276,6 +1287,8 @@ public class ManageApplications extends InstrumentedFragment
                 mExtraInfoBridge = new AppStateClonedAppsBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_NFC_TAG_APPS) {
                 mExtraInfoBridge = new AppStateNfcTagAppsBridge(mContext, mState, this);
+            } else if (mManageApplications.mListType == LIST_TYPE_TURN_SCREEN_ON) {
+                mExtraInfoBridge = new AppStateTurnScreenOnBridge(mContext, mState, this);
             } else {
                 mExtraInfoBridge = null;
             }
@@ -1829,6 +1842,9 @@ public class ManageApplications extends InstrumentedFragment
                 case LIST_TYPE_NFC_TAG_APPS:
                     holder.setSummary(
                             ChangeNfcTagAppsStateDetails.getSummary(mContext, entry));
+                    break;
+                case LIST_TYPE_TURN_SCREEN_ON:
+                    holder.setSummary(TurnScreenOnDetails.getSummary(mContext, entry));
                     break;
                 default:
                     holder.updateSizeText(entry, mManageApplications.mInvalidSizeStr, mWhichSize);

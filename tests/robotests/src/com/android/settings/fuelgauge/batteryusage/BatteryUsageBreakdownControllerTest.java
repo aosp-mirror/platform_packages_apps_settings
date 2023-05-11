@@ -107,8 +107,9 @@ public final class BatteryUsageBreakdownControllerTest {
                 mBatteryHistEntry);
         mBatteryDiffEntry = spy(mBatteryDiffEntry);
         mBatteryUsageBreakdownController.mBatteryDiffData =
-                new BatteryDiffData(mContext, Arrays.asList(mBatteryDiffEntry), Arrays.asList(),
-                        Set.of(), Set.of(), /* isAccumulated= */ false);
+                new BatteryDiffData(mContext, /* screenOnTime= */ 0L,
+                        Arrays.asList(mBatteryDiffEntry), Arrays.asList(), Set.of(), Set.of(),
+                        /* isAccumulated= */ false);
         // Adds fake testing data.
         BatteryDiffEntry.sResourceCache.put(
                 "fakeBatteryDiffEntryKey",
@@ -176,7 +177,7 @@ public final class BatteryUsageBreakdownControllerTest {
     }
 
     @Test
-    public void removeAndCacheAllUnusedPreferences_removePerf_buildCacheAndRemoveAllPreference() {
+    public void removeAndCacheAllUnusedPreferences_removePref_buildCacheAndRemoveAllPreference() {
         doReturn(1).when(mAppListPreferenceGroup).getPreferenceCount();
         doReturn(mPowerGaugePreference).when(mAppListPreferenceGroup).getPreference(0);
         doReturn(PREF_KEY2).when(mBatteryHistEntry).getKey();
@@ -193,7 +194,7 @@ public final class BatteryUsageBreakdownControllerTest {
     }
 
     @Test
-    public void removeAndCacheAllUnusedPreferences_keepPerf_KeepAllPreference() {
+    public void removeAndCacheAllUnusedPreferences_keepPref_KeepAllPreference() {
         doReturn(1).when(mAppListPreferenceGroup).getPreferenceCount();
         doReturn(mPowerGaugePreference).when(mAppListPreferenceGroup).getPreference(0);
         doReturn(PREF_KEY).when(mBatteryHistEntry).getKey();

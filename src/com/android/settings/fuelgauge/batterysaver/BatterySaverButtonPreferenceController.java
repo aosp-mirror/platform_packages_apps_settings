@@ -16,6 +16,8 @@
 
 package com.android.settings.fuelgauge.batterysaver;
 
+import static com.android.settingslib.fuelgauge.BatterySaverLogging.SAVER_ENABLED_SETTINGS;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
@@ -103,7 +105,7 @@ public class BatterySaverButtonPreferenceController extends
     @Override
     public boolean setChecked(boolean stateOn) {
         return BatterySaverUtils.setPowerSaveMode(mContext, stateOn,
-                false /* needFirstTimeWarning */);
+                false /* needFirstTimeWarning */, SAVER_ENABLED_SETTINGS);
     }
 
     @Override

@@ -133,6 +133,19 @@ public class CombinedBiometricStatusUtils {
     }
 
     /**
+     * Returns the class name of the Settings page corresponding to combined biometric settings
+     * based on the current user.
+     */
+    public String getSettingsClassNameBasedOnUser() {
+        UserManager userManager = mContext.getSystemService(UserManager.class);
+        if (userManager != null && userManager.isProfile()) {
+            return getProfileSettingsClassName();
+        } else {
+            return getSettingsClassName();
+        }
+    }
+
+    /**
      * Returns the class name of the Settings page corresponding to combined biometric settings.
      */
     public String getSettingsClassName() {

@@ -24,6 +24,8 @@ import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_6
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
@@ -80,6 +82,7 @@ public class WifiHotspotSpeedSettings extends DashboardFragment implements
         onSpeedInfoMapDataChanged(mWifiHotspotSpeedViewModel.getSpeedInfoMapData().getValue());
         mWifiHotspotSpeedViewModel.getSpeedInfoMapData()
                 .observe(this, this::onSpeedInfoMapDataChanged);
+        mWifiHotspotSpeedViewModel.getRestarting().observe(this, this::onRestartingChanged);
     }
 
     protected void loadPreferences() {
@@ -115,6 +118,12 @@ public class WifiHotspotSpeedSettings extends DashboardFragment implements
                 radioButton.setVisible(speedInfo.mIsVisible);
             }
         }
+    }
+
+    @VisibleForTesting
+    void onRestartingChanged(Boolean restarting) {
+        log("onRestartingChanged(), restarting:" + restarting);
+        setLoading(restarting, false);
     }
 
     @Override

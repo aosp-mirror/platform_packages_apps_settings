@@ -219,7 +219,13 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
         super.onStart();
         startEnrollment();
         updateProgress(false /* animate */, mProgressViewModel.getProgressLiveData().getValue());
-        updateTitleAndDescription();
+        final EnrollmentStatusMessage msg = mProgressViewModel.getHelpMessageLiveData().getValue();
+        if (msg != null) {
+            onEnrollmentHelp(msg);
+        } else {
+            clearError();
+            updateTitleAndDescription();
+        }
     }
 
     @Override
@@ -373,7 +379,7 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
         mView.setHeaderText(error);
         mView.getHeaderTextView().setContentDescription(error);
         new GlifLayoutHelper(getActivity(), mView).setDescriptionText("");
-        if (!mHelpAnimation.isRunning()) {
+        if (isResumed() && !mHelpAnimation.isRunning()) {
             mHelpAnimation.start();
         }
         applySfpsErrorDynamicColors(true);

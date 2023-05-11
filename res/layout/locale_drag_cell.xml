@@ -26,29 +26,35 @@
     android:layoutDirection="locale"
     android:textDirection="locale">
 
-    <CheckBox
-        android:id="@+id/checkbox"
-        style="@style/LanguageCheckboxAndLabel"
-        android:paddingStart="24dp"
-        android:layout_toStartOf="@+id/dragHandle"
-        android:layout_alignTop="@+id/miniLabel"
-        android:layout_alignBottom="@+id/miniLabel" />
-
-    <TextView
-        android:id="@+id/miniLabel"
-        style="@style/LanguageCheckboxAndLabel"
+    <LinearLayout
+        android:id="@+id/numberLayout"
         android:layout_width="wrap_content"
-        android:textColor="?android:attr/colorAccent"
-        android:minWidth="24sp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:gravity="center_vertical|center_horizontal"
-        android:layout_centerVertical="true"/>
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart">
+        <CheckBox
+            android:id="@+id/checkbox"
+            style="@style/LanguageCheckboxAndLabel"
+            android:layout_marginRight="0dp"
+            android:minWidth="24dp"
+            android:paddingEnd="-8dp"/>
+
+        <TextView
+            android:id="@+id/miniLabel"
+            style="@style/LanguageCheckboxAndLabel"
+            android:textColor="?android:attr/colorAccent"
+            android:minWidth="24dp"
+            android:gravity="center_vertical|center_horizontal"/>
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="?android:listPreferredItemHeight"
-        android:paddingStart="56dp"
-        android:layout_toStartOf="@+id/dragHandle">
+        android:layout_toStartOf="@+id/dragHandle"
+        android:layout_toEndOf="@+id/numberLayout"
+        android:paddingStart="32dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,7 +65,7 @@
             app:layout_constraintBottom_toBottomOf="parent">
             <TextView
                 android:id="@+id/label"
-                style="@style/LanguageCheckboxAndLabel" />
+                style="@style/LanguageCheckboxAndLabel"/>
 
             <TextView
                 android:id="@+id/l10nWarn"
@@ -86,7 +92,6 @@
         android:layout_height="match_parent"
         android:paddingStart="?android:attr/listPreferredItemPaddingStart"
         android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-        android:layout_gravity="center_vertical"
         android:src="@drawable/drag_handle"
         android:importantForAccessibility="no"
         android:layout_alignParentEnd="true"

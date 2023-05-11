@@ -48,6 +48,8 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.service.persistentdata.PersistentDataBlockManager;
+import android.text.BidiFormatter;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.util.EventLog;
 import android.util.Log;
@@ -56,6 +58,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
@@ -76,6 +79,7 @@ import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.safetycenter.LockScreenSafetySource;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settingslib.RestrictedPreference;
@@ -138,6 +142,9 @@ public class ChooseLockGeneric extends SettingsActivity {
          * ChooseLockGeneric can be relaunched with the same extras.
          */
         public static final String EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS = "choose_lock_generic_extras";
+
+        /** The character ' • ' to separate the setup choose options */
+        public static final String SEPARATOR = " \u2022 ";
 
         @VisibleForTesting
         static final int CONFIRM_EXISTING_REQUEST = 100;
@@ -628,10 +635,11 @@ public class ChooseLockGeneric extends SettingsActivity {
                         R.string.face_unlock_set_unlock_password);
             } else if (mForBiometrics) {
                 setPreferenceTitle(ScreenLockType.PATTERN,
-                        R.string.biometrics_unlock_set_unlock_pattern);
-                setPreferenceTitle(ScreenLockType.PIN, R.string.biometrics_unlock_set_unlock_pin);
+                        getBiometricsPreferenceTitle(ScreenLockType.PATTERN));
+                setPreferenceTitle(ScreenLockType.PIN,
+                        getBiometricsPreferenceTitle(ScreenLockType.PIN));
                 setPreferenceTitle(ScreenLockType.PASSWORD,
-                        R.string.biometrics_unlock_set_unlock_password);
+                        getBiometricsPreferenceTitle(ScreenLockType.PASSWORD));
             }
 
             if (mManagedPasswordProvider.isSettingManagedPasswordSupported()) {
@@ -650,6 +658,36 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (!(mForBiometrics && mIsSetNewPassword)) {
                 removePreference(KEY_SKIP_BIOMETRICS);
             }
+        }
+
+        @VisibleForTesting
+        String getBiometricsPreferenceTitle(@NonNull ScreenLockType secureType) {
+            SpannableStringBuilder ssb = new SpannableStringBuilder();
+            BidiFormatter bidi = BidiFormatter.getInstance();
+            // Assume the flow is "Screen Lock" + "Face" + "Fingerprint"
+            if (mController != null) {
+                ssb.append(bidi.unicodeWrap(mController.getTitle(secureType)));
+            } else {
+                Log.e(TAG, "ChooseLockGenericController is null!");
+            }
+
+            if (mFaceManager != null && mFaceManager.isHardwareDetected() && isFaceSupported()) {
+                ssb.append(bidi.unicodeWrap(SEPARATOR));
+                ssb.append(bidi.unicodeWrap(
+                        getResources().getString(R.string.keywords_face_settings)));
+            }
+            if (mFingerprintManager != null && mFingerprintManager.isHardwareDetected()) {
+                ssb.append(bidi.unicodeWrap(SEPARATOR));
+                ssb.append(bidi.unicodeWrap(
+                        getResources().getString(R.string.security_settings_fingerprint)));
+            }
+            return ssb.toString();
+        }
+
+        private boolean isFaceSupported() {
+            return FeatureFactory.getFactory(getContext().getApplicationContext())
+                    .getFaceFeatureProvider()
+                    .isSetupWizardSupported(getContext().getApplicationContext());
         }
 
         private void setPreferenceTitle(ScreenLockType lock, @StringRes int title) {

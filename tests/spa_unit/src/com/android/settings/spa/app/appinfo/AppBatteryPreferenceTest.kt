@@ -101,7 +101,7 @@ class AppBatteryPreferenceTest {
 
         setContent(notInstalledApp)
 
-        composeTestRule.onNode(hasTextExactly(context.getString(R.string.app_battery_usage_title)))
+        composeTestRule.onNode(hasTextExactly(context.getString(R.string.battery_details_title)))
             .assertIsDisplayed()
             .assertIsNotEnabled()
     }
@@ -114,7 +114,7 @@ class AppBatteryPreferenceTest {
 
         composeTestRule.onNode(
             hasTextExactly(
-                context.getString(R.string.app_battery_usage_title),
+                context.getString(R.string.battery_details_title),
                 context.getString(R.string.no_battery_summary),
             ),
         ).assertIsDisplayed().assertIsEnabled()

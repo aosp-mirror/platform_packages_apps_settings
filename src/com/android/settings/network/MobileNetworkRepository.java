@@ -37,6 +37,9 @@ import android.util.ArrayMap;
 import android.util.IndentingPrintWriter;
 import android.util.Log;
 
+import androidx.annotation.GuardedBy;
+import androidx.lifecycle.LifecycleOwner;
+
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -57,13 +60,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
-
-import androidx.annotation.GuardedBy;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 
 public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptionsChangedListener {
 
@@ -392,6 +388,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         mActiveSubInfoEntityList = availableSubInfoEntityList.stream()
                 .filter(SubscriptionInfoEntity::isActiveSubscription)
                 .filter(SubscriptionInfoEntity::isSubscriptionVisible)
+                .sorted((e1, e2) -> Integer.compare(e1.simSlotIndex, e2.simSlotIndex))
                 .collect(Collectors.toList());
         if (DEBUG) {
             Log.d(TAG, "onActiveSubInfoChanged, activeSubInfoEntityList = "

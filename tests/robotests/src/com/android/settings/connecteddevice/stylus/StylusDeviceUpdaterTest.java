@@ -26,6 +26,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import android.content.Context;
 import android.content.Intent;
@@ -109,6 +110,15 @@ public class StylusDeviceUpdaterTest {
     }
 
     @Test
+    public void onInputDeviceAdded_null_doesNothing() {
+        doReturn(null).when(mInputManager).getInputDevice(0);
+        mStylusDeviceUpdater.onInputDeviceAdded(0);
+
+        verify(mInputManager).getInputDevice(0);
+        verifyNoMoreInteractions(mInputManager);
+    }
+
+    @Test
     public void onInputDeviceAdded_internalStylus_registersBatteryListener() {
         mStylusDeviceUpdater.onInputDeviceAdded(1);
 
@@ -122,6 +132,15 @@ public class StylusDeviceUpdaterTest {
 
         verify(mInputManager, never()).addInputDeviceBatteryListener(eq(1), any(),
                 any());
+    }
+
+    @Test
+    public void onInputDeviceChanged_null_doesNothing() {
+        doReturn(null).when(mInputManager).getInputDevice(0);
+        mStylusDeviceUpdater.onInputDeviceChanged(0);
+
+        verify(mInputManager).getInputDevice(0);
+        verifyNoMoreInteractions(mInputManager);
     }
 
     @Test

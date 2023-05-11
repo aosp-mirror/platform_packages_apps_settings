@@ -131,6 +131,13 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
     }
 
     /**
+     * Gets Restarting LiveData
+     */
+    public LiveData<Boolean> getRestarting() {
+        return mWifiHotspotRepository.getRestarting();
+    }
+
+    /**
      * Wi-Fi Hotspot Speed Information
      */
     public static final class SpeedInfo {

@@ -18,13 +18,16 @@ package com.android.settings.fuelgauge.batterytip.tips;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.view.View;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.IdRes;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
+import com.android.settings.widget.CardPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.testutils.DrawableTestHelper;
 
@@ -78,6 +81,21 @@ public class BatteryTipTest {
         assertThat(parcelTip.getSummary(mContext)).isEqualTo(SUMMARY);
         assertThat(parcelTip.getIconId()).isEqualTo(ICON_ID);
         assertThat(parcelTip.needUpdate()).isTrue();
+    }
+
+    @Test
+    public void updatePreference_resetLayoutState() {
+        mContext.setTheme(R.style.Theme_Settings);
+        PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
+                View.inflate(mContext, R.layout.card_preference_layout, /* parent= */ null));
+        CardPreference cardPreference = new CardPreference(mContext);
+        cardPreference.onBindViewHolder(holder);
+        cardPreference.setPrimaryButtonVisible(true);
+
+        mBatteryTip.updatePreference(cardPreference);
+
+        View view = holder.findViewById(R.id.card_preference_buttons);
+        assertThat(view.getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test

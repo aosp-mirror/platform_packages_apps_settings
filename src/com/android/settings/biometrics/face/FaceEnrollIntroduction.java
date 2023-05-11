@@ -592,6 +592,10 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         return data;
     }
 
+    protected boolean isFaceStrong() {
+        return mIsFaceStrong;
+    }
+
     private void onFaceStrengthChanged() {
         // Set up and show the "less secure" info section if necessary.
         if (!mIsFaceStrong && getResources().getBoolean(

@@ -167,6 +167,7 @@ class PictureInPictureTest {
         const val PICTURE_IN_PICTURE_PACKAGE_NAME = "picture.in.picture.package.name"
         val PICTURE_IN_PICTURE_APP = ApplicationInfo().apply {
             packageName = PICTURE_IN_PICTURE_PACKAGE_NAME
+            flags = ApplicationInfo.FLAG_INSTALLED
         }
         val PICTURE_IN_PICTURE_PACKAGE_INFO = PackageInfo().apply {
             packageName = PICTURE_IN_PICTURE_PACKAGE_NAME

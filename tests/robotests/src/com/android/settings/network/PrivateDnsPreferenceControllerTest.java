@@ -169,6 +169,7 @@ public class PrivateDnsPreferenceControllerTest {
 
     @Test
     public void getAvailibilityStatus_availableByDefault() {
+        doReturn(true).when(mUserManager).isAdminUser();
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 

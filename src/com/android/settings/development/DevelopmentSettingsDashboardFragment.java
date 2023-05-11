@@ -16,6 +16,7 @@
 
 package com.android.settings.development;
 
+import static android.provider.Settings.Global.DEVELOPMENT_SETTINGS_ENABLED;
 import static android.service.quicksettings.TileService.ACTION_QS_TILE_PREFERENCES;
 
 import android.app.Activity;
@@ -27,12 +28,18 @@ import android.bluetooth.BluetoothCodecStatus;
 import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.ContentObserver;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.SystemProperties;
 import android.os.UserManager;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -59,6 +66,7 @@ import com.android.settings.development.bluetooth.BluetoothCodecDialogPreference
 import com.android.settings.development.bluetooth.BluetoothHDAudioPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothQualityDialogPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothSampleRateDialogPreferenceController;
+import com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController;
 import com.android.settings.development.qstile.DevelopmentTiles;
 import com.android.settings.development.storage.SharedDataPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -173,8 +181,45 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         }
     };
 
+    private final Uri mDevelopEnabled = Settings.Global.getUriFor(DEVELOPMENT_SETTINGS_ENABLED);
+    private final ContentObserver mDeveloperSettingsObserver = new ContentObserver(new Handler(
+            Looper.getMainLooper())) {
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            super.onChange(selfChange, uri);
+            final boolean developmentEnabledState =
+                    DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext());
+            final boolean switchState = mSwitchBar.isChecked();
+
+            // when developer options is enabled, but it is disabled by other privilege apps like:
+            // adb command, we should disable all items and finish the activity.
+            if (developmentEnabledState != switchState) {
+                if (developmentEnabledState) {
+                    return;
+                }
+                disableDeveloperOptions();
+                getActivity().runOnUiThread(() -> finishFragment());
+            }
+        }
+    };
+
     public DevelopmentSettingsDashboardFragment() {
         super(UserManager.DISALLOW_DEBUGGING_FEATURES);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        final ContentResolver cr = getContext().getContentResolver();
+        cr.registerContentObserver(mDevelopEnabled, false, mDeveloperSettingsObserver);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        final ContentResolver cr = getContext().getContentResolver();
+        cr.unregisterContentObserver(mDeveloperSettingsObserver);
     }
 
     @Override
@@ -596,6 +641,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new SelectDebugAppPreferenceController(context, fragment));
         controllers.add(new WaitForDebuggerPreferenceController(context));
         controllers.add(new EnableGpuDebugLayersPreferenceController(context));
+        controllers.add(new GraphicsDriverEnableAngleAsSystemDriverController(context, fragment));
         controllers.add(new ForcePeakRefreshRatePreferenceController(context));
         controllers.add(new EnableVerboseVendorLoggingPreferenceController(context));
         controllers.add(new VerifyAppsOverUsbPreferenceController(context));
@@ -666,6 +712,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new DefaultLaunchPreferenceController(context, "density"));
         controllers.add(new DefaultLaunchPreferenceController(context, "background_check"));
         controllers.add(new DefaultLaunchPreferenceController(context, "inactive_apps"));
+        controllers.add(new TarePreferenceController(context));
         controllers.add(new AutofillCategoryController(context, lifecycle));
         controllers.add(new AutofillLoggingLevelPreferenceController(context, lifecycle));
         controllers.add(new AutofillResetOptionsPreferenceController(context));
@@ -689,6 +736,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new PhantomProcessPreferenceController(context));
         controllers.add(new ContrastPreferenceController(
                 context, context.getSystemService(UiModeManager.class)));
+        controllers.add(new ForceEnableNotesRolePreferenceController(context));
 
         return controllers;
     }

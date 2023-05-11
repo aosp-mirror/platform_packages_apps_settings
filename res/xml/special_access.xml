@@ -195,7 +195,11 @@
         android:key="turn_screen_on"
         android:title="@string/turn_screen_on_title"
         android:order="-200"
-        android:fragment="com.android.settings.applications.specialaccess.turnscreenon.TurnScreenOnSettings" />
+        android:fragment="com.android.settings.applications.manageapplications.ManageApplications">
+        <extra
+            android:name="classname"
+            android:value="com.android.settings.Settings$TurnScreenOnSettingsActivity" />
+    </Preference>
 
     <Preference
         android:key="special_access_more"
