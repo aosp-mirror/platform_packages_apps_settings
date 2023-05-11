@@ -22,6 +22,7 @@ import android.app.backup.BackupDataInputStream;
 import android.app.backup.BackupDataOutput;
 import android.app.backup.BackupHelper;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
 import android.os.IDeviceIdleController;
@@ -34,9 +35,11 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,6 +50,8 @@ public final class BatteryBackupHelper implements BackupHelper {
     /** An inditifier for {@link BackupHelper}. */
     public static final String TAG = "BatteryBackupHelper";
     private static final String DEVICE_IDLE_SERVICE = "deviceidle";
+    private static final String BATTERY_OPTIMIZE_BACKUP_FILE_NAME =
+            "battery_optimize_backup_historical_logs";
 
     static final String DELIMITER = ",";
     static final String DELIMITER_MODE = ":";
@@ -141,6 +146,7 @@ public final class BatteryBackupHelper implements BackupHelper {
         int backupCount = 0;
         final StringBuilder builder = new StringBuilder();
         final AppOpsManager appOps = mContext.getSystemService(AppOpsManager.class);
+        final SharedPreferences sharedPreferences = getSharedPreferences(mContext);
         // Converts application into the AppUsageState.
         for (ApplicationInfo info : applications) {
             final int mode = BatteryOptimizeUtils.getMode(appOps, info.uid, info.packageName);
@@ -157,6 +163,9 @@ public final class BatteryBackupHelper implements BackupHelper {
                     info.packageName + DELIMITER_MODE + optimizationMode;
             builder.append(packageOptimizeMode + DELIMITER);
             Log.d(TAG, "backupOptimizationMode: " + packageOptimizeMode);
+            BatteryHistoricalLogUtil.writeLog(
+                    sharedPreferences, Action.BACKUP, info.packageName,
+                    /* actionDescription */ "mode: " + optimizationMode);
             backupCount++;
         }
 
@@ -208,6 +217,18 @@ public final class BatteryBackupHelper implements BackupHelper {
         }
         Log.d(TAG, String.format("restoreOptimizationMode() count=%d in %d/ms",
                 restoreCount, (System.currentTimeMillis() - timestamp)));
+    }
+
+    /** Dump the app optimization mode backup history data. */
+    public static void dumpHistoricalData(Context context, PrintWriter writer) {
+        BatteryHistoricalLogUtil.printBatteryOptimizeHistoricalLog(
+                getSharedPreferences(context), writer);
+    }
+
+    @VisibleForTesting
+    static SharedPreferences getSharedPreferences(Context context) {
+        return context.getSharedPreferences(
+                BATTERY_OPTIMIZE_BACKUP_FILE_NAME, Context.MODE_PRIVATE);
     }
 
     private void restoreOptimizationMode(
