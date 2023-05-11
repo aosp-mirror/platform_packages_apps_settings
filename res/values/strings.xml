@@ -119,9 +119,9 @@
     <!-- Connected devices settings. Title of the dialog to hint user to pair other ear of the hearing aid device. Shows when only one of the hearing aid device set is connected. [CHAR LIMIT=25] -->
     <string name="bluetooth_pair_other_ear_dialog_title">Pair your other ear</string>
     <!-- Connected devices settings. Message of the dialog to hint user to pair right ear of the hearing aid device. Shows when only left side of hearing aid device set is connected. [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_pair_other_ear_dialog_left_ear_message">Your left hearing aid is connected.\n\nTo pair the right one, make sure it\u2019s turned on and ready to pair.</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_message">Your left hearing device is connected.\n\nTo pair the right one, make sure it\u2019s turned on and ready to pair.</string>
     <!-- Connected devices settings. Message of the dialog to hint user to pair other ear of the hearing aid device. Shows when only right side of the hearing aid device set is connected. [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_pair_other_ear_dialog_right_ear_message">Your right hearing aid is connected.\n\nTo pair the left one, make sure it\u2019s turned on and ready to pair.</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_message">Your right hearing device is connected.\n\nTo pair the left one, make sure it\u2019s turned on and ready to pair.</string>
     <!-- Connected devices settings. Positive button of the dialog to help user to pair right ear of the hearing aid device. Dialog shows when only one of the hearing aid device set is connected. [CHAR LIMIT=20] -->
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button">Pair right ear</string>
     <!-- Connected devices settings. Positive button of the dialog to help user to pair left ear of the hearing aid device. Dialog shows when only one of the hearing aid device set is connected. [CHAR LIMIT=20] -->
@@ -1505,6 +1505,8 @@
     <string name="bluetooth_companion_app_remove_association_dialog_title">Disconnect App?</string>
     <!-- Bluetooth device details companion apps. The body of confirmation dialog for remove association. [CHAR LIMIT=60] -->
     <string name="bluetooth_companion_app_body"><xliff:g id="app_name" example="App Name">%1$s</xliff:g> app will no longer connect to your <xliff:g id="device_name" example="Device Name">%2$s</xliff:g></string>
+    <!-- Summary of Bluetooth LE Audio toggle in Device Details. [CHAR LIMIT=40] -->
+    <string name="device_details_leaudio_toggle_summary">Experimental. Improves audio quality.</string>
 
     <!--  Bluetooth device details. In the confirmation dialog for unpairing a paired device, this is the label on the button that will complete the unpairing action. -->
     <string name="bluetooth_unpair_dialog_forget_confirm_button">Forget device</string>
@@ -4670,7 +4672,7 @@
     <!-- Introduction for the Hearing devices page to introduce feature. [CHAR LIMIT=NONE] -->
     <string name="accessibility_hearingaid_intro">You can use hearing aids, cochlear implants, and other amplification devices with your phone</string>
     <!-- Summary for the accessibility preference for hearing aid when not connected. [CHAR LIMIT=50] -->
-    <string name="accessibility_hearingaid_not_connected_summary">No hearing aids connected</string>
+    <string name="accessibility_hearingaid_not_connected_summary">No hearing devices connected</string>
     <!-- Summary for the accessibility preference for hearing aid when adding new devices. [CHAR LIMIT=50] -->
     <string name="accessibility_hearingaid_adding_summary">Add hearing aids</string>
     <!-- Title of the pair instruction dialog. Dialog shows to ask the user to make sure that their hearing aid devices are in pairing mode. [CHAR LIMIT=25] -->
@@ -10306,7 +10308,16 @@
     <string name="credman_confirmation_message_title">Turn off %1$s\?</string>
 
     <!-- Message of the warning dialog for disabling the credential provider. [CHAR_LIMIT=NONE] -->
-    <string name="credman_confirmation_message">Saved info like addresses or payment methods won\'t be filled in when you sign in. To keep your saved info filled in, set enable a password, passkey and data/or service.</string>
+    <string name="credman_confirmation_message">
+        <![CDATA[
+        <b>Turn off this service?</b>
+        <br/>
+        <br/>
+        Save info like passwords, passkeys, payment methods, and other info won\'t be filled
+        in when you sign in. To use your saved info, choose a password, passkey, or data
+        service.
+        ]]>
+    </string>
 
     <!-- Title of the warning dialog for enabling the credential provider. [CHAR_LIMIT=NONE] -->
     <string name="credman_enable_confirmation_message_title">Use %1$s\?</string>

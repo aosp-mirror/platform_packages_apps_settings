@@ -55,7 +55,7 @@ public class FlashNotificationsPreviewPreferenceController extends
             new Handler(Looper.getMainLooper())) {
         @Override
         public void onChange(boolean selfChange, @Nullable Uri uri) {
-            onSettingChanged();
+            updateState(mPreference);
         }
     };
 
@@ -73,7 +73,7 @@ public class FlashNotificationsPreviewPreferenceController extends
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-        onSettingChanged();
+        updateState(mPreference);
     }
 
     @Override
@@ -103,10 +103,13 @@ public class FlashNotificationsPreviewPreferenceController extends
         }
     }
 
-    private void onSettingChanged() {
-        if (mPreference == null) return;
-
-        mPreference.setEnabled(FlashNotificationsUtil.getFlashNotificationsState(mContext)
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (preference == null) {
+            return;
+        }
+        preference.setEnabled(FlashNotificationsUtil.getFlashNotificationsState(mContext)
                 != FlashNotificationsUtil.State.OFF);
     }
 }
