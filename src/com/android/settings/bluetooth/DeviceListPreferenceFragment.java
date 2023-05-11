@@ -196,10 +196,11 @@ public abstract class DeviceListPreferenceFragment extends
         }
 
         // Prevent updates while the list shows one of the state messages
-        if (mBluetoothAdapter.getState() != BluetoothAdapter.STATE_ON) return;
+        if (mBluetoothAdapter.getState() != BluetoothAdapter.STATE_ON) {
+            return;
+        }
 
-        if (mLeScanFilters != null
-                || (mFilter != null && mFilter.matches(cachedDevice.getDevice()))) {
+        if (mFilter != null && mFilter.matches(cachedDevice.getDevice())) {
             createDevicePreference(cachedDevice);
         }
     }
@@ -325,7 +326,12 @@ public abstract class DeviceListPreferenceFragment extends
                 if (cachedDevice == null) {
                     cachedDevice = mCachedDeviceManager.addDevice(device);
                 }
-                onDeviceAdded(cachedDevice);
+                // Only add device preference when it's not found in the map and there's no other
+                // state message showing in the list
+                if (mDevicePreferenceMap.get(cachedDevice) == null
+                        && mBluetoothAdapter.getState() == BluetoothAdapter.STATE_ON) {
+                    createDevicePreference(cachedDevice);
+                }
             }
 
             @Override
