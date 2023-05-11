@@ -273,8 +273,13 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
 
     @Override
     protected CharSequence getConfirmationMessage(CandidateInfo appInfo) {
+        // If we are selecting none then show a warning label.
         if (appInfo == null) {
-            return null;
+            final String message =
+                    getContext()
+                            .getString(
+                                    R.string.credman_confirmation_message);
+            return Html.fromHtml(message);
         }
         final CharSequence appName = appInfo.loadLabel();
         final String message =
