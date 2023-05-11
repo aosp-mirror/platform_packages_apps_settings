@@ -1090,7 +1090,7 @@
     <!-- Action label for the issue card in Safety Center when no screen lock is set [CHAR LIMIT=50] -->
     <string name="no_screen_lock_issue_action_label">Set screen lock</string>
     <!-- Title of the notification shown by Safety Center when no screen lock is set. This notification is shown in the notification shade, outside of the main Safety Center UI. [CHAR LIMIT=50] -->
-    <string name="no_screen_lock_issue_notification_title">Device has no screen lock</string>
+    <string name="no_screen_lock_issue_notification_title">Set a screen lock</string>
     <!-- Summary/body text of the notification shown by Safety Center when no screen lock is set. This notification is shown in the notification shade, outside of the main Safety Center UI. [CHAR LIMIT=NONE] -->
     <string name="no_screen_lock_issue_notification_text">For added security, set a PIN, pattern, or password for this device.</string>
 
@@ -10306,7 +10306,16 @@
     <string name="credman_confirmation_message_title">Turn off %1$s\?</string>
 
     <!-- Message of the warning dialog for disabling the credential provider. [CHAR_LIMIT=NONE] -->
-    <string name="credman_confirmation_message">Saved info like addresses or payment methods won\'t be filled in when you sign in. To keep your saved info filled in, set enable a password, passkey and data/or service.</string>
+    <string name="credman_confirmation_message">
+        <![CDATA[
+        <b>Turn off this service?</b>
+        <br/>
+        <br/>
+        Save info like passwords, passkeys, payment methods, and other info won\'t be filled
+        in when you sign in. To use your saved info, choose a password, passkey, or data
+        service.
+        ]]>
+    </string>
 
     <!-- Title of the warning dialog for enabling the credential provider. [CHAR_LIMIT=NONE] -->
     <string name="credman_enable_confirmation_message_title">Use %1$s\?</string>
