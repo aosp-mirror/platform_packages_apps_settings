@@ -35,8 +35,10 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -125,7 +127,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
                 update(cachedBluetoothDevice);
             }
         } else {
-          removeAllDevicesFromPreference();
+            removeAllDevicesFromPreference();
         }
     }
 
@@ -252,7 +254,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
             btPreference.setOnGearClickListener(mDeviceProfilesListener);
             if (this instanceof Preference.OnPreferenceClickListener) {
                 btPreference.setOnPreferenceClickListener(
-                        (Preference.OnPreferenceClickListener)this);
+                        (Preference.OnPreferenceClickListener) this);
             }
             mPreferenceMap.put(device, btPreference);
             mDevicePreferenceCallback.onDeviceAdded(btPreference);
@@ -266,17 +268,20 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
         final BluetoothDevice device = cachedDevice.getDevice();
         final CachedBluetoothDevice subCachedDevice = cachedDevice.getSubDevice();
         if (mPreferenceMap.containsKey(device)) {
-            mDevicePreferenceCallback.onDeviceRemoved(mPreferenceMap.get(device));
-            mPreferenceMap.remove(device);
+            removePreference(device);
         } else if (subCachedDevice != null) {
             // When doing remove, to check if preference maps to sub device.
             // This would happen when connection state is changed in detail page that there is no
             // callback from SettingsLib.
             final BluetoothDevice subDevice = subCachedDevice.getDevice();
-            if (mPreferenceMap.containsKey(subDevice)) {
-                mDevicePreferenceCallback.onDeviceRemoved(mPreferenceMap.get(subDevice));
-                mPreferenceMap.remove(subDevice);
-            }
+            removePreference(subDevice);
+        }
+    }
+
+    private void removePreference(BluetoothDevice device) {
+        if (mPreferenceMap.containsKey(device)) {
+            mDevicePreferenceCallback.onDeviceRemoved(mPreferenceMap.get(device));
+            mPreferenceMap.remove(device);
         }
     }
 
@@ -324,14 +329,38 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
      * Update the attributes of {@link Preference}.
      */
     public void refreshPreference() {
-        for (Preference preference : mPreferenceMap.values()) {
-            ((BluetoothDevicePreference) preference).onPreferenceAttributesChanged();
+        List<BluetoothDevice> removeList = new ArrayList<>();
+        mPreferenceMap.forEach((key, preference) -> {
+            if (isDeviceOfMapInCachedDevicesList(key)) {
+                ((BluetoothDevicePreference) preference).onPreferenceAttributesChanged();
+            } else {
+                // If the BluetoothDevice of preference is not in the CachedDevices List, then
+                // remove this preference.
+                removeList.add(key);
+            }
+        });
+
+        for (BluetoothDevice bluetoothDevice : removeList) {
+            Log.d(getLogTag(), "removePreference key: " + bluetoothDevice.getAnonymizedAddress());
+            removePreference(bluetoothDevice);
         }
     }
 
-    protected boolean isDeviceInCachedDevicesList(CachedBluetoothDevice cachedDevice){
+    protected boolean isDeviceInCachedDevicesList(CachedBluetoothDevice cachedDevice) {
         return mLocalManager.getCachedDeviceManager().getCachedDevicesCopy().contains(cachedDevice);
     }
+
+    private boolean isDeviceOfMapInCachedDevicesList(BluetoothDevice inputBluetoothDevice) {
+        Collection<CachedBluetoothDevice> cachedDevices =
+                mLocalManager.getCachedDeviceManager().getCachedDevicesCopy();
+        if (cachedDevices == null || cachedDevices.isEmpty()) {
+            return false;
+        }
+        return cachedDevices.stream()
+                .anyMatch(cachedBluetoothDevice -> cachedBluetoothDevice.getDevice() != null
+                        && cachedBluetoothDevice.getDevice().equals(inputBluetoothDevice));
+    }
+
     protected String getLogTag() {
         return TAG;
     }
