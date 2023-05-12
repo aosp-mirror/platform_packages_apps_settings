@@ -45,8 +45,17 @@
     <PreferenceCategory
         android:key="hearing_options_category"
         android:title="@string/accessibility_screen_option">
+
+        <Preference
+            android:key="audio_routing"
+            android:title="@string/bluetooth_audio_routing_title"
+            android:summary="@string/bluetooth_audio_routing_summary"
+            android:fragment="com.android.settings.accessibility.AccessibilityAudioRoutingFragment"
+            settings:controller="com.android.settings.accessibility.HearingAidAudioRoutingPreferenceController"/>
+
         <SwitchPreference
             android:key="hearing_aid_compatibility"
+            android:order="30"
             android:title="@string/accessibility_hac_mode_title"
             android:summary="@string/accessibility_hac_mode_summary"
             settings:searchable="true"
