@@ -31,6 +31,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -46,7 +47,6 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.drawer.ActivityTile;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.search.Indexable;
@@ -55,6 +55,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -504,6 +505,10 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         // Install dashboard tiles and collect pending observers.
         final boolean forceRoundedIcons = shouldForceRoundedIcon();
         final List<DynamicDataObserver> pendingObservers = new ArrayList<>();
+
+        // Move group tiles to the beginning of the list to ensure they are created before the
+        // other tiles.
+        tiles.sort(Comparator.comparingInt(tile -> tile.getType() == Tile.Type.GROUP ? 0 : 1));
         for (Tile tile : tiles) {
             final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
             if (TextUtils.isEmpty(key)) {
@@ -526,7 +531,14 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 observers = mDashboardFeatureProvider.bindPreferenceToTileAndGetObservers(
                         getActivity(), this, forceRoundedIcons, pref, tile, key,
                         mPlaceholderPreferenceController.getOrder());
-                screen.addPreference(pref);
+                if (tile.hasGroupKey() && mDashboardTilePrefKeys.containsKey(tile.getGroupKey())) {
+                    final Preference group = screen.findPreference(tile.getGroupKey());
+                    if (group instanceof PreferenceCategory) {
+                        ((PreferenceCategory) group).addPreference(pref);
+                    }
+                } else {
+                    screen.addPreference(pref);
+                }
                 registerDynamicDataObservers(observers);
                 mDashboardTilePrefKeys.put(key, observers);
             }
@@ -569,16 +581,21 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     }
 
     protected Preference createPreference(Tile tile) {
-        if (tile.hasSwitch()) {
-            return (tile instanceof ActivityTile || tile.hasPendingIntent())
-                    ? new PrimarySwitchPreference(getPrefContext())
-                    : new SwitchPreference(getPrefContext());
-        } else if (tile.hasPendingIntent()) {
-            Preference preference = new Preference(getPrefContext());
-            preference.setWidgetLayoutResource(R.layout.preference_external_action_icon);
-            return preference;
-        } else {
-            return new Preference(getPrefContext());
+        switch (tile.getType()) {
+            case EXTERNAL_ACTION:
+                Preference externalActionPreference = new Preference(getPrefContext());
+                externalActionPreference
+                        .setWidgetLayoutResource(R.layout.preference_external_action_icon);
+                return externalActionPreference;
+            case SWITCH:
+                return new SwitchPreference(getPrefContext());
+            case SWITCH_WITH_ACTION:
+                return new PrimarySwitchPreference(getPrefContext());
+            case GROUP:
+                return new PreferenceCategory((getPrefContext()));
+            case ACTION:
+            default:
+                return new Preference(getPrefContext());
         }
     }
 
