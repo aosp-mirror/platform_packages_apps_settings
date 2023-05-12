@@ -28,7 +28,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -83,6 +82,7 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.drawable.CircleFramedDrawable;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
+import com.android.settingslib.users.CreateUserDialogController;
 import com.android.settingslib.users.EditUserInfoController;
 import com.android.settingslib.users.GrantAdminDialogController;
 import com.android.settingslib.users.UserCreatingDialog;
@@ -119,6 +119,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     /** UserId of the user being removed */
     private static final String SAVE_REMOVING_USER = "removing_user";
+    private static final String SAVE_CREATE_USER = "create_user";
 
     private static final String KEY_USER_LIST = "user_list";
     private static final String KEY_USER_ME = "user_me";
@@ -171,9 +172,6 @@ public class UserSettings extends SettingsPreferenceFragment
 
     static final int RESULT_GUEST_REMOVED = 100;
 
-    private static final String KEY_ADD_USER_LONG_MESSAGE_DISPLAYED =
-            "key_add_user_long_message_displayed";
-
     private static final String KEY_TITLE = "title";
     private static final String KEY_SUMMARY = "summary";
 
@@ -222,6 +220,8 @@ public class UserSettings extends SettingsPreferenceFragment
             new GrantAdminDialogController();
     private EditUserInfoController mEditUserInfoController =
             new EditUserInfoController(Utils.FILE_PROVIDER_AUTHORITY);
+    private CreateUserDialogController mCreateUserDialogController =
+            new CreateUserDialogController(Utils.FILE_PROVIDER_AUTHORITY);
     private AddUserWhenLockedPreferenceController mAddUserWhenLockedPreferenceController;
     private GuestTelephonyPreferenceController mGuestTelephonyPreferenceController;
     private RemoveGuestOnExitPreferenceController mRemoveGuestOnExitPreferenceController;
@@ -233,7 +233,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private CharSequence mPendingUserName;
     private Drawable mPendingUserIcon;
-    private boolean mGrantAdmin;
+    private boolean mPendingUserIsAdmin;
 
     // A place to cache the generated default avatar
     private Drawable mDefaultIconDrawable;
@@ -348,7 +348,11 @@ public class UserSettings extends SettingsPreferenceFragment
             if (icicle.containsKey(SAVE_REMOVING_USER)) {
                 mRemovingUserId = icicle.getInt(SAVE_REMOVING_USER);
             }
-            mEditUserInfoController.onRestoreInstanceState(icicle);
+            if (icicle.containsKey(SAVE_CREATE_USER)) {
+                mCreateUserDialogController.onRestoreInstanceState(icicle);
+            } else {
+                mEditUserInfoController.onRestoreInstanceState(icicle);
+            }
         }
 
         mUserCaps = UserCapabilities.create(activity);
@@ -440,7 +444,12 @@ public class UserSettings extends SettingsPreferenceFragment
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        mEditUserInfoController.onSaveInstanceState(outState);
+        if (mCreateUserDialogController.isActive()) {
+            outState.putBoolean(SAVE_CREATE_USER, mCreateUserDialogController.isActive());
+            mCreateUserDialogController.onSaveInstanceState(outState);
+        } else {
+            mEditUserInfoController.onSaveInstanceState(outState);
+        }
         outState.putInt(SAVE_REMOVING_USER, mRemovingUserId);
         super.onSaveInstanceState(outState);
     }
@@ -448,6 +457,7 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void startActivityForResult(Intent intent, int requestCode) {
         mEditUserInfoController.startingActivityForResult();
+        mCreateUserDialogController.startingActivityForResult();
         super.startActivityForResult(intent, requestCode);
     }
 
@@ -562,6 +572,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 && resultCode == RESULT_GUEST_REMOVED) {
             scheduleGuestCreation();
         } else {
+            mCreateUserDialogController.onActivityResult(requestCode, resultCode, data);
             mEditUserInfoController.onActivityResult(requestCode, resultCode, data);
         }
     }
@@ -704,37 +715,12 @@ public class UserSettings extends SettingsPreferenceFragment
                         .setPositiveButton(android.R.string.ok, null)
                         .create();
             case DIALOG_ADD_USER: {
-                final SharedPreferences preferences = getActivity().getPreferences(
-                        Context.MODE_PRIVATE);
-                final boolean longMessageDisplayed = preferences.getBoolean(
-                        KEY_ADD_USER_LONG_MESSAGE_DISPLAYED, false);
-                final int messageResId = longMessageDisplayed
-                        ? com.android.settingslib.R.string.user_add_user_message_short
-                        : com.android.settingslib.R.string.user_add_user_message_long;
-                Dialog dlg = new AlertDialog.Builder(context)
-                        .setTitle(com.android.settingslib.R.string.user_add_user_title)
-                        .setMessage(messageResId)
-                        .setPositiveButton(android.R.string.ok,
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        if (!longMessageDisplayed) {
-                                            preferences.edit().putBoolean(
-                                                    KEY_ADD_USER_LONG_MESSAGE_DISPLAYED,
-                                                    true).apply();
-                                        }
-                                        if (UserManager.isMultipleAdminEnabled()) {
-                                            showDialog(DIALOG_GRANT_ADMIN);
-                                        } else {
-                                            showDialog(DIALOG_USER_PROFILE_EDITOR_ADD_USER);
-                                        }
-                                    }
-                                })
-                        .setNegativeButton(android.R.string.cancel, null)
-                        .create();
-                return dlg;
-            }
-            case DIALOG_GRANT_ADMIN: {
-                return buildGrantAdminDialog();
+                synchronized (mUserLock) {
+                    mPendingUserName = getString(
+                            com.android.settingslib.R.string.user_new_user_name);
+                    mPendingUserIcon = null;
+                }
+                return buildAddUserDialog(USER_TYPE_USER);
             }
             case DIALOG_CHOOSE_USER_TYPE: {
                 List<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
@@ -919,17 +905,14 @@ public class UserSettings extends SettingsPreferenceFragment
     private Dialog buildAddUserDialog(int userType) {
         Dialog d;
         synchronized (mUserLock) {
-            d = mEditUserInfoController.createDialog(
+            d = mCreateUserDialogController.createDialog(
                     getActivity(),
                     this::startActivityForResult,
-                    null,
-                    mPendingUserName.toString(),
-                    getString(userType == USER_TYPE_USER
-                            ? com.android.settingslib.R.string.user_info_settings_title
-                            : com.android.settingslib.R.string.profile_info_settings_title),
-                    (userName, userIcon) -> {
+                    UserManager.isMultipleAdminEnabled(),
+                    (userName, userIcon, isAdmin) -> {
                         mPendingUserIcon = userIcon;
                         mPendingUserName = userName;
+                        mPendingUserIsAdmin = isAdmin;
                         addUserNow(userType);
                     },
                     () -> {
@@ -941,26 +924,6 @@ public class UserSettings extends SettingsPreferenceFragment
             );
         }
         return d;
-    }
-
-    private Dialog buildGrantAdminDialog() {
-        return mGrantAdminDialogController.createDialog(
-                getActivity(),
-                (grantAdmin) -> {
-                    mGrantAdmin = grantAdmin;
-                    if (mGrantAdmin) {
-                        mMetricsFeatureProvider.action(getActivity(),
-                                SettingsEnums.ACTION_GRANT_ADMIN_FROM_SETTINGS_CREATION_DIALOG);
-                    } else {
-                        mMetricsFeatureProvider.action(getActivity(),
-                                SettingsEnums.ACTION_NOT_GRANT_ADMIN_FROM_SETTINGS_CREATION_DIALOG);
-                    }
-                    showDialog(DIALOG_USER_PROFILE_EDITOR_ADD_USER);
-                },
-                () -> {
-                    mGrantAdmin = false;
-                }
-        );
     }
 
     @Override
@@ -1065,7 +1028,7 @@ public class UserSettings extends SettingsPreferenceFragment
                         userName,
                         mUserManager.USER_TYPE_FULL_SECONDARY,
                         0);
-                if (mGrantAdmin) {
+                if (mPendingUserIsAdmin) {
                     mUserManager.setUserAdmin(user.id);
                 }
             } else {
@@ -1665,6 +1628,9 @@ public class UserSettings extends SettingsPreferenceFragment
         synchronized (mUserLock) {
             mRemovingUserId = -1;
             updateUserList();
+            if (mCreateUserDialogController.isActive()) {
+                mCreateUserDialogController.clear();
+            }
         }
     }
 
