@@ -322,18 +322,11 @@ public class BatteryInfo {
         final long drainTimeUs = PowerUtil.convertMsToUs(estimate.getEstimateMillis());
         if (drainTimeUs > 0) {
             info.remainingTimeUs = drainTimeUs;
-            info.remainingLabel = PowerUtil.getBatteryRemainingStringFormatted(
+            info.remainingLabel = PowerUtil.getBatteryRemainingShortStringFormatted(
                     context,
-                    PowerUtil.convertUsToMs(drainTimeUs),
-                    null /* percentageString */,
-                    false /* basedOnUsage */
+                    PowerUtil.convertUsToMs(drainTimeUs)
             );
-            info.chargeLabel = PowerUtil.getBatteryRemainingStringFormatted(
-                    context,
-                    PowerUtil.convertUsToMs(drainTimeUs),
-                    info.batteryPercentString,
-                    estimate.isBasedOnUsage() && !shortString
-            );
+            info.chargeLabel = info.remainingLabel;
             info.suggestionLabel = PowerUtil.getBatteryTipStringFormatted(
                     context, PowerUtil.convertUsToMs(drainTimeUs));
         } else {
