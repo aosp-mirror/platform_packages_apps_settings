@@ -38,9 +38,10 @@
         settings:controller="com.android.settings.network.BluetoothWiFiResetPreferenceController" />
 
     <!-- Reset app preferences -->
-    <Preference
+    <com.android.settingslib.RestrictedPreference
         android:key="reset_app_prefs"
-        android:title="@string/reset_app_preferences" />
+        android:title="@string/reset_app_preferences"
+        settings:userRestriction="no_control_apps" />
 
     <!-- Erase Euicc data -->
     <Preference
