@@ -133,18 +133,12 @@ public class MobileNetworkSummaryControllerTest {
         assertThat(mController.isAvailable()).isFalse();
     }
 
-    @Ignore
     @Test
-    public void getSummary_noSubscriptions_correctSummaryAndClickHandler() {
+    public void getSummary_noSubscriptions_returnSummaryCorrectly() {
         mController.displayPreference(mPreferenceScreen);
         mController.onResume();
-        assertThat(mController.getSummary()).isEqualTo("Add a network");
 
-        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        doNothing().when(mContext).startActivity(intentCaptor.capture());
-        mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
-        assertThat(intentCaptor.getValue().getAction()).isEqualTo(
-                EuiccManager.ACTION_PROVISION_EMBEDDED_SUBSCRIPTION);
+        assertThat(mController.getSummary()).isEqualTo("Add a network");
     }
 
     @Test
@@ -300,15 +294,13 @@ public class MobileNetworkSummaryControllerTest {
         assertThat(captor.getValue()).isFalse();
     }
 
-    @Ignore
     @Test
-    public void onResume_noSubscriptionEsimDisabled_isDisabled() {
+    public void onAvailableSubInfoChanged_noSubscriptionEsimDisabled_isDisabled() {
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(null);
         when(mEuiccManager.isEnabled()).thenReturn(false);
         mController.displayPreference(mPreferenceScreen);
 
-        mController.onResume();
+        mController.onAvailableSubInfoChanged(null);
 
         assertThat(mPreference.isEnabled()).isFalse();
     }
