@@ -33,7 +33,7 @@ import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 
 import android.app.AppOpsManager;
 import android.app.backup.BackupDataInputStream;
@@ -251,7 +251,7 @@ public final class BatteryBackupHelperTest {
 
         mBatteryBackupHelper.restoreEntity(mBackupDataInputStream);
 
-        verifyZeroInteractions(mBackupDataInputStream);
+        verifyNoInteractions(mBackupDataInputStream);
     }
 
     @Test
@@ -289,13 +289,13 @@ public final class BatteryBackupHelperTest {
     @Test
     public void restoreOptimizationMode_nullBytesData_skipRestore() throws Exception {
         mBatteryBackupHelper.restoreOptimizationMode(new byte[0]);
-        verifyZeroInteractions(mBatteryOptimizeUtils);
+        verifyNoInteractions(mBatteryOptimizeUtils);
 
         mBatteryBackupHelper.restoreOptimizationMode("invalid data format".getBytes());
-        verifyZeroInteractions(mBatteryOptimizeUtils);
+        verifyNoInteractions(mBatteryOptimizeUtils);
 
         mBatteryBackupHelper.restoreOptimizationMode(DELIMITER.getBytes());
-        verifyZeroInteractions(mBatteryOptimizeUtils);
+        verifyNoInteractions(mBatteryOptimizeUtils);
     }
 
     @Test

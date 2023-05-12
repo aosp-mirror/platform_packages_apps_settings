@@ -24,7 +24,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import android.Manifest;
@@ -142,6 +142,6 @@ public class DefaultAssistPreferenceControllerTest {
 
         controller.getSettingIntent(null);
 
-        verifyZeroInteractions(assistUtils);
+        verifyNoInteractions(assistUtils);
     }
 }
