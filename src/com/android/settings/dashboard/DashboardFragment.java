@@ -573,6 +573,10 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             return (tile instanceof ActivityTile || tile.hasPendingIntent())
                     ? new PrimarySwitchPreference(getPrefContext())
                     : new SwitchPreference(getPrefContext());
+        } else if (tile.hasPendingIntent()) {
+            Preference preference = new Preference(getPrefContext());
+            preference.setWidgetLayoutResource(R.layout.preference_external_action_icon);
+            return preference;
         } else {
             return new Preference(getPrefContext());
         }
