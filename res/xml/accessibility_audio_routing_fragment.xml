@@ -31,7 +31,7 @@
         android:key="audio_routing_ringtone"
         android:persistent="false"
         android:title="@string/bluetooth_ringtone_title"
-        settings:controller="com.android.settings.bluetooth.HearingDeviceRingtoneRoutingPreferenceController" />
+        settings:controller="com.android.settings.accessibility.HearingDeviceRingtoneRoutingPreferenceController" />
 
     <ListPreference
         android:entries="@array/bluetooth_audio_routing_titles"
@@ -40,7 +40,7 @@
         android:key="audio_routing_call"
         android:persistent="false"
         android:title="@string/bluetooth_call_title"
-        settings:controller="com.android.settings.bluetooth.HearingDeviceCallRoutingPreferenceController" />
+        settings:controller="com.android.settings.accessibility.HearingDeviceCallRoutingPreferenceController" />
 
     <ListPreference
         android:entries="@array/bluetooth_audio_routing_titles"
@@ -49,7 +49,7 @@
         android:key="audio_routing_media"
         android:persistent="false"
         android:title="@string/bluetooth_media_title"
-        settings:controller="com.android.settings.bluetooth.HearingDeviceMediaRoutingPreferenceController" />
+        settings:controller="com.android.settings.accessibility.HearingDeviceMediaRoutingPreferenceController" />
 
     <ListPreference
         android:entries="@array/bluetooth_audio_routing_titles"
@@ -58,7 +58,7 @@
         android:key="audio_routing_system_sounds"
         android:persistent="false"
         android:title="@string/bluetooth_system_sounds_title"
-        settings:controller="com.android.settings.bluetooth.HearingDeviceSystemSoundsRoutingPreferenceController" />
+        settings:controller="com.android.settings.accessibility.HearingDeviceSystemSoundsRoutingPreferenceController" />
 
     <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="hearing_device_footer"
