@@ -34,7 +34,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.google.common.annotations.VisibleForTesting;
 
 /**
- * The controller of the hearing device controls in the bluetooth detail settings.
+ * The controller of the hearing device settings to launch Hearing device page.
  */
 public class BluetoothDetailsHearingDeviceControlsController extends BluetoothDetailsController
         implements Preference.OnPreferenceClickListener {
@@ -87,6 +87,7 @@ public class BluetoothDetailsHearingDeviceControlsController extends BluetoothDe
         final Preference preference = new Preference(context);
         preference.setKey(KEY_HEARING_DEVICE_CONTROLS);
         preference.setTitle(context.getString(R.string.bluetooth_device_controls_title));
+        preference.setSummary(context.getString(R.string.bluetooth_device_controls_summary));
         preference.setOnPreferenceClickListener(this);
 
         return preference;
