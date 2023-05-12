@@ -1589,6 +1589,22 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="    &lt;color name=&quot;switch_bar_state_disabled_color&quot;>#1FE3E3E3&lt;/color>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values-night/colors.xml"
+            line="76"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
         errorLine1="    &lt;color name=&quot;switchbar_switch_track_tint&quot;>#BFFFFFFF&lt;/color>"
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -2954,6 +2970,22 @@
         <location
             file="res/values/colors.xml"
             line="216"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="    &lt;color name=&quot;switch_bar_state_disabled_color&quot;>#1F1F1F1F&lt;/color>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values/colors.xml"
+            line="219"
             column="5"/>
     </issue>
 
@@ -6251,6 +6283,38 @@
             file="res/values/styles.xml"
             line="935"
             column="63"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="            &lt;solid android:color=&quot;@color/switch_bar_state_disabled_color&quot;/>"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/switch_bar_bg_disabled.xml"
+            line="22"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="            &lt;solid android:color=&quot;@color/switch_bar_state_disabled_color&quot;/>"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/switch_bar_bg_disabled.xml"
+            line="22"
+            column="20"/>
     </issue>
 
     <issue
