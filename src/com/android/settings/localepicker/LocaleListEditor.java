@@ -18,6 +18,7 @@ package com.android.settings.localepicker;
 
 import static android.os.UserManager.DISALLOW_CONFIG_LOCALE;
 
+import static com.android.settings.localepicker.AppLocalePickerActivity.EXTRA_APP_LOCALE;
 import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_CONFIRM_SYSTEM_DEFAULT;
 
 import android.app.Activity;
@@ -30,6 +31,7 @@ import android.os.Bundle;
 import android.os.LocaleList;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -57,6 +59,7 @@ import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -65,10 +68,11 @@ import java.util.Locale;
  */
 @SearchIndexable
 public class LocaleListEditor extends RestrictedSettingsFragment implements View.OnTouchListener {
-
+    private static final String TAG = LocaleListEditor.class.getSimpleName();
     protected static final String INTENT_LOCALE_KEY = "localeInfo";
     private static final String CFGKEY_REMOVE_MODE = "localeRemoveMode";
     private static final String CFGKEY_REMOVE_DIALOG = "showingLocaleRemoveDialog";
+    private static final String CFGKEY_ADD_LOCALE = "localeAdded";
     private static final int MENU_ID_REMOVE = Menu.FIRST + 1;
     private static final int REQUEST_LOCALE_PICKER = 0;
 
@@ -76,12 +80,16 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
     private static final String KEY_LANGUAGES_PICKER = "languages_picker";
     private static final String TAG_DIALOG_CONFIRM_SYSTEM_DEFAULT = "dialog_confirm_system_default";
     private static final String TAG_DIALOG_NOT_AVAILABLE = "dialog_not_available_locale";
+    static final String EXTRA_SYSTEM_LOCALE_DIALOG_TYPE = "system_locale_dialog_type";
+    private static final String LOCALE_SUGGESTION = "locale_suggestion";
 
     private LocaleDragAndDropAdapter mAdapter;
     private Menu mMenu;
     private View mAddLanguage;
+    private AlertDialog mSuggestionDialog = null;
     private boolean mRemoveMode;
     private boolean mShowingRemoveDialog;
+    private boolean mLocaleAdditionMode = false;
     private boolean mIsUiRestricted;
 
     private LayoutPreference mLocalePickerPreference;
@@ -142,11 +150,20 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+        if (mSuggestionDialog != null) {
+            mSuggestionDialog.dismiss();
+        }
+    }
+
+    @Override
     public void onViewStateRestored(Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         if (savedInstanceState != null) {
             mRemoveMode = savedInstanceState.getBoolean(CFGKEY_REMOVE_MODE, false);
             mShowingRemoveDialog = savedInstanceState.getBoolean(CFGKEY_REMOVE_DIALOG, false);
+            mLocaleAdditionMode = savedInstanceState.getBoolean(CFGKEY_ADD_LOCALE, false);
         }
         setRemoveMode(mRemoveMode);
 
@@ -162,6 +179,10 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
         if (mShowingRemoveDialog) {
             showRemoveLocaleWarningDialog();
         }
+        if (shouldShowConfirmationDialog() && !mLocaleAdditionMode) {
+            getActivity().setResult(Activity.RESULT_OK);
+            showDialogForAddedLocale();
+        }
     }
 
     @Override
@@ -169,6 +190,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
         super.onSaveInstanceState(outState);
         outState.putBoolean(CFGKEY_REMOVE_MODE, mRemoveMode);
         outState.putBoolean(CFGKEY_REMOVE_DIALOG, mShowingRemoveDialog);
+        outState.putBoolean(CFGKEY_ADD_LOCALE, mLocaleAdditionMode);
         mAdapter.saveState(outState);
     }
 
@@ -246,6 +268,118 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
         mAdapter.setRemoveMode(mRemoveMode);
         mAddLanguage.setVisibility(mRemoveMode ? View.INVISIBLE : View.VISIBLE);
         updateVisibilityOfRemoveMenu();
+    }
+
+    private boolean shouldShowConfirmationDialog() {
+        Intent intent = this.getIntent();
+        String dialogType = intent.getStringExtra(EXTRA_SYSTEM_LOCALE_DIALOG_TYPE);
+        String localeTag = intent.getStringExtra(EXTRA_APP_LOCALE);
+        if (!isAllowedPackage()
+                || isNullOrEmpty(dialogType)
+                || isNullOrEmpty(localeTag)
+                || !LOCALE_SUGGESTION.equals(dialogType)
+                || !isValidLocale(localeTag)
+                || isInSystemLocale(localeTag)) {
+            getActivity().setResult(Activity.RESULT_CANCELED);
+            return false;
+        }
+        getActivity().setResult(Activity.RESULT_OK);
+        return true;
+    }
+
+    private boolean isAllowedPackage() {
+        List<String> allowList = Arrays.asList(getContext().getResources().getStringArray(
+                R.array.allowed_packages_for_locale_confirmation_diallog));
+        String callingPckage = getActivity().getCallingPackage();
+        return !isNullOrEmpty(callingPckage) && allowList.contains(callingPckage);
+    }
+
+    private static boolean isNullOrEmpty(String str) {
+        return str == null || str.isEmpty();
+    }
+
+    private boolean isValidLocale(String tag) {
+        String[] systemLocales = getSupportedLocales();
+        for (String systemTag : systemLocales) {
+            if (systemTag.equals(tag)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected String[] getSupportedLocales() {
+        return LocalePicker.getSupportedLocales(getContext());
+    }
+
+    /**
+     *  Check if the localeTag is in the system locale. Since in the current design, the system
+     *  language list would not show two locales with the same language and region but different
+     *  numbering system. So, during the comparison, the u extension has to be stripped out.
+     *
+     * @param languageTag A language tag
+     * @return true if the locale is in the system locale. Otherwise, false.
+     */
+    private boolean isInSystemLocale(String languageTag) {
+        LocaleList systemLocales = LocaleList.getDefault();
+        Locale locale = Locale.forLanguageTag(languageTag).stripExtensions();
+        for (int i = 0; i < systemLocales.size(); i++) {
+            if (systemLocales.get(i).stripExtensions().equals(locale)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void showDialogForAddedLocale() {
+        Intent intent = this.getIntent();
+        String dialogType = intent.getStringExtra(EXTRA_SYSTEM_LOCALE_DIALOG_TYPE);
+        String appLocaleTag = intent.getStringExtra(EXTRA_APP_LOCALE);
+        Log.d(TAG, "Dialog suggested locale: " + appLocaleTag);
+        LocaleStore.LocaleInfo localeInfo = LocaleStore.getLocaleInfo(
+                Locale.forLanguageTag(appLocaleTag));
+        if (LOCALE_SUGGESTION.equals(dialogType)) {
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+            customizeLayout(dialogBuilder, localeInfo.getFullNameNative());
+            dialogBuilder
+                    .setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            mLocaleAdditionMode = true;
+                            String preferencesTags = Settings.System.getString(
+                                    getContext().getContentResolver(),
+                                    Settings.System.LOCALE_PREFERENCES);
+                            mAdapter.addLocale(mayAppendUnicodeTags(localeInfo, preferencesTags));
+                        }
+                    })
+                    .setNegativeButton(android.R.string.cancel,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    mLocaleAdditionMode = true;
+                                }
+                            });
+            mSuggestionDialog = dialogBuilder.create();
+            mSuggestionDialog.show();
+        } else {
+            Log.d(TAG, "Invalid parameter, dialogType:" + dialogType);
+        }
+    }
+
+    private void customizeLayout(AlertDialog.Builder dialogBuilder, String language) {
+        View dialogView = getLocaleDialogView();
+        dialogBuilder.setView(dialogView);
+        TextView title = dialogView.findViewById(R.id.dialog_title);
+        title.setText(
+                String.format(getContext().getResources().getString(
+                        R.string.title_system_locale_addition), language));
+        TextView message = dialogView.findViewById(R.id.dialog_msg);
+        message.setText(R.string.desc_system_locale_addition);
+    }
+
+    protected View getLocaleDialogView() {
+        LayoutInflater inflater = this.getLayoutInflater();
+        return inflater.inflate(R.layout.locale_dialog, null);
     }
 
     // Show the appropriate warning when the user tries to remove locales.
