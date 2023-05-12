@@ -35,6 +35,7 @@ import android.view.autofill.AutofillManager;
 import com.android.settings.applications.defaultapps.DefaultAppPreferenceController;
 import com.android.settingslib.applications.DefaultAppInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultCombinedPreferenceController extends DefaultAppPreferenceController {
@@ -110,14 +111,18 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
     private List<CombinedProviderInfo> getAllProviders(int userId) {
         final List<AutofillServiceInfo> autofillProviders =
                 AutofillServiceInfo.getAvailableServices(mContext, userId);
-        final List<CredentialProviderInfo> credManProviders =
-                mCredentialManager.getCredentialProviderServices(
-                        userId, CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY);
         final String selectedAutofillProvider =
                 Settings.Secure.getStringForUser(
                         mContext.getContentResolver(),
                         DefaultCombinedPicker.AUTOFILL_SETTING,
                         userId);
+
+        final List<CredentialProviderInfo> credManProviders = new ArrayList<>();
+        if (mCredentialManager != null) {
+            credManProviders.addAll(
+                    mCredentialManager.getCredentialProviderServices(
+                            userId, CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY));
+        }
 
         return CombinedProviderInfo.buildMergedList(
                 autofillProviders, credManProviders, selectedAutofillProvider);
