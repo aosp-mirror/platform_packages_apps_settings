@@ -16,7 +16,9 @@
 package com.android.settings.dashboard;
 
 import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.DASHBOARD_CONTAINER;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_GROUP_KEY;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_KEYHINT;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_PENDING_INTENT;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SWITCH_URI;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -43,6 +45,7 @@ import android.os.UserHandle;
 import android.preference.PreferenceManager.OnActivityResultListener;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -60,6 +63,7 @@ import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.drawer.ActivityTile;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.ProviderTile;
+import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -178,6 +182,43 @@ public class DashboardFragmentTest {
         mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
 
         verify(mTestFragment.mScreen, times(2)).addPreference(nullable(Preference.class));
+    }
+
+    @Test
+    public void displayTilesAsPreference_withGroup_shouldAddTilesIntoGroup() {
+        final ProviderInfo providerInfo = new ProviderInfo();
+        providerInfo.packageName = "pkg";
+        providerInfo.name = "provider";
+        providerInfo.authority = "authority";
+        final Bundle groupTileMetaData = new Bundle();
+        groupTileMetaData.putString(META_DATA_PREFERENCE_KEYHINT, "injected_tile_group_key");
+        ProviderTile groupTile = new ProviderTile(providerInfo, mDashboardCategory.key,
+                groupTileMetaData);
+        mDashboardCategory.addTile(groupTile);
+
+        final Bundle subTileMetaData = new Bundle();
+        subTileMetaData.putString(META_DATA_PREFERENCE_KEYHINT, "injected_tile_key3");
+        subTileMetaData.putString(META_DATA_PREFERENCE_GROUP_KEY, "injected_tile_group_key");
+        subTileMetaData.putParcelable(
+                META_DATA_PREFERENCE_PENDING_INTENT,
+                PendingIntent.getActivity(mContext, 0, new Intent(), 0));
+        ProviderTile subTile = new ProviderTile(providerInfo, mDashboardCategory.key,
+                subTileMetaData);
+        mDashboardCategory.addTile(subTile);
+
+        PreferenceCategory groupPreference = mock(PreferenceCategory.class);
+        when(mFakeFeatureFactory.dashboardFeatureProvider
+                .getTilesForCategory(nullable(String.class)))
+                .thenReturn(mDashboardCategory);
+        when(mFakeFeatureFactory.dashboardFeatureProvider
+                .getDashboardKeyForTile(any(Tile.class)))
+                .then(invocation -> ((Tile) invocation.getArgument(0)).getKey(mContext));
+        when(mTestFragment.mScreen.findPreference("injected_tile_group_key"))
+                .thenReturn(groupPreference);
+        mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
+
+        verify(mTestFragment.mScreen, times(3)).addPreference(nullable(Preference.class));
+        verify(groupPreference).addPreference(nullable(Preference.class));
     }
 
     @Test
@@ -403,6 +444,22 @@ public class DashboardFragmentTest {
         final Preference pref = mTestFragment.createPreference(mProviderTile);
 
         assertThat(pref).isInstanceOf(PrimarySwitchPreference.class);
+    }
+
+    @Test
+    public void createPreference_isGroupTile_returnPreferenceCategory() {
+        final ProviderInfo providerInfo = new ProviderInfo();
+        providerInfo.packageName = "pkg";
+        providerInfo.name = "provider";
+        providerInfo.authority = "authority";
+        final Bundle metaData = new Bundle();
+        metaData.putString(META_DATA_PREFERENCE_KEYHINT, "injected_tile_key2");
+        ProviderTile providerTile =
+                new ProviderTile(providerInfo, mDashboardCategory.key, metaData);
+
+        final Preference pref = mTestFragment.createPreference(providerTile);
+
+        assertThat(pref).isInstanceOf(PreferenceCategory.class);
     }
 
     @Test
