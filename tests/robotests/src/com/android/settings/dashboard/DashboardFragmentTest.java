@@ -447,7 +447,7 @@ public class DashboardFragmentTest {
     }
 
     @Test
-    public void createPreference_isGroupTile_returnPreferenceCategory() {
+    public void createPreference_isGroupTile_returnPreferenceCategory_logTileAdded() {
         final ProviderInfo providerInfo = new ProviderInfo();
         providerInfo.packageName = "pkg";
         providerInfo.name = "provider";
@@ -456,10 +456,20 @@ public class DashboardFragmentTest {
         metaData.putString(META_DATA_PREFERENCE_KEYHINT, "injected_tile_key2");
         ProviderTile providerTile =
                 new ProviderTile(providerInfo, mDashboardCategory.key, metaData);
+        MetricsFeatureProvider metricsFeatureProvider =
+                mFakeFeatureFactory.getMetricsFeatureProvider();
+        when(metricsFeatureProvider.getAttribution(any())).thenReturn(123);
 
         final Preference pref = mTestFragment.createPreference(providerTile);
 
         assertThat(pref).isInstanceOf(PreferenceCategory.class);
+        verify(metricsFeatureProvider)
+                .action(
+                        123,
+                        SettingsEnums.ACTION_SETTINGS_GROUP_TILE_ADDED_TO_SCREEN,
+                        mTestFragment.getMetricsCategory(),
+                        "injected_tile_key2",
+                        0);
     }
 
     @Test
