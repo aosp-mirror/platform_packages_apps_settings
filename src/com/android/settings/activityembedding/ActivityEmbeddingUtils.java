@@ -97,16 +97,24 @@ public class ActivityEmbeddingUtils {
      * </ul>
      */
     public static boolean isEmbeddingActivityEnabled(Context context) {
-        boolean isFlagEnabled = FeatureFlagUtils.isEnabled(context,
-                FeatureFlagUtils.SETTINGS_SUPPORT_LARGE_SCREEN);
-        boolean isSettingsSplitSupported = isSettingsSplitEnabled(context);
-        boolean isUserSetupComplete = WizardManagerHelper.isUserSetupComplete(context);
-
-        Log.d(TAG, "isFlagEnabled = " + isFlagEnabled);
-        Log.d(TAG, "isSettingsSplitSupported = " + isSettingsSplitSupported);
-        Log.d(TAG, "isUserSetupComplete = " + isUserSetupComplete);
-
-        return isFlagEnabled && isSettingsSplitSupported && isUserSetupComplete;
+        // Activity Embedding feature is not enabled if Settings doesn't enable large screen
+        // optimization or the device is not supported.
+        if (!isSettingsSplitEnabled(context)) {
+            Log.d(TAG, "isSettingsSplitSupported = false");
+            return false;
+        }
+        // Activity Embedding feature is not enabled if a user chooses to disable the feature.
+        if (!FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_SUPPORT_LARGE_SCREEN)) {
+            Log.d(TAG, "isFlagEnabled = false");
+            return false;
+        }
+        // Don't enable Activity embedding for setup wizard.
+        if (!WizardManagerHelper.isUserSetupComplete(context)) {
+            Log.d(TAG, "isUserSetupComplete = false");
+            return false;
+        }
+        Log.d(TAG, "isEmbeddingActivityEnabled = true");
+        return true;
     }
 
     /** Whether to show the regular or simplified homepage layout. */
@@ -120,8 +128,7 @@ public class ActivityEmbeddingUtils {
      * Check if activity is already embedded
      */
     public static boolean isAlreadyEmbedded(Activity activity) {
-        return ActivityEmbeddingController
-                .getInstance(activity)
-                .isActivityEmbedded(activity);
+        return isEmbeddingActivityEnabled(activity) && ActivityEmbeddingController.getInstance(
+                activity).isActivityEmbedded(activity);
     }
 }
