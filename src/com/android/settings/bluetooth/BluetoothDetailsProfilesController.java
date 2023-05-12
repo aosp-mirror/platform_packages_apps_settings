@@ -120,6 +120,10 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         pref.setTitle(profile.getNameResource(mCachedDevice.getDevice()));
         pref.setOnPreferenceClickListener(this);
         pref.setOrder(profile.getOrdinal());
+
+        if (profile instanceof LeAudioProfile) {
+            pref.setSummary(R.string.device_details_leaudio_toggle_summary);
+        }
         return pref;
     }
 
