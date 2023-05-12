@@ -30,6 +30,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -38,6 +39,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ProviderInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.PreferenceManager.OnActivityResultListener;
 
 import androidx.preference.Preference;
@@ -356,6 +358,36 @@ public class DashboardFragmentTest {
         mActivityTile.getMetaData().putString(META_DATA_PREFERENCE_SWITCH_URI, "uri");
 
         final Preference pref = mTestFragment.createPreference(mActivityTile);
+
+        assertThat(pref).isInstanceOf(PrimarySwitchPreference.class);
+    }
+
+    @Test
+    public void createPreference_isProviderTileWithPendingIntent_returnPreference() {
+        final ProviderInfo providerInfo = new ProviderInfo();
+        providerInfo.packageName = "pkg";
+        providerInfo.name = "provider";
+        providerInfo.authority = "authority";
+        final Bundle metaData = new Bundle();
+        metaData.putString(META_DATA_PREFERENCE_KEYHINT, "injected_tile_key2");
+        ProviderTile providerTile = new ProviderTile(providerInfo, mDashboardCategory.key,
+                metaData);
+        providerTile.pendingIntentMap.put(
+                UserHandle.CURRENT, PendingIntent.getActivity(mContext, 0, new Intent(), 0));
+
+        final Preference pref = mTestFragment.createPreference(providerTile);
+
+        assertThat(pref).isInstanceOf(Preference.class);
+        assertThat(pref).isNotInstanceOf(PrimarySwitchPreference.class);
+        assertThat(pref).isNotInstanceOf(SwitchPreference.class);
+    }
+
+    @Test
+    public void createPreference_isProviderTileWithPendingIntentAndSwitch_returnPrimarySwitch() {
+        mProviderTile.pendingIntentMap.put(
+                UserHandle.CURRENT, PendingIntent.getActivity(mContext, 0, new Intent(), 0));
+
+        final Preference pref = mTestFragment.createPreference(mProviderTile);
 
         assertThat(pref).isInstanceOf(PrimarySwitchPreference.class);
     }
