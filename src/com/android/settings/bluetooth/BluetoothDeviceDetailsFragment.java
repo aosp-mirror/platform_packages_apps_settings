@@ -314,8 +314,6 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                     lifecycle));
             controllers.add(new BluetoothDetailsHearingDeviceControlsController(context, this,
                     mCachedDevice, lifecycle));
-            controllers.add(new BluetoothDetailsAudioRoutingController(context, this, mCachedDevice,
-                    lifecycle));
         }
         return controllers;
     }
