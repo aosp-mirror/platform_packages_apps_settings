@@ -21,8 +21,8 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.ResultReceiver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +35,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
-import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -46,47 +45,17 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 public class LocaleDialogFragment extends InstrumentedDialogFragment {
     private static final String TAG = LocaleDialogFragment.class.getSimpleName();
 
-    static final int DIALOG_CONFIRM_SYSTEM_DEFAULT = 0;
-    static final int DIALOG_NOT_AVAILABLE_LOCALE = 1;
+    static final int DIALOG_CONFIRM_SYSTEM_DEFAULT = 1;
+    static final int DIALOG_NOT_AVAILABLE_LOCALE = 2;
 
     static final String ARG_DIALOG_TYPE = "arg_dialog_type";
     static final String ARG_TARGET_LOCALE = "arg_target_locale";
-    static final String ARG_RESULT_RECEIVER = "arg_result_receiver";
+    static final String ARG_SHOW_DIALOG = "arg_show_dialog";
+
+    private boolean mShouldKeepDialog;
 
     public static LocaleDialogFragment newInstance() {
         return new LocaleDialogFragment();
-    }
-
-    /**
-     * Show dialog
-     */
-    public void show(
-            @NonNull RestrictedSettingsFragment fragment,
-            int dialogType,
-            LocaleStore.LocaleInfo localeInfo) {
-        if (!isAdded()) {
-            return;
-        }
-        show(fragment, dialogType, localeInfo, null);
-    }
-
-    /**
-     * Show dialog
-     */
-    public void show(
-            @NonNull RestrictedSettingsFragment fragment,
-            int dialogType,
-            LocaleStore.LocaleInfo localeInfo,
-            ResultReceiver resultReceiver) {
-        FragmentManager manager = fragment.getChildFragmentManager();
-        Bundle args = new Bundle();
-        args.putInt(ARG_DIALOG_TYPE, dialogType);
-        args.putSerializable(ARG_TARGET_LOCALE, localeInfo);
-        args.putParcelable(ARG_RESULT_RECEIVER, resultReceiver);
-
-        LocaleDialogFragment localeDialogFragment = new LocaleDialogFragment();
-        localeDialogFragment.setArguments(args);
-        localeDialogFragment.show(manager, TAG);
     }
 
     @Override
@@ -103,8 +72,28 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(ARG_SHOW_DIALOG, mShouldKeepDialog);
+    }
+
+    @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        LocaleDialogController controller = new LocaleDialogController(this);
+        if (savedInstanceState != null) {
+            Bundle arguments = getArguments();
+            int type = arguments.getInt(ARG_DIALOG_TYPE);
+            mShouldKeepDialog = savedInstanceState.getBoolean(ARG_SHOW_DIALOG, false);
+            // Keep the dialog if user rotates the device, otherwise close the confirm system
+            // default dialog only when user changes the locale.
+            if (type == DIALOG_CONFIRM_SYSTEM_DEFAULT && !mShouldKeepDialog) {
+                dismiss();
+            }
+        }
+
+        mShouldKeepDialog = true;
+        LocaleListEditor parentFragment = (LocaleListEditor) getParentFragment();
+        LocaleDialogController controller = getLocaleDialogController(getContext(), this,
+                parentFragment);
         LocaleDialogController.DialogContent dialogContent = controller.getDialogContent();
         ViewGroup viewGroup = (ViewGroup) LayoutInflater.from(getContext()).inflate(
                 R.layout.locale_dialog, null);
@@ -140,47 +129,57 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
         textView.setText(content);
     }
 
-    static class LocaleDialogController implements DialogInterface.OnClickListener {
+    @VisibleForTesting
+    LocaleDialogController getLocaleDialogController(Context context,
+            LocaleDialogFragment dialogFragment, LocaleListEditor parentFragment) {
+        return new LocaleDialogController(context, dialogFragment, parentFragment);
+    }
+
+    class LocaleDialogController implements DialogInterface.OnClickListener {
         private final Context mContext;
         private final int mDialogType;
         private final LocaleStore.LocaleInfo mLocaleInfo;
-        private final ResultReceiver mResultReceiver;
         private final MetricsFeatureProvider mMetricsFeatureProvider;
 
+        private LocaleListEditor mParent;
+
         LocaleDialogController(
-                @NonNull Context context, @NonNull LocaleDialogFragment dialogFragment) {
+                @NonNull Context context, @NonNull LocaleDialogFragment dialogFragment,
+                LocaleListEditor parentFragment) {
             mContext = context;
             Bundle arguments = dialogFragment.getArguments();
             mDialogType = arguments.getInt(ARG_DIALOG_TYPE);
-            mLocaleInfo = (LocaleStore.LocaleInfo) arguments.getSerializable(
-                    ARG_TARGET_LOCALE);
-            mResultReceiver = (ResultReceiver) arguments.getParcelable(ARG_RESULT_RECEIVER);
+            mLocaleInfo = (LocaleStore.LocaleInfo) arguments.getSerializable(ARG_TARGET_LOCALE);
             mMetricsFeatureProvider = FeatureFactory.getFactory(
                     mContext).getMetricsFeatureProvider();
+            mParent = parentFragment;
         }
 
-        LocaleDialogController(@NonNull LocaleDialogFragment dialogFragment) {
-            this(dialogFragment.getContext(), dialogFragment);
+        LocaleDialogController(@NonNull LocaleDialogFragment dialogFragment,
+                LocaleListEditor parent) {
+            this(dialogFragment.getContext(), dialogFragment, parent);
         }
 
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            if (mResultReceiver != null && mDialogType == DIALOG_CONFIRM_SYSTEM_DEFAULT) {
+            if (mDialogType == DIALOG_CONFIRM_SYSTEM_DEFAULT) {
+                int result = Activity.RESULT_CANCELED;
+                if (which == DialogInterface.BUTTON_POSITIVE) {
+                    result = Activity.RESULT_OK;
+                }
+                Intent intent = new Intent();
                 Bundle bundle = new Bundle();
                 bundle.putInt(ARG_DIALOG_TYPE, DIALOG_CONFIRM_SYSTEM_DEFAULT);
-                if (which == DialogInterface.BUTTON_POSITIVE) {
-                    mResultReceiver.send(Activity.RESULT_OK, bundle);
-                } else if (which == DialogInterface.BUTTON_NEGATIVE) {
-                    mResultReceiver.send(Activity.RESULT_CANCELED, bundle);
-                }
+                intent.putExtras(bundle);
+                mParent.onActivityResult(DIALOG_CONFIRM_SYSTEM_DEFAULT, result, intent);
                 mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_CHANGE_LANGUAGE);
             }
+            mShouldKeepDialog = false;
         }
 
         @VisibleForTesting
         DialogContent getDialogContent() {
-            DialogContent
-                    dialogContent = new DialogContent();
+            DialogContent dialogContent = new DialogContent();
             switch (mDialogType) {
                 case DIALOG_CONFIRM_SYSTEM_DEFAULT:
                     dialogContent.mTitle = String.format(mContext.getString(
