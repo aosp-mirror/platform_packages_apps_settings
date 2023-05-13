@@ -48,6 +48,8 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
 
     private final DevelopmentSettingsDashboardFragment mFragment;
 
+    private final GraphicsDriverSystemPropertiesWrapper mSystemProperties;
+
     @VisibleForTesting
     static final String PROPERTY_RO_GFX_ANGLE_SUPPORTED = "ro.gfx.angle.supported";
 
@@ -57,11 +59,34 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
     @VisibleForTesting
     static final String ANGLE_DRIVER_SUFFIX = "angle";
 
+    @VisibleForTesting
+    static class Injector {
+        public GraphicsDriverSystemPropertiesWrapper createSystemPropertiesWrapper() {
+            return new GraphicsDriverSystemPropertiesWrapper() {
+                @Override
+                public String get(String key, String def) {
+                    return SystemProperties.get(key, def);
+                }
+
+                @Override
+                public void set(String key, String val) {
+                    SystemProperties.set(key, val);
+                }
+            };
+        }
+    }
 
     public GraphicsDriverEnableAngleAsSystemDriverController(
             Context context, DevelopmentSettingsDashboardFragment fragment) {
+        this(context, fragment, new Injector());
+    }
+
+    @VisibleForTesting
+    GraphicsDriverEnableAngleAsSystemDriverController(
+            Context context, DevelopmentSettingsDashboardFragment fragment, Injector injector) {
         super(context);
         mFragment = fragment;
+        mSystemProperties = injector.createSystemPropertiesWrapper();
     }
 
     @Override
@@ -76,20 +101,27 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
         // set "persist.graphics.egl" to "" if enableAngleAsSystemDriver is false
         GraphicsEnvironment.getInstance().toggleAngleAsSystemDriver(enableAngleAsSystemDriver);
         // pop up a window asking user to reboot to make the new "persist.graphics.egl" take effect
+        showRebootDialog();
+        return true;
+    }
+
+    @VisibleForTesting
+    void showRebootDialog() {
         RebootConfirmationDialogFragment.show(
                 mFragment, R.string.reboot_dialog_enable_angle_as_system_driver,
                 R.string.cancel, this);
-        return true;
     }
+
 
     @Override
     public void updateState(Preference preference) {
         // set switch on if "persist.graphics.egl" is "angle" and angle is built in /vendor
         // set switch off otherwise.
-        final String currentGlesDriver = SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL);
+        final String currentGlesDriver =
+                mSystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL, "");
         final boolean isAngle = TextUtils.equals(ANGLE_DRIVER_SUFFIX, currentGlesDriver);
-        final boolean isAngleSupported =
-                TextUtils.equals(SystemProperties.get(PROPERTY_RO_GFX_ANGLE_SUPPORTED), "true");
+        final boolean isAngleSupported = TextUtils
+                .equals(mSystemProperties.get(PROPERTY_RO_GFX_ANGLE_SUPPORTED, ""), "true");
         ((SwitchPreference) mPreference).setChecked(isAngle && isAngleSupported);
         ((SwitchPreference) mPreference).setEnabled(isAngleSupported);
     }
@@ -98,8 +130,8 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
     protected void onDeveloperOptionsSwitchEnabled() {
         // only enable the switch if ro.gfx.angle.supported is true
         // we use ro.gfx.angle.supported to indicate if ANGLE libs are installed under /vendor
-        final boolean isAngleSupported =
-                TextUtils.equals(SystemProperties.get(PROPERTY_RO_GFX_ANGLE_SUPPORTED), "true");
+        final boolean isAngleSupported = TextUtils
+                .equals(mSystemProperties.get(PROPERTY_RO_GFX_ANGLE_SUPPORTED, ""), "true");
         ((SwitchPreference) mPreference).setEnabled(isAngleSupported);
     }
 
@@ -116,7 +148,8 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
     @Override
     public void onRebootCancelled() {
         // if user presses button "Cancel", do not reboot the device, and toggles switch back
-        final String currentGlesDriver = SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL);
+        final String currentGlesDriver =
+                mSystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL, "");
         if (TextUtils.equals(ANGLE_DRIVER_SUFFIX, currentGlesDriver)) {
             // if persist.graphics.egl = "angle", set the property value back to ""
             GraphicsEnvironment.getInstance().toggleAngleAsSystemDriver(false);
