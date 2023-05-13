@@ -43,6 +43,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -57,6 +58,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Pair;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
@@ -197,6 +199,27 @@ public class DashboardFeatureProviderImplTest {
         assertThat(preference.getIcon()).isNotNull();
         assertThat(preference.getOrder()).isEqualTo(tile.getOrder());
         assertThat(observers.get(0).getUri().toString()).isEqualTo(SWITCH_URI);
+    }
+
+    @Test
+    public void bindPreference_providerTileWithPendingIntent_shouldBindIntent() {
+        final Preference preference = new SwitchPreference(RuntimeEnvironment.application);
+        Bundle metaData = new Bundle();
+        metaData.putInt(META_DATA_PREFERENCE_TITLE, R.string.settings_label);
+        metaData.putInt(META_DATA_PREFERENCE_SUMMARY, R.string.about_settings_summary);
+        metaData.putInt(META_DATA_KEY_ORDER, 10);
+        metaData.putString(META_DATA_PREFERENCE_KEYHINT, KEY);
+        final Tile tile = new ProviderTile(mProviderInfo, CategoryKey.CATEGORY_HOMEPAGE, metaData);
+        PendingIntent pendingIntent =
+                PendingIntent.getActivity(RuntimeEnvironment.application, 0, new Intent("test"), 0);
+        tile.pendingIntentMap.put(UserHandle.CURRENT, pendingIntent);
+
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
+                preference, tile, "123", Preference.DEFAULT_ORDER);
+
+        assertThat(preference.getFragment()).isNull();
+        assertThat(preference.getOnPreferenceClickListener()).isNotNull();
+        assertThat(preference.getOrder()).isEqualTo(tile.getOrder());
     }
 
     @Test
@@ -628,6 +651,55 @@ public class DashboardFeatureProviderImplTest {
                 Shadows.shadowOf(activity).getNextStartedActivityForResult();
 
         assertThat(launchIntent).isNull();
+    }
+
+    @Test
+    public void clickPreference_providerTileWithPendingIntent_singleUser_executesPendingIntent() {
+        final Preference preference = new SwitchPreference(RuntimeEnvironment.application);
+        Bundle metaData = new Bundle();
+        metaData.putInt(META_DATA_PREFERENCE_TITLE, R.string.settings_label);
+        metaData.putInt(META_DATA_PREFERENCE_SUMMARY, R.string.about_settings_summary);
+        metaData.putInt(META_DATA_KEY_ORDER, 10);
+        metaData.putString(META_DATA_PREFERENCE_KEYHINT, KEY);
+        final Tile tile = new ProviderTile(mProviderInfo, CategoryKey.CATEGORY_HOMEPAGE, metaData);
+        PendingIntent pendingIntent =
+                PendingIntent.getActivity(RuntimeEnvironment.application, 0, new Intent("test"), 0);
+        tile.pendingIntentMap.put(UserHandle.CURRENT, pendingIntent);
+
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
+                preference, tile, "123", Preference.DEFAULT_ORDER);
+        preference.performClick();
+
+        Intent nextStartedActivity =
+                Shadows.shadowOf(RuntimeEnvironment.application).peekNextStartedActivity();
+        assertThat(nextStartedActivity).isNotNull();
+        assertThat(nextStartedActivity.getAction()).isEqualTo("test");
+    }
+
+    @Test
+    public void clickPreference_providerTileWithPendingIntent_multiUser_showsProfileDialog() {
+        final Preference preference = new SwitchPreference(RuntimeEnvironment.application);
+        Bundle metaData = new Bundle();
+        metaData.putInt(META_DATA_PREFERENCE_TITLE, R.string.settings_label);
+        metaData.putInt(META_DATA_PREFERENCE_SUMMARY, R.string.about_settings_summary);
+        metaData.putInt(META_DATA_KEY_ORDER, 10);
+        metaData.putString(META_DATA_PREFERENCE_KEYHINT, KEY);
+        final Tile tile = new ProviderTile(mProviderInfo, CategoryKey.CATEGORY_HOMEPAGE, metaData);
+        PendingIntent pendingIntent =
+                PendingIntent.getActivity(RuntimeEnvironment.application, 0, new Intent("test"), 0);
+        tile.pendingIntentMap.put(UserHandle.CURRENT, pendingIntent);
+        tile.pendingIntentMap.put(new UserHandle(10), pendingIntent);
+
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
+                preference, tile, "123", Preference.DEFAULT_ORDER);
+        preference.performClick();
+
+        Fragment dialogFragment =
+                mActivity.getSupportFragmentManager().findFragmentByTag("select_profile");
+        assertThat(dialogFragment).isNotNull();
+        Intent nextStartedActivity =
+                Shadows.shadowOf(RuntimeEnvironment.application).peekNextStartedActivity();
+        assertThat(nextStartedActivity).isNull();
     }
 
     @Test

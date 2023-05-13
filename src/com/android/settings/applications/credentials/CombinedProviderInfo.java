@@ -51,7 +51,7 @@ public final class CombinedProviderInfo {
             @Nullable List<CredentialProviderInfo> cpis,
             @Nullable AutofillServiceInfo asi,
             boolean isDefaultAutofillProvider,
-            boolean IsPrimaryCredmanProvider) {
+            boolean isPrimaryCredmanProvider) {
         if (cpis == null) {
             mCredentialProviderInfos = new ArrayList<>();
         } else {
@@ -59,11 +59,11 @@ public final class CombinedProviderInfo {
         }
         mAutofillServiceInfo = asi;
         mIsDefaultAutofillProvider = isDefaultAutofillProvider;
-        mIsPrimaryCredmanProvider = IsPrimaryCredmanProvider;
+        mIsPrimaryCredmanProvider = isPrimaryCredmanProvider;
     }
 
     /** Returns the credential provider info. */
-    @Nullable
+    @NonNull
     public List<CredentialProviderInfo> getCredentialProviderInfos() {
         return mCredentialProviderInfos;
     }
@@ -85,11 +85,13 @@ public final class CombinedProviderInfo {
     /** Returns the app icon. */
     @Nullable
     public Drawable getAppIcon(@NonNull Context context, int userId) {
-        IconDrawableFactory factory = IconDrawableFactory.newInstance(context);
+        final IconDrawableFactory factory = IconDrawableFactory.newInstance(context);
+        final ServiceInfo brandingService = getBrandingService();
+        final ApplicationInfo appInfo = getApplicationInfo();
+
         Drawable icon = null;
-        ServiceInfo brandingService = getBrandingService();
-        if (brandingService != null) {
-            icon = factory.getBadgedIcon(brandingService, getApplicationInfo(), userId);
+        if (brandingService != null && appInfo != null) {
+            icon = factory.getBadgedIcon(brandingService, appInfo, userId);
         }
 
         // If the branding service gave us a icon then use that.
@@ -98,7 +100,10 @@ public final class CombinedProviderInfo {
         }
 
         // Otherwise fallback to the app icon and then the package name.
-        return factory.getBadgedIcon(getApplicationInfo(), userId);
+        if (appInfo != null) {
+            return factory.getBadgedIcon(appInfo, userId);
+        }
+        return null;
     }
 
     /** Returns the app name. */
@@ -116,11 +121,14 @@ public final class CombinedProviderInfo {
         }
 
         // Otherwise fallback to the app label and then the package name.
-        name = getApplicationInfo().loadLabel(context.getPackageManager());
-        if (TextUtils.isEmpty(name)) {
-            name = getApplicationInfo().packageName;
+        final ApplicationInfo appInfo = getApplicationInfo();
+        if (appInfo != null) {
+            name = appInfo.loadLabel(context.getPackageManager());
+            if (TextUtils.isEmpty(name)) {
+                return appInfo.packageName;
+            }
         }
-        return name;
+        return "";
     }
 
     /** Gets the service to use for branding (name, icons). */
@@ -245,8 +253,10 @@ public final class CombinedProviderInfo {
         // Now go through and build the joint datasets.
         List<CombinedProviderInfo> cmpi = new ArrayList<>();
         for (String packageName : packageNames) {
-            List<AutofillServiceInfo> asi = autofillServices.get(packageName);
-            List<CredentialProviderInfo> cpi = credmanServices.get(packageName);
+            List<AutofillServiceInfo> asi =
+                    autofillServices.getOrDefault(packageName, new ArrayList<>());
+            List<CredentialProviderInfo> cpi =
+                    credmanServices.getOrDefault(packageName, new ArrayList<>());
 
             // If there are multiple autofill services then pick the first one.
             AutofillServiceInfo selectedAsi = null;
