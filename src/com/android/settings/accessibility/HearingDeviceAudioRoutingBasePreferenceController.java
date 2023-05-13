@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.bluetooth;
+package com.android.settings.accessibility;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -47,19 +47,24 @@ public abstract class HearingDeviceAudioRoutingBasePreferenceController extends
     private static final String TAG = "HARoutingBasePreferenceController";
     private static final boolean DEBUG = false;
 
-    private final HearingAidAudioRoutingHelper mHelper;
+    private final HearingAidAudioRoutingHelper mAudioRoutingHelper;
+    private final HearingAidHelper mHearingAidHelper;
 
     public HearingDeviceAudioRoutingBasePreferenceController(Context context,
             String preferenceKey) {
-        super(context, preferenceKey);
-        mHelper = new HearingAidAudioRoutingHelper(context);
+        this(context, preferenceKey,
+                new HearingAidAudioRoutingHelper(context),
+                new HearingAidHelper(context));
     }
 
     @VisibleForTesting
     public HearingDeviceAudioRoutingBasePreferenceController(Context context,
-            String preferenceKey, HearingAidAudioRoutingHelper helper) {
+            String preferenceKey, HearingAidAudioRoutingHelper audioRoutingHelper,
+            HearingAidHelper hearingAidHelper) {
         super(context, preferenceKey);
-        mHelper = helper;
+
+        mAudioRoutingHelper = audioRoutingHelper;
+        mHearingAidHelper = hearingAidHelper;
     }
 
     @Override
@@ -81,7 +86,11 @@ public abstract class HearingDeviceAudioRoutingBasePreferenceController extends
         final Integer routingValue = Ints.tryParse((String) newValue);
 
         saveRoutingValue(mContext, routingValue);
-        trySetAudioRoutingConfig(getSupportedAttributeList(), getHearingDevice(), routingValue);
+        final CachedBluetoothDevice device = mHearingAidHelper.getConnectedHearingAidDevice();
+        if (device != null) {
+            trySetAudioRoutingConfig(getSupportedAttributeList(),
+                    mHearingAidHelper.getConnectedHearingAidDevice(), routingValue);
+        }
 
         return true;
     }
@@ -89,10 +98,10 @@ public abstract class HearingDeviceAudioRoutingBasePreferenceController extends
     private void trySetAudioRoutingConfig(int[] audioAttributes,
             CachedBluetoothDevice hearingDevice,
             @HearingAidAudioRoutingConstants.RoutingValue int routingValue) {
-        final List<AudioProductStrategy> supportedStrategies = mHelper.getSupportedStrategies(
-                audioAttributes);
+        final List<AudioProductStrategy> supportedStrategies =
+                mAudioRoutingHelper.getSupportedStrategies(audioAttributes);
         final AudioDeviceAttributes hearingDeviceAttributes =
-                mHelper.getMatchedHearingDeviceAttributes(hearingDevice);
+                mAudioRoutingHelper.getMatchedHearingDeviceAttributes(hearingDevice);
         if (hearingDeviceAttributes == null) {
             if (DEBUG) {
                 Log.d(TAG,
@@ -103,8 +112,8 @@ public abstract class HearingDeviceAudioRoutingBasePreferenceController extends
             return;
         }
 
-        final boolean status = mHelper.setPreferredDeviceRoutingStrategies(supportedStrategies,
-                hearingDeviceAttributes, routingValue);
+        final boolean status = mAudioRoutingHelper.setPreferredDeviceRoutingStrategies(
+                supportedStrategies, hearingDeviceAttributes, routingValue);
 
         if (!status) {
             final List<String> strategiesName = supportedStrategies.stream()
@@ -120,12 +129,6 @@ public abstract class HearingDeviceAudioRoutingBasePreferenceController extends
      * {@link AudioProductStrategy} to configure audio routing.
      */
     protected abstract int[] getSupportedAttributeList();
-
-    /**
-     * Gets the {@link CachedBluetoothDevice} hearing device that is used to configure audio
-     * routing.
-     */
-    protected abstract CachedBluetoothDevice getHearingDevice();
 
     /**
      * Saves the routing value.

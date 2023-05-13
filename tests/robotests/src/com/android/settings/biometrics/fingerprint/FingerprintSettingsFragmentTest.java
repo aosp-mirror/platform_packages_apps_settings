@@ -20,7 +20,10 @@ import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFP
 
 import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment;
 import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment.ADD_FINGERPRINT_REQUEST;
+import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment.CHOOSE_LOCK_GENERIC_REQUEST;
 import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment.KEY_FINGERPRINT_ADD;
+
+import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -54,6 +57,7 @@ import com.android.settings.biometrics.BiometricsSplitScreenDialog;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowFragment;
+import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowSettingsPreferenceFragment;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -63,6 +67,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
@@ -74,7 +79,7 @@ import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowSettingsPreferenceFragment.class, ShadowUtils.class, ShadowFragment.class,
-        ShadowUserManager.class})
+        ShadowUserManager.class, ShadowLockPatternUtils.class})
 public class FingerprintSettingsFragmentTest {
     private FingerprintSettingsFragment mFragment;
     private Context mContext;
@@ -92,10 +97,62 @@ public class FingerprintSettingsFragmentTest {
         doReturn(true).when(mFingerprintManager).isHardwareDetected();
         ShadowUtils.setFingerprintManager(mFingerprintManager);
         FakeFeatureFactory.setupForTest();
+    }
 
+    @After
+    public void tearDown() {
+        ShadowUtils.reset();
+    }
+
+    @Test
+    public void testAddFingerprint_inFullScreen_noDialog() {
+        setUpFragment(false);
+        // Click "Add Fingerprint"
+        final Preference preference = new Preference(mContext);
+        preference.setKey(KEY_FINGERPRINT_ADD);
+        mFragment.onPreferenceTreeClick(preference);
+
+        verify(mFragment).startActivityForResult(any(), eq(ADD_FINGERPRINT_REQUEST));
+        verify(mFragmentTransaction, never()).add(any(),
+                eq(BiometricsSplitScreenDialog.class.getName()));
+
+    }
+
+    @Test
+    public void testAddFingerprint_inMultiWindow_showsDialog() {
+        setUpFragment(false);
+
+        doReturn(true).when(mActivity).isInMultiWindowMode();
+
+        // Click "Add Fingerprint"
+        final Preference preference = new Preference(mContext);
+        preference.setKey(KEY_FINGERPRINT_ADD);
+        mFragment.onPreferenceTreeClick(preference);
+
+        verify(mFragment, times(0)).startActivityForResult(any(), eq(ADD_FINGERPRINT_REQUEST));
+        verify(mFragmentTransaction).add(any(), eq(BiometricsSplitScreenDialog.class.getName()));
+    }
+
+    @Test
+    public void testChooseLockKeyForFingerprint() {
+        setUpFragment(true);
+        ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(
+                Intent.class);
+        verify(mFragment).startActivityForResult(intentArgumentCaptor.capture(),
+                eq(CHOOSE_LOCK_GENERIC_REQUEST));
+
+        Intent intent = intentArgumentCaptor.getValue();
+        assertThat(intent.getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT,
+                false)).isTrue();
+    }
+
+    private void setUpFragment(boolean showChooseLock) {
         Intent intent = new Intent();
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 1L);
+        if (!showChooseLock) {
+            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
+            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 1L);
+        }
+
         mActivity = spy(Robolectric.buildActivity(FragmentActivity.class, intent).get());
         mContext = spy(ApplicationProvider.getApplicationContext());
 
@@ -112,49 +169,12 @@ public class FingerprintSettingsFragmentTest {
         doNothing().when(mFragment).startActivityForResult(any(Intent.class), anyInt());
 
         setSensor();
-    }
 
-    @After
-    public void tearDown() {
-        ShadowUtils.reset();
-    }
-
-    @Test
-    public void testAddFingerprint_inFullScreen_noDialog() {
         // Start fragment
         mFragment.onAttach(mContext);
         mFragment.onCreate(null);
         mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);
         mFragment.onResume();
-
-        // Click "Add Fingerprint"
-        final Preference preference = new Preference(mContext);
-        preference.setKey(KEY_FINGERPRINT_ADD);
-        mFragment.onPreferenceTreeClick(preference);
-
-        verify(mFragment).startActivityForResult(any(), eq(ADD_FINGERPRINT_REQUEST));
-        verify(mFragmentTransaction, never()).add(any(),
-                eq(BiometricsSplitScreenDialog.class.getName()));
-
-    }
-
-    @Test
-    public void testAddFingerprint_inMultiWindow_showsDialog() {
-        // Start fragment
-        mFragment.onAttach(mContext);
-        mFragment.onCreate(null);
-        mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);
-        mFragment.onResume();
-
-        doReturn(true).when(mActivity).isInMultiWindowMode();
-
-        // Click "Add Fingerprint"
-        final Preference preference = new Preference(mContext);
-        preference.setKey(KEY_FINGERPRINT_ADD);
-        mFragment.onPreferenceTreeClick(preference);
-
-        verify(mFragment, times(0)).startActivityForResult(any(), eq(ADD_FINGERPRINT_REQUEST));
-        verify(mFragmentTransaction).add(any(), eq(BiometricsSplitScreenDialog.class.getName()));
     }
 
     private void setSensor() {
