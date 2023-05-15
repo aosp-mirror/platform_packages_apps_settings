@@ -23,6 +23,7 @@ import com.android.settings.applications.ApplicationFeatureProvider
 import com.android.settings.biometrics.face.FaceFeatureProvider
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider
 import com.android.settings.bluetooth.BluetoothFeatureProvider
+import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
 import com.android.settings.dashboard.DashboardFeatureProvider
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider
@@ -144,6 +145,11 @@ abstract class FeatureFactory {
      * Retrieves implementation for keyboard settings feature.
      */
     abstract val keyboardSettingsFeatureProvider: KeyboardSettingsFeatureProvider
+
+    /**
+     * Retrieves implementation for stylus feature.
+     */
+    abstract val stylusFeatureProvider: StylusFeatureProvider
 
     companion object {
         private var _factory: FeatureFactory? = null
