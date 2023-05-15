@@ -56,6 +56,7 @@ import android.os.Vibrator;
 import android.view.Display;
 import android.view.Surface;
 import android.view.View;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -314,11 +315,17 @@ public class FingerprintEnrollEnrollingTest {
     @Test
     public void fingerprintUdfpsOverlayEnrollment_descriptionViewGoneWithOverlap() {
         initializeActivityWithoutCreate(TYPE_UDFPS_OPTICAL);
-        doReturn(true).when(mActivity).hasOverlap(any(), any());
         when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_0);
         createActivity();
 
-        final GlifLayout defaultLayout = spy(mActivity.findViewById(R.id.setup_wizard_layout));
+        final UdfpsEnrollEnrollingView defaultLayout = spy(
+                mActivity.findViewById(R.id.setup_wizard_layout));
+        doReturn(true).when(defaultLayout).hasOverlap(any(), any());
+
+        // Somehow spy doesn't work, and we need to call initView manually.
+        defaultLayout.initView(mFingerprintManager.getSensorPropertiesInternal().get(0),
+                mActivity.mUdfpsEnrollHelper,
+                mActivity.getSystemService(AccessibilityManager.class));
         final TextView descriptionTextView = defaultLayout.getDescriptionTextView();
 
         defaultLayout.getViewTreeObserver().dispatchOnDraw();
@@ -328,11 +335,17 @@ public class FingerprintEnrollEnrollingTest {
     @Test
     public void fingerprintUdfpsOverlayEnrollment_descriptionViewVisibleWithoutOverlap() {
         initializeActivityWithoutCreate(TYPE_UDFPS_OPTICAL);
-        doReturn(false).when(mActivity).hasOverlap(any(), any());
         when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_0);
         createActivity();
 
-        final GlifLayout defaultLayout = spy(mActivity.findViewById(R.id.setup_wizard_layout));
+        final UdfpsEnrollEnrollingView defaultLayout = spy(
+                mActivity.findViewById(R.id.setup_wizard_layout));
+        doReturn(false).when(defaultLayout).hasOverlap(any(), any());
+
+        // Somehow spy doesn't work, and we need to call initView manually.
+        defaultLayout.initView(mFingerprintManager.getSensorPropertiesInternal().get(0),
+                mActivity.mUdfpsEnrollHelper,
+                mActivity.getSystemService(AccessibilityManager.class));
         final TextView descriptionTextView = defaultLayout.getDescriptionTextView();
 
         defaultLayout.getViewTreeObserver().dispatchOnDraw();
@@ -578,7 +591,6 @@ public class FingerprintEnrollEnrollingTest {
         mContext = spy(RuntimeEnvironment.application);
         mActivity = spy(FingerprintEnrollEnrolling.class);
 
-        when(mFingerprintManager.getSensorPropertiesInternal()).thenReturn(props);
         when(mContext.getDisplay()).thenReturn(mMockDisplay);
         when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_0);
 
