@@ -91,11 +91,12 @@ public final class BatteryBackupHelper implements BackupHelper {
 
     @Override
     public void restoreEntity(BackupDataInputStream data) {
-        BatterySettingsMigrateChecker.verifyConfiguration(mContext);
+        BatterySettingsMigrateChecker.verifySaverConfiguration(mContext);
         if (!isOwner() || data == null || data.size() == 0) {
             Log.w(TAG, "ignore restoreEntity() for non-owner or empty data");
             return;
         }
+
         if (KEY_OPTIMIZATION_LIST.equals(data.getKey())) {
             final int dataSize = data.size();
             final byte[] dataBytes = new byte[dataSize];
@@ -105,7 +106,10 @@ public final class BatteryBackupHelper implements BackupHelper {
                 Log.e(TAG, "failed to load BackupDataInputStream", e);
                 return;
             }
-            restoreOptimizationMode(dataBytes);
+            final int restoreCount = restoreOptimizationMode(dataBytes);
+            if (restoreCount > 0) {
+                BatterySettingsMigrateChecker.verifyOptimizationModes(mContext);
+            }
         }
     }
 
@@ -175,17 +179,17 @@ public final class BatteryBackupHelper implements BackupHelper {
     }
 
     @VisibleForTesting
-    void restoreOptimizationMode(byte[] dataBytes) {
+    int restoreOptimizationMode(byte[] dataBytes) {
         final long timestamp = System.currentTimeMillis();
         final String dataContent = new String(dataBytes, StandardCharsets.UTF_8);
         if (dataContent == null || dataContent.isEmpty()) {
             Log.w(TAG, "no data found in the restoreOptimizationMode()");
-            return;
+            return 0;
         }
         final String[] appConfigurations = dataContent.split(BatteryBackupHelper.DELIMITER);
         if (appConfigurations == null || appConfigurations.length == 0) {
             Log.w(TAG, "no data found from the split() processing");
-            return;
+            return 0;
         }
         int restoreCount = 0;
         for (int index = 0; index < appConfigurations.length; index++) {
@@ -217,12 +221,30 @@ public final class BatteryBackupHelper implements BackupHelper {
         }
         Log.d(TAG, String.format("restoreOptimizationMode() count=%d in %d/ms",
                 restoreCount, (System.currentTimeMillis() - timestamp)));
+        return restoreCount;
     }
 
     /** Dump the app optimization mode backup history data. */
     public static void dumpHistoricalData(Context context, PrintWriter writer) {
         BatteryHistoricalLogUtil.printBatteryOptimizeHistoricalLog(
                 getSharedPreferences(context), writer);
+    }
+
+    static boolean isOwner() {
+        return UserHandle.myUserId() == UserHandle.USER_SYSTEM;
+    }
+
+    static BatteryOptimizeUtils newBatteryOptimizeUtils(
+            Context context, String packageName, BatteryOptimizeUtils testOptimizeUtils) {
+        final int uid = BatteryUtils.getInstance(context).getPackageUid(packageName);
+        if (uid == BatteryUtils.UID_NULL) {
+            return null;
+        }
+        final BatteryOptimizeUtils batteryOptimizeUtils =
+                testOptimizeUtils != null
+                        ? testOptimizeUtils /*testing only*/
+                        : new BatteryOptimizeUtils(context, uid, packageName);
+        return batteryOptimizeUtils;
     }
 
     @VisibleForTesting
@@ -233,14 +255,11 @@ public final class BatteryBackupHelper implements BackupHelper {
 
     private void restoreOptimizationMode(
             String packageName, @BatteryOptimizeUtils.OptimizationMode int mode) {
-        final int uid = BatteryUtils.getInstance(mContext).getPackageUid(packageName);
-        if (uid == BatteryUtils.UID_NULL) {
+        final BatteryOptimizeUtils batteryOptimizeUtils =
+                newBatteryOptimizeUtils(mContext, packageName, mBatteryOptimizeUtils);
+        if (batteryOptimizeUtils == null) {
             return;
         }
-        final BatteryOptimizeUtils batteryOptimizeUtils =
-                mBatteryOptimizeUtils != null
-                        ? mBatteryOptimizeUtils /*testing only*/
-                        : new BatteryOptimizeUtils(mContext, uid, packageName);
         batteryOptimizeUtils.setAppUsageState(
                 mode, BatteryOptimizeHistoricalLogEntry.Action.RESTORE);
         Log.d(TAG, String.format("restore:%s mode=%d", packageName, mode));
@@ -293,9 +312,5 @@ public final class BatteryBackupHelper implements BackupHelper {
         } catch (IOException e) {
             Log.e(TAG, "writeBackupData() is failed for " + dataKey, e);
         }
-    }
-
-    private static boolean isOwner() {
-        return UserHandle.myUserId() == UserHandle.USER_SYSTEM;
     }
 }
