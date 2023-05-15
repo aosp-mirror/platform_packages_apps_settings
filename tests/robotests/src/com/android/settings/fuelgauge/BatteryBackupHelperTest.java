@@ -160,34 +160,6 @@ public final class BatteryBackupHelperTest {
     }
 
     @Test
-    public void performBackup_oneFullPowerListElement_backupFullPowerListData()
-            throws Exception {
-        final String[] fullPowerList = {"com.android.package"};
-        doReturn(fullPowerList).when(mDeviceController).getFullPowerWhitelist();
-
-        mBatteryBackupHelper.performBackup(null, mBackupDataOutput, null);
-
-        final byte[] expectedBytes = fullPowerList[0].getBytes();
-        verify(mBackupDataOutput).writeEntityHeader(
-                BatteryBackupHelper.KEY_FULL_POWER_LIST, expectedBytes.length);
-        verify(mBackupDataOutput).writeEntityData(expectedBytes, expectedBytes.length);
-    }
-
-    @Test
-    public void performBackup_backupFullPowerListData() throws Exception {
-        final String[] fullPowerList = {"com.android.package1", "com.android.package2"};
-        doReturn(fullPowerList).when(mDeviceController).getFullPowerWhitelist();
-
-        mBatteryBackupHelper.performBackup(null, mBackupDataOutput, null);
-
-        final String expectedResult = fullPowerList[0] + DELIMITER + fullPowerList[1];
-        final byte[] expectedBytes = expectedResult.getBytes();
-        verify(mBackupDataOutput).writeEntityHeader(
-                BatteryBackupHelper.KEY_FULL_POWER_LIST, expectedBytes.length);
-        verify(mBackupDataOutput).writeEntityData(expectedBytes, expectedBytes.length);
-    }
-
-    @Test
     public void performBackup_nonOwner_ignoreAllBackupAction() throws Exception {
         ShadowUserHandle.setUid(1);
         final String[] fullPowerList = {"com.android.package"};
@@ -283,7 +255,7 @@ public final class BatteryBackupHelperTest {
 
     @Test
     public void restoreEntity_incorrectDataKey_notReadBackupData() throws Exception {
-        final String incorrectDataKey = BatteryBackupHelper.KEY_FULL_POWER_LIST;
+        final String incorrectDataKey = "incorrect_data_key";
         mockBackupData(30 /*dataSize*/, incorrectDataKey);
 
         mBatteryBackupHelper.restoreEntity(mBackupDataInputStream);
