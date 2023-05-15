@@ -56,24 +56,32 @@ public class AutoclickPreferenceControllerTest {
 
     @Test
     public void getSummary_disabledAutoclick_shouldReturnOffSummary() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, OFF);
+        setAutoClickEnabled(false);
 
-        assertThat(mController.getSummary())
-                .isEqualTo(mContext.getText(R.string.accessibility_feature_state_off));
+        assertThat(mController.getSummary().toString())
+                .isEqualTo(mContext.getText(R.string.autoclick_disabled));
     }
 
     @Test
     public void getSummary_enabledAutoclick_shouldReturnOnSummary() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, ON);
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY, AUTOCLICK_DELAY_DEFAULT);
+        setAutoClickEnabled(true);
+        setAutoClickDelayed(AUTOCLICK_DELAY_DEFAULT);
+
 
         assertThat(mController.getSummary().toString())
                 .isEqualTo(AutoclickUtils.getAutoclickDelaySummary(
                         mContext,
                         R.string.accessibilty_autoclick_preference_subtitle_medium_delay,
                         AUTOCLICK_DELAY_DEFAULT).toString());
+    }
+
+    private void setAutoClickEnabled(boolean enabled) {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, enabled ? ON : OFF);
+    }
+
+    private void setAutoClickDelayed(int delayedInMs) {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY, delayedInMs);
     }
 }
