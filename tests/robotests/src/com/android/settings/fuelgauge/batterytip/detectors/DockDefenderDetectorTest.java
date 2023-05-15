@@ -83,7 +83,7 @@ public class DockDefenderDetectorTest {
 
     @Test
     public void testDetect_dockDefenderActive() {
-        mBatteryInfo.isOverheated = true;
+        mBatteryInfo.isBatteryDefender = true;
         doReturn(true).when(mFakeFeatureFactory.powerUsageFeatureProvider).isExtraDefend();
 
         BatteryTip batteryTip = mDockDefenderDetector.detect();
@@ -95,7 +95,7 @@ public class DockDefenderDetectorTest {
 
     @Test
     public void testDetect_dockDefenderFutureBypass() {
-        mBatteryInfo.isOverheated = false;
+        mBatteryInfo.isBatteryDefender = false;
         doReturn(false).when(mFakeFeatureFactory.powerUsageFeatureProvider).isExtraDefend();
 
         BatteryTip batteryTip = mDockDefenderDetector.detect();
@@ -107,7 +107,7 @@ public class DockDefenderDetectorTest {
 
     @Test
     public void testDetect_overheatedTrue_dockDefenderDisabled() {
-        mBatteryInfo.isOverheated = true;
+        mBatteryInfo.isBatteryDefender = true;
         doReturn(false).when(mFakeFeatureFactory.powerUsageFeatureProvider).isExtraDefend();
 
         BatteryTip batteryTip = mDockDefenderDetector.detect();
@@ -131,7 +131,7 @@ public class DockDefenderDetectorTest {
     @Test
     public void testDetect_overheatedTrueAndDockDefenderNotTriggered_dockDefenderDisabled() {
         doReturn(false).when(mFakeFeatureFactory.powerUsageFeatureProvider).isExtraDefend();
-        mBatteryInfo.isOverheated = true;
+        mBatteryInfo.isBatteryDefender = true;
 
         BatteryTip batteryTip = mDockDefenderDetector.detect();
 
