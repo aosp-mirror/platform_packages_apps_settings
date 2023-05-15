@@ -20,6 +20,7 @@ message BatteryOptimizeHistoricalLogEntry {
     RESET = 3;
     RESTORE = 4;
     BACKUP = 5;
+    FORCE_RESET = 6;
   }
 
   optional string package_name = 1;
