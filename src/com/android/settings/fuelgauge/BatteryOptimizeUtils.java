@@ -128,11 +128,10 @@ public class BatteryOptimizeUtils {
                 mContext, mode, mUid, mPackageName, mBatteryUtils, mPowerAllowListBackend, action);
     }
 
-    /**
-     * Return {@code true} if package name is valid (can get an uid).
-     */
-    public boolean isValidPackageName() {
-        return mBatteryUtils.getPackageUid(mPackageName) != BatteryUtils.UID_NULL;
+    /** Return {@code true} if it is disabled for default optimized mode only. */
+    public boolean isDisabledForOptimizeModeOnly() {
+        return getAllowList(mContext).contains(mPackageName)
+                || mBatteryUtils.getPackageUid(mPackageName) == BatteryUtils.UID_NULL;
     }
 
     /**
