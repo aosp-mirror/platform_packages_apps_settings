@@ -55,7 +55,6 @@ public final class BatteryBackupHelper implements BackupHelper {
 
     static final String DELIMITER = ",";
     static final String DELIMITER_MODE = ":";
-    static final String KEY_FULL_POWER_LIST = "full_power_list";
     static final String KEY_OPTIMIZATION_LIST = "optimization_mode_list";
 
     @VisibleForTesting
@@ -83,7 +82,7 @@ public final class BatteryBackupHelper implements BackupHelper {
             Log.w(TAG, "ignore performBackup() for non-owner or empty data");
             return;
         }
-        final List<String> allowlistedApps = backupFullPowerList(data);
+        final List<String> allowlistedApps = getFullPowerList();
         if (allowlistedApps != null) {
             backupOptimizationMode(data, allowlistedApps);
         }
@@ -117,7 +116,7 @@ public final class BatteryBackupHelper implements BackupHelper {
     public void writeNewStateDescription(ParcelFileDescriptor newState) {
     }
 
-    private List<String> backupFullPowerList(BackupDataOutput data) {
+    private List<String> getFullPowerList() {
         final long timestamp = System.currentTimeMillis();
         String[] allowlistedApps;
         try {
@@ -131,10 +130,7 @@ public final class BatteryBackupHelper implements BackupHelper {
             Log.w(TAG, "no data found in the getFullPowerList()");
             return new ArrayList<>();
         }
-
-        final String allowedApps = String.join(DELIMITER, allowlistedApps);
-        writeBackupData(data, KEY_FULL_POWER_LIST, allowedApps);
-        Log.d(TAG, String.format("backup getFullPowerList() size=%d in %d/ms",
+        Log.d(TAG, String.format("getFullPowerList() size=%d in %d/ms",
                 allowlistedApps.length, (System.currentTimeMillis() - timestamp)));
         return Arrays.asList(allowlistedApps);
     }
