@@ -75,6 +75,9 @@ public class ClonedAppsPreferenceController extends BasePreferenceController
     }
 
     private void updatePreferenceSummary() {
+        if (!isAvailable()) {
+            return;
+        }
         new AsyncTask<Void, Void, Integer[]>() {
 
             @Override
