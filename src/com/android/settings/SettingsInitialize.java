@@ -37,9 +37,9 @@ import android.os.UserManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.window.embedding.SplitController;
 
 import com.android.settings.Settings.CreateShortcutActivity;
+import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.homepage.DeepLinkHomepageActivity;
 import com.android.settings.search.SearchStateReceiver;
 import com.android.settingslib.utils.ThreadUtils;
@@ -166,7 +166,7 @@ public class SettingsInitialize extends BroadcastReceiver {
                 DeepLinkHomepageActivity.class);
         final ComponentName searchStateReceiver = new ComponentName(context,
                 SearchStateReceiver.class);
-        final int enableState = SplitController.getInstance(context).isSplitSupported()
+        final int enableState = ActivityEmbeddingUtils.isSettingsSplitEnabled(context)
                 ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
                 : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
         pm.setComponentEnabledSetting(deepLinkHome, enableState, PackageManager.DONT_KILL_APP);

@@ -164,6 +164,7 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
         if (summary != null) {
             mPreference.setSummary(summary);
         }
+        Log.d(TAG, "updateBatteryStatus: " + label + " summary: " + summary);
     }
 
     @VisibleForTesting

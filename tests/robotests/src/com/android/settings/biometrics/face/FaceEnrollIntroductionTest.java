@@ -32,7 +32,6 @@ import static com.google.common.truth.Truth.assertWithMessage;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -61,6 +60,7 @@ import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowSensorPrivacyManager;
@@ -98,7 +98,8 @@ import java.util.List;
         ShadowUserManager.class,
         ShadowUtils.class,
         ShadowDevicePolicyManager.class,
-        ShadowSensorPrivacyManager.class
+        ShadowSensorPrivacyManager.class,
+        SettingsShadowResources.class
 })
 public class FaceEnrollIntroductionTest {
 
@@ -188,7 +189,6 @@ public class FaceEnrollIntroductionTest {
         mController = Robolectric.buildActivity(
                 TestFaceEnrollIntroduction.class, testIntent);
         mActivity = (TestFaceEnrollIntroduction) spy(mController.get());
-        doReturn(mFaceManager).when(mActivity).getFaceManager();
         when(mActivity.getPostureGuidanceIntent()).thenReturn(null);
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(mFaceManager);
@@ -313,11 +313,15 @@ public class FaceEnrollIntroductionTest {
     @Test
     public void testFaceEnrollIntroduction_hasDescription_weakFace() throws Exception {
         setupActivity();
+        SettingsShadowResources.overrideResource(
+                R.bool.config_face_intro_show_less_secure,
+                true);
         verify(mFaceManager).addAuthenticatorsRegisteredCallback(mCaptor.capture());
-        CharSequence desc = getGlifLayout(mActivity).getDescriptionText();
 
-        assertThat(desc.toString()).isEqualTo(
+        assertThat(getGlifLayout(mActivity).getDescriptionText().toString()).isEqualTo(
                 mContext.getString(R.string.security_settings_face_enroll_introduction_message));
+        assertThat(mActivity.findViewById(R.id.info_row_less_secure).getVisibility()).isEqualTo(
+                View.GONE);
 
         List<FaceSensorPropertiesInternal> props = List.of(new FaceSensorPropertiesInternal(
                 0 /* id */,
@@ -329,17 +333,26 @@ public class FaceEnrollIntroductionTest {
                 true /* supportsSelfIllumination */,
                 false /* resetLockoutRequiresChallenge */));
         mCaptor.getValue().onAllAuthenticatorsRegistered(props);
-        desc = getGlifLayout(mActivity).getDescriptionText();
 
-        assertThat(desc.toString()).isEqualTo(
+        assertThat(getGlifLayout(mActivity).getDescriptionText().toString()).isEqualTo(
                 mContext.getString(R.string.security_settings_face_enroll_introduction_message));
+        assertThat(mActivity.findViewById(R.id.info_row_less_secure).getVisibility()).isEqualTo(
+                View.VISIBLE);
     }
 
     @Test
     public void testFaceEnrollIntroduction_hasDescriptionNoLessSecure_strongFace()
             throws Exception {
         setupActivity();
+        SettingsShadowResources.overrideResource(
+                R.bool.config_face_intro_show_less_secure,
+                true);
         verify(mFaceManager).addAuthenticatorsRegisteredCallback(mCaptor.capture());
+
+        assertThat(getGlifLayout(mActivity).getDescriptionText().toString()).isEqualTo(
+                mContext.getString(R.string.security_settings_face_enroll_introduction_message));
+        assertThat(mActivity.findViewById(R.id.info_row_less_secure).getVisibility()).isEqualTo(
+                View.GONE);
 
         List<FaceSensorPropertiesInternal> props = List.of(new FaceSensorPropertiesInternal(
                 0 /* id */,
@@ -351,11 +364,12 @@ public class FaceEnrollIntroductionTest {
                 true /* supportsSelfIllumination */,
                 false /* resetLockoutRequiresChallenge */));
         mCaptor.getValue().onAllAuthenticatorsRegistered(props);
-        CharSequence desc = getGlifLayout(mActivity).getDescriptionText();
 
-        assertThat(desc.toString()).isEqualTo(
+        assertThat(getGlifLayout(mActivity).getDescriptionText().toString()).isEqualTo(
                 mContext.getString(
                         R.string.security_settings_face_enroll_introduction_message_class3));
+        assertThat(mActivity.findViewById(R.id.info_row_less_secure).getVisibility()).isEqualTo(
+                View.GONE);
     }
 
     @Test

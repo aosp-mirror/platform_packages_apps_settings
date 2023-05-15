@@ -36,6 +36,7 @@ import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.testutils.BatteryTestUtils;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -136,7 +137,7 @@ public class TopLevelBatteryPreferenceControllerTest {
 
     @Test
     public void getDashboardLabel_incompatibleCharger_returnsCorrectLabel() {
-        setupIncompatibleEvent();
+        BatteryTestUtils.setupIncompatibleEvent(mUsbPort, mUsbManager, mUsbPortStatus);
         mController.mPreference = new Preference(mContext);
         BatteryInfo info = new BatteryInfo();
 
@@ -149,15 +150,5 @@ public class TopLevelBatteryPreferenceControllerTest {
         mController.mIsBatteryPresent = false;
         assertThat(mController.getSummary())
                 .isEqualTo(mContext.getString(R.string.battery_missing_message));
-    }
-
-    private void setupIncompatibleEvent() {
-        final List<UsbPort> usbPorts = new ArrayList<>();
-        usbPorts.add(mUsbPort);
-        when(mUsbManager.getPorts()).thenReturn(usbPorts);
-        when(mUsbPort.getStatus()).thenReturn(mUsbPortStatus);
-        when(mUsbPort.supportsComplianceWarnings()).thenReturn(true);
-        when(mUsbPortStatus.isConnected()).thenReturn(true);
-        when(mUsbPortStatus.getComplianceWarnings()).thenReturn(new int[]{1});
     }
 }

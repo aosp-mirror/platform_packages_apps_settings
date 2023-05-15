@@ -16,11 +16,15 @@
 
 package com.android.settings.testutils;
 
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.usb.UsbManager;
+import android.hardware.usb.UsbPort;
+import android.hardware.usb.UsbPortStatus;
 import android.os.BatteryManager;
 import android.os.UserManager;
-
 import androidx.room.Room;
 
 import com.android.settings.fuelgauge.batteryusage.BatteryInformation;
@@ -35,6 +39,9 @@ import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
 import com.google.common.collect.ImmutableList;
 
 import org.robolectric.Shadows;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BatteryTestUtils {
 
@@ -163,6 +170,7 @@ public class BatteryTestUtils {
         }
     }
 
+    /** Gets customized battery changed intent. */
     public static Intent getCustomBatteryIntent(int plugged, int level, int scale, int status) {
         Intent intent = new Intent();
         intent.putExtra(BatteryManager.EXTRA_PLUGGED, plugged);
@@ -171,5 +179,17 @@ public class BatteryTestUtils {
         intent.putExtra(BatteryManager.EXTRA_STATUS, status);
 
         return intent;
+    }
+
+    /** Configures the incompatible charger environment. */
+    public static void setupIncompatibleEvent(
+            UsbPort mockUsbPort, UsbManager mockUsbManager, UsbPortStatus mockUsbPortStatus) {
+        final List<UsbPort> usbPorts = new ArrayList<>();
+        usbPorts.add(mockUsbPort);
+        when(mockUsbManager.getPorts()).thenReturn(usbPorts);
+        when(mockUsbPort.getStatus()).thenReturn(mockUsbPortStatus);
+        when(mockUsbPort.supportsComplianceWarnings()).thenReturn(true);
+        when(mockUsbPortStatus.isConnected()).thenReturn(true);
+        when(mockUsbPortStatus.getComplianceWarnings()).thenReturn(new int[]{1});
     }
 }

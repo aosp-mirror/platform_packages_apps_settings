@@ -70,6 +70,8 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -84,6 +86,8 @@ public final class BatteryBackupHelperTest {
     private static final int UID1 = 1;
 
     private Context mContext;
+    private PrintWriter mPrintWriter;
+    private StringWriter mStringWriter;
     private BatteryBackupHelper mBatteryBackupHelper;
 
     @Mock
@@ -109,6 +113,8 @@ public final class BatteryBackupHelperTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        mStringWriter = new StringWriter();
+        mPrintWriter = new PrintWriter(mStringWriter);
         doReturn(mContext).when(mContext).getApplicationContext();
         doReturn(mAppOpsManager).when(mContext).getSystemService(AppOpsManager.class);
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
@@ -126,6 +132,7 @@ public final class BatteryBackupHelperTest {
     @After
     public void resetShadows() {
         ShadowUserHandle.reset();
+        BatteryBackupHelper.getSharedPreferences(mContext).edit().clear().apply();
     }
 
     @Test
@@ -216,6 +223,8 @@ public final class BatteryBackupHelperTest {
         // 2 for UNRESTRICTED mode and 1 for RESTRICTED mode.
         final String expectedResult = PACKAGE_NAME1 + ":2," + PACKAGE_NAME2 + ":1,";
         verifyBackupData(expectedResult);
+        verifyDumpHistoryData("com.android.testing.1\taction:BACKUP\tevent:mode: 2");
+        verifyDumpHistoryData("com.android.testing.2\taction:BACKUP\tevent:mode: 1");
     }
 
     @Test
@@ -232,6 +241,7 @@ public final class BatteryBackupHelperTest {
         // "com.android.testing.2" for RESTRICTED mode.
         final String expectedResult = PACKAGE_NAME2 + ":1,";
         verifyBackupData(expectedResult);
+        verifyDumpHistoryData("com.android.testing.2\taction:BACKUP\tevent:mode: 1");
     }
 
     @Test
@@ -248,6 +258,7 @@ public final class BatteryBackupHelperTest {
         // "com.android.testing.2" for RESTRICTED mode.
         final String expectedResult = PACKAGE_NAME2 + ":1,";
         verifyBackupData(expectedResult);
+        verifyDumpHistoryData("com.android.testing.2\taction:BACKUP\tevent:mode: 1");
     }
 
     @Test
@@ -355,6 +366,11 @@ public final class BatteryBackupHelperTest {
     private void mockBackupData(int dataSize, String dataKey) {
         doReturn(dataSize).when(mBackupDataInputStream).size();
         doReturn(dataKey).when(mBackupDataInputStream).getKey();
+    }
+
+    private void verifyDumpHistoryData(String expectedResult) {
+        BatteryBackupHelper.dumpHistoricalData(mContext, mPrintWriter);
+        assertThat(mStringWriter.toString().contains(expectedResult)).isTrue();
     }
 
     private void verifyBackupData(String expectedResult) throws Exception {

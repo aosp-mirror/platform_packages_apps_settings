@@ -78,7 +78,7 @@ public class AccountPersonalDashboardFragment extends DashboardFragment {
                     forceUpdatePreferences();
                 }
             };
-            cmpp.init(this, getFragmentManager(), getIntent(), delegate);
+            cmpp.init(this, getFragmentManager(), getIntent(), delegate, /*isWorkProfile=*/false);
         } else {
             getSettingsLifecycle().addObserver(use(PasswordsPreferenceController.class));
         }

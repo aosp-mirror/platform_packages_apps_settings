@@ -1754,7 +1754,7 @@ public final class DataProcessor {
 
     private static Set<String> getSystemAppsPackageNames(Context context) {
         return sTestSystemAppsPackageNames != null ? sTestSystemAppsPackageNames
-                : AppListRepositoryUtil.getSystemPackageNames(context, context.getUserId(), false);
+                : AppListRepositoryUtil.getSystemPackageNames(context, context.getUserId());
     }
 
     private static Set<Integer> getSystemAppsUids(Context context) {

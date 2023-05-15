@@ -26,6 +26,7 @@ import android.credentials.CredentialProviderInfo;
 import android.graphics.drawable.Drawable;
 import android.service.autofill.AutofillServiceInfo;
 import android.text.TextUtils;
+import android.util.IconDrawableFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,18 +44,22 @@ public final class CombinedProviderInfo {
     private final List<CredentialProviderInfo> mCredentialProviderInfos;
     private final @Nullable AutofillServiceInfo mAutofillServiceInfo;
     private final boolean mIsDefaultAutofillProvider;
-    private final boolean mIsDefaultCredmanProvider;
+    private final boolean mIsPrimaryCredmanProvider;
 
     /** Constructs an information instance from both autofill and credential provider. */
     public CombinedProviderInfo(
             @Nullable List<CredentialProviderInfo> cpis,
             @Nullable AutofillServiceInfo asi,
             boolean isDefaultAutofillProvider,
-            boolean isDefaultCredmanProvider) {
-        mCredentialProviderInfos = new ArrayList<>(cpis);
+            boolean IsPrimaryCredmanProvider) {
+        if (cpis == null) {
+            mCredentialProviderInfos = new ArrayList<>();
+        } else {
+            mCredentialProviderInfos = new ArrayList<>(cpis);
+        }
         mAutofillServiceInfo = asi;
         mIsDefaultAutofillProvider = isDefaultAutofillProvider;
-        mIsDefaultCredmanProvider = isDefaultCredmanProvider;
+        mIsPrimaryCredmanProvider = IsPrimaryCredmanProvider;
     }
 
     /** Returns the credential provider info. */
@@ -79,11 +84,12 @@ public final class CombinedProviderInfo {
 
     /** Returns the app icon. */
     @Nullable
-    public Drawable getAppIcon(@NonNull Context context) {
+    public Drawable getAppIcon(@NonNull Context context, int userId) {
+        IconDrawableFactory factory = IconDrawableFactory.newInstance(context);
         Drawable icon = null;
         ServiceInfo brandingService = getBrandingService();
         if (brandingService != null) {
-            icon = brandingService.loadIcon(context.getPackageManager());
+            icon = factory.getBadgedIcon(brandingService, getApplicationInfo(), userId);
         }
 
         // If the branding service gave us a icon then use that.
@@ -91,8 +97,8 @@ public final class CombinedProviderInfo {
             return icon;
         }
 
-        // Otherwise fallback to the app label and then the package name.
-        return getApplicationInfo().loadIcon(context.getPackageManager());
+        // Otherwise fallback to the app icon and then the package name.
+        return factory.getBadgedIcon(getApplicationInfo(), userId);
     }
 
     /** Returns the app name. */
@@ -149,8 +155,8 @@ public final class CombinedProviderInfo {
     }
 
     /** Returns whether the provider is the default credman provider. */
-    public boolean isDefaultCredmanProvider() {
-        return mIsDefaultCredmanProvider;
+    public boolean isPrimaryCredmanProvider() {
+        return mIsPrimaryCredmanProvider;
     }
 
     /** Returns the settings subtitle. */
@@ -192,7 +198,13 @@ public final class CombinedProviderInfo {
             }
         }
 
-        // TODO(280454916): Add logic here.
+        // If there is a primary cred man provider then return that.
+        for (CombinedProviderInfo cpi : providers) {
+            if (cpi.isPrimaryCredmanProvider()) {
+                return cpi;
+            }
+        }
+
         return null;
     }
 
@@ -250,14 +262,14 @@ public final class CombinedProviderInfo {
             }
 
             // Check if we have any enabled cred man services.
-            boolean isDefaultCredmanProvider = false;
-            if (!cpi.isEmpty()) {
-                isDefaultCredmanProvider = cpi.get(0).isEnabled();
+            boolean isPrimaryCredmanProvider = false;
+            if (cpi != null && !cpi.isEmpty()) {
+                isPrimaryCredmanProvider = cpi.get(0).isPrimary();
             }
 
             cmpi.add(
                     new CombinedProviderInfo(
-                            cpi, selectedAsi, isDefaultAutofillProvider, isDefaultCredmanProvider));
+                            cpi, selectedAsi, isDefaultAutofillProvider, isPrimaryCredmanProvider));
         }
 
         return cmpi;

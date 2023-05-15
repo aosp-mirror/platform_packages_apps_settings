@@ -119,9 +119,9 @@
     <!-- Connected devices settings. Title of the dialog to hint user to pair other ear of the hearing aid device. Shows when only one of the hearing aid device set is connected. [CHAR LIMIT=25] -->
     <string name="bluetooth_pair_other_ear_dialog_title">Pair your other ear</string>
     <!-- Connected devices settings. Message of the dialog to hint user to pair right ear of the hearing aid device. Shows when only left side of hearing aid device set is connected. [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_pair_other_ear_dialog_left_ear_message">Your left hearing aid is connected.\n\nTo pair the right one, make sure it\u2019s turned on and ready to pair.</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_message">Your left hearing device is connected.\n\nTo pair the right one, make sure it\u2019s turned on and ready to pair.</string>
     <!-- Connected devices settings. Message of the dialog to hint user to pair other ear of the hearing aid device. Shows when only right side of the hearing aid device set is connected. [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_pair_other_ear_dialog_right_ear_message">Your right hearing aid is connected.\n\nTo pair the left one, make sure it\u2019s turned on and ready to pair.</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_message">Your right hearing device is connected.\n\nTo pair the left one, make sure it\u2019s turned on and ready to pair.</string>
     <!-- Connected devices settings. Positive button of the dialog to help user to pair right ear of the hearing aid device. Dialog shows when only one of the hearing aid device set is connected. [CHAR LIMIT=20] -->
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button">Pair right ear</string>
     <!-- Connected devices settings. Positive button of the dialog to help user to pair left ear of the hearing aid device. Dialog shows when only one of the hearing aid device set is connected. [CHAR LIMIT=20] -->
@@ -221,14 +221,17 @@
     <!-- UI debug setting: Disable Bluetooth hardware offload [CHAR LIMIT=none] -->
     <string name="bluetooth_disable_hw_offload_dialog_cancel">Cancel</string>
 
-    <!-- Setting Checkbox title for disabling Bluetooth LE Audio feature. [CHAR LIMIT=40] -->
+    <!-- Setting toggle title for disabling Bluetooth LE Audio feature. [CHAR LIMIT=40] -->
     <string name="bluetooth_disable_leaudio">Disable Bluetooth LE audio</string>
-    <!-- Summary of checkbox for disabling Bluetooth LE audio [CHAR LIMIT=none]-->
+    <!-- Summary of toggle for disabling Bluetooth LE audio [CHAR LIMIT=none]-->
     <string name="bluetooth_disable_leaudio_summary">Disables Bluetooth LE audio feature if the device supports LE audio hardware capabilities.</string>
 
-    <!-- Setting Checkbox title for enabling Bluetooth LE Audio Allow List. [CHAR LIMIT=none] -->
+    <!-- Setting toggle title for enabling Bluetooth LE Audio toggle in Device Details. [CHAR LIMIT=40] -->
+    <string name="bluetooth_show_leaudio_device_details">Show LE audio toggle in Device Details</string>
+
+    <!-- Setting toggle title for enabling Bluetooth LE Audio Allow List. [CHAR LIMIT=none] -->
     <string name="bluetooth_enable_leaudio_allow_list">Enable Bluetooth LE audio Allow List</string>
-    <!-- Summary of checkbox for enabling Bluetooth LE audio Allow List [CHAR LIMIT=none]-->
+    <!-- Summary of toggle for enabling Bluetooth LE audio Allow List [CHAR LIMIT=none]-->
     <string name="bluetooth_enable_leaudio_allow_list_summary">Enable Bluetooth LE audio allow list feature.</string>
 
     <!-- Title for Bluetooth device group with media capability group [CHAR LIMIT=none]-->
@@ -815,6 +818,10 @@
     <string name="biometric_settings_intro_with_fingerprint">You can unlock with your watch when your fingerprint isn\u2019t recognized.</string>
      <!-- Introduction shown in face page to explain that watch unlock can be used if face isn't recognized. [CHAR LIMIT=NONE]-->
     <string name="biometric_settings_intro_with_face">You can unlock with your watch when your face isn\u2019t recognized.</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_for"> Use fingerprint or watch to</string>
+    <string name="biometric_settings_use_face_or_watch_for"> Use face or watch to</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_for"> Use face, fingerprint, or watch to</string>
+    <string name="biometric_settings_use_watch_for"> Use watch to</string>
     <!-- Message for a biometric preference toggle, indicating that an action can only be performed by using Face Unlock or Watch Unlock. [CHAR LIMIT=50] -->
     <string name="biometric_settings_use_face_or_watch_preference_summary">Using face or watch</string>
     <!-- Message for a biometric preference toggle, indicating that an action can only be performed by using Fingerprint Unlock or Watch Unlock. [CHAR LIMIT=50] -->
@@ -984,6 +991,8 @@
     <string name="setup_fingerprint_enroll_enrolling_skip_title">Skip fingerprint setup?</string>
     <!-- Content of the dialog shown when the user tries to skip fingerprint setup, asking them to confirm the action [CHAR LIMIT=NONE] -->
     <string name="setup_fingerprint_enroll_enrolling_skip_message">You\u2019ve chosen to use your fingerprint as one way to unlock your phone. If you skip now, you\u2019ll need to set this up later. Setup takes only a minute or so.</string>
+    <!-- Title of dialog shown when the user tries to skip for setup screen lock, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
+    <string name="lock_screen_skip_setup_title">Skip setup for <xliff:g id="options" example="PIN • Face • Fingerprint">%s</xliff:g>?</string>
     <!-- Title of dialog shown when the user tries to skip setting up a PIN, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
     <string name="lock_screen_pin_skip_title">Skip PIN setup?</string>
     <!-- Title of dialog shown when the user tries to skip setting up a PIN, warning them of potential consequences of not doing so [CHAR LIMIT=90]-->
@@ -1081,7 +1090,7 @@
     <!-- Action label for the issue card in Safety Center when no screen lock is set [CHAR LIMIT=50] -->
     <string name="no_screen_lock_issue_action_label">Set screen lock</string>
     <!-- Title of the notification shown by Safety Center when no screen lock is set. This notification is shown in the notification shade, outside of the main Safety Center UI. [CHAR LIMIT=50] -->
-    <string name="no_screen_lock_issue_notification_title">Device has no screen lock</string>
+    <string name="no_screen_lock_issue_notification_title">Set a screen lock</string>
     <!-- Summary/body text of the notification shown by Safety Center when no screen lock is set. This notification is shown in the notification shade, outside of the main Safety Center UI. [CHAR LIMIT=NONE] -->
     <string name="no_screen_lock_issue_notification_text">For added security, set a PIN, pattern, or password for this device.</string>
 
@@ -1496,6 +1505,8 @@
     <string name="bluetooth_companion_app_remove_association_dialog_title">Disconnect App?</string>
     <!-- Bluetooth device details companion apps. The body of confirmation dialog for remove association. [CHAR LIMIT=60] -->
     <string name="bluetooth_companion_app_body"><xliff:g id="app_name" example="App Name">%1$s</xliff:g> app will no longer connect to your <xliff:g id="device_name" example="Device Name">%2$s</xliff:g></string>
+    <!-- Summary of Bluetooth LE Audio toggle in Device Details. [CHAR LIMIT=40] -->
+    <string name="device_details_leaudio_toggle_summary">Experimental. Improves audio quality.</string>
 
     <!--  Bluetooth device details. In the confirmation dialog for unpairing a paired device, this is the label on the button that will complete the unpairing action. -->
     <string name="bluetooth_unpair_dialog_forget_confirm_button">Forget device</string>
@@ -2268,6 +2279,8 @@
     <string name="accessibility_category_work">Work profile accounts - <xliff:g id="managed_by" example="Managed by Corporate application">%s</xliff:g></string>
     <!-- Content description for personal profile accounts group [CHAR LIMIT=NONE] -->
     <string name="accessibility_category_personal">Personal profile accounts</string>
+    <!-- Content description for personal clone accounts group [CHAR LIMIT=NONE] -->
+    <string name="accessibility_category_clone">Clone profile accounts</string>
     <!-- Content description for work profile details page title [CHAR LIMIT=NONE] -->
     <string name="accessibility_work_account_title">Work account - <xliff:g id="managed_by" example="Email provider">%s</xliff:g></string>
     <!-- Content description for personal profile details page title [CHAR LIMIT=NONE] -->
@@ -2291,8 +2304,6 @@
     <string name="auto_rotate_switch_face_based">Face Detection</string>
     <!-- Accessibility description for auto rotate learn more link [CHAR LIMIT=NONE] -->
     <string name="auto_rotate_link_a11y">Learn more about auto-rotate</string>
-    <!-- Accessibility summary text for auto rotate [CHAR LIMIT=60] -->
-    <string name="auto_rotate_summary_a11y">When you move your phone between portrait and landscape</string>
 
     <!-- Display settings screen, screen resolution settings title [CHAR LIMIT=30] -->
     <string name="screen_resolution_title">Screen resolution</string>
@@ -4661,7 +4672,7 @@
     <!-- Introduction for the Hearing devices page to introduce feature. [CHAR LIMIT=NONE] -->
     <string name="accessibility_hearingaid_intro">You can use hearing aids, cochlear implants, and other amplification devices with your phone</string>
     <!-- Summary for the accessibility preference for hearing aid when not connected. [CHAR LIMIT=50] -->
-    <string name="accessibility_hearingaid_not_connected_summary">No hearing aids connected</string>
+    <string name="accessibility_hearingaid_not_connected_summary">No hearing devices connected</string>
     <!-- Summary for the accessibility preference for hearing aid when adding new devices. [CHAR LIMIT=50] -->
     <string name="accessibility_hearingaid_adding_summary">Add hearing aids</string>
     <!-- Title of the pair instruction dialog. Dialog shows to ask the user to make sure that their hearing aid devices are in pairing mode. [CHAR LIMIT=25] -->
@@ -5174,7 +5185,7 @@
     <!-- Title for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_limited_temporarily_title">Charging optimized to protect your battery</string>
     <!-- Summary for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_limited_temporarily_summary">To help extend your batter\'s lifespan, charging is optimized</string>
+    <string name="battery_tip_limited_temporarily_summary">To help extend your battery\'s lifespan, charging is optimized</string>
     <!-- Title for the battery dock defender future bypass tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_dock_defender_future_bypass_title">Charging optimized to protect your battery</string>
     <!-- Summary for the battery dock defender future bypass tip [CHAR LIMIT=NONE] -->
@@ -10297,7 +10308,16 @@
     <string name="credman_confirmation_message_title">Turn off %1$s\?</string>
 
     <!-- Message of the warning dialog for disabling the credential provider. [CHAR_LIMIT=NONE] -->
-    <string name="credman_confirmation_message">Saved info like addresses or payment methods won\'t be filled in when you sign in. To keep your saved info filled in, set enable a password, passkey and data/or service.</string>
+    <string name="credman_confirmation_message">
+        <![CDATA[
+        <b>Turn off this service?</b>
+        <br/>
+        <br/>
+        Save info like passwords, passkeys, payment methods, and other info won\'t be filled
+        in when you sign in. To use your saved info, choose a password, passkey, or data
+        service.
+        ]]>
+    </string>
 
     <!-- Title of the warning dialog for enabling the credential provider. [CHAR_LIMIT=NONE] -->
     <string name="credman_enable_confirmation_message_title">Use %1$s\?</string>
@@ -12081,7 +12101,4 @@
 
     <!-- Warning message when we try to dock an app not supporting multiple instances split into multiple sides [CHAR LIMIT=NONE] -->
     <string name="dock_multi_instances_not_supported_text">"This app can only be opened in 1 window"</string>
-
-    <!-- [CHAR LIMIT=30] Label used to open Note Task -->
-    <string name="note_task_shortcut_label">Note shortcut</string>
 </resources>

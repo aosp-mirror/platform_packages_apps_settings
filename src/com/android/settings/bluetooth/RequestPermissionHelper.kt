@@ -30,20 +30,20 @@ object RequestPermissionHelper {
         timeout: Int,
         onAllow: () -> Unit,
         onDeny: () -> Unit,
-    ) {
+    ): AlertDialog? {
         if (context.resources.getBoolean(R.bool.auto_confirm_bluetooth_activation_dialog)) {
             // Don't even show the dialog if configured this way
             onAllow()
-            return
+            return null
         }
-        AlertDialog.Builder(context).apply {
+        return AlertDialog.Builder(context).apply {
             setMessage(context.getEnableMessage(timeout, appLabel))
             setPositiveButton(R.string.allow) { _, _ ->
                 if (context.isDisallowBluetooth()) onDeny() else onAllow()
             }
             setNegativeButton(R.string.deny) { _, _ -> onDeny() }
             setOnCancelListener { onDeny() }
-        }.show()
+        }.create()
     }
 
     fun requestDisable(
@@ -51,18 +51,18 @@ object RequestPermissionHelper {
         appLabel: CharSequence?,
         onAllow: () -> Unit,
         onDeny: () -> Unit,
-    ) {
+    ): AlertDialog? {
         if (context.resources.getBoolean(R.bool.auto_confirm_bluetooth_activation_dialog)) {
             // Don't even show the dialog if configured this way
             onAllow()
-            return
+            return null
         }
-        AlertDialog.Builder(context).apply {
+        return AlertDialog.Builder(context).apply {
             setMessage(context.getDisableMessage(appLabel))
             setPositiveButton(R.string.allow) { _, _ -> onAllow() }
             setNegativeButton(R.string.deny) { _, _ -> onDeny() }
             setOnCancelListener { onDeny() }
-        }.show()
+        }.create()
     }
 }
 

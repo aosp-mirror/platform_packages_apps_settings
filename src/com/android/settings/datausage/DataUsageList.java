@@ -165,11 +165,7 @@ public class DataUsageList extends DataUsageBaseFragment
         }
 
         processArgument();
-        mMobileNetworkRepository = MobileNetworkRepository.getInstance(getContext());
-        ThreadUtils.postOnBackgroundThread(() -> {
-            mSubscriptionInfoEntity = mMobileNetworkRepository.getSubInfoById(
-                    String.valueOf(mSubId));
-        });
+        updateSubscriptionInfoEntity();
         mDataStateListener = new MobileDataEnabledListener(activity, this);
     }
 
@@ -292,6 +288,15 @@ public class DataUsageList extends DataUsageBaseFragment
                 }
             }
         }
+    }
+
+    @VisibleForTesting
+    void updateSubscriptionInfoEntity() {
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(getContext());
+        ThreadUtils.postOnBackgroundThread(() -> {
+            mSubscriptionInfoEntity = mMobileNetworkRepository.getSubInfoById(
+                    String.valueOf(mSubId));
+        });
     }
 
     /**
@@ -503,11 +508,13 @@ public class DataUsageList extends DataUsageBaseFragment
         Collections.sort(items);
         final List<String> packageNames = Arrays.asList(getContext().getResources().getStringArray(
                 R.array.datausage_hiding_carrier_service_package_names));
+        // When there is no specified SubscriptionInfo, Wi-Fi data usage will be displayed.
+        // In this case, the carrier service package also needs to be hidden.
         boolean shouldHidePackageName = mSubscriptionInfoEntity != null
                 ? Arrays.stream(getContext().getResources().getIntArray(
                         R.array.datausage_hiding_carrier_service_carrier_id))
                 .anyMatch(carrierId -> (carrierId == mSubscriptionInfoEntity.carrierId))
-                : false;
+                : true;
 
         for (int i = 0; i < items.size(); i++) {
             UidDetail detail = mUidDetailProvider.getUidDetail(items.get(i).key, true);
