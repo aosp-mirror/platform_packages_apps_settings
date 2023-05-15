@@ -290,8 +290,8 @@ public class BatteryHeaderPreferenceControllerTest {
     }
 
     @Test
-    public void updatePreference_isOverheat_showEmptyText() {
-        mBatteryInfo.isOverheated = true;
+    public void updatePreference_isBatteryDefender_showEmptyText() {
+        mBatteryInfo.isBatteryDefender = true;
 
         mController.updateHeaderPreference(mBatteryInfo);
 
