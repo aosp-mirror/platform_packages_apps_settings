@@ -42,8 +42,8 @@ public class UnrestrictedPreferenceController extends AbstractPreferenceControll
     @Override
     public void updateState(Preference preference) {
 
-        if (!mBatteryOptimizeUtils.isValidPackageName()) {
-            Log.d(TAG, "invalid package name, disable pref");
+        if (mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()) {
+            Log.d(TAG, "disable preference for " + mBatteryOptimizeUtils.getPackageName());
             preference.setEnabled(false);
             return;
         } else {
