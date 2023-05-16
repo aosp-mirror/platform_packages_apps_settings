@@ -17,6 +17,7 @@
 package com.android.settings.development.graphicsdriver;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.GraphicsEnvironment;
 import android.os.SystemProperties;
 import android.text.TextUtils;
@@ -33,9 +34,7 @@ import com.android.settings.development.RebootConfirmationDialogFragment;
 import com.android.settings.development.RebootConfirmationDialogHost;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-/**
- * Controller to handle the events when user toggles this developer option switch: Enable ANGLE
- */
+/** Controller to handle the events when user toggles this developer option switch: Enable ANGLE */
 public class GraphicsDriverEnableAngleAsSystemDriverController
         extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener,
@@ -50,14 +49,15 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
 
     private final GraphicsDriverSystemPropertiesWrapper mSystemProperties;
 
+    private boolean mShouldToggleSwitchBackOnRebootDialogDismiss;
+
     @VisibleForTesting
     static final String PROPERTY_RO_GFX_ANGLE_SUPPORTED = "ro.gfx.angle.supported";
 
     @VisibleForTesting
     static final String PROPERTY_PERSISTENT_GRAPHICS_EGL = "persist.graphics.egl";
 
-    @VisibleForTesting
-    static final String ANGLE_DRIVER_SUFFIX = "angle";
+    @VisibleForTesting static final String ANGLE_DRIVER_SUFFIX = "angle";
 
     @VisibleForTesting
     static class Injector {
@@ -87,6 +87,10 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
         super(context);
         mFragment = fragment;
         mSystemProperties = injector.createSystemPropertiesWrapper();
+        // By default, when the reboot dialog is dismissed we want to toggle the switch back.
+        // Exception is when user chooses to reboot now, the switch should keep its current value
+        // and persist its' state over reboot.
+        mShouldToggleSwitchBackOnRebootDialogDismiss = true;
     }
 
     @Override
@@ -108,10 +112,11 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
     @VisibleForTesting
     void showRebootDialog() {
         RebootConfirmationDialogFragment.show(
-                mFragment, R.string.reboot_dialog_enable_angle_as_system_driver,
-                R.string.cancel, this);
+                mFragment,
+                R.string.reboot_dialog_enable_angle_as_system_driver,
+                R.string.cancel,
+                this);
     }
-
 
     @Override
     public void updateState(Preference preference) {
@@ -120,8 +125,9 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
         final String currentGlesDriver =
                 mSystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL, "");
         final boolean isAngle = TextUtils.equals(ANGLE_DRIVER_SUFFIX, currentGlesDriver);
-        final boolean isAngleSupported = TextUtils
-                .equals(mSystemProperties.get(PROPERTY_RO_GFX_ANGLE_SUPPORTED, ""), "true");
+        final boolean isAngleSupported =
+                TextUtils.equals(
+                        mSystemProperties.get(PROPERTY_RO_GFX_ANGLE_SUPPORTED, ""), "true");
         ((SwitchPreference) mPreference).setChecked(isAngle && isAngleSupported);
         ((SwitchPreference) mPreference).setEnabled(isAngleSupported);
     }
@@ -130,8 +136,9 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
     protected void onDeveloperOptionsSwitchEnabled() {
         // only enable the switch if ro.gfx.angle.supported is true
         // we use ro.gfx.angle.supported to indicate if ANGLE libs are installed under /vendor
-        final boolean isAngleSupported = TextUtils
-                .equals(mSystemProperties.get(PROPERTY_RO_GFX_ANGLE_SUPPORTED, ""), "true");
+        final boolean isAngleSupported =
+                TextUtils.equals(
+                        mSystemProperties.get(PROPERTY_RO_GFX_ANGLE_SUPPORTED, ""), "true");
         ((SwitchPreference) mPreference).setEnabled(isAngleSupported);
     }
 
@@ -145,9 +152,7 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
         ((SwitchPreference) mPreference).setEnabled(false);
     }
 
-    @Override
-    public void onRebootCancelled() {
-        // if user presses button "Cancel", do not reboot the device, and toggles switch back
+    void toggleSwitchBack() {
         final String currentGlesDriver =
                 mSystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL, "");
         if (TextUtils.equals(ANGLE_DRIVER_SUFFIX, currentGlesDriver)) {
@@ -168,5 +173,41 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
 
         // if persist.graphics.egl holds values other than the above two, log error message
         Log.e(TAG, "Invalid persist.graphics.egl property value");
+    }
+
+    @VisibleForTesting
+    void rebootDevice(Context context) {
+        final Intent intent = new Intent(Intent.ACTION_REBOOT);
+        context.startActivity(intent);
+    }
+
+    @Override
+    public void onRebootConfirmed(Context context) {
+        // User chooses to reboot now, do not toggle switch back
+        mShouldToggleSwitchBackOnRebootDialogDismiss = false;
+
+        // Reboot the device
+        rebootDevice(context);
+    }
+
+    @Override
+    public void onRebootCancelled() {
+        // User chooses to cancel reboot, toggle switch back
+        mShouldToggleSwitchBackOnRebootDialogDismiss = true;
+    }
+
+    @Override
+    public void onRebootDialogDismissed() {
+        // If reboot dialog is dismissed either from
+        // 1) User clicks cancel
+        // 2) User taps phone screen area outside of reboot dialog
+        // do not reboot the device, and toggles switch back.
+        if (mShouldToggleSwitchBackOnRebootDialogDismiss) {
+            toggleSwitchBack();
+        }
+
+        // Reset the flag so that the default option is to toggle switch back
+        // on reboot dialog dismissed.
+        mShouldToggleSwitchBackOnRebootDialogDismiss = true;
     }
 }
