@@ -284,6 +284,20 @@ public final class BatteryBackupHelperTest {
     }
 
     @Test
+    public void restoreEntity_verifyConfigurationOneTimeOnly() {
+        final int invalidScheduledLevel = 5;
+        TestUtils.setScheduledLevel(mContext, invalidScheduledLevel);
+        mBatteryBackupHelper.restoreEntity(mBackupDataInputStream);
+        TestUtils.setScheduledLevel(mContext, invalidScheduledLevel);
+
+        // Invoke the restoreEntity() method 2nd time.
+        mBatteryBackupHelper.restoreEntity(mBackupDataInputStream);
+
+        assertThat(TestUtils.getScheduledLevel(mContext))
+                .isEqualTo(invalidScheduledLevel);
+    }
+
+    @Test
     public void restoreOptimizationMode_nullBytesData_skipRestore() throws Exception {
         mBatteryBackupHelper.restoreOptimizationMode(new byte[0]);
         verifyNoInteractions(mBatteryOptimizeUtils);
