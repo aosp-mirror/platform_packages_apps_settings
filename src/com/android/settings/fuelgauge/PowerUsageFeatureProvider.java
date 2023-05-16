@@ -166,4 +166,14 @@ public interface PowerUsageFeatureProvider {
      * Returns {@link Set} for ignoring task root class names for screen on time
      */
     Set<String> getIgnoreScreenOnTimeTaskRootSet();
+
+    /**
+     * Returns the customized device build information for data backup
+     */
+    String getBuildMetadata1(Context context);
+
+    /**
+     * Returns the customized device build information for data backup
+     */
+    String getBuildMetadata2(Context context);
 }
