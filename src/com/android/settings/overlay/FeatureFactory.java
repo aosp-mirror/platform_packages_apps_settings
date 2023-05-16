@@ -51,6 +51,9 @@ import com.android.settings.vpn2.AdvancedVpnFeatureProvider;
 import com.android.settings.wifi.WifiTrackerLibProvider;
 import com.android.settings.wifi.factory.WifiFeatureProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.tools.r8.keepanno.annotations.KeepItemKind;
+import com.android.tools.r8.keepanno.annotations.KeepTarget;
+import com.android.tools.r8.keepanno.annotations.UsesReflection;
 
 /**
  * Abstract class for creating feature controllers. Allows OEM implementations to define their own
@@ -70,6 +73,14 @@ public abstract class FeatureFactory {
      * already exist. Uses the value of {@link R.string#config_featureFactory} to instantiate
      * a factory implementation.
      */
+    @UsesReflection(
+            description = "This method instantiates subclasses of FeatureFactory via reflection.",
+            value = {
+                @KeepTarget(
+                    kind = KeepItemKind.CLASS_AND_MEMBERS,
+                    extendsClassConstant = FeatureFactory.class,
+                    methodName = "<init>")
+            })
     public static FeatureFactory getFactory(Context context) {
         if (sFactory != null) {
             return sFactory;
