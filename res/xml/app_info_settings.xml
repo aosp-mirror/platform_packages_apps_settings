@@ -193,6 +193,8 @@
             android:key="long_background_tasks"
             android:title="@string/long_background_tasks_title"
             android:summary="@string/summary_placeholder"
+            settings:isPreferenceVisible="false"
+            settings:searchable="false"
             settings:controller="com.android.settings.applications.appinfo.LongBackgroundTasksDetailsPreferenceController" />
 
     </PreferenceCategory>
