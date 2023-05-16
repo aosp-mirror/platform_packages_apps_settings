@@ -296,6 +296,10 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     public void onDestroyView() {
         super.onDestroyView();
         removeActionBarToggleSwitch();
+        final boolean isTooltipWindowShowing = mTooltipWindow != null && mTooltipWindow.isShowing();
+        if (isTooltipWindowShowing) {
+            mTooltipWindow.dismiss();
+        }
     }
 
     @Override

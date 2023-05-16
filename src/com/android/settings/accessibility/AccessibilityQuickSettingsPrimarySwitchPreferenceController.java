@@ -66,6 +66,10 @@ public abstract class AccessibilityQuickSettingsPrimarySwitchPreferenceControlle
     @Override
     public void onDestroy() {
         mHandler.removeCallbacksAndMessages(null);
+        final boolean isTooltipWindowShowing = mTooltipWindow != null && mTooltipWindow.isShowing();
+        if (isTooltipWindowShowing) {
+            mTooltipWindow.dismiss();
+        }
     }
 
     @Override
