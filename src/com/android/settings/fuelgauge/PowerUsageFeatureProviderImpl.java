@@ -188,4 +188,14 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     public Set<String> getIgnoreScreenOnTimeTaskRootSet() {
         return new ArraySet<>();
     }
+
+    @Override
+    public String getBuildMetadata1(Context context) {
+        return null;
+    }
+
+    @Override
+    public String getBuildMetadata2(Context context) {
+        return null;
+    }
 }
