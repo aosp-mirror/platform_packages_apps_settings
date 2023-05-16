@@ -51,7 +51,7 @@ public class BatteryInfo {
     public int batteryStatus;
     public int pluggedStatus;
     public boolean discharging = true;
-    public boolean isOverheated;
+    public boolean isBatteryDefender;
     public long remainingTimeUs = 0;
     public long averageTimeToDischarge = EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN;
     public String batteryPercentString;
@@ -257,9 +257,9 @@ public class BatteryInfo {
         info.pluggedStatus = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
         info.mCharging = info.pluggedStatus != 0;
         info.averageTimeToDischarge = estimate.getAverageDischargeTime();
-        info.isOverheated = batteryBroadcast.getIntExtra(
-                BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_UNKNOWN)
-                == BatteryManager.BATTERY_HEALTH_OVERHEAT;
+        info.isBatteryDefender = batteryBroadcast.getIntExtra(
+                BatteryManager.EXTRA_CHARGING_STATUS, BatteryManager.CHARGING_POLICY_DEFAULT)
+                == BatteryManager.CHARGING_POLICY_ADAPTIVE_LONGLIFE;
 
         info.statusLabel = Utils.getBatteryStatus(context, batteryBroadcast, isCompactStatus);
         info.batteryStatus = batteryBroadcast.getIntExtra(
@@ -283,7 +283,7 @@ public class BatteryInfo {
         info.discharging = false;
         info.suggestionLabel = null;
         int dockDefenderMode = BatteryUtils.getCurrentDockDefenderMode(context, info);
-        if ((info.isOverheated && status != BatteryManager.BATTERY_STATUS_FULL
+        if ((info.isBatteryDefender && status != BatteryManager.BATTERY_STATUS_FULL
                 && dockDefenderMode == BatteryUtils.DockDefenderMode.DISABLED)
                 || dockDefenderMode == BatteryUtils.DockDefenderMode.ACTIVE) {
             // Battery defender active, battery charging paused
