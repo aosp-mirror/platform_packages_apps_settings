@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Process;
+import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.SparseIntArray;
 
@@ -197,5 +198,10 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public String getBuildMetadata2(Context context) {
         return null;
+    }
+
+    @Override
+    public boolean isValidToRestoreOptimizationMode(ArrayMap<String, String> deviceInfoMap) {
+        return false;
     }
 }
