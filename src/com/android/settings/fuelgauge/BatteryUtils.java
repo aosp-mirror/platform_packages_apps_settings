@@ -18,7 +18,6 @@ package com.android.settings.fuelgauge;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.InstallSourceInfo;
 import android.content.pm.PackageInfo;
@@ -322,10 +321,10 @@ public class BatteryUtils {
     }
 
     /**
-     * Return {@code true} if battery is overheated and charging.
+     * Return {@code true} if battery defender is on and charging.
      */
     public static boolean isBatteryDefenderOn(BatteryInfo batteryInfo) {
-        return batteryInfo.isOverheated && !batteryInfo.discharging;
+        return batteryInfo.isBatteryDefender && !batteryInfo.discharging;
     }
 
     /**
@@ -627,11 +626,11 @@ public class BatteryUtils {
             if (Settings.Global.getInt(context.getContentResolver(),
                     SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS, 0) == 1) {
                 return DockDefenderMode.TEMPORARILY_BYPASSED;
-            } else if (batteryInfo.isOverheated && FeatureFactory.getFactory(context)
+            } else if (batteryInfo.isBatteryDefender && FeatureFactory.getFactory(context)
                     .getPowerUsageFeatureProvider(context)
                     .isExtraDefend()) {
                 return DockDefenderMode.ACTIVE;
-            } else if (!batteryInfo.isOverheated) {
+            } else if (!batteryInfo.isBatteryDefender) {
                 return DockDefenderMode.FUTURE_BYPASS;
             }
         }
