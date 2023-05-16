@@ -28,7 +28,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.widget.LabeledSeekBarPreference;
-import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
@@ -111,6 +110,10 @@ abstract class PreviewSizeSeekBarController extends BasePreferenceController imp
     public void onDestroy() {
         // remove runnables in the queue.
         mHandler.removeCallbacksAndMessages(null);
+        final boolean isTooltipWindowShowing = mTooltipWindow != null && mTooltipWindow.isShowing();
+        if (isTooltipWindowShowing) {
+            mTooltipWindow.dismiss();
+        }
     }
 
     @Override
