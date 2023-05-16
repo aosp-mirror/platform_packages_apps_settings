@@ -25,17 +25,20 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
+import android.os.Build;
 import android.os.IDeviceIdleController;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
 import java.io.IOException;
@@ -49,9 +52,19 @@ import java.util.List;
 public final class BatteryBackupHelper implements BackupHelper {
     /** An inditifier for {@link BackupHelper}. */
     public static final String TAG = "BatteryBackupHelper";
+    // Definition for the device build information.
+    public static final String KEY_BUILD_BRAND = "device_build_brand";
+    public static final String KEY_BUILD_PRODUCT = "device_build_product";
+    public static final String KEY_BUILD_MANUFACTURER = "device_build_manufacture";
+    public static final String KEY_BUILD_FINGERPRINT = "device_build_fingerprint";
+    // Customized fields for device extra information.
+    public static final String KEY_BUILD_METADATA_1 = "device_build_metadata_1";
+    public static final String KEY_BUILD_METADATA_2 = "device_build_metadata_2";
+
     private static final String DEVICE_IDLE_SERVICE = "deviceidle";
     private static final String BATTERY_OPTIMIZE_BACKUP_FILE_NAME =
             "battery_optimize_backup_historical_logs";
+    private static final int DEVICE_BUILD_INFO_SIZE = 6;
 
     static final String DELIMITER = ",";
     static final String DELIMITER_MODE = ":";
@@ -69,7 +82,13 @@ public final class BatteryBackupHelper implements BackupHelper {
     @VisibleForTesting
     BatteryOptimizeUtils mBatteryOptimizeUtils;
 
+    private byte[] mOptimizationModeBytes;
+    private boolean mVerifyMigrateConfiguration = false;
+
     private final Context mContext;
+    // Device information map from the restoreEntity() method.
+    private final ArrayMap<String, String> mDeviceBuildInfoMap =
+            new ArrayMap<>(DEVICE_BUILD_INFO_SIZE);
 
     public BatteryBackupHelper(Context context) {
         mContext = context.getApplicationContext();
@@ -83,33 +102,50 @@ public final class BatteryBackupHelper implements BackupHelper {
             return;
         }
         final List<String> allowlistedApps = getFullPowerList();
-        if (allowlistedApps != null) {
-            backupOptimizationMode(data, allowlistedApps);
+        if (allowlistedApps == null) {
+            return;
         }
+
+        writeBackupData(data, KEY_BUILD_BRAND, Build.BRAND);
+        writeBackupData(data, KEY_BUILD_PRODUCT, Build.PRODUCT);
+        writeBackupData(data, KEY_BUILD_MANUFACTURER, Build.MANUFACTURER);
+        writeBackupData(data, KEY_BUILD_FINGERPRINT, Build.FINGERPRINT);
+        // Add customized device build metadata fields.
+        final PowerUsageFeatureProvider provider = FeatureFactory.getFactory(mContext)
+                .getPowerUsageFeatureProvider(mContext);
+        writeBackupData(data, KEY_BUILD_METADATA_1, provider.getBuildMetadata1(mContext));
+        writeBackupData(data, KEY_BUILD_METADATA_2, provider.getBuildMetadata2(mContext));
+
+        backupOptimizationMode(data, allowlistedApps);
     }
 
     @Override
     public void restoreEntity(BackupDataInputStream data) {
-        BatterySettingsMigrateChecker.verifySaverConfiguration(mContext);
+        // Ensure we only verify the migrate configuration one time.
+        if (!mVerifyMigrateConfiguration) {
+            mVerifyMigrateConfiguration = true;
+            BatterySettingsMigrateChecker.verifySaverConfiguration(mContext);
+        }
         if (!isOwner() || data == null || data.size() == 0) {
             Log.w(TAG, "ignore restoreEntity() for non-owner or empty data");
             return;
         }
-
-        if (KEY_OPTIMIZATION_LIST.equals(data.getKey())) {
-            final int dataSize = data.size();
-            final byte[] dataBytes = new byte[dataSize];
-            try {
-                data.read(dataBytes, 0 /*offset*/, dataSize);
-            } catch (IOException e) {
-                Log.e(TAG, "failed to load BackupDataInputStream", e);
-                return;
-            }
-            final int restoreCount = restoreOptimizationMode(dataBytes);
-            if (restoreCount > 0) {
-                BatterySettingsMigrateChecker.verifyOptimizationModes(mContext);
-            }
+        final String dataKey = data.getKey();
+        switch (dataKey) {
+            case KEY_BUILD_BRAND:
+            case KEY_BUILD_PRODUCT:
+            case KEY_BUILD_MANUFACTURER:
+            case KEY_BUILD_FINGERPRINT:
+            case KEY_BUILD_METADATA_1:
+            case KEY_BUILD_METADATA_2:
+                restoreBackupData(dataKey, data);
+                break;
+            case KEY_OPTIMIZATION_LIST:
+                // Hold the optimization mode data until all conditions are matched.
+                mOptimizationModeBytes = getBackupData(dataKey, data);
+                break;
         }
+        performRestoreIfNeeded();
     }
 
     @Override
@@ -220,6 +256,23 @@ public final class BatteryBackupHelper implements BackupHelper {
         return restoreCount;
     }
 
+    private void performRestoreIfNeeded() {
+        if (mOptimizationModeBytes == null || mOptimizationModeBytes.length == 0) {
+            return;
+        }
+        final PowerUsageFeatureProvider provider = FeatureFactory.getFactory(mContext)
+                .getPowerUsageFeatureProvider(mContext);
+        if (!provider.isValidToRestoreOptimizationMode(mDeviceBuildInfoMap)) {
+            return;
+        }
+        // Start to restore the app optimization mode data.
+        final int restoreCount = restoreOptimizationMode(mOptimizationModeBytes);
+        if (restoreCount > 0) {
+            BatterySettingsMigrateChecker.verifyOptimizationModes(mContext);
+        }
+        mOptimizationModeBytes = null; // clear data
+    }
+
     /** Dump the app optimization mode backup history data. */
     public static void dumpHistoricalData(Context context, PrintWriter writer) {
         BatteryHistoricalLogUtil.printBatteryOptimizeHistoricalLog(
@@ -299,8 +352,33 @@ public final class BatteryBackupHelper implements BackupHelper {
         return BatteryOptimizeUtils.getInstalledApplications(mContext, getIPackageManager());
     }
 
+    private void restoreBackupData(String dataKey, BackupDataInputStream data) {
+        final byte[] dataBytes = getBackupData(dataKey, data);
+        if (dataBytes == null || dataBytes.length == 0) {
+            return;
+        }
+        final String dataContent = new String(dataBytes, StandardCharsets.UTF_8);
+        mDeviceBuildInfoMap.put(dataKey, dataContent);
+        Log.d(TAG, String.format("restore:%s:%s", dataKey, dataContent));
+    }
+
+    private static byte[] getBackupData(String dataKey, BackupDataInputStream data) {
+        final int dataSize = data.size();
+        final byte[] dataBytes = new byte[dataSize];
+        try {
+            data.read(dataBytes, 0 /*offset*/, dataSize);
+        } catch (IOException e) {
+            Log.e(TAG, "failed to getBackupData() " + dataKey, e);
+            return null;
+        }
+        return dataBytes;
+    }
+
     private static void writeBackupData(
             BackupDataOutput data, String dataKey, String dataContent) {
+        if (dataContent == null || dataContent.isEmpty()) {
+            return;
+        }
         final byte[] dataContentBytes = dataContent.getBytes();
         try {
             data.writeEntityHeader(dataKey, dataContentBytes.length);
@@ -308,5 +386,6 @@ public final class BatteryBackupHelper implements BackupHelper {
         } catch (IOException e) {
             Log.e(TAG, "writeBackupData() is failed for " + dataKey, e);
         }
+        Log.d(TAG, String.format("backup:%s:%s", dataKey, dataContent));
     }
 }
