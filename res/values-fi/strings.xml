@@ -59,12 +59,15 @@
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Liitä oikea korva"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Liitä vasen korva"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Liitä toinen korva"</string>
-    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Vasemman korvan kuulolaite on yhdistetty.\n\nJos haluat liittää oikean sen pariksi, varmista, että se on päällä ja valmis parin muodostukseen."</string>
-    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Oikean korvan kuulolaite on yhdistetty.\n\nJos haluat liittää vasemman sen pariksi, varmista, että se on päällä ja valmis parin muodostukseen."</string>
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_left_ear_message (5711642363615781647) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_right_ear_message (631521133525979967) -->
+    <skip />
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Liitä oikea korva"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Liitä vasen korva"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Kaikille saatavilla oleville kuulolaitteille"</string>
-    <string name="bluetooth_device_controls_title" msgid="4293399064818086587">"Pikanäppäimet ja kuulolaiteyhteensopivuus"</string>
+    <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"Kuulolaiteasetukset"</string>
+    <string name="bluetooth_device_controls_summary" msgid="949566933352398337">"Audion toistotapa, pikakomento, kuulolaiteyhteensopivuus"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Tälle laitteelle"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Audion toistotapa"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Tietoa audion toistotavasta"</string>
@@ -105,8 +108,7 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Peru"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Poista Bluetooth LE audio käytöstä"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Poistaa Bluetooth LE ‑audio-ominaisuuden käytöstä, jos laite tukee LE-audiolaitteistoja"</string>
-    <!-- no translation found for bluetooth_show_leaudio_device_details (3306637862550475370) -->
-    <skip />
+    <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Näytä LE Audio ‑valitsin laitetiedoissa"</string>
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Ota Bluetooth LE -audion sallittujen lista käyttöön"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Ota Bluetooth LE -audion sallittujen lista käyttöön"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Medialaitteet"</string>
@@ -166,6 +168,10 @@
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Voit valita kielen kullekin sovellukselle sen kieliasetuksista."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Lue lisää sovellusten kielistä"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Muutetaanko järjestelmän kieleksi %s?"</string>
+    <!-- no translation found for title_system_locale_addition (8218683660751479466) -->
+    <skip />
+    <!-- no translation found for desc_system_locale_addition (3409917362651596070) -->
+    <skip />
     <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Laitteen asetukset ja aluevalinnat muuttuvat."</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Muuta"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s ei ole saatavilla"</string>
@@ -263,8 +269,8 @@
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Ei käytettävissä"</string>
     <string name="security_status_title" msgid="6958004275337618656">"Suojaustila"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Näytön lukitus, Paikanna laite, sovellusten tietoturva"</string>
-    <string name="safety_center_title" msgid="7732397372178774777">"Tietoturva ja yksityisyys"</string>
-    <string name="safety_center_summary" msgid="3554867379951053869">"Sovellusten tietoturva, laitteen lukitus, luvat"</string>
+    <string name="safety_center_title" msgid="7732397372178774777">"Turvallisuus ja yksityisyys"</string>
+    <string name="safety_center_summary" msgid="3554867379951053869">"Sovellusten turvallisuus, laitteen lukitus, luvat"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Kasvot lisätty"</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Edellyttää käyttöönottoa"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Kasvojentunnistusavaus"</string>
@@ -356,14 +362,10 @@
     <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Otettuasi kasvojentunnistus- ja sormenjälkiavauksen käyttöön puhelimesi pyytää sormenjälkeäsi, kun käytät maskia tai olet pimeässä ympäristössä.\n\nVoit avata lukituksen kellolla, jos kasvojasi tai sormenjälkeäsi ei tunnisteta."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Voit avata lukituksen kellolla, jos sormenjälkeäsi ei tunnisteta."</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Voit avata lukituksen kellolla, jos kasvojasi ei tunnisteta."</string>
-    <!-- no translation found for biometric_settings_use_fingerprint_or_watch_for (1160830065613858095) -->
-    <skip />
-    <!-- no translation found for biometric_settings_use_face_or_watch_for (1507077107150278532) -->
-    <skip />
-    <!-- no translation found for biometric_settings_use_face_fingerprint_or_watch_for (7495835723072020641) -->
-    <skip />
-    <!-- no translation found for biometric_settings_use_watch_for (5454545622244040110) -->
-    <skip />
+    <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"Käytä sormenjälkeä tai kelloa:"</string>
+    <string name="biometric_settings_use_face_or_watch_for" msgid="1507077107150278532">"Käytä kasvoja tai kelloa:"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"Käytä kasvoja, sormenjälkeä tai kelloa:"</string>
+    <string name="biometric_settings_use_watch_for" msgid="5454545622244040110">"Käytä kelloa:"</string>
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Kasvoilla tai kellolla"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Sormenjäljellä tai kellolla"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Kasvoilla, sormenjäljellä tai kellolla"</string>
@@ -447,6 +449,8 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Aseta sormenjäljen reuna tunnistimen päälle ja pidä se siinä, ja tee sitten sama toiselle reunalle"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Ohitetaanko sormenjäljen määritys?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Olet valinnut sormenjäljen yhdeksi tavaksi avata puhelimesi lukitus. Jos ohitat tämän nyt, sinun on määritettävä se myöhemmin. Määritys kestää vain noin minuutin."</string>
+    <!-- no translation found for lock_screen_skip_setup_title (6979006375138175111) -->
+    <skip />
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Ohitetaanko PIN-koodin asetus?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Ohitetaanko PIN-koodin ja kasvojen käyttöönotto?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Ohitetaanko PIN-koodin ja sormenjäljen käyttöönotto?"</string>
@@ -492,7 +496,8 @@
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Näytön lukituksen asettaminen"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Paranna turvallisuutta valitsemalla laitteen PIN-koodi, kuvio tai salasana."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Aseta näytön lukitus"</string>
-    <string name="no_screen_lock_issue_notification_title" msgid="5718363966239208505">"Laitteella ei ole näytön lukitusta"</string>
+    <!-- no translation found for no_screen_lock_issue_notification_title (1214876733592830628) -->
+    <skip />
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"Paranna turvallisuutta valitsemalla laitteelle PIN-koodi, kuvio tai salasana."</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Suojaa puhelimesi"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Lisää avaava sormenjälki"</string>
@@ -523,13 +528,19 @@
     <string name="unlock_set_unlock_password_title" msgid="2559842616268607041">"Salasana"</string>
     <string name="unlock_set_do_later_title" msgid="6565575303676064364">"Ei nyt"</string>
     <string name="current_screen_lock" msgid="1367883977261098017">"Nykyinen näytön lukitus"</string>
-    <string name="fingerprint_unlock_set_unlock_pattern" msgid="4492334416059646032">"Sormenjälki ja kuvio"</string>
-    <string name="fingerprint_unlock_set_unlock_pin" msgid="4724451168139460493">"Sormenjälki ja PIN-koodi"</string>
-    <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"Sormenjälki ja salasana"</string>
+    <!-- no translation found for fingerprint_unlock_set_unlock_pattern (2229689425933043901) -->
+    <skip />
+    <!-- no translation found for fingerprint_unlock_set_unlock_pin (7979848492740627674) -->
+    <skip />
+    <!-- no translation found for fingerprint_unlock_set_unlock_password (6207676267295036963) -->
+    <skip />
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Jatka ilman sormenjälkeä"</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"Kasvojentunnistusavaus ja kuvio"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Kasvojentunnistusavaus ja PIN-koodi"</string>
-    <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Kasvojentunnistusavaus ja salasana"</string>
+    <!-- no translation found for face_unlock_set_unlock_pattern (4206669838203096608) -->
+    <skip />
+    <!-- no translation found for face_unlock_set_unlock_pin (9034912683791069602) -->
+    <skip />
+    <!-- no translation found for face_unlock_set_unlock_password (5874950853246424756) -->
+    <skip />
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Jatka ilman kasvojentunnistusavausta"</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Kuvio • Kasvot • Sormenjälki"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN-koodi • Kasvot • Sormenjälki"</string>
@@ -656,6 +667,8 @@
     <string name="remove_association_button" msgid="5004208145998061135">"Poista yhteys"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Katkaistaanko sovelluksen yhteys?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> ei enää muodosta yhteyttä: <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
+    <!-- no translation found for device_details_leaudio_toggle_summary (7684848254433230809) -->
+    <skip />
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Unohda laite"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Katkaise sovelluksen yhteys"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Liitettyjen Bluetooth-äänilaitteiden enimmäismäärä"</string>
@@ -958,6 +971,8 @@
     <string name="account_settings" msgid="255404935489127404">"Tilit"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"Työprofiilit – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"Henkilökohtaiset profiilit"</string>
+    <!-- no translation found for accessibility_category_clone (7893383448944567885) -->
+    <skip />
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"Työtili – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Henkilökohtainen tili – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Haku"</string>
@@ -1993,7 +2008,8 @@
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Jatka"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Kuulolaitteet"</string>
     <string name="accessibility_hearingaid_intro" msgid="5856992709195963850">"Voit käyttää kuulolaitteita, sisäkorvaimplantteja tai muita äänenvahvistuslaitteita puhelimellasi"</string>
-    <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Ei yhdistettyjä kuulolaitteita"</string>
+    <!-- no translation found for accessibility_hearingaid_not_connected_summary (7438018718889849521) -->
+    <skip />
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Lisää kuulolaitteita"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Liitä kuulolaitteet"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Napauta kuulolaitteitasi seuraavassa kohdassa. Sinun täytyy ehkä liittää vasen ja oikea korva erikseen.\n\nVarmista, että kuulolaitteet ovat päällä ja valmiita parin muodostukseen."</string>
@@ -2193,8 +2209,7 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Enemmän akkua kuluttavat"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Katso eniten kuluttavat sovellukset"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Lataus optimoitu akun suojaamiseksi"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_summary (5107379280241187562) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_summary" msgid="5107379280241187562">"Lataus optimoidaan, jotta akku kestäisi pidempään"</string>
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Lataus optimoitu akun suojaamiseksi"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Lataus optimoidaan laitteen ollessa telineessä, jotta akku kestäisi pidempään"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Lataus optimoitu akun suojaamiseksi"</string>
@@ -2479,9 +2494,7 @@
     <string name="sync_is_failing" msgid="6738004111400633331">"Synkronoinnissa on tällä hetkellä ongelmia. Palvelu palaa käyttöön hetken kuluttua."</string>
     <string name="add_account_label" msgid="7134707140831385869">"Lisää tili"</string>
     <string name="managed_profile_not_available_label" msgid="7500578232182547365">"Työprofiili ei ole vielä käytettävissä"</string>
-    <string name="work_mode_label" msgid="1001415270126064436">"Työprofiili"</string>
-    <string name="work_mode_on_summary" msgid="2042885311126239961">"Organisaatiosi hallinnoima"</string>
-    <string name="work_mode_off_summary" msgid="4044568753909036134">"Sovellukset ja ilmoitukset ovat poissa käytöstä"</string>
+    <string name="work_mode_label" msgid="4687734487641548872">"Työsovellukset"</string>
     <string name="remove_managed_profile_label" msgid="1294933737673830431">"Poista työprofiili"</string>
     <string name="background_data" msgid="321903213000101158">"Taustatiedonsiirto"</string>
     <string name="background_data_summary" msgid="6572245922513522466">"Sovell. voivat synkr., läh. &amp; vast.ottaa tietoa milloin vain"</string>
@@ -2983,7 +2996,7 @@
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Näytön lukituksen ääni"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Latausäänet ja ‑värinä"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Telakointiäänet"</string>
-    <string name="touch_sounds_title" msgid="2200734041857425078">"Kosketusäänet"</string>
+    <string name="touch_sounds_title" msgid="826964355109667449">"Napautus- ja klikkausäänet"</string>
     <string name="vibrate_icon_title" msgid="1281100105045362530">"Näytä aina kuvake värinätilassa ollessa"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Telineen kaiutin"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Kaikki äänet"</string>
@@ -3883,6 +3896,7 @@
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"IT-järjestelmänvalvoja voi nähdä haut ja saapuvat puhelut"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Kahden profiilin kalenteri"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Näytä työtapahtumat omassa kalenterissa"</string>
+    <string name="managed_profile_settings_footer" msgid="996500759305118103">"Kun työsovellukset ovat pois päältä, ne ovat keskeytettyinä, joten niitä ei voi käyttää eivätkä ne voi lähettää ilmoituksia"</string>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"Tallennustilan hallinnointi"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"Tallennustilan hallinta vapauttaa tilaa poistamalla varmuuskopioituja kuvia ja videoita laitteeltasi."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Poista kuvia ja videoita"</string>
@@ -4074,7 +4088,7 @@
     <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Use &lt;xliff:g id=app_name example=Palveluntarjoaja&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; päättelee näytön näkymän perusteella, mitä voidaan täyttää automaattisesti. Uudet salasanat, avainkoodit ja muita tietoja tallennetaan tästä lähtien tänne."</string>
     <string name="credman_picker_title" msgid="2642776965060619988">"Salasanat, avainkoodit ja datapalvelut"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Laitetaanko %1$s pois päältä?"</string>
-    <string name="credman_confirmation_message" msgid="158362573056996762">"Tallennetut tiedot (esim. avainkoodi ja salasanat) eivät ehkä ole saatavilla, kun kirjaudut sisään"</string>
+    <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Laitetaanko tämä palvelu pois päältä?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Tallennettuja tietoja (esimerkiksi salasanoja, avainkoodeja ja maksutapoja) ei täytetä, kun kirjaudut sisään. Jos haluat käyttää tallennettuja tietoja, valitse salasana, avainkoodi tai datapalvelu."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Käytetäänkö: %1$s?"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s päättelee näytön kohteiden perusteella, mitä voidaan täyttää automaattisesti."</string>
     <string name="credman_error_message_title" msgid="4741457523969373713">"Salasanojen, avainkoodien ja datapalveluiden rajoitus"</string>
@@ -4709,5 +4723,4 @@
     <string name="contrast_medium" msgid="384414510709285811">"Keskitaso"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Suuri"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Tämän sovelluksen voi avata vain yhdessä ikkunassa"</string>
-    <string name="note_task_shortcut_label" msgid="1589543982691587932">"Muistiinpanon pikakuvake"</string>
 </resources>

@@ -59,12 +59,13 @@
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"התאמה באוזן ימין"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"התאמה באוזן שמאל"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"התאמה באוזן השנייה"</string>
-    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"מכשיר השמיעה באוזן שמאל מחובר.\n\nכדי להתאים את מכשיר השמיעה באוזן ימין, צריך לוודא שהוא פועל ומוכן להתאמה."</string>
-    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"מכשיר השמיעה באוזן ימין מחובר.\n\nכדי להתאים את מכשיר השמיעה באוזן שמאל, צריך לוודא שהוא פועל ומוכן להתאמה."</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="5711642363615781647">"מכשיר השמיעה באוזן שמאל מחובר.\n\nכדי להתאים את מכשיר השמיעה באוזן ימין, צריך לוודא שהוא פועל ומוכן להתאמה."</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"מכשיר השמיעה באוזן ימין מחובר.\n\nכדי להתאים את מכשיר השמיעה באוזן שמאל, צריך לוודא שהוא פועל ומוכן להתאמה."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"התאמה באוזן ימין"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"התאמה באוזן שמאל"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"לכל מכשירי השמיעה הזמינים"</string>
-    <string name="bluetooth_device_controls_title" msgid="4293399064818086587">"קיצורי דרך ותאימות למכשירי השמיעה"</string>
+    <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"הגדרות של מכשיר שמיעה"</string>
+    <string name="bluetooth_device_controls_summary" msgid="949566933352398337">"פלט אודיו, מקש קיצור, תאימות למכשירי שמיעה"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"למכשיר הזה"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"פלט אודיו"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"מידע על פלט האודיו"</string>
@@ -105,8 +106,7 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"ביטול"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"‏השבתה של Bluetooth LE audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"‏האפשרות הזו משביתה את התכונה Bluetooth LE Audio אם המכשיר תומך ביכולות של חומרת LE audio."</string>
-    <!-- no translation found for bluetooth_show_leaudio_device_details (3306637862550475370) -->
-    <skip />
+    <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"‏הצגת המתג של LE audio בפרטי המכשיר"</string>
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"‏הפעלה של רשימת ההרשאות של Bluetooth LE Audio"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"‏הפעלה של התכונה רשימת ההרשאות של Bluetooth LE Audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"מכשירים לאחסון מדיה"</string>
@@ -166,6 +166,10 @@
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"כדי לבחור שפה עבור כל אפליקציה, יש לעבור אל ההגדרות של שפת האפליקציה."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"מידע נוסף על שפות של אפליקציות"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"‏לשנות את שפת המערכת ל-%s?"</string>
+    <!-- no translation found for title_system_locale_addition (8218683660751479466) -->
+    <skip />
+    <!-- no translation found for desc_system_locale_addition (3409917362651596070) -->
+    <skip />
     <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"הגדרות המכשיר וההעדפות האזוריות שלך ישתנו."</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"שינוי"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"‏%s לא זמינה"</string>
@@ -188,7 +192,7 @@
     <string name="friday_first_day_of_week" msgid="7074795061812083541">"שישי"</string>
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"שבת"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"אם אפליקציה כלשהי לא תומכת בהעדפות אזוריות, השפה והאזור ייקבעו לפי ברירות המחדל של האפליקציה הזו."</string>
-    <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"מידע נוסף על העדפות השפה."</string>
+    <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"מידע נוסף על העדפות השפה"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{להסיר את השפה שנבחרה?}one{להסיר את השפות שנבחרו?}two{להסיר את השפות שנבחרו?}other{להסיר את השפות שנבחרו?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"הטקסט יוצג בשפה אחרת."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"לא ניתן להסיר את כל השפות"</string>
@@ -356,14 +360,10 @@
     <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"לאחר הגדרה של פתיחה ע\"י זיהוי הפנים וביטול הנעילה בטביעת אצבע, טביעת האצבע נדרשת בטלפון אם עוטים מסיכה או נמצאים באזור חשוך.\n\nאפשר לבטל את הנעילה עם השעון כשהפנים או טביעת האצבע לא מזוהים."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"אפשר לבטל את הנעילה עם השעון כשטביעת האצבע לא מזוהה."</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"אפשר לבטל את הנעילה עם השעון כשהפנים לא מזוהים."</string>
-    <!-- no translation found for biometric_settings_use_fingerprint_or_watch_for (1160830065613858095) -->
-    <skip />
-    <!-- no translation found for biometric_settings_use_face_or_watch_for (1507077107150278532) -->
-    <skip />
-    <!-- no translation found for biometric_settings_use_face_fingerprint_or_watch_for (7495835723072020641) -->
-    <skip />
-    <!-- no translation found for biometric_settings_use_watch_for (5454545622244040110) -->
-    <skip />
+    <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"שימוש בטביעת האצבע או בשעון לצורך"</string>
+    <string name="biometric_settings_use_face_or_watch_for" msgid="1507077107150278532">"שימוש בזיהוי פנים או בשעון לצורך"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"שימוש בזיהוי פנים, בטביעת האצבע או בשעון לצורך"</string>
+    <string name="biometric_settings_use_watch_for" msgid="5454545622244040110">"שימוש בשעון לצורך"</string>
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"שימוש בזיהוי הפנים או בשעון"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"שימוש בטביעת האצבע או בשעון"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"שימוש בזיהוי הפנים, בטביעת האצבע או בשעון"</string>
@@ -405,7 +405,7 @@
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"דילוג"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"ביטול"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"נגיעה בחיישן"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"נוגעים בלחצן ההפעלה בלי ללחוץ עליו"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"צריך לגעת בלחצן ההפעלה בלי ללחוץ עליו"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"איך מגדירים טביעת אצבע?"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"החיישן נמצא בגב הטלפון. יש להשתמש באצבע המורה."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"חיישן טביעות האצבע מופיע במסך. נצלם את טביעת האצבע שלך במסך הבא."</string>
@@ -447,6 +447,7 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"מניחים צד אחד של האצבע על החיישן ומחזיקים. אחר כך עוברים לצד השני"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"האם לדלג על הגדרת טביעת אצבע?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"בחרת להשתמש בטביעת האצבע שלך כאחת מהדרכים שבהן תהיה לך אפשרות לבטל את הנעילה בטלפון. אם החלטתך תהיה לדלג על שלב זה עכשיו, יהיה עליך לבצע את ההגדרה בהמשך. ההגדרה לוקחת רק דקה או שתיים."</string>
+    <string name="lock_screen_skip_setup_title" msgid="6979006375138175111">"לדלג על ההגדרה של <xliff:g id="OPTIONS">%s</xliff:g>?"</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"לדלג על הגדרת קוד האימות?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"לדלג על ההגדרה של קוד אימות וזיהוי פנים?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"לדלג על ההגדרה של קוד אימות וטביעת אצבע?"</string>
@@ -492,7 +493,7 @@
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"הגדרה של נעילת מסך"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"כדי לשפר את האבטחה ניתן להגדיר קוד אימות, תבנית או סיסמה למכשיר הזה."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"הגדרה של נעילת מסך"</string>
-    <string name="no_screen_lock_issue_notification_title" msgid="5718363966239208505">"למכשיר אין נעילת מסך"</string>
+    <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"הגדרת נעילת מסך"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"כדי לשפר את האבטחה ניתן להגדיר קוד אימות, קו ביטול נעילה או סיסמה למכשיר הזה."</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"שמירה על אבטחת הטלפון"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"הוספת טביעת אצבע לביטול הנעילה"</string>
@@ -523,13 +524,13 @@
     <string name="unlock_set_unlock_password_title" msgid="2559842616268607041">"סיסמה"</string>
     <string name="unlock_set_do_later_title" msgid="6565575303676064364">"לא עכשיו"</string>
     <string name="current_screen_lock" msgid="1367883977261098017">"נעילת המסך הנוכחית"</string>
-    <string name="fingerprint_unlock_set_unlock_pattern" msgid="4492334416059646032">"טביעת אצבע + קו ביטול נעילה"</string>
-    <string name="fingerprint_unlock_set_unlock_pin" msgid="4724451168139460493">"טביעת אצבע + קוד גישה"</string>
-    <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"טביעת אצבע + סיסמה"</string>
+    <string name="fingerprint_unlock_set_unlock_pattern" msgid="2229689425933043901">"קו ביטול נעילה • טביעת אצבע"</string>
+    <string name="fingerprint_unlock_set_unlock_pin" msgid="7979848492740627674">"קוד אימות • טביעת אצבע"</string>
+    <string name="fingerprint_unlock_set_unlock_password" msgid="6207676267295036963">"סיסמה • טביעת אצבע"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"המשך ללא טביעת אצבע"</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"פתיחה ע\"י זיהוי הפנים וקו ביטול נעילה"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"פתיחה ע\"י זיהוי הפנים וקוד אימות"</string>
-    <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"פתיחה ע\"י זיהוי הפנים וסיסמה"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4206669838203096608">"קו ביטול נעילה • זיהוי פנים"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"קוד אימות • זיהוי פנים"</string>
+    <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"סיסמה • זיהוי פנים"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"המשך ללא פתיחה ע\"י זיהוי הפנים"</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"קו ביטול נעילה • פנים • טביעת אצבע"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"קוד אימות • פנים • טביעת אצבע"</string>
@@ -656,6 +657,7 @@
     <string name="remove_association_button" msgid="5004208145998061135">"הסרת השיוך"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"האם לנתק את האפליקציה?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"האפליקציה <xliff:g id="APP_NAME">%1$s</xliff:g> לא תהיה מחוברת יותר אל <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
+    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"ניסיוני. משפר את איכות האודיו."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"אני רוצה לשכוח את המכשיר"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"ניתוק האפליקציה"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"‏מקסימום התקני אודיו המחוברים באמצעות Bluetooth"</string>
@@ -958,6 +960,7 @@
     <string name="account_settings" msgid="255404935489127404">"חשבונות"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"חשבונות פרופיל עבודה – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"חשבונות פרופיל אישי"</string>
+    <string name="accessibility_category_clone" msgid="7893383448944567885">"שכפול חשבונות פרופיל"</string>
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"חשבון עבודה - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"חשבון אישי – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"חיפוש"</string>
@@ -1993,7 +1996,7 @@
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"המשך"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"מכשירי שמיעה"</string>
     <string name="accessibility_hearingaid_intro" msgid="5856992709195963850">"אפשר להשתמש במכשירי שמיעה, בשתלים קוכליאריים ובמכשירי הגברה אחרים יחד עם הטלפון"</string>
-    <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"אין מכשירי שמיעה מחוברים"</string>
+    <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"אין מכשירי שמיעה מחוברים"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"הוספת מכשירי שמיעה"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"התאמת מכשירי השמיעה"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"במסך הבא, יש להקיש על מכשירי שמיעה. יכול להיות שצריך להתאים את אוזן שמאל ואת אוזן ימין בנפרד.\n\nחשוב לוודא שמכשירי השמיעה מופעלים ומוכנים להתאמה."</string>
@@ -2193,8 +2196,7 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"שימוש מוגבר בסוללה"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"האפליקציות המובילות במידת השימוש בסוללה"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"הטעינה עברה אופטימיזציה כדי להגן על הסוללה"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_summary (5107379280241187562) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_summary" msgid="5107379280241187562">"כדי להאריך את משך חיי הסוללה, הטעינה עוברת אופטימיזציה"</string>
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"הטעינה עברה אופטימיזציה כדי להגן על הסוללה"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"כדי להאריך את חיי הסוללה, הטעינה עוברת אופטימיזציה בזמן העגינה"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"הטעינה עברה אופטימיזציה כדי להגן על הסוללה"</string>
@@ -2479,9 +2481,7 @@
     <string name="sync_is_failing" msgid="6738004111400633331">"הסנכרון נתקל כעת בבעיות. הוא ימשיך תוך זמן קצר."</string>
     <string name="add_account_label" msgid="7134707140831385869">"הוספת חשבון"</string>
     <string name="managed_profile_not_available_label" msgid="7500578232182547365">"פרופיל עבודה עדיין אינו זמין"</string>
-    <string name="work_mode_label" msgid="1001415270126064436">"פרופיל עבודה"</string>
-    <string name="work_mode_on_summary" msgid="2042885311126239961">"מנוהל על ידי הארגון"</string>
-    <string name="work_mode_off_summary" msgid="4044568753909036134">"אפליקציות והתראות מושבתות"</string>
+    <string name="work_mode_label" msgid="4687734487641548872">"אפליקציות לעבודה"</string>
     <string name="remove_managed_profile_label" msgid="1294933737673830431">"הסרת פרופיל עבודה"</string>
     <string name="background_data" msgid="321903213000101158">"שימוש בנתונים ברקע"</string>
     <string name="background_data_summary" msgid="6572245922513522466">"אפליקציות יכולות לסנכרן, לשלוח ולקבל נתונים בכל עת"</string>
@@ -2983,7 +2983,7 @@
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"צליל נעילת המסך"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"צלילים ורטט לטעינה"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"צלילים בעגינה"</string>
-    <string name="touch_sounds_title" msgid="2200734041857425078">"צלילי מגע"</string>
+    <string name="touch_sounds_title" msgid="826964355109667449">"צלילים של הקשה ולחיצה"</string>
     <string name="vibrate_icon_title" msgid="1281100105045362530">"הסמל תמיד מוצג במצב רטט"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"רמקול בעגינה מופעל"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"כל האודיו"</string>
@@ -3884,6 +3884,7 @@
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"‏ייתכן שהשיחות הנכנסות והחיפושים שלך יהיו גלויים למנהל ה-IT"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"יומן למספר פרופילים"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"הצגת אירועי עבודה ביומן האישי"</string>
+    <string name="managed_profile_settings_footer" msgid="996500759305118103">"כשאפליקציות לעבודה מושבתות, הן מושהות. לא ניתן לגשת אליהן והן לא יכולות לשלוח לך התראות"</string>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"ניהול אחסון"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"כדי לעזור בפינוי שטח אחסון, מנהל האחסון מסיר מהמכשיר שלך תמונות וסרטונים מגובים."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"הסרת תמונות וסרטונים"</string>
@@ -4075,7 +4076,7 @@
     <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"‏&lt;b&gt;להשתמש באפליקציה &lt;xliff:g id=app_name האפליקציהexample=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; בודקת את אילו מהפריטים במסך אפשר למלא באופן אוטומטי. סיסמאות ומפתחות גישה חדשים ונתונים אחרים יישמרו כאן מעכשיו."</string>
     <string name="credman_picker_title" msgid="2642776965060619988">"סיסמאות, מפתחות גישה ושירותי נתונים"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"‏להשבית את %1$s?"</string>
-    <string name="credman_confirmation_message" msgid="158362573056996762">"יכול להיות שמידע שמור כמו מפתחות גישה וסיסמאות לא יהיה זמין כשנכנסים לחשבון"</string>
+    <string name="credman_confirmation_message" msgid="2357324543658635239">"‏&lt;b&gt;להשבית את השירות הזה?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; מידע שנשמר כמו סיסמאות, מפתחות גישה, אמצעי תשלום ופרטים נוספים לא ימולאו כשתתבצע כניסה. כדי להשתמש במידע שנשמר, צריך לבחור סיסמה, מפתח גישה או שירות נתונים."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"‏להשתמש ב-%1$s?"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"‏%1$s עושה שימוש במידע המוצג במסך כדי לקבוע אילו פרטים ניתן למלא באופן אוטומטי."</string>
     <string name="credman_error_message_title" msgid="4741457523969373713">"מגבלת הסיסמאות, מפתחות הגישה ושירותי הנתונים"</string>
@@ -4711,5 +4712,4 @@
     <string name="contrast_medium" msgid="384414510709285811">"בינונית"</string>
     <string name="contrast_high" msgid="3988567609694797696">"גבוהה"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"ניתן לפתוח את האפליקציה הזו רק בחלון אחד"</string>
-    <string name="note_task_shortcut_label" msgid="1589543982691587932">"קיצור דרך להערה"</string>
 </resources>

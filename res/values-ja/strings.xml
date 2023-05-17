@@ -59,12 +59,13 @@
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"右耳をペア設定"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"左耳をペア設定"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"もう一方の耳をペア設定"</string>
-    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"左の補聴器を接続しました。\n\n右の補聴器をペア設定するには、電源が入り、ペア設定できる状態になっていることをご確認ください。"</string>
-    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"右の補聴器を接続しました。\n\n左耳をペア設定するには、電源が入り、ペア設定できる状態になっていることをご確認ください。"</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="5711642363615781647">"左の補聴器を接続しました。\n\n右の補聴器をペア設定するには、電源が入り、ペア設定できる状態になっていることをご確認ください。"</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"右の補聴器を接続しました。\n\n左耳をペア設定するには、電源が入り、ペア設定できる状態になっていることをご確認ください。"</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"右耳をペア設定"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"左耳をペア設定"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"使用可能なすべての補聴器"</string>
-    <string name="bluetooth_device_controls_title" msgid="4293399064818086587">"ショートカットと補聴器両立性"</string>
+    <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"補聴器の設定"</string>
+    <string name="bluetooth_device_controls_summary" msgid="949566933352398337">"音声の出力、ショートカット、補聴器両立性"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"このデバイスのみ"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"音声出力"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"音声出力について"</string>
@@ -105,8 +106,7 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"キャンセル"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE Audio を無効にする"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"デバイスが LE オーディオ ハードウェア機能に対応している場合に、Bluetooth LE Audio 機能を無効にします。"</string>
-    <!-- no translation found for bluetooth_show_leaudio_device_details (3306637862550475370) -->
-    <skip />
+    <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"LE Audio の切替をデバイスの詳細に表示"</string>
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Bluetooth LE Audio 許可リストを有効にする"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Bluetooth LE Audio 許可リスト機能を有効にします。"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"メディア デバイス"</string>
@@ -166,6 +166,10 @@
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"アプリごとに言語を選択するには、アプリの言語設定に移動してください。"</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"アプリの言語の詳細"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"システムの言語を%sに変更しますか？"</string>
+    <!-- no translation found for title_system_locale_addition (8218683660751479466) -->
+    <skip />
+    <!-- no translation found for desc_system_locale_addition (3409917362651596070) -->
+    <skip />
     <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"デバイスの設定と地域の設定が変更されます。"</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"変更"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%sは使用できません"</string>
@@ -356,14 +360,10 @@
     <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"顔認証と指紋認証を設定した場合、マスク着用時や暗い場所にいるときは指紋認証が求められます。\n\n顔や指紋が認識されなかった場合は、ウォッチでロック解除できます。"</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"指紋が認識されなかった場合はウォッチでロック解除できます。"</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"顔が認識されなかった場合はウォッチでロック解除できます。"</string>
-    <!-- no translation found for biometric_settings_use_fingerprint_or_watch_for (1160830065613858095) -->
-    <skip />
-    <!-- no translation found for biometric_settings_use_face_or_watch_for (1507077107150278532) -->
-    <skip />
-    <!-- no translation found for biometric_settings_use_face_fingerprint_or_watch_for (7495835723072020641) -->
-    <skip />
-    <!-- no translation found for biometric_settings_use_watch_for (5454545622244040110) -->
-    <skip />
+    <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"指紋認証またはウォッチの使用:"</string>
+    <string name="biometric_settings_use_face_or_watch_for" msgid="1507077107150278532">"顔認証またはウォッチの使用:"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"顔認証、指紋認証、またはウォッチの使用:"</string>
+    <string name="biometric_settings_use_watch_for" msgid="5454545622244040110">"ウォッチの使用:"</string>
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"顔認証または指紋認証を使う"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"指紋認証またはウォッチ認証を使う"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"顔認証、指紋認証、ウォッチ認証のいずれかを使う"</string>
@@ -447,6 +447,7 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"指紋をセンサーに当てて長押しし、指を離してから別の部分を当ててください"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"指紋の設定をスキップしますか？"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"スマートフォンのロック解除方法として指紋を選択しています。スキップした場合は、後でセットアップする必要があります。セットアップの所要時間は1分程度です。"</string>
+    <string name="lock_screen_skip_setup_title" msgid="6979006375138175111">"<xliff:g id="OPTIONS">%s</xliff:g>の設定をスキップしますか？"</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"PIN の設定をスキップしますか？"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"PIN と顔の設定をスキップしますか？"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"PIN と指紋の設定をスキップしますか？"</string>
@@ -492,7 +493,7 @@
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"画面ロックの設定"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"セキュリティを強化するために、このデバイスの PIN、パターン、またはパスワードを設定してください。"</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"画面ロックを設定"</string>
-    <string name="no_screen_lock_issue_notification_title" msgid="5718363966239208505">"デバイスに画面ロックが設定されていません"</string>
+    <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"画面ロックを設定"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"セキュリティを強化するために、このデバイスの PIN、パターン、またはパスワードを設定してください。"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"スマートフォンの保護"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"ロック解除に使う指紋を追加"</string>
@@ -523,13 +524,13 @@
     <string name="unlock_set_unlock_password_title" msgid="2559842616268607041">"パスワード"</string>
     <string name="unlock_set_do_later_title" msgid="6565575303676064364">"後で行う"</string>
     <string name="current_screen_lock" msgid="1367883977261098017">"現在の画面ロック"</string>
-    <string name="fingerprint_unlock_set_unlock_pattern" msgid="4492334416059646032">"指紋 + パターン"</string>
-    <string name="fingerprint_unlock_set_unlock_pin" msgid="4724451168139460493">"指紋 + PIN"</string>
-    <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"指紋 + パスワード"</string>
+    <string name="fingerprint_unlock_set_unlock_pattern" msgid="2229689425933043901">"パターン • 指紋認証"</string>
+    <string name="fingerprint_unlock_set_unlock_pin" msgid="7979848492740627674">"PIN • 指紋認証"</string>
+    <string name="fingerprint_unlock_set_unlock_password" msgid="6207676267295036963">"パスワード • 指紋認証"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"指紋を設定せずに続行"</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"顔認証 + パターン"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"顔認証 + PIN"</string>
-    <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"顔認証 + パスワード"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4206669838203096608">"パターン • 顔認証"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"PIN • 顔認証"</string>
+    <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"パスワード • 顔認証"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"顔認証を設定せずに続行"</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"パターン • 顔 • 指紋"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • 顔 • 指紋"</string>
@@ -656,6 +657,7 @@
     <string name="remove_association_button" msgid="5004208145998061135">"関連付けを削除"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"アプリの接続を解除しますか？"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> アプリは <xliff:g id="DEVICE_NAME">%2$s</xliff:g> に接続できなくなります。"</string>
+    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"試験運用中。音声の品質が向上します。"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"このデバイスとのペア設定を解除"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"アプリの接続を解除する"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"接続できる Bluetooth オーディオ デバイスの上限"</string>
@@ -958,6 +960,7 @@
     <string name="account_settings" msgid="255404935489127404">"アカウント"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"仕事用プロファイルアカウント - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"個人用プロファイルアカウント"</string>
+    <string name="accessibility_category_clone" msgid="7893383448944567885">"プロフィール アカウントのクローンを作成します"</string>
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"仕事用アカウント - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"個人用アカウント - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"検索"</string>
@@ -1855,7 +1858,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"ユーザー補助機能を使用するには、3 本の指で画面の下から上にスワイプします。\n\n機能を切り替えるには、3 本の指で上にスワイプしたまま長押しします。"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="1624189347106713695">"ユーザー補助機能ボタンの設定"</string>
-    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g>ショートカット"</string>
+    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g>のショートカット"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"ユーザー補助機能ボタン"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"ユーザー補助操作"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"2 本の指で上にスワイプ"</string>
@@ -1993,7 +1996,7 @@
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"続行"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"補聴器"</string>
     <string name="accessibility_hearingaid_intro" msgid="5856992709195963850">"補聴器や人工内耳などの聴覚補助器をスマートフォンと連携させて使用できます"</string>
-    <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"接続されている補聴器はありません"</string>
+    <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"補聴器が接続されていません"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"補聴器を追加する"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"補聴器のペア設定"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"次の画面で、お使いの補聴器をタップしてください。左右の耳を別々にペア設定することが必要となる場合もあります。\n\n補聴器の電源が入り、ペア設定できる状態になっていることをご確認ください。"</string>
@@ -2193,8 +2196,7 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"バッテリー使用量が多くなっています"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"使用量の多いアプリを確認"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"バッテリーを保護するために、充電が最適化されています"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_summary (5107379280241187562) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_summary" msgid="5107379280241187562">"バッテリーを長持ちさせるために、充電が最適化されます"</string>
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"バッテリーを保護するために、充電が最適化されています"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"バッテリーを長持ちさせるために、ホルダーにセットされているときは充電が最適化されます"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"バッテリーを保護するために、充電が最適化されています"</string>
@@ -2479,9 +2481,7 @@
     <string name="sync_is_failing" msgid="6738004111400633331">"現在同期で問題が発生しています。しばらくお待ちください。"</string>
     <string name="add_account_label" msgid="7134707140831385869">"アカウントを追加"</string>
     <string name="managed_profile_not_available_label" msgid="7500578232182547365">"仕事用プロファイルがまだ利用できません"</string>
-    <string name="work_mode_label" msgid="1001415270126064436">"仕事用プロファイル"</string>
-    <string name="work_mode_on_summary" msgid="2042885311126239961">"組織によって管理されています"</string>
-    <string name="work_mode_off_summary" msgid="4044568753909036134">"アプリと通知は OFF です"</string>
+    <string name="work_mode_label" msgid="4687734487641548872">"仕事用アプリ"</string>
     <string name="remove_managed_profile_label" msgid="1294933737673830431">"仕事用プロファイルを削除"</string>
     <string name="background_data" msgid="321903213000101158">"バックグラウンドデータ"</string>
     <string name="background_data_summary" msgid="6572245922513522466">"アプリがデータをいつでも同期、送信、受信可能にする"</string>
@@ -2983,7 +2983,7 @@
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"画面ロックの音"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"充電時の音とバイブレーション"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"ドッキング音"</string>
-    <string name="touch_sounds_title" msgid="2200734041857425078">"タッチ操作音"</string>
+    <string name="touch_sounds_title" msgid="826964355109667449">"タッチ / クリック操作音"</string>
     <string name="vibrate_icon_title" msgid="1281100105045362530">"バイブレーション モードのときにアイコンを常に表示"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"ホルダースピーカーでの再生"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"すべて音声"</string>
@@ -3314,7 +3314,7 @@
     <string name="deleted_channels" msgid="8489800381509312964">"{count,plural, =1{# 件のカテゴリを削除しました}other{# 件のカテゴリを削除しました}}"</string>
     <string name="app_notification_block_title" msgid="3880322745749900296">"すべてブロック"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"今後はこの通知を表示しない"</string>
-    <string name="notification_content_block_title" msgid="6689085826061361351">"通知の表示"</string>
+    <string name="notification_content_block_title" msgid="6689085826061361351">"通知を表示"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"シェードにも周辺デバイスにも通知を表示しない"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"通知ドットを許可"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"通知ドットの表示"</string>
@@ -3883,6 +3883,7 @@
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"検索と着信が IT 管理者に公開される可能性があります"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"クロスプロファイル カレンダー"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"個人のカレンダーに仕事の予定を表示する"</string>
+    <string name="managed_profile_settings_footer" msgid="996500759305118103">"無効に設定された仕事用アプリは一時停止してアクセスできなくなり、通知も送信できなくなります"</string>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"ストレージの管理"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"ストレージの空き容量を増やすため、ストレージ マネージャはバックアップした写真や動画をお使いのデバイスから削除します。"</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"写真と動画を削除"</string>
@@ -4074,7 +4075,7 @@
     <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; を使用しますか？&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; は画面上の内容に基づいて、自動入力可能な情報を判別します。今後は、新しいパスワード、パスキー、その他の情報がここに保存されます。"</string>
     <string name="credman_picker_title" msgid="2642776965060619988">"パスワード、パスキー、データのサービス"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s を OFF にしますか？"</string>
-    <string name="credman_confirmation_message" msgid="158362573056996762">"ログインするときに、パスキーやパスワードなどの保存済みの情報を利用できないことがあります"</string>
+    <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;このサービスを無効にしますか？&lt;/b&gt; &lt;br/&gt; &lt;br/&gt;パスワード、パスキー、お支払い方法などの情報を保存しました。その他の情報はログイン時に入力されません。保存された情報を使用するには、パスワード、パスキー、またはデータのサービスを選択してください。"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"%1$s を使用しますか？"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s は自動入力できる情報を判断するために画面上に表示される情報を使用します。"</string>
     <string name="credman_error_message_title" msgid="4741457523969373713">"パスワード、パスキー、データのサービスの上限に達しました"</string>
@@ -4709,5 +4710,4 @@
     <string name="contrast_medium" msgid="384414510709285811">"中"</string>
     <string name="contrast_high" msgid="3988567609694797696">"高"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"このアプリはウィンドウが 1 つの場合のみ開くことができます"</string>
-    <string name="note_task_shortcut_label" msgid="1589543982691587932">"メモのショートカット"</string>
 </resources>

@@ -59,12 +59,13 @@
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"配對右耳"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"配對左耳"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"配對另一耳的裝置"</string>
-    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"左耳助聽器已連接。\n\n如要配對右耳，請確認該耳助聽器已開啟並可開始配對。"</string>
-    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"右耳助聽器已連接。\n\n如要配對左耳，請確認該耳助聽器已開啟並可開始配對。"</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="5711642363615781647">"左耳助聽器連線成功。\n\n如要配對右耳，請確認該耳助聽器已開啟並可開始配對。"</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"右耳助聽器連線成功。\n\n如要配對左耳，請確認該耳助聽器已開啟並可開始配對。"</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"配對右耳的裝置"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"配對左耳"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"所有適用的助聽器"</string>
-    <string name="bluetooth_device_controls_title" msgid="4293399064818086587">"快速鍵和助聽器兼容性"</string>
+    <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"助聽器設定"</string>
+    <string name="bluetooth_device_controls_summary" msgid="949566933352398337">"音訊輸出、快速鍵、助聽器兼容性"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"僅限此裝置"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"音訊輸出裝置"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"關於音訊輸出"</string>
@@ -105,8 +106,7 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"取消"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"停用藍牙 LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"如果裝置支援 LE Audio 硬件功能，則停用藍牙 LE Audio 功能。"</string>
-    <!-- no translation found for bluetooth_show_leaudio_device_details (3306637862550475370) -->
-    <skip />
+    <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"在「裝置詳情」中顯示 LE Audio 切換按鈕"</string>
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"啟用藍牙 LE Audio 許可名單"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"啟用藍牙 LE Audio 許可名單功能。"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"媒體裝置"</string>
@@ -166,6 +166,10 @@
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"如要為各應用程式選取語言，請前往應用程式語言設定。"</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"進一步瞭解應用程式語言"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"要將系統語言變更為「%s」嗎？"</string>
+    <!-- no translation found for title_system_locale_addition (8218683660751479466) -->
+    <skip />
+    <!-- no translation found for desc_system_locale_addition (3409917362651596070) -->
+    <skip />
     <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"系統將變更裝置設定和地區偏好設定。"</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"變更"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"「%s」無法使用"</string>
@@ -356,14 +360,10 @@
     <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"設定「面孔解鎖」和「指紋解鎖」時，如果你戴著口罩或人在昏暗的地方，手機就會要求你註冊指紋。\n\n當系統無法識別你的面孔或指紋時，可以使用手錶解鎖裝置。"</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"當系統無法識別你的指紋時，可以使用手錶解鎖裝置。"</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"當系統無法識別你的面孔時，可以使用手錶解鎖裝置。"</string>
-    <!-- no translation found for biometric_settings_use_fingerprint_or_watch_for (1160830065613858095) -->
-    <skip />
-    <!-- no translation found for biometric_settings_use_face_or_watch_for (1507077107150278532) -->
-    <skip />
-    <!-- no translation found for biometric_settings_use_face_fingerprint_or_watch_for (7495835723072020641) -->
-    <skip />
-    <!-- no translation found for biometric_settings_use_watch_for (5454545622244040110) -->
-    <skip />
+    <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"使用指紋或手錶"</string>
+    <string name="biometric_settings_use_face_or_watch_for" msgid="1507077107150278532">"使用面孔或手錶"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"使用面孔、指紋或手錶"</string>
+    <string name="biometric_settings_use_watch_for" msgid="5454545622244040110">"使用手錶"</string>
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"使用面孔或手錶"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"使用指紋或手錶"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"使用面孔、指紋或手錶"</string>
@@ -447,6 +447,7 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"將指紋的一側放上感應器並按住，然後再換另一側"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"略過指紋設定？"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"你已選擇使用指紋作為唯一的手機解鎖方式。如果你現在略過，將需要稍後設定。設定過程只需約一分鐘。"</string>
+    <string name="lock_screen_skip_setup_title" msgid="6979006375138175111">"要略過<xliff:g id="OPTIONS">%s</xliff:g>嗎？"</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"要略過 PIN 設定嗎？"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"要略過 PIN 和面孔的設定程序嗎？"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"要略過 PIN 和指紋的設定程序嗎？"</string>
@@ -492,7 +493,7 @@
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"設定螢幕鎖定"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"為提升安全性，請為此裝置設定 PIN、圖案或密碼。"</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"設定螢幕鎖定"</string>
-    <string name="no_screen_lock_issue_notification_title" msgid="5718363966239208505">"裝置未設定螢幕鎖定"</string>
+    <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"設定螢幕鎖定"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"為提升安全性，請為此裝置設定 PIN、圖案或密碼。"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"保護手機安全"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"新增用於解鎖的指紋"</string>
@@ -523,13 +524,13 @@
     <string name="unlock_set_unlock_password_title" msgid="2559842616268607041">"密碼"</string>
     <string name="unlock_set_do_later_title" msgid="6565575303676064364">"暫時不要"</string>
     <string name="current_screen_lock" msgid="1367883977261098017">"目前的螢幕鎖定方式"</string>
-    <string name="fingerprint_unlock_set_unlock_pattern" msgid="4492334416059646032">"指紋 + 上鎖圖案"</string>
-    <string name="fingerprint_unlock_set_unlock_pin" msgid="4724451168139460493">"指紋 + PIN"</string>
-    <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"指紋 + 密碼"</string>
+    <string name="fingerprint_unlock_set_unlock_pattern" msgid="2229689425933043901">"圖案 • 指紋"</string>
+    <string name="fingerprint_unlock_set_unlock_pin" msgid="7979848492740627674">"PIN 碼 • 指紋"</string>
+    <string name="fingerprint_unlock_set_unlock_password" msgid="6207676267295036963">"密碼 • 指紋"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"不設定指紋並繼續"</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"面孔解鎖 + 圖案"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"面孔解鎖 + PIN"</string>
-    <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"面孔解鎖 + 密碼"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4206669838203096608">"圖案 • 人臉解鎖"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"PIN 碼 • 人臉解鎖"</string>
+    <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"密碼 • 人臉解鎖"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"繼續但不設定「面孔解鎖」"</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"圖案 • 面孔 • 指紋"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • 面孔 • 指紋"</string>
@@ -656,6 +657,7 @@
     <string name="remove_association_button" msgid="5004208145998061135">"移除關聯"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"要解除連結應用程式嗎？"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」應用程式將與「<xliff:g id="DEVICE_NAME">%2$s</xliff:g>」解除連結"</string>
+    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"實驗功能，用於改善音質。"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"忘記裝置"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"解除連結應用程式"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"連接藍牙音訊裝置的數量上限"</string>
@@ -958,6 +960,7 @@
     <string name="account_settings" msgid="255404935489127404">"帳戶"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"工作設定檔帳戶 - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"個人設定檔帳戶"</string>
+    <string name="accessibility_category_clone" msgid="7893383448944567885">"複製個人資料帳戶"</string>
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"工作帳戶 - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"個人帳戶 - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"搜尋"</string>
@@ -1993,7 +1996,7 @@
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"繼續"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"助聽器"</string>
     <string name="accessibility_hearingaid_intro" msgid="5856992709195963850">"助聽器、人工耳蝸和其他擴音器可配搭手機使用"</string>
-    <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"沒有連接任何助聽器"</string>
+    <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"未連接助聽器"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"新增助聽器"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"配對助聽器"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"請喺下一個畫面輕按助聽器。你可能需要分別配對左耳同右耳嘅裝置。\n\n請確保助聽器開啟咗同準備好配對。"</string>
@@ -2193,8 +2196,7 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"查看用電量較高的應用程式"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"查看用電量最高的應用程式"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"為保護電池，系統已優化充電"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_summary (5107379280241187562) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_summary" msgid="5107379280241187562">"為延長電池壽命，系統會優化充電"</string>
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"為保護電池，系統已優化充電"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"為延長電池壽命，裝置放在插座上充電時，系統會優化充電"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"為保護電池，系統已優化充電"</string>
@@ -2479,9 +2481,7 @@
     <string name="sync_is_failing" msgid="6738004111400633331">"同步處理目前發生問題。將於短時間內恢復。"</string>
     <string name="add_account_label" msgid="7134707140831385869">"新增帳戶"</string>
     <string name="managed_profile_not_available_label" msgid="7500578232182547365">"公司檔案未能使用"</string>
-    <string name="work_mode_label" msgid="1001415270126064436">"工作設定檔"</string>
-    <string name="work_mode_on_summary" msgid="2042885311126239961">"由你的機構管理"</string>
-    <string name="work_mode_off_summary" msgid="4044568753909036134">"應用程式和通知已關閉"</string>
+    <string name="work_mode_label" msgid="4687734487641548872">"工作應用程式"</string>
     <string name="remove_managed_profile_label" msgid="1294933737673830431">"移除公司檔案"</string>
     <string name="background_data" msgid="321903213000101158">"背景資料"</string>
     <string name="background_data_summary" msgid="6572245922513522466">"應用程式隨時可以同步處理、傳送和接收資料"</string>
@@ -2983,7 +2983,7 @@
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"螢幕鎖定音效"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"充電音效及震動"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"座架插入音效"</string>
-    <string name="touch_sounds_title" msgid="2200734041857425078">"觸控音效"</string>
+    <string name="touch_sounds_title" msgid="826964355109667449">"觸控音效"</string>
     <string name="vibrate_icon_title" msgid="1281100105045362530">"在震動模式下一律顯示「震動」圖示"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"插座喇叭播放音效"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"所有音效"</string>
@@ -3883,6 +3883,7 @@
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"IT 管理員或許可看到你的搜尋查詢和來電相關資料"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"跨設定檔日曆"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"在個人日曆中顯示工作活動"</string>
+    <string name="managed_profile_settings_footer" msgid="996500759305118103">"系統會暫停已關閉的工作應用程式，因此你無法存取當中的內容，這類應用程式亦無法傳送通知"</string>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"管理儲存空間"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"儲存空間管理員會從你的裝置移除備份相片和影片，以釋放儲存空間。"</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"移除相片和影片"</string>
@@ -4074,7 +4075,7 @@
     <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"「&lt;b&gt;Use &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;」會根據畫面內容判斷要自動填入的資料。從現在起，新密碼、密鑰和其他資料將會儲存在這裡。"</string>
     <string name="credman_picker_title" msgid="2642776965060619988">"密碼、密鑰及資料服務"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"要關閉「%1$s」嗎？"</string>
-    <string name="credman_confirmation_message" msgid="158362573056996762">"系統不會在你登入時提供已儲存的資料 (如密鑰和密碼)"</string>
+    <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;要關閉此服務嗎？&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; 當你登入後，系統將不會填入密碼、密鑰、付款方法等其他已儲存的資料。如要使用已儲存的資料，請選擇密碼、密鑰或資料服務。"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"要使用「%1$s」嗎？"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"「%1$s」會根據畫面內容判斷要自動填入的資料。"</string>
     <string name="credman_error_message_title" msgid="4741457523969373713">"密碼、密鑰及資料服務限制"</string>
@@ -4709,5 +4710,4 @@
     <string name="contrast_medium" msgid="384414510709285811">"中"</string>
     <string name="contrast_high" msgid="3988567609694797696">"高"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"此應用程式只可在 1 個視窗中開啟"</string>
-    <string name="note_task_shortcut_label" msgid="1589543982691587932">"筆記捷徑"</string>
 </resources>
