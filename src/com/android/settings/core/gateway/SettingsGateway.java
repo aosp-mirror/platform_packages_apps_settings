@@ -94,6 +94,7 @@ import com.android.settings.deviceinfo.PrivateVolumeForget;
 import com.android.settings.deviceinfo.PublicVolumeSettings;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
+import com.android.settings.deviceinfo.batteryinfo.BatteryInfoFragment;
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings;
 import com.android.settings.deviceinfo.legal.ModuleLicensesDashboard;
 import com.android.settings.display.AutoBrightnessSettings;
@@ -371,7 +372,8 @@ public class SettingsGateway {
             NfcAndPaymentFragment.class.getName(),
             ColorAndMotionFragment.class.getName(),
             LongBackgroundTasksDetails.class.getName(),
-            RegionalPreferencesEntriesFragment.class.getName()
+            RegionalPreferencesEntriesFragment.class.getName(),
+            BatteryInfoFragment.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
