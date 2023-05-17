@@ -39,6 +39,7 @@ public class BluetoothLeAudioDeviceDetailsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String PREFERENCE_KEY = "bluetooth_show_leaudio_device_details";
+    private static final String CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT = "le_audio_enabled_by_default";
     static int sLeAudioSupportedStateCache = BluetoothStatusCodes.ERROR_UNKNOWN;
 
     @VisibleForTesting
@@ -87,8 +88,12 @@ public class BluetoothLeAudioDeviceDetailsPreferenceController
         final boolean leAudioDeviceDetailEnabled = DeviceConfig.getBoolean(
                 DeviceConfig.NAMESPACE_SETTINGS_UI,
                 SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED, false);
+        final boolean leAudioEnabledByDefault = DeviceConfig.getBoolean(
+                DeviceConfig.NAMESPACE_BLUETOOTH, CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT, false);
 
-        ((SwitchPreference) mPreference).setChecked(leAudioDeviceDetailEnabled);
+        mPreference.setEnabled(!leAudioEnabledByDefault);
+        ((SwitchPreference) mPreference).setChecked(leAudioDeviceDetailEnabled
+                || leAudioEnabledByDefault);
     }
 
     @Override
