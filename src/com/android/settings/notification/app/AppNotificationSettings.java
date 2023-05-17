@@ -74,6 +74,7 @@ public class AppNotificationSettings extends NotificationSettings {
         mControllers = new ArrayList<>();
         mControllers.add(new HeaderPreferenceController(context, this));
         mControllers.add(new BlockPreferenceController(context, mDependentFieldListener, mBackend));
+        mControllers.add(new FullScreenIntentPermissionPreferenceController(context, mBackend));
         mControllers.add(new BadgePreferenceController(context, mBackend));
         mControllers.add(new AllowSoundPreferenceController(
                 context, mDependentFieldListener, mBackend));
