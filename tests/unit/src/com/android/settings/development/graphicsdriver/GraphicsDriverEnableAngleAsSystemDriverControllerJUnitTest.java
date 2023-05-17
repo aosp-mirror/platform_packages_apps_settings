@@ -56,11 +56,39 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
 
     private GraphicsDriverEnableAngleAsSystemDriverController mController;
 
-    @Mock
-    private DevelopmentSettingsDashboardFragment mFragment;
+    // Signal to wait for SystemProperty values changed
+    private class PropertyChangeSignal {
+        private CountDownLatch mCountDownLatch;
 
-    @Mock
-    private GraphicsDriverSystemPropertiesWrapper mSystemPropertiesMock;
+        private Runnable mCountDownJob;
+
+        PropertyChangeSignal() {
+            mCountDownLatch = new CountDownLatch(1);
+            mCountDownJob =
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            mCountDownLatch.countDown();
+                        }
+                    };
+        }
+
+        public Runnable getCountDownJob() {
+            return mCountDownJob;
+        }
+
+        public void wait(int timeoutInMilliSeconds) {
+            try {
+                mCountDownLatch.await(timeoutInMilliSeconds, TimeUnit.MILLISECONDS);
+            } catch (InterruptedException e) {
+                Assert.fail(e.getMessage());
+            }
+        }
+    }
+
+    @Mock private DevelopmentSettingsDashboardFragment mFragment;
+
+    @Mock private GraphicsDriverSystemPropertiesWrapper mSystemPropertiesMock;
 
     @Before
     public void setUp() {
@@ -76,18 +104,27 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
         // so we can force the SystemProperties with values we need to run tests.
         // 2) Override the showRebootDialog() to do nothing.
         // We do not need to pop up the reboot dialog in the test.
+        // 3) Override the rebootDevice() to do nothing.
         mController = new GraphicsDriverEnableAngleAsSystemDriverController(
-            mContext, mFragment, new Injector(){
-                @Override
-                public GraphicsDriverSystemPropertiesWrapper createSystemPropertiesWrapper() {
-                    return mSystemPropertiesMock;
-                }
-            }) {
-                @Override
-                void showRebootDialog() {
-                    // do nothing
-                }
-        };
+                mContext,
+                mFragment,
+                new Injector() {
+                    @Override
+                    public GraphicsDriverSystemPropertiesWrapper
+                            createSystemPropertiesWrapper() {
+                            return mSystemPropertiesMock;
+                        }
+                    }) {
+                    @Override
+                    void showRebootDialog() {
+                        // do nothing
+                    }
+
+                    @Override
+                    void rebootDevice(Context context) {
+                        // do nothing
+                    }
+                };
 
         final PreferenceManager preferenceManager = new PreferenceManager(mContext);
         final PreferenceScreen screen = preferenceManager.createPreferenceScreen(mContext);
@@ -99,58 +136,42 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
 
     @Test
     public void onPreferenceChange_switchOn_shouldEnableAngleAsSystemDriver() {
+        // Step 1: toggle the switch "Enable ANGLE" on
         // Add a callback when SystemProperty changes.
         // This allows the thread to wait until
         // GpuService::toggleAngleAsSystemDriver() updates the persist.graphics.egl.
-        final CountDownLatch countDownLatch = new CountDownLatch(1);
-        Runnable countDown = new Runnable() {
-            @Override
-            public void run() {
-                countDownLatch.countDown();
-            }
-        };
-        SystemProperties.addChangeCallback(countDown);
-
-        // Test onPreferenceChange(true) updates the persist.graphics.egl to "angle"
+        PropertyChangeSignal propertyChangeSignal = new PropertyChangeSignal();
+        SystemProperties.addChangeCallback(propertyChangeSignal.getCountDownJob());
         mController.onPreferenceChange(mPreference, true);
-        try {
-            countDownLatch.await(100, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException e) {
-            Assert.fail(e.getMessage());
-        }
+        propertyChangeSignal.wait(100);
+
+        // Step 2: verify results
         final String systemEGLDriver = SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL);
         assertThat(systemEGLDriver).isEqualTo(ANGLE_DRIVER_SUFFIX);
 
+        // Step 3: clean up
         // Done with the test, remove the callback
-        SystemProperties.removeChangeCallback(countDown);
+        SystemProperties.removeChangeCallback(propertyChangeSignal.getCountDownJob());
     }
 
     @Test
     public void onPreferenceChange_switchOff_shouldDisableAngleAsSystemDriver() {
+        // Step 1: toggle the switch "Enable ANGLE" off
         // Add a callback when SystemProperty changes.
         // This allows the thread to wait until
         // GpuService::toggleAngleAsSystemDriver() updates the persist.graphics.egl.
-        final CountDownLatch countDownLatch = new CountDownLatch(1);
-        Runnable countDown = new Runnable() {
-            @Override
-            public void run() {
-                countDownLatch.countDown();
-            }
-        };
-        SystemProperties.addChangeCallback(countDown);
-
-        // Test onPreferenceChange(false) updates the persist.graphics.egl to ""
+        PropertyChangeSignal propertyChangeSignal = new PropertyChangeSignal();
+        SystemProperties.addChangeCallback(propertyChangeSignal.getCountDownJob());
         mController.onPreferenceChange(mPreference, false);
-        try {
-            countDownLatch.await(100, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException e) {
-            Assert.fail(e.getMessage());
-        }
+        propertyChangeSignal.wait(100);
+
+        // Step 2: verify results
         final String systemEGLDriver = SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL);
         assertThat(systemEGLDriver).isEqualTo("");
 
+        // Step 3: clean up
         // Done with the test, remove the callback
-        SystemProperties.removeChangeCallback(countDown);
+        SystemProperties.removeChangeCallback(propertyChangeSignal.getCountDownJob());
     }
 
     @Test
@@ -162,8 +183,7 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
 
     @Test
     public void updateState_angleNotSupported_PreferenceShouldNotBeChecked() {
-        when(mSystemPropertiesMock.get(eq(PROPERTY_RO_GFX_ANGLE_SUPPORTED), any()))
-                .thenReturn("");
+        when(mSystemPropertiesMock.get(eq(PROPERTY_RO_GFX_ANGLE_SUPPORTED), any())).thenReturn("");
         mController.updateState(mPreference);
         assertThat(mPreference.isChecked()).isFalse();
     }
@@ -191,8 +211,7 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
             updateState_angleSupported_angleIsNotSystemGLESDriver_PreferenceShouldNotBeChecked() {
         when(mSystemPropertiesMock.get(eq(PROPERTY_RO_GFX_ANGLE_SUPPORTED), any()))
                 .thenReturn("true");
-        when(mSystemPropertiesMock.get(eq(PROPERTY_PERSISTENT_GRAPHICS_EGL), any()))
-                .thenReturn("");
+        when(mSystemPropertiesMock.get(eq(PROPERTY_PERSISTENT_GRAPHICS_EGL), any())).thenReturn("");
         mController.updateState(mPreference);
         assertThat(mPreference.isChecked()).isFalse();
     }
@@ -218,28 +237,18 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
         // Add a callback when SystemProperty changes.
         // This allows the thread to wait until
         // GpuService::toggleAngleAsSystemDriver() updates the persist.graphics.egl.
-        final CountDownLatch countDownLatch = new CountDownLatch(1);
-        Runnable countDown = new Runnable() {
-            @Override
-            public void run() {
-                countDownLatch.countDown();
-            }
-        };
-        SystemProperties.addChangeCallback(countDown);
+        PropertyChangeSignal propertyChangeSignal1 = new PropertyChangeSignal();
+        SystemProperties.addChangeCallback(propertyChangeSignal1.getCountDownJob());
 
         // Test that onDeveloperOptionSwitchDisabled,
         // persist.graphics.egl updates to ""
         mController.onDeveloperOptionsSwitchDisabled();
-        try {
-            countDownLatch.await(100, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException e) {
-            Assert.fail(e.getMessage());
-        }
+        propertyChangeSignal1.wait(100);
         final String systemEGLDriver = SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL);
         assertThat(systemEGLDriver).isEqualTo("");
 
         // Done with the test, remove the callback
-        SystemProperties.removeChangeCallback(countDown);
+        SystemProperties.removeChangeCallback(propertyChangeSignal1.getCountDownJob());
     }
 
     @Test
@@ -256,70 +265,217 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
 
     @Test
     public void onRebootCancelled_ToggleSwitchFromOnToOff() {
+        // Step 1: Toggle the "Enable ANGLE" switch on
         // Add a callback when SystemProperty changes.
         // This allows the thread to wait until
         // GpuService::toggleAngleAsSystemDriver() updates the persist.graphics.egl.
-        final CountDownLatch countDownLatch = new CountDownLatch(1);
-        Runnable countDown = new Runnable() {
-            @Override
-            public void run() {
-                countDownLatch.countDown();
-            }
-        };
-        SystemProperties.addChangeCallback(countDown);
+        PropertyChangeSignal propertyChangeSignal1 = new PropertyChangeSignal();
+        SystemProperties.addChangeCallback(propertyChangeSignal1.getCountDownJob());
+        mController.onPreferenceChange(mPreference, true);
+        // Block the following code execution until the "persist.graphics.egl" property value is
+        // changed.
+        propertyChangeSignal1.wait(100);
 
-        // Test that if the current persist.graphics.egl is "angle",
-        // when reboot is cancelled, persist.graphics.egl is changed back to "",
-        // and switch is set to unchecked.
+        // Step 2: Cancel reboot
+        PropertyChangeSignal propertyChangeSignal2 = new PropertyChangeSignal();
+        SystemProperties.addChangeCallback(propertyChangeSignal2.getCountDownJob());
         when(mSystemPropertiesMock.get(eq(PROPERTY_PERSISTENT_GRAPHICS_EGL), any()))
-                .thenReturn(ANGLE_DRIVER_SUFFIX);
+                .thenReturn(SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL));
         mController.onRebootCancelled();
-        try {
-            countDownLatch.await(100, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException e) {
-            Assert.fail(e.getMessage());
-        }
+        mController.onRebootDialogDismissed();
+        // Block the following code execution until the "persist.graphics.egl" property valye is
+        // changed.
+        propertyChangeSignal2.wait(100);
 
+        // Step 3: Verify results
+        // 1) Test that persist.graphics.egl is changed back to "".
         final String systemEGLDriver = SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL);
         assertThat(systemEGLDriver).isEqualTo("");
+        // 2) Test that the switch is set to unchecked.
         assertThat(mPreference.isChecked()).isFalse();
 
-        // Done with the test, remove the callback.
-        SystemProperties.removeChangeCallback(countDown);
+        // Step 4: Clean up
+        // Done with the test, remove the callback
+        SystemProperties.removeChangeCallback(propertyChangeSignal1.getCountDownJob());
+        SystemProperties.removeChangeCallback(propertyChangeSignal2.getCountDownJob());
     }
 
     @Test
     public void onRebootCancelled_ToggleSwitchFromOffToOn() {
+        // Step 1: Toggle off the switch "Enable ANGLE"
         // Add a callback when SystemProperty changes.
         // This allows the thread to wait until
         // GpuService::toggleAngleAsSystemDriver() updates the persist.graphics.egl.
-        final CountDownLatch countDownLatch = new CountDownLatch(1);
-        Runnable countDown = new Runnable() {
-            @Override
-            public void run() {
-                countDownLatch.countDown();
-            }
-        };
-        SystemProperties.addChangeCallback(countDown);
+        PropertyChangeSignal propertyChangeSignal1 = new PropertyChangeSignal();
+        SystemProperties.addChangeCallback(propertyChangeSignal1.getCountDownJob());
+        mController.onPreferenceChange(mPreference, false);
+        // Block the following code execution until the "persist.graphics.egl" property value is
+        // changed.
+        propertyChangeSignal1.wait(100);
 
-        // Test that if the current persist.graphics.egl is "",
-        // when reboot is cancelled, persist.graphics.egl is changed back to "angle",
-        // and switch is set to checked.
+        // Step 2: Cancel reboot
+        PropertyChangeSignal propertyChangeSignal2 = new PropertyChangeSignal();
+        SystemProperties.addChangeCallback(propertyChangeSignal2.getCountDownJob());
         when(mSystemPropertiesMock.get(eq(PROPERTY_PERSISTENT_GRAPHICS_EGL), any()))
-                .thenReturn("");
+                .thenReturn(SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL));
         mController.onRebootCancelled();
-        try {
-            countDownLatch.await(100, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException e) {
-            Assert.fail(e.getMessage());
-        }
+        mController.onRebootDialogDismissed();
+        // Block the following code execution until the "persist.graphics.egl" property valye is
+        // changed.
+        propertyChangeSignal2.wait(100);
 
+        // Step 3: Verify results
+        // 1) Test that persist.graphics.egl is changed back to "ANGLE"
         final String systemEGLDriver = SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL);
         assertThat(systemEGLDriver).isEqualTo(ANGLE_DRIVER_SUFFIX);
+        // 2) Test that the switch is set to checked
         assertThat(mPreference.isChecked()).isTrue();
 
+        // Step 4: Clean up
         // Done with the test, remove the callback.
-        SystemProperties.removeChangeCallback(countDown);
+        SystemProperties.removeChangeCallback(propertyChangeSignal1.getCountDownJob());
+        SystemProperties.removeChangeCallback(propertyChangeSignal2.getCountDownJob());
     }
 
+    @Test
+    public void onRebootDialogDismissed_ToggleSwitchFromOnToOff() {
+        // Step 1: Toggle on the switch "Enable ANGLE"
+        // Add a callback when SystemProperty changes.
+        // This allows the thread to wait until
+        // GpuService::toggleAngleAsSystemDriver() updates the persist.graphics.egl.
+        PropertyChangeSignal propertyChangeSignal1 = new PropertyChangeSignal();
+        SystemProperties.addChangeCallback(propertyChangeSignal1.getCountDownJob());
+        mController.onPreferenceChange(mPreference, true);
+        // Block the following code execution until the "persist.graphics.egl" property value is
+        // changed.
+        propertyChangeSignal1.wait(100);
+
+        // Step 2: Dismiss the reboot dialog
+        PropertyChangeSignal propertyChangeSignal2 = new PropertyChangeSignal();
+        SystemProperties.addChangeCallback(propertyChangeSignal2.getCountDownJob());
+        when(mSystemPropertiesMock.get(eq(PROPERTY_PERSISTENT_GRAPHICS_EGL), any()))
+                .thenReturn(SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL));
+        mController.onRebootDialogDismissed();
+        // Block the following code execution until the "persist.graphics.egl" property valye is
+        // changed.
+        propertyChangeSignal2.wait(100);
+
+        // Step 3: Verify results
+        // 1) Test that persist.graphics.egl is changed back to "".
+        final String systemEGLDriver = SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL);
+        assertThat(systemEGLDriver).isEqualTo("");
+        // 2) Test that the switch is set to unchecked.
+        assertThat(mPreference.isChecked()).isFalse();
+
+        // Step 4: Clean up
+        // Done with the test, remove the callback
+        SystemProperties.removeChangeCallback(propertyChangeSignal1.getCountDownJob());
+        SystemProperties.removeChangeCallback(propertyChangeSignal2.getCountDownJob());
+    }
+
+    @Test
+    public void onRebootDialogDismissed_ToggleSwitchFromOffToOn() {
+        // Step 1: Toggle on the switch "Enable ANGLE"
+        // Add a callback when SystemProperty changes.
+        // This allows the thread to wait until
+        // GpuService::toggleAngleAsSystemDriver() updates the persist.graphics.egl.
+        PropertyChangeSignal propertyChangeSignal1 = new PropertyChangeSignal();
+        SystemProperties.addChangeCallback(propertyChangeSignal1.getCountDownJob());
+        mController.onPreferenceChange(mPreference, false);
+        // Block the following code execution until the "persist.graphics.egl" property value is
+        // changed.
+        propertyChangeSignal1.wait(100);
+
+        // Step 2: Dismiss the reboot dialog
+        PropertyChangeSignal propertyChangeSignal2 = new PropertyChangeSignal();
+        SystemProperties.addChangeCallback(propertyChangeSignal2.getCountDownJob());
+        when(mSystemPropertiesMock.get(eq(PROPERTY_PERSISTENT_GRAPHICS_EGL), any()))
+                .thenReturn(SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL));
+        mController.onRebootDialogDismissed();
+        // Block the following code execution until the "persist.graphics.egl" property valye is
+        // changed.
+        propertyChangeSignal2.wait(100);
+
+        // Step 3: Verify results
+        // 1) Test that persist.graphics.egl is changed back to "ANGLE"
+        final String systemEGLDriver = SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL);
+        assertThat(systemEGLDriver).isEqualTo(ANGLE_DRIVER_SUFFIX);
+        // 2) Test that the switch is set to checked
+        assertThat(mPreference.isChecked()).isTrue();
+
+        // Step 4: Clean up
+        // Done with the test, remove the callback
+        SystemProperties.removeChangeCallback(propertyChangeSignal1.getCountDownJob());
+        SystemProperties.removeChangeCallback(propertyChangeSignal2.getCountDownJob());
+    }
+
+    @Test
+    public void onRebootDialogConfirmed_ToggleSwitchOnRemainsOn() {
+        // Step 1: Toggle on the switch "Enable ANGLE"
+        // Add a callback when SystemProperty changes.
+        // This allows the thread to wait until
+        // GpuService::toggleAngleAsSystemDriver() updates the persist.graphics.egl.
+        PropertyChangeSignal propertyChangeSignal1 = new PropertyChangeSignal();
+        SystemProperties.addChangeCallback(propertyChangeSignal1.getCountDownJob());
+        mController.onPreferenceChange(mPreference, true);
+        // Block the following code execution until the "persist.graphics.egl" property value is
+        // changed.
+        propertyChangeSignal1.wait(100);
+
+        // Step 2: Confirm reboot
+        PropertyChangeSignal propertyChangeSignal2 = new PropertyChangeSignal();
+        SystemProperties.addChangeCallback(propertyChangeSignal2.getCountDownJob());
+        when(mSystemPropertiesMock.get(eq(PROPERTY_PERSISTENT_GRAPHICS_EGL), any()))
+                .thenReturn(SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL));
+        mController.onRebootConfirmed(mContext);
+        mController.onRebootDialogDismissed();
+        // Block the following code execution until the "persist.graphics.egl" property valye is
+        // changed.
+        propertyChangeSignal2.wait(100);
+
+        // Step 3: Verify Results
+        // Test that persist.graphics.egl remains to be "ANGLE"
+        final String systemEGLDriver = SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL);
+        assertThat(systemEGLDriver).isEqualTo(ANGLE_DRIVER_SUFFIX);
+
+        // Step 4: Clean up
+        // Done with the test, remove the callback
+        SystemProperties.removeChangeCallback(propertyChangeSignal1.getCountDownJob());
+        SystemProperties.removeChangeCallback(propertyChangeSignal2.getCountDownJob());
+    }
+
+    @Test
+    public void onRebootDialogConfirmed_ToggleSwitchOffRemainsOff() {
+        // Step 1: Toggle off the switch "Enable ANGLE"
+        // Add a callback when SystemProperty changes.
+        // This allows the thread to wait until
+        // GpuService::toggleAngleAsSystemDriver() updates the persist.graphics.egl.
+        PropertyChangeSignal propertyChangeSignal1 = new PropertyChangeSignal();
+        SystemProperties.addChangeCallback(propertyChangeSignal1.getCountDownJob());
+        mController.onPreferenceChange(mPreference, false);
+        // Block the following code execution until the "persist.graphics.egl" property value is
+        // changed.
+        propertyChangeSignal1.wait(100);
+
+        // Step 2: Confirm reboot
+        PropertyChangeSignal propertyChangeSignal2 = new PropertyChangeSignal();
+        SystemProperties.addChangeCallback(propertyChangeSignal2.getCountDownJob());
+        when(mSystemPropertiesMock.get(eq(PROPERTY_PERSISTENT_GRAPHICS_EGL), any()))
+                .thenReturn(SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL));
+        mController.onRebootConfirmed(mContext);
+        mController.onRebootDialogDismissed();
+        // Block the following code execution until the "persist.graphics.egl" property valye is
+        // changed.
+        propertyChangeSignal2.wait(100);
+
+        // Step 3: Verify Results
+        // Test that persist.graphics.egl remains to be ""
+        final String systemEGLDriver = SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL);
+        assertThat(systemEGLDriver).isEqualTo("");
+
+        // Step 4: Clean up
+        // Done with the test, remove the callback
+        SystemProperties.removeChangeCallback(propertyChangeSignal1.getCountDownJob());
+        SystemProperties.removeChangeCallback(propertyChangeSignal2.getCountDownJob());
+    }
 }
