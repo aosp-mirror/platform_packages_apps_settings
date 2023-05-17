@@ -315,7 +315,7 @@ public class StylusDevicesControllerTest {
     }
 
     @Test
-    public void defaultNotesPreferenceClick_multiUser_showsProfileSelectorDialog() {
+    public void defaultNotesPreferenceClick_multiUserManagedProfile_showsProfileSelectorDialog() {
         mContext.setTheme(R.style.Theme_AppCompat);
         final String permissionPackageName = "permissions.package";
         final UserHandle currentUser = Process.myUserHandle();
@@ -338,12 +338,42 @@ public class StylusDevicesControllerTest {
     }
 
     @Test
+    public void defaultNotesPreferenceClick_noManagedProfile_sendsManageDefaultRoleIntent() {
+        final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+        mContext.setTheme(R.style.Theme_AppCompat);
+        final String permissionPackageName = "permissions.package";
+        final UserHandle currentUser = Process.myUserHandle();
+        List<UserInfo> userInfos = Arrays.asList(
+                new UserInfo(currentUser.getIdentifier(), "current", 0),
+                new UserInfo(1, "other", UserInfo.FLAG_FULL)
+        );
+        when(mUserManager.getUsers()).thenReturn(userInfos);
+        when(mUserManager.isManagedProfile(1)).thenReturn(false);
+        when(mUserManager.getUserInfo(currentUser.getIdentifier())).thenReturn(userInfos.get(0));
+        when(mUserManager.getUserInfo(1)).thenReturn(userInfos.get(1));
+        when(mUserManager.getProfileParent(any())).thenReturn(null);
+        when(mPm.getPermissionControllerPackageName()).thenReturn(permissionPackageName);
+
+        showScreen(mController);
+        Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
+        mController.onPreferenceClick(defaultNotesPref);
+
+        verify(mContext).startActivity(captor.capture());
+        Intent intent = captor.getValue();
+        assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MANAGE_DEFAULT_APP);
+        assertThat(intent.getPackage()).isEqualTo(permissionPackageName);
+        assertThat(intent.getStringExtra(Intent.EXTRA_ROLE_NAME)).isEqualTo(
+                RoleManager.ROLE_NOTES);
+        assertNull(mController.mDialog);
+    }
+
+    @Test
     public void profileSelectDialogClickCallback_onClick_sendsIntent() {
         Intent intent = new Intent();
         UserHandle user1 = mock(UserHandle.class);
         UserHandle user2 = mock(UserHandle.class);
-        List<UserHandle> users = Arrays.asList(new UserHandle[] {user1, user2});
-        mController.mDialog = mock(Dialog.class);
+        List<UserHandle> users = Arrays.asList(user1, user2);
+        mController.mDialog = new Dialog(mContext);
         UserAdapter.OnClickListener callback = mController
                 .createProfileDialogClickCallback(intent, users);
 
