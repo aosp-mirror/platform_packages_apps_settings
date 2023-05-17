@@ -59,12 +59,13 @@
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Упари десно уво"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Упари лево уво"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Упарите друго уво"</string>
-    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Леви слушни апарат је повезан.\n\nДа бисте упарили десни, уверите се да је укључен и спреман за упаривање."</string>
-    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Десни слушни апарат је повезан.\n\nДа бисте упарили леви, уверите се да је укључен и спреман за упаривање."</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="5711642363615781647">"Леви слушни апарат је повезан.\n\nДа бисте упарили десни, уверите се да је укључен и спреман за упаривање."</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"Десни слушни апарат је повезан.\n\nДа бисте упарили леви, уверите се да је укључен и спреман за упаривање."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Упари десно уво"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Упари лево уво"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"За све доступне слушне апарате"</string>
-    <string name="bluetooth_device_controls_title" msgid="4293399064818086587">"Пречице и компатибилност са слушним апаратима"</string>
+    <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"Подешавања слушног апарата"</string>
+    <string name="bluetooth_device_controls_summary" msgid="949566933352398337">"Аудио излаз, пречица, компатибилност са слушним апаратима"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"За овај уређај"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Аудио излаз"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"О аудио излазу"</string>
@@ -105,8 +106,7 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Откажи"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Онемогући Bluetooth LE audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Онемогућава функцију Bluetooth LE audio ако уређај подржава могућности LE audio хардвера."</string>
-    <!-- no translation found for bluetooth_show_leaudio_device_details (3306637862550475370) -->
-    <skip />
+    <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"LE Audio прекидач у детаљима о уређају"</string>
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Омогући Bluetooth LE Audio листу дозвола"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Омогућава функцију Bluetooth LE Audio листу дозвола."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Медијски уређаји"</string>
@@ -166,6 +166,10 @@
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Да бисте изабрали језик за сваку апликацију, идите у подешавања језика апликације."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Сазнајте више о језицима апликација"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Желите да језик система од сада буде %s ?"</string>
+    <!-- no translation found for title_system_locale_addition (8218683660751479466) -->
+    <skip />
+    <!-- no translation found for desc_system_locale_addition (3409917362651596070) -->
+    <skip />
     <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Подешавања уређаја и регионална подешавања ће се променити."</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Промени"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"Није доступно: %s"</string>
@@ -356,14 +360,10 @@
     <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Кад подесите откључавање лицем и откључавање отиском прста, телефон ће вам тражити отисак прста кад носите маску или се налазите на неком мрачном месту.\n\nАко није могуће препознати лице или отисак прста, можете да га откључате сатом."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Ако отисак прста не може да се препозна, можете да откључате уређај сатом."</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Ако лице не може да се препозна, можете да откључате уређај сатом."</string>
-    <!-- no translation found for biometric_settings_use_fingerprint_or_watch_for (1160830065613858095) -->
-    <skip />
-    <!-- no translation found for biometric_settings_use_face_or_watch_for (1507077107150278532) -->
-    <skip />
-    <!-- no translation found for biometric_settings_use_face_fingerprint_or_watch_for (7495835723072020641) -->
-    <skip />
-    <!-- no translation found for biometric_settings_use_watch_for (5454545622244040110) -->
-    <skip />
+    <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"Користите отисак прста или сат за"</string>
+    <string name="biometric_settings_use_face_or_watch_for" msgid="1507077107150278532">"Користите лице или сат за"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"Користите лице, отисак прста или сат за"</string>
+    <string name="biometric_settings_use_watch_for" msgid="5454545622244040110">"Користите сат за"</string>
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Помоћу лица или сата"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Помоћу отиска прста или сата"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Помоћу лица, отиска прста или сата"</string>
@@ -447,6 +447,7 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Ставите једну страну прста на сензор и задржите, па ставите другу страну"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Прескочити подешавање отиска прста?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Изабрали сте да користите отисак прста као један начин за откључавање телефона. Ако сада прескочите, мораћете касније да обавите ово подешавање. За подешавање је потребно само око минут времена."</string>
+    <string name="lock_screen_skip_setup_title" msgid="6979006375138175111">"Желите да прескочите подешавање за опције <xliff:g id="OPTIONS">%s</xliff:g>?"</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Желите ли да прескочите подешавање PIN-а?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Желите да прескочите подешавање PIN-а и лица?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Прескочићете подешавање PIN-а и отиска прста?"</string>
@@ -492,7 +493,7 @@
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Подесите откључавање екрана"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Да бисте побољшали безбедност, подесите PIN, шаблон или лозинку за овај уређај"</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Подеси откључавање екрана"</string>
-    <string name="no_screen_lock_issue_notification_title" msgid="5718363966239208505">"Уређај нема закључавање екрана"</string>
+    <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"Подесите закључавање екрана"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"Да бисте побољшали безбедност, подесите PIN, шаблон или лозинку за овај уређај"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Заштитите телефон"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Додајте отисак прста за откључавање"</string>
@@ -523,13 +524,13 @@
     <string name="unlock_set_unlock_password_title" msgid="2559842616268607041">"Лозинка"</string>
     <string name="unlock_set_do_later_title" msgid="6565575303676064364">"Не сада"</string>
     <string name="current_screen_lock" msgid="1367883977261098017">"Актуелно закључавање екрана"</string>
-    <string name="fingerprint_unlock_set_unlock_pattern" msgid="4492334416059646032">"отисак прста + шаблон"</string>
-    <string name="fingerprint_unlock_set_unlock_pin" msgid="4724451168139460493">"отисак прста + PIN"</string>
-    <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"отисак прста + лозинка"</string>
+    <string name="fingerprint_unlock_set_unlock_pattern" msgid="2229689425933043901">"Шаблон • Отисак прста"</string>
+    <string name="fingerprint_unlock_set_unlock_pin" msgid="7979848492740627674">"PIN • Отисак прста"</string>
+    <string name="fingerprint_unlock_set_unlock_password" msgid="6207676267295036963">"Лозинка • Отисак прста"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Наставите без отиска прста"</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"Откључавање лицем и шаблон"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Откључавање лицем и PIN"</string>
-    <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Откључавање лицем и лозинка"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4206669838203096608">"Шаблон • Лице"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"PIN • Лице"</string>
+    <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"Лозинка • Лице"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Наставите без откључавања лицем"</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Шаблон • Лице • Отисак прста"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • Лице • Отисак прста"</string>
@@ -656,6 +657,7 @@
     <string name="remove_association_button" msgid="5004208145998061135">"Уклони повезивање"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Желите да прекинете везу са апликацијом?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Апликација <xliff:g id="APP_NAME">%1$s</xliff:g> се више неће повезивати са уређајем <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
+    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Експериментално. Бољи квалитет звука."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Заборави уређај"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Прекини везу са апликацијом"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Максималан број повезаних Bluetooth аудио уређаја"</string>
@@ -958,6 +960,7 @@
     <string name="account_settings" msgid="255404935489127404">"Налози"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"Налози профила за посао – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"Налози личног профила"</string>
+    <string name="accessibility_category_clone" msgid="7893383448944567885">"Клонирајте налоге профила"</string>
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"Налог за посао – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Лични налог – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Претрага"</string>
@@ -1993,7 +1996,7 @@
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Настави"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Слушни апарати"</string>
     <string name="accessibility_hearingaid_intro" msgid="5856992709195963850">"Можете да користите слушне апарате, кохлеарне импланте и друге уређаје за појачавање звука са телефоном"</string>
-    <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Није повезан ниједан слушни апарат"</string>
+    <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Нема повезаних слушних апарата"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Додајте слушне апарате"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Упарите слушне апарате"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"На следећем екрану додирните слушне апарате. Можда ћете морати да засебно упарите лево и десно уво.\n\nУверите се да су слушни апарати укључени и спремни за упаривање."</string>
@@ -2193,8 +2196,7 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Највећа потрошња батерије"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Погледајте апликације са највећом потрошњом батерије"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Пуњење је оптимизовано да би се заштитила батерија"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_summary (5107379280241187562) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_summary" msgid="5107379280241187562">"Пуњење је оптимизовано да би се продужио век трајања батерије"</string>
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Пуњење је оптимизовано да би се заштитила батерија"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Да би се продужио век трајања батерије, пуњење се оптимизује док је уређај на базној станици"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Пуњење је оптимизовано да би се заштитила батерија"</string>
@@ -2479,9 +2481,7 @@
     <string name="sync_is_failing" msgid="6738004111400633331">"Синхронизација тренутно има проблема. Ускоро ће се вратити."</string>
     <string name="add_account_label" msgid="7134707140831385869">"Додај налог"</string>
     <string name="managed_profile_not_available_label" msgid="7500578232182547365">"Пословни профил још увек није доступан"</string>
-    <string name="work_mode_label" msgid="1001415270126064436">"Пословни профил"</string>
-    <string name="work_mode_on_summary" msgid="2042885311126239961">"Овим управља организација"</string>
-    <string name="work_mode_off_summary" msgid="4044568753909036134">"Апликације и обавештења су искључени"</string>
+    <string name="work_mode_label" msgid="4687734487641548872">"Пословне апликације"</string>
     <string name="remove_managed_profile_label" msgid="1294933737673830431">"Уклони пословни профил"</string>
     <string name="background_data" msgid="321903213000101158">"Подаци о позадини"</string>
     <string name="background_data_summary" msgid="6572245922513522466">"Апликације увек могу да синхронизују, шаљу и примају податке"</string>
@@ -2983,7 +2983,7 @@
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Звук закључавања екрана"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Звукови и вибрација пуњења"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Звукови монтирања"</string>
-    <string name="touch_sounds_title" msgid="2200734041857425078">"Звукови при додиру"</string>
+    <string name="touch_sounds_title" msgid="826964355109667449">"Звукови додира и клика"</string>
     <string name="vibrate_icon_title" msgid="1281100105045362530">"Увек приказуј икону у режиму вибрације"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Репродукује базна станица"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Сви звукови"</string>
@@ -3884,6 +3884,7 @@
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"Претраге и долазни позиви могу да буду видљиви ИТ администратору"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Календар за више врста профила"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Приказивање пословних догађаја у личном календару"</string>
+    <string name="managed_profile_settings_footer" msgid="996500759305118103">"Када су пословне апликације искључене, оне се паузирају и не може да им се приступи нити могу да вам шаљу обавештења"</string>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"Управљај меморијским простором"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"Да би ослободио меморијски простор, менаџер меморијског простора уклања резервне копије слика и видео снимака са уређаја."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Уклоните слике и видео"</string>
@@ -4075,7 +4076,7 @@
     <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Користите апликацију &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; користи оно што је на екрану ради одређивања шта може аутоматски да се попуни. Нове лозинке, приступни кодови и други подаци ће се од сада чувати овде."</string>
     <string name="credman_picker_title" msgid="2642776965060619988">"Услуге за лозинке, приступне кодове и податке"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Желите да искључите: %1$s?"</string>
-    <string name="credman_confirmation_message" msgid="158362573056996762">"Сачуване информације попут приступних кодова и лозинки можда неће бити доступне када се пријавите"</string>
+    <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Желите да искључите ову услугу?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Сачуване информације као што су лозинке, приступни кодови, начини плаћања и други подаци се неће попуњавати када сте пријављени. Да бисте користили сачуване информације, одаберите услугу за лозинке, приступне кодове или податке."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Желите да користите %1$s?"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s користи садржај на екрану да би утврдио шта може аутоматски да се попуни."</string>
     <string name="credman_error_message_title" msgid="4741457523969373713">"Ограничење услуга за лозинке, приступне кодове и податке"</string>
@@ -4711,5 +4712,4 @@
     <string name="contrast_medium" msgid="384414510709285811">"Средње"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Високо"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Ова апликација може да се отвори само у једном прозору"</string>
-    <string name="note_task_shortcut_label" msgid="1589543982691587932">"Пречица за белешке"</string>
 </resources>

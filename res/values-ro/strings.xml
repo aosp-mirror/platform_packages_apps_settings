@@ -59,12 +59,13 @@
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Urechea dreaptă"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Urechea stângă"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Asociază cealaltă ureche"</string>
-    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Aparatul auditiv stâng este conectat.\n\nCa să-l asociezi pe cel drept, verifică dacă este pornit și gata de asociat."</string>
-    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Aparatul auditiv drept este conectat.\n\nCa să-l asociezi pe cel stâng, verifică dacă este pornit și gata de asociat."</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="5711642363615781647">"Aparatul auditiv stâng este conectat.\n\nCa să-l asociezi pe cel drept, verifică dacă este pornit și gata de asociat."</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"Aparatul auditiv drept este conectat.\n\nCa să-l asociezi pe cel stâng, verifică dacă este pornit și gata de asociat."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Asociază urechea dreaptă"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Asociază urechea stângă"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Pentru toate aparatele auditive disponibile"</string>
-    <string name="bluetooth_device_controls_title" msgid="4293399064818086587">"Comenzi rapide și compatibilitatea cu aparatele auditive"</string>
+    <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"Setări pentru aparate auditive"</string>
+    <string name="bluetooth_device_controls_summary" msgid="949566933352398337">"Ieșire audio, comandă rapidă, compatibilitate cu aparate auditive"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Pentru acest dispozitiv"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Ieșire audio"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Despre ieșirea audio"</string>
@@ -105,8 +106,7 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Anulează"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Dezactivează Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Dezactivează funcția Bluetooth LE Audio dacă dispozitivul acceptă capacitățile de hardware LE Audio."</string>
-    <!-- no translation found for bluetooth_show_leaudio_device_details (3306637862550475370) -->
-    <skip />
+    <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Afișează comutatorul LE Audio în Detaliile despre dispozitiv"</string>
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Activează Lista cu acces permis pentru Bluetooth LE Audio"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Activează funcția Listă cu acces permis pentru Bluetooth LE Audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Dispozitive media"</string>
@@ -166,6 +166,10 @@
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Ca să selectezi o limbă pentru fiecare aplicație, accesează setările de limbă ale aplicației"</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Află mai multe despre limbile aplicațiilor"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Schimbi limba sistemului la %s?"</string>
+    <!-- no translation found for title_system_locale_addition (8218683660751479466) -->
+    <skip />
+    <!-- no translation found for desc_system_locale_addition (3409917362651596070) -->
+    <skip />
     <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Setările dispozitivului și preferințele regionale se vor modifica."</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Schimbă"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s nu este disponibilă"</string>
@@ -356,14 +360,10 @@
     <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Când configurezi Deblocarea facială și Deblocarea cu amprenta, telefonul îți va solicita amprenta atunci când porți mască sau te afli într-o zonă întunecoasă.\n\nPoți folosi ceasul pentru deblocare când nu ți se recunoaște fața sau amprenta."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Poți folosi ceasul pentru deblocare când nu ți se recunoaște amprenta."</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Poți folosi ceasul pentru deblocare când nu ți se recunoaște fața."</string>
-    <!-- no translation found for biometric_settings_use_fingerprint_or_watch_for (1160830065613858095) -->
-    <skip />
-    <!-- no translation found for biometric_settings_use_face_or_watch_for (1507077107150278532) -->
-    <skip />
-    <!-- no translation found for biometric_settings_use_face_fingerprint_or_watch_for (7495835723072020641) -->
-    <skip />
-    <!-- no translation found for biometric_settings_use_watch_for (5454545622244040110) -->
-    <skip />
+    <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"Folosește amprenta sau ceasul pentru a"</string>
+    <string name="biometric_settings_use_face_or_watch_for" msgid="1507077107150278532">"Folosește fața sau ceasul pentru a"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"Folosește fața, amprenta sau ceasul pentru a"</string>
+    <string name="biometric_settings_use_watch_for" msgid="5454545622244040110">"Folosește ceasul pentru a"</string>
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Folosește fața sau ceasul"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Folosește amprenta sau ceasul"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Folosește fața, amprenta sau ceasul"</string>
@@ -447,6 +447,7 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Așează partea laterală a degetului pe senzor și menține, apoi procedează la fel cu cealaltă parte"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Omiți configurarea amprentei?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Ai ales ca amprenta să fie una dintre modalitățile de deblocare a telefonului. Dacă omiți acum această etapă, va trebui să o configurezi mai târziu. Configurarea durează în jur de un minut."</string>
+    <string name="lock_screen_skip_setup_title" msgid="6979006375138175111">"Omiți configurarea pentru <xliff:g id="OPTIONS">%s</xliff:g>?"</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Omiți configurarea PIN-ului?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Omiți configurarea PIN-ului și a chipului?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Omiți configurarea PIN-ului și a amprentei?"</string>
@@ -492,7 +493,7 @@
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Setează o blocare a ecranului"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Pentru securitate sporită, setează un PIN, un model sau o parolă pentru acest dispozitiv."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Setează blocarea ecranului"</string>
-    <string name="no_screen_lock_issue_notification_title" msgid="5718363966239208505">"Dispozitivul nu are blocarea ecranului setată"</string>
+    <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"Setează o blocare a ecranului"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"Pentru securitate sporită, setează un PIN, un model sau o parolă pentru acest dispozitiv."</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Securizează telefonul"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Adaugă amprenta pentru deblocare"</string>
@@ -523,13 +524,13 @@
     <string name="unlock_set_unlock_password_title" msgid="2559842616268607041">"Parolă"</string>
     <string name="unlock_set_do_later_title" msgid="6565575303676064364">"Nu acum"</string>
     <string name="current_screen_lock" msgid="1367883977261098017">"Blocarea actuală a ecranului"</string>
-    <string name="fingerprint_unlock_set_unlock_pattern" msgid="4492334416059646032">"Amprentă + model"</string>
-    <string name="fingerprint_unlock_set_unlock_pin" msgid="4724451168139460493">"Amprentă + cod PIN"</string>
-    <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"Amprentă + parolă"</string>
+    <string name="fingerprint_unlock_set_unlock_pattern" msgid="2229689425933043901">"Modelul • Amprenta"</string>
+    <string name="fingerprint_unlock_set_unlock_pin" msgid="7979848492740627674">"Codul PIN • Amprenta"</string>
+    <string name="fingerprint_unlock_set_unlock_password" msgid="6207676267295036963">"Parola • Amprenta"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Continuă fără amprentă"</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"Deblocare facială + model"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Deblocare facială + PIN"</string>
-    <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Deblocare facială + parolă"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4206669838203096608">"Modelul • Fața"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"Codul PIN • Fața"</string>
+    <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"Parola • Fața"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Continuă fără Deblocarea facială"</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Model • Față • Amprentă"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • Față • Amprentă"</string>
@@ -656,6 +657,7 @@
     <string name="remove_association_button" msgid="5004208145998061135">"Elimină asocierea"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Deconectezi aplicația?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Aplicația <xliff:g id="APP_NAME">%1$s</xliff:g> nu se va mai conecta la <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
+    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Experimental. Ameliorează calitatea audio."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Elimină dispozitivul"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Deconectează aplicația"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Numărul maxim de dispozitive audio Bluetooth conectate"</string>
@@ -958,6 +960,7 @@
     <string name="account_settings" msgid="255404935489127404">"Conturi"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"Conturi cu profil de serviciu – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"Conturi cu profil personal"</string>
+    <string name="accessibility_category_clone" msgid="7893383448944567885">"Clonează conturile de profil"</string>
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"Cont de serviciu – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Cont personal – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Caută"</string>
@@ -1993,7 +1996,7 @@
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continuă"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Aparate auditive"</string>
     <string name="accessibility_hearingaid_intro" msgid="5856992709195963850">"Poți folosi aparate auditive, implanturi cohleare și alte dispozitive de amplificare cu telefonul"</string>
-    <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Nu s-a conectat niciun aparat auditiv"</string>
+    <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Fără aparate auditive conectate"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Adaugă aparate auditive"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Asociază aparatele auditive"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Pe ecranul următor, atinge aparatele auditive. Poate fi nevoie să asociezi separat urechea stângă și pe cea dreaptă.\n\nVerifică dacă aparatele auditive sunt activate și gata de asociat."</string>
@@ -2193,8 +2196,7 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Utilizare mai mare a bateriei"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Vezi aplicațiile cu cea mai mare utilizare"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Încărcarea este optimizată pentru a proteja bateria"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_summary (5107379280241187562) -->
-    <skip />
+    <string name="battery_tip_limited_temporarily_summary" msgid="5107379280241187562">"Pentru a mări autonomia bateriei, încărcarea este optimizată"</string>
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Încărcarea este optimizată pentru a proteja bateria"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Pentru a mări autonomia bateriei, încărcarea este optimizată cât timp dispozitivul este andocat"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Încărcarea este optimizată pentru a proteja bateria"</string>
@@ -2479,9 +2481,7 @@
     <string name="sync_is_failing" msgid="6738004111400633331">"Sincronizarea se confruntă în prezent cu probleme. Aceasta va fi funcțională în curând."</string>
     <string name="add_account_label" msgid="7134707140831385869">"Adaugă un cont"</string>
     <string name="managed_profile_not_available_label" msgid="7500578232182547365">"Profilul de serviciu nu este încă disponibil"</string>
-    <string name="work_mode_label" msgid="1001415270126064436">"Profil de serviciu"</string>
-    <string name="work_mode_on_summary" msgid="2042885311126239961">"Gestionat de organizația dvs."</string>
-    <string name="work_mode_off_summary" msgid="4044568753909036134">"Aplicațiile și notificările sunt dezactivate"</string>
+    <string name="work_mode_label" msgid="4687734487641548872">"Aplicații pentru lucru"</string>
     <string name="remove_managed_profile_label" msgid="1294933737673830431">"Elimină profilul de serviciu"</string>
     <string name="background_data" msgid="321903213000101158">"Date de fundal"</string>
     <string name="background_data_summary" msgid="6572245922513522466">"Aplicațiile pot oricând sincroniza, trimite și primi date"</string>
@@ -2983,7 +2983,7 @@
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Sunet de blocare a ecranului"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Sunete și vibrații pentru încărcare"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Sunete la andocare"</string>
-    <string name="touch_sounds_title" msgid="2200734041857425078">"Sunete la atingere"</string>
+    <string name="touch_sounds_title" msgid="826964355109667449">"Sunete pentru atingere și clic"</string>
     <string name="vibrate_icon_title" msgid="1281100105045362530">"Afișează întotdeauna pictograma în modul vibrații"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Redare difuzor dispoz. andoc."</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Toate semnalele audio"</string>
@@ -3884,6 +3884,7 @@
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"Căutările tale și apelurile primite pot fi vizibile pentru administratorul IT"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Calendar cu profil combinat"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Afișează evenimente de serviciu pe calendarul personal"</string>
+    <string name="managed_profile_settings_footer" msgid="996500759305118103">"Când aplicațiile pentru lucru sunt dezactivate, acestea sunt întrerupte, nu pot fi accesate și nu îți pot trimite notificări."</string>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"Gestionează spațiul de stocare"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"Pentru a elibera spațiu de stocare, managerul spațiului de stocare elimină de pe dispozitiv fotografiile și videoclipurile cărora le-ai făcut backup."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Elimină fotografii și videoclipuri"</string>
@@ -4075,7 +4076,7 @@
     <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Folosește &lt;xliff:g id=app_name example=Furnizorul&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Furnizorul&gt;%1$s&lt;/xliff:g&gt; folosește elementele de pe ecran pentru a stabili ce se poate completa automat. De acum înainte, parolele noi, cheile de acces și alte informații se vor salva aici."</string>
     <string name="credman_picker_title" msgid="2642776965060619988">"Parole, chei de acces și servicii de date"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Dezactivezi %1$s?"</string>
-    <string name="credman_confirmation_message" msgid="158362573056996762">"Informațiile salvate, cum ar fi cheile de acces și parolele, pot să nu fie disponibile când te conectezi"</string>
+    <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Dezactivezi serviciul?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Informațiile salvate, cum ar fi parole, chei de acces, metode de plată și altele, nu vor fi completate când te conectezi. Pentru a folosi informațiile salvate, alege o parolă, o cheie de acces sau un serviciu de date."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Folosești %1$s?"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s folosește elementele de pe ecran ca să afle ce se poate completa automat."</string>
     <string name="credman_error_message_title" msgid="4741457523969373713">"Limita pentru parole, chei de acces și servicii de date"</string>
@@ -4679,7 +4680,7 @@
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Aplicații instalate cu peste # lună în urmă}few{Aplicații instalate cu peste # luni în urmă}other{Aplicații instalate cu peste # de luni în urmă}}"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Senzor de amprentă"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Notificări flash"</string>
-    <string name="flash_notifications_about_title" msgid="9004351252928121214">"Despre notificările prin semnale luminoase"</string>
+    <string name="flash_notifications_about_title" msgid="9004351252928121214">"Despre notificările flash"</string>
     <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Dezactivate"</string>
     <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"Activate / blițul camerei foto"</string>
     <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Activată / iluminarea ecranului"</string>
@@ -4711,5 +4712,4 @@
     <string name="contrast_medium" msgid="384414510709285811">"Mediu"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Ridicat"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Aplicația se poate deschide într-o singură fereastră"</string>
-    <string name="note_task_shortcut_label" msgid="1589543982691587932">"Comandă rapidă pentru notă"</string>
 </resources>
