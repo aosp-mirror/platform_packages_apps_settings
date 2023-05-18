@@ -16,7 +16,6 @@
 
 package com.android.settings.bluetooth;
 
-import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
@@ -89,7 +88,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         mManager = manager;
         mProfileManager = mManager.getProfileManager();
         mCachedDevice = device;
-        mAllOfCachedDevices = getAllOfCachedBluetoothDevices();
+        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mContext, mCachedDevice);
         lifecycle.addObserver(this);
     }
 
@@ -319,20 +318,6 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         return result;
     }
 
-    private List<CachedBluetoothDevice> getAllOfCachedBluetoothDevices() {
-        List<CachedBluetoothDevice> cachedBluetoothDevices = new ArrayList<>();
-        if (mCachedDevice == null) {
-            return cachedBluetoothDevices;
-        }
-        cachedBluetoothDevices.add(mCachedDevice);
-        if (mCachedDevice.getGroupId() != BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
-            for (CachedBluetoothDevice member : mCachedDevice.getMemberDevice()) {
-                cachedBluetoothDevices.add(member);
-            }
-        }
-        return cachedBluetoothDevices;
-    }
-
     /**
      * Disable the Le Audio profile, VCP, and CSIP for each of the Le Audio devices.
      *
@@ -480,7 +465,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         for (CachedBluetoothDevice item : mAllOfCachedDevices) {
             item.unregisterCallback(this);
         }
-        mAllOfCachedDevices = getAllOfCachedBluetoothDevices();
+        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mContext, mCachedDevice);
         for (CachedBluetoothDevice item : mAllOfCachedDevices) {
             item.registerCallback(this);
         }
