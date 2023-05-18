@@ -48,6 +48,7 @@ import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
@@ -75,6 +76,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     private InputManager mIm;
     private InputMethodManager mImm;
     private InputDeviceIdentifier mAutoInputDeviceIdentifier;
+    private KeyboardSettingsFeatureProvider mFeatureProvider;
     @NonNull
     private PreferenceCategory mKeyboardAssistanceCategory;
     @NonNull
@@ -82,6 +84,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
 
     private Intent mIntentWaitingForResult;
     private boolean mIsNewKeyboardSettings;
+    private boolean mSupportsFirmwareUpdate;
 
     static final String EXTRA_BT_ADDRESS = "extra_bt_address";
     private String mBluetoothAddress;
@@ -104,6 +107,12 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                 (SwitchPreference) mKeyboardAssistanceCategory.findPreference(
                         SHOW_VIRTUAL_KEYBOARD_SWITCH));
 
+        FeatureFactory featureFactory = FeatureFactory.getFactory(getContext());
+        mFeatureProvider = featureFactory.getKeyboardSettingsFeatureProvider();
+        mSupportsFirmwareUpdate = mFeatureProvider.supportsFirmwareUpdate();
+        if (mSupportsFirmwareUpdate) {
+            mFeatureProvider.addFirmwareUpdateCategory(getContext(), getPreferenceScreen());
+        }
         mIsNewKeyboardSettings = FeatureFlagUtils.isEnabled(
                 getContext(), FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_UI);
         boolean isModifierKeySettingsEnabled = FeatureFlagUtils
@@ -247,6 +256,9 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         }
         mKeyboardAssistanceCategory.setOrder(1);
         preferenceScreen.addPreference(mKeyboardAssistanceCategory);
+        if (mSupportsFirmwareUpdate) {
+            mFeatureProvider.addFirmwareUpdateCategory(getPrefContext(), preferenceScreen);
+        }
         updateShowVirtualKeyboardSwitch();
     }
 

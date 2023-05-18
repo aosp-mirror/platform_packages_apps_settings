@@ -39,6 +39,7 @@ import com.android.settings.fuelgauge.BatteryStatusFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
+import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.panel.PanelFeatureProvider;
 import com.android.settings.search.SearchFeatureProvider;
@@ -197,6 +198,11 @@ public abstract class FeatureFactory {
      * Retrieves implementation for Wi-Fi feature.
      */
     public abstract WifiFeatureProvider getWifiFeatureProvider();
+
+    /**
+     * Retrieves implementation for keyboard settings feature.
+     */
+    public abstract KeyboardSettingsFeatureProvider getKeyboardSettingsFeatureProvider();
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {

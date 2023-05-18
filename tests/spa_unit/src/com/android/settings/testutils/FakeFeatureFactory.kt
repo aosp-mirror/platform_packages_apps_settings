@@ -33,6 +33,7 @@ import com.android.settings.fuelgauge.BatteryStatusFeatureProvider
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider
 import com.android.settings.gestures.AssistGestureFeatureProvider
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider
+import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider
 import com.android.settings.localepicker.LocaleFeatureProvider
 import com.android.settings.overlay.DockUpdaterFeatureProvider
 import com.android.settings.overlay.FeatureFactory
@@ -180,6 +181,10 @@ class FakeFeatureFactory : FeatureFactory() {
     }
 
     override fun getWifiFeatureProvider(): WifiFeatureProvider {
+        TODO("Not yet implemented")
+    }
+
+    override fun getKeyboardSettingsFeatureProvider(): KeyboardSettingsFeatureProvider {
         TODO("Not yet implemented")
     }
 }
