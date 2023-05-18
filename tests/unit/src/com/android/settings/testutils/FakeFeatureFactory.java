@@ -35,6 +35,7 @@ import com.android.settings.fuelgauge.BatteryStatusFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
+import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.overlay.DockUpdaterFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
@@ -88,6 +89,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public AccessibilityMetricsFeatureProvider mAccessibilityMetricsFeatureProvider;
     public AdvancedVpnFeatureProvider mAdvancedVpnFeatureProvider;
     public WifiFeatureProvider mWifiFeatureProvider;
+    public KeyboardSettingsFeatureProvider mKeyboardSettingsFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -131,6 +133,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         mAccessibilityMetricsFeatureProvider = mock(AccessibilityMetricsFeatureProvider.class);
         mAdvancedVpnFeatureProvider = mock(AdvancedVpnFeatureProvider.class);
         mWifiFeatureProvider = mock(WifiFeatureProvider.class);
+        mKeyboardSettingsFeatureProvider = mock(KeyboardSettingsFeatureProvider.class);
     }
 
     @Override
@@ -281,5 +284,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public WifiFeatureProvider getWifiFeatureProvider() {
         return mWifiFeatureProvider;
+    }
+
+    @Override
+    public KeyboardSettingsFeatureProvider getKeyboardSettingsFeatureProvider() {
+        return mKeyboardSettingsFeatureProvider;
     }
 }
