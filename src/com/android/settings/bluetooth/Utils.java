@@ -19,6 +19,7 @@ package com.android.settings.bluetooth;
 import static android.os.Process.BLUETOOTH_UID;
 
 import android.app.settings.SettingsEnums;
+import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
@@ -39,9 +40,12 @@ import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils.ErrorListener;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager.BluetoothManagerCallback;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
@@ -224,5 +228,48 @@ public final class Utils {
             return matchedPackage;
         }
         throw new NameNotFoundException("Could not find main bluetooth package");
+    }
+
+    /**
+     * Returns all cachedBluetoothDevices with the same groupId.
+     * @param cachedBluetoothDevice The main cachedBluetoothDevice.
+     * @return all cachedBluetoothDevices with the same groupId.
+     */
+    public static List<CachedBluetoothDevice> getAllOfCachedBluetoothDevices(Context context,
+            CachedBluetoothDevice cachedBluetoothDevice) {
+        List<CachedBluetoothDevice> cachedBluetoothDevices = new ArrayList<>();
+        if (cachedBluetoothDevice == null) {
+            Log.e(TAG, "getAllOfCachedBluetoothDevices: no cachedBluetoothDevice");
+            return cachedBluetoothDevices;
+        }
+        int deviceGroupId = cachedBluetoothDevice.getGroupId();
+        if (deviceGroupId == BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
+            cachedBluetoothDevices.add(cachedBluetoothDevice);
+            return cachedBluetoothDevices;
+        }
+
+        final LocalBluetoothManager localBtMgr = Utils.getLocalBtManager(context);
+        if (localBtMgr == null) {
+            Log.e(TAG, "getAllOfCachedBluetoothDevices: no LocalBluetoothManager");
+            return cachedBluetoothDevices;
+        }
+        CachedBluetoothDevice mainDevice =
+                localBtMgr.getCachedDeviceManager().getCachedDevicesCopy().stream()
+                        .filter(cachedDevice -> cachedDevice.getGroupId() == deviceGroupId)
+                        .findFirst().orElse(null);
+        if (mainDevice == null) {
+            Log.e(TAG, "getAllOfCachedBluetoothDevices: groupId = " + deviceGroupId
+                    + ", no main device.");
+            return cachedBluetoothDevices;
+        }
+        cachedBluetoothDevice = mainDevice;
+        cachedBluetoothDevices.add(cachedBluetoothDevice);
+        for (CachedBluetoothDevice member : cachedBluetoothDevice.getMemberDevice()) {
+            cachedBluetoothDevices.add(member);
+        }
+        Log.d(TAG, "getAllOfCachedBluetoothDevices: groupId = " + deviceGroupId
+                + " , cachedBluetoothDevice = " + cachedBluetoothDevice
+                + " , deviceList = " + cachedBluetoothDevices);
+        return cachedBluetoothDevices;
     }
 }
