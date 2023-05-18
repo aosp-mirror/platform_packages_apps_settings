@@ -16,10 +16,6 @@
 
 package com.android.settings.applications;
 
-import static android.Manifest.permission.RUN_USER_INITIATED_JOBS;
-import static android.app.AppOpsManager.OP_RUN_USER_INITIATED_JOBS;
-import static android.app.AppOpsManager.opToPermission;
-
 import android.Manifest;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -345,7 +341,9 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
 
     @Override
     public boolean isLongBackgroundTaskPermissionToggleSupported() {
-        return TextUtils.equals(RUN_USER_INITIATED_JOBS,
-                opToPermission(OP_RUN_USER_INITIATED_JOBS));
+        // Since the RUN_USER_INITIATED_JOBS permission related to this controller is a normal
+        // app-op permission allowed by default, this should always return false - if it is ever
+        // converted to a special app-op permission, this should be updated.
+        return false;
     }
 }

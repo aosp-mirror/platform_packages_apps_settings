@@ -16,8 +16,6 @@
 
 package com.android.settings.applications.manageapplications;
 
-import static android.util.FeatureFlagUtils.SETTINGS_ENABLE_SPA;
-
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING;
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 
@@ -67,7 +65,6 @@ import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArraySet;
-import android.util.FeatureFlagUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -728,9 +725,6 @@ public class ManageApplications extends InstrumentedFragment
                         R.string.long_background_tasks_label);
                 break;
             case LIST_TYPE_CLONED_APPS:
-                if (!FeatureFlagUtils.isEnabled(getContext(), SETTINGS_ENABLE_SPA)) {
-                    return;
-                }
                 int userId = UserHandle.getUserId(mCurrentUid);
                 UserInfo userInfo = mUserManager.getUserInfo(userId);
                 if (userInfo != null && !userInfo.isCloneProfile()) {

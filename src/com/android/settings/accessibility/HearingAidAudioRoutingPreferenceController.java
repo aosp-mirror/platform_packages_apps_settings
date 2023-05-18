@@ -14,29 +14,25 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications.specialaccess.applications;
+package com.android.settings.accessibility;
 
 import android.content.Context;
+import android.util.FeatureFlagUtils;
 
-import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.overlay.FeatureFactory;
 
 /**
- * The controller for the special access to the long background task.
+ * The controller of the audio routing.
  */
-public class LongBackgroundTaskController extends BasePreferenceController {
-    private final ApplicationFeatureProvider mAppFeatureProvider;
-
-    public LongBackgroundTaskController(Context context, String preferenceKey) {
+public class HearingAidAudioRoutingPreferenceController extends BasePreferenceController {
+    public HearingAidAudioRoutingPreferenceController(Context context,
+            String preferenceKey) {
         super(context, preferenceKey);
-        mAppFeatureProvider = FeatureFactory.getFactory(context)
-                .getApplicationFeatureProvider(context);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return mAppFeatureProvider.isLongBackgroundTaskPermissionToggleSupported()
+        return FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_AUDIO_ROUTING)
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 }
