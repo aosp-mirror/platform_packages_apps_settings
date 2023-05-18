@@ -171,6 +171,9 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 KeyguardManager.ACTION_CONFIRM_REMOTE_DEVICE_CREDENTIAL.equals(intent.getAction());
         mTaskOverlay = isInternalActivity()
                 && intent.getBooleanExtra(KeyguardManager.EXTRA_FORCE_TASK_OVERLAY, false);
+        final boolean prepareRepairMode =
+                KeyguardManager.ACTION_PREPARE_REPAIR_MODE_DEVICE_CREDENTIAL.equals(
+                        intent.getAction());
 
         mUserId = UserHandle.myUserId();
         if (isInternalActivity()) {
@@ -244,6 +247,17 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     .setExternal(true)
                     .show();
             return;
+        } else if (prepareRepairMode) {
+            final ChooseLockSettingsHelper.Builder builder =
+                    new ChooseLockSettingsHelper.Builder(this);
+            launchedCDC = builder.setHeader(mTitle)
+                    .setDescription(mDetails)
+                    .setExternal(true)
+                    .setUserId(mUserId)
+                    .setTaskOverlay(mTaskOverlay)
+                    .setRequestWriteRepairModePassword(true)
+                    .setForceVerifyPath(true)
+                    .show();
         } else if (isEffectiveUserManagedProfile && isInternalActivity()) {
             mCredentialMode = CREDENTIAL_MANAGED;
             if (isBiometricAllowed(effectiveUserId, mUserId)) {
