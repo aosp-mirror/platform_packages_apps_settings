@@ -150,14 +150,6 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        if (mSuggestionDialog != null) {
-            mSuggestionDialog.dismiss();
-        }
-    }
-
-    @Override
     public void onViewStateRestored(Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         if (savedInstanceState != null) {
@@ -246,6 +238,14 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mSuggestionDialog != null) {
+            mSuggestionDialog.dismiss();
+        }
+    }
+
     @VisibleForTesting
     static LocaleStore.LocaleInfo mayAppendUnicodeTags(
             LocaleStore.LocaleInfo localeInfo, String recordTags) {
@@ -290,8 +290,8 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
     private boolean isAllowedPackage() {
         List<String> allowList = Arrays.asList(getContext().getResources().getStringArray(
                 R.array.allowed_packages_for_locale_confirmation_diallog));
-        String callingPckage = getActivity().getCallingPackage();
-        return !isNullOrEmpty(callingPckage) && allowList.contains(callingPckage);
+        String callingPackage = getActivity().getCallingPackage();
+        return !isNullOrEmpty(callingPackage) && allowList.contains(callingPackage);
     }
 
     private static boolean isNullOrEmpty(String str) {
