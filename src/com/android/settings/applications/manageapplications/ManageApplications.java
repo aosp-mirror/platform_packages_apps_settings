@@ -923,10 +923,15 @@ public class ManageApplications extends InstrumentedFragment
             }
             IUserManager um = IUserManager.Stub.asInterface(
                     ServiceManager.getService(Context.USER_SERVICE));
+            CloneBackend cloneBackend = CloneBackend.getInstance(getContext());
             try {
                 // Warning: This removes all the data, media & images present in cloned user.
-                um.removeUser(clonedUserId);
-                mApplications.rebuild();
+                if (um.removeUser(clonedUserId)) {
+                    cloneBackend.resetCloneUserId();
+                    mApplications.rebuild();
+                } else if (ManageApplications.DEBUG) {
+                    Log.e(TAG, "Failed to remove cloned user");
+                }
             } catch (RemoteException e) {
                 Log.e(TAG, "Failed to remove cloned apps", e);
                 Toast.makeText(getContext(),
