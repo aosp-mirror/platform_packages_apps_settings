@@ -50,6 +50,8 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.EventLog;
 import android.util.Log;
 import android.view.Display;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -138,7 +140,7 @@ public class DeviceAdminAdd extends Activity {
         mAppOps = (AppOpsManager)getSystemService(Context.APP_OPS_SERVICE);
         PackageManager packageManager = getPackageManager();
 
-        if ((getIntent().getFlags()&Intent.FLAG_ACTIVITY_NEW_TASK) != 0) {
+        if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK) != 0) {
             Log.w(TAG, "Cannot start ADD_DEVICE_ADMIN as a new task");
             finish();
             return;
@@ -148,7 +150,7 @@ public class DeviceAdminAdd extends Activity {
                 EXTRA_CALLED_FROM_SUPPORT_DIALOG, false);
 
         String action = getIntent().getAction();
-        ComponentName who = (ComponentName)getIntent().getParcelableExtra(
+        ComponentName who = (ComponentName) getIntent().getParcelableExtra(
                 DevicePolicyManager.EXTRA_DEVICE_ADMIN);
         if (who == null) {
             String packageName = getIntent().getStringExtra(EXTRA_DEVICE_ADMIN_PACKAGE_NAME);
@@ -206,7 +208,7 @@ public class DeviceAdminAdd extends Activity {
                     PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS);
             int count = avail == null ? 0 : avail.size();
             boolean found = false;
-            for (int i=0; i<count; i++) {
+            for (int i = 0; i < count; i++) {
                 ResolveInfo ri = avail.get(i);
                 if (ai.packageName.equals(ri.activityInfo.packageName)
                         && ai.name.equals(ri.activityInfo.name)) {
@@ -337,12 +339,12 @@ public class DeviceAdminAdd extends Activity {
         }
         setContentView(R.layout.device_admin_add);
 
-        mAdminIcon = (ImageView)findViewById(R.id.admin_icon);
-        mAdminName = (TextView)findViewById(R.id.admin_name);
-        mAdminDescription = (TextView)findViewById(R.id.admin_description);
+        mAdminIcon = (ImageView) findViewById(R.id.admin_icon);
+        mAdminName = (TextView) findViewById(R.id.admin_name);
+        mAdminDescription = (TextView) findViewById(R.id.admin_description);
         mProfileOwnerWarning = (TextView) findViewById(R.id.profile_owner_warning);
 
-        mAddMsg = (TextView)findViewById(R.id.add_msg);
+        mAddMsg = (TextView) findViewById(R.id.add_msg);
         mAddMsgExpander = (ImageView) findViewById(R.id.add_msg_expander);
         final View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
@@ -363,7 +365,7 @@ public class DeviceAdminAdd extends Activity {
                         boolean hideMsgExpander = mAddMsg.getLineCount() <= maxLines;
                         mAddMsgExpander.setVisibility(hideMsgExpander ? View.GONE : View.VISIBLE);
                         if (hideMsgExpander) {
-                            ((View)mAddMsgExpander.getParent()).invalidate();
+                            ((View) mAddMsgExpander.getParent()).invalidate();
                         }
                         mAddMsg.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     }
@@ -381,7 +383,7 @@ public class DeviceAdminAdd extends Activity {
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 EventLog.writeEvent(EventLogTags.EXP_DET_DEVICE_ADMIN_DECLINED_BY_USER,
-                    mDeviceAdmin.getActivityInfo().applicationInfo.uid);
+                        mDeviceAdmin.getActivityInfo().applicationInfo.uid);
                 finish();
             }
         });
@@ -401,58 +403,64 @@ public class DeviceAdminAdd extends Activity {
 
         final View restrictedAction = findViewById(R.id.restricted_action);
         restrictedAction.setFilterTouchesWhenObscured(true);
-        restrictedAction.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (!mActionButton.isEnabled()) {
-                    showPolicyTransparencyDialogIfRequired();
-                    return;
-                }
-                if (mAdding) {
-                    addAndFinish();
-                } else if (isManagedProfile(mDeviceAdmin)
-                        && mDeviceAdmin.getComponent().equals(mDPM.getProfileOwner())) {
-                    final int userId = UserHandle.myUserId();
-                    UserDialogs.createRemoveDialog(DeviceAdminAdd.this, userId,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    UserManager um = UserManager.get(DeviceAdminAdd.this);
-                                    um.removeUser(userId);
-                                    finish();
-                                }
-                            }
-                    ).show();
-                } else if (mUninstalling) {
-                    mDPM.uninstallPackageWithActiveAdmins(mDeviceAdmin.getPackageName());
-                    finish();
-                } else if (!mWaitingForRemoveMsg) {
-                    try {
-                        // Don't allow the admin to put a dialog up in front
-                        // of us while we interact with the user.
-                        ActivityManager.getService().stopAppSwitches();
-                    } catch (RemoteException e) {
-                    }
-                    mWaitingForRemoveMsg = true;
-                    mDPM.getRemoveWarning(mDeviceAdmin.getComponent(),
-                            new RemoteCallback(new RemoteCallback.OnResultListener() {
-                                @Override
-                                public void onResult(Bundle result) {
-                                    CharSequence msg = result != null
-                                            ? result.getCharSequence(
-                                            DeviceAdminReceiver.EXTRA_DISABLE_WARNING)
-                                            : null;
-                                    continueRemoveAction(msg);
-                                }
-                            }, mHandler));
-                    // Don't want to wait too long.
-                    getWindow().getDecorView().getHandler().postDelayed(new Runnable() {
-                        @Override public void run() {
-                            continueRemoveAction(null);
-                        }
-                    }, 2*1000);
-                }
+
+        final View.OnClickListener restrictedActionClickListener = v -> {
+            if (!mActionButton.isEnabled()) {
+                showPolicyTransparencyDialogIfRequired();
+                return;
             }
+            if (mAdding) {
+                addAndFinish();
+            } else if (isManagedProfile(mDeviceAdmin)
+                    && mDeviceAdmin.getComponent().equals(mDPM.getProfileOwner())) {
+                final int userId = UserHandle.myUserId();
+                UserDialogs.createRemoveDialog(DeviceAdminAdd.this, userId,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                UserManager um = UserManager.get(DeviceAdminAdd.this);
+                                um.removeUser(userId);
+                                finish();
+                            }
+                        }
+                ).show();
+            } else if (mUninstalling) {
+                mDPM.uninstallPackageWithActiveAdmins(mDeviceAdmin.getPackageName());
+                finish();
+            } else if (!mWaitingForRemoveMsg) {
+                try {
+                    // Don't allow the admin to put a dialog up in front
+                    // of us while we interact with the user.
+                    ActivityManager.getService().stopAppSwitches();
+                } catch (RemoteException e) {
+                }
+                mWaitingForRemoveMsg = true;
+                mDPM.getRemoveWarning(mDeviceAdmin.getComponent(),
+                        new RemoteCallback(new RemoteCallback.OnResultListener() {
+                            @Override
+                            public void onResult(Bundle result) {
+                                CharSequence msg = result != null
+                                        ? result.getCharSequence(
+                                        DeviceAdminReceiver.EXTRA_DISABLE_WARNING)
+                                        : null;
+                                continueRemoveAction(msg);
+                            }
+                        }, mHandler));
+                // Don't want to wait too long.
+                getWindow().getDecorView().getHandler().postDelayed(
+                        () -> continueRemoveAction(null), 2 * 1000);
+            }
+        };
+        restrictedAction.setOnKeyListener((view, keyCode, keyEvent) -> {
+            if ((keyEvent.getFlags() & KeyEvent.FLAG_FROM_SYSTEM) == 0) {
+                Log.e(TAG, "Can not activate device-admin with KeyEvent from non-system app.");
+                // Consume event to suppress click.
+                return true;
+            }
+            // Fallback to view click handler.
+            return false;
         });
+        restrictedAction.setOnClickListener(restrictedActionClickListener);
     }
 
     /**
