@@ -361,8 +361,10 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
             messagePairingSet.setText(getString(R.string.bluetooth_pairing_group_late_bonding));
         }
 
-        messagePairingSet.setVisibility(mPairingController.isCoordinatedSetMemberDevice()
-                ? View.VISIBLE : View.GONE);
+        boolean setPairingMessage =
+            mPairingController.isCoordinatedSetMemberDevice() || mPairingController.isLateBonding();
+
+        messagePairingSet.setVisibility(setPairingMessage ? View.VISIBLE : View.GONE);
         return view;
     }
 }
