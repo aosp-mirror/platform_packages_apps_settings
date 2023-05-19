@@ -26,6 +26,7 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
@@ -53,17 +54,28 @@ public final class BluetoothPairingRequest extends BroadcastReceiver {
             boolean shouldShowDialog = LocalBluetoothPreferences.shouldShowDialogInForeground(
                     context, device);
 
-            // Skips consent pairing dialog if the device was recently associated with CDM
+            Log.d(TAG,
+                "Receive ACTION_PAIRING_REQUEST pairingVariant=" + pairingVariant
+                    + " canBondWithoutDialog=" + device.canBondWithoutDialog()
+                    + " isOngoingPairByCsip="
+                    + mBluetoothManager.getCachedDeviceManager().isOngoingPairByCsip(device)
+                    + " isLateBonding="
+                    + mBluetoothManager.getCachedDeviceManager().isLateBonding(device));
+
+            /* Skips consent pairing dialog if the device was recently associated with CDM
+             * or if the device is a member of the coordinated set and is not bonding late.
+             */
             if (pairingVariant == BluetoothDevice.PAIRING_VARIANT_CONSENT
-                    && (device.canBondWithoutDialog()
-                    || mBluetoothManager.getCachedDeviceManager().isOngoingPairByCsip(device))) {
+                && (device.canBondWithoutDialog()
+                    || (mBluetoothManager.getCachedDeviceManager().isOngoingPairByCsip(device)
+                        && !mBluetoothManager.getCachedDeviceManager().isLateBonding(device)))) {
                 device.setPairingConfirmation(true);
             } else if (powerManager.isInteractive() && shouldShowDialog) {
                 // Since the screen is on and the BT-related activity is in the foreground,
                 // just open the dialog
                 // convert broadcast intent into activity intent (same action string)
-                Intent pairingIntent = BluetoothPairingService.getPairingDialogIntent(context,
-                        intent, BluetoothDevice.EXTRA_PAIRING_INITIATOR_FOREGROUND);
+                Intent pairingIntent = BluetoothPairingService.getPairingDialogIntent(
+                    context, intent, BluetoothDevice.EXTRA_PAIRING_INITIATOR_FOREGROUND);
 
                 context.startActivityAsUser(pairingIntent, UserHandle.CURRENT);
             } else {
