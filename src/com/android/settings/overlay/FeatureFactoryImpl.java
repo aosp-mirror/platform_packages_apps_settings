@@ -47,6 +47,8 @@ import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
+import com.android.settings.deviceinfo.batteryinfo.BatteryInfoFeatureProvider;
+import com.android.settings.deviceinfo.batteryinfo.BatteryInfoFeatureProviderImpl;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProviderImpl;
 import com.android.settings.fuelgauge.BatterySettingsFeatureProvider;
@@ -117,6 +119,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private AdvancedVpnFeatureProvider mAdvancedVpnFeatureProvider;
     private WifiFeatureProvider mWifiFeatureProvider;
     private KeyboardSettingsFeatureProvider mKeyboardSettingsFeatureProvider;
+    private BatteryInfoFeatureProvider mBatteryInfoFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -375,5 +378,13 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mKeyboardSettingsFeatureProvider = new KeyboardSettingsFeatureProviderImpl();
         }
         return mKeyboardSettingsFeatureProvider;
+    }
+
+    @Override
+    public BatteryInfoFeatureProvider getBatteryInfoFeatureProvider() {
+        if (mBatteryInfoFeatureProvider == null) {
+            mBatteryInfoFeatureProvider = new BatteryInfoFeatureProviderImpl(getAppContext());
+        }
+        return mBatteryInfoFeatureProvider;
     }
 }
