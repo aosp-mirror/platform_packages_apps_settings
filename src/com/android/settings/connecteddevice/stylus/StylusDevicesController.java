@@ -254,16 +254,17 @@ public class StylusDevicesController extends AbstractPreferenceController implem
 
     private List<UserHandle> getUserAndManagedProfiles() {
         UserManager um = mContext.getSystemService(UserManager.class);
-        final ArrayList<UserHandle> userManagedProfiles = new ArrayList<>();
+        final List<UserHandle> userManagedProfiles = new ArrayList<>();
         // Add the current user, then add all the associated managed profiles.
         final UserHandle currentUser = Process.myUserHandle();
         userManagedProfiles.add(currentUser);
 
         final List<UserInfo> userInfos = um.getUsers();
         for (UserInfo info : userInfos) {
-            if (um.isManagedProfile(info.id)
-                    && um.getProfileParent(info.id).id == currentUser.getIdentifier()) {
-                userManagedProfiles.add(UserHandle.of(info.id));
+            int userId = info.id;
+            if (um.isManagedProfile(userId)
+                    && um.getProfileParent(userId).id == currentUser.getIdentifier()) {
+                userManagedProfiles.add(UserHandle.of(userId));
             }
         }
         return userManagedProfiles;
