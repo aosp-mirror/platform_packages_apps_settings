@@ -141,6 +141,7 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerTest {
 
     @Test
     public void onDeveloperOptionSwitchDisabled_shouldDisableAngleAsSystemDriver() {
+        ShadowSystemProperties.override(PROPERTY_RO_GFX_ANGLE_SUPPORTED, "true");
         mController.onDeveloperOptionsSwitchDisabled();
         final String systemEGLDriver = SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL);
         assertThat(systemEGLDriver).isEqualTo("");
@@ -148,12 +149,14 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerTest {
 
     @Test
     public void onDeveloperOptionSwitchDisabled_preferenceShouldNotBeChecked() {
+        ShadowSystemProperties.override(PROPERTY_RO_GFX_ANGLE_SUPPORTED, "true");
         mController.onDeveloperOptionsSwitchDisabled();
         verify(mPreference).setChecked(false);
     }
 
     @Test
     public void onDeveloperOptionsSwitchDisabled_preferenceShouldNotBeEnabled() {
+        ShadowSystemProperties.override(PROPERTY_RO_GFX_ANGLE_SUPPORTED, "true");
         mController.onDeveloperOptionsSwitchDisabled();
         verify(mPreference).setEnabled(false);
     }
