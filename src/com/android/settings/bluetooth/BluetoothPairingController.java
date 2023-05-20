@@ -72,6 +72,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
     private boolean mIsCoordinatedSetMember;
     private boolean mIsLeAudio;
     private boolean mIsLeContactSharingEnabled;
+    private boolean mIsLateBonding;
 
     /**
      * Creates an instance of a BluetoothPairingController.
@@ -98,6 +99,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
         mDeviceName = mBluetoothManager.getCachedDeviceManager().getName(mDevice);
         mPbapClientProfile = mBluetoothManager.getProfileManager().getPbapClientProfile();
         mPasskeyFormatted = formatKey(mPasskey);
+        mIsLateBonding = mBluetoothManager.getCachedDeviceManager().isLateBonding(mDevice);
 
         final CachedBluetoothDevice cachedDevice =
                 mBluetoothManager.getCachedDeviceManager().findDevice(mDevice);
@@ -116,7 +118,10 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
 
             mIsLeContactSharingEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
                     SettingsUIDeviceConfig.BT_LE_AUDIO_CONTACT_SHARING_ENABLED, true);
-            Log.d(TAG, "BT_LE_AUDIO_CONTACT_SHARING_ENABLED is " + mIsLeContactSharingEnabled);
+            Log.d(TAG,
+                "BT_LE_AUDIO_CONTACT_SHARING_ENABLED is "
+                    + mIsLeContactSharingEnabled + " isCooridnatedSetMember "
+                    + mIsCoordinatedSetMember);
         }
     }
 
@@ -190,6 +195,15 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
      */
     public boolean isCoordinatedSetMemberDevice() {
         return mIsCoordinatedSetMember;
+    }
+
+    /**
+     * A method for querying if the bluetooth device from a coordinated set is bonding late.
+     *
+     * @return - A boolean indicating if the device is bonding late.
+     */
+    public boolean isLateBonding() {
+        return mIsLateBonding;
     }
 
     /**
