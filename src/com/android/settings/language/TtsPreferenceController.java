@@ -26,14 +26,8 @@ import com.android.settings.core.BasePreferenceController;
 
 public class TtsPreferenceController extends BasePreferenceController {
 
-    private static final String KEY_TEXT_TO_SPEECH = "tts_settings_summary";
-
     @VisibleForTesting
     TtsEngines mTtsEngines;
-
-    public TtsPreferenceController(Context context) {
-        this(context, KEY_TEXT_TO_SPEECH);
-    }
 
     public TtsPreferenceController(Context context, String key) {
         super(context, key);
@@ -45,9 +39,5 @@ public class TtsPreferenceController extends BasePreferenceController {
         return !mTtsEngines.getEngines().isEmpty() &&
                 mContext.getResources().getBoolean(R.bool.config_show_tts_settings_summary)
                 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
-    }
-
-    public String getPreferenceKey() {
-        return KEY_TEXT_TO_SPEECH;
     }
 }
