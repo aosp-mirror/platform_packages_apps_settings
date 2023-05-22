@@ -33,15 +33,9 @@ import java.util.Optional;
 /** Controller of the On-device recognition preference. */
 public class OnDeviceRecognitionPreferenceController extends BasePreferenceController {
 
-    private static final String KEY_ON_DEVICE_RECOGNITION = "on_device_recognition_settings";
-
     private static final String TAG = "OnDeviceRecognitionPreferenceController";
 
     private Optional<Intent> mIntent;
-
-    public OnDeviceRecognitionPreferenceController(Context context) {
-        this(context, KEY_ON_DEVICE_RECOGNITION);
-    }
 
     public OnDeviceRecognitionPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -55,10 +49,6 @@ public class OnDeviceRecognitionPreferenceController extends BasePreferenceContr
         return mIntent.isPresent()
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
-    }
-
-    public String getPreferenceKey() {
-        return KEY_ON_DEVICE_RECOGNITION;
     }
 
     @Override
