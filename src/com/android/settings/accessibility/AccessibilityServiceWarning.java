@@ -131,18 +131,17 @@ public class AccessibilityServiceWarning {
     /** Returns a {@link Dialog} to be shown to confirm that they want to disable a service. */
     public static Dialog createDisableDialog(Context context,
             AccessibilityServiceInfo info, DialogInterface.OnClickListener listener) {
-        final AlertDialog dialog = new AlertDialog.Builder(context)
-                .setTitle(context.getString(R.string.disable_service_title,
-                        info.getResolveInfo().loadLabel(context.getPackageManager())))
+        CharSequence serviceName = getServiceName(context, info);
+
+        return new AlertDialog.Builder(context)
+                .setTitle(context.getString(R.string.disable_service_title, serviceName))
                 .setMessage(context.getString(R.string.disable_service_message,
                         context.getString(R.string.accessibility_dialog_button_stop),
-                        getServiceName(context, info)))
+                        serviceName))
                 .setCancelable(true)
                 .setPositiveButton(R.string.accessibility_dialog_button_stop, listener)
                 .setNegativeButton(R.string.accessibility_dialog_button_cancel, listener)
                 .create();
-
-        return dialog;
     }
 
     // Get the service name and bidi wrap it to protect from bidi side effects.
