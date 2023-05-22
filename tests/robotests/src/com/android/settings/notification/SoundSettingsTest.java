@@ -69,7 +69,7 @@ public class SoundSettingsTest {
         keys.addAll(XmlTestUtils.getKeysFromPreferenceXml(context, R.xml.zen_mode_settings));
         // Add keys with hidden resources
         keys.add("alarm_volume");
-        keys.add("ring_volume");
+        keys.add("separate_ring_volume");
         keys.add("notification_volume");
 
         assertThat(keys).containsAtLeastElementsIn(niks);
@@ -93,7 +93,7 @@ public class SoundSettingsTest {
         final int xmlId = settings.getPreferenceScreenResId();
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
 
-        int ring = keys.indexOf("ring_volume");
+        int ring = keys.indexOf("separate_ring_volume");
         int notification = keys.indexOf("notification_volume");
         int alarm = keys.indexOf("alarm_volume");
 

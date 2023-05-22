@@ -196,7 +196,6 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
         ArrayList<VolumeSeekBarPreferenceController> volumeControllers = new ArrayList<>();
         volumeControllers.add(use(AlarmVolumePreferenceController.class));
         volumeControllers.add(use(MediaVolumePreferenceController.class));
-        volumeControllers.add(use(RingVolumePreferenceController.class));
         volumeControllers.add(use(SeparateRingVolumePreferenceController.class));
         volumeControllers.add(use(NotificationVolumePreferenceController.class));
         volumeControllers.add(use(CallVolumePreferenceController.class));
