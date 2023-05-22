@@ -17,12 +17,16 @@
 package com.android.settings.inputmethod;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.Pair;
 import android.view.KeyEvent;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -31,7 +35,9 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
+import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,6 +59,7 @@ public class ModifierKeysPreferenceController extends BasePreferenceController {
     private FragmentManager mFragmentManager;
     private final InputManager mIm;
     private PreferenceScreen mScreen;
+    private Drawable mDrawable;
 
     private final List<Integer> mRemappableKeys = new ArrayList<>(
             Arrays.asList(
@@ -60,6 +67,14 @@ public class ModifierKeysPreferenceController extends BasePreferenceController {
                     KeyEvent.KEYCODE_META_LEFT, KeyEvent.KEYCODE_META_RIGHT,
                     KeyEvent.KEYCODE_ALT_LEFT, KeyEvent.KEYCODE_ALT_RIGHT,
                     KeyEvent.KEYCODE_CAPS_LOCK));
+
+    private final List<Pair<String, Integer>> mKeys = new ArrayList<>(
+            Arrays.asList(
+                    Pair.create(KEY_PREFERENCE_CTRL, R.string.modifier_keys_ctrl),
+                    Pair.create(KEY_PREFERENCE_META, R.string.modifier_keys_meta),
+                    Pair.create(KEY_PREFERENCE_ALT, R.string.modifier_keys_alt),
+                    Pair.create(KEY_PREFERENCE_CAPS_LOCK, R.string.modifier_keys_caps_lock)
+            ));
 
     private String[] mKeyNames = new String[] {
             mContext.getString(R.string.modifier_keys_ctrl),
@@ -74,6 +89,9 @@ public class ModifierKeysPreferenceController extends BasePreferenceController {
         super(context, key);
         mIm = context.getSystemService(InputManager.class);
         Objects.requireNonNull(mIm, "InputManager service cannot be null");
+        KeyboardSettingsFeatureProvider featureProvider =
+                FeatureFactory.getFactory(context).getKeyboardSettingsFeatureProvider();
+        mDrawable = featureProvider.getActionKeyIcon(context);
     }
 
     public void setFragment(Fragment parent) {
@@ -91,31 +109,57 @@ public class ModifierKeysPreferenceController extends BasePreferenceController {
     }
 
     private void refreshUi() {
+        initDefaultKeysName();
         for (Map.Entry<Integer, Integer> entry : mIm.getModifierKeyRemapping().entrySet()) {
             int fromKey = entry.getKey();
             int toKey = entry.getValue();
             int index = mRemappableKeys.indexOf(toKey);
 
             if (isCtrl(fromKey) && mRemappableKeys.contains(toKey)) {
-                Preference preference = mScreen.findPreference(KEY_PREFERENCE_CTRL);
-                preference.setSummary(changeSummaryColor(mKeyNames[index]));
+                setSummaryColor(KEY_PREFERENCE_CTRL, index);
             }
 
             if (isMeta(fromKey) && mRemappableKeys.contains(toKey)) {
-                Preference preference = mScreen.findPreference(KEY_PREFERENCE_META);
-                preference.setSummary(changeSummaryColor(mKeyNames[index]));
+                setSummaryColor(KEY_PREFERENCE_META, index);
             }
 
             if (isAlt(fromKey) && mRemappableKeys.contains(toKey)) {
-                Preference preference = mScreen.findPreference(KEY_PREFERENCE_ALT);
-                preference.setSummary(changeSummaryColor(mKeyNames[index]));
+                setSummaryColor(KEY_PREFERENCE_ALT, index);
             }
 
             if (isCapLock(fromKey) && mRemappableKeys.contains(toKey)) {
-                Preference preference = mScreen.findPreference(KEY_PREFERENCE_CAPS_LOCK);
-                preference.setSummary(changeSummaryColor(mKeyNames[index]));
+                setSummaryColor(KEY_PREFERENCE_CAPS_LOCK, index);
             }
         }
+    }
+
+    private void initDefaultKeysName() {
+        for (Pair<String, Integer> key : mKeys) {
+            LayoutPreference layoutPreference = mScreen.findPreference(key.first);
+            TextView title = layoutPreference.findViewById(R.id.title);
+            TextView summary = layoutPreference.findViewById(R.id.summary);
+            title.setText(key.second);
+            summary.setText(R.string.modifier_keys_default_summary);
+
+            if (key.first.equals(KEY_PREFERENCE_META) && mDrawable != null) {
+                setActionKeyIcon(layoutPreference, mDrawable);
+            }
+        }
+    }
+
+    private static void setActionKeyIcon(LayoutPreference preference, Drawable drawable) {
+        TextView leftBracket = preference.findViewById(R.id.modifier_key_left_bracket);
+        TextView rightBracket = preference.findViewById(R.id.modifier_key_right_bracket);
+        ImageView actionKeyIcon = preference.findViewById(R.id.modifier_key_action_key_icon);
+        leftBracket.setText("(");
+        rightBracket.setText(")");
+        actionKeyIcon.setImageDrawable(drawable);
+    }
+
+    private void setSummaryColor(String key, int targetIndex) {
+        LayoutPreference layoutPreference = mScreen.findPreference(key);
+        TextView summary = layoutPreference.findViewById(R.id.summary);
+        summary.setText(changeSummaryColor(mKeyNames[targetIndex]));
     }
 
     @Override
@@ -137,12 +181,14 @@ public class ModifierKeysPreferenceController extends BasePreferenceController {
         ModifierKeysPickerDialogFragment fragment = new ModifierKeysPickerDialogFragment();
         fragment.setTargetFragment(mParent, 0);
         Bundle bundle = new Bundle();
+        TextView title = ((LayoutPreference) preference).findViewById(R.id.title);
+        TextView summary = ((LayoutPreference) preference).findViewById(R.id.summary);
         bundle.putString(
                 ModifierKeysPickerDialogFragment.DEFAULT_KEY,
-                preference.getTitle().toString());
+                title.getText().toString());
         bundle.putString(
                 ModifierKeysPickerDialogFragment.SELECTION_KEY,
-                preference.getSummary().toString());
+                summary.getText().toString());
         fragment.setArguments(bundle);
         fragment.show(mFragmentManager, KEY_TAG);
     }

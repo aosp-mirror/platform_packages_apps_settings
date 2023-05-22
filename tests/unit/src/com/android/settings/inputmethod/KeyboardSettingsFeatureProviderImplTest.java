@@ -57,4 +57,9 @@ public class KeyboardSettingsFeatureProviderImplTest {
 
         assertThat(mFeatureProvider.addFirmwareUpdateCategory(mContext, screen)).isFalse();
     }
+
+    @Test
+    public void getActionKeyIcon_defaultValue_returnsNull() {
+        assertThat(mFeatureProvider.getActionKeyIcon(mContext)).isNull();
+    }
 }
