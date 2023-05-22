@@ -39,6 +39,8 @@ import java.util.List;
 public class LanguageSettings extends DashboardFragment {
 
     private static final String KEY_SPEECH_CATEGORY = "speech_category";
+    private static final String KEY_ON_DEVICE_RECOGNITION = "on_device_recognition_settings";
+    private static final String KEY_TEXT_TO_SPEECH = "tts_settings_summary";
 
     private static final String TAG = "LanguageSettings";
 
@@ -81,9 +83,9 @@ public class LanguageSettings extends DashboardFragment {
         final DefaultVoiceInputPreferenceController defaultVoiceInputPreferenceController =
                 new DefaultVoiceInputPreferenceController(context, lifecycle);
         final TtsPreferenceController ttsPreferenceController =
-                new TtsPreferenceController(context);
+                new TtsPreferenceController(context, KEY_TEXT_TO_SPEECH);
         final OnDeviceRecognitionPreferenceController onDeviceRecognitionPreferenceController =
-                new OnDeviceRecognitionPreferenceController(context);
+                new OnDeviceRecognitionPreferenceController(context, KEY_ON_DEVICE_RECOGNITION);
 
         controllers.add(defaultVoiceInputPreferenceController);
         controllers.add(ttsPreferenceController);
@@ -103,6 +105,7 @@ public class LanguageSettings extends DashboardFragment {
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.language_settings) {
+                @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context, null);
