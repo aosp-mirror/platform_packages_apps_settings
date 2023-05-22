@@ -401,8 +401,8 @@ public abstract class DevelopmentTiles extends TileService {
 
         @Override
         public void setIsEnabled(boolean isEnabled) {
-            // Don't allow sensors to be reenabled from the lock screen.
-            if (mIsEnabled && mKeyguardManager.isKeyguardLocked()) {
+            // Don't allow sensors to be toggled from the lock screen.
+            if (mKeyguardManager.isKeyguardLocked()) {
                 return;
             }
             mMetricsFeatureProvider.action(getApplicationContext(), SettingsEnums.QS_SENSOR_PRIVACY,
