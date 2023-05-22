@@ -416,7 +416,7 @@
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Τοποθετήστε το δάχτυλό σας στον αισθητήρα και ανασηκώστε το μόλις αισθανθείτε μια δόνηση"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Καλύψτε τον αισθητήρα με το δακτυλικό σας αποτύπωμα, μέχρι να νιώσετε μια δόνηση."</string>
     <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"Χωρίς να πατήσετε το κουμπί, κρατήστε το δάκτυλό σας στον αισθητήρα μέχρι να αισθανθείτε μια δόνηση.\n\nΦροντίστε κάθε φορά να αλλάζετε ελαφρώς τη θέση του δακτύλου σας. Με αυτόν τον τρόπο γίνεται καλύτερη λήψη του δακτυλικού σας αποτυπώματος."</string>
-    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Αγγίξτε παρατετ. τον αισθ. δακτ. αποτυπ."</string>
+    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Αγγίξτε παρατεταμένα τον αισθητήρα"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Ανασηκώστε και αγγίξτε ξανά"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Ακόμα μία φορά"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Ακολουθήστε το εικονίδιο δακτυλικού αποτυπώματος"</string>
@@ -627,6 +627,8 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Σύζευξη με <xliff:g id="DEVICE_NAME">%1$s</xliff:g>;"</string>
+    <!-- no translation found for bluetooth_pairing_group_late_bonding (5310869364570266209) -->
+    <skip />
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Κωδικός σύζευξης Bluetooth"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Πληκτρολογήστε τον κωδικό σύζευξης και, στη συνέχεια, πατήστε Επιστροφή ή Enter"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"Το PIN περιέχει γράμματα ή σύμβολα"</string>
@@ -2845,9 +2847,9 @@
     <string name="account_dashboard_title" msgid="8228773251948253914">"Λογαριασμοί και κωδικοί πρόσβασης"</string>
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Αποθηκευμένοι κωδικοί πρόσβασης, αυτόματη συμπλήρωση, συγχρονισμένοι λογαριασμοί"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Προεπιλεγμένες εφ."</string>
-    <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Διπλότυπες εφαρμογές"</string>
+    <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"κλωνοποιημένες εφαρμογές"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Δημιουργήστε μια δεύτερη παρουσία μιας εφαρμογής, ώστε να μπορείτε να χρησιμοποιείτε δύο λογαριασμούς ταυτόχρονα."</string>
-    <string name="desc_cloneable_app_list_text" msgid="3354586725814708688">"Εφαρμογές που μπορούν να αντιγραφούν."</string>
+    <string name="desc_cloneable_app_list_text" msgid="3354586725814708688">"Εφαρμογές που μπορούν να κλωνοποιηθούν."</string>
     <string name="cloned_apps_summary" msgid="8805362440770795709">"Δημιουργήθηκαν <xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g> διπλότυπα, <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g> εφαρμογές έτοιμες για δημιουργία διπλότυπου"</string>
     <string name="delete_all_app_clones" msgid="3489053361980624999">"Διαγραφή όλων των κλώνων εφαρμογών"</string>
     <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"Η διαγραφή όλων των κλώνων απέτυχε"</string>
@@ -3222,7 +3224,7 @@
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"Ενδέχεται να κουδουνίζει ή να δονείται βάσει των ρυθμίσεων του τηλεφώνου"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Όταν η συσκευή είναι ξεκλειδωμένη, οι ειδοποιήσεις εμφανίζονται ως banner επάνω στην οθόνη"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Όλες οι ειδοποιήσεις \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
-    <string name="notification_app_switch_label" msgid="4422902423925084193">"Όλες οι ειδοποιήσεις <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="notification_app_switch_label" msgid="4422902423925084193">"Όλες οι ειδοποιήσεις από το <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Περίπου # ειδοποίηση την ημέρα}other{Περίπου # ειδοποιήσεις την ημέρα}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Περίπου # ειδοποίηση την εβδομάδα}other{Περίπου # ειδοποιήσεις την εβδομάδα}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Ποτέ"</string>
@@ -3313,6 +3315,8 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Να μην εμφανίζονται ποτέ αυτές οι ειδοποιήσεις"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Εμφάνιση ειδοποιήσεων"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Να μην εμφανίζονται ποτέ ειδοποιήσεις στο πλαίσιο σκίασης ειδοποιήσεων ή σε περιφερειακές συσκευές"</string>
+    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"Να επιτρέπονται οι ειδοποιήσεις σε πλήρη οθόνη"</string>
+    <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"Να επιτρέπονται οι ειδοποιήσεις σε πλήρη οθόνη όταν η συσκευή είναι κλειδωμένη"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Να επιτρέπεται η κουκκίδα ειδοποίησης"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Εμφάνιση κουκκίδας ειδοποίησης"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"Παράκαμψη λειτουργίας Μην ενοχλείτε"</string>
@@ -4028,6 +4032,7 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Αφού πληρώσετε το πλήρες ποσό:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Όλοι οι περιορισμοί καταργούνται από τη συσκευή"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Μπορείτε να απεγκαταστήσετε την εφαρμογή πιστωτή"</string>
+    <string name="device_lock_info" msgid="1628142032642755537">"Κλείδωμα συσκευής"</string>
     <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{Εφαρμογή κάμερας}other{Εφαρμογές κάμερας}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"Εφαρμογή ημερολογίου"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"Εφαρμογή Επαφές"</string>
@@ -4674,15 +4679,15 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Εφαρμογές που εγκαταστάθηκαν τον τελευταίο # μήνα}other{Εφαρμογές που εγκαταστάθηκαν τους τελευταίους # μήνες}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Εφαρμογές που εγκαταστάθηκαν περισσότερο από # μήνα πριν}other{Εφαρμογές που εγκαταστάθηκαν περισσότερο από # μήνες πριν}}"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Αισθητήρας δακτυλικών αποτυπωμάτων"</string>
-    <string name="flash_notifications_title" msgid="4490438861180492311">"Ειδοποιήσεις με φλας"</string>
-    <string name="flash_notifications_about_title" msgid="9004351252928121214">"Σχετικά με τις φωτεινές ειδοποιήσεις"</string>
+    <string name="flash_notifications_title" msgid="4490438861180492311">"Ειδοποιήσεις με λάμψη"</string>
+    <string name="flash_notifications_about_title" msgid="9004351252928121214">"Σχετικά με τις ειδοποιήσεις με λάμψη"</string>
     <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Ανενεργή"</string>
     <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"Ενεργή / φλας κάμερας"</string>
     <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Ενεργή / φλας οθόνης"</string>
     <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Ενεργή / φλας κάμερας και οθόνης"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Το φως της κάμερας ή η οθόνη αναβοσβήνει όταν λαμβάνετε ειδοποιήσεις ή όταν ακούγεται ο ήχος των ξυπνητηριών"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Η οθόνη αναβοσβήνει όταν λαμβάνετε ειδοποιήσεις ή όταν ακούγεται ο ήχος των ξυπνητηριών."</string>
-    <string name="flash_notifications_note" msgid="2426125248448055075">"Αν έχετε ευαισθησία στο φως, να χρησιμοποιείτε τις φωτεινές ειδοποιήσεις προσεκτικά"</string>
+    <string name="flash_notifications_note" msgid="2426125248448055075">"Αν έχετε ευαισθησία στο φως, να χρησιμοποιείτε τις ειδοποιήσεις με λάμψη προσεκτικά"</string>
     <string name="flash_notifications_keywords" msgid="2458759275318514836">"φλας, φως, φωτεινή ένδειξη, βαρήκοος, βαρήκοη, απώλεια ακοής"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"Προεπισκόπηση"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"Φλας κάμερας"</string>
