@@ -31,7 +31,6 @@ import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
-import com.android.settings.deviceinfo.batteryinfo.BatteryInfoFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.BatterySettingsFeatureProvider;
 import com.android.settings.fuelgauge.BatteryStatusFeatureProvider;
@@ -83,7 +82,6 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final AwareFeatureProvider mAwareFeatureProvider;
     public final FaceFeatureProvider mFaceFeatureProvider;
     public final BiometricsRepositoryProvider mBiometricsRepositoryProvider;
-    public final BatteryInfoFeatureProvider mBatteryInfoFeatureProvider;
 
     public PanelFeatureProvider panelFeatureProvider;
     public SlicesFeatureProvider slicesFeatureProvider;
@@ -150,7 +148,6 @@ public class FakeFeatureFactory extends FeatureFactory {
         mAdvancedVpnFeatureProvider = mock(AdvancedVpnFeatureProvider.class);
         mWifiFeatureProvider = mock(WifiFeatureProvider.class);
         mKeyboardSettingsFeatureProvider = mock(KeyboardSettingsFeatureProvider.class);
-        mBatteryInfoFeatureProvider = mock(BatteryInfoFeatureProvider.class);
     }
 
     @Override
@@ -306,10 +303,5 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public KeyboardSettingsFeatureProvider getKeyboardSettingsFeatureProvider() {
         return mKeyboardSettingsFeatureProvider;
-    }
-
-    @Override
-    public BatteryInfoFeatureProvider getBatteryInfoFeatureProvider() {
-        return mBatteryInfoFeatureProvider;
     }
 }

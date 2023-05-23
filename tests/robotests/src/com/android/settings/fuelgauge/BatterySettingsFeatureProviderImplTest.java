@@ -14,39 +14,42 @@
  * limitations under the License.
  */
 
-package com.android.settings.deviceinfo.batteryinfo;
+package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
 import android.os.BatteryManager;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowBatteryManager;
 
 @RunWith(RobolectricTestRunner.class)
-public class BatteryInfoFeatureProviderImplTest {
-    @Mock
+@Config(shadows = {ShadowBatteryManager.class})
+public class BatterySettingsFeatureProviderImplTest {
     private BatteryManager mBatteryManager;
-
+    private ShadowBatteryManager mShadowBatteryManager;
     private Context mContext;
-    private BatteryInfoFeatureProviderImpl mImpl;
+    private BatterySettingsFeatureProviderImpl mImpl;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(org.robolectric.RuntimeEnvironment.application);
-        doReturn(mBatteryManager).when(mContext).getSystemService(BatteryManager.class);
-        mImpl = spy(new BatteryInfoFeatureProviderImpl(mContext));
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        mBatteryManager = mContext.getSystemService(BatteryManager.class);
+        mShadowBatteryManager = shadowOf(mBatteryManager);
+        mImpl = spy(new BatterySettingsFeatureProviderImpl(mContext));
     }
 
     @Test
@@ -62,12 +65,12 @@ public class BatteryInfoFeatureProviderImplTest {
     @Test
     public void getManufactureDateSummary_available_returnExpectedDate() {
         doReturn(true).when(mImpl).isManufactureDateAvailable();
-        when(mBatteryManager.getLongProperty(BatteryManager.BATTERY_PROPERTY_MANUFACTURING_DATE))
-                .thenReturn(1669680000L);
+        mShadowBatteryManager.setLongProperty(BatteryManager.BATTERY_PROPERTY_MANUFACTURING_DATE,
+                1669680000L);
 
         final CharSequence result = mImpl.getManufactureDateSummary();
 
-        assertThat(result).isEqualTo("November 29, 2022");
+        assertThat(result.toString()).isEqualTo("November 29, 2022");
     }
 
     @Test
@@ -80,12 +83,12 @@ public class BatteryInfoFeatureProviderImplTest {
     @Test
     public void getFirstUseDateSummary_available_returnExpectedDate() {
         doReturn(true).when(mImpl).isFirstUseDateAvailable();
-        when(mBatteryManager.getLongProperty(BatteryManager.BATTERY_PROPERTY_FIRST_USAGE_DATE))
-                .thenReturn(1669680000L);
+        mShadowBatteryManager.setLongProperty(BatteryManager.BATTERY_PROPERTY_FIRST_USAGE_DATE,
+                1669680000L);
 
         final CharSequence result = mImpl.getFirstUseDateSummary();
 
-        assertThat(result).isEqualTo("November 29, 2022");
+        assertThat(result.toString()).isEqualTo("November 29, 2022");
     }
 
     @Test

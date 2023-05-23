@@ -16,9 +16,19 @@
 
 package com.android.settings.fuelgauge;
 
-import android.content.ComponentName;
-
 /** Feature provider for battery settings usage. */
 public interface BatterySettingsFeatureProvider {
+
+    /** Returns true if manufacture date should be shown */
+    boolean isManufactureDateAvailable();
+
+    /** Returns true if first use date should be shown */
+    boolean isFirstUseDateAvailable();
+
+    /** Returns the summary of battery manufacture date */
+    CharSequence getManufactureDateSummary();
+
+    /** Returns the summary of battery first use date */
+    CharSequence getFirstUseDateSummary();
 
 }
