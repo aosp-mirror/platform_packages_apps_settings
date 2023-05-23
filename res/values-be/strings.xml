@@ -59,10 +59,8 @@
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Спалучыць справа"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Спалучыць злева"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Спалучыце для іншага вуха"</string>
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_left_ear_message (5711642363615781647) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_right_ear_message (631521133525979967) -->
-    <skip />
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="5711642363615781647">"Падключаны слыхавы апарат для левага вуха.\n\nКаб спалучыць апарат для правага вуха, уключыце яго."</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"Падключаны слыхавы апарат для правага вуха.\n\nКаб спалучыць апарат для левага вуха, уключыце яго."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Спалучыць для правага вуха"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Спалучыць для левага вуха"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Для ўсіх даступных слыхавых апаратаў"</string>
@@ -121,7 +119,10 @@
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth уключаны"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Паказаць усе"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"Стылус"</string>
-    <string name="stylus_default_notes_app" msgid="3896158797687806941">"Стандартныя праграмы для стварэння нататак"</string>
+    <!-- no translation found for stylus_default_notes_app (4165657465911764628) -->
+    <skip />
+    <!-- no translation found for stylus_default_notes_summary_work (4554643411627934223) -->
+    <skip />
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Увод тэксту ў тэкставыя палі"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Ігнараваць націсканні кнопак стілусам"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Стылус"</string>
@@ -449,8 +450,7 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Прыкладзіце палец да датчыка адным бокам і ўтрымлівайце яго, потым павярніце іншым бокам"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Не наладжваць доступ па адбітку пальца?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Вы вырашылі выкарыстоўваць свой адбітак пальца як адзін са спосабаў разблакіроўкі тэлефона. Калі вы прапусціце гэты крок зараз, вам трэба будзе наладзіць спосаб пазней. Наладжванне займае ўсяго каля хвіліны."</string>
-    <!-- no translation found for lock_screen_skip_setup_title (6979006375138175111) -->
-    <skip />
+    <string name="lock_screen_skip_setup_title" msgid="6979006375138175111">"Прапусціць наладжванне <xliff:g id="OPTIONS">%s</xliff:g>?"</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Прапусціць наладку PIN-кода?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Прапусціць наладжванне PIN-кода і твару?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Прапусціць наладжванне PIN-кода і адбітка пальца?"</string>
@@ -496,17 +496,16 @@
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Наладзьце блакіроўку экрана"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"У мэтах дадатковай бяспекі задайце для гэтай прылады PIN-код, узор разблакіроўкі ці пароль."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Наладзіць блакіроўку экрана"</string>
-    <!-- no translation found for no_screen_lock_issue_notification_title (1214876733592830628) -->
-    <skip />
+    <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"Задайце блакіроўку экрана"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"У мэтах дадатковай бяспекі задайце для гэтай прылады PIN-код, узор разблакіроўкі ці пароль."</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Абараніце тэлефон"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Дадайце адбітак пальца для разблакіроўкі"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Спосаб блакіроўкі экрана"</string>
-    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Выберыце спосаб блакіроўкі экрана"</string>
+    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Выберыце спосаб разблакіроўкі экрана"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Новая блакіроўка экрана"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Блакіроўка для працы"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Новая блакіроўка для працы"</string>
-    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Для большай бяспекі наладзьце дадатковы спосаб блакіроўкі экрана"</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Для большай бяспекі наладзьце дадатковы спосаб разблакіроўкі экрана"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Выберыце дадатковы спосаб блакіроўкі экрана"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Калі вы забудзеце спосаб разблакіроўкі экрана, IT-адміністратар не зможа вам дапамагчы."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Задайце для працоўнага профілю асобную блакіроўку"</string>
@@ -528,19 +527,13 @@
     <string name="unlock_set_unlock_password_title" msgid="2559842616268607041">"Пароль"</string>
     <string name="unlock_set_do_later_title" msgid="6565575303676064364">"Не зараз"</string>
     <string name="current_screen_lock" msgid="1367883977261098017">"Бягучы спосаб блакіроўкі"</string>
-    <!-- no translation found for fingerprint_unlock_set_unlock_pattern (2229689425933043901) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_set_unlock_pin (7979848492740627674) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_set_unlock_password (6207676267295036963) -->
-    <skip />
+    <string name="fingerprint_unlock_set_unlock_pattern" msgid="2229689425933043901">"Узор разблакіроўкі • Адбітак пальца"</string>
+    <string name="fingerprint_unlock_set_unlock_pin" msgid="7979848492740627674">"PIN-код • Адбітак пальца"</string>
+    <string name="fingerprint_unlock_set_unlock_password" msgid="6207676267295036963">"Пароль • Адбітак пальца"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Працягнуць без наладжвання адбітка"</string>
-    <!-- no translation found for face_unlock_set_unlock_pattern (4206669838203096608) -->
-    <skip />
-    <!-- no translation found for face_unlock_set_unlock_pin (9034912683791069602) -->
-    <skip />
-    <!-- no translation found for face_unlock_set_unlock_password (5874950853246424756) -->
-    <skip />
+    <string name="face_unlock_set_unlock_pattern" msgid="4206669838203096608">"Узор разблакіроўкі • Распазнаванне твару"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"PIN-код • Распазнаванне твару"</string>
+    <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"Пароль • Распазнаванне твару"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Працягнуць без распазнавання твару"</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Узор разблакіроўкі • Твар • Адбітак пальца"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN-код • Твар • Адбітак пальца"</string>
@@ -641,6 +634,8 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Спалучыцца з <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <!-- no translation found for bluetooth_pairing_group_late_bonding (5310869364570266209) -->
+    <skip />
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Код спалучэння па Bluetooth"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Увядзіце код спалучэння, затым націсніце кнопку Назад або Ўвод"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"PIN-код складаецца з літар ці знакаў"</string>
@@ -667,8 +662,7 @@
     <string name="remove_association_button" msgid="5004208145998061135">"Выдаліць сувязь"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Адключыць праграму?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Праграма \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" больш не будзе падключацца да прылады \"<xliff:g id="DEVICE_NAME">%2$s</xliff:g>\""</string>
-    <!-- no translation found for device_details_leaudio_toggle_summary (7684848254433230809) -->
-    <skip />
+    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Эксперыментальнае. Паляпшае якасць аўдыя."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Забыць прыладу"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Адключыць праграму"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Максімальная колькасць падключаных аўдыяпрылад Bluetooth"</string>
@@ -971,8 +965,7 @@
     <string name="account_settings" msgid="255404935489127404">"Уліковыя запiсы"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"Уліковыя запісы з рабочым профілем – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"Уліковыя запісы з асабістым профілем"</string>
-    <!-- no translation found for accessibility_category_clone (7893383448944567885) -->
-    <skip />
+    <string name="accessibility_category_clone" msgid="7893383448944567885">"Кланіраваныя ўліковыя запісы"</string>
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"Рабочы ўліковы запіс – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Асабісты ўліковы запіс – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Пошук"</string>
@@ -1131,6 +1124,8 @@
     <string name="kernel_version" msgid="3513538109381366881">"Версія ядра"</string>
     <string name="build_number" msgid="9009733242117579826">"Нумар зборкі"</string>
     <string name="module_version" msgid="1787518340082046658">"Абнаўленне сістэмы Google Play"</string>
+    <!-- no translation found for battery_info (7873528123969546728) -->
+    <skip />
     <string name="device_info_not_available" msgid="4804474466616712326">"Недаступна"</string>
     <string name="storage_settings" msgid="7472188817781592677">"Сховішча"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Сховішча і кэш"</string>
@@ -1163,6 +1158,12 @@
     <string name="status_bt_address" msgid="6919660304578476547">"Адрас Bluetooth"</string>
     <string name="status_serial_number" msgid="9060064164331466789">"Серыйны нумар"</string>
     <string name="status_up_time" msgid="1274778533719495438">"Час працы пасля апошняй загрузкі"</string>
+    <!-- no translation found for battery_manufacture_date (7139426520156833987) -->
+    <skip />
+    <!-- no translation found for battery_first_use_date (3157207331722711317) -->
+    <skip />
+    <!-- no translation found for battery_cycle_count (2912949283386571900) -->
+    <skip />
     <string name="memory_calculating_size" msgid="3898240439798661242">"Вядзецца падлік..."</string>
     <string name="storage_menu_rename" msgid="8549835371429159336">"Перайменаваць"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Падключыць"</string>
@@ -2008,8 +2009,7 @@
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Далей"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Слыхавыя апараты"</string>
     <string name="accessibility_hearingaid_intro" msgid="5856992709195963850">"Вы можаце выкарыстоўваць з тэлефонам слыхавыя апараты, кахлеарныя імпланты і іншыя прылады для ўзмацнення гуку"</string>
-    <!-- no translation found for accessibility_hearingaid_not_connected_summary (7438018718889849521) -->
-    <skip />
+    <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Няма падключаных слыхавых апаратаў"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Дадаць слыхавыя апараты"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Спалучыце слыхавы апарат"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"На наступным экране націсніце на слыхавы апарат. Вам можа спатрэбіцца спалучыць паасобку левы і правы навушнікі.\n\nПераканайцеся, што слыхавы апарат уключаны і гатовы да спалучэння."</string>
@@ -2936,6 +2936,8 @@
     <string name="keywords_sim_status_iccid_esim" msgid="4634015619840979184">"сетка, стан мабільнай сеткі, даступнасць мабільнай сеткі, магутнасць сігналу, тып мабільнай сеткі, роўмінг, ICCID, EID"</string>
     <string name="keywords_esim_eid" msgid="8128175058237372457">"EID"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"серыйны нумар, версія апаратнага забеспячэння"</string>
+    <!-- no translation found for keywords_battery_info (3319796850366687033) -->
+    <skip />
     <string name="keywords_android_version" msgid="1629882125290323070">"узровень патчу бяспекі android, версія дыяпазону, версія ядра"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"тэма, святло, цёмны, рэжым, адчувальнасць да святла, фотафобія, зрабіць цямнейшым, зацямніць, цёмны рэжым, мігрэнь"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"цёмная тэма"</string>
@@ -3329,6 +3331,8 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Ніколі не паказваць гэтыя апавяшчэнні"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Уключыць апавяшчэнні"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Ніколі не паказваць апавяшчэнні на \"шторцы\" або на перыферыйных прыладах"</string>
+    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"Дазволіць паказ поўнаэкранных апавяшчэнняў"</string>
+    <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"Дазволіць паказ поўнаэкранных апавяшчэнняў, калі прылада заблакіравана"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Паказваць значок апавяшчэнняў"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Паказваць значок апавяшчэнняў"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"Дазволіць у рэжыме \"Не турбаваць\""</string>
@@ -4046,6 +4050,7 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Калі вы аплаціце поўны кошт:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Усе абмежаванні на выкарыстанне прылады зняты"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Вы не можаце выдаліць праграму крэдытора"</string>
+    <string name="device_lock_info" msgid="1628142032642755537">"Блакіроўка прылады"</string>
     <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{Праграма \"Камера\"}one{Праграмы \"Камера\"}few{Праграмы \"Камера\"}many{Праграмы \"Камера\"}other{Праграмы \"Камера\"}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"Праграма \"Каляндар\""</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"Праграма \"Кантакты\""</string>
