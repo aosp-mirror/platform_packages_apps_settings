@@ -22,8 +22,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.icu.text.MeasureFormat;
-import android.icu.util.MeasureUnit;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
@@ -322,14 +320,10 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
             final boolean isLimit = getArguments().getBoolean(EXTRA_LIMIT);
             final long bytes = isLimit ? editor.getPolicyLimitBytes(template)
                     : editor.getPolicyWarningBytes(template);
-            final long limitDisabled = isLimit ? LIMIT_DISABLED : WARNING_DISABLED;
 
-            final MeasureFormat formatter = MeasureFormat.getInstance(
-                    getContext().getResources().getConfiguration().locale,
-                    MeasureFormat.FormatWidth.SHORT);
             final String[] unitNames = new String[] {
-                formatter.getUnitDisplayName(MeasureUnit.MEGABYTE),
-                formatter.getUnitDisplayName(MeasureUnit.GIGABYTE)
+                    DataUsageFormatter.INSTANCE.getBytesDisplayUnit(getResources(), MIB_IN_BYTES),
+                    DataUsageFormatter.INSTANCE.getBytesDisplayUnit(getResources(), GIB_IN_BYTES),
             };
             final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                     getContext(), android.R.layout.simple_spinner_item, unitNames);
