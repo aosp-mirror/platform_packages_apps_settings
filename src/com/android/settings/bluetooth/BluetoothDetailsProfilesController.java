@@ -16,7 +16,6 @@
 
 package com.android.settings.bluetooth;
 
-import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
@@ -69,6 +68,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
 
     private static final String ENABLE_DUAL_MODE_AUDIO =
             "persist.bluetooth.enable_dual_mode_audio";
+    private static final String CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT = "le_audio_enabled_by_default";
 
     private LocalBluetoothManager mManager;
     private LocalBluetoothProfileManager mProfileManager;
@@ -88,7 +88,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         mManager = manager;
         mProfileManager = mManager.getProfileManager();
         mCachedDevice = device;
-        mAllOfCachedDevices = getAllOfCachedBluetoothDevices();
+        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mContext, mCachedDevice);
         lifecycle.addObserver(this);
     }
 
@@ -99,7 +99,9 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         mIsLeContactSharingEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
                 SettingsUIDeviceConfig.BT_LE_AUDIO_CONTACT_SHARING_ENABLED, true);
         mIsLeAudioToggleEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED, false);
+                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED, false)
+                || DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_BLUETOOTH,
+                CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT, false);
         // Call refresh here even though it will get called later in onResume, to avoid the
         // list of switches appearing to "pop" into the page.
         refresh();
@@ -316,20 +318,6 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         return result;
     }
 
-    private List<CachedBluetoothDevice> getAllOfCachedBluetoothDevices() {
-        List<CachedBluetoothDevice> cachedBluetoothDevices = new ArrayList<>();
-        if (mCachedDevice == null) {
-            return cachedBluetoothDevices;
-        }
-        cachedBluetoothDevices.add(mCachedDevice);
-        if (mCachedDevice.getGroupId() != BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
-            for (CachedBluetoothDevice member : mCachedDevice.getMemberDevice()) {
-                cachedBluetoothDevices.add(member);
-            }
-        }
-        return cachedBluetoothDevices;
-    }
-
     /**
      * Disable the Le Audio profile, VCP, and CSIP for each of the Le Audio devices.
      *
@@ -477,7 +465,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         for (CachedBluetoothDevice item : mAllOfCachedDevices) {
             item.unregisterCallback(this);
         }
-        mAllOfCachedDevices = getAllOfCachedBluetoothDevices();
+        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mContext, mCachedDevice);
         for (CachedBluetoothDevice item : mAllOfCachedDevices) {
             item.registerCallback(this);
         }
