@@ -131,6 +131,8 @@ public final class AccessibilityStatsLogUtils {
                 return FrameworkStatsLog.HEARING_AID_INFO_REPORTED__BOND_ENTRY__ACCESSIBILITY_HEARING_AID_PAIR_ANOTHER;
             case SettingsStatsLog.SETTINGS_UICHANGED__PAGE_ID__BLUETOOTH_FRAGMENT:
                 return FrameworkStatsLog.HEARING_AID_INFO_REPORTED__BOND_ENTRY__BLUETOOTH;
+            case SettingsStatsLog.SETTINGS_UICHANGED__PAGE_ID__ACCESSIBILITY_HEARING_AID_SETTINGS:
+                return FrameworkStatsLog.HEARING_AID_INFO_REPORTED__BOND_ENTRY__ACCESSIBILITY_HEARING_AID_SETTINGS;
             default:
                 return FrameworkStatsLog.HEARING_AID_INFO_REPORTED__BOND_ENTRY__PAGE_UNKNOWN;
         }
