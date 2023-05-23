@@ -377,7 +377,7 @@
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Au fost adăugate fața, amprenta și <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Au fost adăugate fața, amprentele și <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Deblocare facială și cu amprenta"</string>
-    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Deblocarea facială și Deblocarea cu amprenta pentru lucru"</string>
+    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Deblocarea facială și cu amprenta pentru serviciu"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Este necesară configurarea"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Fața și amprentele au fost adăugate"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Fața și amprenta au fost adăugate"</string>
@@ -627,6 +627,8 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Asociezi cu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <!-- no translation found for bluetooth_pairing_group_late_bonding (5310869364570266209) -->
+    <skip />
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Cod de asociere prin Bluetooth"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Introdu codul de conectare, apoi apasă pe Revino sau pe Enter"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"Codul PIN conține litere sau simboluri"</string>
@@ -2513,7 +2515,7 @@
     <string name="data_usage_summary_title" msgid="394067070764360142">"Utilizarea datelor"</string>
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Date mobile și Wi-Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Sincronizare automată a datelor"</string>
-    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Sincron. auto. date serviciu"</string>
+    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Autosincronizare date serviciu"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Schimbă data ciclului..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Ziua din lună pentru resetarea ciclului de utilizare a datelor:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Nicio aplic. nu a utilizat date în ac. perioadă."</string>
@@ -3313,6 +3315,8 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Aceste notificări nu se afișează niciodată"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Afișează notificările"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Nu afișa niciodată notificările în umbră sau pe dispozitive periferice"</string>
+    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"Permite notificările pe ecran complet"</string>
+    <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"Permite afișarea notificărilor pe ecran complet când dispozitivul e blocat"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Permite un punct de notificare"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Afișează punctul de notificare"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"Ignoră Nu deranja"</string>
@@ -3654,7 +3658,7 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Poate accesa toate fișierele"</string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"Notificări pe ecran complet"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"Permite notificările pe ecran complet de la această aplicație"</string>
-    <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Permite aplicației să afișeze notificări care ocupă ecranul complet când dispozitivul este blocat. Aplicațiile le pot folosi pentru a evidenția alarme, apeluri primite sau alte informații urgente."</string>
+    <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Permite aplicației să afișeze notificări care ocupă întregul ecran când dispozitivul e blocat. Aplicațiile le pot folosi pentru a evidenția alarme, apeluri primite sau alte informații urgente."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Aplicații de gestionare media"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Aplicația poate gestiona conținutul media"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Dacă îi permiți, aplicația poate să modifice sau să șteargă fișiere media create cu alte aplicații fără a te întreba. Aplicația trebuie să aibă permisiunea de a accesa fișierele."</string>
@@ -4029,6 +4033,7 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"După ce achiți toată suma:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Toate restricțiile sunt eliminate de pe dispozitiv"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Poți să dezinstalezi aplicația Creditor"</string>
+    <string name="device_lock_info" msgid="1628142032642755537">"Blocarea dispozitivului"</string>
     <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{Aplicația Cameră foto}few{Aplicațiile Cameră foto}other{Aplicațiile Cameră foto}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"Aplicația Calendar"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"Aplicația Agendă"</string>
@@ -4070,7 +4075,7 @@
     <string name="credman_keywords" msgid="8305600680836806170">"date, cheie de acces, parolă"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"auto, completare, completare automată, date, cheie de acces, parolă"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Asigură-te că ai încredere în această aplicație&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Completarea automată Google&gt;%1$s&lt;/xliff:g&gt; folosește conținutul de pe ecran pentru a stabili ce se poate completa automat."</string>
-    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Folosește &lt;xliff:g id=app_name example=Furnizorul&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Furnizorul&gt;%1$s&lt;/xliff:g&gt; folosește elementele de pe ecran pentru a stabili ce se poate completa automat. De acum înainte, parolele noi, cheile de acces și alte informații se vor salva aici."</string>
+    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Folosești &lt;xliff:g id=app_name example=Furnizorul&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Furnizorul&gt;%1$s&lt;/xliff:g&gt; folosește elementele de pe ecran pentru a stabili ce se poate completa automat. De acum înainte, parolele noi, cheile de acces și alte informații se vor salva aici."</string>
     <string name="credman_picker_title" msgid="2642776965060619988">"Parole, chei de acces și servicii de date"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Dezactivezi %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Dezactivezi serviciul?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Informațiile salvate, cum ar fi parole, chei de acces, metode de plată și altele, nu vor fi completate când te conectezi. Pentru a folosi informațiile salvate, alege o parolă, o cheie de acces sau un serviciu de date."</string>
