@@ -19,6 +19,7 @@ import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -35,6 +36,8 @@ public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDev
     private int mPasswordMinQuality = PASSWORD_QUALITY_UNSPECIFIED;
     private int mPasswordMinLength = 0;
     private int mPasswordMinSymbols = 0;
+
+    private List<String> mPermittedAccessibilityServices = null;
 
     public void setShortSupportMessageForUser(ComponentName admin, int userHandle, String message) {
         mSupportMessagesMap.put(Objects.hash(admin, userHandle), message);
@@ -120,6 +123,16 @@ public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDev
 
     public void setPasswordMinimumSymbols(int numOfSymbols) {
         mPasswordMinSymbols = numOfSymbols;
+    }
+
+    public void setPermittedAccessibilityServices(List<String> permittedAccessibilityServices) {
+        mPermittedAccessibilityServices = permittedAccessibilityServices;
+    }
+
+    @Implementation
+    @Nullable
+    public List<String> getPermittedAccessibilityServices(int userId) {
+        return mPermittedAccessibilityServices;
     }
 
     public static ShadowDevicePolicyManager getShadow() {
