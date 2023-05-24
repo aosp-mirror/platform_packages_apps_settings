@@ -32,6 +32,8 @@ import android.os.BatteryManager;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.R;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -61,5 +63,14 @@ public class BatteryCycleCountPreferenceControllerTest {
         doReturn(batteryIntent).when(mContext).registerReceiver(any(), any());
 
         assertThat(mController.getSummary()).isEqualTo("10");
+    }
+
+    @Test
+    public void getSummary_noValue_returnUnavailable() {
+        final Intent batteryIntent = new Intent();
+        doReturn(batteryIntent).when(mContext).registerReceiver(any(), any());
+
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getText(R.string.battery_cycle_count_not_available));
     }
 }

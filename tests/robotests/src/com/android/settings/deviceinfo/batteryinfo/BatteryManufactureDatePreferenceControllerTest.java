@@ -51,14 +51,15 @@ public class BatteryManufactureDatePreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_dateAvailable_returnAvailable() {
-        when(mFactory.mBatteryInfoFeatureProvider.isManufactureDateAvailable()).thenReturn(true);
+        when(mFactory.batterySettingsFeatureProvider.isManufactureDateAvailable()).thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
     public void getAvailabilityStatus_dateUnavailable_returnNotAvailable() {
-        when(mFactory.mBatteryInfoFeatureProvider.isManufactureDateAvailable()).thenReturn(false);
+        when(mFactory.batterySettingsFeatureProvider.isManufactureDateAvailable())
+                .thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }

@@ -50,14 +50,14 @@ public class BatteryFirstUseDatePreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_dateAvailable_returnAvailable() {
-        when(mFactory.mBatteryInfoFeatureProvider.isFirstUseDateAvailable()).thenReturn(true);
+        when(mFactory.batterySettingsFeatureProvider.isFirstUseDateAvailable()).thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
     public void getAvailabilityStatus_dateUnavailable_returnNotAvailable() {
-        when(mFactory.mBatteryInfoFeatureProvider.isFirstUseDateAvailable()).thenReturn(false);
+        when(mFactory.batterySettingsFeatureProvider.isFirstUseDateAvailable()).thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
