@@ -166,14 +166,14 @@
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Untuk memilih bahasa bagi setiap apl, pergi ke tetapan bahasa apl."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Ketahui lebih lanjut tentang bahasa apl"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Tukar bahasa sistem kepada %s ?"</string>
-    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Tetapan dan pilihan serantau peranti akan ditukar."</string>
+    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Tetapan peranti dan tetapan wilayah akan berubah."</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Tukar"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s tidak tersedia"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Bahasa ini tidak boleh digunakan sebagai bahasa sistem, tetapi anda telah membenarkan apl dan laman web menerimanya sebagai bahasa pilihan anda."</string>
-    <string name="regional_preferences_title" msgid="4304567374498629528">"Pilihan serantau"</string>
+    <string name="regional_preferences_title" msgid="4304567374498629528">"Tetapan wilayah"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Tetapkan pilihan unit dan nombor"</string>
-    <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Beritahu apl pilihan serantau anda supaya apl boleh memeribadikan pengalaman anda."</string>
-    <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Apl akan menggunakan pilihan serantau anda jika boleh."</string>
+    <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Beritahu apl tetapan wilayah anda supaya apl boleh memeribadikan pengalaman anda."</string>
+    <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Apl akan menggunakan tetapan wilayah anda jika boleh."</string>
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Suhu"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Hari pertama dalam minggu"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Pilihan nombor"</string>
@@ -187,7 +187,7 @@
     <string name="thursday_first_day_of_week" msgid="3035885630945594833">"Khamis"</string>
     <string name="friday_first_day_of_week" msgid="7074795061812083541">"Jumaat"</string>
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Sabtu"</string>
-    <string name="title_regional_pref_footer" msgid="7450438024324794380">"Jika apl tidak menyokong pilihan serantau, apl tersebut akan menggunakan tetapan penempatan lalai."</string>
+    <string name="title_regional_pref_footer" msgid="7450438024324794380">"Jika apl tidak menyokong tetapan wilayah, tetapan penempatan lalai akan digunakan."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Ketahui lebih lanjut tentang pilihan bahasa."</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Alih keluar bahasa yang dipilih?}other{Alih keluar bahasa yang dipilih?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Teks akan dipaparkan dalam bahasa lain."</string>
@@ -627,6 +627,8 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Gandingkan dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <!-- no translation found for bluetooth_pairing_group_late_bonding (5310869364570266209) -->
+    <skip />
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Kod gandingan Bluetooth"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Taip kod berpasangan kemudian tekan Kembali atau Enter"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"PIN mengandungi huruf atau simbol"</string>
@@ -2807,9 +2809,9 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"Sentiasa gunakan ini untuk panggilan"</string>
     <string name="select_sim_for_data" msgid="2642305487659432499">"Pilih SIM untuk data mudah alih"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Pilih SIM untuk SMS"</string>
-    <string name="data_switch_started" msgid="6292759843974720112">"Menukar SIM data, ini boleh mengambil masa sehingga satu minit…"</string>
+    <string name="data_switch_started" msgid="6292759843974720112">"Menukar SIM data, mungkin mengambil masa hingga satu minit…"</string>
     <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"Gunakan data mudah alih <xliff:g id="NEW_SIM">%1$s</xliff:g>?"</string>
-    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Jika anda bertukar kepada <xliff:g id="NEW_SIM">%1$s</xliff:g>, <xliff:g id="OLD_SIM">%2$s</xliff:g> tidak lagi digunakan untuk data mudah alih."</string>
+    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Jika anda tukar kepada <xliff:g id="NEW_SIM">%1$s</xliff:g>, <xliff:g id="OLD_SIM">%2$s</xliff:g> tidak lagi digunakan untuk data mudah alih."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Gunakan <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Panggil dengan"</string>
     <string name="sim_name_hint" msgid="8231524869124193119">"Masukkan nama SIM"</string>
@@ -2845,7 +2847,7 @@
     <string name="account_dashboard_title" msgid="8228773251948253914">"Kata laluan dan akaun"</string>
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Kata laluan yang disimpan, autolengkap, akaun yang disegerakkan"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Apl lalai"</string>
-    <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Apl Diklon"</string>
+    <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Apl Klon"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Buat tika kedua apl supaya anda boleh menggunakan dua akaun pada masa yang sama."</string>
     <string name="desc_cloneable_app_list_text" msgid="3354586725814708688">"Apl yang boleh diklon."</string>
     <string name="cloned_apps_summary" msgid="8805362440770795709">"<xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g> diklon, <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g> tersedia untuk diklon"</string>
@@ -3313,6 +3315,8 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Jangan sekali-kali tunjukkan pemberitahuan ini"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Tunjukkan pemberitahuan"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Jangan sekali-kali tunjukkan pemberitahuan dalam bidai atau pada peranti persisian"</string>
+    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"Benarkan pemberitahuan skrin penuh"</string>
+    <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"Benarkan pemberitahuan untuk menggunakan skrin penuh apabila peranti dikunci"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Benarkan titik pemberitahuan"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Tunjukkan titik pemberitahuan"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"Batalkan Jangan Ganggu"</string>
@@ -3654,7 +3658,7 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Boleh mengakses semua fail"</string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"Pemberitahuan skrin penuh"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"Benarkan pemberitahuan skrin penuh daripada apl ini"</string>
-    <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Benarkan apl untuk memaparkan pemberitahuan menggunakan skrin penuh apabila peranti dikunci. Apl mungkin menggunakan ciri ini untuk menyerlahkan penggera, panggilan masuk atau pemberitahuan mustahak yang lain."</string>
+    <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Benarkan apl ini untuk memaparkan pemberitahuan menggunakan skrin penuh apabila peranti dikunci. Apl mungkin menggunakan ciri ini untuk menyerlahkan penggera, panggilan masuk atau pemberitahuan mustahak yang lain."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Apl pengurusan media"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Benarkan apl untuk mengurus media"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Jika dibenarkan, apl ini boleh mengubah suai atau memadamkan fail media yang dibuat dengan apl lain tanpa meminta izin anda. Apl mesti mempunyai kebenaran untuk mengakses fail dan media."</string>
@@ -4028,6 +4032,7 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Setelah anda membayar jumlah penuh:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Semua sekatan dialih keluar daripada peranti"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Anda boleh menyahpasang apl pemiutang"</string>
+    <string name="device_lock_info" msgid="1628142032642755537">"Kunci Peranti"</string>
     <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{Apl kamera}other{Apl kamera}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"Apl Kalendar"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"Apl Kenalan"</string>
@@ -4625,8 +4630,8 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Pratonton"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Pilih penyelamat skrin"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Tunjukkan maklumat tambahan"</string>
-    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Paparkan benda seperti masa, cuaca atau maklumat lain pada penyelamat skrin"</string>
-    <string name="dream_home_controls_toggle_title" msgid="706799741564479248">"Menunjukkan kawalan rumah"</string>
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Memaparkan perkara seperti masa, cuaca atau maklumat lain pada penyelamat skrin"</string>
+    <string name="dream_home_controls_toggle_title" msgid="706799741564479248">"Tunjukkan kawalan rumah"</string>
     <string name="dream_home_controls_toggle_summary" msgid="4102519907917430579">"Menunjukkan butang kawalan rumah daripada penyelamat skrin"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Lagi tetapan"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Pilih penyelamat skrin anda"</string>

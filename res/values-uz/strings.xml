@@ -627,6 +627,8 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> qurilmasiga ulansinmi?"</string>
+    <!-- no translation found for bluetooth_pairing_group_late_bonding (5310869364570266209) -->
+    <skip />
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Bluetooth orqali juftlash kodi"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Ulanish kodini kiriting va keyin “Return” yoki “Enter” tugmasini bosing"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"Harflar yoki maxsus belgilardan iborat PIN kod"</string>
@@ -2845,9 +2847,9 @@
     <string name="account_dashboard_title" msgid="8228773251948253914">"Parollar va hisoblar"</string>
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Saqlangan parollar, avtomatik kiritish, sinxronlangan hisoblar"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Birlamchi ilovalar"</string>
-    <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Nusxalangan ilovalar"</string>
+    <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Klon ilovalar"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Bir vaqtda ikkita hisobdan foydalanish uchun ilovaning ikkinchi nusxasini yartaing."</string>
-    <string name="desc_cloneable_app_list_text" msgid="3354586725814708688">"Nusxalash mumkin boʻlgan ilovalar."</string>
+    <string name="desc_cloneable_app_list_text" msgid="3354586725814708688">"Klonlash mumkin ilovalar."</string>
     <string name="cloned_apps_summary" msgid="8805362440770795709">"<xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g> tasi nusxalandi, yana <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g> ta bor"</string>
     <string name="delete_all_app_clones" msgid="3489053361980624999">"Barcha ilova nusxalarini oʻchirish"</string>
     <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"Barcha ilova nusxalari oʻchirilmadi"</string>
@@ -3313,6 +3315,8 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Bu bildirishnomalar boshqa ko‘rsatilmasin"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Bildirishnomalarni yoqish"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Fonda yoki tashqi qurilmalarda bildirishnomalar hech qachon ko‘rsatilmasin"</string>
+    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"Bildirishnomalarni butun ekranda chiqishiga ruxsat berish"</string>
+    <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"Qurilma qulflanganida bildirishnomalarni butun ekranni egallashiga ruxsat berish"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Nuqtali bildirishnoma belgisi"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Bildirishnoma belgisining chiqishi"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"Bezovta qilinmasin rejimi ustidan yozish"</string>
@@ -4028,6 +4032,7 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Qarzingiz toʻliq uzilganidan keyin quyidagilar ochiladi:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Qurilmadan barcha cheklovlar olib tashlanadi"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Kredit idorasi ilovasini oʻchirib tashlashingiz mumkin"</string>
+    <string name="device_lock_info" msgid="1628142032642755537">"Qurilma qulfi"</string>
     <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{Kamera ilovasi}other{Kamera ilovalari}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"Taqvim ilovasi"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"Kontaktlar ilovasi"</string>
@@ -4062,7 +4067,7 @@
     <string name="autofill_app" msgid="7595308061826307921">"Avtomatik kiritish"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Birlamchi avtomatik kiritish xizmati"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Parollar"</string>
-    <string name="credman_chosen_app_title" msgid="4547405511458518096">"Parollar, kalitlar va maʼlumotlar xizmatlari"</string>
+    <string name="credman_chosen_app_title" msgid="4547405511458518096">"Parollar, kirish kalitlari va maʼlumotlar uchun xizmatlar"</string>
     <string name="credman_credentials" msgid="4931371941253324143">"Qoʻshimcha taʼminotchilar"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# ta parol}other{# ta parol}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"avto, toʻldirish, avtotoʻldirish, parol"</string>
@@ -4070,13 +4075,13 @@
     <string name="credman_autofill_keywords" msgid="701180623776848914">"avtomatik, kiritish, avtomatik kiritish, maʼlumotlar, kalit, parol"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Bu ilova ishonchli ekanini tekshiring&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; ekraningizda nimani avtomatik kiritish kerakligini aniqlaydi."</string>
     <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; ishlatilsinmi?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; ekrandagi avtomatik kiritish mumkin axborotlarni aniqlaydi. Endi yangi parollar, kalitlar va boshqa maʼlumotlar saqlanadi."</string>
-    <string name="credman_picker_title" msgid="2642776965060619988">"Parollar, kalitlar va maʼlumot xizmatlari"</string>
+    <string name="credman_picker_title" msgid="2642776965060619988">"Parollar, kirish kalitlari va maʼlumotlar uchun xizmatlar"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s faolsizlantirilsinmi?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Bu xizmat faolsizlantirilsinmi?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Hisobga kirganingizda saqlangan parollar, kalitlar, toʻlov usullari va boshqa maʼlumotlar avtomatik kiritilmaydi. Saqlangan axborotdan foydalanish uchun parol, kalit yoki axborot xizmatini tanlang."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"%1$s ishlatilsinmi?"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s ekraningizda nimani avtomatik kiritish kerakligini aniqlaydi."</string>
-    <string name="credman_error_message_title" msgid="4741457523969373713">"Parollar, kodlar va maʼlumotlarni saqlash boʻyicha xizmatlar soni cheklangan"</string>
-    <string name="credman_error_message" msgid="6793314648458925172">"Bir vaqtda parollar, kodlar va maʼlumotlarni saqlash uchun 5 tadan ortiq xizmat faol boʻlishi mumkin emas. Yangi xizmat qoʻshish uchun birortasini oʻchiring."</string>
+    <string name="credman_error_message_title" msgid="4741457523969373713">"Parollar, kalitlar va maʼlumotlarni saqlash uchun xizmatlar soni cheklangan"</string>
+    <string name="credman_error_message" msgid="6793314648458925172">"Bir vaqtda parollar, kalitlar va maʼlumotlarni saqlash uchun 5 tadan ortiq xizmat faol boʻlishi mumkin emas. Yangi xizmat qoʻshish uchun birortasini oʻchiring."</string>
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Faolsizlantirish"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Avtomatik kiritish"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Jurnal yuritish darajasi"</string>
@@ -4680,9 +4685,9 @@
     <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"Yoniq / Kamera yoritkichi miltillaydi"</string>
     <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Yoniq / ekran miltillashi"</string>
     <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Yoniq / Kamera va ekran yoritkichi miltillaydi"</string>
-    <string name="flash_notifications_intro" msgid="8409873413480928249">"Bildirishnoma kelganda yoki signal jiringlaganda kamera chaqnogʻi yoki ekran miltillaydi"</string>
-    <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Bildirishnoma kelganda yoki signal jiringlaganda ekran miltillaydi"</string>
-    <string name="flash_notifications_note" msgid="2426125248448055075">"Yorugʻlikka sezgir boʻlsangiz, chaqnoqli bildirishnoma ishlating"</string>
+    <string name="flash_notifications_intro" msgid="8409873413480928249">"Bildirishnoma kelganda yoki signal chalinganda kamera yoritkichi yoki ekran miltillaydi"</string>
+    <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Bildirishnoma kelganda yoki signal chalinganda ekran miltillaydi"</string>
+    <string name="flash_notifications_note" msgid="2426125248448055075">"Yorugʻlikka sezgir boʻlsangiz, yoritkichli bildirishnomalarni ehtiyot boʻlib ishlating"</string>
     <string name="flash_notifications_keywords" msgid="2458759275318514836">"chaqnoq, nur, nuqsonli eshitish, karlik"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"Namuna"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"Kamera yoritkichi"</string>
