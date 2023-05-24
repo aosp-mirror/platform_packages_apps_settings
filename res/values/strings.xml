@@ -1037,13 +1037,21 @@
     <!-- Dialog message for dialog which shows when user touches the icon on the screen, instead of the sensor at the back [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_touch_dialog_message">Touch the sensor on the back of your phone. Use your index finger.</string>
     <!-- Dialog message for dialog which shows when finger cannot be processed in enrollment. [CHAR LIMIT=45] -->
-    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title">Enrollment was not completed</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title">Can\u2019t complete fingerprint setup</string>
+    <!-- Dialog message for dialog which shows when finger cannot be enrolled because the HAL is unable to process it (SUW). -->
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message_setup">You can try again now or set up your fingerprint later in Settings.</string>
+    <!-- Dialog message for dialog which shows when finger cannot be enrolled because the HAL is unable to process it. -->
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message">You can try again now or set up your fingerprint later.</string>
     <!-- Dialog message for dialog which shows when finger cannot be enrolled. [CHAR LIMIT=45] -->
     <string name="security_settings_fingerprint_enroll_error_dialog_title">Fingerprint setup timed out</string>
+    <!-- Dialog message for dialog which shows when finger cannot be enrolled due to being idle too long (SUW). -->
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message_setup">You can set up your fingerprint later in Settings.</string>
+    <!-- Dialog message for dialog which shows when finger cannot be enrolled due to an internal error or fingerprint can't be read (SUW). -->
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message_setup">Something went wrong. You can set up your fingerprint later in Settings.</string>
     <!-- Dialog message for dialog which shows when finger cannot be enrolled due to being idle too long. -->
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message">You can set up your fingerprint later in Settings.</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message">You can set up your fingerprint later.</string>
     <!-- Dialog message for dialog which shows when finger cannot be enrolled due to an internal error or fingerprint can't be read. -->
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message">Fingerprint enrollment didn\'t work. Try again or use a different finger.</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message">Something went wrong. You can set up your fingerprint later.</string>
     <!-- Button text shown at the end of enrollment that allows the user to add another fingerprint -->
     <string name="fingerprint_enroll_button_add">Add another</string>
     <!-- Button text shown at the end of enrollment that allows the user to move to the next step -->
