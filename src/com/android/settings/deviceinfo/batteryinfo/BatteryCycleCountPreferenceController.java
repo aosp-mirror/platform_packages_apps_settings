@@ -18,10 +18,11 @@ package com.android.settings.deviceinfo.batteryinfo;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.BatteryManager;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.fuelgauge.BatteryUtils;
 
 /**
  * A controller that manages the information about battery cycle count.
@@ -40,10 +41,11 @@ public class BatteryCycleCountPreferenceController extends BasePreferenceControl
 
     @Override
     public CharSequence getSummary() {
-        final IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-        final Intent batteryStatus = mContext.registerReceiver(null, intentFilter);
-        final int cycleCount = batteryStatus.getIntExtra(BatteryManager.EXTRA_CYCLE_COUNT, -1);
+        final Intent batteryIntent = BatteryUtils.getBatteryIntent(mContext);
+        final int cycleCount = batteryIntent.getIntExtra(BatteryManager.EXTRA_CYCLE_COUNT, -1);
 
-        return Integer.toString(cycleCount);
+        return cycleCount == -1
+                ? mContext.getText(R.string.battery_cycle_count_not_available)
+                : Integer.toString(cycleCount);
     }
 }

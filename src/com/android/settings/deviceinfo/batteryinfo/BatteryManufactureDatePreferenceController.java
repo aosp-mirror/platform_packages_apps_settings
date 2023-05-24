@@ -19,6 +19,7 @@ package com.android.settings.deviceinfo.batteryinfo;
 import android.content.Context;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.fuelgauge.BatterySettingsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 
 /**
@@ -26,22 +27,22 @@ import com.android.settings.overlay.FeatureFactory;
  */
 public class BatteryManufactureDatePreferenceController extends BasePreferenceController {
 
-    private BatteryInfoFeatureProvider mBatteryInfoFeatureProvider;
+    private BatterySettingsFeatureProvider mBatterySettingsFeatureProvider;
 
     public BatteryManufactureDatePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mBatteryInfoFeatureProvider = FeatureFactory.getFactory(
-                context).getBatteryInfoFeatureProvider();
+        mBatterySettingsFeatureProvider = FeatureFactory.getFactory(
+                context).getBatterySettingsFeatureProvider(context);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return mBatteryInfoFeatureProvider.isManufactureDateAvailable()
+        return mBatterySettingsFeatureProvider.isManufactureDateAvailable()
                 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
     public CharSequence getSummary() {
-        return mBatteryInfoFeatureProvider.getManufactureDateSummary();
+        return mBatterySettingsFeatureProvider.getManufactureDateSummary();
     }
 }
