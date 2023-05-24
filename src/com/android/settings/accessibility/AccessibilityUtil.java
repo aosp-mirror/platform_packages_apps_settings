@@ -37,6 +37,7 @@ import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
@@ -124,15 +125,15 @@ public final class AccessibilityUtil {
     }
 
     /**
-     * Return On/Off string according to the setting which specifies the integer value 1 or 0. This
+     * Returns On/Off string according to the setting which specifies the integer value 1 or 0. This
      * setting is defined in the secure system settings {@link android.provider.Settings.Secure}.
      */
-    static CharSequence getSummary(Context context, String settingsSecureKey) {
-        final boolean enabled = Settings.Secure.getInt(context.getContentResolver(),
+    static CharSequence getSummary(
+            Context context, String settingsSecureKey, @StringRes int enabledString,
+            @StringRes int disabledString) {
+        boolean enabled = Settings.Secure.getInt(context.getContentResolver(),
                 settingsSecureKey, State.OFF) == State.ON;
-        final int resId = enabled ? R.string.accessibility_feature_state_on
-                : R.string.accessibility_feature_state_off;
-        return context.getResources().getText(resId);
+        return context.getResources().getText(enabled ? enabledString : disabledString);
     }
 
     /**
@@ -287,6 +288,41 @@ public final class AccessibilityUtil {
         }
 
         Settings.Secure.putString(context.getContentResolver(), targetKey, joiner.toString());
+    }
+
+    /**
+     * Returns the full status with a feature summary.
+     * For example, "$(feature on) / Shortcut on / Speak items on screen".
+     *
+     * @param context           The current context.
+     * @param componentName     The component name in Settings to query
+     *                          if the shortcut turned on.
+     * @param settingsSecureKey One of the key defined in
+     *                          {@link Settings.Secure}.
+     * @param featureOnTextId   The string resource id representing the feature is turned on.
+     * @param featureOffTextId  The string resource id representing the feature is turned off.
+     * @param featureSummaryId  The string resource id of the feature summary.
+     */
+    static CharSequence getFeatureFullStateSummary(
+            Context context, @NonNull ComponentName componentName,
+            String settingsSecureKey,
+            @StringRes int featureOnTextId, @StringRes int featureOffTextId,
+            @StringRes int featureSummaryId) {
+        boolean shortcutEnabled = getUserShortcutTypesFromSettings(context, componentName)
+                != AccessibilityUtil.UserShortcutType.EMPTY;
+        boolean featureEnabled = Settings.Secure.getInt(context.getContentResolver(),
+                settingsSecureKey, AccessibilityUtil.State.OFF) == AccessibilityUtil.State.ON;
+
+        return context.getString(
+                R.string.accessibility_feature_full_state_summary,
+                featureEnabled
+                        ? context.getString(featureOnTextId)
+                        : context.getString(featureOffTextId),
+                shortcutEnabled
+                        ? context.getString(R.string.accessibility_summary_shortcut_enabled)
+                        : context.getString(R.string.generic_accessibility_feature_shortcut_off),
+                context.getString(featureSummaryId)
+        );
     }
 
     /**

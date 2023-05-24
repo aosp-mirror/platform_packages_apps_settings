@@ -68,6 +68,8 @@ public class ColorAndMotionFragment extends DashboardFragment {
 
         mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED);
         mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED);
+        mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
+        mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
 
         mSettingsContentObserver = new AccessibilitySettingsContentObserver(new Handler());
         mSettingsContentObserver.registerKeysToObserverCallback(mShortcutFeatureKeys,
@@ -123,8 +125,6 @@ public class ColorAndMotionFragment extends DashboardFragment {
         final PreferenceCategory experimentalCategory = getPreferenceScreen().findPreference(
                 CATEGORY_EXPERIMENTAL);
         if (ColorDisplayManager.isColorTransformAccelerated(getContext())) {
-            mDisplayDaltonizerPreferenceScreen.setSummary(AccessibilityUtil.getSummary(
-                    getContext(), Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED));
             getPreferenceScreen().removePreference(experimentalCategory);
         } else {
             // Move following preferences to experimental category if device don't supports HWC

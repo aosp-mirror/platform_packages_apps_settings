@@ -19,6 +19,7 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.provider.Settings;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 public class CaptioningPreferenceController extends BasePreferenceController {
@@ -35,6 +36,8 @@ public class CaptioningPreferenceController extends BasePreferenceController {
     @Override
     public CharSequence getSummary() {
         return AccessibilityUtil.getSummary(mContext,
-                Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED);
+                Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED,
+                R.string.show_captions_enabled,
+                R.string.show_captions_disabled);
     }
 }

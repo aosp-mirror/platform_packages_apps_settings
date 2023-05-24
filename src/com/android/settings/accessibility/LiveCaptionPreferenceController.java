@@ -20,10 +20,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 import java.util.List;
@@ -54,5 +56,16 @@ public class LiveCaptionPreferenceController extends BasePreferenceController {
     public void updateState(Preference preference) {
         super.updateState(preference);
         preference.setIntent(LIVE_CAPTION_INTENT);
+        boolean enabled = Settings.Secure.getInt(
+                mContext.getContentResolver(),
+                Settings.Secure.ODI_CAPTIONS_ENABLED, AccessibilityUtil.State.OFF)
+                == AccessibilityUtil.State.ON;
+        CharSequence serviceState = mContext.getText(enabled
+                ? R.string.live_caption_enabled : R.string.live_caption_disabled);
+
+        preference.setSummary(
+                mContext.getString(
+                        R.string.preference_summary_default_combination,
+                        serviceState, mContext.getText(R.string.live_caption_summary)));
     }
 }

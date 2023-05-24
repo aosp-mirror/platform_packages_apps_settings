@@ -411,6 +411,31 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         assertTrue(arguments.containsKey(AccessibilitySettings.EXTRA_HTML_DESCRIPTION));
     }
 
+    @Test
+    public void getSummary_magnificationEnabled_returnShortcutOnWithSummary() {
+        setMagnificationTripleTapEnabled(true);
+
+        assertThat(
+                ToggleScreenMagnificationPreferenceFragment.getServiceSummary(mContext).toString())
+                .isEqualTo(
+                        mContext.getString(R.string.preference_summary_default_combination,
+                                mContext.getString(R.string.accessibility_summary_shortcut_enabled),
+                                mContext.getText(R.string.magnification_feature_summary)));
+    }
+
+    @Test
+    public void getSummary_magnificationDisabled_returnShortcutOffWithSummary() {
+        setMagnificationTripleTapEnabled(false);
+
+        assertThat(
+                ToggleScreenMagnificationPreferenceFragment.getServiceSummary(mContext).toString())
+                .isEqualTo(
+                        mContext.getString(R.string.preference_summary_default_combination,
+                                mContext.getString(
+                                        R.string.generic_accessibility_feature_shortcut_off),
+                                mContext.getText(R.string.magnification_feature_summary)));
+    }
+
     private void putStringIntoSettings(String key, String componentName) {
         Settings.Secure.putString(mContext.getContentResolver(), key, componentName);
     }
