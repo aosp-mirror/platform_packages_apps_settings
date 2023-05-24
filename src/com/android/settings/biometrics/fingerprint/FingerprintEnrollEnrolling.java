@@ -505,7 +505,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         // showErrorDialog() will cause onWindowFocusChanged(false), set mIsCanceled to false
         // before showErrorDialog() to prevent that another error dialog is triggered again.
         mIsCanceled = true;
-        FingerprintErrorDialog.showErrorDialog(this, errorMsgId);
+        FingerprintErrorDialog.showErrorDialog(this, errorMsgId,
+                this instanceof SetupFingerprintEnrollEnrolling);
         cancelEnrollment();
         stopIconAnimation();
         stopListenOrientationEvent();
