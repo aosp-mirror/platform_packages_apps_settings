@@ -75,7 +75,7 @@ public class EnrollmentRequestUtils {
         if (!TextUtils.isEmpty(theme)) {
             i.putExtra(EXTRA_THEME, theme);
         }
-        return new EnrollmentRequest(i, context);
+        return new EnrollmentRequest(i, context, true);
     }
 
 }

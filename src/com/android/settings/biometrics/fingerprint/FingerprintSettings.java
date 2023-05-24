@@ -751,7 +751,7 @@ public class FingerprintSettings extends SubSettings {
                 if (FeatureFlagUtils.isEnabled(getContext(),
                         FeatureFlagUtils.SETTINGS_BIOMETRICS2_ENROLLMENT)) {
                     intent.setClassName(SETTINGS_PACKAGE_NAME,
-                            FingerprintEnrollmentActivity.class.getName());
+                            FingerprintEnrollmentActivity.InternalActivity.class.getName());
                     intent.putExtra(EnrollmentRequest.EXTRA_SKIP_FIND_SENSOR, true);
                 } else {
                     intent.setClassName(SETTINGS_PACKAGE_NAME,
@@ -1025,7 +1025,7 @@ public class FingerprintSettings extends SubSettings {
             intent.setClassName(SETTINGS_PACKAGE_NAME,
                     FeatureFlagUtils.isEnabled(getActivity(),
                             FeatureFlagUtils.SETTINGS_BIOMETRICS2_ENROLLMENT)
-                            ? FingerprintEnrollmentActivity.class.getName()
+                            ? FingerprintEnrollmentActivity.InternalActivity.class.getName()
                             : FingerprintEnrollIntroductionInternal.class.getName()
             );
 

@@ -251,6 +251,7 @@ public class ActivityEmbeddingRulesController {
             addActivityFilter(activityFilters, searchIntent);
         }
         addActivityFilter(activityFilters, FingerprintEnrollmentActivity.class);
+        addActivityFilter(activityFilters, FingerprintEnrollmentActivity.InternalActivity.class);
         addActivityFilter(activityFilters, FingerprintEnrollIntroduction.class);
         addActivityFilter(activityFilters, FingerprintEnrollIntroductionInternal.class);
         addActivityFilter(activityFilters, FingerprintEnrollEnrolling.class);

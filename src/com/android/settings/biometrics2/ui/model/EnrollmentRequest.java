@@ -16,8 +16,6 @@
 
 package com.android.settings.biometrics2.ui.model;
 
-import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY;
-
 import static com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_SUW_SUGGESTED_ACTION_FLOW;
 
 import android.content.Context;
@@ -47,19 +45,20 @@ public final class EnrollmentRequest {
 
     private final boolean mIsSuw;
     private final boolean mIsAfterSuwOrSuwSuggestedAction;
-    private final boolean mIsFromSettingsSummery;
     private final boolean mIsSkipIntro;
     private final boolean mIsSkipFindSensor;
     private final int mTheme;
     private final Bundle mSuwExtras;
 
-    public EnrollmentRequest(@NonNull Intent intent, @NonNull Context context) {
-        mIsSuw = WizardManagerHelper.isAnySetupWizard(intent);
-        mIsAfterSuwOrSuwSuggestedAction = WizardManagerHelper.isDeferredSetupWizard(intent)
+    public EnrollmentRequest(@NonNull Intent intent, @NonNull Context context,
+                             boolean isSetupActivity) {
+        // Only allow mIsSuw to be enabled through SetupActivity for security reason
+        mIsSuw = isSetupActivity && WizardManagerHelper.isAnySetupWizard(intent);
+        mIsAfterSuwOrSuwSuggestedAction = isSetupActivity
+                && (WizardManagerHelper.isDeferredSetupWizard(intent)
                 || WizardManagerHelper.isPortalSetupWizard(intent)
-                || intent.getBooleanExtra(EXTRA_IS_SUW_SUGGESTED_ACTION_FLOW, false);
+                || intent.getBooleanExtra(EXTRA_IS_SUW_SUGGESTED_ACTION_FLOW, false));
         mSuwExtras = getSuwExtras(mIsSuw, intent);
-        mIsFromSettingsSummery = intent.getBooleanExtra(EXTRA_FROM_SETTINGS_SUMMARY, false);
         mIsSkipIntro = intent.getBooleanExtra(BiometricEnrollActivity.EXTRA_SKIP_INTRO, false);
         mIsSkipFindSensor = intent.getBooleanExtra(EXTRA_SKIP_FIND_SENSOR, false);
         mTheme = SetupWizardUtils.getTheme(context, intent);
@@ -71,10 +70,6 @@ public final class EnrollmentRequest {
 
     public boolean isAfterSuwOrSuwSuggestedAction() {
         return mIsAfterSuwOrSuwSuggestedAction;
-    }
-
-    public boolean isFromSettingsSummery() {
-        return mIsFromSettingsSummery;
     }
 
     public boolean isSkipIntro() {
@@ -101,7 +96,6 @@ public final class EnrollmentRequest {
     public String toString() {
         return getClass().getSimpleName() + ":{isSuw:" + mIsSuw
                 + ", isAfterSuwOrSuwSuggestedAction:" + mIsAfterSuwOrSuwSuggestedAction
-                + ", isFromSettingsSummery:" + mIsFromSettingsSummery
                 + "}";
     }
 
