@@ -45,6 +45,10 @@ public class DisableDevSettingsDialogFragment extends InstrumentedDialogFragment
     public static void show(DevelopmentSettingsDashboardFragment host) {
         final DisableDevSettingsDialogFragment dialog = new DisableDevSettingsDialogFragment();
         dialog.setTargetFragment(host, 0 /* requestCode */);
+        // We need to handle data changes and switch state based on which button user clicks,
+        // therefore we should enforce user to click one of the buttons
+        // by disallowing dialog dismiss through tapping outside of dialog bounds.
+        dialog.setCancelable(false);
         final FragmentManager manager = host.getActivity().getSupportFragmentManager();
         dialog.show(manager, TAG);
     }
