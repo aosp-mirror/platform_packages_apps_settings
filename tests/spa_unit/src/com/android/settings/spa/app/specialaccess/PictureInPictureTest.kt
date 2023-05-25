@@ -23,6 +23,7 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.PackageInfoFlags
+import android.os.DeadSystemRuntimeException
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
@@ -101,6 +102,23 @@ class PictureInPictureTest {
     }
 
     @Test
+    fun transform_getInstalledPackagesAsUserThrowsException_treatAsNotSupported() = runTest {
+        whenever(packageManager.getInstalledPackagesAsUser(any<PackageInfoFlags>(), anyInt()))
+            .thenThrow(DeadSystemRuntimeException())
+
+        val recordListFlow = listModel.transform(
+            userIdFlow = flowOf(USER_ID),
+            appListFlow = flowOf(listOf(PICTURE_IN_PICTURE_APP)),
+        )
+
+        val recordList = recordListFlow.first()
+        assertThat(recordList).hasSize(1)
+        val record = recordList[0]
+        assertThat(record.app).isSameInstanceAs(PICTURE_IN_PICTURE_APP)
+        assertThat(record.isSupport).isFalse()
+    }
+
+    @Test
     fun transformItem() {
         whenever(
             packageManager.getPackageInfoAsUser(
@@ -112,6 +130,20 @@ class PictureInPictureTest {
 
         assertThat(record.app).isSameInstanceAs(PICTURE_IN_PICTURE_APP)
         assertThat(record.isSupport).isTrue()
+    }
+
+    @Test
+    fun transformItem_getPackageInfoAsUserThrowsException_treatAsNotSupported() {
+        whenever(
+            packageManager.getPackageInfoAsUser(
+                eq(PICTURE_IN_PICTURE_PACKAGE_NAME), any<PackageInfoFlags>(), eq(USER_ID)
+            )
+        ).thenThrow(DeadSystemRuntimeException())
+
+        val record = listModel.transformItem(PICTURE_IN_PICTURE_APP)
+
+        assertThat(record.app).isSameInstanceAs(PICTURE_IN_PICTURE_APP)
+        assertThat(record.isSupport).isFalse()
     }
 
     @Test
