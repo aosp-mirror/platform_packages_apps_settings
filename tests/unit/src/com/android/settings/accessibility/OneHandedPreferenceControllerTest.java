@@ -23,8 +23,8 @@ import android.content.Context;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.R;
 import com.android.settings.gestures.OneHandedSettingsUtils;
+import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,20 +44,35 @@ public final class OneHandedPreferenceControllerTest {
     @Test
     public void getSummary_oneHandedEnabled_showsOnWithSummary() {
         OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, true);
+        // R.string.gesture_setting_on
+        String gestureSettingOn = ResourcesUtils.getResourcesString(mContext, "gesture_setting_on");
+        // R.string.one_handed_mode_intro_text
+        String oneHandedModeIntroText = ResourcesUtils.getResourcesString(mContext,
+                "one_handed_mode_intro_text");
 
+        // expect: On / $(summary)
         assertThat(mController.getSummary().toString()).isEqualTo(
-                mContext.getString(R.string.preference_summary_default_combination,
-                        mContext.getText(R.string.gesture_setting_on),
-                        mContext.getText(R.string.one_handed_mode_intro_text)));
+                // R.string.preference_summary_default_combination
+                ResourcesUtils.getResourcesString(mContext,
+                        "preference_summary_default_combination", gestureSettingOn,
+                        oneHandedModeIntroText));
     }
 
     @Test
     public void getSummary_oneHandedDisabled_showsOffWithSummary() {
         OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, false);
+        // R.string.gesture_setting_off
+        String gestureSettingOff = ResourcesUtils.getResourcesString(mContext,
+                "gesture_setting_off");
+        // R.string.one_handed_mode_intro_text
+        String oneHandedModeIntroText = ResourcesUtils.getResourcesString(mContext,
+                "one_handed_mode_intro_text");
 
+        // expect: Off / $(summary)
         assertThat(mController.getSummary().toString()).isEqualTo(
-                mContext.getString(R.string.preference_summary_default_combination,
-                        mContext.getText(R.string.gesture_setting_off),
-                        mContext.getText(R.string.one_handed_mode_intro_text)));
+                // R.string.preference_summary_default_combination
+                ResourcesUtils.getResourcesString(mContext,
+                        "preference_summary_default_combination", gestureSettingOff,
+                        oneHandedModeIntroText));
     }
 }
