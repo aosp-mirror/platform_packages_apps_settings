@@ -42,4 +42,9 @@
         settings:controller="com.android.settings.deviceinfo.batteryinfo.BatteryCycleCountPreferenceController"
         settings:enableCopying="true"/>
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="battery_info_footer"
+        android:title="@string/battery_cycle_count_footer"
+        android:selectable="false"
+        settings:searchable="false" />
 </PreferenceScreen>
