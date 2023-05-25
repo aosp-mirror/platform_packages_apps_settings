@@ -81,6 +81,11 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
         this(context, fragment, new Injector());
     }
 
+    private boolean isAngleSupported() {
+        return TextUtils.equals(
+                        mSystemProperties.get(PROPERTY_RO_GFX_ANGLE_SUPPORTED, ""), "true");
+    }
+
     @VisibleForTesting
     GraphicsDriverEnableAngleAsSystemDriverController(
             Context context, DevelopmentSettingsDashboardFragment fragment, Injector injector) {
@@ -118,38 +123,44 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
                 this);
     }
 
-    @Override
-    public void updateState(Preference preference) {
-        // set switch on if "persist.graphics.egl" is "angle" and angle is built in /vendor
-        // set switch off otherwise.
+    /** Return the default value of "persist.graphics.egl" */
+    public boolean isDefaultValue() {
+        if (!isAngleSupported()) {
+            return true;
+        }
+
         final String currentGlesDriver =
                 mSystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL, "");
-        final boolean isAngle = TextUtils.equals(ANGLE_DRIVER_SUFFIX, currentGlesDriver);
-        final boolean isAngleSupported =
-                TextUtils.equals(
-                        mSystemProperties.get(PROPERTY_RO_GFX_ANGLE_SUPPORTED, ""), "true");
-        ((SwitchPreference) mPreference).setChecked(isAngle && isAngleSupported);
-        ((SwitchPreference) mPreference).setEnabled(isAngleSupported);
+        // default value of "persist.graphics.egl" is ""
+        return TextUtils.isEmpty(currentGlesDriver);
     }
 
     @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        // only enable the switch if ro.gfx.angle.supported is true
-        // we use ro.gfx.angle.supported to indicate if ANGLE libs are installed under /vendor
-        final boolean isAngleSupported =
-                TextUtils.equals(
-                        mSystemProperties.get(PROPERTY_RO_GFX_ANGLE_SUPPORTED, ""), "true");
-        ((SwitchPreference) mPreference).setEnabled(isAngleSupported);
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (isAngleSupported()) {
+            // set switch on if "persist.graphics.egl" is "angle" and angle is built in /vendor
+            // set switch off otherwise.
+            final String currentGlesDriver =
+                    mSystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL, "");
+            final boolean isAngle = TextUtils.equals(ANGLE_DRIVER_SUFFIX, currentGlesDriver);
+            ((SwitchPreference) mPreference).setChecked(isAngle);
+        } else {
+            mPreference.setEnabled(false);
+            ((SwitchPreference) mPreference).setChecked(false);
+        }
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
-        // 1) set the persist.graphics.egl empty string
-        GraphicsEnvironment.getInstance().toggleAngleAsSystemDriver(false);
-        // 2) reset the switch
-        ((SwitchPreference) mPreference).setChecked(false);
-        // 3) disable switch
-        ((SwitchPreference) mPreference).setEnabled(false);
+        // 1) disable the switch
+        super.onDeveloperOptionsSwitchDisabled();
+        if (isAngleSupported()) {
+            // 2) set the persist.graphics.egl empty string
+            GraphicsEnvironment.getInstance().toggleAngleAsSystemDriver(false);
+            // 3) reset the switch
+            ((SwitchPreference) mPreference).setChecked(false);
+        }
     }
 
     void toggleSwitchBack() {
