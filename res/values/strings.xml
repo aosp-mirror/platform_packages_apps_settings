@@ -2724,6 +2724,8 @@
     <string name="battery_first_use_date">Date of first use</string>
     <!-- About phone, status item title. Count of battery full charge/discharge cycles [CHAR LIMIT=60]-->
     <string name="battery_cycle_count">Cycle count</string>
+    <!-- About phone, status item title. The status summary for cycle count that's not available. [CHAR LIMIT=40] -->
+    <string name="battery_cycle_count_not_available">Unavailable</string>
 
     <!-- SD card & phone storage settings summary. Displayed when the total memory usage is being calculated. Will be replaced with a number like "12.3 GB" when finished calucating. [CHAR LIMIT=30] -->
     <string name="memory_calculating_size">Calculating\u2026</string>
@@ -4142,9 +4144,9 @@
     <string name="testing_sim_toolkit">SIM toolkit</string>
 
     <!-- Summary for default keyboard settings -->
-    <string name="keyboard_settings_summary">On-screen keyboard, Speech, Tools</string>
+    <string name="keyboard_settings_summary">On-screen keyboard, tools</string>
     <!-- Summary for keyboard settings attaching physical_keyboard  -->
-    <string name="keyboard_settings_with_physical_keyboard_summary">On-screen keyboard, Physical keyboard, Speech, Tools</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary">On-screen keyboard, physical keyboard, tools</string>
     <!-- Title for built-in keyboard settings -->
     <string name="builtin_keyboard_settings_title">Physical keyboard</string>
 
@@ -6940,7 +6942,7 @@
     <!-- Summary text for system preference title, showing important setting items under system setting [CHAR LIMIT=NONE]-->
     <string name="system_dashboard_summary">Languages, gestures, time, backup</string>
     <!-- Summary text for language preference title, showing important setting items under language setting [CHAR LIMIT=NONE]-->
-    <string name="languages_setting_summary">System languages, app languages</string>
+    <string name="languages_setting_summary">System languages, app languages, speech</string>
 
     <!--Search Keywords [CHAR LIMIT=NONE]-->
     <string name="keywords_wifi">wifi, wi-fi, network connection, internet, wireless, data, wi fi</string>
