@@ -17,6 +17,8 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
@@ -33,9 +35,10 @@ import com.android.internal.telephony.util.ArrayUtils;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.utils.ThreadUtils;
 
 /**
- * Preference controller for "Enhanced 4G LTE"
+ * Preference controller for "Voice over NR".
  */
 public class NrAdvancedCallingPreferenceController extends TelephonyTogglePreferenceController
         implements LifecycleObserver, OnStart, OnStop {
@@ -50,7 +53,10 @@ public class NrAdvancedCallingPreferenceController extends TelephonyTogglePrefer
     private boolean mIsVonrVisibleFromCarrierConfig = false;
     private boolean mIsNrEnableFromCarrierConfig = false;
     private boolean mHas5gCapability = false;
+    private boolean mIsVoNrEnabled = false;
     private Integer mCallState;
+
+    private Handler mHandler = new Handler(Looper.getMainLooper());
 
     public NrAdvancedCallingPreferenceController(Context context, String key) {
         super(context, key);
@@ -93,6 +99,8 @@ public class NrAdvancedCallingPreferenceController extends TelephonyTogglePrefer
         int[] nrAvailabilities = carrierConfig.getIntArray(
                 CarrierConfigManager.KEY_CARRIER_NR_AVAILABILITIES_INT_ARRAY);
         mIsNrEnableFromCarrierConfig = !ArrayUtils.isEmpty(nrAvailabilities);
+
+        updateVoNrState();
 
         Log.d(TAG, "mHas5gCapability: " + mHas5gCapability
                 + ",mIsNrEnabledFromCarrierConfig: " + mIsNrEnableFromCarrierConfig
@@ -162,7 +170,7 @@ public class NrAdvancedCallingPreferenceController extends TelephonyTogglePrefer
 
     @Override
     public boolean isChecked() {
-        return mTelephonyManager.isVoNrEnabled();
+        return mIsVoNrEnabled;
     }
 
     @VisibleForTesting
@@ -172,6 +180,19 @@ public class NrAdvancedCallingPreferenceController extends TelephonyTogglePrefer
 
     private boolean isUserControlAllowed() {
         return isCallStateIdle();
+    }
+
+    private void updateVoNrState() {
+        ThreadUtils.postOnBackgroundThread(() -> {
+            boolean result = mTelephonyManager.isVoNrEnabled();
+            if (result != mIsVoNrEnabled) {
+                Log.i(TAG, "VoNr state : " + result);
+                mIsVoNrEnabled = result;
+                mHandler.post(() -> {
+                    updateState(mPreference);
+                });
+            }
+        });
     }
 
     private class PhoneCallStateTelephonyCallback extends TelephonyCallback implements
