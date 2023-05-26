@@ -88,7 +88,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private List<MobileNetworkInfoEntity> mMobileNetworkInfoEntityList = new ArrayList<>();
     private Context mContext;
     private AirplaneModeObserver mAirplaneModeObserver;
-    private Uri mAirplaneModeSettingUri;
+    private DataRoamingObserver mDataRoamingObserver;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private Map<Integer, MobileDataContentObserver> mDataContentObserverMap = new HashMap<>();
     private int mPhysicalSlotIndex = SubscriptionManager.INVALID_SIM_SLOT_INDEX;
@@ -127,10 +127,13 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         mUiccInfoDao = mMobileNetworkDatabase.mUiccInfoDao();
         mMobileNetworkInfoDao = mMobileNetworkDatabase.mMobileNetworkInfoDao();
         mAirplaneModeObserver = new AirplaneModeObserver(new Handler(Looper.getMainLooper()));
-        mAirplaneModeSettingUri = Settings.Global.getUriFor(Settings.Global.AIRPLANE_MODE_ON);
+        mDataRoamingObserver = new DataRoamingObserver(new Handler(Looper.getMainLooper()));
     }
 
     private class AirplaneModeObserver extends ContentObserver {
+        private Uri mAirplaneModeSettingUri =
+                Settings.Global.getUriFor(Settings.Global.AIRPLANE_MODE_ON);
+
         AirplaneModeObserver(Handler handler) {
             super(handler);
         }
@@ -151,6 +154,46 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                 for (MobileNetworkCallback callback : sCallbacks) {
                     callback.onAirplaneModeChanged(isAirplaneModeOn);
                 }
+            }
+        }
+    }
+
+    private class DataRoamingObserver extends ContentObserver {
+        private int mRegSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        private String mBaseField = Settings.Global.DATA_ROAMING;
+
+        DataRoamingObserver(Handler handler) {
+            super(handler);
+        }
+
+        public void register(Context context, int subId) {
+            mRegSubId = subId;
+            String lastField = mBaseField;
+            createTelephonyManagerBySubId(subId);
+            TelephonyManager tm = mTelephonyManagerMap.get(subId);
+            if (tm.getSimCount() != 1) {
+                lastField += subId;
+            }
+            context.getContentResolver().registerContentObserver(
+                    Settings.Global.getUriFor(lastField), false, this);
+        }
+
+        public void unRegister(Context context) {
+            context.getContentResolver().unregisterContentObserver(this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            TelephonyManager tm = mTelephonyManagerMap.get(mRegSubId);
+            if (tm == null) {
+                return;
+            }
+            sExecutor.execute(() -> {
+                insertMobileNetworkInfo(mContext, mRegSubId, tm);
+            });
+            boolean isDataRoamingEnabled = tm.isDataRoamingEnabled();
+            for (MobileNetworkCallback callback : sCallbacks) {
+                callback.onDataRoamingChanged(mRegSubId, isDataRoamingEnabled);
             }
         }
     }
@@ -180,6 +223,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             addRegisterBySubId(subId);
             createTelephonyManagerBySubId(subId);
+            mDataRoamingObserver.register(mContext, subId);
         }
     }
 
@@ -251,6 +295,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         if (sCallbacks.isEmpty()) {
             mSubscriptionManager.removeOnSubscriptionsChangedListener(this);
             mAirplaneModeObserver.unRegister(mContext);
+            mDataRoamingObserver.unRegister(mContext);
             mDataContentObserverMap.forEach((id, observer) -> {
                 observer.unRegister(mContext);
             });
@@ -707,6 +752,12 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
 
         default void onAirplaneModeChanged(boolean enabled) {
+        }
+
+        /**
+         * Notify clients data roaming changed of subscription.
+         */
+        default void onDataRoamingChanged(int subId, boolean enabled) {
         }
 
         default void onCallStateChanged(int state) {
