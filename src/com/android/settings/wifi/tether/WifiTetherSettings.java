@@ -84,8 +84,10 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     WifiTetherSSIDPreferenceController mSSIDPreferenceController;
     @VisibleForTesting
     WifiTetherPasswordPreferenceController mPasswordPreferenceController;
-    private WifiTetherSecurityPreferenceController mSecurityPreferenceController;
-    private WifiTetherMaximizeCompatibilityPreferenceController mMaxCompatibilityPrefController;
+    @VisibleForTesting
+    WifiTetherSecurityPreferenceController mSecurityPreferenceController;
+    @VisibleForTesting
+    WifiTetherMaximizeCompatibilityPreferenceController mMaxCompatibilityPrefController;
     @VisibleForTesting
     WifiTetherAutoOffPreferenceController mWifiTetherAutoOffPreferenceController;
 
@@ -276,15 +278,16 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     SoftApConfiguration buildNewConfig() {
         SoftApConfiguration currentConfig = mWifiTetherViewModel.getSoftApConfiguration();
         SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder(currentConfig);
-        int securityType = (mWifiTetherViewModel.isSpeedFeatureAvailable())
-                ? currentConfig.getSecurityType()
-                : mSecurityPreferenceController.getSecurityType();
         configBuilder.setSsid(mSSIDPreferenceController.getSSID());
-        if (securityType != SoftApConfiguration.SECURITY_TYPE_OPEN) {
-            configBuilder.setPassphrase(
-                    mPasswordPreferenceController.getPasswordValidated(securityType),
-                    securityType);
-        }
+        int securityType =
+                mWifiTetherViewModel.isSpeedFeatureAvailable()
+                        ? currentConfig.getSecurityType()
+                        : mSecurityPreferenceController.getSecurityType();
+        String passphrase =
+                securityType == SoftApConfiguration.SECURITY_TYPE_OPEN
+                        ? null
+                        : mPasswordPreferenceController.getPasswordValidated(securityType);
+        configBuilder.setPassphrase(passphrase, securityType);
         if (!mWifiTetherViewModel.isSpeedFeatureAvailable()) {
             mMaxCompatibilityPrefController.setupMaximizeCompatibility(configBuilder);
         }
