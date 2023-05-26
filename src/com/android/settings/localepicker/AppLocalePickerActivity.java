@@ -34,6 +34,7 @@ import android.widget.ListView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.core.view.ViewCompat;
 
 import com.android.internal.app.LocalePickerWithRegion;
 import com.android.internal.app.LocaleStore;
@@ -117,12 +118,16 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
     @Override
     public boolean onMenuItemActionCollapse(MenuItem item) {
         mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        ViewCompat.setNestedScrollingEnabled(mAppLocaleDetails.getListView(), true);
+        ViewCompat.setNestedScrollingEnabled(mLocalePickerWithRegion.getListView(), true);
         return true;
     }
 
     @Override
     public boolean onMenuItemActionExpand(MenuItem item) {
         mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        ViewCompat.setNestedScrollingEnabled(mAppLocaleDetails.getListView(), false);
+        ViewCompat.setNestedScrollingEnabled(mLocalePickerWithRegion.getListView(), false);
         return true;
     }
 
