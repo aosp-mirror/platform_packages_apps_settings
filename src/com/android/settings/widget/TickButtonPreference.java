@@ -17,6 +17,7 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -32,6 +33,15 @@ public class TickButtonPreference extends Preference {
 
     public TickButtonPreference(Context context) {
         super(context);
+        init(context, null);
+    }
+
+    public TickButtonPreference(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init(context, attrs);
+    }
+
+    private void init(Context context, AttributeSet attrs) {
         setWidgetLayoutResource(R.layout.preference_check_icon);
     }
 
