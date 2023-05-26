@@ -97,6 +97,16 @@ import com.google.android.setupdesign.util.ThemeHelper;
  */
 public class FingerprintEnrollmentActivity extends FragmentActivity {
 
+    /**
+     * Setupwizard activity
+     */
+    public static class SetupActivity extends FingerprintEnrollmentActivity {}
+
+    /**
+     * Internal activity for FingerprintSettings
+     */
+    public static class InternalActivity extends FingerprintEnrollmentActivity {}
+
     private static final boolean DEBUG = false;
     private static final String TAG = "FingerprintEnrollmentActivity";
 
@@ -583,8 +593,8 @@ public class FingerprintEnrollmentActivity extends FragmentActivity {
                 .getBiometricsRepositoryProvider().getFingerprintRepository(application);
         ret.set(CHALLENGE_GENERATOR_KEY, new FingerprintChallengeGenerator(repository));
 
-        ret.set(ENROLLMENT_REQUEST_KEY, new EnrollmentRequest(getIntent(),
-                getApplicationContext()));
+        ret.set(ENROLLMENT_REQUEST_KEY, new EnrollmentRequest(getIntent(), getApplicationContext(),
+                this instanceof SetupActivity));
 
         Bundle extras = getIntent().getExtras();
         final CredentialModel credentialModel = new CredentialModel(extras,

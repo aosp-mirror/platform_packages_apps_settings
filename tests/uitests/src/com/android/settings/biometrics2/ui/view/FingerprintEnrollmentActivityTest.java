@@ -32,6 +32,7 @@ import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.Until;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.test.InstrumentationRegistry;
@@ -47,18 +48,21 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.IOException;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
 public class FingerprintEnrollmentActivityTest {
 
+    private static final String TAG = "FingerprintEnrollmentActivityTest";
+
     private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
     private static final String ACTIVITY_CLASS_NAME =
             "com.android.settings.biometrics2.ui.view.FingerprintEnrollmentActivity";
+    private static final String SUW_ACTIVITY_CLASS_NAME = ACTIVITY_CLASS_NAME + "$SetupActivity";
     private static final String EXTRA_IS_SETUP_FLOW = "isSetupFlow";
     private static final String EXTRA_SKIP_INTRO = "skip_intro";
     private static final String EXTRA_SKIP_FIND_SENSOR = "skip_find_sensor";
-    private static final String EXTRA_FROM_SETTINGS_SUMMARY = "from_settings_summary";
     private static final String EXTRA_PAGE_TRANSITION_TYPE = "page_transition_type";
     private static final String EXTRA_KEY_GK_PW_HANDLE = "gk_pw_handle";
     private static final String TEST_PIN = "1234";
@@ -83,7 +87,6 @@ public class FingerprintEnrollmentActivityTest {
     @Before
     public void setUp() throws InterruptedException {
         mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
-
         mContext = InstrumentationRegistry.getContext();
 
         // Stop every test if it is not a fingerprint device
@@ -121,6 +124,13 @@ public class FingerprintEnrollmentActivityTest {
         assertThat(mFingerprintPropCallbackLaunched).isTrue();
 
         mDevice.pressHome();
+
+        // Stop settings before performing test
+        try {
+            mDevice.executeShellCommand("am force-stop " + SETTINGS_PACKAGE_NAME);
+        } catch (IOException e) {
+            Log.e(TAG, "Fail to stop settings app", e);
+        }
     }
 
     @After
@@ -131,7 +141,7 @@ public class FingerprintEnrollmentActivityTest {
 
     @Test
     public void testIntroChooseLock() {
-        final Intent intent = newActivityIntent();
+        final Intent intent = newActivityIntent(false);
         mContext.startActivity(intent);
         assertThat(mDevice.wait(Until.hasObject(By.text("Choose your backup screen lock method")),
                 IDLE_TIMEOUT)).isTrue();
@@ -371,7 +381,7 @@ public class FingerprintEnrollmentActivityTest {
     @Test
     public void testIntroCheckPin() {
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true);
-        final Intent intent = newActivityIntent();
+        final Intent intent = newActivityIntent(false);
         mContext.startActivity(intent);
         assertThat(mDevice.wait(Until.hasObject(By.text("Enter your device PIN to continue")),
                 IDLE_TIMEOUT)).isTrue();
@@ -552,7 +562,7 @@ public class FingerprintEnrollmentActivityTest {
 
         // Back to home
         mDevice.waitForWindowUpdate("com.android.settings", IDLE_TIMEOUT);
-        assertThat(mDevice.findObject(By.text(DO_IT_LATER))).isNull();
+        assertThat(mDevice.wait(Until.gone(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue();
     }
 
     private void launchIntroWithGkPwHandle(boolean isSuw) {
@@ -560,10 +570,7 @@ public class FingerprintEnrollmentActivityTest {
         final LockscreenCredential lockscreenCredential = LockscreenCredential.createPin(TEST_PIN);
         final int userId = UserHandle.myUserId();
         final LockPatternChecker.OnVerifyCallback onVerifyCallback = (response, timeoutMs) -> {
-            final Intent intent = newActivityIntent();
-            if (isSuw) {
-                intent.putExtra(EXTRA_IS_SETUP_FLOW, true);
-            }
+            final Intent intent = newActivityIntent(isSuw);
             intent.putExtra(EXTRA_KEY_GK_PW_HANDLE, response.getGatekeeperPasswordHandle());
             mContext.startActivity(intent);
         };
@@ -576,7 +583,7 @@ public class FingerprintEnrollmentActivityTest {
         final LockscreenCredential lockscreenCredential = LockscreenCredential.createPin(TEST_PIN);
         final int userId = UserHandle.myUserId();
         final LockPatternChecker.OnVerifyCallback onVerifyCallback = (response, timeoutMs) -> {
-            final Intent intent = newActivityIntent();
+            final Intent intent = newActivityIntent(false);
             intent.putExtra(EXTRA_SKIP_INTRO, true);
             intent.putExtra(EXTRA_KEY_GK_PW_HANDLE, response.getGatekeeperPasswordHandle());
             mContext.startActivity(intent);
@@ -590,7 +597,7 @@ public class FingerprintEnrollmentActivityTest {
         final LockscreenCredential lockscreenCredential = LockscreenCredential.createPin(TEST_PIN);
         final int userId = UserHandle.myUserId();
         final LockPatternChecker.OnVerifyCallback onVerifyCallback = (response, timeoutMs) -> {
-            final Intent intent = newActivityIntent();
+            final Intent intent = newActivityIntent(false);
             intent.putExtra(EXTRA_SKIP_FIND_SENSOR, true);
             intent.putExtra(EXTRA_KEY_GK_PW_HANDLE, response.getGatekeeperPasswordHandle());
             mContext.startActivity(intent);
@@ -600,14 +607,16 @@ public class FingerprintEnrollmentActivityTest {
     }
 
     @NonNull
-    private Intent newActivityIntent() {
+    private Intent newActivityIntent(boolean isSuw) {
         Intent intent = new Intent();
-        intent.setClassName(SETTINGS_PACKAGE_NAME, ACTIVITY_CLASS_NAME);
-        intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, true);
+        intent.setClassName(SETTINGS_PACKAGE_NAME,
+                isSuw ? SUW_ACTIVITY_CLASS_NAME : ACTIVITY_CLASS_NAME);
+        if (isSuw) {
+            intent.putExtra(EXTRA_IS_SETUP_FLOW, true);
+        }
         intent.putExtra(EXTRA_PAGE_TRANSITION_TYPE, 1);
         intent.putExtra(Intent.EXTRA_USER_ID, mContext.getUserId());
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         return intent;
-
     }
 }
