@@ -21,6 +21,10 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.MANAGE_DE
 
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
+import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -44,6 +48,12 @@ public class SpecialAccessSettings extends DashboardFragment {
                 CONNECTED_WORK_AND_PERSONAL_APPS_TITLE, R.string.interact_across_profiles_title);
         replaceEnterpriseStringTitle("device_administrators",
                 MANAGE_DEVICE_ADMIN_APPS, R.string.manage_device_admin);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        use(DataSaverController.class).init(getViewLifecycleOwner());
     }
 
     @Override
