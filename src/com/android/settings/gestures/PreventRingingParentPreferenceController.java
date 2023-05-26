@@ -104,7 +104,7 @@ public class PreventRingingParentPreferenceController extends TogglePreferenceCo
                     break;
                 // VOLUME_HUSH_OFF
                 default:
-                    summary = mContext.getText(R.string.off);
+                    summary = mContext.getText(R.string.switch_off_text);
             }
             preference.setEnabled(true);
             mPreference.setSwitchEnabled(true);

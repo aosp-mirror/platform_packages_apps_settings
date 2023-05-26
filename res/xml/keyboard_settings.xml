@@ -30,23 +30,7 @@
         <Preference
             android:key="physical_keyboard_pref"
             android:title="@string/physical_keyboard_title"
-            android:summary="@string/summary_placeholder"
-            android:fragment="com.android.settings.inputmethod.PhysicalKeyboardFragment"/>
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="speech_category"
-        android:title="@string/speech_category_title">
-        <com.android.settings.widget.GearPreference
-            android:key="voice_input_settings"
-            android:title="@string/voice_input_settings_title"
-            android:fragment="com.android.settings.language.DefaultVoiceInputPicker" />
-
-        <Preference
-            android:key="tts_settings_summary"
-            android:title="@string/tts_settings_title"
-            android:fragment="com.android.settings.tts.TextToSpeechSettings"
-            settings:searchable="false"/>
+            android:summary="@string/summary_placeholder"/>
     </PreferenceCategory>
 
     <PreferenceCategory

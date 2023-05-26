@@ -44,7 +44,7 @@ public class BubbleSummaryNotificationPreferenceController extends BasePreferenc
         return mContext.getString(
                 areBubblesEnabled()
                         ? R.string.notifications_bubble_setting_on_summary
-                        : R.string.off);
+                        : R.string.switch_off_text);
     }
 
     @Override

@@ -48,6 +48,9 @@ public class DevelopmentMemtagPreferenceController extends TogglePreferenceContr
 
     @Override
     public int getAvailabilityStatus() {
+        if (MemtagHelper.isForcedOff() || MemtagHelper.isForcedOn()) {
+            return BasePreferenceController.DISABLED_DEPENDENT_SETTING;
+        }
         return DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)
                         && SystemProperties.getBoolean("ro.arm64.memtag.bootctl_supported", false)
                 ? BasePreferenceController.AVAILABLE

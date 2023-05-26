@@ -49,7 +49,6 @@ import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.inputmethod.KeyboardSettingsPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.slices.BlockingSlicePrefController;
 import com.android.settings.slices.SlicePreferenceController;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -62,9 +61,6 @@ import java.util.List;
 public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment {
     public static final String KEY_DEVICE_ADDRESS = "device_address";
     private static final String TAG = "BTDeviceDetailsFrg";
-
-    static final int FEATURE_HEARING_DEVICE_CONTROLS_ORDER = 1;
-    static final int FEATURE_AUDIO_ROUTING_ORDER = 2;
 
     @VisibleForTesting
     static int EDIT_DEVICE_NAME_ITEM_ID = Menu.FIRST;
@@ -175,14 +171,14 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         }
         use(AdvancedBluetoothDetailsHeaderController.class).init(mCachedDevice);
         use(LeAudioBluetoothDetailsHeaderController.class).init(mCachedDevice, mManager);
-        use(KeyboardSettingsPreferenceController.class).init(mCachedDevice, getActivity());
+        use(KeyboardSettingsPreferenceController.class).init(mCachedDevice);
 
         final BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(
                 context).getBluetoothFeatureProvider();
         final boolean sliceEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
                 SettingsUIDeviceConfig.BT_SLICE_SETTINGS_ENABLED, true);
 
-        use(BlockingSlicePrefController.class).setSliceUri(sliceEnabled
+        use(BlockingPrefWithSliceController.class).setSliceUri(sliceEnabled
                 ? featureProvider.getBluetoothDeviceSettingsUri(mCachedDevice.getDevice())
                 : null);
     }
@@ -318,8 +314,6 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                     lifecycle));
             controllers.add(new BluetoothDetailsHearingDeviceControlsController(context, this,
                     mCachedDevice, lifecycle));
-            controllers.add(new BluetoothDetailsAudioRoutingController(context, this, mCachedDevice,
-                    lifecycle));
         }
         return controllers;
     }

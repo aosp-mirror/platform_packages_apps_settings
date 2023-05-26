@@ -112,11 +112,10 @@ class AppDisableButton(
     @Composable
     private fun confirmDialogPresenter() = rememberAlertDialogPresenter(
         confirmButton = AlertDialogButton(
-            text = stringResource(R.string.reset_app_preferences_button),
+            text = stringResource(R.string.app_disable_dlg_positive),
             onClick = packageInfoPresenter::disable,
         ),
         dismissButton = AlertDialogButton(stringResource(R.string.cancel)),
-        title = stringResource(R.string.app_disable_dlg_positive),
         text = { Text(stringResource(R.string.app_disable_dlg_text)) },
     )
 }

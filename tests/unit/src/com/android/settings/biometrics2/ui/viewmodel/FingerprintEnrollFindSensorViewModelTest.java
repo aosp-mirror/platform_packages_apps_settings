@@ -18,7 +18,6 @@ package com.android.settings.biometrics2.ui.viewmodel;
 
 import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFindSensorViewModel.FINGERPRINT_ENROLL_FIND_SENSOR_ACTION_DIALOG;
 import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFindSensorViewModel.FINGERPRINT_ENROLL_FIND_SENSOR_ACTION_SKIP;
-import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFindSensorViewModel.FINGERPRINT_ENROLL_FIND_SENSOR_ACTION_START;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -40,61 +39,45 @@ public class FingerprintEnrollFindSensorViewModelTest {
     @Rule public final InstantTaskExecutorRule mTaskExecutorRule = new InstantTaskExecutorRule();
 
     private Application mApplication;
+    private FingerprintEnrollFindSensorViewModel mViewModel;
 
     @Before
     public void setUp() {
         mApplication = ApplicationProvider.getApplicationContext();
+        mViewModel = new FingerprintEnrollFindSensorViewModel(mApplication, false);
     }
 
     @Test
-    public void testClickStartButton() {
-        final FingerprintEnrollFindSensorViewModel viewModel =
-                new FingerprintEnrollFindSensorViewModel(mApplication, false);
-
-        viewModel.onStartButtonClick();
-        assertThat(viewModel.getActionLiveData().getValue()).isEqualTo(
-                FINGERPRINT_ENROLL_FIND_SENSOR_ACTION_START);
-    }
-
-    @Test
-    public void testClickSkipButton() {
-        final FingerprintEnrollFindSensorViewModel viewModel =
-                new FingerprintEnrollFindSensorViewModel(mApplication, false);
-
-        viewModel.onSkipButtonClick();
-        assertThat(viewModel.getActionLiveData().getValue()).isEqualTo(
+    public void testClickSkipButtonNotInSuw() {
+        mViewModel = new FingerprintEnrollFindSensorViewModel(mApplication, false);
+        mViewModel.onSkipButtonClick();
+        assertThat(mViewModel.getActionLiveData().getValue()).isEqualTo(
                 FINGERPRINT_ENROLL_FIND_SENSOR_ACTION_SKIP);
     }
 
     @Test
     public void testClickSkipButtonInSuw() {
-        final FingerprintEnrollFindSensorViewModel viewModel =
-                new FingerprintEnrollFindSensorViewModel(mApplication, true);
-
-        viewModel.onSkipButtonClick();
-        assertThat(viewModel.getActionLiveData().getValue()).isEqualTo(
+        mViewModel = new FingerprintEnrollFindSensorViewModel(mApplication, true);
+        mViewModel.onSkipButtonClick();
+        assertThat(mViewModel.getActionLiveData().getValue()).isEqualTo(
                 FINGERPRINT_ENROLL_FIND_SENSOR_ACTION_DIALOG);
     }
 
     @Test
     public void testClickSkipDialogButton() {
-        final FingerprintEnrollFindSensorViewModel viewModel =
-                new FingerprintEnrollFindSensorViewModel(mApplication, true);
-
-        viewModel.onSkipDialogButtonClick();
-        assertThat(viewModel.getActionLiveData().getValue()).isEqualTo(
+        mViewModel.onSkipDialogButtonClick();
+        assertThat(mViewModel.getActionLiveData().getValue()).isEqualTo(
                 FINGERPRINT_ENROLL_FIND_SENSOR_ACTION_SKIP);
     }
 
     @Test
     public void testClearActionLiveData() {
-        final FingerprintEnrollFindSensorViewModel viewModel =
-                new FingerprintEnrollFindSensorViewModel(mApplication, false);
+        assertThat(mViewModel.getActionLiveData().getValue()).isNull();
 
-        viewModel.onStartButtonClick();
-        assertThat(viewModel.getActionLiveData().getValue()).isNotNull();
+        mViewModel.onStartButtonClick();
+        assertThat(mViewModel.getActionLiveData().getValue()).isNotNull();
 
-        viewModel.clearActionLiveData();
-        assertThat(viewModel.getActionLiveData().getValue()).isNull();
+        mViewModel.clearActionLiveData();
+        assertThat(mViewModel.getActionLiveData().getValue()).isNull();
     }
 }

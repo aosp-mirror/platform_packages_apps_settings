@@ -363,6 +363,9 @@
     <!-- Whether Wi-Fi hotspot settings should be shown or not. -->
     <bool name="config_show_wifi_hotspot_settings">true</bool>
 
+    <!-- Whether Wi-Fi hotspot speed should be shown or not. -->
+    <bool name="config_show_wifi_hotspot_speed">false</bool>
+
     <!-- Whether toggle_airplane is available or not. -->
     <bool name="config_show_toggle_airplane">true</bool>
 
@@ -495,6 +498,15 @@
     <!-- Slice Uri to query nearby devices. -->
     <string name="config_nearby_devices_slice_uri" translatable="false">content://com.google.android.gms.nearby.fastpair/device_status_list_item</string>
 
+    <!-- BT Slice intent action. To support Settings 2 panel, BT slice can't use PendingIntent.send(). Therefore, here defines the Slice intent action. -->
+    <string name="config_bt_slice_intent_action" translatable="false"></string>
+    <!-- BT Slice pending intent action. To support Settings 2 panel, BT slice can't use PendingIntent.send(). Therefore, here defines the Slice pending intent action. -->
+    <string name="config_bt_slice_pending_intent_action" translatable="false"></string>
+    <!-- BT Slice EXTRA_INTENT. To support Settings 2 panel, BT slice can't use PendingIntent.send(). Therefore, here defines the Slice EXTRA_INTENT. -->
+    <string name="config_bt_slice_extra_intent" translatable="false"></string>
+    <!-- BT Slice EXTRA_PENDING_INTENT. To support Settings 2 panel, BT slice can't use PendingIntent.send(). Therefore, here defines the Slice EXTRA_PENDING_INTENT. -->
+    <string name="config_bt_slice_extra_pending_intent" translatable="false"></string>
+
     <!-- Grayscale settings intent -->
     <string name="config_grayscale_settings_intent" translatable="false"></string>
 
@@ -512,6 +524,10 @@
     <!-- Settings panel keeps observe this uri -->
     <string-array name="config_panel_keep_observe_uri" translatable="false">
         <item>content://com.android.settings.slices/intent/media_output_indicator</item>
+    </string-array>
+
+    <!-- List containing the apps cannot be changed the battery optimize modes -->
+    <string-array name="config_disable_optimization_mode_apps" translatable="false">
     </string-array>
 
     <!-- Uri to query non-public Slice Uris. -->
@@ -553,7 +569,7 @@
     <!-- Cell broacast receiver package name -->
     <string name="config_cell_broadcast_receiver_package" translatable="false">com.android.cellbroadcastreceiver.module</string>
 
-    <!-- TODO(b/174964885): These media Uri are not defined in framework yet. Replace with framework defined variables once it's available. -->
+    <!-- These media Uri are not defined in framework yet. Replace with framework defined variables once it's available. -->
     <!-- Media Uri to view images storage category. -->
     <string name="config_images_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/images_root</string>
 
@@ -655,7 +671,7 @@
     <bool name="default_allow_sensitive_lockscreen_content">true</bool>
 
     <!-- Whether to enable the app battery usage list page feature. -->
-    <bool name="config_app_battery_usage_list_enabled">false</bool>
+    <bool name="config_app_battery_usage_list_enabled">true</bool>
 
     <!-- Whether sim related information is visible to the end user. -->
     <bool name="config_show_sim_info">true</bool>
@@ -695,4 +711,21 @@
 
     <!-- Whether auto data switching on secondary SIM enables cross-SIM calling on both SIMs. -->
     <bool name="config_auto_data_switch_enables_cross_sim_calling">false</bool>
+
+    <!-- Whether checking adaptive charging to define battery manager visibility. -->
+    <bool name="config_battery_manager_consider_ac">false</bool>
+
+    <!-- Whether to display Cloned Apps page in Settings (Settings > Apps > Cloned Apps).-->
+    <bool name="config_cloned_apps_page_enabled">false</bool>
+
+    <!-- Certificates of apps which are allowed to use activity embedding with Settings.-->
+    <string-array name="config_known_host_certs" translatable="false">
+        <item></item>
+    </string-array>
+
+    <!-- List of packages that should be hidden for MVNO. Do not translate -->
+    <string-array name="datausage_hiding_carrier_service_package_names" translatable="false"/>
+
+    <!-- List of MVNO. Do not translate -->
+    <integer-array name="datausage_hiding_carrier_service_carrier_id" translatable="false"/>
 </resources>

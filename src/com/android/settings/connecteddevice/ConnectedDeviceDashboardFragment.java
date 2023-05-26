@@ -28,6 +28,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -38,7 +39,6 @@ import com.android.settingslib.search.SearchIndexable;
 public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "ConnectedDeviceFrag";
-    private static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
     private static final String SLICE_ACTION = "com.android.settings.SEARCH_RESULT_TRAMPOLINE";
 
@@ -92,8 +92,8 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
     @VisibleForTesting
     boolean isAlwaysDiscoverable(String callingAppPackageName, String action) {
         return TextUtils.equals(SLICE_ACTION, action) ? false
-                : TextUtils.equals(SETTINGS_PACKAGE_NAME, callingAppPackageName)
-                || TextUtils.equals(SYSTEMUI_PACKAGE_NAME, callingAppPackageName);
+                : TextUtils.equals(Utils.SETTINGS_PACKAGE_NAME, callingAppPackageName)
+                || TextUtils.equals(Utils.SYSTEMUI_PACKAGE_NAME, callingAppPackageName);
     }
 
     /**

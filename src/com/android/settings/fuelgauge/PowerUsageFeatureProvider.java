@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.ArrayMap;
 import android.util.SparseIntArray;
 
 import com.android.settingslib.fuelgauge.Estimate;
@@ -118,16 +119,6 @@ public interface PowerUsageFeatureProvider {
     boolean isChartGraphSlotsEnabled(Context context);
 
     /**
-     * Checks whether adaptive charging feature is supported in this device
-     */
-    boolean isAdaptiveChargingSupported();
-
-    /**
-     * Checks whether battery manager feature is supported in this device
-     */
-    boolean isBatteryManagerSupported();
-
-    /**
      * Returns {@code true} if current defender mode is extra defend
      */
     boolean isExtraDefend();
@@ -176,4 +167,19 @@ public interface PowerUsageFeatureProvider {
      * Returns {@link Set} for ignoring task root class names for screen on time
      */
     Set<String> getIgnoreScreenOnTimeTaskRootSet();
+
+    /**
+     * Returns the customized device build information for data backup
+     */
+    String getBuildMetadata1(Context context);
+
+    /**
+     * Returns the customized device build information for data backup
+     */
+    String getBuildMetadata2(Context context);
+
+    /**
+     * Whether the app optimization mode is valid to restore
+     */
+    boolean isValidToRestoreOptimizationMode(ArrayMap<String, String> deviceInfoMap);
 }

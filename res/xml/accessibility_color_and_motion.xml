@@ -64,11 +64,6 @@
         android:title="@string/accessibility_toggle_large_pointer_icon_title"
         settings:controller="com.android.settings.accessibility.LargePointerIconPreferenceController"/>
 
-    <com.android.settings.accessibility.ContrastLevelSeekBarPreference
-        android:key="seekbar_color_contrast"
-        android:persistent="false"
-        android:title="@string/accessibility_contrast_level_title"/>
-
     <PreferenceCategory
         android:key="experimental_category"
         android:persistent="false"

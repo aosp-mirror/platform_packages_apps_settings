@@ -89,13 +89,13 @@ public class MagnificationNavbarPreferenceControllerTest {
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED, ON);
         mController.updateState(mPreference);
         assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getText(R.string.on));
+                .isEqualTo(mContext.getText(R.string.accessibility_feature_state_on));
 
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED, OFF);
         mController.updateState(mPreference);
         assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getText(R.string.off));
+                .isEqualTo(mContext.getText(R.string.accessibility_feature_state_off));
     }
 
     @Test

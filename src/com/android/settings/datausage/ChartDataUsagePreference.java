@@ -48,8 +48,8 @@ public class ChartDataUsagePreference extends Preference {
     // Set to half a meg for now.
     private static final long RESOLUTION = DataUnit.MEBIBYTES.toBytes(1) / 2;
 
-    private int mWarningColor;
-    private int mLimitColor;
+    private final int mWarningColor;
+    private final int mLimitColor;
 
     private Resources mResources;
     private NetworkPolicy mPolicy;
@@ -58,35 +58,35 @@ public class ChartDataUsagePreference extends Preference {
     private NetworkCycleChartData mNetworkCycleChartData;
     private int mSecondaryColor;
     private int mSeriesColor;
-    private UsageView mUsageView;
-    private boolean mSuspendUiUpdate;  // Suppress UI updates to save some CPU time.
 
     public ChartDataUsagePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mResources = context.getResources();
         setSelectable(false);
+        mLimitColor = Utils.getColorAttrDefaultColor(context, android.R.attr.colorError);
+        mWarningColor = Utils.getColorAttrDefaultColor(context, android.R.attr.textColorSecondary);
+        setLayoutResource(R.layout.data_usage_graph);
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-        mUsageView = (UsageView) holder.findViewById(R.id.data_usage);
-    }
-
-    private void onUpdateView() {
-        if ((mUsageView == null) || (mNetworkCycleChartData == null)) {
+        final UsageView chart = (UsageView) holder.findViewById(R.id.data_usage);
+        if (mNetworkCycleChartData == null) {
             return;
         }
+
         final int top = getTop();
-        mUsageView.clearPaths();
-        mUsageView.configureGraph(toInt(mEnd - mStart), top);
-        calcPoints(mUsageView, mNetworkCycleChartData.getUsageBuckets());
-        setupContentDescription(mUsageView, mNetworkCycleChartData.getUsageBuckets());
-        mUsageView.setBottomLabels(new CharSequence[] {
+        chart.clearPaths();
+        chart.configureGraph(toInt(mEnd - mStart), top);
+        calcPoints(chart, mNetworkCycleChartData.getUsageBuckets());
+        setupContentDescription(chart, mNetworkCycleChartData.getUsageBuckets());
+        chart.setBottomLabels(new CharSequence[] {
                 Utils.formatDateRange(getContext(), mStart, mStart),
                 Utils.formatDateRange(getContext(), mEnd, mEnd),
         });
 
-        bindNetworkPolicy(mUsageView, mPolicy, top);
+        bindNetworkPolicy(chart, mPolicy, top);
     }
 
     public int getTop() {
@@ -291,16 +291,9 @@ public class ChartDataUsagePreference extends Preference {
         return new SpannableStringBuilder().append(label, new ForegroundColorSpan(mLimitColor), 0);
     }
 
-    public void onPreparingChartData() {
-        mSuspendUiUpdate = true;
-    }
-
     public void setNetworkPolicy(NetworkPolicy policy) {
         mPolicy = policy;
-        if ((!mSuspendUiUpdate) && (mResources != null)) {
-            onUpdateView();
-            notifyChanged();
-        }
+        notifyChanged();
     }
 
     public long getInspectStart() {
@@ -312,31 +305,15 @@ public class ChartDataUsagePreference extends Preference {
     }
 
     public void setNetworkCycleData(NetworkCycleChartData data) {
-        if (data == null) {
-            return;
-        }
         mNetworkCycleChartData = data;
         mStart = data.getStartTime();
         mEnd = data.getEndTime();
-        if (mResources == null) {
-            Context context = getContext();
-            mResources = context.getResources();
-            mLimitColor = Utils.getColorAttrDefaultColor(context, android.R.attr.colorError);
-            mWarningColor = Utils.getColorAttrDefaultColor(context,
-                    android.R.attr.textColorSecondary);
-            setLayoutResource(R.layout.data_usage_graph);
-        }
-        onUpdateView();
         notifyChanged();
-        mSuspendUiUpdate = false;
     }
 
     public void setColors(int seriesColor, int secondaryColor) {
         mSeriesColor = seriesColor;
         mSecondaryColor = secondaryColor;
-        if ((!mSuspendUiUpdate) && (mResources != null)) {
-            onUpdateView();
-            notifyChanged();
-        }
+        notifyChanged();
     }
 }

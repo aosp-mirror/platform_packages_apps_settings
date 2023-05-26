@@ -16,14 +16,19 @@
 
 package com.android.settings.security.screenlock;
 
+import static com.android.internal.widget.LockPatternUtils.MIN_AUTO_PIN_REQUIREMENT_LENGTH;
+
 import android.content.Context;
 
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 
 /**
  * Preference controller for the pin_auto_confirm setting.
@@ -32,21 +37,23 @@ public class AutoPinConfirmPreferenceController extends AbstractPreferenceContro
         PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
     private static final String PREF_KEY_PIN_AUTO_CONFIRM = "auto_pin_confirm";
-    private static final long MIN_AUTO_PIN_REQUIREMENT_LENGTH = 6L;
 
     private final int mUserId;
     private final LockPatternUtils mLockPatternUtils;
+    private final ObservablePreferenceFragment mParentFragment;
 
     public AutoPinConfirmPreferenceController(Context context, int userId,
-            LockPatternUtils lockPatternUtils) {
+            LockPatternUtils lockPatternUtils,
+            ObservablePreferenceFragment parentFragment) {
         super(context);
         mUserId = userId;
         mLockPatternUtils = lockPatternUtils;
+        mParentFragment = parentFragment;
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        setPinAutoConfirmSettingState((boolean) newValue);
+        launchPinConfirmActivity((boolean) newValue);
         return true;
     }
 
@@ -81,5 +88,19 @@ public class AutoPinConfirmPreferenceController extends AbstractPreferenceContro
 
     private void setPinAutoConfirmSettingState(boolean state) {
         mLockPatternUtils.setAutoPinConfirm(state, mUserId);
+    }
+
+    private void launchPinConfirmActivity(boolean newState) {
+        new ChooseLockSettingsHelper.Builder(mParentFragment.getActivity(), mParentFragment)
+                .setUserId(mUserId)
+                .setRequestCode(newState
+                        ? ScreenLockSettings.AUTO_PIN_SETTING_ENABLING_REQUEST_CODE
+                        : ScreenLockSettings.AUTO_PIN_SETTING_DISABLING_REQUEST_CODE)
+                .setTitle(mContext.getString(R.string.lock_screen_auto_pin_confirm_title))
+                .setDescription(newState
+                        ? mContext.getString(R.string.auto_confirm_on_pin_verify_description)
+                        : mContext.getString(R.string.auto_confirm_off_pin_verify_description))
+                .setReturnCredentials(true)
+                .show();
     }
 }

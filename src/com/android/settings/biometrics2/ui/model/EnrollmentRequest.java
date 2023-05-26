@@ -27,6 +27,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.biometrics.BiometricEnrollActivity;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -36,13 +37,19 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
  * 2. isAfterSuwOrSuwSuggestedAction
  * 3. theme
  * 4. isFromSettingsSummery
- * 5. a helper method, getSetupWizardExtras
+ * 5. isSkipIntro
+ * 6. isSkipFindSensor
+ * 7. a helper method, getSetupWizardExtras
  */
 public final class EnrollmentRequest {
+
+    public static final String EXTRA_SKIP_FIND_SENSOR = "skip_find_sensor";
 
     private final boolean mIsSuw;
     private final boolean mIsAfterSuwOrSuwSuggestedAction;
     private final boolean mIsFromSettingsSummery;
+    private final boolean mIsSkipIntro;
+    private final boolean mIsSkipFindSensor;
     private final int mTheme;
     private final Bundle mSuwExtras;
 
@@ -53,6 +60,8 @@ public final class EnrollmentRequest {
                 || intent.getBooleanExtra(EXTRA_IS_SUW_SUGGESTED_ACTION_FLOW, false);
         mSuwExtras = getSuwExtras(mIsSuw, intent);
         mIsFromSettingsSummery = intent.getBooleanExtra(EXTRA_FROM_SETTINGS_SUMMARY, false);
+        mIsSkipIntro = intent.getBooleanExtra(BiometricEnrollActivity.EXTRA_SKIP_INTRO, false);
+        mIsSkipFindSensor = intent.getBooleanExtra(EXTRA_SKIP_FIND_SENSOR, false);
         mTheme = SetupWizardUtils.getTheme(context, intent);
     }
 
@@ -66,6 +75,14 @@ public final class EnrollmentRequest {
 
     public boolean isFromSettingsSummery() {
         return mIsFromSettingsSummery;
+    }
+
+    public boolean isSkipIntro() {
+        return mIsSkipIntro;
+    }
+
+    public boolean isSkipFindSensor() {
+        return mIsSkipFindSensor;
     }
 
     public int getTheme() {

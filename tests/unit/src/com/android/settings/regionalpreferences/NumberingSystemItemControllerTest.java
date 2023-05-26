@@ -16,12 +16,15 @@
 
 package com.android.settings.regionalpreferences;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.LocaleList;
@@ -32,6 +35,10 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
+
+import com.android.internal.app.LocalePicker;
+import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.widget.TickButtonPreference;
 
 import org.junit.After;
 import org.junit.Before;
@@ -45,6 +52,7 @@ public class NumberingSystemItemControllerTest {
     private NumberingPreferencesFragment mFragment;
     private PreferenceScreen mPreferenceScreen;
     private LocaleList mCacheLocale;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     @UiThreadTest
@@ -53,6 +61,7 @@ public class NumberingSystemItemControllerTest {
             Looper.prepare();
         }
         mApplicationContext = ApplicationProvider.getApplicationContext();
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mFragment = spy(new NumberingPreferencesFragment());
         PreferenceManager preferenceManager = new PreferenceManager(mApplicationContext);
         mPreferenceScreen = preferenceManager.createPreferenceScreen(mApplicationContext);
@@ -62,6 +71,7 @@ public class NumberingSystemItemControllerTest {
     @After
     public void tearDown() {
         LocaleList.setDefault(mCacheLocale);
+        LocalePicker.updateLocales(mCacheLocale);
     }
 
     @Test
@@ -87,6 +97,10 @@ public class NumberingSystemItemControllerTest {
         }
 
         assertTrue(isCallingStartActivity);
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                mApplicationContext,
+                SettingsEnums.ACTION_CHOOSE_LANGUAGE_FOR_NUMBERS_PREFERENCES,
+                "I_am_the_key");
     }
 
     @Test
@@ -107,12 +121,40 @@ public class NumberingSystemItemControllerTest {
         mController.handlePreferenceTreeClick(preference);
 
         verify(mFragment).setArguments(any());
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                mApplicationContext, SettingsEnums.ACTION_SET_NUMBERS_PREFERENCES,
+                "test_key");
     }
 
     @Test
     @UiThreadTest
-    public void displayPreference_languageOptAndHas2Locale_show2Options() {
-        LocaleList.setDefault(LocaleList.forLanguageTags("en-US, zh-TW"));
+    public void handlePreferenceTreeClick_numbersSelect_numberingSystemIsUpdated() {
+        LocalePicker.updateLocales(LocaleList.forLanguageTags("en-US,zh-TW,ar-BH"));
+        Bundle bundle = new Bundle();
+        bundle.putString(RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE,
+                NumberingSystemItemController.ARG_VALUE_NUMBERING_SYSTEM_SELECT);
+        bundle.putString(
+                NumberingSystemItemController.KEY_SELECTED_LANGUAGE, "ar-BH");
+        TickButtonPreference defaultPreference = new TickButtonPreference(mApplicationContext);
+        TickButtonPreference numberPreference = new TickButtonPreference(mApplicationContext);
+        defaultPreference.setKey("default");
+        numberPreference.setKey("latn");
+        mPreferenceScreen.addPreference(defaultPreference);
+        mPreferenceScreen.addPreference(numberPreference);
+        mController = new NumberingSystemItemController(mApplicationContext, bundle);
+        mController.setParentFragment(mFragment);
+        mController.displayPreference(mPreferenceScreen);
+
+        mController.handlePreferenceTreeClick(numberPreference);
+
+        assertThat(LocalePicker.getLocales().toLanguageTags()).contains(
+                "en-US,zh-TW,ar-BH-u-nu-latn");
+    }
+
+    @Test
+    @UiThreadTest
+    public void displayPreference_languageOptAndHas2LocaleWithSingleNu_showNothing() {
+        LocaleList.setDefault(LocaleList.forLanguageTags("en-US,zh-TW"));
         Bundle bundle = new Bundle();
         bundle.putString(RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE,
                 NumberingSystemItemController.ARG_VALUE_LANGUAGE_SELECT);
@@ -123,13 +165,31 @@ public class NumberingSystemItemControllerTest {
 
         mController.displayPreference(mPreferenceScreen);
 
-        assertEquals(LocaleList.getDefault().size(), mPreferenceScreen.getPreferenceCount());
+        assertEquals(0, mPreferenceScreen.getPreferenceCount());
+    }
+
+    @Test
+    @UiThreadTest
+    public void displayPreference_languageOptAndHas2LocaleWithMultiNu_showLocaleWithMultiNuOnly() {
+        // ar-JO and dz-BT have multiple numbering systems.
+        LocaleList.setDefault(LocaleList.forLanguageTags("en-US,zh-TW,ar-JO,dz-BT"));
+        Bundle bundle = new Bundle();
+        bundle.putString(RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE,
+                NumberingSystemItemController.ARG_VALUE_LANGUAGE_SELECT);
+        bundle.putString(
+                NumberingSystemItemController.KEY_SELECTED_LANGUAGE, Locale.US.toLanguageTag());
+        mController = new NumberingSystemItemController(mApplicationContext, bundle);
+        mController.setParentFragment(mFragment);
+
+        mController.displayPreference(mPreferenceScreen);
+
+        assertEquals(2, mPreferenceScreen.getPreferenceCount());
     }
 
     @Test
     @UiThreadTest
     public void displayPreference_enUsNumbersOpt_show1Option() {
-        LocaleList.setDefault(LocaleList.forLanguageTags("en-US, zh-TW"));
+        LocaleList.setDefault(LocaleList.forLanguageTags("en-US,zh-TW"));
         Bundle bundle = new Bundle();
         bundle.putString(RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE,
                 NumberingSystemItemController.ARG_VALUE_NUMBERING_SYSTEM_SELECT);

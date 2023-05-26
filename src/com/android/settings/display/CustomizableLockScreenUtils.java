@@ -18,6 +18,8 @@ package com.android.settings.display;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.text.TextUtils;
@@ -67,6 +69,10 @@ public final class CustomizableLockScreenUtils {
      * <p>This is a slow, blocking call that shouldn't be made on the main thread.
      */
     public static boolean isFeatureEnabled(Context context) {
+        if (!isWallpaperPickerInstalled(context)) {
+            return false;
+        }
+
         try (Cursor cursor = context.getContentResolver().query(
                 FLAGS_URI,
                 null,
@@ -150,5 +156,18 @@ public final class CustomizableLockScreenUtils {
             Log.e(TAG, "Exception while querying quick affordance content provider", e);
             return null;
         }
+    }
+
+    /**
+     * Returns a new {@link Intent} that can be used to start the wallpaper picker
+     * activity.
+     */
+    public static Intent newIntent() {
+        return new Intent(Intent.ACTION_SET_WALLPAPER);
+    }
+
+    private static boolean isWallpaperPickerInstalled(Context context) {
+        final PackageManager packageManager = context.getPackageManager();
+        return newIntent().resolveActivity(packageManager) != null;
     }
 }

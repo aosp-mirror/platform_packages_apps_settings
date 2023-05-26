@@ -61,8 +61,6 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
 
         switch (action) {
             case Intent.ACTION_BOOT_COMPLETED:
-            case Intent.ACTION_MY_PACKAGE_REPLACED:
-            case Intent.ACTION_MY_PACKAGE_UNSUSPENDED:
             case ACTION_SETUP_WIZARD_FINISHED:
             case ACTION_PERIODIC_JOB_RECHECK:
                 Log.d(TAG, "refresh periodic job from action=" + action);

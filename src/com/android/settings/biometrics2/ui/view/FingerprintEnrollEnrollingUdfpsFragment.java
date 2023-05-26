@@ -22,8 +22,7 @@ import android.annotation.RawRes;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.graphics.drawable.Animatable2;
-import android.graphics.drawable.Drawable;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -37,16 +36,16 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.transition.Transition;
-import androidx.transition.TransitionSet;
 
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.biometrics.fingerprint.FingerprintErrorDialog;
 import com.android.settings.biometrics2.ui.model.EnrollmentProgress;
 import com.android.settings.biometrics2.ui.model.EnrollmentStatusMessage;
 import com.android.settings.biometrics2.ui.viewmodel.DeviceRotationViewModel;
@@ -78,8 +77,6 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
     private DeviceRotationViewModel mRotationViewModel;
     private FingerprintEnrollProgressViewModel mProgressViewModel;
 
-    private boolean mAnimationCancelled;
-
     private LottieAnimationView mIllustrationLottie;
     private boolean mHaveShownUdfpsTipLottie;
     private boolean mHaveShownUdfpsLeftEdgeLottie;
@@ -87,34 +84,36 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
     private boolean mHaveShownUdfpsCenterLottie;
     private boolean mHaveShownUdfpsGuideLottie;
 
-    private RelativeLayout mView;
-    private ImageView mIcon;
-    private TextView mErrorText;
     private TextView mTitleText;
     private TextView mSubTitleText;
-    private Button mSkipBtn;
     private UdfpsEnrollView mUdfpsEnrollView;
+    private Button mSkipBtn;
+    private ImageView mIcon;
 
     private boolean mShouldShowLottie;
     private boolean mIsAccessibilityEnabled;
 
+    private int mRotation = -1;
+
     private final View.OnClickListener mOnSkipClickListener =
             (v) -> mEnrollingViewModel.onCancelledDueToOnSkipPressed();
 
-    private Observer<EnrollmentProgress> mProgressObserver = progress -> {
+    private final Observer<EnrollmentProgress> mProgressObserver = progress -> {
         if (progress != null) {
             onEnrollmentProgressChange(progress);
         }
     };
-    private Observer<EnrollmentStatusMessage> mHelpMessageObserver = helpMessage -> {
+    private final Observer<EnrollmentStatusMessage> mHelpMessageObserver = helpMessage -> {
         if (helpMessage != null) {
-            onEnrollmentHelp(helpMessage.getMsgId(), helpMessage.getStr());
+            onEnrollmentHelp(helpMessage);
         }
     };
-    private Observer<EnrollmentStatusMessage> mErrorMessageObserver = errorMessage -> {
-        // TODO
+    private final Observer<EnrollmentStatusMessage> mErrorMessageObserver = errorMessage -> {
+        if (errorMessage != null) {
+            onEnrollmentError(errorMessage);
+        }
     };
-    private Observer<Boolean> mAcquireObserver = isAcquiredGood -> {
+    private final Observer<Boolean> mAcquireObserver = isAcquiredGood -> {
         if (isAcquiredGood != null) {
             onAcquired(isAcquiredGood);
         }
@@ -130,8 +129,20 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
         }
     };
 
-    private int mIconTouchCount;
+    private final Observer<Integer> mRotationObserver = rotation -> {
+        if (rotation != null) {
+            onRotationChanged(rotation);
+        }
+    };
 
+    private final OnBackPressedCallback mOnBackPressedCallback = new OnBackPressedCallback(true) {
+        @Override
+        public void handleOnBackPressed() {
+            setEnabled(false);
+            mEnrollingViewModel.setOnBackPressed();
+            cancelEnrollment();
+        }
+    };
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -141,61 +152,24 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
         mRotationViewModel = provider.get(DeviceRotationViewModel.class);
         mProgressViewModel = provider.get(FingerprintEnrollProgressViewModel.class);
         super.onAttach(context);
-        final TransitionSet transitionSet = (TransitionSet) getSharedElementEnterTransition();
-        if (transitionSet != null) {
-            transitionSet.addListener(new Transition.TransitionListener() {
-                @Override
-                public void onTransitionStart(@NonNull Transition transition) {
+        activity.getOnBackPressedDispatcher().addCallback(mOnBackPressedCallback);
+    }
 
-                }
-
-                @Override
-                public void onTransitionEnd(@NonNull Transition transition) {
-                    transition.removeListener(this);
-                    startEnrollment();
-                    mAnimationCancelled = false;
-                    startIconAnimation();
-                }
-
-                @Override
-                public void onTransitionCancel(@NonNull Transition transition) {
-
-                }
-
-                @Override
-                public void onTransitionPause(@NonNull Transition transition) {
-
-                }
-
-                @Override
-                public void onTransitionResume(@NonNull Transition transition) {
-
-                }
-            });
-        }
+    @Override
+    public void onDetach() {
+        mOnBackPressedCallback.setEnabled(false);
+        super.onDetach();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mEnrollingViewModel.restoreSavedState(savedInstanceState);
         mIsAccessibilityEnabled = mEnrollingViewModel.isAccessibilityEnabled();
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        mEnrollingViewModel.onSaveInstanceState(outState);
-        super.onSaveInstanceState(outState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        mView = initUdfpsLayout(inflater, container);
-        return mView;
-    }
-
-    private RelativeLayout initUdfpsLayout(LayoutInflater inflater, ViewGroup container) {
         final RelativeLayout containView = (RelativeLayout) inflater.inflate(
                 R.layout.udfps_enroll_enrolling_v2, container, false);
 
@@ -203,117 +177,85 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
         mIcon = containView.findViewById(R.id.sud_layout_icon);
         mTitleText = containView.findViewById(R.id.suc_layout_title);
         mSubTitleText = containView.findViewById(R.id.sud_layout_subtitle);
-        mErrorText = containView.findViewById(R.id.error_text);
         mSkipBtn = containView.findViewById(R.id.skip_btn);
         mSkipBtn.setOnClickListener(mOnSkipClickListener);
         mUdfpsEnrollView = containView.findViewById(R.id.udfps_animation_view);
         mUdfpsEnrollView.setSensorProperties(
                 mEnrollingViewModel.getFirstFingerprintSensorPropertiesInternal());
         mShouldShowLottie = shouldShowLottie();
-        boolean isLandscape = BiometricUtils.isReverseLandscape(activity)
+        final boolean isLandscape = BiometricUtils.isReverseLandscape(activity)
                 || BiometricUtils.isLandscape(activity);
         updateOrientation(containView, (isLandscape
                 ? Configuration.ORIENTATION_LANDSCAPE : Configuration.ORIENTATION_PORTRAIT));
 
-
-        final int rotation = mRotationViewModel.getLiveData().getValue();
-        if (rotation == Surface.ROTATION_270) {
-            RelativeLayout.LayoutParams iconLP = new RelativeLayout.LayoutParams(-2, -2);
-            iconLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            iconLP.addRule(RelativeLayout.END_OF, R.id.udfps_animation_view);
-            iconLP.topMargin = (int) convertDpToPixel(76.64f, activity);
-            iconLP.leftMargin = (int) convertDpToPixel(151.54f, activity);
-            mIcon.setLayoutParams(iconLP);
-
-            RelativeLayout.LayoutParams titleLP = new RelativeLayout.LayoutParams(-1, -2);
-            titleLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            titleLP.addRule(RelativeLayout.END_OF, R.id.udfps_animation_view);
-            titleLP.topMargin = (int) convertDpToPixel(138f, activity);
-            titleLP.leftMargin = (int) convertDpToPixel(144f, activity);
-            mTitleText.setLayoutParams(titleLP);
-
-            RelativeLayout.LayoutParams subtitleLP = new RelativeLayout.LayoutParams(-1, -2);
-            subtitleLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            subtitleLP.addRule(RelativeLayout.END_OF, R.id.udfps_animation_view);
-            subtitleLP.topMargin = (int) convertDpToPixel(198f, activity);
-            subtitleLP.leftMargin = (int) convertDpToPixel(144f, activity);
-            mSubTitleText.setLayoutParams(subtitleLP);
-        } else if (rotation == Surface.ROTATION_90) {
-            DisplayMetrics metrics = activity.getResources().getDisplayMetrics();
-            RelativeLayout.LayoutParams iconLP = new RelativeLayout.LayoutParams(-2, -2);
-            iconLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            iconLP.addRule(RelativeLayout.ALIGN_PARENT_START);
-            iconLP.topMargin = (int) convertDpToPixel(76.64f, activity);
-            iconLP.leftMargin = (int) convertDpToPixel(71.99f, activity);
-            mIcon.setLayoutParams(iconLP);
-
-            RelativeLayout.LayoutParams titleLP = new RelativeLayout.LayoutParams(
-                    metrics.widthPixels / 2, -2);
-            titleLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            titleLP.addRule(RelativeLayout.ALIGN_PARENT_START, R.id.udfps_animation_view);
-            titleLP.topMargin = (int) convertDpToPixel(138f, activity);
-            titleLP.leftMargin = (int) convertDpToPixel(66f, activity);
-            mTitleText.setLayoutParams(titleLP);
-
-            RelativeLayout.LayoutParams subtitleLP = new RelativeLayout.LayoutParams(
-                    metrics.widthPixels / 2, -2);
-            subtitleLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            subtitleLP.addRule(RelativeLayout.ALIGN_PARENT_START);
-            subtitleLP.topMargin = (int) convertDpToPixel(198f, activity);
-            subtitleLP.leftMargin = (int) convertDpToPixel(66f, activity);
-            mSubTitleText.setLayoutParams(subtitleLP);
-        }
-
-        if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
-            RelativeLayout.LayoutParams skipBtnLP =
-                    (RelativeLayout.LayoutParams) mIcon.getLayoutParams();
-            skipBtnLP.topMargin = (int) convertDpToPixel(26f, activity);
-            skipBtnLP.leftMargin = (int) convertDpToPixel(54f, activity);
-            mSkipBtn.requestLayout();
-        }
+        mRotation = mRotationViewModel.getLiveData().getValue();
+        configLayout(mRotation);
         return containView;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        if (true /* TODO mRestoring && !mIsCanceled */) {
-            startEnrollment();
-        }
+        startEnrollment();
         updateProgress(false /* animate */, mProgressViewModel.getProgressLiveData().getValue());
-        updateTitleAndDescription();
-        if (true /* TODO mRestoring */) {
-            startIconAnimation();
+        final EnrollmentStatusMessage msg = mProgressViewModel.getHelpMessageLiveData().getValue();
+        if (msg != null) {
+            onEnrollmentHelp(msg);
+        } else {
+            updateTitleAndDescription();
         }
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        mRotationViewModel.getLiveData().observe(this, mRotationObserver);
+    }
+
+    @Override
+    public void onPause() {
+        mRotationViewModel.getLiveData().removeObserver(mRotationObserver);
+        super.onPause();
+    }
+
+    @Override
     public void onStop() {
-        stopIconAnimation();
-        removeEnrollmentObserver();
-        if (!getActivity().isChangingConfigurations()) {
+        removeEnrollmentObservers();
+        if (!getActivity().isChangingConfigurations() && mProgressViewModel.isEnrolling()) {
             mProgressViewModel.cancelEnrollment();
         }
         super.onStop();
     }
 
-    private void removeEnrollmentObserver() {
+    private void removeEnrollmentObservers() {
+        preRemoveEnrollmentObservers();
+        mProgressViewModel.getErrorMessageLiveData().removeObserver(mErrorMessageObserver);
+    }
+
+    private void preRemoveEnrollmentObservers() {
         mProgressViewModel.getProgressLiveData().removeObserver(mProgressObserver);
         mProgressViewModel.getHelpMessageLiveData().removeObserver(mHelpMessageObserver);
-        mProgressViewModel.getErrorMessageLiveData().removeObserver(mErrorMessageObserver);
         mProgressViewModel.getAcquireLiveData().removeObserver(mAcquireObserver);
         mProgressViewModel.getPointerDownLiveData().removeObserver(mPointerDownObserver);
         mProgressViewModel.getPointerUpLiveData().removeObserver(mPointerUpObserver);
     }
 
+    private void cancelEnrollment() {
+        preRemoveEnrollmentObservers();
+        mProgressViewModel.cancelEnrollment();
+    }
+
     private void startEnrollment() {
+        final boolean startResult = mProgressViewModel.startEnrollment(ENROLL_ENROLL);
+        if (!startResult) {
+            Log.e(TAG, "startEnrollment(), failed");
+        }
         mProgressViewModel.getProgressLiveData().observe(this, mProgressObserver);
         mProgressViewModel.getHelpMessageLiveData().observe(this, mHelpMessageObserver);
         mProgressViewModel.getErrorMessageLiveData().observe(this, mErrorMessageObserver);
         mProgressViewModel.getAcquireLiveData().observe(this, mAcquireObserver);
         mProgressViewModel.getPointerDownLiveData().observe(this, mPointerDownObserver);
         mProgressViewModel.getPointerUpLiveData().observe(this, mPointerUpObserver);
-        mProgressViewModel.startEnrollment(ENROLL_ENROLL);
     }
 
     private void updateProgress(boolean animate, @NonNull EnrollmentProgress enrollmentProgress) {
@@ -324,9 +266,10 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
 
         final int progress = getProgress(enrollmentProgress);
 
-
-        mUdfpsEnrollView.onEnrollmentProgress(enrollmentProgress.getRemaining(),
-                enrollmentProgress.getSteps());
+        if (mProgressViewModel.getProgressLiveData().getValue().getSteps() != -1) {
+            mUdfpsEnrollView.onEnrollmentProgress(enrollmentProgress.getRemaining(),
+                    enrollmentProgress.getSteps());
+        }
 
         if (animate) {
             animateProgress(progress);
@@ -343,12 +286,6 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
         return PROGRESS_BAR_MAX * displayProgress / (progress.getSteps() + 1);
     }
 
-    @Override
-    public void onDestroy() {
-        // TODO stopListenOrientationEvent();
-        super.onDestroy();
-    }
-
     private void animateProgress(int progress) {
         // UDFPS animations are owned by SystemUI
         if (progress >= PROGRESS_BAR_MAX) {
@@ -363,13 +300,13 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
                 mTitleText.setText(R.string.security_settings_fingerprint_enroll_repeat_title);
                 if (mIsAccessibilityEnabled || mIllustrationLottie == null) {
                     mSubTitleText.setText(R.string.security_settings_udfps_enroll_start_message);
-                } else if (!mHaveShownUdfpsCenterLottie && mIllustrationLottie != null) {
+                } else if (!mHaveShownUdfpsCenterLottie) {
                     mHaveShownUdfpsCenterLottie = true;
                     // Note: Update string reference when differentiate in between udfps & sfps
                     mIllustrationLottie.setContentDescription(
                             getString(R.string.security_settings_sfps_enroll_finger_center_title)
                     );
-                    configureEnrollmentStage("", R.raw.udfps_center_hint_lottie);
+                    configureEnrollmentStage(R.raw.udfps_center_hint_lottie);
                 }
                 break;
 
@@ -378,13 +315,13 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
                 if (mIsAccessibilityEnabled || mIllustrationLottie == null) {
                     mSubTitleText.setText(
                             R.string.security_settings_udfps_enroll_repeat_a11y_message);
-                } else if (!mHaveShownUdfpsGuideLottie && mIllustrationLottie != null) {
+                } else if (!mHaveShownUdfpsGuideLottie) {
                     mHaveShownUdfpsGuideLottie = true;
                     mIllustrationLottie.setContentDescription(
                             getString(R.string.security_settings_fingerprint_enroll_repeat_message)
                     );
                     // TODO(b/228100413) Could customize guided lottie animation
-                    configureEnrollmentStage("", R.raw.udfps_center_hint_lottie);
+                    configureEnrollmentStage(R.raw.udfps_center_hint_lottie);
                 }
                 break;
             case STAGE_FINGERTIP:
@@ -394,7 +331,7 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
                     mIllustrationLottie.setContentDescription(
                             getString(R.string.security_settings_udfps_tip_fingerprint_help)
                     );
-                    configureEnrollmentStage("", R.raw.udfps_tip_hint_lottie);
+                    configureEnrollmentStage(R.raw.udfps_tip_hint_lottie);
                 }
                 break;
             case STAGE_LEFT_EDGE:
@@ -404,7 +341,7 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
                     mIllustrationLottie.setContentDescription(
                             getString(R.string.security_settings_udfps_side_fingerprint_help)
                     );
-                    configureEnrollmentStage("", R.raw.udfps_left_edge_hint_lottie);
+                    configureEnrollmentStage(R.raw.udfps_left_edge_hint_lottie);
                 } else if (mIllustrationLottie == null) {
                     if (isStageHalfCompleted()) {
                         mSubTitleText.setText(
@@ -421,7 +358,7 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
                     mIllustrationLottie.setContentDescription(
                             getString(R.string.security_settings_udfps_side_fingerprint_help)
                     );
-                    configureEnrollmentStage("", R.raw.udfps_right_edge_hint_lottie);
+                    configureEnrollmentStage(R.raw.udfps_right_edge_hint_lottie);
 
                 } else if (mIllustrationLottie == null) {
                     if (isStageHalfCompleted()) {
@@ -469,13 +406,6 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
                 Log.e(TAG, "Error unhandled configuration change");
                 break;
         }
-    }
-
-    private void startIconAnimation() {
-    }
-
-    private void stopIconAnimation() {
-        mAnimationCancelled = true;
     }
 
     private int getCurrentStage() {
@@ -533,14 +463,8 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
                 * mEnrollingViewModel.getEnrollStageThreshold(index));
     }
 
-    private void showIconTouchDialog() {
-        mIconTouchCount = 0;
-        //TODO EnrollingActivity should observe live data and add dialog fragment
-        mEnrollingViewModel.onIconTouchDialogShow();
-    }
-
-    private void configureEnrollmentStage(CharSequence description, @RawRes int lottie) {
-        mSubTitleText.setText(description);
+    private void configureEnrollmentStage(@RawRes int lottie) {
+        mSubTitleText.setText("");
         LottieCompositionFactory.fromRawRes(getActivity(), lottie)
                 .addListener((c) -> {
                     mIllustrationLottie.setComposition(c);
@@ -565,10 +489,31 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
 
     }
 
-    private void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
-        if (!TextUtils.isEmpty(helpString)) {
-            showError(helpString);
+    private void onEnrollmentHelp(@NonNull EnrollmentStatusMessage helpMessage) {
+        final CharSequence helpStr = helpMessage.getStr();
+        if (!TextUtils.isEmpty(helpStr)) {
+            showError(helpStr);
             mUdfpsEnrollView.onEnrollmentHelp();
+        }
+    }
+    private void onEnrollmentError(@NonNull EnrollmentStatusMessage errorMessage) {
+        removeEnrollmentObservers();
+
+        if (mEnrollingViewModel.getOnBackPressed()
+                && errorMessage.getMsgId() == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
+            mEnrollingViewModel.onCancelledDueToOnBackPressed();
+        } else if (mEnrollingViewModel.getOnSkipPressed()
+                && errorMessage.getMsgId() == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
+            mEnrollingViewModel.onCancelledDueToOnSkipPressed();
+        } else {
+            final int errMsgId = errorMessage.getMsgId();
+            mEnrollingViewModel.showErrorDialog(
+                    new FingerprintEnrollEnrollingViewModel.ErrorDialogData(
+                            getString(FingerprintErrorDialog.getErrorMessage(errMsgId)),
+                            getString(FingerprintErrorDialog.getErrorTitle(errMsgId)),
+                            errMsgId
+                    ));
+            mProgressViewModel.cancelEnrollment();
         }
     }
 
@@ -596,9 +541,73 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
         mSubTitleText.setContentDescription("");
     }
 
+    private void onRotationChanged(int newRotation) {
+        if( (newRotation +2) % 4 == mRotation) {
+            mRotation = newRotation;
+            configLayout(newRotation);
+        }
+    }
+
+    private void configLayout(int newRotation) {
+        final Activity activity = getActivity();
+        if (newRotation == Surface.ROTATION_270) {
+            RelativeLayout.LayoutParams iconLP = new RelativeLayout.LayoutParams(-2, -2);
+            iconLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            iconLP.addRule(RelativeLayout.END_OF, R.id.udfps_animation_view);
+            iconLP.topMargin = (int) convertDpToPixel(76.64f, activity);
+            iconLP.leftMargin = (int) convertDpToPixel(151.54f, activity);
+            mIcon.setLayoutParams(iconLP);
+
+            RelativeLayout.LayoutParams titleLP = new RelativeLayout.LayoutParams(-1, -2);
+            titleLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            titleLP.addRule(RelativeLayout.END_OF, R.id.udfps_animation_view);
+            titleLP.topMargin = (int) convertDpToPixel(138f, activity);
+            titleLP.leftMargin = (int) convertDpToPixel(144f, activity);
+            mTitleText.setLayoutParams(titleLP);
+
+            RelativeLayout.LayoutParams subtitleLP = new RelativeLayout.LayoutParams(-1, -2);
+            subtitleLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            subtitleLP.addRule(RelativeLayout.END_OF, R.id.udfps_animation_view);
+            subtitleLP.topMargin = (int) convertDpToPixel(198f, activity);
+            subtitleLP.leftMargin = (int) convertDpToPixel(144f, activity);
+            mSubTitleText.setLayoutParams(subtitleLP);
+        } else if (newRotation == Surface.ROTATION_90) {
+            DisplayMetrics metrics = activity.getResources().getDisplayMetrics();
+            RelativeLayout.LayoutParams iconLP = new RelativeLayout.LayoutParams(-2, -2);
+            iconLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            iconLP.addRule(RelativeLayout.ALIGN_PARENT_START);
+            iconLP.topMargin = (int) convertDpToPixel(76.64f, activity);
+            iconLP.leftMargin = (int) convertDpToPixel(71.99f, activity);
+            mIcon.setLayoutParams(iconLP);
+
+            RelativeLayout.LayoutParams titleLP = new RelativeLayout.LayoutParams(
+                    metrics.widthPixels / 2, -2);
+            titleLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            titleLP.addRule(RelativeLayout.ALIGN_PARENT_START, R.id.udfps_animation_view);
+            titleLP.topMargin = (int) convertDpToPixel(138f, activity);
+            titleLP.leftMargin = (int) convertDpToPixel(66f, activity);
+            mTitleText.setLayoutParams(titleLP);
+
+            RelativeLayout.LayoutParams subtitleLP = new RelativeLayout.LayoutParams(
+                    metrics.widthPixels / 2, -2);
+            subtitleLP.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            subtitleLP.addRule(RelativeLayout.ALIGN_PARENT_START);
+            subtitleLP.topMargin = (int) convertDpToPixel(198f, activity);
+            subtitleLP.leftMargin = (int) convertDpToPixel(66f, activity);
+            mSubTitleText.setLayoutParams(subtitleLP);
+        }
+
+        if (newRotation == Surface.ROTATION_90 || newRotation == Surface.ROTATION_270) {
+            RelativeLayout.LayoutParams skipBtnLP =
+                    (RelativeLayout.LayoutParams) mSkipBtn.getLayoutParams();
+            skipBtnLP.topMargin = (int) convertDpToPixel(26f, activity);
+            skipBtnLP.leftMargin = (int) convertDpToPixel(54f, activity);
+            mSkipBtn.requestLayout();
+        }
+    }
+
     private float convertDpToPixel(float dp, Context context) {
-        float px = dp * getDensity(context);
-        return px;
+        return dp * getDensity(context);
     }
 
     private float getDensity(Context context) {
@@ -606,38 +615,6 @@ public class FingerprintEnrollEnrollingUdfpsFragment extends Fragment {
         return metrics.density;
     }
 
-    private final Runnable mShowDialogRunnable = new Runnable() {
-        @Override
-        public void run() {
-            showIconTouchDialog();
-        }
-    };
-
     // Give the user a chance to see progress completed before jumping to the next stage.
-    private final Runnable mDelayedFinishRunnable = new Runnable() {
-        @Override
-        public void run() {
-            /* TODO launchFinish(); */
-        }
-    };
-
-    private final Animatable2.AnimationCallback mIconAnimationCallback =
-            new Animatable2.AnimationCallback() {
-                @Override
-                public void onAnimationEnd(Drawable d) {
-                    if (mAnimationCancelled) {
-                        return;
-                    }
-
-                    // Start animation after it has ended.
-                    /* TODO check mProgressBar?
-                    mProgressBar.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            startIconAnimation();
-                        }
-                    });
-                     */
-                }
-            };
+    private final Runnable mDelayedFinishRunnable = () -> mEnrollingViewModel.onEnrollingDone();
 }

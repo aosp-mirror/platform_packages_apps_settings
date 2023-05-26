@@ -56,6 +56,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
@@ -74,6 +75,7 @@ import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollBase;
+import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.safetycenter.LockScreenSafetySource;
@@ -628,10 +630,11 @@ public class ChooseLockGeneric extends SettingsActivity {
                         R.string.face_unlock_set_unlock_password);
             } else if (mForBiometrics) {
                 setPreferenceTitle(ScreenLockType.PATTERN,
-                        R.string.biometrics_unlock_set_unlock_pattern);
-                setPreferenceTitle(ScreenLockType.PIN, R.string.biometrics_unlock_set_unlock_pin);
+                        getBiometricsPreferenceTitle(ScreenLockType.PATTERN));
+                setPreferenceTitle(ScreenLockType.PIN,
+                        getBiometricsPreferenceTitle(ScreenLockType.PIN));
                 setPreferenceTitle(ScreenLockType.PASSWORD,
-                        R.string.biometrics_unlock_set_unlock_password);
+                        getBiometricsPreferenceTitle(ScreenLockType.PASSWORD));
             }
 
             if (mManagedPasswordProvider.isSettingManagedPasswordSupported()) {
@@ -649,6 +652,24 @@ public class ChooseLockGeneric extends SettingsActivity {
             }
             if (!(mForBiometrics && mIsSetNewPassword)) {
                 removePreference(KEY_SKIP_BIOMETRICS);
+            }
+        }
+
+        @VisibleForTesting
+        String getBiometricsPreferenceTitle(@NonNull ScreenLockType secureType) {
+            final boolean hasFingerprint = Utils.hasFingerprintHardware(getContext());
+            final boolean hasFace = Utils.hasFaceHardware(getContext());
+            final boolean isSuw = WizardManagerHelper.isAnySetupWizard(getIntent());
+            final boolean isFaceSupported =
+                    hasFace && (!isSuw || BiometricUtils.isFaceSupportedInSuw(getContext()));
+
+            // Assume the flow is "Screen Lock" + "Face" + "Fingerprint"
+            if (mController != null) {
+                return BiometricUtils.getCombinedScreenLockOptions(getContext(),
+                        mController.getTitle(secureType), hasFingerprint, isFaceSupported);
+            } else {
+                Log.e(TAG, "ChooseLockGenericController is null!");
+                return getResources().getString(R.string.error_title);
             }
         }
 
@@ -813,6 +834,19 @@ public class ChooseLockGeneric extends SettingsActivity {
                 intent = getLockPatternIntent();
             }
             return intent;
+        }
+
+        @Override
+        public void onStop() {
+            super.onStop();
+            // hasCredential checks to see if user chooses a password for screen lock. If the
+            // screen lock is None or Swipe, we do not want to call getActivity().finish().
+            // Otherwise, bugs would be caused. (e.g. b/278488549, b/278530059)
+            final boolean hasCredential = mLockPatternUtils.isSecure(mUserId);
+            if (!getActivity().isChangingConfigurations()
+                    && !mWaitingForConfirmation && hasCredential) {
+                getActivity().finish();
+            }
         }
 
         @Override

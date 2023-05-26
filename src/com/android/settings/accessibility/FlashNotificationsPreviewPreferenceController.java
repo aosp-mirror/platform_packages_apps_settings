@@ -19,8 +19,6 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.FlashNotificationsUtil.ACTION_FLASH_NOTIFICATION_START_PREVIEW;
 import static com.android.settings.accessibility.FlashNotificationsUtil.EXTRA_FLASH_NOTIFICATION_PREVIEW_TYPE;
-import static com.android.settings.accessibility.FlashNotificationsUtil.SETTING_KEY_CAMERA_FLASH_NOTIFICATION;
-import static com.android.settings.accessibility.FlashNotificationsUtil.SETTING_KEY_SCREEN_FLASH_NOTIFICATION;
 import static com.android.settings.accessibility.FlashNotificationsUtil.TYPE_SHORT_PREVIEW;
 
 import android.content.ContentResolver;
@@ -57,7 +55,7 @@ public class FlashNotificationsPreviewPreferenceController extends
             new Handler(Looper.getMainLooper())) {
         @Override
         public void onChange(boolean selfChange, @Nullable Uri uri) {
-            onSettingChanged();
+            updateState(mPreference);
         }
     };
 
@@ -75,7 +73,7 @@ public class FlashNotificationsPreviewPreferenceController extends
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-        onSettingChanged();
+        updateState(mPreference);
     }
 
     @Override
@@ -95,20 +93,23 @@ public class FlashNotificationsPreviewPreferenceController extends
             @NonNull Lifecycle.Event event) {
         if (event == Lifecycle.Event.ON_RESUME) {
             mContentResolver.registerContentObserver(
-                    Settings.System.getUriFor(SETTING_KEY_CAMERA_FLASH_NOTIFICATION),
+                    Settings.System.getUriFor(Settings.System.CAMERA_FLASH_NOTIFICATION),
                     /* notifyForDescendants= */ false, mContentObserver);
             mContentResolver.registerContentObserver(
-                    Settings.System.getUriFor(SETTING_KEY_SCREEN_FLASH_NOTIFICATION),
+                    Settings.System.getUriFor(Settings.System.SCREEN_FLASH_NOTIFICATION),
                     /* notifyForDescendants= */ false, mContentObserver);
         } else if (event == Lifecycle.Event.ON_PAUSE) {
             mContentResolver.unregisterContentObserver(mContentObserver);
         }
     }
 
-    private void onSettingChanged() {
-        if (mPreference == null) return;
-
-        mPreference.setEnabled(FlashNotificationsUtil.getFlashNotificationsState(mContext)
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (preference == null) {
+            return;
+        }
+        preference.setEnabled(FlashNotificationsUtil.getFlashNotificationsState(mContext)
                 != FlashNotificationsUtil.State.OFF);
     }
 }

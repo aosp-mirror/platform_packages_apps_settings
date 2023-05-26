@@ -67,7 +67,7 @@ public class OneHandedEnablePreferenceControllerTest {
         OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, true);
 
         assertThat(mController.getSummary())
-                .isEqualTo(mContext.getText(R.string.on));
+                .isEqualTo(mContext.getText(R.string.switch_on_text));
     }
 
     @Test
@@ -75,6 +75,6 @@ public class OneHandedEnablePreferenceControllerTest {
         OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, false);
 
         assertThat(mController.getSummary())
-                .isEqualTo(mContext.getText(R.string.off));
+                .isEqualTo(mContext.getText(R.string.switch_off_text));
     }
 }

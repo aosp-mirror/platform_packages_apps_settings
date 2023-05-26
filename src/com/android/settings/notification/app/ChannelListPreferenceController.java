@@ -236,13 +236,16 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
             @NonNull PreferenceGroup groupPrefGroup) {
         int initialPrefCount = groupPrefGroup.getPreferenceCount();
         List<Preference> finalOrderedPrefs = new ArrayList<>();
+        Preference appDefinedGroupToggle;
         if (group.getId() == null) {
             // For the 'null' group, set the "Other" title.
             groupPrefGroup.setTitle(R.string.notification_channels_other);
+            appDefinedGroupToggle = null;
         } else {
             // For an app-defined group, set their name and create a row to toggle 'isBlocked'.
             groupPrefGroup.setTitle(group.getName());
-            finalOrderedPrefs.add(addOrUpdateGroupToggle(groupPrefGroup, group));
+            appDefinedGroupToggle = addOrUpdateGroupToggle(groupPrefGroup, group);
+            finalOrderedPrefs.add(appDefinedGroupToggle);
         }
         // Here "empty" means having no channel rows; the group toggle is ignored for this purpose.
         boolean initiallyEmpty = groupPrefGroup.getPreferenceCount() == finalOrderedPrefs.size();
@@ -268,13 +271,25 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
         // remove all preferences and re-add them all.
         // This is required to ensure proper ordering of inserted channels, and it simplifies logic
         // at the cost of computation in the rare case that the list is changing.
+        // As an optimization, keep the app-defined-group toggle. That way it doesn't "flicker"
+        // (due to remove+add) when toggling the group.
         int numFinalGroups = finalOrderedPrefs.size();
         boolean hasInsertions = !initiallyEmpty && initialPrefCount != numFinalGroups;
         boolean requiresRemoval = postAddPrefCount != numFinalGroups;
+        boolean keepGroupToggle =
+                appDefinedGroupToggle != null && groupPrefGroup.getPreferenceCount() > 0
+                        && groupPrefGroup.getPreference(0) == appDefinedGroupToggle
+                        && finalOrderedPrefs.get(0) == appDefinedGroupToggle;
         if (hasInsertions || requiresRemoval) {
-            groupPrefGroup.removeAll();
-            for (Preference preference : finalOrderedPrefs) {
-                groupPrefGroup.addPreference(preference);
+            if (keepGroupToggle) {
+                while (groupPrefGroup.getPreferenceCount() > 1) {
+                    groupPrefGroup.removePreference(groupPrefGroup.getPreference(1));
+                }
+            } else {
+                groupPrefGroup.removeAll();
+            }
+            for (int i = (keepGroupToggle ? 1 : 0); i < finalOrderedPrefs.size(); i++) {
+                groupPrefGroup.addPreference(finalOrderedPrefs.get(i));
             }
         }
     }
@@ -322,7 +337,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
         if (channel.getImportance() > IMPORTANCE_LOW) {
             channelPref.setIcon(getAlertingIcon());
         } else {
-            channelPref.setIcon(R.drawable.empty_icon);
+            channelPref.setIcon(mContext.getDrawable(R.drawable.empty_icon));
         }
         channelPref.setIconSize(PrimarySwitchPreference.ICON_SIZE_SMALL);
         channelPref.setTitle(channel.getName());

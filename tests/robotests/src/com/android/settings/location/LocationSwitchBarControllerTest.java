@@ -23,6 +23,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.widget.Switch;
 
@@ -109,13 +110,25 @@ public class LocationSwitchBarControllerTest {
     }
 
     @Test
+    public void onLocationModeChanged_Restricted_shouldDisableSwitchByAdmin() {
+        final RestrictedLockUtils.EnforcedAdmin admin = RestrictedLockUtils.EnforcedAdmin
+                .createDefaultEnforcedAdminWithRestriction(UserManager.DISALLOW_SHARE_LOCATION);
+        doReturn(null).when(mEnabler).getShareLocationEnforcedAdmin(anyInt());
+        doReturn(false).when(mEnabler).hasShareLocationRestriction(anyInt());
+
+        mController.onLocationModeChanged(Settings.Secure.LOCATION_MODE_BATTERY_SAVING, true);
+
+        verify(mSwitchBar).setDisabledByAdmin(admin);
+    }
+
+    @Test
     public void onLocationModeChanged_Restricted_shouldDisableSwitch() {
         doReturn(null).when(mEnabler).getShareLocationEnforcedAdmin(anyInt());
         doReturn(true).when(mEnabler).hasShareLocationRestriction(anyInt());
 
-        mController.onLocationModeChanged(Settings.Secure.LOCATION_MODE_BATTERY_SAVING, true);
+        mController.onLocationModeChanged(Settings.Secure.LOCATION_MODE_BATTERY_SAVING, false);
 
-        verify(mSwitchBar).setEnabled(false);
+        verify(mSwitchBar).setEnabled(true);
     }
 
     @Test

@@ -79,7 +79,7 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (KEY_AIRPLANE_MODE.equals(preference.getKey())
+        if (KEY_AIRPLANE_MODE.equals(preference.getKey()) && isAvailable()
                 && mAirplaneModeEnabler.isInEcmMode()) {
             // In ECM mode launch ECM app dialog
             if (mFragment != null) {
@@ -141,12 +141,14 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
 
     @Override
     public void onDestroy() {
-        mAirplaneModeEnabler.close();
+        if (isAvailable()) {
+            mAirplaneModeEnabler.close();
+        }
     }
 
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE_EXIT_ECM) {
+        if (requestCode == REQUEST_CODE_EXIT_ECM && isAvailable()) {
             final boolean isChoiceYes = (resultCode == Activity.RESULT_OK);
             // Set Airplane mode based on the return value and checkbox state
             mAirplaneModeEnabler.setAirplaneModeInECM(isChoiceYes,
@@ -156,7 +158,7 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
 
     @Override
     public boolean isChecked() {
-        return mAirplaneModeEnabler.isAirplaneModeOn();
+        return isAvailable() && mAirplaneModeEnabler.isAirplaneModeOn();
     }
 
     @Override
@@ -164,7 +166,9 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
         if (isChecked() == isChecked) {
             return false;
         }
-        mAirplaneModeEnabler.setAirplaneMode(isChecked);
+        if (isAvailable()) {
+            mAirplaneModeEnabler.setAirplaneMode(isChecked);
+        }
         return true;
     }
 

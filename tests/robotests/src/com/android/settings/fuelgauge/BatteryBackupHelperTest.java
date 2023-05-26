@@ -28,6 +28,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.inOrder;
@@ -45,6 +46,7 @@ import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.content.pm.ParceledListSlice;
 import android.content.pm.UserInfo;
+import android.os.Build;
 import android.os.IDeviceIdleController;
 import android.os.RemoteException;
 import android.os.UserHandle;
@@ -53,6 +55,7 @@ import android.util.ArraySet;
 
 import com.android.settings.TestUtils;
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
 import org.junit.After;
@@ -70,6 +73,8 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -84,7 +89,10 @@ public final class BatteryBackupHelperTest {
     private static final int UID1 = 1;
 
     private Context mContext;
+    private PrintWriter mPrintWriter;
+    private StringWriter mStringWriter;
     private BatteryBackupHelper mBatteryBackupHelper;
+    private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
     @Mock
     private PackageManager mPackageManager;
@@ -108,7 +116,11 @@ public final class BatteryBackupHelperTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
+        mPowerUsageFeatureProvider =
+                FakeFeatureFactory.setupForTest().powerUsageFeatureProvider;
         mContext = spy(RuntimeEnvironment.application);
+        mStringWriter = new StringWriter();
+        mPrintWriter = new PrintWriter(mStringWriter);
         doReturn(mContext).when(mContext).getApplicationContext();
         doReturn(mAppOpsManager).when(mContext).getSystemService(AppOpsManager.class);
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
@@ -126,22 +138,15 @@ public final class BatteryBackupHelperTest {
     @After
     public void resetShadows() {
         ShadowUserHandle.reset();
+        BatteryBackupHelper.getSharedPreferences(mContext).edit().clear().apply();
     }
 
     @Test
-    public void performBackup_nullPowerList_notBackupPowerList() throws Exception {
-        doReturn(null).when(mDeviceController).getFullPowerWhitelist();
-        mBatteryBackupHelper.performBackup(null, mBackupDataOutput, null);
-
-        verify(mBackupDataOutput, never()).writeEntityHeader(anyString(), anyInt());
-    }
-
-    @Test
-    public void performBackup_emptyPowerList_notBackupPowerList() throws Exception {
+    public void performBackup_emptyPowerList_backupPowerList() throws Exception {
         doReturn(new String[0]).when(mDeviceController).getFullPowerWhitelist();
         mBatteryBackupHelper.performBackup(null, mBackupDataOutput, null);
 
-        verify(mBackupDataOutput, never()).writeEntityHeader(anyString(), anyInt());
+        verify(mBackupDataOutput, atLeastOnce()).writeEntityHeader(anyString(), anyInt());
     }
 
     @Test
@@ -150,34 +155,6 @@ public final class BatteryBackupHelperTest {
         mBatteryBackupHelper.performBackup(null, mBackupDataOutput, null);
 
         verify(mBackupDataOutput, never()).writeEntityHeader(anyString(), anyInt());
-    }
-
-    @Test
-    public void performBackup_oneFullPowerListElement_backupFullPowerListData()
-            throws Exception {
-        final String[] fullPowerList = {"com.android.package"};
-        doReturn(fullPowerList).when(mDeviceController).getFullPowerWhitelist();
-
-        mBatteryBackupHelper.performBackup(null, mBackupDataOutput, null);
-
-        final byte[] expectedBytes = fullPowerList[0].getBytes();
-        verify(mBackupDataOutput).writeEntityHeader(
-                BatteryBackupHelper.KEY_FULL_POWER_LIST, expectedBytes.length);
-        verify(mBackupDataOutput).writeEntityData(expectedBytes, expectedBytes.length);
-    }
-
-    @Test
-    public void performBackup_backupFullPowerListData() throws Exception {
-        final String[] fullPowerList = {"com.android.package1", "com.android.package2"};
-        doReturn(fullPowerList).when(mDeviceController).getFullPowerWhitelist();
-
-        mBatteryBackupHelper.performBackup(null, mBackupDataOutput, null);
-
-        final String expectedResult = fullPowerList[0] + DELIMITER + fullPowerList[1];
-        final byte[] expectedBytes = expectedResult.getBytes();
-        verify(mBackupDataOutput).writeEntityHeader(
-                BatteryBackupHelper.KEY_FULL_POWER_LIST, expectedBytes.length);
-        verify(mBackupDataOutput).writeEntityData(expectedBytes, expectedBytes.length);
     }
 
     @Test
@@ -216,6 +193,8 @@ public final class BatteryBackupHelperTest {
         // 2 for UNRESTRICTED mode and 1 for RESTRICTED mode.
         final String expectedResult = PACKAGE_NAME1 + ":2," + PACKAGE_NAME2 + ":1,";
         verifyBackupData(expectedResult);
+        verifyDumpHistoryData("com.android.testing.1\taction:BACKUP\tevent:mode: 2");
+        verifyDumpHistoryData("com.android.testing.2\taction:BACKUP\tevent:mode: 1");
     }
 
     @Test
@@ -232,6 +211,7 @@ public final class BatteryBackupHelperTest {
         // "com.android.testing.2" for RESTRICTED mode.
         final String expectedResult = PACKAGE_NAME2 + ":1,";
         verifyBackupData(expectedResult);
+        verifyDumpHistoryData("com.android.testing.2\taction:BACKUP\tevent:mode: 1");
     }
 
     @Test
@@ -248,6 +228,7 @@ public final class BatteryBackupHelperTest {
         // "com.android.testing.2" for RESTRICTED mode.
         final String expectedResult = PACKAGE_NAME2 + ":1,";
         verifyBackupData(expectedResult);
+        verifyDumpHistoryData("com.android.testing.2\taction:BACKUP\tevent:mode: 1");
     }
 
     @Test
@@ -272,7 +253,7 @@ public final class BatteryBackupHelperTest {
 
     @Test
     public void restoreEntity_incorrectDataKey_notReadBackupData() throws Exception {
-        final String incorrectDataKey = BatteryBackupHelper.KEY_FULL_POWER_LIST;
+        final String incorrectDataKey = "incorrect_data_key";
         mockBackupData(30 /*dataSize*/, incorrectDataKey);
 
         mBatteryBackupHelper.restoreEntity(mBackupDataInputStream);
@@ -300,6 +281,20 @@ public final class BatteryBackupHelperTest {
         mBatteryBackupHelper.restoreEntity(mBackupDataInputStream);
 
         assertThat(TestUtils.getScheduledLevel(mContext)).isNotEqualTo(invalidScheduledLevel);
+    }
+
+    @Test
+    public void restoreEntity_verifyConfigurationOneTimeOnly() {
+        final int invalidScheduledLevel = 5;
+        TestUtils.setScheduledLevel(mContext, invalidScheduledLevel);
+        mBatteryBackupHelper.restoreEntity(mBackupDataInputStream);
+        TestUtils.setScheduledLevel(mContext, invalidScheduledLevel);
+
+        // Invoke the restoreEntity() method 2nd time.
+        mBatteryBackupHelper.restoreEntity(mBackupDataInputStream);
+
+        assertThat(TestUtils.getScheduledLevel(mContext))
+                .isEqualTo(invalidScheduledLevel);
     }
 
     @Test
@@ -347,6 +342,26 @@ public final class BatteryBackupHelperTest {
                 .setAppUsageState(MODE_RESTRICTED, Action.RESTORE);
     }
 
+    @Test
+    public void performBackup_backupDeviceBuildInformation() throws Exception {
+        final String[] fullPowerList = {"com.android.package"};
+        doReturn(fullPowerList).when(mDeviceController).getFullPowerWhitelist();
+        doReturn(null).when(mPowerUsageFeatureProvider).getBuildMetadata1(mContext);
+        final String deviceMetadata = "device.metadata.test_device";
+        doReturn(deviceMetadata).when(mPowerUsageFeatureProvider).getBuildMetadata2(mContext);
+
+        mBatteryBackupHelper.performBackup(null, mBackupDataOutput, null);
+
+        final InOrder inOrder = inOrder(mBackupDataOutput);
+        verifyBackupData(inOrder, BatteryBackupHelper.KEY_BUILD_BRAND, Build.BRAND);
+        verifyBackupData(inOrder, BatteryBackupHelper.KEY_BUILD_PRODUCT, Build.PRODUCT);
+        verifyBackupData(inOrder, BatteryBackupHelper.KEY_BUILD_MANUFACTURER, Build.MANUFACTURER);
+        verifyBackupData(inOrder, BatteryBackupHelper.KEY_BUILD_FINGERPRINT, Build.FINGERPRINT);
+        inOrder.verify(mBackupDataOutput, never()).writeEntityHeader(
+                eq(BatteryBackupHelper.KEY_BUILD_METADATA_1), anyInt());
+        verifyBackupData(inOrder, BatteryBackupHelper.KEY_BUILD_METADATA_2, deviceMetadata);
+    }
+
     private void mockUid(int uid, String packageName) throws Exception {
         doReturn(uid).when(mPackageManager)
                 .getPackageUid(packageName, PackageManager.GET_META_DATA);
@@ -355,6 +370,11 @@ public final class BatteryBackupHelperTest {
     private void mockBackupData(int dataSize, String dataKey) {
         doReturn(dataSize).when(mBackupDataInputStream).size();
         doReturn(dataKey).when(mBackupDataInputStream).getKey();
+    }
+
+    private void verifyDumpHistoryData(String expectedResult) {
+        BatteryBackupHelper.dumpHistoricalData(mContext, mPrintWriter);
+        assertThat(mStringWriter.toString().contains(expectedResult)).isTrue();
     }
 
     private void verifyBackupData(String expectedResult) throws Exception {
@@ -411,6 +431,13 @@ public final class BatteryBackupHelperTest {
                         applicationInfo2.packageName);
         mBatteryBackupHelper.mTestApplicationInfoList =
                 new ArraySet<>(Arrays.asList(applicationInfo1, applicationInfo2, applicationInfo3));
+    }
+
+    private void verifyBackupData(
+            InOrder inOrder, String dataKey, String dataContent) throws Exception {
+        final byte[] expectedBytes = dataContent.getBytes();
+        inOrder.verify(mBackupDataOutput).writeEntityHeader(dataKey, expectedBytes.length);
+        inOrder.verify(mBackupDataOutput).writeEntityData(expectedBytes, expectedBytes.length);
     }
 
     @Implements(UserHandle.class)

@@ -249,12 +249,18 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         super.onProcessArguments(arguments);
     }
 
-    private void addAlwaysOnSetting(PreferenceCategory generalCategory) {
-        if (!DeviceConfig.getBoolean(
+    private boolean isAlwaysOnSettingEnabled() {
+        final boolean defaultValue = getContext().getResources().getBoolean(
+                com.android.internal.R.bool.config_magnification_always_on_enabled);
+
+        return DeviceConfig.getBoolean(
                 DeviceConfig.NAMESPACE_WINDOW_MANAGER,
                 "AlwaysOnMagnifier__enable_always_on_magnifier",
-                false
-        )) {
+                defaultValue
+        );
+    }
+    private void addAlwaysOnSetting(PreferenceCategory generalCategory) {
+        if (!isAlwaysOnSettingEnabled()) {
             return;
         }
 
@@ -431,7 +437,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     @Override
     protected CharSequence getShortcutTypeSummary(Context context) {
         if (!mShortcutPreference.isChecked()) {
-            return context.getText(R.string.off);
+            return context.getText(R.string.switch_off_text);
         }
 
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(context,
@@ -752,6 +758,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final int uerShortcutType = getUserShortcutTypeFromSettings(context);
         return (uerShortcutType != AccessibilityUtil.UserShortcutType.EMPTY)
                 ? context.getText(R.string.accessibility_summary_shortcut_enabled)
-                : context.getText(R.string.off);
+                : context.getText(R.string.accessibility_summary_shortcut_disabled);
     }
 }

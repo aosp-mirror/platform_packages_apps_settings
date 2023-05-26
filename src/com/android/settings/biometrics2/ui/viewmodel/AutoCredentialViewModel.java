@@ -19,9 +19,7 @@ package com.android.settings.biometrics2.ui.viewmodel;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
 
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_CHALLENGE;
-import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_SENSOR_ID;
 import static com.android.settings.biometrics2.ui.model.CredentialModel.INVALID_GK_PW_HANDLE;
-import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE;
 
 import android.annotation.IntDef;
@@ -268,7 +266,6 @@ public class AutoCredentialViewModel extends AndroidViewModel {
         mChallengeGenerator.setCallback((sensorId, userId, challenge) -> {
             try {
                 final byte[] newToken = requestGatekeeperHat(gkPwHandle, challenge, userId);
-                mCredentialModel.setSensorId(sensorId);
                 mCredentialModel.setChallenge(challenge);
                 mCredentialModel.setToken(newToken);
             } catch (IllegalStateException e) {
@@ -352,26 +349,6 @@ public class AutoCredentialViewModel extends AndroidViewModel {
             throw new GatekeeperCredentialNotMatchException("Unable to request Gatekeeper HAT");
         }
         return response.getGatekeeperHAT();
-    }
-
-    /**
-     * Get Credential intent extra which will be used to launch next activity.
-     */
-    @NonNull
-    public Bundle createCredentialIntentExtra() {
-        final Bundle retBundle = new Bundle();
-        if (mCredentialModel.isValidGkPwHandle()) {
-            retBundle.putLong(EXTRA_KEY_GK_PW_HANDLE, mCredentialModel.getGkPwHandle());
-        }
-        if (mCredentialModel.isValidToken()) {
-            retBundle.putByteArray(EXTRA_KEY_CHALLENGE_TOKEN, mCredentialModel.getToken());
-        }
-        if (mCredentialModel.isValidUserId()) {
-            retBundle.putInt(Intent.EXTRA_USER_ID, mCredentialModel.getUserId());
-        }
-        retBundle.putLong(EXTRA_KEY_CHALLENGE, mCredentialModel.getChallenge());
-        retBundle.putInt(EXTRA_KEY_SENSOR_ID, mCredentialModel.getSensorId());
-        return retBundle;
     }
 
     /**

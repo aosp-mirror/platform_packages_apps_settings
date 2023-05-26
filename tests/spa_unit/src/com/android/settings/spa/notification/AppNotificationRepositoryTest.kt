@@ -251,7 +251,7 @@ class AppNotificationRepositoryTest {
 
         val summary = repository.getNotificationSummary(APP)
 
-        assertThat(summary).isEqualTo(context.getString(R.string.off))
+        assertThat(summary).isEqualTo(context.getString(R.string.notifications_disabled))
     }
 
     @Test
@@ -273,7 +273,7 @@ class AppNotificationRepositoryTest {
 
         val summary = repository.getNotificationSummary(APP)
 
-        assertThat(summary).isEqualTo(context.getString(R.string.off))
+        assertThat(summary).isEqualTo(context.getString(R.string.notifications_disabled))
     }
 
     @Test

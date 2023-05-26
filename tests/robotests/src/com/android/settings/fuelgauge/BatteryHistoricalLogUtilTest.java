@@ -49,7 +49,7 @@ public final class BatteryHistoricalLogUtilTest {
     @Test
     public void printHistoricalLog_withDefaultLogs() {
         BatteryHistoricalLogUtil.printBatteryOptimizeHistoricalLog(mContext, mTestPrintWriter);
-        assertThat(mTestStringWriter.toString()).contains("No past logs");
+        assertThat(mTestStringWriter.toString()).contains("nothing to dump");
     }
 
     @Test
@@ -57,17 +57,18 @@ public final class BatteryHistoricalLogUtilTest {
         BatteryHistoricalLogUtil.writeLog(mContext, Action.APPLY, "pkg1", "logs");
         BatteryHistoricalLogUtil.printBatteryOptimizeHistoricalLog(mContext, mTestPrintWriter);
 
-        assertThat(mTestStringWriter.toString()).contains("pkg1\tAction:APPLY\tEvent:logs");
+        assertThat(mTestStringWriter.toString()).contains(
+                "pkg1\taction:APPLY\tevent:logs");
     }
 
     @Test
     public void writeLog_multipleLogs_withCorrectCounts() {
         for (int i = 0; i < BatteryHistoricalLogUtil.MAX_ENTRIES; i++) {
-            BatteryHistoricalLogUtil.writeLog(mContext, Action.MANUAL, "pkg" + i, "logs");
+            BatteryHistoricalLogUtil.writeLog(mContext, Action.LEAVE, "pkg" + i, "logs");
         }
         BatteryHistoricalLogUtil.printBatteryOptimizeHistoricalLog(mContext, mTestPrintWriter);
 
-        assertThat(mTestStringWriter.toString().split("MANUAL").length).isEqualTo(41);
+        assertThat(mTestStringWriter.toString().split("LEAVE").length).isEqualTo(41);
     }
 
     @Test

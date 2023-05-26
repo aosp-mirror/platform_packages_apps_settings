@@ -655,6 +655,10 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
             try {
                 mWifiManager.addOrUpdatePasspointConfiguration(passpointConfig);
                 mAnyNetworkSavedSuccess = true;
+
+                // (force) enable MAC randomization on new credentials
+                mWifiManager.setMacRandomizationSettingPasspointEnabled(
+                        passpointConfig.getHomeSp().getFqdn(), true);
             } catch (IllegalArgumentException e) {
                 mResultCodeArrayList.set(mUiToRequestedList.get(index).mIndex,
                         RESULT_NETWORK_ADD_ERROR);
@@ -669,6 +673,10 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
             final WifiConfiguration wifiConfiguration =
                     mUiToRequestedList.get(index).mWifiNetworkSuggestion.getWifiConfiguration();
             wifiConfiguration.SSID = addQuotationIfNeeded(wifiConfiguration.SSID);
+
+            // (force) enable MAC randomization on new credentials
+            wifiConfiguration.setMacRandomizationSetting(
+                    WifiConfiguration.RANDOMIZATION_PERSISTENT);
             mWifiManager.save(wifiConfiguration, mSaveListener);
         }
     }

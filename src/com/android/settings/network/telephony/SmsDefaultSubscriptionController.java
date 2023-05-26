@@ -17,7 +17,6 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
-import android.telecom.PhoneAccountHandle;
 import android.telephony.SubscriptionManager;
 
 import androidx.lifecycle.LifecycleOwner;
@@ -28,7 +27,6 @@ import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 public class SmsDefaultSubscriptionController extends DefaultSubscriptionController {
 
     private final boolean mIsAskEverytimeSupported;
-    private SubscriptionInfoEntity mSubscriptionInfoEntity;
 
     public SmsDefaultSubscriptionController(Context context, String preferenceKey,
             Lifecycle lifecycle, LifecycleOwner lifecycleOwner) {
@@ -38,16 +36,12 @@ public class SmsDefaultSubscriptionController extends DefaultSubscriptionControl
     }
 
     @Override
-    protected SubscriptionInfoEntity getDefaultSubscriptionInfo() {
-        return mSubscriptionInfoEntity;
-    }
-
-    @Override
     protected int getDefaultSubscriptionId() {
+        int defaultSmsSubId = SubscriptionManager.getDefaultSmsSubscriptionId();
         for (SubscriptionInfoEntity subInfo : mSubInfoEntityList) {
-            if (subInfo.isActiveSubscriptionId && subInfo.isDefaultSmsSubscription) {
-                mSubscriptionInfoEntity = subInfo;
-                return Integer.parseInt(subInfo.subId);
+            int subId = subInfo.getSubId();
+            if (subInfo.isActiveSubscriptionId && subId == defaultSmsSubId) {
+                return subId;
             }
         }
         return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
@@ -61,12 +55,6 @@ public class SmsDefaultSubscriptionController extends DefaultSubscriptionControl
     @Override
     protected boolean isAskEverytimeSupported() {
         return mIsAskEverytimeSupported;
-    }
-
-    @Override
-    public PhoneAccountHandle getDefaultCallingAccountHandle() {
-        // Not supporting calling account override by VoIP
-        return null;
     }
 
     @Override

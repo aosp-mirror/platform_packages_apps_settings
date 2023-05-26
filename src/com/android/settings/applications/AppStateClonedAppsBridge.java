@@ -58,6 +58,11 @@ public class AppStateClonedAppsBridge extends AppStateBaseBridge{
             mCloneProfileApps = mContext.getPackageManager()
                     .getInstalledPackagesAsUser(GET_ACTIVITIES,
                             mCloneUserId).stream().map(x -> x.packageName).toList();
+        } else if (!mCloneProfileApps.isEmpty()) {
+            // In case we remove clone profile (mCloneUserId becomes -1), the bridge state should
+            // reflect the same by setting cloneProfileApps as empty, without building the entire
+            // page.
+            mCloneProfileApps = new ArrayList<>();
         }
 
         final List<ApplicationsState.AppEntry> allApps = mAppSession.getAllApps();

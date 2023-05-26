@@ -81,18 +81,6 @@ public final class BootBroadcastReceiverTest {
     }
 
     @Test
-    public void onReceive_withMyPackageReplacedIntent_refreshesJob() {
-        mReceiver.onReceive(mContext, new Intent(Intent.ACTION_MY_PACKAGE_REPLACED));
-        assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNotNull();
-    }
-
-    @Test
-    public void onReceive_withMyPackageUnsuspendIntent_refreshesJob() {
-        mReceiver.onReceive(mContext, new Intent(Intent.ACTION_MY_PACKAGE_UNSUSPENDED));
-        assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNotNull();
-    }
-
-    @Test
     public void onReceive_withBootCompletedIntent_refreshesJob() {
         mReceiver.onReceive(mContext, new Intent(Intent.ACTION_BOOT_COMPLETED));
         assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNotNull();

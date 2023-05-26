@@ -20,6 +20,7 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -106,6 +107,10 @@ public class SimStatusDialogFragment extends InstrumentedDialogFragment {
             .sorted().toArray();
 
     public void setText(int viewId, CharSequence text) {
+        if (!isAdded()) {
+            Log.d(TAG, "Fragment not attached yet.");
+            return;
+        }
         setText(viewId, text, true);
     }
 

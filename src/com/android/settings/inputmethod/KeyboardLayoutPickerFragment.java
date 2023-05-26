@@ -19,10 +19,10 @@ package com.android.settings.inputmethod;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
+import android.hardware.input.InputManager;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-
 
 public class KeyboardLayoutPickerFragment extends DashboardFragment {
 
@@ -45,10 +45,10 @@ public class KeyboardLayoutPickerFragment extends DashboardFragment {
 
         final InputDeviceIdentifier inputDeviceIdentifier = getActivity().getIntent().
                 getParcelableExtra(EXTRA_INPUT_DEVICE_IDENTIFIER);
-        if (inputDeviceIdentifier == null) {
-            getActivity().finish();
+        final InputManager im = context.getSystemService(InputManager.class);
+        if (NewKeyboardSettingsUtils.getInputDevice(im, inputDeviceIdentifier) == null) {
+            return;
         }
-
         use(KeyboardLayoutPickerController.class).initialize(this /*parent*/,
                 inputDeviceIdentifier);
     }

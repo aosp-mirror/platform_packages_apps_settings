@@ -60,7 +60,7 @@ public class AutoclickPreferenceControllerTest {
                 Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, OFF);
 
         assertThat(mController.getSummary())
-                .isEqualTo(mContext.getText(R.string.off));
+                .isEqualTo(mContext.getText(R.string.accessibility_feature_state_off));
     }
 
     @Test

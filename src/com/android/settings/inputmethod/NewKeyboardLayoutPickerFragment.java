@@ -27,13 +27,11 @@ import com.android.settings.R;
 
 public class NewKeyboardLayoutPickerFragment extends Fragment {
 
-    private ViewGroup mFragmentView;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
 
-        mFragmentView = (ViewGroup) inflater.inflate(
+        ViewGroup fragmentView = (ViewGroup) inflater.inflate(
                 R.layout.keyboard_layout_picker, container, false);
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
@@ -47,6 +45,6 @@ public class NewKeyboardLayoutPickerFragment extends Fragment {
                 .replace(R.id.keyboard_layouts, fragment)
                 .commit();
 
-        return mFragmentView;
+        return fragmentView;
     }
 }

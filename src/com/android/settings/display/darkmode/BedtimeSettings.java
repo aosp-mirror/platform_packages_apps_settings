@@ -37,7 +37,7 @@ public final class BedtimeSettings {
         mContext = context;
         mPackageManager = context.getPackageManager();
         mWellbeingPackage = mContext.getResources().getString(
-                com.android.internal.R.string.config_defaultWellbeingPackage);
+                com.android.internal.R.string.config_systemWellbeing);
     }
 
     /**

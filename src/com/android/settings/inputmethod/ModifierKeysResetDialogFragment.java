@@ -18,25 +18,19 @@ package com.android.settings.inputmethod;
 
 import static android.view.WindowManager.LayoutParams.TYPE_SYSTEM_DIALOG;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.hardware.input.InputManager;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
 import androidx.fragment.app.DialogFragment;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settingslib.Utils;
 
 public class ModifierKeysResetDialogFragment extends DialogFragment {
     private static final String MODIFIER_KEYS_CAPS_LOCK = "modifier_keys_caps_lock";
@@ -44,67 +38,41 @@ public class ModifierKeysResetDialogFragment extends DialogFragment {
     private static final String MODIFIER_KEYS_META = "modifier_keys_meta";
     private static final String MODIFIER_KEYS_ALT = "modifier_keys_alt";
 
-    private PreferenceScreen mScreen;
-    private InputManager mIm;
     private String[] mKeys = {
             MODIFIER_KEYS_CAPS_LOCK,
             MODIFIER_KEYS_CTRL,
             MODIFIER_KEYS_META,
             MODIFIER_KEYS_ALT};
 
-    public ModifierKeysResetDialogFragment() {
-    }
-
-    public ModifierKeysResetDialogFragment(PreferenceScreen screen, InputManager inputManager) {
-        mScreen = screen;
-        mIm = inputManager;
-    }
+    public ModifierKeysResetDialogFragment() {}
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
-        Context mContext = getActivity();
+
+        Activity activity = getActivity();
+        InputManager inputManager = activity.getSystemService(InputManager.class);
         View dialoglayout =
-                LayoutInflater.from(mContext).inflate(R.layout.modifier_key_reset_dialog, null);
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
+                LayoutInflater.from(activity).inflate(R.layout.modifier_key_reset_dialog, null);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
         dialogBuilder.setView(dialoglayout);
         AlertDialog modifierKeyResetDialog = dialogBuilder.create();
 
         Button restoreButton = dialoglayout.findViewById(R.id.modifier_key_reset_restore_button);
         restoreButton.setOnClickListener(v -> {
-            resetToDefault();
-            modifierKeyResetDialog.dismiss();
+            inputManager.clearAllModifierKeyRemappings();
+            dismiss();
+            activity.recreate();
         });
 
         Button cancelButton = dialoglayout.findViewById(R.id.modifier_key_reset_cancel_button);
         cancelButton.setOnClickListener(v -> {
-            modifierKeyResetDialog.dismiss();
+            dismiss();
         });
 
         final Window window = modifierKeyResetDialog.getWindow();
         window.setType(TYPE_SYSTEM_DIALOG);
 
         return modifierKeyResetDialog;
-    }
-
-    private void resetToDefault() {
-        Context mContext = getActivity();
-        for (int i = 0; i < mKeys.length; i++) {
-            Preference preference = mScreen.findPreference(mKeys[i]);
-            Spannable title = new SpannableString(
-                    mContext.getString(R.string.modifier_keys_default_summary));
-            title.setSpan(
-                    new ForegroundColorSpan(getColorOfTextColorSecondary()),
-                    0, title.length(), 0);
-            preference.setSummary(title);
-        }
-
-        if (mIm != null) {
-            mIm.clearAllModifierKeyRemappings();
-        }
-    }
-
-    private int getColorOfTextColorSecondary() {
-        return Utils.getColorAttrDefaultColor(getActivity(), android.R.attr.textColorSecondary);
     }
 }

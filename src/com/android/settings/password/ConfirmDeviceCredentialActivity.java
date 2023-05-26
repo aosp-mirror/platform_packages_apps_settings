@@ -24,11 +24,9 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROF
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PATTERN;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PIN;
 
-import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
-
 import android.app.Activity;
 import android.app.KeyguardManager;
-import android.app.StartLockscreenValidationRequest;
+import android.app.RemoteLockscreenValidationSession;
 import android.app.admin.DevicePolicyManager;
 import android.app.trust.TrustManager;
 import android.content.ComponentName;
@@ -63,13 +61,6 @@ import java.util.concurrent.Executor;
 public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     public static final String TAG = ConfirmDeviceCredentialActivity.class.getSimpleName();
 
-    /**
-     * If the intent is sent from {@link com.android.systemui.keyguard.WorkLockActivityController}
-     * then check for device policy management flags.
-     */
-    public static final String EXTRA_FROM_WORK_LOCK_ACTIVITY_CONTROLLER =
-            "from_work_lock_activity_controller";
-
     // The normal flow that apps go through
     private static final int CREDENTIAL_NORMAL = 1;
     // Unlocks the managed profile when the primary profile is unlocked
@@ -80,15 +71,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     public static class InternalActivity extends ConfirmDeviceCredentialActivity {
     }
 
-    public static Intent createIntent(CharSequence title, CharSequence details) {
-        Intent intent = new Intent();
-        intent.setClassName(SETTINGS_PACKAGE_NAME,
-                ConfirmDeviceCredentialActivity.class.getName());
-        intent.putExtra(KeyguardManager.EXTRA_TITLE, title);
-        intent.putExtra(KeyguardManager.EXTRA_DESCRIPTION, details);
-        return intent;
-    }
-
     private BiometricFragment mBiometricFragment;
     private DevicePolicyManager mDevicePolicyManager;
     private LockPatternUtils mLockPatternUtils;
@@ -97,6 +79,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private Context mContext;
     private boolean mCheckDevicePolicyManager;
+    private boolean mTaskOverlay;
 
     private String mTitle;
     private CharSequence mDetails;
@@ -186,6 +169,8 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         boolean frp = KeyguardManager.ACTION_CONFIRM_FRP_CREDENTIAL.equals(intent.getAction());
         boolean remoteValidation =
                 KeyguardManager.ACTION_CONFIRM_REMOTE_DEVICE_CREDENTIAL.equals(intent.getAction());
+        mTaskOverlay = isInternalActivity()
+                && intent.getBooleanExtra(KeyguardManager.EXTRA_FORCE_TASK_OVERLAY, false);
 
         mUserId = UserHandle.myUserId();
         if (isInternalActivity()) {
@@ -235,10 +220,10 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     .setUserId(LockPatternUtils.USER_FRP)
                     .show();
         } else if (remoteValidation) {
-            StartLockscreenValidationRequest startLockScreenValidationRequest =
+            RemoteLockscreenValidationSession remoteLockscreenValidationSession =
                     intent.getParcelableExtra(
-                            KeyguardManager.EXTRA_START_LOCKSCREEN_VALIDATION_REQUEST,
-                            StartLockscreenValidationRequest.class);
+                            KeyguardManager.EXTRA_REMOTE_LOCKSCREEN_VALIDATION_SESSION,
+                            RemoteLockscreenValidationSession.class);
             ComponentName remoteLockscreenValidationServiceComponent =
                     intent.getParcelableExtra(Intent.EXTRA_COMPONENT_NAME, ComponentName.class);
 
@@ -247,15 +232,18 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     new ChooseLockSettingsHelper.Builder(this);
             launchedCDC = builder
                     .setRemoteLockscreenValidation(true)
-                    .setStartLockscreenValidationRequest(startLockScreenValidationRequest)
+                    .setRemoteLockscreenValidationSession(remoteLockscreenValidationSession)
                     .setRemoteLockscreenValidationServiceComponent(
                             remoteLockscreenValidationServiceComponent)
+                    .setRequestGatekeeperPasswordHandle(true)
+                    .setReturnCredentials(true) // returns only password handle.
                     .setHeader(mTitle) // Show the title in the header location
                     .setDescription(mDetails)
                     .setCheckboxLabel(checkboxLabel)
                     .setAlternateButton(alternateButton)
                     .setExternal(true)
                     .show();
+            return;
         } else if (isEffectiveUserManagedProfile && isInternalActivity()) {
             mCredentialMode = CREDENTIAL_MANAGED;
             if (isBiometricAllowed(effectiveUserId, mUserId)) {
@@ -417,6 +405,12 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
      */
     private void showConfirmCredentials() {
         boolean launched = false;
+        ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(this)
+                .setHeader(mTitle)
+                .setDescription(mDetails)
+                .setExternal(true)
+                .setUserId(mUserId)
+                .setTaskOverlay(mTaskOverlay);
         // The only difference between CREDENTIAL_MANAGED and CREDENTIAL_NORMAL is that for
         // CREDENTIAL_MANAGED, we launch the real confirm credential activity with an explicit
         // but fake challenge value (0L). This will result in ConfirmLockPassword calling
@@ -429,22 +423,9 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         // LockPatternChecker and LockPatternUtils. verifyPassword should be the only API to use,
         // which optionally accepts a challenge.
         if (mCredentialMode == CREDENTIAL_MANAGED) {
-            final ChooseLockSettingsHelper.Builder builder =
-                    new ChooseLockSettingsHelper.Builder(this);
-            launched = builder.setHeader(mTitle)
-                    .setDescription(mDetails)
-                    .setExternal(true)
-                    .setUserId(mUserId)
-                    .setForceVerifyPath(true)
-                    .show();
+            launched = builder.setForceVerifyPath(true).show();
         } else if (mCredentialMode == CREDENTIAL_NORMAL) {
-            final ChooseLockSettingsHelper.Builder builder =
-                    new ChooseLockSettingsHelper.Builder(this);
-            launched = builder.setHeader(mTitle) // Show the title string in the header area
-                    .setDescription(mDetails)
-                    .setExternal(true)
-                    .setUserId(mUserId)
-                    .show();
+            launched = builder.show();
         }
         if (!launched) {
             Log.d(TAG, "No pin/pattern/pass set");

@@ -16,8 +16,6 @@
 
 package com.android.settings.applications;
 
-import static android.content.pm.PackageManager.GET_ACTIVITIES;
-
 import static com.android.settings.Utils.PROPERTY_CLONED_APPS_ENABLED;
 
 import android.content.Context;
@@ -56,7 +54,9 @@ public class ClonedAppsPreferenceController extends BasePreferenceController
     @Override
     public int getAvailabilityStatus() {
         return DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_APP_CLONING,
-                PROPERTY_CLONED_APPS_ENABLED, false) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+                PROPERTY_CLONED_APPS_ENABLED, true)
+                && mContext.getResources().getBoolean(R.bool.config_cloned_apps_page_enabled)
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -73,6 +73,9 @@ public class ClonedAppsPreferenceController extends BasePreferenceController
     }
 
     private void updatePreferenceSummary() {
+        if (!isAvailable()) {
+            return;
+        }
         new AsyncTask<Void, Void, Integer[]>() {
 
             @Override
@@ -82,8 +85,8 @@ public class ClonedAppsPreferenceController extends BasePreferenceController
                         mContext.getResources().getStringArray(
                                 com.android.internal.R.array.cloneable_apps));
                 List<String> primaryUserApps = mContext.getPackageManager()
-                        .getInstalledPackagesAsUser(GET_ACTIVITIES,
-                                UserHandle.myUserId()).stream().map(x -> x.packageName).toList();
+                        .getInstalledPackagesAsUser(/* flags*/ 0, UserHandle.myUserId()).stream()
+                        .map(x -> x.packageName).toList();
                 // Count number of installed apps in system user.
                 int availableAppsCount = (int) cloneableApps.stream()
                         .filter(x -> primaryUserApps.contains(x)).count();
@@ -94,8 +97,8 @@ public class ClonedAppsPreferenceController extends BasePreferenceController
                 }
                 // Get all apps in clone profile if present.
                 List<String> cloneProfileApps = mContext.getPackageManager()
-                        .getInstalledPackagesAsUser(GET_ACTIVITIES,
-                                cloneUserId).stream().map(x -> x.packageName).toList();
+                        .getInstalledPackagesAsUser(/* flags*/ 0, cloneUserId).stream()
+                        .map(x -> x.packageName).toList();
                 // Count number of allowlisted app present in clone profile.
                 int clonedAppsCount = (int) cloneableApps.stream()
                         .filter(x -> cloneProfileApps.contains(x)).count();

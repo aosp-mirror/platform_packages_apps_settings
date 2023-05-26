@@ -291,7 +291,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
         BatteryHistoricalLogUtil.writeLog(
                 getContext().getApplicationContext(),
-                Action.MANUAL,
+                Action.LEAVE,
                 BatteryHistoricalLogUtil.getPackageNameWithUserId(
                         mBatteryOptimizeUtils.getPackageName(), UserHandle.myUserId()),
                 mLogStringBuilder.toString());
@@ -343,7 +343,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final String stateString;
         final String footerString;
 
-        if (!mBatteryOptimizeUtils.isValidPackageName()) {
+        if (mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()) {
             // Present optimized only string when the package name is invalid.
             stateString = context.getString(R.string.manager_battery_usage_optimized_only);
             footerString = context.getString(

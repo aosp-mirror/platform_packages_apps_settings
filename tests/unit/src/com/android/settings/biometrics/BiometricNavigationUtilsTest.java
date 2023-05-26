@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -33,6 +34,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -55,6 +57,8 @@ public class BiometricNavigationUtilsTest {
 
     @Mock
     private UserManager mUserManager;
+    @Mock
+    private ActivityResultLauncher<Intent> mLauncher;
     private Context mContext;
     private BiometricNavigationUtils mBiometricNavigationUtils;
 
@@ -72,7 +76,7 @@ public class BiometricNavigationUtilsTest {
         when(mUserManager.isQuietModeEnabled(any())).thenReturn(true);
 
         mBiometricNavigationUtils.launchBiometricSettings(mContext, SETTINGS_CLASS_NAME,
-                Bundle.EMPTY);
+                Bundle.EMPTY, null);
 
         assertQuietModeDialogLaunchRequested();
     }
@@ -82,7 +86,17 @@ public class BiometricNavigationUtilsTest {
         when(mUserManager.isQuietModeEnabled(any())).thenReturn(true);
 
         assertThat(mBiometricNavigationUtils.launchBiometricSettings(
-                mContext, SETTINGS_CLASS_NAME, Bundle.EMPTY)).isFalse();
+                mContext, SETTINGS_CLASS_NAME, Bundle.EMPTY, null)).isFalse();
+    }
+
+    @Test
+    public void launchBiometricSettings_quietMode_withLauncher_notThroughLauncher() {
+        when(mUserManager.isQuietModeEnabled(any())).thenReturn(true);
+
+        mBiometricNavigationUtils.launchBiometricSettings(mContext, SETTINGS_CLASS_NAME,
+                Bundle.EMPTY, mLauncher);
+
+        verify(mLauncher, never()).launch(any(Intent.class));
     }
 
     @Test
@@ -90,7 +104,7 @@ public class BiometricNavigationUtilsTest {
         when(mUserManager.isQuietModeEnabled(any())).thenReturn(false);
 
         mBiometricNavigationUtils.launchBiometricSettings(
-                mContext, SETTINGS_CLASS_NAME, Bundle.EMPTY);
+                mContext, SETTINGS_CLASS_NAME, Bundle.EMPTY, null);
 
         assertSettingsPageLaunchRequested(false /* shouldContainExtras */);
     }
@@ -100,7 +114,7 @@ public class BiometricNavigationUtilsTest {
         when(mUserManager.isQuietModeEnabled(any())).thenReturn(false);
 
         assertThat(mBiometricNavigationUtils.launchBiometricSettings(
-                mContext, SETTINGS_CLASS_NAME, Bundle.EMPTY)).isTrue();
+                mContext, SETTINGS_CLASS_NAME, Bundle.EMPTY, null)).isTrue();
     }
 
     @Test
@@ -108,9 +122,21 @@ public class BiometricNavigationUtilsTest {
         when(mUserManager.isQuietModeEnabled(any())).thenReturn(false);
 
         final Bundle extras = createNotEmptyExtras();
-        mBiometricNavigationUtils.launchBiometricSettings(mContext, SETTINGS_CLASS_NAME, extras);
+        mBiometricNavigationUtils.launchBiometricSettings(
+                mContext, SETTINGS_CLASS_NAME, extras, null);
 
         assertSettingsPageLaunchRequested(true /* shouldContainExtras */);
+    }
+
+    @Test
+    public void launchBiometricSettings_noQuietMode_withLauncher_launchesThroughLauncher() {
+        when(mUserManager.isQuietModeEnabled(any())).thenReturn(false);
+
+        final Bundle extras = createNotEmptyExtras();
+        mBiometricNavigationUtils.launchBiometricSettings(
+                mContext, SETTINGS_CLASS_NAME, extras, mLauncher);
+
+        verify(mLauncher).launch(any(Intent.class));
     }
 
     @Test
@@ -118,7 +144,7 @@ public class BiometricNavigationUtilsTest {
         when(mUserManager.isQuietModeEnabled(any())).thenReturn(false);
 
         assertThat(mBiometricNavigationUtils.launchBiometricSettings(
-                mContext, SETTINGS_CLASS_NAME, createNotEmptyExtras())).isTrue();
+                mContext, SETTINGS_CLASS_NAME, createNotEmptyExtras(), null)).isTrue();
     }
 
     @Test

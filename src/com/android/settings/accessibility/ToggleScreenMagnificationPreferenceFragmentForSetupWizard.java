@@ -39,20 +39,23 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
-        final String title = getContext().getString(
-                R.string.accessibility_screen_magnification_title);
-        final String description = getContext().getString(
-                R.string.accessibility_screen_magnification_intro_text);
-        final Drawable icon = getContext().getDrawable(R.drawable.ic_accessibility_visibility);
-        AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
-                description, icon);
+        if (view instanceof GlifPreferenceLayout) {
+            final GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
+            final String title = getContext().getString(
+                    R.string.accessibility_screen_magnification_title);
+            final String description = getContext().getString(
+                    R.string.accessibility_screen_magnification_intro_text);
+            final Drawable icon = getContext().getDrawable(R.drawable.ic_accessibility_visibility);
+            AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
+                    description, icon);
 
-        final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
-        AccessibilitySetupWizardUtils.setPrimaryButton(getContext(), mixin, R.string.done, () -> {
-            setResult(RESULT_CANCELED);
-            finish();
-        });
+            final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
+            AccessibilitySetupWizardUtils.setPrimaryButton(getContext(), mixin, R.string.done,
+                    () -> {
+                        setResult(RESULT_CANCELED);
+                        finish();
+                    });
+        }
 
         hidePreferenceSettingComponents();
     }
@@ -78,8 +81,11 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
     @Override
     public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
             Bundle savedInstanceState) {
-        final GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
-        return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
+        if (parent instanceof GlifPreferenceLayout) {
+            final GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
+            return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
+        }
+        return super.onCreateRecyclerView(inflater, parent, savedInstanceState);
     }
 
     @Override

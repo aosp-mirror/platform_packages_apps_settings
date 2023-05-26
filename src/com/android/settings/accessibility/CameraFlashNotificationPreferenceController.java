@@ -18,14 +18,13 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
-import static com.android.settings.accessibility.FlashNotificationsUtil.SETTING_KEY_CAMERA_FLASH_NOTIFICATION;
 
 import android.content.Context;
 import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
-
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * Controller for Camera flash notification.
@@ -45,13 +44,15 @@ public class CameraFlashNotificationPreferenceController extends TogglePreferenc
     @Override
     public boolean isChecked() {
         return Settings.System.getInt(mContext.getContentResolver(),
-                SETTING_KEY_CAMERA_FLASH_NOTIFICATION, OFF) != OFF;
+                Settings.System.CAMERA_FLASH_NOTIFICATION, OFF) != OFF;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
+        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider().changed(
+                getMetricsCategory(), getPreferenceKey(), isChecked ? 1 : 0);
         return Settings.System.putInt(mContext.getContentResolver(),
-                SETTING_KEY_CAMERA_FLASH_NOTIFICATION, (isChecked ? ON : OFF));
+                Settings.System.CAMERA_FLASH_NOTIFICATION, (isChecked ? ON : OFF));
     }
 
     @Override

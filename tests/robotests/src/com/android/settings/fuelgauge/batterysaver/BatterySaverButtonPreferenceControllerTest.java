@@ -18,19 +18,14 @@ package com.android.settings.fuelgauge.batterysaver;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.PowerManager;
-import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
 
 import androidx.preference.PreferenceScreen;
@@ -77,24 +72,6 @@ public class BatterySaverButtonPreferenceControllerTest {
     }
 
     @Test
-    public void onSwitchChanged_isCheckedButNotAcked_preferenceIsUnchecked() {
-        setLowPowerWarningAcked(/* acked= */ 0);
-
-        mController.onSwitchChanged(/* switchView= */ null, /* isChecked= */ true);
-
-        assertThat(mPreference.isChecked()).isFalse();
-    }
-
-    @Test
-    public void onSwitchChanged_isCheckedAndAcked_setPowerSaveMode() {
-        setLowPowerWarningAcked(/* acked= */ 1);
-
-        mController.onSwitchChanged(/* switchView= */ null, /* isChecked= */ true);
-
-        verify(mPowerManager).setPowerSaveModeEnabled(true);
-    }
-
-    @Test
     public void updateState_lowPowerOn_preferenceIsChecked() {
         when(mPowerManager.isPowerSaveMode()).thenReturn(true);
 
@@ -113,11 +90,10 @@ public class BatterySaverButtonPreferenceControllerTest {
     }
 
     @Test
-    public void setChecked_on_showWarningMessage() {
+    public void setChecked_on_setPowerSaveMode() {
         mController.setChecked(true);
 
-        verify(mContext).sendBroadcast(any(Intent.class));
-        verify(mPowerManager, never()).setPowerSaveModeEnabled(anyBoolean());
+        verify(mPowerManager).setPowerSaveModeEnabled(true);
     }
 
     @Test
@@ -144,13 +120,5 @@ public class BatterySaverButtonPreferenceControllerTest {
     @Test
     public void isPublicSlice_returnsTrue() {
         assertThat(mController.isPublicSlice()).isTrue();
-    }
-
-    // 0 means not acked, 1 means acked.
-    private void setLowPowerWarningAcked(int acked) {
-        Settings.Secure.putInt(
-                mContext.getContentResolver(),
-                Settings.Secure.LOW_POWER_WARNING_ACKNOWLEDGED,
-                acked);
     }
 }

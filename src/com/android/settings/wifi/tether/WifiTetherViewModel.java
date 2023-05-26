@@ -1,0 +1,172 @@
+/*
+ * Copyright (C) 2023 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.settings.wifi.tether;
+
+import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_OPEN;
+import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA2_PSK;
+import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE;
+import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION;
+
+import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ;
+import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ_5GHZ;
+import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_5GHZ;
+import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_6GHZ;
+
+import android.app.Application;
+import android.net.wifi.SoftApConfiguration;
+
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+
+import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.wifi.repository.WifiHotspotRepository;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Wi-Fi Hotspot ViewModel
+ */
+public class WifiTetherViewModel extends AndroidViewModel {
+    private static final String TAG = "WifiTetherViewModel";
+
+    static Map<Integer, Integer> sSecuritySummaryResMap = new HashMap<>();
+
+    static {
+        sSecuritySummaryResMap.put(SECURITY_TYPE_WPA3_SAE, R.string.wifi_security_sae);
+        sSecuritySummaryResMap.put(SECURITY_TYPE_WPA3_SAE_TRANSITION,
+                R.string.wifi_security_psk_sae);
+        sSecuritySummaryResMap.put(SECURITY_TYPE_WPA2_PSK, R.string.wifi_security_wpa2);
+        sSecuritySummaryResMap.put(SECURITY_TYPE_OPEN, R.string.wifi_security_none);
+    }
+
+    static Map<Integer, Integer> sSpeedSummaryResMap = new HashMap<>();
+
+    static {
+        sSpeedSummaryResMap.put(SPEED_2GHZ, R.string.wifi_hotspot_speed_summary_2g);
+        sSpeedSummaryResMap.put(SPEED_5GHZ, R.string.wifi_hotspot_speed_summary_5g);
+        sSpeedSummaryResMap.put(SPEED_6GHZ, R.string.wifi_hotspot_speed_summary_6g);
+        sSpeedSummaryResMap.put(SPEED_2GHZ_5GHZ, R.string.wifi_hotspot_speed_summary_2g_and_5g);
+    }
+
+    protected final WifiHotspotRepository mWifiHotspotRepository;
+    protected MutableLiveData<Integer> mSecuritySummary;
+    protected MutableLiveData<Integer> mSpeedSummary;
+
+    protected final Observer<Integer> mSecurityTypeObserver = st -> onSecurityTypeChanged(st);
+    protected final Observer<Integer> mSpeedTypeObserver = st -> onSpeedTypeChanged(st);
+
+    public WifiTetherViewModel(@NotNull Application application) {
+        super(application);
+        mWifiHotspotRepository = FeatureFactory.getFactory(application).getWifiFeatureProvider()
+                .getWifiHotspotRepository();
+    }
+
+    @Override
+    protected void onCleared() {
+        if (mSecuritySummary != null) {
+            mWifiHotspotRepository.getSecurityType().removeObserver(mSecurityTypeObserver);
+        }
+        if (mSpeedSummary != null) {
+            mWifiHotspotRepository.getSpeedType().removeObserver(mSpeedTypeObserver);
+        }
+    }
+
+    /**
+     * Return whether Wi-Fi Hotspot Speed Feature is available or not.
+     *
+     * @return {@code true} if Wi-Fi Hotspot Speed Feature is available
+     */
+    public boolean isSpeedFeatureAvailable() {
+        return mWifiHotspotRepository.isSpeedFeatureAvailable();
+    }
+
+    /**
+     * Gets the Wi-Fi tethered AP Configuration.
+     *
+     * @return AP details in {@link SoftApConfiguration}
+     */
+    public SoftApConfiguration getSoftApConfiguration() {
+        return mWifiHotspotRepository.getSoftApConfiguration();
+    }
+
+    /**
+     * Sets the tethered Wi-Fi AP Configuration.
+     *
+     * @param config A valid SoftApConfiguration specifying the configuration of the SAP.
+     */
+    public void setSoftApConfiguration(SoftApConfiguration config) {
+        mWifiHotspotRepository.setSoftApConfiguration(config);
+    }
+
+    /**
+     * Refresh data from the SoftApConfiguration.
+     */
+    public void refresh() {
+        mWifiHotspotRepository.refresh();
+    }
+
+    /**
+     * Gets SecuritySummary LiveData
+     */
+    public LiveData<Integer> getSecuritySummary() {
+        if (mSecuritySummary == null) {
+            mSecuritySummary = new MutableLiveData<>();
+            mWifiHotspotRepository.getSecurityType().observeForever(mSecurityTypeObserver);
+        }
+        return mSecuritySummary;
+    }
+
+    protected void onSecurityTypeChanged(int securityType) {
+        int resId = R.string.summary_placeholder;
+        if (sSecuritySummaryResMap.containsKey(securityType)) {
+            resId = sSecuritySummaryResMap.get(securityType);
+        }
+        mSecuritySummary.setValue(resId);
+    }
+
+    /**
+     * Gets SpeedSummary LiveData
+     */
+    public LiveData<Integer> getSpeedSummary() {
+        if (mSpeedSummary == null) {
+            mSpeedSummary = new MutableLiveData<>();
+            mWifiHotspotRepository.getSpeedType().observeForever(mSpeedTypeObserver);
+        }
+        return mSpeedSummary;
+    }
+
+    protected void onSpeedTypeChanged(Integer speedType) {
+        int resId = R.string.summary_placeholder;
+        if (sSpeedSummaryResMap.containsKey(speedType)) {
+            resId = sSpeedSummaryResMap.get(speedType);
+        }
+        mSpeedSummary.setValue(resId);
+    }
+
+    /**
+     * Gets Restarting LiveData
+     */
+    public LiveData<Boolean> getRestarting() {
+        return mWifiHotspotRepository.getRestarting();
+    }
+}

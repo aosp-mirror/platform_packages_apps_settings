@@ -19,18 +19,15 @@ package com.android.settings.regionalpreferences;
 import static org.junit.Assert.assertEquals;
 
 import android.app.settings.SettingsEnums;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Looper;
 
 import androidx.test.annotation.UiThreadTest;
-import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class NumberingPreferencesFragmentTest {
-    private Context mApplicationContext;
     private NumberingPreferencesFragment mFragment;
 
     @Before
@@ -39,7 +36,6 @@ public class NumberingPreferencesFragmentTest {
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }
-        mApplicationContext = ApplicationProvider.getApplicationContext();
         mFragment = new NumberingPreferencesFragment();
     }
 

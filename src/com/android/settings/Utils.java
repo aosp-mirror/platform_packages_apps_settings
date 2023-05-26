@@ -134,6 +134,8 @@ public final class Utils extends com.android.settingslib.Utils {
 
     public static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
 
+    public static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
+
     public static final String OS_PKG = "os";
 
     /**
@@ -986,17 +988,6 @@ public final class Utils extends com.android.settingslib.Utils {
         return false;
     }
 
-    /**
-     * Return the resource id to represent the install status for an app
-     */
-    @StringRes
-    public static int getInstallationStatus(ApplicationInfo info) {
-        if ((info.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {
-            return R.string.not_installed;
-        }
-        return info.enabled ? R.string.installed : R.string.disabled;
-    }
-
     private static boolean isVolumeValid(VolumeInfo volume) {
         return (volume != null) && (volume.getType() == VolumeInfo.TYPE_PRIVATE)
                 && volume.isMountedReadable();
@@ -1292,5 +1283,16 @@ public final class Utils extends com.android.settingslib.Utils {
         }
         return context.createContextAsUser(mainUser, 0).getSystemService(UserManager.class)
                .isUserForeground();
+    }
+
+    /**
+     * Returns if dreams are available to the current user.
+     */
+    public static boolean areDreamsAvailableToCurrentUser(Context context) {
+        final boolean dreamsSupported = context.getResources().getBoolean(
+                com.android.internal.R.bool.config_dreamsSupported);
+        final boolean dreamsOnlyEnabledForDockUser = context.getResources().getBoolean(
+                com.android.internal.R.bool.config_dreamsOnlyEnabledForDockUser);
+        return dreamsSupported && (!dreamsOnlyEnabledForDockUser || canCurrentUserDream(context));
     }
 }

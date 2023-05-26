@@ -32,6 +32,13 @@
         android:entries="@array/wifi_tether_security"
         android:entryValues="@array/wifi_tether_security_values"/>
 
+    <Preference
+        android:key="wifi_hotspot_security"
+        android:title="@string/wifi_security"
+        android:summary="@string/summary_placeholder"
+        android:fragment="com.android.settings.wifi.tether.WifiHotspotSecuritySettings"
+        settings:isPreferenceVisible="@bool/config_show_wifi_hotspot_speed"/>
+
     <com.android.settings.widget.ValidatedEditTextPreference
         android:key="wifi_tether_network_password"
         android:persistent="false"
@@ -45,4 +52,11 @@
     <SwitchPreference
         android:key="wifi_tether_maximize_compatibility"
         android:title="@string/wifi_hotspot_maximize_compatibility"/>
+
+    <Preference
+        android:key="wifi_hotspot_speed"
+        android:title="@string/wifi_hotspot_speed_title"
+        android:summary="@string/summary_placeholder"
+        android:fragment="com.android.settings.wifi.tether.WifiHotspotSpeedSettings"
+        settings:isPreferenceVisible="@bool/config_show_wifi_hotspot_speed"/>
 </PreferenceScreen>

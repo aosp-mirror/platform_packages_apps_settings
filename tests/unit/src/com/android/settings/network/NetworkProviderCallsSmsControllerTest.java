@@ -100,6 +100,8 @@ public class NetworkProviderCallsSmsControllerTest {
 
         private List<SubscriptionInfoEntity> mSubscriptionInfoEntity;
         private boolean mIsInService;
+        private int mDefaultVoiceSubscriptionId;
+        private int mDefaultSmsSubscriptionId;
 
         @Override
         protected List<SubscriptionInfoEntity> getSubscriptionInfoList() {
@@ -117,6 +119,24 @@ public class NetworkProviderCallsSmsControllerTest {
 
         public void setInService(boolean inService) {
             mIsInService = inService;
+        }
+
+        @Override
+        protected int getDefaultVoiceSubscriptionId() {
+            return mDefaultVoiceSubscriptionId;
+        }
+
+        @Override
+        protected int getDefaultSmsSubscriptionId() {
+            return mDefaultSmsSubscriptionId;
+        }
+
+        public void setDefaultVoiceSubscriptionId(int subscriptionId) {
+            mDefaultVoiceSubscriptionId = subscriptionId;
+        }
+
+        public void setDefaultSmsSubscriptionId(int subscriptionId) {
+            mDefaultSmsSubscriptionId = subscriptionId;
         }
     }
 
@@ -163,15 +183,13 @@ public class NetworkProviderCallsSmsControllerTest {
 
     private SubscriptionInfoEntity setupSubscriptionInfoEntity(String subId, int slotId,
             int carrierId, String displayName, String mcc, String mnc, String countryIso,
-            int cardId, boolean isValid, boolean isActive, boolean isAvailable,
-            boolean isDefaultCall, boolean isDefaultSms) {
+            int cardId, boolean isValid, boolean isActive, boolean isAvailable) {
         return new SubscriptionInfoEntity(subId, slotId, carrierId,
                 displayName, displayName, 0, mcc, mnc, countryIso, false, cardId,
                 TelephonyManager.DEFAULT_PORT_INDEX, false, null,
                 SubscriptionManager.SUBSCRIPTION_TYPE_LOCAL_SIM, displayName, false,
-                "1234567890", true, "default", false, isValid,
-                true, isActive, isAvailable, isDefaultCall, isDefaultSms, false, false,
-                false);
+                "1234567890", true, false, isValid,
+                true, isActive, isAvailable, false);
     }
 
     @Test
@@ -181,7 +199,7 @@ public class NetworkProviderCallsSmsControllerTest {
         mSubInfo1 = setupSubscriptionInfoEntity(INVALID_SUB_ID,
                 SubscriptionManager.INVALID_SIM_SLOT_INDEX, TelephonyManager.UNKNOWN_CARRIER_ID,
                 DISPLAY_NAME_1, SUB_MCC_1, SUB_MNC_1, SUB_COUNTRY_ISO_1,
-                TelephonyManager.UNINITIALIZED_CARD_ID, false, true, true, false, false);
+                TelephonyManager.UNINITIALIZED_CARD_ID, false, true, true);
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
         displayPreferenceWithLifecycle();
@@ -202,9 +220,9 @@ public class NetworkProviderCallsSmsControllerTest {
         mSubInfo1 = setupSubscriptionInfoEntity(INVALID_SUB_ID,
                 SubscriptionManager.INVALID_SIM_SLOT_INDEX, TelephonyManager.UNKNOWN_CARRIER_ID,
                 DISPLAY_NAME_1, SUB_MCC_1, SUB_MNC_1, SUB_COUNTRY_ISO_1,
-                TelephonyManager.UNINITIALIZED_CARD_ID, false, true, true, false, false);
+                TelephonyManager.UNINITIALIZED_CARD_ID, false, true, true);
         mSubInfo2 = setupSubscriptionInfoEntity(SUB_ID_2, 1, 1, DISPLAY_NAME_2, SUB_MCC_2,
-                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true, false, false);
+                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true);
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mSubscriptionInfoEntityList.add(mSubInfo2);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
@@ -226,7 +244,7 @@ public class NetworkProviderCallsSmsControllerTest {
     public void getSummary_oneSubscription_returnDisplayName() {
 
         mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true, false, false);
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true);
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
         displayPreferenceWithLifecycle();
@@ -239,9 +257,9 @@ public class NetworkProviderCallsSmsControllerTest {
     public void getSummary_allSubscriptionsHaveNoPreferredStatus_returnDisplayName() {
 
         mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true, false, false);
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true);
         mSubInfo2 = setupSubscriptionInfoEntity(SUB_ID_2, 1, 1, DISPLAY_NAME_2, SUB_MCC_2,
-                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true, false, false);
+                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true);
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mSubscriptionInfoEntityList.add(mSubInfo2);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
@@ -257,10 +275,13 @@ public class NetworkProviderCallsSmsControllerTest {
     @UiThreadTest
     public void getSummary_oneSubscriptionsIsCallPreferredTwoIsSmsPreferred_returnStatus() {
 
+        mController.setDefaultVoiceSubscriptionId(Integer.parseInt(SUB_ID_1));
+        mController.setDefaultSmsSubscriptionId(Integer.parseInt(SUB_ID_2));
+
         mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true, true, false);
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true);
         mSubInfo2 = setupSubscriptionInfoEntity(SUB_ID_2, 1, 1, DISPLAY_NAME_2, SUB_MCC_2,
-                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true, false, true);
+                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true);
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mSubscriptionInfoEntityList.add(mSubInfo2);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
@@ -284,10 +305,13 @@ public class NetworkProviderCallsSmsControllerTest {
     @UiThreadTest
     public void getSummary_oneSubscriptionsIsSmsPreferredTwoIsCallPreferred_returnStatus() {
 
+        mController.setDefaultSmsSubscriptionId(Integer.parseInt(SUB_ID_1));
+        mController.setDefaultVoiceSubscriptionId(Integer.parseInt(SUB_ID_2));
+
         mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true, false, true);
-        mSubInfo2 = setupSubscriptionInfoEntity(SUB_ID_2, 1, 1, DISPLAY_NAME_2, SUB_MCC_2,
-                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true, true, false);
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true);
+        mSubInfo2 = setupSubscriptionInfoEntity(SUB_ID_2, 2, 2, DISPLAY_NAME_2, SUB_MCC_2,
+                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true);
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mSubscriptionInfoEntityList.add(mSubInfo2);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
@@ -311,10 +335,13 @@ public class NetworkProviderCallsSmsControllerTest {
     @UiThreadTest
     public void getSummary_oneSubscriptionsIsSmsPreferredAndIsCallPreferred_returnStatus() {
 
+        mController.setDefaultSmsSubscriptionId(Integer.parseInt(SUB_ID_1));
+        mController.setDefaultVoiceSubscriptionId(Integer.parseInt(SUB_ID_1));
+
         mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true, true, true);
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true);
         mSubInfo2 = setupSubscriptionInfoEntity(SUB_ID_2, 1, 1, DISPLAY_NAME_2, SUB_MCC_2,
-                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true, false, false);
+                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true);
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mSubscriptionInfoEntityList.add(mSubInfo2);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);

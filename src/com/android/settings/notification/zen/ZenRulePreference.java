@@ -60,13 +60,15 @@ public class ZenRulePreference extends PrimarySwitchPreference {
 
     public ZenRulePreference(Context context,
             final Map.Entry<String, AutomaticZenRule> ruleEntry,
-            Fragment parent, MetricsFeatureProvider metricsProvider) {
+            Fragment parent, MetricsFeatureProvider metricsProvider,
+            ZenModeBackend backend) {
         super(context);
-        mBackend = ZenModeBackend.getInstance(context);
+        mBackend = backend;
         mContext = context;
         mRule = ruleEntry.getValue();
         mName = mRule.getName();
         mId = ruleEntry.getKey();
+        setKey(mId);
         mParent = parent;
         mPm = mContext.getPackageManager();
         mServiceListing = new ZenServiceListing(mContext, CONFIG);
@@ -163,7 +165,7 @@ public class ZenRulePreference extends PrimarySwitchPreference {
         }
 
         return (rule == null || !rule.isEnabled())
-                ? mContext.getResources().getString(R.string.off)
-                : mContext.getResources().getString(R.string.on);
+                ? mContext.getResources().getString(R.string.switch_off_text)
+                : mContext.getResources().getString(R.string.switch_on_text);
     }
 }

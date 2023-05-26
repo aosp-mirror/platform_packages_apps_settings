@@ -147,6 +147,7 @@ class AllAppListTest {
         val listModel = AllAppListModel(context) { stateOf(SUMMARY) }
         val disabledApp = ApplicationInfo().apply {
             packageName = PACKAGE_NAME
+            flags = ApplicationInfo.FLAG_INSTALLED
             enabled = false
         }
 
@@ -157,6 +158,23 @@ class AllAppListTest {
         }
 
         assertThat(summaryState.value).isEqualTo("$SUMMARY${System.lineSeparator()}Disabled")
+    }
+
+    @Test
+    fun allAppListModel_getSummaryWhenNotInstalled() {
+        val listModel = AllAppListModel(context) { stateOf(SUMMARY) }
+        val notInstalledApp = ApplicationInfo().apply {
+            packageName = PACKAGE_NAME
+        }
+
+        lateinit var summaryState: State<String>
+        composeTestRule.setContent {
+            summaryState =
+                listModel.getSummary(option = 0, record = AppRecordWithSize(app = notInstalledApp))
+        }
+
+        assertThat(summaryState.value)
+            .isEqualTo("$SUMMARY${System.lineSeparator()}Not installed for this user")
     }
 
     private fun getAppListInput(): AppListInput<AppRecordWithSize> {
@@ -192,6 +210,7 @@ class AllAppListTest {
         const val SUMMARY = "Summary"
         val APP = ApplicationInfo().apply {
             packageName = PACKAGE_NAME
+            flags = ApplicationInfo.FLAG_INSTALLED
         }
     }
 }

@@ -128,7 +128,8 @@ public class AssistGestureSettingsPreferenceController extends GesturePreference
         if (!mAssistOnly) {
             isEnabled = isEnabled || isSilenceGestureEnabled();
         }
-        return mContext.getText(isEnabled ? R.string.on : R.string.off);
+        return mContext.getText(
+                isEnabled ? R.string.gesture_setting_on : R.string.gesture_setting_off);
     }
 
     @Override

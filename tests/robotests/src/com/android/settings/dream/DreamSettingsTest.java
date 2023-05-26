@@ -21,21 +21,36 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.Bundle;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.WhenToDream;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
+@Config(shadows = ShadowFragment.class)
 @RunWith(RobolectricTestRunner.class)
 public class DreamSettingsTest {
 
@@ -46,7 +61,8 @@ public class DreamSettingsTest {
             DreamSettings.NEVER_DREAM
     );
 
-    private static final @WhenToDream int[] SETTINGS = {
+    @WhenToDream
+    private static final int[] SETTINGS = {
             DreamBackend.WHILE_CHARGING,
             DreamBackend.WHILE_DOCKED,
             DreamBackend.EITHER,
@@ -66,6 +82,15 @@ public class DreamSettingsTest {
             R.string.screensaver_settings_summary_either_long,
             R.string.screensaver_settings_summary_never
     };
+
+    @Mock
+    private Preference mDreamPickerPref;
+    @Mock
+    private Preference mComplicationsTogglePref;
+    @Mock
+    private DreamPickerController mDreamPickerController;
+    @Captor
+    private ArgumentCaptor<DreamPickerController.Callback> mDreamPickerCallbackCaptor;
 
     @Test
     public void getSettingFromPrefKey() {
@@ -129,5 +154,145 @@ public class DreamSettingsTest {
 
         assertThat(DreamSettings.getSummaryTextFromBackend(mockBackend, mockContext)).isEqualTo(
                 fakeName + " test dream is on");
+    }
+
+    @Test
+    public void complicationsToggle_addAndRemoveActiveDreamChangeCallback() {
+        MockitoAnnotations.initMocks(this);
+
+        final Context context = ApplicationProvider.getApplicationContext();
+        final DreamSettings dreamSettings = prepareDreamSettings(context);
+
+        dreamSettings.onAttach(context);
+        dreamSettings.onCreate(Bundle.EMPTY);
+        verify(mDreamPickerController).addCallback(mDreamPickerCallbackCaptor.capture());
+
+        dreamSettings.onDestroy();
+        verify(mDreamPickerController).removeCallback(mDreamPickerCallbackCaptor.getValue());
+    }
+
+    @Test
+    public void complicationsToggle_showWhenDreamSupportsComplications() {
+        MockitoAnnotations.initMocks(this);
+
+        final Context context = ApplicationProvider.getApplicationContext();
+        final DreamSettings dreamSettings = prepareDreamSettings(context);
+
+        // Active dream supports complications
+        final DreamBackend.DreamInfo activeDream = new DreamBackend.DreamInfo();
+        activeDream.supportsComplications = true;
+        when(mDreamPickerController.getActiveDreamInfo()).thenReturn(activeDream);
+
+        dreamSettings.onAttach(context);
+        dreamSettings.onCreate(Bundle.EMPTY);
+
+        // Verify dream complications toggle is visible
+        verify(mComplicationsTogglePref).setVisible(true);
+    }
+
+    @Test
+    public void complicationsToggle_hideWhenDreamDoesNotSupportComplications() {
+        MockitoAnnotations.initMocks(this);
+
+        final Context context = ApplicationProvider.getApplicationContext();
+        final DreamSettings dreamSettings = prepareDreamSettings(context);
+
+        // Active dream does not support complications
+        final DreamBackend.DreamInfo activeDream = new DreamBackend.DreamInfo();
+        activeDream.supportsComplications = false;
+        when(mDreamPickerController.getActiveDreamInfo()).thenReturn(activeDream);
+
+        dreamSettings.onAttach(context);
+        dreamSettings.onCreate(Bundle.EMPTY);
+
+        // Verify dream complications toggle is hidden
+        verify(mComplicationsTogglePref).setVisible(false);
+    }
+
+    @Test
+    public void complicationsToggle_showWhenSwitchToDreamSupportsComplications() {
+        MockitoAnnotations.initMocks(this);
+
+        final Context context = ApplicationProvider.getApplicationContext();
+        final DreamSettings dreamSettings = prepareDreamSettings(context);
+
+        // Active dream does not support complications
+        final DreamBackend.DreamInfo activeDream = new DreamBackend.DreamInfo();
+        activeDream.supportsComplications = false;
+        when(mDreamPickerController.getActiveDreamInfo()).thenReturn(activeDream);
+
+        dreamSettings.onAttach(context);
+        dreamSettings.onCreate(Bundle.EMPTY);
+
+        // Verify dream complications toggle is hidden
+        verify(mComplicationsTogglePref).setVisible(false);
+        verify(mDreamPickerController).addCallback(mDreamPickerCallbackCaptor.capture());
+
+        // Active dream changes to one that supports complications
+        activeDream.supportsComplications = true;
+        mDreamPickerCallbackCaptor.getValue().onActiveDreamChanged();
+
+        // Verify dream complications toggle is shown
+        verify(mComplicationsTogglePref).setVisible(true);
+    }
+
+    private DreamSettings prepareDreamSettings(Context context) {
+        final TestDreamSettings dreamSettings = new TestDreamSettings(context);
+        when(mDreamPickerController.getPreferenceKey()).thenReturn(DreamPickerController.PREF_KEY);
+        when(mDreamPickerPref.getExtras()).thenReturn(new Bundle());
+        when(mDreamPickerPref.getKey()).thenReturn(DreamPickerController.PREF_KEY);
+        when(mComplicationsTogglePref.getKey()).thenReturn(
+                DreamComplicationPreferenceController.PREF_KEY);
+
+        dreamSettings.addPreference(DreamPickerController.PREF_KEY, mDreamPickerPref);
+        dreamSettings.addPreference(DreamComplicationPreferenceController.PREF_KEY,
+                mComplicationsTogglePref);
+        dreamSettings.setDreamPickerController(mDreamPickerController);
+
+        return dreamSettings;
+    }
+
+    private static class TestDreamSettings extends DreamSettings {
+
+        private final Context mContext;
+        private final PreferenceManager mPreferenceManager;
+
+        private final HashMap<String, Preference> mPreferences = new HashMap<>();
+
+        TestDreamSettings(Context context) {
+            super();
+            mContext = context;
+            mPreferenceManager = new PreferenceManager(context);
+            mPreferenceManager.setPreferences(mPreferenceManager.createPreferenceScreen(context));
+        }
+
+        @Override
+        public int getPreferenceScreenResId() {
+            return R.xml.placeholder_prefs;
+        }
+
+        @Override
+        public PreferenceScreen getPreferenceScreen() {
+            return mPreferenceManager.getPreferenceScreen();
+        }
+
+        @Override
+        public PreferenceManager getPreferenceManager() {
+            return mPreferenceManager;
+        }
+
+        @Override
+        public Context getContext() {
+            return mContext;
+        }
+
+        @Override
+        public <T extends Preference> T findPreference(CharSequence key) {
+            return (T) mPreferences.get(key);
+        }
+
+        void addPreference(String key, Preference preference) {
+            mPreferences.put(key, preference);
+        }
     }
 }
