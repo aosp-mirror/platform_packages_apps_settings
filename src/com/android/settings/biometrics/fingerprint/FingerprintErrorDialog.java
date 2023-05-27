@@ -163,6 +163,8 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
         switch (errMsgId) {
             case FingerprintManager.FINGERPRINT_ERROR_TIMEOUT:
                 return R.string.security_settings_fingerprint_enroll_error_dialog_title;
+            case FingerprintManager.FINGERPRINT_ERROR_BAD_CALIBRATION:
+                return R.string.security_settings_fingerprint_bad_calibration_title;
             default:
                 return R.string
                         .security_settings_fingerprint_enroll_error_unable_to_process_dialog_title;
