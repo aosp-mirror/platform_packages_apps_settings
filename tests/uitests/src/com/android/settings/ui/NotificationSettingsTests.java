@@ -19,18 +19,19 @@ package com.android.settings.ui;
 import android.content.Intent;
 import android.os.RemoteException;
 import android.provider.Settings;
-import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.BySelector;
-import android.support.test.uiautomator.Direction;
-import android.support.test.uiautomator.UiDevice;
-import android.support.test.uiautomator.UiObject2;
-import android.support.test.uiautomator.Until;
 import android.system.helpers.ActivityHelper;
 import android.system.helpers.SettingsHelper;
 import android.test.InstrumentationTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.util.Log;
 import android.widget.ListView;
+
+import androidx.test.uiautomator.By;
+import androidx.test.uiautomator.BySelector;
+import androidx.test.uiautomator.Direction;
+import androidx.test.uiautomator.UiDevice;
+import androidx.test.uiautomator.UiObject2;
+import androidx.test.uiautomator.Until;
 
 /** Verifies that you can get to the notification app listing page from the apps & notifications
  * page */
