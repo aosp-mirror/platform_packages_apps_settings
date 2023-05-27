@@ -14,15 +14,19 @@
  * limitations under the License.
  */
 
-package com.android.settings.datausage
+package com.android.settings.applications.specialaccess
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.content.res.Resources
 import android.net.NetworkPolicyManager
 import android.net.NetworkPolicyManager.POLICY_ALLOW_METERED_BACKGROUND
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.datausage.DataSaverSummary.Companion.getUnrestrictedSummary
+import com.android.settings.R
+import com.android.settings.applications.specialaccess.DataSaverController.Companion.getUnrestrictedSummary
+import com.android.settings.core.BasePreferenceController.AVAILABLE
+import com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE
 import com.android.settingslib.spaprivileged.model.app.AppListRepository
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -41,20 +45,41 @@ import org.mockito.Mockito.`when` as whenever
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(AndroidJUnit4::class)
-class DataSaverSummaryTest {
+class DataSaverControllerTest {
     @get:Rule
     val mockito: MockitoRule = MockitoJUnit.rule()
 
     @Spy
     private val context: Context = ApplicationProvider.getApplicationContext()
 
+    @Spy
+    private val resources: Resources = context.resources
+
     @Mock
     private lateinit var networkPolicyManager: NetworkPolicyManager
+
+    @Mock
+    private lateinit var dataSaverController: DataSaverController
 
     @Before
     fun setUp() {
         whenever(context.applicationContext).thenReturn(context)
+        whenever(context.resources).thenReturn(resources)
         whenever(NetworkPolicyManager.from(context)).thenReturn(networkPolicyManager)
+
+        dataSaverController = DataSaverController(context, "key")
+    }
+
+    @Test
+    fun getAvailabilityStatus_whenConfigOn_available() {
+        whenever(resources.getBoolean(R.bool.config_show_data_saver)).thenReturn(true)
+        assertThat(dataSaverController.availabilityStatus).isEqualTo(AVAILABLE)
+    }
+
+    @Test
+    fun getAvailabilityStatus_whenConfigOff_unsupportedOnDevice() {
+        whenever(resources.getBoolean(R.bool.config_show_data_saver)).thenReturn(false)
+        assertThat(dataSaverController.availabilityStatus).isEqualTo(UNSUPPORTED_ON_DEVICE)
     }
 
     @Test
