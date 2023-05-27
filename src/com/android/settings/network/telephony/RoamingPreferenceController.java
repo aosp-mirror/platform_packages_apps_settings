@@ -21,28 +21,23 @@ import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
 import android.content.Context;
 import android.os.PersistableBundle;
-import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
-import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.network.GlobalSettingsChangeListener;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
-import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
-import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +47,6 @@ import java.util.List;
  */
 public class RoamingPreferenceController extends TelephonyTogglePreferenceController implements
         LifecycleObserver, MobileNetworkRepository.MobileNetworkCallback {
-
     private static final String TAG = "RoamingController";
     private static final String DIALOG_TAG = "MobileDataDialog";
 
@@ -62,15 +56,6 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
     protected MobileNetworkRepository mMobileNetworkRepository;
     protected LifecycleOwner mLifecycleOwner;
     private List<MobileNetworkInfoEntity> mMobileNetworkInfoEntityList = new ArrayList<>();
-
-    /**
-     * There're 2 listeners both activated at the same time.
-     * For project that access DATA_ROAMING, only first listener is functional.
-     * For project that access "DATA_ROAMING + subId", first listener will be stopped when receiving
-     * any onChange from second listener.
-     */
-    private GlobalSettingsChangeListener mListener;
-    private GlobalSettingsChangeListener mListenerForSubId;
 
     @VisibleForTesting
     FragmentManager mFragmentManager;
@@ -102,34 +87,11 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
     public void onStart() {
         mMobileNetworkRepository.addRegister(mLifecycleOwner, this, mSubId);
         mMobileNetworkRepository.updateEntity();
-        if (mListener == null) {
-            mListener = new GlobalSettingsChangeListener(mContext,
-                    Settings.Global.DATA_ROAMING) {
-                public void onChanged(String field) {
-                    updateState(mSwitchPreference);
-                }
-            };
-        }
-        stopMonitorSubIdSpecific();
-
-        if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            return;
-        }
-
-        mListenerForSubId = new GlobalSettingsChangeListener(mContext,
-                Settings.Global.DATA_ROAMING + mSubId) {
-            public void onChanged(String field) {
-                stopMonitor();
-                updateState(mSwitchPreference);
-            }
-        };
     }
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
         mMobileNetworkRepository.removeRegister(this);
-        stopMonitor();
-        stopMonitorSubIdSpecific();
     }
 
     @Override
@@ -219,20 +181,6 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
         dialogFragment.show(mFragmentManager, DIALOG_TAG);
     }
 
-    private void stopMonitor() {
-        if (mListener != null) {
-            mListener.close();
-            mListener = null;
-        }
-    }
-
-    private void stopMonitorSubIdSpecific() {
-        if (mListenerForSubId != null) {
-            mListenerForSubId.close();
-            mListenerForSubId = null;
-        }
-    }
-
     @VisibleForTesting
     public void setMobileNetworkInfoEntity(MobileNetworkInfoEntity mobileNetworkInfoEntity) {
         mMobileNetworkInfoEntity = mobileNetworkInfoEntity;
@@ -250,5 +198,14 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
                 return;
             }
         });
+    }
+
+    @Override
+    public void onDataRoamingChanged(int subId, boolean enabled) {
+        if (subId != mSubId) {
+            Log.d(TAG, "onDataRoamingChanged - wrong subId : " + subId + " / " + enabled);
+            return;
+        }
+        update();
     }
 }
