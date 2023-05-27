@@ -407,7 +407,7 @@
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Vos yeux doivent être ouverts"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Vous devez ouvrir les yeux pour déverrouiller le téléphone"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Toujours demander confirmation"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Toujours confirmer le déverrouillage par reco. faciale dans applis"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Toujours confirmer le déverrouillage par reconnaissance faciale dans les applis"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Supprimer l\'empreinte faciale"</string>
     <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"Configurer le déverrouillage par reconnaissance faciale"</string>
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Utilisez votre visage pour déverrouiller votre téléphone ou valider votre identité dans les applis (pour vous connecter ou approuver un achat, par exemple).\n\nÀ savoir :\nVous ne pouvez configurer qu\'un seul visage à la fois. Supprimez le visage actuel pour en ajouter un.\n\nVous pouvez déverrouiller votre téléphone sans le vouloir, en le regardant.\n\nUne autre personne peut le déverrouiller en le tenant devant votre visage.\n\nQuelqu\'un qui vous ressemble beaucoup, comme votre jumeau/jumelle, peut aussi déverrouiller votre téléphone."</string>
@@ -1493,7 +1493,7 @@
     <string name="sim_change_data_message" msgid="3046178883369645132">"Vous utilisez <xliff:g id="CARRIER2_0">%2$s</xliff:g> pour les données mobiles. Si vous basculez sur <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> ne sera plus utilisé pour les données mobiles."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Utiliser <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="sim_preferred_title" msgid="7182406911552216373">"Modifier carte SIM préférée ?"</string>
-    <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> est la seule carte SIM dans votre appareil. Voulez-vous utiliser cette carte SIM pour les données mobiles, les appels et les SMS ?"</string>
+    <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> est la seule SIM de votre appareil. Voulez-vous l\'utiliser pour les données mobiles, les appels et les SMS ?"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Code PIN de la carte SIM incorrect. Vous devez désormais contacter votre opérateur pour déverrouiller votre appareil."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
       <item quantity="one">Code PIN de la carte SIM erroné. Il vous reste <xliff:g id="NUMBER_1">%d</xliff:g> tentative.</item>
@@ -3528,7 +3528,7 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"Toujours l\'utiliser pour les appels"</string>
     <string name="select_sim_for_data" msgid="2642305487659432499">"Choisir profil SIM pour données mobiles"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Sélectionnez une carte SIM pour les SMS"</string>
-    <string name="data_switch_started" msgid="6292759843974720112">"Changement de carte SIM… Cela peut prendre jusqu\'à une minute."</string>
+    <string name="data_switch_started" msgid="6292759843974720112">"Changement de la SIM Internet… Cela peut prendre jusqu\'à une minute."</string>
     <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"Utiliser <xliff:g id="NEW_SIM">%1$s</xliff:g> pour les données mobiles ?"</string>
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Si vous basculez sur <xliff:g id="NEW_SIM">%1$s</xliff:g>, <xliff:g id="OLD_SIM">%2$s</xliff:g> ne sera plus utilisé pour les données mobiles."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Utiliser <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
@@ -4307,7 +4307,7 @@
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Demander le code avant de retirer l\'épingle"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Demander le mot de passe avant de retirer l\'épingle"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Verrouiller l\'appareil quand l\'épingle est retirée"</string>
-    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Confirmer la suppression du profil SIM"</string>
+    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Confirmer la suppression de la SIM"</string>
     <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Confirmer votre identité avant d\'effacer un profil SIM téléchargé"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Ce profil professionnel est géré par :"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Géré par <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
@@ -4590,7 +4590,7 @@
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Risque de décharger la batterie plus rapidement. L\'utilisation de la batterie en arrière-plan ne sera plus bloquée pour l\'application."</string>
     <string name="ignore_optimizations_off_desc" msgid="3324571675983286177">"Recommandé pour améliorer l\'autonomie de la batterie"</string>
     <string name="ignore_optimizations_title" msgid="3464172726254542889">"Autoriser <xliff:g id="APP">%s</xliff:g> à ignorer les optimisations de batterie ?"</string>
-    <string name="app_list_preference_none" msgid="1635406344616653756">"Aucune application"</string>
+    <string name="app_list_preference_none" msgid="1635406344616653756">"Aucun"</string>
     <string name="work_profile_usage_access_warning" msgid="3477719910927319122">"Désactiver l\'accès aux données d\'utilisation pour cette application n\'empêchera pas votre administrateur d\'effectuer le suivi de la consommation des données pour les applications de votre profil professionnel"</string>
     <string name="accessibility_lock_screen_progress" msgid="4597298121698665401">"<xliff:g id="COUNT_0">%1$d</xliff:g> caractères utilisés sur <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
     <string name="draw_overlay" msgid="7902083260500573027">"Superposition sur d\'autres applis"</string>
@@ -5397,7 +5397,7 @@
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Impossible de changer d\'opérateur en raison d\'une erreur."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Désactiver <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"Désactiver la carte SIM ?"</string>
-    <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"Désactivation de la carte SIM<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"Désactivation de la SIM<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
     <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Impossible de désactiver l\'opérateur"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Un problème a empêché l\'appareil de désactiver votre opérateur."</string>
     <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"Utiliser deux profils SIM ?"</string>
@@ -5694,7 +5694,7 @@
     <string name="uwb_settings_title" msgid="8578498712312002231">"Ultra-wideband (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Aide à identifier la position relative des appareils à proximité disposant de l\'UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Désactiver le mode Avion pour utiliser l\'UWB"</string>
-    <string name="camera_toggle_title" msgid="8952668677727244992">"Accès à l\'appareil photo"</string>
+    <string name="camera_toggle_title" msgid="8952668677727244992">"Accès à la caméra"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Accès au micro"</string>
     <string name="location_toggle_title" msgid="5229867700421750868">"Accès à la position"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Pour les applis et services"</string>
