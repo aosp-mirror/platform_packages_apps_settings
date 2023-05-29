@@ -65,7 +65,7 @@
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Çifto anën e majtë"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Për të gjitha pajisjet e dëgjimit që ofrohen"</string>
     <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"Cilësimet e pajisjes së dëgjimit"</string>
-    <string name="bluetooth_device_controls_summary" msgid="949566933352398337">"Dalja e audios, shkurtoret, pajtueshmëria me aparatin e dëgjimit"</string>
+    <string name="bluetooth_device_controls_summary" msgid="949566933352398337">"Dalja e audios, shkurtoret, përputhshmëria me aparatin e dëgjimit"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Për këtë pajisje"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Dalja e audios"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Rreth daljes së audios"</string>
@@ -99,7 +99,7 @@
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Pajisjet e tua"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Çifto pajisjen e re"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Çaktivizo shkarkimin e harduerit të Bluetooth A2DP"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Çaktivizo shkarkimin e harduerit të audios së Bluetooth LE"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Çaktivizo shkarkimin e harduerit të Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Të riniset pajisja?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Duhet të rinisësh pajisjen tënde për të ndryshuar këtë cilësim."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Rinis"</string>
@@ -119,10 +119,8 @@
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth-i është i aktivizuar"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Shiko të gjitha"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"Stilolapsi"</string>
-    <!-- no translation found for stylus_default_notes_app (4165657465911764628) -->
-    <skip />
-    <!-- no translation found for stylus_default_notes_summary_work (4554643411627934223) -->
-    <skip />
+    <string name="stylus_default_notes_app" msgid="4165657465911764628">"Shtypja e butonit të bishtit"</string>
+    <string name="stylus_default_notes_summary_work" msgid="4554643411627934223">"<xliff:g id="APP_NAME">%s</xliff:g> (Profili i punës)"</string>
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Shkruaj në fushat e tekstit"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Shpërfill të gjitha shtypjet e butonave me stilolapsin"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Stilolapsi"</string>
@@ -382,7 +380,7 @@
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Fytyra, gjurma e gishtit dhe <xliff:g id="WATCH">%s</xliff:g> u shtuan"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Fytyra, gjurmët e gishtave dhe <xliff:g id="WATCH">%s</xliff:g> u shtuan"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Shkyçja me fytyrë dhe me gjurmën e gishtit"</string>
-    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Shkyçja me fytyrë dhe gjurmën e gishtit për të punuar"</string>
+    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Shkyçja me fytyrë dhe gjurmë gishti për profilin e punës"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Nevojitet konfigurimi"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Fytyra dhe gjurmët e gishtave u shtuan"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Fytyra dhe gjurma e gishtit u shtuan"</string>
@@ -465,16 +463,30 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"U krye"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Jo, sensori nuk është ai"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Prek sensorin në pjesën e pasme të telefonit. Përdor gishtin tregues."</string>
-    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Regjistrimi nuk përfundoi"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (6305457126747942642) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message_setup (2735739618722623980) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message (5858386244898601003) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Konfigurimi i gjurmës së gishtit skadoi"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"Mund ta konfigurosh gjurmën e gishtit më vonë te \"Cilësimet\"."</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Regjistrimi i gjurmës së gishtit nuk funksionoi. Provo përsëri ose përdor një gisht tjetër."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message_setup (8521566666541069383) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message_setup (8140162986046783546) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (3534341971920335247) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (4344665784935791640) -->
+    <skip />
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Shto një tjetër"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Para"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Opsioni i kyçjes së ekranit është çaktivizuar. Për të mësuar më shumë, kontakto me administratorin e organizatës sate."</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Mund të vazhdosh ta përdorësh gjurmën tënde të gishtit për të autorizuar blerjet dhe qasjen në aplikacione."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Ngrije gishtin dhe më pas preke përsëri sensorin"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Sensori i gjurmës së gishtit nuk mund të përdoret. Vizito një ofrues të shërbimit të riparimit"</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration_title (3073145395701953620) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (304585658839584958) -->
+    <skip />
     <string name="security_advanced_settings" msgid="6260756619837834042">"Cilësime të tjera të sigurisë"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Kyçja e profilit të punës, enkriptimi dhe të tjera"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Enkriptimi, kredencialet dhe të tjera"</string>
@@ -511,7 +523,7 @@
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Opsionet e kyçjes së ekranit"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Opsionet e kyçjes së ekranit"</string>
     <string name="lock_screen_auto_pin_confirm_title" msgid="3012128112186088375">"Shkyçje me konfirmim automatik"</string>
-    <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"Shkyç automatikisht nëse fut një kod të saktë PIN prej 6 shifrash ose më shumë. Ky është disi më pak i sigurt se sa trokitja e \"Enter\" për të konfirmuar."</string>
+    <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"Shkyç automatikisht nëse fut një kod të saktë PIN prej 6 shifrash ose më shumë. Ky është disi më pak i sigurt sesa trokitja e \"Fut\" për të konfirmuar."</string>
     <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"Konfirmo automatikisht kodin e saktë PIN"</string>
     <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"Konfirmimi i kodit tënd PIN duke trokitur \"Enter\" është më i sigurt se sa përdorimi i konfirmimit automatik"</string>
     <string name="auto_confirm_on_pin_verify_description" msgid="2052240431173223502">"Fut kodin PIN të pajisjes për të aktivizuar konfirmimin automatik"</string>
@@ -628,12 +640,11 @@
     <string name="manage_trust_agents" msgid="6410149930029992356">"Agjentët e besuar"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"Për ta përdorur, në fillim cakto një kyçje ekrani"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"Asnjë"</string>
-    <string name="manage_trust_agents_summary_on" msgid="3302574418419446146">"{count,plural, =1{1 agjent aktiv besimi}other{# agjentë aktivë besimi}}"</string>
+    <string name="manage_trust_agents_summary_on" msgid="3302574418419446146">"{count,plural, =1{1 agjent besimi aktiv}other{# agjentë besimi aktivë }}"</string>
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth-i"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth-i"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Të çiftohet me <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
-    <!-- no translation found for bluetooth_pairing_group_late_bonding (5310869364570266209) -->
-    <skip />
+    <string name="bluetooth_pairing_group_late_bonding" msgid="5310869364570266209">"Shto një anëtar të ri te grupi ekzistues i koordinuar"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Kodi i çiftimit të Bluetooth-it"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Shkruaj kodin e çiftimit, pastaj shtyp \"Kthehu\" ose \"Hyr\""</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"Kodi PIN përmban shkronja ose simbole"</string>
@@ -1122,8 +1133,7 @@
     <string name="kernel_version" msgid="3513538109381366881">"Versioni i bërthamës"</string>
     <string name="build_number" msgid="9009733242117579826">"Numri i ndërtimit"</string>
     <string name="module_version" msgid="1787518340082046658">"Përditësimi i sistemit të Google Play"</string>
-    <!-- no translation found for battery_info (7873528123969546728) -->
-    <skip />
+    <string name="battery_info" msgid="7873528123969546728">"Informacione për baterinë"</string>
     <string name="device_info_not_available" msgid="4804474466616712326">"Nuk ofrohet"</string>
     <string name="storage_settings" msgid="7472188817781592677">"Hapësira ruajtëse"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Hapësira ruajtëse dhe memoria specifike"</string>
@@ -1156,11 +1166,10 @@
     <string name="status_bt_address" msgid="6919660304578476547">"Adresa e Bluetooth-it"</string>
     <string name="status_serial_number" msgid="9060064164331466789">"Numri i serisë"</string>
     <string name="status_up_time" msgid="1274778533719495438">"Koha aktive"</string>
-    <!-- no translation found for battery_manufacture_date (7139426520156833987) -->
-    <skip />
-    <!-- no translation found for battery_first_use_date (3157207331722711317) -->
-    <skip />
-    <!-- no translation found for battery_cycle_count (2912949283386571900) -->
+    <string name="battery_manufacture_date" msgid="7139426520156833987">"Data e prodhimit"</string>
+    <string name="battery_first_use_date" msgid="3157207331722711317">"Data e përdorimit për herë të parë"</string>
+    <string name="battery_cycle_count" msgid="2912949283386571900">"Numri i cikleve"</string>
+    <!-- no translation found for battery_cycle_count_not_available (2426584515665184664) -->
     <skip />
     <string name="memory_calculating_size" msgid="3898240439798661242">"Po llogarit…"</string>
     <string name="storage_menu_rename" msgid="8549835371429159336">"Riemërto"</string>
@@ -1756,8 +1765,8 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"Për të gjitha gjuhët"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Gjuhë të tjera…"</string>
     <string name="testing" msgid="6294172343766732037">"Testimi"</string>
-    <string name="keyboard_settings_summary" msgid="2716339620942356432">"Tastiera në ekran, ligjërimi, veglat"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"Tastiera në ekran, tastiera fizike, ligjërimi, veglat"</string>
+    <string name="keyboard_settings_summary" msgid="9188442758316476986">"Tastiera në ekran, veglat"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"Tastiera në ekran, tastiera fizike, veglat"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Tastiera fizike"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Struktura"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Zgjidh veglën"</string>
@@ -1868,7 +1877,8 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Për të përdorur një veçori të qasshmërisë, rrëshqit shpejt lart nga fundi i ekranit me 2 gishta.\n\nPër të ndërruar mes veçorive, rrëshqit shpejt lart me 2 gishta dhe mbaje të shtypur."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Për të përdorur një veçori të qasshmërisë, rrëshqit shpejt lart nga fundi i ekranit me 3 gishta.\n\nPër të ndërruar mes veçorive, rrëshqit shpejt lart me 3 gishta dhe mbaje të shtypur."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"E kuptova"</string>
-    <string name="accessibility_tutorial_dialog_link_button" msgid="1624189347106713695">"Cilësime: butoni i qasshmërisë"</string>
+    <!-- no translation found for accessibility_tutorial_dialog_link_button (6797349445794031781) -->
+    <skip />
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Shkurtorja për \"<xliff:g id="SERVICE">%1$s</xliff:g>\""</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Butoni i qasshmërisë"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Gjesti i qasshmërisë"</string>
@@ -1881,9 +1891,9 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Rrëshqit shpejt lart nga fundi i ekranit me 3 gishta.\n\nPër të kaluar mes veçorive, rrëshqit shpejt lart me 3 gishta dhe mbaje të shtypur."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Opsione të tjera"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Mëso më shumë për <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Mbaj butonat e volumit"</string>
-    <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"mbaj butonat e volumit"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Shtyp dhe mbaj shtypur të dy butonat e volumit"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Mbaj shtypur tastet e volumit"</string>
+    <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"mbaj shtypur tastet e volumit"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Shtyp dhe mbaj shtypur të dyja tastet e volumit"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Trokit tri herë mbi ekran"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"trokit tri herë mbi ekran"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"Trokit me shpejtësi {0,number,integer} herë në ekran. Kjo shkurtore mund të ngadalësojë pajisjen tënde"</string>
@@ -2101,9 +2111,9 @@
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> po kërkon kontroll të plotë të kësaj pajisjeje. Shërbimi mund të lexojë ekranin dhe të veprojë në emër të përdoruesve me nevoja qasshmërie. Ky nivel kontrolli nuk është i përshtatshëm për shumicën e aplikacioneve."</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Kontrolli i plotë është i përshtatshëm për aplikacionet që të ndihmojnë me nevojat e qasshmërisë, por jo për shumicën e aplikacioneve."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Shiko dhe kontrollo ekranin"</string>
-    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Ai mund të lexojë të gjithë përmbajtjen në ekran dhe të shfaqë përmbajtjen mbi aplikacione të tjera."</string>
+    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Mund të lexojë të gjithë përmbajtjen në ekran dhe të shfaqë përmbajtjen mbi aplikacione të tjera."</string>
     <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Shiko dhe kryej veprimet"</string>
-    <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Ai mund të monitorojë ndërveprimet me një aplikacion ose një sensor hardueri dhe të ndërveprojë me aplikacionet në emrin tënd."</string>
+    <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Mund të monitorojë ndërveprimet me një aplikacion ose një sensor hardueri dhe të ndërveprojë me aplikacionet në emrin tënd."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Lejo"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Refuzo"</string>
     <string name="accessibility_dialog_button_stop" msgid="7295448112784528196">"Ndalo"</string>
@@ -2331,6 +2341,8 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Pamja sipas aplikacioneve"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Pamja sipas sistemeve"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_cycle_count_footer (3642121059800373545) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistikat e procesit"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistikat teknike për proceset në ekzekutim"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Përdorimi i memories"</string>
@@ -2870,7 +2882,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Kloni i <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> po krijohet"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Kloni i <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> u krijua"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Gjuhët, gjestet, koha, rezervimi"</string>
-    <string name="languages_setting_summary" msgid="4924440599794956443">"Gjuhët e sistemit, gjuhët e aplikacioneve"</string>
+    <string name="languages_setting_summary" msgid="7963053736715746726">"Gjuhët e sistemit, gjuhët e aplikacioneve, ligjërimi"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, lidhja e rrjetit, internet, pa tel, të dhëna, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Njoftimi i Wi‑Fi, njoftimi i wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"përdorimi i të dhënave"</string>
@@ -2934,8 +2946,7 @@
     <string name="keywords_sim_status_iccid_esim" msgid="4634015619840979184">"rrjeti, gjendja e rrjetit celular, gjendja e shërbimit, fuqia e sinjalit, lloji i rrjetit celular, roaming, iccid, eid"</string>
     <string name="keywords_esim_eid" msgid="8128175058237372457">"eid"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"numri i serisë, versioni i harduerit"</string>
-    <!-- no translation found for keywords_battery_info (3319796850366687033) -->
-    <skip />
+    <string name="keywords_battery_info" msgid="3319796850366687033">"informacione për baterinë, data e prodhimit, numri i cikleve, përdorimi për herë të parë"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"niveli i korrigjimit të sigurisë së Android, versioni i brezit të bazës, versioni i bërthamës"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"tema, e çelët, e errët, modaliteti, ndjeshmëria ndaj dritës, fotofobia, bëje më të errët, errëso, modaliteti i errët, migrenë"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"tema e errët"</string>
@@ -3517,7 +3528,7 @@
     <string name="app_launch_supported_links_title" msgid="2457931321701095763">"{count,plural, =1{# lidhje e mbështetur}other{# lidhje të mbështetura}}"</string>
     <string name="app_launch_supported_links_add" msgid="3271247750388016131">"Shto"</string>
     <string name="app_launch_supported_links_subtext" msgid="4268004019469184113">"Hapet në <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
-    <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="SIZE">%1$s</xliff:g> përdorur në <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
+    <string name="storage_summary_format" msgid="5721782272185284276">"Të përdorura te <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>: <xliff:g id="SIZE">%1$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="979243131665635278">"hap. ruajtëse e brendshme"</string>
     <string name="storage_type_external" msgid="125078274000280821">"hap. ruajtëse e jashtme"</string>
     <string name="data_summary_format" msgid="8802057788950096650">"<xliff:g id="SIZE">%1$s</xliff:g> të përdorura që nga <xliff:g id="DATE">%2$s</xliff:g>"</string>
@@ -3858,10 +3869,6 @@
     <string name="overlay_option_device_default" msgid="7986355499809313848">"Parazgjedhja e pajisjes"</string>
     <string name="overlay_toast_failed_to_apply" msgid="4839587811338164960">"Zbatimi i mbivendosjes dështoi"</string>
     <string name="special_access" msgid="1767980727423395147">"Qasja e veçantë e apl."</string>
-    <plurals name="special_access_summary" formatted="false" msgid="4995506406763570815">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikacione mund të përdorin të dhëna të pakufizuara</item>
-      <item quantity="one">1 aplikacion mund të përdorë të dhëna të pakufizuara</item>
-    </plurals>
     <string name="special_access_more" msgid="132919514147475846">"Shiko më shumë"</string>
     <string name="long_background_tasks_label" msgid="3169590134850226687">"Detyrat e gjata në sfond"</string>
     <string name="long_background_tasks_switch_title" msgid="2491623894899492543">"Lejo detyrat në sfond për një kohë të gjatë"</string>
@@ -4726,4 +4733,36 @@
     <string name="contrast_medium" msgid="384414510709285811">"Mesatar"</string>
     <string name="contrast_high" msgid="3988567609694797696">"I lartë"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Ky aplikacion mund të hapet vetëm në 1 dritare"</string>
+    <!-- no translation found for accessibility_feature_full_state_summary (8747170258807179670) -->
+    <skip />
+    <!-- no translation found for generic_accessibility_service_on (2465820044606775562) -->
+    <skip />
+    <!-- no translation found for generic_accessibility_service_off (1752061696695346360) -->
+    <skip />
+    <!-- no translation found for generic_accessibility_feature_shortcut_off (3669343136122187913) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_state_off (8158137799007601475) -->
+    <skip />
+    <!-- no translation found for daltonizer_state_on (131013270022603983) -->
+    <skip />
+    <!-- no translation found for daltonizer_state_off (1162285688069856179) -->
+    <skip />
+    <!-- no translation found for color_inversion_state_on (1160969033636440368) -->
+    <skip />
+    <!-- no translation found for color_inversion_state_off (6925638668080451724) -->
+    <skip />
+    <!-- no translation found for color_inversion_feature_summary (1199876648549627647) -->
+    <skip />
+    <!-- no translation found for magnification_feature_summary (641825267460247848) -->
+    <skip />
+    <!-- no translation found for autoclick_disabled (3213396804955002120) -->
+    <skip />
+    <!-- no translation found for show_captions_disabled (690650956523818755) -->
+    <skip />
+    <!-- no translation found for show_captions_enabled (7089043007924626) -->
+    <skip />
+    <!-- no translation found for live_caption_disabled (3562035026547887366) -->
+    <skip />
+    <!-- no translation found for live_caption_enabled (5269360946200718949) -->
+    <skip />
 </resources>

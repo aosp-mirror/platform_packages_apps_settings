@@ -99,7 +99,7 @@
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Вашы прылады"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Спалучыць новую прыладу"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Адключыць выгрузку Bluetooth A2DP"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Адключыць апаратную разгрузку для Bluetooth LE audio"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Адключыць апаратную выгрузку для Bluetooth LE audio"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Перазапусціць прыладу?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Каб змяніць гэту наладу, трэба перазапусціць прыладу."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Перазапусціць"</string>
@@ -119,10 +119,8 @@
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth уключаны"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Паказаць усе"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"Стылус"</string>
-    <!-- no translation found for stylus_default_notes_app (4165657465911764628) -->
-    <skip />
-    <!-- no translation found for stylus_default_notes_summary_work (4554643411627934223) -->
-    <skip />
+    <string name="stylus_default_notes_app" msgid="4165657465911764628">"Пры націсканні на кнопку пяра"</string>
+    <string name="stylus_default_notes_summary_work" msgid="4554643411627934223">"<xliff:g id="APP_NAME">%s</xliff:g> (Працоўны профіль)"</string>
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Увод тэксту ў тэкставыя палі"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Ігнараваць націсканні кнопак стілусам"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Стылус"</string>
@@ -169,10 +167,8 @@
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Каб выбраць мову для кожнай праграмы, адкрыйце налады мовы."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Даведацца больш пра мовы, даступныя ў праграме"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Змяніць мову сістэмы на наступную: %s ?"</string>
-    <!-- no translation found for title_system_locale_addition (8218683660751479466) -->
-    <skip />
-    <!-- no translation found for desc_system_locale_addition (3409917362651596070) -->
-    <skip />
+    <string name="title_system_locale_addition" msgid="8218683660751479466">"Дадаць %s у прыярытэтныя мовы?"</string>
+    <string name="desc_system_locale_addition" msgid="3409917362651596070">"Гэта будзе паведамляць праграмам і вэб-сайтам, што вы таксама аддаяце перавагу гэтай мове."</string>
     <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Налады вашай прылады, у тым ліку рэгіянальныя, будуць зменены."</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Змяніць"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"Недаступна: %s"</string>
@@ -467,16 +463,30 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Гатова"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ой, гэта не датчык"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Указальным пальцам дакраніцеся да сэнсара на задняй панэлі тэлефона."</string>
-    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Рэгістрацыя не завершана"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (6305457126747942642) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message_setup (2735739618722623980) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message (5858386244898601003) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Наладжванне адбітка пальца не завершана"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"Адбітак пальца можна наладзіць пазней у Наладах."</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Рэгістрацыя адбітка не атрымалася. Калі ласка, паўтарыце спробу або выкарыстайце іншы палец."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message_setup (8521566666541069383) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message_setup (8140162986046783546) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (3534341971920335247) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (4344665784935791640) -->
+    <skip />
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Дадаць яшчэ адзін"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Далей"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Гэты варыянт разблакіроўкі экрана выключаны. Каб даведацца больш, звярніцеся да адміністратара вашай арганізацыі."</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Аднак вы можаце выкарыстоўваць адбітак пальца для аўтарызацыі падчас купляў і для доступу да праграм."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Падыміце палец, потым дакраніцеся да сканера зноў"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Не ўдалося скарыстаць сканер адбіткаў пальцаў. Звярніцеся ў сэрвісны цэнтр."</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration_title (3073145395701953620) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (304585658839584958) -->
+    <skip />
     <string name="security_advanced_settings" msgid="6260756619837834042">"Іншыя налады бяспекі"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Блакіроўка працоўнага профілю, шыфраванне і іншыя дзеянні"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Шыфраванне, уліковыя даныя і іншыя звесткі"</string>
@@ -634,8 +644,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Спалучыцца з <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
-    <!-- no translation found for bluetooth_pairing_group_late_bonding (5310869364570266209) -->
-    <skip />
+    <string name="bluetooth_pairing_group_late_bonding" msgid="5310869364570266209">"Дадайце ў існуючы ўзгоднены набор новага ўдзельніка"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Код спалучэння па Bluetooth"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Увядзіце код спалучэння, затым націсніце кнопку Назад або Ўвод"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"PIN-код складаецца з літар ці знакаў"</string>
@@ -1163,6 +1172,8 @@
     <!-- no translation found for battery_first_use_date (3157207331722711317) -->
     <skip />
     <!-- no translation found for battery_cycle_count (2912949283386571900) -->
+    <skip />
+    <!-- no translation found for battery_cycle_count_not_available (2426584515665184664) -->
     <skip />
     <string name="memory_calculating_size" msgid="3898240439798661242">"Вядзецца падлік..."</string>
     <string name="storage_menu_rename" msgid="8549835371429159336">"Перайменаваць"</string>
@@ -1758,8 +1769,8 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"Для ўсіх моў"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Іншыя мовы..."</string>
     <string name="testing" msgid="6294172343766732037">"Праверка"</string>
-    <string name="keyboard_settings_summary" msgid="2716339620942356432">"Экранная клавіятура, маўленне, інструменты"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"Экранная клавіятура, фізічная клавіятура, маўленне, інструменты"</string>
+    <string name="keyboard_settings_summary" msgid="9188442758316476986">"Экранная клавіятура, інструменты"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"Экранная клавіятура, фізічная клавіятура, інструменты"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Фізічная клавіятура"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Раскладка"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Выберыце гаджэт"</string>
@@ -1870,7 +1881,8 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Каб скарыстаць спецыяльную магчымасць, правядзіце па экране двума пальцамі знізу ўверх.\n\nКаб пераключыцца на іншую функцыю, правядзіце двума пальцамі ўверх і ўтрымлівайце іх на экране."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Каб скарыстаць спецыяльную магчымасць, правядзіце па экране трыма пальцамі знізу ўверх.\n\nКаб пераключыцца на іншую функцыю, правядзіце трыма пальцамі ўверх і ўтрымлівайце іх на экране."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Зразумела"</string>
-    <string name="accessibility_tutorial_dialog_link_button" msgid="1624189347106713695">"Налады кнопкі спецмагчымасцей"</string>
+    <!-- no translation found for accessibility_tutorial_dialog_link_button (6797349445794031781) -->
+    <skip />
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Хуткі доступ да службы \"<xliff:g id="SERVICE">%1$s</xliff:g>\""</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Кнопка спецыяльных магчымасцей"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Жэст спецыяльных магчымасцей"</string>
@@ -2333,6 +2345,8 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Паказаць выкарыстанне праграмамі"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Паказаць выкарыстанне сістэмамі"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_cycle_count_footer (3642121059800373545) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Статыстыка працэсаў"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Падрабязная статыстыка запушчаных працэсаў"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Аб\'ём выкарыстання памяці"</string>
@@ -2718,7 +2732,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Уключыць тэлефонныя выклікі і SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Гэты карыстальнік атрымае доступ да гісторыі выклікаў і SMS."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Выдаліць правы адміністратара?"</string>
-    <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Калі вы адклікаеце ў гэтага карыстальніка правы адміністратара, потым іх вярнуць зможа любы адміністратар (у тым ліку вы самі)."</string>
+    <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Калі вы адклічаце ў гэтага карыстальніка правы адміністратара, вярнуць іх зможа любы адміністратар (у тым ліку вы самі)."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Даныя для экстранных сітуацый"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Інфармацыя і кантакты карыстальніка <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Адкрыць праграму \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
@@ -2872,7 +2886,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Стварэнне клона \"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>\""</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Створаны клон \"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>\""</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Мовы, жэсты, час, рэзервовае капіраванне"</string>
-    <string name="languages_setting_summary" msgid="4924440599794956443">"Мовы сістэмы, мовы праграмы"</string>
+    <string name="languages_setting_summary" msgid="7963053736715746726">"Мовы сістэмы, мовы праграмы, маўленне"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, злучэнне, інтэрнэт, бесправадны, даныя, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Апавяшчэнне Wi‑Fi, Wi-Fi-апавяшчэнне"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"выкарыстанне трафіка"</string>
@@ -3860,12 +3874,6 @@
     <string name="overlay_option_device_default" msgid="7986355499809313848">"Стандартная налада"</string>
     <string name="overlay_toast_failed_to_apply" msgid="4839587811338164960">"Не ўдалося ўжыць накладанне на экран"</string>
     <string name="special_access" msgid="1767980727423395147">"Спецыяльны доступ для праграм"</string>
-    <plurals name="special_access_summary" formatted="false" msgid="4995506406763570815">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> праграма можа выкарыстоўваць даныя без абмежаванняў</item>
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> праграмы могуць выкарыстоўваць даныя без абмежаванняў</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> праграм могуць выкарыстоўваць даныя без абмежаванняў</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> праграмы могуць выкарыстоўваць даныя без абмежаванняў</item>
-    </plurals>
     <string name="special_access_more" msgid="132919514147475846">"Яшчэ"</string>
     <string name="long_background_tasks_label" msgid="3169590134850226687">"Працяглыя фонавыя задачы"</string>
     <string name="long_background_tasks_switch_title" msgid="2491623894899492543">"Дазволіць выкананне працяглых фонавых задач"</string>
@@ -4732,4 +4740,36 @@
     <string name="contrast_medium" msgid="384414510709285811">"Сярэдняя"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Высокая"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Гэту праграму можна адкрыць толькі ў адным акне"</string>
+    <!-- no translation found for accessibility_feature_full_state_summary (8747170258807179670) -->
+    <skip />
+    <!-- no translation found for generic_accessibility_service_on (2465820044606775562) -->
+    <skip />
+    <!-- no translation found for generic_accessibility_service_off (1752061696695346360) -->
+    <skip />
+    <!-- no translation found for generic_accessibility_feature_shortcut_off (3669343136122187913) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_state_off (8158137799007601475) -->
+    <skip />
+    <!-- no translation found for daltonizer_state_on (131013270022603983) -->
+    <skip />
+    <!-- no translation found for daltonizer_state_off (1162285688069856179) -->
+    <skip />
+    <!-- no translation found for color_inversion_state_on (1160969033636440368) -->
+    <skip />
+    <!-- no translation found for color_inversion_state_off (6925638668080451724) -->
+    <skip />
+    <!-- no translation found for color_inversion_feature_summary (1199876648549627647) -->
+    <skip />
+    <!-- no translation found for magnification_feature_summary (641825267460247848) -->
+    <skip />
+    <!-- no translation found for autoclick_disabled (3213396804955002120) -->
+    <skip />
+    <!-- no translation found for show_captions_disabled (690650956523818755) -->
+    <skip />
+    <!-- no translation found for show_captions_enabled (7089043007924626) -->
+    <skip />
+    <!-- no translation found for live_caption_disabled (3562035026547887366) -->
+    <skip />
+    <!-- no translation found for live_caption_enabled (5269360946200718949) -->
+    <skip />
 </resources>

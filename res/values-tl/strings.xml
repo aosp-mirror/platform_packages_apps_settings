@@ -69,7 +69,7 @@
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Para sa device na ito"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Audio output"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Tungkol sa audio output"</string>
-    <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Iruta ang mga tunog sa iyong device sa pandinig o speaker ng telepono"</string>
+    <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Iruta ang mga tunog sa iyong hearing device o speaker ng telepono"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Kaugnay"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Ringtone at mga alarm"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Audio sa mga tawag"</string>
@@ -119,10 +119,8 @@
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Naka-on ang Bluetooth"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Tingnan lahat"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"Stylus"</string>
-    <!-- no translation found for stylus_default_notes_app (4165657465911764628) -->
-    <skip />
-    <!-- no translation found for stylus_default_notes_summary_work (4554643411627934223) -->
-    <skip />
+    <string name="stylus_default_notes_app" msgid="4165657465911764628">"Pagpindot sa tail button"</string>
+    <string name="stylus_default_notes_summary_work" msgid="4554643411627934223">"<xliff:g id="APP_NAME">%s</xliff:g> (Profile sa trabaho)"</string>
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Sumulat sa mga field ng text"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Huwag pansinin ang lahat ng pagpindot ng button sa stylus"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Stylus"</string>
@@ -381,7 +379,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Naidagdag ang mukha at <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Naidagdag ang mukha, fingerprint, at <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Naidagdag ang mukha, mga fingerprint, at <xliff:g id="WATCH">%s</xliff:g>"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Pag-unlock Gamit ang Mukha &amp; Fingerprint"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Pag-unlock Gamit ang Mukha at Fingerprint"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Pag-unlock Gamit ang Mukha at Fingerprint para sa trabaho"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Kinakailangan ang pag-set up"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Nagdagdag ng mukha at mga fingerprint"</string>
@@ -465,16 +463,30 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Tapos na"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Naku, hindi iyan ang sensor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Pindutin ang sensor sa likod ng iyong telepono. Gamitin ang hintuturo mo."</string>
-    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Hindi nakumpleto ang pag-enroll"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (6305457126747942642) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message_setup (2735739618722623980) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message (5858386244898601003) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Nag-time out ang pag-set up ng fingerprint"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"Puwede mong i-set up ang iyong fingerprint sa ibang pagkakataon sa Mga Setting."</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Hindi gumana ang pagpapatala ng fingerprint. Subukang muli o gumamit ng ibang daliri."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message_setup (8521566666541069383) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message_setup (8140162986046783546) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (3534341971920335247) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (4344665784935791640) -->
+    <skip />
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Magdagdag ng isa pa"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Susunod"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Naka-disable ang opsyong lock ng screen. Para matuto pa, makipag-ugnayan sa admin ng iyong organisasyon."</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Magagamit mo pa rin ang iyong fingerprint para pahintulutan ang mga pagbili at access sa app."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Iangat ang daliri, pagkatapos ay pindutin ulit ang sensor"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Hindi magamit ang sensor para sa fingerprint. Bumisita sa provider ng pag-aayos"</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration_title (3073145395701953620) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (304585658839584958) -->
+    <skip />
     <string name="security_advanced_settings" msgid="6260756619837834042">"Higit pang setting ng seguridad"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Lock ng profile sa trabaho, pag-encrypt, at higit pa"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Pag-encrypt, mga kredensyal, at higit pa"</string>
@@ -1121,8 +1133,7 @@
     <string name="kernel_version" msgid="3513538109381366881">"Bersyon ng kernel"</string>
     <string name="build_number" msgid="9009733242117579826">"Numero ng build"</string>
     <string name="module_version" msgid="1787518340082046658">"Pag-update ng system ng Google Play"</string>
-    <!-- no translation found for battery_info (7873528123969546728) -->
-    <skip />
+    <string name="battery_info" msgid="7873528123969546728">"Impormasyon ng baterya"</string>
     <string name="device_info_not_available" msgid="4804474466616712326">"Hindi available"</string>
     <string name="storage_settings" msgid="7472188817781592677">"Storage"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Storage at cache"</string>
@@ -1155,11 +1166,10 @@
     <string name="status_bt_address" msgid="6919660304578476547">"Address ng bluetooth"</string>
     <string name="status_serial_number" msgid="9060064164331466789">"Serial number"</string>
     <string name="status_up_time" msgid="1274778533719495438">"Up time"</string>
-    <!-- no translation found for battery_manufacture_date (7139426520156833987) -->
-    <skip />
-    <!-- no translation found for battery_first_use_date (3157207331722711317) -->
-    <skip />
-    <!-- no translation found for battery_cycle_count (2912949283386571900) -->
+    <string name="battery_manufacture_date" msgid="7139426520156833987">"Petsa ng paggawa"</string>
+    <string name="battery_first_use_date" msgid="3157207331722711317">"Petsa ng unang paggamit"</string>
+    <string name="battery_cycle_count" msgid="2912949283386571900">"Bilang ng cycle"</string>
+    <!-- no translation found for battery_cycle_count_not_available (2426584515665184664) -->
     <skip />
     <string name="memory_calculating_size" msgid="3898240439798661242">"Kinakalkula..."</string>
     <string name="storage_menu_rename" msgid="8549835371429159336">"Palitan ang pangalan"</string>
@@ -1755,8 +1765,8 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"Para sa lahat ng wika"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Higit pang mga wika..."</string>
     <string name="testing" msgid="6294172343766732037">"Pagsubok"</string>
-    <string name="keyboard_settings_summary" msgid="2716339620942356432">"On-screen na keyboard, Speech, Mga Tool"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"On-screen na keyboard, Pisikal na keyboard, Speech, Mga Tool"</string>
+    <string name="keyboard_settings_summary" msgid="9188442758316476986">"On-screen na keyboard, mga tool"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"On-screen na keyboard, pisikal na keyboard, mga tool"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Pisikal na keyboard"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Layout"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Pumili ng gadget"</string>
@@ -1867,7 +1877,8 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Para gumamit ng feature ng pagiging naa-access, mag-swipe pataas mula sa ibaba ng screen gamit ang 2 daliri.\n\nPara magpalipat-lipat sa mga feature, mag-swipe pataas gamit ang 2 daliri at i-hold ang mga ito."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Para gumamit ng feature ng pagiging naa-access, mag-swipe pataas mula sa ibaba ng screen gamit ang 3 daliri.\n\nPara magpalipat-lipat sa mga feature, mag-swipe pataas gamit ang 3 daliri at i-hold ang mga ito."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
-    <string name="accessibility_tutorial_dialog_link_button" msgid="1624189347106713695">"Setting ng accessibility button"</string>
+    <!-- no translation found for accessibility_tutorial_dialog_link_button (6797349445794031781) -->
+    <skip />
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Shortcut ng <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Button ng accessibility"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Galaw para sa accessibility"</string>
@@ -2024,7 +2035,7 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Compatibility ng hearing aid"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Pinapahusay ang compatibility sa mga telecoil at binabawasan ang hindi gustong ingay"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Tungkol sa mga hearing device"</string>
-    <string name="accessibility_hearing_device_footer_summary" msgid="7451899224828040581">"Tiyaking naka-on at nakahanda sa pagpapares ang iyong device sa pandinig"</string>
+    <string name="accessibility_hearing_device_footer_summary" msgid="7451899224828040581">"Tiyaking naka-on at nakahanda sa pagpapares ang iyong hearing device"</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Magpares ng hearing device"</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Available na hearing device"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Hindi ba lumalabas ang iyong hearing device?"</string>
@@ -2330,6 +2341,8 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Tingnan ayon sa mga app"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Tingnan ayon sa mga system"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_cycle_count_footer (3642121059800373545) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Stats ng Proseso"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Mahahalagang istatistika tungkol sa mga tumatakbong proseso"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Memory na ginamit"</string>
@@ -2820,7 +2833,7 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"Palaging gamitin ito para sa mga tawag"</string>
     <string name="select_sim_for_data" msgid="2642305487659432499">"Pumili ng SIM para sa mobile data"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Pumili ng SIM para sa SMS"</string>
-    <string name="data_switch_started" msgid="6292759843974720112">"Lumilipat ng data SIM, puwede itong magtagal nang hanggang isang minuto…"</string>
+    <string name="data_switch_started" msgid="6292759843974720112">"Lumilipat ng data SIM, puwede itong magtagal nang isang minuto…"</string>
     <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"Gamitin ang <xliff:g id="NEW_SIM">%1$s</xliff:g> sa mobile data?"</string>
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Kung lilipat ka sa <xliff:g id="NEW_SIM">%1$s</xliff:g>, hindi na gagamitin ang <xliff:g id="OLD_SIM">%2$s</xliff:g> para sa mobile data."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Gamitin: <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
@@ -2869,7 +2882,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Gumagawa ng clone ng <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Nakagawa ng clone ng <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Mga wika, mga galaw, oras, pag-back up"</string>
-    <string name="languages_setting_summary" msgid="4924440599794956443">"Mga wika ng system, mga wika ng app"</string>
+    <string name="languages_setting_summary" msgid="7963053736715746726">"Mga wika ng system, mga wika ng app, speech"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, koneksyon sa network, internet, wireless, data, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Notification sa Wi‑Fi, notification sa wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"paggamit ng data"</string>
@@ -2933,8 +2946,7 @@
     <string name="keywords_sim_status_iccid_esim" msgid="4634015619840979184">"network, status ng mobile network, status ng serbisyo, lakas ng signal, uri ng mobile network, naka-roaming, iccid, eid"</string>
     <string name="keywords_esim_eid" msgid="8128175058237372457">"eid"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"serial number, bersyon ng hardware"</string>
-    <!-- no translation found for keywords_battery_info (3319796850366687033) -->
-    <skip />
+    <string name="keywords_battery_info" msgid="3319796850366687033">"impormasyon ng baterya, petsa ng paggawa, bilang ng cycle, unang paggamit"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"antas ng patch ng seguridad ng android, bersyon ng baseband, kernel version"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"tema, light, dark, mode, pagkasensitibo sa ilaw, photophobia, gawing mas madilim, padilimin, dark mode, migraine"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"madilim na tema"</string>
@@ -3857,10 +3869,6 @@
     <string name="overlay_option_device_default" msgid="7986355499809313848">"Default ng device"</string>
     <string name="overlay_toast_failed_to_apply" msgid="4839587811338164960">"Hindi nailapat ang overlay"</string>
     <string name="special_access" msgid="1767980727423395147">"Espesyal na access ng app"</string>
-    <plurals name="special_access_summary" formatted="false" msgid="4995506406763570815">
-      <item quantity="one">May <xliff:g id="COUNT">%d</xliff:g> app na maaaring gumamit ng walang limitasyong data</item>
-      <item quantity="other">May <xliff:g id="COUNT">%d</xliff:g> na app na maaaring gumamit ng walang limitasyong data</item>
-    </plurals>
     <string name="special_access_more" msgid="132919514147475846">"Tumingin pa"</string>
     <string name="long_background_tasks_label" msgid="3169590134850226687">"Matagal na gawain sa background"</string>
     <string name="long_background_tasks_switch_title" msgid="2491623894899492543">"Payagang magpagana ng matagal na gawain sa background"</string>
@@ -4087,7 +4095,7 @@
     <string name="credman_keywords" msgid="8305600680836806170">"data, passkey, password"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"auto, fill, autofill, data, passkey, password"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Tiyaking pinagkakatiwalaan mo ang app na ito&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Ginagamit ng &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; ang nasa iyong screen para matukoy kung ano ang pwedeng i-autofill."</string>
-    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Gamitin ang &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; ginagamit kung ano ang nasa screen mo para matukoy kung ano ang puwedeng i-autofill. Mula ngayon, mase-save na rito ang mga bagong password, passkey, at iba pang impormasyon."</string>
+    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Gamitin ang &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Ginagamit ng &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; kung ano ang nasa screen mo para matukoy kung ano ang puwedeng i-autofill. Mula ngayon, mase-save na rito ang mga bagong password, passkey, at iba pang impormasyon."</string>
     <string name="credman_picker_title" msgid="2642776965060619988">"Mga password, passkey, at serbisyo sa data"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"I-off ang %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;I-off ang serbisyong ito?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Hindi pupunan ang mga naka-save na impormasyon tulad ng mga password, passkey, paraan ng pagbabayad, at iba pang impormasyon kapag nag-sign in ka. Para magamit ang iyong naka-save na impormasyon, pumili ng serbisyo ng password, passkey, o data."</string>
@@ -4725,4 +4733,36 @@
     <string name="contrast_medium" msgid="384414510709285811">"Katamtaman"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Mataas"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Sa 1 window lang puwedeng buksan ang app na ito"</string>
+    <!-- no translation found for accessibility_feature_full_state_summary (8747170258807179670) -->
+    <skip />
+    <!-- no translation found for generic_accessibility_service_on (2465820044606775562) -->
+    <skip />
+    <!-- no translation found for generic_accessibility_service_off (1752061696695346360) -->
+    <skip />
+    <!-- no translation found for generic_accessibility_feature_shortcut_off (3669343136122187913) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_state_off (8158137799007601475) -->
+    <skip />
+    <!-- no translation found for daltonizer_state_on (131013270022603983) -->
+    <skip />
+    <!-- no translation found for daltonizer_state_off (1162285688069856179) -->
+    <skip />
+    <!-- no translation found for color_inversion_state_on (1160969033636440368) -->
+    <skip />
+    <!-- no translation found for color_inversion_state_off (6925638668080451724) -->
+    <skip />
+    <!-- no translation found for color_inversion_feature_summary (1199876648549627647) -->
+    <skip />
+    <!-- no translation found for magnification_feature_summary (641825267460247848) -->
+    <skip />
+    <!-- no translation found for autoclick_disabled (3213396804955002120) -->
+    <skip />
+    <!-- no translation found for show_captions_disabled (690650956523818755) -->
+    <skip />
+    <!-- no translation found for show_captions_enabled (7089043007924626) -->
+    <skip />
+    <!-- no translation found for live_caption_disabled (3562035026547887366) -->
+    <skip />
+    <!-- no translation found for live_caption_enabled (5269360946200718949) -->
+    <skip />
 </resources>
