@@ -150,7 +150,7 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"允许您的设备与附近的蓝牙设备进行通信"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"允许您的手机与附近的蓝牙设备进行通信"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"停用蓝牙 A2DP 硬件分流"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"停用蓝牙 LE 音频硬件分流功能"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"停用蓝牙 LE 音频硬件分流"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"要重启设备吗？"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"您需要重启设备才能让这项设置更改生效。"</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"重启"</string>
@@ -302,10 +302,10 @@
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"按世界协调时间 (UTC) 偏移量选择"</string>
     <string name="date_picker_title" msgid="646573308567782578">"日期"</string>
     <string name="time_picker_title" msgid="1784236407401743393">"时间"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"设备空闲多久后锁定"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"屏幕超时多久后锁定"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"空闲 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>后"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"空闲后立即锁定（<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> 让屏幕保持解锁状态时除外）"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"空闲<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>后（<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> 让屏幕保持解锁状态时除外）"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"超时 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>后（<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> 让屏幕保持解锁状态时除外）"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="197365342192696406">"在锁定屏幕上显示机主信息"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"在锁定屏幕上添加文字"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"启用微件"</string>
@@ -348,7 +348,7 @@
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"已添加人脸"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"点按即可设置人脸"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"人脸解锁"</string>
-    <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"工作用的人脸解锁"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"用于工作资料的人脸解锁"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"如何设置人脸解锁"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"设置人脸解锁"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"使用您的面孔进行身份验证"</string>
@@ -2637,8 +2637,8 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"为助听器进行配对"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"请在下一步中点按您的助听器。您可能需要为左右耳分别进行配对。\n\n请确保助听器已开启，并且已准备好进行配对。"</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 使用中"</string>
-    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，仅左耳已激活"</string>
-    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，仅右耳已激活"</string>
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，仅在使用左耳助听器"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，仅在使用右耳助听器"</string>
     <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，左右耳都已激活"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>及另外 1 个设备已激活"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="776000580683647556">
@@ -4073,7 +4073,7 @@
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"跳过锁定屏幕"</string>
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"解锁后直接转到上次使用的屏幕"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"锁定屏幕, 锁屏, 跳过, 绕过"</string>
-    <string name="locked_work_profile_notification_title" msgid="279367321791301499">"当工作资料遭到锁定时"</string>
+    <string name="locked_work_profile_notification_title" msgid="279367321791301499">"当工作资料锁定时"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"在锁屏状态下仅显示新通知"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"自动从锁定的屏幕中移除之前看过的通知"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"锁屏通知"</string>

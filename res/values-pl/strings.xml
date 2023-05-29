@@ -308,8 +308,8 @@
     <string name="time_picker_title" msgid="1784236407401743393">"Godzina"</string>
     <string name="lock_after_timeout" msgid="8682769000437403444">"Blokuj po wygaszeniu ekranu"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po wygaszeniu"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Zaraz po wygaszeniu, ale nie wtedy, gdy jest odblokowany przez <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po wygaszeniu, ale nie wtedy, gdy jest odblokowany przez <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Zaraz po wygaszeniu, z wyjątkiem sytuacji, gdy blokadę anuluje <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po wygaszeniu, z wyjątkiem sytuacji, gdy blokadę anuluje <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="197365342192696406">"Pokaż tę informację na ekranie blokady"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Dodaj tekst na ekranie blokady"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Włącz widżety"</string>
@@ -539,7 +539,7 @@
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Przy użyciu odcisku palca lub zegarka"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Przy użyciu rozpoznawania twarzy, odcisku palca lub zegarka"</string>
     <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"Przy użyciu zegarka"</string>
-    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Skonfiguruj rozpoznawanie twarzy lub odcisku palca"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Skonfiguruj rozpoznawanie twarzy lub odcisk palca"</string>
     <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"Jeśli twarz lub odcisk palca nie zostaną rozpoznane, możesz odblokować urządzenie zegarkiem"</string>
     <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Najpierw skonfiguruj odblokowywanie odciskiem palca"</string>
     <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"Jeśli odcisk palca nie zostanie rozpoznany, możesz odblokować urządzenie zegarkiem"</string>
@@ -551,7 +551,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Dodano skan twarzy i <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Dodano skan twarzy, odcisk palca i <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Dodano skan twarzy, odciski palca i <xliff:g id="WATCH">%s</xliff:g>"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Rozpoznawanie twarzy i odcisku palca"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Rozpoznawanie twarzy i odcisk palca"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Rozpoznawanie twarzy i odcisku palca w profilu służbowym"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Kliknij, aby skonfigurować"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Dodano skany twarzy i odciski palca"</string>
@@ -2528,8 +2528,8 @@
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Gdy powiększenie jest włączone, możesz powiększać fragmenty ekranu.\n\n"<b>"Aby powiekszyć"</b>", uruchom powiększenie, a następnie kliknij dowolne miejsce na ekranie.\n"<ul><li>"Przeciągnij co najmniej dwoma palcami, by przewijać."</li>\n<li>"Ściągnij do siebie co najmniej dwa palce, by dostosować powiększenie."</li></ul>\n\n<b>"Aby powiększyć tymczasowo"</b>", uruchom powiększenie, a następnie naciśnij i przytrzymaj dowolne miejsce na ekranie.\n"<ul><li>"Przeciągaj palcem, by poruszać się po ekranie."</li>\n<li>"Unieś palec, by wyłączyć powiększenie."</li></ul>\n\n"Nie można powiększyć klawiatury ani paska nawigacji."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Strona <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> z <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Otwieraj przyciskiem ułatwień dostępu"</string>
-    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Przytrzymaj przyciski głośności, aby otworzyć"</string>
-    <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Kliknij ekran trzykrotnie, aby otworzyć"</string>
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Aby otworzyć, przytrzymaj przyciski głośności"</string>
+    <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Aby otworzyć, trzy razy kliknij ekran"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Otwieranie gestem"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Użyj gestu ułatwień dostępu"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Aby użyć tej funkcji, kliknij przycisk ułatwień dostępu <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> u dołu ekranu.\n\nAby przełączać się między funkcjami, naciśnij i przytrzymaj przycisk ułatwień dostępu."</string>
@@ -2676,7 +2676,7 @@
     <string name="accessibility_caption_preference_summary" msgid="632875702223135121">"Nie wszystkie aplikacje do multimediów obsługują te ustawienia napisów."</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Przycisk ułatwień dostępu"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Przesuń dwoma palcami w górę"</string>
-    <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Przytrzymaj klawisze głośności"</string>
+    <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Przytrzymaj przyciski głośności"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Trzykrotnie kliknij ekran"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Dalej"</string>
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Aparaty słuchowe"</string>

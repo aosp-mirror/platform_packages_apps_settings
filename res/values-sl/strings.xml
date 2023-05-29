@@ -151,14 +151,14 @@
     <string name="bluetooth_pref_summary" product="tablet" msgid="3506962706611366830">"Omogočite tabličnemu računalniku, da komunicira z napravami Bluetooth v bližini"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Omogočite napravi, da komunicira z napravami Bluetooth v bližini"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Omogočite telefonu, da komunicira z napravami Bluetooth v bližini"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Onemogoči prelaganje s strojne opreme za A2DP za Bluetooth"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Onemogoči prelaganje na strojno opremo za Bluetooth LE Audio"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Onemogoči prelaganje s strojne opreme za Bluetooth A2DP"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Onemogoči prelaganje s strojne opreme za Bluetooth LE zvok"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Vnovični zagon?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Če želite spremeniti to nastavitev, znova zaženite napravo."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Zaženi znova"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Prekliči"</string>
     <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Omogoči funkcijo Bluetooth LE Audio"</string>
-    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Omogoči funkcijo Bluetooth LE Audio, če naprava podpira strojne zmogljivosti za zvok z majhno porabo energije."</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Omogoči funkcijo Bluetooth LE zvok, če naprava podpira strojno opremo za LE zvok."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Predstavnostne naprave"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Klicne naprave"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Druge naprave"</string>
@@ -2784,7 +2784,7 @@
     <string name="color_cyan" msgid="4341758639597035927">"Cijan"</string>
     <string name="color_yellow" msgid="5957551912912679058">"Rumena"</string>
     <string name="color_magenta" msgid="8943538189219528423">"Magenta"</string>
-    <string name="enable_service_title" msgid="7231533866953706788">"Ali storitvi »<xliff:g id="SERVICE">%1$s</xliff:g>« dovolite popoln nadzor nad svojo napravo?"</string>
+    <string name="enable_service_title" msgid="7231533866953706788">"Ali storitvi <xliff:g id="SERVICE">%1$s</xliff:g> dovolite popoln nadzor nad svojo napravo?"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"<xliff:g id="SERVICE">%1$s</xliff:g> mora:"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"Ker aplikacija zakriva zahtevo za dovoljenje, z nastavitvami ni mogoče preveriti vašega odziva."</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> zahteva popoln nadzor nad to napravo. Storitev lahko prebere zaslon in deluje v imenu uporabnikov s posebnimi potrebami. Ta raven nadzora za večino aplikacij ni primerna."</string>
@@ -2792,7 +2792,7 @@
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Ogledovanje in upravljanje zaslona"</string>
     <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Bere lahko vso vsebino na zaslonu ter prikaže vsebino prek drugih aplikacij."</string>
     <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Ogledovanje in izvajanje dejanj"</string>
-    <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Spremlja lahko vaše interakcije z aplikacijo ali senzorjem strojne opreme ter komunicira z aplikacijami v vašem imenu."</string>
+    <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Spremlja lahko vaše interakcije z aplikacijo ali tipalom strojne opreme ter komunicira z aplikacijami v vašem imenu."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Dovoli"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Zavrni"</string>
     <string name="accessibility_dialog_button_stop" msgid="7295448112784528196">"Ustavi"</string>
@@ -4172,7 +4172,7 @@
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Občutljiva obvestila za delovni profil"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Prikaži občutljivo vsebino delovnega profila na zaklenjenem zaslonu."</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Prikaži vso vsebino obvestil"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Prikaži občutljivo vsebino samo na odklenjenem zaslonu."</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Prikaži občutljivo vsebino samo na odklenjenem zaslonu"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Sploh ne prikazuj obvestil"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Kaj naj bo prikazano na zaklenjenem zaslonu?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Zaklenjen zaslon"</string>
