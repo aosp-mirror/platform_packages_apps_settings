@@ -75,7 +75,7 @@
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Lyd i samtaler"</string>
     <string name="bluetooth_media_title" msgid="343705257183053699">"Medier"</string>
     <string name="bluetooth_system_sounds_title" msgid="6746938637128763205">"Varsler og andre systemlyder"</string>
-    <string name="bluetooth_audio_routing_footer_summary" msgid="410260713589309293">"Lydutgangen avgjøres som standard av enkeltapper"</string>
+    <string name="bluetooth_audio_routing_footer_summary" msgid="410260713589309293">"Som standard blir lydutgangen valgt av enkeltapper"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"Bluetooth-enhet uten navn"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"Søker"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"Finner ingen Bluetooth-enheter."</string>
@@ -180,13 +180,13 @@
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Bruk appstandard"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"Celsius (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"Fahrenheit (°F)"</string>
-    <string name="sunday_first_day_of_week" msgid="7644548348295686051">"Søndag"</string>
-    <string name="monday_first_day_of_week" msgid="7244698610476506771">"Mandag"</string>
-    <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"Tirsdag"</string>
-    <string name="wednesday_first_day_of_week" msgid="6544537589727042869">"Onsdag"</string>
-    <string name="thursday_first_day_of_week" msgid="3035885630945594833">"Torsdag"</string>
-    <string name="friday_first_day_of_week" msgid="7074795061812083541">"Fredag"</string>
-    <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Lørdag"</string>
+    <string name="sunday_first_day_of_week" msgid="7644548348295686051">"søndag"</string>
+    <string name="monday_first_day_of_week" msgid="7244698610476506771">"mandag"</string>
+    <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"tirsdag"</string>
+    <string name="wednesday_first_day_of_week" msgid="6544537589727042869">"onsdag"</string>
+    <string name="thursday_first_day_of_week" msgid="3035885630945594833">"torsdag"</string>
+    <string name="friday_first_day_of_week" msgid="7074795061812083541">"fredag"</string>
+    <string name="saturday_first_day_of_week" msgid="3702282590450322727">"lørdag"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Apper som ikke støtter regionsinnstillinger, bruker sine egne standardinnstillinger for lokalitet."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Finn ut mer om språkinnstillinger."</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Vil du fjerne det valgte språket?}other{Vil du fjerne de valgte språkene?}}"</string>
@@ -460,16 +460,30 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Ferdig"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ops, det er ikke sensoren"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Berør sensoren på baksiden av telefonen. Bruk pekefingeren."</string>
-    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Registreringen er ikke fullført"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (6305457126747942642) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message_setup (2735739618722623980) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message (5858386244898601003) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Konfigurering av fingeravtrykk er tidsavbrutt"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"Du kan konfigurere fingeravtrykket senere i Innstillinger."</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Registrering av fingeravtrykket mislyktes. Prøv på nytt, eller bruk en annen finger."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message_setup (8521566666541069383) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message_setup (8140162986046783546) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (3534341971920335247) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (4344665784935791640) -->
+    <skip />
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Legg til et til"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Neste"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Alternativet for skjermlås er slått av. For å finne ut mer, kontakt administratoren for organisasjonen din."</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Du kan fortsatt bruke fingeravtrykket til å godkjenne kjøp og apptilgang."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Løft fingeren og legg den på sensoren igjen"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Kan ikke bruke fingeravtrykkssensoren. Gå til en reparasjonsleverandør"</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration_title (3073145395701953620) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (304585658839584958) -->
+    <skip />
     <string name="security_advanced_settings" msgid="6260756619837834042">"Flere sikkerhetsinnstillinger"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Lås for jobbprofil, kryptering med mer"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Kryptering, legitimasjon med mer"</string>
@@ -627,8 +641,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Vil du koble til <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
-    <!-- no translation found for bluetooth_pairing_group_late_bonding (5310869364570266209) -->
-    <skip />
+    <string name="bluetooth_pairing_group_late_bonding" msgid="5310869364570266209">"Legg til et nytt medlem i det eksisterende koordinerte settet"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Bluetooth-sammenkoblingskode"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Skriv inn sammenkoblingskoden og trykk på Return eller Enter"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"Personlig kode inneholder bokstaver eller symboler"</string>
@@ -1743,8 +1756,8 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"For alle språk"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Flere språk"</string>
     <string name="testing" msgid="6294172343766732037">"Testing"</string>
-    <string name="keyboard_settings_summary" msgid="2716339620942356432">"Skjermtastatur, tale, verktøy"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"Skjermtastatur, fysisk tastatur, tale, verktøy"</string>
+    <string name="keyboard_settings_summary" msgid="9188442758316476986">"Skjermtastatur, verktøy"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"Skjermtastatur, fysisk tastatur, verktøy"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Fysisk tastatur"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Oppsett"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Velg gadget"</string>
@@ -2858,7 +2871,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Oppretter en klon av <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Opprettet en klon av <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Språk, bevegelser, klokkeslett, sikkerhetskopi"</string>
-    <string name="languages_setting_summary" msgid="4924440599794956443">"Systemspråk, appspråk"</string>
+    <string name="languages_setting_summary" msgid="7963053736715746726">"Systemspråk, appspråk, tale"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, Wifi, nettverkstilkobling, Internett, trådløs, data, Wi Fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi-varsel, wifi-varsel"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"databruk"</string>
@@ -2999,7 +3012,7 @@
     <string name="spatial_summary_off" msgid="8272678804629774378">"Av"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"På / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"På / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> og <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
-    <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Du kan også slå på romlig lyd for Bluetooth-enheter."</string>
+    <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Du kan også slå på Romlig lyd for Bluetooth-enheter."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Innstillinger for tilkoblede enheter"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ingen}=1{1 tidsplan er angitt}other{# tidsplaner er angitt}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ikke forstyrr"</string>
