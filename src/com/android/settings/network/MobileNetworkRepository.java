@@ -433,7 +433,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         mActiveSubInfoEntityList = availableSubInfoEntityList.stream()
                 .filter(SubscriptionInfoEntity::isActiveSubscription)
                 .filter(SubscriptionInfoEntity::isSubscriptionVisible)
-                .sorted((e1, e2) -> Integer.compare(e1.simSlotIndex, e2.simSlotIndex))
                 .collect(Collectors.toList());
         if (DEBUG) {
             Log.d(TAG, "onActiveSubInfoChanged, activeSubInfoEntityList = "
