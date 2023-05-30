@@ -202,8 +202,10 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     void showAlert(Intent intent) {
         final Context context = getActivity();
 
-        final CharSequence title = intent.getCharSequenceExtra(Phone.EXTRA_KEY_ALERT_TITLE);
-        final CharSequence message = intent.getCharSequenceExtra(Phone.EXTRA_KEY_ALERT_MESSAGE);
+        final CharSequence title =
+                intent.getCharSequenceExtra(ImsManager.EXTRA_WFC_REGISTRATION_FAILURE_TITLE);
+        final CharSequence message =
+                intent.getCharSequenceExtra(ImsManager.EXTRA_WFC_REGISTRATION_FAILURE_MESSAGE);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(message)
