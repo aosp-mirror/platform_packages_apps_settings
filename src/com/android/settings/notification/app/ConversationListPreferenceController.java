@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.notification.ConversationChannelWrapper;
+import android.text.BidiFormatter;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
@@ -132,7 +133,7 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
     CharSequence getTitle(ConversationChannelWrapper conversation) {
         ShortcutInfo si = conversation.getShortcutInfo();
         return si != null
-                ? si.getLabel()
+                ? BidiFormatter.getInstance().unicodeWrap(si.getLabel())
                 : conversation.getNotificationChannel().getName();
     }
 
