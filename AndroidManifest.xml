@@ -1712,14 +1712,14 @@
                        android:value="@string/menu_key_apps"/>
         </activity-alias>
 
-        <activity-alias android:name="com.google.android.settings.ManageFullScreenIntent"
+        <activity-alias android:name="ManageFullScreenIntent"
                         android:exported="true"
                         android:targetActivity=".spa.SpaBridgeActivity">
             <meta-data android:name="com.android.settings.spa.DESTINATION"
                        android:value="TogglePermissionAppList/UseFullScreenIntent"/>
         </activity-alias>
 
-        <activity-alias android:name="com.google.android.settings.AppManageFullScreenIntent"
+        <activity-alias android:name="AppManageFullScreenIntent"
                         android:exported="true"
                         android:targetActivity=".spa.SpaAppBridgeActivity">
             <intent-filter>
