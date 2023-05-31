@@ -26,6 +26,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.UsageProgressBarPreference;
@@ -92,7 +93,9 @@ public class StorageUsageProgressBarPreferenceController extends BasePreferenceC
                 if (mStorageEntry.isPrivate()) {
                     // StorageStatsManager can only query private storages.
                     mTotalBytes = mStorageStatsManager.getTotalBytes(mStorageEntry.getFsUuid());
-                    mUsedBytes = mTotalBytes
+                    // TODO(b/288103116): replace with  new API to get TotalBytes before rounding
+                    //  once support by StorageManager.
+                    mUsedBytes = Utils.getPrimaryStorageSize()
                             - mStorageStatsManager.getFreeBytes(mStorageEntry.getFsUuid());
                 } else {
                     final File rootFile = mStorageEntry.getPath();

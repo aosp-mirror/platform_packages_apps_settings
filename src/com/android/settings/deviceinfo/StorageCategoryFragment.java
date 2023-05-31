@@ -211,7 +211,9 @@ public class StorageCategoryFragment extends DashboardFragment
 
         setLoading(false /* loading */, false /* animate */);
 
-        final long privateUsedBytes = mStorageInfo.totalBytes - mStorageInfo.freeBytes;
+        // TODO(b/288103116): replace with  new API to get TotalBytes before rounding
+        //  once support by StorageManager.
+        final long privateUsedBytes = Utils.getPrimaryStorageSize() - mStorageInfo.freeBytes;
         mPreferenceController.setVolume(mSelectedStorageEntry.getVolumeInfo());
         mPreferenceController.setUsedSize(privateUsedBytes);
         mPreferenceController.setTotalSize(mStorageInfo.totalBytes);
