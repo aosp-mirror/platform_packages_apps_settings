@@ -28,6 +28,8 @@ import android.telephony.TelephonyManager;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -37,8 +39,10 @@ import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 /** Tests for {@link HearingDeviceCallRoutingPreferenceController}. */
+@Config(shadows = {ShadowBluetoothAdapter.class})
 @RunWith(RobolectricTestRunner.class)
 public class HearingDeviceCallRoutingPreferenceControllerTest {
 
