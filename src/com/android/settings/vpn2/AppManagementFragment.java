@@ -175,7 +175,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.VPN;
+        return SettingsEnums.VPN_APP_MANAGEMENT;
     }
 
     private boolean onForgetVpnClick() {
