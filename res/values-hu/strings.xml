@@ -99,7 +99,7 @@
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Eszközei"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Új eszköz párosítása"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Bluetooth A2DP hardver tehermentesítésének letiltása"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Bluetooth LE audio hardver tehermentesítésének letiltása"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Bluetooth LE hangátvitel hardver tehermentesítésének letiltása"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Újraindítja az eszközt?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"A beállítás módosításához újra kell indítania az eszközt."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Újraindítás"</string>
@@ -377,7 +377,7 @@
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Arc, ujjlenyomat és <xliff:g id="WATCH">%s</xliff:g> hozzáadva"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Arc, ujjlenyomatok és <xliff:g id="WATCH">%s</xliff:g> hozzáadva"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Arc- és ujjlenyomat-alapú feloldás"</string>
-    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Arcalapú feloldás és Feloldás ujjlenyomattal a munkaprofilban"</string>
+    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Arc- és ujjlenyomat-alapú feloldás a munkaprofilban"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Beállítás szükséges"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Arc és ujjlenyomatok hozzáadva"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Arc és ujjlenyomat hozzáadva"</string>
@@ -460,16 +460,30 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Kész"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Hoppá! Az nem az érzékelő"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Érintse meg a hátsó érzékelőt mutatóujjával."</string>
-    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"A regisztráció nincs kész"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (6305457126747942642) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message_setup (2735739618722623980) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message (5858386244898601003) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Lejárt az ujjlenyomat-beállítás időkorlátja"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"Az ujjlenyomatot később is beállíthatja a Beállításokban."</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Az ujjlenyomat regisztrációja nem sikerült. Próbálja újra, vagy próbálkozzon egy másik ujjával."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message_setup (8521566666541069383) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message_setup (8140162986046783546) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (3534341971920335247) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (4344665784935791640) -->
+    <skip />
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Még egy hozzáadása"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Következő"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"A képernyőzár lehetőség le van tiltva. További információért forduljon szervezete rendszergazdájához."</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Továbbra is használhatja ujjlenyomatát vásárlások és alkalmazás-hozzáférések engedélyezésére."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Emelje fel ujját, majd érintse meg újra az érzékelőt"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Nem lehet használni az ujjlenyomat-érzékelőt. Keresse fel a szervizt."</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration_title (3073145395701953620) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (304585658839584958) -->
+    <skip />
     <string name="security_advanced_settings" msgid="6260756619837834042">"További biztonsági beállítások"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Munkaprofil zárolása, titkosítás és egyebek"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Titkosítás, hitelesítési adatok és egyebek"</string>
@@ -627,8 +641,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Párosítja a következővel: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
-    <!-- no translation found for bluetooth_pairing_group_late_bonding (5310869364570266209) -->
-    <skip />
+    <string name="bluetooth_pairing_group_late_bonding" msgid="5310869364570266209">"Új tag hozzáadása a meglévő koordinált készlethez"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Bluetooth-párosítókód"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Gépelje be a párosítókódot, majd nyomja meg az Enter vagy a Return gombot"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"A PIN-kód betűket vagy szimbólumokat tartalmaz"</string>
@@ -1743,8 +1756,8 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"Minden nyelven"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"További nyelvek…"</string>
     <string name="testing" msgid="6294172343766732037">"Tesztelés"</string>
-    <string name="keyboard_settings_summary" msgid="2716339620942356432">"Képernyő-billentyűzet, beszéd, eszközök"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"Képernyő-billentyűzet, fizikai billentyűzet, beszéd, eszközök"</string>
+    <string name="keyboard_settings_summary" msgid="9188442758316476986">"Képernyő-billentyűzet, eszközök"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"Képernyő-billentyűzet, fizikai billentyűzet, eszközök"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Fizikai billentyűzet"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Elrendezés"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Modul kiválasztása"</string>
@@ -2668,7 +2681,7 @@
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Nincs beállítva"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Nincs létrehozva – Korlátozott jogokkal rendelkező profil"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Még nincs létrehozva – Munkaprofil"</string>
-    <string name="user_admin" msgid="4024553191395768119">"Rendszergazda"</string>
+    <string name="user_admin" msgid="4024553191395768119">"Adminisztrátor"</string>
     <string name="user_you" msgid="3070562015202859996">"Ön (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Nem adhat hozzá több felhasználót. Újabb hozzáadásához távolítsa el valamelyik meglévő felhasználót."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Korlátozott profilok nem adhatnak hozzá fiókokat"</string>
@@ -2703,7 +2716,7 @@
     <string name="user_remove_user" msgid="8468203789739693845">"Felhasználó törlése"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Engedélyezi a hívásokat és SMS-eket?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"A rendszer megosztja az SMS- és híváslistát ezzel a felhasználóval."</string>
-    <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Törli az adminisztrátori jogosultságokat?"</string>
+    <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Eltávolítja az adminisztrátori jogosultságokat?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Ha visszavonja a felhasználó adminisztrátori jogosultságait, később újra megadhatja neki Ön vagy egy másik adminisztrátor."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Segélyhívási információk"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Adatok és névjegyek: <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -2809,7 +2822,7 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"Mindig ezt használja hívásokhoz"</string>
     <string name="select_sim_for_data" msgid="2642305487659432499">"SIM-kártya kiválasztása a mobiladatokhoz"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"SIM-kártya kiválasztása SMS-ekhez"</string>
-    <string name="data_switch_started" msgid="6292759843974720112">"Az adatforgalomhoz használt SIM-kártya váltása folyamatban – ez legfeljebb egy percet vesz igénybe…"</string>
+    <string name="data_switch_started" msgid="6292759843974720112">"Adatforgalomhoz használt SIM-kártya váltása – egy perc, és kész."</string>
     <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"A(z) <xliff:g id="NEW_SIM">%1$s</xliff:g> szolgáltatót használja?"</string>
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Ha a(z) <xliff:g id="NEW_SIM">%1$s</xliff:g> szolgáltatóra vált, az eszköz többé nem használja a(z) <xliff:g id="OLD_SIM">%2$s</xliff:g> szolgáltatót a mobiladat-kapcsolathoz."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"<xliff:g id="NEW_SIM">%1$s</xliff:g> használata"</string>
@@ -2858,7 +2871,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>-klón létrehozása…"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>-klón létrehozva"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Nyelvek, kézmozdulatok, idő, biztonsági mentés"</string>
-    <string name="languages_setting_summary" msgid="4924440599794956443">"Rendszernyelvek, alkalmazásnyelvek"</string>
+    <string name="languages_setting_summary" msgid="7963053736715746726">"Rendszernyelvek, alkalmazásnyelvek, beszéd"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"WiFi, Wi-Fi, hálózati kapcsolat, internet, vezeték nélküli, adatok, Wi Fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi-értesítés, wifi értesítés"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"adathasználat"</string>
