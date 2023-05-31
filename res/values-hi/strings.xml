@@ -99,7 +99,7 @@
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"आपके डिवाइस"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"नया डिवाइस जोड़ें"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"ब्लूटूथ A2DP हार्डवेयर ऑफ़लोड को बंद करें"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"\"ब्लूटूथ LE audio\" हार्डवेयर ऑफ़लोड को बंद करें"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"\'ब्लूटूथ LE audio\' हार्डवेयर ऑफ़लोड को बंद करें"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"क्या आपको डिवाइस रीस्टार्ट करना है?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"इस सेटिंग को बदलने के लिए, आपको अपना डिवाइस रीस्टार्ट करना होगा."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"रीस्टार्ट करें"</string>
@@ -345,8 +345,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"रद्द करें"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"रहने दें"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"मैं सहमत हूं"</string>
-    <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"फ़िंगरप्रिंट सेट अप न करें?"</string>
-    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"फ़िंगरप्रिंट सेट अप करने में सिर्फ़ एक या दो मिनट लगते हैं. अगर आपको अभी सेट अप नहीं करना है, तो बाद में सेटिंग में जाकर फ़िंगरप्रिंट जोड़ा जा सकता है."</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"फ़िंगरप्रिंट सेटअप न करें?"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"फ़िंगरप्रिंट सेटअप करने में सिर्फ़ एक या दो मिनट लगते हैं. अगर आपको अभी सेटअप नहीं करना है, तो बाद में सेटिंग में जाकर फ़िंगरप्रिंट जोड़ा जा सकता है."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"यह आइकॉन दिखने पर, किसी ऐप में साइन इन करने या खरीदारी की मंज़ूरी देने के लिए, पहचान की पुष्टि करते समय फ़िंगरप्रिंट इस्तेमाल करें"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"ध्यान रखें"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"यह कैसे काम करता है"</string>
@@ -463,16 +463,30 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"हो गया"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"ओह हो, वह सेंसर नहीं है"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"अपने फ़ोन के पीछे लगे सेंसर को छुएं. अपनी तर्जनी (अंगूठे के बगल वाली) उंगली का इस्तेमाल करें."</string>
-    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"फ़िंगरप्रिंट जोड़ने की प्रोसेस पूरी नहीं हुई"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (6305457126747942642) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message_setup (2735739618722623980) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message (5858386244898601003) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"फ़िंगरप्रिंट सेटअप करने का तय समय खत्म हो गया"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"कुछ समय बाद सेटिंग में जाकर, फ़िंगरप्रिंट सेट अप करें."</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"फ़िंगरप्रिंट रजिस्टर नहीं हुआ. फिर से कोशिश करें या किसी दूसरी उंगली का इस्तेमाल करें."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message_setup (8521566666541069383) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message_setup (8140162986046783546) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (3534341971920335247) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (4344665784935791640) -->
+    <skip />
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"दूसरा फ़िंगरप्रिंट जोड़ें"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"आगे बढ़ें"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"फ़िंगरप्रिंट के ज़रिए स्क्रीन लॉक खोलने का विकल्प बंद है. ज़्यादा जानने के लिए, अपने संगठन के एडमिन से संपर्क करें."</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"फ़िंगरप्रिंट का इस्तेमाल, खरीदारी को मंज़ूरी देने और ऐप्लिकेशन को ऐक्सेस करने के लिए अब भी किया जा सकता है."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"उंगली हटाएं और सेंसर को फिर से छूएं"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"फ़िंगरप्रिंट सेंसर इस्तेमाल नहीं किया जा सकता. रिपेयर की सेवा देने वाली कंपनी से संपर्क करें"</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration_title (3073145395701953620) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (304585658839584958) -->
+    <skip />
     <string name="security_advanced_settings" msgid="6260756619837834042">"सुरक्षा से जुड़ी और सेटिंग"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"वर्क प्रोफ़ाइल लॉक, एन्क्रिप्शन वगैरह"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"एन्क्रिप्शन, क्रेडेंशियल वगैरह"</string>
@@ -508,7 +522,7 @@
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"अगर आप इस लॉक को भूल जाते हैं, तो आईटी एडमिन से उसे रिसेट करने के लिए कहें"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"स्क्रीन लॉक के विकल्प"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"स्क्रीन लॉक के विकल्प"</string>
-    <string name="lock_screen_auto_pin_confirm_title" msgid="3012128112186088375">"पिन की पुष्टि करके डिवाइस को अपने-आप अनलॉक करने वाली सेटिंग चालू करें"</string>
+    <string name="lock_screen_auto_pin_confirm_title" msgid="3012128112186088375">"पिन की अपने-आप पुष्टि होकर डिवाइस अनलॉक होने की सेटिंग चालू करें"</string>
     <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"यह सेटिंग चालू करने पर, छह या इससे ज़्यादा अंकों का सही पिन डालने के बाद डिवाइस अपने-आप अनलॉक हो जाएगा. यह सुविधा, Enter पर टैप करके पिन की पुष्टि करने की सुविधा से कम सुरक्षित होती है."</string>
     <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"पिन सही होने की पुष्टि अपने-आप करने वाली सेटिंग चालू करें"</string>
     <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"Enter पर टैप करके पिन की पुष्टि करना, अपने-आप पुष्टि करने वाली सुविधा से ज़्यादा सुरक्षित होता है"</string>
@@ -630,8 +644,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"ब्लूटूथ"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"ब्लूटूथ"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"क्या आपको <xliff:g id="DEVICE_NAME">%1$s</xliff:g> से जोड़ना है?"</string>
-    <!-- no translation found for bluetooth_pairing_group_late_bonding (5310869364570266209) -->
-    <skip />
+    <string name="bluetooth_pairing_group_late_bonding" msgid="5310869364570266209">"मौजूदा कोऑर्डिनेटेड सेट में नया सदस्य जोड़ें"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"ब्‍लूटूथ से जोड़ने के लिए कोड"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"दूसरे डिवाइस से जोड़ना वाला कोड लिखें और फिर Return या Enter दबाएं"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"पिन में अक्षर या प्रतीक शामिल होते हैं"</string>
@@ -1120,8 +1133,7 @@
     <string name="kernel_version" msgid="3513538109381366881">"Kernel वर्शन"</string>
     <string name="build_number" msgid="9009733242117579826">"बिल्‍ड नंबर"</string>
     <string name="module_version" msgid="1787518340082046658">"Google Play का सिस्टम अपडेट"</string>
-    <!-- no translation found for battery_info (7873528123969546728) -->
-    <skip />
+    <string name="battery_info" msgid="7873528123969546728">"बैटरी की जानकारी"</string>
     <string name="device_info_not_available" msgid="4804474466616712326">"उपलब्ध नहीं"</string>
     <string name="storage_settings" msgid="7472188817781592677">"स्टोरेज"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"स्टोरेज और कैश"</string>
@@ -1154,11 +1166,10 @@
     <string name="status_bt_address" msgid="6919660304578476547">"ब्लूटूथ पता"</string>
     <string name="status_serial_number" msgid="9060064164331466789">"सीरियल नंबर"</string>
     <string name="status_up_time" msgid="1274778533719495438">"चालू रहने का समय"</string>
-    <!-- no translation found for battery_manufacture_date (7139426520156833987) -->
-    <skip />
-    <!-- no translation found for battery_first_use_date (3157207331722711317) -->
-    <skip />
-    <!-- no translation found for battery_cycle_count (2912949283386571900) -->
+    <string name="battery_manufacture_date" msgid="7139426520156833987">"बनाए जाने की तारीख"</string>
+    <string name="battery_first_use_date" msgid="3157207331722711317">"पहली बार इस्तेमाल किए जाने की तारीख"</string>
+    <string name="battery_cycle_count" msgid="2912949283386571900">"बैटरी कितनी बार पूरी इस्तेमाल की गई"</string>
+    <!-- no translation found for battery_cycle_count_not_available (2426584515665184664) -->
     <skip />
     <string name="memory_calculating_size" msgid="3898240439798661242">"गिनती हो रही है..."</string>
     <string name="storage_menu_rename" msgid="8549835371429159336">"नाम बदलें"</string>
@@ -1498,13 +1509,13 @@
     <string name="lock_settings_profile_title" msgid="103605580492566086">"वर्क प्रोफ़ाइल सुरक्षा"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3776275029218681815">"वर्क प्रोफ़ाइल स्क्रीन लॉक"</string>
     <string name="lock_settings_profile_unification_title" msgid="5777961097706546513">"एक लॉक का उपयोग करें"</string>
-    <string name="lock_settings_profile_unification_summary" msgid="1317553536289481654">"वर्क प्रोफ़ाइल और डिवाइस स्क्रीन के लिए एक लॉक का उपयोग करें"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="1317553536289481654">"वर्क प्रोफ़ाइल और डिवाइस स्क्रीन के लिए एक ही लॉक का इस्तेमाल करें"</string>
     <string name="lock_settings_profile_unification_dialog_title" msgid="5163178097464820825">"एक लॉक का उपयोग करें?"</string>
     <string name="lock_settings_profile_unification_dialog_body" msgid="1222905637428672355">"आपका डिवाइस आपकी वर्क प्रोफ़ाइल के स्क्रीन लॉक का उपयोग करेगा. दोनों ही लॉक पर इस काम से जुड़ीं नीतियां लागू होंगी."</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="8844682343443755895">"आपका वर्क प्रोफ़ाइल लॉक आपके संगठन की सुरक्षा आवश्यकताएं पूरी नहीं करता है. आप अपनी डिवाइस स्क्रीन और अपनी वर्क प्रोफ़ाइल के लिए एक ही लॉक का उपयोग कर सकते हैं, लेकिन सभी वर्क लॉक पॉलिसी लागू होंगी."</string>
     <string name="lock_settings_profile_unification_dialog_confirm" msgid="6276915393736137843">"एक लॉक का उपयोग करें"</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="8509287115116369677">"एक लॉक का उपयोग करें"</string>
-    <string name="lock_settings_profile_unified_summary" msgid="777095092175037385">"डिवाइस स्क्रीन लॉक के जैसा"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="777095092175037385">"वही जो डिवाइस स्क्रीन का लॉक है"</string>
     <string name="manageapplications_settings_title" msgid="9198876415524237657">"ऐप्लिकेशन  प्रबंधित करें"</string>
     <string name="applications_settings" msgid="1941993743933425622">"ऐप्लिकेशन की जानकारी"</string>
     <string name="applications_settings_header" msgid="3154670675856048015">"ऐप्लिकेशन सेटिंग"</string>
@@ -1754,8 +1765,8 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"सभी भाषाओं के लिए"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"ज़्यादा भाषाएं…"</string>
     <string name="testing" msgid="6294172343766732037">"परीक्षण"</string>
-    <string name="keyboard_settings_summary" msgid="2716339620942356432">"ऑन-स्क्रीन कीबोर्ड, स्पीच, टूल"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"ऑन-स्क्रीन कीबोर्ड, फ़िज़िकल कीबोर्ड, स्पीच, टूल"</string>
+    <string name="keyboard_settings_summary" msgid="9188442758316476986">"ऑन-स्क्रीन कीबोर्ड, टूल"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"ऑन-स्क्रीन कीबोर्ड, फ़िज़िकल कीबोर्ड, टूल"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"सामान्य कीबोर्ड"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"लेआउट"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"गैजेट चुनें"</string>
@@ -1866,14 +1877,15 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"सुलभता सुविधा का इस्तेमाल करने के लिए, स्क्रीन पर नीचे से ऊपर की ओर, दो उंगलियों से स्वाइप करें.\n\nएक सुविधा से दूसरी सुविधा पर जाने के लिए, दो उंगलियों से ऊपर की ओर स्वाइप करें और स्क्रीन को थोड़ी देर दबाकर रखें."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"सुलभता सुविधा का इस्तेमाल करने के लिए, स्क्रीन पर नीचे से ऊपर की ओर, तीन उंगलियों से स्वाइप करें.\n\nएक सुविधा से दूसरी सुविधा पर जाने के लिए, तीन उंगलियों से ऊपर की ओर स्वाइप करें और स्क्रीन को थोड़ी देर दबाकर रखें."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"ठीक है"</string>
-    <string name="accessibility_tutorial_dialog_link_button" msgid="1624189347106713695">"सुलभता बटन की सेटिंग"</string>
+    <!-- no translation found for accessibility_tutorial_dialog_link_button (6797349445794031781) -->
+    <skip />
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g> का शॉर्टकट"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"सुलभता बटन"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"सुलभता वाले जेस्चर (हाव-भाव)"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"दो उंगलियों से ऊपर की ओर स्वाइप करें"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"तीन उंगलियों से ऊपर की ओर स्वाइप करें"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"सुलभता बटन पर टैप करें"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"सुलभता वाले जेस्चर (हाव-भाव) का इस्तेमाल करें"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"सुलभता से जुड़े हाथ के जेस्चर का इस्तेमाल करें"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"स्क्रीन पर सबसे नीचे मौजूद, सुलभता बटन <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> पर टैप करें.\n\nएक सुविधा से दूसरी सुविधा पर जाने के लिए, सुलभता बटन को दबाकर रखें."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"स्क्रीन पर नीचे से ऊपर की ओर दो उंगलियों से स्वाइप करें.\n\nएक सुविधा से दूसरी सुविधा पर जाने के लिए, दो उंगलियों से ऊपर की ओर स्वाइप करें और स्क्रीन को थोड़ी देर दबाकर रखें."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"स्क्रीन पर नीचे से ऊपर की ओर तीन उंगलियों से स्वाइप करें.\n\nएक सुविधा से दूसरी सुविधा पर जाने के लिए, तीन उंगलियों से ऊपर की ओर स्वाइप करें और स्क्रीन को थोड़ी देर दबाकर रखें."</string>
@@ -1974,7 +1986,7 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> का इस्तेमाल करें"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> खोलें"</string>
     <string name="accessibility_service_auto_added_qs_tooltip_content" msgid="2941824314912928072">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> को \'फटाफट सेटिंग\' में जोड़ा गया. इसे कभी भी चालू या बंद करने के लिए, स्क्रीन पर नीचे की ओर स्वाइप करें."</string>
-    <string name="accessibility_service_qs_tooltip_content" msgid="6002493441414967868">"स्क्रीन के सबसे ऊपरी हिस्से से भी, <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> को \'फटाफट सेटिंग\' में जोड़ा जा सकता है"</string>
+    <string name="accessibility_service_qs_tooltip_content" msgid="6002493441414967868">"स्क्रीन के सबसे ऊपरी हिस्से से भी, <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> को \'क्विक सेटिंग\' में जोड़ा जा सकता है"</string>
     <string name="accessibility_color_correction_auto_added_qs_tooltip_content" msgid="9092661358437404374">"रंग में सुधार करने की सुविधा को \'फटाफट सेटिंग\' में जोड़ा गया. इसे कभी भी चालू या बंद करने के लिए, स्क्रीन पर नीचे की ओर स्वाइप करें."</string>
     <string name="accessibility_color_correction_qs_tooltip_content" msgid="3258628434235475205">"स्क्रीन के सबसे ऊपरी हिस्से से भी, रंग में सुधार करने की सुविधा को \'फटाफट सेटिंग\' में जोड़ा जा सकता है"</string>
     <string name="accessibility_color_inversion_auto_added_qs_tooltip_content" msgid="7267618234972101725">"रंग बदलने की सुविधा को \'फटाफट सेटिंग\' में जोड़ा गया. इसे कभी भी चालू या बंद करने के लिए, स्क्रीन पर नीचे की ओर स्वाइप करें."</string>
@@ -2329,6 +2341,8 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"ऐप्लिकेशन के हिसाब से देखें"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"सिस्टम के हिसाब से देखें"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_cycle_count_footer (3642121059800373545) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"प्रोसेस के आंकड़े"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"चल रही प्रक्रिया के बारे में आकंड़े"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"मेमोरी उपयोग"</string>
@@ -2868,7 +2882,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> का क्लोन बनाया जा रहा है"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> का क्लोन बनाया गया"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"भाषाएं, जेस्चर, समय, बैकअप"</string>
-    <string name="languages_setting_summary" msgid="4924440599794956443">"सिस्टम की भाषाएं, ऐप्लिकेशन की भाषाएं"</string>
+    <string name="languages_setting_summary" msgid="7963053736715746726">"सिस्टम की भाषाएं, ऐप्लिकेशन की भाषाएं, बोली"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"वाईफ़ाई, वाई-फ़ाई, नेटवर्क कनेक्शन, इंटरनेट, वायरलेस, डेटा, वाई फ़ाई"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"वाई-फ़ाई सूचना, वाई-फ़ाई नोटिफ़िकेशन"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"डेटा खर्च"</string>
@@ -2932,8 +2946,7 @@
     <string name="keywords_sim_status_iccid_esim" msgid="4634015619840979184">"नेटवर्क, मोबाइल नेटवर्क किस राज्य का है, सेवा किस राज्य में ली जा रही है, सिग्नल की क्वालिटी, मोबाइल नेटवर्क टाइप, रोमिंग, आईसीसीआईडी, ईआईडी"</string>
     <string name="keywords_esim_eid" msgid="8128175058237372457">"ईआईडी"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"सीरियल नंबर, हार्डवेयर वर्शन"</string>
-    <!-- no translation found for keywords_battery_info (3319796850366687033) -->
-    <skip />
+    <string name="keywords_battery_info" msgid="3319796850366687033">"बैटरी की जानकारी, बनाए जाने की तारीख, बैटरी कितनी बार पूरी इस्तेमाल की गई, और पहली बार इस्तेमाल किए जाने की तारीख"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"Android सुरक्षा पैच लेवल, मोबाइल रेडियो (बेसबैंड वर्शन), kernel वर्शन"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"थीम, हल्का रंग, गहरा रंग, मोड, लाइट सेंसिटिविटी, फ़ोटोफ़ोबिया, रंग गहरा करना, गहरा रंग करना, गहरे रंग वाला मोड, माइग्रेन"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"गहरे रंग वाली थीम"</string>
@@ -3856,10 +3869,6 @@
     <string name="overlay_option_device_default" msgid="7986355499809313848">"डिवाइस की डिफ़ॉल्ट सेटिंग"</string>
     <string name="overlay_toast_failed_to_apply" msgid="4839587811338164960">"ओवरले लागू नहीं किया जा सका"</string>
     <string name="special_access" msgid="1767980727423395147">"ऐप्लिकेशन के लिए खास ऐक्सेस"</string>
-    <plurals name="special_access_summary" formatted="false" msgid="4995506406763570815">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> ऐप्लिकेशन पाबंदी के बिना डेटा का इस्तेमाल कर सकता है</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ऐप्लिकेशन पाबंदी के बिना डेटा का इस्तेमाल कर सकते हैं</item>
-    </plurals>
     <string name="special_access_more" msgid="132919514147475846">"और देखें"</string>
     <string name="long_background_tasks_label" msgid="3169590134850226687">"लंबे बैकग्राउंड टास्क"</string>
     <string name="long_background_tasks_switch_title" msgid="2491623894899492543">"लंबे बैकग्राउंड टास्क करने की अनुमति दें"</string>
@@ -4724,4 +4733,36 @@
     <string name="contrast_medium" msgid="384414510709285811">"सामान्य"</string>
     <string name="contrast_high" msgid="3988567609694797696">"ज़्यादा"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"इस ऐप्लिकेशन को सिर्फ़ एक विंडो में खोला जा सकता है"</string>
+    <!-- no translation found for accessibility_feature_full_state_summary (8747170258807179670) -->
+    <skip />
+    <!-- no translation found for generic_accessibility_service_on (2465820044606775562) -->
+    <skip />
+    <!-- no translation found for generic_accessibility_service_off (1752061696695346360) -->
+    <skip />
+    <!-- no translation found for generic_accessibility_feature_shortcut_off (3669343136122187913) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_state_off (8158137799007601475) -->
+    <skip />
+    <!-- no translation found for daltonizer_state_on (131013270022603983) -->
+    <skip />
+    <!-- no translation found for daltonizer_state_off (1162285688069856179) -->
+    <skip />
+    <!-- no translation found for color_inversion_state_on (1160969033636440368) -->
+    <skip />
+    <!-- no translation found for color_inversion_state_off (6925638668080451724) -->
+    <skip />
+    <!-- no translation found for color_inversion_feature_summary (1199876648549627647) -->
+    <skip />
+    <!-- no translation found for magnification_feature_summary (641825267460247848) -->
+    <skip />
+    <!-- no translation found for autoclick_disabled (3213396804955002120) -->
+    <skip />
+    <!-- no translation found for show_captions_disabled (690650956523818755) -->
+    <skip />
+    <!-- no translation found for show_captions_enabled (7089043007924626) -->
+    <skip />
+    <!-- no translation found for live_caption_disabled (3562035026547887366) -->
+    <skip />
+    <!-- no translation found for live_caption_enabled (5269360946200718949) -->
+    <skip />
 </resources>

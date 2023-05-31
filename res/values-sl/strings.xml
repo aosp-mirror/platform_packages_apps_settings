@@ -69,7 +69,7 @@
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Za to napravo"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Zvočni izhod"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"O zvočnem izhodu"</string>
-    <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Zvoke usmerite v slušni aparat ali zvočnik telefona."</string>
+    <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Zvoke usmerite v slušni pripomoček ali zvočnik telefona."</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Sorodno"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Zvonjenje in alarmi"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Zvok med klici"</string>
@@ -98,15 +98,15 @@
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Za povezavo z drugimi napravami vklopite Bluetooth."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Vaše naprave"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Seznanitev nove naprave"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Onemogoči prelaganje s strojne opreme za A2DP za Bluetooth"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Onemogoči prelaganje na strojno opremo za Bluetooth LE Audio"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Onemogoči prelaganje s strojne opreme za Bluetooth A2DP"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Onemogoči prelaganje s strojne opreme za Bluetooth LE zvok"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Vnovični zagon?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Če želite spremeniti to nastavitev, znova zaženite napravo."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Zaženi znova"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Prekliči"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Onemogoči funkcijo Bluetooth LE zvok"</string>
-    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Onemogoči funkcijo Bluetooth LE zvok, če naprava podpira strojne zmogljivosti za zvok z majhno porabo energije."</string>
-    <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Pokaži preklopnik za LE zvok v nastavitvah naprave"</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Onemogoči funkcijo Bluetooth LE zvok, če naprava podpira strojno opremo za LE zvok."</string>
+    <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Pokaži preklopnik za LE zvok v podrobnostih o napravi"</string>
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Omogoči seznam dovoljenih za Bluetooth LE zvok"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Omogoči funkcijo seznama dovoljenih za Bluetooth LE zvok."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Predstavnostne naprave"</string>
@@ -119,10 +119,8 @@
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth je vklopljen"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Pokaži vse"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"Pisalo"</string>
-    <!-- no translation found for stylus_default_notes_app (4165657465911764628) -->
-    <skip />
-    <!-- no translation found for stylus_default_notes_summary_work (4554643411627934223) -->
-    <skip />
+    <string name="stylus_default_notes_app" msgid="4165657465911764628">"Pritisk gumba pisala"</string>
+    <string name="stylus_default_notes_summary_work" msgid="4554643411627934223">"<xliff:g id="APP_NAME">%s</xliff:g> (delovni profil)"</string>
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Pisanje v besedilnih poljih"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Prezri vse pritiske gumbov pisala"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Pisalo"</string>
@@ -334,7 +332,7 @@
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Pri uporabi odklepanja s prstnim odtisom"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Prstni odtis za službo"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Dodajte prstni odtis"</string>
-    <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Prstni odtis je dodan.}one{# prstni odtis je dodan.}two{# prstna odtisa sta dodana.}few{# prstni odtisi so dodani.}other{# prstnih odtisov je dodanih.}}"</string>
+    <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Prstni odtis je dodan.}one{Dodan je # prstni odtis.}two{Dodana sta # prstna odtisa.}few{Dodani so # prstni odtisi.}other{Dodanih je # prstnih odtisov.}}"</string>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"Potrebna je nastavitev"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Nastavitev prstnega odtisa"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Omogočanje odklepanja s prstnim odtisom"</string>
@@ -465,16 +463,30 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Končano"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ups, to ni tipalo"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"S kazalcem se dotaknite tipala na hrbtni strani telefona."</string>
-    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Registracija ni bila dokončana."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (6305457126747942642) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message_setup (2735739618722623980) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message (5858386244898601003) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Čas za nastavitev prstnega odtisa je potekel"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"Prstni odtis lahko nastavite pozneje v nastavitvah."</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Registracija prstnega odtisa ni uspela. Poskusite znova ali uporabite drug prst."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message_setup (8521566666541069383) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message_setup (8140162986046783546) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (3534341971920335247) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (4344665784935791640) -->
+    <skip />
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Dodaj še enega"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Naprej"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Ta možnost zaklepanja zaslona je onemogočena. Za več informacij se obrnite na skrbnika organizacije."</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"S prstnim odtisom lahko še vedno odobrite nakupe in dostop do aplikacij."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Dvignite prst in se znova dotaknite tipala."</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Tipala prstnih odtisov ni mogoče uporabiti. Obiščite ponudnika popravil."</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration_title (3073145395701953620) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (304585658839584958) -->
+    <skip />
     <string name="security_advanced_settings" msgid="6260756619837834042">"Več varnostnih nastavitev"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Zaklepanje delovnega profila, šifriranje in drugo"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Šifriranje, poverilnice in drugo"</string>
@@ -632,8 +644,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Želite seznaniti z napravo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
-    <!-- no translation found for bluetooth_pairing_group_late_bonding (5310869364570266209) -->
-    <skip />
+    <string name="bluetooth_pairing_group_late_bonding" msgid="5310869364570266209">"Dodajanje novega člana v obstoječi komplet naprav"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Koda Bluetooth za seznanitev"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Vnesite kodo za seznanjanje in nato pritisnite Return ali Enter"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"PIN vsebuje črke ali simbole"</string>
@@ -1122,8 +1133,7 @@
     <string name="kernel_version" msgid="3513538109381366881">"Različica jedra"</string>
     <string name="build_number" msgid="9009733242117579826">"Delovna različica"</string>
     <string name="module_version" msgid="1787518340082046658">"Posodobitev sistema prek Googla Play"</string>
-    <!-- no translation found for battery_info (7873528123969546728) -->
-    <skip />
+    <string name="battery_info" msgid="7873528123969546728">"Informacije o bateriji"</string>
     <string name="device_info_not_available" msgid="4804474466616712326">"Ni na voljo"</string>
     <string name="storage_settings" msgid="7472188817781592677">"Shramba"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Shramba in predpomnilnik"</string>
@@ -1156,11 +1166,10 @@
     <string name="status_bt_address" msgid="6919660304578476547">"Naslov Bluetooth"</string>
     <string name="status_serial_number" msgid="9060064164331466789">"Serijska številka"</string>
     <string name="status_up_time" msgid="1274778533719495438">"Čas delovanja"</string>
-    <!-- no translation found for battery_manufacture_date (7139426520156833987) -->
-    <skip />
-    <!-- no translation found for battery_first_use_date (3157207331722711317) -->
-    <skip />
-    <!-- no translation found for battery_cycle_count (2912949283386571900) -->
+    <string name="battery_manufacture_date" msgid="7139426520156833987">"Datum izdelave"</string>
+    <string name="battery_first_use_date" msgid="3157207331722711317">"Datum prve uporabe"</string>
+    <string name="battery_cycle_count" msgid="2912949283386571900">"Število ciklov"</string>
+    <!-- no translation found for battery_cycle_count_not_available (2426584515665184664) -->
     <skip />
     <string name="memory_calculating_size" msgid="3898240439798661242">"Izračunavanje ..."</string>
     <string name="storage_menu_rename" msgid="8549835371429159336">"Preimenuj"</string>
@@ -1756,8 +1765,8 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"Za vse jezike"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Več jezikov ..."</string>
     <string name="testing" msgid="6294172343766732037">"Preizkušanje"</string>
-    <string name="keyboard_settings_summary" msgid="2716339620942356432">"Zaslonska tipkovnica, govor, orodja"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"Zaslonska tipkovnica, fizična tipkovnica, govor, orodja"</string>
+    <string name="keyboard_settings_summary" msgid="9188442758316476986">"Zaslonska tipkovnica, orodja"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"Zaslonska tipkovnica, fizična tipkovnica, orodja"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Fizična tipkovnica"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Postavitev"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Izberi pripomoček"</string>
@@ -1868,7 +1877,8 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Če želite uporabljati funkcijo za dostopnost, z dvema prstoma povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med funkcijami, z dvema prstoma povlecite navzgor in pridržite."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Če želite uporabljati funkcijo za dostopnost, s tremi prsti povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med funkcijami, s tremi prsti povlecite navzgor in pridržite."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Razumem"</string>
-    <string name="accessibility_tutorial_dialog_link_button" msgid="1624189347106713695">"Nastavitve gumba za dostopnost"</string>
+    <!-- no translation found for accessibility_tutorial_dialog_link_button (6797349445794031781) -->
+    <skip />
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Bližnjica do funkcije »<xliff:g id="SERVICE">%1$s</xliff:g>«"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Gumb za dostopnost"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Poteza za dostopnost"</string>
@@ -2005,7 +2015,7 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Pridržanje tipk za glasnost"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Trikratni dotik zaslona"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Naprej"</string>
-    <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Slušni aparati"</string>
+    <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Slušni pripomočki"</string>
     <string name="accessibility_hearingaid_intro" msgid="5856992709195963850">"Slušne aparate, polževe vsadke in druge ojačevalnike lahko uporabljate s telefonom."</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Noben slušni pripomoček ni povezan."</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Dodajanje slušnih pripomočkov"</string>
@@ -2018,17 +2028,17 @@
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> in še 1"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Seznanitev nove naprave"</string>
     <string name="accessibility_pair_hearing_device_about_title" msgid="5870335480815052755">"O seznanjanju nove naprave"</string>
-    <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Slušni aparati"</string>
+    <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Slušni pripomočki"</string>
     <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Shranjene naprave"</string>
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Kontrolniki slušnega aparata"</string>
-    <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Bližnjica do slušnega aparata"</string>
+    <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Bližnjica do slušnega pripomočka"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Združljivost s slušnimi aparati"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Izboljša združljivost s teletuljavami in zmanjša količino neželenega hrupa."</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"O slušnih aparatih"</string>
-    <string name="accessibility_hearing_device_footer_summary" msgid="7451899224828040581">"Poskrbite, da je slušni aparat vklopljen in pripravljen za seznanjanje."</string>
+    <string name="accessibility_hearing_device_footer_summary" msgid="7451899224828040581">"Poskrbite, da je slušni pripomoček vklopljen in pripravljen za seznanjanje."</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Seznanitev slušnega aparata"</string>
-    <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Razpoložljivi slušni aparati"</string>
-    <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Ali vaš slušni aparat ni prikazan?"</string>
+    <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Razpoložljivi slušni pripomočki"</string>
+    <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Ali vaš slušni pripomoček ni prikazan?"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"Ogled več naprav"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Prilagoditev zvoka"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Zvočni opis"</string>
@@ -2095,7 +2105,7 @@
     <string name="color_cyan" msgid="4341758639597035927">"Cijan"</string>
     <string name="color_yellow" msgid="5957551912912679058">"Rumena"</string>
     <string name="color_magenta" msgid="8943538189219528423">"Magenta"</string>
-    <string name="enable_service_title" msgid="7231533866953706788">"Ali storitvi »<xliff:g id="SERVICE">%1$s</xliff:g>« dovolite popoln nadzor nad svojo napravo?"</string>
+    <string name="enable_service_title" msgid="7231533866953706788">"Ali storitvi <xliff:g id="SERVICE">%1$s</xliff:g> dovolite popoln nadzor nad svojo napravo?"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"<xliff:g id="SERVICE">%1$s</xliff:g> mora:"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"Ker aplikacija zakriva zahtevo za dovoljenje, z nastavitvami ni mogoče preveriti vašega odziva."</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> zahteva popoln nadzor nad to napravo. Storitev lahko prebere zaslon in deluje v imenu uporabnikov s posebnimi potrebami. Ta raven nadzora za večino aplikacij ni primerna."</string>
@@ -2103,7 +2113,7 @@
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Ogledovanje in upravljanje zaslona"</string>
     <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Bere lahko vso vsebino na zaslonu ter prikaže vsebino prek drugih aplikacij."</string>
     <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Ogledovanje in izvajanje dejanj"</string>
-    <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Spremlja lahko vaše interakcije z aplikacijo ali senzorjem strojne opreme ter komunicira z aplikacijami v vašem imenu."</string>
+    <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Spremlja lahko vaše interakcije z aplikacijo ali tipalom strojne opreme ter komunicira z aplikacijami v vašem imenu."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Dovoli"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Zavrni"</string>
     <string name="accessibility_dialog_button_stop" msgid="7295448112784528196">"Ustavi"</string>
@@ -2331,6 +2341,8 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Prikaz po aplikacijah"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Prikaz po sistemih"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_cycle_count_footer (3642121059800373545) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistični podatki o procesih"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistični podatki o procesih, ki se izvajajo"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Poraba pomnilnika"</string>
@@ -2870,7 +2882,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Ustvarjanje klona aplikacije <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Ustvarjen klon aplikacije <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Jeziki, poteze, ura, varnostno kopiranje"</string>
-    <string name="languages_setting_summary" msgid="4924440599794956443">"Sistemski jeziki, jeziki aplikacij"</string>
+    <string name="languages_setting_summary" msgid="7963053736715746726">"Sistemski jeziki, jeziki aplikacij, govor"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, omrežna povezava, internet, brezžično, podatki, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Obvestilo za Wi‑Fi, obvestilo za wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"prenesena količina podatkov"</string>
@@ -2934,8 +2946,7 @@
     <string name="keywords_sim_status_iccid_esim" msgid="4634015619840979184">"omrežje, stanje mobilnega omrežja, stanje storitve, moč signala, vrsta mobilnega omrežja, gostovanje, iccid, eid"</string>
     <string name="keywords_esim_eid" msgid="8128175058237372457">"eid"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"serijska številka, različica strojne opreme"</string>
-    <!-- no translation found for keywords_battery_info (3319796850366687033) -->
-    <skip />
+    <string name="keywords_battery_info" msgid="3319796850366687033">"informacije o bateriji, datum izdelave, število ciklov, prva uporaba"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"raven varnostnih popravkov za android, različica radijske programske opreme, različica jedra"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"tema, svetla, temna, način, občutljivost na svetlobo, fotofobija, naredi temnejše, potemni, temni način, migrena"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"temna tema"</string>
@@ -3190,7 +3201,7 @@
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Občutljiva obvestila za delovni profil"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Prikaži občutljivo vsebino delovnega profila na zaklenjenem zaslonu."</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Prikaži vso vsebino obvestil"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Prikaži občutljivo vsebino samo na odklenjenem zaslonu."</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Prikaži občutljivo vsebino samo na odklenjenem zaslonu"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Sploh ne prikazuj obvestil"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Kaj naj bo prikazano na zaklenjenem zaslonu?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Zaklenjen zaslon"</string>
@@ -3858,12 +3869,6 @@
     <string name="overlay_option_device_default" msgid="7986355499809313848">"Privzeta nastavitev naprave"</string>
     <string name="overlay_toast_failed_to_apply" msgid="4839587811338164960">"Prekrivanje ni uspelo"</string>
     <string name="special_access" msgid="1767980727423395147">"Posebni dostop za aplikacije"</string>
-    <plurals name="special_access_summary" formatted="false" msgid="4995506406763570815">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> aplikaciji je dovoljen neomejen prenos podatkov.</item>
-      <item quantity="two"><xliff:g id="COUNT">%d</xliff:g> aplikacijama je dovoljen neomejen prenos podatkov.</item>
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aplikacijam je dovoljen neomejen prenos podatkov.</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikacijam je dovoljen neomejen prenos podatkov.</item>
-    </plurals>
     <string name="special_access_more" msgid="132919514147475846">"Prikaži več"</string>
     <string name="long_background_tasks_label" msgid="3169590134850226687">"Dolgotrajna opravila v ozadju"</string>
     <string name="long_background_tasks_switch_title" msgid="2491623894899492543">"Dovoli dolgotrajna opravila v ozadju"</string>
@@ -4730,4 +4735,36 @@
     <string name="contrast_medium" msgid="384414510709285811">"Srednji"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Visok"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"To aplikacijo je mogoče odpreti samo v enem oknu"</string>
+    <!-- no translation found for accessibility_feature_full_state_summary (8747170258807179670) -->
+    <skip />
+    <!-- no translation found for generic_accessibility_service_on (2465820044606775562) -->
+    <skip />
+    <!-- no translation found for generic_accessibility_service_off (1752061696695346360) -->
+    <skip />
+    <!-- no translation found for generic_accessibility_feature_shortcut_off (3669343136122187913) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_state_off (8158137799007601475) -->
+    <skip />
+    <!-- no translation found for daltonizer_state_on (131013270022603983) -->
+    <skip />
+    <!-- no translation found for daltonizer_state_off (1162285688069856179) -->
+    <skip />
+    <!-- no translation found for color_inversion_state_on (1160969033636440368) -->
+    <skip />
+    <!-- no translation found for color_inversion_state_off (6925638668080451724) -->
+    <skip />
+    <!-- no translation found for color_inversion_feature_summary (1199876648549627647) -->
+    <skip />
+    <!-- no translation found for magnification_feature_summary (641825267460247848) -->
+    <skip />
+    <!-- no translation found for autoclick_disabled (3213396804955002120) -->
+    <skip />
+    <!-- no translation found for show_captions_disabled (690650956523818755) -->
+    <skip />
+    <!-- no translation found for show_captions_enabled (7089043007924626) -->
+    <skip />
+    <!-- no translation found for live_caption_disabled (3562035026547887366) -->
+    <skip />
+    <!-- no translation found for live_caption_enabled (5269360946200718949) -->
+    <skip />
 </resources>

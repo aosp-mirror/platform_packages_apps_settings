@@ -119,10 +119,8 @@
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth ativado"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Ver todos"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"Stylus"</string>
-    <!-- no translation found for stylus_default_notes_app (4165657465911764628) -->
-    <skip />
-    <!-- no translation found for stylus_default_notes_summary_work (4554643411627934223) -->
-    <skip />
+    <string name="stylus_default_notes_app" msgid="4165657465911764628">"Pressionar o botão da stylus"</string>
+    <string name="stylus_default_notes_summary_work" msgid="4554643411627934223">"<xliff:g id="APP_NAME">%s</xliff:g> (perfil de trabalho)"</string>
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Escreva nos campos de texto"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignorar todos os pressionamentos de botão com a stylus"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Stylus"</string>
@@ -334,7 +332,7 @@
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Quando usar o Desbloqueio por impressão digital"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Impressão digital do trabalho"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Adicionar impressão digital"</string>
-    <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Impressão digital adicionada}one{# impressão digital adicionada}other{# impressões digitais adicionadas}}"</string>
+    <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Impressão digital registrada}one{# impressão digital registrada}other{# impressões digitais registradas}}"</string>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"Configuração necessária"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Configurar impressão digital"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Permitir Desbloqueio por impressão digital"</string>
@@ -419,8 +417,8 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Excluir"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Toque no sensor"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Encoste o dedo no sensor e, após sentir uma vibração, tire o dedo"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Mantenha a impressão digital no sensor até sentir uma vibração"</string>
-    <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"Sem pressionar o botão, mantenha a impressão digital no sensor até sentir uma vibração.\n\nMova o dedo ligeiramente sempre que o dispositivo vibrar. Isso ajuda na captura da sua impressão digital."</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Mantenha a digital no sensor até sentir uma vibração."</string>
+    <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"Sem pressionar o botão, mantenha a digital no sensor até sentir uma vibração.\n\nMova o dedo ligeiramente sempre que o dispositivo vibrar. Isso ajuda na captura da sua impressão digital."</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Toque e pressione o sensor de impressão digital"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Tire o dedo e toque novamente"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Mais uma vez"</string>
@@ -439,7 +437,7 @@
     <string name="security_settings_sfps_enroll_progress_a11y_message" msgid="6450772721691523736">"Cadastro de impressão digital em <xliff:g id="PERCENTAGE">%d</xliff:g>%%"</string>
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Registro em <xliff:g id="PERCENTAGE">%d</xliff:g>%%"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Cadastro de impressão digital em <xliff:g id="PERCENTAGE">%d</xliff:g>%%"</string>
-    <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Impressão digital adicionada"</string>
+    <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Impressão digital registrada"</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Toque para desbloquear a qualquer momento"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Toque no sensor para desbloquear, mesmo quando a tela estiver desligada. Isso aumenta as chances de desbloqueio acidental."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Tela, Desbloqueio"</string>
@@ -465,16 +463,30 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Concluído"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Opa, este não é o sensor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Toque no sensor na parte traseira do smartphone. Use o dedo indicador."</string>
-    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"O registro não foi concluído"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (6305457126747942642) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message_setup (2735739618722623980) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message (5858386244898601003) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"A configuração da impressão digital expirou"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"Defina sua impressão digital mais tarde nas Configurações."</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"O registro da impressão digital não funcionou. Tente novamente ou use um dedo diferente."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message_setup (8521566666541069383) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message_setup (8140162986046783546) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (3534341971920335247) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (4344665784935791640) -->
+    <skip />
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Adicionar outra"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Próxima"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"A opção de bloqueio de tela está desativada. Para saber mais, entre em contato com o administrador da sua organização."</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Ainda será possível usar sua impressão digital para autorizar compras e o acesso a apps."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Levante o dedo e depois toque no sensor novamente"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Não foi possível usar o sensor de impressão digital. Entre em contato com uma assistência técnica"</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration_title (3073145395701953620) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (304585658839584958) -->
+    <skip />
     <string name="security_advanced_settings" msgid="6260756619837834042">"Mais configurações de segurança"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Bloqueio do perfil de trabalho, criptografia e muito mais"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Criptografia, credenciais e muito mais"</string>
@@ -511,7 +523,7 @@
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Opções de bloqueio de tela"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Opções de bloqueio de tela"</string>
     <string name="lock_screen_auto_pin_confirm_title" msgid="3012128112186088375">"Desbloqueio por confirmação automática"</string>
-    <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"Desbloqueia automaticamente caso você insira um PIN correto de seis ou mais dígitos. Essa é uma maneira um pouco menos segura do que conformar tocando em Enter."</string>
+    <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"Desbloqueia automaticamente se você inserir um PIN correto de seis ou mais dígitos. É uma forma um pouco menos segura do que confirmar tocando em Enter."</string>
     <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"Confirmar PIN correto automaticamente"</string>
     <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"Confirmar o PIN tocando em Enter é mais seguro do que usar a confirmação automática"</string>
     <string name="auto_confirm_on_pin_verify_description" msgid="2052240431173223502">"Insira o PIN do dispositivo para ativar a confirmação automática"</string>
@@ -632,8 +644,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Parear com <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
-    <!-- no translation found for bluetooth_pairing_group_late_bonding (5310869364570266209) -->
-    <skip />
+    <string name="bluetooth_pairing_group_late_bonding" msgid="5310869364570266209">"Adicione um membro ao conjunto coordenado"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Código de pareamento Bluetooth"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Digite o código de pareamento e pressione \"Return\" ou \"Enter\""</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"O PIN contém letras ou símbolos"</string>
@@ -1122,8 +1133,7 @@
     <string name="kernel_version" msgid="3513538109381366881">"Versão do kernel"</string>
     <string name="build_number" msgid="9009733242117579826">"Número da versão"</string>
     <string name="module_version" msgid="1787518340082046658">"Atualização do sistema do Google Play"</string>
-    <!-- no translation found for battery_info (7873528123969546728) -->
-    <skip />
+    <string name="battery_info" msgid="7873528123969546728">"Informações da bateria"</string>
     <string name="device_info_not_available" msgid="4804474466616712326">"Não disponível"</string>
     <string name="storage_settings" msgid="7472188817781592677">"Armazenamento"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Armazenamento e cache"</string>
@@ -1156,11 +1166,10 @@
     <string name="status_bt_address" msgid="6919660304578476547">"Endereço Bluetooth"</string>
     <string name="status_serial_number" msgid="9060064164331466789">"Número de série"</string>
     <string name="status_up_time" msgid="1274778533719495438">"Tempo em atividade"</string>
-    <!-- no translation found for battery_manufacture_date (7139426520156833987) -->
-    <skip />
-    <!-- no translation found for battery_first_use_date (3157207331722711317) -->
-    <skip />
-    <!-- no translation found for battery_cycle_count (2912949283386571900) -->
+    <string name="battery_manufacture_date" msgid="7139426520156833987">"Data de fabricação"</string>
+    <string name="battery_first_use_date" msgid="3157207331722711317">"Data do primeiro uso"</string>
+    <string name="battery_cycle_count" msgid="2912949283386571900">"Contagem de ciclos"</string>
+    <!-- no translation found for battery_cycle_count_not_available (2426584515665184664) -->
     <skip />
     <string name="memory_calculating_size" msgid="3898240439798661242">"Calculando..."</string>
     <string name="storage_menu_rename" msgid="8549835371429159336">"Renomear"</string>
@@ -1756,8 +1765,8 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"Para todos os idiomas"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Mais idiomas..."</string>
     <string name="testing" msgid="6294172343766732037">"Testando"</string>
-    <string name="keyboard_settings_summary" msgid="2716339620942356432">"Teclado na tela, Fala, Ferramentas"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"Teclado na tela, Teclado físico, Fala, Ferramentas"</string>
+    <string name="keyboard_settings_summary" msgid="9188442758316476986">"Teclado na tela e ferramentas"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"Teclado na tela, teclado físico e ferramentas"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Teclado físico"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Layout"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Escolher o gadget"</string>
@@ -1868,7 +1877,8 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Para usar um recurso de acessibilidade, deslize de baixo para cima na tela com dois dedos.\n\nPara alternar entre recursos, deslize de baixo para cima com dois dedos, sem soltar."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Para usar um recurso de acessibilidade, deslize de baixo para cima na tela com três dedos.\n\nPara alternar entre recursos, deslize de baixo para cima com três dedos, sem soltar."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Ok"</string>
-    <string name="accessibility_tutorial_dialog_link_button" msgid="1624189347106713695">"Configurações do botão"</string>
+    <!-- no translation found for accessibility_tutorial_dialog_link_button (6797349445794031781) -->
+    <skip />
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Atalho para <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Botão de acessibilidade"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Gesto de acessibilidade"</string>
@@ -2331,6 +2341,8 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Visualizar por apps"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Visualizar por sistemas"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"Menos de <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_cycle_count_footer (3642121059800373545) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="502683176231281732">"Estatísticas de processo"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Estatísticas detalhadas sobre os processos em execução"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Uso da memória"</string>
@@ -2711,12 +2723,12 @@
     <string name="enable_guest_calling" msgid="8300355036005240911">"Permitir que o visitante use o telefone"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"O histórico de ligações será compartilhado com o usuário visitante"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Ativar chamadas telefônicas e SMS"</string>
-    <string name="user_grant_admin" msgid="5942118263054572074">"Transformar esse usuário um administrador"</string>
+    <string name="user_grant_admin" msgid="5942118263054572074">"Tornar esse usuário um administrador"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Excluir usuário"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Ativar chamadas telefônicas e SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"O histórico de ligações e SMS será compartilhado com este usuário."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Remover privilégios de administrador?"</string>
-    <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Se você remover os privilégios de administrador desse usuário, eles poderão ser devolvidos por você ou por outro administrador."</string>
+    <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Se você remover os privilégios de administrador desse usuário, eles poderão ser restituídos por outro administrador."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Informações de emergência"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Informações e contatos de <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Abrir <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -2870,7 +2882,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Criando clone de <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"O clone de <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> foi criado"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Idiomas, gestos, tempo, backup"</string>
-    <string name="languages_setting_summary" msgid="4924440599794956443">"Idiomas do sistema, Idiomas do app"</string>
+    <string name="languages_setting_summary" msgid="7963053736715746726">"Idiomas do sistema, idiomas de apps e fala"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, Wi-Fi, conexão de rede, Internet, sem fio, dados, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Notificação de Wi‑Fi, notificação de wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"uso de dados"</string>
@@ -2934,8 +2946,7 @@
     <string name="keywords_sim_status_iccid_esim" msgid="4634015619840979184">"rede, estado da rede móvel, status do serviço, potência do sinal, tipo de rede móvel, roaming, iccid, eid"</string>
     <string name="keywords_esim_eid" msgid="8128175058237372457">"EID"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"número de série, versão do hardware"</string>
-    <!-- no translation found for keywords_battery_info (3319796850366687033) -->
-    <skip />
+    <string name="keywords_battery_info" msgid="3319796850366687033">"informações da bateria, data de fabricação, contagem de ciclos, primeiro uso"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"nível do patch de segurança do android, versão da banda de base, versão do kernel"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"tema, claro, escuro, modo, sensibilidade à luz, fotofobia, escurecer, deixar mais escuro, modo escuro, enxaqueca"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"tema escuro"</string>
@@ -3177,7 +3188,7 @@
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Pular tela de bloqueio"</string>
     <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"Após o desbloqueio, a última tela usada será mostrada. Deslize de cima para baixo para conferir as notificações, que não vão aparecer na tela de bloqueio."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Bloquear tela, tela de bloqueio, pular, ignorar"</string>
-    <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Quando o perfil de trabalho está bloqueado"</string>
+    <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Quando o perfil está bloqueado"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Mostrar somente notificações novas na tela de bloqueio"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Remover automaticamente da tela de bloqueio as notificações visualizadas anteriormente"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificações na tela de bloqueio"</string>
@@ -3858,10 +3869,6 @@
     <string name="overlay_option_device_default" msgid="7986355499809313848">"Padrão do dispositivo"</string>
     <string name="overlay_toast_failed_to_apply" msgid="4839587811338164960">"Falha ao aplicar sobreposição"</string>
     <string name="special_access" msgid="1767980727423395147">"Acesso especial para apps"</string>
-    <plurals name="special_access_summary" formatted="false" msgid="4995506406763570815">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> app pode usar dados ilimitados</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> apps podem usar dados ilimitados</item>
-    </plurals>
     <string name="special_access_more" msgid="132919514147475846">"Ver mais"</string>
     <string name="long_background_tasks_label" msgid="3169590134850226687">"Tarefas em segundo plano longas"</string>
     <string name="long_background_tasks_switch_title" msgid="2491623894899492543">"Permitir tarefas em segundo plano de longa duração"</string>
@@ -4143,7 +4150,7 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Ativar o ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"Ative o ANGLE como o driver do OpenGL ES do sistema"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"Ativar o ANGLE como o driver do OpenGL ES do sistema"</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"É necessário reiniciar o dispositivo para mudar o driver do OpenGL ES do sistema"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Mudanças na compatibilidade do app"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Alternar mudanças de compatibilidade do app"</string>
@@ -4726,4 +4733,36 @@
     <string name="contrast_medium" msgid="384414510709285811">"Médio"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Alto"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Esse app só pode ser aberto em uma única janela"</string>
+    <!-- no translation found for accessibility_feature_full_state_summary (8747170258807179670) -->
+    <skip />
+    <!-- no translation found for generic_accessibility_service_on (2465820044606775562) -->
+    <skip />
+    <!-- no translation found for generic_accessibility_service_off (1752061696695346360) -->
+    <skip />
+    <!-- no translation found for generic_accessibility_feature_shortcut_off (3669343136122187913) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_state_off (8158137799007601475) -->
+    <skip />
+    <!-- no translation found for daltonizer_state_on (131013270022603983) -->
+    <skip />
+    <!-- no translation found for daltonizer_state_off (1162285688069856179) -->
+    <skip />
+    <!-- no translation found for color_inversion_state_on (1160969033636440368) -->
+    <skip />
+    <!-- no translation found for color_inversion_state_off (6925638668080451724) -->
+    <skip />
+    <!-- no translation found for color_inversion_feature_summary (1199876648549627647) -->
+    <skip />
+    <!-- no translation found for magnification_feature_summary (641825267460247848) -->
+    <skip />
+    <!-- no translation found for autoclick_disabled (3213396804955002120) -->
+    <skip />
+    <!-- no translation found for show_captions_disabled (690650956523818755) -->
+    <skip />
+    <!-- no translation found for show_captions_enabled (7089043007924626) -->
+    <skip />
+    <!-- no translation found for live_caption_disabled (3562035026547887366) -->
+    <skip />
+    <!-- no translation found for live_caption_enabled (5269360946200718949) -->
+    <skip />
 </resources>
