@@ -35,6 +35,7 @@ android_test {
 
     static_libs: [
         "androidx.test.rules",
+        "androidx.test.uiautomator_uiautomator",
         "app-helpers-core",
         "launcher-helper-lib",
         "metrics-helper-lib",
@@ -43,7 +44,6 @@ android_test {
         "sysui-helper",
         "timeresult-helper-lib",
         "truth-prebuilt",
-        "ub-uiautomator",
     ],
 
     //sdk_version: "current",
