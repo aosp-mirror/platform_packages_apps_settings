@@ -56,6 +56,7 @@ import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.testutils.XmlTestUtils;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -86,7 +87,7 @@ import java.util.List;
 
 /** Test for {@link AccessibilitySettings}. */
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothUtils.class})
+@Config(shadows = {ShadowBluetoothUtils.class, ShadowBluetoothAdapter.class})
 public class AccessibilitySettingsTest {
     private static final String PACKAGE_NAME = "com.android.test";
     private static final String CLASS_NAME = PACKAGE_NAME + ".test_a11y_service";
