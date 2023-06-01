@@ -45,6 +45,7 @@ import android.hardware.usb.UsbManager;
 import android.net.ConnectivityManager;
 import android.net.TetheringManager;
 import android.net.wifi.WifiManager;
+import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.FeatureFlagUtils;
@@ -54,6 +55,7 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
+import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.wifi.tether.WifiTetherPreferenceController;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -66,6 +68,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,7 +97,7 @@ public class TetherSettingsTest {
     @Mock
     private Preference mDataSaverFooter;
 
-    TetherSettings mTetherSettings;
+    private MockTetherSettings mTetherSettings;
 
     @Before
     public void setUp() throws Exception {
@@ -114,13 +119,23 @@ public class TetherSettingsTest {
         when(mTetheringManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
         when(mTetheringManager.getTetherableBluetoothRegexs()).thenReturn(new String[0]);
 
-        mTetherSettings = spy(new TetherSettings());
+        mTetherSettings = spy(new MockTetherSettings());
         mTetherSettings.mContext = mContext;
         mTetherSettings.mWifiTetherPreferenceController = mWifiTetherPreferenceController;
         mTetherSettings.mUsbTether = mUsbTether;
         mTetherSettings.mBluetoothTether = mBluetoothTether;
         mTetherSettings.mEthernetTether = mEthernetTether;
         mTetherSettings.mDataSaverFooter = mDataSaverFooter;
+    }
+
+    @Test
+    @Config(shadows = ShadowRestrictedSettingsFragment.class)
+    public void onCreate_isUiRestricted_doNotSetupViewModel() {
+        when(mTetherSettings.isUiRestricted()).thenReturn(true);
+
+        mTetherSettings.onCreate(null);
+
+        verify(mTetherSettings, never()).setupViewModel();
     }
 
     @Test
@@ -430,5 +445,20 @@ public class TetherSettingsTest {
         mTetherSettings.setupTetherPreference();
         mTetherSettings.registerReceiver();
         updateOnlyBluetoothState(mTetherSettings);
+    }
+
+    private static class MockTetherSettings extends TetherSettings {
+        @Override
+        public boolean isUiRestricted() {
+            return false;
+        }
+    }
+
+    @Implements(RestrictedSettingsFragment.class)
+    public static final class ShadowRestrictedSettingsFragment {
+        @Implementation
+        public void onCreate(Bundle icicle) {
+            // do nothing
+        }
     }
 }
