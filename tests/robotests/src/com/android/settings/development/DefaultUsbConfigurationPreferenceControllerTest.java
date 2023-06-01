@@ -71,8 +71,7 @@ public class DefaultUsbConfigurationPreferenceControllerTest {
 
     @Test
     public void updateState_usbDataSignalingEnabled_shouldNotDisablePreference() {
-        when(mDevicePolicyManager.isUsbDataSignalingEnabledForUser(
-                UserHandle.myUserId())).thenReturn(true);
+        when(mDevicePolicyManager.isUsbDataSignalingEnabled()).thenReturn(true);
         when(mDevicePolicyManager.getProfileOwner()).thenReturn(TEST_COMPONENT_NAME);
 
         mController.updateState(mPreference);
@@ -82,8 +81,7 @@ public class DefaultUsbConfigurationPreferenceControllerTest {
 
     @Test
     public void updateState_usbDataSignalingDisabled_shouldDisablePreference() {
-        when(mDevicePolicyManager.isUsbDataSignalingEnabledForUser(
-                UserHandle.myUserId())).thenReturn(false);
+        when(mDevicePolicyManager.isUsbDataSignalingEnabled()).thenReturn(false);
         when(mDevicePolicyManager.getProfileOwner()).thenReturn(TEST_COMPONENT_NAME);
 
         mController.updateState(mPreference);
@@ -94,8 +92,7 @@ public class DefaultUsbConfigurationPreferenceControllerTest {
 
     @Test
     public void onDeveloperOptionsSwitchEnabled_usbEnabled_shouldNotDisablePreference() {
-        when(mDevicePolicyManager.isUsbDataSignalingEnabledForUser(
-                UserHandle.myUserId())).thenReturn(true);
+        when(mDevicePolicyManager.isUsbDataSignalingEnabled()).thenReturn(true);
         when(mDevicePolicyManager.getProfileOwner()).thenReturn(TEST_COMPONENT_NAME);
 
         mController.onDeveloperOptionsSwitchEnabled();
@@ -105,8 +102,7 @@ public class DefaultUsbConfigurationPreferenceControllerTest {
 
     @Test
     public void onDeveloperOptionsSwitchEnabled_usbDisabled_shouldDisablePreference() {
-        when(mDevicePolicyManager.isUsbDataSignalingEnabledForUser(
-                UserHandle.myUserId())).thenReturn(false);
+        when(mDevicePolicyManager.isUsbDataSignalingEnabled()).thenReturn(false);
         when(mDevicePolicyManager.getProfileOwner()).thenReturn(TEST_COMPONENT_NAME);
 
         mController.onDeveloperOptionsSwitchEnabled();
