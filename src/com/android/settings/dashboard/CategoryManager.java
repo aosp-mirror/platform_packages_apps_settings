@@ -34,6 +34,8 @@ import com.android.settingslib.drawer.ProviderTile;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
 
+import com.google.android.setupcompat.util.WizardManagerHelper;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -79,6 +81,9 @@ public class CategoryManager {
     }
 
     public synchronized List<DashboardCategory> getCategories(Context context) {
+        if (!WizardManagerHelper.isUserSetupComplete(context)) {
+            return new ArrayList<>();
+        }
         tryInitCategories(context);
         return mCategories;
     }
@@ -142,6 +147,10 @@ public class CategoryManager {
     }
 
     private synchronized void tryInitCategories(Context context, boolean forceClearCache) {
+        if (!WizardManagerHelper.isUserSetupComplete(context)) {
+            // Don't init while setup wizard is still running.
+            return;
+        }
         if (mCategories == null) {
             final boolean firstLoading = mCategoryByKeyMap.isEmpty();
             if (forceClearCache) {
