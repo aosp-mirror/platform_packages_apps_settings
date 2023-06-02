@@ -40,6 +40,7 @@ public class BluetoothLeAudioDeviceDetailsPreferenceController
 
     private static final String PREFERENCE_KEY = "bluetooth_show_leaudio_device_details";
     private static final String CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT = "le_audio_enabled_by_default";
+    private static final boolean LE_AUDIO_DEVICE_DETAIL_DEFAULT_VALUE = true;
     static int sLeAudioSupportedStateCache = BluetoothStatusCodes.ERROR_UNKNOWN;
 
     @VisibleForTesting
@@ -75,7 +76,7 @@ public class BluetoothLeAudioDeviceDetailsPreferenceController
         DeviceConfig.setProperty(
                 DeviceConfig.NAMESPACE_SETTINGS_UI,
                 SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED,
-                isEnabled ? "true" : "false", false);
+                isEnabled ? "true" : "false", LE_AUDIO_DEVICE_DETAIL_DEFAULT_VALUE);
         return true;
     }
 
@@ -87,7 +88,8 @@ public class BluetoothLeAudioDeviceDetailsPreferenceController
 
         final boolean leAudioDeviceDetailEnabled = DeviceConfig.getBoolean(
                 DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED, false);
+                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED,
+                LE_AUDIO_DEVICE_DETAIL_DEFAULT_VALUE);
         final boolean leAudioEnabledByDefault = DeviceConfig.getBoolean(
                 DeviceConfig.NAMESPACE_BLUETOOTH, CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT, false);
 
@@ -102,6 +104,7 @@ public class BluetoothLeAudioDeviceDetailsPreferenceController
         // Reset the toggle to null when the developer option is disabled
         DeviceConfig.setProperty(
                 DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED, "null", false);
+                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED, "null",
+                LE_AUDIO_DEVICE_DETAIL_DEFAULT_VALUE);
     }
 }
