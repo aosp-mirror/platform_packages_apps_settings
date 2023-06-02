@@ -64,7 +64,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
-import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 /** Tests for {@link ToggleFeaturePreferenceFragment} */
 @RunWith(RobolectricTestRunner.class)
@@ -119,10 +118,7 @@ public class ToggleFeaturePreferenceFragmentTest {
     }
 
     @Test
-    public void setupFragment_getExpectedPreferenceScreenResId() {
-        FragmentController.setupFragment(mFragment, FragmentActivity.class,
-                /* containerViewId= */ 0, Bundle.EMPTY);
-
+    public void getPreferenceScreenResId_returnsExpectedPreferenceScreenResId() {
         assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(R.xml.placeholder_prefs);
     }
 
