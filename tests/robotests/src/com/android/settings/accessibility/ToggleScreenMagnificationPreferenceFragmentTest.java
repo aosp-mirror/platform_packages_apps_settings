@@ -24,55 +24,55 @@ import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.database.ContentObserver;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import androidx.annotation.XmlRes;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentActivity;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
-import com.android.settings.testutils.shadow.ShadowFragment;
-import com.android.settings.testutils.shadow.ShadowSettingsPreferenceFragment;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settings.testutils.shadow.ShadowStorageManager;
+import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+
+import com.google.common.truth.Correspondence;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowContentResolver;
+import org.robolectric.shadows.ShadowPackageManager;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
+import org.robolectric.util.ReflectionHelpers;
+
+import java.util.Collection;
+import java.util.List;
 
 /** Tests for {@link ToggleScreenMagnificationPreferenceFragment}. */
+@Config(shadows = {ShadowUserManager.class, ShadowStorageManager.class})
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowSettingsPreferenceFragment.class})
 public class ToggleScreenMagnificationPreferenceFragmentTest {
 
     private static final String PLACEHOLDER_PACKAGE_NAME = "com.mock.example";
@@ -95,89 +95,85 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     private static final String KEY_FOLLOW_TYPING =
             Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED;
 
-    private TestToggleScreenMagnificationPreferenceFragment mFragment;
+    private FragmentController<ToggleScreenMagnificationPreferenceFragment> mFragController;
     private Context mContext;
-    private Resources mResources;
-
-    @Mock
-    private FragmentActivity mActivity;
-    @Mock
-    private ContentResolver mContentResolver;
-    @Mock
-    private PackageManager mPackageManager;
+    private Resources mSpyResources;
+    private ShadowPackageManager mShadowPackageManager;
 
     @Before
     public void setUpTestFragment() {
-        MockitoAnnotations.initMocks(this);
+        mContext = ApplicationProvider.getApplicationContext();
 
-        mContext = spy(ApplicationProvider.getApplicationContext());
-        mFragment = spy(new TestToggleScreenMagnificationPreferenceFragment(mContext));
-        mResources = spy(mContext.getResources());
-        when(mContext.getResources()).thenReturn(mResources);
-        when(mContext.getPackageManager()).thenReturn(mPackageManager);
-        when(mFragment.getContext().getResources()).thenReturn(mResources);
-        when(mFragment.getActivity()).thenReturn(mActivity);
-        when(mActivity.getContentResolver()).thenReturn(mContentResolver);
+        // Set up the fragment that support window magnification feature
+        mSpyResources = spy(mContext.getResources());
+        mShadowPackageManager = Shadows.shadowOf(mContext.getPackageManager());
+        Context spyContext = spy(mContext);
+        when(spyContext.getResources()).thenReturn(mSpyResources);
+
+        setWindowMagnificationSupported(
+                /* magnificationAreaSupported= */ true,
+                /* windowMagnificationSupported= */ true);
+
+        TestToggleScreenMagnificationPreferenceFragment fragment =
+                new TestToggleScreenMagnificationPreferenceFragment();
+        fragment.setArguments(new Bundle());
+        fragment.setContext(spyContext);
+
+        mFragController = FragmentController.of(fragment, SettingsActivity.class);
     }
 
     @Test
-    @Config(shadows = ShadowFragment.class)
     public void onResume_defaultStateForFollowingTyping_switchPreferenceShouldReturnTrue() {
-        mFragment.onCreate(new Bundle());
-        mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);
-        mFragment.onAttach(mContext);
+        setKeyFollowTypingEnabled(true);
+
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+
         final SwitchPreference switchPreference =
-                mFragment.findPreference(MagnificationFollowTypingPreferenceController.PREF_KEY);
-
-        mFragment.onResume();
-
+                mFragController.get().findPreference(
+                        MagnificationFollowTypingPreferenceController.PREF_KEY);
         assertThat(switchPreference).isNotNull();
         assertThat(switchPreference.isChecked()).isTrue();
     }
 
     @Test
-    @Config(shadows = ShadowFragment.class)
     public void onResume_disableFollowingTyping_switchPreferenceShouldReturnFalse() {
-        Settings.Secure.putInt(mContext.getContentResolver(), KEY_FOLLOW_TYPING, OFF);
-        mFragment.onCreate(new Bundle());
-        mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);
-        mFragment.onAttach(mContext);
-        SwitchPreference switchPreference =
-                mFragment.findPreference(MagnificationFollowTypingPreferenceController.PREF_KEY);
+        setKeyFollowTypingEnabled(false);
 
-        mFragment.onResume();
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
 
+        final SwitchPreference switchPreference =
+                mFragController.get().findPreference(
+                        MagnificationFollowTypingPreferenceController.PREF_KEY);
         assertThat(switchPreference).isNotNull();
         assertThat(switchPreference.isChecked()).isFalse();
     }
 
     @Test
-    @Config(shadows = {ShadowFragment.class})
     public void onResume_haveRegisterToSpecificUris() {
-        mFragment.onAttach(mContext);
-        mFragment.onCreate(Bundle.EMPTY);
+        ShadowContentResolver shadowContentResolver = Shadows.shadowOf(
+                mContext.getContentResolver());
+        Uri[] observedUri = new Uri[]{
+                Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS),
+                Settings.Secure.getUriFor(
+                        Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE),
+                Settings.Secure.getUriFor(
+                        Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED),
+                Settings.Secure.getUriFor(
+                        Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED)
+        };
+        for (Uri uri : observedUri) {
+            // verify no observer registered before launching the fragment
+            assertThat(shadowContentResolver.getContentObservers(uri)).isEmpty();
+        }
 
-        mFragment.onResume();
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
 
-        verify(mContentResolver).registerContentObserver(
-                eq(Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS)),
-                eq(false),
-                any(AccessibilitySettingsContentObserver.class));
-        verify(mContentResolver).registerContentObserver(
-                eq(Settings.Secure.getUriFor(
-                        Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE)),
-                eq(false),
-                any(AccessibilitySettingsContentObserver.class));
-        verify(mContentResolver).registerContentObserver(
-                eq(Settings.Secure.getUriFor(
-                        Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED)),
-                eq(false),
-                any(AccessibilitySettingsContentObserver.class));
-        verify(mContentResolver).registerContentObserver(
-                eq(Settings.Secure.getUriFor(
-                        Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED)),
-                eq(false),
-                any(AccessibilitySettingsContentObserver.class));
+        for (Uri uri : observedUri) {
+            Collection<ContentObserver> observers = shadowContentResolver.getContentObservers(uri);
+            assertThat(observers.size()).isEqualTo(1);
+            assertThat(observers.stream().findFirst().get()).isInstanceOf(
+                    AccessibilitySettingsContentObserver.class);
+        }
     }
 
     @Test
@@ -247,7 +243,9 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
     @Test
     public void updateShortcutPreferenceData_assignDefaultValueToVariable() {
-        mFragment.updateShortcutPreferenceData();
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+
+        mFragController.get().updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
@@ -259,8 +257,9 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     public void updateShortcutPreferenceData_hasValueInSettings_assignToVariable() {
         putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, MAGNIFICATION_CONTROLLER_NAME);
         setMagnificationTripleTapEnabled(/* enabled= */ true);
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
 
-        mFragment.updateShortcutPreferenceData();
+        mFragController.get().updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
@@ -271,9 +270,10 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     public void updateShortcutPreferenceData_hasValueInSharedPreference_assignToVariable() {
         final PreferredShortcut tripleTapShortcut = new PreferredShortcut(
                 MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.TRIPLETAP);
-
         putUserShortcutTypeIntoSharedPreference(mContext, tripleTapShortcut);
-        mFragment.updateShortcutPreferenceData();
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+
+        mFragController.get().updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
@@ -282,57 +282,53 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
     @Test
     public void setupMagnificationEditShortcutDialog_shortcutPreferenceOff_checkboxIsEmptyValue() {
-        mContext.setTheme(R.style.Theme_AppCompat);
-        final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
-                mContext, DialogType.EDIT_SHORTCUT_MAGNIFICATION, PLACEHOLDER_DIALOG_TITLE,
-                this::callEmptyOnClicked);
-        final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
-                null);
-        mFragment.mShortcutPreference = shortcutPreference;
+        ToggleScreenMagnificationPreferenceFragment fragment =
+                mFragController.create(R.id.main_content, /* bundle= */
+                        null).start().resume().get();
+        fragment.mShortcutPreference = new ShortcutPreference(mContext, /* attrs= */ null);
 
-        mFragment.mShortcutPreference.setChecked(false);
-        mFragment.setupMagnificationEditShortcutDialog(dialog);
+        fragment.mShortcutPreference.setChecked(false);
+        fragment.setupMagnificationEditShortcutDialog(
+                createEditShortcutDialog(fragment.getActivity()));
 
-        final int checkboxValue = mFragment.getShortcutTypeCheckBoxValue();
+        final int checkboxValue = fragment.getShortcutTypeCheckBoxValue();
         assertThat(checkboxValue).isEqualTo(UserShortcutType.EMPTY);
     }
 
     @Test
     public void setupMagnificationEditShortcutDialog_shortcutPreferenceOn_checkboxIsSavedValue() {
-        mContext.setTheme(R.style.Theme_AppCompat);
-        final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
-                mContext, DialogType.EDIT_SHORTCUT_MAGNIFICATION, PLACEHOLDER_DIALOG_TITLE,
-                this::callEmptyOnClicked);
+        ToggleScreenMagnificationPreferenceFragment fragment =
+                mFragController.create(R.id.main_content, /* bundle= */
+                        null).start().resume().get();
         final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
                 null);
         final PreferredShortcut tripletapShortcut = new PreferredShortcut(
                 MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.TRIPLETAP);
-        mFragment.mShortcutPreference = shortcutPreference;
+        fragment.mShortcutPreference = shortcutPreference;
 
         PreferredShortcuts.saveUserShortcutType(mContext, tripletapShortcut);
-        mFragment.mShortcutPreference.setChecked(true);
-        mFragment.setupMagnificationEditShortcutDialog(dialog);
+        fragment.mShortcutPreference.setChecked(true);
+        fragment.setupMagnificationEditShortcutDialog(
+                createEditShortcutDialog(fragment.getActivity()));
 
-        final int checkboxValue = mFragment.getShortcutTypeCheckBoxValue();
+        final int checkboxValue = fragment.getShortcutTypeCheckBoxValue();
         assertThat(checkboxValue).isEqualTo(UserShortcutType.TRIPLETAP);
     }
 
     @Test
-    @Config(shadows = ShadowFragment.class)
     public void restoreValueFromSavedInstanceState_assignToVariable() {
-        mContext.setTheme(R.style.Theme_AppCompat);
-        final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
-                mContext, DialogType.EDIT_SHORTCUT_MAGNIFICATION, PLACEHOLDER_DIALOG_TITLE,
-                this::callEmptyOnClicked);
-        final Bundle savedInstanceState = new Bundle();
-        mFragment.mShortcutPreference = new ShortcutPreference(mContext, /* attrs= */ null);
-
-        savedInstanceState.putInt(KEY_SAVED_USER_SHORTCUT_TYPE,
+        final Bundle fragmentState = createFragmentSavedInstanceState(
                 UserShortcutType.HARDWARE | UserShortcutType.TRIPLETAP);
-        mFragment.onCreate(savedInstanceState);
-        mFragment.setupMagnificationEditShortcutDialog(dialog);
-        final int value = mFragment.getShortcutTypeCheckBoxValue();
-        mFragment.saveNonEmptyUserShortcutType(value);
+        ToggleScreenMagnificationPreferenceFragment fragment = mFragController.get();
+        // Had to use reflection to pass the savedInstanceState when launching the fragment
+        ReflectionHelpers.setField(fragment, "mSavedFragmentState", fragmentState);
+
+        FragmentController.of(fragment, SettingsActivity.class).create(
+                R.id.main_content, /* bundle= */ null).start().resume().get();
+        fragment.setupMagnificationEditShortcutDialog(
+                createEditShortcutDialog(fragment.getActivity()));
+        final int value = fragment.getShortcutTypeCheckBoxValue();
+        fragment.saveNonEmptyUserShortcutType(value);
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
@@ -342,69 +338,86 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
     @Test
     public void onCreateView_magnificationAreaNotSupported_settingsPreferenceIsNull() {
-        when(mResources.getBoolean(
-                com.android.internal.R.bool.config_magnification_area))
-                .thenReturn(false);
-        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_WINDOW_MAGNIFICATION))
-                .thenReturn(true);
+        setWindowMagnificationSupported(
+                /* magnificationAreaSupported= */ false,
+                /* windowMagnificationSupported= */ true);
 
-        mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
 
-        assertThat(mFragment.mSettingsPreference).isNull();
+        assertThat(mFragController.get().mSettingsPreference).isNull();
     }
 
     @Test
     public void onCreateView_windowMagnificationNotSupported_settingsPreferenceIsNull() {
-        when(mResources.getBoolean(
-                com.android.internal.R.bool.config_magnification_area))
-                .thenReturn(true);
-        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_WINDOW_MAGNIFICATION))
-                .thenReturn(false);
+        setWindowMagnificationSupported(
+                /* magnificationAreaSupported= */ true,
+                /* windowMagnificationSupported= */ false);
 
-        mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
 
-        assertThat(mFragment.mSettingsPreference).isNull();
+        assertThat(mFragController.get().mSettingsPreference).isNull();
     }
 
     @Test
     public void onCreateView_setDialogDelegateAndAddTheControllerToLifeCycleObserver() {
-        Lifecycle lifecycle = mock(Lifecycle.class);
-        when(mFragment.getSettingsLifecycle()).thenReturn(lifecycle);
+        Correspondence instanceOf = Correspondence.transforming(
+                observer -> (observer instanceof MagnificationModePreferenceController),
+                "contains MagnificationModePreferenceController");
 
-        mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);
+        ToggleScreenMagnificationPreferenceFragment fragment = mFragController.create(
+                R.id.main_content, /* bundle= */ null).start().resume().get();
 
-        verify(mFragment).setDialogDelegate(any(MagnificationModePreferenceController.class));
-        verify(lifecycle).addObserver(any(MagnificationModePreferenceController.class));
+        DialogCreatable dialogDelegate = ReflectionHelpers.getField(fragment, "mDialogDelegate");
+        List<LifecycleObserver> lifecycleObservers = ReflectionHelpers.getField(
+                fragment.getSettingsLifecycle(), "mObservers");
+        assertThat(dialogDelegate).isInstanceOf(MagnificationModePreferenceController.class);
+        assertThat(lifecycleObservers).isNotNull();
+        assertThat(lifecycleObservers).comparingElementsUsing(instanceOf).contains(true);
     }
 
     @Test
     public void onCreateDialog_setDialogDelegate_invokeDialogDelegate() {
+        ToggleScreenMagnificationPreferenceFragment fragment =
+                mFragController.create(
+                        R.id.main_content, /* bundle= */ null).start().resume().get();
         final DialogCreatable dialogDelegate = mock(DialogCreatable.class, RETURNS_DEEP_STUBS);
         when(dialogDelegate.getDialogMetricsCategory(anyInt())).thenReturn(1);
-        mFragment.setDialogDelegate(dialogDelegate);
+        fragment.setDialogDelegate(dialogDelegate);
 
-        mFragment.onCreateDialog(1);
-        mFragment.getDialogMetricsCategory(1);
+        fragment.onCreateDialog(1);
+        fragment.getDialogMetricsCategory(1);
 
         verify(dialogDelegate).onCreateDialog(1);
         verify(dialogDelegate).getDialogMetricsCategory(1);
     }
 
     @Test
-    public void getMetricsCategory_shouldNotHaveMetricsCategory() {
-        assertThat(mFragment.getMetricsCategory()).isEqualTo(0);
+    public void getMetricsCategory_returnsCorrectCategory() {
+        ToggleScreenMagnificationPreferenceFragment fragment =
+                mFragController.create(
+                        R.id.main_content, /* bundle= */ null).start().resume().get();
+
+        assertThat(fragment.getMetricsCategory()).isEqualTo(
+                SettingsEnums.ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION);
     }
 
     @Test
     public void getHelpResource_returnsCorrectHelpResource() {
-        assertThat(mFragment.getHelpResource()).isEqualTo(R.string.help_url_magnification);
+        ToggleScreenMagnificationPreferenceFragment fragment =
+                mFragController.create(
+                        R.id.main_content, /* bundle= */ null).start().resume().get();
+
+        assertThat(fragment.getHelpResource()).isEqualTo(R.string.help_url_magnification);
     }
 
     @Test
     public void onProcessArguments_defaultArgumentUnavailable_shouldSetDefaultArguments() {
+        ToggleScreenMagnificationPreferenceFragment fragment =
+                mFragController.create(
+                        R.id.main_content, /* bundle= */ null).start().resume().get();
         Bundle arguments = new Bundle();
 
-        mFragment.onProcessArguments(arguments);
+        fragment.onProcessArguments(arguments);
 
         assertTrue(arguments.containsKey(AccessibilitySettings.EXTRA_PREFERENCE_KEY));
         assertTrue(arguments.containsKey(AccessibilitySettings.EXTRA_INTRO));
@@ -450,6 +463,11 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
                 enabled ? ON : OFF);
     }
 
+    private void setKeyFollowTypingEnabled(boolean enabled) {
+        Settings.Secure.putInt(mContext.getContentResolver(), KEY_FOLLOW_TYPING,
+                enabled ? ON : OFF);
+    }
+
     private String getStringFromSettings(String key) {
         return Settings.Secure.getString(mContext.getContentResolver(), key);
     }
@@ -459,91 +477,54 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
                 == ON;
     }
 
-    private void callEmptyOnClicked(DialogInterface dialog, int which) {}
+    private void callEmptyOnClicked(DialogInterface dialog, int which) {
+    }
+
+    private void setWindowMagnificationSupported(boolean magnificationAreaSupported,
+            boolean windowMagnificationSupported) {
+        when(mSpyResources.getBoolean(
+                com.android.internal.R.bool.config_magnification_area))
+                .thenReturn(magnificationAreaSupported);
+        mShadowPackageManager.setSystemFeature(PackageManager.FEATURE_WINDOW_MAGNIFICATION,
+                windowMagnificationSupported);
+    }
+
+    private AlertDialog createEditShortcutDialog(Context context) {
+        context.setTheme(R.style.Theme_AppCompat);
+        return AccessibilityDialogUtils.showEditShortcutDialog(
+                context,
+                DialogType.EDIT_SHORTCUT_MAGNIFICATION, PLACEHOLDER_DIALOG_TITLE,
+                this::callEmptyOnClicked);
+    }
+
+    private Bundle createFragmentSavedInstanceState(int userShortcutType) {
+        final Bundle savedInstanceState = new Bundle();
+        savedInstanceState.putInt(KEY_SAVED_USER_SHORTCUT_TYPE, userShortcutType);
+        final Bundle fragmentState = new Bundle();
+        fragmentState.putBundle(
+                /* FragmentStateManager.SAVED_INSTANCE_STATE_KEY */ "savedInstanceState",
+                savedInstanceState);
+        return fragmentState;
+    }
 
     /**
-     * a test fragment that initializes PreferenceScreen for testing.
+     * A test fragment that provides a way to change the context
      */
-    static class TestToggleScreenMagnificationPreferenceFragment
+    public static class TestToggleScreenMagnificationPreferenceFragment
             extends ToggleScreenMagnificationPreferenceFragment {
-
-        private final Context mContext;
-        private final PreferenceManager mPreferenceManager;
-
-        TestToggleScreenMagnificationPreferenceFragment(Context context) {
-            super();
-            mContext = context;
-            mPreferenceManager = new PreferenceManager(context);
-            mPreferenceManager.setPreferences(mPreferenceManager.createPreferenceScreen(context));
-            setArguments(new Bundle());
-        }
-
-        @Override
-        protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        }
-
-        @Override
-        public int getMetricsCategory() {
-            return 0;
-        }
-
-        @Override
-        int getUserShortcutTypes() {
-            return 0;
-        }
-
-        @Override
-        public int getPreferenceScreenResId() {
-            return R.xml.placeholder_prefs;
-        }
-
-        @Override
-        public PreferenceScreen getPreferenceScreen() {
-            return mPreferenceManager.getPreferenceScreen();
-        }
-
-        @Override
-        public <T extends Preference> T findPreference(CharSequence key) {
-            if (TextUtils.isEmpty(key)) {
-                return null;
-            }
-            return getPreferenceScreen().findPreference(key);
-        }
-
-        @Override
-        public PreferenceManager getPreferenceManager() {
-            return mPreferenceManager;
-        }
-
-        @Override
-        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            // do nothing
-        }
-
-        @Override
-        public void onViewCreated(View view, Bundle savedInstanceState) {
-            // do nothing
-        }
-
-        @SuppressWarnings("MissingSuperCall")
-        @Override
-        public void onDestroyView() {
-            // do nothing
-        }
-
-        @Override
-        public void addPreferencesFromResource(@XmlRes int preferencesResId) {
-            // do nothing
-        }
-
-        @Override
-        protected void updateShortcutPreference() {
-            // UI related function, do nothing in tests
-        }
+        private Context mContext;
 
         @Override
         public Context getContext() {
-            return mContext;
+            return this.mContext != null ? this.mContext : super.getContext();
+        }
+
+        /**
+         * Sets the spy context used for RoboTest in order to change the value of
+         * com.android.internal.R.bool.config_magnification_area
+         */
+        public void setContext(Context context) {
+            this.mContext = context;
         }
     }
 }
