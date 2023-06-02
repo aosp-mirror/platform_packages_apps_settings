@@ -208,6 +208,10 @@ public class FaceSettings extends DashboardFragment {
         mRemoveButton = findPreference(FaceSettingsRemoveButtonPreferenceController.KEY);
         mEnrollButton = findPreference(FaceSettingsEnrollButtonPreferenceController.KEY);
 
+        final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
+        mEnrollButton.setVisible(!hasEnrolled);
+        mRemoveButton.setVisible(hasEnrolled);
+
         // There is no better way to do this :/
         for (AbstractPreferenceController controller : mControllers) {
             if (controller instanceof FaceSettingsPreferenceController) {
@@ -233,8 +237,6 @@ public class FaceSettings extends DashboardFragment {
     public void onStart() {
         super.onStart();
         final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
-        mEnrollButton.setVisible(!hasEnrolled);
-        mRemoveButton.setVisible(hasEnrolled);
 
         // When the user has face id registered but failed enrolling in device lock state,
         // lead users directly to the confirm deletion dialog in Face Unlock settings.

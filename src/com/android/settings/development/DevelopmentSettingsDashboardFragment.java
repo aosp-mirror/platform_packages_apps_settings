@@ -675,6 +675,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new NfcVerboseVendorLogPreferenceController(context, fragment));
         controllers.add(new ShowTapsPreferenceController(context));
         controllers.add(new PointerLocationPreferenceController(context));
+        controllers.add(new ShowKeyPressesPreferenceController(context));
         controllers.add(new ShowSurfaceUpdatesPreferenceController(context));
         controllers.add(new ShowLayoutBoundsPreferenceController(context));
         controllers.add(new ShowRefreshRatePreferenceController(context));

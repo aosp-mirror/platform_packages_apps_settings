@@ -95,8 +95,7 @@ public class HearingAidHelperTest {
     }
 
     @Test
-    public void isHearingAidSupported_supported_returnTrue() {
-        mBluetoothAdapter.enable();
+    public void isHearingAidSupported_ashaSupported_returnTrue() {
         mShadowBluetoothAdapter.clearSupportedProfiles();
         mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
 
@@ -104,14 +103,19 @@ public class HearingAidHelperTest {
     }
 
     @Test
-    public void isHearingAidSupported_bluetoothOff_returnFalse() {
+    public void isHearingAidSupported_hapSupported_returnTrue() {
         mShadowBluetoothAdapter.clearSupportedProfiles();
-        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
-        mBluetoothAdapter.disable();
+        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HAP_CLIENT);
+
+        assertThat(mHelper.isHearingAidSupported()).isTrue();
+    }
+
+    @Test
+    public void isHearingAidSupported_unsupported_returnFalse() {
+        mShadowBluetoothAdapter.clearSupportedProfiles();
 
         assertThat(mHelper.isHearingAidSupported()).isFalse();
     }
-
 
     @Test
     public void isAllHearingAidRelatedProfilesReady_allReady_returnTrue() {
