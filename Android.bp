@@ -106,6 +106,7 @@ android_library {
     plugins: ["androidx.room_room-compiler-plugin"],
 
     libs: [
+        "keepanno-annotations",
         "telephony-common",
         "ims-common",
     ],
