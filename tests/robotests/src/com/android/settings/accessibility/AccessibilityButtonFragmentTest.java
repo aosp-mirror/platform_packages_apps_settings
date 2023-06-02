@@ -67,6 +67,7 @@ public class AccessibilityButtonFragmentTest {
     @Before
     public void setUp() {
         mFragment = spy(new TestAccessibilityButtonFragment(mContext));
+        when(mContext.getResources()).thenReturn(mResources);
         when(mFragment.getResources()).thenReturn(mResources);
         when(mFragment.getActivity()).thenReturn(Robolectric.setupActivity(FragmentActivity.class));
     }
