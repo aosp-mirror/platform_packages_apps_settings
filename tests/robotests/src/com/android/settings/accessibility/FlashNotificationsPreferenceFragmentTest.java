@@ -22,6 +22,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -66,8 +67,9 @@ public class FlashNotificationsPreferenceFragmentTest {
     }
 
     @Test
-    public void getMetricsCategory_isZero() {
-        assertThat(mFragment.getMetricsCategory()).isEqualTo(0); // TODO
+    public void getMetricsCategory_returnsCorrectCategory() {
+        assertThat(mFragment.getMetricsCategory()).isEqualTo(
+                SettingsEnums.FLASH_NOTIFICATION_SETTINGS);
     }
 
     @Test
