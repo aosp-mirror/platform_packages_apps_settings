@@ -304,8 +304,8 @@
     <string name="time_picker_title" msgid="1784236407401743393">"Godzina"</string>
     <string name="lock_after_timeout" msgid="8682769000437403444">"Blokuj po wygaszeniu ekranu"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po wygaszeniu"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Zaraz po wygaszeniu, ale nie wtedy, gdy jest odblokowany przez <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po wygaszeniu, ale nie wtedy, gdy jest odblokowany przez <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Zaraz po wygaszeniu, z wyjątkiem sytuacji, gdy blokadę anuluje <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po wygaszeniu, z wyjątkiem sytuacji, gdy blokadę anuluje <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="197365342192696406">"Pokaż tę informację na ekranie blokady"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Dodaj tekst na ekranie blokady"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Włącz widżety"</string>
@@ -479,7 +479,7 @@
     <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Używaj odcisku palca do odblokowywania tabletu i potwierdzania tożsamości, na przykład podczas logowania się w aplikacjach"</string>
     <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Używaj odcisku palca do odblokowywania urządzenia i potwierdzania tożsamości, np. podczas logowania się w aplikacjach"</string>
     <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Używaj odcisku palca do odblokowywania telefonu i potwierdzania tożsamości, na przykład podczas logowania się w aplikacjach"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Rozpoznawanie twarzy i odcisku palca"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Rozpoznawanie twarzy i odcisk palca"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Kliknij, aby skonfigurować"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Dodano skany twarzy i odciski palca"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Dodano skan twarzy i odcisk palca"</string>
@@ -2005,7 +2005,7 @@
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"Aby używać rozpoznawania twarzy, ustaw kod PIN"</string>
     <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Ustaw hasło, aby używać rozpoznawania twarzy lub odcisku palca"</string>
     <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Ustaw wzór, aby używać rozpoznawania twarzy lub odcisku palca"</string>
-    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Ustaw kod PIN, aby używać rozpoznawania twarzy lub odcisku palca"</string>
+    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Ustaw PIN do rozpoznawania twarzy lub odcisku palca"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Nie pamiętasz hasła?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Nie pamiętasz wzoru?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Nie pamiętasz kodu PIN?"</string>
@@ -2405,8 +2405,8 @@
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Gdy powiększenie jest włączone, możesz powiększać fragmenty ekranu.\n\n"<b>"Aby powiekszyć"</b>", uruchom powiększenie, a następnie kliknij dowolne miejsce na ekranie.\n"<ul><li>"Przeciągnij co najmniej dwoma palcami, by przewijać."</li>\n<li>"Ściągnij do siebie co najmniej dwa palce, by dostosować powiększenie."</li></ul>\n\n<b>"Aby powiększyć tymczasowo"</b>", uruchom powiększenie, a następnie naciśnij i przytrzymaj dowolne miejsce na ekranie.\n"<ul><li>"Przeciągaj palcem, by poruszać się po ekranie."</li>\n<li>"Unieś palec, by wyłączyć powiększenie."</li></ul>\n\n"Nie można powiększyć klawiatury ani paska nawigacji."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Strona <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> z <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Otwieraj przyciskiem ułatwień dostępu"</string>
-    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Przytrzymaj przyciski głośności, aby otworzyć"</string>
-    <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Kliknij ekran trzykrotnie, aby otworzyć"</string>
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Aby otworzyć, przytrzymaj przyciski głośności"</string>
+    <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Aby otworzyć, trzy razy kliknij ekran"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Otwieranie gestem"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Użyj gestu ułatwień dostępu"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Aby użyć tej funkcji, kliknij przycisk ułatwień dostępu <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> u dołu ekranu.\n\nAby przełączać się między funkcjami, naciśnij i przytrzymaj przycisk ułatwień dostępu."</string>
@@ -2553,7 +2553,7 @@
     <string name="accessibility_caption_preference_summary" msgid="632875702223135121">"Nie wszystkie aplikacje do multimediów obsługują te ustawienia napisów."</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Przycisk ułatwień dostępu"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Przesuń dwoma palcami w górę"</string>
-    <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Przytrzymaj klawisze głośności"</string>
+    <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Przytrzymaj przyciski głośności"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Trzykrotnie kliknij ekran"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Dalej"</string>
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Aparaty słuchowe"</string>
@@ -3612,7 +3612,7 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"Zawsze używaj do połączeń"</string>
     <string name="select_sim_for_data" msgid="2642305487659432499">"Wybierz kartę SIM do mobilnej transmisji danych"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Wybierz kartę SIM do SMS-ów"</string>
-    <string name="data_switch_started" msgid="6292759843974720112">"Przełączanie karty SIM do transmisji danych. Może to potrwać do minuty…"</string>
+    <string name="data_switch_started" msgid="6292759843974720112">"Przełączam kartę SIM do transmisji danych. Może to potrwać do minuty…"</string>
     <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"Użyć sieci <xliff:g id="NEW_SIM">%1$s</xliff:g> do mobilnej transmisji danych?"</string>
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Jeśli przełączysz się na sieć <xliff:g id="NEW_SIM">%1$s</xliff:g>, sieć <xliff:g id="OLD_SIM">%2$s</xliff:g> nie będzie już używana do mobilnej transmisji danych."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Użyj sieci <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
@@ -4413,7 +4413,7 @@
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Podaj PIN, aby odpiąć"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Aby odpiąć, poproś o hasło"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Zablokuj urządzenie przy odpinaniu"</string>
-    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Potwierdź chęć usunięcia karty SIM"</string>
+    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Potwierdzaj chęć usunięcia karty SIM"</string>
     <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Zanim wykasujesz dane z pobranej karty SIM, potwierdź swoją tożsamość"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Tym profilem służbowym zarządza:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Zarządzane przez: <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
@@ -5767,7 +5767,7 @@
     <string name="calls_sms_footnote" msgid="1003530944232362815">"Połączenia przez Wi-Fi umożliwiają nawiązywanie i odbieranie połączeń w sieciach Wi-Fi nienależących do operatorów. "<annotation id="url">"Więcej informacji"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Połączenia"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS-y"</string>
-    <string name="calls_sms_preferred" msgid="6016477652522583496">"preferowane"</string>
+    <string name="calls_sms_preferred" msgid="6016477652522583496">"preferowana"</string>
     <string name="calls_sms_calls_preferred" msgid="9004261125829377885">"preferowana do połączeń"</string>
     <string name="calls_sms_sms_preferred" msgid="3855778890660922711">"preferowana do SMS-ów"</string>
     <string name="calls_sms_unavailable" msgid="4055729705246556529">"niedostępne"</string>
@@ -5931,7 +5931,7 @@
     <string name="tare_dialog_confirm_button_title" msgid="9179397559760203348">"Potwierdź"</string>
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Wyświetl podgląd"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Wybierz wygaszacz ekranu"</string>
-    <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Pokaż dodatkowe informacje"</string>
+    <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Pokazuj dodatkowe informacje"</string>
     <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"Wyświetlaj godzinę, datę, pogodę, jakość powietrza i informacje z Google Cast"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Więcej ustawień"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Wybierz wygaszacz ekranu"</string>
