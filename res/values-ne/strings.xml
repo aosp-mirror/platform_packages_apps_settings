@@ -345,7 +345,7 @@
     <string name="security_dashboard_summary" msgid="7571035662779425918">"स्क्रिन लक, Find My Device, एपको सुरक्षा"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"सुरक्षा तथा गोपनीयता"</string>
     <string name="safety_center_summary" msgid="3554867379951053869">"एपको सुरक्षा, डिभाइस लक, अनुमति"</string>
-    <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"अनुहार थपियो"</string>
+    <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"अनुहार थपिएको छ"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"फेस अनलक सेटअप गर्न ट्याप गर्नुहोस्"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"फेस अनलक"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"कार्य प्रोफाइलका लागि फेस अनलक"</string>
@@ -467,6 +467,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"आफ्नो फिंगरप्रिन्ट दर्ता गर्नु…"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"फिंगरप्रिन्ट अनलक प्रयोग गर्न दिनु…"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"आफ्नो फिंगरप्रिन्टको प्रयोग गर्नुहोस्"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"फिंगरप्रिन्ट अनलकका बारेमा थप जान्नुहोस्"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"आफ्नो ट्याब्लेट अनलक गर्न वा आफ्नो पहिचान पुष्टि गर्न (जस्तै, एपमा साइन इन गर्दा वा कुनै खरिद स्वीकृत गर्दा) आफ्नो फिंगरप्रिन्ट प्रयोग गर्नुहोस्।"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"आफ्नो डिभाइस अनलक गर्न वा आफ्नो पहिचान पुष्टि गर्न (जस्तै, एपमा साइन इन गर्दा वा कुनै खरिद स्वीकृत गर्दा) आफ्नो फिंगरप्रिन्ट प्रयोग गर्नुहोस्।"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"आफ्नो फोन अनलक गर्न वा आफ्नो पहिचान पुष्टि गर्न (जस्तै, एपमा साइन इन गर्दा वा कुनै खरिद स्वीकृत गर्दा) आफ्नो फिंगरप्रिन्ट प्रयोग गर्नुहोस्।"</string>
@@ -521,17 +522,39 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"भाइब्रेसन भएको महसुस भएपछि औँला हटाउनुहोस्"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"जता-जता बत्ती बल्छ त्यतातिर फिंगरप्रिन्ट बिस्तारै सार्नुहोस् र फेरि प्रयास गर्नुहोस्"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"तपाईं योभन्दा धेरै पटक प्रयास गर्न सक्नुहुन्न"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"स्मार्ट वाच प्रयोग गरी अनलक गर्ने सुविधा"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"तपाईंले फेस अनलक र फिंगरप्रिन्ट अनलक सेटअप गर्नुभयो भने तपाईंले मास्क लगाएका बेला वा तपाईं कुनै अँध्यारो ठाउँमा हुँदा तपाईंको फोनले तपाईंलाई फिंगरप्रिन्ट प्रयोग गर्न लगाउने छ।\n\nफोनले तपाईंको अनुहार वा फिंगरप्रिन्ट पहिचान गर्न नसकेका खण्डमा तपाईं आफ्नो स्मार्ट वाच प्रयोग गरी अनलक गर्न सक्नुहुन्छ।"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="tablet" msgid="8930396405433023076">"तपाईंले फेस अनलक र फिंगरप्रिन्ट अनलक सेटअप गर्नुभयो भने तपाईंले मास्क लगाएका बेला वा तपाईं कुनै अँध्यारो ठाउँमा हुँदा तपाईंको ट्याब्लेटले तपाईंलाई फिंगरप्रिन्ट प्रयोग गर्न लगाउने छ।\n\nट्याब्लेटले तपाईंको अनुहार वा फिंगरप्रिन्ट पहिचान गर्न नसकेका खण्डमा तपाईं आफ्नो स्मार्ट वाच प्रयोग गरी अनलक गर्न सक्नुहुन्छ।"</string>
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"फोनले तपाईंको फिंगरप्रिन्ट पहिचान गर्न नसकेका खण्डमा तपाईं आफ्नो स्मार्ट वाच प्रयोग गरी अनलक गर्न सक्नुहुन्छ।"</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"फोनले तपाईंको अनुहार पहिचान गर्न नसकेका खण्डमा तपाईं आफ्नो स्मार्ट वाच प्रयोग गरी अनलक गर्न सक्नुहुन्छ।"</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"अनुहार वा स्मार्ट वाच प्रयोग गरेर"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"फिंगरप्रिन्ट वा स्मार्ट वाच प्रयोग गरेर"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"अनुहार, फिंगरप्रिन्ट वा स्मार्ट वाच प्रयोग गरेर"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"स्मार्ट वाच प्रयोग गरेर"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"पहिला फेस वा फिंगरप्रिन्ट अनलक सेटअप गर्नुहोस्"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"फोनले तपाईंको अनुहार वा फिंगरप्रिन्ट पहिचान गर्न नसकेका खण्डमा तपाईं आफ्नो स्मार्ट वाच प्रयोग गरी अनलक गर्न सक्नुहुन्छ"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"पहिला फिंगरप्रिन्ट अनलक सेटअप गर्नुहोस्"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"फोनले तपाईंको फिंगरप्रिन्ट पहिचान गर्न नसकेका खण्डमा तपाईं आफ्नो स्मार्ट वाच प्रयोग गरी अनलक गर्न सक्नुहुन्छ"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"पहिला फेस अनलक सेटअप गर्नुहोस्"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"फोनले तपाईंको अनुहार पहिचान गर्न नसकेका खण्डमा तपाईं आफ्नो स्मार्ट वाच प्रयोग गरी अनलक गर्न सक्नुहुन्छ"</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"सेटअप गर्नुहोस्"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"फिंगरप्रिन्ट र <xliff:g id="WATCH">%s</xliff:g> दर्ता गरियो"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"फिंगरप्रिन्टहरू र <xliff:g id="WATCH">%s</xliff:g> दर्ता गरिए"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"अनुहार र <xliff:g id="WATCH">%s</xliff:g> दर्ता गरियो"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"अनुहार, फिंगरप्रिन्ट र <xliff:g id="WATCH">%s</xliff:g> दर्ता गरियो"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"अनुहार, फिंगरप्रिन्टहरू र <xliff:g id="WATCH">%s</xliff:g> दर्ता गरिए"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"फेस र फिंगरप्रिन्ट अनलक"</string>
+    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"कार्य प्रोफाइलका लागि फेस र फिंगरप्रिन्ट अनलक"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"सेटअप गर्न ट्याप गर्नुहोस्"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"फेस तथा फिंगरप्रिन्टहरू थपिए"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"फेस तथा फिंगरप्रिन्ट थपिए"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"तपाईंले फेस अनलक र फिंगरप्रिन्ट अनलक सेटअप गर्नुभयो भने तपाईंले मास्क लगाएका बेला वा तपाईं कुनै अँध्यारो ठाउँमा हुँदा तपाईंको फोनले तपाईंलाई फिंगरप्रिन्ट प्रयोग गर्न लगाउने छ"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"अनलक गर्ने तरिकाहरू"</string>
-    <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"मेरो फोन अनलक गरियोस्"</string>
-    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"एप मैले नै चलाइरहेको पुष्टि गर्न लगाइयोस्"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"फोन अनलक गर्नुहोस्"</string>
+    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"एपहरू चलाउँदा आफ्नो पहिचान पुष्टि गर्नुहोस्"</string>
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"अनुहार प्रयोग गरेर"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"फिंगरप्रिन्ट प्रयोग गरेर"</string>
-    <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"अनुहार वा फिङ्गरप्रिन्ट प्रयोग गरेर"</string>
+    <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"अनुहार वा फिंगरप्रिन्ट प्रयोग गरेर"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"यो ट्याब्लेट आफ्नो अभिभावकलाई दिनुहोस्"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"यो डिभाइस आफ्नो अभिभावकलाई दिनुहोस्"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"यो फोन आफ्नो अभिभावकलाई देऊ"</string>
@@ -551,9 +574,9 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"पावर बटन नथिचिकनै हल्का छुनुहोस्"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"फिंगरप्रिन्ट सेटअप गर्ने तरिका"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"सेन्सर तपाईंको फोनको पछाडिको भागमा हुन्छ। आफ्नो चोर औंला प्रयोग गर्नुहोस्‌।"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"फिंगरप्रिन्ट सेन्सर पावर बटनमा छ। यो बटन ट्याब्लेटको किनारामा रहेको थोरै उचालिएको भोल्युम बटनको छेउमा रहेको समतल बटन हो।\n\nतपाईंले पावर बटन थिच्नुभयो भने स्क्रिन अफ हुन्छ।"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"फिंगरप्रिन्ट सेन्सर पावर बटनमा छ। यो बटन डिभाइसको किनारामा रहेको थोरै उचालिएको भोल्युम बटनको छेउमा रहेको समतल बटन हो।\n\nतपाईंले पावर बटन थिच्नुभयो भने स्क्रिन अफ हुन्छ।"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"फिंगरप्रिन्ट सेन्सर पावर बटनमा छ। यो बटन फोनको किनारामा रहेको थोरै उचालिएको भोल्युम बटनको छेउमा रहेको समतल बटन हो।\n\nतपाईंले पावर बटन थिच्नुभयो भने स्क्रिन अफ हुन्छ।"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="6345521315059783195">"फिंगरप्रिन्ट सेन्सर पावर बटनमा छ। यो ट्याब्लेटको किनारामा रहेको थोरै उचालिएको भोल्युम बटनको छेउमा रहेको चेप्टो बटन नै पावर बटन हो।"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="5548015866784733975">"फिंगरप्रिन्ट सेन्सर पावर बटनमा छ। यो डिभाइसको किनारामा रहेको थोरै उचालिएको भोल्युम बटनको छेउमा रहेको चेप्टो बटन नै पावर बटन हो।"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="1977903336177861081">"फिंगरप्रिन्ट सेन्सर पावर बटनमा छ। यो फोनको किनारामा रहेको थोरै उचालिएको भोल्युम बटनको छेउमा रहेको चेप्टो बटन नै पावर बटन हो।"</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"फिंगरप्रिन्ट सेन्सर तपाईंको स्क्रिनमा छ। तपाईंले अर्को स्क्रिनमा आफ्नो फिंगरप्रिन्ट क्याप्चर गर्नु पर्ने हुन्छ।"</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"सुरु गर्नुहोस्"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"फिंगरप्रिन्ट सेन्सर भेट्टाउन आफ्नो औँला स्क्रिनमा यताउता सार्नुहोस्। फिंगरप्रिन्ट सेन्सरमा टच एण्ड होल्ड गर्नुहोस्।"</string>
@@ -588,8 +611,11 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"तपाईं अब ट्याब्लेट अनलक गर्ने वा आफ्नो पहिचान पुष्टि गर्ने प्रयोजनका लागि (जस्तै, एपहरूमा साइन इन गर्दा वा कुनै खरिद अनुमोदन गर्दा) आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नुहुन्छ"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"तपाईं अब डिभाइस अनलक गर्ने वा आफ्नो पहिचान पुष्टि गर्ने प्रयोजनका लागि (जस्तै, एपहरूमा साइन इन गर्दा वा कुनै खरिद अनुमोदन गर्दा) आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नुहुन्छ"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"तपाईं अब फोन अनलक गर्ने वा आफ्नो पहिचान पुष्टि गर्ने प्रयोजनका लागि (जस्तै, एपहरूमा साइन इन गर्दा वा कुनै खरिद अनुमोदन गर्दा) आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नुहुन्छ"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"स्क्रिन अन हुँदा मात्र अनलक गरियोस्"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"स्क्रिन अन भएपछि मात्र तपाईं आफ्नो फिंगरप्रिन्ट प्रयोग गरी अनलक गर्न सक्नुहुन्छ। यसमा गल्तीले अनलक हुने सम्भावना कम हुन्छ।"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"तपाईं अब ट्याब्लेट अनलक गर्न वा आफ्नो पहिचान पुष्टि गर्न (जस्तै, एपमा साइन इन गर्दा वा कुनै खरिद स्वीकृत गर्दा) आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नुहुन्छ। \n\nतपाईंले आफ्नो ट्याब्लेट अर्कै तरिकाले समात्दा सो ट्याब्लेट सजिलैसँग अनलक गर्न सकियोस् भन्नाका लागि अर्को फिंगरप्रिन्ट हाल्नुहोस्।"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"तपाईं अब डिभाइस अनलक गर्न वा आफ्नो पहिचान पुष्टि गर्न (जस्तै, एपमा साइन इन गर्दा वा कुनै खरिद स्वीकृत गर्दा) आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नुहुन्छ।\n\nतपाईंले आफ्नो डिभाइस अर्कै तरिकाले समात्दा सो डिभाइस सजिलैसँग अनलक गर्न सकियोस् भन्नाका लागि अर्को फिंगरप्रिन्ट हाल्नुहोस्।"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"तपाईं अब फोन अनलक गर्न वा आफ्नो पहिचान पुष्टि गर्न (जस्तै, एपमा साइन इन गर्दा वा कुनै खरिद स्वीकृत गर्दा) आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नुहुन्छ।\n\nतपाईंले आफ्नो फोन अर्कै तरिकाले समात्दा सो फोन सजिलैसँग अनलक गर्न सकियोस् भन्नाका लागि अर्को फिंगरप्रिन्ट हाल्नुहोस्।"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"जुनसुकै बेला डिभाइस अनलक गर्न सेन्सरमा छुनुहोस्"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"स्क्रिन अफ भएका बेलामा पनि डिभाइस अनलक गर्न सेन्सरमा छुनुहोस्। तपाईंले यसो गर्नुभयो भने तपाईंले नचाहेका बेलामा पनि डिभाइस अनलक हुने बढी सम्भावना हुन्छ।"</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"स्क्रिन, अनलक"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"यो काम पछि गर्नुहोस्‌"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"औँला उठाएर फेरि छुनुहोस्"</string>
@@ -648,6 +674,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"सम्पन्न भयो"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"आच्यौं, त्यो सेन्सर होइन नि त"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"तपाईंको फोनको पछाडि भागमा रहेको सेन्सरमा छुनुहोस्। चोर औंला प्रयोग गर्नुहोस्‌।"</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"दर्ता गर्न सकिएन"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"फिंगरप्रिन्ट सेट अप गर्ने समय सकियो"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"अहिले नै फेरि प्रयास गर्नुहोस् वा पछि सेटिङमा गई फिंगरप्रिन्ट सेटअप गर्नुहोस्"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"फिंगरप्रिन्ट दर्ता गर्न सकिएन। पुन: प्रयास गर्नुहोस् वा अरू औँलाको प्रयोग गर्नुहोस्।"</string>
@@ -735,28 +762,22 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"फिंगरप्रिन्ट + पासवर्ड"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"फिंगरप्रिन्ट बिना जारी राख्नुहोस्"</string>
     <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"तपाईं आफ्नो फिंगरप्रिन्टको प्रयोग गरी आफ्नो फोन अनलक गर्न सक्नुहुन्छ। सुरक्षाका खातिर यस विकल्पलाई एउटा ब्याकअप स्क्रिन लकको आवश्यकता पर्दछ।"</string>
-    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
-    <skip />
+    <string name="fingerprint_unlock_title" product="tablet" msgid="8674718459462612186">"तपाईं आफ्नो फिंगरप्रिन्ट प्रयोग गरी ट्याब्लेट अनलक गर्न सक्नुहुन्छ। सुरक्षासम्बन्धी कारणहरूले गर्दा यो विकल्प प्रयोग गर्न ब्याकअप स्क्रिन लक सेटअप गर्नु पर्ने हुन्छ।"</string>
+    <string name="fingerprint_unlock_title" product="device" msgid="3224468142599659740">"तपाईं आफ्नो फिंगरप्रिन्ट प्रयोग गरी डिभाइस अनलक गर्न सक्नुहुन्छ। सुरक्षासम्बन्धी कारणहरूले गर्दा यो विकल्प प्रयोग गर्न ब्याकअप स्क्रिन लक सेटअप गर्नु पर्ने हुन्छ।"</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"फेस अनलक + प्याटर्न"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"फेस अनलक + PIN"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"फेस अनलक + पासवर्ड"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"फेस अनलक सेटअप नगरिकन जारी राख्नुहोस्"</string>
     <string name="face_unlock_title" product="default" msgid="7344830351598247267">"तपाईं आफ्नो अनुहारको प्रयोग गरी आफ्नो फोन अनलक गर्न सक्नुहुन्छ। सुरक्षा प्रयोजनका लागि, यो विकल्प प्रयोग गर्न कुनै ब्याकअप स्क्रिन लकको आवश्यकता पर्छ।"</string>
-    <!-- no translation found for face_unlock_title (5695698036499155727) -->
-    <skip />
-    <!-- no translation found for face_unlock_title (6768108756755361161) -->
-    <skip />
+    <string name="face_unlock_title" product="tablet" msgid="5695698036499155727">"तपाईं आफ्नो अनुहार प्रयोग गरी ट्याब्लेट अनलक गर्न सक्नुहुन्छ। सुरक्षासम्बन्धी कारणहरूले गर्दा यो विकल्प प्रयोग गर्न ब्याकअप स्क्रिन लक सेटअप गर्नु पर्ने हुन्छ।"</string>
+    <string name="face_unlock_title" product="device" msgid="6768108756755361161">"तपाईं आफ्नो अनुहार प्रयोग गरी डिभाइस अनलक गर्न सक्नुहुन्छ। सुरक्षासम्बन्धी कारणहरूले गर्दा यो विकल्प प्रयोग गर्न ब्याकअप स्क्रिन लक सेटअप गर्नु पर्ने हुन्छ।"</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"प्याटर्न • फेस • फिंगरप्रिन्ट"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • फेस • फिंगरप्रिन्ट"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"पासवर्ड • फेस • फिंगरप्रिन्ट"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"फेस वा फिंगरप्रिन्ट सेटअप नगरिकन जारी राख्नुहोस्"</string>
     <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"तपाईं आफ्नो फेस वा फिंगरप्रिन्ट प्रयोग गरी फोन अनलक गर्न सक्नुहुन्छ। सुरक्षा प्रयोजनका लागि यो विकल्प प्रयोग गर्न कुनै ब्याकअप स्क्रिन लक सेटअप गर्नु पर्ने हुन्छ।"</string>
-    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
-    <skip />
-    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
-    <skip />
+    <string name="biometrics_unlock_title" product="tablet" msgid="5808626401936488028">"तपाईं आफ्नो अनुहार वा फिंगरप्रिन्ट प्रयोग गरी ट्याब्लेट अनलक गर्न सक्नुहुन्छ। सुरक्षासम्बन्धी कारणहरूले गर्दा यो विकल्प प्रयोग गर्न ब्याकअप स्क्रिन लक सेटअप गर्नु पर्ने हुन्छ।"</string>
+    <string name="biometrics_unlock_title" product="device" msgid="4912499343509046929">"तपाईं आफ्नो अनुहार वा फिंगरप्रिन्ट प्रयोग गरी डिभाइस अनलक गर्न सक्नुहुन्छ। सुरक्षासम्बन्धी कारणहरूले गर्दा यो विकल्प प्रयोग गर्न ब्याकअप स्क्रिन लक सेटअप गर्नु पर्ने हुन्छ।"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"प्रशासक, इन्क्रिप्सन नीति वा प्रामाणिक भण्डारणद्वारा असक्षम पारिएको छ"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"छैन"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"स्वाइप"</string>
@@ -886,18 +907,18 @@
     <string name="lockpattern_tutorial_cancel_label" msgid="775215267818384016">"रद्द गर्नुहोस्"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"अर्को"</string>
     <string name="lock_setup" msgid="4622999020926280737">"सेटअप पूरा भयो।"</string>
-    <string name="manage_device_admin" msgid="1044620606203916275">"डिभाइसका एडमिन एपहरू"</string>
+    <string name="manage_device_admin" msgid="1044620606203916275">"डिभाइसका एड्मिन एपहरू"</string>
     <string name="number_of_device_admins_none" msgid="152926922020437312">"कुनै सक्रिय एपहरू छैनन्"</string>
     <plurals name="number_of_device_admins" formatted="false" msgid="2528735319390151989">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> सक्रिय एपहरू</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> सक्रिय एप</item>
     </plurals>
-    <string name="manage_trust_agents" msgid="6410149930029992356">"ट्रस्ट एजेन्ट"</string>
+    <string name="manage_trust_agents" msgid="6410149930029992356">"ट्रस्ट एजेन्टहरू"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"यो सेवा प्रयोग गर्न, पहिले स्क्रिन लक सेट गर्नुहोस्"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"कुनै पनि होइन"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> वटा सक्रिय विश्वसनीय एजेन्ट</item>
-      <item quantity="one">१ वटा सक्रिय विश्वसनीय एजेन्ट</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> वटा सक्रिय ट्रस्ट एजेन्ट</item>
+      <item quantity="one">१ सक्रिय ट्रस्ट एजेन्ट</item>
     </plurals>
     <string name="bluetooth_quick_toggle_title" msgid="5955341060378240781">"ब्लुटुथ"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5257744297562880017">"ब्लुटुथ खोल्नुहोस्"</string>
@@ -2070,9 +2091,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"थप सुरक्षाका लागि आफ्नो डिभाइसको कार्य प्रोफाइलको ढाँचा प्रयोग गर्नुहोस्"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"थप सुरक्षाका लागि आफ्नो डिभाइसको कार्य प्रोफाइलको PIN प्रविष्टि गर्नुहोस्"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"थप सुरक्षाका लागि आफ्नो डिभाइसको कार्य प्रोफाइलको पासवर्ड प्रविष्टि गर्नुहोस्"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"तपाईंको फोन फ्याक्ट्री सेटिङमा रिसेट गरिएको छ। यो फोन प्रयोग गर्न आफ्नो पछिल्लो ढाँचा प्रविष्टि गर्नुहोस्।"</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"तपाईंको फोन फ्याक्ट्री सेटिङमा रिसेट गरिएको छ। यो फोन प्रयोग गर्न आफ्नो पछिल्लो PIN प्रविष्टि गर्नुहोस्।"</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"तपाईंको फोन फ्याक्ट्री सेटिङमा रिसेट गरिएको छ। यो फोन प्रयोग गर्न आफ्नो पछिल्लो पासवर्ड प्रविष्टि गर्नुहोस्।"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"तपाईंको फोन फ्याक्ट्री सेटिङमा रिसेट गरिएको छ। यो फोन प्रयोग गर्न आफ्नो पछिल्लो ढाँचा प्रविष्टि गर्नुहोस्।"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"तपाईंको ट्याब्लेट रिसेट गरी डिफल्ट सेटिङ लागू गरिएको छ। यो ट्याब्लेट प्रयोग गर्न अघिल्लो प्याटर्न कोर्नुहोस्।"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"तपाईंको डिभाइस रिसेट गरी डिफल्ट सेटिङ लागू गरिएको छ। यो डिभाइस प्रयोग गर्न अघिल्लो प्याटर्न कोर्नुहोस्।"</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"तपाईंको फोन फ्याक्ट्री सेटिङमा रिसेट गरिएको छ। यो फोन प्रयोग गर्न आफ्नो पछिल्लो PIN प्रविष्टि गर्नुहोस्।"</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"तपाईंको ट्याब्लेट रिसेट गरी डिफल्ट सेटिङ लागू गरिएको छ। यो ट्याब्लेट प्रयोग गर्न अघिल्लो PIN हाल्नुहोस्।"</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"तपाईंको डिभाइस रिसेट गरी डिफल्ट सेटिङ लागू गरिएको छ। यो डिभाइस प्रयोग गर्न अघिल्लो PIN हाल्नुहोस्।"</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"तपाईंको फोन फ्याक्ट्री सेटिङमा रिसेट गरिएको छ। यो फोन प्रयोग गर्न आफ्नो पछिल्लो पासवर्ड प्रविष्टि गर्नुहोस्।"</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"तपाईंको ट्याब्लेट रिसेट गरी डिफल्ट सेटिङ लागू गरिएको छ। यो ट्याब्लेट प्रयोग गर्न अघिल्लो पासवर्ड हाल्नुहोस्।"</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"तपाईंको डिभाइस रिसेट गरी डिफल्ट सेटिङ लागू गरिएको छ। यो डिभाइस प्रयोग गर्न अघिल्लो पासवर्ड हाल्नुहोस्।"</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"ढाँचा पुष्टि गर्नुहोस्‌"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"PIN पुष्टि गर्नुहोस्‌"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"पासवर्ड पुष्टि गर्नुहोस्"</string>
@@ -2097,6 +2124,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"ढाँचा आवश्यक पर्छ"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"स्क्रिन अनलक गर्न ढाँचा चित्रण गर्नै पर्छ"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"प्याटर्न देखिने पारियोस्"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"PIN सम्बन्धी परिष्कृत गोपनीयता"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"PIN हाल्दा एनिमेसन अफ गरियोस्"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"प्रोफाइलको ढाँचालाई देखिने बनाउनुहोस्"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"ट्याप गर्दा भाइब्रेट गर्नुहोस्"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"पावर बटन थिच्दा तुरुन्त लक होस्"</string>
@@ -2464,7 +2493,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"पहुँचसम्बन्धी कुनै सुविधा प्रयोग गर्न २ वटा औँलाले स्क्रिनको पुछारबाट माथितिर स्वाइप गर्नुहोस्।\n\nएउटा सुविधाबाट अर्को सुविधामा जान २ वटा औँलाले माथितिर स्वाइप गरी स्क्रिनमा थिचिराख्नुहोस्।"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"पहुँचसम्बन्धी कुनै सुविधा प्रयोग गर्न ३ वटा औँलाले स्क्रिनको पुछारबाट माथितिर स्वाइप गर्नुहोस्।\n\nएउटा सुविधाबाट अर्को सुविधामा जान ३ वटा औँलाले माथितिर स्वाइप गरी स्क्रिनमा थिचिराख्नुहोस्।"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"बुझेँ"</string>
-    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g> सम्बन्धी सर्टकट"</string>
+    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g>को सर्टकट"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"एक्सेसिबिलिटी बटन"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"एक्सेसिबिलिटी जेस्चर"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"२ वटा औँलाले माथितिर स्वाइप गर्नुहोस्"</string>
@@ -2697,7 +2726,7 @@
     <string name="color_cyan" msgid="4341758639597035927">"सायन"</string>
     <string name="color_yellow" msgid="5957551912912679058">"पहेँलो"</string>
     <string name="color_magenta" msgid="8943538189219528423">"म्याजेन्टा"</string>
-    <string name="enable_service_title" msgid="7231533866953706788">"<xliff:g id="SERVICE">%1$s</xliff:g> लाई आफ्नो डिभाइस पूर्ण रूपमा नियन्त्रण गर्न दिने हो?"</string>
+    <string name="enable_service_title" msgid="7231533866953706788">"<xliff:g id="SERVICE">%1$s</xliff:g>लाई आफ्नो डिभाइस पूर्ण रूपमा नियन्त्रण गर्न दिने हो?"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"<xliff:g id="SERVICE">%1$s</xliff:g> लाई आवश्यक:"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"एपले अनुमति अनुरोधलाई अस्पष्ट मानिरहेको हुनाले, सेटिङहरूलले तपाईंको प्रतिक्रियालाई प्रमाणित गर्न सक्दैनन्।"</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> ले यो डिभाइस पूर्ण रूपमा नियन्त्रण गर्ने अनुमति माग्दै छ। यो सेवाले स्क्रिनमा भएका जानकारी पढ्न तथा पहुँचसम्बन्धी आवश्यकता भएका प्रयोगकर्ताहरूका तर्फबाट कारबाही गर्न सक्छ। धेरैजसो एपका हकमा यो स्तरको नियन्त्रण उपयुक्त हुँदैन।"</string>
@@ -2707,7 +2736,7 @@
     <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"कारबाहीहरू हेर्नुहोस् र तिनमा कार्य गर्नुहोस्"</string>
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"यसले कुनै एप वा हार्डवेयर सेन्सरसँग तपाईंले गर्ने अन्तर्क्रियाको ट्र्याक गर्न सक्छ र तपाईंका तर्फबाट एपहरूसँग अन्तर्क्रिया गर्न सक्छ।"</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"अनुमति दिनुहोस्"</string>
-    <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"इन्कार गर्नु⋯"</string>
+    <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"नदिनुहोस्"</string>
     <string name="accessibility_dialog_button_stop" msgid="7295448112784528196">"रोक्नुहोस्"</string>
     <string name="accessibility_dialog_button_cancel" msgid="4813234247237851121">"रद्द गर्नु⋯"</string>
     <string name="disable_service_title" msgid="2909108731776956167">"<xliff:g id="SERVICE">%1$s</xliff:g> बन्द गर्ने हो?"</string>
@@ -2842,7 +2871,7 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"ब्याट्री सबैभन्दा धेरै खपत गर्ने एपहरू हेर्नुहोस्"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"तपाईंको डिभाइसको ब्याट्री जोगाउने प्रयोजनका लागि चार्ज गर्ने प्रक्रिया अप्टिमाइज गरिन्छ"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"तपाईंको डिभाइसको ब्याट्रीको आयु बढाउने प्रयोजनका लागि चार्ज गर्ने प्रक्रिया अप्टिमाइज गरिन्छ"</string>
-    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"तपाईंको डिभाइसको ब्याट्री जोगाउने प्रयोजनका लागि चार्ज गर्ने प्रक्रिया अप्टिमाइज गरिन्छ"</string>
+    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"तपाईंको डिभाइसको ब्याट्री जोगाउने प्रयोजनका लागि चार्ज गर्ने प्रक्रिया अप्टिमाइज गरिएको छ"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"तपाईंको डिभाइस डक गरिएका बेला उक्त डिभाइसको ब्याट्रीको आयु बढाउने प्रयोजनका लागि चार्ज गर्ने प्रक्रिया अप्टिमाइज गरिन्छ"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"तपाईंको डिभाइसको ब्याट्री जोगाउने प्रयोजनका लागि चार्ज गर्ने प्रक्रिया अप्टिमाइज गरिन्छ"</string>
     <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"तपाईंको डिभाइस डक गरिएका बेला उक्त डिभाइसको ब्याट्रीको आयु बढाउने प्रयोजनका लागि चार्ज गर्ने प्रक्रिया अप्टिमाइज गरिन्छ"</string>
@@ -3214,7 +3243,7 @@
     <string name="uninstall_device_admin" msgid="4481095209503956916">"एपको स्थापना रद्द गर्नुहोस्"</string>
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"निष्क्रिय पार्नुहोस् तथा स्थापना रद्द गर्नुहोस्"</string>
     <string name="select_device_admin_msg" msgid="5501360309040114486">"डिभाइसका एडमिन एपहरू"</string>
-    <string name="no_device_admins" msgid="8888779888103079854">"डिभाइसका एडमिन एपहरू उपलब्ध छैनन्"</string>
+    <string name="no_device_admins" msgid="8888779888103079854">"डिभाइसका एड्मिन एपहरू उपलब्ध छैनन्"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"विश्वस्त प्रतिनिधि उपलब्ध छैन"</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"डिभाइसको एडमिन एप एक्टिभेट गर्ने हो?"</string>
     <string name="add_device_admin" msgid="6252128813507932519">"यो डिभाइसको एडमिन एप एक्टिभेट गर्नुहोस्"</string>
@@ -3460,7 +3489,7 @@
     <string name="one_usercrt" msgid="1865069301105101370">"एउटा प्रयोगकर्ता सर्टिफिकेट"</string>
     <string name="one_cacrt" msgid="7467796501404158399">"एउटा CA सर्टिफिकेट"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"%d CA सर्टिफिकेटहरू"</string>
-    <string name="user_credential_title" msgid="4686178602575567298">"प्रमाणका विवरणहरू"</string>
+    <string name="user_credential_title" msgid="4686178602575567298">"क्रिडेन्सियलका विवरणहरू"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"हटाइएको प्रमाण: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
     <string name="user_credential_none_installed" msgid="918620912366836994">"प्रयोगकर्ताका क्रिडेन्सियल इन्स्टल गरिएका छैनन्"</string>
     <string name="spellcheckers_settings_title" msgid="2799021700580591443">"स्पेल चेकर"</string>
@@ -3820,7 +3849,8 @@
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"अलार्मको भोल्युम"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"घन्टी तथा सूचनाको भोल्युम"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"घण्टीको भोल्युम"</string>
-    <string name="notification_volume_option_title" msgid="4838818791683615978">"ध्वनी सूचना"</string>
+    <string name="notification_volume_option_title" msgid="4838818791683615978">"सूचनाको भोल्युम"</string>
+    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"सूचना आउँदा घन्टी बज्ने सुविधा म्युट गरिएकाले यो सुविधा उपलब्ध छैन"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"फोनको रिङटोन"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"सूचना आउँदा बज्ने डिफल्ट साउन्ड"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"अनुप्रयोगले प्रदान गरेको ध्वनि"</string>
@@ -3884,7 +3914,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"सूचना आउँदा तपाईंको फोनमा साउन्ड आउने वा भाइब्रेट हुने छैन।"</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">" सूचना आउँदा भिजुअल वा साउन्ड नआओस्"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"तपाईं सूचनाहरू देख्न वा सुन्न सक्नु हुने छैन।"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"तपाईंको फोनमा नयाँ वा हालका सूचना जनाउने जानकारी देखिँदैन, भाइब्रेट हुँदैन वा घन्टी बज्दैन। तपाईं फोनको क्रियाकलाप वा स्थितिसम्बन्धी महत्त्वपूर्ण सूचनाहरू भने देखी नै रहनु हुने छ।\n\n \'बाधा नपुऱ्याउनुहोस्\' सुविधा अफ गरेका बेला तपाईं आफ्नो स्क्रिनको सिरानबाट फेदतर्फ स्क्रोल गरी छुटेका सूचनाहरू हेर्न सक्नुहुन्छ।"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"तपाईंको फोनले नयाँ वा हालका सूचनाहरू देखाउँदैन र नयाँ सूचना आउँदा भाइब्रेट गर्दैन वा आवाज आउँदैन। डिभाइसको क्रियाकलाप वा स्थितिसम्बन्धी महत्त्वपूर्ण सूचनाहरू देखिने क्रम भने जारी नै रहने छ भन्ने कुरा ख्याल गर्नुहोस्।\n\nतपाईंले Do Not Disturb अफ गरेका बेला तपाईं आफ्नो स्क्रिनको सिरानबाट पुछारतर्फ स्वाइप गरी छुटेका सूचनाहरू भेट्टाउन सक्नुहुन्छ।"</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"आफू अनुकूल"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"आफू अनुकूल सेटिङ सक्षम पार्नुहोस्‌"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"आफू अनुकूल सेटिङ हटाउनुहोस्‌"</string>
@@ -3908,7 +3938,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"ध्वनि र कम्पन"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"सुचनाहरूका ध्वनि, कम्पन र केही भिजुअल संकेतहरू"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"सुचनाहरूका ध्वनि, कम्पन र भिजुअल संकेतहरू"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="1115914818435434668">"फोनको आधारभूत गतिविधि र स्ट्याटस देखाउन चाहिने सूचना कहिल्यै लुकाइने छैन।"</string>
+    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"डिभाइसको आधारभूत क्रियाकलाप र स्थितिसम्बन्धी सूचनाहरू कहिले पनि लुकाइने छैनन्।"</string>
     <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"कुनै पनि होइन"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"अन्य विकल्पहरू"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"हाल्नुहोस्"</string>
@@ -4042,6 +4072,8 @@
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"अनलक गरेपछि सीधै पछिल्लो पटक प्रयोग गरिएको स्क्रिनमा पुगियोस्"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"लक स्क्रिन, लकस्क्रिन, छाड्नुहोस्, बाइपास गर्नुहोस्"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"कार्य प्रोफाइल लक हुँदा"</string>
+    <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"लक स्क्रिनमा नयाँ सूचनाहरू मात्र देखाइयोस्"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"यसअघि हेरिएका सूचनाहरू लक स्क्रिनबाट स्वतः हटाइयोस्"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"लक स्क्रिनमा देखाइने सूचनाहरू"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"वार्तालाप, डिफल्ट र साइलेन्ट मोड देखाउनुहोस्"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"सबै वार्तालाप देखाइयोस्"</string>
@@ -4213,7 +4245,7 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"\'बाधा नपुर्‍याउनुहोस्\' सुविधालाई अनुमति दिइयोस्"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"कुनै पनि स्थापित एपहरू द्वारा \'बाधा नपुर्‍याउनुहोस्\' सेटिङ अन हुँदाको अनुमति को माग गरेका छैनन्"</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"एपहरू लोड गरिँदै…"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"तपाईंको अनुरोधबमोजिम Android ले यस एपका सूचनाहरूलाई यो डिभाइसमा देखाउन दिइरहेको छैन"</string>
+    <string name="app_notifications_off_desc" msgid="2484843759466874201">"तपाईंले यो एपलाई सूचना पठाउने अनुमति दिनुभएको छैन"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"तपाईंको अनुरोधबमोजिम Android ले सूचनाहरूको यस कोटिलाई यो डिभाइसमा देखिन दिइरहेको छैन"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"तपाईंको अनुरोधबमोजिम Android ले सूचनाहरूको यस समूहलाई यो डिभाइसमा देखाउन दिइरहेको छैन"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"यो एपले सूचना पठाउँदैन"</string>
@@ -4431,7 +4463,7 @@
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"अनपिन गर्नुअघि PIN मागियोस्"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"पिन निकाल्नुअघि पासवर्ड सोध्नुहोस्"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"अनपिन गर्दा डिभाइस लक गरियोस्"</string>
-    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"पुष्टि गरेपछि मात्र SIM मेटाइयोस"</string>
+    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"पुष्टि गरेपछि मात्र SIM मेटाइयोस्"</string>
     <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"डाउनलोड गरिएको SIM मेट्नुभन्दा पहिले यो व्यक्ति तपाईं नै हो भन्ने पुष्टि गर्नुहोस्"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"यो कार्य प्रोफाइल निम्नद्वारा व्यवस्थित गरिन्छ:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> द्वारा व्यवस्थापन गरिएको"</string>
@@ -4527,7 +4559,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> अतिरिक्त अनुमतिहरु</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> अतिरिक्त अनुमति</item>
     </plurals>
-    <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"कुनै अनुमतिहरू प्रदान गरिएको छैन"</string>
+    <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"कुनै पनि अनुमति दिइएको छैन"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"कुनै अनुमतिहरू अनुरोध गरिएको छैन"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"एपहरूलाई आफ्नो जानकारी कसरी प्रयोग गर्न दिने भन्ने कुरा निर्धारण गर्नुहोस्"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"गोपनीयतासम्बन्धी ड्यासबोर्ड"</string>
@@ -5896,10 +5928,13 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"स्क्रिन सेभर छनौट गर्नुहोस्"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"अतिरिक्त जानकारी देखाइयोस्"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"स्क्रिन सेभरमा समय, मौसमलगायतका जानकारी देखाइयोस्"</string>
+    <string name="dream_home_controls_toggle_title" msgid="706799741564479248">"\"होम कन्ट्रोल\" देखाइयोस्"</string>
+    <string name="dream_home_controls_toggle_summary" msgid="4102519907917430579">"स्क्रिन सेभरमा \"होम कन्ट्रोल\" बटन देखाइयोस्"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"थप सेटिङ"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"स्क्रिन सेभर छान्नुहोस्"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"तपाईंको ट्याब्लेट डक गरिएका बेला तपाईंको डिभाइसमा देखाइनु पर्ने कुराहरू छान्नुहोस्। स्क्रिन सेभर प्रयोग गरिएका बेला तपाईंको डिभाइसले अरू बेलाको तुलनामा बढी ब्याट्री खपत गर्न सक्छ।"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"कस्टमाइज गर्नुहोस्"</string>
+    <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> कस्टमाइज गर्नुहोस्"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"फ्रिफर्म मोड अन गर्न रिबुट गर्नु पर्ने हुन्छ।"</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"सहायक डिस्प्लेहरूमा डेस्कटप मोड बलपूर्वक लागू गर्न रिबुट गर्नु पर्ने हुन्छ।"</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"अहिले नै रिबुट गर्नुहोस्"</string>

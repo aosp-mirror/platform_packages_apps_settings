@@ -195,7 +195,7 @@ public class NetworkRequestDialogFragmentTest {
     }
 
     private List<WifiEntry> createWifiEntryList() {
-        List<WifiEntry> wifiEntryList = spy(new ArrayList<>());
+        List<WifiEntry> wifiEntryList = new ArrayList<>();
 
         final WifiEntry wifiEntry1 = mock(WifiEntry.class);
         when(wifiEntry1.getSsid()).thenReturn("Test AP 1");

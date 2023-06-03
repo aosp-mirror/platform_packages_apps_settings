@@ -1038,6 +1038,8 @@
     <string name="security_settings_fingerprint_enroll_consent_introduction_title">Allow fingerprint unlock</string>
     <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature, when fingerprint unlock is disabled by device admin [CHAR LIMIT=40] -->
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled">Use your fingerprint</string>
+    <!-- Learn more text of footer preference for fingerprint settings [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_settings_footer_learn_more">Learn more about Fingerprint Unlock</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog (tablet) [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet">Use your fingerprint to unlock your tablet or verify it\u2019s you, like when you sign in to apps or approve a purchase.</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog (device) [CHAR LIMIT=NONE]-->
@@ -1150,9 +1152,55 @@
     <!-- Acquire message received during fingerprint enrollment to inform the user they've reached the maximum number of enrollments. [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts">You\u2019ve reached the maximum number of attempts</string>
 
+    <!-- Watch unlock enrollment and settings --><skip />
+    <!-- Title shown for menu item that launches watch unlock settings. [CHAR LIMIT=40] -->
+    <string name ="security_settings_activeunlock_preference_title">Watch Unlock</string>
+    <!-- Introduction shown in face and fingerprint page to introduce the biometric feature. [CHAR LIMIT=NONE]-->
+    <string name="biometric_settings_intro_with_activeunlock" product="default">When you set up Face Unlock and Fingerprint Unlock, your phone will ask for your fingerprint when you wear a mask or are in a dark area.\n\nYou can unlock with your watch when your face or fingerprint isn\u2019t recognized.</string>
+    <!-- Introduction shown in face and fingerprint page to introduce the biometric feature. [CHAR LIMIT=NONE]-->
+    <string name="biometric_settings_intro_with_activeunlock" product="tablet">When you set up Face Unlock and Fingerprint Unlock, your tablet will ask for your fingerprint when you wear a mask or are in a dark area.\n\nYou can unlock with your watch when your face or fingerprint isn\u2019t recognized.</string>
+    <!-- Introduction shown in fingerprint page to explain that watch unlock can be used if fingerprint isn't recognized. [CHAR LIMIT=NONE]-->
+    <string name="biometric_settings_intro_with_fingerprint">You can unlock with your watch when your fingerprint isn\u2019t recognized.</string>
+     <!-- Introduction shown in face page to explain that watch unlock can be used if face isn't recognized. [CHAR LIMIT=NONE]-->
+    <string name="biometric_settings_intro_with_face">You can unlock with your watch when your face isn\u2019t recognized.</string>
+    <!-- Message for a biometric preference toggle, indicating that an action can only be performed by using Face Unlock or Watch Unlock. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_use_face_or_watch_preference_summary">Using face or watch</string>
+    <!-- Message for a biometric preference toggle, indicating that an action can only be performed by using Fingerprint Unlock or Watch Unlock. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary">Using fingerprint or watch</string>
+    <!-- Message for a biometric preference toggle, indicating that an action can be performed by using either Face Unlock, Fingerprint Unlock, or Watch Unlock. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary">Using face, fingerprint, or watch</string>
+    <!-- Message for a biometric preference toggle, indicating that an action can be performed by using Watch Unlock. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_use_watch_preference_summary">Using watch</string>
+    <!-- Title shown in watch unlock require face or fingerprint setup page [CHAR LIMIT=60] -->
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title">Set up Face or Fingerprint Unlock first</string>
+    <!-- Message shown in watch unlock require face or fingerprint setup page [CHAR LIMIT=NONE] -->
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message">You can unlock with your watch when your face or fingerprint isn\u2019t recognized</string>
+    <!-- Title shown in watch unlock require fingerprint setup page [CHAR LIMIT=60] -->
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title">Set up Fingerprint Unlock first</string>
+    <!-- Message shown in watch unlock require fingerprint setup page [CHAR LIMIT=NONE] -->
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message">You can unlock with your watch when your fingerprint isn\u2019t recognized</string>
+    <!-- Title shown in watch unlock require face setup page [CHAR LIMIT=60] -->
+    <string name="security_settings_activeunlock_require_face_setup_title">Set up Face Unlock first</string>
+    <!-- Message shown in watch unlock require face setup page [CHAR LIMIT=NONE] -->
+    <string name="security_settings_activeunlock_require_face_setup_message">You can unlock with your watch when your face isn\u2019t recognized</string>
+    <!-- Button text to launch biometric setup [CHAR LIMIT=30] -->
+    <string name="security_settings_activeunlock_biometric_setup">Set up</string>
+    <!-- Message showing that fingerprint and watch is set up. Shown for a menu item that launches fingerprint and watch unlock settings or enrollment. [CHAR LIMIT=80]-->
+    <string name="security_settings_fingerprint_single_watch_preference_summary">Fingerprint and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
+    <!-- Message showing that multiple fingerprints and watch is set up. Shown for a menu item that launches fingerprint and watch unlock settings or enrollment. [CHAR LIMIT=80]-->
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary">Fingerprints and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
+    <!-- Message showing that face and watch is set up. Shown for a menu item that launches face and watch unlock settings or enrollment. [CHAR LIMIT=80]-->
+    <string name="security_settings_face_watch_preference_summary">Face and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
+    <!-- Message showing that fingerprint, face, and the current watch is set up. Shown for a menu item that launches fingerprint, face,  and active unlock settings or enrollment. [CHAR LIMIT=80] -->
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary">Face, fingerprint, and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
+    <!-- Message showing that multiple fingerprints, face, and the current watch is set up. Shown for a menu item that launches fingerprint, face,  and active unlock settings or enrollment. [CHAR LIMIT=80]-->
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary">Face, fingerprints, and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
+
     <!-- Biometric settings --><skip />
     <!-- Title shown for menu item that launches biometric settings. [CHAR LIMIT=66] -->
     <string name="security_settings_biometric_preference_title">Face &amp; Fingerprint Unlock</string>
+    <!-- Title shown for work menu item that launches biometric settings. [CHAR LIMIT=66] -->
+    <string name="security_settings_work_biometric_preference_title">Face &amp; Fingerprint Unlock for work</string>
     <!-- Message shown in summary field of biometric settings. [CHAR LIMIT=66] -->
     <string name="security_settings_biometric_preference_summary_none_enrolled">Tap to set up</string>
     <!-- Message shown in summary field of biometric settings when face is enrolled, and multiple fingerprints are enrolled. [CHAR LIMIT=66]-->
@@ -1213,11 +1261,11 @@
     <!-- Message shown in fingerprint enrollment dialog to locate the sensor -->
     <string name="security_settings_fingerprint_enroll_find_sensor_message">It\u2019s on the back of your phone. Use your index finger.</string>
     <!-- Message shown in SFPS enrollment dialog to locate the sensor (tablet) [CHAR LIMIT=NONE]-->
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet">The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the tablet.\n\nPressing the power button turns off the screen.</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet">The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the tablet.</string>
     <!-- Message shown in SFPS enrollment dialog to locate the sensor (device) [CHAR LIMIT=NONE]-->
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="device">The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the device.\n\nPressing the power button turns off the screen.</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device">The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the device.</string>
     <!-- Message shown in SFPS enrollment dialog to locate the sensor (default) [CHAR LIMIT=NONE]-->
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="default">The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the phone.\n\nPressing the power button turns off the screen.</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default">The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the phone.</string>
     <!-- Message shown in UDFPS enrollment dialog to locate the sensor [CHAR LIMIT=NONE]-->
     <string name="security_settings_udfps_enroll_find_sensor_message">The fingerprint sensor is on your screen. You\u2019ll capture your fingerprint on the next screen.</string>
     <!-- Button for starting fingerprint enrollment. [CHAR LIMIT=10]-->
@@ -1286,10 +1334,16 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device">Now you can use your fingerprint to unlock your device or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
     <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (default) [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default">Now you can use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
+    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (tablet) [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet">Now you can use your fingerprint to unlock your tablet or verify it\u2019s you, like when you sign in to apps or approve a purchase. \n\nAdd another fingerprint so it\u2019s easier to unlock when you hold your tablet in different ways.</string>
+    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (device) [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device">Now you can use your fingerprint to unlock your device or verify it\u2019s you, like when you sign in to apps or approve a purchase.\n\nAdd another fingerprint so it\u2019s easier to unlock when you hold your device in different ways.</string>
+    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (default) [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default">Now you can use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps or approve a purchase.\n\nAdd another fingerprint so it\u2019s easier to unlock when you hold your phone in different ways.</string>
     <!-- Title for require screen on to auth toggle shown in fingerprint enrollment dialog once enrollment is completed. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_require_screen_on_to_auth_title">Unlock only when screen is on</string>
+    <string name="security_settings_require_screen_on_to_auth_title">Touch to unlock anytime</string>
     <!-- Description for require screen on to auth toggle shown in fingerprint enrollment dialog once enrollment is completed. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_require_screen_on_to_auth_description">The screen must be on before you can unlock with your fingerprint. This makes accidental unlocking less likely.</string>
+    <string name="security_settings_require_screen_on_to_auth_description">Touch the sensor to unlock, even when the screen is off. This makes accidental unlocking more likely.</string>
     <!-- Description for require screen on to auth toggle shown in fingerprint enrollment dialog once enrollment is completed. [CHAR LIMIT=NONE] -->
     <string name="security_settings_require_screen_on_to_auth_keywords">Screen, Unlock</string>
     <!-- Button text to skip enrollment of fingerprint [CHAR LIMIT=40] -->
@@ -1407,6 +1461,8 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_title">Whoops, that\u2019s not the sensor</string>
     <!-- Dialog message for dialog which shows when user touches the icon on the screen, instead of the sensor at the back [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_touch_dialog_message">Touch the sensor on the back of your phone. Use your index finger.</string>
+    <!-- Dialog message for dialog which shows when finger cannot be processed in enrollment. [CHAR LIMIT=45] -->
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title">Enrollment was not completed</string>
     <!-- Dialog message for dialog which shows when finger cannot be enrolled. [CHAR LIMIT=45] -->
     <string name="security_settings_fingerprint_enroll_error_dialog_title">Fingerprint setup timed out</string>
     <!-- Dialog message for dialog which shows when finger cannot be enrolled due to being idle too long. -->
@@ -4678,11 +4734,25 @@
     <string name="lockpassword_strong_auth_required_work_password">For added security, enter your work password</string>
 
     <!-- An explanation text that the pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
-    <string name="lockpassword_confirm_your_pattern_details_frp">Your phone was reset to factory settings. To use this phone, enter your previous pattern.</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default">Your phone was reset to factory settings. To use this phone, enter your previous pattern.</string>
+    <!-- An explanation text that the pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet">Your tablet was reset to factory settings. To use this tablet, enter your previous pattern.</string>
+    <!-- An explanation text that the pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device">Your device was reset to factory settings. To use this device, enter your previous pattern.</string>
+
     <!-- An explanation text that the pin needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
-    <string name="lockpassword_confirm_your_pin_details_frp">Your phone was reset to factory settings. To use this phone, enter your previous PIN.</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default">Your phone was reset to factory settings. To use this phone, enter your previous PIN.</string>
+    <!-- An explanation text that the pin needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet">Your tablet was reset to factory settings. To use this tablet, enter your previous PIN.</string>
+    <!-- An explanation text that the pin needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device">Your device was reset to factory settings. To use this device, enter your previous PIN.</string>
+
     <!-- An explanation text that the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
-    <string name="lockpassword_confirm_your_password_details_frp">Your phone was reset to factory settings. To use this phone, enter your previous password.</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default">Your phone was reset to factory settings. To use this phone, enter your previous password.</string>
+    <!-- An explanation text that the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet">Your tablet was reset to factory settings. To use this tablet, enter your previous password.</string>
+    <!-- An explanation text that the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_password_details_frp" product="device">Your device was reset to factory settings. To use this device, enter your previous password.</string>
 
     <!-- Header shown when pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
     <string name="lockpassword_confirm_your_pattern_header_frp">Verify pattern</string>
@@ -4737,6 +4807,9 @@
     <string name="lockpattern_settings_enable_summary">Must draw pattern to unlock screen</string>
     <!-- Security & location settings screen, setting check box title. This setting controls whether a visible green line is drawn as the users move their finger around while drawing the unlock pattern.  If checked, this line is drawn.  If unchecked, there is nothing drawn so the users do not reveal their pattern while they unlock the phone.-->
     <string name="lockpattern_settings_enable_visible_pattern_title">Make pattern visible</string>
+    <!-- Security & location settings screen, setting check box title. This setting disables animations when entering the PIN.-->
+    <string name="lockpattern_settings_enhanced_pin_privacy_title">Enhanced PIN privacy</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary">Disable animations while entering the PIN</string>
     <!-- Security & location settings screen, setting check box title. This setting controls whether a visible green line is drawn as the users move their finger around while drawing the profile unlock pattern.  If checked, this line is drawn.  If unchecked, there is nothing drawn so the users do not reveal their pattern while they unlock the profile.-->
     <string name="lockpattern_settings_enable_visible_pattern_title_profile">Make profile pattern visible</string>
     <!-- Security & location settings screen, setting check box title. This setting controls whether tactile feedback will be produced when the user draws the pattern.-->
@@ -8776,6 +8849,9 @@
     <!-- Sound: Title for the option managing notification volume. [CHAR LIMIT=30] -->
     <string name="notification_volume_option_title">Notification volume</string>
 
+    <!-- Sound: Summary for when notification volume is disabled. [CHAR LIMIT=100] -->
+    <string name="notification_volume_disabled_summary">Unavailable because ring is muted</string>
+
     <!-- Sound: Title for the option defining the phone ringtone. [CHAR LIMIT=30] -->
     <string name="ringtone_title">Phone ringtone</string>
 
@@ -8965,7 +9041,7 @@
     <!-- Do not disturb: Hide notifications summary [CHAR LIMIT=NONE] -->
     <string name="zen_mode_restrict_notifications_hide_summary">You won\u2019t see or hear notifications</string>
     <!-- Do not disturb: Hide notifications footer [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_restrict_notifications_hide_footer">Your phone won\u2019t show, vibrate or make sound for new or existing notifications. Keep in mind, critical notifications for phone activity and status will still appear.\n\nWhen you turn off Do Not Disturb, find missed notifications by swiping down from the top of your screen.</string>
+    <string name="zen_mode_restrict_notifications_hide_footer">Your phone won\u2019t show, vibrate or make sound for new or existing notifications. Keep in mind, critical notifications for device activity and status will still appear.\n\nWhen you turn off Do Not Disturb, find missed notifications by swiping down from the top of your screen.</string>
     <!-- Do not disturb: Custom settings option [CHAR LIMIT=60] -->
     <string name="zen_mode_restrict_notifications_custom">Custom</string>
     <!-- Do not disturb: restrict notifications page, menu option [CHAR LIMIT=60] -->
@@ -9015,7 +9091,7 @@
     <!-- Do not disturb: what to block summary, all effects -->
     <string name="zen_mode_block_effect_summary_all">Sound, vibration, and visual signs of notifications</string>
 
-    <string name="zen_mode_blocked_effects_footer">Notifications needed for basic phone activity and status will never be hidden.</string>
+    <string name="zen_mode_blocked_effects_footer">Notifications needed for basic device activity and status will never be hidden.</string>
 
     <!--  Do not disturb: Zen mode no sounds are exceptions to bypass do not disturb-->
     <string name="zen_mode_no_exceptions">None</string>
@@ -9412,6 +9488,12 @@
     <!-- Configure Notifications: Title for the option controlling notifications for work profile. [CHAR LIMIT=30] -->
     <string name="locked_work_profile_notification_title">When work profile is locked</string>
 
+    <!-- Configure notifications: Title for the option controlling whether only new notifications are displayed to the user
+    on the lock screen [CHAR LIMIT=60] -->
+    <string name="unseen_notifs_lock_screen">Show only new notifications on lock screen</string>
+
+    <!-- Configure notifications: Summary for option of showing only new notifications on the lock screen. [CHAR LIMIT=100] -->
+    <string name="unseen_notifs_lock_screen_summary">Automatically remove previously viewed notifications from the lock screen</string>
 
     <!-- Configure notifications: Title for determining which notifications appear on the lock screen [CHAR LIMIT=60] -->
     <string name="lock_screen_notifs_title">Notifications on lock screen</string>
@@ -9923,7 +10005,7 @@
     <string name="loading_notification_apps">Loading apps\u2026</string>
 
     <!-- [CHAR LIMIT=NONE] Text appearing when app notifications are off -->
-    <string name="app_notifications_off_desc">At your request, Android is blocking this app\'s notifications from appearing on this device</string>
+    <string name="app_notifications_off_desc">You haven\'t allowed notifications from this app</string>
 
     <!-- [CHAR LIMIT=NONE] Text appearing when channel notifications are off -->
     <string name="channel_notifications_off_desc">At your request, Android is blocking this category of notifications from appearing on this device</string>
@@ -14384,6 +14466,10 @@
     <string name="dream_complications_toggle_title">Show additional information</string>
     <!-- The summary of what overlays this toggle controls [CHAR LIMIT=none] -->
     <string name="dream_complications_toggle_summary">Display things like the time, weather, or other information on the screen saver</string>
+    <!-- The title of the toggle which enables/disables the home controls button on top of the screen saver [CHAR LIMIT=none] -->
+    <string name="dream_home_controls_toggle_title">Show home controls</string>
+    <!-- The summary of the home controls toggle [CHAR LIMIT=none] -->
+    <string name="dream_home_controls_toggle_summary">Show home controls button from the screen saver</string>
     <!-- The title of the category to show for the screensaver miscellaneous settings [CHAR LIMIT=none] -->
     <string name="dream_more_settings_category">More settings</string>
     <!-- The title of the screen saver setup page [CHAR LIMIT=none] -->
@@ -14393,6 +14479,8 @@
 
     <!-- Button to customize the screensaver [CHAR LIMIT=20] -->
     <string name="customize_button_title">Customize</string>
+    <!-- The content description for accessibility tools of the customize button. It specifies which screensaver the user is customizing [CHAR LIMIT=NONE] -->
+    <string name="customize_button_description">Customize <xliff:g id="screensaver_name" example="Art Gallery">%1$s</xliff:g></string>
 
     <!-- Dialog body text used to explain a reboot is required after enabling freeform support for
     it to work [CHAR LIMIT=none] -->

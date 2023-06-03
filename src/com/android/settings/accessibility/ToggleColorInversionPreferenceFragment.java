@@ -93,7 +93,7 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
         mTopIntroTitle = getText(R.string.accessibility_display_inversion_preference_intro_text);
         mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
                 .authority(getPrefContext().getPackageName())
-                .appendPath(String.valueOf(R.raw.accessibility_color_inversion_banner))
+                .appendPath(String.valueOf(R.raw.a11y_color_inversion_banner))
                 .build();
         final View view = super.onCreateView(inflater, container, savedInstanceState);
         updateFooterPreference();

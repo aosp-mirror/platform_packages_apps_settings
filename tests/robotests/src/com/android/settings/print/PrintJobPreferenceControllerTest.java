@@ -21,8 +21,8 @@ import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyObject;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -75,7 +75,7 @@ public class PrintJobPreferenceControllerTest {
         mTestLabel = "PrintTest";
         when(mContext.getSystemService(Context.PRINT_SERVICE)).thenReturn(mPrintManager);
         when(mPrintManager.getGlobalPrintManagerForUser(anyInt())).thenReturn(mPrintManager);
-        when(mPrintManager.getPrintJob(anyObject())).thenReturn(mPrintJob);
+        when(mPrintManager.getPrintJob(any())).thenReturn(mPrintJob);
         when(mPrintJob.getInfo()).thenReturn(mPrintJobInfo);
         mController = new PrintJobPreferenceController(mContext, PREF_KEY);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);

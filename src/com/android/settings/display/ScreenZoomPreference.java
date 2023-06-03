@@ -36,13 +36,13 @@ public class ScreenZoomPreference extends Preference {
                 android.R.attr.preferenceStyle));
 
         final DisplayDensityUtils density = new DisplayDensityUtils(context);
-        final int defaultIndex = density.getCurrentIndex();
+        final int defaultIndex = density.getCurrentIndexForDefaultDisplay();
         if (defaultIndex < 0) {
             setVisible(false);
             setEnabled(false);
         } else if (TextUtils.isEmpty(getSummary())) {
-            final String[] entries = density.getEntries();
-            final int currentIndex = density.getCurrentIndex();
+            final String[] entries = density.getDefaultDisplayDensityEntries();
+            final int currentIndex = density.getCurrentIndexForDefaultDisplay();
             setSummary(entries[currentIndex]);
         }
     }

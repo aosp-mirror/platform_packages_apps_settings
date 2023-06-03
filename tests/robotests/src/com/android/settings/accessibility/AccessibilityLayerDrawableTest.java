@@ -43,7 +43,7 @@ public class AccessibilityLayerDrawableTest {
     @Test
     public void createLayerDrawable_configCorrect() {
         final Drawable expected1stDrawable = mContext.getDrawable(
-                R.drawable.accessibility_button_preview_base);
+                R.drawable.a11y_button_preview_base);
         final Drawable expected2ndDrawable = mContext.getDrawable(TEST_RES_ID);
 
         final AccessibilityLayerDrawable actualDrawable =

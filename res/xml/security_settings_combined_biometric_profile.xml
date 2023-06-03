@@ -17,7 +17,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/security_settings_biometric_preference_title">
+    android:title="@string/security_settings_work_biometric_preference_title">
 
     <com.android.settingslib.widget.TopIntroPreference
         android:title="@string/biometric_settings_intro" />
@@ -28,14 +28,14 @@
 
         <com.android.settingslib.RestrictedPreference
             android:key="biometric_fingerprint_settings_profile"
-            android:title="@string/security_settings_fingerprint_preference_title"
+            android:title="@string/security_settings_work_fingerprint_preference_title"
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_fingerprint_settings"
             settings:controller="com.android.settings.biometrics.combination.BiometricFingerprintProfileStatusPreferenceController" />
 
         <com.android.settingslib.RestrictedPreference
             android:key="biometric_face_settings_profile"
-            android:title="@string/security_settings_face_preference_title"
+            android:title="@string/security_settings_face_profile_preference_title"
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_face_settings"
             settings:controller="com.android.settings.biometrics.combination.BiometricFaceProfileStatusPreferenceController" />

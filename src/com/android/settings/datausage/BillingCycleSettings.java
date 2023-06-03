@@ -43,6 +43,7 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
@@ -503,7 +504,8 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return SubscriptionUtil.isSimHardwareVisible(context)
+                    return (!MobileNetworkUtils.isMobileNetworkUserRestricted(context))
+                            && SubscriptionUtil.isSimHardwareVisible(context)
                             && DataUsageUtils.hasMobileData(context);
                 }
             };

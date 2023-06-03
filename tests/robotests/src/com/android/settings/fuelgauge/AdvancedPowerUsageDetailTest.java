@@ -30,7 +30,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
@@ -859,7 +859,7 @@ public class AdvancedPowerUsageDetailTest {
         mFragment.onRadioButtonClicked(mOptimizePreference);
         mFragment.onPause();
 
-        verifyZeroInteractions(mMetricsFeatureProvider);
+        verifyNoInteractions(mMetricsFeatureProvider);
     }
 
     @Test
@@ -870,7 +870,7 @@ public class AdvancedPowerUsageDetailTest {
 
         mFragment.notifyBackupManager();
 
-        verifyZeroInteractions(mBackupManager);
+        verifyNoInteractions(mBackupManager);
     }
 
     @Test
@@ -893,6 +893,6 @@ public class AdvancedPowerUsageDetailTest {
 
         mFragment.onPause();
 
-        verifyZeroInteractions(mBackupManager);
+        verifyNoInteractions(mBackupManager);
     }
 }

@@ -88,15 +88,15 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
     private void initModeInfos() {
         mModeInfos.add(new MagnificationModeInfo(mContext.getText(
                 R.string.accessibility_magnification_mode_dialog_option_full_screen), null,
-                R.drawable.ic_illustration_fullscreen, MagnificationMode.FULLSCREEN));
+                R.drawable.a11y_magnification_mode_fullscreen, MagnificationMode.FULLSCREEN));
         mModeInfos.add(new MagnificationModeInfo(
                 mContext.getText(R.string.accessibility_magnification_mode_dialog_option_window),
-                null, R.drawable.ic_illustration_window, MagnificationMode.WINDOW));
+                null, R.drawable.a11y_magnification_mode_window, MagnificationMode.WINDOW));
         mModeInfos.add(new MagnificationModeInfo(
                 mContext.getText(R.string.accessibility_magnification_mode_dialog_option_switch),
                 mContext.getText(
                         R.string.accessibility_magnification_area_settings_mode_switch_summary),
-                R.drawable.ic_illustration_switch, MagnificationMode.ALL));
+                R.drawable.a11y_magnification_mode_switch, MagnificationMode.ALL));
     }
 
     @Override

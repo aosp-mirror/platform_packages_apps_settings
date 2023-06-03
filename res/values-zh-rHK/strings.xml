@@ -467,6 +467,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"設定指紋"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"允許使用指紋解鎖"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"使用您的指紋"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"進一步瞭解「指紋解鎖」"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"使用指紋解鎖平板電腦或驗證身分，例如用來登入應用程式或核准購買交易"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"使用指紋解鎖裝置或驗證身分，例如用來登入應用程式或核准購買交易"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"使用指紋解鎖手機或驗證身分，例如用來登入應用程式或核准購買交易"</string>
@@ -521,7 +522,29 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"請在感受到震動後移開手指"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"請移到周遭光線較柔和的地方，然後再試一次"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"嘗試次數已達上限"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"手錶解鎖"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"設定「面孔解鎖」和「指紋解鎖」時，如果您戴著口罩或人在昏暗的地方，手機就會要求您註冊指紋。\n\n當系統無法識別您的面孔或指紋時，可以使用手錶解鎖裝置。"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="tablet" msgid="8930396405433023076">"設定「面孔解鎖」和「指紋解鎖」時，如果您戴著口罩或人在昏暗的地方，平板電腦就會要求您註冊指紋。\n\n當系統無法識別您的面孔或指紋時，可以使用手錶解鎖裝置。"</string>
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"當系統無法識別您的指紋時，可以使用手錶解鎖裝置。"</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"當系統無法識別您的面孔時，可以使用手錶解鎖裝置。"</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"使用面孔或手錶"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"使用指紋或手錶"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"使用面孔、指紋或手錶"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"使用手錶"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"請先設定「面孔解鎖」或「指紋解鎖」"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"當系統無法識別您的面孔或指紋時，可以使用手錶解鎖裝置。"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"請先設定「指紋解鎖」"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"當系統無法識別您的指紋時，可以使用手錶解鎖裝置"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"請先設定「面孔解鎖」"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"當系統無法識別您的面孔時，可以使用手錶解鎖裝置"</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"設定"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"已新增指紋和<xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"已新增指紋和<xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"已新增面孔和<xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"已新增面孔、指紋和<xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"已新增面孔、指紋和<xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"面孔和指紋解鎖"</string>
+    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"用於工作設定檔的面孔和指紋解鎖"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"輕按即可設定"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"已新增面孔和指紋"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"已新增面孔和指紋"</string>
@@ -551,9 +574,9 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"請輕觸開關按鈕，但不要按下"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"如何設定指紋"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"指紋感應器在手機背面。請使用食指輕觸感應器。"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"指紋感應器位於開關按鈕上，開關按鈕形狀扁平，位於平板電腦邊緣凸起的音量按鈕旁。\n\n按下開關按鈕即可關閉螢幕。"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"指紋感應器位於開關按鈕上，開關按鈕形狀扁平，位於裝置邊緣凸起的音量按鈕旁。\n\n按下開關按鈕即可關閉螢幕。"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"指紋感應器位於開關按鈕上，開關按鈕形狀扁平，位於手機邊緣凸起的音量按鈕旁。\n\n按下開關按鈕即可關閉螢幕。"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="6345521315059783195">"指紋感應器位於開關按鈕上，開關按鈕形狀扁平，位於平板電腦邊緣凸起的音量按鈕旁。"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="5548015866784733975">"指紋感應器位於開關按鈕上，開關按鈕形狀扁平，位於裝置邊緣凸起的音量按鈕旁。"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="1977903336177861081">"指紋感應器位於開關按鈕上，開關按鈕形狀扁平，位於手機邊緣凸起的音量按鈕旁。"</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"指紋感應器位於螢幕上。請在下一個畫面擷取指紋。"</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"開始"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"請在螢幕上移動手指，找出感應器的所在位置。按住指紋感應器。"</string>
@@ -588,8 +611,11 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"現在可使用指紋解鎖平板電腦或驗證身分，例如用來登入應用程式或核准購買交易"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"現在可使用指紋解鎖裝置或驗證身分，例如用來登入應用程式或核准購買交易"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"現在可使用指紋解鎖手機或驗證身分，例如用來登入應用程式或核准購買交易"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"僅在螢幕開啟時解鎖"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"您必須先開啟螢幕，才可以使用指紋解鎖，以避免意外解鎖。"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"您現可使用指紋解鎖平板電腦或驗證身分，例如用來登入應用程式或核准購買交易。\n\n新增其他指紋，讓您以不同方式拿著平板電腦時亦能輕鬆解鎖。"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"您現可使用指紋解鎖裝置或驗證身分，例如用來登入應用程式或核准購買交易。\n\n新增其他指紋，讓您以不同方式拿著裝置時亦能輕鬆解鎖。"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"您現可使用指紋解鎖手機或驗證身分，例如用來登入應用程式或核准購買交易。\n\n新增其他指紋，讓您以不同方式拿著手機時亦能輕鬆解鎖。"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"隨時輕觸解鎖"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"即使螢幕關閉，亦可隨時輕觸感應器解鎖，但這樣較容易意外解鎖裝置。"</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"螢幕解鎖"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"稍後再做"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"移開手指，然後再次輕觸感應器"</string>
@@ -648,6 +674,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"完成"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"糟糕，這不是感應器"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"請使用食指輕觸位於手機背面的感應器。"</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"未完成註冊"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"指紋設定逾時"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"您可以立即重試，亦可以稍後再前往「設定」設定指紋"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"無法註冊指紋，請重試或使用另一隻手指。"</string>
@@ -735,28 +762,22 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"指紋 + 密碼"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"不設定指紋並繼續"</string>
     <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"您可以使用指紋解鎖手機。為安全起見，此選項需要設定後備螢幕鎖定方式。"</string>
-    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
-    <skip />
+    <string name="fingerprint_unlock_title" product="tablet" msgid="8674718459462612186">"您可以使用指紋解鎖平板電腦。為安全起見，此選項需要設定後備螢幕鎖定方式。"</string>
+    <string name="fingerprint_unlock_title" product="device" msgid="3224468142599659740">"您可以使用指紋解鎖裝置。為安全起見，此選項需要設定後備螢幕鎖定方式。"</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"面孔解鎖 + 圖案"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"面孔解鎖 + PIN"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"面孔解鎖 + 密碼"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"繼續但不設定「面孔解鎖」"</string>
     <string name="face_unlock_title" product="default" msgid="7344830351598247267">"您可以使用面孔解鎖手機。為安全起見，此選項需要設定後備螢幕鎖定方式。"</string>
-    <!-- no translation found for face_unlock_title (5695698036499155727) -->
-    <skip />
-    <!-- no translation found for face_unlock_title (6768108756755361161) -->
-    <skip />
+    <string name="face_unlock_title" product="tablet" msgid="5695698036499155727">"您可以使用面孔解鎖平板電腦。為安全起見，此選項需要設定後備螢幕鎖定方式。"</string>
+    <string name="face_unlock_title" product="device" msgid="6768108756755361161">"您可以使用面孔解鎖裝置。為安全起見，此選項需要設定後備螢幕鎖定方式。"</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"圖案 • 面孔 • 指紋"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • 面孔 • 指紋"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"密碼 • 面孔 • 指紋"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"繼續但不設定面孔或指紋解鎖"</string>
     <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"您可以使用面孔或指紋解鎖手機。為安全起見，此選項需要設定後備螢幕鎖定方式。"</string>
-    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
-    <skip />
-    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
-    <skip />
+    <string name="biometrics_unlock_title" product="tablet" msgid="5808626401936488028">"您可以使用面孔或指紋解鎖平板電腦。為安全起見，此選項需要設定後備螢幕鎖定方式。"</string>
+    <string name="biometrics_unlock_title" product="device" msgid="4912499343509046929">"您可以使用面孔或指紋解鎖裝置。為安全起見，此選項需要設定後備螢幕鎖定方式。"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"已由管理員、加密政策或認證儲存空間停用"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"無"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"滑動"</string>
@@ -2071,9 +2092,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"為提升安全性，請畫出您的工作設定檔上鎖圖案"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"為提升安全性，請輸入您的工作設定檔 PIN"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"為提升安全性，請輸入您的工作設定檔密碼"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"您的手機已回復原廠設定。如要使用這部手機，請畫出先前的上鎖圖案。"</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"您的手機已回復原廠設定。如要使用這部手機，請輸入先前的 PIN。"</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"您的手機已回復原廠設定。如要使用這部手機，請輸入先前的密碼。"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"您的手機已回復原廠設定。如要使用這部手機，請畫出先前的上鎖圖案。"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"您的平板電腦已回復原廠設定。如要使用此平板電腦，請畫出先前的上鎖圖案。"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"您的裝置已回復原廠設定。如要使用此裝置，請畫出先前的上鎖圖案。"</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"您的手機已回復原廠設定。如要使用這部手機，請輸入先前的 PIN。"</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"您的平板電腦已回復原廠設定。如要使用此平板電腦，請輸入先前的 PIN。"</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"您的裝置已回復原廠設定。如要使用此裝置，請輸入先前的 PIN。"</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"您的手機已回復原廠設定。如要使用這部手機，請輸入先前的密碼。"</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"您的平板電腦已回復原廠設定。如要使用此平板電腦，請輸入先前的密碼。"</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"您的裝置已回復原廠設定。如要使用此裝置，請輸入先前的密碼。"</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"驗證上鎖圖案"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"驗證 PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"驗證密碼"</string>
@@ -2098,6 +2125,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"需要解鎖圖案"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"必須畫出圖案來為螢幕解鎖"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"顯示解鎖圖案"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"進階 PIN 私隱保護"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"輸入 PIN 時停用動畫"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"顯示設定檔的解鎖圖案"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"輕按時震動"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"按開關按鈕立即上鎖"</string>
@@ -2457,7 +2486,7 @@
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"使用手勢即可開啟"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"使用無障礙手勢"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"要使用這項功能，請輕按螢幕底部的無障礙功能按鈕 <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>。\n\n如要切換不同的功能，按住無障礙功能按鈕即可。"</string>
-    <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"如果要用呢項功能，請㩒一下畫面上面嘅無障礙功能掣。"</string>
+    <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"要使用這項功能，請輕按螢幕上的無障礙功能按鈕。"</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"如果要使用呢項功能，請同時㩒住兩個音量鍵。"</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"如果要啟用同停用放大功能，請喺螢幕上面嘅任何一個地方㩒三下。"</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"如果要使用呢項功能，請用 2 隻手指由螢幕底部向上掃。\n\n用 2 隻手指向上掃然後㩒住，就可以切換唔同功能。"</string>
@@ -2621,7 +2650,7 @@
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"語音描述"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"收聽支援的電影和節目的畫面描述"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"語音描述, 音訊, 描述, 低視力"</string>
-    <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"開啟快速鍵"</string>
+    <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"捷徑已開啟"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"關閉"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"開啟"</string>
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"關閉"</string>
@@ -2698,7 +2727,7 @@
     <string name="color_cyan" msgid="4341758639597035927">"藍綠色"</string>
     <string name="color_yellow" msgid="5957551912912679058">"黃色"</string>
     <string name="color_magenta" msgid="8943538189219528423">"洋紅色"</string>
-    <string name="enable_service_title" msgid="7231533866953706788">"允許 <xliff:g id="SERVICE">%1$s</xliff:g> 完全控制您的裝置？"</string>
+    <string name="enable_service_title" msgid="7231533866953706788">"要授予「<xliff:g id="SERVICE">%1$s</xliff:g>」裝置的完整控制權？"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"「<xliff:g id="SERVICE">%1$s</xliff:g>」需要："</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"由於有應用程式阻礙權限請求，「設定」無法驗證您的回覆。"</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g>正在要求完全控制此裝置。此服務可以讀取畫面，並代表需要使用無障礙功能的使用者執行動作。這種程度的控制不適用於大部分應用程式。"</string>
@@ -3822,6 +3851,7 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"鈴聲和通知音量"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"鈴聲音量"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"通知音量"</string>
+    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"鈴聲已設為靜音，無法使用"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"電話鈴聲"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"預設通知音效"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"應用程式提供的音效"</string>
@@ -3885,7 +3915,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"手機收到通知時不會發出音效或震動。"</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"不顯示或發出音效通知"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"您不會看到或聽到通知"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"您的手機不會顯示新通知或現有通知，亦不會為此震動或發出音效。請記住，有關手機活動和狀態的重要通知仍會顯示。\n\n關閉「請勿騷擾」後，您可以從螢幕頂部向下滑動以查看錯過的通知。"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"手機將不會顯示新通知或現有通知，亦不會因此震動或發出音效。請注意，系統仍會顯示手機活動和狀態的重要通知。\n\n關閉「請勿騷擾」後，從螢幕頂部向下滑動即可查看錯過的通知。"</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"自訂"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"啟用自訂設定"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"移除自訂設定"</string>
@@ -3909,7 +3939,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"音效和震動"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"通知的音效、震動和個別視像訊號"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"通知的音效、震動和視像訊號"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="1115914818435434668">"基本手機活動及狀態所需的通知一律不會隱藏。"</string>
+    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"基本裝置活動及狀態所需的通知一律不會隱藏。"</string>
     <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"無"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"其他選項"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"新增"</string>
@@ -4043,6 +4073,8 @@
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"解鎖後直接前往上次使用的畫面"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"上鎖畫面, 鎖定螢幕, 略過, 繞過"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"當工作設定檔被鎖定時"</string>
+    <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"在上鎖畫面上只顯示新通知"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"自動移除上鎖畫面上先前查看過的通知"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"上鎖畫面上的通知"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"顯示對話通知、預設通知和已靜音通知"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"顯示預設對話和靜音對話"</string>
@@ -4214,7 +4246,7 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"允許請勿騷擾權限"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"沒有已安裝的應用程式要求存取「請勿騷擾」。"</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"正在載入應用程式…"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"Android 目前按您的要求防止這個應用程式的通知在此裝置上顯示"</string>
+    <string name="app_notifications_off_desc" msgid="2484843759466874201">"您尚未允許此應用程式發出通知"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Android 目前按您的要求防止這類通知在此裝置上顯示"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Android 目前按您的要求防止這類通知在此裝置上顯示"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"此應用程式不會傳送通知"</string>
@@ -4539,7 +4571,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 個不使用的應用程式</item>
     </plurals>
     <string name="unused_apps_category" msgid="8954930958175500851">"未使用的應用程式設定"</string>
-    <string name="unused_apps_switch" msgid="7595419855882245772">"如果未使用就暫停應用程式活動"</string>
+    <string name="unused_apps_switch" msgid="7595419855882245772">"暫停未使用應用程式的活動"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"移除權限、刪除暫存檔案和停止通知"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"所有應用程式"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"已安裝的應用程式"</string>
@@ -5897,10 +5929,13 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"選擇螢幕保護程式"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"顯示其他資訊"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"在螢幕保護程式顯示時間、天氣或其他資訊"</string>
+    <string name="dream_home_controls_toggle_title" msgid="706799741564479248">"顯示智能家居"</string>
+    <string name="dream_home_controls_toggle_summary" msgid="4102519907917430579">"在螢幕保護程式中顯示智能家居按鈕"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"更多設定"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"選擇螢幕保護程式"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"選擇平板電腦放上插座時螢幕上顯示的內容。如果裝置使用螢幕保護程式，可能會比較耗電。"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"自訂"</string>
+    <string name="customize_button_description" msgid="7440248477266126231">"自訂<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"您需要重新開機，才能啟用任意形式的支援。"</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"您需要重新開機，才能在次要螢幕上強制執行桌面模式。"</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"立即重新開機"</string>

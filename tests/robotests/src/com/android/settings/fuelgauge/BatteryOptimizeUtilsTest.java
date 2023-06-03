@@ -25,16 +25,16 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
@@ -183,8 +183,8 @@ public class BatteryOptimizeUtilsTest {
         mBatteryOptimizeUtils.setAppUsageState(MODE_UNRESTRICTED);
         TimeUnit.SECONDS.sleep(1);
 
-        verifyZeroInteractions(mMockBackend);
-        verifyZeroInteractions(mMockBatteryUtils);
+        verifyNoInteractions(mMockBackend);
+        verifyNoInteractions(mMockBatteryUtils);
     }
 
     @Test
@@ -247,7 +247,7 @@ public class BatteryOptimizeUtilsTest {
                 AppOpsManager.MODE_ALLOWED, /* allowListed */ false,
                 /* isSystemOrDefaultApp */ false);
 
-        verifyZeroInteractions(mMockBatteryUtils);
+        verifyNoInteractions(mMockBatteryUtils);
 
         final InOrder inOrder = inOrder(mMockBackend);
         inOrder.verify(mMockBackend).refreshList();
@@ -261,7 +261,7 @@ public class BatteryOptimizeUtilsTest {
                 AppOpsManager.MODE_ALLOWED, /* allowListed */ true,
                 /* isSystemOrDefaultApp */ true);
 
-        verifyZeroInteractions(mMockBatteryUtils);
+        verifyNoInteractions(mMockBatteryUtils);
 
         final InOrder inOrder = inOrder(mMockBackend);
         inOrder.verify(mMockBackend).refreshList();
