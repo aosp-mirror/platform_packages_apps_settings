@@ -99,7 +99,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         mIsLeContactSharingEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
                 SettingsUIDeviceConfig.BT_LE_AUDIO_CONTACT_SHARING_ENABLED, true);
         mIsLeAudioToggleEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED, false)
+                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED, true)
                 || DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_BLUETOOTH,
                 CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT, false);
         // Call refresh here even though it will get called later in onResume, to avoid the
