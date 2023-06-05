@@ -21,25 +21,22 @@
     android:title="@string/modifier_keys_settings"
     android:key="modifier_keys_all"
     settings:controller="com.android.settings.inputmethod.ModifierKeysPreferenceController">
-    <Preference
+
+    <com.android.settingslib.widget.LayoutPreference
         android:key="modifier_keys_caps_lock"
-        android:title="@string/modifier_keys_caps_lock"
-        android:summary="@string/modifier_keys_default_summary"/>
+        android:layout="@layout/modifier_keys_custom_key" />
 
-    <Preference
+    <com.android.settingslib.widget.LayoutPreference
         android:key="modifier_keys_ctrl"
-        android:title="@string/modifier_keys_ctrl"
-        android:summary="@string/modifier_keys_default_summary"/>
+        android:layout="@layout/modifier_keys_custom_key" />
 
-    <Preference
+    <com.android.settingslib.widget.LayoutPreference
         android:key="modifier_keys_meta"
-        android:title="@string/modifier_keys_meta"
-        android:summary="@string/modifier_keys_default_summary"/>
+        android:layout="@layout/modifier_keys_custom_key" />
 
-    <Preference
+    <com.android.settingslib.widget.LayoutPreference
         android:key="modifier_keys_alt"
-        android:title="@string/modifier_keys_alt"
-        android:summary="@string/modifier_keys_default_summary"/>
+        android:layout="@layout/modifier_keys_custom_key" />
 
     <Preference
         android:key="modifier_keys_restore"
