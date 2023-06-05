@@ -17,7 +17,9 @@
 package com.android.settings.inputmethod;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceScreen;
 
 /**
@@ -41,4 +43,14 @@ public interface KeyboardSettingsFeatureProvider {
      * @return true if the category is added successfully.
      */
     boolean addFirmwareUpdateCategory(Context context, PreferenceScreen screen);
+
+    /**
+     * Get custom action key icon.
+     *
+     * @param context Context for accessing resources.
+     *
+     * @return Returns the image of the icon, or null if there is no any custom icon.
+     */
+    @Nullable
+    Drawable getActionKeyIcon(Context context);
 }
