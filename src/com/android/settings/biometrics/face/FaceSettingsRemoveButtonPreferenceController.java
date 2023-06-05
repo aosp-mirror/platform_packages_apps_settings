@@ -21,6 +21,7 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.hardware.face.Face;
 import android.hardware.face.FaceManager;
 import android.os.Bundle;
@@ -69,10 +70,22 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+            final PackageManager pm = getContext().getPackageManager();
+            final boolean hasFingerprint = pm.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT);
+            final int dialogMessageRes;
+
+            if (hasFingerprint) {
+                dialogMessageRes = mIsConvenience
+                        ? R.string.security_settings_face_remove_dialog_details_fingerprint_conv
+                        : R.string.security_settings_face_remove_dialog_details_fingerprint;
+            } else {
+                dialogMessageRes = mIsConvenience
+                        ? R.string.security_settings_face_settings_remove_dialog_details_convenience
+                        : R.string.security_settings_face_settings_remove_dialog_details;
+            }
+
             builder.setTitle(R.string.security_settings_face_settings_remove_dialog_title)
-                    .setMessage(mIsConvenience
-                            ? R.string.security_settings_face_settings_remove_dialog_details_convenience
-                            : R.string.security_settings_face_settings_remove_dialog_details)
+                    .setMessage(dialogMessageRes)
                     .setPositiveButton(R.string.delete, mOnClickListener)
                     .setNegativeButton(R.string.cancel, mOnClickListener);
             AlertDialog dialog = builder.create();
