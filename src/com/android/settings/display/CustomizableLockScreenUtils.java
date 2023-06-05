@@ -60,6 +60,12 @@ public final class CustomizableLockScreenUtils {
     @VisibleForTesting
     static final String AFFORDANCE_NAME = "affordance_name";
 
+    @VisibleForTesting
+    static final String WALLPAPER_LAUNCH_SOURCE = "com.android.wallpaper.LAUNCH_SOURCE";
+    @VisibleForTesting
+    static final String LAUNCH_SOURCE_SETTINGS = "app_launched_settings";
+
+
     private CustomizableLockScreenUtils() {}
 
     /**
@@ -163,7 +169,14 @@ public final class CustomizableLockScreenUtils {
      * activity.
      */
     public static Intent newIntent() {
-        return new Intent(Intent.ACTION_SET_WALLPAPER);
+        final Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
+        // By adding the launch source here, we tell our destination (in this case, the wallpaper
+        // picker app) that it's been launched from within settings. That way, if we are in a
+        // multi-pane configuration (for example, for large screens), the wallpaper picker app can
+        // safely skip redirecting to the multi-pane version of its activity, as it's already opened
+        // within a multi-pane configuration context.
+        intent.putExtra(WALLPAPER_LAUNCH_SOURCE, LAUNCH_SOURCE_SETTINGS);
+        return intent;
     }
 
     private static boolean isWallpaperPickerInstalled(Context context) {
