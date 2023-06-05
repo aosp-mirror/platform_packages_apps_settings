@@ -621,7 +621,7 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"Du kannst jetzt deinen Fingerabdruck verwenden, um dein Gerät zu entsperren oder deine Identität zu bestätigen, wenn du dich z. B. in Apps anmelden oder Käufe autorisieren möchtest.\n\nDamit sich dein Gerät leichter entsperren lässt, wenn du es anders hältst, kannst du auch einen weiteren Fingerabdruck hinzufügen."</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"Du kannst jetzt deinen Fingerabdruck verwenden, um dein Smartphone zu entsperren oder deine Identität zu bestätigen, wenn du dich z. B. in Apps anmelden oder Käufe autorisieren möchtest.\n\nDamit sich dein Smartphone leichter entsperren lässt, wenn du es anders hältst, kannst du auch einen weiteren Fingerabdruck hinzufügen."</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Jederzeit durch Berühren entsperren"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Du kannst dein Gerät auch bei deaktiviertem Display per Fingerabdruck entsperren. Das erhöht allerdings die Gefahr eines versehentlichen Entsperrens."</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Du kannst dein Gerät auch bei ausgeschaltetem Display per Fingerabdruck entsperren. Das erhöht allerdings die Gefahr eines versehentlichen Entsperrens."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Display, entsperren"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Später"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Hebe den Finger an und lege ihn dann noch mal auf den Sensor"</string>
@@ -1550,7 +1550,7 @@
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ohne Aktivität"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Nicht festgelegt"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Hintergrund"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Hintergrund &amp; Stil"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Hintergrund und Stil"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Startseite, Sperrbildschirm"</string>
     <string name="wallpaper_settings_summary_default" msgid="7569803705735001813">"Standard"</string>
     <string name="wallpaper_settings_summary_custom" msgid="3174561317688848729">"Benutzerdefiniert"</string>
@@ -1993,7 +1993,7 @@
     <string name="location_category_location_services" msgid="8163798686832434284">"Standortdienste"</string>
     <string name="location_title" msgid="5819154746934945021">"Mein Standort"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Standort für Arbeitsprofil"</string>
-    <string name="location_app_level_permissions" msgid="907206607664629759">"Welche Apps dürfen den Standort ermitteln?"</string>
+    <string name="location_app_level_permissions" msgid="907206607664629759">"Berechtigungen zur Standortermittlung"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Standortermittlung ist deaktiviert"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
       <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> von <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> Apps haben Zugriff auf den Standort</item>
@@ -2091,7 +2091,7 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"Für Gesichtsentsperrung Passwort festlegen"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"Für Gesichtsentsperrung Muster festlegen"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"Für Gesichtsentsperrung PIN festlegen"</string>
-    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Passwort für Entsperrung per Gesicht oder Fingerabdruck einrichten"</string>
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Passwort festlegen"</string>
     <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Muster für Entsperrung per Gesicht oder Fingerabdruck einrichten"</string>
     <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"PIN für Entsperrung per Gesicht oder Fingerabdruck einrichten"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Passwort vergessen?"</string>
@@ -2656,8 +2656,8 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Lautstärketasten gedrückt halten"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Dreimal auf den Bildschirm tippen"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Weiter"</string>
-    <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Hörhilfen"</string>
-    <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Keine Hörhilfen verbunden"</string>
+    <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Hörgeräte"</string>
+    <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Keine Hörgeräte verbunden"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Hörhilfen hinzufügen"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Hörgeräte koppeln"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Wähle auf dem nächsten Bildschirm deine Hörgeräte aus. Das linke und rechte Ohr müssen möglicherweise separat gekoppelt werden.\n\nDeine Hörgeräte müssen eingeschaltet und bereit zum Koppeln sein."</string>
