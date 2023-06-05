@@ -22,6 +22,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -39,10 +40,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
 
 import java.util.ArrayList;
@@ -60,6 +63,11 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
     private String mKeyDefaultName;
     private String mKeyFocus;
     private Activity mActivity;
+    private KeyboardSettingsFeatureProvider mFeatureProvider;
+    private Drawable mActionKeyDrawable;
+    private TextView mLeftBracket;
+    private TextView mRightBracket;
+    private ImageView mActionKeyIcon;
 
     private List<int[]> mRemappableKeyList =
             new ArrayList<>(Arrays.asList(
@@ -83,6 +91,8 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
         super.onCreateDialog(savedInstanceState);
 
         mActivity = getActivity();
+        FeatureFactory featureFactory = FeatureFactory.getFactory(mActivity);
+        mFeatureProvider = featureFactory.getKeyboardSettingsFeatureProvider();
         InputManager inputManager = mActivity.getSystemService(InputManager.class);
         mKeyDefaultName = getArguments().getString(DEFAULT_KEY);
         mKeyFocus = getArguments().getString(SELECTION_KEY);
@@ -96,6 +106,10 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
                 mActivity.getString(R.string.modifier_keys_alt)));
         for (int i = 0; i < modifierKeys.size(); i++) {
             mRemappableKeyMap.put(modifierKeys.get(i), mRemappableKeyList.get(i));
+        }
+        Drawable drawable = mFeatureProvider.getActionKeyIcon(mActivity);
+        if (drawable != null) {
+            mActionKeyDrawable = DrawableCompat.wrap(drawable);
         }
 
         View dialoglayout  =
@@ -226,10 +240,18 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
                 checkIcon.setImageAlpha(255);
                 view.setBackground(
                         mActivity.getDrawable(R.drawable.modifier_key_lisetview_background));
+                if (mActionKeyDrawable != null && i == 2) {
+                    setActionKeyIcon(view);
+                    setActionKeyColor(getColorOfMaterialColorPrimary());
+                }
             } else {
                 textView.setTextColor(getColorOfTextColorPrimary());
                 checkIcon.setImageAlpha(0);
                 view.setBackground(null);
+                if (mActionKeyDrawable != null && i == 2) {
+                    setActionKeyIcon(view);
+                    setActionKeyColor(getColorOfTextColorPrimary());
+                }
             }
             return view;
         }
@@ -241,6 +263,21 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
         public int getCurrentItem() {
             return this.mCurrentItem;
         }
+    }
+
+    private void setActionKeyIcon(View view) {
+        mLeftBracket = view.findViewById(R.id.modifier_key_left_bracket);
+        mRightBracket = view.findViewById(R.id.modifier_key_right_bracket);
+        mActionKeyIcon = view.findViewById(R.id.modifier_key_action_key_icon);
+        mLeftBracket.setText("(");
+        mRightBracket.setText(")");
+        mActionKeyIcon.setImageDrawable(mActionKeyDrawable);
+    }
+
+    private void setActionKeyColor(int color) {
+        mLeftBracket.setTextColor(color);
+        mRightBracket.setTextColor(color);
+        DrawableCompat.setTint(mActionKeyDrawable, color);
     }
 
     private int getColorOfTextColorPrimary() {

@@ -17,6 +17,7 @@
 package com.android.settings.inputmethod;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 
 import androidx.preference.PreferenceScreen;
 
@@ -34,4 +35,9 @@ public class KeyboardSettingsFeatureProviderImpl implements KeyboardSettingsFeat
     public boolean addFirmwareUpdateCategory(Context context, PreferenceScreen screen) {
         return false;
     }
+
+    @Override
+    public Drawable getActionKeyIcon(Context context) {
+        return null;
+    };
 }
