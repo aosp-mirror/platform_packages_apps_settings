@@ -451,12 +451,10 @@ public class BatteryUtils {
 
     @VisibleForTesting
     Estimate getEnhancedEstimate() {
-        Estimate estimate = null;
-        // Get enhanced prediction if available
-        if (Duration.between(Estimate.getLastCacheUpdateTime(mContext), Instant.now())
-                .compareTo(Duration.ofSeconds(10)) < 0) {
-            estimate = Estimate.getCachedEstimateIfAvailable(mContext);
-        } else if (mPowerUsageFeatureProvider != null &&
+        // Align the same logic in the BatteryControllerImpl.updateEstimate()
+        Estimate estimate = Estimate.getCachedEstimateIfAvailable(mContext);
+        if (estimate == null &&
+                mPowerUsageFeatureProvider != null &&
                 mPowerUsageFeatureProvider.isEnhancedBatteryPredictionEnabled(mContext)) {
             estimate = mPowerUsageFeatureProvider.getEnhancedBatteryPrediction(mContext);
             if (estimate != null) {
