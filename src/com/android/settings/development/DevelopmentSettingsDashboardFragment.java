@@ -354,13 +354,18 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 final NfcVerboseVendorLogPreferenceController nfcVerboseLogController =
                         getDevelopmentOptionsController(
                                 NfcVerboseVendorLogPreferenceController.class);
+                final GraphicsDriverEnableAngleAsSystemDriverController enableAngleController =
+                        getDevelopmentOptionsController(
+                                GraphicsDriverEnableAngleAsSystemDriverController.class);
                 // If hardware offload isn't default value, we must reboot after disable
                 // developer options. Show a dialog for the user to confirm.
                 if ((a2dpController == null || a2dpController.isDefaultValue())
                         && (leAudioController == null || leAudioController.isDefaultValue())
                         && (nfcSnoopLogController == null || nfcSnoopLogController.isDefaultValue())
                         && (nfcVerboseLogController == null
-                        || nfcVerboseLogController.isDefaultValue())) {
+                        || nfcVerboseLogController.isDefaultValue())
+                        && (enableAngleController == null
+                        || enableAngleController.isDefaultValue())) {
                     disableDeveloperOptions();
                 } else {
                     DisableDevSettingsDialogFragment.show(this /* host */);

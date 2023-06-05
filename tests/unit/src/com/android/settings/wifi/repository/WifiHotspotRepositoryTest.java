@@ -78,7 +78,6 @@ import java.util.List;
 public class WifiHotspotRepositoryTest {
     static final String WIFI_SSID = "wifi_ssid";
     static final String WIFI_PASSWORD = "wifi_password";
-    static final String WIFI_CURRENT_COUNTRY_CODE = "US";
 
     static final int WIFI_5GHZ_BAND_PREFERRED = BAND_2GHZ_5GHZ;
     static final int WIFI_6GHZ_BAND_PREFERRED = BAND_2GHZ_5GHZ_6GHZ;
@@ -112,7 +111,6 @@ public class WifiHotspotRepositoryTest {
         mRepository = new WifiHotspotRepository(mContext, mWifiManager, mTetheringManager);
         mRepository.mSecurityType = mSecurityType;
         mRepository.mSpeedType = mSpeedType;
-        mRepository.mCurrentCountryCode = WIFI_CURRENT_COUNTRY_CODE;
         mRepository.mIsDualBand = true;
         mRepository.mIs5gAvailable = true;
         mRepository.mIs6gAvailable = true;

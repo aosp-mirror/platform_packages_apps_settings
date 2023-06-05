@@ -57,7 +57,7 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
     private GraphicsDriverEnableAngleAsSystemDriverController mController;
 
     // Signal to wait for SystemProperty values changed
-    private class PropertyChangeSignal {
+    private static class PropertyChangeSignal {
         private CountDownLatch mCountDownLatch;
 
         private Runnable mCountDownJob;
@@ -217,23 +217,7 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
     }
 
     @Test
-    public void onDeveloperOptionSwitchEnabled_angleSupported_PreferenceShouldEnabled() {
-        when(mSystemPropertiesMock.get(eq(PROPERTY_RO_GFX_ANGLE_SUPPORTED), any()))
-                .thenReturn("true");
-        mController.onDeveloperOptionsSwitchEnabled();
-        assertThat(mPreference.isEnabled()).isTrue();
-    }
-
-    @Test
-    public void onDeveloperOptionSwitchEnabled_angleNotSupported_PrefenceShouldDisabled() {
-        when(mSystemPropertiesMock.get(eq(PROPERTY_RO_GFX_ANGLE_SUPPORTED), any()))
-                .thenReturn("false");
-        mController.onDeveloperOptionsSwitchEnabled();
-        assertThat(mPreference.isEnabled()).isFalse();
-    }
-
-    @Test
-    public void onDeveloperOptionSwitchDisabled_angleIsNotSystemGLESDriver() {
+    public void onDeveloperOptionSwitchDisabled_angleShouldNotBeSystemGLESDriver() {
         // Add a callback when SystemProperty changes.
         // This allows the thread to wait until
         // GpuService::toggleAngleAsSystemDriver() updates the persist.graphics.egl.
@@ -242,6 +226,8 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
 
         // Test that onDeveloperOptionSwitchDisabled,
         // persist.graphics.egl updates to ""
+        when(mSystemPropertiesMock.get(eq(PROPERTY_RO_GFX_ANGLE_SUPPORTED), any()))
+                .thenReturn("true");
         mController.onDeveloperOptionsSwitchDisabled();
         propertyChangeSignal1.wait(100);
         final String systemEGLDriver = SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL);
@@ -253,12 +239,16 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
 
     @Test
     public void onDeveloperOptionSwitchDisabled_PreferenceShouldNotBeChecked() {
+        when(mSystemPropertiesMock.get(eq(PROPERTY_RO_GFX_ANGLE_SUPPORTED), any()))
+                .thenReturn("true");
         mController.onDeveloperOptionsSwitchDisabled();
         assertThat(mPreference.isChecked()).isFalse();
     }
 
     @Test
     public void onDeveloperOptionSwitchDisabled_PreferenceShouldDisabled() {
+        when(mSystemPropertiesMock.get(eq(PROPERTY_RO_GFX_ANGLE_SUPPORTED), any()))
+                .thenReturn("true");
         mController.onDeveloperOptionsSwitchDisabled();
         assertThat(mPreference.isEnabled()).isFalse();
     }

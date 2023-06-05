@@ -59,10 +59,8 @@
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Підключити правий"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Підключити лівий"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Підключити другий"</string>
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_left_ear_message (5711642363615781647) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_right_ear_message (631521133525979967) -->
-    <skip />
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="5711642363615781647">"Ваш лівий слуховий апарат підключено.\n\nЩоб підключити правий слуховий апарат, переконайтеся, що він увімкнений і готовий до підключення."</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"Ваш правий слуховий апарат підключено.\n\nЩоб підключити лівий слуховий апарат, переконайтеся, що він увімкнений і готовий до підключення."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Підключити правий"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Підключити лівий"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Для всіх доступних слухових апаратів"</string>
@@ -270,7 +268,7 @@
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Обличчя додано"</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Потрібно налаштувати"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Фейс-контроль"</string>
-    <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Фейсконтроль для роботи"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Фейс-контроль для роботи"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Як налаштувати фейс-контроль"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Налаштування фейс-контролю"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Використовуйте обличчя для автентифікації"</string>
@@ -445,8 +443,7 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Прикладіть до датчика й трохи потримайте одну сторону кінчика пальця, а потім зробіть те саме з іншою стороною"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Пропустити налаштування відбитка пальця?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Ви вибрали відбиток пальця як один зі способів розблокування телефона. Якщо пропустити цей крок зараз, потрібно буде налаштувати відбиток пізніше. Це займає близько хвилини."</string>
-    <!-- no translation found for lock_screen_skip_setup_title (6979006375138175111) -->
-    <skip />
+    <string name="lock_screen_skip_setup_title" msgid="6979006375138175111">"Пропустити налаштування опцій \"<xliff:g id="OPTIONS">%s</xliff:g>\"?"</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Не налаштовувати PIN-код?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Пропустити налаштування PIN-коду й фейсконтролю?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Пропустити налаштування PIN-коду й відбитка пальця?"</string>
@@ -463,16 +460,30 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Готово"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Це не датчик"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Торкніться сканера на задній панелі телефона. Прикладіть вказівний палець."</string>
-    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Реєстрацію не завершено"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (6305457126747942642) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message_setup (2735739618722623980) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message (5858386244898601003) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Час очікування для відбитка пальця минув"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"Ви можете додати відбиток пальця пізніше в налаштуваннях"</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Відбиток не зареєстровано. Повторіть спробу або прикладіть інший палець."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message_setup (8521566666541069383) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message_setup (8140162986046783546) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (3534341971920335247) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (4344665784935791640) -->
+    <skip />
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Додати ще"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Далі"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Цей спосіб розблокування екрана вимкнено. Щоб отримати докладнішу інформацію, зв’яжіться з адміністратором своєї організації."</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Ви все одно можете підтверджувати покупки та входити в додатки за допомогою відбитка пальця."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Підніміть палець і знову торкніться датчика"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Не вдається скористатися сканером відбитків пальців. Зверніться до постачальника послуг із ремонту."</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration_title (3073145395701953620) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (304585658839584958) -->
+    <skip />
     <string name="security_advanced_settings" msgid="6260756619837834042">"Інші налаштування безпеки"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Блокування робочого профілю, шифрування тощо"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Шифрування, облікові дані тощо"</string>
@@ -492,8 +503,7 @@
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Налаштуйте блокування екрана"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Для додаткового захисту встановіть PIN-код, ключ або пароль на цьому пристрої."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Налаштувати блокування екрана"</string>
-    <!-- no translation found for no_screen_lock_issue_notification_title (1214876733592830628) -->
-    <skip />
+    <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"Налаштуйте блокування екрана"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"Для додаткового захисту встановіть PIN-код, ключ або пароль на цьому пристрої."</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Захистіть телефон"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Додати відбиток пальця для розблокування"</string>
@@ -502,7 +512,7 @@
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Виберіть спосіб блокування екрана"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Виберіть спосіб розблокування робочих додатків"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Виберіть новий робочий спосіб розблокування"</string>
-    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"З міркувань безпеки потрібен резервний спосіб блокування екрана."</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"З міркувань безпеки потрібен резервний спосіб розблокування екрана"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Виберіть резервний спосіб розблокування екрана"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Якщо ви забудете, як розблокувати екран, адміністратор не зможе скинути цей спосіб."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Створити окремий спосіб розблокування екрана для робочих додатків"</string>
@@ -524,19 +534,13 @@
     <string name="unlock_set_unlock_password_title" msgid="2559842616268607041">"Пароль"</string>
     <string name="unlock_set_do_later_title" msgid="6565575303676064364">"Не зараз"</string>
     <string name="current_screen_lock" msgid="1367883977261098017">"Поточне блокування екрана"</string>
-    <!-- no translation found for fingerprint_unlock_set_unlock_pattern (2229689425933043901) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_set_unlock_pin (7979848492740627674) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_set_unlock_password (6207676267295036963) -->
-    <skip />
+    <string name="fingerprint_unlock_set_unlock_pattern" msgid="2229689425933043901">"Ключ • Відбиток пальця"</string>
+    <string name="fingerprint_unlock_set_unlock_pin" msgid="7979848492740627674">"PIN-код • Відбиток пальця"</string>
+    <string name="fingerprint_unlock_set_unlock_password" msgid="6207676267295036963">"Пароль • Відбиток пальця"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Продовжити без відбитка пальця"</string>
-    <!-- no translation found for face_unlock_set_unlock_pattern (4206669838203096608) -->
-    <skip />
-    <!-- no translation found for face_unlock_set_unlock_pin (9034912683791069602) -->
-    <skip />
-    <!-- no translation found for face_unlock_set_unlock_password (5874950853246424756) -->
-    <skip />
+    <string name="face_unlock_set_unlock_pattern" msgid="4206669838203096608">"Ключ • Фейс-контроль"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"PIN-код • Фейс-контроль"</string>
+    <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"Пароль • Фейс-контроль"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Продовжити без фейсконтролю"</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Ключ • Фейс-контроль • Відбиток пальця"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN-код • Фейс-контроль • Відбиток пальця"</string>
@@ -637,6 +641,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Підключити пристрій <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="bluetooth_pairing_group_late_bonding" msgid="5310869364570266209">"Додати нового учасника до наявного набору узгоджених пристроїв"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Код підключення через Bluetooth"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Введіть код підключення та натисніть Return або Enter."</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"PIN-код містить літери чи символи"</string>
@@ -663,8 +668,7 @@
     <string name="remove_association_button" msgid="5004208145998061135">"Вилучити зв’язок"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Від’єднати додаток?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Додаток <xliff:g id="APP_NAME">%1$s</xliff:g> більше не буде зв’язаний із вашим пристроєм \"<xliff:g id="DEVICE_NAME">%2$s</xliff:g>\""</string>
-    <!-- no translation found for device_details_leaudio_toggle_summary (7684848254433230809) -->
-    <skip />
+    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Експерим. функція. Покращує якість аудіо"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Забути пристрій"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Від’єднати додаток"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Максимальна кількість підключених аудіопристроїв Bluetooth"</string>
@@ -967,8 +971,7 @@
     <string name="account_settings" msgid="255404935489127404">"Облікові записи"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"Робочі облікові записи (керує <xliff:g id="MANAGED_BY">%s</xliff:g>)"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"Особисті облікові записи"</string>
-    <!-- no translation found for accessibility_category_clone (7893383448944567885) -->
-    <skip />
+    <string name="accessibility_category_clone" msgid="7893383448944567885">"Облікові записи копії профілю"</string>
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"Робочий обліковий запис (керує <xliff:g id="MANAGED_BY">%s</xliff:g>)"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Особистий обліковий запис (керує <xliff:g id="MANAGED_BY">%s</xliff:g>)"</string>
     <string name="search_settings" msgid="7573686516434589771">"Пошук"</string>
@@ -1753,8 +1756,8 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"Для всіх мов"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Інші мови..."</string>
     <string name="testing" msgid="6294172343766732037">"Тестування"</string>
-    <string name="keyboard_settings_summary" msgid="2716339620942356432">"Екранна клавіатура, мовлення, інструменти"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"Екранна клавіатура, фізична клавіатура, мовлення, інструменти"</string>
+    <string name="keyboard_settings_summary" msgid="9188442758316476986">"Екранна клавіатура, інструменти"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"Екранна клавіатура, фізична клавіатура, інструменти"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Фізична клавіатура"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Розкладка"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Вибрати віджет"</string>
@@ -1856,7 +1859,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Утримуйте клавіші гучності, щоб відкрити"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Тричі торкніться екрана, щоб відкрити"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Використовуйте жест"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Використовувати жест спеціальних можливостей"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Використовувати жест функцій доступності"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Щоб використовувати цю функцію, натисніть кнопку спеціальних можливостей <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> унизу екрана.\n\nЩоб переключитися між функціями, натисніть і утримуйте кнопку спеціальних можливостей."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"Щоб використовувати цю функцію, натисніть кнопку функцій доступності на екрані."</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Щоб використовувати цю функцію, натисніть і утримуйте обидві клавіші гучності."</string>
@@ -1873,9 +1876,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Провести двома пальцями вгору"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Провести трьома пальцями вгору"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Натиснути кнопку функцій доступності"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Використовувати жест спеціальних можливостей"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Використовувати жест функцій доступності"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Натисніть кнопку спеціальних можливостей <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> унизу екрана.\n\nЩоб переключитися між функціями, натисніть і утримуйте кнопку спеціальних можливостей."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Провести двома пальцями знизу вгору по екрану.\n\nЩоб переключитися між функціями, проведіть двома пальцями вгору й утримуйте екран."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Проведіть двома пальцями знизу вгору по екрану.\n\nЩоб переключитися між функціями, проведіть двома пальцями вгору й утримуйте екран."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Провести по екрану знизу вгору трьома пальцями.\n\nЩоб переключитися між функціями, проведіть по екрану знизу вгору трьома пальцями й утримуйте їх."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Інші опції"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Докладніше про сервіс <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2005,8 +2008,7 @@
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Продовжити"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Слухові апарати"</string>
     <string name="accessibility_hearingaid_intro" msgid="5856992709195963850">"З вашим телефоном можна використовувати слухові апарати, кохлеарні імплантати й інші пристрої для підсилення звуку"</string>
-    <!-- no translation found for accessibility_hearingaid_not_connected_summary (7438018718889849521) -->
-    <skip />
+    <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Слухові апарати не підключено"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Додати слухові апарати"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Підключіть слух. апарати"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Виберіть слухові апарати на наступному екрані. Можливо, вам знадобиться підключити слухові апарати для лівого та правого вух окремо.\n\nПереконайтеся, що слухові апарати ввімкнені й готові до підключення."</string>
@@ -2715,7 +2717,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Увімкнути телефонні дзвінки й SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Цей користувач матиме доступ до історії дзвінків і SMS"</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Вилучити права адміністратора?"</string>
-    <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Якщо видалити права адміністратора для цього користувача, ви чи інший адміністратор пізніше зможете знову надати їх."</string>
+    <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Якщо вилучити права адміністратора для цього користувача, ви чи інший адміністратор пізніше зможете знову надати їх."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Інформація для екстрених випадків"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Інформація та контакти (<xliff:g id="USER_NAME">%1$s</xliff:g>)"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Відкрити додаток <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -2869,7 +2871,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Створення копії додатка <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Створено копію додатка <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Мови, жести, час і резервне копіювання"</string>
-    <string name="languages_setting_summary" msgid="4924440599794956443">"Мови системи, мови додатків"</string>
+    <string name="languages_setting_summary" msgid="7963053736715746726">"Мови системи, мови додатків, мовлення"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, мережеве з’єднання, інтернет, бездротовий, дані, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"сповіщення Wi‑Fi, сповіщення wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"використання трафіку"</string>
@@ -3187,7 +3189,7 @@
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Конфіденційні сповіщення робочого профілю"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Показувати конфіденційний вміст робочого профілю на заблокованому екрані"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Показувати весь вміст сповіщень"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Показувати конфіденційний вміст, коли розблоковано"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Показувати приватну інформацію, лише коли розблоковано"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Узагалі не показувати сповіщення"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Що показувати на заблокованому екрані?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Заблокований екран"</string>
@@ -3326,6 +3328,8 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Ніколи не показувати ці сповіщення"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Показувати сповіщення"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Ніколи не показувати сповіщення на панелі та периферійних пристроях"</string>
+    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"Дозволити сповіщення на весь екран"</string>
+    <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"Дозволити сповіщення на весь екран, коли пристрій заблоковано"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Дозволити значок сповіщення"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Показувати значок сповіщення"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"Дозволити в режимі \"Не турбувати\""</string>
@@ -4043,6 +4047,7 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Коли ви сплатите повну суму:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"усі обмеження щодо пристрою знімаються"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"ви можете видалити додаток кредитора"</string>
+    <string name="device_lock_info" msgid="1628142032642755537">"Блокування пристрою"</string>
     <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{Додаток для камери}one{Додатки для камери}few{Додатки для камери}many{Додатки для камери}other{Додатки для камери}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"Додаток для календарів"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"Додаток для контактів"</string>
@@ -4084,7 +4089,7 @@
     <string name="credman_keywords" msgid="8305600680836806170">"дані, ключ доступу, пароль"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"автоматично, заповнення, автозаповнення, дані, ключ доступу, пароль"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Переконайтеся, що додаток надійний&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Функція Автозаповнення Google&gt;%1$s&lt;/xliff:g&gt; використовує інформацію на екрані, щоб визначати поля для автозаповнення."</string>
-    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Використання додатка &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; використовує інформацію на екрані, щоб визначати поля, які можна заповнити автоматично. Відтепер тут зберігатимуться нові паролі, ключі доступу й інша інформація."</string>
+    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Використовувати &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; використовує інформацію на екрані, щоб визначати поля, які можна заповнити автоматично. Відтепер тут зберігатимуться нові паролі, ключі доступу й інша інформація."</string>
     <string name="credman_picker_title" msgid="2642776965060619988">"Сервіси керування паролями, ключами доступу й даними"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Вимкнути %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Вимкнути цей сервіс?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Збережена інформація, наприклад паролі, ключі доступу, способи оплати тощо, не буде підставлятись автоматично, коли ви ввійдете в обліковий запис. Щоб використовувати збережену інформацію, виберіть сервіс для паролів, ключів доступу або даних."</string>
