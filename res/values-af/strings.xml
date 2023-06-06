@@ -386,7 +386,7 @@
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Gesig en vingerafdruk is bygevoeg"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Wanneer jy Gesigslot en Vingerafdrukslot opstel, sal jou foon vir jou vingerafdruk vra as jy \'n masker dra of op \'n donker plek is"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Maniere om te ontsluit"</string>
-    <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"Gebruik gesig of vingerafdruk en"</string>
+    <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"Gebruik gesig of vingerafdruk en:"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"Ontsluit jou foon"</string>
     <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Verifieer dat dit jy is in apps"</string>
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Gebruik gesig"</string>
@@ -463,30 +463,21 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Klaar"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Oeps, dis nie die sensor nie"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Raak sensor op die agterkant van jou foon. Gebruik jou wysvinger."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (6305457126747942642) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message_setup (2735739618722623980) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message (5858386244898601003) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="6305457126747942642">"Kan nie vingerafdrukopstelling voltooi nie"</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message_setup" msgid="2735739618722623980">"Jy kan nou weer probeer of jou vingerafdruk later in Instellings opstel."</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message" msgid="5858386244898601003">"Jy kan nou weer probeer of jou vingerafdruk later opstel."</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Vingerafdrukopstelling het uitgetel"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message_setup (8521566666541069383) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message_setup (8140162986046783546) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (3534341971920335247) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (4344665784935791640) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message_setup" msgid="8521566666541069383">"Jy kan jou vingerafdruk later in Instellings opstel."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message_setup" msgid="8140162986046783546">"Iets het skeefgeloop. Jy kan jou vingerafdruk later in Instellings opstel."</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="3534341971920335247">"Jy kan jou vingerafdruk later opstel."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="4344665784935791640">"Iets het skeefgeloop. Jy kan jou vingerafdruk later opstel."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Voeg nog een by"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Volgende"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Die skermslotopsie is gedeaktiveer. Kontak jou organisasie se admin om meer te wete te kom."</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Jy kan steeds jou vingerafdruk gebruik om aankope en apptoegang te magtig."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Lig vinger op en raak sensor dan weer"</string>
-    <!-- no translation found for security_settings_fingerprint_bad_calibration_title (3073145395701953620) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_bad_calibration (304585658839584958) -->
-    <skip />
+    <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Kan nie vingerafdruksensor gebruik nie"</string>
+    <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Besoek ’n verskaffer wat herstelwerk doen."</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Meer sekuriteitinstellings"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Werkprofielslot, enkripsie, en meer"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Enkripsie, eiebewyse, en meer"</string>
@@ -1169,8 +1160,7 @@
     <string name="battery_manufacture_date" msgid="7139426520156833987">"Vervaardigingdatum"</string>
     <string name="battery_first_use_date" msgid="3157207331722711317">"Datum van eerste gebruik"</string>
     <string name="battery_cycle_count" msgid="2912949283386571900">"Siklustelling"</string>
-    <!-- no translation found for battery_cycle_count_not_available (2426584515665184664) -->
-    <skip />
+    <string name="battery_cycle_count_not_available" msgid="2426584515665184664">"Onbeskikbaar"</string>
     <string name="memory_calculating_size" msgid="3898240439798661242">"Bereken tans…"</string>
     <string name="storage_menu_rename" msgid="8549835371429159336">"Hernoem"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Monteer"</string>
@@ -1284,7 +1274,6 @@
     <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"Dit sal alle wi‑fi- en Bluetooth-instellings terugstel. Jy kan nie hierdie handeling ontdoen nie."</string>
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Stel terug"</string>
     <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"Bluetooth en wi‑fi is teruggestel"</string>
-    <string name="erase_euicc_data_button" msgid="728078969563311737">"Vee uit"</string>
     <string name="reset_esim_title" msgid="4194570573425902754">"Vee e-SIM-kaarte uit"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"Dit sal geen mobielediensplanne kanselleer nie. Kontak jou diensverskaffer om vervanging-SIM\'s af te laai."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Stel instellings terug"</string>
@@ -2341,8 +2330,7 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Bekyk volgens apps"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Bekyk volgens stelsels"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_cycle_count_footer (3642121059800373545) -->
-    <skip />
+    <string name="battery_cycle_count_footer" msgid="3642121059800373545">"Die siklustelling sal weens gehalte-inspeksies voor versending dalk nie nul wees wanneer dit vir die eerste keer gebruik word nie"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Proses-statistieke"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Bleeksiel-statistieke vir lopende prosesse"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Berginggebruik"</string>
@@ -2966,7 +2954,8 @@
     <string name="keywords_storage_settings" msgid="6018856193950281898">"geheue, kas, data, vee uit, maak skoon, maak beskikbaar, spasie"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"gekoppel, toestel, oorfone, kopstuk, luidspreker, draadloos, bind saam, oorfoonknoppies, musiek, media"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"agtergrond, tema, rooster, pasmaak, personaliseer"</string>
-    <string name="keywords_styles" msgid="5291614313348476068">"ikoon, aksent, kleur"</string>
+    <!-- no translation found for keywords_styles (3367789885254807447) -->
+    <skip />
     <string name="keywords_assist_input" msgid="3086289530227075593">"verstek, assistent"</string>
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"betaling, verstek"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"inkomende kennisgewing"</string>
@@ -3246,7 +3235,8 @@
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Vou kennisgewings in na een lyn op die aftrekskerm"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Geen klank of vibrasie nie"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Geen klank of vibrasie nie en verskyn laer in gespreksafdeling"</string>
-    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Kan lui of vibreer op grond van fooninstellings"</string>
+    <!-- no translation found for notification_channel_summary_default (1168420867670390611) -->
+    <skip />
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Wys kennisgewings as \'n banier boaan die skerm wanneer die toestel ontsluit is"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Alle \"<xliff:g id="APP_NAME">%1$s</xliff:g>\"-kennisgewings"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Alle <xliff:g id="APP_NAME">%1$s</xliff:g>-kennisgewings"</string>
@@ -4053,7 +4043,8 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Nadat jy die volle bedrag betaal het:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Word alle beperkings van die toestel af verwyder"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Kan jy die krediteurprogram deïnstalleer"</string>
-    <string name="device_lock_info" msgid="1628142032642755537">"Toestelslot"</string>
+    <!-- no translation found for financed_device_info (3871860346697308342) -->
+    <skip />
     <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{Kamera-app}other{Kamera-apps}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"Kalenderprogram"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"Kontakteprogram"</string>
@@ -4733,36 +4724,20 @@
     <string name="contrast_medium" msgid="384414510709285811">"Medium"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Hoog"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Hierdie app kan net in 1 venster oopgemaak word"</string>
-    <!-- no translation found for accessibility_feature_full_state_summary (8747170258807179670) -->
-    <skip />
-    <!-- no translation found for generic_accessibility_service_on (2465820044606775562) -->
-    <skip />
-    <!-- no translation found for generic_accessibility_service_off (1752061696695346360) -->
-    <skip />
-    <!-- no translation found for generic_accessibility_feature_shortcut_off (3669343136122187913) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_state_off (8158137799007601475) -->
-    <skip />
-    <!-- no translation found for daltonizer_state_on (131013270022603983) -->
-    <skip />
-    <!-- no translation found for daltonizer_state_off (1162285688069856179) -->
-    <skip />
-    <!-- no translation found for color_inversion_state_on (1160969033636440368) -->
-    <skip />
-    <!-- no translation found for color_inversion_state_off (6925638668080451724) -->
-    <skip />
-    <!-- no translation found for color_inversion_feature_summary (1199876648549627647) -->
-    <skip />
-    <!-- no translation found for magnification_feature_summary (641825267460247848) -->
-    <skip />
-    <!-- no translation found for autoclick_disabled (3213396804955002120) -->
-    <skip />
-    <!-- no translation found for show_captions_disabled (690650956523818755) -->
-    <skip />
-    <!-- no translation found for show_captions_enabled (7089043007924626) -->
-    <skip />
-    <!-- no translation found for live_caption_disabled (3562035026547887366) -->
-    <skip />
-    <!-- no translation found for live_caption_enabled (5269360946200718949) -->
-    <skip />
+    <string name="accessibility_feature_full_state_summary" msgid="8747170258807179670">"<xliff:g id="STATE_0">%1$s</xliff:g> / <xliff:g id="SHORTCUT_STATE">%2$s</xliff:g> / <xliff:g id="SERVICE_SUMMARY">%3$s</xliff:g>"</string>
+    <string name="generic_accessibility_service_on" msgid="2465820044606775562">"Diens aan"</string>
+    <string name="generic_accessibility_service_off" msgid="1752061696695346360">"Diens af"</string>
+    <string name="generic_accessibility_feature_shortcut_off" msgid="3669343136122187913">"Kortpad af"</string>
+    <string name="accessibility_shortcut_state_off" msgid="8158137799007601475">"Af"</string>
+    <string name="daltonizer_state_on" msgid="131013270022603983">"Aan"</string>
+    <string name="daltonizer_state_off" msgid="1162285688069856179">"Af"</string>
+    <string name="color_inversion_state_on" msgid="1160969033636440368">"Aan"</string>
+    <string name="color_inversion_state_off" msgid="6925638668080451724">"Af"</string>
+    <string name="color_inversion_feature_summary" msgid="1199876648549627647">"Maak ligte skerms donker en donker skerms lig"</string>
+    <string name="magnification_feature_summary" msgid="641825267460247848">"Zoem vinnig op die skerm in om inhoud groter te maak"</string>
+    <string name="autoclick_disabled" msgid="3213396804955002120">"Af"</string>
+    <string name="show_captions_disabled" msgid="690650956523818755">"Af"</string>
+    <string name="show_captions_enabled" msgid="7089043007924626">"Aan"</string>
+    <string name="live_caption_disabled" msgid="3562035026547887366">"Af"</string>
+    <string name="live_caption_enabled" msgid="5269360946200718949">"Aan"</string>
 </resources>

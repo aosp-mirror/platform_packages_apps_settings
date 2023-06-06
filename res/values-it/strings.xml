@@ -69,7 +69,7 @@
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Per questo dispositivo"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Uscita audio"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Informazioni su uscita audio"</string>
-    <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Indirizza il suono verso la protesi uditiva o l\'altoparlante del telefono"</string>
+    <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Indirizza il suono verso la protesi uditiva o l\'altoparlante dello smartphone"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Correlati"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Suoneria e sveglie"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Audio durante le chiamate"</string>
@@ -463,30 +463,21 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Fine"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ops, questo non è il sensore"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Tocca il sensore sulla parte posteriore del telefono. Utilizza il dito indice."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_dialog_title (6305457126747942642) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message_setup (2735739618722623980) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_unable_to_process_message (5858386244898601003) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="6305457126747942642">"Impossibile finire configurazione impronta"</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message_setup" msgid="2735739618722623980">"Puoi riprovare subito o configurare l\'impronta in un secondo momento nelle Impostazioni."</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message" msgid="5858386244898601003">"Puoi riprovare subito o configurare l\'impronta in un secondo momento."</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Timeout della configurazione dell\'impronta"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message_setup (8521566666541069383) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message_setup (8140162986046783546) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (3534341971920335247) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_generic_dialog_message (4344665784935791640) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message_setup" msgid="8521566666541069383">"Puoi configurare l\'impronta in un secondo momento nelle Impostazioni."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message_setup" msgid="8140162986046783546">"Si è verificato un problema. Puoi configurare l\'impronta in un secondo momento nelle Impostazioni."</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="3534341971920335247">"Puoi configurare la tua impronta in un secondo momento."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="4344665784935791640">"Si è verificato un problema. Puoi configurare l\'impronta in un secondo momento."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Aggiungine un\'altra"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Avanti"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"L\'opzione di blocco schermo è disattivata. Per scoprire di più, contatta l\'amministratore della tua organizzazione."</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Puoi comunque usare l\'impronta per autorizzare gli acquisti e l\'accesso alle app."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Solleva il dito, quindi tocca di nuovo il sensore"</string>
-    <!-- no translation found for security_settings_fingerprint_bad_calibration_title (3073145395701953620) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_bad_calibration (304585658839584958) -->
-    <skip />
+    <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Impossibile utilizzare il sensore di impronte digitali"</string>
+    <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Contatta un fornitore di servizi di riparazione."</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Altre impostazioni di sicurezza"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Blocco del profilo di lavoro, crittografia e altro"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Crittografia, credenziali e altro"</string>
@@ -504,7 +495,7 @@
     <string name="encryption_settings_title" msgid="2848716008695618360">"Crittografia"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Crittografia attiva"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Imposta un blocco schermo"</string>
-    <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Per maggiore sicurezza, imposta un PIN, una sequenza o una password per questo dispositivo."</string>
+    <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Per maggiore sicurezza, imposta PIN, sequenza o password per il dispositivo."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Imposta un blocco schermo"</string>
     <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"Imposta un blocco schermo"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"Per maggiore sicurezza, imposta un PIN, una sequenza o una password per questo dispositivo."</string>
@@ -1169,8 +1160,7 @@
     <string name="battery_manufacture_date" msgid="7139426520156833987">"Data di produzione"</string>
     <string name="battery_first_use_date" msgid="3157207331722711317">"Data del primo utilizzo"</string>
     <string name="battery_cycle_count" msgid="2912949283386571900">"Conteggio dei cicli"</string>
-    <!-- no translation found for battery_cycle_count_not_available (2426584515665184664) -->
-    <skip />
+    <string name="battery_cycle_count_not_available" msgid="2426584515665184664">"Non disponibile"</string>
     <string name="memory_calculating_size" msgid="3898240439798661242">"Calcolo…"</string>
     <string name="storage_menu_rename" msgid="8549835371429159336">"Rinomina"</string>
     <string name="storage_menu_mount" msgid="4760531872302820569">"Monta"</string>
@@ -1284,7 +1274,6 @@
     <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"Ripristinerà tutte le impostazioni Bluetooth e Wi-Fi. L\'operazione non può essere annullata."</string>
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Reimposta"</string>
     <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"Bluetooth e Wi-Fi sono stati reimpostati"</string>
-    <string name="erase_euicc_data_button" msgid="728078969563311737">"Resetta"</string>
     <string name="reset_esim_title" msgid="4194570573425902754">"Resetta eSIM"</string>
     <string name="reset_esim_desc" msgid="3662444090563399131">"Gli eventuali piani tariffari non verranno annullati. Per scaricare SIM sostitutive, contatta il tuo operatore."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Reimposta"</string>
@@ -2016,7 +2005,7 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Tocca tre volte lo schermo"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continua"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Protesi uditive"</string>
-    <string name="accessibility_hearingaid_intro" msgid="5856992709195963850">"Puoi utilizzare gli apparecchi acustici, gli impianti cocleari e altri dispositivi di amplificazione con il tuo telefono"</string>
+    <string name="accessibility_hearingaid_intro" msgid="5856992709195963850">"Puoi utilizzare gli apparecchi acustici, gli impianti cocleari e altri dispositivi di amplificazione con il tuo smartphone"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Nessuna protesi uditiva connessa"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Aggiungi apparecchi acustici"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Accoppia apparecchi acustici"</string>
@@ -2341,8 +2330,7 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Visualizza per app"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Visualizza per sistemi"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_cycle_count_footer (3642121059800373545) -->
-    <skip />
+    <string name="battery_cycle_count_footer" msgid="3642121059800373545">"A causa dei controlli di qualità prima della spedizione, il conteggio dei cicli potrebbe non essere pari a zero al primo utilizzo"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistiche sui processi"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistiche tecniche sui processi in esecuzione"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Memoria usata"</string>
@@ -2966,7 +2954,8 @@
     <string name="keywords_storage_settings" msgid="6018856193950281898">"memoria, cache dati, eliminare, cancellare, liberare, spazio"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"connesso, dispositivo, cuffie, auricolari, altoparlante, wireless, accoppiare, musica, contenuti multimediali"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"sfondo, tema, griglia, personalizzare, personalizzazione"</string>
-    <string name="keywords_styles" msgid="5291614313348476068">"icona, contrasto, colore"</string>
+    <!-- no translation found for keywords_styles (3367789885254807447) -->
+    <skip />
     <string name="keywords_assist_input" msgid="3086289530227075593">"valore predefinito, assistente"</string>
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"pagamenti, predefinita"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"notifica in arrivo"</string>
@@ -3246,7 +3235,8 @@
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Comprimi le notifiche su una sola riga nell\'area a discesa"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Nessun suono o vibrazione"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Nessun suono o vibrazione e appare più in basso nella sezione delle conversazioni"</string>
-    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Può suonare o vibrare in base alle impostazioni del telefono"</string>
+    <!-- no translation found for notification_channel_summary_default (1168420867670390611) -->
+    <skip />
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Quando il dispositivo è sbloccato, mostra le notifiche come banner in cima allo schermo"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Tutte le notifiche di \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Tutte le notifiche di <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4053,7 +4043,8 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Dopo aver pagato l\'intero importo:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Tutte le limitazioni vengono rimosse dal dispositivo"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Puoi disinstallare l\'app del creditore"</string>
-    <string name="device_lock_info" msgid="1628142032642755537">"Blocco del dispositivo"</string>
+    <!-- no translation found for financed_device_info (3871860346697308342) -->
+    <skip />
     <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{App fotocamera}other{App fotocamera}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"App di calendario"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"App di contatti"</string>
@@ -4733,36 +4724,20 @@
     <string name="contrast_medium" msgid="384414510709285811">"Medio"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Alto"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Questa app può essere aperta soltanto in 1 finestra"</string>
-    <!-- no translation found for accessibility_feature_full_state_summary (8747170258807179670) -->
-    <skip />
-    <!-- no translation found for generic_accessibility_service_on (2465820044606775562) -->
-    <skip />
-    <!-- no translation found for generic_accessibility_service_off (1752061696695346360) -->
-    <skip />
-    <!-- no translation found for generic_accessibility_feature_shortcut_off (3669343136122187913) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_state_off (8158137799007601475) -->
-    <skip />
-    <!-- no translation found for daltonizer_state_on (131013270022603983) -->
-    <skip />
-    <!-- no translation found for daltonizer_state_off (1162285688069856179) -->
-    <skip />
-    <!-- no translation found for color_inversion_state_on (1160969033636440368) -->
-    <skip />
-    <!-- no translation found for color_inversion_state_off (6925638668080451724) -->
-    <skip />
-    <!-- no translation found for color_inversion_feature_summary (1199876648549627647) -->
-    <skip />
-    <!-- no translation found for magnification_feature_summary (641825267460247848) -->
-    <skip />
-    <!-- no translation found for autoclick_disabled (3213396804955002120) -->
-    <skip />
-    <!-- no translation found for show_captions_disabled (690650956523818755) -->
-    <skip />
-    <!-- no translation found for show_captions_enabled (7089043007924626) -->
-    <skip />
-    <!-- no translation found for live_caption_disabled (3562035026547887366) -->
-    <skip />
-    <!-- no translation found for live_caption_enabled (5269360946200718949) -->
-    <skip />
+    <string name="accessibility_feature_full_state_summary" msgid="8747170258807179670">"<xliff:g id="STATE_0">%1$s</xliff:g>/<xliff:g id="SHORTCUT_STATE">%2$s</xliff:g>/<xliff:g id="SERVICE_SUMMARY">%3$s</xliff:g>"</string>
+    <string name="generic_accessibility_service_on" msgid="2465820044606775562">"Servizio attivato"</string>
+    <string name="generic_accessibility_service_off" msgid="1752061696695346360">"Servizio disattivato"</string>
+    <string name="generic_accessibility_feature_shortcut_off" msgid="3669343136122187913">"Scorciatoia disattivata"</string>
+    <string name="accessibility_shortcut_state_off" msgid="8158137799007601475">"Off"</string>
+    <string name="daltonizer_state_on" msgid="131013270022603983">"On"</string>
+    <string name="daltonizer_state_off" msgid="1162285688069856179">"Off"</string>
+    <string name="color_inversion_state_on" msgid="1160969033636440368">"On"</string>
+    <string name="color_inversion_state_off" msgid="6925638668080451724">"Off"</string>
+    <string name="color_inversion_feature_summary" msgid="1199876648549627647">"Rende gli schermi chiari in scuri e gli schermi scuri in chiari"</string>
+    <string name="magnification_feature_summary" msgid="641825267460247848">"Aumenta velocemente lo zoom sullo schermo per ingrandire i contenuti"</string>
+    <string name="autoclick_disabled" msgid="3213396804955002120">"Off"</string>
+    <string name="show_captions_disabled" msgid="690650956523818755">"Off"</string>
+    <string name="show_captions_enabled" msgid="7089043007924626">"On"</string>
+    <string name="live_caption_disabled" msgid="3562035026547887366">"Off"</string>
+    <string name="live_caption_enabled" msgid="5269360946200718949">"On"</string>
 </resources>
