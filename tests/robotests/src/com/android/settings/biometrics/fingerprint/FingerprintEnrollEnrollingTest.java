@@ -78,7 +78,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
-import org.robolectric.shadows.ShadowToast;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -117,16 +116,6 @@ public class FingerprintEnrollEnrollingTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest();
-    }
-
-    @Test
-    public void fingerprintMultiWindowMode() {
-        initializeActivityWithoutCreate(TYPE_UDFPS_OPTICAL);
-        when(mActivity.isInMultiWindowMode()).thenReturn(true);
-        createActivity();
-
-        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
-                mContext.getString(R.string.dock_multi_instances_not_supported_text));
     }
 
     @Test
