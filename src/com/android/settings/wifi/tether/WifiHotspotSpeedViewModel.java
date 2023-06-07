@@ -22,12 +22,15 @@ import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_5
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_6GHZ;
 
 import android.app.Application;
+import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
+import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.repository.WifiHotspotRepository;
 
@@ -41,6 +44,12 @@ import java.util.Map;
  */
 public class WifiHotspotSpeedViewModel extends AndroidViewModel {
     private static final String TAG = "WifiHotspotSpeedViewModel";
+    @VisibleForTesting
+    static final int RES_SPEED_5G_SUMMARY = R.string.wifi_hotspot_speed_5g_summary;
+    @VisibleForTesting
+    static final int RES_SPEED_6G_SUMMARY = R.string.wifi_hotspot_speed_6g_summary;
+    @VisibleForTesting
+    static final int RES_SUMMARY_UNAVAILABLE = R.string.wifi_hotspot_speed_summary_unavailable;
 
     protected final WifiHotspotRepository mWifiHotspotRepository;
     protected Map<Integer, SpeedInfo> mSpeedInfoMap = new HashMap<>();
@@ -75,14 +84,18 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
     }
 
     protected void on6gAvailableChanged(Boolean available) {
-        log("on6gAvailableChanged(), available:" + available);
+        Log.d(TAG, "on6gAvailableChanged(), available:" + available);
         mSpeedInfo6g.mIsEnabled = available;
+        mSpeedInfo6g.mSummary = getApplication()
+                .getString(available ? RES_SPEED_6G_SUMMARY : RES_SUMMARY_UNAVAILABLE);
         updateSpeedInfoMapData();
     }
 
     protected void on5gAvailableChanged(Boolean available) {
-        log("on5gAvailableChanged(), available:" + available);
+        Log.d(TAG, "on5gAvailableChanged(), available:" + available);
         mSpeedInfo5g.mIsEnabled = available;
+        mSpeedInfo5g.mSummary = getApplication()
+                .getString(available ? RES_SPEED_5G_SUMMARY : RES_SUMMARY_UNAVAILABLE);
 
         boolean showDualBand = mWifiHotspotRepository.isDualBand() && available;
         log("on5gAvailableChanged(), showDualBand:" + showDualBand);
@@ -144,6 +157,7 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
         Boolean mIsChecked;
         boolean mIsEnabled;
         boolean mIsVisible;
+        String mSummary;
 
         public SpeedInfo(boolean isChecked, boolean isEnabled, boolean isVisible) {
             this.mIsChecked = isChecked;
@@ -157,6 +171,7 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
                     .append("isChecked:").append(mIsChecked)
                     .append(",isEnabled:").append(mIsEnabled)
                     .append(",isVisible:").append(mIsVisible)
+                    .append(",mSummary:").append(mSummary)
                     .append('}').toString();
         }
     }
