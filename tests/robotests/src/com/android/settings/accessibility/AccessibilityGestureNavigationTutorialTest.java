@@ -50,9 +50,11 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.LooperMode;
 
 /** Tests for {@link AccessibilityGestureNavigationTutorial}. */
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 public final class AccessibilityGestureNavigationTutorialTest {
 
     @Rule

@@ -24,6 +24,7 @@ android_app {
         "Settings-core",
         "androidx.fragment_fragment-testing",
         "frameworks-base-testutils",
+        "androidx.fragment_fragment",
     ],
 
     aaptflags: ["--extra-packages com.android.settings"],
@@ -48,6 +49,8 @@ android_robolectric_test {
     ],
 
     static_libs: [
+        "Robolectric_shadows_androidx_fragment_upstream",
+        "Settings_robolectric_meta_service_file",
         "SettingsLib-robo-testutils",
         "Settings-robo-testutils",
         "androidx.test.core",
@@ -75,15 +78,16 @@ android_robolectric_test {
         "SettingsLib",
         "SettingsLib-search",
     ],
+
+    upstream: true,
 }
 
 java_library {
     name: "Settings-robo-testutils",
     srcs: ["testutils/**/*.java"],
-
     libs: [
+        "Robolectric_all-target_upstream",
         "Settings-core",
-        "Robolectric_all-target",
         "mockito-robolectric-prebuilt",
         "truth-prebuilt",
     ],

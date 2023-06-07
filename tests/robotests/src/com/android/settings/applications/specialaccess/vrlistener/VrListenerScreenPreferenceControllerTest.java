@@ -23,6 +23,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 
+import com.android.settings.testutils.shadow.ShadowActivityManager;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -31,9 +33,11 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowActivityManager;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        ShadowActivityManager.class,
+})
 public class VrListenerScreenPreferenceControllerTest {
 
     private Context mContext;

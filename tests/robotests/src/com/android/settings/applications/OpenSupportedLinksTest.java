@@ -49,9 +49,14 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowUtils.class)
+@LooperMode(LooperMode.Mode.LEGACY)
+@Config(shadows = {
+        ShadowUtils.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class OpenSupportedLinksTest {
     private static final String TEST_FOOTER_TITLE = "FooterTitle";
     private static final String TEST_DOMAIN_LINK = "aaa.bbb.ccc";

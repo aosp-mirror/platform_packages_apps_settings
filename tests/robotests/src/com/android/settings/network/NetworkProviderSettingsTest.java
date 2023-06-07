@@ -99,6 +99,9 @@ import org.robolectric.shadows.ShadowToast;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class NetworkProviderSettingsTest {
 
     private static final int XML_RES = R.xml.wifi_tether_settings;

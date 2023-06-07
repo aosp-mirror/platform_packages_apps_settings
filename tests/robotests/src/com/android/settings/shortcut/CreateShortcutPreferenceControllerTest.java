@@ -125,6 +125,7 @@ public class CreateShortcutPreferenceControllerTest {
                 new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE),
                 Arrays.asList(ri1, ri2));
 
+        doReturn(false).when(mController).canShowWifiHotspot();
         final List<ResolveInfo> info = mController.queryShortcuts();
         assertThat(info).hasSize(1);
         assertThat(info.get(0).activityInfo).isEqualTo(ri2.activityInfo);
@@ -150,6 +151,7 @@ public class CreateShortcutPreferenceControllerTest {
                 new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE),
                 Arrays.asList(ri1, ri2));
 
+        doReturn(false).when(mController).canShowWifiHotspot();
         final List<ResolveInfo> info = mController.queryShortcuts();
         assertThat(info).hasSize(2);
         assertThat(info.get(0).activityInfo).isEqualTo(ri2.activityInfo);
@@ -158,6 +160,7 @@ public class CreateShortcutPreferenceControllerTest {
 
     @Test
     public void queryShortcuts_setSupportOneHandedMode_ShouldEnableShortcuts() {
+        doReturn(true).when(mController).canShowWifiHotspot();
         SystemProperties.set(SUPPORT_ONE_HANDED_MODE, "true");
         setupActivityInfo(Settings.OneHandedSettingsActivity.class.getSimpleName());
 
@@ -166,6 +169,7 @@ public class CreateShortcutPreferenceControllerTest {
 
     @Test
     public void queryShortcuts_setUnsupportOneHandedMode_ShouldDisableShortcuts() {
+        doReturn(false).when(mController).canShowWifiHotspot();
         SystemProperties.set(SUPPORT_ONE_HANDED_MODE, "false");
         setupActivityInfo(Settings.OneHandedSettingsActivity.class.getSimpleName());
 
@@ -174,7 +178,7 @@ public class CreateShortcutPreferenceControllerTest {
 
     @Test
     public void queryShortcuts_configShowWifiHotspot_ShouldEnableShortcuts() {
-        when(mController.canShowWifiHotspot()).thenReturn(true);
+        doReturn(true).when(mController).canShowWifiHotspot();
         setupActivityInfo(Settings.WifiTetherSettingsActivity.class.getSimpleName());
 
         assertThat(mController.queryShortcuts()).hasSize(1);
@@ -182,7 +186,7 @@ public class CreateShortcutPreferenceControllerTest {
 
     @Test
     public void queryShortcuts_configNotShowWifiHotspot_ShouldDisableShortcuts() {
-        when(mController.canShowWifiHotspot()).thenReturn(false);
+        doReturn(false).when(mController).canShowWifiHotspot();
         setupActivityInfo(Settings.WifiTetherSettingsActivity.class.getSimpleName());
 
         assertThat(mController.queryShortcuts()).hasSize(0);

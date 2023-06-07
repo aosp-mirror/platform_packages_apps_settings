@@ -24,6 +24,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
+import static org.robolectric.shadows.ShadowLooper.shadowMainLooper;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothPan;
@@ -205,6 +206,7 @@ public class TetherPreferenceControllerTest {
 
         context.sendBroadcast(new Intent(TetheringManager.ACTION_TETHER_STATE_CHANGED));
 
+        shadowMainLooper().idle();
         verify(mController).updateSummary();
     }
 }

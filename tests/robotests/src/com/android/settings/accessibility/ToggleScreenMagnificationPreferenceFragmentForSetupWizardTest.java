@@ -56,7 +56,10 @@ import org.robolectric.annotation.Config;
 
 /** Tests for {@link ToggleScreenMagnificationPreferenceFragmentForSetupWizard}. */
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowSettingsPreferenceFragment.class})
+@Config(shadows = {
+        ShadowSettingsPreferenceFragment.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class ToggleScreenMagnificationPreferenceFragmentForSetupWizardTest {
 
     private final Context mContext = ApplicationProvider.getApplicationContext();

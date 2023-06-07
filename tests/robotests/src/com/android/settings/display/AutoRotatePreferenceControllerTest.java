@@ -50,6 +50,9 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowSystemSettings.class,
+})
 public class AutoRotatePreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)

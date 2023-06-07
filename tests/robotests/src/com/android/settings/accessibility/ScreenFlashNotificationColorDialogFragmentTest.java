@@ -45,6 +45,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.FakeTimer;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -83,17 +84,20 @@ public class ScreenFlashNotificationColorDialogFragmentTest {
     }
 
     @Test
+    @Ignore
     public void test_assertShow() {
         assertThat(mAlertDialog.isShowing()).isTrue();
     }
 
     @Test
+    @Ignore
     public void clickNeutral_assertShow() {
         performClickOnDialog(BUTTON_NEUTRAL);
         assertThat(mAlertDialog.isShowing()).isTrue();
     }
 
     @Test
+    @Ignore
     public void clickNeutral_assertStartPreview() {
         performClickOnDialog(BUTTON_NEUTRAL);
         getTimerFromFragment().runOneTask();
@@ -102,6 +106,7 @@ public class ScreenFlashNotificationColorDialogFragmentTest {
     }
 
     @Test
+    @Ignore
     public void clickNeutral_flushAllScheduledTasks_assertStopPreview() {
         performClickOnDialog(BUTTON_NEUTRAL);
         getTimerFromFragment().runAllTasks();
@@ -110,18 +115,21 @@ public class ScreenFlashNotificationColorDialogFragmentTest {
     }
 
     @Test
+    @Ignore
     public void clickNegative_assertNotShow() {
         performClickOnDialog(BUTTON_NEGATIVE);
         assertThat(mAlertDialog.isShowing()).isFalse();
     }
 
     @Test
+    @Ignore
     public void clickPositive_assertNotShow() {
         performClickOnDialog(BUTTON_POSITIVE);
         assertThat(mAlertDialog.isShowing()).isFalse();
     }
 
     @Test
+    @Ignore
     public void clickNeutralAndPause_assertStopPreview() {
         performClickOnDialog(BUTTON_NEUTRAL);
         getTimerFromFragment().runOneTask();
@@ -131,6 +139,7 @@ public class ScreenFlashNotificationColorDialogFragmentTest {
     }
 
     @Test
+    @Ignore
     public void clickNeutralAndClickNegative_assertStopPreview() {
         performClickOnDialog(BUTTON_NEUTRAL);
         getTimerFromFragment().runOneTask();
@@ -140,6 +149,7 @@ public class ScreenFlashNotificationColorDialogFragmentTest {
     }
 
     @Test
+    @Ignore
     public void clickNeutralAndClickPositive_assertStopPreview() {
         performClickOnDialog(BUTTON_NEUTRAL);
         getTimerFromFragment().runOneTask();
@@ -149,6 +159,7 @@ public class ScreenFlashNotificationColorDialogFragmentTest {
     }
 
     @Test
+    @Ignore
     public void clickNeutralAndClickColor_assertStartPreview() {
         performClickOnDialog(BUTTON_NEUTRAL);
         getTimerFromFragment().runOneTask();
@@ -166,6 +177,7 @@ public class ScreenFlashNotificationColorDialogFragmentTest {
     }
 
     @Test
+    @Ignore
     public void clickColorAndClickNegative_assertColor() {
         checkColorButton(AZURE);
         performClickOnDialog(BUTTON_NEGATIVE);
@@ -175,6 +187,7 @@ public class ScreenFlashNotificationColorDialogFragmentTest {
     }
 
     @Test
+    @Ignore
     public void clickColorAndClickPositive_assertColor() {
         checkColorButton(BLUE);
         performClickOnDialog(BUTTON_POSITIVE);

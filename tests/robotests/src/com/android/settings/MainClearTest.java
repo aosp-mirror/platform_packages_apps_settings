@@ -50,6 +50,7 @@ import android.widget.ScrollView;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
@@ -66,11 +67,15 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowActivity;
-import org.robolectric.shadows.ShadowUserManager;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowUtils.class)
+@Config(shadows = {
+        ShadowUtils.class,
+        ShadowUserManager.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class MainClearTest {
 
     private static final String TEST_ACCOUNT_TYPE = "android.test.account.type";
@@ -112,7 +117,7 @@ public class MainClearTest {
                 Robolectric.buildActivity(FragmentActivity.class)).get());
         mShadowActivity = Shadows.shadowOf(mActivity);
         UserManager userManager = mActivity.getSystemService(UserManager.class);
-        mShadowUserManager = Shadows.shadowOf(userManager);
+        mShadowUserManager = Shadow.extract(userManager);
         mShadowUserManager.setIsAdminUser(true);
         mContentView = LayoutInflater.from(mActivity).inflate(R.layout.main_clear, null);
 

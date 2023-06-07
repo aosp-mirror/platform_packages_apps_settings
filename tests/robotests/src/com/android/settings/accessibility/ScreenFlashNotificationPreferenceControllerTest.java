@@ -65,6 +65,7 @@ import java.util.function.Consumer;
         ScreenFlashNotificationPreferenceControllerTest
                 .ShadowScreenFlashNotificationColorDialogFragment.class,
         ShadowFlashNotificationsUtils.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
 })
 public class ScreenFlashNotificationPreferenceControllerTest {
     private static final String PREFERENCE_KEY = "preference_key";

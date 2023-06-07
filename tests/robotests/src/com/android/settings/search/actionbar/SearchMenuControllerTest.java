@@ -48,7 +48,10 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowUtils.class)
+@Config(shadows = {
+        ShadowUtils.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class SearchMenuControllerTest {
 
     @Mock

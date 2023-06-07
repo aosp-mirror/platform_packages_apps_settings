@@ -50,7 +50,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class})
+@Config(shadows = {
+        ShadowUserManager.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class ProfileSelectFragmentTest {
 
     private Context mContext;

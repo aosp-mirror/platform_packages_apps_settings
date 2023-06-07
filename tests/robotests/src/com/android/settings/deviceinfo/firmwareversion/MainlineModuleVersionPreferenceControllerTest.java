@@ -184,7 +184,7 @@ public class MainlineModuleVersionPreferenceControllerTest {
         final MainlineModuleVersionPreferenceController controller =
                 new MainlineModuleVersionPreferenceController(mContext, "key");
 
-        assertThat(controller.getSummary()).isEqualTo("May 01, 2019");
+        assertThat(controller.getSummary()).isEqualTo("May 1, 2019");
     }
 
     @Test

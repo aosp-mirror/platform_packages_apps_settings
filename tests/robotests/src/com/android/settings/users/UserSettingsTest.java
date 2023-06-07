@@ -97,6 +97,7 @@ import java.util.List;
         ShadowUserManager.class,
         ShadowDevicePolicyManager.class,
         SettingsShadowResources.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
 })
 public class UserSettingsTest {
 

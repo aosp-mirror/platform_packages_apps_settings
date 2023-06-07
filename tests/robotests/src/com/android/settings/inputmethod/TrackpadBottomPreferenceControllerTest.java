@@ -40,9 +40,13 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 /** Tests for {@link TrackpadBottomPreferenceController} */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowSystemSettings.class,
+})
 public class TrackpadBottomPreferenceControllerTest {
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();

@@ -62,11 +62,16 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
 
 /** Tests for {@link ToggleFeaturePreferenceFragment} */
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
+@Config(shadows = {
+        ShadowFragment.class,
+})
 public class ToggleFeaturePreferenceFragmentTest {
 
     private static final String PLACEHOLDER_PACKAGE_NAME = "com.placeholder.example";

@@ -62,6 +62,9 @@ import org.robolectric.shadows.ShadowApplication;
 
 /** Tests for {@link AccessibilityShortcutPreferenceFragment} */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class AccessibilityShortcutPreferenceFragmentTest {
 
     private static final String PLACEHOLDER_PACKAGE_NAME = "com.placeholder.example";

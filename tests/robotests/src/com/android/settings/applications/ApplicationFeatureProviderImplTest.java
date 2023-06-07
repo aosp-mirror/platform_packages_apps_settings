@@ -50,6 +50,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
@@ -62,6 +63,7 @@ import java.util.Set;
  * Tests for {@link ApplicationFeatureProviderImpl}.
  */
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 public final class ApplicationFeatureProviderImplTest {
 
     private final int MAIN_USER_ID = 0;

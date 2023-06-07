@@ -46,6 +46,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.LooperMode;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -88,6 +89,7 @@ public final class DataProcessManagerTest {
     }
 
     @Test
+    @LooperMode(LooperMode.Mode.LEGACY)
     public void constructor_noLevelData() {
         final DataProcessManager dataProcessManager =
                 new DataProcessManager(mContext, /*handler=*/ null, /*callbackFunction=*/ null);
@@ -96,6 +98,7 @@ public final class DataProcessManagerTest {
     }
 
     @Test
+    @LooperMode(LooperMode.Mode.LEGACY)
     public void start_loadEmptyDatabaseAppUsageData() {
         final MatrixCursor cursor = new MatrixCursor(
                 new String[]{
@@ -116,6 +119,7 @@ public final class DataProcessManagerTest {
     }
 
     @Test
+    @LooperMode(LooperMode.Mode.LEGACY)
     public void start_loadExpectedAppUsageData() throws RemoteException {
         final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
                 new ArrayList<>();
@@ -224,6 +228,7 @@ public final class DataProcessManagerTest {
     }
 
     @Test
+    @LooperMode(LooperMode.Mode.LEGACY)
     public void start_currentUserLocked_emptyAppUsageList() throws RemoteException {
         final UsageEvents.Event event =
                 getUsageEvent(UsageEvents.Event.ACTIVITY_RESUMED, /*timestamp=*/ 1, "package");
@@ -250,6 +255,7 @@ public final class DataProcessManagerTest {
     }
 
     @Test
+    @LooperMode(LooperMode.Mode.LEGACY)
     public void getBatteryLevelData_emptyHistoryMap_returnNull() {
         assertThat(DataProcessManager.getBatteryLevelData(
                 mContext,
