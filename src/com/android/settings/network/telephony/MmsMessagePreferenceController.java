@@ -31,21 +31,19 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 /**
- * Preference controller for "Mobile data"
+ * Preference controller for "MMS messages"
  */
 public class MmsMessagePreferenceController extends TelephonyTogglePreferenceController implements
         LifecycleObserver, OnStart, OnStop {
     private TelephonyManager mTelephonyManager;
-    private SubscriptionManager mSubscriptionManager;
     private MobileDataContentObserver mMobileDataContentObserver;
     private PreferenceScreen mScreen;
 
     public MmsMessagePreferenceController(Context context, String key) {
         super(context, key);
-        mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mMobileDataContentObserver = new MobileDataContentObserver(
                 new Handler(Looper.getMainLooper()));
-        mMobileDataContentObserver.setOnMobileDataChangedListener(()->refreshPreference());
+        mMobileDataContentObserver.setOnMobileDataChangedListener(() -> refreshPreference());
     }
 
     @Override
@@ -88,11 +86,14 @@ public class MmsMessagePreferenceController extends TelephonyTogglePreferenceCon
 
     @Override
     public boolean setChecked(boolean isChecked) {
+        if (mTelephonyManager == null) {
+            return false;
+        }
         mTelephonyManager.setMobileDataPolicyEnabled(
                 TelephonyManager.MOBILE_DATA_POLICY_MMS_ALWAYS_ALLOWED, isChecked);
-        return isChecked == mTelephonyManager.isMobileDataPolicyEnabled(
-                TelephonyManager.MOBILE_DATA_POLICY_MMS_ALWAYS_ALLOWED);
+        return true;
     }
+
 
     @Override
     public boolean isChecked() {
