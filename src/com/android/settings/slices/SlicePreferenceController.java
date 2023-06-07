@@ -44,7 +44,6 @@ public class SlicePreferenceController extends BasePreferenceController implemen
     LiveData<Slice> mLiveData;
     @VisibleForTesting
     SlicePreference mSlicePreference;
-    private boolean mIsObservering = false;
     private Uri mUri;
 
     public SlicePreferenceController(Context context, String preferenceKey) {
@@ -74,9 +73,14 @@ public class SlicePreferenceController extends BasePreferenceController implemen
 
     @Override
     public void onStart() {
-        if (mLiveData != null && !mIsObservering) {
-            mIsObservering = true;
+        if (mLiveData == null) {
+            return;
+        }
+
+        try {
             mLiveData.observeForever(this);
+        } catch (SecurityException e) {
+            Log.w(TAG, "observeForever - no permission");
         }
     }
 
@@ -91,9 +95,14 @@ public class SlicePreferenceController extends BasePreferenceController implemen
     }
 
     private void removeLiveDataObserver() {
-        if (mLiveData != null && mIsObservering && mLiveData.hasActiveObservers()) {
-            mIsObservering = false;
+        if (mLiveData == null) {
+            return;
+        }
+
+        try {
             mLiveData.removeObserver(this);
+        } catch (SecurityException e) {
+            Log.w(TAG, "removeLiveDataObserver - no permission");
         }
     }
 }
