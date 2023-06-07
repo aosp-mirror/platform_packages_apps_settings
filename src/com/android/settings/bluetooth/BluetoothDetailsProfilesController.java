@@ -96,12 +96,6 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     protected void init(PreferenceScreen screen) {
         mProfilesContainer = (PreferenceCategory)screen.findPreference(getPreferenceKey());
         mProfilesContainer.setLayoutResource(R.layout.preference_bluetooth_profile_category);
-        mIsLeContactSharingEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_LE_AUDIO_CONTACT_SHARING_ENABLED, true);
-        mIsLeAudioToggleEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED, true)
-                || DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_BLUETOOTH,
-                CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT, false);
         // Call refresh here even though it will get called later in onResume, to avoid the
         // list of switches appearing to "pop" into the page.
         refresh();
@@ -437,11 +431,26 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
 
     @Override
     public void onResume() {
+        updateLeAudioConfig();
         for (CachedBluetoothDevice item : mAllOfCachedDevices) {
             item.registerCallback(this);
         }
         mProfileManager.addServiceListener(this);
         refresh();
+    }
+
+    private void updateLeAudioConfig() {
+        mIsLeContactSharingEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_LE_AUDIO_CONTACT_SHARING_ENABLED, true);
+        boolean isLeDeviceDetailEnabled = DeviceConfig.getBoolean(
+                DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED, true);
+        boolean isLeEnabledByDefault = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_BLUETOOTH,
+                CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT, false);
+        mIsLeAudioToggleEnabled = isLeDeviceDetailEnabled || isLeEnabledByDefault;
+        Log.d(TAG, "BT_LE_AUDIO_CONTACT_SHARING_ENABLED:" + mIsLeContactSharingEnabled
+                + ", BT_LE_AUDIO_DEVICE_DETAIL_ENABLED:" + isLeDeviceDetailEnabled
+                + ", CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT:" + isLeEnabledByDefault);
     }
 
     @Override
