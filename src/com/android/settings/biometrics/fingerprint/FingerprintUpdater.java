@@ -98,13 +98,18 @@ public class FingerprintUpdater {
         }
 
         @Override
-        public void onPointerDown(int sensorId) {
-            mCallback.onPointerDown(sensorId);
+        public void onUdfpsPointerDown(int sensorId) {
+            mCallback.onUdfpsPointerDown(sensorId);
         }
 
         @Override
-        public void onPointerUp(int sensorId) {
-            mCallback.onPointerUp(sensorId);
+        public void onUdfpsPointerUp(int sensorId) {
+            mCallback.onUdfpsPointerUp(sensorId);
+        }
+
+        @Override
+        public void onUdfpsOverlayShown() {
+            mCallback.onUdfpsOverlayShown();
         }
     }
 
